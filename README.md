@@ -2,6 +2,24 @@
 
 Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool for monitoring and analyzing system health, network connectivity, and performance metrics.
 
+## Quick Start
+
+### Option 1: Docker Compose (Full Stack - Web + API)
+Run the complete web application with backend API:
+```bash
+docker compose up --build
+```
+Access:
+- API → http://localhost:8000/health
+- Web → http://localhost:3000/diagnostic
+
+### Option 2: Command-Line Tool (Standalone Python)
+Run diagnostics from the command line:
+```bash
+pip install -r requirements.txt
+python main.py --all
+```
+
 ## Features
 
 - **System Diagnostics**: Monitor CPU, memory, and disk usage with configurable thresholds
@@ -11,6 +29,8 @@ Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool
 - **Report Generation**: Save diagnostic reports in JSON format for later analysis
 - **Color-coded Output**: Easy-to-read, color-coded console output
 - **Flexible CLI**: Command-line interface with multiple options for targeted diagnostics
+- **Web Interface**: Modern web-based diagnostic interface (via Docker)
+- **REST API**: Backend API for diagnostic services (via Docker)
 
 ## Installation
 
@@ -18,6 +38,7 @@ Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool
 
 - Python 3.7 or higher
 - pip (Python package manager)
+- Docker and Docker Compose (for web application)
 
 ### Setup
 
@@ -32,7 +53,7 @@ cd RealDiag-Software
 pip install -r requirements.txt
 ```
 
-## Usage
+## Usage - CLI Tool
 
 ### Basic Usage
 
@@ -158,8 +179,22 @@ RealDiag-Software/
 │   ├── system.py          # System diagnostics
 │   ├── network.py         # Network diagnostics
 │   └── performance.py     # Performance monitoring
+├── tests/                  # Test suite
+│   ├── test_system.py     # System module tests
+│   ├── test_network.py    # Network module tests
+│   └── test_performance.py # Performance module tests
+├── backend/                # Backend API (Docker)
+├── frontend/               # Web interface (Docker)
+├── docker-compose.yml      # Docker compose configuration
 ├── requirements.txt        # Python dependencies
 └── README.md              # Documentation
+```
+
+## Testing
+
+Run the test suite:
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
 ## Contributing
