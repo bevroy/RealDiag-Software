@@ -1,0 +1,22 @@
+include README.md
+include LICENSE
+include VERSION
+include CHANGELOG.md
+include requirements.txt
+include config.py
+include main.py
+include docker-compose.yml
+
+recursive-include diagnostics *.py
+recursive-include tests *.py
+recursive-include backend *.py *.toml *.yml
+recursive-include frontend *.jsx *.js *.json
+
+include backend/Dockerfile
+include frontend/Dockerfile
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.swp
+global-exclude *.swo
