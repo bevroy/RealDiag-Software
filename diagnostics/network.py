@@ -48,9 +48,13 @@ class NetworkDiagnostics:
         
         result = {}
         for interface_name, addresses in interfaces.items():
+            # Get interface status safely
+            interface_stat = interface_stats.get(interface_name, {})
+            is_up = interface_stat.isup if hasattr(interface_stat, 'isup') else None
+            
             result[interface_name] = {
                 'addresses': [],
-                'is_up': interface_stats.get(interface_name, {}).isup if hasattr(interface_stats.get(interface_name, {}), 'isup') else None
+                'is_up': is_up
             }
             
             for addr in addresses:
