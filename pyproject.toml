@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realdiag-software"
+version = "1.0.0"
+description = "Real Time Diagnostic Assistant Software - System health monitoring and diagnostics"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+authors = [
+    {name = "RealDiag-Software Contributors"}
+]
+keywords = ["diagnostics", "monitoring", "system", "health", "performance", "network"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "psutil>=5.9.0",
+    "colorama>=0.4.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+]
+
+[project.urls]
+Homepage = "https://github.com/bevroy/RealDiag-Software"
+Documentation = "https://github.com/bevroy/RealDiag-Software#readme"
+Repository = "https://github.com/bevroy/RealDiag-Software"
+"Bug Reports" = "https://github.com/bevroy/RealDiag-Software/issues"
+
+[project.scripts]
+realdiag = "main:main"
+
+[tool.setuptools]
+packages = ["diagnostics"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.yml", "*.yaml"]

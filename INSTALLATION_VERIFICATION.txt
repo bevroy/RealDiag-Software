@@ -1,0 +1,177 @@
+================================================================================
+RealDiag-Software v1.0.0 - Installation Verification Guide
+================================================================================
+
+This document provides steps to verify the RealDiag-Software installation.
+
+================================================================================
+PRE-INSTALLATION CHECKS
+================================================================================
+
+1. Python Version Check:
+   $ python3 --version
+   Expected: Python 3.7 or higher
+
+2. Pip Installation:
+   $ pip --version
+   Expected: pip version information
+
+================================================================================
+INSTALLATION METHODS
+================================================================================
+
+METHOD 1: Clone and Install from Source
+----------------------------------------
+$ git clone https://github.com/bevroy/RealDiag-Software.git
+$ cd RealDiag-Software
+$ pip install -r requirements.txt
+
+Verify:
+$ python3 main.py --version
+Expected output: RealDiag 1.0.0
+
+METHOD 2: Using Installation Script
+------------------------------------
+Linux/macOS:
+$ chmod +x install.sh
+$ ./install.sh
+
+Windows:
+$ install.bat
+
+Verify:
+$ python3 main.py --help
+Expected: Help message with all options
+
+METHOD 3: Install from Wheel Package
+-------------------------------------
+$ pip install dist/realdiag_software-1.0.0-py3-none-any.whl
+
+Verify:
+$ python3 -c "import diagnostics; print('Import successful')"
+Expected: Import successful
+
+================================================================================
+POST-INSTALLATION VERIFICATION
+================================================================================
+
+1. Run Version Check:
+   $ python3 main.py --version
+   Expected: RealDiag 1.0.0
+
+2. Run Help Command:
+   $ python3 main.py --help
+   Expected: Usage information and available options
+
+3. Test System Diagnostics:
+   $ python3 main.py --system
+   Expected: System diagnostic output with CPU, memory, and disk info
+
+4. Test Network Diagnostics:
+   $ python3 main.py --network
+   Expected: Network diagnostic output with interfaces and connectivity
+
+5. Test Performance Monitoring:
+   $ python3 main.py --performance
+   Expected: Performance info with uptime and processes
+
+6. Test All Diagnostics:
+   $ python3 main.py --all
+   Expected: Complete diagnostic report
+
+7. Test Report Generation:
+   $ python3 main.py --all --save
+   Expected: JSON file created in reports/ directory
+
+8. Run Test Suite:
+   $ python3 -m unittest discover -s tests -p "test_*.py" -v
+   Expected: All 15 tests pass
+
+================================================================================
+VERIFICATION CHECKLIST
+================================================================================
+
+[ ] Python 3.7+ is installed
+[ ] All dependencies installed successfully
+[ ] main.py --version shows correct version
+[ ] main.py --help displays usage information
+[ ] System diagnostics run without errors
+[ ] Network diagnostics run without errors
+[ ] Performance diagnostics run without errors
+[ ] All diagnostics run together (--all flag)
+[ ] JSON report generation works (--save flag)
+[ ] All 15 unit tests pass
+[ ] No Python import errors
+[ ] Configuration file (config.py) is readable
+
+================================================================================
+COMMON ISSUES AND SOLUTIONS
+================================================================================
+
+Issue: "ModuleNotFoundError: No module named 'psutil'"
+Solution: Install dependencies with: pip install -r requirements.txt
+
+Issue: "Permission denied" when running install.sh
+Solution: Make it executable: chmod +x install.sh
+
+Issue: "Python not found"
+Solution: Ensure Python 3.7+ is installed and in PATH
+
+Issue: Tests fail with import errors
+Solution: Ensure you're in the project root directory
+
+Issue: Reports directory not created
+Solution: This is normal - it's created when using --save flag
+
+================================================================================
+DOCKER VERIFICATION (Optional)
+================================================================================
+
+If using Docker deployment:
+
+1. Build Docker images:
+   $ docker compose build
+
+2. Start services:
+   $ docker compose up -d
+
+3. Check services are running:
+   $ docker compose ps
+
+4. Access web interface:
+   Open browser to: http://localhost:3000/diagnostic
+
+5. Test API endpoint:
+   $ curl http://localhost:8000/health
+
+6. View logs:
+   $ docker compose logs -f
+
+7. Stop services:
+   $ docker compose down
+
+================================================================================
+TROUBLESHOOTING LOGS
+================================================================================
+
+To save verification output for troubleshooting:
+
+$ python3 main.py --all > verification_output.txt 2>&1
+$ python3 -m unittest discover -s tests -v > test_results.txt 2>&1
+
+================================================================================
+SUPPORT
+================================================================================
+
+If you encounter issues during installation:
+1. Check the QUICKSTART.md guide
+2. Review DEPLOYMENT.md for deployment-specific issues
+3. Open an issue: https://github.com/bevroy/RealDiag-Software/issues
+
+Include the following in your issue report:
+- Operating system and version
+- Python version
+- Error messages
+- Output of verification commands
+
+================================================================================

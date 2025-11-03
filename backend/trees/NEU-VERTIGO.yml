@@ -1,0 +1,49 @@
+id: NEU-VERTIGO
+title: Dizziness/Vertigo Diagnostic Tree
+entry: v_start
+nodes:
+- id: v_start
+  when: {}
+  tests: []
+  suggest_dx: []
+  next:
+  - when:
+      red_flags_any:
+      - new focal deficit
+      - severe gait ataxia
+      - central nystagmus
+    go: central
+  - when:
+      symptoms_contains_any:
+      - brief positional vertigo
+      - dix-hallpike positive
+    go: bppv
+  - default: peripheral_vs_central
+- id: central
+  when: {}
+  tests:
+  - ED evaluation
+  - HINTS expert
+  - MRI brain if indicated
+  suggest_dx:
+  - Central cause (consider stroke)
+  next:
+  - default: null
+- id: bppv
+  when: {}
+  tests:
+  - Dix-Hallpike
+  - Epley maneuver
+  suggest_dx:
+  - BPPV
+  next:
+  - default: null
+- id: peripheral_vs_central
+  when: {}
+  tests:
+  - HINTS bedside
+  - Audiometry if hearing symptoms
+  suggest_dx:
+  - Peripheral vestibulopathy vs central
+  next:
+  - default: null
