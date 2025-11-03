@@ -1,0 +1,54 @@
+id: NEU-HEADACHE
+title: Headache Diagnostic Tree
+entry: hx_start
+nodes:
+- id: hx_start
+  when: {}
+  tests: []
+  suggest_dx: []
+  next:
+  - when:
+      red_flags_any:
+      - thunderclap
+      - worst headache of life
+    go: thunderclap
+  - when:
+      exam_flags_any:
+      - papilledema
+    go: iih
+  - default: primary
+- id: thunderclap
+  when: {}
+  tests:
+  - CT head w/o contrast STAT
+  - CTA head/neck
+  - LP if CT negative
+  suggest_dx:
+  - Subarachnoid hemorrhage
+  next:
+  - default: null
+- id: iih
+  when:
+    all_of:
+    - symptoms_contains_any:
+      - headache
+      - pulsatile tinnitus
+    - exam_flags_any:
+      - papilledema
+  tests:
+  - MRI/MRV
+  - Lumbar puncture (if safe)
+  suggest_dx:
+  - Idiopathic intracranial hypertension
+  next:
+  - default: null
+- id: primary
+  when: {}
+  tests:
+  - No emergent imaging if normal neuro exam and primary pattern
+  suggest_dx:
+  - Migraine
+  - Tension-type
+  - Cluster (if TAC features)
+  next:
+  - default: null
