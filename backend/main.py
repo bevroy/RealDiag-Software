@@ -1,5 +1,6 @@
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -14,6 +15,16 @@ app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
 # Jinja2 templates directory
 templates = Jinja2Templates(directory="backend/templates")
+
+
+# Allow CORS from local frontend during development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")

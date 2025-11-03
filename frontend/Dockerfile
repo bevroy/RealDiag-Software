@@ -3,7 +3,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json* ./
 COPY frontend/ ./
-RUN npm ci --omit=dev && npm run build
+RUN npm install && npm run build
 
 FROM node:18-alpine
 WORKDIR /app/frontend
