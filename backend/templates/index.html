@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ app }} API</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>{{ app }} API</h1>
+        <p class="tagline">A small landing page for the {{ app }} backend.</p>
+        <p class="actions">
+          <a class="button" href="/docs">Interactive API Docs</a>
+          <a class="button ghost" href="/redoc">ReDoc</a>
+          <a class="button" href="/health">Health</a>
+        </p>
+      </div>
+    </header>
+
+    <section>
+      <h2>About</h2>
+      <p>This page is served by the API at <code>/</code>. Use <code>/health</code> and <code>/version</code> for automated checks.</p>
+    </section>
+
+    <section class="meta">
+      <h3>Runtime info</h3>
+      <div id="info">
+        <pre>{
+  "app": "{{ app }}",
+  "version": "{{ version }}"
+}</pre>
+      </div>
+    </section>
+  </body>
+</html>
