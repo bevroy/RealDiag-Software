@@ -62,15 +62,25 @@ jobs:
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Log in to GitHub Container Registry
+      # Prefer an explicit PAT stored in repository secrets so CI can push
+      # packages even when organization policies restrict the default
+      # GITHUB_TOKEN. If the `GHCR_PAT` secret is not defined the job will
+      # fall back to using the `GITHUB_TOKEN` provided by Actions.
+      - name: Log in to GHCR using GHCR_PAT
+        if: ${{ secrets.GHCR_PAT != '' }}
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          # Use an explicit PAT stored in repo secrets to ensure the
-          # publish job can create/push packages even when organization
-          # policies restrict the default GITHUB_TOKEN.
           password: ${{ secrets.GHCR_PAT }}
+
+      - name: Log in to GHCR using GITHUB_TOKEN (fallback)
+        if: ${{ secrets.GHCR_PAT == '' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push API image
         uses: docker/build-push-action@v4
         with:
