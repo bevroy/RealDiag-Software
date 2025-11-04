@@ -1,4 +1,5 @@
 
+import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -20,8 +21,13 @@ templates = Jinja2Templates(directory="backend/templates")
 # Allow CORS from local frontend during development
 app.add_middleware(
     CORSMiddleware,
-    # Allow only the local frontend origin in development.
+    # Allow the local frontend origin and preview hostnames (Codespaces / GitHub preview).
+    # The preview regex can be overridden via PREVIEW_ORIGIN_REGEX env var for portability.
     allow_origins=["http://localhost:3000"],
+    allow_origin_regex=os.getenv(
+        "PREVIEW_ORIGIN_REGEX",
+        r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev)$",
+    ),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
