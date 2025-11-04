@@ -22,3 +22,19 @@ jobs:
           pip install fastapi uvicorn jinja2 pyyaml pytest requests
       - name: Run tests
         run: pytest -q
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
