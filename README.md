@@ -13,6 +13,14 @@ Access:
 - API → http://localhost:8000/health
 - Web → http://localhost:3000/diagnostic
 
+Runtime config note
+-------------------
+
+For runtime-injected frontend configuration (for example `NEXT_PUBLIC_API_BASE`) and
+preview host handling (e.g. Codespaces / GitHub preview), see `docs/RUNTIME_CONFIG.md`.
+It documents the `runtime-config.js` pattern and the `PREVIEW_ORIGIN_REGEX` env var used by
+the backend CORS configuration.
+
 ### Option 2: Command-Line Tool (Standalone Python)
 Run diagnostics from the command line:
 ```bash
