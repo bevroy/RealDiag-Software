@@ -83,5 +83,3 @@ def health_version():
     """Return health status plus version metadata."""
     return {"ok": True, "app": Config.APP_NAME, "version": Config.APP_VERSION}
 
-
-app.include_router(diagnostic_router)
