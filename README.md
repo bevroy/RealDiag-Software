@@ -1,5 +1,7 @@
 # RealDiag-Software
 
+![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
+
 Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool for monitoring and analyzing system health, network connectivity, and performance metrics.
 
 ## Quick Start
