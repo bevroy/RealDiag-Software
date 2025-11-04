@@ -27,7 +27,22 @@ export default function Diagnostic(){
             runtimeBase = `${protocol}//${hostname}:8000`
           }
         }
-        const base = (runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || runtimeBase).replace(/\/$/, '')
+        // Decide which base to use. Runtime config (NEXT_PUBLIC_API_BASE) takes
+        // precedence for normal local development, but when we're running inside
+        // a preview hostname (for example `...-3000.app.github.dev`) the preview
+        // heuristic should be preferred even if the runtime config was set to
+        // `http://localhost:8000` (which would be unreachable from the preview).
+        const configBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || ''
+        const isPreviewHost = (typeof window !== 'undefined' && window.location && /-3000\./.test(window.location.hostname))
+        let base = ''
+        if (isPreviewHost && runtimeBase){
+          base = runtimeBase
+        } else if (configBase){
+          base = configBase
+        } else {
+          base = runtimeBase
+        }
+        base = (base || '').replace(/\/$/, '')
 
         // Helper to fetch and capture full details (status, headers, raw text, parsed JSON)
         async function fetchDetails(url){
