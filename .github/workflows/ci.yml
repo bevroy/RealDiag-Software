@@ -67,7 +67,10 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # Use an explicit PAT stored in repo secrets to ensure the
+          # publish job can create/push packages even when organization
+          # policies restrict the default GITHUB_TOKEN.
+          password: ${{ secrets.GHCR_PAT }}
       - name: Build and push API image
         uses: docker/build-push-action@v4
         with:
