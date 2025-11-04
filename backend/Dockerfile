@@ -11,6 +11,6 @@ COPY diagnostics /app/diagnostics
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends curl \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& pip install --no-cache-dir fastapi pyyaml uvicorn[standard] jinja2
+	&& pip install --no-cache-dir fastapi pyyaml uvicorn[standard] prometheus_client jinja2
 EXPOSE 8000
 CMD ["uvicorn","backend.main:app","--host","0.0.0.0","--port","8000"]

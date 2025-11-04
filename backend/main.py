@@ -1,6 +1,8 @@
 
 import os
 from fastapi import FastAPI, Request
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
+import logging
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -9,6 +11,13 @@ from backend.services.diagnostic_router import router as diagnostic_router
 from config import Config
 
 app = FastAPI(title="RealDiag API")
+
+# Basic structured logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+logger = logging.getLogger("realdiag")
+
+# Prometheus metrics
+REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['path', 'method', 'status'])
 
 
 # Serve static files (assets)
@@ -34,6 +43,12 @@ app.add_middleware(
 )
 
 
+@app.get('/metrics')
+def metrics():
+    """Expose Prometheus metrics."""
+    return generate_latest()
+
+
 @app.get("/")
 def root(request: Request):
     """Serve a Jinja2-rendered HTML index for HTML clients; redirect non-HTML clients to /docs.
@@ -52,6 +67,8 @@ def root(request: Request):
 
 @app.get("/health")
 def health():
+    REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
+    logger.info('health check')
     return {"ok": True}
 
 

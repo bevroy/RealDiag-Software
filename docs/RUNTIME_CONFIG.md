@@ -59,6 +59,21 @@ api:
 
 This keeps the allowed origins explicit and portable between preview platforms.
 
+Enabling preview origins in production
+--------------------------------------
+
+For safety, preview origins are only enabled when explicitly allowed. Set the
+`ALLOW_PREVIEW_ORIGINS` environment variable to `true` (and optionally adjust
+`PREVIEW_ORIGIN_REGEX`) in environments where you want previews enabled. For
+example, in `docker-compose.yml`:
+
+api:
+  environment:
+    ALLOW_PREVIEW_ORIGINS: "true"
+    PREVIEW_ORIGIN_REGEX: '^https?://(?:localhost(?::\\d+)?|.+-3000\\.app\\.github\\.dev)$'
+
+This prevents accidental exposure of the API to arbitrary origins in production.
+
 Security note
 - Only expose safe, non-secret values with the `NEXT_PUBLIC_` prefix. Any value written into `runtime-config.js`
   is visible to end users.
