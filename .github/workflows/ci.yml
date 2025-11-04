@@ -154,14 +154,13 @@ jobs:
 
   cross-region-verify:
     name: Cross-region GHCR pull verification
-    # This job is intentionally simple and runs on a separate runner. It can
-    # be triggered manually (workflow_dispatch) or via the scheduled trigger
-    # declared at the top of this workflow. It does not require the full test
-    # job; it's only used to validate that GHCR pulls succeed from another
-    # runner/region.
+    # This job runs on a separate runner and should only perform verification
+    # when there's a tag to verify (i.e. publish ran successfully) or when
+    # invoked manually/scheduled. Gate it so we don't fail regular `main`
+    # pushes where no publish step ran.
     runs-on: ubuntu-latest
     needs: [publish]
-    if: always()
+    if: needs.publish.result == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     steps:
       - name: Set variables
         run: |
