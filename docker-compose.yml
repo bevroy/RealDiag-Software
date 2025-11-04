@@ -7,6 +7,11 @@ services:
       dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
+    # Example env var to override the preview-origin regex used by the backend CORS
+    # handler. Set this in CI or your preview environment if your preview hostnames
+    # use a different pattern than the default (which matches `*-3000.app.github.dev`).
+    environment:
+      PREVIEW_ORIGIN_REGEX: "^https?://(?:localhost(?::\\d+)?|.+-3000\\.app\\.github\\.dev)$"
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
       interval: 10s

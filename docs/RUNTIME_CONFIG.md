@@ -45,6 +45,20 @@ web:
 
 This explicit setting always overrides the heuristic and is the most reliable option for previews.
 
+Overriding the preview-origin regex
+-----------------------------------
+
+The backend's CORS origin check uses a default regex that matches `localhost` and
+hostnames like `*-3000.app.github.dev`. If your preview platform uses a different
+pattern you can override that behavior by setting the `PREVIEW_ORIGIN_REGEX` env var
+for the API. Example (docker-compose):
+
+api:
+  environment:
+    PREVIEW_ORIGIN_REGEX: '^https?://(?:localhost(?::\\d+)?|.+-3000\\.app\\.github\\.dev)$'
+
+This keeps the allowed origins explicit and portable between preview platforms.
+
 Security note
 - Only expose safe, non-secret values with the `NEXT_PUBLIC_` prefix. Any value written into `runtime-config.js`
   is visible to end users.
