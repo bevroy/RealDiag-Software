@@ -12,6 +12,14 @@ on:
     tags: [ 'v*' ]
   # Allow manual runs from the Actions UI if needed for debugging or reruns.
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to verify/pull (e.g. v1.0.6). If empty, defaults to latest.'
+        required: false
+        default: ''
+  # Scheduled verification to check cross-region availability daily.
+  schedule:
+    - cron: '0 5 * * *'
   pull_request:
     branches: [ main ]
 
@@ -95,11 +103,31 @@ jobs:
           file: frontend/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/realdiag-web:${{ github.ref_name }}
-      - name: Verify pushed images are pullable
+      - name: Verify pushed images are pullable (with retry/backoff)
         run: |
-          echo "Verifying the pushed images can be pulled from GHCR..."
-          docker pull ghcr.io/${{ github.repository_owner }}/realdiag-web:${{ github.ref_name }}
-          docker pull ghcr.io/${{ github.repository_owner }}/realdiag-api:${{ github.ref_name }}
+          set -euo pipefail
+          TAG=${{ github.ref_name }}
+          OWNER=${{ github.repository_owner }}
+
+          retry() {
+            local cmd="$*"
+            local max=5
+            local n=0
+            until eval "$cmd"; do
+              n=$((n+1))
+              if [ $n -ge $max ]; then
+                echo "Command failed after $n attempts: $cmd"
+                return 1
+              fi
+              sleep_sec=$((2 ** n))
+              echo "Attempt $n failed — retrying in ${sleep_sec}s..."
+              sleep $sleep_sec
+            done
+          }
+
+          echo "Verifying the pushed images can be pulled from GHCR (owner=${OWNER}, tag=${TAG})..."
+          retry docker pull ghcr.io/${OWNER}/realdiag-web:${TAG}
+          retry docker pull ghcr.io/${OWNER}/realdiag-api:${TAG}
           echo "Pulled images:"
           docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}"
       - name: Set up Node
@@ -120,3 +148,67 @@ jobs:
         run: |
           cd frontend
           npm run build
+
+  cross-region-verify:
+    name: Cross-region GHCR pull verification
+    # This job is intentionally simple and runs on a separate runner. It can
+    # be triggered manually (workflow_dispatch) or via the scheduled trigger
+    # declared at the top of this workflow. It does not require the full test
+    # job; it's only used to validate that GHCR pulls succeed from another
+    # runner/region.
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Set variables
+        run: |
+          TAG_INPUT='${{ github.event.inputs.tag }}'
+          if [ -z "$TAG_INPUT" ]; then
+            TAG='latest'
+          else
+            TAG="$TAG_INPUT"
+          fi
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+
+      - name: Login to GHCR using GHCR_PAT
+        if: ${{ secrets.GHCR_PAT != '' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
+
+      - name: Login to GHCR using GITHUB_TOKEN (fallback)
+        if: ${{ secrets.GHCR_PAT == '' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull images with retry/backoff
+        run: |
+          set -euo pipefail
+          OWNER=${OWNER}
+          TAG=${TAG}
+          retry() {
+            local cmd="$*"
+            local max=5
+            local n=0
+            until eval "$cmd"; do
+              n=$((n+1))
+              if [ $n -ge $max ]; then
+                echo "Command failed after $n attempts: $cmd"
+                return 1
+              fi
+              sleep_sec=$((2 ** n))
+              echo "Attempt $n failed — retrying in ${sleep_sec}s..."
+              sleep $sleep_sec
+            done
+          }
+
+          echo "Pulling ghcr.io/${OWNER}/realdiag-web:${TAG}"
+          retry docker pull ghcr.io/${OWNER}/realdiag-web:${TAG}
+          echo "Pulling ghcr.io/${OWNER}/realdiag-api:${TAG}"
+          retry docker pull ghcr.io/${OWNER}/realdiag-api:${TAG}
+          echo "Pulled images successfully"
