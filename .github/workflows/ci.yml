@@ -3,6 +3,12 @@ name: CI
 on:
   push:
     branches: [ main ]
+    # Also run on tag pushes that start with "v" (release tags). This ensures
+    # the `publish` job's `if: startsWith(github.ref, 'refs/tags/v')` can be
+    # exercised when tags are pushed.
+    tags: [ 'v*' ]
+  # Allow manual runs from the Actions UI if needed for debugging or reruns.
+  workflow_dispatch:
   pull_request:
     branches: [ main ]
 
