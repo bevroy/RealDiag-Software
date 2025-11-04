@@ -27,6 +27,24 @@ Accessing values in client code
 - The diagnostic page uses `window.__RUNTIME_CONFIG` if present. You can also reference `process.env.NEXT_PUBLIC_*`
   in code that runs at build time (e.g., server-side or during build).
 
+Preview environments (Codespaces / GitHub preview)
+-----------------------------------------------
+
+When running the frontend inside a preview URL (for example `your-preview-3000.app.github.dev`),
+the diagnostic page includes a small heuristic that attempts to rewrite the preview hostname
+from `-3000` to `-8000` so the browser in the preview can reach the API exposed on the same
+preview host at port `8000` (i.e. `your-preview-8000.app.github.dev`). If your preview platform
+uses a different URL pattern, set `NEXT_PUBLIC_API_BASE` explicitly in the preview environment or
+in `docker-compose.yml` to the forwarded URL for port `8000`.
+
+Example (override in compose or preview env):
+
+web:
+  environment:
+    NEXT_PUBLIC_API_BASE: "https://<your-preview>-8000.app.github.dev"
+
+This explicit setting always overrides the heuristic and is the most reliable option for previews.
+
 Security note
 - Only expose safe, non-secret values with the `NEXT_PUBLIC_` prefix. Any value written into `runtime-config.js`
   is visible to end users.
