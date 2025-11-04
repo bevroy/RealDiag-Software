@@ -40,7 +40,8 @@ jobs:
       - name: Install frontend dependencies
         run: |
           cd frontend
-          npm ci
+          # Use `npm install` in CI since package-lock.json may not be present in this repo
+          npm install
       - name: Run frontend tests
         run: |
           cd frontend
