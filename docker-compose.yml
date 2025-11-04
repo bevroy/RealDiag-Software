@@ -19,8 +19,14 @@ services:
       dockerfile: frontend/Dockerfile
     ports:
       - "3000:3000"
+    # Runtime-exposed env vars for the frontend (available to the browser as
+    # window.__RUNTIME_CONFIG and to Next.js at build-time as NEXT_PUBLIC_*).
+    # Set these in your environment or here in compose. Example values are
+    # provided below; override them as needed for development or CI.
     environment:
-      - NEXT_PUBLIC_API_BASE=http://localhost:8000
+      NEXT_PUBLIC_API_BASE: "http://localhost:8000"
+      # Example feature flag exposed to client
+      NEXT_PUBLIC_EXAMPLE_FLAG: "false"
     depends_on:
       api:
         condition: service_healthy

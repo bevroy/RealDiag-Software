@@ -20,6 +20,7 @@ templates = Jinja2Templates(directory="backend/templates")
 # Allow CORS from local frontend during development
 app.add_middleware(
     CORSMiddleware,
+    # Allow only the local frontend origin in development.
     allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],

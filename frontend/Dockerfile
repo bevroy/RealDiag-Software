@@ -10,4 +10,6 @@ WORKDIR /app/frontend
 COPY --from=builder /app/frontend /app/frontend
 ENV NODE_ENV=production
 EXPOSE 3000
-CMD ["npm","run","start"]
+COPY frontend/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
+ENTRYPOINT ["./docker-entrypoint.sh"]
