@@ -89,7 +89,9 @@ jobs:
       - name: Install frontend dependencies
         run: |
           cd frontend
-          npm ci
+          # Use `npm install` in the publish job as well because the repo
+          # may not include a package-lock.json. `npm ci` fails without it.
+          npm install
       - name: Run frontend tests
         run: |
           cd frontend
