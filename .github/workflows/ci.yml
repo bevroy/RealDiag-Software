@@ -64,6 +64,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
+    outputs:
+      tag: ${{ steps.publish_outputs.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up QEMU
@@ -125,6 +127,12 @@ jobs:
           retry docker pull ghcr.io/${OWNER}/realdiag-api:${TAG}
           echo "Pulled images:"
           docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}"
+      - name: Set publish outputs
+        id: publish_outputs
+        run: |
+          # Expose the tag we published as a job output so other jobs can
+          # reliably verify the same tag instead of guessing 'latest'.
+          echo "tag=${{ github.ref_name }}" >> $GITHUB_OUTPUT
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -152,15 +160,22 @@ jobs:
     # job; it's only used to validate that GHCR pulls succeed from another
     # runner/region.
     runs-on: ubuntu-latest
+    needs: [publish]
     if: always()
     steps:
       - name: Set variables
         run: |
-          TAG_INPUT='${{ github.event.inputs.tag }}'
-          if [ -z "$TAG_INPUT" ]; then
-            TAG='latest'
+          # Prefer the tag produced by the publish job (when present). If the
+          # publish job didn't run (e.g., scheduled/manual verify) fall back to
+          # the workflow input, and finally to 'latest'.
+          PUB_TAG='${{ needs.publish.outputs.tag }}'
+          INPUT_TAG='${{ github.event.inputs.tag }}'
+          if [ -n "$PUB_TAG" ]; then
+            TAG="$PUB_TAG"
+          elif [ -n "$INPUT_TAG" ]; then
+            TAG="$INPUT_TAG"
           else
-            TAG="$TAG_INPUT"
+            TAG='latest'
           fi
           echo "TAG=$TAG" >> $GITHUB_ENV
           echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
