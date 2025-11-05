@@ -1,2 +1,10 @@
 psutil>=5.9.0
 colorama>=0.4.6
+
+# Runtime dependencies required by the FastAPI app (used by Render's Python build)
+fastapi
+uvicorn[standard]
+gunicorn
+pyyaml
+prometheus_client
+jinja2
