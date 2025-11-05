@@ -1,0 +1,26 @@
+# Render infrastructure-as-code manifest to deploy the backend service.
+# See: https://render.com/docs/deploy-anything#render-yaml
+#
+# This describes a Docker-backed web service that builds from the repo's
+# `backend/Dockerfile` and runs the FastAPI app. Connect your GitHub repo to
+# Render and the `render.yaml` will allow Render to create/update the service.
+
+services:
+  - type: web
+    name: realdiag-backend
+    env: docker
+    branch: main
+    plan: free
+    repo: bevroy/RealDiag-Software
+    dockerfilePath: backend/Dockerfile
+    # Render will provide $PORT at runtime; the start command below uses it.
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    pullRequestPreviews: false
+    # Optional environment variables you may want to set in Render's dashboard
+    envVars:
+      - key: LOG_LEVEL
+        value: info
+      - key: SENTRY_DSN
+        value: ""
