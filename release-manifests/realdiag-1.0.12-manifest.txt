@@ -1,0 +1,31 @@
+RealDiag release manifest
+Release: v1.0.12
+Date: 2025-11-05
+
+This file lists images and their resolved digests that were observed when deploying
+`k8s/staging-realdiag.yaml` into the `staging` namespace on the user's kind cluster.
+
+Images (tag and digest):
+
+- ghcr.io/bevroy/realdiag-api:v1.0.12@sha256:cf683e8e5835a347fd498674b7840141bc70d692796e64f7bad978aa2690d0b4
+- ghcr.io/bevroy/realdiag-web:v1.0.12@sha256:b4ce40c6ee11bf41d32fe118756f8e5fcf0430d719508e15d1a6e106976af88e
+
+Notes:
+- Manifest applied from `k8s/staging-realdiag.yaml`.
+- `staging` namespace was created in the target cluster and deployments were rolled out.
+- An imagePullSecret named `ghcr-pull-secret` exists in the `staging` namespace and
+  the default ServiceAccount was patched to reference it so pods can pull private
+  GHCR images.
+
+How to verify locally (commands run during deployment):
+
+export KUBECONFIG=/workspaces/RealDiag-Software/.kube/config
+kubectl -n staging get pods -o wide
+kubectl -n staging describe pod <pod-name>
+kubectl -n staging logs -l app=realdiag-api --tail=200
+kubectl -n staging logs -l app=realdiag-web --tail=200
+
+If you'd like, I can attach this file to the existing GitHub Release `v1.0.12` as an
+artifact; to do that I need a GitHub token with repo rights or `gh` CLI authentication
+in this environment. Alternatively you can download this file from the repo once
+it's pushed and attach it to the release manually.
