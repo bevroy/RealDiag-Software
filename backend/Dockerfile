@@ -11,7 +11,8 @@ COPY diagnostics /app/diagnostics
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends curl \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& pip install --no-cache-dir fastapi pyyaml uvicorn[standard] prometheus_client jinja2
+	&& pip install --no-cache-dir fastapi pyyaml uvicorn[standard] prometheus_client jinja2 gunicorn
 EXPOSE 8000
-# Use a shell to expand the PORT environment variable (Render sets $PORT). Fall back to 8000.
-CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+	# Use gunicorn with the Uvicorn worker for production. Wrap in a shell so ${PORT} is expanded at runtime
+	# (Render provides $PORT). Fall back to 8000 when not set. Log to stdout/stderr so platform logs capture output.
+	CMD ["sh", "-c", "exec gunicorn -k uvicorn.workers.UvicornWorker -w 2 backend.main:app --bind 0.0.0.0:${PORT:-8000} --timeout 120 --access-logfile - --error-logfile -"]
