@@ -1,0 +1,9 @@
+[build]
+  base = "frontend"
+  command = "npm ci && npm run build"
+  # Netlify Next.js plugin will prepare the final publish output; leave publish pointing
+  # at the default Netlify output directory used by the plugin.
+  publish = "frontend/.netlify"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
