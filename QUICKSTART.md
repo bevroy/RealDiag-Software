@@ -93,3 +93,39 @@ python main.py --help
 ```
 
 For more details, see [README.md](README.md)
+
+## Local prebuilt frontend (developer convenience)
+
+If your local environment is constrained and the Next.js production build OOMs during
+`docker compose up --build`, you can prebuild the frontend and use a prebuilt image
+for faster, more-robust local testing.
+
+1. Build frontend locally:
+
+```bash
+cd frontend
+npm ci && npm run build
+cd -
+```
+
+2. Build the helper image that copies the built files (no `npm run build` inside the image):
+
+```bash
+docker build -f Dockerfile.prebuilt -t realdiag-frontend:prebuilt .
+```
+
+3. Start the stack using a compose override that forces the `web` service to use the prebuilt image:
+
+```bash
+cat > docker-compose.local.yml <<'YML'
+version: "3.9"
+services:
+	web:
+		image: realdiag-frontend:prebuilt
+		build: null
+YML
+
+docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+```
+
+This mirrors the CI-friendly approach implemented in `.github/workflows/frontend-prebuild.yml`.

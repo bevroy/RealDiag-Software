@@ -1,0 +1,20 @@
+FROM node:18-alpine
+WORKDIR /app/frontend
+# The prebuilt Dockerfile expects the repository's `frontend` directory to contain
+# an already-built Next.js project (i.e. `.next/`, `public/`, etc.). This keeps the
+# heavy `npm run build` step out of the Docker build (useful for CI on small runners).
+COPY frontend/ /app/frontend
+ENV NODE_ENV=production
+EXPOSE 3000
+COPY frontend/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh && apk add --no-cache curl
+ENTRYPOINT ["./docker-entrypoint.sh"]
+FROM node:18-alpine
+WORKDIR /app/frontend
+# Copy the already-built frontend directory (including .next)
+COPY frontend/ /app/frontend
+ENV NODE_ENV=production
+EXPOSE 3000
+COPY frontend/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh && apk add --no-cache curl
+ENTRYPOINT ["./docker-entrypoint.sh"]

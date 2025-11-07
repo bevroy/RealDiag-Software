@@ -1,0 +1,70 @@
+name: Frontend prebuild + image
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+  pull_request:
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build-frontend:
+    name: Build frontend artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: frontend/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install and build
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload frontend build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: |
+            frontend/.next
+            frontend/public
+            frontend/package-lock.json
+
+  build-image:
+    name: Build Docker image using prebuilt frontend
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download frontend build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+
+      - name: Show files (debug)
+        run: ls -la . && ls -la frontend || true
+
+      - name: Build image (no push)
+        run: |
+          # Use the prebuilt Dockerfile which copies the built frontend directory
+          docker build -f Dockerfile.prebuilt -t frontend-prebuilt:${{ github.sha }} .
+
+      - name: Save image (optional)
+        if: always()
+        run: docker images --format 'table {{.Repository}}:{{.Tag}}\t{{.Size}}' | sed -n '1,200p'
