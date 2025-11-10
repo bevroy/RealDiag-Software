@@ -4,8 +4,14 @@
 // overridden at runtime when deploying as a container by writing a
 // different /runtime-config.js that sets window.__RUNTIME_CONFIG__.
 
-window.__RUNTIME_CONFIG__ = window.__RUNTIME_CONFIG__ || {
+// Set both names to be safe: some builds expect `window.__RUNTIME_CONFIG` while
+// older/alternate code used `window.__RUNTIME_CONFIG__` (double underscore).
+window.__RUNTIME_CONFIG__ = window.__RUNTIME_CONFIG__ || {};
+window.__RUNTIME_CONFIG = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__ || {
   // API base used by the frontend to call the backend.
   // Matches the variable name used in the app (NEXT_PUBLIC_API_BASE).
   NEXT_PUBLIC_API_BASE: "https://realdiag-software.onrender.com"
 };
+
+// Ensure both variables reference the same object
+window.__RUNTIME_CONFIG__ = window.__RUNTIME_CONFIG__ || window.__RUNTIME_CONFIG;
