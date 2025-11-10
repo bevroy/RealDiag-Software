@@ -29,7 +29,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: realdiag-api
-          image: ghcr.io/bevroy/realdiag-api:v1.0.12
+          image: ghcr.io/bevroy/realdiag-api@sha256:cf683e8e5835a347fd498674b7840141bc70d692796e64f7bad978aa2690d0b4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -97,7 +97,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: realdiag-web
-          image: ghcr.io/bevroy/realdiag-web:v1.0.12
+          image: ghcr.io/bevroy/realdiag-web@sha256:b4ce40c6ee11bf41d32fe118756f8e5fcf0430d719508e15d1a6e106976af88e
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

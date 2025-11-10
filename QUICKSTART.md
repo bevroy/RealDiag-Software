@@ -93,3 +93,62 @@ python main.py --help
 ```
 
 For more details, see [README.md](README.md)
+
+## Local prebuilt frontend (developer convenience)
+
+If your local environment is constrained and the Next.js production build OOMs during
+`docker compose up --build`, you can prebuild the frontend and use a prebuilt image
+for faster, more-robust local testing.
+
+1. Build frontend locally:
+
+```bash
+cd frontend
+npm ci && npm run build
+cd -
+```
+
+2. Build the helper image that copies the built files (no `npm run build` inside the image):
+
+```bash
+docker build -f Dockerfile.prebuilt -t realdiag-frontend:prebuilt .
+```
+
+3. Start the stack using a compose override that forces the `web` service to use the prebuilt image:
+
+```bash
+cat > docker-compose.local.yml <<'YML'
+version: "3.9"
+services:
+	web:
+		image: realdiag-frontend:prebuilt
+		build: null
+YML
+
+docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+```
+
+This mirrors the CI-friendly approach implemented in `.github/workflows/frontend-prebuild.yml`.
+
+## Publishing images to GitHub Container Registry (GHCR)
+
+If you want CI to publish the prebuilt frontend image to GHCR, create a Personal Access
+Token (PAT) with the `write:packages` scope (and `read:packages` if needed) and add it as
+a repository secret named `GHCR_TOKEN`.
+
+Steps to create the PAT:
+
+1. Visit https://github.com/settings/tokens/new
+2. Give it a descriptive name (e.g. "GHCR publish token")
+3. Under "Select scopes", check `write:packages` (optionally `read:packages`)
+4. Create the token and copy the value (you won't be able to see it again)
+
+Add it to your repository:
+
+1. Go to your repository on GitHub -> Settings -> Secrets -> Actions -> New repository secret
+2. Name: `GHCR_TOKEN`
+3. Value: the PAT you copied
+
+With that secret present, the CI workflow `.github/workflows/frontend-prebuild.yml` will push
+the built frontend image to GHCR and post the pushed image digest to the PR (or create a
+release if running on `main`).

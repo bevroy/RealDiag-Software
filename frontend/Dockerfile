@@ -12,4 +12,8 @@ ENV NODE_ENV=production
 EXPOSE 3000
 COPY frontend/docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh
+# Ensure curl is available for the container healthcheck and runtime probes
+# Alpine images don't include curl by default.
+RUN apk add --no-cache curl
+
 ENTRYPOINT ["./docker-entrypoint.sh"]

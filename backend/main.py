@@ -32,10 +32,16 @@ app.add_middleware(
     CORSMiddleware,
     # Allow the local frontend origin and preview hostnames (Codespaces / GitHub preview).
     # The preview regex can be overridden via PREVIEW_ORIGIN_REGEX env var for portability.
-    allow_origins=["http://localhost:3000"],
+    # Also allow the Netlify production/preview domains that host the frontend so
+    # browser requests from the deployed frontend can reach this API.
+    allow_origins=[
+        "http://localhost:3000",
+        "https://realdiag.netlify.app",
+        "https://main--realdiag.netlify.app",
+    ],
     allow_origin_regex=os.getenv(
         "PREVIEW_ORIGIN_REGEX",
-        r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev)$",
+        r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|.+\.netlify\.app)$",
     ),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
