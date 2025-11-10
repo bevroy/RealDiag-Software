@@ -28,11 +28,13 @@
     </section>
 
     <script>
+      // Use runtime-config if available; fall back to the Render backend URL.
+      const API_BASE = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://realdiag-software.onrender.com';
       async function check(){
         try{
-          const h = await fetch('http://localhost:8000/health');
+          const h = await fetch(API_BASE + '/health');
           const hv = await h.json();
-          const v = await fetch('http://localhost:8000/version');
+          const v = await fetch(API_BASE + '/version');
           const j = await v.json();
           document.getElementById('result').textContent = JSON.stringify({health: hv, version: j}, null, 2);
         }catch(e){
