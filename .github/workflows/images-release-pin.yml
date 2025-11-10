@@ -1,0 +1,131 @@
+name: Build & Publish Images, Create Release Artifacts, Pin Manifests
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      commit_pinned:
+        description: 'If true, commit pinned manifests back to repo (requires GITHUB_TOKEN write perms)'
+        required: false
+        default: 'false'
+
+jobs:
+  build-and-push:
+    name: Build multi-arch images and capture digests
+    runs-on: ubuntu-latest
+    outputs:
+      image-digest-file: ${{ steps.save-digest.outputs.path }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GHCR
+        if: ${{ secrets.GHCR_TOKEN != '' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and push backend image (multi-arch)
+        id: build-backend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: ${{ secrets.GHCR_TOKEN != '' }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/realdiag-backend:latest
+            ghcr.io/${{ github.repository_owner }}/realdiag-backend:${{ github.sha }}
+          outputs: type=registry
+
+      - name: Save image digest to file
+        id: save-digest
+        run: |
+          mkdir -p artifacts
+          # build-push-action exposes image digest in output
+          echo "ghcr.io/${GITHUB_REPOSITORY_OWNER:-${{ github.repository_owner }}}/realdiag-backend@${{ steps.build-backend.outputs.digest }}" > artifacts/image-digest.txt
+          echo "artifacts/image-digest.txt" > /tmp/image-digest-path
+          echo "path=artifacts/image-digest.txt" >> $GITHUB_OUTPUT
+
+      - name: Upload digest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-digest
+          path: artifacts/image-digest.txt
+
+  pin-manifests:
+    name: Pin k8s manifests to built image digests
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download image digest artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image-digest
+
+      - name: Show image digest
+        run: cat image-digest.txt
+
+      - name: Pin manifests
+        id: pin
+        run: |
+          python3 tools/pin-manifests.py --manifests k8s/staging-realdiag.yaml --image-digests image-digest.txt --out k8s/staging-realdiag.pinned.yaml
+
+      - name: Upload pinned manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinned-manifest
+          path: k8s/staging-realdiag.pinned.yaml
+
+      - name: Commit pinned manifest back to repo
+        if: ${{ github.event_name != 'push' || github.event.ref_type == 'branch' }} && ${{ inputs.commit_pinned == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add k8s/staging-realdiag.pinned.yaml
+          git commit -m "ci: add pinned k8s manifest for ${{ github.sha }}" || echo "no changes"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    name: Create GitHub Release (on tag)
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [build-and-push, pin-manifests]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: pinned-manifest
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload pinned manifest to release
+        uses: actions/upload-release-asset@v2
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./k8s/staging-realdiag.pinned.yaml
+          asset_name: staging-realdiag.pinned.yaml
+          asset_content_type: application/x-yaml
