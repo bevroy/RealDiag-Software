@@ -1,5 +1,6 @@
 
 import os
+import re
 from fastapi import FastAPI, Request
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
 import logging
@@ -26,6 +27,20 @@ app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 # Jinja2 templates directory
 templates = Jinja2Templates(directory="backend/templates")
 
+# Compute a safe preview origin regex. If PREVIEW_ORIGIN_REGEX is set in the
+# environment (for example, by Render), include its pattern but also ensure the
+# Netlify preview hostnames for this site are allowed so Netlify previews can
+# call this API without requiring a manual env var change in Render.
+_preview_env = os.getenv("PREVIEW_ORIGIN_REGEX")
+_netlify_part = r"(?:[A-Za-z0-9-]+--)?realdiag\.netlify\.app"
+if _preview_env:
+    # strip optional leading scheme anchor and trailing dollar so we can embed
+    _p = re.sub(r'^https?://', '', _preview_env)
+    _p = re.sub(r'\$$', '', _p)
+    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:(?:%s)|(?:%s))$" % (_p, _netlify_part)
+else:
+    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:%s))$" % _netlify_part
+
 
 # Allow CORS from local frontend during development
 app.add_middleware(
@@ -44,11 +59,7 @@ app.add_middleware(
         # Use a conservative regex that matches the canonical Netlify preview pattern for this
         # project while still allowing localhost and common Codespaces/GH previews. The regex
         # can be overridden with the PREVIEW_ORIGIN_REGEX env var if needed.
-           allow_origin_regex=os.getenv(
-               "PREVIEW_ORIGIN_REGEX",
-               # Match localhost, GitHub preview hosts and Netlify preview hostnames for this site
-               r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:[A-Za-z0-9-]+--)?realdiag\.netlify\.app)$",
-        ),
+        allow_origin_regex=PREVIEW_ORIGIN_REGEX_COMBINED,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
