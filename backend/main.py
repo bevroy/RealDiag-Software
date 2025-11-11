@@ -44,10 +44,10 @@ app.add_middleware(
         # Use a conservative regex that matches the canonical Netlify preview pattern for this
         # project while still allowing localhost and common Codespaces/GH previews. The regex
         # can be overridden with the PREVIEW_ORIGIN_REGEX env var if needed.
-        allow_origin_regex=os.getenv(
-            "PREVIEW_ORIGIN_REGEX",
-            # Match localhost, GitHub preview hosts and Netlify preview hostnames for this site
-            r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:[A-Za-z0-9-]+--)?realdiag\\.netlify\\.app)$",
+           allow_origin_regex=os.getenv(
+               "PREVIEW_ORIGIN_REGEX",
+               # Match localhost, GitHub preview hosts and Netlify preview hostnames for this site
+               r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:[A-Za-z0-9-]+--)?realdiag\.netlify\.app)$",
         ),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
