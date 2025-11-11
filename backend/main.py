@@ -39,10 +39,16 @@ app.add_middleware(
         "https://realdiag.netlify.app",
         "https://main--realdiag.netlify.app",
     ],
-    allow_origin_regex=os.getenv(
-        "PREVIEW_ORIGIN_REGEX",
-        r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|.+\.netlify\.app)$",
-    ),
+        # Allow dynamic preview hosts for the frontend. Netlify preview URLs look like
+        # <deploy-id>--<site>.netlify.app (for example: 691393f018f33e61caabd45b--realdiag.netlify.app).
+        # Use a conservative regex that matches the canonical Netlify preview pattern for this
+        # project while still allowing localhost and common Codespaces/GH previews. The regex
+        # can be overridden with the PREVIEW_ORIGIN_REGEX env var if needed.
+        allow_origin_regex=os.getenv(
+            "PREVIEW_ORIGIN_REGEX",
+            # Match localhost, GitHub preview hosts and Netlify preview hostnames for this site
+            r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:[A-Za-z0-9-]+--)?realdiag\\.netlify\\.app)$",
+        ),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
