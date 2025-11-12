@@ -120,42 +120,42 @@ jobs:
         if: always()
         run: docker images --format 'table {{.Repository}}:{{.Tag}}\t{{.Size}}' | sed -n '1,200p'
 
-    smoke-test:
-      name: Smoke e2e using prebuilt image (pytest)
-      runs-on: ubuntu-latest
-      needs: build-image
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+  smoke-test:
+    name: Smoke e2e using prebuilt image (pytest)
+    runs-on: ubuntu-latest
+    needs: build-image
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Download frontend build artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: frontend-build
+      - name: Download frontend build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
 
-        - name: Build prebuilt image for smoke test
-          run: |
-            docker build -f Dockerfile.prebuilt -t realdiag-frontend:smoketest .
+      - name: Build prebuilt image for smoke test
+        run: |
+          docker build -f Dockerfile.prebuilt -t realdiag-frontend:smoketest .
 
-        - name: Create docker-compose local override
-          run: |
-            cat > docker-compose.local.yml <<'YML'
-  version: "3.9"
-  services:
-    web:
-      image: realdiag-frontend:smoketest
-      build: null
-  YML
+      - name: Create docker-compose local override
+        run: |
+          cat > docker-compose.local.yml <<'YML'
+          version: "3.9"
+          services:
+            web:
+              image: realdiag-frontend:smoketest
+              build: null
+          YML
 
-        - name: Run e2e pytest
-          env:
-            # ensure python tests can find docker in PATH
-            PATH: /usr/local/bin:/usr/bin:/bin:$PATH
-          run: |
-            docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --remove-orphans
-            # run the same pytest e2e test the project uses
-            pytest -q tests/test_e2e.py::test_e2e_stack
+      - name: Run e2e pytest
+        env:
+          # ensure python tests can find docker in PATH
+          PATH: /usr/local/bin:/usr/bin:/bin:$PATH
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --remove-orphans
+          # run the same pytest e2e test the project uses
+          pytest -q tests/test_e2e.py::test_e2e_stack
 
-        - name: Tear down stack
-          if: always()
-          run: docker compose -f docker-compose.yml -f docker-compose.local.yml down
+      - name: Tear down stack
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.local.yml down
