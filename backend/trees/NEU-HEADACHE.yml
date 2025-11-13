@@ -25,6 +25,9 @@ nodes:
   - LP if CT negative
   suggest_dx:
   - Subarachnoid hemorrhage
+  referrals:
+  - Emergency neurology/neurosurgery consult
+  - Transfer to stroke center if positive imaging
   next:
   - default: null
 - id: iih
@@ -40,6 +43,9 @@ nodes:
   - Lumbar puncture (if safe)
   suggest_dx:
   - Idiopathic intracranial hypertension
+  referrals:
+  - Neurology referral for IIH management
+  - Ophthalmology for vision monitoring
   next:
   - default: null
 - id: primary
@@ -50,5 +56,9 @@ nodes:
   - Migraine
   - Tension-type
   - Cluster (if TAC features)
+  referrals:
+  - Neurology if refractory to first-line treatment
+  - Headache specialist for chronic daily headache
+  - Consider neurology if cluster headache suspected
   next:
   - default: null

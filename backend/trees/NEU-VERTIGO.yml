@@ -27,6 +27,9 @@ nodes:
   - MRI brain if indicated
   suggest_dx:
   - Central cause (consider stroke)
+  referrals:
+  - Emergency neurology consult
+  - Stroke team activation if acute onset
   next:
   - default: null
 - id: bppv
@@ -36,6 +39,9 @@ nodes:
   - Epley maneuver
   suggest_dx:
   - BPPV
+  referrals:
+  - ENT or vestibular therapy if recurrent
+  - Physical therapy for vestibular rehabilitation
   next:
   - default: null
 - id: peripheral_vs_central
@@ -45,5 +51,8 @@ nodes:
   - Audiometry if hearing symptoms
   suggest_dx:
   - Peripheral vestibulopathy vs central
+  referrals:
+  - ENT if hearing loss or persistent symptoms
+  - Neurology if HINTS suggests central pathology
   next:
   - default: null

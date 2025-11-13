@@ -286,6 +286,17 @@ export default function Diagnose() {
                       </div>
                     )}
 
+                    {result.referrals && result.referrals.length > 0 && (
+                      <div className={styles.resultSection}>
+                        <h4>👨‍⚕️ Specialist Referrals:</h4>
+                        <ul>
+                          {result.referrals.map((referral, i) => (
+                            <li key={i}>{referral}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     {result.trace && result.trace.length > 0 && (
                       <details className={styles.trace}>
                         <summary>View Decision Trace</summary>

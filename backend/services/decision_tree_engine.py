@@ -70,6 +70,7 @@ class DecisionTreeEngine:
             ok,tr=_match(node.get("when") or {}, patient)
             trace_all.extend([f"[{cur}] "+s for s in tr])
             path.append(cur); tests.extend(node.get("tests") or []); dx.extend(node.get("suggest_dx") or [])
+            referrals=[]; referrals.extend(node.get("referrals") or [])
             nxt=None
             for branch in node.get("next") or []:
                 if "default" in branch: nxt=branch["default"]
@@ -77,4 +78,4 @@ class DecisionTreeEngine:
                     b_ok,_=_match(branch["when"], patient)
                     if b_ok: nxt=branch.get("go", nxt); break
             cur=nxt
-        return {"tree":{"id":t["id"],"title":t.get("title")}, "path":path, "tests":sorted(set(tests)), "provisional_dx":sorted(set(dx)), "trace":trace_all}
+        return {"tree":{"id":t["id"],"title":t.get("title")}, "path":path, "tests":sorted(set(tests)), "provisional_dx":sorted(set(dx)), "referrals":sorted(set(referrals)), "trace":trace_all}
