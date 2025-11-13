@@ -1,6 +1,6 @@
 [build]
   base = "frontend"
-  command = "npm install && npm run build"
+  command = "npm install && npm run build && ls -la out/"
   # Next.js static export outputs to 'out' directory (relative to base)
   publish = "out"
 
