@@ -1,0 +1,5 @@
+# Don't ignore anything in the out directory
+# By default Netlify ignores files/folders starting with .  or _
+# We need _next for Next.js static exports
+!out/_next
+!out/_next/**

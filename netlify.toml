@@ -3,6 +3,11 @@
   command = "npm install && npm run build && ls -la out/"
   # Next.js static export outputs to 'out' directory (relative to base)
   publish = "out"
+  # Explicitly include _next directory (Netlify ignores _ prefixed dirs by default)
+  ignore = false
+
+[build.processing]
+  skip_processing = false
 
 # Redirect all requests to index.html for client-side routing
 [[redirects]]
