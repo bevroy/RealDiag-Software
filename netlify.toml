@@ -1,13 +1,5 @@
 [build]
   base = "frontend"
-  # Temporary workaround: use `npm install` instead of `npm ci` so Netlify
-  # doesn't fail when package-lock.json and package.json are out of sync.
-  # Long-term: sync the lockfile (run `npm install` locally and commit
-  # package-lock.json) or ensure package.json matches the lockfile.
   command = "npm install && npm run build"
-  # When using @netlify/plugin-nextjs, the publish directory should be "."
-  # (the frontend root) not ".next". The plugin handles the Next.js deployment.
-  publish = "."
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  # Next.js static export outputs to 'out' directory
+  publish = "out"
