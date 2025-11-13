@@ -260,26 +260,26 @@ export default function Diagnose() {
               <section className={`${styles.section} ${styles.results}`}>
                 <h2>📋 Clinical Decision Support Results</h2>
                 
-                {result.match && (
+                {result.path && result.path.length > 0 && (
                   <div className={styles.resultCard}>
-                    <h3>✓ Matched Node: {result.match.node_id}</h3>
+                    <h3>✓ Decision Path: {result.path.join(' → ')}</h3>
                     
-                    {result.match.suggest_dx && result.match.suggest_dx.length > 0 && (
+                    {result.provisional_dx && result.provisional_dx.length > 0 && (
                       <div className={styles.resultSection}>
                         <h4>🎯 Suggested Diagnoses:</h4>
                         <ul>
-                          {result.match.suggest_dx.map((dx, i) => (
+                          {result.provisional_dx.map((dx, i) => (
                             <li key={i}>{dx}</li>
                           ))}
                         </ul>
                       </div>
                     )}
                     
-                    {result.match.tests && result.match.tests.length > 0 && (
+                    {result.tests && result.tests.length > 0 && (
                       <div className={styles.resultSection}>
                         <h4>🔬 Recommended Tests:</h4>
                         <ul>
-                          {result.match.tests.map((test, i) => (
+                          {result.tests.map((test, i) => (
                             <li key={i}>{test}</li>
                           ))}
                         </ul>
@@ -299,7 +299,7 @@ export default function Diagnose() {
                   </div>
                 )}
 
-                {!result.match && (
+                {(!result.path || result.path.length === 0) && (
                   <div className={styles.noMatch}>
                     <p>No matching diagnostic pathway found with current inputs.</p>
                   </div>
