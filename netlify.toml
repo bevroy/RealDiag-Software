@@ -1,5 +1,11 @@
 [build]
   base = "frontend"
   command = "npm install && npm run build"
-  # Next.js static export outputs to 'out' directory
+  # Next.js static export outputs to 'out' directory (relative to base)
   publish = "out"
+
+# Redirect all requests to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
