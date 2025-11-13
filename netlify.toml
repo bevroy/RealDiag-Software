@@ -5,10 +5,9 @@
   # Long-term: sync the lockfile (run `npm install` locally and commit
   # package-lock.json) or ensure package.json matches the lockfile.
   command = "npm install && npm run build"
-  # publish the Next.js build output directory created by `next build`.
-  # Publish path is relative to the `base` directory above. With `base = "frontend"`
-  # the correct publish directory is the `.next` folder created by `next build`.
-  publish = ".next"
+  # When using @netlify/plugin-nextjs, the publish directory should be "."
+  # (the frontend root) not ".next". The plugin handles the Next.js deployment.
+  publish = "."
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
