@@ -3,8 +3,30 @@ version: 0.1.0
 source: "RealDiag Neurology Core Rules"
 rules:
 
-  - id: NEU-STROKE-ISCHEMIC
-    label: Ischemic stroke
+  - id: NEU-SAH
+    label: Nontraumatic subarachnoid hemorrhage
+    presentations:
+      - sudden severe thunderclap headache
+      - neck stiffness, altered mental status
+      - sentinel bleed may precede rupture
+    icd10:
+      - I60.9    # Nontraumatic subarachnoid hemorrhage, unspecified
+    snomed:
+      - "21454007"   # Subarachnoid hemorrhage
+
+  - id: NEU-ICH
+    label: Spontaneous intracerebral hemorrhage
+    presentations:
+      - sudden severe headache with focal deficits
+      - nausea, vomiting, altered consciousness
+      - hypertension common risk factor
+    icd10:
+      - I61.9    # Nontraumatic intracerebral hemorrhage, unspecified
+    snomed:
+      - "274100004"  # Cerebral hemorrhage
+
+  - id: NEU-ISCH-STROKE
+    label: Ischemic stroke (cerebral infarction)
     presentations:
       - acute focal neurological deficit
       - weakness, numbness, aphasia, visual field defect
@@ -13,17 +35,6 @@ rules:
       - I63.9    # Cerebral infarction, unspecified
     snomed:
       - "422504002"  # Ischemic stroke
-
-  - id: NEU-STROKE-HEMORRHAGIC
-    label: Hemorrhagic stroke (ICH)
-    presentations:
-      - sudden severe headache
-      - focal neurological deficit with altered mental status
-      - nausea, vomiting, seizure possible
-    icd10:
-      - I61.9    # Nontraumatic intracerebral hemorrhage, unspecified
-    snomed:
-      - "274100004"  # Cerebral hemorrhage
 
   - id: NEU-TIA
     label: Transient ischemic attack (TIA)
@@ -36,8 +47,8 @@ rules:
     snomed:
       - "266257000"  # Transient ischemic attack
 
-  - id: NEU-SEIZURE
-    label: Seizure disorder / epilepsy
+  - id: NEU-EPILEPSY
+    label: Epilepsy, unspecified
     presentations:
       - convulsions, loss of consciousness, altered awareness
       - postictal confusion
@@ -58,16 +69,60 @@ rules:
     snomed:
       - "230456007"  # Status epilepticus
 
-  - id: NEU-MIGRAINE
-    label: Migraine
+  - id: NEU-HEADACHE-MIGRAINE
+    label: Migraine without aura
     presentations:
       - recurrent unilateral throbbing headache
       - nausea, photophobia, phonophobia
       - may have aura (visual, sensory)
     icd10:
-      - G43.909  # Migraine, unspecified, not intractable, without status migrainosus
+      - G43.009  # Migraine without aura
     snomed:
       - "37796009"   # Migraine
+
+  - id: NEU-HEADACHE-TENSION
+    label: Tension-type headache
+    presentations:
+      - bilateral band-like pressure headache
+      - mild to moderate intensity
+      - not aggravated by routine physical activity
+    icd10:
+      - G44.209  # Tension-type headache, unspecified
+    snomed:
+      - "398057008"  # Tension headache
+
+  - id: NEU-BPPV
+    label: Benign paroxysmal positional vertigo
+    presentations:
+      - brief episodes of vertigo with head position changes
+      - positive Dix-Hallpike maneuver
+      - nystagmus with characteristic pattern
+    icd10:
+      - H81.1     # Benign paroxysmal positional vertigo
+    snomed:
+      - "41598007"   # Benign paroxysmal positional vertigo
+
+  - id: NEU-TN
+    label: Trigeminal neuralgia
+    presentations:
+      - sudden severe unilateral facial pain
+      - electric shock-like sensations
+      - triggered by touch, chewing, or talking
+    icd10:
+      - G50.0     # Trigeminal neuralgia
+    snomed:
+      - "31681005"   # Trigeminal neuralgia
+
+  - id: NEU-MG
+    label: Myasthenia gravis
+    presentations:
+      - fluctuating muscle weakness, worsens with activity
+      - ptosis, diplopia, bulbar symptoms
+      - autoimmune disorder of neuromuscular junction
+    icd10:
+      - G70.00   # Myasthenia gravis without (acute) exacerbation
+    snomed:
+      - "91637004"   # Myasthenia gravis
 
   - id: NEU-MENINGITIS
     label: Meningitis

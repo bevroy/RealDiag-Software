@@ -3,168 +3,106 @@ version: 0.1.0
 source: "RealDiag Cardiology Core Rules"
 rules:
 
-  - id: CARDIO-MI-STEMI
-    label: ST-elevation myocardial infarction (STEMI)
+  - id: CARD-ACS
+    label: Acute coronary syndrome
     presentations:
-      - chest pain or pressure with ST elevations on ECG
-      - requires immediate reperfusion therapy
-      - troponin elevation
+      - chest pain or pressure, may radiate to arm/jaw/back
+      - dyspnea, diaphoresis, nausea
+      - includes STEMI, NSTEMI, unstable angina
     icd10:
       - I21.9    # Acute myocardial infarction, unspecified
       - I21.3    # ST elevation (STEMI) myocardial infarction of unspecified site
     snomed:
-      - "401314000"  # Acute ST segment elevation myocardial infarction
+      - "394659003"  # Acute coronary syndrome
 
-  - id: CARDIO-MI-NSTEMI
-    label: Non-ST-elevation myocardial infarction (NSTEMI)
+  - id: CARD-AORTIC-DISSECTION
+    label: Aortic dissection
     presentations:
-      - chest pain with troponin elevation but no ST elevation
-      - high-risk acute coronary syndrome
+      - sudden severe tearing chest or back pain
+      - pulse differential between arms
+      - widened mediastinum on CXR
     icd10:
-      - I21.4    # Non-ST elevation (NSTEMI) myocardial infarction
+      - I71.0     # Aortic dissection
     snomed:
-      - "401303003"  # Acute non-ST segment elevation myocardial infarction
+      - "60920007"   # Aortic dissection
 
-  - id: CARDIO-UNSTABLE-ANGINA
-    label: Unstable angina
-    presentations:
-      - new or worsening chest pain at rest or with minimal exertion
-      - normal troponin
-      - acute coronary syndrome
-    icd10:
-      - I20.0    # Unstable angina
-    snomed:
-      - "25106000"   # Unstable angina
-
-  - id: CARDIO-STABLE-ANGINA
-    label: Stable angina pectoris
-    presentations:
-      - predictable chest pain with exertion, relieved by rest or nitroglycerin
-      - chronic coronary artery disease
-    icd10:
-      - I20.9    # Angina pectoris, unspecified
-    snomed:
-      - "194828000"  # Angina pectoris
-
-  - id: CARDIO-HF-SYSTOLIC
-    label: Heart failure with reduced ejection fraction (HFrEF)
-    presentations:
-      - dyspnea, edema, fatigue
-      - ejection fraction <40%
-      - systolic dysfunction
-    icd10:
-      - I50.21   # Acute systolic heart failure
-      - I50.23   # Acute on chronic systolic heart failure
-    snomed:
-      - "441481004"  # Chronic systolic heart failure
-
-  - id: CARDIO-HF-DIASTOLIC
-    label: Heart failure with preserved ejection fraction (HFpEF)
-    presentations:
-      - dyspnea, edema, fatigue
-      - ejection fraction ≥50%
-      - diastolic dysfunction
-    icd10:
-      - I50.31   # Acute diastolic heart failure
-      - I50.33   # Acute on chronic diastolic heart failure
-    snomed:
-      - "441530006"  # Chronic diastolic heart failure
-
-  - id: CARDIO-AFIB
-    label: Atrial fibrillation
-    presentations:
-      - irregular heart rhythm, palpitations
-      - increased stroke risk
-      - may be asymptomatic or cause dyspnea, chest discomfort
-    icd10:
-      - I48.91   # Unspecified atrial fibrillation
-    snomed:
-      - "49436004"   # Atrial fibrillation
-
-  - id: CARDIO-AFLUTTER
-    label: Atrial flutter
-    presentations:
-      - rapid regular atrial rhythm with sawtooth pattern on ECG
-      - palpitations, dyspnea
-    icd10:
-      - I48.92   # Unspecified atrial flutter
-    snomed:
-      - "5370000"    # Atrial flutter
-
-  - id: CARDIO-VT
-    label: Ventricular tachycardia
-    presentations:
-      - wide complex tachycardia
-      - palpitations, syncope, cardiac arrest
-      - life-threatening arrhythmia
-    icd10:
-      - I47.2    # Ventricular tachycardia
-    snomed:
-      - "25569003"   # Ventricular tachycardia
-
-  - id: CARDIO-VFIB
-    label: Ventricular fibrillation
-    presentations:
-      - cardiac arrest, no organized electrical activity
-      - requires immediate defibrillation
-    icd10:
-      - I49.01   # Ventricular fibrillation
-    snomed:
-      - "71908006"   # Ventricular fibrillation
-
-  - id: CARDIO-HTN
-    label: Hypertension
-    presentations:
-      - elevated blood pressure ≥130/80 mmHg (per ACC/AHA)
-      - often asymptomatic
-      - risk factor for cardiovascular disease
-    icd10:
-      - I10      # Essential (primary) hypertension
-    snomed:
-      - "38341003"   # Hypertensive disorder
-
-  - id: CARDIO-HTN-CRISIS
-    label: Hypertensive crisis
-    presentations:
-      - severely elevated BP >180/120 with or without end-organ damage
-      - headache, chest pain, dyspnea, altered mental status
-    icd10:
-      - I16.9    # Hypertensive crisis, unspecified
-    snomed:
-      - "706882009"  # Hypertensive crisis
-
-  - id: CARDIO-PERICARDITIS
-    label: Pericarditis
-    presentations:
-      - sharp chest pain worsened by lying flat, improved by sitting forward
-      - pericardial friction rub
-      - ST elevation diffusely on ECG
-    icd10:
-      - I30.9    # Acute pericarditis, unspecified
-    snomed:
-      - "3238004"    # Pericarditis
-
-  - id: CARDIO-ENDOCARDITIS
-    label: Infective endocarditis
-    presentations:
-      - fever, new heart murmur, embolic phenomena
-      - positive blood cultures
-      - vegetation on echocardiography
-    icd10:
-      - I33.0    # Acute and subacute infective endocarditis
-    snomed:
-      - "56819008"   # Infective endocarditis
-
-  - id: CARDIO-PE
+  - id: CARD-PE
     label: Pulmonary embolism
     presentations:
       - sudden dyspnea, pleuritic chest pain, tachycardia
       - hypoxia, hemoptysis possible
       - requires imaging (CTA)
     icd10:
-      - I26.99   # Pulmonary embolism without acute cor pulmonale
+      - I26.9    # Pulmonary embolism without acute cor pulmonale
     snomed:
       - "59282003"   # Pulmonary embolism
+
+  - id: CARD-VASOVAGAL
+    label: Vasovagal syncope
+    presentations:
+      - sudden loss of consciousness with prodrome
+      - triggered by emotional stress, pain, standing
+      - rapid recovery without confusion
+    icd10:
+      - R55       # Syncope and collapse
+    snomed:
+      - "398665002"  # Vasovagal syncope
+
+  - id: CARD-ORTHOSTATIC
+    label: Orthostatic hypotension
+    presentations:
+      - lightheadedness or syncope upon standing
+      - BP drop ≥20/10 mmHg within 3 minutes of standing
+      - common in elderly or volume depleted
+    icd10:
+      - I95.1     # Orthostatic hypotension
+      - R55       # Syncope and collapse
+    snomed:
+      - "28651003"   # Orthostatic hypotension
+
+  - id: CARD-HF
+    label: Heart failure (chronic)
+    presentations:
+      - dyspnea, edema, fatigue
+      - may have reduced or preserved ejection fraction
+      - requires ongoing management
+    icd10:
+      - I50.9     # Heart failure, unspecified
+    snomed:
+      - "84114007"   # Heart failure
+
+  - id: CARD-HTN
+    label: Hypertension
+    presentations:
+      - elevated blood pressure ≥130/80 mmHg
+      - often asymptomatic
+      - risk factor for cardiovascular disease
+    icd10:
+      - I10       # Essential (primary) hypertension
+    snomed:
+      - "38341003"   # Hypertensive disorder
+
+  - id: CARD-PAD
+    label: Peripheral arterial disease
+    presentations:
+      - claudication (leg pain with walking)
+      - diminished pulses, cool extremities
+      - may progress to critical limb ischemia
+    icd10:
+      - I73.9     # Peripheral vascular disease, unspecified
+    snomed:
+      - "399957001"  # Peripheral arterial disease
+
+  - id: CARD-AFIB
+    label: Atrial fibrillation
+    presentations:
+      - irregular heart rhythm, palpitations
+      - increased stroke risk
+      - may be asymptomatic or cause dyspnea
+    icd10:
+      - I48.0     # Paroxysmal atrial fibrillation
+    snomed:
+      - "49436004"   # Atrial fibrillation
 
   - id: CARDIO-DVT
     label: Deep vein thrombosis
