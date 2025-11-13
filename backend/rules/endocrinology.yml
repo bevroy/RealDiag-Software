@@ -1,0 +1,123 @@
+family: endocrinology
+version: 0.1.0
+source: "RealDiag Endocrinology Core Rules"
+rules:
+
+  - id: ENDO-DM1
+    label: Type 1 diabetes mellitus
+    presentations:
+      - polyuria, polydipsia, weight loss
+      - insulin deficiency, often younger onset
+    icd10:
+      - E10.9   # Type 1 diabetes mellitus without complications
+
+  - id: ENDO-DM2
+    label: Type 2 diabetes mellitus
+    presentations:
+      - hyperglycemia in adults with insulin resistance
+      - may be asymptomatic or present with polyuria/polydipsia
+    icd10:
+      - E11.9   # Type 2 diabetes mellitus without complications
+
+  - id: ENDO-DKA
+    label: Diabetic ketoacidosis (DKA)
+    presentations:
+      - hyperglycemia with ketosis and metabolic acidosis
+      - abdominal pain, vomiting, Kussmaul respirations, fruity breath
+    icd10:
+      - E10.10   # Type 1 diabetes mellitus with ketoacidosis without coma
+      - E11.10   # Type 2 diabetes mellitus with ketoacidosis without coma
+
+  - id: ENDO-HHS
+    label: Hyperosmolar hyperglycemic state (HHS)
+    presentations:
+      - severe hyperglycemia, hyperosmolality, dehydration
+      - minimal or absent ketosis, altered mental status
+    icd10:
+      - E11.00   # Type 2 diabetes mellitus with hyperosmolarity without coma
+
+  - id: ENDO-HYPOGLYCEMIA
+    label: Hypoglycemia
+    presentations:
+      - adrenergic symptoms (tremor, palpitations, sweating, hunger)
+      - neuroglycopenic symptoms (confusion, seizure, loss of consciousness)
+      - low plasma glucose at time of symptoms
+    icd10:
+      - E16.0    # Drug-induced hypoglycemia without coma
+      - E16.1    # Other hypoglycemia
+      - E16.2    # Hypoglycemia, unspecified
+
+  - id: ENDO-HYPERTHYROIDISM
+    label: Hyperthyroidism / thyrotoxicosis
+    presentations:
+      - weight loss, heat intolerance, palpitations, tremor
+      - suppressed TSH, elevated free T4/T3
+    icd10:
+      - E05.90   # Thyrotoxicosis, unspecified without crisis or storm
+
+  - id: ENDO-THYROID_STORM
+    label: Thyroid storm (thyrotoxic crisis)
+    presentations:
+      - severe thyrotoxicosis with fever, tachycardia, CNS changes
+      - precipitated by infection, surgery, or other stressor
+    icd10:
+      - E05.91   # Thyrotoxicosis, unspecified with crisis or storm
+
+  - id: ENDO-HYPOTHYROIDISM
+    label: Hypothyroidism
+    presentations:
+      - fatigue, cold intolerance, weight gain, constipation, dry skin
+      - elevated TSH with low free T4 (primary)
+    icd10:
+      - E03.9    # Hypothyroidism, unspecified
+
+  - id: ENDO-THYROID_NODULE
+    label: Thyroid nodule (benign or indeterminate)
+    presentations:
+      - palpable or incidentally discovered thyroid nodule
+      - normal or abnormal thyroid function depending on etiology
+    icd10:
+      - E04.1    # Nontoxic single thyroid nodule
+      - E04.2    # Nontoxic multinodular goiter
+
+  - id: ENDO-THYROID_CANCER
+    label: Thyroid carcinoma
+    presentations:
+      - thyroid nodule with suspicious ultrasound features or FNA results
+      - local compressive symptoms (hoarseness, dysphagia) or lymphadenopathy
+    icd10:
+      - C73      # Malignant neoplasm of thyroid gland
+
+  - id: ENDO-HYPERCALCEMIA
+    label: Hypercalcemia
+    presentations:
+      - elevated serum calcium
+      - may cause polyuria, constipation, confusion, arrhythmia
+    icd10:
+      - E83.52   # Hypercalcemia
+
+  - id: ENDO-PRIMARY-HPT
+    label: Primary hyperparathyroidism
+    presentations:
+      - chronic hypercalcemia with inappropriately elevated PTH
+      - nephrolithiasis, bone loss, nonspecific symptoms
+    icd10:
+      - E21.0    # Primary hyperparathyroidism
+
+  - id: ENDO-ADRENAL-CRISIS
+    label: Adrenal crisis
+    presentations:
+      - hypotension, shock, abdominal pain, vomiting
+      - hyponatremia, hyperkalemia, hypoglycemia
+      - often in known adrenal insufficiency with stressor
+    icd10:
+      - E27.2    # Addisonian crisis
+
+  - id: ENDO-ADRENAL-INSUFF
+    label: Adrenal insufficiency
+    presentations:
+      - chronic fatigue, weight loss, hyperpigmentation (primary)
+      - hyponatremia, hyperkalemia, low cortisol
+    icd10:
+      - E27.1    # Primary adrenocortical insufficiency
+      - E27.40   # Unspecified adrenocortical insufficiency

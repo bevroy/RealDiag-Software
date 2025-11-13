@@ -1,0 +1,118 @@
+id: ENDO-DIABETES
+title: Diabetes & Hyperglycemic Emergencies
+entry: assess_glucose
+nodes:
+- id: assess_glucose
+  when: {}
+  tests: []
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - ketosis
+      - acidosis
+      - kussmaul respirations
+      - fruity breath
+    go: dka_pathway
+  - when:
+      symptoms_contains_any:
+      - severe hyperglycemia
+      - hyperosmolality
+      - altered mental status
+      - severe dehydration
+    go: hhs_pathway
+  - when:
+      red_flags_any:
+      - tremor
+      - sweating
+      - confusion
+      - seizure
+      - loss of consciousness
+    go: hypoglycemia
+  - when:
+      symptoms_contains_any:
+      - polyuria
+      - polydipsia
+      - weight loss
+    go: new_diabetes
+  - default: established_diabetes
+
+- id: dka_pathway
+  when: {}
+  tests:
+  - Serum glucose
+  - Serum ketones or beta-hydroxybutyrate
+  - Venous or arterial blood gas
+  - Basic metabolic panel
+  - Urinalysis with ketones
+  suggest_dx:
+  - Diabetic ketoacidosis (DKA)
+  referrals:
+  - Admit to ICU or step-down unit
+  - Endocrinology consult
+  - Identify and treat precipitating cause (infection, MI, medication non-compliance)
+  next:
+  - default: null
+
+- id: hhs_pathway
+  when: {}
+  tests:
+  - Serum glucose (typically >600 mg/dL)
+  - Serum osmolality
+  - Basic metabolic panel
+  - Serum ketones (minimal or absent)
+  - Blood gas if altered mental status
+  suggest_dx:
+  - Hyperosmolar hyperglycemic state (HHS)
+  referrals:
+  - Admit to ICU
+  - Endocrinology consult
+  - Aggressive fluid resuscitation with careful monitoring
+  next:
+  - default: null
+
+- id: hypoglycemia
+  when: {}
+  tests:
+  - Immediate glucose check (fingerstick or serum)
+  - If recurrent, consider insulin levels, C-peptide, cortisol
+  suggest_dx:
+  - Hypoglycemia
+  referrals:
+  - Treat with oral glucose if alert, IV dextrose if altered
+  - Endocrinology if recurrent or unexplained
+  - Adjust diabetes medications if applicable
+  next:
+  - default: null
+
+- id: new_diabetes
+  when: {}
+  tests:
+  - Fasting glucose or HbA1c
+  - Random glucose if symptomatic
+  - C-peptide and GAD antibodies if type unclear
+  - Urinalysis for ketones
+  suggest_dx:
+  - Type 1 diabetes mellitus (if younger, ketosis-prone, rapid onset)
+  - Type 2 diabetes mellitus (if older, gradual onset, insulin resistant)
+  referrals:
+  - Endocrinology or diabetes educator
+  - Diabetes self-management education (DSME)
+  - Ophthalmology for baseline diabetic retinopathy screening
+  next:
+  - default: null
+
+- id: established_diabetes
+  when: {}
+  tests:
+  - HbA1c for glycemic control assessment
+  - Annual lipid panel, kidney function, urinary albumin
+  - Annual dilated eye exam
+  suggest_dx:
+  - Type 1 or Type 2 diabetes mellitus (established)
+  referrals:
+  - Continue primary care or endocrinology follow-up
+  - Diabetes educator for optimization
+  - Podiatry for foot care if complications
+  next:
+  - default: null

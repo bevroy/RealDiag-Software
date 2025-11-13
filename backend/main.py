@@ -9,6 +9,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from backend.services.diagnostic_router import router as diagnostic_router
+from backend.services.rules_router import router as rules_router
 from config import Config
 
 app = FastAPI(title="RealDiag API")
@@ -20,8 +21,9 @@ logger = logging.getLogger("realdiag")
 # Prometheus metrics
 REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['path', 'method', 'status'])
 
-# Include diagnostic router
+# Include routers
 app.include_router(diagnostic_router)
+app.include_router(rules_router)
 
 
 # Serve static files (assets)

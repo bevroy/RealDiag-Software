@@ -1,0 +1,116 @@
+id: ENDO-THYROID
+title: Thyroid Disorders
+entry: assess_thyroid
+nodes:
+- id: assess_thyroid
+  when: {}
+  tests: []
+  suggest_dx: []
+  next:
+  - when:
+      red_flags_any:
+      - fever
+      - severe tachycardia
+      - altered mental status
+      - thyrotoxic crisis
+    go: thyroid_storm
+  - when:
+      symptoms_contains_any:
+      - weight loss
+      - heat intolerance
+      - palpitations
+      - tremor
+      - anxiety
+    go: hyperthyroid
+  - when:
+      symptoms_contains_any:
+      - fatigue
+      - cold intolerance
+      - weight gain
+      - constipation
+      - dry skin
+    go: hypothyroid
+  - when:
+      exam_flags_any:
+      - thyroid nodule
+      - neck mass
+      - thyroid enlargement
+    go: thyroid_nodule
+  - default: euthyroid
+
+- id: thyroid_storm
+  when: {}
+  tests:
+  - TSH, free T4, free T3 (stat)
+  - Basic metabolic panel
+  - Cardiac monitoring
+  - Blood cultures if febrile
+  suggest_dx:
+  - Thyroid storm (thyrotoxic crisis)
+  referrals:
+  - ICU admission immediately
+  - Endocrinology urgent consult
+  - Treat with beta-blockers, PTU or methimazole, corticosteroids, cooling
+  - Identify and treat precipitating cause
+  next:
+  - default: null
+
+- id: hyperthyroid
+  when: {}
+  tests:
+  - TSH (suppressed), free T4, free T3
+  - Thyroid stimulating immunoglobulin (TSI) if Graves suspected
+  - Radioactive iodine uptake scan if etiology unclear
+  suggest_dx:
+  - Hyperthyroidism / thyrotoxicosis
+  - Consider Graves disease, toxic adenoma, thyroiditis
+  referrals:
+  - Endocrinology for management
+  - Ophthalmology if exophthalmos or Graves orbitopathy
+  - Consider antithyroid drugs, radioiodine, or surgery
+  next:
+  - default: null
+
+- id: hypothyroid
+  when: {}
+  tests:
+  - TSH (elevated), free T4
+  - TPO antibodies if autoimmune suspected
+  - Lipid panel (often elevated in hypothyroidism)
+  suggest_dx:
+  - Hypothyroidism
+  - Consider Hashimoto thyroiditis, iatrogenic, iodine deficiency
+  referrals:
+  - Primary care or endocrinology for levothyroxine initiation
+  - Recheck TSH in 6-8 weeks after dose adjustment
+  next:
+  - default: null
+
+- id: thyroid_nodule
+  when: {}
+  tests:
+  - TSH to assess thyroid function
+  - Thyroid ultrasound with characteristics (size, echogenicity, vascularity)
+  - Fine needle aspiration (FNA) if suspicious features or size >1cm
+  suggest_dx:
+  - Thyroid nodule (benign or indeterminate)
+  - Thyroid carcinoma (if FNA suspicious or malignant)
+  referrals:
+  - Endocrinology or thyroid specialist
+  - Surgery if FNA shows malignancy or compressive symptoms
+  - Follow-up ultrasound per guidelines if benign
+  next:
+  - default: null
+
+- id: euthyroid
+  when: {}
+  tests:
+  - TSH if clinically indicated
+  - No routine thyroid screening unless high-risk population
+  suggest_dx:
+  - Normal thyroid function (euthyroid)
+  referrals:
+  - Routine primary care follow-up
+  - Consider screening in pregnancy, elderly, or family history
+  next:
+  - default: null

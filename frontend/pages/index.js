@@ -40,6 +40,20 @@ export default function Home(){
             🩺 Interactive Diagnosis Tool
           </Link>
           
+          <Link href="/rules" style={{
+            padding: '1.25rem',
+            background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            boxShadow: '0 4px 12px rgba(72, 187, 120, 0.4)',
+            transition: 'transform 0.2s'
+          }}>
+            📚 Clinical Rules Reference
+          </Link>
+          
           <Link href="/diagnostic" style={{
             padding: '1.25rem',
             background: 'white',
