@@ -20,6 +20,9 @@ logger = logging.getLogger("realdiag")
 # Prometheus metrics
 REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['path', 'method', 'status'])
 
+# Include diagnostic router
+app.include_router(diagnostic_router)
+
 
 # Serve static files (assets)
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
