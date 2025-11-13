@@ -127,7 +127,8 @@ export default function Diagnose() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>🩺 RealDiag - Clinical Decision Support</h1>
+        <img src="/logo.png" alt="RealDiag Logo" style={{maxHeight: '80px', marginBottom: '1rem'}} />
+        <h1>RealDiag - Clinical Decision Support</h1>
         <p>Interactive diagnostic decision trees for clinical evaluation</p>
       </header>
 

@@ -81,7 +81,10 @@ export default function ReferencePage() {
 
   return (
     <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto" }}>
-      <h1 style={{ marginBottom: 4 }}>Reference: Diagnostic Rules & Codes</h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+        <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+        <h1 style={{ marginBottom: 0 }}>Reference: Diagnostic Rules & Codes</h1>
+      </div>
       <p style={{ marginBottom: 12, fontSize: 14, color: "#555" }}>
         Browse RealDiag&apos;s structured rules for neurology, cardiology, and endocrinology.
         Use the search box to filter by diagnosis name, typical presentations, ICD-10, or SNOMED.

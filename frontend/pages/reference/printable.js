@@ -181,7 +181,8 @@ export default function PrintableReferencePage() {
       </head>
       <body>
         <div className="toolbar">
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '30px' }} />
             <strong>RealDiag – Reference Cheat-Sheet</strong>
           </div>
           <div>

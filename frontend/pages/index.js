@@ -18,8 +18,9 @@ export default function Home(){
         textAlign: 'center',
         boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
       }}>
+        <img src="/logo.png" alt="RealDiag Logo" style={{maxWidth: '200px', marginBottom: '1rem'}} />
         <h1 style={{fontSize: '2.5rem', color: '#2d3748', marginBottom: '1rem'}}>
-          🩺 RealDiag
+          RealDiag
         </h1>
         <p style={{color: '#718096', fontSize: '1.1rem', marginBottom: '2rem'}}>
           Clinical Decision Support System
