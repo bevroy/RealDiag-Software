@@ -50,18 +50,26 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/realdiag-backend:latest
             ghcr.io/${{ github.repository_owner }}/realdiag-backend:${{ github.sha }}
-          outputs: type=registry
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Save image digest to file
         id: save-digest
+        if: always()
         run: |
           mkdir -p artifacts
-          # build-push-action exposes image digest in output
-          echo "ghcr.io/${REPO_OWNER}/realdiag-backend@${{ steps.build-backend.outputs.digest }}" > artifacts/image-digest.txt
-          echo "artifacts/image-digest.txt" > /tmp/image-digest-path
+          # build-push-action exposes image digest in output when push succeeds
+          if [ -n "${{ steps.build-backend.outputs.digest }}" ]; then
+            echo "ghcr.io/${REPO_OWNER}/realdiag-backend@${{ steps.build-backend.outputs.digest }}" > artifacts/image-digest.txt
+            echo "Saved digest: $(cat artifacts/image-digest.txt)"
+          else
+            echo "No digest available (image may not have been pushed)" > artifacts/image-digest.txt
+            echo "Build completed but no digest output available"
+          fi
           echo "path=artifacts/image-digest.txt" >> $GITHUB_OUTPUT
 
       - name: Upload digest artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: image-digest
