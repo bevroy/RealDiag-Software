@@ -63,30 +63,62 @@ rules:
   - id: EM-SHOCK-HYPOVOLEMIC
     label: Hypovolemic Shock
     presentations:
-      - Hypotension and tachycardia
-      - History of blood or fluid loss
-      - Pale, cool, clammy skin
-      - Decreased urine output
-      - Altered mental status
+      - Hypotension (SBP <90 mmHg, MAP <65 mmHg)
+      - Tachycardia, weak thready pulses
+      - Cool, clammy, pale or mottled skin
+      - Delayed capillary refill (>2 seconds)
+      - Altered mental status, confusion, agitation
+      - Oliguria (<0.5 mL/kg/hr), decreased urine output
       - Narrow pulse pressure
+      - Sources: Hemorrhage (trauma, GI bleed, AAA rupture), fluid loss (vomiting, diarrhea, burns, DKA)
+      - Classes: I (<15% loss, minimal), II (15-30%, tachycardia), III (30-40%, hypotension), IV (>40%, life-threatening)
+    clinical_pearls:
+      - "Resuscitate with crystalloids first: 30 mL/kg bolus (e.g., 2L for 70kg adult)"
+      - "Blood transfusion if hemorrhagic shock: Target Hgb >7 g/dL (>8 if cardiac disease)"
+      - "Massive transfusion protocol: 1:1:1 ratio (PRBC:FFP:Platelets) if ongoing hemorrhage"
+      - "Permissive hypotension in trauma: SBP 80-90 until hemorrhage controlled (avoid overresuscitation)"
+      - "Two large-bore IVs (14-16G) or central line for rapid infusion"
+      - "Identify and control source: Surgery for bleeding, fluids/antibiotics for dehydration/sepsis"
+    management:
+      - "Immediate: IV access (two large-bore or central line), 30 mL/kg NS/LR bolus, oxygen, cardiac monitor"
+      - "Hemorrhage control: Direct pressure, tourniquet, activate massive transfusion protocol if Class III/IV"
+      - "Blood products: PRBC for Hgb <7 (or <8 if cardiac disease), FFP if INR >1.5, platelets if <50K and bleeding"
+      - "Monitoring: Continuous vitals, urine output (Foley), serial lactate, Hgb q1-2hr, coags"
+      - "Disposition: ICU for ongoing resuscitation, OR for surgical hemorrhage control, admit for Class II or higher"
     icd10:
-      - R57.1
+      - R57.1     # Hypovolemic shock
+      - T79.4XXA  # Traumatic shock, initial encounter
     snomed:
-      - 39419009
+      - "39419009"  # Hypovolemic shock
 
   - id: EM-SHOCK-CARDIOGENIC
     label: Cardiogenic Shock
     presentations:
-      - Hypotension with signs of tissue hypoperfusion
-      - Elevated jugular venous pressure
-      - Pulmonary edema
-      - Cool extremities
-      - Often post-MI or acute heart failure
-      - Decreased cardiac output
+      - Hypotension: SBP <90 mmHg or MAP <65 mmHg despite adequate preload
+      - Evidence of tissue hypoperfusion: Cool extremities, altered mental status, oliguria, elevated lactate
+      - Signs of congestion: Elevated JVP, pulmonary edema (rales, dyspnea), peripheral edema
+      - Tachycardia (compensatory), may have arrhythmias
+      - Etiology: Post-MI (most common), acute decompensated HF, myocarditis, valvular rupture
+      - Cardiac index <2.2 L/min/m², PCWP >18 mmHg (if Swan-Ganz catheter)
+      - High mortality: 40-50% despite aggressive treatment
+    clinical_pearls:
+      - "Do NOT give large fluid boluses: Worsens pulmonary edema (unlike other shock types)"
+      - "Inotropes increase contractility: Dobutamine 2-20 mcg/kg/min (first-line), or milrinone 0.375-0.75 mcg/kg/min"
+      - "Vasopressors if needed: Norepinephrine for MAP <65, but avoid excessive afterload (worsens LV function)"
+      - "Diuretics for pulmonary edema: Furosemide 40-80mg IV bolus or continuous infusion"
+      - "Mechanical circulatory support: IABP (↑coronary perfusion), Impella (↑cardiac output), ECMO (last resort)"
+      - "Emergent revascularization: PCI for STEMI causing cardiogenic shock (door-to-balloon <90 min)"
+    management:
+      - "Immediate: IV access, continuous cardiac monitoring, arterial line, minimize fluids"
+      - "Inotropic support: Dobutamine 2-20 mcg/kg/min IV (or milrinone 0.375-0.75 mcg/kg/min if on beta-blockers)"
+      - "If MAP <65: Add norepinephrine 0.05-0.2 mcg/kg/min (balance BP support vs afterload)"
+      - "Diuresis: Furosemide 40-80mg IV (or continuous infusion 5-10 mg/hr) for pulmonary edema"
+      - "Disposition: CCU/ICU, cardiology consult, consider mechanical support (IABP, Impella), urgent cath if MI"
     icd10:
-      - R57.0
+      - R57.0     # Cardiogenic shock
+      - I21.0     # STEMI with cardiogenic shock
     snomed:
-      - 89323001
+      - "89323001"  # Cardiogenic shock
 
   - id: EM-SHOCK-SEPTIC
     label: Septic Shock
@@ -331,16 +363,32 @@ rules:
   - id: EM-MENINGITIS
     label: Acute Bacterial Meningitis
     presentations:
-      - Fever and headache
-      - Neck stiffness
-      - Altered mental status
-      - Photophobia
-      - Kernig and Brudzinski signs
-      - Requires immediate antibiotics
+      - Classic triad (only 44% have all): Fever, headache, neck stiffness (nuchal rigidity)
+      - Altered mental status, confusion, lethargy (80%)
+      - Photophobia, phonophobia
+      - Kernig sign: Resistance to knee extension with hip flexed 90°
+      - Brudzinski sign: Involuntary hip flexion when neck flexed
+      - Petechial or purpuric rash: N. meningitidis (emergency - high mortality)
+      - Seizures (20-30%), focal neurologic deficits (10-20%)
+      - Risk factors: Immunocompromised, recent neurosurgery, CSF shunt, basilar skull fracture
+    clinical_pearls:
+      - "Do NOT delay antibiotics for LP: Give antibiotics FIRST if LP will be delayed >30 min"
+      - "Empiric antibiotics by age: <50yr (vancomycin + ceftriaxone), >50yr or immunocompromised (add ampicillin for Listeria)"
+      - "Dexamethasone 0.15mg/kg before or with antibiotics: Reduces mortality/morbidity in pneumococcal meningitis"
+      - "CT head before LP if: Altered mental status, focal deficits, papilledema, immunocompromised (concern for mass effect)"
+      - "CSF interpretation: Bacterial (WBC >1000, PMNs, glucose <40, protein >200) vs Viral (lymphocytes <300, normal glucose)"
+      - "LP opening pressure: Normal 5-20 cm H2O, elevated (>25) suggests bacterial or fungal"
+    management:
+      - "Immediate: Blood cultures ×2, empiric antibiotics + dexamethasone (don't wait for LP)"
+      - "Empiric antibiotics: <50yr (vancomycin 15-20mg/kg + ceftriaxone 2g IV), >50yr (add ampicillin 2g IV q4h)"
+      - "Dexamethasone: 0.15mg/kg IV (max 10mg) before or with first antibiotic dose"
+      - "LP when safe: Opening pressure, cell count with differential, glucose, protein, Gram stain, culture"
+      - "Disposition: ICU admission, respiratory isolation if N. meningitidis suspected, prophylaxis for close contacts"
     icd10:
-      - G00.9
+      - G00.9     # Bacterial meningitis, unspecified
+      - G03.9     # Meningitis, unspecified
     snomed:
-      - 95883001
+      - "95883001"  # Bacterial meningitis
 
   - id: EM-DKA
     label: Diabetic Ketoacidosis (DKA)
@@ -537,7 +585,33 @@ rules:
   - id: EM-TESTICULAR-TORSION
     label: Testicular Torsion
     presentations:
-      - Sudden severe testicular pain
+      - Sudden onset severe testicular pain (unilateral)
+      - Nausea, vomiting (50%)
+      - Absent cremasteric reflex (99% sensitive)
+      - High-riding testis, horizontal lie
+      - Swelling, erythema, scrotal edema
+      - Negative Prehn sign: Elevation does NOT relieve pain (vs epididymitis)
+      - Peak ages: Neonates and 12-18 years
+      - Time-critical: Testicular salvage 90% if <6 hours, <50% if 6-12 hours, <10% if >12 hours
+    clinical_pearls:
+      - "Absent cremasteric reflex = torsion until proven otherwise (99% sensitive, 100% NPV)"
+      - "Do NOT delay surgery for imaging if high suspicion: Ultrasound can give false negatives"
+      - "Color Doppler ultrasound: Decreased/absent testicular blood flow (but don't delay surgery)"
+      - "6-hour window critical: Testicular salvage depends on time to detorsion"
+      - "Manual detorsion: 'Open the book' - rotate affected testis outward (lateral to medial) 180-720°"
+      - "All patients need surgery: Detorsion + orchiopexy bilaterally (contralateral testis at risk)"
+    management:
+      - "Immediate: IV access, analgesia (morphine, ketorolac), urgent urology consult"
+      - "Manual detorsion attempt: Rotate affected testis OUTWARD (medial border toward thigh) 180-720° until pain relief"
+      - "If pain worsens: Stop and rotate in opposite direction"
+      - "Ultrasound only if diagnosis uncertain AND surgery will not be delayed: Color Doppler shows decreased flow"
+      - "Disposition: Emergent OR for surgical detorsion + bilateral orchiopexy (fix both testes to prevent recurrence)"
+    icd10:
+      - N44.00    # Torsion of testis, unspecified
+      - N44.01    # Extravaginal torsion of spermatic cord
+      - N44.02    # Intravaginal torsion of spermatic cord
+    snomed:
+      - "51942009"  # Torsion of testis
       - Nausea and vomiting
       - High-riding testis
       - Absent cremasteric reflex

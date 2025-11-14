@@ -17,18 +17,34 @@ rules:
       - 9991008
 
   - id: SURG-BOWEL-OBSTRUCTION-SMALL
-    label: Small Bowel Obstruction
+    label: Small Bowel Obstruction (SBO)
     presentations:
-      - Cramping abdominal pain
-      - Nausea and vomiting (often bilious)
+      - Cramping, colicky abdominal pain (intermittent)
+      - Nausea and vomiting (bilious, high volume, early symptom)
       - Abdominal distension
-      - Obstipation (no stool or gas)
-      - High-pitched or absent bowel sounds
-      - Air-fluid levels on X-ray
+      - Obstipation: No passage of stool or flatus
+      - High-pitched, tinkling bowel sounds (early) → absent (late)
+      - Dehydration from third-spacing and vomiting
+      - Causes: Adhesions (60%, prior surgery), hernia (20%), malignancy, Crohn's
+      - CT: Dilated small bowel >3cm with transition point, air-fluid levels on X-ray
+    clinical_pearls:
+      - "Adhesions = most common cause (60%), especially if prior abdominal surgery"
+      - "Complete vs partial: Complete SBO (no gas in colon), partial (some gas passes through)"
+      - "CT findings: Transition point, small bowel feces sign, closed-loop obstruction (surgical emergency)"
+      - "NGT decompression: Decreases vomiting, aspiration risk, helps conservative management"
+      - "Surgery indications: Strangulation signs (fever, tachycardia, leukocytosis, peritonitis), closed-loop, no improvement 3-5 days"
+      - "Virgin abdomen (no prior surgery) SBO = more likely needs surgery (hernia, malignancy)"
+    management:
+      - "Immediate: NPO, NGT decompression (continuous suction), IV fluids (NS or LR 100-200 mL/hr)"
+      - "Labs: CBC (leukocytosis = strangulation), BMP (check K+ from vomiting), lactate (ischemia)"
+      - "CT abdomen/pelvis with IV contrast: Identify transition point, rule out ischemia/strangulation"
+      - "Conservative management: NGT, IV fluids, serial exams if partial SBO and no strangulation signs"
+      - "Surgery consult: If complete obstruction, closed-loop, strangulation signs, virgin abdomen, or fails conservative therapy"
     icd10:
-      - K56.60
+      - K56.60    # Unspecified intestinal obstruction
+      - K56.69    # Other intestinal obstruction
     snomed:
-      - 81060008
+      - "81060008"  # Small bowel obstruction
 
   - id: SURG-BOWEL-OBSTRUCTION-LARGE
     label: Large Bowel Obstruction
@@ -145,44 +161,88 @@ rules:
   - id: SURG-NECROTIZING-FASCIITIS
     label: Necrotizing Fasciitis
     presentations:
-      - Rapidly spreading erythema and swelling
-      - Severe pain out of proportion to appearance
-      - Skin discoloration (purplish or dusky)
-      - Crepitus or bullae
-      - Systemic toxicity (fever, hypotension)
-      - Requires emergency surgical debridement
+      - Pain out of proportion to physical findings (hallmark, early sign)
+      - Rapidly spreading erythema, edema, warmth
+      - Skin bullae, crepitus (subcutaneous gas), skin necrosis (late)
+      - Fever, tachycardia, hypotension (systemic toxicity)
+      - Wood-hard feel to subcutaneous tissue
+      - Numbness/anesthesia of affected area (nerve involvement)
+      - Risk factors: Diabetes, immunocompromised, IV drug use, recent surgery/trauma
+      - High mortality: 20-40%, higher if delayed treatment
+    clinical_pearls:
+      - "LRINEC score ≥6 = high risk: CRP, WBC, Hgb, Na, Cr, glucose (helps risk stratify)"
+      - "Pain out of proportion = earliest and most important clinical finding"
+      - "Crepitus = pathognomonic but only present 50% (gas-forming organisms)"
+      - "Do NOT wait for imaging: Clinical diagnosis, CT/MRI if uncertain but don't delay surgery"
+      - "Emergent surgical debridement = life-saving: Delay increases mortality exponentially"
+      - "Type 1 (polymicrobial): Diabetics, post-surgery, Fournier's gangrene (perineal)"
+    management:
+      - "Immediate: IV access, aggressive fluid resuscitation (septic shock common), broad-spectrum antibiotics"
+      - "Antibiotics: Vancomycin + pip-tazo + clindamycin (toxin suppression), start immediately"
+      - "EMERGENT surgical consultation: Wide debridement of all necrotic tissue, may need multiple trips to OR"
+      - "Hyperbaric oxygen: Adjunct therapy if available, but do NOT delay surgery"
+      - "Disposition: ICU admission, serial debridements every 24-48hr until no necrotic tissue, high mortality"
     icd10:
-      - M72.6
+      - M72.6     # Necrotizing fasciitis
     snomed:
-      - 44511005
+      - "44511005"  # Necrotizing fasciitis
 
   - id: SURG-COMPARTMENT-SYNDROME
     label: Acute Compartment Syndrome
     presentations:
-      - Severe pain out of proportion to injury
-      - Pain with passive stretching
-      - Tense swollen compartment
-      - Paresthesias
-      - Pallor and pulselessness (late findings)
-      - Requires urgent fasciotomy
+      - Pain out of proportion to physical findings (earliest, most sensitive sign)
+      - Pain with passive stretch of muscles in affected compartment (95% sensitive)
+      - 6 Ps: Pain, Pressure, Paresthesias, Pallor, Pulselessness (LATE), Paralysis (LATE)
+      - Tense, swollen compartment (firm, "wood-like" on palpation)
+      - Paresthesias in distribution of nerves traversing compartment
+      - Most common: Lower leg (anterior compartment), forearm (volar compartment)
+      - Causes: Fractures (tibia, forearm), crush injury, tight casts/dressings, prolonged immobilization
+    clinical_pearls:
+      - "Pain with passive stretch = most sensitive early sign (95%), appears before paresthesias"
+      - "Pulselessness = LATE finding: Irreversible damage already occurred, do NOT wait for this"
+      - "Compartment pressure measurement: >30 mmHg or Δ30 mmHg of diastolic BP = fasciotomy indicated"
+      - "Clinical diagnosis: Don't delay for pressure measurement if high suspicion"
+      - "Time is muscle: Permanent damage after 6-8 hours, fasciotomy must be done urgently"
+      - "Cast/dressing: Remove immediately if suspected, down to skin (may decompress)"
+    management:
+      - "Immediate: Remove all circumferential dressings, casts, splints down to skin, elevate limb to heart level (NOT above)"
+      - "Compartment pressure measurement: Stryker device or arterial line setup, measure affected compartments"
+      - "If pressure >30 mmHg or Δ30 mmHg below diastolic BP: EMERGENT fasciotomy"
+      - "Orthopedic/surgery consult immediately: Fasciotomy = surgical decompression of all compartments"
+      - "Disposition: OR for emergent fasciotomy, wounds left open, delayed primary closure 3-5 days later"
     icd10:
-      - T79.A0XA
+      - T79.A0XA  # Compartment syndrome, unspecified
     snomed:
-      - 238094007
+      - "238094007"  # Compartment syndrome
 
   - id: SURG-AAA-RUPTURED
-    label: Ruptured Abdominal Aortic Aneurysm
+    label: Ruptured Abdominal Aortic Aneurysm (rAAA)
     presentations:
-      - Sudden severe abdominal or back pain
-      - Hypotension and syncope
-      - Pulsatile abdominal mass
-      - Flank ecchymosis
-      - Known AAA or risk factors
-      - Requires emergency vascular surgery
+      - Classic triad (50%): Abdominal/back pain, hypotension, pulsatile abdominal mass
+      - Sudden onset severe abdominal, flank, or back pain (tearing, ripping quality)
+      - Hypotension, tachycardia, shock (may be contained rupture initially)
+      - Syncope or near-syncope
+      - Pulsatile abdominal mass on palpation (but absence doesn't rule out)
+      - Grey-Turner sign: Flank ecchymosis (retroperitoneal bleed)
+      - Risk factors: Age >65, male, smoking, hypertension, known AAA
+      - Mortality: 50% prehospital, 80-90% overall if untreated
+    clinical_pearls:
+      - "Unstable patient (SBP <90) with known AAA or pulsatile mass: Go straight to OR, do NOT get CT"
+      - "Permissive hypotension: Target SBP 80-100 until proximal control (avoid 'pop the clot')"
+      - "FAST exam: Free intraperitoneal or retroperitoneal fluid + hypotension = presumed rAAA"
+      - "CT angiogram if stable: Confirms diagnosis, guides EVAR vs open repair"
+      - "EVAR (endovascular repair): Faster, less invasive if anatomy suitable"
+      - "Open repair: Midline laparotomy, proximal aortic control, higher mortality but definitive"
+    management:
+      - "Immediate: Large-bore IV access ×2, permissive hypotension (SBP 80-100), activate massive transfusion protocol"
+      - "UNSTABLE: Call vascular surgery, go directly to OR, do NOT delay for imaging"
+      - "STABLE: CT angiogram abdomen/pelvis, vascular surgery consult, determine EVAR vs open"
+      - "Blood products: 1:1:1 ratio PRBC:FFP:Platelets, avoid crystalloid overresuscitation"
+      - "Disposition: OR emergently, ICU post-op, high mortality even with surgery (40-50%)"
     icd10:
-      - I71.3
+      - I71.3     # Abdominal aortic aneurysm, ruptured
     snomed:
-      - 233985008
+      - "233985008"  # Ruptured AAA
 
   - id: SURG-ACUTE-LIMB-ISCHEMIA
     label: Acute Limb Ischemia

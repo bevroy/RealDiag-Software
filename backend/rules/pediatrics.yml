@@ -5,73 +5,146 @@ rules:
   - id: PED-CROUP
     label: Croup (Laryngotracheobronchitis)
     presentations:
-      - Barking cough (seal-like)
-      - Inspiratory stridor
-      - Hoarse voice
-      - Worse at night
-      - Preceded by URI symptoms
-      - Age 6 months to 3 years
+      - Barking "seal-like" cough (most characteristic)
+      - Inspiratory stridor (high-pitched sound on inspiration)
+      - Hoarse voice, dysphonia
+      - Symptoms worse at night
+      - Preceded by 1-2 days of URI symptoms (rhinorrhea, low-grade fever)
+      - Age 6 months to 3 years (peak at 2 years)
+      - Parainfluenza virus (most common cause, 75%)
+      - Westley Croup Score: 0-17 (stridor, retractions, air entry, cyanosis, LOC)
+    clinical_pearls:
+      - "Westley score <3 = mild (treat outpatient), 3-7 = moderate, ≥8 = severe (hospitalize)"
+      - "Dexamethasone 0.6mg/kg PO/IM (max 10mg) = mainstay treatment, single dose usually sufficient"
+      - "Racemic epinephrine nebulizer 0.5mL in 3mL NS for severe croup (provides 2hr relief)"
+      - "Cool mist therapy or taking child outside in cold air may provide symptomatic relief"
+      - "Steeple sign on neck X-ray: Subglottic narrowing (but diagnosis is clinical, don't need X-ray)"
+      - "Most improve within 48 hours, but can worsen at night"
+    management:
+      - "All patients: Dexamethasone 0.6mg/kg PO or IM (max 10mg), single dose"
+      - "Mild croup (no stridor at rest): Dexamethasone and discharge with precautions"
+      - "Moderate-severe (stridor at rest): Racemic epinephrine 0.5mL (2.25%) + 3mL NS nebulizer"
+      - "Observe 2-3 hours after epinephrine: Rebound stridor can occur, may need repeat dosing"
+      - "Disposition: Discharge if mild and improved, admit if severe, persistent stridor, or respiratory distress"
     icd10:
-      - J05.0
+      - J05.0     # Acute obstructive laryngitis (croup)
     snomed:
-      - 71186008
+      - "71186008"  # Croup
 
   - id: PED-BRONCHIOLITIS
     label: Bronchiolitis
     presentations:
-      - Wheezing in infant < 2 years
-      - Tachypnea and respiratory distress
-      - Nasal flaring and retractions
-      - Poor feeding
-      - Preceded by URI symptoms
-      - RSV season (fall/winter)
+      - Wheezing and crackles in infant <2 years (peak 2-6 months)
+      - Tachypnea (RR >60), respiratory distress
+      - Nasal flaring, intercostal/subcostal retractions, grunting
+      - Poor feeding, decreased oral intake, dehydration
+      - Low-grade fever, rhinorrhea (preceded by 2-3 days of URI symptoms)
+      - Hypoxia (SpO2 <90% in severe cases)
+      - RSV (respiratory syncytial virus) most common (70%), peak season November-March
+    clinical_pearls:
+      - "Clinical diagnosis: First wheezing episode in infant <2 years with URI prodrome"
+      - "Supportive care ONLY: No bronchodilators (albuterol doesn't help), no steroids, no antibiotics"
+      - "Oxygen for SpO2 <90%, nasal suctioning (bulb or NP suction) to clear secretions"
+      - "High-flow nasal cannula (HFNC) for moderate-severe: 2 L/kg/min, up to 6-8 L/min"
+      - "Admission criteria: Age <3 months, SpO2 <90%, poor feeding, dehydration, apnea"
+      - "Natural history: Worsens days 3-5, improves by day 7-10, cough can last 3-4 weeks"
+    management:
+      - "Supportive care: Nasal suctioning (before feeds), supplemental O2 if SpO2 <90%, maintain hydration"
+      - "Mild (SpO2 >90%, feeding well): Outpatient with close follow-up, nasal saline + bulb suction"
+      - "Moderate-severe: High-flow nasal cannula 2 L/kg/min, NG/IV fluids if poor PO intake"
+      - "Avoid: Bronchodilators (albuterol trial only if uncertain diagnosis), steroids, antibiotics (unless secondary pneumonia)"
+      - "Disposition: Admit if age <3 months, SpO2 <90%, apnea, dehydration, or unable to feed"
     icd10:
-      - J21.0
-      - J21.9
+      - J21.0     # Acute bronchiolitis due to RSV
+      - J21.9     # Acute bronchiolitis, unspecified
     snomed:
-      - 4120002
+      - "4120002"  # Bronchiolitis
 
   - id: PED-KAWASAKI
     label: Kawasaki Disease
     presentations:
-      - Fever > 5 days
-      - Bilateral conjunctival injection
-      - Strawberry tongue, cracked lips
-      - Polymorphous rash
-      - Cervical lymphadenopathy
-      - Extremity changes (edema, peeling)
+      - Fever ≥5 days (high, persistent, often >39°C/102°F)
+      - Bilateral non-exudative conjunctival injection (red eyes, no discharge)
+      - Oral changes: Strawberry tongue, cracked red lips, erythematous pharynx
+      - Polymorphous rash: Maculopapular, diffuse truncal rash (not vesicular)
+      - Cervical lymphadenopathy: Usually unilateral, >1.5 cm
+      - Extremity changes: Erythema/edema of hands/feet (acute), periungual desquamation (2-3 weeks later)
+      - Peak age 6 months to 5 years (80% <5 years), more common in Asian descent
+      - Incomplete Kawasaki: <4 criteria but high suspicion, still treat if cardiac involvement
+    clinical_pearls:
+      - "Diagnosis: Fever ≥5 days + 4 of 5 criteria (eyes, mouth, rash, lymph nodes, extremities)"
+      - "IVIG 2 g/kg over 10-12 hours within 10 days of fever onset: Reduces coronary aneurysm risk from 25% to 4%"
+      - "High-dose aspirin 80-100 mg/kg/day divided QID during acute phase, then low-dose 3-5 mg/kg once daily"
+      - "Echocardiogram at diagnosis and 6-8 weeks: Screen for coronary artery aneurysms (most serious complication)"
+      - "IVIG resistance (10-20%): Persistent fever >36hr after IVIG, may need 2nd dose IVIG or steroids"
+      - "Do NOT give live vaccines for 11 months after IVIG (antibody interference)"
+    management:
+      - "Immediate: Cardiology consult, echocardiogram, labs (CBC, CRP, ESR, liver enzymes)"
+      - "IVIG 2 g/kg IV over 10-12 hours as single dose (within 10 days of fever onset)"
+      - "Aspirin: High-dose 80-100 mg/kg/day divided QID until afebrile 48-72hr, then low-dose 3-5 mg/kg daily ×6-8 weeks"
+      - "If IVIG resistant: 2nd dose IVIG 2 g/kg or add methylprednisolone 2 mg/kg/day"
+      - "Disposition: Admit for IVIG infusion, follow-up echo at 6-8 weeks, long-term cardiology follow-up if aneurysms"
     icd10:
-      - M30.3
+      - M30.3     # Mucocutaneous lymph node syndrome (Kawasaki)
     snomed:
-      - 75053002
+      - "75053002"  # Kawasaki disease
 
   - id: PED-INTUSSUSCEPTION
     label: Intussusception
     presentations:
-      - Intermittent severe abdominal pain in infant
-      - Currant jelly stools
-      - Palpable sausage-shaped mass
-      - Vomiting
-      - Lethargy between pain episodes
-      - Age 6-36 months typically
+      - Intermittent severe colicky abdominal pain (sudden onset, child pulls knees to chest, screams)
+      - Pain episodes last 15-20 minutes, child appears well between episodes
+      - Vomiting (often bilious)
+      - "Currant jelly" stools: Dark red blood mixed with mucus (late finding, only 50%)
+      - Palpable "sausage-shaped" mass in RUQ or right abdomen (Dance sign: emptiness in RLQ)
+      - Lethargy, altered mental status (can be initial presentation)
+      - Age 6-36 months (peak 5-9 months), lead point in older children (lymphoma, Meckel's)
+    clinical_pearls:
+      - "Classic triad (50%): Colicky abdominal pain, vomiting, currant jelly stools"
+      - "Ultrasound diagnostic: 'Target sign' or 'donut sign' (bowel-within-bowel)"
+      - "Air enema = diagnostic AND therapeutic: 80-90% success rate for reduction if <24hr"
+      - "Do NOT delay enema if high suspicion: Can lead to bowel ischemia, perforation, necrosis"
+      - "Recurrence rate 5-10% after successful air enema reduction"
+      - "Surgery needed if: Enema fails, peritonitis, perforation, or lead point identified"
+    management:
+      - "Immediate: IV access, NPO, NG tube if significant vomiting, IV fluids (NS bolus 20 mL/kg)"
+      - "Ultrasound: Target sign confirms diagnosis, assess for lead point"
+      - "Air enema: Diagnostic and therapeutic (80-90% success), fluoroscopy-guided"
+      - "If enema successful: Observe 24hr for recurrence, advance diet slowly"
+      - "If enema fails or contraindications: Emergent surgical consultation for manual reduction or resection"
     icd10:
-      - K56.1
+      - K56.1     # Intussusception
     snomed:
-      - 26036001
+      - "26036001"  # Intussusception
 
   - id: PED-PYLORIC-STENOSIS
     label: Hypertrophic Pyloric Stenosis
     presentations:
-      - Projectile vomiting after feeding
-      - Non-bilious vomiting
-      - Palpable olive-shaped mass in epigastrium
-      - Hungry after vomiting
-      - Age 3-12 weeks
-      - More common in males
+      - Progressive non-bilious projectile vomiting after every feeding
+      - Onset 3-12 weeks of age (peak 3-5 weeks)
+      - Hungry after vomiting ("hungry vomiter")
+      - Palpable "olive-shaped" mass in epigastrium or RUQ (70%, felt after vomiting)
+      - Visible gastric peristaltic waves (left to right across abdomen)
+      - Weight loss, dehydration, failure to thrive
+      - First-born males (4:1 male predominance)
+      - Hypochloremic hypokalemic metabolic alkalosis (from losing HCl in vomit)
+    clinical_pearls:
+      - "Ultrasound diagnostic: Pyloric muscle thickness >3 mm, pyloric channel length >15 mm"
+      - "Palpable olive = pathognomonic (but only felt 60-80%, requires patient relaxed after vomiting)"
+      - "Electrolyte abnormalities: Hypochloremic (Cl <90), hypokalemic (K <3.5), metabolic alkalosis (HCO3 >30)"
+      - "Fix electrolytes BEFORE surgery: Chloride must be >100, K >3.5, alkalosis corrected"
+      - "Pyloromyotomy (Ramstedt procedure) = curative: Split pyloric muscle, keep mucosa intact"
+      - "Not an emergency: Take time to fully resuscitate and correct electrolytes first"
+    management:
+      - "Immediate: NPO, NG tube for decompression, IV fluids (D5 1/2NS with 20 mEq/L KCl)"
+      - "Correct dehydration and electrolytes: Goal Cl >100, K >3.5, normalized bicarb before surgery"
+      - "Ultrasound: Pyloric thickness >3mm and length >15mm diagnostic"
+      - "Surgery consult: Pyloromyotomy (laparoscopic preferred) once electrolytes corrected"
+      - "Post-op: Resume feeds 4-6 hours after surgery, advance slowly, expect some vomiting initially"
     icd10:
-      - Q40.0
+      - Q40.0     # Congenital hypertrophic pyloric stenosis
     snomed:
-      - 205603001
+      - "205603001"  # Pyloric stenosis
 
   - id: PED-HAND-FOOT-MOUTH
     label: Hand-Foot-Mouth Disease
@@ -90,14 +163,30 @@ rules:
   - id: PED-FEBRILE-SEIZURE
     label: Febrile Seizure
     presentations:
-      - Seizure associated with fever
-      - Age 6 months to 5 years
-      - No CNS infection
-      - Generalized tonic-clonic typically
-      - Brief duration (< 15 minutes)
-      - Rapid recovery
+      - Seizure associated with fever (temp ≥38°C/100.4°F)
+      - Age 6 months to 5 years (peak 12-18 months)
+      - No CNS infection (meningitis, encephalitis ruled out)
+      - No prior afebrile seizures (not epilepsy)
+      - Simple febrile seizure (90%): Generalized tonic-clonic, <15 minutes, single episode in 24hr
+      - Complex febrile seizure (10%): Focal features, >15 minutes, or multiple in 24hr
+      - Usually occurs early in febrile illness (first 24hr)
+      - Post-ictal period: Brief drowsiness, then rapid return to baseline
+    clinical_pearls:
+      - "Simple febrile seizure: NO routine labs, CT, EEG, or LP needed (clinical diagnosis)"
+      - "LP indications: Age <12 months (meningitis symptoms subtle), concern for meningitis, complex features"
+      - "Recurrence risk: 30-40% overall, higher if age <18 months, lower fever, or family history"
+      - "Long-term outcomes: Excellent, no increased risk of epilepsy (only 2-4% develop epilepsy vs 1% general population)"
+      - "Do NOT routinely prescribe anticonvulsants: No benefit in preventing recurrence"
+      - "Antipyretics (acetaminophen, ibuprofen) do NOT prevent febrile seizures"
+    management:
+      - "During seizure: Protect from injury, position on side, maintain airway, do NOT restrain"
+      - "If seizure >5 minutes: Benzodiazepine (lorazepam 0.1 mg/kg IV or midazolam 0.2 mg/kg IM/IN)"
+      - "Workup: Identify source of fever (otitis, URI, UTI, etc.), NO routine CT/EEG/labs for simple FS"
+      - "LP if: Age <12 months, clinical concern for meningitis, complex features, or antibiotics given before presentation"
+      - "Disposition: Discharge if simple FS, reassure parents, fever management education, recurrence precautions"
     icd10:
-      - R56.00
+      - R56.00    # Simple febrile convulsions
+      - R56.01    # Complex febrile convulsions
     snomed:
       - 41497008
 
