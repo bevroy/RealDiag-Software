@@ -1,0 +1,43 @@
+{
+  "name": "RealDiag - Clinical Decision Support",
+  "short_name": "RealDiag",
+  "description": "Evidence-based diagnostic decision trees and symptom-based search for medical professionals",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["medical", "health", "education"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Symptom Search",
+      "short_name": "Search",
+      "description": "Search diagnoses by symptoms",
+      "url": "/symptom-search",
+      "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Decision Trees",
+      "short_name": "Diagnose",
+      "description": "Interactive diagnostic decision trees",
+      "url": "/diagnose",
+      "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
