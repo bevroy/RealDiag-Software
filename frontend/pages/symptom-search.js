@@ -9,7 +9,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function SymptomSearch() {
-  const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000';
+  // Use runtime config for API base, with fallback to env var or Render URL
+  const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+  const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
   
   const [symptomInput, setSymptomInput] = useState('');
   const [symptoms, setSymptoms] = useState([]);

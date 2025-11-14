@@ -88,6 +88,24 @@ export default function Diagnostic(){
       <h1>RealDiag — Diagnostic UI (Next)</h1>
       <p>This minimal Next.js page calls the API backend.</p>
 
+      {/* Result div for E2E testing - shows backend health status */}
+      <div id="result" style={{
+        padding: 16,
+        marginTop: 16,
+        background: info.health?.ok ? '#d4edda' : (info.error ? '#f8d7da' : '#fff3cd'),
+        border: `1px solid ${info.health?.ok ? '#c3e6cb' : (info.error ? '#f5c6cb' : '#ffeaa7')}`,
+        borderRadius: 6,
+        color: '#333'
+      }}>
+        {info.status === 'checking' && 'Checking backend...'}
+        {info.error && `Error: ${info.error}`}
+        {info.health && !info.error && (
+          info.health.ok 
+            ? `✅ Backend is healthy (${info.health.status})` 
+            : `❌ Backend returned error (${info.health.status} ${info.health.statusText})`
+        )}
+      </div>
+
       <section style={{marginTop:16}}>
         <h2>Runtime</h2>
         <pre style={{background:'#f6f8fa',padding:12,borderRadius:6}}>{JSON.stringify({base: info.base, lastUnhandled: info.lastUnhandled}, null, 2)}</pre>
