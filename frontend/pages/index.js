@@ -4,7 +4,7 @@ export default function Home(){
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -19,10 +19,10 @@ export default function Home(){
         boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
       }}>
         <img src="/logo.png" alt="RealDiag Logo" style={{maxWidth: '200px', marginBottom: '1rem'}} />
-        <h1 style={{fontSize: '2.5rem', color: '#2d3748', marginBottom: '1rem'}}>
+        <h1 style={{fontSize: '2.5rem', color: '#1a202c', marginBottom: '1rem'}}>
           RealDiag
         </h1>
-        <p style={{color: '#718096', fontSize: '1.1rem', marginBottom: '2rem'}}>
+        <p style={{color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem'}}>
           Clinical Decision Support System
         </p>
         

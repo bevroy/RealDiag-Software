@@ -107,35 +107,36 @@ export default function ReferencePage() {
   }
 
   return (
-    <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+    <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto", minHeight: '100vh', background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
+      <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '16px' }}>
         <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-        <h1 style={{ marginBottom: 0 }}>Reference: Diagnostic Rules & Codes</h1>
+        <h1 style={{ marginBottom: 0, color: '#1a202c' }}>Reference: Diagnostic Rules & Codes</h1>
       </div>
-      <p style={{ marginBottom: 12, fontSize: 14, color: "#555" }}>
-        Search across all disease processes (neurology, cardiology, endocrinology) to find
-        relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
-      </p>
-
-      <p style={{ marginTop: -8, marginBottom: 16, fontSize: 12 }}>
-        Need a printable cheat-sheet?{" "}
-        <a href="/reference/printable" target="_blank" rel="noopener noreferrer">
-          Open printable view
-        </a>
-        .
-      </p>
+      
+      <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <p style={{ marginBottom: 8, fontSize: 14, color: "#4a5568" }}>
+          Search across all disease processes (neurology, cardiology, endocrinology) to find
+          relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
+        </p>
+        <p style={{ margin: 0, fontSize: 12, color: "#718096" }}>
+          Need a printable cheat-sheet?{" "}
+          <a href="/reference/printable" target="_blank" rel="noopener noreferrer" style={{ color: '#667eea' }}>
+            Open printable view
+          </a>.
+        </p>
+      </div>
 
       {/* Top controls: family filters + export */}
-      <div
-        style={{
-          marginBottom: 12,
-          display: "flex",
-          gap: 8,
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 8,
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
           <span style={{ fontSize: 13, fontWeight: 600, marginRight: 4 }}>Filter:</span>
           <button
@@ -192,9 +193,10 @@ export default function ReferencePage() {
           Export CSV
         </a>
       </div>
+      </div>
 
       {/* Search */}
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <input
           type="text"
           placeholder="Search across all diseases by diagnosis, symptom, ICD-10, or SNOMED..."
@@ -238,6 +240,7 @@ export default function ReferencePage() {
       )}
 
       {/* Table */}
+      <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
       <div
         style={{
           border: "1px solid #eee",
@@ -394,6 +397,7 @@ export default function ReferencePage() {
             No rules match your search.
           </div>
         )}
+      </div>
       </div>
     </main>
   );
