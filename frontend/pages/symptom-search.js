@@ -113,6 +113,102 @@ export default function SymptomSearch() {
     }
   };
 
+  const getSensitivityColor = (value) => {
+    if (!value) return '#9ca3af';
+    if (value >= 0.90) return '#10b981'; // High (green)
+    if (value >= 0.80) return '#f59e0b'; // Moderate (amber)
+    return '#ef4444'; // Low (red)
+  };
+
+  const getSpecificityColor = (value) => {
+    if (!value) return '#9ca3af';
+    if (value >= 0.90) return '#10b981'; // High (green)
+    if (value >= 0.80) return '#f59e0b'; // Moderate (amber)
+    return '#ef4444'; // Low (red)
+  };
+
+  const renderSensitivityBadge = (sensitivity) => {
+    if (!sensitivity) return null;
+    const percentage = (sensitivity * 100).toFixed(0);
+    const color = getSensitivityColor(sensitivity);
+    
+    return (
+      <div style={{
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '0.5rem 0.75rem',
+        background: 'white',
+        border: `2px solid ${color}`,
+        borderRadius: '8px',
+        minWidth: '80px'
+      }}>
+        <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: '600', marginBottom: '0.25rem' }}>
+          SENSITIVITY
+        </div>
+        <div style={{ fontSize: '1.1rem', fontWeight: '700', color }}>
+          {percentage}%
+        </div>
+        <div style={{
+          width: '100%',
+          height: '4px',
+          background: '#e5e7eb',
+          borderRadius: '2px',
+          marginTop: '0.25rem',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            width: `${percentage}%`,
+            height: '100%',
+            background: color,
+            transition: 'width 0.3s'
+          }} />
+        </div>
+      </div>
+    );
+  };
+
+  const renderSpecificityBadge = (specificity) => {
+    if (!specificity) return null;
+    const percentage = (specificity * 100).toFixed(0);
+    const color = getSpecificityColor(specificity);
+    
+    return (
+      <div style={{
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '0.5rem 0.75rem',
+        background: 'white',
+        border: `2px solid ${color}`,
+        borderRadius: '8px',
+        minWidth: '80px'
+      }}>
+        <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: '600', marginBottom: '0.25rem' }}>
+          SPECIFICITY
+        </div>
+        <div style={{ fontSize: '1.1rem', fontWeight: '700', color }}>
+          {percentage}%
+        </div>
+        <div style={{
+          width: '100%',
+          height: '4px',
+          background: '#e5e7eb',
+          borderRadius: '2px',
+          marginTop: '0.25rem',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            width: `${percentage}%`,
+            height: '100%',
+            background: color,
+            transition: 'width 0.3s'
+          }} />
+        </div>
+      </div>
+    );
+  };
+
   const handleSearch = async () => {
     if (symptoms.length === 0) {
       setError('Please enter at least one symptom');
@@ -607,8 +703,8 @@ export default function SymptomSearch() {
                         <div style={{
                           display: 'flex',
                           flexDirection: 'column',
-                          alignItems: 'center',
-                          gap: '0.5rem'
+                          alignItems: 'flex-end',
+                          gap: '0.75rem'
                         }}>
                           <div style={{
                             padding: '0.75rem 1.25rem',
@@ -624,6 +720,13 @@ export default function SymptomSearch() {
                             <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>MATCH</div>
                             {result.match_score.toFixed(1)}
                           </div>
+                          {/* Test Characteristics */}
+                          {(result.sensitivity || result.specificity) && (
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                              {renderSensitivityBadge(result.sensitivity)}
+                              {renderSpecificityBadge(result.specificity)}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -682,6 +785,80 @@ export default function SymptomSearch() {
 
                         {expandedCards[idx] && (
                           <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '2px solid #e5e7eb' }}>
+                            {/* Clinical Pearls */}
+                            {result.clinical_pearls && result.clinical_pearls.length > 0 && (
+                              <div style={{ 
+                                marginBottom: '1.5rem',
+                                padding: '1rem',
+                                background: 'linear-gradient(to right, #fef3c7, #fef9e7)',
+                                borderRadius: '8px',
+                                borderLeft: '4px solid #f59e0b'
+                              }}>
+                                <h4 style={{ 
+                                  margin: '0 0 0.75rem', 
+                                  color: '#92400e', 
+                                  fontSize: '0.95rem', 
+                                  fontWeight: '700',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.5px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}>
+                                  <span>💡</span> Clinical Pearls
+                                </h4>
+                                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#78350f' }}>
+                                  {result.clinical_pearls.map((pearl, i) => (
+                                    <li key={i} style={{ 
+                                      marginBottom: '0.5rem', 
+                                      lineHeight: '1.6',
+                                      fontSize: '0.9rem',
+                                      fontWeight: '500'
+                                    }}>
+                                      {pearl}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {/* Management */}
+                            {result.management && result.management.length > 0 && (
+                              <div style={{ 
+                                marginBottom: '1.5rem',
+                                padding: '1rem',
+                                background: 'linear-gradient(to right, #dbeafe, #eff6ff)',
+                                borderRadius: '8px',
+                                borderLeft: '4px solid #3b82f6'
+                              }}>
+                                <h4 style={{ 
+                                  margin: '0 0 0.75rem', 
+                                  color: '#1e40af', 
+                                  fontSize: '0.95rem', 
+                                  fontWeight: '700',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.5px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}>
+                                  <span>💊</span> Management
+                                </h4>
+                                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#1e3a8a' }}>
+                                  {result.management.map((step, i) => (
+                                    <li key={i} style={{ 
+                                      marginBottom: '0.5rem', 
+                                      lineHeight: '1.6',
+                                      fontSize: '0.9rem',
+                                      fontWeight: '500'
+                                    }}>
+                                      {step}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
                             {/* All Presentations */}
                             <div style={{ marginBottom: '1.5rem' }}>
                               <h4 style={{ 

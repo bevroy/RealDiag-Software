@@ -33,6 +33,10 @@ class DiagnosisMatch(BaseModel):
     all_presentations: List[str]
     icd10: List[str]
     snomed: List[Any]  # Can be int or str in YAML
+    sensitivity: Optional[float] = None
+    specificity: Optional[float] = None
+    clinical_pearls: Optional[List[str]] = None
+    management: Optional[List[str]] = None
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -181,14 +185,12 @@ async def search_by_symptoms(request: SymptomSearchRequest):
                     matched_presentations=matched_presentations,
                     all_presentations=string_presentations,  # Use filtered list
                     icd10=rule.get('icd10', []),
-                    snomed=rule.get('snomed', [])
+                    snomed=rule.get('snomed', []),
+                    sensitivity=rule.get('sensitivity'),
+                    specificity=rule.get('specificity'),
+                    clinical_pearls=rule.get('clinical_pearls', []) if 'clinical_pearls' in rule else None,
+                    management=rule.get('management', []) if 'management' in rule else None
                 )
-                
-                # Add clinical context if available
-                if 'sensitivity' in rule or 'clinical_pearls' in rule:
-                    # Store sensitivity/specificity for display
-                    # (These would need to be added to the DiagnosisMatch model)
-                    pass
                 
                 results.append(diagnosis_match)
     
