@@ -2,18 +2,28 @@ rules:
   - id: ID-SEPSIS
     label: Sepsis and Septic Shock
     presentations:
-      - Fever or hypothermia
-      - Tachycardia and tachypnea
-      - Hypotension
-      - Altered mental status
-      - Suspected or confirmed infection
-      - Elevated lactate
+      - Sepsis: Life-threatening organ dysfunction due to dysregulated host response to infection
+      - SOFA score increase ≥2 points (indicates organ dysfunction)
+      - qSOFA (quick screening): Altered mental status, SBP ≤100, RR ≥22 (2+ positive)
+      - Fever (>38.3°C) or hypothermia (<36°C)
+      - Tachycardia (HR >90), tachypnea (RR >20 or PaCO2 <32)
+      - Septic shock: Persistent hypotension requiring vasopressors, lactate >2 mmol/L
+      - Source: Pneumonia (most common), UTI, abdominal, skin/soft tissue
+    clinical_pearls:
+      - "Surviving Sepsis Campaign bundle: Complete within 1 hour"
+      - "1. Measure lactate, 2. Blood cultures before antibiotics, 3. Broad-spectrum antibiotics"
+      - "4. Crystalloid 30mL/kg if hypotensive/lactate ≥4, 5. Vasopressors if still hypotensive"
+      - "Empiric antibiotics: Vancomycin + Pip-Tazo or carbapenem (broad coverage)"
+      - "Norepinephrine is first-line vasopressor (target MAP ≥65 mmHg)"
+      - "Mortality increases 7% per hour delay in antibiotics"
+    sensitivity: 0.91
+    specificity: 0.86
     icd10:
-      - A41.9
-      - R65.21
-      - R65.20
+      - A41.9     # Sepsis, unspecified
+      - R65.21    # Severe sepsis with septic shock
+      - R65.20    # Severe sepsis without septic shock
     snomed:
-      - "91302008"
+      - "91302008"  # Sepsis
 
   - id: ID-UTI
     label: Urinary Tract Infection
@@ -127,17 +137,26 @@ rules:
   - id: ID-ENDOCARDITIS
     label: Infective Endocarditis
     presentations:
-      - Fever
-      - New heart murmur
-      - Petechiae or splinter hemorrhages
-      - Osler's nodes or Janeway lesions
-      - Embolic phenomena
-      - IV drug use or valve disease
+      - Duke criteria: 2 major, 1 major + 3 minor, or 5 minor criteria
+      - Major: Positive blood cultures (typical organisms in 2 cultures), echo findings (vegetation, abscess, new regurgitation)
+      - Minor: Fever >38°C, vascular phenomena (emboli, septic infarcts, Janeway lesions), immunologic (Osler nodes, Roth spots), predisposing condition
+      - Persistent bacteremia (S. aureus, Streptococcus, Enterococcus)
+      - New heart murmur (especially regurgitant)
+      - Splinter hemorrhages (subungual), petechiae
+      - Risk factors: IV drug use, prosthetic valve, previous endocarditis
+    clinical_pearls:
+      - "3 sets of blood cultures from different sites before starting antibiotics"
+      - "Transthoracic echo first, TEE if high suspicion and TTE negative (more sensitive)"
+      - "Empiric antibiotics: Vancomycin + ceftriaxone (native valve), + gentamicin (prosthetic)"
+      - "S. aureus endocarditis: High mortality, surgical evaluation for complications"
+      - "Surgery indications: Heart failure, persistent infection, large vegetation (>10mm), abscess"
+    sensitivity: 0.80
+    specificity: 0.96
     icd10:
-      - I33.0
-      - I33.9
+      - I33.0     # Acute and subacute infective endocarditis
+      - I33.9     # Acute endocarditis, unspecified
     snomed:
-      - "56819008"
+      - "56819008"  # Infective endocarditis
 
   - id: ID-OSTEOMYELITIS
     label: Osteomyelitis
@@ -185,13 +204,23 @@ rules:
   - id: ID-C-DIFF
     label: Clostridioides difficile Infection
     presentations:
-      - Watery diarrhea (≥3 stools/day)
-      - Abdominal cramping
-      - Fever
-      - Recent antibiotic use
-      - Leukocytosis
+      - Watery diarrhea (≥3 unformed stools in 24 hours)
+      - Abdominal cramping and tenderness
+      - Fever, leukocytosis (WBC >15,000)
+      - Recent antibiotic use (within 3 months): Clindamycin, fluoroquinolones, cephalosporins
+      - Severe: WBC >15K, Cr >1.5x baseline, or complicated (hypotension, ileus, megacolon)
+      - Fulminant: Hypotension, shock, ileus, or megacolon
+      - Stool test: Nucleic acid amplification test (NAAT) or toxin EIA
+    clinical_pearls:
+      - "Initial episode: Vancomycin 125mg PO QID or fidaxomicin 200mg PO BID x 10 days"
+      - "First recurrence: Same regimen. Second recurrence: Fidaxomicin or vancomycin taper"
+      - "Severe/fulminant: Vancomycin 500mg PO QID + metronidazole 500mg IV q8h"
+      - "If ileus: Consider vancomycin retention enema, surgical evaluation if no improvement"
+      - "Stop inciting antibiotics if possible. Fecal microbiota transplant for recurrent"
+    sensitivity: 0.85
+    specificity: 0.93
     icd10:
-      - A04.7
-      - A04.72
+      - A04.7     # Enterocolitis due to Clostridium difficile
+      - A04.72    # Enterocolitis due to Clostridium difficile, recurrent
     snomed:
-      - "186431008"
+      - "186431008" # Clostridioides difficile colitis

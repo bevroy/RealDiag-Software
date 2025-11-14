@@ -69,17 +69,24 @@ nodes:
         - exam_flags_any: ["ST elevation", "ST depression", "T wave inversion"]
     tests:
       - Serial troponins (0, 3, 6 hours)
-      - ECG every 15-30 minutes
-      - Aspirin 325mg
+      - ECG every 15-30 minutes if symptoms persist
+      - Aspirin 325mg chewed immediately
+      - HEART score (History, ECG, Age, Risk factors, Troponin): Predicts 6-week MACE
       - Consider cardiac catheterization
     suggest_dx:
       - CARD-ACS
       - CARD-ANGINA
       - CARD-MYOCARDITIS
+    clinical_pearls:
+      - "HEART score 0-3 (low risk): Safe for discharge with outpatient follow-up"
+      - "HEART score 4-6 (moderate): Observation, serial troponins, stress test vs cath"
+      - "HEART score ≥7 (high risk): Early invasive strategy, cardiology consult"
+      - "High-sensitivity troponin: 0 and 1-hour rule-out protocol increasingly used"
+      - "Atypical presentations: Women, elderly, diabetics (may lack chest pain)"
     referrals:
       - Cardiology consult
       - Chest pain unit vs cardiac catheterization lab
-      - Consider transfer to PCI-capable center
+      - Consider transfer to PCI-capable center if STEMI
     trace:
       - "Cardiac features present - ACS protocol"
     next:
@@ -162,12 +169,19 @@ nodes:
         - symptoms_contains_any: ["sudden dyspnea", "hemoptysis"]
         - exam_flags_any: ["tachycardia", "hypoxia", "DVT signs"]
     tests:
-      - Wells score for PE
-      - D-dimer (if low risk)
-      - CT angiography chest
-      - Lower extremity ultrasound
+      - Wells score for PE (0-12.5 points, stratifies pre-test probability)
+      - D-dimer if low risk (Wells <4): Negative rules out PE (high sensitivity)
+      - CT angiography chest (CTPA) if moderate-high risk or positive D-dimer
+      - Lower extremity ultrasound (DVT present = treat as PE)
+      - Consider V/Q scan if contrast contraindicated
     suggest_dx:
       - CARD-PE
+    clinical_pearls:
+      - "PERC rule (8 criteria): If all negative in low-risk patients, can stop workup"
+      - "Massive PE: Hemodynamic instability - consider thrombolysis (tPA)"
+      - "Submassive PE: RV strain on echo - consider thrombolysis in select cases"
+      - "Anticoagulation: Start immediately if high suspicion, don't wait for imaging"
+      - "Treatment: Apixaban, rivaroxaban, or LMWH bridge to warfarin (3-6 months)"
     referrals:
       - Pulmonology or hospitalist
       - Consider ICU if hemodynamically unstable

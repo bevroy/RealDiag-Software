@@ -28,20 +28,45 @@ rules:
   - id: NEU-ISCH-STROKE
     label: Ischemic stroke (cerebral infarction)
     presentations:
-      - acute focal neurological deficit
-      - weakness, numbness, aphasia, visual field defect
-      - symptom onset within hours
+      - Acute focal neurological deficit (sudden onset)
+      - Hemiparesis/hemiplegia, facial droop (FAST criteria)
+      - Aphasia (expressive or receptive), dysarthria
+      - Visual field defect, diplopia, ataxia
+      - Sensory loss (hemibody), neglect syndrome
+      - NIHSS score (0-42) quantifies severity
+      - Time of symptom onset critical (thrombolysis window <4.5 hours)
+      - Large vessel occlusion: Consider thrombectomy up to 24 hours
+    clinical_pearls:
+      - "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call 911"
+      - "CT head FIRST to rule out hemorrhage before thrombolysis"
+      - "tPA eligibility: <4.5 hours, no contraindications, significant deficit"
+      - "Blood pressure management: Permissive hypertension unless extreme (>220/120)"
+      - "Aspirin 325mg after hemorrhage excluded (within 24-48 hours)"
+    sensitivity: 0.88
+    specificity: 0.95
     icd10:
       - I63.9    # Cerebral infarction, unspecified
+      - I63.50   # Cerebral infarction due to occlusion/stenosis of unspecified cerebral artery
     snomed:
       - "422504002"  # Ischemic stroke
 
   - id: NEU-TIA
     label: Transient ischemic attack (TIA)
     presentations:
-      - brief focal neurological symptoms resolving within 24 hours
-      - no acute infarction on imaging
-      - warning sign for stroke
+      - Transient focal neurological symptoms (typically <1 hour duration)
+      - Complete resolution within 24 hours (by definition)
+      - No acute infarction on DWI MRI (tissue-based definition)
+      - Same symptoms as stroke: weakness, aphasia, visual loss, ataxia
+      - High early stroke risk: ABCD2 score predicts 2-day stroke risk
+      - Crescendo TIAs (multiple in 24 hours): Very high risk, urgent evaluation
+    clinical_pearls:
+      - "ABCD2 score: Age, BP, Clinical features, Duration, Diabetes (0-7 points)"
+      - "High risk (ABCD2 ≥4): 4% stroke risk at 2 days, admit for workup"
+      - "Urgent workup: Carotid imaging (US or CTA), echocardiogram, telemetry"
+      - "Dual antiplatelet therapy (aspirin + clopidogrel) for 21 days reduces stroke risk"
+      - "50-99% carotid stenosis: Consider urgent CEA/CAS within 2 weeks"
+    sensitivity: 0.75
+    specificity: 0.92
     icd10:
       - G45.9    # Transient cerebral ischemic attack, unspecified
     snomed:
@@ -72,11 +97,26 @@ rules:
   - id: NEU-HEADACHE-MIGRAINE
     label: Migraine without aura
     presentations:
-      - recurrent unilateral throbbing headache
-      - nausea, photophobia, phonophobia
-      - may have aura (visual, sensory)
+      - Recurrent unilateral (60%) or bilateral throbbing headache
+      - Moderate to severe intensity, worsens with activity
+      - Associated: Nausea/vomiting, photophobia, phonophobia
+      - Duration 4-72 hours if untreated
+      - Aura (20-30%): Visual (scintillating scotoma), sensory, speech disturbance
+      - Migraine with brainstem aura: Vertigo, diplopia, ataxia, dysarthria
+      - Chronic migraine: ≥15 headache days/month for >3 months (≥8 are migraines)
+      - ICHD-3 criteria: ≥5 attacks meeting duration, location, quality criteria
+    clinical_pearls:
+      - "Acute treatment: NSAIDs, triptans (within 2 hours of onset), antiemetics"
+      - "Triptans contraindicated in hemiplegic migraine, basilar migraine, CAD"
+      - "Prophylaxis if ≥4 attacks/month: Propranolol, topiramate, CGRP inhibitors"
+      - "Medication overuse headache: >10 days/month analgesic use for >3 months"
+      - "Red flags requiring imaging: New onset >50, thunderclap, focal neuro deficits"
+    sensitivity: 0.81
+    specificity: 0.75
     icd10:
       - G43.009  # Migraine without aura
+      - G43.109  # Migraine with aura
+      - G43.709  # Chronic migraine without aura
     snomed:
       - "37796009"   # Migraine
 
@@ -127,12 +167,26 @@ rules:
   - id: NEU-MENINGITIS
     label: Meningitis
     presentations:
-      - fever, headache, neck stiffness
-      - altered mental status, photophobia
-      - bacterial, viral, or other etiology
+      - Classic triad: Fever, headache, neck stiffness (only 44% have all three)
+      - Altered mental status, confusion, lethargy
+      - Photophobia, phonophobia, nausea/vomiting
+      - Kernig sign: Resistance to knee extension with hip flexed
+      - Brudzinski sign: Hip flexion when neck is flexed
+      - Petechial rash suggests N. meningitidis (medical emergency)
+      - Seizures (20-40% of bacterial cases)
+    clinical_pearls:
+      - "Do NOT delay antibiotics for LP if clinical suspicion high"
+      - "Empiric antibiotics: Vancomycin + ceftriaxone (+ ampicillin if >50 or immunocompromised)"
+      - "Dexamethasone 0.15mg/kg before or with first antibiotic dose (bacterial)"
+      - "LP opening pressure, cell count, glucose, protein, Gram stain, culture"
+      - "Bacterial: Elevated WBC (>1000), low glucose (<40), high protein (>200)"
+      - "Viral: Lymphocytic pleocytosis (<300), normal glucose, mildly elevated protein"
+    sensitivity: 0.95
+    specificity: 0.94
     icd10:
       - G03.9    # Meningitis, unspecified
       - G00.9    # Bacterial meningitis, unspecified
+      - A87.9    # Viral meningitis, unspecified
     snomed:
       - "7180009"    # Meningitis
 

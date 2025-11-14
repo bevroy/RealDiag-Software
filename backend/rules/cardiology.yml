@@ -6,12 +6,24 @@ rules:
   - id: CARD-ACS
     label: Acute coronary syndrome
     presentations:
-      - chest pain or pressure, may radiate to arm/jaw/back
-      - dyspnea, diaphoresis, nausea
-      - includes STEMI, NSTEMI, unstable angina
+      - Chest pain or pressure (substernal, may radiate to arm/jaw/back/epigastrium)
+      - Associated symptoms: dyspnea, diaphoresis, nausea, vomiting
+      - STEMI: ST elevation ≥1mm in 2+ contiguous leads, new LBBB
+      - NSTEMI: Elevated troponin WITHOUT ST elevation
+      - Unstable angina: Ischemic symptoms WITHOUT troponin elevation
+      - Atypical presentations common in elderly, diabetics, women
+      - HEART score for risk stratification (History, ECG, Age, Risk factors, Troponin)
+    clinical_pearls:
+      - "Door-to-balloon time goal: <90 minutes for STEMI"
+      - "Aspirin 325mg chewed immediately if no contraindications"
+      - "MONA protocol: Morphine, Oxygen (if hypoxic), Nitroglycerin, Aspirin"
+      - "Diabetics and elderly may present with dyspnea alone (no chest pain)"
+    sensitivity: 0.90
+    specificity: 0.85
     icd10:
       - I21.9    # Acute myocardial infarction, unspecified
       - I21.3    # ST elevation (STEMI) myocardial infarction of unspecified site
+      - I21.4    # Non-ST elevation (NSTEMI) myocardial infarction
     snomed:
       - "394659003"  # Acute coronary syndrome
 
@@ -29,11 +41,25 @@ rules:
   - id: CARD-PE
     label: Pulmonary embolism
     presentations:
-      - sudden dyspnea, pleuritic chest pain, tachycardia
-      - hypoxia, hemoptysis possible
-      - requires imaging (CTA)
+      - Sudden onset dyspnea (most common symptom)
+      - Pleuritic chest pain, tachycardia (HR >100)
+      - Tachypnea (RR >20), hypoxia
+      - Hemoptysis (less common, 10-15%)
+      - Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state
+      - Wells criteria for risk stratification (≥4 points = high probability)
+      - PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative
+      - D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)
+    clinical_pearls:
+      - "CTA pulmonary angiography is gold standard for diagnosis"
+      - "V/Q scan alternative if contrast contraindicated"
+      - "Massive PE: Hemodynamic instability, consider thrombolysis"
+      - "Start anticoagulation immediately if high suspicion, don't wait for imaging"
+      - "Check for DVT with duplex ultrasound (present in ~50% of PE cases)"
+    sensitivity: 0.83
+    specificity: 0.96
     icd10:
       - I26.9    # Pulmonary embolism without acute cor pulmonale
+      - I26.0    # Pulmonary embolism with acute cor pulmonale
     snomed:
       - "59282003"   # Pulmonary embolism
 
@@ -63,11 +89,27 @@ rules:
   - id: CARD-HF
     label: Heart failure (chronic)
     presentations:
-      - dyspnea, edema, fatigue
-      - may have reduced or preserved ejection fraction
-      - requires ongoing management
+      - Dyspnea on exertion, orthopnea, paroxysmal nocturnal dyspnea (PND)
+      - Peripheral edema (lower extremities), jugular venous distention (JVD)
+      - Fatigue, exercise intolerance, weight gain
+      - Rales on lung auscultation, S3 gallop
+      - HFrEF: Ejection fraction <40% (systolic dysfunction)
+      - HFpEF: Ejection fraction ≥50% (diastolic dysfunction)
+      - Framingham criteria: 2 major or 1 major + 2 minor for diagnosis
+      - BNP >100 or NT-proBNP >300 supports diagnosis
+    clinical_pearls:
+      - "NYHA classification: Class I (asymptomatic) to Class IV (symptoms at rest)"
+      - "HFrEF treatment: ACE-I/ARB/ARNI, beta-blocker, MRA, SGLT2i (GDMT)"
+      - "Acute decompensation: Diuretics, consider BiPAP if hypoxic"
+      - "Daily weights: >2-3 lbs gain in 24 hours suggests fluid retention"
+      - "Sodium restriction <2g/day, fluid restriction if hyponatremic"
+    sensitivity: 0.85
+    specificity: 0.78
     icd10:
       - I50.9     # Heart failure, unspecified
+      - I50.1     # Left ventricular failure
+      - I50.30    # Unspecified diastolic heart failure
+      - I50.20    # Unspecified systolic heart failure
     snomed:
       - "84114007"   # Heart failure
 
@@ -96,11 +138,26 @@ rules:
   - id: CARD-AFIB
     label: Atrial fibrillation
     presentations:
-      - irregular heart rhythm, palpitations
-      - increased stroke risk
-      - may be asymptomatic or cause dyspnea
+      - Irregularly irregular heart rhythm (most reliable sign)
+      - Palpitations, dyspnea, chest discomfort, fatigue
+      - May be asymptomatic (discovered incidentally)
+      - Absence of P waves on ECG, irregular R-R intervals
+      - Increased stroke risk: CHA2DS2-VASc score guides anticoagulation
+      - Paroxysmal (<7 days, self-terminating), Persistent (>7 days), Permanent
+      - Tachycardia-mediated cardiomyopathy if chronic rapid rate
+    clinical_pearls:
+      - "CHA2DS2-VASc ≥2 (men) or ≥3 (women): Anticoagulation recommended"
+      - "Rate control goal: Resting HR <110 bpm (lenient) or <80 bpm (strict)"
+      - "Rhythm control: Consider cardioversion if <48 hours or TEE negative"
+      - "New onset with hemodynamic instability: Urgent cardioversion"
+      - "Check TSH (hyperthyroidism common cause), electrolytes, echo"
+    sensitivity: 0.95
+    specificity: 0.90
     icd10:
       - I48.0     # Paroxysmal atrial fibrillation
+      - I48.1     # Persistent atrial fibrillation
+      - I48.2     # Chronic atrial fibrillation
+      - I48.91    # Unspecified atrial fibrillation
     snomed:
       - "49436004"   # Atrial fibrillation
 
