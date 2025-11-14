@@ -5,6 +5,14 @@ const FAMILIES = [
   { id: "neurology", label: "Neurology" },
   { id: "cardiology", label: "Cardiology" },
   { id: "endocrinology", label: "Endocrinology" },
+  { id: "pulmonology", label: "Pulmonology" },
+  { id: "gastroenterology", label: "Gastroenterology" },
+  { id: "infectious_disease", label: "Infectious Disease" },
+  { id: "nephrology", label: "Nephrology" },
+  { id: "rheumatology", label: "Rheumatology" },
+  { id: "dermatology", label: "Dermatology" },
+  { id: "psychiatry", label: "Psychiatry" },
+  { id: "obstetrics_gynecology", label: "OB/GYN" },
 ];
 
 function useApiBase() {
@@ -277,10 +285,30 @@ export default function ReferencePage() {
                       fontSize: 11,
                       padding: "2px 8px",
                       borderRadius: 999,
-                      background: r.familyId === "neurology" ? "#E3F2FD" : 
-                                 r.familyId === "cardiology" ? "#FCE4EC" : "#FFF3E0",
-                      color: r.familyId === "neurology" ? "#1565C0" : 
-                             r.familyId === "cardiology" ? "#C2185B" : "#E65100",
+                      background: 
+                        r.familyId === "neurology" ? "#E3F2FD" :
+                        r.familyId === "cardiology" ? "#FCE4EC" :
+                        r.familyId === "endocrinology" ? "#FFF3E0" :
+                        r.familyId === "pulmonology" ? "#E8F5E9" :
+                        r.familyId === "gastroenterology" ? "#FFF9C4" :
+                        r.familyId === "infectious_disease" ? "#FFEBEE" :
+                        r.familyId === "nephrology" ? "#E0F7FA" :
+                        r.familyId === "rheumatology" ? "#F3E5F5" :
+                        r.familyId === "dermatology" ? "#FBE9E7" :
+                        r.familyId === "psychiatry" ? "#E8EAF6" :
+                        r.familyId === "obstetrics_gynecology" ? "#FCE4EC" : "#F5F5F5",
+                      color: 
+                        r.familyId === "neurology" ? "#1565C0" :
+                        r.familyId === "cardiology" ? "#C2185B" :
+                        r.familyId === "endocrinology" ? "#E65100" :
+                        r.familyId === "pulmonology" ? "#2E7D32" :
+                        r.familyId === "gastroenterology" ? "#F57F17" :
+                        r.familyId === "infectious_disease" ? "#C62828" :
+                        r.familyId === "nephrology" ? "#006064" :
+                        r.familyId === "rheumatology" ? "#6A1B9A" :
+                        r.familyId === "dermatology" ? "#BF360C" :
+                        r.familyId === "psychiatry" ? "#283593" :
+                        r.familyId === "obstetrics_gynecology" ? "#AD1457" : "#616161",
                       fontWeight: 600,
                     }}
                   >

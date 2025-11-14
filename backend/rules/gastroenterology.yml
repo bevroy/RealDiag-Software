@@ -1,0 +1,204 @@
+rules:
+  - id: GI-GERD
+    label: Gastroesophageal Reflux Disease (GERD)
+    presentations:
+      - Heartburn (pyrosis)
+      - Regurgitation
+      - Dysphagia
+      - Chronic cough
+      - Laryngitis or hoarseness
+      - Symptoms worse when lying down
+    icd10:
+      - K21.9
+      - K21.0
+    snomed:
+      - "235595009"
+
+  - id: GI-PUD
+    label: Peptic Ulcer Disease
+    presentations:
+      - Epigastric pain
+      - Pain relieved or worsened by eating
+      - Nausea and vomiting
+      - Melena or hematemesis
+      - H. pylori infection or NSAID use
+    icd10:
+      - K27.9
+      - K25.9
+      - K26.9
+    snomed:
+      - "13200003"
+
+  - id: GI-APPENDICITIS
+    label: Acute Appendicitis
+    presentations:
+      - Periumbilical pain migrating to RLQ
+      - Anorexia and nausea
+      - Fever
+      - Rebound tenderness
+      - McBurney's point tenderness
+    icd10:
+      - K35.80
+      - K35.89
+    snomed:
+      - "74400008"
+
+  - id: GI-CHOLECYSTITIS
+    label: Acute Cholecystitis
+    presentations:
+      - RUQ pain radiating to right shoulder
+      - Pain worse after fatty meals
+      - Nausea and vomiting
+      - Fever
+      - Positive Murphy's sign
+    icd10:
+      - K81.0
+      - K80.00
+    snomed:
+      - "76581006"
+
+  - id: GI-PANCREATITIS
+    label: Acute Pancreatitis
+    presentations:
+      - Severe epigastric pain radiating to back
+      - Nausea and vomiting
+      - Alcohol use or gallstones
+      - Abdominal distention
+      - Elevated lipase and amylase
+    icd10:
+      - K85.90
+      - K85.91
+    snomed:
+      - "197456007"
+
+  - id: GI-IBD-CROHNS
+    label: Crohn's Disease
+    presentations:
+      - Chronic diarrhea (often bloody)
+      - Abdominal pain (often RLQ)
+      - Weight loss
+      - Perianal disease
+      - Skip lesions on endoscopy
+    icd10:
+      - K50.90
+      - K50.00
+      - K50.10
+    snomed:
+      - "34000006"
+
+  - id: GI-IBD-UC
+    label: Ulcerative Colitis
+    presentations:
+      - Bloody diarrhea
+      - Urgency and tenesmus
+      - Lower abdominal cramping
+      - Weight loss
+      - Continuous inflammation from rectum
+    icd10:
+      - K51.90
+      - K51.00
+    snomed:
+      - "64766004"
+
+  - id: GI-DIVERTICULITIS
+    label: Acute Diverticulitis
+    presentations:
+      - LLQ abdominal pain
+      - Fever
+      - Change in bowel habits
+      - Nausea
+      - Leukocytosis
+    icd10:
+      - K57.92
+      - K57.32
+    snomed:
+      - "397881000"
+
+  - id: GI-BOWEL-OBSTRUCTION
+    label: Small Bowel Obstruction
+    presentations:
+      - Cramping abdominal pain
+      - Nausea and vomiting
+      - Abdominal distention
+      - Absent bowel sounds or high-pitched sounds
+      - Constipation or obstipation
+    icd10:
+      - K56.60
+      - K56.69
+    snomed:
+      - "81060008"
+
+  - id: GI-CIRRHOSIS
+    label: Liver Cirrhosis
+    presentations:
+      - Jaundice
+      - Ascites
+      - Spider angiomas
+      - Palmar erythema
+      - Hepatic encephalopathy
+      - Easy bruising
+    icd10:
+      - K74.60
+      - K70.30
+      - K74.69
+    snomed:
+      - "19943007"
+
+  - id: GI-HEPATITIS
+    label: Acute Viral Hepatitis
+    presentations:
+      - Jaundice
+      - RUQ pain
+      - Nausea and anorexia
+      - Dark urine
+      - Clay-colored stools
+      - Elevated transaminases
+    icd10:
+      - B19.9
+      - B17.9
+      - K72.00
+    snomed:
+      - "3738000"
+
+  - id: GI-IBS
+    label: Irritable Bowel Syndrome
+    presentations:
+      - Chronic abdominal pain
+      - Bloating
+      - Altered bowel habits (diarrhea, constipation, or mixed)
+      - Symptoms relieved by defecation
+      - No red flag symptoms
+    icd10:
+      - K58.9
+      - K58.0
+    snomed:
+      - "10743008"
+
+  - id: GI-CELIAC
+    label: Celiac Disease
+    presentations:
+      - Chronic diarrhea
+      - Bloating and gas
+      - Weight loss
+      - Fatigue
+      - Dermatitis herpetiformis
+      - Iron deficiency anemia
+    icd10:
+      - K90.0
+    snomed:
+      - "396331005"
+
+  - id: GI-COLORECTAL-CA
+    label: Colorectal Cancer
+    presentations:
+      - Change in bowel habits
+      - Rectal bleeding or melena
+      - Abdominal pain
+      - Unintentional weight loss
+      - Iron deficiency anemia
+      - Palpable mass
+    icd10:
+      - C18.9
+      - C20
+    snomed:
+      - "363406005"

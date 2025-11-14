@@ -113,3 +113,174 @@ rules:
       - I82.40   # Acute embolism and thrombosis of unspecified deep veins of lower extremity
     snomed:
       - "128053003"  # Deep venous thrombosis
+
+  - id: CARD-ANGINA
+    label: Stable Angina Pectoris
+    presentations:
+      - predictable chest pain with exertion
+      - relieved by rest or nitroglycerin
+      - caused by coronary artery disease
+      - no ECG changes at rest
+    icd10:
+      - I20.9    # Angina pectoris, unspecified
+    snomed:
+      - "194828000"  # Angina pectoris
+
+  - id: CARD-CARDIOMYOPATHY
+    label: Cardiomyopathy
+    presentations:
+      - dyspnea, fatigue, edema
+      - may be dilated, hypertrophic, or restrictive
+      - reduced cardiac output
+      - arrhythmias
+    icd10:
+      - I42.9    # Cardiomyopathy, unspecified
+      - I42.0    # Dilated cardiomyopathy
+    snomed:
+      - "57809008"   # Cardiomyopathy
+
+  - id: CARD-MYOCARDITIS
+    label: Myocarditis
+    presentations:
+      - chest pain, dyspnea
+      - fever, recent viral illness
+      - elevated troponin
+      - ECG changes
+      - heart failure symptoms
+    icd10:
+      - I40.9    # Acute myocarditis, unspecified
+    snomed:
+      - "50920009"   # Myocarditis
+
+  - id: CARD-PERICARDITIS
+    label: Acute Pericarditis
+    presentations:
+      - sharp chest pain, worse with lying down, improved sitting forward
+      - pericardial friction rub
+      - diffuse ST elevation on ECG
+      - may have pericardial effusion
+    icd10:
+      - I30.9    # Acute pericarditis, unspecified
+    snomed:
+      - "3238004"    # Pericarditis
+
+  - id: CARD-TAMPONADE
+    label: Cardiac Tamponade
+    presentations:
+      - Beck's triad (hypotension, JVD, muffled heart sounds)
+      - tachycardia
+      - pulsus paradoxus
+      - medical emergency
+    icd10:
+      - I31.4    # Cardiac tamponade
+    snomed:
+      - "35304003"   # Cardiac tamponade
+
+  - id: CARD-VALVE-AS
+    label: Aortic Stenosis
+    presentations:
+      - chest pain, syncope, dyspnea (classic triad)
+      - systolic ejection murmur
+      - slow-rising pulse
+      - typically elderly with calcified valve
+    icd10:
+      - I35.0    # Nonrheumatic aortic (valve) stenosis
+    snomed:
+      - "60573004"   # Aortic valve stenosis
+
+  - id: CARD-VALVE-AR
+    label: Aortic Regurgitation
+    presentations:
+      - dyspnea on exertion
+      - diastolic murmur
+      - wide pulse pressure
+      - bounding pulses (waterhammer pulse)
+    icd10:
+      - I35.1    # Nonrheumatic aortic (valve) insufficiency
+    snomed:
+      - "60234000"   # Aortic valve regurgitation
+
+  - id: CARD-VALVE-MR
+    label: Mitral Regurgitation
+    presentations:
+      - dyspnea, fatigue
+      - holosystolic murmur radiating to axilla
+      - pulmonary edema
+      - atrial fibrillation common
+    icd10:
+      - I34.0    # Nonrheumatic mitral (valve) insufficiency
+    snomed:
+      - "48724000"   # Mitral valve regurgitation
+
+  - id: CARD-VALVE-MS
+    label: Mitral Stenosis
+    presentations:
+      - dyspnea, hemoptysis
+      - opening snap, diastolic rumble
+      - atrial fibrillation common
+      - often rheumatic heart disease history
+    icd10:
+      - I34.2    # Nonrheumatic mitral (valve) stenosis
+      - I05.0    # Rheumatic mitral stenosis
+    snomed:
+      - "79619009"   # Mitral valve stenosis
+
+  - id: CARD-SVT
+    label: Supraventricular Tachycardia
+    presentations:
+      - sudden onset palpitations
+      - rapid regular heart rate (>150 bpm)
+      - may have lightheadedness, chest discomfort
+      - terminates abruptly
+    icd10:
+      - I47.1    # Supraventricular tachycardia
+    snomed:
+      - "6285003"    # Supraventricular tachycardia
+
+  - id: CARD-VFIB
+    label: Ventricular Fibrillation
+    presentations:
+      - cardiac arrest
+      - no pulse, no consciousness
+      - requires immediate defibrillation
+      - medical emergency
+    icd10:
+      - I49.01   # Ventricular fibrillation
+    snomed:
+      - "71908006"   # Ventricular fibrillation
+
+  - id: CARD-VT
+    label: Ventricular Tachycardia
+    presentations:
+      - wide complex tachycardia
+      - palpitations, chest pain, dyspnea
+      - syncope or presyncope
+      - may progress to ventricular fibrillation
+    icd10:
+      - I47.2    # Ventricular tachycardia
+    snomed:
+      - "25569003"   # Ventricular tachycardia
+
+  - id: CARD-BRADYCARDIA
+    label: Bradycardia
+    presentations:
+      - heart rate < 60 bpm
+      - may be asymptomatic or cause fatigue, dizziness
+      - may require pacemaker
+    icd10:
+      - R00.1    # Bradycardia, unspecified
+    snomed:
+      - "48867003"   # Bradycardia
+
+  - id: CARD-HEART-BLOCK
+    label: Atrioventricular Block
+    presentations:
+      - syncope or presyncope
+      - fatigue, dyspnea
+      - first, second, or third degree block on ECG
+      - may require pacemaker
+    icd10:
+      - I44.30   # Unspecified atrioventricular block
+      - I44.2    # Atrioventricular block, complete
+    snomed:
+      - "233916004"  # Atrioventricular block

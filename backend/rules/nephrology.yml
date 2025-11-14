@@ -1,0 +1,145 @@
+rules:
+  - id: NEPHRO-AKI
+    label: Acute Kidney Injury
+    presentations:
+      - Decreased urine output
+      - Elevated creatinine
+      - Fluid overload
+      - Nausea and vomiting
+      - Confusion
+      - Uremic symptoms
+    icd10:
+      - N17.9
+      - N17.0
+      - N17.1
+    snomed:
+      - "14669001"
+
+  - id: NEPHRO-CKD
+    label: Chronic Kidney Disease
+    presentations:
+      - Gradual decline in kidney function
+      - Hypertension
+      - Anemia
+      - Bone disease
+      - Proteinuria
+      - Edema
+    icd10:
+      - N18.3
+      - N18.4
+      - N18.5
+      - N18.6
+    snomed:
+      - "709044004"
+
+  - id: NEPHRO-NEPHROTIC
+    label: Nephrotic Syndrome
+    presentations:
+      - Massive proteinuria (>3.5 g/day)
+      - Hypoalbuminemia
+      - Edema (periorbital, pedal)
+      - Hyperlipidemia
+      - Frothy urine
+    icd10:
+      - N04.9
+    snomed:
+      - "52254009"
+
+  - id: NEPHRO-NEPHRITIC
+    label: Acute Nephritic Syndrome
+    presentations:
+      - Hematuria
+      - Proteinuria (< 3.5 g/day)
+      - Hypertension
+      - Edema
+      - Oliguria
+      - Red cell casts
+    icd10:
+      - N00.9
+      - N05.9
+    snomed:
+      - "236455006"
+
+  - id: NEPHRO-KIDNEY-STONE
+    label: Nephrolithiasis (Kidney Stones)
+    presentations:
+      - Severe colicky flank pain
+      - Hematuria
+      - Nausea and vomiting
+      - Pain radiating to groin
+      - Unable to find comfortable position
+    icd10:
+      - N20.0
+      - N20.2
+    snomed:
+      - "95570007"
+
+  - id: NEPHRO-PYELONEPHRITIS
+    label: Acute Pyelonephritis
+    presentations:
+      - Fever and chills
+      - Flank pain
+      - CVA tenderness
+      - Dysuria and urinary frequency
+      - Nausea and vomiting
+    icd10:
+      - N10
+      - N12
+    snomed:
+      - "45816000"
+
+  - id: NEPHRO-GN
+    label: Glomerulonephritis
+    presentations:
+      - Hematuria (tea-colored urine)
+      - Proteinuria
+      - Hypertension
+      - Edema
+      - Recent infection (post-streptococcal)
+    icd10:
+      - N05.9
+      - N03.9
+    snomed:
+      - "36171008"
+
+  - id: NEPHRO-ESRD
+    label: End-Stage Renal Disease
+    presentations:
+      - Uremic symptoms
+      - Requiring dialysis
+      - Severe fluid overload
+      - Metabolic acidosis
+      - Hyperkalemia
+      - Anemia
+    icd10:
+      - N18.6
+    snomed:
+      - "46177005"
+
+  - id: NEPHRO-POLYCYSTIC
+    label: Polycystic Kidney Disease
+    presentations:
+      - Flank pain
+      - Hematuria
+      - Hypertension
+      - Palpable kidneys
+      - Family history
+      - Progressive renal insufficiency
+    icd10:
+      - Q61.3
+      - Q61.2
+    snomed:
+      - "28728004"
+
+  - id: NEPHRO-RTA
+    label: Renal Tubular Acidosis
+    presentations:
+      - Metabolic acidosis
+      - Normal anion gap
+      - Hypokalemia or hyperkalemia
+      - Nephrolithiasis
+      - Growth retardation (children)
+    icd10:
+      - N25.89
+    snomed:
+      - "236467001"

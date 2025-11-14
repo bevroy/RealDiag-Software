@@ -1,0 +1,178 @@
+rules:
+  - id: PSYCH-MDD
+    label: Major Depressive Disorder
+    presentations:
+      - Depressed mood most of the day
+      - Loss of interest or pleasure
+      - Sleep disturbance (insomnia or hypersomnia)
+      - Fatigue or loss of energy
+      - Feelings of worthlessness or guilt
+      - Difficulty concentrating
+      - Suicidal ideation
+    icd10:
+      - F32.9
+      - F33.1
+      - F33.2
+    snomed:
+      - "370143000"
+
+  - id: PSYCH-GAD
+    label: Generalized Anxiety Disorder
+    presentations:
+      - Excessive worry > 6 months
+      - Difficulty controlling worry
+      - Restlessness
+      - Fatigue
+      - Difficulty concentrating
+      - Muscle tension
+      - Sleep disturbance
+    icd10:
+      - F41.1
+    snomed:
+      - "21897009"
+
+  - id: PSYCH-PANIC
+    label: Panic Disorder
+    presentations:
+      - Recurrent unexpected panic attacks
+      - Palpitations and chest pain
+      - Shortness of breath
+      - Dizziness or lightheadedness
+      - Fear of dying or losing control
+      - Worry about future attacks
+    icd10:
+      - F41.0
+    snomed:
+      - "371631005"
+
+  - id: PSYCH-BIPOLAR
+    label: Bipolar Disorder
+    presentations:
+      - Manic episodes (elevated mood, decreased sleep, impulsivity)
+      - Depressive episodes
+      - Rapid speech and racing thoughts
+      - Risky behavior during mania
+      - Mood cycling pattern
+    icd10:
+      - F31.9
+      - F31.10
+      - F31.30
+    snomed:
+      - "13746004"
+
+  - id: PSYCH-SCHIZOPHRENIA
+    label: Schizophrenia
+    presentations:
+      - Hallucinations (auditory most common)
+      - Delusions
+      - Disorganized speech
+      - Negative symptoms (flat affect, avolition)
+      - Social/occupational dysfunction
+      - Duration > 6 months
+    icd10:
+      - F20.9
+      - F20.0
+    snomed:
+      - "58214004"
+
+  - id: PSYCH-PTSD
+    label: Post-Traumatic Stress Disorder
+    presentations:
+      - History of trauma exposure
+      - Intrusive memories or flashbacks
+      - Avoidance of trauma reminders
+      - Negative mood and cognitions
+      - Hyperarousal and hypervigilance
+      - Duration > 1 month
+    icd10:
+      - F43.10
+    snomed:
+      - "47505003"
+
+  - id: PSYCH-OCD
+    label: Obsessive-Compulsive Disorder
+    presentations:
+      - Recurrent intrusive thoughts (obsessions)
+      - Repetitive behaviors (compulsions)
+      - Time-consuming (> 1 hour/day)
+      - Significant distress or impairment
+      - Recognition that obsessions are excessive
+    icd10:
+      - F42.9
+      - F42.2
+    snomed:
+      - "191736004"
+
+  - id: PSYCH-ADHD
+    label: Attention-Deficit/Hyperactivity Disorder
+    presentations:
+      - Inattention and distractibility
+      - Difficulty organizing tasks
+      - Hyperactivity (fidgeting, inability to sit still)
+      - Impulsivity
+      - Onset before age 12
+      - Symptoms in multiple settings
+    icd10:
+      - F90.9
+      - F90.2
+    snomed:
+      - "406506008"
+
+  - id: PSYCH-SUBSTANCE-USE
+    label: Substance Use Disorder
+    presentations:
+      - Impaired control over substance use
+      - Continued use despite harm
+      - Tolerance
+      - Withdrawal symptoms
+      - Social/occupational impairment
+      - Craving
+    icd10:
+      - F10.20
+      - F11.20
+      - F19.20
+    snomed:
+      - "191816009"
+
+  - id: PSYCH-EATING-ANOREXIA
+    label: Anorexia Nervosa
+    presentations:
+      - Restricted food intake
+      - Significantly low body weight
+      - Intense fear of weight gain
+      - Distorted body image
+      - Amenorrhea
+      - Excessive exercise
+    icd10:
+      - F50.00
+      - F50.02
+    snomed:
+      - "56882008"
+
+  - id: PSYCH-EATING-BULIMIA
+    label: Bulimia Nervosa
+    presentations:
+      - Recurrent binge eating
+      - Compensatory behaviors (vomiting, laxatives, exercise)
+      - Self-evaluation influenced by body shape/weight
+      - Episodes at least weekly for 3 months
+      - Normal or slightly above normal weight
+    icd10:
+      - F50.2
+    snomed:
+      - "78004001"
+
+  - id: PSYCH-AUTISM
+    label: Autism Spectrum Disorder
+    presentations:
+      - Social communication deficits
+      - Restricted, repetitive behaviors
+      - Sensory sensitivities
+      - Difficulty with social reciprocity
+      - Onset in early developmental period
+      - Impairment in functioning
+    icd10:
+      - F84.0
+      - F84.5
+    snomed:
+      - "408856003"

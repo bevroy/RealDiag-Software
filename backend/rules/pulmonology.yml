@@ -1,0 +1,180 @@
+rules:
+  - id: PULM-COPD
+    label: Chronic Obstructive Pulmonary Disease (COPD)
+    presentations:
+      - Chronic productive cough
+      - Progressive dyspnea on exertion
+      - Wheezing and chest tightness
+      - History of smoking or environmental exposure
+      - Reduced exercise tolerance
+    icd10:
+      - J44.0
+      - J44.1
+      - J44.9
+    snomed:
+      - "13645005"
+
+  - id: PULM-ASTHMA
+    label: Asthma
+    presentations:
+      - Episodic wheezing and dyspnea
+      - Nocturnal cough
+      - Chest tightness
+      - Symptoms worse with triggers (cold air, exercise, allergens)
+      - Reversible airflow obstruction
+    icd10:
+      - J45.20
+      - J45.40
+      - J45.50
+      - J45.901
+    snomed:
+      - "195967001"
+
+  - id: PULM-PNEUMONIA
+    label: Community-Acquired Pneumonia
+    presentations:
+      - Fever and chills
+      - Productive cough with purulent sputum
+      - Pleuritic chest pain
+      - Dyspnea and tachypnea
+      - Crackles on lung auscultation
+    icd10:
+      - J18.9
+      - J15.9
+      - J13
+    snomed:
+      - "385093006"
+
+  - id: PULM-PE
+    label: Pulmonary Embolism
+    presentations:
+      - Sudden onset dyspnea
+      - Pleuritic chest pain
+      - Tachycardia and tachypnea
+      - Hemoptysis
+      - Lower extremity swelling or pain
+      - Risk factors (surgery, immobility, malignancy)
+    icd10:
+      - I26.99
+      - I26.90
+      - I26.02
+    snomed:
+      - "59282003"
+
+  - id: PULM-PTX
+    label: Pneumothorax
+    presentations:
+      - Sudden onset unilateral chest pain
+      - Dyspnea
+      - Decreased breath sounds on affected side
+      - Hyperresonance to percussion
+      - Subcutaneous emphysema
+    icd10:
+      - J93.0
+      - J93.11
+      - J93.9
+    snomed:
+      - "36118008"
+
+  - id: PULM-PLEURAL-EFFUSION
+    label: Pleural Effusion
+    presentations:
+      - Progressive dyspnea
+      - Dull chest pain
+      - Decreased breath sounds at lung base
+      - Dullness to percussion
+      - Reduced tactile fremitus
+    icd10:
+      - J90
+      - J91.8
+    snomed:
+      - "60046008"
+
+  - id: PULM-ILD
+    label: Interstitial Lung Disease
+    presentations:
+      - Progressive dyspnea on exertion
+      - Dry cough
+      - Inspiratory crackles (Velcro rales)
+      - Digital clubbing
+      - Restrictive pattern on PFTs
+    icd10:
+      - J84.9
+      - J84.10
+      - J84.112
+    snomed:
+      - "51615001"
+
+  - id: PULM-BRONCHITIS
+    label: Acute Bronchitis
+    presentations:
+      - Acute cough (< 3 weeks)
+      - Productive or non-productive cough
+      - Chest discomfort
+      - Low-grade fever or absent fever
+      - Wheezing or rhonchi
+    icd10:
+      - J20.9
+      - J20.8
+    snomed:
+      - "10509002"
+
+  - id: PULM-LUNG-CA
+    label: Lung Cancer
+    presentations:
+      - Persistent cough or change in chronic cough
+      - Hemoptysis
+      - Unintentional weight loss
+      - Chest pain
+      - Dyspnea
+      - Hoarseness
+      - Smoking history
+    icd10:
+      - C34.90
+      - C34.91
+      - C78.00
+    snomed:
+      - "363358000"
+
+  - id: PULM-TUBERCULOSIS
+    label: Tuberculosis
+    presentations:
+      - Chronic cough > 3 weeks
+      - Hemoptysis
+      - Night sweats
+      - Fever and weight loss
+      - Exposure history or high-risk population
+    icd10:
+      - A15.0
+      - A15.9
+      - A16.9
+    snomed:
+      - "56717001"
+
+  - id: PULM-SARCOIDOSIS
+    label: Pulmonary Sarcoidosis
+    presentations:
+      - Dyspnea
+      - Dry cough
+      - Chest discomfort
+      - Bilateral hilar lymphadenopathy on imaging
+      - Systemic symptoms (fatigue, weight loss)
+    icd10:
+      - D86.0
+      - D86.9
+    snomed:
+      - "31541009"
+
+  - id: PULM-SLEEP-APNEA
+    label: Obstructive Sleep Apnea
+    presentations:
+      - Loud snoring
+      - Witnessed apneic episodes
+      - Excessive daytime sleepiness
+      - Morning headaches
+      - Obesity
+      - Hypertension
+    icd10:
+      - G47.33
+    snomed:
+      - "78275009"

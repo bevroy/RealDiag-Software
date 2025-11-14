@@ -1,0 +1,179 @@
+rules:
+  - id: OB-PREECLAMPSIA
+    label: Preeclampsia
+    presentations:
+      - Hypertension (BP ≥ 140/90)
+      - Proteinuria
+      - Onset after 20 weeks gestation
+      - Headache
+      - Visual changes
+      - RUQ pain
+      - Edema
+    icd10:
+      - O14.90
+      - O14.92
+      - O14.94
+    snomed:
+      - "398254007"
+
+  - id: OB-ECTOPIC
+    label: Ectopic Pregnancy
+    presentations:
+      - Abdominal or pelvic pain
+      - Vaginal bleeding
+      - Positive pregnancy test
+      - Adnexal mass
+      - Shoulder pain (if rupture)
+      - Hypotension/shock (if rupture)
+    icd10:
+      - O00.9
+      - O00.90
+    snomed:
+      - "34801009"
+
+  - id: OB-HYPEREMESIS
+    label: Hyperemesis Gravidarum
+    presentations:
+      - Severe nausea and vomiting
+      - Weight loss > 5%
+      - Dehydration
+      - Electrolyte abnormalities
+      - Ketonuria
+      - Unable to tolerate oral intake
+    icd10:
+      - O21.0
+      - O21.1
+    snomed:
+      - "237241001"
+
+  - id: OB-GDM
+    label: Gestational Diabetes Mellitus
+    presentations:
+      - Abnormal glucose tolerance test
+      - Onset during pregnancy
+      - Risk factors (obesity, family history, previous GDM)
+      - Polyuria and polydipsia
+      - Macrosomia
+    icd10:
+      - O24.419
+      - O24.919
+    snomed:
+      - "11687002"
+
+  - id: GYN-PCOS
+    label: Polycystic Ovary Syndrome
+    presentations:
+      - Irregular menstrual cycles
+      - Hirsutism and acne
+      - Obesity
+      - Infertility
+      - Insulin resistance
+      - Polycystic ovaries on ultrasound
+    icd10:
+      - E28.2
+    snomed:
+      - "69878008"
+
+  - id: GYN-ENDOMETRIOSIS
+    label: Endometriosis
+    presentations:
+      - Dysmenorrhea
+      - Chronic pelvic pain
+      - Dyspareunia
+      - Infertility
+      - Cyclical bowel or bladder symptoms
+    icd10:
+      - N80.9
+      - N80.0
+    snomed:
+      - "129103003"
+
+  - id: GYN-PID
+    label: Pelvic Inflammatory Disease
+    presentations:
+      - Lower abdominal pain
+      - Cervical motion tenderness
+      - Adnexal tenderness
+      - Fever
+      - Abnormal vaginal discharge
+      - STI risk factors
+    icd10:
+      - N73.9
+      - N70.91
+    snomed:
+      - "198130006"
+
+  - id: GYN-FIBROIDS
+    label: Uterine Fibroids (Leiomyoma)
+    presentations:
+      - Heavy menstrual bleeding
+      - Pelvic pressure or fullness
+      - Urinary frequency
+      - Constipation
+      - Palpable pelvic mass
+      - Infertility or pregnancy complications
+    icd10:
+      - D25.9
+      - D25.1
+    snomed:
+      - "95315005"
+
+  - id: GYN-OVARIAN-CYST
+    label: Ovarian Cyst
+    presentations:
+      - Pelvic or abdominal pain
+      - Bloating or fullness
+      - Pain with intercourse
+      - Irregular menstrual cycles
+      - Adnexal mass on exam or imaging
+    icd10:
+      - N83.20
+      - N83.29
+    snomed:
+      - "399492000"
+
+  - id: GYN-MENOPAUSE
+    label: Menopause
+    presentations:
+      - Cessation of menses > 12 months
+      - Hot flashes
+      - Night sweats
+      - Vaginal dryness
+      - Mood changes
+      - Sleep disturbances
+    icd10:
+      - N95.1
+      - N95.9
+    snomed:
+      - "289903006"
+
+  - id: GYN-CERVICAL-CA
+    label: Cervical Cancer
+    presentations:
+      - Abnormal vaginal bleeding
+      - Postcoital bleeding
+      - Vaginal discharge
+      - Pelvic pain
+      - Abnormal Pap smear
+      - HPV infection
+    icd10:
+      - C53.9
+      - D06.9
+    snomed:
+      - "363354003"
+
+  - id: GYN-OVARIAN-CA
+    label: Ovarian Cancer
+    presentations:
+      - Abdominal bloating or distention
+      - Pelvic pain
+      - Early satiety
+      - Urinary symptoms
+      - Weight loss
+      - Palpable adnexal mass
+      - Elevated CA-125
+    icd10:
+      - C56.9
+      - D39.10
+    snomed:
+      - "363443007"

@@ -1,0 +1,182 @@
+rules:
+  - id: DERM-ECZEMA
+    label: Atopic Dermatitis (Eczema)
+    presentations:
+      - Pruritic erythematous patches
+      - Dry, scaly skin
+      - Flexural involvement
+      - Personal or family history of atopy
+      - Chronic relapsing course
+    icd10:
+      - L20.9
+      - L20.89
+    snomed:
+      - "24079001"
+
+  - id: DERM-PSORIASIS
+    label: Psoriasis
+    presentations:
+      - Well-demarcated erythematous plaques
+      - Silvery scale
+      - Extensor surface involvement
+      - Nail pitting or onycholysis
+      - Koebner phenomenon
+    icd10:
+      - L40.0
+      - L40.9
+    snomed:
+      - "9014002"
+
+  - id: DERM-CELLULITIS
+    label: Cellulitis
+    presentations:
+      - Erythema and warmth
+      - Pain and tenderness
+      - Swelling
+      - Fever
+      - Regional lymphadenopathy
+    icd10:
+      - L03.90
+      - L03.115
+    snomed:
+      - "128045006"
+
+  - id: DERM-MELANOMA
+    label: Malignant Melanoma
+    presentations:
+      - Asymmetric pigmented lesion
+      - Irregular borders
+      - Color variation
+      - Diameter > 6mm
+      - Evolving lesion (ABCDEs)
+    icd10:
+      - C43.9
+      - D03.9
+    snomed:
+      - "372244006"
+
+  - id: DERM-BCC
+    label: Basal Cell Carcinoma
+    presentations:
+      - Pearly or translucent papule
+      - Telangiectasias
+      - Central ulceration
+      - Sun-exposed area
+      - Slow-growing
+    icd10:
+      - C44.91
+      - C44.319
+    snomed:
+      - "254701007"
+
+  - id: DERM-SCC
+    label: Squamous Cell Carcinoma
+    presentations:
+      - Scaly erythematous plaque
+      - Central ulceration or crusting
+      - Sun-exposed area
+      - History of actinic keratosis
+      - Rapidly growing
+    icd10:
+      - C44.92
+      - C44.329
+    snomed:
+      - "254703005"
+
+  - id: DERM-ACNE
+    label: Acne Vulgaris
+    presentations:
+      - Comedones (blackheads, whiteheads)
+      - Inflammatory papules and pustules
+      - Face, chest, back involvement
+      - Adolescent or young adult
+      - May have nodules or cysts
+    icd10:
+      - L70.0
+      - L70.9
+    snomed:
+      - "88714009"
+
+  - id: DERM-ROSACEA
+    label: Rosacea
+    presentations:
+      - Facial erythema and flushing
+      - Telangiectasias
+      - Papules and pustules
+      - Rhinophyma
+      - Central face involvement
+      - Triggers (heat, alcohol, spicy foods)
+    icd10:
+      - L71.9
+      - L71.0
+    snomed:
+      - "398909004"
+
+  - id: DERM-URTICARIA
+    label: Urticaria (Hives)
+    presentations:
+      - Pruritic wheals
+      - Transient lesions (< 24 hours)
+      - Central pallor with erythematous border
+      - May have angioedema
+      - Triggered by allergens, medications, or stress
+    icd10:
+      - L50.9
+      - L50.0
+    snomed:
+      - "126485001"
+
+  - id: DERM-TINEA
+    label: Tinea Corporis (Ringworm)
+    presentations:
+      - Annular erythematous patch
+      - Central clearing
+      - Scaly advancing border
+      - Pruritic
+      - KOH positive for hyphae
+    icd10:
+      - B35.4
+      - B35.9
+    snomed:
+      - "414941008"
+
+  - id: DERM-HERPES-ZOSTER
+    label: Herpes Zoster (Shingles)
+    presentations:
+      - Painful vesicular rash
+      - Dermatomal distribution
+      - Unilateral
+      - Prodrome of pain or tingling
+      - More common in elderly or immunocompromised
+    icd10:
+      - B02.9
+      - B02.29
+    snomed:
+      - "4740000"
+
+  - id: DERM-VITILIGO
+    label: Vitiligo
+    presentations:
+      - Depigmented patches
+      - Well-demarcated borders
+      - Often symmetric
+      - Face, hands, body folds
+      - May be associated with autoimmune disease
+    icd10:
+      - L80
+    snomed:
+      - "56727007"
+
+  - id: DERM-ALOPECIA
+    label: Alopecia Areata
+    presentations:
+      - Patchy hair loss
+      - Smooth, non-scarring
+      - Exclamation point hairs at periphery
+      - May progress to totalis or universalis
+      - Associated with autoimmune conditions
+    icd10:
+      - L63.9
+      - L63.0
+    snomed:
+      - "68225006"

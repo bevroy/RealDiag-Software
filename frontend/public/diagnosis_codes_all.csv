@@ -1,34 +1,178 @@
 family,rule_id,label,icd10_codes
-Neurology,NEU-HEADACHE-MIGRAINE,Migraine without aura,"G43.009"
-Neurology,NEU-HEADACHE-TENSION,Tension-type headache,"G44.209"
-Neurology,NEU-SAH,Nontraumatic subarachnoid hemorrhage,"I60.9"
-Neurology,NEU-ICH,Spontaneous intracerebral hemorrhage,"I61.9"
-Neurology,NEU-ISCH-STROKE,Ischemic stroke (cerebral infarction),"I63.9"
-Neurology,NEU-TIA,Transient ischemic attack,"G45.9"
-Neurology,NEU-EPILEPSY,Epilepsy, unspecified,"G40.909"
-Neurology,NEU-BPPV,Benign paroxysmal positional vertigo,"H81.1"
-Neurology,NEU-TN,Trigeminal neuralgia,"G50.0"
-Neurology,NEU-MG,Myasthenia gravis,"G70.00"
-Cardiology,CARD-ACS,Acute coronary syndrome,"I21.9; I21.3"
-Cardiology,CARD-AORTIC-DISSECTION,Aortic dissection,"I71.0"
-Cardiology,CARD-PE,Pulmonary embolism,"I26.9"
-Cardiology,CARD-VASOVAGAL,Vasovagal syncope,"R55"
-Cardiology,CARD-ORTHOSTATIC,Orthostatic hypotension,"I95.1; R55"
-Cardiology,CARD-HF,Heart failure (chronic),"I50.9"
-Cardiology,CARD-HTN,Hypertension,"I10"
-Cardiology,CARD-PAD,Peripheral arterial disease,"I73.9"
-Cardiology,CARD-AFIB,Atrial fibrillation,"I48.0"
-Endocrinology,ENDO-DM1,Type 1 diabetes mellitus,"E10.9"
-Endocrinology,ENDO-DM2,Type 2 diabetes mellitus,"E11.9"
-Endocrinology,ENDO-DKA,Diabetic ketoacidosis,"E10.10; E11.10"
-Endocrinology,ENDO-HHS,Hyperosmolar hyperglycemic state,"E11.00"
-Endocrinology,ENDO-HYPOGLYCEMIA,Hypoglycemia,"E16.0; E16.1; E16.2"
-Endocrinology,ENDO-HYPERTHYROIDISM,Hyperthyroidism / thyrotoxicosis,"E05.90"
-Endocrinology,ENDO-THYROID_STORM,Thyroid storm (thyrotoxic crisis),"E05.91"
-Endocrinology,ENDO-HYPOTHYROIDISM,Hypothyroidism,"E03.9"
-Endocrinology,ENDO-THYROID_NODULE,Thyroid nodule,"E04.1; E04.2"
-Endocrinology,ENDO-THYROID_CANCER,Thyroid carcinoma,"C73"
-Endocrinology,ENDO-HYPERCALCEMIA,Hypercalcemia,"E83.52"
-Endocrinology,ENDO-PRIMARY-HPT,Primary hyperparathyroidism,"E21.0"
-Endocrinology,ENDO-ADRENAL-CRISIS,Adrenal crisis,"E27.2"
-Endocrinology,ENDO-ADRENAL-INSUFF,Adrenal insufficiency,"E27.1; E27.40"
+cardiology,CARD-ACS,Acute coronary syndrome,"I21.9, I21.3"
+cardiology,CARD-AORTIC-DISSECTION,Aortic dissection,I71.0
+cardiology,CARD-PE,Pulmonary embolism,I26.9
+cardiology,CARD-VASOVAGAL,Vasovagal syncope,R55
+cardiology,CARD-ORTHOSTATIC,Orthostatic hypotension,"I95.1, R55"
+cardiology,CARD-HF,Heart failure (chronic),I50.9
+cardiology,CARD-HTN,Hypertension,I10
+cardiology,CARD-PAD,Peripheral arterial disease,I73.9
+cardiology,CARD-AFIB,Atrial fibrillation,I48.0
+cardiology,CARDIO-DVT,Deep vein thrombosis,I82.40
+cardiology,CARD-ANGINA,Stable Angina Pectoris,I20.9
+cardiology,CARD-CARDIOMYOPATHY,Cardiomyopathy,"I42.9, I42.0"
+cardiology,CARD-MYOCARDITIS,Myocarditis,I40.9
+cardiology,CARD-PERICARDITIS,Acute Pericarditis,I30.9
+cardiology,CARD-TAMPONADE,Cardiac Tamponade,I31.4
+cardiology,CARD-VALVE-AS,Aortic Stenosis,I35.0
+cardiology,CARD-VALVE-AR,Aortic Regurgitation,I35.1
+cardiology,CARD-VALVE-MR,Mitral Regurgitation,I34.0
+cardiology,CARD-VALVE-MS,Mitral Stenosis,"I34.2, I05.0"
+cardiology,CARD-SVT,Supraventricular Tachycardia,I47.1
+cardiology,CARD-VFIB,Ventricular Fibrillation,I49.01
+cardiology,CARD-VT,Ventricular Tachycardia,I47.2
+cardiology,CARD-BRADYCARDIA,Bradycardia,R00.1
+cardiology,CARD-HEART-BLOCK,Atrioventricular Block,"I44.30, I44.2"
+dermatology,DERM-ECZEMA,Atopic Dermatitis (Eczema),"L20.9, L20.89"
+dermatology,DERM-PSORIASIS,Psoriasis,"L40.0, L40.9"
+dermatology,DERM-CELLULITIS,Cellulitis,"L03.90, L03.115"
+dermatology,DERM-MELANOMA,Malignant Melanoma,"C43.9, D03.9"
+dermatology,DERM-BCC,Basal Cell Carcinoma,"C44.91, C44.319"
+dermatology,DERM-SCC,Squamous Cell Carcinoma,"C44.92, C44.329"
+dermatology,DERM-ACNE,Acne Vulgaris,"L70.0, L70.9"
+dermatology,DERM-ROSACEA,Rosacea,"L71.9, L71.0"
+dermatology,DERM-URTICARIA,Urticaria (Hives),"L50.9, L50.0"
+dermatology,DERM-TINEA,Tinea Corporis (Ringworm),"B35.4, B35.9"
+dermatology,DERM-HERPES-ZOSTER,Herpes Zoster (Shingles),"B02.9, B02.29"
+dermatology,DERM-VITILIGO,Vitiligo,L80
+dermatology,DERM-ALOPECIA,Alopecia Areata,"L63.9, L63.0"
+endocrinology,ENDO-DM1,Type 1 diabetes mellitus,E10.9
+endocrinology,ENDO-DM2,Type 2 diabetes mellitus,E11.9
+endocrinology,ENDO-DKA,Diabetic ketoacidosis (DKA),"E10.10, E11.10"
+endocrinology,ENDO-HHS,Hyperosmolar hyperglycemic state (HHS),E11.00
+endocrinology,ENDO-HYPOGLYCEMIA,Hypoglycemia,"E16.0, E16.1, E16.2"
+endocrinology,ENDO-HYPERTHYROIDISM,Hyperthyroidism / thyrotoxicosis,E05.90
+endocrinology,ENDO-THYROID_STORM,Thyroid storm (thyrotoxic crisis),E05.91
+endocrinology,ENDO-HYPOTHYROIDISM,Hypothyroidism,E03.9
+endocrinology,ENDO-THYROID_NODULE,Thyroid nodule (benign or indeterminate),"E04.1, E04.2"
+endocrinology,ENDO-THYROID_CANCER,Thyroid carcinoma,C73
+endocrinology,ENDO-HYPERCALCEMIA,Hypercalcemia,E83.52
+endocrinology,ENDO-PRIMARY-HPT,Primary hyperparathyroidism,E21.0
+endocrinology,ENDO-ADRENAL-CRISIS,Adrenal crisis,E27.2
+endocrinology,ENDO-ADRENAL-INSUFF,Adrenal insufficiency,"E27.1, E27.40"
+endocrinology,ENDO-CUSHINGS,Cushing's Syndrome,E24.9
+endocrinology,ENDO-PHEOCHROMOCYTOMA,Pheochromocytoma,D35.00
+endocrinology,ENDO-ACROMEGALY,Acromegaly,E22.0
+endocrinology,ENDO-HYPOPARATHYROIDISM,Hypoparathyroidism,E20.9
+endocrinology,ENDO-OSTEOPOROSIS,Osteoporosis,M81.0
+endocrinology,ENDO-PITUITARY-INSUFFICIENCY,Hypopituitarism,E23.0
+endocrinology,ENDO-PROLACTINOMA,Prolactinoma,D35.2
+endocrinology,ENDO-SIADH,Syndrome of Inappropriate Antidiuretic Hormone (SIADH),E22.2
+endocrinology,ENDO-DIABETES-INSIPIDUS,Diabetes Insipidus,E23.2
+endocrinology,ENDO-METABOLIC-SYNDROME,Metabolic Syndrome,E88.81
+gastroenterology,GI-GERD,Gastroesophageal Reflux Disease (GERD),"K21.9, K21.0"
+gastroenterology,GI-PUD,Peptic Ulcer Disease,"K27.9, K25.9, K26.9"
+gastroenterology,GI-APPENDICITIS,Acute Appendicitis,"K35.80, K35.89"
+gastroenterology,GI-CHOLECYSTITIS,Acute Cholecystitis,"K81.0, K80.00"
+gastroenterology,GI-PANCREATITIS,Acute Pancreatitis,"K85.90, K85.91"
+gastroenterology,GI-IBD-CROHNS,Crohn's Disease,"K50.90, K50.00, K50.10"
+gastroenterology,GI-IBD-UC,Ulcerative Colitis,"K51.90, K51.00"
+gastroenterology,GI-DIVERTICULITIS,Acute Diverticulitis,"K57.92, K57.32"
+gastroenterology,GI-BOWEL-OBSTRUCTION,Small Bowel Obstruction,"K56.60, K56.69"
+gastroenterology,GI-CIRRHOSIS,Liver Cirrhosis,"K74.60, K70.30, K74.69"
+gastroenterology,GI-HEPATITIS,Acute Viral Hepatitis,"B19.9, B17.9, K72.00"
+gastroenterology,GI-IBS,Irritable Bowel Syndrome,"K58.9, K58.0"
+gastroenterology,GI-CELIAC,Celiac Disease,K90.0
+gastroenterology,GI-COLORECTAL-CA,Colorectal Cancer,"C18.9, C20"
+infectious_disease,ID-SEPSIS,Sepsis and Septic Shock,"A41.9, R65.21, R65.20"
+infectious_disease,ID-UTI,Urinary Tract Infection,"N39.0, N30.00, N10"
+infectious_disease,ID-CELLULITIS,Cellulitis,"L03.90, L03.115, L03.119"
+infectious_disease,ID-MENINGITIS,Bacterial Meningitis,"G00.9, G03.9"
+infectious_disease,ID-ENCEPHALITIS,Viral Encephalitis,"G04.90, A86"
+infectious_disease,ID-COVID19,COVID-19,"U07.1, J12.82"
+infectious_disease,ID-INFLUENZA,Influenza,"J11.1, J10.1"
+infectious_disease,ID-HIV,HIV/AIDS,"B20, Z21"
+infectious_disease,ID-ENDOCARDITIS,Infective Endocarditis,"I33.0, I33.9"
+infectious_disease,ID-OSTEOMYELITIS,Osteomyelitis,"M86.9, M86.8X9"
+infectious_disease,ID-LYME,Lyme Disease,"A69.20, A69.23"
+infectious_disease,ID-MONONUCLEOSIS,Infectious Mononucleosis,B27.90
+infectious_disease,ID-C-DIFF,Clostridioides difficile Infection,"A04.7, A04.72"
+nephrology,NEPHRO-AKI,Acute Kidney Injury,"N17.9, N17.0, N17.1"
+nephrology,NEPHRO-CKD,Chronic Kidney Disease,"N18.3, N18.4, N18.5, N18.6"
+nephrology,NEPHRO-NEPHROTIC,Nephrotic Syndrome,N04.9
+nephrology,NEPHRO-NEPHRITIC,Acute Nephritic Syndrome,"N00.9, N05.9"
+nephrology,NEPHRO-KIDNEY-STONE,Nephrolithiasis (Kidney Stones),"N20.0, N20.2"
+nephrology,NEPHRO-PYELONEPHRITIS,Acute Pyelonephritis,"N10, N12"
+nephrology,NEPHRO-GN,Glomerulonephritis,"N05.9, N03.9"
+nephrology,NEPHRO-ESRD,End-Stage Renal Disease,N18.6
+nephrology,NEPHRO-POLYCYSTIC,Polycystic Kidney Disease,"Q61.3, Q61.2"
+nephrology,NEPHRO-RTA,Renal Tubular Acidosis,N25.89
+neurology,NEU-SAH,Nontraumatic subarachnoid hemorrhage,I60.9
+neurology,NEU-ICH,Spontaneous intracerebral hemorrhage,I61.9
+neurology,NEU-ISCH-STROKE,Ischemic stroke (cerebral infarction),I63.9
+neurology,NEU-TIA,Transient ischemic attack (TIA),G45.9
+neurology,NEU-EPILEPSY,"Epilepsy, unspecified","G40.909, R56.9"
+neurology,NEU-STATUS-EPILEPTICUS,Status epilepticus,G41.9
+neurology,NEU-HEADACHE-MIGRAINE,Migraine without aura,G43.009
+neurology,NEU-HEADACHE-TENSION,Tension-type headache,G44.209
+neurology,NEU-BPPV,Benign paroxysmal positional vertigo,H81.1
+neurology,NEU-TN,Trigeminal neuralgia,G50.0
+neurology,NEU-MG,Myasthenia gravis,G70.00
+neurology,NEU-MENINGITIS,Meningitis,"G03.9, G00.9"
+neurology,NEU-ENCEPHALITIS,Encephalitis,G04.90
+neurology,NEU-MS,Multiple sclerosis,G35
+neurology,NEU-PARKINSONS,Parkinson disease,G20
+neurology,NEU-ALZHEIMERS,Alzheimer disease,G30.9
+neurology,NEU-GBS,Guillain-Barré syndrome,G61.0
+neurology,NEU-MYASTHENIA-GRAVIS,Myasthenia gravis,G70.00
+neurology,NEU-ALS,Amyotrophic lateral sclerosis (ALS),G12.21
+neurology,NEU-BELL-PALSY,Bell's Palsy,G51.0
+neurology,NEU-CLUSTER-HEADACHE,Cluster Headache,G44.009
+neurology,NEU-PERIPHERAL-NEUROPATHY,Peripheral Neuropathy,G62.9
+neurology,NEU-RESTLESS-LEG,Restless Legs Syndrome,G25.81
+neurology,NEU-ESSENTIAL-TREMOR,Essential Tremor,G25.0
+neurology,NEU-HYDROCEPHALUS,Hydrocephalus,"G91.9, G91.2"
+neurology,NEU-BRAIN-TUMOR,Brain Tumor,"C71.9, D33.2"
+neurology,NEU-CONCUSSION,Concussion,S06.0X0A
+neurology,NEU-SPINAL-STENOSIS,Lumbar Spinal Stenosis,M48.06
+neurology,NEU-SCIATICA,Sciatica,M54.30
+neurology,NEU-NARCOLEPSY,Narcolepsy,G47.419
+obstetrics_gynecology,OB-PREECLAMPSIA,Preeclampsia,"O14.90, O14.92, O14.94"
+obstetrics_gynecology,OB-ECTOPIC,Ectopic Pregnancy,"O00.9, O00.90"
+obstetrics_gynecology,OB-HYPEREMESIS,Hyperemesis Gravidarum,"O21.0, O21.1"
+obstetrics_gynecology,OB-GDM,Gestational Diabetes Mellitus,"O24.419, O24.919"
+obstetrics_gynecology,GYN-PCOS,Polycystic Ovary Syndrome,E28.2
+obstetrics_gynecology,GYN-ENDOMETRIOSIS,Endometriosis,"N80.9, N80.0"
+obstetrics_gynecology,GYN-PID,Pelvic Inflammatory Disease,"N73.9, N70.91"
+obstetrics_gynecology,GYN-FIBROIDS,Uterine Fibroids (Leiomyoma),"D25.9, D25.1"
+obstetrics_gynecology,GYN-OVARIAN-CYST,Ovarian Cyst,"N83.20, N83.29"
+obstetrics_gynecology,GYN-MENOPAUSE,Menopause,"N95.1, N95.9"
+obstetrics_gynecology,GYN-CERVICAL-CA,Cervical Cancer,"C53.9, D06.9"
+obstetrics_gynecology,GYN-OVARIAN-CA,Ovarian Cancer,"C56.9, D39.10"
+psychiatry,PSYCH-MDD,Major Depressive Disorder,"F32.9, F33.1, F33.2"
+psychiatry,PSYCH-GAD,Generalized Anxiety Disorder,F41.1
+psychiatry,PSYCH-PANIC,Panic Disorder,F41.0
+psychiatry,PSYCH-BIPOLAR,Bipolar Disorder,"F31.9, F31.10, F31.30"
+psychiatry,PSYCH-SCHIZOPHRENIA,Schizophrenia,"F20.9, F20.0"
+psychiatry,PSYCH-PTSD,Post-Traumatic Stress Disorder,F43.10
+psychiatry,PSYCH-OCD,Obsessive-Compulsive Disorder,"F42.9, F42.2"
+psychiatry,PSYCH-ADHD,Attention-Deficit/Hyperactivity Disorder,"F90.9, F90.2"
+psychiatry,PSYCH-SUBSTANCE-USE,Substance Use Disorder,"F10.20, F11.20, F19.20"
+psychiatry,PSYCH-EATING-ANOREXIA,Anorexia Nervosa,"F50.00, F50.02"
+psychiatry,PSYCH-EATING-BULIMIA,Bulimia Nervosa,F50.2
+psychiatry,PSYCH-AUTISM,Autism Spectrum Disorder,"F84.0, F84.5"
+pulmonology,PULM-COPD,Chronic Obstructive Pulmonary Disease (COPD),"J44.0, J44.1, J44.9"
+pulmonology,PULM-ASTHMA,Asthma,"J45.20, J45.40, J45.50, J45.901"
+pulmonology,PULM-PNEUMONIA,Community-Acquired Pneumonia,"J18.9, J15.9, J13"
+pulmonology,PULM-PE,Pulmonary Embolism,"I26.99, I26.90, I26.02"
+pulmonology,PULM-PTX,Pneumothorax,"J93.0, J93.11, J93.9"
+pulmonology,PULM-PLEURAL-EFFUSION,Pleural Effusion,"J90, J91.8"
+pulmonology,PULM-ILD,Interstitial Lung Disease,"J84.9, J84.10, J84.112"
+pulmonology,PULM-BRONCHITIS,Acute Bronchitis,"J20.9, J20.8"
+pulmonology,PULM-LUNG-CA,Lung Cancer,"C34.90, C34.91, C78.00"
+pulmonology,PULM-TUBERCULOSIS,Tuberculosis,"A15.0, A15.9, A16.9"
+pulmonology,PULM-SARCOIDOSIS,Pulmonary Sarcoidosis,"D86.0, D86.9"
+pulmonology,PULM-SLEEP-APNEA,Obstructive Sleep Apnea,G47.33
+rheumatology,RHEUM-RA,Rheumatoid Arthritis,"M06.9, M05.9"
+rheumatology,RHEUM-OA,Osteoarthritis,"M19.90, M17.9, M16.9"
+rheumatology,RHEUM-GOUT,Gout,"M10.9, M10.00"
+rheumatology,RHEUM-PSEUDOGOUT,Pseudogout (CPPD),"M11.9, M11.20"
+rheumatology,RHEUM-SLE,Systemic Lupus Erythematosus,"M32.9, M32.10"
+rheumatology,RHEUM-SJOGREN,Sjögren's Syndrome,"M35.00, M35.09"
+rheumatology,RHEUM-SCLERODERMA,Systemic Sclerosis (Scleroderma),"M34.9, M34.0"
+rheumatology,RHEUM-POLYMYALGIA,Polymyalgia Rheumatica,M35.3
+rheumatology,RHEUM-GCA,Giant Cell Arteritis,"M31.6, M31.5"
+rheumatology,RHEUM-AS,Ankylosing Spondylitis,M45.9
+rheumatology,RHEUM-PSORIATIC,Psoriatic Arthritis,"L40.50, L40.59, M07.60"
+rheumatology,RHEUM-FIBROMYALGIA,Fibromyalgia,M79.7
+rheumatology,RHEUM-VASCULITIS,Systemic Vasculitis,"M31.9, M31.30"

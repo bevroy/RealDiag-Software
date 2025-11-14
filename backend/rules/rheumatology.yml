@@ -1,0 +1,187 @@
+rules:
+  - id: RHEUM-RA
+    label: Rheumatoid Arthritis
+    presentations:
+      - Symmetric polyarticular arthritis
+      - Morning stiffness > 1 hour
+      - Hand and wrist involvement (MCP, PIP)
+      - Rheumatoid nodules
+      - Positive RF or anti-CCP
+    icd10:
+      - M06.9
+      - M05.9
+    snomed:
+      - "69896004"
+
+  - id: RHEUM-OA
+    label: Osteoarthritis
+    presentations:
+      - Joint pain worse with activity
+      - Morning stiffness < 30 minutes
+      - Bony enlargement (Heberden's, Bouchard's nodes)
+      - Crepitus
+      - Loss of range of motion
+    icd10:
+      - M19.90
+      - M17.9
+      - M16.9
+    snomed:
+      - "396275006"
+
+  - id: RHEUM-GOUT
+    label: Gout
+    presentations:
+      - Sudden onset severe joint pain
+      - First MTP joint (podagra) most common
+      - Joint erythema and swelling
+      - Elevated uric acid
+      - Monosodium urate crystals
+    icd10:
+      - M10.9
+      - M10.00
+    snomed:
+      - "90560007"
+
+  - id: RHEUM-PSEUDOGOUT
+    label: Pseudogout (CPPD)
+    presentations:
+      - Acute joint pain and swelling
+      - Knee most commonly affected
+      - Calcium pyrophosphate crystals
+      - Chondrocalcinosis on X-ray
+    icd10:
+      - M11.9
+      - M11.20
+    snomed:
+      - "6404008"
+
+  - id: RHEUM-SLE
+    label: Systemic Lupus Erythematosus
+    presentations:
+      - Malar rash
+      - Photosensitivity
+      - Oral ulcers
+      - Arthritis
+      - Serositis
+      - Renal involvement
+      - Positive ANA, anti-dsDNA
+    icd10:
+      - M32.9
+      - M32.10
+    snomed:
+      - "55464009"
+
+  - id: RHEUM-SJOGREN
+    label: Sjögren's Syndrome
+    presentations:
+      - Dry eyes (keratoconjunctivitis sicca)
+      - Dry mouth (xerostomia)
+      - Parotid gland enlargement
+      - Dental caries
+      - Positive anti-SSA/SSB
+    icd10:
+      - M35.00
+      - M35.09
+    snomed:
+      - "83901003"
+
+  - id: RHEUM-SCLERODERMA
+    label: Systemic Sclerosis (Scleroderma)
+    presentations:
+      - Skin thickening and tightening
+      - Raynaud's phenomenon
+      - Dysphagia
+      - GERD
+      - Pulmonary fibrosis
+      - Digital ulcers
+    icd10:
+      - M34.9
+      - M34.0
+    snomed:
+      - "89155008"
+
+  - id: RHEUM-POLYMYALGIA
+    label: Polymyalgia Rheumatica
+    presentations:
+      - Bilateral shoulder and hip girdle pain
+      - Morning stiffness
+      - Age > 50 years
+      - Elevated ESR/CRP
+      - Dramatic response to low-dose steroids
+    icd10:
+      - M35.3
+    snomed:
+      - "399130002"
+
+  - id: RHEUM-GCA
+    label: Giant Cell Arteritis
+    presentations:
+      - New headache
+      - Temporal artery tenderness
+      - Jaw claudication
+      - Vision changes (amaurosis fugax)
+      - Elevated ESR/CRP
+      - Age > 50 years
+    icd10:
+      - M31.6
+      - M31.5
+    snomed:
+      - "400130008"
+
+  - id: RHEUM-AS
+    label: Ankylosing Spondylitis
+    presentations:
+      - Lower back pain and stiffness
+      - Pain worse at rest, improves with activity
+      - Morning stiffness > 30 minutes
+      - Reduced spinal mobility
+      - HLA-B27 positive
+      - Sacroiliitis on imaging
+    icd10:
+      - M45.9
+    snomed:
+      - "9631008"
+
+  - id: RHEUM-PSORIATIC
+    label: Psoriatic Arthritis
+    presentations:
+      - Joint pain and swelling
+      - Psoriatic skin lesions
+      - Nail pitting or onycholysis
+      - Dactylitis (sausage digits)
+      - Enthesitis
+    icd10:
+      - L40.50
+      - L40.59
+      - M07.60
+    snomed:
+      - "33339001"
+
+  - id: RHEUM-FIBROMYALGIA
+    label: Fibromyalgia
+    presentations:
+      - Widespread musculoskeletal pain
+      - Fatigue
+      - Sleep disturbance
+      - Cognitive difficulties (fibro fog)
+      - Multiple tender points
+      - Normal lab tests
+    icd10:
+      - M79.7
+    snomed:
+      - "203082005"
+
+  - id: RHEUM-VASCULITIS
+    label: Systemic Vasculitis
+    presentations:
+      - Fever and weight loss
+      - Purpura or skin ulcers
+      - Neuropathy
+      - Renal involvement
+      - Elevated inflammatory markers
+      - Organ-specific symptoms
+    icd10:
+      - M31.9
+      - M31.30
+    snomed:
+      - "31996006"

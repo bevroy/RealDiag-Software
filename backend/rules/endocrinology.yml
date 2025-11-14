@@ -121,3 +121,132 @@ rules:
     icd10:
       - E27.1    # Primary adrenocortical insufficiency
       - E27.40   # Unspecified adrenocortical insufficiency
+
+  - id: ENDO-CUSHINGS
+    label: Cushing's Syndrome
+    presentations:
+      - weight gain, central obesity
+      - moon facies, buffalo hump
+      - purple striae, easy bruising
+      - hypertension, hyperglycemia
+      - muscle weakness
+    icd10:
+      - E24.9    # Cushing's syndrome, unspecified
+    snomed:
+      - "47270006"   # Cushing syndrome
+
+  - id: ENDO-PHEOCHROMOCYTOMA
+    label: Pheochromocytoma
+    presentations:
+      - episodic headaches, sweating, palpitations
+      - hypertension (paroxysmal or sustained)
+      - elevated catecholamines
+      - adrenal mass on imaging
+    icd10:
+      - D35.00   # Benign neoplasm of adrenal gland
+    snomed:
+      - "302835009"  # Pheochromocytoma
+
+  - id: ENDO-ACROMEGALY
+    label: Acromegaly
+    presentations:
+      - enlarged hands, feet, facial features
+      - coarse facial features, prognathism
+      - headaches, visual field defects
+      - elevated IGF-1
+      - pituitary adenoma
+    icd10:
+      - E22.0    # Acromegaly and pituitary gigantism
+    snomed:
+      - "74107003"   # Acromegaly
+
+  - id: ENDO-HYPOPARATHYROIDISM
+    label: Hypoparathyroidism
+    presentations:
+      - hypocalcemia
+      - tetany, paresthesias, muscle cramps
+      - Chvostek's and Trousseau's signs
+      - seizures
+      - often post-surgical
+    icd10:
+      - E20.9    # Hypoparathyroidism, unspecified
+    snomed:
+      - "36976003"   # Hypoparathyroidism
+
+  - id: ENDO-OSTEOPOROSIS
+    label: Osteoporosis
+    presentations:
+      - decreased bone density
+      - fragility fractures
+      - vertebral compression fractures
+      - loss of height
+      - postmenopausal women at higher risk
+    icd10:
+      - M81.0    # Age-related osteoporosis without current pathological fracture
+    snomed:
+      - "64859006"   # Osteoporosis
+
+  - id: ENDO-PITUITARY-INSUFFICIENCY
+    label: Hypopituitarism
+    presentations:
+      - fatigue, weakness
+      - loss of libido, amenorrhea
+      - hypotension
+      - multiple hormone deficiencies
+      - may be due to tumor, surgery, radiation
+    icd10:
+      - E23.0    # Hypopituitarism
+    snomed:
+      - "74728003"   # Hypopituitarism
+
+  - id: ENDO-PROLACTINOMA
+    label: Prolactinoma
+    presentations:
+      - elevated prolactin
+      - galactorrhea, amenorrhea (women)
+      - erectile dysfunction, decreased libido (men)
+      - headaches, visual field defects
+      - pituitary adenoma on MRI
+    icd10:
+      - D35.2    # Benign neoplasm of pituitary gland
+    snomed:
+      - "253180008"  # Prolactinoma
+
+  - id: ENDO-SIADH
+    label: Syndrome of Inappropriate Antidiuretic Hormone (SIADH)
+    presentations:
+      - hyponatremia
+      - euvolemic state
+      - concentrated urine with low serum osmolality
+      - confusion, lethargy
+      - often due to medications, malignancy, CNS disorders
+    icd10:
+      - E22.2    # Syndrome of inappropriate secretion of antidiuretic hormone
+    snomed:
+      - "237754005"  # Syndrome of inappropriate ADH secretion
+
+  - id: ENDO-DIABETES-INSIPIDUS
+    label: Diabetes Insipidus
+    presentations:
+      - polyuria (large volume dilute urine)
+      - polydipsia
+      - dehydration
+      - hypernatremia
+      - low urine osmolality
+    icd10:
+      - E23.2    # Diabetes insipidus
+    snomed:
+      - "15771004"   # Diabetes insipidus
+
+  - id: ENDO-METABOLIC-SYNDROME
+    label: Metabolic Syndrome
+    presentations:
+      - central obesity
+      - hypertension
+      - hyperglycemia
+      - dyslipidemia
+      - increased cardiovascular risk
+    icd10:
+      - E88.81   # Metabolic syndrome
+    snomed:
+      - "237602007"  # Metabolic syndrome

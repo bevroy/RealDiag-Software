@@ -1,0 +1,197 @@
+rules:
+  - id: ID-SEPSIS
+    label: Sepsis and Septic Shock
+    presentations:
+      - Fever or hypothermia
+      - Tachycardia and tachypnea
+      - Hypotension
+      - Altered mental status
+      - Suspected or confirmed infection
+      - Elevated lactate
+    icd10:
+      - A41.9
+      - R65.21
+      - R65.20
+    snomed:
+      - "91302008"
+
+  - id: ID-UTI
+    label: Urinary Tract Infection
+    presentations:
+      - Dysuria
+      - Urinary frequency and urgency
+      - Suprapubic pain
+      - Hematuria
+      - Fever (if pyelonephritis)
+      - CVA tenderness (if pyelonephritis)
+    icd10:
+      - N39.0
+      - N30.00
+      - N10
+    snomed:
+      - "68566005"
+
+  - id: ID-CELLULITIS
+    label: Cellulitis
+    presentations:
+      - Erythema and warmth
+      - Swelling and tenderness
+      - Fever
+      - Regional lymphadenopathy
+      - Clearly demarcated borders (vs diffuse)
+    icd10:
+      - L03.90
+      - L03.115
+      - L03.119
+    snomed:
+      - "128045006"
+
+  - id: ID-MENINGITIS
+    label: Bacterial Meningitis
+    presentations:
+      - Severe headache
+      - Fever
+      - Neck stiffness
+      - Photophobia
+      - Altered mental status
+      - Kernig's or Brudzinski's sign
+    icd10:
+      - G00.9
+      - G03.9
+    snomed:
+      - "23572006"
+
+  - id: ID-ENCEPHALITIS
+    label: Viral Encephalitis
+    presentations:
+      - Fever
+      - Altered mental status
+      - Seizures
+      - Focal neurologic deficits
+      - Headache
+      - Behavioral changes
+    icd10:
+      - G04.90
+      - A86
+    snomed:
+      - "45170000"
+
+  - id: ID-COVID19
+    label: COVID-19
+    presentations:
+      - Fever or chills
+      - Cough
+      - Dyspnea
+      - Fatigue
+      - Loss of taste or smell
+      - Body aches
+      - Sore throat
+    icd10:
+      - U07.1
+      - J12.82
+    snomed:
+      - "840539006"
+
+  - id: ID-INFLUENZA
+    label: Influenza
+    presentations:
+      - Sudden onset fever
+      - Myalgias
+      - Headache
+      - Dry cough
+      - Sore throat
+      - Fatigue
+      - Seasonal pattern
+    icd10:
+      - J11.1
+      - J10.1
+    snomed:
+      - "6142004"
+
+  - id: ID-HIV
+    label: HIV/AIDS
+    presentations:
+      - Opportunistic infections
+      - Unexplained weight loss
+      - Persistent fever
+      - Chronic diarrhea
+      - Oral thrush
+      - Kaposi's sarcoma
+      - Low CD4 count
+    icd10:
+      - B20
+      - Z21
+    snomed:
+      - "86406008"
+
+  - id: ID-ENDOCARDITIS
+    label: Infective Endocarditis
+    presentations:
+      - Fever
+      - New heart murmur
+      - Petechiae or splinter hemorrhages
+      - Osler's nodes or Janeway lesions
+      - Embolic phenomena
+      - IV drug use or valve disease
+    icd10:
+      - I33.0
+      - I33.9
+    snomed:
+      - "56819008"
+
+  - id: ID-OSTEOMYELITIS
+    label: Osteomyelitis
+    presentations:
+      - Bone pain
+      - Fever
+      - Localized swelling and erythema
+      - Draining sinus tract
+      - History of trauma, surgery, or diabetic foot ulcer
+    icd10:
+      - M86.9
+      - M86.8X9
+    snomed:
+      - "60168000"
+
+  - id: ID-LYME
+    label: Lyme Disease
+    presentations:
+      - Erythema migrans (bulls-eye rash)
+      - Fever and chills
+      - Fatigue
+      - Headache
+      - Joint pain
+      - Tick exposure in endemic area
+    icd10:
+      - A69.20
+      - A69.23
+    snomed:
+      - "23502006"
+
+  - id: ID-MONONUCLEOSIS
+    label: Infectious Mononucleosis
+    presentations:
+      - Severe sore throat
+      - Fever
+      - Lymphadenopathy (especially posterior cervical)
+      - Splenomegaly
+      - Fatigue
+      - Atypical lymphocytes
+    icd10:
+      - B27.90
+    snomed:
+      - "271558008"
+
+  - id: ID-C-DIFF
+    label: Clostridioides difficile Infection
+    presentations:
+      - Watery diarrhea (≥3 stools/day)
+      - Abdominal cramping
+      - Fever
+      - Recent antibiotic use
+      - Leukocytosis
+    icd10:
+      - A04.7
+      - A04.72
+    snomed:
+      - "186431008"

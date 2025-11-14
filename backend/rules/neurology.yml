@@ -211,3 +211,148 @@ rules:
       - G12.21   # Amyotrophic lateral sclerosis
     snomed:
       - "86044005"   # Amyotrophic lateral sclerosis
+
+  - id: NEU-BELL-PALSY
+    label: Bell's Palsy
+    presentations:
+      - sudden unilateral facial weakness or paralysis
+      - inability to close eye on affected side
+      - loss of taste on anterior tongue
+      - hyperacusis
+      - often preceded by viral illness
+    icd10:
+      - G51.0    # Bell's palsy
+    snomed:
+      - "193093009"  # Bell's palsy
+
+  - id: NEU-CLUSTER-HEADACHE
+    label: Cluster Headache
+    presentations:
+      - severe unilateral periorbital pain
+      - lacrimation, rhinorrhea, ptosis, miosis
+      - restlessness during attacks
+      - occurs in clusters (daily attacks for weeks/months)
+      - more common in men
+    icd10:
+      - G44.009  # Cluster headache syndrome, unspecified
+    snomed:
+      - "193031009"  # Cluster headache
+
+  - id: NEU-PERIPHERAL-NEUROPATHY
+    label: Peripheral Neuropathy
+    presentations:
+      - numbness, tingling, burning in hands/feet
+      - weakness
+      - loss of reflexes
+      - stocking-glove distribution
+      - often due to diabetes, alcohol, or medications
+    icd10:
+      - G62.9    # Polyneuropathy, unspecified
+    snomed:
+      - "42658009"   # Peripheral neuropathy
+
+  - id: NEU-RESTLESS-LEG
+    label: Restless Legs Syndrome
+    presentations:
+      - urge to move legs, especially at rest
+      - uncomfortable sensations in legs
+      - symptoms worse in evening/night
+      - relief with movement
+      - disrupts sleep
+    icd10:
+      - G25.81   # Restless legs syndrome
+    snomed:
+      - "32914008"   # Restless legs syndrome
+
+  - id: NEU-ESSENTIAL-TREMOR
+    label: Essential Tremor
+    presentations:
+      - bilateral action tremor of hands
+      - head tremor (yes-yes or no-no)
+      - voice tremor
+      - improves with alcohol
+      - often family history
+    icd10:
+      - G25.0    # Essential tremor
+    snomed:
+      - "8943002"    # Essential tremor
+
+  - id: NEU-HYDROCEPHALUS
+    label: Hydrocephalus
+    presentations:
+      - headache, nausea, vomiting
+      - gait disturbance, cognitive decline, urinary incontinence (NPH triad)
+      - papilledema
+      - enlarged ventricles on imaging
+    icd10:
+      - G91.9    # Hydrocephalus, unspecified
+      - G91.2    # Normal pressure hydrocephalus
+    snomed:
+      - "230745008"  # Hydrocephalus
+
+  - id: NEU-BRAIN-TUMOR
+    label: Brain Tumor
+    presentations:
+      - headache (worse in morning)
+      - seizures
+      - focal neurological deficits
+      - personality changes
+      - nausea and vomiting
+      - papilledema
+    icd10:
+      - C71.9    # Malignant neoplasm of brain, unspecified
+      - D33.2    # Benign neoplasm of brain, unspecified
+    snomed:
+      - "126952004"  # Neoplasm of brain
+
+  - id: NEU-CONCUSSION
+    label: Concussion
+    presentations:
+      - head trauma with altered consciousness
+      - headache, confusion, amnesia
+      - dizziness, nausea
+      - may have delayed symptoms
+      - CT often normal
+    icd10:
+      - S06.0X0A  # Concussion without loss of consciousness
+    snomed:
+      - "110030002"  # Concussion injury of brain
+
+  - id: NEU-SPINAL-STENOSIS
+    label: Lumbar Spinal Stenosis
+    presentations:
+      - back pain radiating to legs
+      - neurogenic claudication (pain worse with walking, standing)
+      - relief with sitting or leaning forward
+      - numbness in legs
+      - typically older adults
+    icd10:
+      - M48.06   # Spinal stenosis, lumbar region
+    snomed:
+      - "18347007"   # Spinal stenosis
+
+  - id: NEU-SCIATICA
+    label: Sciatica
+    presentations:
+      - radiating pain from lower back to leg
+      - follows sciatic nerve distribution
+      - numbness, tingling, weakness
+      - often due to herniated disc
+      - positive straight leg raise test
+    icd10:
+      - M54.30   # Sciatica, unspecified side
+    snomed:
+      - "23056005"   # Sciatica
+
+  - id: NEU-NARCOLEPSY
+    label: Narcolepsy
+    presentations:
+      - excessive daytime sleepiness
+      - cataplexy (sudden muscle weakness with emotion)
+      - sleep paralysis
+      - hypnagogic hallucinations
+      - automatic behaviors
+    icd10:
+      - G47.419  # Narcolepsy without cataplexy
+    snomed:
+      - "60380001"   # Narcolepsy
