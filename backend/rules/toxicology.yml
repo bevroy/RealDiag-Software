@@ -1,50 +1,92 @@
 rules:
   - id: TOX-ACETAMINOPHEN-OD
-    label: Acetaminophen Overdose
+    label: Acetaminophen (Tylenol) Overdose
     presentations:
-      - Stage 1 (0-24h) - nausea, vomiting, malaise, or asymptomatic
-      - Stage 2 (24-72h) - RUQ pain, elevated AST/ALT
-      - Stage 3 (72-96h) - hepatic failure, jaundice, coagulopathy, encephalopathy
-      - Stage 4 (>96h) - recovery or death
-      - History of ingestion > 150 mg/kg or > 7.5g in adults
-      - Check acetaminophen level at 4 hours post-ingestion
-      - Treat with N-acetylcysteine (NAC)
+      - Stage 1 (0-24h): Nausea, vomiting, malaise, or asymptomatic (most common presentation)
+      - Stage 2 (24-72h): RUQ pain, rising AST/ALT (>1000), elevated INR
+      - Stage 3 (72-96h): Hepatic failure (peak transaminases), jaundice, coagulopathy, encephalopathy, lactic acidosis
+      - Stage 4 (4 days-2 weeks): Recovery or death from liver failure
+      - Toxic dose: >150 mg/kg (child) or >7.5g total (adult) in single acute ingestion
+      - Chronic toxicity: >4g/day for several days (alcoholics, malnourished at higher risk)
+      - Many patients asymptomatic initially despite lethal dose
+    clinical_pearls:
+      - "4-hour acetaminophen level: Plot on Rumack-Matthew nomogram to determine treatment need"
+      - "NAC (N-acetylcysteine) = antidote: Most effective if started <8hr, but give up to 24hr or beyond if elevated AST/ALT"
+      - "NAC dosing: 150 mg/kg IV load over 1hr, then 50 mg/kg over 4hr, then 100 mg/kg over 16hr (total 21hr protocol)"
+      - "Oral NAC alternative: 140 mg/kg load, then 70 mg/kg q4h ×17 doses (can use if IV unavailable)"
+      - "If level >150 mcg/mL at 4hr or >75 at 8hr or >35 at 12hr → treatment line, give NAC"
+      - "Check AST/ALT, INR: If elevated despite NAC, continue NAC until transaminases downtrending and INR <2"
+    management:
+      - "Immediate: Acetaminophen level at 4hr post-ingestion (earlier levels unreliable), AST/ALT, INR, consider activated charcoal if <1hr"
+      - "Plot level on Rumack-Matthew nomogram: If above treatment line or unknown time, start NAC"
+      - "NAC IV protocol: 150 mg/kg in 200mL D5W over 1hr, then 50 mg/kg in 500mL over 4hr, then 100 mg/kg in 1L over 16hr"
+      - "Monitor: Serial AST/ALT, INR q12-24h, continue NAC if transaminases rising or INR elevated"
+      - "Disposition: Admit if NAC needed, psychiatry consult if intentional, liver transplant evaluation if fulminant hepatic failure"
     icd10:
-      - T39.1X1A
+      - T39.1X1A  # Poisoning by 4-Aminophenol derivatives, accidental, initial
+      - T39.1X2A  # Poisoning by 4-Aminophenol derivatives, intentional self-harm, initial
     snomed:
-      - 86977007
+      - "86977007"  # Acetaminophen poisoning
 
   - id: TOX-SALICYLATE
     label: Salicylate Toxicity (Aspirin Overdose)
     presentations:
-      - Tinnitus, hearing loss
-      - Nausea, vomiting
-      - Tachypnea, hyperpnea (respiratory alkalosis)
-      - Altered mental status, confusion
-      - Fever, diaphoresis
-      - Mixed acid-base disorder (respiratory alkalosis + metabolic acidosis)
-      - Elevated salicylate level
-      - Treatment - alkalinize urine, hemodialysis if severe
+      - Tinnitus, hearing loss (earliest symptoms, occur at therapeutic levels 20-30 mg/dL)
+      - Nausea, vomiting, epigastric pain
+      - Tachypnea, hyperpnea (respiratory alkalosis from direct medullary stimulation)
+      - Altered mental status, confusion, agitation, lethargy
+      - Fever, diaphoresis (uncouples oxidative phosphorylation)
+      - Mixed acid-base disorder: Respiratory alkalosis (early) + metabolic acidosis (late, severe)
+      - Chronic toxicity: Elderly, subtle symptoms, higher mortality
+      - Toxic level: >30 mg/dL (acute), >20 mg/dL (chronic)
+    clinical_pearls:
+      - "Mixed acid-base disorder = hallmark: Respiratory alkalosis + anion gap metabolic acidosis"
+      - "Urine alkalinization (pH 7.5-8): Traps ionized salicylate in urine, increases renal clearance"
+      - "Hemodialysis indications: Level >100 mg/dL, severe acidosis (pH <7.2), altered mental status, pulmonary edema, renal failure"
+      - "Chronic toxicity more dangerous: Lower levels cause more toxicity (>20 mg/dL), often missed diagnosis"
+      - "Do NOT give aspirin-containing products for symptom relief (obviously)"
+      - "Check serial levels q2-4h: Delayed absorption with enteric-coated or sustained-release formulations"
+    management:
+      - "Immediate: Salicylate level, VBG (pH), BMP (anion gap), glucose, activated charcoal if <1hr, consider whole bowel irrigation if sustained-release"
+      - "Urine alkalinization: 3 amps (150 mEq) NaHCO3 in 1L D5W at 150-250 mL/hr, target urine pH 7.5-8"
+      - "Avoid intubation if possible: Hypoventilation worsens acidosis and increases CNS salicylate"
+      - "Hemodialysis: If level >100, pH <7.2, altered mental status, pulmonary edema, or refractory despite alkalinization"
+      - "Disposition: ICU if severe (level >80, acidosis, altered MS), nephrology for dialysis, serial levels until downtrending"
     icd10:
-      - T39.011A
+      - T39.011A  # Poisoning by aspirin, accidental, initial
+      - T39.012A  # Poisoning by aspirin, intentional self-harm, initial
     snomed:
-      - 292044008
+      - "292044008"  # Salicylate poisoning
 
   - id: TOX-OPIOID-OD
     label: Opioid Overdose
     presentations:
-      - Decreased level of consciousness, unresponsive
-      - Respiratory depression (RR < 12)
-      - Miosis (pinpoint pupils)
+      - Decreased level of consciousness, unresponsive or obtunded
+      - Respiratory depression: RR <12, shallow breathing, apnea
+      - Miosis: Pinpoint pupils (classic triad with CNS depression and respiratory depression)
       - Bradycardia, hypotension
-      - Cyanosis
-      - Track marks or other signs of drug use
-      - Responds to naloxone (Narcan)
-      - Risk of recurrence after naloxone wears off
+      - Cyanosis, hypoxia (SpO2 <90%)
+      - Track marks, nasal insufflation evidence, or drug paraphernalia
+      - Responds dramatically to naloxone (diagnostic and therapeutic)
+      - Risk factors: Fentanyl (very potent), polypharmacy (benzos + opioids), resuming use after abstinence
+    clinical_pearls:
+      - "Airway management FIRST: Bag-valve-mask ventilation more important than naloxone initially"
+      - "Naloxone dosing: 0.04-0.4mg IV/IM/IN, repeat q2-3min (max 10mg), titrate to respiratory effort NOT full consciousness"
+      - "Goal: Adequate respirations (RR >10), NOT full alertness (avoid precipitating severe withdrawal)"
+      - "Fentanyl: May need higher/repeat naloxone doses (very potent, long-acting)"
+      - "Observe 4-6 hours: Naloxone half-life shorter than most opioids, re-sedation common"
+      - "Naloxone drip: If repeated boluses needed, 2/3 of total reversal dose per hour IV infusion"
+    management:
+      - "Immediate: Airway (bag-valve-mask if apneic), naloxone 0.4mg IV/IM/intranasal, repeat q2-3min PRN"
+      - "Titrate naloxone: Goal RR >10, adequate ventilation (not full alertness - avoid withdrawal)"
+      - "If IV access difficult: Intranasal naloxone 2-4mg (Narcan spray) or IM 0.4-2mg"
+      - "Continuous monitoring: Pulse ox, cardiac monitor, serial neuro exams"
+      - "Disposition: Observe 4-6hr minimum (re-sedation risk), naloxone drip if recurrent, psychiatry if intentional, addiction resources"
     icd10:
-      - T40.2X1A
+      - T40.2X1A  # Poisoning by other opioids, accidental, initial
+      - T40.2X2A  # Poisoning by other opioids, intentional self-harm, initial
     snomed:
-      - 292044008
+      - "292044008"  # Drug overdose
 
   - id: TOX-ALCOHOL-WITHDRAWAL
     label: Alcohol Withdrawal Syndrome
@@ -65,16 +107,29 @@ rules:
   - id: TOX-SEROTONIN-SYNDROME
     label: Serotonin Syndrome
     presentations:
-      - Mental status changes (agitation, confusion)
-      - Autonomic instability (tachycardia, hypertension, hyperthermia, diaphoresis)
-      - Neuromuscular hyperactivity (tremor, clonus, hyperreflexia, rigidity)
-      - Recent increase in serotonergic medications (SSRIs, SNRIs, MAOIs, tramadol)
-      - Mydriasis (dilated pupils)
-      - Treatment - stop offending agents, supportive care, cyproheptadine
+      - Mental status changes: Agitation, confusion, restlessness
+      - Autonomic instability: Tachycardia, hypertension (not hypotension), hyperthermia (38-41°C), diaphoresis, mydriasis
+      - Neuromuscular hyperactivity: Tremor, clonus (spontaneous/inducible/ocular), hyperreflexia, muscle rigidity (MORE in lower extremities)
+      - Recent increase/addition of serotonergic agent: SSRIs, SNRIs, MAOIs, tramadol, linezolid, ondansetron, dextromethorphan
+      - Onset: Typically within 24 hours of medication change
+      - Hunter Criteria: More sensitive than Sternbach criteria for diagnosis
+    clinical_pearls:
+      - "Hunter Criteria (requires serotonergic agent + one of): Spontaneous clonus, inducible clonus + agitation/diaphoresis, ocular clonus + agitation/diaphoresis, tremor + hyperreflexia, hypertonia + temp >38 + ocular clonus/inducible clonus"
+      - "Clonus = KEY finding: Inducible ankle clonus most specific, test by rapid dorsiflexion"
+      - "Differentiate from NMS: SS = hyperreflexia/clonus, NMS = hyporeflexia/lead-pipe rigidity"
+      - "Stop offending agents immediately: Improvement typically within 24 hours"
+      - "Cyproheptadine (5-HT2A antagonist): 12mg load, then 8mg q6h (max 32mg/day)"
+      - "Avoid antipsychotics: Can worsen or cause NMS"
+    management:
+      - "Immediate: Stop all serotonergic agents, supportive care (cooling, fluids, sedation with benzos)"
+      - "Benzodiazepines: Lorazepam 1-2mg IV for agitation, tremor, rigidity"
+      - "Cyproheptadine: 12mg PO load (can crush and give via NG), then 8mg PO q6h"
+      - "Severe cases: ICU admission, intubation for hyperthermia >41°C, paralysis with non-depolarizing agent (rocuronium)"
+      - "Disposition: Mild (outpatient after observation), moderate-severe (admit for monitoring 24-48hr), psychiatry medication reconciliation"
     icd10:
-      - G93.89
+      - G93.89   # Other specified disorders of brain (serotonin syndrome)
     snomed:
-      - 35434009
+      - "35434009"  # Serotonin syndrome
 
   - id: TOX-NEUROLEPTIC-MALIGNANT-SYNDROME
     label: Neuroleptic Malignant Syndrome (NMS)
@@ -108,18 +163,32 @@ rules:
       - 31341008
 
   - id: TOX-TRICYCLIC-ANTIDEPRESSANT
-    label: Tricyclic Antidepressant Overdose
+    label: Tricyclic Antidepressant (TCA) Overdose
     presentations:
-      - Anticholinergic symptoms (dry mouth, dilated pupils, urinary retention, ileus)
-      - CNS depression, seizures, coma
-      - Cardiac toxicity (wide QRS, prolonged QT, ventricular arrhythmias)
-      - Hypotension
-      - ECG shows QRS > 100ms, terminal R wave in aVR
-      - Treatment - sodium bicarbonate for cardiac toxicity, supportive care
+      - Anticholinergic toxidrome: Dry mouth, mydriasis (dilated pupils), urinary retention, decreased bowel sounds, hyperthermia
+      - CNS: Altered mental status, agitation → sedation → seizures → coma
+      - Cardiac toxicity (MOST DANGEROUS): Wide QRS (>100ms), prolonged QT, ventricular arrhythmias (VT, VF), hypotension
+      - ECG findings: QRS >100ms, terminal R wave in aVR >3mm, rightward QRS axis
+      - Seizures (10-20%, often precede cardiac arrest)
+      - Rapid deterioration: Can go from awake to arrest in minutes
+    clinical_pearls:
+      - "QRS >100ms = HIGH RISK for arrhythmias and seizures, requires sodium bicarbonate"
+      - "Terminal R wave in aVR >3mm = specific for TCA toxicity"
+      - "Sodium bicarbonate = FIRST-LINE for cardiac toxicity: Give for QRS >100ms or arrhythmias"
+      - "NaHCO3 mechanism: Overcomes sodium channel blockade (alkalinization + sodium loading)"
+      - "Avoid Class Ia/Ic antiarrhythmics: Worsen sodium channel blockade (procainamide, quinidine)"
+      - "Seizures: Benzodiazepines first-line, avoid phenytoin (also blocks sodium channels)"
+    management:
+      - "Immediate: Continuous cardiac monitoring, IV access, 12-lead ECG (look for QRS >100ms, terminal R in aVR)"
+      - "Sodium bicarbonate: 1-2 mEq/kg (1-2 amps) IV bolus if QRS >100ms or arrhythmias, repeat until QRS <100ms"
+      - "Target serum pH 7.50-7.55: Start NaHCO3 infusion (3 amps in 1L D5W at 150-200 mL/hr)"
+      - "Seizures: Benzodiazepines (lorazepam 2-4mg IV), avoid phenytoin"
+      - "Disposition: ICU admission, continuous telemetry for 24hr after QRS normalizes, psychiatry consult if intentional"
     icd10:
-      - T43.011A
+      - T43.011A  # Poisoning by tricyclic antidepressants, accidental, initial
+      - T43.012A  # Poisoning by tricyclic antidepressants, intentional self-harm, initial
     snomed:
-      - 292044008
+      - "292044008"  # Drug poisoning
 
   - id: TOX-BENZODIAZEPINE-OD
     label: Benzodiazepine Overdose

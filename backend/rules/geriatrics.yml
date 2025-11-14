@@ -32,32 +32,63 @@ rules:
       - 429998004
 
   - id: GER-DELIRIUM
-    label: Delirium
+    label: Delirium (Acute Confusional State)
     presentations:
-      - Acute change in mental status
-      - Fluctuating consciousness
-      - Inattention
-      - Disorganized thinking
-      - Often reversible with treatment
-      - Precipitated by infection, medication, etc
+      - Acute change in mental status (hours to days, not weeks/months like dementia)
+      - Fluctuating level of consciousness (waxes and wanes throughout day)
+      - Inattention: Inability to focus, easily distracted, trouble tracking conversation
+      - Disorganized thinking: Rambling, illogical, tangential speech
+      - Altered level of consciousness: Hyperalert (hyperactive) or lethargic (hypoactive)
+      - Perceptual disturbances: Visual hallucinations, delusions
+      - Hypoactive delirium (most common in elderly): Withdrawn, quiet, easily missed
+      - Often reversible if underlying cause treated
+    clinical_pearls:
+      - "CAM criteria (Confusion Assessment Method): (1) Acute onset + fluctuating AND (2) Inattention AND (3) Disorganized thinking OR (4) Altered LOC"
+      - "Hyperactive (25%): Agitated, restless, hallucinations - easily recognized"
+      - "Hypoactive (50%): Lethargic, withdrawn, quiet - often MISSED, higher mortality"
+      - "Mixed (25%): Alternates between hyperactive and hypoactive"
+      - "Common causes: Infection (UTI, pneumonia), medications (anticholinergics, benzos, opioids), metabolic (hyponatremia, hypoglycemia), hypoxia, pain"
+      - "Do NOT treat with antipsychotics first: Find and treat underlying cause, use non-pharm interventions"
+    management:
+      - "Workup: Infection screen (UA, CXR, blood cultures), metabolics (BMP, Ca, glucose), medication review, ECG, consider CT head"
+      - "Identify and treat cause: Antibiotics for infection, stop offending meds, correct metabolic abnormalities"
+      - "Non-pharmacologic: Reorient frequently, familiar objects, glasses/hearing aids, minimize restraints, lights on during day/off at night"
+      - "Medications (LAST resort): Haloperidol 0.5-1mg PO/IM (hyperactive only), avoid benzos (worsen), avoid if possible"
+      - "Disposition: Admit if cannot identify/treat cause outpatient, high fall risk, unable to care for self at home"
     icd10:
-      - R41.0
+      - R41.0     # Disorientation, unspecified
+      - F05       # Delirium due to known physiological condition
     snomed:
-      - 2776000
+      - "2776000"  # Delirium
 
   - id: GER-FALLS
     label: Recurrent Falls (Geriatric Syndrome)
     presentations:
-      - Two or more falls in past year
-      - Gait instability
-      - Balance impairment
-      - Fear of falling
-      - Multiple risk factors (meds, vision, environment)
-      - May result in injury
+      - Two or more falls in past 12 months, or 1 fall with injury requiring medical attention
+      - Gait instability: Shuffling, wide-based, slow speed, difficulty turning
+      - Balance impairment: Unable to tandem walk, Romberg positive, difficulty with chair rises
+      - Fear of falling (FOF): Limits activities, social isolation, deconditioning
+      - Intrinsic risk factors: Age >80, prior falls, muscle weakness, vision impairment, cognitive impairment
+      - Extrinsic risk factors: Polypharmacy (>4 meds), environmental hazards (rugs, poor lighting)
+      - May result in fractures (hip, wrist), head injury, inability to get up ("long lie")
+    clinical_pearls:
+      - "Fall assessment: Ask ALL patients >65: 'Have you fallen in the past year?'"
+      - "Get Up and Go test: Time patient standing from chair, walking 10 feet, turning, walking back, sitting - >12 sec = high risk"
+      - "High-risk medications: Sedatives (benzos, antihistamines), antihypertensives, psychotropics"
+      - "Multifactorial intervention: Exercise (strength + balance), medication review, vision correction, home safety"
+      - "Vitamin D 800-1000 IU daily: Reduces falls by 20% in elderly"
+      - "Hip protectors: Consider for nursing home residents with high fall risk"
+    management:
+      - "History: Circumstances of fall, loss of consciousness, prodrome, injuries, witnesses"
+      - "Physical exam: Orthostatic vitals, vision screen, gait/balance testing, neurologic exam, foot exam"
+      - "Labs: CBC (anemia), BMP (dehydration), vitamin D, consider ECG/Holter if syncope suspected"
+      - "Interventions: PT/OT referral (strengthening, balance, assistive device), medication review (stop/reduce high-risk meds), vision correction, home safety evaluation"
+      - "Disposition: Admit if fall with injury, syncope, unable to mobilize safely; outpatient if low-risk with close follow-up"
     icd10:
-      - R29.6
+      - R29.6     # Repeated falls
+      - Z91.81    # History of falling
     snomed:
-      - 161898004
+      - "161898004"  # Falls
 
   - id: GER-URINARY-INCONTINENCE
     label: Urinary Incontinence (Geriatric)
@@ -76,16 +107,31 @@ rules:
   - id: GER-POLYPHARMACY
     label: Polypharmacy and Adverse Drug Reactions
     presentations:
-      - Taking 5 or more medications
-      - Confusion or falls from medications
-      - Drug-drug interactions
-      - Inappropriate medications for elderly
-      - Medication non-adherence
-      - Adverse drug events
+      - Taking ≥5 medications regularly (some definitions use ≥10)
+      - Confusion, falls, or cognitive decline from medications
+      - Drug-drug interactions (e.g., warfarin + NSAIDs, SSRIs + tramadol)
+      - Potentially inappropriate medications (PIMs) for elderly (Beers criteria)
+      - Medication non-adherence (too many meds, cost, confusion)
+      - Adverse drug events (ADEs): Falls, delirium, GI bleed, renal injury
+      - Anticholinergic burden: Cumulative anticholinergic effects (dry mouth, constipation, urinary retention, confusion)
+    clinical_pearls:
+      - "Beers Criteria = PIMs to avoid in elderly: Anticholinergics (diphenhydramine, hydroxyzine), benzos, NSAIDs, PPIs long-term, sliding scale insulin"
+      - "STOPP/START: STOPP = potentially inappropriate meds to stop, START = beneficial meds to start"
+      - "Deprescribing: Systematically reduce/stop meds, prioritize those causing ADEs or no clear benefit"
+      - "Anticholinergic burden scale: Each anticholinergic med increases fall/delirium risk cumulatively"
+      - "Medication reconciliation at EVERY visit: Brown bag review (bring all meds/supplements)"
+      - "Start low, go slow: Elderly more sensitive to medications (reduced renal clearance, altered pharmacodynamics)"
+    management:
+      - "Comprehensive medication review: List all prescriptions, OTC, supplements, herbals"
+      - "Identify PIMs: Use Beers criteria or STOPP/START, flag anticholinergics, sedatives, high-risk meds"
+      - "Deprescribing plan: Stop 1 med at a time, taper if needed (benzos, opioids, PPIs), monitor for withdrawal/rebound"
+      - "Simplify regimen: Once-daily dosing preferred, pill organizers, medication list with indications"
+      - "Disposition: Outpatient management with close follow-up, pharmacist consult, geriatrician referral if complex"
     icd10:
-      - Z91.89
+      - Z91.89    # Other specified personal risk factors
+      - Z79.899   # Other long-term drug therapy
     snomed:
-      - 723400009
+      - "723400009"  # Polypharmacy
 
   - id: GER-OSTEOPOROSIS
     label: Osteoporosis
