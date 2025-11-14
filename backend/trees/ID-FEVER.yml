@@ -1,0 +1,343 @@
+tree_id: ID-FEVER
+name: Fever Workup
+description: Decision tree for evaluating fever and sepsis screening
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["fever", "elevated temperature", "chills", "rigors"]
+    tests:
+      - Temperature measurement
+      - Vital signs (BP, HR, RR, O2 sat)
+      - Physical examination
+      - Consider blood cultures
+      - CBC with differential
+      - CRP or ESR
+    suggest_dx:
+      - Infection (source to be determined)
+    referrals:
+      - Emergency evaluation if unstable
+    trace:
+      - "Fever evaluation - assess severity and sepsis risk"
+    next:
+      - node: sepsis_screening
+        if:
+          any_of:
+            - red_flags_any: ["hypotension", "altered mental status", "hypoxia", "tachycardia", "tachypnea"]
+            - exam_flags_any: ["systolic BP < 90", "HR > 100", "RR > 22", "temperature > 38.3°C"]
+      - node: localized_infection
+        default: true
+
+  sepsis_screening:
+    when:
+      any_of:
+        - red_flags_any: ["hypotension", "altered mental status", "severe sepsis", "septic shock"]
+        - exam_flags_any: ["SIRS criteria met", "lactate > 2", "organ dysfunction"]
+    tests:
+      - Blood cultures (x2 from different sites)
+      - Lactate level
+      - CBC, CMP, coagulation studies
+      - Urinalysis and urine culture
+      - Chest X-ray
+      - Procalcitonin
+      - Consider CT abdomen/pelvis if abdominal source
+    suggest_dx:
+      - ID-SEPSIS
+      - Septic shock
+      - Source: pneumonia, UTI, intra-abdominal, skin/soft tissue, meningitis
+    referrals:
+      - ICU admission if septic shock
+      - Infectious disease consult
+      - Early goal-directed therapy
+    trace:
+      - "SEPSIS ALERT - initiate sepsis bundle"
+    next:
+      - node: sepsis_management
+        if:
+          red_flags_any: ["hypotension despite fluids", "lactate > 4", "organ failure"]
+      - node: source_identification
+        default: true
+
+  sepsis_management:
+    when:
+      red_flags_any: ["septic shock", "hypotension", "high lactate", "multi-organ dysfunction"]
+    tests:
+      - Serial lactate measurements
+      - Central line for vasopressors
+      - Continuous monitoring
+      - Echocardiogram if cardiogenic component
+    suggest_dx:
+      - ID-SEPSIS (severe)
+      - Septic shock
+    referrals:
+      - ICU admission STAT
+      - Critical care team
+      - Infectious disease consult
+    trace:
+      - "Septic shock management - resuscitation and source control"
+    next: []
+
+  source_identification:
+    when:
+      symptoms_contains_any: ["fever", "infection symptoms"]
+    tests:
+      - History and physical for source localization
+      - Imaging based on suspected source
+      - Cultures from all potential sources
+    suggest_dx:
+      - Infection (source-specific)
+    referrals:
+      - Appropriate specialist based on source
+    trace:
+      - "Identify infection source for targeted therapy"
+    next:
+      - node: respiratory_source
+        if:
+          any_of:
+            - symptoms_contains_any: ["cough", "dyspnea", "chest pain"]
+            - exam_flags_any: ["crackles", "decreased breath sounds", "tachypnea"]
+      - node: urinary_source
+        if:
+          any_of:
+            - symptoms_contains_any: ["dysuria", "frequency", "flank pain", "suprapubic pain"]
+            - exam_flags_any: ["CVA tenderness", "suprapubic tenderness"]
+      - node: abdominal_source
+        if:
+          any_of:
+            - symptoms_contains_any: ["abdominal pain", "nausea", "vomiting", "diarrhea"]
+            - exam_flags_any: ["abdominal tenderness", "peritoneal signs", "guarding"]
+      - node: skin_soft_tissue
+        if:
+          any_of:
+            - symptoms_contains_any: ["skin redness", "swelling", "wound"]
+            - exam_flags_any: ["erythema", "warmth", "fluctuance", "abscess"]
+      - node: cns_source
+        if:
+          any_of:
+            - symptoms_contains_any: ["headache", "neck stiffness", "altered mental status", "photophobia"]
+            - exam_flags_any: ["nuchal rigidity", "altered mental status", "focal neurologic deficit"]
+      - node: fever_without_source
+        default: true
+
+  respiratory_source:
+    when:
+      any_of:
+        - symptoms_contains_any: ["cough", "dyspnea", "chest pain", "sputum production"]
+        - exam_flags_any: ["crackles", "decreased breath sounds", "dullness to percussion"]
+    tests:
+      - Chest X-ray
+      - Sputum culture (if productive)
+      - Blood cultures
+      - Consider CT chest if complicated
+      - Respiratory viral panel (if influenza season)
+    suggest_dx:
+      - ID-PNEUMONIA
+      - ID-INFLUENZA
+      - Bronchitis
+      - Empyema
+    referrals:
+      - Pulmonology if complicated
+      - Admission if severe pneumonia (PSI/CURB-65)
+    trace:
+      - "Respiratory source identified - pneumonia workup"
+    next: []
+
+  urinary_source:
+    when:
+      any_of:
+        - symptoms_contains_any: ["dysuria", "frequency", "urgency", "flank pain"]
+        - exam_flags_any: ["CVA tenderness", "suprapubic tenderness"]
+    tests:
+      - Urinalysis
+      - Urine culture
+      - Blood cultures if pyelonephritis suspected
+      - Renal ultrasound if obstruction suspected
+      - Consider CT abdomen/pelvis
+    suggest_dx:
+      - ID-UTI
+      - Pyelonephritis
+      - Urosepsis
+      - Complicated UTI
+    referrals:
+      - Urology if obstruction or recurrent
+      - Admission if severe pyelonephritis
+    trace:
+      - "Urinary source identified - UTI/pyelonephritis workup"
+    next: []
+
+  abdominal_source:
+    when:
+      any_of:
+        - symptoms_contains_any: ["abdominal pain", "nausea", "vomiting", "diarrhea"]
+        - exam_flags_any: ["abdominal tenderness", "peritoneal signs", "RUQ tenderness", "RLQ tenderness"]
+    tests:
+      - CBC, CMP, lipase
+      - Blood cultures
+      - CT abdomen/pelvis with contrast
+      - RUQ ultrasound if cholecystitis suspected
+      - Stool cultures if diarrhea
+    suggest_dx:
+      - GI-APPENDICITIS
+      - GI-CHOLECYSTITIS
+      - GI-DIVERTICULITIS
+      - GI-PANCREATITIS (infectious complications)
+      - Intra-abdominal abscess
+    referrals:
+      - General surgery if surgical abdomen
+      - GI consult
+      - Admission for IV antibiotics
+    trace:
+      - "Abdominal source identified - surgical vs medical"
+    next: []
+
+  skin_soft_tissue:
+    when:
+      any_of:
+        - symptoms_contains_any: ["skin redness", "swelling", "pain", "wound"]
+        - exam_flags_any: ["erythema", "warmth", "fluctuance", "purulent drainage"]
+    tests:
+      - Wound culture
+      - Blood cultures if systemic
+      - Imaging if deep infection suspected (US, MRI)
+      - X-ray if osteomyelitis concern
+    suggest_dx:
+      - ID-CELLULITIS
+      - Abscess
+      - Necrotizing fasciitis (if crepitus, severe pain)
+      - ID-OSTEOMYELITIS
+    referrals:
+      - Surgical evaluation if abscess needs drainage
+      - Emergency surgery if necrotizing fasciitis
+      - Admission for IV antibiotics
+    trace:
+      - "Skin/soft tissue source - cellulitis vs abscess"
+    next:
+      - node: necrotizing_infection
+        if:
+          any_of:
+            - red_flags_any: ["severe pain out of proportion", "crepitus", "skin necrosis", "bullae"]
+            - exam_flags_any: ["rapid progression", "systemic toxicity"]
+
+  necrotizing_infection:
+    when:
+      any_of:
+        - red_flags_any: ["severe pain out of proportion", "crepitus", "skin necrosis"]
+        - exam_flags_any: ["rapid spread", "bullae", "systemic toxicity"]
+    tests:
+      - STAT surgical consult
+      - CT or MRI to assess depth
+      - Lactate, CK (elevated if myonecrosis)
+      - Blood cultures
+    suggest_dx:
+      - Necrotizing fasciitis
+      - Gas gangrene
+    referrals:
+      - Emergency surgical debridement STAT
+      - ICU admission
+      - Infectious disease consult
+    trace:
+      - "NECROTIZING INFECTION ALERT - urgent surgery required"
+    next: []
+
+  cns_source:
+    when:
+      any_of:
+        - symptoms_contains_any: ["headache", "neck stiffness", "altered mental status", "photophobia", "seizure"]
+        - exam_flags_any: ["nuchal rigidity", "Kernig sign", "Brudzinski sign", "altered mental status"]
+    tests:
+      - CT head (rule out mass lesion before LP)
+      - Lumbar puncture (opening pressure, cell count, glucose, protein, gram stain, culture)
+      - Blood cultures
+      - Consider MRI brain
+    suggest_dx:
+      - ID-BACTERIAL-MENINGITIS
+      - ID-VIRAL-MENINGITIS
+      - Encephalitis
+      - Brain abscess
+    referrals:
+      - Neurology consult
+      - Infectious disease consult
+      - ICU if severe or altered mental status
+    trace:
+      - "CNS infection suspected - LP after imaging"
+    next:
+      - node: bacterial_meningitis
+        if:
+          red_flags_any: ["altered mental status", "seizure", "focal neurologic deficit", "papilledema"]
+
+  bacterial_meningitis:
+    when:
+      any_of:
+        - red_flags_any: ["altered mental status", "seizure", "petechial rash"]
+        - exam_flags_any: ["nuchal rigidity", "Kernig sign", "Brudzinski sign"]
+    tests:
+      - Blood cultures x2
+      - CT head before LP if altered mental status or focal deficit
+      - Lumbar puncture (elevated protein, low glucose, high WBC with PMN predominance)
+      - Gram stain and culture
+    suggest_dx:
+      - ID-BACTERIAL-MENINGITIS
+      - Meningococcemia
+    referrals:
+      - STAT empiric antibiotics (do NOT delay for imaging)
+      - Neurology consult
+      - ICU admission
+      - Infectious disease consult
+    trace:
+      - "BACTERIAL MENINGITIS - empiric antibiotics immediately"
+    next: []
+
+  fever_without_source:
+    when:
+      symptoms_contains_any: ["fever"]
+    tests:
+      - Comprehensive history (travel, exposures, medications, immunosuppression)
+      - Complete physical examination
+      - CBC, CMP, UA, blood cultures
+      - Chest X-ray
+      - Consider HIV testing, TB testing, autoimmune workup
+      - Consider CT chest/abdomen/pelvis
+    suggest_dx:
+      - Viral syndrome
+      - Drug fever
+      - Occult infection
+      - Autoimmune disease
+      - Malignancy
+    referrals:
+      - Infectious disease consult if prolonged
+      - Consider rheumatology or hematology
+      - Admission if ill-appearing or immunocompromised
+    trace:
+      - "Fever without localizing source - broad workup"
+    next:
+      - node: immunocompromised_fever
+        if:
+          any_of:
+            - symptoms_contains_any: ["HIV", "chemotherapy", "transplant", "immunosuppression"]
+            - exam_flags_any: ["neutropenia", "ANC < 500"]
+
+  immunocompromised_fever:
+    when:
+      any_of:
+        - symptoms_contains_any: ["immunosuppression", "chemotherapy", "transplant", "HIV"]
+        - exam_flags_any: ["neutropenia", "ANC < 500", "CD4 < 200"]
+    tests:
+      - Blood cultures (bacterial and fungal)
+      - Comprehensive infectious workup
+      - Chest X-ray or CT chest
+      - Consider galactomannan, beta-D-glucan
+      - CMV, EBV viral loads if post-transplant
+    suggest_dx:
+      - Febrile neutropenia
+      - Opportunistic infection
+      - Fungal infection
+      - CMV, PJP if HIV
+    referrals:
+      - STAT infectious disease consult
+      - Hematology/oncology
+      - Admission for empiric broad-spectrum antibiotics
+    trace:
+      - "Immunocompromised host with fever - empiric broad antibiotics"
+    next: []

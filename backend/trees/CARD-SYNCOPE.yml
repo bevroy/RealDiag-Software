@@ -1,0 +1,294 @@
+tree_id: CARD-SYNCOPE
+name: Syncope Evaluation
+description: Decision tree for evaluating syncope and loss of consciousness
+version: "1.0"
+entry_point: initial_triage
+
+nodes:
+  initial_triage:
+    when:
+      symptoms_contains_any: ["syncope", "loss of consciousness", "fainting", "blackout", "passing out"]
+    tests:
+      - Vital signs (orthostatic BP and HR)
+      - 12-lead ECG
+      - Point-of-care glucose
+      - Focused physical examination
+      - Detailed history (prodrome, during event, post-event)
+    suggest_dx:
+      - Syncope (cause to be determined)
+    referrals:
+      - Emergency evaluation if cardiac etiology suspected
+    trace:
+      - "Syncope triage - distinguish syncope from other LOC causes"
+    next:
+      - node: cardiac_syncope
+        if:
+          any_of:
+            - red_flags_any: ["syncope during exertion", "syncope while supine", "chest pain", "palpitations", "family history sudden death"]
+            - exam_flags_any: ["abnormal ECG", "murmur", "arrhythmia"]
+      - node: seizure_vs_syncope
+        if:
+          any_of:
+            - symptoms_contains_any: ["tongue biting", "postictal confusion", "incontinence", "jerking movements"]
+            - red_flags_any: ["prolonged LOC", "focal neurologic deficit"]
+      - node: orthostatic_hypotension
+        if:
+          any_of:
+            - symptoms_contains_any: ["dizziness on standing", "lightheadedness"]
+            - exam_flags_any: ["orthostatic vital signs positive", "BP drop > 20 systolic or 10 diastolic"]
+      - node: vasovagal_syncope
+        default: true
+
+  cardiac_syncope:
+    when:
+      any_of:
+        - red_flags_any: ["exertional syncope", "syncope while supine", "no prodrome", "family history sudden death"]
+        - exam_flags_any: ["abnormal ECG", "structural heart disease", "murmur"]
+    tests:
+      - 12-lead ECG (look for: long QT, Brugada pattern, WPW, heart block, LVH, prior MI)
+      - Echocardiogram
+      - Troponin
+      - Continuous cardiac monitoring (telemetry)
+      - Consider EP study if arrhythmia suspected
+      - Consider stress test if exertional
+    suggest_dx:
+      - CARD-VT
+      - CARD-V-FIB
+      - CARD-HEART-BLOCK
+      - CARD-WPW
+      - CARD-VALVE-AS (aortic stenosis)
+      - CARD-HCM (hypertrophic cardiomyopathy)
+      - CARD-ACS
+      - Pulmonary embolism (massive)
+    referrals:
+      - Cardiology consult STAT
+      - Admission for monitoring
+      - Consider EP consult if arrhythmia
+    trace:
+      - "Cardiac syncope - high risk, requires admission"
+    next:
+      - node: arrhythmia_evaluation
+        if:
+          exam_flags_any: ["palpitations", "abnormal ECG", "heart block", "prolonged QT"]
+      - node: structural_heart_disease
+        if:
+          exam_flags_any: ["murmur", "heart failure", "cardiomyopathy"]
+
+  arrhythmia_evaluation:
+    when:
+      any_of:
+        - symptoms_contains_any: ["palpitations", "irregular heartbeat"]
+        - exam_flags_any: ["abnormal ECG", "bradycardia", "tachycardia", "heart block"]
+    tests:
+      - Telemetry monitoring (inpatient)
+      - 24-48 hour Holter monitor (outpatient)
+      - Event recorder or loop recorder
+      - Echocardiogram
+      - Electrolyte panel (K, Mg, Ca)
+      - Thyroid function tests
+    suggest_dx:
+      - CARD-VT
+      - CARD-SVT
+      - CARD-V-FIB
+      - CARD-HEART-BLOCK
+      - CARD-SICK-SINUS
+      - CARD-WPW
+      - CARD-AFIB
+    referrals:
+      - Electrophysiology consult
+      - Consider pacemaker or ICD
+    trace:
+      - "Arrhythmia-related syncope - rhythm monitoring"
+    next: []
+
+  structural_heart_disease:
+    when:
+      any_of:
+        - exam_flags_any: ["systolic murmur", "diastolic murmur", "S3 gallop", "S4 gallop"]
+        - symptoms_contains_any: ["exertional dyspnea", "chest pain", "heart failure symptoms"]
+    tests:
+      - Echocardiogram (assess valves, EF, wall motion)
+      - ECG
+      - Stress test (if stable)
+      - Cardiac MRI if cardiomyopathy suspected
+      - Cardiac catheterization if ischemia suspected
+    suggest_dx:
+      - CARD-VALVE-AS
+      - CARD-HCM
+      - CARD-CARDIOMYOPATHY
+      - CARD-VALVE-MR
+      - CARD-HF
+    referrals:
+      - Cardiology consult
+      - CT surgery if severe valve disease
+      - Consider ICD if low EF
+    trace:
+      - "Structural heart disease causing syncope"
+    next: []
+
+  seizure_vs_syncope:
+    when:
+      any_of:
+        - symptoms_contains_any: ["tongue biting", "incontinence", "postictal confusion", "jerking movements"]
+        - red_flags_any: ["prolonged LOC", "focal neurologic deficit", "headache after event"]
+    tests:
+      - Detailed witness account of event
+      - Neurologic examination
+      - CT head (if first seizure or head trauma)
+      - EEG
+      - MRI brain (if seizure suspected)
+      - Metabolic panel, glucose, toxicology screen
+    suggest_dx:
+      - NEU-SEIZURE
+      - NEU-EPILEPSY
+      - Convulsive syncope (brief jerking can occur with any syncope)
+    referrals:
+      - Neurology consult
+      - Admit if first seizure or status epilepticus
+    trace:
+      - "Distinguish seizure from syncope"
+    next:
+      - node: seizure_workup
+        if:
+          any_of:
+            - symptoms_contains_any: ["prolonged postictal state", "focal motor activity", "aura"]
+            - red_flags_any: ["prolonged LOC > 5 minutes", "focal deficit"]
+
+  seizure_workup:
+    when:
+      symptoms_contains_any: ["seizure", "epilepsy", "convulsions"]
+    tests:
+      - EEG (routine and sleep-deprived)
+      - MRI brain with epilepsy protocol
+      - Metabolic workup (glucose, electrolytes, calcium, magnesium)
+      - Toxicology screen
+      - LP if meningitis/encephalitis suspected
+    suggest_dx:
+      - NEU-SEIZURE
+      - NEU-EPILEPSY
+      - Provoked seizure (metabolic, toxic, structural)
+    referrals:
+      - Neurology consult
+      - Consider anti-epileptic medications
+      - Driving restrictions per state law
+    trace:
+      - "Seizure workup - identify etiology"
+    next: []
+
+  orthostatic_hypotension:
+    when:
+      any_of:
+        - symptoms_contains_any: ["dizziness on standing", "lightheadedness", "syncope on standing"]
+        - exam_flags_any: ["orthostatic vital signs positive", "BP drop > 20/10", "HR increase > 30"]
+    tests:
+      - Orthostatic vital signs (supine, 1 min standing, 3 min standing)
+      - Medication review (antihypertensives, diuretics, alpha-blockers)
+      - CBC (rule out anemia)
+      - Assess volume status
+      - Autonomic testing if recurrent
+    suggest_dx:
+      - Orthostatic hypotension
+      - Volume depletion
+      - Medication-induced
+      - Autonomic dysfunction
+      - POTS (postural orthostatic tachycardia syndrome)
+    referrals:
+      - Cardiology if autonomic dysfunction
+      - Neurology if neuropathy suspected
+      - Adjust medications
+    trace:
+      - "Orthostatic hypotension - identify cause"
+    next:
+      - node: volume_depletion
+        if:
+          any_of:
+            - symptoms_contains_any: ["dehydration", "vomiting", "diarrhea", "poor oral intake"]
+            - exam_flags_any: ["dry mucous membranes", "decreased skin turgor", "elevated BUN/Cr ratio"]
+      - node: autonomic_dysfunction
+        if:
+          symptoms_contains_any: ["recurrent orthostatic symptoms", "no clear precipitant", "chronic condition"]
+
+  volume_depletion:
+    when:
+      any_of:
+        - symptoms_contains_any: ["dehydration", "vomiting", "diarrhea", "decreased PO intake"]
+        - exam_flags_any: ["orthostatic hypotension", "tachycardia", "dry mucous membranes"]
+    tests:
+      - BUN/Cr ratio (> 20 suggests volume depletion)
+      - Electrolytes
+      - Urinalysis (elevated specific gravity)
+      - Assess fluid losses
+    suggest_dx:
+      - Volume depletion
+      - Dehydration
+    referrals:
+      - IV fluids
+      - Treat underlying cause (gastroenteritis, poor intake)
+      - Outpatient follow-up
+    trace:
+      - "Volume depletion causing orthostatic syncope"
+    next: []
+
+  autonomic_dysfunction:
+    when:
+      symptoms_contains_any: ["recurrent orthostatic symptoms", "autonomic symptoms"]
+    tests:
+      - Tilt table test
+      - Autonomic function testing
+      - Rule out diabetes, Parkinson's, other neuropathies
+      - Medication review
+    suggest_dx:
+      - Autonomic dysfunction
+      - POTS
+      - Neurogenic orthostatic hypotension
+    referrals:
+      - Neurology or autonomic specialist
+      - Cardiology
+      - Physical therapy for reconditioning
+    trace:
+      - "Autonomic dysfunction evaluation"
+    next: []
+
+  vasovagal_syncope:
+    when:
+      any_of:
+        - symptoms_contains_any: ["prodrome", "nausea", "diaphoresis", "warmth", "tunnel vision"]
+        - exam_flags_any: ["typical triggers: prolonged standing, pain, emotional stress, hot environment"]
+    tests:
+      - ECG (should be normal)
+      - Orthostatic vital signs
+      - Consider tilt table test if recurrent
+      - Rule out cardiac and neurologic causes
+    suggest_dx:
+      - Vasovagal syncope (neurocardiogenic syncope)
+      - Situational syncope
+    referrals:
+      - Reassurance
+      - Education on prodrome recognition
+      - Outpatient follow-up if recurrent
+      - Consider tilt training or midodrine if severe
+    trace:
+      - "Vasovagal syncope - benign but exclude other causes"
+    next:
+      - node: situational_syncope
+        if:
+          symptoms_contains_any: ["syncope with urination", "syncope with cough", "syncope with defecation"]
+
+  situational_syncope:
+    when:
+      symptoms_contains_any: ["syncope with specific triggers: micturition, defecation, cough, swallow"]
+    tests:
+      - ECG (should be normal)
+      - Rule out cardiac causes
+    suggest_dx:
+      - Situational syncope
+      - Micturition syncope
+      - Cough syncope
+      - Defecation syncope
+    referrals:
+      - Reassurance and education
+      - Avoid triggers if possible
+      - Outpatient follow-up
+    trace:
+      - "Situational syncope - benign vasovagal variant"
+    next: []

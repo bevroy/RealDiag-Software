@@ -1,0 +1,223 @@
+rules:
+  - id: ORTHO-HIP-FRACTURE
+    label: Hip Fracture
+    presentations:
+      - Hip or groin pain after fall or trauma
+      - Unable to bear weight
+      - Shortened and externally rotated leg
+      - Common in elderly with osteoporosis
+      - X-ray shows femoral neck or intertrochanteric fracture
+    icd10:
+      - S72.009A
+    snomed:
+      - 5913000
+
+  - id: ORTHO-DISTAL-RADIUS-FX
+    label: Distal Radius Fracture (Colles Fracture)
+    presentations:
+      - Wrist pain and swelling after fall on outstretched hand (FOOSH)
+      - Dorsal angulation ("dinner fork deformity")
+      - Common in elderly with osteoporosis
+      - X-ray shows fracture of distal radius
+    icd10:
+      - S52.509A
+    snomed:
+      - 263204007
+
+  - id: ORTHO-ANKLE-FRACTURE
+    label: Ankle Fracture
+    presentations:
+      - Ankle pain, swelling, inability to bear weight after trauma
+      - Deformity if displaced
+      - Ottawa ankle rules to determine need for X-ray
+      - X-ray shows fracture of malleolus (medial, lateral, or bimalleolar)
+    icd10:
+      - S82.899A
+    snomed:
+      - 16114001
+
+  - id: ORTHO-CLAVICLE-FRACTURE
+    label: Clavicle Fracture
+    presentations:
+      - Shoulder pain after fall or direct blow
+      - Tenderness and deformity over clavicle
+      - Arm held close to body
+      - X-ray shows fracture (most common in middle third)
+    icd10:
+      - S42.009A
+    snomed:
+      - 58150001
+
+  - id: ORTHO-FEMUR-FRACTURE
+    label: Femoral Shaft Fracture
+    presentations:
+      - Severe thigh pain after high-energy trauma
+      - Unable to bear weight
+      - Deformity, swelling, shortening of leg
+      - Risk of fat embolism and significant blood loss
+      - X-ray shows mid-shaft femur fracture
+    icd10:
+      - S72.309A
+    snomed:
+      - 71642004
+
+  - id: ORTHO-VERTEBRAL-COMPRESSION
+    label: Vertebral Compression Fracture
+    presentations:
+      - Acute back pain (often thoracic or lumbar)
+      - Common in elderly with osteoporosis or after minor trauma
+      - Height loss, kyphosis if multiple fractures
+      - Point tenderness over affected vertebra
+      - X-ray or MRI shows vertebral body compression
+    icd10:
+      - S32.009A
+    snomed:
+      - 230662006
+
+  - id: ORTHO-ACL-TEAR
+    label: Anterior Cruciate Ligament (ACL) Tear
+    presentations:
+      - Knee pain and swelling after twisting injury or sudden deceleration
+      - Pop felt at time of injury
+      - Knee instability, giving way
+      - Positive Lachman test, positive anterior drawer test
+      - MRI shows ACL tear
+    icd10:
+      - S83.511A
+    snomed:
+      - 427477000
+
+  - id: ORTHO-MENISCUS-TEAR
+    label: Meniscus Tear
+    presentations:
+      - Knee pain, swelling, clicking or locking
+      - Joint line tenderness
+      - Positive McMurray test
+      - May follow twisting injury
+      - MRI shows meniscal tear
+    icd10:
+      - S83.209A
+    snomed:
+      - 239720000
+
+  - id: ORTHO-ROTATOR-CUFF-TEAR
+    label: Rotator Cuff Tear
+    presentations:
+      - Shoulder pain, especially with overhead activities
+      - Weakness with arm elevation
+      - Painful arc of motion
+      - Positive drop arm test, empty can test
+      - MRI shows rotator cuff tear
+      - Common in elderly or after trauma
+    icd10:
+      - M75.100
+    snomed:
+      - 47433009
+
+  - id: ORTHO-ACHILLES-RUPTURE
+    label: Achilles Tendon Rupture
+    presentations:
+      - Sudden onset of posterior heel/calf pain during activity
+      - Pop felt at time of injury
+      - Difficulty walking, inability to stand on tiptoes
+      - Positive Thompson test (no plantar flexion with calf squeeze)
+      - Palpable gap in Achilles tendon
+    icd10:
+      - S86.019A
+    snomed:
+      - 40593004
+
+  - id: ORTHO-CARPAL-TUNNEL
+    label: Carpal Tunnel Syndrome
+    presentations:
+      - Hand numbness and tingling in median nerve distribution (thumb, index, middle, radial half of ring finger)
+      - Pain worse at night
+      - Weakness of thumb abduction
+      - Positive Tinel sign, positive Phalen test
+      - Nerve conduction studies show median nerve compression
+    icd10:
+      - G56.00
+    snomed:
+      - 57406009
+
+  - id: ORTHO-COMPARTMENT-SYNDROME
+    label: Compartment Syndrome
+    presentations:
+      - Severe pain out of proportion to exam
+      - Pain with passive stretch of muscles
+      - Tense, swollen compartment
+      - Paresthesias, weakness
+      - Late findings: pulselessness, pallor (indicates irreversible damage)
+      - Follows trauma, fracture, or prolonged limb compression
+      - Compartment pressure > 30 mmHg
+    icd10:
+      - T79.A19A
+    snomed:
+      - 111243008
+
+  - id: ORTHO-OSTEOMYELITIS
+    label: Osteomyelitis
+    presentations:
+      - Bone pain, tenderness, swelling
+      - Fever, chills
+      - Warmth and erythema over affected bone
+      - Elevated WBC, ESR, CRP
+      - Blood cultures may be positive
+      - MRI shows bone marrow edema and enhancement
+      - X-ray may show periosteal reaction, lytic lesions (late finding)
+    icd10:
+      - M86.9
+    snomed:
+      - 60168000
+
+  - id: ORTHO-SEPTIC-ARTHRITIS
+    label: Septic Arthritis
+    presentations:
+      - Acute monoarticular joint pain, swelling, warmth, erythema
+      - Fever
+      - Restricted range of motion
+      - Joint aspiration shows WBC > 50,000 with > 90% neutrophils
+      - Positive gram stain or culture of synovial fluid
+      - Medical emergency requiring drainage
+    icd10:
+      - M00.9
+    snomed:
+      - 372938004
+
+  - id: ORTHO-LOW-BACK-PAIN-RADICULOPATHY
+    label: Low Back Pain with Radiculopathy (Sciatica)
+    presentations:
+      - Low back pain radiating down leg in dermatomal pattern
+      - Numbness, tingling, weakness in affected nerve distribution
+      - Positive straight leg raise test
+      - May have bowel/bladder dysfunction if cauda equina syndrome
+      - MRI shows disc herniation or spinal stenosis
+    icd10:
+      - M54.16
+    snomed:
+      - 23056005
+
+  - id: ORTHO-CERVICAL-RADICULOPATHY
+    label: Cervical Radiculopathy
+    presentations:
+      - Neck pain radiating to arm in dermatomal pattern
+      - Numbness, tingling, weakness in affected nerve distribution
+      - Positive Spurling test (pain with neck extension and rotation)
+      - MRI shows disc herniation or foraminal stenosis
+    icd10:
+      - M54.12
+    snomed:
+      - 128200000
+
+  - id: ORTHO-PLANTAR-FASCIITIS
+    label: Plantar Fasciitis
+    presentations:
+      - Heel pain, especially with first steps in morning
+      - Pain worse after prolonged standing or activity
+      - Tenderness at medial calcaneal tuberosity
+      - Pain improves with rest
+      - X-ray may show heel spur (not diagnostic)
+    icd10:
+      - M72.2
+    snomed:
+      - 202882003

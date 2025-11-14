@@ -1,0 +1,237 @@
+tree_id: CARD-CHEST-PAIN
+name: Chest Pain Evaluation
+description: Decision tree for evaluating acute chest pain
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      any_of:
+        - red_flags_any: ["crushing chest pain", "radiation to arm/jaw", "diaphoresis", "syncope"]
+        - symptoms_contains_any: ["chest pain"]
+    tests:
+      - ECG (12-lead within 10 minutes)
+      - Troponin
+      - Chest X-ray
+      - Vital signs
+    suggest_dx:
+      - Acute coronary syndrome (until proven otherwise)
+    referrals:
+      - Emergency cardiology consult
+      - Activate chest pain protocol
+    trace:
+      - "Patient presents with chest pain - immediate cardiac evaluation"
+    next:
+      - node: life_threatening
+        if:
+          any_of:
+            - red_flags_any: ["hypotension", "severe dyspnea", "altered mental status"]
+            - exam_flags_any: ["hypotension", "respiratory distress", "altered mental status"]
+      - node: cardiac_features
+        if:
+          any_of:
+            - symptoms_contains_any: ["crushing chest pain", "pressure", "radiation to arm"]
+            - exam_flags_any: ["diaphoresis", "ST elevation", "new LBBB"]
+      - node: pleuritic_pain
+        if:
+          symptoms_contains_any: ["sharp pain worse with breathing", "positional pain"]
+      - node: musculoskeletal
+        default: true
+
+  life_threatening:
+    when:
+      any_of:
+        - red_flags_any: ["hypotension", "tearing pain", "pulse differential"]
+        - exam_flags_any: ["hypotension", "widened mediastinum", "absent pulses"]
+    tests:
+      - CT angiography chest (immediate)
+      - Troponin
+      - D-dimer
+      - Blood type and cross-match
+    suggest_dx:
+      - CARD-AORTIC-DISSECTION
+      - CARD-PE
+      - CARD-TAMPONADE
+      - PULM-PTX
+    referrals:
+      - Cardiothoracic surgery STAT
+      - ICU admission
+      - Do not give anticoagulation if dissection suspected
+    trace:
+      - "Life-threatening features present - immediate imaging and surgical evaluation"
+    next: []
+
+  cardiac_features:
+    when:
+      any_of:
+        - symptoms_contains_any: ["crushing pain", "pressure", "radiation"]
+        - exam_flags_any: ["ST elevation", "ST depression", "T wave inversion"]
+    tests:
+      - Serial troponins (0, 3, 6 hours)
+      - ECG every 15-30 minutes
+      - Aspirin 325mg
+      - Consider cardiac catheterization
+    suggest_dx:
+      - CARD-ACS
+      - CARD-ANGINA
+      - CARD-MYOCARDITIS
+    referrals:
+      - Cardiology consult
+      - Chest pain unit vs cardiac catheterization lab
+      - Consider transfer to PCI-capable center
+    trace:
+      - "Cardiac features present - ACS protocol"
+    next:
+      - node: stemi
+        if:
+          exam_flags_any: ["ST elevation", "new LBBB"]
+      - node: nstemi_ua
+        default: true
+
+  stemi:
+    when:
+      exam_flags_any: ["ST elevation", "new LBBB"]
+    tests:
+      - Activate cardiac catheterization lab
+      - Aspirin, P2Y12 inhibitor, anticoagulation
+      - Door-to-balloon time < 90 minutes
+    suggest_dx:
+      - CARD-ACS (STEMI)
+    referrals:
+      - Immediate cardiac catheterization
+      - Cardiology managing care
+    trace:
+      - "STEMI identified - immediate reperfusion therapy"
+    next: []
+
+  nstemi_ua:
+    when:
+      any_of:
+        - exam_flags_any: ["elevated troponin", "ST depression", "T wave inversion"]
+        - symptoms_contains_any: ["ongoing chest pain"]
+    tests:
+      - Risk stratification (TIMI score)
+      - Consider early invasive strategy
+      - Medical management (aspirin, anticoagulation, beta blocker)
+    suggest_dx:
+      - CARD-ACS (NSTEMI or unstable angina)
+    referrals:
+      - Cardiology for risk stratification
+      - Cardiac catheterization within 24-72 hours
+    trace:
+      - "NSTEMI/UA - risk stratification and management"
+    next: []
+
+  pleuritic_pain:
+    when:
+      symptoms_contains_any: ["sharp pain", "worse with breathing", "worse lying down"]
+    tests:
+      - D-dimer
+      - CT angiography if PE suspected
+      - Chest X-ray
+      - Consider echocardiogram
+    suggest_dx:
+      - CARD-PE
+      - CARD-PERICARDITIS
+      - PULM-PNEUMONIA
+      - PULM-PTX
+      - PULM-PLEURAL-EFFUSION
+    referrals:
+      - Pulmonology if PE confirmed
+      - Cardiology if pericarditis
+    trace:
+      - "Pleuritic pain - consider pulmonary/pericardial causes"
+    next:
+      - node: pe_pathway
+        if:
+          any_of:
+            - symptoms_contains_any: ["dyspnea", "hemoptysis"]
+            - exam_flags_any: ["tachycardia", "hypoxia", "unilateral leg swelling"]
+      - node: pericarditis_pathway
+        if:
+          any_of:
+            - symptoms_contains_any: ["better sitting forward"]
+            - exam_flags_any: ["pericardial rub", "diffuse ST elevation"]
+      - node: pulmonary_pathway
+        default: true
+
+  pe_pathway:
+    when:
+      any_of:
+        - symptoms_contains_any: ["sudden dyspnea", "hemoptysis"]
+        - exam_flags_any: ["tachycardia", "hypoxia", "DVT signs"]
+    tests:
+      - Wells score for PE
+      - D-dimer (if low risk)
+      - CT angiography chest
+      - Lower extremity ultrasound
+    suggest_dx:
+      - CARD-PE
+    referrals:
+      - Pulmonology or hospitalist
+      - Consider ICU if hemodynamically unstable
+      - Anticoagulation if confirmed
+    trace:
+      - "PE suspected - Wells score and imaging"
+    next: []
+
+  pericarditis_pathway:
+    when:
+      any_of:
+        - symptoms_contains_any: ["positional pain", "better sitting forward"]
+        - exam_flags_any: ["pericardial rub", "diffuse ST elevation"]
+    tests:
+      - ECG (diffuse ST elevation, PR depression)
+      - Echocardiogram (look for effusion)
+      - Troponin (may be mildly elevated)
+      - Inflammatory markers (ESR, CRP)
+    suggest_dx:
+      - CARD-PERICARDITIS
+      - CARD-MYOCARDITIS
+    referrals:
+      - Cardiology consult
+      - Monitor for tamponade
+    trace:
+      - "Pericarditis suspected - ECG and echocardiogram"
+    next: []
+
+  pulmonary_pathway:
+    when:
+      any_of:
+        - symptoms_contains_any: ["cough", "fever", "dyspnea"]
+        - exam_flags_any: ["crackles", "decreased breath sounds", "fever"]
+    tests:
+      - Chest X-ray
+      - Consider CT chest
+      - CBC, inflammatory markers
+    suggest_dx:
+      - PULM-PNEUMONIA
+      - PULM-PTX
+      - PULM-PLEURAL-EFFUSION
+    referrals:
+      - Pulmonology if complex
+      - Consider admission based on severity
+    trace:
+      - "Pulmonary cause suspected - imaging and labs"
+    next: []
+
+  musculoskeletal:
+    when:
+      any_of:
+        - symptoms_contains_any: ["reproducible with palpation", "worse with movement"]
+        - exam_flags_any: ["chest wall tenderness", "normal ECG", "negative troponin"]
+    tests:
+      - ECG to rule out cardiac
+      - Troponin if any concern
+      - Chest X-ray if trauma
+    suggest_dx:
+      - Costochondritis
+      - Chest wall strain
+      - Rib fracture (if trauma)
+    referrals:
+      - Outpatient follow-up
+      - Return precautions for cardiac symptoms
+    trace:
+      - "Musculoskeletal cause likely - rule out cardiac first"
+    next: []

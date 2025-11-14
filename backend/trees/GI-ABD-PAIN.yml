@@ -1,0 +1,335 @@
+tree_id: GI-ABD-PAIN
+name: Abdominal Pain Evaluation
+description: Decision tree for evaluating acute abdominal pain
+version: "1.0"
+entry_point: initial_triage
+
+nodes:
+  initial_triage:
+    when:
+      symptoms_contains_any: ["abdominal pain", "belly pain"]
+    tests:
+      - Vital signs
+      - Abdominal exam
+      - Urinalysis
+      - Pregnancy test (females of childbearing age)
+      - CBC, CMP
+    suggest_dx:
+      - Acute abdomen (requires evaluation)
+    referrals:
+      - Surgical consult if acute abdomen
+    trace:
+      - "Patient with abdominal pain - triage by location and severity"
+    next:
+      - node: surgical_emergency
+        if:
+          any_of:
+            - red_flags_any: ["hypotension", "peritoneal signs", "severe pain", "rigid abdomen"]
+            - exam_flags_any: ["rebound tenderness", "guarding", "absent bowel sounds"]
+      - node: ruq_pain
+        if:
+          symptoms_contains_any: ["right upper quadrant pain", "RUQ pain"]
+      - node: rlq_pain
+        if:
+          symptoms_contains_any: ["right lower quadrant pain", "RLQ pain", "McBurney point"]
+      - node: llq_pain
+        if:
+          symptoms_contains_any: ["left lower quadrant pain", "LLQ pain"]
+      - node: epigastric_pain
+        if:
+          symptoms_contains_any: ["epigastric pain", "upper abdominal pain"]
+      - node: diffuse_pain
+        default: true
+
+  surgical_emergency:
+    when:
+      any_of:
+        - red_flags_any: ["hypotension", "rigid abdomen", "free air"]
+        - exam_flags_any: ["peritoneal signs", "severe distention", "absent bowel sounds"]
+    tests:
+      - CT abdomen/pelvis with IV contrast (if stable)
+      - Surgical labs (CBC, CMP, coags, type and screen)
+      - Upright chest X-ray or abdominal X-ray
+      - NPO, IV access, fluid resuscitation
+    suggest_dx:
+      - GI-BOWEL-OBSTRUCTION
+      - Perforated viscus
+      - GI-APPENDICITIS (ruptured)
+      - Ischemic bowel
+      - Ruptured AAA
+    referrals:
+      - Emergency surgery consult STAT
+      - ICU admission
+      - NPO, NG tube if obstruction
+    trace:
+      - "Surgical emergency - immediate surgical evaluation"
+    next: []
+
+  ruq_pain:
+    when:
+      symptoms_contains_any: ["right upper quadrant pain", "pain after fatty meals"]
+    tests:
+      - RUQ ultrasound
+      - Liver function tests
+      - Lipase
+      - Murphy's sign assessment
+    suggest_dx:
+      - GI-CHOLECYSTITIS
+      - Choledocholithiasis
+      - GI-HEPATITIS
+      - Hepatic abscess
+    referrals:
+      - Surgery consult if cholecystitis
+      - GI if biliary obstruction
+      - ERCP if choledocholithiasis
+    trace:
+      - "RUQ pain - evaluate hepatobiliary system"
+    next:
+      - node: cholecystitis
+        if:
+          any_of:
+            - exam_flags_any: ["positive Murphy sign", "fever", "leukocytosis"]
+            - symptoms_contains_any: ["nausea", "vomiting", "fever"]
+      - node: hepatitis
+        if:
+          any_of:
+            - exam_flags_any: ["jaundice", "elevated transaminases"]
+            - symptoms_contains_any: ["jaundice", "dark urine"]
+
+  cholecystitis:
+    when:
+      any_of:
+        - exam_flags_any: ["positive Murphy sign", "gallstones on ultrasound", "pericholecystic fluid"]
+        - symptoms_contains_any: ["RUQ pain", "fever", "nausea"]
+    tests:
+      - HIDA scan if ultrasound inconclusive
+      - Surgical labs
+      - NPO, IV antibiotics
+    suggest_dx:
+      - GI-CHOLECYSTITIS
+    referrals:
+      - Surgery for cholecystectomy
+      - Admission for IV antibiotics
+    trace:
+      - "Cholecystitis confirmed - surgical intervention"
+    next: []
+
+  hepatitis:
+    when:
+      any_of:
+        - exam_flags_any: ["jaundice", "AST/ALT > 1000", "tender hepatomegaly"]
+        - symptoms_contains_any: ["jaundice", "dark urine", "clay stools"]
+    tests:
+      - Hepatitis panel (A, B, C)
+      - Acetaminophen level
+      - Autoimmune hepatitis workup
+      - Coagulation studies
+    suggest_dx:
+      - GI-HEPATITIS
+      - Acute liver failure
+    referrals:
+      - GI/hepatology consult
+      - Consider ICU if coagulopathy or encephalopathy
+    trace:
+      - "Hepatitis suspected - determine etiology"
+    next: []
+
+  rlq_pain:
+    when:
+      symptoms_contains_any: ["right lower quadrant pain", "periumbilical pain migrating to RLQ"]
+    tests:
+      - CT abdomen/pelvis with IV contrast
+      - Urinalysis (rule out UTI/stone)
+      - Pregnancy test
+      - Pelvic exam (females)
+      - Appendicitis scoring (Alvarado score)
+    suggest_dx:
+      - GI-APPENDICITIS
+      - Ovarian torsion
+      - OB-ECTOPIC
+      - Mesenteric adenitis
+    referrals:
+      - Surgery if appendicitis likely
+      - GYN if ovarian pathology
+    trace:
+      - "RLQ pain - rule out appendicitis and GYN pathology"
+    next:
+      - node: appendicitis
+        if:
+          any_of:
+            - exam_flags_any: ["rebound tenderness", "Rovsing sign", "fever", "leukocytosis"]
+            - symptoms_contains_any: ["anorexia", "nausea", "pain migration"]
+      - node: gyn_pathology
+        if:
+          any_of:
+            - exam_flags_any: ["adnexal mass", "cervical motion tenderness", "positive pregnancy"]
+            - symptoms_contains_any: ["vaginal bleeding", "missed period"]
+
+  appendicitis:
+    when:
+      any_of:
+        - exam_flags_any: ["RLQ tenderness", "rebound", "Rovsing sign", "fever"]
+        - symptoms_contains_any: ["anorexia", "periumbilical pain migrating to RLQ"]
+    tests:
+      - CT scan (gold standard)
+      - Ultrasound in children or pregnant patients
+      - Alvarado score
+    suggest_dx:
+      - GI-APPENDICITIS
+    referrals:
+      - Surgery for appendectomy
+      - NPO, IV antibiotics
+    trace:
+      - "Appendicitis likely - surgical consultation"
+    next: []
+
+  gyn_pathology:
+    when:
+      any_of:
+        - exam_flags_any: ["adnexal mass", "positive pregnancy test", "cervical motion tenderness"]
+        - symptoms_contains_any: ["vaginal bleeding", "pelvic pain"]
+    tests:
+      - Pelvic ultrasound
+      - Quantitative hCG
+      - Pelvic exam
+    suggest_dx:
+      - OB-ECTOPIC
+      - Ovarian torsion
+      - GYN-OVARIAN-CYST
+      - GYN-PID
+    referrals:
+      - GYN consult
+      - Surgery if torsion or ruptured ectopic
+    trace:
+      - "GYN pathology suspected"
+    next: []
+
+  llq_pain:
+    when:
+      symptoms_contains_any: ["left lower quadrant pain", "LLQ pain"]
+    tests:
+      - CT abdomen/pelvis with IV contrast
+      - CBC, CMP
+      - Urinalysis
+    suggest_dx:
+      - GI-DIVERTICULITIS
+      - Sigmoid volvulus
+      - Renal colic
+    referrals:
+      - Surgery if complicated diverticulitis
+      - GI for colonoscopy (outpatient after resolution)
+    trace:
+      - "LLQ pain - diverticulitis most common in adults"
+    next:
+      - node: diverticulitis
+        if:
+          any_of:
+            - exam_flags_any: ["LLQ tenderness", "fever", "leukocytosis"]
+            - symptoms_contains_any: ["fever", "change in bowel habits"]
+
+  diverticulitis:
+    when:
+      any_of:
+        - exam_flags_any: ["LLQ tenderness", "fever", "leukocytosis", "fat stranding on CT"]
+        - symptoms_contains_any: ["LLQ pain", "fever", "constipation"]
+    tests:
+      - CT scan (confirm diagnosis, assess complications)
+      - Hinchey classification
+    suggest_dx:
+      - GI-DIVERTICULITIS
+    referrals:
+      - Surgery if perforation or abscess
+      - Admission for IV antibiotics if moderate-severe
+      - Outpatient antibiotics if uncomplicated
+    trace:
+      - "Diverticulitis confirmed - assess severity"
+    next: []
+
+  epigastric_pain:
+    when:
+      symptoms_contains_any: ["epigastric pain", "upper abdominal pain"]
+    tests:
+      - Lipase
+      - Liver function tests
+      - ECG (rule out MI)
+      - Upper GI imaging if indicated
+    suggest_dx:
+      - GI-PANCREATITIS
+      - GI-PUD
+      - GI-GERD
+      - CARD-ACS (atypical presentation)
+    referrals:
+      - GI if severe or recurrent
+      - Surgery if perforated ulcer
+    trace:
+      - "Epigastric pain - consider pancreaticobiliary and cardiac causes"
+    next:
+      - node: pancreatitis
+        if:
+          any_of:
+            - exam_flags_any: ["elevated lipase", "epigastric tenderness radiating to back"]
+            - symptoms_contains_any: ["nausea", "vomiting", "pain radiating to back"]
+      - node: peptic_ulcer
+        if:
+          any_of:
+            - symptoms_contains_any: ["pain relieved or worsened by eating", "melena", "hematemesis"]
+            - exam_flags_any: ["epigastric tenderness", "signs of GI bleeding"]
+
+  pancreatitis:
+    when:
+      any_of:
+        - exam_flags_any: ["lipase > 3x normal", "epigastric tenderness"]
+        - symptoms_contains_any: ["severe epigastric pain radiating to back", "nausea", "vomiting"]
+    tests:
+      - Lipase, amylase
+      - CT abdomen (if severe or uncertain diagnosis)
+      - Ranson criteria or BISAP score
+      - Assess etiology (gallstones, alcohol, triglycerides)
+    suggest_dx:
+      - GI-PANCREATITIS
+    referrals:
+      - Admission (most cases)
+      - ICU if severe
+      - Surgery if gallstone pancreatitis after resolution
+    trace:
+      - "Pancreatitis confirmed - assess severity and etiology"
+    next: []
+
+  peptic_ulcer:
+    when:
+      any_of:
+        - symptoms_contains_any: ["epigastric pain", "melena", "hematemesis"]
+        - exam_flags_any: ["epigastric tenderness", "anemia", "signs of bleeding"]
+    tests:
+      - H. pylori testing
+      - CBC (assess for anemia)
+      - Consider EGD if bleeding or severe
+      - NSAID use history
+    suggest_dx:
+      - GI-PUD
+    referrals:
+      - GI for endoscopy
+      - Surgery if perforation or uncontrolled bleeding
+    trace:
+      - "Peptic ulcer suspected - assess for complications"
+    next: []
+
+  diffuse_pain:
+    when:
+      symptoms_contains_any: ["diffuse abdominal pain", "generalized pain"]
+    tests:
+      - CT abdomen/pelvis
+      - CBC, CMP, lactate
+      - Urinalysis
+      - Abdominal X-ray (obstruction series)
+    suggest_dx:
+      - GI-BOWEL-OBSTRUCTION
+      - GI-IBS
+      - Gastroenteritis
+      - Mesenteric ischemia
+    referrals:
+      - Surgery if obstruction
+      - GI for chronic symptoms
+    trace:
+      - "Diffuse pain - broad differential"
+    next: []

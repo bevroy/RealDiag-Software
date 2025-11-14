@@ -11,6 +11,7 @@ from fastapi.templating import Jinja2Templates
 from backend.services.diagnostic_router import router as diagnostic_router
 from backend.services.rules_router import router as rules_router
 from backend.services.reference_router import router as reference_router
+from backend.services.symptom_search import router as symptom_search_router
 from config import Config
 
 app = FastAPI(title="RealDiag API")
@@ -26,6 +27,7 @@ REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['pa
 app.include_router(diagnostic_router)
 app.include_router(rules_router)
 app.include_router(reference_router)
+app.include_router(symptom_search_router)
 
 
 # Serve static files (assets)

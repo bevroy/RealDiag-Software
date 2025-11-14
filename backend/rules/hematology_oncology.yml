@@ -1,0 +1,282 @@
+rules:
+  - id: HEME-IDA
+    label: Iron Deficiency Anemia
+    presentations:
+      - Fatigue, weakness, pallor
+      - Microcytic anemia (MCV < 80)
+      - Low ferritin, low serum iron, elevated TIBC
+      - Pica (especially ice craving)
+      - Koilonychia (spoon nails)
+      - Angular cheilitis
+    icd10:
+      - D50.9
+    snomed:
+      - 87522002
+
+  - id: HEME-B12-DEF
+    label: Vitamin B12 Deficiency Anemia
+    presentations:
+      - Macrocytic anemia (MCV > 100)
+      - Fatigue, weakness
+      - Neurologic symptoms (peripheral neuropathy, ataxia, dementia)
+      - Glossitis (smooth, beefy red tongue)
+      - Low B12 level
+      - Elevated methylmalonic acid and homocysteine
+    icd10:
+      - D51.9
+    snomed:
+      - 190634005
+
+  - id: HEME-FOLATE-DEF
+    label: Folate Deficiency Anemia
+    presentations:
+      - Macrocytic anemia (MCV > 100)
+      - Fatigue, weakness
+      - No neurologic symptoms (unlike B12 deficiency)
+      - Low folate level
+      - Normal methylmalonic acid
+    icd10:
+      - D52.9
+    snomed:
+      - 41841004
+
+  - id: HEME-ACD
+    label: Anemia of Chronic Disease
+    presentations:
+      - Normocytic or microcytic anemia
+      - Fatigue, weakness
+      - Chronic inflammatory condition (RA, CKD, cancer, infection)
+      - Low serum iron, low TIBC, normal or high ferritin
+    icd10:
+      - D63.8
+    snomed:
+      - 691421000119108
+
+  - id: HEME-HEMOLYTIC
+    label: Hemolytic Anemia
+    presentations:
+      - Anemia with elevated reticulocyte count
+      - Jaundice, dark urine
+      - Elevated indirect bilirubin
+      - Elevated LDH
+      - Low haptoglobin
+      - Positive direct Coombs test (if autoimmune)
+    icd10:
+      - D59.9
+    snomed:
+      - 61261009
+
+  - id: HEME-APLASTIC
+    label: Aplastic Anemia
+    presentations:
+      - Pancytopenia (low RBC, WBC, platelets)
+      - Fatigue, weakness, infections, bleeding
+      - Hypocellular bone marrow on biopsy
+      - No splenomegaly
+    icd10:
+      - D61.9
+    snomed:
+      - 306058006
+
+  - id: HEME-SICKLE-CELL
+    label: Sickle Cell Disease
+    presentations:
+      - Recurrent pain crises (vaso-occlusive episodes)
+      - Anemia (hemolytic)
+      - Splenic dysfunction (recurrent infections)
+      - Avascular necrosis of bones
+      - Acute chest syndrome
+      - Hemoglobin electrophoresis shows HbS
+    icd10:
+      - D57.1
+    snomed:
+      - 417357006
+
+  - id: HEME-ITP
+    label: Immune Thrombocytopenic Purpura (ITP)
+    presentations:
+      - Isolated thrombocytopenia (platelets < 100k)
+      - Petechiae, purpura, easy bruising
+      - Mucosal bleeding (epistaxis, gingival bleeding)
+      - No splenomegaly
+      - Normal or increased megakaryocytes on bone marrow
+    icd10:
+      - D69.3
+    snomed:
+      - 32273002
+
+  - id: HEME-TTP
+    label: Thrombotic Thrombocytopenic Purpura (TTP)
+    presentations:
+      - Pentad (often incomplete): thrombocytopenia, microangiopathic hemolytic anemia, neurologic symptoms, renal dysfunction, fever
+      - Schistocytes on blood smear
+      - Elevated LDH
+      - Normal PT/PTT/fibrinogen (unlike DIC)
+      - Low ADAMTS13 activity
+    icd10:
+      - M31.1
+    snomed:
+      - 78129009
+
+  - id: HEME-HUS
+    label: Hemolytic Uremic Syndrome (HUS)
+    presentations:
+      - Triad: microangiopathic hemolytic anemia, thrombocytopenia, acute kidney injury
+      - Often follows diarrheal illness (E. coli O157:H7)
+      - Schistocytes on blood smear
+      - Elevated creatinine
+      - Common in children
+    icd10:
+      - D59.3
+    snomed:
+      - 111407006
+
+  - id: HEME-DIC
+    label: Disseminated Intravascular Coagulation (DIC)
+    presentations:
+      - Thrombocytopenia and prolonged PT/PTT
+      - Elevated D-dimer and fibrin split products
+      - Low fibrinogen
+      - Bleeding and thrombosis
+      - Underlying trigger (sepsis, trauma, malignancy, obstetric complication)
+    icd10:
+      - D65
+    snomed:
+      - 67406007
+
+  - id: HEME-HEMOPHILIA-A
+    label: Hemophilia A
+    presentations:
+      - X-linked bleeding disorder (males affected)
+      - Prolonged PTT, normal PT
+      - Low Factor VIII activity
+      - Hemarthrosis (joint bleeding)
+      - Spontaneous or trauma-related bleeding
+    icd10:
+      - D66
+    snomed:
+      - 90935002
+
+  - id: HEME-HEMOPHILIA-B
+    label: Hemophilia B
+    presentations:
+      - X-linked bleeding disorder (males affected)
+      - Prolonged PTT, normal PT
+      - Low Factor IX activity
+      - Hemarthrosis (joint bleeding)
+      - Similar presentation to Hemophilia A
+    icd10:
+      - D67
+    snomed:
+      - 28929004
+
+  - id: HEME-VWD
+    label: Von Willebrand Disease
+    presentations:
+      - Mucocutaneous bleeding (epistaxis, gingival bleeding, menorrhagia)
+      - Easy bruising
+      - Prolonged PTT (may be normal)
+      - Low von Willebrand factor antigen and activity
+      - Autosomal dominant (most common inherited bleeding disorder)
+    icd10:
+      - D68.0
+    snomed:
+      - 128105008
+
+  - id: ONCO-AML
+    label: Acute Myeloid Leukemia (AML)
+    presentations:
+      - Fatigue, weakness, pallor (anemia)
+      - Fever, infections (neutropenia)
+      - Bleeding, petechiae (thrombocytopenia)
+      - Bone pain
+      - Gingival hyperplasia (M5 subtype)
+      - Auer rods on blood smear
+      - Blasts > 20% on bone marrow
+    icd10:
+      - C92.0
+    snomed:
+      - 91861009
+
+  - id: ONCO-ALL
+    label: Acute Lymphoblastic Leukemia (ALL)
+    presentations:
+      - Fatigue, weakness, pallor
+      - Fever, infections
+      - Bleeding, petechiae
+      - Bone pain (common in children)
+      - Lymphadenopathy, hepatosplenomegaly
+      - Lymphoblasts on blood smear and bone marrow
+      - Most common cancer in children
+    icd10:
+      - C91.0
+    snomed:
+      - 91857003
+
+  - id: ONCO-CML
+    label: Chronic Myeloid Leukemia (CML)
+    presentations:
+      - Often asymptomatic, found incidentally
+      - Fatigue, weight loss, night sweats
+      - Splenomegaly (massive)
+      - Leukocytosis with left shift
+      - Philadelphia chromosome (BCR-ABL fusion) positive
+      - Responsive to tyrosine kinase inhibitors (imatinib)
+    icd10:
+      - C92.1
+    snomed:
+      - 92814006
+
+  - id: ONCO-CLL
+    label: Chronic Lymphocytic Leukemia (CLL)
+    presentations:
+      - Often asymptomatic, found incidentally on CBC
+      - Lymphocytosis (absolute lymphocyte count > 5,000)
+      - Lymphadenopathy
+      - Fatigue, recurrent infections
+      - Smudge cells on blood smear
+      - Most common leukemia in adults
+    icd10:
+      - C91.1
+    snomed:
+      - 92814006
+
+  - id: ONCO-MULTIPLE-MYELOMA
+    label: Multiple Myeloma
+    presentations:
+      - CRAB criteria: hypercalcemia, renal insufficiency, anemia, bone lesions
+      - Bone pain, pathologic fractures
+      - Recurrent infections
+      - Elevated protein gap, monoclonal spike on SPEP
+      - Bence Jones proteinuria
+      - Plasma cells > 10% on bone marrow
+    icd10:
+      - C90.0
+    snomed:
+      - 109989006
+
+  - id: ONCO-HODGKIN
+    label: Hodgkin Lymphoma
+    presentations:
+      - Painless lymphadenopathy (often cervical, supraclavicular)
+      - B symptoms: fever, night sweats, weight loss
+      - Reed-Sternberg cells on lymph node biopsy
+      - Bimodal age distribution (young adults, elderly)
+      - Pruritus
+    icd10:
+      - C81.9
+    snomed:
+      - 118601006
+
+  - id: ONCO-NHL
+    label: Non-Hodgkin Lymphoma
+    presentations:
+      - Painless lymphadenopathy
+      - B symptoms (fever, night sweats, weight loss)
+      - Hepatosplenomegaly
+      - Extranodal involvement common
+      - Many subtypes (DLBCL, follicular, MALT, etc.)
+    icd10:
+      - C85.9
+    snomed:
+      - 118600007

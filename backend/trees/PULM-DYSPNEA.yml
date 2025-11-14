@@ -1,0 +1,275 @@
+tree_id: PULM-DYSPNEA
+name: Dyspnea Evaluation
+description: Decision tree for evaluating shortness of breath
+version: "1.0"
+entry_point: acute_vs_chronic
+
+nodes:
+  acute_vs_chronic:
+    when:
+      symptoms_contains_any: ["dyspnea", "shortness of breath", "difficulty breathing"]
+    tests:
+      - Vital signs (oxygen saturation, respiratory rate)
+      - Pulse oximetry
+      - Chest X-ray
+      - ECG
+      - BNP or pro-BNP
+    suggest_dx:
+      - Respiratory or cardiac cause (to be determined)
+    referrals:
+      - Emergency evaluation if severe
+    trace:
+      - "Dyspnea evaluation - determine acuity and severity"
+    next:
+      - node: critical_dyspnea
+        if:
+          any_of:
+            - red_flags_any: ["severe respiratory distress", "hypoxia", "altered mental status", "stridor"]
+            - exam_flags_any: ["oxygen sat < 90%", "respiratory rate > 30", "accessory muscle use"]
+      - node: acute_onset
+        if:
+          symptoms_contains_any: ["sudden onset", "acute dyspnea"]
+      - node: chronic_progressive
+        default: true
+
+  critical_dyspnea:
+    when:
+      any_of:
+        - red_flags_any: ["severe hypoxia", "respiratory failure", "stridor", "altered mental status"]
+        - exam_flags_any: ["oxygen sat < 90%", "respiratory rate > 30", "cyanosis"]
+    tests:
+      - ABG
+      - Chest X-ray STAT
+      - ECG
+      - Cardiac enzymes
+      - Consider intubation
+    suggest_dx:
+      - Respiratory failure
+      - CARD-PE
+      - PULM-PTX
+      - Severe CARD-HF
+      - PULM-PNEUMONIA
+      - Anaphylaxis
+    referrals:
+      - ICU admission
+      - Emergency intubation if indicated
+      - Critical care team activation
+    trace:
+      - "Critical dyspnea - immediate stabilization required"
+    next: []
+
+  acute_onset:
+    when:
+      symptoms_contains_any: ["sudden onset", "acute dyspnea"]
+    tests:
+      - D-dimer
+      - CT angiography (if PE suspected)
+      - Troponin
+      - Chest X-ray
+      - Lower extremity ultrasound
+    suggest_dx:
+      - CARD-PE
+      - PULM-PTX
+      - CARD-ACS
+      - CARD-HF (acute decompensation)
+    referrals:
+      - Cardiology or pulmonology
+      - Admission likely
+    trace:
+      - "Acute dyspnea - rule out life-threatening causes"
+    next:
+      - node: pe_evaluation
+        if:
+          any_of:
+            - symptoms_contains_any: ["chest pain", "hemoptysis", "leg swelling"]
+            - exam_flags_any: ["tachycardia", "unilateral leg edema", "DVT"]
+      - node: pneumothorax
+        if:
+          any_of:
+            - symptoms_contains_any: ["sudden chest pain", "unilateral chest pain"]
+            - exam_flags_any: ["decreased breath sounds", "hyperresonance", "subcutaneous emphysema"]
+      - node: cardiac_dyspnea
+        default: true
+
+  pe_evaluation:
+    when:
+      any_of:
+        - symptoms_contains_any: ["sudden dyspnea", "pleuritic chest pain", "hemoptysis"]
+        - exam_flags_any: ["tachycardia", "hypoxia", "leg swelling"]
+    tests:
+      - Wells score for PE
+      - D-dimer (if low/moderate risk)
+      - CT angiography chest (definitive)
+      - Lower extremity Doppler
+      - ECG (may show S1Q3T3 pattern)
+    suggest_dx:
+      - CARD-PE
+      - CARDIO-DVT
+    referrals:
+      - Pulmonology or hospitalist
+      - Anticoagulation if confirmed
+      - Consider ICU if massive PE
+    trace:
+      - "PE evaluation - risk stratification and imaging"
+    next: []
+
+  pneumothorax:
+    when:
+      any_of:
+        - symptoms_contains_any: ["sudden onset dyspnea", "unilateral chest pain"]
+        - exam_flags_any: ["decreased breath sounds", "hyperresonance", "absent tactile fremitus"]
+    tests:
+      - Chest X-ray (PA and lateral)
+      - CT chest if uncertain
+      - Assess size (small vs large)
+    suggest_dx:
+      - PULM-PTX
+    referrals:
+      - Pulmonology or thoracic surgery
+      - Chest tube if large or tension pneumothorax
+      - Observation if small and stable
+    trace:
+      - "Pneumothorax evaluation - assess size and stability"
+    next: []
+
+  cardiac_dyspnea:
+    when:
+      any_of:
+        - symptoms_contains_any: ["orthopnea", "PND", "leg swelling"]
+        - exam_flags_any: ["elevated JVP", "S3 gallop", "crackles", "peripheral edema"]
+    tests:
+      - BNP or pro-BNP (> 100 suggests heart failure)
+      - Echocardiogram
+      - Chest X-ray (pulmonary edema, cardiomegaly)
+      - ECG
+      - Troponin
+    suggest_dx:
+      - CARD-HF
+      - CARD-ACS
+      - CARD-VALVE-MR
+      - CARD-VALVE-AS
+    referrals:
+      - Cardiology consult
+      - Admission for diuresis and optimization
+    trace:
+      - "Cardiac cause of dyspnea - assess heart failure"
+    next:
+      - node: acute_hf
+        if:
+          any_of:
+            - exam_flags_any: ["elevated BNP", "pulmonary edema on X-ray", "S3 gallop"]
+            - symptoms_contains_any: ["orthopnea", "PND", "rapid weight gain"]
+
+  acute_hf:
+    when:
+      any_of:
+        - exam_flags_any: ["elevated BNP", "pulmonary edema", "S3 gallop", "JVD"]
+        - symptoms_contains_any: ["orthopnea", "PND", "leg swelling"]
+    tests:
+      - Echocardiogram (assess EF)
+      - Chest X-ray
+      - BNP
+      - Assess precipitant (MI, arrhythmia, medication non-compliance)
+    suggest_dx:
+      - CARD-HF
+    referrals:
+      - Cardiology
+      - Admission for IV diuretics
+      - ICU if cardiogenic shock
+    trace:
+      - "Acute heart failure - diuresis and identify precipitant"
+    next: []
+
+  chronic_progressive:
+    when:
+      symptoms_contains_any: ["chronic dyspnea", "progressive dyspnea", "dyspnea on exertion"]
+    tests:
+      - Pulmonary function tests (PFTs)
+      - Chest X-ray
+      - CT chest (if ILD suspected)
+      - Echocardiogram
+      - Consider exercise testing
+    suggest_dx:
+      - PULM-COPD
+      - PULM-ASTHMA
+      - PULM-ILD
+      - Chronic CARD-HF
+      - Pulmonary hypertension
+    referrals:
+      - Pulmonology for PFTs and workup
+      - Cardiology if cardiac cause
+    trace:
+      - "Chronic dyspnea - determine underlying cause"
+    next:
+      - node: obstructive_disease
+        if:
+          any_of:
+            - symptoms_contains_any: ["wheezing", "cough", "smoking history"]
+            - exam_flags_any: ["wheezing", "prolonged expiration", "hyperinflation"]
+      - node: restrictive_disease
+        if:
+          any_of:
+            - symptoms_contains_any: ["dry cough", "progressive dyspnea"]
+            - exam_flags_any: ["crackles", "decreased lung volumes"]
+      - node: deconditioning
+        default: true
+
+  obstructive_disease:
+    when:
+      any_of:
+        - symptoms_contains_any: ["wheezing", "chronic cough", "smoking history"]
+        - exam_flags_any: ["wheezing", "prolonged expiration", "barrel chest"]
+    tests:
+      - Spirometry (FEV1/FVC < 0.7 suggests obstruction)
+      - Bronchodilator reversibility testing
+      - Chest X-ray
+      - Consider alpha-1 antitrypsin level
+    suggest_dx:
+      - PULM-COPD
+      - PULM-ASTHMA
+    referrals:
+      - Pulmonology for management
+      - Consider pulmonary rehabilitation
+    trace:
+      - "Obstructive lung disease - spirometry for diagnosis"
+    next: []
+
+  restrictive_disease:
+    when:
+      any_of:
+        - symptoms_contains_any: ["dry cough", "progressive dyspnea"]
+        - exam_flags_any: ["fine crackles", "digital clubbing"]
+    tests:
+      - High-resolution CT chest
+      - PFTs (decreased TLC, FVC)
+      - Consider autoimmune workup
+      - Consider lung biopsy
+    suggest_dx:
+      - PULM-ILD
+      - PULM-SARCOIDOSIS
+      - Hypersensitivity pneumonitis
+    referrals:
+      - Pulmonology for specialized testing
+      - Consider rheumatology if connective tissue disease
+    trace:
+      - "Restrictive lung disease - HRCT and further workup"
+    next: []
+
+  deconditioning:
+    when:
+      any_of:
+        - symptoms_contains_any: ["dyspnea only with exertion", "sedentary lifestyle"]
+        - exam_flags_any: ["normal examination", "normal chest X-ray", "normal spirometry"]
+    tests:
+      - Exercise testing
+      - Rule out cardiac and pulmonary causes
+    suggest_dx:
+      - Deconditioning
+      - Obesity-related dyspnea
+      - Anxiety/hyperventilation
+    referrals:
+      - Cardiac rehabilitation or exercise program
+      - Weight loss if appropriate
+    trace:
+      - "Deconditioning likely after ruling out cardiopulmonary disease"
+    next: []

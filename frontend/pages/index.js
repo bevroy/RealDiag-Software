@@ -41,6 +41,20 @@ export default function Home(){
             🩺 Interactive Diagnosis Tool
           </Link>
           
+          <Link href="/symptom-search" style={{
+            padding: '1.25rem',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            boxShadow: '0 4px 12px rgba(245, 158, 11, 0.4)',
+            transition: 'transform 0.2s'
+          }}>
+            🔍 Symptom-Based Search
+          </Link>
+          
           <Link href="/rules" style={{
             padding: '1.25rem',
             background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
