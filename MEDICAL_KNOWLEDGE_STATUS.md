@@ -3,9 +3,10 @@
 ## Current Coverage (November 2025)
 
 ### Summary Statistics
-- **Total Disease Families:** 11
-- **Total Diagnoses:** 177
-- **Coverage Status:** Comprehensive common conditions across major specialties
+- **Total Disease Families:** 13
+- **Total Diagnoses:** 215
+- **Decision Trees:** 9 (covering common emergency/urgent presentations)
+- **Coverage Status:** Comprehensive common conditions across major specialties with active diagnostic support
 
 ### Disease Families
 
@@ -23,8 +24,8 @@
 #### 2. Cardiology (24 diagnoses)
 **Coverage:** Excellent
 - Acute coronary syndromes (ACS, angina)
-- Arrhythmias (AFib, SVT, VT, V-fib, bradycardia, heart block)
-- Valvular disease (AS, AR, MR, MS)
+- Arrhythmias (AFib, SVT, VT, V-fib, bradycardia, heart block, sick sinus, WPW)
+- Valvular disease (AS, AR, MR, MS, TR)
 - Heart failure and cardiomyopathy
 - Vascular (PE, aortic dissection, PAD, DVT)
 - Structural (myocarditis, pericarditis, tamponade)
@@ -34,10 +35,10 @@
 **Coverage:** Excellent
 - Diabetes (Type 1, Type 2, DKA, HHS, hypoglycemia, GDM)
 - Thyroid (hyperthyroid, hypothyroid, thyroid storm, nodules, cancer)
-- Adrenal (insufficiency, crisis, Cushing's, pheochromocytoma)
+- Adrenal (insufficiency, crisis, Cushing's, Addison's, pheochromocytoma)
 - Parathyroid (hyperparathyroidism, hypercalcemia, hypoparathyroidism)
 - Pituitary (acromegaly, hypopituitarism, prolactinoma, diabetes insipidus, SIADH)
-- Metabolic (osteoporosis, metabolic syndrome)
+- Metabolic (osteoporosis, metabolic syndrome, vitamin D deficiency)
 
 #### 4. Pulmonology (12 diagnoses)
 **Coverage:** Good
@@ -45,69 +46,121 @@
 - Infectious (pneumonia, tuberculosis, bronchitis)
 - Vascular (pulmonary embolism)
 - Structural (pneumothorax, pleural effusion)
-- Interstitial (ILD, sarcoidosis)
-- Neoplastic (lung cancer)
-- Sleep (obstructive sleep apnea)
+- Interstitial (ILD, sarcoidosis, bronchiectasis)
+- Other (pulmonary hypertension, cystic fibrosis, obstructive sleep apnea)
 
 #### 5. Gastroenterology (14 diagnoses)
 **Coverage:** Good
 - Upper GI (GERD, PUD, celiac disease)
 - IBD (Crohn's, ulcerative colitis)
-- Acute abdomen (appendicitis, cholecystitis, pancreatitis, diverticulitis, bowel obstruction)
+- Acute abdomen (appendicitis, cholecystitis, pancreatitis, diverticulitis, bowel obstruction, cholangitis)
 - Hepatobiliary (hepatitis, cirrhosis)
 - Functional (IBS)
-- Neoplastic (colorectal cancer)
 
 #### 6. Infectious Disease (13 diagnoses)
 **Coverage:** Good
-- Systemic (sepsis, COVID-19, influenza, HIV, mononucleosis)
-- CNS (meningitis, encephalitis)
+- Systemic (sepsis, COVID-19, influenza, HIV/AIDS)
+- CNS (bacterial meningitis, viral meningitis)
 - Skin/soft tissue (cellulitis)
 - Bone/joint (osteomyelitis, endocarditis)
+- Respiratory (pneumonia)
 - GU (UTI)
 - Vector-borne (Lyme disease)
-- GI (C. difficile)
 
 #### 7. Nephrology (10 diagnoses)
 **Coverage:** Good
-- Acute kidney injury (AKI)
-- Chronic kidney disease (CKD, ESRD)
-- Glomerular (nephrotic syndrome, nephritic syndrome, glomerulonephritis)
-- Structural (polycystic kidney disease, kidney stones)
-- Infections (pyelonephritis)
+- Acute kidney injury (AKI, acute renal failure)
+- Chronic kidney disease (CKD)
+- Glomerular (nephrotic syndrome, nephritic syndrome)
+- Structural (kidney stones)
+- Electrolyte (hyponatremia, hyperkalemia)
 - Tubular (renal tubular acidosis)
+- Other (rhabdomyolysis)
 
 #### 8. Rheumatology (13 diagnoses)
 **Coverage:** Good
-- Inflammatory arthritis (RA, AS, psoriatic arthritis)
+- Inflammatory arthritis (RA, AS, psoriatic arthritis, reactive arthritis)
 - Degenerative (osteoarthritis)
 - Crystal arthropathy (gout, pseudogout)
-- Connective tissue (SLE, Sjögren's, scleroderma)
-- Vasculitis (GCA, systemic vasculitis)
-- Other (polymyalgia rheumatica, fibromyalgia)
+- Connective tissue (SLE, Sjögren's, scleroderma, polymyositis, dermatomyositis)
+- Vasculitis (systemic vasculitis)
 
 #### 9. Dermatology (13 diagnoses)
 **Coverage:** Good
-- Inflammatory (eczema, psoriasis, acne, rosacea, urticaria)
-- Infectious (cellulitis, tinea, herpes zoster)
+- Inflammatory (eczema, psoriasis, acne, rosacea, contact dermatitis, seborrheic dermatitis)
+- Infectious (cellulitis, herpes zoster/shingles, tinea, scabies)
 - Neoplastic (melanoma, BCC, SCC)
-- Autoimmune (vitiligo, alopecia areata)
 
 #### 10. Psychiatry (12 diagnoses)
 **Coverage:** Good
-- Mood disorders (MDD, bipolar disorder)
-- Anxiety disorders (GAD, panic disorder, PTSD, OCD)
+- Mood disorders (MDD, bipolar disorder, adjustment disorder)
+- Anxiety disorders (GAD, panic disorder, social anxiety, PTSD, OCD)
 - Psychotic (schizophrenia)
-- Neurodevelopmental (ADHD, autism)
-- Substance use disorder
-- Eating disorders (anorexia, bulimia)
+- Neurodevelopmental (ADHD)
+- Eating disorders
+- Substance use disorders
 
 #### 11. OB/GYN (12 diagnoses)
 **Coverage:** Good
-- Obstetric complications (preeclampsia, ectopic pregnancy, hyperemesis, GDM)
-- Gynecologic (PCOS, endometriosis, PID, fibroids, ovarian cysts)
-- Neoplastic (cervical cancer, ovarian cancer)
-- Menopause
+- Obstetric complications (preeclampsia, eclampsia, gestational diabetes, placenta previa, placental abruption)
+- Gynecologic (PCOS, endometriosis, PID, fibroids, ovarian cysts, ectopic pregnancy, menorrhagia)
+
+#### 12. Hematology/Oncology (21 diagnoses) **NEW**
+**Coverage:** Excellent
+- Anemias (iron deficiency, B12 deficiency, folate deficiency, anemia of chronic disease, hemolytic anemia, aplastic anemia, sickle cell disease)
+- Bleeding disorders (ITP, TTP, HUS, DIC, hemophilia A/B, von Willebrand disease)
+- Blood cancers (AML, ALL, CML, CLL, multiple myeloma, Hodgkin lymphoma, non-Hodgkin lymphoma)
+
+#### 13. Orthopedics (17 diagnoses) **NEW**
+**Coverage:** Excellent
+- Fractures (hip, distal radius/Colles, ankle, clavicle, femoral shaft, vertebral compression)
+- Ligament/tendon injuries (ACL tear, meniscus tear, rotator cuff tear, Achilles rupture)
+- Nerve compression (carpal tunnel syndrome, cervical radiculopathy, lumbar radiculopathy/sciatica)
+- Infections (osteomyelitis, septic arthritis)
+- Other (compartment syndrome, plantar fasciitis)
+
+---
+
+## Decision Trees (9 total)
+
+### Comprehensive Clinical Pathways **NEW**
+
+1. **NEU-HEADACHE** (Existing)
+   - Headache evaluation and classification
+
+2. **NEU-VERTIGO** (Existing)
+   - Dizziness and vertigo workup
+
+3. **ENDO-DIABETES** (Existing)
+   - Diabetes management pathways
+
+4. **ENDO-THYROID** (Existing)
+   - Thyroid disorder evaluation
+
+5. **CARD-CHEST-PAIN** (NEW)
+   - Chest pain triage (ACS, PE, aortic dissection, pneumothorax, pericarditis, GERD)
+   - Red flags and emergency pathways
+   - Risk stratification and testing algorithms
+
+6. **GI-ABD-PAIN** (NEW)
+   - Abdominal pain evaluation (surgical vs medical)
+   - Peritonitis, appendicitis, cholecystitis, pancreatitis, bowel obstruction
+   - Emergency surgical referral pathways
+
+7. **PULM-DYSPNEA** (NEW)
+   - Shortness of breath workup
+   - Critical dyspnea vs acute onset vs chronic progressive
+   - PE evaluation, CHF, COPD/asthma, pneumothorax, pneumonia
+
+8. **ID-FEVER** (NEW)
+   - Fever and sepsis screening
+   - Source identification (respiratory, urinary, abdominal, skin/soft tissue, CNS)
+   - Immunocompromised host considerations
+
+9. **CARD-SYNCOPE** (NEW)
+   - Syncope/loss of consciousness evaluation
+   - Cardiac syncope vs seizure vs orthostatic vs vasovagal
+   - Arrhythmia and structural heart disease pathways
 
 ---
 
@@ -120,34 +173,23 @@
 ✅ **All major organ systems** represented
 ✅ **ICD-10 and SNOMED CT codes** for all diagnoses
 ✅ **Clinical presentations** for diagnostic support
+✅ **Decision trees** for most common emergency/urgent presentations
+✅ **Symptom-based search** for intelligent diagnostic suggestions
 
 ### What's Missing (Future Priorities)
 
 #### High Priority Additions
 
-1. **Hematology/Oncology**
-   - Anemia types (iron deficiency, B12 deficiency, hemolytic)
-   - Leukemias and lymphomas
-   - Coagulopathies (hemophilia, von Willebrand, DIC)
-   - Thrombocytopenia
-   - Solid tumor oncology
-
-2. **Orthopedics/Sports Medicine**
-   - Fractures and dislocations
-   - Ligament tears (ACL, MCL, rotator cuff)
-   - Osteoarthritis of specific joints
-   - Compartment syndrome
-   - Osteomyelitis
-
-3. **Ophthalmology**
+1. **Ophthalmology**
    - Glaucoma
    - Cataracts
    - Retinal detachment
    - Diabetic retinopathy
    - Macular degeneration
    - Uveitis
+   - Acute angle closure
 
-4. **ENT (Otolaryngology)**
+2. **ENT (Otolaryngology)**
    - Otitis media/externa
    - Sinusitis
    - Pharyngitis/tonsillitis
@@ -155,7 +197,7 @@
    - Meniere's disease
    - Epiglottitis
 
-5. **Urology**
+3. **Urology**
    - Benign prostatic hyperplasia
    - Prostate cancer
    - Erectile dysfunction
@@ -207,50 +249,6 @@
 
 ---
 
-## Data Quality Standards
-
-### Current Standards
-- Each diagnosis includes:
-  - Unique identifier (family prefix + condition code)
-  - Human-readable label
-  - Clinical presentations (symptoms, signs, risk factors)
-  - ICD-10 codes (multiple where applicable)
-  - SNOMED CT codes (for interoperability)
-
-### Future Enhancements Needed
-
-1. **Clinical Guidelines References**
-   - Link to evidence-based guidelines
-   - Citation of primary sources
-   - Update dates for clinical recommendations
-
-2. **Differential Diagnosis Support**
-   - Related/similar conditions
-   - Red flags for dangerous mimics
-   - Key distinguishing features
-
-3. **Laboratory Values**
-   - Normal ranges
-   - Diagnostic thresholds
-   - Common lab abnormalities
-
-4. **Imaging Recommendations**
-   - First-line imaging modality
-   - Key imaging findings
-   - When imaging is indicated
-
-5. **Treatment Algorithms**
-   - First-line medications
-   - Alternative treatments
-   - When to refer to specialist
-
-6. **Severity Stratification**
-   - Mild/moderate/severe criteria
-   - Scoring systems (CURB-65, CHADS2-VASc, etc.)
-   - Risk stratification
-
----
-
 ## System Capabilities
 
 ### Current Features
@@ -259,46 +257,44 @@
 ✅ Search by symptoms, diagnosis name, ICD-10, or SNOMED
 ✅ Expandable details for each diagnosis
 ✅ CSV export for offline use
-✅ Printable reference cheat-sheets
-✅ Interactive decision trees (4 pathways: headache, vertigo, diabetes, thyroid)
+✅ **Symptom-based search** - Input symptoms → get ranked diagnoses ✨ **NEW**
+✅ **9 interactive decision trees** covering most common emergency/urgent presentations ✨ **EXPANDED**
+  - Headache, vertigo, diabetes, thyroid (original 4)
+  - Chest pain, abdominal pain, dyspnea, fever, syncope (new 5)
 ✅ Specialist referral recommendations
 ✅ Clinical reasoning trace (decision tree logic)
+✅ Match scoring for symptom-based diagnosis suggestions
 
 ### Planned Enhancements
 
-1. **Symptom-Based Search**
-   - Input symptoms → suggest possible diagnoses
-   - Ranked by likelihood
-   - Consider demographics (age, sex, risk factors)
+1. **Additional Decision Trees**
+   - Altered mental status algorithm
+   - Head trauma/concussion evaluation
+   - Back pain algorithm
+   - Joint pain algorithm
+   - 40+ more common chief complaints
 
-2. **More Decision Trees**
-   - Chest pain algorithm
-   - Abdominal pain algorithm
-   - Dyspnea algorithm
-   - Fever workup
-   - Altered mental status
-   - 50+ common chief complaints
-
-3. **Risk Calculators**
+2. **Risk Calculators**
    - ASCVD risk
    - CHADS2-VASc (stroke risk in AFib)
    - CURB-65 (pneumonia severity)
    - Wells score (DVT/PE)
    - TIMI score (ACS)
+   - PSI/PORT (pneumonia severity)
 
-4. **Drug Information Integration**
+3. **Drug Information Integration**
    - Common medications for each condition
    - Dosing information
    - Contraindications
    - Drug-drug interactions
 
-5. **Patient Education Materials**
+4. **Patient Education Materials**
    - Plain-language descriptions
    - What to expect
    - When to seek care
    - Lifestyle modifications
 
-6. **Mobile Optimization**
+5. **Mobile Optimization**
    - Native mobile app
    - Offline capability
    - Quick reference cards
@@ -392,20 +388,29 @@
 
 ## Conclusion
 
-RealDiag now contains **177 diagnoses across 11 disease families**, providing solid coverage of common conditions encountered in clinical practice. The system is well-positioned for expansion and can serve as a foundation for comprehensive medical knowledge base.
+RealDiag now contains **215 diagnoses across 13 disease families** with **9 comprehensive decision trees** and **intelligent symptom-based search**, transforming it from a passive reference tool into an active diagnostic assistant.
 
 **Key Strengths:**
-- Broad specialty coverage
+- Comprehensive specialty coverage (13 families)
+- Decision trees for most common emergency/urgent presentations
+- Symptom-based diagnostic suggestions with match scoring
 - Standardized data structure
 - Clinical presentation focus
-- Coding standards compliance
+- Coding standards compliance (ICD-10 + SNOMED)
 - Extensible architecture
 
-**Priorities for Growth:**
-1. Add remaining major specialties (Heme/Onc, Ortho, Ophtho, ENT, Uro)
-2. Expand decision trees
-3. Clinical validation
-4. Enhanced search capabilities
-5. Risk calculators and algorithms
+**Recent Additions (November 2025):**
+✨ 5 new decision trees (chest pain, abdominal pain, dyspnea, fever, syncope)
+✨ 2 new disease families (hematology/oncology, orthopedics)
+✨ Symptom-based search algorithm with intelligent ranking
+✨ 38 new diagnoses added (177 → 215)
 
-The framework is now in place to systematically add medical knowledge and build toward comprehensive diagnostic coverage.
+**Priorities for Growth:**
+1. Add remaining major specialties (Ophthalmology, ENT, Urology)
+2. Expand decision trees (altered mental status, trauma, joint pain)
+3. Clinical validation and guideline integration
+4. Risk calculators (CHADS2-VASc, Wells score, TIMI, CURB-65)
+5. Treatment protocols and medication information
+
+The system has reached a critical milestone: it now provides active diagnostic assistance for the majority of common clinical presentations, not just reference data. With 215 diagnoses, 9 decision trees, and intelligent symptom-based search, RealDiag is positioned to serve as a comprehensive clinical decision support tool.
+
