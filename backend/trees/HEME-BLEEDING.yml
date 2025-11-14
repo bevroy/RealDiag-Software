@@ -1,0 +1,306 @@
+tree_id: HEME-BLEEDING
+name: Bleeding Disorder Evaluation
+description: Decision tree for evaluating abnormal bleeding and coagulopathy
+version: "1.0"
+entry_point: initial_bleeding
+
+nodes:
+  initial_bleeding:
+    when:
+      symptoms_contains_any: ["abnormal bleeding", "easy bruising", "prolonged bleeding", "nosebleeds", "heavy periods"]
+    tests:
+      - History of bleeding (spontaneous vs provoked, mucosal vs deep tissue)
+      - Medication review (anticoagulants, antiplatelet agents, NSAIDs)
+      - Family history of bleeding
+      - Petechiae vs purpura vs ecchymosis
+      - Hemodynamic stability
+      - Sites of bleeding
+    suggest_dx:
+      - Bleeding disorder (etiology to be determined)
+    referrals:
+      - Emergency evaluation if active severe bleeding or hemodynamic instability
+    trace:
+      - "Bleeding evaluation - determine urgency and pattern"
+    next:
+      - node: life_threatening_bleeding
+        if:
+          any_of:
+            - red_flags_any: ["hypotension", "tachycardia", "altered mental status", "massive bleeding"]
+            - symptoms_contains_any: ["intracranial hemorrhage", "GI bleed with hemodynamic instability"]
+      - node: anticoagulant_related
+        if:
+          symptoms_contains_any: ["on warfarin", "on DOACs", "on heparin"]
+      - node: platelet_disorder
+        if:
+          symptoms_contains_any: ["petechiae", "mucosal bleeding", "epistaxis", "menorrhagia"]
+      - node: coagulation_disorder
+        if:
+          symptoms_contains_any: ["deep tissue bleeding", "hemarthrosis", "muscle hematomas"]
+
+  life_threatening_bleeding:
+    when:
+      any_of:
+        - red_flags_any: ["hemodynamic instability", "massive bleeding", "intracranial hemorrhage"]
+        - exam_flags_any: ["hypotension", "altered mental status", "signs of shock"]
+    tests:
+      - STAT CBC, PT/INR, aPTT
+      - Type and crossmatch (6-10 units PRBCs)
+      - Fibrinogen, D-dimer
+      - Thromboelastography (TEG/ROTEM) if available
+      - STAT imaging (CT head, CT chest/abdomen/pelvis)
+      - Activate massive transfusion protocol
+    suggest_dx:
+      - Life-threatening hemorrhage
+      - DIC
+      - Warfarin-related ICH
+      - Trauma-related coagulopathy
+    referrals:
+      - ICU admission STAT
+      - Massive transfusion protocol (1:1:1 ratio PRBC:FFP:platelets)
+      - Reverse anticoagulation (vitamin K, PCC, idarucizumab, andexanet alfa)
+      - Hematology consult STAT
+      - Surgery or interventional radiology if indicated
+    trace:
+      - "Life-threatening bleeding - massive transfusion protocol"
+    next: []
+
+  anticoagulant_related:
+    when:
+      symptoms_contains_any: ["on warfarin", "on DOACs", "on heparin", "on aspirin/clopidogrel"]
+    tests:
+      - INR (if on warfarin)
+      - Anti-Xa level (if on heparin or LMWH)
+      - aPTT
+      - CBC
+      - Assess severity of bleeding
+    suggest_dx:
+      - Anticoagulant-related bleeding
+    referrals:
+      - Hold anticoagulation temporarily
+      - Reversal agents if severe bleeding (vitamin K, PCC, protamine, idarucizumab, andexanet alfa)
+      - Hematology consult if recurrent bleeding or unclear reversal strategy
+    trace:
+      - "Anticoagulant-related bleeding - consider reversal"
+    next:
+      - node: warfarin_bleeding
+        if:
+          symptoms_contains_any: ["on warfarin"]
+      - node: doac_bleeding
+        if:
+          symptoms_contains_any: ["on DOACs", "on dabigatran", "on rivaroxaban", "on apixaban"]
+      - node: heparin_bleeding
+        if:
+          symptoms_contains_any: ["on heparin"]
+
+  warfarin_bleeding:
+    when:
+      symptoms_contains_any: ["on warfarin"]
+    tests:
+      - INR
+      - Assess bleeding severity
+      - Vitamin K 10 mg IV
+      - Prothrombin complex concentrate (PCC) if severe bleeding
+      - FFP if PCC not available
+    suggest_dx:
+      - Warfarin-related bleeding
+    referrals:
+      - Hold warfarin
+      - Vitamin K 10 mg IV (INR reversal in 6-12 hours)
+      - PCC for immediate reversal if life-threatening
+      - Hematology follow-up to restart anticoagulation when safe
+    trace:
+      - "Warfarin reversal - vitamin K and PCC"
+    next: []
+
+  doac_bleeding:
+    when:
+      symptoms_contains_any: ["on DOACs"]
+    tests:
+      - Assess bleeding severity
+      - Idarucizumab if dabigatran and severe bleeding
+      - Andexanet alfa if apixaban/rivaroxaban and severe bleeding
+      - Activated charcoal if recent ingestion (< 2 hours)
+    suggest_dx:
+      - DOAC-related bleeding
+    referrals:
+      - Hold DOAC
+      - Specific reversal agent if life-threatening (idarucizumab for dabigatran, andexanet for Xa inhibitors)
+      - PCC if reversal agents unavailable
+      - Hematology consult
+    trace:
+      - "DOAC reversal - specific reversal agents or PCC"
+    next: []
+
+  heparin_bleeding:
+    when:
+      symptoms_contains_any: ["on heparin", "on LMWH"]
+    tests:
+      - aPTT (if unfractionated heparin)
+      - Anti-Xa level (if LMWH)
+      - Protamine sulfate 1 mg per 100 units heparin
+    suggest_dx:
+      - Heparin-related bleeding
+    referrals:
+      - Hold heparin
+      - Protamine sulfate for reversal (fully reverses UFH, partially reverses LMWH)
+      - Monitor for protamine reaction
+    trace:
+      - "Heparin reversal - protamine sulfate"
+    next: []
+
+  platelet_disorder:
+    when:
+      symptoms_contains_any: ["petechiae", "mucosal bleeding", "epistaxis", "gingival bleeding", "menorrhagia"]
+    tests:
+      - CBC with platelet count
+      - Peripheral blood smear
+      - PT/INR and aPTT (usually normal in platelet disorders)
+      - Consider bone marrow biopsy if thrombocytopenia unexplained
+    suggest_dx:
+      - Thrombocytopenia (ITP, TTP, HUS, marrow failure)
+      - Platelet function disorder (von Willebrand disease, aspirin effect)
+    referrals:
+      - Hematology referral
+    trace:
+      - "Platelet disorder - mucosal bleeding pattern"
+    next:
+      - node: severe_thrombocytopenia
+        if:
+          exam_flags_any: ["platelet count < 10,000", "active bleeding with platelets < 50,000"]
+      - node: immune_thrombocytopenia
+        if:
+          exam_flags_any: ["isolated thrombocytopenia", "platelets 20,000-100,000", "otherwise healthy"]
+      - node: von_willebrand
+        if:
+          symptoms_contains_any: ["family history bleeding", "mucosal bleeding", "menorrhagia", "normal platelet count"]
+
+  severe_thrombocytopenia:
+    when:
+      exam_flags_any: ["platelets < 10,000", "active bleeding with low platelets"]
+    tests:
+      - STAT CBC
+      - Peripheral smear (look for schistocytes suggesting TTP/HUS)
+      - LDH, indirect bilirubin, haptoglobin (if concern for TTP)
+      - ADAMTS13 activity (if TTP suspected)
+      - Platelet transfusion if active bleeding (contraindicated in TTP/HIT)
+    suggest_dx:
+      - Severe thrombocytopenia (ITP vs TTP vs HUS vs marrow failure)
+    referrals:
+      - Hematology consult STAT
+      - Hospital admission
+      - Platelet transfusion if bleeding (avoid in TTP)
+      - Plasmapheresis if TTP
+      - IVIG or steroids if ITP
+    trace:
+      - "Severe thrombocytopenia - hematology consult STAT"
+    next: []
+
+  immune_thrombocytopenia:
+    when:
+      exam_flags_any: ["isolated thrombocytopenia", "platelets 20,000-100,000"]
+    tests:
+      - CBC with differential
+      - Peripheral smear (rule out pseudothrombocytopenia, look for large platelets)
+      - HIV, HCV screening
+      - Consider bone marrow if atypical features
+    suggest_dx:
+      - Immune thrombocytopenic purpura (ITP)
+    referrals:
+      - Hematology referral
+      - Observation if platelets > 30,000 and no bleeding
+      - Steroids or IVIG if platelets < 30,000 or active bleeding
+      - Avoid contact sports and NSAIDs
+    trace:
+      - "ITP - hematology referral"
+    next: []
+
+  von_willebrand:
+    when:
+      symptoms_contains_any: ["mucosal bleeding", "menorrhagia", "prolonged bleeding with procedures", "family history"]
+    tests:
+      - von Willebrand factor antigen
+      - von Willebrand factor activity (ristocetin cofactor)
+      - Factor VIII level
+      - Bleeding time or PFA-100
+    suggest_dx:
+      - von Willebrand disease (Type 1, 2, or 3)
+    referrals:
+      - Hematology referral
+      - DDAVP for type 1 vWD
+      - vWF concentrate for type 3 or severe bleeding
+      - Avoid aspirin and NSAIDs
+    trace:
+      - "von Willebrand disease - hematology referral"
+    next: []
+
+  coagulation_disorder:
+    when:
+      symptoms_contains_any: ["hemarthrosis", "deep tissue hematomas", "muscle bleeding", "prolonged bleeding after surgery"]
+    tests:
+      - PT/INR
+      - aPTT
+      - Mixing study if prolonged PT or aPTT
+      - Factor VIII, IX, XI levels
+      - Fibrinogen
+    suggest_dx:
+      - Hemophilia A (Factor VIII deficiency)
+      - Hemophilia B (Factor IX deficiency)
+      - Factor XI deficiency
+      - Acquired inhibitor (Factor VIII inhibitor)
+      - Liver disease (multiple factor deficiencies)
+    referrals:
+      - Hematology referral
+      - Factor replacement for hemophilia
+      - Avoid NSAIDs and antiplatelet agents
+    trace:
+      - "Coagulation factor deficiency - deep tissue bleeding"
+    next:
+      - node: hemophilia
+        if:
+          any_of:
+            - exam_flags_any: ["prolonged aPTT", "low Factor VIII or IX"]
+            - symptoms_contains_any: ["family history hemophilia", "male patient"]
+      - node: acquired_inhibitor
+        if:
+          exam_flags_any: ["prolonged aPTT", "mixing study does not correct"]
+
+  hemophilia:
+    when:
+      any_of:
+        - exam_flags_any: ["low Factor VIII", "low Factor IX"]
+        - symptoms_contains_any: ["hemarthrosis", "family history hemophilia"]
+    tests:
+      - Factor VIII or IX level
+      - Inhibitor screening (Bethesda assay)
+      - Severity: severe (< 1%), moderate (1-5%), mild (> 5%)
+    suggest_dx:
+      - Hemophilia A (Factor VIII deficiency)
+      - Hemophilia B (Factor IX deficiency)
+    referrals:
+      - Hematology referral to hemophilia treatment center
+      - Prophylactic factor replacement for severe hemophilia
+      - On-demand treatment for bleeding episodes
+      - Avoid IM injections and NSAIDs
+      - Genetic counseling
+    trace:
+      - "Hemophilia - hemophilia treatment center"
+    next: []
+
+  acquired_inhibitor:
+    when:
+      exam_flags_any: ["prolonged aPTT", "mixing study does not correct", "low Factor VIII with inhibitor"]
+    tests:
+      - Mixing study
+      - Bethesda assay (quantify inhibitor titer)
+      - Workup for underlying cause (autoimmune, malignancy, pregnancy)
+    suggest_dx:
+      - Acquired hemophilia A (Factor VIII inhibitor)
+      - Lupus anticoagulant (does not cause bleeding)
+    referrals:
+      - Hematology consult STAT
+      - Immunosuppression (steroids, rituximab)
+      - Bypassing agents for bleeding (rFVIIa, aPCC)
+      - Treat underlying cause
+    trace:
+      - "Acquired inhibitor - hematology consult STAT"
+    next: []

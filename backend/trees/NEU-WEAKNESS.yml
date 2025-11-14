@@ -1,0 +1,257 @@
+tree_id: NEU-WEAKNESS
+name: Acute Weakness Localization
+description: Decision tree for localizing acute weakness and determining urgency
+version: "1.0"
+entry_point: initial_weakness
+
+nodes:
+  initial_weakness:
+    when:
+      symptoms_contains_any: ["weakness", "can't move limb", "paralysis", "difficulty walking"]
+    tests:
+      - Onset and tempo (acute vs gradual)
+      - Distribution (focal vs diffuse, proximal vs distal)
+      - Cranial nerve examination
+      - Motor strength testing
+      - Reflexes (hyperreflexia vs hyporeflexia)
+      - Sensory examination
+      - Vital capacity if bulbar symptoms
+    suggest_dx:
+      - Weakness (localization to be determined)
+    referrals:
+      - Emergency evaluation if acute onset
+    trace:
+      - "Weakness evaluation - determine localization"
+    next:
+      - node: acute_stroke_like
+        if:
+          any_of:
+            - red_flags_any: ["sudden onset", "focal weakness", "facial droop", "speech difficulty"]
+            - symptoms_contains_any: ["hemiparesis", "hemiplegia"]
+      - node: cord_lesion
+        if:
+          any_of:
+            - exam_flags_any: ["sensory level", "bowel/bladder dysfunction", "bilateral leg weakness"]
+            - symptoms_contains_any: ["back pain + weakness", "urinary retention"]
+      - node: neuromuscular_junction
+        if:
+          symptoms_contains_any: ["fatigable weakness", "ptosis", "diplopia", "dysphagia"]
+      - node: peripheral_neuropathy
+        if:
+          exam_flags_any: ["areflexia", "distal weakness", "stocking-glove sensory loss"]
+      - node: myopathy
+        if:
+          symptoms_contains_any: ["proximal weakness", "difficulty rising from chair", "difficulty climbing stairs"]
+
+  acute_stroke_like:
+    when:
+      any_of:
+        - symptoms_contains_any: ["sudden weakness", "hemiparesis", "facial droop"]
+        - red_flags_any: ["acute onset", "focal deficit"]
+    tests:
+      - STAT CT head without contrast
+      - Blood glucose
+      - Time of symptom onset
+      - Consider CT angiography
+      - ECG
+      - Stroke protocol activation
+    suggest_dx:
+      - Acute ischemic stroke
+      - Hemorrhagic stroke
+      - TIA
+      - Hypoglycemia (mimic)
+    referrals:
+      - Neurology STAT
+      - Stroke team activation
+      - Consider thrombolysis if within window
+      - ICU or stroke unit admission
+    trace:
+      - "Acute stroke-like presentation - emergency evaluation"
+    next: []
+
+  cord_lesion:
+    when:
+      any_of:
+        - exam_flags_any: ["sensory level", "bilateral leg weakness", "hyperreflexia with Babinski"]
+        - symptoms_contains_any: ["back pain + bilateral leg weakness", "bowel/bladder dysfunction"]
+    tests:
+      - STAT MRI spine (thoracic and lumbar)
+      - Neurosurgery consult
+      - Bladder scan if urinary symptoms
+      - ESR/CRP if infection suspected
+    suggest_dx:
+      - Spinal cord compression
+      - Epidural abscess
+      - Transverse myelitis
+      - Cauda equina syndrome
+      - Spinal cord infarction
+    referrals:
+      - Neurosurgery STAT
+      - Hospital admission
+      - Antibiotics if infection suspected
+      - High-dose steroids if compression from malignancy
+    trace:
+      - "Spinal cord level - urgent spine imaging"
+    next: []
+
+  neuromuscular_junction:
+    when:
+      symptoms_contains_any: ["fatigable weakness", "ptosis worse with sustained upgaze", "diplopia", "difficulty swallowing", "difficulty breathing"]
+    tests:
+      - Vital capacity and negative inspiratory force (if bulbar symptoms)
+      - Edrophonium test or ice pack test (if available)
+      - Acetylcholine receptor antibodies
+      - Anti-MuSK antibodies
+      - EMG with repetitive stimulation
+      - Chest CT (thymoma)
+    suggest_dx:
+      - Myasthenia gravis
+      - Lambert-Eaton syndrome
+      - Botulism
+    referrals:
+      - Neurology consult
+      - ICU if respiratory compromise
+      - Plasmapheresis or IVIG if myasthenic crisis
+      - Pyridostigmine trial
+    trace:
+      - "Neuromuscular junction - fatigable weakness"
+    next:
+      - node: myasthenic_crisis
+        if:
+          red_flags_any: ["respiratory distress", "vital capacity < 15 mL/kg", "dysphagia with aspiration"]
+      - node: stable_nmj
+        default: true
+
+  myasthenic_crisis:
+    when:
+      any_of:
+        - red_flags_any: ["respiratory failure", "vital capacity < 15 mL/kg"]
+        - symptoms_contains_any: ["dyspnea", "orthopnea", "weak cough"]
+    tests:
+      - Vital capacity every 2-4 hours
+      - Negative inspiratory force
+      - ABG if hypoxia
+      - ICU admission
+      - Plasmapheresis or IVIG
+    suggest_dx:
+      - Myasthenic crisis
+    referrals:
+      - ICU admission STAT
+      - Neurology consult STAT
+      - Plasmapheresis or IVIG
+      - Hold anticholinesterase if cholinergic crisis suspected
+    trace:
+      - "Myasthenic crisis - ICU admission required"
+    next: []
+
+  stable_nmj:
+    when:
+      symptoms_contains_any: ["myasthenia", "LEMS"]
+    tests:
+      - Outpatient neuromuscular workup
+      - Antibody testing
+      - EMG
+      - Chest CT
+    suggest_dx:
+      - Myasthenia gravis
+      - Lambert-Eaton syndrome
+    referrals:
+      - Neurology referral (non-urgent if no bulbar symptoms)
+      - Pyridostigmine trial
+      - Immunosuppression if needed
+    trace:
+      - "Stable NMJ disorder - outpatient workup"
+    next: []
+
+  peripheral_neuropathy:
+    when:
+      exam_flags_any: ["areflexia", "distal weakness", "stocking-glove sensory loss"]
+    tests:
+      - EMG/NCS
+      - Workup for Guillain-Barré if rapidly progressive
+      - Vitamin B12, folate, TSH, HbA1c
+      - LP if GBS suspected
+    suggest_dx:
+      - Guillain-Barré syndrome (if acute ascending weakness)
+      - Chronic inflammatory demyelinating polyneuropathy (CIDP)
+      - Diabetic neuropathy
+      - Toxic neuropathy
+    referrals:
+      - Neurology consult if rapidly progressive
+      - ICU if respiratory compromise (GBS)
+      - IVIG or plasmapheresis for GBS/CIDP
+    trace:
+      - "Peripheral neuropathy - determine acuity"
+    next:
+      - node: guillain_barre
+        if:
+          any_of:
+            - symptoms_contains_any: ["rapidly progressive weakness", "ascending paralysis"]
+            - exam_flags_any: ["areflexia", "facial weakness", "respiratory weakness"]
+      - node: chronic_neuropathy
+        default: true
+
+  guillain_barre:
+    when:
+      any_of:
+        - symptoms_contains_any: ["ascending paralysis", "rapidly progressive weakness"]
+        - exam_flags_any: ["areflexia", "bilateral weakness"]
+    tests:
+      - Lumbar puncture (albuminocytologic dissociation)
+      - EMG/NCS
+      - Vital capacity monitoring
+      - ICU admission if respiratory compromise
+      - IVIG or plasmapheresis
+    suggest_dx:
+      - Guillain-Barré syndrome
+    referrals:
+      - Neurology consult STAT
+      - ICU if FVC declining or FVC < 20 mL/kg
+      - IVIG or plasmapheresis
+      - Monitor for autonomic instability
+    trace:
+      - "Guillain-Barré syndrome - monitor respiratory function"
+    next: []
+
+  chronic_neuropathy:
+    when:
+      symptoms_contains_any: ["chronic weakness", "gradual onset"]
+    tests:
+      - EMG/NCS
+      - Metabolic workup (B12, TSH, HbA1c)
+      - Autoimmune workup if demyelinating pattern
+    suggest_dx:
+      - Diabetic neuropathy
+      - CIDP
+      - Toxic neuropathy
+      - Vitamin deficiency
+    referrals:
+      - Neurology referral (non-urgent)
+      - Treat underlying cause
+      - Physical therapy
+    trace:
+      - "Chronic neuropathy - outpatient workup"
+    next: []
+
+  myopathy:
+    when:
+      symptoms_contains_any: ["proximal weakness", "difficulty rising from chair", "difficulty climbing stairs"]
+    tests:
+      - CK (creatine kinase)
+      - Aldolase
+      - TSH
+      - Inflammatory markers (ESR, CRP)
+      - EMG (myopathic pattern)
+      - Muscle biopsy if indicated
+    suggest_dx:
+      - Inflammatory myopathy (polymyositis, dermatomyositis)
+      - Statin myopathy
+      - Hypothyroid myopathy
+      - Muscular dystrophy
+    referrals:
+      - Neurology or rheumatology referral
+      - Stop offending medications (statins)
+      - Immunosuppression if inflammatory myopathy
+    trace:
+      - "Myopathy - proximal weakness pattern"
+    next: []

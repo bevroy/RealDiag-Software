@@ -1,0 +1,214 @@
+tree_id: NEU-SEIZURE
+name: Seizure Evaluation and Management
+description: Decision tree for evaluating first-time seizure vs known epilepsy
+version: "1.0"
+entry_point: initial_seizure
+
+nodes:
+  initial_seizure:
+    when:
+      symptoms_contains_any: ["seizure", "convulsion", "shaking spell", "loss of consciousness with jerking"]
+    tests:
+      - Vital signs
+      - Blood glucose
+      - History from witness
+      - Known epilepsy or first seizure
+      - Post-ictal state
+      - Tongue biting or incontinence
+      - Neurologic examination
+    suggest_dx:
+      - Seizure (etiology to be determined)
+    referrals:
+      - Emergency evaluation if actively seizing or post-ictal
+    trace:
+      - "Seizure evaluation - determine if active or resolved"
+    next:
+      - node: status_epilepticus
+        if:
+          red_flags_any: ["seizure > 5 minutes", "continuous seizure", "not returning to baseline"]
+      - node: first_seizure
+        if:
+          symptoms_contains_any: ["first seizure", "no prior seizure history"]
+      - node: known_epilepsy
+        if:
+          symptoms_contains_any: ["history of epilepsy", "on anti-seizure medications"]
+
+  status_epilepticus:
+    when:
+      any_of:
+        - red_flags_any: ["seizure > 5 minutes", "continuous seizure activity"]
+        - symptoms_contains_any: ["not returning to baseline between seizures"]
+    tests:
+      - STAT benzodiazepine (lorazepam or diazepam)
+      - Blood glucose
+      - Basic metabolic panel
+      - Antiepileptic drug levels if on medications
+      - CT head if first seizure or trauma
+      - EEG if non-convulsive status suspected
+    suggest_dx:
+      - Status epilepticus
+    referrals:
+      - ICU admission
+      - Neurology consult STAT
+      - Second-line agents if benzos fail (fosphenytoin, levetiracetam, valproate)
+      - Intubation if refractory
+      - Continuous EEG monitoring
+    trace:
+      - "Status epilepticus - emergency treatment"
+    next: []
+
+  first_seizure:
+    when:
+      symptoms_contains_any: ["first seizure", "no prior history"]
+    tests:
+      - Blood glucose
+      - Complete metabolic panel (hyponatremia, hypocalcemia, uremia)
+      - Toxicology screen
+      - CT head (emergent if trauma, focal deficit, or concern for mass)
+      - MRI brain (non-urgent if normal CT and neurologic exam)
+      - EEG (outpatient if normal exam and imaging)
+      - Lumbar puncture if fever or meningismus
+    suggest_dx:
+      - Provoked seizure (metabolic, infection, medication, withdrawal)
+      - Unprovoked seizure (idiopathic or structural)
+      - Brain tumor
+      - Stroke
+      - Meningitis/encephalitis
+    referrals:
+      - Neurology referral
+      - Driving restrictions (state-dependent, typically 3-6 months seizure-free)
+      - Do NOT start antiepileptic drugs unless provoked cause excluded
+    trace:
+      - "First seizure - search for underlying cause"
+    next:
+      - node: provoked_seizure
+        if:
+          any_of:
+            - exam_flags_any: ["hyponatremia", "hypoglycemia", "alcohol withdrawal", "drug intoxication"]
+            - symptoms_contains_any: ["fever + seizure", "recent head trauma"]
+      - node: unprovoked_seizure
+        default: true
+
+  provoked_seizure:
+    when:
+      any_of:
+        - exam_flags_any: ["metabolic abnormality", "infection", "drug/alcohol withdrawal"]
+        - symptoms_contains_any: ["fever", "recent medication change", "alcohol use"]
+    tests:
+      - Treat underlying cause
+      - Correct metabolic abnormalities
+      - Antibiotics if CNS infection
+      - Benzodiazepines if alcohol withdrawal
+      - Stop offending medications
+    suggest_dx:
+      - Provoked seizure due to (specify: hyponatremia, hypoglycemia, infection, withdrawal, medication, etc.)
+    referrals:
+      - Treat underlying cause
+      - NO antiepileptic drugs needed if provoked seizure
+      - Neurology follow-up optional
+      - Driving restrictions apply (state-dependent)
+    trace:
+      - "Provoked seizure - treat underlying cause, AEDs usually not needed"
+    next: []
+
+  unprovoked_seizure:
+    when:
+      symptoms_contains_any: ["first unprovoked seizure"]
+    tests:
+      - MRI brain (better than CT for detecting subtle structural lesions)
+      - EEG (look for epileptiform discharges)
+      - Prolactin level (if uncertainty about diagnosis)
+    suggest_dx:
+      - Unprovoked seizure
+      - Possible epilepsy (recurrence risk ~40-50% over 2 years)
+    referrals:
+      - Neurology referral
+      - Decision to start AED depends on: recurrence risk, EEG findings, MRI findings, patient preference
+      - Driving restrictions
+      - Avoid triggers: sleep deprivation, alcohol, flashing lights
+    trace:
+      - "Unprovoked first seizure - neurology referral"
+    next: []
+
+  known_epilepsy:
+    when:
+      symptoms_contains_any: ["history of epilepsy", "on anti-seizure medications"]
+    tests:
+      - Antiepileptic drug levels
+      - Medication adherence assessment
+      - Recent medication changes or missed doses
+      - Sleep deprivation or alcohol use
+      - Illness or infection
+      - CT head if new focal findings or trauma
+    suggest_dx:
+      - Breakthrough seizure in known epilepsy
+    referrals:
+      - Neurology follow-up
+      - Adjust AED dose if subtherapeutic levels
+      - Add second AED if breakthrough on therapeutic levels
+      - Consider video EEG monitoring if frequent seizures
+    trace:
+      - "Known epilepsy - breakthrough seizure"
+    next:
+      - node: noncompliance
+        if:
+          exam_flags_any: ["subtherapeutic AED levels", "patient admits missed doses"]
+      - node: refractory_epilepsy
+        if:
+          symptoms_contains_any: ["frequent seizures despite medications", "failed multiple AEDs"]
+      - node: medication_adjustment
+        default: true
+
+  noncompliance:
+    when:
+      exam_flags_any: ["subtherapeutic levels", "missed doses"]
+    tests:
+      - Medication adherence counseling
+      - Assess barriers (cost, side effects, complexity)
+      - Simplify regimen if possible
+    suggest_dx:
+      - Breakthrough seizure due to medication nonadherence
+    referrals:
+      - Resume regular dosing
+      - Pharmacy or social work consult if barriers
+      - Neurology follow-up
+    trace:
+      - "Noncompliance with AEDs - counseling and simplification"
+    next: []
+
+  refractory_epilepsy:
+    when:
+      symptoms_contains_any: ["failed 2+ adequate trials of AEDs", "frequent seizures"]
+    tests:
+      - Video EEG monitoring
+      - MRI brain (3 Tesla) to look for subtle lesions
+      - Neuropsychological testing
+      - Evaluate for epilepsy surgery or VNS
+    suggest_dx:
+      - Refractory (drug-resistant) epilepsy
+    referrals:
+      - Epilepsy center referral
+      - Consider epilepsy surgery if focal lesion
+      - Vagal nerve stimulator (VNS)
+      - Ketogenic diet (especially for children)
+      - Clinical trials
+    trace:
+      - "Refractory epilepsy - epilepsy center referral"
+    next: []
+
+  medication_adjustment:
+    when:
+      symptoms_contains_any: ["breakthrough seizure on therapeutic AED"]
+    tests:
+      - Increase dose of current AED or add second AED
+      - Check for drug interactions
+      - Reassess triggers
+    suggest_dx:
+      - Breakthrough seizure despite compliance
+    referrals:
+      - Neurology follow-up
+      - Medication adjustment
+      - Monitor for side effects with dose increase
+    trace:
+      - "Medication adjustment - optimize AED therapy"
+    next: []

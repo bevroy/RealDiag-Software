@@ -1,0 +1,249 @@
+tree_id: NEU-CONFUSION
+name: Acute Confusion and Altered Mental Status
+description: Decision tree for evaluating altered mental status with focus on delirium vs dementia
+version: "1.0"
+entry_point: initial_ams
+
+nodes:
+  initial_ams:
+    when:
+      symptoms_contains_any: ["confusion", "altered mental status", "disorientation", "not acting right"]
+    tests:
+      - Vital signs (fever, hypoxia, BP)
+      - Blood glucose (fingerstick)
+      - Onset and tempo (acute vs chronic)
+      - Baseline cognitive function
+      - Medications review
+      - Alcohol/drug use history
+      - Brief cognitive assessment
+    suggest_dx:
+      - Altered mental status (etiology to be determined)
+    referrals:
+      - Emergency evaluation
+    trace:
+      - "Altered mental status - determine acuity"
+    next:
+      - node: emergency_ams
+        if:
+          any_of:
+            - red_flags_any: ["unresponsive", "GCS < 12", "seizure", "focal neurologic deficit"]
+            - exam_flags_any: ["pupil abnormality", "posturing", "signs of herniation"]
+      - node: acute_delirium
+        if:
+          symptoms_contains_any: ["acute confusion", "sudden change", "fluctuating awareness"]
+      - node: chronic_dementia
+        if:
+          symptoms_contains_any: ["gradual onset", "memory loss over months", "progressive cognitive decline"]
+
+  emergency_ams:
+    when:
+      any_of:
+        - red_flags_any: ["coma", "GCS < 12", "focal deficit", "seizure"]
+        - exam_flags_any: ["unresponsive", "posturing", "abnormal pupils"]
+    tests:
+      - STAT CT head without contrast
+      - Blood glucose
+      - Basic metabolic panel
+      - Toxicology screen
+      - Arterial blood gas if hypoxic
+      - Lumbar puncture if meningitis suspected (after imaging)
+    suggest_dx:
+      - Stroke
+      - Intracranial hemorrhage
+      - Severe hypoglycemia
+      - Status epilepticus
+      - Meningitis/encephalitis
+      - Severe metabolic derangement
+    referrals:
+      - ICU admission
+      - Neurology consult STAT
+      - Treat underlying cause
+      - Airway protection if GCS < 8
+    trace:
+      - "Emergency AMS - critical illness"
+    next: []
+
+  acute_delirium:
+    when:
+      symptoms_contains_any: ["acute confusion", "fluctuating awareness", "inattention", "disorganized thinking"]
+    tests:
+      - Confusion Assessment Method (CAM)
+      - Complete metabolic panel
+      - CBC
+      - Urinalysis and culture
+      - Chest X-ray
+      - ECG
+      - Medication review (anticholinergics, benzos, opioids)
+      - Thyroid function
+      - CT head if trauma or focal findings
+    suggest_dx:
+      - Delirium (determine underlying cause)
+    referrals:
+      - Hospital admission if severe or unsafe at home
+      - Treat underlying cause
+      - Avoid restraints and sedatives if possible
+    trace:
+      - "Acute delirium - search for precipitant"
+    next:
+      - node: infection_delirium
+        if:
+          any_of:
+            - exam_flags_any: ["fever", "leukocytosis", "positive UA"]
+            - symptoms_contains_any: ["dysuria", "cough", "fever"]
+      - node: metabolic_delirium
+        if:
+          exam_flags_any: ["hyponatremia", "hypernatremia", "hypercalcemia", "uremia", "hypoxia"]
+      - node: medication_delirium
+        if:
+          symptoms_contains_any: ["recent medication change", "new anticholinergic", "opioid use"]
+      - node: alcohol_withdrawal
+        if:
+          symptoms_contains_any: ["alcohol use", "tremor", "diaphoresis", "tachycardia"]
+
+  infection_delirium:
+    when:
+      any_of:
+        - exam_flags_any: ["fever", "leukocytosis"]
+        - symptoms_contains_any: ["UTI", "pneumonia", "cellulitis"]
+    tests:
+      - Blood cultures
+      - Urinalysis and urine culture
+      - Chest X-ray
+      - Lumbar puncture if CNS infection suspected
+    suggest_dx:
+      - Delirium due to infection (UTI, pneumonia, sepsis)
+    referrals:
+      - Antibiotics
+      - Hospital admission if severe infection or sepsis
+      - Supportive care
+    trace:
+      - "Infection-related delirium - treat infection"
+    next: []
+
+  metabolic_delirium:
+    when:
+      exam_flags_any: ["hyponatremia", "hypernatremia", "hypercalcemia", "uremia", "liver failure"]
+    tests:
+      - Comprehensive metabolic panel
+      - Ammonia if liver disease
+      - Thyroid function
+      - Vitamin B12
+      - Correct electrolyte abnormalities slowly
+    suggest_dx:
+      - Metabolic encephalopathy (specify: uremic, hepatic, hyponatremia, etc.)
+    referrals:
+      - Hospital admission for electrolyte correction
+      - Nephrology if uremia
+      - Hepatology if hepatic encephalopathy
+    trace:
+      - "Metabolic delirium - correct underlying abnormality"
+    next: []
+
+  medication_delirium:
+    when:
+      symptoms_contains_any: ["recent medication change", "anticholinergic use", "opioid use", "benzodiazepine use"]
+    tests:
+      - Review medication list
+      - Anticholinergic burden score
+      - Consider stopping or reducing offending medications
+      - Toxicology screen if overdose suspected
+    suggest_dx:
+      - Medication-induced delirium
+    referrals:
+      - Discontinue or reduce offending medications
+      - Consider alternatives
+      - Pharmacy consultation
+    trace:
+      - "Medication-induced delirium - medication reconciliation"
+    next: []
+
+  alcohol_withdrawal:
+    when:
+      symptoms_contains_any: ["alcohol use disorder", "tremor", "diaphoresis", "hallucinations", "seizure"]
+    tests:
+      - CIWA-Ar score (Clinical Institute Withdrawal Assessment)
+      - Basic metabolic panel
+      - Magnesium, phosphate
+      - Liver function tests
+      - Blood alcohol level
+      - Thiamine administration
+    suggest_dx:
+      - Alcohol withdrawal
+      - Delirium tremens (if severe)
+    referrals:
+      - Hospital admission if CIWA > 10 or history of DTs
+      - Benzodiazepines (lorazepam or diazepam)
+      - Thiamine, folate, multivitamin
+      - ICU if delirium tremens
+    trace:
+      - "Alcohol withdrawal - CIWA protocol"
+    next:
+      - node: delirium_tremens
+        if:
+          red_flags_any: ["hallucinations", "autonomic instability", "severe agitation", "seizure"]
+      - node: mild_withdrawal
+        default: true
+
+  delirium_tremens:
+    when:
+      any_of:
+        - red_flags_any: ["severe autonomic instability", "hallucinations", "severe agitation"]
+        - symptoms_contains_any: ["seizure", "fever", "tachycardia"]
+    tests:
+      - ICU admission
+      - High-dose benzodiazepines
+      - Continuous monitoring
+      - Thiamine IV
+    suggest_dx:
+      - Delirium tremens
+    referrals:
+      - ICU admission
+      - High-dose benzodiazepines (escalate to phenobarbital if refractory)
+      - Supportive care
+      - Mortality risk 5-15% if untreated
+    trace:
+      - "Delirium tremens - ICU level care"
+    next: []
+
+  mild_withdrawal:
+    when:
+      symptoms_contains_any: ["mild tremor", "anxiety", "insomnia"]
+    tests:
+      - CIWA-Ar scoring
+      - Symptom-triggered benzodiazepines
+      - Thiamine and folate
+    suggest_dx:
+      - Mild alcohol withdrawal
+    referrals:
+      - Outpatient or inpatient depending on severity
+      - Benzodiazepines PRN for CIWA > 8
+      - Addiction medicine referral
+    trace:
+      - "Mild alcohol withdrawal - CIWA protocol"
+    next: []
+
+  chronic_dementia:
+    when:
+      symptoms_contains_any: ["gradual memory loss", "progressive confusion", "difficulty with familiar tasks"]
+    tests:
+      - Mini-Mental State Exam (MMSE) or MoCA
+      - Thyroid function
+      - Vitamin B12
+      - Syphilis screening
+      - MRI brain (to rule out structural lesions, NPH, subdural)
+      - Neuropsychological testing if diagnosis unclear
+    suggest_dx:
+      - Alzheimer's disease
+      - Vascular dementia
+      - Lewy body dementia
+      - Frontotemporal dementia
+      - Normal pressure hydrocephalus (if triad: dementia, gait, incontinence)
+    referrals:
+      - Neurology or geriatrics referral
+      - Cognitive assessment
+      - Safety evaluation (driving, living alone)
+      - Caregiver support and education
+      - Cholinesterase inhibitors if Alzheimer's
+    trace:
+      - "Chronic dementia - progressive cognitive decline"
+    next: []

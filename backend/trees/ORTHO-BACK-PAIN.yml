@@ -1,0 +1,148 @@
+tree_id: ORTHO-BACK-PAIN
+name: Low Back Pain Evaluation
+description: Decision tree for evaluating acute and chronic low back pain with red flag screening
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["back pain", "low back pain", "lumbar pain"]
+    tests:
+      - History of trauma
+      - Onset and duration
+      - Neurologic symptoms
+      - Red flag screening
+      - Straight leg raise test
+      - Neurologic examination
+    suggest_dx:
+      - Back pain (etiology to be determined)
+    referrals:
+      - Emergency evaluation if red flags
+    trace:
+      - "Back pain assessment - screen for emergencies"
+    next:
+      - node: emergency_back
+        if:
+          any_of:
+            - red_flags_any: ["saddle anesthesia", "bowel or bladder dysfunction", "progressive weakness", "fever + back pain"]
+            - exam_flags_any: ["loss of rectal tone", "bilateral leg weakness", "urinary retention"]
+      - node: radiculopathy
+        if:
+          symptoms_contains_any: ["leg pain worse than back", "radiating pain", "numbness", "tingling"]
+      - node: mechanical_pain
+        default: true
+
+  emergency_back:
+    when:
+      any_of:
+        - red_flags_any: ["cauda equina", "saddle anesthesia", "bowel/bladder dysfunction"]
+        - symptoms_contains_any: ["fever + back pain", "progressive weakness", "cancer history + back pain"]
+    tests:
+      - STAT MRI lumbar spine
+      - Blood cultures if fever
+      - ESR/CRP
+      - Neurosurgery consult STAT
+    suggest_dx:
+      - Cauda equina syndrome
+      - Spinal epidural abscess
+      - Spinal cord compression
+      - Vertebral osteomyelitis
+      - Pathologic fracture
+    referrals:
+      - Neurosurgery or Orthopedic spine STAT
+      - Hospital admission
+      - Antibiotics if infection suspected
+    trace:
+      - "Red flags present - emergency spine evaluation"
+    next: []
+
+  radiculopathy:
+    when:
+      symptoms_contains_any: ["leg pain worse than back", "sciatica", "radiating pain to leg", "numbness in dermatomal pattern"]
+    tests:
+      - Straight leg raise (positive if reproduces leg pain < 70 degrees)
+      - Dermatomal sensory exam
+      - Reflex testing
+      - Motor strength testing
+      - Consider MRI if progressive deficits
+    suggest_dx:
+      - Lumbar radiculopathy
+      - Herniated disc
+      - Spinal stenosis
+    referrals:
+      - Conservative management first (NSAIDs, PT)
+      - Spine specialist if progressive deficits
+      - Consider epidural steroid injection
+      - Surgery if severe or progressive neurologic deficit
+    trace:
+      - "Radiculopathy - leg pain predominates"
+    next:
+      - node: progressive_deficit
+        if:
+          exam_flags_any: ["worsening weakness", "footdrop", "progressive sensory loss"]
+      - node: conservative_management
+        default: true
+
+  progressive_deficit:
+    when:
+      exam_flags_any: ["progressive weakness", "footdrop", "severe radiculopathy"]
+    tests:
+      - MRI lumbar spine
+      - EMG/NCS if diagnosis unclear
+      - Spine surgery evaluation
+    suggest_dx:
+      - Herniated disc with severe radiculopathy
+      - Spinal stenosis with myelopathy
+    referrals:
+      - Spine surgery (neurosurgery or orthopedic spine)
+      - Urgent evaluation within 1-2 weeks
+      - May require surgical decompression
+    trace:
+      - "Progressive neurologic deficit - urgent spine referral"
+    next: []
+
+  conservative_management:
+    when:
+      symptoms_contains_any: ["radiculopathy without progressive deficit"]
+    tests:
+      - Trial of conservative therapy
+      - NSAIDs
+      - Physical therapy
+      - Activity modification
+      - Follow-up in 4-6 weeks
+    suggest_dx:
+      - Lumbar radiculopathy
+      - Disc herniation
+    referrals:
+      - Physical therapy
+      - Pain management if refractory
+      - Spine specialist if no improvement in 6 weeks
+    trace:
+      - "Conservative management - most improve without surgery"
+    next: []
+
+  mechanical_pain:
+    when:
+      symptoms_contains_any: ["back pain without leg pain", "axial back pain", "mechanical back pain"]
+    tests:
+      - Red flag screening (already negative)
+      - Palpation for tenderness
+      - Range of motion
+      - No imaging indicated unless red flags or trauma
+    suggest_dx:
+      - Mechanical low back pain
+      - Muscle strain
+      - Lumbar sprain
+      - Degenerative disc disease
+      - Facet arthropathy
+    referrals:
+      - Conservative management
+      - NSAIDs
+      - Heat/ice
+      - Activity as tolerated
+      - Physical therapy
+      - Return if red flags develop or no improvement in 4-6 weeks
+    trace:
+      - "Mechanical back pain - conservative management"
+    next: []
