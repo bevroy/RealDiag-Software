@@ -20,60 +20,79 @@ function useApiBase() {
 
 export default function ReferencePage() {
   const apiBase = useApiBase();
-  const [family, setFamily] = useState("neurology");
-  const [rules, setRules] = useState([]);
+  const [allRules, setAllRules] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const [query, setQuery] = useState("");
   const [expandedId, setExpandedId] = useState(null);
+  const [selectedFamily, setSelectedFamily] = useState("all");
 
   useEffect(() => {
     let cancelled = false;
-    async function load() {
+    async function loadAll() {
       setLoading(true);
       setErr("");
       setExpandedId(null);
       try {
-        const res = await fetch(`${apiBase}/reference/${family}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const results = await Promise.all(
+          FAMILIES.map(async (f) => {
+            const res = await fetch(`${apiBase}/reference/${f.id}`);
+            if (!res.ok) throw new Error(`Failed to load ${f.label}`);
+            const data = await res.json();
+            return (data.rules || []).map(rule => ({
+              ...rule,
+              family: f.label,
+              familyId: f.id
+            }));
+          })
+        );
         if (!cancelled) {
-          setRules(data.rules || []);
+          setAllRules(results.flat());
         }
       } catch (e) {
         if (!cancelled) {
-          setErr(`Failed to load ${family} rules: ${e.message}`);
-          setRules([]);
+          setErr(`Failed to load rules: ${e.message}`);
+          setAllRules([]);
         }
       } finally {
         if (!cancelled) setLoading(false);
       }
     }
-    load();
+    loadAll();
     return () => {
       cancelled = true;
     };
-  }, [apiBase, family]);
+  }, [apiBase]);
 
   const filtered = useMemo(() => {
     const q = (query || "").toLowerCase().trim();
-    if (!q) return rules;
+    
+    // Filter by family first
+    let rulesToFilter = allRules;
+    if (selectedFamily !== "all") {
+      rulesToFilter = allRules.filter(r => r.familyId === selectedFamily);
+    }
+    
+    // Then filter by search query
+    if (!q) return rulesToFilter;
 
-    return (rules || []).filter((r) => {
+    return (rulesToFilter || []).filter((r) => {
       const label = (r.label || "").toLowerCase();
       const id = (r.id || "").toLowerCase();
+      const family = (r.family || "").toLowerCase();
       const present = (r.presentations || []).join(" ").toLowerCase();
       const icd = (r.icd10 || []).join(" ").toLowerCase();
       const snomed = (r.snomed || []).join(" ").toLowerCase();
       return (
         label.includes(q) ||
         id.includes(q) ||
+        family.includes(q) ||
         present.includes(q) ||
         icd.includes(q) ||
         snomed.includes(q)
       );
     });
-  }, [rules, query]);
+  }, [allRules, query, selectedFamily]);
 
   function toggleExpanded(id) {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -86,8 +105,8 @@ export default function ReferencePage() {
         <h1 style={{ marginBottom: 0 }}>Reference: Diagnostic Rules & Codes</h1>
       </div>
       <p style={{ marginBottom: 12, fontSize: 14, color: "#555" }}>
-        Browse RealDiag&apos;s structured rules for neurology, cardiology, and endocrinology.
-        Use the search box to filter by diagnosis name, typical presentations, ICD-10, or SNOMED.
+        Search across all disease processes (neurology, cardiology, endocrinology) to find
+        relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
       </p>
 
       <p style={{ marginTop: -8, marginBottom: 16, fontSize: 12 }}>
@@ -98,7 +117,7 @@ export default function ReferencePage() {
         .
       </p>
 
-      {/* Top controls: family buttons + export */}
+      {/* Top controls: family filters + export */}
       <div
         style={{
           marginBottom: 12,
@@ -109,24 +128,42 @@ export default function ReferencePage() {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          {FAMILIES.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => setFamily(f.id)}
-              style={{
-                padding: "6px 12px",
-                borderRadius: 999,
-                border: "1px solid #ccc",
-                fontSize: 13,
-                cursor: "pointer",
-                background: family === f.id ? "#e0f2f1" : "#f5f5f5",
-                fontWeight: family === f.id ? 600 : 400,
-              }}
-            >
-              {f.label}
-            </button>
-          ))}
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <span style={{ fontSize: 13, fontWeight: 600, marginRight: 4 }}>Filter:</span>
+          <button
+            onClick={() => setSelectedFamily("all")}
+            style={{
+              padding: "6px 12px",
+              borderRadius: 999,
+              border: "1px solid #ccc",
+              fontSize: 13,
+              cursor: "pointer",
+              background: selectedFamily === "all" ? "#e0f2f1" : "#f5f5f5",
+              fontWeight: selectedFamily === "all" ? 600 : 400,
+            }}
+          >
+            All ({allRules.length})
+          </button>
+          {FAMILIES.map((f) => {
+            const count = allRules.filter(r => r.familyId === f.id).length;
+            return (
+              <button
+                key={f.id}
+                onClick={() => setSelectedFamily(f.id)}
+                style={{
+                  padding: "6px 12px",
+                  borderRadius: 999,
+                  border: "1px solid #ccc",
+                  fontSize: 13,
+                  cursor: "pointer",
+                  background: selectedFamily === f.id ? "#e0f2f1" : "#f5f5f5",
+                  fontWeight: selectedFamily === f.id ? 600 : 400,
+                }}
+              >
+                {f.label} ({count})
+              </button>
+            );
+          })}
         </div>
 
         {/* Export CSV button */}
@@ -152,24 +189,29 @@ export default function ReferencePage() {
       <div style={{ marginBottom: 16 }}>
         <input
           type="text"
-          placeholder="Search by diagnosis, symptom, ICD-10, or SNOMED..."
+          placeholder="Search across all diseases by diagnosis, symptom, ICD-10, or SNOMED..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           style={{
             width: "100%",
-            maxWidth: 420,
-            padding: "6px 10px",
+            maxWidth: 500,
+            padding: "8px 12px",
             borderRadius: 999,
             border: "1px solid #ccc",
-            fontSize: 13,
+            fontSize: 14,
           }}
         />
+        {query && (
+          <div style={{ marginTop: 6, fontSize: 12, color: "#666" }}>
+            Found {filtered.length} result{filtered.length !== 1 ? "s" : ""}
+          </div>
+        )}
       </div>
 
       {/* Status / error */}
       {loading && (
         <div style={{ marginBottom: 8, fontSize: 13 }}>
-          Loading {family} rules…
+          Loading all disease rules…
         </div>
       )}
       {err && (
@@ -200,13 +242,14 @@ export default function ReferencePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.1fr 1.6fr 0.8fr 0.6fr",
+            gridTemplateColumns: "0.8fr 1.1fr 1.6fr 0.8fr 0.6fr",
             fontWeight: 600,
             background: "#fafafa",
             borderBottom: "1px solid #eee",
             padding: "8px 10px",
           }}
         >
+          <div>Family</div>
           <div>Diagnosis</div>
           <div>Typical presentations</div>
           <div>ICD-10</div>
@@ -221,12 +264,29 @@ export default function ReferencePage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1.1fr 1.6fr 0.8fr 0.6fr",
+                  gridTemplateColumns: "0.8fr 1.1fr 1.6fr 0.8fr 0.6fr",
                   borderBottom: "1px solid #f2f2f2",
                   padding: "8px 10px",
                   background: isExpanded ? "#f9fdfd" : "white",
                 }}
               >
+                <div>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      fontSize: 11,
+                      padding: "2px 8px",
+                      borderRadius: 999,
+                      background: r.familyId === "neurology" ? "#E3F2FD" : 
+                                 r.familyId === "cardiology" ? "#FCE4EC" : "#FFF3E0",
+                      color: r.familyId === "neurology" ? "#1565C0" : 
+                             r.familyId === "cardiology" ? "#C2185B" : "#E65100",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {r.family}
+                  </span>
+                </div>
                 <div>
                   <div style={{ fontWeight: 600 }}>{r.label || r.id}</div>
                   <div style={{ fontSize: 11, color: "#777" }}>{r.id}</div>
