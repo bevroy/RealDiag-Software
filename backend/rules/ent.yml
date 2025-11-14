@@ -1,0 +1,219 @@
+rules:
+  - id: ENT-OTITIS-MEDIA
+    label: Acute Otitis Media
+    presentations:
+      - Ear pain (otalgia)
+      - Fever
+      - Hearing loss
+      - Bulging, erythematous tympanic membrane
+      - Possible purulent drainage if TM rupture
+      - Common in children
+      - May follow upper respiratory infection
+    icd10:
+      - H66.90
+    snomed:
+      - 3110003
+
+  - id: ENT-OTITIS-EXTERNA
+    label: Otitis Externa (Swimmer's Ear)
+    presentations:
+      - Ear pain, especially with movement of tragus or pinna
+      - Itching in ear canal
+      - Drainage from ear
+      - Hearing loss
+      - Swollen, erythematous ear canal
+      - Pain with chewing
+      - Associated with water exposure or trauma
+    icd10:
+      - H60.90
+    snomed:
+      - 3135009
+
+  - id: ENT-ACUTE-SINUSITIS
+    label: Acute Sinusitis
+    presentations:
+      - Facial pain or pressure (over maxillary or frontal sinuses)
+      - Purulent nasal discharge
+      - Nasal congestion
+      - Decreased sense of smell
+      - Fever (in bacterial sinusitis)
+      - Symptoms > 7 days or worsening after initial improvement
+      - Maxillary tooth pain
+    icd10:
+      - J01.90
+    snomed:
+      - 36971009
+
+  - id: ENT-CHRONIC-SINUSITIS
+    label: Chronic Sinusitis
+    presentations:
+      - Symptoms lasting > 12 weeks
+      - Nasal congestion, obstruction
+      - Facial pressure or fullness
+      - Postnasal drip
+      - Decreased sense of smell
+      - May have nasal polyps
+      - Recurrent acute exacerbations
+    icd10:
+      - J32.9
+    snomed:
+      - 40055000
+
+  - id: ENT-PHARYNGITIS-STREP
+    label: Streptococcal Pharyngitis (Strep Throat)
+    presentations:
+      - Sore throat (sudden onset)
+      - Fever
+      - Tonsillar exudates
+      - Tender anterior cervical lymphadenopathy
+      - Absence of cough
+      - Palatal petechiae
+      - Positive rapid strep test or throat culture
+    icd10:
+      - J02.0
+    snomed:
+      - 43878008
+
+  - id: ENT-PHARYNGITIS-VIRAL
+    label: Viral Pharyngitis
+    presentations:
+      - Sore throat
+      - Usually associated with other URI symptoms (cough, rhinorrhea)
+      - Low-grade or no fever
+      - Pharyngeal erythema without exudates
+      - Gradual onset
+      - Self-limited course
+    icd10:
+      - J02.9
+    snomed:
+      - 1532007
+
+  - id: ENT-TONSILLITIS
+    label: Acute Tonsillitis
+    presentations:
+      - Severe sore throat
+      - Fever
+      - Enlarged, erythematous tonsils with exudates
+      - Dysphagia
+      - Tender cervical lymphadenopathy
+      - Muffled voice (hot potato voice)
+      - May progress to peritonsillar abscess
+    icd10:
+      - J03.90
+    snomed:
+      - 90176007
+
+  - id: ENT-PERITONSILLAR-ABSCESS
+    label: Peritonsillar Abscess
+    presentations:
+      - Severe unilateral throat pain
+      - Trismus (difficulty opening mouth)
+      - Muffled voice (hot potato voice)
+      - Drooling
+      - Unilateral tonsillar swelling with uvular deviation
+      - High fever
+      - Medical emergency requiring drainage
+    icd10:
+      - J36
+    snomed:
+      - 44612001
+
+  - id: ENT-HEARING-LOSS-CONDUCTIVE
+    label: Conductive Hearing Loss
+    presentations:
+      - Difficulty hearing
+      - Abnormal Rinne test (bone conduction > air conduction)
+      - Weber lateralizes to affected ear
+      - Causes - cerumen impaction, otitis media, otosclerosis, TM perforation
+      - May be reversible with treatment of underlying cause
+    icd10:
+      - H90.2
+    snomed:
+      - 44057004
+
+  - id: ENT-HEARING-LOSS-SENSORINEURAL
+    label: Sensorineural Hearing Loss
+    presentations:
+      - Difficulty hearing, especially high frequencies
+      - Normal Rinne test (air > bone conduction)
+      - Weber lateralizes to better ear
+      - Causes - presbycusis (aging), noise exposure, ototoxic drugs, Meniere's
+      - Often permanent
+      - May have tinnitus
+    icd10:
+      - H90.5
+    snomed:
+      - 60700002
+
+  - id: ENT-MENIERES-DISEASE
+    label: Meniere's Disease
+    presentations:
+      - Episodic vertigo (hours duration)
+      - Fluctuating hearing loss (typically low frequency)
+      - Tinnitus (roaring quality)
+      - Aural fullness (sensation of ear pressure)
+      - Nausea and vomiting during episodes
+      - Progressive hearing loss over time
+    icd10:
+      - H81.09
+    snomed:
+      - 13445001
+
+  - id: ENT-EPISTAXIS
+    label: Epistaxis (Nosebleed)
+    presentations:
+      - Bleeding from nose
+      - Anterior epistaxis (90%) - visible bleeding from Little's area
+      - Posterior epistaxis (10%) - blood in posterior pharynx
+      - Risk factors - trauma, dry air, anticoagulation, hypertension
+      - May be severe requiring packing or cauterization
+    icd10:
+      - R04.0
+    snomed:
+      - 12441001
+
+  - id: ENT-EPIGLOTTITIS
+    label: Epiglottitis
+    presentations:
+      - Severe sore throat
+      - High fever
+      - Drooling
+      - Stridor
+      - Tripod position (leaning forward)
+      - Muffled voice
+      - Dysphagia
+      - Medical emergency - airway obstruction risk
+      - Thumb sign on lateral neck X-ray
+    icd10:
+      - J05.10
+    snomed:
+      - 80384002
+
+  - id: ENT-LARYNGITIS
+    label: Acute Laryngitis
+    presentations:
+      - Hoarseness or voice loss
+      - Dry cough
+      - Sore throat (mild)
+      - Usually follows viral URI
+      - Voice worsens with use
+      - Self-limited (typically 1-2 weeks)
+    icd10:
+      - J04.0
+    snomed:
+      - 45913009
+
+  - id: ENT-ALLERGIC-RHINITIS
+    label: Allergic Rhinitis
+    presentations:
+      - Nasal congestion, rhinorrhea
+      - Sneezing
+      - Itchy nose, eyes, throat
+      - Postnasal drip
+      - Watery eyes
+      - Seasonal or perennial
+      - Pale, boggy nasal mucosa on exam
+    icd10:
+      - J30.9
+    snomed:
+      - 61582004

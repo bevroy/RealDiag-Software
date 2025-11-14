@@ -1,0 +1,287 @@
+tree_id: DERM-RASH
+name: Rash Evaluation
+description: Decision tree for evaluating skin rashes and eruptions
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["rash", "skin lesions", "skin eruption", "hives", "blisters", "itching"]
+    tests:
+      - Vital signs (fever suggests infection)
+      - Thorough skin examination (distribution, morphology)
+      - Mucosal examination (oral, conjunctival, genital)
+      - Nikolsky sign (blistering disorders)
+      - Medication history (drug reaction)
+      - Recent illness or travel history
+    suggest_dx:
+      - Rash (cause to be determined)
+    referrals:
+      - Dermatology if unclear or severe
+    trace:
+      - "Rash evaluation - identify life-threatening causes first"
+    next:
+      - node: life_threatening_rash
+        if:
+          any_of:
+            - red_flags_any: ["fever", "mucosal involvement", "blistering", "skin sloughing", "hypotension"]
+            - exam_flags_any: ["purpura", "petechiae with fever", "positive Nikolsky sign"]
+      - node: infectious_rash
+        if:
+          any_of:
+            - red_flags_any: ["fever", "recent illness", "sick contacts"]
+            - exam_flags_any: ["vesicles", "pustules", "lymphadenopathy"]
+      - node: allergic_hypersensitivity
+        if:
+          any_of:
+            - symptoms_contains_any: ["new medication", "hives", "urticaria", "angioedema"]
+            - exam_flags_any: ["pruritic", "wheals", "raised lesions"]
+      - node: autoimmune_rash
+        if:
+          exam_flags_any: ["malar rash", "photosensitivity", "joint pain", "chronic course"]
+      - node: benign_rash
+        default: true
+
+  life_threatening_rash:
+    when:
+      any_of:
+        - red_flags_any: ["mucosal involvement", "skin sloughing", "blistering", "purpura with fever"]
+        - exam_flags_any: ["positive Nikolsky sign", "epidermal detachment", "hypotension"]
+    tests:
+      - Dermatology consult STAT
+      - Skin biopsy
+      - Complete blood count
+      - Metabolic panel
+      - Blood cultures if sepsis suspected
+      - Stop all non-essential medications
+    suggest_dx:
+      - Stevens-Johnson syndrome (SJS)
+      - Toxic epidermal necrolysis (TEN)
+      - DERM-TOXIC-SHOCK
+      - Meningococcemia
+      - Rocky Mountain spotted fever
+      - DRESS syndrome (Drug Reaction with Eosinophilia)
+    referrals:
+      - Dermatology STAT
+      - ICU admission
+      - Burn unit transfer if extensive (TEN)
+      - Stop causative medication immediately
+    trace:
+      - "Life-threatening rash - immediate intervention"
+    next: []
+
+  infectious_rash:
+    when:
+      any_of:
+        - red_flags_any: ["fever", "sick contacts", "recent illness"]
+        - exam_flags_any: ["vesicles", "pustules", "lymphadenopathy", "pharyngitis"]
+    tests:
+      - Viral PCR (if vesicular)
+      - Bacterial culture (if pustular)
+      - Throat culture (if pharyngitis)
+      - Serologies (if indicated)
+      - CBC with differential
+    suggest_dx:
+      - INFECT-VARICELLA (chickenpox)
+      - INFECT-HERPES-ZOSTER (shingles)
+      - INFECT-MEASLES
+      - Scarlet fever
+      - INFECT-CELLULITIS
+      - Impetigo
+      - Viral exanthem
+    referrals:
+      - Dermatology if unclear
+      - Infectious disease if complicated
+    trace:
+      - "Infectious rash - viral vs bacterial"
+    next:
+      - node: vesicular_rash
+        if:
+          exam_flags_any: ["vesicles", "fluid-filled blisters", "crusting"]
+      - node: maculopapular_infectious
+        if:
+          exam_flags_any: ["maculopapular", "diffuse erythema", "blanching"]
+      - node: bacterial_skin_infection
+        if:
+          exam_flags_any: ["pustules", "honey-colored crust", "warmth", "tenderness"]
+
+  vesicular_rash:
+    when:
+      exam_flags_any: ["vesicles", "clear fluid-filled blisters", "crusting"]
+    tests:
+      - Tzanck smear or viral PCR
+      - HSV, VZV testing
+      - Consider antiviral therapy
+    suggest_dx:
+      - INFECT-VARICELLA (chickenpox)
+      - INFECT-HERPES-ZOSTER (shingles)
+      - Herpes simplex virus (HSV)
+      - Hand-foot-mouth disease (coxsackievirus)
+    referrals:
+      - Dermatology if disseminated
+      - Ophthalmology if herpes zoster ophthalmicus (V1 distribution)
+      - Start acyclovir or valacyclovir within 72 hours for shingles
+    trace:
+      - "Vesicular rash - consider HSV, VZV"
+    next: []
+
+  maculopapular_infectious:
+    when:
+      exam_flags_any: ["maculopapular", "erythematous", "blanching", "fever"]
+    tests:
+      - Throat culture (if scarlet fever suspected)
+      - Measles IgM (if measles suspected)
+      - Strep rapid antigen test
+      - Viral serologies
+    suggest_dx:
+      - INFECT-MEASLES
+      - Scarlet fever (Group A Strep)
+      - Roseola (HHV-6)
+      - Fifth disease (parvovirus B19)
+      - Viral exanthem
+    referrals:
+      - Pediatrics for measles management
+      - Antibiotics if strep pharyngitis
+    trace:
+      - "Maculopapular infectious rash - viral or strep"
+    next: []
+
+  bacterial_skin_infection:
+    when:
+      exam_flags_any: ["pustules", "honey-colored crust", "warmth", "erythema", "tenderness"]
+    tests:
+      - Bacterial culture and sensitivity
+      - Consider MRSA coverage
+      - Antibiotic therapy (cephalexin, clindamycin, or doxycycline)
+    suggest_dx:
+      - Impetigo
+      - INFECT-CELLULITIS
+      - Folliculitis
+      - Abscess
+      - MRSA skin infection
+    referrals:
+      - Dermatology if refractory
+      - I&D if abscess present
+    trace:
+      - "Bacterial skin infection - antibiotics"
+    next: []
+
+  allergic_hypersensitivity:
+    when:
+      any_of:
+        - symptoms_contains_any: ["new medication", "hives", "itching", "angioedema"]
+        - exam_flags_any: ["urticaria", "wheals", "pruritic", "raised lesions"]
+    tests:
+      - Stop suspected allergen
+      - Antihistamines (diphenhydramine, cetirizine)
+      - Corticosteroids if severe
+      - Epinephrine if anaphylaxis
+      - Allergy testing (outpatient)
+    suggest_dx:
+      - Urticaria (hives)
+      - Angioedema
+      - Drug hypersensitivity reaction
+      - Contact dermatitis
+      - DERM-ATOPIC-DERM (eczema)
+    referrals:
+      - Allergy/Immunology
+      - Emergency department if anaphylaxis
+    trace:
+      - "Allergic/hypersensitivity rash - antihistamines"
+    next:
+      - node: drug_reaction
+        if:
+          any_of:
+            - symptoms_contains_any: ["new medication within 1-2 weeks"]
+            - exam_flags_any: ["morbilliform", "eosinophilia"]
+      - node: contact_dermatitis
+        if:
+          exam_flags_any: ["localized", "linear pattern", "vesicular borders"]
+
+  drug_reaction:
+    when:
+      any_of:
+        - symptoms_contains_any: ["new medication", "antibiotics", "anticonvulsants"]
+        - exam_flags_any: ["morbilliform rash", "eosinophilia"]
+    tests:
+      - Stop offending medication immediately
+      - Oral corticosteroids if severe
+      - Monitor for progression to SJS/TEN
+      - Document drug allergy
+    suggest_dx:
+      - Maculopapular drug eruption
+      - DRESS syndrome
+      - Serum sickness-like reaction
+    referrals:
+      - Dermatology if severe
+      - Allergy testing after resolution
+    trace:
+      - "Drug reaction - stop medication"
+    next: []
+
+  contact_dermatitis:
+    when:
+      exam_flags_any: ["localized rash", "linear pattern", "pruritic", "vesicular borders"]
+    tests:
+      - Identify and remove irritant/allergen
+      - Topical corticosteroids
+      - Oral antihistamines for itch
+      - Patch testing if recurrent
+    suggest_dx:
+      - Allergic contact dermatitis (poison ivy, nickel, fragrances)
+      - Irritant contact dermatitis
+    referrals:
+      - Dermatology if chronic or severe
+    trace:
+      - "Contact dermatitis - topical steroids"
+    next: []
+
+  autoimmune_rash:
+    when:
+      any_of:
+        - exam_flags_any: ["malar rash", "discoid lesions", "photosensitivity", "chronic course"]
+        - symptoms_contains_any: ["joint pain", "fatigue", "fever"]
+    tests:
+      - ANA (antinuclear antibody)
+      - Anti-dsDNA, anti-Smith (if lupus suspected)
+      - Complement levels (C3, C4)
+      - Skin biopsy with immunofluorescence
+      - CBC, CMP, UA
+    suggest_dx:
+      - RHEUM-SLE (systemic lupus)
+      - Cutaneous lupus
+      - Dermatomyositis
+      - Psoriasis
+      - Scleroderma
+    referrals:
+      - Rheumatology
+      - Dermatology
+      - Sunscreen and sun protection
+    trace:
+      - "Autoimmune rash - rheumatology workup"
+    next: []
+
+  benign_rash:
+    when:
+      all_of:
+        - no_red_flags: ["no fever", "no mucosal involvement", "no systemic symptoms"]
+        - exam_flags_any: ["localized", "chronic stable", "asymptomatic"]
+    tests:
+      - Observation
+      - Topical treatments as needed
+      - Moisturizers for dry skin
+      - Consider dermatology referral if persistent
+    suggest_dx:
+      - DERM-ECZEMA
+      - DERM-PSORIASIS
+      - Seborrheic dermatitis
+      - Tinea (fungal infection)
+      - Rosacea
+      - Acne vulgaris
+    referrals:
+      - Dermatology for chronic or cosmetically concerning rash
+      - Topical therapies
+    trace:
+      - "Benign rash - outpatient management"
+    next: []

@@ -1,0 +1,188 @@
+rules:
+  - id: URO-BPH
+    label: Benign Prostatic Hyperplasia (BPH)
+    presentations:
+      - Lower urinary tract symptoms (LUTS)
+      - Difficulty initiating urination
+      - Weak urinary stream
+      - Urinary frequency and urgency
+      - Nocturia
+      - Incomplete bladder emptying
+      - Enlarged prostate on digital rectal exam
+      - Common in men > 50 years
+    icd10:
+      - N40.0
+    snomed:
+      - 236646002
+
+  - id: URO-PROSTATITIS-ACUTE
+    label: Acute Bacterial Prostatitis
+    presentations:
+      - Fever, chills
+      - Pelvic or perineal pain
+      - Dysuria, urinary frequency
+      - Urinary retention
+      - Tender, boggy prostate on DRE
+      - Pyuria, bacteriuria
+      - Elevated PSA (may be normal after treatment)
+    icd10:
+      - N41.0
+    snomed:
+      - 9713002
+
+  - id: URO-PROSTATITIS-CHRONIC
+    label: Chronic Prostatitis/Chronic Pelvic Pain Syndrome
+    presentations:
+      - Pelvic, perineal, or genital pain (> 3 months)
+      - Urinary symptoms (frequency, urgency, dysuria)
+      - Pain with ejaculation
+      - No fever
+      - Normal or tender prostate on DRE
+      - Urine cultures often negative
+    icd10:
+      - N41.1
+    snomed:
+      - 236650009
+
+  - id: URO-URINARY-RETENTION
+    label: Acute Urinary Retention
+    presentations:
+      - Inability to urinate despite full bladder
+      - Severe suprapubic pain
+      - Palpable distended bladder
+      - Causes - BPH, medications, neurologic, urethral stricture
+      - Medical emergency requiring catheterization
+      - Post-void residual > 300 mL
+    icd10:
+      - R33.9
+    snomed:
+      - 267064002
+
+  - id: URO-NEPHROLITHIASIS
+    label: Nephrolithiasis (Kidney Stones)
+    presentations:
+      - Sudden severe flank pain radiating to groin
+      - Colicky pain (comes in waves)
+      - Hematuria (micro or gross)
+      - Nausea and vomiting
+      - Restlessness, inability to find comfortable position
+      - CVA tenderness
+      - CT scan shows stone
+    icd10:
+      - N20.0
+    snomed:
+      - 95570007
+
+  - id: URO-PYELONEPHRITIS
+    label: Pyelonephritis
+    presentations:
+      - Fever, chills
+      - Flank pain, CVA tenderness
+      - Dysuria, urinary frequency
+      - Nausea and vomiting
+      - Pyuria, bacteriuria, WBC casts
+      - More severe than simple UTI
+      - May require hospitalization
+    icd10:
+      - N10
+    snomed:
+      - 45816000
+
+  - id: URO-TESTICULAR-TORSION
+    label: Testicular Torsion
+    presentations:
+      - Sudden severe testicular pain
+      - Nausea and vomiting
+      - Absent cremasteric reflex
+      - High-riding testicle with horizontal lie
+      - Scrotal swelling and erythema
+      - Surgical emergency (6-hour window for salvage)
+      - Negative Prehn sign (elevation does not relieve pain)
+    icd10:
+      - N44.00
+    snomed:
+      - 51042005
+
+  - id: URO-EPIDIDYMITIS
+    label: Epididymitis
+    presentations:
+      - Gradual onset of testicular pain
+      - Scrotal swelling and tenderness
+      - Dysuria, urinary frequency
+      - Fever (in acute cases)
+      - Positive Prehn sign (pain relieved by elevation)
+      - Cremasteric reflex present
+      - STI or UTI pathogen
+    icd10:
+      - N45.1
+    snomed:
+      - 31070006
+
+  - id: URO-ERECTILE-DYSFUNCTION
+    label: Erectile Dysfunction (ED)
+    presentations:
+      - Inability to achieve or maintain erection
+      - Decreased libido
+      - Causes - vascular, neurologic, hormonal, psychogenic, medications
+      - Risk factors - diabetes, hypertension, heart disease, obesity
+      - May be early sign of cardiovascular disease
+    icd10:
+      - N52.9
+    snomed:
+      - 397803000
+
+  - id: URO-URETHRAL-STRICTURE
+    label: Urethral Stricture
+    presentations:
+      - Weak urinary stream
+      - Difficulty initiating urination
+      - Urinary retention
+      - Post-void dribbling
+      - Recurrent UTIs
+      - History of urethral trauma, catheterization, or STI
+      - Diagnosed by urethrography or cystoscopy
+    icd10:
+      - N35.9
+    snomed:
+      - 449893003
+
+  - id: URO-HYDROCELE
+    label: Hydrocele
+    presentations:
+      - Painless scrotal swelling
+      - Transilluminates on exam
+      - Testicle difficult to palpate due to fluid
+      - May be congenital or acquired
+      - Acquired causes - trauma, infection, tumor
+      - Usually benign
+    icd10:
+      - N43.3
+    snomed:
+      - 63105007
+
+  - id: URO-VARICOCELE
+    label: Varicocele
+    presentations:
+      - Scrotal swelling (feels like bag of worms)
+      - Dull aching pain in scrotum
+      - Worsens with standing, improves when lying down
+      - More common on left side
+      - May cause infertility (decreased sperm count)
+      - Disappears when supine
+    icd10:
+      - I86.1
+    snomed:
+      - 13015003
+
+  - id: URO-HEMATURIA
+    label: Hematuria (Gross or Microscopic)
+    presentations:
+      - Blood in urine (visible or microscopic)
+      - May be painless or associated with dysuria
+      - Causes - UTI, stones, trauma, malignancy, glomerular disease
+      - Requires evaluation to rule out malignancy
+      - Cystoscopy and imaging often indicated
+    icd10:
+      - R31.9
+    snomed:
+      - 34436003

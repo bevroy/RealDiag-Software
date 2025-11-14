@@ -1,0 +1,166 @@
+rules:
+  - id: TOX-ACETAMINOPHEN-OD
+    label: Acetaminophen Overdose
+    presentations:
+      - Stage 1 (0-24h) - nausea, vomiting, malaise, or asymptomatic
+      - Stage 2 (24-72h) - RUQ pain, elevated AST/ALT
+      - Stage 3 (72-96h) - hepatic failure, jaundice, coagulopathy, encephalopathy
+      - Stage 4 (>96h) - recovery or death
+      - History of ingestion > 150 mg/kg or > 7.5g in adults
+      - Check acetaminophen level at 4 hours post-ingestion
+      - Treat with N-acetylcysteine (NAC)
+    icd10:
+      - T39.1X1A
+    snomed:
+      - 86977007
+
+  - id: TOX-SALICYLATE
+    label: Salicylate Toxicity (Aspirin Overdose)
+    presentations:
+      - Tinnitus, hearing loss
+      - Nausea, vomiting
+      - Tachypnea, hyperpnea (respiratory alkalosis)
+      - Altered mental status, confusion
+      - Fever, diaphoresis
+      - Mixed acid-base disorder (respiratory alkalosis + metabolic acidosis)
+      - Elevated salicylate level
+      - Treatment - alkalinize urine, hemodialysis if severe
+    icd10:
+      - T39.011A
+    snomed:
+      - 292044008
+
+  - id: TOX-OPIOID-OD
+    label: Opioid Overdose
+    presentations:
+      - Decreased level of consciousness, unresponsive
+      - Respiratory depression (RR < 12)
+      - Miosis (pinpoint pupils)
+      - Bradycardia, hypotension
+      - Cyanosis
+      - Track marks or other signs of drug use
+      - Responds to naloxone (Narcan)
+      - Risk of recurrence after naloxone wears off
+    icd10:
+      - T40.2X1A
+    snomed:
+      - 292044008
+
+  - id: TOX-ALCOHOL-WITHDRAWAL
+    label: Alcohol Withdrawal Syndrome
+    presentations:
+      - Tremors, especially in hands
+      - Anxiety, restlessness
+      - Diaphoresis
+      - Nausea, vomiting
+      - Tachycardia, hypertension
+      - Seizures (6-48 hours after last drink)
+      - Delirium tremens (48-96 hours) - hallucinations, confusion, autonomic instability
+      - History of chronic heavy alcohol use
+    icd10:
+      - F10.239
+    snomed:
+      - 82800008
+
+  - id: TOX-SEROTONIN-SYNDROME
+    label: Serotonin Syndrome
+    presentations:
+      - Mental status changes (agitation, confusion)
+      - Autonomic instability (tachycardia, hypertension, hyperthermia, diaphoresis)
+      - Neuromuscular hyperactivity (tremor, clonus, hyperreflexia, rigidity)
+      - Recent increase in serotonergic medications (SSRIs, SNRIs, MAOIs, tramadol)
+      - Mydriasis (dilated pupils)
+      - Treatment - stop offending agents, supportive care, cyproheptadine
+    icd10:
+      - G93.89
+    snomed:
+      - 35434009
+
+  - id: TOX-NEUROLEPTIC-MALIGNANT-SYNDROME
+    label: Neuroleptic Malignant Syndrome (NMS)
+    presentations:
+      - Severe muscle rigidity (lead pipe rigidity)
+      - Hyperthermia (often > 40°C)
+      - Altered mental status
+      - Autonomic instability (tachycardia, labile blood pressure, diaphoresis)
+      - Elevated creatine kinase (CK)
+      - Recent antipsychotic use or dosage increase
+      - Life-threatening - requires ICU care
+    icd10:
+      - G21.0
+    snomed:
+      - 26329005
+
+  - id: TOX-CARBON-MONOXIDE
+    label: Carbon Monoxide Poisoning
+    presentations:
+      - Headache
+      - Nausea, vomiting
+      - Dizziness, confusion
+      - Dyspnea
+      - Cherry-red skin (late finding, rare)
+      - Elevated carboxyhemoglobin level
+      - History of exposure (house fire, enclosed space with combustion)
+      - Treatment - 100% oxygen, hyperbaric oxygen if severe
+    icd10:
+      - T58.2X1A
+    snomed:
+      - 31341008
+
+  - id: TOX-TRICYCLIC-ANTIDEPRESSANT
+    label: Tricyclic Antidepressant Overdose
+    presentations:
+      - Anticholinergic symptoms (dry mouth, dilated pupils, urinary retention, ileus)
+      - CNS depression, seizures, coma
+      - Cardiac toxicity (wide QRS, prolonged QT, ventricular arrhythmias)
+      - Hypotension
+      - ECG shows QRS > 100ms, terminal R wave in aVR
+      - Treatment - sodium bicarbonate for cardiac toxicity, supportive care
+    icd10:
+      - T43.011A
+    snomed:
+      - 292044008
+
+  - id: TOX-BENZODIAZEPINE-OD
+    label: Benzodiazepine Overdose
+    presentations:
+      - Sedation, drowsiness
+      - Slurred speech, ataxia
+      - Respiratory depression (especially with co-ingestion of opioids or alcohol)
+      - Confusion
+      - Normal pupil size
+      - Treatment - supportive care, flumazenil (use cautiously - risk of seizures)
+    icd10:
+      - T42.4X1A
+    snomed:
+      - 292044008
+
+  - id: TOX-BETA-BLOCKER-CALCIUM-CHANNEL-BLOCKER
+    label: Beta-Blocker or Calcium Channel Blocker Overdose
+    presentations:
+      - Bradycardia
+      - Hypotension
+      - Altered mental status
+      - Heart block (AV block)
+      - Hyperglycemia (with beta-blockers)
+      - Hypoglycemia (with calcium channel blockers)
+      - Treatment - atropine, glucagon, calcium, high-dose insulin euglycemic therapy
+    icd10:
+      - T44.7X1A
+    snomed:
+      - 292044008
+
+  - id: TOX-METHANOL-ETHYLENE-GLYCOL
+    label: Toxic Alcohol Ingestion (Methanol or Ethylene Glycol)
+    presentations:
+      - Altered mental status, confusion
+      - Visual disturbances (methanol - snowstorm vision, blindness)
+      - Severe metabolic acidosis with elevated anion gap
+      - Elevated osmolar gap
+      - Nausea, vomiting, abdominal pain
+      - Renal failure (ethylene glycol - calcium oxalate crystals)
+      - Treatment - fomepizole or ethanol, hemodialysis
+    icd10:
+      - T51.1X1A
+    snomed:
+      - 292044008

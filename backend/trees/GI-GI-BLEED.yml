@@ -1,0 +1,242 @@
+tree_id: GI-GI-BLEED
+name: Gastrointestinal Bleeding
+description: Decision tree for evaluating upper and lower GI bleeding
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["hematemesis", "coffee ground emesis", "melena", "hematochezia", "rectal bleeding", "blood in stool"]
+    tests:
+      - Vital signs with orthostatics
+      - CBC (hemoglobin, hematocrit)
+      - Type and cross match blood
+      - PT/INR, PTT (coagulation studies)
+      - BMP (BUN often elevated in UGIB)
+      - Large bore IV access (2 lines)
+      - Consider NG tube aspiration
+    suggest_dx:
+      - GI bleeding (source to be determined)
+    referrals:
+      - Gastroenterology consult
+      - Surgery consult if massive bleed
+      - ICU if unstable
+    trace:
+      - "GI bleeding - assess hemodynamic stability and localize source"
+    next:
+      - node: massive_gi_bleed
+        if:
+          any_of:
+            - red_flags_any: ["hypotension", "tachycardia > 110", "altered mental status", "syncope"]
+            - exam_flags_any: ["SBP < 90", "hematemesis large volume", "ongoing hemorrhage"]
+      - node: upper_gi_bleed
+        if:
+          any_of:
+            - symptoms_contains_any: ["hematemesis", "coffee ground emesis", "melena"]
+            - exam_flags_any: ["NG aspirate blood", "BUN/Cr ratio > 30"]
+      - node: lower_gi_bleed
+        if:
+          symptoms_contains_any: ["hematochezia", "bright red blood per rectum", "maroon stool"]
+      - node: occult_gi_bleed
+        default: true
+
+  massive_gi_bleed:
+    when:
+      any_of:
+        - red_flags_any: ["hemodynamic instability", "hypotension", "tachycardia", "altered mental status"]
+        - exam_flags_any: ["massive hematemesis", "ongoing hemorrhage", "SBP < 90"]
+    tests:
+      - Massive transfusion protocol
+      - Type and crossmatch (4-6 units PRBC)
+      - IV fluid resuscitation (crystalloid)
+      - Consider intubation for airway protection
+      - Emergent upper endoscopy or colonoscopy
+      - Consider CTA if no clear source
+    suggest_dx:
+      - GI-PEPTIC-ULCER (bleeding)
+      - GI-VARICEAL-BLEED
+      - Mallory-Weiss tear
+      - Arteriovenous malformation (AVM)
+      - Diverticular bleeding (massive lower GI bleed)
+    referrals:
+      - Gastroenterology STAT (emergent endoscopy)
+      - Surgery STAT (if endoscopic control fails)
+      - ICU admission
+      - Interventional radiology if embolization needed
+    trace:
+      - "Massive GI bleeding - emergent resuscitation and endoscopy"
+    next: []
+
+  upper_gi_bleed:
+    when:
+      any_of:
+        - symptoms_contains_any: ["hematemesis", "coffee ground emesis", "melena"]
+        - exam_flags_any: ["NG aspirate blood", "BUN/Cr ratio > 30"]
+    tests:
+      - Proton pump inhibitor IV (pantoprazole or esomeprazole)
+      - Upper endoscopy (EGD) within 24 hours
+      - Rockall score (risk stratification)
+      - H. pylori testing
+      - Consider octreotide if varices suspected
+      - Reverse anticoagulation if on warfarin
+    suggest_dx:
+      - GI-PEPTIC-ULCER
+      - GI-GASTRITIS
+      - GI-ESOPHAGITIS
+      - GI-GERD
+      - GI-VARICEAL-BLEED
+      - Mallory-Weiss tear
+      - Gastric cancer
+    referrals:
+      - Gastroenterology for EGD
+      - Admit if moderate-high risk
+      - Consider discharge if low risk (Rockall 0-1) and stable
+    trace:
+      - "Upper GI bleed - PPI and endoscopy"
+    next:
+      - node: variceal_bleed
+        if:
+          any_of:
+            - exam_flags_any: ["cirrhosis", "ascites", "splenomegaly"]
+            - red_flags_any: ["known liver disease", "alcohol abuse history"]
+      - node: peptic_ulcer_bleed
+        if:
+          any_of:
+            - symptoms_contains_any: ["epigastric pain", "NSAID use", "aspirin use"]
+            - exam_flags_any: ["H. pylori positive"]
+
+  variceal_bleed:
+    when:
+      any_of:
+        - exam_flags_any: ["varices on endoscopy", "cirrhosis", "portal hypertension"]
+        - red_flags_any: ["known esophageal varices"]
+    tests:
+      - Octreotide infusion
+      - Prophylactic antibiotics (ceftriaxone)
+      - Emergent upper endoscopy with variceal banding
+      - Consider TIPS if refractory
+      - Monitor for hepatic encephalopathy
+    suggest_dx:
+      - GI-VARICEAL-BLEED
+      - Cirrhosis
+      - Portal hypertension
+    referrals:
+      - Gastroenterology STAT
+      - ICU admission
+      - Hepatology consult
+      - Interventional radiology for TIPS if refractory
+    trace:
+      - "Variceal bleed - octreotide and emergent banding"
+    next: []
+
+  peptic_ulcer_bleed:
+    when:
+      any_of:
+        - exam_flags_any: ["gastric ulcer on EGD", "duodenal ulcer on EGD"]
+        - symptoms_contains_any: ["epigastric pain", "NSAID use"]
+    tests:
+      - High-dose PPI (pantoprazole 80 mg bolus then 8 mg/hr infusion)
+      - Endoscopic hemostasis (clips, epinephrine injection, thermal therapy)
+      - H. pylori testing and treatment
+      - Stop NSAIDs, aspirin
+      - Repeat endoscopy if rebleeding
+    suggest_dx:
+      - GI-PEPTIC-ULCER
+      - H. pylori infection
+    referrals:
+      - Gastroenterology
+      - Surgery if endoscopic control fails
+      - Admission for observation
+    trace:
+      - "Peptic ulcer bleeding - PPI and endoscopic therapy"
+    next: []
+
+  lower_gi_bleed:
+    when:
+      symptoms_contains_any: ["hematochezia", "bright red blood per rectum", "maroon stool"]
+    tests:
+      - Colonoscopy (after bowel prep if stable)
+      - CTA abdomen/pelvis if massive or ongoing
+      - Anoscopy to rule out anorectal source
+      - Consider tagged RBC scan if slow intermittent bleed
+    suggest_dx:
+      - Diverticulosis (most common cause)
+      - Hemorrhoids
+      - Angiodysplasia (AVM)
+      - Ischemic colitis
+      - Inflammatory bowel disease (IBD)
+      - Colorectal cancer
+      - Polyp bleeding
+    referrals:
+      - Gastroenterology for colonoscopy
+      - Surgery if massive or refractory
+      - Interventional radiology for embolization if needed
+    trace:
+      - "Lower GI bleed - colonoscopy when stable"
+    next:
+      - node: diverticular_bleed
+        if:
+          exam_flags_any: ["diverticulosis on colonoscopy", "brisk bleeding", "age > 60"]
+      - node: anorectal_source
+        if:
+          symptoms_contains_any: ["bright red blood on tissue", "pain with defecation", "external hemorrhoids"]
+
+  diverticular_bleed:
+    when:
+      exam_flags_any: ["diverticulosis", "sigmoid colon bleeding", "diverticula on colonoscopy"]
+    tests:
+      - Colonoscopy with hemostasis (clips, epinephrine)
+      - CTA if colonoscopy non-diagnostic
+      - Angiography with embolization if ongoing
+      - High-fiber diet after resolution
+    suggest_dx:
+      - Diverticular hemorrhage
+      - Diverticulosis
+    referrals:
+      - Gastroenterology
+      - Surgery if recurrent or refractory (segmental colectomy)
+    trace:
+      - "Diverticular bleeding - usually self-limited"
+    next: []
+
+  anorectal_source:
+    when:
+      symptoms_contains_any: ["bright red blood on tissue", "perianal pain", "external hemorrhoids visible"]
+    tests:
+      - Anoscopy or flexible sigmoidoscopy
+      - Digital rectal exam
+      - Stool softeners, sitz baths
+    suggest_dx:
+      - Internal or external hemorrhoids
+      - Anal fissure
+      - Rectal prolapse
+    referrals:
+      - Colorectal surgery if refractory
+      - Usually managed outpatient
+    trace:
+      - "Anorectal bleeding - benign cause likely"
+    next: []
+
+  occult_gi_bleed:
+    when:
+      any_of:
+        - exam_flags_any: ["anemia", "low hemoglobin", "positive FOBT"]
+        - symptoms_contains_any: ["fatigue", "weakness", "no visible bleeding"]
+    tests:
+      - Iron studies (ferritin, TIBC, iron saturation)
+      - Fecal occult blood test (FOBT)
+      - Upper endoscopy and colonoscopy
+      - Capsule endoscopy if EGD and colonoscopy negative
+    suggest_dx:
+      - Iron deficiency anemia
+      - Occult GI bleeding
+      - Colon cancer
+      - Small bowel lesion
+      - Celiac disease
+    referrals:
+      - Gastroenterology for bidirectional endoscopy
+      - Outpatient workup usually appropriate
+    trace:
+      - "Occult GI bleeding - investigate for malignancy"
+    next: []

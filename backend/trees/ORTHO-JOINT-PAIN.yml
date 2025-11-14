@@ -1,0 +1,210 @@
+tree_id: ORTHO-JOINT-PAIN
+name: Acute Joint Pain Evaluation
+description: Decision tree for evaluating acute monoarticular or oligoarticular joint pain
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["joint pain", "swollen joint", "arthritis", "joint swelling"]
+    tests:
+      - Vital signs (fever suggests infection)
+      - Joint examination (swelling, erythema, warmth, range of motion)
+      - Number of joints involved (monoarticular vs polyarticular)
+      - Trauma history
+      - Sexual history (gonococcal arthritis risk)
+    suggest_dx:
+      - Acute arthritis (cause to be determined)
+    referrals:
+      - Orthopedics or rheumatology if severe
+    trace:
+      - "Joint pain evaluation - monoarticular vs polyarticular"
+    next:
+      - node: septic_arthritis_evaluation
+        if:
+          any_of:
+            - red_flags_any: ["fever", "severe joint swelling", "unable to bear weight"]
+            - exam_flags_any: ["erythema", "warmth", "effusion", "limited ROM"]
+      - node: crystal_arthropathy
+        if:
+          symptoms_contains_any: ["sudden onset", "big toe pain", "podagra", "red hot joint"]
+      - node: trauma_evaluation
+        if:
+          symptoms_contains_any: ["trauma", "injury", "fall", "twist"]
+      - node: chronic_arthritis
+        default: true
+
+  septic_arthritis_evaluation:
+    when:
+      any_of:
+        - red_flags_any: ["fever", "severe pain", "red hot joint"]
+        - exam_flags_any: ["effusion", "warmth", "limited ROM"]
+    tests:
+      - Arthrocentesis (joint aspiration) - STAT
+      - Synovial fluid analysis (cell count, gram stain, culture, crystals)
+      - Blood cultures
+      - CBC, ESR, CRP
+      - X-ray of affected joint
+    suggest_dx:
+      - ORTHO-SEPTIC-ARTHRITIS
+      - Gonococcal arthritis
+      - RHEUM-GOUT
+      - RHEUM-PSEUDOGOUT
+    referrals:
+      - Orthopedics STAT for drainage if septic
+      - Admission for IV antibiotics
+      - Rheumatology if crystal arthropathy
+    trace:
+      - "Septic arthritis workup - joint aspiration required"
+    next:
+      - node: septic_arthritis_confirmed
+        if:
+          exam_flags_any: ["synovial WBC > 50000", "positive gram stain", "positive culture"]
+      - node: crystal_confirmed
+        if:
+          exam_flags_any: ["urate crystals", "calcium pyrophosphate crystals"]
+
+  septic_arthritis_confirmed:
+    when:
+      exam_flags_any: ["synovial WBC > 50000", "positive culture", "positive gram stain"]
+    tests:
+      - Blood cultures
+      - Surgical drainage or arthroscopic washout
+      - Empiric IV antibiotics (vancomycin + ceftriaxone)
+      - Tailor antibiotics to culture results
+    suggest_dx:
+      - ORTHO-SEPTIC-ARTHRITIS
+    referrals:
+      - Orthopedics for surgical drainage
+      - Infectious disease
+      - Admission for IV antibiotics
+    trace:
+      - "Septic arthritis confirmed - surgical emergency"
+    next: []
+
+  crystal_confirmed:
+    when:
+      exam_flags_any: ["urate crystals", "calcium pyrophosphate crystals"]
+    tests:
+      - Uric acid level (may be normal during acute gout attack)
+      - X-ray (may show chondrocalcinosis in pseudogout)
+      - Renal function
+    suggest_dx:
+      - RHEUM-GOUT (negative birefringent needle-shaped crystals)
+      - RHEUM-PSEUDOGOUT (positive birefringent rhomboid crystals)
+    referrals:
+      - Rheumatology for chronic management
+      - NSAIDs, colchicine, or steroids for acute attack
+      - Allopurinol or febuxostat for chronic gout (not during acute attack)
+    trace:
+      - "Crystal arthropathy confirmed"
+    next: []
+
+  crystal_arthropathy:
+    when:
+      symptoms_contains_any: ["sudden onset", "big toe pain", "podagra", "red hot joint"]
+    tests:
+      - Joint aspiration with crystal analysis
+      - Uric acid level
+      - Renal function, CBC
+      - X-ray of affected joint
+    suggest_dx:
+      - RHEUM-GOUT
+      - RHEUM-PSEUDOGOUT
+    referrals:
+      - Rheumatology
+      - NSAIDs, colchicine, or corticosteroids for acute attack
+    trace:
+      - "Crystal arthropathy suspected - joint aspiration needed"
+    next: []
+
+  trauma_evaluation:
+    when:
+      symptoms_contains_any: ["trauma", "injury", "fall", "twist", "sprain"]
+    tests:
+      - X-ray of affected joint (2 views minimum)
+      - Assess for fracture, dislocation
+      - Joint stability testing
+      - Consider MRI if ligament injury suspected
+    suggest_dx:
+      - Fracture
+      - Dislocation
+      - Ligament tear (ORTHO-ACL-TEAR, ORTHO-MENISCUS-TEAR)
+      - Sprain
+      - Hemarthrosis
+    referrals:
+      - Orthopedics if fracture or dislocation
+      - Immobilization, ice, elevation
+      - Sports medicine if ligament injury
+    trace:
+      - "Traumatic joint injury evaluation"
+    next:
+      - node: fracture_or_dislocation
+        if:
+          exam_flags_any: ["fracture on X-ray", "dislocation on X-ray", "joint deformity"]
+      - node: ligament_injury
+        if:
+          symptoms_contains_any: ["pop felt", "knee instability", "giving way"]
+
+  fracture_or_dislocation:
+    when:
+      exam_flags_any: ["fracture", "dislocation", "displaced bone"]
+    tests:
+      - Orthopedic consultation
+      - Neurovascular exam distal to injury
+      - Immobilization
+      - Closed reduction vs surgical fixation
+    suggest_dx:
+      - Fracture
+      - Dislocation
+      - Intra-articular fracture
+    referrals:
+      - Orthopedics for reduction or surgery
+      - Admission if surgical fixation needed
+    trace:
+      - "Fracture or dislocation - orthopedic consultation"
+    next: []
+
+  ligament_injury:
+    when:
+      symptoms_contains_any: ["pop", "instability", "giving way", "swelling"]
+    tests:
+      - Lachman test, anterior drawer (ACL)
+      - McMurray test (meniscus)
+      - Valgus/varus stress (MCL/LCL)
+      - MRI for definitive diagnosis
+    suggest_dx:
+      - ORTHO-ACL-TEAR
+      - ORTHO-MENISCUS-TEAR
+      - MCL or LCL tear
+    referrals:
+      - Orthopedics or sports medicine
+      - Immobilization, ice, physical therapy
+      - Surgical repair if complete tear
+    trace:
+      - "Ligament injury evaluation"
+    next: []
+
+  chronic_arthritis:
+    when:
+      symptoms_contains_any: ["chronic joint pain", "stiffness", "swelling > 6 weeks"]
+    tests:
+      - X-ray of affected joints
+      - RF, anti-CCP (rheumatoid arthritis)
+      - ANA, anti-dsDNA (SLE)
+      - ESR, CRP
+      - CBC, CMP
+    suggest_dx:
+      - RHEUM-RA
+      - RHEUM-OA
+      - RHEUM-SLE
+      - RHEUM-PSORIATIC-ARTHRITIS
+      - RHEUM-ANKYLOSING-SPONDYLITIS
+    referrals:
+      - Rheumatology for chronic management
+      - NSAIDs, DMARDs for inflammatory arthritis
+      - Physical therapy
+    trace:
+      - "Chronic arthritis workup"
+    next: []

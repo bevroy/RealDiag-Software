@@ -1,0 +1,197 @@
+tree_id: CARD-PALPITATIONS
+name: Palpitations Evaluation
+description: Decision tree for evaluating palpitations and irregular heartbeat
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["palpitations", "racing heart", "irregular heartbeat", "heart flutter"]
+    tests:
+      - Vital signs (HR, BP, orthostatic vitals)
+      - 12-lead ECG
+      - Cardiac monitoring
+      - Physical examination
+      - Medication review
+    suggest_dx:
+      - Palpitations (cause to be determined)
+    referrals:
+      - Cardiology if concerning features
+    trace:
+      - "Palpitations evaluation - rhythm identification"
+    next:
+      - node: unstable_tachycardia
+        if:
+          any_of:
+            - red_flags_any: ["chest pain", "syncope", "hypotension", "altered mental status"]
+            - exam_flags_any: ["systolic BP < 90", "severe dyspnea", "heart failure"]
+      - node: atrial_fibrillation
+        if:
+          exam_flags_any: ["irregularly irregular rhythm", "absent P waves", "AFib on ECG"]
+      - node: svt_evaluation
+        if:
+          exam_flags_any: ["narrow complex tachycardia", "regular tachycardia", "HR > 150"]
+      - node: ventricular_arrhythmia
+        if:
+          exam_flags_any: ["wide complex tachycardia", "polymorphic VT", "torsades"]
+      - node: benign_palpitations
+        default: true
+
+  unstable_tachycardia:
+    when:
+      any_of:
+        - red_flags_any: ["chest pain", "syncope", "hypotension", "altered mental status", "severe dyspnea"]
+        - exam_flags_any: ["unstable", "hemodynamically compromised"]
+    tests:
+      - Continuous cardiac monitoring
+      - IV access
+      - Consider synchronized cardioversion if unstable
+      - Troponin
+      - Echocardiogram
+    suggest_dx:
+      - Unstable tachycardia
+      - CARD-VT
+      - CARD-SVT
+      - CARD-AFIB (with RVR)
+    referrals:
+      - Cardiology STAT
+      - ICU admission
+      - Consider electrical cardioversion
+    trace:
+      - "Unstable tachycardia - immediate intervention"
+    next: []
+
+  atrial_fibrillation:
+    when:
+      exam_flags_any: ["irregularly irregular", "AFib on ECG", "absent P waves"]
+    tests:
+      - TSH (thyroid)
+      - Echocardiogram
+      - CHADS2-VASc score (stroke risk)
+      - Consider rate vs rhythm control
+      - Anticoagulation assessment
+    suggest_dx:
+      - CARD-AFIB
+      - ENDO-HYPERTHYROID (if TSH low)
+    referrals:
+      - Cardiology
+      - Rate control (beta-blockers, calcium channel blockers, digoxin)
+      - Rhythm control (cardioversion, antiarrhythmics)
+      - Anticoagulation if CHADS2-VASc ≥ 2
+    trace:
+      - "Atrial fibrillation identified - assess stroke risk"
+    next:
+      - node: afib_with_rvr
+        if:
+          exam_flags_any: ["HR > 110", "rapid ventricular response", "symptomatic"]
+      - node: chronic_afib_management
+        if:
+          exam_flags_any: ["HR controlled", "asymptomatic", "chronic AFib"]
+
+  afib_with_rvr:
+    when:
+      exam_flags_any: ["AFib with RVR", "HR > 110", "symptomatic AFib"]
+    tests:
+      - Rate control medications
+      - Consider cardioversion if acute onset (< 48 hours)
+      - TEE if cardioversion planned and onset > 48 hours
+      - Anticoagulation
+    suggest_dx:
+      - CARD-AFIB (with rapid ventricular response)
+    referrals:
+      - Cardiology
+      - Admission if unstable or new-onset
+      - EP study if refractory or considering ablation
+    trace:
+      - "AFib with RVR - rate control vs cardioversion"
+    next: []
+
+  chronic_afib_management:
+    when:
+      exam_flags_any: ["chronic AFib", "rate controlled", "asymptomatic"]
+    tests:
+      - CHADS2-VASc score
+      - Anticoagulation (warfarin, DOACs)
+      - Rate control medication adjustment
+      - Periodic monitoring
+    suggest_dx:
+      - CARD-AFIB (chronic)
+    referrals:
+      - Cardiology for ongoing management
+      - EP study if considering ablation
+    trace:
+      - "Chronic AFib - anticoagulation and rate control"
+    next: []
+
+  svt_evaluation:
+    when:
+      exam_flags_any: ["narrow complex tachycardia", "regular tachycardia", "HR 150-250"]
+    tests:
+      - 12-lead ECG during episode if possible
+      - Vagal maneuvers (Valsalva, carotid massage)
+      - Adenosine if vagal maneuvers fail
+      - Echocardiogram
+      - Holter monitor or event monitor
+    suggest_dx:
+      - CARD-SVT
+      - CARD-WPW (if delta wave present)
+      - Atrial flutter
+      - AVNRT (AV nodal reentrant tachycardia)
+    referrals:
+      - Cardiology
+      - EP study if recurrent
+      - Consider catheter ablation for definitive treatment
+    trace:
+      - "SVT evaluation - vagal maneuvers and adenosine"
+    next: []
+
+  ventricular_arrhythmia:
+    when:
+      exam_flags_any: ["wide complex tachycardia", "polymorphic VT", "VT", "V-fib"]
+    tests:
+      - Treat as VT until proven otherwise
+      - Amiodarone or lidocaine
+      - Synchronized cardioversion if unstable
+      - Check electrolytes (K, Mg)
+      - Troponin, echo
+      - Coronary angiography if acute MI suspected
+    suggest_dx:
+      - CARD-VT
+      - CARD-V-FIB
+      - Torsades de pointes
+      - CARD-ACS (if ischemic cause)
+    referrals:
+      - Cardiology STAT
+      - EP study
+      - Consider ICD placement
+      - ICU admission
+    trace:
+      - "Ventricular arrhythmia - high-risk condition"
+    next: []
+
+  benign_palpitations:
+    when:
+      all_of:
+        - exam_flags_any: ["normal ECG", "normal vital signs", "sinus rhythm"]
+        - no_red_flags: ["no chest pain", "no syncope", "no family history sudden death"]
+    tests:
+      - Outpatient monitoring (Holter or event monitor)
+      - TSH (rule out hyperthyroidism)
+      - CBC (rule out anemia)
+      - Consider echocardiogram if murmur or structural concern
+      - Caffeine and stimulant use history
+    suggest_dx:
+      - Premature atrial contractions (PACs)
+      - Premature ventricular contractions (PVCs)
+      - Sinus tachycardia
+      - Anxiety
+      - Caffeine or stimulant use
+      - ENDO-HYPERTHYROID
+    referrals:
+      - Outpatient cardiology if symptoms persist
+      - Reassurance if benign
+      - Reduce caffeine, alcohol, stimulants
+    trace:
+      - "Benign palpitations - outpatient monitoring"
+    next: []

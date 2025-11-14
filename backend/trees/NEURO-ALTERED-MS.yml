@@ -1,0 +1,204 @@
+tree_id: NEURO-ALTERED-MS
+name: Altered Mental Status Evaluation
+description: Decision tree for evaluating altered level of consciousness and confusion
+version: "1.0"
+entry_point: initial_assessment
+
+nodes:
+  initial_assessment:
+    when:
+      symptoms_contains_any: ["altered mental status", "confusion", "decreased consciousness", "unresponsive"]
+    tests:
+      - Vital signs (temp, HR, BP, RR, O2 sat)
+      - Fingerstick glucose
+      - GCS (Glasgow Coma Scale)
+      - Focused neurologic exam
+      - Review medications
+    suggest_dx:
+      - Altered mental status (cause to be determined)
+    referrals:
+      - Emergency evaluation
+    trace:
+      - "Altered mental status - assess for life threats"
+    next:
+      - node: hypoglycemia_check
+        if:
+          red_flags_any: ["glucose < 60", "known diabetes", "taking insulin or sulfonylurea"]
+      - node: hypoxia_check
+        if:
+          exam_flags_any: ["oxygen sat < 90%", "cyanosis", "respiratory distress"]
+      - node: stroke_evaluation
+        if:
+          any_of:
+            - red_flags_any: ["focal neurologic deficit", "sudden onset", "facial droop", "arm weakness"]
+            - symptoms_contains_any: ["weakness", "aphasia", "neglect"]
+      - node: infection_workup
+        if:
+          any_of:
+            - red_flags_any: ["fever", "meningismus", "nuchal rigidity"]
+            - exam_flags_any: ["temperature > 38°C", "signs of infection"]
+      - node: toxic_metabolic
+        default: true
+
+  hypoglycemia_check:
+    when:
+      red_flags_any: ["glucose < 60", "hypoglycemia"]
+    tests:
+      - Fingerstick glucose (confirm)
+      - Give D50W IV if severe
+      - Reassess mental status after glucose correction
+    suggest_dx:
+      - ENDO-HYPOGLYCEMIA
+    referrals:
+      - Endocrinology if recurrent
+      - Adjust diabetes medications
+    trace:
+      - "Hypoglycemia identified - treat immediately"
+    next: []
+
+  hypoxia_check:
+    when:
+      exam_flags_any: ["oxygen sat < 90%", "hypoxia", "respiratory distress"]
+    tests:
+      - Supplemental oxygen
+      - ABG
+      - Chest X-ray
+      - Consider mechanical ventilation
+    suggest_dx:
+      - Hypoxic encephalopathy
+      - PULM-PNEUMONIA
+      - CARD-PE
+      - CARD-HF
+    referrals:
+      - ICU if severe
+      - Pulmonology
+    trace:
+      - "Hypoxia causing altered mental status"
+    next: []
+
+  stroke_evaluation:
+    when:
+      any_of:
+        - red_flags_any: ["focal neurologic deficit", "sudden onset", "hemiparesis"]
+        - symptoms_contains_any: ["weakness", "aphasia", "facial droop"]
+    tests:
+      - Stat CT head (non-contrast)
+      - NIH Stroke Scale
+      - Time of symptom onset (tPA window)
+      - ECG, cardiac monitoring
+      - Consider CTA or MRI
+    suggest_dx:
+      - NEU-STROKE-ISCHEMIC
+      - NEU-STROKE-ICH
+      - NEU-STROKE-SAH
+      - NEU-TIA
+    referrals:
+      - Neurology STAT
+      - Consider tPA if < 4.5 hours and no hemorrhage
+      - Neurosurgery if hemorrhagic
+    trace:
+      - "Stroke evaluation - time-sensitive"
+    next: []
+
+  infection_workup:
+    when:
+      any_of:
+        - red_flags_any: ["fever", "nuchal rigidity", "Kernig sign", "Brudzinski sign"]
+        - symptoms_contains_any: ["headache", "photophobia", "neck stiffness"]
+    tests:
+      - Blood cultures x2
+      - CT head before LP if focal deficit or papilledema
+      - Lumbar puncture (opening pressure, cell count, glucose, protein, gram stain, culture)
+      - Urinalysis, urine culture
+      - Chest X-ray
+    suggest_dx:
+      - ID-BACTERIAL-MENINGITIS
+      - ID-VIRAL-MENINGITIS
+      - Encephalitis
+      - ID-SEPSIS
+      - ID-UTI (esp. in elderly)
+    referrals:
+      - Infectious disease
+      - Neurology
+      - Empiric antibiotics immediately if meningitis suspected
+    trace:
+      - "Infection causing altered mental status"
+    next: []
+
+  toxic_metabolic:
+    when:
+      symptoms_contains_any: ["altered mental status", "confusion"]
+    tests:
+      - CMP (electrolytes, BUN, creatinine, calcium, glucose)
+      - CBC
+      - Liver function tests
+      - Ammonia level
+      - TSH
+      - Toxicology screen (urine drug screen, acetaminophen, salicylate, alcohol level)
+      - ABG or VBG
+      - Medication review
+    suggest_dx:
+      - Metabolic encephalopathy
+      - Uremia (NEPH-CKD, NEPH-AKI)
+      - Hepatic encephalopathy
+      - Hyponatremia (NEPH-HYPONATREMIA)
+      - Hypercalcemia
+      - Medication toxicity
+      - Alcohol intoxication or TOX-ALCOHOL-WITHDRAWAL
+    referrals:
+      - Nephrology if renal failure
+      - Hepatology if hepatic encephalopathy
+      - Toxicology if overdose suspected
+    trace:
+      - "Toxic-metabolic workup for altered mental status"
+    next:
+      - node: medication_review
+        if:
+          symptoms_contains_any: ["new medication", "polypharmacy", "elderly patient"]
+      - node: seizure_evaluation
+        if:
+          any_of:
+            - red_flags_any: ["witnessed seizure", "tongue biting", "incontinence", "postictal state"]
+            - symptoms_contains_any: ["jerking movements", "convulsions"]
+
+  medication_review:
+    when:
+      symptoms_contains_any: ["polypharmacy", "elderly", "new medications"]
+    tests:
+      - Complete medication list
+      - Check for anticholinergics, benzodiazepines, opioids, antihistamines
+      - Drug levels if applicable (digoxin, phenytoin, valproate)
+    suggest_dx:
+      - Medication-induced delirium
+      - Anticholinergic toxicity
+      - TOX-BENZODIAZEPINE-OD
+      - TOX-OPIOID-OD
+    referrals:
+      - Pharmacist consultation
+      - Discontinue or reduce offending medications
+    trace:
+      - "Medication-induced altered mental status"
+    next: []
+
+  seizure_evaluation:
+    when:
+      any_of:
+        - red_flags_any: ["witnessed seizure", "postictal state", "tongue biting"]
+        - symptoms_contains_any: ["convulsions", "jerking"]
+    tests:
+      - EEG
+      - CT or MRI brain
+      - Antiepileptic drug levels if known epilepsy
+      - Electrolytes (low sodium can cause seizures)
+    suggest_dx:
+      - NEU-SEIZURE
+      - NEU-EPILEPSY
+      - NEU-STATUS-EPILEPTICUS
+      - Metabolic seizure (hyponatremia, hypoglycemia)
+    referrals:
+      - Neurology
+      - Consider anti-epileptic medications
+      - Admit if first seizure or prolonged postictal state
+    trace:
+      - "Seizure causing altered mental status"
+    next: []

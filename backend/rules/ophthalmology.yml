@@ -1,0 +1,198 @@
+rules:
+  - id: OPHT-GLAUCOMA-OPEN-ANGLE
+    label: Open-Angle Glaucoma
+    presentations:
+      - Progressive peripheral vision loss
+      - Elevated intraocular pressure (IOP > 21 mmHg)
+      - Optic nerve cupping on fundoscopy
+      - Often asymptomatic in early stages
+      - Gradual bilateral vision changes
+      - Family history of glaucoma
+    icd10:
+      - H40.11
+    snomed:
+      - 77075001
+
+  - id: OPHT-GLAUCOMA-ANGLE-CLOSURE
+    label: Acute Angle-Closure Glaucoma
+    presentations:
+      - Sudden severe eye pain
+      - Blurred vision, halos around lights
+      - Nausea and vomiting
+      - Red eye with fixed mid-dilated pupil
+      - Markedly elevated IOP (40-80 mmHg)
+      - Corneal edema (cloudy cornea)
+      - Medical emergency requiring immediate treatment
+    icd10:
+      - H40.21
+    snomed:
+      - 392288005
+
+  - id: OPHT-CATARACT
+    label: Cataracts
+    presentations:
+      - Gradual painless vision loss
+      - Glare and difficulty with night driving
+      - Colors appear faded or yellowed
+      - Cloudy or opaque lens on examination
+      - Common in elderly
+      - May be accelerated by diabetes, steroids, trauma
+    icd10:
+      - H25.9
+    snomed:
+      - 193570009
+
+  - id: OPHT-RETINAL-DETACHMENT
+    label: Retinal Detachment
+    presentations:
+      - Sudden onset of floaters
+      - Flashing lights (photopsia)
+      - Dark curtain or shadow across visual field
+      - Painless vision loss
+      - May follow eye trauma or surgery
+      - Requires urgent ophthalmology referral
+    icd10:
+      - H33.0
+    snomed:
+      - 42059000
+
+  - id: OPHT-DIABETIC-RETINOPATHY
+    label: Diabetic Retinopathy
+    presentations:
+      - Blurred or fluctuating vision
+      - Floaters, dark spots
+      - May be asymptomatic in early stages
+      - History of diabetes mellitus
+      - Microaneurysms, hemorrhages, exudates on fundoscopy
+      - Cotton-wool spots, neovascularization in proliferative stage
+    icd10:
+      - E11.319
+    snomed:
+      - 4855003
+
+  - id: OPHT-MACULAR-DEGENERATION
+    label: Age-Related Macular Degeneration (AMD)
+    presentations:
+      - Central vision loss (difficulty reading, recognizing faces)
+      - Distortion of straight lines (metamorphopsia)
+      - Dry AMD - drusen, gradual vision loss
+      - Wet AMD - sudden vision loss, subretinal hemorrhage
+      - Common in elderly (age > 60)
+      - Preserved peripheral vision
+    icd10:
+      - H35.30
+    snomed:
+      - 267718000
+
+  - id: OPHT-UVEITIS
+    label: Uveitis
+    presentations:
+      - Eye pain and redness
+      - Photophobia
+      - Blurred vision
+      - Floaters
+      - Small irregular pupil
+      - Anterior (iritis), intermediate, or posterior
+      - May be associated with autoimmune disease
+    icd10:
+      - H20.9
+    snomed:
+      - 128473001
+
+  - id: OPHT-CONJUNCTIVITIS
+    label: Conjunctivitis
+    presentations:
+      - Red eye with discharge
+      - Gritty or foreign body sensation
+      - Crusting of eyelids, especially in morning
+      - Viral - watery discharge, highly contagious
+      - Bacterial - purulent discharge
+      - Allergic - itching, bilateral, seasonal
+    icd10:
+      - H10.9
+    snomed:
+      - 9826008
+
+  - id: OPHT-OPTIC-NEURITIS
+    label: Optic Neuritis
+    presentations:
+      - Sudden monocular vision loss
+      - Pain with eye movement
+      - Central scotoma
+      - Decreased color vision (red desaturation)
+      - Relative afferent pupillary defect (RAPD)
+      - Associated with multiple sclerosis in many cases
+    icd10:
+      - H46.9
+    snomed:
+      - 78370002
+
+  - id: OPHT-CENTRAL-RETINAL-ARTERY-OCCLUSION
+    label: Central Retinal Artery Occlusion (CRAO)
+    presentations:
+      - Sudden painless monocular vision loss
+      - Amaurosis fugax may precede
+      - Cherry-red spot on macula
+      - Retinal pallor on fundoscopy
+      - Emergency - vision loss often permanent
+      - Associated with carotid disease, emboli
+    icd10:
+      - H34.1
+    snomed:
+      - 24596005
+
+  - id: OPHT-CENTRAL-RETINAL-VEIN-OCCLUSION
+    label: Central Retinal Vein Occlusion (CRVO)
+    presentations:
+      - Sudden painless monocular vision loss
+      - Blood and thunder appearance on fundoscopy
+      - Diffuse retinal hemorrhages
+      - Tortuous dilated veins
+      - Cotton-wool spots
+      - Risk factors - hypertension, diabetes, glaucoma, hypercoagulable states
+    icd10:
+      - H34.81
+    snomed:
+      - 24596005
+
+  - id: OPHT-CORNEAL-ABRASION
+    label: Corneal Abrasion
+    presentations:
+      - Eye pain, sharp or foreign body sensation
+      - Tearing, photophobia
+      - Blurred vision
+      - History of trauma or foreign body
+      - Fluorescein staining shows epithelial defect
+      - Red eye
+    icd10:
+      - S05.00
+    snomed:
+      - 26324009
+
+  - id: OPHT-HORDEOLUM-CHALAZION
+    label: Hordeolum (Stye) or Chalazion
+    presentations:
+      - Painful or tender eyelid swelling (hordeolum)
+      - Painless firm nodule in eyelid (chalazion)
+      - Red, swollen eyelid
+      - May point toward skin or conjunctival surface
+      - Hordeolum - acute infection of eyelid gland
+      - Chalazion - chronic granulomatous inflammation
+    icd10:
+      - H00.019
+    snomed:
+      - 1482004
+
+  - id: OPHT-BLEPHARITIS
+    label: Blepharitis
+    presentations:
+      - Chronic eyelid inflammation
+      - Burning, itching, gritty sensation
+      - Crusting at base of eyelashes
+      - Red eyelid margins
+      - Dry eyes
+      - May be anterior (staphylococcal) or posterior (meibomian gland dysfunction)
+    icd10:
+      - H01.009
+    snomed:
+      - 41446000
