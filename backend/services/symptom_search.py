@@ -32,7 +32,7 @@ class DiagnosisMatch(BaseModel):
     matched_presentations: List[str]
     all_presentations: List[str]
     icd10: List[str]
-    snomed: List[str]
+    snomed: List[Any]  # Can be int or str in YAML
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -79,9 +79,12 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str]) ->
     score = 0.0
     matched = []
     
+    # Filter out non-string presentations (sometimes YAML has dicts)
+    string_presentations = [p for p in presentations if isinstance(p, str)]
+    
     # Normalize all inputs
     normalized_symptoms = [normalize_text(s) for s in symptom_input]
-    normalized_presentations = [normalize_text(p) for p in presentations]
+    normalized_presentations = [normalize_text(p) for p in string_presentations]
     
     for presentation_idx, presentation in enumerate(normalized_presentations):
         presentation_matched = False
@@ -101,11 +104,11 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str]) ->
                     presentation_matched = True
         
         if presentation_matched:
-            matched.append(presentations[presentation_idx])  # Keep original case
+            matched.append(string_presentations[presentation_idx])  # Keep original case
     
     # Normalize score by number of presentations (avoid bias toward diagnoses with many presentations)
-    if presentations:
-        score = score / len(presentations)
+    if string_presentations:
+        score = score / len(string_presentations)
     
     return (score, matched)
 
@@ -147,13 +150,16 @@ async def search_by_symptoms(request: SymptomSearchRequest):
         filtered_rules = apply_filters(rules, request.age, request.sex)
         
         for rule in filtered_rules:
-            # Get presentations
+            # Get presentations - filter to only strings
             presentations = rule.get('presentations', [])
-            if not presentations:
+            # Filter out non-string presentations (sometimes YAML has dicts or other types)
+            string_presentations = [p for p in presentations if isinstance(p, str)]
+            
+            if not string_presentations:
                 continue
             
             # Calculate match score
-            score, matched_presentations = calculate_match_score(request.symptoms, presentations)
+            score, matched_presentations = calculate_match_score(request.symptoms, string_presentations)
             
             # Only include if there's a match
             if score > 0:
@@ -163,7 +169,7 @@ async def search_by_symptoms(request: SymptomSearchRequest):
                     family=family_name,
                     match_score=round(score, 2),
                     matched_presentations=matched_presentations,
-                    all_presentations=presentations,
+                    all_presentations=string_presentations,  # Use filtered list
                     icd10=rule.get('icd10', []),
                     snomed=rule.get('snomed', [])
                 ))

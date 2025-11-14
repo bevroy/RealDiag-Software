@@ -55,7 +55,21 @@ class DecisionTreeEngine:
         if not self.trees_path.exists(): return trees
         for f in sorted(self.trees_path.glob("*.yml")):
             doc=yaml.safe_load(f.read_text()) or {}
-            if "id" in doc: trees[doc["id"]]=doc
+            # Support both old format (id) and new format (tree_id)
+            tree_id = doc.get("id") or doc.get("tree_id")
+            if tree_id:
+                # Normalize to old format for compatibility
+                if "tree_id" in doc:
+                    doc["id"] = doc["tree_id"]
+                if "name" in doc and "title" not in doc:
+                    doc["title"] = doc["name"]
+                if "entry_point" in doc and "entry" not in doc:
+                    doc["entry"] = doc["entry_point"]
+                # Convert nodes from dict to list if needed
+                if isinstance(doc.get("nodes"), dict):
+                    nodes_dict = doc["nodes"]
+                    doc["nodes"] = [{"id": k, **v} for k, v in nodes_dict.items()]
+                trees[tree_id] = doc
         return trees
     def list(self): return [{"id":t["id"],"title":t.get("title")} for t in self.trees.values()]
     def evaluate(self, tree_id: str, patient: Dict[str, Any]):
@@ -72,10 +86,22 @@ class DecisionTreeEngine:
             path.append(cur); tests.extend(node.get("tests") or []); dx.extend(node.get("suggest_dx") or [])
             referrals=[]; referrals.extend(node.get("referrals") or [])
             nxt=None
-            for branch in node.get("next") or []:
-                if "default" in branch: nxt=branch["default"]
-                if "when" in branch:
+            # Handle "next" field which can be a list of conditional branches
+            next_branches = node.get("next") or []
+            for branch in next_branches:
+                # New format: {node: "name", if: {conditions}, default: true}
+                if branch.get("default"):
+                    nxt=branch.get("node")
+                if "if" in branch:
+                    b_ok,_=_match(branch["if"], patient)
+                    if b_ok: 
+                        nxt=branch.get("node")
+                        break
+                # Old format: {default: "name", when: {conditions}, go: "name"}
+                elif "when" in branch:
                     b_ok,_=_match(branch["when"], patient)
                     if b_ok: nxt=branch.get("go", nxt); break
+                elif "default" in branch and isinstance(branch["default"], str):
+                    nxt=branch["default"]
             cur=nxt
         return {"tree":{"id":t["id"],"title":t.get("title")}, "path":path, "tests":sorted(set(tests)), "provisional_dx":sorted(set(dx)), "referrals":sorted(set(referrals)), "trace":trace_all}
