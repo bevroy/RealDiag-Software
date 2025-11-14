@@ -1,0 +1,258 @@
+family: geriatrics
+description: Geriatric conditions and syndromes primarily affecting older adults
+
+rules:
+  - id: GER-DEMENTIA-ALZHEIMER
+    label: Alzheimer's Disease
+    presentations:
+      - Progressive memory loss
+      - Difficulty with familiar tasks
+      - Language problems (word-finding)
+      - Disorientation to time and place
+      - Poor judgment
+      - Personality changes
+      - Age > 65 typically
+    icd10:
+      - G30.9
+    snomed:
+      - 26929004
+
+  - id: GER-DEMENTIA-VASCULAR
+    label: Vascular Dementia
+    presentations:
+      - Stepwise cognitive decline
+      - History of strokes or TIAs
+      - Focal neurologic deficits
+      - Gait abnormalities
+      - Cardiovascular risk factors
+      - MRI shows infarcts or white matter disease
+    icd10:
+      - F01.50
+    snomed:
+      - 429998004
+
+  - id: GER-DELIRIUM
+    label: Delirium
+    presentations:
+      - Acute change in mental status
+      - Fluctuating consciousness
+      - Inattention
+      - Disorganized thinking
+      - Often reversible with treatment
+      - Precipitated by infection, medication, etc
+    icd10:
+      - R41.0
+    snomed:
+      - 2776000
+
+  - id: GER-FALLS
+    label: Recurrent Falls (Geriatric Syndrome)
+    presentations:
+      - Two or more falls in past year
+      - Gait instability
+      - Balance impairment
+      - Fear of falling
+      - Multiple risk factors (meds, vision, environment)
+      - May result in injury
+    icd10:
+      - R29.6
+    snomed:
+      - 161898004
+
+  - id: GER-URINARY-INCONTINENCE
+    label: Urinary Incontinence (Geriatric)
+    presentations:
+      - Involuntary urine loss
+      - Stress, urge, or overflow types
+      - Nocturia and urgency
+      - Impacts quality of life
+      - Multiple contributing factors
+    icd10:
+      - N39.46
+      - R32
+    snomed:
+      - 165232002
+
+  - id: GER-POLYPHARMACY
+    label: Polypharmacy and Adverse Drug Reactions
+    presentations:
+      - Taking 5 or more medications
+      - Confusion or falls from medications
+      - Drug-drug interactions
+      - Inappropriate medications for elderly
+      - Medication non-adherence
+      - Adverse drug events
+    icd10:
+      - Z91.89
+    snomed:
+      - 723400009
+
+  - id: GER-OSTEOPOROSIS
+    label: Osteoporosis
+    presentations:
+      - Low bone density
+      - Fragility fractures (hip, spine, wrist)
+      - Loss of height
+      - Kyphosis (dowager's hump)
+      - Back pain from compression fractures
+      - Postmenopausal women or age > 70
+    icd10:
+      - M81.0
+    snomed:
+      - 64859006
+
+  - id: GER-PRESSURE-ULCER
+    label: Pressure Ulcer (Decubitus Ulcer)
+    presentations:
+      - Skin breakdown over bony prominences
+      - Sacrum, heels, hips most common
+      - Immobility or bedbound
+      - Stages I-IV
+      - May have necrotic tissue
+      - Risk with malnutrition, incontinence
+    icd10:
+      - L89.90
+    snomed:
+      - 399912005
+
+  - id: GER-SARCOPENIA
+    label: Sarcopenia
+    presentations:
+      - Age-related muscle loss
+      - Decreased strength and function
+      - Slow gait speed
+      - Difficulty rising from chair
+      - Increased fall risk
+      - Poor nutritional status
+    icd10:
+      - M62.84
+    snomed:
+      - 88092000
+
+  - id: GER-FRAILTY
+    label: Frailty Syndrome
+    presentations:
+      - Unintentional weight loss
+      - Exhaustion and fatigue
+      - Weakness (decreased grip strength)
+      - Slow walking speed
+      - Low physical activity
+      - Vulnerability to stressors
+    icd10:
+      - R54
+    snomed:
+      - 248279007
+
+  - id: GER-MACULAR-DEGENERATION
+    label: Age-Related Macular Degeneration
+    presentations:
+      - Central vision loss
+      - Difficulty reading
+      - Straight lines appear wavy (metamorphopsia)
+      - Drusen on fundoscopy
+      - Wet or dry type
+      - Age > 60
+    icd10:
+      - H35.30
+    snomed:
+      - 267718000
+
+  - id: GER-CATARACTS
+    label: Cataracts
+    presentations:
+      - Gradual painless vision loss
+      - Glare and halos around lights
+      - Difficulty with night driving
+      - Colors appear faded
+      - Cloudy or opaque lens
+      - Common in elderly
+    icd10:
+      - H25.9
+    snomed:
+      - 193570009
+
+  - id: GER-HEARING-LOSS
+    label: Presbycusis (Age-Related Hearing Loss)
+    presentations:
+      - Bilateral gradual hearing loss
+      - High-frequency sounds affected first
+      - Difficulty understanding speech in noise
+      - Asking people to repeat
+      - Social isolation
+      - Tinnitus may be present
+    icd10:
+      - H91.10
+    snomed:
+      - 343087000
+
+  - id: GER-BENIGN-PROSTATIC-HYPERPLASIA
+    label: Benign Prostatic Hyperplasia
+    presentations:
+      - Urinary hesitancy and weak stream
+      - Nocturia
+      - Frequency and urgency
+      - Incomplete bladder emptying
+      - Enlarged prostate on DRE
+      - Common in men > 50
+    icd10:
+      - N40.0
+    snomed:
+      - 266569009
+
+  - id: GER-DEPRESSION
+    label: Late-Life Depression
+    presentations:
+      - Depressed mood or anhedonia
+      - Insomnia or hypersomnia
+      - Fatigue and low energy
+      - Feelings of worthlessness
+      - Concentration difficulties
+      - May present with somatic complaints
+      - Suicidal ideation
+    icd10:
+      - F32.9
+    snomed:
+      - 35489007
+
+  - id: GER-PARKINSON
+    label: Parkinson's Disease
+    presentations:
+      - Resting tremor
+      - Bradykinesia
+      - Rigidity
+      - Postural instability
+      - Shuffling gait
+      - Masked facies
+      - Age of onset typically 60s
+    icd10:
+      - G20
+    snomed:
+      - 49049000
+
+  - id: GER-GIANT-CELL-ARTERITIS
+    label: Giant Cell (Temporal) Arteritis
+    presentations:
+      - New headache in patient > 50
+      - Temporal artery tenderness
+      - Jaw claudication
+      - Vision changes (risk of blindness)
+      - Elevated ESR and CRP
+      - Associated with polymyalgia rheumatica
+    icd10:
+      - M31.6
+    snomed:
+      - 400130008
+
+  - id: GER-POLYMYALGIA-RHEUMATICA
+    label: Polymyalgia Rheumatica
+    presentations:
+      - Bilateral shoulder and hip pain and stiffness
+      - Morning stiffness > 1 hour
+      - Age > 50
+      - Elevated ESR and CRP
+      - Difficulty rising from chair
+      - Dramatic response to low-dose steroids
+    icd10:
+      - M35.3
+    snomed:
+      - 399022003

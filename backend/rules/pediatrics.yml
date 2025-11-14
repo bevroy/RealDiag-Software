@@ -1,0 +1,284 @@
+family: pediatrics
+description: Pediatric conditions and diseases primarily affecting children and adolescents
+
+rules:
+  - id: PED-CROUP
+    label: Croup (Laryngotracheobronchitis)
+    presentations:
+      - Barking cough (seal-like)
+      - Inspiratory stridor
+      - Hoarse voice
+      - Worse at night
+      - Preceded by URI symptoms
+      - Age 6 months to 3 years
+    icd10:
+      - J05.0
+    snomed:
+      - 71186008
+
+  - id: PED-BRONCHIOLITIS
+    label: Bronchiolitis
+    presentations:
+      - Wheezing in infant < 2 years
+      - Tachypnea and respiratory distress
+      - Nasal flaring and retractions
+      - Poor feeding
+      - Preceded by URI symptoms
+      - RSV season (fall/winter)
+    icd10:
+      - J21.0
+      - J21.9
+    snomed:
+      - 4120002
+
+  - id: PED-KAWASAKI
+    label: Kawasaki Disease
+    presentations:
+      - Fever > 5 days
+      - Bilateral conjunctival injection
+      - Strawberry tongue, cracked lips
+      - Polymorphous rash
+      - Cervical lymphadenopathy
+      - Extremity changes (edema, peeling)
+    icd10:
+      - M30.3
+    snomed:
+      - 75053002
+
+  - id: PED-INTUSSUSCEPTION
+    label: Intussusception
+    presentations:
+      - Intermittent severe abdominal pain in infant
+      - Currant jelly stools
+      - Palpable sausage-shaped mass
+      - Vomiting
+      - Lethargy between pain episodes
+      - Age 6-36 months typically
+    icd10:
+      - K56.1
+    snomed:
+      - 26036001
+
+  - id: PED-PYLORIC-STENOSIS
+    label: Hypertrophic Pyloric Stenosis
+    presentations:
+      - Projectile vomiting after feeding
+      - Non-bilious vomiting
+      - Palpable olive-shaped mass in epigastrium
+      - Hungry after vomiting
+      - Age 3-12 weeks
+      - More common in males
+    icd10:
+      - Q40.0
+    snomed:
+      - 205603001
+
+  - id: PED-HAND-FOOT-MOUTH
+    label: Hand-Foot-Mouth Disease
+    presentations:
+      - Vesicular rash on hands and feet
+      - Oral ulcers and painful mouth sores
+      - Fever
+      - Sore throat
+      - Decreased oral intake
+      - Coxsackievirus (summer/fall)
+    icd10:
+      - B08.4
+    snomed:
+      - 70572006
+
+  - id: PED-FEBRILE-SEIZURE
+    label: Febrile Seizure
+    presentations:
+      - Seizure associated with fever
+      - Age 6 months to 5 years
+      - No CNS infection
+      - Generalized tonic-clonic typically
+      - Brief duration (< 15 minutes)
+      - Rapid recovery
+    icd10:
+      - R56.00
+    snomed:
+      - 41497008
+
+  - id: PED-OTITIS-MEDIA
+    label: Acute Otitis Media (Pediatric)
+    presentations:
+      - Ear pain and tugging at ear
+      - Fever
+      - Irritability and poor sleep
+      - Decreased hearing
+      - Bulging, red tympanic membrane
+      - Recent URI
+    icd10:
+      - H66.90
+    snomed:
+      - 3110003
+
+  - id: PED-ROSEOLA
+    label: Roseola Infantum (Sixth Disease)
+    presentations:
+      - High fever for 3-4 days
+      - Fever resolves then rash appears
+      - Rose-pink maculopapular rash
+      - Starts on trunk, spreads to extremities
+      - Age 6-24 months
+      - Child appears well despite high fever
+    icd10:
+      - B08.20
+    snomed:
+      - 61959006
+
+  - id: PED-SCARLET-FEVER
+    label: Scarlet Fever
+    presentations:
+      - Sandpaper-textured rash
+      - Strawberry tongue
+      - Pharyngitis with tonsillar exudates
+      - Fever
+      - Pastia lines (rash in skin folds)
+      - Facial flushing with circumoral pallor
+    icd10:
+      - A38.9
+    snomed:
+      - 30242009
+
+  - id: PED-IMPETIGO
+    label: Impetigo
+    presentations:
+      - Honey-colored crusted lesions
+      - Pruritic sores around nose and mouth
+      - Vesicles that rupture easily
+      - Highly contagious
+      - Common in children
+      - No systemic symptoms typically
+    icd10:
+      - L01.0
+    snomed:
+      - 48277006
+
+  - id: PED-FIFTH-DISEASE
+    label: Fifth Disease (Erythema Infectiosum)
+    presentations:
+      - Slapped cheek appearance
+      - Lacy reticular rash on extremities
+      - Low-grade fever
+      - Parvovirus B19
+      - Rash may wax and wane
+      - School-aged children
+    icd10:
+      - B08.3
+    snomed:
+      - 26788001
+
+  - id: PED-HENOCH-SCHONLEIN
+    label: Henoch-Schönlein Purpura (IgA Vasculitis)
+    presentations:
+      - Palpable purpura on lower extremities and buttocks
+      - Abdominal pain (colicky)
+      - Arthralgia or arthritis
+      - Hematuria and glomerulonephritis
+      - Age 3-10 years typically
+      - Recent URI
+    icd10:
+      - D69.0
+    snomed:
+      - 69142008
+
+  - id: PED-APPENDICITIS
+    label: Pediatric Appendicitis
+    presentations:
+      - Periumbilical pain migrating to RLQ
+      - Anorexia and vomiting
+      - Fever
+      - McBurney point tenderness
+      - Rebound tenderness and guarding
+      - Rovsing sign positive
+    icd10:
+      - K35.80
+    snomed:
+      - 74400008
+
+  - id: PED-ASTHMA
+    label: Pediatric Asthma
+    presentations:
+      - Recurrent wheezing
+      - Cough (worse at night)
+      - Shortness of breath with exercise
+      - Chest tightness
+      - Triggered by allergens, URI, exercise
+      - Family history of atopy
+    icd10:
+      - J45.909
+    snomed:
+      - 195967001
+
+  - id: PED-COLIC
+    label: Infantile Colic
+    presentations:
+      - Excessive crying in infant < 3 months
+      - Rule of 3s (> 3 hrs/day, > 3 days/week, > 3 weeks)
+      - Drawing legs up during crying
+      - Difficult to console
+      - Otherwise healthy infant
+      - Evening predominance
+    icd10:
+      - R10.83
+    snomed:
+      - 73893001
+
+  - id: PED-FAILURE-TO-THRIVE
+    label: Failure to Thrive
+    presentations:
+      - Weight < 3rd percentile or crossing percentiles
+      - Inadequate weight gain
+      - Poor feeding or feeding difficulties
+      - Developmental delays may be present
+      - Organic or non-organic causes
+    icd10:
+      - R62.51
+    snomed:
+      - 271823003
+
+  - id: PED-ADHD
+    label: Attention-Deficit/Hyperactivity Disorder
+    presentations:
+      - Inattention and distractibility
+      - Hyperactivity and fidgeting
+      - Impulsivity
+      - Difficulty completing tasks
+      - Academic underachievement
+      - Symptoms in multiple settings
+    icd10:
+      - F90.9
+    snomed:
+      - 406506008
+
+  - id: PED-AUTISM
+    label: Autism Spectrum Disorder
+    presentations:
+      - Social communication deficits
+      - Restricted and repetitive behaviors
+      - Delayed language development
+      - Lack of eye contact
+      - Sensory sensitivities
+      - Onset in early childhood
+    icd10:
+      - F84.0
+    snomed:
+      - 408856003
+
+  - id: PED-LEAD-POISONING
+    label: Lead Poisoning
+    presentations:
+      - Developmental delays
+      - Irritability and behavioral changes
+      - Abdominal pain
+      - Constipation
+      - Anemia
+      - Pica behavior
+      - Living in older housing
+    icd10:
+      - T56.0X1A
+    snomed:
+      - 70691001

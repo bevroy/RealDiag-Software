@@ -1,0 +1,301 @@
+family: emergency_medicine
+description: High-acuity time-sensitive conditions requiring urgent emergency evaluation
+
+rules:
+  - id: EM-ANAPHYLAXIS
+    label: Anaphylaxis
+    presentations:
+      - Acute onset after allergen exposure
+      - Urticaria and angioedema
+      - Respiratory distress (stridor, wheezing)
+      - Hypotension and tachycardia
+      - Gastrointestinal symptoms
+      - Requires immediate epinephrine
+    icd10:
+      - T78.2XXA
+    snomed:
+      - 39579001
+
+  - id: EM-STATUS-EPILEPTICUS
+    label: Status Epilepticus
+    presentations:
+      - Continuous seizure > 5 minutes
+      - Repeated seizures without recovery
+      - Altered consciousness
+      - Tonic-clonic movements
+      - Requires immediate benzodiazepines
+      - High mortality if untreated
+    icd10:
+      - G41.9
+    snomed:
+      - 230456007
+
+  - id: EM-SHOCK-HYPOVOLEMIC
+    label: Hypovolemic Shock
+    presentations:
+      - Hypotension and tachycardia
+      - History of blood or fluid loss
+      - Pale, cool, clammy skin
+      - Decreased urine output
+      - Altered mental status
+      - Narrow pulse pressure
+    icd10:
+      - R57.1
+    snomed:
+      - 39419009
+
+  - id: EM-SHOCK-CARDIOGENIC
+    label: Cardiogenic Shock
+    presentations:
+      - Hypotension with signs of tissue hypoperfusion
+      - Elevated jugular venous pressure
+      - Pulmonary edema
+      - Cool extremities
+      - Often post-MI or acute heart failure
+      - Decreased cardiac output
+    icd10:
+      - R57.0
+    snomed:
+      - 89323001
+
+  - id: EM-SHOCK-SEPTIC
+    label: Septic Shock
+    presentations:
+      - Hypotension requiring vasopressors
+      - Lactate > 2 mmol/L
+      - Fever or hypothermia
+      - Warm flushed skin initially
+      - Suspected or confirmed infection
+      - Organ dysfunction
+    icd10:
+      - R65.21
+    snomed:
+      - 76571007
+
+  - id: EM-ACUTE-CORONARY-SYNDROME
+    label: Acute Coronary Syndrome (STEMI/NSTEMI)
+    presentations:
+      - Chest pain or pressure
+      - Radiating to jaw, arm, or back
+      - Dyspnea and diaphoresis
+      - Nausea
+      - ECG changes (ST elevation or depression)
+      - Elevated troponin
+    icd10:
+      - I21.9
+      - I24.9
+    snomed:
+      - 394659003
+
+  - id: EM-PULMONARY-EMBOLISM
+    label: Pulmonary Embolism
+    presentations:
+      - Sudden dyspnea
+      - Pleuritic chest pain
+      - Tachycardia and tachypnea
+      - Hypoxia
+      - Risk factors (immobility, malignancy, DVT)
+      - Hemoptysis may occur
+    icd10:
+      - I26.99
+    snomed:
+      - 59282003
+
+  - id: EM-AORTIC-DISSECTION
+    label: Aortic Dissection
+    presentations:
+      - Sudden severe tearing chest or back pain
+      - Blood pressure differential between arms
+      - Pulse deficits
+      - Aortic regurgitation murmur
+      - Mediastinal widening on CXR
+      - Risk factors: hypertension, Marfan
+    icd10:
+      - I71.00
+    snomed:
+      - 68345009
+
+  - id: EM-HYPERTENSIVE-EMERGENCY
+    label: Hypertensive Emergency
+    presentations:
+      - Severe hypertension (SBP > 180 or DBP > 120)
+      - End-organ damage present
+      - Altered mental status or encephalopathy
+      - Chest pain or acute heart failure
+      - Papilledema
+      - Acute kidney injury
+    icd10:
+      - I16.9
+    snomed:
+      - 706882009
+
+  - id: EM-STROKE-ISCHEMIC
+    label: Acute Ischemic Stroke
+    presentations:
+      - Sudden focal neurologic deficit
+      - Facial droop or arm weakness
+      - Speech difficulty
+      - Time of onset known
+      - CT brain rules out hemorrhage
+      - Candidate for thrombolysis (< 4.5 hours)
+    icd10:
+      - I63.9
+    snomed:
+      - 422504002
+
+  - id: EM-STROKE-HEMORRHAGIC
+    label: Hemorrhagic Stroke
+    presentations:
+      - Sudden severe headache
+      - Altered consciousness
+      - Focal neurologic deficits
+      - Nausea and vomiting
+      - CT shows blood in brain
+      - Elevated blood pressure
+    icd10:
+      - I61.9
+    snomed:
+      - 274100004
+
+  - id: EM-SUBARACHNOID-HEMORRHAGE
+    label: Subarachnoid Hemorrhage
+    presentations:
+      - Sudden thunderclap headache (worst of life)
+      - Neck stiffness
+      - Photophobia
+      - Altered consciousness or syncope
+      - CT brain shows blood in subarachnoid space
+      - Ruptured aneurysm most common
+    icd10:
+      - I60.9
+    snomed:
+      - 21454007
+
+  - id: EM-MENINGITIS
+    label: Acute Bacterial Meningitis
+    presentations:
+      - Fever and headache
+      - Neck stiffness
+      - Altered mental status
+      - Photophobia
+      - Kernig and Brudzinski signs
+      - Requires immediate antibiotics
+    icd10:
+      - G00.9
+    snomed:
+      - 95883001
+
+  - id: EM-DKA
+    label: Diabetic Ketoacidosis
+    presentations:
+      - Hyperglycemia (glucose > 250)
+      - Metabolic acidosis (pH < 7.3)
+      - Ketones in blood or urine
+      - Nausea, vomiting, abdominal pain
+      - Kussmaul respirations
+      - Fruity breath odor
+      - Altered mental status
+    icd10:
+      - E10.10
+    snomed:
+      - 420422005
+
+  - id: EM-ADRENAL-CRISIS
+    label: Acute Adrenal Crisis
+    presentations:
+      - Hypotension refractory to fluids
+      - Hyponatremia and hyperkalemia
+      - Hypoglycemia
+      - Abdominal pain, nausea, vomiting
+      - History of adrenal insufficiency or steroid use
+      - Requires immediate hydrocortisone
+    icd10:
+      - E27.2
+    snomed:
+      - 36171008
+
+  - id: EM-THYROID-STORM
+    label: Thyroid Storm
+    presentations:
+      - Severe hyperthyroidism
+      - Fever (often > 40°C)
+      - Tachycardia out of proportion to fever
+      - Altered mental status or agitation
+      - Nausea, vomiting, diarrhea
+      - Atrial fibrillation
+      - Precipitated by stress or infection
+    icd10:
+      - E05.5
+    snomed:
+      - 10079009
+
+  - id: EM-TENSION-PNEUMOTHORAX
+    label: Tension Pneumothorax
+    presentations:
+      - Severe dyspnea and chest pain
+      - Hypotension and tachycardia
+      - Absent breath sounds on affected side
+      - Tracheal deviation away from affected side
+      - Jugular venous distension
+      - Requires immediate needle decompression
+    icd10:
+      - J93.0
+    snomed:
+      - 44816003
+
+  - id: EM-CARDIAC-TAMPONADE
+    label: Cardiac Tamponade
+    presentations:
+      - Hypotension and tachycardia
+      - Jugular venous distension
+      - Muffled heart sounds
+      - Beck's triad
+      - Pulsus paradoxus
+      - Dyspnea and chest pain
+    icd10:
+      - I31.4
+    snomed:
+      - 35304003
+
+  - id: EM-ECTOPIC-PREGNANCY-RUPTURED
+    label: Ruptured Ectopic Pregnancy
+    presentations:
+      - Acute abdominal pain in pregnant woman
+      - Vaginal bleeding
+      - Hypotension and tachycardia
+      - Shoulder pain (Kehr sign)
+      - Positive pregnancy test
+      - Requires emergency surgery
+    icd10:
+      - O00.90
+    snomed:
+      - 34801009
+
+  - id: EM-ACUTE-ANGLE-CLOSURE-GLAUCOMA
+    label: Acute Angle-Closure Glaucoma
+    presentations:
+      - Sudden severe eye pain
+      - Blurred vision and halos around lights
+      - Red eye
+      - Fixed mid-dilated pupil
+      - Corneal edema
+      - Nausea and vomiting
+      - Elevated intraocular pressure
+    icd10:
+      - H40.211
+    snomed:
+      - 392288008
+
+  - id: EM-TESTICULAR-TORSION
+    label: Testicular Torsion
+    presentations:
+      - Sudden severe testicular pain
+      - Nausea and vomiting
+      - High-riding testis
+      - Absent cremasteric reflex
+      - Swelling and erythema of scrotum
+      - Requires urgent surgery (< 6 hours)
+    icd10:
+      - N44.00
+    snomed:
+      - 51496003

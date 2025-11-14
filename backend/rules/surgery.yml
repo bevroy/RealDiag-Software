@@ -1,0 +1,283 @@
+family: surgery
+description: Surgical emergencies and complications requiring surgical evaluation or intervention
+
+rules:
+  - id: SURG-ACUTE-ABDOMEN
+    label: Acute Surgical Abdomen
+    presentations:
+      - Sudden severe abdominal pain
+      - Peritoneal signs (guarding, rebound)
+      - Rigidity
+      - Absent bowel sounds
+      - Requires urgent surgical evaluation
+      - Free air on imaging suggests perforation
+    icd10:
+      - R10.0
+    snomed:
+      - 9991008
+
+  - id: SURG-BOWEL-OBSTRUCTION-SMALL
+    label: Small Bowel Obstruction
+    presentations:
+      - Cramping abdominal pain
+      - Nausea and vomiting (often bilious)
+      - Abdominal distension
+      - Obstipation (no stool or gas)
+      - High-pitched or absent bowel sounds
+      - Air-fluid levels on X-ray
+    icd10:
+      - K56.60
+    snomed:
+      - 81060008
+
+  - id: SURG-BOWEL-OBSTRUCTION-LARGE
+    label: Large Bowel Obstruction
+    presentations:
+      - Progressive abdominal distension
+      - Cramping pain
+      - Obstipation
+      - Nausea and late vomiting
+      - Dilated colon on imaging
+      - May be caused by malignancy or volvulus
+    icd10:
+      - K56.60
+    snomed:
+      - 235488008
+
+  - id: SURG-CHOLECYSTITIS
+    label: Acute Cholecystitis
+    presentations:
+      - Right upper quadrant pain
+      - Murphy's sign (inspiratory arrest)
+      - Fever
+      - Nausea and vomiting
+      - Positive sonographic Murphy sign
+      - Gallbladder wall thickening on ultrasound
+    icd10:
+      - K81.0
+    snomed:
+      - 76581006
+
+  - id: SURG-PANCREATITIS
+    label: Acute Pancreatitis
+    presentations:
+      - Severe epigastric pain radiating to back
+      - Nausea and vomiting
+      - Elevated amylase and lipase (> 3x normal)
+      - Alcohol or gallstone history
+      - May have Cullen or Grey-Turner sign
+      - CT shows pancreatic inflammation
+    icd10:
+      - K85.90
+    snomed:
+      - 197456007
+
+  - id: SURG-PERFORATED-VISCUS
+    label: Perforated Viscus
+    presentations:
+      - Sudden severe abdominal pain
+      - Rigid abdomen (board-like)
+      - Peritonitis
+      - Free air under diaphragm on upright CXR
+      - History of PUD or recent GI procedure
+      - Requires emergency surgery
+    icd10:
+      - K63.1
+    snomed:
+      - 609524000
+
+  - id: SURG-MESENTERIC-ISCHEMIA
+    label: Acute Mesenteric Ischemia
+    presentations:
+      - Severe abdominal pain out of proportion to exam
+      - Atrial fibrillation or vascular disease history
+      - Nausea, vomiting, bloody diarrhea
+      - Metabolic acidosis and elevated lactate
+      - CT angiography shows vascular occlusion
+      - High mortality if delayed
+    icd10:
+      - K55.0
+    snomed:
+      - 63367001
+
+  - id: SURG-VOLVULUS
+    label: Colonic Volvulus
+    presentations:
+      - Sudden onset abdominal pain and distension
+      - Obstipation
+      - Coffee-bean sign on X-ray (sigmoid)
+      - Elderly or institutionalized patients
+      - Nausea and vomiting
+      - May require urgent detorsion
+    icd10:
+      - K56.2
+    snomed:
+      - 235509008
+
+  - id: SURG-HERNIA-INCARCERATED
+    label: Incarcerated Hernia
+    presentations:
+      - Painful irreducible hernia
+      - Nausea and vomiting
+      - Abdominal distension
+      - Tender firm mass at hernia site
+      - Signs of bowel obstruction
+      - Risk of strangulation
+    icd10:
+      - K46.0
+    snomed:
+      - 49341006
+
+  - id: SURG-HERNIA-STRANGULATED
+    label: Strangulated Hernia
+    presentations:
+      - Incarcerated hernia with vascular compromise
+      - Severe pain at hernia site
+      - Erythema and warmth of overlying skin
+      - Systemic signs (fever, tachycardia)
+      - Peritoneal signs if bowel necrosis
+      - Requires emergency surgery
+    icd10:
+      - K46.1
+    snomed:
+      - 77456000
+
+  - id: SURG-NECROTIZING-FASCIITIS
+    label: Necrotizing Fasciitis
+    presentations:
+      - Rapidly spreading erythema and swelling
+      - Severe pain out of proportion to appearance
+      - Skin discoloration (purplish or dusky)
+      - Crepitus or bullae
+      - Systemic toxicity (fever, hypotension)
+      - Requires emergency surgical debridement
+    icd10:
+      - M72.6
+    snomed:
+      - 44511005
+
+  - id: SURG-COMPARTMENT-SYNDROME
+    label: Acute Compartment Syndrome
+    presentations:
+      - Severe pain out of proportion to injury
+      - Pain with passive stretching
+      - Tense swollen compartment
+      - Paresthesias
+      - Pallor and pulselessness (late findings)
+      - Requires urgent fasciotomy
+    icd10:
+      - T79.A0XA
+    snomed:
+      - 238094007
+
+  - id: SURG-AAA-RUPTURED
+    label: Ruptured Abdominal Aortic Aneurysm
+    presentations:
+      - Sudden severe abdominal or back pain
+      - Hypotension and syncope
+      - Pulsatile abdominal mass
+      - Flank ecchymosis
+      - Known AAA or risk factors
+      - Requires emergency vascular surgery
+    icd10:
+      - I71.3
+    snomed:
+      - 233985008
+
+  - id: SURG-ACUTE-LIMB-ISCHEMIA
+    label: Acute Limb Ischemia
+    presentations:
+      - Six Ps: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia
+      - Sudden onset limb pain
+      - Cool pale extremity
+      - Absent pulses
+      - Atrial fibrillation or vascular disease
+      - Requires urgent revascularization
+    icd10:
+      - I74.3
+    snomed:
+      - 37618003
+
+  - id: SURG-ANASTOMOTIC-LEAK
+    label: Anastomotic Leak
+    presentations:
+      - Postoperative fever (POD 5-7 typically)
+      - Abdominal pain
+      - Tachycardia and leukocytosis
+      - Peritoneal signs
+      - Recent GI surgery or bowel anastomosis
+      - May require reoperation
+    icd10:
+      - K91.89
+    snomed:
+      - 698979004
+
+  - id: SURG-WOUND-DEHISCENCE
+    label: Wound Dehiscence
+    presentations:
+      - Separation of surgical wound edges
+      - Sudden gush of serosanguineous fluid
+      - Visible bowel (evisceration)
+      - Postoperative day 7-10 typically
+      - Risk factors: obesity, infection, poor nutrition
+      - Requires urgent surgical repair
+    icd10:
+      - T81.31XA
+    snomed:
+      - 231091007
+
+  - id: SURG-POSTOP-ILEUS
+    label: Postoperative Ileus
+    presentations:
+      - Abdominal distension after surgery
+      - Nausea and vomiting
+      - Absent or hypoactive bowel sounds
+      - No passage of stool or flatus
+      - Typically resolves with conservative management
+      - Prolonged ileus > 5 days concerning
+    icd10:
+      - K56.7
+    snomed:
+      - 44186003
+
+  - id: SURG-INTRAABDOMINAL-ABSCESS
+    label: Intraabdominal Abscess
+    presentations:
+      - Postoperative fever
+      - Abdominal pain
+      - Leukocytosis
+      - CT shows fluid collection
+      - Recent abdominal surgery or complicated appendicitis
+      - May require percutaneous drainage
+    icd10:
+      - K65.1
+    snomed:
+      - 128477000
+
+  - id: SURG-SURGICAL-SITE-INFECTION
+    label: Surgical Site Infection
+    presentations:
+      - Wound erythema and warmth
+      - Purulent drainage
+      - Pain and tenderness at incision
+      - Fever
+      - Postoperative day 3-7 typically
+      - May require wound opening and drainage
+    icd10:
+      - T81.4XXA
+    snomed:
+      - 433202001
+
+  - id: SURG-DIVERTICULITIS
+    label: Acute Diverticulitis
+    presentations:
+      - Left lower quadrant pain
+      - Fever
+      - Change in bowel habits
+      - Tenderness and guarding LLQ
+      - Elevated WBC
+      - CT shows colonic wall thickening and fat stranding
+    icd10:
+      - K57.92
+    snomed:
+      - 307496006
