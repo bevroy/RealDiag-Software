@@ -37,14 +37,14 @@ export default function Home() {
 
   const getFamilyColor = (fam) => {
     const colorMap = {
-      neurology: "#3b82f6", cardiology: "#ef4444", endocrinology: "#f97316",
-      pulmonology: "#8b5cf6", gastroenterology: "#10b981", infectious_disease: "#f59e0b",
+      neurology: "#14b8a6", cardiology: "#78716c", endocrinology: "#f97316",
+      pulmonology: "#8b5cf6", gastroenterology: "#14b8a6", infectious_disease: "#f59e0b",
       nephrology: "#06b6d4", rheumatology: "#ec4899", dermatology: "#84cc16",
       psychiatry: "#6366f1", obstetrics_gynecology: "#d946ef",
       hematology_oncology: "#f43f5e", orthopedics: "#14b8a6",
       ophthalmology: "#0ea5e9", ent: "#f472b6", urology: "#22d3ee", toxicology: "#fb923c"
     };
-    return colorMap[fam] || "#6b7280";
+    return colorMap[fam] || "#78716c";
   };
 
   const getFamilyLabel = (fam) => {
@@ -123,7 +123,7 @@ export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
       {/* Header */}
@@ -135,17 +135,17 @@ export default function Home() {
         <Image 
           src="/logo.png" 
           alt="RealDiag Logo" 
-          width={100} 
-          height={100}
-          style={{ maxHeight: '100px', width: 'auto', marginBottom: '1rem' }}
+          width={120} 
+          height={120}
+          style={{ maxHeight: '120px', width: 'auto', marginBottom: '1rem' }}
         />
-        <h1 style={{ margin: 0, fontSize: '3rem', color: '#1a202c', fontWeight: '700' }}>
+        <h1 style={{ margin: 0, fontSize: '3rem', color: '#0f766e', fontWeight: '700' }}>
           RealDiag
         </h1>
-        <p style={{ margin: '0.5rem 0 0', color: '#718096', fontSize: '1.25rem' }}>
+        <p style={{ margin: '0.5rem 0 0', color: '#78716c', fontSize: '1.25rem' }}>
           AI-Powered Clinical Diagnostic Search Engine
         </p>
-        <p style={{ margin: '0.5rem 0 0', color: '#a0aec0', fontSize: '1rem' }}>
+        <p style={{ margin: '0.5rem 0 0', color: '#a8a29e', fontSize: '1rem' }}>
           268 diagnoses • 17 specialties • Evidence-based decision support
         </p>
       </div>
@@ -157,16 +157,17 @@ export default function Home() {
           background: 'white',
           padding: '2.5rem',
           borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-          marginBottom: '2rem'
+          boxShadow: '0 4px 20px rgba(20, 184, 166, 0.15)',
+          marginBottom: '2rem',
+          border: '2px solid #ccfbf1'
         }}>
-          <h2 style={{ marginTop: 0, color: '#1a202c', fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ marginTop: 0, color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: '700' }}>
             🔍 Search by Symptoms
           </h2>
 
           {/* Symptom Input */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#374151' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '700', color: '#78716c' }}>
               Enter Patient Symptoms
             </label>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -179,27 +180,28 @@ export default function Home() {
                 style={{
                   flex: 1,
                   padding: '1rem',
-                  border: '2px solid #e5e7eb',
+                  border: '2px solid #d6d3d1',
                   borderRadius: '8px',
                   fontSize: '1.1rem',
                   outline: 'none',
                   transition: 'border-color 0.2s'
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-                onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
+                onFocus={(e) => e.target.style.borderColor = '#14b8a6'}
+                onBlur={(e) => e.target.style.borderColor = '#d6d3d1'}
               />
               <button
                 onClick={handleAddSymptom}
                 style={{
                   padding: '1rem 2rem',
-                  background: '#3b82f6',
+                  background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '8px',
                   cursor: 'pointer',
-                  fontWeight: '600',
+                  fontWeight: '700',
                   fontSize: '1.1rem',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 4px 12px rgba(20, 184, 166, 0.3)'
                 }}
               >
                 + Add
@@ -215,9 +217,9 @@ export default function Home() {
               gap: '0.75rem',
               marginBottom: '1.5rem',
               padding: '1.25rem',
-              background: '#f0f9ff',
+              background: '#f0fdfa',
               borderRadius: '8px',
-              border: '1px solid #bae6fd'
+              border: '1px solid #99f6e4'
             }}>
               {symptoms.map((symptom, idx) => (
                 <div key={idx} style={{
@@ -225,11 +227,12 @@ export default function Home() {
                   alignItems: 'center',
                   gap: '0.5rem',
                   padding: '0.6rem 1.2rem',
-                  background: '#3b82f6',
+                  background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                   color: 'white',
                   borderRadius: '25px',
                   fontSize: '1rem',
-                  fontWeight: '500'
+                  fontWeight: '500',
+                  boxShadow: '0 2px 8px rgba(20, 184, 166, 0.25)'
                 }}>
                   <span>{symptom}</span>
                   <button
@@ -260,7 +263,7 @@ export default function Home() {
             marginBottom: '1.5rem'
           }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#374151' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '700', color: '#78716c' }}>
                 Age (optional)
               </label>
               <input
@@ -271,14 +274,14 @@ export default function Home() {
                 style={{
                   width: '100%',
                   padding: '0.9rem',
-                  border: '2px solid #e5e7eb',
+                  border: '2px solid #d6d3d1',
                   borderRadius: '8px',
                   fontSize: '1rem'
                 }}
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#374151' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '700', color: '#78716c' }}>
                 Sex (optional)
               </label>
               <select
@@ -287,7 +290,7 @@ export default function Home() {
                 style={{
                   width: '100%',
                   padding: '0.9rem',
-                  border: '2px solid #e5e7eb',
+                  border: '2px solid #d6d3d1',
                   borderRadius: '8px',
                   fontSize: '1rem'
                 }}
@@ -298,7 +301,7 @@ export default function Home() {
               </select>
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#374151' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '700', color: '#78716c' }}>
                 Specialty Filter (optional)
               </label>
               <select
@@ -307,7 +310,7 @@ export default function Home() {
                 style={{
                   width: '100%',
                   padding: '0.9rem',
-                  border: '2px solid #e5e7eb',
+                  border: '2px solid #d6d3d1',
                   borderRadius: '8px',
                   fontSize: '1rem'
                 }}
@@ -327,14 +330,14 @@ export default function Home() {
               style={{
                 flex: 1,
                 padding: '1.25rem',
-                background: symptoms.length === 0 || loading ? '#9ca3af' : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                background: symptoms.length === 0 || loading ? '#a8a29e' : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '8px',
                 cursor: symptoms.length === 0 || loading ? 'not-allowed' : 'pointer',
                 fontWeight: '700',
                 fontSize: '1.2rem',
-                boxShadow: symptoms.length === 0 || loading ? 'none' : '0 4px 12px rgba(16, 185, 129, 0.4)'
+                boxShadow: symptoms.length === 0 || loading ? 'none' : '0 4px 16px rgba(20, 184, 166, 0.4)'
               }}
             >
               {loading ? '🔄 Searching...' : '🔍 Search Diagnoses'}
@@ -343,13 +346,14 @@ export default function Home() {
               onClick={handleClearAll}
               style={{
                 padding: '1.25rem 2.5rem',
-                background: '#ef4444',
+                background: 'linear-gradient(135deg, #78716c 0%, #57534e 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '8px',
                 cursor: 'pointer',
-                fontWeight: '600',
-                fontSize: '1.1rem'
+                fontWeight: '700',
+                fontSize: '1.1rem',
+                boxShadow: '0 4px 12px rgba(120, 113, 108, 0.3)'
               }}
             >
               Clear
@@ -377,12 +381,13 @@ export default function Home() {
             background: 'white',
             padding: '2.5rem',
             borderRadius: '12px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+            boxShadow: '0 4px 20px rgba(20, 184, 166, 0.15)',
+            border: '2px solid #ccfbf1'
           }}>
-            <h2 style={{ marginTop: 0, color: '#1a202c', fontSize: '1.75rem', marginBottom: '1.5rem' }}>
+            <h2 style={{ marginTop: 0, color: '#0f766e', fontSize: '1.75rem', marginBottom: '1.5rem', fontWeight: '700' }}>
               📊 Diagnostic Results
               {results.length > 0 && (
-                <span style={{ marginLeft: '1rem', color: '#6b7280', fontWeight: 'normal', fontSize: '1.1rem' }}>
+                <span style={{ marginLeft: '1rem', color: '#78716c', fontWeight: 'normal', fontSize: '1.1rem' }}>
                   ({results.length} {results.length === 1 ? 'match' : 'matches'})
                 </span>
               )}
@@ -392,7 +397,7 @@ export default function Home() {
               <div style={{ 
                 textAlign: 'center', 
                 padding: '3rem',
-                color: '#6b7280'
+                color: '#78716c'
               }}>
                 <p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
                   🔍 No diagnoses found matching these symptoms
@@ -405,24 +410,24 @@ export default function Home() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {results.map((result, idx) => (
                   <div key={idx} style={{
-                    border: '2px solid #e5e7eb',
+                    border: '2px solid #d6d3d1',
                     borderRadius: '10px',
                     padding: '1.75rem',
-                    background: '#fafafa',
+                    background: '#fafaf9',
                     transition: 'all 0.2s',
                     cursor: 'default'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#3b82f6';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.15)';
+                    e.currentTarget.style.borderColor = '#14b8a6';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(20, 184, 166, 0.2)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#e5e7eb';
+                    e.currentTarget.style.borderColor = '#d6d3d1';
                     e.currentTarget.style.boxShadow = 'none';
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.25rem' }}>
                       <div>
-                        <h3 style={{ margin: '0 0 0.75rem', color: '#1a202c', fontSize: '1.3rem', fontWeight: '600' }}>
+                        <h3 style={{ margin: '0 0 0.75rem', color: '#0f766e', fontSize: '1.3rem', fontWeight: '700' }}>
                           {result.label}
                         </h3>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -432,33 +437,33 @@ export default function Home() {
                             color: 'white',
                             borderRadius: '15px',
                             fontSize: '0.85rem',
-                            fontWeight: '600'
+                            fontWeight: '700'
                           }}>
                             {getFamilyLabel(result.family)}
                           </span>
-                          <span style={{ color: '#9ca3af', fontSize: '0.9rem', fontFamily: 'monospace' }}>
+                          <span style={{ color: '#a8a29e', fontSize: '0.9rem', fontFamily: 'monospace' }}>
                             {result.rule_id}
                           </span>
                         </div>
                       </div>
                       <div style={{
                         padding: '0.75rem 1.5rem',
-                        background: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
-                        color: '#166534',
+                        background: 'linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%)',
+                        color: '#0f766e',
                         borderRadius: '8px',
                         fontWeight: '700',
                         fontSize: '1.1rem',
-                        border: '2px solid #86efac'
+                        border: '2px solid #5eead4'
                       }}>
                         {result.match_score.toFixed(1)} pts
                       </div>
                     </div>
 
                     <div style={{ marginBottom: '1.25rem' }}>
-                      <h4 style={{ margin: '0 0 0.75rem', color: '#059669', fontSize: '1rem', fontWeight: '700' }}>
+                      <h4 style={{ margin: '0 0 0.75rem', color: '#0d9488', fontSize: '1rem', fontWeight: '700' }}>
                         ✓ Matched Presentations:
                       </h4>
-                      <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#047857', fontSize: '0.95rem', lineHeight: '1.8' }}>
+                      <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#0f766e', fontSize: '0.95rem', lineHeight: '1.8' }}>
                         {result.matched_presentations.map((pres, i) => (
                           <li key={i} style={{ marginBottom: '0.3rem' }}>{pres}</li>
                         ))}
@@ -466,10 +471,10 @@ export default function Home() {
                     </div>
 
                     <div style={{ marginBottom: '1.25rem' }}>
-                      <h4 style={{ margin: '0 0 0.75rem', color: '#374151', fontSize: '0.95rem', fontWeight: '600' }}>
+                      <h4 style={{ margin: '0 0 0.75rem', color: '#57534e', fontSize: '0.95rem', fontWeight: '700' }}>
                         All Typical Presentations:
                       </h4>
-                      <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#6b7280', fontSize: '0.9rem', lineHeight: '1.7' }}>
+                      <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#78716c', fontSize: '0.9rem', lineHeight: '1.7' }}>
                         {result.all_presentations.map((pres, i) => (
                           <li key={i} style={{ marginBottom: '0.3rem' }}>{pres}</li>
                         ))}
@@ -480,16 +485,16 @@ export default function Home() {
                       display: 'flex', 
                       gap: '2rem', 
                       fontSize: '0.9rem', 
-                      color: '#6b7280',
+                      color: '#78716c',
                       padding: '1rem',
                       background: 'white',
                       borderRadius: '6px'
                     }}>
                       <div>
-                        <strong style={{ color: '#374151' }}>ICD-10:</strong> {result.icd10.join(', ') || 'N/A'}
+                        <strong style={{ color: '#57534e' }}>ICD-10:</strong> {result.icd10.join(', ') || 'N/A'}
                       </div>
                       <div>
-                        <strong style={{ color: '#374151' }}>SNOMED:</strong> {result.snomed.join(', ') || 'N/A'}
+                        <strong style={{ color: '#57534e' }}>SNOMED:</strong> {result.snomed.join(', ') || 'N/A'}
                       </div>
                     </div>
                   </div>
@@ -505,7 +510,7 @@ export default function Home() {
         maxWidth: '1400px',
         margin: '2rem auto 0',
         textAlign: 'center',
-        color: '#9ca3af',
+        color: '#a8a29e',
         fontSize: '0.9rem'
       }}>
         <p>RealDiag Clinical Decision Support • Evidence-based diagnostics • For educational purposes</p>
