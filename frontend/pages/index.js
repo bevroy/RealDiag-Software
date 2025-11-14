@@ -17,9 +17,11 @@ export default function Home() {
     { id: "", label: "All Specialties" },
     { id: "cardiology", label: "Cardiology" },
     { id: "dermatology", label: "Dermatology" },
+    { id: "emergency_medicine", label: "Emergency Medicine" },
     { id: "endocrinology", label: "Endocrinology" },
     { id: "ent", label: "ENT" },
     { id: "gastroenterology", label: "Gastroenterology" },
+    { id: "geriatrics", label: "Geriatrics" },
     { id: "hematology_oncology", label: "Hematology/Oncology" },
     { id: "infectious_disease", label: "Infectious Disease" },
     { id: "nephrology", label: "Nephrology" },
@@ -27,9 +29,11 @@ export default function Home() {
     { id: "obstetrics_gynecology", label: "OB/GYN" },
     { id: "ophthalmology", label: "Ophthalmology" },
     { id: "orthopedics", label: "Orthopedics" },
+    { id: "pediatrics", label: "Pediatrics" },
     { id: "psychiatry", label: "Psychiatry" },
     { id: "pulmonology", label: "Pulmonology" },
     { id: "rheumatology", label: "Rheumatology" },
+    { id: "surgery", label: "Surgery" },
     { id: "toxicology", label: "Toxicology" },
     { id: "urology", label: "Urology" },
   ];
@@ -41,7 +45,8 @@ export default function Home() {
       nephrology: "#06b6d4", rheumatology: "#ec4899", dermatology: "#84cc16",
       psychiatry: "#6366f1", obstetrics_gynecology: "#d946ef",
       hematology_oncology: "#f43f5e", orthopedics: "#14b8a6",
-      ophthalmology: "#0ea5e9", ent: "#f472b6", urology: "#22d3ee", toxicology: "#fb923c"
+      ophthalmology: "#0ea5e9", ent: "#f472b6", urology: "#22d3ee", toxicology: "#fb923c",
+      pediatrics: "#10b981", geriatrics: "#8b5cf6", emergency_medicine: "#ef4444", surgery: "#0891b2"
     };
     return colorMap[fam] || "#78716c";
   };
