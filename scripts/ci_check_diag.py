@@ -54,13 +54,12 @@ def run_check(url: str, timeout: int = 60) -> int:
         # Try performing a fetch from page context to /health to ensure backend reachable
         try:
             fetch_result = page.evaluate('''async () => {
-                const runtime = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || '';
-                const base = runtime || window.location.origin;
-                const url = base + '/health';
+                const runtime = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://realdiag-software.onrender.com';
+                const url = runtime + '/health';
                 try {
                     const res = await fetch(url, {cache: 'no-store'});
                     const text = await res.text();
-                    return {ok: res.ok, status: res.status, text};
+                    return {ok: res.ok, status: res.status, text, url};
                 } catch (err) { return {error: String(err)}; }
             }''')
             print('FETCH_TEST:', json.dumps(fetch_result))

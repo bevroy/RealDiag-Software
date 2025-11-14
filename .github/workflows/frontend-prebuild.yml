@@ -19,20 +19,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Cache node modules
         uses: actions/cache@v4
         with:
-          path: frontend/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-20-${{ hashFiles('frontend/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-20-
 
       - name: Install and build
         working-directory: frontend
         run: |
-          npm ci
+          npm ci --legacy-peer-deps
           npm run build
 
       - name: Upload frontend build artifact
