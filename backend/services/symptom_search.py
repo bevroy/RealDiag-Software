@@ -69,9 +69,10 @@ def normalize_text(text: str) -> str:
     return text.strip()
 
 
-def calculate_match_score(symptom_input: List[str], presentations: List[str]) -> tuple:
+def calculate_match_score(symptom_input: List[str], presentations: List[str], rule: Dict[str, Any] = None) -> tuple:
     """
     Calculate match score between input symptoms and rule presentations.
+    Enhanced with clinical likelihood modifiers.
     
     Returns:
         (score, matched_presentations)
@@ -109,6 +110,14 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str]) ->
     # Normalize score by number of presentations (avoid bias toward diagnoses with many presentations)
     if string_presentations:
         score = score / len(string_presentations)
+    
+    # Apply clinical likelihood modifier based on sensitivity/specificity if available
+    if rule and 'sensitivity' in rule:
+        sensitivity = float(rule['sensitivity'])
+        # Higher sensitivity = higher pre-test probability for this condition
+        # Apply a small boost (max 10% increase) for high-sensitivity diagnoses
+        sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2  # Range: 0.9 to 1.1
+        score = score * sensitivity_modifier
     
     return (score, matched)
 
@@ -158,12 +167,13 @@ async def search_by_symptoms(request: SymptomSearchRequest):
             if not string_presentations:
                 continue
             
-            # Calculate match score
-            score, matched_presentations = calculate_match_score(request.symptoms, string_presentations)
+            # Calculate match score with clinical likelihood
+            score, matched_presentations = calculate_match_score(request.symptoms, string_presentations, rule)
             
             # Only include if there's a match
             if score > 0:
-                results.append(DiagnosisMatch(
+                # Prepare result with enhanced metadata
+                diagnosis_match = DiagnosisMatch(
                     rule_id=rule.get('id', ''),
                     label=rule.get('label', ''),
                     family=family_name,
@@ -172,7 +182,15 @@ async def search_by_symptoms(request: SymptomSearchRequest):
                     all_presentations=string_presentations,  # Use filtered list
                     icd10=rule.get('icd10', []),
                     snomed=rule.get('snomed', [])
-                ))
+                )
+                
+                # Add clinical context if available
+                if 'sensitivity' in rule or 'clinical_pearls' in rule:
+                    # Store sensitivity/specificity for display
+                    # (These would need to be added to the DiagnosisMatch model)
+                    pass
+                
+                results.append(diagnosis_match)
     
     # Sort by score (descending)
     results.sort(key=lambda x: x.match_score, reverse=True)

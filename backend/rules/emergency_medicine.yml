@@ -5,30 +5,60 @@ rules:
   - id: EM-ANAPHYLAXIS
     label: Anaphylaxis
     presentations:
-      - Acute onset after allergen exposure
-      - Urticaria and angioedema
-      - Respiratory distress (stridor, wheezing)
-      - Hypotension and tachycardia
-      - Gastrointestinal symptoms
-      - Requires immediate epinephrine
+      - Acute onset (minutes to 2 hours) after allergen exposure
+      - Urticaria (hives), angioedema, pruritus
+      - Respiratory distress: Stridor, wheezing, dyspnea, throat tightness
+      - Hypotension, tachycardia, syncope, shock
+      - Gastrointestinal: Nausea, vomiting, diarrhea, cramping
+      - Biphasic reaction in 20%: Recurrence 4-72 hours after initial episode
+      - Common triggers: Foods (peanuts, shellfish), medications (penicillin), insect stings
+    clinical_pearls:
+      - "Epinephrine 0.3-0.5mg IM (1:1000) anterolateral thigh - FIRST-LINE treatment"
+      - "Repeat epinephrine every 5-15 minutes if no response"
+      - "H1 blocker (diphenhydramine 50mg IV) and H2 blocker (ranitidine 50mg IV)"
+      - "Corticosteroids (methylprednisolone 125mg IV) to prevent biphasic reaction"
+      - "IV fluids for hypotension, albuterol for bronchospasm"
+      - "Observe 4-6 hours (longer if severe), prescribe EpiPen on discharge"
+    management:
+      - "Immediate: IM epinephrine, airway management, IV access"
+      - "Supportive: Oxygen, cardiac monitoring, IV fluids"
+      - "Medications: Antihistamines, corticosteroids, bronchodilators PRN"
+      - "Disposition: Observe 4-6 hours minimum, admit if severe or refractory"
+      - "Discharge: EpiPen prescription, allergy referral, avoidance counseling"
     icd10:
-      - T78.2XXA
+      - T78.2XXA   # Anaphylactic shock, initial encounter
+      - T78.00XA   # Anaphylactic reaction, unspecified
     snomed:
-      - 39579001
+      - "39579001"  # Anaphylaxis
 
   - id: EM-STATUS-EPILEPTICUS
     label: Status Epilepticus
     presentations:
-      - Continuous seizure > 5 minutes
-      - Repeated seizures without recovery
-      - Altered consciousness
-      - Tonic-clonic movements
-      - Requires immediate benzodiazepines
-      - High mortality if untreated
+      - Continuous seizure activity >5 minutes (previously >30 min definition outdated)
+      - Repeated seizures without return to baseline consciousness
+      - Generalized tonic-clonic (most common) or focal with impaired awareness
+      - Altered consciousness, coma
+      - Requires immediate intervention to prevent neuronal injury
+      - High mortality (10-20%) if treatment delayed
+      - Causes: Medication noncompliance, CNS infection, metabolic, withdrawal
+    clinical_pearls:
+      - "Time is brain: Start treatment at 5 minutes, not 30 minutes"
+      - "Benzodiazepines FIRST: Lorazepam 0.1mg/kg IV (or diazepam, midazolam IM)"
+      - "If benzos fail (refractory): Fosphenytoin 20 PE/kg IV or levetiracetam 60mg/kg IV"
+      - "If still seizing: Intubation + propofol or midazolam infusion, EEG monitoring"
+      - "Check glucose immediately (hypoglycemia can mimic seizure)"
+      - "Thiamine 100mg IV before dextrose if malnourished/alcoholic"
+    management:
+      - "0-5 min: ABCs, O2, IV access, check glucose, give thiamine if indicated"
+      - "5-10 min: Lorazepam 4mg IV (may repeat once) or midazolam 10mg IM"
+      - "10-20 min: Fosphenytoin 20 PE/kg IV or levetiracetam 60mg/kg IV (max 4500mg)"
+      - "20-40 min: Refractory status - intubate, propofol/midazolam drip, ICU, EEG"
+      - "Workup: Labs (CBC, CMP, tox screen, AED levels), LP if concern for infection, MRI brain"
     icd10:
-      - G41.9
+      - G41.9     # Status epilepticus, unspecified
+      - G41.901   # Status epilepticus NOS without status epilepticus
     snomed:
-      - 230456007
+      - "230456007"  # Status epilepticus
 
   - id: EM-SHOCK-HYPOVOLEMIC
     label: Hypovolemic Shock
@@ -61,113 +91,240 @@ rules:
   - id: EM-SHOCK-SEPTIC
     label: Septic Shock
     presentations:
-      - Hypotension requiring vasopressors
-      - Lactate > 2 mmol/L
-      - Fever or hypothermia
-      - Warm flushed skin initially
-      - Suspected or confirmed infection
-      - Organ dysfunction
+      - Hypotension (SBP <90 or MAP <65) requiring vasopressors despite fluids
+      - Serum lactate >2 mmol/L (indicates tissue hypoperfusion)
+      - Fever (>38.3°C) or hypothermia (<36°C)
+      - Tachycardia, tachypnea, altered mental status
+      - Warm, flushed skin initially (distributive shock) → later cool, mottled
+      - Suspected or confirmed infection source
+      - Meets sepsis criteria (infection + organ dysfunction, SOFA ≥2)
+      - High mortality: 40% even with treatment
+    clinical_pearls:
+      - "Surviving Sepsis 1-hour bundle: (1) Lactate, (2) Cultures, (3) Antibiotics, (4) 30 mL/kg fluids, (5) Vasopressors"
+      - "Broad-spectrum empiric antibiotics within 1 hour: Vancomycin + pip-tazo or carbapenem"
+      - "Fluid resuscitation: 30 mL/kg crystalloid bolus (e.g., 2L for 70kg) in first 3 hours"
+      - "Norepinephrine first-line vasopressor: Target MAP ≥65 mmHg"
+      - "Source control critical: Drain abscesses, remove infected devices, debride necrotic tissue"
+      - "Early ICU involvement: Most require central line, arterial line, mechanical ventilation"
+    management:
+      - "Immediate: IV access, blood cultures ×2 (before antibiotics), lactate, broad-spectrum antibiotics"
+      - "Fluid resuscitation: 30 mL/kg crystalloid, reassess after each bolus (lung sounds, JVP, lactate)"
+      - "Vasopressors: Norepinephrine via central line if MAP <65 despite fluids (can start peripherally if needed)"
+      - "Source control: CT imaging to identify abscess/infection, urgent surgery/IR consult if needed"
+      - "Disposition: ICU admission for all septic shock patients, continuous hemodynamic monitoring"
     icd10:
-      - R65.21
+      - R65.21    # Severe sepsis with septic shock
+      - A41.9     # Sepsis, unspecified organism
     snomed:
-      - 76571007
+      - "76571007"  # Septic shock
 
   - id: EM-ACUTE-CORONARY-SYNDROME
     label: Acute Coronary Syndrome (STEMI/NSTEMI)
     presentations:
-      - Chest pain or pressure
-      - Radiating to jaw, arm, or back
-      - Dyspnea and diaphoresis
-      - Nausea
-      - ECG changes (ST elevation or depression)
-      - Elevated troponin
+      - Chest pain or pressure (substernal, crushing, "elephant on chest")
+      - Radiation to left arm, jaw, neck, back, or epigastrium
+      - Associated symptoms: Dyspnea, diaphoresis, nausea/vomiting, lightheadedness
+      - Atypical presentations common in women, elderly, diabetics (may lack chest pain)
+      - STEMI: ST elevation ≥1mm in ≥2 contiguous leads (or new LBBB)
+      - NSTEMI: Elevated troponin without ST elevation (may have ST depression, T-wave inversion)
+      - Killip classification: I (no HF), II (rales, S3), III (pulmonary edema), IV (cardiogenic shock)
+    clinical_pearls:
+      - "STEMI = medical emergency: Door-to-balloon <90 min or door-to-needle (tPA) <30 min"
+      - "MONA therapy: Morphine (if severe pain), Oxygen (if SpO2 <90%), Nitroglycerin, Aspirin 325mg"
+      - "Antiplatelet therapy: Aspirin 325mg + P2Y12 inhibitor (ticagrelor 180mg or clopidogrel 600mg)"
+      - "High-sensitivity troponin: 0-hour and 1-hour protocol for rapid rule-out"
+      - "Avoid NSAIDs (increase mortality), avoid beta-blockers if HF or hypotension"
+      - "Posterior MI: ST depression V1-V3 (check posterior leads V7-V9 for ST elevation)"
+    management:
+      - "Immediate: Aspirin 325mg chewed, sublingual nitroglycerin if SBP >90, oxygen if hypoxic"
+      - "STEMI: Activate cath lab (PCI <90 min) or give tPA if PCI not available <120 min"
+      - "NSTEMI: Dual antiplatelet, anticoagulation (heparin/enoxaparin), cardiology consult for cath timing"
+      - "High-risk features (urgent cath): Ongoing pain, hemodynamic instability, arrhythmia, GRACE >140"
+      - "Disposition: CCU admission for STEMI/high-risk NSTEMI, telemetry for low-risk, discharge if rule-out"
     icd10:
-      - I21.9
-      - I24.9
+      - I21.9     # Acute myocardial infarction, unspecified
+      - I21.3     # STEMI of unspecified site
+      - I24.9     # Acute ischemic heart disease, unspecified
     snomed:
-      - 394659003
+      - "394659003"  # Acute coronary syndrome
 
   - id: EM-PULMONARY-EMBOLISM
     label: Pulmonary Embolism
     presentations:
-      - Sudden dyspnea
-      - Pleuritic chest pain
-      - Tachycardia and tachypnea
-      - Hypoxia
-      - Risk factors (immobility, malignancy, DVT)
-      - Hemoptysis may occur
+      - Acute dyspnea (most common symptom, 73%)
+      - Pleuritic chest pain (44%)
+      - Tachypnea (>20 breaths/min) and tachycardia
+      - Hypoxia (SpO2 <95%) - but normal O2 doesn't rule out PE
+      - Hemoptysis (less common, 8%)
+      - Syncope or hypotension if massive PE
+      - Risk factors: Recent surgery, immobilization, malignancy, pregnancy, oral contraceptives
+      - Massive PE: Hemodynamic instability (SBP <90 or shock) - 5% of cases, high mortality
+    clinical_pearls:
+      - "Wells score >4 or PERC rule positive → proceed with workup (D-dimer or CTPA)"
+      - "D-dimer negative in low-risk (<2% Wells) safely rules out PE (high sensitivity)"
+      - "CTPA gold standard: Filling defect in pulmonary artery, V/Q scan if contrast contraindicated"
+      - "Massive PE (hemodynamic instability): Consider thrombolysis (tPA 100mg over 2hr) - high bleeding risk but life-saving"
+      - "Start anticoagulation immediately if high suspicion, don't wait for imaging"
+      - "Saddle embolus = large clot at PA bifurcation, high mortality"
+    management:
+      - "Immediate: Oxygen, IV access, anticoagulation if high suspicion (heparin or LMWH)"
+      - "Massive PE (shock/hypotension): Thrombolysis (tPA), consider ECMO/surgical embolectomy"
+      - "Submassive PE (RV strain, no shock): Anticoagulation, monitor closely, consider half-dose tPA"
+      - "Anticoagulation: Apixaban 10mg BID ×7d then 5mg BID, or rivaroxaban 15mg BID ×21d then 20mg daily, or LMWH→warfarin (INR 2-3)"
+      - "Disposition: Admit for massive/submassive PE, discharge if low-risk with outpatient anticoagulation follow-up"
     icd10:
-      - I26.99
+      - I26.99    # Pulmonary embolism without acute cor pulmonale
+      - I26.09    # Saddle embolus
     snomed:
-      - 59282003
+      - "59282003"  # Pulmonary embolism
 
   - id: EM-AORTIC-DISSECTION
     label: Aortic Dissection
     presentations:
-      - Sudden severe tearing chest or back pain
-      - Blood pressure differential between arms
-      - Pulse deficits
-      - Aortic regurgitation murmur
-      - Mediastinal widening on CXR
-      - Risk factors: hypertension, Marfan
+      - Sudden onset severe "tearing" or "ripping" chest/back pain (90%)
+      - Pain location: Anterior chest (Type A), interscapular back (Type B)
+      - Blood pressure differential >20 mmHg between arms
+      - Pulse deficits in extremities or carotid/femoral arteries
+      - Aortic regurgitation murmur (Type A with extension to aortic valve)
+      - Neurologic deficits if carotid involvement (stroke)
+      - Syncope (10-15%), hypotension/shock if rupture or tamponade
+      - Risk factors: Hypertension (most common), Marfan/Ehlers-Danlos, bicuspid aortic valve, cocaine
+    clinical_pearls:
+      - "Type A (ascending aorta): Surgical emergency, mortality 1-2%/hour if untreated"
+      - "Type B (descending aorta): Medical management unless complicated (malperfusion, rupture)"
+      - "CTA chest/abdomen/pelvis with IV contrast is diagnostic test of choice"
+      - "CXR may show widened mediastinum (>8cm), but normal CXR doesn't rule out dissection"
+      - "TEE highly sensitive if CTA contraindicated, but delays definitive diagnosis"
+      - "Don't give beta-blocker alone: Lower heart rate FIRST (target HR <60), then BP (SBP 100-120)"
+    management:
+      - "Immediate: IV access (two large-bore), arterial line, pain control (morphine), BP control"
+      - "BP control: Beta-blocker FIRST (esmolol 0.5mg/kg bolus, then 50-200 mcg/kg/min infusion, or labetalol 20mg IV q10min)"
+      - "After HR <60: Add vasodilator if needed (nicardipine 5mg/hr IV, titrate to SBP 100-120)"
+      - "Type A: Emergent cardiothoracic surgery consult, OR as soon as possible"
+      - "Type B uncomplicated: Medical management (BP/HR control), admit to ICU, serial imaging"
     icd10:
-      - I71.00
+      - I71.00    # Dissection of unspecified site of aorta
+      - I71.01    # Dissection of thoracic aorta
+      - I71.02    # Dissection of abdominal aorta
     snomed:
-      - 68345009
+      - "68345009"  # Aortic dissection
 
   - id: EM-HYPERTENSIVE-EMERGENCY
     label: Hypertensive Emergency
     presentations:
-      - Severe hypertension (SBP > 180 or DBP > 120)
-      - End-organ damage present
-      - Altered mental status or encephalopathy
-      - Chest pain or acute heart failure
-      - Papilledema
-      - Acute kidney injury
+      - Severe hypertension: SBP >180 mmHg or DBP >120 mmHg
+      - Evidence of acute end-organ damage (distinguishes from urgency)
+      - CNS: Hypertensive encephalopathy (confusion, headache, seizures, vision changes)
+      - Cardiac: Acute MI, acute heart failure, pulmonary edema
+      - Renal: Acute kidney injury (Cr elevated)
+      - Vascular: Aortic dissection, acute stroke (hemorrhagic or ischemic)
+      - Other: Retinal hemorrhages, papilledema, microangiopathic hemolytic anemia
+      - Risk factors: Medication noncompliance, renal disease, stimulant use (cocaine, amphetamines)
+    clinical_pearls:
+      - "Hypertensive emergency = elevated BP + end-organ damage (requires ICU, IV meds)"
+      - "Hypertensive urgency = elevated BP, no end-organ damage (can treat PO, discharge)"
+      - "Goal: Reduce BP by 10-20% in first hour, then 25% in first 24 hours - NOT normal immediately"
+      - "Avoid rapid BP drop: Can worsen cerebral/cardiac/renal perfusion"
+      - "First-line IV agents: Nicardipine, labetalol, clevidipine (avoid nitroprusside - cyanide toxicity)"
+      - "Exception: Aortic dissection needs aggressive BP reduction (SBP <120 in 20 min)"
+    management:
+      - "Workup: ECG, troponin, BNP, Cr, UA, CXR, CT head if neurologic symptoms"
+      - "IV antihypertensives: Nicardipine 5mg/hr (titrate by 2.5mg/hr q5-15min, max 15mg/hr)"
+      - "Alternative: Labetalol 20mg IV bolus, repeat 40-80mg q10min (max 300mg) or infusion 0.5-2mg/min"
+      - "Specific scenarios: Dissection (esmolol+nicardipine), stroke (permissive hypertension unless >220/120), eclampsia (magnesium+labetalol/hydralazine)"
+      - "Disposition: ICU admission for continuous BP monitoring and IV medication titration"
     icd10:
-      - I16.9
+      - I16.9     # Hypertensive crisis, unspecified
+      - I16.1     # Hypertensive emergency
     snomed:
-      - 706882009
+      - "706882009"  # Hypertensive crisis
 
   - id: EM-STROKE-ISCHEMIC
     label: Acute Ischemic Stroke
     presentations:
-      - Sudden focal neurologic deficit
-      - Facial droop or arm weakness
-      - Speech difficulty
-      - Time of onset known
-      - CT brain rules out hemorrhage
-      - Candidate for thrombolysis (< 4.5 hours)
+      - Sudden focal neurologic deficit (onset within minutes)
+      - FAST criteria: Facial droop, Arm weakness, Speech difficulty, Time critical
+      - Hemiparesis or hemiplegia
+      - Aphasia (Broca's or Wernicke's), dysarthria
+      - Visual field defects, diplopia
+      - Ataxia, vertigo, nystagmus (posterior circulation)
+      - Time of symptom onset MUST be established for tPA eligibility
+      - NIHSS score 0-42 (quantifies stroke severity)
+    clinical_pearls:
+      - "CT head FIRST to rule out hemorrhage before tPA - noncontrast CT is gold standard"
+      - "tPA eligibility: <4.5 hours from symptom onset, no hemorrhage, no recent surgery/stroke"
+      - "Thrombectomy: Up to 24 hours for large vessel occlusion (MCA, ICA) if perfusion mismatch"
+      - "Permissive hypertension: Allow SBP <220, DBP <120 (brain needs perfusion to penumbra)"
+      - "After tPA: Lower BP if >185/110, monitor q15min for 2hr then q30min for 6hr"
+      - "Give aspirin 325mg after hemorrhage excluded (24hr after tPA)"
+    management:
+      - "Immediate: Noncontrast CT head, IV access, labs (glucose, CBC, coags, troponin), ECG"
+      - "tPA if <4.5hr: Alteplase 0.9mg/kg IV (10% bolus, rest over 1hr), max 90mg"
+      - "Thrombectomy consult: Neurology/IR for large vessel occlusion <24hr if perfusion mismatch"
+      - "BP management: Permissive hypertension unless >220/120 or tPA given (then <185/110)"
+      - "Disposition: Stroke unit or ICU, NPO until swallow eval, DVT prophylaxis, PT/OT/speech therapy"
     icd10:
-      - I63.9
+      - I63.9     # Cerebral infarction, unspecified
+      - I63.30    # Cerebral infarction due to thrombosis
     snomed:
-      - 422504002
+      - "422504002"  # Ischemic stroke
 
   - id: EM-STROKE-HEMORRHAGIC
-    label: Hemorrhagic Stroke
+    label: Hemorrhagic Stroke (Intracerebral Hemorrhage)
     presentations:
-      - Sudden severe headache
-      - Altered consciousness
-      - Focal neurologic deficits
-      - Nausea and vomiting
-      - CT shows blood in brain
-      - Elevated blood pressure
+      - Sudden severe headache with onset during exertion
+      - Altered level of consciousness (drowsiness to coma)
+      - Focal neurologic deficits: Hemiparesis, aphasia, visual defects
+      - Nausea, vomiting (from increased ICP)
+      - Seizures (10-15%, more common than ischemic stroke)
+      - Markedly elevated blood pressure (often >200/120)
+      - Noncontrast CT shows hyperdense blood in brain parenchyma
+      - Common locations: Basal ganglia (hypertension), lobar (amyloid angiopathy)
+    clinical_pearls:
+      - "Reverse anticoagulation immediately: Vitamin K 10mg IV + PCC (or FFP if no PCC) for warfarin"
+      - "BP lowering: Target SBP 140-160 mmHg (lower mortality, but avoid <140 - worsens outcomes)"
+      - "Avoid rapid BP drop: Use nicardipine or labetalol IV, titrate slowly"
+      - "Neurosurgery consult: For cerebellar hemorrhage >3cm, hydrocephalus, mass effect"
+      - "Hold tPA/anticoagulation: Contraindicated, will worsen bleeding"
+      - "ICH score predicts mortality: GCS + ICH volume + intraventricular extension + age + location"
+    management:
+      - "Immediate: Noncontrast CT head, reverse anticoagulation, BP control, neurosurgery consult"
+      - "Reverse anticoagulation: Warfarin (PCC + vit K), DOACs (idarucizumab for dabigatran, andexanet for Xa inhibitors)"
+      - "BP control: Nicardipine 5mg/hr IV titrated to SBP 140-160 (avoid aggressive lowering)"
+      - "ICP management: Elevate HOB 30°, maintain CPP >60, consider mannitol/hypertonic saline if herniation"
+      - "Disposition: ICU admission, neurosurgery evaluation for surgical evacuation vs observation"
     icd10:
-      - I61.9
+      - I61.9     # Intracerebral hemorrhage, unspecified
+      - I61.0     # Intracerebral hemorrhage in hemisphere, subcortical
     snomed:
-      - 274100004
+      - "274100004"  # Cerebral hemorrhage
 
   - id: EM-SUBARACHNOID-HEMORRHAGE
-    label: Subarachnoid Hemorrhage
+    label: Subarachnoid Hemorrhage (SAH)
     presentations:
-      - Sudden thunderclap headache (worst of life)
-      - Neck stiffness
-      - Photophobia
-      - Altered consciousness or syncope
-      - CT brain shows blood in subarachnoid space
-      - Ruptured aneurysm most common
+      - Sudden thunderclap headache: "Worst headache of my life" reaching maximal intensity in seconds
+      - Neck stiffness, meningismus (may take hours to develop)
+      - Photophobia, nausea, vomiting
+      - Altered consciousness (25%), syncope at onset (50%)
+      - Focal neurologic deficits if mass effect or vasospasm
+      - Noncontrast CT brain: Blood in subarachnoid space (sensitivity 95% if <6hr, decreases over time)
+      - Ruptured saccular aneurysm (85%), perimesencephalic venous bleed (10%), AVM, trauma
+    clinical_pearls:
+      - "LP if CT negative and high suspicion: Xanthochromia (yellow CSF from bilirubin breakdown) confirms SAH"
+      - "Hunt-Hess grade I-V predicts outcomes: I (mild headache) to V (coma)"
+      - "Nimodipine 60mg PO/NG q4h for 21 days: Prevents vasospasm, improves outcomes"
+      - "BP control: SBP <160 before aneurysm secured, avoid hypotension (worsens cerebral perfusion)"
+      - "Re-bleeding risk highest in first 24hr: Urgent neurosurgery/IR for aneurysm coiling or clipping"
+      - "Vasospasm peak 7-10 days post-bleed: Hypertension, hypervolemia, hemodilution (triple-H therapy)"
+    management:
+      - "Immediate: Noncontrast CT head, if negative → LP (tube 4 for xanthochromia), neurosurgery consult"
+      - "CTA or MRA: Identify aneurysm location for endovascular coiling vs surgical clipping"
+      - "Nimodipine 60mg PO q4h: Start immediately, continue 21 days to prevent vasospasm"
+      - "BP control: Nicardipine or labetalol to SBP <160 (avoid hypotension)"
+      - "Disposition: ICU admission, neurosurgery/IR for urgent aneurysm repair, daily TCDs to monitor vasospasm"
     icd10:
-      - I60.9
+      - I60.9     # Subarachnoid hemorrhage, unspecified
+      - I60.7     # SAH from intracranial artery, unspecified
     snomed:
       - 21454007
 
@@ -186,62 +343,121 @@ rules:
       - 95883001
 
   - id: EM-DKA
-    label: Diabetic Ketoacidosis
+    label: Diabetic Ketoacidosis (DKA)
     presentations:
-      - Hyperglycemia (glucose > 250)
-      - Metabolic acidosis (pH < 7.3)
-      - Ketones in blood or urine
-      - Nausea, vomiting, abdominal pain
-      - Kussmaul respirations
-      - Fruity breath odor
-      - Altered mental status
+      - Hyperglycemia: Glucose >250 mg/dL (often >400)
+      - Anion gap metabolic acidosis: pH <7.3, bicarb <18, anion gap >12
+      - Ketones: Positive urine or serum ketones (beta-hydroxybutyrate >3 mmol/L)
+      - Kussmaul respirations: Deep, rapid breathing (compensatory for acidosis)
+      - Fruity breath odor (acetone)
+      - Nausea, vomiting, abdominal pain (can mimic surgical abdomen)
+      - Altered mental status, confusion (more severe with lower pH)
+      - Triggers: Infection (most common), insulin noncompliance, new-onset diabetes
+    clinical_pearls:
+      - "DKA triad: Hyperglycemia + anion gap acidosis + ketones (need all 3)"
+      - "Anion gap = Na - (Cl + HCO3), normal 8-12, DKA typically >20"
+      - "Insulin protocol: 0.1 units/kg/hr IV (e.g., 7 units/hr for 70kg), don't bolus unless severe"
+      - "Potassium replacement critical: Start when K <5.2, hold insulin if K <3.3 (can cause cardiac arrest)"
+      - "Add dextrose (D5 in fluids) when glucose <250, continue insulin until anion gap closes"
+      - "Resolution: Glucose <200, bicarb >18, pH >7.3, anion gap <12, able to eat"
+    management:
+      - "Immediate: IV access, labs (VBG, BMP, glucose, ketones), aggressive fluid resuscitation"
+      - "Fluids: 1L NS bolus, then 250-500 mL/hr (10-14 mL/kg/hr), switch to D5 1/2NS when glucose <250"
+      - "Insulin: Regular insulin 0.1 units/kg/hr IV infusion (don't bolus), continue until anion gap closes"
+      - "Potassium: Measure q2-4hr, replace if <5.2 (20-40 mEq/L in fluids), hold insulin if <3.3"
+      - "Disposition: ICU if severe (pH <7.0, bicarb <10, altered mental status), telemetry for moderate, discharge when eating/drinking"
     icd10:
-      - E10.10
+      - E10.10    # Type 1 diabetes with ketoacidosis without coma
+      - E11.10    # Type 2 diabetes with ketoacidosis without coma
     snomed:
-      - 420422005
+      - "420422005"  # Diabetic ketoacidosis
 
   - id: EM-ADRENAL-CRISIS
-    label: Acute Adrenal Crisis
+    label: Acute Adrenal Crisis (Addisonian Crisis)
     presentations:
-      - Hypotension refractory to fluids
-      - Hyponatremia and hyperkalemia
+      - Severe hypotension refractory to IV fluids and vasopressors
+      - Hyponatremia (<130 mEq/L) and hyperkalemia (>5.5 mEq/L)
       - Hypoglycemia
-      - Abdominal pain, nausea, vomiting
-      - History of adrenal insufficiency or steroid use
-      - Requires immediate hydrocortisone
+      - Abdominal pain, nausea, vomiting (can mimic acute abdomen)
+      - Confusion, lethargy, altered mental status
+      - Fever (may indicate precipitating infection)
+      - History: Known adrenal insufficiency, chronic steroid use (>2 weeks), pituitary disease
+      - Precipitants: Infection, trauma, surgery, abrupt steroid cessation
+    clinical_pearls:
+      - "Do NOT wait for confirmatory testing: Give hydrocortisone immediately if suspected"
+      - "Cortisol level before treatment if possible, but don't delay hydrocortisone"
+      - "Hydrocortisone dose: 100mg IV bolus, then 50mg IV q6h or 200mg/day continuous infusion"
+      - "Chronic steroid use ≥2 weeks suppresses HPA axis: Need stress-dose steroids for acute illness"
+      - "Hyponatremia + hyperkalemia + hypoglycemia = classic triad (think adrenal crisis)"
+      - "High mortality if untreated: 100% fatal without steroids"
+    management:
+      - "Immediate: IV access, NS bolus 1-2L, hydrocortisone 100mg IV STAT (before labs)"
+      - "Fluids: Aggressive NS resuscitation (D5NS if hypoglycemic), may need 4-6L in first 24hr"
+      - "Hydrocortisone: 100mg IV bolus, then 50mg q6h (or 200mg/day infusion)"
+      - "Labs: Cortisol level before hydrocortisone (if possible), ACTH, aldosterone, electrolytes, glucose"
+      - "Disposition: ICU admission, identify precipitant (infection, MI, etc.), taper steroids once stable"
     icd10:
-      - E27.2
+      - E27.2     # Addisonian crisis
     snomed:
-      - 36171008
+      - "36171008"  # Adrenal crisis
 
   - id: EM-THYROID-STORM
     label: Thyroid Storm
     presentations:
-      - Severe hyperthyroidism
-      - Fever (often > 40°C)
-      - Tachycardia out of proportion to fever
-      - Altered mental status or agitation
-      - Nausea, vomiting, diarrhea
-      - Atrial fibrillation
-      - Precipitated by stress or infection
+      - Severe hyperthyroidism with life-threatening decompensation
+      - High fever: >40°C (104°F), often >41°C
+      - Tachycardia out of proportion to fever (HR >140), atrial fibrillation (50%)
+      - CNS: Agitation, confusion, delirium, seizures, coma
+      - GI: Nausea, vomiting, diarrhea, abdominal pain
+      - Cardiovascular: High-output heart failure, hypotension (late)
+      - Precipitants: Infection, surgery, trauma, iodine contrast, medication noncompliance
+      - Burch-Wartofsky score ≥45 supports diagnosis (fever, CNS, CV, GI, precipitant)
+    clinical_pearls:
+      - "Clinical diagnosis: Don't wait for thyroid labs, treat immediately if suspected"
+      - "Treatment order matters: (1) PTU/methimazole, (2) beta-blocker, (3) iodine 1hr later, (4) steroids"
+      - "Give iodine 1 hour AFTER PTU/methimazole: Otherwise iodine provides substrate for more T3/T4 synthesis"
+      - "Beta-blockers: Propranolol preferred (blocks T4→T3 conversion), esmolol if hemodynamically unstable"
+      - "Aggressive cooling: Acetaminophen (NOT aspirin - displaces T4 from binding proteins), cooling blankets"
+      - "High mortality: 10-30% even with treatment"
+    management:
+      - "Immediate: IV access, cooling measures (ice packs, cooling blanket), acetaminophen 1g"
+      - "(1) Block synthesis: PTU 500-1000mg PO load then 250mg q4h, or methimazole 20mg q4h"
+      - "(2) Beta-blocker: Propranolol 1-2mg IV q10-15min (or 60-80mg PO q4h), esmolol if unstable"
+      - "(3) Block release (1hr after PTU): Iodine solution (Lugol's 8 drops q6h or SSKI 5 drops q6h)"
+      - "(4) Hydrocortisone 100mg IV q8h: Blocks T4→T3 conversion, treats possible adrenal insufficiency"
     icd10:
-      - E05.5
+      - E05.5     # Thyroid crisis or storm
     snomed:
-      - 10079009
+      - "10079009"  # Thyrotoxic crisis
 
   - id: EM-TENSION-PNEUMOTHORAX
     label: Tension Pneumothorax
     presentations:
-      - Severe dyspnea and chest pain
-      - Hypotension and tachycardia
-      - Absent breath sounds on affected side
-      - Tracheal deviation away from affected side
-      - Jugular venous distension
-      - Requires immediate needle decompression
+      - Severe dyspnea, chest pain, respiratory distress
+      - Hypotension, tachycardia, shock (late finding - don't wait for this)
+      - Absent or decreased breath sounds on affected side
+      - Hyperresonance to percussion on affected side
+      - Tracheal deviation AWAY from affected side (late, unreliable sign)
+      - Jugular venous distension (JVD)
+      - Subcutaneous emphysema may be present
+      - Clinical diagnosis: Do NOT wait for imaging if suspected
+    clinical_pearls:
+      - "Clinical diagnosis = immediate treatment: Do NOT wait for CXR if tension suspected"
+      - "Tracheal deviation is LATE finding: Absence doesn't rule out tension pneumothorax"
+      - "Needle decompression: 2nd intercostal space, midclavicular line, insert 5cm needle/catheter"
+      - "Gush of air confirms diagnosis, patient improves immediately"
+      - "Needle decompression is temporizing: Follow with chest tube (4th/5th ICS, anterior axillary line)"
+      - "Causes: Trauma (most common), mechanical ventilation (barotrauma), central line placement"
+    management:
+      - "Immediate: Needle decompression if tension suspected - 14-16G needle/catheter, 2nd ICS midclavicular line"
+      - "Insert needle perpendicular to chest wall, advance until gush of air, secure catheter"
+      - "Definitive: Chest tube placement (28-32 Fr) in 4th/5th intercostal space, anterior axillary line"
+      - "If needle decompression fails: Consider finger thoracostomy (open pneumothorax, then chest tube)"
+      - "Disposition: Admit for chest tube management, serial CXRs, respiratory therapy"
     icd10:
-      - J93.0
+      - J93.0     # Spontaneous tension pneumothorax
     snomed:
-      - 44816003
+      - "44816003"  # Tension pneumothorax
 
   - id: EM-CARDIAC-TAMPONADE
     label: Cardiac Tamponade
@@ -260,28 +476,60 @@ rules:
   - id: EM-ECTOPIC-PREGNANCY-RUPTURED
     label: Ruptured Ectopic Pregnancy
     presentations:
-      - Acute abdominal pain in pregnant woman
-      - Vaginal bleeding
-      - Hypotension and tachycardia
-      - Shoulder pain (Kehr sign)
-      - Positive pregnancy test
-      - Requires emergency surgery
+      - Acute lower abdominal pain (sudden onset, unilateral or diffuse)
+      - Vaginal bleeding (may be minimal despite massive internal bleeding)
+      - Hypotension, tachycardia, shock
+      - Shoulder pain (Kehr sign): Referred pain from diaphragmatic irritation by blood
+      - Peritoneal signs: Rebound tenderness, guarding
+      - Positive pregnancy test (urine or serum beta-hCG)
+      - Risk factors: Prior ectopic, PID, IUD, tubal surgery, smoking
+      - FAST exam: Free fluid in Morison's pouch, pelvis
+    clinical_pearls:
+      - "Any woman of childbearing age with abdominal pain = pregnancy test (beta-hCG)"
+      - "Ruptured ectopic = surgical emergency: Call OB/GYN immediately if suspected"
+      - "FAST exam: Free fluid in abdomen + positive pregnancy test = ruptured ectopic until proven otherwise"
+      - "Hemodynamically unstable: Go straight to OR, don't wait for formal ultrasound"
+      - "Methotrexate contraindicated if ruptured: Needs immediate surgery"
+      - "Beta-hCG doesn't correlate with rupture risk: Can rupture at any hCG level"
+    management:
+      - "Immediate: IV access (two large-bore), aggressive fluid resuscitation, T&C 4 units PRBC"
+      - "Labs: Beta-hCG, CBC, type & screen, coags"
+      - "FAST exam: Assess for free fluid (hemoperitoneum)"
+      - "If unstable: Emergent OB/GYN consult, OR for exploratory laparotomy/laparoscopy"
+      - "If stable: Transvaginal ultrasound (look for intrauterine pregnancy vs ectopic mass), may need serial hCG"
     icd10:
-      - O00.90
+      - O00.90    # Unspecified ectopic pregnancy without intrauterine pregnancy
+      - O00.10    # Tubal pregnancy without intrauterine pregnancy
     snomed:
-      - 34801009
+      - "34801009"  # Ruptured ectopic pregnancy
 
   - id: EM-ACUTE-ANGLE-CLOSURE-GLAUCOMA
     label: Acute Angle-Closure Glaucoma
     presentations:
-      - Sudden severe eye pain
-      - Blurred vision and halos around lights
-      - Red eye
-      - Fixed mid-dilated pupil
-      - Corneal edema
-      - Nausea and vomiting
-      - Elevated intraocular pressure
+      - Sudden severe eye pain (deep, boring pain)
+      - Blurred vision, halos around lights (corneal edema)
+      - Red eye (conjunctival injection), "steamy" cloudy cornea
+      - Fixed mid-dilated pupil (4-6mm, unresponsive to light)
+      - Rock-hard eye on palpation
+      - Nausea, vomiting, headache (from elevated IOP)
+      - Intraocular pressure (IOP) >30 mmHg (normal 10-21), often >40-60 mmHg
+      - Triggers: Dim lighting, dilating drops, anticholinergic medications
+    clinical_pearls:
+      - "Ophthalmic emergency: Permanent vision loss if IOP not lowered within hours"
+      - "Tonometry: Measure IOP (>30 mmHg diagnostic, normal 10-21)"
+      - "Treatment goal: Lower IOP <20 mmHg within 1-2 hours"
+      - "Topical drops work synergistically: Beta-blocker + alpha-agonist + prostaglandin + steroid"
+      - "Mannitol: Osmotic diuretic, lowers IOP rapidly (if topical drops insufficient)"
+      - "Definitive: Laser peripheral iridotomy (ophthalmology) - creates hole in iris for aqueous drainage"
+    management:
+      - "Immediate: Ophthalmology consult, measure IOP, start topical drops"
+      - "Topical drops (give all): (1) Timolol 0.5% 1 drop, (2) Apraclonidine 1% 1 drop, (3) Prednisolone 1% 1 drop"
+      - "Systemic: Acetazolamide 500mg IV or PO (carbonic anhydrase inhibitor), antiemetics"
+      - "If IOP still elevated: Mannitol 1-2 g/kg IV over 30-45 min (osmotic diuresis)"
+      - "Definitive: Laser peripheral iridotomy (ophthalmology) once IOP controlled, treat fellow eye prophylactically"
     icd10:
+      - H40.211   # Acute angle-closure glaucoma, right eye
+      - H40.212   # Acute angle-closure glaucoma, left eye
       - H40.211
     snomed:
       - 392288008
