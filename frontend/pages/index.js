@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
   const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
@@ -132,12 +131,10 @@ export default function Home() {
         margin: '0 auto 2rem',
         textAlign: 'center'
       }}>
-        <Image 
+        <img 
           src="/logo.png" 
           alt="RealDiag Logo" 
-          width={120} 
-          height={120}
-          style={{ maxHeight: '120px', width: 'auto', marginBottom: '1rem' }}
+          style={{ height: '120px', width: 'auto', marginBottom: '1rem' }}
         />
         <h1 style={{ margin: 0, fontSize: '3rem', color: '#0f766e', fontWeight: '700' }}>
           RealDiag
