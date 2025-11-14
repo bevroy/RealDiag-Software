@@ -1,3 +1,9 @@
+/**
+ * Symptom-Based Diagnostic Search Interface
+ * Phase 3: Mobile-First Responsive Design & User Personalization
+ * Last updated: 2025-11-14
+ */
+
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
