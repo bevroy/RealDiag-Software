@@ -4,6 +4,7 @@ import styles from '../styles/Diagnose.module.css'
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
   const [selectedTree, setSelectedTree] = useState('')
+  const [currentStep, setCurrentStep] = useState(1) // Track wizard step
   const [patientData, setPatientData] = useState({
     diagnosis: '',
     symptoms: [],
@@ -15,6 +16,7 @@ export default function Diagnose() {
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [apiBase, setApiBase] = useState('')
+  const [showWizardMode, setShowWizardMode] = useState(true) // Toggle between wizard and traditional
 
   // Get API base from runtime config or environment
   useEffect(() => {
@@ -94,6 +96,42 @@ export default function Diagnose() {
       onset_hours: ''
     })
     setResult(null)
+    setCurrentStep(1)
+  }
+
+  const getTotalSteps = () => {
+    if (!selectedTree) return 4
+    return 5 // Tree selection + symptoms + exam + red flags + evaluate
+  }
+
+  const getStepTitle = (step) => {
+    const titles = [
+      'Select Diagnostic Tree',
+      'Patient Demographics',
+      'Clinical Symptoms',
+      'Physical Examination',
+      'Red Flags & Risk Factors'
+    ]
+    return titles[step - 1] || 'Unknown Step'
+  }
+
+  const canProceedToNextStep = () => {
+    if (currentStep === 1) return selectedTree !== ''
+    if (currentStep === 2) return patientData.age !== ''
+    if (currentStep === 3) return patientData.symptoms.length > 0
+    return true
+  }
+
+  const nextStep = () => {
+    if (canProceedToNextStep() && currentStep < getTotalSteps()) {
+      setCurrentStep(currentStep + 1)
+    }
+  }
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+    }
   }
 
   // Symptom options based on tree type
@@ -135,8 +173,89 @@ export default function Diagnose() {
       </header>
 
       <div className={styles.main}>
+        {/* Wizard Mode Toggle */}
+        <div style={{maxWidth: '800px', margin: '0 auto 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <button
+            onClick={() => setShowWizardMode(!showWizardMode)}
+            style={{
+              padding: '0.5rem 1rem',
+              background: showWizardMode ? '#3b82f6' : '#e5e7eb',
+              color: showWizardMode ? 'white' : '#374151',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              fontWeight: '500'
+            }}
+          >
+            {showWizardMode ? '✓ Wizard Mode' : 'Traditional Mode'}
+          </button>
+          {result && (
+            <button
+              onClick={handleReset}
+              style={{
+                padding: '0.5rem 1rem',
+                background: '#ef4444',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                fontWeight: '500'
+              }}
+            >
+              🔄 Start Over
+            </button>
+          )}
+        </div>
+
+        {/* Progress Indicator (Wizard Mode Only) */}
+        {showWizardMode && selectedTree && !result && (
+          <div style={{maxWidth: '800px', margin: '0 auto 2rem', background: 'white', borderRadius: '8px', padding: '1.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)'}}>
+            <div style={{marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+              <span style={{fontSize: '0.9rem', fontWeight: '600', color: '#374151'}}>
+                Step {currentStep} of {getTotalSteps()}: {getStepTitle(currentStep)}
+              </span>
+              <span style={{fontSize: '0.85rem', color: '#6b7280'}}>
+                {Math.round((currentStep / getTotalSteps()) * 100)}% Complete
+              </span>
+            </div>
+            {/* Progress Bar */}
+            <div style={{width: '100%', height: '8px', background: '#e5e7eb', borderRadius: '4px', overflow: 'hidden'}}>
+              <div style={{
+                width: `${(currentStep / getTotalSteps()) * 100}%`,
+                height: '100%',
+                background: 'linear-gradient(90deg, #3b82f6 0%, #2563eb 100%)',
+                transition: 'width 0.3s ease'
+              }} />
+            </div>
+            {/* Step Indicators */}
+            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '1rem', gap: '0.5rem'}}>
+              {Array.from({length: getTotalSteps()}, (_, i) => i + 1).map(step => (
+                <div
+                  key={step}
+                  style={{
+                    flex: 1,
+                    textAlign: 'center',
+                    padding: '0.5rem',
+                    borderRadius: '4px',
+                    background: step === currentStep ? '#dbeafe' : (step < currentStep ? '#dcfce7' : '#f3f4f6'),
+                    border: step === currentStep ? '2px solid #3b82f6' : 'none',
+                    fontSize: '0.75rem',
+                    fontWeight: '500',
+                    color: step <= currentStep ? '#374151' : '#9ca3af',
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  {step === currentStep ? '▶' : (step < currentStep ? '✓' : step)}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Tree Selection */}
-        <section className={styles.section}>
+        <section className={styles.section} style={{display: (!showWizardMode || currentStep === 1) ? 'block' : 'none'}}>
           <h2>1. Select Diagnostic Tree</h2>
           <div className={styles.treeSelection}>
             {trees.map(tree => (
@@ -157,7 +276,7 @@ export default function Diagnose() {
         {selectedTree && (
           <>
             {/* Patient Demographics */}
-            <section className={styles.section}>
+            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 2) ? 'block' : 'none'}}>
               <h2>2. Patient Information</h2>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}>
@@ -191,7 +310,7 @@ export default function Diagnose() {
             </section>
 
             {/* Symptoms */}
-            <section className={styles.section}>
+            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 3) ? 'block' : 'none'}}>
               <h2>3. Symptoms</h2>
               <div className={styles.checkboxGrid}>
                 {getSymptomOptions().map(symptom => (
@@ -208,7 +327,7 @@ export default function Diagnose() {
             </section>
 
             {/* Physical Exam */}
-            <section className={styles.section}>
+            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 4) ? 'block' : 'none'}}>
               <h2>4. Physical Exam Findings</h2>
               <div className={styles.checkboxGrid}>
                 {getExamOptions().map(finding => (
@@ -225,7 +344,7 @@ export default function Diagnose() {
             </section>
 
             {/* Red Flags */}
-            <section className={`${styles.section} ${styles.redFlags}`}>
+            <section className={`${styles.section} ${styles.redFlags}`} style={{display: (!showWizardMode || currentStep === 5) ? 'block' : 'none'}}>
               <h2>5. Red Flags ⚠️</h2>
               <div className={styles.checkboxGrid}>
                 {getRedFlagOptions().map(flag => (
@@ -241,21 +360,82 @@ export default function Diagnose() {
               </div>
             </section>
 
-            {/* Actions */}
+            {/* Actions / Wizard Navigation */}
             <section className={styles.actions}>
-              <button
-                className={styles.evaluateButton}
-                onClick={handleEvaluate}
-                disabled={loading}
-              >
-                {loading ? '🔄 Evaluating...' : '🩺 Evaluate Diagnosis'}
-              </button>
-              <button
-                className={styles.resetButton}
-                onClick={handleReset}
-              >
-                🔄 Reset
-              </button>
+              {showWizardMode ? (
+                <div style={{display: 'flex', gap: '1rem', justifyContent: 'space-between'}}>
+                  <button
+                    onClick={prevStep}
+                    disabled={currentStep === 1}
+                    style={{
+                      flex: 1,
+                      padding: '1rem 2rem',
+                      background: currentStep === 1 ? '#e5e7eb' : '#6b7280',
+                      color: currentStep === 1 ? '#9ca3af' : 'white',
+                      border: 'none',
+                      borderRadius: '6px',
+                      cursor: currentStep === 1 ? 'not-allowed' : 'pointer',
+                      fontSize: '1rem',
+                      fontWeight: '600'
+                    }}
+                  >
+                    ← Previous
+                  </button>
+                  {currentStep < getTotalSteps() ? (
+                    <button
+                      onClick={nextStep}
+                      disabled={!canProceedToNextStep()}
+                      style={{
+                        flex: 2,
+                        padding: '1rem 2rem',
+                        background: canProceedToNextStep() ? '#3b82f6' : '#9ca3af',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: canProceedToNextStep() ? 'pointer' : 'not-allowed',
+                        fontSize: '1rem',
+                        fontWeight: '600'
+                      }}
+                    >
+                      Continue →
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleEvaluate}
+                      disabled={loading}
+                      style={{
+                        flex: 2,
+                        padding: '1rem 2rem',
+                        background: loading ? '#9ca3af' : '#10b981',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: loading ? 'not-allowed' : 'pointer',
+                        fontSize: '1rem',
+                        fontWeight: '600'
+                      }}
+                    >
+                      {loading ? '🔄 Evaluating...' : '🩺 Complete Evaluation'}
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <button
+                    className={styles.evaluateButton}
+                    onClick={handleEvaluate}
+                    disabled={loading}
+                  >
+                    {loading ? '🔄 Evaluating...' : '🩺 Evaluate Diagnosis'}
+                  </button>
+                  <button
+                    className={styles.resetButton}
+                    onClick={handleReset}
+                  >
+                    🔄 Reset
+                  </button>
+                </>
+              )}
             </section>
 
             {/* Results */}
