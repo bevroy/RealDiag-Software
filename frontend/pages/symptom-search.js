@@ -18,6 +18,96 @@ export default function SymptomSearch() {
   const [viewMode, setViewMode] = useState('card'); // 'card' or 'compact'
   const [sortBy, setSortBy] = useState('score'); // 'score', 'alpha', 'family'
   const [expandedCards, setExpandedCards] = useState({});
+  const [darkMode, setDarkMode] = useState(false);
+  const [fontSize, setFontSize] = useState('medium'); // 'small', 'medium', 'large'
+  const [showPreferences, setShowPreferences] = useState(false);
+  const [recentSearches, setRecentSearches] = useState([]);
+
+  // Load preferences from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedViewMode = localStorage.getItem('viewMode');
+      const savedSortBy = localStorage.getItem('sortBy');
+      const savedDarkMode = localStorage.getItem('darkMode');
+      const savedFontSize = localStorage.getItem('fontSize');
+      const savedRecentSearches = localStorage.getItem('recentSearches');
+      
+      if (savedViewMode) setViewMode(savedViewMode);
+      if (savedSortBy) setSortBy(savedSortBy);
+      if (savedDarkMode) setDarkMode(savedDarkMode === 'true');
+      if (savedFontSize) setFontSize(savedFontSize);
+      if (savedRecentSearches) {
+        try {
+          setRecentSearches(JSON.parse(savedRecentSearches));
+        } catch (e) {
+          console.error('Error loading recent searches:', e);
+        }
+      }
+    }
+  }, []);
+
+  // Save preferences to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('viewMode', viewMode);
+      localStorage.setItem('sortBy', sortBy);
+      localStorage.setItem('darkMode', darkMode.toString());
+      localStorage.setItem('fontSize', fontSize);
+    }
+  }, [viewMode, sortBy, darkMode, fontSize]);
+
+  // Save recent searches
+  const saveRecentSearch = (searchData) => {
+    const newSearch = {
+      symptoms: searchData.symptoms,
+      timestamp: new Date().toISOString(),
+      resultsCount: searchData.resultsCount
+    };
+    
+    const updated = [newSearch, ...recentSearches.filter(
+      s => JSON.stringify(s.symptoms) !== JSON.stringify(newSearch.symptoms)
+    )].slice(0, 5); // Keep only 5 most recent
+    
+    setRecentSearches(updated);
+    localStorage.setItem('recentSearches', JSON.stringify(updated));
+  };
+
+  const loadRecentSearch = (search) => {
+    setSymptoms(search.symptoms);
+    setShowPreferences(false);
+  };
+
+  // Theme and font size helper functions
+  const getThemeStyles = () => {
+    const baseStyle = {
+      minHeight: '100vh',
+      padding: '1rem',
+      transition: 'background 0.3s, color 0.3s'
+    };
+
+    if (darkMode) {
+      baseStyle.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)';
+      baseStyle.color = '#e5e7eb';
+    } else {
+      baseStyle.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+      baseStyle.color = '#1a202c';
+    }
+
+    return baseStyle;
+  };
+
+  const getFontSizeMultiplier = () => {
+    switch (fontSize) {
+      case 'small': return 0.875;
+      case 'large': return 1.125;
+      default: return 1;
+    }
+  };
+
+  const getCardBackground = () => darkMode ? '#2d3748' : 'white';
+  const getTextColor = () => darkMode ? '#e5e7eb' : '#1a202c';
+  const getSecondaryTextColor = () => darkMode ? '#9ca3af' : '#6b7280';
+  const getBorderColor = () => darkMode ? '#4b5563' : '#e5e7eb';
 
   const FAMILIES = [
     { id: "", label: "All Specialties" },
@@ -248,6 +338,14 @@ export default function SymptomSearch() {
 
       const data = await response.json();
       setResults(data.results || []);
+      
+      // Save to recent searches
+      if (data.results && data.results.length > 0) {
+        saveRecentSearch({
+          symptoms: symptoms,
+          resultsCount: data.results.length
+        });
+      }
     } catch (err) {
       setError(err.message);
       setResults([]);
@@ -270,73 +368,265 @@ export default function SymptomSearch() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-      padding: '2rem'
-    }}>
-      {/* Header */}
+    <div style={getThemeStyles()}>
+      {/* Mobile-optimized header */}
       <div style={{
         maxWidth: '1200px',
-        margin: '0 auto 2rem',
-        background: 'white',
-        padding: '1.5rem',
+        margin: '0 auto 1rem',
+        background: getCardBackground(),
+        padding: '1rem',
         borderRadius: '8px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        boxShadow: darkMode ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '1rem'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: '1 1 auto' }}>
           <Image 
             src="/logo.png" 
             alt="RealDiag Logo" 
-            width={60} 
-            height={60}
-            style={{ maxHeight: '60px', width: 'auto' }}
+            width={50} 
+            height={50}
+            style={{ maxHeight: '50px', width: 'auto' }}
           />
           <div>
-            <h1 style={{ margin: 0, fontSize: '1.75rem', color: '#1a202c' }}>
-              Symptom-Based Search
+            <h1 style={{ 
+              margin: 0, 
+              fontSize: `${1.5 * getFontSizeMultiplier()}rem`, 
+              color: getTextColor(),
+              fontWeight: '700'
+            }}>
+              Symptom Search
             </h1>
-            <p style={{ margin: '0.25rem 0 0', color: '#718096', fontSize: '0.9rem' }}>
-              Enter symptoms to find possible diagnoses
+            <p style={{ 
+              margin: '0.25rem 0 0', 
+              color: getSecondaryTextColor(), 
+              fontSize: `${0.85 * getFontSizeMultiplier()}rem` 
+            }}>
+              Find diagnoses by symptoms
             </p>
           </div>
         </div>
-        <Link href="/" style={{
-          padding: '0.5rem 1rem',
-          background: '#3b82f6',
-          color: 'white',
-          borderRadius: '6px',
-          textDecoration: 'none',
-          fontSize: '0.9rem',
-          fontWeight: '500'
-        }}>
-          ← Back to Home
-        </Link>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setShowPreferences(!showPreferences)}
+            style={{
+              padding: '0.5rem 1rem',
+              background: darkMode ? '#4b5563' : '#f3f4f6',
+              color: getTextColor(),
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
+              fontWeight: '500',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              minHeight: '44px'
+            }}
+          >
+            ⚙️ Settings
+          </button>
+          <Link href="/" style={{
+            padding: '0.5rem 1rem',
+            background: '#3b82f6',
+            color: 'white',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
+            fontWeight: '500',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            minHeight: '44px'
+          }}>
+            ← Home
+          </Link>
+        </div>
       </div>
+
+      {/* Preferences Panel */}
+      {showPreferences && (
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto 1rem',
+          background: getCardBackground(),
+          padding: '1.5rem',
+          borderRadius: '8px',
+          boxShadow: darkMode ? '0 4px 6px rgba(0,0,0,0.3)' : '0 4px 6px rgba(0,0,0,0.1)',
+          border: `2px solid ${darkMode ? '#3b82f6' : '#3b82f6'}`
+        }}>
+          <h3 style={{ 
+            margin: '0 0 1rem', 
+            color: getTextColor(), 
+            fontSize: `${1.1 * getFontSizeMultiplier()}rem`,
+            fontWeight: '600'
+          }}>
+            ⚙️ Preferences
+          </h3>
+          
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+            gap: '1rem', 
+            marginBottom: '1rem' 
+          }}>
+            {/* Dark Mode */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '0.5rem', 
+                fontWeight: '500', 
+                color: getTextColor(), 
+                fontSize: `${0.9 * getFontSizeMultiplier()}rem` 
+              }}>
+                Theme
+              </label>
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  background: darkMode ? '#3b82f6' : '#f3f4f6',
+                  color: darkMode ? 'white' : '#1a202c',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`,
+                  fontWeight: '500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  minHeight: '44px'
+                }}
+              >
+                {darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}
+              </button>
+            </div>
+
+            {/* Font Size */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '0.5rem', 
+                fontWeight: '500', 
+                color: getTextColor(), 
+                fontSize: `${0.9 * getFontSizeMultiplier()}rem` 
+              }}>
+                Font Size
+              </label>
+              <select
+                value={fontSize}
+                onChange={(e) => setFontSize(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  background: darkMode ? '#374151' : 'white',
+                  color: getTextColor(),
+                  border: `1px solid ${getBorderColor()}`,
+                  borderRadius: '6px',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`,
+                  minHeight: '44px'
+                }}
+              >
+                <option value="small">Small (0.875×)</option>
+                <option value="medium">Medium (1×)</option>
+                <option value="large">Large (1.125×)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Recent Searches */}
+          {recentSearches.length > 0 && (
+            <div>
+              <h4 style={{ 
+                margin: '1rem 0 0.5rem', 
+                color: getTextColor(), 
+                fontSize: `${0.95 * getFontSizeMultiplier()}rem`,
+                fontWeight: '600'
+              }}>
+                📝 Recent Searches
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {recentSearches.map((search, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => loadRecentSearch(search)}
+                    style={{
+                      padding: '0.75rem',
+                      background: darkMode ? '#374151' : '#f9fafb',
+                      color: getTextColor(),
+                      border: `1px solid ${getBorderColor()}`,
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      minHeight: '44px',
+                      transition: 'background 0.2s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = darkMode ? '#4b5563' : '#f3f4f6';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = darkMode ? '#374151' : '#f9fafb';
+                    }}
+                  >
+                    <span style={{ flex: 1 }}>
+                      {search.symptoms.join(', ')} 
+                    </span>
+                    <span style={{ 
+                      color: getSecondaryTextColor(), 
+                      fontSize: `${0.8 * getFontSizeMultiplier()}rem`,
+                      marginLeft: '0.5rem',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {search.resultsCount} results
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Main Content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Search Form */}
         <div style={{
-          background: 'white',
-          padding: '2rem',
+          background: getCardBackground(),
+          padding: '1.5rem',
           borderRadius: '8px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-          marginBottom: '2rem'
+          boxShadow: darkMode ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
+          marginBottom: '1.5rem'
         }}>
-          <h2 style={{ marginTop: 0, color: '#1a202c', fontSize: '1.25rem' }}>
+          <h2 style={{ 
+            marginTop: 0, 
+            color: getTextColor(), 
+            fontSize: `${1.25 * getFontSizeMultiplier()}rem`,
+            fontWeight: '600'
+          }}>
             Enter Patient Symptoms
           </h2>
 
           {/* Symptom Input */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem', 
+              fontWeight: '500', 
+              color: getTextColor(),
+              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+            }}>
               Add Symptoms
             </label>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <input
                 type="text"
                 value={symptomInput}
@@ -344,11 +634,14 @@ export default function SymptomSearch() {
                 onKeyPress={handleKeyPress}
                 placeholder="e.g., chest pain, shortness of breath, fever"
                 style={{
-                  flex: 1,
+                  flex: '1 1 200px',
                   padding: '0.75rem',
-                  border: '1px solid #d1d5db',
+                  border: `1px solid ${getBorderColor()}`,
                   borderRadius: '6px',
-                  fontSize: '1rem'
+                  fontSize: `${1 * getFontSizeMultiplier()}rem`,
+                  background: darkMode ? '#374151' : 'white',
+                  color: getTextColor(),
+                  minHeight: '44px'
                 }}
               />
               <button
@@ -361,7 +654,8 @@ export default function SymptomSearch() {
                   borderRadius: '6px',
                   cursor: 'pointer',
                   fontWeight: '500',
-                  fontSize: '1rem'
+                  fontSize: `${1 * getFontSizeMultiplier()}rem`,
+                  minHeight: '44px'
                 }}
               >
                 Add
@@ -975,6 +1269,76 @@ export default function SymptomSearch() {
           </div>
         )}
       </div>
+
+      {/* Mobile-responsive CSS */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          /* Stack items vertically on mobile */
+          div[style*="display: flex"] {
+            flex-wrap: wrap;
+          }
+          
+          /* Full-width buttons on mobile */
+          button, input, select {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+          }
+          
+          /* Increase padding for touch targets */
+          button {
+            padding: 0.875rem 1rem !important;
+            min-height: 48px !important;
+          }
+          
+          /* Larger text on mobile */
+          input, select, textarea {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+          }
+          
+          /* Reduce container padding */
+          div[style*="padding: 1.5rem"] {
+            padding: 1rem !important;
+          }
+          
+          /* Stack header items */
+          header > div {
+            flex-direction: column;
+            align-items: stretch !important;
+          }
+        }
+        
+        @media (min-width: 641px) and (max-width: 1024px) {
+          /* Tablet adjustments */
+          div[style*="gridTemplateColumns"] {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        
+        /* Smooth transitions for theme changes */
+        * {
+          transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Touch-friendly hover states */
+        @media (hover: hover) {
+          button:hover {
+            opacity: 0.9;
+          }
+        }
+        
+        /* Focus states for accessibility */
+        button:focus, input:focus, select:focus {
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
+        }
+        
+        /* Print styles */
+        @media print {
+          button, nav, header {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
