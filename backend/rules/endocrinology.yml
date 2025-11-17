@@ -8,6 +8,27 @@ rules:
     presentations:
       - polyuria, polydipsia, weight loss
       - insulin deficiency, often younger onset
+    clinical_pearls:
+      - "Autoimmune destruction of pancreatic beta cells - 90% loss before symptoms"
+      - "Honeymoon period: Temporary insulin independence after diagnosis (weeks to months)"
+      - "Screen for associated autoimmune diseases: Celiac (10%), thyroid (15-30%)"
+      - "DKA is presenting feature in 25-40% of new Type 1 DM diagnoses"
+      - "Check C-peptide and autoantibodies (GAD65, IA-2, ZnT8) if diagnosis unclear"
+    management:
+      - "Basal-bolus insulin regimen: Long-acting (glargine/detemir) + rapid-acting (lispro/aspart) before meals"
+      - "Total daily dose 0.5-1 units/kg (50% basal, 50% bolus divided into meals)"
+      - "Carb counting: 1 unit per 10-15g carbs (individualize insulin-to-carb ratio)"
+      - "Continuous glucose monitoring (CGM) improves outcomes - recommend if available"
+      - "Annual screening: A1c every 3 months (target <7%), lipids, microalbuminuria, dilated eye exam, foot exam"
+    tests:
+      - "Random glucose >200 mg/dL + symptoms OR fasting glucose ≥126 mg/dL OR A1c ≥6.5%"
+      - "C-peptide (low/undetectable in Type 1)"
+      - "Autoantibodies: GAD65, IA-2, insulin autoantibodies, ZnT8 (positive in 90%)"
+      - "Baseline labs: A1c, comprehensive metabolic panel, lipid panel, TSH, tissue transglutaminase (celiac)"
+    referrals:
+      - "Endocrinology for all new Type 1 DM diagnoses and insulin management"
+      - "Diabetes educator for carb counting, insulin administration, CGM training"
+      - "Ophthalmology annually for dilated fundoscopic exam (screen retinopathy)"
     icd10:
       - E10.9   # Type 1 diabetes mellitus without complications
 
@@ -16,6 +37,27 @@ rules:
     presentations:
       - hyperglycemia in adults with insulin resistance
       - may be asymptomatic or present with polyuria/polydipsia
+    clinical_pearls:
+      - "Insulin resistance + relative insulin deficiency (beta cells produce insulin but body can't use it)"
+      - "80% of Type 2 DM patients are overweight or obese - weight loss improves insulin sensitivity"
+      - "Metformin is first-line unless contraindicated (eGFR <30) - reduces A1c by 1-2%"
+      - "GLP-1 agonists (semaglutide) and SGLT2 inhibitors (empagliflozin) reduce CV/renal events"
+      - "Screen for prediabetes: Fasting glucose 100-125 mg/dL or A1c 5.7-6.4%"
+    management:
+      - "Lifestyle: Weight loss 5-10%, 150 min/week exercise, Mediterranean diet"
+      - "First-line: Metformin 500-1000mg BID (start low, titrate up to reduce GI side effects)"
+      - "If A1c >7% add: GLP-1 agonist (semaglutide 0.5-1mg SQ weekly) OR SGLT2 inhibitor (empagliflozin 10-25mg daily)"
+      - "If A1c >9% consider combination therapy or basal insulin (glargine 10 units nightly, titrate)"
+      - "Target A1c <7% (individualize: <6.5% if young/healthy, <8% if elderly/comorbid)"
+    tests:
+      - "Diagnosis: Fasting glucose ≥126 mg/dL OR random glucose ≥200 + symptoms OR A1c ≥6.5%"
+      - "A1c every 3 months until at goal, then every 6 months"
+      - "Annual: Comprehensive metabolic panel (eGFR for metformin), lipid panel, urine microalbumin/creatinine ratio"
+      - "Annual dilated eye exam, comprehensive foot exam"
+    referrals:
+      - "Endocrinology if difficult to control (A1c >8% on 2+ agents) or requiring insulin"
+      - "Ophthalmology annually for diabetic retinopathy screening"
+      - "Podiatry if peripheral neuropathy, foot deformities, or history of ulcers"
     icd10:
       - E11.9   # Type 2 diabetes mellitus without complications
 
@@ -24,6 +66,26 @@ rules:
     presentations:
       - hyperglycemia with ketosis and metabolic acidosis
       - abdominal pain, vomiting, Kussmaul respirations, fruity breath
+    clinical_pearls:
+      - "Triad: Hyperglycemia (>250 mg/dL), anion gap metabolic acidosis (pH <7.3, HCO3 <18), ketonemia/ketonuria"
+      - "Common precipitants: Infection (30-40%), insulin noncompliance, new-onset Type 1 DM, MI, pancreatitis"
+      - "Kussmaul respirations: Deep sighing breaths compensating for metabolic acidosis"
+      - "Monitor for cerebral edema (especially in children): Headache, altered mental status, bradycardia - MANNITOL"
+      - "Anion gap = Na - (Cl + HCO3), expect >12 in DKA"
+    management:
+      - "ABC's: Airway, breathing, circulation - ICU if pH <7.0 or altered mental status"
+      - "Fluids: 1L NS bolus, then 250-500 mL/hr (correct dehydration over 24-48 hours)"
+      - "Insulin: 0.1 units/kg/hr IV infusion (DON'T give bolus) - goal glucose decrease 50-75 mg/dL/hr"
+      - "When glucose <200, switch to D5-NS and continue insulin until anion gap closes (ketones cleared)"
+      - "Potassium: Add KCl 20-40 mEq/L to fluids (monitor q2-4h, DKA causes total body K depletion despite normal/high initial level)"
+    tests:
+      - "Basic metabolic panel: Glucose, electrolytes, BUN/Cr, anion gap (repeat q2-4h)"
+      - "Arterial or venous blood gas: pH, HCO3, pCO2"
+      - "Serum or urine ketones (beta-hydroxybutyrate preferred over acetoacetate)"
+      - "Search for precipitant: UA/culture, CXR, blood cultures, troponin, lipase"
+    referrals:
+      - "ICU admission if pH <7.0, altered mental status, hemodynamic instability"
+      - "Endocrinology consult for transition to subcutaneous insulin and outpatient management"
     icd10:
       - E10.10   # Type 1 diabetes mellitus with ketoacidosis without coma
       - E11.10   # Type 2 diabetes mellitus with ketoacidosis without coma
@@ -33,6 +95,25 @@ rules:
     presentations:
       - severe hyperglycemia, hyperosmolality, dehydration
       - minimal or absent ketosis, altered mental status
+    clinical_pearls:
+      - "Severe hyperglycemia (>600 mg/dL), hyperosmolality (>320 mOsm/kg), minimal ketosis (pH >7.3)"
+      - "Type 2 DM patients - enough insulin to prevent ketosis but not control glucose"
+      - "Higher mortality than DKA (10-20% vs 1-5%) - older patients with comorbidities"
+      - "Precipitants: Infection (60%), inadequate insulin, MI, stroke, medications (steroids, diuretics)"
+      - "Serum osmolality = 2(Na) + glucose/18 + BUN/2.8 (normal 280-295 mOsm/kg)"
+    management:
+      - "Aggressive fluid resuscitation: 1-2L NS bolus, then 250-500 mL/hr (up to 10L deficit)"
+      - "Insulin: 0.1 units/kg/hr IV infusion AFTER initial fluids (glucose drops with fluids alone)"
+      - "Goal glucose decrease 50-75 mg/dL/hr - slower than DKA to avoid cerebral edema"
+      - "Replace free water deficit slowly over 48 hours (0.45% NS when glucose <300)"
+      - "Potassium: Monitor closely and replace (goal 4-5 mEq/L) - total body depletion despite normal initial K"
+    tests:
+      - "Basic metabolic panel q2-4h: Glucose, Na, K, BUN/Cr, calculate serum osmolality"
+      - "Venous or arterial blood gas: Rule out acidosis (pH should be >7.3)"
+      - "Search for precipitant: UA/culture, CXR, blood cultures, troponin, head CT if focal neuro findings"
+    referrals:
+      - "ICU admission for all HHS patients (severe dehydration, altered mental status)"
+      - "Endocrinology consult for insulin management and transition to outpatient regimen"
     icd10:
       - E11.00   # Type 2 diabetes mellitus with hyperosmolarity without coma
 
@@ -42,6 +123,26 @@ rules:
       - adrenergic symptoms (tremor, palpitations, sweating, hunger)
       - neuroglycopenic symptoms (confusion, seizure, loss of consciousness)
       - low plasma glucose at time of symptoms
+    clinical_pearls:
+      - "Whipple's triad: Symptoms consistent with hypoglycemia + documented low glucose (<70 mg/dL) + relief with treatment"
+      - "In diabetics: Usually iatrogenic (insulin, sulfonylureas) - rule of 15: 15g carbs, recheck in 15 min"
+      - "Non-diabetic hypoglycemia: Insulinoma, post-gastric bypass (dumping), adrenal insufficiency, liver failure"
+      - "Hypoglycemia unawareness: Recurrent lows blunt autonomic symptoms - dangerous for diabetics"
+      - "Sulfonylureas (glyburide, glipizide) cause prolonged hypoglycemia - admit for observation"
+    management:
+      - "Conscious patient: 15g fast-acting carbs (4 oz juice, 3-4 glucose tablets, 1 tbsp honey), recheck in 15 min"
+      - "Unconscious/unable to swallow: D50W 25g (50 mL of 50% dextrose) IV push, repeat if no response"
+      - "Glucagon 1mg IM/SQ if no IV access (teaches family members for home use)"
+      - "After recovery: Feed complex carbs + protein to prevent rebound hypoglycemia"
+      - "If sulfonylurea-induced: Admit for D10W infusion + frequent glucose monitoring (can recur 12-24hrs)"
+    tests:
+      - "Point-of-care glucose <70 mg/dL (confirm with serum glucose if able)"
+      - "If non-diabetic recurrent hypoglycemia: 72-hour fast with glucose, insulin, C-peptide, proinsulin"
+      - "Insulin autoantibodies if suspected autoimmune hypoglycemia"
+      - "Morning cortisol if adrenal insufficiency suspected"
+    referrals:
+      - "Endocrinology for non-diabetic hypoglycemia or recurrent unexplained episodes"
+      - "Admission if sulfonylurea overdose, persistent hypoglycemia, or unable to maintain oral intake"
     icd10:
       - E16.0    # Drug-induced hypoglycemia without coma
       - E16.1    # Other hypoglycemia
@@ -52,6 +153,27 @@ rules:
     presentations:
       - weight loss, heat intolerance, palpitations, tremor
       - suppressed TSH, elevated free T4/T3
+    clinical_pearls:
+      - "Causes: Graves' disease (70% - diffuse goiter + ophthalmopathy), toxic multinodular goiter, solitary toxic adenoma"
+      - "Graves' ophthalmopathy: Proptosis, lid lag, diplopia (specific to Graves', not other causes)"
+      - "TSH always low in primary hyperthyroidism - if normal/high, consider TSH-secreting pituitary adenoma"
+      - "Subclinical hyperthyroidism: Low TSH with normal free T4/T3 - treat if age >65 or cardiac disease"
+      - "Apathetic thyrotoxicosis in elderly: Minimal symptoms, presents with atrial fibrillation or heart failure"
+    management:
+      - "Beta-blocker for symptomatic relief: Propranolol 20-40mg TID or metoprolol 25-50mg BID"
+      - "Methimazole 10-30mg daily (first-line thionamide, less hepatotoxic than PTU)"
+      - "PTU 50-150mg TID only if: First trimester pregnancy, thyroid storm, or methimazole allergy"
+      - "Radioactive iodine ablation (I-131): Definitive therapy, causes permanent hypothyroidism (requires lifelong levothyroxine)"
+      - "Thyroidectomy if: Large goiter with compressive symptoms, pregnancy planning, patient preference"
+    tests:
+      - "TSH (suppressed <0.1), free T4 (elevated), free T3 (elevated)"
+      - "Radioactive iodine uptake (RAIU): High uptake = Graves' or toxic nodule, Low = thyroiditis or exogenous T4"
+      - "Thyroid stimulating immunoglobulin (TSI) or TSH receptor antibodies (TRAb) if Graves' suspected"
+      - "Thyroid ultrasound to evaluate nodules if toxic multinodular goiter suspected"
+    referrals:
+      - "Endocrinology for all new hyperthyroidism diagnoses for treatment planning"
+      - "Ophthalmology if Graves' ophthalmopathy (proptosis, diplopia, vision changes)"
+      - "Cardiology if atrial fibrillation or heart failure present"
     icd10:
       - E05.90   # Thyrotoxicosis, unspecified without crisis or storm
 
@@ -60,6 +182,25 @@ rules:
     presentations:
       - severe thyrotoxicosis with fever, tachycardia, CNS changes
       - precipitated by infection, surgery, or other stressor
+    clinical_pearls:
+      - "Medical emergency with 10-20% mortality - requires ICU admission"
+      - "Burch-Wartofsky score ≥45 supports diagnosis (fever, tachycardia, CNS changes, GI symptoms)"
+      - "Precipitants: Infection, surgery, RAI treatment, trauma, DKA, MI, discontinuing antithyroid meds"
+      - "Differentiate from severe hyperthyroidism: Fever (>38.5°C), CNS changes (agitation, psychosis, coma)"
+      - "Can occur in undiagnosed hyperthyroidism - don't wait for TSH to treat if suspected"
+    management:
+      - "PTU 500-1000mg loading dose PO/NG, then 250mg q4h (blocks T4→T3 conversion, preferred over methimazole)"
+      - "Iodine 1 hour AFTER PTU: SSKI 5 drops q6h or Lugol's solution 10 drops q8h (blocks thyroid hormone release)"
+      - "Beta-blocker: Propranolol 40-80mg PO q4-6h OR 1-2mg IV q10-15min (high dose needed)"
+      - "Hydrocortisone 100mg IV q8h (blocks T4→T3 conversion, treats possible adrenal insufficiency)"
+      - "Supportive: Aggressive cooling, IV fluids, treat precipitant (antibiotics if infection)"
+    tests:
+      - "TSH (suppressed), free T4 (very high) - but TREAT before results if clinical suspicion high"
+      - "Search for precipitant: CBC, blood cultures, UA/culture, CXR, troponin"
+      - "Liver function tests (PTU can cause hepatotoxicity)"
+    referrals:
+      - "ICU admission immediately"
+      - "Endocrinology urgent consult for management guidance"
     icd10:
       - E05.91   # Thyrotoxicosis, unspecified with crisis or storm
 
@@ -68,6 +209,26 @@ rules:
     presentations:
       - fatigue, cold intolerance, weight gain, constipation, dry skin
       - elevated TSH with low free T4 (primary)
+    clinical_pearls:
+      - "Primary (95%): Thyroid gland failure (Hashimoto's, post-RAI, post-thyroidectomy). Secondary (5%): Pituitary failure"
+      - "Subclinical hypothyroidism: Elevated TSH with normal free T4 - treat if TSH >10 or symptoms/pregnancy"
+      - "Hashimoto's thyroiditis: Anti-TPO antibodies positive in 90%, gradual thyroid destruction"
+      - "Medication effects: Amiodarone, lithium, interferon can cause hypothyroidism"
+      - "Levothyroxine must be taken on empty stomach, 30-60 min before breakfast (food reduces absorption)"
+    management:
+      - "Levothyroxine 1.6 mcg/kg/day PO (round to 25, 50, 75, 88, 100, 112, 125, 137, 150 mcg strengths)"
+      - "Start lower in elderly or cardiac disease: 25-50 mcg daily (risk of precipitating angina/MI)"
+      - "Recheck TSH in 6-8 weeks, adjust dose by 12.5-25 mcg increments until TSH normalized"
+      - "Goal TSH 0.5-2.5 mIU/L (tighter range if pregnant: 0.1-2.5 by trimester)"
+      - "Once stable, check TSH annually - dose may need adjustment with weight changes or pregnancy"
+    tests:
+      - "TSH (elevated in primary hypothyroidism, low/normal in secondary)"
+      - "Free T4 (low - confirms hypothyroidism)"
+      - "Anti-TPO antibodies if Hashimoto's suspected (helps predict progression in subclinical cases)"
+      - "If secondary suspected: Morning cortisol, IGF-1, prolactin, LH/FSH, pituitary MRI"
+    referrals:
+      - "Endocrinology if: Secondary hypothyroidism, pregnant, difficulty controlling TSH, or large goiter"
+      - "Cardiology if new cardiac symptoms after starting levothyroxine (reduce dose)"
     icd10:
       - E03.9    # Hypothyroidism, unspecified
 
@@ -76,6 +237,26 @@ rules:
     presentations:
       - palpable or incidentally discovered thyroid nodule
       - normal or abnormal thyroid function depending on etiology
+    clinical_pearls:
+      - "Very common: 50-60% of population has nodules on ultrasound, most benign (90-95%)"
+      - "Risk factors for malignancy: Age <30 or >60, male, radiation exposure, family history, hard/fixed nodule"
+      - "If TSH low, get radioiodine scan - hot nodules (autonomous) are almost never malignant (skip FNA)"
+      - "ATA ultrasound classification: High suspicion features (hypoechoic, microcalcifications, taller-than-wide)"
+      - "Bethesda cytology categories: I (nondiagnostic), II (benign), III/IV (indeterminate), V/VI (suspicious/malignant)"
+    management:
+      - "Check TSH first - if low, nodule may be autonomously functioning (hot)"
+      - "If TSH normal/high: Ultrasound all nodules ≥1 cm or suspicious features"
+      - "FNA if: ≥1 cm with suspicious ultrasound features OR ≥1.5 cm with intermediate features OR ≥2 cm low suspicion"
+      - "Molecular testing (Afirma, ThyroSeq) for indeterminate Bethesda III/IV to avoid unnecessary surgery"
+      - "Benign nodules: Repeat ultrasound in 12-24 months to assess stability"
+    tests:
+      - "TSH (if low, get radioiodine uptake scan)"
+      - "Thyroid ultrasound with nodule characteristics (size, echogenicity, calcifications, vascularity)"
+      - "FNA with cytology if meets size/feature criteria above"
+      - "Calcitonin if family history of medullary thyroid cancer or MEN2 (screen for medullary CA)"
+    referrals:
+      - "Endocrinology for initial evaluation and FNA coordination"
+      - "Thyroid surgery (endocrine surgeon) if: Bethesda V/VI, suspicious growth, compressive symptoms"
     icd10:
       - E04.1    # Nontoxic single thyroid nodule
       - E04.2    # Nontoxic multinodular goiter
@@ -85,6 +266,26 @@ rules:
     presentations:
       - thyroid nodule with suspicious ultrasound features or FNA results
       - local compressive symptoms (hoarseness, dysphagia) or lymphadenopathy
+    clinical_pearls:
+      - "Papillary (85%): Best prognosis, lymph node spread common but survival excellent. Follicular (10%): Vascular invasion"
+      - "Medullary (3%): From C cells, produces calcitonin, screen for MEN2 syndrome (RET mutation)"
+      - "Anaplastic (1%): Rapidly fatal (months), presents as hard fixed mass with compressive symptoms"
+      - "Risk stratification: Low risk (small papillary, no extrathyroidal extension), high risk (>4cm, distant mets, anaplastic)"
+    management:
+      - "Papillary/follicular: Total thyroidectomy (preferred) or lobectomy if low-risk small tumor"
+      - "Radioactive iodine (RAI) ablation post-surgery if high-risk, >4cm, lymph node involvement, or distant mets"
+      - "TSH suppression with levothyroxine: Goal TSH 0.1-0.5 for high-risk, 0.5-2.0 for low-risk"
+      - "Surveillance: Thyroglobulin levels + neck ultrasound every 6-12 months (rising Tg suggests recurrence)"
+      - "Anaplastic: Palliative care, consider tracheostomy if airway compromise, external beam radiation"
+    tests:
+      - "FNA with cytology (Bethesda V or VI = suspicious or malignant)"
+      - "Pre-op: TSH, vocal cord assessment (laryngoscopy), neck ultrasound for lymph nodes"
+      - "Post-op: Thyroglobulin (tumor marker), anti-thyroglobulin antibodies, RAI whole body scan if indicated"
+      - "Calcitonin if medullary suspected, check RET proto-oncogene for MEN2"
+    referrals:
+      - "Endocrine surgeon (high-volume thyroidectomy surgeon) for definitive surgery"
+      - "Endocrinology for post-op RAI ablation and TSH suppression management"
+      - "Medical oncology if anaplastic or distant metastases (tyrosine kinase inhibitors)"
     icd10:
       - C73      # Malignant neoplasm of thyroid gland
 
@@ -93,6 +294,27 @@ rules:
     presentations:
       - elevated serum calcium
       - may cause polyuria, constipation, confusion, arrhythmia
+    clinical_pearls:
+      - "Stones, bones, groans, psychiatric overtones (kidney stones, bone pain, abdominal pain, confusion/depression)"
+      - "90% of cases: Primary hyperparathyroidism (outpatient) or malignancy (inpatient)"
+      - "Measure ionized calcium or correct for albumin: Corrected Ca = measured Ca + 0.8(4.0 - albumin)"
+      - "PTH differentiates: High/inappropriately normal PTH = hyperparathyroidism. Low PTH = malignancy or other"
+      - "Severe hypercalcemia (>14 mg/dL) is medical emergency - can cause cardiac arrhythmias, renal failure, coma"
+    management:
+      - "Mild (<12 mg/dL) asymptomatic: Hydration, treat underlying cause, avoid thiazides and lithium"
+      - "Moderate-severe (≥12 mg/dL) or symptomatic: IV fluids (NS 200-300 mL/hr to restore volume)"
+      - "Calcitonin 4 units/kg SQ/IM q12h (rapid onset but tachyphylaxis after 48hrs)"
+      - "Bisphosphonate: Zoledronic acid 4mg IV over 15 min (slower onset but sustained effect, lowers Ca in 2-4 days)"
+      - "If malignancy-related: Treat underlying cancer, consider denosumab if bisphosphonates fail"
+    tests:
+      - "Total and ionized calcium (or correct for albumin)"
+      - "PTH (intact) - must interpret in context of calcium level"
+      - "If PTH low: PTHrP (malignancy), vitamin D (25-OH and 1,25), SPEP/UPEP (myeloma), TSH"
+      - "Basic metabolic panel (phosphorus often low in hyperparathyroidism, high in malignancy), ECG (shortened QT)"
+    referrals:
+      - "Endocrinology for elevated PTH (primary hyperparathyroidism workup and management)"
+      - "Oncology if malignancy suspected (PTHrP elevated, known cancer history)"
+      - "Hospital admission if calcium >14 mg/dL or symptomatic (confusion, arrhythmia, renal failure)"
     icd10:
       - E83.52   # Hypercalcemia
 
@@ -101,6 +323,27 @@ rules:
     presentations:
       - chronic hypercalcemia with inappropriately elevated PTH
       - nephrolithiasis, bone loss, nonspecific symptoms
+    clinical_pearls:
+      - "Most common cause of hypercalcemia in outpatients (malignancy is most common in inpatients)"
+      - "85% solitary parenchymal adenoma, 15% multigland hyperplasia, <1% parathyroid carcinoma"
+      - "Often asymptomatic - discovered incidentally on routine labs (elevated calcium)"
+      - "Complications: Kidney stones (20%), osteoporosis/fractures, hypercalciuria, peptic ulcer disease"
+      - "MEN1 and MEN2A syndromes: Familial hyperparathyroidism (multigland disease, younger age)"
+    management:
+      - "Parathyroidectomy (curative) if: Symptomatic, age <50, calcium >1 mg/dL above normal, eGFR <60, osteoporosis, kidney stones"
+      - "Observation if asymptomatic and doesn't meet surgical criteria: Monitor calcium, bone density, renal function annually"
+      - "Medical management if surgery contraindicated: Cinacalcet 30-90mg BID (calcimimetic, lowers PTH and calcium)"
+      - "Hydration, avoid thiazide diuretics (increase calcium), avoid prolonged immobilization"
+      - "Bisphosphonates if osteoporosis present (treats bone loss but doesn't lower calcium)"
+    tests:
+      - "Calcium (elevated, check ionized or albumin-corrected), PTH (elevated or inappropriately normal)"
+      - "24-hour urine calcium and creatinine (exclude familial hypocalciuric hypercalcemia if calcium/creatinine clearance ratio <0.01)"
+      - "Vitamin D 25-OH (often low - repletion may worsen hypercalcemia, use caution)"
+      - "DEXA scan for bone density, renal ultrasound or CT for kidney stones"
+      - "Sestamibi scan or 4D CT pre-op to localize adenoma"
+    referrals:
+      - "Endocrinology for diagnosis confirmation and surgical candidacy evaluation"
+      - "Endocrine surgeon if meets surgical criteria (minimally invasive parathyroidectomy preferred if single adenoma)"
     icd10:
       - E21.0    # Primary hyperparathyroidism
 
@@ -110,6 +353,26 @@ rules:
       - hypotension, shock, abdominal pain, vomiting
       - hyponatremia, hyperkalemia, hypoglycemia
       - often in known adrenal insufficiency with stressor
+    clinical_pearls:
+      - "Life-threatening emergency - treat empirically if suspected, don't wait for cortisol results"
+      - "Precipitants: Infection, trauma, surgery, abrupt steroid withdrawal, bilateral adrenal hemorrhage/infarction"
+      - "Labs: Hyponatremia, hyperkalemia, hypoglycemia, hypercalcemia, eosinophilia"
+      - "Cosyntropin stimulation test NOT needed for diagnosis - treat immediately based on clinical suspicion"
+      - "Patients on chronic steroids (≥20mg prednisone >3 weeks) have suppressed HPA axis - need stress dosing"
+    management:
+      - "STAT: Hydrocortisone 100mg IV bolus, then 50-100mg IV q6-8h (or 200mg/24hr continuous infusion)"
+      - "Aggressive IV fluids: 1-2L NS bolus, then 200-300 mL/hr (correct hypovolemia and hyponatremia)"
+      - "Dextrose if hypoglycemic: D50W 25-50 mL IV push"
+      - "Treat precipitant: Antibiotics if infection, pressors if refractory hypotension"
+      - "Once stable, taper hydrocortisone to oral prednisone 5mg BID + fludrocortisone 0.1mg daily (if primary AI)"
+    tests:
+      - "Basic metabolic panel: Hyponatremia, hyperkalemia, hypoglycemia (but don't delay treatment)"
+      - "Random cortisol and ACTH before giving hydrocortisone (cortisol <5 mcg/dL supports diagnosis but NOT required)"
+      - "Once stable: Cosyntropin stimulation test to confirm adrenal insufficiency"
+      - "Imaging if bilateral adrenal hemorrhage suspected: Abdominal CT"
+    referrals:
+      - "ICU admission for hemodynamic monitoring and frequent electrolyte checks"
+      - "Endocrinology consult for transition to chronic replacement and long-term management"
     icd10:
       - E27.2    # Addisonian crisis
 
@@ -118,6 +381,27 @@ rules:
     presentations:
       - chronic fatigue, weight loss, hyperpigmentation (primary)
       - hyponatremia, hyperkalemia, low cortisol
+    clinical_pearls:
+      - "Primary (Addison's): Adrenal gland destruction (autoimmune 80%, TB, hemorrhage). Low cortisol + aldosterone"
+      - "Secondary: Pituitary/hypothalamic dysfunction (most often exogenous steroids). Low cortisol, normal aldosterone"
+      - "Hyperpigmentation only in primary AI (high ACTH stimulates melanocytes) - look in skin creases, mucosa"
+      - "Salt craving in primary AI (aldosterone deficiency causes salt wasting)"
+      - "Autoimmune Addison's: Screen for other autoimmune diseases (thyroid 50%, type 1 DM 20%, vitiligo, pernicious anemia)"
+    management:
+      - "Primary AI: Hydrocortisone 15-25mg daily (10-15mg AM, 5-10mg afternoon) + fludrocortisone 0.05-0.2mg daily"
+      - "Secondary AI: Hydrocortisone only (aldosterone production preserved, no fludrocortisone needed)"
+      - "Stress dosing: Double or triple dose for minor illness, IM hydrocortisone 100mg for vomiting/unable to take PO"
+      - "Emergency card/bracelet: Patients should carry hydrocortisone injection kit and wear medical alert ID"
+      - "Sick day rules education: Critical for preventing adrenal crisis"
+    tests:
+      - "8 AM cortisol: <3 mcg/dL diagnostic for AI, >15 mcg/dL rules out, 3-15 do cosyntropin stim test"
+      - "Cosyntropin stimulation test: Give 250 mcg IV/IM, cortisol at 0 and 60 min (normal peak >18-20 mcg/dL)"
+      - "ACTH: High in primary AI (>2x normal), low/normal in secondary AI"
+      - "If primary: 21-hydroxylase antibodies (autoimmune), renin/aldosterone, electrolytes"
+      - "If secondary: Pituitary MRI, other pituitary hormones (TSH, LH/FSH, prolactin, IGF-1)"
+    referrals:
+      - "Endocrinology for all new diagnoses - lifelong management and education required"
+      - "Emergency room if vomiting/unable to take PO (risk of adrenal crisis)"
     icd10:
       - E27.1    # Primary adrenocortical insufficiency
       - E27.40   # Unspecified adrenocortical insufficiency
@@ -130,6 +414,27 @@ rules:
       - purple striae, easy bruising
       - hypertension, hyperglycemia
       - muscle weakness
+    clinical_pearls:
+      - "Cushing's syndrome = excess cortisol. Cushing's disease = pituitary adenoma causing Cushing's syndrome (70%)"
+      - "Causes: Pituitary adenoma (70%), ectopic ACTH (15% - small cell lung CA), adrenal tumor (15%)"
+      - "Exogenous steroids (iatrogenic) is most common cause of Cushing's syndrome - exclude before workup"
+      - "Purple/wide striae (>1cm), proximal myopathy, easy bruising are most specific findings"
+      - "Complications: Diabetes, hypertension, osteoporosis, infections, psychiatric symptoms"
+    management:
+      - "First: Stop exogenous steroids if possible (taper slowly to avoid adrenal crisis)"
+      - "Pituitary adenoma (Cushing's disease): Transsphenoidal surgery (first-line, 70-90% cure)"
+      - "If surgery fails: Pituitary radiation, bilateral adrenalectomy, or medical therapy (ketoconazole, metyrapone)"
+      - "Ectopic ACTH: Resect source tumor if possible, medical therapy (ketoconazole, etomidate) to control cortisol"
+      - "Adrenal tumor: Surgical resection (laparoscopic adrenalectomy)"
+    tests:
+      - "Screening (pick 2 tests): 24-hr urine free cortisol (≥3x normal), late-night salivary cortisol (elevated), 1mg dexamethasone suppression test (cortisol >1.8 mcg/dL at 8 AM)"
+      - "ACTH to determine source: High = pituitary or ectopic, Low = adrenal tumor"
+      - "If ACTH high: High-dose dexamethasone test and CRH stimulation test to differentiate pituitary vs ectopic"
+      - "Imaging: Pituitary MRI if Cushing's disease, adrenal CT if adrenal source, chest/abdomen CT for ectopic"
+    referrals:
+      - "Endocrinology for all suspected cases - complex workup and management"
+      - "Neurosurgery (pituitary surgeon) if pituitary adenoma confirmed"
+      - "General surgery for adrenal tumor resection"
     icd10:
       - E24.9    # Cushing's syndrome, unspecified
     snomed:
@@ -142,6 +447,33 @@ rules:
       - hypertension (paroxysmal or sustained)
       - elevated catecholamines
       - adrenal mass on imaging
+    clinical_pearls:
+      - "Rule of 10s: 10% bilateral, 10% extra-adrenal (paraganglioma), 10% malignant, 10% familial"
+      - "Classic triad: Headaches, sweating, palpitations/tachycardia during 'spells' (episodes last minutes to hours)"
+      - "Familial syndromes (40%): MEN2, VHL, NF1, SDH mutations - screen if age <40 or family history"
+      - "Hypertensive crisis with surgery/anesthesia if unrecognized - preop alpha-blockade essential"
+      - "Incidentaloma workup: All adrenal masses >1cm should be screened for pheochromocytoma before biopsy"
+    management:
+      - "Alpha-blockade FIRST: Phenoxybenzamine 10mg BID, titrate to 20-40mg TID over 2-3 weeks (goal liberal salt/fluid)"
+      - "Then beta-blockade (NEVER before alpha): Propranolol 10-40mg TID for tachycardia (prevents unopposed alpha)"
+      - "Surgical resection: Laparoscopic adrenalectomy after 10-14 days of adequate alpha-blockade"
+      - "Intra-op hypertensive crisis: Phentolamine 5mg IV boluses, nitroprusside infusion"
+      - "Post-op hypotension common (catecholamine withdrawal) - may need IV fluids and pressors"
+    management:
+      - "Alpha-blockade FIRST: Phenoxybenzamine 10mg BID, titrate to 20-40mg TID over 2-3 weeks"
+      - "Then beta-blockade (NEVER before alpha): Propranolol 10-40mg TID (prevents unopposed alpha)"
+      - "Surgical resection: Laparoscopic adrenalectomy after adequate alpha/beta blockade"
+      - "Intra-op: Phentolamine 5mg IV for hypertensive crisis, nitroprusside infusion"
+      - "Post-op: Monitor for hypotension (catecholamine withdrawal), may need IV fluids"
+    tests:
+      - "Plasma free metanephrines (most sensitive, >4x normal highly specific) OR 24-hr urine metanephrines"
+      - "If positive biochemical test: Adrenal CT or MRI to localize tumor (avoid contrast until after alpha-blockade)"
+      - "Genetic testing if: Age <40, bilateral, extra-adrenal, family history (test VHL, RET, NF1, SDHx)"
+      - "MIBG scan or PET (68Ga-DOTATATE) if extra-adrenal or metastatic disease suspected"
+    referrals:
+      - "Endocrinology for all cases - manage alpha/beta blockade and biochemical confirmation"
+      - "Endocrine surgeon for adrenalectomy (high-volume center preferred)"
+      - "Genetics if familial syndrome suspected"
     icd10:
       - D35.00   # Benign neoplasm of adrenal gland
     snomed:
@@ -155,6 +487,28 @@ rules:
       - headaches, visual field defects
       - elevated IGF-1
       - pituitary adenoma
+    clinical_pearls:
+      - "Growth hormone (GH) excess from pituitary adenoma (99%) - slow progression, diagnosis delayed 7-10 years"
+      - "Complications: Cardiomyopathy (60%), hypertension (40%), diabetes (25%), sleep apnea (60%), colon polyps (30%)"
+      - "Macroadenoma with mass effect: Bitemporal hemianopsia, headaches, hypopituitarism"
+      - "IGF-1 screening: More reliable than GH (GH is pulsatile, IGF-1 reflects integrated GH secretion)"
+      - "Compare old photos: Ring size increase, jaw growth, brow prominence help establish diagnosis"
+    management:
+      - "Transsphenoidal surgery (first-line): 60-70% cure if microadenoma, 40-50% if macroadenoma"
+      - "Medical therapy if surgery incomplete: Somatostatin analogs (octreotide LAR 20-30mg IM monthly or lanreotide)"
+      - "GH receptor antagonist (pegvisomant 10-30mg SQ daily) if somatostatin analogs fail - normalizes IGF-1"
+      - "Radiation therapy for residual tumor after surgery + medical therapy"
+      - "Screen for complications: OGTT, echocardiogram, sleep study, colonoscopy"
+    tests:
+      - "IGF-1 (elevated for age/sex) - initial screening test"
+      - "Oral glucose tolerance test (OGTT): GH should suppress to <1 ng/mL after glucose load (fails to suppress in acromegaly)"
+      - "Pituitary MRI with contrast to visualize adenoma (macroadenoma >1cm in 75%)"
+      - "Formal visual field testing if macroadenoma (assess optic chiasm compression)"
+      - "Screen other pituitary hormones: Prolactin (co-secretion in 25%), TSH, LH/FSH, cortisol"
+    referrals:
+      - "Endocrinology for diagnosis confirmation and medical management"
+      - "Neurosurgery (pituitary surgeon, high-volume center) for transsphenoidal resection"
+      - "Ophthalmology if visual field defects present"
     icd10:
       - E22.0    # Acromegaly and pituitary gigantism
     snomed:
@@ -168,6 +522,27 @@ rules:
       - Chvostek's and Trousseau's signs
       - seizures
       - often post-surgical
+    clinical_pearls:
+      - "Most common cause: Post-thyroidectomy or parathyroidectomy (transient in 30%, permanent in 1-2%)"
+      - "Chvostek sign: Tap facial nerve, facial muscle twitch. Trousseau sign: BP cuff >systolic for 3 min, carpopedal spasm"
+      - "Hypocalcemia with LOW or inappropriately normal PTH (high PTH would be appropriate response)"
+      - "ECG: Prolonged QT interval (risk of torsades) - monitor rhythm if severe hypocalcemia"
+      - "Hypomagnesemia impairs PTH secretion and action - always check and correct magnesium"
+    management:
+      - "Acute symptomatic (tetany, seizures): Calcium gluconate 1-2 amps (1-2g) IV over 10 min, then infusion"
+      - "Chronic: Calcitriol 0.25-2 mcg daily (active vitamin D) + calcium carbonate 1-2g elemental Ca TID with meals"
+      - "Goal: Calcium low-normal (8-8.5 mg/dL) to avoid hypercalciuria (risk of kidney stones if too high)"
+      - "Monitor 24-hr urine calcium - keep <300mg/day (add thiazide diuretic if hypercalciuria develops)"
+      - "Recombinant PTH (teriparatide) for refractory cases - investigational, not FDA approved for hypoparathyroidism"
+    tests:
+      - "Calcium (low, correct for albumin), ionized calcium (most accurate)"
+      - "PTH (low or inappropriately normal - should be elevated in response to hypocalcemia)"
+      - "Magnesium (correct if low - hypomagnesemia causes functional hypoparathyroidism)"
+      - "Phosphorus (elevated in hypoparathyroidism, opposite of hyperparathyroidism)"
+      - "25-OH vitamin D (check stores), ECG (prolonged QT interval)"
+    referrals:
+      - "Endocrinology for chronic management and optimization of calcium/vitamin D replacement"
+      - "Hospital admission if symptomatic hypocalcemia (tetany, seizures, prolonged QT)"
     icd10:
       - E20.9    # Hypoparathyroidism, unspecified
     snomed:
@@ -181,6 +556,26 @@ rules:
       - vertebral compression fractures
       - loss of height
       - postmenopausal women at higher risk
+    clinical_pearls:
+      - "DEXA T-score: Normal >-1.0, Osteopenia -1.0 to -2.5, Osteoporosis <-2.5, Severe osteoporosis <-2.5 + fracture"
+      - "Fragility fracture = fracture from fall from standing height or less (hip, spine, wrist most common)"
+      - "Secondary causes (men and premenopausal women): Steroids, hypogonadism, hyperthyroidism, hyperparathyroidism, celiac"
+      - "Calcium + vitamin D alone insufficient for osteoporosis treatment - need bisphosphonate or other agent"
+      - "Bisphosphonate duration: 3-5 years then drug holiday to reduce atypical fracture risk"
+    management:
+      - "All patients: Calcium 1200mg/day + vitamin D 800-1000 IU daily, weight-bearing exercise, fall prevention"
+      - "First-line bisphosphonate: Alendronate 70mg PO weekly OR zoledronic acid 5mg IV yearly"
+      - "Take alendronate on empty stomach with 8oz water, remain upright 30 min (prevent esophagitis)"
+      - "If bisphosphonate contraindicated: Denosumab 60mg SQ q6 months (RANKL inhibitor)"
+      - "Severe osteoporosis (T-score <-3.0 or fracture): Teriparatide 20 mcg SQ daily or romosozumab (anabolic agents)"
+    tests:
+      - "DEXA scan: Screen women ≥65, men ≥70, younger if risk factors (steroids, fragility fracture, hypogonadism)"
+      - "Baseline labs: Calcium, 25-OH vitamin D, PTH, TSH, creatinine"
+      - "If secondary osteoporosis suspected: Testosterone (men), celiac antibodies, serum/urine protein electrophoresis"
+      - "Repeat DEXA in 1-2 years after starting treatment to assess response"
+    referrals:
+      - "Endocrinology if: Secondary osteoporosis, severe (T-score <-3.5), multiple fractures, or treatment failure"
+      - "Orthopedics for vertebral compression fractures (consider kyphoplasty/vertebroplasty)"
     icd10:
       - M81.0    # Age-related osteoporosis without current pathological fracture
     snomed:
@@ -194,6 +589,27 @@ rules:
       - hypotension
       - multiple hormone deficiencies
       - may be due to tumor, surgery, radiation
+    clinical_pearls:
+      - "Can be partial (isolated hormone deficiencies) or complete (panhypopituitarism)"
+      - "Order of hormone loss: GH → LH/FSH → TSH → ACTH (remember: 'Go Look For The Adenoma')"
+      - "Causes: Pituitary adenoma (mass effect), surgery, radiation, Sheehan syndrome (postpartum hemorrhage), apoplexy"
+      - "Secondary adrenal insufficiency: Low cortisol but normal aldosterone (aldosterone is RAAS, not pituitary-dependent)"
+      - "Pituitary apoplexy: Sudden hemorrhage into adenoma - severe headache, visual loss, shock - neurosurgical emergency"
+    management:
+      - "Replace deficient hormones in order: 1) Cortisol (FIRST - prevents crisis), 2) Thyroid, 3) Sex hormones, 4) GH"
+      - "Hydrocortisone 15-25mg daily divided (10-15mg AM, 5-10mg afternoon) - NO fludrocortisone needed"
+      - "Levothyroxine 1.6 mcg/kg daily - monitor free T4 not TSH (TSH unreliable in central hypothyroidism)"
+      - "Men: Testosterone replacement. Women: Estrogen/progesterone if premenopausal"
+      - "GH replacement (optional): Somatropin if symptoms (fatigue, decreased QOL) - improves body composition"
+    tests:
+      - "8 AM cortisol and ACTH, free T4 and TSH, LH/FSH, testosterone (men) or estradiol (women), IGF-1, prolactin"
+      - "Cosyntropin stimulation test to confirm secondary adrenal insufficiency"
+      - "Pituitary MRI with contrast to evaluate for mass, empty sella, or other structural abnormality"
+      - "Formal visual field testing if macroadenoma or visual symptoms"
+    referrals:
+      - "Endocrinology for all cases - lifelong hormone replacement and monitoring required"
+      - "Neurosurgery if pituitary mass causing mass effect or apoplexy"
+      - "Ophthalmology if visual field defects"
     icd10:
       - E23.0    # Hypopituitarism
     snomed:
@@ -207,6 +623,28 @@ rules:
       - erectile dysfunction, decreased libido (men)
       - headaches, visual field defects
       - pituitary adenoma on MRI
+    clinical_pearls:
+      - "Most common functional pituitary tumor (40% of all pituitary adenomas)"
+      - "Prolactin level correlates with adenoma size: <100 ng/mL (often stalk effect), 100-200 (micro or macro), >200 (prolactinoma likely)"
+      - "Stalk effect: Any pituitary mass can elevate prolactin by compressing stalk (interrupts dopamine inhibition)"
+      - "Medications causing hyperprolactinemia: Antipsychotics (risperidone, haloperidol), metoclopramide, SSRIs - rule out first"
+      - "Men present later with larger tumors (macroadenomas) - lack obvious symptoms until mass effect"
+    management:
+      - "Medical therapy (first-line): Cabergoline 0.25-0.5mg twice weekly (dopamine agonist, better tolerated than bromocriptine)"
+      - "Bromocriptine 2.5-15mg daily if cabergoline unavailable - more side effects (nausea, orthostatic hypotension)"
+      - "Goal: Normalize prolactin, restore gonadal function, shrink tumor (70-90% tumor shrinkage with cabergoline)"
+      - "Surgery (transsphenoidal) if: Medical therapy fails, drug intolerant, or visual field defects requiring urgent decompression"
+      - "Pregnancy: Can stop cabergoline once pregnant (usually safe, tumor rarely grows during pregnancy)"
+    tests:
+      - "Prolactin level (fasting, no breast stimulation, ideally morning) - repeat if elevated (stress/exercise can elevate)"
+      - "If prolactin >100 ng/mL, check macroprolactin (biotin interference or high-dose hook effect)"
+      - "Pituitary MRI with contrast: Microadenoma <1cm (80% of women), macroadenoma ≥1cm (60% of men)"
+      - "Visual fields if macroadenoma (assess for optic chiasm compression)"
+      - "Other pituitary hormones if macroadenoma: TSH, free T4, LH/FSH, testosterone/estradiol, IGF-1, 8 AM cortisol"
+    referrals:
+      - "Endocrinology for all prolactinomas - medical management and monitoring"
+      - "Neurosurgery if medical therapy fails or acute visual field defects"
+      - "Ophthalmology if visual symptoms or macroadenoma"
     icd10:
       - D35.2    # Benign neoplasm of pituitary gland
     snomed:
@@ -220,6 +658,26 @@ rules:
       - concentrated urine with low serum osmolality
       - confusion, lethargy
       - often due to medications, malignancy, CNS disorders
+    clinical_pearls:
+      - "Criteria: Hyponatremia + low serum osmolality (<275) + urine osmolality >100 + urine Na >40 + euvolemia"
+      - "Causes: Medications (SSRIs, carbamazepine, cyclophosphamide), malignancy (small cell lung CA), CNS (meningitis, stroke)"
+      - "Distinguish from other hyponatremias: Hypovolemic (dehydration), hypervolemic (CHF, cirrhosis), SIADH is euvolemic"
+      - "Chronic vs acute: If chronic (>48hrs), correct slowly (6-8 mEq/L/24hr) to avoid osmotic demyelination syndrome"
+      - "Osmotic demyelination (central pontine myelinolysis): Flaccid paralysis, dysphagia, locked-in syndrome - IRREVERSIBLE"
+    management:
+      - "Treat underlying cause: Stop offending medications, treat malignancy, CNS infection"
+      - "Mild (Na 125-135, asymptomatic): Fluid restriction <800-1000 mL/day (first-line)"
+      - "Moderate (Na 120-125): Fluid restriction + salt tablets + loop diuretic (furosemide increases free water excretion)"
+      - "Severe symptomatic (seizures, coma): 3% hypertonic saline 100 mL IV bolus, repeat until symptoms improve"
+      - "Vaptan (tolvaptan 15mg daily): V2 receptor antagonist for refractory SIADH - monitor Na closely (rapid correction risk)"
+    tests:
+      - "Basic metabolic panel: Sodium, calculate serum osmolality (2xNa + glucose/18 + BUN/2.8)"
+      - "Urine osmolality (inappropriately concentrated >100 mOsm/kg), urine sodium (>40 mEq/L)"
+      - "Assess volume status: Euvolemic (no edema, no orthostasis) - key distinguishing feature"
+      - "TSH, cortisol (rule out hypothyroidism and adrenal insufficiency - can mimic SIADH)"
+    referrals:
+      - "Hospital admission if symptomatic or Na <120 mEq/L (risk of seizures, altered mental status)"
+      - "Endocrinology if refractory to fluid restriction or considering vaptan therapy"
     icd10:
       - E22.2    # Syndrome of inappropriate secretion of antidiuretic hormone
     snomed:
@@ -233,6 +691,26 @@ rules:
       - dehydration
       - hypernatremia
       - low urine osmolality
+    clinical_pearls:
+      - "Central DI: ADH deficiency (pituitary/hypothalamus damage). Nephrogenic DI: Kidneys don't respond to ADH"
+      - "Polyuria = >3L urine/day (or >50 mL/kg/day). Nocturia 3-4x/night is common complaint"
+      - "Causes Central: Idiopathic (50%), pituitary surgery, head trauma, tumor, infiltrative (sarcoid, histiocytosis)"
+      - "Causes Nephrogenic: Lithium (most common), hypercalcemia, hypokalemia, chronic kidney disease, inherited"
+      - "Water deprivation test differentiates: Central (responds to desmopressin), nephrogenic (doesn't respond), primary polydipsia"
+    management:
+      - "Central DI: Desmopressin (DDAVP) 0.05-0.2 mg PO BID or 5-20 mcg intranasal BID (titrate to control polyuria)"
+      - "Monitor for overtreatment: Hyponatremia from excessive desmopressin - skip dose if mild hyponatremia"
+      - "Nephrogenic DI: Thiazide diuretic (HCTZ 25-50mg daily) + amiloride (5-10mg daily) - paradoxically reduces urine output"
+      - "Stop lithium if possible (nephrogenic DI), treat hypercalcemia/hypokalemia if present"
+      - "Primary polydipsia: Behavioral therapy, restrict water intake (compulsive water drinking)"
+    tests:
+      - "24-hour urine volume and osmolality (polyuria >3L/day, osmolality <300 mOsm/kg)"
+      - "Serum sodium and osmolality (hypernatremia if inadequate fluid intake, serum osm >295)"
+      - "Water deprivation test (hospitalized): Withhold fluids, measure urine osm q1-2h. Then give desmopressin, remeasure"
+      - "Pituitary MRI if central DI (look for mass, bright spot of posterior pituitary absent in central DI)"
+    referrals:
+      - "Endocrinology for all DI cases - water deprivation test and desmopressin dosing"
+      - "Neurosurgery if pituitary mass identified"
     icd10:
       - E23.2    # Diabetes insipidus
     snomed:
@@ -246,6 +724,28 @@ rules:
       - hyperglycemia
       - dyslipidemia
       - increased cardiovascular risk
+    clinical_pearls:
+      - "Diagnosis: 3 of 5 criteria: Waist >40 in (men) or >35 in (women), BP ≥130/85, fasting glucose ≥100, TG ≥150, HDL <40 (men) or <50 (women)"
+      - "Insulin resistance is the underlying pathophysiology - leads to hyperinsulinemia and metabolic dysfunction"
+      - "2x increased risk of cardiovascular disease, 5x increased risk of type 2 diabetes"
+      - "Weight loss of 5-7% significantly improves insulin sensitivity and all metabolic parameters"
+      - "Non-alcoholic fatty liver disease (NAFLD) present in 90% of metabolic syndrome patients"
+    management:
+      - "Lifestyle (cornerstone): Weight loss 5-10%, 150 min/week moderate exercise, Mediterranean diet"
+      - "Treat hypertension: ACE inhibitor or ARB (losartan 50-100mg daily) - protect kidneys, improve insulin sensitivity"
+      - "Treat dyslipidemia: Statin (atorvastatin 10-40mg nightly) if 10-yr ASCVD risk ≥7.5%"
+      - "Treat prediabetes/diabetes: Metformin 1000mg BID reduces progression to diabetes by 31%"
+      - "Consider GLP-1 agonist (semaglutide 0.25-1mg SQ weekly) for weight loss + glucose control"
+    tests:
+      - "Fasting glucose and A1c (screen for prediabetes/diabetes)"
+      - "Lipid panel: Total cholesterol, LDL, HDL, triglycerides"
+      - "Blood pressure measurement (home BP monitoring preferred)"
+      - "Waist circumference (measure at iliac crest)"
+      - "Consider: ALT/AST (NAFLD screening), urine microalbumin (kidney damage), calculate 10-yr ASCVD risk"
+    referrals:
+      - "Nutrition/dietitian for medical nutrition therapy and weight loss counseling"
+      - "Endocrinology if diabetes develops or difficult to control metabolic parameters"
+      - "Cardiology if known cardiovascular disease or high ASCVD risk"
     icd10:
       - E88.81   # Metabolic syndrome
     snomed:
