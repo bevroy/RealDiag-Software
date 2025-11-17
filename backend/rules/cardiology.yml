@@ -33,6 +33,31 @@ rules:
       - sudden severe tearing chest or back pain
       - pulse differential between arms
       - widened mediastinum on CXR
+      - "Sudden onset severe 'tearing' or 'ripping' chest/back pain (90%)"
+      - "Pain location: Anterior chest (Type A), interscapular back (Type B)"
+      - "Blood pressure differential >20 mmHg between arms"
+      - Pulse deficits, aortic regurgitation murmur (Type A)
+      - "Risk factors: Hypertension (most common), Marfan/Ehlers-Danlos, bicuspid valve, cocaine"
+    clinical_pearls:
+      - "Type A (ascending aorta): Surgical emergency, mortality 1-2%/hour if untreated"
+      - "Type B (descending aorta): Medical management unless complicated (malperfusion, rupture)"
+      - "CTA chest/abdomen/pelvis with IV contrast is diagnostic test of choice"
+      - "Don't give beta-blocker alone: Lower heart rate FIRST (target HR <60), then BP (SBP 100-120)"
+      - "TEE highly sensitive if CTA contraindicated, but delays definitive diagnosis"
+    management:
+      - "Immediate: IV access (two large-bore), arterial line, pain control (morphine), BP control"
+      - "BP control: Beta-blocker FIRST (esmolol 0.5mg/kg bolus, then 50-200 mcg/kg/min infusion, or labetalol 20mg IV q10min)"
+      - "After HR <60: Add vasodilator if needed (nicardipine 5mg/hr IV, titrate to SBP 100-120)"
+      - "Type A: Emergent cardiothoracic surgery consult, OR as soon as possible"
+      - "Type B uncomplicated: Medical management (BP/HR control), admit to ICU, serial imaging"
+    tests:
+      - "CTA chest/abdomen/pelvis: Intimal flap, true vs false lumen (gold standard)"
+      - "Chest X-ray: Widened mediastinum (>8cm), but normal CXR doesn't rule out dissection"
+      - "TEE: If CTA contraindicated, highly sensitive for Type A"
+      - "ECG: May show ischemia if dissection extends to coronaries"
+    referrals:
+      - "Cardiothoracic surgery EMERGENTLY for Type A"
+      - "Vascular surgery for Type B if complicated (malperfusion, rupture, refractory pain)"
     icd10:
       - I71.0     # Aortic dissection
     snomed:
@@ -69,6 +94,30 @@ rules:
       - sudden loss of consciousness with prodrome
       - triggered by emotional stress, pain, standing
       - rapid recovery without confusion
+      - "Prodrome: Nausea, warmth, diaphoresis, tunnel vision (lasts seconds to minutes)"
+      - "Triggers: Prolonged standing, pain, blood/needles, emotional stress, hot environment"
+      - "Rapid recovery: Consciousness returns within seconds, no post-ictal confusion"
+      - "Most common cause of syncope (21% of all syncope)"
+    clinical_pearls:
+      - "Diagnosis of exclusion: Benign if typical triggers, prodrome, quick recovery, normal exam"
+      - "No ECG abnormalities: Normal sinus rhythm, normal QT, no heart block"
+      - "Young healthy patients: Often vasovagal, but still need cardiac workup if concerning features"
+      - "Concerning features: Exertional syncope, no prodrome, family history SCD, abnormal ECG"
+      - "Recurrent vasovagal: Increase salt/fluid intake, counterpressure maneuvers"
+    management:
+      - "Reassurance if classic presentation: Benign condition, excellent prognosis"
+      - "Avoid triggers: Stay hydrated, avoid prolonged standing, recognize prodrome"
+      - "Counterpressure maneuvers: Leg crossing + muscle tensing, hand grip when prodromal"
+      - "Increase salt/fluid intake: 2-3L fluid daily, extra salt (if no contraindication)"
+      - "Midodrine if refractory: 5-10mg TID (alpha-agonist, increases BP)"
+    tests:
+      - "ECG: Rule out structural/electrical heart disease (long QT, WPW, heart block, Brugada)"
+      - "Orthostatic vitals: BP supine, then standing at 1 and 3 minutes (rule out orthostatic hypotension)"
+      - "No further testing if: Typical presentation, normal ECG, normal exam, no concerning features"
+      - "Consider: Echo, Holter, tilt-table test if recurrent or atypical"
+    referrals:
+      - "Cardiology if: Exertional syncope, abnormal ECG, family history SCD, structural heart disease"
+      - "No referral needed if typical vasovagal with normal ECG"
     icd10:
       - R55       # Syncope and collapse
     snomed:
@@ -80,6 +129,30 @@ rules:
       - lightheadedness or syncope upon standing
       - BP drop ≥20/10 mmHg within 3 minutes of standing
       - common in elderly or volume depleted
+      - "Symptoms within 3 minutes of standing: Lightheadedness, dizziness, visual changes, weakness"
+      - "May have syncope or near-syncope"
+      - "Diagnosis: SBP drop ≥20 mmHg or DBP drop ≥10 mmHg within 3 minutes"
+      - "Causes: Dehydration, medications (diuretics, alpha-blockers, antihypertensives), autonomic neuropathy (diabetes, Parkinson)"
+    clinical_pearls:
+      - "Classic orthostatic: Within 3 minutes of standing"
+      - "Delayed orthostatic: 3-10 minutes of standing (POTS if HR rises ≥30 bpm)"
+      - "Most common in elderly: Impaired baroreceptor response, polypharmacy"
+      - "Review medications: Diuretics, alpha-blockers, nitrates, antidepressants, antipsychotics"
+      - "Autonomic neuropathy: Diabetes, Parkinson's, pure autonomic failure"
+    management:
+      - "Review and reduce offending medications: Diuretics, antihypertensives, alpha-blockers"
+      - "Non-pharmacologic: Increase salt/fluid intake, compression stockings, rise slowly"
+      - "Physical countermaneuvers: Leg crossing, muscle tensing before standing"
+      - "Elevate head of bed 30 degrees at night: Reduces nocturnal diuresis"
+      - "Pharmacologic if refractory: Midodrine 2.5-10mg TID, fludrocortisone 0.1-0.2mg daily"
+    tests:
+      - "Orthostatic vitals: BP supine x5 min, then standing at 1 and 3 minutes"
+      - "Document BP and HR at each time point"
+      - "Labs: CBC (anemia), BMP (dehydration, adrenal insufficiency), glucose (autonomic neuropathy)"
+      - "Consider: Tilt-table test if diagnosis unclear or POTS suspected"
+    referrals:
+      - "Neurology if: Autonomic neuropathy suspected (Parkinson's, pure autonomic failure)"
+      - "Cardiology if: Cardiac syncope cannot be excluded"
     icd10:
       - I95.1     # Orthostatic hypotension
       - R55       # Syncope and collapse
@@ -119,6 +192,30 @@ rules:
       - elevated blood pressure ≥130/80 mmHg
       - often asymptomatic
       - risk factor for cardiovascular disease
+      - "Stage 1: SBP 130-139 or DBP 80-89 mmHg"
+      - "Stage 2: SBP ≥140 or DBP ≥90 mmHg"
+      - "Usually asymptomatic (silent killer)"
+      - "Complications: Stroke, MI, heart failure, CKD, retinopathy"
+    clinical_pearls:
+      - "Confirm diagnosis: Home BP monitoring or 24-hour ambulatory BP (more accurate than office)"
+      - "White coat hypertension: Elevated in office, normal at home (20-30% of diagnoses)"
+      - "Target BP: <130/80 for most adults, <140/90 if age >65"
+      - "First-line medications: ACEi/ARB, CCB, thiazide diuretic"
+      - "Lifestyle: Weight loss 5-10 kg reduces SBP 5-20 mmHg, DASH diet, exercise, limit alcohol"
+    management:
+      - "Lifestyle first if Stage 1 without ASCVD: Weight loss, DASH diet, exercise 150 min/week, limit alcohol"
+      - "Start medication if: Stage 2 OR Stage 1 with ASCVD/diabetes/CKD"
+      - "First-line: Thiazide (chlorthalidone 12.5-25mg), ACEi (lisinopril 10-40mg), ARB (losartan 50-100mg), or CCB (amlodipine 5-10mg)"
+      - "Black patients: CCB or thiazide first-line (ACEi less effective as monotherapy)"
+      - "Combination therapy: Often need 2+ medications (ACEi/ARB + CCB or diuretic)"
+    tests:
+      - "Confirm diagnosis: Repeat BP measurements on 2+ visits or home BP monitoring"
+      - "Baseline labs: BMP (K, Cr), fasting glucose, lipid panel, UA, ECG"
+      - "Screen for secondary causes if: Age <30, resistant HTN, hypokalemia, abdominal bruit"
+      - "Secondary causes: Renal artery stenosis, primary aldosteronism, pheochromocytoma, Cushing's"
+    referrals:
+      - "Nephrology if: Resistant HTN (not controlled on 3+ meds) or concern for secondary causes"
+      - "Cardiology if: Target organ damage (LVH, CAD)"
     icd10:
       - I10       # Essential (primary) hypertension
     snomed:
@@ -130,6 +227,32 @@ rules:
       - claudication (leg pain with walking)
       - diminished pulses, cool extremities
       - may progress to critical limb ischemia
+      - "Intermittent claudication: Reproducible leg pain with walking, relieved by rest (calf, thigh, buttock)"
+      - "Distance to claudication: Consistent (e.g., always after 2 blocks)"
+      - "Physical exam: Diminished/absent pulses, bruits, cool skin, hair loss, atrophic changes"
+      - "Critical limb ischemia: Rest pain, non-healing ulcers, gangrene"
+      - "Risk factors: Smoking (most important), diabetes, age >65, HTN, dyslipidemia"
+    clinical_pearls:
+      - "ABI (ankle-brachial index) <0.9 diagnostic (90% sensitive, 95% specific)"
+      - "Smoking cessation most important: Reduces amputation risk 50%"
+      - "Antiplatelet therapy: Aspirin or clopidogrel reduces MI/stroke/death 25%"
+      - "Statin regardless of LDL: High-intensity atorvastatin 40-80mg"
+      - "Supervised exercise therapy: 30-45 min treadmill 3x/week improves walking distance 50-200%"
+    management:
+      - "Smoking cessation: Most important intervention, reduces amputation 50%"
+      - "Antiplatelet: Aspirin 81mg or clopidogrel 75mg daily"
+      - "Statin: High-intensity (atorvastatin 40-80mg) regardless of LDL level"
+      - "ACE inhibitor: Ramipril reduces CV events even if normotensive"
+      - "Supervised exercise therapy: 30-45 min walking 3x/week (improves symptoms without revascularization)"
+      - "Cilostazol 100mg BID: Increases walking distance 40-60% (contraindicated in heart failure)"
+    tests:
+      - "ABI (ankle-brachial index): Ankle SBP / brachial SBP. <0.9 = PAD, <0.4 = severe"
+      - "Arterial duplex ultrasound: Non-invasive imaging, identifies stenosis location"
+      - "CT angiography or MR angiography: Pre-procedural planning if revascularization considered"
+      - "Catheter angiography: Gold standard, done if intervention planned"
+    referrals:
+      - "Vascular surgery if: Critical limb ischemia (rest pain, ulcers, gangrene), lifestyle-limiting claudication despite optimal medical therapy"
+      - "Wound care if: Non-healing ulcers"
     icd10:
       - I73.9     # Peripheral vascular disease, unspecified
     snomed:
@@ -166,22 +289,35 @@ rules:
     presentations:
       - unilateral leg swelling, pain, warmth, erythema
       - positive Doppler ultrasound
+      - "Unilateral leg swelling (most specific finding)"
+      - "Calf or thigh pain, tenderness along deep venous system"
+      - "Warmth, erythema over affected area"
+      - "Risk factors: Recent surgery, immobilization, malignancy, pregnancy, OCPs, thrombophilia"
+      - "Wells score: Clinical prediction rule (≥2 = high probability)"
+    clinical_pearls:
+      - "Proximal DVT (popliteal/femoral): High risk for PE, needs anticoagulation"
+      - "Distal DVT (calf veins): Lower PE risk, consider serial ultrasound vs anticoagulation"
+      - "D-dimer: High sensitivity, low specificity. Negative rules out DVT if low pretest probability"
+      - "Duplex ultrasound: 95% sensitive for proximal DVT, less sensitive for calf DVT"
+      - "Anticoagulation: Apixaban or rivaroxaban preferred (no LMWH bridge needed)"
+    management:
+      - "Anticoagulation: Apixaban 10mg BID x7 days, then 5mg BID OR rivaroxaban 15mg BID x21 days, then 20mg daily"
+      - "Alternative: LMWH (enoxaparin 1mg/kg SC BID) → warfarin (INR 2-3)"
+      - "Duration: 3 months minimum (provoked), 3-6 months (unprovoked), indefinite if recurrent"
+      - "IVC filter: Only if anticoagulation contraindicated (active bleeding)"
+      - "Compression stockings: May reduce post-thrombotic syndrome (controversial)"
+    tests:
+      - "Compression ultrasound with Doppler: First-line diagnostic test (95% sensitive for proximal DVT)"
+      - "Wells score: Pretest probability (≥2 = high probability)"
+      - "D-dimer: If low probability Wells score, negative D-dimer rules out DVT"
+      - "Consider: CT venography or MR venography if ultrasound equivocal"
+    referrals:
+      - "Hematology if: Recurrent DVT, thrombophilia workup, anticoagulation complications"
+      - "Vascular surgery if: Phlegmasia cerulea dolens (limb-threatening), IVC filter placement"
     icd10:
       - I82.40   # Acute embolism and thrombosis of unspecified deep veins of lower extremity
     snomed:
       - "128053003"  # Deep venous thrombosis
-
-  - id: CARD-ANGINA
-    label: Stable Angina Pectoris
-    presentations:
-      - predictable chest pain with exertion
-      - relieved by rest or nitroglycerin
-      - caused by coronary artery disease
-      - no ECG changes at rest
-    icd10:
-      - I20.9    # Angina pectoris, unspecified
-    snomed:
-      - "194828000"  # Angina pectoris
 
   - id: CARD-CARDIOMYOPATHY
     label: Cardiomyopathy
@@ -190,6 +326,31 @@ rules:
       - may be dilated, hypertrophic, or restrictive
       - reduced cardiac output
       - arrhythmias
+      - "Three main types: Dilated (most common, reduced EF), hypertrophic (LVH, outflow obstruction), restrictive (stiff ventricles)"
+      - "Dilated: Heart failure symptoms, EF <40%, global LV dilation"
+      - "Hypertrophic: Dyspnea, syncope, systolic murmur increases with Valsalva"
+      - "Restrictive: Heart failure, preserved EF, impaired filling, mimics constrictive pericarditis"
+    clinical_pearls:
+      - "Dilated cardiomyopathy: Ischemic (CAD) vs non-ischemic (alcohol, viral, idiopathic, peripartum)"
+      - "Hypertrophic cardiomyopathy: Genetic (sarcomere mutations), avoid dehydration/nitrates/ACEi"
+      - "Restrictive cardiomyopathy: Amyloidosis (most common), sarcoidosis, hemochromatosis, radiation"
+      - "Echo distinguishes types: Dilated (big thin heart), hypertrophic (thick septum), restrictive (small stiff heart)"
+      - "Cardiac MRI: Helps identify etiology (fibrosis pattern, infiltration)"
+    management:
+      - "Dilated: GDMT for HFrEF (sacubitril-valsartan, BB, MRA, SGLT2i), ICD if EF ≤35%"
+      - "Hypertrophic: Beta-blockers (metoprolol) or verapamil, avoid ACEi/ARBs/nitrates, ICD if high risk"
+      - "Restrictive: Treat underlying cause (amyloidosis, hemochromatosis), diuretics for volume"
+      - "All types: Anticoagulation if AFib, avoid NSAIDs, manage arrhythmias"
+    tests:
+      - "Echocardiogram: EF, chamber size, wall thickness, diastolic function"
+      - "Cardiac MRI: Fibrosis pattern (helps identify etiology)"
+      - "ECG: LVH (hypertrophic), low voltage (restrictive/amyloid), LBBB (dilated)"
+      - "BNP: Elevated in all types with heart failure"
+      - "Consider: Endomyocardial biopsy if restrictive (amyloidosis, sarcoidosis)"
+    referrals:
+      - "Cardiology for all new diagnoses"
+      - "Genetic counseling if hypertrophic or familial dilated cardiomyopathy"
+      - "Advanced HF team if refractory (LVAD, transplant)"
     icd10:
       - I42.9    # Cardiomyopathy, unspecified
       - I42.0    # Dilated cardiomyopathy
@@ -204,6 +365,33 @@ rules:
       - elevated troponin
       - ECG changes
       - heart failure symptoms
+      - "Chest pain (pleuritic or pressure-like), dyspnea, palpitations"
+      - "Recent viral illness (1-4 weeks prior): URI, GI symptoms"
+      - "Troponin elevated (myocardial injury), may mimic MI"
+      - "ECG: ST changes, T-wave inversions, arrhythmias (VT, heart block)"
+      - "Fulminant myocarditis: Cardiogenic shock, life-threatening arrhythmias"
+    clinical_pearls:
+      - "Viral causes: Coxsackie B, parvovirus B19, adenovirus, influenza, COVID-19"
+      - "Non-viral: Autoimmune (lupus, sarcoidosis), drugs (anthracyclines, immune checkpoint inhibitors), toxins (cocaine)"
+      - "Cardiac MRI: Lake Louise criteria (T2 hyperintensity, LGE, increased T1/T2 mapping)"
+      - "Supportive care: Most recover spontaneously, 20% progress to dilated cardiomyopathy"
+      - "Avoid NSAIDs in acute phase: May worsen inflammation"
+    management:
+      - "Supportive: Rest, avoid exercise until resolution (risk of arrhythmias, sudden death)"
+      - "Heart failure: Standard HF therapy (ACEi, BB, diuretics) once hemodynamically stable"
+      - "Arrhythmias: Continuous telemetry, treat VT, temporary pacemaker if high-degree block"
+      - "Immunosuppression: Only for giant cell or eosinophilic myocarditis (NOT viral)"
+      - "Fulminant: ICU, inotropes, mechanical support (IABP, ECMO), transplant if refractory"
+    tests:
+      - "Troponin: Elevated (myocardial injury)"
+      - "ECG: ST changes, T-wave inversions, PR depression, arrhythmias"
+      - "Echocardiogram: LV dysfunction, wall motion abnormalities, may be normal"
+      - "Cardiac MRI: Gold standard for diagnosis (Lake Louise criteria)"
+      - "Endomyocardial biopsy: Reserved for fulminant cases or if specific treatment changes management"
+    referrals:
+      - "Cardiology for all suspected myocarditis"
+      - "ICU if: Fulminant myocarditis, cardiogenic shock, life-threatening arrhythmias"
+      - "Advanced HF team if: Progressive LV dysfunction, need for mechanical support"
     icd10:
       - I40.9    # Acute myocarditis, unspecified
     snomed:
@@ -221,30 +409,6 @@ rules:
     snomed:
       - "3238004"    # Pericarditis
 
-  - id: CARD-TAMPONADE
-    label: Cardiac Tamponade
-    presentations:
-      - Beck's triad (hypotension, JVD, muffled heart sounds)
-      - tachycardia
-      - pulsus paradoxus
-      - medical emergency
-    icd10:
-      - I31.4    # Cardiac tamponade
-    snomed:
-      - "35304003"   # Cardiac tamponade
-
-  - id: CARD-VALVE-AS
-    label: Aortic Stenosis
-    presentations:
-      - chest pain, syncope, dyspnea (classic triad)
-      - systolic ejection murmur
-      - slow-rising pulse
-      - typically elderly with calcified valve
-    icd10:
-      - I35.0    # Nonrheumatic aortic (valve) stenosis
-    snomed:
-      - "60573004"   # Aortic valve stenosis
-
   - id: CARD-VALVE-AR
     label: Aortic Regurgitation
     presentations:
@@ -252,22 +416,36 @@ rules:
       - diastolic murmur
       - wide pulse pressure
       - bounding pulses (waterhammer pulse)
+      - "Chronic AR: Gradual dyspnea, palpitations, angina (even without CAD)"
+      - "Acute AR: Sudden pulmonary edema, cardiogenic shock (endocarditis, dissection)"
+      - "Diastolic decrescendo murmur: Best heard at left sternal border, leaning forward"
+      - "Wide pulse pressure: SBP elevated, DBP low (e.g., 160/40)"
+      - "Bounding pulses: Waterhammer pulse, Corrigan pulse, de Musset sign (head bobbing)"
+    clinical_pearls:
+      - "Chronic AR: LV adapts (eccentric hypertrophy), asymptomatic for years"
+      - "Acute AR: No time for LV adaptation, rapid pulmonary edema/cardiogenic shock"
+      - "Surgery indicated: Symptomatic, EF <50%, LVESD >50mm, or LV dilation"
+      - "Afterload reduction: ACEi/ARB/hydralazine helps chronic AR (reduces regurgitant volume)"
+      - "Avoid beta-blockers: Bradycardia prolongs diastole, increases regurgitant volume"
+    management:
+      - "Chronic AR: Afterload reduction (ACEi or ARB), avoid beta-blockers"
+      - "Surgery: If symptomatic, EF <50%, LVESD >50mm, or progressive LV dilation"
+      - "Acute severe AR: Emergent surgery (endocarditis, dissection), inotropes, nitroprusside, avoid IABP"
+      - "Endocarditis: 6 weeks antibiotics + early surgery if valve destruction"
+      - "Serial echo: Every 6-12 months for moderate-severe AR"
+    tests:
+      - "Echocardiogram: Assess severity (vena contracta, regurgitant volume), LV size/function"
+      - "Chest X-ray: Cardiomegaly, prominent ascending aorta"
+      - "ECG: LVH with strain pattern (chronic AR)"
+      - "Cardiac catheterization: If echo equivocal or assess CAD pre-surgery"
+    referrals:
+      - "Cardiology for all moderate-severe AR"
+      - "Cardiac surgery if: Symptomatic, EF <50%, or LVESD >50mm"
+      - "Emergent surgery if acute severe AR"
     icd10:
       - I35.1    # Nonrheumatic aortic (valve) insufficiency
     snomed:
       - "60234000"   # Aortic valve regurgitation
-
-  - id: CARD-VALVE-MR
-    label: Mitral Regurgitation
-    presentations:
-      - dyspnea, fatigue
-      - holosystolic murmur radiating to axilla
-      - pulmonary edema
-      - atrial fibrillation common
-    icd10:
-      - I34.0    # Nonrheumatic mitral (valve) insufficiency
-    snomed:
-      - "48724000"   # Mitral valve regurgitation
 
   - id: CARD-VALVE-MS
     label: Mitral Stenosis
@@ -276,23 +454,37 @@ rules:
       - opening snap, diastolic rumble
       - atrial fibrillation common
       - often rheumatic heart disease history
+      - "Dyspnea on exertion (most common), orthopnea, PND"
+      - "Hemoptysis: From pulmonary venous hypertension"
+      - "Opening snap: After S2, then low-pitched diastolic rumble (best at apex, left lateral position)"
+      - "Atrial fibrillation: 40-50% (LA enlargement from increased pressure)"
+      - "Rheumatic heart disease: 99% of MS in developing countries, rare in US"
+    clinical_pearls:
+      - "Opening snap to S2 interval: Shorter interval = more severe stenosis"
+      - "Severe MS: Valve area <1.0 cm² (normal 4-6 cm²), mean gradient >10 mmHg"
+      - "Pregnancy: High risk - increased cardiac output worsens symptoms"
+      - "Mitral valve area inversely related to gradient: Smaller valve = higher gradient"
+      - "Percutaneous mitral balloon commissurotomy (PMBC): First-line if suitable anatomy"
+    management:
+      - "Medical: Rate control for AFib (beta-blockers, CCB), anticoagulation (warfarin for AFib or prior embolism)"
+      - "Diuretics: For pulmonary congestion symptoms"
+      - "Percutaneous mitral balloon commissurotomy (PMBC): If symptomatic, valve area <1.5 cm², favorable anatomy"
+      - "Surgical mitral valve replacement: If PMBC not suitable (severe MR, heavy calcification, LA thrombus)"
+      - "Endocarditis prophylaxis: NOT routinely recommended"
+    tests:
+      - "Echocardiogram: Assess severity (valve area, mean gradient), valve morphology, LA size"
+      - "ECG: LA enlargement (broad P wave V1), AFib common"
+      - "Chest X-ray: LA enlargement (straightening of left heart border), pulmonary edema"
+      - "TEE: Pre-procedure (rule out LA thrombus before PMBC)"
+    referrals:
+      - "Cardiology for all moderate-severe MS"
+      - "Interventional cardiology: PMBC if symptomatic and suitable anatomy"
+      - "Cardiac surgery: If PMBC contraindicated or failed"
     icd10:
       - I34.2    # Nonrheumatic mitral (valve) stenosis
       - I05.0    # Rheumatic mitral stenosis
     snomed:
       - "79619009"   # Mitral valve stenosis
-
-  - id: CARD-SVT
-    label: Supraventricular Tachycardia
-    presentations:
-      - sudden onset palpitations
-      - rapid regular heart rate (>150 bpm)
-      - may have lightheadedness, chest discomfort
-      - terminates abruptly
-    icd10:
-      - I47.1    # Supraventricular tachycardia
-    snomed:
-      - "6285003"    # Supraventricular tachycardia
 
   - id: CARD-VFIB
     label: Ventricular Fibrillation
@@ -301,22 +493,36 @@ rules:
       - no pulse, no consciousness
       - requires immediate defibrillation
       - medical emergency
+      - "Pulseless, unresponsive, no breathing (cardiac arrest)"
+      - "ECG: Chaotic, irregular waveform with no identifiable QRS complexes"
+      - "Shockable rhythm on defibrillator"
+      - "Causes: MI, cardiomyopathy, long QT, Brugada, hypokalemia, hypothermia"
+    clinical_pearls:
+      - "Immediate defibrillation: Only definitive treatment, delays reduce survival 10% per minute"
+      - "CPR + defibrillation: 2 minutes CPR, then shock, repeat"
+      - "ACLS protocol: Epinephrine 1mg IV q3-5min, amiodarone 300mg IV if refractory"
+      - "Post-cardiac arrest: Targeted temperature management (33-36°C x24hr), cardiac cath if STEMI"
+      - "ICD placement: Secondary prevention (survived VF arrest)"
+    management:
+      - "Immediate defibrillation: 200J biphasic (or 360J monophasic), don't delay"
+      - "CPR: 2 minutes, then reassess rhythm and shock again if still VF"
+      - "Epinephrine 1mg IV q3-5min during CPR"
+      - "Amiodarone 300mg IV bolus if VF persists after 3 shocks, then 150mg if needed"
+      - "Post-ROSC: Targeted temperature management, cardiac cath if STEMI, neurology consult"
+    tests:
+      - "ECG: Chaotic irregular waveform (VF)"
+      - "Post-ROSC: ECG (look for STEMI), troponin, labs (K, Mg, lactate)"
+      - "Coronary angiography: If STEMI or suspected ACS as cause"
+      - "Echocardiogram: Assess LV function"
+      - "Neurologic evaluation: Assess for anoxic brain injury"
+    referrals:
+      - "Cardiology STAT for post-cardiac arrest care"
+      - "EP for ICD placement (secondary prevention)"
+      - "ICU for targeted temperature management, hemodynamic support"
     icd10:
       - I49.01   # Ventricular fibrillation
     snomed:
       - "71908006"   # Ventricular fibrillation
-
-  - id: CARD-VT
-    label: Ventricular Tachycardia
-    presentations:
-      - wide complex tachycardia
-      - palpitations, chest pain, dyspnea
-      - syncope or presyncope
-      - may progress to ventricular fibrillation
-    icd10:
-      - I47.2    # Ventricular tachycardia
-    snomed:
-      - "25569003"   # Ventricular tachycardia
 
   - id: CARD-BRADYCARDIA
     label: Bradycardia
@@ -324,6 +530,31 @@ rules:
       - heart rate < 60 bpm
       - may be asymptomatic or cause fatigue, dizziness
       - may require pacemaker
+      - "HR <60 bpm (sinus bradycardia, junctional rhythm, heart block)"
+      - "Symptomatic: Fatigue, dizziness, syncope, dyspnea, chest pain, altered mental status"
+      - "Asymptomatic: Common in athletes, sleep, vagal tone"
+      - "Causes: Medications (BB, CCB, digoxin, amiodarone), MI, sick sinus syndrome, heart block"
+    clinical_pearls:
+      - "Physiologic bradycardia: Athletes, sleep, increased vagal tone - no treatment needed"
+      - "Symptomatic bradycardia: Dizziness, syncope, hypotension, confusion - needs treatment"
+      - "Acute MI: Inferior MI often causes bradycardia (RCA supplies AV node)"
+      - "Medications: Beta-blockers, calcium channel blockers, digoxin, amiodarone"
+      - "Pacemaker indications: Symptomatic bradycardia, complete heart block, sinus node dysfunction with symptoms"
+    management:
+      - "Asymptomatic: No treatment if HR >40 and asymptomatic (physiologic)"
+      - "Symptomatic: Atropine 0.5-1mg IV (may repeat q3-5min, max 3mg)"
+      - "If atropine fails: Transcutaneous pacing, dopamine 5-20 mcg/kg/min, or epinephrine 2-10 mcg/min"
+      - "Stop offending medications: Beta-blockers, CCB, digoxin"
+      - "Permanent pacemaker: If symptomatic despite treatment or high-degree block"
+    tests:
+      - "ECG: Identify type (sinus bradycardia, junctional, heart block)"
+      - "Holter monitor: If intermittent symptoms, correlate symptoms with HR"
+      - "Electrolytes: K, Mg, Ca"
+      - "Digoxin level: If on digoxin (toxicity causes bradycardia)"
+      - "Troponin: Rule out MI as cause"
+    referrals:
+      - "Cardiology if: Symptomatic bradycardia, high-degree heart block, need for pacemaker"
+      - "EP for permanent pacemaker placement"
     icd10:
       - R00.1    # Bradycardia, unspecified
     snomed:
@@ -336,6 +567,32 @@ rules:
       - fatigue, dyspnea
       - first, second, or third degree block on ECG
       - may require pacemaker
+      - "First-degree: PR >200ms, all P waves conducted (benign, no treatment)"
+      - "Second-degree Mobitz I (Wenckebach): Progressive PR lengthening then dropped QRS (usually benign)"
+      - "Second-degree Mobitz II: Constant PR, sudden dropped QRS (high risk for complete block)"
+      - "Third-degree (complete): No relationship between P and QRS, escape rhythm"
+      - "Symptoms: Syncope, presyncope, fatigue, dyspnea (if bradycardic)"
+    clinical_pearls:
+      - "First-degree: Benign, no treatment needed (monitor if on AV nodal blockers)"
+      - "Mobitz I (Wenckebach): Usually benign, AV nodal level, narrow QRS"
+      - "Mobitz II: Infranodal (His-Purkinje), wide QRS, high risk for complete block - needs pacemaker"
+      - "Complete heart block: Medical emergency if symptomatic, pacemaker urgently"
+      - "Inferior MI: AV block common (RCA supplies AV node), often temporary"
+    management:
+      - "First-degree: No treatment, monitor if progressive"
+      - "Mobitz I: Observation if asymptomatic, pacemaker if symptomatic"
+      - "Mobitz II: Permanent pacemaker (high risk for progression to complete block)"
+      - "Complete heart block: Transcutaneous pacing, atropine (if narrow QRS escape), permanent pacemaker"
+      - "Stop AV nodal blockers: Beta-blockers, CCB, digoxin, amiodarone"
+    tests:
+      - "ECG: Identify degree and type of block"
+      - "Telemetry: Monitor for progression"
+      - "Holter monitor: If intermittent symptoms"
+      - "Electrolytes: K, Mg, Ca"
+      - "Troponin: Rule out MI as cause"
+    referrals:
+      - "Cardiology/EP for: Mobitz II, complete heart block, symptomatic bradycardia"
+      - "Permanent pacemaker: Mobitz II, symptomatic complete block, symptomatic Mobitz I"
     icd10:
       - I44.30   # Unspecified atrioventricular block
       - I44.2    # Atrioventricular block, complete
