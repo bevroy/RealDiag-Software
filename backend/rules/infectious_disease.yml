@@ -228,12 +228,12 @@ rules:
   - id: ID-SEPSIS
     label: Sepsis and Septic Shock
     presentations:
-      - SIRS criteria: Temp >38°C or <36°C, HR >90, RR >20, WBC >12K or <4K
-      - Sepsis: Infection + organ dysfunction (qSOFA ≥2: RR ≥22, AMS, SBP ≤100)
-      - Septic shock: Sepsis + hypotension requiring vasopressors + lactate >2 mmol/L
-      - Source: Pneumonia, UTI, intra-abdominal, skin/soft tissue most common
-      - Signs: Fever/hypothermia, tachycardia, tachypnea, hypotension, altered mental status
-      - Elevated lactate (>2), elevated WBC or bandemia
+      - "SIRS criteria: Temp >38°C or <36°C, HR >90, RR >20, WBC >12K or <4K"
+      - "Sepsis: Infection + organ dysfunction (qSOFA ≥2 - RR ≥22, AMS, SBP ≤100)"
+      - "Septic shock: Sepsis + hypotension requiring vasopressors + lactate >2 mmol/L"
+      - "Source: Pneumonia, UTI, intra-abdominal, skin/soft tissue most common"
+      - "Signs: Fever/hypothermia, tachycardia, tachypnea, hypotension, altered mental status"
+      - Elevated lactate (more than 2), elevated WBC or bandemia
     clinical_pearls:
       - "Sepsis-3 definition: Infection + SOFA score increase ≥2"
       - "Septic shock: Sepsis + vasopressors + lactate >2 despite fluids (mortality 40%)"
@@ -460,8 +460,8 @@ rules:
       - Nausea, vomiting, malaise
       - Dysuria, frequency, urgency (cystitis symptoms may be present)
       - Positive CVA tenderness (punch percussion over kidneys)
-      - Urinalysis: Pyuria, WBC casts, bacteriuria, +/- hematuria
-      - Urine culture: >100,000 CFU/mL (typically E. coli 80%)
+      - "Urinalysis: Pyuria, WBC casts, bacteriuria, +/- hematuria"
+      - "Urine culture: Greater than 100,000 CFU/mL (typically E. coli 80%)"
     clinical_pearls:
       - "Uncomplicated: Outpatient PO fluoroquinolone or ceftriaxone x 1, then PO"
       - "Complicated: Admission for IV antibiotics (obstruction, pregnancy, immunocompromised)"
@@ -533,9 +533,9 @@ rules:
       - Severe pain out of proportion to exam findings (early)
       - Rapidly progressive erythema, swelling, induration
       - Bullae, skin necrosis, crepitus (subcutaneous gas)
-      - Systemic toxicity: Fever, hypotension, tachycardia, altered mental status
-      - "Hard board-like" feel to subcutaneous tissue
-      - LRINEC score >6 suggests necrotizing infection (but don't delay surgery)
+      - "Systemic toxicity: Fever, hypotension, tachycardia, altered mental status"
+      - Hard board-like feel to subcutaneous tissue
+      - LRINEC score greater than 6 suggests necrotizing infection (but do not delay surgery)
     clinical_pearls:
       - "SURGICAL EMERGENCY - mortality 25-35% even with treatment"
       - "Early surgical debridement is life-saving (within 6 hours)"
