@@ -13,6 +13,28 @@ rules:
       - Incomplete bladder emptying
       - Enlarged prostate on digital rectal exam
       - Common in men > 50 years
+    clinical_pearls:
+      - "50% of men by age 60, 90% by age 85 - benign proliferation of stromal and epithelial cells in transition zone"
+      - "LUTS: Obstructive (weak stream, hesitancy, incomplete emptying) vs irritative (urgency, frequency, nocturia)"
+      - "IPSS (International Prostate Symptom Score): 0-7 mild, 8-19 moderate, 20-35 severe - guides treatment"
+      - "Complications: Acute urinary retention (1-2% per year), hydronephrosis, recurrent UTIs, bladder stones"
+      - "PSA: May be elevated in BPH (not specific for cancer), 1.5 ng/mL increase per 10g prostate tissue"
+    management:
+      - "Mild symptoms (IPSS <8): Watchful waiting, avoid caffeine/alcohol, timed voiding"
+      - "Alpha-blockers (first-line): Tamsulosin 0.4mg daily or alfuzosin 10mg daily - relaxes smooth muscle, improves flow within days"
+      - "5-alpha reductase inhibitors: Finasteride 5mg daily or dutasteride 0.5mg daily - shrinks prostate 20-30%, takes 6-12 months. For prostate >40g"
+      - "Combination therapy: Alpha-blocker + 5-ARI if prostate >40g (better than monotherapy)"
+      - "TURP (transurethral resection of prostate): If failed medical therapy, recurrent retention, hydronephrosis, bladder stones"
+    tests:
+      - "DRE: Estimate prostate size (normal 20g, BPH often 30-100g), assess nodules (concern for cancer)"
+      - "IPSS questionnaire: Severity assessment (7 questions, 0-5 scale each)"
+      - "Post-void residual (PVR): Bladder scan after voiding. <50 mL normal, >200 mL significant retention"
+      - "Uroflowmetry: Peak flow <10 mL/sec suggests obstruction (normal >15 mL/sec)"
+      - "PSA: If life expectancy >10 years (screen for prostate cancer). Elevated PSA needs further workup (free PSA, MRI, biopsy)"
+      - "UA: Rule out UTI, hematuria"
+    referrals:
+      - "Urology if: Failed medical therapy, recurrent urinary retention, hydronephrosis, recurrent UTIs, hematuria, elevated PSA concerning for cancer"
+      - "Most BPH managed by primary care with alpha-blockers +/- 5-ARI"
     icd10:
       - N40.0
     snomed:
@@ -28,6 +50,27 @@ rules:
       - Tender, boggy prostate on DRE
       - Pyuria, bacteriuria
       - Elevated PSA (may be normal after treatment)
+    clinical_pearls:
+      - "Bacterial infection of prostate - E. coli (80%), Klebsiella, Proteus, Enterococcus. Risk factors: recent UTI, catheterization, transrectal prostate biopsy"
+      - "DO NOT vigorously massage prostate on DRE (can cause bacteremia, sepsis) - gentle palpation only"
+      - "PSA: Transiently elevated during acute prostatitis (inflammation causes PSA release), recheck 6 weeks after treatment"
+      - "Abscess formation: 5-10% develop prostatic abscess if inadequately treated - needs drainage"
+      - "Chronic prostatitis: 5-10% develop chronic bacterial prostatitis after acute episode (recurrent UTIs with same organism)"
+    management:
+      - "Fluoroquinolone x4 weeks: Ciprofloxacin 500mg BID or levofloxacin 500mg daily (best prostate penetration)"
+      - "Alternative: TMP-SMX DS BID x4 weeks (if fluoroquinolone resistance or contraindication)"
+      - "Hospitalization if septic/toxic: Ceftriaxone 1g IV daily + gentamicin 5mg/kg IV daily, then oral fluoroquinolone x4 weeks total"
+      - "Urinary retention: Suprapubic catheter preferred over urethral (avoid instrumenting infected prostate)"
+      - "NSAIDs for pain: Ibuprofen 600mg TID, avoid alpha-blockers acutely (may worsen hypotension if septic)"
+    tests:
+      - "UA with culture BEFORE antibiotics: Pyuria (WBC >10), bacteriuria, positive culture (>100,000 CFU/mL)"
+      - "Blood cultures if febrile: Positive in 50% (bacteremia common)"
+      - "DRE: Exquisitely tender, boggy, swollen prostate - DO NOT massage vigorously"
+      - "TRUS (transrectal ultrasound) if not improving: Rule out prostatic abscess (hypoechoic fluid collection)"
+      - "PSA: Elevated acutely, recheck 6 weeks after treatment to ensure normalization"
+    referrals:
+      - "Urology if: Not improving after 48-72h antibiotics, urinary retention, concern for abscess"
+      - "Admit if: Septic, toxic appearance, unable to tolerate PO, urinary retention"
     icd10:
       - N41.0
     snomed:
@@ -42,6 +85,27 @@ rules:
       - No fever
       - Normal or tender prostate on DRE
       - Urine cultures often negative
+    clinical_pearls:
+      - "Most common prostatitis syndrome (90% of cases) - chronic pelvic pain >3 months, often no bacteria identified"
+      - "Two types: IIIA inflammatory (WBC in expressed prostatic secretions) vs IIIB non-inflammatory (no WBC) - treatment similar"
+      - "Etiology unclear: Not infectious in most cases, theories include pelvic floor dysfunction, neuromuscular pain, autoimmune"
+      - "NIH-CPSI (Chronic Prostatitis Symptom Index): Scores pain, urinary symptoms, quality of life - useful for monitoring treatment"
+      - "Frustrating condition: No cure, multiple failed treatments common, significant impact on quality of life"
+    management:
+      - "Trial of antibiotics (even if culture-negative): Fluoroquinolone (ciprofloxacin 500mg BID) x4-6 weeks - helps 40%"
+      - "Alpha-blocker: Tamsulosin 0.4mg daily - relaxes bladder neck/prostate, improves urinary symptoms and pain in 50%"
+      - "NSAIDs: Ibuprofen 600mg TID or naproxen 500mg BID for pain"
+      - "Pelvic floor physical therapy: Myofascial release, trigger point therapy - effective in 50-60%"
+      - "Avoid: Cycling, prolonged sitting, spicy foods, caffeine, alcohol (may worsen symptoms)"
+    tests:
+      - "Clinical diagnosis: Pelvic pain >3 months + LUTS, no fever, no clear bacterial infection"
+      - "UA with culture: Usually negative (if positive, treat but may still have CPPS)"
+      - "Post-prostate massage urine (Meares-Stamey 4-glass test): >10 WBC in expressed prostatic secretions = IIIA inflammatory. Rarely done in practice"
+      - "DRE: Normal or mildly tender prostate"
+      - "PSA: Usually normal (may be mildly elevated)"
+    referrals:
+      - "Urology if: Refractory to treatment, diagnostic uncertainty, patient requests specialty care"
+      - "Pelvic floor physical therapy for all patients"
     icd10:
       - N41.1
     snomed:
@@ -56,6 +120,27 @@ rules:
       - Causes - BPH, medications, neurologic, urethral stricture
       - Medical emergency requiring catheterization
       - Post-void residual > 300 mL
+    clinical_pearls:
+      - "Complete inability to void with painful distended bladder - URGENT, requires immediate catheterization"
+      - "Causes: BPH (most common, 50%), anticholinergics/opioids/sympathomimetics, neurologic (spinal cord injury, diabetic neuropathy), infection, urethral stricture"
+      - "Post-obstructive diuresis: After catheterization, can have massive diuresis (>200 mL/hr) from retained urea/solutes - monitor fluids, electrolytes"
+      - "Bladder decompression: If >1L retained, drain slowly or in stages (clamp catheter after 500 mL, unclamp 15 min later) - rapid decompression may cause hematuria, hypotension"
+      - "Trial without catheter: 50-70% success rate after alpha-blocker initiation, remove catheter after 1-3 days"
+    management:
+      - "Immediate catheterization: Urethral catheter (16-18 Fr) with sterile technique. If unable, suprapubic catheter by urology"
+      - "Start alpha-blocker: Tamsulosin 0.4mg daily immediately after catheterization (improves voiding trial success)"
+      - "Trial without catheter: After 1-3 days on alpha-blocker, remove catheter in AM, monitor voiding. Success if PVR <200 mL"
+      - "If failed voiding trial: Replace catheter, continue alpha-blocker, add 5-ARI if BPH, refer urology for definitive management (TURP)"
+      - "Stop causative medications: Anticholinergics, opioids, decongestants"
+    tests:
+      - "Bladder scan: Volume >300 mL confirms retention (normal <50 mL)"
+      - "Palpation/percussion: Distended bladder palpable above pubic symphysis, dull to percussion"
+      - "Post-catheterization volume: Document volume drained (if >1L, monitor for post-obstructive diuresis)"
+      - "UA with culture after catheterization: Rule out UTI (catheterization introduces bacteria)"
+      - "Creatinine: If chronic retention, check for obstructive uropathy/hydronephrosis"
+    referrals:
+      - "Urology within 24-48 hours for failed voiding trial or catheter placement difficulties"
+      - "If chronic retention (>1L residual), renal ultrasound to assess hydronephrosis"
     icd10:
       - R33.9
     snomed:
@@ -71,6 +156,27 @@ rules:
       - Restlessness, inability to find comfortable position
       - CVA tenderness
       - CT scan shows stone
+    clinical_pearls:
+      - "10-15% lifetime risk - calcium oxalate (80%), calcium phosphate (10%), uric acid (9%), struvite (10% - infection stones), cystine (1%)"
+      - "Stone size predicts passage: <5mm (90% pass spontaneously), 5-10mm (50% pass), >10mm (unlikely to pass - needs intervention)"
+      - "Renal colic: Colicky flank pain radiating to groin (follows ureter course), patient writhing in pain (vs peritonitis where patient still)"
+      - "Infection stone (struvite): Urease-producing bacteria (Proteus, Klebsiella), staghorn calculus, needs antibiotics + stone removal"
+      - "Recurrence: 50% within 5-10 years if no prevention - diet modification and medication reduce recurrence 50%"
+    management:
+      - "Pain control: NSAIDs (ketorolac 30mg IV or ibuprofen 800mg PO) superior to opioids. Opioids PRN (morphine 4-8mg IV q2-4h)"
+      - "Antiemetics: Ondansetron 4mg IV/PO"
+      - "Medical expulsive therapy: Tamsulosin 0.4mg daily - relaxes ureter, increases passage rate 30% for 5-10mm stones"
+      - "Hydration: 2-3 L fluid daily - increases urine volume, flushes stones. No benefit to aggressive IV hydration"
+      - "Urologic intervention: Shock wave lithotripsy (ESWL), ureteroscopy, or percutaneous nephrolithotomy if >10mm, infection, obstruction, failed conservative"
+    tests:
+      - "CT abdomen/pelvis without contrast (GOLD STANDARD): 95% sensitive, shows stone size/location, hydronephrosis"
+      - "Ultrasound: If pregnant or avoiding radiation - detects hydronephrosis but misses small stones"
+      - "UA: Hematuria (90% - if absent, reconsider diagnosis), pH (low <5.5 = uric acid, high >7 = struvite), crystals"
+      - "Strain urine: Catch stone for analysis (guides prevention)"
+      - "Metabolic workup if recurrent: 24-hour urine (calcium, oxalate, citrate, uric acid, volume), serum calcium, PTH"
+    referrals:
+      - "Urology URGENTLY if: Infected obstructed kidney (fever + hydronephrosis = sepsis risk), solitary kidney, bilateral obstruction, renal insufficiency, intractable pain"
+      - "Urology routine if: Stone >10mm, failed passage after 4-6 weeks, patient preference for intervention"
     icd10:
       - N20.0
     snomed:
@@ -86,6 +192,27 @@ rules:
       - Pyuria, bacteriuria, WBC casts
       - More severe than simple UTI
       - May require hospitalization
+    clinical_pearls:
+      - "Bacterial infection of kidney parenchyma - E. coli (80%), Klebsiella, Proteus, Enterococcus"
+      - "Ascending infection: Most cases from bladder UTI ascending to kidney via ureter"
+      - "Complicated vs uncomplicated: Complicated (male, pregnant, diabetes, immunosuppressed, obstruction, catheter) needs longer treatment"
+      - "WBC casts: Pathognomonic for pyelonephritis - neutrophils in tubular casts on urine microscopy"
+      - "Emphysematous pyelonephritis: Gas-forming infection (usually diabetics) - CT shows gas in kidney, high mortality, needs nephrectomy"
+    management:
+      - "Outpatient (mild, uncomplicated): Fluoroquinolone (ciprofloxacin 500mg BID or levofloxacin 750mg daily) x7-14 days"
+      - "Inpatient (severe, complicated): Ceftriaxone 1g IV daily OR amp/gent (ampicillin 2g IV q6h + gentamicin 5mg/kg IV daily) until afebrile x48h, then oral x14 days total"
+      - "Pregnant: Ceftriaxone 1g IV daily until afebrile x48h (avoid fluoroquinolones, high risk of preterm labor/sepsis)"
+      - "Renal ultrasound if not improving in 48-72h: Rule out obstruction, abscess, emphysematous pyelonephritis"
+      - "Follow-up urine culture 1-2 weeks after treatment: Ensure bacterial clearance"
+    tests:
+      - "UA with culture BEFORE antibiotics: Pyuria, bacteriuria, WBC casts (pathognomonic), positive nitrites"
+      - "Urine culture: >100,000 CFU/mL (lower threshold if symptoms severe)"
+      - "Blood cultures: Positive in 20-30% (bacteremia common)"
+      - "CBC: Leukocytosis with left shift"
+      - "Renal ultrasound: If not improving, diabetic, or suspicion for obstruction - rule out abscess, obstruction"
+    referrals:
+      - "Urology if: Obstruction present, renal abscess, emphysematous pyelonephritis, recurrent pyelonephritis (>2 episodes)"
+      - "Admit if: Unable to tolerate PO, severe sepsis, pregnant, immunocompromised, concern for complicated infection"
     icd10:
       - N10
     snomed:
@@ -101,6 +228,26 @@ rules:
       - Scrotal swelling and erythema
       - Surgical emergency (6-hour window for salvage)
       - Negative Prehn sign (elevation does not relieve pain)
+    clinical_pearls:
+      - "SURGICAL EMERGENCY - spermatic cord twists, cutting off blood supply to testicle, 6-hour window for salvage"
+      - "Bimodal age: Neonates and adolescents (12-18 years) - bell clapper deformity (horizontal lie, inadequate fixation)"
+      - "Absent cremasteric reflex: 99% sensitive for torsion - stroke inner thigh, normal = testicle retracts, absent = torsion"
+      - "High-riding testicle: Twisted cord shortens, testicle sits higher than contralateral side"
+      - "Salvage rate by time: <6 hours (90-100%), 6-12 hours (50%), 12-24 hours (10%), >24 hours (<5%)"
+    management:
+      - "DO NOT delay surgery for imaging if high clinical suspicion - time is testicle, operate immediately"
+      - "Emergent scrotal exploration: Detorse testicle, assess viability, bilateral orchiopexy (fix both testes to prevent recurrence)"
+      - "Manual detorsion: If surgery delayed - rotate testicle outward (open book direction) 1-2 full turns, relief of pain suggests success. STILL NEEDS SURGERY"
+      - "Orchiectomy: If testicle non-viable (black, necrotic), remove to prevent autoimmune orchitis affecting contralateral testicle"
+      - "Bilateral orchiopexy: Always fix contralateral testicle (15% risk of torsion in other side if not fixed)"
+    tests:
+      - "Clinical diagnosis - DO NOT delay surgery for tests"
+      - "Cremasteric reflex: Absent in 99% of torsion (stroke inner thigh - testicle should retract up)"
+      - "Doppler ultrasound ONLY if diagnosis uncertain: Decreased or absent testicular blood flow. Takes 30-60 minutes - don't delay surgery"
+      - "Horizontal lie: Testicle lying transversely instead of vertically on ultrasound"
+    referrals:
+      - "Urology EMERGENTLY - call immediately, patient goes directly to OR"
+      - "If urology unavailable, transfer to facility with urology after calling ahead - surgical emergency"
     icd10:
       - N44.00
     snomed:
@@ -116,6 +263,27 @@ rules:
       - Positive Prehn sign (pain relieved by elevation)
       - Cremasteric reflex present
       - STI or UTI pathogen
+    clinical_pearls:
+      - "Inflammation of epididymis - age <35 years (STI - Chlamydia, gonorrhea), age >35 years (coliforms - E. coli, Enterococcus)"
+      - "Gradual onset (vs testicular torsion which is sudden) - pain develops over hours to days"
+      - "Prehn sign: Pain relief with scrotal elevation (vs torsion where elevation doesn't help or worsens pain) - 70% sensitive"
+      - "Cremasteric reflex present: Distinguishes from torsion (absent in 99% of torsion)"
+      - "Doppler ultrasound: Increased blood flow (hyperemia) vs torsion (decreased flow)"
+    management:
+      - "Age <35 or sexually active: Ceftriaxone 250mg IM x1 + doxycycline 100mg BID x10 days (covers gonorrhea + Chlamydia)"
+      - "Age >35 or no STI risk: Levofloxacin 500mg daily x10 days (covers E. coli and coliforms)"
+      - "Supportive care: Scrotal support (wear briefs, not boxers), ice packs, NSAIDs (ibuprofen 600mg TID)"
+      - "Treat sexual partners: If STI etiology, partner needs treatment (expedited partner therapy)"
+      - "Follow-up: Pain should improve in 2-3 days, resolve in 1-2 weeks. If not improving, ultrasound to rule out abscess"
+    tests:
+      - "UA with culture: Pyuria, bacteriuria (if coliforms). May be normal if STI etiology"
+      - "Urethral swab: Nucleic acid amplification test (NAAT) for gonorrhea/Chlamydia if age <35 or STI risk"
+      - "Cremasteric reflex: Present (vs absent in torsion)"
+      - "Doppler ultrasound: Increased blood flow to epididymis (hyperemia), enlarged epididymis. Use if torsion cannot be excluded clinically"
+      - "Prehn sign: Pain relief with scrotal elevation (positive in 70% of epididymitis)"
+    referrals:
+      - "Urology if: Not improving after 2-3 days of antibiotics, concern for abscess, recurrent epididymitis"
+      - "If unable to exclude torsion clinically, urgent urology evaluation"
     icd10:
       - N45.1
     snomed:
@@ -129,6 +297,28 @@ rules:
       - Causes - vascular, neurologic, hormonal, psychogenic, medications
       - Risk factors - diabetes, hypertension, heart disease, obesity
       - May be early sign of cardiovascular disease
+    clinical_pearls:
+      - "40% of men age 40, 70% age 70 - vascular causes most common (endothelial dysfunction)"
+      - "Sentinel for cardiovascular disease: ED symptoms often precede MI/stroke by 3-5 years (same endothelial dysfunction)"
+      - "Psychogenic vs organic: Morning erections present = psychogenic. Absent = organic vascular/neurologic"
+      - "Medication causes: Antihypertensives (beta-blockers, thiazides), antidepressants (SSRIs), antiandrogens (finasteride), antipsychotics"
+      - "Diabetes: 50% have ED (neuropathy, vascular disease, low testosterone)"
+    management:
+      - "Lifestyle modification: Weight loss, exercise, smoking cessation, reduce alcohol - improves ED in 30%"
+      - "PDE5 inhibitors (first-line): Sildenafil 50mg, tadalafil 10mg, vardenafil 10mg - take 1 hour before sex"
+      - "Contraindications to PDE5 inhibitors: Nitrates (absolute - causes fatal hypotension), alpha-blockers (relative, can use with caution)"
+      - "Testosterone replacement: If low testosterone (<300 ng/dL) AND symptoms (fatigue, decreased libido). Check AM total testosterone x2"
+      - "Second-line: Vacuum erection device, intraurethral alprostadil, intracavernosal injection (alprostadil), penile prosthesis"
+    tests:
+      - "History: Morning erections (psychogenic if present), medications, cardiovascular risk factors"
+      - "Total testosterone: Check AM level (low if <300 ng/dL). Repeat if low to confirm"
+      - "Fasting glucose or HbA1c: Screen for diabetes"
+      - "Lipid panel: Cardiovascular risk assessment"
+      - "TSH: If symptoms of hypothyroidism"
+      - "Prolactin: If low libido, gynecomastia, or low testosterone (pituitary tumor)"
+    referrals:
+      - "Urology if: Failed PDE5 inhibitors, low testosterone needs evaluation, considering second-line therapies (injection, prosthesis)"
+      - "Cardiology if: No cardiovascular workup in past 5 years (ED may be first sign of CAD)"
     icd10:
       - N52.9
     snomed:
@@ -144,6 +334,26 @@ rules:
       - Recurrent UTIs
       - History of urethral trauma, catheterization, or STI
       - Diagnosed by urethrography or cystoscopy
+    clinical_pearls:
+      - "Narrowing of urethra from scar tissue - causes: trauma (straddle injury, pelvic fracture), catheterization (iatrogenic), STI (gonococcal), idiopathic"
+      - "Anterior urethra strictures (90%): Bulbar urethra most common - trauma, catheter, instrumentation"
+      - "Posterior urethra strictures (10%): Membranous urethra - pelvic fracture, prostate surgery (TURP)"
+      - "Recurrence common: 50% recur after single dilation, urethroplasty (surgical repair) has better long-term success (85-90%)"
+      - "Complications: Recurrent UTIs, urinary retention, bladder stones, hydronephrosis"
+    management:
+      - "Urethral dilation: Office procedure - sequential dilators to stretch stricture. Quick but 50% recur within 1 year"
+      - "Direct vision internal urethrotomy (DVIU): Endoscopic incision of stricture. 50-70% success rate, best for short strictures <1.5cm"
+      - "Urethroplasty (gold standard): Open surgical repair - excision + primary anastomosis or buccal mucosa graft. 85-90% success, definitive treatment"
+      - "Chronic catheterization: If not surgical candidate - suprapubic catheter preferred over urethral (avoids trauma)"
+      - "Self-dilation: Teach patient to dilate at home with catheters - prevents recurrence after urethroplasty"
+    tests:
+      - "Uroflowmetry: Peak flow <10 mL/sec suggests obstruction (normal >15 mL/sec)"
+      - "Post-void residual: Bladder scan after voiding - >200 mL suggests significant obstruction"
+      - "Retrograde urethrography (RUG): Contrast injected into urethra during X-ray - gold standard for diagnosis, shows stricture location/length"
+      - "Cystoscopy: Direct visualization of urethra and stricture"
+    referrals:
+      - "Urology for all urethral strictures - requires dilation, DVIU, or urethroplasty"
+      - "Urgent if urinary retention"
     icd10:
       - N35.9
     snomed:
@@ -158,6 +368,25 @@ rules:
       - May be congenital or acquired
       - Acquired causes - trauma, infection, tumor
       - Usually benign
+    clinical_pearls:
+      - "Fluid collection in tunica vaginalis surrounding testicle - communicating (congenital, patent processus vaginalis) vs non-communicating (acquired)"
+      - "Congenital hydrocele: Present at birth, 80% resolve by age 1 year (closes spontaneously). If persistent after age 1, needs repair"
+      - "Acquired hydrocele: Trauma, epididymitis, testicular torsion, tumor (1% of hydroceles hide testicular tumor) - needs ultrasound"
+      - "Transillumination: Shine flashlight through scrotum - hydrocele lights up red (fluid), tumor/hernia does not (solid)"
+      - "Idiopathic: Most common in adults - slow fluid accumulation, unknown cause, usually benign"
+    management:
+      - "Observation: For small asymptomatic hydroceles - 80% of congenital resolve by age 1, many adult hydroceles stable"
+      - "Aspiration: Temporary relief (recurs in 80% within months) - only if patient declines surgery. Risk of infection, bleeding"
+      - "Sclerotherapy: After aspiration, inject sclerosant (tetracycline, phenol) - 80% success but painful, risk of infection"
+      - "Hydrocelectomy: Surgical excision of tunica vaginalis - definitive treatment, <5% recurrence. Indications: large/symptomatic, congenital after age 1"
+      - "Ultrasound BEFORE surgery: Rule out underlying testicular tumor (1% of hydroceles)"
+    tests:
+      - "Transillumination: Flashlight through scrotum - fluid transilluminates (red glow), solid masses do not"
+      - "Ultrasound: If any concern for tumor, unable to palpate testicle, rapid growth, or before surgery. Shows fluid around testicle, evaluates testicle/epididymis"
+      - "Physical exam: Fluid collection separate from testicle (can get above swelling vs inguinal hernia where you cannot)"
+    referrals:
+      - "Urology if: Large/symptomatic, congenital hydrocele persisting after age 1, unable to palpate testicle, rapid growth, patient desires surgery"
+      - "Small asymptomatic hydroceles can be observed"
     icd10:
       - N43.3
     snomed:
@@ -172,6 +401,27 @@ rules:
       - More common on left side
       - May cause infertility (decreased sperm count)
       - Disappears when supine
+    clinical_pearls:
+      - "Dilated pampiniform venous plexus - 15% of men, 40% of infertile men, left side 85% (left testicular vein drains to renal vein at 90° angle, higher pressure)"
+      - "Bag of worms: Classic description of varicocele on palpation - dilated tortuous veins above testicle"
+      - "Infertility: Varicocele causes increased scrotal temperature (venous pooling), impairs spermatogenesis. Repair improves sperm in 70%"
+      - "Right-sided varicocele: Rare (<5%) - suggests retroperitoneal mass compressing IVC (renal cell carcinoma, lymphoma) - needs imaging"
+      - "Varicocele grades: I (palpable with Valsalva), II (palpable at rest), III (visible through scrotal skin)"
+    management:
+      - "Observation: If asymptomatic and no infertility - most varicoceles don't require treatment"
+      - "Indications for repair: Infertility (abnormal semen analysis) + palpable varicocele, pain unresponsive to conservative measures, testicular atrophy"
+      - "Surgical repair: Varicocelectomy (ligate dilated veins) - laparoscopic, open inguinal, or subinguinal approach. 70% improve sperm parameters"
+      - "Percutaneous embolization: Interventional radiology - coil embolization of testicular vein. 90% success, less invasive than surgery"
+      - "Conservative: Scrotal support, NSAIDs for pain"
+    tests:
+      - "Physical exam: Bag of worms palpable above testicle, more prominent with standing/Valsalva, disappears when supine"
+      - "Valsalva maneuver: Increases intra-abdominal pressure - varicocele becomes more prominent (venous filling)"
+      - "Scrotal ultrasound with Doppler: Shows dilated pampiniform veins >3mm, venous reflux with Valsalva"
+      - "Semen analysis: If infertility concern - varicocele causes low count, poor motility, abnormal morphology"
+      - "Testicular volume: Varicocele can cause atrophy (smaller testicle on affected side)"
+    referrals:
+      - "Urology if: Infertility (abnormal semen analysis), significant pain, testicular atrophy, right-sided varicocele (needs imaging for mass)"
+      - "Asymptomatic varicoceles can be observed"
     icd10:
       - I86.1
     snomed:
@@ -185,6 +435,27 @@ rules:
       - Causes - UTI, stones, trauma, malignancy, glomerular disease
       - Requires evaluation to rule out malignancy
       - Cystoscopy and imaging often indicated
+    clinical_pearls:
+      - "Gross hematuria (visible blood) vs microscopic (≥3 RBC/HPF on UA) - both need evaluation for malignancy if age >35"
+      - "Glomerular vs non-glomerular: Glomerular (RBC casts, dysmorphic RBCs, proteinuria) suggests nephrology. Non-glomerular (normal RBCs, clots) suggests urologic"
+      - "Malignancy risk: 5% of gross hematuria, 0.5% of microscopic hematuria have bladder cancer (higher risk if age >35, smoking, occupational exposures)"
+      - "Painless hematuria: More concerning for malignancy (bladder cancer, renal cell carcinoma). Painful suggests stones, UTI"
+      - "Exercise-induced hematuria: Can occur after strenuous exercise, resolves within 48-72 hours, benign"
+    management:
+      - "Treat UTI if present: Antibiotics, then repeat UA in 6 weeks - if hematuria resolves, no further workup needed"
+      - "Cystoscopy: For age >35, gross hematuria, or risk factors (smoking, occupational exposures) - evaluates bladder and urethra for tumor"
+      - "CT urogram (CTU): Imaging of choice - contrast CT during excretory phase, evaluates kidneys/ureters/bladder for stones, masses, strictures"
+      - "If glomerular (RBC casts, proteinuria): Refer nephrology - glomerulonephritis workup (ANA, ANCA, complement, renal biopsy)"
+      - "Anticoagulation: Does NOT cause hematuria - if on warfarin/DOACs and have hematuria, still needs full workup"
+    tests:
+      - "UA with microscopy: ≥3 RBC/HPF diagnostic. Look for RBC casts (glomerular), WBCs (infection), dysmorphic RBCs (glomerular)"
+      - "Urine cytology: Detects high-grade urothelial carcinoma (bladder cancer) - 40% sensitive"
+      - "CT urogram: Gold standard imaging - shows renal masses, stones, ureteral tumors"
+      - "Cystoscopy: Direct visualization of bladder and urethra - detects bladder tumors, urethral lesions"
+      - "Renal function: Creatinine - if elevated with RBC casts, suggests glomerulonephritis"
+    referrals:
+      - "Urology for: Age >35 with microscopic hematuria, any gross hematuria, abnormal CT or cytology"
+      - "Nephrology if: RBC casts, proteinuria >500mg/day, elevated creatinine (glomerular disease)"
     icd10:
       - R31.9
     snomed:
