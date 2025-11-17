@@ -11,6 +11,28 @@ rules:
       - Chronic cough
       - Laryngitis or hoarseness
       - Symptoms worse when lying down
+    clinical_pearls:
+      - "Clinical diagnosis: Typical symptoms (heartburn, regurgitation) - no testing needed"
+      - "PPI trial: If symptoms improve on PPI, confirms GERD (diagnostic and therapeutic)"
+      - "Alarm symptoms: Dysphagia, weight loss, anemia, vomiting - need EGD"
+      - "Barrett's esophagus: Chronic GERD causes intestinal metaplasia (increased cancer risk)"
+      - "Extraesophageal manifestations: Chronic cough, asthma, laryngitis (less responsive to PPI)"
+      - "Lifestyle modifications: Elevate head of bed, avoid late meals, lose weight, avoid triggers"
+    management:
+      - "Lifestyle: Weight loss, elevate head of bed 6-8 inches, avoid meals 3 hours before bed"
+      - "Avoid triggers: Caffeine, alcohol, chocolate, peppermint, fatty foods, smoking"
+      - "PPI therapy: Omeprazole 20mg daily or pantoprazole 40mg daily x 8 weeks (take 30-60min before breakfast)"
+      - "If refractory: Increase PPI to BID dosing or switch PPI"
+      - "Consider H2 blocker at bedtime for nocturnal symptoms (ranitidine, famotidine)"
+    tests:
+      - "None needed for typical symptoms (empiric PPI trial)"
+      - "EGD if: Alarm symptoms, refractory symptoms, or long-standing GERD (screen for Barrett's)"
+      - "Esophageal pH monitoring if diagnosis uncertain or evaluating for anti-reflux surgery"
+      - "Esophageal manometry if dysphagia present (rule out achalasia, scleroderma)"
+    referrals:
+      - "Gastroenterology if: Refractory to PPI, alarm symptoms, Barrett's esophagus, or surgical candidate"
+      - "Surgery (Nissen fundoplication) if medical therapy fails or patient preference"
+      - "ENT if extraesophageal symptoms (laryngitis, chronic cough)"
     icd10:
       - K21.9
       - K21.0
@@ -25,6 +47,28 @@ rules:
       - Nausea and vomiting
       - Melena or hematemesis
       - H. pylori infection or NSAID use
+    clinical_pearls:
+      - "Duodenal ulcers more common (4:1), pain 2-5 hours after meals, relieved by food/antacids"
+      - "Gastric ulcers: Pain worsened by eating, must biopsy to rule out malignancy"
+      - "H. pylori causes 70% of ulcers, NSAIDs 20-30%, stress ulcers in ICU patients"
+      - "Test and treat H. pylori (even without EGD if <60 years, no alarm symptoms)"
+      - "PPI therapy heals ulcers in 4-8 weeks"
+      - "Recurrence rate high if H. pylori not eradicated or NSAIDs continued"
+    management:
+      - "PPI: Omeprazole 20-40mg daily or pantoprazole 40mg daily x 4-8 weeks"
+      - "H. pylori eradication: Clarithromycin triple therapy (PPI BID + clarithromycin 500mg + amoxicillin 1g) x 14 days"
+      - "Alternative: Bismuth quadruple therapy (PPI + bismuth + tetracycline + metronidazole) x 14 days"
+      - "Stop NSAIDs if possible; if needed, use with PPI prophylaxis"
+      - "Confirm H. pylori eradication: Urea breath test or stool antigen 4+ weeks after treatment (off PPI)"
+    tests:
+      - "EGD if: Age >60, alarm symptoms (weight loss, dysphagia, bleeding), or refractory symptoms"
+      - "H. pylori testing: Urea breath test, stool antigen (non-invasive), or biopsy during EGD"
+      - "CBC (anemia from chronic blood loss)"
+      - "Stool guaiac (occult blood)"
+    referrals:
+      - "Gastroenterology for EGD if alarm symptoms, refractory to treatment, or gastric ulcer (biopsy)"
+      - "Surgery if: Perforation, refractory bleeding despite endoscopic therapy, or gastric outlet obstruction"
+      - "Emergency surgery if free air on imaging (perforated ulcer)"
     icd10:
       - K27.9
       - K25.9
@@ -40,6 +84,29 @@ rules:
       - Fever
       - Rebound tenderness
       - McBurney's point tenderness
+    clinical_pearls:
+      - "Classic presentation: Periumbilical pain migrating to RLQ (McBurney's point) within 12-24 hours"
+      - "Anorexia almost universal (if hungry, unlikely appendicitis)"
+      - "Rovsing's sign: LLQ palpation causes RLQ pain (highly specific)"
+      - "Psoas sign (pain with right hip extension) or obturator sign (pain with internal hip rotation)"
+      - "Perforation risk increases after 36-48 hours (mortality increases from 0.1% to 3%)"
+      - "CT has high sensitivity (95%), but ultrasound preferred in pregnancy/children (avoid radiation)"
+    management:
+      - "NPO, IV fluids, pain control (opioids do NOT mask exam findings)"
+      - "Antibiotics: Ceftriaxone 1g IV + metronidazole 500mg IV (or piperacillin-tazobactam 3.375g IV)"
+      - "Appendectomy (laparoscopic preferred, open if perforated/complicated)"
+      - "Non-operative management: Antibiotics alone for uncomplicated (controversial, 30% recurrence)"
+      - "If perforated/abscess: Antibiotics, consider percutaneous drainage, interval appendectomy 6-8 weeks"
+    tests:
+      - "CT abdomen/pelvis with IV contrast (sensitivity 95%, specificity 94%)"
+      - "Ultrasound if pregnancy, children, or young women (avoid radiation)"
+      - "CBC (leukocytosis with left shift), CRP elevated"
+      - "Urinalysis (rule out UTI, may have mild pyuria from appendiceal inflammation)"
+      - "Pregnancy test in women of childbearing age"
+    referrals:
+      - "Surgery consultation STAT for all suspected appendicitis"
+      - "Gynecology if ovarian pathology suspected (ruptured cyst, torsion, PID)"
+      - "Interventional radiology if abscess needs drainage"
     icd10:
       - K35.80
       - K35.89
@@ -54,6 +121,28 @@ rules:
       - Nausea and vomiting
       - Fever
       - Positive Murphy's sign
+    clinical_pearls:
+      - "Murphy's sign (inspiratory arrest with RUQ palpation) highly specific (90%)"
+      - "95% due to gallstone obstruction of cystic duct"
+      - "RUQ ultrasound is diagnostic test of choice (sensitivity 90%)"
+      - "Ultrasound findings: Gallstones, wall thickening >4mm, pericholecystic fluid, sonographic Murphy's"
+      - "Early cholecystectomy (<72 hours) preferred over delayed (lower complications)"
+      - "Complications: Gangrenous cholecystitis, perforation, emphysematous cholecystitis (diabetics)"
+    management:
+      - "NPO, IV fluids, IV antibiotics (ceftriaxone 1g IV + metronidazole 500mg IV)"
+      - "Pain control: Opioids, NSAIDs"
+      - "Cholecystectomy (laparoscopic) ideally within 72 hours of symptom onset"
+      - "If poor surgical candidate: Percutaneous cholecystostomy tube drainage"
+      - "Avoid delaying surgery beyond 72 hours (increased risk of conversion to open, complications)"
+    tests:
+      - "Right upper quadrant ultrasound (gallstones, wall thickening >4mm, pericholecystic fluid, sonographic Murphy's)"
+      - "CBC (leukocytosis), liver function tests (may have mild elevation)"
+      - "HIDA scan if ultrasound equivocal (non-filling gallbladder diagnostic of cholecystitis)"
+      - "CT abdomen if concern for complication (perforation, abscess)"
+    referrals:
+      - "Surgery for cholecystectomy"
+      - "Gastroenterology for ERCP if common bile duct stone suspected (elevated bilirubin, dilated CBD)"
+      - "Interventional radiology if percutaneous drainage needed"
     icd10:
       - K81.0
       - K80.00
@@ -68,6 +157,30 @@ rules:
       - Alcohol use or gallstones
       - Abdominal distention
       - Elevated lipase and amylase
+    clinical_pearls:
+      - "Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)"
+      - "Lipase more sensitive and specific than amylase"
+      - "Causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (>1000 mg/dL), medications, ERCP"
+      - "Early aggressive IV fluid resuscitation (LR preferred) improves outcomes"
+      - "Ranson's criteria or APACHE II score for severity; CT severity index for necrotizing pancreatitis"
+      - "Most cases mild, self-limited; 20% develop severe pancreatitis (organ failure, necrosis)"
+    management:
+      - "Aggressive IV fluids: LR 250-500 mL/hr (goal urine output 0.5-1 mL/kg/hr)"
+      - "NPO initially, advance diet as tolerated (early feeding within 24-48hr better than prolonged NPO)"
+      - "Pain control: Opioids (morphine, hydromorphone)"
+      - "Treat underlying cause: ERCP for gallstone pancreatitis with cholangitis or persistent obstruction"
+      - "ICU if severe: Persistent organ failure (>48hr), SIRS, necrosis"
+    tests:
+      - "Lipase (>3x upper limit normal)"
+      - "Liver function tests (if elevated bilirubin, suggests gallstone etiology)"
+      - "Triglycerides (if >1000 mg/dL, consider hypertriglyceridemia as cause)"
+      - "CT abdomen with IV contrast if severe or uncertain diagnosis (delay 48-72 hours for optimal assessment)"
+      - "Right upper quadrant ultrasound (assess for gallstones)"
+    referrals:
+      - "Gastroenterology for all acute pancreatitis"
+      - "Surgery if complications (necrosis with infection, abscess, pseudocyst)"
+      - "ERCP if gallstone pancreatitis with cholangitis or persistent obstruction"
+      - "ICU if severe (persistent organ failure, necrosis)"
     icd10:
       - K85.90
       - K85.91
@@ -82,6 +195,29 @@ rules:
       - Weight loss
       - Perianal disease
       - Skip lesions on endoscopy
+    clinical_pearls:
+      - "Transmural inflammation (unlike UC which is mucosal only)"
+      - "Can affect any part of GI tract (mouth to anus), commonly terminal ileum and colon"
+      - "Skip lesions: Patchy areas of inflammation with normal bowel in between"
+      - "Perianal disease (fissures, fistulas, abscesses) highly specific for Crohn's"
+      - "Smoking worsens Crohn's (opposite of UC where smoking is protective)"
+      - "Complications: Strictures, fistulas, abscesses, bowel obstruction, increased colon cancer risk"
+    management:
+      - "Mild-moderate: Budesonide 9mg daily (ileal/right colon) or mesalamine 2.4-4.8g daily"
+      - "Moderate-severe: Prednisone 40mg daily with taper, then azathioprine 2-2.5mg/kg or 6-MP for maintenance"
+      - "Biologic therapy: Anti-TNF (infliximab 5mg/kg IV, adalimumab 40mg SC q2wk) or vedolizumab (gut-specific)"
+      - "Surgery for complications (stricturoplasty, resection) - NOT curative, disease recurs"
+      - "Avoid NSAIDs (can trigger flare), smoking cessation essential"
+    tests:
+      - "Colonoscopy with ileoscopy (skip lesions, cobblestoning, aphthous ulcers, fistulas)"
+      - "CT enterography or MR enterography (assess small bowel involvement, complications)"
+      - "Fecal calprotectin (elevated, monitors inflammation, guides treatment)"
+      - "CBC (anemia, leukocytosis), CRP/ESR (elevated during flare)"
+      - "Stool studies (C. diff, enteric pathogens - rule out infection)"
+    referrals:
+      - "Gastroenterology for all suspected IBD (diagnosis, treatment, colonoscopy)"
+      - "Surgery if complications (obstruction, abscess, fistula, refractory disease)"
+      - "Colorectal surgery for perianal disease"
     icd10:
       - K50.90
       - K50.00
@@ -97,6 +233,30 @@ rules:
       - Lower abdominal cramping
       - Weight loss
       - Continuous inflammation from rectum
+    clinical_pearls:
+      - "Continuous mucosal inflammation (unlike Crohn's skip lesions), starts in rectum, extends proximally"
+      - "Classification: Proctitis (rectum only), left-sided (to splenic flexure), pancolitis (entire colon)"
+      - "Smoking protective (opposite of Crohn's)"
+      - "Severe flare (>10 BM/day, fever, tachycardia): IV steroids, if no response in 3-5 days consider colectomy"
+      - "Toxic megacolon: Dilated colon >6cm + systemic toxicity, high risk perforation, needs surgery"
+      - "Increased colon cancer risk: Screen starting 8 years after diagnosis"
+    management:
+      - "Mild proctitis: Mesalamine suppositories 1000mg daily or enemas 4g nightly"
+      - "Mild-moderate: Oral mesalamine (5-ASA) 2.4-4.8g daily + topical mesalamine"
+      - "Moderate-severe: Prednisone 40mg daily with taper over 8-12 weeks"
+      - "Maintenance: Azathioprine 2-2.5mg/kg, 6-MP, or biologics (infliximab, vedolizumab, tofacitinib)"
+      - "Severe flare: IV methylprednisolone 60mg daily, if refractory cyclosporine or colectomy"
+    tests:
+      - "Colonoscopy (continuous inflammation, loss of vascular pattern, pseudopolyps, friability)"
+      - "Biopsy (crypt abscesses, basal plasmacytosis, crypt distortion)"
+      - "Fecal calprotectin (elevated, monitors disease activity)"
+      - "CBC (anemia, thrombocytosis), CRP/ESR, albumin"
+      - "Abdominal X-ray if toxic megacolon suspected (dilated colon)"
+      - "Stool studies (rule out C. diff, CMV colitis)"
+    referrals:
+      - "Gastroenterology for all suspected UC (diagnosis, treatment, colonoscopy)"
+      - "Colorectal surgery if severe refractory flare, toxic megacolon, dysplasia, or colon cancer"
+      - "Total colectomy with ileal pouch-anal anastomosis (IPAA) is curative"
     icd10:
       - K51.90
       - K51.00
@@ -111,6 +271,28 @@ rules:
       - Change in bowel habits
       - Nausea
       - Leukocytosis
+    clinical_pearls:
+      - "Diverticulosis common (50% by age 60), most asymptomatic; 10-25% develop diverticulitis"
+      - "Hinchey classification: I (phlegmon), II (abscess), III (purulent peritonitis), IV (fecal peritonitis)"
+      - "CT abdomen/pelvis is diagnostic test of choice (sensitivity 98%)"
+      - "Uncomplicated: Outpatient antibiotics + clear liquids; complicated: Admission + IV antibiotics"
+      - "Avoid colonoscopy during acute episode (risk perforation) - wait 6-8 weeks"
+      - "High-fiber diet after resolution may reduce recurrence"
+    management:
+      - "Uncomplicated (outpatient): Ciprofloxacin 500mg BID + metronidazole 500mg TID x 7-10 days, clear liquids"
+      - "Complicated (admission): NPO or clear liquids, IV antibiotics (ceftriaxone 1g + metronidazole 500mg IV)"
+      - "Abscess >3cm: Percutaneous drainage + antibiotics"
+      - "Surgery (sigmoid resection) if: Perforation, obstruction, refractory symptoms, or recurrent episodes"
+      - "Elective surgery after 2nd episode (or 1st in immunocompromised)"
+    tests:
+      - "CT abdomen/pelvis with IV contrast (bowel wall thickening, pericolic fat stranding, abscess)"
+      - "CBC (leukocytosis), CRP elevated"
+      - "Urinalysis (rule out UTI, may have mild pyuria from adjacent inflammation)"
+      - "Colonoscopy 6-8 weeks after resolution (rule out colon cancer if >50 years or not up-to-date)"
+    referrals:
+      - "Surgery if: Complicated diverticulitis (perforation, obstruction), abscess needs drainage, recurrent episodes"
+      - "Gastroenterology for colonoscopy 6-8 weeks post-resolution"
+      - "Interventional radiology if abscess >3cm needs drainage"
     icd10:
       - K57.92
       - K57.32
@@ -125,6 +307,27 @@ rules:
       - Abdominal distention
       - Absent bowel sounds or high-pitched sounds
       - Constipation or obstipation
+    clinical_pearls:
+      - "Most common causes: Adhesions (60% - prior surgery), hernias (20%), malignancy, Crohn's"
+      - "Partial vs complete: Partial may pass flatus/stool, complete has obstipation"
+      - "Closed-loop obstruction: Two points of obstruction, high risk strangulation/ischemia"
+      - "CT findings: Dilated small bowel >3cm, transition point, air-fluid levels"
+      - "Conservative management (NPO + NGT) successful in 80% of partial obstructions"
+      - "Strangulation (ischemic bowel): Fever, severe pain, peritoneal signs - surgical emergency"
+    management:
+      - "NPO, IV fluids (aggressive resuscitation if dehydrated)"
+      - "Nasogastric tube (NGT) decompression"
+      - "Serial abdominal exams (monitor for peritoneal signs suggesting ischemia)"
+      - "Conservative management 24-48 hours if partial obstruction and no peritoneal signs"
+      - "Surgery if: Complete obstruction, signs of ischemia (fever, peritonitis, lactic acidosis), or failed conservative management"
+    tests:
+      - "CT abdomen/pelvis with IV contrast (diagnostic, identifies transition point, ischemia)"
+      - "Abdominal X-ray (dilated small bowel loops, air-fluid levels, paucity of colonic gas)"
+      - "CBC (leukocytosis suggests ischemia), BMP (assess electrolytes), lactate (elevated if ischemia)"
+      - "Water-soluble contrast study (Gastrografin) if diagnosis uncertain or predicts need for surgery"
+    referrals:
+      - "Surgery consultation for all small bowel obstructions"
+      - "Emergent surgery if: Signs of strangulation (peritonitis, fever, lactic acidosis), closed-loop, or complete obstruction"
     icd10:
       - K56.60
       - K56.69
@@ -140,6 +343,29 @@ rules:
       - Palmar erythema
       - Hepatic encephalopathy
       - Easy bruising
+    clinical_pearls:
+      - "End-stage liver disease with fibrosis and regenerative nodules"
+      - "Causes: Alcohol (most common US), hepatitis C, NAFLD, hepatitis B, autoimmune, hemochromatosis"
+      - "Child-Pugh score (A, B, C) and MELD score predict mortality"
+      - "Screen for HCC: Ultrasound + AFP every 6 months (cirrhosis increases HCC risk 100-fold)"
+      - "Variceal screening: EGD at diagnosis, if large varices start propranolol prophylaxis"
+      - "Hepatorenal syndrome: Renal failure in cirrhosis (high mortality without transplant)"
+    management:
+      - "Treat underlying cause: Alcohol cessation, antiviral therapy (HBV with tenofovir, HCV with DAAs)"
+      - "Ascites: Sodium restriction (<2g/day), spironolactone 100mg + furosemide 40mg (2:1 ratio)"
+      - "Hepatic encephalopathy: Lactulose 30mL TID (goal 2-3 soft stools/day) + rifaximin 550mg BID"
+      - "Variceal prophylaxis: Propranolol 20mg BID (titrate to HR 55-60) or nadolol, or EGD banding"
+      - "Liver transplant evaluation if decompensated (ascites, variceal bleed, encephalopathy) or MELD >15"
+    tests:
+      - "Liver ultrasound (nodular liver, splenomegaly, ascites, portal vein patency)"
+      - "Liver function tests (albumin, bilirubin, PT/INR, transaminases)"
+      - "Hepatitis serologies (HBsAg, anti-HCV), iron studies (ferritin, TIBC), ANA/ASMA (autoimmune)"
+      - "EGD (screen for varices)"
+      - "Ultrasound + AFP every 6 months (HCC screening)"
+    referrals:
+      - "Gastroenterology/hepatology for all cirrhosis patients"
+      - "Transplant hepatology if decompensated (ascites, variceal bleed, encephalopathy) or MELD >15"
+      - "Addiction medicine for alcohol use disorder"
     icd10:
       - K74.60
       - K70.30
@@ -156,6 +382,28 @@ rules:
       - Dark urine
       - Clay-colored stools
       - Elevated transaminases
+    clinical_pearls:
+      - "Hepatitis A: Fecal-oral transmission, self-limited, no chronic infection, vaccine available"
+      - "Hepatitis B: Percutaneous/sexual, 5-10% develop chronic infection (higher in neonates), vaccine available"
+      - "Hepatitis C: Bloodborne (IVDU, transfusions pre-1992), 70-85% chronicity, curable with DAAs"
+      - "ALT > AST in viral hepatitis (opposite of alcoholic hepatitis where AST > ALT 2:1)"
+      - "Fulminant hepatic failure rare (<1%) but life-threatening (encephalopathy + coagulopathy)"
+    management:
+      - "Supportive care: Hydration, antiemetics, rest, avoid hepatotoxins (alcohol, acetaminophen, NSAIDs)"
+      - "Hepatitis A: Self-limited, no specific treatment, post-exposure prophylaxis (vaccine or immunoglobulin)"
+      - "Hepatitis B: Most resolve spontaneously, monitor; if chronic treat with tenofovir or entecavir"
+      - "Hepatitis C: Treat with direct-acting antivirals (sofosbuvir-based regimens) - cure rate >95%"
+      - "Fulminant hepatic failure: ICU, transplant evaluation"
+    tests:
+      - "Hepatitis panel: Anti-HAV IgM (acute hep A), HBsAg + anti-HBc IgM (acute hep B), anti-HCV (hep C)"
+      - "Liver function tests: ALT/AST (often >1000 in acute), bilirubin, alkaline phosphatase, PT/INR, albumin"
+      - "HCV RNA if anti-HCV positive (confirms active infection)"
+      - "HIV test (if hepatitis B or C)"
+      - "Liver ultrasound if chronic hepatitis"
+    referrals:
+      - "Gastroenterology/hepatology for chronic hepatitis B or C (treatment)"
+      - "Transplant hepatology if fulminant hepatic failure (encephalopathy + INR >6.5)"
+      - "Infectious disease for hepatitis C treatment"
     icd10:
       - B19.9
       - B17.9
@@ -171,6 +419,27 @@ rules:
       - Altered bowel habits (diarrhea, constipation, or mixed)
       - Symptoms relieved by defecation
       - No red flag symptoms
+    clinical_pearls:
+      - "Diagnosis of exclusion: Rome IV criteria (abdominal pain ≥1 day/week x 3 months with ≥2 of: related to defecation, change in stool frequency, change in stool form)"
+      - "Subtypes: IBS-D (diarrhea), IBS-C (constipation), IBS-M (mixed), IBS-U (unclassified)"
+      - "Rule out red flags: Age >50, weight loss, anemia, family history colon cancer, rectal bleeding"
+      - "No diagnostic test for IBS - diagnosis based on symptoms and exclusion of other causes"
+      - "Low FODMAP diet reduces symptoms in 70%"
+    management:
+      - "Dietary: Low FODMAP diet trial x 6-8 weeks, increase fiber if IBS-C, avoid triggers"
+      - "IBS-D: Loperamide 2-4mg PRN, rifaximin 550mg TID x 14 days (if bloating), eluxadoline"
+      - "IBS-C: Osmotic laxatives (PEG 3350 17g daily), linaclotide 290mcg daily, lubiprostone"
+      - "Antispasmodics: Hyoscyamine 0.125-0.25mg PRN or dicyclomine 10-20mg QID"
+      - "Consider tricyclic antidepressants (amitriptyline 10-50mg HS) for pain or SSRIs if comorbid anxiety"
+    tests:
+      - "Minimal testing if typical symptoms and no red flags"
+      - "CBC, CMP, TSH, celiac serologies (tissue transglutaminase IgA + total IgA)"
+      - "Stool studies (C. diff, ova & parasites, Giardia antigen) if diarrhea"
+      - "Colonoscopy if: Age >45 (colon cancer screening), alarm features, or family history IBD/colon cancer"
+    referrals:
+      - "Gastroenterology if: Refractory symptoms, alarm features, or need colonoscopy"
+      - "Dietitian for low FODMAP diet guidance"
+      - "Psychiatry/psychology if severe anxiety or depression comorbidity"
     icd10:
       - K58.9
       - K58.0
@@ -186,6 +455,29 @@ rules:
       - Fatigue
       - Dermatitis herpetiformis
       - Iron deficiency anemia
+    clinical_pearls:
+      - "Autoimmune reaction to gluten (wheat, rye, barley) causing small bowel villous atrophy"
+      - "Tissue transglutaminase IgA (tTG-IgA) most sensitive and specific screening test"
+      - "Must be eating gluten when tested (false negative if already on gluten-free diet)"
+      - "Gold standard: Small bowel biopsy showing villous atrophy (Marsh classification)"
+      - "Associated with dermatitis herpetiformis (intensely pruritic vesicles on extensor surfaces)"
+      - "Strict gluten-free diet is only treatment, improves symptoms and reduces cancer risk"
+    management:
+      - "Strict lifelong gluten-free diet (avoid wheat, rye, barley)"
+      - "Supplement deficiencies: Iron, folate, vitamin D, calcium, B12"
+      - "Repeat tTG-IgA after 6-12 months (should normalize on gluten-free diet)"
+      - "Screen first-degree relatives (10% risk)"
+      - "Dietitian referral for gluten-free diet education"
+    tests:
+      - "Tissue transglutaminase IgA (tTG-IgA) + total IgA (most sensitive/specific)"
+      - "If IgA deficient: Deamidated gliadin peptide IgG or tTG-IgG"
+      - "Small bowel biopsy (duodenum) via EGD (villous atrophy, crypt hyperplasia, intraepithelial lymphocytes)"
+      - "CBC (anemia), CMP (hypoalbuminemia), iron studies, vitamin D, folate, B12"
+      - "Must be on gluten-containing diet when tested (false negative if gluten-free)"
+    referrals:
+      - "Gastroenterology for EGD with small bowel biopsy (confirms diagnosis)"
+      - "Dietitian for gluten-free diet education and meal planning"
+      - "Refractory celiac: GI for repeat biopsy, rule out complications (lymphoma, refractory sprue)"
     icd10:
       - K90.0
     snomed:
@@ -200,6 +492,30 @@ rules:
       - Unintentional weight loss
       - Iron deficiency anemia
       - Palpable mass
+    clinical_pearls:
+      - "Third most common cancer, second leading cause of cancer death in US"
+      - "Screening: Colonoscopy every 10 years starting age 45 (or 40 if African American or family history)"
+      - "Right-sided: Iron deficiency anemia, occult bleeding (cecum has large caliber, no obstruction)"
+      - "Left-sided: Bright red blood per rectum, obstruction, pencil-thin stools (descending colon narrow)"
+      - "Staging: CT chest/abdomen/pelvis, CEA level"
+      - "5-year survival: Stage I (90%), Stage II (80%), Stage III (70%), Stage IV (14%)"
+    management:
+      - "Surgical resection: Hemicolectomy (right or left), low anterior resection, abdominoperineal resection"
+      - "Adjuvant chemotherapy: FOLFOX (5-FU + leucovorin + oxaliplatin) for Stage III or high-risk Stage II"
+      - "Metastatic (Stage IV): Systemic chemotherapy (FOLFOX or FOLFIRI) + biologics (bevacizumab, cetuximab)"
+      - "Rectal cancer: Neoadjuvant chemoradiation before surgery if T3-4 or node-positive"
+      - "Surveillance: Colonoscopy at 1 year, then every 3-5 years; CEA every 3-6 months x 2 years"
+    tests:
+      - "Colonoscopy with biopsy (diagnostic, allows tissue diagnosis and polypectomy)"
+      - "CT chest/abdomen/pelvis with IV contrast (staging, assess for metastases)"
+      - "Carcinoembryonic antigen (CEA) - tumor marker for surveillance"
+      - "MRI pelvis if rectal cancer (local staging)"
+      - "Molecular testing: MSI (microsatellite instability), KRAS, NRAS, BRAF (guides therapy)"
+    referrals:
+      - "Gastroenterology for colonoscopy (diagnosis)"
+      - "Colorectal surgery for resection"
+      - "Medical oncology for chemotherapy (Stage III, IV, or high-risk Stage II)"
+      - "Radiation oncology if rectal cancer"
     icd10:
       - C18.9
       - C20
