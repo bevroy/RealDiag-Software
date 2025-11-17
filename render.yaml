@@ -13,14 +13,6 @@ services:
     plan: free
     repo: bevroy/RealDiag-Software
     dockerfilePath: backend/Dockerfile
-    # Render will provide $PORT at runtime; the start command below uses it.
-    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
     healthCheckPath: /health
     autoDeploy: true
-    pullRequestPreviews: false
-    # Optional environment variables you may want to set in Render's dashboard
-    envVars:
-      - key: LOG_LEVEL
-        value: info
-      - key: SENTRY_DSN
-        value: ""
