@@ -7,6 +7,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
 
 export default function SymptomSearch() {
   // Use runtime config for API base, with fallback to env var or Render URL
@@ -24,12 +25,13 @@ export default function SymptomSearch() {
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [viewMode, setViewMode] = useState('card'); // 'card' or 'compact'
-  const [sortBy, setSortBy] = useState('score'); // 'score', 'alpha', 'family'
+  const [sortBy, setSortBy] = useState('likelihood'); // 'likelihood', 'score', 'alpha', 'family'
   const [expandedCards, setExpandedCards] = useState({});
   const [darkMode, setDarkMode] = useState(false);
   const [fontSize, setFontSize] = useState('medium'); // 'small', 'medium', 'large'
   const [showPreferences, setShowPreferences] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [displayLimit, setDisplayLimit] = useState(5); // New: Show only 5 results initially
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -201,14 +203,55 @@ export default function SymptomSearch() {
   const getSortedResults = () => {
     const sorted = [...results];
     switch (sortBy) {
+      case 'likelihood':
+        // Sort by Bayesian likelihood score (primary), then match score (secondary)
+        return sorted.sort((a, b) => {
+          const likelihoodA = calculateLikelihood(a) || 0;
+          const likelihoodB = calculateLikelihood(b) || 0;
+          if (Math.abs(likelihoodA - likelihoodB) > 0.1) {
+            return likelihoodB - likelihoodA;
+          }
+          return b.match_score - a.match_score;
+        });
       case 'alpha':
         return sorted.sort((a, b) => a.label.localeCompare(b.label));
       case 'family':
         return sorted.sort((a, b) => a.family.localeCompare(b.family));
       case 'score':
-      default:
         return sorted.sort((a, b) => b.match_score - a.match_score);
+      default:
+        return sorted.sort((a, b) => {
+          const likelihoodA = calculateLikelihood(a) || 0;
+          const likelihoodB = calculateLikelihood(b) || 0;
+          return likelihoodB - likelihoodA;
+        });
     }
+  };
+
+  // Get limited results for display
+  const getDisplayedResults = () => {
+    const sorted = getSortedResults();
+    return sorted.slice(0, displayLimit);
+  };
+
+  // Check if there are more results to show
+  const hasMoreResults = () => {
+    return getSortedResults().length > displayLimit;
+  };
+
+  // Show more results
+  const showMoreResults = () => {
+    setDisplayLimit(prev => Math.min(prev + 5, results.length));
+  };
+
+  // Show all results
+  const showAllResults = () => {
+    setDisplayLimit(results.length);
+  };
+
+  // Reset display limit when new search
+  const resetDisplayLimit = () => {
+    setDisplayLimit(5);
   };
 
   const getSensitivityColor = (value) => {
@@ -316,6 +359,7 @@ export default function SymptomSearch() {
     setLoading(true);
     setError(null);
     setHasSearched(true);
+    resetDisplayLimit(); // Reset to show 5 results
 
     try {
       // Use age range if selected, otherwise use specific age
@@ -884,7 +928,7 @@ export default function SymptomSearch() {
                 Search Results
                 {results.length > 0 && (
                   <span style={{ marginLeft: '1rem', color: '#6b7280', fontWeight: 'normal', fontSize: '1rem' }}>
-                    ({results.length} {results.length === 1 ? 'match' : 'matches'})
+                    (Showing {Math.min(displayLimit, results.length)} of {results.length} {results.length === 1 ? 'match' : 'matches'})
                   </span>
                 )}
               </h2>
@@ -905,6 +949,7 @@ export default function SymptomSearch() {
                         background: 'white'
                       }}
                     >
+                      <option value="likelihood">Likelihood (Recommended)</option>
                       <option value="score">Match Score</option>
                       <option value="alpha">Alphabetical</option>
                       <option value="family">Specialty</option>
@@ -958,8 +1003,9 @@ export default function SymptomSearch() {
                 </p>
               </div>
             ) : (
+              <>
               <div style={{ display: 'flex', flexDirection: 'column', gap: viewMode === 'card' ? '1.5rem' : '0.75rem' }}>
-                {getSortedResults().map((result, idx) => (
+                {getDisplayedResults().map((result, idx) => (
                   viewMode === 'card' ? (
                     // Enhanced Card View
                     <div key={idx} style={{
@@ -1087,6 +1133,81 @@ export default function SymptomSearch() {
 
                         {expandedCards[idx] && (
                           <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '2px solid #e5e7eb' }}>
+                            {/* Work-Up Section */}
+                            {(result.tests || result.referrals) && (
+                              <div style={{ 
+                                marginBottom: '1.5rem',
+                                padding: '1rem',
+                                background: 'linear-gradient(to right, #e0f2fe, #f0f9ff)',
+                                borderRadius: '8px',
+                                borderLeft: '4px solid #0ea5e9'
+                              }}>
+                                <h4 style={{ 
+                                  margin: '0 0 0.75rem', 
+                                  color: '#075985', 
+                                  fontSize: '0.95rem', 
+                                  fontWeight: '700',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.5px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}>
+                                  <span>🔬</span> Recommended Work-Up
+                                </h4>
+                                
+                                {result.tests && result.tests.length > 0 && (
+                                  <div style={{ marginBottom: result.referrals && result.referrals.length > 0 ? '1rem' : '0' }}>
+                                    <h5 style={{ 
+                                      margin: '0 0 0.5rem', 
+                                      color: '#0c4a6e', 
+                                      fontSize: '0.85rem', 
+                                      fontWeight: '600'
+                                    }}>
+                                      📋 Diagnostic Tests:
+                                    </h5>
+                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#075985' }}>
+                                      {result.tests.map((test, i) => (
+                                        <li key={i} style={{ 
+                                          marginBottom: '0.5rem', 
+                                          lineHeight: '1.6',
+                                          fontSize: '0.9rem',
+                                          fontWeight: '500'
+                                        }}>
+                                          {test}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+                                
+                                {result.referrals && result.referrals.length > 0 && (
+                                  <div>
+                                    <h5 style={{ 
+                                      margin: '0 0 0.5rem', 
+                                      color: '#0c4a6e', 
+                                      fontSize: '0.85rem', 
+                                      fontWeight: '600'
+                                    }}>
+                                      👨‍⚕️ Specialist Referrals:
+                                    </h5>
+                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#075985' }}>
+                                      {result.referrals.map((referral, i) => (
+                                        <li key={i} style={{ 
+                                          marginBottom: '0.5rem', 
+                                          lineHeight: '1.6',
+                                          fontSize: '0.9rem',
+                                          fontWeight: '500'
+                                        }}>
+                                          {referral}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            
                             {/* Clinical Pearls */}
                             {result.clinical_pearls && result.clinical_pearls.length > 0 && (
                               <div style={{ 
@@ -1273,6 +1394,63 @@ export default function SymptomSearch() {
                   )
                 ))}
               </div>
+              
+              {/* Show More Button */}
+              {hasMoreResults() && (
+                <div style={{ 
+                  marginTop: '2rem', 
+                  display: 'flex', 
+                  gap: '1rem',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexWrap: 'wrap'
+                }}>
+                  <button
+                    onClick={showMoreResults}
+                    style={{
+                      padding: '1rem 2rem',
+                      background: '#3b82f6',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                      transition: 'all 0.2s',
+                      minHeight: '48px'
+                    }}
+                    onMouseEnter={(e) => e.target.style.background = '#2563eb'}
+                    onMouseLeave={(e) => e.target.style.background = '#3b82f6'}
+                  >
+                    📊 Show 5 More Results ({getSortedResults().length - displayLimit} remaining)
+                  </button>
+                  <button
+                    onClick={showAllResults}
+                    style={{
+                      padding: '1rem 2rem',
+                      background: 'white',
+                      color: '#3b82f6',
+                      border: '2px solid #3b82f6',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      transition: 'all 0.2s',
+                      minHeight: '48px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#eff6ff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'white';
+                    }}
+                  >
+                    📋 Show All {results.length} Results
+                  </button>
+                </div>
+              )}
+              </>
             )}
           </div>
         )}

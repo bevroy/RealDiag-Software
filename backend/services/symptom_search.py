@@ -37,6 +37,8 @@ class DiagnosisMatch(BaseModel):
     specificity: Optional[float] = None
     clinical_pearls: Optional[List[str]] = None
     management: Optional[List[str]] = None
+    tests: Optional[List[str]] = None  # Diagnostic tests to order
+    referrals: Optional[List[str]] = None  # Specialist referrals
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -189,7 +191,9 @@ async def search_by_symptoms(request: SymptomSearchRequest):
                     sensitivity=rule.get('sensitivity'),
                     specificity=rule.get('specificity'),
                     clinical_pearls=rule.get('clinical_pearls', []) if 'clinical_pearls' in rule else None,
-                    management=rule.get('management', []) if 'management' in rule else None
+                    management=rule.get('management', []) if 'management' in rule else None,
+                    tests=rule.get('tests', []) if 'tests' in rule else None,
+                    referrals=rule.get('referrals', []) if 'referrals' in rule else None
                 )
                 
                 results.append(diagnosis_match)
