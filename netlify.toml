@@ -2,11 +2,15 @@
   base = "frontend"
   command = "npm run build"
   publish = ".next"
+  # Force fresh build - updated 2025-11-17
+  ignore = "git diff --quiet HEAD^ HEAD ./"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   NEXT_TELEMETRY_DISABLED = "1"
+  # Cache buster for comprehensive rule updates
+  BUILD_ID = "2025-11-17-comprehensive-rules"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

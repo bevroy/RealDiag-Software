@@ -1,7 +1,8 @@
 /**
  * Symptom-Based Diagnostic Search Interface
  * Phase 3: Mobile-First Responsive Design & User Personalization
- * Last updated: 2025-11-14
+ * Last updated: 2025-11-17 - Comprehensive rule updates with clinical_pearls, management, tests, referrals
+ * Build: 2025-11-17T14:30:00Z
  */
 
 import { useState, useMemo, useEffect } from 'react';

@@ -130,6 +130,24 @@ export default function Home() {
       background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
+      {/* NEW UPDATE BANNER */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto 1rem',
+        padding: '1rem 1.5rem',
+        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        borderRadius: '12px',
+        color: 'white',
+        textAlign: 'center',
+        boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+      }}>
+        <strong>🎉 NEW: Comprehensive Clinical Guidelines!</strong>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', opacity: 0.95 }}>
+          140+ diagnostic rules now include detailed clinical pearls, management protocols, recommended tests, and specialist referrals.
+          Updated: November 17, 2025
+        </p>
+      </div>
+
       {/* Header */}
       <div style={{
         maxWidth: '1400px',
