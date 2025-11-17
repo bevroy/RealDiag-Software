@@ -37,6 +37,28 @@ rules:
       - Hematuria
       - Fever (if pyelonephritis)
       - CVA tenderness (if pyelonephritis)
+    clinical_pearls:
+      - "E. coli causes 80-85% of community-acquired UTIs"
+      - "Uncomplicated UTI: Young, healthy women without structural/functional abnormalities"
+      - "Complicated UTI: Male, pregnancy, catheter, obstruction, immunocompromised, pyelonephritis"
+      - "Nitrites (specific for bacteria), leukocyte esterase (sensitive for pyuria)"
+      - "Treat empirically if symptoms present, don't wait for culture (3-day course for uncomplicated)"
+      - "Recurrent UTIs (≥2 in 6mo or ≥3 in 1yr): Consider prophylaxis or post-coital antibiotics"
+    management:
+      - "Uncomplicated cystitis: Nitrofurantoin 100mg BID x 5d or TMP-SMX DS BID x 3d (if local resistance <20%)"
+      - "Alternative: Fosfomycin 3g single dose (convenient but lower efficacy)"
+      - "Complicated/pyelonephritis: Ciprofloxacin 500mg BID x 7d or ceftriaxone 1g IV x1 then PO"
+      - "Pregnant: Nitrofurantoin (avoid 1st trimester and near term), cephalexin, or amoxicillin-clavulanate x 7d"
+      - "Catheter-associated: Remove/change catheter + antibiotics x 7d"
+    tests:
+      - "Urinalysis with microscopy (pyuria, bacteriuria, nitrites, leukocyte esterase)"
+      - "Urine culture if: Complicated, pyelonephritis, pregnant, or failed initial therapy"
+      - "Renal ultrasound if pyelonephritis with poor response (rule out abscess, obstruction)"
+      - "No need for test-of-cure UA/culture if symptoms resolve"
+    referrals:
+      - "Urology if: Recurrent UTIs in men, anatomic abnormality, stones, obstruction"
+      - "Nephrology if acute pyelonephritis complicated by AKI"
+      - "Admission if: Sepsis, pregnant with pyelonephritis, inability to tolerate oral hydration"
     icd10:
       - N39.0
       - N30.00
@@ -52,6 +74,28 @@ rules:
       - Fever
       - Regional lymphadenopathy
       - Clearly demarcated borders (vs diffuse)
+    clinical_pearls:
+      - "Strep pyogenes (Group A Strep) and Staph aureus most common organisms"
+      - "Purulent cellulitis (abscess/drainage): Suspect MRSA, needs I&D + antibiotics"
+      - "Non-purulent cellulitis: Beta-lactam (cephalexin) covers strep adequately"
+      - "Mark borders with marker pen to track progression or improvement"
+      - "Elevation + NSAIDs reduce inflammation and edema"
+      - "Recurrent cellulitis: Consider prophylaxis (penicillin VK 250-500mg daily)"
+    management:
+      - "Non-purulent: Cephalexin 500mg PO QID x 5-7 days or dicloxacillin 500mg QID"
+      - "MRSA risk (purulent, IVDU, prior MRSA): TMP-SMX DS 1-2 tabs BID + cephalexin OR doxycycline 100mg BID"
+      - "Severe/systemic: Admit for IV cefazolin 2g q8h or vancomycin 15-20mg/kg q12h if MRSA"
+      - "Abscess: Incision and drainage (I&D) REQUIRED + antibiotics"
+      - "Elevation of affected extremity, NSAIDs for pain and inflammation"
+    tests:
+      - "Clinical diagnosis (no routine lab testing for uncomplicated)"
+      - "Blood cultures if systemic symptoms (fever, tachycardia)"
+      - "Wound culture if abscess drained"
+      - "Ultrasound if abscess suspected but not clinically apparent"
+    referrals:
+      - "Admission if: Systemic toxicity, failed outpatient therapy, immunocompromised, rapidly progressive"
+      - "Surgery if necrotizing fasciitis suspected (pain out of proportion, crepitus, rapid progression)"
+      - "Dermatology if atypical or recurrent"
     icd10:
       - L03.90
       - L03.115
@@ -68,6 +112,28 @@ rules:
       - Photophobia
       - Altered mental status
       - Kernig's or Brudzinski's sign
+    clinical_pearls:
+      - "Classic triad (fever, neck stiffness, altered mental status) present in only 44% of cases"
+      - "Don't delay antibiotics for LP or imaging - empiric treatment immediately if suspected"
+      - "Empiric: Vancomycin + ceftriaxone (add ampicillin if >50yo or immunocompromised for Listeria)"
+      - "Dexamethasone 10mg IV before or with first antibiotic dose reduces mortality and sequelae"
+      - "CSF: WBC >1000 (PMN predominant), glucose <40 mg/dL, protein >200 mg/dL"
+      - "Mortality 15-25% despite treatment; neurologic sequelae (hearing loss, seizures) common"
+    management:
+      - "Blood cultures, then empiric antibiotics IMMEDIATELY (don't wait for LP or CT)"
+      - "Vancomycin 15-20mg/kg IV q8-12h + ceftriaxone 2g IV q12h"
+      - "If >50yo or immunocompromised: Add ampicillin 2g IV q4h (covers Listeria)"
+      - "Dexamethasone 10mg IV q6h x 4 days (start with or before antibiotics)"
+      - "LP when safe (after CT if focal deficit, papilledema, immunocompromised)"
+    tests:
+      - "Blood cultures x2 before antibiotics"
+      - "CT head if focal deficit, papilledema, immunocompromised, or seizure BEFORE LP"
+      - "Lumbar puncture: CSF cell count, glucose, protein, gram stain, culture"
+      - "Procalcitonin (elevated suggests bacterial vs viral)"
+    referrals:
+      - "ICU admission for all bacterial meningitis"
+      - "Infectious disease consult"
+      - "Neurology if complications (seizures, stroke, hydrocephalus)"
     icd10:
       - G00.9
       - G03.9
@@ -83,6 +149,28 @@ rules:
       - Focal neurologic deficits
       - Headache
       - Behavioral changes
+    clinical_pearls:
+      - "HSV encephalitis most common viral cause (and most important to treat)"
+      - "Start acyclovir empirically if encephalitis suspected - don't wait for PCR results"
+      - "MRI: Temporal lobe involvement (HSV), hemorrhagic changes"
+      - "EEG: PLEDS (periodic lateralizing epileptiform discharges) suggest HSV"
+      - "Mortality 70% untreated HSV; 30% with treatment; neurologic sequelae common"
+      - "Other causes: VZV, enteroviruses, arboviruses (West Nile, EEE), rabies"
+    management:
+      - "Empiric acyclovir 10mg/kg IV q8h IMMEDIATELY (for HSV)"
+      - "Continue acyclovir 14-21 days if HSV confirmed on PCR"
+      - "Supportive care: IV fluids, anticonvulsants if seizures (levetiracetam, fosphenytoin)"
+      - "Consider antibiotics (vancomycin + ceftriaxone) until bacterial meningitis ruled out"
+      - "Treat elevated ICP if present (elevate head, osmotic therapy)"
+    tests:
+      - "MRI brain with contrast (temporal lobe enhancement, hemorrhagic changes suggest HSV)"
+      - "Lumbar puncture: CSF PCR for HSV, VZV, enteroviruses; cell count/glucose/protein"
+      - "EEG (PLEDS suggest HSV encephalitis)"
+      - "Blood cultures (rule out bacterial)"
+    referrals:
+      - "ICU admission"
+      - "Neurology consult"
+      - "Infectious disease consult"
     icd10:
       - G04.90
       - A86
@@ -99,6 +187,28 @@ rules:
       - Loss of taste or smell
       - Body aches
       - Sore throat
+    clinical_pearls:
+      - "SARS-CoV-2 virus, respiratory droplet transmission"
+      - "Incubation 2-14 days (median 5 days)"
+      - "Risk factors for severe disease: Age >65, obesity, diabetes, immunocompromised, lung/heart disease"
+      - "Nirmatrelvir-ritonavir (Paxlovid) within 5 days reduces hospitalization 89% (high-risk patients)"
+      - "Dexamethasone reduces mortality in hospitalized patients requiring oxygen"
+      - "Long COVID: Persistent symptoms >4 weeks (fatigue, dyspnea, brain fog)"
+    management:
+      - "Mild-moderate: Supportive care (rest, hydration, acetaminophen for fever)"
+      - "High-risk within 5 days: Nirmatrelvir-ritonavir (Paxlovid) 300/100mg BID x 5 days"
+      - "Alternative: Molnupiravir 800mg BID x 5 days (if Paxlovid contraindicated)"
+      - "Hospitalized requiring oxygen: Dexamethasone 6mg daily x 10 days + remdesivir 200mg IV x1, then 100mg daily x 5d"
+      - "Severe: Tocilizumab or baricitinib + dexamethasone, mechanical ventilation if needed"
+    tests:
+      - "NAAT (PCR) - gold standard, high sensitivity"
+      - "Rapid antigen test - quick, less sensitive (good PPV if positive, repeat if negative with symptoms)"
+      - "Chest X-ray if moderate-severe (bilateral infiltrates)"
+      - "D-dimer, ferritin, CRP elevated (poor prognostic indicators)"
+    referrals:
+      - "Hospitalization if: SpO2 <94%, respiratory rate >30, severe symptoms"
+      - "ICU if respiratory failure, shock, or multiorgan dysfunction"
+      - "Infectious disease for complex cases or immunocompromised"
     icd10:
       - U07.1
       - J12.82
@@ -115,6 +225,28 @@ rules:
       - Sore throat
       - Fatigue
       - Seasonal pattern
+    clinical_pearls:
+      - "Seasonal (winter in Northern hemisphere), types A and B cause epidemics"
+      - "Oseltamivir (Tamiflu) most effective if started within 48 hours of symptom onset"
+      - "Reduces symptom duration by ~1 day and reduces complications in high-risk patients"
+      - "High-risk: Age >65, pregnant, chronic diseases (lung, heart, diabetes), immunocompromised"
+      - "Complications: Pneumonia (viral or secondary bacterial), myocarditis, encephalitis, myositis"
+      - "Annual vaccination recommended for all >6 months old"
+    management:
+      - "Supportive care: Rest, fluids, acetaminophen or NSAIDs for fever/myalgias"
+      - "Antiviral (if <48hr from onset): Oseltamivir 75mg PO BID x 5 days"
+      - "Alternative: Baloxavir marboxil 40-80mg single dose (one-time treatment)"
+      - "Prophylaxis if exposed: Oseltamivir 75mg daily x 7-10 days (unvaccinated high-risk)"
+      - "Treat secondary bacterial pneumonia if develops (amoxicillin-clavulanate or ceftriaxone)"
+    tests:
+      - "Rapid influenza diagnostic test (RIDT) - quick but lower sensitivity (50-70%)"
+      - "RT-PCR (gold standard, high sensitivity)"
+      - "Chest X-ray if concern for pneumonia"
+      - "Clinical diagnosis reasonable during flu season with typical symptoms"
+    referrals:
+      - "Hospitalization if: Severe symptoms, hypoxia, dehydration, high-risk with complications"
+      - "ICU if respiratory failure or septic shock"
+      - "Infectious disease if immunocompromised or resistant infection"
     icd10:
       - J11.1
       - J10.1
@@ -131,6 +263,29 @@ rules:
       - Oral thrush
       - Kaposi's sarcoma
       - Low CD4 count
+    clinical_pearls:
+      - "AIDS definition: CD4 <200 or AIDS-defining illness (PCP, CMV, cryptococcal meningitis, Kaposi's)"
+      - "Acute HIV: Mononucleosis-like syndrome 2-4 weeks after exposure (fever, rash, lymphadenopathy)"
+      - "PrEP (pre-exposure prophylaxis): Tenofovir-emtricitabine daily reduces transmission >90%"
+      - "PEP (post-exposure): Start within 72 hours, same regimen x 28 days"
+      - "U=U: Undetectable viral load = Untransmittable"
+      - "Screen all ages 13-64 at least once, high-risk annually"
+    management:
+      - "Start ART (antiretroviral therapy) immediately after diagnosis (regardless of CD4)"
+      - "Preferred regimen: Integrase inhibitor (bictegravir or dolutegravir) + 2 NRTIs (tenofovir-emtricitabine)"
+      - "Example: Biktarvy (bictegravir-tenofovir-emtricitabine) 1 tablet daily"
+      - "Prophylaxis: TMP-SMX DS daily if CD4 <200 (prevents PCP, toxo)"
+      - "Monitor: Viral load (goal undetectable <50), CD4 count"
+    tests:
+      - "HIV antibody/antigen test (4th generation) - detects HIV-1, HIV-2, p24 antigen"
+      - "HIV RNA viral load (confirms diagnosis if antibody positive)"
+      - "CD4 count (assesses immune status)"
+      - "Genotypic resistance testing before starting ART"
+      - "Screen for: Hepatitis B/C, STIs, TB (PPD or IGRA)"
+    referrals:
+      - "HIV clinic or infectious disease for all newly diagnosed"
+      - "Social work (medication assistance programs, housing, mental health)"
+      - "Start ART as soon as possible (improves outcomes)"
     icd10:
       - B20
       - Z21
@@ -169,6 +324,30 @@ rules:
       - Localized swelling and erythema
       - Draining sinus tract
       - History of trauma, surgery, or diabetic foot ulcer
+    clinical_pearls:
+      - "Hematogenous (children, IVDU): Long bones, vertebrae; Staph aureus most common"
+      - "Contiguous (adults): From adjacent infection, surgery, trauma; polymicrobial if diabetic foot"
+      - "MRI is most sensitive test (detects within days), bone scan less specific"
+      - "Bone biopsy for culture (gold standard) - guides antibiotic choice"
+      - "Duration: 4-6 weeks IV antibiotics, may need PICC line"
+      - "Diabetic foot osteomyelitis: Probe-to-bone test (if probe touches bone = likely osteo)"
+    management:
+      - "Empiric: Vancomycin 15-20mg/kg IV q12h (covers MRSA) until culture results"
+      - "If MSSA: Switch to nafcillin or cefazolin"
+      - "Diabetic foot (polymicrobial): Vancomycin + piperacillin-tazobactam"
+      - "Duration: 4-6 weeks IV antibiotics, may transition to PO after 2 weeks if improving"
+      - "Surgery if: Abscess, sequestrum (dead bone), failed medical therapy, hardware infection"
+    tests:
+      - "MRI (most sensitive, detects marrow edema within 3-5 days)"
+      - "Bone biopsy with culture (gold standard for organism identification)"
+      - "Blood cultures, ESR, CRP (elevated, track response to treatment)"
+      - "X-ray (shows changes after 10-14 days - periosteal elevation, lytic lesions)"
+      - "Probe-to-bone test (diabetic foot) - positive if probe contacts bone"
+    referrals:
+      - "Infectious disease for antibiotic management (long-term IV)"
+      - "Orthopedic surgery if abscess, sequestrum, or hardware-associated"
+      - "Vascular surgery if diabetic foot with ischemia"
+      - "PICC line placement for prolonged IV antibiotics"
     icd10:
       - M86.9
       - M86.8X9
@@ -184,6 +363,29 @@ rules:
       - Headache
       - Joint pain
       - Tick exposure in endemic area
+    clinical_pearls:
+      - "Borrelia burgdorferi transmitted by Ixodes tick (deer tick), endemic in Northeast/Upper Midwest US"
+      - "Erythema migrans (EM) rash diagnostic if present (70-80% of cases) - treat clinically, no testing needed"
+      - "Early localized: EM rash. Early disseminated: Multiple EM, facial palsy, carditis, meningitis"
+      - "Late: Lyme arthritis (knee), encephalopathy"
+      - "Two-tier testing: ELISA screening, if positive confirm with Western blot"
+      - "Doxycycline preferred (also covers anaplasmosis, another tick-borne disease)"
+    management:
+      - "Early localized or disseminated: Doxycycline 100mg PO BID x 10-21 days"
+      - "Alternative: Amoxicillin 500mg TID or cefuroxime 500mg BID (if pregnant or <8 years old)"
+      - "Lyme carditis: Ceftriaxone 2g IV daily x 14-21 days"
+      - "Lyme meningitis/encephalitis: Ceftriaxone 2g IV daily x 14-28 days"
+      - "Lyme arthritis: Doxycycline 100mg BID x 28 days"
+    tests:
+      - "Clinical diagnosis if EM rash present (no testing needed)"
+      - "Two-tier serology: ELISA screening, if positive confirm with Western blot"
+      - "Testing not useful in first 3-4 weeks (antibodies not yet developed)"
+      - "CSF analysis if neurologic symptoms (lymphocytic pleocytosis)"
+      - "ECG if carditis suspected (AV block)"
+    referrals:
+      - "Infectious disease if neurologic involvement, carditis, or refractory symptoms"
+      - "Cardiology if Lyme carditis (AV block may need temporary pacing)"
+      - "Rheumatology if Lyme arthritis refractory to antibiotics"
     icd10:
       - A69.20
       - A69.23
@@ -199,6 +401,28 @@ rules:
       - Splenomegaly
       - Fatigue
       - Atypical lymphocytes
+    clinical_pearls:
+      - "Epstein-Barr virus (EBV) most common cause, transmitted via saliva ('kissing disease')"
+      - "Classic triad: Fever, pharyngitis, lymphadenopathy (especially posterior cervical)"
+      - "Avoid ampicillin/amoxicillin (causes maculopapular rash in 90-100% of EBV patients)"
+      - "Splenomegaly in 50% (peak 2-3 weeks) - avoid contact sports 3-4 weeks to prevent splenic rupture"
+      - "Monospot test (heterophile antibody): Quick, but false negative in first week or young children"
+      - "Self-limited, supportive care only (no antivirals effective)"
+    management:
+      - "Supportive care: Rest, fluids, NSAIDs or acetaminophen for fever/pain"
+      - "Avoid contact sports for 3-4 weeks (risk splenic rupture)"
+      - "Short course steroids if severe tonsillar hypertrophy with airway compromise (prednisone 40-60mg x 5-7 days)"
+      - "Avoid ampicillin/amoxicillin (causes rash)"
+      - "Most recover in 2-4 weeks, but fatigue may persist months"
+    tests:
+      - "Monospot test (heterophile antibody) - quick, but negative first week or in young children"
+      - "EBV serology: VCA-IgM (acute), VCA-IgG (past/chronic), EBNA (past infection)"
+      - "CBC: Lymphocytosis with atypical lymphocytes (>10%)"
+      - "Liver function tests (mild transaminitis common)"
+    referrals:
+      - "ENT if severe tonsillar hypertrophy with airway compromise"
+      - "Hematology if severe cytopenias or prolonged symptoms"
+      - "Most managed outpatient with supportive care"
     icd10:
       - B27.90
     snomed:
