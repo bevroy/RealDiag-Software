@@ -9,6 +9,31 @@ rules:
       - sudden severe thunderclap headache
       - neck stiffness, altered mental status
       - sentinel bleed may precede rupture
+      - "Worst headache of life" reaching maximum intensity in seconds
+      - Photophobia, nausea, vomiting
+      - Syncope at onset (50%)
+      - Focal neurologic deficits if mass effect
+    clinical_pearls:
+      - "Ruptured saccular aneurysm (85%), perimesencephalic venous bleed (10%), AVM, trauma"
+      - "CT head 95% sensitive if <6 hours, sensitivity decreases over time"
+      - "LP if CT negative and high suspicion: Xanthochromia (yellow CSF) confirms SAH"
+      - "Hunt-Hess grade I-V predicts outcomes: I (mild headache) to V (coma)"
+      - "Nimodipine 60mg PO q4h x21 days: Prevents vasospasm, improves outcomes"
+      - "Re-bleeding risk highest in first 24hr: Urgent aneurysm repair"
+    management:
+      - "Immediate: Noncontrast CT head, if negative → LP (tube 4 for xanthochromia), neurosurgery consult"
+      - "CTA or MRA: Identify aneurysm location for endovascular coiling vs surgical clipping"
+      - "Nimodipine 60mg PO/NG q4h: Start immediately, continue 21 days to prevent vasospasm"
+      - "BP control: Nicardipine or labetalol to SBP <160 (avoid hypotension)"
+      - "Disposition: ICU admission, neurosurgery/IR for urgent aneurysm repair, daily TCDs to monitor vasospasm"
+    tests:
+      - "Noncontrast CT head: Blood in subarachnoid space (95% sensitive if <6hr)"
+      - "LP if CT negative: Xanthochromia (tube 4 centrifuged, yellow supernatant from bilirubin)"
+      - "CTA head/neck or MRA: Identify aneurysm location, size, morphology"
+      - "Transcranial Doppler (TCD): Daily monitoring for vasospasm days 4-14"
+    referrals:
+      - "Neurosurgery EMERGENTLY: Aneurysm coiling (endovascular) or clipping (open)"
+      - "ICU admission for all SAH patients"
     icd10:
       - I60.9    # Nontraumatic subarachnoid hemorrhage, unspecified
     snomed:
@@ -20,6 +45,29 @@ rules:
       - sudden severe headache with focal deficits
       - nausea, vomiting, altered consciousness
       - hypertension common risk factor
+      - Markedly elevated BP (often >200/120)
+      - Seizures (10-15%, more common than ischemic stroke)
+      - "Common locations: Basal ganglia (hypertension), lobar (amyloid angiopathy)"
+    clinical_pearls:
+      - "Reverse anticoagulation immediately: Vitamin K 10mg IV + PCC (or FFP) for warfarin"
+      - "BP lowering: Target SBP 140-160 mmHg (lower mortality, but avoid <140)"
+      - "Neurosurgery consult: For cerebellar hemorrhage >3cm, hydrocephalus, mass effect"
+      - "Hold tPA/anticoagulation: Contraindicated, will worsen bleeding"
+      - "ICH score predicts mortality: GCS + ICH volume + IVH + age + location"
+    management:
+      - "Immediate: Noncontrast CT head, reverse anticoagulation, BP control, neurosurgery consult"
+      - "Reverse anticoagulation: Warfarin (PCC + vit K), DOACs (idarucizumab for dabigatran, andexanet for Xa inhibitors)"
+      - "BP control: Nicardipine 5mg/hr IV titrated to SBP 140-160 (avoid aggressive lowering)"
+      - "ICP management: Elevate HOB 30°, maintain CPP >60, consider mannitol/hypertonic saline if herniation"
+      - "Disposition: ICU admission, neurosurgery evaluation for surgical evacuation vs observation"
+    tests:
+      - "Noncontrast CT head: Hyperdense blood in brain parenchyma"
+      - "CT angiography (CTA): If concern for vascular malformation, tumor, or secondary cause"
+      - "MRI brain: If lobar hemorrhage (rule out amyloid angiopathy, tumor)"
+      - "Coagulation studies: PT/INR, aPTT, platelet count"
+    referrals:
+      - "Neurosurgery URGENTLY: For cerebellar hemorrhage >3cm, hydrocephalus, significant mass effect"
+      - "ICU admission for all ICH patients"
     icd10:
       - I61.9    # Nontraumatic intracerebral hemorrhage, unspecified
     snomed:
@@ -78,6 +126,30 @@ rules:
       - convulsions, loss of consciousness, altered awareness
       - postictal confusion
       - may have aura or automatisms
+      - Recurrent unprovoked seizures (≥2 seizures >24 hours apart)
+      - "Generalized: Tonic-clonic, absence, myoclonic, atonic"
+      - "Focal: Aware vs impaired awareness, with or without motor symptoms"
+    clinical_pearls:
+      - "Diagnosis: ≥2 unprovoked seizures OR 1 seizure + high recurrence risk (>60% at 10 years)"
+      - "EEG: Interictal epileptiform discharges support diagnosis (50% yield, repeat improves to 80%)"
+      - "MRI brain: Rule out structural cause (tumor, vascular malformation, hippocampal sclerosis)"
+      - "First-line AEDs: Levetiracetam (broad spectrum, few interactions), lamotrigine, valproate"
+      - "Focal seizures: Levetiracetam, lamotrigine, carbamazepine, oxcarbazepine"
+      - "Generalized seizures: Valproate (avoid women of childbearing age), levetiracetam, lamotrigine"
+    management:
+      - "First seizure: Neuro consult, EEG, MRI brain, consider AED if high recurrence risk"
+      - "Recurrent seizures: Start AED (levetiracetam 500mg BID or lamotrigine 25mg daily titrate)"
+      - "Monotherapy first: Start one AED, titrate to effect, if fails try alternative monotherapy"
+      - "Seizure precautions: No driving (state-specific, typically 3-12 months seizure-free), no swimming alone, no heights"
+      - "Breakthrough seizure: Check AED levels, assess compliance, identify triggers (sleep deprivation, alcohol, meds)"
+    tests:
+      - "EEG: Interictal spikes, sharp waves (50% first EEG, 80% after repeat)"
+      - "MRI brain with epilepsy protocol: Hippocampal sclerosis, cortical dysplasia, tumors"
+      - "AED levels: Phenytoin, valproate, carbamazepine (not needed for levetiracetam, lamotrigine)"
+      - "Metabolic panel: Rule out electrolyte abnormalities triggering seizures"
+    referrals:
+      - "Neurology for: New-onset seizures, medication management, refractory epilepsy"
+      - "Epilepsy surgery evaluation if: Drug-resistant (failed ≥2 appropriate AEDs)"
     icd10:
       - G40.909  # Epilepsy, unspecified, not intractable, without status epilepticus
       - R56.9    # Unspecified convulsions
@@ -89,6 +161,32 @@ rules:
     presentations:
       - prolonged seizure >5 minutes or recurrent seizures without recovery
       - medical emergency requiring immediate treatment
+      - Generalized tonic-clonic (most common) or focal with impaired awareness
+      - Altered consciousness, coma
+      - High mortality (10-20%) if treatment delayed
+      - "Causes: Medication noncompliance, CNS infection, metabolic, withdrawal"
+    clinical_pearls:
+      - "Time is brain: Start treatment at 5 minutes, not 30 minutes (old definition outdated)"
+      - "Benzodiazepines FIRST: Lorazepam 0.1mg/kg IV (or diazepam, midazolam IM)"
+      - "If benzos fail (refractory): Fosphenytoin 20 PE/kg IV or levetiracetam 60mg/kg IV"
+      - "If still seizing: Intubation + propofol or midazolam infusion, EEG monitoring"
+      - "Check glucose immediately (hypoglycemia can mimic seizure)"
+      - "Thiamine 100mg IV before dextrose if malnourished/alcoholic"
+    management:
+      - "0-5 min: ABCs, O2, IV access, check glucose, give thiamine if indicated"
+      - "5-10 min: Lorazepam 4mg IV (may repeat once) or midazolam 10mg IM"
+      - "10-20 min: Fosphenytoin 20 PE/kg IV or levetiracetam 60mg/kg IV (max 4500mg)"
+      - "20-40 min: Refractory status - intubate, propofol/midazolam drip, ICU, EEG"
+      - "Workup: Labs (CBC, CMP, tox screen, AED levels), LP if concern for infection, MRI brain"
+    tests:
+      - "Glucose: Fingerstick immediately (hypoglycemia can cause seizures)"
+      - "Labs: CBC, CMP (lytes, Ca, Mg), AED levels if on meds, tox screen"
+      - "LP: If fever or concern for meningitis/encephalitis (after CT if focal deficits)"
+      - "MRI brain: After stabilization to rule out structural cause"
+      - "EEG: Continuous monitoring if refractory status or persistent altered mental status"
+    referrals:
+      - "Neurology STAT for refractory status epilepticus"
+      - "ICU admission for all status epilepticus requiring >1 dose of benzos"
     icd10:
       - G41.9    # Status epilepticus, unspecified
     snomed:
@@ -126,6 +224,29 @@ rules:
       - bilateral band-like pressure headache
       - mild to moderate intensity
       - not aggravated by routine physical activity
+      - "Pressing/tightening quality (non-pulsating)"
+      - Duration 30 minutes to 7 days
+      - "May have photophobia OR phonophobia (not both)"
+      - No nausea or vomiting (distinguishes from migraine)
+    clinical_pearls:
+      - "Most common primary headache disorder (lifetime prevalence 40-80%)"
+      - "Episodic (<15 days/month) vs chronic (≥15 days/month for >3 months)"
+      - "Associated with neck muscle tightness, stress, poor posture, lack of sleep"
+      - "Medication overuse headache: >10 days/month analgesic use transforms episodic to chronic"
+      - "Red flags requiring imaging: New onset >50, thunderclap, focal deficits, fever, cognitive changes"
+    management:
+      - "Acute: NSAIDs (ibuprofen 400-800mg, naproxen 500mg) or acetaminophen 1000mg"
+      - "Avoid opioids and butalbital: High abuse potential, worsen chronic headaches"
+      - "Chronic tension headache prophylaxis: Amitriptyline 10-75mg qhs (most effective)"
+      - "Non-pharmacologic: Physical therapy, stress management, CBT, biofeedback, trigger point injections"
+      - "Medication withdrawal if overuse: Gradual taper, expect rebound headaches x2-4 weeks"
+    tests:
+      - "Clinical diagnosis: No imaging needed if typical presentation and normal neuro exam"
+      - "Imaging (CT or MRI) if: Red flags, new onset >50, progressive, focal neuro findings"
+      - "Headache diary: Track frequency, triggers, medication use"
+    referrals:
+      - "Neurology if: Chronic refractory headaches, medication overuse, unclear diagnosis"
+      - "Physical therapy for: Cervicogenic component, muscle tension"
     icd10:
       - G44.209  # Tension-type headache, unspecified
     snomed:
@@ -137,6 +258,29 @@ rules:
       - brief episodes of vertigo with head position changes
       - positive Dix-Hallpike maneuver
       - nystagmus with characteristic pattern
+      - "Vertigo lasting seconds to 1 minute with head movement"
+      - "Triggered by: Rolling over in bed, looking up, bending over"
+      - "Posterior canal (90%): Upbeat-torsional nystagmus toward affected ear"
+      - "No hearing loss or tinnitus (distinguishes from Meniere's)"
+    clinical_pearls:
+      - "Most common cause of vertigo (20-30% of all vertigo)"
+      - "Otoconia (calcium carbonate crystals) dislodge into semicircular canals"
+      - "Dix-Hallpike test: Positive = vertigo + nystagmus with 30-second delay, fatigues with repetition"
+      - "Epley maneuver: 80% success rate after 1-2 treatments"
+      - "Recurrence rate: 50% at 5 years, may need repeat Epley"
+    management:
+      - "Dix-Hallpike maneuver: Patient sits upright, turn head 45° to affected side, rapidly lay supine with head hanging 20°"
+      - "Epley (canalith repositioning) maneuver: 5 positions held x30 seconds each to move crystals out of canal"
+      - "Epley steps: (1) Dix-Hallpike position, (2) rotate head 90° to opposite side, (3) roll onto side, (4) sit upright"
+      - "Meclizine 25mg TID: Symptomatic relief for severe nausea, but doesn't speed recovery (avoid chronic use)"
+      - "Vestibular exercises (Brandt-Daroff): If Epley fails, home exercises to habituate"
+    tests:
+      - "Dix-Hallpike maneuver: Diagnostic test, positive = vertigo + upbeat-torsional nystagmus"
+      - "No imaging needed: Unless atypical features (central nystagmus, hearing loss, focal deficits)"
+      - "Audiometry if: Hearing loss present (consider Meniere's, acoustic neuroma)"
+    referrals:
+      - "ENT or vestibular physical therapy if: Refractory to Epley maneuvers (after 2-3 attempts)"
+      - "Neurology if: Atypical features, central vertigo suspected"
     icd10:
       - H81.1     # Benign paroxysmal positional vertigo
     snomed:
@@ -148,6 +292,30 @@ rules:
       - sudden severe unilateral facial pain
       - electric shock-like sensations
       - triggered by touch, chewing, or talking
+      - "Intense stabbing pain lasting seconds to 2 minutes"
+      - "Affects V2 (maxillary) or V3 (mandibular) divisions most commonly"
+      - "Trigger zones: Light touch to face, wind, brushing teeth"
+      - Unilateral facial spasm may accompany pain
+    clinical_pearls:
+      - "Classic (idiopathic) TN: Vascular compression of trigeminal nerve root (90%)"
+      - "Secondary TN: MS (2-5% of MS patients), tumor, vascular malformation - younger age, bilateral"
+      - "Carbamazepine 200mg BID: First-line treatment, 70-80% response rate"
+      - "MRI brain with FIESTA sequence: Rule out MS plaques, tumor, vascular compression"
+      - "Surgical options if refractory: Microvascular decompression (70-80% long-term cure)"
+    management:
+      - "First-line: Carbamazepine 200mg BID, titrate to 400-800mg BID (check levels, aim 4-12 mcg/mL)"
+      - "Alternative: Oxcarbazepine 300mg BID (fewer side effects than carbamazepine), gabapentin, pregabalin"
+      - "Monitor: CBC, CMP (carbamazepine can cause hyponatremia, bone marrow suppression)"
+      - "Baclofen: Add-on if inadequate response to carbamazepine (10mg TID, titrate to 60-80mg/day)"
+      - "Surgical: Microvascular decompression (MVD) if refractory to meds - 70-80% long-term pain-free"
+    tests:
+      - "MRI brain with FIESTA or CISS sequence: Visualize neurovascular compression, rule out MS, tumor"
+      - "Clinical diagnosis: Typical triggers, brief electric shock pain, normal neuro exam"
+      - "Carbamazepine level: Therapeutic 4-12 mcg/mL"
+      - "CBC, CMP: Baseline and periodic monitoring on carbamazepine (hyponatremia, bone marrow suppression)"
+    referrals:
+      - "Neurology for: Atypical features (age <40, bilateral, sensory loss), refractory to first-line therapy"
+      - "Neurosurgery if: Failed medical management, consider microvascular decompression"
     icd10:
       - G50.0     # Trigeminal neuralgia
     snomed:
@@ -159,6 +327,33 @@ rules:
       - fluctuating muscle weakness, worsens with activity
       - ptosis, diplopia, bulbar symptoms
       - autoimmune disorder of neuromuscular junction
+      - "Ocular symptoms (85% present with): Ptosis, diplopia"
+      - "Bulbar symptoms: Dysphagia, dysarthria, facial weakness"
+      - "Generalized weakness: Proximal limb weakness, respiratory muscle involvement"
+      - Weakness improves with rest, worsens throughout day
+    clinical_pearls:
+      - "Autoimmune: Antibodies block ACh receptors at NMJ (anti-AChR 85%, anti-MuSK 5%)"
+      - "Ice pack test: Ptosis improves after ice on closed eyelid x2 min (80% sensitive)"
+      - "Pyridostigmine 60mg TID-QID: Acetylcholinesterase inhibitor, symptomatic relief"
+      - "Immunosuppression: Prednisone, azathioprine, mycophenolate for long-term control"
+      - "Thymectomy: 30% have thymoma (remove), 50% improve after thymectomy even without thymoma"
+      - "Myasthenic crisis: Respiratory failure from weakness, needs ICU + plasmapheresis/IVIG"
+    management:
+      - "Symptomatic: Pyridostigmine 60mg PO q4-6h (max 600mg/day), adjust based on response"
+      - "Immunosuppression: Prednisone 1mg/kg daily (may worsen first 2 weeks, hospitalize), taper after improvement"
+      - "Steroid-sparing: Azathioprine 2-3 mg/kg/day or mycophenolate 1000mg BID (takes 6-12 months)"
+      - "Myasthenic crisis: ICU admission, plasmapheresis or IVIG, mechanical ventilation if needed"
+      - "Thymectomy: For thymoma (always) or generalized MG age <65 without thymoma (improves outcomes)"
+    tests:
+      - "Serology: Anti-AChR antibodies (85% generalized, 50% ocular), anti-MuSK (5%, AChR-negative)"
+      - "Ice pack test: Apply ice to closed eyelid x2 min, ptosis improves (80% sensitive)"
+      - "EMG: Repetitive nerve stimulation shows >10% decrement (80% sensitive)"
+      - "CT chest: Thymoma present in 10-15% (anterior mediastinal mass)"
+      - "Edrophonium (Tensilon) test: Rarely used (cardiac risks), ice pack test preferred"
+    referrals:
+      - "Neurology for: Diagnosis confirmation, immunosuppression management"
+      - "Cardiothoracic surgery: Thymectomy (if thymoma or generalized MG age <65)"
+      - "ICU if: Myasthenic crisis (respiratory failure), FVC <15 mL/kg or NIF <-30 cmH2O"
     icd10:
       - G70.00   # Myasthenia gravis without (acute) exacerbation
     snomed:
@@ -196,6 +391,31 @@ rules:
       - fever, headache, altered mental status
       - seizures, focal neurological deficits
       - often viral (HSV, arbovirus)
+      - "Classic triad: Fever, headache, altered mental status (distinguishes from meningitis)"
+      - Personality changes, confusion, memory impairment
+      - Seizures (50% of HSV encephalitis)
+      - "Viral: HSV-1 (most common, 10-20%), VZV, EBV, enteroviruses, arboviruses (West Nile)"
+    clinical_pearls:
+      - "HSV encephalitis: Most common fatal sporadic encephalitis, temporal lobe involvement"
+      - "Start acyclovir empirically if suspicion: Do NOT wait for PCR results (high mortality if delayed)"
+      - "MRI: Temporal lobe inflammation (HSV), thalamic (arbovirus), basal ganglia (EV-71)"
+      - "LP: Lymphocytic pleocytosis, elevated protein, normal glucose (viral pattern)"
+      - "HSV PCR: 95% sensitive after 72 hours, may be negative early (repeat if high suspicion)"
+    management:
+      - "Empiric acyclovir 10mg/kg IV q8h: Start immediately if encephalitis suspected (covers HSV, VZV)"
+      - "LP: Cell count, protein, glucose, HSV PCR, VZV PCR, bacterial culture, enterovirus PCR"
+      - "MRI brain with contrast: Temporal lobe involvement suggests HSV"
+      - "Supportive: Seizure management (levetiracetam 1000-1500mg BID), ICP monitoring if needed"
+      - "Continue acyclovir x14-21 days if HSV confirmed (21 days for severe cases)"
+    tests:
+      - "LP: Lymphocytic pleocytosis (10-500 WBC), elevated protein (50-100), normal glucose, RBCs if HSV"
+      - "HSV PCR (CSF): 95% sensitive after 72 hours, 98% specific (gold standard)"
+      - "MRI brain: FLAIR hyperintensity in temporal lobes (HSV), thalamus (West Nile), basal ganglia (EV-71)"
+      - "EEG: Periodic lateralized epileptiform discharges (PLEDs) in temporal lobe suggest HSV"
+    referrals:
+      - "Neurology STAT for diagnosis and management"
+      - "ICU admission for: Altered mental status, seizures, respiratory compromise"
+      - "Infectious disease consult: For atypical organisms, immunocompromised"
     icd10:
       - G04.90   # Encephalitis, unspecified
     snomed:
@@ -207,6 +427,32 @@ rules:
       - relapsing-remitting or progressive neurological symptoms
       - optic neuritis, sensory changes, weakness, ataxia
       - MRI with demyelinating lesions
+      - "Optic neuritis (25% present with): Painful vision loss, RAPD"
+      - "Sensory symptoms: Paresthesias, Lhermitte sign (electric shock with neck flexion)"
+      - "Motor: Unilateral weakness, spasticity, hyperreflexia, Babinski sign"
+      - "Cerebellar: Ataxia, intention tremor, nystagmus, dysarthria"
+    clinical_pearls:
+      - "McDonald criteria: Dissemination in time (2+ attacks) and space (2+ CNS lesions)"
+      - "Relapsing-remitting MS (85%): Discrete attacks with full/partial recovery"
+      - "Primary progressive MS (10%): Gradual worsening from onset without relapses"
+      - "MRI: Periventricular white matter lesions (Dawson fingers), juxtacortical, infratentorial"
+      - "OCT (optical coherence tomography): Retinal nerve fiber layer thinning predicts disability"
+      - "Disease-modifying therapy (DMT): Start early to prevent disability"
+    management:
+      - "Acute relapse: Methylprednisolone 1g IV daily x3-5 days (speeds recovery, doesn't change long-term outcome)"
+      - "First-line DMT: Interferon beta, glatiramer, teriflunomide, dimethyl fumarate"
+      - "High-efficacy DMT (aggressive disease): Natalizumab, ocrelizumab, alemtuzumab"
+      - "Symptomatic: Baclofen/tizanidine (spasticity), amantadine (fatigue), oxybutynin (bladder)"
+      - "MRI monitoring: Annual MRI to assess disease activity and treatment response"
+    tests:
+      - "MRI brain/spine with contrast: Periventricular white matter lesions, enhancement indicates active inflammation"
+      - "LP: Oligoclonal bands (95% MS, absent in serum), elevated IgG index"
+      - "VEP (visual evoked potentials): Prolonged latency (optic nerve demyelination)"
+      - "Serology: Check for NMO-IgG (aquaporin-4 antibody) to exclude neuromyelitis optica"
+    referrals:
+      - "Neurology for: Suspected MS, initiation of DMT, disease monitoring"
+      - "Neuro-ophthalmology if: Optic neuritis, vision loss"
+      - "Urology if: Neurogenic bladder, urinary retention"
     icd10:
       - G35      # Multiple sclerosis
     snomed:
@@ -217,6 +463,32 @@ rules:
     presentations:
       - resting tremor, rigidity, bradykinesia, postural instability
       - gradual onset, typically older adults
+      - "Resting tremor: 4-6 Hz pill-rolling, unilateral initially, improves with movement"
+      - "Bradykinesia: Slow movements, reduced arm swing, masked facies, micrographia"
+      - "Rigidity: Cogwheel rigidity on passive movement"
+      - "Postural instability: Stooped posture, shuffling gait, festination"
+    clinical_pearls:
+      - "Clinical diagnosis: Requires bradykinesia + tremor and/or rigidity"
+      - "Dopaminergic deficiency: Degeneration of substantia nigra pars compacta"
+      - "Carbidopa/levodopa: Gold standard, start when symptoms interfere with function"
+      - "Honeymoon period: 3-5 years of good response, then motor fluctuations (wearing off, dyskinesias)"
+      - "Non-motor symptoms: REM sleep behavior disorder, constipation, hyposmia, depression precede motor"
+      - "DaTscan: SPECT imaging shows reduced striatal dopamine uptake (not routinely needed)"
+    management:
+      - "Start when functional impairment: Carbidopa/levodopa 25/100mg TID, titrate by 25/100mg q3-7days"
+      - "Alternative first-line (age <65): Dopamine agonist (ropinirole, pramipexole) - delays motor complications"
+      - "MAO-B inhibitors: Rasagiline 1mg daily or selegiline 5mg BID (mild symptoms, delays need for levodopa)"
+      - "Motor fluctuations: COMT inhibitors (entacapone), amantadine (dyskinesias), MAO-B inhibitors"
+      - "Deep brain stimulation (DBS): If motor fluctuations refractory to meds, age <70, good levodopa response"
+    tests:
+      - "Clinical diagnosis: No lab test required, diagnosis based on cardinal features"
+      - "DaTscan (not routine): SPECT imaging shows reduced striatal dopamine transporter uptake"
+      - "MRI brain: Rule out atypical parkinsonism (vascular, PSP, MSA) - normal in idiopathic PD"
+      - "Response to levodopa: Improvement supports diagnosis (atypical parkinsonism doesn't respond)"
+    referrals:
+      - "Neurology (movement disorders): For diagnosis confirmation, medication management"
+      - "Physical therapy: Gait training, fall prevention, Lee Silverman Voice Treatment (LSVT BIG)"
+      - "DBS evaluation if: Motor fluctuations refractory to medication optimization"
     icd10:
       - G20      # Parkinson disease
     snomed:
@@ -228,6 +500,33 @@ rules:
       - progressive memory loss and cognitive decline
       - impaired daily functioning
       - most common cause of dementia
+      - "Early: Short-term memory loss, word-finding difficulty, disorientation"
+      - "Middle: Behavioral changes, apraxia, agnosia, getting lost"
+      - "Late: Unable to recognize family, incontinence, immobility"
+      - Gradual onset and progression (vs vascular which is stepwise)
+    clinical_pearls:
+      - "Most common dementia (60-80%), age >65, prevalence doubles every 5 years"
+      - "Amyloid plaques and neurofibrillary tangles: Pathologic hallmarks"
+      - "MoCA or MMSE: Screening cognitive tests (MMSE 0-30, <24 suggests dementia)"
+      - "Rule out reversible causes: B12, TSH, syphilis, depression (pseudo-dementia)"
+      - "Cholinesterase inhibitors: Donepezil, rivastigmine, galantamine - modest benefit (2-3 points MMSE)"
+      - "Memantine: NMDA antagonist for moderate-severe AD, can combine with cholinesterase inhibitor"
+    management:
+      - "Mild-moderate AD: Donepezil 5mg qhs, increase to 10mg after 4-6 weeks (or rivastigmine, galantamine)"
+      - "Moderate-severe AD: Add memantine 5mg daily, titrate to 10mg BID over 4 weeks"
+      - "Behavioral symptoms: Avoid antipsychotics if possible (black box warning, increased mortality)"
+      - "Depression common (40%): SSRI (sertraline, citalopram) first-line"
+      - "Caregiver support: Most important intervention, respite care, support groups, legal/financial planning"
+    tests:
+      - "MoCA or MMSE: Cognitive screening (MMSE <24 suggests dementia)"
+      - "MRI brain: Hippocampal atrophy, rule out vascular disease, NPH, tumor"
+      - "Labs: B12, TSH, syphilis (RPR), CBC, CMP to rule out reversible causes"
+      - "Amyloid PET scan: Shows amyloid deposition (not routinely needed, expensive)"
+      - "CSF biomarkers: Low Aβ42, elevated tau (research, not routine)"
+    referrals:
+      - "Neurology for: Atypical features (age <65, rapid progression, focal deficits)"
+      - "Geriatrics or memory clinic: Comprehensive assessment, care coordination"
+      - "Social work: Caregiver support, community resources, long-term care planning"
     icd10:
       - G30.9    # Alzheimer disease, unspecified
     snomed:
@@ -239,21 +538,36 @@ rules:
       - ascending weakness and areflexia
       - often follows infection
       - respiratory muscle involvement possible
+      - "Acute inflammatory demyelinating polyneuropathy (AIDP, 90% in US)"
+      - "Progressive symmetric weakness over days to 4 weeks"
+      - "Areflexia: Loss of deep tendon reflexes (hallmark)"
+      - "Preceding infection (70%): Campylobacter jejuni, CMV, EBV, Zika"
+    clinical_pearls:
+      - "Ascending paralysis: Starts legs, ascends to arms, trunk, face (30% need intubation)"
+      - "Albuminocytologic dissociation: Elevated CSF protein (>45), normal WBC count"
+      - "Respiratory monitoring: Serial FVC (intubate if <15 mL/kg or declining), NIF"
+      - "IVIG or plasmapheresis: Equally effective, shorten recovery time"
+      - "Axonal variants (Asia): Acute motor axonal neuropathy (AMAN), worse prognosis"
+      - "Recovery: Weeks to months, 80% fully recover, 5% mortality"
+    management:
+      - "ICU monitoring: Serial FVC q4-6h, NIF (negative inspiratory force), intubate if FVC <15 mL/kg or declining"
+      - "IVIG 0.4 g/kg/day x5 days OR plasmapheresis 5 sessions over 10-14 days (start within 2 weeks)"
+      - "Supportive: DVT prophylaxis (heparin), monitor autonomic instability (arrhythmias, BP swings), pain control"
+      - "Physical therapy: Early mobilization after acute phase to prevent contractures"
+      - "Pain management: Gabapentin 300-900mg TID, carbamazepine for neuropathic pain"
+    tests:
+      - "LP: Elevated protein (>45 mg/dL, peaks at 4-6 weeks), normal WBC (<10 cells)"
+      - "EMG/NCS: Demyelinating features (prolonged distal latencies, conduction block, slow velocities)"
+      - "Pulmonary function: Serial FVC (intubate <15 mL/kg), NIF (<-30 cmH2O concerning)"
+      - "Serology: Anti-GQ1b antibodies (Miller Fisher variant - ataxia, areflexia, ophthalmoplegia)"
+    referrals:
+      - "Neurology STAT: For diagnosis confirmation, IVIG vs plasmapheresis decision"
+      - "ICU admission: All GBS patients need monitoring for respiratory failure"
+      - "Physical medicine & rehab: Acute and long-term rehabilitation"
     icd10:
       - G61.0    # Guillain-Barré syndrome
     snomed:
       - "40956001"   # Guillain-Barré syndrome
-
-  - id: NEU-MYASTHENIA-GRAVIS
-    label: Myasthenia gravis
-    presentations:
-      - fluctuating muscle weakness, worsens with activity
-      - ptosis, diplopia, bulbar symptoms
-      - autoimmune disorder of neuromuscular junction
-    icd10:
-      - G70.00   # Myasthenia gravis without (acute) exacerbation
-    snomed:
-      - "91637004"   # Myasthenia gravis
 
   - id: NEU-ALS
     label: Amyotrophic lateral sclerosis (ALS)
@@ -261,6 +575,33 @@ rules:
       - progressive muscle weakness and atrophy
       - upper and lower motor neuron signs
       - fasciculations, spasticity, bulbar symptoms
+      - "UMN signs: Hyperreflexia, spasticity, Babinski, clonus"
+      - "LMN signs: Weakness, atrophy, fasciculations, hyporeflexia"
+      - "Bulbar onset (25%): Dysarthria, dysphagia, tongue atrophy"
+      - "Limb onset (75%): Asymmetric arm or leg weakness"
+    clinical_pearls:
+      - "El Escorial criteria: UMN + LMN signs in ≥3 regions (bulbar, cervical, thoracic, lumbar)"
+      - "Riluzole 50mg BID: Only FDA-approved drug, extends survival 2-3 months"
+      - "Median survival: 3-5 years from symptom onset (20% survive >5 years)"
+      - "Respiratory failure: Most common cause of death, FVC <50% consider NIV"
+      - "No sensory, bowel/bladder, cognitive involvement (classic - but FTD in 15%)"
+      - "EMG: Widespread denervation (fibrillations, fasciculations) in ≥3 limbs"
+    management:
+      - "Riluzole 50mg BID: Start at diagnosis, may slow progression, monitor LFTs"
+      - "Edaravone: IV infusion (60mg daily x14 days/month), may slow decline in early ALS"
+      - "Multidisciplinary clinic: Neurology, pulmonology, nutrition, PT/OT, speech, palliative"
+      - "Respiratory: Serial FVC (NIV if <50%, consider tracheostomy discussions), cough assist device"
+      - "Nutrition: PEG tube if weight loss >10%, dysphagia, aspiration (place while FVC >50%)"
+    tests:
+      - "EMG/NCS: Widespread denervation in ≥3 limbs, fibrillations, fasciculations, normal conduction velocities"
+      - "MRI brain/spine: Rule out mimics (cervical myelopathy, MS, tumor)"
+      - "Pulmonary function: Serial FVC (NIV if <50%), consider tracheostomy if continued decline"
+      - "Rule out ALS mimics: CK (myopathy), TSH, SPEP (paraprotein), heavy metals, Lyme"
+    referrals:
+      - "Neurology (ALS clinic): Diagnosis confirmation, riluzole, multidisciplinary care"
+      - "Pulmonology: NIV initiation when FVC <50%"
+      - "Gastroenterology: PEG tube placement (place while FVC >50%)"
+      - "Palliative care: Early involvement for symptom management, goals of care"
     icd10:
       - G12.21   # Amyotrophic lateral sclerosis
     snomed:
@@ -274,6 +615,31 @@ rules:
       - loss of taste on anterior tongue
       - hyperacusis
       - often preceded by viral illness
+      - "Complete hemifacial weakness: Forehead involved (vs stroke which spares forehead)"
+      - "Periauricular pain (50%) may precede weakness"
+      - "House-Brackmann grade I-VI: I (normal) to VI (complete paralysis)"
+    clinical_pearls:
+      - "Idiopathic facial nerve palsy (CN VII) - diagnosis of exclusion"
+      - "Forehead involvement: Distinguishes from stroke (stroke spares forehead due to bilateral UMN innervation)"
+      - "Prednisone + acyclovir: Start within 72 hours, improves recovery to 90-95%"
+      - "Eye protection critical: Artificial tears, eye ointment at night, tape eyelid closed (prevent corneal abrasion)"
+      - "Recovery: 70% complete in 6 months without treatment, 85% with steroids, 30% have mild residual weakness"
+      - "Ramsay Hunt syndrome: Herpes zoster of geniculate ganglion (vesicles in ear canal, worse prognosis)"
+    management:
+      - "Prednisone 60mg daily x5 days, taper over 5 days (10 days total) - START WITHIN 72 HOURS"
+      - "Acyclovir 400mg 5x daily x7 days (or valacyclovir 1g TID x7 days) - if severe or Ramsay Hunt"
+      - "Eye protection: Artificial tears q2h during day, lacrilube ointment at night, tape eyelid closed if incomplete closure"
+      - "Physical therapy: Facial exercises after 2-3 weeks (avoid early to prevent synkinesis)"
+      - "Recheck: 1-2 weeks to assess for improvement, consider EMG if no recovery by 3 months"
+    tests:
+      - "Clinical diagnosis: Acute unilateral facial weakness including forehead, normal neuro exam otherwise"
+      - "No imaging if typical: Sudden onset, complete hemifacial weakness, no other neuro deficits"
+      - "MRI brain with contrast: If atypical (gradual onset, other cranial nerves, bilateral, not improving)"
+      - "EMG (after 2-3 weeks): Nerve conduction studies predict prognosis if no clinical improvement"
+    referrals:
+      - "Ophthalmology if: Incomplete eye closure, corneal abrasion, persistent lagophthalmos"
+      - "Neurology if: Atypical features (bilateral, recurrent, other cranial nerves, no improvement 3 months)"
+      - "ENT if: Ramsay Hunt syndrome, chronic facial paralysis (consider surgical decompression)"
     icd10:
       - G51.0    # Bell's palsy
     snomed:
@@ -287,6 +653,29 @@ rules:
       - restlessness during attacks
       - occurs in clusters (daily attacks for weeks/months)
       - more common in men
+      - "Excruciating unilateral periorbital pain (8-10/10) lasting 15-180 minutes"
+      - "Ipsilateral autonomic features: Lacrimation, conjunctival injection, rhinorrhea, Horner syndrome"
+      - "Cluster periods: 1-8 attacks/day for weeks to months, then remission months to years"
+    clinical_pearls:
+      - "Most painful primary headache disorder (suicidal headache)"
+      - "Male predominance (3:1), average age 30, associated with smoking/alcohol"
+      - "Restlessness during attacks: Unlike migraine (prefer dark quiet room), cluster patients pace/rock"
+      - "Oxygen 100% 12-15 L/min x15 min: Aborts attack in 70% within 15 minutes"
+      - "Sumatriptan 6mg SC: Aborts attack in 75% within 15 minutes (faster than oral)"
+      - "Prophylaxis: Verapamil 240-960mg/day (most effective), taper after cluster period ends"
+    management:
+      - "Acute attack: 100% oxygen 12-15 L/min via non-rebreather mask x15 min (first-line)"
+      - "Sumatriptan 6mg SC or 20mg intranasal (faster than oral) - can repeat once after 1 hour"
+      - "Prophylaxis: Verapamil 240mg daily, increase by 80mg q2 weeks to 480-960mg (EKG before increases >480mg)"
+      - "Prednisone taper: 60mg x5d then taper over 3 weeks (bridge therapy while verapamil titrating)"
+      - "Avoid triggers: Alcohol, nitroglycerin, histamine during cluster period"
+    tests:
+      - "Clinical diagnosis: Severe unilateral periorbital pain + ipsilateral autonomic features + restlessness"
+      - "MRI brain with contrast: To rule out secondary causes (pituitary tumor, aneurysm, cavernous sinus pathology)"
+      - "EKG: Before verapamil >480mg/day (can cause heart block)"
+    referrals:
+      - "Neurology for: Diagnosis confirmation, verapamil titration, refractory cases"
+      - "Consider nerve blocks: Greater occipital nerve block for transitional therapy"
     icd10:
       - G44.009  # Cluster headache syndrome, unspecified
     snomed:
@@ -300,6 +689,33 @@ rules:
       - loss of reflexes
       - stocking-glove distribution
       - often due to diabetes, alcohol, or medications
+      - "Sensory > motor: Paresthesias, dysesthesias, numbness"
+      - "Neuropathic pain: Burning, shooting, electric shock pain"
+      - "Distal symmetric polyneuropathy: Stocking-glove distribution (feet before hands)"
+    clinical_pearls:
+      - "Diabetes most common cause (50%), followed by alcohol, B12 deficiency, medications"
+      - "Length-dependent: Starts feet, ascends to knees before affecting hands (longest nerves affected first)"
+      - "Screen for causes: HbA1c, B12, TSH, SPEP, HIV, heavy metals, Lyme"
+      - "Diabetic neuropathy: Screen annually with 10g monofilament, vibration (128 Hz tuning fork)"
+      - "Neuropathic pain: Gabapentin, pregabalin, duloxetine, or tricyclics (amitriptyline)"
+      - "CIDP (chronic inflammatory demyelinating polyneuropathy): Acquired immune-mediated, treatable with IVIG"
+    management:
+      - "Treat underlying cause: Glycemic control (diabetes), B12 replacement, stop toxin (alcohol, meds)"
+      - "Neuropathic pain: Gabapentin 300mg TID titrate to 900-3600mg/day, or pregabalin 75mg BID titrate to 300mg BID"
+      - "Alternative: Duloxetine 60mg daily (SNRI), amitriptyline 25-75mg qhs (TCA)"
+      - "Topical: Lidocaine 5% patches, capsaicin cream for localized pain"
+      - "Foot care: Daily inspection, proper footwear, podiatry (diabetics at high ulcer/amputation risk)"
+    tests:
+      - "Diabetes: HbA1c, fasting glucose"
+      - "B12 level: <200 pg/mL deficient, methylmalonic acid if borderline"
+      - "Thyroid: TSH (hypothyroidism)"
+      - "SPEP with immunofixation: Paraproteinemia, amyloidosis"
+      - "EMG/NCS: Distinguish axonal (reduced amplitude) vs demyelinating (slow velocity, prolonged latencies)"
+      - "Consider: HIV, RPR, Lyme, heavy metals (lead, arsenic), ANA if idiopathic"
+    referrals:
+      - "Neurology if: Rapid progression, asymmetric, motor > sensory, demyelinating pattern on EMG"
+      - "Podiatry for: Diabetic neuropathy (ulcer prevention, foot care)"
+      - "Pain management if: Refractory neuropathic pain"
     icd10:
       - G62.9    # Polyneuropathy, unspecified
     snomed:
@@ -313,6 +729,28 @@ rules:
       - symptoms worse in evening/night
       - relief with movement
       - disrupts sleep
+      - "Urge to move legs with uncomfortable sensations (creeping, crawling, tingling)"
+      - "Worse with rest, evening/night (circadian pattern)"
+      - "Relief with movement (walking, stretching)"
+      - "Disrupts sleep initiation and maintenance"
+    clinical_pearls:
+      - "5-10% prevalence, female predominance 2:1, often family history (60% if onset <40 years)"
+      - "Iron deficiency: Low ferritin (<75 mcg/L) worsens RLS, check ferritin in all patients"
+      - "Secondary causes: Iron deficiency, pregnancy, ESRD, neuropathy, antidepressants (SSRIs)"
+      - "First-line: Iron repletion if ferritin <75, then dopamine agonists (pramipexole, ropinirole)"
+      - "Augmentation: Worsening symptoms with dopamine agonists (earlier onset, more severe) - switch to gabapentin"
+    management:
+      - "Check ferritin: If <75 mcg/L, iron supplementation (ferrous sulfate 325mg BID-TID + vitamin C)"
+      - "Moderate-severe: Pramipexole 0.125mg 2-3h before symptoms, titrate to 0.5mg (or ropinirole 0.25-4mg)"
+      - "Alternative: Gabapentin 300-1800mg qhs (preferred if augmentation, neuropathy, or anxiety)"
+      - "Avoid: Dopamine antagonists (metoclopramide, prochlorperazine), SSRIs, antihistamines (worsen RLS)"
+      - "Non-pharmacologic: Leg massage, hot bath, moderate exercise, sleep hygiene, avoid caffeine/alcohol"
+    tests:
+      - "Clinical diagnosis: 4 criteria (urge to move, worse at rest, relief with movement, worse evening/night)"
+      - "Ferritin: Check in all patients, supplement if <75 mcg/L (even if not anemic)"
+      - "Polysomnography: If concurrent sleep apnea suspected, shows periodic limb movements (PLMs) in 80%"
+    referrals:
+      - "Neurology or sleep medicine if: Refractory to first-line treatment, augmentation, unclear diagnosis"
     icd10:
       - G25.81   # Restless legs syndrome
     snomed:
@@ -326,6 +764,30 @@ rules:
       - voice tremor
       - improves with alcohol
       - often family history
+      - "Bilateral postural and kinetic tremor (4-12 Hz)"
+      - "Improves at rest (vs Parkinson resting tremor)"
+      - "Head tremor (50%): Yes-yes (vertical) or no-no (horizontal)"
+      - "Voice tremor, difficulty with fine motor tasks (writing, drinking)"
+    clinical_pearls:
+      - "Most common movement disorder (4-5% over age 65), autosomal dominant 50%"
+      - "Action tremor: Postural (arms outstretched) and kinetic (reaching for object), worse with intention"
+      - "Alcohol responsive (50-70%): Transient improvement with alcohol (diagnostic clue)"
+      - "Propranolol 40-320mg/day: First-line, reduces tremor 50-70% in 60% of patients"
+      - "Primidone: Alternative first-line, start low (12.5-25mg qhs) to avoid acute toxicity"
+      - "DBS: Thalamic stimulation for refractory disabling tremor"
+    management:
+      - "First-line: Propranolol 40mg BID, titrate to 80-320mg/day (or metoprolol if asthma)"
+      - "Alternative: Primidone 12.5-25mg qhs, titrate slowly to 250mg qhs (acute toxicity common if start high)"
+      - "Second-line: Gabapentin 300-2400mg/day, topiramate 25-400mg/day"
+      - "Botulinum toxin: For head or voice tremor if meds ineffective"
+      - "Deep brain stimulation (DBS): Thalamic VIM nucleus for severe disabling tremor refractory to meds"
+    tests:
+      - "Clinical diagnosis: Bilateral postural/kinetic tremor, no other neuro signs"
+      - "Distinguish from Parkinson: ET is action tremor (worse with movement), PD is resting tremor (improves with movement)"
+      - "No imaging needed: Unless atypical features (asymmetric, rigidity, bradykinesia)"
+    referrals:
+      - "Neurology if: Atypical features, uncertain diagnosis, refractory to first-line meds"
+      - "DBS evaluation if: Severe disabling tremor despite medication optimization"
     icd10:
       - G25.0    # Essential tremor
     snomed:
@@ -338,6 +800,30 @@ rules:
       - gait disturbance, cognitive decline, urinary incontinence (NPH triad)
       - papilledema
       - enlarged ventricles on imaging
+      - "Normal pressure hydrocephalus (NPH): Triad of gait apraxia, dementia, urinary incontinence"
+      - "Gait abnormality: Magnetic gait (feet stuck to floor), wide-based, shuffling"
+      - "Cognitive decline: Bradyphrenia, executive dysfunction"
+      - "Urinary incontinence: Urgency initially, then frank incontinence"
+    clinical_pearls:
+      - "NPH triad: Wet (urinary incontinence), Wacky (dementia), Wobbly (gait disturbance) - recall 'wet, wacky, wobbly'"
+      - "Gait usually first symptom (95%), then cognitive (75%), then urinary (50%)"
+      - "Reversible dementia: Shunt-responsive if diagnosed early"
+      - "Large-volume LP (30-50 mL): Temporary improvement in gait predicts shunt response (90% PPV)"
+      - "Ventriculoperitoneal shunt: 50-80% improve after shunting, gait improves most, cognition variable"
+    management:
+      - "Diagnostic LP: Remove 30-50 mL CSF, test gait before and 2-4 hours after (improvement predicts shunt response)"
+      - "Timed gait test: 25-foot walk timed before and after LP (>10% improvement suggests shunt-responsive)"
+      - "Ventriculoperitoneal (VP) shunt: Neurosurgery placement, diverts CSF to peritoneum"
+      - "Shunt complications: Over-drainage (subdural hematoma), under-drainage (recurrence), infection (1-2%)"
+      - "Post-shunt: Serial imaging, adjust shunt valve pressure if needed"
+    tests:
+      - "MRI brain: Enlarged ventricles (Evans index >0.3), narrow sulci, periventricular T2 hyperintensity"
+      - "High-volume LP: Remove 30-50 mL, test gait improvement (predicts shunt response)"
+      - "Gait testing: 25-foot timed walk before and after LP"
+      - "Cognitive testing: MMSE, MoCA before and after LP"
+    referrals:
+      - "Neurosurgery for: Shunt evaluation and placement"
+      - "Neurology for: Diagnosis confirmation, prognostic LP"
     icd10:
       - G91.9    # Hydrocephalus, unspecified
       - G91.2    # Normal pressure hydrocephalus
@@ -353,6 +839,31 @@ rules:
       - personality changes
       - nausea and vomiting
       - papilledema
+      - "Progressive symptoms over weeks to months"
+      - "Morning headache: Worse with Valsalva, cough, lying flat (increased ICP)"
+      - "New-onset seizures in adult (especially >40 years)"
+      - "Focal deficits depend on location: Motor, sensory, language, vision"
+    clinical_pearls:
+      - "Primary brain tumors: Glioblastoma (most common malignant), meningioma (most common benign)"
+      - "Metastatic brain tumors: More common than primary (10:1), from lung, breast, melanoma, renal, colon"
+      - "MRI with contrast: Gadolinium enhancement differentiates high-grade (enhances) vs low-grade (no enhancement)"
+      - "Dexamethasone: Reduces vasogenic edema, improves symptoms rapidly"
+      - "Glioblastoma: Median survival 15 months with surgery + radiation + temozolomide"
+    management:
+      - "Dexamethasone: 4-8mg PO/IV q6h to reduce vasogenic edema and symptoms"
+      - "Anti-epileptics: If seizures present (levetiracetam 500-1000mg BID), not for prophylaxis"
+      - "Neurosurgery consult: Resection for tissue diagnosis and cytoreduction"
+      - "Radiation + chemotherapy: Temozolomide for glioblastoma, radiation for many primary and metastatic tumors"
+      - "Palliative care: Early involvement for symptom management, goals of care"
+    tests:
+      - "MRI brain with and without contrast: Gold standard, shows location, size, enhancement pattern"
+      - "Biopsy or resection: Tissue diagnosis required (glioma grade, metastasis, lymphoma, meningioma)"
+      - "Chest/abdomen/pelvis CT: If metastases suspected, find primary tumor"
+      - "PET scan: May help differentiate tumor recurrence from radiation necrosis"
+    referrals:
+      - "Neurosurgery URGENTLY: For biopsy/resection"
+      - "Neuro-oncology: For chemotherapy and radiation planning"
+      - "Palliative care: Early involvement for high-grade tumors"
     icd10:
       - C71.9    # Malignant neoplasm of brain, unspecified
       - D33.2    # Benign neoplasm of brain, unspecified
@@ -367,6 +878,29 @@ rules:
       - dizziness, nausea
       - may have delayed symptoms
       - CT often normal
+      - "Mild traumatic brain injury (mTBI) - brief alteration in consciousness"
+      - "Retrograde or anterograde amnesia"
+      - "Post-concussive symptoms: Headache, dizziness, fatigue, irritability, concentration difficulty"
+      - "Symptoms may develop hours to days after injury"
+    clinical_pearls:
+      - "CT head not needed if: GCS 15, no LOC, no vomiting, age <65, no anticoagulation (per PECARN or Canadian CT rules)"
+      - "Return to play: Graded protocol, not same day even if asymptomatic (increased second impact risk)"
+      - "Post-concussion syndrome: Symptoms >3 months in 10-15%, headache most common"
+      - "Cognitive rest: Limit screen time, reading, work/school initially (24-48h), then gradual return"
+      - "Avoid NSAIDs first 24-48h: Theoretical bleeding risk, use acetaminophen for headache"
+    management:
+      - "Acute: Rest 24-48 hours (physical and cognitive), avoid screens, sleep hygiene"
+      - "Symptom-limited activity: Gradual return to activities as symptoms allow, don't push through pain"
+      - "Return to play protocol: (1) Rest, (2) light aerobic, (3) sport-specific, (4) non-contact, (5) full contact, (6) game play"
+      - "Each step 24 hours: If symptoms return, drop back to previous step"
+      - "Persistent symptoms >2 weeks: Neurology or sports medicine referral"
+    tests:
+      - "CT head: Not needed if low risk (PECARN/Canadian rules), obtain if LOC, vomiting, severe mechanism, anticoagulation"
+      - "Concussion assessment tools: SCAT5 (Sport Concussion Assessment Tool), ImPACT testing"
+      - "Cognitive testing: If symptoms persist >2 weeks"
+    referrals:
+      - "Neurology or sports medicine if: Symptoms persist >2 weeks, multiple concussions, severe symptoms"
+      - "Neuropsychology if: Cognitive symptoms affecting school/work"
     icd10:
       - S06.0X0A  # Concussion without loss of consciousness
     snomed:
@@ -380,6 +914,30 @@ rules:
       - relief with sitting or leaning forward
       - numbness in legs
       - typically older adults
+      - "Neurogenic claudication: Leg pain/weakness with walking, relieved by sitting/flexion"
+      - "Shopping cart sign: Relief when leaning forward on cart (flexion opens canal)"
+      - "Bilateral leg symptoms common (vs unilateral in disc herniation)"
+      - "Degenerative: Facet joint hypertrophy, ligamentum flavum thickening, disc bulge"
+    clinical_pearls:
+      - "Neurogenic vs vascular claudication: Neurogenic (relieved by flexion, worse downhill), vascular (relieved by rest, worse uphill)"
+      - "Conservative management first: 50-60% improve with PT, NSAIDs, epidural steroid injections"
+      - "Red flags: Cauda equina (saddle anesthesia, bowel/bladder dysfunction, severe weakness) - emergency surgery"
+      - "MRI lumbar spine: Shows stenosis degree, but correlation with symptoms variable (many asymptomatic stenosis)"
+      - "Surgery: Laminectomy if conservative fails and significant functional impairment"
+    management:
+      - "Physical therapy: Core strengthening, flexion-based exercises, aerobic conditioning (aquatic therapy ideal)"
+      - "NSAIDs: Ibuprofen 600-800mg TID or naproxen 500mg BID for pain"
+      - "Gabapentin: 300-900mg TID for neuropathic leg pain"
+      - "Epidural steroid injection: If radicular symptoms prominent, provides 3-6 months relief in 50%"
+      - "Surgical decompression (laminectomy): If failed conservative therapy >6 months and significant disability"
+    tests:
+      - "MRI lumbar spine: Shows canal diameter, nerve root compression, ligamentum flavum thickening"
+      - "Clinical diagnosis: Neurogenic claudication, relief with flexion, older age"
+      - "X-ray lumbar spine: Standing AP/lateral shows degenerative changes, spondylolisthesis"
+    referrals:
+      - "Neurosurgery or orthopedic spine if: Failed conservative therapy >6 months, significant disability, cauda equina"
+      - "Physical therapy: First-line conservative management"
+      - "Pain management: For epidural steroid injections"
     icd10:
       - M48.06   # Spinal stenosis, lumbar region
     snomed:
@@ -393,6 +951,31 @@ rules:
       - numbness, tingling, weakness
       - often due to herniated disc
       - positive straight leg raise test
+      - "Sharp shooting pain from buttock down posterior leg to foot"
+      - "Dermatomal distribution: L5 (lateral leg, dorsal foot) or S1 (posterior leg, plantar foot)"
+      - "Weakness: L5 (foot drop, ankle dorsiflexion), S1 (unable to toe stand, plantar flexion)"
+      - "Herniated disc (90%): L4-L5 (affects L5 root) or L5-S1 (affects S1 root)"
+    clinical_pearls:
+      - "Natural history: 80-90% improve with conservative management over 6-12 weeks"
+      - "Straight leg raise: Positive if pain <60 degrees leg elevation (80% sensitive, 40% specific)"
+      - "Crossed straight leg raise: Contralateral leg raise reproduces pain (95% specific for herniated disc)"
+      - "Red flags: Cauda equina (saddle anesthesia, bladder/bowel dysfunction), progressive weakness, fever"
+      - "MRI lumbar spine: Not needed unless red flags or failed conservative therapy >6 weeks"
+    management:
+      - "First 6 weeks: NSAIDs (ibuprofen 600-800mg TID), remain active (bed rest not helpful)"
+      - "Physical therapy: McKenzie exercises (extension-based), core strengthening after acute phase"
+      - "Neuropathic pain: Gabapentin 300-900mg TID or pregabalin 75-150mg BID if radicular pain prominent"
+      - "Avoid opioids: Not superior to NSAIDs, high abuse risk, delays recovery"
+      - "Epidural steroid injection: Consider if failed NSAIDs + PT x6 weeks, provides 3-6 months relief"
+      - "Surgery (microdiscectomy): If failed conservative x6-12 weeks, progressive weakness, or cauda equina"
+    tests:
+      - "Straight leg raise: Supine, passively raise leg - positive if pain <60 degrees"
+      - "MRI lumbar spine: If red flags, failed conservative x6 weeks, or considering surgery (shows disc herniation, nerve compression)"
+      - "X-ray lumbar spine: Rule out fracture, spondylolisthesis, but doesn't show disc"
+      - "Neurologic exam: Check strength (L5 dorsiflexion, S1 plantarflexion), reflexes (L4 patellar, S1 Achilles)"
+    referrals:
+      - "Neurosurgery or orthopedic spine if: Cauda equina (emergency), progressive weakness, failed conservative x6-12 weeks"
+      - "Physical therapy: First-line conservative management"
     icd10:
       - M54.30   # Sciatica, unspecified side
     snomed:
@@ -406,6 +989,30 @@ rules:
       - sleep paralysis
       - hypnagogic hallucinations
       - automatic behaviors
+      - "Excessive daytime sleepiness (EDS): Overwhelming sleepiness despite adequate nighttime sleep"
+      - "Cataplexy (60-70%): Sudden bilateral muscle weakness triggered by emotion (laughter, surprise)"
+      - "Sleep paralysis: Inability to move when falling asleep or waking up"
+      - "Hypnagogic/hypnopompic hallucinations: Vivid dreams while falling asleep or waking"
+    clinical_pearls:
+      - "Narcolepsy type 1: With cataplexy (low CSF hypocretin-1), HLA-DQB1*06:02 (98%)"
+      - "Narcolepsy type 2: Without cataplexy (normal hypocretin)"
+      - "Onset typically age 10-30, often misdiagnosed as depression or epilepsy"
+      - "MSLT (multiple sleep latency test): Mean sleep latency <8 min + ≥2 SOREMPs (sleep-onset REM)"
+      - "Treatment: Modafinil/armodafinil for EDS, sodium oxybate for cataplexy"
+    management:
+      - "Scheduled naps: 15-20 minute naps 2-3x daily (non-pharmacologic foundation)"
+      - "Excessive sleepiness: Modafinil 200-400mg AM (or armodafinil 150-250mg AM)"
+      - "Alternative stimulants: Methylphenidate 20-60mg/day, dextroamphetamine 10-60mg/day"
+      - "Cataplexy: Sodium oxybate 4.5-9g divided into 2 doses at night (controls both EDS and cataplexy)"
+      - "Antidepressants for cataplexy: Venlafaxine 75-150mg, SSRIs (fluoxetine, sertraline)"
+    tests:
+      - "Polysomnography (overnight): Rule out sleep apnea, shows decreased sleep latency"
+      - "MSLT (next day): Mean sleep latency <8 min + ≥2 sleep-onset REM periods (SOREMPs)"
+      - "Hypocretin-1 (CSF): <110 pg/mL diagnostic for narcolepsy type 1 (not routinely done)"
+      - "HLA-DQB1*06:02: Present in 98% of narcolepsy type 1 (not diagnostic, many normal people have it)"
+    referrals:
+      - "Sleep medicine: For diagnosis confirmation (MSLT), treatment initiation"
+      - "Neurology: For complex cases, cataplexy management"
     icd10:
       - G47.419  # Narcolepsy without cataplexy
     snomed:
