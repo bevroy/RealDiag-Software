@@ -1,0 +1,451 @@
+"""
+Authentication & User Management Service
+=========================================
+
+Provides user authentication, session management, and profile handling.
+Supports multiple auth providers: JWT, OAuth2, API keys.
+"""
+
+from fastapi import HTTPException, Depends, Header, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from typing import Optional, Dict, Any, List
+from pydantic import BaseModel, EmailStr, Field
+from datetime import datetime, timedelta
+import secrets
+import hashlib
+import jwt
+from pathlib import Path
+import json
+
+# JWT Configuration
+SECRET_KEY = secrets.token_urlsafe(32)  # In production, load from env
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+
+security = HTTPBearer()
+
+# Models
+class UserCreate(BaseModel):
+    """User registration model."""
+    email: EmailStr
+    password: str = Field(..., min_length=8)
+    full_name: str
+    specialty: Optional[str] = None
+    institution: Optional[str] = None
+
+class UserLogin(BaseModel):
+    """User login model."""
+    email: EmailStr
+    password: str
+
+class UserProfile(BaseModel):
+    """User profile model."""
+    user_id: str
+    email: str
+    full_name: str
+    specialty: Optional[str] = None
+    institution: Optional[str] = None
+    created_at: str
+    last_login: Optional[str] = None
+    search_count: int = 0
+    favorite_count: int = 0
+
+class UserSettings(BaseModel):
+    """User settings and preferences."""
+    user_id: str
+    default_specialty: Optional[str] = None
+    notification_preferences: Dict[str, bool] = {
+        "email_updates": True,
+        "new_features": True,
+        "weekly_digest": False
+    }
+    display_preferences: Dict[str, Any] = {
+        "theme": "light",
+        "results_per_page": 10,
+        "show_icd_codes": True,
+        "show_snomed_codes": False
+    }
+
+class SearchHistory(BaseModel):
+    """Search history entry."""
+    search_id: str
+    user_id: str
+    symptoms: List[str]
+    age: Optional[int] = None
+    sex: Optional[str] = None
+    family: Optional[str] = None
+    timestamp: str
+    result_count: int
+    top_diagnosis: Optional[str] = None
+
+class FavoriteDiagnosis(BaseModel):
+    """Favorite diagnosis entry."""
+    favorite_id: str
+    user_id: str
+    rule_id: str
+    diagnosis_label: str
+    family: str
+    notes: Optional[str] = None
+    added_at: str
+
+class CustomList(BaseModel):
+    """Custom differential diagnosis list."""
+    list_id: str
+    user_id: str
+    name: str
+    description: Optional[str] = None
+    specialty: Optional[str] = None
+    diagnoses: List[Dict[str, Any]] = []
+    created_at: str
+    updated_at: str
+    is_public: bool = False
+
+
+# In-memory storage (replace with database in production)
+users_db: Dict[str, Dict] = {}
+sessions_db: Dict[str, Dict] = {}
+search_history_db: Dict[str, List[Dict]] = {}
+favorites_db: Dict[str, List[Dict]] = {}
+custom_lists_db: Dict[str, List[Dict]] = {}
+user_settings_db: Dict[str, Dict] = {}
+
+
+# Helper functions
+def hash_password(password: str) -> str:
+    """Hash password using SHA-256."""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify password against hash."""
+    return hash_password(plain_password) == hashed_password
+
+def create_access_token(user_id: str, email: str) -> str:
+    """Create JWT access token."""
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode = {
+        "sub": user_id,
+        "email": email,
+        "exp": expire
+    }
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+def verify_token(token: str) -> Dict[str, Any]:
+    """Verify and decode JWT token."""
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has expired"
+        )
+    except jwt.JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials"
+        )
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Any]:
+    """Dependency to get current authenticated user."""
+    token = credentials.credentials
+    payload = verify_token(token)
+    user_id = payload.get("sub")
+    
+    if user_id not in users_db:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    return users_db[user_id]
+
+async def get_optional_user(authorization: Optional[str] = Header(None)) -> Optional[Dict[str, Any]]:
+    """Dependency to get user if authenticated, None otherwise."""
+    if not authorization or not authorization.startswith("Bearer "):
+        return None
+    
+    try:
+        token = authorization.replace("Bearer ", "")
+        payload = verify_token(token)
+        user_id = payload.get("sub")
+        return users_db.get(user_id)
+    except:
+        return None
+
+
+# User management functions
+def create_user(user_data: UserCreate) -> Dict[str, Any]:
+    """Create new user account."""
+    # Check if email already exists
+    for user in users_db.values():
+        if user["email"] == user_data.email:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            )
+    
+    # Create user
+    user_id = f"user_{secrets.token_urlsafe(16)}"
+    hashed_pwd = hash_password(user_data.password)
+    
+    user = {
+        "user_id": user_id,
+        "email": user_data.email,
+        "password_hash": hashed_pwd,
+        "full_name": user_data.full_name,
+        "specialty": user_data.specialty,
+        "institution": user_data.institution,
+        "created_at": datetime.utcnow().isoformat(),
+        "last_login": None,
+        "search_count": 0,
+        "favorite_count": 0,
+        "is_active": True
+    }
+    
+    users_db[user_id] = user
+    
+    # Initialize user data structures
+    search_history_db[user_id] = []
+    favorites_db[user_id] = []
+    custom_lists_db[user_id] = []
+    user_settings_db[user_id] = {
+        "user_id": user_id,
+        "default_specialty": user_data.specialty,
+        "notification_preferences": {
+            "email_updates": True,
+            "new_features": True,
+            "weekly_digest": False
+        },
+        "display_preferences": {
+            "theme": "light",
+            "results_per_page": 10,
+            "show_icd_codes": True,
+            "show_snomed_codes": False
+        }
+    }
+    
+    return user
+
+def authenticate_user(email: str, password: str) -> Dict[str, Any]:
+    """Authenticate user and return user data."""
+    for user in users_db.values():
+        if user["email"] == email:
+            if verify_password(password, user["password_hash"]):
+                # Update last login
+                user["last_login"] = datetime.utcnow().isoformat()
+                return user
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Incorrect password"
+                )
+    
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="User not found"
+    )
+
+
+# Search history functions
+def add_search_to_history(
+    user_id: str,
+    symptoms: List[str],
+    result_count: int,
+    age: Optional[int] = None,
+    sex: Optional[str] = None,
+    family: Optional[str] = None,
+    top_diagnosis: Optional[str] = None
+) -> Dict[str, Any]:
+    """Add search to user's history."""
+    if user_id not in search_history_db:
+        search_history_db[user_id] = []
+    
+    search_entry = {
+        "search_id": f"search_{secrets.token_urlsafe(12)}",
+        "user_id": user_id,
+        "symptoms": symptoms,
+        "age": age,
+        "sex": sex,
+        "family": family,
+        "timestamp": datetime.utcnow().isoformat(),
+        "result_count": result_count,
+        "top_diagnosis": top_diagnosis
+    }
+    
+    search_history_db[user_id].insert(0, search_entry)  # Most recent first
+    
+    # Update user's search count
+    if user_id in users_db:
+        users_db[user_id]["search_count"] += 1
+    
+    # Keep only last 100 searches
+    search_history_db[user_id] = search_history_db[user_id][:100]
+    
+    return search_entry
+
+def get_user_search_history(user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+    """Get user's search history."""
+    return search_history_db.get(user_id, [])[:limit]
+
+
+# Favorites functions
+def add_favorite(
+    user_id: str,
+    rule_id: str,
+    diagnosis_label: str,
+    family: str,
+    notes: Optional[str] = None
+) -> Dict[str, Any]:
+    """Add diagnosis to user's favorites."""
+    if user_id not in favorites_db:
+        favorites_db[user_id] = []
+    
+    # Check if already favorited
+    for fav in favorites_db[user_id]:
+        if fav["rule_id"] == rule_id:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Diagnosis already in favorites"
+            )
+    
+    favorite = {
+        "favorite_id": f"fav_{secrets.token_urlsafe(12)}",
+        "user_id": user_id,
+        "rule_id": rule_id,
+        "diagnosis_label": diagnosis_label,
+        "family": family,
+        "notes": notes,
+        "added_at": datetime.utcnow().isoformat()
+    }
+    
+    favorites_db[user_id].append(favorite)
+    
+    # Update user's favorite count
+    if user_id in users_db:
+        users_db[user_id]["favorite_count"] += 1
+    
+    return favorite
+
+def get_user_favorites(user_id: str) -> List[Dict[str, Any]]:
+    """Get user's favorite diagnoses."""
+    return favorites_db.get(user_id, [])
+
+def remove_favorite(user_id: str, favorite_id: str) -> bool:
+    """Remove diagnosis from favorites."""
+    if user_id not in favorites_db:
+        return False
+    
+    favorites = favorites_db[user_id]
+    for i, fav in enumerate(favorites):
+        if fav["favorite_id"] == favorite_id:
+            favorites.pop(i)
+            if user_id in users_db:
+                users_db[user_id]["favorite_count"] -= 1
+            return True
+    
+    return False
+
+
+# Custom lists functions
+def create_custom_list(
+    user_id: str,
+    name: str,
+    description: Optional[str] = None,
+    specialty: Optional[str] = None,
+    is_public: bool = False
+) -> Dict[str, Any]:
+    """Create custom differential diagnosis list."""
+    if user_id not in custom_lists_db:
+        custom_lists_db[user_id] = []
+    
+    custom_list = {
+        "list_id": f"list_{secrets.token_urlsafe(12)}",
+        "user_id": user_id,
+        "name": name,
+        "description": description,
+        "specialty": specialty,
+        "diagnoses": [],
+        "created_at": datetime.utcnow().isoformat(),
+        "updated_at": datetime.utcnow().isoformat(),
+        "is_public": is_public
+    }
+    
+    custom_lists_db[user_id].append(custom_list)
+    return custom_list
+
+def get_user_custom_lists(user_id: str) -> List[Dict[str, Any]]:
+    """Get user's custom lists."""
+    return custom_lists_db.get(user_id, [])
+
+def add_diagnosis_to_list(user_id: str, list_id: str, diagnosis: Dict[str, Any]) -> Dict[str, Any]:
+    """Add diagnosis to custom list."""
+    if user_id not in custom_lists_db:
+        raise HTTPException(status_code=404, detail="User has no lists")
+    
+    for custom_list in custom_lists_db[user_id]:
+        if custom_list["list_id"] == list_id:
+            custom_list["diagnoses"].append(diagnosis)
+            custom_list["updated_at"] = datetime.utcnow().isoformat()
+            return custom_list
+    
+    raise HTTPException(status_code=404, detail="List not found")
+
+def remove_diagnosis_from_list(user_id: str, list_id: str, rule_id: str) -> Dict[str, Any]:
+    """Remove diagnosis from custom list."""
+    if user_id not in custom_lists_db:
+        raise HTTPException(status_code=404, detail="User has no lists")
+    
+    for custom_list in custom_lists_db[user_id]:
+        if custom_list["list_id"] == list_id:
+            custom_list["diagnoses"] = [
+                d for d in custom_list["diagnoses"] if d.get("rule_id") != rule_id
+            ]
+            custom_list["updated_at"] = datetime.utcnow().isoformat()
+            return custom_list
+    
+    raise HTTPException(status_code=404, detail="List not found")
+
+
+# Analytics functions
+def get_user_analytics(user_id: str) -> Dict[str, Any]:
+    """Get user analytics and insights."""
+    if user_id not in users_db:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user = users_db[user_id]
+    searches = search_history_db.get(user_id, [])
+    
+    # Calculate statistics
+    total_searches = len(searches)
+    
+    # Most searched symptoms
+    symptom_counts = {}
+    for search in searches:
+        for symptom in search.get("symptoms", []):
+            symptom_counts[symptom] = symptom_counts.get(symptom, 0) + 1
+    
+    top_symptoms = sorted(symptom_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+    
+    # Most viewed specialties
+    family_counts = {}
+    for search in searches:
+        family = search.get("family")
+        if family:
+            family_counts[family] = family_counts.get(family, 0) + 1
+    
+    top_specialties = sorted(family_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+    
+    # Recent activity
+    recent_activity = searches[:10]
+    
+    return {
+        "user_id": user_id,
+        "total_searches": total_searches,
+        "total_favorites": user.get("favorite_count", 0),
+        "total_custom_lists": len(custom_lists_db.get(user_id, [])),
+        "member_since": user.get("created_at"),
+        "last_login": user.get("last_login"),
+        "top_symptoms": [{"symptom": s, "count": c} for s, c in top_symptoms],
+        "top_specialties": [{"specialty": s, "count": c} for s, c in top_specialties],
+        "recent_activity": recent_activity
+    }
