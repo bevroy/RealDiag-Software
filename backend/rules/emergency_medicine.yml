@@ -516,6 +516,31 @@ rules:
       - "Beck's triad: Hypotension, JVD, muffled heart sounds"
       - "Pulsus paradoxus: >10 mmHg drop in SBP with inspiration"
       - Dyspnea and chest pain
+      - "Tachycardia out of proportion to findings"
+      - "Electrical alternans on ECG (beat-to-beat QRS amplitude variation)"
+      - "Causes: Pericardial effusion (malignancy, uremia, infection), trauma, post-MI (free wall rupture), aortic dissection"
+    clinical_pearls:
+      - "Accumulation of pericardial fluid compresses heart, prevents ventricular filling, decreases cardiac output"
+      - "Beck's triad (hypotension, JVD, muffled heart sounds): Classic but only 10-40% have all three"
+      - "Pulsus paradoxus: Exaggerated drop in SBP >10 mmHg during inspiration (normal <10 mmHg) - 80% sensitive"
+      - "Electrical alternans: Beat-to-beat variation in QRS amplitude (heart swinging in fluid) - pathognomonic but rare"
+      - "RUSH exam (bedside ultrasound): Circumferential pericardial effusion + IVC plethora + RV diastolic collapse"
+      - "Pericardiocentesis is both diagnostic and therapeutic - immediate life-saving intervention"
+    management:
+      - "Immediate: IV access (two large-bore), aggressive fluid resuscitation (preload), oxygen, bedside ultrasound"
+      - "Fluids: NS bolus 1-2L to increase preload (temporizing measure - buys time for pericardiocentesis)"
+      - "Avoid: Positive pressure ventilation (worsens preload), diuretics (worsens preload)"
+      - "Emergent pericardiocentesis: Subxiphoid or parasternal approach, ultrasound-guided, aspirate fluid (send for culture, cytology, Gram stain)"
+      - "Disposition: ICU after pericardiocentesis, cardiothoracic surgery consult if traumatic/post-MI, pericardial drain placement"
+    tests:
+      - "Bedside ultrasound (RUSH exam): Circumferential pericardial effusion, RV diastolic collapse (80% sensitive), RA systolic collapse (best predictor)"
+      - "IVC ultrasound: Plethoric (dilated >2cm, <50% collapse with inspiration) - indicates elevated CVP"
+      - "ECG: Low voltage QRS (<5mm in limb leads), electrical alternans (pathognomonic but rare 20%)"
+      - "CXR: Enlarged cardiac silhouette (water bottle heart) - needs >250 mL effusion, often normal in acute tamponade"
+      - "Pericardial fluid analysis: Cell count, Gram stain, culture, cytology, glucose, protein, LDH"
+    referrals:
+      - "Cardiology EMERGENTLY for pericardiocentesis - can be performed at bedside by emergency or cardiology"
+      - "Cardiothoracic surgery if: Traumatic tamponade, post-MI free wall rupture, recurrent effusion after drainage"
     icd10:
       - I31.4     # Cardiac tamponade
     snomed:
@@ -606,18 +631,15 @@ rules:
       - "If pain worsens: Stop and rotate in opposite direction"
       - "Ultrasound only if diagnosis uncertain AND surgery will not be delayed: Color Doppler shows decreased flow"
       - "Disposition: Emergent OR for surgical detorsion + bilateral orchiopexy (fix both testes to prevent recurrence)"
+    tests:
+      - "Cremasteric reflex: Absent in 99% of torsion (stroke inner thigh, normal = testicle retracts)"
+      - "Doppler ultrasound: Decreased or absent blood flow (don't delay surgery for this)"
+      - "Physical exam: High-riding testis, horizontal lie, firm tender testis"
+    referrals:
+      - "Urology EMERGENTLY - call immediately, patient goes directly to OR"
     icd10:
       - N44.00    # Torsion of testis, unspecified
       - N44.01    # Extravaginal torsion of spermatic cord
       - N44.02    # Intravaginal torsion of spermatic cord
     snomed:
       - "51942009"  # Torsion of testis
-      - Nausea and vomiting
-      - High-riding testis
-      - Absent cremasteric reflex
-      - Swelling and erythema of scrotum
-      - "Requires urgent surgery (<6 hours)"
-    icd10:
-      - N44.00
-    snomed:
-      - "51942009"  # Testicular torsion
