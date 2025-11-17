@@ -202,3 +202,384 @@ rules:
       - C20
     snomed:
       - "363406005"
+
+  - id: GASTRO-CROHNS-DISEASE
+    label: Crohn's Disease
+    presentations:
+      - Chronic diarrhea (may be bloody), abdominal pain (often RLQ)
+      - Weight loss, fatigue, fever
+      - Perianal disease: Fissures, fistulas, abscesses (highly specific)
+      - Skip lesions: Patchy inflammation anywhere from mouth to anus
+      - Extraintestinal manifestations: Arthritis, erythema nodosum, uveitis, PSC
+      - Complications: Strictures, fistulas, abscesses, bowel obstruction
+    clinical_pearls:
+      - "Transmural inflammation (unlike UC which is mucosal)"
+      - "Can affect any part of GI tract (mouth to anus), but commonly terminal ileum"
+      - "String sign on imaging (narrowed terminal ileum)"
+      - "Smoking worsens Crohn's (opposite of UC)"
+      - "Biologic therapy (anti-TNF) for moderate-severe disease"
+    management:
+      - "Mild-moderate: Budesonide 9mg daily or mesalamine"
+      - "Moderate-severe: Prednisone 40mg daily taper, then azathioprine or anti-TNF"
+      - "Biologics: Infliximab, adalimumab, vedolizumab (for steroid-refractory)"
+      - "Surgery for complications: Stricturoplasty, resection (not curative)"
+      - "Nutrition: Elemental diet, avoid NSAIDs"
+    tests:
+      - Colonoscopy with ileoscopy (patchy ulcers, skip lesions, cobblestoning)
+      - CT enterography or MR enterography (assess small bowel)
+      - Fecal calprotectin (elevated, monitors inflammation)
+      - CBC (anemia, leukocytosis), CRP/ESR (elevated)
+      - Stool studies (rule out infection)
+    referrals:
+      - Gastroenterology for all suspected IBD
+      - Surgery if complications (obstruction, fistula, abscess)
+    sensitivity: 0.85
+    specificity: 0.82
+    icd10:
+      - K50.90   # Crohn's disease, unspecified, without complications
+      - K50.80   # Crohn's disease of both small and large intestine
+    snomed:
+      - "34000006"  # Crohn's disease
+
+  - id: GASTRO-ULCERATIVE-COLITIS
+    label: Ulcerative Colitis (UC)
+    presentations:
+      - Bloody diarrhea (hallmark), tenesmus, urgency
+      - Lower abdominal cramping, often relieved by defecation
+      - Continuous inflammation starting at rectum, extends proximally
+      - Extraintestinal: Arthritis, PSC (stronger association than Crohn's), erythema nodosum
+      - Severe flare (fulminant colitis): >10 BM/day, fever, tachycardia, anemia
+      - Toxic megacolon: Dilated colon (>6 cm), systemic toxicity, risk of perforation
+    clinical_pearls:
+      - "Continuous mucosal inflammation (unlike Crohn's skip lesions)"
+      - "Starts in rectum, extends proximally (can be proctitis, left-sided, or pancolitis)"
+      - "Smoking protective (opposite of Crohn's)"
+      - "Increased colon cancer risk: Screen starting 8 years after diagnosis"
+      - "Severe flare: IV steroids, if no response in 3-5 days → consider colectomy"
+    management:
+      - "Mild-moderate: Mesalamine (5-ASA) 2.4-4.8g daily, topical mesalamine suppositories/enemas"
+      - "Moderate-severe: Prednisone 40mg daily taper"
+      - "Maintenance: Azathioprine, 6-MP, or biologics (infliximab, vedolizumab)"
+      - "Severe flare: IV methylprednisolone 60mg daily, if refractory → cyclosporine or colectomy"
+      - "Toxic megacolon: NPO, IV fluids, antibiotics, surgery if no improvement"
+    tests:
+      - Colonoscopy (continuous inflammation, loss of vascular pattern, pseudopolyps)
+      - Biopsy (crypt abscesses, basal plasmacytosis)
+      - Fecal calprotectin (elevated)
+      - CBC (anemia), CRP/ESR, stool studies
+      - Abdominal X-ray if toxic megacolon suspected (dilated colon)
+    referrals:
+      - Gastroenterology for all suspected UC
+      - Colorectal surgery if severe refractory flare or toxic megacolon
+    sensitivity: 0.88
+    specificity: 0.85
+    icd10:
+      - K51.90   # Ulcerative colitis, unspecified, without complications
+      - K51.00   # Ulcerative pancolitis without complications
+    snomed:
+      - "64766004"  # Ulcerative colitis
+
+  - id: GASTRO-ACUTE-HEPATITIS
+    label: Acute Viral Hepatitis (A, B, C)
+    presentations:
+      - Jaundice, dark urine, clay-colored stools
+      - Right upper quadrant pain, hepatomegaly
+      - Nausea, vomiting, anorexia, fatigue
+      - Fever, myalgias (prodrome)
+      - Markedly elevated transaminases (ALT/AST >1000 U/L)
+      - Hep A: Fecal-oral transmission, self-limited
+      - Hep B: Percutaneous/sexual, risk of chronic infection
+      - Hep C: Bloodborne, high chronicity rate (70-85%)
+    clinical_pearls:
+      - "ALT > AST (unlike alcoholic hepatitis where AST > ALT 2:1)"
+      - "Hep A: IgM anti-HAV positive (acute infection)"
+      - "Hep B: HBsAg + IgM anti-HBc = acute infection"
+      - "Hep C: Anti-HCV + HCV RNA = acute or chronic (check HCV RNA)"
+      - "Fulminant hepatic failure rare but serious (encephalopathy, coagulopathy)"
+    management:
+      - "Supportive care: Hydration, antiemetics, rest"
+      - "Avoid: Alcohol, hepatotoxic drugs (acetaminophen, NSAIDs)"
+      - "Hep A: Self-limited, no specific treatment"
+      - "Hep B: Most resolve, monitor; if chronic → entecavir or tenofovir"
+      - "Hep C: Treat with direct-acting antivirals (sofosbuvir-based regimens), cure rate >95%"
+    tests:
+      - Hepatitis panel: Anti-HAV IgM, HBsAg, anti-HBc IgM, anti-HCV
+      - Liver function tests: ALT, AST, bilirubin, alkaline phosphatase, PT/INR
+      - If chronic suspected: HCV RNA, HBV DNA, HIV test, liver ultrasound
+    referrals:
+      - Gastroenterology/hepatology for chronic hepatitis B or C
+      - Transplant hepatology if fulminant hepatic failure
+    sensitivity: 0.92
+    specificity: 0.88
+    icd10:
+      - B15.9    # Hepatitis A without hepatic coma
+      - B16.9    # Acute hepatitis B without delta-agent and without hepatic coma
+      - B17.10   # Acute hepatitis C without hepatic coma
+    snomed:
+      - "40468003"  # Viral hepatitis
+
+  - id: GASTRO-ACUTE-PANCREATITIS
+    label: Acute Pancreatitis
+    presentations:
+      - Severe, constant epigastric pain radiating to back
+      - Nausea, vomiting, anorexia
+      - Elevated lipase (>3x ULN) or amylase
+      - Imaging: Pancreatic inflammation, edema, or necrosis on CT
+      - Causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia, medications, trauma
+      - Severe pancreatitis: Organ failure, necrosis, SIRS
+    clinical_pearls:
+      - "Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)"
+      - "Lipase more specific than amylase"
+      - "CT not needed for mild cases; delay 48-72hr if imaging needed (IV contrast)"
+      - "Ranson's criteria or APACHE II score for severity assessment"
+      - "Early aggressive IV hydration (LR preferred) improves outcomes"
+    management:
+      - "Aggressive IV fluids: LR 250-500 mL/hr (goal UOP 0.5-1 mL/kg/hr)"
+      - "NPO initially, advance diet as tolerated (early feeding better than prolonged NPO)"
+      - "Pain control: Opioids (morphine, hydromorphone)"
+      - "Treat underlying cause: ERCP for gallstone pancreatitis with cholangitis/obstruction"
+      - "ICU if severe: Organ failure, necrosis, SIRS"
+    tests:
+      - Lipase (elevated >3x ULN)
+      - Liver function tests (if gallstone etiology)
+      - Triglycerides (if hypertriglyceridemia suspected, >1000 mg/dL)
+      - CT abdomen with IV contrast (if severe or uncertain diagnosis, delay 48-72hr)
+      - Right upper quadrant ultrasound (assess for gallstones)
+    referrals:
+      - Gastroenterology for all cases
+      - Surgery for complications (necrosis, abscess, pseudocyst)
+      - ERCP if gallstone with cholangitis/obstruction
+    sensitivity: 0.90
+    specificity: 0.85
+    icd10:
+      - K85.90   # Acute pancreatitis without necrosis or infection, unspecified
+      - K85.00   # Idiopathic acute pancreatitis without necrosis or infection
+    snomed:
+      - "197456007"  # Acute pancreatitis
+
+  - id: GASTRO-CHRONIC-PANCREATITIS
+    label: Chronic Pancreatitis
+    presentations:
+      - Chronic or recurrent epigastric pain, often after eating
+      - Steatorrhea (fatty, foul-smelling stools) - pancreatic insufficiency
+      - Weight loss, malabsorption
+      - Diabetes mellitus (endocrine insufficiency)
+      - Calcifications on CT (pathognomonic)
+      - Most common cause: Chronic alcohol use (70%)
+    clinical_pearls:
+      - "Triad: Chronic pain, steatorrhea, diabetes (burnt out pancreas)"
+      - "Pancreatic calcifications on CT are diagnostic"
+      - "Lipase/amylase often NORMAL (gland burnt out)"
+      - "Increased risk of pancreatic cancer (5%)"
+      - "Pancreatic enzyme replacement improves absorption and reduces pain"
+    management:
+      - "Alcohol cessation (essential), smoking cessation"
+      - "Pancreatic enzyme replacement: Creon 25,000-40,000 units lipase with meals"
+      - "Pain management: NSAIDs, opioids (often refractory pain)"
+      - "Fat-soluble vitamins: A, D, E, K supplementation"
+      - "Diabetes management: Insulin often required"
+    tests:
+      - CT abdomen (pancreatic calcifications, atrophy, duct dilation)
+      - Fecal elastase (low <200 mcg/g indicates exocrine insufficiency)
+      - Hemoglobin A1c (assess for diabetes)
+      - MRCP or ERCP (duct abnormalities, strictures)
+    referrals:
+      - Gastroenterology for all cases
+      - Endocrinology for diabetes management
+      - Pain clinic for refractory pain
+      - Surgery if severe refractory pain (pancreatic resection, duct decompression)
+    sensitivity: 0.82
+    specificity: 0.88
+    icd10:
+      - K86.1    # Other chronic pancreatitis
+      - K86.0    # Alcohol-induced chronic pancreatitis
+    snomed:
+      - "235494005"  # Chronic pancreatitis
+
+  - id: GASTRO-CHOLECYSTITIS
+    label: Acute Cholecystitis
+    presentations:
+      - Right upper quadrant pain, often after fatty meal
+      - Murphy's sign: Inspiratory arrest with RUQ palpation
+      - Fever, nausea, vomiting
+      - Ultrasound: Gallstones, thickened gallbladder wall (>4mm), pericholecystic fluid
+      - Positive sonographic Murphy's sign
+      - Elevated WBC, sometimes elevated bilirubin/alkaline phosphatase
+    clinical_pearls:
+      - "Cholecystitis = inflammation of gallbladder (usually due to stone obstruction)"
+      - "Murphy's sign highly specific (90%)"
+      - "RUQ ultrasound is diagnostic test of choice"
+      - "Early cholecystectomy (within 72hr) preferred over delayed"
+      - "Gangrenous cholecystitis and perforation are serious complications"
+    management:
+      - "NPO, IV fluids, IV antibiotics (ceftriaxone + metronidazole)"
+      - "Pain control: Opioids, NSAIDs"
+      - "Cholecystectomy: Ideally within 72 hours of symptom onset"
+      - "If poor surgical candidate: Percutaneous cholecystostomy tube"
+      - "Avoid delaying surgery >72hr (increased complications)"
+    tests:
+      - Right upper quadrant ultrasound (gallstones, wall thickening, Murphy's sign)
+      - CBC (leukocytosis), liver function tests
+      - HIDA scan if ultrasound equivocal (non-filling gallbladder)
+    referrals:
+      - Surgery for cholecystectomy
+      - Gastroenterology if ERCP needed (choledocholithiasis)
+    sensitivity: 0.88
+    specificity: 0.90
+    icd10:
+      - K81.0    # Acute cholecystitis
+    snomed:
+      - "76581006"  # Acute cholecystitis
+
+  - id: GASTRO-ASCENDING-CHOLANGITIS
+    label: Acute Ascending Cholangitis
+    presentations:
+      - Charcot's triad: Fever/chills, jaundice, RUQ pain (50-70% have all 3)
+      - Reynolds' pentad: Charcot triad + hypotension + altered mental status (severe)
+      - Elevated bilirubin, alkaline phosphatase, transaminases
+      - Dilated bile ducts on imaging
+      - Most common cause: Choledocholithiasis (CBD stone)
+    clinical_pearls:
+      - "Medical emergency requiring IV antibiotics and biliary decompression"
+      - "ERCP within 24-48 hours for drainage"
+      - "Mortality 10% even with treatment; 50% if untreated"
+      - "Tokyo guidelines for severity: Grade I (mild), II (moderate), III (severe)"
+      - "Blood cultures often positive (E. coli, Klebsiella, Enterococcus)"
+    management:
+      - "IV antibiotics: Piperacillin-tazobactam 3.375g q6h or ceftriaxone + metronidazole"
+      - "IV fluids, supportive care"
+      - "Emergent ERCP: Sphincterotomy, stone extraction, stent placement"
+      - "If ERCP unsuccessful: Percutaneous transhepatic biliary drainage (PTBD)"
+      - "Blood cultures before antibiotics"
+    tests:
+      - Right upper quadrant ultrasound (dilated CBD >6mm, stones)
+      - Liver function tests (elevated bilirubin, alk phos)
+      - CBC (leukocytosis), blood cultures
+      - MRCP or CT if ultrasound equivocal
+      - ERCP (diagnostic and therapeutic)
+    referrals:
+      - Gastroenterology for emergent ERCP
+      - Surgery if ERCP unsuccessful or complications
+      - ICU if septic shock
+    sensitivity: 0.85
+    specificity: 0.88
+    icd10:
+      - K83.09   # Ascending cholangitis
+      - K80.30   # Calculus of bile duct with cholangitis
+    snomed:
+      - "82403002"  # Cholangitis
+
+  - id: GASTRO-PEPTIC-ULCER-DISEASE
+    label: Peptic Ulcer Disease (PUD)
+    presentations:
+      - Epigastric pain (burning or gnawing)
+      - Duodenal ulcer: Pain 2-5 hours after eating, relieved by food
+      - Gastric ulcer: Pain worsened by eating
+      - Nausea, bloating, early satiety
+      - Alarm symptoms: Weight loss, anemia, dysphagia, hematemesis, melena
+      - Causes: H. pylori (70%), NSAIDs (20-30%), stress ulcers
+    clinical_pearls:
+      - "Duodenal ulcers more common than gastric (4:1 ratio)"
+      - "H. pylori test and treat (even without EGD if no alarm symptoms)"
+      - "Stop NSAIDs if possible"
+      - "PPI therapy: 4-8 weeks for healing"
+      - "Gastric ulcers: Always biopsy to rule out malignancy"
+    management:
+      - "PPI: Omeprazole 20-40mg daily or pantoprazole 40mg daily x 4-8 weeks"
+      - "H. pylori eradication: Triple therapy (PPI BID + clarithromycin + amoxicillin) x 14 days"
+      - "Alternative: Quadruple therapy (PPI + bismuth + tetracycline + metronidazole)"
+      - "Stop NSAIDs; if needed, use with PPI"
+      - "Confirm eradication: Urea breath test or stool antigen 4 weeks after treatment"
+    tests:
+      - EGD if alarm symptoms, age >60, or refractory symptoms
+      - H. pylori testing: Urea breath test, stool antigen, or biopsy during EGD
+      - CBC (anemia from chronic bleeding)
+      - Stool guaiac (occult blood)
+    referrals:
+      - Gastroenterology for EGD if alarm symptoms or refractory
+      - Surgery if perforation or refractory bleeding
+    sensitivity: 0.85
+    specificity: 0.80
+    icd10:
+      - K27.9    # Peptic ulcer, site unspecified
+      - K26.9    # Duodenal ulcer, unspecified
+      - K25.9    # Gastric ulcer, unspecified
+    snomed:
+      - "13200003"  # Peptic ulcer
+
+  - id: GASTRO-UPPER-GI-BLEEDING
+    label: Upper Gastrointestinal Bleeding
+    presentations:
+      - Hematemesis (vomiting blood, coffee-ground emesis)
+      - Melena (black, tarry stools)
+      - Hemodynamic instability: Hypotension, tachycardia, syncope
+      - Anemia, elevated BUN/Cr ratio (BUN/Cr >30 suggests upper GI source)
+      - Causes: Peptic ulcer (40%), varices (20%), Mallory-Weiss tear, gastritis, malignancy
+    clinical_pearls:
+      - "Stabilize first: Two large-bore IVs, fluids, type and cross"
+      - "GBS score (Glasgow-Blatchford) predicts need for intervention"
+      - "PPI drip (pantoprazole 80mg bolus, then 8mg/hr) for ulcer bleeding"
+      - "Variceal bleeding: Octreotide drip + antibiotics + EGD banding"
+      - "Emergent EGD within 24 hours (sooner if unstable)"
+    management:
+      - "Resuscitation: Two large-bore IVs, crystalloid, transfuse if Hgb <7 (or <8-9 if CAD)"
+      - "PPI: Pantoprazole 80mg IV bolus, then 8mg/hr infusion"
+      - "If variceal suspected: Octreotide 50mcg bolus, then 50mcg/hr + ceftriaxone 1g IV"
+      - "EGD within 24 hours (emergent if unstable)"
+      - "Hold anticoagulation, reverse if necessary"
+    tests:
+      - CBC (hemoglobin trend), type and cross
+      - BMP (BUN/Cr ratio >30 suggests upper GI source)
+      - Coagulation studies (PT/INR if on anticoagulation)
+      - Liver function tests (if suspect varices)
+      - EGD (diagnostic and therapeutic)
+    referrals:
+      - Gastroenterology for emergent EGD
+      - Surgery if endoscopic therapy fails
+      - ICU if hemodynamically unstable
+    sensitivity: 0.92
+    specificity: 0.85
+    icd10:
+      - K92.2    # Gastrointestinal hemorrhage, unspecified
+      - K92.0    # Hematemesis
+      - K92.1    # Melena
+    snomed:
+      - "37372002"  # Upper gastrointestinal hemorrhage
+
+  - id: GASTRO-CIRRHOSIS
+    label: Cirrhosis
+    presentations:
+      - Ascites, peripheral edema
+      - Jaundice, spider angiomata, palmar erythema
+      - Hepatomegaly (early), then atrophic liver (late)
+      - Splenomegaly, varices (portal hypertension)
+      - Hepatic encephalopathy: Confusion, asterixis, altered mental status
+      - Causes: Alcohol (most common US), HCV, NAFLD, HBV, autoimmune, hemochromatosis
+    clinical_pearls:
+      - "Cirrhosis = end-stage liver disease with fibrosis and nodule formation"
+      - "Child-Pugh score: A (5-6 points), B (7-9), C (10-15) predicts mortality"
+      - "MELD score used for transplant allocation"
+      - "Screen for HCC: Ultrasound + AFP every 6 months"
+      - "Variceal screening: EGD at diagnosis, if large varices → propranolol"
+    management:
+      - "Treat underlying cause: Alcohol cessation, antiviral therapy (HBV/HCV)"
+      - "Ascites: Sodium restriction (<2g/day), spironolactone 100mg + furosemide 40mg"
+      - "Hepatic encephalopathy: Lactulose 30mL TID, rifaximin 550mg BID"
+      - "Variceal prophylaxis: Propranolol 20mg BID (titrate to HR 55-60)"
+      - "Liver transplant evaluation if decompensated (MELD >15)"
+    tests:
+      - Liver ultrasound (nodular liver, splenomegaly, ascites)
+      - Liver function tests, albumin, PT/INR
+      - Hepatitis serologies (HBV, HCV), ferritin (hemochromatosis), ANA (autoimmune)
+      - EGD (screen for varices)
+      - Ultrasound + AFP every 6 months (HCC screening)
+    referrals:
+      - Gastroenterology/hepatology for all cirrhosis
+      - Transplant hepatology if decompensated or MELD >15
+    sensitivity: 0.85
+    specificity: 0.88
+    icd10:
+      - K74.60   # Unspecified cirrhosis of liver
+      - K70.30   # Alcoholic cirrhosis of liver
+    snomed:
+      - "19943007"  # Cirrhosis of liver

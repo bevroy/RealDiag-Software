@@ -224,3 +224,417 @@ rules:
       - A04.72    # Enterocolitis due to Clostridium difficile, recurrent
     snomed:
       - "186431008" # Clostridioides difficile colitis
+
+  - id: ID-SEPSIS
+    label: Sepsis and Septic Shock
+    presentations:
+      - SIRS criteria: Temp >38°C or <36°C, HR >90, RR >20, WBC >12K or <4K
+      - Sepsis: Infection + organ dysfunction (qSOFA ≥2: RR ≥22, AMS, SBP ≤100)
+      - Septic shock: Sepsis + hypotension requiring vasopressors + lactate >2 mmol/L
+      - Source: Pneumonia, UTI, intra-abdominal, skin/soft tissue most common
+      - Signs: Fever/hypothermia, tachycardia, tachypnea, hypotension, altered mental status
+      - Elevated lactate (>2), elevated WBC or bandemia
+    clinical_pearls:
+      - "Sepsis-3 definition: Infection + SOFA score increase ≥2"
+      - "Septic shock: Sepsis + vasopressors + lactate >2 despite fluids (mortality 40%)"
+      - "Sepsis bundle: Blood cultures, antibiotics within 1 hour, 30mL/kg fluids"
+      - "Source control essential: Drain abscess, remove infected device, debridement"
+      - "Broad-spectrum antibiotics initially, then narrow based on culture"
+    management:
+      - "Blood cultures x2 (before antibiotics), then broad-spectrum antibiotics within 1 hour"
+      - "IV fluids: 30 mL/kg crystalloid bolus (LR or NS) in first 3 hours"
+      - "Antibiotics: Vancomycin + piperacillin-tazobactam (or cefepime or meropenem)"
+      - "Vasopressors if hypotensive after fluids: Norepinephrine first-line"
+      - "Source control: Remove infected catheter, drain abscess, debride necrotic tissue"
+    tests:
+      - Blood cultures x2 (different sites, before antibiotics)
+      - Lactate (elevated >2, recheck in 2-4hr if elevated)
+      - CBC with differential, comprehensive metabolic panel
+      - Procalcitonin (elevated in bacterial infection)
+      - Imaging to identify source (chest X-ray, CT abdomen/pelvis, etc.)
+    referrals:
+      - ICU admission for septic shock or severe sepsis
+      - Surgery if source control needed (abscess, bowel perforation)
+      - Infectious disease consult for complex cases
+    sensitivity: 0.88
+    specificity: 0.80
+    icd10:
+      - A41.9    # Sepsis, unspecified organism
+      - R65.20   # Severe sepsis without septic shock
+      - R65.21   # Severe sepsis with septic shock
+    snomed:
+      - "91302008"  # Sepsis
+
+  - id: ID-BACTERIAL-MENINGITIS
+    label: Bacterial Meningitis
+    presentations:
+      - Classic triad: Fever, neck stiffness, altered mental status (only 44% have all 3)
+      - Severe headache, photophobia, nausea/vomiting
+      - Kernig's sign (pain with leg extension), Brudzinski's sign (neck flexion → hip flexion)
+      - Petechial rash (Neisseria meningitidis)
+      - Seizures, focal neurologic deficits (complications)
+      - CSF: Elevated WBC (>1000, PMN predominant), low glucose, high protein, elevated opening pressure
+    clinical_pearls:
+      - "Don't delay antibiotics for LP or imaging! Give empiric antibiotics if high suspicion"
+      - "LP contraindicated if: Focal deficit, papilledema, immunocompromised → get CT first"
+      - "Empiric: Vancomycin + ceftriaxone (add ampicillin if >50yo or immunocompromised for Listeria)"
+      - "Dexamethasone 10mg IV 15-20 min before or with first antibiotic dose (reduces mortality)"
+      - "Mortality 15-25% even with treatment; neurologic sequelae common"
+    management:
+      - "Blood cultures, then empiric antibiotics immediately (don't wait for LP!)"
+      - "Vancomycin 15-20mg/kg IV + ceftriaxone 2g IV q12h"
+      - "If >50yo or immunocompromised: Add ampicillin 2g IV q4h (for Listeria)"
+      - "Dexamethasone 10mg IV q6h x 4 days (start with or before antibiotics)"
+      - "LP when safe (after CT if focal signs); send CSF for cell count, glucose, protein, gram stain, culture"
+    tests:
+      - Lumbar puncture: CSF cell count, glucose, protein, gram stain, culture
+      - Blood cultures x2 before antibiotics
+      - CT head if focal neurologic signs before LP
+      - Procalcitonin (elevated in bacterial)
+    referrals:
+      - ICU admission for all bacterial meningitis
+      - Infectious disease consult
+      - Neurology if complications (seizures, stroke)
+    sensitivity: 0.85
+    specificity: 0.90
+    icd10:
+      - G00.9    # Bacterial meningitis, unspecified
+      - G00.2    # Streptococcal meningitis
+    snomed:
+      - "95883001"  # Bacterial meningitis
+
+  - id: ID-VIRAL-MENINGITIS
+    label: Viral (Aseptic) Meningitis
+    presentations:
+      - Fever, headache, neck stiffness (milder than bacterial)
+      - Photophobia, nausea, malaise
+      - No altered mental status typically (less severe than bacterial)
+      - CSF: Lymphocytic pleocytosis (10-1000 cells, lymphocyte predominant), normal glucose, mildly elevated protein
+      - Causes: Enteroviruses (most common), HSV-2, VZV, HIV, mumps
+      - Self-limited in most cases (1-2 weeks)
+    clinical_pearls:
+      - "Cannot distinguish from bacterial clinically - treat as bacterial until CSF results"
+      - "CSF lymphocytic predominance suggests viral (but early bacterial can have lymphocytes)"
+      - "HSV-2 meningitis: Recurrent, associated with genital HSV"
+      - "Most common cause: Enteroviruses (coxsackie, echovirus)"
+      - "Treatment supportive unless HSV encephalitis (acyclovir)"
+    management:
+      - "Initially treat as bacterial meningitis until CSF results available"
+      - "If CSF confirms viral: Supportive care (fluids, analgesics, antiemetics)"
+      - "Acyclovir if HSV suspected (encephalitis features, immunocompromised)"
+      - "Pain control: Acetaminophen, NSAIDs"
+      - "Most recover fully in 7-10 days without treatment"
+    tests:
+      - Lumbar puncture: CSF cell count (lymphocytic), glucose (normal), protein (mildly elevated)
+      - CSF viral PCR panel (enterovirus, HSV, VZV)
+      - Blood cultures (rule out bacterial)
+    referrals:
+      - Infectious disease if HSV or complicated
+      - Admission if severe symptoms, unable to tolerate PO
+    sensitivity: 0.80
+    specificity: 0.85
+    icd10:
+      - A87.9    # Viral meningitis, unspecified
+      - A87.0    # Enteroviral meningitis
+    snomed:
+      - "7180009"  # Viral meningitis
+
+  - id: ID-ENCEPHALITIS
+    label: Encephalitis
+    presentations:
+      - Altered mental status, confusion, disorientation (hallmark)
+      - Fever, headache, seizures
+      - Focal neurologic deficits (weakness, aphasia, ataxia)
+      - Personality changes, behavioral abnormalities
+      - HSV encephalitis: Temporal lobe involvement, hemorrhagic changes on MRI
+      - CSF: Lymphocytic pleocytosis, elevated protein, RBCs (if hemorrhagic)
+    clinical_pearls:
+      - "HSV encephalitis most common viral cause (and most treatable)"
+      - "Start acyclovir empirically if encephalitis suspected (don't wait for PCR)"
+      - "MRI more sensitive than CT: Temporal lobe enhancement (HSV)"
+      - "EEG: PLEDS (periodic lateralizing epileptiform discharges) suggests HSV"
+      - "Mortality 70% if untreated HSV; 30% with treatment"
+    management:
+      - "Empiric acyclovir 10mg/kg IV q8h immediately (for HSV)"
+      - "Supportive care: IVF, anticonvulsants if seizures"
+      - "Antibiotics if bacterial meningitis not ruled out (vanc + ceftriaxone)"
+      - "Continue acyclovir 14-21 days if HSV confirmed"
+      - "Treat elevated ICP if present"
+    tests:
+      - MRI brain with contrast (temporal lobe involvement suggests HSV)
+      - Lumbar puncture: CSF PCR for HSV, VZV, enteroviruses
+      - EEG (PLEDS suggest HSV)
+      - Blood cultures, CSF cell count/glucose/protein
+    referrals:
+      - ICU admission
+      - Neurology consult
+      - Infectious disease consult
+    sensitivity: 0.82
+    specificity: 0.88
+    icd10:
+      - G04.90   # Encephalitis, unspecified
+      - B00.4    # Herpesviral encephalitis
+    snomed:
+      - "45170000"  # Encephalitis
+
+  - id: ID-COMMUNITY-ACQUIRED-PNEUMONIA
+    label: Community-Acquired Pneumonia (CAP)
+    presentations:
+      - Cough (productive or non-productive), fever, dyspnea
+      - Pleuritic chest pain, chills, rigors
+      - Crackles/rales on auscultation, bronchial breath sounds
+      - Chest X-ray: Lobar consolidation, infiltrate
+      - Sputum production (may be purulent, rust-colored, or blood-tinged)
+      - CURB-65 score predicts mortality: Confusion, Uremia, RR ≥30, BP <90/60, age ≥65
+    clinical_pearls:
+      - "Most common pathogens: S. pneumoniae, H. influenzae, atypical (Mycoplasma, Chlamydia)"
+      - "CURB-65 ≥2: Consider admission; ≥3: ICU consideration"
+      - "Outpatient: Amoxicillin or doxycycline (low resistance)"
+      - "Inpatient: Ceftriaxone + azithromycin (covers typical + atypical)"
+      - "Typical vs atypical: Typical has high fever, productive cough; atypical has dry cough, gradual onset"
+    management:
+      - "Outpatient: Amoxicillin 1g TID x 5-7d or doxycycline 100mg BID x 5-7d"
+      - "Inpatient non-ICU: Ceftriaxone 1-2g IV daily + azithromycin 500mg IV/PO daily"
+      - "ICU: Ceftriaxone + azithromycin OR beta-lactam + fluoroquinolone (levofloxacin)"
+      - "If MRSA or Pseudomonas risk: Add vancomycin or piperacillin-tazobactam"
+      - "Supportive: Oxygen, fluids, fever control"
+    tests:
+      - Chest X-ray (PA and lateral)
+      - CBC, basic metabolic panel
+      - Blood cultures x2 if admitted
+      - Sputum culture if ICU or failed outpatient treatment
+      - Procalcitonin (helps distinguish bacterial from viral)
+    referrals:
+      - Hospital admission if CURB-65 ≥2 or hypoxia
+      - ICU if CURB-65 ≥3 or severe respiratory distress
+      - Pulmonology if complicated (effusion, abscess, empyema)
+    sensitivity: 0.85
+    specificity: 0.80
+    icd10:
+      - J18.9    # Pneumonia, unspecified organism
+      - J13      # Pneumonia due to Streptococcus pneumoniae
+    snomed:
+      - "385093006"  # Community-acquired pneumonia
+
+  - id: ID-HEALTHCARE-ACQUIRED-PNEUMONIA
+    label: Hospital-Acquired Pneumonia (HAP) / Ventilator-Associated Pneumonia (VAP)
+    presentations:
+      - Pneumonia >48 hours after hospital admission (HAP) or >48hr after intubation (VAP)
+      - Fever, leukocytosis, purulent sputum
+      - New infiltrate on chest X-ray
+      - Worsening oxygenation, increased ventilatory support requirements
+      - High risk for resistant organisms: MRSA, Pseudomonas, Acinetobacter
+    clinical_pearls:
+      - "Empiric coverage for MRSA + Pseudomonas required"
+      - "De-escalate based on cultures (most important intervention)"
+      - "8-day course adequate for most (exception: non-fermenting GNR like Pseudomonas)"
+      - "Prevention: Elevate HOB 30-45°, daily sedation vacation, chlorhexidine oral care"
+      - "Mortality 20-50% depending on pathogen and severity"
+    management:
+      - "Empiric: Vancomycin 15-20mg/kg q12h + anti-pseudomonal beta-lactam"
+      - "Anti-pseudomonal: Piperacillin-tazobactam 4.5g q6h, cefepime 2g q8h, or meropenem 1g q8h"
+      - "If high resistance risk: Add aminoglycoside or fluoroquinolone"
+      - "Narrow based on cultures and sensitivities (CRITICAL)"
+      - "Duration: 7-8 days for most; 14 days if poor response or non-fermenting GNR"
+    tests:
+      - Chest X-ray (new infiltrate)
+      - Sputum culture (including quantitative if VAP)
+      - Blood cultures x2
+      - CBC, basic metabolic panel, procalcitonin
+    referrals:
+      - ICU if respiratory failure
+      - Infectious disease consult for multidrug-resistant organisms
+      - Pulmonology if complicated
+    sensitivity: 0.75
+    specificity: 0.70
+    icd10:
+      - J18.9    # Pneumonia, unspecified organism
+      - J95.851  # Ventilator associated pneumonia
+    snomed:
+      - "434531000124109"  # Hospital acquired pneumonia
+
+  - id: ID-ACUTE-PYELONEPHRITIS
+    label: Acute Pyelonephritis
+    presentations:
+      - Fever, chills, flank pain (CVA tenderness)
+      - Nausea, vomiting, malaise
+      - Dysuria, frequency, urgency (cystitis symptoms may be present)
+      - Positive CVA tenderness (punch percussion over kidneys)
+      - Urinalysis: Pyuria, WBC casts, bacteriuria, +/- hematuria
+      - Urine culture: >100,000 CFU/mL (typically E. coli 80%)
+    clinical_pearls:
+      - "Uncomplicated: Outpatient PO fluoroquinolone or ceftriaxone x 1, then PO"
+      - "Complicated: Admission for IV antibiotics (obstruction, pregnancy, immunocompromised)"
+      - "WBC casts are pathognomonic for pyelonephritis"
+      - "Imaging not needed for uncomplicated; CT if severe, no improvement in 48-72hr"
+      - "Sepsis can develop quickly - low threshold for admission"
+    management:
+      - "Outpatient: Ciprofloxacin 500mg PO BID x 7d or levofloxacin 750mg daily x 5d"
+      - "Alternative: Ceftriaxone 1g IV/IM x 1, then cefpodoxime or ciprofloxacin PO"
+      - "Inpatient: Ceftriaxone 1-2g IV daily or fluoroquinolone IV"
+      - "If gram-positive cocci: Ampicillin + gentamicin (enterococcus)"
+      - "If severe/septic: Piperacillin-tazobactam or carbapenem"
+    tests:
+      - Urinalysis (pyuria, WBC casts, bacteriuria)
+      - Urine culture (before antibiotics)
+      - Blood cultures if admitted or severe
+      - CT abdomen/pelvis if complicated or no improvement (rule out abscess, obstruction)
+    referrals:
+      - Admission if: Sepsis, pregnancy, obstruction, immunocompromised, unable to tolerate PO
+      - Urology if obstruction or recurrent infections
+    sensitivity: 0.90
+    specificity: 0.85
+    icd10:
+      - N10       # Acute pyelonephritis
+      - N12       # Tubulo-interstitial nephritis, not specified as acute or chronic
+    snomed:
+      - "36689008"  # Acute pyelonephritis
+
+  - id: ID-CELLULITIS
+    label: Cellulitis
+    presentations:
+      - Erythema, warmth, swelling, tenderness (localized skin infection)
+      - Poorly demarcated borders (vs erysipelas: well-demarcated, raised)
+      - Fever, chills if systemic
+      - Lymphangitis (red streaks), lymphadenopathy
+      - Most common organisms: Strep pyogenes, Staph aureus
+      - Risk factors: Break in skin, lymphedema, venous insufficiency, obesity, diabetes
+    clinical_pearls:
+      - "Purulent cellulitis (abscess/drainage): Think MRSA, needs incision and drainage"
+      - "Non-purulent cellulitis: Beta-hemolytic strep most likely, use beta-lactam"
+      - "Mark borders with pen to track progression"
+      - "Elevation + NSAIDs help in addition to antibiotics"
+      - "Recurrent cellulitis: Consider prophylaxis (penicillin VK 250-500mg daily)"
+    management:
+      - "Non-purulent: Cephalexin 500mg PO QID x 5-7d or dicloxacillin 500mg PO QID"
+      - "MRSA risk (purulent, recent MRSA): TMP-SMX DS 1-2 tabs BID or doxycycline 100mg BID"
+      - "Severe/systemic: Admit for IV antibiotics (cefazolin or vancomycin if MRSA)"
+      - "If abscess: Incision and drainage REQUIRED"
+      - "Elevation of affected limb, NSAIDs for pain/inflammation"
+    tests:
+      - Clinical diagnosis (no tests needed for uncomplicated)
+      - Blood cultures if systemic symptoms
+      - Wound culture if drainage/abscess
+      - Consider ultrasound if abscess suspected
+    referrals:
+      - Admission if: Systemic toxicity, failed outpatient therapy, immunocompromised
+      - Surgery if necrotizing fasciitis suspected
+    sensitivity: 0.80
+    specificity: 0.75
+    icd10:
+      - L03.90   # Cellulitis, unspecified
+      - L03.115  # Cellulitis of right lower limb
+    snomed:
+      - "128045006"  # Cellulitis
+
+  - id: ID-NECROTIZING-FASCIITIS
+    label: Necrotizing Fasciitis
+    presentations:
+      - Severe pain out of proportion to exam findings (early)
+      - Rapidly progressive erythema, swelling, induration
+      - Bullae, skin necrosis, crepitus (subcutaneous gas)
+      - Systemic toxicity: Fever, hypotension, tachycardia, altered mental status
+      - "Hard board-like" feel to subcutaneous tissue
+      - LRINEC score >6 suggests necrotizing infection (but don't delay surgery)
+    clinical_pearls:
+      - "SURGICAL EMERGENCY - mortality 25-35% even with treatment"
+      - "Early surgical debridement is life-saving (within 6 hours)"
+      - "Don't wait for imaging - high suspicion = OR"
+      - "Type I: Polymicrobial (diabetes, post-op); Type II: Group A Strep (healthy, young)"
+      - "Pain out of proportion + rapid progression = necrotizing fasciitis until proven otherwise"
+    management:
+      - "EMERGENT surgical consultation and debridement (ASAP)"
+      - "Broad-spectrum IV antibiotics: Vancomycin + piperacillin-tazobactam + clindamycin"
+      - "Clindamycin 900mg IV q8h (inhibits toxin production)"
+      - "IV fluids, vasopressors if shock"
+      - "ICU admission, serial debridements often required"
+    tests:
+      - Clinical diagnosis - don't delay surgery for imaging
+      - LRINEC score: CRP, WBC, Hgb, Na, Cr, glucose (>6 suggests necrotizing)
+      - CT/MRI may show gas in tissue, fascial thickening (but don't delay surgery)
+      - Blood cultures, wound cultures
+    referrals:
+      - EMERGENT surgery consultation
+      - ICU admission
+      - Infectious disease consult
+    sensitivity: 0.75
+    specificity: 0.85
+    icd10:
+      - M72.6    # Necrotizing fasciitis
+    snomed:
+      - "419402002"  # Necrotizing fasciitis
+
+  - id: ID-INFECTIVE-ENDOCARDITIS
+    label: Infective Endocarditis
+    presentations:
+      - Fever (most common, 85%), new heart murmur (regurgitant)
+      - Signs of septic emboli: Osler nodes (painful finger/toe nodules), Janeway lesions (palms/soles)
+      - Roth spots (retinal hemorrhages), splinter hemorrhages (under nails)
+      - Heart failure (valve destruction), stroke (septic emboli)
+      - Modified Duke criteria for diagnosis (clinical + echo + blood cultures)
+      - Risk factors: Prosthetic valve, IV drug use, structural heart disease
+    clinical_pearls:
+      - "3 sets of blood cultures from different sites before antibiotics"
+      - "IVDU: Think tricuspid valve endocarditis (Staph aureus)"
+      - "Dental procedures: Viridans strep; IVDU: Staph aureus; Healthcare: Enterococcus"
+      - "Empiric: Vancomycin + ceftriaxone (native valve) or + gentamicin (prosthetic)"
+      - "Surgery for: Severe heart failure, abscess, large vegetation (>10mm), persistent bacteremia"
+    management:
+      - "Blood cultures x3 before antibiotics"
+      - "Empiric: Vancomycin 15-20mg/kg q12h + ceftriaxone 2g IV q24h"
+      - "If prosthetic valve: Add gentamicin 1mg/kg q8h"
+      - "Tailor to organism: S. aureus, Streptococcus, Enterococcus (consult ID)"
+      - "Duration: 4-6 weeks IV antibiotics, surgery if indicated"
+    tests:
+      - Blood cultures x3 (from different sites, before antibiotics)
+      - Echocardiogram: TTE first, TEE if high suspicion and TTE negative
+      - CBC, ESR/CRP, basic metabolic panel
+      - ECG (conduction abnormalities suggest abscess)
+    referrals:
+      - Infectious disease consult (all cases)
+      - Cardiology consult
+      - Cardiac surgery if heart failure, abscess, large vegetation, persistent bacteremia
+    sensitivity: 0.80
+    specificity: 0.90
+    icd10:
+      - I33.0    # Acute and subacute infective endocarditis
+    snomed:
+      - "56819008"  # Infective endocarditis
+
+  - id: ID-TUBERCULOSIS-PULMONARY
+    label: Pulmonary Tuberculosis (TB)
+    presentations:
+      - Chronic cough (>3 weeks), hemoptysis
+      - Fever, night sweats, weight loss ("B symptoms")
+      - Chest X-ray: Upper lobe cavitary lesions, infiltrates, hilar lymphadenopathy
+      - AFB smear and culture from sputum
+      - TST or IGRA positive (but can be negative in active TB)
+      - Risk factors: HIV, homelessness, incarceration, immigration from endemic areas
+    clinical_pearls:
+      - "Suspect TB: Chronic cough + fever + night sweats + weight loss + upper lobe cavities"
+      - "Airborne precautions (negative pressure room)"
+      - "RIPE therapy x 6 months: Rifampin, Isoniazid, Pyrazinamide, Ethambutol"
+      - "Directly observed therapy (DOT) improves adherence and prevents resistance"
+      - "Report to public health department (notifiable disease)"
+    management:
+      - "RIPE therapy: Rifampin 600mg, Isoniazid 300mg, Pyrazinamide 1500mg, Ethambutol 1200mg daily"
+      - "Intensive phase: All 4 drugs x 2 months"
+      - "Continuation phase: Rifampin + Isoniazid x 4 months (total 6 months)"
+      - "Add pyridoxine (vitamin B6) 25-50mg daily to prevent isoniazid neuropathy"
+      - "Monitor liver function tests (hepatotoxicity risk)"
+    tests:
+      - Sputum AFB smear and culture x3 (morning specimens)
+      - Chest X-ray (PA and lateral)
+      - TST or IGRA (QuantiFERON)
+      - HIV test (high co-infection rate)
+      - Baseline liver function tests, CBC, creatinine
+    referrals:
+      - Infectious disease or TB clinic (directly observed therapy)
+      - Public health notification (mandatory reporting)
+      - HIV clinic if co-infected
+    sensitivity: 0.75
+    specificity: 0.90
+    icd10:
+      - A15.0    # Tuberculosis of lung
+    snomed:
+      - "154283005"  # Pulmonary tuberculosis

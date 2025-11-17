@@ -341,3 +341,553 @@ rules:
       - I44.2    # Atrioventricular block, complete
     snomed:
       - "233916004"  # Atrioventricular block
+
+  - id: CARD-ACUTE-HEART-FAILURE
+    label: Acute Heart Failure / Decompensated Heart Failure
+    presentations:
+      - Dyspnea at rest or with minimal exertion (most common)
+      - Orthopnea (dyspnea when lying flat), PND (paroxysmal nocturnal dyspnea)
+      - Bilateral lower extremity edema, weight gain (>2-3 lbs in days)
+      - Rales/crackles on lung auscultation, elevated JVP
+      - S3 gallop (ventricular gallop, indicates volume overload)
+      - Chest X-ray: Pulmonary edema, pleural effusions, cardiomegaly
+      - BNP >400 or NT-proBNP >900 pg/mL supports diagnosis
+      - Triggers: medication non-adherence, dietary indiscretion, infection, ischemia, arrhythmia
+    clinical_pearls:
+      - "BNP <100 makes HF unlikely (high negative predictive value)"
+      - "Loop diuretics (IV furosemide 40-80mg) for acute volume overload"
+      - "BiPAP reduces intubation rates in acute pulmonary edema"
+      - "Distinguish HFrEF (EF <40%) from HFpEF (EF ≥50%) - treatment differs"
+      - "Watch for cardiorenal syndrome: Diuresis improves lungs, worsens kidneys"
+    management:
+      - "IV loop diuretics: Furosemide 40-80mg IV (double home dose if on oral)"
+      - "Oxygen or BiPAP if hypoxic or respiratory distress"
+      - "Nitroglycerin if BP adequate (SBP >90-100) for afterload reduction"
+      - "Daily weights, strict I/Os, Na/fluid restriction (≤2L/day, <2g Na/day)"
+      - "Treat underlying cause: Control AFib, treat ischemia, antibiotics for infection"
+    tests:
+      - BNP or NT-proBNP
+      - Chest X-ray (2-view)
+      - ECG (look for ischemia, arrhythmia)
+      - Echocardiogram (assess EF, valves, wall motion)
+      - Basic metabolic panel (renal function, electrolytes)
+      - Troponin (rule out ACS as trigger)
+    referrals:
+      - Cardiology for new-onset HF or refractory symptoms
+      - Heart failure clinic for chronic management
+      - Consider advanced HF team if refractory (VAD, transplant evaluation)
+    sensitivity: 0.88
+    specificity: 0.82
+    icd10:
+      - I50.9    # Heart failure, unspecified
+      - I50.21   # Acute systolic heart failure
+      - I50.31   # Acute diastolic heart failure
+      - I50.41   # Acute combined systolic and diastolic heart failure
+    snomed:
+      - "84114007"  # Heart failure
+
+  - id: CARD-CARDIOGENIC-SHOCK
+    label: Cardiogenic Shock
+    presentations:
+      - Hypotension (SBP <90 mmHg for >30 min) despite adequate filling
+      - Signs of tissue hypoperfusion: altered mental status, cool/clammy skin, oliguria
+      - Pulmonary edema: Dyspnea, rales, hypoxia
+      - Tachycardia (compensatory), narrow pulse pressure
+      - Most commonly due to acute MI (80% of cases)
+      - Other causes: decompensated HF, myocarditis, valvular rupture, arrhythmia
+      - SCAI shock stages: A (at risk) through E (extremis)
+    clinical_pearls:
+      - "Mortality 40-50% even with optimal treatment"
+      - "Key diagnostic: Hypotension + pulmonary edema (wet and cold)"
+      - "Don't give fluids - worsens pulmonary edema (cardiogenic, not hypovolemic)"
+      - "Early invasive management improves outcomes in shock due to MI"
+      - "Impella, IABP, or ECMO for refractory shock"
+    management:
+      - "Inotropes: Dobutamine 2-20 mcg/kg/min (first-line for cardiogenic shock)"
+      - "Vasopressors if needed: Norepinephrine for severe hypotension"
+      - "Diuretics: Small doses for pulmonary edema if BP tolerates"
+      - "Emergent revascularization if ACS (PCI or CABG)"
+      - "Mechanical circulatory support: IABP, Impella, VA-ECMO"
+    tests:
+      - Echocardiogram STAT (assess function, valves, tamponade)
+      - ECG and troponin (rule out MI)
+      - Chest X-ray (pulmonary edema)
+      - Arterial blood gas (assess oxygenation, lactate)
+      - Pulmonary artery catheter (confirm diagnosis: CI <2.2, PCWP >15)
+    referrals:
+      - Cardiology consult STAT
+      - CCU/ICU admission
+      - Cardiac surgery if mechanical complication (VSD, papillary rupture)
+      - Advanced HF/transplant team if refractory
+    sensitivity: 0.85
+    specificity: 0.90
+    icd10:
+      - R57.0    # Cardiogenic shock
+    snomed:
+      - "89323001"  # Cardiogenic shock
+
+  - id: CARD-HYPERTENSIVE-EMERGENCY
+    label: Hypertensive Emergency
+    presentations:
+      - Severely elevated BP: SBP >180 or DBP >120 mmHg
+      - WITH acute end-organ damage (distinguishes from urgency)
+      - Hypertensive encephalopathy: Headache, confusion, seizures, vision changes
+      - Acute pulmonary edema, flash pulmonary edema
+      - Acute coronary syndrome, acute aortic dissection
+      - Acute renal failure, microangiopathic hemolytic anemia
+      - Retinal hemorrhages, papilledema on fundoscopy
+    clinical_pearls:
+      - "Emergency = end-organ damage (needs IV meds, ICU)"
+      - "Urgency = high BP alone (oral meds, outpatient follow-up)"
+      - "Reduce BP 10-20% in first hour, then 25% over 24 hours (don't drop too fast!)"
+      - "Too-rapid BP reduction can cause stroke, blindness, renal failure"
+      - "Nicardipine or labetalol drips most common first-line agents"
+    management:
+      - "IV antihypertensives: Nicardipine drip 5-15 mg/hr (preferred), or Labetalol 20mg IV bolus"
+      - "Goal: Reduce MAP by 10-20% in first hour, max 25% in 24 hours"
+      - "Treat underlying emergency: Nitroprusside for dissection, diuretics for pulmonary edema"
+      - "Avoid: Oral/sublingual nifedipine (unpredictable drops)"
+      - "ICU admission for continuous BP monitoring"
+    tests:
+      - ECG (ischemia)
+      - Chest X-ray (pulmonary edema, widened mediastinum)
+      - Basic metabolic panel (renal function)
+      - Urinalysis (proteinuria, RBC casts)
+      - Troponin (ACS)
+      - CT head if neuro symptoms (stroke vs encephalopathy)
+      - Consider: Echocardiogram, CTA chest (dissection)
+    referrals:
+      - ICU admission for IV drip and monitoring
+      - Cardiology consult
+      - Nephrology if acute renal failure
+    sensitivity: 0.92
+    specificity: 0.88
+    icd10:
+      - I16.9    # Hypertensive crisis, unspecified
+      - I16.1    # Hypertensive emergency
+    snomed:
+      - "38341003"  # Hypertensive disorder
+
+  - id: CARD-PERICARDITIS
+    label: Acute Pericarditis
+    presentations:
+      - Sharp, pleuritic chest pain (90%), worse with lying flat, better leaning forward
+      - Pain may radiate to trapezius ridge (pathognomonic)
+      - Pericardial friction rub on auscultation (30%, best heard at left sternal border)
+      - ECG: Diffuse ST elevation (in multiple leads), PR depression
+      - Fever, malaise common if infectious etiology
+      - Most common causes: Viral (coxsackie, echovirus), post-MI (Dressler syndrome), uremia, autoimmune
+      - Pericardial effusion may be present (seen on echo)
+    clinical_pearls:
+      - "ECG: Diffuse ST elevation + PR depression (unlike MI: regional ST elevation)"
+      - "Troponin may be mildly elevated (myopericarditis) - doesn't mean ACS"
+      - "NSAIDs + colchicine reduce recurrence by 50%"
+      - "Avoid steroids initially (increase recurrence risk)"
+      - "Red flags for tamponade: Hypotension, JVD, muffled heart sounds (Beck triad)"
+    management:
+      - "NSAIDs: Ibuprofen 600-800mg TID or aspirin 750-1000mg TID for 1-2 weeks"
+      - "Colchicine 0.6mg BID (or daily if <70kg) for 3 months (reduces recurrence)"
+      - "Avoid strenuous activity until symptoms resolve and CRP normalizes"
+      - "If refractory: Low-dose prednisone taper (but increases recurrence)"
+      - "Watch for tamponade: Daily clinical assessment first week"
+    tests:
+      - ECG (diffuse ST elevation, PR depression)
+      - Echocardiogram (assess for effusion, tamponade)
+      - Chest X-ray (cardiomegaly if large effusion)
+      - CRP/ESR (elevated, track resolution)
+      - Troponin (may be elevated in myopericarditis)
+      - Consider: Viral serologies, ANA, RF if suspect autoimmune
+    referrals:
+      - Cardiology for recurrent pericarditis or large effusion
+      - Rheumatology if autoimmune etiology suspected
+    sensitivity: 0.85
+    specificity: 0.80
+    icd10:
+      - I30.9    # Acute pericarditis, unspecified
+      - I30.0    # Acute nonspecific idiopathic pericarditis
+    snomed:
+      - "3238004"  # Pericarditis
+
+  - id: CARD-CARDIAC-TAMPONADE
+    label: Cardiac Tamponade
+    presentations:
+      - Beck's triad: Hypotension, elevated JVP (distended neck veins), muffled heart sounds
+      - Pulsus paradoxus: SBP drops >10 mmHg with inspiration
+      - Tachycardia (compensatory), dyspnea, chest discomfort
+      - Signs of shock: Cool extremities, altered mental status
+      - Electrical alternans on ECG (alternating QRS amplitude)
+      - Echocardiogram: Pericardial effusion with RA/RV collapse in diastole
+      - Causes: Pericarditis, trauma, aortic dissection, malignancy, post-cardiac surgery, uremia
+    clinical_pearls:
+      - "Medical emergency requiring immediate pericardiocentesis"
+      - "Don't wait for full Beck's triad - high suspicion with 2/3 findings + echo"
+      - "Fluids temporize but definitive treatment is drainage"
+      - "Echo shows RA collapse (early), then RV collapse (more specific)"
+      - "Post-drainage: Monitor for recurrence (malignant effusions)"
+    management:
+      - "Emergent pericardiocentesis: Needle aspiration via subxiphoid approach"
+      - "IV fluids: Aggressive resuscitation while preparing for drainage"
+      - "Avoid positive pressure ventilation (decreases venous return)"
+      - "Drain 50-100mL often dramatic improvement"
+      - "Send fluid: Cell count, culture, cytology"
+    tests:
+      - Echocardiogram STAT (diagnostic)
+      - ECG (electrical alternans, low voltage)
+      - Chest X-ray (enlarged cardiac silhouette)
+      - Pericardial fluid analysis (cell count, culture, cytology)
+    referrals:
+      - Cardiology/interventional for pericardiocentesis STAT
+      - Cardiac surgery if traumatic or post-operative
+      - ICU admission
+    sensitivity: 0.90
+    specificity: 0.95
+    icd10:
+      - I31.4    # Cardiac tamponade
+    snomed:
+      - "35304003"  # Cardiac tamponade
+
+  - id: CARD-STABLE-ANGINA
+    label: Stable Angina Pectoris
+    presentations:
+      - Predictable chest discomfort with exertion, relieved by rest (5-10 minutes)
+      - Substernal pressure, tightness, or heaviness (not sharp)
+      - May radiate to left arm, jaw, neck, or epigastrium
+      - Associated symptoms: Dyspnea, diaphoresis, nausea (less common than ACS)
+      - Reproducible pattern: Same level of exertion triggers symptoms
+      - Relieved by nitroglycerin within 5 minutes
+      - No symptoms at rest (distinguishes from unstable angina)
+    clinical_pearls:
+      - "Typical angina: Substernal, exertional, relieved by rest or NTG"
+      - "Atypical angina: 2 of 3 features (more common in women, diabetics)"
+      - "Stable = predictable pattern, no crescendo, no rest symptoms"
+      - "Stress test if new diagnosis (exercise ECG, nuclear, echo stress)"
+      - "Optimal medical therapy: Aspirin, statin, BB or CCB, nitrates PRN"
+    management:
+      - "Antiplatelet: Aspirin 81mg daily"
+      - "Beta-blocker: Metoprolol 25-100mg BID (first-line for rate control)"
+      - "Nitrates: Sublingual NTG 0.4mg PRN for angina (take up to 3 doses 5 min apart)"
+      - "Statin: High-intensity (atorvastatin 40-80mg) regardless of LDL"
+      - "Risk factor modification: Smoking cessation, BP control, diabetes management"
+    tests:
+      - Stress test (exercise ECG, nuclear perfusion, or stress echo)
+      - Coronary CT angiography (if low-intermediate risk)
+      - Coronary angiography if high risk or positive stress test
+      - Lipid panel, A1c, ECG
+    referrals:
+      - Cardiology for new diagnosis or refractory symptoms
+      - Consider revascularization (PCI or CABG) if severe or refractory
+    sensitivity: 0.75
+    specificity: 0.70
+    icd10:
+      - I20.9    # Angina pectoris, unspecified
+      - I20.8    # Other forms of angina pectoris
+    snomed:
+      - "194828000"  # Angina pectoris
+
+  - id: CARD-VENTRICULAR-TACHYCARDIA
+    label: Ventricular Tachycardia (VT)
+    presentations:
+      - Wide-complex tachycardia (QRS >120ms) at rate >100 bpm, usually 150-250
+      - Pulseless VT: No pulse, cardiac arrest (needs immediate defibrillation)
+      - Stable VT: Pulse present, may have symptoms (dizziness, dyspnea, chest pain)
+      - AV dissociation, fusion beats, capture beats on ECG (specific for VT)
+      - Common in setting of structural heart disease, prior MI, cardiomyopathy
+      - Can degenerate into ventricular fibrillation (VF) and cardiac arrest
+    clinical_pearls:
+      - "Wide-complex tachycardia = VT until proven otherwise (treat as VT!)"
+      - "Pulseless VT: Immediate defibrillation (same as VF)"
+      - "Stable VT: Amiodarone or cardioversion"
+      - "Brugada criteria help distinguish VT from SVT with aberrancy"
+      - "Post-MI VT (>48hr): High risk for recurrence, needs ICD"
+    management:
+      - "Pulseless VT: Immediate defibrillation 200J biphasic, then CPR"
+      - "Stable VT: Amiodarone 150mg IV over 10min, or synchronized cardioversion"
+      - "Correct electrolytes: Mg, K (hypokalemia/hypomagnesemia lower VT threshold)"
+      - "Beta-blockers for chronic suppression if recurrent"
+      - "ICD placement for sustained VT, especially if EF <35%"
+    tests:
+      - ECG (wide-complex tachycardia, AV dissociation)
+      - Electrolytes (K, Mg, Ca)
+      - Troponin (ischemia as trigger)
+      - Echocardiogram (assess EF, structural disease)
+      - Coronary angiography if suspect ischemic VT
+    referrals:
+      - Cardiology/EP (electrophysiology) consult
+      - Consider ICD placement if sustained VT or cardiac arrest survivor
+      - EP study and ablation for recurrent VT
+    sensitivity: 0.92
+    specificity: 0.88
+    icd10:
+      - I47.2    # Ventricular tachycardia
+    snomed:
+      - "25569003"  # Ventricular tachycardia
+
+  - id: CARD-SUPRAVENTRICULAR-TACHYCARDIA
+    label: Supraventricular Tachycardia (SVT)
+    presentations:
+      - Sudden onset palpitations (abrupt start and stop)
+      - Regular narrow-complex tachycardia, rate 150-250 bpm
+      - Dizziness, lightheadedness, dyspnea, chest discomfort
+      - Polyuria common after episode (atrial stretch → ANP release)
+      - Most common type: AVNRT (AV nodal reentrant tachycardia) 60%
+      - Other types: AVRT (accessory pathway), atrial tachycardia
+      - Usually young patients without structural heart disease
+    clinical_pearls:
+      - "Vagal maneuvers: Valsalva, carotid massage, ice water immersion"
+      - "Adenosine 6mg rapid IV push (then 12mg if no response) - diagnostic and therapeutic"
+      - "Warning before adenosine: 'You'll feel like you're dying for 10 seconds'"
+      - "Adenosine causes transient asystole (have defibrillator ready)"
+      - "If recurrent: Refer to EP for ablation (>95% cure rate)"
+    management:
+      - "Vagal maneuvers first: Valsalva (bear down), carotid massage"
+      - "Adenosine 6mg rapid IV push, flush immediately (half-life 10 seconds)"
+      - "If no response: Adenosine 12mg, then 12mg again"
+      - "Alternatives: Diltiazem 0.25mg/kg IV or metoprolol 5mg IV"
+      - "Synchronized cardioversion if unstable or refractory"
+    tests:
+      - ECG during episode (narrow-complex tachycardia, no P waves or buried P waves)
+      - Echocardiogram if recurrent (rule out structural disease)
+      - Consider EP study if recurrent or poorly tolerated
+    referrals:
+      - Cardiology/EP for recurrent SVT
+      - Catheter ablation for definitive cure (consider after 2+ episodes)
+    sensitivity: 0.95
+    specificity: 0.90
+    icd10:
+      - I47.1    # Supraventricular tachycardia
+      - I47.19   # Other supraventricular tachycardia
+    snomed:
+      - "6456007"  # Supraventricular tachycardia
+
+  - id: CARD-ATRIAL-FIBRILLATION-RVR
+    label: Atrial Fibrillation with Rapid Ventricular Response (AFib RVR)
+    presentations:
+      - Irregularly irregular rhythm on ECG, no P waves, rate >100 bpm
+      - Palpitations, dyspnea, chest discomfort, dizziness
+      - May be asymptomatic in chronic AFib
+      - Heart rate typically 110-180 bpm (uncontrolled)
+      - Risk factors: HTN, CAD, valvular disease, thyroid disease, ETOH, advanced age
+      - Complications: Stroke risk (CHA2DS2-VASc score), heart failure, cardiomyopathy
+    clinical_pearls:
+      - "Goals: Rate control (<110 bpm at rest) and anticoagulation"
+      - "Rate vs rhythm control: Rate control non-inferior for most patients"
+      - "CHA2DS2-VASc ≥2 men, ≥3 women: Start anticoagulation (apixaban, rivaroxaban)"
+      - "Cardioversion if <48hr onset, or after 3 weeks anticoagulation + TEE"
+      - "IV metoprolol or diltiazem for acute rate control"
+    management:
+      - "Rate control: Metoprolol 5mg IV q5min up to 15mg, or diltiazem 0.25mg/kg IV"
+      - "Oral: Metoprolol 25-100mg BID or diltiazem 180-360mg daily (extended-release)"
+      - "Anticoagulation: Apixaban 5mg BID or rivaroxaban 20mg daily if CHA2DS2-VASc ≥2"
+      - "Cardioversion: If unstable or <48hr onset (consider after TEE if uncertain duration)"
+      - "Treat triggers: Hyperthyroidism, infection, ETOH"
+    tests:
+      - ECG (irregularly irregular, no P waves, variable R-R intervals)
+      - TSH (hyperthyroidism common trigger)
+      - Echocardiogram (assess LV function, valves, LA size)
+      - CHA2DS2-VASc score (stroke risk)
+      - Consider: TEE before cardioversion if >48hr or unknown duration
+    referrals:
+      - Cardiology for new-onset AFib or rhythm control
+      - EP for catheter ablation if symptomatic despite meds
+    sensitivity: 0.98
+    specificity: 0.95
+    icd10:
+      - I48.91   # Unspecified atrial fibrillation
+      - I48.0    # Paroxysmal atrial fibrillation
+    snomed:
+      - "49436004"  # Atrial fibrillation
+
+  - id: CARD-HFREF
+    label: Heart Failure with Reduced Ejection Fraction (HFrEF)
+    presentations:
+      - Exertional dyspnea, orthopnea, paroxysmal nocturnal dyspnea
+      - Lower extremity edema, weight gain, fatigue
+      - Exam: Rales, JVD, S3 gallop, displaced PMI
+      - Echocardiogram: LVEF <40%
+      - BNP >400 or NT-proBNP >900 pg/mL
+      - Etiologies: Ischemic (CAD), nonischemic (dilated cardiomyopathy, viral, toxins)
+    clinical_pearls:
+      - "HFrEF (EF <40%) vs HFpEF (EF ≥50%) - treatments differ"
+      - "Quadruple therapy improves survival: ACEi/ARB/ARNI, BB, MRA, SGLT2i"
+      - "Sacubitril-valsartan (Entresto) superior to ACEi for HFrEF"
+      - "Avoid NSAIDs (worsen fluid retention), diltiazem/verapamil (negative inotropes)"
+      - "ICD if EF ≤35% despite optimal medical therapy (primary prevention SCD)"
+    management:
+      - "ACE inhibitor: Lisinopril 2.5-40mg daily, or ARB if ACEi-intolerant"
+      - "Sacubitril-valsartan (Entresto) 24/26mg BID → titrate to 97/103mg BID (if tolerated)"
+      - "Beta-blocker: Carvedilol 3.125mg BID → 25mg BID, or metoprolol succinate"
+      - "Mineralocorticoid antagonist: Spironolactone 12.5-25mg daily (watch K+)"
+      - "SGLT2 inhibitor: Dapagliflozin 10mg daily (even if not diabetic!)"
+      - "Loop diuretic: Furosemide 20-80mg daily PRN for volume overload"
+    tests:
+      - Echocardiogram (assess EF, valves, wall motion)
+      - BNP or NT-proBNP
+      - ECG, chest X-ray
+      - Basic metabolic panel (renal function, K+)
+      - Coronary angiography (assess for ischemic etiology)
+    referrals:
+      - Cardiology for new diagnosis
+      - Heart failure clinic for chronic management
+      - Consider ICD if EF ≤35%, CRT if LBBB and QRS ≥150ms
+    sensitivity: 0.85
+    specificity: 0.80
+    icd10:
+      - I50.22   # Chronic systolic heart failure
+      - I50.23   # Acute on chronic systolic heart failure
+    snomed:
+      - "441530006"  # Chronic systolic heart failure
+
+  - id: CARD-AORTIC-STENOSIS
+    label: Aortic Stenosis (AS)
+    presentations:
+      - Classic triad (late disease): Exertional dyspnea, angina, syncope (SAD mnemonic)
+      - Crescendo-decrescendo systolic murmur, loudest at right upper sternal border
+      - Radiates to carotids, reduced carotid upstroke (pulsus parvus et tardus)
+      - Soft or absent S2 (A2 component), may have S4
+      - Etiology: Calcific (age >70), bicuspid valve (age 40-60), rheumatic
+      - Symptoms indicate severe AS: Mean gradient >40 mmHg, AVA <1.0 cm², Vmax >4 m/s
+    clinical_pearls:
+      - "Severe symptomatic AS: 2-year survival 50% without AVR"
+      - "Once symptomatic, needs valve replacement (TAVR or SAVR)"
+      - "Avoid afterload reducers (ACEi, hydralazine) - can cause hypotension"
+      - "Low-dose diuretics OK for HF symptoms, but preload-dependent"
+      - "Echo every 1-2 years for moderate AS, every 6-12 months for severe asymptomatic"
+    management:
+      - "Symptomatic severe AS: Aortic valve replacement (TAVR vs SAVR)"
+      - "TAVR preferred if age >65, high surgical risk, or comorbidities"
+      - "Medical management: Treat HTN carefully (avoid aggressive afterload reduction)"
+      - "Diuretics for HF symptoms (low dose), beta-blockers for angina (caution)"
+      - "Endocarditis prophylaxis NOT routinely recommended"
+    tests:
+      - Echocardiogram (assess severity: gradient, AVA, Vmax)
+      - ECG (LVH with strain pattern)
+      - Chest X-ray (cardiomegaly, calcified valve)
+      - Cardiac catheterization if echo equivocal or to assess CAD pre-surgery
+      - BNP (prognostic in asymptomatic AS)
+    referrals:
+      - Cardiology for all symptomatic AS
+      - Cardiac surgery/structural heart team for AVR evaluation
+    sensitivity: 0.88
+    specificity: 0.85
+    icd10:
+      - I35.0    # Nonrheumatic aortic (valve) stenosis
+      - I06.0    # Rheumatic aortic stenosis
+    snomed:
+      - "60573004"  # Aortic valve stenosis
+
+  - id: CARD-MITRAL-REGURGITATION
+    label: Mitral Regurgitation (MR)
+    presentations:
+      - Holosystolic murmur at apex, radiates to axilla
+      - Dyspnea, orthopnea, fatigue (symptoms of pulmonary congestion)
+      - May have laterally displaced, hyperdynamic PMI (chronic MR with LV dilation)
+      - Acute MR: Sudden onset dyspnea, pulmonary edema, cardiogenic shock
+      - Chronic MR: Gradual onset, may be asymptomatic for years
+      - Etiologies: Primary (valve disease: MVP, rheumatic), secondary (LV dilation, ischemic)
+    clinical_pearls:
+      - "Acute severe MR: Medical emergency (papillary muscle rupture post-MI, endocarditis)"
+      - "Chronic primary MR: Surgery if symptomatic or LVEF <60% or LVESD >40mm"
+      - "Secondary (functional) MR: Optimize HF meds, consider MitraClip"
+      - "MVP with severe MR: Repair preferred over replacement (better outcomes)"
+      - "Afterload reduction (ACEi) helps in chronic MR"
+    management:
+      - "Acute severe MR: ICU, inotropes, IABP, emergent surgery"
+      - "Chronic primary MR: Surgery if symptomatic, EF <60%, or progressive LV dilation"
+      - "Secondary MR: Optimize HF therapy (ACEi, BB, diuretics, SGLT2i)"
+      - "Afterload reduction: ACEi or hydralazine/nitrates"
+      - "Consider: MitraClip for high surgical risk or secondary MR"
+    tests:
+      - Echocardiogram (assess severity, LV size/function, mechanism)
+      - Chest X-ray (cardiomegaly, pulmonary edema)
+      - ECG (LVH, LA enlargement)
+      - TEE for surgical planning
+      - Cardiac catheterization if CAD evaluation needed
+    referrals:
+      - Cardiology for moderate-severe MR
+      - Cardiac surgery for severe symptomatic MR or LV dysfunction
+    sensitivity: 0.85
+    specificity: 0.82
+    icd10:
+      - I34.0    # Nonrheumatic mitral (valve) insufficiency
+      - I05.1    # Rheumatic mitral insufficiency
+    snomed:
+      - "48724000"  # Mitral valve regurgitation
+
+  - id: CARD-DILATED-CARDIOMYOPATHY
+    label: Dilated Cardiomyopathy (DCM)
+    presentations:
+      - Progressive dyspnea, orthopnea, lower extremity edema (heart failure symptoms)
+      - Fatigue, reduced exercise tolerance
+      - May present with arrhythmias (AFib, VT) or thromboembolic events
+      - Echocardiogram: LV dilation, reduced EF (<40%), global hypokinesis
+      - Etiologies: Idiopathic (most common), ischemic, alcohol, viral (coxsackie, parvovirus), peripartum, genetic
+    clinical_pearls:
+      - "Ischemic vs nonischemic: Coronary angiography to differentiate"
+      - "Alcohol-induced DCM: Complete abstinence may reverse in 50%"
+      - "Peripartum cardiomyopathy: Last month pregnancy to 5 months postpartum"
+      - "Consider genetic testing if family history or age <50"
+      - "High risk for sudden cardiac death: ICD if EF ≤35%"
+    management:
+      - "Guideline-directed medical therapy (GDMT) for HFrEF:"
+      - "Sacubitril-valsartan 24/26mg BID → 97/103mg BID"
+      - "Beta-blocker: Carvedilol 3.125mg BID → 25mg BID"
+      - "Spironolactone 12.5-25mg daily (MRA)"
+      - "SGLT2 inhibitor: Dapagliflozin 10mg daily"
+      - "Diuretics for volume management, avoid alcohol, sodium restriction"
+    tests:
+      - Echocardiogram (LV size, EF, wall motion)
+      - Coronary angiography (rule out ischemic etiology)
+      - ECG (nonspecific ST-T changes, LBBB)
+      - BNP, troponin
+      - Consider: Cardiac MRI (fibrosis assessment), genetic testing, viral serologies
+    referrals:
+      - Cardiology for all new diagnoses
+      - Heart failure clinic
+      - Consider genetic counseling if familial
+      - Advanced HF team if refractory (LVAD, transplant)
+    sensitivity: 0.82
+    specificity: 0.78
+    icd10:
+      - I42.0    # Dilated cardiomyopathy
+    snomed:
+      - "195021003"  # Dilated cardiomyopathy
+
+  - id: CARD-HYPERTROPHIC-CARDIOMYOPATHY
+    label: Hypertrophic Cardiomyopathy (HCM)
+    presentations:
+      - Dyspnea on exertion (most common), chest pain, palpitations
+      - Syncope or presyncope with exertion (ominous - high SCD risk)
+      - Systolic murmur: Increases with Valsalva, decreases with squatting
+      - May be asymptomatic (found on screening or echo for other reason)
+      - Echocardiogram: LVH (septal wall ≥15mm), often asymmetric septal hypertrophy
+      - Genetic: Autosomal dominant, sarcomere protein mutations
+    clinical_pearls:
+      - "AVOID: Dehydration, vigorous exercise, afterload reducers (ACEi, nitrates)"
+      - "Valsalva/standing increases murmur (less preload = more LVOT obstruction)"
+      - "SCD risk: Family history SCD, unexplained syncope, massive LVH (≥30mm), NSVT"
+      - "ICD for secondary prevention (cardiac arrest survivor) or high-risk primary prevention"
+      - "Septal reduction therapy if severe symptoms: Myectomy or alcohol septal ablation"
+    management:
+      - "Beta-blockers: Metoprolol 50-200mg daily (first-line for symptoms)"
+      - "Verapamil alternative if BB intolerant: 120-480mg daily"
+      - "Avoid: ACEi, ARBs, digoxin, nitrates (reduce afterload → worsen obstruction)"
+      - "Disopyramide for refractory symptoms (negative inotrope)"
+      - "ICD if high SCD risk, septal myectomy if severe obstruction + symptoms"
+    tests:
+      - Echocardiogram (LV wall thickness, LVOT gradient)
+      - ECG (LVH with strain, deep Q waves)
+      - 24-hour Holter monitor (detect NSVT)
+      - Cardiac MRI (assess fibrosis, apical HCM)
+      - Genetic testing (family screening)
+    referrals:
+      - Cardiology for all new diagnoses
+      - Genetic counseling, family screening
+      - Cardiac surgery if septal myectomy indicated
+      - EP for ICD placement if high risk
+    sensitivity: 0.90
+    specificity: 0.88
+    icd10:
+      - I42.1    # Obstructive hypertrophic cardiomyopathy
+      - I42.2    # Other hypertrophic cardiomyopathy
+    snomed:
+      - "233873004"  # Hypertrophic cardiomyopathy
