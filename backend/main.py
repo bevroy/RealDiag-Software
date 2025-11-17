@@ -12,9 +12,10 @@ from backend.services.diagnostic_router import router as diagnostic_router
 from backend.services.rules_router import router as rules_router
 from backend.services.reference_router import router as reference_router
 from backend.services.symptom_search import router as symptom_search_router
+from backend.services.integration_router import router as integration_router
 from config import Config
 
-app = FastAPI(title="RealDiag API")
+app = FastAPI(title="RealDiag API", version="1.1.0", description="Clinical Decision Support System with EHR Integration")
 
 # Basic structured logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
@@ -28,6 +29,7 @@ app.include_router(diagnostic_router)
 app.include_router(rules_router)
 app.include_router(reference_router)
 app.include_router(symptom_search_router)
+app.include_router(integration_router)
 
 
 # Serve static files (assets)
