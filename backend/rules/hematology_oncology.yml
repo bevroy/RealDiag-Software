@@ -11,6 +11,26 @@ rules:
       - Pica (especially ice craving)
       - Koilonychia (spoon nails)
       - Angular cheilitis
+    clinical_pearls:
+      - "Most common cause of anemia worldwide - suspect in women of childbearing age, GI blood loss"
+      - "Microcytic anemia differential: TICS (Thalassemia, Iron deficiency, Chronic disease, Sideroblastic)"
+      - "Ferritin <15 ng/mL diagnostic for iron deficiency. Ferritin 15-30 with inflammation also suggests IDA"
+      - "Must find source of blood loss: GI workup (EGD/colonoscopy) in men and postmenopausal women"
+      - "RDW elevated in iron deficiency (mixed cell sizes) vs normal in thalassemia trait"
+    management:
+      - "Oral iron: Ferrous sulfate 325mg (65mg elemental iron) PO TID on empty stomach (1hr before meals)"
+      - "Take with vitamin C (orange juice) to enhance absorption. Avoid with calcium, tea, coffee"
+      - "Side effects: Nausea, constipation, dark stools - dose can be reduced or take with food if intolerant"
+      - "If oral intolerant or malabsorption: IV iron (iron sucrose 200mg IV or ferric carboxymaltose 750-1000mg IV)"
+      - "Monitor: Reticulocytosis in 7-10 days (response), Hgb increase 1-2 g/dL per month, ferritin after 3 months"
+    tests:
+      - "CBC: Low hemoglobin, low MCV (<80), elevated RDW"
+      - "Iron studies: Low ferritin (<15-30), low serum iron, elevated TIBC (>450), low transferrin saturation (<20%)"
+      - "If ferritin 30-100 and normal TIBC: Consider inflammatory state masking iron deficiency"
+      - "GI workup: EGD and colonoscopy in men and postmenopausal women (rule out GI malignancy)"
+    referrals:
+      - "Gastroenterology for EGD/colonoscopy to identify source of blood loss"
+      - "Hematology if: Refractory to oral iron, requiring chronic IV iron, or other cytopenias present"
     icd10:
       - D50.9
     snomed:
@@ -25,6 +45,27 @@ rules:
       - Glossitis (smooth, beefy red tongue)
       - Low B12 level
       - Elevated methylmalonic acid and homocysteine
+    clinical_pearls:
+      - "Neurologic damage from B12 deficiency is IRREVERSIBLE if untreated - treat even if anemia not severe"
+      - "Causes: Pernicious anemia (anti-IF antibodies, 60%), malabsorption (post-gastric bypass, Crohn's), strict vegan diet"
+      - "Peripheral neuropathy: Stocking-glove paresthesias. Subacute combined degeneration: Posterior columns + lateral corticospinal tracts"
+      - "B12 level <200 pg/mL = deficient. 200-300 = borderline (check MMA and homocysteine)"
+      - "Folate replacement WITHOUT B12 in combined deficiency can worsen neurologic symptoms"
+    management:
+      - "Parenteral B12 (initial): Cyanocobalamin 1000 mcg IM daily × 1 week, then weekly × 4 weeks, then monthly lifelong"
+      - "Oral B12 (if not pernicious anemia or severe): 1000-2000 mcg PO daily (high dose overcomes malabsorption)"
+      - "Pernicious anemia: Lifelong IM injections (oral insufficient due to lack of intrinsic factor)"
+      - "Monitor: Reticulocytosis in 3-5 days, neurologic symptoms may take 6-12 months to improve"
+      - "Check for potassium drop first week of treatment (hypokalemia from rapid cell production)"
+    tests:
+      - "CBC: Macrocytic anemia (MCV >100), hypersegmented neutrophils (>5 lobes)"
+      - "B12 level: <200 pg/mL diagnostic. If borderline, check methylmalonic acid and homocysteine (both elevated in B12 deficiency)"
+      - "Anti-intrinsic factor antibodies (specific for pernicious anemia, 50% sensitive)"
+      - "Anti-parietal cell antibodies (90% sensitive but less specific for pernicious anemia)"
+    referrals:
+      - "Hematology if: Severe pancytopenia, unclear cause of macrocytosis, or refractory to treatment"
+      - "Neurology if severe neurologic symptoms or subacute combined degeneration"
+      - "Gastroenterology if concern for malabsorption (Crohn's, celiac)"
     icd10:
       - D51.9
     snomed:
@@ -38,6 +79,26 @@ rules:
       - No neurologic symptoms (unlike B12 deficiency)
       - Low folate level
       - Normal methylmalonic acid
+    clinical_pearls:
+      - "NO neurologic symptoms (key difference from B12 deficiency) - folate doesn't affect myelin"
+      - "Causes: Malnutrition (alcoholics, elderly), malabsorption (celiac, Crohn's), medications (methotrexate, phenytoin, TMP-SMX)"
+      - "Pregnancy increases folate requirements 5-10x - neural tube defects if deficient in first trimester"
+      - "Homocysteine elevated in folate deficiency (like B12) but methylmalonic acid is NORMAL (differentiates)"
+      - "Rare in US due to folate fortification of grains since 1998"
+    management:
+      - "Folic acid 1mg PO daily × 1-4 months (until stores repleted)"
+      - "Higher doses (5mg daily) if malabsorption or drug-induced (methotrexate)"
+      - "IMPORTANT: Rule out B12 deficiency first - giving folate alone can worsen B12 neurologic symptoms"
+      - "Pregnancy: 400-800 mcg daily preconception through first trimester (prevents neural tube defects)"
+      - "Alcoholics: Thiamine + folate + multivitamin (often multiple deficiencies)"
+    tests:
+      - "CBC: Macrocytic anemia (MCV >100), hypersegmented neutrophils"
+      - "Serum folate <3 ng/mL (low sensitivity - changes rapidly with diet)"
+      - "RBC folate <150 ng/mL (better reflects body stores)"
+      - "Elevated homocysteine (like B12 deficiency), normal methylmalonic acid (unlike B12 deficiency)"
+    referrals:
+      - "Hematology if unclear cause, refractory to treatment, or other cytopenias"
+      - "Gastroenterology if malabsorption suspected (celiac, Crohn's)"
     icd10:
       - D52.9
     snomed:
@@ -50,6 +111,26 @@ rules:
       - Fatigue, weakness
       - Chronic inflammatory condition (RA, CKD, cancer, infection)
       - Low serum iron, low TIBC, normal or high ferritin
+    clinical_pearls:
+      - "Second most common anemia (after iron deficiency) - due to chronic inflammation"
+      - "Pathophysiology: Hepcidin (from inflammation) blocks iron release from stores, suppresses EPO production"
+      - "Iron studies pattern: Low iron, LOW TIBC (<250), normal/high ferritin (>100) - iron is trapped, not deficient"
+      - "Distinguish from IDA: IDA has low ferritin + high TIBC. ACD has normal/high ferritin + low TIBC"
+      - "Treat underlying disease (RA, CKD, infection, cancer) - treating anemia alone doesn't help"
+    management:
+      - "Treat underlying condition: Anti-inflammatory therapy for RA, treat infection, cancer therapy"
+      - "EPO (erythropoietin) if CKD: Epoetin alfa 50-100 units/kg SQ 3x/week (goal Hgb 10-11 g/dL, not higher)"
+      - "Iron supplementation only if true iron deficiency coexists (ferritin <100 in CKD, <30 in others)"
+      - "Transfusion if symptomatic (angina, dyspnea at rest) and Hgb <7 g/dL"
+      - "Avoid EPO in cancer patients (associated with worse outcomes, tumor progression)"
+    tests:
+      - "CBC: Normocytic (80% of cases) or microcytic anemia, normal RDW"
+      - "Iron studies: Low serum iron, LOW TIBC (<250 mcg/dL), low transferrin saturation (<20%), normal or HIGH ferritin (>100)"
+      - "Elevated inflammatory markers: CRP, ESR"
+      - "Workup for underlying disease: RA (RF, anti-CCP), CKD (creatinine, eGFR), cancer screening"
+    referrals:
+      - "Treat underlying specialty: Rheumatology for RA, nephrology for CKD, oncology for malignancy"
+      - "Hematology if diagnosis unclear or other cytopenias present"
     icd10:
       - D63.8
     snomed:
@@ -64,6 +145,26 @@ rules:
       - Elevated LDH
       - Low haptoglobin
       - Positive direct Coombs test (if autoimmune)
+    clinical_pearls:
+      - "Intravascular hemolysis: In blood vessels (hemoglobinuria, hemoglobinemia). Extravascular: In spleen (jaundice, splenomegaly)"
+      - "Causes: Autoimmune (warm IgG, cold IgM), microangiopathic (TTP, HUS, DIC), G6PD deficiency, hereditary spherocytosis"
+      - "Reticulocytosis (>2% or absolute count >100k) = appropriate bone marrow response to anemia"
+      - "Coombs (DAT) positive: Autoimmune hemolysis (warm vs cold agglutinins). Negative: G6PD, spherocytosis, TTP"
+      - "Schistocytes on smear suggest microangiopathic hemolysis (TTP, HUS, DIC, mechanical heart valve)"
+    management:
+      - "Warm autoimmune hemolytic anemia: Prednisone 1mg/kg/day, taper slowly over 3-6 months"
+      - "If steroid-refractory: Rituximab 375mg/m2 IV weekly × 4 doses OR splenectomy"
+      - "Cold agglutinin disease: Avoid cold exposure, rituximab (steroids less effective)"
+      - "G6PD deficiency: Avoid oxidative triggers (fava beans, sulfa drugs, dapsone, antimalarials), supportive care"
+      - "Transfuse if symptomatic (angina, severe dyspnea) - may worsen hemolysis but needed if life-threatening"
+    tests:
+      - "CBC: Anemia with elevated reticulocyte count (>2%), spherocytes or schistocytes on smear"
+      - "Hemolysis labs: Elevated indirect bilirubin, elevated LDH (often >1000), low/undetectable haptoglobin"
+      - "Direct Coombs test (DAT): Positive in autoimmune hemolysis (IgG = warm, C3 = cold)"
+      - "Peripheral smear: Spherocytes (hereditary spherocytosis, autoimmune), schistocytes (microangiopathic), bite cells (G6PD)"
+    referrals:
+      - "Hematology for all hemolytic anemias - complex workup and management"
+      - "Emergent if: TTP/HUS suspected (plasmapheresis time-sensitive), severe symptomatic anemia"
     icd10:
       - D59.9
     snomed:
@@ -76,6 +177,26 @@ rules:
       - Fatigue, weakness, infections, bleeding
       - Hypocellular bone marrow on biopsy
       - No splenomegaly
+    clinical_pearls:
+      - "Bone marrow failure: Pancytopenia + hypocellular bone marrow (<25% cellularity)"
+      - "Causes: Idiopathic (50%), drugs (chloramphenicol, NSAIDs, carbamazepine), toxins (benzene), viral (hepatitis, EBV, HIV)"
+      - "Severe aplastic anemia: ANC <500, platelets <20k, reticulocytes <1% - life-threatening without treatment"
+      - "No hepatosplenomegaly (helps distinguish from MDS, leukemia which often have organomegaly)"
+      - "Fanconi anemia: Inherited aplastic anemia, congenital anomalies (thumb/radius, short stature), chromosome breakage test"
+    management:
+      - "Supportive: Transfuse PRBCs if symptomatic (Hgb <7), platelets if <10k or bleeding"
+      - "Growth factors: Filgrastim (G-CSF) for severe neutropenia (<500) to reduce infection risk"
+      - "Definitive therapy (age <40, severe): Allogeneic hematopoietic stem cell transplant (HSCT) - curative in 70-90%"
+      - "If HSCT not feasible: Immunosuppressive therapy (IST) with horse ATG + cyclosporine (60-70% response)"
+      - "Eltrombopag (thrombopoietin agonist) added to IST improves response rates"
+    tests:
+      - "CBC with differential: Pancytopenia (low Hgb, WBC, platelets), low reticulocyte count"
+      - "Bone marrow biopsy: Hypocellular marrow (<25% cellularity), no abnormal cells (rules out MDS, leukemia)"
+      - "Severity grading: Severe (ANC <500, platelets <20k, retics <1%), Very severe (ANC <200)"
+      - "Workup for causes: Hepatitis serologies, HIV, Fanconi anemia testing if young, drug/toxin exposure history"
+    referrals:
+      - "Hematology urgently - aplastic anemia requires specialized management"
+      - "Bone marrow transplant center if age <40 and severe disease (HSCT evaluation)"
     icd10:
       - D61.9
     snomed:
@@ -90,6 +211,27 @@ rules:
       - Avascular necrosis of bones
       - Acute chest syndrome
       - Hemoglobin electrophoresis shows HbS
+    clinical_pearls:
+      - "Vaso-occlusive crisis (VOC): Sickled RBCs block microvasculature → ischemic pain (bones, chest, abdomen)"
+      - "Acute chest syndrome: New infiltrate on CXR + chest pain/fever/hypoxia - can be fatal, treat aggressively"
+      - "Functional asplenia by age 5: Increased risk of encapsulated organisms (Strep pneumo, H. flu, N. meningitidis)"
+      - "Triggers for crisis: Dehydration, infection, cold, stress, hypoxia, acidosis"
+      - "Hydroxyurea reduces crisis frequency by 50% - increases fetal hemoglobin (HbF) which doesn't sickle"
+    management:
+      - "Pain crisis: Aggressive hydration (1.5x maintenance), opioids (morphine 0.1mg/kg IV q2-3h or PCA), NSAIDs (ketorolac 15-30mg IV q6h)"
+      - "Incentive spirometry q2h while awake (prevents acute chest syndrome)"
+      - "Acute chest syndrome: Supplemental O2, incentive spirometry, antibiotics (ceftriaxone + azithromycin), exchange transfusion if severe"
+      - "Disease-modifying: Hydroxyurea 15-35mg/kg/day (increases HbF, reduces crises by 50%)"
+      - "Prophylaxis: Penicillin VK 125-250mg BID until age 5 (prevents pneumococcal sepsis), folic acid 1mg daily, vaccinate (pneumococcal, H. flu, meningococcal)"
+    tests:
+      - "Hemoglobin electrophoresis: HbSS (most severe), HbSC (milder), HbS-beta thal"
+      - "CBC: Chronic hemolytic anemia (Hgb 6-9 g/dL baseline), reticulocytosis, target cells on smear"
+      - "During crisis: CBC (watch for aplastic crisis if retic count drops), CXR (acute chest syndrome), cultures if febrile"
+      - "Newborn screening: All states screen at birth for early penicillin prophylaxis"
+    referrals:
+      - "Hematology for all sickle cell patients - chronic disease management"
+      - "Hospital admission if: Acute chest syndrome, severe pain crisis, fever (risk of sepsis), priapism >4hrs"
+      - "Bone marrow transplant evaluation if: Severe disease, recurrent crises, stroke (curative but high-risk)"
     icd10:
       - D57.1
     snomed:
@@ -103,6 +245,25 @@ rules:
       - Mucosal bleeding (epistaxis, gingival bleeding)
       - No splenomegaly
       - Normal or increased megakaryocytes on bone marrow
+    clinical_pearls:
+      - "Diagnosis of exclusion: Isolated thrombocytopenia with no other cytopenias, no splenomegaly, no secondary causes"
+      - "Immune-mediated platelet destruction by anti-platelet antibodies (usually don't test - not sensitive/specific)"
+      - "Acute ITP (children): Self-limited, often post-viral, resolves in weeks to months. Chronic ITP (adults): Requires treatment"
+      - "Bleeding risk correlates with platelet count: <10k (high risk ICH), 10-30k (mucosal bleeding), >30k (low bleeding risk)"
+      - "No bone marrow biopsy needed if: Age <60, typical presentation, isolated thrombocytopenia (BM only if atypical features)"
+    management:
+      - "Platelets >30k and no bleeding: Observation only (most adults don't bleed until <10k)"
+      - "First-line if platelets <30k or bleeding: Prednisone 1mg/kg/day × 2-4 weeks, taper slowly"
+      - "Life-threatening bleeding or pre-procedure: IVIG 1g/kg × 1-2 days (raises platelets in 24-48hrs) + platelet transfusion"
+      - "Second-line (steroid-refractory): Rituximab 375mg/m2 IV weekly × 4 OR thrombopoietin agonists (eltrombopag, romiplostim)"
+      - "Splenectomy: Reserved for refractory cases (60-70% long-term remission but infection risk)"
+    tests:
+      - "CBC with peripheral smear: Isolated thrombocytopenia (<100k), large platelets, no other cytopenias"
+      - "Rule out secondary causes: HIV, HCV, H. pylori (check and treat if positive), lupus (ANA), drug-induced (heparin, quinidine)"
+      - "Bone marrow biopsy only if: Age >60, atypical features, considering splenectomy (confirms increased megakaryocytes)"
+    referrals:
+      - "Hematology for all ITP patients - treatment decisions and monitoring"
+      - "Hospital admission if: Platelets <10k, active bleeding, mucosal bleeding with platelets <20k"
     icd10:
       - D69.3
     snomed:
@@ -116,6 +277,27 @@ rules:
       - Elevated LDH
       - Normal PT/PTT/fibrinogen (unlike DIC)
       - Low ADAMTS13 activity
+    clinical_pearls:
+      - "Medical emergency: 90% mortality without treatment, <10% with plasmapheresis - start treatment before ADAMTS13 results"
+      - "Pathophysiology: ADAMTS13 deficiency → large vWF multimers → platelet microthrombi → microangiopathic hemolysis + organ ischemia"
+      - "Classic pentad rarely complete (40%) - thrombocytopenia + MAHA + neurologic or renal = enough to treat empirically"
+      - "Neurologic: Waxing/waning confusion, headache, seizures, stroke, coma (differentiates from HUS which spares CNS)"
+      - "DO NOT transfuse platelets (worsens thrombosis) unless life-threatening bleeding"
+    management:
+      - "EMERGENT plasmapheresis (plasma exchange) 1-1.5 plasma volumes daily - continue until platelets >150k × 2 days"
+      - "If plasmapheresis delayed: Fresh frozen plasma 30 mL/kg IV (provides ADAMTS13) until pheresis available"
+      - "Corticosteroids: Prednisone 1mg/kg/day or methylprednisolone 1g IV daily (may help in autoimmune TTP)"
+      - "Rituximab 375mg/m2 IV weekly × 4 doses added to plasmapheresis (reduces relapses)"
+      - "Caplacizumab (anti-vWF antibody) 10mg IV then SQ daily - newer therapy, reduces time to remission"
+    tests:
+      - "CBC: Thrombocytopenia (often <30k), anemia with elevated reticulocyte count"
+      - "Peripheral smear: Schistocytes (fragmented RBCs) - KEY diagnostic feature"
+      - "Hemolysis labs: Elevated indirect bilirubin, elevated LDH (often >1000), low/undetectable haptoglobin, negative Coombs"
+      - "PT/PTT/fibrinogen: Normal (differentiates from DIC which has prolonged PT/PTT, low fibrinogen)"
+      - "ADAMTS13 activity <10% with inhibitor = acquired TTP. Send before starting treatment but DON'T wait for results"
+    referrals:
+      - "Hematology STAT + ICU admission - initiate plasmapheresis emergently"
+      - "Nephrology if severe renal dysfunction (may need hemodialysis)"
     icd10:
       - M31.1
     snomed:
@@ -129,6 +311,28 @@ rules:
       - Schistocytes on blood smear
       - Elevated creatinine
       - Common in children
+    clinical_pearls:
+      - "Typical (diarrhea-associated) HUS: E. coli O157:H7 (Shiga toxin) after bloody diarrhea, children, self-limited (supportive care)"
+      - "Atypical HUS: Complement dysregulation, adults, no diarrhea, high mortality/recurrence - needs eculizumab (anti-C5)"
+      - "Differentiate from TTP: HUS has prominent renal failure with minimal neuro symptoms. TTP has neuro symptoms with less renal"
+      - "DO NOT use antibiotics for E. coli O157:H7 - may worsen HUS by increasing Shiga toxin release"
+      - "Typical HUS has 90% recovery with supportive care. Atypical HUS has 50% mortality without eculizumab"
+    management:
+      - "Typical (post-diarrhea) HUS: Supportive care only - fluids, electrolyte management, transfusions, dialysis if needed"
+      - "NO plasmapheresis for typical HUS (not ADAMTS13 deficiency)"
+      - "Atypical HUS: Eculizumab 900mg IV weekly × 4, then 1200mg IV q2 weeks (blocks complement C5)"
+      - "Meningococcal vaccine required before eculizumab (C5 inhibition increases meningitis risk)"
+      - "Hemodialysis if: Uremic symptoms, refractory hyperkalemia, volume overload (50% of children need temporary dialysis)"
+    tests:
+      - "CBC: Thrombocytopenia, anemia with elevated reticulocyte count"
+      - "Peripheral smear: Schistocytes (fragmented RBCs)"
+      - "Hemolysis labs: Elevated LDH, indirect bilirubin, low haptoglobin, negative Coombs"
+      - "Renal function: Elevated BUN/creatinine, hematuria, proteinuria"
+      - "Stool culture for E. coli O157:H7 (typical HUS) or Shiga toxin PCR"
+      - "ADAMTS13 activity normal (differentiates from TTP)"
+    referrals:
+      - "Nephrology urgently for renal management and possible dialysis"
+      - "Hematology if atypical HUS (no diarrhea, adult) - needs eculizumab"
     icd10:
       - D59.3
     snomed:
@@ -142,6 +346,29 @@ rules:
       - Low fibrinogen
       - Bleeding and thrombosis
       - Underlying trigger (sepsis, trauma, malignancy, obstetric complication)
+    clinical_pearls:
+      - "Consumption coagulopathy: Widespread activation of coagulation → consumes platelets/factors → bleeding + thrombosis"
+      - "Causes: Sepsis (gram-negative most common), trauma, malignancy (acute promyelocytic leukemia, adenocarcinoma), obstetric (abruption, amniotic fluid embolism, HELLP)"
+      - "DIC is NEVER primary diagnosis - always secondary to underlying trigger (treat the trigger)"
+      - "Overt DIC: Bleeding + thrombosis + lab abnormalities. Non-overt: Labs abnormal but no clinical bleeding/clotting"
+      - "APL (M3 AML): Severe DIC from release of procoagulant granules - treat with ATRA + chemotherapy urgently"
+    management:
+      - "Treat underlying condition: Antibiotics for sepsis, delivery for obstetric complications, chemotherapy for APL"
+      - "Supportive transfusions: Platelets if <50k and bleeding (or <20k prophylactic), FFP if prolonged PT/PTT and bleeding"
+      - "Cryoprecipitate if fibrinogen <100 mg/dL (contains factor VIII, fibrinogen, vWF)"
+      - "Heparin: Controversial, only consider if thrombosis predominates (DVT, PE, acral ischemia) - may worsen bleeding"
+      - "NO transfusion if not bleeding and stable - may worsen thrombosis ('adding fuel to fire')"
+    tests:
+      - "PT/PTT: Prolonged (consumption of clotting factors)"
+      - "Fibrinogen: Low (<100 mg/dL) - KEY distinguishing feature (normal/high in TTP/HUS)"
+      - "D-dimer and fibrin split products: Markedly elevated (>1000)"
+      - "Platelets: Low (<100k) from consumption"
+      - "Peripheral smear: Schistocytes (if microangiopathic hemolysis component)"
+      - "DIC score (ISTH): Platelets, PT, fibrinogen, D-dimer - score ≥5 = overt DIC"
+    referrals:
+      - "ICU admission - often critically ill with multiorgan dysfunction"
+      - "Hematology for transfusion guidance and complex coagulation management"
+      - "If APL: Hematology EMERGENTLY for ATRA initiation"
     icd10:
       - D65
     snomed:
@@ -155,6 +382,26 @@ rules:
       - Low Factor VIII activity
       - Hemarthrosis (joint bleeding)
       - Spontaneous or trauma-related bleeding
+    clinical_pearls:
+      - "Most common severe inherited bleeding disorder (1 in 5000 males) - X-linked recessive"
+      - "Severity: Severe (<1% factor VIII) spontaneous bleeds, Moderate (1-5%) trauma-related, Mild (5-40%) post-surgery bleeding"
+      - "Hemarthrosis (joint bleeding): Ankles, knees, elbows - repeated bleeding → chronic arthropathy"
+      - "Inhibitor development in 30%: Anti-factor VIII antibodies make treatment difficult - use bypassing agents"
+      - "Females are carriers (usually asymptomatic) but can have mild symptoms if extreme X-inactivation"
+    management:
+      - "On-demand treatment: Factor VIII concentrate to raise level: Minor bleed (40%), major bleed (80-100%)"
+      - "Dosing: 1 unit/kg raises factor VIII by 2%. For 80% level in 70kg patient: (80% - baseline%) / 2 × 70kg units"
+      - "Prophylaxis (severe hemophilia): Factor VIII 25-40 units/kg 3x/week to prevent spontaneous bleeding/arthropathy"
+      - "If inhibitor present: Bypassing agents (FEIBA, recombinant factor VIIa) or emicizumab (prophylaxis)"
+      - "Minor procedures: DDAVP (desmopressin) 0.3 mcg/kg IV in mild hemophilia A (releases endogenous factor VIII from endothelium)"
+    tests:
+      - "PTT: Prolonged. PT: Normal (factor VIII in intrinsic pathway)"
+      - "Factor VIII activity: <1% (severe), 1-5% (moderate), 5-40% (mild)"
+      - "Mixing study: PTT corrects with 1:1 mix of patient plasma + normal plasma (factor deficiency, not inhibitor)"
+      - "Inhibitor screening: Bethesda assay for anti-factor VIII antibodies (if treatment failure)"
+    referrals:
+      - "Hematology for all hemophilia patients - lifelong specialized care"
+      - "Hemophilia Treatment Center for comprehensive care (hematology, orthopedics, physical therapy)"
     icd10:
       - D66
     snomed:
@@ -168,6 +415,26 @@ rules:
       - Low Factor IX activity
       - Hemarthrosis (joint bleeding)
       - Similar presentation to Hemophilia A
+    clinical_pearls:
+      - "Christmas disease (Factor IX deficiency) - clinically indistinguishable from Hemophilia A, 1/5 as common"
+      - "Severity same as hemophilia A: Severe (<1%), moderate (1-5%), mild (5-40%)"
+      - "Must test factor IX level to differentiate from hemophilia A (both have prolonged PTT, normal PT)"
+      - "Inhibitor development less common than hemophilia A (~5% vs 30%)"
+      - "Factor IX has longer half-life than factor VIII - requires less frequent dosing for prophylaxis"
+    management:
+      - "On-demand treatment: Factor IX concentrate (recombinant or plasma-derived)"
+      - "Dosing: 1 unit/kg raises factor IX by 1% (different from factor VIII). For 80% level: (80% - baseline%) × weight in kg"
+      - "Prophylaxis: Factor IX 40-100 units/kg 2x/week (longer half-life allows less frequent dosing than FVIII)"
+      - "If inhibitor present: Bypassing agents (FEIBA, recombinant factor VIIa)"
+      - "DDAVP does NOT work for hemophilia B (only releases factor VIII, not factor IX)"
+    tests:
+      - "PTT: Prolonged. PT: Normal"
+      - "Factor IX activity: <1% (severe), 1-5% (moderate), 5-40% (mild)"
+      - "Mixing study: PTT corrects with normal plasma"
+      - "Inhibitor screening: Bethesda assay for anti-factor IX antibodies"
+    referrals:
+      - "Hematology for all hemophilia B patients"
+      - "Hemophilia Treatment Center for multidisciplinary care"
     icd10:
       - D67
     snomed:
@@ -181,6 +448,26 @@ rules:
       - Prolonged PTT (may be normal)
       - Low von Willebrand factor antigen and activity
       - Autosomal dominant (most common inherited bleeding disorder)
+    clinical_pearls:
+      - "Most common inherited bleeding disorder (1% of population) - usually mild, autosomal dominant"
+      - "vWF function: Platelet adhesion (primary hemostasis) + carrier protein for factor VIII (prolongs FVIII half-life)"
+      - "Type 1 (75%): Partial quantitative deficiency, mild. Type 2 (20%): Qualitative defect. Type 3 (5%): Complete absence, severe"
+      - "Menorrhagia is presenting symptom in 75% of women with VWD"
+      - "PTT may be normal in mild cases (vWF carriers factor VIII, if VIII level adequate, PTT normal)"
+    management:
+      - "Type 1 mild bleeding: DDAVP (desmopressin) 0.3 mcg/kg IV or intranasal 300 mcg (releases vWF from endothelium)"
+      - "DDAVP trial test dose: Check vWF and FVIII levels 1 hour after DDAVP to confirm response before surgery"
+      - "Major surgery or Type 2/3: vWF concentrate (Humate-P, Alphanate) containing both vWF and FVIII"
+      - "Menorrhagia: Hormonal contraceptives (suppress menstruation), tranexamic acid 1300mg TID during menses"
+      - "Avoid aspirin and NSAIDs (impair platelet function)"
+    tests:
+      - "Screening: PTT may be prolonged or normal, PT normal, bleeding time prolonged (rarely done now)"
+      - "Diagnostic: vWF antigen (low), vWF activity (ristocetin cofactor assay - low), factor VIII (low to normal)"
+      - "Type 2 subtypes require vWF multimer analysis (send to specialty lab)"
+      - "Repeat testing if negative but high suspicion (vWF is acute phase reactant, increases with stress, pregnancy, estrogen)"
+    referrals:
+      - "Hematology for diagnosis confirmation and subtype classification"
+      - "Gynecology for menorrhagia management in women"
     icd10:
       - D68.0
     snomed:
@@ -196,6 +483,27 @@ rules:
       - Gingival hyperplasia (M5 subtype)
       - Auer rods on blood smear
       - Blasts > 20% on bone marrow
+    clinical_pearls:
+      - "Most common acute leukemia in adults (median age 68 years) - poor prognosis in elderly"
+      - "Auer rods: Azurophilic needle-like inclusions in myeloblasts - pathognomonic for AML"
+      - "APL (M3, t(15;17)): DIC at presentation - treat with ATRA + arsenic (95% cure rate in young patients)"
+      - "Secondary AML: From MDS, prior chemotherapy, or radiation - worse prognosis than de novo AML"
+      - "Tumor lysis syndrome risk: Hyperuricemia, hyperkalemia, hyperphosphatemia, hypocalcemia - start allopurinol before chemo"
+    management:
+      - "Induction chemotherapy (fit patients age <60): 7+3 regimen (cytarabine 7 days + anthracycline 3 days)"
+      - "Consolidation after remission: High-dose cytarabine × 3-4 cycles OR allogeneic HSCT"
+      - "Allogeneic HSCT: Curative option for high-risk AML, adverse cytogenetics, or relapsed disease"
+      - "APL: ATRA 45 mg/m2/day + arsenic trioxide (avoid anthracyclines) - differentiation therapy"
+      - "Elderly/unfit: Hypomethylating agents (azacitidine, decitabine) + venetoclax OR supportive care"
+    tests:
+      - "CBC with differential: Pancytopenia with circulating blasts"
+      - "Peripheral smear: Myeloblasts with Auer rods (if present)"
+      - "Bone marrow biopsy: >20% myeloblasts diagnostic for AML"
+      - "Cytogenetics/molecular: Prognostic (favorable: t(8;21), inv(16), APL t(15;17). Adverse: complex, -5, -7, FLT3-ITD)"
+      - "Flow cytometry: Myeloid markers (CD13, CD33, MPO positive)"
+    referrals:
+      - "Hematology/oncology urgently - AML is medical emergency requiring rapid treatment"
+      - "Bone marrow transplant evaluation for all fit patients in remission"
     icd10:
       - C92.0
     snomed:
@@ -211,6 +519,28 @@ rules:
       - Lymphadenopathy, hepatosplenomegaly
       - Lymphoblasts on blood smear and bone marrow
       - Most common cancer in children
+    clinical_pearls:
+      - "Most common childhood malignancy (peak age 2-5 years) - excellent prognosis in children (90% cure)"
+      - "B-ALL (85%): CD19+, CD10+. T-ALL (15%): CD3+, presents with mediastinal mass, worse prognosis"
+      - "Philadelphia chromosome positive (Ph+ ALL, 25% of adults): t(9;22) BCR-ABL - poor prognosis, needs tyrosine kinase inhibitor"
+      - "CNS involvement in 5-10% at diagnosis - requires CNS prophylaxis (intrathecal chemotherapy)"
+      - "Tumor lysis syndrome high risk - start allopurinol, aggressive hydration before starting chemotherapy"
+    management:
+      - "Multi-agent chemotherapy in phases: Induction (achieve remission) → Consolidation → Maintenance (2-3 years total)"
+      - "Induction: Vincristine, prednisone, asparaginase +/- anthracycline (80-90% complete remission)"
+      - "CNS prophylaxis: Intrathecal methotrexate or cytarabine (ALL commonly spreads to CNS)"
+      - "Ph+ ALL: Add tyrosine kinase inhibitor (imatinib, dasatinib) to chemotherapy"
+      - "Allogeneic HSCT: For high-risk ALL (Ph+, MLL rearrangement, poor response), relapsed disease"
+    tests:
+      - "CBC: Pancytopenia with circulating lymphoblasts (may have WBC >100k)"
+      - "Bone marrow biopsy: >20% lymphoblasts"
+      - "Flow cytometry: B-ALL (CD19+, CD10+, TdT+) vs T-ALL (CD3+, CD7+, TdT+)"
+      - "Cytogenetics: Hyperdiploidy (good prognosis), t(9;22) Ph+ (poor), t(4;11) MLL (very poor), t(12;21) (excellent)"
+      - "LP with CSF cytology: Rule out CNS involvement"
+    referrals:
+      - "Hematology/oncology urgently - ALL requires immediate treatment"
+      - "Pediatric oncology if child (better outcomes at specialized centers)"
+      - "Bone marrow transplant evaluation for high-risk or relapsed disease"
     icd10:
       - C91.0
     snomed:
@@ -225,6 +555,26 @@ rules:
       - Leukocytosis with left shift
       - Philadelphia chromosome (BCR-ABL fusion) positive
       - Responsive to tyrosine kinase inhibitors (imatinib)
+    clinical_pearls:
+      - "Philadelphia chromosome t(9;22): BCR-ABL fusion creates constitutively active tyrosine kinase - diagnostic for CML"
+      - "Three phases: Chronic (asymptomatic, 90%), Accelerated (worsening cytopenias), Blast crisis (acute leukemia transformation)"
+      - "Tyrosine kinase inhibitors (TKIs) transformed CML from fatal (median survival 3-5 years) to chronic manageable disease"
+      - "WBC often >100k at presentation with entire myeloid series (myelocytes, metamyelocytes, bands) - 'left shift'"
+      - "Treatment-free remission possible in 40-50% after years of TKI therapy with deep molecular response"
+    management:
+      - "First-line TKI: Imatinib 400mg daily (1st generation) OR dasatinib/nilotinib (2nd generation, faster/deeper responses)"
+      - "Monitor response: BCR-ABL PCR q3 months - goal is major molecular response (BCR-ABL ≤0.1%)"
+      - "If resistance/intolerance: Switch to 2nd generation TKI (dasatinib, nilotinib, bosutinib) or 3rd generation (ponatinib)"
+      - "Allogeneic HSCT: Reserved for TKI failure, blast crisis, or T315I mutation (ponatinib only TKI that works)"
+      - "Hydroxyurea initially if WBC >100k (cytoreduction while awaiting TKI) to prevent leukostasis"
+    tests:
+      - "CBC: Leukocytosis (often >100k) with left shift (myelocytes, metamyelocytes, basophilia)"
+      - "Philadelphia chromosome: Cytogenetics showing t(9;22) OR BCR-ABL PCR (quantitative, for monitoring)"
+      - "Bone marrow biopsy: Hypercellular with myeloid predominance, <10% blasts (chronic phase)"
+      - "Monitor: BCR-ABL PCR q3 months to assess treatment response"
+    referrals:
+      - "Hematology/oncology for all CML diagnoses - lifelong TKI management"
+      - "Bone marrow transplant evaluation if TKI failure or blast crisis"
     icd10:
       - C92.1
     snomed:
@@ -239,6 +589,27 @@ rules:
       - Fatigue, recurrent infections
       - Smudge cells on blood smear
       - Most common leukemia in adults
+    clinical_pearls:
+      - "Most common leukemia in Western adults (median age 70) - indolent, many never need treatment"
+      - "Smudge cells (Gumprecht shadows): Fragile CLL cells rupture during smear preparation - characteristic finding"
+      - "Rai staging: 0 (lymphocytosis only), I (+ nodes), II (+ organomegaly), III (+ anemia), IV (+ thrombocytopenia)"
+      - "Watch and wait: If asymptomatic Rai stage 0-II, no treatment - may remain stable for years"
+      - "Complications: Autoimmune hemolytic anemia (10-25%), hypogammaglobulinemia (recurrent infections), Richter transformation (3-10% to DLBCL)"
+    management:
+      - "Early stage asymptomatic: Observation only (no survival benefit from early treatment)"
+      - "Indications to treat: Symptomatic lymphadenopathy, cytopenias, B symptoms, autoimmune complications, doubling time <6 months"
+      - "First-line (fit patients): FCR (fludarabine + cyclophosphamide + rituximab) OR venetoclax + obinutuzumab"
+      - "First-line (elderly/unfit): Ibrutinib (BTK inhibitor) 420mg daily - oral, well-tolerated"
+      - "Deletion 17p or TP53 mutation: Ibrutinib or venetoclax (chemo-resistant)"
+    tests:
+      - "CBC: Lymphocytosis (>5000) persisting >3 months, often >20-50k"
+      - "Peripheral smear: Small mature lymphocytes with smudge cells"
+      - "Flow cytometry: CD5+, CD19+, CD23+ (distinguishes from mantle cell lymphoma which is CD23-)"
+      - "FISH: Deletion 13q (favorable, 55%), trisomy 12 (intermediate), deletion 11q or 17p (poor prognosis, chemo-resistant)"
+      - "Immunoglobulin levels: Often low (explains recurrent infections)"
+    referrals:
+      - "Hematology/oncology for all CLL diagnoses - staging and treatment decisions"
+      - "Observation only if asymptomatic early stage (watch and wait)"
     icd10:
       - C91.1
     snomed:
@@ -253,6 +624,29 @@ rules:
       - Elevated protein gap, monoclonal spike on SPEP
       - Bence Jones proteinuria
       - Plasma cells > 10% on bone marrow
+    clinical_pearls:
+      - "Malignant plasma cells produce monoclonal immunoglobulin (M-protein) causing hyperviscosity, kidney damage"
+      - "CRAB = end-organ damage: Calcium >11 mg/dL, Renal (Cr >2), Anemia (Hgb <10), Bone lesions (lytic lesions or osteoporosis with fractures)"
+      - "Median age 70 years - back pain is most common presenting symptom (vertebral compression fractures)"
+      - "Kidney disease: Light chain cast nephropathy from Bence Jones protein (free light chains)"
+      - "MGUS (monoclonal gammopathy of uncertain significance): M-protein <3g/dL, <10% plasma cells, no CRAB - 1% per year progress to myeloma"
+    management:
+      - "Transplant eligible (<65-70 years, fit): Induction (VRd: bortezomib + lenalidomide + dex) → autologous HSCT → maintenance lenalidomide"
+      - "Transplant ineligible (elderly/frail): VRd OR daratumumab + lenalidomide + dex (continuous until progression)"
+      - "Bisphosphonates: Zoledronic acid 4mg IV monthly (reduces bone events, improves survival)"
+      - "Radiation therapy for painful bone lesions or impending fracture"
+      - "Supportive: Hydration, avoid NSAIDs (worsen kidney), treat hypercalcemia, prophylactic antibiotics if recurrent infections"
+    tests:
+      - "SPEP (serum protein electrophoresis): Monoclonal spike (M-spike) - quantify M-protein"
+      - "Serum free light chains: Elevated kappa or lambda with abnormal ratio"
+      - "UPEP: Bence Jones proteinuria (free light chains in urine)"
+      - "Bone marrow biopsy: >10% clonal plasma cells"
+      - "Skeletal survey (NOT bone scan): Lytic lesions, compression fractures, osteopenia"
+      - "Labs: Anemia, elevated calcium, elevated creatinine, elevated beta-2 microglobulin (prognostic)"
+    referrals:
+      - "Hematology/oncology for all multiple myeloma diagnoses"
+      - "Bone marrow transplant evaluation if age <70 and fit"
+      - "Orthopedics/neurosurgery for spinal cord compression or pathologic fractures"
     icd10:
       - C90.0
     snomed:
@@ -266,6 +660,27 @@ rules:
       - Reed-Sternberg cells on lymph node biopsy
       - Bimodal age distribution (young adults, elderly)
       - Pruritus
+    clinical_pearls:
+      - "Reed-Sternberg cells (owl's eye appearance) in inflammatory background - diagnostic for Hodgkin lymphoma"
+      - "Bimodal age: Peak at 20-30 years, second peak at 50-60 years"
+      - "Alcohol-induced lymph node pain: Specific but rare sign of Hodgkin lymphoma"
+      - "Most common histology: Nodular sclerosis (70%) - excellent prognosis with chemo+radiation"
+      - "B symptoms present in 30-40% - indicate worse prognosis but still highly curable"
+    management:
+      - "Early stage (I-II): ABVD chemotherapy (doxorubicin, bleomycin, vinblastine, dacarbazine) × 2-4 cycles + involved-field radiation"
+      - "Advanced stage (III-IV) or bulky disease: ABVD × 6 cycles or escalated BEACOPP (more toxic but better outcomes)"
+      - "PET scan after 2 cycles (interim PET): If negative, continue ABVD. If positive, escalate to BEACOPP or consider brentuximab"
+      - "Relapsed/refractory: Salvage chemotherapy + autologous HSCT (curative in 50%)"
+      - "Brentuximab vedotin (anti-CD30 antibody-drug conjugate) for relapsed disease"
+    tests:
+      - "Excisional lymph node biopsy (NOT FNA - need architecture): Reed-Sternberg cells in inflammatory background"
+      - "Immunohistochemistry: CD15+, CD30+ (Reed-Sternberg cells)"
+      - "PET/CT scan for staging (Ann Arbor I-IV)"
+      - "Labs: CBC, ESR (elevated in active disease), LDH (prognostic), HIV testing"
+    referrals:
+      - "Hematology/oncology for all Hodgkin lymphoma diagnoses"
+      - "Radiation oncology after chemotherapy for early-stage disease"
+      - "Fertility preservation consult before starting chemotherapy (chemo can cause infertility)"
     icd10:
       - C81.9
     snomed:
@@ -279,6 +694,27 @@ rules:
       - Hepatosplenomegaly
       - Extranodal involvement common
       - Many subtypes (DLBCL, follicular, MALT, etc.)
+    clinical_pearls:
+      - "Diverse group of lymphoid malignancies - 30+ subtypes with different behavior and treatment"
+      - "DLBCL (diffuse large B-cell, 30%): Aggressive, curable with R-CHOP (60-70% cure)"
+      - "Follicular lymphoma (20%): Indolent, watch and wait if asymptomatic, not curable but long survival (10-15 years)"
+      - "MALT lymphoma: Associated with H. pylori (gastric), sometimes cured with antibiotics alone"
+      - "Mantle cell lymphoma: Aggressive, poor prognosis, median survival 3-5 years"
+    management:
+      - "DLBCL (aggressive): R-CHOP (rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone) × 6 cycles"
+      - "Follicular lymphoma: Watch and wait if asymptomatic stage I-II. Treat with rituximab + chemo (bendamustine) if symptomatic"
+      - "MALT lymphoma (H. pylori+): Triple therapy antibiotics (PPI + amoxicillin + clarithromycin) × 14 days - 70% remission"
+      - "Mantle cell lymphoma: Aggressive chemo (R-HyperCVAD) + autologous HSCT in first remission"
+      - "CNS prophylaxis: Intrathecal chemotherapy for high-risk NHL (testicular, paranasal sinus involvement)"
+    tests:
+      - "Excisional lymph node biopsy with flow cytometry and immunohistochemistry (subtype NHL)"
+      - "DLBCL: CD20+, CD19+, bcl-6+. Follicular: CD20+, CD10+, bcl-2+. Mantle cell: CD20+, CD5+, cyclin D1+"
+      - "PET/CT for staging (Ann Arbor I-IV)"
+      - "Bone marrow biopsy if advanced stage or B symptoms"
+      - "Labs: CBC, LDH (prognostic - elevated worse), beta-2 microglobulin, HIV/hepatitis B testing"
+    referrals:
+      - "Hematology/oncology for all NHL diagnoses - treatment varies widely by subtype"
+      - "Bone marrow transplant evaluation for aggressive NHL in first remission"
     icd10:
       - C85.9
     snomed:
