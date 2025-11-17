@@ -7,10 +7,10 @@ rules:
     label: Acute coronary syndrome
     presentations:
       - Chest pain or pressure (substernal, may radiate to arm/jaw/back/epigastrium)
-      - Associated symptoms: dyspnea, diaphoresis, nausea, vomiting
-      - STEMI: ST elevation ≥1mm in 2+ contiguous leads, new LBBB
-      - NSTEMI: Elevated troponin WITHOUT ST elevation
-      - Unstable angina: Ischemic symptoms WITHOUT troponin elevation
+      - "Associated symptoms: dyspnea, diaphoresis, nausea, vomiting"
+      - "STEMI: ST elevation ≥1mm in 2+ contiguous leads, new LBBB"
+      - "NSTEMI: Elevated troponin WITHOUT ST elevation"
+      - "Unstable angina: Ischemic symptoms WITHOUT troponin elevation"
       - Atypical presentations common in elderly, diabetics, women
       - HEART score for risk stratification (History, ECG, Age, Risk factors, Troponin)
     clinical_pearls:
@@ -45,10 +45,10 @@ rules:
       - Pleuritic chest pain, tachycardia (HR >100)
       - Tachypnea (RR >20), hypoxia
       - Hemoptysis (less common, 10-15%)
-      - Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state
+      - "Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state"
       - Wells criteria for risk stratification (≥4 points = high probability)
-      - PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative
-      - D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)
+      - "PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative"
+      - "D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)"
     clinical_pearls:
       - "CTA pulmonary angiography is gold standard for diagnosis"
       - "V/Q scan alternative if contrast contraindicated"
@@ -93,9 +93,9 @@ rules:
       - Peripheral edema (lower extremities), jugular venous distention (JVD)
       - Fatigue, exercise intolerance, weight gain
       - Rales on lung auscultation, S3 gallop
-      - HFrEF: Ejection fraction <40% (systolic dysfunction)
-      - HFpEF: Ejection fraction ≥50% (diastolic dysfunction)
-      - Framingham criteria: 2 major or 1 major + 2 minor for diagnosis
+      - "HFrEF: Ejection fraction <40% (systolic dysfunction)"
+      - "HFpEF: Ejection fraction ≥50% (diastolic dysfunction)"
+      - "Framingham criteria: 2 major or 1 major + 2 minor for diagnosis"
       - BNP >100 or NT-proBNP >300 supports diagnosis
     clinical_pearls:
       - "NYHA classification: Class I (asymptomatic) to Class IV (symptoms at rest)"
@@ -142,7 +142,7 @@ rules:
       - Palpitations, dyspnea, chest discomfort, fatigue
       - May be asymptomatic (discovered incidentally)
       - Absence of P waves on ECG, irregular R-R intervals
-      - Increased stroke risk: CHA2DS2-VASc score guides anticoagulation
+      - "Increased stroke risk: CHA2DS2-VASc score guides anticoagulation"
       - Paroxysmal (<7 days, self-terminating), Persistent (>7 days), Permanent
       - Tachycardia-mediated cardiomyopathy if chronic rapid rate
     clinical_pearls:
@@ -350,9 +350,9 @@ rules:
       - Bilateral lower extremity edema, weight gain (>2-3 lbs in days)
       - Rales/crackles on lung auscultation, elevated JVP
       - S3 gallop (ventricular gallop, indicates volume overload)
-      - Chest X-ray: Pulmonary edema, pleural effusions, cardiomegaly
+      - "Chest X-ray: Pulmonary edema, pleural effusions, cardiomegaly"
       - BNP >400 or NT-proBNP >900 pg/mL supports diagnosis
-      - Triggers: medication non-adherence, dietary indiscretion, infection, ischemia, arrhythmia
+      - "Triggers: medication non-adherence, dietary indiscretion, infection, ischemia, arrhythmia"
     clinical_pearls:
       - "BNP <100 makes HF unlikely (high negative predictive value)"
       - "Loop diuretics (IV furosemide 40-80mg) for acute volume overload"
@@ -390,12 +390,12 @@ rules:
     label: Cardiogenic Shock
     presentations:
       - Hypotension (SBP <90 mmHg for >30 min) despite adequate filling
-      - Signs of tissue hypoperfusion: altered mental status, cool/clammy skin, oliguria
-      - Pulmonary edema: Dyspnea, rales, hypoxia
+      - "Signs of tissue hypoperfusion: altered mental status, cool/clammy skin, oliguria"
+      - "Pulmonary edema: Dyspnea, rales, hypoxia"
       - Tachycardia (compensatory), narrow pulse pressure
       - Most commonly due to acute MI (80% of cases)
-      - Other causes: decompensated HF, myocarditis, valvular rupture, arrhythmia
-      - SCAI shock stages: A (at risk) through E (extremis)
+      - "Other causes: decompensated HF, myocarditis, valvular rupture, arrhythmia"
+      - "SCAI shock stages: A (at risk) through E (extremis)"
     clinical_pearls:
       - "Mortality 40-50% even with optimal treatment"
       - "Key diagnostic: Hypotension + pulmonary edema (wet and cold)"
@@ -413,7 +413,7 @@ rules:
       - ECG and troponin (rule out MI)
       - Chest X-ray (pulmonary edema)
       - Arterial blood gas (assess oxygenation, lactate)
-      - Pulmonary artery catheter (confirm diagnosis: CI <2.2, PCWP >15)
+      - "Pulmonary artery catheter (confirm diagnosis: CI <2.2, PCWP >15)"
     referrals:
       - Cardiology consult STAT
       - CCU/ICU admission
@@ -429,9 +429,9 @@ rules:
   - id: CARD-HYPERTENSIVE-EMERGENCY
     label: Hypertensive Emergency
     presentations:
-      - Severely elevated BP: SBP >180 or DBP >120 mmHg
+      - "Severely elevated BP: SBP >180 or DBP >120 mmHg"
       - WITH acute end-organ damage (distinguishes from urgency)
-      - Hypertensive encephalopathy: Headache, confusion, seizures, vision changes
+      - "Hypertensive encephalopathy: Headache, confusion, seizures, vision changes"
       - Acute pulmonary edema, flash pulmonary edema
       - Acute coronary syndrome, acute aortic dissection
       - Acute renal failure, microangiopathic hemolytic anemia
@@ -455,7 +455,7 @@ rules:
       - Urinalysis (proteinuria, RBC casts)
       - Troponin (ACS)
       - CT head if neuro symptoms (stroke vs encephalopathy)
-      - Consider: Echocardiogram, CTA chest (dissection)
+      - "Consider: Echocardiogram, CTA chest (dissection)"
     referrals:
       - ICU admission for IV drip and monitoring
       - Cardiology consult
@@ -474,9 +474,9 @@ rules:
       - Sharp, pleuritic chest pain (90%), worse with lying flat, better leaning forward
       - Pain may radiate to trapezius ridge (pathognomonic)
       - Pericardial friction rub on auscultation (30%, best heard at left sternal border)
-      - ECG: Diffuse ST elevation (in multiple leads), PR depression
+      - "ECG: Diffuse ST elevation (in multiple leads), PR depression"
       - Fever, malaise common if infectious etiology
-      - Most common causes: Viral (coxsackie, echovirus), post-MI (Dressler syndrome), uremia, autoimmune
+      - "Most common causes: Viral (coxsackie, echovirus), post-MI (Dressler syndrome), uremia, autoimmune"
       - Pericardial effusion may be present (seen on echo)
     clinical_pearls:
       - "ECG: Diffuse ST elevation + PR depression (unlike MI: regional ST elevation)"
@@ -496,7 +496,7 @@ rules:
       - Chest X-ray (cardiomegaly if large effusion)
       - CRP/ESR (elevated, track resolution)
       - Troponin (may be elevated in myopericarditis)
-      - Consider: Viral serologies, ANA, RF if suspect autoimmune
+      - "Consider: Viral serologies, ANA, RF if suspect autoimmune"
     referrals:
       - Cardiology for recurrent pericarditis or large effusion
       - Rheumatology if autoimmune etiology suspected
@@ -511,13 +511,13 @@ rules:
   - id: CARD-CARDIAC-TAMPONADE
     label: Cardiac Tamponade
     presentations:
-      - Beck's triad: Hypotension, elevated JVP (distended neck veins), muffled heart sounds
-      - Pulsus paradoxus: SBP drops >10 mmHg with inspiration
+      - "Beck's triad: Hypotension, elevated JVP (distended neck veins), muffled heart sounds"
+      - "Pulsus paradoxus: SBP drops >10 mmHg with inspiration"
       - Tachycardia (compensatory), dyspnea, chest discomfort
-      - Signs of shock: Cool extremities, altered mental status
+      - "Signs of shock: Cool extremities, altered mental status"
       - Electrical alternans on ECG (alternating QRS amplitude)
-      - Echocardiogram: Pericardial effusion with RA/RV collapse in diastole
-      - Causes: Pericarditis, trauma, aortic dissection, malignancy, post-cardiac surgery, uremia
+      - "Echocardiogram: Pericardial effusion with RA/RV collapse in diastole"
+      - "Causes: Pericarditis, trauma, aortic dissection, malignancy, post-cardiac surgery, uremia"
     clinical_pearls:
       - "Medical emergency requiring immediate pericardiocentesis"
       - "Don't wait for full Beck's triad - high suspicion with 2/3 findings + echo"
@@ -552,8 +552,8 @@ rules:
       - Predictable chest discomfort with exertion, relieved by rest (5-10 minutes)
       - Substernal pressure, tightness, or heaviness (not sharp)
       - May radiate to left arm, jaw, neck, or epigastrium
-      - Associated symptoms: Dyspnea, diaphoresis, nausea (less common than ACS)
-      - Reproducible pattern: Same level of exertion triggers symptoms
+      - "Associated symptoms: Dyspnea, diaphoresis, nausea (less common than ACS)"
+      - "Reproducible pattern: Same level of exertion triggers symptoms"
       - Relieved by nitroglycerin within 5 minutes
       - No symptoms at rest (distinguishes from unstable angina)
     clinical_pearls:
@@ -588,8 +588,8 @@ rules:
     label: Ventricular Tachycardia (VT)
     presentations:
       - Wide-complex tachycardia (QRS >120ms) at rate >100 bpm, usually 150-250
-      - Pulseless VT: No pulse, cardiac arrest (needs immediate defibrillation)
-      - Stable VT: Pulse present, may have symptoms (dizziness, dyspnea, chest pain)
+      - "Pulseless VT: No pulse, cardiac arrest (needs immediate defibrillation)"
+      - "Stable VT: Pulse present, may have symptoms (dizziness, dyspnea, chest pain)"
       - AV dissociation, fusion beats, capture beats on ECG (specific for VT)
       - Common in setting of structural heart disease, prior MI, cardiomyopathy
       - Can degenerate into ventricular fibrillation (VF) and cardiac arrest
@@ -629,8 +629,8 @@ rules:
       - Regular narrow-complex tachycardia, rate 150-250 bpm
       - Dizziness, lightheadedness, dyspnea, chest discomfort
       - Polyuria common after episode (atrial stretch → ANP release)
-      - Most common type: AVNRT (AV nodal reentrant tachycardia) 60%
-      - Other types: AVRT (accessory pathway), atrial tachycardia
+      - "Most common type: AVNRT (AV nodal reentrant tachycardia) 60%"
+      - "Other types: AVRT (accessory pathway), atrial tachycardia"
       - Usually young patients without structural heart disease
     clinical_pearls:
       - "Vagal maneuvers: Valsalva, carotid massage, ice water immersion"
@@ -666,8 +666,8 @@ rules:
       - Palpitations, dyspnea, chest discomfort, dizziness
       - May be asymptomatic in chronic AFib
       - Heart rate typically 110-180 bpm (uncontrolled)
-      - Risk factors: HTN, CAD, valvular disease, thyroid disease, ETOH, advanced age
-      - Complications: Stroke risk (CHA2DS2-VASc score), heart failure, cardiomyopathy
+      - "Risk factors: HTN, CAD, valvular disease, thyroid disease, ETOH, advanced age"
+      - "Complications: Stroke risk (CHA2DS2-VASc score), heart failure, cardiomyopathy"
     clinical_pearls:
       - "Goals: Rate control (<110 bpm at rest) and anticoagulation"
       - "Rate vs rhythm control: Rate control non-inferior for most patients"
@@ -685,7 +685,7 @@ rules:
       - TSH (hyperthyroidism common trigger)
       - Echocardiogram (assess LV function, valves, LA size)
       - CHA2DS2-VASc score (stroke risk)
-      - Consider: TEE before cardioversion if >48hr or unknown duration
+      - "Consider: TEE before cardioversion if >48hr or unknown duration"
     referrals:
       - Cardiology for new-onset AFib or rhythm control
       - EP for catheter ablation if symptomatic despite meds
@@ -702,10 +702,10 @@ rules:
     presentations:
       - Exertional dyspnea, orthopnea, paroxysmal nocturnal dyspnea
       - Lower extremity edema, weight gain, fatigue
-      - Exam: Rales, JVD, S3 gallop, displaced PMI
-      - Echocardiogram: LVEF <40%
+      - "Exam: Rales, JVD, S3 gallop, displaced PMI"
+      - "Echocardiogram: LVEF <40%"
       - BNP >400 or NT-proBNP >900 pg/mL
-      - Etiologies: Ischemic (CAD), nonischemic (dilated cardiomyopathy, viral, toxins)
+      - "Etiologies: Ischemic (CAD), nonischemic (dilated cardiomyopathy, viral, toxins)"
     clinical_pearls:
       - "HFrEF (EF <40%) vs HFpEF (EF ≥50%) - treatments differ"
       - "Quadruple therapy improves survival: ACEi/ARB/ARNI, BB, MRA, SGLT2i"
@@ -740,12 +740,12 @@ rules:
   - id: CARD-AORTIC-STENOSIS
     label: Aortic Stenosis (AS)
     presentations:
-      - Classic triad (late disease): Exertional dyspnea, angina, syncope (SAD mnemonic)
+      - "Classic triad (late disease): Exertional dyspnea, angina, syncope (SAD mnemonic)"
       - Crescendo-decrescendo systolic murmur, loudest at right upper sternal border
       - Radiates to carotids, reduced carotid upstroke (pulsus parvus et tardus)
       - Soft or absent S2 (A2 component), may have S4
-      - Etiology: Calcific (age >70), bicuspid valve (age 40-60), rheumatic
-      - Symptoms indicate severe AS: Mean gradient >40 mmHg, AVA <1.0 cm², Vmax >4 m/s
+      - "Etiology: Calcific (age >70), bicuspid valve (age 40-60), rheumatic"
+      - "Symptoms indicate severe AS: Mean gradient >40 mmHg, AVA <1.0 cm², Vmax >4 m/s"
     clinical_pearls:
       - "Severe symptomatic AS: 2-year survival 50% without AVR"
       - "Once symptomatic, needs valve replacement (TAVR or SAVR)"
@@ -759,7 +759,7 @@ rules:
       - "Diuretics for HF symptoms (low dose), beta-blockers for angina (caution)"
       - "Endocarditis prophylaxis NOT routinely recommended"
     tests:
-      - Echocardiogram (assess severity: gradient, AVA, Vmax)
+      - "Echocardiogram (assess severity: gradient, AVA, Vmax)"
       - ECG (LVH with strain pattern)
       - Chest X-ray (cardiomegaly, calcified valve)
       - Cardiac catheterization if echo equivocal or to assess CAD pre-surgery
@@ -819,8 +819,8 @@ rules:
       - Progressive dyspnea, orthopnea, lower extremity edema (heart failure symptoms)
       - Fatigue, reduced exercise tolerance
       - May present with arrhythmias (AFib, VT) or thromboembolic events
-      - Echocardiogram: LV dilation, reduced EF (<40%), global hypokinesis
-      - Etiologies: Idiopathic (most common), ischemic, alcohol, viral (coxsackie, parvovirus), peripartum, genetic
+      - "Echocardiogram: LV dilation, reduced EF (<40%), global hypokinesis"
+      - "Etiologies: Idiopathic (most common), ischemic, alcohol, viral (coxsackie, parvovirus), peripartum, genetic"
     clinical_pearls:
       - "Ischemic vs nonischemic: Coronary angiography to differentiate"
       - "Alcohol-induced DCM: Complete abstinence may reverse in 50%"
@@ -839,7 +839,7 @@ rules:
       - Coronary angiography (rule out ischemic etiology)
       - ECG (nonspecific ST-T changes, LBBB)
       - BNP, troponin
-      - Consider: Cardiac MRI (fibrosis assessment), genetic testing, viral serologies
+      - "Consider: Cardiac MRI (fibrosis assessment), genetic testing, viral serologies"
     referrals:
       - Cardiology for all new diagnoses
       - Heart failure clinic
@@ -857,10 +857,10 @@ rules:
     presentations:
       - Dyspnea on exertion (most common), chest pain, palpitations
       - Syncope or presyncope with exertion (ominous - high SCD risk)
-      - Systolic murmur: Increases with Valsalva, decreases with squatting
+      - "Systolic murmur: Increases with Valsalva, decreases with squatting"
       - May be asymptomatic (found on screening or echo for other reason)
-      - Echocardiogram: LVH (septal wall ≥15mm), often asymmetric septal hypertrophy
-      - Genetic: Autosomal dominant, sarcomere protein mutations
+      - "Echocardiogram: LVH (septal wall ≥15mm), often asymmetric septal hypertrophy"
+      - "Genetic: Autosomal dominant, sarcomere protein mutations"
     clinical_pearls:
       - "AVOID: Dehydration, vigorous exercise, afterload reducers (ACEi, nitrates)"
       - "Valsalva/standing increases murmur (less preload = more LVOT obstruction)"
