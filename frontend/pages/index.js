@@ -516,6 +516,118 @@ export default function Home() {
                       </ul>
                     </div>
 
+                    {/* Clinical Pearls */}
+                    {result.clinical_pearls && result.clinical_pearls.length > 0 && (
+                      <div style={{ 
+                        marginBottom: '1.25rem',
+                        padding: '1rem',
+                        background: 'linear-gradient(to right, #fef3c7, #fef9e7)',
+                        borderRadius: '8px',
+                        borderLeft: '4px solid #f59e0b'
+                      }}>
+                        <h4 style={{ 
+                          margin: '0 0 0.75rem', 
+                          color: '#92400e', 
+                          fontSize: '0.95rem', 
+                          fontWeight: '700',
+                          textTransform: 'uppercase'
+                        }}>
+                          💡 Clinical Pearls
+                        </h4>
+                        <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#78350f', lineHeight: '1.7' }}>
+                          {result.clinical_pearls.map((pearl, i) => (
+                            <li key={i} style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                              {pearl}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Management */}
+                    {result.management && result.management.length > 0 && (
+                      <div style={{ 
+                        marginBottom: '1.25rem',
+                        padding: '1rem',
+                        background: 'linear-gradient(to right, #dbeafe, #eff6ff)',
+                        borderRadius: '8px',
+                        borderLeft: '4px solid #3b82f6'
+                      }}>
+                        <h4 style={{ 
+                          margin: '0 0 0.75rem', 
+                          color: '#1e40af', 
+                          fontSize: '0.95rem', 
+                          fontWeight: '700',
+                          textTransform: 'uppercase'
+                        }}>
+                          🏥 Management
+                        </h4>
+                        <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#1e3a8a', lineHeight: '1.7' }}>
+                          {result.management.map((mgmt, i) => (
+                            <li key={i} style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                              {mgmt}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Tests */}
+                    {result.tests && result.tests.length > 0 && (
+                      <div style={{ 
+                        marginBottom: '1.25rem',
+                        padding: '1rem',
+                        background: 'linear-gradient(to right, #f3e8ff, #faf5ff)',
+                        borderRadius: '8px',
+                        borderLeft: '4px solid #a855f7'
+                      }}>
+                        <h4 style={{ 
+                          margin: '0 0 0.75rem', 
+                          color: '#6b21a8', 
+                          fontSize: '0.95rem', 
+                          fontWeight: '700',
+                          textTransform: 'uppercase'
+                        }}>
+                          🔬 Recommended Tests
+                        </h4>
+                        <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#581c87', lineHeight: '1.7' }}>
+                          {result.tests.map((test, i) => (
+                            <li key={i} style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                              {test}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Referrals */}
+                    {result.referrals && result.referrals.length > 0 && (
+                      <div style={{ 
+                        marginBottom: '1.25rem',
+                        padding: '1rem',
+                        background: 'linear-gradient(to right, #fce7f3, #fdf2f8)',
+                        borderRadius: '8px',
+                        borderLeft: '4px solid #ec4899'
+                      }}>
+                        <h4 style={{ 
+                          margin: '0 0 0.75rem', 
+                          color: '#9f1239', 
+                          fontSize: '0.95rem', 
+                          fontWeight: '700',
+                          textTransform: 'uppercase'
+                        }}>
+                          👨‍⚕️ Specialist Referrals
+                        </h4>
+                        <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#831843', lineHeight: '1.7' }}>
+                          {result.referrals.map((ref, i) => (
+                            <li key={i} style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                              {ref}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     <div style={{ 
                       display: 'flex', 
                       gap: '2rem', 
