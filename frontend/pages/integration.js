@@ -107,7 +107,7 @@ export default function IntegrationPage() {
           marginBottom: '2rem',
           flexWrap: 'wrap'
         }}>
-          {['overview', 'fhir', 'hl7', 'webhooks', 'api-keys', 'examples'].map(tab => (
+          {['overview', 'fhir', 'hl7', 'pdf-export', 'ehr-pull', 'cpoe', 'webhooks', 'api-keys', 'examples'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -124,7 +124,12 @@ export default function IntegrationPage() {
                 textTransform: 'capitalize'
               }}
             >
-              {tab === 'fhir' ? 'FHIR R4' : tab === 'hl7' ? 'HL7 v2' : tab}
+              {tab === 'fhir' ? 'FHIR R4' : 
+               tab === 'hl7' ? 'HL7 v2' : 
+               tab === 'pdf-export' ? 'PDF Export' :
+               tab === 'ehr-pull' ? 'EHR Pull' :
+               tab === 'cpoe' ? 'CPOE Orders' :
+               tab}
             </button>
           ))}
         </div>
@@ -546,6 +551,322 @@ Content-Type: application/json
                   <li>Rotate keys regularly (recommended: every 90-180 days)</li>
                   <li>Use different keys for development, staging, and production</li>
                   <li>Revoke compromised keys immediately</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'pdf-export' && (
+            <div>
+              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>📄 PDF Report Generation</h2>
+              <p style={{ lineHeight: '1.8', color: '#555' }}>
+                Generate professional PDF reports for diagnostic findings, workup plans, and differential diagnoses.
+                Perfect for chart documentation, patient handouts, and provider communication.
+              </p>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Single Diagnosis Report</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/export/pdf/diagnosis</code></p>
+                
+                <h4>Request Example:</h4>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`{
+  "diagnosis_data": {
+    "label": "Acute Coronary Syndrome",
+    "family": "cardiology",
+    "icd10": ["I21.9", "I24.9"],
+    "snomed": ["394659003"],
+    "presentations": ["chest pain", "dyspnea", "diaphoresis"],
+    "clinical_pearls": [
+      "Troponin elevation confirms diagnosis",
+      "Time is muscle - early intervention critical"
+    ],
+    "management": [
+      "Aspirin 325mg immediately",
+      "Heparin anticoagulation",
+      "Consider PCI vs fibrinolysis"
+    ],
+    "tests": ["ECG", "Troponin I/T", "CK-MB"],
+    "referrals": ["Cardiology STAT"]
+  },
+  "patient_info": {
+    "id": "MRN12345",
+    "name": "John Doe",
+    "dob": "1970-01-01",
+    "age": 54
+  },
+  "clinical_context": "Presented with acute chest pain..."
+}`}
+                </pre>
+
+                <h4 style={{ marginTop: '1.5rem' }}>Response:</h4>
+                <p>Returns a PDF file (Content-Type: application/pdf) with comprehensive diagnostic report including:</p>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li>Patient demographics and report metadata</li>
+                  <li>Clinical presentations and context</li>
+                  <li>Highlighted clinical pearls in styled boxes</li>
+                  <li>Management recommendations</li>
+                  <li>Recommended tests and specialist referrals</li>
+                  <li>ICD-10 and SNOMED CT codes</li>
+                  <li>Professional disclaimer footer</li>
+                </ul>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Differential Diagnosis Report</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/export/pdf/differential</code></p>
+                
+                <h4>Features:</h4>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li>Summary table of top 10 differential diagnoses with match scores</li>
+                  <li>Detailed breakdown of top 3 diagnoses with key points</li>
+                  <li>Search criteria and symptom documentation</li>
+                  <li>Patient information header</li>
+                  <li>Professional medical disclaimer</li>
+                </ul>
+
+                <h4>Python Example:</h4>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`import requests
+
+response = requests.post(
+    "${apiBase}/integration/export/pdf/diagnosis",
+    headers={"X-API-Key": "your_api_key"},
+    json={"diagnosis_data": {...}, "patient_info": {...}}
+)
+
+# Save PDF file
+with open("diagnosis_report.pdf", "wb") as f:
+    f.write(response.content)`}
+                </pre>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'ehr-pull' && (
+            <div>
+              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>📥 Pull Patient Data from EHR</h2>
+              <p style={{ lineHeight: '1.8', color: '#555' }}>
+                Retrieve comprehensive patient information from your Electronic Health Record system via FHIR API.
+                Access demographics, active conditions, medications, allergies, recent vitals, and lab results.
+              </p>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#fef3c7', borderRadius: '8px', border: '2px solid #f59e0b' }}>
+                <h3 style={{ marginTop: 0, color: '#92400e' }}>⚙️ Configuration Required</h3>
+                <p style={{ color: '#78350f' }}>
+                  Before pulling patient data, you must configure your FHIR server connection using the
+                  <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px', margin: '0 0.25rem' }}>
+                    POST /integration/ehr/fhir/configure
+                  </code>
+                  endpoint.
+                </p>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 1: Configure FHIR Server</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/ehr/fhir/configure</code></p>
+                
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`{
+  "config_name": "main_ehr",
+  "base_url": "https://fhir.hospital.org/api/R4",
+  "auth_type": "bearer",
+  "token": "eyJhbGciOiJSUzI1NiIs..."
+}
+
+// Supported auth types:
+// - "none": No authentication
+// - "basic": Username/password
+// - "bearer": Bearer token
+// - "oauth2": OAuth 2.0 (token must be obtained separately)`}
+                </pre>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 2: Search for Patients</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>GET /integration/ehr/fhir/search/patients</code></p>
+                
+                <h4>Query Parameters:</h4>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li><code>name</code> - Patient name (e.g., "John Doe")</li>
+                  <li><code>identifier</code> - Medical record number</li>
+                  <li><code>birth_date</code> - Birth date (YYYY-MM-DD)</li>
+                  <li><code>config_name</code> - FHIR configuration (default: "main_ehr")</li>
+                </ul>
+
+                <h4>Example:</h4>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`GET ${apiBase}/integration/ehr/fhir/search/patients?name=John%20Doe
+
+Response:
+{
+  "patients": [
+    {
+      "id": "patient-12345",
+      "name": "John Doe",
+      "gender": "male",
+      "birth_date": "1970-01-01"
+    }
+  ],
+  "count": 1
+}`}
+                </pre>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 3: Pull Comprehensive Patient Data</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>GET /integration/ehr/fhir/pull/patient/&#123;patient_id&#125;</code></p>
+                
+                <h4>Returns:</h4>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li><strong>Demographics:</strong> Name, gender, date of birth, age</li>
+                  <li><strong>Allergies:</strong> List of known allergies and intolerances</li>
+                  <li><strong>Active Conditions:</strong> Current diagnoses with status</li>
+                  <li><strong>Medications:</strong> Active medication orders</li>
+                  <li><strong>Recent Vitals:</strong> Latest vital signs (BP, HR, temp, etc.)</li>
+                  <li><strong>Recent Labs:</strong> Latest laboratory results</li>
+                </ul>
+
+                <h4>JavaScript Example:</h4>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`const response = await fetch(
+  "${apiBase}/integration/ehr/fhir/pull/patient/patient-12345?config_name=main_ehr",
+  {
+    headers: { "X-API-Key": "your_api_key" }
+  }
+);
+
+const patientData = await response.json();
+
+console.log(\`Patient: \${patientData.name}, Age: \${patientData.age}\`);
+console.log(\`Allergies: \${patientData.allergies.join(", ")}\`);
+console.log(\`Active Conditions: \${patientData.conditions.length}\`);
+console.log(\`Current Medications: \${patientData.medications.length}\`);`}
+                </pre>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#ecfdf5', borderRadius: '8px', border: '2px solid #10b981' }}>
+                <h3 style={{ marginTop: 0, color: '#065f46' }}>💡 Use Case: Context-Aware Diagnosis</h3>
+                <p style={{ color: '#064e3b' }}>
+                  Pull patient data before running diagnostic searches to get context-aware recommendations.
+                  RealDiag can consider existing conditions, medications, and recent labs when suggesting diagnoses.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'cpoe' && (
+            <div>
+              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>🏥 CPOE Integration - Order Tests & Referrals</h2>
+              <p style={{ lineHeight: '1.8', color: '#555' }}>
+                Seamlessly create orders in your Computerized Provider Order Entry (CPOE) system directly from RealDiag recommendations.
+                Supports labs, imaging, specialist referrals, and medications via FHIR ServiceRequest resources.
+              </p>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Create CPOE Order</h3>
+                <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/cpoe/order</code></p>
+                
+                <h4>Supported Order Types:</h4>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li><strong>lab</strong> - Laboratory tests (CBC, CMP, troponin, etc.)</li>
+                  <li><strong>imaging</strong> - Radiology orders (X-ray, CT, MRI, etc.)</li>
+                  <li><strong>referral</strong> - Specialist consultations</li>
+                  <li><strong>medication</strong> - Medication orders</li>
+                </ul>
+
+                <h4>Priority Levels:</h4>
+                <ul style={{ color: '#555', lineHeight: '1.8' }}>
+                  <li><strong>stat</strong> - Immediate/emergent (&lt; 1 hour)</li>
+                  <li><strong>urgent</strong> - Urgent (within 24 hours)</li>
+                  <li><strong>routine</strong> - Standard timing</li>
+                </ul>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Request Example - Lab Order</h3>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`{
+  "order_type": "lab",
+  "description": "Troponin I",
+  "patient_id": "patient-12345",
+  "encounter_id": "visit-789",
+  "priority": "stat",
+  "ordering_provider": "Dr. Jane Smith",
+  "clinical_indication": "Suspected acute coronary syndrome",
+  "diagnosis_codes": ["I21.9", "R07.9"],
+  "config_name": "main_ehr"
+}`}
+                </pre>
+
+                <h4 style={{ marginTop: '1.5rem' }}>Response:</h4>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`{
+  "message": "Order created successfully",
+  "order_id": "ServiceRequest/sr-67890",
+  "status": "active",
+  "service_request": {
+    "resourceType": "ServiceRequest",
+    "id": "sr-67890",
+    "status": "active",
+    "intent": "order",
+    "priority": "stat",
+    "code": { "text": "Troponin I" },
+    "subject": { "reference": "Patient/patient-12345" },
+    "authoredOn": "2024-11-17T10:30:00Z"
+  }
+}`}
+                </pre>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ marginTop: 0, color: '#667eea' }}>Python Example - Cardiology Referral</h3>
+                <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
+{`import requests
+
+# Create cardiology referral order
+response = requests.post(
+    "${apiBase}/integration/cpoe/order",
+    headers={
+        "Content-Type": "application/json",
+        "X-API-Key": "your_api_key"
+    },
+    json={
+        "order_type": "referral",
+        "description": "Cardiology consultation - ACS workup",
+        "patient_id": "patient-12345",
+        "priority": "urgent",
+        "ordering_provider": "Dr. Smith",
+        "clinical_indication": "Troponin positive, STEMI on ECG",
+        "diagnosis_codes": ["I21.02"],  # STEMI involving LAD
+        "config_name": "main_ehr"
+    }
+)
+
+order = response.json()
+print(f"Referral created: {order['order_id']}")
+print(f"Status: {order['status']}")`}
+                </pre>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#ecfdf5', borderRadius: '8px', border: '2px solid #10b981' }}>
+                <h3 style={{ marginTop: 0, color: '#065f46' }}>💡 Workflow Integration</h3>
+                <div style={{ color: '#064e3b', lineHeight: '1.8' }}>
+                  <strong>1.</strong> RealDiag suggests diagnosis (e.g., "Acute Coronary Syndrome")<br/>
+                  <strong>2.</strong> Recommended tests appear (ECG, Troponin, CK-MB)<br/>
+                  <strong>3.</strong> One-click order creation sends to EHR CPOE<br/>
+                  <strong>4.</strong> Order automatically includes ICD-10 codes and clinical context<br/>
+                  <strong>5.</strong> Track order status via FHIR ServiceRequest
+                </div>
+              </div>
+
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#fef3c7', borderRadius: '8px', border: '2px solid #f59e0b' }}>
+                <h3 style={{ marginTop: 0, color: '#92400e' }}>⚙️ Prerequisites</h3>
+                <ul style={{ color: '#78350f', lineHeight: '1.8' }}>
+                  <li>FHIR server must be configured (see EHR Pull tab)</li>
+                  <li>Ordering provider must have active credentials in EHR</li>
+                  <li>Patient and encounter must exist in EHR system</li>
+                  <li>Your FHIR server must support ServiceRequest resource creation</li>
                 </ul>
               </div>
             </div>

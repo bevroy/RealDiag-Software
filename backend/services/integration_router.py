@@ -459,8 +459,329 @@ async def integration_health():
             "fhir": "available",
             "hl7": "available",
             "webhooks": "available",
-            "api_keys": "available"
+            "api_keys": "available",
+            "pdf_export": "available",
+            "ehr_integration": "available",
+            "cpoe": "available"
         },
         "active_webhooks": len(webhooks_db),
         "active_api_keys": len([k for k in api_keys_db.values() if not k.get("revoked")])
     }
+
+
+# ========================================
+# NEW: PDF Export Endpoints
+# ========================================
+
+@router.post("/export/pdf/diagnosis")
+async def export_diagnosis_pdf(
+    diagnosis_data: Dict[str, Any] = Body(...),
+    patient_info: Optional[Dict[str, Any]] = Body(None),
+    clinical_context: Optional[str] = Body(None),
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Generate PDF report for a single diagnosis.
+    
+    Request body:
+    ```json
+    {
+      "diagnosis_data": {
+        "label": "Acute Coronary Syndrome",
+        "family": "cardiology",
+        "icd10": ["I21.9"],
+        "snomed": ["394659003"],
+        "presentations": ["chest pain", "dyspnea"],
+        "clinical_pearls": ["Troponin elevation is key"],
+        "management": ["Aspirin 325mg", "Heparin"],
+        "tests": ["ECG", "Troponin"],
+        "referrals": ["Cardiology"]
+      },
+      "patient_info": {
+        "id": "MRN123",
+        "name": "John Doe",
+        "dob": "1970-01-01",
+        "age": 54
+      },
+      "clinical_context": "Presented with acute chest pain..."
+    }
+    ```
+    """
+    from backend.services.pdf_export import PDFReportGenerator
+    from fastapi.responses import StreamingResponse
+    
+    try:
+        generator = PDFReportGenerator()
+        pdf_buffer = generator.generate_diagnosis_report(
+            diagnosis=diagnosis_data,
+            patient_info=patient_info,
+            clinical_context=clinical_context
+        )
+        
+        return StreamingResponse(
+            pdf_buffer,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"attachment; filename=diagnosis_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"PDF generation failed: {str(e)}")
+
+
+@router.post("/export/pdf/differential")
+async def export_differential_pdf(
+    diagnoses: List[Dict[str, Any]] = Body(...),
+    patient_info: Optional[Dict[str, Any]] = Body(None),
+    search_criteria: Optional[str] = Body(None),
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Generate PDF report for differential diagnoses.
+    
+    Request body:
+    ```json
+    {
+      "diagnoses": [
+        {"label": "ACS", "match_score": 8.5, ...},
+        {"label": "PE", "match_score": 7.2, ...}
+      ],
+      "patient_info": {"id": "MRN123", "name": "John Doe"},
+      "search_criteria": "chest pain + dyspnea + diaphoresis"
+    }
+    ```
+    """
+    from backend.services.pdf_export import PDFReportGenerator
+    from fastapi.responses import StreamingResponse
+    
+    try:
+        generator = PDFReportGenerator()
+        pdf_buffer = generator.generate_multi_diagnosis_report(
+            diagnoses=diagnoses,
+            patient_info=patient_info,
+            search_criteria=search_criteria
+        )
+        
+        return StreamingResponse(
+            pdf_buffer,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"attachment; filename=differential_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"PDF generation failed: {str(e)}")
+
+
+# ========================================
+# NEW: EHR Data Pull Endpoints
+# ========================================
+
+# In-memory FHIR server configurations (replace with database in production)
+fhir_configs: Dict[str, Dict[str, Any]] = {}
+
+
+class FHIRConfigRequest(BaseModel):
+    """Configure FHIR server connection."""
+    config_name: str
+    base_url: str
+    auth_type: str = Field(default="none", description="none, basic, bearer, oauth2")
+    username: Optional[str] = None
+    password: Optional[str] = None
+    token: Optional[str] = None
+
+
+@router.post("/ehr/fhir/configure")
+async def configure_fhir_server(
+    config: FHIRConfigRequest,
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Configure connection to FHIR server for pulling patient data.
+    
+    Example:
+    ```json
+    {
+      "config_name": "main_ehr",
+      "base_url": "https://fhir.hospital.org/api",
+      "auth_type": "bearer",
+      "token": "eyJhbGc..."
+    }
+    ```
+    """
+    fhir_configs[config.config_name] = {
+        "base_url": config.base_url,
+        "auth_type": config.auth_type,
+        "username": config.username,
+        "password": config.password,
+        "token": config.token,
+        "created_at": datetime.now().isoformat()
+    }
+    
+    return {
+        "message": f"FHIR server '{config.config_name}' configured successfully",
+        "config_name": config.config_name
+    }
+
+
+@router.get("/ehr/fhir/pull/patient/{patient_id}")
+async def pull_patient_data(
+    patient_id: str,
+    config_name: str = "main_ehr",
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Pull comprehensive patient data from EHR via FHIR.
+    
+    Returns patient demographics, conditions, medications, allergies,
+    recent vitals, and recent lab results.
+    
+    Example: GET /ehr/fhir/pull/patient/12345?config_name=main_ehr
+    """
+    from backend.services.ehr_integration import EHRIntegrationService, FHIRServerConfig
+    
+    if config_name not in fhir_configs:
+        raise HTTPException(
+            status_code=404,
+            detail=f"FHIR configuration '{config_name}' not found. Configure it first with POST /ehr/fhir/configure"
+        )
+    
+    config_data = fhir_configs[config_name]
+    fhir_config = FHIRServerConfig(
+        base_url=config_data["base_url"],
+        auth_type=config_data["auth_type"],
+        username=config_data.get("username"),
+        password=config_data.get("password"),
+        token=config_data.get("token")
+    )
+    
+    ehr_service = EHRIntegrationService(config=fhir_config)
+    
+    try:
+        patient_data = await ehr_service.pull_patient_data(patient_id)
+        return patient_data.dict()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to pull patient data: {str(e)}")
+
+
+@router.get("/ehr/fhir/search/patients")
+async def search_patients(
+    name: Optional[str] = None,
+    identifier: Optional[str] = None,
+    birth_date: Optional[str] = None,
+    config_name: str = "main_ehr",
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Search for patients in EHR system.
+    
+    Query parameters:
+    - name: Patient name
+    - identifier: MRN or other identifier
+    - birth_date: Birth date (YYYY-MM-DD)
+    - config_name: FHIR configuration to use
+    
+    Example: GET /ehr/fhir/search/patients?name=John%20Doe&config_name=main_ehr
+    """
+    from backend.services.ehr_integration import EHRIntegrationService, FHIRServerConfig
+    
+    if config_name not in fhir_configs:
+        raise HTTPException(status_code=404, detail=f"FHIR configuration '{config_name}' not found")
+    
+    config_data = fhir_configs[config_name]
+    fhir_config = FHIRServerConfig(
+        base_url=config_data["base_url"],
+        auth_type=config_data["auth_type"],
+        username=config_data.get("username"),
+        password=config_data.get("password"),
+        token=config_data.get("token")
+    )
+    
+    ehr_service = EHRIntegrationService(config=fhir_config)
+    
+    try:
+        patients = await ehr_service.search_patients(
+            name=name,
+            identifier=identifier,
+            birth_date=birth_date
+        )
+        return {"patients": patients, "count": len(patients)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Patient search failed: {str(e)}")
+
+
+# ========================================
+# NEW: CPOE Integration Endpoints
+# ========================================
+
+@router.post("/cpoe/order")
+async def create_cpoe_order(
+    order_type: str = Body(..., description="lab, imaging, referral, medication"),
+    description: str = Body(...),
+    patient_id: str = Body(...),
+    encounter_id: Optional[str] = Body(None),
+    priority: str = Body("routine", description="stat, urgent, routine"),
+    ordering_provider: str = Body(...),
+    clinical_indication: Optional[str] = Body(None),
+    diagnosis_codes: List[str] = Body(default=[]),
+    config_name: str = Body("main_ehr"),
+    api_key: str = Depends(verify_api_key)
+):
+    """
+    Create order in CPOE system via FHIR ServiceRequest.
+    
+    Sends orders for labs, imaging, referrals, or medications to the EHR's
+    computerized provider order entry system.
+    
+    Request body:
+    ```json
+    {
+      "order_type": "lab",
+      "description": "Troponin I",
+      "patient_id": "12345",
+      "encounter_id": "visit-789",
+      "priority": "stat",
+      "ordering_provider": "Dr. Smith",
+      "clinical_indication": "Suspected ACS",
+      "diagnosis_codes": ["I21.9"],
+      "config_name": "main_ehr"
+    }
+    ```
+    """
+    from backend.services.ehr_integration import EHRIntegrationService, FHIRServerConfig, CPOEOrder
+    
+    if config_name not in fhir_configs:
+        raise HTTPException(status_code=404, detail=f"FHIR configuration '{config_name}' not found")
+    
+    config_data = fhir_configs[config_name]
+    fhir_config = FHIRServerConfig(
+        base_url=config_data["base_url"],
+        auth_type=config_data["auth_type"],
+        username=config_data.get("username"),
+        password=config_data.get("password"),
+        token=config_data.get("token")
+    )
+    
+    ehr_service = EHRIntegrationService(config=fhir_config)
+    
+    order = CPOEOrder(
+        order_type=order_type,
+        description=description,
+        patient_id=patient_id,
+        encounter_id=encounter_id,
+        priority=priority,
+        ordering_provider=ordering_provider,
+        clinical_indication=clinical_indication,
+        diagnosis_codes=diagnosis_codes
+    )
+    
+    try:
+        service_request = await ehr_service.create_cpoe_order(order)
+        return {
+            "message": "Order created successfully",
+            "order_id": service_request.get("id"),
+            "status": service_request.get("status"),
+            "service_request": service_request
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
