@@ -33,6 +33,8 @@ export default function SymptomSearch() {
   const [showPreferences, setShowPreferences] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
   const [displayLimit, setDisplayLimit] = useState(5); // New: Show only 5 results initially
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -54,8 +56,32 @@ export default function SymptomSearch() {
           console.error('Error loading recent searches:', e);
         }
       }
+      
+      // Check authentication
+      const token = localStorage.getItem('realdiag_token');
+      if (token) {
+        fetchUserProfile(token);
+      }
     }
   }, []);
+
+  // Fetch user profile
+  const fetchUserProfile = async (token) => {
+    try {
+      const response = await fetch(`${apiBase}/users/me`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        setIsAuthenticated(true);
+      } else {
+        localStorage.removeItem('realdiag_token');
+      }
+    } catch (err) {
+      console.error('Failed to fetch user profile:', err);
+    }
+  };
 
   // Save preferences to localStorage
   useEffect(() => {
@@ -392,12 +418,37 @@ export default function SymptomSearch() {
       const data = await response.json();
       setResults(data.results || []);
       
-      // Save to recent searches
+      // Save to recent searches (local)
       if (data.results && data.results.length > 0) {
         saveRecentSearch({
           symptoms: symptoms,
           resultsCount: data.results.length
         });
+      }
+      
+      // Track search in user history if authenticated
+      if (isAuthenticated) {
+        const token = localStorage.getItem('realdiag_token');
+        if (token) {
+          try {
+            await fetch(`${apiBase}/users/me/history`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                symptoms: symptoms,
+                age: ageValue ? parseInt(ageValue) : null,
+                sex: sex || null,
+                family: family || null,
+                result_count: data.results.length
+              })
+            });
+          } catch (err) {
+            console.error('Failed to track search:', err);
+          }
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -418,6 +469,45 @@ export default function SymptomSearch() {
     setHasSearched(false);
     setError(null);
     setExpandedCards({});
+  };
+
+  // Add to favorites
+  const addToFavorites = async (result) => {
+    if (!isAuthenticated) {
+      alert('Please sign in to save favorites');
+      window.location.href = '/account';
+      return;
+    }
+
+    const token = localStorage.getItem('realdiag_token');
+    if (!token) return;
+
+    try {
+      const response = await fetch(`${apiBase}/users/me/favorites`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          rule_id: result.rule_id,
+          diagnosis_label: result.label,
+          family: result.family,
+          notes: ''
+        })
+      });
+
+      if (response.ok) {
+        alert('✅ Added to favorites!');
+      } else if (response.status === 400) {
+        alert('ℹ️ Already in favorites');
+      } else {
+        throw new Error('Failed to add favorite');
+      }
+    } catch (err) {
+      console.error('Error adding favorite:', err);
+      alert('❌ Failed to add favorite');
+    }
   };
 
   return (
@@ -496,6 +586,22 @@ export default function SymptomSearch() {
             minHeight: '44px'
           }}>
             ← Home
+          </Link>
+          <Link href="/account" style={{
+            padding: '0.5rem 1rem',
+            background: isAuthenticated ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#10b981',
+            color: 'white',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
+            fontWeight: '500',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            minHeight: '44px',
+            boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)'
+          }}>
+            {isAuthenticated ? `👤 ${user?.full_name?.split(' ')[0] || 'Account'}` : '👤 Sign In'}
           </Link>
         </div>
       </div>
@@ -1055,19 +1161,41 @@ export default function SymptomSearch() {
                           alignItems: 'flex-end',
                           gap: '0.75rem'
                         }}>
-                          <div style={{
-                            padding: '0.75rem 1.25rem',
-                            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                            color: 'white',
-                            borderRadius: '8px',
-                            fontWeight: '700',
-                            fontSize: '1.1rem',
-                            boxShadow: '0 4px 6px rgba(16, 185, 129, 0.2)',
-                            textAlign: 'center',
-                            minWidth: '100px'
-                          }}>
-                            <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>MATCH</div>
-                            {result.match_score.toFixed(1)}
+                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                            <button
+                              onClick={() => addToFavorites(result)}
+                              style={{
+                                padding: '0.5rem 1rem',
+                                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                fontWeight: '600',
+                                fontSize: '0.85rem',
+                                boxShadow: '0 2px 4px rgba(245, 158, 11, 0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.25rem'
+                              }}
+                              title="Add to favorites"
+                            >
+                              ⭐ Favorite
+                            </button>
+                            <div style={{
+                              padding: '0.75rem 1.25rem',
+                              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                              color: 'white',
+                              borderRadius: '8px',
+                              fontWeight: '700',
+                              fontSize: '1.1rem',
+                              boxShadow: '0 4px 6px rgba(16, 185, 129, 0.2)',
+                              textAlign: 'center',
+                              minWidth: '100px'
+                            }}>
+                              <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>MATCH</div>
+                              {result.match_score.toFixed(1)}
+                            </div>
                           </div>
                           {/* Test Characteristics */}
                           {(result.sensitivity || result.specificity) && (
@@ -1376,6 +1504,22 @@ export default function SymptomSearch() {
                           </span>
                         </div>
                       </div>
+                      <button
+                        onClick={() => addToFavorites(result)}
+                        style={{
+                          padding: '0.5rem 0.75rem',
+                          background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          fontSize: '0.85rem',
+                          fontWeight: '600'
+                        }}
+                        title="Add to favorites"
+                      >
+                        ⭐
+                      </button>
                       <button
                         onClick={() => toggleCardExpand(idx)}
                         style={{

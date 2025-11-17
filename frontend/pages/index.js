@@ -141,9 +141,9 @@ export default function Home() {
         textAlign: 'center',
         boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
       }}>
-        <strong>🎉 NEW: Comprehensive Clinical Guidelines!</strong>
+        <strong>🎉 NEW: User Accounts & Comprehensive Clinical Guidelines!</strong>
         <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', opacity: 0.95 }}>
-          140+ diagnostic rules now include detailed clinical pearls, management protocols, recommended tests, and specialist referrals.
+          Create an account to save your search history, favorite diagnoses, and create custom differential lists! 140+ rules now include detailed clinical pearls, management protocols, tests, and referrals.
           Updated: November 17, 2025
         </p>
       </div>
@@ -152,8 +152,23 @@ export default function Home() {
       <div style={{
         maxWidth: '1400px',
         margin: '0 auto 2rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        position: 'relative'
       }}>
+        <div style={{ position: 'absolute', top: 0, right: 0 }}>
+          <a href="/account" style={{
+            display: 'inline-block',
+            padding: '0.75rem 1.5rem',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontWeight: '600',
+            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+          }}>
+            👤 Account
+          </a>
+        </div>
         <img 
           src="/logo.png" 
           alt="RealDiag Logo" 
