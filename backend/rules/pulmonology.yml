@@ -10,6 +10,28 @@ rules:
       - Wheezing and chest tightness
       - History of smoking or environmental exposure
       - Reduced exercise tolerance
+    clinical_pearls:
+      - "Spirometry diagnostic: FEV1/FVC <0.70 post-bronchodilator (confirms obstruction)"
+      - "GOLD staging: Mild (FEV1 ≥80%), Moderate (50-80%), Severe (30-50%), Very severe (<30%)"
+      - "Smoking cessation most effective intervention (slows decline in FEV1)"
+      - "Triple therapy (LABA+LAMA+ICS) for frequent exacerbations (≥2/year or 1 hospitalization)"
+      - "Pulmonary rehab improves exercise capacity and quality of life"
+      - "Oxygen therapy (>15 hours/day) improves survival if chronic hypoxia (PaO2 <55 or SpO2 <88%)"
+    management:
+      - "Smoking cessation counseling + varenicline or bupropion"
+      - "Bronchodilators: LAMA (tiotropium 18mcg daily) or LABA (salmeterol 50mcg BID)"
+      - "Add ICS (fluticasone) if ≥2 exacerbations/year or blood eosinophils ≥300"
+      - "Long-term oxygen if PaO2 <55 mmHg or SpO2 <88% at rest"
+      - "Vaccinations: Pneumococcal (PCV20 or PCV15+PPSV23), annual influenza"
+    tests:
+      - "Spirometry with bronchodilator (diagnostic, assess severity)"
+      - "Chest X-ray (hyperinflation, flattened diaphragms, rule out complications)"
+      - "ABG if severe or exacerbation (assess hypoxia, hypercapnia)"
+      - "Alpha-1 antitrypsin level if age <45 or minimal smoking history"
+    referrals:
+      - "Pulmonology for initial diagnosis, frequent exacerbations, or oxygen evaluation"
+      - "Pulmonary rehabilitation program"
+      - "Lung transplant evaluation if FEV1 <25% or severe symptoms despite therapy"
     icd10:
       - J44.0
       - J44.1
@@ -25,6 +47,28 @@ rules:
       - Chest tightness
       - Symptoms worse with triggers (cold air, exercise, allergens)
       - Reversible airflow obstruction
+    clinical_pearls:
+      - "Diagnosis: Episodic symptoms + reversible obstruction (FEV1 improves ≥12% and 200mL post-bronchodilator)"
+      - "Intermittent: Symptoms ≤2 days/week. Persistent: Symptoms >2 days/week"
+      - "Step-up therapy: Add ICS if symptoms >2 days/week, add LABA if daily symptoms"
+      - "Avoid LABA monotherapy (increased mortality risk) - always use with ICS"
+      - "Peak flow monitoring: <80% personal best = action needed, <50% = severe"
+      - "Aspirin-exacerbated respiratory disease (AERD): Asthma + nasal polyps + ASA sensitivity"
+    management:
+      - "Mild intermittent: Albuterol MDI 2 puffs PRN (if using >2 days/week, add controller)"
+      - "Mild-moderate persistent: ICS (fluticasone 88-220mcg BID or budesonide 180-360mcg BID)"
+      - "Moderate-severe: ICS-LABA (fluticasone-salmeterol 250/50 BID)"
+      - "Uncontrolled on ICS-LABA: Add LAMA (tiotropium) or biologics (omalizumab if allergic, dupilumab if eosinophilic)"
+      - "Asthma action plan (green-yellow-red zones based on symptoms/peak flow)"
+    tests:
+      - "Spirometry with bronchodilator (FEV1 improves ≥12% and 200mL = reversible obstruction)"
+      - "Peak expiratory flow rate (PEFR) monitoring"
+      - "Methacholine challenge if spirometry normal but clinical suspicion high"
+      - "Allergy testing (skin prick or IgE) if allergic triggers suspected"
+    referrals:
+      - "Pulmonology if severe or uncontrolled despite step 4 therapy (ICS-LABA + LAMA)"
+      - "Allergy/immunology for biologic therapy consideration"
+      - "Consider if: ≥2 ED visits/year, 1+ hospitalization, or frequent steroid bursts"
     icd10:
       - J45.20
       - J45.40
@@ -41,6 +85,28 @@ rules:
       - Pleuritic chest pain
       - Dyspnea and tachypnea
       - Crackles on lung auscultation
+    clinical_pearls:
+      - "Most common bacterial causes: Streptococcus pneumoniae (most common), Mycoplasma, Chlamydia, Haemophilus"
+      - "CURB-65 score predicts mortality: Confusion, Urea >20, RR ≥30, BP <90/60, age ≥65 (score ≥2 = consider admission)"
+      - "Atypical features: Gradual onset, dry cough, extrapulmonary symptoms (Mycoplasma, Legionella)"
+      - "Healthcare-associated pneumonia (HCAP): Within 90 days hospitalization - covers MRSA/Pseudomonas"
+      - "Blood cultures positive in only 5-14% (send before antibiotics but don't delay treatment)"
+    management:
+      - "Outpatient healthy: Amoxicillin 1g TID x 5 days OR doxycycline 100mg BID x 5 days"
+      - "Outpatient with comorbidities: Amoxicillin-clavulanate 875/125mg BID + azithromycin 500mg daily x 5 days"
+      - "Inpatient non-ICU: Ceftriaxone 1g daily + azithromycin 500mg daily"
+      - "ICU: Ceftriaxone 2g daily + azithromycin 500mg daily (or levofloxacin 750mg daily)"
+      - "Add vancomycin or linezolid if MRSA suspected (influenza, IV drug use, recent hospitalization)"
+    tests:
+      - "Chest X-ray (lobar consolidation, interstitial infiltrates)"
+      - "Sputum gram stain and culture if hospitalized"
+      - "Blood cultures x 2 if hospitalized (before antibiotics)"
+      - "Procalcitonin or CRP if diagnosis uncertain"
+      - "Consider: Legionella urinary antigen, pneumococcal urinary antigen"
+    referrals:
+      - "Admission if CURB-65 ≥2, hypoxia (SpO2 <90%), inability to tolerate PO, or social concerns"
+      - "ICU if CURB-65 ≥3, mechanical ventilation needed, or septic shock"
+      - "Pulmonology if slow resolution or concern for post-obstructive pneumonia (lung cancer)"
     icd10:
       - J18.9
       - J15.9
@@ -57,6 +123,28 @@ rules:
       - Hemoptysis
       - Lower extremity swelling or pain
       - Risk factors (surgery, immobility, malignancy)
+    clinical_pearls:
+      - "Wells score guides testing: Low risk + negative D-dimer rules out PE (high NPV)"
+      - "Massive PE: Hypotension (SBP <90) or cardiac arrest - consider thrombolytics"
+      - "Submassive PE: Normotensive but RV strain on echo/CT - higher mortality, controversial thrombolytics"
+      - "CTPA gold standard (sensitivity 83%, specificity 96%), V/Q scan if contrast contraindicated"
+      - "Unprovoked PE: Anticoagulate ≥3 months, consider indefinite if low bleed risk"
+    management:
+      - "Hemodynamically stable: Apixaban 10mg BID x 7 days then 5mg BID OR rivaroxaban 15mg BID x 21 days then 20mg daily"
+      - "Massive PE (shock): Thrombolytics - tPA 100mg IV over 2 hours, then anticoagulation"
+      - "Contraindication to anticoagulation: IVC filter placement"
+      - "Duration: 3 months if provoked, 3-6 months if unprovoked (consider indefinite), indefinite if recurrent"
+      - "Reduce dose after initial treatment (e.g., apixaban 2.5mg BID for extended therapy)"
+    tests:
+      - "CTPA (CT pulmonary angiography) - diagnostic test of choice"
+      - "D-dimer if low-moderate pretest probability (Wells <4), negative rules out"
+      - "Lower extremity Doppler ultrasound (if positive, can treat as PE without CTPA)"
+      - "ECG (most common: sinus tachycardia, may see S1Q3T3 pattern)"
+      - "Troponin, BNP (elevated suggests RV strain, worse prognosis)"
+    referrals:
+      - "ICU if massive PE (hypotension, cardiac arrest)"
+      - "Cardiology or interventional radiology if considering catheter-directed thrombolysis"
+      - "Hematology if unprovoked PE or recurrent VTE (thrombophilia workup)"
     icd10:
       - I26.99
       - I26.90
@@ -72,6 +160,27 @@ rules:
       - Decreased breath sounds on affected side
       - Hyperresonance to percussion
       - Subcutaneous emphysema
+    clinical_pearls:
+      - "Primary spontaneous: Tall, thin, young males (ruptured apical bleb), no underlying lung disease"
+      - "Secondary spontaneous: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia in HIV)"
+      - "Tension pneumothorax: Hypotension, JVD, tracheal deviation - immediate needle decompression (2nd ICS MCL)"
+      - "Small (<2 cm apex to cupola) + stable: Observe, 100% oxygen accelerates reabsorption 4x"
+      - "Recurrence risk 20-30% after first episode, 50% after second - consider pleurodesis"
+    management:
+      - "Tension pneumothorax: Immediate needle decompression (14-16G, 2nd ICS midclavicular line), then chest tube"
+      - "Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal suction (-20 cm H2O)"
+      - "Small (<2 cm) primary + stable: Observation, 100% oxygen, repeat CXR in 6 hours"
+      - "Alternative for primary: Aspiration with small-bore catheter (14-16F)"
+      - "If persistent air leak >5 days: VATS with pleurodesis or bleb resection"
+    tests:
+      - "Chest X-ray PA upright (visceral pleural line, absence of lung markings)"
+      - "Expiratory CXR increases sensitivity (not routinely needed)"
+      - "CT chest if small or uncertain diagnosis"
+      - "ABG if respiratory distress or underlying lung disease"
+    referrals:
+      - "Cardiothoracic surgery STAT if tension pneumothorax"
+      - "CT surgery for persistent air leak (>5 days), recurrent, or bilateral"
+      - "Pulmonology for recurrent pneumothorax (pleurodesis consideration)"
     icd10:
       - J93.0
       - J93.11
@@ -87,6 +196,28 @@ rules:
       - Decreased breath sounds at lung base
       - Dullness to percussion
       - Reduced tactile fremitus
+    clinical_pearls:
+      - "Transudate (low protein): CHF most common, also cirrhosis, nephrotic syndrome"
+      - "Exudate (high protein): Pneumonia (parapneumonic), malignancy, TB, PE"
+      - "Light's criteria: Exudate if pleural protein/serum >0.5, pleural LDH/serum >0.6, OR pleural LDH >2/3 ULN"
+      - "Complicated parapneumonic (pH <7.2, glucose <60, LDH >1000): Needs drainage"
+      - "Empyema (pus): Chest tube drainage required, often needs VATS decortication"
+      - "Malignant effusion: Exudative, often bloody, positive cytology (50-60% first tap)"
+    management:
+      - "Diagnostic thoracentesis if effusion >10mm on lateral decubitus CXR"
+      - "Transudate: Treat underlying cause (diuretics for CHF, manage cirrhosis)"
+      - "Uncomplicated parapneumonic: Antibiotics alone may suffice"
+      - "Complicated parapneumonic or empyema: Chest tube drainage 24-28F, consider fibrinolytics (tPA + DNase)"
+      - "Recurrent malignant: Pleurodesis (talc) or tunneled pleural catheter (PleurX)"
+    tests:
+      - "Chest X-ray PA/lateral (blunts costophrenic angle if >200mL), lateral decubitus (layers if free-flowing)"
+      - "Ultrasound (detects 5-50mL, guides thoracentesis, identifies septations)"
+      - "Thoracentesis: Cell count/diff, protein, LDH, glucose, pH, gram stain, culture, cytology"
+      - "Serum protein and LDH (for Light's criteria)"
+    referrals:
+      - "Pulmonology for thoracentesis or complex/recurrent effusions"
+      - "Cardiothoracic surgery if empyema, loculated, or need VATS/decortication"
+      - "Oncology if malignant effusion"
     icd10:
       - J90
       - J91.8
@@ -101,6 +232,29 @@ rules:
       - Inspiratory crackles (Velcro rales)
       - Digital clubbing
       - Restrictive pattern on PFTs
+    clinical_pearls:
+      - "Idiopathic pulmonary fibrosis (IPF) most common ILD, median survival 3-5 years"
+      - "UIP pattern on HRCT: Honeycombing, subpleural/basal predominance, traction bronchiectasis"
+      - "Avoid corticosteroids in IPF (ineffective and increase mortality)"
+      - "Antifibrotics (pirfenidone, nintedanib) slow decline by ~50% in IPF"
+      - "Connective tissue disease-ILD: Scleroderma, RA, polymyositis - responds to immunosuppression"
+      - "Hypersensitivity pneumonitis: Exposure history (birds, mold) - remove exposure"
+    management:
+      - "IPF: Antifibrotics - pirfenidone 801mg TID or nintedanib 150mg BID (slow progression)"
+      - "CTD-ILD: Immunosuppression - mycophenolate 1000-1500mg BID or cyclophosphamide"
+      - "Oxygen therapy if SpO2 <88% at rest or with exertion"
+      - "Pulmonary rehabilitation (improves quality of life, 6MWD)"
+      - "Lung transplant referral if FVC <70% predicted or rapid decline (>10% FVC/year)"
+    tests:
+      - "High-resolution CT chest (HRCT) - diagnostic for UIP pattern"
+      - "PFTs: Restrictive (low FVC, FEV1/FVC normal or high), reduced DLCO"
+      - "6-minute walk test with oxygen desaturation"
+      - "CTD workup: ANA, RF, anti-CCP, anti-Scl-70, Jo-1, myositis panel"
+      - "Lung biopsy (surgical or transbronchial) if diagnosis uncertain after HRCT"
+    referrals:
+      - "Pulmonology for all suspected ILD (HRCT interpretation, treatment)"
+      - "Rheumatology if CTD-ILD suspected"
+      - "Lung transplant center if FVC <70% or progressive despite treatment"
     icd10:
       - J84.9
       - J84.10
@@ -116,6 +270,28 @@ rules:
       - Chest discomfort
       - Low-grade fever or absent fever
       - Wheezing or rhonchi
+    clinical_pearls:
+      - "Viral in 90-95% (rhinovirus, coronavirus, influenza, RSV) - antibiotics NOT indicated"
+      - "Diagnosis clinical: Cough <3 weeks without pneumonia on exam or CXR"
+      - "Antibiotics do NOT reduce cough duration (Cochrane review) - only use if pneumonia suspected"
+      - "Post-viral cough can persist 3-8 weeks after infection resolves"
+      - "Differentiate from pneumonia: No focal consolidation, tachypnea, hypoxia"
+      - "Pertussis (whooping cough): Paroxysmal cough with inspiratory whoop, test if >2 weeks"
+    management:
+      - "Supportive care: Hydration, rest, honey for cough (>1 year old)"
+      - "Symptomatic relief: Dextromethorphan 10-20mg q4h PRN or benzonatate 100-200mg TID"
+      - "Short-acting bronchodilator (albuterol) if wheezing present"
+      - "Antibiotics NOT recommended (viral etiology)"
+      - "Oseltamivir 75mg BID x 5 days if influenza suspected and <48 hours from onset"
+    tests:
+      - "None routinely needed (clinical diagnosis)"
+      - "Chest X-ray only if: Vital sign abnormalities (RR >24, HR >100, fever >38°C), or exam suggests pneumonia"
+      - "Influenza PCR if flu season and within 48 hours of onset (guides oseltamivir use)"
+      - "Pertussis PCR if cough >2 weeks or paroxysmal"
+    referrals:
+      - "No referral needed for uncomplicated acute bronchitis"
+      - "Follow-up if cough persists >3 weeks (rule out pneumonia, pertussis, asthma, post-nasal drip)"
+      - "Pulmonology if concern for underlying COPD or asthma"
     icd10:
       - J20.9
       - J20.8
@@ -132,6 +308,30 @@ rules:
       - Dyspnea
       - Hoarseness
       - Smoking history
+    clinical_pearls:
+      - "Most common cancer death worldwide, 85% associated with smoking"
+      - "Non-small cell (NSCLC) 85%: Adenocarcinoma (most common, peripheral), squamous (central), large cell"
+      - "Small cell (SCLC) 15%: Aggressive, central, paraneoplastic syndromes (SIADH, Cushing), chemotherapy-sensitive"
+      - "Screen high-risk: Age 50-80, 20 pack-year smoking, current or quit <15 years - annual low-dose CT"
+      - "Pancoast tumor: Apical mass with Horner syndrome (ptosis, miosis, anhidrosis) and shoulder pain"
+      - "SVC syndrome: Facial swelling, venous distension - often SCLC or lymphoma"
+    management:
+      - "NSCLC: Surgery if resectable (lobectomy/pneumonectomy), stereotactic radiation if unresectable"
+      - "NSCLC advanced: Systemic therapy (platinum doublet, immunotherapy, targeted therapy if EGFR/ALK mutation)"
+      - "SCLC limited: Chemotherapy (cisplatin + etoposide) + radiation"
+      - "SCLC extensive: Chemotherapy + immunotherapy (atezolizumab)"
+      - "Supportive: Pain control, palliative radiation, smoking cessation"
+    tests:
+      - "CT chest with contrast (assess size, location, lymph nodes, metastases)"
+      - "PET-CT (staging, assess for distant metastases)"
+      - "Tissue diagnosis: Bronchoscopy with biopsy, CT-guided needle biopsy, or surgical biopsy"
+      - "Molecular testing: EGFR, ALK, ROS1, PD-L1 (guides targeted/immunotherapy)"
+      - "Brain MRI (staging, rule out CNS metastases)"
+    referrals:
+      - "Pulmonology for bronchoscopy and tissue diagnosis"
+      - "Thoracic oncology for treatment planning (multidisciplinary tumor board)"
+      - "Cardiothoracic surgery if potentially resectable"
+      - "Palliative care early for symptom management and goals of care"
     icd10:
       - C34.90
       - C34.91
@@ -147,6 +347,29 @@ rules:
       - Night sweats
       - Fever and weight loss
       - Exposure history or high-risk population
+    clinical_pearls:
+      - "Latent TB (LTBI): Positive test, no symptoms, not contagious - treat to prevent active disease"
+      - "Active pulmonary TB: Upper lobe cavitary lesions, AFB smear positive, contagious"
+      - "HIV patients: Atypical CXR (lower lobes, miliary), higher risk dissemination"
+      - "RIPE therapy x 2 months (intensive), then rifampin + isoniazid x 4 months (continuation) = 6 months total"
+      - "Directly observed therapy (DOT) improves adherence and reduces resistance"
+      - "Drug resistance: MDR-TB (resistant to rifampin + isoniazid), XDR-TB (+ fluoroquinolone + injectable)"
+    management:
+      - "Active TB: RIPE therapy - Rifampin 600mg, Isoniazid 300mg, Pyrazinamide 1500mg, Ethambutol 1200mg daily x 2 months"
+      - "Continuation phase: Rifampin 600mg + isoniazid 300mg daily x 4 months (total 6 months)"
+      - "Add pyridoxine (vitamin B6) 25-50mg daily to prevent isoniazid neuropathy"
+      - "Latent TB: Isoniazid 300mg daily x 9 months OR rifampin 600mg daily x 4 months"
+      - "Respiratory isolation until 3 negative sputum AFB smears (if hospitalized)"
+    tests:
+      - "Sputum AFB smear x 3 (quick, low sensitivity), culture (gold standard, takes 6-8 weeks)"
+      - "GeneXpert MTB/RIF (PCR, rapid, detects rifampin resistance in 2 hours)"
+      - "Chest X-ray: Upper lobe cavitary lesions, hilar lymphadenopathy, miliary pattern"
+      - "TST (tuberculin skin test) or IGRA (interferon-gamma release assay) - screen for LTBI"
+      - "Baseline: LFTs, creatinine, visual acuity (ethambutol), HIV test"
+    referrals:
+      - "Public health department (reportable disease, contact tracing, DOT)"
+      - "Infectious disease for all active TB (treatment monitoring, drug resistance)"
+      - "Pulmonology for bronchoscopy if unable to produce sputum"
     icd10:
       - A15.0
       - A15.9
@@ -162,6 +385,31 @@ rules:
       - Chest discomfort
       - Bilateral hilar lymphadenopathy on imaging
       - Systemic symptoms (fatigue, weight loss)
+    clinical_pearls:
+      - "Multisystem granulomatous disease, lungs involved in 90%, also skin, eyes, heart, CNS"
+      - "Bilateral hilar lymphadenopathy + erythema nodosum + arthritis = Löfgren syndrome (acute, good prognosis)"
+      - "Diagnosis: Compatible clinical/radiologic + non-caseating granulomas on biopsy + exclusion of other causes"
+      - "Stages: I (hilar LAD only), II (LAD + infiltrates), III (infiltrates only), IV (fibrosis)"
+      - "50% resolve spontaneously without treatment (especially Stage I and Löfgren)"
+      - "Cardiac sarcoid: Arrhythmias, heart block - needs PET, cardiac MRI, EP study, may need ICD"
+    management:
+      - "Asymptomatic Stage I: Observation (50% spontaneous resolution)"
+      - "Symptomatic pulmonary: Prednisone 20-40mg daily x 1-2 months, then taper over 6-12 months"
+      - "Steroid-sparing agents if relapse or prolonged treatment: Methotrexate 10-15mg weekly or azathioprine"
+      - "Cardiac sarcoid: High-dose steroids (prednisone 40-60mg), ICD if high-risk arrhythmias"
+      - "Neurosarcoidosis: High-dose steroids + immunosuppression"
+    tests:
+      - "Chest X-ray: Bilateral hilar lymphadenopathy (Stage I-II), reticulonodular infiltrates"
+      - "CT chest: Perilymphatic nodules along bronchovascular bundles"
+      - "Tissue biopsy: Transbronchial biopsy (EBUS-guided if mediastinal nodes), or skin/lymph node if accessible"
+      - "PFTs: Restrictive or obstructive, reduced DLCO"
+      - "Labs: ACE level (elevated 60%, not specific), elevated calcium (10%), lymphopenia"
+      - "Ophthalmology exam (uveitis in 25%), ECG (arrhythmias, heart block)"
+    referrals:
+      - "Pulmonology for diagnosis (bronchoscopy, biopsy) and treatment"
+      - "Cardiology if cardiac symptoms (palpitations, syncope) - needs PET, cardiac MRI, EP study"
+      - "Ophthalmology for uveitis screening"
+      - "Neurology if CNS involvement (cranial neuropathy, seizures)"
     icd10:
       - D86.0
       - D86.9
@@ -177,6 +425,27 @@ rules:
       - Morning headaches
       - Obesity
       - Hypertension
+    clinical_pearls:
+      - "Apnea-Hypopnea Index (AHI): Mild 5-15, Moderate 15-30, Severe >30 events/hour"
+      - "STOP-BANG score predicts OSA risk: Snoring, Tired, Observed apnea, Pressure (HTN), BMI >35, Age >50, Neck >40cm, Gender (male)"
+      - "CPAP reduces cardiovascular events (stroke, MI), improves daytime sleepiness"
+      - "Central sleep apnea: Brain doesn't signal breathing (heart failure, opioids) - different treatment"
+      - "Untreated OSA increases risk: HTN (50%), atrial fibrillation, stroke, MI, diabetes"
+    management:
+      - "CPAP (continuous positive airway pressure) first-line therapy - use >4 hours/night for benefit"
+      - "Weight loss (10% reduces AHI by 25%), avoid alcohol/sedatives before bed"
+      - "Positional therapy if supine-predominant OSA (sleep on side)"
+      - "Oral appliance (mandibular advancement device) if mild-moderate OSA or CPAP intolerant"
+      - "Surgery (uvulopalatopharyngoplasty, septoplasty) if anatomic obstruction or failed medical therapy"
+    tests:
+      - "Polysomnography (in-lab sleep study): Gold standard, measures AHI, oxygen desaturation, sleep stages"
+      - "Home sleep apnea test (HSAT): Limited channels, lower cost, for high pretest probability"
+      - "Epworth Sleepiness Scale (ESS): Subjective daytime sleepiness assessment"
+      - "ECG, echocardiogram if concern for arrhythmia or pulmonary hypertension"
+    referrals:
+      - "Sleep medicine for polysomnography and CPAP titration"
+      - "ENT if anatomic obstruction (enlarged tonsils, severe septal deviation) or surgical candidate"
+      - "Bariatric surgery consultation if BMI >40 and weight loss unsuccessful"
     icd10:
       - G47.33
     snomed:
