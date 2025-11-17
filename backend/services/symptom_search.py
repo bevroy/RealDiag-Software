@@ -190,10 +190,10 @@ async def search_by_symptoms(request: SymptomSearchRequest):
                     snomed=rule.get('snomed', []),
                     sensitivity=rule.get('sensitivity'),
                     specificity=rule.get('specificity'),
-                    clinical_pearls=rule.get('clinical_pearls', []) if 'clinical_pearls' in rule else None,
-                    management=rule.get('management', []) if 'management' in rule else None,
-                    tests=rule.get('tests', []) if 'tests' in rule else None,
-                    referrals=rule.get('referrals', []) if 'referrals' in rule else None
+                    clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
+                    management=rule.get('management'),
+                    tests=rule.get('tests'),
+                    referrals=rule.get('referrals')
                 )
                 
                 results.append(diagnosis_match)
