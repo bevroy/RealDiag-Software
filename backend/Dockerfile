@@ -5,13 +5,15 @@ COPY backend /app/backend
 # Copy shared top-level modules/config used by the backend
 COPY config.py /app/config.py
 COPY diagnostics /app/diagnostics
+# Copy requirements file
+COPY requirements.txt /app/requirements.txt
 # Install runtime dependencies directly instead of building the backend as a distribution.
 # Building the package fails in a flat layout with multiple top-level packages. The source
 # is already copied into /app/backend so Python can import it directly at runtime.
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends curl \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& pip install --no-cache-dir fastapi pyyaml uvicorn[standard] prometheus_client jinja2 gunicorn
+	&& pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 	# Use gunicorn with the Uvicorn worker for production. Wrap in a shell so ${PORT} is expanded at runtime
 	# (Render provides $PORT). Fall back to 8000 when not set. Log to stdout/stderr so platform logs capture output.
