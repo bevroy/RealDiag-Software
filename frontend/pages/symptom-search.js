@@ -265,12 +265,20 @@ export default function SymptomSearch() {
   // Get limited results for display
   const getDisplayedResults = () => {
     const sorted = getSortedResults();
-    return sorted.slice(0, displayLimit);
+    const limited = sorted.slice(0, displayLimit);
+    console.log('🔍 Display Debug:', {
+      totalResults: sorted.length,
+      displayLimit: displayLimit,
+      showing: limited.length
+    });
+    return limited;
   };
 
   // Check if there are more results to show
   const hasMoreResults = () => {
-    return getSortedResults().length > displayLimit;
+    const hasMore = getSortedResults().length > displayLimit;
+    console.log('🔍 hasMoreResults:', hasMore, 'total:', getSortedResults().length, 'limit:', displayLimit);
+    return hasMore;
   };
 
   // Show more results
