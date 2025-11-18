@@ -1,11 +1,9 @@
 [build]
-  command = "cd frontend && npm install && npm run build"
+  command = "echo 'Using pre-built files from git' && ls -la frontend/out/_next/static/chunks/pages/ | grep symptom"
   publish = "frontend/out"
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--legacy-peer-deps"
-  NEXT_TELEMETRY_DISABLED = "1"
 
 # Cache configuration
 [[headers]]
