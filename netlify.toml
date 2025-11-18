@@ -1,8 +1,8 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = ".next"
-  # Force fresh build - updated 2025-11-17
+  publish = "out"
+  # Force fresh build - updated 2025-11-18
   ignore = "git diff --quiet HEAD^ HEAD ./"
 
 [build.environment]
