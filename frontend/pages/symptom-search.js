@@ -9,6 +9,12 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
+import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
+import { assessUrgency, getUrgencyBadge } from '../utils/timeSensitiveAlerts';
+import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor, getSeverityIcon } from '../utils/drugInteractions';
+import { analyzePathways } from '../utils/costEffectiveness';
+import { compareDifferentialDiagnoses, findDistinguishingFeatures } from '../utils/differentialComparison';
+import { availableCalculators } from '../utils/pretestCalculators';
 
 export default function SymptomSearch() {
   // Use runtime config for API base, with fallback to env var or Render URL
@@ -42,6 +48,15 @@ export default function SymptomSearch() {
   const [displayLimit, setDisplayLimit] = useState(5); // New: Show only 5 results initially
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  // Advanced features state
+  const [expandedRedFlags, setExpandedRedFlags] = useState({});
+  const [expandedUrgency, setExpandedUrgency] = useState({});
+  const [expandedDrugInteractions, setExpandedDrugInteractions] = useState({});
+  const [expandedCostAnalysis, setExpandedCostAnalysis] = useState({});
+  const [expandedComparison, setExpandedComparison] = useState({});
+  const [selectedCalculator, setSelectedCalculator] = useState(null);
+  const [calculatorResults, setCalculatorResults] = useState({});
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -1029,6 +1044,111 @@ export default function SymptomSearch() {
           )}
         </div>
 
+        {/* Clinical Decision Calculators */}
+        {hasSearched && results.length > 0 && (
+          <div style={{
+            background: 'white',
+            padding: '2rem',
+            borderRadius: '8px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+            marginBottom: '1.5rem'
+          }}>
+            <h2 style={{ 
+              margin: '0 0 1rem', 
+              color: '#1a202c', 
+              fontSize: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              🧮 Clinical Decision Calculators
+            </h2>
+            <p style={{ marginBottom: '1rem', color: '#6b7280', fontSize: '0.9rem' }}>
+              Use validated clinical scores to support your diagnostic decisions
+            </p>
+            
+            <div style={{ 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+              gap: '1rem'
+            }}>
+              {availableCalculators.map((calc) => (
+                <button
+                  key={calc.id}
+                  onClick={() => setSelectedCalculator(calc.id)}
+                  style={{
+                    padding: '1rem',
+                    background: selectedCalculator === calc.id ? '#dbeafe' : '#f9fafb',
+                    border: selectedCalculator === calc.id ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <div style={{ fontWeight: '700', marginBottom: '0.5rem', color: '#1a202c' }}>
+                    {calc.name}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                    {calc.category}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', color: '#374151' }}>
+                    {calc.description}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {selectedCalculator && (
+              <div style={{ 
+                marginTop: '1.5rem',
+                padding: '1.5rem',
+                background: '#f0f9ff',
+                borderRadius: '8px',
+                border: '2px solid #3b82f6'
+              }}>
+                <div style={{ 
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '1rem'
+                }}>
+                  <h3 style={{ margin: 0, fontSize: '1.1rem' }}>
+                    {availableCalculators.find(c => c.id === selectedCalculator)?.name}
+                  </h3>
+                  <button
+                    onClick={() => setSelectedCalculator(null)}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: '#fee2e2',
+                      color: '#991b1b',
+                      border: 'none',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      fontWeight: '600',
+                      fontSize: '0.85rem'
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
+                <div style={{ 
+                  padding: '1rem',
+                  background: 'white',
+                  borderRadius: '6px',
+                  fontSize: '0.9rem',
+                  color: '#6b7280'
+                }}>
+                  <em>Calculator interface would go here - requires user input for specific criteria</em>
+                  <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
+                    Note: Full interactive calculators will be implemented in the next phase
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Results */}
         {hasSearched && (
           <div style={{
@@ -1435,6 +1555,358 @@ export default function SymptomSearch() {
                                 </ul>
                               </div>
                             )}
+
+                            {/* Advanced Clinical Decision Support Features */}
+                            
+                            {/* Red Flag Alerts */}
+                            {(() => {
+                              const redFlags = detectRedFlags(result.diagnosis);
+                              if (redFlags.length === 0) return null;
+                              
+                              return (
+                                <div style={{ 
+                                  marginBottom: '1.5rem',
+                                  border: `3px solid ${getSeverityStyle(redFlags[0].severity).border}`,
+                                  borderRadius: '8px',
+                                  overflow: 'hidden',
+                                  animation: redFlags[0].severity === 'critical' ? 'pulse 2s ease-in-out infinite' : 'none'
+                                }}>
+                                  <button
+                                    onClick={() => setExpandedRedFlags({...expandedRedFlags, [idx]: !expandedRedFlags[idx]})}
+                                    style={{
+                                      width: '100%',
+                                      padding: '1rem',
+                                      background: getSeverityStyle(redFlags[0].severity).bg,
+                                      color: getSeverityStyle(redFlags[0].severity).text,
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      fontWeight: '700',
+                                      fontSize: '0.95rem',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'space-between',
+                                      textAlign: 'left'
+                                    }}
+                                  >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                      {getSeverityStyle(redFlags[0].severity).icon} RED FLAG ALERT: {redFlags[0].alert}
+                                    </span>
+                                    <span>{expandedRedFlags[idx] ? '▼' : '▶'}</span>
+                                  </button>
+                                  
+                                  {expandedRedFlags[idx] && (
+                                    <div style={{ padding: '1rem', background: 'white' }}>
+                                      {redFlags.map((flag, flagIdx) => (
+                                        <div key={flagIdx} style={{ marginBottom: flagIdx < redFlags.length - 1 ? '1.5rem' : '0' }}>
+                                          <div style={{ marginBottom: '0.75rem' }}>
+                                            <strong style={{ color: '#dc2626' }}>⏱️ {formatTimeWindow(flag.timeWindow)}</strong>
+                                          </div>
+                                          <div style={{ marginBottom: '0.75rem' }}>
+                                            <strong>Outcome if Delayed:</strong> {flag.mortality}
+                                          </div>
+                                          <div>
+                                            <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Critical Actions:</strong>
+                                            <ol style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                                              {getActionList(flag).map((action, actionIdx) => (
+                                                <li key={actionIdx} style={{ marginBottom: '0.5rem', lineHeight: '1.5' }}>
+                                                  {action.action}
+                                                </li>
+                                              ))}
+                                            </ol>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
+
+                            {/* Time-Sensitive Urgency Alert */}
+                            {(() => {
+                              const urgencyInfo = assessUrgency(result.diagnosis);
+                              if (!urgencyInfo.hasTimeWindow) return null;
+                              
+                              const badge = getUrgencyBadge(urgencyInfo.urgency.level);
+                              
+                              return (
+                                <div style={{ 
+                                  marginBottom: '1.5rem',
+                                  border: `2px solid ${badge.color}`,
+                                  borderRadius: '8px',
+                                  overflow: 'hidden'
+                                }}>
+                                  <button
+                                    onClick={() => setExpandedUrgency({...expandedUrgency, [idx]: !expandedUrgency[idx]})}
+                                    style={{
+                                      width: '100%',
+                                      padding: '1rem',
+                                      background: badge.bgColor,
+                                      color: badge.color,
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      fontWeight: '700',
+                                      fontSize: '0.95rem',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'space-between',
+                                      textAlign: 'left'
+                                    }}
+                                  >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                      {badge.icon} URGENCY: {badge.label} - {urgencyInfo.urgency.timeWindow}
+                                    </span>
+                                    <span>{expandedUrgency[idx] ? '▼' : '▶'}</span>
+                                  </button>
+                                  
+                                  {expandedUrgency[idx] && (
+                                    <div style={{ padding: '1rem', background: 'white' }}>
+                                      <div style={{ marginBottom: '1rem' }}>
+                                        <strong>Time to Treatment:</strong> {urgencyInfo.timeToTreatment}
+                                      </div>
+                                      {urgencyInfo.outcomeWithDelay && (
+                                        <div style={{ marginBottom: '1rem' }}>
+                                          <strong>Outcome if Delayed:</strong> {urgencyInfo.outcomeWithDelay}
+                                        </div>
+                                      )}
+                                      {urgencyInfo.criticalActions && (
+                                        <div>
+                                          <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Critical Actions:</strong>
+                                          <ol style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                                            {urgencyInfo.criticalActions.map((action, actionIdx) => (
+                                              <li key={actionIdx} style={{ marginBottom: '0.5rem', lineHeight: '1.5' }}>
+                                                {action}
+                                              </li>
+                                            ))}
+                                          </ol>
+                                        </div>
+                                      )}
+                                      {urgencyInfo.milestones && (
+                                        <div style={{ marginTop: '1rem' }}>
+                                          <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Treatment Milestones:</strong>
+                                          <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
+                                            {urgencyInfo.milestones.map((milestone, mIdx) => (
+                                              <li key={mIdx} style={{ marginBottom: '0.5rem' }}>
+                                                <strong>{milestone.time}:</strong> {milestone.action}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
+
+                            {/* Drug Interactions Checker */}
+                            {result.management && result.management.length > 0 && (() => {
+                              const managementText = result.management.join(' ');
+                              const interactionAnalysis = analyzeManagementInteractions(managementText);
+                              
+                              if (!interactionAnalysis.hasInteractions) return null;
+                              
+                              return (
+                                <div style={{ 
+                                  marginBottom: '1.5rem',
+                                  border: interactionAnalysis.hasMajorInteractions ? '2px solid #dc2626' : '2px solid #f59e0b',
+                                  borderRadius: '8px',
+                                  overflow: 'hidden'
+                                }}>
+                                  <button
+                                    onClick={() => setExpandedDrugInteractions({...expandedDrugInteractions, [idx]: !expandedDrugInteractions[idx]})}
+                                    style={{
+                                      width: '100%',
+                                      padding: '1rem',
+                                      background: interactionAnalysis.hasMajorInteractions ? '#fee2e2' : '#fef3c7',
+                                      color: interactionAnalysis.hasMajorInteractions ? '#7f1d1d' : '#92400e',
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      fontWeight: '700',
+                                      fontSize: '0.95rem',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'space-between',
+                                      textAlign: 'left'
+                                    }}
+                                  >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                      💊 DRUG INTERACTIONS DETECTED ({interactionAnalysis.interactions.length})
+                                    </span>
+                                    <span>{expandedDrugInteractions[idx] ? '▼' : '▶'}</span>
+                                  </button>
+                                  
+                                  {expandedDrugInteractions[idx] && (
+                                    <div style={{ padding: '1rem', background: 'white' }}>
+                                      {interactionAnalysis.interactions.map((interaction, intIdx) => {
+                                        const severityColors = getDrugSeverityColor(interaction.severity);
+                                        return (
+                                          <div 
+                                            key={intIdx} 
+                                            style={{ 
+                                              marginBottom: intIdx < interactionAnalysis.interactions.length - 1 ? '1rem' : '0',
+                                              padding: '0.75rem',
+                                              background: severityColors.bg,
+                                              borderLeft: `4px solid ${severityColors.border}`,
+                                              borderRadius: '4px'
+                                            }}
+                                          >
+                                            <div style={{ marginBottom: '0.5rem' }}>
+                                              <strong style={{ textTransform: 'capitalize' }}>
+                                                {getSeverityIcon(interaction.severity)} {interaction.severity} Interaction
+                                              </strong>
+                                            </div>
+                                            <div style={{ marginBottom: '0.5rem' }}>
+                                              <strong>{interaction.drug1}</strong> + <strong>{interaction.drug2}</strong>
+                                            </div>
+                                            <div style={{ marginBottom: '0.5rem' }}>
+                                              <strong>Effect:</strong> {interaction.effect}
+                                            </div>
+                                            <div style={{ marginBottom: '0.5rem' }}>
+                                              <strong>Alternative:</strong> {interaction.alternative}
+                                            </div>
+                                            {interaction.monitoring && (
+                                              <div style={{ fontSize: '0.85rem', fontStyle: 'italic', color: '#6b7280' }}>
+                                                {interaction.monitoring}
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
+
+                            {/* Cost-Effectiveness Analysis */}
+                            {(() => {
+                              const pathwayAnalysis = analyzePathways(result.diagnosis);
+                              if (!pathwayAnalysis) return null;
+                              
+                              return (
+                                <div style={{ 
+                                  marginBottom: '1.5rem',
+                                  border: '2px solid #14b8a6',
+                                  borderRadius: '8px',
+                                  overflow: 'hidden'
+                                }}>
+                                  <button
+                                    onClick={() => setExpandedCostAnalysis({...expandedCostAnalysis, [idx]: !expandedCostAnalysis[idx]})}
+                                    style={{
+                                      width: '100%',
+                                      padding: '1rem',
+                                      background: '#ccfbf1',
+                                      color: '#134e4a',
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      fontWeight: '700',
+                                      fontSize: '0.95rem',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'space-between',
+                                      textAlign: 'left'
+                                    }}
+                                  >
+                                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                      💰 COST-EFFECTIVENESS ANALYSIS
+                                    </span>
+                                    <span>{expandedCostAnalysis[idx] ? '▼' : '▶'}</span>
+                                  </button>
+                                  
+                                  {expandedCostAnalysis[idx] && (
+                                    <div style={{ padding: '1rem', background: 'white' }}>
+                                      {/* Quick Recommendations */}
+                                      <div style={{ marginBottom: '1.5rem' }}>
+                                        <h5 style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', fontWeight: '700' }}>
+                                          Quick Recommendations:
+                                        </h5>
+                                        {pathwayAnalysis.recommendations.map((rec, recIdx) => (
+                                          <div key={recIdx} style={{ 
+                                            marginBottom: '0.75rem',
+                                            padding: '0.75rem',
+                                            background: '#f0fdfa',
+                                            borderRadius: '4px',
+                                            borderLeft: '3px solid #14b8a6'
+                                          }}>
+                                            <div style={{ fontWeight: '600', marginBottom: '0.25rem' }}>
+                                              {rec.title}: {rec.pathway}
+                                            </div>
+                                            <div style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                                              {rec.reason}
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+
+                                      {/* Pathway Comparison */}
+                                      <div>
+                                        <h5 style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', fontWeight: '700' }}>
+                                          Diagnostic Pathways:
+                                        </h5>
+                                        {pathwayAnalysis.pathways.map((pathway, pIdx) => (
+                                          <div key={pIdx} style={{ 
+                                            marginBottom: '1rem',
+                                            padding: '1rem',
+                                            border: '1px solid #d1d5db',
+                                            borderRadius: '6px'
+                                          }}>
+                                            <div style={{ 
+                                              display: 'flex', 
+                                              justifyContent: 'space-between',
+                                              alignItems: 'start',
+                                              marginBottom: '0.75rem'
+                                            }}>
+                                              <strong>{pathway.name}</strong>
+                                              <span style={{ 
+                                                padding: '0.25rem 0.75rem',
+                                                background: pathway === pathwayAnalysis.cheapest ? '#d1fae5' : 
+                                                           pathway === pathwayAnalysis.fastest ? '#dbeafe' : '#f3f4f6',
+                                                color: pathway === pathwayAnalysis.cheapest ? '#065f46' : 
+                                                       pathway === pathwayAnalysis.fastest ? '#1e40af' : '#374151',
+                                                borderRadius: '4px',
+                                                fontSize: '0.75rem',
+                                                fontWeight: '600'
+                                              }}>
+                                                {pathway === pathwayAnalysis.cheapest ? '💰 Cheapest' : 
+                                                 pathway === pathwayAnalysis.fastest ? '⚡ Fastest' : 
+                                                 pathway === pathwayAnalysis.mostEfficient ? '🎯 Most Efficient' : ''}
+                                              </span>
+                                            </div>
+                                            <div style={{ 
+                                              display: 'grid',
+                                              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                                              gap: '0.75rem',
+                                              marginBottom: '0.75rem',
+                                              fontSize: '0.85rem'
+                                            }}>
+                                              <div>
+                                                <strong>Cost:</strong> ${pathway.totalCost}
+                                              </div>
+                                              <div>
+                                                <strong>Time:</strong> {pathway.timeDescription}
+                                              </div>
+                                              <div>
+                                                <strong>Sensitivity:</strong> {pathway.sensitivity}%
+                                              </div>
+                                              <div>
+                                                <strong>Specificity:</strong> {pathway.specificity}%
+                                              </div>
+                                            </div>
+                                            <div style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                                              {pathway.notes}
+                                            </div>
+                                            <div style={{ fontSize: '0.8rem' }}>
+                                              <strong>Tests:</strong> {pathway.tests.join(', ')}
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
 
                             {/* All Presentations */}
                             <div style={{ marginBottom: '1.5rem' }}>
