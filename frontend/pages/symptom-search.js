@@ -15,6 +15,31 @@ import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor
 import { analyzePathways } from '../utils/costEffectiveness';
 import { compareDifferentialDiagnoses, findDistinguishingFeatures } from '../utils/differentialComparison';
 import { availableCalculators } from '../utils/pretestCalculators';
+import { 
+  downloadAllRules, 
+  getOfflineStats, 
+  isOnline, 
+  onConnectionChange,
+  requestBackgroundSync 
+} from '../utils/offlineManager';
+import {
+  isVoiceInputSupported,
+  createVoiceRecognition,
+  normalizeMedicalText,
+  detectVoiceCommand,
+  requestMicrophonePermission,
+  speak
+} from '../utils/voiceInput';
+import {
+  isScannerSupported,
+  createBarcodeDetector,
+  requestCameraPermission,
+  startCameraStream,
+  stopCameraStream,
+  startContinuousScanning,
+  parsePatientID,
+  validatePatientID
+} from '../utils/barcodeScanner';
 
 export default function SymptomSearch() {
   // Use runtime config for API base, with fallback to env var or Render URL
@@ -57,6 +82,22 @@ export default function SymptomSearch() {
   const [expandedComparison, setExpandedComparison] = useState({});
   const [selectedCalculator, setSelectedCalculator] = useState(null);
   const [calculatorResults, setCalculatorResults] = useState({});
+  
+  // Mobile features state
+  const [offlineStats, setOfflineStats] = useState(null);
+  const [isDownloadingRules, setIsDownloadingRules] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [connectionStatus, setConnectionStatus] = useState(true);
+  const [showOfflinePanel, setShowOfflinePanel] = useState(false);
+  const [voiceRecognition, setVoiceRecognition] = useState(null);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceTranscript, setVoiceTranscript] = useState('');
+  const [showVoicePanel, setShowVoicePanel] = useState(false);
+  const [barcodeDetector, setBarcodeDetector] = useState(null);
+  const [showScanner, setShowScanner] = useState(false);
+  const [scannerStream, setScannerStream] = useState(null);
+  const [scannedPatientId, setScannedPatientId] = useState(null);
+  const [showMobileFeatures, setShowMobileFeatures] = useState(false);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -84,6 +125,9 @@ export default function SymptomSearch() {
       if (token) {
         fetchUserProfile(token);
       }
+      
+      // Initialize mobile features
+      initializeMobileFeatures();
     }
   }, []);
 
@@ -304,6 +348,236 @@ export default function SymptomSearch() {
   // Show all results
   const showAllResults = () => {
     setDisplayLimit(results.length);
+  };
+
+  // Mobile features initialization
+  const initializeMobileFeatures = async () => {
+    // Check connection status
+    setConnectionStatus(isOnline());
+    onConnectionChange((online) => {
+      setConnectionStatus(online);
+      if (online) {
+        speak('Connection restored');
+        requestBackgroundSync('search-sync');
+        requestBackgroundSync('favorites-sync');
+      } else {
+        speak('You are now offline. Cached data is available.');
+      }
+    });
+
+    // Load offline stats
+    const stats = await getOfflineStats();
+    setOfflineStats(stats);
+
+    // Initialize voice recognition
+    if (isVoiceInputSupported()) {
+      const recognition = createVoiceRecognition({
+        continuous: false,
+        interimResults: true,
+        lang: 'en-US'
+      });
+      setVoiceRecognition(recognition);
+    }
+
+    // Initialize barcode detector
+    if (isScannerSupported()) {
+      const detector = await createBarcodeDetector(['qr_code', 'code_128', 'ean_13']);
+      setBarcodeDetector(detector);
+    }
+  };
+
+  // Download all rules for offline use
+  const handleDownloadRules = async () => {
+    if (isDownloadingRules) return;
+
+    setIsDownloadingRules(true);
+    setDownloadProgress(0);
+
+    try {
+      await downloadAllRules(apiBase, (progress) => {
+        setDownloadProgress(progress);
+      });
+
+      const stats = await getOfflineStats();
+      setOfflineStats(stats);
+
+      speak('Rules downloaded successfully');
+    } catch (error) {
+      console.error('Failed to download rules:', error);
+      speak('Failed to download rules');
+    } finally {
+      setIsDownloadingRules(false);
+      setDownloadProgress(0);
+    }
+  };
+
+  // Voice input handlers
+  const handleStartVoiceInput = async () => {
+    if (!voiceRecognition) {
+      speak('Voice input not supported');
+      return;
+    }
+
+    const permission = await requestMicrophonePermission();
+    if (!permission.granted) {
+      speak(permission.message);
+      return;
+    }
+
+    setIsListening(true);
+    setVoiceTranscript('');
+    setShowVoicePanel(true);
+
+    voiceRecognition.onstart = () => {
+      speak('Listening');
+    };
+
+    voiceRecognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map(result => result[0].transcript)
+        .join('');
+      
+      const normalized = normalizeMedicalText(transcript);
+      setVoiceTranscript(normalized);
+
+      if (event.results[event.results.length - 1].isFinal) {
+        const command = detectVoiceCommand(normalized);
+        
+        if (command) {
+          handleVoiceCommand(command, normalized);
+        } else {
+          // Add as symptom
+          const trimmed = normalized.trim();
+          if (trimmed && !symptoms.includes(trimmed)) {
+            setSymptoms([...symptoms, trimmed]);
+            speak('Symptom added');
+          }
+        }
+      }
+    };
+
+    voiceRecognition.onerror = (event) => {
+      console.error('Voice recognition error:', event.error);
+      setIsListening(false);
+      speak('Voice input error');
+    };
+
+    voiceRecognition.onend = () => {
+      setIsListening(false);
+    };
+
+    voiceRecognition.start();
+  };
+
+  const handleStopVoiceInput = () => {
+    if (voiceRecognition && isListening) {
+      voiceRecognition.stop();
+      setIsListening(false);
+    }
+  };
+
+  const handleVoiceCommand = (command, transcript) => {
+    switch (command.action) {
+      case 'add':
+        if (command.value && !symptoms.includes(command.value)) {
+          setSymptoms([...symptoms, command.value]);
+          speak('Symptom added');
+        }
+        break;
+      case 'search':
+        if (symptoms.length > 0) {
+          handleSearch();
+          speak('Searching');
+        } else {
+          speak('Please add symptoms first');
+        }
+        break;
+      case 'clear':
+        handleClearAll();
+        speak('Cleared');
+        break;
+      case 'help':
+        speak('You can say: add symptom, search, clear all');
+        break;
+    }
+  };
+
+  // Barcode scanner handlers
+  const handleStartScanner = async () => {
+    if (!barcodeDetector) {
+      speak('Barcode scanner not supported');
+      return;
+    }
+
+    const permission = await requestCameraPermission();
+    if (!permission.granted) {
+      speak(permission.message);
+      return;
+    }
+
+    setShowScanner(true);
+
+    // Wait for video element to be available
+    setTimeout(async () => {
+      const video = document.getElementById('scanner-video');
+      if (!video) return;
+
+      const result = await startCameraStream(video, { facingMode: 'environment' });
+      if (!result.success) {
+        speak(result.message);
+        setShowScanner(false);
+        return;
+      }
+
+      setScannerStream(result.stream);
+
+      // Start continuous scanning
+      const scanner = startContinuousScanning(barcodeDetector, video, (scanResult) => {
+        if (scanResult.success && scanResult.found) {
+          const barcode = scanResult.barcodes[0];
+          const parsed = parsePatientID(barcode.rawValue, barcode.format);
+          const validation = validatePatientID(parsed.patientId);
+
+          if (validation.valid) {
+            setScannedPatientId(validation.patientId);
+            speak('Patient ID scanned');
+            handleStopScanner();
+          } else {
+            speak(validation.error);
+          }
+        }
+      });
+
+      // Store scanner for cleanup
+      video.dataset.scanner = JSON.stringify(scanner);
+    }, 100);
+  };
+
+  const handleStopScanner = () => {
+    const video = document.getElementById('scanner-video');
+    if (video) {
+      stopCameraStream(video);
+      
+      // Stop continuous scanning
+      const scannerData = video.dataset.scanner;
+      if (scannerData) {
+        try {
+          const scanner = JSON.parse(scannerData);
+          if (scanner && scanner.stop) {
+            scanner.stop();
+          }
+        } catch (e) {
+          console.error('Failed to stop scanner:', e);
+        }
+      }
+    }
+
+    if (scannerStream) {
+      scannerStream.getTracks().forEach(track => track.stop());
+      setScannerStream(null);
+    }
+
+    setShowScanner(false);
   };
 
   // Reset display limit when new search
@@ -849,8 +1123,357 @@ export default function SymptomSearch() {
               >
                 Add
               </button>
+              {/* Voice Input Button */}
+              {typeof window !== 'undefined' && isVoiceInputSupported() && (
+                <button
+                  onClick={isListening ? handleStopVoiceInput : handleStartVoiceInput}
+                  style={{
+                    padding: '0.75rem',
+                    background: isListening ? '#ef4444' : '#8b5cf6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    minHeight: '44px',
+                    minWidth: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  title={isListening ? 'Stop listening' : 'Voice input'}
+                >
+                  {isListening ? '⏹️' : '🎤'}
+                </button>
+              )}
+              {/* Barcode Scanner Button */}
+              {typeof window !== 'undefined' && isScannerSupported() && (
+                <button
+                  onClick={handleStartScanner}
+                  style={{
+                    padding: '0.75rem',
+                    background: '#f59e0b',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    minHeight: '44px',
+                    minWidth: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  title="Scan patient ID"
+                >
+                  📷
+                </button>
+              )}
+              {/* Mobile Features Toggle */}
+              <button
+                onClick={() => setShowMobileFeatures(!showMobileFeatures)}
+                style={{
+                  padding: '0.75rem',
+                  background: '#06b6d4',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem',
+                  minHeight: '44px',
+                  minWidth: '44px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative'
+                }}
+                title="Mobile features"
+              >
+                📱
+                {!connectionStatus && (
+                  <span style={{
+                    position: 'absolute',
+                    top: '4px',
+                    right: '4px',
+                    width: '8px',
+                    height: '8px',
+                    background: '#ef4444',
+                    borderRadius: '50%',
+                    border: '2px solid white'
+                  }}></span>
+                )}
+              </button>
             </div>
           </div>
+
+          {/* Voice Transcript Panel */}
+          {showVoicePanel && voiceTranscript && (
+            <div style={{
+              marginBottom: '1rem',
+              padding: '1rem',
+              background: isListening ? '#fef3c7' : '#f0fdf4',
+              border: `2px solid ${isListening ? '#f59e0b' : '#10b981'}`,
+              borderRadius: '6px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                {isListening && (
+                  <span style={{ fontSize: '1.2rem' }}>🎤</span>
+                )}
+                <strong style={{ color: isListening ? '#92400e' : '#065f46' }}>
+                  {isListening ? 'Listening...' : 'Voice Input'}
+                </strong>
+              </div>
+              <p style={{ margin: '0', color: isListening ? '#78350f' : '#047857' }}>
+                {voiceTranscript}
+              </p>
+            </div>
+          )}
+
+          {/* Scanned Patient ID */}
+          {scannedPatientId && (
+            <div style={{
+              marginBottom: '1rem',
+              padding: '1rem',
+              background: '#ecfdf5',
+              border: '2px solid #10b981',
+              borderRadius: '6px'
+            }}>
+              <strong style={{ color: '#065f46' }}>Patient ID:</strong>
+              <span style={{ marginLeft: '0.5rem', fontSize: '1.1rem', fontWeight: '600', color: '#047857' }}>
+                {scannedPatientId}
+              </span>
+              <button
+                onClick={() => setScannedPatientId(null)}
+                style={{
+                  marginLeft: '1rem',
+                  padding: '0.25rem 0.75rem',
+                  background: '#ef4444',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem'
+                }}
+              >
+                Clear
+              </button>
+            </div>
+          )}
+
+          {/* Mobile Features Panel */}
+          {showMobileFeatures && (
+            <div style={{
+              marginBottom: '1.5rem',
+              padding: '1.5rem',
+              background: darkMode ? '#374151' : '#f9fafb',
+              borderRadius: '8px',
+              border: `2px solid ${connectionStatus ? '#10b981' : '#ef4444'}`
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: '1rem' 
+              }}>
+                <h3 style={{ margin: 0, color: getTextColor(), fontSize: '1.1rem', fontWeight: '600' }}>
+                  📱 Mobile Features
+                </h3>
+                <button
+                  onClick={() => setShowMobileFeatures(false)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: getTextColor(),
+                    cursor: 'pointer',
+                    fontSize: '1.5rem',
+                    padding: '0',
+                    lineHeight: '1'
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Connection Status */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem',
+                background: connectionStatus ? '#d1fae5' : '#fee2e2',
+                border: `1px solid ${connectionStatus ? '#10b981' : '#ef4444'}`,
+                borderRadius: '6px',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.2rem' }}>
+                  {connectionStatus ? '🟢' : '🔴'}
+                </span>
+                <strong style={{ color: connectionStatus ? '#065f46' : '#991b1b' }}>
+                  {connectionStatus ? 'Online' : 'Offline'}
+                </strong>
+              </div>
+
+              {/* Offline Storage Stats */}
+              {offlineStats && (
+                <div style={{
+                  padding: '1rem',
+                  background: darkMode ? '#4b5563' : 'white',
+                  borderRadius: '6px',
+                  marginBottom: '1rem'
+                }}>
+                  <h4 style={{ margin: '0 0 0.5rem', color: getTextColor(), fontSize: '0.95rem' }}>
+                    📊 Offline Storage
+                  </h4>
+                  <div style={{ fontSize: '0.85rem', color: getSecondaryTextColor(), lineHeight: '1.6' }}>
+                    <div>Rules: {offlineStats.rules.count}</div>
+                    <div>Searches: {offlineStats.searches.count}</div>
+                    <div>Favorites: {offlineStats.favorites.count}</div>
+                    {offlineStats.rules.byFamily && Object.keys(offlineStats.rules.byFamily).length > 0 && (
+                      <div style={{ marginTop: '0.5rem' }}>
+                        <strong>By Specialty:</strong>
+                        {Object.entries(offlineStats.rules.byFamily).slice(0, 5).map(([fam, count]) => (
+                          <div key={fam} style={{ marginLeft: '1rem' }}>
+                            {getFamilyLabel(fam)}: {count}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Download Rules Button */}
+              <button
+                onClick={handleDownloadRules}
+                disabled={isDownloadingRules || !connectionStatus}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  background: isDownloadingRules ? '#9ca3af' : 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: isDownloadingRules || !connectionStatus ? 'not-allowed' : 'pointer',
+                  fontWeight: '600',
+                  fontSize: '0.95rem',
+                  minHeight: '44px',
+                  marginBottom: '1rem'
+                }}
+              >
+                {isDownloadingRules ? `Downloading... ${Math.round(downloadProgress)}%` : '⬇️ Download All Rules'}
+              </button>
+
+              {/* Download Progress Bar */}
+              {isDownloadingRules && (
+                <div style={{
+                  width: '100%',
+                  height: '8px',
+                  background: darkMode ? '#4b5563' : '#e5e7eb',
+                  borderRadius: '4px',
+                  overflow: 'hidden',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{
+                    width: `${downloadProgress}%`,
+                    height: '100%',
+                    background: 'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              )}
+
+              {/* Feature Status */}
+              <div style={{ fontSize: '0.85rem', color: getSecondaryTextColor() }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span>{typeof window !== 'undefined' && isVoiceInputSupported() ? '✅' : '❌'}</span>
+                  <span>Voice Input</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span>{typeof window !== 'undefined' && isScannerSupported() ? '✅' : '❌'}</span>
+                  <span>Barcode Scanner</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>{offlineStats && offlineStats.rules.count > 0 ? '✅' : '❌'}</span>
+                  <span>Offline Data</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Barcode Scanner Modal */}
+          {showScanner && (
+            <div style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0,0,0,0.9)',
+              zIndex: 9999,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1rem'
+            }}>
+              <div style={{
+                width: '100%',
+                maxWidth: '600px',
+                background: '#1a202c',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                position: 'relative'
+              }}>
+                <button
+                  onClick={handleStopScanner}
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    background: '#ef4444',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '44px',
+                    height: '44px',
+                    cursor: 'pointer',
+                    fontSize: '1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10
+                  }}
+                >
+                  ×
+                </button>
+                
+                <h3 style={{ color: 'white', marginTop: 0, marginBottom: '1rem', textAlign: 'center' }}>
+                  📷 Scan Patient ID
+                </h3>
+                
+                <video
+                  id="scanner-video"
+                  autoPlay
+                  playsInline
+                  style={{
+                    width: '100%',
+                    borderRadius: '8px',
+                    background: '#000'
+                  }}
+                ></video>
+                
+                <p style={{ 
+                  color: '#9ca3af', 
+                  fontSize: '0.85rem', 
+                  textAlign: 'center',
+                  marginTop: '1rem',
+                  marginBottom: 0
+                }}>
+                  Position the barcode or QR code within the camera view
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Symptom Tags */}
           {symptoms.length > 0 && (
