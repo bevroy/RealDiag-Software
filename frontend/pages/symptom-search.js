@@ -1473,18 +1473,6 @@ export default function SymptomSearch() {
                       background: 'white',
                       transition: 'all 0.2s'
                     }}>
-                      <div style={{
-                        padding: '0.5rem 0.75rem',
-                        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                        color: 'white',
-                        borderRadius: '6px',
-                        fontWeight: '700',
-                        fontSize: '0.9rem',
-                        minWidth: '60px',
-                        textAlign: 'center'
-                      }}>
-                        {result.match_score.toFixed(1)}
-                      </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: '600', color: '#1a202c', marginBottom: '0.25rem' }}>
                           {result.label}

@@ -481,17 +481,6 @@ export default function Home() {
                           </span>
                         </div>
                       </div>
-                      <div style={{
-                        padding: '0.75rem 1.5rem',
-                        background: 'linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%)',
-                        color: '#0f766e',
-                        borderRadius: '8px',
-                        fontWeight: '700',
-                        fontSize: '1.1rem',
-                        border: '2px solid #5eead4'
-                      }}>
-                        {result.match_score.toFixed(1)} pts
-                      </div>
                     </div>
 
                     <div style={{ marginBottom: '1.25rem' }}>
