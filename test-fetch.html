@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test Fetch</title></head>
+<body>
+<h1>Testing API Fetch</h1>
+<button onclick="testFetch()">Test API</button>
+<pre id="result"></pre>
+<script>
+async function testFetch() {
+  const result = document.getElementById('result');
+  result.textContent = 'Testing...';
+  try {
+    const response = await fetch('https://realdiag-software.onrender.com/search/by-symptoms', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({symptoms: ['headache']})
+    });
+    const data = await response.json();
+    result.textContent = 'SUCCESS!\n' + JSON.stringify(data, null, 2).substring(0, 500);
+  } catch (error) {
+    result.textContent = 'ERROR: ' + error.message + '\n' + error.stack;
+  }
+}
+</script>
+</body>
+</html>

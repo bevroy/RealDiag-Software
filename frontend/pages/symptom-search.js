@@ -1197,21 +1197,31 @@ export default function SymptomSearch() {
                             >
                               ⭐ Favorite
                             </button>
-                            <div style={{
-                              padding: '0.75rem 1.25rem',
-                              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                              color: 'white',
-                              borderRadius: '8px',
-                              fontWeight: '700',
-                              fontSize: '1.1rem',
-                              boxShadow: '0 4px 6px rgba(16, 185, 129, 0.2)',
-                              textAlign: 'center',
-                              minWidth: '100px'
-                            }}>
-                              <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>MATCH</div>
-                              {result.match_score.toFixed(1)}
-                            </div>
                           </div>
+                          {/* Likelihood Score */}
+                          {(() => {
+                            const likelihood = calculateLikelihood(result);
+                            const confidenceLevel = getConfidenceLevel(likelihood);
+                            const confidenceColor = getConfidenceColor(likelihood);
+                            return likelihood ? (
+                              <div style={{
+                                padding: '0.75rem 1.25rem',
+                                background: `linear-gradient(135deg, ${confidenceColor} 0%, ${confidenceColor}dd 100%)`,
+                                color: 'white',
+                                borderRadius: '8px',
+                                fontWeight: '700',
+                                fontSize: '1.1rem',
+                                boxShadow: `0 4px 6px rgba(16, 185, 129, 0.2)`,
+                                textAlign: 'center',
+                                minWidth: '120px',
+                                border: `2px solid ${confidenceColor}`
+                              }}>
+                                <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>LIKELIHOOD</div>
+                                <div style={{ fontSize: '1.3rem' }}>{likelihood.toFixed(0)}%</div>
+                                <div style={{ fontSize: '0.65rem', opacity: 0.9, marginTop: '0.15rem' }}>{confidenceLevel}</div>
+                              </div>
+                            ) : null;
+                          })()}
                           {/* Test Characteristics */}
                           {(result.sensitivity || result.specificity) && (
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
