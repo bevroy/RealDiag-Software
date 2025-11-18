@@ -822,7 +822,7 @@ export default function SymptomSearch() {
                 onClick={handleAddSymptom}
                 style={{
                   padding: '0.75rem 1.5rem',
-                  background: '#3b82f6',
+                  background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '6px',
@@ -854,7 +854,7 @@ export default function SymptomSearch() {
                   alignItems: 'center',
                   gap: '0.5rem',
                   padding: '0.5rem 1rem',
-                  background: '#3b82f6',
+                  background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                   color: 'white',
                   borderRadius: '20px',
                   fontSize: '0.9rem'
@@ -987,7 +987,7 @@ export default function SymptomSearch() {
               style={{
                 flex: 1,
                 padding: '1rem',
-                background: symptoms.length === 0 || loading ? '#9ca3af' : '#10b981',
+                background: symptoms.length === 0 || loading ? '#9ca3af' : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',
@@ -1567,7 +1567,7 @@ export default function SymptomSearch() {
                     onClick={showMoreResults}
                     style={{
                       padding: '1rem 2rem',
-                      background: '#3b82f6',
+                      background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                       color: 'white',
                       border: 'none',
                       borderRadius: '8px',
@@ -1578,8 +1578,8 @@ export default function SymptomSearch() {
                       transition: 'all 0.2s',
                       minHeight: '48px'
                     }}
-                    onMouseEnter={(e) => e.target.style.background = '#2563eb'}
-                    onMouseLeave={(e) => e.target.style.background = '#3b82f6'}
+                    onMouseEnter={(e) => e.target.style.background = 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)'}
+                    onMouseLeave={(e) => e.target.style.background = 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)'}
                   >
                     📊 Show 5 More Results ({getSortedResults().length - displayLimit} remaining)
                   </button>
@@ -1588,8 +1588,8 @@ export default function SymptomSearch() {
                     style={{
                       padding: '1rem 2rem',
                       background: 'white',
-                      color: '#3b82f6',
-                      border: '2px solid #3b82f6',
+                      color: '#14b8a6',
+                      border: '2px solid #14b8a6',
                       borderRadius: '8px',
                       cursor: 'pointer',
                       fontSize: '1rem',
