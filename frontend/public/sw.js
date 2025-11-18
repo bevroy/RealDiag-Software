@@ -1,6 +1,6 @@
 // Service Worker for RealDiag PWA
-const CACHE_NAME = 'realdiag-v1';
-const RUNTIME_CACHE = 'realdiag-runtime';
+const CACHE_NAME = 'realdiag-v2-2025-11-18';
+const RUNTIME_CACHE = 'realdiag-runtime-v2';
 
 // Assets to cache on install
 const PRECACHE_URLS = [
