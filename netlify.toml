@@ -9,8 +9,8 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   NEXT_TELEMETRY_DISABLED = "1"
-  # Cache buster for comprehensive rule updates
-  BUILD_ID = "2025-11-17-comprehensive-rules"
+  # Force rebuild - display limit and likelihood fixes
+  BUILD_ID = "2025-11-18-display-fixes"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
