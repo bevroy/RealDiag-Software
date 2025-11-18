@@ -15,6 +15,13 @@ export default function SymptomSearch() {
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
   const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
   
+  // Debug logging
+  if (typeof window !== 'undefined') {
+    console.log('🔍 API Base URL:', apiBase);
+    console.log('🔍 Runtime Config:', runtimeConfig);
+    console.log('🔍 Process Env:', process.env.NEXT_PUBLIC_API_BASE);
+  }
+  
   const [symptomInput, setSymptomInput] = useState('');
   const [symptoms, setSymptoms] = useState([]);
   const [age, setAge] = useState('');
