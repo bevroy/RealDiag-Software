@@ -1,6 +1,6 @@
 [build]
   base = "frontend"
-  command = "npm run build"
+  command = "npm run build && ls -la out/_next/static/chunks/pages/ | grep symptom"
   publish = "out"
   # Force fresh build - updated 2025-11-18
   ignore = "git diff --quiet HEAD^ HEAD ./"
@@ -9,8 +9,8 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   NEXT_TELEMETRY_DISABLED = "1"
-  # Force rebuild - display limit and likelihood fixes
-  BUILD_ID = "2025-11-18-display-fixes"
+  # Force rebuild - static export with new bundles
+  BUILD_ID = "2025-11-18-static-export-v2"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
