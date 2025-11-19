@@ -96,12 +96,19 @@ export default function ReferencePage() {
         // Strict comparison with explicit type checking
         return r && r.familyId && String(r.familyId) === String(selectedFamily);
       });
+      
+      console.log(`Filtering for: ${selectedFamily}`);
+      console.log(`Matched ${rulesToFilter.length} rules`);
+      console.log(`First 5 rule IDs:`, rulesToFilter.slice(0, 5).map(r => r.id));
     }
     
     // Then filter by search query
-    if (!q) return rulesToFilter;
+    if (!q) {
+      console.log(`No search query, returning ${rulesToFilter.length} rules`);
+      return rulesToFilter;
+    }
 
-    return (rulesToFilter || []).filter((r) => {
+    const searchFiltered = (rulesToFilter || []).filter((r) => {
       const label = (r.label || "").toLowerCase();
       const id = (r.id || "").toLowerCase();
       const present = (r.presentations || []).join(" ").toLowerCase();
@@ -115,6 +122,9 @@ export default function ReferencePage() {
         snomed.includes(q)
       );
     });
+    
+    console.log(`Search query "${q}" filtered to ${searchFiltered.length} rules`);
+    return searchFiltered;
   }, [allRules, query, selectedFamily]);
 
   function toggleExpanded(id) {
