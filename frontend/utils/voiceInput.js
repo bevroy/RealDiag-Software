@@ -55,6 +55,10 @@ const medicalTerms = {
 
 // Clean and normalize medical terms
 export function normalizeMedicalText(text) {
+  if (!text || typeof text !== 'string') {
+    return '';
+  }
+  
   let normalized = text.toLowerCase().trim();
   
   // Replace common misrecognitions
@@ -83,6 +87,15 @@ const voiceCommands = {
 
 // Detect voice commands
 export function detectVoiceCommand(text) {
+  if (!text || typeof text !== 'string') {
+    return {
+      detected: false,
+      action: null,
+      command: null,
+      original: text
+    };
+  }
+  
   const normalized = text.toLowerCase().trim();
   
   for (const [command, action] of Object.entries(voiceCommands)) {

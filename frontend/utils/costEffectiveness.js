@@ -62,6 +62,7 @@ const calculatePathwayMetrics = (tests) => {
   const testDetails = [];
 
   tests.forEach(testName => {
+    if (!testName || typeof testName !== 'string') return;
     const test = testCosts[testName.toLowerCase()];
     if (test) {
       totalCost += test.cost;
@@ -267,6 +268,9 @@ export const diagnosticPathways = {
 
 // Analyze cost-effectiveness of pathways
 export const analyzePathways = (condition) => {
+  if (!condition || typeof condition !== 'string') {
+    return null;
+  }
   const conditionKey = condition.toLowerCase().replace(/\s+/g, '-');
   const pathwayData = diagnosticPathways[conditionKey];
   
@@ -365,6 +369,9 @@ export const comparePathways = (condition, pathway1Name, pathway2Name) => {
 
 // Get test information
 export const getTestInfo = (testName) => {
+  if (!testName || typeof testName !== 'string') {
+    return null;
+  }
   return testCosts[testName.toLowerCase()] || null;
 };
 

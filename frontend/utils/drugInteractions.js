@@ -147,8 +147,12 @@ const drugInteractions = {
 
 // Check interactions for a medication list
 export const checkDrugInteractions = (medications) => {
+  if (!Array.isArray(medications) || medications.length === 0) {
+    return [];
+  }
+  
   const interactions = [];
-  const medicationList = medications.map(m => m.toLowerCase());
+  const medicationList = medications.filter(m => m && typeof m === 'string').map(m => m.toLowerCase());
 
   medicationList.forEach((med, index) => {
     if (drugInteractions[med]) {
@@ -179,12 +183,18 @@ export const checkDrugInteractions = (medications) => {
 
 // Get interactions for a specific drug
 export const getDrugInfo = (medication) => {
+  if (!medication || typeof medication !== 'string') {
+    return null;
+  }
   const med = medication.toLowerCase();
   return drugInteractions[med] || null;
 };
 
 // Check if medication is in database
 export const hasDrugInfo = (medication) => {
+  if (!medication || typeof medication !== 'string') {
+    return false;
+  }
   return medication.toLowerCase() in drugInteractions;
 };
 

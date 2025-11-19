@@ -302,6 +302,14 @@ export const timeSensitiveConditions = {
 
 // Determine urgency level for a diagnosis
 export const assessUrgency = (diagnosis) => {
+  // Handle undefined, null, or non-string diagnosis
+  if (!diagnosis || typeof diagnosis !== 'string') {
+    return {
+      urgency: urgencyLevels.NON_URGENT,
+      hasTimeWindow: false
+    };
+  }
+  
   const diagnosisLower = diagnosis.toLowerCase();
   
   for (const [key, condition] of Object.entries(timeSensitiveConditions)) {
@@ -327,7 +335,19 @@ export const assessUrgency = (diagnosis) => {
 
 // Generate urgency report for multiple diagnoses
 export const generateUrgencyReport = (diagnoses) => {
-  const assessments = diagnoses.map(dx => ({
+  if (!Array.isArray(diagnoses) || diagnoses.length === 0) {
+    return {
+      assessments: [],
+      immediate: [],
+      emergent: [],
+      urgent: [],
+      highestUrgency: 'non-urgent',
+      needsImmediateAction: false,
+      timeCriticalCount: 0
+    };
+  }
+  
+  const assessments = diagnoses.filter(dx => dx).map(dx => ({
     diagnosis: dx.diagnosis || dx,
     ...assessUrgency(dx.diagnosis || dx)
   }));
