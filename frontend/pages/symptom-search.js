@@ -878,8 +878,8 @@ export default function SymptomSearch() {
             onClick={() => setShowPreferences(!showPreferences)}
             style={{
               padding: '0.5rem 1rem',
-              background: darkMode ? '#4b5563' : '#f3f4f6',
-              color: getTextColor(),
+              background: darkMode ? '#0d9488' : '#ccfbf1',
+              color: darkMode ? 'white' : '#0f766e',
               border: 'none',
               borderRadius: '6px',
               cursor: 'pointer',
@@ -1642,7 +1642,7 @@ export default function SymptomSearch() {
               onClick={handleClearAll}
               style={{
                 padding: '1rem 2rem',
-                background: '#ef4444',
+                background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',
