@@ -29,6 +29,8 @@ def get_endocrinology_rules() -> Dict[str, Any]:
   rules: List[Dict[str, Any]] = data.get("rules", [])
   return {
     "family": family,
+    "version": data.get("version", "1.0.0"),
+    "source": data.get("source", "Clinical Practice Guidelines"),
     "count": len(rules),
     "rules": rules,
   }
@@ -45,6 +47,8 @@ def get_rules_by_family(family: str) -> Dict[str, Any]:
   rules: List[Dict[str, Any]] = data.get("rules", [])
   return {
     "family": data.get("family", family),
+    "version": data.get("version", "1.0.0"),
+    "source": data.get("source", "Clinical Practice Guidelines"),
     "count": len(rules),
     "rules": rules,
   }

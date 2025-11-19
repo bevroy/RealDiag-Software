@@ -366,13 +366,13 @@ export default function ReferencePage() {
                 >
                   <div style={{ marginBottom: 4 }}>
                     <strong>SNOMED:</strong>{" "}
-                    {r.snomed && r.snomed.length > 0 ? (
+                    {r.snomed && Array.isArray(r.snomed) && r.snomed.length > 0 ? (
                       r.snomed.join(", ")
                     ) : (
                       <span style={{ color: "#999" }}>Not specified</span>
                     )}
                   </div>
-                  {r.citations && r.citations.length > 0 && (
+                  {r.citations && Array.isArray(r.citations) && r.citations.length > 0 && (
                     <div style={{ marginTop: 8 }}>
                       <strong>📚 Sources & References:</strong>
                       <ol style={{ fontSize: 12, marginTop: 4, paddingLeft: 18 }}>
@@ -382,7 +382,7 @@ export default function ReferencePage() {
                       </ol>
                     </div>
                   )}
-                  {(!r.citations || r.citations.length === 0) && (
+                  {(!r.citations || !Array.isArray(r.citations) || r.citations.length === 0) && (
                     <div style={{ marginTop: 8, fontSize: 11, color: "#666" }}>
                       <strong>Sources:</strong> Clinical guidelines and medical literature. See{" "}
                       <a href="/sources" style={{ color: "#667eea" }}>Medical Sources page</a> for complete references.
