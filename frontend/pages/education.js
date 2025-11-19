@@ -207,7 +207,7 @@ export default function EducationPage() {
       
       <style jsx>{`
         body {
-          background: linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%);
+          background: linear-gradient(135deg, #e0f2f1 0%, #fef9e7 100%); /* teal to light brown */
           min-height: 100vh;
         }
 
@@ -287,7 +287,7 @@ export default function EducationPage() {
         .education-header h1 {
           margin: 0;
           font-size: 1.75em;
-          color: #78350f;
+          color: #92400e; /* brown */
         }
 
         .home-button {
@@ -335,8 +335,8 @@ export default function EducationPage() {
         }
 
         .education-tabs button.tab-active {
-          color: #14b8a6;
-          border-bottom-color: #14b8a6;
+          color: #009688; /* teal */
+          border-bottom-color: #009688;
           font-weight: 600;
         }
 
@@ -465,7 +465,7 @@ export default function EducationPage() {
         <header className="education-header">
           <div className="header-content">
             <img src="/logo.png" alt="RealDiag Logo" />
-            <h1>📚 Medical Training Center</h1>
+            <h1>Medical Training Center</h1>
           </div>
           <a href="/" className="home-button">🏠 Home</a>
         </header>

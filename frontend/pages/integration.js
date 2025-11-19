@@ -172,9 +172,8 @@ export default function IntegrationPage() {
           gap: '16px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
             <h1 style={{ marginBottom: 0, color: '#78350f' }}>
-              🔌 EHR Integration & API Access
+              EHR Integration & API Access
             </h1>
           </div>
           <a href="/" style={{
@@ -292,7 +291,7 @@ export default function IntegrationPage() {
                     borderRadius: '12px',
                     border: '1px solid #e2e8f0'
                   }}>
-                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{feature.icon}</div>
+                    {/* Removed plug clip art/icon from header and feature grid */}
                     <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: '#333' }}>{feature.title}</h3>
                     <p style={{ margin: 0, fontSize: '0.9rem', color: '#666', lineHeight: '1.6' }}>{feature.desc}</p>
                   </div>
@@ -306,7 +305,8 @@ export default function IntegrationPage() {
                 borderLeft: '4px solid #f97316',
                 borderRadius: '8px'
               }}>
-                <h4 style={{ margin: '0 0 0.5rem', color: '#c2410c' }}>🎯 Quick Start</h4>
+                {/* Removed bullseye clip art/icon from Quick Start box */}
+                <h4 style={{ margin: '0 0 0.5rem', color: 'brown' }}>Quick Start</h4>
                 <ol style={{ margin: 0, paddingLeft: '1.5rem', color: '#9a3412', lineHeight: '1.8' }}>
                   <li>Create an API key using <code>/integration/api-keys</code></li>
                   <li>Include the key in request headers: <code>X-API-Key: your_key</code></li>

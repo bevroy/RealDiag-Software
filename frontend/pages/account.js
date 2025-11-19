@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { isAuthenticated as checkAuth, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
+import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
 
 export default function AccountPage() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function AccountPage() {
     setApiBase(base.replace(/\/$/, ''));
 
     // Check if already logged in (via HttpOnly cookie)
-    if (checkAuth()) {
+    if (isAuthenticated()) {
       fetchUserProfile();
     }
   }, []);
@@ -291,7 +291,7 @@ export default function AccountPage() {
             <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
             <div>
               <h1 style={{ marginBottom: 0, color: '#78350f' }}>
-                👤 My Account
+                My Account
               </h1>
               <p style={{ margin: '0.25rem 0 0', color: '#666', fontSize: '0.9rem' }}>
                 {isAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}

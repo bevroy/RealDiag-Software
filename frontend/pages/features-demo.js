@@ -302,10 +302,10 @@ export default function FeaturesDemo() {
           <h2 id="decision-heading">Task 3.3: Advanced Decision Support</h2>
           
           <div style={{ 
-            marginTop: '1rem', 
-            padding: '2rem', 
-            background: 'white', 
-            border: '2px solid #e5e7eb',
+            marginTop: '1rem',
+            padding: '2rem',
+            background: 'linear-gradient(135deg, #fbeee6 0%, #e7f5f3 100%)',
+            border: '2px solid #78350f',
             borderRadius: '8px'
           }}>
             <h3>🩺 Sample Diagnosis: {sampleResult.label}</h3>
@@ -376,7 +376,8 @@ export default function FeaturesDemo() {
                 padding: '1rem', 
                 background: '#fef9e7', 
                 borderLeft: '4px solid #f59e0b',
-                borderRadius: '4px'
+                borderRadius: '4px',
+                color: '#92400e' // brown
               }}>
                 <ol style={{ lineHeight: '2', paddingLeft: '1.5rem' }}>
                   {decisionTrace.map((step, i) => (
@@ -390,8 +391,8 @@ export default function FeaturesDemo() {
             <div style={{ 
               marginTop: '2rem', 
               padding: '1.5rem', 
-              background: 'linear-gradient(to right, #f3e8ff, #faf5ff)',
-              borderLeft: '4px solid #8b5cf6',
+              background: 'linear-gradient(to right, #e0f2f1, #fef9e7)', // teal to light brown
+              borderLeft: '4px solid #92400e', // brown
               borderRadius: '8px'
             }}>
               <h4 style={{ margin: '0 0 1rem', color: '#5b21b6' }}>
@@ -407,7 +408,7 @@ export default function FeaturesDemo() {
                     aria-label={`Toggle ${finding} finding`}
                     style={{
                       padding: '0.5rem 1rem',
-                      background: '#8b5cf6',
+                      background: '#009688', // teal
                       color: 'white',
                       border: 'none',
                       borderRadius: '20px',
@@ -423,10 +424,10 @@ export default function FeaturesDemo() {
               <div style={{ 
                 marginTop: '1rem', 
                 padding: '0.75rem', 
-                background: '#fef3c7',
+                background: '#e0f2f1', // teal
                 borderRadius: '6px',
                 fontSize: '0.875rem',
-                color: '#92400e'
+                color: '#92400e' // brown
               }}>
                 💡 <strong>Interactive Mode:</strong> In the main app, clicking these buttons toggles findings and recalculates likelihood in real-time!
               </div>
