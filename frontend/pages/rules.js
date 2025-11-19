@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useMemo, useState } from "react";
 
 const FAMILIES = [
@@ -39,15 +38,22 @@ export default function ReferencePage() {
             const res = await fetch(`${apiBase}/reference/${f.id}`);
             if (!res.ok) throw new Error(`Failed to load ${f.label}`);
             const data = await res.json();
-            return (data.rules || []).map(rule => ({
-              ...rule,
-              family: f.label,
-              familyId: f.id
-            }));
+            return (data.rules || [])
+              .filter(rule => rule && rule.id) // Filter out invalid rules
+              .map(rule => ({
+                ...rule,
+                family: f.label,
+                familyId: f.id,
+                // Ensure arrays are actually arrays
+                presentations: Array.isArray(rule.presentations) ? rule.presentations : [],
+                icd10: Array.isArray(rule.icd10) ? rule.icd10 : [],
+                snomed: Array.isArray(rule.snomed) ? rule.snomed : [],
+                citations: Array.isArray(rule.citations) ? rule.citations : [],
+              }));
           })
         );
         if (!cancelled) {
-          setAllRules(results.flat());
+          setAllRules(results.flat().filter(r => r && r.id));
         }
       } catch (e) {
         if (!cancelled) {
