@@ -28,6 +28,14 @@ from backend.services.auth_cookies import (
 )
 import secrets
 
+# Import rate limiter
+try:
+    from backend.services.security import limiter
+    LIMITER_AVAILABLE = True
+except ImportError:
+    LIMITER_AVAILABLE = False
+    limiter = None
+
 router = APIRouter(prefix="/users", tags=["users"])
 
 
@@ -38,9 +46,11 @@ class TokenResponse(BaseModel):
     user: Dict[str, Any]
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
-async def register_user(user_data: UserCreate):
+@limiter.limit("5/15minutes") if LIMITER_AVAILABLE else lambda f: f
+async def register_user(request: Request, user_data: UserCreate):
     """
     Register a new user account.
+    Rate limit: 5 attempts per 15 minutes per IP.
     
     Request body:
     ```json
@@ -74,9 +84,11 @@ async def register_user(user_data: UserCreate):
     )
 
 @router.post("/login")
-async def login_user(credentials: UserLogin):
+@limiter.limit("5/15minutes") if LIMITER_AVAILABLE else lambda f: f
+async def login_user(request: Request, credentials: UserLogin):
     """
     Authenticate user and get access token.
+    Rate limit: 5 attempts per 15 minutes per IP.
     
     Request body:
     ```json

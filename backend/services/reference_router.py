@@ -2,7 +2,15 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import yaml
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+
+# Import rate limiter
+try:
+    from backend.services.security import limiter
+    LIMITER_AVAILABLE = True
+except ImportError:
+    LIMITER_AVAILABLE = False
+    limiter = None
 
 router = APIRouter(prefix="/reference", tags=["reference"])
 
@@ -20,9 +28,11 @@ def _load_rules_file(filename: str) -> Dict[str, Any]:
 
 
 @router.get("/endocrinology")
-def get_endocrinology_rules() -> Dict[str, Any]:
+@limiter.limit("100/minute") if LIMITER_AVAILABLE else lambda f: f
+def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
   """
   Return the full endocrinology rules document as JSON.
+  Rate limit: 100 requests per minute per IP.
   """
   data = _load_rules_file("endocrinology.yml")
   family = data.get("family", "endocrinology")
@@ -37,10 +47,12 @@ def get_endocrinology_rules() -> Dict[str, Any]:
 
 
 @router.get("/{family}")
-def get_rules_by_family(family: str) -> Dict[str, Any]:
+@limiter.limit("100/minute") if LIMITER_AVAILABLE else lambda f: f
+def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   """
   Generalized endpoint: /reference/{family}
   Looks for {family}.yml in backend/rules.
+  Rate limit: 100 requests per minute per IP.
   """
   filename = f"{family}.yml"
   data = _load_rules_file(filename)

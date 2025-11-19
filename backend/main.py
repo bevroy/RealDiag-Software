@@ -31,6 +31,10 @@ except ImportError as e:
 
 from config import Config
 
+# Basic structured logging (must be first)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+logger = logging.getLogger("realdiag")
+
 app = FastAPI(
     title="RealDiag API", 
     version="1.4.0", 
@@ -41,10 +45,7 @@ app = FastAPI(
 if SECURITY_ENABLED:
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-# Basic structured logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-logger = logging.getLogger("realdiag")
+    logger.info("✅ Rate limiting enabled: 1000 requests/hour global, specific limits on auth and search endpoints")
 
 # Prometheus metrics
 REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['path', 'method', 'status'])

@@ -208,9 +208,11 @@ def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> 
 
 
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
+@limiter.limit("60/minute")
 async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request = None):
     """
     Search for diagnoses based on symptom input.
+    Rate limit: 60 requests per minute per IP.
     
     Returns ranked list of possible diagnoses with match scores.
     """

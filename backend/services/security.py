@@ -19,52 +19,105 @@ import logging
 logger = logging.getLogger("realdiag.security")
 
 # Rate limiter configuration
-limiter = Limiter(key_func=get_remote_address, default_limits=["100/hour"])
+# Global limit: 1000 requests per hour per IP
+# Specific endpoints can override with their own decorators
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=["1000/hour"],
+    storage_uri="memory://",
+    strategy="fixed-window"
+)
 
 
 class SecurityHeaders:
     """Add security headers to all responses"""
     
     @staticmethod
-    def add_headers(response) -> None:
-        """Add comprehensive security headers"""
+    def add_headers(response, is_production: bool = False) -> None:
+        """Add comprehensive security headers
+        
+        Args:
+            response: FastAPI response object
+            is_production: Whether running in production (enables stricter policies)
+        """
+        import os
+        is_production = os.getenv("ENVIRONMENT", "development").lower() == "production"
+        
         # Prevent clickjacking
         response.headers["X-Frame-Options"] = "DENY"
         
         # Prevent MIME type sniffing
         response.headers["X-Content-Type-Options"] = "nosniff"
         
-        # Enable XSS protection
+        # Enable XSS protection (legacy but still useful)
         response.headers["X-XSS-Protection"] = "1; mode=block"
         
-        # HSTS - Force HTTPS (only in production)
-        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        # HSTS - Force HTTPS (only in production with HTTPS)
+        if is_production:
+            response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"
         
-        # Content Security Policy
-        csp = (
-            "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'; "
-            "style-src 'self' 'unsafe-inline'; "
-            "img-src 'self' data: https:; "
-            "font-src 'self' data:; "
-            "connect-src 'self' https:; "
-            "frame-ancestors 'none';"
-        )
+        # Content Security Policy (production-ready)
+        # Note: 'unsafe-inline' and 'unsafe-eval' should be removed in production
+        # after refactoring frontend to use nonces/hashes
+        if is_production:
+            csp = (
+                "default-src 'self'; "
+                "script-src 'self'; "
+                "style-src 'self'; "
+                "img-src 'self' data: https:; "
+                "font-src 'self' data:; "
+                "connect-src 'self' https://api.realdiag.com https://sentry.io; "
+                "frame-ancestors 'none'; "
+                "base-uri 'self'; "
+                "form-action 'self'; "
+                "upgrade-insecure-requests;"
+            )
+        else:
+            # Development CSP (more permissive)
+            csp = (
+                "default-src 'self'; "
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval'; "
+                "style-src 'self' 'unsafe-inline'; "
+                "img-src 'self' data: https:; "
+                "font-src 'self' data:; "
+                "connect-src 'self' http://localhost:* https:; "
+                "frame-ancestors 'none';"
+            )
         response.headers["Content-Security-Policy"] = csp
         
         # Referrer policy
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         
-        # Permissions policy
-        response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+        # Permissions policy (restrict powerful features)
+        response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+        
+        # Prevent caching of sensitive data
+        if is_production:
+            response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, private"
+            response.headers["Pragma"] = "no-cache"
 
 
 async def security_middleware(request: Request, call_next):
     """Middleware to add security headers to all responses"""
+    import os
     try:
+        # Track request start time for performance monitoring
+        start_time = time.time()
+        
         response = await call_next(request)
-        SecurityHeaders.add_headers(response)
+        
+        # Add security headers
+        is_production = os.getenv("ENVIRONMENT", "development").lower() == "production"
+        SecurityHeaders.add_headers(response, is_production)
+        
+        # Add performance header
+        process_time = time.time() - start_time
+        response.headers["X-Process-Time"] = str(process_time)
+        
         return response
+    except RateLimitExceeded:
+        # Let rate limit errors pass through
+        raise
     except Exception as e:
         logger.error(f"Security middleware error: {str(e)}")
         raise
