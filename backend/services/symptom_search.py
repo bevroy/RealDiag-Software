@@ -6,22 +6,55 @@ This service provides intelligent diagnostic suggestions based on user-entered s
 It searches across all disease families and ranks results by symptom match score.
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 import yaml
 import re
-from pydantic import BaseModel
+from pydantic import BaseModel, validator, conint, conlist
+from backend.services.security import limiter, InputValidator, AuditLogger
 
 router = APIRouter()
 
 # Models
 class SymptomSearchRequest(BaseModel):
-    """Request model for symptom-based search."""
-    symptoms: List[str]
-    age: Optional[int] = None
+    """Request model for symptom-based search with input validation."""
+    symptoms: conlist(str, min_items=1, max_items=50)  # Max 50 symptoms
+    age: Optional[conint(ge=0, le=120)] = None  # Age 0-120
     sex: Optional[str] = None
     family: Optional[str] = None  # Optional filter by disease family
+    
+    @validator('symptoms')
+    def validate_symptoms(cls, v):
+        """Sanitize and validate symptoms"""
+        if not v:
+            raise ValueError("At least one symptom is required")
+        
+        # Sanitize each symptom
+        sanitized = []
+        for symptom in v:
+            clean = InputValidator.sanitize_string(symptom, max_length=200)
+            if clean:
+                sanitized.append(clean)
+        
+        if not sanitized:
+            raise ValueError("No valid symptoms provided")
+        
+        return sanitized
+    
+    @validator('sex')
+    def validate_sex(cls, v):
+        """Validate sex input"""
+        if v and v not in ['M', 'F', 'male', 'female', '']:
+            raise ValueError("Sex must be M, F, or empty")
+        return v
+    
+    @validator('family')
+    def validate_family(cls, v):
+        """Sanitize family input"""
+        if v:
+            return InputValidator.sanitize_string(v, max_length=50)
+        return v
 
 class DiagnosisMatch(BaseModel):
     """Model for a matched diagnosis."""
@@ -137,12 +170,26 @@ def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> 
 
 
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
-async def search_by_symptoms(request: SymptomSearchRequest):
+@limiter.limit("10/minute")  # Rate limit: 10 searches per minute
+async def search_by_symptoms(request_obj: Request, request: SymptomSearchRequest):
     """
     Search for diagnoses based on symptom input.
+    Rate limited to 10 requests per minute per IP.
     
     Returns ranked list of possible diagnoses with match scores.
     """
+    # Audit log the search
+    client_ip = request_obj.client.host if request_obj.client else "unknown"
+    AuditLogger.log_security_event(
+        "symptom_search",
+        {
+            "symptom_count": len(request.symptoms),
+            "age": request.age,
+            "family": request.family,
+            "ip": client_ip
+        }
+    )
+    
     if not request.symptoms:
         raise HTTPException(status_code=400, detail="At least one symptom is required")
     
