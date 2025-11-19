@@ -78,28 +78,34 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Features List */}
-        <div style={{
+        {/* Features Dropdown */}
+        <details style={{
           background: 'white',
-          padding: '2rem 2.5rem',
+          padding: '1.5rem 2rem',
           borderRadius: '12px',
           boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
           border: '1px solid #e2e8f0',
-          marginBottom: '3rem'
+          marginBottom: '3rem',
+          cursor: 'pointer'
         }}>
-          <h3 style={{ 
-            margin: '0 0 1.5rem', 
+          <summary style={{ 
             color: '#0f766e', 
-            fontSize: '1.3rem',
+            fontSize: '1.2rem',
             fontWeight: '600',
-            textAlign: 'center'
+            textAlign: 'center',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem'
           }}>
-            Key Features
-          </h3>
+            <span>Key Features</span>
+            <span style={{ fontSize: '0.9rem', color: '#64748b' }}>▼</span>
+          </summary>
           <ul style={{
             listStyle: 'none',
             padding: 0,
-            margin: 0,
+            margin: '1.5rem 0 0',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '1rem',
@@ -132,7 +138,7 @@ export default function Home() {
               <span><strong style={{ color: '#0f766e' }}>Fast & Accurate:</strong> Instant results powered by advanced algorithms and diagnostic rules</span>
             </li>
           </ul>
-        </div>
+        </details>
 
         {/* Quick Links */}
         <div style={{
