@@ -264,7 +264,8 @@ export default function ReferencePage() {
         </div>
 
         {/* Rows */}
-        {(filtered || []).map((r) => {
+        {(filtered || []).map((r, idx) => {
+          if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
           return (
             <div key={r.id}>
@@ -319,7 +320,7 @@ export default function ReferencePage() {
                   <div style={{ fontSize: 11, color: "#777" }}>{r.id}</div>
                 </div>
                 <div>
-                  {(r.presentations || []).length === 0 ? (
+                  {(!r.presentations || !Array.isArray(r.presentations) || r.presentations.length === 0) ? (
                     <span style={{ color: "#999" }}>—</span>
                   ) : (
                     <ul style={{ margin: 0, paddingLeft: 18 }}>
@@ -330,7 +331,7 @@ export default function ReferencePage() {
                   )}
                 </div>
                 <div>
-                  {r.icd10 && r.icd10.length > 0 ? (
+                  {r.icd10 && Array.isArray(r.icd10) && r.icd10.length > 0 ? (
                     r.icd10.join(", ")
                   ) : (
                     <span style={{ color: "#999" }}>—</span>
