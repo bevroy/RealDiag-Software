@@ -250,16 +250,16 @@ export default function SymptomSearch() {
 
   const getFamilyColor = (fam) => {
     const colorMap = {
-      neurology: "#3b82f6", cardiology: "#ef4444", endocrinology: "#f97316",
-      pulmonology: "#8b5cf6", gastroenterology: "#10b981", infectious_disease: "#f59e0b",
-      nephrology: "#06b6d4", rheumatology: "#ec4899", dermatology: "#84cc16",
-      psychiatry: "#6366f1", obstetrics_gynecology: "#d946ef",
-      hematology_oncology: "#f43f5e", orthopedics: "#14b8a6",
-      pediatrics: "#10b981", geriatrics: "#8b5cf6", emergency_medicine: "#ef4444",
-      surgery: "#0891b2", ent: "#f97316", ophthalmology: "#06b6d4",
-      toxicology: "#dc2626", urology: "#0891b2"
+      neurology: "#14b8a6", cardiology: "#0d9488", endocrinology: "#0f766e",
+      pulmonology: "#14b8a6", gastroenterology: "#0d9488", infectious_disease: "#0f766e",
+      nephrology: "#14b8a6", rheumatology: "#0d9488", dermatology: "#0f766e",
+      psychiatry: "#14b8a6", obstetrics_gynecology: "#0d9488",
+      hematology_oncology: "#0f766e", orthopedics: "#14b8a6",
+      pediatrics: "#0d9488", geriatrics: "#0f766e", emergency_medicine: "#14b8a6",
+      surgery: "#0d9488", ent: "#0f766e", ophthalmology: "#14b8a6",
+      toxicology: "#0d9488", urology: "#0f766e"
     };
-    return colorMap[fam] || "#6b7280";
+    return colorMap[fam] || "#64748b";
   };
 
   const getFamilyLabel = (fam) => {

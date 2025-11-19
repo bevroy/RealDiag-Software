@@ -255,17 +255,17 @@ export default function Home() {
         <div style={{
           margin: '0 0 2rem',
           padding: '1rem 1.5rem',
-          background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
+          background: 'linear-gradient(135deg, #0f766e 0%, #0d9488 100%)',
           borderRadius: '10px',
           color: 'white',
           textAlign: 'center',
-          boxShadow: '0 2px 8px rgba(220, 38, 38, 0.2)',
-          border: '1px solid rgba(252, 165, 165, 0.3)'
+          boxShadow: '0 2px 8px rgba(15, 118, 110, 0.2)',
+          border: '1px solid rgba(204, 251, 241, 0.3)'
         }}>
           <strong style={{ fontSize: '0.95rem' }}>⚠️ MEDICAL DISCLAIMER: NOT FOR CLINICAL USE</strong>
           <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.95 }}>
             Educational purposes only. Not FDA-approved. Not a substitute for professional medical judgment.
-            See <Link href="/legal-disclaimer" style={{ color: '#fef3c7', textDecoration: 'underline' }}>Legal Disclaimer</Link> for complete terms.
+            See <Link href="/legal-disclaimer" style={{ color: '#ccfbf1', textDecoration: 'underline' }}>Legal Disclaimer</Link> for complete terms.
           </p>
         </div>
       </div>
