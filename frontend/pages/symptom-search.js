@@ -602,82 +602,30 @@ export default function SymptomSearch() {
   const renderSensitivityBadge = (sensitivity) => {
     if (!sensitivity) return null;
     const percentage = (sensitivity * 100).toFixed(0);
-    const color = getSensitivityColor(sensitivity);
     
     return (
-      <div style={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '0.5rem 0.75rem',
-        background: 'white',
-        border: `2px solid ${color}`,
-        borderRadius: '8px',
-        minWidth: '80px'
+      <span style={{
+        fontSize: '0.9rem',
+        color: '#0f766e',
+        fontWeight: '500'
       }}>
-        <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: '600', marginBottom: '0.25rem' }}>
-          SENSITIVITY
-        </div>
-        <div style={{ fontSize: '1.1rem', fontWeight: '700', color }}>
-          {percentage}%
-        </div>
-        <div style={{
-          width: '100%',
-          height: '4px',
-          background: '#e5e7eb',
-          borderRadius: '2px',
-          marginTop: '0.25rem',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${percentage}%`,
-            height: '100%',
-            background: color,
-            transition: 'width 0.3s'
-          }} />
-        </div>
-      </div>
+        Sensitivity: <strong style={{ color: '#14b8a6' }}>{percentage}%</strong>
+      </span>
     );
   };
 
   const renderSpecificityBadge = (specificity) => {
     if (!specificity) return null;
     const percentage = (specificity * 100).toFixed(0);
-    const color = getSpecificityColor(specificity);
     
     return (
-      <div style={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '0.5rem 0.75rem',
-        background: 'white',
-        border: `2px solid ${color}`,
-        borderRadius: '8px',
-        minWidth: '80px'
+      <span style={{
+        fontSize: '0.9rem',
+        color: '#0f766e',
+        fontWeight: '500'
       }}>
-        <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: '600', marginBottom: '0.25rem' }}>
-          SPECIFICITY
-        </div>
-        <div style={{ fontSize: '1.1rem', fontWeight: '700', color }}>
-          {percentage}%
-        </div>
-        <div style={{
-          width: '100%',
-          height: '4px',
-          background: '#e5e7eb',
-          borderRadius: '2px',
-          marginTop: '0.25rem',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${percentage}%`,
-            height: '100%',
-            background: color,
-            transition: 'width 0.3s'
-          }} />
-        </div>
-      </div>
+        Specificity: <strong style={{ color: '#14b8a6' }}>{percentage}%</strong>
+      </span>
     );
   };
 
@@ -1941,14 +1889,14 @@ export default function SymptomSearch() {
                               onClick={() => addToFavorites(result)}
                               style={{
                                 padding: '0.5rem 1rem',
-                                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                                background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                                 color: 'white',
                                 border: 'none',
                                 borderRadius: '6px',
                                 cursor: 'pointer',
                                 fontWeight: '600',
                                 fontSize: '0.85rem',
-                                boxShadow: '0 2px 4px rgba(245, 158, 11, 0.3)',
+                                boxShadow: '0 2px 4px rgba(20, 184, 166, 0.3)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.25rem'
@@ -1962,29 +1910,19 @@ export default function SymptomSearch() {
                           {(() => {
                             const likelihood = calculateLikelihood(result);
                             const confidenceLevel = getConfidenceLevel(likelihood);
-                            const confidenceColor = getConfidenceColor(likelihood);
                             return likelihood ? (
-                              <div style={{
-                                padding: '0.75rem 1.25rem',
-                                background: `linear-gradient(135deg, ${confidenceColor} 0%, ${confidenceColor}dd 100%)`,
-                                color: 'white',
-                                borderRadius: '8px',
-                                fontWeight: '700',
-                                fontSize: '1.1rem',
-                                boxShadow: `0 4px 6px rgba(16, 185, 129, 0.2)`,
-                                textAlign: 'center',
-                                minWidth: '120px',
-                                border: `2px solid ${confidenceColor}`
+                              <span style={{
+                                fontSize: '0.9rem',
+                                color: '#0f766e',
+                                fontWeight: '500'
                               }}>
-                                <div style={{ fontSize: '0.7rem', fontWeight: '500', opacity: 0.9, marginBottom: '0.25rem' }}>LIKELIHOOD</div>
-                                <div style={{ fontSize: '1.3rem' }}>{likelihood.toFixed(0)}%</div>
-                                <div style={{ fontSize: '0.65rem', opacity: 0.9, marginTop: '0.15rem' }}>{confidenceLevel}</div>
-                              </div>
+                                Likelihood: <strong style={{ color: '#14b8a6', fontSize: '1rem' }}>{likelihood.toFixed(0)}%</strong> <span style={{ fontSize: '0.8rem', color: '#64748b' }}>({confidenceLevel})</span>
+                              </span>
                             ) : null;
                           })()}
                           {/* Test Characteristics */}
                           {(result.sensitivity || result.specificity) && (
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                               {renderSensitivityBadge(result.sensitivity)}
                               {renderSpecificityBadge(result.specificity)}
                             </div>
@@ -2633,7 +2571,7 @@ export default function SymptomSearch() {
                         onClick={() => addToFavorites(result)}
                         style={{
                           padding: '0.5rem 0.75rem',
-                          background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                          background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                           color: 'white',
                           border: 'none',
                           borderRadius: '6px',
@@ -2649,8 +2587,8 @@ export default function SymptomSearch() {
                         onClick={() => toggleCardExpand(idx)}
                         style={{
                           padding: '0.5rem 1rem',
-                          background: expandedCards[idx] ? '#3b82f6' : '#f3f4f6',
-                          color: expandedCards[idx] ? 'white' : '#374151',
+                          background: expandedCards[idx] ? '#14b8a6' : '#ccfbf1',
+                          color: expandedCards[idx] ? 'white' : '#0f766e',
                           border: 'none',
                           borderRadius: '6px',
                           cursor: 'pointer',
