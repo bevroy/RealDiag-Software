@@ -411,12 +411,7 @@ export default function ReferencePage() {
         </div>
 
         {/* Rows */}
-        {(() => {
-          console.log(`Rendering ${filtered.length} filtered rules`);
-          console.log('First 3 filtered rule IDs:', filtered.slice(0, 3).map(r => r?.id));
-          console.log('First 3 filtered familyIds:', filtered.slice(0, 3).map(r => r?.familyId));
-          return filtered;
-        })().map((r, idx) => {
+        {(filtered || []).map((r, idx) => {
           if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
           
