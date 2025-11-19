@@ -15,19 +15,10 @@ const FAMILIES = [
   { id: "obstetrics_gynecology", label: "OB/GYN" },
 ];
 
-function useApiBase() {
-  return useMemo(() => {
-    if (process.env.NEXT_PUBLIC_API_BASE) return process.env.NEXT_PUBLIC_API_BASE;
-    if (typeof window !== "undefined") {
-      const host = window.location.hostname.replace("-3000", "-8000");
-      return `https://${host}`;
-    }
-    return "http://localhost:8000";
-  }, []);
-}
-
 export default function ReferencePage() {
-  const apiBase = useApiBase();
+  // Use runtime config for API base, with fallback to env var or Render URL
+  const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+  const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
   const [allRules, setAllRules] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
