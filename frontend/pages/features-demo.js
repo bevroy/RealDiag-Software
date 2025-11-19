@@ -208,15 +208,15 @@ export default function FeaturesDemo() {
               </ul>
             </div>
             
-            <div style={{ padding: '1.5rem', background: '#ccfbf1', borderRadius: '8px', border: '2px solid #14b8a6' }}>
-              <h3 style={{ color: '#0f766e' }}>🔍 Try It Out</h3>
+            <div style={{ padding: '1.5rem', background: '#e0f2f1', borderRadius: '8px', border: '2px solid #009688' }}>
+              <h3 style={{ color: '#92400e' }}>🔍 Try It Out</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
                 <AccessibleButton
                   onClick={() => setShowModal(true)}
                   ariaLabel="Open accessible modal dialog"
                   style={{
                     padding: '1rem',
-                    background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                    background: '#009688',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -258,11 +258,11 @@ export default function FeaturesDemo() {
           <div className="tablet-split-screen" style={{ marginTop: '1rem' }}>
             <div className="tablet-search-panel" style={{ 
               padding: '1.5rem', 
-              background: '#fef3c7', 
+              background: '#fef9e7', 
               borderRadius: '8px',
               border: '2px solid #92400e'
             }}>
-              <h3 style={{ color: '#78350f' }}>📱 Tablet Features</h3>
+              <h3 style={{ color: '#92400e' }}>📱 Tablet Features</h3>
               <ul style={{ lineHeight: '1.8' }}>
                 <li><strong>Split-Screen Layout:</strong> Search on left, results on right (768-1024px)</li>
                 <li><strong>Sticky Navigation:</strong> Search form stays visible while scrolling</li>
@@ -282,17 +282,33 @@ export default function FeaturesDemo() {
             </div>
             
             <div className="tablet-results-grid" style={{ display: 'grid', gap: '1rem' }}>
-              {[1, 2, 3].map(i => (
-                <div key={i} style={{ 
-                  padding: '1rem', 
-                  background: '#f0fdfa', 
-                  border: '2px solid #ccfbf1',
-                  borderRadius: '8px' 
-                }}>
-                  <h4>Result Card {i}</h4>
-                  <p>Optimized for tablet viewing</p>
-                </div>
-              ))}
+              <div style={{ 
+                padding: '1.5rem', 
+                background: '#e0f2f1',
+                border: '2px solid #009688',
+                borderRadius: '8px' 
+              }}>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#92400e' }}>Multi-Column Layout</h4>
+                <p style={{ color: '#374151', lineHeight: '1.6' }}>Diagnostic results display in a 2-column grid on tablets (768-1024px), maximizing screen real estate while maintaining readability.</p>
+              </div>
+              <div style={{ 
+                padding: '1.5rem', 
+                background: '#fef9e7',
+                border: '2px solid #92400e',
+                borderRadius: '8px' 
+              }}>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#009688' }}>Touch-Optimized Cards</h4>
+                <p style={{ color: '#374151', lineHeight: '1.6' }}>All interactive elements meet 44x44px minimum touch target size, with generous spacing for comfortable stylus or finger interaction.</p>
+              </div>
+              <div style={{ 
+                padding: '1.5rem', 
+                background: '#e0f2f1',
+                border: '2px solid #009688',
+                borderRadius: '8px' 
+              }}>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#92400e' }}>Landscape Optimization</h4>
+                <p style={{ color: '#374151', lineHeight: '1.6' }}>Split-screen layout activates in landscape mode, showing search controls alongside results for efficient clinical workflow.</p>
+              </div>
             </div>
           </div>
         </section>
