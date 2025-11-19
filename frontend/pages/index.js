@@ -78,108 +78,60 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Features Grid */}
+        {/* Features List */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.25rem',
+          background: 'white',
+          padding: '2rem 2.5rem',
+          borderRadius: '12px',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e2e8f0',
           marginBottom: '3rem'
         }}>
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
+          <h3 style={{ 
+            margin: '0 0 1.5rem', 
+            color: '#0f766e', 
+            fontSize: '1.3rem',
+            fontWeight: '600',
+            textAlign: 'center'
           }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>🎯</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              Evidence-Based
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Differential diagnoses ranked by Bayesian likelihood with sensitivity and specificity data.
-            </p>
-          </div>
-
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
+            Key Features
+          </h3>
+          <ul style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '1rem',
+            color: '#64748b',
+            fontSize: '1rem',
+            lineHeight: '1.6'
           }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>📚</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              Clinical Pearls
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Detailed clinical pearls, management protocols, and evidence-based guidelines.
-            </p>
-          </div>
-
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
-          }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>🏥</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              17 Specialties
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Cardiology, neurology, emergency medicine, and 14 other medical specialties.
-            </p>
-          </div>
-
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
-          }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>🔬</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              Test Recommendations
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Suggested diagnostic tests and specialist referrals for each diagnosis.
-            </p>
-          </div>
-
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
-          }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>📖</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              Medical Training
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Case library, quizzes, flashcards, and progress tracking for students.
-            </p>
-          </div>
-
-          <div style={{
-            background: 'white',
-            padding: '1.75rem',
-            borderRadius: '12px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
-          }}>
-            <div style={{ fontSize: '2.25rem', marginBottom: '0.75rem' }}>⚡</div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e', fontSize: '1.1rem', fontWeight: '600' }}>
-              Fast & Accurate
-            </h3>
-            <p style={{ margin: 0, color: '#64748b', lineHeight: '1.5', fontSize: '0.95rem' }}>
-              Instant results powered by advanced algorithms and diagnostic rules.
-            </p>
-          </div>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>🎯</span>
+              <span><strong style={{ color: '#0f766e' }}>Evidence-Based:</strong> Differential diagnoses ranked by Bayesian likelihood with sensitivity and specificity data</span>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>📚</span>
+              <span><strong style={{ color: '#0f766e' }}>Clinical Pearls:</strong> Detailed clinical pearls, management protocols, and evidence-based guidelines</span>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>🏥</span>
+              <span><strong style={{ color: '#0f766e' }}>17 Specialties:</strong> Cardiology, neurology, emergency medicine, and 14 other medical specialties</span>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>🔬</span>
+              <span><strong style={{ color: '#0f766e' }}>Test Recommendations:</strong> Suggested diagnostic tests and specialist referrals for each diagnosis</span>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>📖</span>
+              <span><strong style={{ color: '#0f766e' }}>Medical Training:</strong> Case library, quizzes, flashcards, and progress tracking for students</span>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>⚡</span>
+              <span><strong style={{ color: '#0f766e' }}>Fast & Accurate:</strong> Instant results powered by advanced algorithms and diagnostic rules</span>
+            </li>
+          </ul>
         </div>
 
         {/* Quick Links */}
