@@ -32,6 +32,7 @@ export default function ReferencePage() {
       setLoading(true);
       setErr("");
       setExpandedId(null);
+      setAllRules([]); // Clear existing data before loading
       try {
         const results = await Promise.all(
           FAMILIES.map(async (f) => {
@@ -40,7 +41,7 @@ export default function ReferencePage() {
             const data = await res.json();
             
             // Map rules and ensure familyId is set correctly
-            const mappedRules = (data.rules || [])
+            return (data.rules || [])
               .filter(rule => rule && rule.id) // Filter out invalid rules
               .map(rule => ({
                 ...rule,
@@ -52,24 +53,10 @@ export default function ReferencePage() {
                 snomed: Array.isArray(rule.snomed) ? rule.snomed.map(String) : [],
                 citations: Array.isArray(rule.citations) ? rule.citations.map(String) : [],
               }));
-            
-            // Debug: Log what we're loading
-            console.log(`Loaded ${f.label} (${f.id}):`, mappedRules.length, 'rules');
-            if (mappedRules.length > 0) {
-              console.log(`  First rule:`, { id: mappedRules[0].id, familyId: mappedRules[0].familyId });
-            }
-            
-            return mappedRules;
           })
         );
         if (!cancelled) {
-          const flatRules = results.flat().filter(r => r && r.id);
-          console.log('Total rules loaded:', flatRules.length);
-          console.log('Rules by family:', FAMILIES.map(f => ({
-            family: f.id,
-            count: flatRules.filter(r => r.familyId === f.id).length
-          })));
-          setAllRules(flatRules);
+          setAllRules(results.flat().filter(r => r && r.id));
         }
       } catch (e) {
         if (!cancelled) {
@@ -96,19 +83,12 @@ export default function ReferencePage() {
         // Strict comparison with explicit type checking
         return r && r.familyId && String(r.familyId) === String(selectedFamily);
       });
-      
-      console.log(`Filtering for: ${selectedFamily}`);
-      console.log(`Matched ${rulesToFilter.length} rules`);
-      console.log(`First 5 rule IDs:`, rulesToFilter.slice(0, 5).map(r => r.id));
     }
     
     // Then filter by search query
-    if (!q) {
-      console.log(`No search query, returning ${rulesToFilter.length} rules`);
-      return rulesToFilter;
-    }
+    if (!q) return rulesToFilter;
 
-    const searchFiltered = (rulesToFilter || []).filter((r) => {
+    return (rulesToFilter || []).filter((r) => {
       const label = (r.label || "").toLowerCase();
       const id = (r.id || "").toLowerCase();
       const present = (r.presentations || []).join(" ").toLowerCase();
@@ -122,9 +102,6 @@ export default function ReferencePage() {
         snomed.includes(q)
       );
     });
-    
-    console.log(`Search query "${q}" filtered to ${searchFiltered.length} rules`);
-    return searchFiltered;
   }, [allRules, query, selectedFamily]);
 
   function toggleExpanded(id) {
@@ -407,6 +384,7 @@ export default function ReferencePage() {
       {/* Table */}
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
       <div
+        key={`${selectedFamily}-${filtered.length}`}
         style={{
           border: "1px solid #eee",
           borderRadius: 12,
@@ -433,7 +411,12 @@ export default function ReferencePage() {
         </div>
 
         {/* Rows */}
-        {(filtered || []).map((r, idx) => {
+        {(() => {
+          console.log(`Rendering ${filtered.length} filtered rules`);
+          console.log('First 3 filtered rule IDs:', filtered.slice(0, 3).map(r => r?.id));
+          console.log('First 3 filtered familyIds:', filtered.slice(0, 3).map(r => r?.familyId));
+          return filtered;
+        })().map((r, idx) => {
           if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
           
