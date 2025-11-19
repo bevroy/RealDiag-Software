@@ -893,21 +893,6 @@ export default function SymptomSearch() {
           >
             ⚙️ Settings
           </button>
-          <Link href="/" style={{
-            padding: '0.5rem 1rem',
-            background: '#3b82f6',
-            color: 'white',
-            borderRadius: '6px',
-            textDecoration: 'none',
-            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
-            fontWeight: '500',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            minHeight: '44px'
-          }}>
-            ← Home
-          </Link>
           <Link href="/account" style={{
             padding: '0.5rem 1rem',
             background: isAuthenticated ? 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)' : '#10b981',
