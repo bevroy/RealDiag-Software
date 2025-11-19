@@ -6,7 +6,7 @@ REST API endpoints for user authentication, profiles, favorites, custom lists,
 search history, and analytics.
 """
 
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, Response, Request
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, EmailStr
 from backend.services.auth_service import (
@@ -21,6 +21,12 @@ from backend.services.auth_service import (
     get_user_analytics,
     users_db, user_settings_db
 )
+from backend.services.auth_cookies import (
+    cookie_auth,
+    create_cookie_response,
+    get_token_from_cookie
+)
+import secrets
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -31,7 +37,7 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user: Dict[str, Any]
 
-@router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register_user(user_data: UserCreate):
     """
     Register a new user account.
@@ -46,20 +52,28 @@ async def register_user(user_data: UserCreate):
       "institution": "Memorial Hospital"
     }
     ```
+    
+    Returns tokens in secure HttpOnly cookies instead of response body.
     """
     user = create_user(user_data)
-    token = create_access_token(user["user_id"], user["email"])
+    access_token = create_access_token(user["user_id"], user["email"])
+    refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
     
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": user_safe
-    }
+    # Return response with tokens in HttpOnly cookies
+    return create_cookie_response(
+        data={
+            "message": "Registration successful",
+            "user": user_safe
+        },
+        access_token=access_token,
+        refresh_token=refresh_token,
+        status_code=status.HTTP_201_CREATED
+    )
 
-@router.post("/login", response_model=TokenResponse)
+@router.post("/login")
 async def login_user(credentials: UserLogin):
     """
     Authenticate user and get access token.
@@ -71,18 +85,34 @@ async def login_user(credentials: UserLogin):
       "password": "SecurePass123!"
     }
     ```
+    
+    Returns tokens in secure HttpOnly cookies instead of response body.
+    Client should check for 'csrf_token' in response to use in X-CSRF-Token header.
     """
     user = authenticate_user(credentials.email, credentials.password)
-    token = create_access_token(user["user_id"], user["email"])
+    access_token = create_access_token(user["user_id"], user["email"])
+    refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
     
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": user_safe
-    }
+    # Return response with tokens in HttpOnly cookies
+    return create_cookie_response(
+        data={
+            "message": "Login successful",
+            "user": user_safe
+        },
+        access_token=access_token,
+        refresh_token=refresh_token
+    )
+
+@router.post("/logout")
+async def logout_user(response: Response):
+    """
+    Logout user by clearing authentication cookies.
+    """
+    cookie_auth.clear_auth_cookies(response)
+    return {"message": "Logout successful"}
 
 @router.get("/me", response_model=UserProfile)
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):

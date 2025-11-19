@@ -120,10 +120,9 @@ export default function SymptomSearch() {
         }
       }
       
-      // Check authentication
-      const token = localStorage.getItem('realdiag_token');
-      if (token) {
-        fetchUserProfile(token);
+      // Check authentication (via HttpOnly cookie)
+      if (checkAuth()) {
+        fetchUserProfile();
       }
       
       // Initialize mobile features
@@ -132,20 +131,20 @@ export default function SymptomSearch() {
   }, []);
 
   // Fetch user profile
-  const fetchUserProfile = async (token) => {
+  const fetchUserProfile = async () => {
     try {
-      const response = await fetch(`${apiBase}/users/me`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (response.ok) {
-        const userData = await response.json();
+      const userData = await getCurrentUser();
+      if (userData) {
         setUser(userData);
         setIsAuthenticated(true);
       } else {
-        localStorage.removeItem('realdiag_token');
+        setUser(null);
+        setIsAuthenticated(false);
       }
     } catch (err) {
       console.error('Failed to fetch user profile:', err);
+      setUser(null);
+      setIsAuthenticated(false);
     }
   };
 

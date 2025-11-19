@@ -6,7 +6,7 @@ Provides user authentication, session management, and profile handling.
 Supports multiple auth providers: JWT, OAuth2, API keys.
 """
 
-from fastapi import HTTPException, Depends, Header, status
+from fastapi import HTTPException, Depends, Header, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional, Dict, Any, List
 from pydantic import BaseModel, EmailStr, Field
@@ -16,13 +16,14 @@ import hashlib
 import jwt
 from pathlib import Path
 import json
+import os
 
 # JWT Configuration
-SECRET_KEY = secrets.token_urlsafe(32)  # In production, load from env
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_urlsafe(32))  # Load from env in production
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRATION_MINUTES", "60"))  # 1 hour default
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)  # Don't auto-error, we'll check cookies too
 
 # Models
 class UserCreate(BaseModel):
@@ -145,9 +146,30 @@ def verify_token(token: str) -> Dict[str, Any]:
             detail="Could not validate credentials"
         )
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Any]:
-    """Dependency to get current authenticated user."""
-    token = credentials.credentials
+async def get_current_user(
+    request: Request,
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
+) -> Dict[str, Any]:
+    """
+    Dependency to get current authenticated user.
+    Checks HttpOnly cookie first, then Authorization header (for backwards compatibility).
+    """
+    token = None
+    
+    # First, try to get token from HttpOnly cookie (preferred method)
+    token = request.cookies.get("access_token")
+    
+    # Fall back to Authorization header if cookie not present (backwards compatibility)
+    if not token and credentials:
+        token = credentials.credentials
+    
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated - no access token found",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+    
     payload = verify_token(token)
     user_id = payload.get("sub")
     
@@ -159,13 +181,27 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     
     return users_db[user_id]
 
-async def get_optional_user(authorization: Optional[str] = Header(None)) -> Optional[Dict[str, Any]]:
-    """Dependency to get user if authenticated, None otherwise."""
-    if not authorization or not authorization.startswith("Bearer "):
+async def get_optional_user(
+    request: Request,
+    authorization: Optional[str] = Header(None)
+) -> Optional[Dict[str, Any]]:
+    """
+    Dependency to get user if authenticated, None otherwise.
+    Checks HttpOnly cookie first, then Authorization header.
+    """
+    token = None
+    
+    # Try cookie first
+    token = request.cookies.get("access_token")
+    
+    # Fall back to Authorization header
+    if not token and authorization and authorization.startswith("Bearer "):
+        token = authorization.replace("Bearer ", "")
+    
+    if not token:
         return None
     
     try:
-        token = authorization.replace("Bearer ", "")
         payload = verify_token(token)
         user_id = payload.get("sub")
         return users_db.get(user_id)

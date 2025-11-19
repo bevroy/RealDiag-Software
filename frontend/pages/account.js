@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { isAuthenticated as checkAuth, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
 
 export default function AccountPage() {
   const router = useRouter();
@@ -31,65 +32,56 @@ export default function AccountPage() {
     const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
     setApiBase(base.replace(/\/$/, ''));
 
-    // Check if already logged in
-    const token = localStorage.getItem('realdiag_token');
-    if (token) {
-      fetchUserProfile(token);
+    // Check if already logged in (via HttpOnly cookie)
+    if (checkAuth()) {
+      fetchUserProfile();
     }
   }, []);
 
-  const fetchUserProfile = async (token) => {
+  const fetchUserProfile = async () => {
     try {
-      const response = await fetch(`${apiBase}/users/me`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (response.ok) {
-        const userData = await response.json();
+      const userData = await getCurrentUser();
+      if (userData) {
         setUser(userData);
         setIsAuthenticated(true);
         setActiveTab('dashboard');
-        loadDashboardData(token);
+        loadDashboardData();
       } else {
-        localStorage.removeItem('realdiag_token');
+        setIsAuthenticated(false);
+        setUser(null);
       }
     } catch (err) {
       console.error('Failed to fetch profile:', err);
+      setIsAuthenticated(false);
+      setUser(null);
     }
   };
 
-  const loadDashboardData = async (token) => {
+  const loadDashboardData = async () => {
     try {
       // Load search history
-      const historyRes = await fetch(`${apiBase}/users/me/history?limit=10`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const historyRes = await authenticatedFetch(`${apiBase}/users/me/history?limit=10`);
       if (historyRes.ok) {
         const historyData = await historyRes.json();
         setSearchHistory(historyData.history || []);
       }
 
       // Load favorites
-      const favRes = await fetch(`${apiBase}/users/me/favorites`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const favRes = await authenticatedFetch(`${apiBase}/users/me/favorites`);
       if (favRes.ok) {
         const favData = await favRes.json();
         setFavorites(favData.favorites || []);
       }
 
       // Load custom lists
-      const listsRes = await fetch(`${apiBase}/users/me/lists`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const listsRes = await authenticatedFetch(`${apiBase}/users/me/lists`);
       if (listsRes.ok) {
         const listsData = await listsRes.json();
         setCustomLists(listsData.lists || []);
       }
 
       // Load analytics
-      const analyticsRes = await fetch(`${apiBase}/users/me/analytics`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const analyticsRes = await authenticatedFetch(`${apiBase}/users/me/analytics`);
       if (analyticsRes.ok) {
         const analyticsData = await analyticsRes.json();
         setAnalytics(analyticsData);
@@ -105,23 +97,11 @@ export default function AccountPage() {
     setError(null);
 
     try {
-      const response = await fetch(`${apiBase}/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: loginEmail, password: loginPassword })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Login failed');
-      }
-
-      const data = await response.json();
-      localStorage.setItem('realdiag_token', data.access_token);
+      const data = await authLogin(loginEmail, loginPassword);
       setUser(data.user);
       setIsAuthenticated(true);
       setActiveTab('dashboard');
-      loadDashboardData(data.access_token);
+      loadDashboardData();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -135,29 +115,17 @@ export default function AccountPage() {
     setError(null);
 
     try {
-      const response = await fetch(`${apiBase}/users/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: registerEmail,
-          password: registerPassword,
-          full_name: registerName,
-          specialty: registerSpecialty || null,
-          institution: registerInstitution || null
-        })
+      const data = await authRegister({
+        email: registerEmail,
+        password: registerPassword,
+        full_name: registerName,
+        specialty: registerSpecialty || null,
+        institution: registerInstitution || null
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Registration failed');
-      }
-
-      const data = await response.json();
-      localStorage.setItem('realdiag_token', data.access_token);
       setUser(data.user);
       setIsAuthenticated(true);
       setActiveTab('dashboard');
-      loadDashboardData(data.access_token);
+      loadDashboardData();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -165,15 +133,20 @@ export default function AccountPage() {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('realdiag_token');
-    setUser(null);
-    setIsAuthenticated(false);
-    setActiveTab('login');
-    setSearchHistory([]);
-    setFavorites([]);
-    setCustomLists([]);
-    setAnalytics(null);
+  const handleLogout = async () => {
+    try {
+      await authLogout();
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      setUser(null);
+      setIsAuthenticated(false);
+      setActiveTab('login');
+      setSearchHistory([]);
+      setFavorites([]);
+      setCustomLists([]);
+      setAnalytics(null);
+    }
   };
 
   const specialties = [
