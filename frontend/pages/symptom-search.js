@@ -1678,99 +1678,114 @@ export default function SymptomSearch() {
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             marginBottom: '1.5rem'
           }}>
-            <h2 style={{ 
-              margin: '0 0 1rem', 
-              color: '#1a202c', 
-              fontSize: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
+            <details style={{
+              cursor: 'pointer'
             }}>
-              🧮 Clinical Decision Calculators
-            </h2>
-            <p style={{ marginBottom: '1rem', color: '#6b7280', fontSize: '0.9rem' }}>
-              Use validated clinical scores to support your diagnostic decisions
-            </p>
-            
-            <div style={{ 
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-              gap: '1rem'
-            }}>
-              {availableCalculators.map((calc) => (
-                <button
-                  key={calc.id}
-                  onClick={() => setSelectedCalculator(calc.id)}
-                  style={{
-                    padding: '1rem',
-                    background: selectedCalculator === calc.id ? '#dbeafe' : '#f9fafb',
-                    border: selectedCalculator === calc.id ? '2px solid #3b82f6' : '2px solid #e5e7eb',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  <div style={{ fontWeight: '700', marginBottom: '0.5rem', color: '#1a202c' }}>
-                    {calc.name}
-                  </div>
-                  <div style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.5rem' }}>
-                    {calc.category}
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: '#374151' }}>
-                    {calc.description}
-                  </div>
-                </button>
-              ))}
-            </div>
+              <summary style={{
+                listStyle: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                fontSize: '1.25rem',
+                fontWeight: '600',
+                color: '#0f766e',
+                padding: '0.5rem',
+                borderRadius: '6px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = '#f0fdfa'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              >
+                <span>🧮 Clinical Decision Calculators</span>
+                <span style={{ fontSize: '0.8rem', color: '#64748b' }}>▼</span>
+              </summary>
+              
+              <div style={{ marginTop: '1rem' }}>
+                <p style={{ marginBottom: '1rem', color: '#6b7280', fontSize: '0.9rem' }}>
+                  Use validated clinical scores to support your diagnostic decisions
+                </p>
+                
+                <div style={{ 
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+                  gap: '1rem'
+                }}>
+                  {availableCalculators.map((calc) => (
+                    <button
+                      key={calc.id}
+                      onClick={() => setSelectedCalculator(calc.id)}
+                      style={{
+                        padding: '1rem',
+                        background: selectedCalculator === calc.id ? '#ccfbf1' : '#f9fafb',
+                        border: selectedCalculator === calc.id ? '2px solid #14b8a6' : '2px solid #e5e7eb',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      <div style={{ fontWeight: '700', marginBottom: '0.5rem', color: '#1a202c' }}>
+                        {calc.name}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                        {calc.category}
+                      </div>
+                      <div style={{ fontSize: '0.85rem', color: '#374151' }}>
+                        {calc.description}
+                      </div>
+                    </button>
+                  ))}
+                </div>
 
-            {selectedCalculator && (
-              <div style={{ 
-                marginTop: '1.5rem',
-                padding: '1.5rem',
-                background: '#f0f9ff',
-                borderRadius: '8px',
-                border: '2px solid #3b82f6'
-              }}>
-                <div style={{ 
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '1rem'
-                }}>
-                  <h3 style={{ margin: 0, fontSize: '1.1rem' }}>
-                    {availableCalculators.find(c => c.id === selectedCalculator)?.name}
-                  </h3>
-                  <button
-                    onClick={() => setSelectedCalculator(null)}
-                    style={{
-                      padding: '0.5rem 1rem',
-                      background: '#fee2e2',
-                      color: '#991b1b',
-                      border: 'none',
+                {selectedCalculator && (
+                  <div style={{ 
+                    marginTop: '1.5rem',
+                    padding: '1.5rem',
+                    background: '#f0fdfa',
+                    borderRadius: '8px',
+                    border: '2px solid #14b8a6'
+                  }}>
+                    <div style={{ 
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: '1rem'
+                    }}>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#0f766e' }}>
+                        {availableCalculators.find(c => c.id === selectedCalculator)?.name}
+                      </h3>
+                      <button
+                        onClick={() => setSelectedCalculator(null)}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          fontWeight: '600',
+                          fontSize: '0.85rem'
+                        }}
+                      >
+                        Close
+                      </button>
+                    </div>
+                    <div style={{ 
+                      padding: '1rem',
+                      background: 'white',
                       borderRadius: '6px',
-                      cursor: 'pointer',
-                      fontWeight: '600',
-                      fontSize: '0.85rem'
-                    }}
-                  >
-                    Close
-                  </button>
-                </div>
-                <div style={{ 
-                  padding: '1rem',
-                  background: 'white',
-                  borderRadius: '6px',
-                  fontSize: '0.9rem',
-                  color: '#6b7280'
-                }}>
-                  <em>Calculator interface would go here - requires user input for specific criteria</em>
-                  <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
-                    Note: Full interactive calculators will be implemented in the next phase
+                      fontSize: '0.9rem',
+                      color: '#6b7280'
+                    }}>
+                      <em>Calculator interface would go here - requires user input for specific criteria</em>
+                      <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
+                        Note: Full interactive calculators will be implemented in the next phase
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
-            )}
+            </details>
           </div>
         )}
 
