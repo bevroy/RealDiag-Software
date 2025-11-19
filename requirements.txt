@@ -19,3 +19,18 @@ python-multipart
 slowapi>=0.1.9
 bcrypt>=4.0.1
 cryptography>=41.0.0
+
+# Testing and Quality
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+locust>=2.15.0
+bandit>=1.7.5
+safety>=2.3.5
+
+# Monitoring and Error Tracking
+sentry-sdk>=1.38.0
+prometheus-client>=0.18.0
+
+# E2E Testing
+playwright>=1.40.0

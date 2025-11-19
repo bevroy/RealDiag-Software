@@ -208,16 +208,14 @@ def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> 
 
 
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
-@limiter.limit("10/minute")  # Rate limit: 10 searches per minute
-async def search_by_symptoms(request_obj: Request, request: SymptomSearchRequest):
+async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request = None):
     """
     Search for diagnoses based on symptom input.
-    Rate limited to 10 requests per minute per IP.
     
     Returns ranked list of possible diagnoses with match scores.
     """
     # Audit log the search
-    client_ip = request_obj.client.host if request_obj.client else "unknown"
+    client_ip = request_obj.client.host if request_obj and request_obj.client else "unknown"
     AuditLogger.log_security_event(
         "symptom_search",
         {

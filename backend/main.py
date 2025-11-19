@@ -57,6 +57,14 @@ app.include_router(integration_router)
 app.include_router(user_router)
 app.include_router(education_router)
 
+# Include monitoring router if available
+try:
+    from backend.services.monitoring import router as monitoring_router
+    app.include_router(monitoring_router)
+    logger.info("Monitoring endpoints enabled")
+except ImportError:
+    logger.warning("Monitoring module not available")
+
 
 # Serve static files (assets)
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
