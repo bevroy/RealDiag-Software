@@ -98,7 +98,7 @@ export default function SourcesPage() {
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <a
               href="/"
               style={{
@@ -109,6 +109,23 @@ export default function SourcesPage() {
               }}
             >
               RealDiag
+            </a>
+            <a
+              href="/"
+              style={{
+                padding: "8px 16px",
+                background: "rgba(255, 255, 255, 0.2)",
+                color: "white",
+                textDecoration: "none",
+                borderRadius: "6px",
+                fontSize: 14,
+                fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                gap: "6px"
+              }}
+            >
+              🏠 Home
             </a>
           </div>
         </header>

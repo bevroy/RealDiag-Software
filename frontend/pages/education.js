@@ -220,6 +220,23 @@ export default function EducationPage() {
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           color: white;
           border-radius: 12px;
+          position: relative;
+        }
+
+        .home-button {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          padding: 8px 16px;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          text-decoration: none;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 6px;
         }
 
         .education-header h1 {
@@ -369,6 +386,7 @@ export default function EducationPage() {
 
       <div className="education-container">
         <header className="education-header">
+          <a href="/" className="home-button">🏠 Home</a>
           <h1>📚 Medical Training Center</h1>
           <p>Enhance your clinical reasoning skills with cases, quizzes, and flashcards</p>
         </header>

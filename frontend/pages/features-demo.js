@@ -48,7 +48,24 @@ export default function FeaturesDemo() {
       {/* Task 6.1: Skip Link */}
       <SkipLink targetId="main-content" />
       
-      <header role="banner" style={{ marginBottom: '2rem' }}>
+      <header role="banner" style={{ marginBottom: '2rem', position: 'relative' }}>
+        <a href="/" style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          padding: '8px 16px',
+          background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+          color: 'white',
+          textDecoration: 'none',
+          borderRadius: '6px',
+          fontSize: 14,
+          fontWeight: 600,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}>
+          🏠 Home
+        </a>
         <h1>RealDiag - New Features Demo</h1>
         <p style={{ color: '#6b7280', fontSize: '1.1rem' }}>
           Accessibility, Tablet Optimization & Advanced Decision Support

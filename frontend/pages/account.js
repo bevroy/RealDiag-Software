@@ -210,23 +210,41 @@ export default function AccountPage() {
               {isAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches and personalize your experience'}
             </p>
           </div>
-          {isAuthenticated && (
-            <button
-              onClick={handleLogout}
-              style={{
-                padding: '0.75rem 1.5rem',
-                background: '#ef4444',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                fontWeight: '600'
-              }}
-            >
-              Logout
-            </button>
-          )}
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <a href="/" style={{
+              padding: '0.75rem 1.5rem',
+              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              fontWeight: '600',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              🏠 Home
+            </a>
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  background: '#ef4444',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  fontWeight: '600'
+                }}
+              >
+                Logout
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Tabs */}

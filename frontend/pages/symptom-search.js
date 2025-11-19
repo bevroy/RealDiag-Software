@@ -857,6 +857,23 @@ export default function SymptomSearch() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <Link href="/" style={{
+            padding: '0.5rem 1rem',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
+            fontWeight: '500',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            minHeight: '44px',
+            textDecoration: 'none'
+          }}>
+            🏠 Home
+          </Link>
           <button
             onClick={() => setShowPreferences(!showPreferences)}
             style={{

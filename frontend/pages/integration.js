@@ -54,8 +54,26 @@ export default function IntegrationPage() {
           borderRadius: '16px', 
           padding: '2rem', 
           marginBottom: '2rem',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
+          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+          position: 'relative'
         }}>
+          <a href="/" style={{
+            position: 'absolute',
+            top: '1.5rem',
+            right: '2rem',
+            padding: '8px 16px',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '6px',
+            fontSize: 14,
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            🏠 Home
+          </a>
           <h1 style={{ 
             margin: '0 0 0.5rem', 
             fontSize: '2.5rem', 
