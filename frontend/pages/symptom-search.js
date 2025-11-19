@@ -189,10 +189,10 @@ export default function SymptomSearch() {
     };
 
     if (darkMode) {
-      baseStyle.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)';
+      baseStyle.background = 'linear-gradient(135deg, #0f766e 0%, #0d9488 100%)';
       baseStyle.color = '#e5e7eb';
     } else {
-      baseStyle.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+      baseStyle.background = 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)';
       baseStyle.color = '#1a202c';
     }
 
@@ -895,7 +895,7 @@ export default function SymptomSearch() {
           </button>
           <Link href="/account" style={{
             padding: '0.5rem 1rem',
-            background: isAuthenticated ? 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)' : '#10b981',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
             color: 'white',
             borderRadius: '6px',
             textDecoration: 'none',
@@ -921,7 +921,7 @@ export default function SymptomSearch() {
           padding: '1.5rem',
           borderRadius: '8px',
           boxShadow: darkMode ? '0 4px 6px rgba(0,0,0,0.3)' : '0 4px 6px rgba(0,0,0,0.1)',
-          border: `2px solid ${darkMode ? '#3b82f6' : '#3b82f6'}`
+          border: `2px solid ${darkMode ? '#14b8a6' : '#14b8a6'}`
         }}>
           <h3 style={{ 
             margin: '0 0 1rem', 
@@ -954,7 +954,7 @@ export default function SymptomSearch() {
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  background: darkMode ? '#3b82f6' : '#f3f4f6',
+                  background: darkMode ? '#14b8a6' : '#ccfbf1',
                   color: darkMode ? 'white' : '#1a202c',
                   border: 'none',
                   borderRadius: '6px',
@@ -1131,7 +1131,7 @@ export default function SymptomSearch() {
                   onClick={isListening ? handleStopVoiceInput : handleStartVoiceInput}
                   style={{
                     padding: '0.75rem',
-                    background: isListening ? '#ef4444' : '#8b5cf6',
+                    background: isListening ? '#ef4444' : '#14b8a6',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -1154,7 +1154,7 @@ export default function SymptomSearch() {
                   onClick={handleStartScanner}
                   style={{
                     padding: '0.75rem',
-                    background: '#f59e0b',
+                    background: '#14b8a6',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -1176,7 +1176,7 @@ export default function SymptomSearch() {
                 onClick={() => setShowMobileFeatures(!showMobileFeatures)}
                 style={{
                   padding: '0.75rem',
-                  background: '#06b6d4',
+                  background: '#14b8a6',
                   color: 'white',
                   border: 'none',
                   borderRadius: '6px',
@@ -1214,7 +1214,7 @@ export default function SymptomSearch() {
               marginBottom: '1rem',
               padding: '1rem',
               background: isListening ? '#fef3c7' : '#f0fdf4',
-              border: `2px solid ${isListening ? '#f59e0b' : '#10b981'}`,
+              border: `2px solid ${isListening ? '#f59e0b' : '#14b8a6'}`,
               borderRadius: '6px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
