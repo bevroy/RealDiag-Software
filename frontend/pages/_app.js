@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import '../styles/globals.css'
 import '../styles/accessibility-tablet.css'
+// ...existing code...
 
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)

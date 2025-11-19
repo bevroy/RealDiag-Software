@@ -7,7 +7,7 @@ export default function AccountPage() {
   const router = useRouter();
   const [apiBase, setApiBase] = useState('');
   const [activeTab, setActiveTab] = useState('login');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -43,16 +43,16 @@ export default function AccountPage() {
       const userData = await getCurrentUser();
       if (userData) {
         setUser(userData);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
         setActiveTab('dashboard');
         loadDashboardData();
       } else {
-        setIsAuthenticated(false);
+        setIsUserAuthenticated(false);
         setUser(null);
       }
     } catch (err) {
       console.error('Failed to fetch profile:', err);
-      setIsAuthenticated(false);
+      setIsUserAuthenticated(false);
       setUser(null);
     }
   };
@@ -99,7 +99,7 @@ export default function AccountPage() {
     try {
       const data = await authLogin(loginEmail, loginPassword);
       setUser(data.user);
-      setIsAuthenticated(true);
+      setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       loadDashboardData();
     } catch (err) {
@@ -123,7 +123,7 @@ export default function AccountPage() {
         institution: registerInstitution || null
       });
       setUser(data.user);
-      setIsAuthenticated(true);
+      setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       loadDashboardData();
     } catch (err) {
@@ -140,7 +140,7 @@ export default function AccountPage() {
       console.error('Logout error:', err);
     } finally {
       setUser(null);
-      setIsAuthenticated(false);
+      setIsUserAuthenticated(false);
       setActiveTab('login');
       setSearchHistory([]);
       setFavorites([]);
@@ -294,7 +294,7 @@ export default function AccountPage() {
                 My Account
               </h1>
               <p style={{ margin: '0.25rem 0 0', color: '#666', fontSize: '0.9rem' }}>
-                {isAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}
+                {isUserAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}
               </p>
             </div>
           </div>
@@ -315,7 +315,7 @@ export default function AccountPage() {
             }}>
               🏠 Home
             </a>
-            {isAuthenticated && (
+            {isUserAuthenticated && (
               <button
                 onClick={handleLogout}
                 style={{
@@ -336,7 +336,7 @@ export default function AccountPage() {
         </div>
 
         {/* Tabs */}
-        {!isAuthenticated && (
+        {!isUserAuthenticated && (
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem' }}>
             {['login', 'register'].map(tab => (
               <button
@@ -360,7 +360,7 @@ export default function AccountPage() {
           </div>
         )}
 
-        {isAuthenticated && (
+        {isUserAuthenticated && (
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
             {['dashboard', 'history', 'favorites', 'lists', 'analytics'].map(tab => (
               <button
@@ -405,7 +405,7 @@ export default function AccountPage() {
           )}
 
           {/* Login Tab */}
-          {activeTab === 'login' && !isAuthenticated && (
+          {activeTab === 'login' && !isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Sign In</h2>
               <form onSubmit={handleLogin} style={{ maxWidth: '400px' }}>
@@ -469,7 +469,7 @@ export default function AccountPage() {
           )}
 
           {/* Register Tab */}
-          {activeTab === 'register' && !isAuthenticated && (
+          {activeTab === 'register' && !isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Create Account</h2>
               <form onSubmit={handleRegister} style={{ maxWidth: '500px' }}>
