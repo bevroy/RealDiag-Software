@@ -114,6 +114,10 @@ export default function ReferencePage() {
           Need a printable cheat-sheet?{" "}
           <a href="/reference/printable" target="_blank" rel="noopener noreferrer" style={{ color: '#667eea' }}>
             Open printable view
+          </a>{" "}
+          • View{" "}
+          <a href="/sources" style={{ color: '#667eea' }}>
+            medical sources & references
           </a>.
         </p>
       </div>
@@ -369,13 +373,19 @@ export default function ReferencePage() {
                     )}
                   </div>
                   {r.citations && r.citations.length > 0 && (
-                    <div>
-                      <strong>Guideline / reference notes:</strong>
+                    <div style={{ marginTop: 8 }}>
+                      <strong>📚 Sources & References:</strong>
                       <ol style={{ fontSize: 12, marginTop: 4, paddingLeft: 18 }}>
                         {r.citations.map((c, i) => (
                           <li key={i}>{c}</li>
                         ))}
                       </ol>
+                    </div>
+                  )}
+                  {(!r.citations || r.citations.length === 0) && (
+                    <div style={{ marginTop: 8, fontSize: 11, color: "#666" }}>
+                      <strong>Sources:</strong> Clinical guidelines and medical literature. See{" "}
+                      <a href="/sources" style={{ color: "#667eea" }}>Medical Sources page</a> for complete references.
                     </div>
                   )}
                 </div>

@@ -296,6 +296,18 @@ export default function Home() {
             }}>
               📚 Medical Training
             </a>
+            <a href="/sources" style={{
+              padding: '1rem',
+              background: 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%)',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              transition: 'all 0.2s'
+            }}>
+              📖 Medical Sources
+            </a>
             <a href="/account" style={{
               padding: '1rem',
               background: 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%)',
