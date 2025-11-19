@@ -179,30 +179,8 @@ export default function SourcesPage() {
                               borderRadius: 999,
                               fontSize: 12,
                               marginRight: 12,
-                              background:
-                                fam.family === "neurology" ? "#E3F2FD" :
-                                fam.family === "cardiology" ? "#FCE4EC" :
-                                fam.family === "endocrinology" ? "#FFF3E0" :
-                                fam.family === "pulmonology" ? "#E8F5E9" :
-                                fam.family === "gastroenterology" ? "#FFFDE7" :
-                                fam.family === "infectious_disease" ? "#FFEBEE" :
-                                fam.family === "nephrology" ? "#E0F7FA" :
-                                fam.family === "rheumatology" ? "#F3E5F5" :
-                                fam.family === "dermatology" ? "#FBE9E7" :
-                                fam.family === "psychiatry" ? "#E8EAF6" :
-                                fam.family === "obstetrics_gynecology" ? "#FCE4EC" : "#F5F5F5",
-                              color:
-                                fam.family === "neurology" ? "#1565C0" :
-                                fam.family === "cardiology" ? "#C2185B" :
-                                fam.family === "endocrinology" ? "#E65100" :
-                                fam.family === "pulmonology" ? "#2E7D32" :
-                                fam.family === "gastroenterology" ? "#F57F17" :
-                                fam.family === "infectious_disease" ? "#C62828" :
-                                fam.family === "nephrology" ? "#006064" :
-                                fam.family === "rheumatology" ? "#6A1B9A" :
-                                fam.family === "dermatology" ? "#BF360C" :
-                                fam.family === "psychiatry" ? "#283593" :
-                                fam.family === "obstetrics_gynecology" ? "#AD1457" : "#616161",
+                              background: "#ccfbf1",
+                              color: "#0f766e",
                               fontWeight: 600,
                             }}
                           >
