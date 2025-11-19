@@ -84,7 +84,7 @@ if _preview_env:
     _p = re.sub(r'\$$', '', _p)
     PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:(?:%s)|(?:%s))$" % (_p, _netlify_part)
 else:
-    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:%s))$" % _netlify_part
+    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:localhost(?::\d+)?|.+-\d+\.app\.github\.dev|(?:%s))$" % _netlify_part
 
 
 # Add security middleware FIRST (before CORS) if security is enabled
@@ -100,6 +100,7 @@ app.add_middleware(
     # browser requests from the deployed frontend can reach this API.
     allow_origins=[
         "http://localhost:3000",
+        "http://localhost:8080",
         "https://realdiag.netlify.app",
         "https://main--realdiag.netlify.app",
     ],

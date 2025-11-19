@@ -16,9 +16,6 @@ const FAMILIES = [
 ];
 
 export default function ReferencePage() {
-  // Use runtime config for API base, with fallback to env var or Render URL
-  const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-  const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
   const [allRules, setAllRules] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -29,6 +26,10 @@ export default function ReferencePage() {
   useEffect(() => {
     let cancelled = false;
     async function loadAll() {
+      // Get API base inside useEffect to ensure runtime-config.js has loaded
+      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+      
       setLoading(true);
       setErr("");
       setExpandedId(null);
@@ -61,7 +62,7 @@ export default function ReferencePage() {
     return () => {
       cancelled = true;
     };
-  }, [apiBase]);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = (query || "").toLowerCase().trim();
