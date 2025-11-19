@@ -9,6 +9,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
+import { isAuthenticated } from '../utils/auth';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
 import { assessUrgency, getUrgencyBadge } from '../utils/timeSensitiveAlerts';
 import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor, getSeverityIcon } from '../utils/drugInteractions';
@@ -72,7 +73,7 @@ export default function SymptomSearch() {
   const [recentSearches, setRecentSearches] = useState([]);
   const [displayLimit, setDisplayLimit] = useState(5); // New: Show only 5 results initially
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   
   // Advanced features state
   const [expandedRedFlags, setExpandedRedFlags] = useState({});
@@ -121,7 +122,7 @@ export default function SymptomSearch() {
       }
       
       // Check authentication (via HttpOnly cookie)
-      if (checkAuth()) {
+      if (isAuthenticated()) {
         fetchUserProfile();
       }
       
@@ -136,15 +137,15 @@ export default function SymptomSearch() {
       const userData = await getCurrentUser();
       if (userData) {
         setUser(userData);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
       } else {
         setUser(null);
-        setIsAuthenticated(false);
+        setIsUserAuthenticated(false);
       }
     } catch (err) {
       console.error('Failed to fetch user profile:', err);
       setUser(null);
-      setIsAuthenticated(false);
+      setIsUserAuthenticated(false);
     }
   };
 
@@ -959,7 +960,7 @@ export default function SymptomSearch() {
             minHeight: '44px',
             boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)'
           }}>
-            {isAuthenticated ? `👤 ${user?.full_name?.split(' ')[0] || 'Account'}` : '👤 Sign In'}
+            {isUserAuthenticated ? `👤 ${user?.full_name?.split(' ')[0] || 'Account'}` : '👤 Sign In'}
           </Link>
         </div>
       </div>
