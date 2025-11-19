@@ -2095,13 +2095,13 @@ export default function SymptomSearch() {
                               <div style={{ 
                                 marginBottom: '1.5rem',
                                 padding: '1rem',
-                                background: 'linear-gradient(to right, #e0f2fe, #f0f9ff)',
+                                background: 'linear-gradient(to right, #ccfbf1, #f0fdfa)',
                                 borderRadius: '8px',
-                                borderLeft: '4px solid #0ea5e9'
+                                borderLeft: '4px solid #14b8a6'
                               }}>
                                 <h4 style={{ 
                                   margin: '0 0 0.75rem', 
-                                  color: '#075985', 
+                                  color: '#0f766e', 
                                   fontSize: '0.95rem', 
                                   fontWeight: '700',
                                   textTransform: 'uppercase',
@@ -2117,13 +2117,13 @@ export default function SymptomSearch() {
                                   <div style={{ marginBottom: result.referrals && result.referrals.length > 0 ? '1rem' : '0' }}>
                                     <h5 style={{ 
                                       margin: '0 0 0.5rem', 
-                                      color: '#0c4a6e', 
+                                      color: '#0f766e', 
                                       fontSize: '0.85rem', 
                                       fontWeight: '600'
                                     }}>
                                       📋 Diagnostic Tests:
                                     </h5>
-                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#075985' }}>
+                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#0f766e' }}>
                                       {result.tests.map((test, i) => (
                                         <li key={i} style={{ 
                                           marginBottom: '0.5rem', 
@@ -2142,13 +2142,13 @@ export default function SymptomSearch() {
                                   <div>
                                     <h5 style={{ 
                                       margin: '0 0 0.5rem', 
-                                      color: '#0c4a6e', 
+                                      color: '#0f766e', 
                                       fontSize: '0.85rem', 
                                       fontWeight: '600'
                                     }}>
                                       👨‍⚕️ Specialist Referrals:
                                     </h5>
-                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#075985' }}>
+                                    <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#0f766e' }}>
                                       {result.referrals.map((referral, i) => (
                                         <li key={i} style={{ 
                                           marginBottom: '0.5rem', 
@@ -2172,11 +2172,11 @@ export default function SymptomSearch() {
                                 padding: '1rem',
                                 background: 'linear-gradient(to right, #fef3c7, #fef9e7)',
                                 borderRadius: '8px',
-                                borderLeft: '4px solid #f59e0b'
+                                borderLeft: '4px solid #92400e'
                               }}>
                                 <h4 style={{ 
                                   margin: '0 0 0.75rem', 
-                                  color: '#92400e', 
+                                  color: '#78350f', 
                                   fontSize: '0.95rem', 
                                   fontWeight: '700',
                                   textTransform: 'uppercase',
@@ -2207,13 +2207,13 @@ export default function SymptomSearch() {
                               <div style={{ 
                                 marginBottom: '1.5rem',
                                 padding: '1rem',
-                                background: 'linear-gradient(to right, #dbeafe, #eff6ff)',
+                                background: 'linear-gradient(to right, #ccfbf1, #f0fdfa)',
                                 borderRadius: '8px',
-                                borderLeft: '4px solid #3b82f6'
+                                borderLeft: '4px solid #14b8a6'
                               }}>
                                 <h4 style={{ 
                                   margin: '0 0 0.75rem', 
-                                  color: '#1e40af', 
+                                  color: '#0f766e', 
                                   fontSize: '0.95rem', 
                                   fontWeight: '700',
                                   textTransform: 'uppercase',
@@ -2224,7 +2224,7 @@ export default function SymptomSearch() {
                                 }}>
                                   <span>💊</span> Management
                                 </h4>
-                                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#1e3a8a' }}>
+                                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#0f766e' }}>
                                   {result.management.map((step, i) => (
                                     <li key={i} style={{ 
                                       marginBottom: '0.5rem', 
