@@ -47,15 +47,27 @@ python main.py --all
 
 ## Features
 
-- **System Diagnostics**: Monitor CPU, memory, and disk usage with configurable thresholds
-- **Network Diagnostics**: Check network connectivity, interface information, and network statistics
-- **Performance Monitoring**: Track system uptime, process information, and load averages
-- **Real-time Analysis**: Get instant insights into your system's health
-- **Report Generation**: Save diagnostic reports in JSON format for later analysis
-- **Color-coded Output**: Easy-to-read, color-coded console output
-- **Flexible CLI**: Command-line interface with multiple options for targeted diagnostics
-- **Web Interface**: Modern web-based diagnostic interface (via Docker)
-- **REST API**: Backend API for diagnostic services (via Docker)
+### Core Diagnostic Capabilities
+- **21 Medical Specialties**: Comprehensive coverage including Cardiology, Neurology, Emergency Medicine, and more
+- **8,000+ Diagnostic Rules**: Evidence-based criteria from major medical organizations
+- **Decision Tree Engine**: Intelligent symptom-to-diagnosis matching
+- **ICD-10 & LOINC Codes**: Complete medical coding support
+- **Medical Sources**: Attribution to ACC/AHA, ADA, IDSA, KDIGO, and other trusted organizations
+
+### Epic/EHR Integration 🆕
+- **SMART on FHIR**: Launch directly from Epic patient chart
+- **Real-time Lab Evaluation**: Automatically checks troponin, WBC, glucose, and more
+- **Automated Criteria Matching**: Compares patient data to diagnostic criteria
+- **Intelligent Recommendations**: Suggests orders based on missing tests
+- **Clinical Scores**: qSOFA, HEART score, TIMI calculated automatically
+- **Bi-directional Integration**: Read patient data, write orders (coming soon)
+
+### User Interface
+- **Web Interface**: Modern Next.js application with interactive diagnostic tools
+- **REST API**: FastAPI backend with comprehensive endpoints
+- **SMART Launch Page**: Native Epic integration interface
+- **Educational Mode**: Learning tools for medical students
+- **Report Generation**: PDF export and clinical documentation
 
 ## Installation
 
@@ -103,6 +115,34 @@ Run performance diagnostics only:
 ```bash
 python main.py --performance
 ```
+
+## Usage - Epic Integration 🆕
+
+### Setup for Epic/EHR Connection
+
+1. **Register your app with Epic App Oriel**:
+   - Go to https://apporchard.epic.com/
+   - Create new SMART on FHIR app
+   - Configure redirect URI: `https://realdiag-software.onrender.com/smart/callback`
+
+2. **Configure environment variables**:
+```bash
+# Copy example file
+cp .env.example .env
+
+# Edit with your Epic credentials
+FHIR_BASE_URL=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4
+SMART_CLIENT_ID=your_epic_client_id
+SMART_CLIENT_SECRET=your_epic_client_secret
+SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+```
+
+3. **Launch from Epic**:
+   - Open patient chart in Epic
+   - Click "RealDiag" in app menu
+   - Automatic patient data loading and evaluation
+
+For complete Epic integration documentation, see [EPIC_INTEGRATION_GUIDE.md](./EPIC_INTEGRATION_GUIDE.md).
 
 ### Combining Options
 
