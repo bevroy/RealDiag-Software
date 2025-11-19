@@ -105,24 +105,24 @@ export default function ReferencePage() {
   }
 
   return (
-    <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto", minHeight: '100vh', background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
+    <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto", minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)' }}>
       <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '16px' }}>
         <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-        <h1 style={{ marginBottom: 0, color: '#1a202c' }}>Reference: Diagnostic Rules & Codes</h1>
+        <h1 style={{ marginBottom: 0, color: '#0f766e' }}>Reference: Diagnostic Rules & Codes</h1>
       </div>
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-        <p style={{ marginBottom: 8, fontSize: 14, color: "#4a5568" }}>
+        <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
           Search across all disease processes (neurology, cardiology, endocrinology) to find
           relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
         </p>
-        <p style={{ margin: 0, fontSize: 12, color: "#718096" }}>
+        <p style={{ margin: 0, fontSize: 12, color: "#94a3b8" }}>
           Need a printable cheat-sheet?{" "}
-          <a href="/reference/printable" target="_blank" rel="noopener noreferrer" style={{ color: '#667eea' }}>
+          <a href="/reference/printable" target="_blank" rel="noopener noreferrer" style={{ color: '#14b8a6' }}>
             Open printable view
           </a>{" "}
           • View{" "}
-          <a href="/sources" style={{ color: '#667eea' }}>
+          <a href="/sources" style={{ color: '#14b8a6' }}>
             medical sources & references
           </a>.
         </p>
@@ -149,7 +149,7 @@ export default function ReferencePage() {
               border: "1px solid #ccc",
               fontSize: 13,
               cursor: "pointer",
-              background: selectedFamily === "all" ? "#e0f2f1" : "#f5f5f5",
+              background: selectedFamily === "all" ? "#ccfbf1" : "#f5f5f5",
               fontWeight: selectedFamily === "all" ? 600 : 400,
             }}
           >
@@ -167,7 +167,7 @@ export default function ReferencePage() {
                   border: "1px solid #ccc",
                   fontSize: 13,
                   cursor: "pointer",
-                  background: selectedFamily === f.id ? "#e0f2f1" : "#f5f5f5",
+                  background: selectedFamily === f.id ? "#ccfbf1" : "#f5f5f5",
                   fontWeight: selectedFamily === f.id ? 600 : 400,
                 }}
               >
@@ -184,8 +184,8 @@ export default function ReferencePage() {
           style={{
             padding: "6px 12px",
             borderRadius: 999,
-            border: "1px solid #00796b",
-            background: "#009688",
+            border: "1px solid #0d9488",
+            background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
             color: "white",
             fontSize: 13,
             textDecoration: "none",
