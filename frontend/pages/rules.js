@@ -85,14 +85,12 @@ export default function ReferencePage() {
     return (rulesToFilter || []).filter((r) => {
       const label = (r.label || "").toLowerCase();
       const id = (r.id || "").toLowerCase();
-      const family = (r.family || "").toLowerCase();
       const present = (r.presentations || []).join(" ").toLowerCase();
       const icd = (r.icd10 || []).join(" ").toLowerCase();
       const snomed = (r.snomed || []).join(" ").toLowerCase();
       return (
         label.includes(q) ||
         id.includes(q) ||
-        family.includes(q) ||
         present.includes(q) ||
         icd.includes(q) ||
         snomed.includes(q)
