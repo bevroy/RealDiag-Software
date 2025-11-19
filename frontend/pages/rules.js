@@ -273,6 +273,15 @@ export default function ReferencePage() {
         {(filtered || []).map((r, idx) => {
           if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
+          
+          // Safe value extraction with fallbacks
+          const label = r.label || r.id || '';
+          const family = r.family || '';
+          const presentations = r.presentations || [];
+          const icd10 = r.icd10 || [];
+          const snomed = r.snomed || [];
+          const citations = r.citations || [];
+          
           return (
             <div key={r.id}>
               <div
@@ -318,27 +327,27 @@ export default function ReferencePage() {
                       fontWeight: 600,
                     }}
                   >
-                    {r.family}
+                    {family}
                   </span>
                 </div>
                 <div>
-                  <div style={{ fontWeight: 600 }}>{r.label || r.id}</div>
+                  <div style={{ fontWeight: 600 }}>{label}</div>
                   <div style={{ fontSize: 11, color: "#777" }}>{r.id}</div>
                 </div>
                 <div>
-                  {(!r.presentations || !Array.isArray(r.presentations) || r.presentations.length === 0) ? (
+                  {presentations.length === 0 ? (
                     <span style={{ color: "#999" }}>—</span>
                   ) : (
                     <ul style={{ margin: 0, paddingLeft: 18 }}>
-                      {r.presentations.map((p, i) => (
+                      {presentations.map((p, i) => (
                         <li key={i}>{p}</li>
                       ))}
                     </ul>
                   )}
                 </div>
                 <div>
-                  {r.icd10 && Array.isArray(r.icd10) && r.icd10.length > 0 ? (
-                    r.icd10.join(", ")
+                  {icd10.length > 0 ? (
+                    icd10.join(", ")
                   ) : (
                     <span style={{ color: "#999" }}>—</span>
                   )}
@@ -373,23 +382,23 @@ export default function ReferencePage() {
                 >
                   <div style={{ marginBottom: 4 }}>
                     <strong>SNOMED:</strong>{" "}
-                    {r.snomed && Array.isArray(r.snomed) && r.snomed.length > 0 ? (
-                      r.snomed.map(String).join(", ")
+                    {snomed.length > 0 ? (
+                      snomed.join(", ")
                     ) : (
                       <span style={{ color: "#999" }}>Not specified</span>
                     )}
                   </div>
-                  {r.citations && Array.isArray(r.citations) && r.citations.length > 0 && (
+                  {citations.length > 0 && (
                     <div style={{ marginTop: 8 }}>
                       <strong>📚 Sources & References:</strong>
                       <ol style={{ fontSize: 12, marginTop: 4, paddingLeft: 18 }}>
-                        {r.citations.map((c, i) => (
+                        {citations.map((c, i) => (
                           <li key={i}>{c}</li>
                         ))}
                       </ol>
                     </div>
                   )}
-                  {(!r.citations || !Array.isArray(r.citations) || r.citations.length === 0) && (
+                  {citations.length === 0 && (
                     <div style={{ marginTop: 8, fontSize: 11, color: "#666" }}>
                       <strong>Sources:</strong> Clinical guidelines and medical literature. See{" "}
                       <a href="/sources" style={{ color: "#667eea" }}>Medical Sources page</a> for complete references.
