@@ -304,58 +304,20 @@ export default function FeaturesDemo() {
           <div style={{ 
             marginTop: '1rem',
             padding: '2rem',
-            background: 'linear-gradient(135deg, #fbeee6 0%, #e7f5f3 100%)',
-            border: '2px solid #78350f',
+            background: '#e0f2f1', // teal
             borderRadius: '8px'
           }}>
             <h3>🩺 Sample Diagnosis: {sampleResult.label}</h3>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
-              {/* Match Score */}
-              <div style={{ 
-                padding: '1.5rem', 
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                color: 'white',
-                borderRadius: '8px',
-                textAlign: 'center'
-              }}>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>MATCH SCORE</div>
-                <div style={{ fontSize: '2rem', fontWeight: '700', margin: '0.5rem 0' }}>
-                  {sampleResult.match_score.toFixed(1)}
-                </div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>out of 10</div>
-              </div>
-              
-              {/* Likelihood Score (NEW) */}
-              <div style={{ 
-                padding: '1.5rem', 
-                background: `linear-gradient(135deg, ${confidenceColor} 0%, ${confidenceColor}dd 100%)`,
-                color: 'white',
-                borderRadius: '8px',
-                textAlign: 'center',
-                border: '3px solid ' + confidenceColor
-              }}>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>LIKELIHOOD</div>
-                <div style={{ fontSize: '2rem', fontWeight: '700', margin: '0.5rem 0' }}>
-                  {likelihood ? likelihood.toFixed(0) + '%' : 'N/A'}
-                </div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{confidenceLevel} Confidence</div>
-              </div>
-              
-              {/* Test Characteristics */}
-              <div style={{ padding: '1.5rem', background: '#f0fdfa', borderRadius: '8px', border: '2px solid #ccfbf1' }}>
-                <div style={{ marginBottom: '0.75rem' }}>
-                  <div style={{ fontSize: '0.8rem', color: '#6b7280', fontWeight: '600' }}>SENSITIVITY</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#10b981' }}>
-                    {(sampleResult.sensitivity * 100).toFixed(0)}%
-                  </div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.8rem', color: '#6b7280', fontWeight: '600' }}>SPECIFICITY</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#3b82f6' }}>
-                    {(sampleResult.specificity * 100).toFixed(0)}%
-                  </div>
-                </div>
+              <div style={{ color: '#92400e', fontSize: '1.1rem', background: 'none', padding: 0 }}>
+                <strong>Advanced Decision Support:</strong> This section provides a sample diagnosis, match score, likelihood, and test characteristics in a clear, text-based format. All information is presented without decorative boxes or clip-art for improved accessibility and consistency.
+                <br /><br />
+                <span><strong>Sample Diagnosis:</strong> {sampleResult.label}</span><br />
+                <span><strong>Match Score:</strong> {sampleResult.match_score.toFixed(1)} / 10</span><br />
+                <span><strong>Likelihood:</strong> {likelihood ? likelihood.toFixed(0) + '%' : 'N/A'} ({confidenceLevel} Confidence)</span><br />
+                <span><strong>Sensitivity:</strong> {(sampleResult.sensitivity * 100).toFixed(0)}%</span><br />
+                <span><strong>Specificity:</strong> {(sampleResult.specificity * 100).toFixed(0)}%</span>
               </div>
             </div>
             
@@ -391,15 +353,12 @@ export default function FeaturesDemo() {
             <div style={{ 
               marginTop: '2rem', 
               padding: '1.5rem', 
-              background: 'linear-gradient(to right, #e0f2f1, #fef9e7)', // teal to light brown
-              borderLeft: '4px solid #92400e', // brown
+              background: '#e0f2f1', // teal
               borderRadius: '8px'
             }}>
-              <h4 style={{ margin: '0 0 1rem', color: '#5b21b6' }}>
-                🔮 What-If Scenario Analysis
-              </h4>
+              <h4 style={{ margin: '0 0 1rem', color: '#92400e', fontWeight: 'bold' }}>What-If Scenario Analysis</h4>
               <p style={{ marginBottom: '1rem', color: '#6b21a8' }}>
-                Try removing findings to see how likelihood changes:
+                <span style={{ color: '#92400e' }}>Try removing findings to see how likelihood changes:</span>
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {sampleResult.matched_presentations.map((finding, i) => (
@@ -429,7 +388,7 @@ export default function FeaturesDemo() {
                 fontSize: '0.875rem',
                 color: '#92400e' // brown
               }}>
-                💡 <strong>Interactive Mode:</strong> In the main app, clicking these buttons toggles findings and recalculates likelihood in real-time!
+                <strong>Interactive Mode:</strong> In the main app, clicking these buttons toggles findings and recalculates likelihood in real-time!
               </div>
             </div>
           </div>
