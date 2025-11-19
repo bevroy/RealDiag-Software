@@ -139,7 +139,7 @@ export default function SourcesPage() {
           }}
         >
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-            <h1 style={{ fontSize: 32, marginBottom: 8, color: "#1f2937" }}>
+            <h1 style={{ fontSize: 32, marginBottom: 8, color: "#78350f" }}>
               📚 Medical Sources & References
             </h1>
             <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 32 }}>

@@ -25,7 +25,7 @@ export default function LegalDisclaimer() {
         <h1 style={{
           margin: '0 0 0.5rem',
           fontSize: '2.5rem',
-          background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
+          background: 'linear-gradient(135deg, #78350f 0%, #92400e 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'

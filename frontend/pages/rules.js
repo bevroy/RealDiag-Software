@@ -109,7 +109,7 @@ export default function ReferencePage() {
       <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-          <h1 style={{ marginBottom: 0, color: '#0f766e' }}>Reference: Diagnostic Rules & Codes</h1>
+          <h1 style={{ marginBottom: 0, color: '#78350f' }}>Reference: Diagnostic Rules & Codes</h1>
         </div>
         <a href="/" style={{
           padding: '8px 16px',

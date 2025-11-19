@@ -790,7 +790,7 @@ export default function SymptomSearch() {
             <h1 style={{ 
               margin: 0, 
               fontSize: `${1.5 * getFontSizeMultiplier()}rem`, 
-              color: getTextColor(),
+              color: '#78350f',
               fontWeight: '700'
             }}>
               Symptom Search

@@ -132,7 +132,7 @@ export default function Home() {
           alt="RealDiag Logo" 
           style={{ height: '150px', width: 'auto', marginBottom: '1rem' }}
         />
-        <h1 style={{ margin: 0, fontSize: '3.5rem', color: '#0f766e', fontWeight: '700', letterSpacing: '-0.02em' }}>
+        <h1 style={{ margin: 0, fontSize: '3.5rem', color: '#78350f', fontWeight: '700', letterSpacing: '-0.02em' }}>
           RealDiag, LLC
         </h1>
         <p style={{ margin: '1rem 0 0.5rem', color: '#64748b', fontSize: '1.4rem', fontWeight: '500' }}>

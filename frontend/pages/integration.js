@@ -77,7 +77,7 @@ export default function IntegrationPage() {
           <h1 style={{ 
             margin: '0 0 0.5rem', 
             fontSize: '2.5rem', 
-            background: 'linear-gradient(135deg, #14b8a6, #0d9488)',
+            background: 'linear-gradient(135deg, #78350f, #92400e)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>

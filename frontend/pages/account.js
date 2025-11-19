@@ -203,7 +203,7 @@ export default function AccountPage() {
           alignItems: 'center'
         }}>
           <div>
-            <h1 style={{ margin: '0 0 0.5rem', fontSize: '2.5rem', color: '#0f766e' }}>
+            <h1 style={{ margin: '0 0 0.5rem', fontSize: '2.5rem', color: '#78350f' }}>
               👤 My Account
             </h1>
             <p style={{ margin: 0, color: '#666' }}>

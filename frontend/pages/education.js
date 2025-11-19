@@ -242,6 +242,7 @@ export default function EducationPage() {
         .education-header h1 {
           margin: 0 0 10px 0;
           font-size: 2.5em;
+          color: #78350f;
         }
 
         .education-header p {

@@ -67,7 +67,7 @@ export default function FeaturesDemo() {
         }}>
           🏠 Home
         </a>
-        <h1>RealDiag - New Features Demo</h1>
+        <h1 style={{ color: '#78350f' }}>RealDiag - New Features Demo</h1>
         <p style={{ color: '#6b7280', fontSize: '1.1rem' }}>
           Accessibility, Tablet Optimization & Advanced Decision Support
         </p>
