@@ -94,7 +94,8 @@ export default function SourcesPage() {
         {/* Navigation Dropdown */}
         <div style={{
           maxWidth: '1200px',
-          margin: '0 auto 1rem'
+          margin: '0 auto 1rem',
+          width: '100%'
         }}>
           <details style={{
             background: 'white',
@@ -206,7 +207,7 @@ export default function SourcesPage() {
         </div>
 
         {/* Header */}
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: '100%' }}>
           <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
