@@ -21,15 +21,19 @@ from datetime import datetime
 
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
+from ..services.ehr_adapter import EHRAdapter, EHRVendor
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/smart", tags=["SMART on FHIR"])
 
 # Configuration (should be environment variables in production)
+# Supports multiple EHR vendors: Epic, Cerner, Allscripts, athenahealth
+EHR_VENDOR = os.getenv("EHR_VENDOR", "epic").lower()  # epic, cerner, allscripts, athenahealth
 FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4")
 CLIENT_ID = os.getenv("SMART_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("SMART_CLIENT_SECRET", "")
 REDIRECT_URI = os.getenv("SMART_REDIRECT_URI", "http://localhost:8000/smart/callback")
+TENANT_ID = os.getenv("EHR_TENANT_ID")  # Required for Cerner
 
 # Global instances (in production, use dependency injection)
 diagnostic_engine = SmartDiagnosticEngine()
@@ -80,6 +84,21 @@ class PatientSummaryResponse(BaseModel):
     recent_vitals: List[Dict[str, Any]]
 
 
+def get_ehr_config():
+    """Get EHR configuration for current vendor."""
+    try:
+        return EHRAdapter.get_config(
+            vendor=EHR_VENDOR,
+            fhir_base_url=FHIR_BASE_URL,
+            client_id=CLIENT_ID,
+            client_secret=CLIENT_SECRET,
+            tenant_id=TENANT_ID
+        )
+    except ValueError as e:
+        logger.error(f"EHR configuration error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/launch")
 async def smart_launch(
     iss: str = Query(..., description="FHIR server URL"),
@@ -88,7 +107,7 @@ async def smart_launch(
     """
     SMART on FHIR launch endpoint.
     
-    This is the entry point when launching from Epic or another EHR.
+    This is the entry point when launching from Epic, Cerner, or another EHR.
     Redirects to EHR authorization page.
     
     Args:
@@ -98,19 +117,16 @@ async def smart_launch(
     Returns:
         Redirect to EHR authorization page
     """
-    logger.info(f"SMART launch initiated from {iss}")
+    logger.info(f"SMART launch initiated from {iss} using {EHR_VENDOR}")
     
-    # In production, discover authorization endpoint from iss + /.well-known/smart-configuration
-    # For now, construct Epic's typical auth URL
-    auth_url = f"{iss}/oauth2/authorize"
+    # Get vendor-specific configuration
+    ehr_config = get_ehr_config()
     
-    # Build authorization URL
-    scopes = [
-        "launch",
-        "patient/*.read",
-        "openid",
-        "fhirUser"
-    ]
+    # Use vendor-specific authorization URL
+    auth_url = ehr_config.authorize_url
+    
+    # Build authorization URL with vendor-specific scopes
+    scopes = ehr_config.scopes
     
     params = {
         "response_type": "code",

@@ -449,11 +449,13 @@ function PatientBanner({ patientData }) {
 - Update problem list
 - Create clinical notes
 
-### Phase 4: Multi-EHR Support
-- Cerner/Oracle Health
-- Allscripts
-- athenahealth
-- MEDITECH
+### Phase 4: Multi-EHR Support ✅ **IMPLEMENTED**
+- ✅ **Cerner/Oracle Health** - Fully supported! See [CERNER_INTEGRATION_GUIDE.md](./CERNER_INTEGRATION_GUIDE.md)
+- ⏳ Allscripts (adapter ready, needs testing)
+- ⏳ athenahealth (adapter ready, needs testing)
+- ⏳ MEDITECH
+
+**Note**: The EHR adapter layer (`backend/services/ehr_adapter.py`) already supports Epic, Cerner, Allscripts, and athenahealth. Just configure environment variables to switch vendors!
 
 ### Phase 5: Advanced Features
 - Real-time risk calculators
