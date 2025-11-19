@@ -44,9 +44,10 @@ export default function FeaturesDemo() {
   const decisionTrace = generateDecisionTrace(sampleResult, likelihood);
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Task 6.1: Skip Link */}
-      <SkipLink targetId="main-content" />
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)', padding: '2rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Task 6.1: Skip Link */}
+        <SkipLink targetId="main-content" />
       
       <header role="banner" style={{ marginBottom: '2rem', position: 'relative' }}>
         <a href="/" style={{
@@ -414,6 +415,7 @@ export default function FeaturesDemo() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

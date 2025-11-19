@@ -910,7 +910,7 @@ export default function SymptomSearch() {
           </Link>
           <Link href="/account" style={{
             padding: '0.5rem 1rem',
-            background: isAuthenticated ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#10b981',
+            background: isAuthenticated ? 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)' : '#10b981',
             color: 'white',
             borderRadius: '6px',
             textDecoration: 'none',

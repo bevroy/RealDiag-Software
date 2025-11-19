@@ -44,7 +44,7 @@ export default function IntegrationPage() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
       padding: '2rem'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -77,7 +77,7 @@ export default function IntegrationPage() {
           <h1 style={{ 
             margin: '0 0 0.5rem', 
             fontSize: '2.5rem', 
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
+            background: 'linear-gradient(135deg, #14b8a6, #0d9488)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
@@ -132,7 +132,7 @@ export default function IntegrationPage() {
               style={{
                 padding: '0.75rem 1.5rem',
                 background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
-                color: activeTab === tab ? '#667eea' : 'white',
+                color: activeTab === tab ? '#14b8a6' : 'white',
                 border: 'none',
                 borderRadius: '8px',
                 fontSize: '1rem',
@@ -218,7 +218,7 @@ export default function IntegrationPage() {
                 Export diagnoses as FHIR R4 Condition resources for seamless integration with modern EHR systems.
               </p>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>📍 Endpoint</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>📍 Endpoint</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -232,7 +232,7 @@ Content-Type: application/json
 X-API-Key: your_api_key_here`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>📝 Request Body</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>📝 Request Body</h3>
               <pre style={{
                 background: '#f8fafc',
                 padding: '1rem',
@@ -253,7 +253,7 @@ X-API-Key: your_api_key_here`}
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>✅ Response (FHIR Condition Resource)</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>✅ Response (FHIR Condition Resource)</h3>
               <pre style={{
                 background: '#f8fafc',
                 padding: '1rem',
@@ -296,7 +296,7 @@ X-API-Key: your_api_key_here`}
                 style={{
                   marginTop: '2rem',
                   padding: '1rem 2rem',
-                  background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                  background: 'linear-gradient(135deg, #14b8a6, #0d9488)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '8px',
@@ -332,7 +332,7 @@ X-API-Key: your_api_key_here`}
                 Generate HL7 v2.5 messages for integration with legacy clinical information systems.
               </p>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>📍 Endpoint</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>📍 Endpoint</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -346,7 +346,7 @@ Content-Type: application/json
 X-API-Key: your_api_key_here`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>📝 Request Body</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>📝 Request Body</h3>
               <pre style={{
                 background: '#f8fafc',
                 padding: '1rem',
@@ -366,7 +366,7 @@ X-API-Key: your_api_key_here`}
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>✅ Response (HL7 Message)</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>✅ Response (HL7 Message)</h3>
               <pre style={{
                 background: '#f8fafc',
                 padding: '1rem',
@@ -408,7 +408,7 @@ OBX|2|CE|ICD10^ICD-10 Code||I24.9||||||F|||20251117103000`}
                 Receive real-time notifications when diagnoses are created, updated, or searched.
               </p>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>1. Register Webhook</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>1. Register Webhook</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -428,7 +428,7 @@ X-API-Key: your_api_key_here
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>2. Receive Notifications</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>2. Receive Notifications</h3>
               <p style={{ color: '#555', lineHeight: '1.8' }}>
                 When subscribed events occur, RealDiag will POST to your webhook URL:
               </p>
@@ -452,7 +452,7 @@ X-API-Key: your_api_key_here
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>3. Verify Signatures</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>3. Verify Signatures</h3>
               <p style={{ color: '#555', lineHeight: '1.8' }}>
                 All webhook requests include an <code>X-Webhook-Signature</code> header for verification:
               </p>
@@ -500,7 +500,7 @@ def verify_webhook(payload, signature, secret):
                 Create and manage API keys for secure access to integration endpoints.
               </p>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>Create API Key</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>Create API Key</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -519,7 +519,7 @@ Content-Type: application/json
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>Response</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>Response</h3>
               <pre style={{
                 background: '#f8fafc',
                 padding: '1rem',
@@ -537,7 +537,7 @@ Content-Type: application/json
 }`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>Using API Keys</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>Using API Keys</h3>
               <p style={{ color: '#555', lineHeight: '1.8' }}>
                 Include your API key in all integration endpoint requests:
               </p>
@@ -583,7 +583,7 @@ Content-Type: application/json
               </p>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Single Diagnosis Report</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Single Diagnosis Report</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/export/pdf/diagnosis</code></p>
                 
                 <h4>Request Example:</h4>
@@ -631,7 +631,7 @@ Content-Type: application/json
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Differential Diagnosis Report</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Differential Diagnosis Report</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/export/pdf/differential</code></p>
                 
                 <h4>Features:</h4>
@@ -681,7 +681,7 @@ with open("diagnosis_report.pdf", "wb") as f:
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 1: Configure FHIR Server</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Step 1: Configure FHIR Server</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/ehr/fhir/configure</code></p>
                 
                 <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
@@ -701,7 +701,7 @@ with open("diagnosis_report.pdf", "wb") as f:
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 2: Search for Patients</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Step 2: Search for Patients</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>GET /integration/ehr/fhir/search/patients</code></p>
                 
                 <h4>Query Parameters:</h4>
@@ -732,7 +732,7 @@ Response:
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Step 3: Pull Comprehensive Patient Data</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Step 3: Pull Comprehensive Patient Data</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>GET /integration/ehr/fhir/pull/patient/&#123;patient_id&#125;</code></p>
                 
                 <h4>Returns:</h4>
@@ -782,7 +782,7 @@ console.log(\`Current Medications: \${patientData.medications.length}\`);`}
               </p>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Create CPOE Order</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Create CPOE Order</h3>
                 <p><strong>Endpoint:</strong> <code style={{ background: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>POST /integration/cpoe/order</code></p>
                 
                 <h4>Supported Order Types:</h4>
@@ -802,7 +802,7 @@ console.log(\`Current Medications: \${patientData.medications.length}\`);`}
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Request Example - Lab Order</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Request Example - Lab Order</h3>
                 <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
 {`{
   "order_type": "lab",
@@ -838,7 +838,7 @@ console.log(\`Current Medications: \${patientData.medications.length}\`);`}
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <h3 style={{ marginTop: 0, color: '#667eea' }}>Python Example - Cardiology Referral</h3>
+                <h3 style={{ marginTop: 0, color: '#14b8a6' }}>Python Example - Cardiology Referral</h3>
                 <pre style={{ background: '#1e293b', color: '#e2e8f0', padding: '1rem', borderRadius: '8px', overflow: 'auto', fontSize: '0.875rem' }}>
 {`import requests
 
@@ -894,7 +894,7 @@ print(f"Status: {order['status']}")`}
             <div>
               <h2 style={{ margin: '0 0 1rem', color: '#333' }}>Code Examples</h2>
               
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>Python Example</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>Python Example</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -927,7 +927,7 @@ fhir_resource = response.json()["fhir_resource"]
 print(f"Created FHIR Condition: {fhir_resource['id']}")`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>JavaScript/Node.js Example</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>JavaScript/Node.js Example</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -958,7 +958,7 @@ const { hl7_message } = await response.json();
 console.log('HL7 Message:', hl7_message);`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>cURL Example</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>cURL Example</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',
@@ -978,7 +978,7 @@ curl -X POST ${apiBase}/integration/webhooks/register \\
   }'`}
               </pre>
 
-              <h3 style={{ marginTop: '2rem', color: '#667eea' }}>C# Example</h3>
+              <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>C# Example</h3>
               <pre style={{
                 background: '#1e293b',
                 color: '#e2e8f0',

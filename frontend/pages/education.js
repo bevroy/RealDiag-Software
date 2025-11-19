@@ -217,7 +217,7 @@ export default function EducationPage() {
           text-align: center;
           margin-bottom: 30px;
           padding: 30px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
           color: white;
           border-radius: 12px;
           position: relative;
@@ -270,13 +270,13 @@ export default function EducationPage() {
         }
 
         .education-tabs button:hover {
-          color: #667eea;
+          color: #14b8a6;
           background: #f5f5f5;
         }
 
         .education-tabs button.tab-active {
-          color: #667eea;
-          border-bottom-color: #667eea;
+          color: #14b8a6;
+          border-bottom-color: #14b8a6;
           font-weight: 600;
         }
 
@@ -342,7 +342,7 @@ export default function EducationPage() {
 
         .search-bar button {
           padding: 12px 30px;
-          background: #667eea;
+          background: #14b8a6;
           color: white;
           border: none;
           border-radius: 8px;
@@ -368,7 +368,7 @@ export default function EducationPage() {
         .case-card:hover {
           transform: translateY(-4px);
           box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-          border-color: #667eea;
+          border-color: #14b8a6;
         }
 
         .case-card h3 {

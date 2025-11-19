@@ -418,7 +418,7 @@ export default function ReferencePage() {
                   {citations.length === 0 && (
                     <div style={{ marginTop: 8, fontSize: 11, color: "#666" }}>
                       <strong>Sources:</strong> Clinical guidelines and medical literature. See{" "}
-                      <a href="/sources" style={{ color: "#667eea" }}>Medical Sources page</a> for complete references.
+                      <a href="/sources" style={{ color: "#14b8a6" }}>Medical Sources page</a> for complete references.
                     </div>
                   )}
                 </div>

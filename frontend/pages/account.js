@@ -187,7 +187,7 @@ export default function AccountPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
       padding: '2rem'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -203,7 +203,7 @@ export default function AccountPage() {
           alignItems: 'center'
         }}>
           <div>
-            <h1 style={{ margin: '0 0 0.5rem', fontSize: '2.5rem', color: '#667eea' }}>
+            <h1 style={{ margin: '0 0 0.5rem', fontSize: '2.5rem', color: '#0f766e' }}>
               👤 My Account
             </h1>
             <p style={{ margin: 0, color: '#666' }}>
@@ -257,7 +257,7 @@ export default function AccountPage() {
                 style={{
                   padding: '0.75rem 1.5rem',
                   background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
-                  color: activeTab === tab ? '#667eea' : 'white',
+                  color: activeTab === tab ? '#14b8a6' : 'white',
                   border: 'none',
                   borderRadius: '8px',
                   fontSize: '1rem',
@@ -281,7 +281,7 @@ export default function AccountPage() {
                 style={{
                   padding: '0.75rem 1.5rem',
                   background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
-                  color: activeTab === tab ? '#667eea' : 'white',
+                  color: activeTab === tab ? '#14b8a6' : 'white',
                   border: 'none',
                   borderRadius: '8px',
                   fontSize: '1rem',
@@ -364,7 +364,7 @@ export default function AccountPage() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    background: '#667eea',
+                    background: '#14b8a6',
                     color: 'white',
                     border: 'none',
                     borderRadius: '8px',
@@ -486,7 +486,7 @@ export default function AccountPage() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    background: '#667eea',
+                    background: '#14b8a6',
                     color: 'white',
                     border: 'none',
                     borderRadius: '8px',
@@ -520,8 +520,8 @@ export default function AccountPage() {
                   </div>
                   <div style={{ color: '#92400e', marginTop: '0.5rem' }}>Favorites</div>
                 </div>
-                <div style={{ padding: '1.5rem', background: '#e0e7ff', borderRadius: '12px', border: '2px solid #667eea' }}>
-                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#667eea' }}>
+                <div style={{ padding: '1.5rem', background: '#ccfbf1', borderRadius: '12px', border: '2px solid #14b8a6' }}>
+                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#14b8a6' }}>
                     {analytics?.total_custom_lists || 0}
                   </div>
                   <div style={{ color: '#4338ca', marginTop: '0.5rem' }}>Custom Lists</div>
@@ -529,13 +529,13 @@ export default function AccountPage() {
               </div>
 
               <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ color: '#667eea' }}>Quick Actions</h3>
+                <h3 style={{ color: '#14b8a6' }}>Quick Actions</h3>
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                   <button
                     onClick={() => router.push('/symptom-search')}
                     style={{
                       padding: '0.75rem 1.5rem',
-                      background: '#667eea',
+                      background: '#14b8a6',
                       color: 'white',
                       border: 'none',
                       borderRadius: '8px',
@@ -577,7 +577,7 @@ export default function AccountPage() {
               </div>
 
               <div>
-                <h3 style={{ color: '#667eea' }}>Recent Searches</h3>
+                <h3 style={{ color: '#14b8a6' }}>Recent Searches</h3>
                 {searchHistory.length === 0 ? (
                   <p style={{ color: '#666' }}>No searches yet. Start searching to see your history here!</p>
                 ) : (
@@ -730,7 +730,7 @@ export default function AccountPage() {
               <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Usage Analytics</h2>
               
               <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ color: '#667eea' }}>Top Symptoms Searched</h3>
+                <h3 style={{ color: '#14b8a6' }}>Top Symptoms Searched</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {analytics.top_symptoms?.slice(0, 10).map((item, idx) => (
                     <div key={idx} style={{
@@ -741,7 +741,7 @@ export default function AccountPage() {
                       background: '#f9fafb',
                       borderRadius: '8px'
                     }}>
-                      <span style={{ fontWeight: 'bold', color: '#667eea', minWidth: '30px' }}>{idx + 1}</span>
+                      <span style={{ fontWeight: 'bold', color: '#14b8a6', minWidth: '30px' }}>{idx + 1}</span>
                       <span style={{ flex: 1 }}>{item.symptom}</span>
                       <span style={{ color: '#666', fontSize: '0.875rem' }}>{item.count} searches</span>
                     </div>
@@ -750,7 +750,7 @@ export default function AccountPage() {
               </div>
 
               <div>
-                <h3 style={{ color: '#667eea' }}>Most Viewed Specialties</h3>
+                <h3 style={{ color: '#14b8a6' }}>Most Viewed Specialties</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
                   {analytics.top_specialties?.map((item, idx) => (
                     <div key={idx} style={{

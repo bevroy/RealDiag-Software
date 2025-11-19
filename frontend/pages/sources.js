@@ -92,7 +92,7 @@ export default function SourcesPage() {
         {/* Header */}
         <header
           style={{
-            background: "#667eea",
+            background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
             color: "white",
             padding: "16px 24px",
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
