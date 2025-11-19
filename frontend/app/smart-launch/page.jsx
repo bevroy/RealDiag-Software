@@ -357,7 +357,7 @@ const styles = {
     width: '50px',
     height: '50px',
     border: '4px solid #e5e7eb',
-    borderTop: '4px solid '#667eea',
+    borderTop: '4px solid #667eea',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
   },
