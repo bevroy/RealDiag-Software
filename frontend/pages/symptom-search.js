@@ -1844,7 +1844,7 @@ export default function SymptomSearch() {
                       onClick={() => setViewMode('card')}
                       style={{
                         padding: '0.5rem 1rem',
-                        background: viewMode === 'card' ? '#3b82f6' : 'white',
+                        background: viewMode === 'card' ? '#14b8a6' : 'white',
                         color: viewMode === 'card' ? 'white' : '#374151',
                         border: 'none',
                         cursor: 'pointer',
@@ -1858,7 +1858,7 @@ export default function SymptomSearch() {
                       onClick={() => setViewMode('compact')}
                       style={{
                         padding: '0.5rem 1rem',
-                        background: viewMode === 'compact' ? '#3b82f6' : 'white',
+                        background: viewMode === 'compact' ? '#14b8a6' : 'white',
                         color: viewMode === 'compact' ? 'white' : '#374151',
                         border: 'none',
                         borderLeft: '1px solid #d1d5db',
@@ -2027,8 +2027,8 @@ export default function SymptomSearch() {
                           style={{
                             width: '100%',
                             padding: '0.75rem',
-                            background: expandedCards[idx] ? '#3b82f6' : '#f3f4f6',
-                            color: expandedCards[idx] ? 'white' : '#374151',
+                            background: expandedCards[idx] ? '#14b8a6' : '#ccfbf1',
+                            color: expandedCards[idx] ? 'white' : '#0f766e',
                             border: 'none',
                             borderRadius: '6px',
                             cursor: 'pointer',
