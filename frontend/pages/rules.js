@@ -270,7 +270,10 @@ export default function ReferencePage() {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
           <span style={{ fontSize: 13, fontWeight: 600, marginRight: 4 }}>Filter:</span>
           <button
-            onClick={() => setSelectedFamily("all")}
+            onClick={() => {
+              setSelectedFamily("all");
+              setQuery("");
+            }}
             style={{
               padding: "6px 12px",
               borderRadius: 999,
@@ -288,7 +291,10 @@ export default function ReferencePage() {
             return (
               <button
                 key={f.id}
-                onClick={() => setSelectedFamily(f.id)}
+                onClick={() => {
+                  setSelectedFamily(f.id);
+                  setQuery("");
+                }}
                 style={{
                   padding: "6px 12px",
                   borderRadius: 999,
