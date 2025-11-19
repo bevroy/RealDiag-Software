@@ -20,6 +20,14 @@ We welcome suggestions for new features or improvements! Please create an issue 
 - Why this enhancement would be useful
 - Any implementation ideas you might have
 
+### Medical Content Updates
+
+For updates to diagnostic rules, clinical guidelines, or medical content:
+- **See [MEDICAL_UPDATE_PROCESS.md](MEDICAL_UPDATE_PROCESS.md)** for the complete medical content update workflow
+- All medical updates require clinical review by a qualified healthcare professional
+- Include source guideline references and evidence levels
+- Follow the structured update process for safety and accuracy
+
 ### Pull Requests
 
 1. Fork the repository
@@ -88,8 +96,34 @@ RealDiag-Software/
 └── config.py        # Configuration
 ```
 
+## Medical Content Guidelines
+
+### Clinical Review Requirements
+All medical content updates must:
+1. Include source references (published guidelines, peer-reviewed literature)
+2. Specify evidence level (A/B/C based on strength of evidence)
+3. Be reviewed by a qualified healthcare professional
+4. Include version numbers and last_updated dates
+5. Document the clinical reviewer's credentials in the PR
+
+### Validation
+Run the medical rules validator before submitting:
+```bash
+cd backend
+python scripts/validate_rules.py --all
+```
+
+This checks for:
+- Required metadata fields
+- YAML syntax errors
+- Missing citations
+- Outdated rules (>1 year old)
+- Data consistency
+
 ## Questions?
 
 Feel free to open an issue with your question or reach out to the maintainers.
+
+For medical content questions, see [MEDICAL_UPDATE_PROCESS.md](MEDICAL_UPDATE_PROCESS.md).
 
 Thank you for contributing!
