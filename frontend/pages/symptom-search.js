@@ -1627,8 +1627,8 @@ export default function SymptomSearch() {
               style={{
                 flex: 1,
                 padding: '1rem',
-                background: symptoms.length === 0 || loading ? '#9ca3af' : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-                color: 'white',
+                background: symptoms.length === 0 || loading ? '#99f6e4' : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                color: symptoms.length === 0 || loading ? '#0d9488' : 'white',
                 border: 'none',
                 borderRadius: '6px',
                 cursor: symptoms.length === 0 || loading ? 'not-allowed' : 'pointer',
