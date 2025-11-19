@@ -14,6 +14,7 @@ from backend.services.reference_router import router as reference_router
 from backend.services.symptom_search import router as symptom_search_router
 from backend.services.integration_router import router as integration_router
 from backend.services.user_router import router as user_router
+from backend.services.education_router import router as education_router
 from backend.services.security import security_middleware, limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi import _rate_limit_exceeded_handler
@@ -21,8 +22,8 @@ from config import Config
 
 app = FastAPI(
     title="RealDiag API", 
-    version="1.3.0", 
-    description="Clinical Decision Support System with Enhanced Security"
+    version="1.4.0", 
+    description="Clinical Decision Support System with Enhanced Security and Medical Training Tools"
 )
 
 # Add rate limiter to app state
@@ -43,6 +44,7 @@ app.include_router(reference_router)
 app.include_router(symptom_search_router)
 app.include_router(integration_router)
 app.include_router(user_router)
+app.include_router(education_router)
 
 
 # Serve static files (assets)

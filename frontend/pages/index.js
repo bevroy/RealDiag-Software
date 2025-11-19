@@ -38,10 +38,10 @@ export default function Home() {
         textAlign: 'center',
         boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
       }}>
-        <strong>🎉 NEW: Mobile Features & Advanced Clinical Tools!</strong>
+        <strong>🎉 NEW: Medical Training Center!</strong>
         <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', opacity: 0.95 }}>
-          Offline mode, voice input, barcode scanner, pretest calculators, drug interactions, and more!
-          Updated: November 19, 2025
+          Case library, quiz mode, flashcards, progress tracking, and learning objectives mapped to curriculum!
+          Perfect for medical students and residents. Updated: November 19, 2025
         </p>
       </div>
 
@@ -283,6 +283,18 @@ export default function Home() {
               transition: 'all 0.2s'
             }}>
               ✨ Features Demo
+            </a>
+            <a href="/education" style={{
+              padding: '1rem',
+              background: 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%)',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              transition: 'all 0.2s'
+            }}>
+              📚 Medical Training
             </a>
             <a href="/account" style={{
               padding: '1rem',
