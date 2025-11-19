@@ -130,7 +130,7 @@ export default function Home() {
         <img 
           src="/logo.png" 
           alt="RealDiag Logo" 
-          style={{ height: '100px', width: 'auto', marginBottom: '1rem' }}
+          style={{ height: '150px', width: 'auto', marginBottom: '1rem' }}
         />
         <h1 style={{ margin: 0, fontSize: '3.5rem', color: '#0f766e', fontWeight: '700', letterSpacing: '-0.02em' }}>
           RealDiag
