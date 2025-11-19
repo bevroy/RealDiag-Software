@@ -194,23 +194,27 @@ export default function AccountPage() {
         {/* Header */}
         <div style={{
           background: 'white',
-          borderRadius: '16px',
-          padding: '2rem',
+          borderRadius: '12px',
+          padding: '1.5rem',
           marginBottom: '2rem',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           display: 'flex',
+          alignItems: 'center',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          gap: '16px'
         }}>
-          <div>
-            <h1 style={{ margin: '0 0 0.5rem', fontSize: '2.5rem', color: '#78350f' }}>
-              👤 My Account
-            </h1>
-            <p style={{ margin: 0, color: '#666' }}>
-              {isAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches and personalize your experience'}
-            </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1 }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+            <div>
+              <h1 style={{ marginBottom: 0, color: '#78350f' }}>
+                👤 My Account
+              </h1>
+              <p style={{ margin: '0.25rem 0 0', color: '#666', fontSize: '0.9rem' }}>
+                {isAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}
+              </p>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', whiteSpace: 'nowrap' }}>
             <a href="/" style={{
               padding: '0.75rem 1.5rem',
               background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',

@@ -51,16 +51,22 @@ export default function IntegrationPage() {
         {/* Header */}
         <div style={{ 
           background: 'white', 
-          borderRadius: '16px', 
-          padding: '2rem', 
+          borderRadius: '12px', 
+          padding: '1.5rem', 
           marginBottom: '2rem',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-          position: 'relative'
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '16px'
         }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+            <h1 style={{ marginBottom: 0, color: '#78350f' }}>
+              🔌 EHR Integration & API Access
+            </h1>
+          </div>
           <a href="/" style={{
-            position: 'absolute',
-            top: '1.5rem',
-            right: '2rem',
             padding: '8px 16px',
             background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
             color: 'white',
@@ -70,22 +76,11 @@ export default function IntegrationPage() {
             fontWeight: 600,
             display: 'flex',
             alignItems: 'center',
-            gap: '6px'
+            gap: '6px',
+            whiteSpace: 'nowrap'
           }}>
             🏠 Home
           </a>
-          <h1 style={{ 
-            margin: '0 0 0.5rem', 
-            fontSize: '2.5rem', 
-            background: 'linear-gradient(135deg, #78350f, #92400e)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            🔌 EHR Integration & API Access
-          </h1>
-          <p style={{ margin: 0, color: '#666', fontSize: '1.1rem' }}>
-            Connect RealDiag with your Electronic Health Record system, FHIR endpoints, or custom applications
-          </p>
         </div>
 
         {/* API Key Input */}

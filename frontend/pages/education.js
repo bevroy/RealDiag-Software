@@ -214,21 +214,36 @@ export default function EducationPage() {
         }
 
         .education-header {
-          text-align: center;
-          margin-bottom: 30px;
-          padding: 30px;
-          background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-          color: white;
+          margin-bottom: 20px;
+          padding: 1.5rem;
+          background: white;
           border-radius: 12px;
-          position: relative;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .header-content {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .header-content img {
+          height: 50px;
+        }
+
+        .education-header h1 {
+          margin: 0;
+          font-size: 1.75em;
+          color: #78350f;
         }
 
         .home-button {
-          position: absolute;
-          top: 20px;
-          right: 20px;
           padding: 8px 16px;
-          background: rgba(255, 255, 255, 0.2);
+          background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
           color: white;
           text-decoration: none;
           border-radius: 6px;
@@ -237,12 +252,7 @@ export default function EducationPage() {
           display: flex;
           align-items: center;
           gap: 6px;
-        }
-
-        .education-header h1 {
-          margin: 0 0 10px 0;
-          font-size: 2.5em;
-          color: #78350f;
+          white-space: nowrap;
         }
 
         .education-header p {
@@ -387,9 +397,11 @@ export default function EducationPage() {
 
       <div className="education-container">
         <header className="education-header">
+          <div className="header-content">
+            <img src="/logo.png" alt="RealDiag Logo" />
+            <h1>📚 Medical Training Center</h1>
+          </div>
           <a href="/" className="home-button">🏠 Home</a>
-          <h1>📚 Medical Training Center</h1>
-          <p>Enhance your clinical reasoning skills with cases, quizzes, and flashcards</p>
         </header>
 
         <div className="education-tabs">

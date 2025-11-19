@@ -786,23 +786,14 @@ export default function SymptomSearch() {
             height={50}
             style={{ maxHeight: '50px', width: 'auto' }}
           />
-          <div>
-            <h1 style={{ 
-              margin: 0, 
-              fontSize: `${1.5 * getFontSizeMultiplier()}rem`, 
-              color: '#78350f',
-              fontWeight: '700'
-            }}>
-              Symptom Search
-            </h1>
-            <p style={{ 
-              margin: '0.25rem 0 0', 
-              color: getSecondaryTextColor(), 
-              fontSize: `${0.85 * getFontSizeMultiplier()}rem` 
-            }}>
-              Find diagnoses by symptoms
-            </p>
-          </div>
+          <h1 style={{ 
+            margin: 0, 
+            fontSize: `${1.5 * getFontSizeMultiplier()}rem`, 
+            color: '#78350f',
+            fontWeight: '700'
+          }}>
+            🔍 Symptom Search
+          </h1>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <Link href="/" style={{

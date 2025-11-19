@@ -90,26 +90,12 @@ export default function SourcesPage() {
         }}
       >
         {/* Header */}
-        <header
-          style={{
-            background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
-            color: "white",
-            padding: "16px 24px",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-          }}
-        >
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <a
-              href="/"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                fontSize: 20,
-                fontWeight: 600,
-              }}
-            >
-              RealDiag
-            </a>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px" }}>
+          <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+              <h1 style={{ marginBottom: 0, color: '#78350f' }}>📚 Medical Sources & References</h1>
+            </div>
             <a
               href="/"
               style={{
@@ -128,21 +114,19 @@ export default function SourcesPage() {
               🏠 Home
             </a>
           </div>
-        </header>
 
-        {/* Main Content */}
-        <main
+        {/* Content */}
+        <div
           style={{
-            flex: 1,
-            padding: "24px",
-            background: "#f9fafb",
+            background: 'white',
+            borderRadius: '12px',
+            padding: '1rem',
+            marginBottom: '1rem',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
           }}
         >
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-            <h1 style={{ fontSize: 32, marginBottom: 8, color: "#78350f" }}>
-              📚 Medical Sources & References
-            </h1>
-            <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 32 }}>
+            <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 16 }}>
               RealDiag integrates evidence-based clinical guidelines and medical literature
               to support diagnostic decision-making. Below are the sources used across
               our diagnostic modules.
@@ -302,7 +286,8 @@ export default function SourcesPage() {
               </>
             )}
           </div>
-        </main>
+        </div>
+        </div>
 
         {/* Footer */}
         <footer

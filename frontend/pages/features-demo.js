@@ -49,28 +49,28 @@ export default function FeaturesDemo() {
         {/* Task 6.1: Skip Link */}
         <SkipLink targetId="main-content" />
       
-      <header role="banner" style={{ marginBottom: '2rem', position: 'relative' }}>
-        <a href="/" style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          padding: '8px 16px',
-          background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-          color: 'white',
-          textDecoration: 'none',
-          borderRadius: '6px',
-          fontSize: 14,
-          fontWeight: 600,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px'
-        }}>
-          🏠 Home
-        </a>
-        <h1 style={{ color: '#78350f' }}>RealDiag - New Features Demo</h1>
-        <p style={{ color: '#6b7280', fontSize: '1.1rem' }}>
-          Accessibility, Tablet Optimization & Advanced Decision Support
-        </p>
+      <header role="banner" style={{ marginBottom: '2rem' }}>
+        <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+            <h1 style={{ marginBottom: 0, color: '#78350f' }}>RealDiag - New Features Demo</h1>
+          </div>
+          <a href="/" style={{
+            padding: '8px 16px',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '6px',
+            fontSize: 14,
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            whiteSpace: 'nowrap'
+          }}>
+            🏠 Home
+          </a>
+        </div>
       </header>
       
       <main id="main-content" role="main">
