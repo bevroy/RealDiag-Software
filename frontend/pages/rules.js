@@ -38,7 +38,9 @@ export default function ReferencePage() {
             const res = await fetch(`${apiBase}/reference/${f.id}`);
             if (!res.ok) throw new Error(`Failed to load ${f.label}`);
             const data = await res.json();
-            return (data.rules || [])
+            
+            // Map rules and ensure familyId is set correctly
+            const mappedRules = (data.rules || [])
               .filter(rule => rule && rule.id) // Filter out invalid rules
               .map(rule => ({
                 ...rule,
@@ -50,10 +52,24 @@ export default function ReferencePage() {
                 snomed: Array.isArray(rule.snomed) ? rule.snomed.map(String) : [],
                 citations: Array.isArray(rule.citations) ? rule.citations.map(String) : [],
               }));
+            
+            // Debug: Log what we're loading
+            console.log(`Loaded ${f.label} (${f.id}):`, mappedRules.length, 'rules');
+            if (mappedRules.length > 0) {
+              console.log(`  First rule:`, { id: mappedRules[0].id, familyId: mappedRules[0].familyId });
+            }
+            
+            return mappedRules;
           })
         );
         if (!cancelled) {
-          setAllRules(results.flat().filter(r => r && r.id));
+          const flatRules = results.flat().filter(r => r && r.id);
+          console.log('Total rules loaded:', flatRules.length);
+          console.log('Rules by family:', FAMILIES.map(f => ({
+            family: f.id,
+            count: flatRules.filter(r => r.familyId === f.id).length
+          })));
+          setAllRules(flatRules);
         }
       } catch (e) {
         if (!cancelled) {
