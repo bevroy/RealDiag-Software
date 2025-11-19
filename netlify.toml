@@ -1,5 +1,5 @@
 [build]
-  command = "echo 'Using pre-built files from git' && ls -la frontend/out/_next/static/chunks/pages/ | grep symptom"
+  command = "cd frontend && npm install && npm run build"
   publish = "frontend/out"
 
 [build.environment]
