@@ -73,10 +73,13 @@ export default function ReferencePage() {
   const filtered = useMemo(() => {
     const q = (query || "").toLowerCase().trim();
     
-    // Filter by family first
+    // Filter by family first - ensure strict string comparison
     let rulesToFilter = allRules;
     if (selectedFamily !== "all") {
-      rulesToFilter = allRules.filter(r => r.familyId === selectedFamily);
+      rulesToFilter = allRules.filter(r => {
+        // Strict comparison with explicit type checking
+        return r && r.familyId && String(r.familyId) === String(selectedFamily);
+      });
     }
     
     // Then filter by search query
