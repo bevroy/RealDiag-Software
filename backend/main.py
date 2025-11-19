@@ -15,9 +15,19 @@ from backend.services.symptom_search import router as symptom_search_router
 from backend.services.integration_router import router as integration_router
 from backend.services.user_router import router as user_router
 from backend.services.education_router import router as education_router
-from backend.services.security import security_middleware, limiter
-from slowapi.errors import RateLimitExceeded
-from slowapi import _rate_limit_exceeded_handler
+
+# Import security features with fallback
+try:
+    from backend.services.security import security_middleware, limiter
+    from slowapi.errors import RateLimitExceeded
+    from slowapi import _rate_limit_exceeded_handler
+    SECURITY_ENABLED = True
+except ImportError as e:
+    logging.warning(f"Security features not available: {e}. Running without rate limiting.")
+    SECURITY_ENABLED = False
+    security_middleware = None
+    limiter = None
+
 from config import Config
 
 app = FastAPI(
@@ -26,9 +36,10 @@ app = FastAPI(
     description="Clinical Decision Support System with Enhanced Security and Medical Training Tools"
 )
 
-# Add rate limiter to app state
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+# Add rate limiter to app state if security is enabled
+if SECURITY_ENABLED:
+    app.state.limiter = limiter
+    app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Basic structured logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
@@ -68,8 +79,9 @@ else:
     PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:localhost(?::\d+)?|.+-3000\.app\.github\.dev|(?:%s))$" % _netlify_part
 
 
-# Add security middleware FIRST (before CORS)
-app.middleware("http")(security_middleware)
+# Add security middleware FIRST (before CORS) if security is enabled
+if SECURITY_ENABLED and security_middleware:
+    app.middleware("http")(security_middleware)
 
 # Allow CORS from local frontend during development
 app.add_middleware(

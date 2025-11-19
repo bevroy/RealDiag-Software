@@ -12,15 +12,43 @@ from pathlib import Path
 import yaml
 import re
 from pydantic import BaseModel, validator, conint, conlist
-from backend.services.security import limiter, InputValidator, AuditLogger
+import logging
+
+# Import security features with fallback
+try:
+    from backend.services.security import limiter, InputValidator, AuditLogger
+    SECURITY_ENABLED = True
+except ImportError:
+    logging.warning("Security features not available in symptom_search. Running without rate limiting.")
+    SECURITY_ENABLED = False
+    
+    # Provide dummy limiter that does nothing
+    class DummyLimiter:
+        def limit(self, *args, **kwargs):
+            def decorator(func):
+                return func
+            return decorator
+    
+    limiter = DummyLimiter()
+    
+    # Provide dummy classes
+    class InputValidator:
+        @staticmethod
+        def sanitize_string(value: str, max_length: int = 500) -> str:
+            return value[:max_length].strip() if value else ""
+    
+    class AuditLogger:
+        @staticmethod
+        def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
+            logging.info(f"AUDIT: {event_type} - {details}")
 
 router = APIRouter()
 
 # Models
 class SymptomSearchRequest(BaseModel):
     """Request model for symptom-based search with input validation."""
-    symptoms: conlist(str, min_items=1, max_items=50)  # Max 50 symptoms
-    age: Optional[conint(ge=0, le=120)] = None  # Age 0-120
+    symptoms: List[str]  # List of symptoms
+    age: Optional[int] = None  # Patient age
     sex: Optional[str] = None
     family: Optional[str] = None  # Optional filter by disease family
     
@@ -29,6 +57,9 @@ class SymptomSearchRequest(BaseModel):
         """Sanitize and validate symptoms"""
         if not v:
             raise ValueError("At least one symptom is required")
+        
+        if len(v) > 50:
+            raise ValueError("Maximum 50 symptoms allowed")
         
         # Sanitize each symptom
         sanitized = []
@@ -41,6 +72,13 @@ class SymptomSearchRequest(BaseModel):
             raise ValueError("No valid symptoms provided")
         
         return sanitized
+    
+    @validator('age')
+    def validate_age(cls, v):
+        """Validate age is in reasonable range"""
+        if v is not None and (v < 0 or v > 120):
+            raise ValueError("Age must be between 0 and 120")
+        return v
     
     @validator('sex')
     def validate_sex(cls, v):

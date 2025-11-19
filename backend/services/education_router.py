@@ -11,7 +11,35 @@ from pathlib import Path
 import yaml
 import json
 import random
-from backend.services.security import limiter, InputValidator, AuditLogger
+import logging
+
+# Import security features with fallback
+try:
+    from backend.services.security import limiter, InputValidator, AuditLogger
+    SECURITY_ENABLED = True
+except ImportError:
+    logging.warning("Security features not available in education router. Running without rate limiting.")
+    SECURITY_ENABLED = False
+    
+    # Provide dummy limiter that does nothing
+    class DummyLimiter:
+        def limit(self, *args, **kwargs):
+            def decorator(func):
+                return func
+            return decorator
+    
+    limiter = DummyLimiter()
+    
+    # Provide dummy classes
+    class InputValidator:
+        @staticmethod
+        def sanitize_string(value: str, max_length: int = 500) -> str:
+            return value[:max_length].strip() if value else ""
+    
+    class AuditLogger:
+        @staticmethod
+        def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
+            logging.info(f"AUDIT: {event_type} - {details}")
 
 router = APIRouter(prefix="/education", tags=["education"])
 
