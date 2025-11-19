@@ -304,6 +304,11 @@ export const redFlagConditions = {
 
 // Scan diagnosis for red flags
 export const detectRedFlags = (diagnosis) => {
+  // Handle undefined, null, or non-string diagnosis
+  if (!diagnosis || typeof diagnosis !== 'string') {
+    return [];
+  }
+  
   const diagnosisLower = diagnosis.toLowerCase();
   const detectedFlags = [];
   
@@ -378,7 +383,11 @@ export const getSeverityStyle = (severity) => {
 
 // Check if diagnosis list contains any red flags
 export const hasRedFlags = (diagnoses) => {
+  if (!Array.isArray(diagnoses) || diagnoses.length === 0) {
+    return false;
+  }
   return diagnoses.some(dx => {
+    if (!dx) return false;
     const flags = detectRedFlags(dx.diagnosis || dx);
     return flags.length > 0;
   });
@@ -386,10 +395,15 @@ export const hasRedFlags = (diagnoses) => {
 
 // Get highest severity red flag from diagnosis list
 export const getHighestSeverityFlag = (diagnoses) => {
+  if (!Array.isArray(diagnoses) || diagnoses.length === 0) {
+    return null;
+  }
+  
   let highestSeverity = null;
   let highestPriority = 999;
   
   diagnoses.forEach(dx => {
+    if (!dx) return;
     const flags = detectRedFlags(dx.diagnosis || dx);
     flags.forEach(flag => {
       if (flag.priority < highestPriority) {
@@ -408,7 +422,21 @@ export const generateRedFlagSummary = (diagnoses) => {
   const criticalFlags = [];
   const highFlags = [];
   
+  if (!Array.isArray(diagnoses)) {
+    return {
+      totalFlags: 0,
+      criticalCount: 0,
+      highCount: 0,
+      allFlags: [],
+      criticalFlags: [],
+      highFlags: [],
+      hasCritical: false,
+      needsImmediateAction: false
+    };
+  }
+  
   diagnoses.forEach(dx => {
+    if (!dx) return;
     const flags = detectRedFlags(dx.diagnosis || dx);
     flags.forEach(flag => {
       const flagWithDx = {
