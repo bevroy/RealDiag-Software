@@ -234,25 +234,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Banners at Bottom */}
+      {/* Medical Disclaimer at Bottom */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* NEW UPDATE BANNER */}
-        <div style={{
-          margin: '0 0 1rem',
-          padding: '1rem 1.5rem',
-          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-          borderRadius: '10px',
-          color: 'white',
-          textAlign: 'center',
-          boxShadow: '0 2px 8px rgba(16, 185, 129, 0.2)'
-        }}>
-          <strong style={{ fontSize: '0.95rem' }}>🎉 NEW: Medical Training Center!</strong>
-          <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.95 }}>
-            Case library, quiz mode, flashcards, progress tracking. Updated: November 19, 2025
-          </p>
-        </div>
-
-        {/* MEDICAL DISCLAIMER */}
         <div style={{
           margin: '0 0 2rem',
           padding: '1rem 1.5rem',
