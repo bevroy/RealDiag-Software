@@ -44,11 +44,11 @@ export default function ReferencePage() {
                 ...rule,
                 family: f.label,
                 familyId: f.id,
-                // Ensure arrays are actually arrays
-                presentations: Array.isArray(rule.presentations) ? rule.presentations : [],
-                icd10: Array.isArray(rule.icd10) ? rule.icd10 : [],
-                snomed: Array.isArray(rule.snomed) ? rule.snomed : [],
-                citations: Array.isArray(rule.citations) ? rule.citations : [],
+                // Ensure arrays are actually arrays and normalize to strings
+                presentations: Array.isArray(rule.presentations) ? rule.presentations.map(String) : [],
+                icd10: Array.isArray(rule.icd10) ? rule.icd10.map(String) : [],
+                snomed: Array.isArray(rule.snomed) ? rule.snomed.map(String) : [],
+                citations: Array.isArray(rule.citations) ? rule.citations.map(String) : [],
               }));
           })
         );
@@ -374,7 +374,7 @@ export default function ReferencePage() {
                   <div style={{ marginBottom: 4 }}>
                     <strong>SNOMED:</strong>{" "}
                     {r.snomed && Array.isArray(r.snomed) && r.snomed.length > 0 ? (
-                      r.snomed.join(", ")
+                      r.snomed.map(String).join(", ")
                     ) : (
                       <span style={{ color: "#999" }}>Not specified</span>
                     )}
