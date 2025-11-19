@@ -372,18 +372,18 @@ export default function EducationPage() {
         }
 
         .badge.beginner {
-          background: #e3f2fd;
-          color: #1976d2;
+          background: #ccfbf1;
+          color: #0f766e;
         }
 
         .badge.intermediate {
-          background: #fff3e0;
-          color: #f57c00;
+          background: #fef3c7;
+          color: #78350f;
         }
 
         .badge.advanced {
-          background: #fce4ec;
-          color: #c2185b;
+          background: #ccfbf1;
+          color: #0d9488;
         }
 
         .search-bar {

@@ -195,8 +195,8 @@ export default function FeaturesDemo() {
             gap: '1.5rem',
             marginTop: '1rem'
           }}>
-            <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px' }}>
-              <h3>✅ Implemented Features</h3>
+            <div style={{ padding: '1.5rem', background: '#f0fdfa', borderRadius: '8px', border: '2px solid #ccfbf1' }}>
+              <h3 style={{ color: '#0f766e' }}>✅ Implemented Features</h3>
               <ul style={{ lineHeight: '1.8' }}>
                 <li><strong>Skip Links:</strong> Press Tab to see "Skip to main content"</li>
                 <li><strong>Keyboard Navigation:</strong> Tab, Enter, Escape keys work</li>
@@ -208,15 +208,15 @@ export default function FeaturesDemo() {
               </ul>
             </div>
             
-            <div style={{ padding: '1.5rem', background: '#dbeafe', borderRadius: '8px' }}>
-              <h3>🔍 Try It Out</h3>
+            <div style={{ padding: '1.5rem', background: '#ccfbf1', borderRadius: '8px', border: '2px solid #14b8a6' }}>
+              <h3 style={{ color: '#0f766e' }}>🔍 Try It Out</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
                 <AccessibleButton
                   onClick={() => setShowModal(true)}
                   ariaLabel="Open accessible modal dialog"
                   style={{
                     padding: '1rem',
-                    background: '#3b82f6',
+                    background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -259,9 +259,10 @@ export default function FeaturesDemo() {
             <div className="tablet-search-panel" style={{ 
               padding: '1.5rem', 
               background: '#fef3c7', 
-              borderRadius: '8px' 
+              borderRadius: '8px',
+              border: '2px solid #92400e'
             }}>
-              <h3>📱 Tablet Features</h3>
+              <h3 style={{ color: '#78350f' }}>📱 Tablet Features</h3>
               <ul style={{ lineHeight: '1.8' }}>
                 <li><strong>Split-Screen Layout:</strong> Search on left, results on right (768-1024px)</li>
                 <li><strong>Sticky Navigation:</strong> Search form stays visible while scrolling</li>
@@ -284,8 +285,8 @@ export default function FeaturesDemo() {
               {[1, 2, 3].map(i => (
                 <div key={i} style={{ 
                   padding: '1rem', 
-                  background: '#f9fafb', 
-                  border: '2px solid #e5e7eb',
+                  background: '#f0fdfa', 
+                  border: '2px solid #ccfbf1',
                   borderRadius: '8px' 
                 }}>
                   <h4>Result Card {i}</h4>
@@ -342,7 +343,7 @@ export default function FeaturesDemo() {
               </div>
               
               {/* Test Characteristics */}
-              <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px' }}>
+              <div style={{ padding: '1.5rem', background: '#f0fdfa', borderRadius: '8px', border: '2px solid #ccfbf1' }}>
                 <div style={{ marginBottom: '0.75rem' }}>
                   <div style={{ fontSize: '0.8rem', color: '#6b7280', fontWeight: '600' }}>SENSITIVITY</div>
                   <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#10b981' }}>
