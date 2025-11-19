@@ -1121,17 +1121,18 @@ Console.WriteLine(result);`}
         <div style={{
           marginTop: '2rem',
           padding: '1.5rem',
-          background: 'rgba(255,255,255,0.1)',
+          background: 'white',
           borderRadius: '12px',
-          color: 'white',
-          textAlign: 'center'
+          color: '#78350f',
+          textAlign: 'center',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
         }}>
           <p style={{ margin: 0, fontSize: '0.9rem' }}>
-            📚 For complete API documentation, visit <a href={`${apiBase}/docs`} style={{ color: '#fff', fontWeight: '600' }}>
+            📚 For complete API documentation, visit <a href={`${apiBase}/docs`} style={{ color: '#0f766e', fontWeight: '600', textDecoration: 'underline' }}>
               {apiBase}/docs
             </a>
           </p>
-          <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.8 }}>
+          <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', color: '#92400e' }}>
             Need help with integration? Contact support or check our GitHub repository.
           </p>
         </div>
