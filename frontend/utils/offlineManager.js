@@ -84,7 +84,11 @@ export async function getAllRules() {
   const db = await openDB();
   const transaction = db.transaction([STORES.RULES], 'readonly');
   const store = transaction.objectStore(STORES.RULES);
-  return await store.getAll();
+  const rules = await store.getAll();
+  if (!Array.isArray(rules)) {
+    return [];
+  }
+  return rules;
 }
 
 // Get rules by family
@@ -118,6 +122,10 @@ export async function getAllSearches() {
   const transaction = db.transaction([STORES.SEARCHES], 'readonly');
   const store = transaction.objectStore(STORES.SEARCHES);
   const searches = await store.getAll();
+  // Ensure searches is an array before sorting
+  if (!Array.isArray(searches)) {
+    return [];
+  }
   return searches.sort((a, b) => b.timestamp - a.timestamp);
 }
 
@@ -158,7 +166,11 @@ export async function getAllFavorites() {
   const db = await openDB();
   const transaction = db.transaction([STORES.FAVORITES], 'readonly');
   const store = transaction.objectStore(STORES.FAVORITES);
-  return await store.getAll();
+  const favorites = await store.getAll();
+  if (!Array.isArray(favorites)) {
+    return [];
+  }
+  return favorites;
 }
 
 // Delete favorite
@@ -219,35 +231,44 @@ export async function getOfflineStats() {
       getAllFavorites()
     ]);
     
-    const unsyncedSearches = searches.filter(s => !s.synced);
+    // Ensure all are arrays
+    const safeRules = Array.isArray(rules) ? rules : [];
+    const safeSearches = Array.isArray(searches) ? searches : [];
+    const safeFavorites = Array.isArray(favorites) ? favorites : [];
+    
+    const unsyncedSearches = safeSearches.filter(s => !s.synced);
     
     // Calculate storage size estimate
-    const rulesSize = JSON.stringify(rules).length;
-    const searchesSize = JSON.stringify(searches).length;
-    const favoritesSize = JSON.stringify(favorites).length;
+    const rulesSize = JSON.stringify(safeRules).length;
+    const searchesSize = JSON.stringify(safeSearches).length;
+    const favoritesSize = JSON.stringify(safeFavorites).length;
     const totalSize = rulesSize + searchesSize + favoritesSize;
     
     // Group rules by family
-    const rulesByFamily = rules.reduce((acc, rule) => {
+    const rulesByFamily = safeRules.reduce((acc, rule) => {
       const family = rule.family || 'Unknown';
       acc[family] = (acc[family] || 0) + 1;
       return acc;
     }, {});
     
+    const lastUpdated = safeRules.length > 0 
+      ? Math.max(...safeRules.map(r => r.lastUpdated || 0))
+      : 0;
+    
     return {
       rules: {
-        count: rules.length,
+        count: safeRules.length,
         byFamily: rulesByFamily,
         size: rulesSize,
-        lastUpdated: Math.max(...rules.map(r => r.lastUpdated || 0))
+        lastUpdated: lastUpdated
       },
       searches: {
-        count: searches.length,
+        count: safeSearches.length,
         unsynced: unsyncedSearches.length,
         size: searchesSize
       },
       favorites: {
-        count: favorites.length,
+        count: safeFavorites.length,
         size: favoritesSize
       },
       totalSize: totalSize,
