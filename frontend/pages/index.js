@@ -7,6 +7,26 @@ export default function Home() {
       background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
+      {/* MEDICAL DISCLAIMER - CRITICAL */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto 1rem',
+        padding: '1rem 1.5rem',
+        background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
+        borderRadius: '12px',
+        color: 'white',
+        textAlign: 'center',
+        boxShadow: '0 4px 12px rgba(220, 38, 38, 0.3)',
+        border: '2px solid #fca5a5'
+      }}>
+        <strong>⚠️ MEDICAL DISCLAIMER: NOT FOR CLINICAL USE</strong>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', opacity: 0.95 }}>
+          This software is NOT FDA-approved and is provided for <strong>EDUCATIONAL PURPOSES ONLY</strong>. 
+          Not a substitute for professional medical judgment. Not validated for clinical accuracy.
+          See <Link href="/legal-disclaimer" style={{ color: '#fef3c7', textDecoration: 'underline' }}>Legal Disclaimer</Link> for complete terms.
+        </p>
+      </div>
+
       {/* NEW UPDATE BANNER */}
       <div style={{
         maxWidth: '1400px',
@@ -18,10 +38,10 @@ export default function Home() {
         textAlign: 'center',
         boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
       }}>
-        <strong>🎉 NEW: User Accounts & Comprehensive Clinical Guidelines!</strong>
+        <strong>🎉 NEW: Mobile Features & Advanced Clinical Tools!</strong>
         <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', opacity: 0.95 }}>
-          Create an account to save your search history, favorite diagnoses, and create custom differential lists! 140+ rules now include detailed clinical pearls, management protocols, tests, and referrals.
-          Updated: November 17, 2025
+          Offline mode, voice input, barcode scanner, pretest calculators, drug interactions, and more!
+          Updated: November 19, 2025
         </p>
       </div>
 

@@ -2,7 +2,22 @@
 
 ![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
 
-Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool for monitoring and analyzing system health, network connectivity, and performance metrics.
+Real Time Diagnostic Assistant Software - A comprehensive clinical decision support system for medical education and reference.
+
+## ⚠️ **CRITICAL DISCLAIMER**
+
+**THIS SOFTWARE IS NOT FDA-APPROVED AND IS PROVIDED FOR EDUCATIONAL PURPOSES ONLY.**
+
+- ❌ **NOT** for clinical use or medical diagnosis
+- ❌ **NOT** a substitute for professional medical judgment
+- ❌ **NOT** validated for clinical accuracy
+- ❌ **NOT** HIPAA compliant in current form
+
+See [LEGAL_DISCLAIMER.md](./LEGAL_DISCLAIMER.md) and [SECURITY.md](./SECURITY.md) for complete information.
+
+**For Healthcare Professionals:** This is a reference tool only. Always apply professional judgment and verify information independently.
+
+**For Patients:** Do not use for self-diagnosis. Always consult a qualified healthcare provider. Call 911 for emergencies.
 
 ## Quick Start
 
