@@ -44,10 +44,121 @@ export default function IntegrationPage() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Navigation Dropdown */}
+        <div style={{ marginBottom: '1rem' }}>
+          <details style={{
+            background: 'white',
+            padding: '0.75rem 1.25rem',
+            borderRadius: '10px',
+            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+            border: '1px solid #e2e8f0',
+            cursor: 'pointer'
+          }}>
+            <summary style={{ 
+              color: '#0f766e', 
+              fontSize: '1rem',
+              fontWeight: '600',
+              listStyle: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}>
+              <span>☰ Navigation</span>
+            </summary>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '0.75rem',
+              marginTop: '1rem',
+              paddingTop: '1rem',
+              borderTop: '1px solid #e2e8f0'
+            }}>
+              <a href="/symptom-search" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                🔍 Symptom Search
+              </a>
+              <a href="/rules" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                📋 Browse Rules
+              </a>
+              <a href="/features-demo" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                ✨ Features
+              </a>
+              <a href="/education" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                📚 Training
+              </a>
+              <a href="/sources" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                📖 Sources
+              </a>
+              <a href="/account" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                👤 Account
+              </a>
+            </div>
+          </details>
+        </div>
+
         {/* Header */}
         <div style={{ 
           background: 'white', 

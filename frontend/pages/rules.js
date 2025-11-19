@@ -105,7 +105,120 @@ export default function ReferencePage() {
   }
 
   return (
-    <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto", minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)' }}>
+    <main style={{ padding: '2rem', maxWidth: 1200, margin: "0 auto", minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)' }}>
+      {/* Navigation Dropdown */}
+      <div style={{
+        marginBottom: '1rem'
+      }}>
+        <details style={{
+          background: 'white',
+          padding: '0.75rem 1.25rem',
+          borderRadius: '10px',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e2e8f0',
+          cursor: 'pointer'
+        }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1rem',
+            fontWeight: '600',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}>
+            <span>☰ Navigation</span>
+          </summary>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: '0.75rem',
+            marginTop: '1rem',
+            paddingTop: '1rem',
+            borderTop: '1px solid #e2e8f0'
+          }}>
+            <a href="/symptom-search" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              🔍 Symptom Search
+            </a>
+            <a href="/integration" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              🔌 API
+            </a>
+            <a href="/features-demo" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              ✨ Features
+            </a>
+            <a href="/education" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              📚 Training
+            </a>
+            <a href="/sources" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              📖 Sources
+            </a>
+            <a href="/account" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              👤 Account
+            </a>
+          </div>
+        </details>
+      </div>
+
       <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />

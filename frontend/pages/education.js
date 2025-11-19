@@ -206,11 +206,60 @@ export default function EducationPage() {
       </Head>
       
       <style jsx>{`
+        body {
+          background: linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%);
+          min-height: 100vh;
+        }
+
         .education-container {
-          max-width: 1400px;
+          max-width: 1200px;
           margin: 0 auto;
-          padding: 20px;
+          padding: 2rem;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .nav-dropdown {
+          margin-bottom: 1rem;
+        }
+
+        .nav-dropdown details {
+          background: white;
+          padding: 0.75rem 1.25rem;
+          border-radius: 10px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          border: 1px solid #e2e8f0;
+          cursor: pointer;
+        }
+
+        .nav-dropdown summary {
+          color: #0f766e;
+          font-size: 1rem;
+          font-weight: 600;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .nav-links {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 0.75rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-links a {
+          padding: 0.75rem;
+          background: #f0fdfa;
+          border: 1px solid #ccfbf1;
+          border-radius: 8px;
+          text-decoration: none;
+          text-align: center;
+          color: #0f766e;
+          font-weight: 600;
+          font-size: 0.9rem;
         }
 
         .education-header {
@@ -396,6 +445,23 @@ export default function EducationPage() {
       `}</style>
 
       <div className="education-container">
+        {/* Navigation Dropdown */}
+        <div className="nav-dropdown">
+          <details>
+            <summary>
+              <span>☰ Navigation</span>
+            </summary>
+            <div className="nav-links">
+              <a href="/symptom-search">🔍 Symptom Search</a>
+              <a href="/rules">📋 Browse Rules</a>
+              <a href="/integration">🔌 API</a>
+              <a href="/features-demo">✨ Features</a>
+              <a href="/sources">📖 Sources</a>
+              <a href="/account">👤 Account</a>
+            </div>
+          </details>
+        </div>
+
         <header className="education-header">
           <div className="header-content">
             <img src="/logo.png" alt="RealDiag Logo" />
