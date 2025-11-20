@@ -253,7 +253,7 @@ export default function FeaturesDemo() {
         
         {/* Task 4.3: Tablet Optimization */}
         <section aria-labelledby="tablet-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="tablet-heading">Task 4.3: Tablet Optimization</h2>
+          <h2 id="tablet-heading" style={{ color: '#0f766e' }}>Task 4.3: Tablet Optimization</h2>
           
           <div className="tablet-split-screen" style={{ marginTop: '1rem' }}>
             <div className="tablet-search-panel" style={{ 
