@@ -1,0 +1,669 @@
+id: OBGYN-PREGNANCY-COMPLICATIONS
+title: Pregnancy Complications Diagnostic Tree
+specialty: Obstetrics and Gynecology/Emergency Medicine
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: ACOG Guidelines, SMFM Guidelines
+entry: initial_assessment
+
+clinical_pearls:
+  - Blood pressure ≥140/90 x2 after 20 weeks = hypertensive disorder of pregnancy
+  - Severe features = SBP ≥160 or DBP ≥110, or end-organ damage
+  - Magnesium sulfate prevents eclamptic seizures (reduces risk by 50%)
+  - Delivery is the only definitive cure for preeclampsia
+  - HELLP syndrome can present without hypertension or proteinuria
+  - Placental abruption = classic triad (pain, bleeding, fetal distress) but only 10% have all three
+  - Preterm labor <37 weeks requires tocolytics + steroids for fetal lung maturity
+
+red_flags:
+  - Blood pressure ≥160/110 (severe hypertension, stroke risk)
+  - Severe headache, visual changes, RUQ pain (preeclampsia with severe features)
+  - Seizures (eclampsia - obstetric emergency)
+  - Vaginal bleeding with abdominal pain (abruption, previa)
+  - Decreased fetal movement (fetal distress)
+  - Regular contractions <37 weeks (preterm labor)
+  - Rupture of membranes <37 weeks (PPROM, infection risk)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial evaluation of pregnancy complications
+  tests:
+  - History
+    - Gestational age (LMP, dating ultrasound)
+    - Prenatal care history, prior complications
+    - Presenting symptoms (bleeding, pain, contractions, fluid leak, headache, vision changes, decreased fetal movement)
+    - Risk factors (prior preeclampsia, diabetes, hypertension, multiple gestation, AMA)
+  - Vital signs (blood pressure x2, 4 hours apart)
+  - Fetal heart tones (Doppler or continuous monitoring if available)
+  - Fundal height (estimate gestational age)
+  - Abdominal exam (tenderness, contractions)
+  - Speculum exam (if bleeding - visualize cervix, rule out placenta previa first)
+  - Sterile vaginal exam (if no bleeding - cervical dilation, effacement, station)
+  suggest_dx: []
+  next:
+  - when:
+      seizures: present
+    go: eclampsia
+  - when:
+      blood_pressure: '>=160/110'
+    go: severe_hypertension
+  - when:
+      all_of:
+      - blood_pressure: '>=140/90'
+      - gestational_age: '>=20_weeks'
+    go: hypertensive_disorders
+  - when:
+      vaginal_bleeding: present
+    go: antepartum_hemorrhage
+  - when:
+      regular_contractions: present_before_37_weeks
+    go: preterm_labor
+  - when:
+      fluid_leaking: present_before_37_weeks
+    go: preterm_premature_rupture
+  - when:
+      hyperemesis: severe
+    go: hyperemesis_gravidarum
+  - default: hypertensive_disorders
+
+- id: eclampsia
+  when:
+    seizures: present_in_pregnancy
+  description: Eclampsia - OBSTETRIC EMERGENCY (seizures complicating preeclampsia)
+  tests:
+  - Protect airway (left lateral decubitus position, suction)
+  - Continuous fetal monitoring
+  - Labs
+    - CBC, CMP, LFTs (AST/ALT)
+    - Coagulation (PT/INR, aPTT, fibrinogen)
+    - Uric acid, LDH
+    - Urinalysis (proteinuria)
+  - Head CT or MRI (if atypical presentation, focal deficits, prolonged altered mental status)
+  suggest_dx:
+  - Eclampsia (seizures due to preeclampsia, can occur antepartum, intrapartum, or postpartum up to 6 weeks)
+  referrals:
+  - OB/GYN STAT
+  - ICU admission
+  - Anesthesia
+  management:
+  - Seizure management
+    - Magnesium sulfate (first-line anticonvulsant for eclampsia)
+      - Loading dose 4-6g IV over 15-20 minutes
+      - Maintenance 2g/hour continuous IV infusion
+      - Continue 24 hours postpartum or after last seizure
+    - If seizures persist despite magnesium
+      - Lorazepam 2-4mg IV or Diazepam 5-10mg IV
+  - Blood pressure control (if SBP ≥160 or DBP ≥110)
+    - Labetalol 20mg IV, then 40-80mg q10min (max 300mg)
+    - OR Hydralazine 5-10mg IV q20min (max 25mg)
+    - OR Nifedipine immediate-release 10-20mg PO q20-30min
+    - Goal SBP 140-150, DBP 90-100 (avoid excessive lowering = placental hypoperfusion)
+  - Delivery (definitive treatment)
+    - Stabilize mother first
+    - Deliver regardless of gestational age (eclampsia = indication for delivery)
+    - Cesarean section if unfavorable cervix or fetal distress
+    - Induction if favorable cervix and mother/fetus stable
+  - Monitor magnesium toxicity
+    - Therapeutic level 4-7 mEq/L
+    - Toxicity - loss of deep tendon reflexes (8-12 mEq/L), respiratory depression (>12 mEq/L), cardiac arrest (>15 mEq/L)
+    - Antidote - Calcium gluconate 1g (10mL of 10% solution) IV over 3 minutes
+  next:
+  - default: null
+
+- id: severe_hypertension
+  when:
+    blood_pressure: '>=160/110'
+  description: Severe hypertension in pregnancy - EMERGENCY (stroke risk)
+  tests:
+  - Blood pressure q15min
+  - Continuous fetal monitoring
+  - Labs (CBC, CMP, LFTs, coagulation, uric acid, LDH)
+  - Urinalysis with protein-to-creatinine ratio or 24-hour urine protein
+  - Assess for severe features
+    - Symptoms (severe headache, visual changes, RUQ/epigastric pain)
+    - Labs (platelets <100k, Cr >1.1, AST/ALT >2x normal, LDH elevated)
+    - Pulmonary edema
+    - Fetal growth restriction, oligohydramnios
+  suggest_dx:
+  - Preeclampsia with severe features
+  - Chronic hypertension with superimposed preeclampsia
+  referrals:
+  - OB/GYN STAT
+  - Admit to labor and delivery
+  management:
+  - Blood pressure control (treat if SBP ≥160 or DBP ≥110)
+    - Labetalol 20mg IV, double dose q10min (20→40→80mg) up to 300mg total
+    - OR Hydralazine 5-10mg IV q20min, max 25mg
+    - OR Nifedipine immediate-release 10-20mg PO, repeat q20-30min, max 50mg/hour
+    - Goal SBP 140-150, DBP 90-100
+  - Seizure prophylaxis
+    - Magnesium sulfate 4-6g IV loading, then 2g/hour maintenance
+    - Continue 24 hours postpartum
+  - Delivery planning
+    - ≥34 weeks - deliver within 24-48 hours
+    - <34 weeks - deliver if maternal/fetal instability, otherwise may attempt expectant management with close monitoring if stable
+    - ≥37 weeks or severe features at any gestational age - deliver promptly
+  next:
+  - when:
+      gestational_age: '>=34_weeks'
+    go: preeclampsia_delivery
+  - when:
+      severe_features: present
+    go: preeclampsia_delivery
+  - default: preeclampsia_expectant
+
+- id: hypertensive_disorders
+  when:
+    all_of:
+    - blood_pressure: '>=140/90'
+    - gestational_age: '>=20_weeks'
+  description: Hypertensive disorders of pregnancy
+  tests:
+  - Blood pressure (confirm with repeat measurement 4 hours apart)
+  - Urinalysis with protein-to-creatinine ratio (preeclampsia if ≥0.3)
+  - Labs (CBC with platelets, CMP, LFTs, uric acid, LDH)
+  - Fetal ultrasound (growth, amniotic fluid volume)
+  - Assess for symptoms (headache, visual changes, RUQ pain, edema)
+  suggest_dx:
+  - Gestational hypertension (new-onset HTN after 20 weeks, no proteinuria, no severe features)
+  - Preeclampsia without severe features (HTN + proteinuria or end-organ dysfunction)
+  - Preeclampsia with severe features
+  - HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets)
+  - Chronic hypertension (HTN diagnosed before pregnancy or <20 weeks)
+  - Superimposed preeclampsia (preeclampsia on chronic HTN)
+  referrals:
+  - OB/GYN for evaluation and management
+  management:
+  - Classification
+    - Gestational HTN - BP ≥140/90, no proteinuria, no severe features
+    - Preeclampsia - BP ≥140/90 + proteinuria (≥300mg/24h or protein/Cr ≥0.3) OR end-organ dysfunction
+    - Severe features - SBP ≥160, DBP ≥110, Cr >1.1, platelets <100k, AST/ALT >2x, pulmonary edema, cerebral/visual symptoms
+  - Gestational hypertension (no severe features)
+    - Close monitoring (BP twice weekly, labs weekly)
+    - Fetal surveillance (NST, BPP weekly)
+    - Deliver at 37 weeks
+  - Preeclampsia without severe features
+    - ≥37 weeks - deliver
+    - <37 weeks - expectant management with close monitoring, deliver at 37 weeks
+    - Labs twice weekly, BP daily, fetal testing twice weekly
+  - Preeclampsia with severe features
+    - Magnesium sulfate for seizure prophylaxis
+    - Antihypertensives for BP ≥160/110
+    - Deliver at ≥34 weeks
+    - <34 weeks - deliver if maternal/fetal instability, otherwise corticosteroids + close monitoring
+  next:
+  - when:
+      any_of:
+      - platelets: '<100000'
+      - AST_ALT: '>2x_normal'
+      - hemolysis: present
+    go: hellp_syndrome
+  - when:
+      severe_features: present
+    go: severe_hypertension
+  - default: preeclampsia_expectant
+
+- id: hellp_syndrome
+  when:
+    all_of:
+    - pregnancy: present
+    - labs_any:
+      - hemolysis
+      - elevated_liver_enzymes
+      - low_platelets
+  description: HELLP syndrome - life-threatening complication of preeclampsia
+  tests:
+  - CBC with peripheral smear
+    - Platelets <100,000 (often <50,000)
+    - Schistocytes (fragmented RBCs, hemolysis)
+  - LFTs
+    - AST >70 U/L
+    - ALT >70 U/L
+  - LDH >600 U/L (hemolysis)
+  - Bilirubin >1.2 mg/dL (indirect, hemolysis)
+  - Haptoglobin low (consumed by hemolysis)
+  - Coagulation studies (PT/INR, aPTT, fibrinogen - rule out DIC)
+  - Uric acid elevated
+  suggest_dx:
+  - HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets - variant of severe preeclampsia)
+  - Can present without hypertension (15%) or proteinuria (10%)
+  referrals:
+  - OB/GYN STAT
+  - ICU
+  - Hematology if DIC
+  management:
+  - Magnesium sulfate (seizure prophylaxis)
+  - Blood pressure control (if HTN present)
+  - Corticosteroids
+    - Betamethasone 12mg IM q24h x2 doses (fetal lung maturity if <34 weeks)
+    - Dexamethasone 10mg IV q12h (may also improve maternal platelet count)
+  - Delivery (definitive treatment)
+    - Deliver regardless of gestational age if diagnosis confirmed
+    - Stabilize mother first (correct coagulopathy)
+    - Transfuse if platelets <20k (or <50k if cesarean section planned)
+  - Monitor complications
+    - Liver hematoma or rupture (RUQ pain, shock, free fluid on ultrasound) - SURGICAL EMERGENCY
+    - DIC (fibrinogen <300, elevated PT/INR)
+    - Acute kidney injury (oliguria, Cr rising)
+    - Pulmonary edema
+  patient_education:
+  - Life-threatening emergency
+  - Symptoms worsen after delivery (peak 24-48h postpartum)
+  - Future pregnancy risk 5-25%
+  next:
+  - default: null
+
+- id: preeclampsia_delivery
+  when:
+    all_of:
+    - preeclampsia: confirmed
+    - delivery_indicated: true
+  description: Delivery management for preeclampsia
+  tests:
+  - Continuous fetal monitoring
+  - Labs (CBC, CMP, LFTs, coagulation)
+  - Type and screen
+  suggest_dx: []
+  referrals:
+  - OB/GYN for delivery
+  management:
+  - Magnesium sulfate (seizure prophylaxis)
+    - Start during labor or before cesarean
+    - Continue 24 hours postpartum
+  - Blood pressure control (if SBP ≥160 or DBP ≥110)
+  - Mode of delivery
+    - Vaginal delivery preferred if favorable cervix and no contraindications
+    - Cervical ripening and induction if unfavorable
+    - Cesarean section if obstetric indications (fetal distress, breech, prior cesarean)
+  - Postpartum monitoring
+    - Blood pressure q15min x1 hour, then q4h x48 hours
+    - Strict I&O (risk of pulmonary edema)
+    - Continue antihypertensives postpartum
+    - Preeclampsia can worsen in first 48 hours postpartum
+  patient_education:
+  - Symptoms may worsen after delivery
+  - Return if severe headache, vision changes, RUQ pain, shortness of breath
+  - Increased risk of hypertension and cardiovascular disease later in life
+  - Future pregnancy risk of recurrence 15-25%
+  next:
+  - default: null
+
+- id: preeclampsia_expectant
+  when:
+    all_of:
+    - preeclampsia: without_severe_features
+    - gestational_age: '<37_weeks'
+  description: Expectant management of preeclampsia without severe features
+  tests:
+  - Blood pressure twice weekly (daily if home monitoring)
+  - Labs (CBC, CMP, LFTs) twice weekly
+  - Fetal surveillance (NST, BPP) twice weekly
+  - Daily fetal kick counts
+  - Ultrasound for growth q3-4 weeks
+  suggest_dx: []
+  referrals:
+  - OB/GYN close follow-up
+  - Admit if worsening labs or symptoms
+  management:
+  - Antihypertensives (if BP persistently ≥140/90)
+    - Labetalol 200-400mg PO BID-TID (max 2400mg/day)
+    - OR Nifedipine extended-release 30-90mg PO daily
+    - OR Methyldopa 250-500mg PO BID-TID (max 3g/day)
+  - Low-dose aspirin 81mg daily (started <16 weeks, continue to 36 weeks)
+  - Delivery timing
+    - 37 weeks (gestational HTN or preeclampsia without severe features)
+    - 34 weeks (preeclampsia with severe features)
+    - Earlier if maternal or fetal decompensation
+  - Patient education
+    - Return precautions (headache, vision changes, RUQ pain, decreased fetal movement)
+    - Daily BP monitoring at home
+  next:
+  - default: null
+
+- id: antepartum_hemorrhage
+  when:
+    all_of:
+    - vaginal_bleeding: present
+    - pregnancy: present
+  description: Vaginal bleeding in pregnancy after 20 weeks
+  tests:
+  - Vital signs (hypotension, tachycardia)
+  - Pelvic ultrasound - placental location (do NOT perform digital cervical exam until placenta previa ruled out)
+  - Continuous fetal monitoring
+  - CBC, type and screen, crossmatch
+  - Coagulation studies (PT/INR, aPTT, fibrinogen)
+  - Kleihauer-Betke test (quantify fetal-maternal hemorrhage)
+  suggest_dx:
+  - Placenta previa (placenta covers or near cervical os)
+  - Placental abruption (premature separation of placenta)
+  - Vasa previa (fetal vessels over cervical os)
+  - Bloody show (cervical dilation, labor)
+  - Cervical lesions, trauma
+  referrals:
+  - OB/GYN immediately
+  - Admit to labor and delivery
+  management:
+  - Resuscitation if unstable (IVs, fluids, blood transfusion)
+  - Do NOT perform digital cervical exam (can cause massive hemorrhage if placenta previa)
+  - RhoGAM 300mcg IM if Rh-negative
+  next:
+  - when:
+      ultrasound: placenta_previa
+    go: placenta_previa
+  - when:
+      all_of:
+      - bleeding: heavy
+      - uterine_tenderness: present
+    go: placental_abruption
+  - default: placenta_previa
+
+- id: placenta_previa
+  when:
+    ultrasound: placenta_over_or_near_os
+  description: Placenta previa - placenta covers cervical os
+  tests:
+  - Pelvic ultrasound (transvaginal safe and accurate for placental location)
+  - Fetal monitoring
+  - CBC, type and crossmatch
+  - Do NOT perform digital cervical exam (can trigger catastrophic hemorrhage)
+  suggest_dx:
+  - Complete previa (placenta completely covers os)
+  - Partial previa (placenta partially covers os)
+  - Marginal previa (placenta at edge of os)
+  - Low-lying placenta (placenta within 2cm of os)
+  referrals:
+  - OB/GYN
+  - Admit if active bleeding
+  management:
+  - Pelvic rest (no intercourse, no vaginal exams)
+  - Bed rest if bleeding
+  - Serial ultrasounds (placenta may migrate away from os as uterus grows)
+  - Corticosteroids if <34 weeks (betamethasone 12mg IM q24h x2)
+  - Delivery by cesarean section (if previa persists)
+    - Scheduled at 36-37 weeks (balance preterm risks vs bleeding risk)
+    - Emergent if uncontrolled hemorrhage or fetal distress
+  - Type and crossmatch (anticipate hemorrhage at delivery)
+  - RhoGAM if Rh-negative
+  patient_education:
+  - Cesarean delivery required
+  - Return if bleeding increases
+  - Increased risk of placenta accreta (placenta invades uterine wall, life-threatening)
+  next:
+  - default: null
+
+- id: placental_abruption
+  when:
+    all_of:
+    - abdominal_pain: present
+    - uterine_tenderness_or_contractions: present
+  description: Placental abruption - premature separation of placenta
+  tests:
+  - Clinical diagnosis (ultrasound only 25% sensitive, normal ultrasound does NOT exclude abruption)
+  - Continuous fetal monitoring (variable or late decelerations, fetal distress)
+  - CBC (anemia if significant blood loss)
+  - Coagulation studies (DIC in severe abruption with fetal demise)
+  - Fibrinogen (consumed in DIC)
+  - Kleihauer-Betke test
+  suggest_dx:
+  - Placental abruption (risk factors - hypertension, trauma, cocaine, smoking, prior abruption 10% recurrence)
+  referrals:
+  - OB/GYN STAT
+  - OR if fetal distress or maternal instability
+  management:
+  - Resuscitation
+    - 2 large-bore IVs
+    - IV crystalloid
+    - Type and crossmatch, transfuse if hemorrhage
+  - Continuous fetal monitoring
+  - Delivery
+    - Emergent cesarean if fetal distress (non-reassuring fetal heart tracing)
+    - Vaginal delivery if mother/fetus stable and labor progressing
+    - Expectant management if mild abruption, <34 weeks, mother/fetus stable
+  - Correct coagulopathy
+    - Cryoprecipitate (fibrinogen <200 mg/dL)
+    - FFP (coagulopathy)
+    - Platelets (thrombocytopenia <50k)
+  - RhoGAM 300mcg IM if Rh-negative
+  patient_education:
+  - Serious complication with risk of fetal demise
+  - Classic triad (vaginal bleeding, abdominal pain, uterine contractions) only present in 10%
+  - Can have concealed hemorrhage (blood trapped behind placenta)
+  next:
+  - default: null
+
+- id: preterm_labor
+  when:
+    all_of:
+    - regular_contractions: present
+    - gestational_age: '<37_weeks'
+  description: Preterm labor - regular contractions with cervical change before 37 weeks
+  tests:
+  - Tocometry (contraction frequency)
+  - Sterile vaginal exam (cervical dilation, effacement, station)
+  - Fetal fibronectin (if available, cervical dilation <3cm, 24-34 weeks)
+    - Negative fFN = <1% deliver within 7 days (reassuring)
+    - Positive fFN = increased risk but not definitive
+  - Urinalysis and culture (UTI can trigger preterm labor)
+  - Cervical cultures (GBS, Chlamydia, gonorrhea)
+  - Ultrasound (cervical length <25mm = increased risk)
+  suggest_dx:
+  - Preterm labor (regular contractions + cervical change before 37 weeks)
+  - Risk factors - prior preterm birth, multiple gestation, infection, uterine anomalies, short cervix
+  referrals:
+  - OB/GYN immediately
+  - Admit to labor and delivery
+  management:
+  - Tocolytics (stop contractions, buy time for steroids to work)
+    - Nifedipine 20mg PO loading, then 10-20mg PO q4-6h (first-line, fewer side effects)
+    - OR Indomethacin 50-100mg PO/PR, then 25-50mg q6h (best <32 weeks, limit 48-72h due to fetal risks)
+    - OR Terbutaline 0.25mg SQ q20min-6h (short-term use)
+    - OR Magnesium sulfate 4-6g IV loading, then 2g/h (less effective, more side effects)
+  - Corticosteroids (fetal lung maturity, most important intervention)
+    - Betamethasone 12mg IM q24h x2 doses (preferred)
+    - OR Dexamethasone 6mg IM q12h x4 doses
+    - Give if 24-34 weeks (some use up to 36+6 weeks)
+    - Maximal benefit 24h-7 days after first dose (reduces RDS, IVH, NEC, mortality)
+  - Magnesium sulfate (fetal neuroprotection)
+    - Give if <32 weeks and delivery imminent within 24 hours
+    - Loading 4-6g IV, maintenance 2g/h
+    - Reduces cerebral palsy risk
+  - Antibiotics (GBS prophylaxis)
+    - Penicillin G 5 million units IV loading, then 2.5 million units q4h
+    - OR Ampicillin 2g IV q6h
+    - OR Cefazolin 2g IV loading, then 1g q8h
+  - Bed rest, hydration
+  patient_education:
+  - Tocolytics only delay delivery 48 hours (enough time for steroids to work)
+  - Steroids reduce serious preterm complications
+  - If delivery occurs, NICU team will be present
+  next:
+  - default: null
+
+- id: preterm_premature_rupture
+  when:
+    all_of:
+    - fluid_leaking: present
+    - gestational_age: '<37_weeks'
+  description: Preterm premature rupture of membranes (PPROM)
+  tests:
+  - Sterile speculum exam (visualize pooling of amniotic fluid, avoid digital exam = increases infection risk)
+  - Nitrazine test (amniotic fluid alkaline, turns nitrazine paper blue, pH >6.5)
+  - Ferning test (amniotic fluid crystallizes on slide)
+  - Ultrasound (amniotic fluid volume)
+  - Fetal monitoring
+  - GBS culture
+  - Amniocentesis (if suspect infection - glucose <15, WBC >30, positive Gram stain)
+  suggest_dx:
+  - PPROM (rupture of membranes before labor, <37 weeks)
+  - Risk factors - infection, prior PPROM, smoking, cervical insufficiency, amniocentesis
+  referrals:
+  - OB/GYN immediately
+  - Admit for monitoring
+  management:
+  - Expectant management (if no infection, 24-34 weeks)
+    - Admit for observation
+    - Antibiotics (prolong latency, reduce infection and neonatal morbidity)
+      - Ampicillin 2g IV q6h x48h, then Amoxicillin 250mg PO TID x5 days PLUS
+      - Azithromycin 1g PO single dose
+    - Corticosteroids (betamethasone 12mg IM q24h x2 if <34 weeks)
+    - Magnesium sulfate (neuroprotection if <32 weeks and delivery imminent)
+    - GBS prophylaxis during labor
+    - Monitor for infection (temp q4h, fetal tachycardia, uterine tenderness, foul discharge)
+    - Daily NST
+    - Deliver at 34 weeks (balance infection risk vs prematurity)
+  - Deliver immediately if
+    - Chorioamnionitis (fever, uterine tenderness, fetal tachycardia, maternal tachycardia, leukocytosis)
+    - Fetal distress
+    - Labor (contractions + cervical change)
+    - ≥34 weeks
+  patient_education:
+  - Goal is to reach 34 weeks
+  - Daily monitoring for infection
+  - Return if fever, contractions, decreased fetal movement
+  next:
+  - when:
+      any_of:
+      - fever: present
+      - uterine_tenderness: present
+      - fetal_tachycardia: present
+    go: chorioamnionitis
+  - default: null
+
+- id: chorioamnionitis
+  when:
+    all_of:
+    - fever: present
+    - uterine_tenderness: present
+  description: Chorioamnionitis (intraamniotic infection)
+  tests:
+  - Fever ≥38°C (100.4°F)
+  - Maternal tachycardia >100 bpm
+  - Fetal tachycardia >160 bpm
+  - Uterine tenderness
+  - Foul-smelling amniotic fluid or discharge
+  - Maternal leukocytosis (WBC >15k)
+  - CBC, blood cultures
+  suggest_dx:
+  - Chorioamnionitis (clinical diagnosis, typically polymicrobial - E. coli, GBS, anaerobes)
+  referrals:
+  - OB/GYN STAT
+  - NICU (neonate at risk for sepsis)
+  management:
+  - Broad-spectrum IV antibiotics (start immediately, do NOT wait for delivery)
+    - Ampicillin 2g IV q6h PLUS Gentamicin 5mg/kg IV q24h
+    - Add Clindamycin 900mg IV q8h if cesarean delivery or necrotizing infection suspected
+    - Continue until afebrile, typically 24-48h postpartum
+  - Delivery
+    - Deliver as soon as possible (vaginal or cesarean)
+    - Do NOT delay for antibiotics to work
+    - Chorioamnionitis is indication for delivery regardless of gestational age
+  - Neonatal evaluation
+    - Blood cultures, CBC from neonate
+    - Antibiotics for neonate (ampicillin + gentamicin)
+  patient_education:
+  - Serious infection requiring immediate delivery
+  - Neonate at risk for sepsis
+  next:
+  - default: null
+
+- id: hyperemesis_gravidarum
+  when:
+    all_of:
+    - nausea_vomiting: severe_persistent
+    - gestational_age: '<20_weeks'
+  description: Hyperemesis gravidarum - severe nausea and vomiting of pregnancy
+  tests:
+  - Vital signs (orthostatic hypotension, tachycardia)
+  - Weight loss (>5% pre-pregnancy weight)
+  - Urinalysis (ketones, specific gravity)
+  - CMP (electrolytes, BUN/Cr, glucose)
+  - LFTs (transaminases may be elevated)
+  - TSH (hyperthyroidism associated with HG)
+  - Ultrasound (rule out molar pregnancy, multiple gestation)
+  suggest_dx:
+  - Hyperemesis gravidarum (persistent nausea/vomiting with weight loss >5%, dehydration, electrolyte abnormalities)
+  - Peaks 9-10 weeks gestation, resolves by 20 weeks in most
+  referrals:
+  - OB/GYN
+  - Admit if severe dehydration, unable to tolerate oral intake, weight loss >10%
+  management:
+  - Hydration
+    - IV fluids (NS or LR with dextrose, replete potassium)
+    - Correct electrolyte abnormalities
+    - Thiamine 100mg IV before glucose (prevent Wernicke encephalopathy)
+  - Antiemetics
+    - First-line - Pyridoxine (vitamin B6) 25mg PO TID + Doxylamine 12.5mg PO TID-QID
+    - Second-line - Ondansetron 4-8mg PO/IV q8h (some concern for cleft palate, but overall safe)
+    - OR Metoclopramide 10mg PO/IV q6h
+    - OR Promethazine 12.5-25mg PO/PR/IV q4-6h
+  - Nutritional support
+    - Small frequent meals
+    - Avoid triggers
+    - Bland diet (crackers, toast)
+    - Total parenteral nutrition (TPN) if refractory, unable to tolerate oral intake >2 weeks
+  patient_education:
+  - Self-limited, usually resolves by mid-pregnancy
+  - Small frequent meals
+  - Return if unable to keep down fluids, severe weakness, confusion
+  next:
+  - default: null
+
+differential_diagnosis:
+  hypertensive_disorders:
+    - Gestational hypertension
+    - Preeclampsia without severe features
+    - Preeclampsia with severe features
+    - Eclampsia (seizures)
+    - HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets)
+    - Chronic hypertension
+    - Superimposed preeclampsia
+  hemorrhage:
+    - Placenta previa (placenta covers os)
+    - Placental abruption (premature separation)
+    - Vasa previa (fetal vessels over os)
+    - Uterine rupture (prior cesarean scar)
+  preterm_complications:
+    - Preterm labor
+    - Preterm premature rupture of membranes (PPROM)
+    - Cervical insufficiency
+    - Chorioamnionitis (intraamniotic infection)
+  other:
+    - Hyperemesis gravidarum (severe vomiting)
+    - Gestational diabetes
+    - Thyroid disorders (hyperthyroidism, hypothyroidism)
+    - Cholestasis of pregnancy (pruritus, elevated bile acids)
+
+disposition_guidance:
+  admit:
+    - Eclampsia (seizures)
+    - Severe hypertension (BP ≥160/110)
+    - HELLP syndrome
+    - Placental abruption
+    - Placenta previa with bleeding
+    - Preterm labor <37 weeks
+    - PPROM <37 weeks
+    - Chorioamnionitis
+    - Hyperemesis gravidarum with dehydration or electrolyte abnormalities
+  emergent_delivery:
+    - Eclampsia
+    - HELLP syndrome
+    - Placental abruption with fetal distress or maternal instability
+    - Chorioamnionitis
+  discharge:
+    - Stable vital signs
+    - No active bleeding
+    - No signs of infection
+    - Gestational hypertension or preeclampsia without severe features (close outpatient follow-up)
+  follow_up:
+    - Preeclampsia - twice-weekly BP checks, labs, fetal surveillance
+    - Gestational hypertension - weekly BP checks, labs
+    - Placenta previa - serial ultrasounds q2-4 weeks
+    - Preterm labor (stopped) - weekly follow-up, cervical length ultrasound
+
+references:
+  - ACOG Practice Bulletin No. 222 - Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020.
+  - ACOG Practice Bulletin No. 204 - Fetal Growth Restriction. Obstet Gynecol. 2019 (Reaffirmed 2021).
+  - ACOG Committee Opinion No. 743 - Low-Dose Aspirin Use During Pregnancy. Obstet Gynecol. 2018 (Reaffirmed 2021).
+  - ACOG Practice Bulletin No. 171 - Management of Preterm Labor. Obstet Gynecol. 2016 (Reaffirmed 2021).
+  - ACOG Practice Bulletin No. 217 - Prelabor Rupture of Membranes. Obstet Gynecol. 2020.
