@@ -10,19 +10,29 @@ import os
 from typing import Optional, Dict, Any, List
 from datetime import datetime
 from contextlib import contextmanager
-from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, scoped_session, relationship
-from sqlalchemy.pool import QueuePool
 import logging
 
 logger = logging.getLogger(__name__)
 
+# Try to import SQLAlchemy - graceful fallback if not available
+try:
+    from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON
+    from sqlalchemy.ext.declarative import declarative_base
+    from sqlalchemy.orm import sessionmaker, scoped_session, relationship
+    from sqlalchemy.pool import QueuePool
+    SQLALCHEMY_AVAILABLE = True
+except ImportError:
+    logger.warning("⚠️  SQLAlchemy not installed - database features disabled")
+    SQLALCHEMY_AVAILABLE = False
+
 # Database configuration
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    logger.warning("⚠️  DATABASE_URL not set - using in-memory storage (not recommended for production)")
+if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
+    if not DATABASE_URL:
+        logger.warning("⚠️  DATABASE_URL not set - using in-memory storage")
+    if not SQLALCHEMY_AVAILABLE:
+        logger.warning("⚠️  SQLAlchemy not available - using in-memory storage")
     DATABASE_AVAILABLE = False
     engine = None
     SessionLocal = None

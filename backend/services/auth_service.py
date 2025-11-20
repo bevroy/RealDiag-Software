@@ -37,10 +37,10 @@ try:
         get_user_custom_lists as db_get_user_custom_lists,
         get_user_settings as db_get_user_settings
     )
-except ImportError:
+except (ImportError, Exception) as e:
     DATABASE_AVAILABLE = False
     logger = logging.getLogger(__name__)
-    logger.warning("⚠️  Database module not available - using in-memory storage")
+    logger.warning(f"⚠️  Database module not available - using in-memory storage: {e}")
 
 # JWT Configuration
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_urlsafe(32))  # Load from env in production
