@@ -10,8 +10,8 @@ if (typeof window !== 'undefined') {
   const ENVIRONMENT = process.env.NEXT_PUBLIC_ENVIRONMENT || 'development';
   
   if (SENTRY_DSN) {
-    // Dynamic import to avoid build-time issues
-    import("@sentry/nextjs").then((SentryModule) => {
+    // Dynamic import to avoid build-time issues - use browser SDK
+    import("@sentry/browser").then((SentryModule) => {
       Sentry = SentryModule;
       
       Sentry.init({
