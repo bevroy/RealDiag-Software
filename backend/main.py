@@ -82,6 +82,33 @@ if SECURITY_ENABLED:
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
     logger.info("✅ Rate limiting enabled: 1000 requests/hour global, specific limits on auth and search endpoints")
 
+# Database initialization on startup
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on application startup."""
+    try:
+        from backend.services.database import DATABASE_AVAILABLE, init_database, check_database_connection
+        
+        if DATABASE_AVAILABLE:
+            logger.info("🔄 Initializing database...")
+            
+            # Check connection
+            if check_database_connection():
+                logger.info("✅ Database connection verified")
+                
+                # Create tables if they don't exist
+                init_database()
+                logger.info("✅ Database initialized successfully")
+            else:
+                logger.error("❌ Database connection failed")
+        else:
+            logger.warning("⚠️  Database not configured - using in-memory storage")
+    
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize database: {e}")
+        # Don't crash the app - fall back to in-memory storage
+        logger.warning("⚠️  Falling back to in-memory storage")
+
 # Prometheus metrics
 REQUEST_COUNTER = Counter('realdiag_requests_total', 'Total HTTP requests', ['path', 'method', 'status'])
 
