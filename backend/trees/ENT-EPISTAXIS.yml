@@ -1,0 +1,335 @@
+id: ENT-EPISTAXIS
+title: Epistaxis (Nosebleed) Diagnostic Tree
+specialty: Otolaryngology/Emergency Medicine
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AAO-HNS Clinical Practice Guidelines
+entry: initial_assessment
+
+clinical_pearls:
+  - 90% of nosebleeds are anterior (Kiesselbach plexus/Little's area)
+  - Posterior bleeds more common in elderly, hypertensives
+  - Identify bleeding site before treatment (suction, headlight, speculum)
+  - Topical decongestant + anesthetic essential before cautery/packing
+  - Silver nitrate cautery for small anterior bleeds
+  - Posterior packing requires ENT consultation and admission
+
+red_flags:
+  - Massive hemorrhage (hemodynamic instability)
+  - Posterior bleeding (difficult to control, may need intervention)
+  - Anticoagulation (warfarin, DOACs, antiplatelet agents)
+  - Recurrent epistaxis after packing removal
+  - Blood dyscrasias (thrombocytopenia, hemophilia)
+  - Hereditary hemorrhagic telangiectasia (HHT, Osler-Weber-Rendu)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial nosebleed evaluation
+  tests:
+  - Vital signs (blood pressure, heart rate - assess hemodynamic stability)
+  - Nasal examination
+    - Have patient blow nose (remove clots)
+    - Suction (visualize bleeding site)
+    - Nasal speculum and headlight
+    - Identify anterior vs posterior source
+  - Medication review (anticoagulants, antiplatelets, NSAIDs)
+  - CBC (if significant blood loss or recurrent)
+  - Coagulation studies (PT/INR, aPTT) if on anticoagulation or concern for coagulopathy
+  suggest_dx: []
+  next:
+  - when:
+      vital_signs_any:
+      - hypotension
+      - tachycardia
+      - massive_hemorrhage
+    go: massive_epistaxis
+  - when:
+      bleeding_site: posterior
+    go: posterior_epistaxis
+  - when:
+      bleeding_site: anterior_identified
+    go: anterior_epistaxis_treatment
+  - when:
+      bleeding_site: unable_to_identify
+    go: unidentified_source
+  - default: anterior_epistaxis_treatment
+
+- id: massive_epistaxis
+  when:
+    vital_signs_any:
+    - SBP: '<90'
+    - HR: '>120'
+    - severe_hemorrhage: true
+  description: Life-threatening epistaxis with hemodynamic instability
+  tests:
+  - IV access (2 large-bore IVs)
+  - Rapid vital signs, continuous monitoring
+  - Type and crossmatch (transfuse if Hgb <7 or symptomatic)
+  - CBC, coagulation studies (PT/INR, aPTT), platelet count
+  - Reverse anticoagulation if applicable
+  suggest_dx:
+  - Severe anterior or posterior epistaxis
+  - Possible arterial bleeding (sphenopalatine, ethmoidal arteries)
+  referrals:
+  - ENT STAT
+  - Interventional radiology (for angiography and embolization)
+  - ICU admission
+  management:
+  - Resuscitation
+    - 2 large-bore IVs
+    - IV fluids (NS or LR bolus)
+    - Transfuse PRBCs if Hgb <7 or hemodynamic instability
+    - Reverse anticoagulation
+      - Warfarin - vitamin K 10mg IV slow push + 4-factor PCC or FFP
+      - Dabigatran - idarucizumab 5g IV
+      - Rivaroxaban/apixaban - 4-factor PCC
+  - Control bleeding
+    - Topical decongestant + anesthetic (oxymetazoline, lidocaine)
+    - Anterior packing (Rapid Rhino, Merocel)
+    - Posterior packing (Foley catheter or epistaxis balloon)
+    - May need both anterior and posterior
+  - ENT for endoscopic cautery or ligation
+    - Sphenopalatine artery ligation
+    - Ethmoidal artery ligation
+  - Interventional radiology if ENT unavailable or failed
+    - Angiography and embolization
+    - Sphenopalatine or internal maxillary artery
+  - Admit ICU for monitoring
+  next:
+  - default: null
+
+- id: posterior_epistaxis
+  when:
+    bleeding_site: posterior
+  description: Posterior epistaxis
+  tests:
+  - Blood dripping down posterior pharynx despite anterior pressure
+  - Nasal endoscopy (if available) - identify sphenopalatine area
+  - Vital signs (blood pressure, HR)
+  - CBC, coagulation studies
+  suggest_dx:
+  - Posterior epistaxis
+  - Sphenopalatine artery branch (most common)
+  - Risk factors - hypertension, anticoagulation, elderly
+  referrals:
+  - ENT consultation (same day, urgent)
+  - Admit for observation (posterior packing requires admission)
+  management:
+  - Topical decongestant + anesthetic
+    - Oxymetazoline spray or 4% cocaine pledgets
+    - 4% lidocaine
+  - Posterior nasal packing
+    - Epistaxis balloon (Rapid Rhino, Epistat)
+      - Inflate posterior balloon first, then anterior
+      - Leave in place 3-5 days
+    - Foley catheter method (if no epistaxis balloon available)
+      - 10-14F Foley inserted through nose to nasopharynx
+      - Inflate balloon with 10mL saline, pull forward (tamponade)
+      - Pack anterior nose around catheter
+      - Secure Foley to cheek (umbilical clamp on gauze)
+    - Commercial posterior pack (Brighton epistaxis balloon)
+  - Prophylactic antibiotics (while pack in place)
+    - Amoxicillin-clavulanate 875/125mg PO BID
+    - Or clindamycin 300mg PO TID (if penicillin allergic)
+    - Prevent toxic shock syndrome, sinusitis
+  - Humidified oxygen (nasal packing impairs breathing)
+  - Blood pressure control (target SBP <140)
+  - Admit to hospital
+    - Risk of airway obstruction
+    - Re-bleeding common
+    - Posterior packs uncomfortable, may dislodge
+  - ENT follow-up for pack removal in 3-5 days
+  - Endoscopic sphenopalatine artery ligation if rebleeding
+  complications:
+  - Re-bleeding (30% after pack removal)
+  - Sinusitis
+  - Toxic shock syndrome
+  - Airway obstruction
+  - Myocardial infarction (elderly, hypoxia)
+  next:
+  - default: null
+
+- id: anterior_epistaxis_treatment
+  when:
+    bleeding_site: anterior
+  description: Anterior epistaxis management
+  tests:
+  - Identify Kiesselbach plexus (anteroinferior septum)
+  - Visualize specific bleeding vessel
+  suggest_dx:
+  - Anterior epistaxis (90% of nosebleeds)
+  - Kiesselbach plexus (Little's area)
+  referrals:
+  - ENT if refractory to treatment
+  management:
+  - Initial measures
+    - Have patient sit upright, lean forward (prevent swallowing blood)
+    - Blow nose (clear clots)
+    - Pinch nose (compress against septum) for 10-15 minutes
+  - Topical anesthesia and vasoconstriction
+    - Oxymetazoline (Afrin) spray or cotton pledget soaked
+    - 4% lidocaine spray or pledget
+    - Leave in place 10 minutes
+  - Suction (visualize bleeding site with nasal speculum)
+  - Chemical cautery (if discrete bleeding vessel identified)
+    - Silver nitrate stick
+    - Dry the area first (cautery ineffective if wet)
+    - Roll stick on bleeding vessel for 5-10 seconds
+    - Cauterize small area around vessel
+    - Do NOT cauterize both sides of septum (septal perforation risk)
+  - Anterior nasal packing (if cautery fails or diffuse oozing)
+    - Rapid Rhino (most common)
+      - Insert along floor of nose (parallel to hard palate, NOT upward)
+      - Inflate with air or saline per package instructions
+      - Leave in place 3-5 days
+    - Merocel sponge
+      - Insert dry, then wet with water or saline (expands)
+      - Remove in 3-5 days
+    - Petroleum gauze (ribbon gauze)
+      - Layer strips in accordion fashion (floor to roof)
+      - Pack firmly but not excessively tight
+  - Post-packing instructions
+    - Keep pack in place 3-5 days
+    - No nose blowing, straining, heavy lifting
+    - Oral antibiotics (prevent sinusitis, toxic shock)
+      - Amoxicillin-clavulanate 875/125mg PO BID
+    - Pain management (acetaminophen or ibuprofen)
+    - Elevate head of bed
+  - Return for pack removal in 3-5 days
+  - Re-bleeding prevention after pack removal
+    - Topical nasal saline gel or ointment (Ayr, Ponaris)
+    - Humidifier
+    - Avoid nose picking, blowing
+  discharge_criteria:
+  - Bleeding controlled
+  - Hemodynamically stable
+  - Pack in place securely
+  - Patient understands return precautions
+  next:
+  - default: null
+
+- id: unidentified_source
+  when:
+    bleeding_site: unable_to_identify
+  description: Epistaxis with unidentified bleeding source
+  tests:
+  - Nasal endoscopy (if available)
+  - CT sinuses (if recurrent, suspect tumor or structural cause)
+  suggest_dx:
+  - Likely anterior, but unable to visualize
+  - Consider posterior source
+  referrals:
+  - ENT consultation (same day if persistent bleeding)
+  management:
+  - Attempt anterior packing (empiric treatment)
+  - If fails, place posterior packing
+  - ENT for endoscopic evaluation
+  next:
+  - default: null
+
+- id: recurrent_epistaxis_workup
+  when:
+    history: recurrent_epistaxis
+  description: Evaluation of recurrent nosebleeds
+  tests:
+  - Complete blood count (anemia, platelet count)
+  - Coagulation studies (PT/INR, aPTT)
+  - Comprehensive metabolic panel (renal function - uremia causes bleeding)
+  - Blood pressure (hypertension)
+  - Nasal endoscopy
+  - CT sinuses (mass, structural abnormality)
+  - Consider
+    - Von Willebrand factor (if family history or easy bruising)
+    - Hereditary hemorrhagic telangiectasia (HHT) screening (family history, telangiectasias, visceral AVMs)
+    - Platelet function studies (if acquired platelet dysfunction)
+  suggest_dx:
+  - Dry nasal mucosa (most common - low humidity, chronic rhinitis)
+  - Hypertension
+  - Anticoagulation or antiplatelet medications
+  - Coagulopathy (von Willebrand disease, hemophilia, liver disease)
+  - Thrombocytopenia
+  - Hereditary hemorrhagic telangiectasia (HHT, Osler-Weber-Rendu)
+  - Nasal polyps
+  - Septal deviation or perforation
+  - Intranasal drug use (cocaine)
+  - Neoplasm (rare - juvenile nasopharyngeal angiofibroma, SCC)
+  referrals:
+  - ENT for nasal endoscopy
+  - Hematology if coagulopathy identified
+  management:
+  - Treat underlying cause
+  - Hypertension - blood pressure control
+  - Dry nasal mucosa
+    - Saline nasal spray or gel (Ayr, NeilMed)
+    - Petroleum jelly (Vaseline) applied to septum
+    - Humidifier (especially winter)
+  - Anticoagulation
+    - Risk-benefit analysis (continue vs stop)
+    - Do NOT stop anticoagulation without discussing with prescribing physician
+    - May need to reverse temporarily for severe bleeding
+  - Hereditary hemorrhagic telangiectasia
+    - Laser ablation of telangiectasias
+    - Estrogen therapy (increases vascular resistance)
+    - Young's procedure (close nostrils) if severe
+    - Screen for pulmonary and cerebral AVMs
+  - Chemical cautery of visible vessels
+  - Septal dermoplasty (if severe recurrent)
+  patient_education:
+  - Nasal saline gel daily
+  - Humidifier in bedroom
+  - Avoid nose picking
+  - Avoid NSAIDs if possible
+  next:
+  - default: null
+
+differential_diagnosis:
+  local_causes:
+    - Digital trauma (nose picking, most common in children)
+    - Dry nasal mucosa (low humidity, heating/AC)
+    - Infection (rhinosinusitis, URI)
+    - Trauma (facial fracture, nasal fracture)
+    - Foreign body (children)
+    - Septal deviation or perforation
+    - Intranasal drug use (cocaine, inhaled steroids)
+    - Tumor (juvenile nasopharyngeal angiofibroma, SCC, lymphoma)
+    - Post-surgical (septoplasty, sinus surgery)
+  systemic_causes:
+    - Hypertension (most common systemic cause)
+    - Anticoagulation (warfarin, DOACs, heparin)
+    - Antiplatelet agents (aspirin, clopidogrel)
+    - Coagulopathy (von Willebrand disease, hemophilia, liver disease)
+    - Thrombocytopenia
+    - Uremia (renal failure)
+    - Hereditary hemorrhagic telangiectasia (HHT)
+    - Leukemia, lymphoma
+    - Alcohol abuse (coagulopathy, thrombocytopenia)
+  vascular_causes:
+    - Sphenopalatine artery (posterior epistaxis)
+    - Ethmoidal arteries (anterior or posterior)
+    - Kiesselbach plexus (anterior, most common)
+
+disposition_guidance:
+  admit:
+    - Posterior packing placed (requires admission)
+    - Hemodynamic instability
+    - Significant blood loss (Hgb <7, transfusion required)
+    - Continued bleeding despite anterior packing
+    - Elderly with comorbidities and packing in place
+    - Inadequate social support for follow-up
+  discharge:
+    - Anterior packing, hemodynamically stable
+    - Bleeding controlled with cautery alone
+    - Reliable for follow-up
+    - Understands return precautions
+  follow_up:
+    - Remove anterior packing in 3-5 days (can be done by primary care or ENT)
+    - Remove posterior packing in 3-5 days (ENT only, admit for removal)
+    - ENT follow-up after packing removal (assess for re-bleeding, underlying pathology)
+    - Recurrent epistaxis - ENT for endoscopy and workup
+
+references:
+  - Tunkel DE et al. AAO-HNS Clinical Practice Guideline - Nosebleed (Epistaxis). Otolaryngol Head Neck Surg. 2020.
+  - Viehweg TL et al. Epistaxis - Diagnosis and Treatment. J Oral Maxillofac Surg. 2006.
+  - Pond F, Sizeland A. Epistaxis - Strategies for Management. Aust Fam Physician. 2000.
+  - Pollice PA, Yoder MG. Epistaxis - A Retrospective Review of Hospitalized Patients. Otolaryngol Head Neck Surg. 1997.

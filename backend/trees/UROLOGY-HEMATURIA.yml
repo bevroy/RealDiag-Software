@@ -1,0 +1,455 @@
+id: UROLOGY-HEMATURIA
+title: Hematuria Diagnostic Tree
+specialty: Urology/Nephrology/Primary Care
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AUA Guidelines, NICE Guidelines
+entry: initial_assessment
+
+clinical_pearls:
+  - Gross hematuria always warrants workup (2.5-10% malignancy risk)
+  - Microscopic hematuria = ≥3 RBCs per high-power field on urine microscopy
+  - Dipstick positive but negative microscopy = myoglobinuria, hemoglobinuria, or false positive
+  - Glomerular hematuria = dysmorphic RBCs, RBC casts, proteinuria
+  - Non-glomerular hematuria = normal RBC morphology, often clots
+  - Anticoagulation does NOT cause hematuria, still requires workup
+
+red_flags:
+  - Age >35 with gross hematuria (malignancy risk)
+  - Irritative voiding symptoms without infection (bladder cancer)
+  - Painless gross hematuria (classic for bladder or kidney cancer)
+  - Flank mass (renal cell carcinoma)
+  - Constitutional symptoms (weight loss, fever, night sweats)
+  - Acute kidney injury with hematuria (GN, HUS, TTP)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial hematuria evaluation
+  tests:
+  - Urinalysis with microscopy (confirm true hematuria)
+    - ≥3 RBCs per HPF on properly collected specimen
+    - Dipstick alone insufficient (false positives)
+  - Urine microscopy
+    - RBC morphology (dysmorphic vs normal)
+    - RBC casts (glomerular)
+    - WBC casts (pyelonephritis)
+    - Crystals (stones)
+  - Urine culture (rule out UTI)
+  - Urine cytology (if risk factors for malignancy)
+  - History
+    - Gross vs microscopic
+    - Timing (initial, terminal, total stream)
+    - Associated pain, clots
+    - Recent URI, skin infection (post-infectious GN)
+    - Medications (anticoagulants, cyclophosphamide)
+    - Family history (Alport, PKD, stones)
+    - Risk factors for malignancy (smoking, age >35, occupational exposures)
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - acute_kidney_injury
+      - proteinuria_>500mg
+      - RBC_casts
+      - dysmorphic_RBCs
+    go: glomerular_hematuria
+  - when:
+      all_of:
+      - urine_culture: positive
+      - symptoms_contains_any:
+        - dysuria
+        - frequency
+        - urgency
+    go: urinary_tract_infection
+  - when:
+      symptoms_contains_any:
+      - flank_pain
+      - colicky_pain
+      - stones_on_imaging
+    go: nephrolithiasis
+  - when:
+      all_of:
+      - gross_hematuria: true
+      - age: '>35'
+    go: malignancy_workup
+  - when:
+      exam_findings_any:
+      - flank_mass
+      - bladder_mass
+    go: malignancy_workup
+  - default: non_glomerular_workup
+
+- id: glomerular_hematuria
+  when:
+    urine_findings_any:
+    - RBC_casts
+    - dysmorphic_RBCs
+    - proteinuria
+  description: Glomerular causes of hematuria
+  tests:
+  - Urinalysis - dysmorphic RBCs, RBC casts
+  - 24-hour urine protein (or spot protein/creatinine ratio)
+  - Basic metabolic panel (BUN, creatinine - assess kidney function)
+  - CBC
+  - Complement levels (C3, C4)
+    - Low C3 - post-infectious GN, MPGN, lupus nephritis
+    - Low C3 and C4 - lupus, cryoglobulinemia
+  - ANA, anti-dsDNA (lupus)
+  - ANCA (vasculitis - GPA, MPA)
+  - Anti-GBM antibody (Goodpasture)
+  - ASO titer, anti-DNase B (post-streptococcal GN)
+  - Hepatitis B and C serology
+  - HIV test
+  - Audiometry (if suspect Alport syndrome)
+  - Renal ultrasound (assess kidney size, rule out obstruction)
+  - Kidney biopsy (if diagnosis uncertain or AKI)
+  suggest_dx:
+  - IgA nephropathy (Berger disease, most common primary GN)
+  - Post-infectious glomerulonephritis (post-strep, staph)
+  - Thin basement membrane disease (benign familial hematuria)
+  - Alport syndrome (hereditary nephritis, hearing loss, eye abnormalities)
+  - Lupus nephritis
+  - ANCA-associated vasculitis (GPA, MPA)
+  - Goodpasture syndrome (anti-GBM disease)
+  - Membranoproliferative GN (MPGN)
+  - Acute proliferative GN
+  referrals:
+  - Nephrology for glomerular disease workup
+  - Kidney biopsy if diagnosis uncertain, significant proteinuria, or declining GFN
+  management:
+  - Treat underlying cause
+  - IgA nephropathy
+    - ACE inhibitor or ARB (reduce proteinuria)
+    - Steroids if severe proteinuria or declining function
+    - Fish oil (omega-3) may help
+  - Post-infectious GN
+    - Supportive care (usually self-limited)
+    - Salt restriction, diuretics for edema
+    - Antihypertensives
+  - Lupus nephritis
+    - Immunosuppression (steroids, cyclophosphamide, mycophenolate)
+    - Hydroxychloroquine
+  - ANCA vasculitis
+    - High-dose steroids + cyclophosphamide or rituximab
+  - Goodpasture
+    - Plasmapheresis + cyclophosphamide + steroids
+  - Thin basement membrane disease
+    - Observation only (benign, no treatment needed)
+    - Monitor blood pressure and kidney function
+  - Alport syndrome
+    - ACE inhibitor (slow progression)
+    - Hearing aids
+    - Eventual dialysis or transplant
+  patient_education:
+  - May need kidney biopsy for diagnosis
+  - Long-term nephrology follow-up
+  - Control blood pressure
+  next:
+  - default: null
+
+- id: urinary_tract_infection
+  when:
+    all_of:
+    - urine_culture: positive
+    - symptoms: UTI_symptoms
+  description: UTI causing hematuria
+  tests:
+  - Urinalysis - pyuria, bacteriuria, nitrites
+  - Urine culture and sensitivity
+  - If pyelonephritis suspected
+    - CBC, CMP
+    - Blood cultures
+    - CT abdomen/pelvis (if complicated or not improving)
+  suggest_dx:
+  - Cystitis (E. coli most common)
+  - Pyelonephritis
+  - Prostatitis (men)
+  referrals:
+  - Urology if recurrent UTIs, structural abnormality, or treatment failure
+  management:
+  - Uncomplicated cystitis (women)
+    - Nitrofurantoin 100mg PO BID x 5 days
+    - Or TMP-SMX DS PO BID x 3 days (if local resistance <20%)
+    - Or fosfomycin 3g PO single dose
+  - Complicated UTI or pyelonephritis
+    - Ciprofloxacin 500mg PO BID x 7 days
+    - Or levofloxacin 750mg PO daily x 5 days
+    - If severe or admission - ceftriaxone 1g IV daily
+  - Prostatitis
+    - Ciprofloxacin 500mg PO BID x 4-6 weeks
+    - Or levofloxacin 500mg PO daily x 4-6 weeks
+  - Repeat urinalysis after treatment to ensure resolution
+  - If hematuria persists after infection treated, requires full workup
+  next:
+  - default: null
+
+- id: nephrolithiasis
+  when:
+    symptoms_contains_any:
+    - flank_pain
+    - colicky_pain
+    - hematuria_with_pain
+  description: Kidney stones causing hematuria
+  tests:
+  - Non-contrast CT abdomen/pelvis (gold standard)
+    - Identifies stone size, location, obstruction
+  - Urinalysis - RBCs, crystals
+  - BMP (creatinine - assess kidney function)
+  - CBC (if concern for infection)
+  suggest_dx:
+  - Nephrolithiasis (calcium oxalate most common)
+  referrals:
+  - Urology if
+    - Stone >10mm (unlikely to pass)
+    - Obstruction with infection (emergent)
+    - Single kidney with obstructing stone
+    - Bilateral obstruction
+    - Intractable pain or vomiting
+    - Acute kidney injury
+  management:
+  - See UROLOGY-KIDNEY-STONES tree for complete management
+  - Pain control (NSAIDs, opioids)
+  - Tamsulosin (medical expulsive therapy)
+  - Hydration
+  - Strain urine for stone analysis
+  - Intervention if stone not passing (lithotripsy, ureteroscopy)
+  next:
+  - default: null
+
+- id: malignancy_workup
+  when:
+    risk_factors_any:
+    - age: '>35'
+    - smoking: true
+    - gross_hematuria: true
+    - occupational_exposure: true
+    - irritative_symptoms_without_infection: true
+  description: Evaluation for urologic malignancy
+  tests:
+  - Cystoscopy (evaluate bladder and urethra)
+    - Visualize bladder lesions, tumors
+    - Biopsy suspicious areas
+  - CT urography (CTU) or MRI urography
+    - Evaluate kidneys, ureters, bladder
+    - Identify masses, filling defects
+  - Urine cytology (low sensitivity, high specificity for high-grade cancer)
+  - Urine tumor markers (UroVysion FISH, NMP22) - adjuncts, not diagnostic
+  - PSA (men >50 or with urinary symptoms)
+  suggest_dx:
+  - Bladder cancer (transitional cell carcinoma)
+    - Risk factors - smoking (most important), age, occupational (aniline dyes, rubber, textiles)
+    - Painless gross hematuria classic presentation
+  - Renal cell carcinoma (RCC)
+    - Classic triad (10%) - hematuria, flank pain, flank mass
+    - Often incidental on imaging
+  - Upper tract urothelial carcinoma (renal pelvis, ureter)
+  - Prostate cancer
+  - Urethral cancer (rare)
+  referrals:
+  - Urology for cystoscopy and imaging
+  - Oncology if malignancy confirmed
+  management:
+  - Bladder cancer
+    - Transurethral resection of bladder tumor (TURBT)
+    - Intravesical BCG or chemotherapy (non-muscle invasive)
+    - Radical cystectomy (muscle-invasive)
+    - Chemotherapy + radiation alternative
+  - Renal cell carcinoma
+    - Partial or radical nephrectomy
+    - Ablation for small tumors
+    - Targeted therapy or immunotherapy if metastatic
+  - Upper tract urothelial CA
+    - Nephroureterectomy with bladder cuff
+  - Surveillance
+    - Bladder cancer - cystoscopy q3-6 months for years
+    - RCC - imaging surveillance post-nephrectomy
+  next:
+  - default: null
+
+- id: non_glomerular_workup
+  when: {}
+  description: Non-glomerular hematuria workup
+  tests:
+  - Imaging
+    - CT urography (preferred) - kidneys, ureters, bladder
+    - Or renal ultrasound + retrograde pyelogram (if CT contraindicated)
+  - Cystoscopy (if age >35, smoking, gross hematuria, or risk factors)
+  - Urine cytology (if risk factors for malignancy)
+  - PSA (men >50)
+  suggest_dx: []
+  next:
+  - when:
+      imaging_findings: renal_mass
+    go: renal_mass_evaluation
+  - when:
+      imaging_findings: bladder_mass
+    go: malignancy_workup
+  - when:
+      exam_findings: enlarged_prostate
+    go: benign_prostatic_hyperplasia
+  - when:
+      all_of:
+      - workup: negative
+      - microscopic_hematuria: persistent
+    go: persistent_microscopic_hematuria
+  - default: persistent_microscopic_hematuria
+
+- id: renal_mass_evaluation
+  when:
+    imaging_findings: renal_mass
+  description: Renal mass detected on imaging
+  tests:
+  - CT abdomen/pelvis with IV contrast (characterize mass)
+    - Simple cyst (no enhancement, thin wall) - benign, no follow-up needed
+    - Complex cyst (Bosniak classification)
+    - Solid mass (enhances >15 HU) - RCC until proven otherwise
+  - Chest CT (staging if RCC suspected)
+  suggest_dx:
+  - Simple renal cyst (most common, benign)
+  - Complex cyst (Bosniak II-IV)
+  - Renal cell carcinoma (RCC)
+  - Angiomyolipoma (benign, fat-containing)
+  - Oncocytoma (benign, cannot distinguish from RCC pre-op)
+  referrals:
+  - Urology for solid masses or complex cysts
+  management:
+  - Simple cyst - no treatment needed
+  - Solid mass (RCC suspected)
+    - Partial nephrectomy (nephron-sparing, preferred if feasible)
+    - Radical nephrectomy (if large or complex)
+    - Active surveillance (small tumors <4cm in elderly or comorbid patients)
+    - Ablation (cryotherapy, radiofrequency) for small tumors in poor surgical candidates
+  - Angiomyolipoma
+    - Observation if <4cm
+    - Embolization or resection if >4cm (risk of spontaneous hemorrhage)
+  next:
+  - default: null
+
+- id: benign_prostatic_hyperplasia
+  when:
+    all_of:
+    - patient: male
+    - exam: enlarged_prostate
+    - symptoms: LUTS
+  description: BPH causing hematuria
+  tests:
+  - DRE - enlarged, smooth prostate
+  - PSA (rule out prostate cancer)
+  - Uroflowmetry (if obstructive symptoms)
+  - Post-void residual (bladder ultrasound)
+  - Cystoscopy (if gross hematuria or persistent microscopic hematuria)
+  suggest_dx:
+  - Benign prostatic hyperplasia (N40)
+  referrals:
+  - Urology if refractory symptoms, urinary retention, or elevated PSA
+  management:
+  - Alpha-blockers
+    - Tamsulosin 0.4mg PO daily (most common)
+    - Or alfuzosin, silodosin
+    - Improves flow, reduces symptoms
+  - 5-alpha-reductase inhibitors (if prostate >40g)
+    - Finasteride 5mg PO daily
+    - Or dutasteride 0.5mg PO daily
+    - Shrinks prostate over months
+  - Combination therapy (alpha-blocker + 5ARI) if severe
+  - Surgical options if medical management fails
+    - TURP (transurethral resection of prostate) - gold standard
+    - Laser prostatectomy (HoLEP, PVP)
+    - UroLift (minimally invasive)
+  patient_education:
+  - Common in older men
+  - Not related to prostate cancer
+  - Medications improve symptoms
+  next:
+  - default: null
+
+- id: persistent_microscopic_hematuria
+  when:
+    all_of:
+    - microscopic_hematuria: persistent
+    - workup: negative
+  description: Persistent asymptomatic microscopic hematuria with negative workup
+  tests:
+  - Repeat urinalysis in 6 months (confirm persistence)
+  - Blood pressure, kidney function (monitor for progression)
+  - Consider thin basement membrane disease, IgA nephropathy (most require biopsy for diagnosis)
+  suggest_dx:
+  - Thin basement membrane disease (benign familial hematuria)
+  - Mild IgA nephropathy
+  - Idiopathic hematuria
+  referrals:
+  - Nephrology if develops proteinuria, hypertension, or declining GFR
+  - Repeat cystoscopy/imaging if develops risk factors or gross hematuria
+  management:
+  - Observation
+  - Annual urinalysis
+  - Monitor blood pressure and kidney function
+  - Repeat workup if
+    - Gross hematuria develops
+    - New risk factors for malignancy
+    - Proteinuria develops
+    - Kidney function declines
+  patient_education:
+  - Cause not always found
+  - Likely benign if workup negative
+  - Monitor annually
+  - Report gross hematuria or new symptoms
+  next:
+  - default: null
+
+differential_diagnosis:
+  glomerular:
+    - IgA nephropathy (most common primary GN)
+    - Thin basement membrane disease (benign familial hematuria)
+    - Alport syndrome
+    - Post-infectious glomerulonephritis
+    - Lupus nephritis
+    - ANCA-associated vasculitis
+    - Goodpasture syndrome
+    - Membranoproliferative GN
+  non_glomerular_renal:
+    - Nephrolithiasis
+    - Renal cell carcinoma
+    - Renal cyst (simple or complex)
+    - Pyelonephritis
+    - Renal trauma
+    - Papillary necrosis (sickle cell, diabetes, NSAIDs)
+    - Renal infarction
+    - Arteriovenous malformation
+    - Polycystic kidney disease
+  bladder_and_lower_tract:
+    - Bladder cancer (transitional cell carcinoma)
+    - Cystitis (bacterial, hemorrhagic, radiation, cyclophosphamide)
+    - Benign prostatic hyperplasia (BPH)
+    - Prostate cancer
+    - Urethritis
+    - Urethral stricture
+    - Bladder stones
+    - Trauma (catheter, instrumentation)
+  other:
+    - Anticoagulation (reveals underlying pathology, not a cause itself)
+    - Strenuous exercise (march hematuria)
+    - Menstruation (contamination)
+    - Factitious (Munchausen)
+
+disposition_guidance:
+  urgent_referral:
+    - Gross hematuria in patient >35 years (malignancy workup)
+    - Acute kidney injury with hematuria (nephrology)
+    - Obstructing stone with infection (urology emergency)
+  routine_referral:
+    - All gross hematuria requires urology evaluation
+    - Microscopic hematuria with risk factors - urology
+    - Glomerular hematuria - nephrology
+    - Negative initial workup but persistent - repeat evaluation in 3-5 years
+  follow_up:
+    - Repeat urinalysis to confirm persistence
+    - Annual monitoring if idiopathic microscopic hematuria
+    - Cystoscopy surveillance if history of bladder cancer
+
+references:
+  - Davis R et al. AUA Guideline - Diagnosis, Evaluation and Follow-up of Asymptomatic Microhematuria (AMH) in Adults. J Urol. 2012.
+  - Barocas DA et al. AUA/SUFU Guideline - Microhematuria. J Urol. 2020.
+  - Sharp VJ et al. Evaluation of the Urologic Patient - Testing and Imaging. Med Clin North Am. 2018.
+  - Avellino GJ et al. Asymptomatic Microscopic Hematuria - Screening and Evaluation. Am Fam Physician. 2020.

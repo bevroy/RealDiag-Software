@@ -1,0 +1,413 @@
+id: UROLOGY-KIDNEY-STONES
+title: Kidney Stones (Nephrolithiasis) Diagnostic Tree
+specialty: Urology/Emergency Medicine
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AUA Guidelines, EAU Guidelines
+entry: initial_assessment
+
+clinical_pearls:
+  - Classic presentation: sudden-onset colicky flank pain radiating to groin
+  - Non-contrast CT abdomen/pelvis is gold standard (98% sensitivity)
+  - Stones <5mm pass spontaneously 90%, 5-10mm pass 50%, >10mm pass <10%
+  - NSAIDs (ketorolac) superior to opioids for renal colic pain
+  - Tamsulosin (medical expulsive therapy) helps passage of distal ureteral stones
+  - Infected obstructing stone = urologic emergency (sepsis risk)
+
+red_flags:
+  - Fever with obstructing stone (obstructive pyelonephritis, urosepsis)
+  - Single kidney with obstructing stone (acute kidney injury risk)
+  - Bilateral obstructing stones (rare, acute kidney injury)
+  - Anuria (bilateral obstruction or single kidney)
+  - Intractable pain or vomiting (admission, possible intervention)
+  - Acute kidney injury (Cr elevation)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial kidney stone evaluation
+  tests:
+  - History
+    - Pain onset (sudden, colicky)
+    - Location (flank, radiating to groin, testicle, labia)
+    - Character (intermittent cramping, waves)
+    - Associated symptoms (nausea, vomiting, hematuria)
+    - Prior stones, family history
+  - Physical exam
+    - Vital signs (fever, tachycardia)
+    - Costovertebral angle (CVA) tenderness
+    - Abdominal exam (rule out other causes)
+  - Urinalysis - hematuria (90%, but can be absent)
+  - BMP - creatinine (assess kidney function)
+  - CBC (if fever or concern for infection)
+  - Pregnancy test (women of childbearing age)
+  - Non-contrast CT abdomen/pelvis (gold standard)
+    - Stone size, location, number
+    - Hydronephrosis
+    - Alternative diagnoses (appendicitis, AAA)
+  - Renal ultrasound (alternative if pregnancy, young age, recurrent stones)
+    - Less sensitive for stones, but detects hydronephrosis
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - fever: present
+      - hydronephrosis: present
+    go: obstructive_pyelonephritis
+  - when:
+      all_of:
+      - patient_characteristics_any:
+        - single_kidney
+        - bilateral_obstruction
+      - hydronephrosis: present
+    go: high_risk_obstruction
+  - when:
+      all_of:
+      - symptoms: intractable_pain_or_vomiting
+      - unable_to_tolerate_PO: true
+    go: admission_for_pain_control
+  - when:
+      stone_location: ureteral
+    go: ureteral_stone_management
+  - when:
+      stone_location: renal
+    go: renal_stone_management
+  - default: ureteral_stone_management
+
+- id: obstructive_pyelonephritis
+  when:
+    all_of:
+    - fever: present
+    - obstructing_stone: present
+    - hydronephrosis: present
+  description: Infected obstructed kidney - UROLOGIC EMERGENCY
+  tests:
+  - Vital signs (sepsis criteria - fever, tachycardia, hypotension)
+  - CBC - leukocytosis
+  - BMP - creatinine
+  - Urinalysis - pyuria, bacteriuria, nitrites
+  - Blood cultures (before antibiotics)
+  - Urine culture (after decompression)
+  - CT abdomen/pelvis (confirm obstruction)
+  suggest_dx:
+  - Obstructive pyelonephritis with infected hydronephrosis
+  - Risk of urosepsis and septic shock
+  referrals:
+  - Urology STAT
+  - ICU if septic or unstable
+  management:
+  - EMERGENT decompression (within hours)
+    - Retrograde ureteral stent (preferred)
+    - Or percutaneous nephrostomy tube
+    - Delay increases mortality risk
+  - Resuscitation if septic
+    - 2 large-bore IVs
+    - IV fluid bolus (30 mL/kg crystalloid)
+    - Vasopressors if hypotensive after fluids
+  - IV antibiotics (immediately after cultures)
+    - Ceftriaxone 2g IV daily
+    - Or piperacillin-tazobactam 4.5g IV q6h
+    - If unstable or high MRSA risk, add vancomycin 15 mg/kg IV
+    - Adjust based on culture and sensitivity
+  - Admit to ICU if septic shock
+  - Stone removal after infection resolved (interval procedure)
+    - Ureteroscopy, lithotripsy, or PCNL in 1-2 weeks
+  complications:
+  - Septic shock (mortality 20-30% if delayed treatment)
+  - Acute kidney injury
+  - Perinephric abscess
+  next:
+  - default: null
+
+- id: high_risk_obstruction
+  when:
+    patient_characteristics_any:
+    - single_kidney
+    - bilateral_obstruction
+    - transplant_kidney
+    - baseline_CKD
+  description: High-risk obstruction (single kidney, bilateral, transplant)
+  tests:
+  - BMP - creatinine (assess AKI)
+  - CT (confirm obstruction)
+  - Urinalysis
+  suggest_dx:
+  - Obstructing stone in high-risk patient
+  - Risk of acute kidney injury and dialysis
+  referrals:
+  - Urology urgently (same day)
+  - Nephrology if acute kidney injury
+  management:
+  - Urgent decompression (within 24 hours)
+    - Retrograde ureteral stent
+    - Or percutaneous nephrostomy
+  - IV fluids
+  - Avoid nephrotoxic medications (NSAIDs, contrast if possible)
+  - Definitive stone treatment after decompression
+  next:
+  - default: null
+
+- id: admission_for_pain_control
+  when:
+    symptoms_contains_any:
+    - intractable_pain
+    - intractable_vomiting
+    - unable_to_tolerate_PO
+  description: Admission for pain control and hydration
+  tests:
+  - CT (confirm diagnosis, stone size/location)
+  - BMP, CBC
+  - Urinalysis
+  suggest_dx:
+  - Nephrolithiasis with severe symptoms
+  referrals:
+  - Urology consultation
+  management:
+  - IV fluids (LR or NS)
+  - IV pain control
+    - Ketorolac 30mg IV (if no renal impairment)
+    - Or morphine 4-8mg IV q2-4h PRN
+    - Or hydromorphone 0.5-1mg IV q2-4h PRN
+  - Antiemetics
+    - Ondansetron 4-8mg IV q8h
+    - Or metoclopramide 10mg IV q6h
+  - Alpha-blocker (medical expulsive therapy)
+    - Tamsulosin 0.4mg PO daily
+  - Monitor urine output, strain urine for stone
+  - Urology consultation for possible intervention if
+    - Stone >10mm (unlikely to pass)
+    - Failed medical management after 48 hours
+    - Persistent obstruction
+  next:
+  - default: null
+
+- id: ureteral_stone_management
+  when:
+    stone_location: ureter
+  description: Ureteral stone management
+  tests:
+  - Non-contrast CT - measure stone size, location
+    - Proximal ureter (kidney to pelvic brim)
+    - Mid-ureter (pelvic brim to iliac vessels)
+    - Distal ureter (iliac vessels to bladder)
+  - Degree of hydronephrosis (mild, moderate, severe)
+  suggest_dx:
+  - Ureteral calculus
+  referrals:
+  - Urology if
+    - Stone >10mm
+    - High-grade obstruction
+    - Solitary kidney
+    - Failed conservative management (4-6 weeks)
+  management:
+  - Stone size determines passage rate (<5mm 90% pass in 12 days, 5-7mm 50% pass in 22 days, 7-10mm 25% pass, >10mm <10% pass and likely needs intervention)
+  - Conservative management (trial of passage)
+    - Hydration (oral or IV)
+    - Pain control
+      - NSAIDs (ketorolac 10mg PO TID or ibuprofen 600mg TID)
+      - Opioids PRN (oxycodone, hydrocodone)
+    - Medical expulsive therapy (MET)
+      - Tamsulosin 0.4mg PO daily (alpha-blocker, relaxes ureter)
+      - Efficacy best for distal stones 5-10mm
+      - Increases passage rate 30-50%
+      - Reduces time to passage
+    - Antiemetics PRN (ondansetron)
+    - Strain urine (catch stone for analysis)
+  - Duration of trial
+    - 4-6 weeks maximum
+    - Earlier intervention if
+      - Pain not controlled
+      - Persistent high-grade obstruction
+      - Infection
+      - AKI
+  - Surgical intervention indications
+    - Stone >10mm
+    - Failed conservative management after 4-6 weeks
+    - Intractable pain or vomiting
+    - Infection with obstruction
+    - High-grade obstruction
+    - Solitary kidney or bilateral stones
+    - Patient preference (occupation, travel)
+  - Intervention options
+    - Ureteroscopy (URS) with laser lithotripsy
+      - First-line for most ureteral stones
+      - Rigid or flexible ureteroscope
+      - Holmium laser fragmentation
+      - Stone basket extraction
+      - Ureteral stent placement (if inflammation, large burden)
+    - Extracorporeal shock wave lithotripsy (ESWL)
+      - Non-invasive, outpatient
+      - Best for proximal ureteral stones <10mm, lower stone-free rate than URS, multiple sessions may be needed, contraindications include pregnancy, bleeding disorders, obstruction distal to stone
+  discharge_criteria:
+  - Pain controlled
+  - Tolerating PO
+  - No fever or infection
+  - Able to follow up
+  patient_education:
+  - Drink 2-3 liters fluid daily
+  - Strain urine (catch stone in strainer or coffee filter)
+  - Pain is intermittent (stone moving)
+  - Return if fever, unable to void, severe pain
+  - Stone analysis guides prevention
+  next:
+  - default: null
+
+- id: renal_stone_management
+  when:
+    stone_location: kidney
+  description: Renal stone (not causing obstruction)
+  tests:
+  - CT - stone size, location (calyx, renal pelvis)
+  - Urinalysis
+  - BMP
+  suggest_dx:
+  - Renal calculus (asymptomatic or intermittent pain)
+  referrals:
+  - Urology if
+    - Stone >20mm (staghorn)
+    - Symptomatic despite medical management
+    - Occupational risk (pilots, divers)
+    - Patient preference
+  management:
+  - Observation (if asymptomatic and <20mm)
+    - Many renal stones remain asymptomatic
+    - May pass spontaneously or remain stable
+    - Annual imaging to monitor growth
+  - Medical management (stone prevention)
+    - Hydration (goal urine output 2-2.5 L/day)
+    - Dietary modifications (based on stone type)
+  - Surgical intervention (if symptomatic or large)
+    - Indications
+      - Symptomatic (pain, infection, obstruction)
+      - Stone >20mm (staghorn calculus)
+      - Growing stone
+      - Occupational requirement (pilot, astronaut)
+    - Options
+      - ESWL (extracorporeal shock wave lithotripsy)
+        - Non-invasive
+        - Best for stones <20mm in renal pelvis
+        - Multiple sessions may be needed
+      - Percutaneous nephrolithotomy (PCNL)
+        - Large stones >20mm
+        - Staghorn calculi
+        - Tract through skin to kidney
+        - Fragment and remove stone
+        - Most invasive but highest stone-free rate
+      - Flexible ureteroscopy with laser lithotripsy
+        - Less invasive than PCNL
+        - For stones <20mm
+  patient_education:
+  - May remain asymptomatic for years
+  - Can pass and cause symptoms later
+  - Prevention important (hydration, diet)
+  next:
+  - default: null
+
+- id: stone_prevention
+  when:
+    history: recurrent_stones
+  description: Prevention of recurrent kidney stones
+  tests:
+  - Stone analysis (composition)
+  - 24-hour urine collection (after stone passage or removal)
+    - Volume, pH, calcium, oxalate, citrate, uric acid, cystine, creatinine
+  - Metabolic workup (if recurrent)
+    - BMP (calcium, creatinine)
+    - Parathyroid hormone (if hypercalcemia)
+    - Uric acid level
+  suggest_dx:
+  - Calcium oxalate (most common, 75%)
+  - Calcium phosphate
+  - Uric acid (radiolucent, visible on CT but not X-ray)
+  - Struvite (infection stones, staghorn)
+  - Cystine (genetic, radiopaque)
+  referrals:
+  - Urology for recurrent stones
+  - Nephrology if metabolic abnormality identified
+  management:
+  - General measures (all stone types)
+    - Hydration - goal urine output 2-2.5 L/day
+      - Drink enough to make urine pale yellow
+      - Lemonade (citrate) may help
+    - Reduce sodium intake (<2300 mg/day)
+      - High sodium increases calcium excretion
+    - Normal calcium intake (1000-1200 mg/day)
+      - Do NOT restrict calcium (increases oxalate absorption)
+    - Reduce animal protein (meat, fish, poultry)
+  - Calcium oxalate stones
+    - Reduce oxalate-rich foods
+      - Spinach, rhubarb, nuts, chocolate, tea, beets
+    - Calcium supplements with meals (binds oxalate in gut)
+    - Thiazide diuretics (if hypercalciuria)
+      - Hydrochlorothiazide 25-50mg daily
+      - Or chlorthalidone 25mg daily
+    - Potassium citrate (if low urine citrate)
+      - 10-20 mEq PO BID-TID
+      - Increases urine citrate (inhibits stones)
+  - Uric acid stones
+    - Alkalinize urine (goal pH 6.5-7.0)
+      - Potassium citrate 10-20 mEq PO TID
+    - Allopurinol (if hyperuricosuria)
+      - 100-300mg PO daily
+    - Low purine diet (reduce meat, seafood)
+  - Struvite stones (infection)
+    - Eradicate infection
+    - Long-term antibiotics if recurrent UTIs
+    - Complete surgical removal (struvite recurs if fragments remain)
+  - Cystine stones (genetic)
+    - High fluid intake (3-4 L/day)
+    - Alkalinize urine (pH >7.0)
+    - Tiopronin or D-penicillamine (chelates cystine)
+    - Low methionine diet
+  patient_education:
+  - Recurrence rate 50% at 5-10 years without prevention
+  - Hydration most important
+  - Stone analysis guides prevention
+  - Follow-up with urology or nephrology
+  next:
+  - default: null
+
+differential_diagnosis:
+  stone_types:
+    - Calcium oxalate (75% of stones)
+    - Calcium phosphate
+    - Uric acid (radiolucent)
+    - Struvite (magnesium ammonium phosphate, infection stones)
+    - Cystine (genetic, autosomal recessive)
+  other_causes_of_flank_pain:
+    - Pyelonephritis (fever, pyuria, no stone)
+    - Renal infarction (sudden onset, AF, hematuria)
+    - Abdominal aortic aneurysm (pulsatile mass, older patient)
+    - Appendicitis (right-sided, peritoneal signs)
+    - Ovarian torsion (women, pelvic pain)
+    - Ectopic pregnancy (women of childbearing age)
+    - Musculoskeletal (trauma, no hematuria)
+
+disposition_guidance:
+  admit:
+    - Obstructive pyelonephritis (infected stone)
+    - Intractable pain or vomiting
+    - Acute kidney injury
+    - Solitary kidney with obstruction
+    - Bilateral obstructing stones
+    - Sepsis
+    - Social factors (unable to follow up, homeless)
+  discharge:
+    - Pain controlled with oral medications
+    - Tolerating PO fluids
+    - No fever or infection
+    - Stone <10mm likely to pass
+    - Reliable for follow-up
+    - Urology follow-up in 1-2 weeks
+  follow_up:
+    - Urology in 1-2 weeks (sooner if symptoms worsen)
+    - Repeat imaging in 2-4 weeks (assess stone passage)
+    - Stone analysis (if passed)
+    - 24-hour urine collection (if recurrent stones)
+    - Return immediately if fever, unable to void, severe pain
+
+references:
+  - Assimos D et al. AUA Guideline - Surgical Management of Stones. J Urol. 2016.
+  - Turk C et al. EAU Guidelines on Urolithiasis. Eur Urol. 2020.
+  - Scales CD Jr et al. Prevalence of Kidney Stones in the United States. Eur Urol. 2012.
+  - Holdgate A, Pollock T. Nonsteroidal Anti-inflammatory Drugs (NSAIDs) versus Opioids for Acute Renal Colic. Cochrane Database Syst Rev. 2005.

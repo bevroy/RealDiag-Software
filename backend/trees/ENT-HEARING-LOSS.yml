@@ -1,0 +1,528 @@
+id: ENT-HEARING-LOSS
+title: Hearing Loss Diagnostic Tree
+specialty: Otolaryngology/Audiology/Primary Care
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AAO-HNS Clinical Practice Guidelines
+entry: initial_assessment
+
+clinical_pearls:
+  - Weber test lateralizes TO affected ear in conductive loss, AWAY in sensorineural
+  - Rinne test - air > bone conduction is normal, bone > air indicates conductive loss
+  - Sudden sensorineural hearing loss is an emergency (steroids within 2 weeks)
+  - Presbycusis (age-related) affects high frequencies first
+  - Unilateral SNHL - rule out acoustic neuroma (MRI IAC)
+  - Ototoxic medications - aminoglycosides, cisplatin, loop diuretics, salicylates
+
+red_flags:
+  - Sudden onset hearing loss (SSNHL = otologic emergency)
+  - Unilateral hearing loss (acoustic neuroma until proven otherwise)
+  - Hearing loss with vertigo (Meniere's, labyrinthitis, acoustic neuroma)
+  - Hearing loss with facial weakness (cerebellopontine angle tumor)
+  - Rapidly progressive hearing loss (autoimmune, infection)
+  - Congenital hearing loss in newborn (early intervention critical)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial hearing loss evaluation
+  tests:
+  - History
+    - Onset (sudden vs gradual)
+    - Unilateral vs bilateral
+    - Associated symptoms (tinnitus, vertigo, ear fullness)
+    - Noise exposure history
+    - Ototoxic medication exposure
+    - Family history of hearing loss
+  - Otoscopic examination (TM, canal, cerumen)
+  - Weber test (512 Hz tuning fork midline forehead)
+  - Rinne test (512 Hz tuning fork mastoid then near ear canal)
+  - Whisper test or finger rub
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - onset: sudden
+      - duration: '<72 hours'
+    go: sudden_hearing_loss_emergency
+  - when:
+      exam_findings: cerumen_impaction
+    go: cerumen_impaction
+  - when:
+      tuning_forks: conductive_pattern
+    go: conductive_hearing_loss
+  - when:
+      tuning_forks: sensorineural_pattern
+    go: sensorineural_hearing_loss
+  - default: sensorineural_hearing_loss
+
+- id: sudden_hearing_loss_emergency
+  when:
+    all_of:
+    - onset: sudden
+    - duration: '<72 hours'
+    - type: sensorineural
+  description: Sudden sensorineural hearing loss (SSNHL) - OTOLOGIC EMERGENCY
+  tests:
+  - Audiometry (pure tone and speech)
+    - ≥30 dB loss over 3 contiguous frequencies
+  - MRI internal auditory canal (IAC) with gadolinium
+    - Rule out acoustic neuroma, stroke, MS
+  - Labs
+    - CBC, CMP, ESR, CRP
+    - TSH, lipid panel
+    - Autoimmune panel if bilateral (ANA, RF, anti-CCP, ANCA)
+    - Lyme serology if endemic area
+    - Syphilis serology (RPR, FTA-ABS)
+  - Consider hypercoagulable workup if vascular risk
+  suggest_dx:
+  - Idiopathic sudden sensorineural hearing loss (most common, 90%)
+  - Viral labyrinthitis (CMV, HSV, VZV, mumps)
+  - Vascular occlusion (labyrinthine artery infarction)
+  - Autoimmune inner ear disease
+  - Acoustic neuroma (rare presentation)
+  - Ototoxic medication
+  - Temporal bone fracture
+  - Perilymphatic fistula
+  referrals:
+  - ENT urgently (same day if possible)
+  - Audiology for formal testing
+  - Neurology if stroke suspected
+  management:
+  - START STEROIDS IMMEDIATELY (ideally within 2 weeks of onset)
+    - Prednisone 60mg PO daily x 7-14 days
+    - Then taper over 5-7 days
+    - Or dexamethasone 10mg daily x 4 days, then taper
+  - Intratympanic steroid injection (if oral fails or contraindicated)
+    - Dexamethasone or methylprednisolone through TM
+    - Multiple injections over 2-3 weeks
+    - Can be salvage therapy after failed oral steroids
+  - Antiviral therapy (controversial, may add if within 72 hours)
+    - Valacyclovir 1g PO TID x 7-10 days
+    - Efficacy unclear, consider if viral etiology suspected
+  - Hyperbaric oxygen (controversial, within 2 weeks)
+    - May improve outcomes if started early
+    - 100% oxygen at 2-2.5 atmospheres
+  - Treat underlying cause if identified
+  - Avoid ototoxic medications
+  - Hearing aid if permanent loss
+  prognosis:
+  - Spontaneous recovery 32-65% (better if treated early)
+  - Better prognosis
+    - Mild-moderate loss
+    - Low-frequency loss
+    - Early steroid treatment
+    - Vertigo absent
+  - Worse prognosis
+    - Severe-profound loss
+    - Vertigo present
+    - Delayed treatment >2 weeks
+    - Age >60
+  next:
+  - default: null
+
+- id: cerumen_impaction
+  when:
+    exam_findings: cerumen_obstructing_canal
+  description: Cerumen impaction causing conductive hearing loss
+  tests:
+  - Otoscopy - cerumen completely or partially occluding canal
+  - Cannot visualize TM
+  suggest_dx:
+  - Cerumen impaction (H61.2)
+  referrals:
+  - ENT if impacted against TM, failed removal attempts, or canal stenosis
+  management:
+  - Cerumen removal
+    - Irrigation (if TM intact, no surgery history, no infection)
+      - Warm water or saline, gentle pressure
+      - Direct stream posterosuperiorly (not at TM)
+    - Curette (under direct visualization)
+      - Use with otoscope or microscope
+      - Gentle scraping motions
+    - Suction (Frazier tip or Baron suction)
+  - Cerumenolytics (if hard, dry cerumen)
+    - Carbamide peroxide 6.5% drops TID x 3-5 days, then irrigate
+    - Or mineral oil, docusate sodium, hydrogen peroxide
+  - Do NOT irrigate if
+    - TM perforation
+    - Tympanostomy tubes
+    - Cholesteatoma
+    - External otitis present
+    - Prior ear surgery
+  - Reassess hearing after removal
+  patient_education:
+  - Do NOT use cotton swabs (pushes wax deeper, impaction risk)
+  - Avoid over-cleaning (cerumen is protective)
+  - If prone to impaction, use cerumenolytic drops weekly
+  next:
+  - default: null
+
+- id: conductive_hearing_loss
+  when:
+    tuning_forks: conductive_pattern
+  description: Conductive hearing loss evaluation
+  tests:
+  - Weber test - lateralizes TO affected ear
+  - Rinne test - bone conduction > air conduction (abnormal)
+  - Otoscopy
+  - Audiometry - air-bone gap ≥15 dB
+  - Tympanometry (Type As, B, or C)
+  suggest_dx: []
+  next:
+  - when:
+      exam_findings: TM_perforation
+    go: tympanic_membrane_perforation
+  - when:
+      exam_findings_any:
+      - middle_ear_effusion
+      - retracted_TM
+      - air_fluid_level
+    go: otitis_media_effusion
+  - when:
+      exam_findings: cholesteatoma
+    go: cholesteatoma
+  - when:
+      all_of:
+      - exam: normal_TM
+      - history: progressive_hearing_loss
+    go: otosclerosis_assessment
+  - default: otitis_media_effusion
+
+- id: tympanic_membrane_perforation
+  when:
+    exam_findings: TM_perforation
+  description: Tympanic membrane perforation
+  tests:
+  - Otoscopy - perforation visible
+    - Note size (small <25%, medium 25-50%, large >50%)
+    - Location (central vs marginal)
+  - Audiometry (conductive hearing loss proportional to size)
+  - CT temporal bones (if chronic, suspect cholesteatoma or ossicular erosion)
+  suggest_dx:
+  - Chronic TM perforation (H72.9)
+  - Causes - chronic OM, trauma, cholesteatoma, tube extrusion
+  referrals:
+  - ENT for consideration of tympanoplasty
+  management:
+  - Keep ear dry (no swimming, earplugs in shower)
+  - Topical antibiotics if otorrhea
+    - Ofloxacin 0.3% 10 drops BID
+    - Or ciprofloxacin-dexamethasone 4 drops BID
+  - Surgical repair (tympanoplasty) if
+    - Symptomatic (hearing loss, recurrent otorrhea)
+    - Stable perforation >3 months
+    - Adequate Eustachian tube function
+  - Contraindications to surgery
+    - Active otorrhea (treat first)
+    - Poor Eustachian tube function
+    - Uncontrolled allergies or URI
+  patient_education:
+  - Keep water out (main priority)
+  - Success rate of tympanoplasty 85-90%
+  next:
+  - default: null
+
+- id: otitis_media_effusion
+  when:
+    exam_findings: middle_ear_effusion
+  description: Otitis media with effusion (OME) causing conductive hearing loss
+  tests:
+  - Otoscopy - dull TM, air-fluid level, retracted TM
+  - Pneumatic otoscopy (reduced mobility)
+  - Tympanometry (Type B flat curve)
+  - Audiometry - conductive hearing loss (usually mild 20-40 dB)
+  suggest_dx:
+  - Otitis media with effusion (H65.9)
+  - Eustachian tube dysfunction
+  referrals:
+  - ENT if persistent >3 months
+  - Audiology if hearing loss
+  - Consider tympanostomy tubes if
+    - Persistent ≥3 months with hearing loss ≥20 dB
+    - Recurrent AOM (≥3 in 6 months or ≥4 in 12 months)
+    - Structural damage to TM or middle ear
+    - Speech delay or learning problems
+  management:
+  - Observation (most resolve in 3 months)
+  - NO antibiotics (not effective)
+  - Intranasal corticosteroids if allergic rhinitis
+    - Fluticasone 2 sprays each nostril daily
+  - Autoinflation (Otovent balloon, Valsalva) may help
+  - Tympanostomy tubes if indicated
+  - Hearing aids if tubes contraindicated and persistent loss
+  patient_education:
+  - Not an infection
+  - Usually temporary
+  - Follow-up in 3 months
+  next:
+  - default: null
+
+- id: cholesteatoma
+  when:
+    exam_findings: cholesteatoma
+  description: Cholesteatoma
+  tests:
+  - Otoscopy - white debris in attic or posterosuperior TM
+  - Foul-smelling otorrhea
+  - CT temporal bones (evaluate extent, ossicular erosion, complications)
+  - Audiometry (conductive or mixed hearing loss)
+  suggest_dx:
+  - Acquired cholesteatoma (H71.9)
+  - Keratinizing squamous epithelium in middle ear
+  referrals:
+  - ENT urgently
+  - Surgical excision required
+  management:
+  - Surgical removal (tympanomastoidectomy)
+    - Canal wall up (CWU) - preserve canal
+    - Canal wall down (CWD) - better visualization, requires lifelong cleaning
+  - Topical antibiotics if infected
+  - Do NOT irrigate (can push debris deeper)
+  complications:
+  - Ossicular erosion (hearing loss)
+  - Facial nerve paralysis
+  - Labyrinthitis, SNHL
+  - Intracranial extension (meningitis, brain abscess, sigmoid sinus thrombosis)
+  next:
+  - default: null
+
+- id: otosclerosis_assessment
+  when:
+    all_of:
+    - exam: normal_TM
+    - hearing_loss: progressive_conductive
+  description: Otosclerosis evaluation
+  tests:
+  - Otoscopy - normal TM
+  - Audiometry - conductive hearing loss, Carhart notch (bone conduction dip at 2 kHz)
+  - Tympanometry - Type As (reduced compliance)
+  - CT temporal bones (not routine, shows otospongiotic focus at oval window)
+  suggest_dx:
+  - Otosclerosis (H80.9)
+  - Abnormal bone growth around stapes footplate
+  - Family history common (50% autosomal dominant)
+  - Onset 20s-40s, more common in women
+  referrals:
+  - ENT/otology
+  - Audiology for hearing aid evaluation
+  management:
+  - Observation (if mild, patient not bothered)
+  - Hearing aid (if patient prefers non-surgical)
+  - Surgical - stapedectomy or stapedotomy
+    - Success rate 90%
+    - Remove stapes, place prosthesis
+    - Risks - SNHL (1%), dead ear (0.5%), vertigo, tinnitus
+  - Sodium fluoride (controversial, may slow progression)
+  patient_education:
+  - Progressive but treatable
+  - Surgery very effective
+  - Hearing aid alternative if prefer non-surgical
+  next:
+  - default: null
+
+- id: sensorineural_hearing_loss
+  when:
+    tuning_forks: sensorineural_pattern
+  description: Sensorineural hearing loss evaluation
+  tests:
+  - Weber test - lateralizes AWAY from affected ear (to better ear)
+  - Rinne test - air conduction > bone conduction (normal) but both reduced
+  - Audiometry (pure tone, speech)
+  - Tympanometry (Type A - normal)
+  suggest_dx: []
+  next:
+  - when:
+      presentation: unilateral
+    go: unilateral_snhl
+  - when:
+      history: ototoxic_medication
+    go: ototoxic_hearing_loss
+  - when:
+      history: noise_exposure
+    go: noise_induced_hearing_loss
+  - when:
+      age: '>65'
+    go: presbycusis
+  - default: presbycusis
+
+- id: unilateral_snhl
+  when:
+    presentation: unilateral_sensorineural
+  description: Unilateral sensorineural hearing loss - rule out acoustic neuroma
+  tests:
+  - MRI internal auditory canal (IAC) with gadolinium (MANDATORY)
+    - Rule out vestibular schwannoma (acoustic neuroma)
+  - Audiometry (asymmetric SNHL)
+  - Auditory brainstem response (ABR) - screening test (less sensitive than MRI)
+  suggest_dx:
+  - Vestibular schwannoma (acoustic neuroma) (D33.3)
+  - Labyrinthitis
+  - Meniere's disease
+  - Temporal bone fracture
+  - Idiopathic
+  referrals:
+  - ENT for MRI and workup
+  - Neurosurgery if tumor found
+  - Audiology for hearing aid or CROS
+  management:
+  - MRI IAC with gadolinium (gold standard)
+  - If acoustic neuroma found
+    - Observation (if small, elderly, minimal symptoms)
+    - Stereotactic radiosurgery (Gamma Knife)
+    - Surgical resection (if large, young, growing)
+  - Hearing rehabilitation
+    - Hearing aid (if serviceable hearing)
+    - CROS hearing aid (contralateral routing of signal)
+    - Bone-anchored hearing aid (BAHA)
+    - Cochlear implant (if profound bilateral loss)
+  next:
+  - default: null
+
+- id: ototoxic_hearing_loss
+  when:
+    history: ototoxic_medication
+  description: Medication-induced ototoxicity
+  tests:
+  - Audiometry (usually bilateral high-frequency SNHL)
+  - Medication review
+    - Aminoglycosides (gentamicin, tobramycin, amikacin)
+    - Cisplatin, carboplatin
+    - Loop diuretics (furosemide, bumetanide)
+    - High-dose aspirin (reversible)
+    - Vancomycin
+    - Macrolides (erythromycin, azithromycin)
+  - Renal function (drug levels)
+  suggest_dx:
+  - Ototoxic hearing loss (H91.0)
+  referrals:
+  - Audiology for baseline and serial audiograms
+  - ENT if severe or progressive
+  management:
+  - STOP ototoxic medication if possible
+  - Switch to alternative agent
+  - Monitor drug levels (aminoglycosides, vancomycin)
+  - Baseline audiometry before starting ototoxic drugs
+  - Serial audiometry during treatment
+  - Hearing aids if permanent loss
+  patient_education:
+  - Report tinnitus, hearing loss, dizziness immediately
+  - May be reversible if caught early
+  - Some loss may be permanent
+  next:
+  - default: null
+
+- id: noise_induced_hearing_loss
+  when:
+    history: noise_exposure
+  description: Noise-induced hearing loss (NIHL)
+  tests:
+  - Audiometry - bilateral high-frequency SNHL
+    - Characteristic notch at 4 kHz
+  - Noise exposure history
+    - Occupational (construction, military, factory, music)
+    - Recreational (concerts, firearms, power tools)
+  suggest_dx:
+  - Noise-induced hearing loss (H83.3)
+  referrals:
+  - Audiology for hearing aids
+  - Occupational medicine (workers' compensation)
+  management:
+  - Hearing protection (prevent further damage)
+    - Earplugs (foam, custom-molded)
+    - Earmuffs
+    - Combination for very loud environments (>100 dB)
+  - Hearing aids if symptomatic
+  - Workplace accommodations
+  patient_education:
+  - Damage is permanent and cumulative
+  - Wear hearing protection (concerts, power tools, firearms)
+  - Safe listening levels <85 dB for 8 hours
+  - OSHA requires protection at ≥85 dB time-weighted average
+  next:
+  - default: null
+
+- id: presbycusis
+  when:
+    age: '>65'
+  description: Age-related hearing loss (presbycusis)
+  tests:
+  - Audiometry - bilateral symmetric high-frequency SNHL
+  - Gradual downsloping pattern
+  - Speech discrimination may be disproportionately affected
+  suggest_dx:
+  - Presbycusis (H91.1)
+  - Most common cause of SNHL in adults
+  referrals:
+  - Audiology for hearing aid evaluation
+  management:
+  - Hearing aids (first-line)
+    - Behind-the-ear (BTE)
+    - In-the-ear (ITE)
+    - Completely-in-canal (CIC)
+    - Receiver-in-canal (RIC)
+  - Assistive listening devices
+    - Amplified telephone
+    - TV listening systems
+    - Alerting devices (doorbell, alarm)
+  - Communication strategies
+    - Face-to-face conversation
+    - Reduce background noise
+    - Good lighting (lip reading)
+  - Cochlear implant if profound bilateral loss and poor word recognition
+  patient_education:
+  - Normal aging process
+  - Hearing aids significantly improve quality of life
+  - Untreated hearing loss linked to cognitive decline, depression, falls
+  - Medicare does NOT cover hearing aids (most insurance doesn't)
+  next:
+  - default: null
+
+differential_diagnosis:
+  conductive:
+    - Cerumen impaction (most common)
+    - Otitis media with effusion
+    - Tympanic membrane perforation
+    - Cholesteatoma
+    - Otosclerosis
+    - Ossicular discontinuity (trauma)
+    - Tympanosclerosis
+    - Foreign body
+  sensorineural:
+    - Presbycusis (age-related, most common)
+    - Noise-induced hearing loss
+    - Sudden sensorineural hearing loss (idiopathic)
+    - Acoustic neuroma (vestibular schwannoma)
+    - Meniere's disease
+    - Labyrinthitis (viral, bacterial)
+    - Ototoxicity (aminoglycosides, cisplatin, loop diuretics)
+    - Autoimmune inner ear disease
+    - Temporal bone fracture
+    - Genetic (congenital or hereditary)
+  mixed:
+    - Chronic otitis media with SNHL
+    - Cholesteatoma with labyrinthine involvement
+    - Otosclerosis with cochlear involvement (advanced)
+
+disposition_guidance:
+  urgent_referral:
+    - Sudden sensorineural hearing loss (same day ENT)
+    - Unilateral SNHL (MRI to rule out acoustic neuroma)
+    - Hearing loss with vertigo or facial weakness
+    - Cholesteatoma
+    - Suspected temporal bone fracture
+  routine_referral:
+    - Conductive hearing loss not from cerumen
+    - Progressive SNHL
+    - Failed hearing aid trial
+    - Congenital or childhood hearing loss (early intervention critical)
+  follow_up:
+    - Otitis media with effusion - 3 months
+    - Presbycusis - after hearing aid fitting (audiology)
+    - Noise-induced - annual audiometry if ongoing exposure
+
+references:
+  - Stachler RJ et al. AAO-HNS Clinical Practice Guideline - Sudden Hearing Loss. Otolaryngol Head Neck Surg. 2012.
+  - Rosenfeld RM et al. AAO-HNS Clinical Practice Guideline - Cerumen Impaction. Otolaryngol Head Neck Surg. 2017.
+  - Gates GA, Mills JH. Presbycusis. Lancet. 2005.
+  - Chandrasekhar SS et al. Clinical Practice Guideline - Sudden Hearing Loss (Update). Otolaryngol Head Neck Surg. 2019.
