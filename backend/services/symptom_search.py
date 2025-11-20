@@ -17,19 +17,11 @@ import logging
 # Import security features with fallback
 try:
     from backend.services.security import limiter, InputValidator, AuditLogger
-    SECURITY_ENABLED = True
+    LIMITER_AVAILABLE = True
 except ImportError:
     logging.warning("Security features not available in symptom_search. Running without rate limiting.")
-    SECURITY_ENABLED = False
-    
-    # Provide dummy limiter that does nothing
-    class DummyLimiter:
-        def limit(self, *args, **kwargs):
-            def decorator(func):
-                return func
-            return decorator
-    
-    limiter = DummyLimiter()
+    LIMITER_AVAILABLE = False
+    limiter = None
     
     # Provide dummy classes
     class InputValidator:
@@ -208,6 +200,7 @@ def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> 
 
 
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
+@limiter.limit("60/minute") if LIMITER_AVAILABLE else lambda f: f
 async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request):
     """
     Search for diagnoses based on symptom input.
