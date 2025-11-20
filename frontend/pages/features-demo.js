@@ -164,7 +164,7 @@ export default function FeaturesDemo() {
         <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-            <h1 style={{ marginBottom: 0, color: '#78350f' }}>RealDiag - New Features Demo</h1>
+            <h1 style={{ marginBottom: 0, color: '#78350f', fontSize: '1.75rem' }}>RealDiag Features</h1>
           </div>
           <a href="/" style={{
             padding: '8px 16px',
@@ -187,7 +187,7 @@ export default function FeaturesDemo() {
       <main id="main-content" role="main">
         {/* Task 6.1: Accessibility Features */}
         <section aria-labelledby="accessibility-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="accessibility-heading">Task 6.1: Accessibility (WCAG 2.1 AA)</h2>
+          <h2 id="accessibility-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Accessibility (WCAG 2.1 AA)</h2>
           
           <div style={{ 
             display: 'grid', 
@@ -195,8 +195,8 @@ export default function FeaturesDemo() {
             gap: '1.5rem',
             marginTop: '1rem'
           }}>
-            <div style={{ padding: '1.5rem', background: '#f0fdfa', borderRadius: '8px', border: '2px solid #ccfbf1' }}>
-              <h3 style={{ color: '#0f766e' }}>✅ Implemented Features</h3>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>✅ Implemented Features</h3>
               <ul style={{ lineHeight: '1.8' }}>
                 <li><strong>Skip Links:</strong> Press Tab to see "Skip to main content"</li>
                 <li><strong>Keyboard Navigation:</strong> Tab, Enter, Escape keys work</li>
@@ -208,8 +208,8 @@ export default function FeaturesDemo() {
               </ul>
             </div>
             
-            <div style={{ padding: '1.5rem', background: '#e0f2f1', borderRadius: '8px', border: '2px solid #009688' }}>
-              <h3 style={{ color: '#92400e' }}>🔍 Try It Out</h3>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>🔍 Try It Out</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
                 <AccessibleButton
                   onClick={() => setShowModal(true)}
@@ -253,16 +253,17 @@ export default function FeaturesDemo() {
         
         {/* Task 4.3: Tablet Optimization */}
         <section aria-labelledby="tablet-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="tablet-heading" style={{ color: '#0f766e' }}>Task 4.3: Tablet Optimization</h2>
+          <h2 id="tablet-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Tablet Optimization</h2>
           
-          <div className="tablet-split-screen" style={{ marginTop: '1rem' }}>
+          <div className="tablet-split-screen" style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             <div className="tablet-search-panel" style={{ 
               padding: '1.5rem', 
-              background: '#fef9e7', 
+              background: 'white', 
               borderRadius: '8px',
-              border: '2px solid #92400e'
+              border: '1px solid #d1d5db',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
             }}>
-              <h3 style={{ color: '#92400e' }}>📱 Tablet Features</h3>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>📱 Tablet Features</h3>
               <ul style={{ lineHeight: '1.8' }}>
                 <li><strong>Split-Screen Layout:</strong> Search on left, results on right (768-1024px)</li>
                 <li><strong>Sticky Navigation:</strong> Search form stays visible while scrolling</li>
@@ -284,29 +285,32 @@ export default function FeaturesDemo() {
             <div className="tablet-results-grid" style={{ display: 'grid', gap: '1rem' }}>
               <div style={{ 
                 padding: '1.5rem', 
-                background: '#e0f2f1',
-                border: '2px solid #009688',
-                borderRadius: '8px' 
+                background: 'white',
+                border: '1px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
               }}>
-                <h4 style={{ margin: '0 0 0.75rem', color: '#92400e' }}>Multi-Column Layout</h4>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#78350f', fontSize: '1rem' }}>Multi-Column Layout</h4>
                 <p style={{ color: '#374151', lineHeight: '1.6' }}>Diagnostic results display in a 2-column grid on tablets (768-1024px), maximizing screen real estate while maintaining readability.</p>
               </div>
               <div style={{ 
                 padding: '1.5rem', 
-                background: '#fef9e7',
-                border: '2px solid #92400e',
-                borderRadius: '8px' 
+                background: 'white',
+                border: '1px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
               }}>
-                <h4 style={{ margin: '0 0 0.75rem', color: '#009688' }}>Touch-Optimized Cards</h4>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#78350f', fontSize: '1rem' }}>Touch-Optimized Cards</h4>
                 <p style={{ color: '#374151', lineHeight: '1.6' }}>All interactive elements meet 44x44px minimum touch target size, with generous spacing for comfortable stylus or finger interaction.</p>
               </div>
               <div style={{ 
                 padding: '1.5rem', 
-                background: '#e0f2f1',
-                border: '2px solid #009688',
-                borderRadius: '8px' 
+                background: 'white',
+                border: '1px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
               }}>
-                <h4 style={{ margin: '0 0 0.75rem', color: '#92400e' }}>Landscape Optimization</h4>
+                <h4 style={{ margin: '0 0 0.75rem', color: '#78350f', fontSize: '1rem' }}>Landscape Optimization</h4>
                 <p style={{ color: '#374151', lineHeight: '1.6' }}>Split-screen layout activates in landscape mode, showing search controls alongside results for efficient clinical workflow.</p>
               </div>
             </div>
@@ -315,15 +319,17 @@ export default function FeaturesDemo() {
         
         {/* Task 3.3: Advanced Decision Support */}
         <section aria-labelledby="decision-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="decision-heading">Task 3.3: Advanced Decision Support</h2>
+          <h2 id="decision-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Advanced Decision Support</h2>
           
           <div style={{ 
             marginTop: '1rem',
             padding: '2rem',
-            background: '#e0f2f1', // teal
-            borderRadius: '8px'
+            background: 'white',
+            borderRadius: '8px',
+            border: '1px solid #d1d5db',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
           }}>
-            <h3>🩺 Sample Diagnosis: {sampleResult.label}</h3>
+            <h3 style={{ color: '#78350f', fontSize: '1.25rem', marginTop: 0 }}>🩺 Sample Diagnosis: {sampleResult.label}</h3>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
               <div style={{ color: '#92400e', fontSize: '1.1rem', background: 'none', padding: 0 }}>
@@ -369,10 +375,11 @@ export default function FeaturesDemo() {
             <div style={{ 
               marginTop: '2rem', 
               padding: '1.5rem', 
-              background: '#e0f2f1', // teal
-              borderRadius: '8px'
+              background: '#f9fafb',
+              borderRadius: '8px',
+              border: '1px solid #e5e7eb'
             }}>
-              <h4 style={{ margin: '0 0 1rem', color: '#92400e', fontWeight: 'bold' }}>What-If Scenario Analysis</h4>
+              <h4 style={{ margin: '0 0 1rem', color: '#0f766e', fontWeight: '600', fontSize: '1.125rem' }}>What-If Scenario Analysis</h4>
               <p style={{ marginBottom: '1rem', color: '#6b21a8' }}>
                 <span style={{ color: '#92400e' }}>Try removing findings to see how likelihood changes:</span>
               </p>
