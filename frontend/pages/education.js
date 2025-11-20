@@ -442,6 +442,246 @@ export default function EducationPage() {
           background: white;
           border-radius: 12px;
         }
+
+        /* Quiz Styles */
+        .quiz-start {
+          text-align: center;
+          padding: 3rem;
+          background: white;
+          border-radius: 12px;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .quiz-start h2 {
+          color: #0f766e;
+          margin-bottom: 1rem;
+        }
+
+        .quiz-start button {
+          margin-top: 1.5rem;
+          padding: 1rem 2rem;
+          background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 1.125rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        .quiz-start button:hover:not(:disabled) {
+          transform: translateY(-2px);
+        }
+
+        .quiz-start button:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .quiz-container {
+          background: white;
+          border-radius: 12px;
+          padding: 2rem;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .quiz-progress {
+          background: #f3f4f6;
+          padding: 0.75rem;
+          border-radius: 8px;
+          text-align: center;
+          font-weight: 600;
+          color: #0f766e;
+          margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          margin: 1.5rem 0;
+        }
+
+        .quiz-option {
+          padding: 1rem;
+          border: 2px solid #e5e7eb;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+          border-color: #14b8a6;
+          background: #f0fdfa;
+        }
+
+        .quiz-option.selected {
+          border-color: #14b8a6;
+          background: #ccfbf1;
+        }
+
+        .explanation {
+          background: #fef3c7;
+          border-left: 4px solid #f59e0b;
+          padding: 1.5rem;
+          border-radius: 8px;
+          margin: 1.5rem 0;
+        }
+
+        .quiz-actions {
+          display: flex;
+          justify-content: center;
+          margin-top: 1.5rem;
+        }
+
+        .quiz-actions button {
+          padding: 0.75rem 2rem;
+          background: #14b8a6;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .quiz-actions button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .flashcard-progress {
+          background: #f3f4f6;
+          padding: 0.75rem;
+          border-radius: 8px;
+          text-align: center;
+          font-weight: 600;
+          color: #0f766e;
+          margin-bottom: 1.5rem;
+        }
+
+        .flashcard {
+          background: white;
+          border: 2px solid #14b8a6;
+          border-radius: 12px;
+          padding: 3rem 2rem;
+          min-height: 300px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .flashcard:hover {
+          box-shadow: 0 8px 24px rgba(20, 184, 166, 0.2);
+        }
+
+        .flashcard-front h3,
+        .flashcard-back h4 {
+          color: #0f766e;
+          margin-top: 0;
+        }
+
+        .flashcard-meta {
+          margin-top: 1rem;
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .flashcard-review {
+          margin-top: 1.5rem;
+          text-align: center;
+        }
+
+        .review-buttons {
+          display: flex;
+          gap: 0.75rem;
+          justify-content: center;
+          margin-top: 1rem;
+        }
+
+        .review-buttons button {
+          padding: 0.75rem 1.5rem;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        .review-buttons button:hover {
+          transform: translateY(-2px);
+        }
+
+        .review-again { background: #ef4444; color: white; }
+        .review-hard { background: #f59e0b; color: white; }
+        .review-good { background: #10b981; color: white; }
+        .review-easy { background: #3b82f6; color: white; }
+
+        .no-flashcards {
+          text-align: center;
+          padding: 3rem;
+          background: white;
+          border-radius: 12px;
+        }
+
+        /* Learning Objectives Styles */
+        .objectives-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .objective-card {
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 12px;
+          padding: 1.5rem;
+        }
+
+        .objective-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: start;
+          margin-bottom: 1rem;
+        }
+
+        .objective-header h3 {
+          color: #0f766e;
+          margin: 0;
+          font-size: 1.125rem;
+        }
+
+        .objective-header div {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .objective-links {
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid #e5e7eb;
+          font-size: 0.875rem;
+          color: #6b7280;
+        }
+
+        .no-objectives {
+          text-align: center;
+          padding: 3rem;
+          background: white;
+          border-radius: 12px;
+        }
       `}</style>
 
       <div className="education-container">
@@ -606,11 +846,152 @@ export default function EducationPage() {
           </div>
         )}
 
-        {(activeTab === 'quiz' || activeTab === 'flashcards' || activeTab === 'objectives') && (
-          <div className="loading">
-            {activeTab === 'quiz' && 'Quiz mode coming soon...'}
-            {activeTab === 'flashcards' && 'Flashcards coming soon...'}
-            {activeTab === 'objectives' && 'Learning objectives coming soon...'}
+        {activeTab === 'quiz' && (
+          <div>
+            {!quizActive ? (
+              <div className="quiz-start">
+                <h2>Start Quiz</h2>
+                <p>Test your knowledge with multiple-choice questions based on clinical cases.</p>
+                <button onClick={startQuiz} disabled={loading}>
+                  {loading ? 'Loading...' : '🎯 Start Quiz (10 Questions)'}
+                </button>
+              </div>
+            ) : (
+              <div className="quiz-container">
+                <div className="quiz-progress">
+                  Question {currentQuestionIndex + 1} of {quizQuestions.length}
+                </div>
+                {quizQuestions[currentQuestionIndex] && (
+                  <div>
+                    <h3>{quizQuestions[currentQuestionIndex].question_text}</h3>
+                    <div className="quiz-options">
+                      {quizQuestions[currentQuestionIndex].options.map((option) => (
+                        <div 
+                          key={option.id}
+                          className={`quiz-option ${selectedAnswer === option.id ? 'selected' : ''}`}
+                          onClick={() => !showExplanation && setSelectedAnswer(option.id)}
+                        >
+                          <strong>{option.id}.</strong> {option.text}
+                        </div>
+                      ))}
+                    </div>
+                    {showExplanation && (
+                      <div className="explanation">
+                        <h4>Explanation:</h4>
+                        <p>{quizQuestions[currentQuestionIndex].explanation}</p>
+                        <p><strong>Correct Answer:</strong> {quizQuestions[currentQuestionIndex].correct_answer.join(', ')}</p>
+                      </div>
+                    )}
+                    <div className="quiz-actions">
+                      {!showExplanation ? (
+                        <button onClick={submitQuizAnswer} disabled={!selectedAnswer}>
+                          Submit Answer
+                        </button>
+                      ) : (
+                        <button onClick={nextQuestion}>
+                          {currentQuestionIndex < quizQuestions.length - 1 ? 'Next Question' : 'Finish Quiz'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'flashcards' && (
+          <div>
+            {loading ? (
+              <div className="loading">Loading flashcards...</div>
+            ) : flashcards.length === 0 ? (
+              <div className="no-flashcards">
+                <h3>No Flashcards Due</h3>
+                <p>You're all caught up! Check back later or start a quiz to add more cards.</p>
+                <button onClick={loadFlashcards}>Refresh</button>
+              </div>
+            ) : (
+              <div className="flashcard-container">
+                <div className="flashcard-progress">
+                  Card {currentCardIndex + 1} of {flashcards.length}
+                </div>
+                <div 
+                  className={`flashcard ${showCardBack ? 'flipped' : ''}`}
+                  onClick={() => setShowCardBack(!showCardBack)}
+                >
+                  <div className="flashcard-front">
+                    <h3>{flashcards[currentCardIndex].front}</h3>
+                    <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '1rem' }}>
+                      Click to reveal answer
+                    </p>
+                  </div>
+                  {showCardBack && (
+                    <div className="flashcard-back">
+                      <h4>Answer:</h4>
+                      <p>{flashcards[currentCardIndex].back}</p>
+                      <div className="flashcard-meta">
+                        <span className="badge">{flashcards[currentCardIndex].specialty}</span>
+                        <span className={`badge ${flashcards[currentCardIndex].difficulty}`}>
+                          {flashcards[currentCardIndex].difficulty}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {showCardBack && (
+                  <div className="flashcard-review">
+                    <p>How well did you know this?</p>
+                    <div className="review-buttons">
+                      <button onClick={() => reviewFlashcard(1)} className="review-again">
+                        Again
+                      </button>
+                      <button onClick={() => reviewFlashcard(3)} className="review-hard">
+                        Hard
+                      </button>
+                      <button onClick={() => reviewFlashcard(4)} className="review-good">
+                        Good
+                      </button>
+                      <button onClick={() => reviewFlashcard(5)} className="review-easy">
+                        Easy
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'objectives' && (
+          <div>
+            {loading ? (
+              <div className="loading">Loading objectives...</div>
+            ) : (
+              <div className="objectives-grid">
+                {learningObjectives.map((objective) => (
+                  <div key={objective.objective_id} className="objective-card">
+                    <div className="objective-header">
+                      <h3>{objective.title}</h3>
+                      <div>
+                        <span className="badge">{objective.year_level}</span>
+                        <span className="badge">{objective.specialty}</span>
+                      </div>
+                    </div>
+                    <p>{objective.description}</p>
+                    {objective.related_cases && objective.related_cases.length > 0 && (
+                      <div className="objective-links">
+                        <strong>Related Cases:</strong> {objective.related_cases.join(', ')}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {learningObjectives.length === 0 && (
+                  <div className="no-objectives">
+                    <p>No learning objectives found for the selected filters.</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
