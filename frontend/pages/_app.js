@@ -1,13 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import '../styles/globals.css'
 import '../styles/accessibility-tablet.css'
-import { Sentry } from '../utils/sentry'
 
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)
   const [showInstallButton, setShowInstallButton] = useState(false)
 
   useEffect(()=>{
+    // Initialize Sentry (client-side only)
+    if (typeof window !== 'undefined') {
+      import('../utils/sentry').catch(err => {
+        console.warn('Sentry initialization skipped:', err.message)
+      })
+    }
+
     // Register service worker for PWA
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js')
