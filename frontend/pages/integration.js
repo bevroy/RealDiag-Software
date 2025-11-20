@@ -236,7 +236,7 @@ export default function IntegrationPage() {
               onClick={() => setActiveTab(tab)}
               style={{
                 padding: '0.75rem 1.5rem',
-                background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
+                background: activeTab === tab ? 'white' : '#0d9488',
                 color: activeTab === tab ? '#14b8a6' : 'white',
                 border: 'none',
                 borderRadius: '8px',
