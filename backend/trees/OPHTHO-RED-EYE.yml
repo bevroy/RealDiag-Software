@@ -1,0 +1,668 @@
+id: OPHTHO-RED-EYE
+title: Red Eye Diagnostic Tree
+specialty: Ophthalmology/Emergency Medicine
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AAO Preferred Practice Patterns
+entry: initial_assessment
+
+clinical_pearls:
+  - Red eye + vision loss = emergency until proven otherwise
+  - Red eye + severe pain + photophobia = serious pathology
+  - Acute angle-closure glaucoma = hardened globe, mid-dilated fixed pupil, corneal edema
+  - Contact lens wearer with red eye = assume infectious keratitis until proven otherwise
+  - Unilateral red eye in neonate = exclude congenital glaucoma, nasolacrimal duct obstruction
+  - Topical anesthetics help differentiate superficial vs deep pain
+
+red_flags:
+  - Vision loss (suggests serious pathology)
+  - Severe eye pain (corneal involvement, glaucoma, uveitis)
+  - Photophobia (uveitis, keratitis, corneal abrasion)
+  - Ciliary flush (limbal injection = intraocular inflammation)
+  - Fixed mid-dilated pupil (acute angle-closure glaucoma)
+  - Irregular or peaked pupil (globe rupture, iris trauma)
+  - Corneal opacity or infiltrate (keratitis)
+  - Hypopyon (pus in anterior chamber = severe infection)
+
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial red eye evaluation
+  tests:
+  - Visual acuity (each eye separately)
+  - Pupil examination (size, reactivity, APD)
+  - Extraocular movements
+  - Tonometry (intraocular pressure if no globe rupture concern)
+  - Fluorescein staining (corneal abrasion, dendrites, ulcer)
+  - Slit lamp examination if available
+  - Evert upper eyelid (look for foreign body)
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - vision loss
+      - severe pain
+      - fixed pupil
+    go: emergency_causes
+  - when:
+      exam_findings_any:
+      - corneal opacity
+      - hypopyon
+      - ciliary flush
+    go: sight_threatening
+  - when:
+      all_of:
+      - contact_lens_wearer: true
+      - symptoms_contains: eye pain
+    go: contact_lens_keratitis
+  - when:
+      exam_findings_any:
+      - fluorescein uptake
+      - corneal defect
+    go: corneal_pathology
+  - when:
+      exam_findings: subconjunctival hemorrhage
+    go: subconjunctival_hemorrhage
+  - default: conjunctivitis_assessment
+
+- id: emergency_causes
+  when:
+    symptoms_contains_any:
+    - vision loss
+    - severe pain
+    - nausea vomiting
+  description: Sight-threatening red eye requiring urgent evaluation
+  tests:
+  - Intraocular pressure (tonometry)
+  - Slit lamp examination
+  - Dilated fundoscopic exam (if safe)
+  - Anterior chamber depth assessment
+  - Gonioscopy if acute angle-closure suspected
+  suggest_dx:
+  - Acute angle-closure glaucoma
+  - Corneal ulcer
+  - Uveitis
+  - Endophthalmitis
+  referrals:
+  - Ophthalmology consultation STAT
+  - Do NOT delay treatment while waiting for consultation
+  next:
+  - when:
+      all_of:
+      - iop: '>21 mmHg'
+      - symptoms_contains_any:
+        - nausea
+        - headache
+        - rainbow halos
+    go: acute_angle_closure_glaucoma
+  - when:
+      exam_findings: anterior_uveitis
+    go: uveitis
+  - default: sight_threatening
+
+- id: acute_angle_closure_glaucoma
+  when:
+    all_of:
+    - iop: '>21 mmHg'
+    - symptoms_contains_any:
+      - severe eye pain
+      - headache
+      - nausea vomiting
+      - rainbow halos
+  description: Acute angle-closure glaucoma
+  tests:
+  - Intraocular pressure (often >40-60 mmHg)
+  - Slit lamp - corneal edema, shallow anterior chamber, mid-dilated fixed pupil
+  - Gonioscopy (narrow or closed angle)
+  - Check other eye (prophylactic treatment may be needed)
+  suggest_dx:
+  - Acute angle-closure glaucoma (H40.2)
+  - Ophthalmologic emergency
+  referrals:
+  - Ophthalmology STAT for laser peripheral iridotomy
+  - Hospital admission if IOP not controlled
+  management:
+  - START TREATMENT IMMEDIATELY - do not wait for ophthalmology
+  - Lower IOP rapidly
+    - Acetazolamide 500mg IV or 500mg PO
+    - Timolol 0.5% eye drops (1 drop, repeat in 30 min)
+    - Apraclonidine 1% eye drops (1 drop)
+    - Pilocarpine 2% (1 drop q15min x4 doses) - ONLY after IOP starts to drop
+  - Mannitol 1-2 g/kg IV if IOP remains >50 mmHg
+  - Antiemetics for nausea
+  - Analgesia
+  - Definitive treatment - laser peripheral iridotomy (LPI)
+  - Treat fellow eye prophylactically (high risk)
+  contraindications:
+  - Do NOT give pilocarpine first - paradoxically worsens angle closure if IOP very high
+  - Avoid mydriatics (atropine, tropicamide)
+  monitoring:
+  - Recheck IOP every 30-60 minutes
+  - Goal IOP <21 mmHg before iridotomy
+  next:
+  - default: null
+
+- id: sight_threatening
+  when:
+    exam_findings_any:
+    - corneal opacity
+    - hypopyon
+    - ciliary flush
+    - corneal infiltrate
+  description: Sight-threatening infection or inflammation
+  tests:
+  - Slit lamp examination
+  - Fluorescein staining
+  - Corneal culture (if ulcer present)
+  - Anterior chamber assessment
+  suggest_dx:
+  - Bacterial keratitis
+  - Fungal keratitis
+  - Uveitis
+  - Endophthalmitis
+  referrals:
+  - Ophthalmology consultation STAT (same day)
+  - Do NOT delay if weekend - call on-call ophthalmology
+  management:
+  - Do NOT patch eye
+  - Do NOT give topical steroids without ophthalmology approval
+  - Consider starting fortified antibiotics if bacterial keratitis suspected
+  next:
+  - when:
+      exam_findings: hypopyon
+    go: bacterial_keratitis
+  - when:
+      exam_findings: ciliary_flush
+    go: uveitis
+  - default: null
+
+- id: contact_lens_keratitis
+  when:
+    all_of:
+    - contact_lens_wearer: true
+    - symptoms_contains: eye pain
+  description: Contact lens-related keratitis
+  tests:
+  - Remove contact lens immediately
+  - Visual acuity
+  - Fluorescein staining
+  - Slit lamp examination
+  - Look for corneal infiltrate or ulcer
+  - Pseudomonas risk high in contact lens wearers
+  suggest_dx:
+  - Contact lens-related keratitis
+  - Bacterial keratitis (Pseudomonas risk)
+  - Acanthamoeba keratitis (severe pain, poor response to antibiotics)
+  referrals:
+  - Ophthalmology within 24 hours
+  - STAT if corneal infiltrate or ulcer
+  management:
+  - Remove contact lens, do NOT reinsert
+  - Fortified antibiotic drops if infiltrate/ulcer
+    - Moxifloxacin 0.5% q1h while awake
+    - Or tobramycin + cefazolin fortified drops
+  - Do NOT patch eye
+  - Do NOT use topical steroids
+  - Cycloplegic for pain (cyclopentolate 1%)
+  - If simple corneal abrasion without infiltrate
+    - Antibiotic ointment (erythromycin)
+    - Discontinue contact lens wear until healed
+  warning:
+  - Contact lens wear + corneal infiltrate = assume Pseudomonas until proven otherwise
+  - Acanthamoeba keratitis - severe pain out of proportion, ring infiltrate, poor response to antibiotics
+  next:
+  - default: null
+
+- id: bacterial_keratitis
+  when:
+    exam_findings_any:
+    - corneal ulcer
+    - hypopyon
+    - corneal infiltrate
+  description: Bacterial keratitis or corneal ulcer
+  tests:
+  - Corneal culture (scraping by ophthalmology)
+  - Gram stain
+  - Slit lamp examination
+  - Assess size and depth of ulcer
+  suggest_dx:
+  - Bacterial keratitis (H16.0)
+  - Corneal ulcer
+  - Pseudomonas (contact lens wearers, rapid progression)
+  - Staph aureus, Strep pneumoniae (common)
+  referrals:
+  - Ophthalmology STAT
+  - Daily follow-up required
+  - Hospital admission if severe or perforated
+  management:
+  - Fortified antibiotic drops
+    - Moxifloxacin 0.5% or gatifloxacin 0.3% q1h around the clock
+    - Or fortified tobramycin 14 mg/mL + cefazolin 50 mg/mL alternating q1h
+  - Cycloplegic (cyclopentolate 1% or homatropine 5% TID)
+  - Do NOT use topical steroids initially
+  - Do NOT patch eye
+  - Pain control (oral analgesics)
+  - Admission if
+    - Central ulcer threatening visual axis
+    - Perforated cornea
+    - Non-compliant patient
+    - Rapid progression
+  complications:
+  - Corneal perforation
+  - Endophthalmitis
+  - Vision loss
+  - Corneal scarring
+  next:
+  - default: null
+
+- id: uveitis
+  when:
+    exam_findings_any:
+    - ciliary flush
+    - cells and flare in anterior chamber
+    - photophobia
+  description: Anterior uveitis (iritis)
+  tests:
+  - Slit lamp examination - cells and flare in anterior chamber
+  - Dilated fundoscopic exam (rule out posterior uveitis)
+  - Intraocular pressure
+  - If first episode - workup for systemic causes
+    - CBC, ESR, CRP
+    - HLA-B27 (ankylosing spondylitis)
+    - ACE level, chest X-ray (sarcoidosis)
+    - RPR (syphilis)
+    - Consider Lyme, TB testing
+  suggest_dx:
+  - Anterior uveitis (iritis) (H20.0)
+  - Idiopathic (50% of cases)
+  - HLA-B27 associated (ankylosing spondylitis, reactive arthritis, IBD, psoriatic arthritis)
+  - Sarcoidosis
+  - Syphilis
+  - Lyme disease
+  - Tuberculosis
+  - Herpes simplex/zoster
+  referrals:
+  - Ophthalmology within 24-48 hours
+  - Rheumatology if HLA-B27 positive or systemic symptoms
+  management:
+  - Topical corticosteroids
+    - Prednisolone acetate 1% q1-2h while awake initially
+    - Taper slowly over weeks based on response
+  - Cycloplegic (homatropine 5% or cyclopentolate 1% BID-TID)
+    - Prevents posterior synechiae
+    - Provides pain relief
+  - Do NOT use steroids if herpetic keratitis suspected (dendritic ulcer)
+  - Treat underlying systemic disease if identified
+  monitoring:
+  - Check IOP (uveitis can cause glaucoma)
+  - Daily follow-up initially
+  - Watch for posterior synechiae formation
+  complications:
+  - Posterior synechiae (iris stuck to lens)
+  - Glaucoma (steroid-induced or inflammatory)
+  - Cataract
+  - Cystoid macular edema
+  next:
+  - default: null
+
+- id: corneal_pathology
+  when:
+    exam_findings_any:
+    - fluorescein uptake
+    - corneal defect
+  description: Corneal abrasion or epithelial defect
+  tests:
+  - Fluorescein staining
+  - Evert upper eyelid (look for foreign body)
+  - Slit lamp if available
+  - Document size and location of defect
+  - Look for infiltrate (white opacity = infection)
+  suggest_dx: []
+  next:
+  - when:
+      exam_findings: dendritic_pattern
+    go: herpes_simplex_keratitis
+  - when:
+      exam_findings: foreign_body
+    go: corneal_foreign_body
+  - when:
+      all_of:
+      - fluorescein_positive: true
+      - infiltrate: absent
+    go: simple_corneal_abrasion
+  - default: simple_corneal_abrasion
+
+- id: herpes_simplex_keratitis
+  when:
+    exam_findings: dendritic_ulcer
+  description: Herpes simplex keratitis
+  tests:
+  - Fluorescein staining - classic dendritic (branching) pattern
+  - Slit lamp examination
+  - Corneal sensation (may be decreased)
+  suggest_dx:
+  - Herpes simplex keratitis (B00.52)
+  - Can cause permanent corneal scarring
+  referrals:
+  - Ophthalmology within 24 hours
+  management:
+  - Antiviral therapy
+    - Ganciclovir 0.15% gel 5x daily
+    - Or trifluridine 1% drops 9x daily while awake
+    - Oral acyclovir 400mg 5x daily or valacyclovir 500mg TID
+  - Do NOT use topical steroids (can worsen epithelial disease)
+  - Cycloplegic for comfort (cyclopentolate 1%)
+  - Do NOT patch eye
+  - Continue until epithelial defect healed plus 3 days
+  complications:
+  - Stromal keratitis (immune-mediated, may need steroids later)
+  - Geographic ulcer
+  - Corneal perforation
+  - Permanent scarring
+  next:
+  - default: null
+
+- id: corneal_foreign_body
+  when:
+    exam_findings: foreign_body
+  description: Corneal foreign body
+  tests:
+  - Visual acuity
+  - Examine with magnification
+  - Evert upper eyelid (check for subtarsal foreign body)
+  - Rust ring (metallic foreign body)
+  - Assess depth of foreign body
+  suggest_dx:
+  - Corneal foreign body (T15.0)
+  - Rust ring (if metallic)
+  referrals:
+  - Ophthalmology if
+    - Central location (visual axis)
+    - Deep foreign body
+    - Intraocular foreign body suspected
+    - Unable to remove
+  management:
+  - Topical anesthetic (proparacaine 0.5%)
+  - Remove foreign body with moistened cotton swab or 25G needle at slit lamp
+  - Remove rust ring if possible (ophthalmology may defer to allow softening)
+  - Antibiotic ointment (erythromycin or bacitracin) QID x 3-5 days
+  - Do NOT patch eye (increases infection risk)
+  - Cycloplegic if significant pain (cyclopentolate 1%)
+  - Follow-up in 24 hours
+  - Tetanus prophylaxis if needed
+  warning:
+  - High-velocity injury (hammering metal on metal) - suspect intraocular foreign body
+  - Get CT orbits if intraocular foreign body suspected
+  next:
+  - default: null
+
+- id: simple_corneal_abrasion
+  when:
+    all_of:
+    - fluorescein_positive: true
+    - infiltrate: absent
+    - foreign_body: absent
+  description: Simple traumatic corneal abrasion
+  tests:
+  - Fluorescein staining - uptake shows epithelial defect
+  - Document size and location
+  - Evert upper eyelid (rule out foreign body)
+  - Visual acuity
+  suggest_dx:
+  - Corneal abrasion (S05.0)
+  referrals:
+  - Routine ophthalmology if not healed in 48 hours
+  - Large central abrasions - ophthalmology within 24 hours
+  management:
+  - Antibiotic ointment
+    - Erythromycin ointment QID x 3-5 days
+    - Or polymyxin-bacitracin ointment
+  - Cycloplegic for pain relief (cyclopentolate 1% or homatropine 5%)
+  - Oral analgesia (NSAIDs, acetaminophen)
+  - Topical NSAIDs controversial (may delay healing)
+  - Do NOT patch eye (no benefit, increases infection risk)
+  - Do NOT give topical anesthetics to take home (toxic to cornea)
+  - Follow-up in 24-48 hours
+  - Should heal within 24-72 hours depending on size
+  patient_education:
+  - Avoid rubbing eye
+  - Sunglasses for photophobia
+  - Contact lens wearers - do NOT wear lenses until healed plus 24 hours
+  - Return if worsening pain, vision loss, increasing redness
+  next:
+  - default: null
+
+- id: subconjunctival_hemorrhage
+  when:
+    exam_findings: subconjunctival_hemorrhage
+  description: Subconjunctival hemorrhage
+  tests:
+  - Blood pressure (rule out hypertension)
+  - If history of trauma - rule out globe rupture
+  - Coagulation studies if recurrent or spontaneous with bleeding elsewhere
+  suggest_dx:
+  - Subconjunctival hemorrhage (H11.3)
+  - Benign, self-limited
+  referrals:
+  - None needed if simple hemorrhage
+  - If recurrent - check for bleeding disorder, hypertension
+  management:
+  - Reassurance - looks worse than it is
+  - No treatment needed
+  - Resolves spontaneously in 1-3 weeks
+  - Artificial tears for comfort if needed
+  - Address underlying cause (HTN, anticoagulation, trauma)
+  patient_education:
+  - Harmless, will resolve on its own
+  - May spread before it gets better (gravity)
+  - Changes color as it resolves (like bruise)
+  - Return if pain, vision changes, or new bleeding
+  next:
+  - default: null
+
+- id: conjunctivitis_assessment
+  when: {}
+  description: Conjunctivitis evaluation
+  tests:
+  - Visual acuity (should be normal)
+  - Discharge character (purulent, mucoid, watery)
+  - Preauricular lymphadenopathy (viral)
+  - Cornea clear (fluorescein negative)
+  - Conjunctival injection (diffuse, not ciliary)
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - discharge_type: purulent
+      - eyelids_stuck: true
+    go: bacterial_conjunctivitis
+  - when:
+      symptoms_contains_any:
+      - itching
+      - bilateral
+      - seasonal
+      - history of allergies
+    go: allergic_conjunctivitis
+  - when:
+      symptoms_contains_any:
+      - watery discharge
+      - preauricular_node: present
+      - recent_uri: true
+    go: viral_conjunctivitis
+  - default: viral_conjunctivitis
+
+- id: bacterial_conjunctivitis
+  when:
+    exam_findings_any:
+    - purulent discharge
+    - eyelids stuck together
+  description: Bacterial conjunctivitis
+  tests:
+  - Bacterial culture (if severe, not responding, or neonate)
+  - Gonorrhea/Chlamydia testing if sexually active or neonate
+  suggest_dx:
+  - Bacterial conjunctivitis (H10.0)
+  - Staph aureus, Strep pneumoniae, H. influenzae (common)
+  - Gonococcal conjunctivitis (hyperacute, severe)
+  - Chlamydial conjunctivitis (chronic, follicular)
+  referrals:
+  - Ophthalmology if hyperacute (gonorrhea suspected)
+  - Neonatal conjunctivitis requires immediate ophthalmology consultation
+  management:
+  - Topical antibiotics
+    - Moxifloxacin 0.5% or gatifloxacin 0.3% QID x 5-7 days
+    - Trimethoprim-polymyxin B QID x 5-7 days (alternative)
+    - Erythromycin ointment QID (especially in children)
+  - Warm compresses
+  - Hygiene - wash hands, avoid sharing towels
+  - Hyperacute purulent (suspect gonorrhea)
+    - Ceftriaxone 1g IM
+    - Saline irrigation
+    - Moxifloxacin drops
+    - Ophthalmology consultation
+  - Chlamydial
+    - Azithromycin 1g PO single dose
+    - Plus topical antibiotics
+    - Treat sexual partners
+  neonatal:
+  - Neonate with conjunctivitis is emergency
+  - Rule out gonococcal (can perforate cornea rapidly)
+  - Ceftriaxone 25-50 mg/kg IV/IM
+  - Ophthalmology consultation
+  next:
+  - default: null
+
+- id: viral_conjunctivitis
+  when:
+    symptoms_contains_any:
+    - watery discharge
+    - preauricular lymph node
+    - recent upper respiratory infection
+  description: Viral conjunctivitis
+  tests:
+  - Usually clinical diagnosis
+  - Fluorescein (rule out keratitis)
+  - Preauricular lymphadenopathy
+  suggest_dx:
+  - Viral conjunctivitis (B30.9)
+  - Adenovirus (most common, highly contagious)
+  - Epidemic keratoconjunctivitis (severe adenovirus)
+  referrals:
+  - Ophthalmology if
+    - Not improving in 7-10 days
+    - Vision affected
+    - Severe pain or photophobia
+  management:
+  - Supportive care (no cure for viral)
+  - Cold compresses
+  - Artificial tears
+  - Consider topical antihistamine-decongestant for symptom relief
+  - Do NOT use antibiotics (no benefit)
+  - Do NOT use topical steroids (can prolong viral shedding and cause complications)
+  - Highly contagious for 10-14 days
+  patient_education:
+  - Wash hands frequently
+  - Do not share towels, pillows
+  - Avoid touching eyes
+  - Stay home from work/school until discharge resolves
+  - Discard eye makeup
+  - Do not wear contact lenses until resolved
+  - Resolves spontaneously in 2-3 weeks
+  next:
+  - default: null
+
+- id: allergic_conjunctivitis
+  when:
+    symptoms_contains_any:
+    - itching
+    - bilateral
+    - seasonal pattern
+    - cobblestone papillae
+  description: Allergic conjunctivitis
+  tests:
+  - Bilateral involvement
+  - Itching prominent
+  - Cobblestone papillae on upper tarsal conjunctiva
+  - No discharge or watery discharge
+  suggest_dx:
+  - Allergic conjunctivitis (H10.1)
+  - Seasonal allergic conjunctivitis (hay fever)
+  - Vernal keratoconjunctivitis (severe, children)
+  referrals:
+  - Ophthalmology if severe or not responding
+  - Allergy testing if chronic
+  management:
+  - Avoid allergens
+  - Cold compresses
+  - Artificial tears (flush allergens)
+  - Topical antihistamine-mast cell stabilizers
+    - Olopatadine 0.1% BID (Patanol)
+    - Ketotifen 0.025% BID (OTC)
+    - Azelastine 0.05% BID
+  - Oral antihistamines (cetirizine, loratadine, fexofenadine)
+  - Topical steroids for severe cases (short course, ophthalmology guidance)
+  patient_education:
+  - Avoid eye rubbing
+  - Remove contact lenses during episodes
+  - Use preservative-free artificial tears
+  - Identify and avoid triggers
+  next:
+  - default: null
+
+differential_diagnosis:
+  sight_threatening:
+    - Acute angle-closure glaucoma
+    - Bacterial keratitis/corneal ulcer
+    - Uveitis
+    - Endophthalmitis
+    - Globe rupture
+    - Chemical injury
+  infection:
+    - Bacterial conjunctivitis
+    - Viral conjunctivitis (adenovirus)
+    - Herpes simplex keratitis
+    - Contact lens-related keratitis
+    - Preseptal cellulitis
+    - Orbital cellulitis
+  inflammation:
+    - Anterior uveitis (iritis)
+    - Episcleritis
+    - Scleritis
+    - Allergic conjunctivitis
+  trauma:
+    - Corneal abrasion
+    - Corneal foreign body
+    - Subconjunctival hemorrhage
+    - Chemical injury
+    - Arc eye (UV keratitis)
+  other:
+    - Dry eye syndrome
+    - Blepharitis
+    - Pinguecula/pterygium
+    - Chalazion/hordeolum
+
+disposition_guidance:
+  emergency_ophthalmology:
+    - Acute angle-closure glaucoma
+    - Corneal ulcer with hypopyon
+    - Suspected endophthalmitis
+    - Chemical injury
+    - Globe rupture
+  urgent_ophthalmology_24h:
+    - Contact lens-related keratitis with infiltrate
+    - Herpes simplex keratitis
+    - Uveitis (first episode)
+    - Large central corneal abrasion
+    - Corneal foreign body unable to remove
+  routine_follow_up:
+    - Simple conjunctivitis (viral, bacterial, allergic)
+    - Small corneal abrasion
+    - Subconjunctival hemorrhage
+    - Episcleritis
+
+references:
+  - American Academy of Ophthalmology. Preferred Practice Pattern - Conjunctivitis. 2018.
+  - AAO Preferred Practice Pattern - Bacterial Keratitis. 2019.
+  - AAO Preferred Practice Pattern - Primary Angle Closure. 2020.
+  - Azari AA, Barney NP. Conjunctivitis - A Systematic Review of Diagnosis and Treatment. JAMA. 2013.
+  - Ehlers JP, Shah CP. The Wills Eye Manual - Office and Emergency Room Diagnosis and Treatment of Eye Disease. 7th Edition. 2016.

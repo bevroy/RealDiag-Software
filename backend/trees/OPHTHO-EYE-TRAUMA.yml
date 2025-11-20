@@ -1,0 +1,607 @@
+id: OPHTHO-EYE-TRAUMA
+title: Eye Trauma Diagnostic Tree
+specialty: Ophthalmology/Emergency Medicine/Trauma
+version: 1.0
+last_updated: 2025-11-20
+evidence_level: AAO Preferred Practice Patterns, EAST Trauma Guidelines
+entry: trauma_assessment
+
+clinical_pearls:
+  - Always suspect globe rupture with high-velocity injury or sharp object
+  - Do NOT press on eye if globe rupture suspected - can extrude intraocular contents
+  - Chemical injury = immediate copious irrigation BEFORE full exam
+  - Alkali burns worse than acid burns (penetrate deeper, cause liquefactive necrosis)
+  - Hyphema + elevated IOP = sickle cell patients at high risk for central retinal artery occlusion
+  - Orbital compartment syndrome = surgical emergency (lateral canthotomy within minutes)
+
+red_flags:
+  - Globe rupture (irregular pupil, 360° subconjunctival hemorrhage, shallow anterior chamber)
+  - Chemical injury to eye (immediate irrigation required)
+  - Orbital compartment syndrome (proptosis, hard globe, vision loss, APD)
+  - Hyphema with elevated IOP
+  - Intraocular foreign body (high-velocity injury)
+  - Retrobulbar hemorrhage
+  - Penetrating injury
+
+nodes:
+- id: trauma_assessment
+  when: {}
+  description: Initial eye trauma evaluation
+  tests:
+  - Visual acuity (BEFORE manipulating eye)
+  - Inspect for obvious globe rupture signs
+  - Check extraocular movements
+  - Pupil examination
+  - Intraocular pressure (ONLY if no rupture suspected)
+  - Mechanism of injury critical
+  suggest_dx: []
+  next:
+  - when:
+      mechanism: chemical_exposure
+    go: chemical_injury
+  - when:
+      exam_findings_any:
+      - irregular pupil
+      - 360_degree_subconjunctival_hemorrhage
+      - shallow_anterior_chamber
+      - peaked_pupil
+    go: globe_rupture
+  - when:
+      mechanism: high_velocity_injury
+    go: intraocular_foreign_body_assessment
+  - when:
+      symptoms_contains_any:
+      - severe_proptosis
+      - vision_loss
+      - APD
+      - hard_globe
+    go: orbital_compartment_syndrome
+  - when:
+      exam_findings: hyphema
+    go: hyphema
+  - when:
+      exam_findings: orbital_fracture_signs
+    go: orbital_fracture
+  - default: blunt_trauma_assessment
+
+- id: chemical_injury
+  when:
+    mechanism: chemical_exposure
+  description: Chemical injury to eye - IMMEDIATE IRRIGATION
+  tests:
+  - START IRRIGATION IMMEDIATELY - do not delay for exam
+  - Copious irrigation with normal saline or lactated Ringer's
+  - Morgan lens or IV tubing for continuous irrigation
+  - Irrigate for minimum 30 minutes (longer for alkali)
+  - Check pH before and after irrigation (goal pH 7.0-7.5)
+  - Remove particulate matter from fornices
+  - Evert upper lid and irrigate fornices
+  - After irrigation - full eye exam
+    - Visual acuity
+    - Slit lamp examination
+    - Assess corneal clarity
+    - Anterior chamber depth
+  - Document type of chemical if known
+  suggest_dx:
+  - Alkali burn (worse prognosis - lye, ammonia, cement, plaster, drain cleaners)
+  - Acid burn (better prognosis - battery acid, vinegar)
+  referrals:
+  - Ophthalmology STAT
+  - All significant chemical injuries require ophthalmology evaluation
+  management:
+  - IRRIGATE FIRST, exam later
+  - Minimum 2 liters normal saline irrigation
+  - Alkali burns - may need hours of irrigation
+  - After irrigation
+    - Topical antibiotics (moxifloxacin QID)
+    - Cycloplegic (cyclopentolate 1%)
+    - Topical steroids (prednisolone acetate 1% q1-2h) - ophthalmology guidance
+    - Oral vitamin C 2g daily (promote collagen synthesis)
+    - Oral doxycycline 100mg BID (inhibit collagenase)
+  - Do NOT patch eye
+  - Pain control
+  - Admit if severe (>50% corneal involvement)
+  grading:
+  - Grade I - corneal epithelial damage only (good prognosis)
+  - Grade II - corneal haze, iris details visible (good prognosis)
+  - Grade III - total corneal epithelial loss, stromal haze, iris details obscured (guarded)
+  - Grade IV - opaque cornea, no view of iris (poor prognosis)
+  prognosis:
+  - Alkali worse than acid (penetrates deeper)
+  - Grade I-II - usually full recovery
+  - Grade III-IV - risk of perforation, glaucoma, permanent vision loss
+  next:
+  - default: null
+
+- id: globe_rupture
+  when:
+    exam_findings_any:
+    - irregular_pupil
+    - peaked_pupil
+    - 360_subconjunctival_hemorrhage
+    - shallow_anterior_chamber
+    - prolapsed_uveal_tissue
+  description: Open globe injury (globe rupture or penetrating injury)
+  tests:
+  - Do NOT press on eye or check IOP
+  - Document visual acuity if possible
+  - Examine without manipulation
+  - Look for entry wound
+  - Check for intraocular foreign body
+  - CT orbits (axial and coronal, thin cuts)
+    - Shows intraocular foreign body
+    - Globe contour abnormality
+  - Do NOT perform MRI if metallic foreign body possible
+  suggest_dx:
+  - Open globe injury (S05.2)
+  - Penetrating injury
+  - Globe rupture (blunt trauma)
+  - Intraocular foreign body
+  referrals:
+  - Ophthalmology STAT
+  - Operating room for primary repair
+  - NPO for surgery
+  management:
+  - PROTECT THE EYE
+    - Metal or plastic eye shield (NOT pressure patch)
+    - Do NOT manipulate eye
+    - Do NOT check IOP
+    - Do NOT instill drops or ointment
+  - NPO for surgery
+  - Tetanus prophylaxis
+  - IV antibiotics
+    - Vancomycin 1g IV + ceftazidime 1g IV
+    - Or moxifloxacin 400mg IV
+  - Antiemetics (prevent vomiting/Valsalva)
+  - Pain control (avoid aspirin/NSAIDs)
+  - Update tetanus if needed
+  - Primary surgical repair within 24 hours
+  complications:
+  - Endophthalmitis (infection inside eye)
+  - Sympathetic ophthalmia (autoimmune reaction in fellow eye)
+  - Retinal detachment
+  - Phthisis bulbi (shrunken, non-functional eye)
+  prognosis:
+  - Depends on extent of injury
+  - Visual outcome poor if
+    - Initial VA <20/200
+    - Posterior rupture
+    - Large wound
+    - Afferent pupillary defect
+  next:
+  - default: null
+
+- id: intraocular_foreign_body_assessment
+  when:
+    mechanism: high_velocity_injury
+  description: Assess for intraocular foreign body (IOFB)
+  tests:
+  - High-velocity mechanism (hammering metal on metal, grinding, explosion)
+  - May have small entry wound
+  - CT orbits without contrast (shows metallic IOFB)
+    - Axial and coronal views
+    - Thin cuts (1-2mm)
+  - Do NOT get MRI if metallic IOFB suspected
+  - Slit lamp examination
+  - Dilated fundoscopy if view clear
+  suggest_dx: []
+  next:
+  - when:
+      ct_scan: intraocular_foreign_body_present
+    go: intraocular_foreign_body
+  - when:
+      ct_scan: no_foreign_body
+    go: blunt_trauma_assessment
+  - default: intraocular_foreign_body
+
+- id: intraocular_foreign_body
+  when:
+    ct_scan: intraocular_foreign_body_visible
+  description: Intraocular foreign body (IOFB)
+  tests:
+  - CT orbits - location, size, composition of IOFB
+  - B-scan ultrasound (if view obscured)
+  - Assess for endophthalmitis
+  suggest_dx:
+  - Intraocular foreign body (S05.5)
+  - Iron/steel - most common, causes siderosis
+  - Copper - causes chalcosis
+  - Organic material - high infection risk
+  referrals:
+  - Ophthalmology STAT
+  - Vitreoretinal surgery for posterior IOFB removal
+  management:
+  - Eye shield (no pressure)
+  - NPO for surgery
+  - IV antibiotics
+    - Vancomycin 1g IV + ceftazidime 1g IV
+    - Cover for endophthalmitis
+  - Tetanus prophylaxis
+  - Surgical removal
+    - Anterior IOFB - removal at slit lamp or OR
+    - Posterior IOFB - pars plana vitrectomy
+  - May leave inert IOFB if removal too risky
+  complications:
+  - Endophthalmitis (especially organic material)
+  - Siderosis (iron toxicity to retina)
+  - Chalcosis (copper toxicity)
+  - Retinal detachment
+  - Traumatic cataract
+  next:
+  - default: null
+
+- id: orbital_compartment_syndrome
+  when:
+    symptoms_contains_any:
+    - severe_proptosis
+    - hard_globe
+    - vision_loss
+    - APD
+  description: Orbital compartment syndrome - surgical emergency
+  tests:
+  - Proptosis (eye bulging forward)
+  - Tense, hard globe
+  - Vision loss
+  - APD (afferent pupillary defect)
+  - IOP >40 mmHg typically
+  - Restricted extraocular motility
+  - CT orbits shows retrobulbar hemorrhage
+  suggest_dx:
+  - Orbital compartment syndrome
+  - Retrobulbar hemorrhage causing compartment syndrome
+  referrals:
+  - Ophthalmology STAT
+  - If ophthalmology not immediately available, ED must perform lateral canthotomy
+  management:
+  - EMERGENT LATERAL CANTHOTOMY AND CANTHOLYSIS
+    - Time-sensitive - vision loss permanent if >90-120 minutes
+    - Do NOT wait for ophthalmology if vision threatened
+    - Can be performed by emergency physician
+  - Procedure
+    - Local anesthetic (lidocaine with epi to lateral canthus)
+    - Clamp lateral canthus x 60 seconds (hemostasis)
+    - Cut through skin and conjunctiva at lateral canthus
+    - Identify inferior crus of lateral canthal tendon
+    - Cut inferior crus (may hear "pop")
+    - Globe should decompress, proptosis improve
+  - After decompression
+    - Recheck IOP, vision, APD
+    - May need superior crus release if not adequate
+  - Surgical repair of canthotomy later
+  complications:
+  - Permanent vision loss if not decompressed
+  - Central retinal artery occlusion
+  - Optic nerve damage
+  next:
+  - default: null
+
+- id: hyphema
+  when:
+    exam_findings: blood_in_anterior_chamber
+  description: Hyphema (blood in anterior chamber)
+  tests:
+  - Slit lamp examination - layered blood in anterior chamber
+  - Grade hyphema
+    - Grade I - <1/3 anterior chamber
+    - Grade II - 1/3 to 1/2
+    - Grade III - >1/2 but not total
+    - Grade IV - total (eight-ball hyphema)
+  - Intraocular pressure
+  - Gonioscopy (angle recession)
+  - Dilated fundoscopy (rule out retinal tear, detachment)
+  - Sickle cell screening (African American patients)
+  - CT orbits if significant trauma
+  suggest_dx:
+  - Traumatic hyphema (S05.1)
+  referrals:
+  - Ophthalmology within 24 hours
+  - Daily follow-up required
+  - Admit if
+    - Grade III-IV hyphema
+    - Elevated IOP
+    - Sickle cell disease/trait
+    - Poor compliance anticipated
+  management:
+  - Head elevation 30-45 degrees (helps blood settle inferiorly)
+  - Eye shield (protect from reinjury)
+  - Limit activity (strict bed rest controversial)
+  - Cycloplegic (cyclopentolate 1% TID)
+  - Topical steroids (prednisolone acetate 1% QID)
+  - Lower IOP if elevated
+    - Timolol 0.5% BID
+    - Dorzolamide-timolol BID
+    - AVOID acetazolamide and mannitol in sickle cell patients
+  - Pain control (avoid aspirin/NSAIDs initially)
+  - Antiemetics (prevent Valsalva)
+  - Aminocaproic acid 50-100 mg/kg q4h (reduces rebleeding) - controversial
+  - Sickle cell patients
+    - Higher risk of IOP elevation causing CRAO
+    - Keep IOP <25 mmHg
+    - Avoid carbonic anhydrase inhibitors (acidosis worsens sickling)
+  complications:
+  - Rebleeding (3-5 days after injury, 10-20% incidence)
+  - Glaucoma (acute or chronic)
+  - Corneal blood staining
+  - Optic atrophy
+  - Angle recession leading to late glaucoma
+  monitoring:
+  - Daily exam first week
+  - Check IOP daily
+  - Watch for rebleeding
+  - Angle recession may cause glaucoma years later - annual follow-up
+  next:
+  - default: null
+
+- id: orbital_fracture
+  when:
+    symptoms_contains_any:
+    - diplopia
+    - enophthalmos
+    - infraorbital_numbness
+    - limited_upgaze
+  description: Orbital fracture evaluation
+  tests:
+  - CT orbits (axial and coronal)
+    - Blowout fracture (floor or medial wall)
+    - Orbital rim fracture
+  - Assess for muscle entrapment
+  - Forced duction test (if no globe rupture)
+  - Extraocular motility
+  - Enophthalmos (sunken eye)
+  - Infraorbital nerve sensation (V2)
+  suggest_dx:
+  - Orbital floor fracture (most common)
+  - Medial wall fracture
+  - Orbital rim fracture
+  referrals:
+  - Ophthalmology for orbital fracture
+  - Oculoplastics or maxillofacial surgery for surgical repair
+  - ENT if paranasal sinus involvement
+  management:
+  - Ice and head elevation
+  - Antibiotics (amoxicillin-clavulanate 875/125mg BID x 7-10 days)
+  - Avoid nose blowing (can cause orbital emphysema)
+  - Nasal decongestants
+  - Tetanus if needed
+  - Surgical indications (oculoplastics)
+    - Muscle entrapment with bradycardia (pediatric emergency)
+    - Diplopia in primary gaze with large fracture
+    - Enophthalmos >2mm
+    - Large fracture (>50% orbital floor)
+  - Timing of surgery - 1-2 weeks (allows swelling to resolve)
+  - Pediatric trapdoor fracture with entrapment - URGENT surgery (within 24 hours)
+  complications:
+  - Persistent diplopia
+  - Enophthalmos
+  - Infraorbital nerve hypesthesia (usually improves)
+  - Restrictive strabismus
+  next:
+  - default: null
+
+- id: blunt_trauma_assessment
+  when: {}
+  description: Blunt ocular trauma evaluation
+  tests:
+  - Visual acuity
+  - Pupil examination (traumatic mydriasis, iris damage)
+  - Slit lamp examination
+  - Intraocular pressure
+  - Dilated fundoscopy
+    - Commotio retinae (retinal whitening)
+    - Retinal tear or detachment
+    - Choroidal rupture
+    - Traumatic optic neuropathy
+  - Gonioscopy (angle recession)
+  suggest_dx:
+  - Blunt ocular trauma
+  - Assess for specific injuries
+  next:
+  - when:
+      exam_findings: hyphema
+    go: hyphema
+  - when:
+      exam_findings: traumatic_iritis
+    go: traumatic_iritis
+  - when:
+      exam_findings: lens_dislocation
+    go: lens_subluxation
+  - when:
+      exam_findings_any:
+      - retinal_tear
+      - retinal_detachment
+    go: traumatic_retinal_injury
+  - when:
+      exam_findings: vision_loss_with_APD
+    go: traumatic_optic_neuropathy
+  - default: contusion_injury
+
+- id: traumatic_iritis
+  when:
+    exam_findings_any:
+    - cells_flare_anterior_chamber
+    - photophobia
+    - ciliary_flush
+  description: Traumatic iritis
+  tests:
+  - Slit lamp - cells and flare in anterior chamber
+  - Rule out hyphema
+  - Intraocular pressure
+  suggest_dx:
+  - Traumatic anterior uveitis
+  referrals:
+  - Ophthalmology within 24-48 hours
+  management:
+  - Cycloplegic (cyclopentolate 1% or homatropine 5% TID)
+  - Topical steroids (prednisolone acetate 1% q2-4h)
+  - Follow-up in 24-48 hours
+  next:
+  - default: null
+
+- id: lens_subluxation
+  when:
+    exam_findings_any:
+    - lens_edge_visible
+    - phacodonesis
+    - iridodonesis
+  description: Lens subluxation or dislocation
+  tests:
+  - Slit lamp examination
+  - Assess degree of subluxation
+  - Intraocular pressure (pupillary block if lens dislocates anteriorly)
+  - Dilated fundoscopy
+  suggest_dx:
+  - Traumatic lens subluxation
+  - Lens dislocation (anterior or posterior)
+  referrals:
+  - Ophthalmology within 24 hours
+  - STAT if anterior dislocation with pupillary block (IOP elevated)
+  management:
+  - If anterior dislocation with elevated IOP
+    - Lower IOP (acetazolamide, timolol)
+    - Cycloplegic
+    - Urgent surgical removal
+  - If stable subluxation
+    - Monitor for progression
+    - May need cataract extraction and IOL
+  next:
+  - default: null
+
+- id: traumatic_retinal_injury
+  when:
+    exam_findings_any:
+    - retinal_tear
+    - retinal_detachment
+    - commotio_retinae
+  description: Traumatic retinal pathology
+  tests:
+  - Dilated fundoscopy
+  - B-scan ultrasound if view obscured
+  - Document extent of injury
+  suggest_dx:
+  - Traumatic retinal tear
+  - Traumatic retinal detachment
+  - Commotio retinae (retinal contusion)
+  - Choroidal rupture
+  referrals:
+  - Ophthalmology STAT if retinal detachment
+  - Within 24 hours if retinal tear
+  - Within 1 week if commotio retinae
+  management:
+  - Retinal detachment - see OPHTHO-VISION-LOSS tree
+  - Retinal tear - laser or cryotherapy
+  - Commotio retinae - observation, may develop macular hole
+  next:
+  - default: null
+
+- id: traumatic_optic_neuropathy
+  when:
+    exam_findings_any:
+    - vision_loss
+    - APD
+    - normal_fundoscopy
+  description: Traumatic optic neuropathy
+  tests:
+  - APD (hallmark)
+  - Visual acuity (often severely reduced)
+  - Visual fields
+  - Fundoscopy (may be normal initially, disc pallor develops later)
+  - CT orbits (rule out optic canal fracture)
+  suggest_dx:
+  - Traumatic optic neuropathy
+  - Direct injury to optic nerve
+  - Indirect injury from transmission of forces
+  referrals:
+  - Neuro-ophthalmology STAT
+  - Neurosurgery if optic canal fracture
+  management:
+  - CONTROVERSIAL - no proven treatment
+  - High-dose corticosteroids (historical)
+    - Methylprednisolone 30 mg/kg IV bolus, then 5.4 mg/kg/hr x 48 hours
+    - May worsen outcomes per recent studies
+  - Optic canal decompression (neurosurgery)
+    - Consider if optic canal fracture with bony impingement
+    - No clear benefit proven
+  - Observation may be reasonable
+  prognosis:
+  - Variable, depends on severity
+  - Some spontaneous improvement possible
+  - Many have permanent vision loss
+  next:
+  - default: null
+
+- id: contusion_injury
+  when: {}
+  description: Ocular contusion without sight-threatening findings
+  tests:
+  - Document visual acuity
+  - Full eye examination
+  - Dilated fundoscopy
+  suggest_dx:
+  - Ocular contusion
+  - Periorbital contusion (black eye)
+  referrals:
+  - Ophthalmology follow-up in 1 week
+  - Sooner if symptoms worsen
+  management:
+  - Ice for first 24 hours
+  - Artificial tears for comfort
+  - Eye shield if significant swelling
+  - Avoid aspirin/NSAIDs initially (risk of bleeding)
+  - Follow-up in 1 week
+  - Watch for delayed complications
+    - Traumatic glaucoma (angle recession)
+    - Retinal tear/detachment
+    - Traumatic cataract
+  next:
+  - default: null
+
+differential_diagnosis:
+  vision_threatening:
+    - Globe rupture/open globe injury
+    - Intraocular foreign body
+    - Retinal detachment
+    - Hyphema with elevated IOP
+    - Orbital compartment syndrome
+    - Chemical injury (alkali)
+    - Traumatic optic neuropathy
+  moderate:
+    - Corneal abrasion
+    - Hyphema (small)
+    - Traumatic iritis
+    - Orbital fracture
+    - Lens subluxation
+    - Commotio retinae
+  minor:
+    - Periorbital contusion
+    - Subconjunctival hemorrhage
+    - Conjunctival laceration
+
+disposition_guidance:
+  operating_room_stat:
+    - Globe rupture
+    - Intraocular foreign body (posterior)
+    - Orbital compartment syndrome (if canthotomy fails)
+    - Lens dislocation with pupillary block
+  admit:
+    - Grade III-IV hyphema
+    - Sickle cell patients with hyphema
+    - Severe chemical injury
+    - Bilateral injuries
+    - Suspected non-accidental trauma (child abuse)
+  urgent_ophthalmology:
+    - Chemical injury (after irrigation)
+    - Hyphema
+    - Retinal detachment
+    - Large corneal laceration
+    - Lens dislocation
+  discharge_with_follow_up:
+    - Corneal abrasion
+    - Subconjunctival hemorrhage
+    - Periorbital contusion
+    - Small hyphema (Grade I) without complications
+
+references:
+  - American Academy of Ophthalmology. Preferred Practice Pattern - Ocular Trauma. 2018.
+  - Eastern Association for the Surgery of Trauma. Practice Management Guidelines for Open Globe Injury. 2019.
+  - Kuhn F et al. The Ocular Trauma Score (OTS). Ophthalmol Clin North Am. 2002.
+  - Ehlers JP, Shah CP. The Wills Eye Manual - Emergency Room Diagnosis and Treatment of Eye Disease. 7th Edition. 2016.
