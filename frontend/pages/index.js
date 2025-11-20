@@ -151,7 +151,6 @@ export default function Home() {
         <p style={{ margin: '1rem 0 0.5rem', color: '#64748b', fontSize: '1.4rem', fontWeight: '500', lineHeight: '1.8' }}>
           <em>AI-Powered</em>
           <br />
-          <br />
           Real-Time Diagnostic Assistant
         </p>
         <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
