@@ -407,7 +407,7 @@ export default function AccountPage() {
           {/* Login Tab */}
           {activeTab === 'login' && !isUserAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Sign In</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Sign In</h2>
               <form onSubmit={handleLogin} style={{ maxWidth: '400px' }}>
                 <div style={{ marginBottom: '1rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
@@ -471,7 +471,7 @@ export default function AccountPage() {
           {/* Register Tab */}
           {activeTab === 'register' && !isUserAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Create Account</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Create Account</h2>
               <form onSubmit={handleRegister} style={{ maxWidth: '500px' }}>
                 <div style={{ marginBottom: '1rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
@@ -593,7 +593,7 @@ export default function AccountPage() {
           {/* Dashboard Tab */}
           {activeTab === 'dashboard' && isAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Dashboard</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Dashboard</h2>
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                 <div style={{ padding: '1.5rem', background: '#f0fdfa', borderRadius: '12px', border: '2px solid #14b8a6' }}>
@@ -694,7 +694,7 @@ export default function AccountPage() {
           {/* History Tab */}
           {activeTab === 'history' && isAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Search History</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Search History</h2>
               {searchHistory.length === 0 ? (
                 <p style={{ color: '#666' }}>No search history yet.</p>
               ) : (
@@ -728,7 +728,7 @@ export default function AccountPage() {
           {/* Favorites Tab */}
           {activeTab === 'favorites' && isAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>My Favorites</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>My Favorites</h2>
               {favorites.length === 0 ? (
                 <p style={{ color: '#666' }}>No favorites yet. Click the star icon on any diagnosis to add it here!</p>
               ) : (
@@ -769,7 +769,7 @@ export default function AccountPage() {
           {/* Lists Tab */}
           {activeTab === 'lists' && isAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Custom Differential Lists</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Custom Differential Lists</h2>
               {customLists.length === 0 ? (
                 <p style={{ color: '#666' }}>No custom lists yet. Create lists to organize differential diagnoses by specialty or clinical scenario!</p>
               ) : (
@@ -781,7 +781,7 @@ export default function AccountPage() {
                       borderRadius: '12px',
                       border: '2px solid #60a5fa'
                     }}>
-                      <h3 style={{ margin: '0 0 0.5rem', color: '#1e40af' }}>{list.name}</h3>
+                      <h3 style={{ margin: '0 0 0.5rem', color: '#0f766e' }}>{list.name}</h3>
                       {list.description && (
                         <p style={{ margin: '0 0 1rem', fontSize: '0.875rem', color: '#666' }}>
                           {list.description}
@@ -815,7 +815,7 @@ export default function AccountPage() {
           {/* Analytics Tab */}
           {activeTab === 'analytics' && isAuthenticated && analytics && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#333' }}>Usage Analytics</h2>
+              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Usage Analytics</h2>
               
               <div style={{ marginBottom: '2rem' }}>
                 <h3 style={{ color: '#14b8a6' }}>Top Symptoms Searched</h3>

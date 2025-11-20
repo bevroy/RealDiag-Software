@@ -207,7 +207,7 @@ export default function EducationPage() {
       
       <style jsx>{`
         body {
-          background: linear-gradient(135deg, #e0f2f1 0%, #fef9e7 100%); /* teal to light brown */
+          background: linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%);
           min-height: 100vh;
         }
 

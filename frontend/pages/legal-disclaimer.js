@@ -4,7 +4,7 @@ export default function LegalDisclaimer() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
       {/* Header */}

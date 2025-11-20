@@ -266,7 +266,7 @@ export default function IntegrationPage() {
         }}>
           {activeTab === 'overview' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>Integration Overview</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>Integration Overview</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 RealDiag provides comprehensive integration capabilities to connect with modern and legacy healthcare systems.
               </p>
@@ -292,7 +292,7 @@ export default function IntegrationPage() {
                     border: '1px solid #e2e8f0'
                   }}>
                     {/* Removed plug clip art/icon from header and feature grid */}
-                    <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: '#333' }}>{feature.title}</h3>
+                    <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: '#0f766e' }}>{feature.title}</h3>
                     <p style={{ margin: 0, fontSize: '0.9rem', color: '#666', lineHeight: '1.6' }}>{feature.desc}</p>
                   </div>
                 ))}
@@ -306,7 +306,7 @@ export default function IntegrationPage() {
                 borderRadius: '8px'
               }}>
                 {/* Removed bullseye clip art/icon from Quick Start box */}
-                <h4 style={{ margin: '0 0 0.5rem', color: 'brown' }}>Quick Start</h4>
+                <h4 style={{ margin: '0 0 0.5rem', color: '#92400e' }}>Quick Start</h4>
                 <ol style={{ margin: 0, paddingLeft: '1.5rem', color: '#9a3412', lineHeight: '1.8' }}>
                   <li>Create an API key using <code>/integration/api-keys</code></li>
                   <li>Include the key in request headers: <code>X-API-Key: your_key</code></li>
@@ -319,7 +319,7 @@ export default function IntegrationPage() {
 
           {activeTab === 'fhir' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>FHIR R4 Integration</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>FHIR R4 Integration</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Export diagnoses as FHIR R4 Condition resources for seamless integration with modern EHR systems.
               </p>
@@ -433,7 +433,7 @@ X-API-Key: your_api_key_here`}
 
           {activeTab === 'hl7' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>HL7 v2 Messaging</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>HL7 v2 Messaging</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Generate HL7 v2.5 messages for integration with legacy clinical information systems.
               </p>
@@ -497,7 +497,7 @@ OBX|2|CE|ICD10^ICD-10 Code||I24.9||||||F|||20251117103000`}
                 borderLeft: '4px solid #3b82f6',
                 borderRadius: '8px'
               }}>
-                <h4 style={{ margin: '0 0 0.5rem', color: '#1e40af' }}>💡 Supported Message Types</h4>
+                <h4 style={{ margin: '0 0 0.5rem', color: '#0f766e' }}>💡 Supported Message Types</h4>
                 <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#1e3a8a', lineHeight: '1.8' }}>
                   <li><strong>ORU^R01:</strong> Observation Result (most common)</li>
                   <li><strong>ADT:</strong> Admission/Discharge/Transfer</li>
@@ -509,7 +509,7 @@ OBX|2|CE|ICD10^ICD-10 Code||I24.9||||||F|||20251117103000`}
 
           {activeTab === 'webhooks' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>Webhook Notifications</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>Webhook Notifications</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Receive real-time notifications when diagnoses are created, updated, or searched.
               </p>
@@ -601,7 +601,7 @@ def verify_webhook(payload, signature, secret):
 
           {activeTab === 'api-keys' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>API Key Management</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>API Key Management</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Create and manage API keys for secure access to integration endpoints.
               </p>
@@ -668,7 +668,7 @@ Content-Type: application/json
                 borderLeft: '4px solid #ef4444',
                 borderRadius: '8px'
               }}>
-                <h4 style={{ margin: '0 0 0.5rem', color: '#991b1b' }}>🔒 Security Best Practices</h4>
+                <h4 style={{ margin: '0 0 0.5rem', color: '#92400e' }}>🔒 Security Best Practices</h4>
                 <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#7f1d1d', lineHeight: '1.8' }}>
                   <li>Store API keys securely (environment variables, secrets manager)</li>
                   <li>Never commit API keys to version control</li>
@@ -682,7 +682,7 @@ Content-Type: application/json
 
           {activeTab === 'pdf-export' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>📄 PDF Report Generation</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>📄 PDF Report Generation</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Generate professional PDF reports for diagnostic findings, workup plans, and differential diagnoses.
                 Perfect for chart documentation, patient handouts, and provider communication.
@@ -769,7 +769,7 @@ with open("diagnosis_report.pdf", "wb") as f:
 
           {activeTab === 'ehr-pull' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>📥 Pull Patient Data from EHR</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>📥 Pull Patient Data from EHR</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Retrieve comprehensive patient information from your Electronic Health Record system via FHIR API.
                 Access demographics, active conditions, medications, allergies, recent vitals, and lab results.
@@ -870,7 +870,7 @@ console.log(\`Current Medications: \${patientData.medications.length}\`);`}
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#ecfdf5', borderRadius: '8px', border: '2px solid #10b981' }}>
-                <h3 style={{ marginTop: 0, color: '#065f46' }}>💡 Use Case: Context-Aware Diagnosis</h3>
+                <h3 style={{ marginTop: 0, color: '#0f766e' }}>💡 Use Case: Context-Aware Diagnosis</h3>
                 <p style={{ color: '#064e3b' }}>
                   Pull patient data before running diagnostic searches to get context-aware recommendations.
                   RealDiag can consider existing conditions, medications, and recent labs when suggesting diagnoses.
@@ -881,7 +881,7 @@ console.log(\`Current Medications: \${patientData.medications.length}\`);`}
 
           {activeTab === 'cpoe' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>🏥 CPOE Integration - Order Tests & Referrals</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>🏥 CPOE Integration - Order Tests & Referrals</h2>
               <p style={{ lineHeight: '1.8', color: '#555' }}>
                 Seamlessly create orders in your Computerized Provider Order Entry (CPOE) system directly from RealDiag recommendations.
                 Supports labs, imaging, specialist referrals, and medications via FHIR ServiceRequest resources.
@@ -974,7 +974,7 @@ print(f"Status: {order['status']}")`}
               </div>
 
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#ecfdf5', borderRadius: '8px', border: '2px solid #10b981' }}>
-                <h3 style={{ marginTop: 0, color: '#065f46' }}>💡 Workflow Integration</h3>
+                <h3 style={{ marginTop: 0, color: '#0f766e' }}>💡 Workflow Integration</h3>
                 <div style={{ color: '#064e3b', lineHeight: '1.8' }}>
                   <strong>1.</strong> RealDiag suggests diagnosis (e.g., "Acute Coronary Syndrome")<br/>
                   <strong>2.</strong> Recommended tests appear (ECG, Troponin, CK-MB)<br/>
@@ -998,7 +998,7 @@ print(f"Status: {order['status']}")`}
 
           {activeTab === 'examples' && (
             <div>
-              <h2 style={{ margin: '0 0 1rem', color: '#333' }}>Code Examples</h2>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>Code Examples</h2>
               
               <h3 style={{ marginTop: '2rem', color: '#14b8a6' }}>Python Example</h3>
               <pre style={{

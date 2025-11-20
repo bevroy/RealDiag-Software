@@ -274,7 +274,7 @@ export default function SourcesPage() {
               <>
                 {/* Family-Level Sources */}
                 <section style={{ marginBottom: 48 }}>
-                  <h2 style={{ fontSize: 24, marginBottom: 16, color: "#374151" }}>
+                  <h2 style={{ fontSize: 24, marginBottom: 16, color: "#78350f" }}>
                     Core Clinical Guidelines by Specialty
                   </h2>
                   <div style={{ display: "grid", gap: 16 }}>
@@ -322,7 +322,7 @@ export default function SourcesPage() {
                 {/* Rule-Specific Citations */}
                 {allCitations.length > 0 && (
                   <section>
-                    <h2 style={{ fontSize: 24, marginBottom: 16, color: "#374151" }}>
+                    <h2 style={{ fontSize: 24, marginBottom: 16, color: "#78350f" }}>
                       Specific Guidelines & References
                     </h2>
                     <div
@@ -366,7 +366,7 @@ export default function SourcesPage() {
 
                 {/* Disclaimer */}
                 <section style={{ marginTop: 48, paddingTop: 24, borderTop: "1px solid #e5e7eb" }}>
-                  <h3 style={{ fontSize: 18, marginBottom: 12, color: "#374151" }}>
+                  <h3 style={{ fontSize: 18, marginBottom: 12, color: "#0f766e" }}>
                     Medical Disclaimer
                   </h3>
                   <p style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.7 }}>

@@ -148,8 +148,8 @@ export default function Home() {
         <h1 style={{ margin: 0, fontSize: '3.5rem', color: '#78350f', fontWeight: '700', letterSpacing: '-0.02em' }}>
           RealDiag, LLC
         </h1>
-        <p style={{ margin: '1rem 0 0.5rem', color: '#64748b', fontSize: '1.4rem', fontWeight: '500' }}>
-          <em>AI-Powered</em> Real-Time Diagnostic Assistant
+        <p style={{ margin: '1rem 0 0.5rem', color: '#64748b', fontSize: '1.4rem', fontWeight: '500', lineHeight: '1.8' }}>
+          <em>AI-Powered</em><br />Real-Time Diagnostic Assistant
         </p>
         <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
           268 diagnoses • 17 specialties • Evidence-based
