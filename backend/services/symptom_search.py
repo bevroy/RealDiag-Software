@@ -13,6 +13,7 @@ import yaml
 import re
 from pydantic import BaseModel, validator, conint, conlist
 import logging
+from functools import lru_cache
 
 # Import security features with fallback
 try:
@@ -111,8 +112,12 @@ class SymptomSearchResponse(BaseModel):
 
 
 # Helper functions
+@lru_cache(maxsize=1)
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
-    """Load all disease family YAML files."""
+    """
+    Load all disease family YAML files with caching.
+    Cache is automatically cleared on app reload.
+    """
     rules_dir = Path(__file__).parent.parent / "rules"
     families = {}
     
@@ -124,9 +129,10 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 if data and 'rules' in data:
                     families[family_name] = data['rules']
         except Exception as e:
-            print(f"Error loading {family_name}: {e}")
+            logging.error(f"Error loading {family_name}: {e}")
             continue
     
+    logging.info(f"Loaded {len(families)} disease families with {sum(len(rules) for rules in families.values())} total rules")
     return families
 
 
@@ -136,6 +142,53 @@ def normalize_text(text: str) -> str:
     text = re.sub(r'[^\w\s]', ' ', text)  # Remove punctuation
     text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
     return text.strip()
+
+
+def calculate_match_score_optimized(normalized_symptoms: List[str], original_symptoms: List[str], 
+                                   string_presentations: List[str], rule: Dict[str, Any] = None) -> tuple:
+    """
+    Optimized version - accepts pre-normalized symptoms to avoid redundant processing.
+    
+    Returns:
+        (score, matched_presentations)
+    """
+    score = 0.0
+    matched = []
+    
+    # Normalize presentations once
+    normalized_presentations = [normalize_text(p) for p in string_presentations]
+    
+    for presentation_idx, presentation in enumerate(normalized_presentations):
+        presentation_matched = False
+        
+        for symptom in normalized_symptoms:
+            # Exact phrase match (highest weight)
+            if symptom in presentation:
+                score += 5.0
+                presentation_matched = True
+            # Word overlap (lower weight)
+            else:
+                symptom_words = set(symptom.split())
+                presentation_words = set(presentation.split())
+                overlap = symptom_words & presentation_words
+                if overlap:
+                    score += len(overlap) * 1.0
+                    presentation_matched = True
+        
+        if presentation_matched:
+            matched.append(string_presentations[presentation_idx])  # Keep original case
+    
+    # Normalize score by number of presentations
+    if string_presentations:
+        score = score / len(string_presentations)
+    
+    # Apply clinical likelihood modifier
+    if rule and 'sensitivity' in rule:
+        sensitivity = float(rule['sensitivity'])
+        sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2
+        score = score * sensitivity_modifier
+    
+    return (score, matched)
 
 
 def calculate_match_score(symptom_input: List[str], presentations: List[str], rule: Dict[str, Any] = None) -> tuple:
@@ -234,6 +287,9 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
     else:
         families_to_search = all_families
     
+    # Pre-normalize input symptoms once
+    normalized_input = [normalize_text(s) for s in request.symptoms]
+    
     # Search and score all rules
     results = []
     
@@ -250,8 +306,10 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
             if not string_presentations:
                 continue
             
-            # Calculate match score with clinical likelihood
-            score, matched_presentations = calculate_match_score(request.symptoms, string_presentations, rule)
+            # Calculate match score with clinical likelihood (pass pre-normalized input)
+            score, matched_presentations = calculate_match_score_optimized(
+                normalized_input, request.symptoms, string_presentations, rule
+            )
             
             # Only include if there's a match
             if score > 0:

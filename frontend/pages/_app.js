@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import '../styles/globals.css'
 import '../styles/accessibility-tablet.css'
-// ...existing code...
+import { Sentry } from '../utils/sentry'
 
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)
