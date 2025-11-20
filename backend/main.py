@@ -35,6 +35,41 @@ from config import Config
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger("realdiag")
 
+# Initialize Sentry for error tracking (production)
+SENTRY_DSN = os.getenv("SENTRY_DSN")
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+if SENTRY_DSN:
+    try:
+        import sentry_sdk
+        from sentry_sdk.integrations.fastapi import FastApiIntegration
+        from sentry_sdk.integrations.logging import LoggingIntegration
+        
+        sentry_sdk.init(
+            dsn=SENTRY_DSN,
+            environment=ENVIRONMENT,
+            traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
+            profiles_sample_rate=float(os.getenv("SENTRY_PROFILES_SAMPLE_RATE", "0.1")),
+            integrations=[
+                FastApiIntegration(transaction_style="url"),
+                LoggingIntegration(
+                    level=logging.INFO,
+                    event_level=logging.ERROR
+                ),
+            ],
+            # Set release version for better tracking
+            release=f"realdiag@{Config.APP_VERSION}",
+            # Sample errors in production
+            before_send=lambda event, hint: event if ENVIRONMENT == "production" else None if ENVIRONMENT == "development" else event,
+        )
+        logger.info(f"✅ Sentry initialized for environment: {ENVIRONMENT}")
+    except ImportError:
+        logger.warning("⚠️  Sentry SDK not installed. Error tracking disabled.")
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize Sentry: {e}")
+else:
+    logger.info("ℹ️  Sentry DSN not configured. Error tracking disabled.")
+
 app = FastAPI(
     title="RealDiag API", 
     version="1.4.0", 
@@ -94,29 +129,29 @@ else:
 if SECURITY_ENABLED and security_middleware:
     app.middleware("http")(security_middleware)
 
-# Allow CORS from local frontend during development
+# CORS Configuration - Allow all domains (production + development)
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+# Allow both production and development origins
 app.add_middleware(
     CORSMiddleware,
-    # Allow the local frontend origin and preview hostnames (Codespaces / GitHub preview).
-    # The preview regex can be overridden via PREVIEW_ORIGIN_REGEX env var for portability.
-    # Also allow the Netlify production/preview domains that host the frontend so
-    # browser requests from the deployed frontend can reach this API.
     allow_origins=[
+        # Production domains
+        "https://realdiag.com",
+        "https://www.realdiag.com",
+        "https://api.realdiag.com",
+        # Development/Staging domains
         "http://localhost:3000",
         "http://localhost:8080",
         "https://realdiag.netlify.app",
         "https://main--realdiag.netlify.app",
     ],
-        # Allow dynamic preview hosts for the frontend. Netlify preview URLs look like
-        # <deploy-id>--<site>.netlify.app (for example: 691393f018f33e61caabd45b--realdiag.netlify.app).
-        # Use a conservative regex that matches the canonical Netlify preview pattern for this
-        # project while still allowing localhost and common Codespaces/GH previews. The regex
-        # can be overridden with the PREVIEW_ORIGIN_REGEX env var if needed.
-        allow_origin_regex=PREVIEW_ORIGIN_REGEX_COMBINED,
+    allow_origin_regex=PREVIEW_ORIGIN_REGEX_COMBINED,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+logger.info(f"✅ CORS configured for {ENVIRONMENT} (permissive)")
 
 
 @app.get('/metrics')
