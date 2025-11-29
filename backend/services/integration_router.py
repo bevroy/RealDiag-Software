@@ -4,17 +4,26 @@ Integration Services Router
 
 Provides integration endpoints for EHR systems, FHIR export, HL7 messaging,
 webhooks, and API key management for third-party integrations.
+
+AUTHENTICATION:
+- API Key (for system-to-system integration): Pass X-API-Key header
+- User Authentication (for logged-in users): JWT token in Authorization header or cookie
 """
 
 from fastapi import APIRouter, HTTPException, Header, Depends, Body
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Union
 from pydantic import BaseModel, Field
 from datetime import datetime
 import hashlib
 import secrets
 import json
+from backend.services.auth_service import get_current_user, get_optional_user
+from backend.services.subscription_gate import SubscriptionGate
 
 router = APIRouter(prefix="/integration", tags=["integration"])
+
+# Import user subscriptions
+from backend.services.subscription_router import user_subscriptions
 
 # Models
 class FHIRConditionRequest(BaseModel):
@@ -68,7 +77,7 @@ api_keys_db = {}
 
 
 def verify_api_key(x_api_key: Optional[str] = Header(None)) -> str:
-    """Verify API key from header."""
+    """Verify API key from header (for system-to-system integration)."""
     if not x_api_key:
         raise HTTPException(status_code=401, detail="API key required")
     
@@ -87,13 +96,53 @@ def verify_api_key(x_api_key: Optional[str] = Header(None)) -> str:
     return x_api_key
 
 
+def verify_user_or_api_key(
+    x_api_key: Optional[str] = Header(None),
+    current_user: Optional[Dict] = Depends(get_optional_user)
+) -> Dict[str, Any]:
+    """
+    Verify either user authentication OR API key.
+    
+    Returns authentication context:
+    - {'type': 'user', 'user_id': '...', 'email': '...'} for logged-in users
+    - {'type': 'api_key', 'key': '...'} for API key authentication
+    
+    Raises 401 if neither authentication method is provided.
+    """
+    # Check user authentication first
+    if current_user:
+        return {
+            'type': 'user',
+            'user_id': current_user.get('user_id'),
+            'email': current_user.get('email'),
+            'full_name': current_user.get('full_name')
+        }
+    
+    # Fall back to API key
+    if x_api_key:
+        api_key = verify_api_key(x_api_key)
+        return {
+            'type': 'api_key',
+            'key': api_key,
+            'name': api_keys_db.get(api_key, {}).get('name', 'Unknown')
+        }
+    
+    # No authentication provided
+    raise HTTPException(
+        status_code=401,
+        detail="Authentication required: Provide either user login (JWT token) or API key (X-API-Key header)"
+    )
+
+
 @router.post("/fhir/condition")
 async def export_to_fhir_condition(
     request: FHIRConditionRequest,
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Convert a RealDiag diagnosis to FHIR R4 Condition resource.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Returns a FHIR-compliant JSON Condition resource that can be imported
     into EHR systems supporting FHIR.
@@ -195,7 +244,7 @@ async def export_to_fhir_condition(
 @router.post("/hl7/message")
 async def generate_hl7_message(
     request: HL7MessageRequest,
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Generate HL7 v2 message for diagnosis.
@@ -267,10 +316,12 @@ async def generate_hl7_message(
 @router.post("/webhooks/register")
 async def register_webhook(
     webhook: WebhookRegistration,
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Register a webhook endpoint to receive real-time notifications.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Supported events:
     - diagnosis.created: New diagnosis generated
@@ -313,8 +364,12 @@ async def register_webhook(
 
 
 @router.get("/webhooks")
-async def list_webhooks(api_key: str = Depends(verify_api_key)):
-    """List all registered webhooks."""
+async def list_webhooks(auth: Dict[str, Any] = Depends(verify_user_or_api_key)):
+    """
+    List all registered webhooks.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
+    """
     return {
         "webhooks": [
             {k: v for k, v in webhook.items() if k != "secret"}
@@ -324,8 +379,12 @@ async def list_webhooks(api_key: str = Depends(verify_api_key)):
 
 
 @router.delete("/webhooks/{webhook_id}")
-async def delete_webhook(webhook_id: str, api_key: str = Depends(verify_api_key)):
-    """Delete a registered webhook."""
+async def delete_webhook(webhook_id: str, auth: Dict[str, Any] = Depends(verify_user_or_api_key)):
+    """
+    Delete a registered webhook.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
+    """
     if webhook_id not in webhooks_db:
         raise HTTPException(status_code=404, detail="Webhook not found")
     
@@ -334,12 +393,19 @@ async def delete_webhook(webhook_id: str, api_key: str = Depends(verify_api_key)
 
 
 @router.post("/api-keys")
-async def create_api_key(key_request: APIKeyCreate):
+async def create_api_key(
+    key_request: APIKeyCreate,
+    current_user: Dict = Depends(get_current_user)
+):
     """
     Create a new API key for integration access.
     
-    NOTE: In production, this endpoint should require admin authentication.
+    ⚠️ REQUIRES USER AUTHENTICATION
+    
+    Creates API keys tied to your user account for third-party integrations.
     """
+    # Associate API key with user who created it
+    user_id = current_user.get("user_id")
     # Generate API key
     api_key = f"rdiag_{secrets.token_urlsafe(32)}"
     
@@ -353,6 +419,7 @@ async def create_api_key(key_request: APIKeyCreate):
         "key": api_key,
         "name": key_request.name,
         "scopes": key_request.scopes,
+        "user_id": user_id,  # Track which user created this key
         "created_at": datetime.now().isoformat(),
         "expires_at": expires_at,
         "revoked": False
@@ -368,30 +435,57 @@ async def create_api_key(key_request: APIKeyCreate):
 
 
 @router.get("/api-keys")
-async def list_api_keys(x_api_key: str = Header(None)):
+async def list_api_keys(current_user: Dict = Depends(get_current_user)):
     """
-    List all API keys (excluding the key values).
+    List all API keys created by the authenticated user (excluding the key values).
     
-    NOTE: In production, this should require admin authentication.
+    ⚠️ REQUIRES USER AUTHENTICATION
     """
+    user_id = current_user.get("user_id")
+    
+    # Filter to only show user's own API keys
+    user_keys = [
+        {k: v for k, v in key_data.items() if k != "key"}
+        for key_data in api_keys_db.values()
+        if key_data.get("user_id") == user_id
+    ]
+    
     return {
-        "api_keys": [
-            {k: v for k, v in key_data.items() if k != "key"}
-            for key_data in api_keys_db.values()
-        ]
+        "api_keys": user_keys,
+        "total": len(user_keys)
     }
 
 
 @router.post("/export")
 async def export_diagnosis(
     export_request: DiagnosisExportRequest,
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Export diagnosis in multiple formats for integration with external systems.
     
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
+    🔐 REQUIRES SUBSCRIPTION: Export features based on plan level
+    
     Supports: FHIR, HL7, JSON, XML, CSV formats.
+    
+    Feature Access:
+    - JSON Export: All plans
+    - FHIR Export: Professional+ and above
+    - HL7 Export: Organization and above
+    - Bulk Export: Enterprise only
     """
+    # Check subscription for export features
+    if auth.get("auth_type") == "user":
+        user = auth.get("user")
+        async with SubscriptionGate(user, user_subscriptions) as gate:
+            # Check export format access
+            if export_request.format == "fhir":
+                gate.require_feature("fhir_export")
+            elif export_request.format == "hl7":
+                gate.require_feature("ehr_integration")
+            elif export_request.format in ["xml", "csv"]:
+                gate.require_feature("bulk_export")
     from .rules_engine import RulesEngine
     engine = RulesEngine()
     rule = engine.get_rule(export_request.rule_id)
@@ -405,7 +499,7 @@ async def export_diagnosis(
             rule_id=export_request.rule_id,
             patient_id=export_request.patient_context.get("patient_id", "unknown") if export_request.patient_context else "unknown"
         )
-        return await export_to_fhir_condition(fhir_request, api_key)
+        return await export_to_fhir_condition(fhir_request, auth)
     
     elif export_request.format == "json":
         return {
@@ -478,10 +572,12 @@ async def export_diagnosis_pdf(
     diagnosis_data: Dict[str, Any] = Body(...),
     patient_info: Optional[Dict[str, Any]] = Body(None),
     clinical_context: Optional[str] = Body(None),
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Generate PDF report for a single diagnosis.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Request body:
     ```json
@@ -534,10 +630,12 @@ async def export_differential_pdf(
     diagnoses: List[Dict[str, Any]] = Body(...),
     patient_info: Optional[Dict[str, Any]] = Body(None),
     search_criteria: Optional[str] = Body(None),
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Generate PDF report for differential diagnoses.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Request body:
     ```json
@@ -594,10 +692,12 @@ class FHIRConfigRequest(BaseModel):
 @router.post("/ehr/fhir/configure")
 async def configure_fhir_server(
     config: FHIRConfigRequest,
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Configure connection to FHIR server for pulling patient data.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Example:
     ```json
@@ -628,10 +728,12 @@ async def configure_fhir_server(
 async def pull_patient_data(
     patient_id: str,
     config_name: str = "main_ehr",
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Pull comprehensive patient data from EHR via FHIR.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Returns patient demographics, conditions, medications, allergies,
     recent vitals, and recent lab results.
@@ -670,10 +772,12 @@ async def search_patients(
     identifier: Optional[str] = None,
     birth_date: Optional[str] = None,
     config_name: str = "main_ehr",
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Search for patients in EHR system.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Query parameters:
     - name: Patient name
@@ -725,10 +829,12 @@ async def create_cpoe_order(
     clinical_indication: Optional[str] = Body(None),
     diagnosis_codes: List[str] = Body(default=[]),
     config_name: str = Body("main_ehr"),
-    api_key: str = Depends(verify_api_key)
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
 ):
     """
     Create order in CPOE system via FHIR ServiceRequest.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
     
     Sends orders for labs, imaging, referrals, or medications to the EHR's
     computerized provider order entry system.

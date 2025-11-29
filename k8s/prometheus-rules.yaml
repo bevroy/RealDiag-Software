@@ -1,0 +1,313 @@
+---
+# Prometheus Alert Rules for RealDiag Production
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: realdiag-alerts
+  namespace: staging
+  labels:
+    app: realdiag
+    prometheus: kube-prometheus
+spec:
+  groups:
+    - name: realdiag-api
+      interval: 30s
+      rules:
+        # High Error Rate
+        - alert: RealDiagHighErrorRate
+          expr: |
+            (
+              sum(rate(http_requests_total{app="realdiag-api", status=~"5.."}[5m]))
+              /
+              sum(rate(http_requests_total{app="realdiag-api"}[5m]))
+            ) > 0.05
+          for: 5m
+          labels:
+            severity: critical
+            component: api
+          annotations:
+            summary: "High error rate on RealDiag API"
+            description: "API error rate is {{ $value | humanizePercentage }} (threshold: 5%)"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#high-error-rates"
+        
+        # Critical Error Rate (even higher)
+        - alert: RealDiagCriticalErrorRate
+          expr: |
+            (
+              sum(rate(http_requests_total{app="realdiag-api", status=~"5.."}[2m]))
+              /
+              sum(rate(http_requests_total{app="realdiag-api"}[2m]))
+            ) > 0.10
+          for: 2m
+          labels:
+            severity: critical
+            component: api
+            page: "true"  # Page on-call
+          annotations:
+            summary: "🚨 CRITICAL: Very high error rate on RealDiag API"
+            description: "API error rate is {{ $value | humanizePercentage }} (threshold: 10%)"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#high-error-rates"
+        
+        # High Response Time (p95)
+        - alert: RealDiagHighResponseTime
+          expr: |
+            histogram_quantile(0.95,
+              sum(rate(http_request_duration_seconds_bucket{app="realdiag-api"}[5m])) by (le)
+            ) > 2
+          for: 10m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "High API response time (p95)"
+            description: "95th percentile response time is {{ $value }}s (threshold: 2s)"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#performance-issues"
+        
+        # Very High Response Time (p95)
+        - alert: RealDiagVeryHighResponseTime
+          expr: |
+            histogram_quantile(0.95,
+              sum(rate(http_request_duration_seconds_bucket{app="realdiag-api"}[5m])) by (le)
+            ) > 5
+          for: 5m
+          labels:
+            severity: critical
+            component: api
+          annotations:
+            summary: "🚨 Very high API response time (p95)"
+            description: "95th percentile response time is {{ $value }}s (threshold: 5s)"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#performance-issues"
+        
+        # High Memory Usage
+        - alert: RealDiagHighMemoryUsage
+          expr: |
+            (
+              container_memory_working_set_bytes{pod=~"realdiag-api-.*"}
+              /
+              container_spec_memory_limit_bytes{pod=~"realdiag-api-.*"}
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "High memory usage on API pod"
+            description: "Pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} of memory limit"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#performance-issues"
+        
+        # High CPU Usage
+        - alert: RealDiagHighCPUUsage
+          expr: |
+            (
+              rate(container_cpu_usage_seconds_total{pod=~"realdiag-api-.*"}[5m])
+              /
+              container_spec_cpu_quota{pod=~"realdiag-api-.*"} * 100000
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "High CPU usage on API pod"
+            description: "Pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} of CPU limit"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#performance-issues"
+        
+        # Pod Restart Loop
+        - alert: RealDiagPodRestartLoop
+          expr: |
+            rate(kube_pod_container_status_restarts_total{namespace="production", pod=~"realdiag-.*"}[15m]) > 0
+          for: 5m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "Pod is restarting frequently"
+            description: "Pod {{ $labels.pod }} has restarted {{ $value }} times in the last 15 minutes"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#pods-not-starting"
+        
+        # Pod Not Ready
+        - alert: RealDiagPodNotReady
+          expr: |
+            kube_pod_status_phase{namespace="production", pod=~"realdiag-.*", phase!~"Running|Succeeded"} > 0
+          for: 5m
+          labels:
+            severity: critical
+            component: infrastructure
+          annotations:
+            summary: "Pod is not ready"
+            description: "Pod {{ $labels.pod }} is in {{ $labels.phase }} phase"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#pods-not-starting"
+        
+        # Deployment Replica Mismatch
+        - alert: RealDiagDeploymentReplicaMismatch
+          expr: |
+            (
+              kube_deployment_spec_replicas{namespace="production", deployment=~"realdiag-.*"}
+              !=
+              kube_deployment_status_replicas_available{namespace="production", deployment=~"realdiag-.*"}
+            )
+          for: 10m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "Deployment has fewer replicas than desired"
+            description: "Deployment {{ $labels.deployment }} has {{ $value }} fewer replicas available than desired"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#pods-not-starting"
+        
+        # HPA at Max Replicas
+        - alert: RealDiagHPAMaxedOut
+          expr: |
+            (
+              kube_horizontalpodautoscaler_status_current_replicas{namespace="production", horizontalpodautoscaler=~"realdiag-.*"}
+              ==
+              kube_horizontalpodautoscaler_spec_max_replicas{namespace="production", horizontalpodautoscaler=~"realdiag-.*"}
+            )
+          for: 15m
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "HPA is at maximum replicas"
+            description: "HPA {{ $labels.horizontalpodautoscaler }} has been at max replicas ({{ $value }}) for 15 minutes"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#scaling"
+        
+        # Low Request Rate (possible downtime detection)
+        - alert: RealDiagLowRequestRate
+          expr: |
+            sum(rate(http_requests_total{app="realdiag-api"}[5m])) < 0.1
+          for: 10m
+          labels:
+            severity: warning
+            component: api
+          annotations:
+            summary: "Very low request rate - possible downtime"
+            description: "API is receiving {{ $value }} requests/sec (threshold: 0.1/sec)"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#troubleshooting"
+        
+        # Certificate Expiring Soon
+        - alert: RealDiagCertificateExpiringSoon
+          expr: |
+            (
+              certmanager_certificate_expiration_timestamp_seconds{namespace="production"}
+              - time()
+            ) < (7 * 24 * 3600)
+          for: 1h
+          labels:
+            severity: warning
+            component: infrastructure
+          annotations:
+            summary: "TLS certificate expiring soon"
+            description: "Certificate {{ $labels.name }} will expire in {{ $value | humanizeDuration }}"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#certificate-issues"
+        
+        # Rate Limit Hit Frequently
+        - alert: RealDiagHighRateLimitHits
+          expr: |
+            sum(rate(rate_limit_exceeded_total{app="realdiag-api"}[5m])) > 10
+          for: 10m
+          labels:
+            severity: info
+            component: api
+          annotations:
+            summary: "High rate of rate limit hits"
+            description: "API is rejecting {{ $value }} requests/sec due to rate limiting"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#high-error-rates"
+    
+    - name: realdiag-web
+      interval: 30s
+      rules:
+        # Web High Memory Usage
+        - alert: RealDiagWebHighMemoryUsage
+          expr: |
+            (
+              container_memory_working_set_bytes{pod=~"realdiag-web-.*"}
+              /
+              container_spec_memory_limit_bytes{pod=~"realdiag-web-.*"}
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+            component: web
+          annotations:
+            summary: "High memory usage on web pod"
+            description: "Pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} of memory limit"
+        
+        # Web High CPU Usage
+        - alert: RealDiagWebHighCPUUsage
+          expr: |
+            (
+              rate(container_cpu_usage_seconds_total{pod=~"realdiag-web-.*"}[5m])
+              /
+              container_spec_cpu_quota{pod=~"realdiag-web-.*"} * 100000
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+            component: web
+          annotations:
+            summary: "High CPU usage on web pod"
+            description: "Pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} of CPU limit"
+    
+    - name: realdiag-dependencies
+      interval: 60s
+      rules:
+        # PostgreSQL Down
+        - alert: RealDiagPostgreSQLDown
+          expr: |
+            up{job="postgresql"} == 0
+          for: 2m
+          labels:
+            severity: critical
+            component: database
+            page: "true"
+          annotations:
+            summary: "🚨 PostgreSQL is down"
+            description: "PostgreSQL database is not responding"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#high-error-rates"
+        
+        # Redis Down
+        - alert: RealDiagRedisDown
+          expr: |
+            up{job="redis"} == 0
+          for: 2m
+          labels:
+            severity: critical
+            component: cache
+            page: "true"
+          annotations:
+            summary: "🚨 Redis is down"
+            description: "Redis cache is not responding"
+            runbook_url: "https://github.com/bevroy/RealDiag-Software/blob/main/docs/PRODUCTION_DEPLOYMENT.md#high-error-rates"
+        
+        # PostgreSQL High Connection Count
+        - alert: RealDiagPostgreSQLHighConnections
+          expr: |
+            (
+              pg_stat_database_numbackends{datname="realdiag"}
+              /
+              pg_settings_max_connections
+            ) > 0.8
+          for: 5m
+          labels:
+            severity: warning
+            component: database
+          annotations:
+            summary: "PostgreSQL connection pool near limit"
+            description: "Database is using {{ $value | humanizePercentage }} of max connections"
+        
+        # Redis High Memory Usage
+        - alert: RealDiagRedisHighMemory
+          expr: |
+            (
+              redis_memory_used_bytes
+              /
+              redis_memory_max_bytes
+            ) > 0.85
+          for: 10m
+          labels:
+            severity: warning
+            component: cache
+          annotations:
+            summary: "Redis memory usage high"
+            description: "Redis is using {{ $value | humanizePercentage }} of max memory"

@@ -1,531 +1,409 @@
 # Custom Domain Setup Guide
-**RealDiag Production Domain Configuration**  
-Setup Date: November 20, 2025
+**Domain:** realdiag.com  
+**Date:** November 20, 2025
 
 ---
 
-## 🎯 Overview
+## 📋 Domain Structure
 
-This guide will help you set up your custom domain (e.g., `realdiag.com`) for production deployment.
-
-**Current URLs:**
-- Backend: `https://realdiag-software.onrender.com`
-- Frontend: `https://realdiag.netlify.app`
-
-**Target URLs:**
-- Backend: `https://api.realdiag.com`
-- Frontend: `https://realdiag.com` or `https://www.realdiag.com`
+| Subdomain | Purpose | Points To | Platform |
+|-----------|---------|-----------|----------|
+| `realdiag.com` | Main website | Netlify | Frontend |
+| `www.realdiag.com` | WWW redirect | Netlify | Frontend |
+| `api.realdiag.com` | Backend API | Render | Backend API |
 
 ---
 
-## Step 1: Purchase Domain (If Not Already Owned)
+## Step 1: DNS Configuration ⏱️ 10 min
 
-### Recommended Registrars:
-1. **Namecheap** - https://www.namecheap.com
-   - Price: ~$10-15/year for .com
-   - Easy DNS management
-   - Free WHOIS privacy
+### Where to Configure DNS
+Log into your domain registrar (where you purchased realdiag.com) - common providers:
+- GoDaddy, Namecheap, Google Domains, Cloudflare, etc.
 
-2. **Google Domains** - https://domains.google
-   - Price: ~$12/year
-   - Integrated with Google Cloud
-   - Simple interface
+### DNS Records to Add
 
-3. **Cloudflare** - https://www.cloudflare.com/products/registrar
-   - Price: At-cost (~$9/year)
-   - Free SSL and CDN
-   - Best for performance
+**For Frontend (Netlify):**
 
-**Purchase:** `realdiag.com` (or your preferred domain)
+Add these records in your DNS provider:
 
----
+```
+Type: A
+Name: @
+Value: 75.2.60.5
+TTL: 3600 (or Auto)
 
-## Step 2: Configure DNS Records
-
-### Option A: Using Netlify DNS (Recommended for Simplicity)
-
-1. **Add Domain to Netlify:**
-   - Go to https://app.netlify.com
-   - Select your RealDiag site
-   - Click **Domain settings**
-   - Click **Add custom domain**
-   - Enter: `realdiag.com`
-   - Follow prompts to verify ownership
-
-2. **Update Nameservers at Your Registrar:**
-   
-   Netlify will provide nameservers like:
-   ```
-   dns1.p08.nsone.net
-   dns2.p08.nsone.net
-   dns3.p08.nsone.net
-   dns4.p08.nsone.net
-   ```
-
-   Go to your domain registrar (Namecheap, Google Domains, etc.) and update nameservers to these values.
-
-3. **Netlify Will Auto-Configure:**
-   - SSL certificate (via Let's Encrypt)
-   - WWW redirect (www.realdiag.com → realdiag.com)
-   - HTTPS enforcement
-   - CDN distribution
-
-4. **Add API Subdomain:**
-   - In Netlify DNS settings, add a CNAME record:
-     ```
-     Type: CNAME
-     Name: api
-     Value: realdiag-software.onrender.com
-     TTL: 3600
-     ```
-
----
-
-### Option B: Using Cloudflare DNS (Best for Performance & Security)
-
-1. **Add Site to Cloudflare:**
-   - Go to https://dash.cloudflare.com
-   - Click **Add a site**
-   - Enter: `realdiag.com`
-   - Select Free plan
-   - Cloudflare will scan existing DNS records
-
-2. **Update Nameservers:**
-   
-   Cloudflare provides nameservers like:
-   ```
-   lara.ns.cloudflare.com
-   ned.ns.cloudflare.com
-   ```
-
-   Update these at your domain registrar.
-
-3. **Add DNS Records:**
-
-   **For Frontend (Netlify):**
-   ```
-   Type: CNAME
-   Name: @
-   Content: realdiag.netlify.app
-   Proxy status: Proxied (orange cloud)
-   TTL: Auto
-   ```
-
-   ```
-   Type: CNAME
-   Name: www
-   Content: realdiag.netlify.app
-   Proxy status: Proxied (orange cloud)
-   TTL: Auto
-   ```
-
-   **For Backend (Render):**
-   ```
-   Type: CNAME
-   Name: api
-   Content: realdiag-software.onrender.com
-   Proxy status: Proxied (orange cloud)
-   TTL: Auto
-   ```
-
-4. **Configure SSL/TLS:**
-   - In Cloudflare dashboard → SSL/TLS
-   - Set to **Full (strict)**
-   - Enable **Always Use HTTPS**
-   - Enable **Automatic HTTPS Rewrites**
-
-5. **Enable Security Features:**
-   - **Security** → **Settings** → Enable **Browser Integrity Check**
-   - **Security** → **Bots** → Enable **Bot Fight Mode** (Free)
-   - **Speed** → **Optimization** → Enable **Auto Minify** (JS, CSS, HTML)
-
----
-
-## Step 3: Configure Netlify Custom Domain
-
-1. **Add Custom Domain:**
-   - Netlify dashboard → Your site → **Domain settings**
-   - Click **Add custom domain**
-   - Enter: `realdiag.com`
-   - Click **Verify**
-
-2. **Add WWW Subdomain:**
-   - Click **Add domain alias**
-   - Enter: `www.realdiag.com`
-   - Netlify will redirect www → non-www automatically
-
-3. **Enable HTTPS:**
-   - Netlify auto-provisions SSL via Let's Encrypt
-   - Wait 1-5 minutes for certificate
-   - Verify HTTPS is active
-
-4. **Force HTTPS:**
-   - In domain settings, enable **Force HTTPS**
-   - All HTTP requests will redirect to HTTPS
-
----
-
-## Step 4: Configure Render Custom Domain
-
-1. **Add Custom Domain:**
-   - Go to https://dashboard.render.com
-   - Select your `realdiag-software` service
-   - Click **Settings** tab
-   - Scroll to **Custom Domains**
-   - Click **Add Custom Domain**
-   - Enter: `api.realdiag.com`
-
-2. **Verify DNS:**
-   - Render will show DNS configuration needed
-   - Ensure your CNAME record points to `realdiag-software.onrender.com`
-   - Click **Verify** once DNS is configured
-
-3. **SSL Certificate:**
-   - Render auto-provisions SSL certificate
-   - Wait 5-10 minutes for activation
-   - Verify at: https://api.realdiag.com/health
-
----
-
-## Step 5: Update Application Configuration
-
-### Backend Configuration
-
-Update CORS origins in Render environment variables:
-
-```bash
-CORS_ORIGINS=https://realdiag.com,https://www.realdiag.com
-FRONTEND_URL=https://realdiag.com
-API_BASE_URL=https://api.realdiag.com
+Type: CNAME
+Name: www
+Value: realdiag.netlify.app
+TTL: 3600 (or Auto)
 ```
 
-### Frontend Configuration
+**For Backend API (Render):**
 
-Update API endpoint in Netlify environment variables:
+```
+Type: CNAME
+Name: api
+Value: realdiag-software.onrender.com
+TTL: 3600 (or Auto)
+```
+
+**Important Notes:**
+- `@` means the root domain (realdiag.com)
+- DNS changes can take 5 minutes to 48 hours to propagate (usually < 1 hour)
+- Keep your registrar's nameservers (don't change them unless using Cloudflare)
+
+---
+
+## Step 2: Netlify Domain Configuration ⏱️ 5 min
+
+### Add Custom Domain
+
+1. **Go to Netlify Dashboard:**
+   - Visit https://app.netlify.com
+   - Select your **RealDiag** site
+
+2. **Add Domain:**
+   - Go to **Domain management** (or **Domain settings**)
+   - Click **Add custom domain** (or **Add a domain**)
+   - Enter: `realdiag.com`
+   - Click **Verify**
+   - Click **Add domain**
+
+3. **Add WWW Subdomain:**
+   - Click **Add domain alias**
+   - Enter: `www.realdiag.com`
+   - Click **Add domain**
+
+4. **Enable HTTPS:**
+   - Netlify will automatically provision SSL certificates (Let's Encrypt)
+   - Wait 2-5 minutes for certificate to be issued
+   - Look for "HTTPS certificate provisioned" status
+
+5. **Configure Redirects:**
+   - In **Domain settings**, set:
+     - Primary domain: `realdiag.com` (or `www.realdiag.com` if you prefer www)
+     - Automatic redirect: www → non-www (or vice versa)
+
+### Verify Netlify Setup
+
+```bash
+# Check DNS propagation (may take a few minutes)
+nslookup realdiag.com
+
+# Expected: Should show Netlify's IP (75.2.60.5)
+
+# Test HTTPS
+curl -I https://realdiag.com
+# Should return: 200 OK with valid SSL
+```
+
+---
+
+## Step 3: Render Domain Configuration ⏱️ 5 min
+
+### Add Custom Domain for API
+
+1. **Go to Render Dashboard:**
+   - Visit https://dashboard.render.com
+   - Select your `realdiag-software` web service
+
+2. **Add Custom Domain:**
+   - Go to **Settings** tab
+   - Scroll to **Custom Domains** section
+   - Click **Add Custom Domain**
+   - Enter: `api.realdiag.com`
+   - Click **Save**
+
+3. **Verify DNS:**
+   - Render will show CNAME target (should be `realdiag-software.onrender.com`)
+   - Ensure your DNS CNAME record matches
+   - Wait for "DNS configured" status
+
+4. **SSL Certificate:**
+   - Render automatically provisions SSL certificates
+   - Wait 2-5 minutes for certificate to be issued
+   - Status will show "Certificate Active"
+
+### Verify Render Setup
+
+```bash
+# Check DNS propagation
+nslookup api.realdiag.com
+# Expected: Should show Render's servers
+
+# Test API with new domain
+curl https://api.realdiag.com/health
+# Expected: {"ok":true}
+
+# Verify SSL certificate
+curl -I https://api.realdiag.com/version
+# Should return: 200 OK with valid SSL
+```
+
+---
+
+## Step 4: Update Application Configuration ⏱️ 5 min
+
+### Update Backend CORS Settings
+
+The backend needs to allow requests from your custom domain.
+
+**In Render Dashboard → Environment Variables:**
+
+Update or add these variables:
+
+```bash
+# Update CORS origins
+CORS_ORIGINS=https://realdiag.com,https://www.realdiag.com,https://api.realdiag.com
+
+# Optional: Update API base URL
+API_BASE_URL=https://api.realdiag.com
+
+# Optional: Set frontend URL
+FRONTEND_URL=https://realdiag.com
+```
+
+This will trigger an automatic redeploy (~2-3 minutes).
+
+### Update Frontend API URL
+
+**Option A: Environment Variable (Recommended)**
+
+In Netlify Dashboard → Environment Variables:
 
 ```bash
 NEXT_PUBLIC_API_URL=https://api.realdiag.com
 ```
 
-Or if using runtime config, update `frontend/next.config.js`:
+Then redeploy frontend.
 
-```javascript
-module.exports = {
-  publicRuntimeConfig: {
-    apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://api.realdiag.com'
-  }
-}
-```
+**Option B: Code Change (if needed)**
+
+If your frontend hardcodes the API URL, we'll need to update it in the code.
 
 ---
 
-## Step 6: Update API Calls in Frontend
-
-Find and replace API URLs in your frontend code:
-
-```bash
-cd /workspaces/RealDiag-Software/frontend
-
-# Search for hardcoded API URLs
-grep -r "realdiag-software.onrender.com" pages/ --include="*.js" --include="*.jsx"
-```
-
-Update to use the custom domain:
-
-**Before:**
-```javascript
-const response = await fetch('https://realdiag-software.onrender.com/api/endpoint');
-```
-
-**After:**
-```javascript
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.realdiag.com';
-const response = await fetch(`${API_URL}/api/endpoint`);
-```
-
----
-
-## Step 7: Update Security Headers
-
-Update CSP in `backend/services/security.py`:
-
-```python
-"Content-Security-Policy": (
-    "default-src 'self'; "
-    "script-src 'self'; "
-    "style-src 'self'; "
-    "img-src 'self' data: https:; "
-    "font-src 'self' data:; "
-    "connect-src 'self' https://api.realdiag.com https://sentry.io; "
-    "frame-ancestors 'none'; "
-    "base-uri 'self'; "
-    "form-action 'self'; "
-    "upgrade-insecure-requests;"
-)
-```
-
----
-
-## Step 8: Test Configuration
+## Step 5: Verification & Testing ⏱️ 10 min
 
 ### DNS Propagation Check
 
 ```bash
-# Check if DNS has propagated
-dig realdiag.com
-dig www.realdiag.com
-dig api.realdiag.com
+# Check all domains resolve correctly
+dig realdiag.com +short
+dig www.realdiag.com +short
+dig api.realdiag.com +short
 
-# Or use online tool
-# https://www.whatsmydns.net/#A/realdiag.com
+# Or use online tool: https://dnschecker.org
 ```
 
-### SSL Certificate Check
+### Test All Endpoints
 
 ```bash
-# Verify SSL certificates
-curl -vI https://realdiag.com 2>&1 | grep -i "SSL certificate"
-curl -vI https://api.realdiag.com 2>&1 | grep -i "SSL certificate"
-```
-
-### Functionality Tests
-
-```bash
-# Test backend API
-curl https://api.realdiag.com/health
-curl https://api.realdiag.com/version
-
-# Test frontend
+# 1. Test main website
 curl -I https://realdiag.com
-curl -I https://www.realdiag.com  # Should redirect to realdiag.com
+# Expected: 200 OK with SSL
+
+# 2. Test WWW redirect
+curl -I https://www.realdiag.com
+# Expected: 301 redirect to realdiag.com (or stays if www is primary)
+
+# 3. Test API health
+curl https://api.realdiag.com/health
+# Expected: {"ok":true}
+
+# 4. Test API version
+curl https://api.realdiag.com/version
+# Expected: {"app":"RealDiag","version":"1.0.0"}
+
+# 5. Test symptom search from frontend
+# Open browser: https://realdiag.com/symptom-search
+# Enter symptoms and verify it works
 ```
 
-### Browser Test
-
-1. Open: https://realdiag.com
-2. Check that site loads correctly
-3. Open DevTools → Network tab
-4. Verify all API calls go to `api.realdiag.com`
-5. Check for mixed content warnings (should be none)
-6. Test symptom search functionality
-7. Test user login/signup
-
----
-
-## Step 9: Update Documentation & Links
-
-### Update References
-
-Files to update:
-- `README.md` - Update live demo URLs
-- `DEPLOYMENT.md` - Update deployment URLs
-- `frontend/public/manifest.json` - Update start_url
-- `backend/templates/index.html` - Update links if any
-
-### Update External Services
-
-- **Sentry:** Update "Allowed Domains" to include `realdiag.com`
-- **OAuth (Epic/Cerner):** Update redirect URIs if using EHR integration
-- **Analytics:** Update allowed domains if using Plausible/Matomo
-
----
-
-## Step 10: Monitor & Verify
-
-### First 24 Hours
-
-- [ ] Check Sentry for any CORS errors
-- [ ] Monitor Netlify analytics for traffic
-- [ ] Check Render logs for API errors
-- [ ] Verify all pages load correctly
-- [ ] Test on multiple devices/browsers
-
-### Performance Check
+### SSL Certificate Verification
 
 ```bash
-# Run load test with new domain
-sed -i 's/realdiag-software.onrender.com/api.realdiag.com/g' load_test.sh
-bash load_test.sh
+# Check SSL certificate details
+openssl s_client -connect realdiag.com:443 -servername realdiag.com < /dev/null 2>/dev/null | openssl x509 -noout -dates
+
+# Check API SSL
+openssl s_client -connect api.realdiag.com:443 -servername api.realdiag.com < /dev/null 2>/dev/null | openssl x509 -noout -dates
 ```
 
-### SEO Configuration
+### Browser Testing
 
-**Add to `frontend/pages/_app.js`:**
-```javascript
-<Head>
-  <link rel="canonical" href="https://realdiag.com" />
-  <meta property="og:url" content="https://realdiag.com" />
-</Head>
-```
+1. **Open in Browser:**
+   - Visit https://realdiag.com
+   - Check for padlock icon (valid SSL)
+   - Open DevTools → Console
+   - Look for no CORS errors
+
+2. **Test Functionality:**
+   - Navigate to Symptom Search
+   - Enter symptoms (e.g., "headache, fever")
+   - Verify results load from `api.realdiag.com`
+   - Check Network tab for API calls
+
+3. **Test All Pages:**
+   - Home: https://realdiag.com
+   - Symptom Search: https://realdiag.com/symptom-search
+   - Rules: https://realdiag.com/rules
+   - API Docs: https://api.realdiag.com/docs
+   - Account: https://realdiag.com/account
 
 ---
 
-## 🔧 Troubleshooting
+## Step 6: Update External References ⏱️ 5 min
+
+### Update Documentation
+
+Files that may reference old URLs:
+- `README.md`
+- `DEPLOYMENT.md`
+- `netlify.toml`
+- Any marketing materials
+
+### Update Sentry
+
+If using Sentry, update allowed domains:
+
+1. Go to https://sentry.io
+2. Project Settings → Client Keys (DSN)
+3. Add to allowed domains:
+   - `realdiag.com`
+   - `www.realdiag.com`
+   - `api.realdiag.com`
+
+### Update Search Engines
+
+1. **Google Search Console:**
+   - Add property for `realdiag.com`
+   - Verify ownership (DNS TXT record or HTML file)
+   - Submit sitemap
+
+2. **Update robots.txt** (if needed)
+
+---
+
+## 🚨 Troubleshooting
 
 ### DNS Not Resolving
 
-**Problem:** `dig realdiag.com` shows no results
+**Problem:** Domain doesn't resolve after adding DNS records
 
-**Solution:**
-1. Verify nameservers are correctly updated at registrar
-2. Wait 24-48 hours for DNS propagation
-3. Clear local DNS cache: `sudo systemd-resolve --flush-caches`
+**Solutions:**
+1. Wait longer (can take up to 48 hours, usually < 1 hour)
+2. Check DNS records are correct (no typos)
+3. Use `nslookup` or `dig` to check propagation
+4. Clear DNS cache: `sudo systemd-resolve --flush-caches` (Linux)
 
-### SSL Certificate Error
+### SSL Certificate Not Provisioning
 
-**Problem:** "Your connection is not private" error
+**Problem:** "Certificate pending" stuck for > 10 minutes
 
-**Solution:**
-1. Wait 5-10 minutes for SSL provisioning
-2. Check Netlify/Render dashboard for SSL status
-3. Verify DNS CNAME records are correct
-4. Force SSL regeneration in platform dashboard
+**Solutions:**
+1. Verify DNS is resolving correctly first
+2. In Netlify: Try removing and re-adding the domain
+3. In Render: Check CNAME target is correct
+4. Ensure no CAA records blocking Let's Encrypt
 
-### CORS Errors
+### CORS Errors in Browser
 
-**Problem:** Browser shows CORS policy errors
+**Problem:** "CORS policy: No 'Access-Control-Allow-Origin' header"
 
-**Solution:**
-1. Verify `CORS_ORIGINS` includes `https://realdiag.com`
-2. Check no trailing slashes in URLs
-3. Restart backend service after updating env vars
-4. Clear browser cache and test in incognito
+**Solutions:**
+1. Verify backend `CORS_ORIGINS` includes `https://realdiag.com`
+2. Check Render environment variables are saved
+3. Wait for automatic redeploy (~2-3 minutes)
+4. Hard refresh browser (Ctrl+Shift+R)
 
 ### Mixed Content Warnings
 
-**Problem:** "Mixed Content" errors in console
+**Problem:** "Mixed Content: The page was loaded over HTTPS, but..."
 
-**Solution:**
-1. Search for `http://` URLs in frontend code
-2. Update all to use `https://` or protocol-relative URLs
-3. Update CSP `upgrade-insecure-requests` directive
+**Solutions:**
+1. Ensure all API calls use `https://` not `http://`
+2. Check frontend environment variable `NEXT_PUBLIC_API_URL`
+3. Update any hardcoded URLs in code
 
 ### WWW Not Redirecting
 
-**Problem:** `www.realdiag.com` doesn't redirect to `realdiag.com`
+**Problem:** www.realdiag.com doesn't redirect to realdiag.com
 
-**Solution:**
-1. Add www as domain alias in Netlify
-2. Verify CNAME record for www subdomain
-3. Check redirect rules in `netlify.toml`
-
----
-
-## 📋 Quick Reference
-
-### DNS Records Summary
-
-| Type | Name | Value | TTL |
-|------|------|-------|-----|
-| CNAME | @ | realdiag.netlify.app | 3600 |
-| CNAME | www | realdiag.netlify.app | 3600 |
-| CNAME | api | realdiag-software.onrender.com | 3600 |
-| TXT | @ | netlify-verification=... | 3600 |
-
-### Environment Variables to Update
-
-**Render:**
-```bash
-CORS_ORIGINS=https://realdiag.com,https://www.realdiag.com
-FRONTEND_URL=https://realdiag.com
-API_BASE_URL=https://api.realdiag.com
-ENVIRONMENT=production
-```
-
-**Netlify:**
-```bash
-NEXT_PUBLIC_API_URL=https://api.realdiag.com
-NEXT_PUBLIC_ENVIRONMENT=production
-```
+**Solutions:**
+1. In Netlify, set primary domain preference
+2. Enable automatic HTTPS redirect
+3. May take a few minutes after enabling
 
 ---
 
-## 📱 Post-Setup Tasks
+## ✅ Post-Setup Checklist
 
-### 1. Update PWA Manifest
+After completing all steps, verify:
 
-Edit `frontend/public/manifest.json`:
-```json
-{
-  "name": "RealDiag",
-  "short_name": "RealDiag",
-  "start_url": "https://realdiag.com",
-  "scope": "https://realdiag.com/",
-  "id": "https://realdiag.com/"
-}
-```
-
-### 2. Submit to Search Engines
-
-**Google Search Console:**
-1. Go to https://search.google.com/search-console
-2. Add property: `https://realdiag.com`
-3. Verify ownership via DNS TXT record
-4. Submit sitemap: `https://realdiag.com/sitemap.xml`
-
-**Bing Webmaster Tools:**
-1. Go to https://www.bing.com/webmasters
-2. Add site: `https://realdiag.com`
-3. Verify and submit sitemap
-
-### 3. Set Up Monitoring
-
-**Uptime Monitoring:**
-- UptimeRobot: https://uptimerobot.com
-- Monitor: `https://realdiag.com` and `https://api.realdiag.com/health`
-- Alert via email/Slack on downtime
-
-**Performance Monitoring:**
-- Google PageSpeed Insights
-- WebPageTest.org
-- Lighthouse CI
-
----
-
-## ✅ Completion Checklist
-
-- [ ] Domain purchased and registered
-- [ ] DNS records configured
-- [ ] Nameservers updated and propagated
-- [ ] Custom domain added to Netlify
-- [ ] Custom domain added to Render
-- [ ] SSL certificates active for all domains
-- [ ] Environment variables updated (backend)
-- [ ] Environment variables updated (frontend)
-- [ ] API URLs updated in frontend code
-- [ ] CORS origins updated in backend
-- [ ] Security headers updated
-- [ ] All tests passing
+- [ ] `realdiag.com` loads with valid SSL (green padlock)
+- [ ] `www.realdiag.com` redirects correctly
+- [ ] `api.realdiag.com/health` returns `{"ok":true}`
+- [ ] `api.realdiag.com/docs` shows API documentation
+- [ ] Symptom search works from `realdiag.com/symptom-search`
 - [ ] No CORS errors in browser console
-- [ ] No mixed content warnings
-- [ ] WWW redirecting correctly
-- [ ] Documentation updated
-- [ ] External services updated (Sentry, OAuth)
-- [ ] Monitoring configured
-- [ ] Search engine submission completed
+- [ ] All pages load correctly
+- [ ] User accounts/login works
+- [ ] SSL certificates valid (not expired)
+- [ ] Security headers present (check with curl -I)
+- [ ] Sentry capturing errors on new domain
 
 ---
 
-## 🎉 Success!
+## 📊 Expected Timeline
 
-Once all steps are complete, your production URLs will be:
+| Step | Time | Status |
+|------|------|--------|
+| DNS Configuration | 10 min | Manual |
+| Netlify Domain Setup | 5 min | Manual |
+| Render Domain Setup | 5 min | Manual |
+| Update CORS/Environment | 5 min | Manual |
+| DNS Propagation | 15-60 min | Automatic |
+| SSL Certificate Provisioning | 2-10 min | Automatic |
+| Testing & Verification | 10 min | Manual |
+| **Total Time** | **~1-2 hours** | **(mostly waiting for DNS)** |
 
-- **Website:** https://realdiag.com
-- **API:** https://api.realdiag.com
-- **API Docs:** https://api.realdiag.com/docs
+---
 
-**Estimated Time:** 2-4 hours (including DNS propagation)
+## 🎯 Quick Start Commands
+
+```bash
+# 1. Check current DNS (before changes)
+nslookup realdiag.com
+nslookup www.realdiag.com
+nslookup api.realdiag.com
+
+# 2. After DNS changes, wait 5-10 minutes, then check again
+watch -n 30 'nslookup realdiag.com'
+
+# 3. Test SSL certificates
+curl -I https://realdiag.com
+curl -I https://api.realdiag.com
+
+# 4. Test API functionality
+curl https://api.realdiag.com/health
+curl https://api.realdiag.com/version
+
+# 5. Monitor deployment logs
+# Netlify: https://app.netlify.com (Deploys tab)
+# Render: https://dashboard.render.com (Events tab)
+```
 
 ---
 
 ## 📞 Need Help?
 
-**DNS Issues:** Check with your domain registrar support  
-**SSL Issues:** Check Netlify/Render documentation  
-**CORS Issues:** Review backend CORS configuration  
-**Performance:** Run load tests and check Sentry logs
+- **DNS Issues:** Contact your domain registrar support
+- **Netlify Issues:** https://answers.netlify.com
+- **Render Issues:** https://render.com/docs
+- **SSL Issues:** Check Let's Encrypt status: https://letsencrypt.status.io
 
-**Documentation:**
-- Netlify Custom Domains: https://docs.netlify.com/domains-https/custom-domains/
-- Render Custom Domains: https://render.com/docs/custom-domains
-- Cloudflare Setup: https://developers.cloudflare.com/dns/
+---
+
+**Status:** Ready to begin custom domain setup  
+**Estimated Completion:** 1-2 hours (including DNS propagation wait time)

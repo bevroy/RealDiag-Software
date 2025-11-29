@@ -12,6 +12,7 @@ import yaml
 import json
 import random
 import logging
+from backend.services.auth_service import get_optional_user, get_current_user
 
 # Import security features with fallback
 try:
@@ -617,35 +618,67 @@ flashcard_system = FlashcardSystem()
 async def get_cases(
     request: Request,
     specialty: Optional[str] = None,
-    difficulty: Optional[str] = None
+    difficulty: Optional[str] = None,
+    current_user: Optional[Dict] = Depends(get_optional_user)
 ):
-    """Get all clinical cases with optional filters"""
+    """
+    Get all clinical cases with optional filters.
+    
+    Public endpoint - authentication optional.
+    Authenticated users get progress indicators on cases.
+    """
     AuditLogger.log_security_event(
         "case_library_access",
-        {"specialty": specialty, "difficulty": difficulty, "ip": request.client.host if request.client else "unknown"}
+        {
+            "specialty": specialty, 
+            "difficulty": difficulty, 
+            "user_id": current_user.get("user_id") if current_user else None,
+            "ip": request.client.host if request.client else "unknown"
+        }
     )
     
     return case_library.get_all_cases(specialty, difficulty)
 
 @router.get("/cases/{case_id}", response_model=ClinicalCase)
 @limiter.limit("30/minute")
-async def get_case(request: Request, case_id: str):
-    """Get specific clinical case"""
+async def get_case(
+    request: Request, 
+    case_id: str,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Get specific clinical case.
+    
+    Public endpoint - authentication optional.
+    Authenticated users get case marked as viewed in progress.
+    """
     case = case_library.get_case(case_id)
     if not case:
         raise HTTPException(status_code=404, detail="Case not found")
     
     AuditLogger.log_security_event(
         "case_view",
-        {"case_id": case_id, "ip": request.client.host if request.client else "unknown"}
+        {
+            "case_id": case_id, 
+            "user_id": current_user.get("user_id") if current_user else None,
+            "ip": request.client.host if request.client else "unknown"
+        }
     )
     
     return case
 
 @router.get("/cases/search/{query}")
 @limiter.limit("15/minute")
-async def search_cases(request: Request, query: str):
-    """Search cases by keywords"""
+async def search_cases(
+    request: Request, 
+    query: str,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Search cases by keywords.
+    
+    Public endpoint - authentication optional.
+    """
     clean_query = InputValidator.sanitize_string(query, max_length=100)
     results = case_library.search_cases(clean_query)
     
@@ -656,9 +689,15 @@ async def search_cases(request: Request, query: str):
 async def get_quiz_questions(
     request: Request,
     count: int = 10,
-    difficulty: Optional[str] = None
+    difficulty: Optional[str] = None,
+    current_user: Optional[Dict] = Depends(get_optional_user)
 ):
-    """Get random quiz questions"""
+    """
+    Get random quiz questions.
+    
+    Public endpoint - authentication optional.
+    Unauthenticated users can view questions but not save progress.
+    """
     if count > 50:
         raise HTTPException(status_code=400, detail="Maximum 50 questions per request")
     
@@ -666,15 +705,37 @@ async def get_quiz_questions(
     
     AuditLogger.log_security_event(
         "quiz_started",
-        {"question_count": len(questions), "difficulty": difficulty, "ip": request.client.host if request.client else "unknown"}
+        {
+            "question_count": len(questions), 
+            "difficulty": difficulty, 
+            "user_id": current_user.get("user_id") if current_user else None,
+            "ip": request.client.host if request.client else "unknown"
+        }
     )
     
-    return {"questions": questions, "count": len(questions)}
+    result = {"questions": questions, "count": len(questions)}
+    
+    if not current_user:
+        result["notice"] = "Login to save your quiz progress and track learning stats"
+    
+    return result
 
 @router.post("/quiz/submit")
 @limiter.limit("30/minute")
-async def submit_quiz_answer(request: Request, attempt: QuizAttempt):
-    """Submit quiz answer"""
+async def submit_quiz_answer(
+    request: Request, 
+    attempt: QuizAttempt,
+    current_user: Dict = Depends(get_current_user)
+):
+    """
+    Submit quiz answer.
+    
+    ⚠️ REQUIRES AUTHENTICATION
+    Must be logged in to submit answers and track progress.
+    """
+    # Override attempt user_id with authenticated user
+    attempt.user_id = current_user["user_id"]
+    
     result = quiz_system.submit_answer(attempt)
     
     # Update progress
@@ -688,8 +749,24 @@ async def submit_quiz_answer(request: Request, attempt: QuizAttempt):
 
 @router.get("/progress/{user_id}")
 @limiter.limit("20/minute")
-async def get_progress(request: Request, user_id: str):
-    """Get user progress statistics"""
+async def get_progress(
+    request: Request, 
+    user_id: str,
+    current_user: Dict = Depends(get_current_user)
+):
+    """
+    Get user progress statistics.
+    
+    ⚠️ REQUIRES AUTHENTICATION
+    Users can only view their own progress.
+    """
+    # Users can only view their own progress
+    if user_id != current_user["user_id"]:
+        raise HTTPException(
+            status_code=403, 
+            detail="Access denied: You can only view your own progress"
+        )
+    
     stats = progress_tracker.get_progress(user_id)
     
     if not stats:
@@ -704,23 +781,42 @@ async def get_progress(request: Request, user_id: str):
 @limiter.limit("20/minute")
 async def get_due_flashcards(
     request: Request,
-    user_id: str,
-    limit: int = 20
+    limit: int = 20,
+    current_user: Dict = Depends(get_current_user)
 ):
-    """Get flashcards due for review"""
+    """
+    Get flashcards due for review.
+    
+    ⚠️ REQUIRES AUTHENTICATION
+    Flashcard review is personalized per user.
+    """
     if limit > 100:
         raise HTTPException(status_code=400, detail="Maximum 100 flashcards per request")
     
+    # Use authenticated user's ID
+    user_id = current_user["user_id"]
     cards = flashcard_system.get_due_flashcards(user_id, limit)
     
     return {"flashcards": cards, "count": len(cards)}
 
 @router.post("/flashcards/review")
 @limiter.limit("100/minute")
-async def review_flashcard(request: Request, review: FlashcardReview):
-    """Review flashcard and update schedule"""
+async def review_flashcard(
+    request: Request, 
+    review: FlashcardReview,
+    current_user: Dict = Depends(get_current_user)
+):
+    """
+    Review flashcard and update schedule.
+    
+    ⚠️ REQUIRES AUTHENTICATION
+    Flashcard reviews are tied to your learning schedule.
+    """
     if review.quality < 0 or review.quality > 5:
         raise HTTPException(status_code=400, detail="Quality must be 0-5")
+    
+    # Override review user_id with authenticated user
+    review.user_id = current_user["user_id"]
     
     result = flashcard_system.review_flashcard(review)
     

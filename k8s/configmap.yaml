@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: realdiag-config
+  namespace: staging
+  labels:
+    app: realdiag
+data:
+  # Application Settings
+  ENVIRONMENT: "staging"
+  LOG_LEVEL: "DEBUG"
+  
+  # API Configuration
+  API_VERSION: "v1.4.0"
+  API_TITLE: "RealDiag Clinical Decision Support API"
+  
+  # CORS Settings
+  CORS_ORIGINS: "http://localhost:3000,http://localhost:8000"
+  
+  # Security
+  SECURITY_ENABLED: "true"
+  RATE_LIMIT_ENABLED: "true"
+  
+  # Database
+  DATABASE_POOL_SIZE: "10"
+  DATABASE_MAX_OVERFLOW: "20"
+  
+  # Cache
+  CACHE_TTL: "3600"
+  CACHE_ENABLED: "true"
+  
+  # Monitoring
+  SENTRY_TRACES_SAMPLE_RATE: "0.1"
+  SENTRY_PROFILES_SAMPLE_RATE: "0.1"
+  
+  # Public URLs (for frontend)
+  PUBLIC_API_URL: "http://localhost:8000"
+  PUBLIC_WEB_URL: "http://localhost:3000"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: realdiag-web-config
+  namespace: staging
+  labels:
+    app: realdiag-web
+data:
+  NODE_ENV: "development"
+  NEXT_TELEMETRY_DISABLED: "1"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: realdiag-secrets
+  namespace: staging
+  labels:
+    app: realdiag
+type: Opaque
+stringData:
+  # Database credentials
+  DATABASE_URL: "postgresql://realdiag_user:staging_db_pass_2024@postgresql:5432/realdiag"
+  
+  # Sentry DSN
+  SENTRY_DSN: "https://staging-sentry-key@sentry.io/staging"
+  
+  # API Keys
+  SECRET_KEY: "staging-secret-key-eteQx-eX8S5PZ8C-duUuvJ-2mWFRCCVRjNphbqiEbYw"
+  API_KEY: "staging-api-key-2024-realdiag"
+  
+  # JWT Secret
+  JWT_SECRET: "staging-jwt-secret-kL8mN9pQ2rS3tU4vW5xY6zA7bC8dE9fG0"
+  
+  # Redis Password
+  REDIS_PASSWORD: "staging-redis-pass-2024"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql-secrets
+  namespace: staging
+  labels:
+    app: postgresql
+type: Opaque
+stringData:
+  POSTGRES_USER: "realdiag_user"
+  POSTGRES_PASSWORD: "staging_db_pass_2024"
+  POSTGRES_DB: "realdiag"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secrets
+  namespace: staging
+  labels:
+    app: redis
+type: Opaque
+stringData:
+  REDIS_PASSWORD: "staging-redis-pass-2024"

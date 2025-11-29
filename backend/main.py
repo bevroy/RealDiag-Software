@@ -16,6 +16,7 @@ from backend.services.integration_router import router as integration_router
 from backend.services.user_router import router as user_router
 from backend.services.education_router import router as education_router
 from backend.services.smart_router import router as smart_router
+from backend.services.subscription_router import router as subscription_router
 
 # Import security features with fallback
 try:
@@ -121,6 +122,7 @@ app.include_router(integration_router)
 app.include_router(user_router)
 app.include_router(education_router)
 app.include_router(smart_router)
+app.include_router(subscription_router)
 
 # Include monitoring router if available
 try:

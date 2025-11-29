@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealDiag Pricing Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .pricing-calculator {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      padding: 2rem;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .pricing-calculator h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-size: 1.8rem;
+    }
+    .pricing-calculator > p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    .calc-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .calc-form label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .calc-form input,
+    .calc-form select {
+      margin-top: 0.4rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 6px;
+      border: 2px solid #e0e0e0;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .calc-form input:focus,
+    .calc-form select:focus {
+      outline: none;
+      border-color: #4f46e5;
+    }
+    .calc-form button {
+      margin-top: 1rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      background: #4f46e5;
+      color: white;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calc-form button:hover {
+      background: #4338ca;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+    .calc-results {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #f7f7fb;
+      border-radius: 8px;
+      border-left: 4px solid #4f46e5;
+    }
+    .calc-results p {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+    .calc-results p:last-child {
+      margin-bottom: 0;
+    }
+    .calc-results strong {
+      color: #222;
+    }
+    .calc-results span {
+      color: #4f46e5;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+    .plan-details {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .plan-details ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .plan-details li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .plan-details li:last-child {
+      border-bottom: none;
+    }
+    .plan-details li:before {
+      content: "✓ ";
+      color: #10b981;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+    .savings-badge {
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.2rem 0.6rem;
+      background: #10b981;
+      color: white;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .pricing-table {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    .pricing-table h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-size: 1.5rem;
+    }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .plan-card {
+      padding: 1.5rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    .plan-card:hover {
+      border-color: #4f46e5;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+    }
+    .plan-card h4 {
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    .plan-card .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin: 0.5rem 0;
+    }
+    .plan-card .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #666;
+    }
+    .plan-card ul {
+      list-style: none;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .plan-card li {
+      padding: 0.3rem 0;
+      color: #666;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .back-link a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .back-link a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>💰 RealDiag Pricing Calculator</h1>
+      <p>Estimate your monthly and annual subscription costs</p>
+    </div>
+
+    <section class="pricing-calculator">
+      <h2>Calculate Your Cost</h2>
+      <p>Get an instant estimate based on your needs</p>
+
+      <div class="calc-form">
+        <label>
+          Customer Type:
+          <select id="customerType">
+            <option value="individual">Individual Clinician</option>
+            <option value="org">Healthcare Organization</option>
+            <option value="academic">Academic Institution</option>
+            <option value="nonprofit">Non-Profit Organization</option>
+          </select>
+        </label>
+
+        <label id="individualPlanLabel">
+          Individual Plan:
+          <select id="individualPlan">
+            <option value="starter">Starter - $29/mo</option>
+            <option value="professional" selected>Professional - $49/mo</option>
+            <option value="professional_plus">Professional Plus - $69/mo</option>
+          </select>
+        </label>
+
+        <label id="numCliniciansLabel">
+          Number of Clinicians:
+          <input id="numClinicians" type="number" min="1" value="10">
+        </label>
+
+        <label id="academicRoleLabel" style="display:none;">
+          Academic Role:
+          <select id="academicRole">
+            <option value="faculty">Faculty - $25/mo</option>
+            <option value="resident">Resident/Fellow - $12/mo</option>
+            <option value="student">Student - Free</option>
+          </select>
+        </label>
+
+        <label id="nonprofitTierLabel" style="display:none;">
+          Non-Profit Tier:
+          <select id="nonprofitTier">
+            <option value="standard">Standard - $18/mo per clinician</option>
+            <option value="expanded">Safety-Net/Expanded - $10/mo per clinician</option>
+          </select>
+        </label>
+
+        <button type="button" onclick="calculatePricing()">Calculate Pricing</button>
+      </div>
+
+      <div class="calc-results" id="results" style="display: none;">
+        <p><strong>Plan Selected:</strong> <span id="planName" style="font-size: 1rem; font-weight: 600;"></span></p>
+        <p><strong>Estimated Monthly Cost:</strong> <span id="monthlyCost">$0</span></p>
+        <p><strong>Estimated Annual Cost:</strong> <span id="annualCost">$0</span> <span id="savingsBadge"></span></p>
+        <div class="plan-details" id="planDetails"></div>
+      </div>
+    </section>
+
+    <div class="pricing-table">
+      <h3>📋 Quick Reference: All Plans</h3>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <h4>Free</h4>
+          <div class="price">$0</div>
+          <ul>
+            <li>✓ 10 searches per week</li>
+            <li>✓ 1 diagnostic module</li>
+            <li>✓ Community support</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h4>Starter</h4>
+          <div class="price">$29<span>/mo</span></div>
+          <ul>
+            <li>✓ Unlimited searches</li>
+            <li>✓ 1 module</li>
+            <li>✓ JSON export</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h4>Professional</h4>
+          <div class="price">$49<span>/mo</span></div>
+          <ul>
+            <li>✓ All modules</li>
+            <li>✓ FHIR export</li>
+            <li>✓ Priority support</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h4>Professional+</h4>
+          <div class="price">$69<span>/mo</span></div>
+          <ul>
+            <li>✓ API access</li>
+            <li>✓ Analytics</li>
+            <li>✓ Phone support</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h4>Organization</h4>
+          <div class="price">$24-40<span>/seat/mo</span></div>
+          <ul>
+            <li>✓ Volume discounts</li>
+            <li>✓ Admin dashboard</li>
+            <li>✓ EHR integration</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h4>Enterprise</h4>
+          <div class="price">Custom</div>
+          <ul>
+            <li>✓ White-label</li>
+            <li>✓ Custom SLA</li>
+            <li>✓ Dedicated support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-link">
+      <a href="/">← Back to Home</a>
+      <a href="/docs" style="margin-left: 1rem;">API Documentation →</a>
+    </div>
+  </div>
+
+  <script>
+    function getOrgPerClinicianPrice(n) {
+      if (n <= 10) return 40;
+      if (n <= 50) return 32;
+      if (n <= 100) return 28;
+      if (n <= 300) return 24;
+      return 20; // custom enterprise estimate
+    }
+
+    function getIndividualPlanPrice(plan) {
+      const prices = {
+        'starter': 29,
+        'professional': 49,
+        'professional_plus': 69
+      };
+      return prices[plan] || 49;
+    }
+
+    function getIndividualPlanName(plan) {
+      const names = {
+        'starter': 'Individual Starter',
+        'professional': 'Individual Professional',
+        'professional_plus': 'Individual Professional Plus'
+      };
+      return names[plan] || 'Individual Professional';
+    }
+
+    function getIndividualPlanFeatures(plan) {
+      const features = {
+        'starter': [
+          'Unlimited diagnostic searches',
+          '1 diagnostic module',
+          'JSON export',
+          'Email support'
+        ],
+        'professional': [
+          'Unlimited diagnostic searches',
+          'All diagnostic modules',
+          'FHIR export',
+          'Priority email support',
+          'Search history & favorites'
+        ],
+        'professional_plus': [
+          'All Professional features',
+          'Advanced analytics',
+          'API access (1,000 calls/day)',
+          'Priority phone support',
+          'Custom lists & workflows'
+        ]
+      };
+      return features[plan] || features['professional'];
+    }
+
+    function calculatePricing() {
+      const type = document.getElementById('customerType').value;
+      const n = Math.max(1, parseInt(document.getElementById('numClinicians').value || "1", 10));
+      const academicRole = document.getElementById('academicRole').value;
+      const nonprofitTier = document.getElementById('nonprofitTier').value;
+      const individualPlan = document.getElementById('individualPlan').value;
+
+      let monthly = 0;
+      let annual = 0;
+      let planName = '';
+      let features = [];
+      let savings = 0;
+
+      if (type === 'individual') {
+        const per = getIndividualPlanPrice(individualPlan);
+        planName = getIndividualPlanName(individualPlan);
+        monthly = per;
+        // Annual: 2 months free (10 months price for 12 months service)
+        annual = per * 10;
+        savings = per * 2;
+        features = getIndividualPlanFeatures(individualPlan);
+      } else if (type === 'org') {
+        const per = getOrgPerClinicianPrice(n);
+        planName = 'Organization';
+        monthly = per * n;
+        annual = monthly * 12; // Organizations don't get the 2-month discount in the current model
+        features = [
+          'All Professional Plus features',
+          'Admin dashboard',
+          'User management',
+          'EHR integration (HL7/FHIR)',
+          'Bulk export',
+          'SSO (Single Sign-On)',
+          'Dedicated account manager',
+          '24/7 support',
+          `Volume pricing: $${per}/seat/month for ${n} seats`
+        ];
+      } else if (type === 'academic') {
+        let per = 25;
+        let roleName = 'Faculty';
+        if (academicRole === 'resident') {
+          per = 12;
+          roleName = 'Resident/Fellow';
+        } else if (academicRole === 'student') {
+          per = 0;
+          roleName = 'Student';
+        }
+        planName = `Academic - ${roleName}`;
+        monthly = per * n;
+        annual = monthly * 12;
+        features = [
+          'All Professional features',
+          'Teaching mode',
+          'Simulated clinical cases',
+          'Student analytics (Faculty)',
+          'Educational resources',
+          'Board prep materials (Residents)'
+        ];
+        if (academicRole === 'student') {
+          features = [
+            'Basic diagnostic access',
+            'Educational modules',
+            '50 searches per month',
+            'Learning resources',
+            'Study materials'
+          ];
+        }
+      } else if (type === 'nonprofit') {
+        const per = nonprofitTier === 'expanded' ? 10 : 18;
+        const tierName = nonprofitTier === 'expanded' ? 'Expanded (Safety-Net)' : 'Standard';
+        planName = `Non-Profit ${tierName}`;
+        monthly = per * n;
+        annual = monthly * 12;
+        features = [
+          'All Professional features',
+          'Non-profit discount (40-65% off)',
+          'Mission-focused support',
+          'Resource optimization',
+          'Grant-friendly pricing',
+          'Community health focus'
+        ];
+      }
+
+      // Display results
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('planName').textContent = planName;
+      document.getElementById('monthlyCost').textContent = `$${monthly.toLocaleString()}`;
+      document.getElementById('annualCost').textContent = `$${annual.toLocaleString()}`;
+      
+      // Show savings badge if applicable
+      const savingsBadge = document.getElementById('savingsBadge');
+      if (savings > 0) {
+        savingsBadge.innerHTML = `<span class="savings-badge">Save $${savings.toLocaleString()}/year</span>`;
+      } else {
+        savingsBadge.innerHTML = '';
+      }
+
+      // Display plan features
+      const detailsDiv = document.getElementById('planDetails');
+      detailsDiv.innerHTML = '<strong style="display: block; margin-bottom: 0.5rem;">Plan Features:</strong><ul>' + 
+        features.map(f => `<li>${f}</li>`).join('') + 
+        '</ul>';
+
+      // Scroll to results
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Event listeners for dynamic form updates
+    document.getElementById('customerType').addEventListener('change', function() {
+      const type = this.value;
+      
+      // Show/hide relevant fields
+      document.getElementById('individualPlanLabel').style.display = type === 'individual' ? 'flex' : 'none';
+      document.getElementById('numCliniciansLabel').style.display = type === 'individual' ? 'none' : 'flex';
+      document.getElementById('academicRoleLabel').style.display = type === 'academic' ? 'flex' : 'none';
+      document.getElementById('nonprofitTierLabel').style.display = type === 'nonprofit' ? 'flex' : 'none';
+
+      // Update label text
+      const label = document.getElementById('numCliniciansLabel').querySelector('label') || document.getElementById('numCliniciansLabel');
+      if (type === 'org') {
+        label.childNodes[0].textContent = 'Number of Seats: ';
+      } else if (type === 'academic') {
+        label.childNodes[0].textContent = 'Number of Users: ';
+      } else if (type === 'nonprofit') {
+        label.childNodes[0].textContent = 'Number of Clinicians: ';
+      }
+    });
+
+    // Calculate on page load with default values
+    window.addEventListener('load', function() {
+      calculatePricing();
+    });
+  </script>
+</body>
+</html>
