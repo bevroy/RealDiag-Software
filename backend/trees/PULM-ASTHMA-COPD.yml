@@ -1,0 +1,268 @@
+tree_id: PULM-ASTHMA-COPD
+name: Asthma and COPD Exacerbation
+family: PULMONOLOGY
+specialty: Pulmonology/Emergency Medicine/Primary Care
+chief_complaint: Shortness of Breath/Wheezing
+description: Diagnostic decision tree for asthma and COPD exacerbation management
+version: "1.0"
+author: RealDiag Team
+entry_point: diagnosis
+
+nodes:
+  - id: diagnosis
+    type: question
+    text: "Primary diagnosis?"
+    options:
+      - label: "Known asthma"
+        next: asthma_exacerbation
+      - label: "Known COPD"
+        next: copd_exacerbation
+      - label: "Unknown, first presentation"
+        next: differentiate
+
+  - id: asthma_exacerbation
+    type: question
+    text: "Severity of exacerbation?"
+    options:
+      - label: "Severe (can't speak, RR >30, HR >120, O2 <90%)"
+        next: severe_asthma
+      - label: "Life-threatening (silent chest, cyanosis, exhaustion, altered mental status)"
+        next: critical_asthma
+      - label: "Moderate (partial sentences, some distress)"
+        next: moderate_asthma
+      - label: "Mild (speaks full sentences, minimal distress)"
+        next: mild_asthma
+
+  - id: critical_asthma
+    type: diagnosis
+    diagnosis: Life-Threatening Asthma Exacerbation
+    icd10: J45.902
+    urgency: critical
+    workup:
+      - Continuous monitoring
+      - ABG (pCO2 >40 is concerning)
+      - CXR
+      - ECG
+      - Lactate
+    treatment:
+      - High-flow oxygen (target SpO2 93-95%)
+      - Continuous albuterol nebulizer
+      - Ipratropium 0.5mg nebulized q20min x 3
+      - IV methylprednisolone 125mg OR oral prednisone 60mg
+      - IV magnesium sulfate 2g over 20 minutes
+      - Consider epinephrine 0.3mg IM
+      - Prepare for intubation (avoid if possible)
+      - ICU admission
+      - Pulmonology consult
+      - Consider heliox or BiPAP before intubation
+
+  - id: severe_asthma
+    type: diagnosis
+    diagnosis: Severe Asthma Exacerbation
+    icd10: J45.902
+    urgency: critical
+    workup:
+      - Peak flow (usually <40% predicted)
+      - ABG if severe distress
+      - CXR
+      - CBC if infection suspected
+    treatment:
+      - Supplemental oxygen (target SpO2 93-95%)
+      - Albuterol 2.5-5mg nebulized q20min x 3 or continuous
+      - Ipratropium 0.5mg nebulized q20min x 3
+      - Systemic corticosteroids (prednisone 60mg PO or methylprednisolone 125mg IV)
+      - Consider IV magnesium 2g over 20 min
+      - Hospital admission likely
+      - Recheck peak flow after 1 hour
+      - Discharge if improves to >70% predicted and stable
+      - Pulmonology follow-up
+
+  - id: moderate_asthma
+    type: diagnosis
+    diagnosis: Moderate Asthma Exacerbation
+    icd10: J45.901
+    urgency: high
+    workup:
+      - Peak flow (40-69% predicted)
+      - Pulse oximetry
+      - Consider CXR if fever or first episode
+    treatment:
+      - Albuterol 2.5-5mg nebulized q20min x 3 doses
+      - Ipratropium 0.5mg nebulized x 1-3 doses
+      - Oral prednisone 40-60mg OR
+      - IV methylprednisolone 40-80mg if unable to take PO
+      - Oxygen if SpO2 <90%
+      - Reassess after 1 hour
+      - Admit if no improvement
+      - Discharge home if peak flow >70% and stable x 1 hour
+      - 5-day prednisone taper at discharge
+      - Albuterol MDI with spacer
+      - PCP follow-up in 3-5 days
+
+  - id: mild_asthma
+    type: diagnosis
+    diagnosis: Mild Asthma Exacerbation
+    icd10: J45.20
+    urgency: medium
+    workup:
+      - Peak flow (>70% predicted)
+      - Pulse oximetry
+    treatment:
+      - Albuterol 2.5-5mg nebulized OR MDI 4-8 puffs
+      - May repeat x 3 over 1 hour
+      - Oral prednisone 40-60mg
+      - Observe for 1 hour
+      - Discharge if improved and peak flow >80%
+      - Prednisone 40mg daily x 5 days
+      - Albuterol MDI 2 puffs q4-6h PRN
+      - Continue controller if on one
+      - Start ICS if not already on controller
+      - PCP follow-up in 1 week
+
+  - id: copd_exacerbation
+    type: question
+    text: "Severity assessment?"
+    options:
+      - label: "Severe (respiratory failure, altered mental status)"
+        next: severe_copd
+      - label: "Moderate (increased dyspnea and sputum)"
+        next: moderate_copd
+      - label: "Mild (increased symptoms but stable)"
+        next: mild_copd
+
+  - id: severe_copd
+    type: diagnosis
+    diagnosis: Severe COPD Exacerbation
+    icd10: J44.1
+    urgency: critical
+    workup:
+      - ABG (check for hypercapnia, acidosis)
+      - CXR
+      - ECG
+      - BNP (rule out heart failure)
+      - CBC, CMP
+      - Sputum culture if purulent
+      - Procalcitonin (guide antibiotic use)
+    treatment:
+      - Controlled oxygen (target SpO2 88-92%, avoid over-oxygenation)
+      - Albuterol and ipratropium nebulizers q2-4h
+      - Systemic corticosteroids (prednisone 40mg daily x 5 days)
+      - Antibiotics if increased sputum purulence (azithromycin, doxycycline, or amoxicillin-clavulanate)
+      - BiPAP if pH <7.35 or pCO2 >45
+      - Consider intubation if BiPAP failure
+      - ICU admission if respiratory failure
+      - Hospital admission
+      - Pulmonology consult
+
+  - id: moderate_copd
+    type: diagnosis
+    diagnosis: Moderate COPD Exacerbation
+    icd10: J44.1
+    urgency: high
+    workup:
+      - CXR
+      - ABG or VBG if concern for hypercapnia
+      - CBC
+      - Sputum culture if very purulent
+    treatment:
+      - Supplemental oxygen (target SpO2 88-92%)
+      - Albuterol/ipratropium (DuoNeb) q4-6h
+      - Prednisone 40mg daily x 5 days
+      - Antibiotics if 2 of 3 criteria (increased dyspnea, sputum volume, sputum purulence)
+      - Azithromycin 500mg day 1, then 250mg x 4 days OR
+      - Doxycycline 100mg BID x 5 days OR
+      - Amoxicillin-clavulanate 875mg BID x 5 days
+      - Consider admission if severe baseline, comorbidities, poor social support
+      - Discharge if improves, with close follow-up
+
+  - id: mild_copd
+    type: diagnosis
+    diagnosis: Mild COPD Exacerbation
+    icd10: J44.1
+    urgency: medium
+    workup:
+      - Usually clinical diagnosis
+      - CXR if atypical features
+    treatment:
+      - Increase frequency of short-acting bronchodilators
+      - Albuterol/ipratropium MDI or nebulizer q4-6h
+      - Consider prednisone 40mg x 5 days
+      - Antibiotics if purulent sputum
+      - Home oxygen if chronically hypoxemic
+      - PCP or pulmonology follow-up in 1-2 weeks
+      - Smoking cessation counseling
+      - Ensure on appropriate maintenance therapy
+
+  - id: differentiate
+    type: question
+    text: "Clinical features?"
+    options:
+      - label: "Young, atopic, variable symptoms, good response to bronchodilators"
+        next: likely_asthma
+      - label: "Older, smoking history, chronic productive cough, poor reversibility"
+        next: likely_copd
+      - label: "Mixed features or unclear"
+        next: overlap_syndrome
+
+  - id: likely_asthma
+    type: diagnosis
+    diagnosis: Suspected Asthma - First Episode
+    icd10: J45.909
+    urgency: medium
+    workup:
+      - Peak flow before and after bronchodilator
+      - CXR (rule out alternative diagnosis)
+      - Consider spirometry when stable (FEV1/FVC <0.7 with reversibility)
+      - IgE, eosinophils if allergic features
+    treatment:
+      - Treat as moderate asthma exacerbation
+      - Albuterol nebulizer
+      - Oral corticosteroids
+      - Start controller therapy (ICS)
+      - Fluticasone 88-220 mcg BID OR budesonide 180-360 mcg BID
+      - Albuterol MDI for rescue
+      - Allergy testing if indicated
+      - Pulmonology referral for confirmation
+      - Asthma action plan
+
+  - id: likely_copd
+    type: diagnosis
+    diagnosis: Suspected COPD - First Exacerbation
+    icd10: J44.9
+    urgency: medium
+    workup:
+      - CXR (hyperinflation, flattened diaphragms)
+      - Spirometry when stable (FEV1/FVC <0.7 post-bronchodilator)
+      - ABG if severe
+      - Alpha-1 antitrypsin if <45 years or minimal smoking
+    treatment:
+      - Treat as moderate COPD exacerbation
+      - Albuterol/ipratropium
+      - Prednisone 40mg x 5 days
+      - Antibiotics if purulent
+      - Smoking cessation (most important!)
+      - Start maintenance therapy: LABA/LAMA combination
+      - Tiotropium 18 mcg daily + formoterol
+      - Pulmonology referral
+      - Pulmonary rehabilitation
+      - Vaccinations (influenza, pneumococcal)
+
+  - id: overlap_syndrome
+    type: diagnosis
+    diagnosis: Asthma-COPD Overlap Syndrome (ACOS)
+    icd10: J44.9
+    urgency: medium
+    workup:
+      - Spirometry (when stable)
+      - CXR
+      - Eosinophil count
+      - IgE
+      - Consider CT chest
+    treatment:
+      - Treat exacerbation based on severity
+      - ICS/LABA combination (essential)
+      - Add LAMA if needed
+      - Systemic steroids for exacerbation
+      - Pulmonology referral for optimization
+      - Smoking cessation
+      - Consider biologic therapy if eosinophilic

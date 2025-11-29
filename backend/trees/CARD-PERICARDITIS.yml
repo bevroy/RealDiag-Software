@@ -1,0 +1,121 @@
+tree_id: CARD-PERICARDITIS
+name: Pericarditis and Pericardial Effusion
+family: CARDIOLOGY
+specialty: Cardiology, Emergency Medicine
+chief_complaint: Chest Pain, Pericardial Effusion, Cardiac Tamponade
+description: Comprehensive evaluation and management of pericarditis and pericardial disease
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: pericardial_presentation
+
+nodes:
+  - id: pericardial_presentation
+    type: question
+    text: "Primary presentation?"
+    options:
+      - label: "Cardiac tamponade (hypotension, elevated JVP, muffled heart sounds, pulsus paradoxus)"
+        next: cardiac_tamponade
+      - label: "Pericardial effusion without tamponade"
+        next: pericardial_effusion
+      - label: "Acute pericarditis (chest pain, pericardial rub)"
+        next: acute_pericarditis
+
+  - id: cardiac_tamponade
+    type: diagnosis
+    name: "Cardiac Tamponade"
+    icd10: "I31.4"
+    urgency: critical
+    workup:
+      - Clinical diagnosis - Beck's triad (hypotension, elevated JVP, muffled heart sounds)
+      - Pulsus paradoxus - Systolic BP drop >10 mmHg with inspiration (exaggerated normal physiology)
+      - Tachycardia, tachypnea, dyspnea
+      - ECG - Electrical alternans (beat-to-beat variation in QRS amplitude due to heart swinging in fluid), low voltage
+      - Chest X-ray - Enlarged cardiac silhouette ("water bottle" heart if large effusion)
+      - Echocardiogram (STAT) - Large pericardial effusion, right atrial/ventricular collapse (diastolic), IVC plethora (dilated, <50% collapse with inspiration), respiratory variation in mitral/tricuspid inflow velocities
+    treatment:
+      - MEDICAL EMERGENCY - Requires immediate drainage
+      - Stabilization BEFORE drainage
+      - IV fluids (NS bolus 500-1000 mL) - Increase preload, improve cardiac output
+      - Avoid diuretics and vasodilators (worsen hypotension)
+      - Avoid positive pressure ventilation if possible (decreases venous return)
+      - Inotropes (dobutamine) or vasopressors (norepinephrine) if refractory hypotension
+      - Emergency pericardiocentesis (definitive treatment)
+      - Ultrasound-guided or fluoroscopy-guided preferred (reduces complications)
+      - Subxiphoid approach most common
+      - Remove fluid until hemodynamics improve (may not need to drain all)
+      - Send fluid for - Cell count with differential, Gram stain and culture, AFB stain and culture, cytology (malignancy), glucose, protein, LDH, adenosine deaminase (ADA >40 suggests TB)
+      - Leave pigtail catheter in place for continued drainage
+      - Pericardial window (surgical drainage) if recurrent, loculated, or traumatic
+      - Cardiothoracic surgery consultation
+      - Treat underlying cause once stabilized
+
+  - id: pericardial_effusion
+    type: diagnosis
+    name: "Pericardial Effusion without Tamponade"
+    icd10: "I31.3"
+    urgency: medium
+    workup:
+      - Echocardiogram - Quantify effusion size (small <10mm, moderate 10-20mm, large >20mm echo-free space in diastole), assess for tamponade physiology
+      - ECG - Low voltage if large effusion, electrical alternans (rare unless tamponade)
+      - Chest X-ray - Enlarged cardiac silhouette if >250 mL
+      - Workup for etiology
+      - Viral (most common) - Often clinical diagnosis, consider viral serologies if severe
+      - Idiopathic (presumed viral)
+      - Post-cardiac injury (Dressler syndrome after MI, post-cardiac surgery)
+      - Uremia (renal failure) - BUN >60
+      - Malignancy - Cytology, consider CT chest/abdomen to look for primary tumor (lung, breast, lymphoma, leukemia)
+      - TB - High suspicion if endemic area, HIV, subacute/chronic presentation; pericardial fluid ADA >40 U/L, AFB culture, biopsy
+      - Autoimmune - SLE (anti-dsDNA, complement), RA (RF, anti-CCP), scleroderma
+      - Hypothyroidism - TSH
+      - Trauma - History
+      - Labs - CBC, BMP (BUN, Cr), TSH, ANA, ESR/CRP, troponin (if pericarditis)
+    treatment:
+      - Small-moderate effusion without tamponade - Outpatient management with follow-up echo in 1-2 weeks
+      - Large effusion (>20mm) - Admit for observation, follow-up echo q12-24h to monitor for tamponade
+      - Treat underlying cause
+      - Uremic pericarditis - Dialysis
+      - Hypothyroid - Levothyroxine
+      - Malignant effusion - Pericardiocentesis + pericardial window, treat malignancy
+      - TB pericarditis - 4-drug anti-TB therapy (RIPE), consider corticosteroids (prednisone 1mg/kg/day tapered over 6-8 weeks to reduce constrictive pericarditis risk)
+      - Pericardiocentesis indicated if symptomatic, tamponade physiology, concern for bacterial/tuberculous/malignant (diagnostic and therapeutic)
+
+  - id: acute_pericarditis
+    type: diagnosis
+    name: "Acute Pericarditis"
+    icd10: "I30.9"
+    urgency: medium
+    workup:
+      - Clinical criteria (need 2 of 4) - Chest pain (pleuritic, sharp, positional - better leaning forward), pericardial friction rub, ECG changes, pericardial effusion
+      - Chest pain characteristics - Sharp, pleuritic, worse lying flat, improved sitting up and leaning forward, radiates to trapezius ridge (pathognomonic)
+      - Physical exam - Pericardial friction rub (triphasic - atrial systole, ventricular systole, ventricular diastole), heard best at left sternal border with patient leaning forward
+      - ECG (classic evolution over days-weeks)
+      - Stage 1 (days 1-2) - Diffuse ST elevation (concave up) in most leads except aVR and V1, PR depression (very specific), upright T waves
+      - Stage 2 (days 3-7) - ST segments normalize, T waves flatten
+      - Stage 3 (weeks) - Diffuse T wave inversions
+      - Stage 4 (weeks-months) - ECG normalizes or persistent T inversions
+      - Distinguished from STEMI - ST elevation in pericarditis is diffuse and concave (vs regional and convex in MI), PR depression, no reciprocal changes, no Q waves
+      - Labs - Troponin (may be mildly elevated if myopericarditis), ESR/CRP (elevated, useful to monitor treatment response), CBC, BMP
+      - Echocardiogram - Assess for pericardial effusion and tamponade, LV function
+      - Chest X-ray - Usually normal unless large effusion
+      - Etiology workup (if severe, recurrent, or high risk)
+      - Viral serologies (Coxsackie, echovirus, adenovirus, influenza) - low yield
+      - TB testing if risk factors
+      - ANA, RF if autoimmune suspected
+      - Most cases are idiopathic or viral (self-limited)
+    treatment:
+      - Outpatient management for most (uncomplicated acute pericarditis)
+      - High-risk features requiring admission - Fever >38°C, subacute onset, large effusion (>20mm), tamponade, immunosuppression, trauma, oral anticoagulation, myopericarditis (elevated troponin + LV dysfunction), failure of NSAIDs after 1 week
+      - First-line therapy - NSAIDs + colchicine (reduces recurrence from 30% to 10-15%)
+      - Ibuprofen 600-800mg PO TID x 1-2 weeks, taper over 2-4 weeks OR
+      - Indomethacin 25-50mg PO TID x 1-2 weeks, taper OR
+      - Aspirin 750-1000mg PO TID (preferred if recent MI or CAD)
+      - PLUS Colchicine 0.6mg PO BID (if >70kg) or 0.6mg daily (if <70kg or intolerant) x 3 months
+      - GI prophylaxis - PPI (omeprazole) if NSAID side effects
+      - Restrict strenuous physical activity until symptoms resolve and CRP normalizes (risk ventricular arrhythmias)
+      - Athletes - Restrict competitive sports for 3 months
+      - Corticosteroids - AVOID unless refractory or contraindication to NSAIDs (increases recurrence risk)
+      - If needed - Prednisone 0.25-0.5mg/kg/day, taper slowly over 3 months
+      - Follow-up - Repeat CRP in 1 week (should be decreasing), echo if effusion present
+      - Recurrent pericarditis (15-30%) - Increase colchicine to 6 months, low-dose NSAIDs, consider IL-1 inhibitors (anakinra, rilonacept) if refractory
+      - Complications - Cardiac tamponade (rare in viral/idiopathic), constrictive pericarditis (chronic complication), recurrent pericarditis

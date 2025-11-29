@@ -1,0 +1,157 @@
+tree_id: TRAUMA-ABDOMINAL-TRAUMA
+name: Abdominal Trauma Evaluation
+family: TRAUMA
+specialty: Trauma Surgery, Emergency Medicine, General Surgery
+chief_complaint: Abdominal Pain, Distension After Trauma, Penetrating Injury
+description: Comprehensive evaluation and management of blunt and penetrating abdominal trauma
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: abdominal_trauma_presentation
+
+nodes:
+  - id: abdominal_trauma_presentation
+    type: question
+    text: "Mechanism and stability?"
+    options:
+      - label: "Blunt abdominal trauma - hemodynamically stable"
+        next: blunt_stable
+      - label: "Blunt abdominal trauma - hemodynamically unstable"
+        next: blunt_unstable
+      - label: "Penetrating abdominal trauma"
+        next: penetrating_trauma
+
+  - id: blunt_stable
+    type: diagnosis
+    name: "Blunt Abdominal Trauma - Stable"
+    icd10: "S39.91XA"
+    urgency: high
+    workup:
+      - Mechanisms - MVA (most common), falls, assault, crush injury
+      - Clinical evaluation - ATLS primary survey ABCDE first
+      - Physical exam - Abdominal tenderness, distension, ecchymosis (seat belt sign - associated with bowel injury, lumbar spine fracture)
+      - Unreliable in distracting injuries, intoxication, altered mental status
+      - Indications for abdominal imaging in blunt trauma
+      - Mechanism (high-energy, significant force)
+      - Abdominal pain or tenderness
+      - Hemodynamic instability (after resuscitation)
+      - Altered mental status (cannot assess abdomen)
+      - Lower rib fractures (spleen, liver injury)
+      - Imaging - CT abdomen/pelvis with IV contrast - GOLD STANDARD for stable blunt trauma
+      - Sensitivity >95% for solid organ injury (liver, spleen, kidneys)
+      - Identifies free fluid (blood), active extravasation (blush), solid organ lacerations (grade I-V), hollow viscus injury (free air, bowel wall thickening, mesenteric stranding)
+      - Triple-contrast (IV, oral, rectal) not routinely needed
+      - FAST exam (Focused Assessment with Sonography for Trauma) - Bedside ultrasound
+      - Looks for free fluid (blood) in 4 areas - Perihepatic (Morrison pouch), perisplenic, pelvis, pericardial
+      - Fast, repeatable, no radiation
+      - Positive FAST in unstable patient → OR (no need for CT)
+      - Negative FAST does NOT exclude injury (sensitivity 70-80%), need CT if stable
+      - Solid organ injury grading (AAST)
+      - Spleen, liver, kidney - Grade I (subcapsular hematoma, laceration <1 cm) to Grade V (shattered organ, vascular injury)
+      - Most are low grade (I-III) and managed non-operatively
+    treatment:
+      - Non-operative management (NOM) - Standard for hemodynamically stable blunt solid organ injuries (spleen, liver, kidneys) Grade I-III (and many Grade IV)
+      - Criteria - Hemodynamically stable (or stable after resuscitation <2 units PRBC), no peritonitis, no hollow viscus injury
+      - ICU monitoring - Serial abdominal exams, serial Hgb/Hct q6h (initial 24 hours)
+      - Transfusion as needed (maintain Hgb >7-8)
+      - Bed rest 24-48 hours, gradual mobilization
+      - Repeat CT if clinical deterioration (increased pain, hemodynamic instability, dropping Hgb)
+      - Angioembolization - If contrast blush on CT (active bleeding) but stable
+      - Interventional radiology - Coil embolization of bleeding vessel (spleen, liver, kidneys)
+      - Success rate 80-90%, avoids laparotomy
+      - Complications - Abscess, biloma (liver), splenic infarction, bleeding recurrence
+      - Success rate NOM - Spleen 90-95%, liver 85-90%, kidneys 95%
+      - Failed NOM (5-10%) - Hemodynamic instability, ongoing transfusion requirement (>4 units), peritonitis → laparotomy
+      - Return to activity - Grade I-II (4-6 weeks), Grade III (2-3 months), Grade IV-V (3-6 months), contact sports clearance by surgeon
+      - Hollow viscus injury - Bowel, mesentery (less common blunt, 5% abdominal trauma)
+      - Mechanisms - Seat belt, direct blow, crush, deceleration (shear at fixed points - ligament of Treitz, ileocecal valve)
+      - CT findings - Free air (perforation), bowel wall thickening, mesenteric stranding, free fluid without solid organ injury
+      - Requires laparotomy - Repair perforation, resect non-viable bowel
+      - Diagnostic laparoscopy if equivocal (exploratory laparoscopy vs laparotomy)
+
+  - id: blunt_unstable
+    type: diagnosis
+    name: "Blunt Abdominal Trauma - Unstable"
+    icd10: "S39.91XA"
+    urgency: critical
+    workup:
+      - Hemodynamic instability - SBP <90 despite 2L crystalloid (or ongoing fluid/blood requirement), tachycardia, altered mental status
+      - Source of bleeding - Abdomen, pelvis, chest, external, long bones (femur)
+      - FAST exam - Rapid bedside assessment
+      - Positive FAST (free fluid) + unstable → presumed hemoperitoneum → OR (do NOT wait for CT)
+      - Negative FAST + unstable → look elsewhere (chest, pelvis, extremities)
+      - Pelvic fracture - Major cause hemorrhage in blunt trauma
+      - Pelvic X-ray (AP) in trauma bay
+      - Unstable fracture (open book, vertical shear) → pelvic binder, resuscitation
+      - Rectal exam - Blood (rectal injury), high-riding prostate (urethral injury), bony fragments
+    treatment:
+      - Resuscitation
+      - Massive transfusion protocol - 1:1:1 ratio PRBC:FFP:platelets (avoid dilutional coagulopathy)
+      - Permissive hypotension - SBP 80-90 (avoid aggressive fluids, worsen bleeding), EXCEPT TBI (maintain MAP >80)
+      - Damage control resuscitation - Prevent lethal triad (hypothermia, acidosis, coagulopathy)
+      - Tranexamic acid - 1g IV bolus within 3 hours injury (CRASH-2 trial reduces mortality)
+      - Emergency laparotomy - Positive FAST + unstable, or peritonitis + unstable
+      - Damage control surgery - Abbreviated laparotomy, control hemorrhage (packing, ligation), control contamination (staple bowel), temporary abdominal closure (Bogota bag, VAC)
+      - Return to OR 24-48 hours for definitive repair (after resuscitation, corrected coagulopathy)
+      - Hemostasis techniques - Manual compression, packing (liver, spleen), suture repair, resection (spleen, liver segment), vascular control (Pringle maneuver - clamp hepatic pedicle 15-20 min intervals)
+      - Splenectomy - If uncontrollable bleeding, Grade IV-V, hemodynamic instability
+      - Post-splenectomy vaccination - Pneumococcal (PCV20 or PPSV23), H. influenzae, meningococcal (given 14 days post-op or at discharge)
+      - Overwhelming post-splenectomy infection (OPSI) risk 0.1-0.4% per year (lifelong)
+      - Pelvic hemorrhage + unstable fracture
+      - Pelvic binder (or sheet wrapped around pelvis, tighten, clamp) - Temporarily reduces pelvic volume, tamponades venous bleeding
+      - Angioembolization - Internal iliac artery branches (IR), controls arterial bleeding 90%
+      - Preperitoneal packing - Surgical packing of pelvis (if angio not available or failed)
+      - External fixation - Stabilize pelvis (orthopedics)
+
+  - id: penetrating_trauma
+    type: diagnosis
+    name: "Penetrating Abdominal Trauma"
+    icd10: "S31.609A"
+    urgency: critical
+    workup:
+      - Mechanisms - Gunshot wound (GSW) vs stab wound (SW)
+      - Gunshot wounds - High energy, unpredictable trajectory, high likelihood intra-abdominal injury (>95% if peritoneal violation)
+      - Stab wounds - Lower energy, tangential trajectories, lower likelihood injury (30-40% if peritoneal violation)
+      - Hard signs of peritoneal violation/intra-abdominal injury - MANDATE immediate laparotomy
+      - Hemodynamic instability (hemorrhagic shock)
+      - Evisceration (bowel protruding)
+      - Peritonitis (guarding, rigidity, rebound)
+      - Blood per rectum or NG tube
+      - Free air on X-ray (pneumoperitoneum, hollow viscus perforation)
+      - No hard signs + stable - Selective non-operative management vs mandatory exploration (depends on mechanism, location)
+      - Physical exam - Entry/exit wounds, trajectory, number of wounds
+      - Do NOT probe wounds with fingers or instruments in ED (can cause bleeding, introduce infection)
+      - Anterior abdomen - Between costal margins and inguinal ligaments, anterior axillary lines
+      - Flank - Between anterior/posterior axillary lines, costal margin to iliac crest
+      - Back - Posterior to posterior axillary line
+    treatment:
+      - Gunshot wounds to abdomen
+      - Hard signs → immediate laparotomy (90-95% require surgery)
+      - No hard signs + stable → CT abdomen/pelvis with IV contrast
+      - If peritoneal violation (free fluid, organ injury, trajectory through abdomen) → laparotomy (high threshold to operate, most GSW to abdomen require surgery)
+      - Tangential GSW (no peritoneal violation on CT) → observe 24 hours, serial exams
+      - Stab wounds to anterior abdomen
+      - Hard signs → immediate laparotomy
+      - No hard signs + stable → selective approach
+      - Local wound exploration (LWE) - Extend wound under local anesthesia, visualize fascia
+      - Fascia intact (no peritoneal violation) → discharge (no further workup needed)
+      - Fascia violated or cannot determine → diagnostic peritoneal aspiration/lavage (DPL) OR diagnostic laparoscopy OR CT
+      - Diagnostic laparoscopy - Visualize peritoneum, identify injuries, may convert to laparotomy if injury found
+      - Sensitivity 90-95%, can miss diaphragm/bowel injuries
+      - Serial clinical exams - Admit, observe 24 hours, repeat exams q4-6h (detect peritonitis if develops)
+      - Failure rate (missed injury) 1-3%
+      - Flank/back stab wounds - Lower likelihood intra-abdominal injury (retroperitoneal, may not cause peritonitis initially)
+      - Triple-contrast CT (IV, oral, rectal) - High sensitivity for hollow viscus, retroperitoneal injury
+      - If negative CT + no peritonitis → observe 24 hours
+      - Laparotomy indications
+      - Mandatory - Hard signs, GSW with peritoneal violation, failed NOM (peritonitis develops)
+      - Exploratory laparotomy - Systematic inspection of entire abdomen
+      - Spleen, liver, stomach, small bowel (entire length), colon, kidneys, bladder, diaphragm, pancreas, major vessels
+      - Injuries - Repair perforations, resect non-viable bowel, splenectomy/hepatorrhaphy if needed, colostomy if colon injury with contamination/shock
+      - Damage control if unstable - Pack, control bleeding/contamination, temporary closure, return to OR
+      - Hollow viscus injuries - Small bowel (most common penetrating), colon, stomach
+      - Small bowel perforation - Primary repair (if <50% circumference, clean), resection + anastomosis (if large defect, multiple injuries, non-viable)
+      - Colon perforation - Primary repair (if low-grade injury, minimal contamination, no shock), diverting colostomy (if severe injury, shock, peritonitis, delayed presentation >12 hours)
+      - Rectal injuries - Diverting colostomy, presacral drainage
+      - Diaphragm injuries - Repair (prevent herniation of abdominal contents into chest)
+      - Post-operative complications - Abscess (15-20%), anastomotic leak, wound infection, prolonged ileus, fistula

@@ -1,0 +1,69 @@
+tree_id: TRAUMA-PELVIC-FRACTURE
+name: Pelvic Fracture Evaluation
+family: TRAUMA
+specialty: Trauma Surgery, Orthopedic Surgery
+chief_complaint: Pelvic Pain After Trauma, Hemodynamic Instability
+description: Evaluation and management of pelvic fractures
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: pelvic_fracture_evaluation
+
+nodes:
+  - id: pelvic_fracture_evaluation
+    type: diagnosis
+    name: "Pelvic Fracture"
+    icd10: "S32.9XXA"
+    urgency: critical
+    workup:
+      - High-energy pelvic fractures - Life-threatening, massive hemorrhage (mortality 10-30% if unstable)
+      - Mechanisms - MVA (most common), pedestrian struck, fall from height, crush injury
+      - Low-energy fractures - Elderly falls, isolated rami fractures, stable
+      - Classification - Young-Burgess or Tile/AO system
+      - Stable fractures - Single ramus, iliac wing, sacral ala, transverse sacral (below S2)
+      - Minimally displaced, intact pelvic ring
+      - Unstable fractures - Disruption of pelvic ring
+      - Lateral compression (LC) - Most common (60%), side impact, internal rotation
+      - Anteroposterior compression (APC) - Open book, pubic symphysis diastasis >2.5 cm, external rotation
+      - Vertical shear (VS) - Most unstable, vertical displacement of hemipelvis, fall from height
+      - Hemorrhage sources - 80% venous (presacral venous plexus), 20% arterial (iliac, pudendal, obturator branches)
+      - Retroperitoneal hematoma massive (can hold several liters blood)
+      - Associated injuries - Bladder/urethral (10-15%), rectal/vaginal, nerve (L5, S1), vascular
+      - Physical exam - Pelvic instability (rock pelvis gently ONCE, do NOT repeat), leg length discrepancy, open fracture (perineal laceration, blood at urethral meatus, high-riding prostate)
+      - Rectal/vaginal exam - Blood (rectal/vaginal tear = OPEN fracture, very high infection risk), high-riding prostate (urethral injury)
+      - Imaging - Pelvic X-ray (AP) in trauma bay, CT abdomen/pelvis with IV contrast (define fracture pattern, identify bleeding source - contrast extravasation)
+    treatment:
+      - ATLS protocol - ABCs, resuscitation
+      - Hemodynamically unstable + pelvic fracture → presume pelvic hemorrhage
+      - Pelvic binder - IMMEDIATE, or wrap sheet around pelvis at level of greater trochanters, tighten, clamp
+      - Reduces pelvic volume, tamponades venous bleeding (especially APC open book)
+      - Apply in field or trauma bay, keep in place until definitive stabilization
+      - Massive transfusion protocol - 1:1:1 ratio PRBC:FFP:platelets
+      - Permissive hypotension SBP 80-90 (unless TBI)
+      - Tranexamic acid 1g IV within 3 hours
+      - Angioembolization - If hemodynamically unstable despite resuscitation and pelvic binder, or contrast blush on CT
+      - Interventional radiology - Catheterize internal iliac arteries, embolize bleeding branches (coils, Gelfoam)
+      - Controls arterial bleeding 85-95%
+      - Requires hemodynamic stability to transport to IR suite
+      - Preperitoneal packing - Alternative if angio not available or patient too unstable to transport
+      - Surgical packing of pelvis through midline incision, pack retroperitoneum
+      - Damage control, return to OR in 24-48 hours for pack removal
+      - REBOA (Resuscitative Endovascular Balloon Occlusion of Aorta) - Temporize if in extremis, inflate balloon in aorta (zone III below renal arteries), bridge to definitive control
+      - Time-limited (max 30-60 min, ischemia below), complications (limb ischemia, aortic injury)
+      - External fixation - Stabilize pelvis if unstable fracture (APC, VS)
+      - Pins placed in iliac crests, connected by frame
+      - Temporary (damage control) or definitive
+      - Reduces ongoing bleeding, allows patient mobilization
+      - Laparotomy - If peritonitis, evisceration, or hemodynamically unstable with positive FAST and pelvic fracture
+      - Pelvic fracture + intraperitoneal bleeding may need both laparotomy AND pelvic control
+      - Sequence - If unstable: preperitoneal packing during laparotomy, external fixation, then angio if still bleeding
+      - Open pelvic fractures - Perineal/rectal/vaginal tears
+      - Fecal diversion colostomy, aggressive debridement, broad-spectrum antibiotics (gram-negative + anaerobic coverage)
+      - Mortality 25-50% (infection risk high)
+      - Genitourinary injuries
+      - Bladder rupture - Intraperitoneal (requires surgical repair), extraperitoneal (catheter drainage 10-14 days)
+      - Urethral injury - Retrograde urethrogram if blood at meatus or high-riding prostate, suprapubic catheter (do NOT place Foley blindly - risk complete transection)
+      - Definitive fixation - Once stable, ORIF (open reduction internal fixation) vs closed reduction percutaneous screw fixation
+      - Timing - Early fixation (2-7 days) vs late (after resuscitation)
+      - Complications - Hemorrhage, infection (especially open fractures), DVT/PE (immobility), nerve injury (foot drop L5/S1), chronic pain, leg length discrepancy, SI joint dysfunction, sexual dysfunction
+      - Prognosis - Stable fractures recover well, unstable fractures significant morbidity (chronic pain 40-60%, disability), mortality high if unstable + hemorrhage

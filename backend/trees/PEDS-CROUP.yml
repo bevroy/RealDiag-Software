@@ -1,0 +1,93 @@
+tree_id: PEDS-CROUP
+name: Pediatric Croup (Laryngotracheobronchitis)
+family: PEDIATRICS
+specialty: Pediatrics, Emergency Medicine
+chief_complaint: Barky Cough, Stridor, Respiratory Distress
+description: Comprehensive evaluation and management of pediatric croup
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: croup_presentation
+
+nodes:
+  - id: croup_presentation
+    type: question
+    text: "Severity of croup?"
+    options:
+      - label: "Severe croup (stridor at rest, retractions, agitation, hypoxia)"
+        next: severe_croup
+      - label: "Moderate croup (stridor at rest, mild retractions, no distress at rest)"
+        next: moderate_croup
+      - label: "Mild croup (barky cough, no stridor at rest)"
+        next: mild_croup
+
+  - id: severe_croup
+    type: diagnosis
+    name: "Severe Croup"
+    icd10: "J05.0"
+    urgency: critical
+    workup:
+      - Clinical diagnosis - Barky/seal-like cough, inspiratory stridor AT REST, moderate-severe retractions (subcostal, intercostal, suprasternal), agitation or lethargy, decreased air entry, hypoxia (SpO2 <92%)
+      - Westley Croup Score - ≥8 points (severe)
+      - Stridor - None (0), when agitated (1), at rest (2)
+      - Retractions - None (0), mild (1), moderate (2), severe (3)
+      - Air entry - Normal (0), decreased (1), markedly decreased (2)
+      - Cyanosis - None (0), with agitation (4), at rest (5)
+      - Level of consciousness - Normal (0), altered (5)
+      - Age 6 months to 6 years (peak 2 years), viral prodrome (rhinorrhea, low-grade fever) x 1-2 days, symptoms worse at night
+      - Parainfluenza virus (most common 75%), also RSV, influenza, adenovirus, rarely bacterial (Staph, Strep)
+      - X-ray neck (AP) - NOT routinely needed, shows steeple sign (subglottic narrowing), helps rule out epiglottitis, foreign body, retropharyngeal abscess
+      - DO NOT examine throat with tongue depressor (can precipitate complete obstruction if epiglottitis)
+    treatment:
+      - Hospital admission (likely PICU)
+      - Keep child calm (crying worsens obstruction), allow position of comfort, minimize invasive procedures
+      - Humidified oxygen - Target SpO2 >92%
+      - Nebulized racemic epinephrine 0.5mL of 2.25% solution in 3mL NS - Rapid onset (10-30 min), vasoconstriction reduces airway edema, effects last 2 hours (rebound possible)
+      - Can repeat q20-30min if needed
+      - Observe for ≥3-4 hours after last dose (rebound stridor)
+      - Corticosteroids (CRITICAL, reduce severity and duration)
+      - Dexamethasone 0.6 mg/kg PO/IM/IV x 1 dose (max 10mg) - Gold standard, single dose, long-acting
+      - Benefits evident in 6 hours, peak 24 hours
+      - Oral bioavailability excellent, can give PO even in severe cases
+      - Intubation - If impending respiratory failure (severe retractions, hypoxia despite oxygen, altered mental status, fatigue)
+      - Smaller endotracheal tube than usual (0.5-1 size smaller) due to subglottic edema
+      - ICU management if intubated
+
+  - id: moderate_croup
+    type: diagnosis
+    name: "Moderate Croup"
+    icd10: "J05.0"
+    urgency: high
+    workup:
+      - Clinical - Barky cough, inspiratory stridor at rest, mild retractions, no distress when calm, SpO2 >92%
+      - Westley Croup Score 3-7 points
+      - Same etiology as severe croup (parainfluenza most common)
+    treatment:
+      - ED observation
+      - Dexamethasone 0.6 mg/kg PO/IM x 1 dose (max 10mg) - ALWAYS give steroids
+      - Nebulized racemic epinephrine - Consider if persistent stridor at rest or moderate distress
+      - Observe 3-4 hours after treatment
+      - If improves (no stridor at rest, no retractions) - Discharge home with dexamethasone (already given), return precautions
+      - If not improving or rebound after epinephrine - Admit for observation
+      - Cool mist or humidified air - Traditional but minimal evidence, does not hurt
+
+  - id: mild_croup
+    type: diagnosis
+    name: "Mild Croup"
+    icd10: "J05.0"
+    urgency: medium
+    workup:
+      - Clinical - Barky cough, NO stridor at rest (may have stridor only when crying/agitated), no retractions, normal air entry, well-appearing
+      - Westley Score 0-2 points
+      - Diagnosis clinical, no imaging needed
+    treatment:
+      - Outpatient management
+      - Dexamethasone 0.6 mg/kg PO x 1 dose (max 10mg) - Still give! Reduces return visits and symptom duration
+      - Single dose adequate, no need for multiple days
+      - Cool mist humidifier at home (traditional, minimal evidence but harmless)
+      - Antipyretics - Acetaminophen or ibuprofen for fever/comfort
+      - Return precautions - If develops stridor at rest, increased work of breathing, difficulty breathing, unable to drink fluids, drooling (worry for epiglottitis)
+      - Symptoms usually peak day 2-3, resolve by day 7
+      - Most children improve significantly within 24 hours of dexamethasone
+      - No antibiotics (viral illness)
+      - Prevention - Influenza vaccine (reduces influenza-associated croup)

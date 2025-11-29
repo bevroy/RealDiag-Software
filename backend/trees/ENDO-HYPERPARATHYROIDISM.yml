@@ -1,0 +1,127 @@
+tree_id: ENDO-HYPERPARATHYROIDISM
+name: Primary Hyperparathyroidism Evaluation
+family: ENDOCRINOLOGY
+specialty: Endocrinology, Surgery
+chief_complaint: Hypercalcemia, Kidney Stones, Osteoporosis, Fatigue
+description: Evaluation and management of primary hyperparathyroidism
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hyperparathyroidism_evaluation
+
+nodes:
+  - id: hyperparathyroidism_evaluation
+    type: diagnosis
+    name: "Primary Hyperparathyroidism"
+    icd10: "E21.0"
+    urgency: medium
+    workup:
+      - Primary hyperparathyroidism (PHPT) - Excess parathyroid hormone (PTH) secretion from parathyroid gland(s) → hypercalcemia
+      - Most common cause hypercalcemia outpatient (50%)
+      - Prevalence - 1 in 500-1000, increases with age, women 2-3:1, peak age 50-60 years
+      - Etiology - Solitary adenoma (80-85%), multigland hyperplasia (15%), double adenoma (4%), parathyroid carcinoma (<1%, very rare)
+      - Pathophysiology - Autonomous PTH secretion (loss normal feedback inhibition by calcium)
+      - PTH effects - Increases serum calcium via 3 mechanisms
+      - Bone resorption (osteoclast activation, calcium release from bone)
+      - Renal calcium reabsorption (distal tubule)
+      - Increased intestinal calcium absorption (indirect, PTH stimulates 1-alpha-hydroxylase → active vitamin D production)
+      - Decreases serum phosphate (PTH increases renal phosphate excretion)
+      - Classic presentation - "Stones, bones, abdominal groans, and psychiatric overtones"
+      - Modern presentation - Most asymptomatic (incidental hypercalcemia on routine labs 50-80%)
+      - Symptomatic manifestations
+      - Renal - Nephrolithiasis (calcium stones 15-20%), nephrocalcinosis, polyuria/polydipsia (hypercalciuria), chronic kidney disease (hypercalcemia → renal damage)
+      - Skeletal - Osteoporosis (cortical bone loss > trabecular), osteitis fibrosa cystica (severe, rare now, "brown tumors" cystic bone lesions, pathologic fractures, bone pain)
+      - Gastrointestinal - Peptic ulcer disease (calcium stimulates gastrin), pancreatitis (calcium activates trypsin), constipation
+      - Neuropsychiatric - Fatigue, weakness, depression, cognitive impairment, memory loss (vague symptoms, "psychiatric overtones")
+      - Cardiovascular - Hypertension, LVH, arrhythmias, vascular calcification
+      - Neuromuscular - Proximal muscle weakness (hypercalcemia affects neuromuscular junction)
+      - Clinical presentation - Mild hypercalcemia (calcium 10.5-11.5 mg/dL) common, severe hypercalcemia (>14 mg/dL) rare
+      - Asymptomatic (50-80%) - Incidental finding routine labs
+      - Symptomatic - Kidney stones most common, osteoporosis, fractures, fatigue/weakness
+      - Labs
+      - Calcium - Elevated (total and ionized)
+      - Total calcium 10.5-13 mg/dL (mild-moderate), >14 (severe)
+      - Ionized calcium >5.6 mg/dL (most accurate, not affected by albumin)
+      - Correct total calcium for albumin - Corrected Ca = measured Ca + 0.8 x (4 - albumin)
+      - PTH - Elevated or "inappropriately normal" (should be suppressed if hypercalcemia)
+      - PTH >65 pg/mL (clearly elevated) diagnostic in setting of hypercalcemia
+      - PTH 20-65 (normal range) still inappropriate (should be <20 if calcium elevated)
+      - Intact PTH assay (measures full-length PTH)
+      - Phosphate - Low or low-normal (PTH increases renal phosphate excretion)
+      - 25-hydroxyvitamin D - Often low (PTH increases conversion to active form, depletes stores)
+      - Check baseline (replete before surgery)
+      - 24-hour urine calcium - Elevated (>250-300 mg/24 hr) or normal
+      - Low urine calcium (<100 mg/24 hr) suggests familial hypocalciuric hypercalcemia (FHH, mimics PHPT, see below)
+      - Alkaline phosphatase - May be elevated (bone turnover)
+      - Creatinine - Assess renal function
+      - Imaging
+      - Parathyroid imaging - NOT needed for diagnosis (biochemical diagnosis), perform preoperatively if surgery planned (localize adenoma)
+      - Sestamibi scan (Tc-99m sestamibi) - 75-90% sensitivity for adenomas, retained in hyperfunctioning parathyroid tissue
+      - 4D CT - Four-dimensional CT (3D + contrast washout timing), 85-90% sensitivity
+      - Ultrasound - 70-80% sensitivity, operator-dependent, useful for neck anatomy (thyroid nodules)
+      - Dual imaging (sestamibi + ultrasound or CT) - Increases localization to 95%
+      - Surgical planning (focused vs. bilateral exploration)
+      - Bone density (DEXA) - Assess for osteoporosis (cortical bone loss, distal 1/3 radius most affected)
+      - Perform baseline all patients (guide management)
+      - Renal imaging - Renal ultrasound or CT if suspect nephrolithiasis
+      - Differential diagnosis - Other causes hypercalcemia
+      - Malignancy - Second most common cause (PTHrP secretion squamous cell, renal, ovarian, breast cancers, or osteolytic metastases multiple myeloma, breast)
+      - PTH suppressed (<20), PTHrP elevated
+      - Familial hypocalciuric hypercalcemia (FHH) - Benign, autosomal dominant, inactivating mutation calcium-sensing receptor (CASR)
+      - Mild hypercalcemia (calcium 10.2-11.5), PTH normal-high, LOW urine calcium (<100 mg/24 hr)
+      - Calcium-to-creatinine clearance ratio <0.01 (FHH), >0.02 (PHPT)
+      - NO treatment needed, surgery NOT indicated (parathyroidectomy will not cure)
+      - Vitamin D intoxication, thiazide diuretics, lithium, immobilization, granulomatous disease (sarcoid, TB)
+    treatment:
+      - Definitive treatment - Parathyroidectomy (CURATIVE)
+      - Indications for surgery
+      - All symptomatic patients - Kidney stones, osteoporosis (T-score <-2.5 any site), fragility fracture, hypercalciuria (>400 mg/24 hr), nephrocalcinosis, CKD (eGFR <60)
+      - Asymptomatic patients meeting ANY criterion (per 2014 guidelines)
+      - Age <50 years
+      - Calcium >1 mg/dL above upper limit normal (>11.3 mg/dL if ULN 10.3)
+      - Osteoporosis (T-score <-2.5 at lumbar spine, hip, or distal 1/3 radius)
+      - Fragility fracture
+      - eGFR <60 mL/min
+      - Hypercalciuria >400 mg/24 hr or nephrolithiasis on imaging
+      - Surgical approach
+      - Focused (minimally invasive) parathyroidectomy - If single adenoma localized on imaging
+      - Excise adenoma, confirm PTH drop >50% from baseline 10 minutes post-excision (intraoperative PTH monitoring)
+      - Smaller incision, outpatient, 95-98% cure rate
+      - Bilateral neck exploration - If multigland disease, failed localization, or familial syndrome (MEN)
+      - Explore all 4 glands, excise abnormal gland(s)
+      - Hyperplasia - Subtotal parathyroidectomy (remove 3.5 glands, leave 0.5 gland or reimplant in forearm) or total parathyroidectomy + autotransplantation
+      - Cure rate 95-98% (experienced surgeon)
+      - Complications - Hypocalcemia (transient 5-30%, permanent <1% if single adenoma, higher if multigland), recurrent laryngeal nerve injury (1-2%, hoarseness), hematoma, persistent/recurrent hyperparathyroidism (5%)
+      - Hungry bone syndrome - Severe hypocalcemia post-op (preoperative severe bone disease, rapid bone remineralization)
+      - Treat with IV calcium + high-dose oral calcium + calcitriol
+      - Medical management - If surgery declined/contraindicated or observation
+      - Observation - Asymptomatic, not meeting surgical criteria
+      - Monitor annually - Serum calcium, creatinine, DEXA every 1-2 years
+      - 25-30% progress to meet surgical criteria over 10-15 years
+      - Hydration - Maintain good hydration (prevent stones, reduce calcium)
+      - Avoid thiazides (increase calcium), avoid excessive calcium restriction (increases PTH further)
+      - Vitamin D - Replete if deficient (many are), target 25-OH vitamin D >30 ng/mL
+      - Does NOT worsen hypercalcemia (PTH-driven, not vitamin D-driven)
+      - Bisphosphonates - If osteoporosis, contraindication to surgery
+      - Alendronate 70 mg weekly - Increase bone density (but does not treat underlying PHPT)
+      - Calcimimetics - Cinacalcet (Sensipar) 30-90 mg PO BID
+      - Allosteric activator calcium-sensing receptor → decreases PTH secretion, lowers calcium
+      - Approved for severe hypercalcemia if surgery contraindicated (parathyroid carcinoma, failed surgery)
+      - Lowers calcium (not cures disease), does not improve bone density or kidney stones
+      - Expensive ($300-500/month), nausea common
+      - Hypercalcemic crisis (rare) - Calcium >14 mg/dL, altered mental status, dehydration, renal failure, arrhythmias
+      - Medical emergency
+      - Aggressive IV hydration (normal saline 200-300 mL/hr, replace volume deficit)
+      - Calcitonin 4 IU/kg IM/SQ q12h (rapid onset 4-6 hours, but tachyphylaxis 48 hours)
+      - Bisphosphonates - Zoledronic acid 4 mg IV or pamidronate 60-90 mg IV (onset 24-48 hours, lasts weeks)
+      - Loop diuretics (furosemide) - ONLY if volume replete (increase renal calcium excretion)
+      - Dialysis - If refractory, severe renal failure
+      - Urgent parathyroidectomy - If medical management fails
+      - Prognosis - Excellent if surgery (cure 95-98%)
+      - Recurrence <5% (adenoma), higher if hyperplasia (15-20%)
+      - Asymptomatic observation - Stable 70%, progression 25-30% over 15 years
+      - Familial syndromes - Screen if young (<40), multigland hyperplasia, family history
+      - MEN 1 (multiple endocrine neoplasia type 1) - Hyperparathyroidism + pituitary adenoma + pancreatic neuroendocrine tumors (PPP)
+      - MEN 2A - Hyperparathyroidism + medullary thyroid cancer + pheochromocytoma
+      - Familial isolated hyperparathyroidism (FIHP)
+      - Genetic testing - MEN1, RET, CDC73 (HRPT2, hyperparathyroidism-jaw tumor syndrome)

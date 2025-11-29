@@ -1,0 +1,148 @@
+tree_id: DERM-ECZEMA-DERMATITIS
+name: Eczema and Dermatitis Evaluation
+family: DERMATOLOGY
+specialty: Dermatology, Allergy, Primary Care
+chief_complaint: Itchy Rash, Dry Skin, Red Patches
+description: Comprehensive evaluation and management of eczema and various forms of dermatitis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: dermatitis_presentation
+
+nodes:
+  - id: dermatitis_presentation
+    type: question
+    text: "Pattern and distribution of dermatitis?"
+    options:
+      - label: "Chronic relapsing eczema, typically flexural areas, history of atopy"
+        next: atopic_dermatitis
+      - label: "Contact dermatitis - well-demarcated, corresponds to exposure pattern"
+        next: contact_dermatitis_type
+      - label: "Seborrheic distribution (scalp, face, chest)"
+        next: seborrheic_dermatitis
+      - label: "Hand dermatitis"
+        next: hand_dermatitis
+
+  - id: atopic_dermatitis
+    type: diagnosis
+    name: "Atopic Dermatitis (Eczema)"
+    icd10: "L20.9"
+    urgency: low
+    workup:
+      - Clinical diagnosis (no specific tests needed)
+      - Diagnostic criteria (Hanifin and Rajka) - Must have pruritus plus 3+ of - Typical morphology and distribution (flexural in adults, facial/extensor in infants), chronic/relapsing course, personal/family history of atopy, xerosis
+      - Distribution - Infants (face, scalp, extensor surfaces), Children/adults (flexural areas - antecubital, popliteal fossae, neck, wrists, ankles)
+      - IgE level (often elevated but not diagnostic)
+      - Consider allergy testing (skin prick or specific IgE) if food or environmental triggers suspected
+      - Skin culture if concern for secondary infection (impetiginized eczema)
+    treatment:
+      - Skin barrier repair and maintenance (most important)
+      - Emollients - Thick, greasy moisturizers (petrolatum, Aquaphor, CeraVe, Eucerin) applied liberally and frequently (at least BID, ideally after bathing)
+      - Bathing - Lukewarm water, brief showers/baths (5-10 min), gentle cleansers, pat dry and immediately apply moisturizer
+      - Topical corticosteroids (mainstay of treatment)
+      - Mild (face, intertriginous) - Hydrocortisone 1-2.5% cream BID
+      - Moderate (body) - Triamcinolone 0.1% cream or ointment BID
+      - Potent (severe flares, thick plaques) - Clobetasol 0.05% ointment BID x 2 weeks max, then taper
+      - Ointments preferred over creams (better penetration, less irritation)
+      - Apply steroid first, then moisturizer on top
+      - Topical calcineurin inhibitors (steroid-sparing, for sensitive areas like face/eyelids)
+      - Tacrolimus 0.03-0.1% ointment BID OR pimecrolimus 1% cream BID
+      - No risk of skin atrophy (unlike steroids)
+      - Antihistamines (for pruritus) - Hydroxyzine 25-50mg PO QHS or cetirizine 10mg PO daily
+      - Avoid triggers - Harsh soaps, hot water, wool, stress, allergens
+      - Secondary infection treatment - Mupirocin 2% ointment TID x 5-7 days (if impetiginized), oral antibiotics (cephalexin) if extensive
+      - Severe/refractory eczema
+      - Systemic immunosuppression - Dupilumab (Dupixent) 300mg SC q2 weeks (IL-4/IL-13 inhibitor, very effective, first-line biologic)
+      - Alternatives - Methotrexate, cyclosporine, azathioprine, mycophenolate (for severe refractory cases)
+      - Phototherapy (UVB) - 3x/week
+      - JAK inhibitors - Upadacitinib (Rinvoq), abrocitinib (oral options)
+      - Dermatology referral for severe or refractory cases
+
+  - id: contact_dermatitis_type
+    type: question
+    text: "Onset and pattern of contact dermatitis?"
+    options:
+      - label: "Allergic contact dermatitis - delayed onset (24-48 hrs after exposure), pruritic, corresponds to contactant"
+        next: allergic_contact_dermatitis
+      - label: "Irritant contact dermatitis - immediate onset, burning/stinging, often occupational"
+        next: irritant_contact_dermatitis
+
+  - id: allergic_contact_dermatitis
+    type: diagnosis
+    name: "Allergic Contact Dermatitis"
+    icd10: "L23.9"
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Common allergens - Nickel (jewelry, belt buckles), poison ivy/oak/sumac (urushiol), fragrances, preservatives, rubber, neomycin, formaldehyde
+      - Patch testing (gold standard) - Apply suspected allergens to back for 48 hrs, read at 72-96 hrs
+      - Consider if recurrent, severe, or cause unclear
+    treatment:
+      - Avoid allergen (most important)
+      - Identify and eliminate contactant
+      - Topical corticosteroids - Moderate to potent strength (triamcinolone 0.1% or clobetasol 0.05%) BID x 2 weeks
+      - For acute severe reactions (poison ivy with blistering) - Oral prednisone 40-60mg daily x 5-7 days, then taper over 2-3 weeks (if taper too short, rebound flare)
+      - Cool compresses with Burrow's solution (aluminum acetate)
+      - Antihistamines for pruritus
+      - Barrier protection if occupational exposure unavoidable
+
+  - id: irritant_contact_dermatitis
+    type: diagnosis
+    name: "Irritant Contact Dermatitis"
+    icd10: "L24.9"
+    urgency: low
+    workup:
+      - Clinical diagnosis (no allergy, immediate onset after contact)
+      - Common irritants - Soaps, detergents, solvents, acids, alkalis, water (frequent handwashing)
+      - Occupational history important (healthcare workers, hairdressers, cleaners, mechanics)
+    treatment:
+      - Avoid or minimize irritant exposure
+      - Barrier protection (gloves - cotton liners under vinyl/nitrile)
+      - Frequent moisturization with thick emollients
+      - Mild topical corticosteroids (hydrocortisone 1-2.5% or triamcinolone 0.1%) BID
+      - Healing takes time after irritant removed (barrier function recovery)
+      - Occupational modifications if work-related
+
+  - id: seborrheic_dermatitis
+    type: diagnosis
+    name: "Seborrheic Dermatitis"
+    icd10: "L21.9"
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Distribution - Scalp (dandruff), face (eyebrows, nasolabial folds, beard area), chest, back
+      - Appearance - Greasy, yellowish scales on erythematous base
+      - Associated with Malassezia yeast overgrowth
+      - Rule out psoriasis if severe (can overlap - "sebopsoriasis")
+    treatment:
+      - Scalp treatment
+      - Antifungal shampoos - Ketoconazole 2% shampoo 2-3x/week OR selenium sulfide 2.5% shampoo 2x/week OR zinc pyrithione shampoo daily
+      - Leave on scalp 5-10 minutes before rinsing
+      - Tar shampoo (neutrogena T-Gel) alternative
+      - Topical corticosteroid solution (fluocinolone 0.01% or clobetasol solution) for severe scalp involvement
+      - Face and body
+      - Ketoconazole 2% cream BID OR ciclopirox 1% cream BID
+      - Low-potency topical steroid (hydrocortisone 1-2.5%) for flares (short-term only on face)
+      - Pimecrolimus 1% cream BID (steroid-sparing option for face)
+      - Maintenance - Continue antifungal shampoo 1-2x/week long-term to prevent recurrence
+      - Exacerbating factors - Stress, cold weather, HIV (severe seborrheic dermatitis can be sign of immunosuppression)
+
+  - id: hand_dermatitis
+    type: diagnosis
+    name: "Hand Dermatitis/Hand Eczema"
+    icd10: "L30.9"
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Determine type - Irritant contact (most common), allergic contact, atopic, dyshidrotic (vesicular)
+      - Occupational assessment
+      - Patch testing if allergic component suspected
+      - Consider dyshidrotic eczema if vesicles on palms/fingers
+    treatment:
+      - Avoid irritants and allergens
+      - Hand hygiene - Minimize water exposure, pat dry thoroughly, cotton gloves under vinyl gloves for wet work
+      - Aggressive moisturization - Apply thick ointment after every hand wash and at bedtime
+      - Topical corticosteroids - Potent to super-potent (clobetasol 0.05% ointment BID) for palms (thick skin)
+      - Occlusion technique - Apply steroid ointment, cover with plastic wrap or cotton gloves overnight
+      - For dyshidrotic eczema (vesicular hand eczema) - High-potency steroids, tacrolimus, consider oral prednisone burst for severe flares
+      - Severe/refractory hand eczema - Systemic therapy (dupilumab, methotrexate, cyclosporine, alitretinoin), phototherapy (hand-directed UVB), dermatology referral

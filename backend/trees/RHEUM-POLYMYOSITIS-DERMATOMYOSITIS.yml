@@ -1,0 +1,153 @@
+tree_id: RHEUM-POLYMYOSITIS-DERMATOMYOSITIS
+name: Polymyositis and Dermatomyositis Evaluation
+family: RHEUMATOLOGY
+specialty: Rheumatology, Neurology
+chief_complaint: Muscle Weakness, Rash, Difficulty Rising from Chair
+description: Evaluation and management of polymyositis and dermatomyositis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: pm_dm_evaluation
+
+nodes:
+  - id: pm_dm_evaluation
+    type: question
+    text: "Which condition?"
+    options:
+      - label: "Dermatomyositis"
+        next: dermatomyositis
+      - label: "Polymyositis"
+        next: polymyositis
+
+  - id: dermatomyositis
+    type: diagnosis
+    name: "Dermatomyositis"
+    icd10: "M33.1"
+    urgency: high
+    workup:
+      - Dermatomyositis (DM) - Autoimmune inflammatory myopathy + characteristic skin manifestations
+      - Epidemiology - Rare, incidence 1-10 per million/year, female:male 2:1
+      - Bimodal peak - Children (5-15 years, juvenile DM) and adults (40-60 years)
+      - Pathophysiology - Complement-mediated microangiopathy → muscle and skin damage
+      - Anti-Mi-2, anti-TIF1-γ (associated with malignancy), anti-MDA5 (amyopathic DM, ILD) antibodies
+      - Clinical presentation - HALLMARK: Proximal muscle weakness + characteristic rash
+      - Muscle weakness (90%) - Symmetric, proximal (shoulders, hips)
+      - Difficulty rising from chair, climbing stairs, lifting objects overhead, getting out of bathtub
+      - Gradual onset (weeks to months)
+      - Distal strength preserved (can open jars, button shirts)
+      - Neck flexors weak (difficulty lifting head off pillow)
+      - Myalgias - 25-50% (but can be painless)
+      - Dysphagia - 30-60% (pharyngeal/upper esophageal muscles), aspiration risk
+      - Dysphonia - Voice change (weak, nasal)
+      - Respiratory muscle weakness - Rare, severe cases
+      - Skin manifestations (PATHOGNOMONIC)
+      - Gottron papules - Erythematous papules over MCP/PIP/DIP joints (extensor surfaces), PATHOGNOMONIC
+      - Gottron sign - Erythematous macules (flat) over MCP/PIP/DIP joints, elbows, knees
+      - Heliotrope rash - Violaceous (purple) erythema upper eyelids ± periorbital edema, PATHOGNOMONIC
+      - Shawl sign - Erythema over shoulders, upper back (shawl distribution)
+      - V-sign - Erythema anterior chest/neck (V-neck distribution)
+      - Mechanic's hands - Hyperkeratotic, fissured lateral/palmar fingers (associated with anti-synthetase syndrome)
+      - Photosensitivity - Rash worsens with sun exposure
+      - Calcinosis - Calcium deposits in skin/subcutaneous tissue (more common juvenile DM)
+      - Systemic manifestations
+      - Interstitial lung disease (ILD, 30-40%) - Dyspnea, dry cough, restrictive pattern PFTs, associated with anti-synthetase antibodies (anti-Jo-1)
+      - Cardiac - Myocarditis (rare), conduction defects, arrhythmias
+      - Arthritis - Non-erosive polyarthritis (hands, wrists) in anti-synthetase syndrome
+      - Raynaud phenomenon - 20-30%
+      - Constitutional - Fever, weight loss, fatigue
+      - Malignancy association - 15-30% adults (ovarian, lung, pancreatic, stomach, colorectal, breast)
+      - Risk highest within 3 years of DM diagnosis
+      - Anti-TIF1-γ antibodies - Higher malignancy risk (40-70%)
+      - Amyopathic dermatomyositis - Characteristic rash WITHOUT muscle weakness (<6 months)
+      - 10-20% DM patients
+      - May progress to classic DM
+      - Physical exam
+      - Muscle strength testing - Proximal weakness (shoulder abduction, hip flexion 3-4/5), preserved distal strength
+      - Neck flexor weakness - Cannot lift head off bed
+      - Skin exam - Gottron papules (MCP/PIP joints), heliotrope rash (eyelids), V-sign, shawl sign
+      - Gower sign - Uses hands to "climb up" legs when rising from floor (proximal weakness)
+      - Labs
+      - Muscle enzymes - Elevated (muscle damage)
+      - Creatine kinase (CK) - Elevated 5-50x normal (most sensitive, 80-90%)
+      - Aldolase - Elevated
+      - AST, ALT, LDH - Elevated (from muscle, not liver)
+      - Myositis-specific antibodies
+      - Anti-Mi-2 - Specific for DM (5-10%), good prognosis, responsive to treatment
+      - Anti-TIF1-γ (transcriptional intermediary factor 1-gamma) - DM (20-30%), strongly associated with malignancy (screen for cancer)
+      - Anti-MDA5 (melanoma differentiation-associated gene 5) - Amyopathic DM, rapidly progressive ILD (poor prognosis)
+      - Anti-synthetase antibodies - Anti-Jo-1 most common (20%), associated with ILD + arthritis + mechanic's hands + Raynaud (anti-synthetase syndrome)
+      - ESR, CRP - Elevated (inflammation)
+      - ANA - Positive 50-80%
+      - Electromyography (EMG) - Myopathic pattern
+      - Short-duration, low-amplitude polyphasic motor unit potentials
+      - Early recruitment
+      - Fibrillations, positive sharp waves (muscle irritability)
+      - MRI muscle - Edema (high T2 signal), enhancement with gadolinium (inflammation)
+      - Guides biopsy site
+      - Muscle biopsy - GOLD STANDARD (if diagnosis uncertain)
+      - Perivascular and perimysial inflammation (B-cells, CD4+ T-cells, macrophages)
+      - Perifascicular atrophy - Characteristic (muscle fiber atrophy at periphery of fascicles)
+      - Complement deposition in vessels
+      - Distinguishes from polymyositis (endomysial inflammation)
+      - Chest imaging - HRCT chest (ILD screening), especially if dyspnea or anti-synthetase antibodies
+      - Pulmonary function tests - DLCO, spirometry (restrictive if ILD)
+      - Malignancy screening - Age-appropriate cancer screening + CT chest/abdomen/pelvis (adults with new DM)
+      - Women - Pelvic exam, Pap smear, mammogram, CA-125
+      - Men - Rectal exam, PSA
+      - All - Colonoscopy, chest/abdomen/pelvis imaging
+      - Repeat annually x 3 years
+    treatment:
+      - Corticosteroids - FIRST-LINE
+      - Prednisone 1 mg/kg/day (60-80 mg daily) x 4-6 weeks
+      - Gradual taper over 6-12 months (5-10 mg/month) once CK normalizes and strength improves
+      - Monitor CK monthly (guide taper)
+      - IV methylprednisolone 1 g daily x 3-5 days if severe
+      - Immunosuppressive agents - Steroid-sparing, add if inadequate response or to allow steroid taper
+      - Methotrexate 15-25 mg PO/SQ weekly - Most commonly used, onset 6-8 weeks
+      - Azathioprine 2-2.5 mg/kg/day - Onset 3-6 months
+      - Mycophenolate mofetil 2-3 g/day - Alternative
+      - IVIG - If refractory to steroids/immunosuppression
+      - 2 g/kg over 2-5 days monthly
+      - Effective 60-70% refractory cases
+      - Rituximab - If refractory (anti-CD20, depletes B-cells)
+      - Physical therapy - ESSENTIAL, prevents contractures, maintains strength
+      - Avoid aggressive exercise during acute phase (worsens muscle damage)
+      - Gentle range of motion initially, progressive strengthening as inflammation controlled
+      - ILD treatment - If present
+      - Mycophenolate or cyclophosphamide + corticosteroids
+      - Treat underlying malignancy - If found (DM may improve with cancer treatment)
+      - Prognosis
+      - With treatment - 80-90% achieve remission or significant improvement
+      - 5-year survival 75-85% (lower if malignancy)
+      - Predictors poor outcome - Older age, malignancy, ILD, cardiac involvement, dysphagia
+      - Juvenile DM - Better prognosis (90% remission), calcinosis common sequela
+
+  - id: polymyositis
+    type: diagnosis
+    name: "Polymyositis"
+    icd10: "M33.2"
+    urgency: high
+    workup:
+      - Polymyositis (PM) - Autoimmune inflammatory myopathy WITHOUT skin manifestations
+      - Rarer than dermatomyositis
+      - Diagnosis of exclusion (many cases reclassified as inclusion body myositis or other myopathies)
+      - Pathophysiology - CD8+ T-cell-mediated muscle fiber destruction
+      - Clinical presentation - Symmetric proximal muscle weakness (identical to DM but NO rash)
+      - NO skin manifestations (if rash present, it's DM not PM)
+      - Muscle weakness - Same pattern as DM (proximal, symmetric)
+      - Dysphagia - 30-60%
+      - ILD - 10-20%
+      - Malignancy association - Lower than DM (5-10%)
+      - Labs - Same as DM (elevated CK, myositis-specific antibodies)
+      - Anti-synthetase antibodies (anti-Jo-1) - 20-30%
+      - EMG - Myopathic pattern (same as DM)
+      - Muscle biopsy - ESSENTIAL (distinguish from DM and inclusion body myositis)
+      - Endomysial inflammation (CD8+ T-cells invade non-necrotic muscle fibers)
+      - No perivascular/perimysial inflammation (distinguishes from DM)
+      - No rimmed vacuoles (distinguishes from inclusion body myositis)
+    treatment:
+      - Treatment - Same as dermatomyositis
+      - Corticosteroids + steroid-sparing agents (methotrexate, azathioprine)
+      - IVIG or rituximab if refractory
+      - Physical therapy
+      - Prognosis - Similar to DM (80-90% respond to treatment)

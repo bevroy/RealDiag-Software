@@ -1,0 +1,132 @@
+tree_id: CARD-HEART-FAILURE
+name: Acute Decompensated Heart Failure
+family: CARDIOLOGY
+specialty: Emergency Medicine, Cardiology, Critical Care
+chief_complaint: Dyspnea, Leg Swelling, Orthopnea, Paroxysmal Nocturnal Dyspnea
+description: Comprehensive evaluation and management of acute decompensated heart failure with classification and treatment protocols
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hf_presentation
+
+nodes:
+  - id: hf_presentation
+    type: question
+    text: "Patient with suspected acute heart failure - Clinical profile?"
+    options:
+      - label: "Cardiogenic shock (hypotension, end-organ hypoperfusion, cool extremities)"
+        next: cardiogenic_shock
+      - label: "Acute pulmonary edema (severe respiratory distress, hypoxemia, pink frothy sputum)"
+        next: acute_pulmonary_edema
+      - label: "Hypertensive heart failure (SBP >140, pulmonary congestion)"
+        next: hypertensive_hf
+      - label: "Euvolemic/warm and dry (low cardiac output without congestion)"
+        next: low_output_hf
+
+  - id: cardiogenic_shock
+    type: diagnosis
+    name: "Cardiogenic Shock"
+    icd10: "I50.9"
+    urgency: critical
+    workup:
+      - ECG (MI, arrhythmia)
+      - Troponin (acute MI)
+      - BNP or NT-proBNP (>1000 pg/mL suggests HF, but may be falsely low in acute setting)
+      - CBC, CMP (renal function, electrolytes)
+      - Lactate (>2 suggests inadequate perfusion)
+      - ABG (assess oxygenation and acid-base)
+      - Chest X-ray (pulmonary edema, cardiomegaly)
+      - Bedside echocardiogram (assess EF, valves, wall motion, pericardial effusion)
+      - Right heart catheterization (PCWP >15, CI <2.2, elevated SVR)
+      - Coronary angiography if ACS suspected
+    treatment:
+      - CCU/ICU admission
+      - Inotropic support - Dobutamine 2-20 mcg/kg/min (if SBP 70-100) OR milrinone 0.375-0.75 mcg/kg/min (load 50 mcg/kg over 10 min) - use cautiously, can worsen hypotension
+      - Vasopressor support - Norepinephrine 0.1-3 mcg/kg/min if SBP <70 (add to inotrope)
+      - Consider mechanical circulatory support - Intra-aortic balloon pump (IABP), Impella, or VA-ECMO if refractory
+      - Diuretics ONLY after perfusion restored (low-dose furosemide 20-40mg IV)
+      - Avoid beta-blockers and ACE inhibitors in acute phase
+      - Intubation and mechanical ventilation if respiratory failure
+      - Treat underlying cause - Emergent revascularization if STEMI, valve surgery if acute valvular dysfunction
+      - Pulmonary artery catheter for hemodynamic monitoring
+      - Cardiology and cardiac surgery consultation
+      - Consider heart transplant evaluation if refractory
+
+  - id: acute_pulmonary_edema
+    type: diagnosis
+    name: "Acute Pulmonary Edema (Flash Pulmonary Edema)"
+    icd10: "I50.1"
+    urgency: critical
+    workup:
+      - ECG (ischemia, arrhythmia)
+      - Troponin
+      - BNP or NT-proBNP (elevated)
+      - CMP, CBC
+      - ABG or VBG (hypoxemia, respiratory acidosis)
+      - Chest X-ray (bilateral infiltrates, Kerley B lines, cephalization, pleural effusions)
+      - Bedside ultrasound (B-lines indicating pulmonary edema)
+      - Echocardiogram (systolic vs diastolic dysfunction, valvular disease)
+    treatment:
+      - IMMEDIATE oxygen therapy - High-flow nasal cannula, NFPP (CPAP or BiPAP preferred - reduces preload and afterload, improves oxygenation) - intubate if failing NIV
+      - Position patient upright (reduces preload)
+      - IV diuretics - Furosemide 40-80mg IV bolus (double home dose if on chronic diuretics), then continuous infusion 5-20 mg/hr
+      - Nitroglycerin IV 10-20 mcg/min, titrate up by 10-20 mcg/min q3-5min (reduces preload and afterload) - avoid if SBP <90 or RV infarct
+      - Consider nitroprusside if refractory hypertension (potent afterload reduction)
+      - Morphine 2-4mg IV (reduces anxiety and preload) - use cautiously, can cause respiratory depression
+      - Avoid excessive fluid removal initially (goal negative 500-1000mL in first 6 hours)
+      - Treat precipitant - Control BP, treat ischemia, rate control for AFib
+      - ICU admission with continuous monitoring
+      - Foley catheter to monitor urine output (goal >0.5 mL/kg/hr)
+      - Daily weights
+
+  - id: hypertensive_hf
+    type: diagnosis
+    name: "Hypertensive Acute Heart Failure"
+    icd10: "I50.9"
+    urgency: high
+    workup:
+      - ECG
+      - Troponin (rule out ACS)
+      - BNP or NT-proBNP
+      - CMP (renal function critical for diuretic dosing)
+      - Chest X-ray
+      - Echocardiogram (often preserved EF with diastolic dysfunction)
+    treatment:
+      - Hospital admission (telemetry or ICU if severe)
+      - Vasodilators - Nitroglycerin IV (first-line for BP control and preload reduction) OR nitroprusside if severe HTN
+      - IV diuretics - Furosemide 40-80mg IV bolus, then reassess (goal net negative 2-3L over 24 hours)
+      - Oxygen if hypoxemic (SpO2 <90%)
+      - NIPPV (BiPAP) if respiratory distress
+      - Transition to oral diuretics and antihypertensives when stable
+      - Optimize chronic HF medications - ACE inhibitor or ARB, beta-blocker (start low after decongestion), aldosterone antagonist
+      - Treat underlying hypertension aggressively
+      - Cardiology follow-up
+
+  - id: low_output_hf
+    type: diagnosis
+    name: "Low Cardiac Output Heart Failure (Warm and Dry)"
+    icd10: "I50.9"
+    urgency: high
+    workup:
+      - ECG
+      - Troponin
+      - BNP or NT-proBNP
+      - CMP (assess renal function, hyponatremia common)
+      - Chest X-ray (may show cardiomegaly but minimal congestion)
+      - Echocardiogram (typically low EF <40%)
+      - Consider right heart catheterization if diagnosis uncertain
+    treatment:
+      - Hospital admission
+      - Avoid aggressive diuresis (no significant volume overload)
+      - Optimize oral medications
+      - ACE inhibitor or ARB (titrate up if tolerated)
+      - Beta-blocker (carvedilol, metoprolol succinate, or bisoprolol) - start low and go slow
+      - Aldosterone antagonist (spironolactone 12.5-25mg daily or eplerenone)
+      - ARNI (sacubitril-valsartan) if EF <40% and symptomatic despite optimal therapy (replace ACE/ARB)
+      - SGLT2 inhibitor (dapagliflozin 10mg or empagliflozin 10mg daily) - reduces HF hospitalizations
+      - Hydralazine-nitrate if intolerant to ACE/ARB
+      - Consider ICD if EF <35% and >40 days post-MI or non-ischemic
+      - CRT (cardiac resynchronization therapy) if EF <35%, LBBB, QRS >150ms
+      - Diuretics PRN for mild congestion (furosemide 20-40mg PO daily)
+      - Sodium and fluid restriction (<2g sodium, <2L fluid)
+      - Advanced therapies - LVAD or heart transplant evaluation if refractory

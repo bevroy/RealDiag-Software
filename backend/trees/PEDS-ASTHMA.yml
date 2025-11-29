@@ -1,0 +1,104 @@
+tree_id: PEDS-ASTHMA
+name: Pediatric Asthma Exacerbation
+family: PEDIATRICS
+specialty: Pediatrics, Pulmonology, Emergency Medicine
+chief_complaint: Wheezing, Shortness of Breath, Cough, Chest Tightness
+description: Comprehensive evaluation and management of pediatric asthma exacerbation
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: asthma_exacerbation
+
+nodes:
+  - id: asthma_exacerbation
+    type: question
+    text: "Severity of asthma exacerbation?"
+    options:
+      - label: "Severe or life-threatening (minimal air movement, altered mental status, cyanosis)"
+        next: severe_asthma
+      - label: "Moderate exacerbation (speaking in phrases, moderate distress)"
+        next: moderate_asthma
+      - label: "Mild exacerbation (speaking in sentences, minimal distress)"
+        next: mild_asthma
+
+  - id: severe_asthma
+    type: diagnosis
+    name: "Severe Asthma Exacerbation"
+    icd10: "J45.901"
+    urgency: critical
+    workup:
+      - Clinical assessment - Respiratory rate, work of breathing (retractions, accessory muscle use), air entry, alertness, SpO2
+      - Severe features - Sits upright, speaks in words or short phrases, severe distress, RR >30 (adult) or >40 (child), HR >120 (adult), SpO2 <90%, drowsy/confused, silent chest (ominous sign - impending respiratory failure)
+      - Peak flow or FEV1 - <40% predicted (if able to perform)
+      - ABG - If concern for respiratory failure (hypercapnia PaCO2 >45 is ominous, normal PaCO2 may indicate tiring in severe obstruction)
+      - Chest X-ray - If concern for pneumonia, pneumothorax, pneumomediastinum, atelectasis (not routine)
+    treatment:
+      - Continuous cardiorespiratory monitoring, pulse oximetry
+      - Oxygen - High-flow to maintain SpO2 >90-92%
+      - Inhaled beta-2 agonist - Continuous nebulized albuterol (10-15 mg/hr = 2.5-5mg q20min continuously) OR albuterol MDI with spacer 4-8 puffs q20min x 3 doses
+      - Ipratropium bromide - Add to first 3 albuterol treatments (0.5mg nebulized q20min x 3 doses OR 4-8 puffs MDI with albuterol)
+      - Systemic corticosteroids (CRITICAL - improves outcomes, prevents relapse)
+      - Prednisone/prednisolone 1-2 mg/kg PO (max 60mg) OR
+      - Methylprednisolone 1-2 mg/kg IV q6h (if unable to tolerate PO or vomiting) OR
+      - Dexamethasone 0.6 mg/kg PO/IV x 1 dose (alternative, single dose, less vomiting, equivalent efficacy)
+      - Continue for 3-5 days, no taper needed for short course
+      - Magnesium sulfate - 25-75 mg/kg IV over 20 minutes (max 2g) - For severe exacerbations not responding to initial therapy, bronchodilator effect
+      - Heliox - Helium-oxygen mixture (70:30 or 80:20) if available, reduces work of breathing
+      - Terbutaline - Subcutaneous 0.01 mg/kg (max 0.4mg) q20min x 3 doses, or continuous IV infusion - For refractory cases
+      - Non-invasive positive pressure ventilation (BiPAP/CPAP) - Consider if respiratory failure but still able to protect airway
+      - Intubation and mechanical ventilation - If impending or actual respiratory arrest, severe altered mental status, refractory hypoxemia, exhaustion
+      - Use largest ETT possible, low respiratory rate (6-8 breaths/min), allow prolonged expiratory time, permissive hypercapnia (accept higher CO2 to avoid barotrauma)
+      - Risk of pneumothorax, hypotension (auto-PEEP)
+      - ICU/PICU admission
+      - Avoid - Antibiotics (unless bacterial infection confirmed), aggressive IV fluids (risk pulmonary edema), sedatives (worsen respiratory depression)
+
+  - id: moderate_asthma
+    type: diagnosis
+    name: "Moderate Asthma Exacerbation"
+    icd10: "J45.41"
+    urgency: high
+    workup:
+      - Clinical assessment - Speaking in phrases, moderate distress, some accessory muscle use, SpO2 90-95%
+      - Peak flow 40-69% predicted
+      - Moderate features - Prefers sitting to lying, speaks in phrases, moderate distress, RR 20-30, HR 100-120, SpO2 90-95%
+    treatment:
+      - Oxygen if SpO2 <90%
+      - Inhaled beta-2 agonist - Albuterol nebulized 2.5-5mg q20min x 3 doses (or continuous if poor response) OR albuterol MDI 4-8 puffs q20min x 3 doses with spacer
+      - Ipratropium - Add to first 3 albuterol treatments (0.5mg nebulized or 4-8 puffs MDI q20min x 3)
+      - Systemic corticosteroids - Prednisone 1-2 mg/kg PO (max 60mg) or dexamethasone 0.6 mg/kg PO x 1, start early
+      - Reassess after 1 hour
+      - If good response (SpO2 >90%, no distress, peak flow >70%) - Consider discharge home with oral steroids and albuterol
+      - If incomplete response - Admit for continued treatment, consider magnesium sulfate
+      - If poor response - Treat as severe, consider ICU
+
+  - id: mild_asthma
+    type: diagnosis
+    name: "Mild Asthma Exacerbation"
+    icd10: "J45.21"
+    urgency: medium
+    workup:
+      - Clinical assessment - Speaking in sentences, mild distress, no accessory muscle use, SpO2 >95%
+      - Peak flow >70% predicted
+      - Mild features - Comfortable lying down, speaks normally, mild distress, RR normal, HR normal, SpO2 >95%
+    treatment:
+      - Inhaled beta-2 agonist - Albuterol nebulized 2.5-5mg q20min x 3 doses OR albuterol MDI 4-8 puffs with spacer q20min x 3
+      - Consider ipratropium with first albuterol dose
+      - Oral corticosteroids - Prednisone 1-2 mg/kg (max 60mg) or dexamethasone 0.6 mg/kg x 1 dose
+      - Reassess after 1 hour
+      - If good response - Discharge home with 3-5 day steroid course, albuterol MDI with spacer q4-6h PRN, follow-up with pediatrician/pulmonology within 1-7 days
+      - If incomplete response - Continue treatment, observe longer, consider admission
+      - Discharge criteria
+      - Sustained improvement after treatment (>1 hour since last albuterol)
+      - SpO2 >90-92% on room air
+      - Peak flow >70% predicted or personal best
+      - No or minimal distress
+      - Able to take oral steroids
+      - Safe home environment, reliable caregivers, access to follow-up
+      - Discharge medications
+      - Albuterol MDI 90 mcg, 2 puffs q4-6h PRN with spacer/mask
+      - Prednisone/prednisolone 1-2 mg/kg daily x 3-5 days (no taper) OR dexamethasone 0.6 mg/kg x 1
+      - Continue controller medication if already on one
+      - Asthma action plan review
+      - Follow-up within 1-7 days (earlier if moderate-severe)
+      - Trigger avoidance (smoking cessation in home, allergen control)
+      - Controller therapy assessment - If frequent exacerbations, poor control, or not on controller → start inhaled corticosteroid (ICS) like fluticasone

@@ -1,0 +1,161 @@
+tree_id: GEN-MED-HYPERTENSION-CRISIS
+name: Hypertensive Crisis Management
+family: GENERAL_MEDICINE
+specialty: Internal Medicine, Emergency Medicine, Critical Care
+chief_complaint: Severe Hypertension, Headache, Chest Pain, Neurologic Symptoms
+description: Evaluation and management of hypertensive urgency and emergency
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hypertensive_crisis_evaluation
+
+nodes:
+  - id: hypertensive_crisis_evaluation
+    type: question
+    text: "Acute end-organ damage present?"
+    options:
+      - label: "Hypertensive emergency (with end-organ damage)"
+        next: hypertensive_emergency
+      - label: "Hypertensive urgency (no end-organ damage)"
+        next: hypertensive_urgency
+      - label: "Specific hypertensive emergencies"
+        next: specific_emergencies
+
+  - id: hypertensive_emergency
+    type: diagnosis
+    name: "Hypertensive Emergency"
+    icd10: "I16.1"
+    urgency: critical
+    workup:
+      - Definition - Severe BP elevation (typically SBP >180 and/or DBP >120) with acute target organ damage
+      - Requires immediate BP reduction (minutes to hours) to prevent irreversible organ damage
+      - End-organ damage manifestations
+      - Neurologic - Hypertensive encephalopathy (headache, confusion, seizures, vision changes, altered mental status), intracerebral hemorrhage, ischemic stroke (do NOT lower BP acutely unless thrombolysis candidate), subarachnoid hemorrhage, posterior reversible encephalopathy syndrome (PRES)
+      - Cardiac - Acute coronary syndrome (MI), acute left ventricular failure/pulmonary edema, aortic dissection (MOST URGENT)
+      - Renal - Acute kidney injury (hematuria, proteinuria, elevated Cr)
+      - Microangiopathic hemolytic anemia (MAHA) - Schistocytes, elevated LDH, low haptoglobin
+      - Ophthalmologic - Papilledema, retinal hemorrhages/exudates
+      - Workup
+      - ECG - Ischemia, LVH, arrhythmias
+      - Chest X-ray - Pulmonary edema, widened mediastinum (dissection)
+      - Labs - Troponin (ACS), BNP (heart failure), Cr/BUN (renal), urinalysis (hematuria, proteinuria, RBC casts), peripheral smear (MAHA)
+      - CT head - If neurologic symptoms (ICH, SAH, stroke, encephalopathy)
+      - CT angiography chest - If suspect aortic dissection (asymmetric pulses, chest/back pain)
+      - Fundoscopy - Papilledema, hemorrhages
+    treatment:
+      - ICU admission - Continuous monitoring, arterial line for beat-to-beat BP
+      - IV antihypertensive agents - Titratable, short-acting
+      - Goal BP reduction - 10-20% reduction in first hour, then gradual to 160/100-110 over next 2-6 hours
+      - Avoid precipitous drops (can cause stroke, MI, renal failure from hypoperfusion)
+      - Exception: Aortic dissection (SBP <120 within 20 min), ICH (see specific emergencies)
+      - First-line agents
+      - Nicardipine - 5 mg/hr IV infusion, titrate by 2.5 mg/hr q5-15min (max 15 mg/hr)
+      - Advantages: Easy titration, no bolus needed, short half-life, cerebral/renal vasodilation
+      - Most versatile, good for most emergencies
+      - Labetalol - 20 mg IV bolus, then 40-80 mg q10min (max 300 mg total) OR infusion 0.5-2 mg/min
+      - Alpha + beta blocker, good for most emergencies
+      - First-line for aortic dissection (with esmolol)
+      - Avoid in acute heart failure (negative inotrope), severe bradycardia, asthma
+      - Clevidipine - 1-2 mg/hr IV, titrate by doubling q90sec (max 32 mg/hr)
+      - Ultra-short acting (1 min), very titratable, lipid emulsion
+      - Expensive, avoid if hypertriglyceridemia, soy/egg allergy
+      - Nitroprusside - 0.25-10 mcg/kg/min IV infusion
+      - Immediate onset, potent, easily titratable
+      - Concerns: Cyanide toxicity (if >48-72 hours or renal failure), increased ICP (avoid in ICH/stroke), coronary steal (avoid in ACS)
+      - Reserve for refractory cases or aortic dissection
+      - Esmolol - 500-1000 mcg/kg bolus, then 50-300 mcg/kg/min infusion
+      - Ultra-short acting beta-blocker (9 min half-life)
+      - First-line for aortic dissection (HR control <60 bpm before vasodilator)
+      - Fenoldopam - 0.1-0.3 mcg/kg/min IV, titrate q15min (max 1.6)
+      - Dopamine-1 agonist, increases renal perfusion
+      - Good if renal insufficiency concern
+      - Avoid in glaucoma (increases intraocular pressure)
+      - Hydralazine - 10-20 mg IV q4-6h
+      - Less predictable, less titratable, prolonged action
+      - Avoid except in pregnancy (eclampsia/preeclampsia)
+      - Enalaprilat - 1.25-5 mg IV q6h
+      - IV ACE inhibitor, onset 15-30 min, duration 6 hours
+      - Avoid in pregnancy, AKI
+      - Transition to oral - Once stabilized (6-12 hours), start oral agents (amlodipine, lisinopril, carvedilol, clonidine)
+
+  - id: hypertensive_urgency
+    type: diagnosis
+    name: "Hypertensive Urgency"
+    icd10: "I16.0"
+    urgency: medium
+    workup:
+      - Definition - Severe BP elevation (SBP >180 or DBP >120) WITHOUT acute end-organ damage
+      - No immediate risk, but increased long-term cardiovascular risk
+      - Often asymptomatic or nonspecific symptoms (headache, dizziness, anxiety)
+      - Evaluate for end-organ damage (same workup as emergency) - If negative, it's urgency
+      - Common scenarios - Medication noncompliance, pain, anxiety, withdrawal (clonidine, beta-blocker)
+    treatment:
+      - Outpatient management - Safe to discharge with close follow-up (24-48 hours)
+      - Do NOT use IV medications or rapid BP reduction (risk stroke/MI)
+      - Goal - Gradual reduction over 24-48 hours (days to weeks acceptable)
+      - Restart/intensify oral medications
+      - If previously on medications - Restart same regimen (most common issue is noncompliance)
+      - If not on treatment - Start oral agent (amlodipine 5-10 mg, lisinopril 10-20 mg, labetalol 100-200 mg, clonidine 0.1-0.2 mg)
+      - Combination therapy often needed (two agents different classes)
+      - Observation 4-6 hours - Reassess BP, ensure no symptoms develop, recheck if indicated (Cr if concerns)
+      - Address underlying cause - Pain control, anxiety management, medication compliance education
+      - Close follow-up - Recheck BP in 24-48 hours (primary care or clinic), adjust medications as needed
+      - Avoid rapid-acting agents - No sublingual nifedipine (unpredictable precipitous drops, stroke risk), no IV agents
+      - Patient education - Medication adherence, lifestyle modifications (low sodium, weight loss, exercise), home BP monitoring
+
+  - id: specific_emergencies
+    type: diagnosis
+    name: "Specific Hypertensive Emergencies"
+    icd10: "I16.1"
+    urgency: critical
+    workup:
+      - Different emergencies require tailored BP goals and agent selection
+    treatment:
+      - Aortic dissection - MOST URGENT
+      - Goal - SBP <120 mmHg AND HR <60 bpm within 20 minutes
+      - Beta-blocker FIRST (esmolol 500-1000 mcg/kg bolus then 50-300 mcg/kg/min OR labetalol 20 mg IV q10min)
+      - MUST reduce HR before vasodilator (prevent reflex tachycardia → increased shear stress → propagation)
+      - Then add vasodilator - Nicardipine OR nitroprusside 0.25-10 mcg/kg/min
+      - Urgent surgical consult (type A dissection), medical management + delayed surgery (type B uncomplicated)
+      - Acute ischemic stroke
+      - DO NOT lower BP unless extreme (>220/120) or thrombolysis candidate
+      - If NOT thrombolysis candidate - Permissive hypertension (brain autoregulation disrupted, BP supports penumbra perfusion)
+      - Treat only if SBP >220 or DBP >120 (then lower 10-15% cautiously)
+      - If thrombolysis (tPA) candidate - Lower to <185/110 before tPA, maintain <180/105 post-tPA x 24 hours
+      - Nicardipine or labetalol (avoid nitroprusside - increases ICP)
+      - Intracerebral hemorrhage (ICH)
+      - Rapid lowering now recommended (ATACH-2, INTERACT-2 trials)
+      - Goal SBP 140 mmHg within 1 hour if initial SBP 150-220
+      - Nicardipine or labetalol
+      - Avoid nitroprusside (increases ICP)
+      - Acute coronary syndrome (ACS)
+      - Goal - SBP <140 mmHg, reduce myocardial oxygen demand
+      - Nitroglycerin 5-200 mcg/min IV (coronary vasodilation, preload reduction)
+      - Beta-blocker (labetalol, esmolol) - Reduce HR, contractility
+      - Avoid hydralazine (reflex tachycardia)
+      - Acute heart failure/pulmonary edema
+      - Goal - Reduce preload and afterload
+      - Nitroglycerin IV (venodilation, reduces preload)
+      - Loop diuretic (furosemide 40-80 mg IV)
+      - Avoid beta-blockers (negative inotrope)
+      - Clevidipine or nicardipine if additional afterload reduction needed
+      - Eclampsia/preeclampsia
+      - Magnesium sulfate 4-6 g IV load, then 1-2 g/hr (seizure prophylaxis, first-line)
+      - Hydralazine 5-10 mg IV q20min OR labetalol 20 mg IV q10min
+      - Goal SBP <160, DBP <110
+      - Avoid ACE inhibitors, ARBs (teratogenic)
+      - Delivery definitive treatment
+      - Hypertensive encephalopathy
+      - Confusion, seizures, visual changes, headache, vomiting, PRES on MRI
+      - Gradual BP reduction 10-20% first hour (avoid precipitous drop → watershed infarcts)
+      - Nicardipine, labetalol, clevidipine
+      - Avoid nitroprusside (increases ICP)
+      - Acute kidney injury
+      - Moderate BP reduction (10-20% over 24 hours)
+      - Avoid precipitous drops (worsens renal perfusion)
+      - Nicardipine, clevidipine, fenoldopam (renal vasodilation)
+      - Catecholamine excess (pheochromocytoma, cocaine, amphetamines, MAO inhibitor crisis)
+      - Phentolamine 5-15 mg IV (alpha-blocker) for pheochromocytoma
+      - Benzodiazepines (lorazepam 1-2 mg IV) for cocaine/stimulants (sedation, reduce sympathetic tone)
+      - Avoid beta-blockers alone (unopposed alpha → paradoxical hypertension)
+      - After alpha-blockade, can add beta-blocker if needed

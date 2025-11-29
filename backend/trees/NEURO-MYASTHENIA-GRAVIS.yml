@@ -1,0 +1,156 @@
+tree_id: NEURO-MYASTHENIA-GRAVIS
+name: Myasthenia Gravis Evaluation
+family: NEUROLOGY
+specialty: Neurology, Neuromuscular
+chief_complaint: Muscle Weakness, Ptosis, Diplopia, Dysphagia
+description: Evaluation and management of myasthenia gravis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: mg_evaluation
+
+nodes:
+  - id: mg_evaluation
+    type: diagnosis
+    name: "Myasthenia Gravis"
+    icd10: "G70.00"
+    urgency: high
+    workup:
+      - Myasthenia gravis (MG) - Autoimmune disorder of neuromuscular junction, antibodies against acetylcholine receptors (AChR) or muscle-specific kinase (MuSK) → impaired neuromuscular transmission → muscle weakness
+      - Epidemiology - Prevalence 20 per 100,000, incidence 0.3-2.8 per 100,000/year
+      - Bimodal peak - Young women (20-40 years) and older men (60-80 years)
+      - Female predominance young-onset (2-3:1), male predominance late-onset
+      - Pathophysiology - Antibodies bind postsynaptic acetylcholine receptors (AChR 85%) or MuSK (5%) → receptor destruction/blockade/functional impairment → reduced available receptors → decreased neuromuscular transmission → fatigable weakness
+      - Thymus abnormalities (85%) - Thymic hyperplasia (50-70%, especially young), thymoma (10-15%, older patients)
+      - Clinical presentation - HALLMARK: Fatigable weakness (worsens with repetitive use, improves with rest)
+      - Ocular symptoms (85% initial, 15% remain purely ocular)
+      - Ptosis - Asymmetric, fatigable (worsens with sustained upgaze)
+      - Diplopia - Binocular (extraocular muscle weakness), variable
+      - Bulbar symptoms (15% initial presentation)
+      - Dysarthria - Nasal, slurred speech, fatigues with prolonged talking
+      - Dysphagia - Difficulty swallowing liquids > solids, nasal regurgitation
+      - Facial weakness - Reduced facial expression, difficulty closing eyes
+      - Limb weakness (10% initial, 85% eventually)
+      - Proximal > distal - Difficulty lifting arms overhead, rising from chair, climbing stairs
+      - Neck weakness - Difficulty holding head up (head drop)
+      - Respiratory failure (myasthenic crisis) - Life-threatening, 15-20% patients
+      - Weak respiratory muscles → hypercapnia, hypoxemia → respiratory failure
+      - Triggers - Infection (most common), surgery, medications, pregnancy/postpartum, rapid taper immunosuppression
+      - Symptoms - Dyspnea, tachypnea, orthopnea, accessory muscle use, anxiety
+      - Physical exam
+      - Ptosis - Unilateral or bilateral, asymmetric, fatigues with sustained upgaze (count to 60)
+      - Ice pack test - Apply ice to ptotic eyelid x 2 min → improves ptosis (cooling enhances neuromuscular transmission)
+      - Sensitivity 80%, specificity 90%
+      - Extraocular movements - Limitation (any direction), fatigable
+      - Facial weakness - Cannot bury eyelashes (orbicularis oculi), weak smile
+      - Neck flexion weakness - Cannot lift head off bed against resistance
+      - Limb strength - Proximal weakness, fatigues with repetitive movements (arm abduction 10 times)
+      - Reflexes - Normal (preserved, distinguishes from neuropathy/myopathy)
+      - Sensation - Normal (pure motor disorder)
+      - Diagnostic testing
+      - Antibody testing - FIRST-LINE
+      - Anti-AChR antibodies - 85% generalized MG, 50% ocular-only MG
+      - Highly specific (>95%), diagnostic if positive
+      - Anti-MuSK antibodies - 5% (MG with negative AChR), more severe phenotype (bulbar/respiratory prominent), less responsive to cholinesterase inhibitors
+      - Anti-LRP4 antibodies - Rare (~5%), seronegative MG
+      - Seronegative MG - 10-15% (negative AChR, MuSK, LRP4), diagnosis based on clinical + electrodiagnostic
+      - Edrophonium (Tensilon) test - BEDSIDE diagnostic test
+      - Short-acting cholinesterase inhibitor (increases ACh at synapse)
+      - Give edrophonium 2 mg IV test dose (watch for bradycardia), then 8 mg IV
+      - Positive - Objective improvement weakness within 30-60 seconds (ptosis improves, strength improves), lasts 5-10 minutes
+      - Sensitivity 80-95%, specificity 90%
+      - Complications - Bradycardia, syncope (have atropine ready)
+      - Less commonly used now (antibody testing preferred)
+      - Electrodiagnostic studies - Repetitive nerve stimulation (RNS) or single-fiber EMG (SFEMG)
+      - Repetitive nerve stimulation (RNS) - Stimulate nerve at 2-5 Hz, measure compound muscle action potential (CMAP)
+      - Positive - >10% decrement CMAP amplitude (fatigues with repetition)
+      - Sensitivity 50-75% (higher if generalized MG, lower if purely ocular)
+      - Single-fiber EMG (SFEMG) - Most sensitive test (95-99% sensitive)
+      - Increased jitter (variability in neuromuscular transmission timing) or blocking
+      - Abnormal in nearly all MG patients (including purely ocular)
+      - Not specific (abnormal in other neuromuscular disorders)
+      - CT or MRI chest - ESSENTIAL (evaluate thymus)
+      - Thymic hyperplasia (50-70%, young-onset MG)
+      - Thymoma (10-15%, older patients, associated with myasthenia gravis)
+      - All MG patients should have chest imaging (thymoma changes management)
+      - Thyroid function tests - TSH, free T4 (thyroid disease coexists 5-10%)
+      - Pulmonary function tests - Vital capacity, negative inspiratory force (baseline, monitor respiratory status)
+      - Vital capacity <15-20 mL/kg → impending respiratory failure
+      - Differential diagnosis - Lambert-Eaton myasthenic syndrome (improves with exercise, small cell lung cancer, anti-VGCC antibodies), botulism (descending paralysis, pupils dilated), stroke (sudden onset, sensory changes, UMN signs), mitochondrial myopathy (progressive, family history), brain stem lesion
+    treatment:
+      - Goals - Improve neuromuscular transmission, suppress autoimmune response
+      - Symptomatic treatment - Cholinesterase inhibitors
+      - Pyridostigmine (Mestinon) - FIRST-LINE symptomatic treatment
+      - Dose 30-120 mg PO q4-6h (start 30-60 mg TID, titrate up, typical dose 60 mg 4-5x/day)
+      - Mechanism - Inhibits acetylcholinesterase → increases ACh availability at synapse
+      - Onset 30-60 minutes, duration 3-4 hours
+      - Effect - Improves weakness 50-70% (not curative, symptomatic relief)
+      - Side effects - Cholinergic (diarrhea, abdominal cramps, salivation, bradycardia)
+      - Less effective in MuSK+ MG
+      - Immunosuppressive therapy - For inadequate response to pyridostigmine or moderate-severe disease
+      - Corticosteroids - Most commonly used immunosuppression
+      - Prednisone 1 mg/kg/day (or 60-80 mg daily)
+      - Initial worsening possible (10-20% transiently worsen in first 1-2 weeks, hospitalize if severe)
+      - Start low-dose and taper up if outpatient (reduce worsening risk), or high-dose if inpatient
+      - Clinical improvement 2-4 weeks, maximum benefit 3-6 months
+      - Taper slowly once remission achieved (to minimum effective dose or alternate-day)
+      - Long-term side effects - Weight gain, osteoporosis, diabetes, cataracts, infection risk
+      - Steroid-sparing agents - Add if inadequate response to steroids or to reduce steroid dose
+      - Azathioprine (Imuran) 2-3 mg/kg/day - Most commonly used
+      - Onset SLOW (3-12 months to benefit, latency effect)
+      - Check TPMT enzyme (deficiency causes severe myelosuppression)
+      - Monitor CBC q2 weeks x 3 months, then monthly (leukopenia), LFTs (hepatotoxicity)
+      - Side effects - Myelosuppression, hepatotoxicity, GI upset, infection, increased malignancy risk
+      - Mycophenolate mofetil (CellCept) 1000-1500 mg BID - Alternative
+      - Onset 6-12 months
+      - Side effects - Diarrhea, leukopenia, infection
+      - Methotrexate 15-25 mg weekly - Alternative
+      - Cyclosporine, tacrolimus - Less commonly used (renal/BP side effects)
+      - Rituximab (Rituxan) - Anti-CD20 monoclonal antibody
+      - For refractory MG (especially MuSK+ or seronegative)
+      - Depletes B-cells → reduces antibody production
+      - Dose 375 mg/m² weekly x 4 doses or 1000 mg x 2 doses (2 weeks apart)
+      - Improvement 3-6 months, can repeat q6-12 months
+      - Thymectomy - Surgical removal of thymus
+      - Indications
+      - Thymoma (ABSOLUTE indication, risk invasion/metastasis)
+      - Age <65 years with generalized MG (AChR+ antibodies, non-thymoma)
+      - Improves remission rate, reduces medication requirements
+      - Benefit 1-5 years post-surgery (delayed)
+      - MGTX trial - Thymectomy + prednisone superior to prednisone alone (3-year follow-up)
+      - Not beneficial if purely ocular MG, age >65, MuSK+ MG
+      - Approach - Transsternal, transcervical, or video-assisted thoracoscopic (VATS)
+      - Rapid immunomodulation - For myasthenic crisis or severe exacerbation
+      - Plasma exchange (PLEX) - Remove circulating antibodies
+      - 5 exchanges over 10-14 days (1-1.5 plasma volumes each)
+      - Improvement within days, lasts 4-8 weeks (temporary)
+      - Complications - Hypotension, infection, electrolyte abnormalities
+      - Intravenous immunoglobulin (IVIG) 2 g/kg over 2-5 days (0.4 g/kg/day x 5 days)
+      - Mechanism - Neutralizes autoantibodies, modulates immune system
+      - Improvement within 1-2 weeks, lasts 4-8 weeks
+      - Easier than PLEX (no central line), similar efficacy
+      - Side effects - Headache, aseptic meningitis, thrombosis, renal failure (rare)
+      - Use - Bridge to slower-acting immunosuppression, treat myasthenic crisis, preoperative optimization
+      - Myasthenic crisis management - MEDICAL EMERGENCY
+      - Recognition - Respiratory distress, tachypnea, weak cough, inability to clear secretions, dysphagia (aspiration risk)
+      - Vital capacity <15-20 mL/kg, NIF >-30 cm H2O → impending respiratory failure
+      - ICU admission - Close monitoring, pulmonary function testing q4-6h
+      - Intubation criteria - VC <15 mL/kg, NIF >-30, hypoxia, hypercarbia, inability to protect airway
+      - PLEX or IVIG - Rapid immunomodulation (equivalent efficacy)
+      - High-dose corticosteroids - Methylprednisolone 1000 mg IV daily x 3-5 days, then oral prednisone
+      - Hold pyridostigmine - During crisis (reduces secretions, confounds exam)
+      - Avoid triggers - Treat infection (most common precipitant), avoid medications that worsen MG
+      - Medications to avoid in MG - Worsen neuromuscular transmission
+      - Aminoglycosides - Gentamicin, tobramycin (block presynaptic ACh release)
+      - Fluoroquinolones - Ciprofloxacin, levofloxacin
+      - Macrolides - Azithromycin, erythromycin
+      - Magnesium - IV magnesium (preeclampsia treatment, avoid in MG)
+      - Neuromuscular blockers - Succinylcholine, vecuronium (prolonged paralysis)
+      - Beta-blockers - Propranolol, timolol eyedrops
+      - Statins - Can cause myopathy (use cautiously)
+      - Prognosis
+      - With treatment - Normal or near-normal life expectancy, 10-20% achieve remission (off medications), 30-40% minimal symptoms on low-dose medications
+      - Mortality - 3-5% (mostly myasthenic crisis, aspiration pneumonia)
+      - Ocular MG - 15% remain purely ocular (if no generalization after 2 years, unlikely to generalize)
+      - Thymoma-associated MG - More severe, worse prognosis
+      - MuSK+ MG - More severe bulbar/respiratory involvement, less responsive to cholinesterase inhibitors, may respond better to rituximab

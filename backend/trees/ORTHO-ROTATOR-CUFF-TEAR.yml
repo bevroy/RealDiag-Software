@@ -1,0 +1,102 @@
+tree_id: ORTHO-ROTATOR-CUFF-TEAR
+name: Rotator Cuff Tear Evaluation
+family: ORTHOPEDICS
+specialty: Orthopedic Surgery, Sports Medicine
+chief_complaint: Shoulder Pain, Weakness, Limited Range of Motion
+description: Evaluation and management of rotator cuff tears
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: rotator_cuff_evaluation
+
+nodes:
+  - id: rotator_cuff_evaluation
+    type: diagnosis
+    name: "Rotator Cuff Tear"
+    icd10: "M75.10"
+    urgency: medium
+    workup:
+      - Rotator cuff - Four muscles/tendons stabilize glenohumeral joint
+      - Supraspinatus (most commonly torn), infraspinatus, teres minor, subscapularis
+      - Function - Stabilize humeral head in glenoid, abduction/external rotation/internal rotation
+      - Epidemiology - Very common, 30% age >60 (prevalence increases with age), 70% age >80
+      - Causes
+      - Degenerative - Age-related tendon degeneration (most common), repetitive overhead activities (swimming, baseball, painting)
+      - Acute traumatic - Fall on outstretched arm, shoulder dislocation
+      - Risk factors - Age >40, repetitive overhead work/sports, smoking (impairs healing), impingement syndrome
+      - Types
+      - Partial-thickness tear - Does not go through full tendon thickness, bursal-sided or articular-sided
+      - Full-thickness tear - Complete disruption
+      - Massive tear - >5 cm or involving 2+ tendons
+      - Presentation
+      - Pain - Lateral shoulder, worse with overhead activities, lying on affected side at night
+      - Weakness - Difficulty with abduction (raising arm to side), external rotation
+      - Limited range of motion - Active > passive (can move arm with assistance, but not on own suggests tear vs. frozen shoulder)
+      - "Painful arc" 60-120° abduction
+      - May report "popping" sensation (if acute tear)
+      - Physical exam
+      - Inspection - Muscle atrophy (supraspinatus/infraspinatus fossae) if chronic
+      - Palpation - Tenderness anterolateral acromion, greater tuberosity
+      - Range of motion - Active ROM reduced (passive may be preserved)
+      - Strength testing (grade 0-5)
+      - Supraspinatus (empty can test, Jobe test) - Abduct arm 90°, forward flex 30°, thumb down (empty can position), resist downward pressure
+      - Weakness or pain suggests supraspinatus pathology
+      - Infraspinatus/teres minor (external rotation) - Arm at side, elbow 90°, resist external rotation
+      - Subscapularis (internal rotation) - Lift-off test (hand behind back, lift off), belly press test (press hand on abdomen, elbow forward)
+      - Special tests
+      - Drop arm test - Passively abduct arm to 90°, ask patient to slowly lower
+      - Arm "drops" suddenly (cannot control descent) if full-thickness tear
+      - Impingement signs - Neer sign (pain with passive forward flexion), Hawkins-Kennedy sign (pain with internal rotation at 90° flexion)
+      - Imaging
+      - X-ray shoulder (AP, axillary, outlet view) - Rule out fracture, arthritis, calcific tendinitis
+      - Chronic tears - Humeral head migration superiorly (decreased acromiohumeral distance <7 mm), acromial spurring
+      - MRI shoulder - GOLD STANDARD for rotator cuff tears
+      - High sensitivity/specificity >90% for full-thickness tears
+      - Visualize tear size, location, muscle quality (atrophy, fatty infiltration = poor prognosis)
+      - Ultrasound - Alternative (operator-dependent), good for full-thickness tears, less expensive
+      - MR arthrography - Contrast injected into joint, best for partial tears
+    treatment:
+      - Non-operative - First-line for partial tears, small full-thickness tears (<1 cm), low-demand patients, elderly
+      - NSAIDs - Ibuprofen 600 mg TID, naproxen 500 mg BID (reduce pain/inflammation)
+      - Physical therapy - Core of conservative management (3-6 months trial)
+      - Phase 1 - Pain control, passive ROM (avoid stiffness)
+      - Phase 2 - Active ROM, scapular stabilization
+      - Phase 3 - Rotator cuff strengthening (resistance exercises)
+      - Success rate 50-80% (partial tears 80%, small full-thickness 50%)
+      - Subacromial corticosteroid injection - If refractory pain
+      - Betamethasone or triamcinolone + lidocaine
+      - Temporary relief (weeks to months), may facilitate PT
+      - Limited injections (max 3 per year, weakens tendon)
+      - Surgical repair - Indications
+      - Acute traumatic full-thickness tear (younger, active patient)
+      - Failed conservative management 3-6 months
+      - Functional limitations (cannot perform ADLs or work)
+      - Full-thickness tear >1 cm
+      - Young patient (<60), active, good tissue quality
+      - Techniques
+      - Arthroscopic repair - MOST COMMON, minimally invasive
+      - Insert anchors in bone (greater tuberosity), suture tendon to bone
+      - Advantages - Less pain, faster recovery, cosmetic
+      - Success rate 80-95% (small tears), 60-80% (large tears)
+      - Mini-open or open repair - For massive tears, complex repairs, revision
+      - Superior capsular reconstruction - For irreparable massive tears (graft to fill defect)
+      - Reverse total shoulder arthroplasty - For irreparable massive tears with arthritis, elderly
+      - Converts shoulder biomechanics (deltoid primary mover instead of rotator cuff)
+      - Outcomes - 80-90% pain relief, improved function
+      - Postoperative rehabilitation - Critical for success
+      - Sling immobilization 4-6 weeks
+      - Phase 1 (0-6 weeks) - Passive ROM (therapist moves arm, protect repair)
+      - Phase 2 (6-12 weeks) - Active ROM
+      - Phase 3 (12+ weeks) - Strengthening
+      - Return to full activity 4-6 months
+      - Irreparable tears - Massive tears, severe fatty infiltration, elderly
+      - Non-operative management - PT, injections, pain control
+      - Debridement ± subacromial decompression - Palliative, remove inflamed tissue, improve space
+      - Tendon transfer - Latissimus dorsi or pectoralis major (for young patients)
+      - Reverse total shoulder arthroplasty - If arthritis present
+      - Prognosis
+      - Non-operative - 50-80% improve, but tear may progress (20-40% enlarge over 5 years)
+      - Surgical repair - 80-95% success (small-medium tears), 60-80% (large-massive tears)
+      - Re-tear rate 10-30% (higher with larger tears, older age, poor tissue quality)
+      - Most re-tears asymptomatic (remain pain-free despite recurrent tear)
+      - Complications - Stiffness (frozen shoulder 5-10%), infection (<1%), nerve injury (axillary nerve rare)

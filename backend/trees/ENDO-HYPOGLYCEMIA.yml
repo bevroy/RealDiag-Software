@@ -1,0 +1,269 @@
+tree_id: ENDO-HYPOGLYCEMIA
+name: Hypoglycemia Evaluation
+family: ENDOCRINOLOGY
+specialty: Endocrinology/Emergency Medicine/Primary Care
+chief_complaint: Hypoglycemia
+description: Diagnostic decision tree for evaluating hypoglycemia
+version: "1.0"
+author: RealDiag Team
+entry_point: glucose_level
+
+nodes:
+  - id: glucose_level
+    type: question
+    text: "Blood glucose level and symptoms?"
+    options:
+      - label: "< 54 mg/dL with symptoms (severe)"
+        next: severe_hypoglycemia
+      - label: "54-70 mg/dL with symptoms"
+        next: moderate_hypoglycemia
+      - label: "< 70 mg/dL without symptoms"
+        next: asymptomatic_low
+
+  - id: severe_hypoglycemia
+    type: question
+    text: "Patient status?"
+    options:
+      - label: "Altered mental status, seizures, unconscious"
+        next: critical_hypoglycemia
+      - label: "Conscious, can swallow"
+        next: treatable_hypoglycemia
+
+  - id: critical_hypoglycemia
+    type: diagnosis
+    diagnosis: Severe Hypoglycemia with Neuroglycopenia
+    icd10: E16.2
+    urgency: critical
+    workup:
+      - Stat glucose
+      - BMP
+      - Consider insulin/C-peptide levels
+    treatment:
+      - Dextrose 50% 25g IV (50mL of D50W)
+      - Glucagon 1mg IM if no IV access
+      - Recheck glucose q15min
+      - Continuous glucose monitoring
+      - ICU admission if recurrent
+
+  - id: treatable_hypoglycemia
+    type: diagnosis
+    diagnosis: Symptomatic Hypoglycemia
+    icd10: E16.2
+    urgency: high
+    workup:
+      - Capillary glucose
+      - Review medications
+    treatment:
+      - 15g fast-acting carbs (juice, glucose tabs)
+      - Recheck in 15 min (Rule of 15)
+      - Repeat if still < 70 mg/dL
+      - Follow with complex carb + protein
+      - Identify and correct cause
+
+  - id: moderate_hypoglycemia
+    type: question
+    text: "Diabetic patient?"
+    options:
+      - label: "Yes - on diabetes medications"
+        next: diabetic_hypoglycemia
+      - label: "No - not diabetic"
+        next: nondiabetic_hypoglycemia
+
+  - id: diabetic_hypoglycemia
+    type: question
+    text: "Medications and timing?"
+    options:
+      - label: "On insulin or sulfonylurea"
+        next: medication_induced
+      - label: "Missed meals, increased activity"
+        next: situational_hypoglycemia
+      - label: "Frequent episodes, unpredictable"
+        next: hypoglycemia_unawareness
+
+  - id: medication_induced
+    type: diagnosis
+    diagnosis: Medication-Induced Hypoglycemia
+    icd10: E16.0
+    urgency: medium
+    workup:
+      - Review medication regimen
+      - HbA1c
+      - Renal function
+    treatment:
+      - Adjust insulin/sulfonylurea dose
+      - Educate on timing and food
+      - Consider medication change
+      - CGM if available
+      - Glucagon prescription
+
+  - id: situational_hypoglycemia
+    type: diagnosis
+    diagnosis: Situational Hypoglycemia
+    icd10: E16.1
+    urgency: medium
+    workup:
+      - Review lifestyle factors
+      - Medication review
+    treatment:
+      - Diabetes education
+      - Adjust meds before exercise
+      - Meal planning
+      - Carry fast-acting carbs
+      - Medical alert bracelet
+
+  - id: hypoglycemia_unawareness
+    type: diagnosis
+    diagnosis: Hypoglycemia Unawareness
+    icd10: E16.2
+    urgency: high
+    workup:
+      - HbA1c
+      - Autonomic testing
+      - Review glucose patterns
+    treatment:
+      - Relax glycemic targets temporarily
+      - CGM with alerts
+      - Intensive education
+      - Consider insulin pump
+      - Endocrinology referral
+
+  - id: nondiabetic_hypoglycemia
+    type: question
+    text: "Timing relative to meals?"
+    options:
+      - label: "Fasting (> 8 hours without food)"
+        next: fasting_hypoglycemia
+      - label: "Postprandial (within 4 hours of eating)"
+        next: reactive_hypoglycemia
+      - label: "Random, no clear pattern"
+        next: investigate_causes
+
+  - id: fasting_hypoglycemia
+    type: question
+    text: "Associated conditions?"
+    options:
+      - label: "History of bariatric surgery"
+        next: post_bariatric
+      - label: "Liver or kidney disease"
+        next: organ_dysfunction
+      - label: "No obvious cause"
+        next: insulinoma_workup
+
+  - id: post_bariatric
+    type: diagnosis
+    diagnosis: Post-Bariatric Hypoglycemia
+    icd10: E89.1
+    urgency: medium
+    workup:
+      - Mixed meal tolerance test
+      - Insulin/C-peptide levels
+    treatment:
+      - Dietary modifications (low GI, frequent meals)
+      - Acarbose
+      - Avoid simple sugars
+      - Consider calcium channel blockers
+      - Rarely requires revision surgery
+
+  - id: organ_dysfunction
+    type: diagnosis
+    diagnosis: Hypoglycemia due to Organ Dysfunction
+    icd10: E16.2
+    urgency: high
+    workup:
+      - LFTs
+      - Renal function
+      - Cortisol level
+    treatment:
+      - Treat underlying condition
+      - Frequent meals
+      - Dextrose infusion if severe
+      - Specialist consultation
+
+  - id: insulinoma_workup
+    type: diagnosis
+    diagnosis: Insulinoma (Rule Out)
+    icd10: D13.7
+    urgency: high
+    workup:
+      - 72-hour supervised fast
+      - Insulin, C-peptide, proinsulin during hypoglycemia
+      - CT abdomen/MRI pancreas
+      - Endoscopic ultrasound
+    treatment:
+      - Frequent small meals until diagnosis
+      - Surgical resection if confirmed
+      - Diazoxide if inoperable
+      - Endocrinology/surgery referral
+
+  - id: reactive_hypoglycemia
+    type: question
+    text: "Severity and frequency?"
+    options:
+      - label: "Mild, occasional"
+        next: physiologic_reactive
+      - label: "Severe, frequent"
+        next: pathologic_reactive
+
+  - id: physiologic_reactive
+    type: diagnosis
+    diagnosis: Reactive Hypoglycemia (Physiologic)
+    icd10: E16.1
+    urgency: low
+    workup:
+      - Mixed meal tolerance test
+      - Rule out diabetes (OGTT)
+    treatment:
+      - Dietary modifications (low GI, high protein/fiber)
+      - Avoid simple sugars
+      - Small frequent meals
+      - Monitor symptoms
+      - Usually benign
+
+  - id: pathologic_reactive
+    type: diagnosis
+    diagnosis: Reactive Hypoglycemia (Pathologic)
+    icd10: E16.1
+    urgency: medium
+    workup:
+      - Extended OGTT (5 hours)
+      - Insulin, C-peptide levels
+      - Screen for early diabetes
+    treatment:
+      - Comprehensive dietary plan
+      - Acarbose if severe
+      - Monitor for diabetes development
+      - Endocrinology referral
+
+  - id: investigate_causes
+    type: diagnosis
+    diagnosis: Hypoglycemia - Unknown Etiology
+    icd10: E16.2
+    urgency: medium
+    workup:
+      - Comprehensive metabolic panel
+      - Cortisol, growth hormone
+      - Insulin, C-peptide
+      - Medication review
+      - Consider factitious hypoglycemia
+    treatment:
+      - Frequent monitoring
+      - Dietary modifications
+      - Treat identified cause
+      - Endocrinology referral
+      - Document episodes
+
+  - id: asymptomatic_low
+    type: diagnosis
+    diagnosis: Asymptomatic Hypoglycemia
+    icd10: E16.2
+    urgency: low
+    workup:
+      - Confirm with lab glucose
+      - Review medications
+      - Screen for diabetes if borderline
+    treatment:
+      - Dietary counseling
+      - Avoid prolonged fasting
+      - Monitor symptoms
+      - Repeat testing if persistent
+      - May be artifact (pseudohypoglycemia)

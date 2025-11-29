@@ -1,0 +1,175 @@
+tree_id: PULM-OCCUPATIONAL-LUNG-DISEASE
+name: Occupational Lung Disease Evaluation
+family: PULMONOLOGY
+specialty: Pulmonology, Occupational Medicine
+chief_complaint: Dyspnea, Cough, Chest Tightness
+description: Evaluation and management of occupational lung diseases
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: occupational_lung_evaluation
+
+nodes:
+  - id: occupational_lung_evaluation
+    type: question
+    text: "Which type of occupational lung disease?"
+    options:
+      - label: "Asbestosis"
+        next: asbestosis
+      - label: "Silicosis"
+        next: silicosis
+      - label: "Coal worker's pneumoconiosis"
+        next: coal_workers_pneumoconiosis
+      - label: "Occupational asthma"
+        next: occupational_asthma
+
+  - id: asbestosis
+    type: diagnosis
+    name: "Asbestosis"
+    icd10: "J61"
+    urgency: medium
+    workup:
+      - Asbestosis - Diffuse interstitial pulmonary fibrosis caused by chronic asbestos fiber inhalation
+      - Latency period - 15-30 years after first exposure (dose-dependent)
+      - Occupational exposure - Shipbuilding, construction, insulation work, automotive brake repair, mining, textiles
+      - Asbestos fiber types - Serpentine (chrysotile, most common 95%) and amphibole (crocidolite, amosite, more fibrogenic)
+      - Pathophysiology - Asbestos fibers <5 μm diameter reach alveoli → phagocytosed by macrophages → inflammatory response → fibrosis (predominantly lower lobes)
+      - Fibers persist in lung tissue (biopersistent)
+      - Clinical presentation - Insidious onset progressive dyspnea (exertional initially), nonproductive cough, chest tightness
+      - Physical exam - Bibasilar inspiratory crackles ("Velcro rales"), digital clubbing (50%), cyanosis (advanced)
+      - Chest X-ray - Bilateral lower lobe reticular opacities, pleural plaques (calcified or non-calcified, marker of asbestos exposure but not disease severity)
+      - ILO classification (International Labour Organization) - Standardized grading 0-3 based on profusion of opacities
+      - HRCT chest - More sensitive than CXR
+      - Findings - Subpleural reticular opacities, honeycombing (advanced), interlobular septal thickening, parenchymal bands
+      - Pleural abnormalities - Pleural plaques (bilateral, calcified, diaphragm/lateral chest wall), diffuse pleural thickening, rounded atelectasis
+      - PFTs - Restrictive pattern (reduced FVC, FEV1, TLC), reduced DLCO (impaired gas exchange)
+      - FEV1/FVC ratio preserved or increased (restrictive)
+      - Diagnosis - Occupational history + imaging findings + restrictive PFTs
+      - Lung biopsy rarely needed (if atypical presentation)
+      - Asbestos bodies (golden-brown rod-like structures, asbestos fiber coated with iron-protein) on sputum or BAL
+      - Complications
+      - Lung cancer - 5x increased risk (synergistic with smoking, 50-90x risk if both)
+      - Mesothelioma - Malignant pleural tumor (latency 30-40 years), highly associated with asbestos (especially amphibole), poor prognosis (median survival 9-12 months)
+      - Progressive respiratory failure
+    treatment:
+      - No specific treatment (irreversible fibrosis)
+      - Remove from exposure (prevent progression)
+      - Smoking cessation - CRITICAL (reduces lung cancer risk)
+      - Supplemental oxygen - If hypoxemia (PaO2 <55 mmHg or O2 sat <88%)
+      - Pulmonary rehabilitation - Exercise training, improve functional capacity
+      - Vaccinations - Influenza annual, pneumococcal
+      - Surveillance - Chest X-ray or CT annually (screen for lung cancer), PFTs annually
+      - Lung transplant - If advanced, refractory respiratory failure
+      - Legal/compensation - Workers' compensation eligible, document exposure history
+
+  - id: silicosis
+    type: diagnosis
+    name: "Silicosis"
+    icd10: "J62.8"
+    urgency: high
+    workup:
+      - Silicosis - Pneumoconiosis caused by inhalation of crystalline silica (silicon dioxide) dust
+      - Occupational exposure - Mining, sandblasting, stone cutting, quarrying, foundry work, ceramics, glass manufacturing, construction (concrete, masonry)
+      - Types - Chronic, accelerated, acute
+      - Chronic silicosis - Most common (>10 years exposure), slow progressive nodular disease
+      - Accelerated silicosis - 5-10 years heavy exposure, more rapid progression
+      - Acute silicosis (silicoproteinosis) - Months to 5 years intense exposure (sandblasting), alveolar filling (mimics pulmonary alveolar proteinosis), rapidly progressive
+      - Pathophysiology - Crystalline silica particles →phagocytosed by macrophages → macrophage death → release inflammatory mediators → fibrosis
+      - Silicotic nodules - Whorled collagen (hyalinized), central necrosis
+      - Clinical presentation
+      - Chronic - Asymptomatic early, progressive dyspnea, cough
+      - Acute - Rapid onset dyspnea, fever, weight loss (weeks to months)
+      - Physical exam - Crackles, decreased breath sounds (if advanced)
+      - Chest X-ray
+      - Chronic - Upper lobe predominant small rounded nodules (1-10 mm), "eggshell calcification" hilar lymph nodes (pathognomonic)
+      - Progressive massive fibrosis (PMF) - Conglomerate masses >1 cm (upper lobes), background nodular opacities
+      - Acute - Bilateral alveolar opacities (ground-glass, consolidation)
+      - HRCT - More sensitive, centrilobular nodules, PMF masses, ground-glass (acute)
+      - PFTs
+      - Chronic - Restrictive or mixed obstructive-restrictive, reduced DLCO
+      - Acute - Severe restriction, markedly reduced DLCO
+      - Diagnosis - Occupational history + imaging + PFTs
+      - Complications
+      - Progressive massive fibrosis (10-20% chronic silicosis)
+      - Tuberculosis - 3-30x increased risk (impaired macrophage function)
+      - Screen all silicosis patients (CXR, IGRA or PPD, consider empiric treatment if endemic area)
+      - Lung cancer, COPD, autoimmune diseases (rheumatoid arthritis, scleroderma)
+    treatment:
+      - Remove from exposure
+      - Acute silicosis - Whole lung lavage (wash out proteinaceous material, temporary improvement)
+      - Corticosteroids (controversial, limited efficacy)
+      - TB screening/treatment - Latent TB treatment (isoniazid 9 months) if positive IGRA/PPD
+      - Active TB treatment if diagnosed
+      - Supportive care - Oxygen, pulmonary rehabilitation
+      - Lung transplant - If advanced, acute silicosis good candidacy (disease doesn't recur in transplanted lung)
+      - Prevention - Engineering controls (wet cutting, ventilation), respiratory protection (N95 respirators insufficient, need higher protection)
+
+  - id: coal_workers_pneumoconiosis
+    type: diagnosis
+    name: "Coal Worker's Pneumoconiosis"
+    icd10: "J60"
+    urgency: medium
+    workup:
+      - Coal worker's pneumoconiosis (CWP, "black lung disease") - Pneumoconiosis from coal dust inhalation
+      - Occupational exposure - Underground coal mining (higher risk), surface mining
+      - Types - Simple CWP vs. complicated CWP (progressive massive fibrosis)
+      - Pathophysiology - Coal dust particles → macrophages → coal macules (dust-laden macrophages + minimal fibrosis) → coal nodules (dense collagen + dust)
+      - Clinical presentation
+      - Simple CWP - Often asymptomatic (not disabling), may have cough, black sputum (melanoptysis)
+      - Complicated CWP (PMF) - Progressive dyspnea, cough, sputum production, respiratory failure
+      - Physical exam - Usually normal (simple), crackles/decreased breath sounds (PMF)
+      - Chest X-ray
+      - Simple CWP - Small rounded opacities (1-10 mm), upper/mid zones, background of increased linear markings
+      - Complicated CWP (PMF) - Large opacities >1 cm (coalesced nodules), upper lobe masses, background simple CWP
+      - Cavitation possible (ischemic necrosis)
+      - HRCT - Better characterization, centrilobular nodules, emphysema
+      - PFTs - Simple CWP often normal, PMF restrictive or mixed pattern
+      - Diagnosis - Coal mining exposure + imaging
+      - Complications - PMF, Caplan syndrome (rheumatoid arthritis + large lung nodules in coal workers), COPD, mycobacterial infections
+    treatment:
+      - Remove from exposure
+      - No specific treatment
+      - Treat COPD if present (bronchodilators, inhaled steroids)
+      - Oxygen, pulmonary rehabilitation
+      - Lung transplant (if PMF, severe)
+
+  - id: occupational_asthma
+    type: diagnosis
+    name: "Occupational Asthma"
+    icd10: "J45.50"
+    urgency: medium
+    workup:
+      - Occupational asthma - Asthma caused or exacerbated by workplace exposures
+      - Most common occupational lung disease (15% adult asthma)
+      - Types
+      - Immunologic (sensitizer-induced) - Latency period (weeks to years), specific IgE or T-cell mediated
+      - High molecular weight (>5 kDa) - Proteins, flour, enzymes, latex, animal dander
+      - Low molecular weight (<5 kDa) - Diisocyanates (polyurethane foam, paint), wood dust, metals (platinum, nickel)
+      - Non-immunologic (irritant-induced, RADS) - Immediate onset after single high-level exposure to irritant (no latency)
+      - Reactive airways dysfunction syndrome (RADS) - Acute irritant exposure (chlorine gas, ammonia, smoke) → persistent asthma
+      - High-risk occupations - Bakers (flour), healthcare workers (latex, cleaning agents), spray painters (isocyanates), woodworkers, farmers, laboratory animal workers
+      - Clinical presentation - Asthma symptoms (dyspnea, wheezing, chest tightness, cough) that improve away from work (weekends, vacations)
+      - Pattern - Symptoms worse at work, improve away from work (pathognomonic)
+      - May have delayed onset (symptoms peak 4-12 hours after exposure)
+      - Physical exam - Expiratory wheezing (during exposure), may be normal if remote from exposure
+      - Diagnosis - Clinical history + objective confirmation
+      - Detailed occupational history - Job tasks, exposures, timing of symptoms
+      - PFTs with bronchodilator - Reversible airflow obstruction (FEV1 increase ≥12% and ≥200 mL post-bronchodilator)
+      - Serial peak flow monitoring - Measure peak flow 4x daily for 2-3 weeks at work and away from work
+      - ≥20% variability between work and off-work periods suggests occupational asthma
+      - Methacholine challenge - Nonspecific bronchial hyperresponsiveness (PC20 <8 mg/mL)
+      - Specific inhalation challenge - Gold standard (research setting), reproduce exposure in controlled lab, monitor FEV1
+      - Positive if FEV1 drops ≥20%
+      - Not widely available, risk severe reaction
+      - Specific IgE testing - If high molecular weight allergen (flour, latex)
+      - Skin prick testing or serum IgE
+    treatment:
+      - Remove from exposure - MOST IMPORTANT (early removal improves prognosis)
+      - Complete avoidance ideal (job change), but not always feasible
+      - Reduce exposure - Engineering controls (ventilation, enclosure), respiratory protection (N95 or higher)
+      - Continued exposure → worsening asthma, become sensitized (require lower exposure trigger)
+      - Standard asthma treatment - Inhaled corticosteroids (ICS) + long-acting beta-agonist (LABA) if needed
+      - Short-acting beta-agonist (SABA) for rescue
+      - Prognosis - Better if removed early (<1-2 years symptoms), 30-70% improve/resolve if removed from exposure
+      - Continued exposure → irreversible airway remodeling, persistent asthma even after removal
+      - Workers' compensation, disability benefits

@@ -1,0 +1,129 @@
+tree_id: HEME-CHRONIC-MYELOID-LEUKEMIA
+name: Chronic Myeloid Leukemia Evaluation
+family: HEMATOLOGY
+specialty: Hematology, Oncology
+chief_complaint: Fatigue, Weight Loss, Early Satiety, Splenomegaly
+description: Evaluation and management of chronic myeloid leukemia
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: cml_evaluation
+
+nodes:
+  - id: cml_evaluation
+    type: diagnosis
+    name: "Chronic Myeloid Leukemia"
+    icd10: "C92.1"
+    urgency: high
+    workup:
+      - Chronic myeloid leukemia (CML) - Myeloproliferative neoplasm characterized by uncontrolled proliferation of myeloid cells (granulocytes, especially neutrophils)
+      - Incidence - 1-2 per 100,000, 15% adult leukemias, 8000 new cases/year US
+      - Median age 65 years, slight male predominance
+      - Etiology - Philadelphia chromosome (BCR-ABL1 fusion gene) in >95%
+      - Pathophysiology - Translocation t(9;22) (q34;q11) → fusion BCR gene (chromosome 22) with ABL1 gene (chromosome 9)
+      - BCR-ABL1 fusion protein - Constitutively active tyrosine kinase → uncontrolled proliferation, inhibited apoptosis
+      - Philadelphia chromosome - Abnormal shortened chromosome 22 (visible on cytogenetics)
+      - BCR-ABL1 transcript variants - p210 (most common, e13a2 or e14a2), p190 (worse prognosis), p230
+      - Phases - Three distinct phases (natural progression if untreated)
+      - Chronic phase (CP) - 85% at diagnosis, indolent, controlled proliferation
+      - Blasts <10% blood/marrow, basophils <20%, platelets >100K (unless treatment-related)
+      - Most responsive to therapy (>90% achieve remission with TKI)
+      - Accelerated phase (AP) - Transition phase, 10% at diagnosis
+      - Blasts 10-19% blood/marrow, basophils ≥20%, platelets <100K (unrelated to treatment), clonal evolution (new cytogenetic abnormalities), increasing splenomegaly despite treatment
+      - Less responsive to therapy
+      - Blast phase (BP, blast crisis) - 5% at diagnosis, acute leukemia (myeloid 70%, lymphoid 30%)
+      - Blasts ≥20% blood/marrow, extramedullary blast proliferation
+      - Poor prognosis (median survival 6-12 months if untreated, 3-9 months even with treatment)
+      - Clinical presentation
+      - Asymptomatic (40-50%) - Incidental finding elevated WBC on routine CBC
+      - Symptomatic chronic phase - Insidious onset
+      - Fatigue, malaise, weight loss, night sweats (hypermetabolic symptoms)
+      - Early satiety, left upper quadrant fullness/pain (massive splenomegaly)
+      - Bleeding/bruising (platelet dysfunction), thrombosis (hyperviscosity if WBC >200-300K)
+      - Priapism (rare, leukostasis)
+      - Gout/hyperuricemia (high cell turnover)
+      - Accelerated/blast phase - Worsening symptoms, fever, bone pain, infections, bleeding
+      - Physical exam
+      - Splenomegaly (90% chronic phase, often MASSIVE, palpable 10-20 cm below costal margin)
+      - Hepatomegaly (50%)
+      - Pallor, petechiae/ecchymoses (if thrombocytopenic or platelet dysfunction)
+      - Labs
+      - CBC - Leukocytosis (often marked, 20,000-500,000/μL)
+      - Entire spectrum of myeloid maturation (myelocytes, metamyelocytes, bands, neutrophils) - "left shift"
+      - Basophilia, eosinophilia (characteristic)
+      - Anemia (mild-moderate)
+      - Platelets - Normal, elevated (50%), or low (thrombocytopenia in advanced disease)
+      - Peripheral smear - Myeloid precursors all stages, basophilia, eosinophilia
+      - Low leukocyte alkaline phosphatase (LAP) score - Distinguishes CML from leukemoid reaction (infection, inflammation have HIGH LAP)
+      - Chemistry - Elevated uric acid (tumor burden), elevated LDH (cell turnover), elevated B12 (increased transcobalamin from granulocytes)
+      - Bone marrow aspirate/biopsy - Hypercellular (90-100%), myeloid hyperplasia, increased myeloid:erythroid ratio (10-30:1, normal 2-4:1)
+      - Cytogenetics - Philadelphia chromosome t(9;22) in 95%
+      - FISH (fluorescence in situ hybridization) - Detect BCR-ABL1 fusion (more sensitive than karyotype)
+      - RT-PCR (reverse transcriptase PCR) - Quantify BCR-ABL1 transcript levels (gold standard for diagnosis and monitoring)
+      - Report as BCR-ABL1 transcript % (international scale, IS)
+      - Baseline establishes response to treatment
+      - Philadelphia-negative CML (5%) - Same clinical presentation, BCR-ABL1 positive by FISH/PCR (cryptic translocation not visible on karyotype)
+      - Differential diagnosis - Leukemoid reaction (infection, inflammation, malignancy → reactive leukocytosis, but LAP elevated, no Philadelphia chromosome)
+      - Other myeloproliferative neoplasms (polycythemia vera, essential thrombocythemia, primary myelofibrosis) - JAK2 mutation, no BCR-ABL1
+      - Chronic myelomonocytic leukemia (CMML), atypical CML (aCML) - No Philadelphia chromosome
+      - Risk stratification - Predict prognosis, guide treatment intensity
+      - Sokal score - Age, spleen size, platelet count, blasts (traditional)
+      - Hasford (Euro) score - Adds eosinophils, basophils
+      - ELTS score (EUTOS long-term survival) - Age, spleen size, platelets, blasts
+      - Low, intermediate, high risk (5-year survival differs)
+    treatment:
+      - Tyrosine kinase inhibitors (TKIs) - FIRST-LINE, revolutionary (CML transformed from fatal to chronic disease, near-normal life expectancy)
+      - Imatinib (Gleevec) - First TKI (approved 2001), BCR-ABL1 inhibitor
+      - Dose - 400 mg PO daily (chronic phase), 600-800 mg daily (accelerated/blast phase)
+      - IRIS trial - 10-year overall survival 83%, complete cytogenetic response (CCyR) 83%
+      - Side effects - Edema (periorbital, peripheral), nausea, diarrhea, muscle cramps, rash, myelosuppression
+      - Second-generation TKIs - More potent, faster/deeper responses
+      - Dasatinib (Sprycel) 100 mg PO daily - Dual SRC/ABL inhibitor
+      - Faster major molecular response (MMR) than imatinib
+      - Side effects - Pleural effusions (30%, dose-reduce or diuretics), pulmonary hypertension (rare), bleeding (platelet dysfunction)
+      - Nilotinib (Tasigna) 300 mg PO BID (take on empty stomach, 2 hours before/after food)
+      - Faster MMR than imatinib
+      - Side effects - Hyperglycemia, QT prolongation, cardiovascular events (peripheral artery disease, ischemic heart disease)
+      - Bosutinib (Bosulif) 400 mg PO daily - SRC/ABL inhibitor
+      - Diarrhea common (50%)
+      - First-line choice - Imatinib vs. second-generation TKI
+      - Imatinib - Longer track record, lower cost (generic available), fewer cardiovascular side effects
+      - Appropriate for most patients, especially older/comorbidities
+      - Dasatinib/nilotinib - Faster/deeper responses (achieve MMR faster, more patients achieve deep molecular response DMR)
+      - Consider if younger, high-risk disease, desire treatment-free remission
+      - Third-generation TKIs - For T315I mutation (resistant to first/second-generation)
+      - Ponatinib (Iclusig) 45 mg PO daily - Only TKI active against T315I
+      - Cardiovascular toxicity (arterial thrombosis 20-30%, dose-reduce to 15-30 mg maintain response while reducing toxicity)
+      - Asciminib (Scemblix) 40 mg PO BID - Allosteric inhibitor (binds different site than ATP-competitive TKIs)
+      - Approved for T315I mutation or intolerance to ≥2 prior TKIs
+      - Lower toxicity than ponatinib
+      - Monitoring response - BCR-ABL1 transcript levels (RT-qPCR) every 3 months
+      - Milestones
+      - 3 months - BCR-ABL1 ≤10% (early molecular response, EMR)
+      - 6 months - BCR-ABL1 ≤1%
+      - 12 months - BCR-ABL1 ≤0.1% (major molecular response, MMR, MR3)
+      - Deeper responses - MR4 (≤0.01%), MR4.5 (≤0.0032%), MR5 (undetectable)
+      - Failure to meet milestones → switch TKI, assess for resistance mutations (BCR-ABL1 kinase domain sequencing)
+      - Treatment-free remission (TFR) - Discontinue TKI in select patients with sustained deep molecular response
+      - Eligibility - Chronic phase CML, sustained DMR (MR4 or deeper) ≥2 years on TKI
+      - 50% remain in remission off TKI (molecular recurrence 50%, but respond again when TKI restarted)
+      - Close monitoring (BCR-ABL1 q1 month x 6 months, then q2 months x 6 months, then q3 months)
+      - Restart TKI if loss of MMR
+      - Allogeneic hematopoietic stem cell transplantation (allo-HSCT) - CURATIVE, but high toxicity (transplant-related mortality 20-30%, graft-vs-host disease)
+      - Indications (limited in TKI era)
+      - Blast phase (blast crisis) - Induce remission with TKI/chemotherapy, then transplant
+      - T315I mutation + failed ponatinib/asciminib
+      - Accelerated phase not responding to TKI
+      - Multiple TKI failures
+      - NOT first-line (TKIs preferred)
+      - Chemotherapy - Hydroxyurea (cytoreductive, reduce WBC), rarely used now (TKIs superior)
+      - Interferon-alpha - Historical treatment (before TKIs), rarely used now (TKIs better efficacy, fewer side effects)
+      - Leukapheresis - Emergency treatment if hyperleukocytosis with leukostasis symptoms (WBC >200-300K, neurologic/pulmonary symptoms)
+      - Rapidly reduce WBC, temporizing measure (start TKI simultaneously)
+      - Prognosis
+      - Pre-TKI era - Median survival 3-5 years (progressed to blast crisis)
+      - TKI era - 10-year survival 80-90%, near-normal life expectancy if optimal response
+      - Chronic phase with optimal TKI response - Excellent (most never progress)
+      - Accelerated phase - Median survival 4-6 years (with TKI)
+      - Blast phase - Poor (median survival 6-12 months), transplant offers best chance
+      - Resistance - BCR-ABL1 mutations (especially T315I), non-compliance (missed doses), drug interactions

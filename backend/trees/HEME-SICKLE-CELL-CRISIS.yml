@@ -1,0 +1,138 @@
+tree_id: HEME-SICKLE-CELL-CRISIS
+name: Sickle Cell Disease and Crisis Management
+family: HEMATOLOGY
+specialty: Hematology, Emergency Medicine
+chief_complaint: Severe Pain, Fever, Dyspnea, Chest Pain
+description: Comprehensive evaluation and management of sickle cell disease and acute complications
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: sickle_cell_presentation
+
+nodes:
+  - id: sickle_cell_presentation
+    type: question
+    text: "Type of sickle cell complication?"
+    options:
+      - label: "Acute chest syndrome (fever, chest pain, pulmonary infiltrate, hypoxia)"
+        next: acute_chest_syndrome
+      - label: "Vaso-occlusive crisis (severe pain without acute chest or other complication)"
+        next: vaso_occlusive_crisis
+      - label: "Stroke or neurologic symptoms"
+        next: sickle_cell_stroke
+      - label: "Splenic sequestration or aplastic crisis"
+        next: splenic_sequestration
+
+  - id: acute_chest_syndrome
+    type: diagnosis
+    name: "Acute Chest Syndrome"
+    icd10: "D57.01"
+    urgency: critical
+    workup:
+      - Definition - New pulmonary infiltrate on CXR + ≥1 of chest pain, fever, tachypnea, wheezing, cough, hypoxia
+      - Leading cause of death in sickle cell disease
+      - Etiology - Infection (most common Chlamydia, Mycoplasma, Streptococcus pneumoniae), fat embolism from bone marrow infarction, pulmonary infarction from sickling, hypoventilation from rib/sternal infarction pain
+      - Clinical - Fever, chest pain, dyspnea, cough, hypoxia, tachypnea
+      - Chest X-ray - New pulmonary infiltrate (may be normal initially, repeat in 24 hours if high suspicion)
+      - Labs - CBC (Hgb baseline varies 6-10 in SCD, watch for acute drop), reticulocyte count, type and cross, ABG or VBG, sputum/blood cultures, respiratory viral panel, atypical pneumonia studies (Mycoplasma/Chlamydia PCR)
+      - Pulse oximetry - Maintain SpO2 >95%
+    treatment:
+      - Hospital admission (ICU if severe hypoxia, respiratory distress, or rapidly progressive)
+      - Oxygen - Target SpO2 >95% (avoid hyperoxia which can suppress erythropoiesis)
+      - Incentive spirometry - 10 breaths q2h while awake (CRITICAL to prevent atelectasis and hypoventilation)
+      - Aggressive IV hydration - 1-1.5x maintenance rate (D5 0.45% NS), avoid over-hydration (pulmonary edema risk)
+      - Antibiotics - Broad-spectrum to cover typical and atypical pathogens
+      - Ceftriaxone 1-2g IV daily + azithromycin 500mg IV/PO daily (cover Strep pneumo, Mycoplasma, Chlamydia)
+      - Pain control - Opioids (morphine or hydromorphone PCA), avoid oversedation which worsens hypoventilation
+      - Simple transfusion OR exchange transfusion
+      - Simple transfusion - PRBC 10 mL/kg, raises Hgb by ~1 g/dL, for mild-moderate ACS or if Hgb <8
+      - Exchange transfusion - Remove sickle RBCs and replace with normal RBCs, goal HbS <30%, for severe ACS (respiratory failure, multi-lobar infiltrates, worsening hypoxia)
+      - Automated red cell exchange (preferred if available) or manual exchange
+      - Bronchodilators - Albuterol if wheezing
+      - Avoid NSAIDs (renal toxicity in SCD)
+      - Monitor closely - Serial CXR, ABG, clinical status (can deteriorate rapidly)
+      - Mechanical ventilation if respiratory failure
+      - Hematology consultation
+      - Complications - Respiratory failure (10-15% mortality in adults), multi-organ failure
+      - Prevention - Vaccination (pneumococcal, H. influenzae, influenza, meningococcal), hydroxyurea, chronic transfusion program if recurrent
+
+  - id: vaso_occlusive_crisis
+    type: diagnosis
+    name: "Vaso-Occlusive Pain Crisis"
+    icd10: "D57.00"
+    urgency: high
+    workup:
+      - Most common complication of sickle cell disease
+      - Pathophysiology - Sickling of RBCs in microvasculature → vaso-occlusion → tissue ischemia and infarction → severe pain
+      - Triggers - Infection, dehydration, cold exposure, stress, menstruation, high altitude, often no identifiable trigger
+      - Clinical - Severe pain in bones, joints, abdomen, chest (can be anywhere), patient's baseline pain is their reference
+      - Locations - Extremities (long bones), back, chest, abdomen
+      - Rule out complications - Acute chest syndrome, stroke, infection, priapism, splenic sequestration
+      - Physical exam - Pain out of proportion to exam, focal tenderness, assess for fever, lung exam, abdominal exam, neurologic exam
+      - Labs - CBC with differential (baseline Hgb, watch for acute drop suggesting sequestration or aplastic crisis), reticulocyte count (should be elevated 5-15% at baseline), type and screen (in case transfusion needed), CMP (renal function), LFTs if RUQ pain
+      - Chest X-ray - If any respiratory symptoms (rule out acute chest syndrome)
+      - Urinalysis - If dysuria or flank pain
+      - Blood cultures - If fever >38.5°C
+      - Compare to patient's baseline labs (patients know their baseline Hgb and retic count)
+    treatment:
+      - Outpatient vs hospital admission decision
+      - Admit if - Severe pain not controlled in ED, fever, chest/abdominal pain, hypoxia, abnormal labs (Hgb drop, leukocytosis), unable to tolerate oral intake, psychosocial concerns
+      - Outpatient if - Pain controlled, able to take oral meds/fluids, no complications, reliable follow-up
+      - Aggressive analgesia (MOST IMPORTANT)
+      - Assess baseline opioid use (many patients on chronic opioids)
+      - IV opioids - Morphine 0.1 mg/kg IV q15-30min until pain controlled, then scheduled dosing q2-4h + PCA OR hydromorphone 0.5-1mg IV q15-30min
+      - Oral opioids - If outpatient or transitioning oxycodone 5-10mg PO q4h or morphine 15-30mg PO q4h
+      - Use patient's home regimen as baseline, add on top for acute crisis
+      - Avoid meperidine (Demerol) - Accumulation of normeperidine metabolite causes seizures
+      - Adjuncts - Acetaminophen, avoid NSAIDs (renal toxicity)
+      - Aggressive IV hydration - 1-1.5x maintenance (D5 0.45% NS), avoid over-hydration
+      - Incentive spirometry - 10 breaths q2h (prevent acute chest syndrome, especially if rib pain or opioids)
+      - Supplemental oxygen ONLY if hypoxic (SpO2 <95%) - Unnecessary oxygen suppresses erythropoiesis
+      - Warm compresses - For localized pain
+      - Treat underlying trigger - Antibiotics if infection, address dehydration
+      - Transfusion NOT routinely indicated for uncomplicated VOC (only if complications or acute anemia)
+      - Transition to oral - Once pain controlled and tolerating PO, switch to oral opioids, taper over 5-7 days
+      - Hematology consultation or follow-up
+      - Chronic prevention - Hydroxyurea (increases HbF, reduces crisis frequency by 50%), adequate hydration, avoid triggers, vaccinations, folic acid 1mg daily
+
+  - id: sickle_cell_stroke
+    type: diagnosis
+    name: "Stroke in Sickle Cell Disease"
+    icd10: "I63.9"
+    urgency: critical
+    workup:
+      - Ischemic stroke (most common in children) or hemorrhagic stroke (more common in adults)
+      - Risk factors - Prior TIA or stroke, severe anemia, recent acute chest syndrome, hypertension
+      - Clinical - Focal neurologic deficits, altered mental status, seizures, severe headache
+      - CT head STAT (without contrast) - Rule out hemorrhage
+      - MRI/MRA brain - More sensitive for acute ischemia, assess vascular stenosis
+      - Labs - CBC, type and cross (urgent), reticulocyte count, HbS level
+    treatment:
+      - EMERGENCY exchange transfusion - Goal HbS <30% (ideally <20%), raise Hgb to 10 g/dL
+      - Automated red cell exchange (urgent hematology consult)
+      - Do NOT give simple transfusion initially (risk hyperviscosity if Hgb rises above 10-11)
+      - Neurology consultation
+      - Supportive care - BP management, avoid hypoxia, monitor neuro status
+      - No thrombolytics (contraindicated in SCD stroke)
+      - Chronic transfusion program - After first stroke, chronic transfusions every 3-4 weeks to keep HbS <30-50% (secondary stroke prevention, 90% effective)
+      - Chelation therapy - For iron overload from chronic transfusions (deferoxamine or deferasirox)
+      - Primary prevention - Transcranial Doppler (TCD) screening in children 2-16 years, if abnormal (high velocities) → chronic transfusion program reduces stroke risk by 90%
+
+  - id: splenic_sequestration
+    type: diagnosis
+    name: "Splenic Sequestration Crisis"
+    icd10: "D57.02"
+    urgency: critical
+    workup:
+      - Sudden pooling of blood in spleen → acute anemia, hypovolemia, splenomegaly
+      - Most common in young children (adults usually auto-splenectomized from repeated infarctions)
+      - Clinical - Acute pallor, weakness, tachycardia, hypotension, rapidly enlarging spleen, abdominal pain
+      - Labs - Hgb drop ≥2 g/dL below baseline (can drop to 3-4 g/dL), elevated reticulocyte count, thrombocytopenia
+      - Physical exam - Enlarged spleen (measure and track size)
+    treatment:
+      - Emergency simple blood transfusion - 5-10 mL/kg PRBC (restore circulating volume)
+      - Monitor closely - Spleen size, Hgb (can have rebound anemia as spleen releases sequestered RBCs)
+      - IV fluids - Normal saline bolus if hypotensive
+      - Splenectomy - For recurrent sequestration (after 2nd episode), elective when patient stable
+      - Must vaccinate before splenectomy (encapsulated organisms) - Pneumococcal, H. influenzae, meningococcal, give 2 weeks before if possible or 2 weeks after
+      - Prophylactic penicillin after splenectomy - Penicillin VK 250-500mg PO BID lifelong

@@ -1,0 +1,111 @@
+tree_id: INFECTIOUS-MALARIA
+name: Malaria Evaluation
+family: INFECTIOUS_DISEASE
+specialty: Infectious Disease, Travel Medicine, Emergency Medicine
+chief_complaint: Fever, Chills, Headache, Malaise
+description: Evaluation and management of malaria
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: malaria_evaluation
+
+nodes:
+  - id: malaria_evaluation
+    type: diagnosis
+    name: "Malaria"
+    icd10: "B50.9"
+    urgency: critical
+    workup:
+      - Malaria - Parasitic infection caused by Plasmodium species, transmitted by Anopheles mosquito
+      - Global burden - 247 million cases/year, 619,000 deaths (2021), 95% cases sub-Saharan Africa
+      - US - 2000 cases/year, nearly all imported (returned travelers)
+      - Species - Five species infect humans
+      - P. falciparum - Most deadly (90% deaths), severe malaria, sub-Saharan Africa
+      - P. vivax - Hypnozoite dormant liver stage (relapses), Asia, Latin America, some Africa
+      - P. ovale - Hypnozoite stage (relapses), West Africa
+      - P. malariae - Mild, chronic low-level parasitemia, worldwide
+      - P. knowlesi - Zoonotic (macaque monkeys), Southeast Asia, can be severe (24-hour replication cycle)
+      - Transmission - Female Anopheles mosquito bite (nocturnal feeding), blood transfusion, congenital (rare)
+      - Pathophysiology - Sporozoites injected by mosquito → liver (hepatocytes) → replicate 5-10 days → merozoites released → infect RBCs → replicate within RBCs (48 hours P. vivax/ovale/falciparum, 72 hours P. malariae) → RBC rupture → release merozoites + inflammatory cytokines → fever paroxysms
+      - Hypnozoites (P. vivax, P. ovale) remain dormant in liver → reactivate weeks to years later (relapses)
+      - Incubation period - 7-30 days (average 10-15 days)
+      - Clinical presentation - Classic triad fever + chills + sweats (paroxysmal)
+      - Fever pattern - Paroxysms every 48 hours (tertian, P. vivax/ovale/falciparum) or 72 hours (quartan, P. malariae)
+      - Irregular fever common first week, then synchronized
+      - Chills (rigors) → high fever (40-41°C) → profuse sweating → defervescence
+      - Headache, malaise, myalgias, nausea, vomiting, diarrhea, abdominal pain
+      - Physical exam - Fever, splenomegaly (50-60%, takes days to develop), hepatomegaly, jaundice, pallor (anemia)
+      - Labs
+      - Anemia - Hemolytic anemia (RBC destruction), normocytic
+      - Thrombocytopenia (70-80%, often first abnormality)
+      - Hyperbilirubinemia (unconjugated, hemolysis)
+      - Elevated LDH, low haptoglobin (hemolysis)
+      - Parasitemia - Thick and thin blood smears (gold standard)
+      - Thick smear - Screen for parasites (more sensitive, concentrates RBCs)
+      - Thin smear - Identify species, quantify parasitemia (% infected RBCs)
+      - Parasitemia >5% (P. falciparum) indicates severe malaria risk
+      - Repeat smears q12-24h if initial negative but high suspicion (sensitivity increases)
+      - Rapid diagnostic tests (RDTs) - Detect parasite antigens (HRP2 for P. falciparum, pLDH for other species)
+      - Sensitivity 90-95%, results in 15-20 minutes
+      - Useful resource-limited settings, but does NOT quantify parasitemia or identify all species
+      - Positive RDT (especially HRP2) can persist 2-4 weeks after treatment (does NOT indicate active infection)
+      - PCR - Most sensitive, species identification, but not widely available, slow turnaround
+      - Differential diagnosis - Typhoid fever (similar fever pattern endemic areas, do blood culture), dengue, rickettsial infections, viral hemorrhagic fevers, influenza, sepsis
+      - Severe malaria (P. falciparum) - Life-threatening, high mortality (10-50% if untreated, 10-20% treated)
+      - WHO criteria (≥1 of following)
+      - Cerebral malaria - Altered consciousness, seizures, coma (Glasgow Coma Scale <11)
+      - Severe anemia - Hemoglobin <7 g/dL or hematocrit <20%
+      - Renal failure - Creatinine >3 mg/dL or oliguria (<400 mL/24 hr)
+      - Pulmonary edema/ARDS
+      - Hypoglycemia - Glucose <40 mg/dL (parasite consumes glucose, quinine stimulates insulin)
+      - Shock (systolic BP <80 mmHg)
+      - Acidosis - pH <7.35 or bicarbonate <15, elevated lactate
+      - Hyperlactatemia - Lactate >5 mmol/L
+      - Hyperparasitemia - >5% infected RBCs (>250,000 parasites/μL)
+      - Jaundice - Bilirubin >3 mg/dL
+      - Bleeding/DIC
+      - Hemoglobinuria (blackwater fever) - Massive intravascular hemolysis
+    treatment:
+      - Uncomplicated malaria - Oral therapy
+      - Chloroquine-sensitive P. vivax, P. ovale, P. malariae (Central America, Middle East, parts of Asia)
+      - Chloroquine 600 mg base (1000 mg chloroquine phosphate) PO, then 300 mg base at 6, 24, and 48 hours (total 1500 mg base over 3 days)
+      - PLUS primaquine for P. vivax/ovale (eradicate hypnozoites, prevent relapse)
+      - Primaquine 30 mg base PO daily x 14 days (or 0.5 mg/kg/day)
+      - Check G6PD before primaquine (risk hemolysis if G6PD deficient)
+      - Chloroquine-resistant P. falciparum (most areas, especially Africa, Southeast Asia)
+      - Artemisinin-based combination therapy (ACT) - FIRST-LINE worldwide
+      - Artemether-lumefantrine (Coartem) - 4 tablets PO BID x 3 days (with fatty food, improves absorption)
+      - Artesunate-amodiaquine, dihydroartemisinin-piperaquine (alternatives, limited US availability)
+      - Atovaquone-proguanil (Malaap) - 4 tablets (1000/400 mg) PO daily x 3 days
+      - Excellent efficacy, well-tolerated, expensive
+      - Quinine sulfate 650 mg PO TID x 3 or 7 days (Africa 3 days, Southeast Asia 7 days) PLUS doxycycline 100 mg PO BID x 7 days or clindamycin 600 mg PO TID x 7 days
+      - Mefloquine 750 mg PO, then 500 mg PO 6-12 hours later (total 1250 mg)
+      - Neuropsychiatric side effects (dizziness, nightmares, psychosis)
+      - Severe malaria (P. falciparum) - IV therapy, ICU
+      - IV artesunate - FIRST-LINE (preferred over quinine)
+      - Dose - 2.4 mg/kg IV bolus at 0, 12, 24 hours, then daily until able to take oral (minimum 3 doses)
+      - Reduces mortality 35% vs. quinine (SEAQUAMAT, AQUAMAT trials)
+      - Available in US via CDC (CDC Malaria Hotline 770-488-7788)
+      - Switch to oral ACT when able to tolerate PO and parasitemia <1%
+      - IV quinidine (if artesunate unavailable) - 10 mg/kg loading dose (max 600 mg) over 1-2 hours, then 0.02 mg/kg/min continuous infusion
+      - Cardiac monitoring (QT prolongation, hypotension, arrhythmias)
+      - PLUS doxycycline or clindamycin
+      - Exchange transfusion - Consider if parasitemia >10% (especially if severe disease, reduce parasite burden rapidly)
+      - Supportive care
+      - ICU monitoring, airway protection if coma
+      - IV fluids (cautious, risk pulmonary edema)
+      - Treat hypoglycemia (10% dextrose), acidosis (bicarbonate if pH <7.1)
+      - Dialysis if renal failure
+      - Transfusion if severe anemia
+      - Anticonvulsants if seizures (benzodiazepines, phenytoin)
+      - Prevention (chemoprophylaxis for travelers)
+      - Chloroquine-sensitive areas - Chloroquine 500 mg PO weekly (start 1-2 weeks before, continue 4 weeks after)
+      - Chloroquine-resistant areas
+      - Atovaquone-proguanil (Malarone) 250/100 mg PO daily (start 1-2 days before, continue 7 days after)
+      - Doxycycline 100 mg PO daily (start 1-2 days before, continue 4 weeks after)
+      - Mefloquine 250 mg PO weekly (start 2-3 weeks before, continue 4 weeks after)
+      - Mosquito avoidance - Insect repellent (DEET 20-50%), permethrin-treated bed nets, long sleeves/pants, avoid outdoor dusk to dawn
+      - Prognosis
+      - Uncomplicated malaria - Excellent (mortality <0.1% with treatment)
+      - Severe malaria - Mortality 10-20% (treated), 10-50% cerebral malaria even with treatment
+      - Post-malaria neurologic syndrome - 0.5-2% (delayed cerebellar ataxia, psychosis weeks after treatment)

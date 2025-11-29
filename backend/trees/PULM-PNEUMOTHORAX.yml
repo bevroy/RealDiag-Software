@@ -1,0 +1,172 @@
+tree_id: PULM-PNEUMOTHORAX
+name: Pneumothorax Evaluation
+family: PULMONOLOGY
+specialty: Pulmonology, Emergency Medicine, Thoracic Surgery
+chief_complaint: Chest Pain, Dyspnea, Sudden Onset
+description: Evaluation and management of pneumothorax
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: pneumothorax_evaluation
+
+nodes:
+  - id: pneumothorax_evaluation
+    type: question
+    text: "What type of pneumothorax?"
+    options:
+      - label: "Primary Spontaneous Pneumothorax"
+        next: primary_spontaneous
+      - label: "Secondary Spontaneous Pneumothorax"
+        next: secondary_spontaneous
+      - label: "Tension Pneumothorax"
+        next: tension_pneumothorax
+      - label: "Traumatic Pneumothorax"
+        next: traumatic
+
+  - id: primary_spontaneous
+    type: diagnosis
+    name: "Primary Spontaneous Pneumothorax"
+    icd10: "J93.11"
+    urgency: high
+    workup:
+      - Primary spontaneous pneumothorax (PSP) - Pneumothorax without underlying lung disease or trauma
+      - Epidemiology - Incidence 7-18 per 100,000/year males, 1-6 per 100,000 females
+      - Peak age 20-30 years (young, tall, thin males)
+      - Recurrence rate 30% after first episode, 50% after second
+      - Risk factors - Tall stature (>6 feet, 4x risk), thin body habitus (low BMI), male (6:1 male:female), smoking (20x risk, dose-dependent), family history (10% familial)
+      - Pathophysiology - Rupture of subpleural blebs/bullae (apical) → air enters pleural space
+      - Blebs - <1-2 cm air-filled sacs beneath visceral pleura
+      - Bullae - >2 cm emphysema-like lesions
+      - Present 80-90% patients at surgery (apical blebs)
+      - Mechanism - Negative pleural pressure gradient + structural weakness → bleb rupture
+      - Clinical presentation
+      - Sudden onset pleuritic chest pain (90%) - Sharp, ipsilateral, worse with inspiration
+      - Dyspnea (80%) - Severity depends on size and lung reserve
+      - Can be asymptomatic (small pneumothorax)
+      - Physical exam
+      - Decreased breath sounds - Ipsilateral
+      - Hyperresonance to percussion - Ipsilateral
+      - Decreased tactile fremitus - Ipsilateral
+      - Normal vital signs usually (unless large or tension)
+      - Imaging
+      - Chest X-ray (upright inspiratory PA) - DIAGNOSTIC
+      - Visceral pleural line (white line separating lung from chest wall)
+      - Absence of lung markings peripheral to line
+      - Size estimation - Light index (distance from chest wall to lung apex, lateral midpoint, base in cm, large if >2 cm any location OR apex-to-cupola distance >3 cm)
+      - Expiratory films NOT more sensitive (no longer recommended)
+      - CT chest - If X-ray equivocal, identify blebs/bullae (surgical planning), occult pneumothorax (post-trauma)
+    treatment:
+      - Treatment based on size and symptoms
+      - Small PSP (<2 cm) + minimal symptoms - Observation + supplemental oxygen
+      - Discharge with 24-48 hour f/u if reliable, close to hospital
+      - Supplemental oxygen (high-flow O2 increases reabsorption rate 4-fold)
+      - Spontaneous resolution 1-2 weeks (1.25% per day air reabsorption)
+      - Repeat CXR 4-6 hours or next day (ensure not enlarging)
+      - Large PSP (>2 cm) or symptomatic - Aspiration or chest tube
+      - Simple aspiration - 16-18G IV catheter, aspirate up to 2.5 L air
+      - Success rate 50-70% (if lung re-expands, observe 4 hours, CXR, discharge if stable)
+      - Chest tube (pigtail 8-14 Fr or standard 16-24 Fr) - If aspiration fails or large pneumothorax
+      - Insert via Seldinger technique (wire-guided) or blunt dissection (4-5th intercostal space mid-axillary line)
+      - Connect to water seal or suction (-20 cm H2O)
+      - Remove when air leak stopped x 24 hours and lung re-expanded
+      - Video-assisted thoracoscopic surgery (VATS) - Indications
+      - Recurrent PSP (2nd ipsilateral episode, recurrence risk 50-60% after 2nd episode)
+      - Bilateral pneumothorax (simultaneous or sequential)
+      - Persistent air leak (>5-7 days)
+      - High-risk occupation (pilots, divers, remote locations)
+      - Patient preference
+      - Procedure - Pleurodesis (mechanical or chemical) + bleb/bulla resection
+      - Success rate 90-95% (recurrence rate 5%)
+      - Discharge advice - Avoid air travel x 2 weeks (altitude increases pneumothorax), avoid SCUBA diving permanently (unless bilateral pleurodesis), smoking cessation (most important to prevent recurrence)
+
+  - id: secondary_spontaneous
+    type: diagnosis
+    name: "Secondary Spontaneous Pneumothorax"
+    icd10: "J93.12"
+    urgency: high
+    workup:
+      - Secondary spontaneous pneumothorax (SSP) - Pneumothorax in patient with underlying lung disease
+      - Epidemiology - Older patients (median 60-65 years), associated lung disease
+      - Underlying diseases
+      - COPD (most common 70-80%, emphysema with bullae rupture)
+      - Cystic fibrosis (pneumothorax 20-25% CF patients)
+      - Pneumocystis jirovecii pneumonia (PCP, 10-35% AIDS patients with PCP)
+      - Lung cancer (necrotic tumor erodes visceral pleura)
+      - Interstitial lung disease (pulmonary fibrosis with subpleural cysts)
+      - Catamenial pneumothorax (endometriosis, occurs 24-72 hours after menses onset, 70-80% right-sided)
+      - Clinical presentation - More severe symptoms than PSP (compromised lung reserve)
+      - Dyspnea (95%) - More prominent
+      - Chest pain (90%)
+      - Hypoxemia (often significant)
+      - Physical exam - Signs of underlying lung disease + pneumothorax findings (decreased breath sounds, hyperresonance)
+    treatment:
+      - Lower threshold for intervention than PSP (worse lung reserve)
+      - All SSP - Hospitalization recommended (even if small)
+      - Supplemental oxygen
+      - Small SSP (<2 cm) + minimal symptoms - Aspiration or small-bore chest tube (8-14 Fr)
+      - Large SSP or symptomatic - Chest tube (14-24 Fr)
+      - Higher failure rate than PSP (underlying disease)
+      - Larger chest tube may be needed (16-24 Fr)
+      - Suction (-20 cm H2O)
+      - Persistent air leak - Surgical referral earlier than PSP (5 days vs. 7 days)
+      - VATS or thoracotomy - Pleurodesis + blebectomy
+      - Treat underlying lung disease - Optimize COPD management, antibiotics if PCP
+
+  - id: tension_pneumothorax
+    type: diagnosis
+    name: "Tension Pneumothorax"
+    icd10: "J93.0"
+    urgency: critical
+    workup:
+      - Tension pneumothorax - One-way valve mechanism → progressive air accumulation → cardiovascular collapse
+      - IMMEDIATE LIFE-THREATENING EMERGENCY
+      - Pathophysiology - Air enters pleural space during inspiration but cannot escape during expiration (one-way valve)
+      - Progressive accumulation → increased intrapleural pressure → mediastinal shift → compression of contralateral lung + IVC/SVC → decreased venous return → obstructive shock
+      - Causes - Mechanical ventilation (positive pressure, most common), trauma (chest wall defect acts as valve), iatrogenic (central line, thoracentesis), barotrauma
+      - Clinical presentation - SEVERE, ACUTE
+      - Severe dyspnea, respiratory distress
+      - Hypotension (obstructive shock from decreased venous return)
+      - Tachycardia, tachypnea
+      - Hypoxemia, cyanosis
+      - Altered mental status (hypoxia, shock)
+      - JVD (elevated CVP from decreased venous return)
+      - Physical exam
+      - Absent breath sounds - Ipsilateral
+      - Hyperresonance - Ipsilateral
+      - Tracheal deviation - AWAY from affected side (late finding, not always present)
+      - Hypotension, tachycardia
+      - CLINICAL DIAGNOSIS - Do NOT wait for imaging
+    treatment:
+      - IMMEDIATE needle decompression - LIFE-SAVING
+      - 14-16G angiocatheter, 2nd intercostal space midclavicular line (or 4-5th intercostal space anterior axillary line)
+      - Insert perpendicular to chest wall, listen for rush of air
+      - Leave catheter in place, remove needle
+      - Immediate improvement in hemodynamics (confirms diagnosis)
+      - Converts tension to simple pneumothorax
+      - Definitive chest tube - After needle decompression
+      - Large-bore chest tube (28-32 Fr), 4-5th intercostal space mid-axillary line
+      - Connect to suction (-20 cm H2O)
+      - CXR after chest tube placement (confirm position, re-expansion)
+
+  - id: traumatic
+    type: diagnosis
+    name: "Traumatic Pneumothorax"
+    icd10: "S27.0"
+    urgency: high
+    workup:
+      - Traumatic pneumothorax - Pneumothorax from blunt or penetrating chest trauma
+      - Epidemiology - 20-40% major chest trauma
+      - Mechanisms
+      - Penetrating trauma - Gunshot, stab wounds, direct chest wall penetration
+      - Blunt trauma - Rib fracture punctures lung (most common), alveolar rupture from sudden compression, tracheobronchial tear
+      - Iatrogenic - Central line placement (subclavian/IJ, 1-3%), mechanical ventilation (barotrauma), thoracentesis (5-30%), lung biopsy (15-40%)
+      - Clinical presentation - Variable (asymptomatic to severe)
+      - Assess for other injuries (hemothorax, pulmonary contusion, rib fractures)
+      - Occult pneumothorax - Not visible on supine CXR but seen on CT (20-30% chest trauma)
+      - Imaging - CXR (supine AP if trauma), CT chest (more sensitive, identifies occult pneumothorax, other injuries)
+    treatment:
+      - Small occult pneumothorax + not on positive pressure ventilation - Observation (30-40% require chest tube)
+      - Any size if mechanical ventilation anticipated - Chest tube (risk tension with positive pressure)
+      - Symptomatic or large - Chest tube (20-28 Fr)
+      - Hemopneumothorax - Large-bore chest tube (32-36 Fr)
+      - Persistent air leak - Consider tracheobronchial injury (bronchoscopy), surgical repair

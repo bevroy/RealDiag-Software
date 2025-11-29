@@ -1,0 +1,113 @@
+tree_id: GI-DIVERTICULITIS
+name: Diverticulitis Evaluation
+family: GASTROENTEROLOGY
+specialty: Gastroenterology, Surgery, Emergency Medicine
+chief_complaint: Left Lower Quadrant Abdominal Pain, Fever, Change in Bowel Habits
+description: Evaluation and management of acute diverticulitis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: diverticulitis_evaluation
+
+nodes:
+  - id: diverticulitis_evaluation
+    type: diagnosis
+    name: "Acute Diverticulitis"
+    icd10: "K57.92"
+    urgency: high
+    workup:
+      - Diverticulitis - Inflammation/infection of colonic diverticula (outpouchings of colonic mucosa/submucosa through muscular layer)
+      - Diverticulosis - Presence of diverticula (asymptomatic, 50-70% by age 80)
+      - Diverticulitis - Complication of diverticulosis (inflammation, 10-25% with diverticulosis develop diverticulitis lifetime)
+      - Prevalence - Increasing (Western diet low fiber), 130,000 hospitalizations/year US
+      - Pathophysiology - Diverticulum obstruction (by fecalith or inspissated food) → increased intraluminal pressure → microperforation → inflammation
+      - Can progress to macroperforation (free air, peritonitis), abscess, fistula, stricture
+      - Location - 95% sigmoid colon (high intraluminal pressure, narrow lumen)
+      - Right-sided diverticulitis rare in West (more common Asia, younger age)
+      - Risk factors - Age (>40), low fiber diet, obesity, physical inactivity, smoking, NSAIDs, opioids
+      - Clinical presentation
+      - Left lower quadrant pain (70-90%) - Classic presentation, acute onset, constant, may radiate to back
+      - Right lower quadrant pain if right-sided (mimics appendicitis)
+      - Fever (50-70%) - Low-grade typically, high fever suggests abscess/perforation
+      - Change in bowel habits - Diarrhea or constipation (50%)
+      - Nausea/vomiting (20-60%)
+      - Urinary symptoms - Dysuria, frequency (if bladder irritation from adjacent inflammation)
+      - Physical exam
+      - Abdominal tenderness LLQ (localized or diffuse if peritonitis)
+      - Guarding, rebound tenderness (peritoneal irritation)
+      - Palpable mass (phlegmon or abscess)
+      - Tympany (ileus), absent bowel sounds (peritonitis)
+      - Rectal exam - Tenderness, exclude rectal mass/blood
+      - Labs
+      - WBC - Leukocytosis (70-80%, typically 10,000-15,000)
+      - Normal WBC does not exclude (30% have normal)
+      - CRP - Elevated (more sensitive than WBC for inflammation)
+      - Urinalysis - Pyuria/hematuria if bladder involvement (10-15%, colovesical fistula consideration)
+      - Blood cultures - If septic
+      - Imaging
+      - CT abdomen/pelvis with IV and oral contrast - GOLD STANDARD (sensitivity 95%, specificity 97%)
+      - Findings - Colonic wall thickening (>4 mm), pericolic fat stranding, diverticula
+      - Complications - Abscess (pericolic fluid collection), free air (perforation), fistula, obstruction
+      - Hinchey classification (severity)
+      - Hinchey 0 - Uncomplicated (colonic wall thickening, pericolic fat stranding only)
+      - Hinchey Ia - Pericolic abscess or phlegmon (confined)
+      - Hinchey Ib - Pelvic abscess (distant from colon)
+      - Hinchey II - Distant abscess (intra-abdominal, retroperitoneal)
+      - Hinchey III - Purulent peritonitis (ruptured abscess without fecal contamination)
+      - Hinchey IV - Fecal peritonitis (free perforation)
+      - Ultrasound - Alternative if CT contraindicated (pregnancy, renal failure), operator-dependent, sensitivity 85%
+      - MRI - Alternative if CT contraindicated
+      - Colonoscopy - CONTRAINDICATED acutely (risk perforation)
+      - Perform 6-8 weeks after resolution (exclude colon cancer, 2-11% have concomitant cancer, especially >50 years)
+      - Differential diagnosis - Appendicitis (RLQ pain, but 10% have long appendix in LLQ), IBD (Crohn colitis, ulcerative colitis), ischemic colitis, colon cancer, ovarian pathology (ectopic pregnancy, ovarian torsion, PID), UTI/pyelonephritis
+    treatment:
+      - Treatment strategy - Based on severity (uncomplicated vs. complicated)
+      - Uncomplicated diverticulitis (Hinchey 0) - 75% cases, no abscess/perforation/fistula/obstruction
+      - Outpatient management - If mild, tolerate PO, reliable follow-up, no significant comorbidities
+      - Antibiotics - CONTROVERSIAL (recent studies suggest may not be necessary for immunocompetent, CT-confirmed uncomplicated diverticulitis)
+      - Traditional approach - Antibiotics 7-10 days (gram-negative and anaerobic coverage)
+      - Ciprofloxacin 500 mg PO BID + metronidazole 500 mg PO TID
+      - Amoxicillin-clavulanate 875/125 mg PO BID
+      - Moxifloxacin 400 mg PO daily
+      - Modern approach (select patients) - Consider no antibiotics if CT-confirmed uncomplicated, immunocompetent, no sepsis, mild symptoms
+      - AVOD trial, DIABOLO trial - No difference outcomes (antibiotics vs. no antibiotics) for uncomplicated
+      - Clinical judgment (if concern for progression, immunocompromised → give antibiotics)
+      - Diet - Clear liquids initially → advance to low-residue diet as tolerated (NOT long-term, just acute episode)
+      - Follow-up 2-3 days (ensure improvement, if worse → imaging, consider admission)
+      - Inpatient management - If unable to tolerate PO, severe symptoms, immunocompromised, comorbidities, failed outpatient
+      - NPO initially (bowel rest) → advance diet as improves
+      - IV antibiotics - Gram-negative and anaerobic coverage
+      - Ceftriaxone 1-2 g IV daily + metronidazole 500 mg IV q8h
+      - Ciprofloxacin 400 mg IV q12h + metronidazole 500 mg IV q8h
+      - Piperacillin-tazobactam 3.375 g IV q6h (monotherapy)
+      - Duration 4-7 days IV (if improving, can transition to PO to complete 7-10 days total)
+      - IV fluids, pain control (avoid opioids if possible, worsen constipation)
+      - Complicated diverticulitis
+      - Small abscess (<3-4 cm) - IV antibiotics alone (many resolve)
+      - Large abscess (≥4 cm) - Percutaneous drainage + IV antibiotics
+      - CT-guided or ultrasound-guided drain placement
+      - Success rate 70-90% (avoids urgent surgery)
+      - Drain until output minimal and resolved clinically/radiographically
+      - Hinchey III-IV (purulent or fecal peritonitis) - SURGICAL EMERGENCY
+      - Resuscitation (IV fluids, broad-spectrum antibiotics, vasopressors if septic shock)
+      - Urgent surgery
+      - Traditional - Hartmann procedure (sigmoid resection, end colostomy, rectal stump oversewn, reverse colostomy 3-6 months later)
+      - Alternative - Primary resection with anastomosis (if stable, no significant fecal contamination)
+      - Laparoscopic peritoneal lavage - Controversial (wash out abdomen without resection, some centers for Hinchey III)
+      - Recurrent diverticulitis - Risk 20-30% after first episode, higher after second episode (40-50%)
+      - Elective sigmoid resection - Consider after 2 episodes (especially if young <50, immunocompromised, chronic steroids)
+      - Previous recommendation "after 2 attacks" less rigid now (individualize, quality of life, patient preference)
+      - Laparoscopic sigmoid colectomy with primary anastomosis
+      - Cure rate >90%, low morbidity/mortality elective surgery (vs. 15-30% mortality emergency surgery)
+      - Complications
+      - Abscess (15-20%)
+      - Perforation (free perforation 1-2%, high mortality 20-30% if fecal peritonitis)
+      - Fistula - Colovesical (most common, pneumaturia, fecaluria, recurrent UTI), colovaginal, coloenteric
+      - Stricture/obstruction (10%) - Chronic inflammation → fibrosis → narrowing
+      - Colonoscopy - Perform 6-8 weeks after resolution (rule out colon cancer, confirm healing)
+      - Prevention (after recovery)
+      - High-fiber diet (25-30 g/day) - Reduce recurrence risk 30-40% (fiber bulks stool, reduces intraluminal pressure)
+      - Avoid nuts/seeds/popcorn - Old myth, NO EVIDENCE to avoid (not associated with diverticulitis)
+      - Exercise, maintain healthy weight
+      - Avoid NSAIDs, opioids if possible
+      - Rifaximin - Cyclic rifaximin (400 mg BID x 7 days/month) + mesalamine may reduce recurrence (European studies, not widely adopted US)

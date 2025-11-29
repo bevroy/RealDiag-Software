@@ -1,0 +1,279 @@
+tree_id: NEURO-STROKE
+name: Acute Stroke Evaluation
+family: NEUROLOGY
+specialty: Neurology/Emergency Medicine
+chief_complaint: Stroke Symptoms
+description: Diagnostic decision tree for acute stroke evaluation and management
+version: "1.0"
+author: RealDiag Team
+entry_point: symptom_onset
+
+nodes:
+  - id: symptom_onset
+    type: question
+    text: "Time from symptom onset?"
+    options:
+      - label: "0-4.5 hours (tPA window)"
+        next: acute_stroke_tpa
+      - label: "4.5-24 hours (thrombectomy window)"
+        next: acute_stroke_thrombectomy
+      - label: ">24 hours or unknown"
+        next: stroke_late
+      - label: "Transient, resolved (<24 hours)"
+        next: tia
+
+  - id: acute_stroke_tpa
+    type: question
+    text: "Stroke severity and contraindications?"
+    options:
+      - label: "Large vessel occlusion (LVO) suspected"
+        next: lvo_stroke
+      - label: "Eligible for tPA, no contraindications"
+        next: ischemic_stroke_tpa
+      - label: "Hemorrhagic on imaging"
+        next: hemorrhagic_stroke
+      - label: "Contraindications to tPA"
+        next: stroke_no_tpa
+
+  - id: lvo_stroke
+    type: diagnosis
+    diagnosis: Acute Ischemic Stroke with Large Vessel Occlusion
+    icd10: I63.9
+    urgency: critical
+    workup:
+      - STAT non-contrast CT head (rule out hemorrhage)
+      - CT angiography head/neck (identify occlusion)
+      - CT perfusion (assess salvageable tissue)
+      - NIH Stroke Scale (NIHSS)
+      - Glucose, INR, aPTT, platelets
+      - ECG
+      - Type and screen
+    treatment:
+      - ACTIVATE STROKE TEAM immediately
+      - IV tPA 0.9 mg/kg (max 90mg) if <4.5 hours
+      - EMERGENT mechanical thrombectomy
+      - Transfer to comprehensive stroke center if not available
+      - Target door-to-needle <60 min, door-to-groin <90 min
+      - Blood pressure control (permit 185/110 for tPA)
+      - Aspirin 325mg at 24 hours post-tPA
+      - Neuro ICU admission
+      - Monitor for hemorrhagic transformation
+
+  - id: ischemic_stroke_tpa
+    type: diagnosis
+    diagnosis: Acute Ischemic Stroke (tPA Candidate)
+    icd10: I63.9
+    urgency: critical
+    workup:
+      - STAT non-contrast CT head (must rule out hemorrhage)
+      - NIHSS score
+      - Glucose (treat if <60 or >400)
+      - CBC, INR, aPTT
+      - ECG
+      - BP monitoring
+    treatment:
+      - IV alteplase (tPA) 0.9 mg/kg (10% bolus, 90% over 60 min)
+      - Max dose 90mg
+      - No anticoagulants or antiplatelets x 24 hours
+      - Blood pressure control (<185/110 pre-tPA, <180/105 post-tPA)
+      - Labetalol or nicardipine drip
+      - Neuro checks q15min x 2h, then q30min x 6h, then q1h
+      - NPO until swallow eval
+      - Aspirin 325mg at 24 hours
+      - Stroke unit admission
+      - Monitor for hemorrhage
+      - CTA/MRI to identify stroke mechanism
+
+  - id: hemorrhagic_stroke
+    type: question
+    text: "Location of hemorrhage?"
+    options:
+      - label: "Intracerebral hemorrhage (ICH)"
+        next: ich
+      - label: "Subarachnoid hemorrhage (SAH)"
+        next: sah
+
+  - id: ich
+    type: diagnosis
+    diagnosis: Intracerebral Hemorrhage
+    icd10: I61.9
+    urgency: critical
+    workup:
+      - Non-contrast CT head (measure volume)
+      - CT angiography (spot sign predicts expansion)
+      - CBC, PT/INR, aPTT, platelets
+      - Liver function tests
+      - Toxicology screen
+    treatment:
+      - Neurosurgery consult immediately
+      - Blood pressure control (SBP 140-160 if no ICP concern)
+      - Reverse anticoagulation emergently
+      - Warfarin: 4-factor PCC + vitamin K 10mg IV
+      - Dabigatran: idarucizumab 5g IV
+      - Xa inhibitors: andexanet alfa
+      - Platelet transfusion if on antiplatelet + surgery planned (controversial)
+      - Seizure prophylaxis if lobar location (levetiracetam 1000mg)
+      - Intracranial pressure monitoring if GCS ≤8
+      - Neurosurgical evacuation if cerebellar, superficial >30mL, or deteriorating
+      - Neuro ICU
+
+  - id: sah
+    type: diagnosis
+    diagnosis: Subarachnoid Hemorrhage
+    icd10: I60.9
+    urgency: critical
+    workup:
+      - Non-contrast CT head (98% sensitive if <6 hours)
+      - Lumbar puncture if CT negative (xanthochromia)
+      - CT angiography or conventional angiography (identify aneurysm)
+      - ECG (neurogenic T waves)
+      - Grade severity (Hunt-Hess, Fisher scale)
+    treatment:
+      - STAT neurosurgery/interventional neuroradiology consult
+      - Blood pressure control (SBP <160 until aneurysm secured)
+      - Nimodipine 60mg q4h x 21 days (prevent vasospasm)
+      - Aneurysm repair (coiling vs clipping) within 24-72 hours
+      - Neuro ICU
+      - Monitor for vasospasm (days 3-14)
+      - Transcranial Dopplers
+      - Hydration
+      - EVD placement if hydrocephalus
+      - Seizure prophylaxis
+
+  - id: stroke_no_tpa
+    type: diagnosis
+    diagnosis: Acute Ischemic Stroke (Not tPA Candidate)
+    icd10: I63.9
+    urgency: critical
+    workup:
+      - CT head
+      - CTA if LVO suspected (may still be thrombectomy candidate)
+      - NIHSS
+      - Labs
+      - Echocardiogram
+      - Telemetry
+    treatment:
+      - Aspirin 325mg daily (after hemorrhage excluded)
+      - Blood pressure control (permissive hypertension initially)
+      - Consider mechanical thrombectomy if LVO and <24 hours
+      - Stroke unit admission
+      - Swallow evaluation before PO
+      - DVT prophylaxis (SCDs, then heparin 5000 units TID after 24-48h)
+      - Statin (atorvastatin 80mg)
+      - Workup stroke etiology
+      - Rehabilitation
+
+  - id: acute_stroke_thrombectomy
+    type: diagnosis
+    diagnosis: Acute Stroke (4.5-24 Hour Window)
+    icd10: I63.9
+    urgency: critical
+    workup:
+      - Non-contrast CT head
+      - CT angiography (identify LVO)
+      - CT perfusion (mismatch suggests salvageable tissue)
+      - NIHSS
+      - Labs
+    treatment:
+      - Consider mechanical thrombectomy if:
+        - Large vessel occlusion (ICA or proximal MCA)
+        - NIHSS ≥6
+        - Small infarct core on imaging
+        - Good collaterals
+      - Transfer to thrombectomy-capable center
+      - Aspirin 325mg if not thrombectomy candidate
+      - Blood pressure management
+      - Stroke unit
+      - Extended window trials (DAWN, DEFUSE-3) support up to 24 hours in selected patients
+
+  - id: stroke_late
+    type: diagnosis
+    diagnosis: Stroke - Late Presentation
+    icd10: I63.9
+    urgency: high
+    workup:
+      - CT or MRI brain
+      - Stroke mechanism workup
+      - Echocardiogram (look for cardioembolic source)
+      - Carotid ultrasound
+      - Telemetry (atrial fibrillation)
+      - Lipid panel, HbA1c
+    treatment:
+      - Aspirin 325mg daily or clopidogrel 75mg daily
+      - High-intensity statin (atorvastatin 80mg)
+      - Blood pressure control (target <140/90, <130/80 if prior stroke)
+      - Anticoagulation if atrial fibrillation (apixaban, rivaroxaban, or warfarin)
+      - Dual antiplatelet therapy x 21-90 days if minor stroke or TIA
+      - Risk factor modification
+      - Rehabilitation
+      - Carotid endarterectomy if >70% stenosis and favorable anatomy
+
+  - id: tia
+    type: question
+    text: "ABCD2 score and workup?"
+    options:
+      - label: "High risk (ABCD2 ≥4) or crescendo TIAs"
+        next: high_risk_tia
+      - label: "Moderate risk (ABCD2 2-3)"
+        next: moderate_risk_tia
+      - label: "Low risk (ABCD2 0-1)"
+        next: low_risk_tia
+
+  - id: high_risk_tia
+    type: diagnosis
+    diagnosis: High-Risk Transient Ischemic Attack
+    icd10: G45.9
+    urgency: critical
+    workup:
+      - MRI brain with DWI (40-50% have acute infarct)
+      - MRA head/neck or CTA
+      - Echocardiogram
+      - 24-48 hour telemetry or Holter
+      - Carotid ultrasound
+      - Lipid panel, HbA1c
+    treatment:
+      - Hospital admission
+      - Dual antiplatelet therapy (aspirin 325mg + clopidogrel 75mg) x 21 days
+      - High-dose statin
+      - Stroke risk is 10-20% within 90 days without treatment
+      - Urgent neurology consult
+      - Expedited workup
+      - Consider CEA or stenting if high-grade carotid stenosis
+
+  - id: moderate_risk_tia
+    type: diagnosis
+    diagnosis: Moderate-Risk TIA
+    icd10: G45.9
+    urgency: high
+    workup:
+      - MRI brain (preferred) or CT
+      - Vascular imaging (CTA, MRA, or carotid ultrasound)
+      - Echocardiogram
+      - Telemetry
+      - Lipid panel, HbA1c
+    treatment:
+      - Observation unit or admission
+      - Expedited outpatient workup if reliable
+      - Dual antiplatelet therapy (aspirin + clopidogrel) x 21 days
+      - High-dose statin
+      - Neurology follow-up within 24-48 hours
+      - Complete workup within 48 hours
+
+  - id: low_risk_tia
+    type: diagnosis
+    diagnosis: Low-Risk TIA
+    icd10: G45.9
+    urgency: medium
+    workup:
+      - MRI or CT brain
+      - Vascular imaging
+      - Echocardiogram
+      - Telemetry or Holter
+      - Labs
+    treatment:
+      - May discharge with urgent outpatient workup
+      - Aspirin 325mg daily (consider dual antiplatelet)
+      - High-dose statin
+      - Neurology follow-up within 48 hours
+      - Complete vascular and cardiac workup within 1 week
+      - Risk factor modification

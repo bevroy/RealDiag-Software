@@ -1,0 +1,165 @@
+tree_id: GEN-MED-HYPERLIPIDEMIA
+name: Hyperlipidemia Management
+family: GENERAL_MEDICINE
+specialty: Internal Medicine, Cardiology, Endocrinology
+chief_complaint: Elevated Cholesterol, Cardiovascular Risk Assessment
+description: Comprehensive evaluation and management of hyperlipidemia for cardiovascular disease prevention
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hyperlipidemia_evaluation
+
+nodes:
+  - id: hyperlipidemia_evaluation
+    type: question
+    text: "Clinical risk assessment?"
+    options:
+      - label: "Primary prevention (no ASCVD)"
+        next: primary_prevention
+      - label: "Secondary prevention (known ASCVD)"
+        next: secondary_prevention
+      - label: "Familial hypercholesterolemia"
+        next: familial_hypercholesterolemia
+
+  - id: primary_prevention
+    type: diagnosis
+    name: "Primary Prevention - Hyperlipidemia"
+    icd10: "E78.5"
+    urgency: low
+    workup:
+      - Primary prevention - No known atherosclerotic cardiovascular disease (ASCVD)
+      - ASCVD defined - Coronary heart disease (MI, angina, coronary revascularization), stroke/TIA, peripheral arterial disease
+      - Lipid panel - Fasting (9-12 hours preferred, not mandatory for screening)
+      - Total cholesterol, LDL-C (low-density lipoprotein cholesterol), HDL-C (high-density lipoprotein), triglycerides
+      - Non-HDL-C = Total cholesterol - HDL-C (includes all atherogenic lipoproteins)
+      - LDL-C goal - Primary target for therapy (most predictive of ASCVD risk)
+      - Normal lipids - LDL <100 mg/dL, HDL >40 mg/dL (men) or >50 mg/dL (women), triglycerides <150 mg/dL
+      - Risk stratification - ACC/AHA Pooled Cohort Equations (PCE) for 10-year ASCVD risk
+      - Input - Age, sex, race, total cholesterol, HDL-C, SBP, diabetes, smoking
+      - Output - 10-year risk of MI or stroke
+      - Risk categories
+      - Low risk <5%
+      - Borderline risk 5-7.4%
+      - Intermediate risk 7.5-19.9%
+      - High risk ≥20%
+      - Very high risk - LDL ≥190 mg/dL (assume high risk without calculation)
+      - Risk enhancers - Consider if borderline/intermediate risk (tip decision toward statin)
+      - Family history premature ASCVD (men <55, women <65)
+      - Chronic kidney disease (eGFR <60)
+      - Metabolic syndrome
+      - Inflammatory diseases (RA, psoriasis, HIV)
+      - South Asian ancestry
+      - LDL 160-189 mg/dL persistently
+      - Triglycerides ≥175 mg/dL persistently
+      - High-sensitivity CRP ≥2 mg/L
+      - Lipoprotein(a) ≥50 mg/dL
+      - Ankle-brachial index <0.9
+      - Coronary artery calcium (CAC) score - If uncertain about statin (intermediate risk)
+      - CAC 0 - Consider defer statin (unless diabetes, family history, smoking)
+      - CAC 1-99 - Favor statin age ≥55
+      - CAC ≥100 or ≥75th percentile - Initiate statin
+    treatment:
+      - Lifestyle modifications - FIRST-LINE for all patients
+      - Diet - Mediterranean diet, reduce saturated fat <7% calories, trans fat 0%, cholesterol <200 mg/day
+      - Plant stanols/sterols 2 g/day (lower LDL 5-10%)
+      - Soluble fiber 10-25 g/day
+      - Exercise - 150 min/week moderate-intensity aerobic
+      - Weight loss - If overweight, 5-10% reduction lowers LDL 5-10%
+      - Smoking cessation - Mandatory
+      - Statin therapy - 2024 ACC/AHA Guidelines
+      - Age <75 with LDL ≥190 mg/dL - High-intensity statin (lower LDL ≥50%)
+      - Atorvastatin 40-80 mg, rosuvastatin 20-40 mg
+      - Age 40-75 with diabetes - Moderate-intensity statin (lower LDL 30-49%)
+      - Atorvastatin 10-20 mg, rosuvastatin 5-10 mg, simvastatin 20-40 mg, pravastatin 40-80 mg
+      - High-risk diabetes (10-year ASCVD risk ≥20%) or diabetes + age ≥50 with risk enhancers - High-intensity statin
+      - Age 40-75 with 10-year ASCVD risk ≥7.5% - Moderate-to-high-intensity statin
+      - Age 40-75 with 10-year ASCVD risk 5-7.4% - Consider moderate-intensity statin if risk enhancers present
+      - Age >75 - Individualize (consider if tolerated, continuation if already on statin)
+      - Statin side effects - Myalgias most common (5-10%), usually mild
+      - Check CK if symptomatic (rhabdomyolysis rare <0.1%)
+      - Hepatotoxicity rare (check ALT at baseline, 12 weeks, then PRN)
+      - New-onset diabetes 0.1% increased risk (benefit outweighs risk)
+      - Statin intolerance - Try different statin, lower dose, alternate-day dosing
+      - Non-statin therapies - Consider if inadequate LDL reduction on maximally tolerated statin, or statin intolerance
+      - Ezetimibe 10 mg daily - Inhibits intestinal cholesterol absorption, lowers LDL 15-20%
+      - IMPROVE-IT trial - Statin + ezetimibe reduced ASCVD events vs statin alone
+      - Well-tolerated, no significant side effects
+      - PCSK9 inhibitors - Monoclonal antibodies, subcutaneous injection every 2-4 weeks
+      - Evolocumab 140 mg q2 weeks or 420 mg monthly, alirocumab 75-150 mg q2 weeks
+      - Lower LDL 50-60% (potent)
+      - FOURIER, ODYSSEY trials - Reduced ASCVD events 15-20%
+      - Very expensive ($6,000-14,000/year), insurance requires prior authorization (high risk or familial hypercholesterolemia)
+      - Inclisiran - siRNA PCSK9 inhibitor, 284 mg SC every 6 months (after loading doses)
+      - Convenient dosing, lower LDL ~50%
+      - Bempedoic acid 180 mg daily - ATP citrate lyase inhibitor, lowers LDL 15-25%
+      - For statin intolerance
+      - CLEAR Outcomes trial - Reduced ASCVD events
+      - Bile acid sequestrants - Colesevelam 3.75 g/day, cholestyramine 8-24 g/day
+      - Lower LDL 15-25%, but GI side effects (bloating, constipation), interfere with other medications
+      - Rarely used now
+      - Monitoring - Lipid panel 4-12 weeks after starting therapy, then every 3-12 months
+      - LDL reduction - Goal ≥50% reduction for high-risk, 30-49% for moderate-risk
+      - Percent reduction more important than absolute LDL target in primary prevention
+
+  - id: secondary_prevention
+    type: diagnosis
+    name: "Secondary Prevention - Established ASCVD"
+    icd10: "E78.5"
+    urgency: medium
+    workup:
+      - Secondary prevention - Known ASCVD (MI, stroke, TIA, PAD, coronary revascularization)
+      - Very high-risk ASCVD - Multiple major ASCVD events OR 1 major event + multiple high-risk conditions
+      - Major ASCVD events - Recent ACS (<12 months), MI (other than recent ACS), ischemic stroke, symptomatic PAD
+      - High-risk conditions - Age ≥65, heterozygous familial hypercholesterolemia, prior CABG/PCI outside major events, diabetes, hypertension, CKD (eGFR 15-59), smoking, LDL ≥100 on maximally tolerated statin + ezetimibe, CHF
+    treatment:
+      - High-intensity statin - MANDATORY for all patients with ASCVD (unless contraindication)
+      - Atorvastatin 40-80 mg daily or rosuvastatin 20-40 mg daily
+      - Goal - LDL reduction ≥50% from baseline
+      - If very high-risk ASCVD - LDL goal <70 mg/dL (consider <55 mg/dL per European guidelines)
+      - If not at goal on maximally tolerated statin - Add ezetimibe 10 mg
+      - Further reduces LDL 15-20%, reduces ASCVD events
+      - If still not at goal (LDL ≥70 or non-HDL ≥100) on statin + ezetimibe - Add PCSK9 inhibitor
+      - Evolocumab or alirocumab
+      - Dramatically lowers LDL (can achieve <20-30 mg/dL)
+      - Proven mortality benefit in very high-risk patients
+      - Aggressive therapy - "Lower is better" for LDL in secondary prevention
+      - No lower threshold identified for harm
+      - Triglycerides elevated (≥150 mg/dL) despite statin - Optimize lifestyle, control diabetes, avoid alcohol
+      - Severe hypertriglyceridemia (≥500 mg/dL) - Risk pancreatitis, add fibrate or omega-3 fatty acids
+      - Monitoring - Lipid panel 4-12 weeks after initiation, then every 3-6 months
+      - Lifetime therapy - Statins reduce recurrent ASCVD events 25-30%
+
+  - id: familial_hypercholesterolemia
+    type: diagnosis
+    name: "Familial Hypercholesterolemia"
+    icd10: "E78.01"
+    urgency: high
+    workup:
+      - Familial hypercholesterolemia (FH) - Genetic disorder, LDL receptor mutations
+      - Autosomal dominant, heterozygous (1 in 250) or homozygous (1 in 300,000)
+      - Heterozygous FH - LDL 190-400 mg/dL, premature ASCVD (men <55, women <65)
+      - Homozygous FH - LDL >400 mg/dL (often 600-1000), ASCVD in childhood/adolescence
+      - Clinical features - Tendon xanthomas (Achilles, extensor tendons hands), xanthelasmas (eyelids), corneal arcus (age <45)
+      - Family history - Premature ASCVD, high cholesterol
+      - Diagnosis - Clinical (Dutch Lipid Clinic Criteria >8 points definite FH, 6-8 probable) or genetic testing
+      - LDL ≥190 mg/dL + family history or physical findings = suspect FH
+      - Screen family members (cascade screening) - First-degree relatives
+    treatment:
+      - Heterozygous FH
+      - High-intensity statin - Start early (age 8-10 for children)
+      - Goal - LDL <100 mg/dL (or <70 if ASCVD)
+      - Add ezetimibe - Almost always needed
+      - Add PCSK9 inhibitor - If LDL still >100 or ASCVD present
+      - Covered by insurance for FH (genetic diagnosis or clinical criteria)
+      - Lipoprotein apheresis - If refractory, LDL >200 despite maximal therapy or >100 with ASCVD
+      - Biweekly procedure, removes LDL from blood (similar to dialysis)
+      - Reduces LDL 50-70%
+      - Homozygous FH - Extremely aggressive therapy
+      - High-intensity statin + ezetimibe + PCSK9 inhibitor
+      - Lipoprotein apheresis - Often required (weekly)
+      - Lomitapide (microsomal triglyceride transfer protein inhibitor) - 5-60 mg daily, lowers LDL 40-50%
+      - Hepatotoxic, GI side effects, very expensive
+      - Evinacumab (ANGPTL3 inhibitor) - IV infusion monthly, for homozygous FH
+      - Lowers LDL ~50%
+      - Prognosis - Untreated heterozygous FH, 50% men have MI by age 50, 30% women by age 60
+      - With aggressive treatment, can normalize life expectancy

@@ -1,0 +1,139 @@
+tree_id: PEDS-KAWASAKI
+name: Kawasaki Disease Evaluation
+family: PEDIATRICS
+specialty: Pediatrics, Cardiology, Rheumatology
+chief_complaint: Prolonged Fever, Rash, Red Eyes, Red Lips
+description: Kawasaki disease diagnosis and coronary aneurysm prevention
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: kawasaki_presentation
+
+nodes:
+  - id: kawasaki_presentation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Classic Kawasaki disease (meets diagnostic criteria)"
+        next: classic_kawasaki
+      - label: "Incomplete Kawasaki disease (fever + some but not all criteria)"
+        next: incomplete_kawasaki
+      - label: "Kawasaki disease with coronary complications"
+        next: kawasaki_coronary_complications
+
+  - id: classic_kawasaki
+    type: diagnosis
+    name: "Classic Kawasaki Disease"
+    icd10: "M30.3"
+    urgency: critical
+    workup:
+      - Definition - Acute febrile vasculitis of childhood, medium vessel vasculitis (coronary arteries most critical)
+      - Epidemiology - Peak age 6 months to 5 years (75% <5 years), more common in Asian children (especially Japanese), boys > girls (1.5:1)
+      - Diagnostic criteria (classic) - Fever ≥5 days PLUS ≥4 of 5 principal features
+      - Bilateral non-exudative conjunctival injection (limbic sparing, no discharge)
+      - Oral mucous membrane changes - Erythema, cracked lips, strawberry tongue, diffuse oropharyngeal erythema
+      - Polymorphous rash - Maculopapular, diffuse, non-vesicular (can be morbilliform, scarlatiniform, erythema multiforme-like)
+      - Extremity changes - Acute phase (erythema and edema of hands/feet), Subacute phase (periungual desquamation starting 2-3 weeks after fever onset)
+      - Cervical lymphadenopathy - Usually unilateral, >1.5cm diameter, least common of the 5 criteria
+      - Additional features (not required for diagnosis but supportive)
+      - Irritability (especially in infants), perineal erythema/desquamation, arthritis/arthralgia, aseptic meningitis, sterile pyuria, uveitis, hydrops of gallbladder
+      - Complications - Coronary artery aneurysms (CAAs) 20-25% if untreated, REDUCED to <5% with IVIG
+      - Timing - Aneurysms develop 1-4 weeks after fever onset (subacute phase)
+      - Risk factors for CAAs - Age <1 year or >8 years, male, persistent fever >10 days, recurrent Kawasaki, elevated CRP >10, anemia, hypoalbuminemia <3g/dL, thrombocytopenia initially
+      - Labs - Non-specific but supportive
+      - Acute phase - Elevated WBC (neutrophilia), elevated ESR/CRP, thrombocytosis (later, peaks week 2-3, often >600K), mild transaminitis, hypoalbuminemia <3g/dL, sterile pyuria
+      - Anemia (normocytic), hyponatremia
+      - Echocardiogram MANDATORY - Baseline (at diagnosis) and 2 weeks and 6-8 weeks
+      - Assess coronary arteries - LAD, RCA, LM dimensions (Z-score adjusted for BSA)
+      - Normal <2.5 Z-score, small 2.5-5 Z-score, medium 5-10, giant >10 Z-score or absolute diameter >8mm
+      - Look for decreased LV function, mitral regurgitation, pericardial effusion
+    treatment:
+      - IVIG + aspirin - MUST treat within 10 days of fever onset (ideally within 7 days) to prevent aneurysms
+      - IVIG 2 g/kg IV single infusion over 10-12 hours (reduces CAA risk from 25% to <5%, anti-inflammatory)
+      - High-dose aspirin 80-100 mg/kg/day divided QID (during acute febrile phase, anti-inflammatory)
+      - Transition to low-dose aspirin 3-5 mg/kg/day once afebrile x 48-72 hours (antiplatelet effect)
+      - Continue low-dose aspirin x 6-8 weeks if no aneurysms (until echo confirms normal coronaries)
+      - If aneurysms present, continue aspirin indefinitely (see complications node)
+      - Response to IVIG - Defervescence within 24-48 hours (90% respond)
+      - IVIG-refractory (persistent or recrudescent fever ≥36 hours after IVIG) - 10-20% of patients
+      - Repeat IVIG 2 g/kg (second dose often effective)
+      - If still refractory after 2nd IVIG, consider
+      - Corticosteroids - Methylprednisolone 30 mg/kg IV x 1-3 days OR pulse IV methylprednisolone 10-30 mg/kg/day x 3 days, then prednisone taper
+      - Infliximab 5 mg/kg IV (anti-TNF, shows efficacy in refractory cases)
+      - Anakinra - IL-1 receptor antagonist, emerging data
+      - High-risk patients (consider adjunctive therapy upfront with IVIG)
+      - If Kobayashi score ≥5 (Japanese scoring system - elevated CRP, low albumin, young age, etc.), consider adding prednisolone or infliximab to initial IVIG
+      - Supportive care - Hydration, antipyretics (acetaminophen), monitor for heart failure
+
+  - id: incomplete_kawasaki
+    type: diagnosis
+    name: "Incomplete Kawasaki Disease"
+    icd10: "M30.3"
+    urgency: critical
+    workup:
+      - Definition - Fever ≥5 days with 2-3 principal features (not meeting full criteria), but otherwise consistent with Kawasaki
+      - Higher risk in infants <6 months (atypical presentation, often incomplete)
+      - Clinical suspicion - Prolonged unexplained fever in infant or young child with some Kawasaki features
+      - Incomplete Kawasaki algorithm (AHA guidelines)
+      - If fever ≥5 days + 2-3 features → Check CRP and ESR
+      - If CRP <3 mg/dL AND ESR <40 mm/hr → Unlikely Kawasaki, follow as outpatient
+      - If CRP ≥3 mg/dL OR ESR ≥40 mm/hr → Check supplemental labs
+      - Supplemental labs (≥3 of 7 positive = treat as Kawasaki)
+      - Albumin ≤3 g/dL
+      - Anemia for age
+      - Elevated ALT
+      - Platelets ≥450K after day 7 (or ≥350K if treating earlier)
+      - WBC ≥15K
+      - Urine ≥10 WBC/hpf (sterile pyuria)
+      - Echocardiogram - Perform in all suspected incomplete Kawasaki
+      - If echo shows CAAs → Definite Kawasaki, treat
+      - If echo normal but ≥3 supplemental labs positive → Treat as Kawasaki
+      - Infants <6 months - Lower threshold to treat (even with 2-3 features + elevated CRP/ESR), higher risk of CAAs and atypical presentation
+    treatment:
+      - Same as classic Kawasaki - IVIG 2 g/kg + aspirin
+      - Do NOT delay treatment waiting for full criteria if high suspicion (especially infants)
+      - Risk-benefit - Benefit of preventing CAAs outweighs risk of IVIG if reasonable suspicion
+
+  - id: kawasaki_coronary_complications
+    type: diagnosis
+    name: "Kawasaki Disease - Coronary Complications"
+    icd10: "M30.3"
+    urgency: critical
+    workup:
+      - Coronary artery aneurysms (CAAs) - Most serious complication
+      - Classification (Z-score adjusted for BSA)
+      - Small - Z-score 2.5 to <5
+      - Medium - Z-score 5 to <10 or absolute dimension <8mm
+      - Giant - Z-score ≥10 or absolute dimension ≥8mm
+      - Risk stratification
+      - Low risk - No CAAs at any time, normal echo
+      - Medium risk - Small CAAs that regress (resolve within 6-8 weeks)
+      - High risk - Medium CAAs (persistent dilation)
+      - Very high risk - Giant CAAs (>8mm absolute or Z ≥10) - HIGHEST risk MI and death
+      - Natural history - Small aneurysms often regress over 1-2 years (50-70%), giant aneurysms rarely regress, risk thrombosis and stenosis
+      - Complications - Thrombosis (acute MI in children!), stenosis (ischemia, angina in childhood/adulthood), rupture (rare)
+      - Follow-up imaging - Serial echos
+      - If no CAAs - Echo at 2 weeks and 6-8 weeks, if both normal, no further cardiac follow-up needed
+      - If small CAAs - Echo q2-4 weeks until regression, then every 3-6 months x 2 years
+      - If medium/giant CAAs - Frequent echos, stress testing, coronary angiography or CT angiography to assess for stenosis, lifelong cardiology follow-up
+    treatment:
+      - Antiplatelet/anticoagulation - Based on aneurysm size and risk
+      - No CAAs - Low-dose aspirin x 6-8 weeks, then discontinue if echo normal
+      - Small CAAs - Low-dose aspirin 3-5 mg/kg/day until regression confirmed (minimum 3-6 months)
+      - Medium CAAs - Low-dose aspirin + clopidogrel 1 mg/kg/day (dual antiplatelet)
+      - Giant CAAs or evidence of thrombosis - Low-dose aspirin + therapeutic anticoagulation (enoxaparin 1 mg/kg SC q12h or warfarin INR 2-3)
+      - High-risk patients (giant aneurysms, LV dysfunction) - May add abciximab (antiplatelet) acutely
+      - Beta-blockers - Consider if large aneurysms (reduce myocardial oxygen demand, shear stress)
+      - Coronary intervention
+      - Thrombosis → Acute MI - Cardiac catheterization, thrombolysis, or PCI (stenting)
+      - Stenosis → Ischemia - CABG or PCI
+      - Long-term management
+      - Lifelong cardiology follow-up if persistent CAAs
+      - Stress testing periodically (exercise or pharmacologic) to assess for ischemia
+      - Avoid contact sports if giant aneurysms (risk trauma, rupture)
+      - Counsel about cardiovascular risk factors (diet, exercise, no smoking)
+      - Women with history of Kawasaki - Preconception counseling (pregnancy safe if no significant CAD)
+      - Activity restrictions - Based on risk stratification
+      - Low risk (no CAAs) - No restrictions
+      - Medium risk - Avoid competitive contact sports
+      - High/very high risk - Individualized restrictions, possibly limited to low-intensity activities

@@ -1,0 +1,344 @@
+tree_id: GENERAL-FATIGUE
+name: Fatigue Evaluation
+family: GENERAL
+specialty: Internal Medicine/Primary Care
+chief_complaint: Fatigue
+description: Diagnostic decision tree for fatigue evaluation
+version: "1.0"
+author: RealDiag Team
+entry_point: duration
+
+nodes:
+  - id: duration
+    type: question
+    text: "Duration of fatigue?"
+    options:
+      - label: "Acute (<1 month)"
+        next: acute_fatigue
+      - label: "Chronic (≥1 month)"
+        next: chronic_fatigue
+
+  - id: acute_fatigue
+    type: question
+    text: "Associated symptoms?"
+    options:
+      - label: "Fever, URI symptoms"
+        next: viral_illness
+      - label: "Dyspnea, chest pain"
+        next: cardiac_eval
+      - label: "Recent medication change"
+        next: medication_fatigue
+      - label: "Insomnia, poor sleep"
+        next: sleep_deprivation
+
+  - id: viral_illness
+    type: diagnosis
+    diagnosis: Acute Viral Illness
+    icd10: J06.9
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Consider influenza/COVID testing
+      - Mono spot if pharyngitis
+    treatment:
+      - Supportive care
+      - Rest
+      - Hydration
+      - NSAIDs for fever
+      - Expect resolution in 1-2 weeks
+
+  - id: cardiac_eval
+    type: diagnosis
+    diagnosis: Cardiac Evaluation Required
+    icd10: R53.83
+    urgency: high
+    workup:
+      - ECG
+      - Troponin
+      - BNP
+      - CXR
+      - Echocardiogram
+    treatment:
+      - Rule out ACS, heart failure
+      - Cardiology referral if abnormal
+      - Treat underlying condition
+
+  - id: medication_fatigue
+    type: diagnosis
+    diagnosis: Medication-Induced Fatigue
+    icd10: T50.905A
+    urgency: low
+    workup:
+      - Medication review
+      - Common culprits: beta-blockers, antihistamines, benzodiazepines, antipsychotics
+    treatment:
+      - Adjust timing or dose
+      - Consider alternative medication
+      - May improve over time
+      - Discontinue if possible
+
+  - id: sleep_deprivation
+    type: diagnosis
+    diagnosis: Sleep Deprivation
+    icd10: G47.9
+    urgency: low
+    workup:
+      - Sleep history
+      - Consider sleep study if OSA suspected
+    treatment:
+      - Sleep hygiene
+      - Treat underlying cause
+      - Cognitive behavioral therapy
+      - Address insomnia
+
+  - id: chronic_fatigue
+    type: question
+    text: "Pattern of fatigue?"
+    options:
+      - label: "Progressive weakness, muscle fatigue"
+        next: neuromuscular_eval
+      - label: "Unrefreshing sleep, post-exertional malaise"
+        next: chronic_fatigue_syndrome
+      - label: "Mood symptoms (depression, anhedonia)"
+        next: depression_eval
+      - label: "Weight changes, temperature intolerance"
+        next: endocrine_eval
+      - label: "Shortness of breath, pallor"
+        next: anemia_eval
+
+  - id: neuromuscular_eval
+    type: question
+    text: "Neurological findings?"
+    options:
+      - label: "Proximal muscle weakness"
+        next: myopathy
+      - label: "Ascending weakness, absent reflexes"
+        next: guillain_barre
+      - label: "Fluctuating weakness, ptosis, diplopia"
+        next: myasthenia_gravis
+
+  - id: myopathy
+    type: diagnosis
+    diagnosis: Myopathy
+    icd10: G72.9
+    urgency: medium
+    workup:
+      - CK, aldolase
+      - TSH
+      - Vitamin D
+      - EMG/NCS
+      - Consider muscle biopsy
+      - Rule out statin-induced
+    treatment:
+      - Discontinue statins if causative
+      - Treat underlying cause
+      - Neurology referral
+      - Physical therapy
+
+  - id: guillain_barre
+    type: diagnosis
+    diagnosis: Guillain-Barré Syndrome
+    icd10: G61.0
+    urgency: critical
+    workup:
+      - Lumbar puncture (elevated protein)
+      - EMG/NCS
+      - Respiratory function monitoring
+    treatment:
+      - Hospital admission
+      - IVIG or plasmapheresis
+      - Monitor respiratory function
+      - Neurology consult
+      - ICU if respiratory compromise
+
+  - id: myasthenia_gravis
+    type: diagnosis
+    diagnosis: Myasthenia Gravis
+    icd10: G70.00
+    urgency: high
+    workup:
+      - AChR antibodies
+      - Anti-MuSK antibodies
+      - CT chest (thymoma)
+      - Edrophonium test
+      - EMG with repetitive stimulation
+    treatment:
+      - Pyridostigmine
+      - Immunosuppression (prednisone, azathioprine)
+      - Neurology referral
+      - Thymectomy if thymoma
+
+  - id: chronic_fatigue_syndrome
+    type: diagnosis
+    diagnosis: Chronic Fatigue Syndrome (ME/CFS)
+    icd10: G93.3
+    urgency: low
+    workup:
+      - Diagnosis of exclusion
+      - CBC, CMP, TSH
+      - ESR/CRP
+      - Rule out other causes
+      - Requires ≥6 months duration + post-exertional malaise
+    treatment:
+      - Graded exercise therapy (controversial)
+      - Cognitive behavioral therapy
+      - Pacing strategies
+      - Treat symptoms (pain, sleep)
+      - Multidisciplinary approach
+      - No cure, focus on function
+
+  - id: depression_eval
+    type: diagnosis
+    diagnosis: Major Depressive Disorder
+    icd10: F32.9
+    urgency: medium
+    workup:
+      - PHQ-9 screening
+      - Rule out medical causes
+      - Assess suicidality
+    treatment:
+      - SSRI/SNRI
+      - Psychotherapy
+      - Exercise
+      - Sleep hygiene
+      - Psychiatry referral if severe
+      - Monitor for response in 4-6 weeks
+
+  - id: endocrine_eval
+    type: question
+    text: "Endocrine symptoms?"
+    options:
+      - label: "Weight gain, cold intolerance, constipation"
+        next: hypothyroidism
+      - label: "Weight loss, heat intolerance, tremor"
+        next: hyperthyroidism
+      - label: "Polyuria, polydipsia"
+        next: diabetes
+      - label: "Hyperpigmentation, hypotension, salt craving"
+        next: adrenal_insufficiency
+
+  - id: hypothyroidism
+    type: diagnosis
+    diagnosis: Hypothyroidism
+    icd10: E03.9
+    urgency: medium
+    workup:
+      - TSH
+      - Free T4
+      - TPO antibodies if autoimmune suspected
+    treatment:
+      - Levothyroxine 1.6 mcg/kg/day
+      - Recheck TSH in 6-8 weeks
+      - Titrate to goal TSH 0.5-2.5
+      - Lifelong therapy
+
+  - id: hyperthyroidism
+    type: diagnosis
+    diagnosis: Hyperthyroidism
+    icd10: E05.90
+    urgency: medium
+    workup:
+      - TSH (suppressed)
+      - Free T4, Free T3
+      - Thyroid uptake scan
+      - TSH receptor antibodies
+    treatment:
+      - Methimazole or PTU
+      - Beta-blocker for symptoms
+      - Endocrinology referral
+      - Consider radioactive iodine or surgery
+
+  - id: diabetes
+    type: diagnosis
+    diagnosis: Diabetes Mellitus
+    icd10: E11.9
+    urgency: medium
+    workup:
+      - HbA1c
+      - Fasting glucose
+      - BMP
+      - Urinalysis
+    treatment:
+      - Metformin
+      - Lifestyle modifications
+      - Glucose monitoring
+      - Diabetes education
+      - Target HbA1c <7%
+
+  - id: adrenal_insufficiency
+    type: diagnosis
+    diagnosis: Adrenal Insufficiency
+    icd10: E27.40
+    urgency: high
+    workup:
+      - Morning cortisol
+      - ACTH stimulation test
+      - ACTH level
+      - Electrolytes (hyponatremia, hyperkalemia)
+    treatment:
+      - Hydrocortisone replacement
+      - Fludrocortisone if primary
+      - Stress dose steroids when ill
+      - Endocrinology referral
+      - MedicAlert bracelet
+
+  - id: anemia_eval
+    type: question
+    text: "Anemia type?"
+    options:
+      - label: "Microcytic (MCV <80)"
+        next: iron_deficiency
+      - label: "Macrocytic (MCV >100)"
+        next: b12_deficiency
+      - label: "Normocytic"
+        next: anemia_chronic_disease
+
+  - id: iron_deficiency
+    type: diagnosis
+    diagnosis: Iron Deficiency Anemia
+    icd10: D50.9
+    urgency: medium
+    workup:
+      - CBC
+      - Ferritin
+      - Iron studies
+      - Consider GI evaluation if no obvious source
+    treatment:
+      - Ferrous sulfate 325mg TID
+      - Vitamin C to enhance absorption
+      - Recheck CBC in 4-6 weeks
+      - Treat underlying cause
+      - Consider IV iron if intolerant
+
+  - id: b12_deficiency
+    type: diagnosis
+    diagnosis: Vitamin B12 Deficiency
+    icd10: D51.9
+    urgency: medium
+    workup:
+      - CBC (macrocytic)
+      - Vitamin B12 level
+      - Methylmalonic acid if borderline
+      - Consider pernicious anemia workup
+    treatment:
+      - Cyanocobalamin 1000mcg IM weekly x 4 weeks, then monthly
+      - Or high-dose oral 1000-2000mcg daily
+      - Recheck CBC in 2-3 months
+      - Lifelong if pernicious anemia
+
+  - id: anemia_chronic_disease
+    type: diagnosis
+    diagnosis: Anemia of Chronic Disease
+    icd10: D63.8
+    urgency: medium
+    workup:
+      - CBC
+      - Ferritin (elevated)
+      - Iron studies (low iron, low TIBC)
+      - ESR/CRP
+      - Evaluate for underlying inflammatory condition
+    treatment:
+      - Treat underlying disease
+      - EPO if renal disease
+      - Transfusion if severe
+      - Iron supplementation may not help

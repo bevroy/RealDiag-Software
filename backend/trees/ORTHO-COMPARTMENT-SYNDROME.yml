@@ -1,0 +1,109 @@
+tree_id: ORTHO-COMPARTMENT-SYNDROME
+name: Acute Compartment Syndrome Evaluation
+family: ORTHOPEDICS
+specialty: Orthopedic Surgery, Trauma Surgery, Emergency Medicine
+chief_complaint: Severe Pain, Swelling, Tense Extremity After Injury
+description: Comprehensive evaluation and management of acute compartment syndrome
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: compartment_syndrome_presentation
+
+nodes:
+  - id: compartment_syndrome_presentation
+    type: question
+    text: "Clinical suspicion for compartment syndrome?"
+    options:
+      - label: "High suspicion - 6 P's present, high-risk mechanism"
+        next: compartment_syndrome
+      - label: "Unclear - measure compartment pressures"
+        next: pressure_measurement
+
+  - id: pressure_measurement
+    type: question
+    text: "Compartment pressure results?"
+    options:
+      - label: "Absolute pressure >30 mmHg OR delta pressure <30 mmHg (diastolic BP - compartment pressure)"
+        next: compartment_syndrome
+      - label: "Normal pressures (<30 mmHg absolute, delta >30 mmHg)"
+        next: monitor_closely
+
+  - id: monitor_closely
+    type: diagnosis
+    name: "Elevated Risk but No Compartment Syndrome Yet"
+    icd10: "M79.A9"
+    urgency: high
+    workup:
+      - Continue serial exams q1-2h
+      - Repeat compartment pressure measurements if clinical concern
+      - Elevate extremity to heart level (NOT above heart - reduces arterial inflow)
+      - Remove/split constrictive dressings and casts
+    treatment:
+      - Close monitoring
+      - Low threshold for fasciotomy if any concern
+      - Orthopedic consultation for admission and serial exams
+
+  - id: compartment_syndrome
+    type: diagnosis
+    name: "Acute Compartment Syndrome"
+    icd10: "M79.A9"
+    urgency: critical
+    workup:
+      - CLINICAL DIAGNOSIS (do NOT delay surgery for pressure measurements if high clinical suspicion)
+      - Pathophysiology - Increased pressure within closed fascial compartment → Decreased tissue perfusion → Ischemia and necrosis of muscle/nerves (irreversible damage begins at 6-8 hours)
+      - Common causes
+      - Fractures (most common) - Tibial shaft fracture (highest risk), distal radius, forearm, supracondylar humerus
+      - Crush injury, blast injury
+      - Reperfusion after vascular injury or prolonged ischemia
+      - Tight casts, dressings, PASG (pneumatic anti-shock garment)
+      - Burns (circumferential eschar)
+      - Snake bites (envenomation)
+      - Bleeding into compartment (anticoagulation)
+      - Vigorous exercise (exertional compartment syndrome - different entity, chronic/recurrent)
+      - Classic 6 P's (late findings - do NOT wait for all 6, early diagnosis critical)
+      - Pain - Severe, progressive, out of proportion to injury, NOT relieved by opioids, worsened by passive stretch of muscles in compartment (MOST SENSITIVE early sign)
+      - Pressure - Compartment feels tense/firm on palpation
+      - Paresthesias - Numbness/tingling (nerve ischemia)
+      - Pallor - Pale skin (late)
+      - Pulselessness - Absent pulses (VERY LATE, often irreversible damage by this point)
+      - Paralysis - Weakness/inability to move (late, suggests nerve damage)
+      - Key clinical pearl - Pain with passive stretch is earliest and most reliable sign
+      - Physical exam - Assess all compartments of affected limb
+      - Lower leg (4 compartments) - Anterior (dorsiflexion), lateral (eversion), superficial posterior (plantarflexion), deep posterior (toe flexion)
+      - Forearm (3 compartments) - Volar (finger/wrist flexion), dorsal (finger/wrist extension), mobile wad (brachioradialis)
+      - Thigh, upper arm (less common)
+      - Compartment pressure measurement (if diagnosis uncertain and time permits)
+      - Normal <10-12 mmHg, >30 mmHg absolute diagnostic (though some use >20 mmHg)
+      - Delta pressure (diastolic BP - compartment pressure) <30 mmHg diagnostic (more accurate in hypotension)
+      - Continuous monitoring if borderline
+      - Measure ALL compartments at risk (don't just measure one)
+      - Do NOT delay fasciotomy for pressure measurements if high clinical suspicion
+      - Labs - CK (may be elevated if rhabdomyolysis), BMP (hyperkalemia, acute kidney injury from rhabdomyolysis), myoglobin
+      - X-rays - Assess for fractures (if trauma)
+    treatment:
+      - SURGICAL EMERGENCY - Fasciotomy within 6 hours to prevent permanent damage
+      - Immediate measures (while preparing for OR)
+      - Remove ALL constrictive dressings, splints, casts (cast bivalving - cut cast on both sides and spread open, remove padding)
+      - Position limb at level of heart (elevation above heart decreases arterial perfusion, dependent position increases venous congestion)
+      - Avoid hypotension (maintain adequate perfusion pressure)
+      - Pain control - Opioids, but increasing pain despite narcotics is diagnostic clue
+      - IV fluids - Aggressive hydration if rhabdomyolysis (prevent AKI)
+      - Emergency fasciotomy (DEFINITIVE treatment)
+      - Incise fascia to decompress ALL affected compartments
+      - Lower leg - Two-incision technique (anterolateral incision for anterior/lateral compartments, posteromedial incision for superficial/deep posterior compartments)
+      - Forearm - Volar and dorsal incisions
+      - Leave wounds open (do NOT close), sterile dressings
+      - Delayed primary closure or skin grafting in 3-7 days after edema resolves
+      - Inspect muscle viability - Debride necrotic muscle (if present, indicates delayed diagnosis)
+      - Post-fasciotomy care
+      - ICU or step-down monitoring
+      - Assess perfusion, pulses, neurovascular status
+      - Serial CK, myoglobin, BMP (monitor for rhabdomyolysis and AKI)
+      - Aggressive IV hydration (if rhabdomyolysis - target urine output 200-300 mL/hr, urine alkalinization with sodium bicarbonate, consider mannitol)
+      - Wound care - Dressing changes, return to OR in 48-72 hours for re-exploration, delayed closure or skin grafting
+      - Physical therapy (once healed)
+      - Complications
+      - If fasciotomy delayed (>12 hours) - Muscle necrosis, contractures (Volkmann contracture in forearm), permanent nerve damage, limb loss, rhabdomyolysis with AKI, sepsis
+      - Mortality 10-20% if delayed or untreated
+      - Prevention - High index of suspicion, early recognition, remove constrictive dressings, frequent neurovascular checks post-fracture/surgery
+      - Prognosis - Excellent if fasciotomy <6 hours; Poor if delayed (permanent disability, amputation)

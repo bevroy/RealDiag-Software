@@ -1,0 +1,319 @@
+tree_id: RENAL-AKI
+name: Acute Kidney Injury Evaluation
+family: UROLOGY
+specialty: Nephrology/Internal Medicine/Emergency Medicine
+chief_complaint: Acute Kidney Injury
+description: Diagnostic decision tree for acute kidney injury evaluation
+version: "1.0"
+author: RealDiag Team
+entry_point: severity
+
+nodes:
+  - id: severity
+    type: question
+    text: "AKI severity (KDIGO criteria)?"
+    options:
+      - label: "Stage 3 (Cr ≥3x baseline or ≥4.0, or dialysis)"
+        next: severe_aki
+      - label: "Stage 2 (Cr 2-2.9x baseline)"
+        next: moderate_aki
+      - label: "Stage 1 (Cr 1.5-1.9x baseline or increase ≥0.3)"
+        next: mild_aki
+
+  - id: severe_aki
+    type: question
+    text: "Life-threatening complications?"
+    options:
+      - label: "Hyperkalemia >6.5, acidosis pH <7.1, uremia, volume overload"
+        next: dialysis_urgent
+      - label: "Severe but no urgent dialysis indication"
+        next: severe_aki_workup
+
+  - id: dialysis_urgent
+    type: diagnosis
+    diagnosis: Severe AKI - Urgent Dialysis Indication
+    icd10: N17.9
+    urgency: critical
+    workup:
+      - STAT BMP, calcium, phosphate, magnesium
+      - ABG or VBG
+      - ECG (peaked T waves)
+      - Urinalysis
+      - Renal ultrasound
+      - Bladder scan
+    treatment:
+      - EMERGENT nephrology consult for dialysis
+      - Hyperkalemia management (Calcium gluconate 10% 10mL IV, Insulin 10 units + D50 50mL IV, Albuterol nebulized, Sodium bicarbonate if acidotic, Kayexalate or patiromer)
+      - Volume overload (IV furosemide 40-200mg or infusion)
+      - Metabolic acidosis (sodium bicarbonate)
+      - Uremic pericarditis or encephalopathy (urgent dialysis)
+      - ICU admission
+      - Stop nephrotoxins
+
+  - id: severe_aki_workup
+    type: question
+    text: "Urine output pattern?"
+    options:
+      - label: "Oliguric (<400 mL/day)"
+        next: oliguric_aki
+      - label: "Anuric (<50 mL/day)"
+        next: anuric_aki
+      - label: "Non-oliguric"
+        next: non_oliguric_aki
+
+  - id: oliguric_aki
+    type: diagnosis
+    diagnosis: Oliguric Acute Kidney Injury
+    icd10: N17.9
+    urgency: high
+    workup:
+      - BMP daily
+      - Urinalysis with microscopy
+      - Urine electrolytes (Na, Cr, urea)
+      - FENa <1% = prerenal, >2% = ATN
+      - Renal ultrasound (hydronephrosis)
+      - Bladder scan (retention)
+      - Consider renal biopsy if unclear
+    treatment:
+      - Identify and treat underlying cause
+      - Prerenal: aggressive fluid resuscitation
+      - Intrinsic: supportive care, stop nephrotoxins
+      - Postrenal: relieve obstruction (Foley, nephrostomy)
+      - Nephrology consult
+      - Hospital admission
+      - Monitor for dialysis indications (AEIOU: Acidosis, Electrolytes, Ingestion, Overload, Uremia)
+      - Adjust medications for renal function
+
+  - id: anuric_aki
+    type: diagnosis
+    diagnosis: Anuric Acute Kidney Injury
+    icd10: N17.9
+    urgency: critical
+    workup:
+      - STAT renal ultrasound
+      - Bladder scan
+      - Foley catheter
+      - BMP, urinalysis
+    treatment:
+      - Rule out obstruction immediately
+      - Foley catheter placement
+      - Renal ultrasound for hydronephrosis
+      - Nephrology consult
+      - Likely needs dialysis
+      - ICU admission
+      - Urology consult if obstruction
+
+  - id: non_oliguric_aki
+    type: diagnosis
+    diagnosis: Non-Oliguric Acute Kidney Injury
+    icd10: N17.9
+    urgency: high
+    workup:
+      - BMP, urinalysis
+      - FENa, urine electrolytes
+      - Renal ultrasound
+      - Review medications
+    treatment:
+      - Better prognosis than oliguric AKI
+      - IV fluids if prerenal
+      - Stop nephrotoxins
+      - Adjust medication dosing
+      - Monitor electrolytes
+      - Nephrology consult
+      - Hospital admission vs observation
+
+  - id: moderate_aki
+    type: question
+    text: "Determine AKI etiology?"
+    options:
+      - label: "Prerenal (hypovolemia, hypotension)"
+        next: prerenal_aki
+      - label: "Intrinsic (ATN, AIN, glomerulonephritis)"
+        next: intrinsic_aki
+      - label: "Postrenal (obstruction)"
+        next: postrenal_aki
+
+  - id: prerenal_aki
+    type: diagnosis
+    diagnosis: Prerenal Acute Kidney Injury
+    icd10: N17.9
+    urgency: high
+    workup:
+      - BMP
+      - Urinalysis (concentrated, bland sediment)
+      - FENa <1%, BUN/Cr >20:1
+      - Urine osmolality >500
+      - Assess volume status
+      - Review diuretics, ACE-I, ARB, NSAIDs
+    treatment:
+      - IV fluid resuscitation (NS or LR)
+      - Fluid challenge 500-1000 mL
+      - Target MAP >65
+      - Stop ACE-I/ARB/NSAIDs temporarily
+      - Hold diuretics
+      - Monitor Cr response (should improve within 24-48h)
+      - If no response, consider intrinsic AKI
+      - Hospital admission
+      - Daily BMP
+
+  - id: intrinsic_aki
+    type: question
+    text: "Likely intrinsic cause?"
+    options:
+      - label: "Acute tubular necrosis (ATN)"
+        next: atn
+      - label: "Acute interstitial nephritis (AIN)"
+        next: ain
+      - label: "Glomerulonephritis"
+        next: glomerulonephritis
+
+  - id: atn
+    type: diagnosis
+    diagnosis: Acute Tubular Necrosis
+    icd10: N17.0
+    urgency: high
+    workup:
+      - Urinalysis (muddy brown casts, renal tubular epithelial cells)
+      - FENa >2%
+      - Identify cause: ischemia (shock, surgery) or nephrotoxins (contrast, aminoglycosides, rhabdomyolysis)
+      - CK if rhabdomyolysis suspected
+      - Urine myoglobin
+    treatment:
+      - Supportive care (no specific treatment)
+      - IV fluids to maintain euvolemia
+      - Stop nephrotoxins
+      - Avoid contrast if possible
+      - Rhabdomyolysis: aggressive hydration, goal UOP 200-300 mL/h
+      - Sodium bicarbonate if myoglobinuria
+      - Adjust medications for renal function
+      - Monitor for recovery (1-3 weeks typically)
+      - Dialysis if needed
+      - Hospital admission
+      - Nephrology consult
+
+  - id: ain
+    type: diagnosis
+    diagnosis: Acute Interstitial Nephritis
+    icd10: N10
+    urgency: high
+    workup:
+      - Urinalysis (WBC casts, eosinophiluria)
+      - Medication review (NSAIDs, PPIs, antibiotics, especially beta-lactams)
+      - CBC with differential (eosinophilia)
+      - Complement levels (normal in AIN)
+      - Consider renal biopsy if unclear
+    treatment:
+      - Stop offending medication
+      - Corticosteroids if severe or not improving (prednisone 1 mg/kg)
+      - Supportive care
+      - Usually reversible if caught early
+      - Monitor Cr closely
+      - Nephrology consult
+      - Hospital admission
+
+  - id: glomerulonephritis
+    type: diagnosis
+    diagnosis: Acute Glomerulonephritis
+    icd10: N00.9
+    urgency: high
+    workup:
+      - Urinalysis (RBC casts, dysmorphic RBCs, proteinuria)
+      - 24-hour urine protein
+      - Serologies: ANA, ANCA, anti-GBM, complement (C3, C4), ASO titer
+      - Hepatitis B/C, HIV
+      - Cryoglobulins
+      - Renal biopsy (often needed for diagnosis and treatment)
+    treatment:
+      - Nephrology consult URGENTLY
+      - Immunosuppression if indicated (steroids, cyclophosphamide, rituximab)
+      - Plasmapheresis for anti-GBM, ANCA vasculitis
+      - Treat underlying infection if post-infectious
+      - Blood pressure control
+      - Hospital admission
+      - Dialysis if severe
+
+  - id: postrenal_aki
+    type: question
+    text: "Level of obstruction?"
+    options:
+      - label: "Bladder outlet obstruction (BPH, neurogenic)"
+        next: bladder_outlet
+      - label: "Bilateral ureteral obstruction"
+        next: ureteral_obstruction
+      - label: "Single kidney with unilateral obstruction"
+        next: unilateral_obstruction
+
+  - id: bladder_outlet
+    type: diagnosis
+    diagnosis: Bladder Outlet Obstruction
+    icd10: N13.8
+    urgency: high
+    workup:
+      - Bladder scan (>300 mL residual)
+      - Foley catheter placement
+      - BMP before and after decompression
+      - Renal ultrasound
+    treatment:
+      - Foley catheter immediate decompression
+      - Monitor for post-obstructive diuresis
+      - Replace urinary losses with 0.45% NS if massive diuresis
+      - Treat BPH (tamsulosin 0.4mg, finasteride 5mg)
+      - Urology consult
+      - Monitor Cr (should improve)
+      - Trial of void after Cr normalizes
+
+  - id: ureteral_obstruction
+    type: diagnosis
+    diagnosis: Bilateral Ureteral Obstruction
+    icd10: N13.6
+    urgency: critical
+    workup:
+      - STAT renal ultrasound (bilateral hydronephrosis)
+      - CT abdomen/pelvis without contrast
+      - Identify cause (stones, malignancy, retroperitoneal fibrosis)
+    treatment:
+      - URGENT urology consult
+      - Bilateral nephrostomy tubes OR
+      - Bilateral ureteral stents
+      - IV fluids
+      - Treat underlying cause
+      - Monitor for post-obstructive diuresis
+      - Nephrology consult
+      - Hospital admission
+
+  - id: unilateral_obstruction
+    type: diagnosis
+    diagnosis: Unilateral Obstruction in Solitary Kidney
+    icd10: N13.1
+    urgency: critical
+    workup:
+      - Renal ultrasound
+      - CT urogram
+      - Assess for stone vs mass
+    treatment:
+      - URGENT urology consult
+      - Nephrostomy tube or ureteral stent
+      - Treat as bilateral obstruction
+      - Cannot tolerate delay
+      - Hospital admission
+
+  - id: mild_aki
+    type: diagnosis
+    diagnosis: Stage 1 Acute Kidney Injury
+    icd10: N17.9
+    urgency: medium
+    workup:
+      - BMP
+      - Urinalysis
+      - Review medications (NSAIDs, ACE-I, ARB, diuretics)
+      - FENa if unclear etiology
+      - Renal ultrasound if concern for obstruction
+    treatment:
+      - Identify and treat underlying cause
+      - IV fluids if prerenal
+      - Stop nephrotoxins
+      - Medication adjustment
+      - Monitor Cr daily
+      - Admit if not improving or high risk
+      - Outpatient management if improving and low risk
+      - Nephrology follow-up

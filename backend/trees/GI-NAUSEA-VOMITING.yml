@@ -1,0 +1,338 @@
+tree_id: GI-NAUSEA-VOMITING
+name: Nausea and Vomiting Evaluation
+family: GASTROENTEROLOGY
+specialty: Gastroenterology/Emergency Medicine/Primary Care
+chief_complaint: Nausea and Vomiting
+description: Diagnostic decision tree for evaluating nausea and vomiting
+version: "1.0"
+author: RealDiag Team
+entry_point: onset_timing
+
+nodes:
+  - id: onset_timing
+    type: question
+    text: "Timing of symptoms?"
+    options:
+      - label: "Acute (< 1 week)"
+        next: acute_associated
+      - label: "Chronic/Recurrent (> 1 week)"
+        next: chronic_pattern
+
+  - id: acute_associated
+    type: question
+    text: "Associated symptoms?"
+    options:
+      - label: "Severe abdominal pain"
+        next: surgical_abdomen
+      - label: "Diarrhea, fever"
+        next: gastroenteritis
+      - label: "Headache, visual changes"
+        next: neuro_causes
+      - label: "Chest pain"
+        next: cardiac_eval
+      - label: "Missed period (female)"
+        next: pregnancy_test
+
+  - id: surgical_abdomen
+    type: question
+    text: "Location and character of pain?"
+    options:
+      - label: "RUQ pain, worse after fatty meals"
+        next: cholecystitis
+      - label: "RLQ pain, rebound tenderness"
+        next: appendicitis
+      - label: "Epigastric pain radiating to back"
+        next: pancreatitis
+      - label: "Severe constant pain, peritoneal signs"
+        next: perforation_obstruction
+
+  - id: cholecystitis
+    type: diagnosis
+    diagnosis: Acute Cholecystitis
+    icd10: K81.0
+    urgency: high
+    workup:
+      - RUQ ultrasound
+      - CBC, CMP, lipase
+      - HIDA scan if inconclusive
+    treatment:
+      - NPO, IV fluids
+      - Antibiotics
+      - Pain control
+      - Surgical consultation
+
+  - id: appendicitis
+    type: diagnosis
+    diagnosis: Acute Appendicitis
+    icd10: K35.80
+    urgency: high
+    workup:
+      - CT abdomen/pelvis
+      - CBC, CRP
+      - Urinalysis
+    treatment:
+      - NPO, IV fluids
+      - Antibiotics
+      - Surgical consultation (appendectomy)
+
+  - id: pancreatitis
+    type: diagnosis
+    diagnosis: Acute Pancreatitis
+    icd10: K85.90
+    urgency: high
+    workup:
+      - Lipase (>3x upper limit)
+      - CBC, CMP, LFTs
+      - CT abdomen if severe
+      - Ultrasound for gallstones
+    treatment:
+      - NPO, aggressive IV fluids
+      - Pain control
+      - Treat underlying cause
+      - ICU if severe
+
+  - id: perforation_obstruction
+    type: diagnosis
+    diagnosis: Bowel Perforation/Obstruction
+    icd10: K56.60
+    urgency: critical
+    workup:
+      - Upright CXR (free air)
+      - CT abdomen/pelvis
+      - CBC, lactate
+    treatment:
+      - NPO, NG tube
+      - IV fluids/resuscitation
+      - Broad-spectrum antibiotics
+      - Emergent surgical consultation
+
+  - id: gastroenteritis
+    type: question
+    text: "Severity assessment?"
+    options:
+      - label: "Mild - tolerating oral fluids"
+        next: viral_gastroenteritis
+      - label: "Moderate-Severe - dehydration, bloody stool"
+        next: bacterial_gastroenteritis
+
+  - id: viral_gastroenteritis
+    type: diagnosis
+    diagnosis: Viral Gastroenteritis
+    icd10: A08.4
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Stool studies if severe/persistent
+    treatment:
+      - Oral rehydration
+      - Antiemetics prn
+      - Probiotics
+      - Gradual diet advancement
+
+  - id: bacterial_gastroenteritis
+    type: diagnosis
+    diagnosis: Bacterial Gastroenteritis
+    icd10: A09
+    urgency: medium
+    workup:
+      - Stool culture, O&P, C. diff
+      - CBC, BMP
+      - Consider CT if toxic
+    treatment:
+      - IV fluids if dehydrated
+      - Antibiotics if indicated (fluoroquinolone, azithromycin)
+      - Antiemetics
+      - Monitor for complications
+
+  - id: neuro_causes
+    type: question
+    text: "Neurological findings?"
+    options:
+      - label: "Severe headache, photophobia, nuchal rigidity"
+        next: meningitis_concern
+      - label: "Headache with vision changes, BP >180/120"
+        next: hypertensive_emergency
+      - label: "Vertigo, nystagmus"
+        next: vestibular_disorder
+      - label: "Focal deficits"
+        next: stroke_concern
+
+  - id: meningitis_concern
+    type: diagnosis
+    diagnosis: Meningitis (Rule Out)
+    icd10: G03.9
+    urgency: critical
+    workup:
+      - Blood cultures
+      - CT head (if focal signs)
+      - Lumbar puncture
+    treatment:
+      - Empiric antibiotics immediately
+      - Dexamethasone
+      - Supportive care
+      - Isolation
+
+  - id: hypertensive_emergency
+    type: diagnosis
+    diagnosis: Hypertensive Emergency
+    icd10: I16.1
+    urgency: critical
+    workup:
+      - ECG
+      - Troponin
+      - BMP, creatinine
+      - Fundoscopic exam
+      - CT head
+    treatment:
+      - IV antihypertensive (labetalol, nicardipine)
+      - Reduce BP 10-20% in first hour
+      - ICU monitoring
+
+  - id: vestibular_disorder
+    type: diagnosis
+    diagnosis: Vestibular Disorder
+    icd10: H81.9
+    urgency: medium
+    workup:
+      - Clinical exam (Dix-Hallpike)
+      - Consider MRI if central features
+    treatment:
+      - Meclizine or antihistamines
+      - Vestibular rehabilitation
+      - Epley maneuver if BPPV
+
+  - id: stroke_concern
+    type: diagnosis
+    diagnosis: Stroke (Rule Out)
+    icd10: I63.9
+    urgency: critical
+    workup:
+      - Stat CT head
+      - Neurology consult
+      - ECG, troponin
+    treatment:
+      - Stroke protocol activation
+      - Consider tPA if indicated
+      - Neurology/neurosurgery consult
+
+  - id: cardiac_eval
+    type: diagnosis
+    diagnosis: Acute Coronary Syndrome (Rule Out)
+    icd10: I24.9
+    urgency: critical
+    workup:
+      - ECG
+      - Troponin (serial)
+      - CXR
+    treatment:
+      - Aspirin
+      - Antiemetics
+      - Cardiology consult if ACS confirmed
+      - Monitor
+
+  - id: pregnancy_test
+    type: question
+    text: "Pregnancy test result?"
+    options:
+      - label: "Positive"
+        next: pregnancy_related
+      - label: "Negative"
+        next: other_causes
+
+  - id: pregnancy_related
+    type: diagnosis
+    diagnosis: Pregnancy-Related Nausea/Vomiting
+    icd10: O21.9
+    urgency: medium
+    workup:
+      - Quantitative hCG
+      - Pelvic ultrasound
+      - BMP if severe vomiting
+    treatment:
+      - Vitamin B6 + doxylamine
+      - Ondansetron if severe
+      - IV fluids if hyperemesis
+      - Confirm intrauterine pregnancy
+
+  - id: chronic_pattern
+    type: question
+    text: "Pattern and triggers?"
+    options:
+      - label: "Morning vomiting, improved after eating"
+        next: pregnancy_or_metabolic
+      - label: "After meals, heartburn"
+        next: gerd_gastroparesis
+      - label: "Weight loss, early satiety"
+        next: malignancy_concern
+      - label: "Medication history"
+        next: medication_induced
+
+  - id: pregnancy_or_metabolic
+    type: diagnosis
+    diagnosis: Pregnancy vs Metabolic Disorder
+    icd10: O21.0
+    urgency: low
+    workup:
+      - Pregnancy test
+      - BMP, glucose
+      - TSH
+    treatment:
+      - Treat underlying cause
+      - Antiemetics prn
+      - Dietary modifications
+
+  - id: gerd_gastroparesis
+    type: diagnosis
+    diagnosis: GERD/Gastroparesis
+    icd10: K21.9
+    urgency: low
+    workup:
+      - Upper endoscopy
+      - Gastric emptying study
+    treatment:
+      - PPI therapy
+      - Prokinetics (metoclopramide)
+      - Small frequent meals
+      - Low-fat diet
+
+  - id: malignancy_concern
+    type: diagnosis
+    diagnosis: GI Malignancy (Rule Out)
+    icd10: C26.9
+    urgency: high
+    workup:
+      - Upper endoscopy with biopsy
+      - CT abdomen/pelvis
+      - Tumor markers
+    treatment:
+      - Refer to gastroenterology/oncology
+      - Symptomatic management
+      - Nutritional support
+
+  - id: medication_induced
+    type: diagnosis
+    diagnosis: Medication-Induced Nausea
+    icd10: T50.905A
+    urgency: low
+    workup:
+      - Review medication list
+      - Consider alternative agents
+    treatment:
+      - Adjust or discontinue offending medication
+      - Take medications with food
+      - Antiemetics prn
+
+  - id: other_causes
+    type: diagnosis
+    diagnosis: Nausea/Vomiting - Other Causes
+    icd10: R11.2
+    urgency: low
+    workup:
+      - CBC, CMP, LFTs
+      - Consider gastric emptying study
+      - Upper endoscopy
+    treatment:
+      - Symptomatic treatment
+      - Antiemetics
+      - Treat underlying cause
+      - Follow-up with gastroenterology

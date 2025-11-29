@@ -1,0 +1,108 @@
+tree_id: PEDS-BRONCHIOLITIS
+name: Pediatric Bronchiolitis Evaluation
+family: PEDIATRICS
+specialty: Pediatrics, Emergency Medicine
+chief_complaint: Infant with Cough, Wheezing, Respiratory Distress
+description: Comprehensive evaluation and management of bronchiolitis in infants and young children
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: bronchiolitis_presentation
+
+nodes:
+  - id: bronchiolitis_presentation
+    type: question
+    text: "Child with suspected bronchiolitis - Age and severity?"
+    options:
+      - label: "Severe respiratory distress (retractions, grunting, apnea, hypoxia SpO2 <90%, poor feeding)"
+        next: severe_bronchiolitis
+      - label: "Moderate symptoms (tachypnea, wheezing, mild retractions, feeding 50-75% of normal)"
+        next: moderate_bronchiolitis
+      - label: "Mild symptoms (rhinorrhea, cough, no distress, feeding well)"
+        next: mild_bronchiolitis
+
+  - id: severe_bronchiolitis
+    type: diagnosis
+    name: "Severe Bronchiolitis Requiring Hospitalization"
+    icd10: "J21.9"
+    urgency: critical
+    workup:
+      - Clinical diagnosis (infants <24 months with first episode of wheezing, preceded by URI symptoms)
+      - Peak season - Fall/winter (RSV season)
+      - Respiratory rate (normal <2mo is 30-60, 2-12mo is 24-40)
+      - Pulse oximetry (SpO2 <90% concerning)
+      - Nasopharyngeal swab for viral PCR (RSV, influenza, COVID-19, parainfluenza, metapneumovirus) - for infection control and prognosis, not treatment
+      - Chest X-ray NOT routinely needed (only if concern for pneumonia, foreign body, or atypical presentation)
+      - CXR findings in bronchiolitis - Hyperinflation, peribronchial thickening, patchy atelectasis
+      - Labs NOT routinely needed (CBC, BMP only if severe or dehydration)
+      - Blood culture only if febrile and toxic-appearing (r/o sepsis)
+      - Risk factors for severe disease - Age <12 weeks (esp <6 weeks), prematurity (<37 weeks), chronic lung disease (BPD), congenital heart disease, immunodeficiency
+    treatment:
+      - Hospital admission (PICU if severe)
+      - Supportive care (mainstay - no specific antiviral treatment for RSV)
+      - Oxygen supplementation - Goal SpO2 >90% (avoid over-oxygenation, target 90-94%)
+      - High-flow nasal cannula (HFNC) if SpO2 <90% on room air or significant work of breathing (2 L/kg/min)
+      - Consider CPAP or BiPAP if failing HFNC
+      - Intubation and mechanical ventilation if respiratory failure (apnea, hypercapnia, refractory hypoxemia, exhaustion)
+      - Hydration and nutrition
+      - IV fluids if unable to maintain oral intake (D5 0.45% NS at maintenance rate)
+      - NG tube feeding if tachypneic but can tolerate enteral (safer than IV alone)
+      - Monitor for aspiration risk
+      - Frequent nasal suctioning (before feeding, q2-4h as needed) - gentle bulb suction or NP suction
+      - Position upright (30-45 degrees)
+      - Medications NOT recommended (evidence shows no benefit)
+      - NO bronchodilators (albuterol, racemic epinephrine) - trial dose acceptable but discontinue if no response
+      - NO corticosteroids (oral or inhaled) - not effective in bronchiolitis
+      - NO antibiotics - unless bacterial superinfection suspected (persistent fever >72hrs, lobar consolidation, elevated WBC)
+      - NO chest PT or nebulized hypertonic saline - not beneficial in severe cases
+      - Monitoring - Continuous pulse oximetry, cardiorespiratory monitoring (apnea risk in infants <6 months)
+      - Isolation precautions (contact and droplet)
+      - Discharge criteria - SpO2 >90% on room air, adequate oral intake, no apnea, respiratory rate normalizing
+      - Palivizumab (Synagis) prophylaxis for high-risk infants - Monthly IM injections during RSV season for preemies <29 weeks, chronic lung disease, congenital heart disease (given prior to RSV season, not treatment)
+
+  - id: moderate_bronchiolitis
+    type: diagnosis
+    name: "Moderate Bronchiolitis"
+    icd10: "J21.9"
+    urgency: high
+    workup:
+      - Clinical diagnosis
+      - Vital signs (respiratory rate, heart rate, SpO2)
+      - Assessment of hydration status and feeding
+      - RSV testing if indicated for cohorting
+      - Chest X-ray only if atypical features
+    treatment:
+      - Observation in ED or hospital admission decision based on - Age (<3 months = admit), feeding (if <50% intake = admit), work of breathing, social factors, follow-up reliability
+      - Supportive care
+      - Supplemental oxygen if SpO2 persistently <90%
+      - Nasal suctioning before feeds
+      - Encourage oral fluids
+      - Trial of bronchodilator (albuterol 2.5mg nebulized) acceptable - Continue only if clear improvement, discontinue if no response
+      - ED observation (6-12 hours) with reassessment
+      - If improving and feeding adequately, discharge home with close follow-up
+      - If worsening or unable to feed, admit
+
+  - id: mild_bronchiolitis
+    type: diagnosis
+    name: "Mild Bronchiolitis (Outpatient Management)"
+    icd10: "J21.9"
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Vital signs (confirm SpO2 >90%, normal respiratory rate for age)
+      - Assess feeding and hydration
+    treatment:
+      - Outpatient management with close follow-up
+      - Supportive care at home
+      - Frequent small feeds (offer fluids often)
+      - Nasal saline drops and gentle bulb suctioning before feeds
+      - Upright positioning
+      - Humidified air (cool mist humidifier)
+      - Fever management (acetaminophen or ibuprofen if >6 months)
+      - Avoid smoke exposure
+      - Medications NOT recommended - No bronchodilators, no steroids, no antibiotics, no cough suppressants
+      - Parental education
+      - Natural course - Peaks at day 3-5, improves by 7-10 days, cough may persist 3-4 weeks
+      - Return precautions - Worsening breathing, poor feeding, lethargy, apnea (breathing pauses), dusky color
+      - Follow-up within 24-48 hours (phone call or visit)
+      - Prevention - Hand hygiene, avoid sick contacts, no smoking around infant

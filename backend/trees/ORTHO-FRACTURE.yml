@@ -1,0 +1,483 @@
+tree_id: ORTHO-FRACTURE
+name: Fracture Evaluation and Management
+family: ORTHOPEDICS
+specialty: Orthopedics/Emergency Medicine
+chief_complaint: Bone Fracture
+description: Diagnostic decision tree for fracture evaluation
+version: "1.0"
+author: RealDiag Team
+entry_point: location
+
+nodes:
+  - id: location
+    type: question
+    text: "Fracture location?"
+    options:
+      - label: "Hip/femur"
+        next: hip_fracture
+      - label: "Wrist/distal radius"
+        next: wrist_fracture
+      - label: "Ankle"
+        next: ankle_fracture
+      - label: "Clavicle"
+        next: clavicle_fracture
+      - label: "Hand/finger"
+        next: hand_fracture
+      - label: "Foot/toe"
+        next: foot_fracture
+      - label: "Vertebral compression"
+        next: vertebral_fracture
+
+  - id: hip_fracture
+    type: question
+    text: "Type of hip fracture?"
+    options:
+      - label: "Femoral neck fracture"
+        next: femoral_neck
+      - label: "Intertrochanteric fracture"
+        next: intertrochanteric
+      - label: "Subtrochanteric fracture"
+        next: subtrochanteric
+
+  - id: femoral_neck
+    type: diagnosis
+    diagnosis: Femoral Neck Fracture
+    icd10: S72.001A
+    urgency: critical
+    workup:
+      - AP and lateral hip X-rays
+      - MRI if occult fracture suspected
+      - CBC, BMP, coags
+      - Type and screen
+      - ECG, CXR for preop
+    treatment:
+      - NPO for surgery
+      - Pain control (avoid NSAIDs if surgical candidate)
+      - Orthopedic consult STAT
+      - Surgical repair within 24-48 hours
+      - Young: internal fixation
+      - Elderly/displaced: hemiarthroplasty or total hip
+      - DVT prophylaxis
+      - Early mobilization
+
+  - id: intertrochanteric
+    type: diagnosis
+    diagnosis: Intertrochanteric Hip Fracture
+    icd10: S72.141A
+    urgency: critical
+    workup:
+      - Hip X-rays (AP and lateral)
+      - CBC, BMP, coags
+      - Type and screen
+      - Preop clearance
+    treatment:
+      - NPO for surgery
+      - Pain control
+      - Orthopedic consult
+      - Surgical fixation (intramedullary nail or sliding hip screw)
+      - Surgery within 24-48 hours
+      - DVT prophylaxis
+      - Hospital admission
+
+  - id: subtrochanteric
+    type: diagnosis
+    diagnosis: Subtrochanteric Femur Fracture
+    icd10: S72.21XA
+    urgency: critical
+    workup:
+      - Full femur X-rays
+      - Assess for pathologic fracture (bisphosphonates)
+      - CBC, BMP
+      - Type and screen
+    treatment:
+      - NPO for surgery
+      - Orthopedic consult
+      - Intramedullary nail fixation
+      - Discontinue bisphosphonates if atypical fracture
+      - Consider teriparatide for healing
+      - Hospital admission
+
+  - id: wrist_fracture
+    type: question
+    text: "Type of wrist fracture?"
+    options:
+      - label: "Colles fracture (dorsal angulation)"
+        next: colles_fracture
+      - label: "Smith fracture (volar angulation)"
+        next: smith_fracture
+      - label: "Scaphoid fracture"
+        next: scaphoid_fracture
+
+  - id: colles_fracture
+    type: question
+    text: "Fracture characteristics?"
+    options:
+      - label: "Minimally displaced, stable"
+        next: colles_stable
+      - label: "Displaced or intra-articular"
+        next: colles_unstable
+
+  - id: colles_stable
+    type: diagnosis
+    diagnosis: Stable Colles Fracture
+    icd10: S52.501A
+    urgency: medium
+    workup:
+      - Wrist X-rays (PA, lateral, oblique)
+      - Assess radial height, volar tilt, articular involvement
+    treatment:
+      - Closed reduction if angulated
+      - Sugar-tong or short-arm splint
+      - Ice, elevation
+      - NSAIDs for pain
+      - Orthopedic follow-up in 5-7 days
+      - Repeat X-rays to assess alignment
+      - Transition to cast for 4-6 weeks
+
+  - id: colles_unstable
+    type: diagnosis
+    diagnosis: Unstable Colles Fracture
+    icd10: S52.501A
+    urgency: high
+    workup:
+      - Wrist X-rays
+      - CT if intra-articular
+    treatment:
+      - Closed reduction
+      - Splint immobilization
+      - Orthopedic consult within 24-48 hours
+      - May require ORIF or external fixation
+      - Ice, elevation
+      - Pain control
+
+  - id: smith_fracture
+    type: diagnosis
+    diagnosis: Smith Fracture (Reverse Colles)
+    icd10: S52.541A
+    urgency: high
+    workup:
+      - Wrist X-rays
+    treatment:
+      - Closed reduction (difficult to maintain)
+      - Volar splint
+      - Orthopedic consult (often requires ORIF)
+      - Ice, elevation
+      - Follow-up in 24-48 hours
+
+  - id: scaphoid_fracture
+    type: diagnosis
+    diagnosis: Scaphoid Fracture
+    icd10: S62.001A
+    urgency: high
+    workup:
+      - Wrist X-rays (scaphoid views)
+      - MRI or CT if X-ray negative but high suspicion
+      - Recheck X-rays in 10-14 days if initially negative
+    treatment:
+      - Thumb spica splint or cast
+      - Non-weight bearing
+      - Orthopedic referral
+      - Displaced/proximal pole: surgical fixation
+      - Non-displaced waist: long-arm thumb spica x 6 weeks, then short-arm x 6 weeks
+      - High risk of avascular necrosis and non-union
+      - Close follow-up
+
+  - id: ankle_fracture
+    type: question
+    text: "Ottawa ankle rules - can patient bear weight?"
+    options:
+      - label: "Unable to bear weight, bimalleolar"
+        next: unstable_ankle
+      - label: "Lateral malleolus only, can bear weight"
+        next: lateral_malleolus
+      - label: "Medial malleolus only"
+        next: medial_malleolus
+
+  - id: unstable_ankle
+    type: diagnosis
+    diagnosis: Unstable Ankle Fracture
+    icd10: S82.891A
+    urgency: high
+    workup:
+      - Ankle X-rays (AP, lateral, mortise)
+      - Assess syndesmosis
+      - Check for talar shift
+    treatment:
+      - Posterior splint with stirrups
+      - Non-weight bearing
+      - Ice, elevation
+      - Orthopedic consult within 24 hours
+      - ORIF for displaced or unstable fractures
+      - Syndesmotic screw if needed
+
+  - id: lateral_malleolus
+    type: diagnosis
+    diagnosis: Isolated Lateral Malleolus Fracture
+    icd10: S82.61XA
+    urgency: medium
+    workup:
+      - Ankle X-rays
+      - Assess mortise stability
+    treatment:
+      - Posterior splint or walking boot
+      - Weight bearing as tolerated if stable
+      - Ice, elevation
+      - NSAIDs
+      - Orthopedic follow-up in 5-7 days
+      - Transition to walking boot
+      - 4-6 weeks immobilization
+
+  - id: medial_malleolus
+    type: diagnosis
+    diagnosis: Medial Malleolus Fracture
+    icd10: S82.51XA
+    urgency: high
+    workup:
+      - Ankle X-rays
+      - Assess for associated injuries
+    treatment:
+      - Posterior splint
+      - Non-weight bearing
+      - Orthopedic referral
+      - Often requires ORIF (intra-articular)
+      - Ice, elevation
+
+  - id: clavicle_fracture
+    type: question
+    text: "Location of clavicle fracture?"
+    options:
+      - label: "Middle third (most common)"
+        next: mid_clavicle
+      - label: "Distal third"
+        next: distal_clavicle
+      - label: "Open fracture or neurovascular compromise"
+        next: clavicle_emergent
+
+  - id: mid_clavicle
+    type: diagnosis
+    diagnosis: Midshaft Clavicle Fracture
+    icd10: S42.021A
+    urgency: low
+    workup:
+      - Clavicle X-ray (AP and 45-degree cephalic tilt)
+      - Neurovascular exam
+    treatment:
+      - Sling immobilization
+      - Ice
+      - NSAIDs
+      - Most heal without surgery
+      - Orthopedic follow-up in 1-2 weeks
+      - Consider ORIF if significantly displaced, shortened >2cm, or open
+      - Return to activity in 6-12 weeks
+
+  - id: distal_clavicle
+    type: diagnosis
+    diagnosis: Distal Clavicle Fracture
+    icd10: S42.031A
+    urgency: medium
+    workup:
+      - Clavicle X-rays
+      - Assess AC joint involvement
+    treatment:
+      - Sling immobilization
+      - Orthopedic referral
+      - May require ORIF if displaced or unstable
+      - Ice, NSAIDs
+
+  - id: clavicle_emergent
+    type: diagnosis
+    diagnosis: Complicated Clavicle Fracture
+    icd10: S42.001A
+    urgency: critical
+    workup:
+      - X-rays
+      - Neurovascular assessment
+      - CT if concern for vascular injury
+    treatment:
+      - Orthopedic or trauma surgery consult STAT
+      - Wound management if open
+      - Vascular surgery if vascular injury
+      - Likely requires ORIF
+      - IV antibiotics if open
+
+  - id: hand_fracture
+    type: question
+    text: "Which finger/bone?"
+    options:
+      - label: "5th metacarpal neck (boxer's fracture)"
+        next: boxers_fracture
+      - label: "Finger phalanx"
+        next: phalanx_fracture
+      - label: "Thumb"
+        next: thumb_fracture
+
+  - id: boxers_fracture
+    type: diagnosis
+    diagnosis: 5th Metacarpal Neck Fracture (Boxer's)
+    icd10: S62.307A
+    urgency: low
+    workup:
+      - Hand X-rays (PA, lateral, oblique)
+      - Assess angulation
+    treatment:
+      - Ulnar gutter splint
+      - Acceptable angulation up to 40 degrees
+      - ORIF if >40 degrees or rotational deformity
+      - Ice, elevation
+      - Hand surgery follow-up in 5-7 days
+      - 4-6 weeks immobilization
+
+  - id: phalanx_fracture
+    type: diagnosis
+    diagnosis: Phalangeal Fracture
+    icd10: S62.609A
+    urgency: low
+    workup:
+      - Finger X-rays
+      - Assess rotation (check fingernails alignment)
+    treatment:
+      - Buddy taping to adjacent finger
+      - Aluminum foam splint if unstable
+      - Ice, elevation
+      - Hand therapy referral
+      - ORIF if displaced, intra-articular, or rotated
+      - 3-4 weeks immobilization
+
+  - id: thumb_fracture
+    type: diagnosis
+    diagnosis: Thumb Fracture
+    icd10: S62.501A
+    urgency: medium
+    workup:
+      - Thumb X-rays
+      - Assess for Bennett or Rolando fracture (intra-articular)
+    treatment:
+      - Thumb spica splint
+      - Hand surgery referral
+      - Bennett/Rolando fractures require ORIF
+      - Non-displaced: 4-6 weeks immobilization
+      - Close follow-up
+
+  - id: foot_fracture
+    type: question
+    text: "Which foot bone?"
+    options:
+      - label: "Metatarsal (2nd-4th)"
+        next: metatarsal_fracture
+      - label: "5th metatarsal base (Jones)"
+        next: jones_fracture
+      - label: "Toe"
+        next: toe_fracture
+
+  - id: metatarsal_fracture
+    type: diagnosis
+    diagnosis: Metatarsal Fracture
+    icd10: S92.301A
+    urgency: low
+    workup:
+      - Foot X-rays
+    treatment:
+      - Walking boot or stiff-soled shoe
+      - Weight bearing as tolerated
+      - Ice, elevation
+      - NSAIDs
+      - Orthopedic follow-up in 1-2 weeks
+      - 4-6 weeks immobilization
+      - ORIF if displaced or multiple
+
+  - id: jones_fracture
+    type: diagnosis
+    diagnosis: Jones Fracture (5th Metatarsal Base)
+    icd10: S92.351A
+    urgency: medium
+    workup:
+      - Foot X-rays
+      - Distinguish from avulsion fracture
+    treatment:
+      - Non-weight bearing
+      - Short-leg cast or boot
+      - Orthopedic referral
+      - High risk of non-union
+      - Athletes: consider ORIF with screw
+      - Non-operative: 6-8 weeks NWB
+
+  - id: toe_fracture
+    type: diagnosis
+    diagnosis: Toe Fracture
+    icd10: S92.911A
+    urgency: low
+    workup:
+      - Toe X-rays if displaced or open
+      - Clinical diagnosis often sufficient
+    treatment:
+      - Buddy taping
+      - Stiff-soled shoe
+      - Ice, elevation
+      - NSAIDs
+      - Weight bearing as tolerated
+      - Usually heals in 4-6 weeks
+      - Refer if great toe or significantly displaced
+
+  - id: vertebral_fracture
+    type: question
+    text: "Mechanism and neurologic status?"
+    options:
+      - label: "High-energy trauma"
+        next: traumatic_vertebral
+      - label: "Low-energy/osteoporotic, no neuro deficit"
+        next: compression_fracture
+      - label: "Neurologic deficit present"
+        next: unstable_spine
+
+  - id: traumatic_vertebral
+    type: diagnosis
+    diagnosis: Traumatic Spine Fracture
+    icd10: S32.009A
+    urgency: critical
+    workup:
+      - CT spine
+      - MRI if neuro deficit
+      - Complete neuro exam
+      - Spinal precautions
+    treatment:
+      - Maintain spinal immobilization
+      - Trauma surgery/neurosurgery/orthospine consult
+      - Hospital admission
+      - May require surgical stabilization
+      - Monitor neurologic status
+
+  - id: compression_fracture
+    type: diagnosis
+    diagnosis: Osteoporotic Compression Fracture
+    icd10: M80.08XA
+    urgency: medium
+    workup:
+      - Thoracolumbar X-rays
+      - CT or MRI if neurologic symptoms
+      - DEXA scan
+      - Rule out pathologic fracture
+    treatment:
+      - Pain control (acetaminophen, NSAIDs, short-term opioids)
+      - Calcitonin nasal spray
+      - Brace if acute
+      - Early mobilization
+      - Physical therapy
+      - Osteoporosis treatment (bisphosphonate, denosumab)
+      - Consider vertebroplasty/kyphoplasty if refractory pain
+      - Calcium and vitamin D
+
+  - id: unstable_spine
+    type: diagnosis
+    diagnosis: Spinal Fracture with Neurologic Compromise
+    icd10: S32.009A
+    urgency: critical
+    workup:
+      - CT and MRI spine
+      - Complete neurologic exam
+    treatment:
+      - STAT neurosurgery/orthospine consult
+      - Maintain spinal precautions
+      - High-dose steroids if acute spinal cord injury (controversial)
+      - Surgical decompression/stabilization
+      - ICU admission
+      - DVT prophylaxis

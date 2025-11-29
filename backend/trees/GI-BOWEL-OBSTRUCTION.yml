@@ -1,0 +1,213 @@
+tree_id: GI-BOWEL-OBSTRUCTION
+name: Bowel Obstruction Evaluation and Management
+family: GASTROENTEROLOGY
+specialty: Surgery, Emergency Medicine, Gastroenterology
+chief_complaint: Abdominal Pain, Distension, Nausea, Vomiting, Obstipation
+description: Comprehensive evaluation and management of small and large bowel obstruction
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: obstruction_presentation
+
+nodes:
+  - id: obstruction_presentation
+    type: question
+    text: "Clinical presentation consistent with bowel obstruction?"
+    options:
+      - label: "Yes - Abdominal pain, distension, vomiting, obstipation/constipation"
+        next: obstruction_location
+      - label: "Uncertain - Need imaging confirmation"
+        next: imaging_workup
+
+  - id: imaging_workup
+    type: question
+    text: "Imaging findings?"
+    options:
+      - label: "Dilated bowel loops, air-fluid levels, transition point"
+        next: obstruction_location
+      - label: "Ileus pattern (diffuse dilation without transition point)"
+        next: ileus
+      - label: "Normal imaging"
+        next: alternative_diagnosis
+
+  - id: alternative_diagnosis
+    type: diagnosis
+    name: "Alternative Diagnosis - Not Bowel Obstruction"
+    icd10: "R10.9"
+    urgency: medium
+    workup:
+      - Consider other causes of abdominal pain (gastroenteritis, constipation, appendicitis, cholecystitis)
+      - Additional imaging or labs as indicated
+    treatment:
+      - Treat underlying cause
+      - Symptomatic management
+
+  - id: ileus
+    type: diagnosis
+    name: "Ileus (Pseudo-obstruction)"
+    icd10: "K56.0"
+    urgency: medium
+    workup:
+      - Abdominal X-ray (diffuse bowel dilation without transition point)
+      - CT abdomen/pelvis (if X-ray equivocal)
+      - Labs - CBC, CMP (electrolytes, calcium, magnesium, phosphate)
+      - Identify precipitant (post-op, medications, metabolic)
+    treatment:
+      - NPO
+      - IV fluids
+      - Correct electrolyte abnormalities (hypokalemia, hypomagnesemia, hypocalcemia)
+      - Nasogastric tube if significant nausea/vomiting
+      - Discontinue offending medications (opioids, anticholinergics)
+      - Treat underlying cause (infection, inflammation)
+      - Early mobilization
+      - Consider rectal tube if colonic pseudo-obstruction (Ogilvie syndrome)
+      - Neostigmine 2mg IV over 3-5 min (if Ogilvie syndrome and cecum >10cm) - cardiac monitoring required, atropine at bedside
+      - Colonoscopic decompression if neostigmine fails
+      - Surgery rarely needed unless perforation
+
+  - id: obstruction_location
+    type: question
+    text: "Location of obstruction?"
+    options:
+      - label: "Small bowel obstruction (dilated small bowel with collapsed colon)"
+        next: sbo_assessment
+      - label: "Large bowel obstruction (dilated colon, may have competent ileocecal valve)"
+        next: lbo_assessment
+
+  - id: sbo_assessment
+    type: question
+    text: "Small bowel obstruction - Signs of strangulation or perforation?"
+    options:
+      - label: "Yes - Peritonitis, severe pain, fever, WBC >15k, lactate >2.5, free air, bowel wall thickening"
+        next: complicated_sbo
+      - label: "No - Simple SBO without signs of ischemia"
+        next: simple_sbo
+
+  - id: complicated_sbo
+    type: diagnosis
+    name: "Complicated Small Bowel Obstruction with Strangulation"
+    icd10: "K56.2"
+    urgency: critical
+    workup:
+      - CT abdomen/pelvis with IV contrast (closed-loop obstruction, bowel wall thickening, decreased enhancement, mesenteric edema, free fluid, pneumatosis)
+      - CBC (leukocytosis)
+      - CMP (metabolic acidosis, elevated BUN/Cr)
+      - Lactate (>2.5 concerning for ischemia)
+      - Type and screen
+    treatment:
+      - NPO
+      - Aggressive IV fluid resuscitation (crystalloids, LR or NS)
+      - Nasogastric tube decompression
+      - IV antibiotics (broad-spectrum) - Ceftriaxone 2g IV + metronidazole 500mg IV OR piperacillin-tazobactam 3.375g IV q6h
+      - Pain control (opioids acceptable)
+      - EMERGENT surgery consultation
+      - Exploratory laparotomy for resection of ischemic bowel
+      - ICU admission post-operatively
+      - Risk of short bowel syndrome if extensive resection
+
+  - id: simple_sbo
+    type: question
+    text: "Partial vs complete obstruction? History of prior abdominal surgery?"
+    options:
+      - label: "Partial obstruction (some gas in colon) AND prior abdominal surgery (adhesions likely)"
+        next: adhesive_sbo
+      - label: "Complete obstruction OR no prior surgery (consider other causes)"
+        next: complete_sbo
+
+  - id: adhesive_sbo
+    type: diagnosis
+    name: "Partial Small Bowel Obstruction (Likely Adhesive)"
+    icd10: "K56.5"
+    urgency: high
+    workup:
+      - CT abdomen/pelvis with IV contrast (identify transition point, rule out other causes)
+      - CBC, CMP
+      - Lactate (should be normal in simple obstruction)
+    treatment:
+      - Hospital admission
+      - NPO initially
+      - Nasogastric tube decompression if significant vomiting or distension
+      - IV fluid resuscitation
+      - Serial abdominal exams (q4-6h)
+      - Serial labs (CBC, lactate q12-24h)
+      - Conservative management trial for 24-48 hours (80% of adhesive partial SBO resolve with conservative management)
+      - Water-soluble contrast study (Gastrografin) on day 1-2 if not improving - therapeutic (draws fluid into bowel) and prognostic (if contrast in colon by 24hr, high likelihood of resolution)
+      - Advance diet slowly when passing gas/stool and improved symptoms
+      - Surgery consultation for observation
+      - Surgical intervention if - No improvement after 48-72 hours, signs of peritonitis, clinical deterioration, complete obstruction
+
+  - id: complete_sbo
+    type: diagnosis
+    name: "Complete Small Bowel Obstruction"
+    icd10: "K56.60"
+    urgency: critical
+    workup:
+      - CT abdomen/pelvis with IV contrast
+      - Identify cause - Adhesions (most common if prior surgery), hernia (inguinal, femoral, ventral), tumor, Crohn's disease, intussusception, gallstone ileus
+      - CBC, CMP, lactate
+    treatment:
+      - Hospital admission
+      - NPO
+      - Nasogastric tube decompression
+      - IV fluids (aggressive resuscitation)
+      - Surgery consultation
+      - If adhesive SBO - Trial of conservative management x 24-48 hours with close monitoring
+      - If hernia - Urgent/emergent surgery for reduction and repair
+      - If tumor - Oncology consult, may need palliative surgery or stenting
+      - If gallstone ileus - Surgery for enterolithotomy
+      - Surgery indications - Clinical deterioration, signs of ischemia, complete obstruction not improving after 48-72 hours, closed-loop obstruction
+
+  - id: lbo_assessment
+    type: question
+    text: "Large bowel obstruction - Competent or incompetent ileocecal valve?"
+    options:
+      - label: "Competent valve (small bowel not dilated, closed-loop obstruction, cecum >10cm)"
+        next: closed_loop_lbo
+      - label: "Incompetent valve (small bowel also dilated) OR cecum <10cm"
+        next: lbo_causes
+
+  - id: closed_loop_lbo
+    type: diagnosis
+    name: "Closed-Loop Large Bowel Obstruction (Competent Ileocecal Valve)"
+    icd10: "K56.60"
+    urgency: critical
+    workup:
+      - CT abdomen/pelvis with IV and oral contrast
+      - Assess cecal diameter (>12cm = impending perforation, 10-12cm = high risk)
+      - Identify obstructing lesion (colon cancer, volvulus, stricture)
+      - CBC, CMP, lactate
+      - Type and screen
+      - Colonoscopy contraindicated if perforation risk
+    treatment:
+      - NPO
+      - IV fluids
+      - Nasogastric tube
+      - IV antibiotics (broad-spectrum)
+      - URGENT surgery consultation
+      - High risk of cecal perforation (mortality up to 40% if perforation occurs)
+      - Emergent surgery if cecum >12cm or signs of perforation
+      - Surgical options - Resection with primary anastomosis vs Hartmann procedure vs colostomy
+      - If sigmoid volvulus - Consider endoscopic detorsion first (if no peritonitis), then semi-elective surgery
+
+  - id: lbo_causes
+    type: diagnosis
+    name: "Large Bowel Obstruction"
+    icd10: "K56.60"
+    urgency: high
+    workup:
+      - CT abdomen/pelvis with IV contrast
+      - Common causes - Colon cancer (most common), sigmoid volvulus, diverticular stricture, fecal impaction
+      - Colonoscopy (diagnostic and potentially therapeutic) - if stable and no perforation risk
+      - CEA (if cancer suspected)
+      - Biopsy of obstructing lesion
+    treatment:
+      - Hospital admission
+      - NPO
+      - IV fluids
+      - Nasogastric tube if vomiting
+      - Surgery consultation
+      - If colon cancer - Surgical resection (colectomy), may need colostomy if left-sided, oncology consult
+      - If sigmoid volvulus - Endoscopic detorsion (flexible sigmoidoscopy with rectal tube placement), then elective sigmoid colectomy during same admission to prevent recurrence
+      - If fecal impaction - Digital disimpaction, enemas (avoid if proximal obstruction)
+      - If diverticular stricture - May need resection
+      - Colonic stenting (endoscopic) can be bridge to surgery in some cases of malignant obstruction (allows bowel prep and single-stage resection)

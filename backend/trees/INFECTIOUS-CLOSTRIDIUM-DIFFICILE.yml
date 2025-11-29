@@ -1,0 +1,128 @@
+tree_id: INFECTIOUS-CLOSTRIDIUM-DIFFICILE
+name: Clostridium Difficile Infection Evaluation
+family: INFECTIOUS_DISEASE
+specialty: Infectious Disease, Gastroenterology
+chief_complaint: Diarrhea, Abdominal Pain, Fever
+description: Evaluation and management of Clostridium difficile infection
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: cdiff_evaluation
+
+nodes:
+  - id: cdiff_evaluation
+    type: diagnosis
+    name: "Clostridium Difficile Infection"
+    icd10: "A04.7"
+    urgency: high
+    workup:
+      - Clostridium difficile infection (CDI) - Anaerobic gram-positive spore-forming bacteria → toxin-mediated colitis
+      - Most common healthcare-associated infection in US
+      - Epidemiology - 500,000 cases/year US, 29,000 deaths/year
+      - Increasing incidence, severity (hypervirulent NAP1/BI/027 strain)
+      - Risk factors
+      - Antibiotic exposure (strongest risk factor, 90% cases) - Especially clindamycin, fluoroquinolones, cephalosporins, broad-spectrum penicillins
+      - Risk highest during treatment and 3 months after
+      - Hospitalization/healthcare exposure - Spores ubiquitous in hospitals, long-term care facilities
+      - Age >65 years (10x risk)
+      - Inflammatory bowel disease (IBD) - 3-8x risk, more severe
+      - Immunosuppression - HIV, chemotherapy, solid organ transplant
+      - Proton pump inhibitors (PPI) - Controversial, 1.5-2x risk (reduced gastric acid allows spore survival)
+      - Recent GI surgery
+      - Pathophysiology - Antibiotics disrupt normal colonic flora → C. diff overgrowth → toxin production
+      - Toxin A (enterotoxin) + Toxin B (cytotoxin) → intestinal inflammation, fluid secretion, mucosal damage
+      - Hypervirulent strains (NAP1/BI/027) - Produce 16-23x more toxin, binary toxin, fluoroquinolone resistance
+      - Spectrum
+      - Asymptomatic colonization (10-30% hospitalized, 50-70% long-term care)
+      - Mild-moderate diarrhea
+      - Severe colitis
+      - Fulminant colitis (3-5%) - Toxic megacolon, perforation, shock, death (30-50% mortality)
+      - Clinical presentation
+      - Diarrhea (≥3 unformed stools per 24 hours) - Watery, foul-smelling, rarely bloody
+      - Abdominal pain/cramping (80%) - Lower abdomen, colicky
+      - Fever (30-50%) - Low-grade, high fever suggests severe disease
+      - Leukocytosis (50-80%) - Often marked (WBC 15,000-50,000), left shift
+      - Nausea (no vomiting usually)
+      - Severe/fulminant CDI (3-5%) - WBC >15,000 or creatinine ≥1.5x baseline
+      - Toxic megacolon - Dilated colon (>6 cm), systemic toxicity
+      - Perforation - Peritonitis, free air
+      - Hypotension, shock
+      - Ileus - Absent bowel sounds (severe inflammation impairs motility), can have NO diarrhea (paradoxical)
+      - Physical exam
+      - Abdominal tenderness - Diffuse or lower quadrants
+      - Distension - If ileus or toxic megacolon
+      - Fever, tachycardia
+      - Severe - Hypotension, altered mental status, peritoneal signs (perforation)
+      - Diagnostic testing - Test only if diarrhea (≥3 unformed stools/24 hours), do NOT test asymptomatic patients or test of cure
+      - Nucleic acid amplification test (NAAT, PCR) - Detects C. diff toxin genes
+      - Most sensitive (90-95%), but detects colonization (cannot distinguish infection from colonization)
+      - Glutamate dehydrogenase (GDH) + toxin EIA - Two-step algorithm
+      - GDH (screening test, high sensitivity 85-95%, low specificity) → if positive, reflex to toxin EIA
+      - Toxin EIA (detects toxin A/B, 75-85% sensitive, 95-100% specific)
+      - If GDH+/toxin- → PCR for confirmation
+      - Stool culture - Gold standard (research only, 3-5 days, not clinically used)
+      - Labs
+      - WBC - Leukocytosis (often >15,000), severe if >15,000 or <2,000 (poor prognostic sign)
+      - CMP - Elevated creatinine (dehydration), hypoalbuminemia (protein-losing enteropathy), electrolyte abnormalities
+      - Lactate - Elevated if severe (tissue hypoperfusion)
+      - Imaging - Not routine, obtain if severe disease or complications suspected
+      - CT abdomen/pelvis - Colonic wall thickening (>4 mm), pericolonic stranding, ascites, "accordion sign" (contrast between edematous haustral folds)
+      - Toxic megacolon - Colon >6 cm
+      - Perforation - Free air, pneumoperitoneum
+      - Abdominal X-ray - Toxic megacolon (dilated colon >6 cm), ileus, free air
+      - Colonoscopy/sigmoidoscopy - NOT routine (risk perforation), reserved for uncertain diagnosis
+      - Pseudomembranes - Raised yellow-white plaques (2-10 mm) overlying erythematous mucosa (PATHOGNOMONIC, but only present 50% cases)
+      - Severity assessment - Guides treatment
+      - Mild-moderate - WBC <15,000, creatinine <1.5x baseline
+      - Severe - WBC ≥15,000 OR creatinine ≥1.5x baseline
+      - Fulminant - Hypotension, shock, ileus, megacolon, or perforation
+    treatment:
+      - Discontinue inciting antibiotic - If possible (most important intervention)
+      - Infection control - Contact precautions, hand washing with soap and water (alcohol does NOT kill spores), environmental cleaning with bleach
+      - Antibiotic treatment - Depends on severity
+      - Mild-moderate CDI (initial episode)
+      - Fidaxomicin 200 mg PO BID x 10 days - PREFERRED (lower recurrence rate 15% vs. 25% vancomycin)
+      - Expensive ($3,000-4,000 per course)
+      - Vancomycin 125 mg PO QID x 10 days - Alternative first-line (cheaper, $500-1,000)
+      - Metronidazole 500 mg PO TID x 10 days - Second-line (only if vancomycin/fidaxomicin unavailable)
+      - Less effective, no longer first-line per 2021 IDSA guidelines
+      - Severe CDI (initial episode)
+      - Vancomycin 125 mg PO QID x 10 days - FIRST-LINE
+      - OR fidaxomicin 200 mg PO BID x 10 days
+      - Fulminant CDI
+      - Vancomycin 500 mg PO/NG QID - High-dose
+      - PLUS metronidazole 500 mg IV q8h (add IV metronidazole if ileus, poor PO absorption)
+      - If ileus - Vancomycin enema (500 mg in 100 mL NS q6h per rectum) to deliver drug to colon
+      - Surgical consultation - Emergent if perforation, toxic megacolon unresponsive to medical therapy (12-24 hours)
+      - Subtotal colectomy with end ileostomy - Mortality 30-50% (but >80% mortality if perforation and no surgery)
+      - Alternative - Diverting loop ileostomy + colonic lavage + antegrade vancomycin (preserves colon)
+      - First recurrence (20-30%)
+      - If mild-moderate - Fidaxomicin 200 mg PO BID x 10 days (preferred, lower 2nd recurrence)
+      - OR vancomycin 125 mg PO QID x 10 days, then pulse-taper regimen (125 mg BID x 7d, daily x 7d, every 2-3 days x 2-8 weeks)
+      - If severe - Vancomycin pulse-taper OR fidaxomicin
+      - Second or subsequent recurrence (≥2 recurrences)
+      - Fidaxomicin 200 mg PO BID x 10 days - PREFERRED
+      - OR vancomycin pulse-taper (extended taper)
+      - OR fecal microbiota transplantation (FMT) - HIGHLY effective for recurrent CDI
+      - Success rate 80-90% (restore normal colonic flora)
+      - Indications - ≥2 recurrences after standard therapy
+      - Routes - Colonoscopy (most common), enema, capsules (oral)
+      - Bezlotoxumab (Zinplava) - Monoclonal antibody against toxin B
+      - Given with antibiotics (single IV infusion 10 mg/kg)
+      - Reduces recurrence 40% → 27% (NOT treatment, reduces recurrence only)
+      - Indications - High risk recurrence (age >65, severe CDI, ≥2 prior episodes, immunocompromised)
+      - Supportive care
+      - IV fluids - Aggressive rehydration (diarrhea losses)
+      - Electrolyte repletion - Hypokalemia common
+      - Avoid antiperistaltics - Loperamide, opiates (worsen toxic megacolon, prolong toxin exposure)
+      - Avoid unnecessary antibiotics
+      - Prevention
+      - Antibiotic stewardship - Avoid unnecessary antibiotics, use narrow-spectrum when possible, shortest effective duration
+      - Infection control - Contact precautions, hand hygiene with soap and water, environmental disinfection (bleach)
+      - Probiotics - NOT recommended for prevention (insufficient evidence)
+      - Prognosis
+      - Mild-moderate CDI - 90% cure rate with treatment
+      - Severe CDI - 75-80% cure rate, 3-5% mortality
+      - Fulminant CDI - 30-50% mortality (even with treatment)
+      - Recurrence - 20-30% after first episode, 50-60% after second episode, 60-65% after third episode
+      - FMT - 80-90% cure rate for recurrent CDI

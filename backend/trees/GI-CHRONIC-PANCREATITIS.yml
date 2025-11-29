@@ -1,0 +1,112 @@
+tree_id: GI-CHRONIC-PANCREATITIS
+name: Chronic Pancreatitis Evaluation
+family: GASTROENTEROLOGY
+specialty: Gastroenterology, Surgery
+chief_complaint: Chronic Abdominal Pain, Weight Loss, Steatorrhea
+description: Evaluation and management of chronic pancreatitis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: chronic_pancreatitis_evaluation
+
+nodes:
+  - id: chronic_pancreatitis_evaluation
+    type: diagnosis
+    name: "Chronic Pancreatitis"
+    icd10: "K86.1"
+    urgency: medium
+    workup:
+      - Chronic pancreatitis - Progressive inflammatory disease → irreversible damage pancreas → fibrosis, calcifications, loss of exocrine/endocrine function
+      - Prevalence - 50 per 100,000, male predominance 3:1
+      - Causes - "TIGAR-O" classification
+      - Toxic-metabolic (70%) - Alcohol most common (accounts for 60-70% all cases in Western countries, chronic heavy use >5 years), smoking (independent risk factor, synergistic with alcohol), hypercalcemia, hyperlipidemia (triglycerides >1000)
+      - Idiopathic (10-30%) - Early onset (<20 years) or late onset (>60 years), tropical pancreatitis (nutritional, India/Africa)
+      - Genetic (1-2%) - PRSS1 (hereditary pancreatitis, autosomal dominant, recurrent acute pancreatitis childhood → chronic pancreatitis), CFTR mutations (cystic fibrosis), SPINK1
+      - Autoimmune (5%) - Type 1 AIP (IgG4-related disease, older, extrapancreatic manifestations) or Type 2 AIP (younger, isolated pancreas, IBD association)
+      - Recurrent acute pancreatitis - Multiple episodes → chronic pancreatitis
+      - Obstructive - Pancreatic duct stricture, tumor, pancreas divisum
+      - Pathophysiology - Chronic inflammation → acinar cell loss → replacement by fibrous tissue → calcifications → pancreatic duct strictures → exocrine insufficiency (lipase/amylase deficiency → maldigestion) + endocrine insufficiency (insulin/glucagon loss → diabetes)
+      - Clinical features
+      - Chronic abdominal pain (85%) - Epigastric, radiates to back, constant or intermittent, worse after eating (fear of food, weight loss)
+      - May "burn out" (pain decreases as gland fibrosis, "painless chronic pancreatitis")
+      - Exocrine insufficiency (steatorrhea, malnutrition) - Fat malabsorption (>7 g fat/day stool)
+      - Steatorrhea - Bulky, foul-smelling, floating stools (difficult to flush)
+      - Requires >90% loss pancreatic function before clinical steatorrhea
+      - Fat-soluble vitamin deficiency (A, D, E, K) - Night blindness, osteoporosis, neuropathy, bleeding
+      - Weight loss, muscle wasting
+      - Endocrine insufficiency - Diabetes mellitus (30-40%, "pancreatogenic diabetes," type 3c)
+      - Loss both insulin AND glucagon → brittle diabetes (hypoglycemia risk)
+      - Labs
+      - Amylase/lipase - Often NORMAL (advanced disease, no functional tissue left)
+      - Elevated during acute exacerbations
+      - Fecal elastase-1 - <200 mcg/g stool suggests exocrine insufficiency (noninvasive)
+      - Sensitivity 60-90% (normal does not rule out)
+      - Fecal fat (72-hour stool collection) - >7 g/day confirms steatorrhea (gold standard but cumbersome)
+      - Fat-soluble vitamins (A, D, E, K), prothrombin time
+      - Glucose, HbA1c - Screen for diabetes
+      - IgG4 - Elevated in type 1 autoimmune pancreatitis (>2x ULN)
+      - CA 19-9 - If mass (differentiate from pancreatic cancer)
+      - Imaging
+      - CT abdomen with IV contrast - Pancreatic calcifications (pathognomonic, 50%), pancreatic duct dilation, atrophy, pseudocysts
+      - Calcifications - Late finding (not present early disease)
+      - MRCP (MR cholangiopancreatography) - Visualize pancreatic duct system (strictures, dilation "chain of lakes"), stones, pseudocysts
+      - Non-invasive alternative to ERCP
+      - ERCP (endoscopic retrograde cholangiopancreatography) - Gold standard for duct anatomy
+      - "Cambridge classification" - Grade 0-4 based on duct changes (dilation, strictures, stones, side branch abnormalities)
+      - Therapeutic (stone extraction, stricture dilation, stent placement)
+      - Risk pancreatitis 3-5%
+      - EUS (endoscopic ultrasound) - Detect early changes (parenchymal inhomogeneity, hyperechoic strands, lobularity, stones, calcifications, duct dilation)
+      - More sensitive than CT for early disease (when calcifications absent)
+      - Rosemont criteria - 9 features (≥5 major or ≥3 major + ≥3 minor = consistent with CP)
+      - Pancreatic function tests - Secretin-stimulated testing (measure bicarbonate secretion), rarely used clinically
+    treatment:
+      - Pain management - Most challenging aspect
+      - Lifestyle - Abstinence from alcohol (MANDATORY, slows progression), smoking cessation, small frequent meals (low fat <50 g/day)
+      - Analgesics - Stepwise approach
+      - NSAIDs, acetaminophen - First-line
+      - Tramadol - Second-line
+      - Opioids - Often required (morphine, oxycodone, fentanyl)
+      - Risk dependency, but undertreated pain also harmful
+      - Use opioid contract, single prescriber
+      - Pancreatic enzyme replacement - May reduce pain by negative feedback (reduce pancreatic secretion)
+      - Non-enteric coated enzymes taken WITH meals (enteric coated release in duodenum, not stomach)
+      - Efficacy for pain controversial
+      - Antioxidants - Vitamin C, E, selenium, methionine (reduce oxidative stress), modest benefit in some studies
+      - Neuromodulators - Gabapentin, pregabalin, tricyclic antidepressants (for neuropathic component)
+      - Endoscopic therapy - If pancreatic duct obstruction (stones, strictures)
+      - ERCP with stone extraction (lithotripsy if large), stricture dilation, stent placement
+      - Effective 60-70% (pain relief), especially if dilated duct (>6 mm) with stricture/stones
+      - Celiac plexus block - EUS-guided injection (alcohol, bupivacaine, steroids) into celiac ganglia
+      - Temporary relief (weeks to months), 50-60% respond
+      - Repeat as needed
+      - Surgical therapy - For refractory pain despite medical/endoscopic treatment
+      - Lateral pancreaticojejunostomy (Puestow procedure) - If dilated duct (>7 mm), open duct along length, anastomose to jejunum (decompress duct)
+      - Pain relief 70-80%, most durable results
+      - Pancreatic resection - Pancreaticoduodenectomy (Whipple) for head-dominant disease, distal pancreatectomy for tail disease
+      - Total pancreatectomy with islet autotransplantation (TPIAT) - Remove entire pancreas, harvest islet cells, infuse into portal vein
+      - For intractable pain, preserve some endocrine function (30-50% insulin-independent)
+      - Exocrine insufficiency treatment - Pancreatic enzyme replacement therapy (PERT)
+      - Pancrelipase - Lipase, protease, amylase (Creon, Zenpep, Pancreaze)
+      - Dose - 40,000-80,000 units lipase WITH each meal, 20,000-40,000 WITH snacks
+      - Take with FIRST bite of food
+      - Capsules contain enteric-coated microspheres (pH-sensitive, release in duodenum >5.5)
+      - PPI - Add if inadequate response (omeprazole 20-40 mg daily, increase duodenal pH, optimize enzyme activity)
+      - Titrate to symptom resolution (normal stool consistency, weight gain)
+      - Fat-soluble vitamins - Supplement A, D, E, K (water-miscible forms)
+      - Medium-chain triglycerides (MCT oil) - Absorbed without pancreatic enzymes, supplemental calories
+      - Endocrine insufficiency treatment - Diabetes management
+      - Insulin often required (type 3c diabetes)
+      - Monitor closely (brittle, hypoglycemia risk from glucagon deficiency)
+      - Avoid metformin (lactic acidosis risk), sulfonylureas (hypoglycemia)
+      - Complications
+      - Pseudocyst - Encapsulated fluid collection (>4 weeks after acute pancreatitis)
+      - Asymptomatic - Observe (many resolve spontaneously)
+      - Symptomatic (pain, obstruction, infection) - Drainage (endoscopic cystgastrostomy preferred vs. surgical vs. percutaneous)
+      - Pancreatic ascites/pleural effusion - Duct disruption
+      - High amylase in ascitic/pleural fluid
+      - ERCP with stent placement (bridge duct disruption)
+      - Splenic vein thrombosis - Isolated gastric varices (treat with splenectomy)
+      - Pancreatic cancer - Increased risk 2-3% (especially hereditary pancreatitis 40% lifetime risk)
+      - Surveillance controversial (annual CA 19-9, imaging)
+      - Prognosis - Median survival 20-25 years from diagnosis (reduced from general population)
+      - Mortality - Complications (pseudocyst infection/rupture, bleeding), malnutrition, pancreatic cancer, continued alcohol use (cirrhosis, other cancers)

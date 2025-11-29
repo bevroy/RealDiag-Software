@@ -1,0 +1,122 @@
+tree_id: PULM-LUNG-CANCER
+name: Lung Cancer Evaluation and Management
+family: PULMONOLOGY
+specialty: Pulmonology, Oncology, Thoracic Surgery
+chief_complaint: Cough, Hemoptysis, Weight Loss, Chest Pain
+description: Comprehensive evaluation and management of lung cancer
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: lung_cancer_presentation
+
+nodes:
+  - id: lung_cancer_presentation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Suspected lung cancer - diagnostic workup"
+        next: lung_cancer_workup
+      - label: "Confirmed non-small cell lung cancer (NSCLC)"
+        next: nsclc_management
+      - label: "Confirmed small cell lung cancer (SCLC)"
+        next: sclc_management
+
+  - id: lung_cancer_workup
+    type: diagnosis
+    name: "Lung Cancer - Diagnostic Workup"
+    icd10: "C34.90"
+    urgency: high
+    workup:
+      - Risk factors - Smoking (85-90% of cases, risk proportional to pack-years), secondhand smoke, radon exposure, asbestos, family history, COPD, pulmonary fibrosis
+      - Clinical presentation - Often asymptomatic early (discovered incidentally on imaging), cough (new or change in chronic cough), hemoptysis, dyspnea, chest pain, weight loss, hoarseness (recurrent laryngeal nerve), SVC syndrome, Horner syndrome (Pancoast tumor)
+      - Paraneoplastic syndromes - SIADH (SCLC, hyponatremia), hypercalcemia (squamous cell, PTHrP), Lambert-Eaton syndrome (SCLC, proximal weakness), hypertrophic pulmonary osteoarthropathy (clubbing, periostitis)
+      - Chest X-ray - Nodule, mass, hilar/mediastinal lymphadenopathy, atelectasis, pleural effusion
+      - CT chest with IV contrast - Characterize lesion (size, location, spiculation, cavitation), assess lymph nodes, detect metastases
+      - PET-CT - Staging (differentiate benign vs malignant, assess nodal involvement and distant metastases), NOT for nodules <8mm (high false positive)
+      - Tissue diagnosis REQUIRED - Obtain histology and molecular testing
+      - Bronchoscopy with biopsy - For central lesions, endobronchial ultrasound (EBUS) for mediastinal nodes
+      - CT-guided needle biopsy - For peripheral lesions
+      - Mediastinoscopy - If large mediastinal nodes (>1cm short axis) and PET-negative (confirm N2/N3 disease)
+      - Thoracentesis - If pleural effusion (cytology, malignant effusion = stage IV)
+      - Molecular testing (NSCLC) - EGFR mutation, ALK rearrangement, ROS1 rearrangement, BRAF V600E, PD-L1 expression, others (critical for targeted therapy)
+      - Brain MRI with contrast - Staging for all patients (high risk of brain metastases)
+      - Labs - CBC, CMP, LFTs, calcium
+      - Pulmonary function tests - If considering surgery (assess operative risk)
+      - Staging - TNM 8th edition
+      - T (primary tumor size/invasion), N (nodal involvement), M (metastasis)
+      - Stage I-IIIA potentially resectable, Stage IIIB-IV usually unresectable
+
+  - id: nsclc_management
+    type: diagnosis
+    name: "Non-Small Cell Lung Cancer (NSCLC)"
+    icd10: "C34.90"
+    urgency: high
+    workup:
+      - Subtypes - Adenocarcinoma (40%, peripheral, non-smokers), squamous cell (25-30%, central, smokers), large cell (10%)
+      - Staging complete (see workup above)
+    treatment:
+      - Stage I (T1-2, N0, M0) - Early stage, localized
+      - Surgical resection - Lobectomy (preferred) or pneumonectomy if needed, goal R0 resection
+      - Video-assisted thoracoscopic surgery (VATS) or robotic if appropriate
+      - Mediastinal lymph node dissection or sampling
+      - Adjuvant chemotherapy - If tumor ≥4cm (T2b) or high-risk features, cisplatin-based x 4 cycles
+      - Stereotactic body radiation therapy (SBRT) - If medically inoperable (high-dose focused radiation, 3-5 fractions)
+      - Stage II (T1-2, N1 or T3, N0) - Locally advanced
+      - Surgical resection + adjuvant chemotherapy (cisplatin + pemetrexed or vinorelbine) x 4 cycles
+      - Radiation if incomplete resection or N1 disease
+      - Stage IIIA (T1-3, N2 or T4, N0-1) - Locally advanced, potentially resectable
+      - Multimodality therapy - Neoadjuvant chemotherapy or chemoradiation → surgery → adjuvant therapy OR
+      - Definitive concurrent chemoradiation (if unresectable)
+      - Stage IIIB-C (T4, N2 or any T, N3) - Locally advanced, unresectable
+      - Definitive concurrent chemoradiation - Cisplatin + etoposide with concurrent radiation (60 Gy)
+      - Consolidation immunotherapy - Durvalumab (PD-L1 inhibitor) x 1 year after chemoradiation (PACIFIC trial, significant survival benefit)
+      - Stage IV (M1, any distant metastasis) - Metastatic disease
+      - Systemic therapy (NOT curative, goal prolong survival and improve quality of life)
+      - Molecular testing CRITICAL - Guides targeted therapy
+      - EGFR mutation (15% Caucasian, 50% Asian) - EGFR TKI first-line: Osimertinib (preferred, 3rd gen), erlotinib, gefitinib (1st gen), afatinib (2nd gen), median PFS 18 months
+      - ALK rearrangement (5%) - ALK inhibitor: Alectinib (preferred), crizotinib, ceritinib, brigatinib, lorlatinib, excellent responses
+      - ROS1 rearrangement (1-2%) - Crizotinib or entrectinib
+      - BRAF V600E (2%) - Dabrafenib + trametinib
+      - KRAS G12C (13%) - Sotorasib or adagrasib (new, exciting)
+      - MET exon 14 skipping - Capmatinib or tepotinib
+      - RET rearrangement - Selpercatinib or pralsetinib
+      - NTRK fusion - Larotrectinib or entrectinib
+      - No targetable mutation - Immunotherapy or chemotherapy
+      - PD-L1 ≥50% - Pembrolizumab monotherapy (PD-1 inhibitor) first-line
+      - PD-L1 1-49% - Pembrolizumab + chemotherapy (cisplatin/carboplatin + pemetrexed)
+      - PD-L1 <1% - Chemotherapy (platinum doublet) ± bevacizumab (VEGF inhibitor)
+      - Second-line - Docetaxel, pemetrexed, immunotherapy if not given first-line
+      - Palliative care - Early involvement, symptom management, radiation for bone mets/brain mets, thoracentesis/pleurodesis for effusions
+      - Brain metastases - Stereotactic radiosurgery (SRS) if oligometastatic (≤4 lesions), whole-brain radiation therapy (WBRT) if multiple
+      - Prognosis - 5-year survival: Stage I 70-90%, Stage II 50-60%, Stage IIIA 30-40%, Stage IIIB 10-15%, Stage IV <5%
+
+  - id: sclc_management
+    type: diagnosis
+    name: "Small Cell Lung Cancer (SCLC)"
+    icd10: "C34.90"
+    urgency: critical
+    workup:
+      - Characteristics - 15% of lung cancers, highly aggressive, early metastasis, strong smoking association (99%), neuroendocrine origin
+      - Staging - Limited stage vs extensive stage (simplified from TNM)
+      - Limited stage (30%) - Confined to hemithorax + regional nodes, can fit in single radiation port
+      - Extensive stage (70%) - Beyond hemithorax, malignant pleural/pericardial effusion, distant metastases
+    treatment:
+      - Limited stage SCLC
+      - Concurrent chemoradiation (curative intent)
+      - Chemotherapy - Cisplatin + etoposide x 4 cycles (EP regimen)
+      - Radiation - 45 Gy in 1.5 Gy BID fractions (accelerated hyperfractionated) OR 60-70 Gy in standard fractions, concurrent with chemo cycles 1-2
+      - Start radiation early (with cycle 1 or 2, not after all chemo)
+      - Prophylactic cranial irradiation (PCI) - If complete or partial response, reduces brain mets (high risk 60% without PCI), 25 Gy in 10 fractions, improves survival
+      - Brain MRI before PCI (defer if already has brain mets)
+      - Surgery - Rarely (only stage I disease, <5% of SCLC), lobectomy + adjuvant chemotherapy
+      - Median survival 18-24 months, 5-year survival 20-25%
+      - Extensive stage SCLC
+      - Palliative chemotherapy + immunotherapy
+      - First-line - Carboplatin or cisplatin + etoposide x 4-6 cycles + atezolizumab or durvalumab (PD-L1 inhibitor, IMpower133 and CASPIAN trials, significant survival benefit)
+      - Continue immunotherapy maintenance after chemo
+      - Prophylactic cranial irradiation - Consider if good response (controversial in extensive stage, brain MRI surveillance alternative)
+      - Second-line - Topotecan or lurbinectedin (if relapse >6 months), or rechallenge with platinum if >6 months from first-line
+      - Palliative radiation - Brain mets, bone mets, SVC syndrome
+      - Prognosis - Median survival 10-13 months, 2-year survival <10%
+      - Very responsive initially (70-80% response rate) but almost all relapse
+      - Supportive care - Aggressive symptom management, early palliative care involvement

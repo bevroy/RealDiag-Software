@@ -1,0 +1,129 @@
+tree_id: ALLERGY-URTICARIA
+name: Urticaria and Angioedema Evaluation
+family: ALLERGY_IMMUNOLOGY
+specialty: Allergy/Immunology, Dermatology
+chief_complaint: Hives, Itching, Swelling, Recurrent Rash
+description: Evaluation and management of acute and chronic urticaria
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: urticaria_evaluation
+
+nodes:
+  - id: urticaria_evaluation
+    type: question
+    text: "Duration and pattern?"
+    options:
+      - label: "Acute urticaria (<6 weeks)"
+        next: acute_urticaria
+      - label: "Chronic urticaria (≥6 weeks)"
+        next: chronic_urticaria
+      - label: "Physical urticarias"
+        next: physical_urticarias
+
+  - id: acute_urticaria
+    type: diagnosis
+    name: "Acute Urticaria"
+    icd10: "L50.9"
+    urgency: medium
+    workup:
+      - Urticaria (hives) - Pruritic, raised, erythematous wheals with pale centers, blanch with pressure
+      - Individual lesions transient (<24 hours), but new lesions continue to appear
+      - Acute urticaria - Duration <6 weeks, common (20% population at some point)
+      - Causes - Identifiable trigger in 50%
+      - Infections - Viral URI most common (children), streptococcal pharyngitis, viral hepatitis
+      - Medications - Antibiotics (penicillin, sulfa), NSAIDs, ACE inhibitors
+      - Foods - IgE-mediated (peanuts, shellfish, milk, eggs) immediate onset
+      - Insect stings
+      - Contact allergens - Latex, plants
+      - Angioedema - Deeper swelling dermis/subcutaneous tissue, non-pitting, affects face (lips, periorbital), tongue, extremities
+      - Can occur with or without urticaria
+      - Airway involvement - EMERGENCY if tongue/laryngeal swelling
+    treatment:
+      - Remove trigger if identified
+      - H1 antihistamines - First-line
+      - Non-sedating - Cetirizine 10 mg daily, loratadine 10 mg daily, fexofenadine 180 mg daily
+      - Sedating (if needed for sleep) - Diphenhydramine 25-50 mg q6h, hydroxyzine 25 mg q6-8h
+      - H2 antihistamines - Add if inadequate response (ranitidine 150 mg BID, famotidine 20 mg BID)
+      - Corticosteroids - Short course if severe (prednisone 40 mg daily x 3-5 days)
+      - Avoid routine use (not needed for most acute urticaria)
+      - Epinephrine - If anaphylaxis (see ALLERGY-ANAPHYLAXIS)
+      - Duration - Usually resolves 1-2 weeks, continue antihistamines until resolved
+
+  - id: chronic_urticaria
+    type: diagnosis
+    name: "Chronic Urticaria"
+    icd10: "L50.8"
+    urgency: low
+    workup:
+      - Chronic spontaneous urticaria (CSU) - Daily or near-daily hives ≥6 weeks, no identifiable trigger
+      - Prevalence 0.5-1% population, more common women
+      - Pathophysiology - 40-50% autoimmune (IgG autoantibodies against IgE receptor or IgE), mast cell/basophil activation
+      - Chronic inducible urticaria - Physical triggers (see next node)
+      - Evaluation - Identify underlying cause (though most idiopathic)
+      - History - Duration, frequency, triggers, associated symptoms (joint pain, fever - suggests systemic disease)
+      - Extensive workup NOT recommended for isolated CSU
+      - Basic labs if atypical - CBC (eosinophilia), ESR/CRP (elevated suggests urticarial vasculitis), TSH (thyroid autoimmunity associated), complement C3/C4 (low if vasculitis)
+      - Skin biopsy - If individual lesions last >24 hours, painful/burning (not itchy), residual bruising (urticarial vasculitis - leukocytoclastic vasculitis)
+      - Autologous serum skin test - Research tool, not routine
+      - Quality of life - Significantly impaired (worse than ischemic heart disease in some studies)
+    treatment:
+      - Step-wise approach (EAACI/GA²LEN/EDF guidelines)
+      - Step 1 - Non-sedating H1 antihistamine standard dose
+      - Cetirizine 10 mg, loratadine 10 mg, fexofenadine 180 mg, levocetirizine 5 mg, desloratadine 5 mg daily
+      - Trial 2-4 weeks
+      - Step 2 - Increase H1 antihistamine up to 4x dose (off-label but guideline-recommended)
+      - Cetirizine 40 mg daily, fexofenadine 180 mg BID, etc.
+      - More effective than adding H2 blocker or leukotriene inhibitor
+      - Trial 2-4 weeks
+      - Step 3 - Add omalizumab (anti-IgE monoclonal antibody)
+      - 150-300 mg SC every 4 weeks (FDA-approved for chronic urticaria)
+      - Very effective (60-70% complete response), works within 1-2 doses
+      - Expensive (~$1000-2000/month), but dramatically improves quality of life
+      - Continue 6-12 months, may taper/discontinue (30-50% remain in remission)
+      - Step 4 - Add cyclosporine (off-label)
+      - 3-5 mg/kg/day divided BID, monitor BP/Cr
+      - Side effects (nephrotoxicity, hypertension, infections)
+      - Reserve for refractory cases
+      - Alternatives - Dapsone, sulfasalazine, methotrexate, mycophenolate (limited evidence)
+      - Avoid - Chronic corticosteroids (side effects outweigh benefits, only short bursts for flares)
+      - Prognosis - 50% resolve within 1 year, 20% persist >5 years
+
+  - id: physical_urticarias
+    type: diagnosis
+    name: "Physical Urticarias"
+    icd10: "L50.5"
+    urgency: low
+    workup:
+      - Chronic inducible urticaria - Physical stimulus triggers hives
+      - Types
+      - Dermographism (dermatographic urticaria) - Most common physical urticaria
+      - "Skin writing" - Linear wheals develop within 5 min of stroking/scratching skin
+      - Pruritus common, scratch worsens
+      - Test - Stroke tongue blade firmly on forearm, observe for wheal
+      - Cold urticaria - Hives on cold exposure (cold water, air, ice)
+      - Can be generalized if large body area exposed (swimming)
+      - Risk anaphylaxis if jump into cold water (systemic mast cell activation)
+      - Ice cube test - Apply ice 5 min, observe for wheal on rewarming
+      - Cholinergic urticaria - Small (1-3 mm) hives with exercise, hot shower, emotional stress
+      - Increased core body temperature triggers
+      - "Pinpoint hives" surrounded by erythematous flare
+      - Exercise challenge test
+      - Solar urticaria - Hives on sun-exposed skin within minutes
+      - Phototesting confirms wavelength
+      - Pressure urticaria (delayed) - Deep painful swelling 4-6 hours after sustained pressure (tight clothing, standing, sitting)
+      - Aquagenic urticaria - Rare, hives from water contact (any temperature)
+      - Vibratory angioedema - Vibration triggers (jackhammer, lawn mower)
+    treatment:
+      - Avoidance - Minimize triggers (difficult for some)
+      - Dermographism - Avoid tight clothing, scratching
+      - Cold urticaria - Avoid cold water swimming, gradual acclimation, carry epinephrine
+      - Cholinergic - Avoid triggers, cool down gradually
+      - H1 antihistamines - Same as CSU, may need higher doses
+      - Non-sedating preferred, taken regularly (not PRN)
+      - Dermographism responds well to antihistamines
+      - Omalizumab - Effective for refractory physical urticarias (especially cold urticaria)
+      - Specific management
+      - Cold urticaria - Cyproheptadine sometimes effective (antihistamine with anti-serotonin)
+      - Solar urticaria - Sunscreen, UVB/PUVA phototherapy desensitization
+      - Pressure urticaria - Most difficult to treat, often requires omalizumab or immunosuppressants

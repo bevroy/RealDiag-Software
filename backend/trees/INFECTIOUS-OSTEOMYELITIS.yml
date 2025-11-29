@@ -1,0 +1,153 @@
+tree_id: INFECTIOUS-OSTEOMYELITIS
+name: Osteomyelitis Evaluation and Management
+family: INFECTIOUS_DISEASE
+specialty: Infectious Disease, Orthopedic Surgery
+chief_complaint: Bone Pain, Fever, Overlying Cellulitis, Chronic Wound
+description: Diagnosis and management of acute and chronic osteomyelitis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: osteomyelitis_presentation
+
+nodes:
+  - id: osteomyelitis_presentation
+    type: question
+    text: "Route of infection and duration?"
+    options:
+      - label: "Hematogenous osteomyelitis"
+        next: hematogenous_osteomyelitis
+      - label: "Contiguous osteomyelitis (diabetic foot, post-surgical)"
+        next: contiguous_osteomyelitis
+      - label: "Chronic osteomyelitis"
+        next: chronic_osteomyelitis
+
+  - id: hematogenous_osteomyelitis
+    type: diagnosis
+    name: "Hematogenous Osteomyelitis"
+    icd10: "M86.9"
+    urgency: high
+    workup:
+      - Hematogenous spread - Bacteremia seeds bone (children: metaphysis long bones rich blood supply, adults: vertebrae)
+      - Children - Long bones (femur, tibia, humerus), metaphysis most vascular, 50% <5 years old
+      - Adults - Vertebral osteomyelitis (50% cases), lumbar > thoracic > cervical
+      - Risk factors - IVDU, bacteremia (endocarditis, line infections, UTI), immunosuppression, diabetes, sickle cell disease
+      - Organisms
+      - S. aureus - Most common all ages (70-90%), MRSA increasing
+      - Children - Group A Strep, Kingella kingae (age <4 years), S. pneumoniae
+      - Sickle cell - Salmonella (most common), also S. aureus
+      - IVDU - S. aureus, Pseudomonas (vertebrae, sternoclavicular, pubic symphysis)
+      - Neonates - Group B Strep, E. coli, S. aureus
+      - Clinical presentation
+      - Children - Fever (50%), limp or refusal to bear weight, localized bone pain/tenderness, swelling/warmth/erythema over affected bone
+      - Adults vertebral - Back pain (100%), fever (50%), neurologic deficits if epidural abscess (10-15%)
+      - Diagnosis
+      - Labs - Elevated WBC (50%), ESR elevated (90%), CRP elevated (98%, most sensitive)
+      - Blood cultures - Positive 30-60% (should be obtained before antibiotics)
+      - Plain X-rays - Initially normal (10-14 days for changes), later show periosteal reaction, bone destruction, sclerosis
+      - MRI - Gold standard, sensitive and specific (90-95%), shows bone marrow edema, soft tissue involvement, abscesses, early detection
+      - Bone biopsy/culture - Definitive diagnosis, identifies organism, guides therapy
+      - Percutaneous needle biopsy or open biopsy (especially vertebral osteomyelitis)
+      - If blood cultures positive + classic imaging, may treat empirically without biopsy
+    treatment:
+      - Antibiotics - Prolonged course, IV initially then transition to PO with high bioavailability
+      - Empiric therapy (pending cultures) - Cover S. aureus (including MRSA if risk factors)
+      - Vancomycin 15-20 mg/kg IV q8-12h (target trough 15-20) OR daptomycin 6-10 mg/kg IV daily
+      - PLUS ceftriaxone 2g IV daily or cefepime 2g IV q8h (gram-negative coverage, especially vertebral)
+      - Targeted therapy (culture-directed)
+      - MSSA - Nafcillin 2g IV q4h or cefazolin 2g IV q8h (first-line), transition to cephalexin 500 mg PO QID or dicloxacillin 500 mg PO QID
+      - MRSA - Vancomycin or daptomycin IV, transition to PO linezolid 600 mg BID or TMP-SMX 1-2 DS tabs BID (if susceptible)
+      - Streptococcus - Penicillin G 4 million units IV q4h or ceftriaxone 2g IV daily, transition to amoxicillin 500 mg TID
+      - Gram-negatives - Fluoroquinolone (ciprofloxacin 750 mg PO BID excellent bone penetration) or ceftriaxone
+      - Salmonella (sickle cell) - Ceftriaxone 2g IV daily or fluoroquinolone x 4-6 weeks
+      - Duration - Total 4-6 weeks minimum
+      - Children acute - 3-4 weeks often sufficient if good response
+      - Adults acute - 6 weeks standard
+      - Vertebral osteomyelitis - 6-8 weeks (may extend to 12 weeks if slow response)
+      - IV x 2-4 weeks, then transition to PO with high bioavailability if clinical improvement, CRP declining, patient tolerating PO
+      - Monitor CRP weekly (should decline 50% by 2 weeks, normalize by 6-8 weeks)
+      - Surgery - Indications
+      - Abscess drainage (subperiosteal, soft tissue, epidural)
+      - Decompression (neurologic deficits from epidural abscess, spinal instability)
+      - Failure medical management (persistent fever, bacteremia >5 days antibiotics)
+      - Debridement necrotic bone (if extensive)
+      - Complications - Chronic osteomyelitis (10-15% if inadequate treatment), pathologic fracture, growth disturbance (children, physeal plate damage), septic arthritis (if joint involvement)
+
+  - id: contiguous_osteomyelitis
+    type: diagnosis
+    name: "Contiguous Osteomyelitis"
+    icd10: "M86.9"
+    urgency: high
+    workup:
+      - Direct inoculation from adjacent soft tissue infection, trauma, surgery, or hardware
+      - Most common - Diabetic foot osteomyelitis (DFO), post-surgical, pressure ulcers (sacrum, heel)
+      - Diabetic foot osteomyelitis - 15-20% diabetic foot infections
+      - Risk factors - Neuropathy (loss protective sensation), peripheral arterial disease, prior ulcers, foot deformities (Charcot)
+      - Clinical - Chronic ulcer (>2 weeks), exposed bone, "probe to bone" test positive (blunt probe reaches bone, 90% PPV for osteomyelitis)
+      - Organisms - Polymicrobial (50-70%)
+      - S. aureus (MRSA 20-30%)
+      - Streptococcus
+      - Gram-negatives - E. coli, Proteus, Pseudomonas
+      - Anaerobes - Bacteroides, Peptostreptococcus (especially with necrotic tissue)
+      - Diagnosis
+      - Probe-to-bone test - If positive, very suggestive osteomyelitis
+      - X-ray - Bone destruction, periosteal reaction (may take 2-4 weeks, 50% sensitivity)
+      - MRI - Sensitive (90%) and specific (80%), shows bone marrow edema, cortical destruction, soft tissue involvement
+      - Bone biopsy/culture - Gold standard, especially if prior antibiotics (superficial wound cultures unreliable)
+      - Percutaneous or open biopsy, obtain after debridement of overlying soft tissue
+      - Histopathology (necrotic bone, inflammatory cells) + microbiology (culture)
+      - ESR/CRP - Non-specific (elevated in soft tissue infection alone), useful for monitoring treatment response
+    treatment:
+      - Surgery - Often required for cure (especially with vascular insufficiency)
+      - Debridement - Remove infected bone, necrotic tissue, foreign material (hardware if present)
+      - Radical resection - If extensive (toe amputation, ray amputation, transmetatarsal amputation)
+      - Revascularization - If PAD (angioplasty, bypass), critical for healing
+      - Negative pressure wound therapy (VAC) - Promotes granulation
+      - Antibiotics - After obtaining deep cultures/bone biopsy
+      - Empiric (pending cultures) - Broad-spectrum
+      - Vancomycin 15 mg/kg IV q12h PLUS (piperacillin-tazobactam 3.375g IV q6h OR cefepime 2g IV q8h + metronidazole 500 mg IV q8h)
+      - Targeted therapy (culture-directed, multidrug often needed for polymicrobial)
+      - MSSA - Cefazolin 2g IV q8h or nafcillin
+      - MRSA - Vancomycin or daptomycin
+      - Pseudomonas - Cefepime, piperacillin-tazobactam, or fluoroquinolone
+      - Anaerobes - Metronidazole or clindamycin
+      - Duration
+      - Post-surgical with debridement (residual bone viable) - 4-6 weeks
+      - Medical management alone (no surgery, or debridement incomplete) - 6-12 weeks (often prolonged oral suppression indefinitely)
+      - Long-term suppressive therapy - If not surgical candidate, undrained infection, retained hardware
+      - PO antibiotics indefinitely to suppress (not cure)
+      - Fluoroquinolone, TMP-SMX, doxycycline, linezolid (based on organism)
+      - Monitor CRP (should decline), clinical symptoms
+      - Wound care - Offloading (total contact cast, surgical shoe), glycemic control, optimize nutrition
+
+  - id: chronic_osteomyelitis
+    type: diagnosis
+    name: "Chronic Osteomyelitis"
+    icd10: "M86.60"
+    urgency: medium
+    workup:
+      - Chronic osteomyelitis - >6 weeks, sequestrum (necrotic bone), involucrum (new bone formation), sinus tracts, biofilm formation
+      - Results from inadequate treatment acute osteomyelitis, or progressive contiguous infection
+      - Pathophysiology - Avascular necrotic bone (sequestrum) acts as nidus for persistent infection, biofilm on necrotic bone/hardware resistant to antibiotics
+      - Clinical - Chronic pain, draining sinus tracts, recurrent flares (acute exacerbations), bone deformity
+      - Diagnosis
+      - X-ray - Sequestrum (dense necrotic bone), involucrum (periosteal new bone), cortical irregularity, sclerosis
+      - MRI - Delineate extent (bone marrow signal, abscesses, sinus tracts, soft tissue)
+      - CT - Better for bone detail (sequestrum, involucrum), surgical planning
+      - Nuclear medicine - Bone scan + WBC scan (indium-111 or Tc-99m) if hardware present (MRI artifact), positive if infection
+      - Bone biopsy/culture - Essential (chronic infection, may have unusual organisms, biofilm)
+    treatment:
+      - Surgery - Cornerstone of treatment (antibiotics alone rarely curative)
+      - Sequestrectomy - Remove all necrotic bone (sequestrum), debride infected tissue
+      - Dead space management - Fill defect (antibiotic cement beads, bone graft, muscle flap)
+      - Sinus tract excision
+      - Hardware removal if present (source of biofilm)
+      - Amputation - If extensive, non-salvageable
+      - Antibiotics - Prolonged (6-12 weeks post-surgery)
+      - Culture-directed from deep intraoperative specimens
+      - Biofilm-active antibiotics - Rifampin (add to other antibiotics, never monotherapy due to rapid resistance), fluoroquinolones (good bone penetration)
+      - Duration - 6 weeks minimum post-complete debridement, may need 3-6 months or lifelong suppression if incomplete resection
+      - Long-term suppression - If not surgical candidate or unable to completely debride
+      - Oral antibiotics indefinitely (fluoroquinolone, linezolid, TMP-SMX, doxycycline)
+      - Goal - Suppress symptoms, prevent flares (not cure)
+      - Hyperbaric oxygen - Adjunctive, controversial benefit (may improve tissue oxygenation, antibiotic delivery, healing)
+      - Prognosis - Cure rate with adequate surgery + antibiotics 70-90%, recurrence 10-30% (higher if retained hardware, inadequate debridement, vascular insufficiency)

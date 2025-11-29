@@ -1,0 +1,276 @@
+tree_id: HEME-ANEMIA
+name: Anemia Evaluation and Classification
+family: HEMATOLOGY
+specialty: Hematology, Internal Medicine, Emergency Medicine
+chief_complaint: Fatigue, Weakness, Pallor, Dyspnea
+description: Comprehensive evaluation and classification of anemia with diagnostic approach
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: anemia_presentation
+
+nodes:
+  - id: anemia_presentation
+    type: question
+    text: "Anemia confirmed? (Hgb <13 g/dL men, <12 g/dL women, <11 g/dL pregnant)"
+    options:
+      - label: "Yes - Anemia present, severe (Hgb <7 g/dL) with symptoms or hemodynamic instability"
+        next: severe_anemia
+      - label: "Yes - Anemia present, mild-moderate (Hgb 7-12 g/dL)"
+        next: anemia_classification
+      - label: "No - Hemoglobin normal"
+        next: not_anemia
+
+  - id: not_anemia
+    type: diagnosis
+    name: "Normal Hemoglobin - Alternative Diagnosis"
+    icd10: "R53.83"
+    urgency: low
+    workup:
+      - Consider other causes of fatigue (hypothyroidism, sleep apnea, depression, heart failure)
+      - TSH, ferritin, B12, folate (may still have deficiencies without anemia)
+    treatment:
+      - Treat underlying cause
+
+  - id: severe_anemia
+    type: diagnosis
+    name: "Severe Anemia Requiring Urgent Management"
+    icd10: "D64.9"
+    urgency: critical
+    workup:
+      - CBC with differential (MCV, platelets, WBC)
+      - Reticulocyte count
+      - Peripheral blood smear
+      - Type and screen
+      - Assess for bleeding (GI bleed, trauma, menorrhagia)
+      - Hemolysis labs if suspected (bilirubin, LDH, haptoglobin, Coombs test)
+    treatment:
+      - Hospital admission
+      - Packed RBC transfusion if Hgb <7 g/dL and symptomatic (dyspnea, chest pain, tachycardia, altered mental status, hemodynamic instability)
+      - Transfusion threshold <7 g/dL for stable patients, <8 g/dL for cardiac disease or active ischemia
+      - Transfuse 1-2 units PRBC at a time, reassess
+      - Oxygen if hypoxemic
+      - IV fluids if hypovolemic
+      - Identify and treat underlying cause urgently (stop bleeding, treat hemolysis)
+      - Proceed with full anemia workup after stabilization
+
+  - id: anemia_classification
+    type: question
+    text: "MCV (mean corpuscular volume)?"
+    options:
+      - label: "Microcytic (MCV <80 fL)"
+        next: microcytic_anemia
+      - label: "Normocytic (MCV 80-100 fL)"
+        next: normocytic_anemia
+      - label: "Macrocytic (MCV >100 fL)"
+        next: macrocytic_anemia
+
+  - id: microcytic_anemia
+    type: question
+    text: "Microcytic anemia - Iron studies and ferritin?"
+    options:
+      - label: "Ferritin <30 ng/mL, low iron, high TIBC - Iron deficiency"
+        next: iron_deficiency_anemia
+      - label: "Ferritin normal/high, normal/low iron, normal/low TIBC - Anemia of chronic disease"
+        next: anemia_chronic_disease
+      - label: "Normal ferritin and iron studies, microcytosis, possible hemoglobinopathy"
+        next: thalassemia_workup
+
+  - id: iron_deficiency_anemia
+    type: diagnosis
+    name: "Iron Deficiency Anemia"
+    icd10: "D50.9"
+    urgency: medium
+    workup:
+      - CBC (microcytic, hypochromic, low Hgb)
+      - Iron studies (low serum iron <60, low ferritin <30, high TIBC >400, low transferrin saturation <20%)
+      - Peripheral smear (microcytic, hypochromic RBCs, pencil cells)
+      - Identify source of iron loss
+      - GI workup - Fecal occult blood, upper endoscopy and colonoscopy (if >50 years old or alarm symptoms)
+      - Celiac serology (tissue transglutaminase IgA)
+      - Urine for hematuria
+      - Menstrual history in women
+    treatment:
+      - Oral iron supplementation - Ferrous sulfate 325mg (65mg elemental iron) PO TID on empty stomach OR ferrous gluconate 325mg (36mg elemental iron) PO TID
+      - Take with vitamin C (enhances absorption)
+      - Avoid with calcium, tea, coffee (inhibit absorption)
+      - Side effects - Constipation, dark stools, nausea (take with food if intolerant)
+      - IV iron if - Intolerant to oral, malabsorption (celiac, IBD), chronic kidney disease, need rapid repletion
+      - IV iron options - Iron sucrose 200mg IV x 5 doses OR ferric carboxymaltose 750mg IV x 2 doses
+      - Treat underlying cause (stop bleeding, treat celiac, menorrhagia management)
+      - Recheck CBC and iron studies in 4-8 weeks
+      - Expect Hgb increase of 1g/dL per week with treatment
+      - Continue iron for 3-6 months after normalization to replete stores
+
+  - id: anemia_chronic_disease
+    type: diagnosis
+    name: "Anemia of Chronic Disease/Inflammation"
+    icd10: "D63.8"
+    urgency: medium
+    workup:
+      - CBC (mild normocytic or microcytic anemia)
+      - Iron studies (low or normal iron, low or normal TIBC, normal or high ferritin >100, low transferrin saturation)
+      - Inflammatory markers (ESR, CRP elevated)
+      - Identify underlying chronic disease (chronic infection, autoimmune disease, malignancy, CKD)
+    treatment:
+      - Treat underlying disease
+      - Iron supplementation NOT helpful unless true concurrent iron deficiency (ferritin <30 despite inflammation)
+      - Erythropoiesis-stimulating agents (ESAs) if CKD-related (epoetin alfa or darbepoetin)
+      - Transfusion only if severe and symptomatic
+      - Monitor and manage anemia as part of chronic disease management
+
+  - id: thalassemia_workup
+    type: diagnosis
+    name: "Thalassemia (Suspected Hemoglobinopathy)"
+    icd10: "D56.9"
+    urgency: medium
+    workup:
+      - CBC (microcytic anemia, often Hgb 10-12, MCV 60-70)
+      - Peripheral smear (target cells, basophilic stippling)
+      - Iron studies (normal - key differentiator from iron deficiency)
+      - Hemoglobin electrophoresis (elevated HbA2 >3.5% in beta-thalassemia trait, HbH inclusions in alpha-thalassemia)
+      - Genetic testing if diagnosis uncertain
+      - Family history (Mediterranean, African, Southeast Asian ancestry)
+    treatment:
+      - Beta-thalassemia trait (minor) - No treatment needed, avoid unnecessary iron supplementation
+      - Alpha-thalassemia trait - No treatment needed
+      - Beta-thalassemia major (Cooley's anemia) - Regular transfusions, iron chelation, consider bone marrow transplant
+      - Genetic counseling
+      - Hematology referral if transfusion-dependent
+
+  - id: normocytic_anemia
+    type: question
+    text: "Normocytic anemia - Reticulocyte count?"
+    options:
+      - label: "Elevated reticulocyte count (>2% or >100,000) - Increased RBC destruction or blood loss"
+        next: hemolysis_or_bleeding
+      - label: "Low reticulocyte count (<2%) - Decreased RBC production"
+        next: hypoproliferative_anemia
+
+  - id: hemolysis_or_bleeding
+    type: question
+    text: "Evidence of hemolysis or bleeding?"
+    options:
+      - label: "Hemolysis - Elevated bilirubin (indirect), elevated LDH, low haptoglobin"
+        next: hemolytic_anemia
+      - label: "Acute blood loss - Trauma, GI bleed, surgical"
+        next: acute_blood_loss
+
+  - id: acute_blood_loss
+    type: diagnosis
+    name: "Acute Blood Loss Anemia"
+    icd10: "D62"
+    urgency: high
+    workup:
+      - Identify source of bleeding
+      - CBC (may be initially normal, then drop as equilibration occurs)
+      - Vitals (tachycardia, hypotension)
+      - GI bleed workup (endoscopy)
+      - Trauma imaging
+    treatment:
+      - Stop bleeding (endoscopic hemostasis, surgery, reversal of anticoagulation)
+      - IV fluid resuscitation
+      - Transfuse PRBC if Hgb <7 or symptomatic
+      - Address underlying cause
+
+  - id: hemolytic_anemia
+    type: diagnosis
+    name: "Hemolytic Anemia"
+    icd10: "D59.9"
+    urgency: high
+    workup:
+      - Reticulocyte count (elevated)
+      - Peripheral smear (schistocytes, spherocytes, sickle cells)
+      - LDH (elevated >500)
+      - Indirect bilirubin (elevated >2)
+      - Haptoglobin (low <25)
+      - Direct Coombs test (DAT) - Positive in autoimmune hemolytic anemia (AIHA)
+      - G6PD level (if oxidative stress exposure)
+      - Hemoglobin electrophoresis (sickle cell)
+    treatment:
+      - Identify cause - Autoimmune (warm AIHA, cold agglutinin), microangiopathic (TTP, HUS, DIC), hereditary (G6PD, spherocytosis, sickle cell), drug-induced
+      - Warm AIHA - Prednisone 1mg/kg daily, IVIG if severe, consider rituximab or splenectomy if refractory
+      - Cold agglutinin - Avoid cold exposure, rituximab
+      - TTP - Plasma exchange urgently, do not transfuse platelets
+      - G6PD deficiency - Avoid oxidative triggers (sulfa drugs, fava beans)
+      - Sickle cell crisis - Hydration, pain control, oxygen, consider transfusion
+      - Hematology consultation
+
+  - id: hypoproliferative_anemia
+    type: diagnosis
+    name: "Hypoproliferative Normocytic Anemia"
+    icd10: "D64.9"
+    urgency: medium
+    workup:
+      - CBC with differential
+      - Reticulocyte count (low)
+      - CMP (assess renal function - CKD common cause)
+      - TSH (hypothyroidism)
+      - Consider bone marrow biopsy if pancytopenia or suspected marrow disorder
+      - Erythropoietin level (low in CKD)
+    treatment:
+      - Chronic kidney disease - Erythropoiesis-stimulating agents (epoetin alfa 50-100 units/kg SC 3x/week or darbepoetin 0.45 mcg/kg SC weekly), iron supplementation (target ferritin >200, TSAT >20%)
+      - Hypothyroidism - Levothyroxine replacement
+      - Bone marrow failure - Hematology referral, consider transfusion support
+
+  - id: macrocytic_anemia
+    type: question
+    text: "Macrocytic anemia - B12 and folate levels?"
+    options:
+      - label: "B12 deficiency (<200 pg/mL)"
+        next: b12_deficiency
+      - label: "Folate deficiency (<2 ng/mL)"
+        next: folate_deficiency
+      - label: "B12 and folate normal - Consider other causes"
+        next: other_macrocytic
+
+  - id: b12_deficiency
+    type: diagnosis
+    name: "Vitamin B12 Deficiency Anemia"
+    icd10: "D51.9"
+    urgency: medium
+    workup:
+      - CBC (macrocytic anemia, MCV >100, hypersegmented neutrophils)
+      - B12 level (<200 pg/mL, 200-300 equivocal)
+      - Methylmalonic acid (MMA) and homocysteine (both elevated in B12 deficiency)
+      - Peripheral smear (macrocytic, hypersegmented neutrophils)
+      - Anti-intrinsic factor antibodies (pernicious anemia)
+      - Consider EGD with biopsy if pernicious anemia suspected
+    treatment:
+      - Vitamin B12 replacement
+      - If severe or neurologic symptoms - Cyanocobalamin 1000 mcg IM daily x 1 week, then weekly x 4 weeks, then monthly lifelong
+      - If mild and no neurologic symptoms - Oral B12 1000-2000 mcg daily (absorbed even without intrinsic factor at high doses)
+      - Treat underlying cause (pernicious anemia, malabsorption, dietary deficiency)
+      - Monitor CBC in 4-8 weeks (expect reticulocytosis in 1 week, Hgb increase by 4-8 weeks)
+      - Address neurologic complications (peripheral neuropathy, subacute combined degeneration of spinal cord)
+
+  - id: folate_deficiency
+    type: diagnosis
+    name: "Folate Deficiency Anemia"
+    icd10: "D52.9"
+    urgency: medium
+    workup:
+      - CBC (macrocytic anemia)
+      - Folate level (<2 ng/mL)
+      - B12 level (must check - similar presentation, treat B12 first if both low)
+      - Homocysteine (elevated in folate deficiency, normal MMA differentiates from B12)
+    treatment:
+      - Folic acid 1mg PO daily
+      - Treat underlying cause (poor nutrition, alcoholism, malabsorption, medications like methotrexate)
+      - Recheck CBC in 4-8 weeks
+      - Nutritional counseling (leafy greens, legumes, fortified grains)
+
+  - id: other_macrocytic
+    type: diagnosis
+    name: "Macrocytic Anemia - Other Causes"
+    icd10: "D53.9"
+    urgency: medium
+    workup:
+      - Consider other causes - Alcohol use, liver disease, hypothyroidism, MDS (myelodysplastic syndrome), medications (hydroxyurea, azathioprine)
+      - Peripheral smear
+      - TSH, liver function tests
+      - Bone marrow biopsy if MDS suspected (elderly with cytopenias)
+    treatment:
+      - Alcohol cessation if alcohol-related
+      - Treat hypothyroidism
+      - Hematology referral if MDS suspected

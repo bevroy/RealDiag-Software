@@ -1,0 +1,151 @@
+tree_id: TRAUMA-POLYTRAUMA
+name: Polytrauma Evaluation
+family: TRAUMA
+specialty: Trauma Surgery, Emergency Medicine, Critical Care
+chief_complaint: Multiple Traumatic Injuries
+description: Comprehensive ATLS-based approach to polytrauma
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: polytrauma_presentation
+
+nodes:
+  - id: polytrauma_presentation
+    type: question
+    text: "Patient stability?"
+    options:
+      - label: "Hemodynamically unstable (hypotension, shock)"
+        next: unstable_polytrauma
+      - label: "Hemodynamically stable - systematic evaluation"
+        next: stable_polytrauma_primary_survey
+      - label: "Traumatic cardiac arrest"
+        next: traumatic_cardiac_arrest
+
+  - id: unstable_polytrauma
+    type: diagnosis
+    name: "Unstable Polytrauma - Life-Threatening Hemorrhage"
+    icd10: "T07"
+    urgency: critical
+    workup:
+      - Definition - Multiple injuries involving ≥2 body regions or organ systems, life-threatening
+      - Hypotension (SBP <90 mmHg), tachycardia (HR >120), shock (altered mental status, poor perfusion)
+      - ATLS Primary Survey - ABCDE (simultaneous assessment and resuscitation)
+      - Airway with C-spine protection
+      - Breathing and ventilation
+      - Circulation with hemorrhage control
+      - Disability (neurologic status - GCS, pupils)
+      - Exposure/Environmental control (remove clothing, prevent hypothermia)
+      - Life-threatening causes of hypotension in trauma - "Bloody" sources
+      - Chest - Hemothorax, tension pneumothorax, cardiac tamponade, aortic injury
+      - Abdomen - Solid organ injury (liver, spleen), mesenteric injury, retroperitoneal hemorrhage
+      - Pelvis - Pelvic fracture with arterial bleeding (open book, vertical shear)
+      - Long bones - Femur fracture (1-2L blood loss per femur), multiple fractures
+      - External - Scalp laceration, open fractures, major vessel injury
+      - "On the floor and four more" - External bleeding, chest, abdomen, pelvis, retroperitoneum/long bones
+      - Focused assessment with sonography for trauma (FAST) - Rapid bedside ultrasound
+      - Pericardial sac (tamponade), perihepatic, perisplenic, pelvis (free fluid = blood)
+      - Positive FAST in unstable patient = operating room
+      - Chest X-ray - Hemothorax, pneumothorax, widened mediastinum (aortic injury)
+      - Pelvic X-ray - Pelvic fracture (if positive, apply pelvic binder immediately)
+      - Labs - Type and cross 6-10 units PRBCs, ABG with lactate, Hgb (may be falsely normal early), coags (PT/PTT/INR), fibrinogen
+    treatment:
+      - Massive transfusion protocol (MTP) - Activate immediately if
+      - SBP <90 despite 1-2L crystalloid, obvious exsanguination, positive FAST with shock, severe mechanism (GSW torso, multiple extremity amputations)
+      - Balanced resuscitation - 1:1:1 ratio (PRBCs:FFP:platelets), avoid crystalloid excess (worsens dilutional coagulopathy)
+      - Damage control resuscitation principles
+      - Permissive hypotension - SBP 80-90 mmHg acceptable until hemorrhage controlled (avoid aggressive fluid that increases bleeding, dilutes clotting factors, hypothermia)
+      - Exception - Traumatic brain injury (need MAP ≥80, SBP ≥110 to maintain CPP)
+      - Prevent lethal triad - Hypothermia, acidosis, coagulopathy
+      - Rewarm aggressively (warmed fluids, Bair Hugger, increase room temp)
+      - Correct acidosis (control bleeding, adequate perfusion)
+      - Correct coagulopathy (FFP, platelets, cryoprecipitate if fibrinogen <150-200, tranexamic acid)
+      - Tranexamic acid (TXA) - 1g IV over 10 min, then 1g over 8 hours (give within 3 hours of injury, reduces mortality in hemorrhagic shock, CRASH-2 trial)
+      - Hemorrhage control by source
+      - Chest - Tube thoracostomy (chest tube), if >1500mL immediate output or >200mL/hr x 4 hours → thoracotomy
+      - Tension pneumothorax - Needle decompression 2nd ICS midclavicular line, then chest tube
+      - Cardiac tamponade - Pericardiocentesis or resuscitative thoracotomy, repair cardiac injury
+      - Abdomen - Laparotomy (damage control surgery), pack bleeding, temporary abdominal closure, return to OR in 24-48hr for definitive repair
+      - Pelvis - Pelvic binder (reduce pelvic volume, tamponade bleeding), angioembolization if arterial bleeding, external fixation
+      - Long bones - Splint, early fixation when stable
+      - Unstable patient - Operating room vs interventional radiology (angioembolization)
+      - Positive FAST + shock = laparotomy (don't waste time on CT)
+      - Pelvic fracture + shock = pelvic binder, consider angioembolization if no abdominal source
+      - Resuscitative endovascular balloon occlusion of aorta (REBOA) - Inflate balloon in aorta (zone I for abdomen/pelvis, zone III for pelvis only) to temporize non-compressible torso hemorrhage, bridge to OR
+
+  - id: stable_polytrauma_primary_survey
+    type: diagnosis
+    name: "Stable Polytrauma - Systematic Evaluation"
+    icd10: "T07"
+    urgency: high
+    workup:
+      - Hemodynamically stable - SBP >90, HR <120, adequate perfusion
+      - ATLS Primary Survey - ABCDE (identify life threats first)
+      - A - Airway patent? C-spine immobilized? (cervical collar, backboard until spine cleared)
+      - Indications for intubation - GCS ≤8, inability to protect airway, severe maxillofacial trauma, respiratory distress
+      - B - Breathing adequate? Chest rise symmetric? Breath sounds equal?
+      - Tension pneumothorax, open pneumothorax, massive hemothorax, flail chest - treat immediately
+      - C - Pulses present? Perfusion adequate? Bleeding controlled?
+      - Two large-bore IVs (14-16 gauge), 1-2L crystalloid bolus if needed
+      - D - Disability (neurologic exam) - GCS score, pupil size and reactivity, lateralizing signs
+      - GCS <8 → intubate, GCS 9-13 → close monitoring, repeat exams
+      - E - Exposure - Remove all clothing, logroll to examine back, prevent hypothermia (warm blankets, warmed fluids)
+      - Secondary Survey - Head-to-toe detailed exam (only after primary survey complete and patient stable)
+      - Head/face - Scalp lacerations, skull fractures, facial fractures, eye exam
+      - Neck - Midline cervical tenderness, tracheal deviation, JVD, subcutaneous emphysema
+      - Chest - Rib fractures, crepitus, paradoxical movement (flail), heart sounds (muffled = tamponade)
+      - Abdomen - Tenderness, distension, peritoneal signs (rebound, guarding), seat belt sign (marker of intra-abdominal injury)
+      - Pelvis - Pelvic stability (compress iliac crests - do ONCE, further manipulation increases bleeding)
+      - Extremities - Deformities, pulses, sensation, compartments (firm, tense = compartment syndrome)
+      - Back - Logroll, spine tenderness, step-offs, rectal exam (tone, blood, high-riding prostate = urethral injury)
+      - Neurologic - Motor, sensory, reflexes (spinal cord injury level)
+      - Imaging for stable polytrauma
+      - Trauma pan-scan (CT head/C-spine/chest/abdomen/pelvis with IV contrast) - Standard for stable blunt polytrauma
+      - Chest X-ray, pelvic X-ray - Can be obtained during primary survey
+      - FAST - Quick screening for free fluid, but CT more sensitive
+      - Extremity X-rays - If obvious deformity or high suspicion for fracture
+    treatment:
+      - Admit to trauma ICU - Close monitoring, repeat exams (q1-2 hours initially)
+      - Spinal precautions - Maintain C-spine immobilization until spine cleared clinically (awake, alert, no midline tenderness, no distracting injury, no neurologic deficit) or by imaging (CT C-spine)
+      - Thoracolumbar spine - CT if mechanism, back pain, or neurologic symptoms
+      - Specific injuries - See respective trees
+      - Traumatic brain injury - Prevent secondary brain injury (maintain CPP, avoid hypotension/hypoxia), ICP monitoring if severe (GCS ≤8), mannitol/hypertonic saline for elevated ICP, neurosurgery consult
+      - Solid organ injury (liver/spleen) - Most managed non-operatively if stable (grade I-III usually, some IV), serial Hgb, CT in 48-72hr to assess for delayed bleeding
+      - Pelvic fracture - Pelvic binder if unstable fracture pattern, orthopedic consult, avoid foley if urethral injury suspected (blood at meatus, high-riding prostate → retrograde urethrogram first)
+      - Long bone fractures - Splint initially, early definitive fixation (within 24-48hr reduces fat embolism, ARDS, mortality)
+      - Rib fractures/pulmonary contusion - Pain control (epidural, PCA, nerve blocks), incentive spirometry, pulmonary toilet, may need mechanical ventilation if severe
+      - VTE prophylaxis - Start when safe (no active bleeding, no ongoing resuscitation), LMWH or SQ heparin, IVC filter if contraindication to anticoagulation and high DVT risk
+      - Tetanus prophylaxis - If open wounds
+      - Antibiotics - If open fractures (cefazolin, add gentamicin and/or penicillin for dirty wounds), penetrating abdominal trauma
+
+  - id: traumatic_cardiac_arrest
+    type: diagnosis
+    name: "Traumatic Cardiac Arrest"
+    icd10: "T07"
+    urgency: critical
+    workup:
+      - Witnessed or unwitnessed cardiac arrest in trauma patient
+      - Survival highly dependent on mechanism and timing
+      - Best prognosis - Penetrating thoracic trauma with short prehospital time (<10 min)
+      - Poor prognosis - Blunt trauma, prolonged CPR (>15 min), no signs of life
+      - Reversible causes of traumatic arrest (treat these, NOT standard ACLS)
+      - Tension pneumothorax - Unilateral breath sounds, tracheal deviation, distended neck veins
+      - Cardiac tamponade - Muffled heart sounds, distended neck veins, pulseless electrical activity (PEA)
+      - Severe hypovolemia - Massive hemorrhage (exsanguination)
+      - Hypoxia - Airway obstruction, major chest injury
+    treatment:
+      - Resuscitative thoracotomy - Last-ditch effort, perform in ED if
+      - Penetrating thoracic trauma with <15 min CPR or loss of vitals in ED
+      - Penetrating extrathoracic trauma with <5 min CPR
+      - Blunt trauma with <10 min CPR (controversial, very low survival)
+      - NOT indicated if no signs of life, asystole, blunt trauma with prolonged CPR
+      - Procedure - Left anterolateral thoracotomy (5th ICS), open pericardium, control cardiac bleeding, internal cardiac massage, cross-clamp descending aorta (increase coronary/cerebral perfusion)
+      - Survival - Penetrating cardiac injury 30-40%, penetrating non-cardiac thoracic 15%, penetrating abdominal 5%, blunt trauma <2%
+      - Bilateral thoracostomy - Decompress tension pneumothorax both sides (finger or chest tube)
+      - Pericardiocentesis - Temporizing for tamponade, but thoracotomy preferred
+      - REBOA - If available, inflate balloon in aorta zone I (bridge to OR)
+      - Massive transfusion - Activate MTP, 1:1:1 resuscitation
+      - If ROSC achieved - Transport immediately to OR for hemorrhage control
+      - Withhold/terminate resuscitation if
+      - Blunt trauma with no signs of life in field and >10 min CPR
+      - Penetrating trauma with no cardiac activity on ultrasound after thoracotomy
+      - Asystole throughout, no reversible cause identified

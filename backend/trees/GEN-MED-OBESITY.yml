@@ -1,0 +1,110 @@
+tree_id: GEN-MED-OBESITY
+name: Obesity Evaluation and Management
+family: GENERAL-MEDICINE
+specialty: Internal Medicine, Endocrinology, Bariatric Surgery
+chief_complaint: Weight Gain, Obesity-Related Complications
+description: Comprehensive evaluation and management of obesity
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: obesity_evaluation
+
+nodes:
+  - id: obesity_evaluation
+    type: diagnosis
+    name: "Obesity"
+    icd10: "E66.9"
+    urgency: medium
+    workup:
+      - Obesity - Excess body fat, BMI ≥30 kg/m²
+      - Classification - BMI (kg/m²)
+      - Overweight 25-29.9
+      - Class I obesity 30-34.9
+      - Class II obesity 35-39.9
+      - Class III (severe/morbid) obesity ≥40
+      - Limitations BMI - Does not distinguish fat vs. muscle (athletes misclassified), does not assess body fat distribution
+      - Waist circumference better predictor metabolic risk (central adiposity)
+      - Men >102 cm (40 inches), women >88 cm (35 inches) = increased risk
+      - Prevalence - EPIDEMIC, 42% US adults (2020), rising
+      - Disproportionate by race/ethnicity (non-Hispanic Black 50%, Hispanic 45%, non-Hispanic White 42%, Asian 17%)
+      - Etiology - Multifactorial (genetic + environmental + behavioral)
+      - Energy imbalance - Caloric intake > expenditure
+      - Modern environment - Highly processed foods (calorie-dense, low satiety), sedentary lifestyle, large portions, food marketing
+      - Genetic - Polygenic (100+ genes identified), rare monogenic (MC4R, leptin deficiency)
+      - Heritability 40-70%
+      - Medications - Weight gain (antipsychotics, antidepressants, mood stabilizers, anticonvulsants, insulin, sulfonylureas, thiazolidinediones, glucocorticoids, beta-blockers)
+      - Endocrine - Hypothyroidism, Cushing syndrome, polycystic ovary syndrome (PCOS), hypothalamic injury, growth hormone deficiency
+      - Pathophysiology - Adipose tissue endocrine organ (secretes adipokines)
+      - Leptin (satiety signal) resistance → continued eating despite adequate stores
+      - Adiponectin decreased (insulin sensitizer)
+      - Inflammatory cytokines increased (TNF-α, IL-6) → insulin resistance, systemic inflammation
+      - Comorbidities - "Obesity-related diseases" (major driver morbidity/mortality)
+      - Metabolic - Type 2 diabetes (80% obese), metabolic syndrome (central obesity + insulin resistance + dyslipidemia + hypertension)
+      - Cardiovascular - Hypertension (3x risk), coronary artery disease, heart failure (especially HFpEF), atrial fibrillation, stroke
+      - Pulmonary - Obstructive sleep apnea (60-90% severe obesity), obesity hypoventilation syndrome, asthma
+      - Gastrointestinal - Nonalcoholic fatty liver disease (NAFLD) → NASH → cirrhosis, GERD, gallstones
+      - Musculoskeletal - Osteoarthritis (knees, hips, low back), impaired mobility
+      - Cancer - Increased risk 13 cancer types (endometrial, esophageal adenocarcinoma, kidney, liver, pancreatic, gastric, colorectal, gallbladder, ovarian, breast post-menopause, multiple myeloma, meningioma, thyroid)
+      - Reproductive - Infertility, PCOS, pregnancy complications (gestational diabetes, preeclampsia), erectile dysfunction
+      - Psychosocial - Depression, anxiety, stigma, discrimination, reduced quality of life
+      - Evaluation
+      - History - Weight history (onset, trajectory, maximum weight, weight loss attempts), diet/eating patterns, physical activity, sleep, medications, family history, obesity-related symptoms (snoring, joint pain, GERD)
+      - Screen for eating disorders (binge eating disorder common)
+      - Physical exam - Height, weight, BMI, waist circumference, blood pressure (large cuff if needed), acanthosis nigricans (insulin resistance), striae/buffalo hump/proximal myopathy (Cushing), thyromegaly
+      - Labs - Fasting glucose or HbA1c (diabetes), lipid panel, TSH, ALT/AST (NAFLD), consider screening sleep study if symptoms OSA
+      - Secondary causes uncommon but screen if clinical suspicion (Cushing - 24-hour urinary free cortisol or dexamethasone suppression test)
+    treatment:
+      - Goals - 5-10% weight loss improves metabolic health (glucose, lipids, BP), ≥10-15% for substantial comorbidity reduction
+      - Even modest weight loss beneficial (do not require "ideal" BMI)
+      - Weight loss maintenance challenging (long-term treatment required)
+      - Lifestyle modification - FOUNDATION all treatment
+      - Diet - Caloric deficit 500-750 kcal/day → 1-2 lbs/week loss
+      - Various approaches effective (low-carb, low-fat, Mediterranean, DASH) - adherence most important
+      - Portion control, increase fruits/vegetables, decrease processed foods/sugar-sweetened beverages
+      - Consider structured programs (meal replacements, very low-calorie diets 800-1200 kcal/day with supervision)
+      - Physical activity - 150-300 min/week moderate intensity (brisk walking) or 75-150 min vigorous
+      - Combination aerobic + resistance training
+      - Critical for weight maintenance (prevents regain)
+      - Behavioral therapy - Self-monitoring (food diary, weigh regularly), goal-setting, problem-solving, stimulus control, cognitive restructuring
+      - Individual or group sessions
+      - Pharmacotherapy - Consider if BMI ≥30 OR BMI ≥27 with comorbidities AND insufficient weight loss with lifestyle (3-6 months)
+      - Most effective as adjunct to lifestyle (not monotherapy)
+      - GLP-1 receptor agonists - MOST EFFECTIVE
+      - Semaglutide (Wegovy) 2.4 mg SQ weekly - 15-17% weight loss (1 year), cardiovascular benefits (MACE reduction), nausea common (starts 0.25 mg, titrate monthly)
+      - Liraglutide (Saxenda) 3 mg SQ daily - 8% weight loss, nausea
+      - Tirzepatide (Zepbound) 15 mg SQ weekly - 20-22% weight loss (dual GLP-1/GIP agonist, most effective available), approved 2023
+      - Mechanism - Increase satiety, slow gastric emptying, reduce appetite
+      - Cost barrier ($1000-1500/month, insurance coverage variable)
+      - Phentermine/topiramate (Qsymia) - 10-12% weight loss, combination sympathomimetic + anticonvulsant
+      - Contraindications - Pregnancy, glaucoma, hyperthyroidism, cardiovascular disease (phentermine)
+      - Naltrexone/bupropion (Contrave) - 5-7% weight loss, opioid antagonist + antidepressant
+      - Orlistat (Xenical, Alli) - 3-5% weight loss, lipase inhibitor (blocks fat absorption 30%)
+      - GI side effects prominent (steatorrhea, fecal incontinence), fat-soluble vitamin deficiency
+      - OTC available (Alli 60 mg TID)
+      - Phentermine - Short-term use (<12 weeks), 5-8% weight loss, sympathomimetic (appetite suppressant)
+      - Duration - Long-term treatment (lifelong if effective, weight regain upon discontinuation)
+      - Bariatric surgery - Most effective treatment (durable weight loss 20-35%, metabolic disease remission)
+      - Indications - BMI ≥40 OR BMI ≥35 with obesity-related comorbidities (diabetes, HTN, OSA, NAFLD) AND failure medical management
+      - Procedures
+      - Roux-en-Y gastric bypass (RYGB) - Gold standard, 30-35% total weight loss
+      - Small gastric pouch anastomosed to jejunum (bypasses stomach, duodenum, proximal jejunum)
+      - Restricts intake + malabsorption
+      - Rapid diabetes remission (70-80%, GLP-1 surge)
+      - Complications - Dumping syndrome (rapid gastric emptying → hypoglycemia), marginal ulcer, internal hernia, nutritional deficiencies (iron, B12, calcium, vitamin D)
+      - Sleeve gastrectomy - Most common (60% all bariatric), 25-30% weight loss
+      - Remove 80% stomach (vertical sleeve), preserve pylorus
+      - Restrictive only (no malabsorption)
+      - Fewer nutritional deficiencies than RYGB, but higher GERD (consider RYGB if severe GERD)
+      - Adjustable gastric band (Lap-Band) - Less common now, 15-20% weight loss
+      - Inflatable band around proximal stomach (adjustable)
+      - Lowest risk, reversible, but highest failure/revision rate
+      - Biliopancreatic diversion with duodenal switch (BPD/DS) - Most weight loss (40%), most malabsorption, highest complications
+      - Reserved for BMI >50
+      - Benefits - Weight loss, diabetes remission (T2DM remission 60-80% RYGB, 50-70% sleeve), hypertension improvement, OSA improvement, reduced mortality (cardiovascular events, cancer)
+      - Risks - Perioperative mortality 0.1-0.5%, complications (leak, bleeding, VTE, stricture), nutritional deficiencies (lifelong supplementation required), weight regain (20-30% regain some weight 5-10 years)
+      - Post-op - Lifelong multivitamin, calcium, vitamin D, iron, B12, protein supplementation, regular monitoring
+      - Endoscopic procedures - Intragastric balloon (temporary, 6-12 months, 10% weight loss), endoscopic sleeve gastroplasty (suture stomach endoscopically)
+      - Less invasive than surgery, but less effective
+      - Adjunctive treatments - Address comorbidities (CPAP for OSA, metformin for diabetes, statins for dyslipidemia)
+      - Multidisciplinary approach - Dietitian, exercise physiologist, behavioral therapist, primary care, specialists (endocrinology, surgery)
+      - Prevention - Public health priority (obesogenic environment modification, early intervention)

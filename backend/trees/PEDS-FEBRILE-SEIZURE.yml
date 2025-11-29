@@ -1,0 +1,128 @@
+tree_id: PEDS-FEBRILE-SEIZURE
+name: Pediatric Febrile Seizure Evaluation
+family: PEDIATRICS
+specialty: Pediatrics, Neurology, Emergency Medicine
+chief_complaint: Seizure with Fever in Child
+description: Comprehensive evaluation and management of febrile seizures
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: febrile_seizure_presentation
+
+nodes:
+  - id: febrile_seizure_presentation
+    type: question
+    text: "Type of febrile seizure?"
+    options:
+      - label: "Simple febrile seizure (generalized, <15 min, no recurrence in 24hr)"
+        next: simple_febrile_seizure
+      - label: "Complex febrile seizure (focal, >15 min, or recurrent in 24hr)"
+        next: complex_febrile_seizure
+      - label: "Concern for meningitis or serious infection"
+        next: febrile_seizure_meningitis
+
+  - id: simple_febrile_seizure
+    type: diagnosis
+    name: "Simple Febrile Seizure"
+    icd10: "R56.00"
+    urgency: medium
+    workup:
+      - Definition - Seizure with fever (>38°C/100.4°F) in child age 6 months to 5 years, WITHOUT CNS infection, metabolic disturbance, or history of afebrile seizures
+      - Simple febrile seizure criteria (ALL must be met)
+      - Generalized tonic-clonic seizure (not focal)
+      - Duration <15 minutes
+      - Does NOT recur within 24 hours
+      - Child neurologically normal before and after seizure
+      - Epidemiology - Very common (2-5% of children), peak age 18 months, benign condition
+      - Typically occurs during rapid temperature rise (early in febrile illness)
+      - Common causes - Viral URI, otitis media, roseola (HHV-6), influenza, gastroenteritis
+      - Physical exam - Post-ictal (sleepy) initially, then returns to baseline within 30-60 min, identify fever source
+      - Assess for meningitis - Nuchal rigidity, bulging fontanelle, altered mental status, petechiae
+      - Labs - NOT routinely required if simple febrile seizure
+      - Consider glucose if prolonged NPO or concern for hypoglycemia
+      - Electrolytes if severe vomiting/diarrhea
+      - Lumbar puncture - NOT routinely indicated for simple febrile seizure if fully immunized and well-appearing
+      - CONSIDER if age <12 months (meningeal signs unreliable, especially if <6 months)
+      - STRONGLY CONSIDER if not fully immunized for H. influenzae and S. pneumoniae
+      - PERFORM if any concern for meningitis (altered mental status beyond post-ictal, meningeal signs)
+      - Neuroimaging (CT/MRI) - NOT indicated for simple febrile seizure
+      - EEG - NOT indicated for simple febrile seizure (does not predict recurrence or epilepsy)
+    treatment:
+      - Reassurance - Benign condition, excellent prognosis, does NOT cause brain damage or developmental delay
+      - Identify and treat fever source - Viral illness (supportive care), bacterial infection (antibiotics if needed)
+      - Antipyretics - Acetaminophen or ibuprofen for comfort (NOT proven to prevent recurrence of febrile seizures, but OK for fever management)
+      - No antiepileptic medications - NOT indicated for simple febrile seizures (risks outweigh benefits)
+      - Recurrence risk - Overall 30% (higher if age <18 months at first seizure, family history of febrile seizures, lower temperature at seizure, brief duration of fever before seizure)
+      - If recurs, still considered benign (no increased risk of epilepsy if remains simple)
+      - Epilepsy risk - Slightly increased (1-2% vs 0.5% in general population, still very low), higher if complex features, family history of epilepsy, neurodevelopmental abnormalities
+      - Parental education CRITICAL
+      - Febrile seizures are benign, common, do NOT cause harm
+      - Seizure action plan - If seizure occurs, place child on side, protect from injury, do NOT put anything in mouth, time the seizure, call 911 if >5 minutes
+      - Aggressive fever reduction does NOT prevent febrile seizures
+      - Follow-up with pediatrician for routine care
+
+  - id: complex_febrile_seizure
+    type: diagnosis
+    name: "Complex Febrile Seizure"
+    icd10: "R56.00"
+    urgency: high
+    workup:
+      - Definition - Febrile seizure with ANY of following
+      - Focal features (one-sided, focal onset)
+      - Duration >15 minutes (prolonged)
+      - Recurs within 24 hours (multiple seizures)
+      - Higher risk features than simple febrile seizure
+      - Same age range (6 months to 5 years)
+      - Labs - Consider electrolytes (Na, glucose, Ca, Mg), especially if prolonged seizure
+      - Lumbar puncture - Lower threshold
+      - STRONGLY CONSIDER in all complex febrile seizures
+      - PERFORM if age <12 months, not fully immunized, any meningeal signs, altered mental status
+      - Neuroimaging - CONSIDER if
+      - Focal seizure (MRI brain to rule out structural lesion)
+      - Prolonged post-ictal period (>1 hour)
+      - Signs of increased ICP or focal neurologic deficits
+      - EEG - CONSIDER if
+      - Recurrent complex febrile seizures
+      - Concern for underlying seizure disorder
+      - Focal seizure (increased epilepsy risk)
+    treatment:
+      - Acute seizure management - If still seizing on arrival
+      - Benzodiazepines - Lorazepam 0.1 mg/kg IV/IM (max 4mg) or midazolam 0.2 mg/kg IM/IN (max 10mg)
+      - If continues >5 minutes after benzos, treat as status epilepticus
+      - Identify and treat fever source
+      - Antipyretics - Acetaminophen or ibuprofen
+      - Recurrence risk - Higher than simple (30-50%)
+      - Epilepsy risk - Higher (4-6%, especially if focal seizure), but still relatively low
+      - Antiepileptic prophylaxis - Generally NOT recommended
+      - Only consider if very frequent recurrences, prolonged seizures, significant parental anxiety
+      - Options - Intermittent diazepam 0.33 mg/kg PR at fever onset (questionable efficacy, sedation) OR daily phenobarbital (significant side effects, not recommended)
+      - Neurology referral - Consider if recurrent complex febrile seizures, focal features, family wishes
+
+  - id: febrile_seizure_meningitis
+    type: diagnosis
+    name: "Febrile Seizure - Rule Out Meningitis"
+    icd10: "R56.00"
+    urgency: critical
+    workup:
+      - Red flags for meningitis/encephalitis
+      - Altered mental status beyond expected post-ictal period (>1 hour)
+      - Meningeal signs - Nuchal rigidity, Kernig sign, Brudzinski sign
+      - Bulging fontanelle (infants)
+      - Petechial or purpuric rash (meningococcemia)
+      - Severe headache, photophobia, vomiting
+      - Age <6 months (meningitis harder to detect clinically)
+      - Not fully immunized for H. influenzae type b and S. pneumoniae
+      - Recent antibiotic use (partially treated meningitis)
+      - Lumbar puncture MANDATORY if concern for meningitis
+      - Obtain before antibiotics if possible (but do NOT delay antibiotics if unstable)
+      - CSF studies - Cell count with differential, glucose, protein, Gram stain, bacterial culture, consider viral PCR panel
+      - Labs - CBC, blood culture, CMP, consider procalcitonin/CRP
+      - Neuroimaging before LP - ONLY if concern for increased ICP (papilledema, focal deficits, signs of herniation)
+    treatment:
+      - If concern for bacterial meningitis - Empiric antibiotics IMMEDIATELY (do not wait for LP if unstable)
+      - Ceftriaxone 100 mg/kg IV (max 2g) + vancomycin 15 mg/kg IV (covers S. pneumoniae, N. meningitidis, H. influenzae)
+      - Add acyclovir 20 mg/kg IV if concern for HSV encephalitis (focal seizure, temporal lobe findings)
+      - Dexamethasone 0.15 mg/kg IV before or with first antibiotic dose (if bacterial meningitis suspected, reduces complications)
+      - Seizure management - Benzodiazepines if ongoing
+      - ICU admission if unstable, ongoing seizures, altered mental status
+      - If LP negative for meningitis and child improves - Simple febrile seizure, discharge with close follow-up

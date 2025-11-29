@@ -1,0 +1,182 @@
+tree_id: OBGYN-ECTOPIC
+name: Ectopic Pregnancy Evaluation
+family: OBGYN
+specialty: Obstetrics-Gynecology/Emergency Medicine
+chief_complaint: Ectopic Pregnancy
+description: Diagnostic decision tree for ectopic pregnancy evaluation
+version: "1.0"
+author: RealDiag Team
+entry_point: presentation
+
+nodes:
+  - id: presentation
+    type: question
+    text: "Clinical stability?"
+    options:
+      - label: "Unstable (hypotension, severe pain, peritoneal signs)"
+        next: ruptured_ectopic
+      - label: "Stable with positive pregnancy test"
+        next: stable_evaluation
+      - label: "Pregnancy of unknown location"
+        next: pul
+
+  - id: ruptured_ectopic
+    type: diagnosis
+    diagnosis: Ruptured Ectopic Pregnancy
+    icd10: O00.9
+    urgency: critical
+    workup:
+      - Type and cross (anticipate transfusion)
+      - CBC, PT/INR, aPTT
+      - Quantitative beta-hCG
+      - Bedside ultrasound (free fluid in pelvis)
+      - May not have time for formal imaging
+    treatment:
+      - EMERGENT OB/GYN consult
+      - Two large-bore IVs
+      - Aggressive fluid resuscitation
+      - Blood transfusion as needed
+      - NPO for surgery
+      - Emergency laparoscopy or laparotomy
+      - Salpingectomy or salpingostomy
+      - RhoGAM if Rh negative
+      - Hospital admission
+      - Mortality risk if delayed
+
+  - id: stable_evaluation
+    type: question
+    text: "Transvaginal ultrasound findings?"
+    options:
+      - label: "Intrauterine pregnancy confirmed"
+        next: intrauterine_pregnancy
+      - label: "Ectopic mass visualized"
+        next: confirmed_ectopic
+      - label: "No IUP, no ectopic mass seen"
+        next: pul
+
+  - id: intrauterine_pregnancy
+    type: diagnosis
+    diagnosis: Intrauterine Pregnancy Confirmed
+    icd10: Z34.90
+    urgency: low
+    workup:
+      - Dating ultrasound
+      - Confirm fetal cardiac activity if >6 weeks
+    treatment:
+      - Ectopic pregnancy essentially ruled out (heterotopic pregnancy 1:30,000)
+      - Routine prenatal care
+      - OB follow-up
+      - Reassurance
+
+  - id: confirmed_ectopic
+    type: question
+    text: "Size and characteristics?"
+    options:
+      - label: "Unruptured, medical management candidate"
+        next: medical_management
+      - label: "Size >3.5cm or fetal cardiac activity"
+        next: surgical_ectopic
+      - label: "Expectant management candidate"
+        next: expectant_management
+
+  - id: medical_management
+    type: diagnosis
+    diagnosis: Ectopic Pregnancy - Medical Management
+    icd10: O00.9
+    urgency: high
+    workup:
+      - Beta-hCG level
+      - CBC, BMP, LFTs
+      - Blood type (RhoGAM if Rh negative)
+      - Confirm hemodynamic stability
+      - Criteria: hCG <5000, mass <3.5cm, no fetal cardiac activity, no rupture, patient reliable
+    treatment:
+      - Methotrexate 50 mg/m² IM single dose
+      - Strict contraception x 3 months
+      - Avoid alcohol, NSAIDs, folic acid
+      - Beta-hCG on day 4 and 7 (should drop 15% between day 4-7)
+      - Repeat weekly until undetectable
+      - Second dose methotrexate if hCG plateaus or rises
+      - Monitor for rupture (pain, bleeding)
+      - Pelvic rest (no intercourse, tampons)
+      - Success rate 85-90%
+      - OB/GYN follow-up
+      - RhoGAM 300 mcg if Rh negative
+
+  - id: surgical_ectopic
+    type: diagnosis
+    diagnosis: Ectopic Pregnancy - Surgical Management
+    icd10: O00.9
+    urgency: high
+    workup:
+      - Beta-hCG
+      - CBC, type and screen
+      - BMP
+      - Consent for surgery
+    treatment:
+      - Laparoscopy preferred (diagnostic and therapeutic)
+      - Salpingectomy (remove tube) OR
+      - Salpingostomy (preserve tube if wants fertility)
+      - Laparotomy if unstable or technical difficulties
+      - RhoGAM if Rh negative
+      - Follow beta-hCG to zero (persistent trophoblast if plateaus)
+      - Monitor for bleeding
+      - Hospital admission or observation
+      - OB/GYN follow-up
+
+  - id: expectant_management
+    type: diagnosis
+    diagnosis: Ectopic Pregnancy - Expectant Management
+    icd10: O00.9
+    urgency: medium
+    workup:
+      - Beta-hCG <1000 and declining
+      - Minimal symptoms
+      - Reliable patient
+      - Access to emergency care
+    treatment:
+      - Serial beta-hCG every 2-3 days until undetectable
+      - Close monitoring for rupture
+      - Admit if pain worsens or bleeding increases
+      - Success rate 50-70%
+      - Convert to medical or surgical if hCG rises or symptoms worsen
+      - RhoGAM if Rh negative
+      - Close OB/GYN follow-up
+
+  - id: pul
+    type: diagnosis
+    diagnosis: Pregnancy of Unknown Location
+    icd10: O00.9
+    urgency: medium
+    workup:
+      - Quantitative beta-hCG
+      - Transvaginal ultrasound (no IUP, no ectopic mass)
+      - Repeat hCG in 48 hours
+      - Progesterone level (may help)
+    treatment:
+      - Discriminatory zone: IUP should be visible if hCG >3500 (TVUS)
+      - Serial hCG monitoring:
+        - Rising appropriately (doubles q48h): likely IUP, repeat US when >3500
+        - Rising slowly or plateauing: likely ectopic, consider methotrexate
+        - Falling: likely spontaneous abortion
+      - If hCG >3500 and no IUP on US: presume ectopic
+      - Methotrexate vs D&C vs diagnostic laparoscopy
+      - Close monitoring
+      - Return precautions for pain or bleeding
+      - OB/GYN follow-up in 48 hours
+
+  - id: heterotopic
+    type: diagnosis
+    diagnosis: Heterotopic Pregnancy
+    icd10: O00.9
+    urgency: critical
+    workup:
+      - Both IUP and ectopic pregnancy present
+      - Rare (1:30,000 spontaneous, 1:100-500 with IVF)
+      - Ultrasound shows IUP + adnexal mass
+    treatment:
+      - Surgical management of ectopic
+      - Preserve intrauterine pregnancy
+      - Laparoscopy with salpingectomy
+      - Close OB monitoring of IUP
+      - High-risk pregnancy

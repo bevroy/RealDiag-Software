@@ -1,0 +1,128 @@
+tree_id: RENAL-CKD
+name: Chronic Kidney Disease (CKD) Management
+family: NEPHROLOGY
+specialty: Nephrology, Internal Medicine
+chief_complaint: Elevated Creatinine, Proteinuria, Hypertension, Edema
+description: Comprehensive evaluation and management of chronic kidney disease
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: ckd_presentation
+
+nodes:
+  - id: ckd_presentation
+    type: question
+    text: "CKD stage?"
+    options:
+      - label: "Stage 5 CKD (GFR <15) or end-stage renal disease (ESRD)"
+        next: esrd
+      - label: "Stage 3-4 CKD (GFR 15-59)"
+        next: ckd_stage_3_4
+      - label: "Stage 1-2 CKD (GFR ≥60 with kidney damage)"
+        next: ckd_early
+
+  - id: esrd
+    type: diagnosis
+    name: "End-Stage Renal Disease (ESRD) - Stage 5 CKD"
+    icd10: "N18.6"
+    urgency: high
+    workup:
+      - Definition - GFR <15 mL/min/1.73m² OR on dialysis
+      - Assess for uremic symptoms - Nausea, vomiting, anorexia, pruritus, metallic taste, confusion, pericarditis, asterixis, seizures
+      - Labs - BMP (Cr, BUN, K, bicarb, Ca, phos), CBC (anemia), albumin, PTH, lipid panel
+      - Uremic complications - Hyperkalemia, metabolic acidosis, volume overload, uremic pericarditis
+      - Renal replacement therapy (RRT) options - Hemodialysis, peritoneal dialysis, kidney transplant
+    treatment:
+      - Indications to start dialysis (one or more)
+      - GFR <10-15 mL/min with uremic symptoms OR
+      - Refractory hyperkalemia (K >6.5 despite medical management) OR
+      - Refractory volume overload/pulmonary edema OR
+      - Refractory metabolic acidosis (bicarb <15) OR
+      - Uremic pericarditis OR
+      - Uremic encephalopathy or seizures
+      - Hemodialysis (most common in US)
+      - AV fistula creation (preferred access, place when GFR 15-20, needs 3-6 months to mature) OR
+      - AV graft (if poor vessels) OR
+      - Tunneled dialysis catheter (temporary, high infection risk)
+      - Schedule - Typically 3x/week, 3-4 hours per session
+      - Peritoneal dialysis
+      - Catheter placed in peritoneum
+      - Continuous ambulatory PD (CAPD) - Manual exchanges 4x/day OR
+      - Automated PD (APD) - Cycler at night
+      - Advantages - Home-based, preserves residual renal function longer, hemodynamically gentler
+      - Disadvantages - Risk of peritonitis, requires motivated patient
+      - Kidney transplant (BEST long-term outcome)
+      - Refer for evaluation early (GFR <20)
+      - Living donor preferred (better outcomes, shorter wait)
+      - Deceased donor - Wait list (average 3-5 years in US)
+      - Preemptive transplant (before dialysis) ideal
+      - Medical management while on dialysis
+      - Fluid restriction - 1-1.5 L/day (or 1 L + urine output)
+      - Low potassium diet (<2 g/day) - Avoid bananas, oranges, tomatoes, potatoes
+      - Low phosphorus diet (<1 g/day) - Phosphate binders with meals (calcium acetate, sevelamer, lanthanum)
+      - Renal vitamins (water-soluble vitamins lost during dialysis)
+      - ESA for anemia (epoetin alfa, darbepoetin) - Goal Hgb 10-11 g/dL
+      - IV iron supplementation
+      - Active vitamin D (calcitriol) for secondary hyperparathyroidism if PTH elevated
+      - Conservative management (if patient declines dialysis) - Palliative/hospice focus, medical management of symptoms
+
+  - id: ckd_stage_3_4
+    type: diagnosis
+    name: "CKD Stage 3-4"
+    icd10: "N18.4"
+    urgency: medium
+    workup:
+      - Stage 3a (GFR 45-59), stage 3b (GFR 30-44), stage 4 (GFR 15-29)
+      - Etiology determination - Diabetes (most common), hypertension, glomerulonephritis, polycystic kidney disease, obstructive uropathy
+      - Urinalysis - Proteinuria (albumin/creatinine ratio), hematuria, pyuria
+      - Renal ultrasound - Assess kidney size (small echogenic kidneys suggest chronic irreversible disease), rule out obstruction, screen for PKD
+      - Labs - BMP, CBC (anemia), lipid panel, PTH (secondary hyperparathyroidism), vitamin D (25-OH), calcium, phosphorus
+      - Stage annually with eGFR calculation (CKD-EPI equation using creatinine)
+      - Screen for complications - Anemia (Hgb <13 in men, <12 in women), CKD-MBD (mineral bone disease), metabolic acidosis (bicarb <22), hyperkalemia, volume overload
+    treatment:
+      - Slow progression (PRIORITY)
+      - BP control - Goal <130/80 (or <120/80 if proteinuria >1 g/day)
+      - ACE inhibitor (lisinopril 10-40mg daily) OR ARB (losartan 50-100mg daily) - FIRST-LINE, reduces proteinuria and slows progression (even if not hypertensive)
+      - Continue unless hyperkalemia (K >5.5) or acute rise in Cr >30%
+      - Add other antihypertensives as needed (amlodipine, chlorthalidone, beta-blocker)
+      - Glycemic control in diabetes - A1c goal <7% (or <8% if advanced CKD or elderly), SGLT2 inhibitors preferred (empagliflozin, dapagliflozin - renoprotective, slow GFR decline)
+      - Reduce proteinuria - ACE-I/ARB, SGLT2 inhibitor, finerenone (non-steroidal MRA, reduces albuminuria and CKD progression in diabetic CKD)
+      - Dietary modifications
+      - Low protein diet (0.6-0.8 g/kg/day) - May slow progression in stage 4-5, requires dietitian supervision
+      - Low sodium (<2 g/day) - Reduces BP, proteinuria
+      - Avoid nephrotoxins - NSAIDs, aminoglycosides, contrast dye (use iso-osmolar contrast if needed, pre-hydrate), proton pump inhibitors (AIN risk)
+      - Manage complications
+      - Anemia (Hgb <10) - Erythropoiesis-stimulating agents (epoetin alfa 50-100 units/kg SC 1-3x/week, titrate to Hgb 10-11 g/dL), IV iron if ferritin <100 or TSAT <20%
+      - CKD-MBD (secondary hyperparathyroidism) - Restrict dietary phosphorus (<800-1000mg/day), phosphate binders with meals (calcium acetate 667mg 2-3 tabs TID), active vitamin D (calcitriol 0.25-0.5 mcg daily) or vitamin D analogs (paricalcitol) if PTH >70 in stage 3 or >110 in stage 4
+      - Metabolic acidosis (bicarb <22) - Sodium bicarbonate 650mg PO TID, goal bicarb 23-29 (slows CKD progression)
+      - Hyperkalemia - Low potassium diet, stop K-sparing diuretics, patiromer or sodium zirconium cyclosilicate (K binders)
+      - Dyslipidemia - Statin for cardiovascular protection (high CV risk in CKD)
+      - Volume overload - Loop diuretics (furosemide 40-80mg daily or BID, increase dose as GFR declines), thiazides ineffective if GFR <30
+      - Nephrology referral
+      - Refer when GFR <30 OR rapidly declining GFR OR proteinuria >1 g/day OR uncertain etiology
+      - Early referral (GFR <30) improves outcomes and allows timely dialysis access planning
+      - Dialysis access planning - Place AV fistula when GFR 15-20 (takes 3-6 months to mature)
+      - Transplant evaluation - Refer when GFR <20
+      - Vaccinations - Hepatitis B (all CKD patients, required before dialysis), pneumococcal, influenza, COVID-19
+
+  - id: ckd_early
+    type: diagnosis
+    name: "CKD Stage 1-2 (Early CKD)"
+    icd10: "N18.2"
+    urgency: low
+    workup:
+      - Definition - GFR ≥60 mL/min with evidence of kidney damage (proteinuria, hematuria, structural abnormality on imaging, or pathologic diagnosis)
+      - Determine etiology - Diabetes, hypertension, glomerular disease, genetic (PKD), obstructive uropathy
+      - Urinalysis - Albumin/creatinine ratio (normal <30, microalbuminuria 30-300, macroalbuminuria >300)
+      - Imaging - Renal ultrasound
+      - Consider renal biopsy if - Unexplained proteinuria >1 g/day, hematuria with proteinuria, rapidly declining GFR
+    treatment:
+      - Prevent progression to advanced CKD
+      - Treat underlying cause - Optimize diabetes control (A1c <7%), BP control (<130/80)
+      - ACE inhibitor or ARB - For all patients with proteinuria or diabetes (even if normotensive), reduces progression
+      - SGLT2 inhibitors - In diabetes (empagliflozin 10-25mg daily, dapagliflozin 10mg daily), renoprotective
+      - Lifestyle modifications - Smoking cessation (critical), weight loss if obese, regular exercise, low sodium diet
+      - Avoid nephrotoxins - NSAIDs, contrast dye (use sparingly, pre-hydrate)
+      - Monitor - Annual eGFR and urine albumin/creatinine, adjust therapy based on progression
+      - Cardiovascular risk reduction - Statin (atorvastatin 20-40mg daily), aspirin if CAD
+      - Nephrology referral if proteinuria >1 g/day or GFR declining rapidly

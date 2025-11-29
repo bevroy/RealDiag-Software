@@ -1,0 +1,137 @@
+tree_id: RHEUM-SCLERODERMA
+name: Systemic Sclerosis (Scleroderma) Evaluation
+family: RHEUMATOLOGY
+specialty: Rheumatology, Pulmonology, Cardiology
+chief_complaint: Skin Thickening, Raynaud Phenomenon, Dyspnea, Dysphagia
+description: Evaluation and management of systemic sclerosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: scleroderma_evaluation
+
+nodes:
+  - id: scleroderma_evaluation
+    type: question
+    text: "Limited or diffuse cutaneous involvement?"
+    options:
+      - label: "Limited cutaneous systemic sclerosis (lcSSc)"
+        next: limited_scleroderma
+      - label: "Diffuse cutaneous systemic sclerosis (dcSSc)"
+        next: diffuse_scleroderma
+
+  - id: limited_scleroderma
+    type: diagnosis
+    name: "Limited Cutaneous Systemic Sclerosis"
+    icd10: "M34.1"
+    urgency: medium
+    workup:
+      - Limited cutaneous systemic sclerosis (lcSSc) - Skin thickening limited to hands, forearms, feet, face (distal to elbows/knees)
+      - Former "CREST syndrome" (Calcinosis, Raynaud, Esophageal dysmotility, Sclerodactyly, Telangiectasias) - subset of lcSSc
+      - Prevalence - 70% all systemic sclerosis cases
+      - More common women (3-4:1), peak age 40-50 years
+      - Pathophysiology - Autoimmune vasculopathy + fibrosis (endothelial injury → vascular damage + fibroblast activation → collagen deposition)
+      - Autoantibodies - Anticentromere antibody (ACA) 60-80% lcSSc (highly specific)
+      - Clinical features - Triad: Raynaud + skin thickening + internal organ involvement
+      - Raynaud phenomenon - Nearly universal (95%), often FIRST manifestation (years before other features)
+      - Cold-induced vasospasm → triphasic color change (white/blue/red), fingers/toes
+      - Distinguished from primary Raynaud (no underlying disease) by nailfold capillary abnormalities, digital ulcers, autoantibodies
+      - Skin - Distal only (fingers, hands, forearms, face)
+      - Sclerodactyly - Thickening/tightening skin of fingers (tapered, waxy, shiny), limited range motion
+      - Facial - Tight skin, reduced oral aperture (microstomia), beaked nose, radial furrowing perioral
+      - Calcinosis cutis - Calcium deposits subcutaneous (fingertips, elbows, knees), can ulcerate (painful, infected)
+      - Telangiectasias - Mat-like telangiectasias face, hands, lips, tongue
+      - GI - Esophageal dysmotility most common (80-90%)
+      - GERD, dysphagia (lower esophageal sphincter dysfunction, aperistalsis lower 2/3 esophagus), Barrett esophagus, strictures
+      - Gastroparesis, small bowel dysmotility (bacterial overgrowth, malabsorption), colonic involvement (constipation, pseudo-obstruction)
+      - Pulmonary - Pulmonary arterial hypertension (PAH) 10-15% (most important cause mortality lcSSc)
+      - Dyspnea, fatigue, chest pain
+      - Screening ESSENTIAL (annual TTE, PFT with DLCO)
+      - Interstitial lung disease (ILD) less common than dcSSc (20-30%), but can occur
+      - Cardiac - Less common (pericarditis, arrhythmias, cardiomyopathy)
+      - Renal - Scleroderma renal crisis RARE in lcSSc (<5%, vs. 10-15% dcSSc)
+      - Physical exam - Skin thickening distal extremities, sclerodactyly, facial tightening, telangiectasias, calcinosis, digital ulcers/pitting scars
+      - Modified Rodnan Skin Score (mRSS) - Palpate 17 body areas, score 0-3 each (0 = normal, 1 = mild thickening, 2 = moderate, 3 = severe/unable to pinch)
+      - Maximum 51 (typically <20 in lcSSc, >20 in dcSSc)
+      - Labs - Autoantibodies
+      - ANA positive 95% (speckled or nucleolar pattern)
+      - Anticentromere (ACA) 60-80% lcSSc, associated PAH risk
+      - Anti-Scl-70 (anti-topoisomerase I) - Rare in lcSSc (associated dcSSc, ILD)
+      - Anti-RNA polymerase III - Rare in lcSSc (associated dcSSc, renal crisis)
+      - Imaging
+      - HRCT chest - Screen for ILD (ground-glass opacities, reticular pattern, traction bronchiectasis), nonspecific interstitial pneumonia (NSIP) most common pattern
+      - Echocardiogram - Estimate pulmonary artery systolic pressure (PASP), screen for PAH (PASP >40 mmHg or elevated RV systolic pressure)
+      - Right heart catheterization - Confirm PAH (mean PA pressure ≥25 mmHg, PCWP ≤15, PVR ≥3 Wood units)
+      - PFTs - Reduced DLCO (earliest sign PAH or ILD), restrictive pattern if ILD (reduced FVC, FEV1, TLC)
+      - Barium swallow or esophageal manometry - Esophageal dysmotility (aperistalsis)
+      - Nailfold capillaroscopy - Dilated capillary loops, capillary loss (distinguishes from primary Raynaud)
+    treatment:
+      - No disease-modifying therapy (treat organ-specific complications)
+      - Raynaud phenomenon - Avoid cold, stress; smoking cessation
+      - Calcium channel blockers - Nifedipine 30-90 mg daily or amlodipine 5-10 mg (first-line, reduce frequency/severity attacks)
+      - Phosphodiesterase-5 inhibitors (PDE5i) - Sildenafil, tadalafil (if CCB inadequate or digital ulcers)
+      - Endothelin receptor antagonists - Bosentan (severe, prevents digital ulcers)
+      - Prostacyclin analogues - Iloprost IV (severe, refractory)
+      - Digital ulcers - Wound care, antibiotics if infected, PDE5i or endothelin antagonists (healing, prevention)
+      - GERD/esophageal - PPI high-dose (omeprazole 40 mg BID or equivalent), elevate head of bed, prokinetics (metoclopramide) if gastroparesis
+      - Surveillance EGD for Barrett esophagus
+      - Pulmonary arterial hypertension - PAH-specific therapy
+      - Endothelin receptor antagonists (ERAs) - Bosentan, ambrisentan, macitentan (reduce endothelin-mediated vasoconstriction, first-line)
+      - PDE5 inhibitors - Sildenafil, tadalafil (vasodilation)
+      - Prostacyclin pathway - Epoprostenol IV (most effective, severe), treprostinil (SQ/IV/inhaled), selexipag (oral)
+      - Combination therapy often required
+      - Diuretics, oxygen
+      - Lung transplant if refractory
+      - Interstitial lung disease - If progressive or extensive (>20% lung involvement)
+      - Mycophenolate mofetil 1.5-3 g/day (first-line, SLS II trial improved FVC)
+      - Cyclophosphamide IV (alternative, more toxic)
+      - Nintedanib (antifibrotic tyrosine kinase inhibitor, approved 2020 for SSc-ILD, slows FVC decline)
+      - Prognosis - Better than dcSSc (10-year survival 70-80%)
+      - PAH most important mortality determinant (5-year survival 50% if untreated)
+      - Surveillance - Annual TTE + PFT with DLCO (screen for PAH/ILD), BP monitoring (renal crisis)
+
+  - id: diffuse_scleroderma
+    type: diagnosis
+    name: "Diffuse Cutaneous Systemic Sclerosis"
+    icd10: "M34.0"
+    urgency: high
+    workup:
+      - Diffuse cutaneous systemic sclerosis (dcSSc) - Skin thickening proximal to elbows/knees, trunk, abdomen
+      - More severe, rapid progression, higher internal organ involvement early
+      - Prevalence - 30% all systemic sclerosis
+      - Autoantibodies - Anti-Scl-70 (anti-topoisomerase I) 30-40% dcSSc, associated ILD
+      - Anti-RNA polymerase III 20-25% dcSSc, associated scleroderma renal crisis (SRC)
+      - Clinical features - Similar to lcSSc but more extensive/severe
+      - Skin - Proximal extremities + trunk (Modified Rodnan Skin Score typically >20)
+      - Rapid progression first 3-5 years (then plateau or improve)
+      - Puffy hands early (edema phase) → thickening/induration
+      - Contractures (flexion contractures fingers, reduced mouth opening)
+      - Hyperpigmentation, hypopigmentation ("salt and pepper")
+      - Raynaud - Present but may occur closer to onset skin changes (vs. years before in lcSSc)
+      - Pulmonary - Interstitial lung disease (ILD) 40-60% (most common cause death dcSSc)
+      - Dyspnea, dry cough
+      - HRCT - NSIP pattern most common (ground-glass, reticular), or UIP pattern (honeycomb)
+      - Renal - Scleroderma renal crisis (SRC) 10-15% dcSSc, MEDICAL EMERGENCY
+      - Acute onset hypertension (often severe, >180/120), acute kidney injury (oliguria, rising creatinine), microangiopathic hemolytic anemia (schistocytes), thrombocytopenia
+      - Usually within 4 years disease onset
+      - Risk factors - Diffuse skin involvement, anti-RNA polymerase III, rapid skin progression, new cardiac events, GLUCOCORTICOIDS (avoid high-dose steroids >15 mg/day prednisone)
+      - Cardiac - More common than lcSSc (myocardial fibrosis, arrhythmias, pericarditis, heart failure)
+      - GI - Similar to lcSSc (esophageal dysmotility, gastroparesis, bacterial overgrowth, pseudo-obstruction)
+      - Musculoskeletal - Inflammatory arthritis, myopathy, tendon friction rubs (palpable crepitus, highly specific for dcSSc)
+    treatment:
+      - Immunosuppression - For progressive skin disease or organ involvement
+      - Methotrexate 15-25 mg weekly - Skin improvement, not proven for ILD
+      - Mycophenolate mofetil 2-3 g/day - First-line for ILD (SLS II trial)
+      - Cyclophosphamide IV monthly x 6-12 months - Alternative for ILD (SLS I trial)
+      - Tocilizumab (IL-6 inhibitor) - Emerging (focuSSced trial showed skin improvement, ILD stabilization)
+      - Hematopoietic stem cell transplantation (HSCT) - Severe, rapidly progressive dcSSc
+      - Ablate immune system with high-dose chemotherapy, rescue with autologous stem cells
+      - ASTIS trial - Improved survival vs. cyclophosphamide (but 10% treatment-related mortality, select centers only)
+      - Interstitial lung disease - Same as lcSSc (mycophenolate or cyclophosphamide + nintedanib)
+      - Scleroderma renal crisis - URGENT ACE inhibitor (captopril 6.25-25 mg TID or equivalent, titrate rapidly to control BP)
+      - ACE inhibitor LIFE-SAVING (mortality reduced from 80% to 20%)
+      - Avoid stopping ACE inhibitor even if creatinine rises initially
+      - Dialysis if needed (50% recover renal function within 18 months)
+      - AVOID glucocorticoids >15 mg/day prednisone (precipitate SRC)
+      - Prognosis - 10-year survival 50-70% (worse than lcSSc)
+      - ILD and SRC most important mortality causes
+      - Skin may stabilize/improve after 3-5 years

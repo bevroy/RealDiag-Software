@@ -1,0 +1,91 @@
+tree_id: PEDS-FAILURE-TO-THRIVE
+name: Pediatric Failure to Thrive Evaluation
+family: PEDIATRICS
+specialty: Pediatrics
+chief_complaint: Poor Weight Gain, Growth Delay
+description: Evaluation and management of failure to thrive in children
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: failure_to_thrive_evaluation
+
+nodes:
+  - id: failure_to_thrive_evaluation
+    type: diagnosis
+    name: "Failure to Thrive (FTT)"
+    icd10: "R62.51"
+    urgency: medium
+    workup:
+      - Definition - Inadequate weight gain or growth in children <2 years old
+      - Criteria (any one)
+      - Weight for age <3rd or 5th percentile (or <2 standard deviations below mean)
+      - Weight for length <3rd or 5th percentile
+      - Decrease in weight crossing ≥2 major percentile lines on growth chart (50th to 10th)
+      - Weight <80% ideal body weight for age/length
+      - Classification
+      - Inadequate caloric intake (most common 60-80%)
+      - Inadequate caloric absorption (GI malabsorption)
+      - Increased caloric requirements (chronic disease)
+      - Defective caloric utilization (metabolic disorders)
+      - Common causes - "NOT GROWING"
+      - Neglect/poverty/food insecurity (psychosocial, most common overall 50%)
+      - Oral-motor dysfunction (cerebral palsy, cleft palate, poor latch)
+      - Tumor/malignancy (rare)
+      - GI disorders (GERD, celiac disease, cow milk protein allergy, chronic diarrhea, malabsorption CF)
+      - Renal disease (CKD, RTA)
+      - Obesity (parents overweight underfeeding infant)
+      - Worms/parasites (Giardia)
+      - Infection (chronic, TB, HIV, recurrent infections)
+      - Neurologic (CP, developmental delay, swallowing dysfunction)
+      - Genetic/syndromic (Down, Turner, Prader-Willi)
+      - History - CRITICAL, detailed
+      - Dietary history (24-hour recall, feeding schedule, formula preparation errors - over-dilution common, breastfeeding adequacy, juice/water excess)
+      - Caloric intake estimation (should be ~100 kcal/kg/day infants)
+      - Feeding behaviors (length of feeds, choking/gagging, food refusal, picky eating)
+      - Vomiting, diarrhea, stool patterns (fat malabsorption - bulky, foul, floating)
+      - Developmental milestones
+      - Birth history (prematurity, IUGR)
+      - Family dynamics, stressors, poverty, parental mental health (depression, substance abuse)
+      - Physical exam
+      - Accurate measurements - Weight, length/height, head circumference (plot on growth chart, review trends)
+      - Underweight but normal linear growth and head circumference → inadequate intake most likely
+      - Weight AND length/height low, head circumference normal → chronic inadequate intake or systemic disease
+      - All three low (microcephaly) → genetic/congenital disorder, severe malnutrition
+      - Assess for organic disease - Dysmorphic features, developmental delay, signs of neglect/abuse, cardiopulmonary abnormalities, abdominal masses, oral/dental pathology
+      - Labs - NOT routinely needed if psychosocial FTT suspected (diagnosis by observation of adequate weight gain with increased intake)
+      - Initial if organic suspected - CBC (anemia - iron deficiency, chronic disease), CMP (renal function, electrolytes), urinalysis (UTI, RTA)
+      - Celiac screening - Tissue transglutaminase IgA + total IgA (if age >6 months)
+      - Stool studies - Ova and parasites, stool culture, reducing substances (carbohydrate malabsorption), fecal elastase (pancreatic insufficiency CF)
+      - Extended workup if indicated - TSH (hypothyroidism), sweat chloride test (CF), HIV, TB testing, genetic testing, developmental evaluation
+    treatment:
+      - Nutritional rehabilitation - PRIMARY treatment
+      - Calculate caloric needs - "Catch-up" growth requires MORE than typical 100 kcal/kg/day
+      - Formula - 120-150 kcal/kg/day (based on ideal weight for length, not actual weight)
+      - "Ideal weight" = 50th percentile weight for current length
+      - Increase caloric density
+      - Breast milk/formula - Add calories (concentrate formula from 20 kcal/oz to 24-30 kcal/oz by adding less water or adding powder)
+      - Fortify breast milk - Add formula powder or breast milk fortifier
+      - Solid foods - High-calorie options (avocado, nut butters, whole milk dairy, oils)
+      - Nutritional supplements - Pediasure, Boost Kid Essentials (30 kcal/oz)
+      - Frequent feeds - Small frequent meals/feeds (q2-3h infants)
+      - Feeding strategies
+      - Structured feeding schedule, limit distractions (TV off), 20-30 min meal duration
+      - Positive reinforcement, avoid force-feeding (counterproductive)
+      - Occupational therapy - If oral-motor dysfunction, feeding aversion
+      - Address underlying cause
+      - Psychosocial - Social work, WIC (Women Infants Children program), food assistance, parental education, mental health support (postpartum depression), possible child protective services if neglect
+      - Medical - Treat GERD (PPI), celiac (gluten-free diet), food allergies (elimination diet), infection (antibiotics), constipation (laxatives)
+      - Developmental - Early intervention services
+      - Monitoring - Close follow-up
+      - Weekly weight checks initially (gain 20-30 g/day expected in infants <3 months, 15-20 g/day 3-6 months)
+      - Goal - Return to previous growth trajectory (cross percentiles back upward)
+      - Adjust calories based on response
+      - Hospitalization - Indications
+      - Severe malnutrition (weight <70% ideal, signs of kwashiorkor/marasmus)
+      - Acute life-threatening condition (dehydration, hypoglycemia)
+      - Failure outpatient management, suspected abuse/neglect (document weight gain with adequate intake)
+      - Complex medical condition
+      - Refeeding syndrome risk - Severe malnutrition, electrolyte shifts (hypophosphatemia, hypokalemia, hypomagnesemia) with rapid refeeding
+      - Monitor electrolytes closely, start calories conservatively (50-75% needs), advance slowly
+      - Supplement phosphorus, potassium, magnesium
+      - Prognosis - Most cases (80-90%) improve with nutritional intervention, catch-up growth within 3-6 months if adequate intake, early intervention better outcomes (cognitive development may be affected if prolonged severe malnutrition)

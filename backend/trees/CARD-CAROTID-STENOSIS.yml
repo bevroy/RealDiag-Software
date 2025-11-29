@@ -1,0 +1,125 @@
+tree_id: CARD-CAROTID-STENOSIS
+name: Carotid Stenosis Evaluation
+family: CARDIOLOGY
+specialty: Vascular Surgery, Neurology, Cardiology
+chief_complaint: Transient Ischemic Attack, Stroke, Asymptomatic Carotid Bruit
+description: Evaluation and management of carotid artery stenosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: carotid_stenosis_evaluation
+
+nodes:
+  - id: carotid_stenosis_evaluation
+    type: question
+    text: "Symptomatic or asymptomatic?"
+    options:
+      - label: "Symptomatic carotid stenosis"
+        next: symptomatic_stenosis
+      - label: "Asymptomatic carotid stenosis"
+        next: asymptomatic_stenosis
+
+  - id: symptomatic_stenosis
+    type: diagnosis
+    name: "Symptomatic Carotid Stenosis"
+    icd10: "I65.21"
+    urgency: critical
+    workup:
+      - Symptomatic carotid stenosis - Carotid atherosclerotic stenosis with recent ipsilateral neurologic symptoms
+      - Symptoms - TIA or stroke in ipsilateral carotid territory (within 6 months)
+      - High risk recurrent stroke (10-20% within 90 days if untreated)
+      - Carotid artery anatomy - Common carotid bifurcates into internal (to brain) and external (to face/scalp) carotid arteries
+      - Stenosis most commonly at carotid bifurcation (turbulent flow, atherosclerosis)
+      - Pathophysiology - Stroke mechanisms
+      - Artery-to-artery embolism - Plaque rupture → thrombus forms → emboli break off → travel to intracranial vessels (most common mechanism)
+      - Hemodynamic (low-flow) - Severe stenosis (>90%) → inadequate perfusion during hypotension
+      - Thrombotic occlusion - Complete carotid occlusion
+      - TIA vs. stroke - TIA symptoms resolve <24 hours (most <1 hour), stroke persistent deficit
+      - Symptoms ipsilateral carotid territory
+      - Left ICA - Right hemiparesis, right hemisensory loss, aphasia (if dominant hemisphere)
+      - Right ICA - Left hemiparesis, left hemisensory loss, neglect (if non-dominant)
+      - Amaurosis fugax - Transient monocular vision loss ("curtain coming down"), ipsilateral eye (ophthalmic artery from ICA)
+      - Physical exam - Carotid bruit (but 40% stenoses have NO bruit, bruit may disappear if >90% or occluded)
+      - Imaging
+      - Carotid duplex ultrasound - First-line screening, noninvasive
+      - Measures peak systolic velocity (PSV), end-diastolic velocity (EDV)
+      - 50-69% stenosis - PSV 125-230 cm/s
+      - 70-99% stenosis - PSV >230 cm/s, EDV >100 cm/s
+      - Sensitivity/specificity 85-90% (operator-dependent)
+      - CTA (CT angiography) or MRA (MR angiography) - Confirmatory, pre-operative planning
+      - Visualize plaque morphology, degree stenosis, intracranial vessels
+      - CTA faster, better spatial resolution; MRA no contrast/radiation
+      - Digital subtraction angiography (DSA) - Gold standard, but invasive (1% stroke risk)
+      - Reserved for discrepant non-invasive tests
+      - Stenosis grading - NASCET (North American Symptomatic Carotid Endarterectomy Trial) criteria
+      - % stenosis = (1 - [diameter at stenosis / diameter normal distal ICA]) x 100
+      - Mild <50%, moderate 50-69%, severe 70-99%
+      - Brain imaging - CT or MRI brain to confirm infarct, rule out hemorrhage, assess infarct size
+    treatment:
+      - Medical management - ALL patients (symptomatic and asymptomatic)
+      - Antiplatelet therapy - Aspirin 81-325 mg daily OR clopidogrel 75 mg daily
+      - Dual antiplatelet (aspirin + clopidogrel) x 21-90 days if minor stroke/high-risk TIA (then single agent)
+      - High-intensity statin - Atorvastatin 40-80 mg or rosuvastatin 20-40 mg
+      - LDL <70 mg/dL
+      - Plaque stabilization (reduce rupture risk)
+      - Antihypertensive - BP <140/90 (chronic); in acute stroke avoid aggressive lowering (maintain perfusion)
+      - Diabetes control, smoking cessation
+      - Carotid endarterectomy (CEA) - Surgical removal of plaque, GOLD STANDARD
+      - Indications - Symptomatic stenosis ≥50% (especially ≥70%)
+      - Timing - URGENT within 2 weeks of symptom onset (greatest benefit)
+      - Delay if large stroke (>1/3 MCA territory, risk hemorrhagic transformation)
+      - NASCET trial - CEA reduced 2-year stroke risk from 26% to 9% (symptomatic ≥70% stenosis)
+      - CEA reduced stroke from 22% to 16% (symptomatic 50-69% stenosis, more modest benefit)
+      - Technique - Longitudinal arteriotomy, plaque removal, patch closure (vein or prosthetic)
+      - Perioperative stroke/death risk 5-6% (acceptable if experienced surgeon <6%)
+      - Benefits outweigh risks if stenosis ≥50%
+      - Contraindications - Total occlusion (no benefit), severe comorbidities (life expectancy <5 years)
+      - Carotid artery stenting (CAS) - Endovascular, percutaneous
+      - Indications - Alternative to CEA
+      - High surgical risk (age >80, severe cardiac/pulmonary disease, contralateral laryngeal nerve palsy, prior neck radiation/surgery, recurrent stenosis post-CEA)
+      - Anatomic high risk for CEA (high bifurcation, contralateral occlusion)
+      - Technique - Femoral or radial access, guidewire across stenosis, balloon angioplasty, stent deployment, embolic protection device (filter to capture debris)
+      - CREST trial - CEA vs CAS comparable overall stroke/MI/death rates 4-year follow-up
+      - CAS higher periprocedural stroke (4.1% vs 2.3%), CEA higher MI (2.3% vs 1.1%)
+      - Restenosis higher with CAS (6-7% vs 3% CEA)
+      - Dual antiplatelet - Aspirin + clopidogrel ≥3 days before procedure, continue 1-3 months post-stent, then single agent
+      - Timing of intervention
+      - TIA or minor stroke - CEA/CAS within 2 weeks (ideally <7 days), maximum benefit early
+      - Moderate-large stroke - Delay 4-6 weeks (allow stabilization, reduce hemorrhagic transformation risk)
+      - Crescendo TIA - URGENT CEA (recurrent symptoms, high-risk plaque)
+
+  - id: asymptomatic_stenosis
+    type: diagnosis
+    name: "Asymptomatic Carotid Stenosis"
+    icd10: "I65.21"
+    urgency: low
+    workup:
+      - Asymptomatic carotid stenosis - Stenosis with NO ipsilateral neurologic symptoms (ever or within past 6 months)
+      - Often discovered incidentally (carotid bruit on exam, imaging for other reasons)
+      - Natural history - Annual stroke risk 1-2% (with medical therapy)
+      - Lower than symptomatic stenosis (but not zero)
+      - Screening - NOT recommended general population (USPSTF grade D)
+      - High rate false positives, harms of intervention may outweigh benefits
+      - May consider selective screening if multiple risk factors (age >65, hypertension, diabetes, smoking, known coronary/peripheral artery disease)
+      - Imaging - Same as symptomatic (duplex ultrasound, CTA/MRA)
+    treatment:
+      - Medical management - FIRST-LINE for asymptomatic stenosis
+      - Optimal medical therapy has reduced stroke rates (now 1% per year vs. 2-3% historically)
+      - Antiplatelet - Aspirin 81-325 mg daily
+      - High-intensity statin - Atorvastatin 40-80 mg, LDL <70
+      - BP control <140/90, diabetes control, smoking cessation
+      - Carotid endarterectomy (CEA) - Consider if very high-grade stenosis + low surgical risk
+      - Indications - Asymptomatic stenosis 70-99% in select patients
+      - Life expectancy >5 years, perioperative stroke/death risk <3% (experienced surgeon), patient preference
+      - ACAS trial - CEA reduced 5-year stroke risk from 11% to 5.1% (asymptomatic 60-99% stenosis)
+      - Benefit modest (NNT ~20 to prevent 1 stroke over 5 years)
+      - Perioperative risk 2.3% (stroke/death) must be balanced against natural history 1-2% annual risk
+      - Many patients managed medically alone (especially if surgical risk higher, patient preference)
+      - Shared decision-making ESSENTIAL
+      - Contraindications - Age >80 (surgical risk outweighs benefit), significant comorbidities, life expectancy <5 years
+      - Carotid artery stenting (CAS) - Generally NOT preferred for asymptomatic (higher periprocedural stroke risk than CEA, no proven benefit over medical therapy)
+      - May consider if high surgical risk AND stenosis ≥80%
+      - Surveillance - Duplex ultrasound every 6-12 months if severe stenosis (monitor progression)
+      - Annual if moderate stenosis
+      - Progression to symptoms → treat as symptomatic
+      - Progression to near-occlusion (>99%, "string sign") → higher stroke risk, consider intervention

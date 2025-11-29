@@ -1,0 +1,161 @@
+tree_id: HEME-THROMBOCYTOPENIA
+name: Thrombocytopenia Evaluation
+family: HEMATOLOGY
+specialty: Hematology, Internal Medicine
+chief_complaint: Low Platelet Count, Bleeding, Bruising, Petechiae
+description: Comprehensive evaluation of thrombocytopenia causes and management
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: thrombocytopenia_evaluation
+
+nodes:
+  - id: thrombocytopenia_evaluation
+    type: question
+    text: "Severity and clinical context?"
+    options:
+      - label: "Immune thrombocytopenia (ITP)"
+        next: immune_thrombocytopenia
+      - label: "Thrombotic microangiopathy (TTP/HUS)"
+        next: thrombotic_microangiopathy
+      - label: "Drug-induced or other causes"
+        next: drug_induced_thrombocytopenia
+
+  - id: immune_thrombocytopenia
+    type: diagnosis
+    name: "Immune Thrombocytopenia (ITP)"
+    icd10: "D69.3"
+    urgency: high
+    workup:
+      - ITP - Autoantibody-mediated platelet destruction, diagnosis of exclusion
+      - Isolated thrombocytopenia (platelets <100K, usually <50K), normal Hgb/WBC, no splenomegaly
+      - Primary ITP - Idiopathic (no underlying cause)
+      - Secondary ITP - Associated with autoimmune disease (SLE, antiphospholipid syndrome), infections (HIV, HCV, H. pylori), medications, lymphoproliferative disorders (CLL)
+      - Clinical presentation - Mucocutaneous bleeding (petechiae, purpura, epistaxis, gingival bleeding, menorrhagia), bruising, typically no systemic symptoms
+      - Severe - Platelets <10K, risk ICH (<1% but life-threatening)
+      - Pediatric ITP - Often post-viral, acute onset, self-limited (80% resolve within 6 months)
+      - Adult ITP - More chronic, insidious onset, female predominance
+      - Workup - Exclude other causes
+      - CBC with differential - Isolated thrombocytopenia, normal Hgb/WBC (if anemic or leukopenia, consider SLE, marrow disorder)
+      - Peripheral smear - Decreased platelets, large platelets (young), NO schistocytes (exclude TTP/HUS)
+      - HIV, HCV testing - Secondary ITP
+      - H. pylori testing - Eradication improves platelets 50% cases
+      - Direct antiglobulin test (DAT/Coombs) - If anemia, exclude Evans syndrome (ITP + AIHA)
+      - Bone marrow biopsy - NOT routinely needed, consider if age >60, atypical features (splenomegaly, cytopenias), no response to treatment (rule out MDS, leukemia, aplastic anemia)
+      - Increased megakaryocytes (compensatory production)
+    treatment:
+      - Observation - If platelets >30K and no/minimal bleeding (asymptomatic)
+      - Many tolerate platelets 20-30K without treatment
+      - Avoid contact sports, aspirin/NSAIDs, IM injections
+      - First-line treatment - If platelets <30K or bleeding
+      - Corticosteroids - Prednisone 1 mg/kg/day (max 80 mg) x 2-4 weeks, taper over 4-6 weeks
+      - Response 70-80% (platelets rise within 3-7 days, peak 1-2 weeks)
+      - Relapse common during taper (50%)
+      - Dexamethasone 40 mg PO daily x 4 days - Alternative (pulse therapy, may have more durable response)
+      - IVIg (intravenous immunoglobulin) - 1 g/kg x 1-2 days OR 0.4 g/kg daily x 5 days
+      - Rapid response (24-48 hours), short duration (2-4 weeks)
+      - Expensive, reserve for bleeding, pre-procedure, or need rapid increase
+      - Anti-D (WinRho) - Rh-positive, non-splenectomized patients, 50-75 mcg/kg IV x 1
+      - Response 80%, causes mild hemolysis (monitor), risk severe hemolysis/DIC (black box warning)
+      - Second-line treatment - If relapse, steroid-dependent, or no response to steroids
+      - Splenectomy - Definitive, 60-70% long-term remission (cure)
+      - Laparoscopic preferred
+      - Pre-op vaccinations (2 weeks prior) - Pneumococcal, H. influenzae, meningococcal
+      - Risks - Surgical (bleeding, thrombosis), OPSI (long-term infection risk 0.1-0.4%/year)
+      - TPO receptor agonists (thrombopoietin mimetics) - Stimulate platelet production
+      - Romiplostim (Nplate) 1-10 mcg/kg SC weekly - Titrate to platelets 50-150K
+      - Eltrombopag (Promacta) 25-75 mg PO daily
+      - Response 70-80%, avoid splenectomy, well-tolerated
+      - Indefinite duration (many relapse if stopped)
+      - Rituximab (anti-CD20 mAb) - 375 mg/m² weekly x 4 doses
+      - Response 60%, median duration 1-2 years, delays need for splenectomy
+      - Immunosuppressants - Azathioprine, mycophenolate, cyclosporine (third-line, if above fail)
+      - Emergency treatment - Severe bleeding or ICH (platelets any level)
+      - High-dose methylprednisolone 1 g IV daily x 3 days
+      - IVIg 1 g/kg daily x 2 days
+      - Platelet transfusion (usually ineffective, destroyed rapidly, but give if life-threatening hemorrhage)
+      - Emergent splenectomy if uncontrolled hemorrhage
+      - H. pylori eradication - If positive, improves platelets 50% (triple or quadruple therapy)
+
+  - id: thrombotic_microangiopathy
+    type: diagnosis
+    name: "Thrombotic Microangiopathy (TTP/HUS)"
+    icd10: "M31.1"
+    urgency: critical
+    workup:
+      - TMA - Microangiopathic hemolytic anemia (MAHA) + thrombocytopenia + organ dysfunction
+      - Pathophysiology - Endothelial injury → platelet adhesion/aggregation → microthrombi → RBC fragmentation (schistocytes) + organ ischemia
+      - TTP (thrombotic thrombocytopenic purpura) - ADAMTS13 deficiency (<10% activity)
+      - Congenital (rare) - ADAMTS13 gene mutation
+      - Acquired (most common) - Autoantibody against ADAMTS13 (inhibitor)
+      - ADAMTS13 cleaves von Willebrand factor multimers → deficiency → ultra-large vWF multimers → platelet clumping
+      - Classic pentad (only 5% have all five)
+      - Thrombocytopenia (platelets <30K, often <10K)
+      - MAHA - Hemolytic anemia (Hgb 7-9), schistocytes on smear, elevated LDH (>1000), low haptoglobin, indirect hyperbilirubinemia, negative Coombs
+      - Neurologic symptoms - Headache, confusion, seizures, stroke, coma (60%)
+      - Renal impairment - Cr elevated (50%), but less severe than HUS
+      - Fever (30%)
+      - Triggers - Idiopathic (50%), medications (ticlopidine, clopidogrel, quinine, chemotherapy), pregnancy, HIV, autoimmune disease, malignancy
+      - HUS (hemolytic uremic syndrome) - MAHA + thrombocytopenia + AKI (Cr >1.5)
+      - Typical HUS (90% children) - Shiga-toxin producing E. coli (O157:H7) or Shigella, diarrhea (bloody) prodrome 5-10 days prior
+      - Atypical HUS (10%) - Complement dysregulation (mutations in complement regulatory proteins), no diarrhea prodrome, worse prognosis, high recurrence
+      - Diagnosis
+      - CBC - Severe thrombocytopenia, anemia
+      - Peripheral smear - Schistocytes (helmet cells, fragmented RBCs) >1% confirms MAHA
+      - LDH markedly elevated (>1000), haptoglobin undetectable, indirect bilirubin elevated
+      - Coombs negative (not immune hemolysis)
+      - Cr/BUN - Renal function (HUS more severe renal, TTP more neuro)
+      - ADAMTS13 activity and inhibitor - Send BEFORE plasmapheresis (but do NOT wait for results to start treatment)
+      - <10% activity with inhibitor = acquired TTP
+      - <10% activity without inhibitor = congenital TTP
+      - Stool culture, Shiga toxin - If diarrhea (typical HUS)
+      - Differential - DIC (PT/PTT prolonged, fibrinogen low, D-dimer elevated in DIC; normal in TTP/HUS), severe sepsis, malignant hypertension, HELLP syndrome (pregnancy), drug toxicity
+    treatment:
+      - TTP - MEDICAL EMERGENCY, 90% mortality if untreated, <10% with plasmapheresis
+      - Plasma exchange (plasmapheresis) - First-line, IMMEDIATELY (do NOT wait for ADAMTS13 results)
+      - 1-1.5 plasma volumes daily until platelets >150K x 2 days and LDH normalizing
+      - Removes autoantibody, replenishes ADAMTS13
+      - Mortality <10% with early treatment, 80-90% response
+      - Corticosteroids - Prednisone 1 mg/kg/day or methylprednisolone 1 g IV daily x 3 days
+      - Adjunct to plasmapheresis (immunosuppression)
+      - Rituximab - 375 mg/m² weekly x 4 doses
+      - Adjunct to plasmapheresis, reduces relapses, faster remission
+      - Caplacizumab (anti-vWF nanobody) - 10 mg IV then 10 mg SC daily
+      - FDA-approved 2019, blocks vWF binding to platelets, faster platelet recovery, reduces TTP-related death/recurrence
+      - Given with plasmapheresis + immunosuppression
+      - Avoid platelet transfusion - Contraindicated (can worsen thrombosis), unless life-threatening hemorrhage
+      - Supportive - Transfuse PRBCs if Hgb <7, dialysis if AKI
+      - Refractory TTP - Splenectomy, cyclophosphamide, cyclosporine, vincristine
+      - Typical HUS (Shiga-toxin) - Supportive care (no plasmapheresis, no antibiotics)
+      - Hydration, transfusions, dialysis if severe AKI (50% require temporary dialysis)
+      - Eculizumab NOT effective for Shiga-toxin HUS
+      - Antibiotics CONTRAINDICATED (increase toxin release, worse outcomes)
+      - Prognosis - 90-95% recovery, 5% ESRD
+      - Atypical HUS - Eculizumab (anti-C5 mAb)
+      - Blocks terminal complement, 80-90% response
+      - Lifelong therapy (high recurrence if stopped)
+      - Meningococcal vaccine required before starting (or give prophylactic antibiotics)
+      - Plasma exchange less effective than TTP (but may use acutely while awaiting eculizumab)
+
+  - id: drug_induced_thrombocytopenia
+    type: diagnosis
+    name: "Drug-Induced and Other Thrombocytopenia"
+    icd10: "D69.59"
+    urgency: medium
+    workup:
+      - Drug-induced thrombocytopenia - Immune or non-immune mechanisms
+      - Common culprits - Heparin (HIT), quinine, quinidine, sulfonamides, vancomycin, linezolid, valproic acid, carbamazepine, chemotherapy (dose-dependent)
+      - Heparin-induced thrombocytopenia (HIT) - Type II, immune-mediated (antibodies against PF4-heparin complex), paradoxical THROMBOSIS risk 50%
+      - Platelets drop >50% from baseline, nadir 20-150K (usually NOT severe), onset 5-10 days after heparin exposure (earlier if prior exposure within 100 days)
+      - Complications - DVT, PE, arterial thrombosis, limb ischemia, skin necrosis at injection sites
+      - 4Ts score - Pre-test probability (Thrombocytopenia severity, Timing, Thrombosis, oTher causes)
+      - Low score <4 - Unlikely HIT
+      - Intermediate 4-5 or High ≥6 - Test for HIT antibodies (PF4 ELISA), functional assay (serotonin release assay SRA)
+      - Treatment HIT - STOP all heparin (including flushes), alternative anticoagulation (argatroban, bivalirudin, fondaparinux, DOAC), do NOT give platelets, do NOT give warfarin acutely (until platelets >150K, risk warfarin-induced skin necrosis)
+      - Other drug-induced - Stop offending drug, platelets recover 5-10 days (quinine/quinidine rapid recovery, gold/sulfonamides slower)
+      - Pseudothrombocytopenia - EDTA-dependent platelet clumping (lab artifact)
+      - Platelets normal on peripheral smear, repeat CBC in citrate or heparin tube (normal count)
+      - Gestational thrombocytopenia - Mild (platelets 70-150K), third trimester, benign (mother and baby safe), no treatment needed
+      - Most common cause thrombocytopenia in pregnancy (70%)
+      - Distinguish from preeclampsia/HELLP (HTN, proteinuria, liver dysfunction)
+      - Other causes - Hypersplenism (cirrhosis, portal hypertension - platelets 50-100K, pancytopenia), bone marrow disorders (leukemia, MDS, aplastic anemia - cytopenias, abnormal WBC/RBC), vitamin B12/folate deficiency (macrocytic anemia + thrombocytopenia), infections (HIV, HCV, sepsis, viral), alcohol (direct marrow suppression)

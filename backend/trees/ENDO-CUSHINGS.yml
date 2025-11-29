@@ -1,0 +1,130 @@
+tree_id: ENDO-CUSHINGS
+name: Cushing Syndrome Evaluation
+family: ENDOCRINOLOGY
+specialty: Endocrinology, Internal Medicine
+chief_complaint: Weight Gain, Moon Face, Easy Bruising, Weakness
+description: Comprehensive evaluation and differential diagnosis of Cushing syndrome
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: cushings_presentation
+
+nodes:
+  - id: cushings_presentation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Suspected Cushing syndrome - screening"
+        next: cushings_screening
+      - label: "Confirmed hypercortisolism - determine etiology"
+        next: cushings_differential
+      - label: "Cushing syndrome complications"
+        next: cushings_complications
+
+  - id: cushings_screening
+    type: diagnosis
+    name: "Cushing Syndrome - Screening"
+    icd10: "E24.9"
+    urgency: medium
+    workup:
+      - Clinical features of hypercortisolism (need multiple features to suspect)
+      - Central obesity with dorsocervical fat pad ("buffalo hump"), supraclavicular fullness, moon facies
+      - Skin changes - Purple striae (>1 cm wide), easy bruising, thin skin, poor wound healing, acne, hirsutism
+      - Proximal muscle weakness (difficulty rising from chair, climbing stairs)
+      - Hypertension, glucose intolerance/diabetes
+      - Psychiatric - Depression, anxiety, cognitive impairment, psychosis
+      - Menstrual irregularities, decreased libido
+      - Osteoporosis, fractures
+      - When to screen - Suggestive clinical features + at least one of: young age with osteoporosis or hypertension, progressive features, diabetes difficult to control, adrenal incidentaloma
+      - Initial screening tests (need at least 2 abnormal for diagnosis)
+      - 24-hour urine free cortisol (UFC) - Collect 24-hour urine, measure cortisol, >3-4x upper limit normal = Cushing (mild elevation can be physiologic stress, obesity, depression - "pseudo-Cushing")
+      - Late-night salivary cortisol - Cortisol normally lowest at midnight, collect saliva 11 PM-midnight x 2 nights, elevated = loss of diurnal rhythm (Cushing)
+      - Low-dose dexamethasone suppression test (LDDST) - Give dexamethasone 1mg PO at 11 PM, measure 8 AM cortisol next morning, normal <1.8 mcg/dL (suppression), Cushing >1.8 (no suppression)
+      - Exclude pseudo-Cushing - Obesity, depression, alcoholism, PCOS can cause mild cortisol elevation
+      - If unclear, dexamethasone-CRH test or insulin tolerance test (specialist)
+    treatment:
+      - If screening negative - Reassure, address other causes of symptoms
+      - If screening positive (≥2 abnormal tests) - Proceed to determine etiology (see next node)
+
+  - id: cushings_differential
+    type: diagnosis
+    name: "Cushing Syndrome - Determine Etiology"
+    icd10: "E24.9"
+    urgency: high
+    workup:
+      - Hypercortisolism confirmed, now determine cause
+      - ACTH-dependent (80%) - Excess ACTH drives cortisol production
+      - Cushing disease (70% of Cushing syndrome) - Pituitary adenoma secreting ACTH
+      - Ectopic ACTH syndrome (10%) - Non-pituitary tumor secreting ACTH (small cell lung cancer most common, also carcinoid, pancreatic neuroendocrine tumors)
+      - ACTH-independent (20%) - Adrenal gland produces excess cortisol autonomously
+      - Adrenal adenoma (10%) - Benign tumor
+      - Adrenal carcinoma (5%) - Malignant, aggressive, often large >4cm, may secrete multiple steroids
+      - Bilateral adrenal hyperplasia (rare) - ACTH-independent macronodular hyperplasia (AIMAH) or primary pigmented nodular adrenal disease (PPNAD)
+      - Exogenous glucocorticoids - Most common cause of Cushing features overall (iatrogenic), ACTH suppressed
+      - Step 1 - Measure plasma ACTH (8-9 AM)
+      - ACTH suppressed (<5 pg/mL) - ACTH-independent (adrenal cause), proceed to adrenal imaging
+      - ACTH normal or elevated (>20 pg/mL) - ACTH-dependent (pituitary or ectopic), need to differentiate
+      - If ACTH-dependent (ACTH ≥20 pg/mL)
+      - Step 2 - High-dose dexamethasone suppression test (HDDST)
+      - Give dexamethasone 8mg PO at 11 PM, measure 8 AM cortisol
+      - Suppression >50% from baseline - Cushing disease (pituitary, negative feedback intact)
+      - No suppression - Ectopic ACTH (tumor, no feedback)
+      - Step 3 - Pituitary MRI with gadolinium - Look for pituitary adenoma (often microadenoma <10mm, 50% visible on MRI)
+      - Step 4 - If MRI negative or ectopic suspected, inferior petrosal sinus sampling (IPSS) - Gold standard to differentiate pituitary vs ectopic
+      - Catheterize petrosal sinuses (drain pituitary), measure ACTH centrally vs peripherally, give CRH
+      - Central:peripheral ACTH ratio >2 (baseline) or >3 (after CRH) = pituitary source (Cushing disease)
+      - No gradient = ectopic ACTH, then image chest/abdomen/pelvis for tumor (CT or octreotide scan)
+      - If ACTH-independent (ACTH <5 pg/mL)
+      - Adrenal CT or MRI - Characterize adrenal mass
+      - Adenoma - Usually <4cm, homogeneous, low density (<10 HU on unenhanced CT), benign appearance
+      - Carcinoma - Large >4cm, heterogeneous, irregular, calcifications, local invasion, metastases
+      - Bilateral nodules - AIMAH (large nodules) or PPNAD (small nodules, pigmented)
+    treatment:
+      - Treatment depends on etiology
+      - Cushing disease (pituitary adenoma) - See pituitary management
+      - Transsphenoidal surgery (TSS) - First-line, resect adenoma, cure rate 70-90% for microadenomas, lower for macroadenomas
+      - Post-op - Assess for cure (low morning cortisol <5 mcg/dL indicates remission, need steroid replacement temporarily until HPA axis recovers)
+      - If persistent or recurrent - Repeat surgery, radiation (stereotactic or conventional), or medical therapy
+      - Adrenal adenoma - Unilateral adrenalectomy (laparoscopic), curative
+      - Post-op steroid replacement - Contralateral adrenal suppressed, need hydrocortisone until recovers (months)
+      - Adrenal carcinoma - Surgical resection (open adrenalectomy, en bloc if locally invasive), often metastatic at diagnosis
+      - Adjuvant mitotane (adrenolytic drug, toxic to adrenal cortex) + chemotherapy if advanced
+      - Poor prognosis (5-year survival 30-40%)
+      - Ectopic ACTH - Resect primary tumor if possible (curative if completely resected)
+      - Small cell lung cancer - Often metastatic, treat malignancy (chemotherapy)
+      - Carcinoid tumors - Surgical resection, octreotide (somatostatin analog)
+      - If tumor unresectable or occult - Medical management or bilateral adrenalectomy
+      - Medical management of hypercortisolism (bridge to surgery or if surgery not possible)
+      - Steroidogenesis inhibitors
+      - Ketoconazole 200-400mg TID (inhibits cortisol synthesis, hepatotoxic, monitor LFTs)
+      - Metyrapone 250-500mg TID-QID (inhibits 11β-hydroxylase)
+      - Etomidate IV (ICU, severe acute hypercortisolism)
+      - Mifepristone 300-1200mg daily - Glucocorticoid receptor antagonist (blocks cortisol action, cannot monitor with cortisol levels, risk hypokalemia, hyperglycemia)
+      - Osilodrostat - Newer, 11β-hydroxylase inhibitor
+      - Bilateral adrenalectomy - Definitive treatment if medical/surgical options exhausted, requires lifelong steroid and mineralocorticoid replacement, risk Nelson syndrome (pituitary tumor growth after adrenalectomy in Cushing disease)
+
+  - id: cushings_complications
+    type: diagnosis
+    name: "Cushing Syndrome Complications"
+    icd10: "E24.9"
+    urgency: high
+    workup:
+      - Complications of chronic hypercortisolism
+      - Cardiovascular - Hypertension (80%), atherosclerosis, MI, stroke, heart failure
+      - Metabolic - Diabetes mellitus (40%), dyslipidemia, obesity
+      - Musculoskeletal - Osteoporosis (50%), vertebral compression fractures, proximal myopathy, avascular necrosis (hip, femoral head)
+      - Infections - Increased risk (immunosuppression from hypercortisolism), opportunistic infections (fungal, TB)
+      - Psychiatric - Depression, anxiety, psychosis, cognitive impairment, suicidality
+      - Thromboembolic - Hypercoagulable state, DVT, PE (increased risk)
+    treatment:
+      - Treat underlying Cushing syndrome (surgical or medical as above)
+      - Manage complications
+      - Hypertension - Antihypertensives (ACE inhibitors, ARBs, CCBs)
+      - Diabetes - Insulin often required (oral agents less effective)
+      - Osteoporosis - Bisphosphonates (alendronate, risedronate), calcium, vitamin D
+      - VTE prophylaxis - Consider if hospitalized or immobile
+      - Psychiatric - SSRIs for depression, atypical antipsychotics for psychosis (avoid typical antipsychotics, worsen metabolic syndrome)
+      - Infection prophylaxis - PCP prophylaxis (TMP-SMX) if severe hypercortisolism or on immunosuppression
+      - Post-treatment - Adrenal insufficiency
+      - After successful treatment (surgery, radiation), HPA axis suppressed, need steroid replacement (hydrocortisone 15-25mg daily divided) until axis recovers (6-18 months)
+      - Educate on stress-dose steroids, medic alert bracelet

@@ -1,0 +1,263 @@
+tree_id: DERM-SKIN-INFECTION
+name: Skin and Soft Tissue Infection Evaluation
+family: DERMATOLOGY
+specialty: Dermatology/Emergency Medicine/Primary Care/Infectious Disease
+chief_complaint: Skin Infection
+description: Diagnostic decision tree for evaluating skin and soft tissue infections
+version: "1.0"
+author: RealDiag Team
+entry_point: presentation
+
+nodes:
+  - id: presentation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Superficial - honey-crusted lesions"
+        next: impetigo
+      - label: "Localized redness, warmth, distinct border"
+        next: cellulitis_erysi
+      - label: "Purulent drainage, abscess"
+        next: abscess_furuncle
+      - label: "Rapidly spreading, severe pain, systemic toxicity"
+        next: necrotizing_infection
+      - label: "Vesicular/bullous lesions"
+        next: vesicular_infection
+
+  - id: impetigo
+    type: diagnosis
+    diagnosis: Impetigo
+    icd10: L01.00
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Culture if MRSA suspected
+    treatment:
+      - Topical mupirocin
+      - Oral antibiotics if extensive (cephalexin, dicloxacillin)
+      - Good hygiene
+      - Avoid scratching
+
+  - id: cellulitis_erysi
+    type: question
+    text: "Location and characteristics?"
+    options:
+      - label: "Well-demarcated, raised border, face/legs"
+        next: erysipelas
+      - label: "Ill-defined borders, extremity"
+        next: cellulitis
+      - label: "Periorbital/orbital involvement"
+        next: periorbital_cellulitis
+
+  - id: erysipelas
+    type: diagnosis
+    diagnosis: Erysipelas
+    icd10: A46
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Blood cultures if systemically ill
+    treatment:
+      - Penicillin VK or amoxicillin
+      - Elevation of affected area
+      - Analgesics
+      - Consider admission if facial
+
+  - id: cellulitis
+    type: question
+    text: "Severity assessment?"
+    options:
+      - label: "Mild - no systemic signs"
+        next: simple_cellulitis
+      - label: "Moderate-Severe or comorbidities"
+        next: complicated_cellulitis
+
+  - id: simple_cellulitis
+    type: diagnosis
+    diagnosis: Uncomplicated Cellulitis
+    icd10: L03.90
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Mark borders for monitoring
+    treatment:
+      - Cephalexin 500mg QID x 5-7 days
+      - Doxycycline (if PCN allergic)
+      - Add MRSA coverage if not improving (TMP-SMX)
+      - Elevation, analgesics
+
+  - id: complicated_cellulitis
+    type: diagnosis
+    diagnosis: Complicated Cellulitis
+    icd10: L03.90
+    urgency: high
+    workup:
+      - Blood cultures
+      - CBC, CRP
+      - Consider imaging if deep infection suspected
+    treatment:
+      - IV antibiotics (vancomycin + piperacillin-tazobactam)
+      - Admission
+      - Surgical consultation if necrotizing features
+
+  - id: periorbital_cellulitis
+    type: question
+    text: "Orbital involvement?"
+    options:
+      - label: "Preseptal only - normal vision/movement"
+        next: preseptal_cellulitis
+      - label: "Postseptal - vision changes, ophthalmoplegia"
+        next: orbital_cellulitis
+
+  - id: preseptal_cellulitis
+    type: diagnosis
+    diagnosis: Preseptal Cellulitis
+    icd10: H05.011
+    urgency: medium
+    workup:
+      - Clinical exam
+      - CT orbits if unsure
+    treatment:
+      - Oral antibiotics (augmentin)
+      - Close follow-up
+      - Ophthalmology consult if worsening
+
+  - id: orbital_cellulitis
+    type: diagnosis
+    diagnosis: Orbital Cellulitis
+    icd10: H05.012
+    urgency: critical
+    workup:
+      - CT orbits with contrast
+      - Blood cultures
+      - Ophthalmology consult
+    treatment:
+      - IV antibiotics (vancomycin + ceftriaxone)
+      - Admission
+      - ENT/ophthalmology consult
+      - May need surgical drainage
+
+  - id: abscess_furuncle
+    type: question
+    text: "Size and location?"
+    options:
+      - label: "Small (<5cm), simple"
+        next: simple_abscess
+      - label: "Large, multiple, or concerning location"
+        next: complex_abscess
+      - label: "Hair follicle involvement"
+        next: folliculitis
+
+  - id: simple_abscess
+    type: diagnosis
+    diagnosis: Cutaneous Abscess
+    icd10: L02.91
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Culture purulent material
+    treatment:
+      - Incision and drainage (I&D)
+      - Packing if needed
+      - TMP-SMX or doxycycline for MRSA coverage
+      - Warm compresses
+      - Follow-up in 48h
+
+  - id: complex_abscess
+    type: diagnosis
+    diagnosis: Complex Abscess/Carbuncle
+    icd10: L02.93
+    urgency: high
+    workup:
+      - Culture
+      - Blood cultures if systemic
+      - Consider imaging for depth
+    treatment:
+      - I&D in OR if extensive
+      - IV antibiotics (vancomycin)
+      - Consider admission
+      - Wound care
+
+  - id: folliculitis
+    type: diagnosis
+    diagnosis: Folliculitis/Furuncle
+    icd10: L73.9
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - Culture if recurrent
+    treatment:
+      - Warm compresses
+      - Topical mupirocin
+      - Oral antibiotics if extensive
+      - Good hygiene
+
+  - id: necrotizing_infection
+    type: diagnosis
+    diagnosis: Necrotizing Fasciitis
+    icd10: M72.6
+    urgency: critical
+    workup:
+      - LRINEC score
+      - CT with contrast
+      - Blood cultures, lactate
+      - Surgical exploration
+    treatment:
+      - EMERGENT surgical debridement
+      - Broad-spectrum IV antibiotics
+      - ICU admission
+      - Hyperbaric oxygen if available
+      - High mortality if delayed
+
+  - id: vesicular_infection
+    type: question
+    text: "Distribution and appearance?"
+    options:
+      - label: "Grouped vesicles, dermatomal"
+        next: herpes_zoster
+      - label: "Diffuse vesicles, different stages"
+        next: varicella
+      - label: "Localized grouped vesicles, recurrent"
+        next: herpes_simplex
+
+  - id: herpes_zoster
+    type: diagnosis
+    diagnosis: Herpes Zoster (Shingles)
+    icd10: B02.9
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Tzanck smear or PCR if uncertain
+    treatment:
+      - Antivirals within 72h (valacyclovir, famciclovir)
+      - Analgesics
+      - Ophthalmology if trigeminal involvement
+      - Shingrix vaccine after resolution
+
+  - id: varicella
+    type: diagnosis
+    diagnosis: Varicella (Chickenpox)
+    icd10: B01.9
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Consider PCR in immunocompromised
+    treatment:
+      - Supportive care (antihistamines)
+      - Acyclovir if high-risk or severe
+      - Isolation
+      - Calamine lotion
+
+  - id: herpes_simplex
+    type: diagnosis
+    diagnosis: Herpes Simplex Virus
+    icd10: B00.9
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - PCR or culture if uncertain
+    treatment:
+      - Antivirals (valacyclovir, acyclovir)
+      - Suppressive therapy if recurrent
+      - Avoid triggers
+      - Topical anesthetics for pain

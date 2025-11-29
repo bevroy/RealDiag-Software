@@ -1,0 +1,104 @@
+tree_id: NEURO-ALS
+name: Amyotrophic Lateral Sclerosis (ALS) Evaluation
+family: NEUROLOGY
+specialty: Neurology, Palliative Care
+chief_complaint: Progressive Weakness, Muscle Atrophy, Fasciculations
+description: Comprehensive evaluation and management of ALS/motor neuron disease
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: als_presentation
+
+nodes:
+  - id: als_presentation
+    type: question
+    text: "Clinical presentation pattern?"
+    options:
+      - label: "Limb-onset ALS (focal weakness in arm or leg)"
+        next: als_diagnosis
+      - label: "Bulbar-onset ALS (dysarthria, dysphagia)"
+        next: bulbar_als
+      - label: "Established ALS - symptom management"
+        next: als_management
+
+  - id: als_diagnosis
+    type: diagnosis
+    name: "Amyotrophic Lateral Sclerosis - Limb Onset"
+    icd10: "G12.21"
+    urgency: medium
+    workup:
+      - Clinical features - Progressive painless weakness, muscle atrophy, fasciculations, hyperreflexia (UMN + LMN signs in same region = diagnostic)
+      - Upper motor neuron (UMN) signs - Hyperreflexia, spasticity, Babinski sign, pseudobulbar affect (emotional lability)
+      - Lower motor neuron (LMN) signs - Weakness, atrophy, fasciculations (visible muscle twitching), hyporeflexia
+      - Limb-onset (70%) - Asymmetric weakness starting in hand (difficulty buttoning, writing) or foot (foot drop, tripping), spreads contiguously to other limbs
+      - No sensory loss, no bowel/bladder dysfunction (preserved), no eye movement abnormalities (ocular muscles spared until very late)
+      - El Escorial Criteria (revised) - Requires UMN + LMN signs in ≥2 regions (bulbar, cervical, thoracic, lumbosacral)
+      - Definite ALS - UMN + LMN in ≥3 regions
+      - Probable ALS - UMN + LMN in ≥2 regions
+      - Possible ALS - UMN + LMN in 1 region
+      - EMG/NCS - Shows widespread denervation (fibrillations, positive sharp waves, fasciculations) with normal sensory studies, reduced motor amplitudes, confirms LMN involvement in clinically unaffected regions
+      - MRI brain and spine - NORMAL (rules out structural mimics like cervical myelopathy, brain lesions)
+      - Labs - CK mildly elevated (2-3x), CBC, CMP, TSH, vitamin B12, serum/urine protein electrophoresis (rule out multifocal motor neuropathy, paraproteinemia), heavy metals if exposure, Lyme if endemic, HIV
+      - Genetic testing - SOD1, C9orf72, FUS, TARDBP mutations (5-10% familial, 95% sporadic, but genetic testing can help diagnosis)
+      - Pulmonary function tests - Forced vital capacity (FVC) baseline (respiratory failure is common cause of death)
+      - Rule out ALS mimics - Multifocal motor neuropathy (treatable with IVIG), Kennedy disease (X-linked, slower), cervical spondylotic myelopathy, myasthenia gravis, inclusion body myositis
+    treatment:
+      - Disease-modifying medications (modest benefit, slow progression by 3-6 months)
+      - Riluzole 50mg PO BID - Glutamate antagonist, prolongs survival ~3 months, monitor LFTs
+      - Edaravone 60mg IV daily x 14 days (initial cycle), then 14 days on/14 days off - Free radical scavenger, slows functional decline, expensive, IV administration burden
+      - Symptomatic management
+      - Spasticity - Baclofen 5-20mg TID, tizanidine 2-8mg TID, avoid excessive treatment (muscle tone helps compensate for weakness)
+      - Sialorrhea (drooling) - Glycopyrrolate 1-2mg TID, scopolamine patch, botulinum toxin to salivary glands, suction device
+      - Pseudobulbar affect (pathologic laughing/crying) - Dextromethorphan/quinidine (Nuedexta)
+      - Depression - SSRIs (common, treat aggressively)
+      - Pain - Acetaminophen, NSAIDs, gabapentin, opioids if severe
+      - Cramps - Quinine, magnesium, gentle stretching
+      - Multidisciplinary care ESSENTIAL
+      - Neurology/ALS clinic - Every 3 months
+      - Physical therapy - Range of motion, stretching, assistive devices (walker, wheelchair), prevent contractures
+      - Occupational therapy - ADL adaptations, communication devices (when speech affected)
+      - Speech therapy - Swallowing evaluation, communication strategies
+      - Nutrition - High-calorie diet (weight loss common), consider PEG tube when FVC <50% or significant dysphagia (placed electively before respiratory compromise)
+      - Respiratory - Monitor FVC every 3 months, non-invasive ventilation (BiPAP) when FVC <50% or symptomatic hypoventilation (improves survival and quality of life), tracheostomy + ventilation (discuss goals of care)
+      - Palliative care - Early involvement, advance directives, symptom management, hospice when appropriate
+      - Clinical trials - Consider enrollment
+      - Prognosis - Median survival 3-5 years from symptom onset (range 1-10 years), 50% die within 3 years, worse prognosis with bulbar onset, older age, faster progression
+
+  - id: bulbar_als
+    type: diagnosis
+    name: "Bulbar-Onset ALS"
+    icd10: "G12.21"
+    urgency: medium
+    workup:
+      - Same workup as limb-onset ALS
+      - Bulbar onset (25-30%) - Dysarthria (slurred speech, nasal quality), dysphagia (difficulty swallowing liquids first, then solids), tongue atrophy and fasciculations, jaw weakness
+      - Worse prognosis - Faster progression, earlier respiratory failure, median survival 2-3 years
+    treatment:
+      - Same disease-modifying and symptomatic treatments as limb-onset
+      - Dysphagia management CRITICAL
+      - Speech therapy swallow evaluation
+      - Diet modification - Thickened liquids, pureed foods
+      - PEG tube placement EARLY (when 10% weight loss or FVC <50%) - Placed before respiratory compromise makes procedure risky
+      - Improves nutrition, hydration, medication administration, quality of life
+      - Communication devices - Augmentative and alternative communication (AAC), eye-gaze technology when unable to speak
+      - Aggressive respiratory monitoring - BiPAP earlier, consider tracheostomy (discuss goals extensively)
+
+  - id: als_management
+    type: diagnosis
+    name: "Established ALS - Ongoing Management"
+    icd10: "G12.21"
+    urgency: medium
+    workup:
+      - Regular monitoring every 3 months - Functional status (ALSFRS-R score 0-48, tracks progression), weight, FVC, swallowing function, communication ability, mood
+      - Assess for complications - Respiratory failure, aspiration pneumonia, malnutrition, pressure ulcers, venous thromboembolism
+    treatment:
+      - Continue riluzole/edaravone if tolerated
+      - Escalating supportive care as disease progresses
+      - Mobility - Progress from cane → walker → wheelchair (power wheelchair when upper extremity weakness), lift systems, hospital bed
+      - Respiratory - BiPAP titration, eventually 24-hour ventilation or tracheostomy (if consistent with goals), cough assist device
+      - Nutrition - PEG tube if not already placed
+      - Communication - Speech-generating devices, eye-gaze technology
+      - End-of-life planning - Advance directives, POLST forms, hospice referral when appropriate
+      - Terminal phase - Morphine for dyspnea and air hunger, benzodiazepines for anxiety, atropine for secretions
+      - Family support - Caregiver burden immense, respite care, support groups, ALS Association resources
+      - Quality of life focus - Maintain dignity, autonomy in decision-making, comfort

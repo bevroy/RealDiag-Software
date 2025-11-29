@@ -1,0 +1,114 @@
+tree_id: ENT-SINUSITIS
+name: Sinusitis Evaluation and Management
+family: ENT
+specialty: Otolaryngology, Internal Medicine, Family Medicine
+chief_complaint: Facial Pain, Nasal Congestion, Purulent Discharge, Headache
+description: Diagnosis and management of acute and chronic sinusitis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: sinusitis_evaluation
+
+nodes:
+  - id: sinusitis_evaluation
+    type: question
+    text: "Duration and severity?"
+    options:
+      - label: "Acute bacterial sinusitis"
+        next: acute_bacterial_sinusitis
+      - label: "Viral rhinosinusitis (common cold)"
+        next: viral_rhinosinusitis
+      - label: "Chronic sinusitis"
+        next: chronic_sinusitis
+
+  - id: viral_rhinosinusitis
+    type: diagnosis
+    name: "Viral Rhinosinusitis (Common Cold)"
+    icd10: "J00"
+    urgency: low
+    workup:
+      - Viral upper respiratory infection - Most common cause "sinusitis" symptoms
+      - Viruses - Rhinovirus, coronavirus, adenovirus, influenza, parainfluenza
+      - Clinical features - Nasal congestion, rhinorrhea (clear or colored), facial pressure/pain, cough, sore throat, malaise
+      - Duration <10 days, peaks 3-5 days then improves
+      - Colored nasal discharge does NOT indicate bacterial infection (viral can be yellow/green)
+      - Diagnosis - Clinical, no imaging needed
+    treatment:
+      - Supportive care - Self-limited, resolves 7-10 days
+      - Symptomatic relief - Saline nasal irrigation, intranasal decongestants (oxymetazoline 3 days max, rebound congestion), oral decongestants (pseudoephedrine), NSAIDs (pain/fever)
+      - Antibiotics NOT indicated - No benefit, increases resistance
+      - Red flags for bacterial superinfection - See acute bacterial sinusitis node
+
+  - id: acute_bacterial_sinusitis
+    type: diagnosis
+    name: "Acute Bacterial Sinusitis"
+    icd10: "J01.90"
+    urgency: medium
+    workup:
+      - Bacterial superinfection complicating viral rhinosinusitis (0.5-2% of viral URI)
+      - Bacteria - S. pneumoniae (30%), H. influenzae (20%), M. catarrhalis (20%), S. aureus, anaerobes
+      - Criteria for bacterial sinusitis (need ONE)
+      - Persistent symptoms ≥10 days without improvement (most common)
+      - Severe symptoms ≥3-4 days (high fever >39°C, purulent nasal discharge, facial pain)
+      - "Double worsening" - Initial improvement then worsening after 5-6 days
+      - Clinical features - Purulent nasal discharge (thick, colored), facial pain/pressure (worse bending forward, maxillary teeth pain), nasal obstruction, hyposmia, cough (worse at night post-nasal drip)
+      - Maxillary sinusitis most common - Cheek/upper teeth pain, infraorbital tenderness
+      - Frontal sinusitis - Forehead pain, frontal tenderness
+      - Ethmoid sinusitis - Retro-orbital/between eyes pain
+      - Sphenoid sinusitis - Vertex headache, retro-orbital pain (rare, but complications more common)
+      - Diagnosis - Clinical (criteria above), imaging NOT routinely needed
+      - CT sinus - If suspected complications (periorbital cellulitis, meningitis, cavernous sinus thrombosis), recurrent/refractory, chronic, pre-operative planning
+      - Maxillary sinus aspiration/culture - Rarely done (invasive), reserve for immunocompromised, severe/complicated, failed multiple antibiotics
+      - Complications - Rare but serious
+      - Orbital cellulitis/abscess - Periorbital edema, erythema, proptosis, ophthalmoplegia, vision loss (EMERGENCY)
+      - Intracranial - Meningitis, epidural/subdural/brain abscess, cavernous sinus thrombosis (headache, fever, CN VI palsy, proptosis, ophthalmoplegia)
+      - Osteomyelitis (frontal bone - Pott puffy tumor)
+    treatment:
+      - Watchful waiting - Mild symptoms, reliable follow-up, consider observation x 3-7 days (many resolve spontaneously)
+      - Symptomatic care - Saline irrigation, intranasal steroids (fluticasone, mometasone), oral decongestants, NSAIDs
+      - Antibiotics - If severe, persistent ≥10 days, or double worsening
+      - First-line - Amoxicillin 500 mg TID or 875 mg BID x 5-7 days (10 days if severe)
+      - High-dose if risk factors (recent antibiotics, daycare, age <2 or >65, immunocompromised) - Amoxicillin 1g TID or 90 mg/kg/day divided BID
+      - Penicillin allergy - Doxycycline 100 mg BID OR levofloxacin 500 mg daily OR moxifloxacin 400 mg daily
+      - High-resistance risk - Amoxicillin-clavulanate 2000/125 mg (Augmentin XR) BID or 875/125 mg BID x 5-10 days
+      - Failure to improve 3-5 days - Switch to amoxicillin-clavulanate (add beta-lactamase coverage), or fluoroquinolone (levofloxacin, moxifloxacin)
+      - Severe/complicated - IV antibiotics (ceftriaxone, vancomycin if MRSA concern), surgical drainage if abscess
+      - Adjuncts - Intranasal corticosteroids (mometasone 2 sprays each nostril daily x 10 days, modest benefit), mucolytics (guaifenesin), avoid antihistamines (thicken secretions)
+
+  - id: chronic_sinusitis
+    type: diagnosis
+    name: "Chronic Rhinosinusitis"
+    icd10: "J32.9"
+    urgency: low
+    workup:
+      - Chronic rhinosinusitis (CRS) - Symptoms ≥12 weeks, inflammation of sinuses/nasal mucosa
+      - Two types
+      - CRS without nasal polyps (CRSsNP) - More common, adults
+      - CRS with nasal polyps (CRSwNP) - Associated with asthma, aspirin sensitivity (Samter triad - asthma, nasal polyps, aspirin sensitivity)
+      - Pathophysiology - Multifactorial (obstruction, inflammation, infection, biofilms, osteitis)
+      - Risk factors - Allergies, asthma, smoking, anatomic obstruction (deviated septum), cystic fibrosis, immunodeficiency
+      - Fungal sinusitis - Allergic fungal sinusitis (AFS, eosinophilic mucin, polyps), invasive fungal sinusitis (immunocompromised, aggressive, Mucor)
+      - Clinical features - Need ≥2 of: nasal obstruction, nasal discharge (anterior/posterior), facial pain/pressure, hyposmia/anosmia (loss of smell)
+      - Must be present ≥12 weeks
+      - Diagnosis
+      - Nasal endoscopy - Visualize polyps, purulent discharge, edema, anatomic abnormalities
+      - CT sinus - Mucosal thickening, air-fluid levels, bone changes (osteitis), anatomic evaluation
+      - Allergy testing - If suspected allergic component
+    treatment:
+      - Medical management - First-line
+      - Saline nasal irrigation - 240 mL BID (high-volume, most important intervention)
+      - Intranasal corticosteroids - Fluticasone, mometasone, budesonide 2 sprays each nostril daily x 3-6 months (reduce inflammation, shrink polyps)
+      - Prolonged course needed
+      - Antibiotics - If purulence or acute exacerbation
+      - Culture-directed if available (endoscopy-guided middle meatus culture)
+      - Empiric - Amoxicillin-clavulanate 875 mg BID x 3 weeks
+      - Doxycycline 100 mg BID x 3 weeks (anti-inflammatory properties, biofilm penetration)
+      - Oral corticosteroids - Short course if severe polyps or exacerbation (prednisone 30-40 mg daily x 5-7 days, taper)
+      - Leukotriene inhibitors - Montelukast 10 mg daily (especially if asthma, aspirin sensitivity)
+      - Biologics - For severe CRSwNP despite medical/surgical therapy
+      - Dupilumab (anti-IL-4/IL-13) 300 mg SC q2 weeks (FDA-approved, reduces polyps, improves symptoms)
+      - Omalizumab (anti-IgE) if allergic component
+      - Surgical management - If refractory to medical therapy (3-6 months)
+      - Functional endoscopic sinus surgery (FESS) - Remove polyps, enlarge sinus ostia, improve drainage
+      - Success rate 80-90%, but polyps recur 10-20% per year (continue intranasal steroids post-op)
+      - Aspirin desensitization - If Samter triad, reduces polyp recurrence after FESS (aspirin 325-650 mg BID after desensitization)

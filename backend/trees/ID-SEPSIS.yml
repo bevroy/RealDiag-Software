@@ -1,0 +1,241 @@
+tree_id: ID-SEPSIS
+name: Sepsis Recognition and Management
+family: INFECTIOUS DISEASE
+specialty: Emergency Medicine/Critical Care/Infectious Disease
+chief_complaint: Sepsis
+description: Diagnostic decision tree for sepsis evaluation and management
+version: "1.0"
+author: RealDiag Team
+entry_point: screening
+
+nodes:
+  - id: screening
+    type: question
+    text: "qSOFA score (altered mental status, RR ≥22, SBP ≤100)?"
+    options:
+      - label: "≥2 points with suspected infection"
+        next: sepsis_suspected
+      - label: "Infection + organ dysfunction (SOFA ≥2)"
+        next: sepsis_confirmed
+      - label: "Sepsis + hypotension requiring vasopressors"
+        next: septic_shock
+      - label: "Infection without organ dysfunction"
+        next: infection_no_sepsis
+
+  - id: sepsis_suspected
+    type: question
+    text: "Vital signs and clinical presentation?"
+    options:
+      - label: "Hypotension (SBP <90 or MAP <65)"
+        next: septic_shock
+      - label: "Altered mental status, tachypnea, but BP stable"
+        next: sepsis_confirmed
+      - label: "Source identified"
+        next: identify_source
+
+  - id: sepsis_confirmed
+    type: question
+    text: "Identify infection source?"
+    options:
+      - label: "Pulmonary (cough, infiltrate)"
+        next: sepsis_pneumonia
+      - label: "Urinary (dysuria, CVA tenderness)"
+        next: sepsis_urinary
+      - label: "Abdominal (peritonitis, tenderness)"
+        next: sepsis_abdominal
+      - label: "Skin/soft tissue"
+        next: sepsis_skin
+      - label: "Unknown source"
+        next: sepsis_unknown
+
+  - id: septic_shock
+    type: diagnosis
+    diagnosis: Septic Shock
+    icd10: R65.21
+    urgency: critical
+    workup:
+      - Blood cultures x2 (before antibiotics)
+      - Lactate (repeat q2-4h)
+      - CBC, CMP, coags
+      - Urinalysis, urine culture
+      - CXR
+      - Consider CT abdomen/pelvis
+      - Sputum culture if pneumonia
+      - Consider procalcitonin
+    treatment:
+      - IMMEDIATE broad-spectrum antibiotics within 1 hour
+      - Aggressive IV fluid resuscitation (30 mL/kg crystalloid)
+      - Norepinephrine if hypotensive after fluids (target MAP ≥65)
+      - ICU admission
+      - Source control (drain abscess, remove infected device)
+      - Consider stress-dose steroids (hydrocortisone 200mg/day)
+      - Monitor lactate clearance
+      - Early goal-directed therapy
+      - Surviving Sepsis Campaign guidelines
+
+  - id: sepsis_pneumonia
+    type: diagnosis
+    diagnosis: Sepsis Secondary to Pneumonia
+    icd10: J15.9
+    urgency: critical
+    workup:
+      - Blood cultures x2
+      - Sputum culture (if able)
+      - CXR
+      - Lactate
+      - CBC, CMP
+      - Legionella and pneumococcal urinary antigens
+      - Consider respiratory viral panel
+    treatment:
+      - Antibiotics within 1 hour
+      - Ceftriaxone 2g IV + azithromycin 500mg IV OR
+      - Levofloxacin 750mg IV + vancomycin if MRSA risk OR
+      - Piperacillin-tazobactam 4.5g IV if Pseudomonas risk
+      - IV fluids (30 mL/kg if hypotensive)
+      - Oxygen to maintain SpO2 >92%
+      - ICU if respiratory failure or shock
+      - Vasopressors if needed
+
+  - id: sepsis_urinary
+    type: diagnosis
+    diagnosis: Sepsis Secondary to Urinary Source (Urosepsis)
+    icd10: A41.9
+    urgency: critical
+    workup:
+      - Blood cultures x2
+      - Urinalysis, urine culture
+      - Lactate
+      - CBC, CMP
+      - CT abdomen/pelvis with contrast (if concern for obstruction/abscess)
+      - Renal ultrasound if CT contraindicated
+    treatment:
+      - Antibiotics within 1 hour
+      - Ceftriaxone 2g IV OR piperacillin-tazobactam 4.5g IV OR
+      - Ciprofloxacin 400mg IV if PCN allergic
+      - Consider vancomycin if MRSA risk or recent hospitalization
+      - IV fluids (30 mL/kg)
+      - Emergent urology consult if obstruction (nephrostomy tube or stent)
+      - Vasopressors if shock
+      - ICU admission
+
+  - id: sepsis_abdominal
+    type: diagnosis
+    diagnosis: Sepsis Secondary to Intra-Abdominal Infection
+    icd10: K65.9
+    urgency: critical
+    workup:
+      - Blood cultures x2
+      - Lactate
+      - CBC, CMP, lipase
+      - CT abdomen/pelvis with IV contrast
+      - Consider paracentesis if ascites
+    treatment:
+      - Antibiotics within 1 hour
+      - Piperacillin-tazobactam 4.5g IV OR
+      - Ceftriaxone 2g IV + metronidazole 500mg IV OR
+      - Meropenem 1g IV if critically ill
+      - IV fluids (30 mL/kg)
+      - Emergent surgery consult for source control
+      - Percutaneous drainage of abscess if present
+      - Vasopressors if shock
+      - ICU admission
+
+  - id: sepsis_skin
+    type: diagnosis
+    diagnosis: Sepsis Secondary to Skin/Soft Tissue Infection
+    icd10: A41.9
+    urgency: critical
+    workup:
+      - Blood cultures x2
+      - Wound culture
+      - Lactate
+      - CBC, CMP, CK
+      - Imaging of affected area
+      - Consider LRINEC score if necrotizing fasciitis concern
+    treatment:
+      - Antibiotics within 1 hour
+      - Vancomycin 15-20 mg/kg IV + piperacillin-tazobactam 4.5g IV OR
+      - Vancomycin + ceftriaxone 2g IV + metronidazole 500mg IV
+      - IV fluids (30 mL/kg)
+      - EMERGENT surgical debridement if necrotizing infection
+      - Source control
+      - Vasopressors if shock
+      - ICU admission
+
+  - id: sepsis_unknown
+    type: diagnosis
+    diagnosis: Sepsis of Unknown Source
+    icd10: A41.9
+    urgency: critical
+    workup:
+      - Blood cultures x2 (peripheral and central line if present)
+      - Lactate
+      - CBC, CMP, coags
+      - Urinalysis, urine culture
+      - CXR
+      - CT chest/abdomen/pelvis with contrast
+      - Consider echocardiogram (endocarditis)
+      - Procalcitonin
+      - Consider lumbar puncture if meningitis possible
+    treatment:
+      - Broad-spectrum antibiotics within 1 hour
+      - Vancomycin 15-20 mg/kg IV + piperacillin-tazobactam 4.5g IV OR
+      - Vancomycin + meropenem 1g IV if critically ill
+      - Add acyclovir if meningitis concern
+      - IV fluids (30 mL/kg)
+      - Vasopressors if shock
+      - Remove any potentially infected catheters/devices
+      - ICU admission
+      - Infectious disease consult
+
+  - id: identify_source
+    type: question
+    text: "Most likely source?"
+    options:
+      - label: "Respiratory"
+        next: sepsis_pneumonia
+      - label: "Urinary"
+        next: sepsis_urinary
+      - label: "Abdominal"
+        next: sepsis_abdominal
+      - label: "Skin/soft tissue"
+        next: sepsis_skin
+      - label: "Central line"
+        next: line_sepsis
+
+  - id: line_sepsis
+    type: diagnosis
+    diagnosis: Central Line-Associated Bloodstream Infection
+    icd10: T80.211A
+    urgency: critical
+    workup:
+      - Blood cultures from line and peripheral
+      - Lactate
+      - CBC, CMP
+      - Remove line and culture tip
+    treatment:
+      - Remove infected catheter
+      - Vancomycin 15-20 mg/kg IV (MRSA/CoNS coverage)
+      - Add gram-negative coverage if neutropenic or critically ill
+      - IV fluids
+      - Vasopressors if shock
+      - 7-14 days antibiotics (depends on organism and clearance)
+      - Consider echocardiogram if persistent bacteremia
+      - Infectious disease consult
+
+  - id: infection_no_sepsis
+    type: diagnosis
+    diagnosis: Infection Without Organ Dysfunction
+    icd10: A49.9
+    urgency: medium
+    workup:
+      - Targeted workup based on source
+      - Consider blood cultures if high-risk
+      - Lactate if borderline
+    treatment:
+      - Source-appropriate antibiotics
+      - Oral or IV based on severity
+      - Outpatient management if stable
+      - Close follow-up
+      - Return precautions for worsening symptoms
+      - Admit if high-risk (elderly, immunocompromised, unstable)

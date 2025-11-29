@@ -1,0 +1,99 @@
+tree_id: INFECTIOUS-BRAIN-ABSCESS
+name: Brain Abscess Evaluation
+family: INFECTIOUS_DISEASE
+specialty: Infectious Disease, Neurosurgery, Neurology
+chief_complaint: Headache, Fever, Focal Neurologic Deficit, Altered Mental Status
+description: Evaluation and management of brain abscess
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: brain_abscess_evaluation
+
+nodes:
+  - id: brain_abscess_evaluation
+    type: diagnosis
+    name: "Brain Abscess"
+    icd10: "G06.0"
+    urgency: critical
+    workup:
+      - Brain abscess - Focal suppurative infection within brain parenchyma
+      - Incidence - 0.4-0.9 per 100,000, but increasing (immunocompromised patients)
+      - Pathogenesis - Four stages (early cerebritis → late cerebritis → early capsule formation → late capsule formation over 2-3 weeks)
+      - Well-formed capsule develops (rim-enhancing lesion on imaging)
+      - Sources of infection
+      - Contiguous spread (40-50%) - Paranasal sinusitis (frontal lobe), otitis media/mastoiditis (temporal lobe/cerebellum), dental infection
+      - Hematogenous spread (25-30%) - Bacteremia, endocarditis, lung abscess, intra-abdominal infection
+      - Multiple abscesses common
+      - Direct inoculation (10%) - Neurosurgery, penetrating head trauma
+      - Cryptogenic (15-20%) - No source identified
+      - Risk factors - Immunocompromised (HIV, transplant, chemotherapy), congenital heart disease with right-to-left shunt (bypasses pulmonary filter), chronic sinusitis/otitis
+      - Microbiology
+      - Streptococcus species - Most common (60-70%), viridans strep (dental, sinusitis), S. milleri group (anginosus, constellatus, intermedius)
+      - Staphylococcus aureus - Trauma, neurosurgery, endocarditis, MRSA increasing
+      - Gram-negative bacilli - E. coli, Klebsiella, Pseudomonas (otitis, sinusitis, post-neurosurgery)
+      - Anaerobes - Bacteroides, Prevotella, Fusobacterium (dental, sinusitis, often mixed)
+      - Fungi - Aspergillus, Candida, Mucor (immunocompromised)
+      - Toxoplasma gondii - HIV/AIDS (CD4 <100), multiple ring-enhancing lesions
+      - Nocardia - Immunocompromised, pulmonary source
+      - Polymicrobial 30-60% (especially contiguous spread)
+      - Clinical presentation - Triad (only 20% have all three)
+      - Headache (70%) - Severe, progressive, localized
+      - Fever (50%) - Absent 50% (especially if chronic)
+      - Focal neurologic deficit (50%) - Hemiparesis, aphasia, visual field defects (depends on location)
+      - Altered mental status, confusion, lethargy (40%)
+      - Seizures (25-35%)
+      - Nausea/vomiting (papilledema, increased ICP)
+      - Meningismus rare (<10%, distinguishes from meningitis)
+      - Physical exam - Focal neurologic findings (cranial nerve palsies, motor weakness), papilledema (increased ICP 25%)
+      - Labs
+      - WBC elevated 60% (often normal)
+      - Blood cultures - Positive 10-30% (low yield unless endocarditis)
+      - ESR, CRP elevated (nonspecific)
+      - Lumbar puncture - CONTRAINDICATED if mass effect (risk herniation)
+      - If done (no mass effect), shows elevated WBC, protein, but NON-diagnostic
+      - Imaging
+      - CT head with contrast - Ring-enhancing lesion (hypodense center with rim enhancement), surrounding vasogenic edema, mass effect
+      - May be multiple
+      - MRI brain with gadolinium - BEST modality
+      - T1 - Hypointense center (pus), rim enhancement (capsule)
+      - T2 - Hyperintense center, rim hypointense (capsule)
+      - DWI - Restricted diffusion (pus, distinguishes abscess from tumor/cyst)
+      - Toxoplasma - Multiple ring-enhancing lesions, basal ganglia predilection
+      - MR spectroscopy - Amino acids, lactate, succinate (abscess), choline (tumor)
+      - Differential diagnosis - Primary brain tumor (glioblastoma), metastases, toxoplasmosis (HIV), tuberculoma, neurocysticercosis
+    treatment:
+      - Antimicrobial therapy - URGENT (start empirically before identification)
+      - Empiric regimen - Vancomycin + ceftriaxone or cefotaxime + metronidazole
+      - Vancomycin 15-20 mg/kg IV q8-12h (cover MRSA)
+      - Ceftriaxone 2 g IV q12h or cefotaxime 2 g IV q4-6h (streptococci, gram-negatives)
+      - Metronidazole 500 mg IV q6-8h (anaerobes)
+      - Duration 6-8 weeks IV (at least 4-6 weeks after surgical drainage)
+      - Targeted therapy - Adjust based on culture (aspiration or surgical drainage)
+      - Streptococci - Penicillin G 4 million units IV q4h or ceftriaxone
+      - MRSA - Vancomycin (target trough 15-20) or linezolid
+      - Gram-negatives - Ceftriaxone, cefepime, or meropenem (based on susceptibility)
+      - Anaerobes - Metronidazole
+      - Toxoplasma (HIV) - Pyrimethamine 200 mg load then 50-75 mg daily + sulfadiazine 1-1.5 g q6h + leucovorin 10-20 mg daily x 6 weeks
+      - Aspergillus - Voriconazole 6 mg/kg q12h x2 doses, then 4 mg/kg q12h
+      - Corticosteroids - Controversial (reduce cerebral edema but may impair antibiotic penetration, reduce capsule formation)
+      - Use selectively - If severe vasogenic edema with mass effect/herniation risk
+      - Dexamethasone 10 mg IV then 4 mg q6h
+      - Taper once edema improves
+      - Avoid routine use (may delay diagnosis, impair immune response)
+      - Antiepileptics - If seizures occur (phenytoin, levetiracetam)
+      - Prophylaxis controversial (many centers use for supratentorial abscess 3-6 months)
+      - Surgical management - Often required in combination with antibiotics
+      - Indications - Large abscess (>2.5 cm), significant mass effect, gas-containing abscess (gas-forming organisms), multiloculated, fungal abscess (poor antibiotic penetration), failed medical therapy (no improvement 2 weeks), need diagnosis (biopsy)
+      - Techniques
+      - Stereotactic needle aspiration - Preferred (minimally invasive, low morbidity), obtain pus for culture, decompress
+      - Can repeat if reaccumulates
+      - Craniotomy with excision - If superficial, well-encapsulated, or aspiration failed
+      - Higher morbidity, but definitive
+      - Medical therapy alone - Small abscess (<2.5 cm), multiple abscesses (not amenable to surgery), deep/eloquent location (high surgical risk), early cerebritis (before encapsulation)
+      - Requires close monitoring (repeat MRI every 1-2 weeks)
+      - Monitoring - Serial MRI (every 1-2 weeks initially) to assess response (abscess size decreasing, edema resolving)
+      - If enlarging or not improving at 2 weeks → surgical drainage
+      - Complications - Seizures (30-50%), permanent neurologic deficits (20-30%), rupture into ventricle (mortality 80%), obstructive hydrocephalus (may require ventriculostomy)
+      - Prognosis - Mortality 10-15% (improved from 40% pre-CT era)
+      - Worse prognosis - Delayed diagnosis, rupture into ventricle, multiple abscesses, fungal, immunocompromised, altered mental status on presentation
+      - Neurologic sequelae 30-50% (hemiparesis, seizures, cognitive impairment)

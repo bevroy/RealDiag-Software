@@ -1,0 +1,79 @@
+tree_id: DERM-MELANOMA
+name: Melanoma Evaluation and Management
+family: DERMATOLOGY
+specialty: Dermatology, Oncology
+chief_complaint: Suspicious Skin Lesion, Changing Mole, Melanoma Diagnosis
+description: Screening, diagnosis, staging, and management of melanoma
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: melanoma_evaluation
+
+nodes:
+  - id: melanoma_evaluation
+    type: diagnosis
+    name: "Melanoma"
+    icd10: "C43.9"
+    urgency: high
+    workup:
+      - Most deadly skin cancer (1% of skin cancers, 75% skin cancer deaths)
+      - Increasing incidence, median age 65 but occurs all ages
+      - Risk factors - Fair skin (Fitzpatrick I-II), blonde/red hair, blue eyes, UV exposure (sunburns, tanning beds), many nevi (>50), atypical nevi, family history (10% familial, CDKN2A mutation), immunosuppression
+      - Clinical recognition - ABCDE criteria
+      - Asymmetry - One half unlike other
+      - Border irregularity - Scalloped, poorly defined
+      - Color variegation - Multiple colors (brown, black, red, white, blue)
+      - Diameter >6mm (pencil eraser) - Though many melanomas smaller
+      - Evolving - Changing size, shape, color, symptoms (bleeding, itching)
+      - "Ugly duckling" sign - Lesion looks different from others
+      - Subtypes
+      - Superficial spreading (70%) - Most common, trunk/extremities, slow radial growth
+      - Nodular (15%) - Aggressive, rapid vertical growth, dark nodule
+      - Lentigo maligna (10%) - Sun-damaged skin, face/neck, elderly
+      - Acral lentiginous (5%) - Palms, soles, subungual (nail), more common darker skin, worst prognosis
+      - Diagnosis - Excisional biopsy with narrow margins (2mm), full-thickness (punch or elliptical excision)
+      - Do NOT shave biopsy (cannot assess depth)
+      - Pathology - Breslow depth (most important prognostic factor, mm invasion), ulceration, mitotic rate
+      - Staging - AJCC 8th edition
+      - T (tumor) - Breslow depth and ulceration
+      - T1 <1mm, T2 1-2mm, T3 2-4mm, T4 >4mm
+      - Ulceration upstages (worse prognosis)
+      - N (nodes) - Sentinel lymph node biopsy (SLNB) if ≥T1b or ulcerated/mitoses
+      - M (metastases) - Distant sites (LDH elevated poor prognostic factor)
+      - Metastatic workup - CT chest/abdomen/pelvis, brain MRI if symptoms, PET scan (optional), LDH
+    treatment:
+      - Wide local excision - Definitive treatment localized melanoma
+      - Margins based on Breslow depth
+      - In situ - 0.5-1 cm margins
+      - ≤1mm - 1 cm margins
+      - 1-2mm - 1-2 cm margins (usually 1 cm sufficient per recent trials)
+      - >2mm - 2 cm margins
+      - Sentinel lymph node biopsy (SLNB) - T1b or greater (≥0.8mm depth or ulcerated)
+      - Lymphoscintigraphy identifies sentinel node, inject blue dye, excise, pathology
+      - Positive SLNB - Complete lymph node dissection NO longer routine (MSLT-II, DeCOG-SLT trials no survival benefit), close observation with ultrasound surveillance
+      - Positive SLNB is indication for adjuvant therapy
+      - Adjuvant therapy - Stage III (node-positive) or high-risk stage II (T3b-T4b)
+      - Immunotherapy - Anti-PD-1 (nivolumab, pembrolizumab) x 1 year, improves recurrence-free survival ~50% vs observation (CheckMate-238, KEYNOTE-054)
+      - Targeted therapy - If BRAF V600E/K mutation (50% melanomas)
+      - Dabrafenib + trametinib (BRAF inhibitor + MEK inhibitor) x 1 year, similar efficacy to immunotherapy
+      - Interferon-alpha - Older option, high-dose x 1 year, toxic (flu-like symptoms, depression), less effective than newer agents, rarely used now
+      - Observation - Alternative for low-risk stage IIB
+      - Advanced/metastatic melanoma (stage IV)
+      - Immunotherapy - First-line
+      - Combination - Ipilimumab (anti-CTLA-4) + nivolumab (anti-PD-1), highest response rate 50-60%, 5-year survival ~50% (dramatic improvement vs historical 10%)
+      - Severe immune-related adverse events (colitis, hepatitis, pneumonitis, hypophysitis) 50-60%
+      - Monotherapy - Pembrolizumab or nivolumab (anti-PD-1), response rate 40%, better tolerated, 5-year survival ~35%
+      - Targeted therapy - If BRAF mutation
+      - Dabrafenib + trametinib (or vemurafenib + cobimetinib, or encorafenib + binimetinib)
+      - Response rate 60-70%, rapid responses (weeks), median PFS 11-15 months
+      - Resistance develops (median 12-18 months)
+      - Side effects - Arthralgias, rash, photosensitivity, pyrexia
+      - Sequence - Immunotherapy vs targeted therapy unclear, often immunotherapy first (durable responses), targeted if need rapid response or immunotherapy fails
+      - Intratumoral therapy - Talimogene laherparepvec (T-VEC), oncolytic virus injected into lesions, induces local and systemic immune response (combination with immunotherapy)
+      - Chemotherapy - Dacarbazine, temozolomide (older agents, low response rates 10-15%, rarely used now, palliative)
+      - Brain metastases - Common (50% stage IV develop), SRS (stereotactic radiosurgery) if limited number, WBRT if multiple, immunotherapy penetrates CNS (some activity)
+      - Prognosis
+      - Localized (stage I-II) - 5-year survival 90-99% stage I, 70-90% stage II (depends on depth/ulceration)
+      - Regional (stage III, node-positive) - 40-80% (depends on number nodes, ulceration)
+      - Distant metastases (stage IV) - 10-30% historically, now 35-50% with modern immunotherapy/targeted therapy
+      - Thin melanomas (<1mm) - Excellent prognosis >95% cure

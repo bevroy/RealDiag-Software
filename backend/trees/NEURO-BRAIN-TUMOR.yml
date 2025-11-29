@@ -1,0 +1,168 @@
+tree_id: NEURO-BRAIN-TUMOR
+name: Brain Tumor Evaluation
+family: NEUROLOGY
+specialty: Neurology, Neurosurgery, Neuro-Oncology
+chief_complaint: Headache, Seizures, Focal Neurologic Deficits
+description: Comprehensive evaluation of primary and metastatic brain tumors
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: brain_tumor_presentation
+
+nodes:
+  - id: brain_tumor_presentation
+    type: question
+    text: "Tumor type suspected?"
+    options:
+      - label: "Primary malignant (glioblastoma, anaplastic astrocytoma)"
+        next: primary_malignant_brain_tumor
+      - label: "Primary benign (meningioma, acoustic neuroma)"
+        next: primary_benign_brain_tumor
+      - label: "Metastatic brain tumors"
+        next: metastatic_brain_tumors
+
+  - id: primary_malignant_brain_tumor
+    type: diagnosis
+    name: "Primary Malignant Brain Tumor"
+    icd10: "C71.9"
+    urgency: critical
+    workup:
+      - Gliomas - Most common primary malignant brain tumors in adults
+      - Glioblastoma (GBM, grade IV astrocytoma) - Most aggressive, most common malignant primary brain tumor in adults (50% of gliomas)
+      - Peak age 55-65, male predominance
+      - Clinical - Headache (worse morning, improves upright), seizures (30-50%), progressive focal deficits (hemiparesis, aphasia), cognitive decline, personality changes
+      - MRI - Ring-enhancing mass with central necrosis, surrounding vasogenic edema, mass effect, crosses corpus callosum ("butterfly glioma")
+      - Irregular thick enhancing rim, heterogeneous appearance
+      - Restricted diffusion on DWI (hypercellular)
+      - Location - Cerebral hemispheres (frontal, temporal most common)
+      - Histology - High-grade features (pseudopalisading necrosis, microvascular proliferation), high mitotic activity
+      - Molecular markers - IDH wild-type (worse prognosis), MGMT promoter methylation (better response to temozolomide)
+      - Prognosis - Median survival 15-18 months with treatment (surgery + chemoradiation), 3-4 months without treatment
+      - Anaplastic astrocytoma (grade III) - Less aggressive than GBM
+      - Younger age (peak 30-50s), better prognosis (median survival 2-3 years)
+      - IDH-mutant better prognosis (median survival 5-7 years)
+      - Oligodendroglioma (grade II-III) - Better prognosis
+      - 1p/19q co-deletion (excellent prognostic marker, very chemosensitive)
+      - Median survival grade II 10-15 years, grade III 5-8 years
+      - Presentation - Seizures common (70-80% present with seizures)
+      - Complications - Increased ICP (herniation risk), status epilepticus, thromboembolism (hypercoagulable from tumor)
+      - Workup - MRI brain with and without contrast (gold standard), CT if MRI contraindicated
+      - If seizure - EEG, start antiepileptic drugs (levetiracetam preferred, no enzyme induction)
+      - Dexamethasone - If significant edema/mass effect (reduces vasogenic edema, improves symptoms)
+      - Biopsy or resection - Tissue diagnosis required for grade and molecular markers
+    treatment:
+      - Glioblastoma (GBM)
+      - Maximal safe surgical resection - First-line (extent of resection correlates with survival, but tumor infiltrates widely, cannot cure with surgery alone)
+      - Goal - Remove bulk, decompress, obtain tissue
+      - Gross total resection if possible (improves OS), but preserve eloquent cortex (motor, speech)
+      - If unresectable (eloquent location, deep, multifocal) - Stereotactic biopsy for diagnosis
+      - Postoperative - Start within 4-6 weeks
+      - Stupp protocol (standard of care) - Concurrent temozolomide 75 mg/m² daily + radiation therapy 60 Gy over 6 weeks (30 fractions), then adjuvant temozolomide 150-200 mg/m² days 1-5 of 28-day cycle x 6 cycles
+      - MGMT methylated tumors respond better to temozolomide (median OS 21 months vs 15 months unmethylated)
+      - Tumor-treating fields (Optune) - Wearable device delivers alternating electrical fields, add to temozolomide (improves OS by ~5 months in trials)
+      - Elderly/poor performance status - Hypofractionated RT (40 Gy over 3 weeks) + temozolomide, or RT alone if very frail
+      - Recurrent GBM - Repeat resection if feasible, bevacizumab (anti-VEGF, improves PFS but not OS), re-irradiation, clinical trials
+      - Supportive care - Dexamethasone (taper as tolerated to minimize side effects), antiepileptics if seizures, VTE prophylaxis (high thrombosis risk), physical/occupational/speech therapy
+      - Anaplastic astrocytoma (grade III)
+      - Surgery + radiation + chemotherapy (temozolomide or PCV - procarbazine, CCNU, vincristine if oligodendroglial features)
+      - IDH-mutant - Better prognosis, median survival 5-7 years
+      - Oligodendroglioma (grade II-III)
+      - Surgery (maximal safe resection), radiation, chemotherapy (PCV or temozolomide)
+      - 1p/19q co-deleted - Excellent response to chemotherapy, median survival 10-15 years
+      - Can observe low-grade (grade II) after resection if gross total resection and asymptomatic
+
+  - id: primary_benign_brain_tumor
+    type: diagnosis
+    name: "Primary Benign Brain Tumor"
+    icd10: "D33.2"
+    urgency: medium
+    workup:
+      - Meningioma - Most common primary benign brain tumor (30% of all intracranial tumors)
+      - Arise from arachnoid cap cells (meninges), typically benign (90% WHO grade I)
+      - Risk factors - Female (2:1), older age (peak 60-70s), radiation exposure, neurofibromatosis type 2
+      - Location - Parasagittal, convexity, sphenoid wing, olfactory groove, foramen magnum
+      - Clinical - Often asymptomatic (incidental finding), slow-growing
+      - If symptomatic - Headache, seizures, focal deficits (depends on location)
+      - Olfactory groove - Anosmia, frontal lobe symptoms
+      - Parasagittal - Leg weakness (motor cortex)
+      - Sphenoid wing - Proptosis, vision changes
+      - MRI - Extra-axial mass (outside brain parenchyma), homogeneous enhancement, "dural tail" (dural enhancement adjacent to tumor, pathognomonic), hyperostosis of adjacent bone
+      - Angiography - If near major vessels (preoperative embolization reduces bleeding)
+      - Acoustic neuroma (vestibular schwannoma) - Benign tumor of CN VIII (vestibular nerve)
+      - 90% unilateral (sporadic), 10% bilateral (neurofibromatosis type 2, autosomal dominant)
+      - Clinical - Progressive unilateral sensorineural hearing loss (90%), tinnitus, imbalance (not vertigo usually), facial numbness (CN V), facial weakness (CN VII if large)
+      - MRI - Cerebellopontine angle mass, enhancing, "ice cream cone" appearance (extends into internal auditory canal)
+      - Audiology - Asymmetric sensorineural hearing loss, poor speech discrimination
+      - Pituitary adenoma - See endocrinology (ENDO-PITUITARY tree if exists, or covered under hyperprolactinemia, acromegaly, Cushing disease)
+    treatment:
+      - Meningioma
+      - Observation - If small (<3cm), asymptomatic, incidental finding, elderly
+      - Serial MRI q6-12 months (most grow slowly, <2mm/year)
+      - Many never require intervention
+      - Surgical resection - If symptomatic (seizures, mass effect, deficits) or growing
+      - Goal - Simpson grade I (gross total resection including dural attachment and bone, lowest recurrence 10%)
+      - If complete resection grade I - Cure, no further treatment, surveillance MRI
+      - If incomplete resection or grade II/III (atypical/anaplastic) - Consider adjuvant radiation (stereotactic radiosurgery)
+      - Radiation - Stereotactic radiosurgery (Gamma Knife, CyberKnife) if
+      - Surgically inaccessible (cavernous sinus, skull base), residual tumor after surgery, recurrent, patient refuses surgery
+      - High tumor control rate (>90% at 10 years)
+      - Medical therapy - Limited role, somatostatin analogs (octreotide) or progesterone receptor antagonists (mifepristone) under investigation
+      - Acoustic neuroma
+      - Observation - Small tumors (<1.5cm), elderly, poor surgical candidates
+      - Serial MRI q6-12 months (50% stable or grow slowly)
+      - Hearing preservation possible if observe small tumors
+      - Surgery (microsurgical resection) - If large (>3cm), causing brainstem compression, growing, or patient preference
+      - Approaches - Translabyrinthine (sacrifices hearing, good for large tumors), retrosigmoid (hearing preservation attempt), middle fossa (small tumors, best hearing preservation)
+      - Risks - Facial nerve injury (CN VII, temporary or permanent weakness), hearing loss, CSF leak, meningitis
+      - Stereotactic radiosurgery - Alternative to surgery, especially if <3cm
+      - High tumor control (95%), hearing preservation 50%
+      - Complications - Facial/trigeminal neuropathy (delayed), malignant transformation (rare)
+
+  - id: metastatic_brain_tumors
+    type: diagnosis
+    name: "Metastatic Brain Tumors"
+    icd10: "C79.31"
+    urgency: critical
+    workup:
+      - Most common intracranial tumors in adults (5-10x more common than primary brain tumors)
+      - Primary cancers most likely to metastasize to brain - "Lots of Bad Stuff Kills Glia"
+      - Lung (50%, especially small cell and adenocarcinoma)
+      - Breast (15-20%)
+      - Skin (melanoma, 10%, most likely to hemorrhage)
+      - Kidney (renal cell carcinoma, 5-10%)
+      - GI (colorectal, 5%)
+      - Location - Gray-white matter junction (watershed, high blood flow), cerebellum (20-30%)
+      - Multiple metastases (60-70%), solitary (30-40%)
+      - Clinical - Headache, seizures (20-40%), focal deficits (depends on location - hemiparesis, aphasia, visual field defect, ataxia)
+      - Presentation can be acute (hemorrhage into metastasis, especially melanoma and renal cell)
+      - MRI brain with contrast - Multiple enhancing lesions at gray-white junction, surrounding vasogenic edema
+      - Melanoma and RCC often hemorrhagic (T1 bright)
+      - CT chest/abdomen/pelvis - Identify primary if unknown (20-30% of brain mets present before primary known)
+      - PET-CT - Useful if CT negative
+      - If no primary found after thorough workup - Melanoma, lung, or renal cell likely (biopsy metastasis)
+      - Complications - Increased ICP (herniation), status epilepticus, hemorrhage, hydrocephalus
+    treatment:
+      - Dexamethasone - 4-8mg q6h if symptomatic edema/mass effect (rapid improvement in hours to days)
+      - Antiepileptics - If seizure occurred (levetiracetam 500-1000mg BID), NOT prophylactically
+      - Surgery (resection) - If
+      - Solitary metastasis, surgically accessible, good performance status, controlled systemic disease
+      - Large (>3cm), symptomatic mass effect, or unknown primary (need tissue)
+      - Improves survival and local control vs RT alone (if solitary)
+      - Postoperative - Stereotactic radiosurgery (SRS) to resection cavity (reduces local recurrence)
+      - Stereotactic radiosurgery (SRS) - Gamma Knife, CyberKnife
+      - Indications - 1-4 metastases (some centers up to 10), each <3-4cm, good performance status
+      - High local control rate (80-90%), outpatient, no surgery, can repeat if new lesions
+      - Spares normal brain vs whole-brain RT (less cognitive decline)
+      - Whole-brain radiation therapy (WBRT) - 30 Gy over 10 fractions
+      - Indications - Multiple metastases (>4-10), leptomeningeal disease, small cell lung cancer (high CNS relapse), after SRS if recurrence
+      - Palliates symptoms, improves intracranial control
+      - Side effects - Cognitive decline (memory impairment), alopecia, fatigue
+      - Hippocampal-avoidance WBRT + memantine reduces cognitive toxicity
+      - Systemic therapy - Treat primary cancer
+      - Some chemotherapies/targeted therapies/immunotherapies penetrate blood-brain barrier
+      - Melanoma - Immunotherapy (nivolumab, pembrolizumab, ipilimumab), BRAF/MEK inhibitors if BRAF-mutant
+      - Lung adenocarcinoma - EGFR TKIs (osimertinib penetrates BBB), ALK inhibitors (alectinib)
+      - Breast (HER2+) - Trastuzumab + pertuzumab, T-DM1, tucatinib
+      - RCC - Immunotherapy (nivolumab + ipilimumab), VEGF TKIs (cabozantinib)
+      - Prognosis - Depends on primary, number of metastases, performance status, age, extracranial disease control
+      - Median survival - 4-6 months with supportive care, 8-12 months with SRS/surgery + systemic therapy, up to 2-3 years if favorable factors (solitary met, controlled primary, good KPS)

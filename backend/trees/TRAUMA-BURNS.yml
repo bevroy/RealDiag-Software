@@ -1,0 +1,359 @@
+tree_id: TRAUMA-BURNS
+name: Burn Evaluation and Management
+family: TRAUMA
+specialty: Trauma Surgery/Emergency Medicine/Burn Surgery
+chief_complaint: Burn Injury
+description: Diagnostic decision tree for burn evaluation and management
+version: "1.0"
+author: RealDiag Team
+entry_point: severity_assessment
+
+nodes:
+  - id: severity_assessment
+    type: question
+    text: "Burn depth and extent?"
+    options:
+      - label: "Critical burn (transfer criteria)"
+        next: critical_burn
+      - label: "Full-thickness (3rd degree)"
+        next: full_thickness
+      - label: "Partial-thickness (2nd degree)"
+        next: partial_thickness
+      - label: "Superficial (1st degree)"
+        next: superficial_burn
+      - label: "Chemical burn"
+        next: chemical_burn
+      - label: "Electrical burn"
+        next: electrical_burn
+
+  - id: critical_burn
+    type: question
+    text: "Which burn center transfer criteria met?"
+    options:
+      - label: "Partial-thickness >10% TBSA"
+        next: major_burn
+      - label: "Full-thickness any %"
+        next: full_thickness_transfer
+      - label: "Face, hands, feet, genitals, joints"
+        next: special_area_burn
+      - label: "Inhalation injury"
+        next: inhalation_injury
+      - label: "Circumferential burn"
+        next: circumferential_burn
+
+  - id: major_burn
+    type: diagnosis
+    diagnosis: Major Burn (>10% TBSA)
+    icd10: T31.10
+    urgency: critical
+    workup:
+      - Calculate TBSA (Rule of Nines or Lund-Browder)
+      - ABG, carboxyhemoglobin if smoke exposure
+      - CBC, CMP, lactate
+      - Urinalysis (myoglobin)
+      - CXR
+      - ECG
+    treatment:
+      - Airway assessment (intubate if airway edema)
+      - 100% oxygen if smoke exposure
+      - IV fluid resuscitation (Parkland formula 4 mL/kg/% TBSA over 24h, half in first 8h)
+      - Foley catheter (monitor urine output >0.5 mL/kg/h)
+      - NG tube if >20% TBSA
+      - Pain control (IV morphine)
+      - Tetanus prophylaxis
+      - Clean burns, apply silver sulfadiazine
+      - TRANSFER to burn center
+      - Keep patient warm
+
+  - id: full_thickness_transfer
+    type: diagnosis
+    diagnosis: Full-Thickness Burn (Burn Center Transfer)
+    icd10: T31.0
+    urgency: critical
+    workup:
+      - Calculate TBSA
+      - ABG, carboxyhemoglobin
+      - CBC, CMP
+      - Type and screen
+    treatment:
+      - Airway management
+      - IV fluid resuscitation (Parkland formula)
+      - Pain control
+      - Cover with sterile dressings
+      - Tetanus prophylaxis
+      - Do NOT apply topical agents before transfer
+      - TRANSFER to burn center
+      - Will require excision and grafting
+
+  - id: special_area_burn
+    type: diagnosis
+    diagnosis: Burn to Special Area (Face/Hands/Feet/Genitals/Joints)
+    icd10: T20.0XXA
+    urgency: high
+    workup:
+      - Assess depth and extent
+      - Ophthalmology consult if eye involvement
+      - Airway assessment if facial burn
+    treatment:
+      - IV fluids if significant TBSA
+      - Pain control
+      - Clean gently
+      - Silver sulfadiazine (avoid on face)
+      - Bacitracin for facial burns
+      - Hand burns: elevate, splint in position of function
+      - Tetanus prophylaxis
+      - TRANSFER to burn center for definitive care
+      - Burn center for specialized rehabilitation
+
+  - id: inhalation_injury
+    type: diagnosis
+    diagnosis: Inhalation Injury
+    icd10: T27.3XXA
+    urgency: critical
+    workup:
+      - ABG, carboxyhemoglobin (>10% diagnostic)
+      - CXR (often normal initially)
+      - Direct laryngoscopy/bronchoscopy
+      - Cyanide level if suspected
+    treatment:
+      - 100% oxygen via non-rebreather
+      - Early intubation if airway edema, stridor, or respiratory distress
+      - Mechanical ventilation with lung-protective strategy
+      - Hydroxocobalamin for cyanide poisoning
+      - Bronchodilators
+      - Pulmonary toilet
+      - TRANSFER to burn center
+      - ICU admission
+      - High mortality risk
+
+  - id: circumferential_burn
+    type: diagnosis
+    diagnosis: Circumferential Burn
+    icd10: T22.00XA
+    urgency: critical
+    workup:
+      - Assess distal perfusion (pulses, capillary refill, sensation)
+      - Compartment syndrome assessment
+      - Chest excursion if torso
+    treatment:
+      - Frequent neurovascular checks
+      - Elevate extremity
+      - EMERGENT escharotomy if compartment syndrome or vascular compromise
+      - Torso: escharotomy if respiratory compromise
+      - IV fluid resuscitation
+      - TRANSFER to burn center
+      - May require fasciotomy
+
+  - id: full_thickness
+    type: question
+    text: "TBSA of full-thickness burn?"
+    options:
+      - label: "<2% TBSA"
+        next: small_full_thickness
+      - label: "≥2% TBSA or special area"
+        next: full_thickness_transfer
+
+  - id: small_full_thickness
+    type: diagnosis
+    diagnosis: Small Full-Thickness Burn
+    icd10: T30.0
+    urgency: medium
+    workup:
+      - Clinical assessment
+      - Rule out deeper injury
+    treatment:
+      - Clean with soap and water
+      - Debride blisters if broken
+      - Silver sulfadiazine
+      - Non-adherent dressing
+      - Pain control (NSAIDs, acetaminophen)
+      - Tetanus if not up to date
+      - Plastic surgery or burn clinic follow-up in 24-48 hours
+      - Will likely need excision and grafting
+      - Keep clean and moist
+
+  - id: partial_thickness
+    type: question
+    text: "Characteristics of partial-thickness burn?"
+    options:
+      - label: "<10% TBSA, no special areas"
+        next: minor_partial_thickness
+      - label: "≥10% TBSA or special area"
+        next: major_burn
+
+  - id: minor_partial_thickness
+    type: diagnosis
+    diagnosis: Minor Partial-Thickness Burn (2nd Degree)
+    icd10: T30.0
+    urgency: low
+    workup:
+      - Calculate TBSA
+      - Clinical assessment
+    treatment:
+      - Cool with room-temperature water (not ice)
+      - Clean with mild soap and water
+      - Debride ruptured blisters (controversial - leave intact if <2cm)
+      - Silver sulfadiazine OR bacitracin
+      - Non-adherent dressing (Xeroform)
+      - Pain control (NSAIDs, acetaminophen, opioids PRN)
+      - Tetanus if not current
+      - Wound check in 48 hours
+      - Dressing changes daily or BID
+      - Should heal in 2-3 weeks
+      - Burn clinic follow-up if not improving
+
+  - id: superficial_burn
+    type: diagnosis
+    diagnosis: Superficial Burn (1st Degree/Sunburn)
+    icd10: T30.0
+    urgency: low
+    workup:
+      - Clinical diagnosis
+    treatment:
+      - Cool compresses
+      - Aloe vera gel
+      - Moisturizer
+      - NSAIDs for pain
+      - Hydration
+      - Should heal in 3-5 days without scarring
+      - No special wound care needed
+      - Return if blistering or worsening
+
+  - id: chemical_burn
+    type: question
+    text: "Type of chemical?"
+    options:
+      - label: "Acid (pH <7)"
+        next: acid_burn
+      - label: "Alkali (pH >7)"
+        next: alkali_burn
+      - label: "Hydrofluoric acid"
+        next: hf_burn
+      - label: "White phosphorus"
+        next: phosphorus_burn
+
+  - id: acid_burn
+    type: diagnosis
+    diagnosis: Acid Chemical Burn
+    icd10: T54.2X1A
+    urgency: high
+    workup:
+      - Assess depth and extent
+      - Consider systemic toxicity
+    treatment:
+      - Copious water irrigation (20-30 minutes minimum)
+      - Remove contaminated clothing
+      - Do NOT neutralize
+      - Assess depth after irrigation
+      - Pain control
+      - Tetanus
+      - Silver sulfadiazine
+      - Transfer to burn center if severe
+      - Ophthalmology consult if eye exposure
+
+  - id: alkali_burn
+    type: diagnosis
+    diagnosis: Alkali Chemical Burn
+    icd10: T54.3X1A
+    urgency: critical
+    workup:
+      - Assess depth (alkali burns deeper)
+      - Monitor for systemic effects
+    treatment:
+      - PROLONGED water irrigation (45-60 minutes or until pH normalized)
+      - Remove all contaminated clothing
+      - Do NOT neutralize
+      - More destructive than acid burns
+      - Check pH with litmus paper
+      - Pain control
+      - Tetanus
+      - TRANSFER to burn center (higher risk)
+      - May require debridement
+
+  - id: hf_burn
+    type: diagnosis
+    diagnosis: Hydrofluoric Acid Burn
+    icd10: T54.2X1A
+    urgency: critical
+    workup:
+      - ECG (monitor QT, arrhythmias)
+      - Calcium, magnesium, potassium
+      - Serial ECGs
+    treatment:
+      - Copious water irrigation
+      - Calcium gluconate gel topically
+      - Intralesional calcium gluconate injection (0.5 mL/cm² of 10% solution)
+      - IV calcium gluconate if large TBSA (risk of hypocalcemia, hyperkalemia)
+      - Cardiac monitoring
+      - Pain often severe
+      - Toxicology consult
+      - TRANSFER to burn center
+      - Can cause fatal arrhythmias
+
+  - id: phosphorus_burn
+    type: diagnosis
+    diagnosis: White Phosphorus Burn
+    icd10: T57.1X1A
+    urgency: critical
+    workup:
+      - Full trauma evaluation
+    treatment:
+      - Remove all clothing
+      - Brush off particles (DO NOT use water initially - ignites)
+      - After particle removal: copious water irrigation
+      - Cover with water-soaked dressings
+      - Copper sulfate solution to identify residual particles (controversial)
+      - Surgical debridement of embedded particles
+      - TRANSFER to burn center
+      - Risk of systemic toxicity
+
+  - id: electrical_burn
+    type: question
+    text: "Voltage and presentation?"
+    options:
+      - label: "High-voltage (>1000V) or lightning"
+        next: high_voltage
+      - label: "Low-voltage (<1000V) household"
+        next: low_voltage
+
+  - id: high_voltage
+    type: diagnosis
+    diagnosis: High-Voltage Electrical Burn
+    icd10: T75.4XXA
+    urgency: critical
+    workup:
+      - Continuous cardiac monitoring
+      - ECG (look for arrhythmias, MI)
+      - Troponin
+      - CK, myoglobin (rhabdomyolysis)
+      - CBC, CMP
+      - Urinalysis (myoglobinuria)
+      - Compartment syndrome assessment
+      - Imaging for fractures (muscle contractions)
+      - Ophthalmology exam (cataracts)
+    treatment:
+      - Cardiac monitoring for 24 hours minimum
+      - Aggressive IV fluid resuscitation (higher than calculated for burns)
+      - Target urine output 1-2 mL/kg/h if myoglobinuria
+      - Alkalinize urine if rhabdomyolysis
+      - Fasciotomy if compartment syndrome
+      - Debride devitalized tissue
+      - TRANSFER to burn center
+      - High risk of delayed complications
+      - May require amputations
+
+  - id: low_voltage
+    type: diagnosis
+    diagnosis: Low-Voltage Electrical Burn
+    icd10: T75.4XXA
+    urgency: medium
+    workup:
+      - ECG
+      - Cardiac monitoring if abnormal ECG, loss of consciousness, or cardiac symptoms
+    treatment:
+      - Observe if ECG normal and no symptoms
+      - Admit for monitoring if abnormal ECG
+      - Local wound care
+      - Tetanus
+      - Outpatient follow-up if stable
+      - Return precautions for palpitations, chest pain

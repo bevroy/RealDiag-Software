@@ -1,0 +1,142 @@
+tree_id: NEURO-MULTIPLE-SCLEROSIS
+name: Multiple Sclerosis Evaluation
+family: NEUROLOGY
+specialty: Neurology
+chief_complaint: Vision Changes, Weakness, Sensory Changes, Fatigue
+description: Evaluation and management of multiple sclerosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: ms_evaluation
+
+nodes:
+  - id: ms_evaluation
+    type: diagnosis
+    name: "Multiple Sclerosis"
+    icd10: "G35"
+    urgency: high
+    workup:
+      - Multiple sclerosis (MS) - Chronic autoimmune demyelinating disease of central nervous system (CNS)
+      - Prevalence - 1 million US, 2.8 million worldwide, increasing
+      - Female predominance 3:1
+      - Peak onset 20-40 years (young adults)
+      - Geography - Higher latitudes (vitamin D hypothesis), more common temperate climates
+      - Pathophysiology - Autoimmune T-cell mediated attack on myelin (oligodendrocyte damage) → demyelination → axonal injury
+      - Inflammation → plaques (lesions) in white matter CNS
+      - Dissemination in space (multiple CNS locations) AND time (relapses over time)
+      - Types - Four clinical courses
+      - Relapsing-remitting MS (RRMS) - 85% at diagnosis
+      - Acute attacks (relapses, exacerbations) with new/worsening symptoms lasting ≥24 hours
+      - Followed by complete or partial recovery (remission)
+      - Between attacks, disease stable (no progression)
+      - Secondary progressive MS (SPMS) - 50% RRMS transition to SPMS after 10-15 years
+      - Gradual worsening neurologic function (progressive disability)
+      - May have superimposed relapses early, but eventually no relapses (just progression)
+      - Primary progressive MS (PPMS) - 10-15% at diagnosis
+      - Gradual worsening from onset (no discrete relapses/remissions)
+      - Older age onset (40-50 years), equal male:female
+      - Progressive-relapsing MS (PRMS) - Rare (<5%), progressive from onset WITH superimposed relapses
+      - Clinical presentation - Symptoms depend on lesion location
+      - Optic neuritis - Unilateral vision loss (subacute over hours to days), eye pain with movement, decreased color vision (red desaturation), central scotoma
+      - Afferent pupillary defect (Marcus Gunn pupil)
+      - Most common initial presentation (20%), 50% develop MS within 15 years
+      - Transverse myelitis - Spinal cord inflammation
+      - Weakness (paraparesis or quadriparesis depending on level), sensory level, bowel/bladder dysfunction (urinary retention or incontinence)
+      - Lhermitte sign - Electric shock sensation down spine with neck flexion (dorsal column lesion)
+      - Brainstem/cerebellar - Diplopia (internuclear ophthalmoplegia INO, cranial nerve palsies), vertigo, ataxia, dysarthria, dysphagia, nystagmus
+      - INO - Impaired adduction one eye with nystagmus abducting eye (medial longitudinal fasciculus lesion), highly suggestive MS if bilateral and young
+      - Sensory - Paresthesias, numbness (face, limbs, trunk), Lhermitte sign
+      - Motor - Weakness, spasticity, hyperreflexia, Babinski sign
+      - Autonomic - Bladder dysfunction (urinary urgency, frequency, retention), bowel dysfunction (constipation), sexual dysfunction
+      - Cognitive - Memory impairment, slowed processing, executive dysfunction (40-60%)
+      - Fatigue - Most common symptom (80%), debilitating, worsened by heat (Uhthoff phenomenon)
+      - Uhthoff phenomenon - Worsening symptoms with heat (hot weather, exercise, fever)
+      - Paroxysmal symptoms - Trigeminal neuralgia, tonic spasms (brief involuntary muscle contractions)
+      - Physical exam - Findings depend on lesion location and disease stage
+      - Visual - Decreased visual acuity, color vision, visual field defect, optic disc pallor (chronic optic neuritis)
+      - Motor - Weakness (hemiparesis, paraparesis), spasticity, hyperreflexia, clonus, Babinski
+      - Sensory - Decreased sensation, dysesthesias
+      - Cerebellar - Ataxia (gait, limb), dysmetria, intention tremor, dysarthria
+      - Cranial nerves - INO, nystagmus, facial weakness
+      - Diagnostic criteria - McDonald Criteria 2017 (clinical + MRI)
+      - Requires dissemination in space (≥2 CNS locations) AND time (≥2 attacks OR MRI evidence of new lesions)
+      - MRI brain and spine with contrast - MOST IMPORTANT test
+      - T2/FLAIR - Hyperintense lesions (white matter plaques)
+      - Periventricular (fingers of Dawson, perpendicular to lateral ventricles), juxtacortical, infratentorial (brainstem, cerebellum), spinal cord
+      - T1 with gadolinium - Enhancing lesions (acute, blood-brain barrier breakdown), "black holes" (chronic axonal loss)
+      - Dissemination in space - ≥1 T2 lesion in ≥2 of 4 locations (periventricular, juxtacortical, infratentorial, spinal cord)
+      - Dissemination in time - Simultaneous gadolinium-enhancing AND non-enhancing lesions, OR new T2 or enhancing lesion on follow-up MRI
+      - Lumbar puncture - Supportive (not required if MRI diagnostic)
+      - Oligoclonal bands (OCBs) - Present in CSF but not serum (90% MS)
+      - Elevated IgG index (intrathecal IgG synthesis)
+      - Mild lymphocytic pleocytosis (5-50 cells/μL)
+      - Evoked potentials - Detect subclinical lesions
+      - Visual evoked potentials (VEP) - Delayed latency (optic nerve lesion)
+      - Less commonly used now (MRI more sensitive)
+      - Blood tests - Exclude MS mimics
+      - Vitamin B12, TSH, ANA, Lyme serology, HIV, RPR (syphilis), NMO-IgG (aquaporin-4 antibody, neuromyelitis optica)
+      - MOG antibody (myelin oligodendrocyte glycoprotein, MOG-associated disease)
+      - Differential diagnosis - MS mimics
+      - Neuromyelitis optica spectrum disorder (NMOSD) - Optic neuritis + longitudinally extensive transverse myelitis (≥3 vertebral segments)
+      - Anti-aquaporin-4 antibody positive
+      - Worse prognosis than MS, different treatment (rituximab, eculizumab)
+      - MOG-associated disease - Optic neuritis, transverse myelitis, ADEM
+      - Anti-MOG antibody positive, better prognosis than MS
+      - Acute disseminated encephalomyelitis (ADEM) - Monophasic, post-infectious, children
+      - CNS vasculitis, Lyme disease, sarcoidosis, vitamin B12 deficiency, stroke
+    treatment:
+      - Acute relapse treatment - High-dose corticosteroids
+      - Methylprednisolone 1 g IV daily x 3-5 days (or dexamethasone 320-400 mg IV)
+      - Speeds recovery (reduces inflammation), does NOT alter long-term prognosis
+      - Oral prednisone taper may follow (1 week)
+      - Plasma exchange (PLEX) - If severe relapse not responding to steroids (5-7 exchanges)
+      - Disease-modifying therapies (DMTs) - Reduce relapse rate, slow progression, prevent disability
+      - Start early (first demyelinating event or diagnosis) - Early treatment improves long-term outcomes
+      - Injectable first-line (moderate efficacy)
+      - Interferon beta-1a (Avonex IM weekly, Rebif SQ TIW) - 30% reduction relapses
+      - Interferon beta-1b (Betaseron, Extavia SQ every other day)
+      - Glatiramer acetate (Copaxone SQ daily or TIW) - 30% reduction
+      - Mechanism - Immunomodulation (shift Th1 to Th2, reduce BBB permeability)
+      - Side effects - Injection site reactions, flu-like symptoms (interferons), lipoatrophy
+      - Oral moderate efficacy
+      - Teriflunomide (Aubagio 7-14 mg PO daily) - Pyrimidine synthesis inhibitor
+      - Dimethyl fumarate (Tecfidera 240 mg PO BID) - Nrf2 pathway activation (neuroprotection)
+      - Flushing, GI upset common
+      - Diroximel fumarate (Vumerity) - Similar to DMF, better GI tolerability
+      - High-efficacy therapies - Greater relapse reduction (50-70%), more potent, consider if aggressive disease or inadequate response to first-line
+      - Oral high-efficacy
+      - Fingolimod (Gilenya 0.5 mg PO daily) - S1P receptor modulator (sequesters lymphocytes in lymph nodes)
+      - First-dose observation required (bradycardia risk 6 hours)
+      - Macular edema risk (ophthalmology baseline and 3 months)
+      - Siponimod (Mayzent), ozanimod (Zeposia) - Newer S1P modulators
+      - Cladribine (Mavenclad) - Purine analog, short course (2 treatment courses 1 year apart)
+      - Lymphocyte depletion, prolonged effect (4 years)
+      - Infusion high-efficacy
+      - Natalizumab (Tysabri 300 mg IV monthly) - α4 integrin inhibitor (prevents lymphocyte CNS entry)
+      - Very effective (70% relapse reduction), but PML risk (progressive multifocal leukoencephalopathy, JC virus)
+      - JC virus antibody testing required (if positive, PML risk 1:100-1:1000 depending on duration)
+      - Ocrelizumab (Ocrevus 600 mg IV q6 months) - Anti-CD20 (B-cell depletion)
+      - Approved RRMS and PPMS (only DMT approved for PPMS)
+      - Infusion reactions common (premedicate with steroids, antihistamines)
+      - Ofatumumab (Kesimpta 20 mg SQ monthly) - Anti-CD20, self-administered
+      - Alemtuzumab (Lemtrada 12 mg IV daily x 5 days, then 3 days 1 year later) - Anti-CD52 (profound lymphocyte depletion)
+      - Very effective but high toxicity (autoimmunity 30-40% thyroid disease, ITP), REMS program
+      - Autologous hematopoietic stem cell transplantation (AHSCT) - Highly active relapsing MS refractory to DMTs
+      - Ablative chemotherapy + stem cell rescue
+      - 90% relapse-free 5 years, but 2-5% mortality
+      - Symptomatic treatment
+      - Spasticity - Baclofen 10-80 mg/day, tizanidine 4-36 mg/day, gabapentin, botulinum toxin, intrathecal baclofen pump if severe
+      - Fatigue - Amantadine 100 mg BID, modafinil 100-200 mg daily, exercise
+      - Bladder dysfunction - Anticholinergics (oxybutynin, tolterodine), intermittent catheterization if retention
+      - Depression - SSRIs (common, 50% lifetime prevalence)
+      - Neuropathic pain - Gabapentin, pregabalin, duloxetine, tricyclics
+      - Tremor - Propranolol, primidone, clonazepam (often refractory)
+      - Physical therapy, occupational therapy, speech therapy
+      - Lifestyle - Vitamin D supplementation (2000-5000 IU daily), exercise, avoid smoking (accelerates progression), heat avoidance
+      - Prognosis - Variable, unpredictable
+      - Life expectancy reduced 7-14 years
+      - 50% require ambulatory assistance 15 years after diagnosis (without DMTs)
+      - Favorable - Female, RRMS, younger onset, complete recovery from relapses, long interval between first 2 attacks, sensory symptoms predominate, minimal disability 5 years
+      - Unfavorable - Male, PPMS, older onset, incomplete recovery, motor/cerebellar symptoms, high lesion load on MRI, rapid accumulation disability early
+      - DMTs reduce relapse rate 30-70%, reduce disability progression
+      - SPMS progression continues despite treatment (less responsive to DMTs)

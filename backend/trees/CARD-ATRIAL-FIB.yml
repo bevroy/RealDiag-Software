@@ -1,0 +1,236 @@
+tree_id: CARD-ATRIAL-FIB
+name: Atrial Fibrillation Management
+family: CARDIOLOGY
+specialty: Cardiology/Emergency Medicine/Internal Medicine
+chief_complaint: Atrial Fibrillation
+description: Diagnostic decision tree for atrial fibrillation evaluation and management
+version: "1.0"
+author: RealDiag Team
+entry_point: presentation
+
+nodes:
+  - id: presentation
+    type: question
+    text: "Clinical presentation and stability?"
+    options:
+      - label: "Unstable (hypotension, chest pain, altered mental status, acute heart failure)"
+        next: unstable_afib
+      - label: "Stable, new onset (<48 hours)"
+        next: new_onset_afib
+      - label: "Stable, duration >48 hours or unknown"
+        next: chronic_afib
+      - label: "Paroxysmal (self-terminating)"
+        next: paroxysmal_afib
+      - label: "Rapid ventricular response (RVR)"
+        next: afib_rvr
+
+  - id: unstable_afib
+    type: diagnosis
+    diagnosis: Unstable Atrial Fibrillation
+    icd10: I48.91
+    urgency: critical
+    workup:
+      - ECG (confirm AFib)
+      - Troponin
+      - BNP
+      - TSH
+      - CXR
+      - Echocardiogram
+    treatment:
+      - Emergent synchronized cardioversion (120-200J biphasic)
+      - Sedate first if conscious (propofol or etomidate)
+      - Anticoagulation after cardioversion
+      - Cardiology consult
+      - Hospital admission
+      - Evaluate for underlying cause
+
+  - id: new_onset_afib
+    type: question
+    text: "Duration of symptoms?"
+    options:
+      - label: "Definite <12 hours"
+        next: very_recent_afib
+      - label: "12-48 hours"
+        next: recent_afib
+
+  - id: very_recent_afib
+    type: diagnosis
+    diagnosis: New Onset AFib (<12 hours)
+    icd10: I48.91
+    urgency: high
+    workup:
+      - ECG
+      - Troponin, BNP
+      - TSH
+      - Echocardiogram
+      - Rule out reversible causes (MI, PE, thyrotoxicosis, alcohol)
+    treatment:
+      - Consider cardioversion (electrical or chemical)
+      - Heparin anticoagulation
+      - Rate control if not cardioverting (metoprolol, diltiazem)
+      - Ibutilide 1mg IV over 10 min (may repeat) OR
+      - Flecainide 300mg PO (if no structural heart disease) OR
+      - Electrical cardioversion
+      - Observe for 4-6 hours post-cardioversion
+      - Cardiology follow-up
+      - Continue anticoagulation based on CHA2DS2-VASc
+
+  - id: recent_afib
+    type: diagnosis
+    diagnosis: New Onset AFib (12-48 hours)
+    icd10: I48.91
+    urgency: high
+    workup:
+      - ECG
+      - Troponin, BNP
+      - TSH
+      - Echocardiogram (TEE before cardioversion to rule out thrombus)
+    treatment:
+      - Anticoagulation (heparin or LMWH)
+      - Rate control
+      - TEE-guided cardioversion OR
+      - 3-4 weeks anticoagulation then cardioversion
+      - CHA2DS2-VASc score for long-term anticoagulation
+      - Cardiology consult
+      - Hospital admission vs observation unit
+
+  - id: chronic_afib
+    type: question
+    text: "Symptom burden and management strategy?"
+    options:
+      - label: "Symptomatic, candidate for rhythm control"
+        next: rhythm_control
+      - label: "Asymptomatic or rate control preferred"
+        next: rate_control
+      - label: "On anticoagulation, routine follow-up"
+        next: chronic_management
+
+  - id: rhythm_control
+    type: diagnosis
+    diagnosis: AFib - Rhythm Control Strategy
+    icd10: I48.91
+    urgency: medium
+    workup:
+      - Echocardiogram (LA size, EF, valves)
+      - TSH
+      - Renal function
+      - Liver function
+      - CHA2DS2-VASc score
+    treatment:
+      - Anticoagulation for 3-4 weeks
+      - TEE to rule out thrombus
+      - Cardioversion (electrical preferred)
+      - Antiarrhythmic maintenance (amiodarone, sotalol, dofetilide, or flecainide)
+      - Continue anticoagulation based on CHA2DS2-VASc (not based on rhythm)
+      - Consider catheter ablation if refractory
+      - Cardiology follow-up
+      - Monitor for recurrence
+
+  - id: rate_control
+    type: diagnosis
+    diagnosis: AFib - Rate Control Strategy
+    icd10: I48.91
+    urgency: medium
+    workup:
+      - Baseline ECG
+      - Echocardiogram
+      - TSH
+      - CHA2DS2-VASc score
+    treatment:
+      - Rate control target <110 bpm at rest (lenient) or <80 bpm (strict if symptomatic)
+      - Beta-blocker (metoprolol 25-100mg BID) OR
+      - Calcium channel blocker (diltiazem 180-360mg daily)
+      - Digoxin as adjunct or if HF (0.125-0.25mg daily)
+      - Anticoagulation based on CHA2DS2-VASc (≥2 men, ≥3 women)
+      - Apixaban 5mg BID OR rivaroxaban 20mg daily OR warfarin (INR 2-3)
+      - Cardiology follow-up
+      - Monitor rate control and symptoms
+
+  - id: chronic_management
+    type: diagnosis
+    diagnosis: Chronic AFib on Anticoagulation
+    icd10: I48.2
+    urgency: low
+    workup:
+      - Annual ECG
+      - Echocardiogram if change in symptoms
+      - Annual renal function if on DOAC
+      - INR monitoring if on warfarin
+    treatment:
+      - Continue anticoagulation
+      - Continue rate control
+      - Monitor for bleeding
+      - Reassess CHA2DS2-VASc and HAS-BLED annually
+      - Cardiology follow-up annually
+      - Consider ablation if symptomatic despite medical therapy
+
+  - id: paroxysmal_afib
+    type: diagnosis
+    diagnosis: Paroxysmal Atrial Fibrillation
+    icd10: I48.0
+    urgency: medium
+    workup:
+      - 24-hour Holter or 30-day event monitor
+      - Echocardiogram
+      - TSH
+      - CHA2DS2-VASc score
+    treatment:
+      - Anticoagulation if CHA2DS2-VASc ≥2 (men) or ≥3 (women)
+      - Pill-in-the-pocket (flecainide 300mg or propafenone 600mg) if infrequent
+      - Daily antiarrhythmic if frequent episodes
+      - Beta-blocker for rate control during episodes
+      - Consider catheter ablation if symptomatic
+      - Trigger avoidance (alcohol, caffeine, stress)
+      - Cardiology referral
+
+  - id: afib_rvr
+    type: question
+    text: "Heart rate and symptoms?"
+    options:
+      - label: "HR >150, symptomatic"
+        next: severe_rvr
+      - label: "HR 110-150, stable"
+        next: moderate_rvr
+
+  - id: severe_rvr
+    type: diagnosis
+    diagnosis: AFib with Severe RVR
+    icd10: I48.91
+    urgency: high
+    workup:
+      - ECG
+      - Troponin
+      - BNP
+      - TSH
+      - Identify precipitant (infection, PE, MI, thyrotoxicosis)
+    treatment:
+      - IV rate control
+      - Metoprolol 2.5-5mg IV over 2 min, repeat q5min (max 15mg) OR
+      - Diltiazem 0.25 mg/kg IV over 2 min, then 5-15 mg/h infusion OR
+      - Esmolol 500 mcg/kg load then 50-200 mcg/kg/min (if concerned about tolerance)
+      - Avoid beta-blockers if decompensated HF (use digoxin or amiodarone)
+      - Anticoagulation
+      - Treat underlying cause
+      - Hospital admission
+      - Consider cardioversion if medical therapy fails
+
+  - id: moderate_rvr
+    type: diagnosis
+    diagnosis: AFib with Moderate RVR
+    icd10: I48.91
+    urgency: medium
+    workup:
+      - ECG
+      - TSH
+      - BNP if HF suspected
+      - Medication compliance check
+    treatment:
+      - Oral rate control
+      - Increase beta-blocker or CCB dose
+      - Metoprolol XL 50-200mg daily OR
+      - Diltiazem CD 180-360mg daily
+      - Add digoxin if inadequate control
+      - Ensure anticoagulation
+      - Observation vs admission based on symptoms
+      - Cardiology follow-up
+      - Investigate non-compliance or triggers

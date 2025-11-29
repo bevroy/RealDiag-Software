@@ -1,0 +1,159 @@
+tree_id: CARD-AORTIC-STENOSIS
+name: Aortic Stenosis Evaluation
+family: CARDIOLOGY
+specialty: Cardiology, Cardiac Surgery
+chief_complaint: Chest Pain, Syncope, Dyspnea, Heart Murmur
+description: Comprehensive evaluation of aortic stenosis severity and management
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: aortic_stenosis_presentation
+
+nodes:
+  - id: aortic_stenosis_presentation
+    type: question
+    text: "Severity and symptom status?"
+    options:
+      - label: "Severe symptomatic AS"
+        next: severe_symptomatic_as
+      - label: "Severe asymptomatic AS"
+        next: severe_asymptomatic_as
+      - label: "Mild-moderate AS"
+        next: mild_moderate_as
+
+  - id: severe_symptomatic_as
+    type: diagnosis
+    name: "Severe Symptomatic Aortic Stenosis"
+    icd10: "I35.0"
+    urgency: high
+    workup:
+      - Classic symptomatic triad - Once symptoms develop, prognosis is poor without intervention
+      - Angina pectoris - Most common initial symptom, median survival 5 years
+      - LVH causes increased myocardial oxygen demand, reduced coronary perfusion time (prolonged ejection)
+      - Syncope or presyncope - Exertional (fixed cardiac output cannot meet demand), median survival 3 years
+      - Arrhythmias also contribute
+      - Heart failure/dyspnea - Worst prognosis, median survival 2 years
+      - Systolic dysfunction (afterload mismatch), diastolic dysfunction (LVH, decreased compliance)
+      - Physical exam
+      - Harsh crescendo-decrescendo systolic murmur at RUSB, radiates to carotids
+      - Severity correlates with late-peaking murmur (severe AS peaks later in systole)
+      - Diminished or absent A2 (aortic closure sound)
+      - Pulsus parvus et tardus (weak, delayed carotid upstroke)
+      - Narrow pulse pressure if severe
+      - Laterally displaced PMI, S4 gallop (LVH)
+      - Echo Doppler - Definitive assessment of severity
+      - Severe AS criteria (need ALL three)
+      - Mean gradient >40 mmHg
+      - Peak velocity >4.0 m/s
+      - Aortic valve area (AVA) <1.0 cm² (or indexed AVA <0.6 cm²/m²)
+      - Normal AVA 3-4 cm²
+      - Moderate AS - Mean gradient 25-40, velocity 3-4 m/s, AVA 1.0-1.5 cm²
+      - Mild AS - Mean gradient <25, velocity <3 m/s, AVA >1.5 cm²
+      - Low-flow, low-gradient AS - Severe AS with low gradient (challenging diagnosis)
+      - LV dysfunction (EF <50%) - Reduced cardiac output → lower gradient despite severe stenosis
+      - Dobutamine stress echo - Distinguishes true severe AS (AVA remains <1.0, gradient increases) from pseudo-severe AS (AVA increases >1.0)
+      - Paradoxical low-flow, low-gradient AS - Normal EF but small LV cavity, restrictive physiology
+      - Calcium scoring on CT - High Agatston score >2000 men, >1200 women confirms severe AS
+      - Etiology
+      - Calcific degenerative (senile) - Most common, elderly >70 years, progressive calcium deposition
+      - Risk factors similar to atherosclerosis (HTN, hyperlipidemia, DM, smoking, CKD)
+      - Bicuspid aortic valve - Congenital, symptoms earlier (50-60 years), accelerated degeneration
+      - 1-2% population, associated aortopathy (ascending aortic aneurysm, dissection risk)
+      - Rheumatic heart disease - Rare in developed countries, commissural fusion, often mitral valve also involved
+    treatment:
+      - Aortic valve replacement - ONLY effective treatment for severe symptomatic AS, Class I indication
+      - Median survival without AVR - 2-5 years depending on symptom
+      - Medical therapy does NOT improve outcomes (diuretics for symptom palliation only)
+      - Surgical AVR (SAVR) - Gold standard, open-heart surgery, cardiopulmonary bypass
+      - Indications - Severe symptomatic AS (any symptoms), low surgical risk, younger patients
+      - Mechanical valve - Lasts lifetime, requires lifelong warfarin (INR 2-3), bioprosthetic valve durability 10-20 years, no anticoagulation (aspirin only), choice based on age/preference/contraindications
+      - Age <60 years - Mechanical preferred (avoid reoperation)
+      - Age >65 years - Bioprosthetic preferred (avoid anticoagulation)
+      - Age 60-65 - Shared decision-making
+      - Transcatheter AVR (TAVR) - Percutaneous, transfemoral or transapical approach
+      - Originally for inoperable or high surgical risk, now approved for all risk categories
+      - Indications - Severe symptomatic AS, high surgical risk (STS score >8%), intermediate risk, or patient preference if low risk
+      - Advantages - Less invasive, faster recovery, no sternotomy, lower 30-day mortality in some trials
+      - Disadvantages - Higher stroke risk periprocedural, paravalvular leak, permanent pacemaker 10-20% (conduction system injury), valve durability unknown long-term (10-year data emerging, appears good)
+      - Contraindications - Bicuspid valve (relative, improved devices), small annulus, LV thrombus, endocarditis
+      - PARTNER and CoreValve trials - TAVR non-inferior to SAVR in high, intermediate, and low-risk patients
+      - Risk assessment - STS score, EuroSCORE
+      - Low risk <4%, intermediate 4-8%, high >8%
+      - Heart Team approach - Cardiologist + cardiac surgeon discuss optimal strategy
+      - Balloon valvuloplasty - Palliative, NOT definitive treatment
+      - Temporary improvement, restenosis within 6-12 months
+      - Bridge to TAVR/SAVR in unstable patients, or destination palliation if not AVR candidate
+      - Medical management - If patient refuses or inoperable (comfort care)
+      - Diuretics for pulmonary edema (furosemide)
+      - Avoid vasodilators (ACE inhibitors, nitrates) - Can cause severe hypotension (fixed cardiac output)
+      - Beta-blockers cautiously (can reduce contractility)
+      - Gentle diuresis (preload-dependent, avoid dehydration)
+
+  - id: severe_asymptomatic_as
+    type: diagnosis
+    name: "Severe Asymptomatic Aortic Stenosis"
+    icd10: "I35.0"
+    urgency: medium
+    workup:
+      - Asymptomatic severe AS - Watchful waiting vs early intervention debate
+      - Natural history - Most develop symptoms within 2-5 years, then rapid decline
+      - Sudden cardiac death risk - 1% per year if truly asymptomatic, higher if very severe
+      - Risk stratification - Identify high-risk asymptomatic patients who benefit from early AVR
+      - Very severe AS (velocity >5 m/s, gradient >60 mmHg)
+      - LV dysfunction (EF <50%) - Indicates afterload mismatch, early AVR prevents irreversible damage
+      - Abnormal exercise stress test - Symptoms (angina, syncope, dyspnea) or hypotension with exercise (Class IIa indication for AVR)
+      - Rapid progression (velocity increase >0.3 m/s per year)
+      - Marked LVH (wall thickness ≥15 mm)
+      - Elevated BNP
+      - Moderate-severe valve calcification
+      - Clinical surveillance - If no high-risk features
+      - Echo every 6-12 months (monitor progression)
+      - Exercise stress test - Unmask symptoms (many patients subconsciously limit activity, "pseudo-asymptomatic")
+      - Contraindicated if symptomatic (risk syncope, sudden death)
+      - Patient education - Report symptoms immediately (angina, syncope, dyspnea)
+    treatment:
+      - Asymptomatic severe AS - Guidelines
+      - Class I indications for AVR (should perform)
+      - LV dysfunction (EF <50%) without other cause
+      - Undergoing other cardiac surgery (CABG, ascending aortic surgery)
+      - Class IIa indications (reasonable to perform)
+      - Very severe AS (velocity >5 m/s)
+      - Symptomatic on exercise stress test
+      - Rapid progression or markedly elevated BNP
+      - Class IIb indication (may consider)
+      - Low surgical risk + moderate-severe calcification or elevated biomarkers
+      - Watchful waiting - If none of above, close monitoring
+      - Echo every 6-12 months
+      - Exercise stress test annually (if able)
+      - Report symptoms immediately
+      - Early AVR controversy - Emerging data suggests early intervention may improve outcomes in asymptomatic patients (AVATAR, RECOVERY trials)
+      - Prevents irreversible LV remodeling, fibrosis
+      - TAVR makes intervention lower risk (may lower threshold)
+      - Guidelines evolving, shared decision-making
+
+  - id: mild_moderate_as
+    type: diagnosis
+    name: "Mild to Moderate Aortic Stenosis"
+    icd10: "I35.0"
+    urgency: low
+    workup:
+      - Mild AS - Mean gradient <25 mmHg, velocity <3 m/s, AVA >1.5 cm²
+      - Usually asymptomatic
+      - Prognosis good, slow progression
+      - Echo surveillance every 3-5 years
+      - Moderate AS - Mean gradient 25-40 mmHg, velocity 3-4 m/s, AVA 1.0-1.5 cm²
+      - May be asymptomatic or mild symptoms
+      - Progression variable (10-15% per year progress to severe)
+      - Echo surveillance every 1-2 years
+      - Risk factors for rapid progression
+      - Moderate-severe valve calcification
+      - Older age, CKD, hyperlipidemia, metabolic syndrome
+      - CAD, smoking, diabetes
+    treatment:
+      - Medical management
+      - Risk factor modification - Control HTN (gentle, avoid overtreatment), statin therapy (may slow progression, data mixed - SALTIRE trial negative, SEAS trial showed trend, no definitive recommendation), diabetes control, smoking cessation
+      - Avoid strenuous exercise/isometric exercise if moderate AS (guidelines suggest avoid competitive sports)
+      - Endocarditis prophylaxis - NOT recommended for AS (guidelines changed 2007)
+      - Only for prosthetic valves, prior endocarditis, certain congenital heart disease
+      - Surveillance - Serial echo monitoring, report symptoms immediately
+      - No indication for AVR unless symptoms develop or meets criteria for asymptomatic severe AS with high-risk features

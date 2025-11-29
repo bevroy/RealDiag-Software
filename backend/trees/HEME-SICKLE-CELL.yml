@@ -1,0 +1,157 @@
+tree_id: HEME-SICKLE-CELL
+name: Sickle Cell Disease Management
+family: HEMATOLOGY
+specialty: Hematology, Emergency Medicine
+chief_complaint: Pain Crisis, Acute Chest Syndrome, Fever, Anemia
+description: Comprehensive evaluation and management of sickle cell disease complications
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: sickle_cell_presentation
+
+nodes:
+  - id: sickle_cell_presentation
+    type: question
+    text: "Type of sickle cell crisis or complication?"
+    options:
+      - label: "Acute chest syndrome"
+        next: acute_chest_syndrome
+      - label: "Vaso-occlusive pain crisis"
+        next: vaso_occlusive_crisis
+      - label: "Splenic sequestration or aplastic crisis"
+        next: other_sickle_crisis
+      - label: "Chronic sickle cell disease management"
+        next: chronic_sickle_cell
+
+  - id: acute_chest_syndrome
+    type: diagnosis
+    name: "Acute Chest Syndrome (ACS)"
+    icd10: "D57.01"
+    urgency: critical
+    workup:
+      - Definition - New pulmonary infiltrate on CXR involving at least one complete lung segment + one or more of: fever, cough, sputum, dyspnea, hypoxia, chest pain
+      - Leading cause of death in sickle cell disease
+      - Causes - Infection (most common - S. pneumoniae, Mycoplasma, Chlamydia, viruses), fat embolism from bone marrow infarction, pulmonary infarction from vaso-occlusion, hypoventilation from rib/sternal infarction
+      - Clinical - Fever, cough, chest pain, dyspnea, hypoxia, tachypnea, often 2-3 days after pain crisis
+      - Chest X-ray - New infiltrate (may be delayed 24-48 hours after symptom onset, repeat CXR if initial negative)
+      - Labs - CBC (Hgb may drop, elevated WBC), reticulocyte count, blood cultures, sputum culture, viral respiratory panel
+      - ABG if severe (assess A-a gradient, hypoxia, hypercapnia)
+      - Type and screen (prepare for transfusion)
+    treatment:
+      - Hospital admission (ICU if severe hypoxia, respiratory distress, bilateral/multilobar infiltrates)
+      - Oxygen - Target SpO2 >95%
+      - Incentive spirometry - Every 2 hours while awake (prevent atelectasis, reduce ACS risk)
+      - IV fluids - Cautious hydration (maintenance rate, avoid overload which worsens pulmonary edema)
+      - Antibiotics - Broad-spectrum to cover typical and atypical organisms
+      - Ceftriaxone 1-2g IV daily PLUS azithromycin 500mg IV/PO daily OR levofloxacin 750mg IV/PO daily (covers S. pneumoniae, H. influenzae, Mycoplasma, Chlamydia)
+      - Add vancomycin if MRSA risk
+      - Analgesia - Opioids (morphine, hydromorphone) - Adequate pain control important, but avoid oversedation (worsens hypoventilation)
+      - Avoid NSAIDs if renal dysfunction
+      - Bronchodilators - Albuterol nebulizers if wheezing
+      - Blood transfusion
+      - Simple transfusion (if Hgb <6-7 g/dL) - 1-2 units PRBC, goal Hgb 10 g/dL
+      - Exchange transfusion (if severe ACS) - Remove patient RBCs and replace with normal RBCs, goal HbS <30%, do NOT increase Hgb above baseline (hyperviscosity risk)
+      - Indications for exchange - Hypoxia refractory to oxygen, rapidly progressive infiltrates, multilobar involvement, deteriorating despite simple transfusion
+      - Mechanical ventilation if respiratory failure (high mortality if intubated)
+      - Monitor closely for progression (can deteriorate rapidly)
+      - Complications - Respiratory failure, pulmonary hypertension, stroke, death
+      - Prevention (chronic management) - Hydroxyurea, chronic transfusions if recurrent ACS
+
+  - id: vaso_occlusive_crisis
+    type: diagnosis
+    name: "Vaso-Occlusive Pain Crisis (VOC)"
+    icd10: "D57.00"
+    urgency: high
+    workup:
+      - Most common acute complication of sickle cell disease
+      - Pathophysiology - Sickle RBCs occlude microcirculation → tissue ischemia and infarction → severe pain
+      - Common sites - Bones (long bones, spine, ribs, sternum), chest, abdomen
+      - Triggers - Infection, dehydration, cold, stress, menses, hypoxia, high altitude, alcohol, none identified (most common)
+      - Clinical - Severe pain (often excruciating), location varies (patients usually know their typical pain pattern), fever may be present
+      - Rule out other causes - Infection, acute chest syndrome (CXR), stroke, acute abdomen (surgical abdomen), avascular necrosis, osteomyelitis, priapism
+      - Labs - CBC (baseline Hgb, check for significant drop suggesting other crisis), reticulocyte count, type and screen if anemia worsening
+      - Imaging - Based on clinical concern (CXR if chest symptoms, CT if abdominal pain and concern for surgical abdomen)
+    treatment:
+      - Pain management (PRIORITY - treat pain aggressively)
+      - Assess baseline opioid use (if on chronic opioids at home, will need higher doses)
+      - IV opioids (first-line for severe pain)
+      - Morphine 0.1-0.15mg/kg IV q2-3h OR hydromorphone 0.015mg/kg IV q2-3h OR fentanyl 1-2 mcg/kg IV q1h
+      - PCA (patient-controlled analgesia) pump preferred - Allows patient to self-administer with lockout intervals
+      - Avoid meperidine (Demerol) - Metabolite normeperidine accumulates, causes seizures
+      - Add NSAIDs if no contraindication - Ketorolac 15-30mg IV q6h x 48 hours max (renal toxicity concern) or ibuprofen 400-800mg PO q6h
+      - Adjuncts - Acetaminophen, gabapentin, lidocaine patches
+      - Reassess pain frequently (every 30-60 minutes), adjust doses as needed
+      - IV fluids - 1.5x maintenance rate (correct dehydration, improve blood flow), avoid overhydration
+      - Oxygen - ONLY if hypoxic (routine oxygen not beneficial and may suppress erythropoiesis)
+      - Incentive spirometry - Every 2 hours while awake (prevent atelectasis and acute chest syndrome)
+      - Treat underlying trigger if identified - Antibiotics for infection
+      - Admission vs discharge
+      - Admit if - Severe pain requiring IV opioids, concern for ACS, fever/infection, unable to tolerate PO, poor social support
+      - Discharge if - Adequate pain control on PO opioids, able to hydrate, no concerning features, reliable follow-up
+      - Discharge medications - Opioids (oxycodone, morphine), NSAIDs, increase baseline hydroxyurea if applicable
+      - Avoid - Routine blood transfusions for uncomplicated VOC (not beneficial), sedatives (worsen hypoventilation)
+      - Prevention - Hydroxyurea (reduces crisis frequency by 50%), adequate hydration, avoid triggers, prophylactic antibiotics (penicillin), vaccinations
+
+  - id: other_sickle_crisis
+    type: diagnosis
+    name: "Other Sickle Cell Crises"
+    icd10: "D57.00"
+    urgency: critical
+    workup:
+      - Splenic sequestration crisis - Acute pooling of RBCs in spleen, sudden splenomegaly, severe anemia (Hgb drops >2 g/dL), hypovolemic shock, thrombocytopenia, reticulocytosis
+      - Most common in children (adults usually have autosplenectomy from repeated infarctions)
+      - Aplastic crisis - Temporary cessation of RBC production, severe anemia WITHOUT reticulocytosis, often triggered by parvovirus B19 infection
+      - Hemolytic crisis - Acute worsening of hemolysis (rare), elevated LDH, indirect bilirubin, low haptoglobin, reticulocytosis
+      - Stroke - Ischemic or hemorrhagic, sudden neurologic deficit, occurs in 10% of children, 25% by age 45
+    treatment:
+      - Splenic sequestration
+      - EMERGENT blood transfusion (simple transfusion to restore circulating volume and Hgb)
+      - Goal Hgb 6-8 g/dL (avoid rapid increase - can lead to hyperviscosity when sequestered cells release)
+      - IV fluids for hypovolemia
+      - Splenectomy - Consider if recurrent episodes (high recurrence rate)
+      - Aplastic crisis
+      - Supportive care (usually self-limited, resolves in 7-10 days when bone marrow recovers)
+      - Transfusion if severe symptomatic anemia
+      - Parvovirus PCR (if suspected), isolation precautions
+      - Stroke
+      - Emergent neurology consultation, head CT/MRI
+      - Exchange transfusion (emergent) - Goal HbS <30%, do NOT delay imaging for transfusion
+      - tPA contraindicated in hemorrhagic stroke
+      - Chronic transfusion program to prevent recurrence (maintain HbS <30-50%)
+      - Priapism - Aspiration/irrigation by urology, exchange transfusion for refractory cases
+
+  - id: chronic_sickle_cell
+    type: diagnosis
+    name: "Chronic Sickle Cell Disease Management"
+    icd10: "D57.1"
+    urgency: low
+    workup:
+      - Types - HbSS (most severe), HbSC (milder), HbS-beta-thalassemia
+      - Baseline labs - CBC, reticulocyte count, LFTs, BMP, ferritin
+      - Screen for complications - TCD (transcranial Doppler) for stroke risk in children, echocardiogram for pulmonary hypertension, ophthalmology for retinopathy, renal function (proteinuria)
+    treatment:
+      - Disease-modifying therapy
+      - Hydroxyurea (UNIVERSAL recommendation for all patients with HbSS or HbS-beta-thalassemia starting at 9 months)
+      - 15-35mg/kg/day PO, titrate to mild myelosuppression (ANC >2000, platelets >80k)
+      - Increases HbF (fetal hemoglobin, prevents sickling), reduces VOC by 50%, reduces ACS, reduces mortality
+      - Monitor CBC monthly during titration, then q3 months
+      - L-glutamine 5-15g PO BID (ages >5 years) - Reduces oxidative stress, reduces VOC frequency (add-on to hydroxyurea)
+      - Crizanlizumab (Adakveo) 5mg/kg IV monthly - P-selectin inhibitor, reduces VOC frequency
+      - Voxelotor (Oxbryta) 1500mg PO daily - Increases Hgb oxygen affinity, reduces hemolysis (improves Hgb by 1-2 g/dL)
+      - Chronic transfusion therapy - For stroke prevention (secondary prevention or primary if high TCD velocities), recurrent ACS, maintain HbS <30-50%
+      - Chelation therapy if iron overload from transfusions (deferasirox, deferoxamine)
+      - Prophylaxis
+      - Penicillin VK 125mg PO BID (ages 2mo-3yr) then 250mg BID (ages 3-5yr) - Prevents overwhelming pneumococcal sepsis (functional asplenia)
+      - Folic acid 1mg PO daily - Support erythropoiesis
+      - Vaccinations - Pneumococcal (PCV13, PPSV23), H. influenzae type b, meningococcal, annual influenza
+      - Hydroxyurea (all patients)
+      - Hematopoietic stem cell transplant (HSCT) - ONLY curative therapy, consider in children with severe disease (stroke, recurrent ACS, frequent VOC)
+      - Gene therapy - Emerging curative option (lentiviral gene addition or CRISPR gene editing)
+      - Manage chronic complications
+      - Avascular necrosis (hip, shoulder) - Pain management, joint replacement
+      - Chronic kidney disease - ACE inhibitor for proteinuria, avoid nephrotoxins
+      - Pulmonary hypertension - Echocardiogram screening, pulmonary vasodilators, chronic transfusions
+      - Retinopathy - Ophthalmology screening, laser photocoagulation
+      - Leg ulcers - Wound care, compression, transfusions if refractory
+      - Hematology follow-up every 3-6 months
+      - Reproductive counseling - Genetic counseling for family planning, preconception optimization

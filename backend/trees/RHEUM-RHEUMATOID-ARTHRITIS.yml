@@ -1,0 +1,112 @@
+tree_id: RHEUM-RHEUMATOID-ARTHRITIS
+name: Rheumatoid Arthritis Evaluation and Management
+family: RHEUMATOLOGY
+specialty: Rheumatology, Internal Medicine
+chief_complaint: Joint Pain, Swelling, Morning Stiffness
+description: Comprehensive evaluation and management of rheumatoid arthritis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: ra_presentation
+
+nodes:
+  - id: ra_presentation
+    type: question
+    text: "Presentation type?"
+    options:
+      - label: "New diagnosis - polyarticular synovitis evaluation"
+        next: ra_diagnosis
+      - label: "Established RA - disease activity assessment"
+        next: established_ra
+      - label: "RA flare or inadequate disease control"
+        next: ra_flare
+
+  - id: ra_diagnosis
+    type: diagnosis
+    name: "Rheumatoid Arthritis - New Diagnosis"
+    icd10: "M05.9"
+    urgency: medium
+    workup:
+      - Clinical presentation - Symmetric polyarticular synovitis (swelling, tenderness, warmth), small joints preferentially (MCPs, PIPs, wrists, MTPs), morning stiffness >30-60 minutes, improves with activity
+      - Pattern - Additive, symmetric, involves ≥3 joint areas
+      - Extra-articular manifestations - Rheumatoid nodules (20-30%, extensor surfaces), interstitial lung disease, pleural effusion, pericarditis, episcleritis, keratoconjunctivitis sicca, vasculitis (severe), Felty syndrome (RA + splenomegaly + neutropenia)
+      - 2010 ACR/EULAR Classification Criteria (score ≥6 out of 10 = definite RA)
+      - Joint involvement - 1 large joint (0), 2-10 large joints (1), 1-3 small joints (2), 4-10 small joints (3), >10 joints with ≥1 small joint (5)
+      - Serology - RF and anti-CCP both negative (0), RF or anti-CCP low-positive (2), RF or anti-CCP high-positive (3)
+      - Acute phase reactants - CRP and ESR both normal (0), CRP or ESR abnormal (1)
+      - Duration - <6 weeks (0), ≥6 weeks (1)
+      - Labs - RF (rheumatoid factor) positive in 70-80%, anti-CCP (anti-cyclic citrullinated peptide) positive in 70-80% (more specific than RF, predicts erosive disease), ESR and CRP (elevated, correlate with disease activity), CBC (anemia of chronic disease common, thrombocytosis), CMP, LFTs (baseline before starting DMARDs)
+      - Imaging - X-rays hands and feet (periarticular osteopenia early, marginal erosions later, joint space narrowing, subluxation in advanced disease), ultrasound or MRI more sensitive for early synovitis and erosions
+      - Rule out other causes - Psoriatic arthritis (psoriasis, DIP involvement, dactylitis, nail pitting), lupus (systemic features, anti-dsDNA), viral arthritis (parvovirus, hepatitis), reactive arthritis (preceding infection, asymmetric oligoarthritis)
+    treatment:
+      - Treat-to-target strategy - Goal is remission (DAS28 <2.6) or low disease activity
+      - Start DMARD therapy EARLY (within 3 months of symptom onset) - Delays in treatment lead to irreversible joint damage
+      - First-line DMARD - Methotrexate 15-25mg PO/SC weekly (most effective, well-studied)
+      - Must give folic acid 1mg daily (reduces side effects)
+      - Monitor CBC, CMP, LFTs q2-3 months
+      - Contraindications - Pregnancy (teratogenic), significant liver disease, alcohol abuse, CKD (GFR <30)
+      - Side effects - Nausea (common, take at bedtime or split dose), mucositis, hepatotoxicity, bone marrow suppression, pneumonitis (rare but serious), avoid NSAIDs (increase MTX toxicity)
+      - Alternative DMARDs if MTX contraindicated - Leflunomide 20mg daily (similar efficacy to MTX, hepatotoxic), sulfasalazine 2-3g daily (less effective), hydroxychloroquine 200-400mg daily (mildest DMARD, often combination therapy)
+      - Bridging therapy - While waiting for DMARD to work (takes 6-12 weeks)
+      - Low-dose prednisone 5-10mg daily (taper off over 3-6 months as DMARD takes effect)
+      - NSAIDs - Ibuprofen, naproxen, celecoxib for symptom relief
+      - Intra-articular corticosteroid injections for particularly inflamed joints
+      - Assess response at 3 months - DAS28 score (Disease Activity Score using 28 joints)
+      - Calculate using tender joint count, swollen joint count, ESR/CRP, patient global assessment
+      - Remission <2.6, low disease activity 2.6-3.2, moderate 3.2-5.1, high >5.1
+      - If inadequate response - Add or switch to biologic DMARD
+      - Patient education - Chronic disease requiring lifelong treatment, regular monitoring, avoid smoking (worsens disease), physical therapy, occupational therapy
+      - Rheumatology referral essential
+
+  - id: established_ra
+    type: diagnosis
+    name: "Established Rheumatoid Arthritis"
+    icd10: "M05.9"
+    urgency: low
+    workup:
+      - Assess disease activity - DAS28 score, tender/swollen joint count, patient-reported outcomes, ESR/CRP
+      - Monitor for complications - Joint deformities (swan neck, boutonniere, ulnar deviation), cervical spine involvement (atlantoaxial subluxation - can cause myelopathy), extra-articular disease
+      - Labs - CBC, CMP, LFTs (monitor DMARD toxicity), ESR/CRP
+      - Imaging - Annual X-rays to monitor for progression if active disease
+    treatment:
+      - Continue effective DMARD regimen
+      - Goal remission or low disease activity
+      - If in remission - Continue current therapy, consider tapering biologics cautiously (not conventional DMARDs)
+      - Regular monitoring - Clinic visits q3-6 months, labs q3-6 months
+      - Vaccinations - Influenza annually, pneumococcal (PCV13 + PPSV23), COVID-19, hepatitis B, recombinant zoster (Shingrix) - Give BEFORE starting biologics if possible
+      - Avoid live vaccines on biologics
+      - Screen for infections - TB (PPD or IGRA) before starting biologics, hepatitis B/C
+      - Manage comorbidities - Cardiovascular disease risk (RA increases CV risk 1.5-2x), osteoporosis (DEXA scan, bisphosphonates if indicated), depression/fatigue
+      - Physical therapy - Range of motion, strengthening
+      - Occupational therapy - Joint protection, assistive devices, splinting
+      - Surgery - Joint replacement (hip, knee) for severe damage, synovectomy, tendon repair
+
+  - id: ra_flare
+    type: diagnosis
+    name: "Rheumatoid Arthritis Flare"
+    icd10: "M05.9"
+    urgency: medium
+    workup:
+      - Assess disease activity - Increased joint pain, swelling, stiffness, elevated ESR/CRP
+      - Determine cause - Medication non-adherence, infection (septic arthritis must be ruled out), other triggers
+      - Rule out septic arthritis - If single hot swollen joint, arthrocentesis mandatory (synovial fluid WBC >50,000 suggests infection, Gram stain and culture)
+    treatment:
+      - Inadequate response to current DMARD (DAS28 >3.2 at 3 months or persistent moderate-high disease activity)
+      - Escalate therapy - Add or switch to different strategy
+      - Triple therapy (if not already on) - Methotrexate + hydroxychloroquine + sulfasalazine (effective, well-tolerated)
+      - Add biologic DMARD (usually with continued methotrexate)
+      - TNF inhibitors (first-line biologics) - Adalimumab 40mg SC q2 weeks, etanercept 50mg SC weekly, infliximab 3-10 mg/kg IV q8 weeks, certolizumab, golimumab
+      - Contraindications - Active infection, CHF (NYHA class III-IV), demyelinating disease, malignancy history (within 5 years)
+      - Side effects - Infection risk (reactivation TB, fungal), injection site reactions, infusion reactions
+      - Screen for TB before starting
+      - Non-TNF biologics - If TNF inhibitor fails or contraindicated
+      - Abatacept (T-cell costimulation inhibitor) - 500-1000mg IV monthly or 125mg SC weekly
+      - Rituximab (anti-CD20, B-cell depletion) - 1000mg IV x2 doses 2 weeks apart, repeat q6 months
+      - Tocilizumab (IL-6 receptor antagonist) - 4-8 mg/kg IV q4 weeks or 162mg SC weekly
+      - JAK inhibitors (oral targeted synthetic DMARDs) - If biologic fails or patient prefers oral
+      - Tofacitinib 5mg PO BID, baricitinib 2mg daily, upadacitinib 15mg daily
+      - Black box warnings - Serious infections, malignancy, MACE, thrombosis (especially age >65, CV risk factors, current/former smokers)
+      - Bridging with steroids - Short-term prednisone 10-20mg daily, taper over 2-4 weeks
+      - Intra-articular injections - Triamcinolone for individual joints
+      - Reassess at 3 months - If still inadequate response, switch to different biologic class or add JAK inhibitor
+      - Refractory disease - Combination biologics generally NOT recommended (increased infection risk), consider clinical trial

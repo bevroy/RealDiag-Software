@@ -1,0 +1,119 @@
+tree_id: CARD-RESTRICTIVE-CARDIOMYOPATHY
+name: Restrictive Cardiomyopathy Evaluation
+family: CARDIOLOGY
+specialty: Cardiology, Heart Failure
+chief_complaint: Dyspnea, Edema, Fatigue, Exercise Intolerance
+description: Evaluation and management of restrictive cardiomyopathy
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: restrictive_cardiomyopathy_evaluation
+
+nodes:
+  - id: restrictive_cardiomyopathy_evaluation
+    type: diagnosis
+    name: "Restrictive Cardiomyopathy"
+    icd10: "I42.5"
+    urgency: high
+    workup:
+      - Restrictive cardiomyopathy (RCM) - Impaired ventricular filling due to increased stiffness (decreased compliance) of ventricular myocardium
+      - Rare (least common cardiomyopathy, <5% all cardiomyopathies)
+      - Systolic function preserved (EF normal or near-normal early), diastolic dysfunction dominant
+      - Pathophysiology - Rigid, non-compliant ventricles → impaired diastolic filling → elevated filling pressures → atrial enlargement, pulmonary/systemic venous congestion
+      - Ventricular volumes normal or reduced (small cavity size)
+      - Distinguish from constrictive pericarditis (treatment very different, constriction curable with pericardiectomy)
+      - Causes
+      - Infiltrative - Amyloidosis (most common cause RCM in developed countries), sarcoidosis, hemochromatosis, glycogen storage diseases (Fabry, Gaucher)
+      - Amyloidosis - Light chain (AL, primary, plasma cell dyscrasia, worse prognosis median survival 6 months untreated) vs. transthyretin (ATTR, wild-type senile or hereditary, better prognosis)
+      - Sarcoidosis - Granulomatous infiltration, conduction abnormalities common (AV block, VT)
+      - Hemochromatosis - Iron deposition (also causes dilated cardiomyopathy if severe)
+      - Non-infiltrative - Idiopathic, familial (rare genetic mutations), scleroderma, diabetic cardiomyopathy
+      - Storage diseases - Glycogen storage (Pompe), lysosomal storage (Fabry)
+      - Endomyocardial - Endomyocardial fibrosis (tropical, eosinophilic), hypereosinophilic syndrome (Loeffler endocarditis), carcinoid heart disease, radiation, anthracyclines
+      - Clinical presentation - Symptoms right-sided heart failure predominate (vs. left-sided in most heart failure)
+      - Dyspnea on exertion, orthopnea (pulmonary venous congestion)
+      - Peripheral edema, ascites, hepatomegaly (systemic venous congestion)
+      - Fatigue, exercise intolerance (reduced cardiac output, chronotropic incompetence)
+      - Chest pain (if amyloid, mimics angina)
+      - Syncope (arrhythmias, conduction block)
+      - Physical exam
+      - Elevated JVP (prominent x and y descents, "M" or "W" waveform)
+      - Kussmaul sign - JVP rises with inspiration (impaired RV filling, also seen constrictive pericarditis)
+      - S3 (may be present), S4 (atrial contraction against stiff ventricle)
+      - Hepatomegaly, ascites, peripheral edema
+      - Hypotension (reduced cardiac output)
+      - Mitral/tricuspid regurgitation murmurs (annular dilation from atrial enlargement)
+      - Specific findings - Macroglossia, periorbital purpura, neuropathy (AL amyloid), skin changes (scleroderma)
+      - ECG - Low voltage (especially amyloid, infiltration), conduction abnormalities (AV block, BBB especially sarcoid), pseudoinfarct pattern (poor R wave progression, amyloid), atrial fibrillation/flutter (common, atrial enlargement)
+      - Chest X-ray - Normal or mildly enlarged heart (small or normal ventricular size, large atria), pulmonary venous congestion, pleural effusions
+      - Echocardiography - KEY diagnostic tool
+      - Ventricular size - Normal or reduced cavity size (small LV/RV)
+      - Wall thickness - Normal or increased (if infiltrative, "ground glass" sparkling appearance in amyloid)
+      - Systolic function - Preserved EF early (may decrease late)
+      - Diastolic dysfunction - Grade 3-4 (restrictive filling pattern), E/A ratio >2 (rapid early filling limited by stiff ventricle, reduced A wave), short deceleration time (<150 ms)
+      - Atrial enlargement - Biatrial enlargement (LA and RA), disproportionate to ventricular size
+      - Valves - Mitral/tricuspid regurgitation (functional, atrial dilation)
+      - Pericardium - Normal (excludes constrictive pericarditis, but constriction can coexist)
+      - Specific findings amyloid - "Granular sparkling" myocardium, apical sparing of longitudinal strain (bulls-eye pattern, base/mid affected more than apex), thickened valve leaflets, thickened interatrial septum
+      - Cardiac MRI - Assess tissue characterization
+      - Late gadolinium enhancement (LGE) - Global subendocardial or transmural enhancement (amyloid), patchy mid-wall enhancement (sarcoid)
+      - T1 mapping, extracellular volume (ECV) - Elevated in infiltrative disease (amyloid, sarcoid)
+      - Hemochromatosis - T2* reduced (iron deposition, paramagnetic effect)
+      - Cardiac catheterization - Hemodynamics
+      - Elevated filling pressures - RA, RV diastolic, PCWP all elevated, equalized (within 5 mmHg)
+      - "Dip and plateau" (square root sign) - RV/LV pressure tracings (rapid early diastolic filling then plateau)
+      - PA systolic pressure usually <50 mmHg (vs. >50 in constrictive)
+      - Distinguish from constrictive pericarditis
+      - Concordance - RCM systolic BP variation with respiration concordant between RV/LV (both increase inspiration), constrictive discordant (ventricular interdependence)
+      - BNP - Markedly elevated RCM (>400 pg/mL), normal or mildly elevated constrictive (<100-200)
+      - Tissue Doppler - E' reduced RCM, E' normal or increased constrictive (annulus moves normally, pericardium restricts)
+      - Specific diagnostic tests
+      - Amyloidosis - Serum/urine protein electrophoresis, serum free light chains, bone marrow biopsy (if AL suspected)
+      - Endomyocardial biopsy - Gold standard (Congo red stain, apple-green birefringence under polarized light)
+      - Technetium-99m pyrophosphate (PYP) scan - Grade 2-3 cardiac uptake diagnostic ATTR amyloid (no biopsy needed if + monoclonal protein excluded)
+      - Genetic testing - If ATTR suspected (hereditary variants)
+      - Sarcoidosis - Elevated ACE, PET scan (FDG uptake), endomyocardial biopsy (noncaseating granulomas, low yield 20-30%)
+      - Hemochromatosis - Ferritin, transferrin saturation, genetic testing (HFE mutations C282Y, H63D)
+      - Endomyocardial biopsy - Consider if diagnosis uncertain (histology, electron microscopy, immunohistochemistry)
+      - Risk highest in RCM (small stiff ventricles), perform with care
+    treatment:
+      - No specific treatment for myocardial restriction (irreversible in most cases)
+      - Treat underlying cause (if possible)
+      - Amyloidosis AL - Chemotherapy (melt plasma cells, stop light chain production)
+      - Bortezomib + cyclophosphamide + dexamethasone (CyBorD)
+      - Melphalan + dexamethasone ± autologous stem cell transplant (if eligible, age <65, low comorbidities)
+      - Daratumumab (anti-CD38 monoclonal) - Refractory, improves outcomes
+      - Cardiac response slow (6-12 months), prognosis poor if advanced (median survival 6 months untreated, 2-4 years with treatment)
+      - Amyloidosis ATTR - Transthyretin stabilizers and silencers
+      - Tafamidis - TTR stabilizer (prevents dissociation/misfolding), approved 2019, reduces mortality 30%, slows progression
+      - Dose 80 mg PO daily (Vyndaqel), expensive ($225,000/year)
+      - Inotersen, patisiran - TTR silencers (antisense oligonucleotide, siRNA), reduce TTR production
+      - Hereditary ATTR only (not wild-type)
+      - Liver transplant - Hereditary ATTR (liver produces mutant TTR), curative but cardiac disease may progress
+      - Prognosis better than AL (median survival 3-5 years wild-type ATTR)
+      - Hemochromatosis - Phlebotomy (reduce iron stores), iron chelation (deferoxamine), treat early (before irreversible fibrosis)
+      - Sarcoidosis - Corticosteroids (prednisone 20-40 mg daily), immunosuppressants (methotrexate, azathioprine)
+      - ICD (sudden death risk from VT)
+      - Symptomatic treatment heart failure
+      - Diuretics - Careful use (reduce congestion, but preload-dependent, excessive diuresis → hypotension, reduced cardiac output)
+      - Low-dose loop diuretics (furosemide 20-40 mg daily), titrate to fluid balance
+      - Avoid aggressive diuresis (precipitate hypotension, renal failure)
+      - Vasodilators - AVOID (ACE inhibitors, ARBs cause hypotension in restrictive physiology)
+      - Beta-blockers - AVOID or use cautiously (negative inotropic effect, may worsen in amyloid)
+      - Digoxin - AVOID in amyloid (binds amyloid fibrils, increases toxicity risk)
+      - Calcium channel blockers - AVOID in amyloid (bind fibrils, worsen hypotension)
+      - Arrhythmias - Common (atrial fibrillation 40-60%)
+      - Anticoagulation - Mandatory if atrial fibrillation (high stroke risk, low flow state, atrial thrombi)
+      - Rate control difficult (chronotropic incompetence, need higher HR to maintain CO)
+      - Amiodarone - Preferred antiarrhythmic (if needed, toxicity risk)
+      - Pacemaker/ICD - If conduction disease (especially sarcoid), or high-risk ventricular arrhythmias
+      - Transplant - Definitive treatment if advanced, refractory symptoms
+      - Indications - Age <65-70, advanced heart failure (NYHA III-IV), life expectancy <1-2 years without transplant
+      - Amyloid AL - Usually not candidates (systemic disease, recurrence in transplanted heart if plasma cell dyscrasia active)
+      - Combined heart-liver transplant may be considered (eliminate AL production + replace heart)
+      - Amyloid ATTR - May be candidates (localized disease if wild-type)
+      - Prognosis - Poor overall (worse than other cardiomyopathies)
+      - Amyloid AL - Median survival 6 months untreated, 2-4 years with treatment (advanced disease)
+      - Amyloid ATTR - Median survival 3-5 years (better than AL)
+      - Sarcoid - Variable (depends on extent cardiac involvement, arrhythmias)
+      - Hemochromatosis - Good if treated early (before fibrosis)

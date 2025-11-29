@@ -1,0 +1,142 @@
+tree_id: CARD-AORTIC-DISSECTION
+name: Aortic Dissection Evaluation
+family: CARDIOLOGY
+specialty: Cardiology, Cardiac Surgery, Emergency Medicine
+chief_complaint: Severe Chest Pain, Back Pain, Tearing Pain
+description: Evaluation and management of aortic dissection
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: aortic_dissection_evaluation
+
+nodes:
+  - id: aortic_dissection_evaluation
+    type: diagnosis
+    name: "Aortic Dissection"
+    icd10: "I71.00"
+    urgency: critical
+    workup:
+      - Aortic dissection - Tear in intimal layer of aorta → blood enters media creating false lumen
+      - LIFE-THREATENING EMERGENCY (mortality 1-2% per hour if untreated Type A)
+      - Epidemiology - Incidence 3-4 per 100,000/year, median age 63 years, male:female 2-3:1
+      - Risk factors
+      - Hypertension (75-80%, most important modifiable risk factor)
+      - Age (peak 60-80 years)
+      - Genetic/connective tissue disorders - Marfan syndrome (50% dissect by age 40, FBN1 mutation), Ehlers-Danlos syndrome type IV (vascular, COL3A1 mutation), Loeys-Dietz syndrome, familial thoracic aortic aneurysm
+      - Bicuspid aortic valve (9x risk, 5-10% develop dissection)
+      - Aortic aneurysm (risk increases with size, >5.5-6 cm)
+      - Cocaine/amphetamine use (acute hypertension)
+      - Trauma (deceleration injury, usually descending aorta)
+      - Iatrogenic (cardiac catheterization, cardiac surgery, aortic cannulation)
+      - Pregnancy (3rd trimester/peripartum, especially with Marfan)
+      - Giant cell arteritis, Turner syndrome, coarctation of aorta
+      - Classification
+      - Stanford A (proximal) - Involves ascending aorta (60-70%), requires EMERGENT SURGERY (mortality 50% at 48 hours without surgery)
+      - Stanford B (distal) - Descending aorta only (distal to left subclavian artery, 30-40%), usually medical management
+      - DeBakey I - Ascending + descending (40%)
+      - DeBakey II - Ascending only (20-30%)
+      - DeBakey III - Descending only (30-40%)
+      - Pathophysiology - Intimal tear → blood enters media (dissection plane) → creates true and false lumens → complications (rupture, branch vessel occlusion, aortic regurgitation, cardiac tamponade)
+      - Clinical presentation - SUDDEN ONSET severe pain (85-95%)
+      - Chest pain - Anterior chest (ascending aorta, Type A), often radiates to jaw/neck
+      - Back pain - Interscapular (descending aorta, Type B)
+      - Quality - TEARING, RIPPING, SHARP (classic, 50-60%), "worst pain of my life"
+      - Abrupt maximal intensity (sudden onset distinguishes from MI which crescendos)
+      - Migratory pain - Follows dissection propagation (chest → back → abdomen)
+      - Syncope (10-15%) - Cardiac tamponade, arrhythmia, rupture, decreased cerebral perfusion
+      - Neurologic symptoms (15-20%) - Stroke (carotid involvement), paraplegia (spinal artery), altered mental status
+      - Acute aortic regurgitation (40-75% Type A) - Diastolic murmur, pulmonary edema
+      - Branch vessel involvement - Pulse deficits, blood pressure differentials (>20 mmHg between arms), mesenteric ischemia (abdominal pain, bloody diarrhea), renal infarction (flank pain, hematuria), limb ischemia
+      - Cardiac tamponade (20% Type A) - Hypotension, muffled heart sounds, elevated JVP (Beck triad)
+      - Physical exam - CRITICAL
+      - Vital signs - Hypertension (70-80%), but can be normotensive or hypotensive (rupture, tamponade)
+      - Pulse deficit (15-30%) - Absent or diminished pulses (carotid, brachial, radial, femoral)
+      - Blood pressure differential - >20 mmHg systolic between arms (30-40% sensitive, 96% specific)
+      - Cardiac exam - Diastolic murmur (aortic regurgitation), muffled heart sounds (tamponade)
+      - Neurologic exam - Focal deficits (stroke), paraplegia, Horner syndrome (compression sympathetic chain)
+      - Diagnostic triad (classic but only 30% have all three) - Severe tearing chest/back pain + widened mediastinum on CXR + pulse differential
+      - Labs
+      - D-dimer - Elevated (>500 ng/mL) in 96-98% acute aortic dissection
+      - Negative D-dimer (<500) high negative predictive value (96-99%) if within 24 hours
+      - BUT not specific (elevated in PE, DVT, MI, trauma, sepsis)
+      - Use in combination with clinical score (ADD-RS)
+      - Troponin - May be elevated (coronary artery involvement 10-15%)
+      - CBC, CMP, coagulation studies (pre-op)
+      - Type and cross (prepare for surgery)
+      - ECG - Exclude MI (ST elevation suggests MI but could be coronary artery involvement from dissection, 10-15%)
+      - Usually normal or nonspecific ST-T changes
+      - Imaging - DO NOT DELAY definitive imaging if high suspicion
+      - Chest X-ray - INADEQUATE to rule out dissection (initial screening only)
+      - Widened mediastinum (>8 cm, 60-80% sensitive)
+      - Abnormal aortic contour, pleural effusion (hemothorax), displaced calcification
+      - Normal CXR does NOT exclude dissection (12-15% have normal CXR)
+      - CT angiography (CTA) chest/abdomen/pelvis - FIRST-LINE definitive imaging (98-99% sensitive, 95-98% specific)
+      - Advantages - Rapid (5-10 minutes), widely available, evaluates entire aorta
+      - Findings - Intimal flap (separates true and false lumens), contrast in false lumen, displaced intimal calcification
+      - Identify entry/exit tears, branch vessel involvement, pericardial effusion
+      - Transesophageal echocardiography (TEE) - 98-99% sensitive, 95% specific
+      - Advantages - Bedside (unstable patients), visualize ascending aorta, assess aortic valve, pericardial effusion
+      - Disadvantages - Requires sedation, operator-dependent, poor visualization distal ascending aorta (tracheal air), descending aorta
+      - MR angiography (MRA) - 98-99% sensitive, 98% specific
+      - Disadvantages - Time-consuming (30-60 min), not widely available emergently, contraindicated if unstable patient
+      - Advantages - No radiation, no contrast (renal failure)
+      - Aortography - Gold standard historically, rarely used (invasive, time-consuming, CT/TEE replaced)
+      - Risk stratification - Aortic Dissection Detection Risk Score (ADD-RS)
+      - High risk predisposing conditions (Marfan, family history, bicuspid aortic valve, thoracic aortic aneurysm)
+      - High risk pain features (sudden onset, severe intensity, tearing/ripping quality)
+      - High risk exam features (pulse deficit, systolic BP differential >20 mmHg, focal neurologic deficit, diastolic murmur)
+      - Score 0 = low risk (exclude dissection if D-dimer <500), score 1+ = imaging
+    treatment:
+      - IMMEDIATE management - STABILIZE HEMODYNAMICS
+      - Blood pressure control - CRITICAL (prevent dissection propagation/rupture)
+      - Goal - Systolic BP 100-120 mmHg, heart rate <60 bpm (reduce dP/dt, shear stress on aorta)
+      - Beta-blockers - FIRST-LINE
+      - Esmolol 500 mcg/kg IV bolus then 50-300 mcg/kg/min infusion (short-acting, titratable)
+      - OR labetalol 20 mg IV then 20-80 mg q10min OR 0.5-2 mg/min infusion
+      - OR metoprolol 5 mg IV q5min x 3 doses
+      - ALWAYS give beta-blocker BEFORE vasodilator (prevent reflex tachycardia)
+      - Vasodilators - ADD to beta-blocker if BP still elevated
+      - Nicardipine 5-15 mg/hr IV infusion (calcium channel blocker)
+      - OR nitroprusside 0.3-10 mcg/kg/min IV infusion (potent, immediate onset)
+      - Contraindication beta-blockers - Diltiazem or verapamil (non-DHP calcium channel blockers)
+      - Pain control - Morphine 2-4 mg IV q5-10min (reduces catecholamine surge)
+      - Avoid hypertension from pain
+      - Oxygen, IV access (2 large bore), telemetry monitoring
+      - Type and cross 6-10 units PRBCs (massive transfusion protocol if rupture)
+      - Avoid anticoagulation/antiplatelets (increase bleeding risk)
+      - NPO (potential surgery)
+      - Definitive management - Depends on Type A vs. B
+      - Type A (ascending) - EMERGENT SURGERY (within hours)
+      - Mortality 1-2% per hour without surgery
+      - Operative mortality 10-30% (but better than 80-90% without surgery)
+      - Procedure - Ascending aorta replacement (resect dissected segment, synthetic graft)
+      - Aortic valve repair/replacement if AR
+      - Coronary artery reimplantation if ostia involved
+      - Complications - Stroke (5-10%), bleeding, renal failure, paraplegia
+      - Type B (descending) - MEDICAL MANAGEMENT (usually)
+      - Uncomplicated Type B - Medical management (strict BP control)
+      - Beta-blockers, vasodilators, target BP <120/80, HR <60
+      - Survival 90-95% with medical management
+      - Complicated Type B - Endovascular or open surgery
+      - Indications - Rupture, malperfusion (visceral, limb, renal ischemia), refractory pain, uncontrolled hypertension, progression/expansion
+      - Thoracic endovascular aortic repair (TEVAR) - Stent-graft placed via femoral artery, covers entry tear
+      - Less invasive than open surgery (mortality 5-10% vs. 20-30% open)
+      - Complications - Stroke, paraplegia (2-5%, spinal cord ischemia), endoleak
+      - Open surgical repair - If TEVAR not feasible (mortality 20-30%)
+      - Chronic management - After acute phase
+      - Lifelong beta-blockers - Reduce aortic wall stress, prevent progression
+      - Atenolol 50-100 mg daily, metoprolol 50-200 mg daily
+      - Blood pressure control - Target <120/80 (130/80 if older)
+      - Serial imaging - CT/MRA q3-6 months first year, then yearly (monitor false lumen thrombosis, aneurysm formation)
+      - Surgery if aortic diameter >5.5 cm or rapid expansion (>0.5 cm/year)
+      - Genetic counseling/testing - If Marfan or other genetic syndrome suspected
+      - Screen first-degree relatives - Echocardiography, genetic testing
+      - Complications
+      - Rupture - Hemothorax, hemopericardium (tamponade), exsanguination (mortality 80-90%)
+      - Malperfusion syndromes - Coronary (MI), carotid (stroke), spinal (paraplegia), renal (AKI), mesenteric (bowel ischemia), limb (acute limb ischemia)
+      - Acute aortic regurgitation - Pulmonary edema, cardiogenic shock
+      - Cardiac tamponade - Pericardial effusion from ascending dissection rupture
+      - Prognosis
+      - Type A - Mortality 1-2% per hour untreated (50% at 48 hours, 80-90% at 2 weeks), operative mortality 10-30%, 5-year survival 50-70% post-surgery
+      - Type B uncomplicated - 90-95% survival with medical management, 5-year survival 60-80%
+      - Type B complicated - Higher mortality, better with TEVAR than open surgery

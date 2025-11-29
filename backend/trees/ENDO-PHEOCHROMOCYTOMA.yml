@@ -1,0 +1,108 @@
+tree_id: ENDO-PHEOCHROMOCYTOMA
+name: Pheochromocytoma Evaluation
+family: ENDOCRINOLOGY
+specialty: Endocrinology, Surgery
+chief_complaint: Hypertension, Palpitations, Headache, Sweating
+description: Evaluation and management of pheochromocytoma
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: pheochromocytoma_evaluation
+
+nodes:
+  - id: pheochromocytoma_evaluation
+    type: diagnosis
+    name: "Pheochromocytoma"
+    icd10: "D35.00"
+    urgency: high
+    workup:
+      - Pheochromocytoma - Catecholamine-secreting tumor from chromaffin cells
+      - Location - Adrenal medulla 85-90%, extra-adrenal (paraganglioma) 10-15% (organ of Zuckerkandl near aortic bifurcation, bladder, thorax)
+      - Incidence - Rare (2-8 per million per year), 0.1-0.6% of hypertensive patients
+      - "Rule of 10s" - 10% bilateral, 10% extra-adrenal, 10% malignant, 10% familial (NOW 30-40% familial with genetic testing)
+      - Genetic syndromes - Screen if diagnosed <40 years, bilateral, paraganglioma, family history, malignant
+      - MEN 2A - Medullary thyroid cancer + pheochromocytoma + primary hyperparathyroidism (RET mutation)
+      - MEN 2B - Medullary thyroid cancer + pheochromocytoma + marfanoid habitus + mucosal neuromas (RET mutation)
+      - Von Hippel-Lindau (VHL) - Retinal/CNS hemangioblastomas, renal cell carcinoma, pheochromocytoma (VHL mutation)
+      - Neurofibromatosis type 1 (NF1) - Café-au-lait spots, neurofibromas, pheochromocytoma
+      - SDH mutations (succinate dehydrogenase) - Paraganglioma-pheochromocytoma syndrome (SDHB, SDHD)
+      - Clinical presentation - "Classic triad" (5Ps: Pressure, Pain, Palpitations, Perspiration, Pallor)
+      - Hypertension - Sustained (50%) or paroxysmal (50%)
+      - Severe, refractory to multiple antihypertensives
+      - Paroxysmal "spells" - Sudden onset, last minutes to hours, occur multiple times per day to monthly
+      - Headache (sudden, severe, throbbing)
+      - Palpitations (tachycardia, arrhythmias)
+      - Diaphoresis (profuse sweating)
+      - Pallor (vasoconstriction) or flushing
+      - Anxiety, sense of impending doom
+      - Chest/abdominal pain
+      - Nausea
+      - Triggers - Tyramine-rich foods (cheese, wine), abdominal pressure (micturition if bladder pheo), surgery/anesthesia, medications (metoclopramide, opioids, steroids)
+      - Complications - Hypertensive crisis, MI, stroke, cardiomyopathy (catecholamine-induced, Takotsubo), arrhythmias
+      - Physical exam - Hypertension (persistent or orthostatic), tachycardia, pallor, rare abdominal mass
+      - Biochemical testing - FIRST step (confirm excess catecholamine production)
+      - Plasma free metanephrines - BEST initial test
+      - Sensitivity 97-99%, specificity 85-89%
+      - Fasting, supine for 30 min (upright position increases false positives)
+      - Normal excludes pheo (high negative predictive value)
+      - 24-hour urine metanephrines and catecholamines - Alternative/confirmatory
+      - Metanephrines (metanephrine + normetanephrine) - Metabolites of epinephrine/norepinephrine
+      - More stable than catecholamines (epinephrine/norepinephrine)
+      - Chromogranin A - Nonspecific marker (elevated in neuroendocrine tumors, PPI use, renal failure)
+      - Interpretation - >3-4x upper limit normal virtually diagnostic
+      - Mild elevation (1-2x ULN) - Consider repeat, rule out interfering medications
+      - Interfering medications - Tricyclic antidepressants, sympathomimetics (decongestants, cocaine, amphetamines), withdrawal (clonidine, alcohol), beta-blockers (increase normetanephrine)
+      - Hold interfering meds 2 weeks before testing if possible
+      - Anatomic localization - AFTER biochemical confirmation
+      - CT abdomen/pelvis with IV contrast - First-line imaging
+      - Adrenal mass (>2 cm typical), high attenuation (>10 HU), heterogeneous, avid enhancement
+      - Sensitivity 90-95%
+      - MRI abdomen/pelvis - Alternative (especially if contrast allergy, pregnancy)
+      - T2-weighted "light bulb sign" (very bright hyperintensity)
+      - Functional imaging - If CT/MRI negative or extra-adrenal suspected
+      - 123I-MIBG scintigraphy - Taken up by chromaffin cells
+      - Sensitivity 85-90% for pheo, 70% for paraganglioma
+      - 68Ga-DOTATATE PET - Somatostatin receptor imaging, high sensitivity for SDH-mutated tumors
+      - 18F-FDG PET - Hypermetabolic, useful for malignant/metastatic
+      - Genetic testing - Consider all patients (40% have germline mutation)
+      - Especially if <40 years, bilateral, paraganglioma, family history, malignant
+      - Panel - RET, VHL, NF1, SDHB, SDHD, SDHC, SDHAF2, TMEM127, MAX
+    treatment:
+      - Preoperative medical management - ESSENTIAL (prevent intraoperative hypertensive crisis)
+      - Alpha-adrenergic blockade - FIRST-LINE
+      - Phenoxybenzamine (non-selective irreversible) 10 mg BID, increase to 20-40 mg TID
+      - Start 10-14 days before surgery
+      - Goal - Control BP, allow volume expansion (chronic vasoconstriction → volume contraction)
+      - Side effects - Orthostatic hypotension, nasal congestion, reflex tachycardia
+      - Doxazosin, terazosin (selective alpha-1 blockers) - Alternative, shorter-acting
+      - Beta-adrenergic blockade - Add AFTER alpha blockade (control tachycardia/arrhythmias)
+      - NEVER give beta-blocker first (unopposed alpha → severe hypertension)
+      - Propranolol 20-40 mg TID or metoprolol 25-50 mg BID
+      - Calcium channel blockers - Amlodipine, nicardipine (adjunct for BP control)
+      - Metyrosine (Demser) - Tyrosine hydroxylase inhibitor, blocks catecholamine synthesis
+      - 250 mg QID, increase to 1-4 g/day
+      - Reserve for refractory hypertension or if alpha-blockers contraindicated
+      - Side effects - Sedation, depression, diarrhea, crystalluria
+      - Fluid resuscitation - High-sodium diet, IV fluids before surgery (expand intravascular volume)
+      - Goals preop optimization - SBP <130 mmHg, HR 60-80 bpm, orthostatic hypotension (indicates adequate alpha blockade), no PVCs for 1 week
+      - Surgical resection - CURATIVE treatment
+      - Laparoscopic adrenalectomy - Preferred approach (minimally invasive, faster recovery)
+      - Open adrenalectomy - Large tumors (>6 cm), invasive, malignant
+      - Intraoperative management - Experienced anesthesia team
+      - Tumor manipulation → massive catecholamine release → hypertensive crisis (SBP >200)
+      - Treat - Phentolamine IV bolus 5 mg, sodium nitroprusside infusion
+      - Post-tumor removal → catecholamine levels plummet → hypotension (requires fluid, vasopressors)
+      - Cortical-sparing adrenalectomy - Consider if bilateral pheo (preserve cortical function, avoid lifelong steroid replacement)
+      - Postoperative - Monitor BP closely (hypotension common first 24-48 hours)
+      - Biochemical testing - Repeat plasma/urine metanephrines at 2-6 weeks post-op (confirm cure)
+      - If elevated → residual disease, metastases, or incomplete resection
+      - Surveillance - Annual biochemical testing (recurrence 5-15%), imaging if biochemistry positive
+      - Lifelong for hereditary syndromes
+      - Malignant pheochromocytoma (10%) - Defined by presence of metastases (bone, liver, lung, lymph nodes)
+      - Cannot predict from histology (benign and malignant look identical)
+      - SDHB mutation highest malignant risk (30-70%)
+      - Treatment - Surgical debulking, MIBG therapy (radiolabeled 131I-MIBG targets tumor), chemotherapy (cyclophosphamide, vincristine, dacarbazine), tyrosine kinase inhibitors (sunitinib)
+      - 5-year survival 40-50%
+      - Prognosis - Excellent if benign and completely resected (cure >95%)
+      - Hypertension resolves 70-80% (may persist if prolonged HTN caused vascular damage)
+      - Recurrence 5-15% (higher if hereditary)

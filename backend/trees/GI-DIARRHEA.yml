@@ -1,0 +1,338 @@
+tree_id: GI-DIARRHEA
+name: Diarrhea Evaluation
+family: GASTROENTEROLOGY
+specialty: Gastroenterology/Infectious Disease/Primary Care
+chief_complaint: Diarrhea
+description: Diagnostic decision tree for evaluating acute and chronic diarrhea
+version: "1.0"
+author: RealDiag Team
+entry_point: duration
+
+nodes:
+  - id: duration
+    type: question
+    text: "Duration of diarrhea?"
+    options:
+      - label: "< 2 weeks (Acute)"
+        next: acute_features
+      - label: "2-4 weeks (Persistent)"
+        next: persistent_eval
+      - label: "> 4 weeks (Chronic)"
+        next: chronic_features
+
+  - id: acute_features
+    type: question
+    text: "Associated symptoms?"
+    options:
+      - label: "Bloody diarrhea, fever"
+        next: invasive_diarrhea
+      - label: "Watery diarrhea, vomiting, no fever"
+        next: noninvasive_diarrhea
+      - label: "Recent antibiotics"
+        next: cdiff_concern
+      - label: "Travel history"
+        next: travelers_diarrhea
+
+  - id: invasive_diarrhea
+    type: question
+    text: "Risk factors and severity?"
+    options:
+      - label: "Recent camping, untreated water"
+        next: giardia_concern
+      - label: "Undercooked poultry"
+        next: campylobacter
+      - label: "Severe abdominal pain, toxic appearance"
+        next: severe_colitis
+      - label: "Outbreak setting"
+        next: shigella_ecoli
+
+  - id: giardia_concern
+    type: diagnosis
+    diagnosis: Giardiasis
+    icd10: A07.1
+    urgency: medium
+    workup:
+      - Stool O&P (3 specimens)
+      - Giardia antigen test
+    treatment:
+      - Metronidazole 250mg TID x 5-7 days
+      - Tinidazole 2g single dose (alternative)
+      - Hydration
+
+  - id: campylobacter
+    type: diagnosis
+    diagnosis: Campylobacter Enteritis
+    icd10: A04.5
+    urgency: medium
+    workup:
+      - Stool culture
+      - CBC if severe
+    treatment:
+      - Usually self-limited
+      - Azithromycin 500mg x 3 days if severe
+      - Hydration
+      - Avoid antimotility agents
+
+  - id: severe_colitis
+    type: diagnosis
+    diagnosis: Severe Infectious Colitis
+    icd10: A09
+    urgency: high
+    workup:
+      - Stool culture, O&P, C. diff
+      - CBC, BMP, lactate
+      - CT abdomen if toxic megacolon suspected
+    treatment:
+      - IV fluids
+      - Empiric antibiotics (fluoroquinolone)
+      - Consider hospitalization
+      - Monitor for complications
+
+  - id: shigella_ecoli
+    type: diagnosis
+    diagnosis: Shigella/E. coli Enteritis
+    icd10: A03.9
+    urgency: medium
+    workup:
+      - Stool culture
+      - CBC
+      - Consider HUS in children (Shiga toxin)
+    treatment:
+      - Azithromycin or fluoroquinolone
+      - Hydration
+      - Avoid antimotility agents
+      - Monitor for HUS
+
+  - id: noninvasive_diarrhea
+    type: diagnosis
+    diagnosis: Viral Gastroenteritis
+    icd10: A08.4
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - BMP if dehydration
+    treatment:
+      - Oral rehydration (ORS)
+      - Probiotics
+      - Bland diet when tolerating
+      - Loperamide prn (if no fever/blood)
+
+  - id: cdiff_concern
+    type: diagnosis
+    diagnosis: Clostridioides difficile Infection
+    icd10: A04.7
+    urgency: high
+    workup:
+      - C. diff PCR or toxin assay
+      - CBC, BMP
+      - CT abdomen if severe
+    treatment:
+      - Stop offending antibiotic
+      - Vancomycin 125mg PO QID x 10 days
+      - Fidaxomicin (alternative)
+      - Consider fecal transplant if recurrent
+
+  - id: travelers_diarrhea
+    type: diagnosis
+    diagnosis: Travelers' Diarrhea
+    icd10: A09
+    urgency: low
+    workup:
+      - Usually clinical
+      - Stool culture if severe/persistent
+    treatment:
+      - Azithromycin 1000mg single dose
+      - Loperamide for symptomatic relief
+      - Hydration
+      - Probiotics
+
+  - id: persistent_eval
+    type: question
+    text: "Additional evaluation?"
+    options:
+      - label: "Recent antibiotics"
+        next: cdiff_concern
+      - label: "Immunocompromised"
+        next: opportunistic_infection
+      - label: "Otherwise healthy"
+        next: postinfectious_ibs
+
+  - id: opportunistic_infection
+    type: diagnosis
+    diagnosis: Opportunistic GI Infection
+    icd10: K52.9
+    urgency: high
+    workup:
+      - Stool culture, O&P, Cryptosporidium
+      - CMV testing if indicated
+      - Colonoscopy with biopsy
+    treatment:
+      - Treat specific organism
+      - Optimize immune function
+      - Supportive care
+      - ID consultation
+
+  - id: postinfectious_ibs
+    type: diagnosis
+    diagnosis: Post-Infectious IBS
+    icd10: K58.0
+    urgency: low
+    workup:
+      - Exclude persistent infection
+      - Consider colonoscopy if red flags
+    treatment:
+      - Dietary modifications (low FODMAP)
+      - Probiotics
+      - Loperamide prn
+      - Reassurance and follow-up
+
+  - id: chronic_features
+    type: question
+    text: "Stool characteristics?"
+    options:
+      - label: "Watery, large volume"
+        next: secretory_diarrhea
+      - label: "Fatty, foul-smelling (steatorrhea)"
+        next: malabsorption
+      - label: "Bloody, mucoid"
+        next: inflammatory_diarrhea
+      - label: "Small volume, urgency"
+        next: functional_diarrhea
+
+  - id: secretory_diarrhea
+    type: question
+    text: "Associated factors?"
+    options:
+      - label: "Flushing, wheezing"
+        next: carcinoid_syndrome
+      - label: "Episodic, stress-related"
+        next: ibs_diarrhea
+      - label: "Persistent despite fasting"
+        next: secretory_causes
+
+  - id: carcinoid_syndrome
+    type: diagnosis
+    diagnosis: Carcinoid Syndrome
+    icd10: E34.0
+    urgency: medium
+    workup:
+      - 24-hour urine 5-HIAA
+      - CT abdomen/pelvis
+      - Octreotide scan
+    treatment:
+      - Octreotide
+      - Surgical resection if localized
+      - Oncology referral
+
+  - id: ibs_diarrhea
+    type: diagnosis
+    diagnosis: IBS with Diarrhea
+    icd10: K58.0
+    urgency: low
+    workup:
+      - Clinical diagnosis (Rome criteria)
+      - Basic labs to exclude other causes
+    treatment:
+      - Dietary modifications (low FODMAP)
+      - Loperamide prn
+      - Rifaximin if indicated
+      - Eluxadoline or alosetron
+
+  - id: secretory_causes
+    type: diagnosis
+    diagnosis: Secretory Diarrhea
+    icd10: K59.1
+    urgency: medium
+    workup:
+      - Stool electrolytes
+      - Fasting stool output
+      - VIPoma workup if indicated
+      - Colonoscopy
+    treatment:
+      - Treat underlying cause
+      - Octreotide if secretory tumor
+      - Cholestyramine if bile acid diarrhea
+
+  - id: malabsorption
+    type: question
+    text: "Risk factors?"
+    options:
+      - label: "Alcohol use, chronic pancreatitis"
+        next: pancreatic_insufficiency
+      - label: "Prior intestinal surgery"
+        next: short_bowel_syndrome
+      - label: "Otherwise healthy"
+        next: celiac_disease
+
+  - id: pancreatic_insufficiency
+    type: diagnosis
+    diagnosis: Pancreatic Insufficiency
+    icd10: K86.81
+    urgency: medium
+    workup:
+      - Fecal elastase
+      - CT abdomen
+      - Consider ERCP
+    treatment:
+      - Pancreatic enzyme replacement (PERT)
+      - Fat-soluble vitamin supplementation
+      - Treat underlying cause
+
+  - id: short_bowel_syndrome
+    type: diagnosis
+    diagnosis: Short Bowel Syndrome
+    icd10: K91.2
+    urgency: medium
+    workup:
+      - Nutritional assessment
+      - Vitamin levels
+    treatment:
+      - Dietary modifications
+      - Antimotility agents
+      - Vitamin/mineral supplementation
+      - Consider TPN if severe
+
+  - id: celiac_disease
+    type: diagnosis
+    diagnosis: Celiac Disease
+    icd10: K90.0
+    urgency: low
+    workup:
+      - Tissue transglutaminase IgA
+      - Total IgA
+      - Upper endoscopy with duodenal biopsy
+    treatment:
+      - Strict gluten-free diet
+      - Nutritional supplementation
+      - Monitor response
+      - Dietitian referral
+
+  - id: inflammatory_diarrhea
+    type: diagnosis
+    diagnosis: Inflammatory Bowel Disease
+    icd10: K51.90
+    urgency: high
+    workup:
+      - CBC, CRP, ESR
+      - Fecal calprotectin
+      - Colonoscopy with biopsy
+      - Consider imaging
+    treatment:
+      - Refer to gastroenterology
+      - 5-ASA compounds
+      - Corticosteroids if active
+      - Consider biologics
+
+  - id: functional_diarrhea
+    type: diagnosis
+    diagnosis: Functional Diarrhea
+    icd10: K59.1
+    urgency: low
+    workup:
+      - Exclude organic causes
+      - Basic labs
+    treatment:
+      - Dietary fiber
+      - Loperamide prn
+      - Behavioral therapy
+      - Reassurance

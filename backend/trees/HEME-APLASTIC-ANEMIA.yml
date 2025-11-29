@@ -1,0 +1,94 @@
+tree_id: HEME-APLASTIC-ANEMIA
+name: Aplastic Anemia Evaluation
+family: HEMATOLOGY
+specialty: Hematology
+chief_complaint: Pancytopenia, Fatigue, Bleeding, Infections
+description: Evaluation and management of aplastic anemia
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: aplastic_anemia_evaluation
+
+nodes:
+  - id: aplastic_anemia_evaluation
+    type: diagnosis
+    name: "Aplastic Anemia"
+    icd10: "D61.9"
+    urgency: high
+    workup:
+      - Aplastic anemia - Bone marrow failure, pancytopenia (anemia, leukopenia, thrombocytopenia), hypocellular bone marrow
+      - Mechanism - Immune-mediated destruction of hematopoietic stem cells (cytotoxic T cells attack)
+      - Incidence - 2 per million per year, bimodal (15-25 years, >60 years)
+      - Causes
+      - Idiopathic - 70% (no identifiable cause, presumed autoimmune)
+      - Acquired
+      - Medications - Chloramphenicol, sulfonamides, NSAIDs, anticonvulsants, gold, chemotherapy (alkylating agents)
+      - Toxins - Benzene, insecticides, organic solvents
+      - Viral infections - Hepatitis (non-A, non-B, non-C most common, seronegative hepatitis), EBV, CMV, parvovirus B19, HIV
+      - Immune disorders - Eosinophilic fasciitis, thymoma, pregnancy
+      - Paroxysmal nocturnal hemoglobinuria (PNH) - 30-50% aplastic anemia have PNH clone
+      - Inherited - Fanconi anemia (DNA repair defect, congenital anomalies, age <10), dyskeratosis congenita, Shwachman-Diamond syndrome
+      - Presentation - Symptoms from pancytopenia
+      - Anemia - Fatigue, dyspnea, pallor
+      - Thrombocytopenia - Petechiae, purpura, mucosal bleeding (gums, nose), easy bruising, menorrhagia
+      - Neutropenia - Infections (bacterial, fungal), fever
+      - NO hepatosplenomegaly, NO lymphadenopathy (distinguishes from leukemia)
+      - Labs
+      - CBC - Pancytopenia
+      - Anemia - Normocytic, low reticulocyte count (bone marrow not responding)
+      - Leukopenia - ANC <1500 (often <500 severe)
+      - Thrombocytopenia - Platelets <50,000 (often <20,000 severe)
+      - Peripheral smear - No blasts (distinguishes from leukemia), no abnormal cells
+      - Bone marrow biopsy - REQUIRED for diagnosis
+      - Hypocellular (<25% cellularity, often <10%)
+      - Markedly reduced megakaryocytes, myeloid, erythroid precursors
+      - Increased fat, stromal cells
+      - NO fibrosis (distinguishes from myelofibrosis), NO infiltration (leukemia, lymphoma)
+      - NO dysplasia (MDS)
+      - Flow cytometry - PNH testing (CD55, CD59) on RBC and granulocytes (30-50% have PNH clone)
+      - Cytogenetics - Normal karyotype (abnormal suggests MDS)
+      - Viral serologies - Hepatitis A/B/C, EBV, CMV, HIV
+      - Vitamin B12, folate - Rule out megaloblastic anemia
+      - Fanconi anemia testing - If age <40 or family history (chromosome breakage test with diepoxybutane or mitomycin C)
+      - HLA typing - If potential transplant candidate (type patient and siblings)
+      - Severity classification
+      - Severe aplastic anemia (SAA) - Bone marrow cellularity <25% AND 2 of 3: ANC <500, platelets <20,000, reticulocytes <20,000 (corrected <1%)
+      - Very severe (VSAA) - SAA + ANC <200
+      - Non-severe (NSAA) - Does not meet SAA criteria
+      - Differential diagnosis - MDS (dysplasia, abnormal cytogenetics), acute leukemia (blasts), hairy cell leukemia (splenomegaly), PNH, megaloblastic anemia (high MCV)
+    treatment:
+      - Supportive care - ALL patients
+      - Transfusions - PRBC if Hgb <7 or symptomatic, platelets if <10,000 or bleeding
+      - CMV-negative, leukoreduced blood products (prevent allosensitization, important if transplant candidate)
+      - Infection prophylaxis - Antibacterial (if ANC <500, consider fluoroquinolone), antifungal (if ANC <200, fluconazole or posaconazole)
+      - Avoid IM injections, NSAIDs (bleeding risk)
+      - Definitive therapy - Based on age, severity, HLA-matched donor availability
+      - Allogeneic hematopoietic stem cell transplant (HSCT) - CURATIVE, first-line for young (<40 years) with severe/very severe AA and HLA-matched sibling donor
+      - Myeloablative conditioning (cyclophosphamide ± ATG), then donor stem cells
+      - Success rate 80-90% long-term survival (matched sibling donor)
+      - Complications - GVHD (acute 30-40%, chronic 20-30%), infections, graft failure 5-10%
+      - Matched unrelated donor (MUD) - If no sibling, outcomes improving (70-80% survival), higher GVHD risk
+      - Haploidentical transplant - Alternative if no matched donor
+      - Immunosuppressive therapy (IST) - For patients NOT transplant candidates (age >40, no matched donor, comorbidities)
+      - Horse antithymocyte globulin (ATG) + cyclosporine - STANDARD
+      - ATG 40 mg/kg/day IV x 4 days (lymphocyte depletion)
+      - Cyclosporine 5-10 mg/kg/day divided BID (maintain levels 200-400), continue 6-12 months minimum
+      - Response 60-80% (hematologic improvement 3-6 months)
+      - Partial response (transfusion-independent) or complete response (normal counts)
+      - Relapse 30-40% (reinitiate IST or consider transplant)
+      - Eltrombopag - Thrombopoietin receptor agonist, added to ATG + cyclosporine
+      - Stimulates hematopoietic stem cells
+      - Improves response rates to 80-90% (vs 60-70% ATG + CsA alone)
+      - Rabbit ATG - Alternative to horse ATG (no proven superiority, higher cost)
+      - Second-line IST - If refractory or relapse after first course ATG + CsA
+      - Repeat ATG (horse if initially rabbit, or vice versa), consider HSCT
+      - Androgens - Danazol, oxymetholone
+      - Modest efficacy (30-40% response), slow onset (3-6 months)
+      - For older patients not tolerating IST, or non-severe AA
+      - Side effects - Virilization (women), hepatotoxicity
+      - Supportive only - If non-severe AA, asymptomatic, observation with transfusion support
+      - Complications and prognosis
+      - Untreated severe AA - 80% mortality within 2 years (infection, bleeding)
+      - With treatment - HSCT 80-90% cure, IST 60-80% response
+      - Long-term risks - Clonal evolution (MDS 10-15%, AML 5%, PNH), relapse
+      - Surveillance - CBC every 3-6 months, monitor for cytopenias (relapse), dysplasia (MDS), hemolysis (PNH)

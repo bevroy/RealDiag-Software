@@ -1,0 +1,133 @@
+tree_id: NEPHRO-HYPONATREMIA
+name: Hyponatremia Evaluation
+family: NEPHROLOGY
+specialty: Nephrology, Internal Medicine, Endocrinology
+chief_complaint: Low Sodium, Confusion, Seizures, Headache
+description: Comprehensive evaluation and management of hyponatremia
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hyponatremia_evaluation
+
+nodes:
+  - id: hyponatremia_evaluation
+    type: question
+    text: "Volume status and severity?"
+    options:
+      - label: "Hypovolemic hyponatremia"
+        next: hypovolemic_hyponatremia
+      - label: "Euvolemic hyponatremia (SIADH)"
+        next: euvolemic_hyponatremia
+      - label: "Hypervolemic hyponatremia"
+        next: hypervolemic_hyponatremia
+
+  - id: hypovolemic_hyponatremia
+    type: diagnosis
+    name: "Hypovolemic Hyponatremia"
+    icd10: "E87.1"
+    urgency: high
+    workup:
+      - Hyponatremia - Serum Na <135 mEq/L (most common electrolyte disorder)
+      - Severity - Mild 130-135, moderate 125-129, severe <125, critical <120
+      - Symptoms - Related to cerebral edema (osmotic water shift into brain)
+      - Mild - Headache, nausea, confusion
+      - Severe - Seizures, coma, respiratory arrest, death
+      - Acute (<48 hours) more symptomatic than chronic (brain adapts by extruding osmoles)
+      - Hypovolemic hyponatremia - Total body water decreased, total body sodium decreased MORE
+      - Clinical signs - Dry mucous membranes, decreased skin turgor, orthostatic hypotension, tachycardia
+      - Causes
+      - Renal losses - Diuretics (thiazides most common, cause hypokalemia too), salt-wasting nephropathy, mineralocorticoid deficiency (Addison disease), cerebral salt wasting
+      - GI losses - Vomiting, diarrhea, third-spacing (pancreatitis, peritonitis, burns)
+      - Skin losses - Sweating
+      - Labs to differentiate
+      - Urine sodium (UNa) - <20 mEq/L extrarenal losses (appropriate renal conservation), >40 mEq/L renal losses
+      - Urine osmolality (Uosm) - >100 mOsm/kg (concentrated, appropriate response)
+      - BUN/Cr - Elevated (prerenal azotemia)
+    treatment:
+      - Volume resuscitation - NS 0.9% (isotonic saline)
+      - Repletes volume AND corrects hyponatremia
+      - Caution - Do NOT correct too rapidly (risk osmotic demyelination syndrome ODS)
+      - Correction rate - 6-8 mEq/L per 24 hours (max 10-12 mEq/L first 24hr if severe symptoms)
+      - Slower if chronic (0.5 mEq/L per hour)
+      - ODS (central pontine myelinolysis) - Rapid correction (>10-12 mEq/L per 24hr) causes brain demyelination
+      - Quadriparesis, pseudobulbar palsy, locked-in syndrome, can be irreversible
+      - Highest risk - Chronic hyponatremia, alcoholism, malnutrition, liver disease
+      - If overcorrection occurs - Re-lower sodium with D5W or desmopressin
+      - Treat underlying cause - Stop diuretics, replace fluid losses, evaluate for adrenal insufficiency if renal losses
+
+  - id: euvolemic_hyponatremia
+    type: diagnosis
+    name: "Euvolemic Hyponatremia (SIADH)"
+    icd10: "E22.2"
+    urgency: medium
+    workup:
+      - Euvolemic hyponatremia - Normal volume status, total body sodium normal or slightly decreased, total body water increased
+      - Clinical signs - No edema, normal BP, normal JVP, normal skin turgor
+      - SIADH (Syndrome of Inappropriate ADH) - Most common cause euvolemic hyponatremia
+      - Excessive ADH (vasopressin) → water retention → dilutional hyponatremia
+      - Causes SIADH - "CANT PISS"
+      - CNS disorders - Meningitis, encephalitis, head trauma, stroke, brain tumors
+      - Malignancy - Small cell lung cancer (paraneoplastic ADH production most common), pancreatic, bladder
+      - Pulmonary - Pneumonia, TB, positive pressure ventilation
+      - Medications - SSRIs, carbamazepine, cyclophosphamide, vincristine, NSAIDs, ecstasy/MDMA
+      - Surgery/pain/stress - Postoperative state (ADH release)
+      - Diagnostic criteria SIADH
+      - Hyponatremia with low serum osmolality (<275 mOsm/kg)
+      - Urine osmolality >100 mOsm/kg (inappropriately concentrated)
+      - Urine sodium >40 mEq/L (natriuresis from volume expansion)
+      - Euvolemic (no edema, no dehydration)
+      - Normal thyroid and adrenal function (exclude hypothyroidism, adrenal insufficiency)
+      - No diuretic use
+      - Fractional excretion of uric acid (FEUA) >12% (ADH increases uric acid excretion, low serum uric acid)
+    treatment:
+      - Treat underlying cause - Discontinue offending medications, treat pneumonia, etc.
+      - Fluid restriction - FIRST-LINE for chronic SIADH
+      - <800-1000 mL/day (less than urinary losses)
+      - Effective but difficult compliance
+      - Increase sodium intake (salt tablets, salty foods)
+      - Hypertonic saline (3% NaCl) - If severe symptomatic (seizures, coma)
+      - 100 mL bolus over 10 min (can repeat x2-3), then infusion
+      - Goal - Increase Na 1-2 mEq/L per hour until symptoms resolve, then slow
+      - Monitor Na q2-4h
+      - Vaptans - ADH V2 receptor antagonists (aquaretics, cause free water excretion without electrolyte loss)
+      - Tolvaptan 15-60 mg daily PO, conivaptan 20 mg IV load then 20-40 mg/day
+      - Very effective, but expensive, liver toxicity (tolvaptan), risk rapid overcorrection
+      - Reserve for refractory SIADH or inability to restrict fluids
+      - Urea - 15-60 g/day PO (osmotic diuresis, increases free water excretion)
+      - Cheap, effective, but unpalatable
+      - Demeclocycline - Tetracycline antibiotic, induces nephrogenic diabetes insipidus (blocks ADH effect)
+      - 300-600 mg BID
+      - Slow onset (days), nephrotoxic
+      - Rarely used now (vaptans preferred)
+      - Chronic management - Fluid restriction + salt tablets, treat underlying cause
+
+  - id: hypervolemic_hyponatremia
+    type: diagnosis
+    name: "Hypervolemic Hyponatremia"
+    icd10: "E87.1"
+    urgency: medium
+    workup:
+      - Hypervolemic hyponatremia - Total body water increased, total body sodium increased, but water increased MORE (dilutional)
+      - Clinical signs - Edema (peripheral, pulmonary, ascites), elevated JVP
+      - Causes - Edematous states
+      - Heart failure - Reduced cardiac output → RAAS activation → Na and water retention
+      - Cirrhosis - Portal hypertension, splanchnic vasodilation → "underfilled" → RAAS activation
+      - Nephrotic syndrome - Hypoalbuminemia → decreased oncotic pressure → third-spacing
+      - Advanced renal failure - Inability to excrete free water
+      - Labs
+      - Urine sodium - Variable
+      - <20 mEq/L in CHF, cirrhosis, nephrotic syndrome (avid Na retention)
+      - >40 mEq/L in renal failure (kidney cannot reabsorb Na)
+      - Urine osmolality >100 (concentrated in CHF/cirrhosis, isosthenuric ~300 in renal failure)
+    treatment:
+      - Treat underlying disease - Optimize HF management, diuretics, treat cirrhosis
+      - Fluid restriction - <1000-1500 mL/day
+      - More important than sodium restriction in hyponatremia (counterintuitive)
+      - Sodium restriction - <2 g/day (for edema management, not hyponatremia)
+      - Diuretics - Loop diuretics (furosemide) for volume overload
+      - Caution - Can worsen hyponatremia initially (excrete more Na than water), but improve long-term by removing excess volume
+      - Vaptans - Tolvaptan approved for hypervolemic hyponatremia in CHF (EVEREST trial modest benefit)
+      - Increases free water excretion, improves Na without worsening renal function
+      - Not routinely used (expensive, no mortality benefit)
+      - Avoid hypertonic saline - Worsens volume overload
+      - Dialysis - If renal failure with fluid overload, ultrafiltration removes excess water

@@ -1,0 +1,156 @@
+tree_id: ENDO-ADRENAL-INSUFFICIENCY
+name: Adrenal Insufficiency Evaluation
+family: ENDOCRINOLOGY
+specialty: Endocrinology, Internal Medicine
+chief_complaint: Fatigue, Weakness, Hypotension, Hyperpigmentation
+description: Diagnosis and management of primary and secondary adrenal insufficiency
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: adrenal_insufficiency_evaluation
+
+nodes:
+  - id: adrenal_insufficiency_evaluation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Acute adrenal crisis"
+        next: adrenal_crisis
+      - label: "Chronic primary adrenal insufficiency (Addison disease)"
+        next: primary_adrenal_insufficiency
+      - label: "Secondary adrenal insufficiency"
+        next: secondary_adrenal_insufficiency
+
+  - id: adrenal_crisis
+    type: diagnosis
+    name: "Acute Adrenal Crisis"
+    icd10: "E27.2"
+    urgency: critical
+    workup:
+      - Life-threatening emergency - Severe cortisol deficiency
+      - Precipitants - Infection/illness (most common), surgery, trauma, abrupt steroid discontinuation, GI losses (vomiting, diarrhea), medications (etomidate, ketoconazole, rifampin)
+      - Clinical presentation - SHOCK + hypoglycemia + hyponatremia
+      - Hypotension/shock - Refractory to fluids (cortisol needed for vascular tone)
+      - Fever (may mimic sepsis)
+      - Severe weakness, fatigue, lethargy, confusion
+      - Abdominal pain, nausea, vomiting (may mimic acute abdomen)
+      - Hypoglycemia (especially children)
+      - Labs - Classic triad: hyponatremia, hyperkalemia, hypoglycemia
+      - Hyponatremia - Dilutional (ADH excess + low cortisol) + mineralocorticoid deficiency (primary AI only)
+      - Hyperkalemia - Aldosterone deficiency (primary AI only, not secondary)
+      - Hypoglycemia - Cortisol deficiency (impaired gluconeogenesis)
+      - Eosinophilia, lymphocytosis, anemia
+      - Diagnosis - CLINICAL, do NOT delay treatment for testing
+      - If suspected → draw cortisol + ACTH → give hydrocortisone immediately (do NOT wait for results)
+      - Random cortisol <5 mcg/dL during stress strongly suggests AI
+      - Random cortisol >18-20 mcg/dL rules out (adequate stress response)
+      - Cortisol 5-18 may be inadequate for stress
+    treatment:
+      - EMERGENCY treatment - Do NOT delay for diagnostic testing
+      - IV hydrocortisone 100 mg bolus immediately, then 50-100 mg IV q6-8h (or 200 mg/24hr continuous infusion)
+      - High-dose hydrocortisone has mineralocorticoid activity (no need for fludrocortisone acutely)
+      - IV fluids - Aggressive NS 1-2L bolus, then continue (may need several liters, severe volume depletion)
+      - Dextrose - D5 NS or D10W if hypoglycemic
+      - Identify and treat precipitant - Antibiotics if infection, stress-dose steroids perioperatively
+      - Monitor - Glucose, electrolytes q4-6h initially, BP, mental status
+      - Taper steroids - Once stable (48-72 hours), taper to oral maintenance (hydrocortisone 15-25 mg daily divided BID-TID, add fludrocortisone if primary AI)
+      - Workup underlying cause - After stabilization, cortisol/ACTH levels, cosyntropin stim test, imaging (adrenal CT, pituitary MRI)
+
+  - id: primary_adrenal_insufficiency
+    type: diagnosis
+    name: "Primary Adrenal Insufficiency (Addison Disease)"
+    icd10: "E27.1"
+    urgency: high
+    workup:
+      - Destruction of adrenal cortex → deficiency of cortisol + aldosterone + androgens
+      - Causes
+      - Autoimmune adrenalitis - Most common developed countries (80-90%), anti-21-hydroxylase antibodies
+      - Associated autoimmune diseases - Autoimmune polyglandular syndrome (APS-1: Addison + hypoparathyroid + mucocutaneous candidiasis; APS-2: Addison + thyroid + T1DM)
+      - Tuberculosis - Most common worldwide, bilateral adrenal enlargement then calcification
+      - Fungal - Histoplasmosis, blastomycosis (immunocompromised)
+      - Hemorrhage/infarction - Sepsis (Waterhouse-Friderichsen syndrome with meningococcemia), anticoagulation, antiphospholipid syndrome
+      - Metastatic cancer - Lung, breast, melanoma, lymphoma (must replace >90% bilateral adrenals)
+      - Medications - Ketoconazole, etomidate, mitotane (adrenolytic)
+      - Adrenoleukodystrophy - X-linked, young males, very long chain fatty acids
+      - Clinical presentation - Insidious onset (months to years), nonspecific
+      - Fatigue, weakness - Most common, progressive
+      - Weight loss, anorexia
+      - Hyperpigmentation - HALLMARK of primary AI (NOT in secondary)
+      - Increased ACTH → stimulates melanocytes
+      - Generalized (sun-exposed areas, palmar creases, buccal mucosa, areolae, scars, pressure points)
+      - GI symptoms - Nausea, vomiting, diarrhea, abdominal pain, salt craving
+      - Orthostatic hypotension, dizziness
+      - Women - Loss of axillary/pubic hair (androgen deficiency)
+      - Labs - Hyponatremia, hyperkalemia, hypoglycemia (fasting), mild hypercalcemia, eosinophilia
+      - Diagnosis
+      - Morning cortisol (8 AM) - <3 mcg/dL diagnostic AI, >18 mcg/dL rules out, 3-18 indeterminate (proceed with stim test)
+      - ACTH - Elevated in primary AI (>100 pg/mL, often >200), confirms primary
+      - Cosyntropin (ACTH) stimulation test - GOLD STANDARD
+      - Baseline cortisol → give cosyntropin 250 mcg IV/IM → measure cortisol 30 and 60 min
+      - Normal response - Peak cortisol >18-20 mcg/dL (rules out AI)
+      - Abnormal - Peak <18 mcg/dL (AI confirmed)
+      - High-dose test (250 mcg) can miss partial/early AI, low-dose test (1 mcg) more sensitive
+      - Plasma renin - Elevated in primary AI (aldosterone deficiency)
+      - Adrenal CT - Identify cause (atrophy in autoimmune, enlargement in TB/fungal/mets, calcification, hemorrhage)
+      - Anti-21-hydroxylase antibodies - If autoimmune suspected
+      - Screen for other autoimmune diseases - TSH, fasting glucose, vitamin B12, celiac serologies
+    treatment:
+      - Glucocorticoid replacement - LIFELONG
+      - Hydrocortisone 15-25 mg daily divided BID or TID (mimic diurnal rhythm)
+      - 10-15 mg AM (on waking), 5 mg early afternoon (2-3 PM)
+      - OR prednisone 5 mg AM (longer half-life, once daily, but less physiologic)
+      - Goal - Symptom relief, avoid over-replacement (Cushing side effects)
+      - Mineralocorticoid replacement - Primary AI only (aldosterone deficiency)
+      - Fludrocortisone 0.05-0.2 mg daily (typically 0.1 mg)
+      - Monitor - BP (orthostatic), electrolytes (Na, K), plasma renin (goal upper normal)
+      - DHEA replacement - Consider in women (improve quality of life, libido, well-being)
+      - DHEA 25-50 mg daily
+      - Sick day rules - CRITICAL patient education
+      - "Stress dosing" - Double or triple hydrocortisone during illness (fever, vomiting, diarrhea, infection)
+      - Minor illness (URI) - Double dose x 2-3 days
+      - Moderate illness (flu, gastroenteritis) - Triple dose, contact physician
+      - Severe illness/unable to take PO - ER for IV hydrocortisone
+      - Surgery - Stress-dose IV hydrocortisone (100 mg perioperatively, taper over 2-3 days)
+      - Medical alert identification - Bracelet/card ("adrenal insufficiency, requires hydrocortisone")
+      - Emergency injection kit - Hydrocortisone 100 mg IM (teach family/caregiver)
+      - Monitoring - Symptoms, BP, electrolytes, plasma renin (fludrocortisone dose), bone density (avoid over-replacement)
+
+  - id: secondary_adrenal_insufficiency
+    type: diagnosis
+    name: "Secondary/Tertiary Adrenal Insufficiency"
+    icd10: "E27.3"
+    urgency: medium
+    workup:
+      - ACTH deficiency (pituitary) or CRH deficiency (hypothalamus) → low cortisol only (aldosterone normal)
+      - Causes
+      - Exogenous glucocorticoids - MOST COMMON (chronic steroid use suppresses HPA axis)
+      - Risk if prednisone >5 mg daily (or equivalent) x >3 weeks
+      - Pituitary tumor, surgery, radiation (panhypopituitarism)
+      - Sheehan syndrome (postpartum pituitary necrosis)
+      - Traumatic brain injury
+      - Lymphocytic hypophysitis (autoimmune)
+      - Clinical presentation - Similar to primary AI but:
+      - NO hyperpigmentation (low ACTH)
+      - NO hyperkalemia (aldosterone intact)
+      - NO salt craving
+      - May have other pituitary hormone deficiencies (hypothyroid, hypogonadism, GH deficiency)
+      - Labs - Hyponatremia (ADH excess), hypoglycemia, normal potassium
+      - ACTH - Low or inappropriately normal (should be high if cortisol low)
+      - Morning cortisol <3 mcg/dL suggests AI
+      - Cosyntropin stimulation test - May be NORMAL initially (adrenal glands intact, just not stimulated)
+      - In chronic secondary AI (>4-6 weeks), adrenals atrophy → abnormal response
+      - Insulin tolerance test (ITT) - GOLD STANDARD for secondary AI (tests entire HPA axis)
+      - Give insulin → induce hypoglycemia (glucose <40) → measure cortisol
+      - Normal peak cortisol >18-20 mcg/dL
+      - Dangerous (contraindicated if seizures, CAD), rarely done clinically
+      - MRI pituitary - Identify pituitary pathology (adenoma, empty sella)
+      - Screen for other pituitary deficiencies - TSH, free T4, LH/FSH, testosterone/estradiol, IGF-1, prolactin
+    treatment:
+      - Glucocorticoid replacement - Same as primary AI
+      - Hydrocortisone 15-25 mg daily divided BID-TID
+      - NO fludrocortisone (aldosterone intact)
+      - Sick day rules - Same stress-dose adjustments
+      - Treat underlying cause - Remove pituitary adenoma, replace other pituitary hormones
+      - Chronic steroid taper - If withdrawing exogenous steroids
+      - Slow taper (reduce by 10-20% every 1-2 weeks), may take months for HPA recovery
+      - Cosyntropin stim test to confirm recovery before stopping (normal response = safe to stop)

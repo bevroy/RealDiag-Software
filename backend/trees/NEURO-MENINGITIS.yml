@@ -1,0 +1,204 @@
+tree_id: NEURO-MENINGITIS
+name: Meningitis and Encephalitis Evaluation
+family: NEUROLOGY
+specialty: Neurology/Infectious Disease/Emergency Medicine
+chief_complaint: Meningitis
+description: Diagnostic decision tree for meningitis and encephalitis evaluation
+version: "1.0"
+author: RealDiag Team
+entry_point: presentation
+
+nodes:
+  - id: presentation
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Fever, headache, neck stiffness, altered mental status"
+        next: suspected_meningitis
+      - label: "Seizures, focal neurologic deficits, altered mental status"
+        next: suspected_encephalitis
+      - label: "Immunocompromised or chronic symptoms"
+        next: immunocompromised
+
+  - id: suspected_meningitis
+    type: question
+    text: "Contraindications to immediate LP?"
+    options:
+      - label: "No contraindications, clinically stable"
+        next: immediate_lp
+      - label: "Focal neurologic deficits, papilledema, immunocompromised, or severely altered mental status"
+        next: imaging_first
+      - label: "Contraindication to LP (coagulopathy, thrombocytopenia, infection at LP site)"
+        next: empiric_treatment
+
+  - id: immediate_lp
+    type: diagnosis
+    diagnosis: Suspected Bacterial Meningitis - LP First
+    icd10: G03.9
+    urgency: critical
+    workup:
+      - IMMEDIATE lumbar puncture (do not delay for imaging)
+      - CSF studies: cell count, glucose, protein, Gram stain, culture
+      - CSF PCR: HSV, enterovirus, if available
+      - Blood cultures x2
+      - CBC, BMP, glucose, lactate
+      - PT/INR if coagulopathy suspected
+    treatment:
+      - Antibiotics within 1 hour of arrival (ideally within 30 min of LP)
+      - Empiric: vancomycin 15-20 mg/kg IV + ceftriaxone 2g IV
+      - Add ampicillin 2g IV if >50 years or immunocompromised (Listeria coverage)
+      - Dexamethasone 10mg IV before or with first antibiotic dose
+      - Acyclovir 10 mg/kg IV q8h if HSV encephalitis possible
+      - ICU admission
+      - Seizure precautions
+      - Neurology and infectious disease consult
+
+  - id: imaging_first
+    type: diagnosis
+    diagnosis: Suspected Bacterial Meningitis - Imaging Before LP
+    icd10: G03.9
+    urgency: critical
+    workup:
+      - Blood cultures IMMEDIATELY
+      - Start antibiotics before imaging (do NOT delay)
+      - STAT non-contrast CT head
+      - If CT safe (no mass lesion, no midline shift, no increased ICP): proceed with LP
+      - CSF studies as above
+    treatment:
+      - Empiric antibiotics BEFORE imaging
+      - Vancomycin 15-20 mg/kg IV + ceftriaxone 2g IV
+      - Ampicillin 2g IV if >50 or immunocompromised
+      - Dexamethasone 10mg IV
+      - Acyclovir 10 mg/kg IV q8h
+      - LP after imaging if safe
+      - ICU admission
+      - If LP contraindicated: treat empirically based on blood cultures and clinical course
+
+  - id: empiric_treatment
+    type: diagnosis
+    diagnosis: Bacterial Meningitis - Empiric Treatment Only
+    icd10: G03.9
+    urgency: critical
+    workup:
+      - Blood cultures x2
+      - CT head
+      - MRI brain if LP permanently contraindicated
+      - PCR testing on blood if available
+    treatment:
+      - Broad-spectrum antibiotics
+      - Vancomycin + ceftriaxone + ampicillin
+      - Dexamethasone
+      - Acyclovir
+      - Adjust based on blood cultures
+      - ICU admission
+      - Consider repeat attempt at LP when safer
+      - Treat for 10-14 days minimum
+
+  - id: suspected_encephalitis
+    type: diagnosis
+    diagnosis: Suspected Encephalitis
+    icd10: G04.90
+    urgency: critical
+    workup:
+      - CT or MRI brain (MRI preferred - may show temporal lobe enhancement in HSV)
+      - Lumbar puncture:
+        - CSF PCR for HSV-1, HSV-2, VZV, enterovirus, WNV
+        - Lymphocytic pleocytosis typical
+        - RBCs suggest HSV encephalitis
+      - EEG (temporal lobe periodic lateralizing epileptiform discharges in HSV)
+      - Blood cultures
+      - Autoimmune encephalitis panel if no infectious cause
+    treatment:
+      - IMMEDIATE empiric acyclovir 10 mg/kg IV q8h (do NOT wait for CSF results)
+      - Treat for 14-21 days if HSV confirmed
+      - Antibiotics for bacterial meningitis coverage (vancomycin + ceftriaxone)
+      - Seizure management (levetiracetam, fosphenytoin)
+      - ICU admission
+      - Neurology and infectious disease consult
+      - If autoimmune: high-dose steroids, IVIG, plasmapheresis
+      - Mortality 70% untreated HSV encephalitis, 20-30% with treatment
+
+  - id: immunocompromised
+    type: question
+    text: "Type of immunocompromise?"
+    options:
+      - label: "HIV/AIDS (CD4 <200)"
+        next: hiv_meningitis
+      - label: "Transplant or immunosuppression"
+        next: opportunistic_meningitis
+      - label: "Chronic or subacute symptoms"
+        next: chronic_meningitis
+
+  - id: hiv_meningitis
+    type: diagnosis
+    diagnosis: Meningitis in HIV/AIDS
+    icd10: B45.1
+    urgency: critical
+    workup:
+      - CD4 count
+      - CT head (look for mass lesions - toxoplasmosis)
+      - Lumbar puncture:
+        - Opening pressure (elevated in cryptococcal)
+        - Cell count, glucose, protein
+        - Cryptococcal antigen (serum and CSF)
+        - India ink stain
+        - Fungal culture
+        - TB culture and AFB
+        - Toxoplasma PCR
+        - CMV PCR
+    treatment:
+      - Cryptococcal meningitis (most common):
+        - Amphotericin B 0.7-1 mg/kg/day + flucytosine 100 mg/kg/day x 2 weeks
+        - Then fluconazole 400mg daily x 8 weeks
+        - Then fluconazole 200mg daily lifelong
+        - Serial LPs to reduce opening pressure if >25 cm H2O
+      - Toxoplasmosis: sulfadiazine + pyrimethamine + leucovorin
+      - TB meningitis: RIPE therapy x 12 months
+      - Start or optimize ART
+      - Infectious disease consult
+
+  - id: opportunistic_meningitis
+    type: diagnosis
+    diagnosis: Opportunistic Meningitis
+    icd10: G03.9
+    urgency: critical
+    workup:
+      - CT or MRI brain
+      - Lumbar puncture with extensive studies:
+        - Bacterial, fungal, viral, TB cultures
+        - Cryptococcal antigen
+        - AFB smear
+        - PCR panel
+    treatment:
+      - Broad empiric coverage:
+        - Vancomycin + meropenem (or ceftriaxone + ampicillin)
+        - Amphotericin B for fungal coverage
+        - Acyclovir
+      - Adjust based on cultures
+      - Infectious disease consult
+      - Reduce immunosuppression if possible
+      - ICU admission
+
+  - id: chronic_meningitis
+    type: diagnosis
+    diagnosis: Chronic Meningitis
+    icd10: G03.9
+    urgency: high
+    workup:
+      - MRI brain with contrast
+      - Lumbar puncture:
+        - Lymphocytic pleocytosis typical
+        - TB culture (may need repeat LPs)
+        - Fungal culture (Cryptococcus, Histoplasma, Coccidioides)
+        - Cytology (malignancy)
+        - Sarcoidosis markers (ACE level)
+        - VDRL (neurosyphilis)
+      - Chest CT (TB, sarcoidosis)
+      - Travel history
+    treatment:
+      - TB meningitis: RIPE x 12 months + steroids
+      - Fungal: amphotericin B + azole
+      - Sarcoidosis: high-dose steroids
+      - Neurosyphilis: penicillin G 4 million units IV q4h x 14 days
+      - Malignant: intrathecal chemotherapy
+      - Infectious disease and neurology consult

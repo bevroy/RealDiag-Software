@@ -1,0 +1,76 @@
+tree_id: OBGYN-OVARIAN-TORSION
+name: Ovarian Torsion Evaluation
+family: OBGYN
+specialty: Gynecology, Emergency Medicine
+chief_complaint: Acute Pelvic Pain, Nausea, Vomiting
+description: Comprehensive evaluation and management of ovarian torsion
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: ovarian_torsion_presentation
+
+nodes:
+  - id: ovarian_torsion_presentation
+    type: question
+    text: "Suspicion for ovarian torsion?"
+    options:
+      - label: "High suspicion - Acute unilateral pelvic pain, known ovarian mass, abnormal ultrasound"
+        next: ovarian_torsion
+      - label: "Alternative diagnosis more likely"
+        next: alternative_pelvic_pain
+
+  - id: alternative_pelvic_pain
+    type: diagnosis
+    name: "Alternative Pelvic Pain Diagnosis"
+    icd10: "N94.89"
+    urgency: medium
+    workup:
+      - Consider other causes - Ectopic pregnancy, ovarian cyst rupture, PID, appendicitis, kidney stone
+      - Workup based on clinical suspicion
+    treatment:
+      - Treat underlying cause
+      - OBGYN consultation if diagnosis unclear
+
+  - id: ovarian_torsion
+    type: diagnosis
+    name: "Ovarian Torsion"
+    icd10: "N83.5"
+    urgency: critical
+    workup:
+      - Clinical presentation - Acute onset severe unilateral lower abdominal/pelvic pain, often sudden/sharp, may be intermittent (partial torsion), nausea and vomiting (80%), low-grade fever possible
+      - Risk factors - Ovarian mass (most common - dermoid cyst, cystadenoma, corpus luteum cyst), ovarian enlargement from ovulation induction (fertility treatments), pregnancy (increased ovarian size and mobility), long ovarian ligament, prior torsion (contralateral)
+      - Physical exam - Unilateral adnexal tenderness, palpable adnexal mass (two-thirds of cases), peritoneal signs if ovarian necrosis
+      - Labs
+      - Pregnancy test (β-hCG) - ALWAYS check (rule out ectopic pregnancy)
+      - CBC - Leukocytosis possible
+      - Urinalysis - Rule out UTI/pyelonephritis
+      - Labs often normal in ovarian torsion
+      - Pelvic ultrasound with Doppler (first-line imaging)
+      - Findings suggestive of torsion
+      - Enlarged ovary (>4cm diameter or volume >20 cm³, or >2x contralateral ovary)
+      - Peripherally displaced ovarian follicles ("string of pearls" sign)
+      - Ovarian mass (cyst or tumor) - Present in 80-90%
+      - Absent or decreased arterial Doppler flow (specificity ~90%, but normal flow does NOT exclude torsion - dual blood supply from ovarian and uterine arteries means flow can persist)
+      - Whirlpool sign - Twisted vascular pedicle (pathognomonic if seen)
+      - Free pelvic fluid
+      - NORMAL Doppler does NOT exclude torsion (sensitivity only 60%)
+      - Clinical diagnosis takes precedence over imaging
+      - CT or MRI if ultrasound non-diagnostic and high clinical suspicion (shows enlarged ovary, twisted pedicle, edema)
+      - Key principle - Ovarian torsion is a CLINICAL diagnosis, imaging supports but does NOT rule out, high index of suspicion is critical
+    treatment:
+      - SURGICAL EMERGENCY - Ovary viability decreases with time (necrosis after 10-12 hours, though can survive longer)
+      - NPO, IV fluids
+      - Analgesia - Opioids PRN
+      - Antiemetics - Ondansetron
+      - Immediate OBGYN consultation
+      - Emergency laparoscopy (diagnostic and therapeutic)
+      - Detorsion (untwisting) of adnexa - First step, detorsion EVEN IF ovary appears necrotic (color often improves after detorsion, ovarian function can recover even if appears dusky)
+      - Cystectomy if ovarian mass present (remove cyst, preserve ovarian tissue)
+      - Oophoropexy (suspension of ovary to pelvic wall) - Consider to prevent recurrent torsion, especially in reproductive-age women
+      - Oophorectomy ONLY if - Ovary remains necrotic after detorsion with no perfusion, or if malignancy suspected (send frozen section)
+      - Conservative approach (ovarian preservation) preferred in reproductive-age women and children
+      - Pathology - Send ovarian tissue/cyst for pathology (rule out malignancy, though rare in torsion)
+      - Complications if delayed treatment - Ovarian necrosis (loss of ovary), peritonitis, sepsis, potential venous thromboembolism
+      - Recurrence risk - 10% (higher if underlying anatomic predisposition)
+      - Follow-up - Outpatient OBGYN follow-up in 1-2 weeks, ultrasound to assess ovarian recovery
+      - Prognosis - Excellent if early diagnosis and treatment (<10 hours), ovarian function usually preserved if detorsion performed; Poor if delayed (>24 hours often results in ovarian necrosis)

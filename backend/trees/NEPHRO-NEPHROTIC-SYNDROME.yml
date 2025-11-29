@@ -1,0 +1,175 @@
+tree_id: NEPHRO-NEPHROTIC-SYNDROME
+name: Nephrotic Syndrome Evaluation
+family: NEPHROLOGY
+specialty: Nephrology, Internal Medicine
+chief_complaint: Edema, Proteinuria, Hypoalbuminemia, Hyperlipidemia
+description: Comprehensive evaluation and management of nephrotic syndrome
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: nephrotic_syndrome_presentation
+
+nodes:
+  - id: nephrotic_syndrome_presentation
+    type: question
+    text: "Age and clinical context?"
+    options:
+      - label: "Children (minimal change disease likely)"
+        next: minimal_change_disease
+      - label: "Adults - primary nephrotic syndrome"
+        next: adult_primary_nephrotic
+      - label: "Secondary nephrotic syndrome"
+        next: secondary_nephrotic
+
+  - id: minimal_change_disease
+    type: diagnosis
+    name: "Minimal Change Disease (MCD)"
+    icd10: "N04.0"
+    urgency: medium
+    workup:
+      - Most common cause nephrotic syndrome in children (80-90% age <10 years)
+      - Peak age 2-6 years, male predominance 2:1
+      - Pathophysiology - Podocyte foot process effacement (electron microscopy), immune dysregulation, increased glomerular permeability to albumin
+      - LM normal, IF negative, EM foot process fusion
+      - Nephrotic syndrome definition - "HALE" (Heavy proteinuria, Albuminuria/hypoalbuminemia, Lipiduria, Edema)
+      - Proteinuria >3.5 g/24hr (or spot urine protein/Cr >3-3.5) - Massive, selective (albumin >> globulins)
+      - Hypoalbuminemia <3 g/dL (often <2.5) - Loss in urine exceeds hepatic synthesis
+      - Hyperlipidemia - Cholesterol >200 (often >300), triglycerides elevated, hepatic lipoprotein synthesis increases
+      - Edema - Generalized, periorbital (especially morning), scrotal/labial, ascites, pleural effusions
+      - Pathophysiology - Hypoalbuminemia → decreased oncotic pressure → fluid shifts to interstitium, activates RAAS
+      - Clinical presentation MCD
+      - Sudden onset periorbital edema (mornings), progressing to anasarca
+      - Weight gain (fluid retention)
+      - Urine foamy (proteinuria)
+      - No hematuria, no hypertension, normal renal function (key differentiating features)
+      - Preceding URI or allergic reaction (triggers)
+      - Labs
+      - Urinalysis - 3-4+ protein, lipiduria (oval fat bodies, Maltese crosses), NO RBCs, NO RBC casts
+      - 24hr urine protein or spot urine protein/Cr ratio - Massive proteinuria
+      - Albumin <2.5-3, total protein low
+      - Cholesterol elevated, triglycerides elevated
+      - Cr/BUN normal (renal function preserved)
+      - C3/C4 normal (not complement-mediated)
+      - Renal biopsy - NOT needed in children with typical presentation (age 1-10, no hematuria, no HTN, normal Cr)
+      - Empiric steroid trial, biopsy only if atypical or steroid-resistant
+      - Adults - Biopsy usually performed (higher likelihood other causes)
+    treatment:
+      - Corticosteroids - First-line, highly responsive (>90% children remission)
+      - Prednisone 60 mg/m²/day (or 2 mg/kg/day, max 60 mg) x 4-6 weeks
+      - Then taper - 40 mg/m² every other day x 4-6 weeks, then gradual taper over 2-3 months
+      - Remission - Urine protein negative or trace x 3 consecutive days (usually within 2-4 weeks)
+      - Relapse - 80% children relapse (urine protein 3-4+ x 3 days)
+      - Infrequent relapsers (<2 relapses in 6 months) - Repeat steroid course
+      - Frequent relapsers (≥2 relapses in 6 months) or steroid-dependent (relapse during taper or within 2 weeks of stopping) - Steroid-sparing agents
+      - Cyclophosphamide 2 mg/kg/day x 8-12 weeks (induce prolonged remission, 60-70% 5-year remission, gonadal toxicity risk)
+      - Calcineurin inhibitors - Cyclosporine 4-5 mg/kg/day or tacrolimus 0.1-0.2 mg/kg/day (effective but relapse when stopped)
+      - Mycophenolate mofetil 500-1000 mg/m²/day BID (steroid-sparing, less toxic)
+      - Rituximab (anti-CD20 mAb) - Emerging therapy for refractory cases
+      - Supportive care
+      - Diuretics - Furosemide 1-2 mg/kg/day for edema (monitor volume status, avoid overdiuresis → AKI)
+      - Salt restriction
+      - ACE inhibitors or ARBs - Reduce proteinuria (NOT first-line in children, consider if persistent proteinuria)
+      - Statins - If persistent hyperlipidemia after remission
+      - Anticoagulation prophylaxis - If albumin <2 and additional risk factors (consider in adults, rare in children)
+      - Infection prophylaxis - Pneumococcal vaccine (loss of immunoglobulins in urine, complement factors)
+      - Prognosis - Excellent in children, most achieve long-term remission by adolescence/adulthood
+      - Adults - Still responsive to steroids but higher relapse rate, may need chronic immunosuppression
+
+  - id: adult_primary_nephrotic
+    type: diagnosis
+    name: "Primary Nephrotic Syndrome in Adults"
+    icd10: "N04.9"
+    urgency: medium
+    workup:
+      - Adults with nephrotic syndrome - Broader differential, always biopsy
+      - Primary glomerular diseases (60-70%)
+      - Membranous nephropathy (MN) - Most common primary in Caucasian adults (30-40%)
+      - Focal segmental glomerulosclerosis (FSGS) - 30-35%, more common in African Americans
+      - Minimal change disease (MCD) - 10-15% adults
+      - Membranoproliferative GN (MPGN) - <10%
+      - IgA nephropathy with nephrotic-range proteinuria - Rare
+      - Secondary causes (30-40%) - Diabetes, SLE, amyloidosis, drugs (see next node)
+      - Renal biopsy - Essential for diagnosis in adults
+      - Light microscopy, immunofluorescence, electron microscopy
+      - Complications of nephrotic syndrome
+      - Thromboembolism - Hypercoagulable (loss antithrombin III, protein C/S, increased fibrinogen, platelet hyperreactivity)
+      - DVT, PE, renal vein thrombosis (suspect if sudden flank pain, gross hematuria, worsening renal function, asymmetric kidney size)
+      - Risk highest if albumin <2.5 and membranous nephropathy
+      - Prophylactic anticoagulation if albumin <2-2.5 (controversial, consider if additional risk)
+      - Infection - Loss of immunoglobulins, complement, encapsulated organisms (S. pneumoniae, H. influenzae)
+      - Spontaneous bacterial peritonitis (if ascites)
+      - AKI - Hypovolemia (overdiuresis), ATN, interstitial nephritis
+      - Hyperlipidemia - Accelerated atherosclerosis, cardiovascular risk
+    treatment:
+      - Treat underlying cause based on biopsy diagnosis
+      - Membranous nephropathy (MN)
+      - "Rule of thirds" - 1/3 spontaneous remission, 1/3 persistent proteinuria, 1/3 progressive to ESRD
+      - Low-risk (proteinuria <4 g/day, normal Cr, no symptoms) - Conservative management ACE/ARB + observation x 6 months
+      - High-risk (proteinuria >8 g/day, declining GFR, symptomatic edema) - Immunosuppression
+      - Cyclical Ponticelli regimen - Alternate months steroids + alkylating agent (chlorambucil or cyclophosphamide) x 6 months (60-70% remission)
+      - Rituximab 375 mg/m² weekly x 4 doses or 1000 mg x 2 doses (emerging first-line, fewer side effects, 60-65% remission MENTOR trial)
+      - Calcineurin inhibitors (cyclosporine, tacrolimus) - Alternative, relapse common after stopping
+      - Focal segmental glomerulosclerosis (FSGS)
+      - Primary (idiopathic) vs secondary (obesity, drugs, reflux nephropathy, HIV, adaptive to nephron loss)
+      - High-dose prednisone 1 mg/kg (max 80 mg) daily x 4-6 months (only 30-40% respond, slow response 3-4 months)
+      - If steroid-resistant - Calcineurin inhibitors (cyclosporine), mycophenolate
+      - Poor prognosis - 50% progress to ESRD within 10 years if no remission
+      - African Americans, collapsing variant worst prognosis
+      - Minimal change disease (adults) - Same as children, prednisone responsive but slower (8-16 weeks remission), higher relapse rate
+      - Supportive care for all
+      - ACE inhibitors or ARBs - Reduce proteinuria (captopril, enalapril, lisinopril, losartan)
+      - Diuretics - Loop diuretics (furosemide 40-80 mg BID) for edema, combination with thiazides if refractory
+      - Salt restriction <2 g/day
+      - Statins - High-intensity (atorvastatin 40-80 mg, rosuvastatin 20-40 mg)
+      - Anticoagulation - If albumin <2-2.5 and membranous nephropathy (rivaroxaban 10 mg daily or warfarin INR 2-3 or prophylactic LMWH)
+      - Pneumococcal vaccine, influenza vaccine
+      - Prognosis - Depends on underlying cause, response to treatment, degree of renal impairment at presentation
+
+  - id: secondary_nephrotic
+    type: diagnosis
+    name: "Secondary Nephrotic Syndrome"
+    icd10: "N04.9"
+    urgency: medium
+    workup:
+      - Secondary causes - Systemic disease or drug/toxin causing nephrotic syndrome
+      - Diabetic nephropathy - Most common cause nephrotic syndrome overall (30-40% all cases)
+      - Long-standing diabetes (usually >10 years), retinopathy often coexists
+      - Progressive proteinuria (microalbuminuria → macroalbuminuria → nephrotic)
+      - Hypertension, declining GFR
+      - Biopsy - Nodular glomerulosclerosis (Kimmelstiel-Wilson), diffuse mesangial expansion, basement membrane thickening
+      - Systemic lupus erythematosus (SLE) - Lupus nephritis Class V (membranous)
+      - Subepithelial immune deposits, full house IF (IgG, IgA, IgM, C3, C1q)
+      - Active SLE serologies (anti-dsDNA, low C3/C4)
+      - Amyloidosis - AL (primary, light chain) or AA (secondary, chronic inflammation)
+      - Apple-green birefringence Congo red stain
+      - Systemic symptoms (fatigue, weight loss, hepatosplenomegaly, macroglossia, periorbital purpura, carpal tunnel)
+      - Fat pad biopsy or rectal biopsy may diagnose (less invasive)
+      - HIV-associated nephropathy (HIVAN) - Collapsing FSGS variant
+      - African Americans, advanced HIV (low CD4, high viral load)
+      - Rapidly progressive to ESRD without ART
+      - Preeclampsia - Proteinuria, hypertension, thrombocytopenia, elevated LFTs (HELLP)
+      - Delivery definitive treatment
+      - Hepatitis B and C - Membranous (HBV) or MPGN with cryoglobulinemia (HCV)
+      - Medications/drugs - NSAIDs (minimal change or interstitial nephritis), gold, penicillamine, interferon, bisphosphonates, lithium, heroin (FSGS)
+      - Malignancy - Membranous nephropathy with solid tumors (lung, colon, breast, stomach), Hodgkin lymphoma (minimal change)
+      - Paraneoplastic, resolves with tumor treatment
+    treatment:
+      - Treat underlying disease
+      - Diabetic nephropathy
+      - Glycemic control (HbA1c <7%, avoid hypoglycemia)
+      - Blood pressure control (<130/80) - ACE inhibitors or ARBs first-line (lisinopril 10-40 mg daily, losartan 50-100 mg daily)
+      - SGLT2 inhibitors - Empagliflozin, dapagliflozin (slow CKD progression, cardiovascular benefit CREDENCE, DAPA-CKD trials)
+      - GLP-1 agonists - Semaglutide (renal + CV benefit)
+      - Finerenone (nonsteroidal MRA) - FIDELITY trial reduces CKD progression
+      - Lupus nephritis Class V
+      - Hydroxychloroquine 200-400 mg daily (all SLE patients)
+      - ACE/ARB for proteinuria
+      - Immunosuppression if high-risk features (severe proteinuria, mixed Class III/IV+V) - Mycophenolate mofetil 1-3 g/day + steroids OR cyclophosphamide
+      - Amyloidosis AL - Chemotherapy (bortezomib, cyclophosphamide, dexamethasone), autologous stem cell transplant if eligible
+      - Amyloidosis AA - Treat underlying inflammatory condition (RA with biologics, FMF with colchicine, chronic infection eradicate)
+      - HIV-associated nephropathy - Antiretroviral therapy (URGENT, can reverse), ACE/ARB, prednisone if not responsive to ART
+      - Hepatitis B - Antiviral therapy (entecavir, tenofovir)
+      - Hepatitis C - Direct-acting antivirals (sofosbuvir/velpatasvir, glecaprevir/pibrentasvir) cure HCV, resolve cryoglobulinemia/MPGN
+      - Drug-induced - Stop offending drug (NSAIDs), usually resolves
+      - Malignancy - Treat cancer, nephrotic syndrome may resolve
+      - Supportive care - ACE/ARB, diuretics, statins, anticoagulation as above

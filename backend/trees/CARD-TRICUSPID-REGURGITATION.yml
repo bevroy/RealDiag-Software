@@ -1,0 +1,117 @@
+tree_id: CARD-TRICUSPID-REGURGITATION
+name: Tricuspid Regurgitation Evaluation
+family: CARDIOLOGY
+specialty: Cardiology, Cardiac Surgery
+chief_complaint: Edema, Dyspnea, Fatigue, Ascites
+description: Evaluation and management of tricuspid regurgitation
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: tr_evaluation
+
+nodes:
+  - id: tr_evaluation
+    type: diagnosis
+    name: "Tricuspid Regurgitation"
+    icd10: "I07.1"
+    urgency: medium
+    workup:
+      - Tricuspid regurgitation (TR) - Backward flow of blood from right ventricle to right atrium during systole due to incomplete tricuspid valve closure
+      - Prevalence - Mild TR very common (70-80% adults on echo, physiologic), moderate-severe TR 1-3% population
+      - Historically undertreated ("forgotten valve"), increasing recognition as significant contributor to morbidity/mortality
+      - Types
+      - Primary (organic) TR - Intrinsic valve disease (20%)
+      - Causes - Rheumatic heart disease, infective endocarditis (IV drug use), carcinoid heart disease, Ebstein anomaly (congenital), myxomatous degeneration (prolapse), trauma (chest trauma, pacemaker lead), drug-induced (fenfluramine/phentermine, ergotamine)
+      - Secondary (functional) TR - Normal valve leaflets, TR due to RV/annular dilation (80%)
+      - Most common cause - Left-sided heart disease (LV failure, mitral valve disease) → pulmonary hypertension → RV dilation → tricuspid annular dilation → TR
+      - Other causes - Primary pulmonary hypertension, RV infarction, atrial fibrillation (atrial dilation)
+      - Pathophysiology - TR → RV volume overload → RV dilation → worsening TR (vicious cycle)
+      - Systemic venous congestion (elevated RA/CVP pressure)
+      - Reduced forward cardiac output (if severe)
+      - Clinical presentation - Symptoms of right heart failure
+      - Asymptomatic - Mild-moderate TR (compensated)
+      - Symptomatic - Severe TR
+      - Peripheral edema (legs, ankles), ascites, anasarca
+      - Dyspnea (primarily from underlying left-sided disease or pulmonary hypertension, not TR itself)
+      - Fatigue, exercise intolerance (reduced cardiac output)
+      - Right upper quadrant pain (hepatic congestion, "cardiac cirrhosis")
+      - Anorexia, early satiety (ascites, hepatomegaly)
+      - Physical exam
+      - Inspection - Prominent jugular venous pulsations, large CV wave (regurgitant wave during systole)
+      - Elevated JVP
+      - Palpation - RV heave (parasternal lift), pulsatile hepatomegaly (systolic pulsations transmitted from RA)
+      - Auscultation - Holosystolic murmur left lower sternal border (LLSB), increases with inspiration (Carvallo sign, increased venous return to right heart)
+      - Soft murmur (low-pressure regurgitation, may be inaudible if severe)
+      - Hepatomegaly, ascites, peripheral edema
+      - ECG - Right atrial enlargement (tall P waves >2.5 mm in lead II), right ventricular hypertrophy (if chronic), atrial fibrillation common
+      - Chest X-ray - Cardiomegaly (RA/RV enlargement), pleural effusions
+      - Echocardiography - GOLD STANDARD for diagnosis and severity assessment
+      - 2D/3D echo - Visualize valve anatomy (leaflets, chordae), assess mechanism (primary vs secondary)
+      - Leaflet prolapse, flail leaflet, vegetation (endocarditis), thickening/retraction (rheumatic)
+      - Annular dilation (functional TR, annular diameter >40 mm or >21 mm/m² severe)
+      - RV size and function (dilated RV >42 mm basal diameter, RV dysfunction TAPSE <17 mm)
+      - RA size (RA area >18 cm² severe dilation)
+      - Color Doppler - Visualize regurgitant jet, estimate severity
+      - Vena contracta width >7 mm (severe)
+      - Large central jet or eccentric jet hugging RA wall
+      - Continuous wave Doppler - Measure jet velocity, estimate RV systolic pressure
+      - Hepatic vein flow - Systolic flow reversal (severe TR)
+      - Quantitative assessment
+      - Effective regurgitant orifice area (EROA) ≥40 mm² (severe)
+      - Regurgitant volume ≥45 mL (severe)
+      - Severity grading - Mild, moderate, severe, torrential (massive)
+      - Severe TR - Vena contracta ≥7 mm, EROA ≥40 mm², regurgitant volume ≥45 mL, systolic flow reversal hepatic vein
+      - Right heart catheterization - Assess hemodynamics, pulmonary pressures
+      - Elevated RA pressure (>10 mmHg), prominent CV wave
+      - Pulmonary artery pressure (assess for pulmonary hypertension, determine if primary or secondary TR)
+      - Cardiac output (may be reduced if severe TR)
+      - Cardiac MRI - If echocardiogram inadequate, quantify RV volumes/function, regurgitant fraction
+      - Liver function tests - Evaluate hepatic congestion (elevated transaminases, bilirubin, INR in "cardiac cirrhosis")
+      - BNP/NT-proBNP - Elevated (right heart failure)
+    treatment:
+      - Medical management - Treat underlying cause and volume overload
+      - Diuretics - Loop diuretics (furosemide 40-120 mg daily or higher) + spironolactone (aldosterone antagonist, reduces edema/ascites)
+      - Goal - Euvolemia (reduce preload, decrease TR, improve symptoms)
+      - Aggressive diuresis required (many patients develop diuretic resistance)
+      - Treat left-sided heart failure - ACE inhibitors/ARBs, beta-blockers, SGLT2 inhibitors (if underlying LV dysfunction)
+      - Treat atrial fibrillation - Rate control (beta-blockers, digoxin), anticoagulation (stroke prevention), rhythm control (cardioversion, ablation)
+      - Pulmonary hypertension - If present, treat underlying cause (LV disease, lung disease)
+      - Sildenafil, riociguat, prostacyclin analogs if primary pulmonary hypertension or group 1 PAH
+      - Medical therapy alone - Inadequate for severe TR (symptoms and prognosis improve with intervention)
+      - Surgical intervention - Tricuspid valve repair or replacement
+      - Indications
+      - Severe TR undergoing left-sided valve surgery (concomitant repair recommended, prevents future TR)
+      - Severe symptomatic TR (NYHA class III-IV) refractory to medical therapy
+      - Severe TR with progressive RV dilation or dysfunction (even if asymptomatic)
+      - Timing - Earlier intervention better outcomes (before irreversible RV dysfunction or "cardiac cirrhosis")
+      - Surgical approaches
+      - Tricuspid valve repair - PREFERRED (if possible)
+      - Annuloplasty - Rigid or semi-rigid ring (reduce annular dilation, restore valve competence)
+      - Most common technique, especially for secondary TR
+      - Better outcomes than replacement (lower mortality, no prosthetic valve complications)
+      - Leaflet repair - Suture techniques (for prolapse, flail leaflet)
+      - Tricuspid valve replacement - If repair not feasible (severe leaflet destruction, Ebstein anomaly, endocarditis)
+      - Bioprosthetic valve preferred (avoid anticoagulation complications, better durability in tricuspid position than mechanical)
+      - Mechanical valve - Young patients (longer durability), but requires lifelong anticoagulation
+      - Higher thrombosis risk in tricuspid position (low-flow, low-pressure)
+      - Perioperative risk - Higher if isolated TR surgery (sick patients, advanced RV dysfunction, liver disease)
+      - Mortality 8-20% isolated TR surgery (vs. 2-5% concomitant with left-sided surgery)
+      - Best outcomes if repair at time of mitral/aortic surgery (prevent future severe TR)
+      - Transcatheter intervention - For high surgical risk patients
+      - Transcatheter edge-to-edge repair (TEER) - TriClip (analogous to MitraClip for mitral valve)
+      - Clip leaflets together (reduce regurgitant orifice)
+      - TRILUMINATE trial - TriClip reduced TR severity, improved symptoms, reduced heart failure hospitalizations (vs. medical therapy alone)
+      - Percutaneous approach (transfemoral venous), lower risk than surgery
+      - Indications - Severe symptomatic TR, high surgical risk, favorable anatomy
+      - Tricuspid annuloplasty devices - Cardioband, Trialign (percutaneous annuloplasty)
+      - Transcatheter valve replacement - Heterotopic (EVOQUE) or orthotopic valve implantation
+      - Emerging therapies (limited data)
+      - Caval valve implantation (CAVI) - Valve in SVC/IVC (reduce venous congestion, not true TR repair)
+      - Prognosis
+      - Mild-moderate TR - Excellent prognosis (if no underlying cardiac disease)
+      - Severe TR (untreated) - Poor prognosis
+      - 5-year survival 50-60% (if not corrected)
+      - Mortality increases with severity (moderate-severe TR doubles mortality vs. no TR)
+      - After intervention - Improved survival and quality of life (if performed before advanced RV dysfunction/liver disease)
+      - Repair better outcomes than replacement
+      - Predictors of poor outcome - Advanced age, severe RV dysfunction (TAPSE <14 mm), severe liver disease, renal dysfunction, prior right heart failure

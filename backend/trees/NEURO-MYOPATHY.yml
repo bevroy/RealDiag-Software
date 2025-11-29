@@ -1,0 +1,137 @@
+tree_id: NEURO-MYOPATHY
+name: Myopathy Evaluation
+family: NEUROLOGY
+specialty: Neurology, Rheumatology
+chief_complaint: Muscle Weakness, Myalgias, Elevated CK
+description: Evaluation and management of inflammatory and metabolic myopathies
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: myopathy_evaluation
+
+nodes:
+  - id: myopathy_evaluation
+    type: question
+    text: "Clinical pattern and associated features?"
+    options:
+      - label: "Inflammatory myopathy (polymyositis/dermatomyositis)"
+        next: inflammatory_myopathy
+      - label: "Drug-induced or toxic myopathy"
+        next: drug_induced_myopathy
+      - label: "Metabolic or genetic myopathy"
+        next: metabolic_myopathy
+
+  - id: inflammatory_myopathy
+    type: diagnosis
+    name: "Inflammatory Myopathy (Polymyositis/Dermatomyositis)"
+    icd10: "M33.20"
+    urgency: high
+    workup:
+      - Idiopathic inflammatory myopathies - Autoimmune muscle inflammation
+      - Dermatomyositis (DM) - Skin findings + myositis
+      - Gottron papules (pathognomonic) - Erythematous/violaceous papules over MCPs, PIPs, elbows, knees
+      - Heliotrope rash - Violaceous erythema upper eyelids + periorbital edema
+      - V-sign (chest), shawl sign (shoulders/back), mechanic hands (hyperkeratotic cracked palms)
+      - Polymyositis (PM) - Myositis without skin findings (diagnosis of exclusion, rare)
+      - Inclusion body myositis (IBM) - Distal AND proximal weakness (finger flexors, quadriceps), asymmetric, age >50, slowly progressive, poor response to treatment
+      - Clinical presentation
+      - Symmetric proximal muscle weakness - Difficulty rising from chair, climbing stairs, lifting arms overhead, insidious onset over weeks-months
+      - Myalgias (50%)
+      - Dysphagia (30-40%, esophageal dysmotility, pharyngeal weakness)
+      - Respiratory muscle weakness (rare but serious, check VC)
+      - ILD (interstitial lung disease) - 30-40%, worse with anti-synthetase antibodies (anti-Jo-1), dry cough, dyspnea
+      - Cardiac involvement - Myocarditis (arrhythmias, heart failure), conduction defects
+      - Malignancy risk - DM 20-30% (ovarian, lung, gastric, colorectal, NHL), PM lower risk, age-appropriate cancer screening + CT chest/abdomen/pelvis
+      - Labs
+      - CK - Elevated 10-50x normal (most sensitive), correlates with disease activity
+      - Aldolase - Elevated (less specific)
+      - LDH, AST, ALT - Elevated (muscle origin, not liver)
+      - ESR/CRP - Normal or mildly elevated (unlike PMR)
+      - Myositis-specific antibodies
+      - Anti-Jo-1 (anti-histidyl-tRNA synthetase) - Anti-synthetase syndrome (myositis, ILD, Raynaud, mechanic hands, fever, arthritis), 20-30% DM/PM
+      - Anti-Mi-2 - DM, good prognosis, steroid-responsive
+      - Anti-SRP (signal recognition particle) - Severe PM, cardiac involvement, poor response
+      - Anti-MDA5 - DM with rapidly progressive ILD, minimal muscle involvement, poor prognosis
+      - EMG - Myopathic pattern (short-duration, small-amplitude polyphasic potentials, early recruitment), fibrillations, positive sharp waves
+      - Muscle biopsy - Definitive diagnosis
+      - DM - Perivascular/perifascicular inflammation, perifascicular atrophy, capillary loss
+      - PM - Endomysial inflammation (CD8+ T cells invade muscle fibers)
+      - IBM - Rimmed vacuoles, inclusion bodies, amyloid deposits
+    treatment:
+      - Corticosteroids - First-line
+      - Prednisone 1 mg/kg/day (60-80 mg) x 4-6 weeks, then slow taper over 6-12 months (monitor CK, clinical strength)
+      - High-dose IV methylprednisolone 1 g daily x 3 days if severe (dysphagia, respiratory weakness)
+      - Response - CK declines within 2-4 weeks, strength improves 3-6 months (lags behind CK)
+      - Steroid-sparing agents - Add early (within 2-3 months) to reduce steroid toxicity
+      - Methotrexate 15-25 mg PO weekly OR azathioprine 2 mg/kg/day (most commonly used)
+      - Mycophenolate mofetil 2-3 g/day - Alternative, especially if ILD
+      - Takes 3-6 months for full effect, allow steroids to taper gradually
+      - Refractory disease
+      - IVIg 2 g/kg monthly (divided over 2-5 days) - Effective for DM, especially skin manifestations
+      - Rituximab (anti-CD20) 1 g x 2 doses 2 weeks apart - Increasingly used, effective 80% DM/PM
+      - Cyclophosphamide - Severe ILD
+      - Biologics - Tocilizumab (anti-IL-6), abatacept (CTLA-4-Ig) experimental
+      - Physical therapy - Critical, start early (prevent contractures, maintain ROM), gradual strengthening as inflammation controlled
+      - ILD treatment - Prednisone + mycophenolate or azathioprine, cyclophosphamide if severe
+      - Cancer screening - Age-appropriate + CT chest/abdomen/pelvis (if DM)
+      - Inclusion body myositis - Resistant to immunosuppression, supportive care (PT, assistive devices), slow progression to disability
+      - Prognosis - 80-90% achieve remission or low disease activity with treatment, 5-year survival >90%, IBM poor prognosis (progressive disability despite treatment)
+
+  - id: drug_induced_myopathy
+    type: diagnosis
+    name: "Drug-Induced and Toxic Myopathy"
+    icd10: "G72.0"
+    urgency: medium
+    workup:
+      - Drug-induced myopathy - Common, reversible if drug stopped
+      - Statins - Most common cause drug-induced myopathy
+      - Spectrum - Myalgias (10-15%, CK normal) → myositis (CK elevated) → rhabdomyolysis (CK >10,000, myoglobinuria, AKI)
+      - Risk factors - High-dose statin, drug interactions (fibrates, cyclosporine, macrolides, azoles, grapefruit juice inhibit CYP3A4), older age, hypothyroidism, renal/hepatic dysfunction
+      - SLCO1B1 gene variant (reduced statin clearance)
+      - Immune-mediated necrotizing myopathy (IMNM) - Anti-HMGCR antibodies, statin-triggered but persists after discontinuation, requires immunosuppression (high-dose steroids, IVIg, rituximab)
+      - Management - Stop statin, CK normalizes 2-4 weeks, rechallenge with lower dose or different statin if needed, consider ezetimibe/PCSK9 inhibitor
+      - Other drugs
+      - Corticosteroids - Chronic use, proximal weakness, normal CK (type 2 fiber atrophy), improve with dose reduction/discontinuation
+      - Colchicine - Especially with renal insufficiency or drug interactions, CK elevated, vacuolar myopathy, neuropathy also
+      - Hydroxychloroquine - Vacuolar myopathy, CK normal/elevated
+      - Alcohol - Acute (rhabdomyolysis) or chronic (proximal weakness, low CK)
+      - Cocaine, amphetamines - Rhabdomyolysis
+      - Zidovudine (AZT) - Mitochondrial myopathy
+      - Diagnosis - Temporal relationship (symptoms within weeks-months of starting drug), CK elevated, muscle biopsy if unclear (necrosis, inflammation, vacuoles)
+    treatment:
+      - Stop offending drug - Symptoms resolve 2-4 weeks to months
+      - Supportive care - Hydration if rhabdomyolysis
+      - IMNM (anti-HMGCR) - Immunosuppression (prednisone + methotrexate or IVIg or rituximab)
+
+  - id: metabolic_myopathy
+    type: diagnosis
+    name: "Metabolic and Genetic Myopathy"
+    icd10: "G72.89"
+    urgency: medium
+    workup:
+      - Metabolic myopathies - Defects in energy metabolism (glycogen, lipid, mitochondrial)
+      - Clinical clues - Childhood onset, family history, exercise intolerance, myoglobinuria with exercise, fluctuating symptoms
+      - Glycogen storage diseases - McArdle disease (myophosphorylase deficiency, type V)
+      - Exercise intolerance, "second wind" phenomenon (improve after rest and resume exercise), myoglobinuria, CK elevated at baseline
+      - Forearm ischemic exercise test - No rise in lactate (abnormal)
+      - Muscle biopsy - Absent myophosphorylase, subsarcolemmal glycogen accumulation
+      - Lipid metabolism disorders - Carnitine palmitoyltransferase II (CPT II) deficiency
+      - Prolonged exercise or fasting triggers rhabdomyolysis, myoglobinuria
+      - CK normal between episodes
+      - Mitochondrial myopathies - mtDNA mutations
+      - Exercise intolerance, proximal weakness, external ophthalmoplegia (CPEO), ptosis
+      - Multi-system (neurologic, cardiac, endocrine, sensorineural hearing loss)
+      - Lactic acidosis
+      - Muscle biopsy - Ragged red fibers (Gomori trichrome), cytochrome oxidase-negative fibers
+      - Endocrine myopathies
+      - Hypothyroidism - Proximal weakness, myalgias, CK elevated (often 500-1000), delayed relaxation phase reflexes, resolve with levothyroxine
+      - Hyperthyroidism - Proximal weakness, normal CK
+      - Cushing syndrome - Proximal weakness, normal CK, steroid-induced type 2 fiber atrophy
+      - Muscular dystrophies - Genetic, progressive
+      - Duchenne/Becker - X-linked, boys, calf pseudohypertrophy, Gowers sign, CK >10,000, muscle biopsy absent/reduced dystrophin
+      - Facioscapulohumeral (FSHD) - Face and shoulder girdle weakness, asymmetric, adolescence/young adult
+      - Limb-girdle - Proximal weakness, teens-adulthood, various genetic subtypes
+    treatment:
+      - Treat underlying cause if metabolic (thyroid replacement, avoid triggers in glycogen/lipid disorders)
+      - Supportive - PT, avoid myotoxic drugs, genetic counseling
+      - Specific therapies emerging - Enzyme replacement (Pompe disease - acid maltase deficiency, alglucosidase alfa), gene therapy trials (Duchenne)

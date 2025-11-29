@@ -1,0 +1,186 @@
+tree_id: GEN-MED-DIABETES-MANAGEMENT
+name: Diabetes Mellitus Management
+family: GENERAL_MEDICINE
+specialty: Internal Medicine, Endocrinology, Family Medicine
+chief_complaint: Hyperglycemia, Polyuria, Polydipsia, Weight Loss, Diabetes Follow-up
+description: Comprehensive management of Type 1 and Type 2 diabetes mellitus
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: diabetes_management
+
+nodes:
+  - id: diabetes_management
+    type: question
+    text: "Type of diabetes and clinical scenario?"
+    options:
+      - label: "Type 2 diabetes - initial management"
+        next: type2_initial_management
+      - label: "Type 2 diabetes - intensification"
+        next: type2_intensification
+      - label: "Type 1 diabetes management"
+        next: type1_diabetes_management
+
+  - id: type2_initial_management
+    type: diagnosis
+    name: "Type 2 Diabetes - Initial Management"
+    icd10: "E11.9"
+    urgency: medium
+    workup:
+      - Type 2 diabetes mellitus - 90-95% of diabetes, insulin resistance + progressive beta-cell failure
+      - Risk factors - Obesity (especially central), sedentary lifestyle, family history, age >45, ethnicity (African American, Hispanic, Native American, Asian), prior GDM, PCOS
+      - Diagnostic criteria (any one sufficient)
+      - HbA1c ≥6.5% (repeat to confirm unless symptomatic + glucose >200)
+      - Fasting plasma glucose ≥126 mg/dL (8 hours no caloric intake)
+      - 2-hour plasma glucose ≥200 mg/dL during 75g OGTT
+      - Random glucose ≥200 mg/dL with symptoms (polyuria, polydipsia, weight loss)
+      - Prediabetes - HbA1c 5.7-6.4%, fasting glucose 100-125, 2hr OGTT 140-199 (screen annually, lifestyle intervention, consider metformin if high risk)
+      - Initial evaluation newly diagnosed T2DM
+      - Confirm diagnosis, assess severity (HbA1c, fasting glucose)
+      - Screen for complications - Retinopathy (dilated eye exam), nephropathy (urine albumin/Cr ratio, eGFR), neuropathy (monofilament exam), cardiovascular disease (lipids, BP)
+      - Assess cardiovascular risk - Lipid panel (statins), blood pressure (ACE/ARB target <130/80)
+      - C-peptide, GAD antibodies if atypical (young, lean - may be LADA or T1DM)
+      - Target HbA1c - Individualized
+      - <7% most patients (microvascular benefit)
+      - <6.5% if early disease, no hypoglycemia risk, no CVD
+      - <8% if advanced complications, limited life expectancy, hypoglycemia risk, long diabetes duration
+    treatment:
+      - Lifestyle modification - FIRST-LINE for all patients
+      - Weight loss - 5-10% reduces HbA1c ~0.5-1%, improves insulin sensitivity
+      - Medical nutrition therapy - Carbohydrate counting, low glycemic index, Mediterranean diet, portion control
+      - Physical activity - 150 min/week moderate (brisk walking) or 75 min vigorous, resistance training 2-3x/week
+      - Metformin - First-line medication (unless contraindicated)
+      - Dose - Start 500 mg daily or BID with meals, titrate to 1000 mg BID (max 2550 mg/day) over 2-4 weeks
+      - Mechanism - Decreases hepatic glucose production, improves insulin sensitivity
+      - Efficacy - Lowers HbA1c 1-2%
+      - Benefits - Weight neutral or modest weight loss, cardiovascular benefit (UKPDS), inexpensive, safe
+      - Side effects - GI (diarrhea, nausea - common early, resolve with time or extended-release formulation), lactic acidosis (rare, avoid if eGFR <30)
+      - Contraindications - eGFR <30 (stop or reduce dose if eGFR 30-45), acute illness, contrast administration (hold 48 hours), liver disease, heart failure (relative)
+      - Vitamin B12 deficiency (check B12 annually, supplement if low)
+      - If HbA1c not at goal after 3 months metformin + lifestyle - Add second agent (based on patient factors)
+      - ASCVD or high CV risk - SGLT2 inhibitor OR GLP-1 agonist (proven CV benefit)
+      - Heart failure or CKD - SGLT2 inhibitor (empagliflozin, dapagliflozin, canagliflozin) - Reduce HF hospitalizations, slow CKD progression
+      - Weight loss priority - GLP-1 agonist (semaglutide, liraglutide, dulaglutide) - 5-10% weight loss, HbA1c reduction 1-1.5%
+      - Cost concern - Sulfonylurea (glipizide, glyburide, glimepiride) - Inexpensive, but hypoglycemia risk, weight gain
+      - Avoid hypoglycemia - DPP-4 inhibitor (sitagliptin, linagliptin) - Weight neutral, no hypoglycemia, modest efficacy HbA1c -0.5-0.8%
+      - Combination therapy options (metformin + one or more)
+      - SGLT2 inhibitors - Empagliflozin 10-25 mg daily, dapagliflozin 5-10 mg daily, canagliflozin 100-300 mg daily
+      - Mechanism - Block glucose reabsorption in kidney → glucosuria
+      - Benefits - Weight loss 2-4 kg, BP reduction, HF benefit (DAPA-HF), CKD benefit (CREDENCE), CV benefit (EMPA-REG)
+      - Side effects - Genital mycotic infections (10-15% women, 5% men), UTIs, volume depletion, DKA (rare, "euglycemic DKA"), amputation risk (canagliflozin), Fournier gangrene (rare)
+      - GLP-1 receptor agonists - Semaglutide 0.5-1 mg SC weekly (2.4 mg for obesity), liraglutide 1.2-1.8 mg SC daily, dulaglutide 1.5 mg SC weekly
+      - Mechanism - Incretin mimetic, stimulates insulin secretion (glucose-dependent), suppresses glucagon, delays gastric emptying, reduces appetite
+      - Benefits - Weight loss 5-10%, CV benefit (LEADER, SUSTAIN-6), no hypoglycemia
+      - Side effects - Nausea (common, improves over time), vomiting, diarrhea, pancreatitis (rare), medullary thyroid cancer (rodent studies, contraindicated if MEN 2 or personal/family history MTC)
+      - Oral GLP-1 - Semaglutide 7-14 mg PO daily (lower efficacy than injectable)
+      - DPP-4 inhibitors - Sitagliptin 100 mg daily, linagliptin 5 mg daily, saxagliptin 5 mg daily
+      - Mechanism - Inhibit DPP-4 enzyme → increase endogenous GLP-1
+      - Benefits - Weight neutral, no hypoglycemia, oral
+      - Modest efficacy - HbA1c -0.5-0.8%
+      - Sulfonylureas - Glipizide 5-20 mg daily/BID, glimepiride 1-8 mg daily
+      - Mechanism - Stimulate insulin secretion (beta-cells)
+      - Benefits - Inexpensive, effective HbA1c -1-1.5%
+      - Side effects - Hypoglycemia (10-20% per year), weight gain 2-5 kg
+      - TZDs - Pioglitazone 15-45 mg daily
+      - Mechanism - Improve insulin sensitivity (PPAR-gamma agonist)
+      - Benefits - No hypoglycemia, durable glycemic control
+      - Side effects - Weight gain, edema, heart failure exacerbation (contraindicated NYHA III-IV), bone fractures (women), bladder cancer (pioglitazone, controversial)
+      - Insulin - If HbA1c very elevated (>10%), symptomatic hyperglycemia, or not at goal with oral agents (see intensification node)
+
+  - id: type2_intensification
+    type: diagnosis
+    name: "Type 2 Diabetes - Treatment Intensification"
+    icd10: "E11.9"
+    urgency: medium
+    workup:
+      - Indications for insulin in Type 2 DM
+      - HbA1c >10% at diagnosis (beta-cell exhaustion)
+      - Symptomatic hyperglycemia (polyuria, polydipsia, weight loss)
+      - Not at goal despite multiple oral agents
+      - Acute illness, surgery, hospitalization (temporary)
+      - Pregnancy (insulin preferred, some oral agents acceptable)
+      - Insulin types - Onset, peak, duration
+      - Rapid-acting (bolus) - Lispro, aspart, glulisine (onset 5-15 min, peak 1-2 hr, duration 4-6 hr) - Cover meals
+      - Short-acting - Regular (onset 30 min, peak 2-4 hr, duration 6-8 hr)
+      - Intermediate-acting - NPH (onset 2-4 hr, peak 4-10 hr, duration 12-18 hr) - Basal coverage BID
+      - Long-acting (basal) - Glargine, detemir, degludec (onset 1-2 hr, NO peak, duration 24 hr) - Basal coverage once daily
+      - Pre-mixed - 70/30 (70% NPH, 30% regular) or 75/25 (75% protamine lispro, 25% lispro) - BID dosing, less flexible
+    treatment:
+      - Basal insulin (starting insulin for T2DM)
+      - Add to metformin +/- other oral agents
+      - Glargine U-100 or U-300, detemir, or degludec - 10 units SC once daily (or 0.1-0.2 units/kg)
+      - Bedtime or morning (consistent timing)
+      - Titrate - Check fasting glucose, increase 2 units q3 days until fasting glucose 80-130 mg/dL
+      - If hypoglycemia (glucose <70) - Decrease 10-20% or 2-4 units
+      - Target fasting glucose 80-130, avoid hypoglycemia
+      - Continue oral agents (metformin, SGLT2i, GLP-1)
+      - Basal-bolus insulin (intensive insulin for T2DM)
+      - If not at goal with basal insulin alone (HbA1c still elevated)
+      - Add prandial (mealtime) rapid-acting insulin - Lispro, aspart, or glulisine before meals
+      - Start 4 units or 10% basal dose per meal (usually largest meal first, then add others)
+      - Titrate based on pre-meal and 2-hour post-meal glucose
+      - Carbohydrate counting - 1 unit per 10-15g carbs (individualized insulin-to-carb ratio)
+      - Correction factor (sensitivity factor) - How much 1 unit lowers glucose (start 1 unit per 50 mg/dL >150)
+      - Typical total daily dose (TDD) - 0.5-1 unit/kg in T2DM
+      - 50% basal, 50% bolus (divided among 3 meals)
+      - GLP-1 + basal insulin combination
+      - Very effective combination (GLP-1 reduces postprandial glucose, weight gain from insulin)
+      - Fixed-ratio combinations - Insulin degludec/liraglutide (Xultophy), insulin glargine/lixisenatide (Soliqua)
+      - Monitoring
+      - Self-monitoring blood glucose (SMBG) - If on insulin, check fasting and pre-meals (or 2hr post-meals if titrating bolus)
+      - Continuous glucose monitor (CGM) - Real-time glucose, trend arrows, alerts (covered by insurance if on multiple daily injections or insulin pump)
+      - HbA1c - Every 3 months if not at goal, every 6 months if stable
+      - Hypoglycemia management - Glucose <70 mg/dL
+      - Rule of 15 - 15g fast-acting carbs (4 oz juice, 3-4 glucose tablets, 1 tbsp honey), recheck 15 min, repeat if still <70
+      - Severe (unable to self-treat) - Glucagon 1 mg IM/SC (family/caregiver), call 911
+      - Insulin pump therapy - Continuous subcutaneous insulin infusion (CSII), mostly T1DM but some T2DM
+      - Hybrid closed-loop systems (artificial pancreas) - CGM + insulin pump with algorithm (adjusts basal automatically)
+
+  - id: type1_diabetes_management
+    type: diagnosis
+    name: "Type 1 Diabetes Management"
+    icd10: "E10.9"
+    urgency: high
+    workup:
+      - Type 1 diabetes mellitus - Autoimmune destruction of pancreatic beta-cells → absolute insulin deficiency
+      - 5-10% of diabetes, typically younger onset (<30 years, peak 10-14 years) but can occur any age
+      - LADA (latent autoimmune diabetes in adults) - Slower progression, initially may not require insulin
+      - Clinical presentation - Polyuria, polydipsia, weight loss, DKA at presentation 30-40%
+      - Diagnosis - Hyperglycemia + low/absent C-peptide + autoantibodies (GAD65, IA-2, ZnT8, insulin autoantibodies)
+      - Honeymoon period - Temporary partial recovery of beta-cell function first 6-12 months (lower insulin needs)
+      - Goals - Prevent DKA, avoid hypoglycemia, HbA1c <7% (or <6.5% if achievable without hypoglycemia), normal growth/development (children)
+    treatment:
+      - Insulin - ONLY treatment for T1DM (oral agents not effective, no endogenous insulin production)
+      - Multiple daily injections (MDI) - Basal-bolus regimen
+      - Basal - Glargine, detemir, or degludec once or twice daily (background insulin)
+      - Bolus - Rapid-acting (lispro, aspart, glulisine) before each meal + corrections
+      - Total daily dose (TDD) - 0.5-0.7 units/kg (honeymoon lower ~0.3-0.5, adolescents higher ~1-1.2 due to insulin resistance)
+      - 50% basal, 50% bolus divided among meals
+      - Carbohydrate counting - Insulin-to-carb ratio (I:C) - Start 1:15 (1 unit per 15g carbs), adjust based on response
+      - Correction factor (CF) - 1800 rule: 1800/TDD = how many mg/dL 1 unit lowers glucose (e.g., TDD 50 units → CF 1:36, 1 unit lowers glucose 36 mg/dL)
+      - Insulin pump (CSII) - Continuous subcutaneous insulin infusion
+      - Advantages - Precise basal rates (can vary by time of day), no long-acting injections, easier adjustments
+      - Requires training, motivated patient, expense
+      - Hybrid closed-loop (artificial pancreas) - Medtronic 670G, Tandem Control-IQ, Omnipod 5
+      - CGM + pump + algorithm (auto-adjusts basal, some auto-correct boluses)
+      - Improves time-in-range (70-180 mg/dL), reduces hypoglycemia
+      - Continuous glucose monitor (CGM) - Dexcom, Freestyle Libre, Guardian
+      - Real-time glucose every 5 minutes, trend arrows (rapidly falling/rising), alerts
+      - Reduces HbA1c 0.3-0.5%, reduces hypoglycemia, improves quality of life
+      - Recommended for all T1DM patients (standard of care)
+      - Blood glucose monitoring targets
+      - Fasting/pre-meal - 80-130 mg/dL
+      - 2-hour post-meal - <180 mg/dL
+      - Bedtime - 100-140 mg/dL (prevent nocturnal hypoglycemia)
+      - HbA1c <7% (or <6.5% if no hypoglycemia)
+      - Time-in-range (CGM metric) - >70% time in 70-180 mg/dL, <4% <70 (hypoglycemia), <1% <54 (severe hypoglycemia)
+      - Hypoglycemia - Glucose <70 mg/dL
+      - Mild-moderate (self-treated) - 15g carbs, recheck 15 min, repeat (rule of 15)
+      - Severe (requires assistance) - Glucagon 1 mg IM/SC, or nasal glucagon (Baqsimi 3 mg), call 911
+      - Hypoglycemia unawareness - Loss of autonomic warning symptoms (common with long-standing T1DM), DANGEROUS (sudden severe hypoglycemia), requires higher glucose targets, CGM critical
+      - DKA prevention - Sick day management (never stop insulin, check glucose/ketones q2-4h, increase insulin if hyperglycemic, hydrate, seek help if persistent ketones or vomiting)
+      - Adjunctive therapies (approved for T1DM)
+      - Pramlintide (Symlin) - Synthetic amylin analog, given with meals (SC), reduces postprandial glucose, weight loss, increased hypoglycemia risk, not commonly used
+      - SGLT2 inhibitors - Dapagliflozin, empagliflozin (off-label, CV/renal benefit in trials, euglycemic DKA risk)
+      - Education - Carb counting, insulin dosing, CGM use, hypoglycemia recognition/treatment, sick day management, exercise adjustments (reduce insulin or increase carbs)
+      - Team approach - Endocrinologist, diabetes educator, dietitian, mental health (T1DM burden/burnout common)

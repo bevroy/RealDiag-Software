@@ -1,0 +1,142 @@
+tree_id: CARD-HYPERTROPHIC-CARDIOMYOPATHY
+name: Hypertrophic Cardiomyopathy Evaluation
+family: CARDIOLOGY
+specialty: Cardiology
+chief_complaint: Dyspnea, Chest Pain, Syncope, Palpitations
+description: Evaluation and management of hypertrophic cardiomyopathy
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: hcm_evaluation
+
+nodes:
+  - id: hcm_evaluation
+    type: diagnosis
+    name: "Hypertrophic Cardiomyopathy"
+    icd10: "I42.1"
+    urgency: high
+    workup:
+      - Hypertrophic cardiomyopathy (HCM) - Genetic cardiac disease characterized by left ventricular hypertrophy without other cause (hypertension, aortic stenosis)
+      - Most common inherited cardiac disease (1 in 500)
+      - Leading cause sudden cardiac death young athletes
+      - Epidemiology - Prevalence 1:500 (0.2%), 600,000-1.5 million US
+      - Equal male:female, all races/ethnicities
+      - Bimodal presentation - Young adults (athletic screening, family screening) or older adults (progressive symptoms)
+      - Genetics - Autosomal dominant inheritance (50% offspring risk), >1,400 mutations identified
+      - Sarcomere genes (80%) - β-myosin heavy chain (MYH7, 40%), myosin-binding protein C (MYBPC3, 40%), troponin T/I, tropomyosin
+      - Penetrance variable (some carriers never develop hypertrophy)
+      - De novo mutations 20-30%
+      - Pathophysiology - Myocyte disarray + hypertrophy + fibrosis → diastolic dysfunction (impaired relaxation) ± left ventricular outflow tract (LVOT) obstruction
+      - Hypertrophy pattern - Asymmetric septal hypertrophy most common (60-70%, septum ≥1.5x posterior wall), can be apical, mid-ventricular, concentric
+      - LVOT obstruction (30-70%) - Systolic anterior motion (SAM) of mitral valve → dynamic obstruction, gradient worsens with decreased preload/afterload or increased contractility
+      - Diastolic dysfunction - Stiff ventricle, impaired filling → elevated filling pressures → dyspnea
+      - Myocardial ischemia - Supply-demand mismatch (increased muscle mass + small vessel disease + diastolic dysfunction reduces coronary perfusion)
+      - Arrhythmias - Atrial fibrillation (20-30%, increased stroke risk 4-5x), ventricular tachycardia/fibrillation (sudden death mechanism)
+      - Clinical presentation - Highly variable (asymptomatic 25% to severe symptoms to sudden death)
+      - Asymptomatic (25%) - Incidental murmur, family screening, athletic screening
+      - Dyspnea (most common symptom 90%) - Exertional, due to diastolic dysfunction ± LVOT obstruction ± mitral regurgitation
+      - Chest pain (75%) - Angina (even without CAD), atypical, exertional or at rest
+      - Syncope/presyncope (15-25%) - Exertional (worrisome, suggests LVOT obstruction or arrhythmia), postprandial, postural
+      - Palpitations - Atrial fibrillation, ventricular arrhythmias
+      - Sudden cardiac death (1% per year) - Ventricular tachycardia/fibrillation, often during/after exercise in young patients
+      - Heart failure - Systolic dysfunction ("burned out" HCM 5-10%, end-stage with EF <50%)
+      - Physical exam
+      - Systolic murmur - Harsh crescendo-decrescendo, LLSB, INCREASES with Valsalva/standing (decreased preload increases obstruction) and DECREASES with squatting/handgrip (increased afterload decreases obstruction)
+      - Classic finding distinguishes from aortic stenosis (AS murmur decreases with Valsalva)
+      - Bifid carotid pulse - "Spike and dome"
+      - S4 gallop - Atrial kick against stiff ventricle
+      - Displaced PMI - Hyperdynamic, sustained
+      - Mitral regurgitation murmur (if SAM present)
+      - Diagnostic evaluation
+      - ECG - Abnormal in 75-95%
+      - LVH criteria (Sokolow-Lyon, Cornell), deep narrow Q waves (septal hypertrophy mimics MI), giant negative T waves (apical HCM), LAE (left atrial enlargement), short PR (pre-excitation if WPW)
+      - Echocardiography - PRIMARY diagnostic tool
+      - Diagnostic criteria - LV wall thickness ≥15 mm (any segment) in absence of other cause (hypertension, aortic stenosis)
+      - If family history positive - ≥13 mm diagnostic
+      - Pattern - Asymmetric septal hypertrophy (ASH, septum ≥1.5x posterior wall most common), can be apical (spade shape on ventriculogram), mid-ventricular, concentric
+      - LVOT obstruction - Resting gradient ≥30 mmHg (30% patients), provocable gradient with Valsalva/exercise (70% patients)
+      - Severe obstruction ≥50 mmHg (associated with worse symptoms, higher mortality)
+      - Systolic anterior motion (SAM) - Mitral valve leaflet pulled toward septum during systole
+      - Mitral regurgitation - Often present if SAM (posterolateral jet)
+      - Diastolic dysfunction - Impaired relaxation, elevated E/e' (>15)
+      - LV ejection fraction - Usually hyperdynamic (EF >60-70%), or normal, rarely reduced (<50% "burned out" HCM)
+      - Cardiac MRI - Gold standard for LV mass, identifies atypical patterns, delayed gadolinium enhancement (fibrosis, predicts arrhythmia risk)
+      - Exercise stress testing - Unmask LVOT obstruction, assess exercise capacity, blood pressure response (failure to increase ≥20 mmHg or decrease suggests high risk)
+      - Holter monitor (24-48 hours) - Detect ventricular arrhythmias (non-sustained VT risk factor), atrial fibrillation
+      - Genetic testing - Consider if definite HCM, facilitates family screening
+      - Cardiac catheterization - If symptoms/echo discordant, assess hemodynamics, rule out CAD (older patients)
+      - Risk stratification for sudden cardiac death - CRITICAL
+      - Major risk factors (HCM Risk-SCD calculator, ESC guidelines)
+      - Family history sudden cardiac death (first-degree relative <40 years)
+      - Unexplained syncope (especially recent, exertional)
+      - Non-sustained VT on Holter (≥3 beats ≥120 bpm)
+      - Massive LVH (wall thickness ≥30 mm)
+      - Abnormal blood pressure response to exercise (failure to increase ≥20 mmHg or decrease)
+      - Extensive late gadolinium enhancement on MRI (≥15% LV mass)
+      - LV apical aneurysm
+      - Risk score - 5-year SCD risk <4% (low), 4-6% (intermediate), >6% (high)
+      - ICD if 5-year risk ≥6% or ≥1 major risk factor
+    treatment:
+      - Goals - Relieve symptoms, prevent sudden cardiac death, treat atrial fibrillation
+      - Lifestyle modifications - ALL patients
+      - Avoid dehydration (worsens LVOT obstruction)
+      - Avoid extreme exertion (competitive sports, CONTRAINDICATED if LVOT obstruction or high-risk features)
+      - Recreational exercise OK (low-moderate intensity)
+      - Pharmacologic therapy - For symptomatic patients (dyspnea, chest pain, syncope)
+      - Beta-blockers - FIRST-LINE
+      - Metoprolol 50-200 mg daily, atenolol 50-100 mg daily, propranolol 160-480 mg daily
+      - Mechanism - Negative inotrope (reduce contractility, reduce LVOT gradient), negative chronotrope (prolong diastole, improve filling)
+      - Improve symptoms 60-70%
+      - Non-dihydropyridine calcium channel blockers - If beta-blockers inadequate or contraindicated
+      - Verapamil 240-480 mg daily (most commonly used), diltiazem 240-360 mg daily
+      - Caution if resting LVOT gradient >50 mmHg or pulmonary edema (can worsen obstruction)
+      - Disopyramide - If symptoms persist despite beta-blocker/CCB (especially if severe LVOT obstruction)
+      - 400-600 mg daily (divided BID-TID)
+      - Type Ia antiarrhythmic, negative inotrope
+      - Side effects - Anticholinergic (dry mouth, urinary retention), QT prolongation
+      - Mavacamten (Camzyos) - NEW myosin inhibitor (FDA approved 2022)
+      - Reduces LVOT gradient, improves symptoms, functional capacity
+      - For symptomatic obstructive HCM (gradient ≥50 mmHg)
+      - Dose 2.5-15 mg daily (titrate based on LVOT gradient, EF monitoring)
+      - Risk severe systolic dysfunction (hold if EF <50%)
+      - AVOID medications that worsen obstruction
+      - Vasodilators (nitrates, ACE inhibitors, hydralazine) - reduce afterload, worsen LVOT obstruction
+      - Dihydropyridine CCBs (amlodipine, nifedipine) - vasodilation
+      - Positive inotropes (digoxin, dobutamine) - increase contractility, worsen obstruction
+      - Diuretics - Use cautiously (reduce preload, worsen obstruction), but may be needed if pulmonary edema
+      - Invasive therapies - If severe symptoms (NYHA III-IV) despite maximal medical therapy AND LVOT gradient ≥50 mmHg
+      - Septal reduction therapy - Reduce septal thickness → relieve obstruction
+      - Surgical septal myectomy (Morrow procedure) - GOLD STANDARD
+      - Resect portion hypertrophied septum (usually ~10 grams)
+      - Success rate 90-95% (eliminate gradient), symptom improvement 80-90%, mortality <1% (experienced centers)
+      - Durable, addresses mitral regurgitation if present
+      - Alcohol septal ablation - Less invasive alternative
+      - Inject ethanol into septal perforator artery → controlled MI → septal thinning (scar formation)
+      - For patients poor surgical candidates (elderly, comorbidities)
+      - Success rate 70-80%, 10-20% require repeat procedure
+      - Complications - Complete heart block (10-20% require permanent pacemaker), ventricular arrhythmias
+      - Sudden cardiac death prevention
+      - Implantable cardioverter-defibrillator (ICD) - Primary prevention
+      - Indications (2020 AHA/ACC guidelines)
+      - Prior cardiac arrest or sustained VT (secondary prevention)
+      - 5-year SCD risk ≥6% (HCM Risk-SCD calculator)
+      - ≥1 major risk factor (family history SCD, unexplained syncope, non-sustained VT, massive LVH ≥30 mm, abnormal BP response exercise, extensive LGE, apical aneurysm)
+      - Shared decision-making if intermediate risk (4-6%)
+      - Atrial fibrillation management
+      - Anticoagulation - MANDATORY (stroke risk 4-5x, CHA2DS2-VASc often underestimates risk in HCM)
+      - Warfarin (INR 2-3) or DOAC (apixaban, rivaroxaban, edoxaban, dabigatran)
+      - Anticoagulate even if CHA2DS2-VASc = 0 (HCM itself is risk factor)
+      - Rate control - Beta-blocker, verapamil, diltiazem
+      - Rhythm control - Amiodarone (if symptomatic despite rate control), catheter ablation (consider if symptomatic despite medications)
+      - Heart failure management
+      - If systolic dysfunction develops ("burned out" HCM, EF <50%) - Treat as standard heart failure (ACE inhibitors, ARBs, beta-blockers, diuretics, consider transplant if refractory)
+      - Family screening - ESSENTIAL
+      - First-degree relatives - Echo + ECG q12-18 months ages 10-20 years (rapid growth), then q5 years (penetrance continues into adulthood)
+      - Genetic testing - If positive in proband, test relatives (if negative, no further cardiac screening needed)
+      - Prognosis
+      - Variable - Many live normal lifespan with minimal symptoms, others progressive symptoms or sudden death
+      - Overall mortality 1-2% per year (similar general population with modern therapy)
+      - Sudden cardiac death - 1% per year (0.5% with ICD), higher in young patients, athletes
+      - Atrial fibrillation - 20-30% develop, increases stroke risk
+      - Heart failure - 5-10% progress to systolic dysfunction ("burned out"), may require transplant
+      - Better prognosis if diagnosed/managed appropriately

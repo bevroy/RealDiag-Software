@@ -1,0 +1,176 @@
+tree_id: NEPHRO-GLOMERULONEPHRITIS
+name: Glomerulonephritis Evaluation
+family: NEPHROLOGY
+specialty: Nephrology, Internal Medicine
+chief_complaint: Hematuria, Proteinuria, Edema, Hypertension
+description: Comprehensive evaluation of glomerular diseases
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: glomerulonephritis_presentation
+
+nodes:
+  - id: glomerulonephritis_presentation
+    type: question
+    text: "Clinical syndrome?"
+    options:
+      - label: "Nephritic syndrome (hematuria, HTN, AKI, oliguria)"
+        next: nephritic_syndrome
+      - label: "Nephrotic syndrome (proteinuria >3.5g/day, hypoalbuminemia, edema)"
+        next: nephrotic_syndrome
+      - label: "Rapidly progressive glomerulonephritis (RPGN)"
+        next: rpgn
+
+  - id: nephritic_syndrome
+    type: diagnosis
+    name: "Nephritic Syndrome"
+    icd10: "N05.9"
+    urgency: high
+    workup:
+      - Definition - Glomerular inflammation with hematuria, RBC casts, proteinuria (usually <3.5g/day), hypertension, edema, oliguria, AKI
+      - Classic triad - Hematuria (tea-colored urine), hypertension, edema
+      - RBC casts pathognomonic for glomerulonephritis
+      - Etiologies by timing
+      - Acute post-infectious GN - Most common cause in children
+      - Post-streptococcal GN (PSGN) - 1-3 weeks after pharyngitis or 3-6 weeks after impetigo (GAS infection)
+      - Low C3, normal C4, elevated ASO titer or anti-DNase B
+      - Self-limited, supportive care, excellent prognosis (95% recover completely)
+      - Other infections - Staph (post-infectious), endocarditis, hepatitis B/C, HIV
+      - IgA nephropathy (Berger disease) - Most common primary GN worldwide
+      - Episodic gross hematuria (often with URI, "synpharyngitic" - concurrent with infection vs PSGN delayed)
+      - Persistent microscopic hematuria between episodes
+      - IgA deposition in mesangium on biopsy (immunofluorescence)
+      - Variable prognosis - 20-40% progress to ESRD over 20 years
+      - Alport syndrome - Hereditary nephritis (X-linked), sensorineural hearing loss, ocular abnormalities (lenticonus)
+      - Progressive renal failure, hematuria, proteinuria
+      - Thin/split basement membrane on EM
+      - Membranoproliferative GN (MPGN) - Nephritic or mixed nephritic-nephrotic
+      - Type I (immune complex-mediated) - Hepatitis C, cryoglobulinemia, low C3 and C4
+      - Type II (dense deposit disease) - C3 nephritic factor, low C3, normal C4
+      - "Tram-track" appearance on LM (basement membrane splitting)
+      - Labs - Urinalysis (RBC casts, dysmorphic RBCs, proteinuria), Cr, BUN, electrolytes
+      - Complement levels - C3, C4 (low in PSGN, MPGN Type I, lupus; normal in IgA nephropathy, Alport)
+      - Serologies - ASO titer, anti-DNase B (strep), ANA (lupus), ANCA (vasculitis), hepatitis B/C, HIV, cryoglobulins
+      - Renal biopsy - If diagnosis unclear, progressive disease, or need to guide therapy
+    treatment:
+      - Post-streptococcal GN - Supportive care
+      - Antibiotics if active infection (penicillin or amoxicillin), but do NOT prevent GN
+      - Salt restriction, loop diuretics for volume overload (furosemide)
+      - Antihypertensives (ACE inhibitors preferred for long-term renoprotection)
+      - Dialysis if severe AKI (hyperkalemia, acidosis, uremia, pulmonary edema)
+      - Monitor - Usually resolves in 1-2 weeks, C3 normalizes in 6-8 weeks
+      - IgA nephropathy
+      - ACE inhibitor or ARB - First-line for proteinuria >1g/day and HTN (renoprotective, slow progression)
+      - Goal BP <130/80, proteinuria <1g/day
+      - Immunosuppression - Corticosteroids if high-risk (proteinuria >1g/day despite ACE/ARB, declining GFR, crescents on biopsy)
+      - Prednisone 0.8-1 mg/kg/day x 2 months, then taper over 6 months (risk infections, glucose intolerance)
+      - Alternatives - Mycophenolate mofetil, cyclophosphamide (if crescentic)
+      - Avoid in advanced CKD (GFR <30) - steroids don't help
+      - Fish oil (omega-3 fatty acids) - Modest benefit in some studies
+      - Tonsillectomy - Controversial, may reduce hematuria episodes in some patients
+      - MPGN - Treat underlying cause
+      - Hepatitis C - Direct-acting antivirals (sofosbuvir/ledipasvir) can induce remission
+      - Cryoglobulinemia - Rituximab, plasmapheresis if severe
+      - Immunosuppression if idiopathic and progressive (steroids, cyclophosphamide, mycophenolate)
+
+  - id: nephrotic_syndrome
+    type: diagnosis
+    name: "Nephrotic Syndrome"
+    icd10: "N04.9"
+    urgency: high
+    workup:
+      - Definition - Heavy proteinuria >3.5g/day (or spot urine protein:Cr ratio >3), hypoalbuminemia <3g/dL, edema, hyperlipidemia
+      - Pathophysiology - Podocyte damage → loss of glomerular charge barrier → massive proteinuria → hypoalbuminemia → edema (decreased oncotic pressure)
+      - Complications - Hypercoagulable state (loss of antithrombin III → DVT, renal vein thrombosis, PE), infections (loss of immunoglobulins → encapsulated bacteria, spontaneous bacterial peritonitis), hyperlipidemia, AKI
+      - Primary causes (intrinsic kidney disease)
+      - Minimal change disease (MCD) - Most common in children (90% of nephrotic syndrome in kids)
+      - Sudden onset massive edema, normal complement
+      - Podocyte foot process effacement on EM, normal LM
+      - Steroid-responsive (95% respond to prednisone)
+      - Focal segmental glomerulosclerosis (FSGS) - Most common primary nephrotic in adults (especially African Americans)
+      - Segmental sclerosis on LM (some but not all glomeruli affected)
+      - Primary (idiopathic) or secondary (HIV, heroin, obesity, reflux nephropathy)
+      - Poor prognosis - 50% progress to ESRD in 10 years
+      - Steroid-resistant often
+      - Membranous nephropathy - Most common primary nephrotic in Caucasian adults
+      - Thick basement membrane with subepithelial deposits ("spike and dome" on silver stain)
+      - Primary (idiopathic, anti-PLA2R antibodies 70%) or secondary (hepatitis B, NSAIDs, malignancy - lung, colon, breast)
+      - Rule of thirds - 1/3 spontaneous remission, 1/3 persistent proteinuria, 1/3 progress to ESRD
+      - Secondary causes
+      - Diabetic nephropathy - Most common cause of ESRD in US, Kimmelstiel-Wilson nodules (nodular glomerulosclerosis)
+      - Amyloidosis (AL or AA) - Apple-green birefringence with Congo red stain
+      - SLE (class V membranous lupus nephritis)
+      - Labs - 24-hour urine protein or spot protein:Cr ratio, albumin, lipid panel, Cr, BUN
+      - Serologies - ANA (lupus), hepatitis B/C, HIV, complement (C3, C4), anti-PLA2R (membranous), SPEP/UPEP (myeloma, amyloid)
+      - Renal biopsy - REQUIRED to differentiate etiology and guide treatment (except children with classic MCD features can be treated empirically)
+    treatment:
+      - General supportive care - ALL nephrotic patients
+      - Salt restriction <2g/day, fluid restriction if severe hypoalbuminemia
+      - Diuretics - Loop diuretics (furosemide 40-80mg BID or higher) ± thiazide for synergy, albumin infusion if severe hypoalbuminemia and refractory edema (temporary)
+      - ACE inhibitor or ARB - Reduce proteinuria (lisinopril 10-40mg, losartan 50-100mg)
+      - Statin - For hyperlipidemia (atorvastatin 20-40mg)
+      - Anticoagulation - Consider if albumin <2-2.5 g/dL (high thrombosis risk), therapeutic if renal vein thrombosis or DVT/PE
+      - Minimal change disease
+      - Prednisone 1 mg/kg/day (max 80mg) or 2 mg/kg every other day x 4-6 weeks, then taper over 6 months
+      - 95% respond (proteinuria resolves), but 50% relapse
+      - Frequent relapsers or steroid-dependent - Add cyclophosphamide, cyclosporine, or rituximab (steroid-sparing)
+      - Focal segmental glomerulosclerosis
+      - ACE inhibitor or ARB first-line (reduce proteinuria)
+      - Steroids - Prednisone 1 mg/kg/day x 4-6 months, only 30-40% respond (vs 95% in MCD)
+      - Immunosuppression if steroid-resistant - Cyclosporine, tacrolimus, mycophenolate, rituximab
+      - Treat secondary causes (HIV - HAART, obesity - weight loss)
+      - Many progress to ESRD, need dialysis or transplant (can recur post-transplant)
+      - Membranous nephropathy
+      - Observation if proteinuria <4g/day and normal renal function (may spontaneously remit)
+      - Immunosuppression if proteinuria >8g/day, declining GFR, or persistent proteinuria 4-8g/day x 6 months
+      - Cyclical therapy - Alternating months of steroids (methylprednisolone IV → prednisone PO) and alkylating agent (cyclophosphamide or chlorambucil) x 6 months (Ponticelli regimen)
+      - Alternatives - Calcineurin inhibitors (cyclosporine, tacrolimus), rituximab (anti-CD20, depletes B cells producing anti-PLA2R)
+      - Treat secondary causes - Stop NSAIDs, treat hepatitis B, screen for malignancy
+
+  - id: rpgn
+    type: diagnosis
+    name: "Rapidly Progressive Glomerulonephritis (RPGN)"
+    icd10: "N01.9"
+    urgency: critical
+    workup:
+      - Definition - Rapid loss of renal function (days to weeks), crescents on biopsy (>50% of glomeruli), nephritic syndrome
+      - Without treatment → ESRD in weeks to months (MEDICAL EMERGENCY)
+      - Clinical - Oliguria, hematuria, RBC casts, proteinuria, HTN, edema, AKI (Cr doubling in 3 months)
+      - Classification by immunofluorescence pattern
+      - Type I - Anti-GBM disease (linear IgG) - 10-20% of RPGN
+      - Goodpasture syndrome - Anti-GBM antibodies attack glomerular and alveolar basement membranes
+      - Pulmonary-renal syndrome - Hemoptysis, dyspnea, alveolar hemorrhage + rapidly progressive GN
+      - Young men (20-30s) or older adults (60-70s), smokers at higher risk
+      - Anti-GBM antibodies positive (target type IV collagen)
+      - Type II - Immune complex disease (granular deposits) - 40-50% of RPGN
+      - Lupus nephritis (SLE class III/IV - proliferative)
+      - Post-infectious GN (PSGN, endocarditis)
+      - IgA nephropathy with crescents
+      - Henoch-Schönlein purpura (IgA vasculitis)
+      - Type III - Pauci-immune (no/minimal deposits, ANCA-positive) - 40-50% of RPGN
+      - ANCA-associated vasculitis - GPA, MPA, EGPA (see vasculitis tree)
+      - c-ANCA/PR3 (GPA) or p-ANCA/MPO (MPA)
+      - Labs - Urinalysis (RBC casts), Cr (rapid rise), ANCA (c-ANCA/PR3, p-ANCA/MPO), anti-GBM antibodies, ANA, complement (C3, C4), blood cultures
+      - Chest X-ray - Alveolar infiltrates if pulmonary hemorrhage (Goodpasture, vasculitis)
+      - Renal biopsy URGENT - Shows crescents (epithelial cell proliferation in Bowman space), guides treatment
+    treatment:
+      - MEDICAL EMERGENCY - Treat aggressively before irreversible fibrosis
+      - Anti-GBM disease (Goodpasture syndrome)
+      - Triple therapy (MUST start all three immediately)
+      - Plasmapheresis (PLEX) - Daily x 14 days (removes circulating anti-GBM antibodies)
+      - High-dose corticosteroids - Methylprednisolone 500-1000mg IV daily x 3 days, then prednisone 1 mg/kg/day
+      - Cyclophosphamide 2 mg/kg/day PO (suppress antibody production)
+      - If pulmonary hemorrhage - May need mechanical ventilation, transfuse PRBCs cautiously (avoid volume overload)
+      - Dialysis if ESRD at presentation (if Cr >5-6 or dialysis-dependent, may not recover renal function, but treat anyway to prevent pulmonary hemorrhage)
+      - Prognosis - If treated early (Cr <5-6), 90% renal recovery; if dialysis-dependent at presentation, <10% recover
+      - ANCA-associated vasculitis (see RHEUM-VASCULITIS tree)
+      - Induction - Rituximab or cyclophosphamide + high-dose steroids
+      - Plasmapheresis - Consider if severe (Cr >5.6, dialysis-dependent, pulmonary hemorrhage)
+      - Maintenance - Rituximab or azathioprine/mycophenolate x 18-24 months
+      - Lupus nephritis (proliferative class III/IV)
+      - Induction - Mycophenolate mofetil 2-3g daily OR cyclophosphamide (Euro-Lupus or NIH protocol) + high-dose steroids
+      - Maintenance - Mycophenolate or azathioprine
+      - Hydroxychloroquine 200-400mg daily (all SLE patients)
+      - Monitor - Repeat renal function, ANCA titers or anti-GBM levels (should decrease with treatment), urinalysis
+      - Dialysis - If severe AKI with uremic symptoms, hyperkalemia, acidosis, volume overload
+      - Kidney transplant - Can transplant after ESRD, but wait 6-12 months and ensure anti-GBM undetectable (risk recurrence)

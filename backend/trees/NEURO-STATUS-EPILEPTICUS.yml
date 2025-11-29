@@ -1,0 +1,159 @@
+tree_id: NEURO-STATUS-EPILEPTICUS
+name: Status Epilepticus Management
+family: NEUROLOGY
+specialty: Emergency Medicine, Neurology, Critical Care
+chief_complaint: Continuous Seizure Activity, Prolonged Seizure, Repeated Seizures
+description: Comprehensive evaluation and management of status epilepticus with staged treatment protocol
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: seizure_presentation
+
+nodes:
+  - id: seizure_presentation
+    type: question
+    text: "Seizure presentation and duration?"
+    options:
+      - label: "Continuous seizure activity >5 minutes OR ≥2 seizures without return to baseline"
+        next: status_epilepticus_confirm
+      - label: "Brief seizure <5 minutes with return to baseline"
+        next: single_seizure
+
+  - id: single_seizure
+    type: diagnosis
+    name: "Single Seizure (Not Status Epilepticus)"
+    icd10: "R56.9"
+    urgency: high
+    workup:
+      - Fingerstick glucose (hypoglycemia common reversible cause)
+      - Electrolytes (sodium, calcium, magnesium)
+      - CBC (infection)
+      - Toxicology screen
+      - Blood alcohol level
+      - Antiepileptic drug (AED) levels if known epilepsy
+      - Head CT non-contrast (stroke, hemorrhage, mass)
+      - Consider LP if fever or concern for meningitis/encephalitis
+      - EEG (routine or prolonged if concern for non-convulsive seizures)
+    treatment:
+      - Treat underlying cause (correct glucose, electrolytes)
+      - Benzodiazepine PRN if recurrent seizure
+      - Load with AED if first unprovoked seizure or known epilepsy (levetiracetam 1500-3000mg IV, fosphenytoin 20mg PE/kg IV, or valproic acid 20-40mg/kg IV)
+      - Neurology consultation
+      - Hospital admission if first seizure, structural lesion, or recurrent seizures
+      - Discharge if provoked seizure from reversible cause and patient returns to baseline
+
+  - id: status_epilepticus_confirm
+    type: question
+    text: "Type of status epilepticus?"
+    options:
+      - label: "Convulsive status epilepticus (tonic-clonic movements)"
+        next: convulsive_se_stage1
+      - label: "Non-convulsive status epilepticus (altered mental status without motor activity)"
+        next: non_convulsive_se
+
+  - id: convulsive_se_stage1
+    type: diagnosis
+    name: "Convulsive Status Epilepticus - Initial Management (Stage 1)"
+    icd10: "G41.9"
+    urgency: critical
+    workup:
+      - STAT fingerstick glucose
+      - CBC, CMP (sodium, calcium, magnesium, glucose)
+      - Toxicology screen and blood alcohol
+      - AED levels if known epilepsy
+      - Head CT non-contrast
+      - LP if fever (do CT first to rule out mass)
+      - Continuous EEG monitoring (once stabilized)
+      - ABG or VBG (assess lactic acidosis, respiratory status)
+      - Pregnancy test (women of childbearing age)
+      - CK and troponin (rhabdomyolysis, cardiac stress)
+    treatment:
+      - TIME 0-5 MINUTES - Stabilization Phase
+      - Airway protection (position patient, suction, consider intubation if not protecting airway)
+      - Oxygen via NRB or BVM
+      - IV access x2 large bore
+      - Monitor - cardiac, BP, pulse ox, capnography if intubated
+      - Thiamine 100mg IV (before glucose if malnourished/alcoholic)
+      - Dextrose 50% 50mL IV push if hypoglycemic (or 25g D50 ampule)
+      - TIME 5-20 MINUTES - First-Line Benzodiazepines
+      - Lorazepam 0.1mg/kg IV (max 4mg per dose, may repeat once after 5-10 min) OR
+      - Diazepam 0.15-0.2mg/kg IV (max 10mg per dose, may repeat once) OR
+      - Midazolam 10mg IM (if no IV access, ages >13 years, or 0.2mg/kg IM)
+      - If seizure stops after first-line treatment, proceed to load AED (next stage)
+      - If seizure continues after 2 doses of benzodiazepine, proceed to Stage 2
+
+  - id: convulsive_se_stage2
+    type: diagnosis
+    name: "Refractory Status Epilepticus (Stage 2)"
+    icd10: "G41.9"
+    urgency: critical
+    workup:
+      - Continue workup from Stage 1
+      - Continuous EEG monitoring (essential at this stage)
+      - MRI brain (once stabilized, if etiology unknown)
+      - CSF analysis if LP performed
+      - Autoimmune encephalitis panel (NMDA receptor, VGKC, etc)
+      - Paraneoplastic panel if appropriate
+    treatment:
+      - TIME 20-40 MINUTES - Second-Line AED Loading
+      - Load with ONE of the following (while continuing benzodiazepines PRN)
+      - Fosphenytoin 20mg PE/kg IV at max 150mg PE/min (monitor BP and ECG, can cause hypotension and arrhythmias) OR
+      - Levetiracetam 60mg/kg IV (max 4500mg) over 10-15 minutes (no cardiac monitoring needed, preferred in elderly and pregnancy) OR
+      - Valproic acid 40mg/kg IV (max 3000mg) over 10 minutes (avoid in pregnancy, liver disease, mitochondrial disorders)
+      - Intubation likely needed at this stage for airway protection
+      - Mechanical ventilation (protect from aspiration, maintain oxygenation)
+      - If seizure continues after second-line AED, proceed to Stage 3 (continuous infusion)
+
+  - id: convulsive_se_stage3
+    type: diagnosis
+    name: "Super-Refractory Status Epilepticus (Stage 3)"
+    icd10: "G41.9"
+    urgency: critical
+    workup:
+      - Continuous EEG monitoring (24/7)
+      - MRI brain with contrast and DWI sequences
+      - Extensive metabolic workup (ammonia, lactate, pyruvate, amino acids)
+      - Genetic testing if young patient
+      - Autoimmune and paraneoplastic panels
+      - CSF studies (cell count, protein, glucose, cultures, PCR, oligoclonal bands, autoantibodies)
+    treatment:
+      - TIME >40 MINUTES - Continuous Anesthetic Infusions
+      - ICU admission with continuous EEG monitoring
+      - Intubation and mechanical ventilation (if not already done)
+      - Start continuous infusion with ONE of the following
+      - Midazolam 0.2mg/kg IV bolus, then 0.1-2mg/kg/hr infusion (first-line, titrate to EEG burst suppression) OR
+      - Propofol 1-2mg/kg IV bolus, then 20-200mcg/kg/min infusion (rapid onset, but risk of propofol infusion syndrome if prolonged >48hrs) OR
+      - Pentobarbital 5-15mg/kg IV load over 1-2 hours, then 0.5-5mg/kg/hr infusion (most effective but most hypotension and longest wake-up time)
+      - Goal - EEG burst suppression or seizure freedom
+      - Maintain burst suppression for 24-48 hours, then attempt slow wean
+      - Add additional AEDs during infusion (combine levetiracetam + fosphenytoin + valproic acid or others)
+      - Vasopressors (norepinephrine) for hypotension due to anesthetics
+      - Treat underlying cause aggressively (IV acyclovir if HSV encephalitis, steroids/IVIG if autoimmune, antibiotics if infection)
+      - Refractory to stage 3 - Consider ketamine 1-5mg/kg/hr, ketogenic diet, immunotherapy (steroids, IVIG, plasmapheresis), therapeutic hypothermia
+      - Neurology and critical care co-management
+
+  - id: non_convulsive_se
+    type: diagnosis
+    name: "Non-Convulsive Status Epilepticus"
+    icd10: "G41.0"
+    urgency: critical
+    workup:
+      - STAT EEG (diagnostic - shows continuous or near-continuous seizure activity on EEG without obvious motor manifestations)
+      - Fingerstick glucose
+      - CBC, CMP (electrolytes)
+      - Toxicology screen
+      - AED levels if known epilepsy
+      - Head CT
+      - LP if fever or concern for encephalitis
+      - MRI brain
+      - Continuous EEG monitoring
+    treatment:
+      - High index of suspicion in any patient with unexplained altered mental status
+      - Treatment similar to convulsive SE but less urgency for airway management
+      - Benzodiazepines first-line (lorazepam 0.1mg/kg IV or diazepam 0.15mg/kg IV)
+      - Load with second-line AED (levetiracetam, fosphenytoin, or valproic acid)
+      - Continuous EEG monitoring to guide therapy
+      - If refractory, proceed to continuous infusions (midazolam, propofol, or pentobarbital)
+      - ICU admission
+      - Treat underlying cause
+      - Neurology consultation

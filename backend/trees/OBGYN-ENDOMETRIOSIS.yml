@@ -1,0 +1,95 @@
+tree_id: OBGYN-ENDOMETRIOSIS
+name: Endometriosis Evaluation
+family: OBSTETRICS_GYNECOLOGY
+specialty: Gynecology, Reproductive Endocrinology
+chief_complaint: Pelvic Pain, Dysmenorrhea, Dyspareunia, Infertility
+description: Evaluation and management of endometriosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: endometriosis_evaluation
+
+nodes:
+  - id: endometriosis_evaluation
+    type: diagnosis
+    name: "Endometriosis"
+    icd10: "N80.9"
+    urgency: medium
+    workup:
+      - Endometriosis - Endometrial tissue (glands and stroma) outside uterus
+      - Prevalence - 10% reproductive-age women, 20-50% women with infertility, 70-90% women with chronic pelvic pain
+      - Pathophysiology - Retrograde menstruation theory (most accepted, menstrual blood flows through fallopian tubes into pelvis, implants grow)
+      - Estrogen-dependent (grows during reproductive years, regresses after menopause)
+      - Locations - Ovaries (most common, endometriomas "chocolate cysts"), pelvic peritoneum, uterosacral ligaments, cul-de-sac (pouch of Douglas), bladder, bowel (rare but serious)
+      - Extra-pelvic - Diaphragm, lung (catamenial pneumothorax), surgical scars (C-section, laparoscopy)
+      - Clinical features - "Classic triad" but variable
+      - Dysmenorrhea - Severe painful periods (worse than primary dysmenorrhea, progressive, starts before menses)
+      - Dyspareunia - Deep pain with intercourse (deep penetration)
+      - Dyschezia - Painful bowel movements (especially during menses)
+      - Chronic pelvic pain - Non-cyclical, may radiate to back/legs
+      - Infertility - Difficulty conceiving (30-50% have endometriosis)
+      - Cyclical symptoms - Hematuria (bladder involvement), hematochezia (bowel), hemoptysis/pneumothorax (thoracic)
+      - Physical exam
+      - Pelvic exam - Tender nodules on uterosacral ligaments (pathognomonic), fixed retroverted uterus, adnexal mass (endometrioma), cervical motion tenderness
+      - Often NORMAL (50% have normal exam)
+      - Labs - CA-125 elevated (>35 U/mL) in 50% moderate-severe endometriosis
+      - NOT diagnostic (also elevated ovarian cancer, PID, fibroids, pregnancy)
+      - Imaging
+      - Transvaginal ultrasound - Detect endometriomas (ovarian cysts with homogeneous low-level echoes "ground glass")
+      - Cannot visualize peritoneal implants
+      - MRI - Better visualization deep infiltrating endometriosis (bowel, bladder)
+      - Laparoscopy with biopsy - GOLD STANDARD for diagnosis
+      - Direct visualization of lesions (powder-burn, red, white, clear vesicles)
+      - Biopsy confirms endometrial glands and stroma
+      - Staging - Revised American Society for Reproductive Medicine (rASRM) classification
+      - Minimal (Stage I), mild (Stage II), moderate (Stage III), severe (Stage IV)
+      - Based on location, depth, adhesions
+      - Correlation with symptoms poor (Stage I can have severe pain, Stage IV minimal symptoms)
+      - Differential diagnosis - PID, ovarian cysts, IBS, interstitial cystitis, adhesions
+    treatment:
+      - Goals - Pain relief, preserve/improve fertility
+      - Treatment depends on symptoms, fertility desires, disease severity
+      - Expectant management - If minimal symptoms, await spontaneous improvement (20-30%)
+      - Medical therapy - First-line for pain (does NOT improve fertility)
+      - NSAIDs - Ibuprofen 600-800 mg TID, naproxen 500 mg BID (for dysmenorrhea)
+      - Combined oral contraceptives (COCs) - Continuous (skip placebo week) or cyclic
+      - Suppress ovulation, decidualize endometrial tissue, induce atrophy
+      - Effective 70-80% for pain relief
+      - Progestins - Medroxyprogesterone acetate 10-30 mg daily PO or 150 mg IM q3 months (Depo-Provera), norethindrone acetate 5 mg daily
+      - Suppress ovulation, decidualize, atrophy
+      - Effective 80-90%
+      - Side effects - Weight gain, bloating, irregular bleeding, mood changes
+      - Levonorgestrel IUD (Mirena) - 20 mcg/day levonorgestrel, effective for pain, well-tolerated
+      - GnRH agonists - Leuprolide 3.75 mg IM monthly or 11.25 mg q3 months, goserelin 3.6 mg SC monthly
+      - Induce medical menopause (suppress estrogen), most effective for pain
+      - Limitations - Hypoestrogenic side effects (hot flashes, vaginal dryness, bone loss), limit use 6-12 months
+      - Add-back therapy - Low-dose estrogen-progestin (norethindrone 5 mg daily ± estrogen 0.625 mg) to reduce side effects, allow longer duration
+      - GnRH antagonist - Elagolix 150-200 mg daily, oral
+      - Suppress estrogen, similar efficacy to GnRH agonists, faster onset, reversible
+      - Side effects - Hot flashes, bone loss (less than GnRH agonists)
+      - Aromatase inhibitors - Letrozole 2.5 mg daily (third-line, experimental)
+      - Reduce local estrogen production
+      - Must use with progestin or OCP (prevent estrogen-withdrawal bleeding, cyst formation)
+      - Surgical therapy - For refractory pain, endometriomas, deep infiltrating disease, fertility
+      - Laparoscopic excision or ablation - Visualize and remove/destroy lesions, lyse adhesions, drain endometriomas
+      - Gold standard for diagnosis AND treatment
+      - Pain relief 70-80% (but 20-30% recurrence at 2 years, 50% at 5 years)
+      - Improves fertility (pregnancy rates increase 30-50% after surgery for minimal-mild disease)
+      - Excision of endometriomas - Cystectomy (remove cyst wall) vs. drainage/ablation
+      - Cystectomy superior recurrence (10-20% vs. 30-40%)
+      - Risk - Ovarian reserve reduction (AMH decreases), consider sparing ovarian tissue if fertility desired
+      - Hysterectomy ± bilateral salpingo-oophorectomy (BSO) - Definitive for women who completed childbearing
+      - Hysterectomy alone - 60-70% pain relief
+      - Hysterectomy + BSO - 90% pain relief (removes estrogen source)
+      - Consider HRT after BSO (if no residual disease)
+      - Recurrence - 40-50% within 5 years if ovaries conserved, 5-10% if BSO
+      - Endometriosis and infertility
+      - Mechanisms - Anatomic distortion (adhesions, tubal obstruction), inflammatory environment, altered peritoneal fluid, ovulatory dysfunction
+      - Management
+      - Surgical treatment - Improves fertility (especially minimal-mild disease)
+      - Assisted reproductive technology (ART) - IVF first-line for moderate-severe disease
+      - Success rates similar to non-endometriosis if adequate ovarian reserve
+      - Ovarian stimulation protocols - GnRH antagonist or long agonist
+      - Medical suppression - Does NOT improve fertility (delays conception)
+      - Prognosis - Chronic relapsing disease, pain recurs 20-50% after surgery, may require multiple surgeries
+      - Menopause - Symptoms regress (estrogen withdrawal)

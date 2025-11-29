@@ -1,0 +1,113 @@
+tree_id: PULM-SARCOIDOSIS
+name: Sarcoidosis Evaluation
+family: PULMONOLOGY
+specialty: Pulmonology, Internal Medicine
+chief_complaint: Dyspnea, Cough, Lymphadenopathy, Skin Lesions
+description: Comprehensive evaluation and management of sarcoidosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: sarcoidosis_evaluation
+
+nodes:
+  - id: sarcoidosis_evaluation
+    type: diagnosis
+    name: "Sarcoidosis"
+    icd10: "D86.9"
+    urgency: medium
+    workup:
+      - Multisystem granulomatous disease of unknown etiology
+      - Most commonly affects lungs (90%), lymph nodes, skin, eyes
+      - Epidemiology - Peak 20-40 years, African Americans 3-4x higher incidence, women > men
+      - Noncaseating granulomas (epithelioid cells, giant cells, NO necrosis)
+      - Clinical presentation - Highly variable
+      - Pulmonary (90%) - Dyspnea, dry cough, chest pain, wheezing (rarely), often asymptomatic
+      - Constitutional - Fever, weight loss, fatigue, night sweats
+      - Löfgren syndrome - Acute sarcoidosis triad: bilateral hilar lymphadenopathy + erythema nodosum + arthritis (ankles)
+      - Excellent prognosis, often self-limited
+      - Heerfordt syndrome - Uveoparotid fever: parotid enlargement + uveitis + facial nerve palsy + fever
+      - Skin (25%) - Erythema nodosum (acute, good prognosis), lupus pernio (chronic violaceous plaques nose/cheeks, poor prognosis), papules, plaques, scar infiltration
+      - Eyes (25%) - Anterior uveitis (most common, blurred vision, photophobia, red eye), posterior uveitis, optic neuritis, can cause blindness
+      - Cardiac (5% clinical, 25% autopsy) - Conduction abnormalities (AV block most common), ventricular arrhythmias, sudden death, cardiomyopathy/heart failure
+      - Neurologic (5%) - Cranial neuropathy (facial nerve palsy most common, Bell's palsy-like), aseptic meningitis, seizures, hypothalamic/pituitary dysfunction
+      - Hypercalcemia/hypercalciuria (10%) - Granulomas produce 1,25-dihydroxyvitamin D (activated vitamin D)
+      - Kidney stones, nephrocalcinosis
+      - Diagnostic workup
+      - Chest X-ray - Staging (Scadding classification)
+      - Stage 0 - Normal (5%)
+      - Stage 1 - Bilateral hilar lymphadenopathy (BHL) alone (50%), best prognosis
+      - Stage 2 - BHL + parenchymal infiltrates (25-30%)
+      - Stage 3 - Parenchymal infiltrates without BHL (10-15%)
+      - Stage 4 - Pulmonary fibrosis (5%), worst prognosis
+      - CT chest - Better characterization, micronodules (perilymphatic distribution along bronchovascular bundles, fissures, pleura)
+      - Pulmonary function tests - Restrictive pattern (decreased TLC, FVC), decreased DLCO
+      - Obstructive pattern if endobronchial involvement or fibrosis
+      - Labs
+      - ACE level - Elevated 60% (not specific, also elevated TB, lymphoma, hyperthyroidism)
+      - Calcium - Serum calcium, 24hr urine calcium (hypercalciuria more common than hypercalcemia)
+      - Inflammatory markers - ESR, CRP often elevated (nonspecific)
+      - CBC - Lymphopenia, anemia of chronic disease
+      - LFTs - Elevated if hepatic involvement
+      - Tissue biopsy - Required for diagnosis (noncaseating granulomas)
+      - Transbronchial biopsy (bronchoscopy) - 60-90% yield, safe
+      - Endobronchial ultrasound (EBUS) with lymph node biopsy - High yield
+      - Mediastinoscopy - If bronchoscopy nondiagnostic
+      - Skin, lymph node, liver biopsy if accessible lesions
+      - Exclude other causes - TB (AFB stain/culture, negative PPD/IGRA common in sarcoid due to anergy), fungal infections (histoplasmosis, coccidioidomycosis), lymphoma, berylliosis
+      - BAL fluid analysis (supportive but not diagnostic) - Lymphocytosis, elevated CD4:CD8 ratio >3.5 suggests sarcoid
+      - Cardiac screening if any cardiac symptoms or high-risk features
+      - ECG - Conduction abnormalities, arrhythmias
+      - Holter monitor - Detect asymptomatic arrhythmias
+      - Echocardiogram - Wall motion abnormalities, EF
+      - Cardiac MRI with gadolinium - Most sensitive for cardiac sarcoid (late gadolinium enhancement)
+      - PET scan - Identifies active cardiac inflammation
+      - Ophthalmology exam - Slit lamp (all patients, screen for asymptomatic uveitis)
+    treatment:
+      - Observation - Stage 1 (BHL alone), asymptomatic, Löfgren syndrome (often self-resolves 1-2 years)
+      - Monitor PFTs, chest X-ray q3-6 months
+      - 60-70% Stage 1 resolve spontaneously
+      - Indications for treatment
+      - Symptomatic pulmonary disease (dyspnea, declining PFTs)
+      - Cardiac involvement (arrhythmias, heart failure, any cardiac sarcoid)
+      - Neurologic involvement (any CNS/PNS manifestations)
+      - Ocular involvement (uveitis - to prevent blindness)
+      - Hypercalcemia
+      - Progressive or severe disease (Stage 3-4)
+      - Corticosteroids - First-line
+      - Prednisone 20-40 mg daily x 4-8 weeks, then taper slowly over 6-12 months (total 12-24 months)
+      - Monitor PFTs, chest X-ray to assess response (improvement in 2-3 months)
+      - 60-80% respond initially, but 50-75% relapse when tapered
+      - Side effects - Weight gain, diabetes, osteoporosis (give calcium/vitamin D), infections, mood changes
+      - Steroid-sparing agents - If relapse during taper, unable to taper <10-15 mg daily, or steroid toxicity
+      - Methotrexate 10-25 mg weekly + folic acid (most commonly used, 60% response)
+      - Azathioprine 50-200 mg daily
+      - Mycophenolate mofetil 1-3 g/day
+      - Leflunomide 10-20 mg daily
+      - Takes 3-6 months to see benefit, continue steroids initially then taper
+      - Biologic therapy - Refractory disease
+      - Infliximab (anti-TNF) 3-5 mg/kg IV q4-8 weeks - Most evidence, 60-70% response in refractory cases
+      - Adalimumab - Alternative anti-TNF
+      - Monitor for TB reactivation (check PPD/IGRA before starting)
+      - Hydroxychloroquine - For skin lesions (lupus pernio), hypercalcemia (reduces vitamin D activation)
+      - 200-400 mg daily
+      - Baseline + annual ophthalmology (retinal toxicity risk)
+      - Cardiac sarcoidosis - Aggressive treatment
+      - High-dose prednisone 40-60 mg daily, prolonged course
+      - Immunosuppressants (methotrexate, azathioprine) often added
+      - ICD if high-risk arrhythmias (EF <35%, sustained VT, unexplained syncope)
+      - Pacemaker if high-grade AV block
+      - Heart failure management (ACE inhibitors, beta-blockers, diuretics)
+      - Hypercalcemia management
+      - Hydration, avoid vitamin D supplements, limit sun exposure, low calcium diet
+      - Corticosteroids or hydroxychloroquine (reduce vitamin D production by granulomas)
+      - Monitoring
+      - PFTs, chest X-ray q3-6 months (assess progression/response)
+      - Calcium, LFTs periodically
+      - ECG, Holter if cardiac involvement
+      - Ophthalmology annually (uveitis can be asymptomatic)
+      - Prognosis - Variable
+      - Stage 1 (BHL alone) - 60-80% spontaneous remission
+      - Stage 2-3 - 50-60% remission with treatment
+      - Stage 4 (fibrosis) - Irreversible, may progress to pulmonary hypertension, consider transplant evaluation
+      - Cardiac or neuro sarcoid - Poor prognosis without treatment, sudden death risk
+      - Overall mortality 1-5%, mostly from pulmonary fibrosis or cardiac involvement

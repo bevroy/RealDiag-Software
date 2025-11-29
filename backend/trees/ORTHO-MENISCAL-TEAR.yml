@@ -1,0 +1,97 @@
+tree_id: ORTHO-MENISCAL-TEAR
+name: Meniscal Tear Evaluation
+family: ORTHOPEDICS
+specialty: Orthopedics, Sports Medicine
+chief_complaint: Knee Pain, Swelling, Locking, Catching
+description: Evaluation and management of meniscal tears
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: meniscal_tear_evaluation
+
+nodes:
+  - id: meniscal_tear_evaluation
+    type: diagnosis
+    name: "Meniscal Tear"
+    icd10: "S83.2"
+    urgency: medium
+    workup:
+      - Meniscal tear - Tear of medial or lateral meniscus (fibrocartilage C-shaped structure in knee)
+      - Most common knee injury requiring surgery
+      - Incidence - 60-70 per 100,000, peak age 20-29 years (sports) and 40-60 years (degenerative)
+      - Anatomy - Medial meniscus (larger, C-shaped, more fixed) and lateral meniscus (smaller, O-shaped, more mobile)
+      - Function - Load transmission (50% weight-bearing), shock absorption, joint stability, proprioception
+      - Blood supply - Outer 1/3 vascular ("red zone"), middle 1/3 ("red-white zone"), inner 1/3 avascular ("white zone")
+      - Healing potential decreases with distance from periphery
+      - Mechanism
+      - Traumatic - Twisting injury with foot planted (cutting, pivoting), squatting, sudden stops
+      - Common in young athletes (soccer, basketball, football)
+      - Often associated ACL tear (30-50% ACL tears have meniscal tear)
+      - Degenerative - Chronic wear, minimal/no trauma, middle-aged/elderly
+      - Horizontal cleavage tears common (degenerative), associated osteoarthritis
+      - Types of tears - Vertical (longitudinal), horizontal, radial, complex, bucket-handle (displaced longitudinal), flap, root (meniscus detachment from tibial plateau)
+      - Clinical presentation
+      - Pain - Joint line pain (medial or lateral), worse with weight-bearing, twisting, squatting
+      - Swelling - Gradual onset (12-24 hours), less dramatic than ACL tear
+      - Mechanical symptoms - Locking (inability to fully extend knee, displaced bucket-handle tear), catching, popping
+      - Giving way - Sensation of instability (but less than ACL tear)
+      - Physical exam
+      - Inspection - Effusion (mild to moderate), quadriceps atrophy (chronic)
+      - Palpation - Joint line tenderness (medial or lateral), 75-90% sensitive
+      - Range of motion - May have limited terminal extension (locked knee if displaced tear)
+      - Provocative tests
+      - McMurray test - Flex knee maximally, externally rotate tibia (tests medial meniscus) or internally rotate (tests lateral), extend knee while applying valgus/varus stress
+      - Positive - Palpable click or pop at joint line with pain (sensitivity 50-70%, specificity 70-80%)
+      - Apley compression test - Patient prone, knee flexed 90°, apply downward pressure on heel while rotating tibia
+      - Positive - Pain with compression and rotation (suggests meniscal tear vs. ligamentous if pain with distraction)
+      - Thessaly test - Patient stands on one leg, knee flexed 20°, rotate body internally/externally (weight-bearing rotation)
+      - Positive - Medial or lateral joint line pain (sensitivity 90%, specificity 80%)
+      - Valgus/varus stress - Assess collateral ligaments (differentiate ligament vs. meniscus)
+      - Lachman, anterior drawer - Assess ACL (concomitant injury)
+      - Imaging
+      - X-rays (AP, lateral, sunrise, weight-bearing) - Rule out fracture, osteoarthritis, loose bodies
+      - Meniscal tear NOT visible on X-ray (cartilage radiolucent)
+      - MRI - GOLD STANDARD for meniscal tear diagnosis
+      - Sensitivity 90-95%, specificity 85-95%
+      - T2-weighted images - High signal within meniscus extending to articular surface (Grade 3) = tear
+      - Grade 1-2 signal (intrasubstance, not reaching surface) = degeneration, not tear
+      - Identify tear type, location, size, associated injuries (ACL, MCL, bone marrow edema)
+      - Ultrasound - Dynamic assessment, lower sensitivity than MRI, operator-dependent
+    treatment:
+      - Treatment depends on tear type, location, patient age, activity level, symptoms
+      - Conservative (non-operative) - First-line for many tears
+      - Indications - Degenerative tears, stable tears, minimal symptoms, peripheral tears, elderly/low demand
+      - Rest, ice, compression, elevation (RICE)
+      - NSAIDs - Ibuprofen 400-800 mg TID, naproxen 500 mg BID (pain, inflammation)
+      - Physical therapy - Quadriceps strengthening (VMO), hamstring strengthening, range of motion exercises, proprioception
+      - Corticosteroid injection - Intra-articular (temporary relief 6-12 weeks, if persistent pain)
+      - Hyaluronic acid injection (viscosupplementation) - If osteoarthritis present
+      - Outcomes - 50-70% improve with conservative treatment (especially degenerative tears)
+      - Surgical (arthroscopic) - If conservative fails or mechanical symptoms
+      - Indications - Mechanical symptoms (locking, catching), failed conservative treatment 6-12 weeks, young active patients, displaced tears, unstable tears
+      - Techniques
+      - Meniscectomy (partial) - Remove torn portion, preserve as much meniscus as possible
+      - Most common procedure
+      - Relief of mechanical symptoms 80-90%
+      - Long-term risk osteoarthritis (loss of meniscus → increased contact stress)
+      - Meniscus repair - Suture tear back together (preserve meniscus)
+      - Indications - Peripheral tears (red or red-white zone, vascular, healing potential), vertical longitudinal tears, acute tears (<3 months), young patients (<40 years)
+      - Contraindications - White zone tears (avascular, won't heal), degenerative tears, complex tears
+      - Techniques - Inside-out, outside-in, all-inside (suture anchors)
+      - Success rate 70-90% (peripheral), 50-70% (red-white zone)
+      - Healing time 3-6 months (slower return to sport than meniscectomy)
+      - Root repair - If meniscus root tear (detachment), repair restores function
+      - Meniscal transplantation - If total meniscectomy performed, symptomatic, young (<50), stable knee
+      - Allograft meniscus implantation
+      - Rehabilitation
+      - Meniscectomy - Weight-bearing as tolerated immediately, return to sport 4-6 weeks
+      - Meniscus repair - Protected weight-bearing (6 weeks), brace (limit flexion >90° for 6 weeks), return to sport 4-6 months
+      - Physical therapy - Range of motion, strengthening, proprioception, gradual return to activity
+      - Complications
+      - Osteoarthritis - Long-term risk 10-20 years (meniscectomy 50-70%, repair 10-30%)
+      - Retear - 10-20% after repair (higher if mid-substance or white zone)
+      - Stiffness, infection (<1%), neurovascular injury (rare)
+      - Prognosis
+      - Meniscectomy - Good short-term (pain relief 80-90%), but long-term osteoarthritis risk
+      - Meniscus repair - Better long-term outcomes (preserve meniscus), success rate 70-90% peripheral tears
+      - Conservative - 50-70% improve (especially degenerative tears)

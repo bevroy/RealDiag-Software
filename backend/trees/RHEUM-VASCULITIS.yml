@@ -1,0 +1,145 @@
+tree_id: RHEUM-VASCULITIS
+name: Systemic Vasculitis Evaluation
+family: RHEUMATOLOGY
+specialty: Rheumatology, Internal Medicine
+chief_complaint: Rash, Fever, Multi-organ Involvement, Constitutional Symptoms
+description: Comprehensive evaluation of systemic vasculitis syndromes
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: vasculitis_presentation
+
+nodes:
+  - id: vasculitis_presentation
+    type: question
+    text: "Vessel size predominantly involved?"
+    options:
+      - label: "Large vessel vasculitis (aorta, major branches)"
+        next: large_vessel_vasculitis
+      - label: "Medium vessel vasculitis (visceral arteries)"
+        next: medium_vessel_vasculitis
+      - label: "Small vessel vasculitis (capillaries, venules, arterioles)"
+        next: small_vessel_vasculitis
+
+  - id: large_vessel_vasculitis
+    type: diagnosis
+    name: "Large Vessel Vasculitis"
+    icd10: "M31.9"
+    urgency: high
+    workup:
+      - Giant cell arteritis (GCA/temporal arteritis) and Takayasu arteritis
+      - Giant cell arteritis - Age >50, most common >70
+      - Classic triad - Headache (new, temporal), jaw claudication, vision changes (amaurosis fugax, diplopia, blindness - EMERGENCY)
+      - PMR symptoms - Shoulder/hip girdle pain and stiffness (50% have concurrent polymyalgia rheumatica)
+      - Scalp tenderness, temporal artery abnormality (thickened, tender, reduced pulse), constitutional symptoms
+      - Risk of permanent vision loss if untreated (ischemic optic neuropathy)
+      - Labs - Markedly elevated ESR (often >100), elevated CRP, normocytic anemia, thrombocytosis
+      - Temporal artery biopsy - Gold standard (shows giant cells, granulomatous inflammation), do NOT delay treatment waiting for biopsy, can be positive up to 2 weeks after starting steroids
+      - Biopsy 2-3 cm segment, consider bilateral if first negative (skip lesions)
+      - CTA or MRA - Shows arteritis (mural thickening, stenosis) in aorta and branches
+      - Takayasu arteritis - Age <40, more common in Asian women
+      - Vascular symptoms - Limb claudication, blood pressure discrepancy between arms (>10 mmHg), diminished pulses, bruits, hypertension (renal artery stenosis)
+      - Constitutional symptoms - Fever, weight loss, fatigue
+      - Complications - Aortic regurgitation, aortic aneurysm, stroke, MI
+      - Labs - Elevated ESR/CRP
+      - Imaging CRITICAL - CT angiography or MR angiography shows aortic and branch vessel stenosis, wall thickening, aneurysms
+      - FDG-PET - Shows vascular inflammation (active disease)
+    treatment:
+      - Giant cell arteritis - MEDICAL EMERGENCY if vision symptoms
+      - High-dose corticosteroids IMMEDIATELY (do not wait for biopsy)
+      - Vision symptoms or threatened - Methylprednisolone 1000mg IV daily x 3 days, then prednisone 1 mg/kg/day
+      - No vision symptoms - Prednisone 40-60mg daily
+      - Taper very slowly over 12-18 months (too rapid taper → relapse)
+      - Monitor ESR/CRP and clinical symptoms
+      - Steroid-sparing agent - Tocilizumab 162mg SC weekly or q2 weeks (IL-6 inhibitor, GiACTA trial showed benefit, reduces steroid exposure and relapse)
+      - Alternative - Methotrexate 15-25mg weekly (modest steroid-sparing)
+      - Low-dose aspirin 81mg daily - Reduces ischemic complications (stroke, MI, vision loss)
+      - Ophthalmology - Urgent if vision symptoms
+      - Monitor for complications - Aortic aneurysm (imaging surveillance), steroid side effects
+      - Takayasu arteritis
+      - High-dose corticosteroids - Prednisone 1 mg/kg/day, taper over 12-24 months
+      - Steroid-sparing agents - Often needed
+      - Methotrexate 15-25mg weekly, azathioprine 2 mg/kg/day, mycophenolate mofetil 2-3g daily
+      - Biologics - Tocilizumab (most evidence), TNF inhibitors (infliximab, adalimumab)
+      - Revascularization - If critical stenosis, aneurysm, perform when disease quiescent (on immunosuppression)
+      - Angioplasty, stenting, or bypass grafting
+      - Antiplatelet therapy - Aspirin 81mg daily
+      - Monitor disease activity - ESR/CRP, imaging (CTA/MRA q6-12 months), PET if available
+
+  - id: medium_vessel_vasculitis
+    type: diagnosis
+    name: "Medium Vessel Vasculitis"
+    icd10: "M31.9"
+    urgency: critical
+    workup:
+      - Polyarteritis nodosa (PAN) and Kawasaki disease
+      - Polyarteritis nodosa - Rare, affects medium arteries (renal, mesenteric, hepatic, cardiac, peripheral nerves)
+      - Clinical - Multi-organ involvement, fever, weight loss, myalgias, arthralgias
+      - Renal - Hypertension (renovascular), renal infarcts (NOT glomerulonephritis, that's small vessel)
+      - GI - Abdominal pain, GI bleeding, bowel infarction/perforation
+      - Neurologic - Mononeuritis multiplex (multiple peripheral nerve infarcts, asymmetric, step-wise), stroke
+      - Skin - Livedo reticularis, subcutaneous nodules, ulcers, digital ischemia
+      - Cardiac - MI, pericarditis
+      - Hepatitis B association - 10-30% have chronic HBV (immune complex deposition)
+      - Labs - Elevated ESR/CRP, anemia, leukocytosis, hepatitis B serologies (HBsAg, HBeAg)
+      - ANCA negative (distinguishes from ANCA-associated vasculitis)
+      - Angiography - Mesenteric, renal, or hepatic angiogram shows aneurysms ("rosary sign") and stenoses
+      - Biopsy - Affected tissue (kidney, nerve, muscle, skin) shows necrotizing arteritis, NOT needed if classic angiogram findings
+      - Kawasaki disease - Children <5 years, acute febrile illness
+      - Diagnostic criteria - Fever ≥5 days plus ≥4 of 5: bilateral conjunctival injection, oral changes (strawberry tongue, cracked lips), polymorphous rash, extremity changes (erythema, edema, desquamation), cervical lymphadenopathy
+      - Complication - Coronary artery aneurysms (20-25% if untreated, risk MI, sudden death)
+      - Labs - Elevated WBC, platelets (thrombocytosis late), ESR/CRP, mild transaminitis
+      - Echocardiogram - Assess coronary arteries (aneurysms, dilation)
+    treatment:
+      - Polyarteritis nodosa
+      - HBV-negative PAN - High-dose corticosteroids + cyclophosphamide
+      - Prednisone 1 mg/kg/day + cyclophosphamide 2 mg/kg/day PO or 0.6 g/m² IV monthly (induction 3-6 months)
+      - Maintenance - Azathioprine or methotrexate after remission
+      - HBV-positive PAN - Different approach
+      - Antiviral therapy (entecavir or tenofovir) to clear HBV
+      - Short course steroids + plasma exchange (remove immune complexes)
+      - Avoid prolonged immunosuppression (worsens viral replication)
+      - Severe organ-threatening disease - Add plasma exchange or rituximab
+      - Kawasaki disease - TREAT URGENTLY (within 10 days of fever onset to prevent aneurysms)
+      - IVIG 2 g/kg IV single infusion (over 10-12 hours) - Reduces aneurysm risk from 25% to <5%
+      - High-dose aspirin 80-100 mg/kg/day divided QID until fever resolves, then low-dose 3-5 mg/kg/day x 6-8 weeks (antiplatelet)
+      - Corticosteroids - Add if IVIG-refractory or high-risk features
+      - Refractory - Repeat IVIG, infliximab 5 mg/kg, or anakinra (IL-1 inhibitor)
+      - Follow-up echo - 2 weeks and 6-8 weeks to assess coronary arteries
+      - Long-term - If aneurysms develop, long-term antiplatelet or anticoagulation, cardiology follow-up
+
+  - id: small_vessel_vasculitis
+    type: diagnosis
+    name: "Small Vessel Vasculitis (ANCA-Associated)"
+    icd10: "M31.30"
+    urgency: critical
+    workup:
+      - ANCA-associated vasculitis (AAV) - GPA, MPA, EGPA
+      - Granulomatosis with polyangiitis (GPA, formerly Wegener's) - c-ANCA/PR3 (70-90%)
+      - Classic triad - Upper airway (sinusitis, nasal crusting, saddle-nose deformity, subglottic stenosis), lungs (nodules, cavitary lesions, hemorrhage), kidneys (glomerulonephritis)
+      - Other - Ocular (scleritis, orbital pseudotumor), skin (palpable purpura), nervous system (mononeuritis multiplex)
+      - Microscopic polyangiitis (MPA) - p-ANCA/MPO (50-70%)
+      - Small vessel necrotizing vasculitis WITHOUT granulomas
+      - Pulmonary-renal syndrome - Alveolar hemorrhage + rapidly progressive glomerulonephritis
+      - No upper airway involvement (vs GPA)
+      - Eosinophilic granulomatosis with polyangiitis (EGPA, formerly Churg-Strauss) - p-ANCA/MPO (40%)
+      - Asthma + eosinophilia + vasculitis
+      - Three phases - Prodromal (allergic rhinitis, asthma), eosinophilic (peripheral eosinophilia, organ infiltration), vasculitic (purpura, mononeuritis multiplex, cardiac involvement)
+      - Labs - ANCA (c-ANCA/PR3 or p-ANCA/MPO), elevated ESR/CRP, urinalysis (RBC casts, proteinuria), eosinophilia (EGPA)
+      - Chest X-ray/CT - Nodules, cavitary lesions, infiltrates, alveolar hemorrhage
+      - Renal biopsy - Pauci-immune crescentic glomerulonephritis (few immune deposits, crescent formation)
+      - Tissue biopsy - Lung, sinus, skin shows necrotizing vasculitis ± granulomas
+    treatment:
+      - Induction therapy (severe organ-threatening disease - renal, pulmonary hemorrhage, CNS)
+      - High-dose corticosteroids - Methylprednisolone 1000mg IV daily x 3 days (if life-threatening), then prednisone 1 mg/kg/day
+      - Rituximab 375 mg/m² IV weekly x 4 doses (preferred for GPA, non-inferior to cyclophosphamide, fewer side effects) OR
+      - Cyclophosphamide 2 mg/kg/day PO or 15 mg/kg IV q2-3 weeks (6 doses, traditional regimen)
+      - Plasma exchange (PLEX) - Consider if severe renal disease (Cr >5.6), alveolar hemorrhage, or ANCA+ with dialysis-dependence (PEXIVAS trial mixed results, but used in severe cases)
+      - Maintenance therapy (after remission, ~3-6 months induction)
+      - Rituximab 500mg IV q6 months x 2 years OR
+      - Azathioprine 2 mg/kg/day or mycophenolate mofetil 2-3g daily x 18-24 months
+      - Prednisone taper - Slow taper to 5-7.5mg daily maintenance
+      - Non-severe disease (no organ-threatening) - Methotrexate 20-25mg weekly + prednisone (alternative to rituximab/cyclophosphamide)
+      - Monitor - ANCA titers (rising titer may predict relapse but not always), Cr, urinalysis, clinical symptoms
+      - TMP-SMX prophylaxis - If on cyclophosphamide or rituximab (PCP prophylaxis)
+      - Relapse - Common (50% relapse within 5 years), retreat with induction therapy

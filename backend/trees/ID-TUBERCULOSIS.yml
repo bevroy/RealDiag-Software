@@ -1,0 +1,127 @@
+tree_id: ID-TUBERCULOSIS
+name: Tuberculosis Evaluation and Management
+family: INFECTIOUS DISEASE
+specialty: Infectious Disease, Pulmonology
+chief_complaint: Chronic Cough, Fever, Night Sweats, Weight Loss, Hemoptysis
+description: Comprehensive evaluation and management of latent and active tuberculosis
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: tb_presentation
+
+nodes:
+  - id: tb_presentation
+    type: question
+    text: "TB presentation type?"
+    options:
+      - label: "Active pulmonary tuberculosis suspected (symptoms, CXR findings)"
+        next: active_pulmonary_tb
+      - label: "Extrapulmonary tuberculosis (lymph nodes, meningitis, spine, other)"
+        next: extrapulmonary_tb
+      - label: "Latent TB infection (positive TST/IGRA, no symptoms)"
+        next: latent_tb
+
+  - id: active_pulmonary_tb
+    type: diagnosis
+    name: "Active Pulmonary Tuberculosis"
+    icd10: "A15.0"
+    urgency: high
+    workup:
+      - Risk factors - HIV, immunosuppression, close contact with TB, immigration from endemic area, homeless, incarcerated, healthcare workers
+      - Symptoms - Chronic cough >3 weeks, fever, night sweats, weight loss, hemoptysis
+      - Chest X-ray - Upper lobe infiltrates/cavitation (classic), hilar lymphadenopathy, pleural effusion, miliary pattern (disseminated)
+      - CT chest if CXR equivocal
+      - Sputum studies (3 samples on different days, early morning preferred)
+      - AFB smear (acid-fast bacilli) - Rapid (same day), low sensitivity (50-60%), does NOT distinguish M. tuberculosis from non-tuberculous mycobacteria
+      - Mycobacterial culture (gold standard) - Takes 2-6 weeks, speciation and drug susceptibility testing
+      - GeneXpert MTB/RIF PCR (rapid molecular test) - Detects M. tuberculosis AND rifampin resistance in <2 hours, high sensitivity/specificity, preferred initial test
+      - If unable to produce sputum - Induced sputum (nebulized hypertonic saline), bronchoscopy with BAL
+      - HIV test - All TB patients should be tested
+      - Baseline labs - CBC, CMP, LFTs (before starting treatment), hepatitis B and C serology
+    treatment:
+      - Airborne isolation precautions - Negative pressure room until non-infectious (3 negative AFB smears on treatment OR 2 weeks of treatment and clinical improvement)
+      - Report to public health department (TB is reportable)
+      - 4-drug intensive phase x 2 months (RIPE regimen)
+      - Rifampin 10mg/kg PO daily (max 600mg)
+      - Isoniazid 5mg/kg PO daily (max 300mg) + pyridoxine (vitamin B6) 25-50mg daily (prevent peripheral neuropathy)
+      - Pyrazinamide 25mg/kg PO daily (max 2g)
+      - Ethambutol 15mg/kg PO daily (monitor visual acuity and color vision monthly)
+      - Continuation phase x 4 months (total 6 months for drug-susceptible pulmonary TB)
+      - Rifampin + isoniazid daily
+      - Extend to 9-12 months if - CNS TB, bone/joint TB, slow clinical response, HIV coinfection, cavitary disease with positive 2-month cultures
+      - Directly observed therapy (DOT) - Witnessed medication administration (improves adherence and outcomes)
+      - Monitoring
+      - Sputum culture at 2 months (should be negative, if positive = treatment failure or drug resistance)
+      - Monthly clinical assessment and LFTs (hepatotoxicity risk with rifampin/isoniazid)
+      - Baseline and monthly visual acuity/color vision (ethambutol toxicity)
+      - Drug resistance
+      - Rifampin-resistant or multidrug-resistant TB (MDR-TB = resistant to rifampin + isoniazid) - Requires 9-20 month regimen with second-line drugs (fluoroquinolone + bedaquiline or linezolid + others), infectious disease consultation
+      - Extensively drug-resistant TB (XDR-TB) - MDR + resistant to fluoroquinolone and injectable - Complex treatment, often 18-24 months
+      - HIV coinfection - Start antiretroviral therapy (ART) within 2-8 weeks of TB treatment (within 2 weeks if CD4 <50), use rifabutin instead of rifampin if on protease inhibitors (drug interactions)
+      - Steroid adjunct - Prednisone 1mg/kg/day x 4 weeks then taper for TB meningitis or pericarditis (reduces mortality)
+      - Contact investigation - Screen close contacts (TST or IGRA)
+      - Cure definition - Negative cultures, completed treatment, clinical improvement
+
+  - id: extrapulmonary_tb
+    type: diagnosis
+    name: "Extrapulmonary Tuberculosis"
+    icd10: "A18.9"
+    urgency: high
+    workup:
+      - TB meningitis - Headache, fever, altered mental status, cranial nerve palsies, seizures
+      - LP - Elevated opening pressure, lymphocytic pleocytosis (100-500 cells), elevated protein (>1 g/dL), low glucose (<45), AFB smear (low sensitivity 10-20%), TB PCR (higher sensitivity), TB culture (gold standard)
+      - MRI brain - Basal meningeal enhancement, hydrocephalus, tuberculomas, infarcts
+      - TB lymphadenitis (scrofula) - Painless lymph node enlargement (cervical most common), FNA or excisional biopsy for culture and pathology (caseous necrosis, granulomas)
+      - Pott's disease (spinal TB) - Back pain, neurologic deficits, kyphosis
+      - MRI spine - Vertebral destruction, paraspinal abscess, epidural extension
+      - Genitourinary TB - Sterile pyuria, hematuria, flank pain
+      - Urine AFB smear and culture (3 early morning samples), imaging (hydronephrosis, calcifications)
+      - Miliary (disseminated) TB - Fever, weight loss, hepatosplenomegaly, pancytopenia
+      - CXR - Diffuse miliary nodules (1-3mm), blood cultures for AFB, bone marrow biopsy
+      - TB peritonitis - Ascites, abdominal pain
+      - Paracentesis - Exudative (high protein, high LDH), lymphocytic, ADA >40 U/L (highly suggestive), AFB culture
+    treatment:
+      - Same 4-drug RIPE regimen as pulmonary TB
+      - Duration
+      - TB lymphadenitis - 6 months
+      - Bone/joint TB (including Pott's disease) - 9-12 months
+      - TB meningitis - 12 months
+      - Miliary TB - 9-12 months
+      - Genitourinary TB - 6-9 months
+      - Adjunctive corticosteroids
+      - TB meningitis - Dexamethasone 12-16mg IV daily x 3 weeks, taper over 6-8 weeks (reduces mortality and neurologic sequelae)
+      - TB pericarditis - Prednisone 1mg/kg/day x 4 weeks, taper over 6 weeks (reduces constrictive pericarditis and mortality)
+      - Surgery
+      - Neurosurgery for hydrocephalus (VP shunt)
+      - Orthopedic surgery for spinal TB with neurologic compromise (decompression, stabilization)
+      - Lymph node excision if no response to medical therapy
+      - Infectious disease consultation for all extrapulmonary TB
+
+  - id: latent_tb
+    type: diagnosis
+    name: "Latent Tuberculosis Infection (LTBI)"
+    icd10: "Z22.7"
+    urgency: low
+    workup:
+      - Definition - Positive TB test (TST or IGRA) WITHOUT symptoms or CXR findings of active TB
+      - Tuberculin skin test (TST, Mantoux) - Positive if induration ≥5mm (HIV, immunosuppressed, recent TB contact), ≥10mm (high-risk groups - diabetes, CKD, healthcare workers, immigrants from endemic areas), ≥15mm (low-risk populations)
+      - Interferon-gamma release assay (IGRA) - QuantiFERON-TB Gold or T-SPOT.TB blood test, preferred over TST (no cross-reactivity with BCG vaccine, single visit)
+      - Chest X-ray - Normal (if abnormal, evaluate for active TB)
+      - Rule out active TB - Symptom screen (cough, fever, night sweats, weight loss), CXR
+    treatment:
+      - Indications for LTBI treatment (prevent progression to active TB, ~5-10% lifetime risk, higher in immunocompromised)
+      - HIV positive (highest priority)
+      - Recent TB contact
+      - Recent TST/IGRA conversion (<2 years)
+      - CXR with fibrotic changes (old TB)
+      - Immunosuppression (TNF-alpha inhibitors, chronic steroids, transplant)
+      - End-stage renal disease, diabetes
+      - Treatment regimens (choose one)
+      - Rifampin 10mg/kg (max 600mg) PO daily x 4 months (preferred, better completion rates, less hepatotoxicity than INH) OR
+      - Isoniazid 5mg/kg (max 300mg) PO daily + pyridoxine 25mg daily x 9 months (9H) OR
+      - Isoniazid + rifapentine weekly x 12 weeks (3HP, directly observed) - 900mg INH + 900mg rifapentine (if >50kg) weekly x 12 doses OR
+      - Rifapentine + isoniazid daily x 3 months (3HP daily)
+      - Contraindications - Active TB (must rule out first), liver disease (relative), pregnancy (defer unless high-risk)
+      - Monitoring - Baseline LFTs, monthly clinical assessment, educate on hepatotoxicity symptoms (stop if ALT >5x ULN or symptomatic with ALT >3x ULN)
+      - HIV patients - Start ART if not already on it, treat LTBI regardless of CD4 count
+      - No treatment needed if - Prior adequate TB treatment, low-risk positive TST/IGRA without other risk factors (discuss risks/benefits)

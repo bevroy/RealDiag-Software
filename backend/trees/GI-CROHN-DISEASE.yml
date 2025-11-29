@@ -1,0 +1,120 @@
+tree_id: GI-CROHN-DISEASE
+name: Crohn Disease Evaluation
+family: GASTROENTEROLOGY
+specialty: Gastroenterology
+chief_complaint: Abdominal Pain, Diarrhea, Weight Loss
+description: Evaluation and management of Crohn disease
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: crohn_evaluation
+
+nodes:
+  - id: crohn_evaluation
+    type: diagnosis
+    name: "Crohn Disease"
+    icd10: "K50.9"
+    urgency: high
+    workup:
+      - Crohn disease - Chronic inflammatory bowel disease (IBD) affecting any part of GI tract from mouth to anus (transmural inflammation)
+      - Epidemiology - Incidence 3-20 per 100,000, prevalence 100-300 per 100,000 (North America/Europe highest)
+      - Bimodal peak - 15-30 years (most common) and 50-70 years
+      - Slightly more common females
+      - Risk factors - Family history (15-30% have affected first-degree relative, 10-20x increased risk), smoking (2x risk, worsens disease), Jewish ancestry (Ashkenazi 3-5x), Western diet, prior appendectomy protective
+      - Pathophysiology - Dysregulated immune response to intestinal microbiota in genetically susceptible individuals → chronic transmural inflammation
+      - Genetic susceptibility - NOD2/CARD15 mutations (30-40% patients), IL23R, ATG16L1 (autophagy)
+      - Location - Can affect any part GI tract (mouth to anus)
+      - Terminal ileum most common (30-40%), ileocolonic (40-50%), isolated colon (20%), upper GI (5-10%)
+      - Skip lesions - Discontinuous areas inflammation (normal bowel between diseased segments) CHARACTERISTIC
+      - Transmural inflammation - Full thickness bowel wall (vs. ulcerative colitis mucosal/submucosal only)
+      - Complications - Strictures, fistulas, abscesses
+      - Clinical presentation
+      - Chronic diarrhea - 6+ weeks, non-bloody more common than UC (70% vs. 30%), but can have hematochezia
+      - Abdominal pain - Right lower quadrant most common (terminal ileum), cramping, worse after eating
+      - Weight loss - Malabsorption, decreased oral intake (fear eating worsens pain)
+      - Fever - Low-grade, especially with flares or abscess
+      - Perianal disease - 30-40% patients, fistulas, abscesses, skin tags, fissures (CHARACTERISTIC, rare in UC)
+      - Extraintestinal manifestations (25-40%)
+      - Arthralgias/arthritis (10-20%, peripheral joints most common, ankylosing spondylitis 3-5%)
+      - Erythema nodosum (tender red nodules lower legs 2-15%), pyoderma gangrenosum (<2%, ulcerative skin lesions)
+      - Uveitis/episcleritis (4-12%, eye pain, photophobia, blurred vision)
+      - Primary sclerosing cholangitis (PSC) - Less common than UC (1-3% Crohn vs. 5-10% UC)
+      - Aphthous ulcers (oral ulcers 10-20%)
+      - Physical exam - Right lower quadrant tenderness/mass (thickened terminal ileum or abscess), perianal fistula/skin tags, weight loss, pallor (anemia)
+      - Labs
+      - Anemia - Iron deficiency (chronic GI blood loss, malabsorption) or anemia of chronic disease
+      - Leukocytosis - Active inflammation or abscess
+      - Thrombocytosis - Inflammatory response
+      - Hypoalbuminemia - Malnutrition, protein-losing enteropathy
+      - Inflammatory markers - Elevated ESR (>30), CRP (>10 mg/L), correlates with disease activity
+      - Fecal calprotectin - Elevated (>250 mcg/g), sensitive marker intestinal inflammation (92% sensitive, 76% specific for IBD vs. IBS)
+      - Vitamin B12 deficiency - Terminal ileum disease/resection (B12 absorbed distal ileum)
+      - Stool studies - Exclude infectious colitis (C. diff, Salmonella, Shigella, Campylobacter, ova/parasites)
+      - Imaging
+      - CT enterography - First-line initial evaluation, bowel wall thickening (>3 mm), mural hyperenhancement (comb sign = engorged vasa recta), fat stranding, complications (abscesses, fistulas, obstruction)
+      - MR enterography - Alternative CT (no radiation, preferred young patients/pregnancy), similar findings
+      - Small bowel follow-through - Less commonly used (CT/MR superior)
+      - Endoscopy
+      - Colonoscopy with ileoscopy - GOLD STANDARD, visualize mucosa + obtain biopsies
+      - Findings - Skip lesions (discontinuous), cobblestoning (linear ulcers intersecting with normal mucosa), aphthous ulcers, deep ulcers, strictures, perianal disease
+      - Biopsies - Transmural inflammation, noncaseating granulomas (30%, pathognomonic but not required), crypt abscesses, goblet cell preservation (vs. UC depleted)
+      - Upper endoscopy - If upper GI symptoms (10% have esophagogastroduodenal Crohn)
+      - Capsule endoscopy - Evaluate small bowel if ileocolonoscopy negative but high suspicion (CONTRAINDICATED if known stricture)
+      - Histology - Transmural inflammation, noncaseating granulomas (30%), skip lesions, preserved goblet cells, fissuring ulcers
+      - Differential diagnosis - Ulcerative colitis (continuous colon-only, bloody diarrhea, no perianal disease), IBS (no inflammation, normal calprotectin), infectious colitis, celiac disease, lymphoma, tuberculosis (especially ileocecal)
+    treatment:
+      - Goals - Induce remission, maintain remission, prevent complications, improve quality of life
+      - Treatment stepwise based on disease severity and location
+      - Mild-moderate disease - 5-aminosalicylates (5-ASA) or budesonide
+      - Mesalamine (5-ASA) - Sulfasalazine 3-6 g/day, mesalamine 2.4-4.8 g/day (oral or rectal)
+      - Less effective Crohn than UC (30-40% response vs. 50-70% UC), mainly for colonic disease
+      - Budesonide 9 mg daily x 8 weeks - Topical corticosteroid, ileal/right colon disease, fewer systemic side effects than prednisone
+      - Remission rate 50-60%
+      - Moderate-severe disease - Corticosteroids (induction) + immunomodulators/biologics (maintenance)
+      - Prednisone 40-60 mg daily x 1-2 weeks, taper over 8-12 weeks
+      - Rapid symptom relief (70-80% response), NOT for maintenance (side effects, steroid dependence)
+      - Immunomodulators - Steroid-sparing maintenance
+      - Azathioprine 2-2.5 mg/kg/day or 6-mercaptopurine (6-MP) 1-1.5 mg/kg/day
+      - Onset 3-6 months (slow)
+      - Check TPMT enzyme (thiopurine methyltransferase) before starting (deficiency causes severe myelosuppression)
+      - Monitor CBC q3 months (leukopenia), LFTs (hepatotoxicity), risk lymphoma (4-5x)
+      - Methotrexate 25 mg IM/SQ weekly (if azathioprine fails or intolerant)
+      - Biologics - Anti-TNF and other targeted therapies (FIRST-LINE for moderate-severe)
+      - Anti-TNF agents
+      - Infliximab (Remicade) 5 mg/kg IV at 0, 2, 6 weeks then q8 weeks - First biologic approved Crohn (1998), remission rate 60-70%
+      - Adalimumab (Humira) 160 mg SQ week 0, 80 mg week 2, then 40 mg q2 weeks - Remission rate 50-60%
+      - Certolizumab pegol (Cimzia) 400 mg SQ weeks 0, 2, 4, then q4 weeks
+      - Check for latent TB (PPD or IGRA), hepatitis B before starting (reactivation risk)
+      - Anti-integrin (gut-selective)
+      - Vedolizumab (Entyvio) 300 mg IV weeks 0, 2, 6, then q8 weeks - Blocks α4β7 integrin (gut lymphocyte trafficking), remission rate 40-50%, slower onset than anti-TNF, safer (no systemic immunosuppression)
+      - Anti-IL12/23
+      - Ustekinumab (Stelara) 6 mg/kg IV week 0, then 90 mg SQ q8-12 weeks - Remission rate 50-60%
+      - JAK inhibitors
+      - Upadacitinib (Rinvoq) 45 mg PO daily - Oral small molecule, remission rate 50-60%
+      - Combination therapy - Anti-TNF + immunomodulator (azathioprine) superior to monotherapy (SONIC trial: combination 57% vs. infliximab alone 44% vs. azathioprine alone 30%)
+      - Antibiotics - Perianal disease (metronidazole 500 mg TID + ciprofloxacin 500 mg BID), bacterial overgrowth
+      - Nutritional support - Enteral nutrition (exclusive enteral nutrition 80% remission in children, less effective adults), vitamin supplementation (B12, iron, vitamin D)
+      - Severe/fulminant disease - Hospitalization, IV corticosteroids
+      - Methylprednisolone 40-60 mg IV daily or hydrocortisone 100 mg IV q6-8h
+      - If no improvement 3-5 days → infliximab 5 mg/kg IV (rescue therapy)
+      - NPO, TPN if needed, correct electrolytes/anemia
+      - Surgical consultation (complications)
+      - Surgery - 70-80% require surgery lifetime (strictures, fistulas, abscesses, medically refractory)
+      - Indications - Obstruction (stricture), perforation, abscess (percutaneous drainage first-line, surgery if fails), fistula (complex/symptomatic), dysplasia/cancer, medically refractory disease
+      - Strictureplasty - Widen stricture without resection (preserve bowel length)
+      - Ileocolic resection - Most common, remove diseased terminal ileum + right colon
+      - Bowel-sparing approach (Crohn recurs, minimize short bowel syndrome)
+      - Recurrence - 50% clinical recurrence 10 years post-op, 80% endoscopic recurrence
+      - Post-op prophylaxis - Anti-TNF or immunomodulator reduces recurrence
+      - Perianal disease - Exam under anesthesia + MRI pelvis, seton placement (drain fistula), biologics (infliximab most effective 50-60% closure), metronidazole + ciprofloxacin
+      - Maintenance therapy - After remission induction, continue immunomodulator or biologic indefinitely
+      - Monitor disease activity - Symptoms, CRP/fecal calprotectin q3-6 months, colonoscopy q1-3 years
+      - Mucosal healing - Goal (reduces complications, hospitalizations, surgery)
+      - Complications
+      - Strictures - Fibrostenotic disease, obstruction (colicky pain, vomiting), endoscopic balloon dilation or surgery
+      - Fistulas - Enteroenteric, enterovesical (bladder, pneumaturia, UTI), enterocutaneous, perianal
+      - Abscesses - Fever, leukocytosis, CT drainage vs. surgery
+      - Malabsorption - B12, fat-soluble vitamins, bile salt diarrhea (terminal ileum disease/resection)
+      - Colorectal cancer - Increased risk (2-3x) after 8-10 years disease, surveillance colonoscopy q1-3 years
+      - Osteoporosis - Chronic inflammation, corticosteroid use, malabsorption (vitamin D, calcium), DEXA scan baseline and q2 years
+      - Prognosis - Chronic relapsing-remitting disease, 50% in remission at any time, biologics improved outcomes (reduced surgeries, hospitalizations), normal life expectancy with treatment

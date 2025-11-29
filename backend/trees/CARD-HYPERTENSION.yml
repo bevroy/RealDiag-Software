@@ -1,0 +1,304 @@
+tree_id: CARD-HYPERTENSION
+name: Hypertension Evaluation and Management
+family: CARDIOLOGY
+specialty: Cardiology/Primary Care/Internal Medicine
+chief_complaint: Elevated Blood Pressure
+description: Diagnostic decision tree for hypertension evaluation and management
+version: "1.0"
+author: RealDiag Team
+entry_point: bp_measurement
+
+nodes:
+  - id: bp_measurement
+    type: question
+    text: "Blood pressure reading?"
+    options:
+      - label: "≥ 180/120 mmHg with symptoms"
+        next: hypertensive_emergency
+      - label: "≥ 180/120 mmHg without symptoms"
+        next: hypertensive_urgency
+      - label: "140-179/90-119 mmHg (Stage 2)"
+        next: stage2_htn
+      - label: "130-139/80-89 mmHg (Stage 1)"
+        next: stage1_htn
+      - label: "120-129/<80 mmHg (Elevated)"
+        next: elevated_bp
+
+  - id: hypertensive_emergency
+    type: question
+    text: "End-organ damage present?"
+    options:
+      - label: "Chest pain, ECG changes"
+        next: acute_coronary
+      - label: "Severe headache, altered mental status, seizures"
+        next: hypertensive_encephalopathy
+      - label: "Dyspnea, pulmonary edema"
+        next: acute_heart_failure
+      - label: "Back pain, pulse differential"
+        next: aortic_dissection
+
+  - id: acute_coronary
+    type: diagnosis
+    diagnosis: Hypertensive Emergency with ACS
+    icd10: I16.1
+    urgency: critical
+    workup:
+      - ECG
+      - Troponin
+      - CXR
+      - Echocardiogram
+    treatment:
+      - IV nitroglycerin or labetalol
+      - Aspirin
+      - Cardiology consult
+      - Reduce BP 10-20% in first hour
+      - ICU admission
+
+  - id: hypertensive_encephalopathy
+    type: diagnosis
+    diagnosis: Hypertensive Encephalopathy
+    icd10: I67.4
+    urgency: critical
+    workup:
+      - CT head
+      - Fundoscopic exam (papilledema)
+      - BMP, creatinine
+    treatment:
+      - IV labetalol or nicardipine
+      - Reduce BP 10-25% in first hour
+      - Seizure precautions
+      - ICU admission
+      - Neurology consult
+
+  - id: acute_heart_failure
+    type: diagnosis
+    diagnosis: Hypertensive Emergency with Acute HF
+    icd10: I16.1
+    urgency: critical
+    workup:
+      - CXR
+      - BNP/NT-proBNP
+      - Echocardiogram
+      - ECG
+    treatment:
+      - IV nitroglycerin or nitroprusside
+      - IV furosemide
+      - Reduce BP 10-20% in first hour
+      - Non-invasive ventilation if needed
+      - ICU admission
+
+  - id: aortic_dissection
+    type: diagnosis
+    diagnosis: Aortic Dissection
+    icd10: I71.00
+    urgency: critical
+    workup:
+      - CT angiography chest
+      - Transthoracic echocardiogram
+      - ECG
+    treatment:
+      - IV esmolol + nitroprusside
+      - Target SBP 100-120 mmHg
+      - Emergent cardiothoracic surgery consult
+      - ICU admission
+      - Control heart rate first
+
+  - id: hypertensive_urgency
+    type: diagnosis
+    diagnosis: Hypertensive Urgency
+    icd10: I16.0
+    urgency: high
+    workup:
+      - BMP, creatinine
+      - Urinalysis
+      - ECG
+      - Assess for end-organ damage
+    treatment:
+      - Oral antihypertensives
+      - Reduce BP over 24-48 hours
+      - Close outpatient follow-up in 1-3 days
+      - Avoid rapid BP reduction
+      - Address medication compliance
+
+  - id: stage2_htn
+    type: question
+    text: "Previous diagnosis of hypertension?"
+    options:
+      - label: "Newly diagnosed"
+        next: new_stage2
+      - label: "Known HTN, uncontrolled on meds"
+        next: uncontrolled_htn
+      - label: "White coat hypertension suspected"
+        next: white_coat_eval
+
+  - id: new_stage2
+    type: question
+    text: "CV risk factors present?"
+    options:
+      - label: "High CV risk or diabetes"
+        next: high_risk_stage2
+      - label: "Low-moderate risk"
+        next: standard_stage2
+
+  - id: high_risk_stage2
+    type: diagnosis
+    diagnosis: Stage 2 Hypertension (High Risk)
+    icd10: I10
+    urgency: high
+    workup:
+      - BMP, creatinine, eGFR
+      - Lipid panel
+      - HbA1c
+      - Urinalysis
+      - ECG
+      - Consider echocardiogram
+    treatment:
+      - Start 2 antihypertensives immediately
+      - ACE-I/ARB + CCB or thiazide diuretic
+      - Lifestyle modifications
+      - Follow-up in 1 month
+      - Target < 130/80
+
+  - id: standard_stage2
+    type: diagnosis
+    diagnosis: Stage 2 Hypertension
+    icd10: I10
+    urgency: medium
+    workup:
+      - BMP, creatinine
+      - Lipid panel
+      - Urinalysis
+      - ECG
+    treatment:
+      - Start 2 antihypertensives
+      - Lifestyle modifications
+      - Follow-up in 1 month
+      - Target < 130/80
+
+  - id: uncontrolled_htn
+    type: question
+    text: "Medication adherence?"
+    options:
+      - label: "Poor adherence"
+        next: adherence_intervention
+      - label: "Good adherence, inadequate control"
+        next: treatment_intensification
+      - label: "Resistant hypertension (on 3+ meds)"
+        next: resistant_htn
+
+  - id: adherence_intervention
+    type: diagnosis
+    diagnosis: Non-Adherence to Antihypertensive Therapy
+    icd10: Z91.14
+    urgency: medium
+    workup:
+      - Medication reconciliation
+      - Identify barriers
+    treatment:
+      - Simplify regimen
+      - Address cost/side effects
+      - Patient education
+      - Consider combination pills
+      - Close follow-up
+
+  - id: treatment_intensification
+    type: diagnosis
+    diagnosis: Uncontrolled Hypertension
+    icd10: I10
+    urgency: medium
+    workup:
+      - Review current regimen
+      - BMP, creatinine
+      - Check for secondary causes
+    treatment:
+      - Increase dose or add medication
+      - Optimize drug classes
+      - Lifestyle reinforcement
+      - Follow-up in 2-4 weeks
+
+  - id: resistant_htn
+    type: diagnosis
+    diagnosis: Resistant Hypertension
+    icd10: I10
+    urgency: high
+    workup:
+      - Screen for secondary causes
+      - Aldosterone/renin ratio
+      - Renal artery duplex
+      - Sleep study (OSA)
+      - 24-hour ambulatory BP monitoring
+    treatment:
+      - Add spironolactone
+      - Cardiology/nephrology referral
+      - Rule out pseudoresistance
+      - Consider renal denervation
+
+  - id: white_coat_eval
+    type: diagnosis
+    diagnosis: White Coat Hypertension (Suspected)
+    icd10: R03.0
+    urgency: low
+    workup:
+      - Home BP monitoring
+      - 24-hour ambulatory BP monitoring
+      - Office BP rechecks
+    treatment:
+      - Confirm diagnosis
+      - Lifestyle modifications
+      - Monitor annually if confirmed
+      - May not need medications
+
+  - id: stage1_htn
+    type: question
+    text: "Cardiovascular risk assessment?"
+    options:
+      - label: "High CV risk (>10% 10-year ASCVD risk)"
+        next: high_risk_stage1
+      - label: "Low-moderate risk"
+        next: lifestyle_first
+
+  - id: high_risk_stage1
+    type: diagnosis
+    diagnosis: Stage 1 Hypertension (High CV Risk)
+    icd10: I10
+    urgency: medium
+    workup:
+      - ASCVD risk calculator
+      - BMP, lipids, HbA1c
+      - Urinalysis, ECG
+    treatment:
+      - Start antihypertensive (ACE-I/ARB, CCB, or thiazide)
+      - Lifestyle modifications
+      - Statin if indicated
+      - Follow-up in 1 month
+      - Target < 130/80
+
+  - id: lifestyle_first
+    type: diagnosis
+    diagnosis: Stage 1 Hypertension
+    icd10: I10
+    urgency: low
+    workup:
+      - Baseline labs
+      - Cardiovascular risk assessment
+    treatment:
+      - Lifestyle modifications (DASH diet, exercise, weight loss, limit alcohol/sodium)
+      - Recheck BP in 3-6 months
+      - Start medication if not improved
+      - Home BP monitoring
+
+  - id: elevated_bp
+    type: diagnosis
+    diagnosis: Elevated Blood Pressure
+    icd10: R03.0
+    urgency: low
+    workup:
+      - Confirm with repeat measurements
+      - Assess CV risk factors
+    treatment:
+      - Lifestyle modifications
+      - Weight management
+      - DASH diet
+      - Regular exercise
+      - Limit sodium and alcohol
+      - Recheck BP in 3-6 months

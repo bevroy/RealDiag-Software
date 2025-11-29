@@ -1,0 +1,116 @@
+tree_id: HEME-ACUTE-MYELOID-LEUKEMIA
+name: Acute Myeloid Leukemia Evaluation
+family: HEMATOLOGY
+specialty: Hematology, Oncology
+chief_complaint: Fatigue, Bleeding, Infections, Fever
+description: Evaluation and management of acute myeloid leukemia
+version: "1.0"
+author: RealDiag Clinical Team
+
+entry_point: aml_evaluation
+
+nodes:
+  - id: aml_evaluation
+    type: diagnosis
+    name: "Acute Myeloid Leukemia"
+    icd10: "C92.0"
+    urgency: critical
+    workup:
+      - Acute myeloid leukemia (AML) - Clonal malignancy of myeloid progenitor cells with arrested maturation → accumulation of blasts in bone marrow/blood
+      - Incidence - 4.3 per 100,000, 20,000 new cases/year US
+      - Median age 68 years (elderly predominant, 54% >65 years)
+      - Most common acute leukemia adults
+      - Etiology - Most cases de novo (unknown cause), risk factors
+      - Therapy-related - Prior chemotherapy (alkylating agents, topoisomerase II inhibitors), radiation (latency 5-10 years)
+      - Myelodysplastic syndrome (MDS) progression (10-30% MDS evolve to AML)
+      - Genetic syndromes - Down syndrome (20x risk), Fanconi anemia, Bloom syndrome
+      - Exposures - Benzene, smoking
+      - Pathophysiology - Acquired genetic mutations → blocked differentiation + increased proliferation → blast accumulation (crowding out normal hematopoiesis)
+      - Bone marrow failure - Anemia, thrombocytopenia, neutropenia
+      - Diagnosis - ≥20% blasts in bone marrow or peripheral blood (WHO 2016)
+      - Clinical presentation - Acute onset (days to weeks)
+      - Bone marrow failure symptoms
+      - Anemia - Fatigue, dyspnea, pallor
+      - Thrombocytopenia - Petechiae, purpura, mucosal bleeding (gums), epistaxis, menorrhagia
+      - Neutropenia - Infections (fever, pneumonia, cellulitis, perirectal abscess)
+      - Leukostasis (if hyperleukocytosis WBC >100,000) - Respiratory distress (pulmonary infiltrates), neurologic symptoms (confusion, headache, blurred vision, stroke)
+      - MEDICAL EMERGENCY (mortality 20-40%)
+      - Tumor lysis syndrome - Hyperuricemia, hyperkalemia, hyperphosphatemia, hypocalcemia, acute kidney injury (spontaneous or after chemotherapy)
+      - Extramedullary disease - Gingival hypertrophy (monocytic subtypes), skin infiltration (leukemia cutis), chloroma (granulocytic sarcoma, solid tumor of blasts)
+      - DIC - Especially acute promyelocytic leukemia (APL, M3), bleeding/thrombosis
+      - Physical exam - Pallor, petechiae/ecchymoses, fever, gingival hypertrophy, hepatosplenomegaly (30-50%), lymphadenopathy (less common than ALL), skin lesions
+      - Labs
+      - CBC - Anemia (Hgb <10), thrombocytopenia (platelets <50K), WBC variable (elevated 50%, normal 25%, low 25%)
+      - Peripheral smear - Blasts (large cells, high nuclear:cytoplasmic ratio, nucleoli, Auer rods if present pathognomonic for AML)
+      - Auer rods - Azurophilic needle-like inclusions (abnormal primary granules)
+      - Chemistry - Elevated LDH, uric acid (tumor burden), electrolyte abnormalities (tumor lysis)
+      - Coagulation - PT/PTT/fibrinogen/D-dimer (assess for DIC, especially APL)
+      - Bone marrow aspirate and biopsy - ESSENTIAL for diagnosis
+      - Morphology - Hypercellular (>80%), ≥20% blasts (myeloblasts, monoblasts)
+      - Flow cytometry - Immunophenotyping (CD13, CD33, CD34, HLA-DR, MPO positive), distinguish AML from ALL
+      - Cytogenetics - Karyotype (prognostic, guide treatment)
+      - Favorable - t(8;21), inv(16), t(15;17) APL
+      - Intermediate - Normal karyotype, +8, +21, del(7q), del(9q)
+      - Unfavorable - Complex karyotype (≥3 abnormalities), -5, del(5q), -7, del(7q), 3q abnormalities
+      - Molecular testing - Mutations (prognostic, targetable)
+      - FLT3-ITD (25-30%) - Poor prognosis (high relapse risk), targetable (FLT3 inhibitors)
+      - NPM1 (30-35%) - Favorable prognosis (if FLT3-ITD negative)
+      - CEBPA (5-10%) - Favorable prognosis (if biallelic)
+      - IDH1/IDH2 (15-20%) - Targetable (IDH inhibitors)
+      - TP53 (5-10%) - Poor prognosis
+      - Subtypes (FAB classification, older) - M0-M7 based on morphology/maturation
+      - M3 - Acute promyelocytic leukemia (APL), t(15;17), DIC, tretinoin responsive (CURABLE)
+      - Risk stratification - Favorable, intermediate, unfavorable (based on cytogenetics/molecular)
+      - Guides treatment intensity, transplant decision
+    treatment:
+      - URGENT - AML is medical emergency (stabilize, start treatment within 48-72 hours)
+      - Supportive care - Prior to/during chemotherapy
+      - Transfusions - RBC if Hgb <7-8, platelets if <10K (or <50K if bleeding/fever/procedure)
+      - Antibiotics - Fever in neutropenic patient (ANC <500) → broad-spectrum antibiotics IMMEDIATELY (cefepime, piperacillin-tazobactam, meropenem)
+      - Tumor lysis prophylaxis - Allopurinol 300 mg daily OR rasburicase 0.2 mg/kg IV (if high risk), aggressive hydration
+      - Hydroxyurea - If hyperleukocytosis (WBC >50-100K), rapidly reduce WBC (cytoreductive, not curative)
+      - Leukapheresis - If leukostasis symptoms (emergent)
+      - Induction chemotherapy - Goal achieve complete remission (CR, <5% blasts, ANC >1000, platelets >100K)
+      - Standard "7+3" regimen - Cytarabine (araC) 100-200 mg/m² continuous IV infusion x 7 days + anthracycline (daunorubicin 60-90 mg/m² or idarubicin 12 mg/m² IV) x 3 days
+      - CR rate 60-80% (young), 40-60% (elderly)
+      - Severe myelosuppression (nadir 10-14 days, prolonged neutropenia 3-4 weeks)
+      - APL (M3) - ALL-TRANS RETINOIC ACID (ATRA, tretinoin) 45 mg/m²/day PO + arsenic trioxide (ATO) 0.15 mg/kg IV daily
+      - ATRA induces differentiation (promyelocytes → mature granulocytes)
+      - APL differentiation syndrome - Fever, dyspnea, pulmonary infiltrates, pleural/pericardial effusions (treat dexamethasone 10 mg IV BID)
+      - APL most curable AML (CR rate >90%, cure rate 70-90%)
+      - Bone marrow biopsy day 14-21 - Assess response (aplastic = good, persistent blasts = refractory)
+      - Consolidation chemotherapy - After CR, prevent relapse
+      - High-dose cytarabine (HiDAC) - 3 g/m² IV q12h days 1, 3, 5 (3-4 cycles)
+      - Most common consolidation
+      - Neurotoxicity risk (cerebellar, elderly)
+      - Gemtuzumab ozogamicin (Mylotarg) - Anti-CD33 antibody-drug conjugate (if CD33+)
+      - Allogeneic hematopoietic stem cell transplantation (allo-HSCT) - CURATIVE, graft-vs-leukemia effect
+      - Indications
+      - Intermediate/unfavorable risk in first CR (CR1) - Transplant reduces relapse 50%
+      - Favorable risk - Transplant NOT recommended CR1 (chemotherapy alone cure rate 50-70%, transplant toxicity outweighs benefit)
+      - Relapsed/refractory AML - Transplant only curative option
+      - Timing - After 1-2 consolidation cycles (CR1)
+      - Donor - Matched sibling best, matched unrelated donor (MUD) acceptable, haploidentical (half-matched family)
+      - Age - Traditionally <55-60 years, but reduced-intensity conditioning (RIC) allows older patients (up to 70-75)
+      - Toxicity - Graft-vs-host disease (GVHD 30-50%), transplant-related mortality (TRM 10-20%)
+      - Targeted therapies - For specific mutations
+      - FLT3 inhibitors - Midostaurin (Rydapt) added to induction/consolidation if FLT3-mutated (improves survival)
+      - Gilteritinib (Xospata) for relapsed/refractory FLT3-mutated AML
+      - IDH inhibitors - Ivosidenib (IDH1 inhibitor), enasidenib (IDH2 inhibitor) for relapsed/refractory or elderly unfit for chemo
+      - Venetoclax (BCL-2 inhibitor) + hypomethylating agent (azacitidine or decitabine) - For elderly/unfit patients (>75 years or significant comorbidities)
+      - CR rate 60-70% (impressive for elderly), oral regimen
+      - Elderly/unfit patients - Less intensive therapy
+      - Hypomethylating agents (azacitidine 75 mg/m² SQ/IV days 1-7 or decitabine) + venetoclax
+      - Low-dose cytarabine
+      - Supportive care only if very frail (palliative)
+      - Relapsed/refractory AML - Poor prognosis
+      - Reinduction chemotherapy - Different regimen (MEC: mitoxantrone, etoposide, cytarabine; FLAG-Ida: fludarabine, cytarabine, idarubicin)
+      - CR rate 30-50%
+      - Allo-HSCT - Only curative option if achieve CR2
+      - Clinical trials - Encouraged
+      - Prognosis - Variable (depends on age, cytogenetics, molecular, fitness)
+      - Favorable risk - 5-year survival 50-70%
+      - Intermediate risk - 5-year survival 30-50%
+      - Unfavorable risk - 5-year survival 10-20%
+      - Elderly (>60 years) - 5-year survival 10-20% (worse tolerance chemotherapy, higher risk cytogenetics)
+      - Relapsed AML - Median survival 6-12 months
