@@ -1,0 +1,56 @@
+tree_id: UROLOGY-PROSTATE-CANCER
+name: Prostate Cancer
+family: Urology
+specialty: Urology
+chief_complaint: Elevated PSA or abnormal prostate exam
+description: |
+  Most common non-cutaneous cancer in men, second leading cause of cancer death in men. Usually adenocarcinoma arising from peripheral zone.
+  Often indolent and slow-growing, but subset aggressive. Age, race (African American), family history are major risk factors. Screening controversial.
+icd10: C61
+urgency: Moderate
+workup:
+  - PSA screening controversial - discuss risks and benefits, shared decision-making
+  - USPSTF recommends individualized decision for ages 55-69, against screening for 70+
+  - PSA levels - less than 2.5 ng/mL low risk, 2.5-10 intermediate (4-10 older cutoff), greater than 10 high risk
+  - PSA velocity (rate of rise) and PSA density (PSA/prostate volume) add information
+  - Digital rectal exam (DRE) - palpate for nodules, induration, asymmetry (50% of cancers not palpable)
+  - Elevated PSA or abnormal DRE prompts further workup
+  - Multiparametric MRI prostate before biopsy - identifies suspicious lesions, guides targeted biopsy, PI-RADS score (1-5)
+  - Transrectal ultrasound (TRUS) guided prosy biopsy with 12-core systematic sampling plus MRI-targeted biopsies if lesion identified
+  - Gleason score grades histology - pattern 3 (well-differentiated) to 5 (poorly differentiated), sum of two most common patterns
+  - Gleason 6 (3+3) low-grade, Gleason 7 (3+4 or 4+3) intermediate, Gleason 8-10 high-grade
+  - Grade Group system (1-5) replacing Gleason - GG1 equals Gleason 6, GG2 equals 3+4, GG3 equals 4+3, GG4 equals 8, GG5 equals 9-10
+  - Staging - bone scan if PSA greater than 10 or high-grade or bone pain, CT or MRI pelvis if high-risk
+treatment:
+  - Very low and low-risk (PSA less than 10, Gleason 6, T1-T2a) - active surveillance
+  - Repeat PSA every 6 months, DRE annually, MRI and biopsy at 1 year then as indicated
+  - Defer treatment until progression (most never progress)
+  - Intermediate and high-risk localized disease - definitive treatment
+  - Radical prostatectomy (open, laparoscopic, or robotic) - curative intent, removes prostate and seminal vesicles, pelvic lymph node dissection if high-risk
+  - Side effects - erectile dysfunction (30-70%, nerve-sparing reduces risk), urinary incontinence (5-20%, improves over time)
+  - External beam radiation therapy (EBRT) or brachytherapy (radioactive seed implants) - equivalent efficacy to surgery
+  - Side effects - urinary urgency/frequency, rectal irritation, erectile dysfunction (lower initially but increases over time)
+  - Androgen deprivation therapy (ADT) added to radiation for intermediate/high-risk - LHRH agonist (leuprolide, goserelin) 6-36 months depending on risk
+  - Adjuvant/salvage radiation if positive margins or PSA recurrence after surgery
+  - Metastatic disease - ADT mainstay
+  - LHRH agonist (leuprolide 7.5mg IM monthly or 22.5mg q3 months) or antagonist (degarelix 240mg SC loading, 80mg monthly)
+  - Antiandrogens - abiraterone 1000mg daily plus prednisone 5mg BID (blocks androgen synthesis), enzalutamide 160mg daily (androgen receptor antagonist), apalutamide, darolutamide
+  - Combination ADT plus abiraterone or enzalutamide improves survival in metastatic hormone-sensitive prostate cancer
+  - Castration-resistant prostate cancer (CRPC) - cancer progresses despite ADT
+  - Next-generation antiandrogens (enzalutamide, abiraterone), chemotherapy (docetaxel, cabazitaxel), radium-223 for bone metastases, PARP inhibitors if BRCA mutations
+  - Surveillance after treatment - PSA every 3-6 months x 5 years then annually, DRE annually
+clinical_pearls:
+  - Most prostate cancers diagnosed by screening (elevated PSA), asymptomatic
+  - Obstructive urinary symptoms usually from BPH, not cancer (cancer in peripheral zone)
+  - Advanced disease presents with bone pain (osteoblastic metastases), lymphedema, spinal cord compression
+  - PSA recurrence (biochemical recurrence) after treatment - rising PSA without metastases on imaging, may recur years after treatment
+  - Gleason 6 considered very low-grade, some argue should not be called cancer (virtually no metastatic potential)
+  - African American men have 2x higher incidence and mortality
+differentials:
+  - Benign prostatic hyperplasia
+  - Prostatitis
+  - Urinary tract infection
+  - Bladder cancer
+  - Other pelvic malignancy
+trace:
+  - 68-year-old man with PSA 8.5 ng/mL on routine screening, previous PSA 4.2 two years ago → DRE shows firm nodule right lobe → Multiparametric MRI shows 1.2 cm PI-RADS 4 lesion right peripheral zone → TRUS biopsy with MRI fusion - 4/12 cores positive, Gleason 7 (3+4) Grade Group 2 → Bone scan and CT pelvis negative for metastases → Diagnose intermediate-risk localized prostate cancer (T2aN0M0) → Counsel on treatment options → Patient opts for robotic radical prostatectomy → Nerve-sparing bilateral → Pathology shows pT2c disease, negative margins, Gleason 3+4, 30% tumor volume → PSA undetectable at 6 weeks → Regains urinary continence by 3 months, erectile function improving with PDE5 inhibitors → PSA remains undetectable at 2 years, excellent outcome

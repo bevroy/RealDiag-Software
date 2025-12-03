@@ -1,136 +1,48 @@
 tree_id: RHEUM-POLYMYALGIA-RHEUMATICA
-name: Polymyalgia Rheumatica and Giant Cell Arteritis
-family: RHEUMATOLOGY
-specialty: Rheumatology, Internal Medicine
-chief_complaint: Shoulder and Hip Pain, Morning Stiffness, Headache, Vision Changes
-description: Evaluation and management of polymyalgia rheumatica and giant cell arteritis
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: pmr_gca_evaluation
-
-nodes:
-  - id: pmr_gca_evaluation
-    type: question
-    text: "Clinical presentation?"
-    options:
-      - label: "Polymyalgia rheumatica (PMR)"
-        next: polymyalgia_rheumatica
-      - label: "Giant cell arteritis (GCA)"
-        next: giant_cell_arteritis
-      - label: "Overlap PMR and GCA"
-        next: pmr_gca_overlap
-
-  - id: polymyalgia_rheumatica
-    type: diagnosis
-    name: "Polymyalgia Rheumatica"
-    icd10: "M35.3"
-    urgency: medium
-    workup:
-      - PMR - Inflammatory condition causing proximal muscle pain and stiffness
-      - Epidemiology - Age >50 years (almost never <50), peak 70-80 years, women 2-3:1
-      - Associated with GCA (10-15% PMR patients develop GCA, 40-60% GCA patients have PMR)
-      - Clinical features - "CLASSIC TRIAD"
-      - Bilateral shoulder pain and stiffness (90-95%) - Difficulty raising arms, combing hair, reaching overhead
-      - Hip/pelvic girdle pain (50-70%) - Difficulty rising from chair, climbing stairs
-      - Morning stiffness >45 minutes (often several hours) - "Gel phenomenon"
-      - Rapid onset (2-4 weeks), symmetric
-      - Constitutional symptoms - Fatigue, malaise, low-grade fever, weight loss (30-50%)
-      - No muscle weakness on exam (differentiates from myositis) - Pain limits testing, but strength normal
-      - Peripheral arthritis (wrists, knees) in 25-30% - Mild synovitis
-      - Labs - Markedly elevated inflammatory markers (hallmark)
-      - ESR >40 mm/hr (usually >50-100) - Very elevated
-      - CRP elevated (>10 mg/L, often >20-30)
-      - Normal ESR/CRP makes PMR unlikely (rare <5%)
-      - Normocytic anemia (anemia of chronic disease)
-      - Normal CK (rules out myositis)
-      - RF and anti-CCP negative (not RA)
-      - Imaging - Not required for diagnosis but supportive
-      - Ultrasound - Subacromial/subdeltoid bursitis, biceps tenosynovitis, trochanteric bursitis
-      - MRI shoulders/hips - Bursitis, synovitis
-      - Diagnostic criteria (2012 EULAR/ACR) - Age ≥50 + bilateral shoulder pain + elevated ESR/CRP + rapid response to steroids
-    treatment:
-      - Corticosteroids - Cornerstone, dramatic response (diagnostic and therapeutic)
-      - Prednisone 12.5-25 mg daily (most use 15-20 mg)
-      - Response within 24-72 hours (>70% marked improvement by 3 days) - If no response, reconsider diagnosis
-      - Continue 4-6 weeks until symptoms controlled and ESR/CRP normalize
-      - Gradual taper over 12-18 months (slow taper prevents relapse)
-      - Reduce 2.5 mg every 2-4 weeks to 10 mg, then 1 mg every 4-8 weeks
-      - Monitor ESR/CRP and symptoms
-      - Relapse common if taper too fast (30-50% relapse) - Increase dose back to pre-relapse level, resume taper slower
-      - Steroid-sparing agents - If prolonged course (>2 years), frequent relapses, steroid toxicity
-      - Methotrexate 10-25 mg weekly (modest benefit, reduces steroid dose ~20%)
-      - Tocilizumab (IL-6 inhibitor) 162 mg SC weekly - Emerging evidence (GiACTA trial for GCA, PMR data accumulating), expensive
-      - Osteoporosis prophylaxis - ALL patients on long-term steroids
-      - Calcium 1200-1500 mg + vitamin D 800-1000 IU daily
-      - Bisphosphonate (alendronate 70 mg weekly, risedronate 35 mg weekly) or denosumab if high fracture risk
-      - PPI if GERD or GI risk factors
-      - Monitor for GCA - Educate about symptoms (new headache, vision changes, jaw claudication) - EMERGENCY
-      - Prognosis - Usually self-limited 1-2 years, but some require low-dose steroids for years
-
-  - id: giant_cell_arteritis
-    type: diagnosis
-    name: "Giant Cell Arteritis (Temporal Arteritis)"
-    icd10: "M31.6"
-    urgency: critical
-    workup:
-      - GCA - Large vessel vasculitis, granulomatous inflammation of aorta and branches (especially cranial arteries)
-      - Most common systemic vasculitis in adults >50
-      - Same epidemiology as PMR (age >50, peak 70-80, women 2-3:1)
-      - OPHTHALMIC EMERGENCY - Risk permanent vision loss if untreated (15-20% affected eyes, 30-50% both eyes if first eye involved)
-      - Clinical features - "CLASSIC TRIAD"
-      - New headache (60-90%) - Temporal region, severe, persistent, scalp tenderness (pain combing hair)
-      - Visual symptoms (25-50%) - Transient vision loss (amaurosis fugax), diplopia, permanent vision loss (anterior ischemic optic neuropathy AION from ophthalmic artery occlusion)
-      - Jaw/tongue claudication (30-70%) - Pain with chewing, pathognomonic (highly specific)
-      - Temporal artery abnormalities - Tenderness, decreased pulsation, nodularity, prominence
-      - Constitutional symptoms - Fever, weight loss, fatigue (50%)
-      - PMR symptoms (40-60%)
-      - Labs - Markedly elevated inflammatory markers (ESR often >100 mm/hr, CRP >20-30)
-      - Anemia, thrombocytosis, elevated alkaline phosphatase
-      - Temporal artery biopsy - GOLD STANDARD, but do NOT delay treatment
-      - Skip lesions - Need 2-3 cm segment, bilateral if first negative
-      - Sensitivity 80-90% if done within 2 weeks of starting steroids (can be positive up to 2-4 weeks)
-      - Findings - Transmural inflammation, giant cells, intimal thickening, fragmented internal elastic lamina
-      - Negative biopsy does NOT exclude GCA (20% false negatives) - Treat if high suspicion
-      - Imaging - Alternative/adjunct to biopsy
-      - Temporal artery ultrasound - "Halo sign" (hypoechoic wall thickening), sensitivity 75-80%
-      - CT/MR angiography - Large vessel involvement (aorta, subclavian, axillary), mural thickening
-      - FDG-PET - Vascular inflammation
-    treatment:
-      - High-dose corticosteroids - URGENT, start IMMEDIATELY if suspected (do NOT wait for biopsy)
-      - Vision loss can occur suddenly and is irreversible
-      - Uncomplicated GCA - Prednisone 40-60 mg daily (1 mg/kg)
-      - Vision loss or impending vision loss - IV methylprednisolone 1000 mg daily x 3 days, then prednisone 60 mg
-      - Response rapid (24-72 hours symptoms improve, ESR/CRP normalize)
-      - Duration 12-24 months (longer than PMR)
-      - Taper slowly once controlled (4-6 weeks initial dose)
-      - 10% every 2 weeks to 40 mg, then 5 mg every 2-4 weeks to 20 mg, then 2.5 mg every 4-8 weeks to 10 mg, then 1 mg every 4-8 weeks
-      - Relapse common (50-75% at some point) - Increase back to pre-relapse dose
-      - Tocilizumab (IL-6 inhibitor) - ADJUNCT, reduces steroid exposure
-      - 162 mg SC weekly OR 8 mg/kg IV every 4 weeks
-      - GiACTA trial - Added to steroid taper, increased sustained remission (56% vs 14%), allowed faster steroid taper
-      - FDA-approved 2017 for GCA
-      - Expensive (~$30,000-40,000/year)
-      - Consider if refractory, steroid toxicity, unable to taper
-      - Aspirin 81-100 mg daily - Reduces ischemic complications (vision loss, stroke, MI)
-      - Methotrexate - Modest steroid-sparing effect (less effective than tocilizumab)
-      - Osteoporosis prophylaxis - Same as PMR (calcium, vitamin D, bisphosphonate)
-      - Monitor - ESR/CRP (may stay slightly elevated, follow symptoms more than labs), vision, symptoms
-      - Complications - Vision loss (prevent with early treatment), aortic aneurysm/dissection (5-10%, screen with imaging annually), stroke (2-5%)
-      - Prognosis - Usually requires 1-2 years treatment minimum, some need lifelong low-dose steroids
-
-  - id: pmr_gca_overlap
-    type: diagnosis
-    name: "PMR-GCA Overlap"
-    icd10: "M31.6"
-    urgency: critical
-    workup:
-      - 10-15% PMR patients develop GCA during course
-      - 40-60% GCA patients have PMR symptoms
-      - Same disease spectrum (PMR milder end, GCA severe end)
-      - Presentation - Proximal muscle pain/stiffness (PMR) + cranial symptoms (GCA)
-    treatment:
-      - Treat as GCA - Higher steroid doses (prednisone 40-60 mg daily), longer duration
-      - Risk vision loss if undertreated
-      - Temporal artery biopsy - Consider even if PMR diagnosed, if any cranial symptoms develop
-      - Educate PMR patients - Report new headache, visual symptoms, jaw claudication immediately (RED FLAGS)
+name: Polymyalgia Rheumatica
+family: Rheumatology
+specialty: Rheumatology
+chief_complaint: Bilateral shoulder and hip pain and stiffness
+description: |
+  Inflammatory condition causing bilateral proximal muscle pain and stiffness in patients over 50 years. Often associated with giant cell arteritis (15-20%).
+  Responds dramatically to corticosteroids. More common in women (2:1), Northern European descent. Average age of onset 70 years.
+icd10: M35.3
+urgency: Moderate
+workup:
+  - Clinical criteria - age greater than 50, bilateral shoulder and/or hip girdle pain/stiffness lasting at least 4 weeks, morning stiffness greater than 45 minutes, elevated inflammatory markers
+  - ESR typically greater than 40 mm/hr (often greater than 100), CRP elevated
+  - Normal or mildly elevated creatine kinase (not true myopathy, no muscle weakness)
+  - CBC may show anemia of chronic disease, thrombocytosis
+  - Rule out other causes - rheumatoid factor and anti-CCP (rheumatoid arthritis), ANA (lupus, other CTD), TSH (hypothyroidism), serum and urine protein electrophoresis (multiple myeloma)
+  - Physical exam - tenderness of shoulder and hip girdles, full range of motion (may be limited by pain), normal muscle strength
+  - Ultrasound shoulders/hips shows bursitis, tenosynovitis if diagnosis uncertain
+  - Screen for giant cell arteritis (GCA) - new headache, scalp tenderness, jaw claudication, visual symptoms, temporal artery tenderness or decreased pulse
+  - If GCA symptoms present, start high-dose steroids immediately and obtain temporal artery biopsy within 1-2 weeks
+treatment:
+  - Prednisone 15-20mg daily (dramatic response within 24-72 hours diagnostic)
+  - Lack of rapid improvement should prompt reconsideration of diagnosis
+  - Taper slowly over 12-18 months to minimize relapse
+  - Reduce by 2.5mg every 2-4 weeks until 10mg daily, then 1mg every 4-8 weeks
+  - Monitor ESR/CRP monthly initially, then every 3 months - increase dose if symptoms recur or markers rise
+  - Many patients require low-dose maintenance (5-7.5mg daily) for extended periods
+  - Steroid-sparing agents if unable to taper below 10mg or frequent relapses - methotrexate 10-25mg weekly (modest benefit), tocilizumab 162mg SC weekly or q2 weeks (IL-6 inhibitor, more effective)
+  - Bone protection - calcium 1200mg daily, vitamin D 800-1000 IU daily, bisphosphonate (alendronate 70mg weekly) if high fracture risk or prolonged steroid use expected
+  - PPI for GI protection if risk factors for ulcer
+  - Screen for steroid complications - diabetes (glucose monitoring), hypertension, cataracts, glaucoma
+  - Physical therapy and exercise to maintain strength and function
+clinical_pearls:
+  - Dramatic response to prednisone characteristic - patients feel remarkably better within days
+  - Symptoms worse in morning, improve with activity (opposite of osteoarthritis)
+  - True muscle weakness absent (can distinguish from polymyositis, which has weakness and very high CK)
+  - High relapse rate (50%) during steroid taper - require extended treatment
+  - Giant cell arteritis coexists in 15-20%, consider temporal artery biopsy if any GCA symptoms
+  - Average disease duration 3-4 years, some remit within 2 years, others require prolonged treatment
+differentials:
+  - Rheumatoid arthritis (RA)
+  - Hypothyroidism
+  - Polymyositis
+  - Multiple myeloma
+  - Paraneoplastic syndrome
+  - Rotator cuff tendinitis
+trace:
+  - 72-year-old woman with 6-week history of bilateral shoulder and hip pain and stiffness, worse in morning x 2 hours → Difficulty raising arms overhead, getting out of chair → No muscle weakness, no headache or visual symptoms → ESR 95 mm/hr, CRP 65 mg/L → CK 85 U/L (normal), RF negative, TSH normal → Exam shows tenderness over shoulder girdles, full ROM, strength 5/5 throughout → Diagnose polymyalgia rheumatica → Start prednisone 15mg daily → Dramatic improvement within 48 hours, able to perform daily activities → ESR decreases to 20 mm/hr at 1 month → Begin slow taper, reduce to 12.5mg at 6 weeks, 10mg at 12 weeks → Symptoms recur at 7.5mg, increase back to 10mg → Add methotrexate 15mg weekly as steroid-sparing agent → Able to taper to 5mg prednisone with good control → Continue low-dose prednisone and methotrexate, bone protection with alendronate

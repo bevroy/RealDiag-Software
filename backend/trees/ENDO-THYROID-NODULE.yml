@@ -1,171 +1,52 @@
 tree_id: ENDO-THYROID-NODULE
-name: Thyroid Nodule Evaluation
-family: ENDOCRINOLOGY
-specialty: Endocrinology, Surgery, Radiology
-chief_complaint: Thyroid Mass, Neck Swelling
-description: Comprehensive evaluation of thyroid nodules and cancer risk
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: thyroid_nodule_presentation
-
-nodes:
-  - id: thyroid_nodule_presentation
-    type: question
-    text: "Initial evaluation findings?"
-    options:
-      - label: "Incidental thyroid nodule found on imaging"
-        next: thyroid_nodule_workup
-      - label: "Abnormal FNA cytology results"
-        next: thyroid_nodule_bethesda
-      - label: "Thyroid cancer confirmed or suspected"
-        next: thyroid_cancer_management
-
-  - id: thyroid_nodule_workup
-    type: diagnosis
-    name: "Thyroid Nodule - Initial Workup"
-    icd10: "E04.1"
-    urgency: medium
-    workup:
-      - Epidemiology - Very common (5% palpable, 50-70% on ultrasound autopsy studies), majority benign (95%), only 5-10% malignant
-      - Risk factors for malignancy - Age <20 or >70, male sex, radiation exposure (childhood head/neck radiation), family history (thyroid cancer, MEN2, familial polyposis), rapid growth, hoarseness (RLN invasion), cervical lymphadenopathy
-      - First step - TSH level (distinguish functioning vs non-functioning nodule)
-      - TSH suppressed (<0.5) - Suggests hyperfunctioning "hot" nodule (rarely malignant <1%)
-      - Proceed to radioiodine uptake scan - Hot nodule (increased uptake) = autonomous, treat hyperthyroidism, no FNA needed
-      - Cold nodule on scan = Non-functioning, proceed with ultrasound + FNA
-      - TSH normal or elevated - Non-functioning nodule, proceed with thyroid ultrasound
-      - Thyroid ultrasound - Assesses size, characteristics, lymph nodes
-      - High-risk features (increased malignancy risk)
-      - Hypoechoic (darker than thyroid tissue)
-      - Microcalcifications (punctate bright spots, psammoma bodies in papillary thyroid cancer)
-      - Irregular margins (spiculated, infiltrative)
-      - Taller-than-wide shape (anteroposterior > transverse diameter)
-      - Increased vascularity
-      - Extrathyroidal extension
-      - Suspicious cervical lymphadenopathy (rounded, cystic, microcalcifications, loss of fatty hilum)
-      - Low-risk features - Spongiform, purely cystic, peripheral halo
-      - ACR TI-RADS scoring - Assigns points for suspicious features, recommends FNA threshold
-      - TR1 (benign) - No FNA
-      - TR2 (not suspicious) - No FNA
-      - TR3 (mildly suspicious) - FNA if ≥2.5 cm
-      - TR4 (moderately suspicious) - FNA if ≥1.5 cm
-      - TR5 (highly suspicious) - FNA if ≥1 cm
-      - Fine needle aspiration (FNA) - Indications
-      - Nodule ≥1 cm with suspicious ultrasound features (TR4-5)
-      - Any size if suspicious lymph nodes or extrathyroidal extension
-      - Nodule ≥1.5-2 cm even if low suspicion (TR3)
-      - Do NOT FNA if hot nodule on scan or purely cystic
-    treatment:
-      - Management based on FNA results (see Bethesda classification node)
-      - If benign - Surveillance ultrasound (repeat in 12-24 months, if stable x 2 exams, can extend interval or stop)
-      - If malignant - Surgery (see thyroid cancer node)
-      - Suppressive therapy - Levothyroxine to suppress TSH below normal (0.1-0.5) - controversial, NOT routinely recommended (minimal benefit, risk atrial fibrillation, osteoporosis)
-      - Consider only if TSH elevated and nodule growing
-
-  - id: thyroid_nodule_bethesda
-    type: diagnosis
-    name: "Thyroid Nodule - Bethesda Classification"
-    icd10: "E04.1"
-    urgency: medium
-    workup:
-      - Bethesda System for Reporting Thyroid Cytopathology - Standardized classification
-      - Bethesda I - Non-diagnostic/Unsatisfactory (10-20% of FNAs)
-      - Insufficient cellularity, obscuring blood, thick colloid
-      - Malignancy risk - Cannot assess
-      - Bethesda II - Benign (60-70%)
-      - Benign follicular nodule (adenomatoid/hyperplastic), lymphocytic thyroiditis, colloid nodule
-      - Malignancy risk <3%
-      - Bethesda III - Atypia of Undetermined Significance (AUS) or Follicular Lesion of Undetermined Significance (FLUS) (5-10%)
-      - Some atypical features but not enough for suspicious category
-      - Malignancy risk 10-30%
-      - Bethesda IV - Follicular Neoplasm or Suspicious for Follicular Neoplasm (FN/SFN) (10-25%)
-      - Follicular cells in microfollicular pattern, cannot distinguish adenoma from carcinoma on cytology (need capsular/vascular invasion on histology)
-      - Includes Hürthle cell neoplasm
-      - Malignancy risk 25-40%
-      - Bethesda V - Suspicious for Malignancy (3-5%)
-      - Features suggestive but not diagnostic (suspicious for papillary carcinoma most common)
-      - Malignancy risk 50-75%
-      - Bethesda VI - Malignant (5-10%)
-      - Papillary thyroid carcinoma (most common), medullary carcinoma, anaplastic carcinoma, lymphoma, metastasis
-      - Malignancy risk 97-99%
-      - Molecular testing - Can refine risk for indeterminate categories (Bethesda III-IV)
-      - Gene expression classifiers (Afirma) - High negative predictive value (if negative, very unlikely cancer, can avoid surgery)
-      - Mutation panels (ThyroSeq) - BRAF V600E (papillary), RAS mutations (follicular), RET/PTC rearrangements
-      - BRAF V600E mutation - High specificity for papillary thyroid cancer (>99%), higher risk aggressive features
-    treatment:
-      - Bethesda I (Non-diagnostic) - Repeat FNA with ultrasound guidance (50-90% diagnostic on repeat)
-      - If repeat non-diagnostic and high suspicion US features - Consider molecular testing or diagnostic lobectomy
-      - Bethesda II (Benign) - Surveillance ultrasound 12-24 months, if stable can extend or stop
-      - Bethesda III (AUS/FLUS) - Repeat FNA or molecular testing
-      - If molecular test low risk - Surveillance
-      - If molecular test high risk or repeat FNA suspicious - Surgery (lobectomy)
-      - Bethesda IV (FN/SFN) - Molecular testing or diagnostic lobectomy
-      - If molecular test low risk (benign gene expression classifier) - Surveillance acceptable
-      - If molecular test high risk or patient preference - Lobectomy (intraoperative frozen section unreliable, cannot distinguish adenoma from carcinoma, need permanent histology)
-      - If carcinoma on final pathology, may need completion thyroidectomy
-      - Bethesda V (Suspicious) - Surgery recommended (lobectomy vs total thyroidectomy based on size, risk features)
-      - High likelihood cancer, molecular testing can confirm if uncertain
-      - Bethesda VI (Malignant) - Surgery (see thyroid cancer management)
-
-  - id: thyroid_cancer_management
-    type: diagnosis
-    name: "Thyroid Cancer Management"
-    icd10: "C73"
-    urgency: high
-    workup:
-      - Types of thyroid cancer
-      - Papillary thyroid carcinoma (PTC) - 80-85% of thyroid cancers, excellent prognosis
-      - Slow growing, spreads to cervical lymph nodes (30-50%), distant mets rare
-      - 10-year survival >95% overall
-      - Variants - Classic, follicular variant (good prognosis), tall cell (more aggressive), diffuse sclerosing (younger patients, bilateral)
-      - Follicular thyroid carcinoma (FTC) - 10-15%, hematogenous spread (lungs, bones), lymph nodes less common
-      - 10-year survival 85-90%
-      - Hürthle cell carcinoma - More aggressive variant of follicular
-      - Medullary thyroid carcinoma (MTC) - 3-5%, arises from parafollicular C cells (secrete calcitonin)
-      - 25% familial (MEN 2A, MEN 2B, familial MTC) - RET proto-oncogene mutation
-      - Lymph node involvement common
-      - Calcitonin and CEA tumor markers (monitor for recurrence)
-      - Screen first-degree relatives if sporadic presentation (may be unrecognized familial)
-      - Anaplastic thyroid carcinoma - <2%, highly aggressive, elderly, rapidly enlarging neck mass
-      - Invades local structures (trachea, esophagus), distant mets common
-      - Median survival 3-6 months, nearly uniformly fatal
-      - Thyroid lymphoma - 1-2%, associated with Hashimoto thyroiditis, B-cell non-Hodgkin
-      - Preoperative evaluation
-      - Labs - TSH, calcitonin (if MTC suspected), thyroglobulin (postoperative tumor marker)
-      - Ultrasound neck - Assess primary tumor size, extrathyroidal extension, lymph nodes (central and lateral compartments)
-      - Laryngoscopy - If hoarseness or large tumor (assess vocal cord mobility, RLN function)
-      - Staging - TNM staging, risk stratification (ATA low/intermediate/high risk)
-    treatment:
-      - Surgery - Mainstay of treatment for differentiated thyroid cancer (PTC, FTC)
-      - Lobectomy (hemithyroidectomy) - Acceptable for
-      - Low-risk papillary or follicular cancer <4 cm, unifocal, no extrathyroidal extension, no lymph node involvement, no radiation history
-      - Advantages - Preserve thyroid function (no lifelong levothyroxine), lower complication risk
-      - Total thyroidectomy - Indicated for
-      - Tumor >4 cm, bilateral disease, extrathyroidal extension, lymph node metastases, distant metastases, prior radiation exposure, family history, high-risk histology (tall cell, diffuse sclerosing)
-      - Allows radioactive iodine ablation and thyroglobulin monitoring
-      - Lymph node dissection
-      - Prophylactic central neck dissection (level VI) - Controversial, consider if T3-T4 tumor or clinically apparent nodes
-      - Therapeutic lateral neck dissection (levels II-V) - If biopsy-proven lateral lymph node metastases
-      - Complications of surgery - Hypocalcemia (transient 20-30%, permanent 1-3% if bilateral parathyroid injury), recurrent laryngeal nerve injury (hoarseness, 1-2% permanent), hematoma
-      - Radioactive iodine (RAI) ablation - I-131, given 4-6 weeks post-thyroidectomy
-      - Indications - High-risk features (extrathyroidal extension, vascular invasion, lymph node mets, distant mets, aggressive histology), tumor >4 cm
-      - NOT indicated for low-risk small tumors (<1-2 cm, no adverse features)
-      - Preparation - Levothyroxine withdrawal (TSH >30) OR rhTSH (Thyrogen) injections, low-iodine diet
-      - Dose - 30-150 mCi (ablation dose) or higher if metastatic disease
-      - Follow-up post-treatment
-      - TSH suppression - Levothyroxine to keep TSH <0.1 (high risk) or 0.1-0.5 (low risk) for 5-10 years (suppress any residual cancer cells)
-      - Thyroglobulin monitoring - Tumor marker (should be undetectable after total thyroidectomy + RAI), rising Tg indicates recurrence
-      - Measure Tg on suppressive therapy and after TSH stimulation (annually)
-      - Neck ultrasound - Every 6-12 months for 5 years, then annually
-      - Whole body iodine scan - If Tg elevated or high-risk features
-      - Recurrence - 10-20% of patients, usually cervical lymph nodes
-      - Treatment - Surgical resection, RAI if iodine-avid, external beam radiation if not amenable
-      - Medullary thyroid carcinoma - Total thyroidectomy + central neck dissection (lymph nodes involved early)
-      - Monitor calcitonin and CEA postoperatively
-      - No role for RAI (C cells don't take up iodine)
-      - Genetic testing for RET mutation (if hereditary, screen family, prophylactic thyroidectomy in childhood for MEN 2)
-      - Metastatic disease - Tyrosine kinase inhibitors (vandetanib, cabozantinib)
-      - Anaplastic carcinoma - Usually unresectable
-      - Palliative surgery (tracheostomy for airway obstruction), external beam radiation, chemotherapy
-      - BRAF V600E mutation - Dabrafenib + trametinib (targeted therapy)
-      - Prognosis dismal
+name: Thyroid Nodule
+family: Endocrinology
+specialty: Endocrinology
+chief_complaint: Thyroid nodule or neck mass
+description: |
+  Discrete lesion within thyroid gland, palpable or detected on imaging. Very common (50-70% on ultrasound), but only 5-10% are malignant.
+  Evaluation aims to identify malignancy risk. Risk factors for cancer include childhood radiation exposure, family history of thyroid cancer, rapid growth, vocal cord paralysis.
+icd10: E04.1
+urgency: Low
+workup:
+  - TSH first test - if suppressed (TSH less than 0.5), get thyroid uptake scan (hot nodule rarely malignant)
+  - Thyroid ultrasound - assess size, echogenicity, composition, margins, calcifications
+  - American Thyroid Association (ATA) sonographic patterns predict malignancy risk
+  - High suspicion (70-90% malignancy risk) - solid hypoechoic with irregular margins, microcalcifications, taller than wide, extrathyroidal extension
+  - Intermediate suspicion (10-20%) - hypoechoic solid nodule with smooth margins
+  - Low suspicion (5-10%) - isoechoic or hyperechoic solid, partially cystic with eccentric solid areas
+  - Very low suspicion (less than 3%) - spongiform or partially cystic without suspicious features
+  - Benign (less than 1%) - purely cystic
+  - Fine needle aspiration (FNA) biopsy indications - nodules greater than 1 cm with high or intermediate suspicion pattern, greater than 1.5 cm with low suspicion, greater than 2 cm with very low suspicion
+  - FNA cytology - Bethesda classification (I nondiagnostic, II benign, III atypia of undetermined significance, IV follicular neoplasm, V suspicious for malignancy, VI malignant)
+  - Molecular testing (Afirma, ThyroSeq) if indeterminate cytology (Bethesda III-IV) to refine malignancy risk
+treatment:
+  - Benign nodules (Bethesda II) - observation with repeat ultrasound in 1-2 years
+  - If stable x 2 exams, extend surveillance interval or discharge
+  - Levothyroxine suppression no longer recommended (does not reduce nodule size, increases adverse effects)
+  - Malignant nodules (Bethesda VI) or suspicious (Bethesda V) - surgical referral for thyroidectomy
+  - Total thyroidectomy for papillary or follicular thyroid cancer greater than 4 cm, extrathyroidal extension, lymph node metastases
+  - Thyroid lobectomy sufficient for small (less than 4 cm) low-risk papillary carcinoma confined to thyroid
+  - Indeterminate nodules (Bethesda III-IV) - molecular testing to guide management
+  - High-risk molecular profile - surgical excision
+  - Low-risk molecular profile - observation with repeat FNA or lobectomy based on clinical factors
+  - Hot nodule (autonomous, suppresses TSH) - if hyperthyroid, treat with radioactive iodine or surgery
+  - Cystic nodules - aspiration for symptom relief if large, high recurrence rate
+  - Ethanol ablation or radiofrequency ablation for benign nodules causing compressive symptoms
+clinical_pearls:
+  - Most thyroid nodules asymptomatic, discovered incidentally on imaging (thyroid incidentaloma)
+  - Palpable nodules detected in 5% of population, ultrasound detects in 50-70%
+  - Compressive symptoms (dysphagia, dyspnea, voice changes) suggest large goiter or malignancy
+  - Papillary thyroid cancer (80% of thyroid cancers) - indolent, excellent prognosis, lymph node spread common
+  - Follicular thyroid cancer (10-15%) - hematogenous spread to lungs and bones
+  - Medullary thyroid cancer (5%) - from C cells, produce calcitonin, 25% familial (MEN 2)
+  - Anaplastic thyroid cancer (less than 2%) - aggressive, poor prognosis, elderly patients
+differentials:
+  - Thyroid cyst
+  - Multinodular goiter
+  - Thyroiditis
+  - Parathyroid adenoma
+  - Lymph node
+  - Thyroglossal duct cyst
+trace:
+  - 45-year-old woman with 2 cm thyroid nodule palpated on routine exam → No symptoms, no radiation history → TSH 2.1 mIU/L (normal) → Thyroid ultrasound shows 2.2 cm solid hypoechoic nodule right lobe with irregular margins and microcalcifications (high suspicion pattern) → FNA biopsy performed → Cytology shows Bethesda VI (papillary thyroid carcinoma) → Neck ultrasound shows no suspicious lymph nodes → Refer to endocrine surgery → Total thyroidectomy with central neck dissection → Pathology confirms 2.1 cm papillary thyroid carcinoma, no extrathyroidal extension, 0/5 lymph nodes → Stage pT1bN0 → Low-risk, no radioactive iodine needed → Start levothyroxine suppression (TSH goal 0.5-2) → Monitor thyroglobulin and anti-thyroglobulin antibodies, neck ultrasound at 6-12 months → Excellent prognosis

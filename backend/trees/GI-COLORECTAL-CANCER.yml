@@ -1,0 +1,54 @@
+tree_id: GI-COLORECTAL-CANCER
+name: Colorectal Cancer
+family: Gastroenterology
+specialty: Gastroenterology
+chief_complaint: Rectal bleeding or change in bowel habits
+description: |
+  Third most common cancer in US, second leading cause of cancer death. Develops from adenomatous polyps over 10-15 years (adenoma-carcinoma sequence).
+  Screening reduces incidence and mortality by detecting and removing precancerous polyps. Risk factors include age greater than 50, family history, IBD, hereditary syndromes (Lynch, FAP).
+icd10: C18.9
+urgency: High
+workup:
+  - Screening average-risk individuals starting age 45 - colonoscopy every 10 years (gold standard), FIT (fecal immunochemical test) annually, or Cologuard (stool DNA) every 3 years
+  - Colonoscopy diagnostic and therapeutic - visualizes entire colon, biopsies lesions, removes polyps
+  - Symptoms prompting evaluation - rectal bleeding, iron deficiency anemia, change in bowel habits, abdominal pain, weight loss, palpable mass
+  - CT colonography (virtual colonoscopy) alternative if standard colonoscopy not feasible
+  - Biopsy confirms adenocarcinoma - well, moderately, or poorly differentiated
+  - Staging workup - CT chest/abdomen/pelvis with contrast, CEA (carcinoembryonic antigen) baseline
+  - MRI pelvis for rectal cancer (assess depth, lymph nodes, plan surgery/neoadjuvant therapy)
+  - PET scan if concern for distant metastases
+  - TNM staging - T (tumor depth), N (lymph nodes), M (metastases)
+  - Stage I (T1-2N0), II (T3-4N0), III (any T with N+), IV (M1)
+  - Genetic testing - microsatellite instability (MSI) or mismatch repair (MMR) deficiency testing for all CRCs (predicts response to immunotherapy, identifies Lynch syndrome)
+  - KRAS, NRAS, BRAF mutations guide targeted therapy in metastatic disease
+treatment:
+  - Surgical resection primary treatment for localized disease
+  - Colon cancer - hemicolectomy or segmental resection with adequate margins and lymph node harvest (at least 12 nodes)
+  - Rectal cancer - low anterior resection or abdominoperineal resection (permanent colostomy if tumor involves anal sphincter)
+  - Neoadjuvant chemoradiation for stage II-III rectal cancer (5-FU or capecitabine plus radiation) - shrinks tumor, improves resectability, reduces local recurrence
+  - Adjuvant chemotherapy for stage III colon cancer (any node-positive) - FOLFOX (5-FU, leucovorin, oxaliplatin) or CAPOX (capecitabine, oxaliplatin) x 6 months
+  - Reduces recurrence by 30%, improves survival
+  - Stage II colon cancer - adjuvant chemotherapy if high-risk features (T4, poorly differentiated, lymphovascular invasion, inadequate lymph nodes, perforation)
+  - MSI-high/dMMR stage II generally good prognosis, may not benefit from 5-FU
+  - Metastatic colorectal cancer (stage IV) - systemic chemotherapy
+  - FOLFOX or FOLFIRI (5-FU, leucovorin, irinotecan) plus targeted therapy
+  - Bevacizumab (anti-VEGF) or cetuximab/panitumumab (anti-EGFR, if RAS wild-type)
+  - Immunotherapy (pembrolizumab, nivolumab) highly effective for MSI-high/dMMR tumors (30% response rate in MSI-low, 60% in MSI-high)
+  - Surgical resection of isolated liver or lung metastases if feasible (potentially curative)
+  - Surveillance after treatment - CEA every 3-6 months x 5 years, CT chest/abdomen/pelvis annually x 5 years, colonoscopy at 1 year then every 3-5 years
+clinical_pearls:
+  - Right-sided colon cancer presents with iron deficiency anemia, left-sided with obstructive symptoms or hematochezia
+  - Rectal cancer requires multimodal therapy (surgery, chemo, radiation) unlike colon cancer
+  - Lynch syndrome (hereditary nonpolyposis colorectal cancer) - autosomal dominant, early-onset CRC (40s), also endometrial, ovarian cancers, MSI-high tumors
+  - Familial adenomatous polyposis (FAP) - hundreds to thousands of polyps, 100% CRC risk by age 40, requires prophylactic colectomy
+  - Obstructing colon cancer may require stent placement or diverting colostomy before definitive surgery
+  - Total neoadjuvant therapy (chemo plus radiation before surgery) emerging standard for rectal cancer
+differentials:
+  - Hemorrhoids
+  - Diverticulosis
+  - Inflammatory bowel disease
+  - Ischemic colitis
+  - Angiodysplasia
+  - Polyps
+trace:
+  - 58-year-old man with iron deficiency anemia discovered on routine labs, Hgb 9.2 g/dL → No GI symptoms → Colonoscopy shows 4 cm mass in ascending colon → Biopsy confirms moderately differentiated adenocarcinoma → CT chest/abdomen/pelvis shows no metastases → CEA 8.5 ng/mL → MSI testing shows microsatellite stable (MSS) → Diagnose stage III colon cancer (T3N1M0) after right hemicolectomy with 3/18 lymph nodes positive → Postoperative recovery uneventful → Start adjuvant chemotherapy with CAPOX (capecitabine 1000 mg/m2 BID days 1-14, oxaliplatin 130 mg/m2 day 1, q3 weeks) x 8 cycles (6 months) → Peripheral neuropathy from oxaliplatin managed with dose reduction → CEA normalizes, surveillance CT scans clear → No recurrence at 3 years
