@@ -1,156 +1,42 @@
 tree_id: RHEUM-GOUT
-name: Gout and Hyperuricemia Management
-family: RHEUMATOLOGY
-specialty: Rheumatology, Internal Medicine
-chief_complaint: Acute Joint Pain, Swelling, Redness, Hyperuricemia
-description: Comprehensive evaluation and management of gout and hyperuricemia
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: gout_presentation
-
-nodes:
-  - id: gout_presentation
-    type: question
-    text: "Clinical presentation?"
-    options:
-      - label: "Acute gout attack (flare)"
-        next: acute_gout_flare
-      - label: "Intercritical gout (between flares)"
-        next: intercritical_gout
-      - label: "Chronic tophaceous gout"
-        next: chronic_tophaceous_gout
-
-  - id: acute_gout_flare
-    type: diagnosis
-    name: "Acute Gout Flare"
-    icd10: "M10.9"
-    urgency: high
-    workup:
-      - Gout - Crystal-induced inflammatory arthritis, monosodium urate (MSU) crystal deposition
-      - Most common inflammatory arthritis in men >40 years
-      - Hyperuricemia (uric acid >6.8 mg/dL, supersaturation point) - Necessary but not sufficient (most hyperuricemic individuals never develop gout)
-      - Causes hyperuricemia - Overproduction (10%) or underexcretion (90%)
-      - Overproduction - High purine diet (red meat, shellfish, organ meats, alcohol especially beer), myeloproliferative disorders, psoriasis, tumor lysis syndrome, HGPRT deficiency (Lesch-Nyhan)
-      - Underexcretion - Renal insufficiency, diuretics (thiazides, loops), low-dose aspirin, cyclosporine, metabolic syndrome
-      - Acute gout flare - Sudden onset severe monoarticular arthritis (90% monoarticular initially)
-      - First MTP joint (podagra) - Classic, 50-70% first attack, 90% at some point
-      - Also ankle, midfoot, knee, wrist, fingers (polyarticular more common with recurrent gout)
-      - Peak 12-24 hours, severe pain (10/10, "cannot even touch or cover with sheet"), erythema, warmth, swelling, exquisite tenderness
-      - Self-limited - Resolves spontaneously 7-10 days (even without treatment)
-      - Triggers - Alcohol binge, high purine meal (steak, seafood), diuretics, dehydration, trauma, surgery, acute illness
-      - Diagnosis - GOLD STANDARD: Arthrocentesis with synovial fluid analysis
-      - Synovial fluid - Inflammatory (WBC 2,000-50,000, usually 10,000-20,000), neutrophil predominance (>50%)
-      - Polarized light microscopy - Needle-shaped, negatively birefringent crystals (yellow when parallel to polarizer, blue when perpendicular) intracellular in WBCs
-      - Gram stain and culture - Rule out septic arthritis (can coexist)
-      - Serum uric acid - Often normal or LOW during acute flare (25-40% <6.8 mg/dL during attack, redistribution into tissues)
-      - Check 2-4 weeks after flare resolves (elevated confirms hyperuricemia, guides urate-lowering therapy)
-      - Imaging - Usually not needed for diagnosis
-      - X-ray - Normal early, chronic gout shows "rat bite" erosions with overhanging edges (pathognomonic), preservation of joint space
-      - Ultrasound - "Double contour sign" (MSU crystals on cartilage surface), tophi, erosions
-      - Dual-energy CT (DECT) - Color-coded urate deposition, very specific (90-95%) but expensive
-      - Differential diagnosis - Septic arthritis (must rule out, aspirate joint), pseudogout (CPPD crystals - rhomboid, positively birefringent), cellulitis, trauma, reactive arthritis
-    treatment:
-      - Acute flare management - Anti-inflammatory medications (NOT urate-lowering therapy during flare)
-      - Start within 24 hours symptom onset (more effective early)
-      - NSAIDs - First-line if no contraindications
-      - Indomethacin 50 mg TID OR naproxen 500 mg BID OR ibuprofen 800 mg TID x 5-7 days
-      - Contraindications - CKD (eGFR <30), PUD, anticoagulation, heart failure
-      - Colchicine - Alternative or add to NSAIDs
-      - Low-dose regimen - 1.2 mg at onset, then 0.6 mg 1 hour later (total 1.8 mg day 1), then 0.6 mg daily or BID until resolved
-      - High-dose regimen NO longer recommended (same efficacy, more GI side effects)
-      - Contraindications - CKD (reduce dose if eGFR <30, avoid if <10), liver disease, drug interactions (strong CYP3A4 inhibitors - clarithromycin, diltiazem)
-      - Side effects - Diarrhea (dose-dependent), nausea
-      - Corticosteroids - If NSAIDs and colchicine contraindicated or ineffective
-      - Intra-articular - Triamcinolone 20-40 mg (if monoarticular, after aspirate to rule out septic arthritis)
-      - Oral - Prednisone 30-40 mg daily x 5 days, then taper OR 0.5 mg/kg x 5-10 days, taper
-      - IM or IV - Methylprednisolone 80-120 mg if unable to take PO
-      - IL-1 inhibitors - Refractory or contraindications to above
-      - Anakinra 100 mg SC daily x 3 days (off-label)
-      - Canakinumab 150 mg SC x 1 (FDA-approved for gout flares in patients who fail or cannot use NSAIDs/colchicine, very expensive)
-      - Do NOT start or stop urate-lowering therapy during acute flare (can prolong or worsen flare)
-      - If already on allopurinol/febuxostat, continue same dose
-      - Rest, elevation, ice - Supportive care
-
-  - id: intercritical_gout
-    type: diagnosis
-    name: "Intercritical Gout (Urate-Lowering Therapy)"
-    icd10: "M10.9"
-    urgency: medium
-    workup:
-      - Intercritical period - Asymptomatic interval between acute flares
-      - Duration variable - Can be months to years
-      - Without treatment, flare frequency increases, intercritical period shortens
-      - Indications for urate-lowering therapy (ULT) - "Treat-to-target" approach
-      - ≥2 flares per year (most common indication)
-      - Tophi (clinical or imaging)
-      - Chronic kidney disease (stage 3+, eGFR <60)
-      - Urolithiasis (kidney stones)
-      - First flare if young (<40 years) or very high uric acid (>9 mg/dL)
-      - Goal uric acid - <6 mg/dL (all patients), <5 mg/dL if tophi or frequent flares (dissolve crystals faster)
-      - Treat indefinitely (lifelong), not just during flares
-    treatment:
-      - Lifestyle modifications - All patients
-      - Weight loss (if obese)
-      - Limit alcohol (especially beer, liquor; wine less goutogenic)
-      - Limit high-purine foods (red meat, organ meats, shellfish, high-fructose corn syrup)
-      - Moderate purine foods OK in moderation (poultry, fish)
-      - Low-fat dairy, cherries (reduce flares), coffee (reduce risk)
-      - Hydration (2-3 L/day)
-      - Discontinue diuretics if possible (switch to alternative antihypertensive)
-      - Vitamin C 500 mg daily (modest uricosuric effect)
-      - Urate-lowering therapy (ULT) - Start 2-4 weeks after acute flare resolves (NOT during flare)
-      - Xanthine oxidase inhibitors (XOI) - First-line
-      - Allopurinol - Start 100 mg daily (50 mg if CKD stage 4+), titrate by 100 mg every 2-4 weeks until uric acid <6 mg/dL
-      - Typical maintenance dose 300 mg daily, max 800 mg daily
-      - Check uric acid 2-4 weeks after each dose change
-      - Side effects - Rash (5%, usually mild; RARELY Stevens-Johnson syndrome/TEN 0.1%, higher risk HLA-B*5801 allele in Asian, African descent, CKD - consider screening)
-      - Febuxostat - Non-purine XOI, no dose adjustment for CKD
-      - Start 40 mg daily, titrate to 80 mg (max 120 mg if needed)
-      - More potent than allopurinol, but FDA black box warning (cardiovascular mortality signal in CARES trial, use if allopurinol fails or contraindicated)
-      - Uricosurics - Second-line (less effective than XOI), increase renal urate excretion
-      - Probenecid - 500 mg BID, titrate to 1000 mg BID (ineffective if eGFR <50)
-      - Contraindications - CKD, kidney stones
-      - Lesinurad - Selective URAT1 inhibitor, 200 mg daily (add to XOI if XOI alone insufficient)
-      - Uricase - Recombinant uricase enzyme, converts uric acid to allantoin (soluble)
-      - Pegloticase - IV infusion 8 mg every 2 weeks (for refractory tophaceous gout)
-      - Rapidly lowers uric acid to near zero, dissolves tophi
-      - Infusion reactions (anaphylaxis), antibody formation (loss of efficacy)
-      - Reserve for severe refractory gout (tophi, erosions) failed other ULT
-      - Flare prophylaxis during ULT initiation - CRITICAL (starting ULT mobilizes crystals, triggers flares 25-50%)
-      - Colchicine 0.6 mg daily or BID x 3-6 months OR
-      - Low-dose NSAID (naproxen 250 mg BID) x 3-6 months OR
-      - Low-dose prednisone 5-10 mg daily x 3-6 months (if NSAIDs/colchicine contraindicated)
-      - Continue until uric acid <6 mg/dL x 3-6 months AND no flares
-      - Monitoring - Uric acid every 2-4 weeks during titration, then every 6-12 months once at goal
-      - Adjust ULT dose to maintain uric acid <6 mg/dL
-      - Do NOT stop ULT if flare occurs (continue, treat flare separately)
-
-  - id: chronic_tophaceous_gout
-    type: diagnosis
-    name: "Chronic Tophaceous Gout"
-    icd10: "M1A.9"
-    urgency: medium
-    workup:
-      - Chronic gout - Long-standing uncontrolled hyperuricemia, persistent MSU crystal deposition
-      - Tophi - Nodular deposits of MSU crystals, surrounded by foreign body granuloma
-      - Locations - Joints (hands, feet, elbows, knees), periarticular, ears (helix), olecranon bursa, Achilles tendon
-      - Usually painless (unless inflamed), firm, white/yellow chalky material if drain
-      - Complications - Chronic arthritis, joint destruction/deformity, limited mobility, skin ulceration/infection, bony erosions
-      - Imaging - X-ray shows "rat bite" erosions with overhanging edges (pathognomonic), joint destruction
-      - Occurs after 10-20 years uncontrolled gout (if untreated)
-      - Rare now with early ULT
-    treatment:
-      - Aggressive urate-lowering therapy - Goal uric acid <5 mg/dL (dissolve tophi faster than <6)
-      - High-dose XOI - Allopurinol 600-800 mg daily, or febuxostat 80-120 mg daily
-      - Add uricosuric if XOI alone insufficient (probenecid, lesinurad)
-      - Pegloticase - If refractory to oral ULT (tophi persisting despite uric acid <6 for >6 months)
-      - 8 mg IV every 2 weeks
-      - Dramatic effect - Tophi shrink/resolve 6-12 months in most patients
-      - Surgical debridement - If large tophi causing mechanical issues, skin ulceration, infection, nerve compression
-      - After ULT stabilized (lower risk recurrence)
-      - Flare prophylaxis - Longer duration (6-12 months) until tophi resolving and uric acid stable <5 mg/dL
-      - Colchicine 0.6 mg daily/BID indefinitely in some patients
-      - Monitoring - Uric acid monthly during optimization, then every 3-6 months
-      - Serial photos or measurements of tophi (document resolution)
-      - Prognosis - With uric acid <5 mg/dL, tophi shrink/resolve over months to years (larger tophi take longer, 2-3 years)
+name: Gout
+family: Rheumatology
+specialty: Rheumatology
+chief_complaint: Sudden severe joint pain and swelling
+description: |
+  Crystal arthropathy from monosodium urate crystal deposition. Classic presentation is podagra (first MTP joint).
+  Caused by hyperuricemia (uric acid greater than 6.8 mg/dL leads to crystal formation). Affects 4% of US adults, more common in men.
+icd10: M10.9
+urgency: Moderate
+workup:
+  - Arthrocentesis with synovial fluid analysis (gold standard) - WBC 2000-50,000/mm3, negatively birefringent needle-shaped crystals under polarized microscopy
+  - Serum uric acid level - elevated in 90% during acute attack but can be normal (not diagnostic, hyperuricemia alone does not confirm gout)
+  - X-ray of affected joint - punched-out erosions with overhanging edges in chronic gout, normal in early disease
+  - Ultrasound shows double contour sign (urate crystals on cartilage surface)
+  - Rule out septic arthritis - send synovial fluid for Gram stain and culture
+treatment:
+  - Acute gout attack - NSAIDs, colchicine, or corticosteroids (treat within 24 hours for best response)
+  - NSAIDs first-line - indomethacin 50mg TID, naproxen 500mg BID, or ibuprofen 800mg TID until resolution
+  - Colchicine 1.2mg loading dose, then 0.6mg 1 hour later, then 0.6mg daily (or BID during attack) - most effective if started early
+  - Corticosteroids if NSAIDs/colchicine contraindicated - prednisone 40mg daily x 5 days then taper, or intra-articular injection
+  - Do NOT start urate-lowering therapy during acute attack (can worsen attack)
+  - Urate-lowering therapy (ULT) for recurrent attacks (2 or more per year), tophi, chronic kidney disease, or urolithiasis
+  - Allopurinol 100mg daily, increase by 100mg every 2-4 weeks to achieve uric acid less than 6 mg/dL (max 800mg/day)
+  - Febuxostat 40-80mg daily alternative if allopurinol intolerant
+  - Prophylaxis with colchicine 0.6mg daily or low-dose NSAID during first 6 months of ULT (prevents flares)
+clinical_pearls:
+  - Classic presentation includes sudden onset severe monoarthritis, often at night, with erythema and warmth
+  - Risk factors include male gender, obesity, alcohol (especially beer), high-purine diet (red meat, seafood), diuretics, kidney disease
+  - Podagra (first MTP joint) occurs in 50% of first attacks, eventually 90%
+  - Tophi (subcutaneous urate deposits) in chronic untreated gout, commonly on ears, fingers, elbows
+  - Uric acid can be normal during acute attack (acute phase response increases renal excretion)
+  - HLA-B5801 testing before allopurinol in high-risk populations (Asian descent) - predicts severe hypersensitivity
+differentials:
+  - Septic arthritis
+  - Pseudogout (calcium pyrophosphate deposition)
+  - Rheumatoid arthritis
+  - Trauma
+  - Cellulitis
+  - Psoriatic arthritis
+trace:
+  - Sudden onset severe right first MTP joint pain, red, swollen, unable to bear weight → Arthrocentesis shows 15,000 WBC/mm3, negatively birefringent needle-shaped crystals → Uric acid 9.2 mg/dL → Diagnose acute gouty arthritis → Indomethacin 50mg TID → Pain improves in 48 hours → Complete 7-day course → Two prior similar attacks, start urate-lowering therapy after resolution → Allopurinol 100mg daily with colchicine 0.6mg daily prophylaxis → Titrate allopurinol to achieve uric acid less than 6 mg/dL → No further attacks
