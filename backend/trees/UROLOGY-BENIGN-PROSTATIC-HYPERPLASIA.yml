@@ -1,0 +1,45 @@
+tree_id: UROLOGY-BENIGN-PROSTATIC-HYPERPLASIA
+name: Benign Prostatic Hyperplasia
+family: Urology
+specialty: Urology
+chief_complaint: Urinary frequency and weak stream
+description: |
+  Non-malignant enlargement of prostate gland causing bladder outlet obstruction.
+  Affects 50% of men by age 60, 90% by age 85. Symptoms from mechanical obstruction and smooth muscle tone.
+icd10: N40.0
+urgency: Low
+workup:
+  - International Prostate Symptom Score (IPSS) - 0-7 mild, 8-19 moderate, 20-35 severe
+  - Digital rectal exam (assess prostate size, nodules, consistency)
+  - Urinalysis (rule out UTI, hematuria)
+  - PSA level (elevated in BPH but need to exclude prostate cancer)
+  - Post-void residual (PVR) via bladder scan (>200 mL significant retention)
+  - Serum creatinine (chronic retention can cause hydronephrosis and renal insufficiency)
+  - Uroflowmetry if diagnosis uncertain (peak flow <10 mL/sec suggests obstruction)
+  - Cystoscopy if hematuria or suspected urethral stricture
+treatment:
+  - Watchful waiting if mild symptoms (IPSS <8) and not bothersome
+  - Alpha-blocker for moderate symptoms - tamsulosin 0.4mg daily, alfuzosin 10mg daily (relaxes prostate smooth muscle, improves flow within days)
+  - 5-alpha reductase inhibitor for large prostate (>30g) - finasteride 5mg or dutasteride 0.5mg daily (shrinks prostate 20-30% over 6-12 months)
+  - Combination therapy (alpha-blocker plus 5ARI) if large prostate and bothersome symptoms
+  - Phosphodiesterase-5 inhibitor (tadalafil 5mg daily) if concurrent erectile dysfunction
+  - Surgical intervention if refractory urinary retention, recurrent UTIs, bladder stones, hydronephrosis, persistent hematuria
+  - TURP (transurethral resection of prostate) gold standard surgery (most effective, 80-90% symptom improvement)
+  - Minimally invasive options - laser enucleation (HoLEP), prostatic urethral lift (UroLift), water vapor thermal therapy (Rezūm)
+clinical_pearls:
+  - Obstructive symptoms include hesitancy, weak stream, intermittency, incomplete emptying, straining
+  - Irritative symptoms include frequency, urgency, nocturia (often from detrusor overactivity secondary to obstruction)
+  - Nocturia 2 or more times per night highly bothersome and associated with increased mortality
+  - PSA velocity and free-to-total PSA ratio help distinguish BPH from cancer
+  - Alpha-blockers can cause orthostatic hypotension and retrograde ejaculation (counsel patients)
+  - 5ARIs reduce PSA by 50% after 6 months (adjust PSA baseline when screening for cancer)
+  - Acute urinary retention requires bladder catheterization, then trial of void after alpha-blocker/5ARI for 3-7 days
+differentials:
+  - Prostate cancer
+  - Urethral stricture
+  - Bladder neck contracture
+  - Neurogenic bladder
+  - Bladder cancer
+  - Overactive bladder
+trace:
+  - Urinary frequency and weak stream → IPSS score 16 (moderate symptoms) → DRE shows enlarged prostate, smooth → PSA 3.2 ng/mL (normal) → PVR 150 mL → Start tamsulosin 0.4mg daily → Some improvement but prostate large on DRE → Add finasteride 5mg daily → Reassess at 3 months, IPSS improved to 9 → Continue combination therapy → Symptoms stable

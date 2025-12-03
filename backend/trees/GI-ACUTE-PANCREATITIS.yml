@@ -1,154 +1,46 @@
 tree_id: GI-ACUTE-PANCREATITIS
-name: Acute Pancreatitis Evaluation and Management
-family: GASTROENTEROLOGY
-specialty: Emergency Medicine, Gastroenterology, Surgery
-chief_complaint: Severe Epigastric Abdominal Pain, Nausea, Vomiting
-description: Comprehensive evaluation and management of acute pancreatitis with severity stratification and treatment protocols
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: pancreatitis_presentation
-
-nodes:
-  - id: pancreatitis_presentation
-    type: question
-    text: "Patient with suspected acute pancreatitis - Diagnosis confirmed?"
-    options:
-      - label: "Yes - 2 of 3 criteria met (characteristic pain, lipase >3x ULN, imaging findings)"
-        next: severity_assessment
-      - label: "Uncertain - Only 1 criterion met, need further workup"
-        next: pancreatitis_workup
-
-  - id: pancreatitis_workup
-    type: question
-    text: "Initial diagnostic workup results?"
-    options:
-      - label: "Lipase >3x ULN and/or CT/US showing pancreatitis"
-        next: severity_assessment
-      - label: "Lipase mildly elevated (1-3x ULN) but imaging negative"
-        next: other_diagnosis
-
-  - id: other_diagnosis
-    type: diagnosis
-    name: "Alternative Diagnosis - Not Acute Pancreatitis"
-    icd10: "R10.13"
-    urgency: medium
-    workup:
-      - Consider other causes of epigastric pain (PUD, biliary colic, cholecystitis, mesenteric ischemia, MI)
-      - CT abdomen/pelvis with contrast
-      - Upper endoscopy if PUD suspected
-      - Cardiac workup if chest pain component
-    treatment:
-      - Treat underlying cause
-      - Symptomatic management
-      - GI or surgery consultation as appropriate
-
-  - id: severity_assessment
-    type: question
-    text: "Severity stratification - Organ failure present?"
-    options:
-      - label: "Yes - Persistent organ failure >48 hours (shock requiring vasopressors, PaO2/FiO2 <300, Cr >2.0)"
-        next: severe_pancreatitis
-      - label: "No organ failure but local complications (necrosis, pseudocyst, abscess) OR transient organ failure <48 hours"
-        next: moderately_severe_pancreatitis
-      - label: "No organ failure and no local complications"
-        next: mild_pancreatitis
-
-  - id: severe_pancreatitis
-    type: diagnosis
-    name: "Severe Acute Pancreatitis with Persistent Organ Failure"
-    icd10: "K85.9"
-    urgency: critical
-    workup:
-      - Lipase and amylase (lipase >3x ULN diagnostic)
-      - CBC (elevated WBC, hemoconcentration if Hct >44%)
-      - CMP (elevated BUN, Cr, glucose, low calcium)
-      - LFTs (elevated AST/ALT/alk phos/bilirubin if gallstone etiology)
-      - Triglycerides (if >1000 mg/dL, may be cause)
-      - Lactate (>2.0 suggests poor perfusion)
-      - ABG (assess oxygenation and acid-base)
-      - CT abdomen/pelvis with IV contrast (AFTER resuscitation, delay 48-72hrs if possible to assess necrosis)
-      - Ultrasound abdomen (assess for gallstones, bile duct dilation)
-      - Chest X-ray (pleural effusions common)
-      - Ranson criteria (at admission and 48hrs)
-      - APACHE II score
-      - Bedside Index of Severity in Acute Pancreatitis (BISAP) score
-      - Modified CT Severity Index (MCTSI) if CT performed
-    treatment:
-      - ICU admission
-      - Aggressive IV fluid resuscitation (Lactated Ringer's preferred) - 250-500mL/hr initially, goal UOP 0.5-1mL/kg/hr
-      - Monitor for fluid overload (risk of ARDS and abdominal compartment syndrome)
-      - NPO initially, but early enteral nutrition preferred over TPN (start within 24-48hrs if tolerated)
-      - Nasojejunal feeding tube if unable to tolerate PO (better than TPN)
-      - Pain control (opioids are safe - morphine, hydromorphone, fentanyl)
-      - Antiemetics (ondansetron 4-8mg IV q8h PRN)
-      - Correct electrolyte abnormalities (calcium, magnesium)
-      - Oxygen therapy or mechanical ventilation if respiratory failure
-      - Vasopressors (norepinephrine) if fluid-refractory shock
-      - Antibiotics ONLY if infected necrosis confirmed (not prophylactic) - carbapenem (meropenem 1g IV q8h or imipenem-cilastatin 500mg IV q6h) or fluoroquinolone + metronidazole
-      - ERCP with sphincterotomy within 24 hours if acute cholangitis or biliary obstruction (do NOT perform routinely for gallstone pancreatitis without cholangitis)
-      - Cholecystectomy during same admission once recovered if gallstone etiology (usually after 2-3 weeks)
-      - Percutaneous or endoscopic drainage if infected necrosis or abscess
-      - Surgical debridement (necrosectomy) if failed percutaneous drainage or deterioration
-      - DVT prophylaxis (heparin SQ)
-      - Stress ulcer prophylaxis (PPI)
-      - Monitor for complications (ARDS, AKI, DIC, abdominal compartment syndrome, pancreatic necrosis, pseudocyst, abscess)
-
-  - id: moderately_severe_pancreatitis
-    type: diagnosis
-    name: "Moderately Severe Acute Pancreatitis"
-    icd10: "K85.9"
-    urgency: high
-    workup:
-      - Lipase and amylase
-      - CBC, CMP, LFTs
-      - Triglycerides
-      - Lactate
-      - RUQ ultrasound (gallstones)
-      - CT abdomen/pelvis with contrast (after 48-72hrs to assess necrosis and complications)
-      - BISAP score, Ranson criteria
-    treatment:
-      - Hospital admission (ICU or step-down if transient organ failure)
-      - Aggressive IV hydration (LR 250-500mL/hr initially, then adjust based on response)
-      - Goal-directed fluid therapy (avoid over-resuscitation)
-      - NPO until pain improving, then advance diet as tolerated
-      - Early oral/enteral nutrition within 24-48 hours if possible (low-fat solid diet better than clear liquids)
-      - Nasojejunal feeding if unable to tolerate PO
-      - Pain control (IV opioids, then transition to oral)
-      - Antiemetics PRN
-      - No prophylactic antibiotics unless cholangitis present
-      - ERCP within 24 hours ONLY if cholangitis or persistent biliary obstruction
-      - Monitor for development of local complications (pseudocyst, necrosis, abscess)
-      - CT follow-up if clinically worsening
-      - Cholecystectomy before discharge if gallstone pancreatitis (once clinically improved, usually 2-3 weeks)
-      - Alcohol cessation counseling if alcohol-induced
-      - Smoking cessation
-
-  - id: mild_pancreatitis
-    type: diagnosis
-    name: "Mild Acute Pancreatitis"
-    icd10: "K85.9"
-    urgency: high
-    workup:
-      - Lipase (>3x ULN)
-      - CBC, CMP, LFTs
-      - RUQ ultrasound (assess for gallstones)
-      - Triglycerides if no clear etiology
-      - BISAP score
-      - CT abdomen NOT routinely needed unless diagnosis uncertain or not improving after 48-72hrs
-    treatment:
-      - Hospital admission (floor bed)
-      - IV hydration (LR 150-300mL/hr, adjust based on response)
-      - Goal UOP 0.5-1 mL/kg/hr
-      - Early oral feeding as tolerated (start low-fat solid diet when pain improving, no need to wait for lipase to normalize)
-      - NPO only if severe nausea/vomiting or ileus
-      - Pain control - IV opioids initially (morphine 2-4mg IV q4h PRN or hydromorphone 0.5-1mg IV q4h PRN), transition to oral (oxycodone, hydrocodone)
-      - Antiemetics (ondansetron, promethazine)
-      - No antibiotics (not indicated for uncomplicated pancreatitis)
-      - Monitor for clinical deterioration
-      - ERCP NOT indicated unless cholangitis or persistent biliary obstruction
-      - Cholecystectomy before discharge if gallstone pancreatitis (index admission after recovery, usually 2-4 days)
-      - If unable to perform cholecystectomy, ERCP with sphincterotomy can be done to reduce recurrence risk until surgery
-      - Address underlying cause (stop alcohol, treat hypertriglyceridemia, stop offending medications)
-      - Outpatient GI follow-up
-      - Discharge when pain controlled on oral meds, tolerating diet, and afebrile
+name: Acute Pancreatitis
+family: Gastroenterology
+specialty: Gastroenterology
+chief_complaint: Severe epigastric pain radiating to back
+description: |
+  Acute inflammation of pancreas. Most common causes - gallstones (40%), alcohol (30%), hypertriglyceridemia (10%).
+  Mild (80%) vs severe (20% with organ failure or necrosis). Mortality 5-10% overall, 30% in severe cases.
+icd10: K85.9
+urgency: High
+workup:
+  - Diagnosis requires 2 of 3 criteria - characteristic pain, lipase or amylase >3x upper limit normal, imaging findings
+  - Lipase preferred over amylase (more specific, elevated longer)
+  - Complete metabolic panel (hypocalcemia poor prognostic sign, assess renal function)
+  - Liver enzymes (ALT >150 suggests gallstone etiology, AST >100 suggests alcohol)
+  - Triglycerides (>1000 mg/dL can cause pancreatitis)
+  - CT abdomen with IV contrast (only if diagnosis uncertain or assess complications after 48-72 hours)
+  - Abdominal ultrasound to assess for gallstones and bile duct dilation
+  - Ranson criteria or BISAP score to assess severity (predict mortality and ICU need)
+treatment:
+  - Aggressive IV fluid resuscitation with lactated Ringer's 250-500 mL/hr initially (reduces mortality and organ failure)
+  - Goal urine output >0.5 mL/kg/hr, avoid fluid overload
+  - NPO initially, advance diet when pain improving (low-fat diet, can start oral feeding within 24 hours if tolerating)
+  - Pain control with IV opioids (morphine, hydromorphone) titrated to effect
+  - Antiemetics including ondansetron for nausea
+  - No antibiotics unless infected necrosis confirmed (prophylactic antibiotics not beneficial)
+  - ERCP within 24 hours if concurrent cholangitis (fever, jaundice, elevated bilirubin)
+  - Cholecystectomy during same hospitalization if gallstone pancreatitis (prevent recurrence)
+  - Severe pancreatitis requires ICU monitoring, may need nutritional support (enteral preferred over parenteral)
+  - Necrosis managed conservatively unless infected (percutaneous or surgical drainage)
+clinical_pearls:
+  - Classic presentation includes sudden severe epigastric pain radiating to back, nausea, vomiting
+  - Cullen sign (periumbilical ecchymosis) and Grey Turner sign (flank ecchymosis) suggest hemorrhagic pancreatitis (rare, poor prognosis)
+  - GET SMASHED causes - Gallstones, Ethanol, Trauma, Steroids, Mumps, Autoimmune, Scorpion sting, Hyperlipidemia/Hypercalcemia, ERCP, Drugs
+  - Drugs causing pancreatitis include azathioprine, valproic acid, 6-mercaptopurine, furosemide, pentamidine, didanosine
+  - Early aggressive hydration (first 12-24 hours) reduces morbidity and mortality
+  - Avoid CT in first 48 hours (underestimates necrosis, allow time for inflammatory changes to evolve)
+differentials:
+  - Peptic ulcer disease (perforated)
+  - Acute cholecystitis
+  - Mesenteric ischemia
+  - Bowel obstruction
+  - Myocardial infarction
+  - Aortic dissection
+trace:
+  - Severe epigastric pain radiating to back with vomiting → Lipase 1200 U/L (>3x normal) → CT shows pancreatic edema → Diagnose acute pancreatitis → Abdominal ultrasound shows gallstones → Gallstone pancreatitis → Aggressive IV hydration with LR 250 mL/hr → NPO, IV morphine for pain → Check LFTs (ALT 180 suggests biliary etiology) → ERCP not needed (no cholangitis) → Pain improving day 3, advance to low-fat diet → Laparoscopic cholecystectomy before discharge → Discharge with low-fat diet instructions
