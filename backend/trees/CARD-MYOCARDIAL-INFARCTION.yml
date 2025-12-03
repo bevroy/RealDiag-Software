@@ -1,0 +1,67 @@
+tree_id: CARD-MYOCARDIAL-INFARCTION
+name: Myocardial Infarction (Heart Attack)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest pain and shortness of breath
+description: |
+  Acute coronary syndrome (ACS) caused by rupture of atherosclerotic plaque with thrombotic occlusion of coronary artery. Results in myocardial necrosis.
+  STEMI (ST-elevation MI) involves complete occlusion requiring immediate reperfusion. NSTEMI (non-ST elevation MI) involves partial occlusion. Leading cause of death worldwide. Time is muscle - rapid treatment critical.
+icd10: I21.9
+urgency: Critical
+workup:
+  - Clinical presentation - acute chest pain (pressure, tightness, heaviness), often radiates to left arm, jaw, neck, back, epigastrium
+  - Associated symptoms - dyspnea, diaphoresis, nausea, lightheadedness
+  - Atypical presentations common in elderly, women, diabetics - dyspnea without chest pain, fatigue, weakness
+  - ECG immediate (within 10 minutes of arrival) - diagnostic for STEMI
+  - STEMI - ST elevation at least 1 mm in two contiguous leads (at least 2 mm in V2-V3), new LBBB
+  - NSTEMI/unstable angina - ST depression, T wave inversion, or normal ECG
+  - Posterior MI - tall R waves and ST depression V1-V3 (need posterior leads V7-V9)
+  - Right ventricular MI - ST elevation V1, V4R (complicates inferior MI)
+  - Cardiac biomarkers - troponin I or T most sensitive and specific
+  - Troponin rises 3-4 hours after symptom onset, peaks 24 hours, elevated x 1-2 weeks
+  - High-sensitivity troponin allows earlier detection (0 and 1-2 hour protocol)
+  - CK-MB less specific, rises and falls faster than troponin
+  - Chest X-ray - assess for pulmonary edema, aortic dissection, pneumothorax
+  - Echocardiogram - assess wall motion abnormalities, LV function, mechanical complications (VSR, papillary muscle rupture, free wall rupture)
+  - Coronary angiography - defines anatomy, guides revascularization
+treatment:
+  - STEMI - immediate reperfusion goal door-to-balloon less than 90 minutes (PCI) or door-to-needle less than 30 minutes (fibrinolysis)
+  - Primary PCI (percutaneous coronary intervention) preferred if available - angioplasty and stent placement
+  - Fibrinolysis if PCI not available within 120 minutes and symptom onset less than 12 hours
+  - Alteplase (tPA), reteplase, or tenecteplase
+  - Contraindications - prior ICH, ischemic stroke less than 3 months, active bleeding, suspected aortic dissection
+  - NSTEMI/unstable angina - risk stratification (TIMI or GRACE score)
+  - High-risk (elevated troponin, ST changes, GRACE greater than 140) - early invasive strategy (angiography within 24 hours)
+  - Low-risk - conservative strategy with medical management, consider angiography if ischemia on stress test
+  - MONA mnemonic for initial treatment
+  - Morphine 4-8mg IV for pain (avoid in NSTEMI, associated with worse outcomes)
+  - Oxygen only if hypoxic (SpO2 less than 90%) - excess oxygen harmful
+  - Nitroglycerin 0.4mg SL q5min x 3 doses or IV infusion (contraindicated if right ventricular infarct, recent sildenafil use, SBP less than 90)
+  - Aspirin 162-325mg chewed immediately (then 81mg daily lifelong)
+  - Dual antiplatelet therapy (DAPT) - aspirin plus P2Y12 inhibitor
+  - Ticagrelor 180mg load then 90mg BID (preferred, no PPI interaction) or prasugrel 60mg load then 10mg daily (avoid if prior stroke, age greater than 75, weight less than 60kg)
+  - Clopidogrel 600mg load then 75mg daily if ticagrelor/prasugrel contraindicated
+  - Continue DAPT x 12 months minimum after ACS
+  - Anticoagulation - heparin (unfractionated or enoxaparin) during acute phase
+  - Beta-blocker within 24 hours if no contraindications - metoprolol 25-50mg BID, target HR 50-60
+  - High-intensity statin regardless of LDL - atorvastatin 80mg daily or rosuvastatin 40mg daily
+  - ACE inhibitor (or ARB if intolerant) especially if anterior MI, LV dysfunction, heart failure, diabetes - lisinopril 2.5-5mg daily, titrate to target
+  - Aldosterone antagonist if LVEF less than 40% and heart failure or diabetes - spironolactone 25mg daily or eplerenone 25-50mg daily
+  - Complications - cardiogenic shock, heart failure, arrhythmias (VT/VF, heart block), mechanical (VSR, papillary muscle rupture, free wall rupture, LV aneurysm), pericarditis (Dressler syndrome)
+  - Cardiac rehabilitation - supervised exercise, risk factor modification, psychological support
+clinical_pearls:
+  - Golden hour - mortality increases 7.5% for every 30-minute delay in reperfusion
+  - Killip classification predicts mortality - I (no heart failure) 6%, II (rales, S3) 17%, III (pulmonary edema) 38%, IV (cardiogenic shock) 81%
+  - Right ventricular infarction - hypotension with clear lungs, JVD, avoid nitrates and diuretics (preload dependent), give IV fluids
+  - Wellens syndrome - biphasic or deeply inverted T waves V2-V4, proximal LAD stenosis, high risk for anterior MI
+  - Reinfarction or recurrent ischemia - repeat ECG and troponin, urgent angiography
+  - Women and diabetics higher mortality, more atypical presentations
+differentials:
+  - Unstable angina
+  - Aortic dissection
+  - Pulmonary embolism
+  - Pericarditis
+  - Gastroesophageal reflux disease
+  - Pneumothorax
+trace:
+  - 58-year-old man with sudden onset substernal chest pressure radiating to left arm x 45 minutes → Associated dyspnea, diaphoresis, nausea → Risk factors - hypertension, hyperlipidemia, smoking → BP 155/90, HR 95, oxygen saturation 94% → ECG shows 3 mm ST elevation leads II, III, aVF (inferior STEMI), 1 mm ST elevation V4R (RV involvement) → Aspirin 325mg chewed, ticagrelor 180mg, heparin bolus → Activate cath lab → Troponin I 8.2 ng/mL (elevated) → Emergent coronary angiography shows 100% occlusion proximal right coronary artery → Primary PCI with drug-eluting stent placement, door-to-balloon 65 minutes → TIMI 3 flow restored → Start metoprolol 25mg BID, atorvastatin 80mg, lisinopril 5mg daily → Echo shows LVEF 45%, inferior wall hypokinesis, no mechanical complications → Continue aspirin 81mg and ticagrelor 90mg BID x 12 months → Cardiac rehabilitation referral → Smoking cessation, lifestyle modifications → LVEF improves to 52% at 3-month follow-up
