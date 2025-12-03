@@ -1,127 +1,113 @@
 tree_id: PSYCH-ADHD
-name: ADHD Evaluation
-family: PSYCHIATRY
-specialty: Psychiatry, Pediatrics, Neurology
-chief_complaint: Inattention, Hyperactivity, Impulsivity, Poor Focus
-description: Evaluation and management of attention-deficit/hyperactivity disorder
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: adhd_evaluation
-
-nodes:
-  - id: adhd_evaluation
-    type: question
-    text: "ADHD subtype?"
-    options:
-      - label: "Predominantly inattentive"
-        next: inattentive_type
-      - label: "Predominantly hyperactive-impulsive"
-        next: hyperactive_type
-      - label: "Combined type"
-        next: combined_type
-
-  - id: inattentive_type
-    type: diagnosis
-    name: "ADHD - Predominantly Inattentive"
-    icd10: "F90.0"
-    urgency: low
-    workup:
-      - ADHD - Neurodevelopmental disorder, persistent pattern of inattention and/or hyperactivity-impulsivity
-      - Prevalence - 5-10% children, 2-5% adults
-      - Onset - Symptoms present before age 12 (DSM-5 criteria)
-      - Neurobiological - Dopamine/norepinephrine dysregulation, prefrontal cortex hypofunction
-      - Genetic component strong (heritability 70-80%)
-      - Inattentive type - ≥6 inattention symptoms (≥5 if age ≥17)
-      - Symptoms - Fails to give close attention to details (careless mistakes), difficulty sustaining attention (tasks, conversations), does not seem to listen when spoken to directly, does not follow through on instructions (fails to finish tasks), difficulty organizing tasks/activities, avoids tasks requiring sustained mental effort (homework, paperwork), loses things (keys, phone, paperwork), easily distracted by extraneous stimuli, forgetful in daily activities
-      - Fewer than 6 hyperactive-impulsive symptoms
-      - Presentation - "Daydreamer," poor academic/work performance, disorganized, forgetful
-      - More common in girls (vs. hyperactive type more common boys)
-      - Often diagnosed later (less disruptive than hyperactive type)
-      - Differential diagnosis
-      - Learning disabilities - Dyslexia, dyscalculia (specific deficits, ADHD global inattention)
-      - Anxiety/depression - Can cause inattention (treat underlying mood disorder)
-      - Sleep disorders - Sleep apnea, insufficient sleep (daytime inattention)
-      - Substance use - Cannabis, alcohol
-      - Medical - Thyroid disorder, anemia, lead poisoning
-      - Medications - Antihistamines, benzodiazepines
-      - DSM-5 diagnostic criteria - Requires
-      - ≥6 inattention symptoms (≥5 if age ≥17) present ≥6 months
-      - Symptoms present before age 12
-      - Symptoms present in ≥2 settings (home, school/work, social)
-      - Clear evidence symptoms interfere with functioning
-      - Not better explained by another disorder
-      - Assessment
-      - Clinical interview - Patient and collateral (parents, teachers, spouse)
-      - Rating scales - Vanderbilt (children), Conners, ADHD Rating Scale IV, Adult ADHD Self-Report Scale (ASRS)
-      - School/work performance - Report cards, evaluations
-      - Rule out comorbidities - Oppositional defiant disorder (50%), learning disabilities (30%), anxiety (30%), depression (20%)
-      - Medical workup - NOT routinely required (thyroid, lead if clinically indicated)
-    treatment:
-      - Behavioral therapy - First-line for preschool age (<6 years), adjunct for all ages
-      - Parent training (positive reinforcement, structure, routines)
-      - Behavioral classroom interventions (organizational skills, homework support)
-      - CBT (adults, adolescents) - Time management, organization, emotional regulation
-      - Pharmacotherapy - First-line for school-age children, adolescents, adults
-      - Stimulants - MOST EFFECTIVE (70-80% respond)
-      - Methylphenidate - Ritalin (short-acting 3-4 hours), Concerta (long-acting 12 hours), Daytrana (patch)
-      - Start 5-10 mg BID (short-acting) or 18 mg daily (long-acting)
-      - Titrate to effect (typical dose 0.5-1 mg/kg/day)
-      - Amphetamines - Adderall (mixed amphetamine salts 4-6 hours), Adderall XR (12 hours), Vyvanse (lisdexamfetamine, prodrug 12-14 hours)
-      - Start 5-10 mg daily, titrate to 20-60 mg
-      - Mechanism - Increase dopamine/norepinephrine release
-      - Side effects - Decreased appetite (growth concerns children, monitor height/weight), insomnia (take morning/afternoon, NOT evening), irritability/"rebound" (when wears off), headache, stomach ache, increased heart rate/BP (monitor BP), tics (usually mild, 10%)
-      - Rare - Sudden cardiac death (no increased risk in healthy individuals, but screen for cardiac disease, family history sudden death)
-      - Contraindications - Severe cardiovascular disease, uncontrolled hypertension, hyperthyroidism, glaucoma, concurrent MAOI
-      - Caution - Tics (may worsen, but often transient), substance use disorder (diversion risk, consider non-stimulants)
-      - Non-stimulants - Second-line (if stimulant failed, contraindication, substance use risk, preference)
-      - Atomoxetine (Strattera) - Norepinephrine reuptake inhibitor
-      - 0.5 mg/kg/day initially, increase to 1.2 mg/kg/day (max 100 mg)
-      - Takes 4-6 weeks full effect (vs. stimulants work day 1)
-      - Advantages - Not controlled substance (no abuse potential), 24-hour coverage, helps anxiety
-      - Side effects - Decreased appetite, GI upset, fatigue, dizziness
-      - Black box warning - Suicidal ideation children/adolescents (rare, monitor)
-      - Guanfacine XR (Intuniv), clonidine XR (Kapvay) - Alpha-2 agonists
-      - Lower blood pressure, reduce hyperactivity/impulsivity (less effect on inattention)
-      - Useful adjunct to stimulants, or monotherapy
-      - Side effects - Sedation, hypotension, bradycardia, rebound hypertension if stopped abruptly
-      - Bupropion (Wellbutrin) - Off-label, norepinephrine-dopamine reuptake inhibitor
-      - 150-300 mg daily
-      - Modest efficacy, useful if comorbid depression
-      - Monitoring - Follow-up every 3-6 months, assess symptom control, side effects, growth (children), BP/HR, diversion concerns
-      - Combination therapy - Stimulant + behavioral therapy superior to either alone
-      - Adults - Stimulants first-line (methylphenidate or amphetamines), non-stimulants if contraindication
-      - Prognosis - 50-80% children continue symptoms into adulthood (may be less impairing)
-      - Increased risk - Academic underachievement, unemployment, relationship difficulties, substance use disorders, motor vehicle accidents
-      - Treatment improves outcomes
-
-  - id: hyperactive_type
-    type: diagnosis
-    name: "ADHD - Predominantly Hyperactive-Impulsive"
-    icd10: "F90.1"
-    urgency: low
-    workup:
-      - Hyperactive-impulsive type - ≥6 hyperactive-impulsive symptoms (≥5 if age ≥17), fewer than 6 inattention symptoms
-      - Symptoms hyperactivity - Fidgets with hands/feet or squirms in seat, leaves seat when remaining seated expected, runs about/climbs excessively (restless in adults), unable to play quietly, "on the go" or acts as if "driven by a motor," talks excessively
-      - Symptoms impulsivity - Blurts out answers before question completed, difficulty waiting turn, interrupts or intrudes on others
-      - Presentation - Disruptive, "can't sit still," talks excessively, interrupts
-      - More common boys (3:1 vs. girls)
-      - Often diagnosed earlier (more disruptive than inattentive)
-      - Comorbidities - Oppositional defiant disorder 50%, conduct disorder 20%
-    treatment:
-      - Same as inattentive type - Behavioral therapy + stimulants first-line
-      - Alpha-2 agonists (guanfacine, clonidine) particularly helpful for hyperactivity/impulsivity
-
-  - id: combined_type
-    type: diagnosis
-    name: "ADHD - Combined Type"
-    icd10: "F90.2"
-    urgency: low
-    workup:
-      - Combined type - ≥6 inattention symptoms AND ≥6 hyperactive-impulsive symptoms (most common subtype)
-      - Symptoms - Mix of inattention + hyperactivity/impulsivity (see above)
-      - Presentation - Disorganized, forgetful, restless, impulsive
-      - Most impairing subtype
-    treatment:
-      - Same as above - Behavioral therapy + stimulants
-      - May require combination pharmacotherapy (stimulant + alpha-2 agonist) for comprehensive symptom control
+name: Attention-Deficit/Hyperactivity Disorder (ADHD)
+family: psychiatric
+specialty: Psychiatry/Pediatrics
+chief_complaint: Inattention, hyperactivity, impulsivity affecting function
+description: Neurodevelopmental disorder characterized by persistent inattention and/or hyperactivity-impulsivity
+icd10: F90.9
+urgency: routine
+workup:
+  - Clinical diagnosis based on DSM-5 criteria
+  - Age of onset before age 12 years
+  - Symptoms present in 2 or more settings (home, school, work, social)
+  - Symptoms interfere with or reduce quality of functioning
+  - Not better explained by another disorder
+  - Inattentive presentation - 6+ symptoms (5+ if age 17+) of inattention for 6+ months
+  - Fails to give close attention to details, difficulty sustaining attention, does not listen, fails to finish tasks, difficulty organizing, avoids sustained mental effort, loses things, easily distracted, forgetful
+  - Hyperactive-impulsive presentation - 6+ symptoms (5+ if age 17+) for 6+ months
+  - Fidgets, leaves seat, runs/climbs inappropriately, cannot play quietly, on the go, talks excessively, blurts out answers, difficulty waiting turn, interrupts
+  - Combined presentation - meets criteria for both inattentive and hyperactive-impulsive
+  - Rating scales - Vanderbilt Assessment (parents, teachers), Conners scales, ADHD Rating Scale
+  - Comprehensive history including prenatal, developmental, family, educational
+  - Screen for comorbid conditions - learning disabilities, anxiety, depression, oppositional defiant disorder, conduct disorder
+  - Physical examination - growth parameters, vital signs, cardiovascular exam, neurological exam
+  - Vision and hearing screening (rule out sensory deficits)
+  - Thyroid function tests if symptoms suggest hypothyroidism
+  - ECG if personal or family history of cardiac disease before starting stimulants
+  - Lead level if risk factors for lead exposure
+  - No routine neuroimaging or EEG unless focal neurological findings
+treatment:
+  - Multimodal approach - medication plus behavioral interventions
+  - Behavioral therapy
+  - Parent training in behavior management (especially for preschool age)
+  - School accommodations (504 plan or IEP) - extended time, preferred seating, breaks
+  - Organizational skills training, time management strategies
+  - Cognitive behavioral therapy for adolescents and adults
+  - Pharmacotherapy (first-line for moderate-severe ADHD)
+  - Stimulant medications - first-line, 70-80% response rate
+  - Methylphenidate formulations - immediate release (Ritalin) 5-20 mg BID-TID, extended release (Concerta, Ritalin LA) 18-72 mg daily
+  - Amphetamine formulations - mixed amphetamine salts (Adderall) IR 5-30 mg BID, XR 5-30 mg daily, lisdexamfetamine (Vyvanse) 30-70 mg daily
+  - Start low, titrate to effect, monitor for side effects
+  - Non-stimulant medications - second-line or if stimulants contraindicated/not tolerated
+  - Atomoxetine (Strattera) 40-100 mg daily (takes 4-6 weeks for full effect)
+  - Guanfacine XR (Intuniv) 1-4 mg daily
+  - Clonidine XR (Kapvay) 0.1-0.4 mg daily
+  - Bupropion 150-300 mg daily (off-label)
+  - Monitor response with rating scales, academic performance, social functioning
+  - Monitor side effects - decreased appetite, weight loss, insomnia, tics, blood pressure, heart rate
+  - Height and weight monitoring every 3-6 months in children
+  - Periodic drug holidays (weekends, summers) controversial - consider if significant side effects
+  - Avoid use of stimulants in structural cardiac abnormalities, uncontrolled hypertension
+clinical_pearls:
+  - Prevalence 5-10% in children, 2.5% in adults (often persists into adulthood)
+  - Male-to-female ratio 2-3:1 in children (inattentive type more common in girls)
+  - ADHD is highly heritable (heritability 70-80%)
+  - Not caused by poor parenting, too much sugar, or excessive screen time (myths)
+  - Combined presentation most common (62%), inattentive only (31%), hyperactive-impulsive only (7%)
+  - Hyperactivity often decreases with age, inattention persists
+  - High comorbidity - 50-60% have at least one other disorder (ODD, anxiety, depression, learning disability)
+  - Stimulant medications have low abuse potential when used as prescribed at therapeutic doses
+  - Medication does NOT increase risk of substance abuse - untreated ADHD increases risk
+  - Academic underachievement common despite normal or high intelligence
+  - Increased risk of motor vehicle accidents in adolescents/adults with ADHD
+differentials:
+  - Normal developmental behavior (younger children have shorter attention spans)
+  - Anxiety disorders (inattention secondary to worry)
+  - Depression (poor concentration, psychomotor agitation or retardation)
+  - Bipolar disorder (episodic mood changes, distinct periods)
+  - Learning disabilities (inattention specific to certain subjects)
+  - Sleep disorders (daytime hyperactivity/inattention from poor sleep)
+  - Hearing or vision impairment
+  - Autism spectrum disorder (social communication deficits, restricted interests)
+  - Thyroid disorder (hyperthyroidism can mimic hyperactivity)
+  - Substance abuse (can cause attention problems)
+trace:
+  - 8-year-old boy referred by school for evaluation of academic difficulties and behavioral problems
+  - Teacher reports he is constantly out of his seat, talks excessively, interrupts others, does not complete assignments
+  - Difficulty following multi-step directions, loses homework and supplies frequently
+  - Bright child but grades declining, requiring frequent redirection
+  - Symptoms present since kindergarten but worsening with increased academic demands
+  - Parents report similar behaviors at home - difficulty with homework, forgetful, loses things, constantly moving
+  - Cannot sit through dinner, interrupts conversations, impulsive (runs into street)
+  - Past medical history - uncomplicated pregnancy and delivery, normal developmental milestones
+  - No history of head trauma, seizures, lead exposure
+  - Family history - father had similar symptoms as child, never diagnosed
+  - Physical exam - well-appearing, active child, vitals normal including BP and HR
+  - Height/weight at 50th percentile
+  - Cardiovascular exam normal, no murmurs, regular rate and rhythm
+  - Neurological exam normal, no focal deficits
+  - Vision and hearing screening normal
+  - Parent and teacher Vanderbilt scales completed
+  - Parent scale - 8 inattention symptoms, 7 hyperactive-impulsive symptoms (meets criteria for both)
+  - Teacher scale - 8 inattention symptoms, 9 hyperactive-impulsive symptoms
+  - Both indicate significant impairment in academic performance and peer relationships
+  - Diagnosis - ADHD, combined presentation
+  - Treatment plan discussed with parents
+  - Referral to psychologist for behavioral therapy and parent training
+  - School meeting arranged for 504 plan accommodations
+  - Started methylphenidate XR (Concerta) 18 mg each morning
+  - Education provided on ADHD, medication effects and side effects
+  - 2-week follow-up - parents report significant improvement in ability to complete homework
+  - Eating breakfast before school now, no appetite at lunch but good dinner
+  - No sleep difficulties
+  - 4-week follow-up - teacher reports marked improvement in attention and behavior
+  - Completing assignments, fewer interruptions, staying seated
+  - Increased dose to 27 mg given continued mild symptoms
+  - 8-week follow-up - continued improvement on 27 mg dose
+  - Grades improving, teacher very pleased with progress
+  - Side effects - decreased appetite at lunch (given medication holiday on weekends to allow catch-up eating)
+  - Height and weight stable, growing along curve
+  - 6-month follow-up - doing well academically and behaviorally on stable dose
+  - 504 plan in place with accommodations (preferential seating, extended time on tests)
+  - Attending behavioral therapy monthly, using reward systems at home
+  - Outcome - Significant improvement with multimodal treatment, better functioning at school and home

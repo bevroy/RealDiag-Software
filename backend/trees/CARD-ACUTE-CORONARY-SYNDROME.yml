@@ -1,46 +1,114 @@
 tree_id: CARD-ACUTE-CORONARY-SYNDROME
-name: Acute Coronary Syndrome
-family: Cardiology
-specialty: Cardiology
-chief_complaint: Chest pain and dyspnea
-description: |
-  Spectrum of coronary artery disease from unstable angina to STEMI. Caused by plaque rupture with thrombosis.
-  STEMI (ST-elevation MI), NSTEMI (non-ST-elevation MI), unstable angina. Leading cause of death worldwide.
+name: Acute Coronary Syndrome (ACS)
+family: cardiovascular
+specialty: Cardiology/Emergency Medicine
+chief_complaint: Chest pain or pressure, shortness of breath, diaphoresis
+description: Spectrum of acute myocardial ischemia ranging from unstable angina to STEMI
 icd10: I24.9
-urgency: Critical
+urgency: emergency
 workup:
-  - ECG within 10 minutes of presentation (STEMI shows ST elevation in 2+ contiguous leads, new LBBB)
-  - Cardiac troponin at presentation and 3-6 hours later (elevated in MI, normal in unstable angina)
-  - NSTEMI shows ST depression, T wave inversion, or non-specific changes with positive troponin
-  - Complete blood count, basic metabolic panel, lipid panel, coagulation studies
-  - Chest X-ray to rule out other causes (aortic dissection, pneumothorax, pneumonia)
-  - Echocardiogram to assess wall motion abnormalities and ejection fraction
-  - Coronary angiography for definitive diagnosis and revascularization
+  - Immediate assessment - within 10 minutes of presentation
+  - Brief focused history - chest pain characteristics (onset, quality, duration, radiation, associated symptoms)
+  - STEMI equivalents - diaphoresis, dyspnea, nausea, vomiting, syncope (especially in elderly, women, diabetics)
+  - Risk factors - age, smoking, diabetes, hypertension, hyperlipidemia, family history
+  - Physical examination - vitals (hypotension, tachycardia), signs of heart failure, murmur (acute MR from papillary muscle rupture)
+  - 12-lead ECG within 10 minutes - CRITICAL
+  - STEMI - ST elevation greater than 1 mm in 2+ contiguous leads, new LBBB
+  - NSTEMI - ST depression, T wave inversion, or non-diagnostic ECG with positive biomarkers
+  - Unstable angina - symptoms at rest, no ST elevation, negative biomarkers
+  - Cardiac biomarkers
+  - Troponin I or T (preferred) - detectable 3-4 hours, peaks 12-24 hours, elevated up to 7-14 days
+  - High-sensitivity troponin - detectable earlier (1-2 hours), requires serial measurements
+  - Repeat at 3-6 hours if initial negative but clinical suspicion high
+  - CK-MB less specific than troponin
+  - Complete blood count, comprehensive metabolic panel, lipid panel, coagulation studies
+  - Chest X-ray (pulmonary edema, widened mediastinum)
+  - Echocardiography (wall motion abnormalities, complications)
 treatment:
-  - STEMI treatment - immediate reperfusion therapy (door-to-balloon time <90 minutes preferred)
-  - Primary PCI (percutaneous coronary intervention) preferred over fibrinolysis if available within 120 minutes
-  - Fibrinolysis if PCI not available (alteplase, tenecteplase) - give within 12 hours of symptom onset
-  - Aspirin 325mg chewed immediately (reduces mortality 20-25%)
-  - P2Y12 inhibitor - clopidogrel 600mg, ticagrelor 180mg, or prasugrel 60mg loading dose
-  - Anticoagulation - heparin bolus 60 units/kg (max 4000 units) then infusion, or enoxaparin 1 mg/kg SC q12h
-  - Beta-blocker (metoprolol 25-50mg PO) within 24 hours if no contraindications
-  - High-intensity statin (atorvastatin 80mg or rosuvastatin 40mg)
-  - ACE inhibitor (lisinopril 2.5-5mg) if anterior MI, EF <40%, hypertension, or diabetes
-  - Nitroglycerin for ongoing chest pain (sublingual or IV drip)
-  - Morphine for refractory pain
+  - STEMI - time is muscle, door-to-balloon less than 90 minutes for PCI
+  - Activate cardiac catheterization lab immediately
+  - Primary PCI (percutaneous coronary intervention) preferred if available within 120 minutes
+  - Fibrinolysis if PCI not available within 120 minutes (door-to-needle less than 30 minutes)
+  - Alteplase, reteplase, or tenecteplase
+  - Contraindications - prior ICH, ischemic stroke within 3 months, active bleeding, aortic dissection
+  - Immediate medications (MONA plus antiplatelet/anticoagulation)
+  - Morphine 2-4 mg IV for pain (use judiciously, may worsen outcomes)
+  - Oxygen if SpO2 less than 90% (avoid routine oxygen if saturation normal)
+  - Nitroglycerin 0.4 mg sublingual every 5 minutes x3, then IV infusion if ongoing pain
+  - Contraindications - hypotension, right ventricular infarction, PDE5 inhibitor use within 24-48 hours
+  - Aspirin 162-325 mg chewed immediately (loading dose)
+  - Dual antiplatelet therapy (DAPT)
+  - Aspirin 325 mg loading then 81 mg daily maintenance
+  - P2Y12 inhibitor - clopidogrel 600 mg loading (or ticagrelor 180 mg, prasugrel 60 mg) then maintenance
+  - Ticagrelor 90 mg BID preferred over clopidogrel (more potent)
+  - Anticoagulation
+  - Heparin unfractionated IV bolus 60 U/kg (max 4000 U) then infusion 12 U/kg/hr
+  - Or enoxaparin 1 mg/kg SC every 12 hours
+  - Beta-blocker (within 24 hours if stable, no heart failure/hypotension)
+  - Metoprolol 25-50 mg PO BID or IV 5 mg every 5 minutes x3
+  - ACE inhibitor within 24 hours (especially if anterior MI, EF less than 40%, diabetes, hypertension)
+  - Lisinopril 2.5-5 mg daily, titrate up
+  - High-intensity statin - atorvastatin 80 mg or rosuvastatin 40 mg daily
+  - NSTEMI/Unstable angina - risk stratification
+  - GRACE or TIMI risk scores
+  - High risk - invasive strategy (cardiac catheterization within 24 hours)
+  - Low-intermediate risk - ischemia-guided strategy or invasive within 72 hours
+  - Complications - arrhythmias (VT/VF, heart block), cardiogenic shock, mechanical complications (free wall rupture, VSR, acute MR), pericarditis
 clinical_pearls:
-  - Classic presentation includes substernal chest pressure radiating to left arm or jaw, associated with dyspnea, diaphoresis, nausea
-  - Atypical presentations more common in women, elderly, diabetics (dyspnea, fatigue, epigastric pain)
-  - STEMI criteria include ST elevation at J point in 2+ contiguous leads (greater than 1mm in limb leads, greater than 2mm in precordial leads)
-  - Sgarbossa criteria help diagnose MI in presence of LBBB
-  - Killip classification predicts mortality - Class I (no heart failure), II (rales, S3), III (pulmonary edema), IV (cardiogenic shock)
-  - Complications include arrhythmias, heart failure, mechanical (papillary muscle rupture, VSD, free wall rupture), pericarditis
+  - Classic chest pain - substernal pressure, squeezing, radiating to left arm or jaw, 10-20 minutes duration
+  - Women, elderly, diabetics may present with atypical symptoms (no chest pain, just dyspnea or fatigue)
+  - STEMI treated with PCI has 3-5% mortality, with fibrinolysis 6-7%, without reperfusion 15-20%
+  - Time to reperfusion is critical - every 30 minute delay increases mortality
+  - Right ventricular infarction (inferior STEMI with RV involvement) - hypotension, elevated JVP, clear lungs
+  - Requires IV fluids, avoid nitrates and diuretics
+  - Wellens syndrome - biphasic or deeply inverted T waves in V2-V3, indicates critical LAD stenosis
+  - High risk for anterior STEMI within days-weeks, urgent catheterization
+  - Post-MI medications - aspirin lifelong, P2Y12 inhibitor 12 months, beta-blocker, ACE/ARB, statin
+  - Cardiac rehabilitation improves outcomes - enroll all post-MI patients
 differentials:
-  - Aortic dissection
-  - Pulmonary embolism
-  - Pneumothorax
-  - Pericarditis
-  - Gastroesophageal reflux disease
-  - Costochondritis
+  - Aortic dissection (tearing pain radiating to back, pulse differential, widened mediastinum)
+  - Pulmonary embolism (dyspnea, pleuritic chest pain, DVT risk factors, elevated D-dimer)
+  - Pericarditis (pleuritic chest pain, worse with lying flat, better leaning forward, friction rub)
+  - Pneumothorax (sudden dyspnea, unilateral decreased breath sounds, hyperresonance)
+  - GERD (burning chest pain, relieved with antacids, no ECG changes)
+  - Costochondritis (chest wall tenderness, reproducible with palpation)
+  - Anxiety/panic attack (younger patient, hyperventilation, no cardiac risk factors)
 trace:
-  - Severe substernal chest pressure radiating to left arm x 30 minutes → ECG shows ST elevation in V2-V5 → Aspirin 325mg chewed, ticagrelor 180mg, heparin bolus → Diagnose anterior STEMI → Activate cath lab, door-to-balloon 65 minutes → PCI with stent to LAD → Start metoprolol, atorvastatin 80mg, lisinopril → Dual antiplatelet therapy x 12 months → Cardiac rehab referral
+  - 58-year-old man with history of hypertension and hyperlipidemia presents to ED via EMS with chest pain
+  - Sudden onset severe substernal chest pressure 90 minutes ago while shoveling snow
+  - Pain 10/10, radiating to left arm and jaw, associated with diaphoresis, nausea
+  - EMS gave aspirin 324 mg, oxygen, sublingual nitroglycerin with minimal relief
+  - Past medical history - hypertension, hyperlipidemia, 30-pack-year smoking history
+  - Medications - lisinopril, simvastatin (non-compliant)
+  - Family history - father MI at age 55
+  - Physical exam on arrival - appears distressed, diaphoretic, pale
+  - Vitals - BP 160/95, HR 102, RR 22, SpO2 94% on 4L NC, temp 37.0C
+  - Cardiac exam - tachycardic regular rhythm, no murmurs, JVP not elevated
+  - Lung exam - bibasilar crackles
+  - 12-lead ECG (obtained 8 minutes after arrival) - ST elevation 3-4 mm in V2-V4, I, aVL (anterolateral STEMI)
+  - Diagnosis - Acute ST-elevation myocardial infarction (STEMI), anterolateral
+  - Code STEMI activated, cardiac catheterization lab mobilized
+  - Door-to-balloon goal less than 90 minutes
+  - Immediate treatment initiated
+  - Aspirin 325 mg chewed (already given by EMS)
+  - Ticagrelor 180 mg loading dose PO
+  - Heparin IV bolus 4000 units followed by infusion
+  - Nitroglycerin IV infusion started for ongoing chest pain
+  - Taken emergently to cardiac catheterization lab
+  - Coronary angiography - 100% occlusion of proximal LAD (culprit lesion), 70% stenosis RCA, 50% stenosis LCx
+  - Primary PCI to LAD - balloon angioplasty, drug-eluting stent placed with TIMI 3 flow restored
+  - Door-to-balloon time 72 minutes (excellent)
+  - Post-procedure - chest pain resolved, repeat ECG shows resolution of ST elevations
+  - Admitted to CCU for monitoring
+  - Started on metoprolol 25 mg BID, lisinopril 5 mg daily, atorvastatin 80 mg daily
+  - Continued aspirin 81 mg daily, ticagrelor 90 mg BID (DAPT for 12 months)
+  - Echocardiogram day 2 - EF 45% (reduced), anterior wall hypokinesis, no mechanical complications
+  - Hospital course uncomplicated, no arrhythmias, no heart failure
+  - Discharged day 3 with medication reconciliation and education
+  - Enrolled in cardiac rehabilitation program
+  - Smoking cessation counseling, nicotine replacement therapy
+  - Follow-up with cardiologist in 2 weeks
+  - 6-week follow-up - doing well, attending cardiac rehab 3 times per week
+  - Quit smoking, tolerating medications well
+  - Repeat echo - EF improved to 50%
+  - Outcome - Successful primary PCI with good recovery, excellent compliance with secondary prevention
