@@ -1,173 +1,98 @@
 tree_id: ALLERGY-ANAPHYLAXIS
-name: Anaphylaxis Management
-family: ALLERGY_IMMUNOLOGY
-specialty: Allergy/Immunology, Emergency Medicine
-chief_complaint: Acute Allergic Reaction, Difficulty Breathing, Urticaria, Angioedema, Hypotension
-description: Comprehensive evaluation and management of anaphylaxis and severe allergic reactions
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: anaphylaxis_presentation
-
-nodes:
-  - id: anaphylaxis_presentation
-    type: question
-    text: "Severity of allergic reaction?"
-    options:
-      - label: "Anaphylaxis (life-threatening)"
-        next: anaphylaxis
-      - label: "Severe allergic reaction (not anaphylaxis)"
-        next: severe_allergic_reaction
-      - label: "Post-stabilization management"
-        next: post_anaphylaxis_management
-
-  - id: anaphylaxis
-    type: diagnosis
-    name: "Anaphylaxis"
-    icd10: "T78.2"
-    urgency: critical
-    workup:
-      - Definition - Severe, life-threatening systemic hypersensitivity reaction
-      - Rapid onset (minutes to hours), multi-system involvement
-      - Biphasic reaction - 5-20% have second wave of symptoms 4-12 hours later (up to 72 hours)
-      - Clinical criteria for anaphylaxis (ANY ONE sufficient for diagnosis)
-      - Criterion 1 - Acute onset (minutes-hours) with skin/mucosal involvement (urticaria, pruritus, flushing, angioedema) PLUS at least one of:
-      - Respiratory compromise (dyspnea, wheeze, stridor, hypoxia)
-      - Hypotension or end-organ dysfunction (syncope, collapse, incontinence)
-      - Criterion 2 - Two or more of following rapidly after likely allergen exposure:
-      - Skin/mucosal (urticaria, angioedema)
-      - Respiratory (wheeze, stridor)
-      - Hypotension/syncope
-      - GI symptoms (cramping, vomiting, diarrhea)
-      - Criterion 3 - Hypotension after exposure to KNOWN allergen
-      - Adults SBP <90 or >30% decrease from baseline
-      - Children - Age-specific low BP or >30% decrease
-      - Common triggers
-      - Foods - Peanuts, tree nuts, shellfish, fish, milk, eggs, wheat, soy (accounts for 30-40% anaphylaxis)
-      - Medications - Antibiotics (penicillin, cephalosporins), NSAIDs, contrast media, neuromuscular blocking agents
-      - Insect stings - Hymenoptera (bees, wasps, hornets, fire ants)
-      - Latex
-      - Exercise-induced - Food-dependent exercise-induced anaphylaxis (FDEIA)
-      - Idiopathic (20% no identified trigger)
-      - Risk factors for severe/fatal anaphylaxis
-      - Asthma (especially poorly controlled)
-      - Cardiovascular disease
-      - Mastocytosis
-      - Delayed epinephrine administration
-      - Beta-blocker use (impairs response to epinephrine, refractory hypotension)
-      - ACE inhibitor use (worsens angioedema)
-      - Clinical presentation - Rapid progression, seconds to minutes
-      - Cutaneous (90%) - Urticaria (hives), angioedema, flushing, pruritus (palms/soles)
-      - Respiratory (70%) - Dyspnea, wheeze, stridor (laryngeal edema), cough, rhinorrhea, sensation throat closing
-      - Cardiovascular (45%) - Hypotension, tachycardia (or bradycardia), syncope, chest pain, arrhythmias, cardiac arrest
-      - GI (30-45%) - Nausea, vomiting, cramping abdominal pain, diarrhea
-      - Neurologic - Sense of impending doom, confusion, dizziness, headache
-      - Note - 10-20% NO skin findings (anaphylaxis without urticaria/flushing, more common in hypotensive presentations)
-      - Labs - NOT needed for diagnosis (clinical), do NOT delay treatment
-      - Serum tryptase - Elevated 1-2 hours after symptom onset, peaks 60-90 min, returns to baseline 6-8 hours
-      - Confirmatory if elevated (>11.4 ng/mL), but normal does NOT exclude
-      - Histamine - Less useful (peaks 5-10 min, normalizes 30-60 min)
-    treatment:
-      - ABC - Airway, breathing, circulation, call for help, activate emergency response
-      - Position - Supine with legs elevated (or left lateral decubitus if pregnant), do NOT sit up (sudden death from empty ventricle syndrome)
-      - Epinephrine - First-line, IMMEDIATE, life-saving, NO absolute contraindications
-      - IM epinephrine 1:1000 (1 mg/mL) in anterolateral thigh (vastus lateralis)
-      - Adults - 0.3-0.5 mg (0.3-0.5 mL) IM
-      - Children - 0.01 mg/kg (max 0.3 mg) IM, or auto-injector dose (0.15 mg if 15-30 kg, 0.3 mg if >30 kg)
-      - Repeat q5-15min as needed (70% require only one dose, 20% require two doses)
-      - Auto-injector (EpiPen, Auvi-Q) if available - Administer through clothing if necessary
-      - IV epinephrine - If refractory to IM doses, in extremis, cardiac arrest
-      - 0.1 mg (1 mL of 1:10,000 or 0.1 mL of 1:1000 in 10 mL NS) slow IV push over 5 min
-      - Continuous infusion 0.1-1 mcg/kg/min if persistent hypotension (ICU)
-      - Oxygen - High-flow 100% by face mask or non-rebreather
-      - IV fluids - Aggressive volume resuscitation if hypotensive
-      - NS or LR 1-2 L bolus adults (20 mL/kg children), repeat as needed
-      - Massive fluid shifts (up to 35% intravascular volume can extravasate in 10 min)
-      - Adjunctive medications (NOT substitutes for epinephrine, give AFTER epinephrine)
-      - H1 antihistamine - Diphenhydramine 25-50 mg IV/IM (1 mg/kg children, max 50 mg)
-      - Relieves urticaria/pruritus, minimal effect on life-threatening manifestations
-      - H2 antihistamine - Ranitidine 50 mg IV or famotidine 20 mg IV (may add benefit)
-      - Corticosteroids - Methylprednisolone 1-2 mg/kg IV (max 125 mg) OR hydrocortisone 5 mg/kg IV
-      - May prevent biphasic reaction (controversial, evidence weak), no immediate benefit (takes 4-6 hours)
-      - Bronchodilators - Albuterol 2.5-5 mg nebulized if wheezing/bronchospasm
-      - Refractory hypotension despite epinephrine and fluids
-      - Vasopressors - Norepinephrine, vasopressin, dopamine (ICU)
-      - Glucagon - 1-5 mg IV bolus then 5-15 mcg/min infusion if on beta-blockers (bypasses beta-receptor blockade)
-      - Methylene blue - Experimental for refractory shock
-      - Airway management
-      - Anticipate difficult airway (angioedema, laryngeal edema)
-      - Early intubation if stridor, respiratory distress, angioedema progressing (do NOT delay until complete obstruction)
-      - Cricothyrotomy if cannot intubate/ventilate
-      - Observation period - Minimum 4-8 hours (biphasic reaction risk), 24 hours if severe
-      - ICU if refractory, required vasopressors, severe asthma
-
-  - id: severe_allergic_reaction
-    type: diagnosis
-    name: "Severe Allergic Reaction (Not Anaphylaxis)"
-    icd10: "T78.40"
-    urgency: high
-    workup:
-      - Allergic reactions not meeting anaphylaxis criteria
-      - Urticaria and/or angioedema without respiratory/cardiovascular/GI involvement
-      - Still potentially serious (angioedema can progress to airway compromise)
-      - Urticaria (hives) - Pruritic, raised, erythematous wheals (blanch with pressure), transient (<24 hours any individual lesion)
-      - Angioedema - Deeper swelling dermis/submucosa, non-pitting, non-pruritic, affects face (lips, tongue, periorbital), extremities, GI tract (abdominal pain)
-      - Mast cell or bradykinin-mediated
-      - Causes - Same triggers as anaphylaxis (foods, medications, insect stings), plus ACE inhibitors (bradykinin-mediated angioedema 0.1-0.7% patients)
-    treatment:
-      - Remove trigger if identifiable
-      - Mild urticaria/angioedema (no airway involvement, no respiratory distress)
-      - H1 antihistamines - Diphenhydramine 25-50 mg PO/IV q6h OR cetirizine 10 mg PO daily OR loratadine 10 mg PO daily
-      - Non-sedating antihistamines preferred outpatient
-      - H2 antihistamines - Ranitidine 150 mg PO BID or famotidine 20 mg PO BID (may add benefit)
-      - Corticosteroids - Prednisone 40-60 mg PO daily x 3-5 days (prevents prolonged/recurrent urticaria)
-      - Severe urticaria/angioedema or concerning for progression
-      - Epinephrine 0.3-0.5 mg IM if ANY concern for airway compromise or progression to anaphylaxis
-      - Threshold low to give epinephrine (safe, effective)
-      - Admit for observation if angioedema involving tongue, oropharynx (airway risk)
-      - ACE inhibitor-induced angioedema
-      - Stop ACE inhibitor (do NOT rechallenge, switch to ARB generally safe but 5-10% cross-reactivity)
-      - Antihistamines and steroids NOT effective (bradykinin-mediated, not histamine)
-      - Icatibant (bradykinin B2 receptor antagonist) 30 mg SC - Approved for hereditary angioedema, used off-label for ACE inhibitor angioedema
-      - FFP or C1 esterase inhibitor if severe/refractory
-      - Secure airway early if tongue/pharyngeal swelling
-
-  - id: post_anaphylaxis_management
-    type: diagnosis
-    name: "Post-Anaphylaxis Management"
-    icd10: "T78.2"
-    urgency: medium
-    workup:
-      - After stabilization from anaphylaxis episode
-      - Goals - Identify trigger, prevent recurrence, educate patient, prescribe emergency medications
-      - Trigger identification
-      - Detailed history - Timing, foods, medications, insect stings, exercise, preceding viral illness
-      - Allergy testing - Skin prick testing or specific IgE (serum) 4-6 weeks after event (false negatives if done too soon)
-      - Foods (peanut, tree nuts, shellfish, fish, milk, egg, wheat, soy)
-      - Venom (bee, wasp, hornet, yellow jacket, fire ant)
-      - Medications (penicillin, cephalosporins, NSAIDs)
-      - Latex
-      - Tryptase baseline - If idiopathic or recurrent (screen for mastocytosis)
-    treatment:
-      - Avoidance - Strict avoidance of identified trigger
-      - Food labels (cross-contamination risk)
-      - Inform restaurants, schools, family
-      - Medical alert bracelet
-      - Epinephrine auto-injector - CRITICAL, prescribe 2 devices (one backup)
-      - EpiPen, Auvi-Q (voice instructions), generic alternatives
-      - 0.15 mg (15-30 kg children) or 0.3 mg (>30 kg, adults)
-      - Teach proper use - Remove safety cap, jab into outer thigh, hold 3 seconds, massage
-      - Carry at all times
-      - Call 911 immediately after using
-      - Expiration dates (replace yearly)
-      - Written emergency action plan - When to use epinephrine (immediate for respiratory, cardiovascular symptoms or multi-system), call 911, secondary medications (antihistamines)
-      - Avoid triggers - Beta-blockers (impair epinephrine response, consider alternative antihypertensives), ACE inhibitors if angioedema
-      - Medical alert identification - Bracelet or necklace stating anaphylaxis trigger
-      - Allergy/Immunology referral
-      - Confirm trigger with testing
-      - Venom immunotherapy - If insect sting anaphylaxis (highly effective, 90-95% protection after full course 3-5 years)
-      - Oral immunotherapy (OIT) - Experimental for food allergies (peanut OIT FDA-approved Palforzia, desensitizes but requires ongoing daily dosing, risk anaphylaxis during treatment)
-      - Omalizumab (anti-IgE mAb) - For idiopathic anaphylaxis or refractory chronic urticaria
-      - Aspirin desensitization - If NSAID anaphylaxis and aspirin needed (cardiovascular disease)
-      - Patient education - Recognize early symptoms, use epinephrine immediately (do NOT delay), avoid known triggers, carry epinephrine always
-      - Prognosis - Recurrence risk depends on trigger avoidability (food allergies persist in 80-90% peanut/tree nut, outgrow milk/egg 50-80% by school age)
+name: Anaphylaxis
+family: allergic
+specialty: Allergy-Immunology/Emergency Medicine
+chief_complaint: Sudden onset difficulty breathing, hives, hypotension after allergen exposure
+description: Severe systemic allergic reaction involving multiple organ systems, potentially life-threatening
+icd10: T78.2XXA
+urgency: emergency
+workup:
+  - Clinical diagnosis based on history and physical examination - DO NOT DELAY TREATMENT
+  - Anaphylaxis criteria (NIAID/FAAN) - acute onset (minutes to hours) with involvement of skin/mucosa plus respiratory compromise OR cardiovascular compromise OR hypotension after known allergen
+  - Detailed history - timing of exposure, previous reactions, current symptoms
+  - Physical examination - assess airway, breathing, circulation
+  - Skin - urticaria, angioedema, flushing, pruritus (80-90% of cases)
+  - Respiratory - dyspnea, wheezing, stridor, throat tightness, hypoxemia
+  - Cardiovascular - tachycardia, hypotension, syncope, chest pain
+  - Gastrointestinal - nausea, vomiting, diarrhea, abdominal cramping
+  - Neurological - dizziness, confusion, sense of impending doom
+  - Vital signs - hypotension (SBP less than 90 or 30% decrease from baseline), tachycardia, tachypnea, low oxygen saturation
+  - Serum tryptase (within 1-2 hours of symptom onset, elevated supports diagnosis but normal does not rule out)
+  - Peak at 1-2 hours, may be helpful retrospectively
+  - Consider biphasic reaction (1-20% of cases, symptoms recur 1-72 hours later)
+treatment:
+  - Intramuscular epinephrine 0.3-0.5 mg (1:1000 concentration) into anterolateral thigh - FIRST-LINE TREATMENT
+  - Repeat every 5-15 minutes as needed for persistent symptoms
+  - Pediatric dose 0.01 mg/kg (max 0.3 mg for children less than 30 kg, 0.5 mg if greater than 30 kg)
+  - Call for help, activate emergency response (call 911)
+  - Place patient supine with legs elevated (or position of comfort if respiratory distress)
+  - High-flow oxygen via non-rebreather mask
+  - IV access, aggressive fluid resuscitation with normal saline 1-2 L bolus (20 mL/kg in children)
+  - Cardiac monitoring, pulse oximetry
+  - Adjunctive medications (AFTER epinephrine, not substitutes)
+  - H1-antihistamines - diphenhydramine 25-50 mg IV/IM or cetirizine 10 mg PO
+  - H2-antihistamines - ranitidine 50 mg IV or famotidine 20 mg IV
+  - Corticosteroids - methylprednisolone 125 mg IV or prednisone 60 mg PO (may prevent biphasic reaction)
+  - Bronchodilators - albuterol nebulizer if bronchospasm
+  - If hypotension persists despite epinephrine and fluids
+  - IV epinephrine infusion 0.1-1 mcg/kg/min
+  - Vasopressors (norepinephrine, dopamine)
+  - Glucagon 1-2 mg IV if on beta-blockers (epinephrine may be less effective)
+  - Observation period minimum 4-6 hours (longer if severe or history of biphasic reaction)
+  - Discharge planning - prescribe epinephrine auto-injector (EpiPen, Auvi-Q) with training
+  - Carry two auto-injectors at all times
+  - Refer to allergist for identification of trigger and allergen testing
+  - Medical alert bracelet
+clinical_pearls:
+  - Most common triggers - foods (peanuts, tree nuts, shellfish, fish, milk, eggs), medications (antibiotics, NSAIDs), insect stings (Hymenoptera), latex
+  - Epinephrine is ONLY definitive treatment - antihistamines and steroids are adjuncts
+  - No absolute contraindications to epinephrine in anaphylaxis
+  - Intramuscular route preferred (faster absorption than subcutaneous)
+  - Anterolateral thigh is optimal site (vastus lateralis muscle)
+  - Delayed or absent epinephrine administration is leading cause of fatal anaphylaxis
+  - Biphasic reactions occur in 1-20%, typically within 4-6 hours but can be up to 72 hours
+  - Risk factors for severe/fatal anaphylaxis - asthma, delayed epinephrine, adolescents/young adults, peanut/tree nut allergy
+  - Beta-blockers may attenuate response to epinephrine, may need glucagon
+  - ACE inhibitors may worsen angioedema
+  - Exercise-induced anaphylaxis - can be food-dependent (eat then exercise)
+differentials:
+  - Vasovagal syncope (bradycardia, pallor, no urticaria or respiratory symptoms)
+  - Panic attack (no objective findings, no urticaria or hypotension)
+  - Asthma exacerbation (respiratory symptoms only, no skin or cardiovascular involvement)
+  - Hereditary angioedema (no urticaria, slower onset, C1 esterase inhibitor deficiency)
+  - Scombroid fish poisoning (histamine ingestion, mimics allergy but not IgE-mediated)
+  - Carcinoid syndrome (flushing, diarrhea, wheezing, elevated 5-HIAA)
+  - Mastocytosis (recurrent episodes, elevated baseline tryptase)
+trace:
+  - 22-year-old woman with known peanut allergy accidentally ate cookie containing peanut butter at party
+  - Within 5 minutes developed tingling lips and tongue, generalized itching
+  - Over next 10 minutes developed hives all over body, throat tightness, difficulty breathing, dizziness
+  - Friends called 911, EMS arrived within 8 minutes
+  - EMS assessment - appears in distress, multiple urticarial lesions on face and trunk
+  - Vitals - BP 85/50, HR 125, RR 28, SpO2 89% on room air
+  - Bilateral wheezing on lung auscultation, no stridor
+  - Diagnosis - Anaphylaxis due to peanut ingestion
+  - EMS administered epinephrine 0.5 mg IM (1:1000) into right anterolateral thigh
+  - High-flow oxygen via non-rebreather mask
+  - Established IV access, started normal saline bolus
+  - Transported to ED with lights and sirens
+  - ED arrival (15 minutes after epinephrine) - improved but still symptomatic
+  - BP 95/60, HR 115, RR 24, SpO2 94% on oxygen
+  - Urticaria still present, less respiratory distress but ongoing wheezing
+  - Second dose of epinephrine 0.5 mg IM given
+  - Continued IV fluids, total 2 L normal saline bolus
+  - Diphenhydramine 50 mg IV, famotidine 20 mg IV, methylprednisolone 125 mg IV
+  - Albuterol nebulizer treatment
+  - 30 minutes later - significant improvement
+  - BP 110/70, HR 95, RR 18, SpO2 98% on 2L nasal cannula
+  - Urticaria fading, no wheezing, breathing comfortably
+  - Admitted for observation given severity and use of two epinephrine doses
+  - Monitored for 12 hours, no biphasic reaction
+  - Discharge planning - prescribed two epinephrine auto-injectors (EpiPen 0.3 mg)
+  - Detailed teaching on when and how to use auto-injector
+  - Strict peanut avoidance education, reading food labels
+  - Medical alert bracelet ordered
+  - Referral to allergist for formal testing and education
+  - Allergist follow-up 2 weeks later - confirmed peanut allergy via skin prick testing
+  - Discussed avoidance strategies, emergency action plan
+  - Outcome - Patient now carries two auto-injectors at all times, has avoided peanuts successfully
