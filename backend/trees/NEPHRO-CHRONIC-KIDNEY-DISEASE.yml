@@ -1,0 +1,46 @@
+tree_id: NEPHRO-CHRONIC-KIDNEY-DISEASE
+name: Chronic Kidney Disease
+family: Nephrology
+specialty: Nephrology
+chief_complaint: Elevated creatinine or declining kidney function
+description: |
+  Progressive loss of kidney function over >3 months. Defined by GFR <60 mL/min/1.73m² or kidney damage markers.
+  Leading causes: diabetes (40%), hypertension (30%), glomerulonephritis (15%).
+icd10: N18.9
+urgency: Moderate
+workup:
+  - Serum creatinine and eGFR calculation (CKD-EPI equation most accurate)
+  - Urinalysis with microscopy (proteinuria, hematuria, casts)
+  - Urine albumin-to-creatinine ratio (UACR, normal <30 mg/g)
+  - Complete metabolic panel (hyperkalemia, metabolic acidosis, hyperphosphatemia)
+  - CBC (anemia from decreased erythropoietin)
+  - Renal ultrasound (kidney size, echogenicity, obstruction)
+  - Lipid panel and HbA1c if diabetic
+  - Parathyroid hormone (PTH) if GFR <60 (secondary hyperparathyroidism common)
+treatment:
+  - ACE inhibitor or ARB for proteinuria >300 mg/day (reduces progression by 30-40%)
+  - Blood pressure target <130/80 mmHg (or <120/80 if proteinuria >1g/day)
+  - SGLT2 inhibitor (empagliflozin or dapagliflozin) slows progression in diabetic and non-diabetic CKD
+  - Tight glycemic control in diabetes (HbA1c target <7%)
+  - Dietary sodium restriction <2g/day, potassium restriction if hyperkalemic
+  - Phosphate binders if hyperphosphatemia (calcium acetate, sevelamer)
+  - Erythropoiesis-stimulating agents (ESAs) if anemia and hemoglobin <10 g/dL
+  - Vitamin D supplementation if deficient
+  - Nephrology referral if GFR <30 or rapidly declining
+  - Dialysis initiation when GFR <15 or uremic symptoms present
+clinical_pearls:
+  - CKD stages: G1 (GFR ≥90), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29), G5 (<15, kidney failure)
+  - Proteinuria categories: A1 (<30 mg/g), A2 (30-300), A3 (>300, nephrotic range >3000)
+  - Avoid NSAIDs (worsen kidney function), adjust medication doses for GFR
+  - Screen all diabetics and hypertensives annually for CKD
+  - Uremic symptoms: nausea, altered mental status, pericarditis, seizures (indication for urgent dialysis)
+  - Metabolic acidosis common in CKD, treat with sodium bicarbonate if pH <7.35
+differentials:
+  - Acute kidney injury
+  - Diabetic nephropathy
+  - Hypertensive nephrosclerosis
+  - Glomerulonephritis
+  - Polycystic kidney disease
+  - Obstructive uropathy
+trace:
+  - Elevated creatinine or proteinuria → Calculate eGFR and check UACR → Stage CKD by GFR and albuminuria → Renal ultrasound to assess kidney structure → Treat underlying cause (diabetes, hypertension) → ACE/ARB for proteinuria → SGLT2 inhibitor for progression risk → Nephrology referral if stage G4-G5 → Dialysis or transplant planning
