@@ -1,130 +1,51 @@
 tree_id: PULM-SLEEP-APNEA
-name: Obstructive Sleep Apnea Evaluation
-family: PULMONOLOGY
-specialty: Pulmonology, Sleep Medicine
-chief_complaint: Snoring, Daytime Sleepiness, Witnessed Apneas
-description: Evaluation and management of obstructive sleep apnea
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: osa_evaluation
-
-nodes:
-  - id: osa_evaluation
-    type: diagnosis
-    name: "Obstructive Sleep Apnea"
-    icd10: "G47.33"
-    urgency: medium
-    workup:
-      - Obstructive sleep apnea (OSA) - Repetitive collapse upper airway during sleep → intermittent hypoxemia + sleep fragmentation
-      - Epidemiology - Very common, prevalence 10-30% adults (26% men, 17% women ages 30-70)
-      - 80-90% remain undiagnosed
-      - Risk factors - Obesity (strongest risk factor, 70% OSA patients), male sex (2-3:1 M:F), age (increases until 60-65 then plateaus), postmenopausal women, craniofacial abnormalities (retrognathia, micrognathia, macroglossia), large neck circumference (>17 inches men, >16 inches women), nasal obstruction, smoking, alcohol, family history
-      - Pathophysiology - Upper airway collapse during sleep (reduced pharyngeal dilator muscle tone + anatomic narrowing) → apneas/hypopneas → hypoxemia + hypercapnia → arousal → sleep fragmentation
-      - Cycle repeats throughout night (can occur 5-100+ times per hour)
-      - Apnea - Complete cessation airflow ≥10 seconds
-      - Hypopnea - ≥30% reduction airflow ≥10 seconds with ≥3% oxygen desaturation or arousal
-      - Apnea-hypopnea index (AHI) - Number apneas + hypopneas per hour sleep
-      - Clinical presentation - Classic triad: snoring, witnessed apneas, excessive daytime sleepiness
-      - Nocturnal symptoms
-      - Loud snoring (90-95%) - Reported by bed partner, chronic, habitual
-      - Witnessed apneas - Bed partner observes breathing pauses followed by gasping/choking
-      - Frequent awakenings - Sense of choking/gasping
-      - Nocturia (≥2 times per night)
-      - Restless sleep
-      - Morning headaches - Dull, bilateral, resolves within hours
-      - Diaphoresis - Night sweats
-      - Daytime symptoms
-      - Excessive daytime sleepiness (EDS) - Most common symptom (50-70%), Epworth Sleepiness Scale >10
-      - Falling asleep during passive activities (watching TV, reading, meetings), driving (increased MVA risk 2-7x)
-      - Fatigue, lack of energy
-      - Difficulty concentrating, memory problems
-      - Mood changes - Irritability, depression
-      - Morning dry mouth/sore throat
-      - Physical exam
-      - Obesity - BMI >30 (60-70% OSA patients), central adiposity
-      - Neck circumference - >17 inches (43 cm) men, >16 inches (40 cm) women
-      - Oropharyngeal crowding - Mallampati score (grade III-IV, cannot see soft palate), large tongue, low-lying soft palate, large tonsils, narrow airway
-      - Retrognathia/micrognathia - Recessed chin
-      - Nasal obstruction - Deviated septum, turbinate hypertrophy, polyps
-      - Hypertension (50-60%)
-      - Screening questionnaires
-      - STOP-Bang - Snoring, Tired, Observed apneas, high blood Pressure, BMI >35, Age >50, Neck circumference >40 cm, male Gender
-      - Score ≥3 high risk OSA (sensitivity 90-95%)
-      - Epworth Sleepiness Scale (ESS) - 8 questions, score 0-24, >10 abnormal (excessive sleepiness), >16 severe
-      - Polysomnography (PSG, sleep study) - GOLD STANDARD diagnosis
-      - In-lab overnight study - Monitors EEG (sleep stages), EOG (eye movements), EMG (muscle tone), respiratory effort, airflow (nasal pressure, thermistor), oxygen saturation, ECG, body position, snoring
-      - Parameters measured
-      - Apnea-hypopnea index (AHI) - Number apneas + hypopneas per hour
-      - Oxygen desaturation index (ODI) - Number desaturations ≥3-4% per hour
-      - Arousal index - Number arousals per hour
-      - Sleep architecture - Total sleep time, sleep efficiency, sleep stages
-      - OSA severity
-      - Mild - AHI 5-15
-      - Moderate - AHI 15-30
-      - Severe - AHI >30
-      - Home sleep apnea testing (HSAT) - Alternative for uncomplicated cases
-      - Portable monitor (type III) - Measures respiratory effort, airflow, oxygen saturation (no EEG, cannot determine sleep stages)
-      - Calculates respiratory event index (REI) or respiratory disturbance index (RDI)
-      - Indications - High pretest probability OSA, no significant comorbidities (heart failure, COPD, neuromuscular), no other sleep disorders suspected
-      - Advantages - Convenient, less expensive
-      - Limitations - May underestimate severity (denominator is recording time not sleep time), cannot diagnose central sleep apnea
-      - Labs - Rule out other causes sleepiness
-      - TSH (hypothyroidism), CBC (anemia)
-      - Associated conditions/complications
-      - Cardiovascular - Hypertension (50-60%, especially resistant HTN), coronary artery disease, heart failure, atrial fibrillation, stroke
-      - Metabolic - Insulin resistance, type 2 diabetes, metabolic syndrome
-      - Neurologic - Cognitive impairment, dementia risk
-      - Increased MVA risk (2-7x)
-      - Perioperative complications - Difficult intubation, postoperative respiratory complications
-    treatment:
-      - Goals - Reduce AHI, improve oxygenation, reduce daytime sleepiness, reduce cardiovascular risk
-      - Lifestyle modifications - ALL patients
-      - Weight loss - 10% weight loss reduces AHI 30-50%, can cure mild OSA
-      - Avoid alcohol (especially evening) - Worsens upper airway collapsibility
-      - Avoid sedatives - Benzodiazepines, opioids worsen OSA
-      - Sleep position - Avoid supine (lateral position reduces AHI 50% if positional OSA)
-      - Positional therapy - Tennis ball in back of shirt, specialized pillows, positional alarms
-      - Smoking cessation
-      - Treat nasal congestion - Nasal steroids, decongestants
-      - Continuous positive airway pressure (CPAP) - FIRST-LINE treatment, GOLD STANDARD
-      - Pneumatic splint - Delivers positive pressure throughout respiratory cycle → maintains upper airway patency
-      - Titration - In-lab PSG or auto-titrating CPAP (APAP) to determine optimal pressure (typically 5-20 cm H2O)
-      - Efficacy - Reduces AHI to <5 in 85-90%, improves symptoms, reduces cardiovascular events
-      - Adherence - 50-70% long-term (major limitation)
-      - Good adherence - Use ≥4 hours/night ≥70% nights
-      - Side effects - Mask discomfort, nasal congestion/dryness, aerophagia, claustrophobia
-      - Strategies improve adherence - Proper mask fitting (multiple types: nasal, nasal pillows, full-face), heated humidification, pressure ramp, desensitization, nasal saline/steroids
-      - Bilevel positive airway pressure (BiPAP) - If CPAP intolerant
-      - Higher inspiratory pressure (IPAP), lower expiratory pressure (EPAP) → easier to exhale
-      - For patients with CPAP intolerance, high pressure requirements (>15 cm H2O), or coexisting hypoventilation
-      - Oral appliances (mandibular advancement devices) - Alternative if CPAP intolerant or mild-moderate OSA
-      - Custom-fitted by dentist, advances mandible forward → enlarges upper airway
-      - Efficacy - Reduces AHI 40-60%, less effective than CPAP but better adherence
-      - Best for mild-moderate OSA (AHI <30), non-obese, positional OSA
-      - Side effects - Temporomandibular joint pain, excessive salivation, tooth discomfort
-      - Contraindications - Severe TMJ disorder, inadequate dentition
-      - Follow-up PSG - Confirm efficacy
-      - Surgical interventions - Selected patients
-      - Uvulopalatopharyngoplasty (UPPP) - Remove excess soft palate/uvula/tonsils
-      - Success rate 40-60% (reduce AHI ≥50%), less effective than CPAP
-      - For patients with large tonsils/uvula who cannot tolerate CPAP/oral appliance
-      - Maxillomandibular advancement (MMA) - Advance maxilla and mandible surgically
-      - Most effective surgery (success rate 80-90%), for severe OSA with craniofacial abnormalities
-      - Invasive, prolonged recovery
-      - Hypoglossal nerve stimulation (Inspire) - Implanted device stimulates hypoglossal nerve → tongue protrusion during inspiration
-      - FDA-approved 2014, for moderate-severe OSA (AHI 15-65) who cannot tolerate CPAP
-      - Success rate 60-70% (reduce AHI ≥50%)
-      - Tracheostomy - Last resort, severe OSA refractory to all treatments
-      - 100% effective (bypasses upper airway obstruction)
-      - Medications - Limited role, NOT first-line
-      - Modafinil/armodafinil - Wakefulness-promoting agents for residual sleepiness despite adequate CPAP therapy
-      - Does NOT treat OSA, only symptoms
-      - Follow-up
-      - CPAP therapy - Download data regularly (compliance, AHI on therapy, leak), adjust pressure if needed
-      - Repeat sleep study - If symptoms persist despite treatment, significant weight change, or treatment adjustment needed
-      - Monitor cardiovascular risk factors - Blood pressure, diabetes screening
-      - Prognosis
-      - Untreated OSA - Increased mortality (cardiovascular events), MVA risk, decreased quality of life
-      - Treated OSA (adherent CPAP) - Reduced cardiovascular events, improved symptoms, quality of life, mortality approaches general population
-      - Weight loss can cure mild OSA
+name: Obstructive Sleep Apnea
+family: Pulmonology
+specialty: Pulmonology
+chief_complaint: Loud snoring and daytime sleepiness
+description: |
+  Recurrent upper airway obstruction during sleep causing apneas (complete cessation) or hypopneas (reduced airflow). Affects 10-20% of adults, more common in obese males.
+  Results in sleep fragmentation, hypoxemia, sympathetic activation. Major complications include hypertension, cardiovascular disease, stroke, motor vehicle accidents.
+icd10: G47.33
+urgency: Moderate
+workup:
+  - Clinical presentation - loud snoring, witnessed apneas, gasping/choking during sleep, excessive daytime sleepiness, morning headaches, poor concentration
+  - Epworth Sleepiness Scale (ESS) quantifies daytime sleepiness - score 0-24, greater than 10 suggests excessive sleepiness
+  - STOP-BANG questionnaire screens for OSA - Snoring, Tired, Observed apneas, Pressure (hypertension), BMI greater than 35, Age greater than 50, Neck circumference greater than 40 cm, Gender male (high risk if 5-8 yes, intermediate 3-4)
+  - Physical exam - obesity (BMI greater than 30), large neck circumference (greater than 17 inches men, greater than 16 inches women), crowded oropharynx (Mallampati class III-IV), retrognathia, enlarged tonsils
+  - Polysomnography (overnight sleep study) gold standard - monitors airflow, respiratory effort, oxygen saturation, EEG, ECG, limb movements
+  - Apnea-hypopnea index (AHI) - number of apneas plus hypopneas per hour of sleep
+  - AHI less than 5 normal, 5-15 mild OSA, 15-30 moderate OSA, greater than 30 severe OSA
+  - Home sleep apnea test (HSAT) alternative for uncomplicated cases - measures airflow, respiratory effort, oxygen saturation (less comprehensive than polysomnography)
+  - Assess for complications - blood pressure, ECG (arrhythmias), echocardiogram if pulmonary hypertension suspected
+treatment:
+  - Positive airway pressure (PAP) therapy first-line - splints airway open with continuous positive pressure
+  - CPAP (continuous positive airway pressure) - fixed pressure throughout breathing cycle, most common
+  - Titration study determines optimal pressure (typically 6-15 cm H2O)
+  - BiPAP (bilevel positive airway pressure) if CPAP intolerant or requires high pressures - higher pressure on inspiration, lower on expiration
+  - Auto-adjusting PAP adjusts pressure breath-by-breath
+  - Adherence critical - use at least 4 hours per night on 70% of nights for insurance coverage, optimal use every night entire sleep period
+  - Mask options - nasal, nasal pillows, full face (if mouth breathing)
+  - Address adherence barriers - mask fit, pressure discomfort, nasal congestion (heated humidifier, nasal steroids), claustrophobia
+  - Lifestyle modifications - weight loss (10% weight loss reduces AHI 30%), avoid alcohol and sedatives, sleep position therapy (avoid supine if positional OSA)
+  - Oral appliances (mandibular advancement device) for mild-moderate OSA or CPAP intolerant - advances mandible forward to open airway, fitted by dentist
+  - Surgery for selected patients - uvulopalatopharyngoplasty (UPPP), tonsillectomy if enlarged tonsils, maxillomandibular advancement for severe refractory OSA
+  - Hypoglossal nerve stimulation (Inspire) FDA-approved for moderate-severe OSA intolerant to CPAP - implanted device stimulates tongue protrusor muscle
+  - Treat complications - optimize blood pressure control, screen for cardiovascular disease
+  - Re-evaluate with repeat sleep study after significant weight change or if symptoms recur on treatment
+clinical_pearls:
+  - Untreated severe OSA increases cardiovascular mortality 3-fold
+  - Motor vehicle accident risk 2-7x higher in untreated OSA
+  - CPAP improves blood pressure by 5-10 mmHg, reduces cardiovascular events
+  - Central sleep apnea (CSA) different pathophysiology - lack of respiratory effort, common in heart failure, Cheyne-Stokes respiration
+  - Obesity hypoventilation syndrome (Pickwickian syndrome) - obesity plus daytime hypercapnia, requires BiPAP
+  - Screen all patients with resistant hypertension, atrial fibrillation, heart failure for OSA
+differentials:
+  - Central sleep apnea
+  - Narcolepsy
+  - Idiopathic hypersomnia
+  - Restless legs syndrome
+  - Insomnia
+  - Depression
+trace:
+  - 52-year-old obese man (BMI 36) with loud snoring, witnessed apneas by wife, excessive daytime sleepiness → Falls asleep during meetings, near-miss motor vehicle accident → Epworth Sleepiness Scale 16 (severe), STOP-BANG 6 (high risk) → Exam shows neck circumference 18 inches, Mallampati class III, BP 152/95 → Polysomnography shows AHI 42 events/hour (severe OSA), lowest O2 saturation 78% → CPAP titration study, optimal pressure 11 cm H2O → Start CPAP therapy with nasal mask and heated humidification → Initial adherence poor due to nasal congestion, add fluticasone nasal spray → Adherence improves to 6.5 hours nightly → Repeat ESS 6 at 3 months, daytime sleepiness resolved → Blood pressure improves to 132/82 → Counseled on weight loss, continues CPAP long-term

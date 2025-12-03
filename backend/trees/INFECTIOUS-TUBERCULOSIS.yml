@@ -1,0 +1,52 @@
+tree_id: INFECTIOUS-TUBERCULOSIS
+name: Tuberculosis
+family: Infectious Disease
+specialty: Infectious Disease
+chief_complaint: Chronic cough, fever, and night sweats
+description: |
+  Mycobacterium tuberculosis infection primarily affecting lungs but can involve any organ (extrapulmonary TB). Transmitted via airborne droplets.
+  Latent TB infection (LTBI) asymptomatic with positive skin test but negative cultures, 5-10% lifetime risk of progression to active TB. High-risk populations include HIV, immigrants from endemic areas, homeless, incarcerated.
+icd10: A15.0
+urgency: High
+workup:
+  - Clinical presentation - chronic cough greater than 3 weeks, fever, night sweats, weight loss, hemoptysis
+  - Chest X-ray - upper lobe infiltrates, cavitation classic for reactivation TB, hilar lymphadenopathy in primary TB, miliary pattern (disseminated)
+  - Sputum for acid-fast bacilli (AFB) smear and culture - 3 samples on different days
+  - AFB smear positive in 50-80% of culture-positive cases (insensitive but rapid)
+  - Culture on solid media (Lowenstein-Jensen) definitive but takes 4-8 weeks, liquid media (MGIT) faster (1-3 weeks)
+  - Nucleic acid amplification test (NAAT) - rapid molecular test (GeneXpert MTB/RIF) detects TB and rifampin resistance in hours
+  - Tuberculin skin test (TST/PPD) - positive if induration 5 mm or greater (HIV, recent contact, CXR findings), 10 mm or greater (high-risk populations), 15 mm or greater (low-risk)
+  - Interferon-gamma release assay (IGRA) - QuantiFERON-TB Gold or T-SPOT - detects latent TB, not affected by BCG vaccination
+  - HIV testing mandatory - HIV most important risk factor for TB progression
+  - Drug susceptibility testing on culture isolate - test for resistance to first-line drugs (isoniazid, rifampin, ethambutol, pyrazinamide)
+  - Extrapulmonary TB - biopsy and culture of affected site (lymph node, pleural fluid, CSF), granulomas with caseating necrosis
+treatment:
+  - Active pulmonary TB - directly observed therapy (DOT) preferred to ensure adherence
+  - Intensive phase (2 months) - isoniazid 5 mg/kg (300mg) daily, rifampin 10 mg/kg (600mg) daily, pyrazinamide 25 mg/kg (1500-2000mg) daily, ethambutol 15-25 mg/kg (1200-1600mg) daily
+  - Continuation phase (4 months) - isoniazid plus rifampin daily (total 6 months for drug-susceptible pulmonary TB)
+  - Pyridoxine (vitamin B6) 25-50mg daily with isoniazid to prevent peripheral neuropathy
+  - Monitor for adverse effects - hepatotoxicity (isoniazid, rifampin, pyrazinamide - check LFTs monthly), optic neuritis (ethambutol - baseline and monthly visual acuity/color vision), rifampin (orange discoloration of secretions, drug interactions via CYP450)
+  - Multidrug-resistant TB (MDR-TB) - resistance to isoniazid and rifampin, requires 18-24 months treatment with second-line drugs (fluoroquinolones, injectables)
+  - Latent TB infection (LTBI) treatment - prevents progression to active TB
+  - Isoniazid 300mg daily x 9 months or 900mg twice weekly x 9 months
+  - Rifampin 600mg daily x 4 months (better tolerated, shorter)
+  - Isoniazid/rifapentine 900mg/900mg weekly x 12 weeks (3HP regimen, DOT)
+  - Do not treat LTBI without ruling out active TB (chest X-ray, symptom review)
+  - Respiratory isolation for active pulmonary TB until 3 consecutive negative AFB smears or 2 weeks of appropriate treatment
+  - Report to public health department - contact investigation, DOT program
+clinical_pearls:
+  - Primary TB (first infection) - often asymptomatic or mild pneumonia, middle/lower lobes, hilar lymphadenopathy
+  - Reactivation TB (latent to active) - upper lobes, cavitation, high bacillary load, contagious
+  - TB pleurisy - exudative effusion with lymphocyte predominance, low glucose, elevated adenosine deaminase
+  - TB meningitis - basilar meningitis, high mortality, cranial nerve palsies, hydrocephalus, treat x 12 months with adjunctive steroids
+  - Paradoxical worsening after starting treatment common (immune reconstitution)
+  - Rifampin interacts with many drugs - reduces efficacy of OCPs, warfarin, antiretrovirals
+differentials:
+  - Community-acquired pneumonia
+  - Lung cancer
+  - Fungal infection (histoplasmosis, coccidioidomycosis)
+  - Nontuberculous mycobacteria
+  - Sarcoidosis
+  - Lymphoma
+trace:
+  - 45-year-old homeless man with cough x 6 weeks, fever, night sweats, 15 lb weight loss → Chest X-ray shows right upper lobe cavitary lesion → Sputum AFB smear positive → Place in respiratory isolation → Sputum NAAT positive for M. tuberculosis, rifampin susceptibility detected → HIV test negative → Initiate four-drug therapy - isoniazid 300mg, rifampin 600mg, pyrazinamide 2000mg, ethambutol 1600mg daily plus pyridoxine 50mg → Sputum culture grows M. tuberculosis, susceptible to all first-line drugs → Continue intensive phase x 2 months → Repeat sputum AFB negative after 3 weeks of treatment, remove from isolation → Transition to continuation phase isoniazid plus rifampin x 4 months → Public health DOT program ensures adherence → Complete 6-month treatment, cure documented with 3 negative cultures, chest X-ray shows residual scarring
