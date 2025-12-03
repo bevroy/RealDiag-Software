@@ -1,136 +1,44 @@
 tree_id: PSYCH-BIPOLAR-DISORDER
-name: Bipolar Disorder Evaluation
-family: PSYCHIATRY
+name: Bipolar Disorder
+family: Psychiatry
 specialty: Psychiatry
-chief_complaint: Mood Swings, Depression, Elevated Mood, Impulsivity
-description: Evaluation and management of bipolar disorder
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: bipolar_evaluation
-
-nodes:
-  - id: bipolar_evaluation
-    type: question
-    text: "Which type of bipolar disorder?"
-    options:
-      - label: "Bipolar I Disorder"
-        next: bipolar_i
-      - label: "Bipolar II Disorder"
-        next: bipolar_ii
-
-  - id: bipolar_i
-    type: diagnosis
-    name: "Bipolar I Disorder"
-    icd10: "F31.9"
-    urgency: high
-    workup:
-      - Bipolar I disorder - Recurrent mood disorder characterized by ≥1 manic episode (may have depressive episodes, but not required for diagnosis)
-      - Prevalence - 1% lifetime, equal male:female
-      - Peak onset late teens to 20s
-      - Manic episode - Abnormally elevated, expansive, or irritable mood + increased goal-directed activity/energy lasting ≥7 days (or any duration if hospitalization required)
-      - PLUS ≥3 of following (4 if mood only irritable) - "DIG FAST"
-      - Distractibility - Attention easily diverted
-      - Inflated self-esteem/Grandiosity - Exaggerated beliefs (special powers, famous, wealthy)
-      - Flight of ideas/Racing thoughts - Rapid shifting topics
-      - Activity increase/Agitation - Increased goal-directed activity (work, social, sexual), psychomotor agitation
-      - Sleep decreased - Decreased need for sleep (feels rested after 3 hours)
-      - Talkativeness - Pressured speech, difficult to interrupt
-      - Marked impairment in functioning OR psychotic features OR hospitalization required
-      - Hypomanic episode - Similar to mania but LESS severe (4 days minimum, NOT severely impairing, NO psychosis, NO hospitalization)
-      - Observable change in functioning but NOT marked impairment
-      - Depressive episode - Same criteria as major depressive disorder (≥2 weeks depressed mood or anhedonia + ≥5 symptoms)
-      - Clinical presentation manic episode
-      - Elevated mood - Euphoric, excessively happy, "on top of the world"
-      - Irritable mood - Easily angered if thwarted
-      - Grandiosity - Unrealistic beliefs about abilities, importance
-      - Decreased need for sleep - Goes days with little/no sleep without fatigue
-      - Pressured speech - Rapid, loud, difficult to interrupt
-      - Racing thoughts - Feels thoughts are moving too fast
-      - Distractibility - Cannot focus, attention jumps
-      - Increased goal-directed activity - Starting multiple projects, hypersexuality, excessive spending
-      - Risky behaviors - Reckless driving, sexual indiscretions, spending sprees, foolish investments
-      - Psychotic features (50-75% manic episodes) - Delusions (grandiose most common), hallucinations (auditory)
-      - Mixed features - Manic AND depressive symptoms simultaneously (irritable mood + depressed mood + suicidal ideation)
-      - Physical exam/Mental status exam
-      - Appearance - Bright/loud clothing, excessive makeup, disheveled
-      - Behavior - Hyperactive, intrusive, hypersexual comments
-      - Speech - Pressured, loud, rapid
-      - Mood - Elevated, euphoric, or irritable
-      - Affect - Labile (rapid shifts)
-      - Thought process - Flight of ideas, tangential
-      - Thought content - Grandiose delusions
-      - Perception - Hallucinations (if psychotic)
-      - Insight/judgment - Impaired (poor awareness of illness, risky decisions)
-      - Screening - Mood Disorder Questionnaire (MDQ), Young Mania Rating Scale (YMRS)
-      - Labs/imaging - Rule out medical causes mania
-      - TSH (hyperthyroidism), urine drug screen (cocaine, amphetamines, steroids), HIV, syphilis
-      - Brain MRI - If first episode, atypical features, neurologic signs
-      - Differential diagnosis - Substance-induced mood disorder (stimulants, steroids, antidepressants), ADHD, borderline personality disorder, schizoaffective disorder, medical causes (hyperthyroidism, CNS lesions, Cushing)
-    treatment:
-      - Acute mania - Hospitalization often required (safety, medication initiation)
-      - Mood stabilizers - FIRST-LINE
-      - Lithium - Gold standard, 600-1800 mg/day (target level 0.8-1.2 mEq/L acute, 0.6-1.0 maintenance)
-      - Onset 5-7 days
-      - Monitoring - Serum lithium q5-7 days until stable (therapeutic 0.6-1.2, toxic >1.5)
-      - Side effects - Tremor, polyuria/polydipsia (nephrogenic DI), hypothyroidism, weight gain, cognitive dulling
-      - Toxicity - Confusion, ataxia, seizures, arrhythmias, renal failure (narrow therapeutic index)
-      - Check baseline and periodic TSH, creatinine, calcium
-      - Valproate (divalproex) - 750-2000 mg/day (target level 50-125 mcg/mL)
-      - Faster onset than lithium (3-5 days)
-      - Side effects - Weight gain, tremor, hair loss, pancreatitis, hepatotoxicity, thrombocytopenia, PCOS, teratogenic (neural tube defects)
-      - Contraindicated pregnancy
-      - Check baseline CBC, LFTs
-      - Carbamazepine - 400-1200 mg/day (level 4-12 mcg/mL)
-      - Drug interactions (CYP450 inducer, lowers levels other medications including oral contraceptives)
-      - Side effects - Hyponatremia, agranulocytosis (rare), Stevens-Johnson syndrome
-      - Atypical antipsychotics - Especially if psychotic features or rapid control needed
-      - Olanzapine 10-20 mg/day, risperidone 2-6 mg/day, quetiapine 400-800 mg/day, aripiprazole 15-30 mg/day
-      - Faster onset (hours to days)
-      - Can be combined with mood stabilizer
-      - Side effects - Weight gain, metabolic syndrome (especially olanzapine), EPS (risperidone), sedation
-      - Benzodiazepines - Adjunct for agitation, insomnia (lorazepam 1-2 mg q4-6h PRN)
-      - Avoid antidepressants in acute mania (can worsen mania, induce rapid cycling)
-      - Maintenance treatment - LIFELONG (prevent recurrence)
-      - Continue mood stabilizer indefinitely (lithium or valproate)
-      - Relapse risk 50-90% if discontinue
-      - Lamotrigine - Better for prevention of depressive episodes (less effective acute mania)
-      - Dose 200-400 mg/day (slow titration over 6-8 weeks to reduce Stevens-Johnson syndrome risk 0.1-0.3%)
-      - Start 25 mg daily x 2 weeks, increase slowly
-      - Well-tolerated (no weight gain, no metabolic effects)
-      - Atypical antipsychotic - If needed for maintenance
-      - Bipolar depression treatment
-      - Quetiapine (Seroquel) or lurasidone (Latuda) - FDA-approved for bipolar depression monotherapy
-      - Lamotrigine - Effective prevention depressive episodes
-      - Mood stabilizer (lithium or valproate) + SSRI - If above inadequate
-      - Caution - Antidepressants alone can trigger mania/hypomania (use with mood stabilizer)
-      - ECT - If severe, treatment-refractory, catatonic, or high suicide risk (most effective treatment)
-      - Psychotherapy - Adjunct to medications
-      - Psychoeducation - Illness education, medication adherence, early warning signs
-      - Cognitive-behavioral therapy (CBT), interpersonal and social rhythm therapy (IPSRT)
-      - Prognosis - Chronic, recurrent (90% have multiple episodes)
-      - Suicide risk 10-15% (highest of all psychiatric disorders)
-      - Functional impairment even between episodes (30-60%)
-
-  - id: bipolar_ii
-    type: diagnosis
-    name: "Bipolar II Disorder"
-    icd10: "F31.81"
-    urgency: high
-    workup:
-      - Bipolar II disorder - Recurrent mood disorder characterized by ≥1 hypomanic episode AND ≥1 major depressive episode (NEVER had full manic episode)
-      - Prevalence - 0.4% lifetime, female > male (2:1)
-      - Hypomanic episode - Elevated/irritable mood + increased energy ≥4 days + ≥3 "DIG FAST" symptoms
-      - Observable change BUT not severe impairment, NO psychosis, NO hospitalization
-      - Often unrecognized (patients feel good, don't report)
-      - Depressive episodes - More frequent and longer than hypomanic episodes
-      - Predominant polarity depression (spend 37x more time depressed than hypomanic)
-      - Clinical presentation - Mostly depressive symptoms
-      - Hypomanic symptoms may be missed (brief, feel normal/good)
-      - High suicide risk (higher than bipolar I)
-      - Differential - Major depressive disorder (no hypomania), bipolar I (no full mania), cyclothymic disorder
-    treatment:
-      - Similar to bipolar I but more focus on preventing/treating depression
-      - Mood stabilizer - Lithium or lamotrigine (lamotrigine preferred for bipolar II, better depression prevention)
-      - Avoid antidepressant monotherapy (risk hypomania/rapid cycling)
-      - If antidepressant needed, use with mood stabilizer
+chief_complaint: Mood swings with periods of elevated mood and depression
+description: |
+  Chronic mood disorder with episodes of mania or hypomania and depression.
+  Bipolar I (manic episodes), Bipolar II (hypomanic episodes with major depression). Lifetime prevalence 1-2%. Average age of onset 25 years.
+icd10: F31.9
+urgency: Moderate
+workup:
+  - Clinical diagnosis using DSM-5 criteria
+  - Manic episode - distinct period of abnormally elevated, expansive, or irritable mood lasting at least 7 days (or any duration if hospitalization needed)
+  - Plus 3 or more symptoms - grandiosity, decreased need for sleep, pressured speech, racing thoughts, distractibility, increased goal-directed activity, excessive risky behavior
+  - Hypomanic episode - similar but lasts 4-7 days, less severe, no marked impairment or psychosis
+  - Major depressive episode - as per criteria (2 weeks of depressed mood or anhedonia plus other symptoms)
+  - Rule out medical causes - thyroid function tests, metabolic panel, toxicology screen
+  - Brain imaging if atypical presentation or first episode in older adult
+treatment:
+  - Mood stabilizers first-line - lithium 900-1200mg/day (target level 0.8-1.2 mEq/L) most effective
+  - Alternative mood stabilizers - valproate 500-1500mg/day, carbamazepine 400-1200mg/day
+  - Atypical antipsychotics - quetiapine 300-800mg, olanzapine 10-20mg, risperidone 2-6mg, aripiprazole 15-30mg
+  - Acute mania - antipsychotic (quetiapine, olanzapine, risperidone) plus mood stabilizer, benzodiazepines for agitation
+  - Bipolar depression - quetiapine or lurasidone monotherapy, or lithium/valproate plus antidepressant (SSRI with caution, risk of switching to mania)
+  - Maintenance therapy - continue mood stabilizer lifelong to prevent recurrence
+  - Psychotherapy - cognitive behavioral therapy, family-focused therapy, interpersonal and social rhythm therapy
+  - Monitor lithium levels every 3-6 months, check TSH and creatinine (lithium can cause hypothyroidism and nephrotoxicity)
+clinical_pearls:
+  - Bipolar I requires at least one manic episode, Bipolar II requires hypomanic episode plus major depressive episode
+  - Manic patients often have poor insight and may not recognize illness
+  - Rapid cycling (4 or more mood episodes per year) indicates poor prognosis
+  - Antidepressants alone can precipitate mania in bipolar patients (always use with mood stabilizer)
+  - Lithium most effective for preventing suicide in bipolar disorder
+  - High comorbidity with substance use disorders (60%), anxiety disorders (50%)
+  - Psychiatric emergency if suicidal, homicidal, or severe psychosis (hospitalize)
+differentials:
+  - Major depressive disorder
+  - Schizoaffective disorder
+  - Borderline personality disorder
+  - Substance-induced mood disorder
+  - ADHD
+  - Hyperthyroidism
+trace:
+  - 3-day history of decreased sleep (2 hours/night), rapid speech, excessive spending, feeling on top of the world → Prior episode of severe depression 6 months ago → No substance use, TSH normal → Diagnose bipolar I disorder, manic episode → Start lithium 600mg BID plus olanzapine 10mg nightly → Lorazepam 2mg for agitation → Hospitalize for safety → Symptoms improve over 7 days → Continue lithium (level 0.9 mEq/L) and olanzapine → Psychoeducation, follow-up weekly initially → Long-term mood stabilization

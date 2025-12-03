@@ -1,311 +1,45 @@
 tree_id: GI-CIRRHOSIS
-name: Cirrhosis Complications Management
-family: GASTROENTEROLOGY
-specialty: Gastroenterology/Hepatology/Internal Medicine
-chief_complaint: Cirrhosis Complications
-description: Diagnostic decision tree for cirrhosis complications
-version: "1.0"
-author: RealDiag Team
-entry_point: complication
-
-nodes:
-  - id: complication
-    type: question
-    text: "Primary complication?"
-    options:
-      - label: "Ascites (new or worsening)"
-        next: ascites_eval
-      - label: "Variceal bleeding"
-        next: variceal_bleeding
-      - label: "Hepatic encephalopathy"
-        next: hepatic_encephalopathy
-      - label: "Spontaneous bacterial peritonitis (SBP)"
-        next: sbp
-      - label: "Hepatorenal syndrome"
-        next: hepatorenal_syndrome
-      - label: "Newly diagnosed cirrhosis"
-        next: new_cirrhosis
-
-  - id: ascites_eval
-    type: question
-    text: "Previous ascites history?"
-    options:
-      - label: "New onset ascites"
-        next: new_ascites
-      - label: "Refractory ascites"
-        next: refractory_ascites
-      - label: "Tense ascites"
-        next: tense_ascites
-
-  - id: new_ascites
-    type: diagnosis
-    diagnosis: New Onset Ascites
-    icd10: R18.8
-    urgency: medium
-    workup:
-      - Diagnostic paracentesis (cell count, albumin, culture, cytology)
-      - Serum-ascites albumin gradient (SAAG)
-      - SAAG ≥1.1 = portal hypertension
-      - Abdominal ultrasound with Doppler
-      - Liver function tests
-      - INR, platelets
-      - Renal function
-      - Urinalysis
-    treatment:
-      - Sodium restriction (<2g/day)
-      - Spironolactone 100mg daily (increase to 400mg)
-      - Add furosemide 40mg if inadequate response (max 160mg)
-      - Daily weights
-      - Monitor electrolytes and renal function
-      - Hepatology referral
-      - Treat underlying liver disease
-      - Transplant evaluation if decompensated
-
-  - id: refractory_ascites
-    type: diagnosis
-    diagnosis: Refractory Ascites
-    icd10: K70.31
-    urgency: high
-    workup:
-      - Paracentesis with studies
-      - Assess diuretic resistance vs intolerance
-      - Renal function, electrolytes
-      - Hepatology consult
-    treatment:
-      - Serial large-volume paracentesis (remove 5+ liters)
-      - Albumin replacement 6-8g per liter removed if >5L
-      - TIPS (transjugular intrahepatic portosystemic shunt) if candidate
-      - Peritoneovenous shunt (rarely used)
-      - Liver transplant evaluation (MELD exception)
-      - Midodrine + octreotide if HRS developing
-
-  - id: tense_ascites
-    type: diagnosis
-    diagnosis: Tense Ascites
-    icd10: R18.8
-    urgency: high
-    workup:
-      - Diagnostic and therapeutic paracentesis
-      - Cell count, albumin, culture
-      - Assess respiratory compromise
-    treatment:
-      - Large-volume paracentesis (5-10 liters)
-      - Albumin 6-8g/L removed if >5L (prevents post-paracentesis circulatory dysfunction)
-      - Diuretics
-      - Sodium restriction
-      - Monitor for SBP
-      - Hepatology consult
-
-  - id: variceal_bleeding
-    type: question
-    text: "Active bleeding status?"
-    options:
-      - label: "Active hematemesis or melena"
-        next: active_variceal_bleed
-      - label: "History of varices, no current bleeding"
-        next: variceal_prophylaxis
-
-  - id: active_variceal_bleed
-    type: diagnosis
-    diagnosis: Acute Variceal Hemorrhage
-    icd10: I85.01
-    urgency: critical
-    workup:
-      - Type and cross (anticipate transfusion)
-      - CBC, INR, aPTT, fibrinogen
-      - CMP, liver function tests
-      - Lactate
-    treatment:
-      - ACTIVATE GI BLEED TEAM
-      - Two large-bore IVs
-      - Octreotide 50 mcg bolus, then 50 mcg/h infusion x 2-5 days
-      - IV antibiotics (ceftriaxone 1g daily) - reduces mortality
-      - Blood transfusion (target Hgb 7-9 g/dL, avoid over-transfusion)
-      - Emergent upper endoscopy (variceal band ligation)
-      - Avoid over-resuscitation (increases portal pressure)
-      - Correct coagulopathy minimally (INR <2.5)
-      - Platelet transfusion if <50K and active bleeding
-      - Blakemore tube if massive bleeding, temporary bridge
-      - TIPS if refractory bleeding
-      - ICU admission
-
-  - id: variceal_prophylaxis
-    type: diagnosis
-    diagnosis: Variceal Bleeding Prophylaxis
-    icd10: I85.00
-    urgency: medium
-    workup:
-      - Upper endoscopy (variceal screening)
-      - Grade size of varices
-    treatment:
-      - Primary prophylaxis if medium/large varices:
-        - Non-selective beta-blocker (propranolol 20mg BID or nadolol 40mg daily, titrate to HR 55-60)
-        - Carvedilol 6.25-12.5mg daily (alternative)
-        - Variceal band ligation if intolerant to beta-blockers
-      - Secondary prophylaxis (prior bleed):
-        - Beta-blocker + variceal band ligation
-        - Consider TIPS if refractory
-      - Avoid NSAIDs and anticoagulation if possible
-
-  - id: hepatic_encephalopathy
-    type: question
-    text: "Grade of encephalopathy?"
-    options:
-      - label: "Grade 3-4 (stupor or coma)"
-        next: severe_encephalopathy
-      - label: "Grade 1-2 (confusion, asterixis)"
-        next: mild_encephalopathy
-
-  - id: severe_encephalopathy
-    type: diagnosis
-    diagnosis: Severe Hepatic Encephalopathy
-    icd10: K72.91
-    urgency: critical
-    workup:
-      - Exclude precipitants (infection, GI bleed, medications, constipation, electrolyte abnormalities)
-      - Ammonia level (not diagnostic, but helps)
-      - CBC, CMP
-      - Blood cultures
-      - Diagnostic paracentesis (rule out SBP)
-      - CT head if acute change or focal findings
-      - Toxicology screen
-    treatment:
-      - Airway protection (intubation if Grade 4)
-      - Lactulose 30mL PO/NG q2h until bowel movement, then q6-8h (goal 3-4 stools/day)
-      - Lactulose enema if unable to take PO (300mL in 700mL water)
-      - Rifaximin 550mg BID
-      - Zinc sulfate 220mg daily
-      - Identify and treat precipitant
-      - IV antibiotics if infection
-      - Correct electrolytes
-      - Stop sedatives, opioids, benzodiazepines
-      - ICU admission
-      - Hepatology consult
-      - Transplant evaluation
-
-  - id: mild_encephalopathy
-    type: diagnosis
-    diagnosis: Mild Hepatic Encephalopathy
-    icd10: K72.90
-    urgency: medium
-    workup:
-      - Identify precipitants
-      - Ammonia level
-      - BMP
-      - Consider infection workup
-    treatment:
-      - Lactulose 15-30mL PO TID-QID (goal 2-3 soft stools/day)
-      - Rifaximin 550mg BID (add to lactulose)
-      - Treat precipitant (infection, constipation, GI bleed)
-      - Discontinue sedatives
-      - Correct electrolytes (especially potassium)
-      - Protein restriction NOT recommended
-      - Zinc supplementation
-      - Hepatology follow-up
-      - Consider TIPS if refractory
-
-  - id: sbp
-    type: diagnosis
-    diagnosis: Spontaneous Bacterial Peritonitis
-    icd10: K65.2
-    urgency: critical
-    workup:
-      - Diagnostic paracentesis (BEFORE antibiotics)
-      - Cell count (PMN >250 = SBP)
-      - Culture (BEFORE antibiotics, inoculate blood culture bottles at bedside)
-      - Gram stain
-      - Blood cultures
-      - CBC, CMP
-      - Lactate
-    treatment:
-      - Empiric antibiotics immediately after tap
-      - Cefotaxime 2g IV q8h x 5 days OR
-      - Ceftriaxone 2g IV daily x 5 days OR
-      - Piperacillin-tazobactam 4.5g IV q6h
-      - Albumin 1.5 g/kg on day 1, then 1 g/kg on day 3 (reduces renal failure and mortality)
-      - Repeat paracentesis in 48h if not improving (PMN should decrease by 25%)
-      - Hospital admission
-      - Secondary prophylaxis: ciprofloxacin 500mg daily or TMP-SMX DS daily lifelong
-      - Hepatology consult
-      - Transplant evaluation
-
-  - id: hepatorenal_syndrome
-    type: question
-    text: "Type of hepatorenal syndrome?"
-    options:
-      - label: "Type 1 (rapid, doubling Cr within 2 weeks)"
-        next: hrs_type1
-      - label: "Type 2 (gradual, refractory ascites)"
-        next: hrs_type2
-
-  - id: hrs_type1
-    type: diagnosis
-    diagnosis: Hepatorenal Syndrome Type 1
-    icd10: K76.7
-    urgency: critical
-    workup:
-      - Exclude other causes of AKI
-      - Stop diuretics
-      - Stop nephrotoxins (NSAIDs, aminoglycosides, contrast)
-      - Urinalysis (bland sediment)
-      - Renal ultrasound (normal kidneys)
-      - Volume challenge (albumin 1g/kg, max 100g)
-      - Diagnostic criteria: Cr >1.5, no improvement after albumin, no shock, no nephrotoxins, no parenchymal kidney disease
-    treatment:
-      - Hepatology and nephrology consult STAT
-      - Albumin 1g/kg daily (max 100g)
-      - Vasoconstrictors:
-        - Midodrine 7.5-12.5mg TID (titrate to MAP increase) + octreotide 100-200 mcg TID SC OR
-        - Norepinephrine 0.5-3 mg/h IV (if ICU)
-        - Terlipressin (not available in US)
-      - Discontinue diuretics
-      - TIPS if eligible
-      - Renal replacement therapy if needed
-      - URGENT liver transplant evaluation (high mortality)
-      - ICU admission
-
-  - id: hrs_type2
-    type: diagnosis
-    diagnosis: Hepatorenal Syndrome Type 2
-    icd10: K76.7
-    urgency: high
-    workup:
-      - Diagnostic criteria similar to Type 1 but more gradual
-      - Urinalysis
-      - Renal ultrasound
-      - Rule out other causes
-    treatment:
-      - Albumin infusions
-      - Midodrine + octreotide
-      - Serial paracentesis for ascites
-      - TIPS if candidate
-      - Discontinue diuretics
-      - Liver transplant evaluation
-      - Median survival 6 months without transplant
-
-  - id: new_cirrhosis
-    type: diagnosis
-    diagnosis: Newly Diagnosed Cirrhosis
-    icd10: K74.60
-    urgency: medium
-    workup:
-      - Determine etiology (hepatitis B/C, alcohol, NAFLD, autoimmune, genetic)
-      - Complete hepatitis panel
-      - Autoimmune markers (ANA, ASMA, IgG)
-      - Iron studies, ceruloplasmin, alpha-1 antitrypsin
-      - Abdominal ultrasound
-      - Upper endoscopy (variceal screening)
-      - AFP and ultrasound q6mo (HCC surveillance)
-      - Calculate MELD-Na score
-    treatment:
-      - Treat underlying cause
-      - Hepatitis C: DAAs (cure possible)
-      - Hepatitis B: entecavir or tenofovir
-      - Alcohol cessation
-      - Weight loss if NAFLD
-      - Variceal prophylaxis if indicated
-      - Hepatology referral
-      - Transplant evaluation if decompensated (ascites, encephalopathy, variceal bleed, jaundice)
-      - Vaccinations (HAV, HBV, influenza, pneumococcal)
-      - Avoid NSAIDs, nephrotoxins
-      - HCC surveillance
+name: Cirrhosis
+family: Gastroenterology
+specialty: Gastroenterology
+chief_complaint: Ascites and jaundice
+description: |
+  End-stage liver disease with fibrosis and nodular regeneration. Irreversible architectural distortion.
+  Common causes include alcohol (40%), hepatitis C (30%), NAFLD (20%), hepatitis B (10%). Complications include portal hypertension, ascites, hepatic encephalopathy, variceal bleeding.
+icd10: K74.60
+urgency: Moderate
+workup:
+  - Liver enzymes (AST, ALT, alkaline phosphatase, bilirubin) - AST greater than ALT suggests alcohol
+  - Albumin and INR assess synthetic function
+  - Complete blood count (thrombocytopenia from portal hypertension and hypersplenism)
+  - Abdominal ultrasound with Doppler (assess for hepatocellular carcinoma, portal vein thrombosis, ascites)
+  - Child-Pugh score or MELD score to assess severity and prognosis
+  - Upper endoscopy to screen for esophageal varices
+  - Hepatitis B and C serology, autoimmune hepatitis panel, iron studies (hemochromatosis), ceruloplasmin (Wilson disease)
+  - Alpha-fetoprotein and liver imaging every 6 months to screen for hepatocellular carcinoma
+treatment:
+  - Treat underlying cause (alcohol cessation, antiviral therapy for hepatitis B/C, weight loss for NAFLD)
+  - Ascites management - sodium restriction less than 2g/day, diuretics (spironolactone 100mg plus furosemide 40mg daily)
+  - Large-volume paracentesis if tense ascites (albumin 6-8g per liter removed if greater than 5L)
+  - Spontaneous bacterial peritonitis prophylaxis - norfloxacin 400mg daily or ciprofloxacin 750mg weekly if history of SBP or ascitic protein less than 1.5 g/dL
+  - Beta-blocker (propranolol or carvedilol) for primary or secondary variceal bleeding prophylaxis
+  - Hepatic encephalopathy treatment - lactulose 30mL TID to achieve 2-3 soft bowel movements daily, rifaximin 550mg BID
+  - Nutrition - high-protein diet (1-1.5 g/kg/day), zinc and multivitamin supplementation
+  - Avoid hepatotoxins (alcohol, NSAIDs, certain antibiotics)
+  - Liver transplant evaluation if decompensated cirrhosis (MELD score 15 or higher)
+clinical_pearls:
+  - Compensated cirrhosis may be asymptomatic or have fatigue, pruritus
+  - Decompensated cirrhosis presents with ascites, variceal bleeding, hepatic encephalopathy, jaundice
+  - Child-Pugh score assesses severity using bilirubin, albumin, INR, ascites, encephalopathy (Class A best, C worst)
+  - MELD score predicts 3-month mortality and used for transplant prioritization
+  - Signs of portal hypertension include splenomegaly, thrombocytopenia, varices, ascites, caput medusae
+  - Hepatorenal syndrome is AKI from renal vasoconstriction in advanced cirrhosis (poor prognosis, needs transplant)
+differentials:
+  - Alcoholic liver disease
+  - Nonalcoholic fatty liver disease
+  - Chronic hepatitis B or C
+  - Autoimmune hepatitis
+  - Primary biliary cholangitis
+  - Hemochromatosis
+trace:
+  - Abdominal distension and leg swelling x 2 months → Jaundice, spider angiomata, palmar erythema on exam → Ultrasound shows cirrhotic liver, splenomegaly, ascites → Paracentesis shows SAAG greater than 1.1 (portal hypertension), no SBP → Hepatitis C antibody positive, HCV RNA detectable → Child-Pugh Class B, MELD 15 → Start spironolactone 100mg plus furosemide 40mg → Upper endoscopy shows medium varices, start propranolol 20mg BID → Treat hepatitis C with sofosbuvir/velpatasvir → Refer for liver transplant evaluation
