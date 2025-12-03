@@ -1,162 +1,47 @@
 tree_id: PULM-PULMONARY-HYPERTENSION
-name: Pulmonary Hypertension Evaluation
-family: PULMONOLOGY
-specialty: Pulmonology, Cardiology
-chief_complaint: Dyspnea, Fatigue, Syncope, Chest Pain
-description: Comprehensive evaluation and classification of pulmonary hypertension
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: pulmonary_hypertension_presentation
-
-nodes:
-  - id: pulmonary_hypertension_presentation
-    type: question
-    text: "Clinical classification?"
-    options:
-      - label: "Group 1 - Pulmonary arterial hypertension (PAH)"
-        next: pah_management
-      - label: "Group 2 - PH due to left heart disease"
-        next: ph_left_heart_disease
-      - label: "Group 3-5 - Other causes (lung disease, CTEPH, multifactorial)"
-        next: ph_other_causes
-
-  - id: pah_management
-    type: diagnosis
-    name: "Pulmonary Arterial Hypertension (PAH)"
-    icd10: "I27.0"
-    urgency: high
-    workup:
-      - Definition - Pulmonary hypertension (PH) from pulmonary arterial disease
-      - Hemodynamic criteria (right heart catheterization REQUIRED for diagnosis)
-      - Mean pulmonary artery pressure (mPAP) ≥20 mmHg (updated 2018, was ≥25)
-      - Pulmonary vascular resistance (PVR) ≥3 Wood units
-      - Pulmonary artery wedge pressure (PAWP) ≤15 mmHg (pre-capillary, excludes left heart disease)
-      - WHO Group 1 PAH - Subtypes
-      - Idiopathic PAH (IPAH) - No identifiable cause, diagnosis of exclusion
-      - Heritable PAH - BMPR2 mutation (most common), ALK1, endoglin
-      - Drug/toxin-induced - Appetite suppressants (fenfluramine, phentermine), methamphetamine, dasatinib, cocaine
-      - Associated PAH (APAH) - Connective tissue disease (scleroderma most common 10-15% develop PAH, SLE, MCTD), congenital heart disease (Eisenmenger syndrome), portal hypertension, HIV, schistosomiasis
-      - Clinical presentation - Progressive dyspnea (most common), fatigue, chest pain, syncope (exertional, poor prognostic sign), palpitations, lower extremity edema (RV failure)
-      - Median survival without treatment - 2.8 years from diagnosis
-      - Physical exam - Loud P2, RV heave, elevated JVP, tricuspid regurgitation murmur, hepatomegaly, ascites, peripheral edema (RV failure)
-      - Echocardiogram - Screening tool (NOT diagnostic)
-      - Elevated RVSP >40 mmHg (TR jet velocity), RV dilation/hypertrophy, RV dysfunction, RA enlargement, D-shaped LV (septal flattening)
-      - Cannot reliably estimate PA pressure, right heart cath required
-      - Right heart catheterization (RHC) - Gold standard, MUST perform for diagnosis
-      - Confirms hemodynamics, measures cardiac output (thermodilution or Fick), calculates PVR
-      - Vasoreactivity testing (acute vasodilator challenge) - Inhaled nitric oxide, IV epoprostenol, or IV adenosine
-      - Positive response - Decrease mPAP ≥10 mmHg to mPAP ≤40 mmHg with increased or unchanged cardiac output
-      - Only 10-15% respond (mostly IPAH), identifies CCB responders
-      - Additional workup to exclude other causes
-      - Pulmonary function tests with DLCO - Rule out parenchymal lung disease
-      - High-resolution CT chest - Rule out interstitial lung disease, emphysema
-      - V/Q scan - Rule out chronic thromboembolic PH (Group 4)
-      - More sensitive than CT angiography for CTEPH
-      - If V/Q shows mismatch, proceed to pulmonary angiography
-      - Serologies - ANA, anti-Scl-70, anti-centromere (scleroderma), HIV, hepatitis panel
-      - 6-minute walk test - Prognostic (distance <300m poor prognosis), assess functional capacity
-      - BNP or NT-proBNP - Elevated with RV strain, prognostic marker
-      - Risk stratification - Low/intermediate/high risk based on functional class, 6MWT, BNP, hemodynamics
-    treatment:
-      - General measures - All PAH patients
-      - Oxygen - If SpO2 <90% at rest or exertion (maintain >90%)
-      - Diuretics - Furosemide for volume overload, peripheral edema (careful not to over-diurese, preload-dependent RV)
-      - Anticoagulation - Warfarin INR 1.5-2.5 (controversial, recommended for IPAH, not routinely for APAH)
-      - Exercise - Supervised rehabilitation, avoid strenuous exertion
-      - Pregnancy avoidance - Maternal mortality 25-50%, contraception mandatory
-      - Immunizations - Influenza, pneumococcal
-      - Specific PAH therapies - Target three pathways (prostacyclin, endothelin, nitric oxide)
-      - Calcium channel blockers (CCBs) - ONLY if positive vasoreactivity test (10-15% of IPAH patients)
-      - Amlodipine 20mg daily or diltiazem 720mg daily (high doses needed)
-      - Excellent response if truly vasoreactive (5-year survival >95%)
-      - Do NOT use if vasoreactivity test negative (can worsen hemodynamics)
-      - Prostacyclin pathway agonists
-      - Epoprostenol (IV continuous infusion) - Most potent, gold standard for severe PAH (WHO FC IV)
-      - Requires permanent central line, continuous infusion pump (half-life 3-5 min)
-      - Improves survival in severe PAH
-      - Side effects - Flushing, jaw pain, diarrhea, line infections, pump malfunction (life-threatening)
-      - Treprostinil - IV, SC, or inhaled, longer half-life than epoprostenol
-      - Iloprost - Inhaled 6-9 times daily (short-acting)
-      - Selexipag - Oral prostacyclin receptor agonist (GRIPHON trial, reduces morbidity/mortality)
-      - Endothelin receptor antagonists (ERAs)
-      - Bosentan - Dual ERA (ETA and ETB), hepatotoxicity (monitor LFTs monthly), teratogenic
-      - Ambrisentan - Selective ETA, less hepatotoxicity
-      - Macitentan - Dual ERA, improved morbidity/mortality (SERAPHIN trial)
-      - Nitric oxide-cGMP pathway
-      - Phosphodiesterase-5 inhibitors (PDE5i) - Sildenafil 20mg TID, tadalafil 40mg daily
-      - Enhance cGMP, cause pulmonary vasodilation
-      - Well-tolerated, oral
-      - Soluble guanylate cyclase stimulator - Riociguat (NOT with PDE5i, risk hypotension)
-      - Combination therapy - Often required, especially moderate-severe PAH
-      - Initial combination (upfront dual therapy) - Ambrisentan + tadalafil (AMBITION trial, superior to monotherapy)
-      - Sequential addition - Start one agent, add second/third if inadequate response
-      - Triple therapy - Prostacyclin + ERA + PDE5i for refractory severe PAH
-      - Treatment algorithm by risk stratification
-      - Low risk (WHO FC I-II, 6MWT >440m, BNP <50) - Oral monotherapy (ERA or PDE5i) OR upfront combination
-      - Intermediate risk (WHO FC II-III, 6MWT 165-440m) - Upfront combination therapy (ambrisentan + tadalafil) OR add second agent if on monotherapy
-      - High risk (WHO FC IV, 6MWT <165m, syncope, RV failure, high BNP) - IV/SC prostacyclin ± oral agents, consider lung transplant evaluation
-      - Balloon atrial septostomy - Palliative, create R→L shunt to decompress RV (improves systemic output), bridge to transplant
-      - Lung transplant - Definitive treatment, consider if refractory to maximal medical therapy
-      - Indications - Rapidly progressive, WHO FC IV despite combination therapy, severe RV failure
-      - Survival post-transplant - 50% at 5 years
-
-  - id: ph_left_heart_disease
-    type: diagnosis
-    name: "PH Due to Left Heart Disease (Group 2)"
-    icd10: "I27.2"
-    urgency: high
-    workup:
-      - Most common cause of PH overall (60-70% of all PH)
-      - Etiology - Left-sided valvular disease (mitral stenosis, mitral regurgitation, aortic stenosis), left ventricular systolic dysfunction (HFrEF), left ventricular diastolic dysfunction (HFpEF - most common)
-      - Pathophysiology - Elevated left atrial pressure → passive backward transmission to pulmonary veins → postcapillary PH
-      - Can develop reactive pulmonary arterial changes (combined pre- and postcapillary PH) if chronic
-      - Hemodynamics - Right heart catheterization
-      - mPAP ≥20 mmHg
-      - PAWP >15 mmHg (postcapillary, elevated left-sided filling pressures)
-      - If PVR <3 Wood units - Isolated postcapillary PH (IpcPH)
-      - If PVR ≥3 Wood units - Combined pre- and postcapillary PH (CpcPH, reactive component)
-      - Diastolic pressure gradient (DPG = diastolic PAP - PAWP) >7 mmHg also suggests CpcPH
-      - Clinical - Dyspnea, orthopnea, paroxysmal nocturnal dyspnea, crackles on lung exam (pulmonary edema), S3 gallop, history of CAD, hypertension, diabetes
-      - Echocardiogram - Assess LV function (EF), diastolic dysfunction (E/e' ratio), valvular disease, LA enlargement
-      - Elevated RVSP, but may underestimate severity
-    treatment:
-      - Treat underlying left heart disease - Mainstay
-      - HFrEF - GDMT (ACE/ARB or ARNI, beta-blocker, MRA, SGLT2i), see CARD-CARDIOMYOPATHY tree
-      - HFpEF - BP control, diuretics, SGLT2i (dapagliflozin, empagliflozin reduce HF hospitalization)
-      - Valvular disease - Surgical or transcatheter valve repair/replacement (TAVR for AS, MitraClip for MR)
-      - Diuretics - Loop diuretics (furosemide) to reduce volume overload, PAWP
-      - PAH-specific therapies - Generally CONTRAINDICATED in Group 2 PH
-      - Can worsen pulmonary edema (vasodilate pulmonary circulation → increase blood flow to left heart → worsen congestion)
-      - Trials (phosphodiesterase inhibitors, ERAs) showed no benefit or harm
-      - Exception - May consider in highly selected patients with severe CpcPH (PVR ≥5) refractory to optimal left heart management, in specialized centers only
-
-  - id: ph_other_causes
-    type: diagnosis
-    name: "PH Other Causes (Groups 3-5)"
-    icd10: "I27.2"
-    urgency: medium
-    workup:
-      - Group 3 - PH due to lung disease and/or hypoxia
-      - COPD (most common), interstitial lung disease (IPF, NSIP), sleep-disordered breathing (OSA, obesity hypoventilation), high altitude, developmental lung abnormalities
-      - Usually mild-moderate PH (mPAP 25-35 mmHg)
-      - Workup - PFTs (obstructive vs restrictive pattern, DLCO), chest CT (emphysema, fibrosis), polysomnography (sleep apnea)
-      - Treatment - Treat underlying lung disease (bronchodilators for COPD, antifibrotics for IPF, CPAP for OSA), supplemental oxygen (goal SpO2 >90%), PAH-specific therapies NOT recommended (no proven benefit, may worsen V/Q mismatch)
-      - Group 4 - Chronic thromboembolic pulmonary hypertension (CTEPH)
-      - Persistent PH due to organized thrombi in pulmonary arteries (failed to resolve after acute PE)
-      - 2-4% of PE patients develop CTEPH
-      - Clinical - Progressive dyspnea months to years after PE (or no known PE history in 25%)
-      - V/Q scan - Screening test of choice, mismatched perfusion defects
-      - CT angiography - Organized thrombi, webs, bands, pouch defects in pulmonary arteries
-      - Right heart cath - Confirms PH, pre-capillary (PAWP ≤15, PVR ≥3)
-      - Pulmonary angiography - Gold standard, delineates anatomy for surgery
-      - Treatment - Pulmonary thromboendarterectomy (PTE) - Curative surgical procedure, remove organized thrombi from pulmonary arteries
-      - Only definitive treatment, should be evaluated at experienced center
-      - Cure rate 60-70%, perioperative mortality 2-5%
-      - Inoperable CTEPH - Distal disease, comorbidities
-      - Balloon pulmonary angioplasty (BPA) - Percutaneous dilation of stenotic vessels, multiple sessions
-      - Medical therapy - Riociguat (soluble guanylate cyclase stimulator, CHEST-1 trial), consider other PAH therapies
-      - Lifelong anticoagulation mandatory (prevent recurrent thrombosis)
-      - Group 5 - PH with unclear multifactorial mechanisms
-      - Hematologic (sickle cell disease, myeloproliferative disorders, chronic hemolytic anemia), systemic disorders (sarcoidosis, vasculitis, Langerhans cell histiocytosis), metabolic (glycogen storage disease, Gaucher disease), chronic renal failure on dialysis, tumoral obstruction
-      - Treat underlying disorder
+name: Pulmonary Hypertension
+family: Pulmonology
+specialty: Pulmonology
+chief_complaint: Dyspnea on exertion and fatigue
+description: |
+  Elevated pulmonary artery pressure (mean PAP greater than 20 mmHg at rest). Five WHO groups based on etiology.
+  Group 1 (pulmonary arterial hypertension), Group 2 (left heart disease), Group 3 (lung disease/hypoxia), Group 4 (CTEPH), Group 5 (unclear/multifactorial). Progressive disease leads to right heart failure.
+icd10: I27.0
+urgency: Moderate
+workup:
+  - Transthoracic echocardiogram (TTE) screening tool - estimates right ventricular systolic pressure (RVSP) from tricuspid regurgitation jet velocity
+  - RVSP greater than 40 mmHg suggests PH, but echo alone cannot definitively diagnose
+  - Right heart catheterization gold standard - mean PAP greater than 20 mmHg diagnostic
+  - Measure pulmonary capillary wedge pressure (PCWP) - distinguishes precapillary (PCWP less than 15, groups 1, 3, 4, 5) from postcapillary (PCWP greater than 15, group 2)
+  - Pulmonary function tests and arterial blood gas (assess for lung disease, hypoxemia)
+  - High-resolution CT chest (evaluate for interstitial lung disease, emphysema)
+  - V/Q scan to rule out chronic thromboembolic disease (CTEPH)
+  - 6-minute walk test (assess functional capacity and prognosis)
+  - Labs - BNP (elevated indicates RV strain), CBC, comprehensive metabolic panel, HIV, hepatitis serologies, ANA, scleroderma antibodies
+treatment:
+  - Treat underlying cause - optimize left heart failure, treat lung disease, anticoagulation and consider pulmonary thromboendarterectomy for CTEPH
+  - Group 1 PAH-specific therapies (do not use in groups 2-5 unless specialized center)
+  - Calcium channel blockers if vasoreactive on testing (only 5-10% respond) - amlodipine 10-20mg or diltiazem 240-720mg
+  - Endothelin receptor antagonists - ambrisentan 5-10mg daily, bosentan 125mg BID (monitor liver enzymes)
+  - Phosphodiesterase-5 inhibitors - sildenafil 20mg TID, tadalafil 40mg daily
+  - Prostacyclin analogs - epoprostenol IV continuous infusion (most effective), treprostinil SC or IV, inhaled iloprost
+  - Combination therapy often required for WHO functional class III-IV
+  - Diuretics for volume overload and right heart failure
+  - Supplemental oxygen if SpO2 less than 90%
+  - Lung transplant or heart-lung transplant for refractory severe disease
+clinical_pearls:
+  - Symptoms nonspecific in early disease - dyspnea, fatigue, chest pain, syncope
+  - Physical exam shows elevated JVP, loud P2, tricuspid regurgitation murmur, hepatomegaly, peripheral edema
+  - Screening recommended for high-risk populations (scleroderma, portal hypertension, congenital heart disease, HIV)
+  - WHO functional class predicts prognosis (I minimal symptoms, II mild limitation, III marked limitation, IV symptoms at rest)
+  - BNP and 6-minute walk distance important prognostic markers
+  - Avoid pregnancy (high maternal mortality 30-50%)
+differentials:
+  - Heart failure with preserved ejection fraction
+  - Chronic obstructive pulmonary disease
+  - Interstitial lung disease
+  - Pulmonary embolism
+  - Valvular heart disease
+  - Sleep apnea
+trace:
+  - Progressive dyspnea on exertion x 1 year, now short of breath climbing stairs → Exam shows elevated JVP, loud P2 → Echo shows RVSP 65 mmHg, dilated right ventricle → PFTs normal, V/Q scan low probability → Right heart catheterization shows mean PAP 38 mmHg, PCWP 12 mmHg → Diagnose Group 1 pulmonary arterial hypertension (idiopathic) → Start sildenafil 20mg TID plus ambrisentan 5mg daily → 6-minute walk improves from 320m to 410m → Continue dual therapy, follow with serial echocardiograms and functional assessments
