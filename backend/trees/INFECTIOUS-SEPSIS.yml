@@ -1,0 +1,46 @@
+tree_id: INFECTIOUS-SEPSIS
+name: Sepsis
+family: Infectious Disease
+specialty: Infectious Disease
+chief_complaint: Fever, hypotension, and altered mental status
+description: |
+  Life-threatening organ dysfunction caused by dysregulated host response to infection.
+  Septic shock is sepsis with persistent hypotension requiring vasopressors and lactate greater than 2 mmol/L. Mortality 20-40%.
+icd10: A41.9
+urgency: Critical
+workup:
+  - Sepsis diagnosis requires infection plus SOFA score increase of 2 or more points
+  - Quick SOFA (qSOFA) for screening - altered mental status, systolic BP less than 100 mmHg, respiratory rate 22 or higher (2 of 3 suggests sepsis)
+  - Blood cultures x2 from different sites before antibiotics (positive in 30-40%)
+  - Lactate level (greater than 2 mmol/L indicates tissue hypoperfusion, greater than 4 mmol/L high mortality)
+  - Complete blood count (leukocytosis or leukopenia), basic metabolic panel, liver enzymes, coagulation studies
+  - Source identification - urinalysis and culture, chest X-ray, wound cultures, lumbar puncture if meningitis suspected
+  - Procalcitonin helps distinguish bacterial from viral infection
+  - ABG if respiratory distress or shock
+treatment:
+  - Sepsis bundle (complete within 1 hour) - measure lactate, obtain blood cultures, give broad-spectrum antibiotics, start IV fluids
+  - Broad-spectrum antibiotics within 1 hour (each hour delay increases mortality 7%)
+  - Empiric antibiotics - vancomycin 15-20 mg/kg plus piperacillin-tazobactam 4.5g IV q6h or meropenem 1g IV q8h
+  - Adjust antibiotics based on culture results and source
+  - Aggressive IV fluid resuscitation - 30 mL/kg crystalloid (lactated Ringer's or normal saline) bolus within 3 hours
+  - Septic shock management - norepinephrine first-line vasopressor (target MAP greater than 65 mmHg)
+  - Add vasopressin 0.03-0.04 units/min if inadequate response to norepinephrine
+  - Hydrocortisone 200mg/day if refractory shock despite fluids and vasopressors
+  - Source control - drain abscesses, remove infected devices, debride necrotic tissue
+  - Supportive care - mechanical ventilation if ARDS, renal replacement therapy if AKI
+clinical_pearls:
+  - Common sources include pneumonia (most common), urinary tract, abdominal, skin/soft tissue, bloodstream (catheter-related)
+  - SIRS criteria (2 or more of fever/hypothermia, tachycardia, tachypnea, WBC abnormal) no longer used for sepsis definition
+  - Early goal-directed therapy (EGDT) protocol less emphasized now, focus on early antibiotics and adequate resuscitation
+  - Lactate clearance (decrease by 10% in 2-6 hours) indicates adequate resuscitation
+  - Avoid over-resuscitation (fluid overload worsens outcomes)
+  - De-escalate antibiotics once pathogen identified to prevent resistance
+differentials:
+  - Septic shock
+  - Hypovolemic shock
+  - Cardiogenic shock
+  - Anaphylaxis
+  - Adrenal insufficiency
+  - Toxic shock syndrome
+trace:
+  - Fever 102F, hypotension 85/50 mmHg, altered mental status, tachypneic → qSOFA score 3 → Blood cultures drawn, lactate 4.2 mmol/L → Diagnose sepsis, likely pneumonia (CXR shows infiltrate) → Vancomycin 1.5g IV plus piperacillin-tazobactam 4.5g IV within 30 minutes → 30 mL/kg LR bolus (2100 mL over 3 hours) → Persistent hypotension, start norepinephrine → Admit ICU → Blood cultures grow Streptococcus pneumoniae, narrow to ceftriaxone → Wean off vasopressors day 3 → Complete 7-day antibiotic course

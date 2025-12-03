@@ -1,0 +1,46 @@
+tree_id: CARD-ACUTE-CORONARY-SYNDROME
+name: Acute Coronary Syndrome
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest pain and dyspnea
+description: |
+  Spectrum of coronary artery disease from unstable angina to STEMI. Caused by plaque rupture with thrombosis.
+  STEMI (ST-elevation MI), NSTEMI (non-ST-elevation MI), unstable angina. Leading cause of death worldwide.
+icd10: I24.9
+urgency: Critical
+workup:
+  - ECG within 10 minutes of presentation (STEMI shows ST elevation in 2+ contiguous leads, new LBBB)
+  - Cardiac troponin at presentation and 3-6 hours later (elevated in MI, normal in unstable angina)
+  - NSTEMI shows ST depression, T wave inversion, or non-specific changes with positive troponin
+  - Complete blood count, basic metabolic panel, lipid panel, coagulation studies
+  - Chest X-ray to rule out other causes (aortic dissection, pneumothorax, pneumonia)
+  - Echocardiogram to assess wall motion abnormalities and ejection fraction
+  - Coronary angiography for definitive diagnosis and revascularization
+treatment:
+  - STEMI treatment - immediate reperfusion therapy (door-to-balloon time <90 minutes preferred)
+  - Primary PCI (percutaneous coronary intervention) preferred over fibrinolysis if available within 120 minutes
+  - Fibrinolysis if PCI not available (alteplase, tenecteplase) - give within 12 hours of symptom onset
+  - Aspirin 325mg chewed immediately (reduces mortality 20-25%)
+  - P2Y12 inhibitor - clopidogrel 600mg, ticagrelor 180mg, or prasugrel 60mg loading dose
+  - Anticoagulation - heparin bolus 60 units/kg (max 4000 units) then infusion, or enoxaparin 1 mg/kg SC q12h
+  - Beta-blocker (metoprolol 25-50mg PO) within 24 hours if no contraindications
+  - High-intensity statin (atorvastatin 80mg or rosuvastatin 40mg)
+  - ACE inhibitor (lisinopril 2.5-5mg) if anterior MI, EF <40%, hypertension, or diabetes
+  - Nitroglycerin for ongoing chest pain (sublingual or IV drip)
+  - Morphine for refractory pain
+clinical_pearls:
+  - Classic presentation includes substernal chest pressure radiating to left arm or jaw, associated with dyspnea, diaphoresis, nausea
+  - Atypical presentations more common in women, elderly, diabetics (dyspnea, fatigue, epigastric pain)
+  - STEMI criteria include ST elevation at J point in 2+ contiguous leads (greater than 1mm in limb leads, greater than 2mm in precordial leads)
+  - Sgarbossa criteria help diagnose MI in presence of LBBB
+  - Killip classification predicts mortality - Class I (no heart failure), II (rales, S3), III (pulmonary edema), IV (cardiogenic shock)
+  - Complications include arrhythmias, heart failure, mechanical (papillary muscle rupture, VSD, free wall rupture), pericarditis
+differentials:
+  - Aortic dissection
+  - Pulmonary embolism
+  - Pneumothorax
+  - Pericarditis
+  - Gastroesophageal reflux disease
+  - Costochondritis
+trace:
+  - Severe substernal chest pressure radiating to left arm x 30 minutes → ECG shows ST elevation in V2-V5 → Aspirin 325mg chewed, ticagrelor 180mg, heparin bolus → Diagnose anterior STEMI → Activate cath lab, door-to-balloon 65 minutes → PCI with stent to LAD → Start metoprolol, atorvastatin 80mg, lisinopril → Dual antiplatelet therapy x 12 months → Cardiac rehab referral

@@ -1,87 +1,47 @@
 tree_id: ORTHO-HIP-FRACTURE
-name: Hip Fracture Management
-family: ORTHOPEDICS
-specialty: Orthopedic Surgery, Geriatrics, Internal Medicine
-chief_complaint: Hip Pain After Fall, Unable to Bear Weight
-description: Evaluation and management of hip fractures
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: hip_fracture_evaluation
-
-nodes:
-  - id: hip_fracture_evaluation
-    type: diagnosis
-    name: "Hip Fracture"
-    icd10: "S72.009A"
-    urgency: high
-    workup:
-      - Epidemiology - Common in elderly, >300,000 per year US, 90% from falls, women > men (osteoporosis)
-      - High morbidity/mortality - 1-year mortality 20-30%, loss of independence 50%
-      - Risk factors - Age, osteoporosis, low BMD, prior fracture, fall risk, female, smoking, alcohol, vitamin D deficiency, medications (steroids, sedatives)
-      - Anatomy - Intracapsular vs extracapsular
-      - Intracapsular (femoral neck) - Within hip joint capsule, disrupts blood supply to femoral head (risk AVN)
-      - Extracapsular - Intertrochanteric (between greater/lesser trochanter) or subtrochanteric (below lesser trochanter)
-      - Clinical presentation
-      - Unable to bear weight, severe hip/groin pain
-      - Shortened, externally rotated leg (classic)
-      - Tenderness to palpation, pain with range of motion (especially internal rotation)
-      - Rare: Nondisplaced fracture may walk with pain
-      - Imaging
-      - AP pelvis + lateral hip X-rays - Diagnostic in 90-95%
-      - Femoral neck fracture - Lucency through neck, displacement, angulation
-      - Intertrochanteric fracture - Fracture line between trochanters, comminution
-      - If X-ray negative but high clinical suspicion - MRI (gold standard, nearly 100% sensitive) or CT
-      - Occult fracture 5-10%, MRI detects bone marrow edema
-      - Classification
-      - Femoral neck (intracapsular) - Garden classification (I-IV, based on displacement)
-      - Garden I-II (nondisplaced) - Lower AVN risk (10-15%)
-      - Garden III-IV (displaced) - High AVN risk (20-40%), worse outcomes
-      - Intertrochanteric (extracapsular) - Evans or AO/OTA classification (stability based on comminution, posteromedial cortex)
-      - Stable (2-part) vs unstable (3-4 part, reverse obliquity)
-    treatment:
-      - Surgical management - Nearly all hip fractures require surgery (exceptions: non-ambulatory, severe dementia, hospice)
-      - Goal - Early mobilization (reduce complications: DVT, pneumonia, pressure ulcers, delirium, death)
-      - Timing - Within 24-48 hours (delay increases mortality, complications)
-      - Optimize medically first (volume resuscitation, cardiac clearance if needed, correct coagulopathy)
-      - Surgical options depend on fracture type
-      - Femoral neck (intracapsular) fractures
-      - Young patients (<65 years) or active - Internal fixation (cannulated screws or sliding hip screw)
-      - Preserve native hip, allow fracture healing
-      - Risk AVN 10-30%, nonunion 10-20%
-      - Elderly (>65 years) displaced fractures - Arthroplasty (replacement)
-      - Hemiarthroplasty (femoral head replacement) - Active, independent ambulators, lower surgical risk
-      - Total hip arthroplasty (THR) - Healthy, active, pre-existing hip arthritis, higher function goals
-      - THR better function long-term but higher dislocation risk, longer surgery
-      - Elderly nondisplaced fractures - Internal fixation acceptable (lower AVN risk)
-      - Intertrochanteric (extracapsular) fractures
-      - Sliding hip screw (SHS) with side plate - Stable fractures (2-part, no comminution)
-      - Most common, allows controlled collapse, good outcomes
-      - Cephalomedullary nail (intramedullary hip screw) - Unstable fractures (3-4 part, reverse obliquity, subtrochanteric extension)
-      - Load-sharing device, better for unstable patterns
-      - Faster surgery, less blood loss
-      - Perioperative management
-      - Anesthesia - Spinal or general (similar outcomes, spinal may have less delirium)
-      - Venous thromboembolism prophylaxis - Enoxaparin 40 mg SC daily or fondaparinux 2.5 mg SC daily x 10-35 days post-op (high VTE risk)
-      - Mechanical prophylaxis (SCDs) if bleeding contraindication
-      - Pain management - Multimodal (acetaminophen, NSAIDs if safe, nerve blocks, opioids judiciously)
-      - Avoid oversedation (delirium risk)
-      - Transfusion - Restrictive strategy (Hgb <7-8 g/dL in stable patients), liberal if symptomatic anemia or cardiovascular disease
-      - Early mobilization - Physical therapy day 1 post-op (weight-bearing as tolerated with most repairs)
-      - Prevents complications (pneumonia, DVT, delirium, pressure ulcers, muscle atrophy)
-      - Delirium prevention - Reorient frequently, minimize sedatives/anticholinergics, early mobilization, adequate pain control, sleep hygiene
-      - Nutrition - High protein, calcium, vitamin D
-      - Complications
-      - Mortality - 5-10% in-hospital, 20-30% 1-year (higher if male, advanced age, comorbidities, delayed surgery)
-      - Medical - DVT/PE (5-10%), pneumonia, MI, delirium (up to 50%), pressure ulcers, UTI
-      - Surgical - Infection (1-5%), hardware failure, nonunion (intertrochanteric <5%, femoral neck 10-30%), AVN (femoral neck 10-40%), dislocation (THR 2-10%)
-      - Functional decline - 50% lose independence, 20-30% require long-term care
-      - Osteoporosis management - CRITICAL to prevent second fracture (20% risk 1 year)
-      - DEXA scan (if not already done)
-      - Calcium 1200 mg/day + vitamin D 800-1000 IU daily
-      - Bisphosphonates - Alendronate 70 mg weekly or zoledronic acid 5 mg IV yearly
-      - Start after fracture healing (6-12 weeks post-op)
-      - Reduce second fracture risk 30-40%
-      - Alternatives: Denosumab 60 mg SC q6 months, teriparatide (if very high risk)
-      - Fall prevention - PT/OT home assessment, remove hazards, assistive devices, vision/hearing optimization, medication review (minimize sedatives)
-      - Discharge planning - Majority require rehab (SNF or inpatient rehab), home with home health if good prior function
+name: Hip Fracture
+family: Orthopedics
+specialty: Orthopedics
+chief_complaint: Hip pain and inability to bear weight after fall
+description: |
+  Fracture of proximal femur (femoral neck, intertrochanteric, or subtrochanteric). Most common in elderly with osteoporosis.
+  90% occur from low-energy falls. High morbidity and mortality - 1-year mortality 20-30%.
+icd10: S72.009A
+urgency: Critical
+workup:
+  - X-ray pelvis and hip (AP and lateral views) diagnoses 95% of fractures
+  - MRI hip if high clinical suspicion with negative X-ray (detects occult fractures)
+  - CT scan alternative if MRI contraindicated
+  - Classify fracture type - femoral neck (intracapsular), intertrochanteric, subtrochanteric (affects treatment)
+  - Garden classification for femoral neck fractures (I-IV, higher grades indicate displacement)
+  - Complete blood count, type and screen, basic metabolic panel, coagulation studies
+  - ECG, chest X-ray for preoperative clearance
+  - Assess for medical optimization before surgery
+treatment:
+  - Surgery within 24-48 hours reduces mortality and complications
+  - Femoral neck fracture displaced (Garden III-IV) - total hip arthroplasty or hemiarthroplasty in elderly
+  - Femoral neck fracture non-displaced (Garden I-II) - internal fixation with cannulated screws
+  - Intertrochanteric fracture - intramedullary nail (cephalomedullary nail) or sliding hip screw
+  - Subtrochanteric fracture - intramedullary nail
+  - Non-operative management only if patient non-ambulatory or severe comorbidities preclude surgery
+  - Pain control - nerve blocks (femoral or fascia iliaca) preferred over opioids
+  - Multimodal analgesia - acetaminophen, NSAIDs, regional anesthesia
+  - DVT prophylaxis - enoxaparin 40mg SC daily or fondaparinux 2.5mg SC daily
+  - Early mobilization postoperatively (same or next day) improves outcomes
+  - Physical therapy and rehabilitation essential
+clinical_pearls:
+  - Classic presentation includes shortened, externally rotated leg after fall, unable to bear weight
+  - Femoral neck fractures risk AVN (avascular necrosis) due to disruption of blood supply
+  - Displaced femoral neck fractures in young patients require urgent ORIF to preserve femoral head
+  - Intertrochanteric fractures heal reliably (extracapsular, good blood supply)
+  - Osteoporosis treatment essential after fracture - bisphosphonate (alendronate) or denosumab, calcium, vitamin D
+  - Fall risk assessment and prevention critical (home safety, vision, medications, PT)
+differentials:
+  - Hip contusion
+  - Greater trochanter fracture (avulsion)
+  - Pubic ramus fracture
+  - Femoral shaft fracture
+  - Pathologic fracture (metastatic disease)
+  - Hip dislocation
+trace:
+  - 82-year-old woman fell at home, unable to bear weight on right leg → Right leg shortened and externally rotated → X-ray shows displaced right femoral neck fracture (Garden IV) → Admit, pain control with fascia iliaca block → Preoperative clearance → Hemiarthroplasty within 24 hours → DVT prophylaxis with enoxaparin → Early mobilization with PT day 1 postop → Discharge to rehab facility → Start alendronate for osteoporosis → Fall prevention evaluation
