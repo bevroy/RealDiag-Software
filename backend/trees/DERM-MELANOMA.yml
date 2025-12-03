@@ -2,42 +2,55 @@ tree_id: DERM-MELANOMA
 name: Melanoma
 family: Dermatology
 specialty: Dermatology
-chief_complaint: Changing mole or skin lesion
+chief_complaint: Changing mole or suspicious pigmented lesion
 description: |
-  Malignant tumor of melanocytes. Most deadly skin cancer. Early detection crucial for survival.
-  ABCDE criteria: Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolution.
+  Most deadly skin cancer, arises from melanocytes. Early detection critical - 5-year survival 99% if localized, 27% if distant metastases.
+  Risk factors include UV exposure, fair skin, multiple nevi, family history, CDKN2A mutations. Four main subtypes - superficial spreading (70%), nodular, lentigo maligna, acral lentiginous.
 icd10: C43.9
 urgency: High
 workup:
-  - Detailed skin examination with dermoscopy
-  - ABCDE criteria assessment
-  - Total body skin examination
-  - Excisional biopsy with 1-3mm margins (diagnostic gold standard)
-  - Sentinel lymph node biopsy if depth >0.8mm or ulceration present
-  - Staging CT chest/abdomen/pelvis and brain MRI if stage IIC or higher
-  - LDH level (elevated suggests metastatic disease)
-  - Genetic testing for BRAF V600 mutation if stage III or IV
+  - ABCDE criteria for suspicious lesions - Asymmetry, Border irregularity, Color variation, Diameter greater than 6 mm, Evolving (changing size, shape, color)
+  - Ugly duckling sign - lesion looks different from other nevi
+  - Dermoscopy aids diagnosis - asymmetric pigment network, irregular dots/globules, blue-white veil, regression structures
+  - Excisional biopsy with 1-3 mm margins preferred (allows assessment of full depth) - complete lesion removal
+  - Punch or shave biopsy acceptable if lesion large or cosmetically sensitive area
+  - Histopathology determines Breslow depth (mm of invasion), ulceration, mitotic rate, Clark level
+  - Breslow depth most important prognostic factor - thin (less than 1 mm), intermediate (1-4 mm), thick (greater than 4 mm)
+  - Sentinel lymph node biopsy indicated if Breslow depth greater than 0.8 mm or ulceration present
+  - Staging - physical exam for lymphadenopathy, satellite/in-transit lesions
+  - CT chest/abdomen/pelvis and brain MRI if high-risk (stage IIB or higher, positive lymph nodes)
+  - LDH if metastatic disease suspected
 treatment:
-  - Wide local excision: 0.5-1cm margins for in situ, 1cm for <1mm depth, 2cm for >1mm depth
-  - Sentinel lymph node biopsy for staging (not therapeutic but prognostic)
-  - Adjuvant immunotherapy for stage III: nivolumab or pembrolizumab (anti-PD-1) reduces recurrence by 50%
-  - Adjuvant targeted therapy if BRAF V600 mutation: dabrafenib plus trametinib
-  - Metastatic disease: First-line immunotherapy (nivolumab plus ipilimumab or pembrolizumab monotherapy)
-  - BRAF/MEK inhibitors if BRAF mutated and immunotherapy fails
-  - Radiation therapy for brain metastases or symptomatic lesions
+  - Wide local excision with margins based on Breslow depth
+  - In situ - 5 mm margins
+  - Less than 1 mm - 1 cm margins
+  - 1-2 mm - 1-2 cm margins
+  - Greater than 2 mm - 2 cm margins
+  - Sentinel lymph node biopsy (SLNB) if Breslow greater than 0.8 mm - identifies occult nodal metastases
+  - Complete lymph node dissection no longer routine if positive SLNB (completion dissection does not improve survival)
+  - Adjuvant therapy for stage IIB-IV (high risk of recurrence)
+  - Pembrolizumab (anti-PD-1) 200mg IV q3 weeks or 400mg IV q6 weeks x 1 year - reduces recurrence by 35%, improves survival
+  - Nivolumab (anti-PD-1) 240mg IV q2 weeks or 480mg IV q4 weeks x 1 year - similar efficacy to pembrolizumab
+  - BRAF/MEK inhibitors for BRAF V600 mutations - dabrafenib 150mg BID plus trametinib 2mg daily x 1 year
+  - Metastatic melanoma treatment - immunotherapy (pembrolizumab, nivolumab, ipilimumab/nivolumab combination) or targeted therapy if BRAF mutation
+  - Ipilimumab/nivolumab combination higher response rate (58%) but more toxicity than monotherapy
+  - Radiation therapy for symptomatic metastases or as adjuvant if high-risk features
+  - Surveillance - skin exam every 3-6 months x 5 years then annually, imaging based on stage
+  - Sun protection - broad-spectrum SPF 30+, protective clothing, avoid midday sun, no tanning beds
+  - Screen family members (10% have family history)
 clinical_pearls:
-  - Breslow depth most important prognostic factor (survival decreases with increasing depth)
-  - 5-year survival: 99% for stage IA, 10-15% for stage IV
-  - Melanoma can arise de novo (70%) or from existing nevus (30%)
-  - Amelanotic melanoma lacks pigment (5-10% of cases, easily missed)
-  - Patients need lifelong surveillance every 3-6 months
-  - Sun protection critical for prevention (SPF 30+, protective clothing, avoid tanning beds)
+  - Nodular melanoma most aggressive subtype - vertical growth phase from onset, amelanotic (25% lack pigment)
+  - Acral lentiginous melanoma on palms, soles, nail beds - most common in darker skin types, often diagnosed late
+  - Amelanotic melanoma challenging diagnosis - red or flesh-colored nodule, high index of suspicion
+  - Pregnancy does not worsen prognosis but may delay diagnosis (changes in existing nevi common)
+  - Ulceration worse prognosis at any Breslow depth
+  - Desmoplastic melanoma neurotropic variant - high local recurrence, consider adjuvant radiation
 differentials:
   - Seborrheic keratosis
-  - Basal cell carcinoma
-  - Squamous cell carcinoma
   - Dysplastic nevus
   - Blue nevus
+  - Pigmented basal cell carcinoma
   - Dermatofibroma
+  - Hematoma
 trace:
-  - Changing or new pigmented lesion → Dermoscopy and ABCDE criteria → Excisional biopsy → Pathology confirms melanoma with Breslow depth → Wide local excision with appropriate margins → Sentinel lymph node biopsy if indicated → Staging imaging if high-risk → Adjuvant therapy for stage III → Lifelong surveillance
+  - 55-year-old woman with changing mole on upper back x 6 months, irregular borders, multiple colors → Dermoscopy shows asymmetric pigment network, blue-white veil → Excisional biopsy with 2 mm margins → Pathology shows superficial spreading melanoma, Breslow depth 1.8 mm, no ulceration, mitotic rate 3/mm2 → Diagnose stage IB melanoma → Wide local excision with 2 cm margins → Sentinel lymph node biopsy shows no metastases (0/3 nodes) → Final stage IB (T2aN0M0) → Moderate risk of recurrence → Discuss adjuvant pembrolizumab vs observation → Patient opts for surveillance → Skin exam every 3 months, total body photography → Annual full-body skin exams, no recurrence at 3 years → Counseled on sun protection and self-skin exams

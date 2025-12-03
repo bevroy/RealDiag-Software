@@ -1,143 +1,52 @@
 tree_id: INFECTIOUS-HIV-AIDS
-name: HIV/AIDS Evaluation
-family: INFECTIOUS_DISEASE
+name: HIV/AIDS
+family: Infectious Disease
 specialty: Infectious Disease
-chief_complaint: Risk Exposure, Opportunistic Infections, Weight Loss
-description: Evaluation and management of HIV infection and AIDS
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: hiv_evaluation
-
-nodes:
-  - id: hiv_evaluation
-    type: diagnosis
-    name: "HIV/AIDS"
-    icd10: "B20"
-    urgency: high
-    workup:
-      - Human immunodeficiency virus (HIV) - Retrovirus infects CD4+ T-lymphocytes → progressive immunodeficiency
-      - AIDS (acquired immunodeficiency syndrome) - Advanced HIV with CD4 <200 or AIDS-defining illness
-      - Epidemiology - 38 million people living with HIV worldwide (2020), 1.2 million US
-      - 35,000 new infections/year US
-      - Disproportionately affects men who have sex with men (MSM 70%), Black/Hispanic populations
-      - Transmission - Blood, sexual contact, perinatal (mother-to-child)
-      - Sexual - Receptive anal intercourse highest risk (1.4% per act), vaginal intercourse (0.1-0.2%), oral sex (very low risk)
-      - Parenteral - Injection drug use (sharing needles), needle-stick injury (0.3%), transfusion (rare in US, <1 in 1.5 million)
-      - Perinatal - Without intervention 25%, with ART + interventions <1%
-      - NOT transmitted - Casual contact, saliva, tears, urine, insect bites
-      - Pathophysiology - HIV infects CD4+ T-cells (using CD4 receptor + CCR5/CXCR4 coreceptor) → integrates into host DNA → viral replication → CD4 cell depletion → immunodeficiency
-      - Natural history (without treatment)
-      - Acute HIV infection (2-4 weeks post-exposure) - High viral load, CD4 decline, acute retroviral syndrome 50-90%
-      - Chronic HIV (clinical latency, years) - Viral replication continues, gradual CD4 decline, asymptomatic or mild symptoms
-      - AIDS (8-10 years without treatment) - CD4 <200 or opportunistic infections
-      - Death (2-3 years after AIDS diagnosis without treatment)
-      - Stages of HIV infection (CDC classification)
-      - Stage 1 - CD4 ≥500 cells/μL or ≥26%
-      - Stage 2 - CD4 200-499 cells/μL or 14-25%
-      - Stage 3 (AIDS) - CD4 <200 cells/μL or <14% OR AIDS-defining illness (regardless of CD4)
-      - Clinical presentation - Depends on stage
-      - Acute HIV infection (acute retroviral syndrome, 50-90%) - 2-4 weeks post-exposure
-      - Flu-like illness - Fever, fatigue, pharyngitis, myalgias, headache
-      - Lymphadenopathy - Generalized
-      - Rash - Maculopapular, trunk/face
-      - Mucocutaneous ulcers - Oral/genital
-      - Duration 1-2 weeks, self-limited
-      - Often misdiagnosed as mononucleosis or viral syndrome
-      - Chronic HIV (asymptomatic or early symptomatic)
-      - Asymptomatic (years) - Normal CD4 (>500)
-      - Early symptoms - Persistent generalized lymphadenopathy, oral thrush, herpes zoster, seborrheic dermatitis
-      - AIDS (CD4 <200) - Opportunistic infections, malignancies, wasting
-      - Opportunistic infections (AIDS-defining)
-      - Pneumocystis jirovecii pneumonia (PCP) - Most common OI, CD4 <200, dyspnea + dry cough + fever, CXR diffuse bilateral interstitial infiltrates, diagnose with sputum/BAL (silver stain, immunofluorescence), treat TMP-SMX 15-20 mg/kg/day (TMP component) IV/PO x 21 days + prednisone if PaO2 <70
-      - Toxoplasmosis - CD4 <100, encephalitis (headache, confusion, seizures, focal neurologic deficits), MRI ring-enhancing lesions (basal ganglia), treat empirically sulfadiazine + pyrimethamine + leucovorin, biopsy if no response 10-14 days
-      - Cytomegalovirus (CMV) - CD4 <50, retinitis (floaters, visual field defects, "ketchup and cheese" fundus), colitis (diarrhea, hematochezia), esophagitis, treat ganciclovir or foscarnet
-      - Mycobacterium avium complex (MAC) - CD4 <50, disseminated (fever, night sweats, weight loss, hepatosplenomegaly, lymphadenopathy, anemia), blood cultures positive, treat clarithromycin + ethambutol
-      - Cryptococcal meningitis - CD4 <100, headache + fever + altered mental status (often minimal meningismus), India ink positive 50%, CSF cryptococcal antigen 95-100% sensitive, treat amphotericin B + flucytosine x 2 weeks then fluconazole
-      - Tuberculosis - Any CD4, pulmonary (upper lobe cavitary if high CD4, diffuse/miliary if low CD4) or extrapulmonary (lymph nodes, CNS), sputum AFB, treat RIPE (rifampin, isoniazid, pyrazinamide, ethambutol)
-      - Candida esophagitis - CD4 <100, odynophagia, white plaques esophagus on endoscopy, treat fluconazole
-      - AIDS-defining malignancies
-      - Kaposi sarcoma - HHV-8, violaceous skin lesions, can involve visceral organs
-      - Non-Hodgkin lymphoma - Primary CNS lymphoma (CD4 <50, mass lesion MRI)
-      - Cervical cancer - Invasive
-      - Other manifestations
-      - HIV wasting syndrome - Unintentional weight loss >10% + chronic diarrhea or weakness/fever >30 days
-      - HIV-associated dementia - Cognitive impairment, motor dysfunction
-      - Diagnostic testing
-      - Screening - Recommended all adults 15-65 years at least once, high-risk annually
-      - 4th generation HIV Ag/Ab combo test (ELISA) - FIRST-LINE screening
-      - Detects HIV-1/HIV-2 antibodies + p24 antigen
-      - Positive 2-3 weeks post-exposure (earlier than antibody-only tests)
-      - Sensitivity >99%, specificity 99%
-      - If positive → confirmatory testing
-      - HIV-1/HIV-2 antibody differentiation assay - Distinguishes HIV-1 from HIV-2
-      - HIV-1 RNA PCR (viral load) - If antibody differentiation indeterminate or negative but high suspicion acute HIV
-      - Detects virus directly, positive within 7-10 days post-exposure (before antibodies)
-      - Window period - Time from infection to positive test (4th gen 2-3 weeks, antibody-only 4-6 weeks, RNA PCR 7-10 days)
-      - Baseline labs after HIV diagnosis
-      - CD4 count - Assess immune status, guide prophylaxis
-      - HIV viral load - Assess treatment response
-      - HIV genotype resistance testing - Before starting ART (detect transmitted resistance)
-      - CBC, CMP, LFTs - Baseline organ function
-      - Lipid panel, glucose, HbA1c - Cardiovascular risk
-      - Serologies - Hepatitis A/B/C (coinfection common), syphilis (RPR), toxoplasma IgG (if positive, at risk reactivation)
-      - PPD or IGRA - Latent TB screening
-      - Pregnancy test (women of childbearing age)
-    treatment:
-      - Antiretroviral therapy (ART) - TREAT ALL HIV+ patients regardless of CD4 (2018 guidelines)
-      - Benefits - Prevents progression to AIDS, restores immune function, reduces transmission to near zero (undetectable = untransmittable, U=U)
-      - Goal - Virologic suppression (viral load <50 copies/mL, ideally undetectable <20)
-      - ART regimens - Combination therapy (typically 3 drugs, 2-3 classes)
-      - Nucleoside/nucleotide reverse transcriptase inhibitors (NRTIs) - Backbone of most regimens
-      - Tenofovir alafenamide (TAF) or tenofovir disoproxil fumarate (TDF) + emtricitabine (FTC) or lamivudine (3TC)
-      - TAF preferred (less renal/bone toxicity than TDF)
-      - Integrase strand transfer inhibitors (INSTIs) - PREFERRED third drug (most potent, well-tolerated)
-      - Biktegravir, dolutegravir, raltegravir
-      - Non-nucleoside reverse transcriptase inhibitors (NNRTIs) - Alternative third drug
-      - Efavirenz, rilpivirine, doravirine
-      - Protease inhibitors (PIs) - Alternative, boosted with ritonavir or cobicistat
-      - Darunavir, atazanavir
-      - Recommended first-line regimens (single-tablet, once-daily)
-      - Biktegravir/TAF/FTC (Biktarvy) - PREFERRED, high barrier to resistance
-      - Dolutegravir/abacavir/lamivudine (Triumeq) - If HLA-B*5701 negative (abacavir hypersensitivity risk)
-      - Dolutegravir + TAF/FTC
-      - Initiate ART - As soon as possible after diagnosis (same day if rapid start program)
-      - Monitoring
-      - HIV viral load - 2-4 weeks after starting ART, then q4-8 weeks until undetectable, then q3-6 months
-      - CD4 count - Q3-6 months (less important once >200 and virally suppressed)
-      - Labs - CBC, CMP q6 months, lipids/glucose yearly
-      - Adherence - CRITICAL (>95% adherence needed for viral suppression)
-      - Missed doses → viral replication → resistance
-      - Single-tablet regimens improve adherence
-      - Virologic failure - Viral load >200 copies/mL on two occasions
-      - Assess adherence, drug interactions, resistance testing (HIV genotype), switch regimen
-      - Opportunistic infection prophylaxis - Based on CD4
-      - PCP prophylaxis - CD4 <200, TMP-SMX DS 1 tab daily (or dapsone, atovaquone if sulfa allergy)
-      - Discontinue when CD4 >200 x 3 months on ART
-      - Toxoplasmosis prophylaxis - CD4 <100 + toxoplasma IgG positive, TMP-SMX DS 1 tab daily (same as PCP prophylaxis)
-      - Discontinue when CD4 >200 x 3 months
-      - MAC prophylaxis - CD4 <50, azithromycin 1200 mg weekly
-      - Discontinue when CD4 >100 x 3 months
-      - Vaccinations - IMPORTANT
-      - Inactivated vaccines - Safe at any CD4 (influenza, pneumococcal, hepatitis A/B, HPV, COVID-19)
-      - Live vaccines - Avoid if CD4 <200 (MMR, varicella), give if CD4 >200
-      - Post-exposure prophylaxis (PEP) - After high-risk exposure (needle-stick, sexual assault, condom failure)
-      - Start within 72 hours (ideally <2 hours)
-      - 28-day course ART - TDF/FTC + raltegravir or dolutegravir
-      - Efficacy 80-90% if started early
-      - Pre-exposure prophylaxis (PrEP) - Prevent HIV acquisition in high-risk individuals
-      - Indications - MSM with condomless sex, injection drug users, HIV+ partner
-      - Regimens - TDF/FTC (Truvada) 1 tab daily, or TAF/FTC (Descovy) 1 tab daily
-      - Efficacy >90% if adherent
-      - Monitor q3 months - HIV test, STI screening, creatinine
-      - Perinatal transmission prevention
-      - ART during pregnancy (continue or initiate), viral load monitoring
-      - Cesarean delivery if viral load >1000 near delivery
-      - Avoid breastfeeding (US, where formula safe)
-      - Infant PEP - Zidovudine (AZT) x 6 weeks
-      - Transmission rate <1% with interventions
-      - Prognosis
-      - With ART - Near-normal life expectancy if started early (CD4 >350), undetectable viral load
-      - U=U (undetectable = untransmittable) - No sexual transmission risk if viral load undetectable >6 months
-      - Without ART - Progression to AIDS 8-10 years, death 2-3 years after AIDS diagnosis
-      - Complications - ART side effects (metabolic syndrome, lipodystrophy, renal/bone toxicity), cardiovascular disease (increased risk), non-AIDS malignancies
+chief_complaint: HIV positive status or AIDS-defining illness
+description: |
+  Chronic viral infection causing progressive immunodeficiency by depleting CD4 T-cells. AIDS defined as CD4 count less than 200 or AIDS-defining opportunistic infection.
+  Transmitted through sexual contact, blood exposure, vertical transmission. Antiretroviral therapy (ART) suppresses viral replication, restores immune function, prevents transmission.
+icd10: B20
+urgency: High
+workup:
+  - HIV screening - 4th generation antigen/antibody test (detects HIV-1/2 antibodies and p24 antigen)
+  - Positive screening confirmed with HIV-1/HIV-2 differentiation immunoassay
+  - If acute HIV suspected (negative antibody but high-risk exposure) - HIV RNA viral load (detects virus before antibody seroconversion)
+  - Baseline CD4 count and CD4 percentage - normal greater than 500 cells/mcL, AIDS defined as less than 200
+  - HIV RNA viral load (copies/mL) - assess disease progression and treatment response
+  - Resistance testing (genotype) before starting ART - identifies transmitted drug resistance
+  - HLA-B5701 testing before abacavir (hypersensitivity reaction if positive)
+  - Screening for coinfections - hepatitis A, B, C serology (vaccinate if not immune), syphilis (RPR), tuberculosis (QuantiFERON or PPD), toxoplasma IgG
+  - Baseline labs - CBC, CMP, lipids, urinalysis, pregnancy test in women
+  - Screen for opportunistic infections if CD4 less than 200 - chest X-ray
+treatment:
+  - Start ART immediately regardless of CD4 count (treat all HIV-positive patients)
+  - Integrase strand transfer inhibitor (INSTI) based regimen preferred - two nucleoside reverse transcriptase inhibitors (NRTIs) plus INSTI
+  - Biktarvy (bictegravir/tenofovir alafenamide/emtricitabine) one tablet daily - highly effective, well-tolerated, high barrier to resistance
+  - Alternative regimens - dolutegravir/abacavir/lamivudine, dolutegravir plus tenofovir/emtricitabine
+  - Goals - undetectable viral load (less than 20-50 copies/mL) within 6 months, maintain suppression
+  - Monitor viral load at 4-8 weeks, then every 3-6 months; CD4 count every 3-6 months
+  - Adherence critical - greater than 95% adherence needed to prevent resistance
+  - Opportunistic infection prophylaxis based on CD4 count
+  - CD4 less than 200 - TMP-SMX DS daily (Pneumocystis and Toxoplasma prophylaxis), alternative dapsone 100mg daily or atovaquone 1500mg daily
+  - CD4 less than 50 - add azithromycin 1200mg weekly (MAC prophylaxis)
+  - Can discontinue prophylaxis when CD4 greater than 200 x 3 months on ART (immune reconstitution)
+  - Vaccinations - pneumococcal, hepatitis A/B (if not immune), influenza annual, Tdap, HPV (if age appropriate)
+  - Screen for complications - cardiovascular disease, bone density, kidney function, malignancies
+  - U=U (Undetectable equals Untransmittable) - viral suppression prevents sexual transmission
+  - Pre-exposure prophylaxis (PrEP) for HIV-negative high-risk individuals - tenofovir/emtricitabine daily or cabotegravir 600mg IM q2 months
+clinical_pearls:
+  - Acute HIV syndrome (2-4 weeks post-exposure) - fever, pharyngitis, rash, lymphadenopathy, often mistaken for mononucleosis
+  - Window period (eclipse phase) - first 10-14 days after infection, even RNA may be negative
+  - AIDS-defining illnesses - PCP, CMV retinitis, disseminated MAC, cryptococcal meningitis, toxoplasma encephalitis, Kaposi sarcoma, CNS lymphoma, progressive multifocal leukoencephalopathy, esophageal candidiasis
+  - Immune reconstitution inflammatory syndrome (IRIS) - paradoxical worsening when starting ART due to restored immune response
+  - Drug interactions common - check before prescribing new medications (protease inhibitors major CYP interactions)
+  - Aging HIV population - increased cardiovascular disease, malignancies, neurocognitive disorders
+differentials:
+  - Mononucleosis (acute HIV)
+  - Viral syndrome
+  - Secondary syphilis
+  - Drug reaction
+  - Lymphoma (if lymphadenopathy)
+trace:
+  - 32-year-old man presents with fever, sore throat, rash x 1 week → Reports unprotected sex 3 weeks ago → Exam shows diffuse maculopapular rash, pharyngitis, generalized lymphadenopathy → 4th generation HIV test positive → HIV RNA 850000 copies/mL, CD4 480 cells/mcL → HIV-1/2 differentiation confirms HIV-1 → Diagnose acute HIV infection → Resistance testing shows no mutations → HLA-B5701 negative, hepatitis B and C negative (vaccinate for hep A and B), RPR negative, QuantiFERON negative → Start bictegravir/tenofovir/emtricitabine (Biktarvy) one tablet daily → Counsel on adherence, safe sex, U=U concept → Viral load undetectable at 8 weeks → CD4 increases to 650 at 6 months → Continue ART lifelong, excellent adherence and viral suppression maintained
