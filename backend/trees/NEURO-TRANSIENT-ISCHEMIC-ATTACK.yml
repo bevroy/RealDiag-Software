@@ -1,44 +1,74 @@
 tree_id: NEURO-TRANSIENT-ISCHEMIC-ATTACK
-name: Transient Ischemic Attack
+name: Transient Ischemic Attack (TIA)
 family: Neurology
 specialty: Neurology
-chief_complaint: Brief episode of neurologic dysfunction
+chief_complaint: Temporary weakness and vision loss
 description: |
-  Transient neurologic deficit from focal cerebral ischemia lasting less than 24 hours (typically less than 1 hour). No permanent infarction on imaging.
-  Warning sign for stroke - 10-15% risk of stroke within 90 days, highest risk in first 48 hours.
+  Transient episode of neurologic dysfunction due to focal brain, spinal cord, or retinal ischemia without acute infarction. Symptoms resolve within 24 hours (most within 60 minutes).
+  High-risk warning for imminent stroke - 10-20% have stroke within 90 days (half within 48 hours). Urgent evaluation and treatment prevent stroke. Differs from stroke by absence of permanent injury on imaging.
 icd10: G45.9
-urgency: High
+urgency: Critical
 workup:
-  - Urgent evaluation to prevent stroke - admit or evaluate in TIA clinic within 24 hours
-  - MRI brain with diffusion-weighted imaging (DWI) most sensitive for acute infarction (50% of TIAs show infarct on DWI)
-  - CT head without contrast if MRI unavailable (less sensitive, rule out hemorrhage)
-  - Carotid ultrasound or CTA neck to assess for carotid stenosis
-  - ECG and telemetry monitoring for atrial fibrillation
-  - Echocardiogram (transthoracic or transesophageal) if cardiac source suspected
-  - ABCD2 score predicts stroke risk (Age, Blood pressure, Clinical features, Duration, Diabetes) - score 4 or higher is high risk
-  - Complete blood count, basic metabolic panel, lipid panel, HbA1c, coagulation studies
+  - Clinical presentation - sudden onset focal neurologic deficit, resolves within 24 hours (usually less than 1 hour)
+  - Anterior circulation (carotid territory) - hemiparesis, hemisensory loss, aphasia, amaurosis fugax (monocular vision loss, "curtain coming down")
+  - Posterior circulation (vertebrobasilar) - diplopia, vertigo, ataxia, bilateral vision loss, drop attacks, crossed findings
+  - Time-based definition outdated - tissue-based definition (no infarct on imaging) preferred
+  - Distinguish from stroke mimics - seizure (Todd paralysis), migraine aura (march, positive symptoms), hypoglycemia, conversion disorder
+  - ABCD2 score predicts stroke risk - Age 60+ (1 point), BP greater than 140/90 (1), Clinical features (unilateral weakness 2, speech disturbance without weakness 1), Duration (greater than 60 min 2, 10-59 min 1), Diabetes (1)
+  - Score 0-3 low risk (1% 2-day stroke risk), 4-5 moderate (4%), 6-7 high (8%)
+  - Brain imaging urgent (within 24 hours, ideally within 12 hours)
+  - MRI with diffusion-weighted imaging (DWI) preferred - detects acute ischemia (25-50% of TIAs have DWI abnormality)
+  - CT head without contrast if MRI unavailable or contraindicated - rule out hemorrhage, mass
+  - Vascular imaging to identify stenosis
+  - CT angiography (CTA) head and neck or MR angiography (MRA) - assess carotid and vertebrobasilar arteries
+  - Carotid duplex ultrasound - non-invasive, measures carotid stenosis degree
+  - Severe stenosis (70-99%) high-risk for stroke
+  - Cardiac evaluation for embolic source
+  - ECG - atrial fibrillation, LVH
+  - Echocardiogram - transthoracic (TTE) or transesophageal (TEE if high suspicion for cardioembolic source)
+  - Look for thrombus, valve vegetation, PFO, atrial septal defect, atrial myxoma
+  - Telemetry or outpatient cardiac monitor (Holter, event recorder) to detect paroxysmal AF
+  - Labs - CBC, CMP, lipid panel, HbA1c, PT/PTT (if anticoagulation considered)
+  - Hypercoagulable workup if young (less than 50), cryptogenic, recurrent - protein C/S, antithrombin III, factor V Leiden, prothrombin gene mutation, antiphospholipid antibodies
 treatment:
-  - Aspirin 325mg immediately (or dual antiplatelet with clopidogrel 300-600mg loading if high risk)
-  - Dual antiplatelet therapy (aspirin 81mg plus clopidogrel 75mg daily) for 21 days if high-risk TIA or minor stroke, then aspirin monotherapy
-  - High-intensity statin (atorvastatin 80mg or rosuvastatin 40mg) regardless of cholesterol level
-  - Blood pressure control - target less than 140/90 mmHg (less than 130/80 if diabetes or CKD)
-  - Anticoagulation with DOAC if atrial fibrillation (apixaban, rivaroxaban, edoxaban, dabigatran)
-  - Carotid endarterectomy (CEA) or stenting if symptomatic carotid stenosis 70-99% (perform within 2 weeks)
-  - Diabetes management (HbA1c target less than 7%)
+  - Admit to hospital or TIA clinic for urgent workup (stroke risk highest within 48 hours)
+  - Antiplatelet therapy immediately unless contraindication
+  - Aspirin 325mg loading dose, then 81mg daily (or clopidogrel 75mg daily)
+  - Dual antiplatelet therapy (DAPT) for high-risk TIA - aspirin 50-325mg plus clopidogrel 75mg daily x 21-90 days (reduces early stroke risk 30-40%)
+  - Indications - ABCD2 4 or greater, large vessel stenosis, recurrent TIA
+  - After 21-90 days, transition to single antiplatelet (aspirin or clopidogrel)
+  - Statins high-intensity regardless of LDL - atorvastatin 40-80mg daily or rosuvastatin 20-40mg daily
+  - Pleiotropic effects beyond lipid lowering (plaque stabilization)
+  - Blood pressure management - goal less than 140/90 (less than 130/80 if diabetes or renal disease)
+  - Avoid acute lowering immediately after TIA (may worsen ischemia)
+  - ACE inhibitor/ARB preferred
+  - Diabetes control - goal HbA1c less than 7%
+  - Anticoagulation if atrial fibrillation or other cardioembolic source
+  - DOAC preferred - apixaban 5mg BID, rivaroxaban 20mg daily, edoxaban 60mg daily, dabigatran 150mg BID
+  - Warfarin (INR 2-3) if mechanical valve or severe mitral stenosis
+  - Stop antiplatelet when starting anticoagulation (increased bleeding risk)
+  - Carotid revascularization if symptomatic severe stenosis (70-99%)
+  - Carotid endarterectomy (CEA) within 2 weeks of TIA - 65% relative risk reduction for stroke
+  - Carotid artery stenting (CAS) alternative if high surgical risk
+  - Perioperative stroke risk 2-5%
+  - No benefit if stenosis less than 50%, questionable benefit 50-69%
   - Lifestyle modifications - smoking cessation, weight loss, exercise, Mediterranean diet
+  - Treat underlying conditions - diabetes, hyperlipidemia, hypertension, sleep apnea
+  - Patent foramen ovale (PFO) - if cryptogenic stroke/TIA in young patient with PFO, consider closure (controversial, select patients benefit)
 clinical_pearls:
-  - Common presentations include unilateral weakness, numbness, aphasia, dysarthria, vision loss (amaurosis fugax), ataxia, vertigo
-  - Crescendo TIAs (multiple episodes in short time) indicate very high stroke risk
-  - Posterior circulation TIAs may present with diplopia, vertigo, ataxia, bilateral weakness
-  - Mimics include migraine aura, seizure, hypoglycemia, syncope, peripheral neuropathy
-  - Tissue-based definition (no infarct on imaging) replaced time-based definition (less than 24 hours)
-  - Secondary stroke prevention requires addressing all modifiable risk factors
+  - TIA is stroke until proven otherwise - urgent workup same as stroke
+  - Most TIAs last less than 1 hour (median 10-15 minutes)
+  - Classic TIA may have no symptoms by time patient reaches ED - history critical
+  - Amaurosis fugax (transient monocular blindness) - retinal TIA, often embolic from carotid
+  - Crescendo TIAs (multiple TIAs increasing frequency) extremely high stroke risk - urgent revascularization
+  - Atypical features suggest TIA mimic - march of symptoms (migraine), positive sensory symptoms (tingling), isolated symptoms without other deficits
+  - Vertebrobasilar TIA - isolated vertigo NOT TIA (need other brainstem signs), crossed findings (ipsilateral cranial nerve, contralateral motor/sensory)
 differentials:
-  - Ischemic stroke
+  - Stroke
+  - Seizure (Todd paralysis)
   - Migraine with aura
-  - Seizure (Todd's paralysis)
   - Hypoglycemia
-  - Bell's palsy
+  - Conversion disorder
   - Multiple sclerosis
 trace:
-  - Right arm weakness and slurred speech x 15 minutes, resolved completely → Urgent MRI brain shows small DWI lesion in left MCA territory → Carotid ultrasound shows 40% left ICA stenosis → ECG shows sinus rhythm → Diagnose TIA → Aspirin 325mg loading, then dual antiplatelet (aspirin 81mg plus clopidogrel 75mg) x 21 days → Atorvastatin 80mg → Blood pressure control with lisinopril → Smoking cessation counseling → Neurology follow-up
+  - 68-year-old man with hypertension, diabetes, hyperlipidemia presents with sudden onset right arm weakness and slurred speech lasting 15 minutes, completely resolved → Prior episode similar symptoms 3 months ago, did not seek care → Exam now normal, no focal deficits → BP 165/92, HR 78 regular → ABCD2 score 6 (age 60+, BP elevated, unilateral weakness, duration less than 60 min, diabetes) - high risk → Admit for urgent TIA workup → MRI brain with DWI shows small acute infarct left corona radiata (not TIA but minor stroke) → MRA shows 85% left internal carotid stenosis → Echocardiogram normal, no AF on telemetry → Lipid panel LDL 145 mg/dL → Start aspirin 325mg plus clopidogrel 75mg daily (dual antiplatelet x 21 days) → Atorvastatin 80mg daily → Blood pressure control with lisinopril 20mg daily → Urgent carotid endarterectomy left ICA performed day 3 → Surgery successful, no perioperative complications → Transition to aspirin 81mg daily alone after 21 days → HbA1c 8.1%, intensify diabetes management → No recurrent events at 6-month follow-up
