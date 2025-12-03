@@ -1,147 +1,47 @@
 tree_id: DERM-PSORIASIS
-name: Psoriasis Evaluation and Management
-family: DERMATOLOGY
-specialty: Dermatology, Rheumatology
-chief_complaint: Scaly Plaques, Itching, Joint Pain, Nail Changes
-description: Comprehensive evaluation and management of psoriasis
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: psoriasis_evaluation
-
-nodes:
-  - id: psoriasis_evaluation
-    type: question
-    text: "Clinical presentation?"
-    options:
-      - label: "Plaque psoriasis (chronic)"
-        next: plaque_psoriasis
-      - label: "Guttate psoriasis"
-        next: guttate_psoriasis
-      - label: "Psoriatic arthritis"
-        next: psoriatic_arthritis
-
-  - id: plaque_psoriasis
-    type: diagnosis
-    name: "Chronic Plaque Psoriasis"
-    icd10: "L40.0"
-    urgency: low
-    workup:
-      - Most common type (80-90% of psoriasis)
-      - Chronic inflammatory skin disease, hyperproliferation of keratinocytes (T-cell mediated, IL-17/IL-23 pathways)
-      - Prevalence 2-3% population, onset bimodal (15-30 years, 50-60 years)
-      - Genetic component (30-40% family history, HLA-Cw6 association)
-      - Clinical features - Well-demarcated erythematous plaques with silvery-white scales
-      - Distribution - Extensor surfaces (elbows, knees), scalp, lumbosacral area, nails
-      - Symmetric
-      - Auspitz sign - Pinpoint bleeding when scales removed (dilated capillaries in dermal papillae)
-      - Koebner phenomenon - New lesions at sites of trauma (scratching, sunburn, surgery)
-      - Nail changes (50%) - Pitting, oil spots, onycholysis, subungual hyperkeratosis
-      - Severity assessment - Body surface area (BSA), PASI score
-      - Mild <3% BSA or <5% BSA
-      - Moderate 3-10% BSA or 5-10% BSA
-      - Severe >10% BSA
-      - Palms = 1% BSA (hand method)
-      - Comorbidities - Psoriatic arthritis (30%), metabolic syndrome, obesity, diabetes, hypertension, hyperlipidemia, cardiovascular disease (increased MI/stroke risk), depression/anxiety
-      - Differential diagnosis - Eczema (less well-demarcated, flexural), seborrheic dermatitis (face, greasy scales), tinea (KOH positive, less symmetric)
-    treatment:
-      - Topical therapy - First-line for mild disease (<3-5% BSA)
-      - Corticosteroids - High-potency (betamethasone, clobetasol) for body, mid-potency for face/intertriginous
-      - BID application, taper to prevent rebound
-      - Side effects - Skin atrophy, tachyphylaxis, do NOT use high-potency long-term
-      - Vitamin D analogues - Calcipotriene 0.005% cream/ointment BID
-      - Mechanism - Inhibits keratinocyte proliferation, enhances differentiation
-      - Combination with steroid more effective than either alone (Taclonex = calcipotriene + betamethasone)
-      - Topical calcineurin inhibitors - Tacrolimus 0.1%, pimecrolimus 1% (for face, intertriginous areas, steroid-sparing)
-      - Tazarotene - Topical retinoid 0.1% gel (teratogenic, avoid pregnancy)
-      - Coal tar - Keratolytic, anti-proliferative (messy, stains, odor, less used now)
-      - Salicylic acid - Keratolytic (scale removal), 3-6% ointment
-      - Phototherapy - Second-line for moderate-severe or inadequate response to topicals
-      - Narrow-band UVB (NB-UVB) - 3x/week, 20-30 sessions
-      - Most commonly used, effective 70-80%
-      - PUVA (psoralen + UVA) - Psoralen (photosensitizer) oral or topical, then UVA exposure
-      - More effective than NB-UVB but more side effects (nausea, skin cancer risk with cumulative doses)
-      - Excimer laser - Targeted UVB for localized plaques
-      - Systemic therapy - Moderate-severe disease (>5-10% BSA), or inadequate response to topical/phototherapy, or significant impact on quality of life
-      - Traditional systemic agents
-      - Methotrexate - 10-25 mg weekly PO/SC/IM, folic acid 1 mg daily
-      - Mechanism - Folate antagonist, anti-inflammatory
-      - Effective, inexpensive, also treats psoriatic arthritis
-      - Side effects - Hepatotoxicity (monitor LFTs, avoid alcohol), bone marrow suppression (monitor CBC), teratogenic, nausea
-      - Contraindications - Pregnancy, liver disease, alcohol abuse, renal insufficiency
-      - Cyclosporine - 2.5-5 mg/kg/day divided BID
-      - Rapid onset (2-4 weeks), effective
-      - Side effects - Nephrotoxicity (monitor Cr), hypertension (monitor BP), infections, increased malignancy risk
-      - Reserve for severe flares, limit duration (<1-2 years)
-      - Acitretin - Retinoid, 25-50 mg daily
-      - Effective for pustular and erythrodermic psoriasis
-      - Side effects - Teratogenic (contraception x 3 years after stopping), hyperlipidemia, hepatotoxicity, dry skin/mucosa
-      - Apremilast - PDE4 inhibitor, 30 mg BID oral
-      - Modest efficacy (PASI 75 response 30-40%), well-tolerated
-      - Nausea, diarrhea, weight loss
-      - No lab monitoring required
-      - Biologic agents - First-line for moderate-severe disease (increasingly preferred over methotrexate/cyclosporine)
-      - TNF inhibitors - Etanercept 50 mg SC weekly, adalimumab 40 mg SC every 2 weeks, infliximab 5 mg/kg IV weeks 0,2,6 then q8 weeks
-      - Effective PASI 75 response 50-70%
-      - Side effects - Infection risk (TB reactivation - screen PPD/QuantiFERON before starting), CHF exacerbation, demyelination, lupus-like syndrome, malignancy
-      - IL-12/IL-23 inhibitor - Ustekinumab 45-90 mg SC weeks 0,4 then q12 weeks
-      - Very effective PASI 75 response 70-80%
-      - Well-tolerated, convenient dosing
-      - IL-23 inhibitors - Guselkumab 100 mg SC weeks 0,4 then q8 weeks, tildrakizumab, risankizumab
-      - Highly effective PASI 90 response 70-80%, PASI 100 (complete clearance) 40-60%
-      - IL-17 inhibitors - Secukinumab 300 mg SC weeks 0,1,2,3,4 then q4 weeks, ixekizumab, brodalumab
-      - Most effective PASI 90 response 70-85%, rapid onset
-      - Side effects - Candida infections (oral, genital), IBD exacerbation (avoid if Crohn's)
-      - Biologic choice - IL-17 or IL-23 inhibitors first-line for efficacy, TNF inhibitors if concurrent psoriatic arthritis or IBD
-      - Lifestyle modifications - Weight loss (if obese, improves response to treatment), avoid alcohol, smoking cessation, stress management, moisturize
-
-  - id: guttate_psoriasis
-    type: diagnosis
-    name: "Guttate Psoriasis"
-    icd10: "L40.4"
-    urgency: low
-    workup:
-      - "Raindrop psoriasis - Small (2-10 mm) drop-like erythematous scaly papules/plaques"
-      - Distribution - Trunk and proximal extremities (Christmas tree pattern)
-      - Onset - Acute, children/young adults
-      - Trigger - Streptococcal pharyngitis (2-3 weeks after infection) 80%
-      - Confirm with throat culture or rapid strep test, ASO titer
-      - May be first presentation of psoriasis, or acute flare in known psoriasis
-      - Prognosis - Usually self-limited (resolves 3-4 months), 30-40% develop chronic plaque psoriasis
-    treatment:
-      - Treat streptococcal infection - Penicillin or amoxicillin 10 days if positive culture
-      - Topical therapy - Mid-potency steroids, calcipotriene, emollients
-      - Phototherapy - NB-UVB very effective if extensive
-      - Systemic therapy - Usually not needed (self-limited), reserve for severe or persistent
-
-  - id: psoriatic_arthritis
-    type: diagnosis
-    name: "Psoriatic Arthritis"
-    icd10: "L40.50"
-    urgency: medium
-    workup:
-      - Inflammatory arthritis associated with psoriasis (30% of psoriasis patients develop PsA)
-      - Usually psoriasis precedes arthritis (70%), but 15% arthritis first
-      - Clinical patterns - Five subtypes
-      - Asymmetric oligoarthritis (70%) - Most common, <5 joints, dactylitis ("sausage digits"), DIP involvement
-      - Symmetric polyarthritis (15%) - RA-like, but RF/anti-CCP negative
-      - DIP predominant (5%) - DIP joints, associated with nail psoriasis
-      - Spondylitis (5%) - Axial involvement, sacroiliitis, similar AS
-      - Arthritis mutilans (<5%) - Severe destructive, "pencil-in-cup" deformity, telescoping digits
-      - Extra-articular features - Dactylitis (50%), enthesitis (Achilles, plantar fascia 30-50%), uveitis (7%)
-      - Labs - Negative RF, negative anti-CCP (seronegative), elevated ESR/CRP
-      - Imaging - X-ray shows erosions, "pencil-in-cup" deformity, ankylosis, periostitis, sacroiliitis (asymmetric)
-      - MRI/ultrasound - Synovitis, enthesitis, dactylitis
-    treatment:
-      - NSAIDs - First-line for mild disease
-      - Indomethacin 25-50 mg TID, naproxen 500 mg BID
-      - DMARDs - Moderate-severe disease
-      - Methotrexate - 15-25 mg weekly, first-line DMARD
-      - TNF inhibitors - Etanercept, adalimumab, infliximab, certolizumab, golimumab
-      - Very effective for both skin and joints
-      - IL-17 inhibitors - Secukinumab, ixekizumab (effective for PsA and psoriasis)
-      - IL-23 inhibitors - Guselkumab, risankizumab (approved for PsA)
-      - JAK inhibitors - Tofacitinib 5 mg BID oral (alternative to biologics)
-      - Apremilast - PDE4 inhibitor, modest efficacy for PsA
-      - Physical therapy - Range of motion, strengthen
-      - Prognosis - Progressive, can cause joint damage if untreated, biologics slow progression
+name: Psoriasis
+family: Dermatology
+specialty: Dermatology
+chief_complaint: Scaly red plaques on elbows and knees
+description: |
+  Chronic immune-mediated inflammatory skin disease with hyperproliferation of keratinocytes. Affects 2-3% population.
+  Multiple variants - plaque psoriasis (90%), guttate, inverse, pustular, erythrodermic. Associated with psoriatic arthritis (30%), metabolic syndrome, cardiovascular disease.
+icd10: L40.0
+urgency: Low
+workup:
+  - Clinical diagnosis based on appearance - well-demarcated erythematous plaques with silvery-white scale
+  - Distribution - extensor surfaces (elbows, knees), scalp, sacrum, nails
+  - Auspitz sign - pinpoint bleeding when scale removed (not routinely performed)
+  - Koebner phenomenon - new lesions at sites of trauma
+  - Skin biopsy if diagnosis uncertain - shows epidermal hyperplasia, parakeratosis, neutrophils in stratum corneum (Munro microabscesses)
+  - Nail changes - pitting, oil drop discoloration, onycholysis, subungual hyperkeratosis
+  - Screen for psoriatic arthritis - joint pain, swelling, dactylitis (sausage digits), enthesitis
+  - Severity assessment - body surface area (BSA) involved, Psoriasis Area and Severity Index (PASI)
+  - Mild (less than 3% BSA), moderate (3-10% BSA), severe (greater than 10% BSA)
+treatment:
+  - Mild disease - topical therapies sufficient
+  - Topical corticosteroids first-line - high-potency (clobetasol 0.05%) for body, low-potency (hydrocortisone 1-2.5%) for face and intertriginous areas
+  - Vitamin D analogs - calcipotriene 0.005% cream/ointment BID (can combine with topical steroid)
+  - Calcineurin inhibitors - tacrolimus 0.1% or pimecrolimus 1% for face and intertriginous (steroid-sparing)
+  - Moderate to severe disease - phototherapy or systemic agents
+  - Narrowband UVB phototherapy 3 times weekly (first-line for moderate-severe)
+  - Systemic traditional agents - methotrexate 7.5-25mg weekly (monitor CBC, LFTs), cyclosporine 2.5-5 mg/kg/day (short-term), acitretin 25-50mg daily (teratogenic)
+  - Biologic therapy for moderate-severe disease - TNF inhibitors (adalimumab 40mg SC q2 weeks, etanercept 50mg SC weekly), IL-17 inhibitors (secukinumab 300mg SC monthly, ixekizumab), IL-23 inhibitors (guselkumab 100mg SC q8 weeks, risankizumab)
+  - IL-23 inhibitors most effective with longest dosing intervals
+  - Treat comorbidities - screen for metabolic syndrome, cardiovascular disease, depression
+clinical_pearls:
+  - Triggers include stress, infections (strep throat precedes guttate psoriasis), medications (beta-blockers, lithium, antimalarials), trauma
+  - Scalp psoriasis often first manifestation, can be difficult to treat
+  - Inverse psoriasis (intertriginous areas) - smooth red plaques without scale
+  - Erythrodermic and pustular psoriasis medical emergencies (systemic toxicity)
+  - Psoriatic arthritis patterns - symmetric polyarthritis (RA-like), asymmetric oligoarthritis, DIP joint involvement, spondylitis, arthritis mutilans
+  - Clear skin improves quality of life and reduces cardiovascular risk
+differentials:
+  - Eczema (atopic dermatitis)
+  - Seborrheic dermatitis
+  - Tinea corporis
+  - Cutaneous lupus
+  - Pityriasis rosea
+  - Cutaneous T-cell lymphoma
+trace:
+  - 35-year-old with red scaly plaques on elbows, knees, scalp x 6 months → Exam shows well-demarcated erythematous plaques with silvery scale, nail pitting → BSA 8% (moderate psoriasis) → Start clobetasol 0.05% ointment BID to body, calcipotriene 0.005% solution to scalp → Partial improvement after 4 weeks → Add narrowband UVB phototherapy 3x weekly → Significant improvement after 12 weeks → Maintenance with topical therapy and intermittent phototherapy → Develop joint pain and swelling in fingers → Diagnose psoriatic arthritis → Start adalimumab 40mg SC q2 weeks → Skin clears and joint symptoms resolve
