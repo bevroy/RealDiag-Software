@@ -1,0 +1,63 @@
+tree_id: INFECTIOUS-PNEUMONIA
+name: Community-Acquired Pneumonia
+family: Infectious Disease
+specialty: Pulmonology/Infectious Disease
+chief_complaint: Cough, fever, and shortness of breath
+description: |
+  Acute infection of lung parenchyma acquired outside hospital. Leading infectious cause of death in US. Common pathogens - Streptococcus pneumoniae (most common), Haemophilus influenzae, Mycoplasma pneumoniae, Chlamydophila pneumoniae, Legionella, viruses (influenza, RSV, COVID-19).
+  Risk factors include age extremes, chronic lung disease, immunosuppression, smoking. Severity stratification guides management (outpatient vs inpatient vs ICU).
+icd10: J18.9
+urgency: High
+workup:
+  - Clinical presentation - cough (productive or dry), fever, dyspnea, pleuritic chest pain, malaise
+  - Atypical pneumonia (Mycoplasma, Chlamydia, Legionella) - dry cough, extrapulmonary symptoms (headache, diarrhea), gradual onset
+  - Elderly may present atypically - altered mental status, falls, no fever
+  - Physical exam - tachypnea, tachycardia, fever, hypoxia, lung findings (crackles, bronchial breath sounds, egophony, dullness to percussion)
+  - Vital signs critical - temperature, heart rate, respiratory rate, blood pressure, oxygen saturation
+  - Chest X-ray - lobar consolidation (typical bacterial), interstitial infiltrates (atypical or viral), pleural effusion
+  - Cannot reliably distinguish bacterial from viral or typical from atypical based on CXR
+  - Labs if moderate-severe or hospitalized - CBC (leukocytosis with left shift), CMP (assess hydration, renal function), procalcitonin (elevated in bacterial infection)
+  - Blood cultures x 2 before antibiotics if admitted (positive 5-14%, S. pneumoniae most common)
+  - Sputum Gram stain and culture if productive cough, severe CAP, or concern for resistant organism
+  - Urinary antigens - Legionella (serogroup 1), pneumococcal (detects capsular polysaccharide)
+  - ABG if hypoxia or respiratory distress
+  - Severity assessment determines disposition
+  - CURB-65 score (1 point each) - Confusion, Urea greater than 20 mg/dL (BUN greater than 20), Respiratory rate greater than 30, Blood pressure (SBP less than 90 or DBP less than 60), age 65 or greater
+  - Score 0-1 outpatient, 2 consider admission, 3-5 admit (high mortality risk)
+  - PSI (Pneumonia Severity Index) more complex but validated
+  - ICU admission if severe CAP - septic shock (vasopressors), respiratory failure (mechanical ventilation), or 3+ minor criteria
+treatment:
+  - Outpatient treatment (healthy, no antibiotics x 3 months)
+  - Amoxicillin 1g TID x 5-7 days (first-line, narrow spectrum) or doxycycline 100mg BID
+  - If comorbidities (COPD, diabetes, heart/liver/renal disease) or recent antibiotics - respiratory fluoroquinolone (levofloxacin 750mg daily or moxifloxacin 400mg daily) or amoxicillin-clavulanate 875mg BID plus macrolide (azithromycin 500mg day 1, then 250mg days 2-5)
+  - Inpatient non-ICU treatment
+  - Beta-lactam (ceftriaxone 1-2g daily or ampicillin-sulbactam 1.5-3g q6h) plus macrolide (azithromycin 500mg daily)
+  - OR respiratory fluoroquinolone monotherapy (levofloxacin 750mg daily or moxifloxacin 400mg daily)
+  - ICU treatment
+  - Beta-lactam (ceftriaxone 2g daily or ampicillin-sulbactam 3g q6h) plus azithromycin 500mg daily
+  - OR beta-lactam plus respiratory fluoroquinolone
+  - Add vancomycin or linezolid if MRSA risk (recent influenza, cavitary lesions, IV drug use)
+  - Add antipseudomonal coverage if risk factors (bronchiectasis, prior Pseudomonas, recent hospitalization and IV antibiotics) - piperacillin-tazobactam or cefepime or meropenem
+  - Duration typically 5-7 days if clinical improvement (afebrile x 48-72h, stable vitals, tolerating oral)
+  - Empyema (complicated parapneumonic effusion) - chest tube drainage plus antibiotics
+  - Supportive care - supplemental oxygen (target SpO2 greater than 90%), IV fluids, antipyretics
+  - Prevention - pneumococcal vaccines (PCV20 or PCV15 plus PPSV23), influenza vaccine annually, smoking cessation, COVID-19 vaccination
+  - Failure to improve by 72 hours - consider alternative diagnosis, resistant organism, complication (empyema, abscess), wrong antibiotic coverage
+clinical_pearls:
+  - S. pneumoniae most common bacterial cause - abrupt onset, rusty sputum, lobar consolidation
+  - Mycoplasma pneumoniae - young adults, gradual onset, dry cough, extrapulmonary (rash, hemolytic anemia)
+  - Legionella - hot tubs, water systems, hyponatremia, diarrhea, high fever, relative bradycardia
+  - Klebsiella pneumoniae - alcoholics, diabetics, currant jelly sputum, upper lobe cavitation
+  - Staphylococcus aureus - post-influenza, MRSA in IVDU, necrotizing pneumonia
+  - Aspiration pneumonia - altered consciousness, dysphagia, right lower lobe or posterior segments
+  - Healthcare-associated pneumonia (HCAP) concept no longer recommended - treat as CAP unless risk factors for resistant organisms
+  - Procalcitonin-guided therapy reduces antibiotic duration without worse outcomes
+differentials:
+  - Bronchitis
+  - Congestive heart failure
+  - Pulmonary embolism
+  - Lung cancer
+  - Tuberculosis
+  - Atelectasis
+trace:
+  - 68-year-old man with COPD presents with 3 days of productive cough (yellow-green sputum), fever to 38.9°C, dyspnea → Increasing oxygen requirement at home → Exam shows tachypnea RR 28, oxygen saturation 88% on room air, crackles right lower lung field → Chest X-ray shows right lower lobe consolidation → CURB-65 score 2 (age 65+, respiratory rate greater than 30) → Admit to hospital → Labs - WBC 16,500, creatinine 1.4 mg/dL → Blood cultures drawn → Sputum Gram stain shows Gram-positive diplococci → Urine pneumococcal antigen positive → Start ceftriaxone 1g IV daily plus azithromycin 500mg IV daily → Supplemental oxygen 3L nasal cannula → Defervescence by 48 hours, oxygen saturation improves → Sputum culture grows Streptococcus pneumoniae sensitive to penicillin → Switch to amoxicillin 1g PO TID when tolerating oral → Discharge day 4 on amoxicillin to complete 7 days total → Follow-up chest X-ray at 6 weeks shows resolution → Pneumococcal vaccine (PCV20) administered
