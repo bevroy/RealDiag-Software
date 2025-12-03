@@ -1,154 +1,42 @@
 tree_id: NEURO-MIGRAINE
-name: Migraine Headache Evaluation
-family: NEUROLOGY
-specialty: Neurology, Primary Care
-chief_complaint: Headache, Nausea, Photophobia, Visual Disturbances
-description: Comprehensive evaluation and management of migraine headache
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: migraine_evaluation
-
-nodes:
-  - id: migraine_evaluation
-    type: question
-    text: "Migraine with aura or without aura?"
-    options:
-      - label: "Migraine without aura"
-        next: migraine_without_aura
-      - label: "Migraine with aura"
-        next: migraine_with_aura
-
-  - id: migraine_without_aura
-    type: diagnosis
-    name: "Migraine Without Aura"
-    icd10: "G43.1"
-    urgency: medium
-    workup:
-      - Migraine without aura - Most common type (70-80% all migraines)
-      - Prevalence - 12% general population, 18% women, 6% men (3:1 female predominance)
-      - Peak age 35-45 years
-      - Pathophysiology - Neurovascular disorder (trigeminovascular system activation + cortical spreading depression)
-      - Cortical spreading depression - Wave of neuronal depolarization spreading across cortex (3-5 mm/min)
-      - Activates trigeminal nerve → release CGRP, substance P → meningeal vessel dilation, inflammation (sterile neurogenic inflammation)
-      - Diagnostic criteria (ICHD-3) - Requires ≥5 attacks fulfilling criteria
-      - Duration 4-72 hours (untreated or unsuccessfully treated)
-      - At least 2 of 4 characteristics - Unilateral location, pulsating quality, moderate-severe intensity (inhibits daily activities), aggravation by routine physical activity
-      - At least 1 associated symptom - Nausea and/or vomiting, photophobia and phonophobia
-      - Not better accounted for by another diagnosis
-      - Clinical features
-      - Headache - Throbbing/pulsating, unilateral (60%), frontotemporal or retro-orbital
-      - Moderate-severe intensity (interferes with activities, patient prefers to lie still in dark quiet room)
-      - Worsened by physical activity (walking stairs, bending)
-      - Nausea/vomiting (80%)
-      - Photophobia and phonophobia (90%)
-      - Osmophobia (sensitivity to odors)
-      - Duration 4-72 hours (if untreated)
-      - Phases - Premonitory (prodrome) hours to 2 days before headache (fatigue, irritability, food cravings, yawning, neck stiffness)
-      - Headache phase 4-72 hours
-      - Postdrome ("migraine hangover") - Fatigue, difficulty concentrating, 24-48 hours after headache resolves
-      - Triggers - Stress, sleep changes (too much or too little), meals skipped, dehydration, hormonal changes (menstruation, ovulation, oral contraceptives), alcohol (especially red wine), aged cheeses (tyramine), processed meats (nitrates), chocolate, caffeine withdrawal, weather changes, bright lights, strong smells
-      - Physical exam - Normal between attacks
-      - During attack - Patient appears ill, prefers dark room, normal neurologic exam (if abnormal, consider other diagnosis)
-      - Red flags (exclude secondary headache) - "SNOOP4"
-      - Systemic symptoms (fever, weight loss, pregnancy)
-      - Neurologic symptoms/signs (altered mental status, focal deficit, papilledema)
-      - Onset sudden (thunderclap headache, subarachnoid hemorrhage)
-      - Onset after age 50 (giant cell arteritis)
-      - Pattern change (different from usual headaches)
-      - Positional (worse lying down → increased ICP, worse standing → low CSF pressure)
-      - Precipitated by Valsalva (cough, sneeze → increased ICP, Chiari malformation)
-      - Progressive worsening
-      - Papilledema, pulsatile tinnitus (idiopathic intracranial hypertension)
-      - Workup - Clinical diagnosis (no imaging required if typical presentation, normal neuro exam, no red flags)
-      - Neuroimaging (MRI brain) - If red flags, atypical features, abnormal neuro exam, diagnosis uncertain
-      - Headache diary - Document frequency, duration, triggers, treatments (identify patterns, guide management)
-    treatment:
-      - Acute treatment - Goal terminate attack, restore function
-      - General principles - Treat early (within 1-2 hours onset for best efficacy), adequate dose (avoid undertreatment), limit acute medication use <10 days/month (prevent medication overuse headache)
-      - Triptans - Serotonin 5-HT1B/1D agonists, FIRST-LINE
-      - Sumatriptan 50-100 mg PO (onset 30-60 min, 60-70% effective 2 hours) or 6 mg SQ (onset 10-15 min, 80% effective, most effective route) or 20 mg intranasal
-      - Rizatriptan 10 mg PO (faster onset than sumatriptan)
-      - Eletriptan 40-80 mg PO (higher efficacy, lower recurrence)
-      - Other triptans - Zolmitriptan, naratriptan, almotriptan, frovatriptan
-      - Contraindications - Coronary artery disease, cerebrovascular disease, uncontrolled hypertension, basilar/hemiplegic migraine (risk vasoconstriction)
-      - Side effects - Chest tightness (benign, not cardiac ischemia), paresthesias, dizziness
-      - NSAIDs - Effective mild-moderate migraine
-      - Ibuprofen 400-800 mg, naproxen 500-1000 mg, ketorolac 30-60 mg IM/IV (ER)
-      - Aspirin 900-1000 mg
-      - Combination medications - Excedrin Migraine (aspirin 250 mg + acetaminophen 250 mg + caffeine 65 mg)
-      - Antiemetics - Treat nausea, enhance gastroparesis (improve absorption oral medications)
-      - Metoclopramide 10 mg PO/IV (prokinetic + antiemetic, also has direct antimigraine effect)
-      - Prochlorperazine 10 mg PO/IV or 25 mg PR
-      - Ondansetron 4-8 mg (if cannot tolerate dopamine antagonists)
-      - Gepants (CGRP receptor antagonists) - Newer class, effective acute treatment
-      - Ubrogepant 50-100 mg PO, rimegepant 75 mg PO
-      - Effective as triptans, fewer contraindications (safe in cardiovascular disease)
-      - Ditans - Lasmiditan 50-200 mg PO (5-HT1F agonist, does NOT cause vasoconstriction, safe in vascular disease)
-      - Dizziness, somnolence (do not drive 8 hours)
-      - Ergots - Older agents, less preferred (more side effects, vasoconstriction)
-      - Ergotamine, dihydroergotamine (DHE 1 mg IM/SQ or 0.5-1 mg IV)
-      - DHE useful for status migrainosus (ER/infusion center)
-      - Opioids - AVOID (not migraine-specific, risk dependence, medication overuse headache)
-      - Rescue only if all else fails
-      - Status migrainosus - Migraine lasting >72 hours
-      - ER treatment - IV fluids, antiemetics (metoclopramide or prochlorperazine), DHE, steroids (dexamethasone 10-20 mg IV, prevent recurrence), nerve blocks
-      - Preventive treatment - Indications: ≥4 headache days/month with impairment, ≥8 headache days/month, inadequate response to acute treatment, contraindication/side effects acute medications, patient preference
-      - Goal reduce frequency/severity 50% (not cure)
-      - First-line agents
-      - Beta-blockers - Propranolol 80-240 mg/day, metoprolol 100-200 mg/day
-      - Effective 50-60%, well-tolerated
-      - Contraindications - Asthma, bradycardia, hypotension
-      - Antiepileptics - Topiramate 50-200 mg/day (start 25 mg, titrate slowly)
-      - Effective 50%, weight loss
-      - Side effects - Cognitive slowing ("dopamax"), paresthesias, kidney stones, glaucoma, teratogenic (avoid pregnancy)
-      - Valproate 500-1500 mg/day - Effective but weight gain, teratogenic (avoid women childbearing age)
-      - Antidepressants - Amitriptyline 25-150 mg qHS (tricyclic)
-      - Effective 50%, also helps insomnia, comorbid depression
-      - Side effects - Sedation, dry mouth, weight gain
-      - Venlafaxine 150 mg/day (SNRI) - If comorbid depression/anxiety
-      - CGRP monoclonal antibodies - MOST EFFECTIVE, BEST TOLERATED (newest class)
-      - Erenumab 70-140 mg SQ monthly (anti-CGRP receptor)
-      - Fremanezumab 225 mg SQ monthly or 675 mg q3 months (anti-CGRP)
-      - Galcanezumab 240 mg loading then 120 mg SQ monthly (anti-CGRP)
-      - Eptinezumab 100 mg IV q3 months (anti-CGRP)
-      - Reduce migraine days 50% in 50-60% patients (some respond dramatically)
-      - Well-tolerated (injection site reactions, constipation)
-      - High cost ($575-700/month, insurance may require failure of 2-3 oral preventives)
-      - Trial duration - Adequate trial 2-3 months (except CGRP antibodies may work faster, 1 month)
-      - Lifestyle modifications - Maintain regular sleep schedule, regular meals, hydration, exercise, stress management, avoid triggers
-      - Nonpharmacologic - Biofeedback, cognitive-behavioral therapy, relaxation training, acupuncture
-      - Magnesium 400-600 mg/day, riboflavin (vitamin B2) 400 mg/day, CoQ10 100-300 mg/day (modest benefit)
-
-  - id: migraine_with_aura
-    type: diagnosis
-    name: "Migraine With Aura"
-    icd10: "G43.1"
-    urgency: medium
-    workup:
-      - Migraine with aura - Migraine preceded by reversible focal neurologic symptoms (aura) 20-30% migraineurs
-      - Aura - Transient neurologic symptoms (typically visual) developing gradually over 5-20 minutes, lasting 5-60 minutes, followed by headache (within 60 minutes)
-      - Types of aura
-      - Visual (90%) - Positive phenomena (scintillating scotoma, fortification spectra, zigzag lines, shimmering) or negative (scotoma, visual field defect)
-      - Classic "fortification spectrum" - Bright zigzag arc expanding across visual field
-      - Sensory (30-40%) - Unilateral paresthesias (pins and needles) spreading from hand up arm to face ("marching")
-      - Speech/language (10-20%) - Dysphasia (difficulty finding words, slurred speech)
-      - Motor - Weakness (rare, if present consider hemiplegic migraine)
-      - Brainstem (rare) - Vertigo, diplopia, dysarthria, ataxia (basilar-type migraine)
-      - Retinal (rare) - Monocular vision loss (retinal artery spasm)
-      - Aura characteristics - Gradual onset (distinguishes from stroke, which is sudden), "march" or spread (cortical spreading depression), fully reversible (no permanent deficit), positive AND negative symptoms (stroke typically only negative)
-      - Headache follows aura (typically within 60 minutes), but can occur during aura or no headache ("acephalgic migraine")
-      - Differential diagnosis - Stroke/TIA (sudden onset, older age, vascular risk factors), seizure (positive symptoms only, seconds to minutes, no march, typically consciousness impaired)
-      - Workup - If first aura or atypical features, consider neuroimaging (MRI brain) and neurology referral to exclude stroke, structural lesion
-      - Typical aura with history of prior similar events - No imaging needed
-    treatment:
-      - Acute treatment - Same as migraine without aura (triptans, NSAIDs, antiemetics)
-      - Treat during or after aura (waiting may reduce efficacy)
-      - Aspirin - May abort aura if taken early
-      - Preventive treatment - Same as migraine without aura
-      - Avoid combined hormonal contraceptives (estrogen-containing) - Increased stroke risk (especially if aura + smoking + age >35)
-      - Progestin-only contraceptives safe
-      - Hemiplegic migraine - Rare subtype with motor weakness during aura
-      - Genetic forms (familial hemiplegic migraine FHM1, FHM2, FHM3) - Autosomal dominant, calcium/sodium channel mutations
-      - AVOID triptans and ergots (contraindicated)
-      - Verapamil (calcium channel blocker) preventive treatment
+name: Migraine
+family: Neurology
+specialty: Neurology
+chief_complaint: Recurrent severe headache
+description: |
+  Recurrent primary headache disorder with unilateral throbbing pain, nausea, photophobia, phonophobia.
+  Affects 15% of population, 3:1 female predominance. Migraine with aura (25%) vs without aura (75%).
+icd10: G43.909
+urgency: Moderate
+workup:
+  - Clinical diagnosis based on ICHD-3 criteria (no imaging needed for typical presentation)
+  - Migraine without aura: ≥5 attacks lasting 4-72 hours with ≥2 of (unilateral, throbbing, moderate-severe, worse with activity) PLUS nausea/vomiting or photophobia/phonophobia
+  - Migraine with aura: reversible focal neurologic symptoms (visual most common) lasting 5-60 minutes, followed by headache within 60 minutes
+  - Neuroimaging (MRI brain) indicated if: atypical features, focal neurologic deficits persisting beyond aura, sudden onset ("thunderclap"), age >50 with new headache, change in headache pattern
+  - Red flags requiring urgent evaluation: sudden severe headache, fever/meningismus, focal deficits, papilledema, altered mental status
+treatment:
+  - Acute treatment (abortive): take at headache onset for best efficacy
+  - Mild-moderate: NSAIDs (ibuprofen 400-800mg, naproxen 500-1000mg) or acetaminophen 1000mg
+  - Moderate-severe: triptans first-line (sumatriptan 50-100mg PO, rizatriptan 10mg ODT, eletriptan 40mg)
+  - Rescue therapy: metoclopramide 10mg IV/IM for nausea, prochlorperazine 10mg IV, or ketorolac 30mg IV
+  - Avoid opioids (not effective, risk medication overuse headache)
+  - Preventive therapy if: ≥4 headache days per month, ≥8 migraine days per month, or debilitating attacks
+  - Preventive first-line: topiramate 50-100mg daily, propranolol 80-240mg daily, amitriptyline 25-100mg nightly
+  - Preventive alternatives: valproate, venlafaxine, or CGRP monoclonal antibodies (erenumab, fremanezumab, galcanezumab)
+  - Botox injections for chronic migraine (≥15 headache days per month)
+clinical_pearls:
+  - Medication overuse headache (rebound): occurs with acute meds >10-15 days per month (requires withdrawal and prevention)
+  - Aura symptoms: visual (scintillating scotoma, zigzag lines), sensory (paresthesias), speech disturbance (rarely motor)
+  - Status migrainosus: migraine lasting >72 hours (treat with IV antiemetics, steroids, DHE, or hospitalize)
+  - Triggers: stress, sleep changes, menstruation, foods (aged cheese, wine, MSG), weather changes, skipped meals
+  - Premonitory symptoms (hours before): mood changes, neck stiffness, yawning, food cravings
+  - Triptans contraindicated in: coronary artery disease, uncontrolled hypertension, hemiplegic migraine, basilar migraine
+differentials:
+  - Tension-type headache
+  - Cluster headache
+  - Medication overuse headache
+  - Subarachnoid hemorrhage
+  - Meningitis
+  - Brain tumor
+trace:
+  - Recurrent unilateral throbbing headache with nausea and photophobia → ≥5 similar attacks lasting 4-72 hours → Diagnose migraine without aura → Mild-moderate severity → Trial ibuprofen 600mg at onset → Inadequate relief → Prescribe sumatriptan 100mg for future attacks → Frequent attacks (≥4 per month) → Initiate preventive therapy with propranolol 80mg daily → Reduce attack frequency by 50%

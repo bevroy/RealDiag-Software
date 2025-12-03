@@ -1,0 +1,44 @@
+tree_id: PULM-COMMUNITY-ACQUIRED-PNEUMONIA
+name: Community-Acquired Pneumonia
+family: Pulmonology
+specialty: Pulmonology
+chief_complaint: Cough, fever, and dyspnea
+description: |
+  Acute lung infection acquired outside healthcare setting. Common pathogens: S. pneumoniae (most common), H. influenzae, M. pneumoniae, viruses.
+  5th leading cause of death in US. Mortality varies by severity and age.
+icd10: J18.9
+urgency: High
+workup:
+  - Chest X-ray (lobar consolidation, interstitial infiltrates, or pleural effusion)
+  - Oxygen saturation and ABG if hypoxic
+  - Blood cultures x2 if severe or hospitalized (positive in 5-14%)
+  - Sputum culture and Gram stain if productive cough and hospitalized
+  - Urinary antigen tests: Streptococcus pneumoniae and Legionella (if severe or risk factors)
+  - Procalcitonin may help distinguish bacterial from viral (elevated >0.25 ng/mL suggests bacterial)
+  - Complete blood count (leukocytosis common), basic metabolic panel
+  - Severity assessment: CURB-65 score (Confusion, Urea >20 mg/dL, RR ≥30, BP <90/60, age ≥65)
+treatment:
+  - Outpatient healthy adult: amoxicillin 1g TID or doxycycline 100mg BID x 5-7 days
+  - Outpatient with comorbidities: amoxicillin-clavulanate or cephalosporin PLUS macrolide (azithromycin or clarithromycin)
+  - Outpatient alternative: respiratory fluoroquinolone monotherapy (levofloxacin 750mg daily, moxifloxacin 400mg daily)
+  - Inpatient non-ICU: ceftriaxone 1g IV daily or ampicillin-sulbactam PLUS azithromycin 500mg IV/PO daily
+  - Inpatient ICU: ceftriaxone or cefotaxime PLUS azithromycin OR respiratory fluoroquinolone
+  - Add vancomycin or linezolid if MRSA risk factors (prior MRSA, IV drug use, post-influenza)
+  - Supportive care: oxygen therapy (target SpO2 >90%), IV fluids, antipyretics
+  - CURB-65 score ≥2 suggests hospitalization needed
+clinical_pearls:
+  - Typical pneumonia: abrupt onset, fever, productive cough, lobar consolidation on CXR (S. pneumoniae, H. influenzae)
+  - Atypical pneumonia: gradual onset, dry cough, extrapulmonary symptoms, interstitial infiltrates (Mycoplasma, Chlamydia, Legionella)
+  - Complications: pleural effusion (30%), empyema, lung abscess, sepsis, respiratory failure
+  - Parapneumonic effusion: drain if pH <7.2, glucose <60, positive Gram stain, or loculated
+  - Prevention: pneumococcal vaccine (PPSV23 and PCV20), influenza vaccine annually
+  - Duration: 5 days adequate for uncomplicated CAP with clinical improvement
+differentials:
+  - Acute bronchitis
+  - Influenza
+  - COVID-19
+  - Pulmonary embolism
+  - Heart failure with pulmonary edema
+  - Lung cancer
+trace:
+  - Cough, fever, and dyspnea → Chest X-ray shows lobar consolidation → CURB-65 score 0-1 (outpatient) → Healthy adult, no comorbidities → Amoxicillin 1g TID x 5 days → Clinical improvement in 48-72 hours → Complete 5-day course → Follow-up CXR in 6 weeks if >50 years old or smoker
