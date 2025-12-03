@@ -1,0 +1,44 @@
+tree_id: INFECTIOUS-INFLUENZA
+name: Influenza
+family: Infectious Disease
+specialty: Infectious Disease
+chief_complaint: Fever, cough, and myalgias
+description: |
+  Acute respiratory illness caused by influenza A or B virus. Highly contagious, transmitted via respiratory droplets.
+  Seasonal epidemics (winter in temperate climates). Incubation period 1-4 days. Complications include pneumonia, myocarditis, encephalitis.
+icd10: J11.1
+urgency: Moderate
+workup:
+  - Clinical diagnosis during influenza season - sudden onset fever, cough, myalgias, headache, fatigue
+  - Rapid influenza diagnostic test (RIDT) detects viral antigens (60-80% sensitive, results in 15 minutes)
+  - Molecular assay (RT-PCR) gold standard (95% sensitive, differentiates A vs B and subtypes)
+  - Testing recommended if result will change management (antiviral therapy, isolation precautions)
+  - Chest X-ray if pneumonia suspected
+  - Complete blood count typically shows leukopenia
+treatment:
+  - Antiviral therapy most effective if started within 48 hours of symptom onset
+  - Oseltamivir (Tamiflu) 75mg PO BID x 5 days (first-line for outpatients)
+  - Zanamivir 10mg inhaled BID x 5 days alternative (avoid in asthma/COPD, can cause bronchospasm)
+  - Baloxavir 40-80mg PO single dose (new agent, single-dose convenience)
+  - Indications for antiviral therapy - hospitalized patients, severe illness, high-risk conditions (age less than 2 or greater than 65, pregnancy, immunocompromised, chronic medical conditions)
+  - Symptomatic treatment - acetaminophen or ibuprofen for fever and myalgias, rest, hydration
+  - Avoid aspirin in children and adolescents (risk of Reye syndrome)
+  - Antibiotics not indicated unless bacterial superinfection (S. pneumoniae, S. aureus pneumonia)
+  - Hospitalization if respiratory distress, hypoxemia, dehydration, altered mental status
+  - Prevention - annual influenza vaccine (inactivated or live attenuated), hand hygiene, respiratory etiquette
+clinical_pearls:
+  - Sudden onset distinguishes influenza from common cold (gradual onset)
+  - Classic triad includes fever, cough, and myalgias
+  - Complications more common in high-risk groups (elderly, pregnant, chronic disease, immunocompromised)
+  - Secondary bacterial pneumonia presents with new fever after initial improvement
+  - Oseltamivir reduces symptom duration by 1 day and reduces complications
+  - Chemoprophylaxis with oseltamivir 75mg daily x 10 days for high-risk exposed individuals (within 48 hours of exposure)
+differentials:
+  - Common cold (rhinovirus)
+  - COVID-19
+  - Respiratory syncytial virus (RSV)
+  - Streptococcal pharyngitis
+  - Community-acquired pneumonia
+  - Mononucleosis
+trace:
+  - Sudden onset fever 102F, severe myalgias, dry cough, headache x 24 hours → Flu season, multiple colleagues ill → Rapid influenza test positive for influenza A → High-risk patient (diabetes, age 68) → Start oseltamivir 75mg BID within 36 hours of symptom onset → Symptomatic treatment with acetaminophen → Fever resolves day 3, symptoms improve → Complete 5-day course → Full recovery by day 7

@@ -1,0 +1,43 @@
+tree_id: CARD-ATRIAL-FLUTTER
+name: Atrial Flutter
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Palpitations and dyspnea
+description: |
+  Regular atrial tachycardia with sawtooth flutter waves, typically 250-350 bpm. Usually 2:1 AV conduction resulting in ventricular rate 150 bpm.
+  Typical (counterclockwise) flutter involves tricuspid annulus. Often progresses to atrial fibrillation. Shares risk factors with AFib.
+icd10: I48.92
+urgency: Moderate
+workup:
+  - ECG diagnostic - sawtooth flutter waves (best seen in leads II, III, aVF, V1), regular atrial rate 250-350 bpm
+  - Typical flutter shows negative flutter waves in inferior leads (II, III, aVF), positive in V1
+  - Ventricular rate usually 150 bpm with 2:1 conduction, may vary with 3:1 or 4:1 block
+  - Adenosine 6mg IV rapid push can unmask flutter waves by transiently blocking AV node
+  - Echocardiogram to assess structural heart disease and left atrial size
+  - TSH, basic metabolic panel (hypokalemia, hypomagnesemia lower threshold for arrhythmias)
+  - Troponin if chest pain or hemodynamic instability
+treatment:
+  - Hemodynamically unstable - immediate synchronized cardioversion starting at 50-100J
+  - Hemodynamically stable - rate control or rhythm control strategy
+  - Rate control - beta-blocker (metoprolol 25-100mg PO BID, esmolol 0.5 mg/kg IV bolus) or calcium channel blocker (diltiazem 0.25 mg/kg IV bolus)
+  - Avoid digoxin for acute rate control in flutter (often ineffective)
+  - Anticoagulation using CHA2DS2-VASc score (same as atrial fibrillation) - DOAC or warfarin if score 2 or higher in men, 3 or higher in women
+  - Cardioversion - electrical (50-100J synchronized) or pharmacological (ibutilide 1mg IV over 10 min)
+  - Catheter ablation curative for typical flutter (95% success rate, first-line for recurrent flutter)
+  - Ablation of cavotricuspid isthmus creates bidirectional block preventing flutter circuit
+  - Class IC agents (flecainide, propafenone) contraindicated unless on AV nodal blocking agent (can cause 1:1 conduction and hemodynamic collapse)
+clinical_pearls:
+  - Classic ventricular rate 150 bpm should raise suspicion for atrial flutter with 2:1 block
+  - Carotid sinus massage or adenosine slows AV conduction, reveals flutter waves
+  - High risk of thromboembolism similar to atrial fibrillation (anticoagulate based on CHA2DS2-VASc)
+  - Atrial flutter often coexists with or converts to atrial fibrillation
+  - Catheter ablation more definitive than medical therapy for typical flutter
+  - Atypical flutter (left atrial) harder to ablate, often seen after cardiac surgery or ablation
+differentials:
+  - Atrial fibrillation
+  - Supraventricular tachycardia (AVNRT, AVRT)
+  - Atrial tachycardia
+  - Sinus tachycardia
+  - Multifocal atrial tachycardia
+trace:
+  - Palpitations and lightheadedness x 2 hours → ECG shows regular tachycardia 150 bpm, sawtooth waves in inferior leads → Diagnose atrial flutter with 2:1 conduction → Hemodynamically stable → IV metoprolol 5mg, rate decreases to 120 bpm → Start oral metoprolol 50mg BID → CHA2DS2-VASc score 3, start apixaban 5mg BID → Refer to electrophysiology for catheter ablation → Successful ablation of cavotricuspid isthmus → Stop metoprolol, continue anticoagulation 3 months post-ablation
