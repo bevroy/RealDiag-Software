@@ -1,46 +1,66 @@
 tree_id: CARD-AORTIC-STENOSIS
 name: Aortic Stenosis
-family: Cardiology
+family: cardiovascular
 specialty: Cardiology
-chief_complaint: Exertional chest pain, dyspnea, or syncope
-description: |
-  Progressive narrowing of aortic valve orifice. Most common valvular heart disease requiring surgery.
-  Causes include calcific degeneration (elderly), bicuspid aortic valve (younger), rheumatic heart disease. Asymptomatic for years then rapid decline once symptoms develop.
+chief_complaint: Exertional dyspnea, chest pain, syncope
+description: Progressive narrowing of aortic valve causing left ventricular outflow obstruction
 icd10: I35.0
-urgency: Moderate
+urgency: urgent-if-symptomatic
 workup:
-  - Transthoracic echocardiogram (TTE) diagnostic - assess valve area, mean gradient, peak velocity, left ventricular function
-  - Severe AS criteria - aortic valve area (AVA) less than 1.0 cm2, mean gradient greater than 40 mmHg, peak velocity greater than 4 m/s
-  - Moderate AS - AVA 1.0-1.5 cm2, mean gradient 25-40 mmHg, velocity 3-4 m/s
-  - Mild AS - AVA greater than 1.5 cm2, mean gradient less than 25 mmHg, velocity 2.5-3 m/s
-  - Low-flow low-gradient AS with reduced ejection fraction - dobutamine stress echo to differentiate true severe AS from pseudostenosis
-  - Physical exam - crescendo-decrescendo systolic murmur at right upper sternal border radiating to carotids, delayed and diminished carotid upstroke (pulsus parvus et tardus), soft or absent A2
-  - ECG - left ventricular hypertrophy with strain pattern
-  - Cardiac catheterization before surgery if CAD suspected - simultaneous coronary angiography (many patients need CABG)
-  - Exercise stress test if asymptomatic severe AS to assess for symptoms and risk stratification (only if supervised)
+  - Transthoracic echocardiography (TTE) - diagnostic test of choice
+  - Measure aortic valve area (AVA less than 1.0 cm² severe, 1.0-1.5 cm² moderate, greater than 1.5 cm² mild)
+  - Mean transvalvular gradient (greater than 40 mmHg severe, 25-40 mmHg moderate, less than 25 mmHg mild)
+  - Aortic jet velocity (greater than 4 m/s severe, 3-4 m/s moderate, less than 3 m/s mild)
+  - Left ventricular ejection fraction (LVEF) and wall thickness
+  - ECG (left ventricular hypertrophy, left axis deviation, LBBB)
+  - Chest X-ray (boot-shaped heart, calcified aortic valve)
+  - Cardiac catheterization if echo nondiagnostic or to assess coronary artery disease pre-op
+  - Exercise stress test if asymptomatic with severe AS to unmask symptoms (physician-supervised)
+  - BNP/NT-proBNP (elevated indicates worse prognosis)
+  - Cardiac CT for aortic valve calcium scoring (Agatston score greater than 2000 in men, greater than 1200 in women predicts rapid progression)
 treatment:
-  - No medical therapy slows progression - statins do not help (unlike atherosclerosis)
-  - Symptomatic severe AS - aortic valve replacement (AVR) indicated
-  - Classic symptom triad - angina, syncope, dyspnea/heart failure
-  - Median survival after symptom onset - angina 5 years, syncope 3 years, heart failure 2 years
-  - Surgical AVR (SAVR) - mechanical valve (lifelong anticoagulation, durable) or bioprosthetic valve (no anticoagulation but degenerates over 10-20 years)
-  - Transcatheter aortic valve replacement (TAVR) - less invasive, via femoral artery, approved for all risk categories now, outcomes similar to SAVR in most patients
-  - TAVR preferred if high surgical risk, elderly, or significant comorbidities; SAVR preferred if young (bioprosthetic valve degenerates, would need redo), mechanical valve desired, or concomitant cardiac surgery needed
-  - Asymptomatic severe AS - observation with serial echos every 6-12 months, consider AVR if very severe (AVA less than 0.6 cm2, velocity greater than 5 m/s), LVEF less than 50%, or undergoing other cardiac surgery
-  - Balloon valvuloplasty temporizing measure (bridge to AVR in hemodynamically unstable or palliation if not AVR candidate) - high restenosis rate
-  - Endocarditis prophylaxis not routinely recommended (only if prior endocarditis)
+  - Aortic valve replacement (AVR) for symptomatic severe AS (Class I indication)
+  - Surgical AVR (SAVR) via sternotomy - gold standard for low-risk patients
+  - Transcatheter aortic valve replacement (TAVR) for high or intermediate surgical risk
+  - AVR indicated if asymptomatic with LVEF less than 50%, undergoing cardiac surgery, or abnormal exercise test
+  - Medical management ONLY if not surgical candidate - no medications prevent progression
+  - Diuretics cautiously for heart failure symptoms (avoid excessive preload reduction)
+  - Avoid afterload reducers (ACE inhibitors, ARBs) in severe AS - can cause hypotension
+  - Antibiotic prophylaxis for dental procedures if prior endocarditis or prosthetic valve
+  - Serial echocardiography every 6-12 months for asymptomatic moderate-severe AS
+  - Balloon aortic valvuloplasty as bridge to AVR in hemodynamically unstable patients
+  - Treat concomitant coronary artery disease with CABG at time of AVR
 clinical_pearls:
-  - Asymptomatic phase lasts 10-20 years with gradual progression, once symptomatic rapid decline and high mortality without intervention
-  - Sudden cardiac death risk in asymptomatic AS very low (less than 1% per year), dramatically increases once symptomatic
-  - Bicuspid aortic valve most common congenital heart defect (1-2% population), presents with AS at younger age (40s-50s), screen with echo
-  - Associated aortopathy with bicuspid valve - ascending aorta dilation, dissection risk, may need aortic surgery
-  - Paradoxical low-flow low-gradient AS with preserved EF - small LV cavity, restrictive physiology
-  - Avoid vasodilators in severe AS (reduced preload worsens cardiac output)
+  - Classic triad - Angina, Syncope, Dyspnea (mnemonic AS causes SAD)
+  - Once symptomatic, median survival without AVR - angina 5 years, syncope 3 years, heart failure 2 years
+  - Pulsus parvus et tardus (weak, delayed carotid upstroke) classic finding
+  - Crescendo-decrescendo systolic murmur best heard at right upper sternal border, radiates to carotids
+  - Paradoxical splitting of S2 (A2 delayed past P2) in severe AS
+  - Low-flow, low-gradient AS with reduced LVEF - dobutamine stress echo helps differentiate true severe AS from pseudo-severe
+  - Normal-flow, low-gradient AS with preserved LVEF - look for small LV cavity, consider CT calcium score
+  - TAVR now approved for low surgical risk patients - comparable outcomes to SAVR
+  - Bicuspid aortic valve causes early AS (age 40-50s vs 70-80s for degenerative calcific AS)
+  - Avoid vasodilators and vigorous diuresis - AS patients dependent on preload
 differentials:
-  - Hypertrophic cardiomyopathy
-  - Mitral regurgitation
-  - Aortic sclerosis (thickening without stenosis)
-  - Subvalvular or supravalvular stenosis
-  - Aortic coarctation
+  - Hypertrophic obstructive cardiomyopathy (HOCM) - murmur increases with Valsalva
+  - Mitral regurgitation - holosystolic murmur at apex
+  - Aortic sclerosis - similar murmur but no hemodynamic significance, normal AVA
+  - Supravalvular or subvalvular stenosis
+  - Pulmonary stenosis - murmur at left upper sternal border
 trace:
-  - 72-year-old man with progressive exertional dyspnea and chest pressure x 6 months → Exam shows harsh crescendo-decrescendo systolic murmur at RUSB, delayed carotid upstroke, sustained PMI → ECG shows LVH with strain → Echo shows severe AS (AVA 0.7 cm2, mean gradient 48 mmHg, peak velocity 4.5 m/s), LVEF 55%, calcified trileaflet valve → Coronary angiography shows 2-vessel CAD → Symptomatic severe AS with CAD → High surgical risk (STS score 8%) → Heart team discussion → Recommend TAVR plus possible PCI → Successful transfemoral TAVR with balloon-expandable valve → Post-TAVR echo shows AVA 1.8 cm2, mean gradient 8 mmHg, trace paravalvular leak → PCI to LAD and RCA → Symptoms resolve, improved exercise tolerance
+  - 78-year-old man with 6-month history of progressive exertional dyspnea and chest tightness
+  - Recently had near-syncope while climbing stairs
+  - Past medical history - hypertension, hyperlipidemia, known bicuspid aortic valve
+  - Physical exam - BP 130/85, HR 72, crescendo-decrescendo systolic murmur grade 3/6 at RUSB radiating to carotids
+  - Diminished and delayed carotid upstroke bilaterally, sustained PMI displaced laterally
+  - ECG - left ventricular hypertrophy with strain pattern
+  - TTE - bicuspid aortic valve with severe calcification, AVA 0.7 cm² (severe), mean gradient 48 mmHg, peak velocity 4.5 m/s
+  - LVEF 55% with concentric left ventricular hypertrophy (wall thickness 14 mm)
+  - NT-proBNP 850 pg/mL (elevated)
+  - Cardiac catheterization - 70% mid-LAD stenosis, confirms severe AS
+  - Cardiothoracic surgery consultation - recommended surgical AVR with bioprosthetic valve and CABG to LAD
+  - STS risk score 2.5% (low-intermediate surgical risk)
+  - Patient underwent successful SAVR (23 mm Carpentier-Edwards bioprosthetic valve) with CABG x1 (LIMA to LAD)
+  - Postoperative course uncomplicated, discharged home day 5
+  - 6-week follow-up - symptom-free, normal prosthetic valve function on echo
+  - Outcome - Excellent result with resolution of symptoms, on aspirin 81 mg daily lifelong
