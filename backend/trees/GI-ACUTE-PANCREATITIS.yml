@@ -1,46 +1,82 @@
 tree_id: GI-ACUTE-PANCREATITIS
 name: Acute Pancreatitis
-family: Gastroenterology
+family: gastrointestinal
 specialty: Gastroenterology
-chief_complaint: Severe epigastric pain radiating to back
-description: |
-  Acute inflammation of pancreas. Most common causes - gallstones (40%), alcohol (30%), hypertriglyceridemia (10%).
-  Mild (80%) vs severe (20% with organ failure or necrosis). Mortality 5-10% overall, 30% in severe cases.
+chief_complaint: Severe epigastric pain radiating to back, nausea, vomiting
+description: Acute inflammation of the pancreas with local and systemic manifestations
 icd10: K85.9
-urgency: High
+urgency: emergency
 workup:
-  - Diagnosis requires 2 of 3 criteria - characteristic pain, lipase or amylase >3x upper limit normal, imaging findings
-  - Lipase preferred over amylase (more specific, elevated longer)
-  - Complete metabolic panel (hypocalcemia poor prognostic sign, assess renal function)
-  - Liver enzymes (ALT >150 suggests gallstone etiology, AST >100 suggests alcohol)
-  - Triglycerides (>1000 mg/dL can cause pancreatitis)
-  - CT abdomen with IV contrast (only if diagnosis uncertain or assess complications after 48-72 hours)
-  - Abdominal ultrasound to assess for gallstones and bile duct dilation
-  - Ranson criteria or BISAP score to assess severity (predict mortality and ICU need)
+  - Clinical diagnosis requires 2 of 3 criteria - characteristic abdominal pain, serum lipase or amylase greater than 3 times upper limit of normal, characteristic imaging findings
+  - Serum lipase (more specific than amylase, remains elevated longer)
+  - Serum amylase (can be normal in 10-20% of cases)
+  - Comprehensive metabolic panel (calcium, glucose, BUN, creatinine)
+  - Complete blood count (elevated WBC with left shift)
+  - Liver function tests (ALT greater than 150 U/L suggests gallstone etiology)
+  - Triglycerides (if greater than 1000 mg/dL suggests hypertriglyceridemia as cause)
+  - CT abdomen with IV contrast (not needed for diagnosis, reserve for severe cases or complications)
+  - Perform CT after 48-72 hours if not improving or to evaluate for necrosis
+  - Abdominal ultrasound to evaluate for gallstones (biliary pancreatitis)
+  - Chest X-ray (assess for pleural effusion, ARDS)
+  - Arterial blood gas if respiratory distress
+  - Ranson criteria or APACHE II score to assess severity
+  - BISAP score (BUN greater than 25, impaired mental status, SIRS, age greater than 60, pleural effusion) - score greater than 3 predicts mortality
 treatment:
-  - Aggressive IV fluid resuscitation with lactated Ringer's 250-500 mL/hr initially (reduces mortality and organ failure)
-  - Goal urine output >0.5 mL/kg/hr, avoid fluid overload
-  - NPO initially, advance diet when pain improving (low-fat diet, can start oral feeding within 24 hours if tolerating)
-  - Pain control with IV opioids (morphine, hydromorphone) titrated to effect
-  - Antiemetics including ondansetron for nausea
-  - No antibiotics unless infected necrosis confirmed (prophylactic antibiotics not beneficial)
-  - ERCP within 24 hours if concurrent cholangitis (fever, jaundice, elevated bilirubin)
-  - Cholecystectomy during same hospitalization if gallstone pancreatitis (prevent recurrence)
-  - Severe pancreatitis requires ICU monitoring, may need nutritional support (enteral preferred over parenteral)
-  - Necrosis managed conservatively unless infected (percutaneous or surgical drainage)
+  - Aggressive IV fluid resuscitation - Lactated Ringer 250-500 mL/hr (15-20 mL/kg/hr) initially
+  - Goal urine output greater than 0.5 mL/kg/hr, avoid fluid overload
+  - NPO initially, advance diet as tolerated when pain improves
+  - Early enteral nutrition (within 24-48 hours) preferred over parenteral - reduces infections and mortality
+  - Pain control - IV opioids (morphine, hydromorphone), avoid meperidine
+  - Antiemetics - ondansetron 4-8 mg IV Q8H PRN
+  - No role for prophylactic antibiotics in sterile pancreatitis
+  - Antibiotics only if infected necrosis suspected (carbapenem or fluoroquinolone plus metronidazole)
+  - ERCP within 24 hours if concurrent acute cholangitis or biliary obstruction
+  - Cholecystectomy during same admission for mild gallstone pancreatitis (once recovered)
+  - Delayed cholecystectomy (6 weeks) for severe necrotizing pancreatitis
+  - Insulin for hyperglycemia (target glucose 140-180 mg/dL)
+  - Correct hypocalcemia if symptomatic or severe (calcium less than 7.5 mg/dL)
+  - Avoid alcohol and smoking cessation counseling
 clinical_pearls:
-  - Classic presentation includes sudden severe epigastric pain radiating to back, nausea, vomiting
-  - Cullen sign (periumbilical ecchymosis) and Grey Turner sign (flank ecchymosis) suggest hemorrhagic pancreatitis (rare, poor prognosis)
-  - GET SMASHED causes - Gallstones, Ethanol, Trauma, Steroids, Mumps, Autoimmune, Scorpion sting, Hyperlipidemia/Hypercalcemia, ERCP, Drugs
-  - Drugs causing pancreatitis include azathioprine, valproic acid, 6-mercaptopurine, furosemide, pentamidine, didanosine
-  - Early aggressive hydration (first 12-24 hours) reduces morbidity and mortality
-  - Avoid CT in first 48 hours (underestimates necrosis, allow time for inflammatory changes to evolve)
+  - GET SMASHED mnemonic for causes - Gallstones, Ethanol, Trauma, Steroids, Mumps, Autoimmune, Scorpion sting, Hypercalcemia/Hypertriglyceridemia, ERCP, Drugs
+  - Gallstones (40-50%) and alcohol (30-35%) account for 80% of cases
+  - Drugs causing pancreatitis - azathioprine, 6-MP, valproic acid, sulfonamides, pentamidine, didanosine
+  - Cullen sign (periumbilical ecchymosis) and Grey Turner sign (flank ecchymosis) indicate severe hemorrhagic pancreatitis
+  - Lipase more sensitive and specific than amylase, stays elevated longer (7-14 days vs 3-5 days)
+  - Normal lipase does NOT rule out pancreatitis if presentation late or chronic disease
+  - CT findings - pancreatic enlargement, peripancreatic fat stranding, fluid collections
+  - Necrotizing pancreatitis develops in 10-20%, mortality 15-30%
+  - Infected necrosis requires drainage (percutaneous, endoscopic, or surgical)
+  - Pseudocyst develops in 10-20% after 4 weeks, most resolve spontaneously
 differentials:
-  - Peptic ulcer disease (perforated)
-  - Acute cholecystitis
-  - Mesenteric ischemia
-  - Bowel obstruction
-  - Myocardial infarction
-  - Aortic dissection
+  - Perforated peptic ulcer - sudden onset, peritoneal signs, free air on imaging
+  - Acute cholecystitis - RUQ pain, positive Murphy sign, gallbladder wall thickening
+  - Mesenteric ischemia - pain out of proportion to exam, older patient, AF
+  - Myocardial infarction - chest pain radiation, ECG changes, elevated troponin
+  - Ruptured abdominal aortic aneurysm - pulsatile mass, hypotension, back pain
+  - Bowel obstruction - colicky pain, distension, hyperactive bowel sounds
+  - Diabetic ketoacidosis - elevated glucose, anion gap acidosis, ketonuria
 trace:
-  - Severe epigastric pain radiating to back with vomiting → Lipase 1200 U/L (>3x normal) → CT shows pancreatic edema → Diagnose acute pancreatitis → Abdominal ultrasound shows gallstones → Gallstone pancreatitis → Aggressive IV hydration with LR 250 mL/hr → NPO, IV morphine for pain → Check LFTs (ALT 180 suggests biliary etiology) → ERCP not needed (no cholangitis) → Pain improving day 3, advance to low-fat diet → Laparoscopic cholecystectomy before discharge → Discharge with low-fat diet instructions
+  - 52-year-old man presents to ED with sudden onset severe epigastric pain radiating to back, started 6 hours ago
+  - Constant pain 9/10, associated with nausea and vomiting (5 episodes)
+  - Unable to find comfortable position, pain worse lying flat
+  - History of heavy alcohol use (6-8 beers daily for 20 years)
+  - No prior episodes, no gallstones, no recent trauma
+  - Physical exam - vitals BP 105/70, HR 115, temp 38.2C, RR 24, O2 sat 94% on RA
+  - Appears ill, diaphoretic, tender epigastrium with guarding, diminished bowel sounds
+  - No rebound tenderness, no palpable masses
+  - Labs - WBC 18.5 K/uL, Hgb 15.2 g/dL, platelets 210 K/uL
+  - Lipase 1250 U/L (normal less than 60), amylase 650 U/L (normal less than 100)
+  - BUN 28 mg/dL, creatinine 1.4 mg/dL, glucose 210 mg/dL, calcium 8.2 mg/dL
+  - ALT 45 U/L, AST 85 U/L, alkaline phosphatase 90 U/L, total bilirubin 1.2 mg/dL
+  - Triglycerides 180 mg/dL (normal)
+  - CT abdomen with contrast - diffuse pancreatic enlargement with peripancreatic fat stranding, no necrosis
+  - RUQ ultrasound - no gallstones, no biliary dilatation
+  - Diagnosis - Acute alcoholic pancreatitis, moderate severity
+  - BISAP score 2 (BUN greater than 25, age greater than 60 no) - moderate risk
+  - Admitted to medical floor, aggressive IV fluid resuscitation with Lactated Ringer 250 mL/hr
+  - NPO, IV hydromorphone 0.5 mg Q3H PRN pain, ondansetron 4 mg IV Q8H PRN nausea
+  - Day 2 - pain improved, started clear liquid diet, tolerated well
+  - Day 3 - advanced to low-fat diet, pain 3/10, lipase trending down to 420 U/L
+  - Alcohol cessation counseling, social work consultation, outpatient addiction services referral
+  - Discharged day 4 with outpatient follow-up, complete alcohol abstinence advised
+  - Outcome - Full recovery, attending alcohol support group, no recurrence at 6 months
