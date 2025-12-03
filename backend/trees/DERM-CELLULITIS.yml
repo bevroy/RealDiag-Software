@@ -1,0 +1,45 @@
+tree_id: DERM-CELLULITIS
+name: Cellulitis
+family: Dermatology
+specialty: Dermatology
+chief_complaint: Warm, red, swollen area of skin
+description: |
+  Acute bacterial infection of dermis and subcutaneous tissue. Most commonly caused by Streptococcus pyogenes and Staphylococcus aureus.
+  Entry through breaks in skin (trauma, insect bites, fungal infections). Lower extremities most common site (70%).
+icd10: L03.90
+urgency: Moderate
+workup:
+  - Clinical diagnosis based on warmth, erythema, edema, tenderness of affected area
+  - Mark borders of erythema to track progression or improvement
+  - Blood cultures if systemic signs (fever, hypotension, tachycardia) or immunocompromised (positive in only 5-10%)
+  - Complete blood count (leukocytosis suggests systemic infection)
+  - CRP or ESR elevated but non-specific
+  - Wound culture if purulent drainage present
+  - Imaging (ultrasound or CT) if concerned for abscess or necrotizing fasciitis
+  - Consider Doppler ultrasound to rule out deep vein thrombosis if unilateral leg swelling
+treatment:
+  - Outpatient mild cellulitis without purulence - cephalexin 500mg QID or cefazolin 1-2g IV q8h
+  - If MRSA suspected (purulent drainage, prior MRSA, IV drug use, recent hospitalization) - add TMP-SMX DS BID or doxycycline 100mg BID
+  - Penicillin allergy - clindamycin 300-450mg TID or doxycycline 100mg BID
+  - Inpatient moderate-severe - cefazolin 1-2g IV q8h or ceftriaxone 1-2g IV daily
+  - MRSA coverage inpatient - vancomycin 15-20 mg/kg IV q8-12h or daptomycin 4mg/kg IV daily
+  - Duration 5-7 days for mild cases, 7-14 days for severe or slow to respond
+  - Elevation of affected limb and cool compresses reduce swelling
+  - NSAIDs for pain and inflammation
+  - Treat predisposing factors - tinea pedis, venous stasis, lymphedema
+clinical_pearls:
+  - Systemic signs (fever, hypotension, altered mental status) suggest bacteremia or necrotizing infection (requires hospitalization)
+  - Rapidly spreading erythema, crepitus, severe pain out of proportion, or skin necrosis suggests necrotizing fasciitis (surgical emergency)
+  - Recurrent cellulitis - address predisposing factors (obesity, diabetes, lymphedema, tinea pedis, chronic venous insufficiency)
+  - Lower extremity cellulitis often bilateral lymphedema mimics infection (no fever, symmetric, chronic)
+  - Erysipelas is superficial cellulitis with well-demarcated raised borders and lymphatic involvement
+  - Failure to improve in 48-72 hours - broaden antibiotic coverage, consider imaging for abscess, or alternative diagnosis
+differentials:
+  - Deep vein thrombosis
+  - Erysipelas
+  - Necrotizing fasciitis
+  - Contact dermatitis
+  - Venous stasis dermatitis
+  - Lipodermatosclerosis
+trace:
+  - Warm, red, swollen left lower leg x 2 days → Fever 101F, area of erythema 10cm x 8cm, tender → Mark borders → No purulence or crepitus → Diagnose cellulitis → Start cephalexin 500mg QID x 7 days → Elevate leg, NSAIDs for pain → Follow-up day 3, erythema improving → Complete antibiotic course → Treat underlying tinea pedis to prevent recurrence
