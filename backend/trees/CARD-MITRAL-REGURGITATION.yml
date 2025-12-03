@@ -1,163 +1,49 @@
 tree_id: CARD-MITRAL-REGURGITATION
-name: Mitral Regurgitation Evaluation
-family: CARDIOLOGY
-specialty: Cardiology, Cardiac Surgery
-chief_complaint: Heart Murmur, Dyspnea, Palpitations, Fatigue
-description: Evaluation and management of acute and chronic mitral regurgitation
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: mitral_regurgitation_evaluation
-
-nodes:
-  - id: mitral_regurgitation_evaluation
-    type: question
-    text: "Acuity and severity?"
-    options:
-      - label: "Acute severe mitral regurgitation"
-        next: acute_severe_mr
-      - label: "Chronic primary mitral regurgitation"
-        next: chronic_primary_mr
-      - label: "Chronic secondary mitral regurgitation"
-        next: chronic_secondary_mr
-
-  - id: acute_severe_mr
-    type: diagnosis
-    name: "Acute Severe Mitral Regurgitation"
-    icd10: "I34.0"
-    urgency: critical
-    workup:
-      - Acute MR - Sudden onset severe regurgitation, cardiovascular collapse
-      - Causes
-      - Papillary muscle rupture - MI (inferior MI → posteromedial papillary muscle, single blood supply), rupture 2-7 days post-MI
-      - Chordae tendineae rupture - Spontaneous (myxomatous degeneration), trauma, endocarditis
-      - Infective endocarditis - Valve destruction, perforation, chordal rupture
-      - Trauma - Blunt chest trauma
-      - Pathophysiology - Sudden volume overload, LV and LA not adapted (small, non-compliant LA)
-      - LA pressure acutely elevated → pulmonary edema
-      - Forward stroke volume reduced (blood regurgitates) → cardiogenic shock
-      - Clinical presentation - Fulminant pulmonary edema, cardiogenic shock
-      - Dyspnea, orthopnea, hypoxia, crackles bilateral
-      - Hypotension, tachycardia, cold extremities
-      - Murmur - Holosystolic at apex radiating to axilla, BUT may be soft/absent (equalization of LA/LV pressures in acute setting)
-      - S3 gallop
-      - Diagnosis
-      - CXR - Pulmonary edema, normal LA size (not enlarged in acute MR)
-      - ECG - ST changes if MI, arrhythmias
-      - Echocardiogram - URGENT TTE and TEE
-      - Flail leaflet (ruptured chordae/papillary muscle), vegetation (endocarditis), eccentric high-velocity regurgitant jet
-      - Severe MR criteria - Vena contracta >0.7 cm, regurgitant volume >60 mL, regurgitant fraction >50%, ERO >0.4 cm²
-      - LV function usually preserved (acute, no time to develop dysfunction)
-      - Pulmonary artery catheter - Elevated PCWP, large V waves (>3x mean PCWP)
-    treatment:
-      - Medical stabilization - ICU, bridge to surgery
-      - Reduce afterload - Nitroprusside 0.3-10 mcg/kg/min (reduce regurgitant volume, improve forward flow)
-      - Contraindicated if hypotensive
-      - Inotropes - Dobutamine 5-20 mcg/kg/min if hypotensive, cardiogenic shock
-      - Diuretics - Furosemide IV (pulmonary edema)
-      - Intra-aortic balloon pump (IABP) - If refractory shock, bridge to surgery (reduces afterload, increases coronary perfusion)
-      - Mechanical ventilation - If respiratory failure
-      - Avoid vasoconstrictors (increase afterload, worsen MR)
-      - Emergency surgery - ONLY definitive treatment
-      - Mitral valve repair (preferred) - Chordal replacement, leaflet resection, annuloplasty ring
-      - Mitral valve replacement - If unrepairable (extensive destruction, endocarditis)
-      - Papillary muscle rupture post-MI - Emergency surgery within hours (mortality 50-90% medical management, 20-40% surgical)
-      - Coronary revascularization (CABG) if concomitant CAD
-      - Endocarditis - Antibiotics + surgery (see endocarditis tree)
-      - Prognosis - High mortality without surgery (75% within 24 hours if papillary muscle rupture), surgical mortality 10-40% (depends on cause, hemodynamic status)
-
-  - id: chronic_primary_mr
-    type: diagnosis
-    name: "Chronic Primary Mitral Regurgitation"
-    icd10: "I34.0"
-    urgency: medium
-    workup:
-      - Primary (organic) MR - Intrinsic valve pathology
-      - Causes
-      - Degenerative (myxomatous) - Most common (70%), mitral valve prolapse (MVP), redundant/thickened leaflets, chordal elongation/rupture
-      - Barlow disease (diffuse myxomatous degeneration) vs fibroelastic deficiency (chordal rupture, less redundant leaflets)
-      - Rheumatic heart disease - Leaflet thickening, commissural fusion, chordal thickening (less common developed countries)
-      - Endocarditis - Vegetation, leaflet perforation, chordal rupture
-      - Congenital - Cleft leaflet
-      - Pathophysiology - Chronic volume overload, LV and LA adapt (dilate, eccentric hypertrophy)
-      - Compensated - Asymptomatic, normal EF (total stroke volume increased, effective forward SV maintained)
-      - Decompensated - LV dysfunction (EF declines, irreversible myocardial damage if prolonged), LA dilation (atrial fibrillation), pulmonary hypertension
-      - Clinical presentation
-      - Asymptomatic - Often for years (compensated)
-      - Symptoms - Dyspnea (exertional → at rest), orthopnea, PND, palpitations (AFib), fatigue
-      - Physical exam
-      - Holosystolic murmur at apex, radiates to axilla (posterolateral leaflet prolapse) or left sternal border (anterolateral leaflet prolapse)
-      - Hyperdynamic apical impulse, laterally displaced (LV dilation)
-      - S3 gallop (volume overload)
-      - Mid-systolic click (MVP, may precede murmur)
-      - Severity assessment - Echocardiogram (TTE, TEE if surgical planning)
-      - Mild - Vena contracta <0.3 cm, regurgitant volume <30 mL, regurgitant fraction <30%
-      - Moderate - VC 0.3-0.69 cm, RV 30-59 mL, RF 30-49%
-      - Severe - VC ≥0.7 cm, RV ≥60 mL, RF ≥50%, ERO ≥0.4 cm²
-      - LV size and function - LVESD (LV end-systolic dimension) ≥40 mm or LVEF <60% indicate LV decompensation (need surgery even if asymptomatic)
-      - LA size, pulmonary artery pressure
-      - Surgical risk - Assess with STS score, frailty, comorbidities
-    treatment:
-      - Asymptomatic severe primary MR - Surgery vs observation
-      - Surgery indicated if ANY
-      - LV dysfunction (EF <60% or LVESD ≥40 mm) - Prevent irreversible myocardial damage
-      - Symptomatic (NYHA II-IV)
-      - New-onset AFib
-      - Pulmonary hypertension (PASP >50 mmHg)
-      - High likelihood successful repair (posterior leaflet prolapse, no calcification)
-      - Surgery - Mitral valve repair preferred over replacement (better outcomes, no anticoagulation)
-      - Repair techniques - Resection/plication of prolapsed segment, chordal transfer/replacement (neo-chords), annuloplasty ring
-      - Repair rate >95% for posterior leaflet prolapse, 80-90% anterior or bileaflet
-      - If unrepairable → mitral valve replacement (mechanical or bioprosthetic)
-      - Transcatheter edge-to-edge repair (TEER) - MitraClip
-      - Percutaneous, clip approximates leaflets (creates double-orifice valve)
-      - Approved for primary MR if prohibitive surgical risk
-      - Less durable than surgical repair, but lower procedural risk
-      - Medical management - If asymptomatic mild-moderate MR, or surgery contraindicated
-      - No proven medical therapy slows progression
-      - Treat AFib (rate/rhythm control, anticoagulation)
-      - Diuretics if congestion symptoms
-      - Vasodilators (ACE inhibitors) NOT beneficial in primary MR (unlike secondary MR)
-      - Serial monitoring - Echo every 6-12 months (assess LV function, symptoms), intervene BEFORE irreversible LV dysfunction
-
-  - id: chronic_secondary_mr
-    type: diagnosis
-    name: "Chronic Secondary (Functional) Mitral Regurgitation"
-    icd10: "I34.0"
-    urgency: medium
-    workup:
-      - Secondary (functional) MR - Structurally normal valve, MR due to LV dysfunction/dilation
-      - Ischemic MR - Post-MI, LV remodeling, papillary muscle displacement (not rupture), leaflet tethering
-      - Non-ischemic MR - Dilated cardiomyopathy (idiopathic, viral, alcohol, etc.)
-      - Pathophysiology - LV dilation → mitral annular dilation, papillary muscle displacement → leaflet tethering (restricted closure) → incomplete coaptation → MR
-      - MR worsens LV dysfunction (volume overload), vicious cycle
-      - Clinical presentation - Heart failure symptoms (dyspnea, orthopnea, edema), underlying CAD or cardiomyopathy
-      - Diagnosis - Echocardiogram
-      - Structurally normal leaflets, restricted leaflet motion (tethering), incomplete coaptation
-      - Dilated LV (LVEF usually <40%), dilated LA
-      - Severe secondary MR - ERO ≥0.2 cm² (lower threshold than primary MR, 0.2 vs 0.4)
-      - Dynamic MR - Severity varies with loading conditions (worse with exercise)
-    treatment:
-      - Guideline-directed medical therapy (GDMT) for heart failure - FIRST-LINE
-      - ACE inhibitors/ARBs - Reduce afterload, LV remodeling (may reduce MR severity)
-      - Beta-blockers - Carvedilol, metoprolol succinate, bisoprolol
-      - Aldosterone antagonists - Spironolactone (EF <35%, NYHA II-IV)
-      - SGLT2 inhibitors - Dapagliflozin, empagliflozin (HFrEF benefit)
-      - Diuretics - Furosemide (congestion)
-      - Hydralazine-nitrates - If ACE/ARB intolerant
-      - Cardiac resynchronization therapy (CRT) - If wide QRS (LBBB ≥150 ms) + EF ≤35%
-      - Improves LV synchrony, reduces MR severity 30-50%
-      - Revascularization - If ischemic MR and viable myocardium
-      - CABG - May improve LV function, reduce MR
-      - PCI if suitable anatomy
-      - Surgery - If persistent severe MR despite optimal medical therapy
-      - CABG + mitral valve repair (undersized annuloplasty ring) - If ischemic MR and revascularization needed
-      - Mitral valve replacement - If repair unlikely durable (severe tethering, large LV)
-      - High surgical risk (EF <30%, NYHA IV mortality 10-20%)
-      - Transcatheter edge-to-edge repair (TEER) - MitraClip
-      - FDA-approved for secondary MR in patients with HFrEF (EF 20-50%) and NYHA II-IV symptoms despite GDMT, at prohibitive surgical risk
-      - COAPT trial - MitraClip reduced HF hospitalizations 47%, mortality 38% vs medical therapy alone (if MR severe relative to LV size)
-      - MITRA-FR trial - No benefit (if MR proportionate to severe LV dilation)
-      - Patient selection critical - "Disproportionate" MR (large regurgitant volume relative to LV size) benefits from TEER
-      - Transcatheter mitral valve replacement (TMVR) - Investigational, for failed repair/bioprosthetic valves
-      - Heart transplant/LVAD - End-stage heart failure refractory to above
+name: Mitral Regurgitation
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Dyspnea and fatigue with holosystolic murmur
+description: |
+  Mitral valve insufficiency allows backflow from left ventricle to left atrium. Primary MR (valve pathology), secondary/functional MR (normal valve but LV dilation/dysfunction).
+  Causes include mitral valve prolapse, rheumatic heart disease, endocarditis, ischemic (papillary muscle dysfunction), degenerative. Chronic MR tolerated for years, acute MR causes pulmonary edema.
+icd10: I34.0
+urgency: Moderate
+workup:
+  - Transthoracic echocardiogram (TTE) diagnostic - assess severity, mechanism, LV function, LV size
+  - Severity grading - mild, moderate, severe based on jet area, regurgitant volume, regurgitant orifice area, vena contracta width
+  - Severe MR criteria - regurgitant volume greater than 60 mL, regurgitant fraction greater than 50%, effective regurgitant orifice area (EROA) greater than 0.4 cm2
+  - Assess valve morphology - primary (leaflet abnormality, prolapse, flail, vegetations) vs secondary (restricted motion, tethering from LV remodeling)
+  - Transesophageal echo (TEE) for better visualization, surgical planning
+  - Measure LV dimensions and ejection fraction - chronic MR causes volume overload leading to LV dilation
+  - Left atrial size - chronic MR causes LA enlargement
+  - Physical exam - holosystolic murmur at apex radiating to axilla, soft S1, S3 gallop, hyperdynamic PMI
+  - ECG - left atrial enlargement (P mitrale), atrial fibrillation common, LVH if chronic severe
+  - Chest X-ray - cardiomegaly, LA enlargement, pulmonary congestion if decompensated
+  - Exercise stress echo if symptoms unclear with moderate-severe MR
+  - Cardiac catheterization before surgery - coronary angiography to assess for CAD (concomitant CABG if needed)
+treatment:
+  - Asymptomatic chronic severe primary MR - observation with serial echos every 6-12 months if LV function preserved (EF greater than 60%, LVESD less than 40 mm)
+  - Mitral valve surgery indications - symptomatic severe MR, asymptomatic with LV dysfunction (EF 30-60% or LVESD greater than 40 mm), new atrial fibrillation, pulmonary hypertension
+  - Mitral valve repair preferred over replacement - lower mortality, better LV function, no anticoagulation needed (if sinus rhythm), 90-95% feasible for degenerative MR
+  - Mitral valve replacement if repair not feasible - mechanical valve (lifelong warfarin) or bioprosthetic (no warfarin but degenerates over 10-15 years)
+  - Transcatheter edge-to-edge repair (MitraClip) for high surgical risk patients with symptomatic severe primary MR or secondary MR despite optimal medical therapy
+  - Secondary/functional MR - optimize heart failure treatment first (ACE inhibitor/ARB, beta-blocker, diuretics), cardiac resynchronization therapy if eligible
+  - Consider surgery if severe secondary MR persisting despite optimal medical therapy and undergoing CABG
+  - Acute severe MR (papillary muscle rupture from MI, chordae rupture, endocarditis) - medical stabilization (vasodilators, diuretics, intra-aortic balloon pump) then urgent surgery
+  - Atrial fibrillation management - rate control, anticoagulation
+  - Endocarditis prophylaxis not routinely recommended (only if prosthetic valve or prior endocarditis)
+clinical_pearls:
+  - Mitral valve prolapse most common cause in developed countries - myxomatous degeneration, click-murmur on exam
+  - Rheumatic heart disease most common worldwide - mixed stenosis and regurgitation
+  - Acute papillary muscle rupture complication of inferior MI (posteromedial papillary muscle) - cardiogenic shock, urgent surgery
+  - Carpentier classification - Type I (normal leaflet motion, annular dilation), Type II (excessive motion, prolapse, flail), Type III (restricted motion, rheumatic or ischemic)
+  - Chronic severe MR compensated by LV dilation (large compliant LA, increased preload), sudden deterioration if AF develops or LV fails
+  - Surgery timing critical - waiting until symptoms or severe LV dysfunction reduces survival benefit
+differentials:
+  - Tricuspid regurgitation
+  - Aortic stenosis
+  - Hypertrophic cardiomyopathy
+  - Ventricular septal defect
+  - Mitral stenosis
+trace:
+  - 65-year-old man with progressive dyspnea on exertion x 1 year, orthopnea → Exam shows holosystolic murmur at apex radiating to axilla, laterally displaced PMI → ECG shows atrial fibrillation, left atrial enlargement → Echo shows severe MR (EROA 0.5 cm2, regurgitant volume 70 mL), posterior leaflet flail from ruptured chordae, dilated LV (LVESD 42 mm), LVEF 58%, dilated LA → Symptomatic severe primary MR with borderline LV dilation → Coronary angiography shows no significant CAD → TEE confirms posterior leaflet P2 flail, favorable for repair → Mitral valve repair with posterior leaflet resection and annuloplasty ring → Maze procedure for AF → Postop echo shows trace residual MR, improved LV function → Amiodarone for rhythm control, warfarin for AF and recent surgery → Sinus rhythm at 3 months, excellent functional capacity
