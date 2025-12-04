@@ -1,0 +1,71 @@
+tree_id: NEPHRO-CKD
+name: Chronic Kidney Disease
+family: Renal
+specialty: Nephrology
+chief_complaint: Reduced kidney function
+description: Progressive irreversible loss of kidney function over months to years, defined as eGFR less than 60 mL/min/1.73m2 or kidney damage markers for 3 or more months
+
+icd10: N18.9
+
+urgency: routine
+
+workup:
+  - Definition: abnormalities of kidney structure or function present for 3 or more months (eGFR less than 60, albuminuria, or structural abnormalities)
+  - GFR categories: G1 (90 or more), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29), G5 (less than 15 or dialysis) - stages based on eGFR
+  - Albuminuria categories: A1 (less than 30 mg/g normal), A2 (30-300 mg/g moderately increased), A3 (more than 300 mg/g severely increased) - urine albumin-to-creatinine ratio
+  - Etiology: diabetes (40 percent most common), hypertension (30 percent), glomerulonephritis, polycystic kidney disease, obstructive uropathy
+  - Clinical presentation: often asymptomatic until advanced (stage 4-5), then fatigue, anorexia, nausea, pruritus, edema, dyspnea from volume overload
+  - Laboratory: creatinine and eGFR (CKD-EPI equation most accurate), urine albumin-to-creatinine ratio (screen for albuminuria), urinalysis (hematuria, proteinuria, casts)
+  - Evaluate etiology: glucose/HbA1c (diabetes), BP (hypertension), renal ultrasound (kidney size, obstruction, polycystic kidneys), serologies if suspected glomerulonephritis (ANA, ANCA, complement, hepatitis B/C)
+  - Complications of CKD: anemia (low erythropoietin), metabolic acidosis, mineral and bone disorder (secondary hyperparathyroidism from hyperphosphatemia/hypocalcemia/low vitamin D), hypertension, volume overload, hyperkalemia, uremia (advanced)
+  - Assess for complications: CBC (anemia), CMP (acidosis bicarbonate less than 22, hyperkalemia), phosphate, calcium, PTH, 25-OH vitamin D, iron studies
+
+treatment:
+  - Slow progression: treat underlying cause (tight glycemic control in diabetes HbA1c 7 percent, BP control), ACE inhibitor or ARB for proteinuria (albuminuria 30 or more mg/g) - reduces proteinuria and slows progression, goal BP less than 130/80
+  - ACE inhibitors or ARBs: lisinopril 10-40 mg daily, losartan 50-100 mg daily (renoprotective in diabetic and non-diabetic CKD with albuminuria), monitor creatinine/potassium 2 weeks after starting (acceptable if creatinine increases less than 30 percent), discontinue if creatinine increases 30 percent or more or hyperkalemia
+  - SGLT2 inhibitors for CKD: dapagliflozin 10 mg daily or empagliflozin 10 mg daily (slow CKD progression, reduce CV events, reduce HF hospitalizations) - now recommended for all CKD patients with eGFR 20 or more regardless of diabetes
+  - Dietary sodium restriction: less than 2 grams daily (reduces BP and proteinuria)
+  - Protein restriction controversial: 0.8 grams/kg daily (may slow progression in advanced CKD but risk malnutrition)
+  - Anemia treatment: target hemoglobin 10-11.5 g/dL, oral iron if iron deficiency (ferritin less than 100 or TSAT less than 20 percent), erythropoiesis-stimulating agents (ESA darbepoetin or epoetin) if hemoglobin less than 10 g/dL and iron replete (caution cardiovascular risks if target hemoglobin greater than 11.5)
+  - Metabolic acidosis: sodium bicarbonate 650-1300 mg TID if bicarbonate less than 22 mEq/L (slows CKD progression)
+  - Mineral and bone disorder: phosphate binders (calcium carbonate 500-1000 mg with meals, sevelamer) if phosphate greater than 5.5 mg/dL, vitamin D (ergocalciferol or cholecalciferol) if deficiency, calcitriol if stage 4-5 CKD with secondary hyperparathyroidism
+  - Hyperkalemia: dietary potassium restriction, stop potassium-sparing diuretics, potassium binders (patiromer, sodium zirconium cyclosilicate) if persistent hyperkalemia greater than 5.5 mEq/L despite dietary restriction
+  - Volume overload: loop diuretics (furosemide 40-80 mg daily or higher doses), sodium restriction
+  - Cardiovascular disease prevention: statin (atorvastatin 20-80 mg daily), aspirin if ASCVD
+  - Avoid nephrotoxins: NSAIDs, IV contrast (pre-hydrate if necessary), aminoglycosides
+  - Dialysis preparation: refer nephrology when eGFR less than 30 (stage 4), discuss modality (hemodialysis vs peritoneal dialysis), create vascular access (AV fistula preferred) when eGFR approaching 20-25
+  - Dialysis initiation indications: eGFR less than 10-15 (stage 5), uremic symptoms (encephalopathy, pericarditis, bleeding), refractory volume overload, refractory hyperkalemia, severe metabolic acidosis
+  - Kidney transplant: best long-term outcome, evaluate when eGFR less than 20, preemptive transplant (before dialysis) ideal
+
+clinical_pearls:
+  - CKD defined as eGFR less than 60 for 3 or more months, or albuminuria or structural damage
+  - Diabetes and hypertension most common causes (70 percent combined)
+  - ACE inhibitor or ARB for albuminuria (slows progression), SGLT2 inhibitor for all CKD
+  - Goal BP less than 130/80, tight glycemic control if diabetes
+  - Complications include anemia, metabolic acidosis, mineral bone disorder, hyperkalemia
+  - Refer nephrology when eGFR less than 30 (stage 4) for dialysis planning
+  - Dialysis typically initiated when eGFR less than 10-15 or uremic symptoms
+
+differentials:
+  - Acute kidney injury (AKI) - rapid decline creatinine over hours to days, often reversible, identify precipitant (prerenal, intrinsic, postrenal)
+  - Acute on chronic kidney disease (AKI superimposed on CKD) - acute worsening from infection, dehydration, obstruction, nephrotoxins
+  - Prerenal azotemia (reduced renal perfusion from volume depletion, heart failure) - BUN:Cr ratio greater than 20:1, FeNa less than 1 percent, improves with fluids
+
+trace:
+  - 58-year-old man with type 2 diabetes x 15 years presents for follow-up, hypertension x 10 years, no symptoms
+  - Medications: metformin 1000 mg BID, amlodipine 10 mg daily
+  - Labs: HbA1c 8.2 percent (suboptimal control), creatinine 1.8 mg/dL (baseline 1.0 two years ago), eGFR 42 mL/min/1.73m2 (stage 3b CKD), urine albumin/creatinine ratio 350 mg/g (severely increased albuminuria), potassium 4.8 mEq/L
+  - Prior labs 1 year ago: creatinine 1.6, eGFR 48 (confirms chronic - present more than 3 months)
+  - Diagnosis: chronic kidney disease stage 3b (eGFR 42), likely diabetic nephropathy (diabetes with albuminuria)
+  - Renal ultrasound: normal-sized kidneys, no hydronephrosis, no masses
+  - Further labs: hemoglobin 11.2 g/dL (mild anemia), bicarbonate 20 mEq/L (metabolic acidosis), phosphate 4.8 mg/dL, calcium 8.9 mg/dL, PTH 85 pg/mL (mildly elevated, normal 10-65), 25-OH vitamin D 22 ng/mL (insufficient)
+  - Counseling: CKD from diabetes, progressive, goal slow progression and prevent complications
+  - Optimize diabetes control: added empagliflozin 10 mg daily (SGLT2 inhibitor - slows CKD progression and improves glycemic control), continued metformin (safe if eGFR greater than 30)
+  - Started lisinopril 10 mg daily (ACE inhibitor for proteinuria and BP control), sodium restriction less than 2 grams daily
+  - Recheck creatinine/potassium in 2 weeks: creatinine 2.0 mg/dL (11 percent increase from 1.8, acceptable less than 30 percent), eGFR 38, potassium 5.1 mEq/L (acceptable), continue lisinopril
+  - Started sodium bicarbonate 650 mg TID (treat metabolic acidosis bicarbonate less than 22)
+  - Started vitamin D3 2000 IU daily (replete deficiency)
+  - 3 months: HbA1c 7.1 percent (improved), BP 128/76 (improved), creatinine stable 2.0, eGFR 38 stable, urine albumin/creatinine 180 mg/g (50 percent reduction - excellent response to ACE inhibitor and SGLT2 inhibitor), bicarbonate 23 mEq/L (corrected)
+  - 1 year: stable eGFR 37-40 (no progression), albuminuria reduced to 150 mg/g, hemoglobin 11.8 g/dL (anemia stable), continues medical management
+  - Referred to nephrology for CKD education and dialysis preparation planning (stage 3b approaching stage 4)
+  - 2 years: eGFR stable 35-38, continues ACE inhibitor, SGLT2 inhibitor, tight diabetes control, slowed progression successfully
