@@ -3,47 +3,48 @@ name: Celiac Disease
 family: Gastroenterology
 specialty: Gastroenterology
 chief_complaint: Chronic diarrhea and abdominal pain
-description: |
-  Autoimmune disorder triggered by gluten (wheat, barley, rye) causing small intestinal inflammation and villous atrophy. Affects 1% of population.
-  Strongly associated with HLA-DQ2 (95%) and HLA-DQ8. Classic presentation diarrhea and malabsorption, but many have minimal GI symptoms. Increased risk of lymphoma if untreated.
+description: Autoimmune disorder triggered by gluten ingestion causing small intestinal villous atrophy and malabsorption. Strict lifelong gluten-free diet reverses damage and prevents complications.
 icd10: K90.0
-urgency: Low
+urgency: non-urgent
+
 workup:
-  - Serologic testing while on gluten-containing diet - tissue transglutaminase IgA (TTG-IgA) most sensitive and specific (95%)
-  - Endomysial antibody IgA (EMA-IgA) very specific (98%) but more expensive
-  - Total IgA level - 2-3% of celiac patients have IgA deficiency (false negative TTG-IgA and EMA-IgA)
-  - If IgA deficient, check TTG-IgG and deamidated gliadin peptide IgG
-  - Upper endoscopy with duodenal biopsies (at least 4-6 samples from duodenum and bulb) if positive serology
-  - Histology shows villous atrophy, crypt hyperplasia, increased intraepithelial lymphocytes (Marsh classification)
-  - HLA-DQ2/DQ8 testing if diagnosis uncertain - negative has high negative predictive value (rules out celiac)
-  - Assess for nutritional deficiencies - iron, folate, vitamin B12, vitamin D, calcium, zinc
-  - Bone density (DEXA) if diagnosed as adult - osteopenia/osteoporosis common
-  - Screen first-degree relatives - 10% have celiac disease
-  - Monitoring after diagnosis - TTG-IgA at 6 months and annually (should normalize on gluten-free diet), repeat endoscopy if persistent symptoms despite diet
+  - Serologic screening (while on gluten-containing diet): tissue transglutaminase IgA (tTG-IgA) most sensitive and specific
+  - Total IgA level: check simultaneously (5% celiac patients have IgA deficiency causing false negative tTG-IgA)
+  - If IgA deficient: order IgG-based tests (tTG-IgG, deamidated gliadin peptide IgG)
+  - Endomysial antibody (EMA): highly specific confirmatory test if tTG positive
+  - HLA-DQ2/DQ8 genetic testing: negative result effectively rules out celiac (high negative predictive value >99%)
+  - Upper endoscopy with duodenal biopsies: gold standard for diagnosis, shows villous atrophy, crypt hyperplasia, increased intraepithelial lymphocytes (Marsh 3)
+  - Biopsy required before starting gluten-free diet (GFD) to confirm diagnosis
+  - Labs for malabsorption: CBC (anemia from iron, B12, folate deficiency), CMP (hypoalbuminemia), iron studies, vitamin D, folate, B12
+  - Bone density scan: if osteoporosis risk factors (malabsorption causes vitamin D and calcium deficiency)
+  - Screening: first-degree relatives, type 1 diabetes, autoimmune thyroid disease, Down syndrome, Turner syndrome
+
 treatment:
-  - Strict lifelong gluten-free diet - avoid wheat, barley, rye (oats contaminated unless certified gluten-free)
-  - Consultation with dietitian experienced in celiac disease - label reading, cross-contamination avoidance, meal planning
-  - Hidden sources of gluten - sauces, soups, processed foods, medications, communion wafers
-  - Most patients improve within weeks, complete healing takes 6-24 months
-  - Nutritional supplementation - iron, folate, calcium 1200mg daily, vitamin D 800-1000 IU (treat deficiencies aggressively)
-  - Pneumococcal vaccine (hyposplenism risk)
-  - Refractory celiac disease (persistent symptoms and villous atrophy despite strict gluten-free diet x 6-12 months) - rule out inadvertent gluten exposure, consider enteropathy-associated T-cell lymphoma
-  - Type I refractory (polyclonal T cells) - treat with steroids
-  - Type II refractory (clonal T cells) - high risk of lymphoma, may need immunosuppression or chemotherapy
-  - Associated conditions - dermatitis herpetiformis (treat with dapsone 50-200mg daily plus gluten-free diet), type 1 diabetes, autoimmune thyroid disease, IgA nephropathy
+  - Strict lifelong gluten-free diet (GFD): avoid wheat, barley, rye (oats controversial but usually tolerated if uncontaminated)
+  - Dietitian referral: education on GFD, hidden sources of gluten, cross-contamination, label reading
+  - Nutritional supplementation: iron, calcium 1500 mg daily, vitamin D 2000 IU daily, folate, B12 if deficient
+  - Serologic monitoring: tTG-IgA at 6 months then annually to assess adherence (should normalize on strict GFD)
+  - Repeat endoscopy: consider at 1-2 years if symptoms persist or tTG remains elevated (assess mucosal healing)
+  - Screen for associated conditions: autoimmune thyroid disease (TSH), type 1 diabetes (HbA1c, glucose), osteoporosis (DEXA)
+  - Pneumococcal vaccine: hyposplenism common in untreated celiac
+  - Refractory celiac disease: persistent symptoms and villous atrophy despite strict GFD >12 months, may require immunosuppression
+  - Avoid gluten challenge unless diagnostic uncertainty
+
 clinical_pearls:
-  - Must be eating gluten when tested - at least 1-2 slices bread daily x 6 weeks before serology/biopsy
-  - Silent celiac (positive serology and villous atrophy but asymptomatic) and latent celiac (positive serology, normal biopsy) exist
-  - Dermatitis herpetiformis pathognomonic - intensely pruritic vesicular rash on extensor surfaces, responds to gluten-free diet
-  - Non-celiac gluten sensitivity controversial entity - symptoms improve with gluten avoidance but negative serology and normal biopsy
-  - Increased risk of small bowel adenocarcinoma and enteropathy-associated T-cell lymphoma (rare, poor prognosis)
-  - Fertility issues improve with gluten-free diet
+  - Screen with tTG-IgA and total IgA (if IgA deficient use IgG-based tests)
+  - Must be on gluten-containing diet for accurate serology and biopsy
+  - Duodenal biopsy confirms diagnosis before starting GFD
+  - Strict lifelong gluten-free diet reverses damage and prevents complications
+  - tTG normalizes on GFD - monitor adherence annually
+  - Screen first-degree relatives (10% risk), type 1 diabetes, autoimmune thyroid disease
+  - Complications if untreated: osteoporosis, lymphoma, infertility
+  - Oats usually tolerated if uncontaminated
+
 differentials:
-  - Irritable bowel syndrome
-  - Inflammatory bowel disease
-  - Lactose intolerance
-  - Small intestinal bacterial overgrowth
-  - Tropical sprue
-  - Whipple disease
-trace:
-  - 32-year-old woman with chronic diarrhea 4-6 times daily, abdominal bloating, fatigue x 2 years → Labs show iron deficiency anemia (Hgb 9.8, ferritin 8), low vitamin D → TTG-IgA elevated 85 U/mL (normal less than 20), total IgA normal → Upper endoscopy with duodenal biopsies shows Marsh 3b (subtotal villous atrophy, crypt hyperplasia) → Diagnose celiac disease → Refer to dietitian for gluten-free diet education → Start iron supplementation 325mg daily, calcium 1200mg, vitamin D 2000 IU → Symptoms improve significantly within 3 weeks → DEXA shows osteopenia, continue calcium and vitamin D → Repeat TTG-IgA at 6 months normalizes to 12 U/mL → Repeat endoscopy at 1 year shows improved villous architecture → Continues strict gluten-free diet, annual TTG monitoring, joined celiac support group
+  - Irritable bowel syndrome: normal labs and endoscopy, negative serology
+  - Inflammatory bowel disease: bloody diarrhea, extraintestinal manifestations, colonoscopy shows ulceration
+  - Lactose intolerance: diarrhea and bloating after dairy, improves with lactose avoidance, normal biopsy
+  - Small intestinal bacterial overgrowth: responds to antibiotics, normal biopsy
+
+trace: |
+  A 28-year-old woman presented with 2 years of chronic diarrhea 4-5 times daily, bloating, abdominal pain, fatigue, and 15-pound unintentional weight loss. Labs showed iron deficiency anemia (Hgb 9.8, ferritin 8) and low vitamin D 12. tTG-IgA 156 (strongly positive, normal <20), total IgA normal. Referred to gastroenterology for upper endoscopy which showed scalloped duodenal folds, biopsies revealed total villous atrophy with increased intraepithelial lymphocytes (Marsh 3c) confirming celiac disease. Started strict gluten-free diet with dietitian guidance and supplementation with iron, calcium 1500 mg, vitamin D 2000 IU, folate. At 3 months diarrhea resolved, energy improved, gained 8 pounds. At 6 months tTG-IgA 18 (normalized), Hgb 12.4, ferritin 45. At 12 months repeat endoscopy showed complete mucosal healing with normal villi. Remains on strict GFD, annual tTG monitoring, excellent quality of life. First-degree relatives screened, sister also diagnosed with celiac disease.

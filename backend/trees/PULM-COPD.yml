@@ -1,65 +1,51 @@
 tree_id: PULM-COPD
 name: Chronic Obstructive Pulmonary Disease
-family: Pulmonary
+family: Pulmonology
 specialty: Pulmonology
 chief_complaint: Shortness of breath and chronic cough
-description: Progressive lung disease characterized by persistent airflow limitation from emphysema and/or chronic bronchitis, primarily caused by cigarette smoking
-
+description: Progressive airflow limitation caused by chronic bronchitis and emphysema, primarily from cigarette smoking. Smoking cessation, bronchodilators, and inhaled corticosteroids reduce exacerbations and slow progression.
 icd10: J44.9
-
-urgency: routine_urgent
+urgency: non-urgent
 
 workup:
-  - Clinical presentation includes chronic dyspnea (progressive, worse with exertion), chronic cough (may be productive), sputum production, wheezing, barrel chest, pursed-lip breathing, use of accessory muscles
-  - Risk factors include cigarette smoking (85-90 percent of cases), occupational exposures (dust, chemicals), alpha-1 antitrypsin deficiency (young onset, basilar emphysema), biomass fuel exposure
-  - Spirometry required for diagnosis with post-bronchodilator FEV1/FVC less than 0.70 confirms airflow obstruction (not fully reversible)
-  - Severity by GOLD criteria based on FEV1 percent predicted: GOLD 1 mild (FEV1 80 percent or more), GOLD 2 moderate (50-79 percent), GOLD 3 severe (30-49 percent), GOLD 4 very severe (less than 30 percent)
-  - Pulse oximetry to assess for hypoxemia (SpO2 less than 88-90 percent indicates supplemental oxygen need)
-  - Arterial blood gas if severe for hypoxemia, hypercapnia (elevated PaCO2), respiratory acidosis
-  - Chest X-ray shows hyperinflation (flattened diaphragms, increased AP diameter), bullae, decreased vascular markings
-  - CBC for polycythemia (elevated hematocrit from chronic hypoxemia)
-  - Alpha-1 antitrypsin level if age less than 45, minimal smoking history, or basilar emphysema on CT
-  - Assess symptom burden with mMRC dyspnea scale (0-4), CAT score (COPD Assessment Test 0-40)
-  - GOLD ABCD classification: Group A (low symptoms, low exacerbations), Group B (high symptoms, low exacerbations), Group E (high exacerbations regardless of symptoms)
+  - Clinical diagnosis: chronic dyspnea, cough, sputum production in smoker >40 years old with >10 pack-year history
+  - Spirometry (required for diagnosis): post-bronchodilator FEV1/FVC <0.70 confirms airflow obstruction
+  - GOLD severity staging by FEV1: GOLD 1 (FEV1 ≥80% predicted), GOLD 2 (50-79%), GOLD 3 (30-49%), GOLD 4 (<30%)
+  - GOLD ABCD classification: combines symptoms (mMRC or CAT score) and exacerbation history to guide treatment
+  - Chest X-ray: hyperinflation, flattened diaphragms, increased AP diameter (barrel chest)
+  - Alpha-1 antitrypsin level: if early onset <45 years, minimal smoking history, or lower lobe predominant emphysema
+  - Arterial blood gas: if severe COPD or acute exacerbation to assess hypoxemia and hypercapnia
+  - 6-minute walk test: assess functional capacity and oxygen desaturation
 
 treatment:
-  - Smoking cessation most important intervention (only proven to slow FEV1 decline), counseling plus pharmacotherapy (varenicline 0.5-1 mg BID, bupropion 150 mg BID, nicotine replacement), all patients every visit
-  - Bronchodilators cornerstone of therapy with inhaled short-acting beta-agonists (SABA albuterol 2 puffs QID PRN) and/or short-acting muscarinic antagonists (SAMA ipratropium 2 puffs QID PRN) for mild/intermittent symptoms
-  - Long-acting bronchodilators for daily symptoms include LABA (salmeterol, formoterol, indacaterol) or LAMA (tiotropium 18 mcg daily, umeclidinium), LAMA preferred for initial therapy (reduces exacerbations more than LABA)
-  - Combination LABA plus LAMA for persistent symptoms despite monotherapy (more effective than either alone)
-  - Inhaled corticosteroids (ICS) add to LABA/LAMA if frequent exacerbations (2 or more per year) or eosinophils 300 or more cells/microL, triple therapy (ICS/LABA/LAMA), increased pneumonia risk with ICS
-  - Oxygen therapy if chronic hypoxemia with long-term oxygen (LTOT) improves survival if resting PaO2 55 or less mmHg or SpO2 88 percent or less (or PaO2 56-59 with cor pulmonale/polycythemia), prescribe 15 or more hours daily including sleep
-  - Pulmonary rehabilitation includes exercise training plus education, improves dyspnea, exercise capacity, quality of life, reduces hospitalizations, underutilized but highly effective
-  - Vaccinations include annual influenza, pneumococcal (PCV20 or PCV15 plus PPSV23), COVID-19, Tdap
-  - COPD exacerbation acute worsening with increased dyspnea, cough, sputum (volume/purulence), treat with increased bronchodilators (albuterol/ipratropium nebulizers every 4-6 hours), systemic corticosteroids (prednisone 40 mg daily x 5 days), antibiotics if increased sputum purulence or mechanical ventilation (azithromycin 500 mg daily x 5 days or doxycycline 100 mg BID x 5 days or amoxicillin-clavulanate), oxygen to target SpO2 88-92 percent (avoid hyperoxia - suppresses hypoxic drive)
-  - Severe exacerbation requires hospitalization if severe dyspnea, altered mental status, hemodynamic instability, acidosis pH less than 7.35, oxygen requirement, noninvasive ventilation (BiPAP) if respiratory acidosis pH 7.25-7.35 (improves outcomes, reduces intubation), invasive mechanical ventilation if pH less than 7.25 or refractory hypoxemia
+  - Smoking cessation: MOST IMPORTANT intervention, only treatment that slows FEV1 decline
+  - Influenza vaccine annually, pneumococcal vaccines (PCV20 or PPSV23)
+  - Bronchodilators (all patients with symptoms): LABA (long-acting beta-agonist) and/or LAMA (long-acting muscarinic antagonist)
+  - Inhaled corticosteroids (ICS): add if frequent exacerbations (≥2 per year or ≥1 requiring hospitalization) or high eosinophils >300
+  - Triple therapy (LABA/LAMA/ICS): for frequent exacerbators, single inhaler improves adherence
+  - Common regimens: fluticasone/umeclidinium/vilanterol (Trelegy) once daily, or budesonide/glycopyrrolate/formoterol (Breztri) twice daily
+  - SAMA or SABA: albuterol as needed for acute symptoms
+  - Supplemental oxygen: if resting PaO2 <55 mmHg or O2 sat <88% (improves survival)
+  - Pulmonary rehabilitation: exercise training, education, nutrition - improves symptoms and reduces hospitalizations
+  - Roflumilast (PDE4 inhibitor): if severe COPD with chronic bronchitis and frequent exacerbations despite triple therapy
+  - Azithromycin prophylaxis 250 mg daily or three times weekly: reduces exacerbations in former smokers with frequent exacerbations
+  - Acute exacerbation treatment: systemic corticosteroids (prednisone 40 mg daily x5 days), antibiotics if increased sputum purulence, increased bronchodilators
 
 clinical_pearls:
-  - COPD from cigarette smoking (85-90 percent), spirometry required for diagnosis (FEV1/FVC less than 0.70)
-  - Smoking cessation only proven intervention to slow disease progression
-  - LAMA (tiotropium) preferred initial long-acting bronchodilator (reduces exacerbations)
-  - ICS add if frequent exacerbations (2 or more/year) or eosinophils 300 or more
-  - Long-term oxygen therapy (15 or more hours daily) improves survival if chronic hypoxemia
-  - Pulmonary rehabilitation highly effective (improves symptoms, reduces hospitalizations)
-  - Exacerbations treat with bronchodilators, steroids (5 days), antibiotics if purulent sputum
+  - Smoking cessation most important - only treatment that slows FEV1 decline
+  - Spirometry required for diagnosis - FEV1/FVC <0.70 post-bronchodilator
+  - All symptomatic patients need bronchodilator - LABA and/or LAMA
+  - Add ICS if ≥2 exacerbations per year or eosinophils >300
+  - Triple therapy (LABA/LAMA/ICS) for frequent exacerbators
+  - Supplemental oxygen if PaO2 <55 or O2 sat <88% improves survival
+  - Pulmonary rehab improves symptoms and reduces hospitalizations
+  - Acute exacerbation: prednisone 40 mg x5 days plus antibiotics if purulent sputum
 
 differentials:
-  - Asthma (reversible airflow obstruction, bronchodilator response greater than 12 percent FEV1 improvement, younger age, atopy, eosinophilia)
-  - Bronchiectasis (chronic productive cough with copious purulent sputum, recurrent infections, CT shows dilated bronchi)
-  - Congestive heart failure (dyspnea, orthopnea, crackles, elevated BNP, pulmonary edema on X-ray)
-  - Interstitial lung disease (restrictive pattern on spirometry, reduced DLCO, reticular infiltrates on CT)
+  - Asthma: younger onset, reversible airflow obstruction, atopy, eosinophilia, FEV1/FVC normalizes post-bronchodilator
+  - Bronchiectasis: chronic productive cough, recurrent infections, dilated airways on CT
+  - Heart failure: orthopnea, paroxysmal nocturnal dyspnea, elevated BNP, pulmonary edema on imaging
+  - Interstitial lung disease: restrictive pattern on spirometry, reticular opacities on CT
 
-trace:
-  - 62-year-old man presents with 2 years progressive dyspnea with exertion (climbing stairs, walking uphill), chronic cough productive of white sputum, 40 pack-year smoking history (currently smokes 1 pack daily x 40 years), no previous pulmonary testing
-  - Exam shows pursed-lip breathing, barrel chest, decreased breath sounds bilaterally, prolonged expiratory phase, no wheezes at rest, SpO2 94 percent on room air
-  - Chest X-ray shows hyperinflation with flattened diaphragms, increased AP diameter
-  - Spirometry post-bronchodilator shows FEV1 1.8 L (58 percent predicted), FVC 3.4 L (75 percent predicted), FEV1/FVC 0.53 (less than 0.70 confirms obstruction), no significant bronchodilator response (FEV1 improved 8 percent)
-  - ABG shows pH 7.41, PaCO2 42 mmHg, PaO2 72 mmHg (mild hypoxemia but not requiring oxygen at rest)
-  - Diagnosis of COPD GOLD 2 moderate (FEV1 58 percent), Group B (high symptoms mMRC dyspnea grade 2, low exacerbations none in past year)
-  - Smoking cessation counseling strongly advised to quit, referred to smoking cessation program, started varenicline 0.5 mg daily x 3 days then 0.5 mg BID x 4 days then 1 mg BID x 12 weeks
-  - Started tiotropium 18 mcg inhaled daily (LAMA long-acting bronchodilator), albuterol MDI 2 puffs every 4-6 hours PRN dyspnea
-  - Influenza vaccine administered, pneumococcal PCV20 vaccine given
-  - Referred to pulmonary rehabilitation program
-  - 3 months shows quit smoking (using varenicline), dyspnea improved, tolerating tiotropium well, attending pulmonary rehabilitation
-  - 6 months shows sustained smoking cessation (major achievement), completed pulmonary rehabilitation with significant improvement in exercise capacity and quality of life, dyspnea mMRC grade 1 (only with strenuous exertion), continues tiotropium maintenance therapy
-  - Annual follow-up shows remains smoke-free, stable symptoms, no exacerbations, repeat spirometry FEV1 1.9 L (60 percent predicted) - stable lung function (smoking cessation preventing further decline)
+trace: |
+  A 62-year-old man with 45 pack-year smoking history presented with 3 years progressive dyspnea on exertion and chronic productive cough. Spirometry showed FEV1 52% predicted, FEV1/FVC 0.58 post-bronchodilator (GOLD 2 moderate obstruction). mMRC dyspnea score 2, one exacerbation requiring antibiotics in past year. Chest X-ray showed hyperinflation. Diagnosed with COPD GOLD 2 Group B. Counseled extensively on smoking cessation, referred to cessation program. Started fluticasone/umeclidinium/vilanterol (Trelegy) one inhalation daily plus albuterol inhaler as needed. Influenza and pneumococcal vaccines given. Referred to pulmonary rehabilitation. At 3 months quit smoking (most important achievement), dyspnea improved, completed pulmonary rehab. At 12 months FEV1 stable at 54%, no exacerbations. At 2 years remains smoke-free, FEV1 stable, excellent symptom control on triple therapy with significantly improved quality of life.
