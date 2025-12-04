@@ -1,94 +1,179 @@
 tree_id: HEME-APLASTIC-ANEMIA
-name: Aplastic Anemia Evaluation
-family: HEMATOLOGY
+name: Aplastic Anemia
+family: hematologic
 specialty: Hematology
-chief_complaint: Pancytopenia, Fatigue, Bleeding, Infections
-description: Evaluation and management of aplastic anemia
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: aplastic_anemia_evaluation
-
-nodes:
-  - id: aplastic_anemia_evaluation
-    type: diagnosis
-    name: "Aplastic Anemia"
-    icd10: "D61.9"
-    urgency: high
-    workup:
-      - Aplastic anemia - Bone marrow failure, pancytopenia (anemia, leukopenia, thrombocytopenia), hypocellular bone marrow
-      - Mechanism - Immune-mediated destruction of hematopoietic stem cells (cytotoxic T cells attack)
-      - Incidence - 2 per million per year, bimodal (15-25 years, >60 years)
-      - Causes
-      - Idiopathic - 70% (no identifiable cause, presumed autoimmune)
-      - Acquired
-      - Medications - Chloramphenicol, sulfonamides, NSAIDs, anticonvulsants, gold, chemotherapy (alkylating agents)
-      - Toxins - Benzene, insecticides, organic solvents
-      - Viral infections - Hepatitis (non-A, non-B, non-C most common, seronegative hepatitis), EBV, CMV, parvovirus B19, HIV
-      - Immune disorders - Eosinophilic fasciitis, thymoma, pregnancy
-      - Paroxysmal nocturnal hemoglobinuria (PNH) - 30-50% aplastic anemia have PNH clone
-      - Inherited - Fanconi anemia (DNA repair defect, congenital anomalies, age <10), dyskeratosis congenita, Shwachman-Diamond syndrome
-      - Presentation - Symptoms from pancytopenia
-      - Anemia - Fatigue, dyspnea, pallor
-      - Thrombocytopenia - Petechiae, purpura, mucosal bleeding (gums, nose), easy bruising, menorrhagia
-      - Neutropenia - Infections (bacterial, fungal), fever
-      - NO hepatosplenomegaly, NO lymphadenopathy (distinguishes from leukemia)
-      - Labs
-      - CBC - Pancytopenia
-      - Anemia - Normocytic, low reticulocyte count (bone marrow not responding)
-      - Leukopenia - ANC <1500 (often <500 severe)
-      - Thrombocytopenia - Platelets <50,000 (often <20,000 severe)
-      - Peripheral smear - No blasts (distinguishes from leukemia), no abnormal cells
-      - Bone marrow biopsy - REQUIRED for diagnosis
-      - Hypocellular (<25% cellularity, often <10%)
-      - Markedly reduced megakaryocytes, myeloid, erythroid precursors
-      - Increased fat, stromal cells
-      - NO fibrosis (distinguishes from myelofibrosis), NO infiltration (leukemia, lymphoma)
-      - NO dysplasia (MDS)
-      - Flow cytometry - PNH testing (CD55, CD59) on RBC and granulocytes (30-50% have PNH clone)
-      - Cytogenetics - Normal karyotype (abnormal suggests MDS)
-      - Viral serologies - Hepatitis A/B/C, EBV, CMV, HIV
-      - Vitamin B12, folate - Rule out megaloblastic anemia
-      - Fanconi anemia testing - If age <40 or family history (chromosome breakage test with diepoxybutane or mitomycin C)
-      - HLA typing - If potential transplant candidate (type patient and siblings)
-      - Severity classification
-      - Severe aplastic anemia (SAA) - Bone marrow cellularity <25% AND 2 of 3: ANC <500, platelets <20,000, reticulocytes <20,000 (corrected <1%)
-      - Very severe (VSAA) - SAA + ANC <200
-      - Non-severe (NSAA) - Does not meet SAA criteria
-      - Differential diagnosis - MDS (dysplasia, abnormal cytogenetics), acute leukemia (blasts), hairy cell leukemia (splenomegaly), PNH, megaloblastic anemia (high MCV)
-    treatment:
-      - Supportive care - ALL patients
-      - Transfusions - PRBC if Hgb <7 or symptomatic, platelets if <10,000 or bleeding
-      - CMV-negative, leukoreduced blood products (prevent allosensitization, important if transplant candidate)
-      - Infection prophylaxis - Antibacterial (if ANC <500, consider fluoroquinolone), antifungal (if ANC <200, fluconazole or posaconazole)
-      - Avoid IM injections, NSAIDs (bleeding risk)
-      - Definitive therapy - Based on age, severity, HLA-matched donor availability
-      - Allogeneic hematopoietic stem cell transplant (HSCT) - CURATIVE, first-line for young (<40 years) with severe/very severe AA and HLA-matched sibling donor
-      - Myeloablative conditioning (cyclophosphamide ± ATG), then donor stem cells
-      - Success rate 80-90% long-term survival (matched sibling donor)
-      - Complications - GVHD (acute 30-40%, chronic 20-30%), infections, graft failure 5-10%
-      - Matched unrelated donor (MUD) - If no sibling, outcomes improving (70-80% survival), higher GVHD risk
-      - Haploidentical transplant - Alternative if no matched donor
-      - Immunosuppressive therapy (IST) - For patients NOT transplant candidates (age >40, no matched donor, comorbidities)
-      - Horse antithymocyte globulin (ATG) + cyclosporine - STANDARD
-      - ATG 40 mg/kg/day IV x 4 days (lymphocyte depletion)
-      - Cyclosporine 5-10 mg/kg/day divided BID (maintain levels 200-400), continue 6-12 months minimum
-      - Response 60-80% (hematologic improvement 3-6 months)
-      - Partial response (transfusion-independent) or complete response (normal counts)
-      - Relapse 30-40% (reinitiate IST or consider transplant)
-      - Eltrombopag - Thrombopoietin receptor agonist, added to ATG + cyclosporine
-      - Stimulates hematopoietic stem cells
-      - Improves response rates to 80-90% (vs 60-70% ATG + CsA alone)
-      - Rabbit ATG - Alternative to horse ATG (no proven superiority, higher cost)
-      - Second-line IST - If refractory or relapse after first course ATG + CsA
-      - Repeat ATG (horse if initially rabbit, or vice versa), consider HSCT
-      - Androgens - Danazol, oxymetholone
-      - Modest efficacy (30-40% response), slow onset (3-6 months)
-      - For older patients not tolerating IST, or non-severe AA
-      - Side effects - Virilization (women), hepatotoxicity
-      - Supportive only - If non-severe AA, asymptomatic, observation with transfusion support
-      - Complications and prognosis
-      - Untreated severe AA - 80% mortality within 2 years (infection, bleeding)
-      - With treatment - HSCT 80-90% cure, IST 60-80% response
-      - Long-term risks - Clonal evolution (MDS 10-15%, AML 5%, PNH), relapse
-      - Surveillance - CBC every 3-6 months, monitor for cytopenias (relapse), dysplasia (MDS), hemolysis (PNH)
+chief_complaint: Fatigue, bleeding, recurrent infections from pancytopenia
+description: Bone marrow failure syndrome characterized by pancytopenia and hypocellular bone marrow
+icd10: D61.9
+urgency: urgent
+workup:
+  - Clinical presentation - symptoms from cytopenias
+  - Anemia symptoms - fatigue, weakness, dyspnea on exertion, pallor
+  - Thrombocytopenia symptoms - petechiae, purpura, mucosal bleeding, epistaxis, menorrhagia
+  - Neutropenia symptoms - recurrent bacterial/fungal infections, fever
+  - No hepatosplenomegaly (distinguishes from leukemia, lymphoma)
+  - No lymphadenopathy
+  - Onset typically insidious over weeks to months
+  - History of potential exposures
+  - Medications (chloramphenicol, NSAIDs, carbamazepine, sulfonamides)
+  - Chemicals (benzene, pesticides, solvents)
+  - Radiation exposure
+  - Viral infections (hepatitis, EBV, CMV, parvovirus B19, HIV)
+  - Physical examination
+  - Pallor (anemia)
+  - Petechiae, purpura (thrombocytopenia)
+  - No splenomegaly, no hepatomegaly, no lymphadenopathy (key features)
+  - Signs of infection if neutropenic
+  - Laboratory studies
+  - Complete blood count - pancytopenia (decreased all three cell lines)
+  - Anemia - hemoglobin less than 10 g/dL, normocytic (MCV normal)
+  - Thrombocytopenia - platelets less than 50,000/μL
+  - Neutropenia - absolute neutrophil count (ANC) less than 1,500/μL
+  - Reticulocyte count - low (reticulocyte index less than 1%, hypoproliferative)
+  - Peripheral blood smear - no abnormal cells, no blasts
+  - Comprehensive metabolic panel, liver function tests
+  - Viral serologies - hepatitis A/B/C, EBV, CMV, HIV, parvovirus B19
+  - Vitamin B12 and folate levels (rule out megaloblastic anemia)
+  - Fanconi anemia testing if young patient (chromosomal breakage test, genetic testing)
+  - PNH flow cytometry - rule out paroxysmal nocturnal hemoglobinuria (CD55/CD59 deficient cells)
+  - 30-50% of aplastic anemia have small PNH clone
+  - Bone marrow aspiration and biopsy - ESSENTIAL for diagnosis
+  - Markedly hypocellular (cellularity less than 25%, or less than 50% with less than 30% hematopoietic cells)
+  - No dysplasia, no abnormal cells, no fibrosis, no infiltration
+  - Normal cytogenetics (rules out myelodysplastic syndrome, leukemia)
+  - Severity classification (Camitta criteria)
+  - Severe aplastic anemia (SAA) - bone marrow cellularity less than 25% PLUS two of three
+  - ANC less than 500/μL
+  - Platelets less than 20,000/μL
+  - Reticulocyte count less than 20,000/μL (or reticulocyte index less than 1%)
+  - Very severe aplastic anemia (VSAA) - SAA criteria plus ANC less than 200/μL
+  - Non-severe aplastic anemia - does not meet SAA criteria
+treatment:
+  - Supportive care - ALL patients
+  - Transfusion support
+  - Packed red blood cells for symptomatic anemia (Hgb less than 7-8 g/dL)
+  - Use leukocyte-reduced, irradiated products (if transplant candidate)
+  - Platelet transfusion for severe thrombocytopenia (platelets less than 10,000/μL or bleeding)
+  - Infection prevention and treatment
+  - Antimicrobial prophylaxis if ANC less than 500/μL
+  - Fluoroquinolone (levofloxacin 500 mg daily)
+  - Antifungal prophylaxis (fluconazole 400 mg daily or posaconazole)
+  - G-CSF (filgrastim) controversial - may use short-term for severe infections
+  - Fever in neutropenic patient - broad-spectrum antibiotics immediately (cefepime or meropenem)
+  - Avoid IM injections (bleeding risk)
+  - Remove potential causative agents - stop offending medications
+  - Definitive treatment - depends on severity and patient factors
+  - Severe aplastic anemia (SAA or VSAA)
+  - Allogeneic hematopoietic stem cell transplant (HSCT) - CURATIVE, first-line if young with matched sibling donor
+  - Age less than 40 with HLA-matched sibling donor
+  - Cure rate 80-90% with matched sibling donor
+  - Lower success and higher GVHD with unrelated donors
+  - Use myeloablative conditioning (cyclophosphamide, ATG, fludarabine)
+  - Immunosuppressive therapy (IST) - if no matched donor or age greater than 40
+  - Horse anti-thymocyte globulin (ATG) 40 mg/kg/day IV for 4 days
+  - PLUS cyclosporine 5 mg/kg/day PO in divided doses for 6-12 months
+  - PLUS eltrombopag (thrombopoietin receptor agonist) 150 mg daily
+  - Response rate 60-80% (hematologic improvement by 3-6 months)
+  - Complete response 30-40%, partial response 30-40%
+  - Premedication for ATG - methylprednisolone, acetaminophen, diphenhydramine (prevent serum sickness)
+  - Non-severe aplastic anemia
+  - Observation with supportive care if stable counts
+  - Cyclosporine alone may be tried
+  - IST or transplant if progression to severe
+  - Eltrombopag - thrombopoietin receptor agonist
+  - 150 mg daily, added to IST
+  - Improves response rates when combined with ATG/cyclosporine
+  - May use as monotherapy or with cyclosporine for relapsed/refractory disease
+  - Relapsed or refractory disease
+  - Second course of IST (rabbit ATG if horse ATG used initially)
+  - Eltrombopag if not previously used
+  - Allogeneic HSCT with matched unrelated donor or haploidentical donor
+  - Long-term monitoring
+  - Monitor for relapse (20-30% after IST)
+  - Monitor for clonal evolution - PNH (10-15%), MDS (10-15%), AML (5%)
+  - Annual bone marrow biopsy with cytogenetics for first few years
+clinical_pearls:
+  - Incidence 2-6 per million, bimodal age distribution (15-25 years and over 60 years)
+  - Causes - idiopathic (70-80%), drugs (chloramphenicol, NSAIDs), chemicals (benzene), radiation, viruses (hepatitis, EBV), immune disorders, Fanconi anemia (inherited)
+  - Pathophysiology - immune-mediated destruction of hematopoietic stem cells by cytotoxic T cells
+  - Absence of hepatosplenomegaly key diagnostic feature (differentiates from leukemia, lymphoma, myelofibrosis)
+  - Hypocellular bone marrow with normal cytogenetics distinguishes from MDS
+  - Young patients with matched sibling donor - transplant first-line (curative)
+  - Older patients or no donor - IST with ATG/cyclosporine plus eltrombopag
+  - 5-year survival 75-80% with appropriate treatment
+  - Risk of clonal evolution to MDS/AML (10-15%) or PNH (10-15%) after IST
+  - Iron overload common from transfusions - consider chelation if ferritin greater than 1000 ng/mL
+differentials:
+  - Myelodysplastic syndrome (MDS) - hypocellular MDS can mimic aplastic anemia, but has dysplasia and cytogenetic abnormalities
+  - Acute leukemia (pancytopenia with blasts on smear or bone marrow)
+  - Hairy cell leukemia (splenomegaly, hairy cells on smear, CD25/CD103 positive)
+  - Large granular lymphocytic leukemia (LGL) - neutropenia predominant, LGL cells on flow
+  - Paroxysmal nocturnal hemoglobinuria (PNH) - hemolysis, thrombosis, positive flow cytometry
+  - Hypersplenism (splenomegaly, normal/hypercellular bone marrow)
+  - Megaloblastic anemia (B12/folate deficiency - macrocytic, hypersegmented neutrophils)
+  - SLE with autoimmune cytopenias (positive ANA, other lupus features)
+trace:
+  - 28-year-old man presents with 6-week history of progressive fatigue and bruising
+  - Fatigue worsening, now short of breath walking up stairs
+  - Easy bruising with minimal trauma, petechiae on legs
+  - Nosebleeds twice in past week
+  - Low-grade fevers, recent sinus infection treated with amoxicillin
+  - No recent travel, no toxic exposures, no new medications
+  - Had hepatitis (type unclear) 3 months ago that resolved
+  - Past medical history - none
+  - Medications - none currently
+  - Family history - no blood disorders
+  - Physical exam - pale, appears fatigued
+  - Vitals - temp 37.8C, HR 98, BP 115/70
+  - Skin - pallor, petechiae on lower extremities, multiple ecchymoses
+  - No jaundice, no lymphadenopathy
+  - Abdomen - no hepatosplenomegaly (KEY FINDING)
+  - No bone tenderness
+  - Labs - CBC with differential
+  - WBC 2.1 K/μL (low), ANC 800/μL (neutropenia)
+  - Hemoglobin 7.2 g/dL (severe anemia), MCV 88 fL (normocytic)
+  - Platelets 15,000/μL (severe thrombocytopenia)
+  - PANCYTOPENIA
+  - Reticulocyte count 0.3% (low, reticulocyte index 0.5% - hypoproliferative)
+  - Peripheral blood smear - no blasts, no abnormal cells, no schistocytes
+  - Comprehensive metabolic panel - normal
+  - LDH 180 U/L (normal), haptoglobin 120 mg/dL (normal) - no hemolysis
+  - B12 and folate - normal
+  - Viral serologies - hepatitis C antibody positive (explains prior hepatitis), HIV negative, EBV/CMV remote infection
+  - PNH flow cytometry - 2% PNH clone (small clone, supports diagnosis)
+  - Bone marrow biopsy - markedly hypocellular (cellularity 10%, normal 40-60% for age)
+  - No dysplasia, no increased blasts, no fibrosis, no abnormal cells
+  - Cytogenetics - normal karyotype
+  - Diagnosis - Severe aplastic anemia (SAA), likely post-hepatitis C
+  - Meets SAA criteria - bone marrow cellularity less than 25% plus ANC less than 500, platelets less than 20,000, reticulocytes less than 20,000
+  - Post-hepatitis aplastic anemia (hepatitis-associated aplastic anemia)
+  - Admitted for supportive care and treatment planning
+  - Supportive care initiated
+  - Transfusion - 2 units PRBCs (leukocyte-reduced, irradiated), Hgb increased to 9.5 g/dL
+  - Platelet transfusion 1 apheresis unit, platelets increased to 35,000/μL
+  - Infection prophylaxis - levofloxacin 500 mg daily, fluconazole 400 mg daily
+  - Avoid IM injections, minimize invasive procedures
+  - Hematology consultation - treatment planning
+  - Patient age 28, severe disease, requires definitive therapy
+  - HLA typing - patient and siblings typed
+  - Has 1 matched sibling donor (brother, 10/10 HLA match)
+  - Decision - proceed with allogeneic hematopoietic stem cell transplant (curative option)
+  - Pre-transplant workup - cardiac echo normal, PFTs normal, infectious disease screening negative
+  - HSCT performed 4 weeks after diagnosis
+  - Conditioning regimen - cyclophosphamide 50 mg/kg/day x4 days, ATG, fludarabine
+  - Stem cell infusion from matched sibling donor
+  - GVHD prophylaxis - tacrolimus plus methotrexate
+  - Post-transplant course
+  - Day 0-14: Pancytopenic, transfusion support, broad-spectrum antibiotics
+  - Day 15: Neutrophil engraftment (ANC greater than 500/μL)
+  - Day 21: Platelet engraftment (platelets greater than 20,000/μL without transfusion)
+  - Day 30: Counts recovering, ANC 2,000/μL, Hgb 10 g/dL, platelets 85,000/μL
+  - Mild acute GVHD grade I (skin rash) - responded to topical steroids
+  - Day 100 post-transplant - bone marrow biopsy
+  - Normocellular marrow with trilineage hematopoiesis
+  - Chimerism study - 100% donor cells (complete engraftment)
+  - 1-year post-transplant - excellent recovery
+  - CBC normal - WBC 6.5 K/μL, Hgb 14.2 g/dL, platelets 220,000/μL
+  - Off all immunosuppression, no GVHD
+  - Returned to work, full activities
+  - Outcome - CURED with allogeneic stem cell transplant, complete remission
