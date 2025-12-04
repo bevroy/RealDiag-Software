@@ -1,135 +1,119 @@
 tree_id: OBGYN-PREECLAMPSIA
-name: Preeclampsia and Hypertensive Disorders of Pregnancy
-family: OBGYN
-specialty: Obstetrics, Maternal-Fetal Medicine
-chief_complaint: Hypertension in Pregnancy, Headache, Visual Changes, Epigastric Pain
-description: Comprehensive evaluation and management of preeclampsia and eclampsia
-version: "1.0"
-author: RealDiag Clinical Team
-
-entry_point: htn_pregnancy
-
-nodes:
-  - id: htn_pregnancy
-    type: question
-    text: "Pregnant patient with hypertension - Classification?"
-    options:
-      - label: "Seizures in pregnancy with hypertension - Eclampsia"
-        next: eclampsia
-      - label: "BP ≥160/110 and/or symptoms (headache, visual changes, RUQ pain) - Severe preeclampsia"
-        next: severe_preeclampsia
-      - label: "BP ≥140/90 after 20 weeks with proteinuria - Preeclampsia without severe features"
-        next: preeclampsia_without_severe
-      - label: "BP ≥140/90 after 20 weeks without proteinuria or symptoms"
-        next: gestational_htn
-
-  - id: eclampsia
-    type: diagnosis
-    name: "Eclampsia"
-    icd10: "O15.9"
-    urgency: critical
-    workup:
-      - Clinical diagnosis (seizure in pregnancy or postpartum with preeclampsia)
-      - Rule out other causes of seizure (stroke, meningitis, epilepsy, metabolic)
-      - BP measurement
-      - Labs - CBC (platelets, hemolysis), CMP (renal function, LFTs), LDH, uric acid
-      - Urinalysis (proteinuria)
-      - Fetal monitoring (continuous)
-      - Head CT if atypical presentation or focal neurologic findings (r/o ICH, PRES)
-    treatment:
-      - IMMEDIATE seizure management
-      - ABC stabilization, position left lateral to prevent aspiration
-      - Magnesium sulfate (drug of choice for eclamptic seizures and prophylaxis)
-      - Loading dose - 4-6g IV over 15-20 minutes
-      - Maintenance - 2g/hr continuous IV infusion
-      - If recurrent seizure - Additional 2g IV bolus
-      - Monitor for magnesium toxicity - Hourly reflexes, respiratory rate (>12), urine output (>25 mL/hr), consider magnesium levels
-      - Antidote - Calcium gluconate 1g IV if respiratory depression
-      - If seizures refractory to magnesium - Lorazepam 2-4mg IV or levetiracetam
-      - Severe hypertension management (if BP ≥160/110)
-      - Labetalol 20mg IV, then 40mg, then 80mg q10min (max 300mg) OR
-      - Hydralazine 5-10mg IV q20min OR
-      - Nifedipine 10-20mg PO q20min
-      - Goal BP 140-150/90-100 (do NOT lower too aggressively - risk placental hypoperfusion)
-      - Definitive treatment - DELIVERY (regardless of gestational age)
-      - Stabilize mother first (control seizures and BP)
-      - Deliver once stable (vaginal delivery preferred if favorable cervix, C-section if unstable or unfavorable)
-      - Continue magnesium sulfate during delivery and for 24 hours postpartum
-      - ICU monitoring
-      - Fetal assessment (continuous monitoring, consider emergency C-section if fetal distress)
-
-  - id: severe_preeclampsia
-    type: diagnosis
-    name: "Severe Preeclampsia"
-    icd10: "O14.1"
-    urgency: critical
-    workup:
-      - Diagnostic criteria - BP ≥160/110 on 2 occasions 4 hours apart OR any severe features
-      - Severe features - Severe headache unresponsive to medication, visual disturbances (blurred vision, scotomata), RUQ/epigastric pain, pulmonary edema, new-onset renal insufficiency (Cr >1.1), thrombocytopenia (platelets <100k), elevated LFTs (2x normal), fetal growth restriction
-      - Labs - CBC (platelets, check for hemolysis), CMP (Cr, AST/ALT), LDH, uric acid, coagulation studies if platelets low
-      - 24-hour urine protein (≥300mg) OR protein/creatinine ratio ≥0.3 (but delivery not delayed for proteinuria assessment if severe features present)
-      - Fetal assessment - NST, BPP, ultrasound for growth and amniotic fluid
-    treatment:
-      - Hospital admission
-      - Severe hypertension management - Goal BP <160/110 to prevent stroke
-      - Labetalol 20mg IV bolus, repeat with escalating doses (20-40-80mg q10-20min, max 300mg) OR
-      - Hydralazine 5-10mg IV q20min (max 20mg) OR
-      - Nifedipine immediate-release 10-20mg PO q20min
-      - Maintenance antihypertensive - Labetalol 200-400mg PO BID-TID or nifedipine XL 30-60mg daily
-      - Magnesium sulfate for seizure prophylaxis
-      - Loading - 4-6g IV over 15-20 min
-      - Maintenance - 2g/hr continuous infusion until 24 hours postpartum
-      - Monitor reflexes, respiratory rate, urine output
-      - Corticosteroids for fetal lung maturity if <34 weeks
-      - Betamethasone 12mg IM x2 doses 24 hours apart OR dexamethasone 6mg IM q12h x4 doses
-      - Delivery timing (definitive treatment)
-      - ≥34 weeks with severe features - Deliver (induce labor or C-section)
-      - "<34 weeks - Expectant management ONLY if maternal and fetal status stable, in tertiary care center with continuous monitoring"
-      - Deliver immediately if any of - Uncontrolled severe hypertension, eclampsia, pulmonary edema, placental abruption, DIC, non-reassuring fetal status, HELLP syndrome
-      - Monitoring - Continuous fetal monitoring, frequent BP checks, daily labs (CBC, CMP, LFTs)
-      - Fluid restriction (80-100 mL/hr) - Risk of pulmonary edema
-      - MFM consultation
-
-  - id: preeclampsia_without_severe
-    type: diagnosis
-    name: "Preeclampsia without Severe Features"
-    icd10: "O14.0"
-    urgency: high
-    workup:
-      - Diagnostic criteria - BP ≥140/90 after 20 weeks gestation with proteinuria (≥300mg/24hr OR P/C ratio ≥0.3)
-      - OR BP ≥140/90 with any of - Thrombocytopenia, renal insufficiency, elevated LFTs, pulmonary edema, cerebral symptoms (even without proteinuria)
-      - Labs - CBC, CMP, LFTs, uric acid, 24-hour urine protein or P/C ratio
-      - Fetal assessment - NST twice weekly, ultrasound for growth and AFI weekly
-    treatment:
-      - Management depends on gestational age
-      - ≥37 weeks - Deliver (induce labor)
-      - 34-37 weeks - Consider delivery vs expectant management (individualized)
-      - "<34 weeks - Expectant management with close monitoring IF no severe features and fetal status reassuring"
-      - Outpatient vs inpatient - Can consider outpatient if reliable patient, BP <150/100, reassuring labs, close follow-up (2x/week)
-      - Antihypertensive therapy - Goal BP <140/90
-      - Labetalol 200-400mg PO BID-TID OR
-      - Nifedipine XL 30-60mg PO daily OR
-      - Methyldopa 250-500mg PO TID (safe but less effective)
-      - Avoid ACE inhibitors and ARBs (teratogenic)
-      - Aspirin 81mg daily - if not already started (should be started by 12-16 weeks for high-risk patients)
-      - Fetal surveillance - NST, BPP, growth scans
-      - Patient education - Report headache, visual changes, RUQ pain, decreased fetal movement immediately
-      - Delivery at 37 weeks (do not go beyond 37 weeks)
-
-  - id: gestational_htn
-    type: diagnosis
-    name: "Gestational Hypertension"
-    icd10: "O13.9"
-    urgency: medium
-    workup:
-      - Diagnostic criteria - BP ≥140/90 after 20 weeks without proteinuria or other features of preeclampsia
-      - Labs - CBC, CMP, LFTs, uric acid, P/C ratio (to rule out preeclampsia)
-      - Repeat labs weekly (30-50% progress to preeclampsia)
-      - Fetal surveillance - NST weekly
-    treatment:
-      - Antihypertensive if BP persistently ≥150/100
-      - Labetalol, nifedipine, or methyldopa
-      - Close monitoring for progression to preeclampsia
-      - Weekly or twice weekly visits with BP checks and labs
-      - Delivery at 37-39 weeks (do not allow post-term)
-      - If progresses to preeclampsia, manage accordingly
+name: Preeclampsia
+family: obstetric-gynecologic
+specialty: Obstetrics
+chief_complaint: Hypertension, proteinuria, headache, vision changes in pregnancy
+description: Pregnancy-specific hypertensive disorder after 20 weeks with end-organ dysfunction
+icd10: O14.90
+urgency: urgent-to-emergency
+workup:
+  - Clinical presentation in pregnancy after 20 weeks gestation
+  - Hypertension (BP 140/90 or greater on two occasions 4 hours apart)
+  - With proteinuria (greater than 300 mg/24hr or protein/creatinine ratio greater than 0.3)
+  - Or in absence of proteinuria - thrombocytopenia, renal insufficiency, liver dysfunction, pulmonary edema, cerebral/visual symptoms
+  - Severe features include BP 160/110 or greater, symptoms (headache, visual changes, RUQ pain), platelet less than 100K, Cr greater than 1.1, transaminases 2x normal, pulmonary edema
+  - Risk factors include nulliparity, age extremes, obesity, chronic hypertension, diabetes, renal disease, prior preeclampsia, multiple gestation, APS
+  - Physical exam shows hypertension, edema (face/hands concerning), hyperreflexia, RUQ tenderness
+  - Labs include CBC (thrombocytopenia, hemolysis), CMP (elevated Cr, transaminases), LDH (hemolysis), uric acid (elevated)
+  - Urine protein/creatinine ratio or 24-hour urine protein
+  - HELLP syndrome variant with Hemolysis, Elevated Liver enzymes, Low Platelets - life-threatening
+  - Fetal monitoring with NST, BPP, umbilical artery Doppler, growth ultrasounds
+treatment:
+  - Only cure is delivery - timing depends on severity and gestational age
+  - Blood pressure management
+  - Severe hypertension (BP 160/110 or greater) - urgent treatment to prevent stroke
+  - Labetalol 20 mg IV push, repeat every 10 min up to 300 mg total
+  - Hydralazine 5-10 mg IV push every 20 min
+  - Nifedipine 10-20 mg PO immediate release every 20 min
+  - Goal BP 140-150/90-100 (not too low, maintain placental perfusion)
+  - Seizure prophylaxis with magnesium sulfate
+  - If severe features present
+  - Loading dose 4-6 g IV over 15-20 min, then maintenance 2 g/hr
+  - Continue during labor and 24 hours postpartum
+  - Monitor magnesium toxicity (reflexes, respiratory rate, urine output)
+  - Calcium gluconate antidote if toxicity
+  - Delivery timing
+  - 37+ weeks - deliver regardless of severity
+  - 34-37 weeks with severe features - deliver
+  - Less than 34 weeks with severe features - betamethasone for fetal lung maturity, then deliver within 24-48 hours
+  - Expectant management only if less than 34 weeks without severe features (rare)
+  - Delivery improves maternal condition but symptoms may persist/worsen first 24-48 hours postpartum
+  - Monitor BP and labs closely postpartum
+  - Continue magnesium 24 hours postpartum if severe features
+  - Antihypertensive medications may be needed for weeks postpartum
+  - Postpartum preeclampsia can present up to 6 weeks after delivery
+  - Long-term implications include increased cardiovascular risk
+  - Aspirin prophylaxis for future pregnancies (81 mg daily starting 12 weeks)
+clinical_pearls:
+  - Preeclampsia occurs after 20 weeks gestation, peaks near term and postpartum
+  - Triad of hypertension, proteinuria, end-organ dysfunction
+  - Severe features require prompt delivery or intensive monitoring
+  - Magnesium sulfate prevents eclamptic seizures
+  - Only cure is delivery but symptoms may worsen first 24-48 hours postpartum
+  - HELLP syndrome variant is life-threatening
+  - Aspirin 81 mg starting at 12 weeks prevents preeclampsia in high-risk patients
+  - Future cardiovascular risk increased
+differentials:
+  - Chronic hypertension (present before 20 weeks or persists greater than 12 weeks postpartum)
+  - Gestational hypertension (hypertension without proteinuria or features)
+  - Acute fatty liver of pregnancy (severe liver dysfunction, hypoglycemia)
+  - TTP/HUS (fever, neurologic changes, severe thrombocytopenia)
+  - Appendicitis (if RUQ pain without other features)
+trace:
+  - 28-year-old primigravid woman at 34 weeks gestation presents with headache and vision changes
+  - Severe frontal headache x 1 day, blurry vision, seeing spots
+  - Also RUQ pain described as pressure
+  - Swelling of hands and face noticed
+  - No prior medical problems, normal prenatal course until now
+  - Exam shows BP 168/105 (severe hypertension), edema of face and hands
+  - Hyperreflexia 3+, RUQ tenderness
+  - Fetal heart rate tracing reactive (reassuring)
+  - Labs - platelets 98,000 (low), AST 156 U/L (elevated), ALT 189 U/L (elevated)
+  - Creatinine 1.3 mg/dL (elevated from baseline 0.7)
+  - Urine protein/creatinine ratio 0.8 (elevated)
+  - Diagnosis - PREECLAMPSIA WITH SEVERE FEATURES at 34 weeks
+  - Severe BP, symptoms (headache, visual changes, RUQ pain), thrombocytopenia, elevated transaminases, renal dysfunction
+  - Risk for eclampsia, HELLP syndrome
+  - Admitted to labor and delivery
+  - Immediate management
+  - Magnesium sulfate loading dose 6 g IV over 20 minutes
+  - Then maintenance 2 g/hr continuous infusion (seizure prophylaxis)
+  - Antihypertensive - labetalol 20 mg IV push
+  - BP rechecked 15 min later 155/98 (improved but still elevated)
+  - Labetalol 40 mg IV push
+  - BP now 142/92 (goal range)
+  - Start labetalol 200 mg PO BID
+  - Betamethasone 12 mg IM for fetal lung maturity (less than 34 weeks)
+  - Repeat in 24 hours
+  - Continuous fetal monitoring
+  - Plan for delivery after betamethasone course completed (24-48 hours)
+  - Hospital course - on magnesium sulfate, close monitoring
+  - Headache improved, no seizures
+  - BP controlled 135-145/85-95 on labetalol
+  - Repeat labs 12 hours - platelets 92K (stable), AST/ALT still elevated
+  - Fetal monitoring reassuring
+  - 30 hours after admission - completed betamethasone course
+  - Induced labor with plan for vaginal delivery
+  - Labor progressed, magnesium continued throughout
+  - Delivered healthy baby girl, 2100 grams (appropriate for 34 weeks)
+  - Apgars 8 and 9, admitted to NICU for prematurity (34 weeks)
+  - Postpartum course - continue magnesium sulfate x 24 hours
+  - BP initially increased to 165/102 (common first 24-48 hours postpartum)
+  - Labetalol increased to 300 mg BID
+  - Added nifedipine XL 30 mg daily
+  - Stopped magnesium at 24 hours, no seizures
+  - Labs improving - platelets 110K, transaminases decreasing
+  - Discharged postpartum day 4
+  - BP 138/88 on labetalol 300 mg BID + nifedipine 30 mg daily
+  - Blood pressure cuff for home monitoring
+  - Follow-up 3 days (check BP and labs)
+  - Postpartum day 7 - BP 132/84, labs normalized
+  - Gradually weaning antihypertensives over next 4 weeks
+  - 6 weeks postpartum - BP normal off all medications
+  - Full recovery
+  - Counseling for future pregnancies
+  - 30-50% risk recurrence in future pregnancy
+  - Start aspirin 81 mg daily at 12 weeks gestation (reduces risk)
+  - Early prenatal care, close monitoring
+  - Long-term increased cardiovascular risk - healthy lifestyle, regular BP monitoring
+  - Outcome - Successful management with delivery at 34 weeks, mother and baby healthy
