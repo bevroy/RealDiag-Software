@@ -1,142 +1,52 @@
 tree_id: NEURO-PARKINSON-DISEASE
-name: Parkinson Disease Evaluation
-family: NEUROLOGY
-specialty: Neurology, Movement Disorders
-chief_complaint: Tremor, Slowness, Stiffness, Balance Problems
-description: Evaluation and management of Parkinson disease
-version: "1.0"
-author: RealDiag Clinical Team
+name: Parkinson Disease
+family: Neurology
+specialty: Movement Disorders
+chief_complaint: Tremor and slowed movement
+description: Progressive neurodegenerative disorder causing resting tremor, bradykinesia, rigidity, and postural instability from loss of dopaminergic neurons. Levodopa highly effective for motor symptoms.
+icd10: G20
+urgency: non-urgent
 
-entry_point: parkinson_evaluation
+workup:
+  - Clinical diagnosis: bradykinesia (essential) plus either resting tremor or rigidity
+  - Classic features: resting tremor 4-6 Hz (pill-rolling), unilateral onset, gradual progression
+  - Examination: masked facies, decreased blink rate, micrographia, shuffling gait, stooped posture, reduced arm swing
+  - Response to levodopa: dramatic improvement strongly supports diagnosis (>50% improvement typical)
+  - Neuroimaging: brain MRI normal (excludes structural lesions, normal pressure hydrocephalus, vascular parkinsonism)
+  - DaTscan (dopamine transporter imaging): reduced striatal uptake supports diagnosis but not routinely needed
+  - Rule out medication-induced parkinsonism: antipsychotics (haloperidol, risperidone), metoclopramide, valproate
+  - Red flags against PD: symmetric onset, early falls, early autonomic dysfunction, poor levodopa response (suggests atypical parkinsonian disorder)
 
-nodes:
-  - id: parkinson_evaluation
-    type: diagnosis
-    name: "Parkinson Disease"
-    icd10: "G20"
-    urgency: medium
-    workup:
-      - Parkinson disease (PD) - Progressive neurodegenerative disorder affecting dopaminergic neurons in substantia nigra
-      - Second most common neurodegenerative disease (after Alzheimer)
-      - Epidemiology - Prevalence 1-2% over age 60, 4-5% over age 85
-      - Incidence 10-20 per 100,000/year, 60,000 new cases/year US
-      - Mean age onset 60 years (range 40-70), male:female 1.5-2:1
-      - Risk factors - Age (strongest risk factor), male sex, family history (10-15% have affected first-degree relative), pesticide exposure, head trauma, well water
-      - Protective factors - Coffee, smoking (inverse association), exercise
-      - Pathophysiology - Degeneration dopaminergic neurons in substantia nigra pars compacta → striatal dopamine depletion → motor symptoms
-      - Loss 50-70% dopaminergic neurons before symptom onset
-      - Lewy bodies (α-synuclein aggregates) pathologic hallmark
-      - Clinical diagnosis - Based on motor features (no definitive test)
-      - Cardinal motor features (parkinsonism) - "TRAP"
-      - Tremor (resting) - 4-6 Hz, "pill-rolling," worse at rest, improves with action, asymmetric (70-80% patients)
-      - Typically starts one hand, may involve leg/chin
-      - Rigidity - "Cogwheel" (ratchety resistance to passive movement) or "lead-pipe," neck/limbs
-      - Akinesia/bradykinesia - Slowness initiating/executing movement, decreased amplitude (hypomimia, micrographia, shuffling gait)
-      - Postural instability - Late feature (not present early), impaired balance, retropulsion (pull test positive)
-      - UK Brain Bank criteria - GOLD STANDARD clinical diagnosis
-      - Bradykinesia PLUS ≥1 of: resting tremor, rigidity, or postural instability (not caused by visual/vestibular/cerebellar/proprioceptive dysfunction)
-      - Supportive features - Asymmetric onset, progressive, persistent asymmetry, excellent response to levodopa (70-100% improvement), levodopa-induced dyskinesias, clinical course ≥10 years
-      - Exclusion criteria - History of strokes, head injury, encephalitis, neuroleptic use, oculogyric crises, supranuclear gaze palsy (PSP), cerebellar signs, early severe autonomic failure, Babinski sign, brain tumor/hydrocephalus on imaging
-      - Motor symptoms progression - Unilateral → bilateral (but remains asymmetric), tremor-dominant vs. postural instability/gait difficulty (PIGD) phenotypes
-      - Tremor-dominant - Better prognosis, slower progression
-      - PIGD - Worse prognosis, more cognitive decline, more falls
-      - Non-motor symptoms (very common, often precede motor symptoms by years)
-      - Autonomic - Orthostatic hypotension (30-50%), constipation (80-90%, earliest symptom), urinary urgency/frequency, erectile dysfunction, excessive sweating
-      - Sleep disorders - REM sleep behavior disorder (RBD, 25-50%, acting out dreams, PRECEDES motor symptoms by 10+ years), insomnia, restless legs syndrome, excessive daytime sleepiness
-      - Neuropsychiatric - Depression (40-50%), anxiety (40%), apathy (40%), hallucinations (psychosis 20-40%, especially visual, dopaminergic medications), dementia (30-80% eventually develop)
-      - Sensory - Hyposmia/anosmia (loss of smell 70-90%, EARLY, precedes motor symptoms), pain (40-60%)
-      - Other - Seborrheic dermatitis, drooling (sialorrhea), dysphagia (late)
-      - Physical exam
-      - Tremor - Observe at rest (hands in lap), count backwards (cognitively distract), asymmetric
-      - Rigidity - Passive movement of limbs (neck, wrist, elbow), "cogwheel" with superimposed tremor
-      - Bradykinesia tests
-      - Finger taps - Tap index finger to thumb rapidly (10 times), observe for slowing, reduced amplitude
-      - Hand movements - Open/close fist rapidly
-      - Foot taps - Tap foot on ground rapidly
-      - Facial hypomimia - Reduced facial expression ("masked facies"), decreased blink rate
-      - Hypophonia - Soft, monotonous speech
-      - Micrographia - Small handwriting (gets progressively smaller)
-      - Postural instability - Pull test (stand behind patient, pull shoulders backward, normal <2 steps to recover, abnormal >2 steps or would fall without support)
-      - Gait - Shuffling, reduced arm swing (asymmetric), festination (accelerating short steps), freezing (feet "stuck to floor"), en bloc turning (turn whole body as unit, cannot pivot)
-      - Postural changes - Stooped posture (flexed trunk), camptocormia (severe forward flexion)
-      - Labs/imaging - No definitive test, diagnosis is CLINICAL
-      - MRI brain - Typically normal (rule out alternative diagnoses, vascular parkinsonism, normal pressure hydrocephalus)
-      - DaTscan (dopamine transporter SPECT imaging) - Shows reduced striatal dopamine transporter uptake (can distinguish PD from essential tremor or drug-induced parkinsonism, but cannot distinguish PD from other parkinsonian syndromes like MSA or PSP)
-      - Not routinely needed if classic presentation
-      - Genetic testing - Only if early onset (<40 years) or strong family history (LRRK2, PARK2, PINK1, SNCA)
-      - Differential diagnosis
-      - Essential tremor - Action tremor (vs. resting), bilateral, symmetric, improves with alcohol, no bradykinesia/rigidity, family history
-      - Drug-induced parkinsonism - Antipsychotics (haloperidol, risperidone), metoclopramide, prochlorperazine, symmetric, reversible with medication discontinuation
-      - Vascular parkinsonism - Lower body predominance, gait difficulty, stepwise progression, MRI shows lacunar infarcts
-      - Atypical parkinsonian syndromes - Poor levodopa response, early falls, supranuclear gaze palsy (PSP), cerebellar signs/autonomic failure (MSA), dementia before/concurrent with motor symptoms (Lewy body dementia)
-      - Normal pressure hydrocephalus - Triad: gait apraxia, urinary incontinence, dementia, MRI shows enlarged ventricles
-    treatment:
-      - No cure, treatment is symptomatic (improve motor function, quality of life)
-      - When to start treatment - When symptoms interfere with function or quality of life (no benefit to early treatment, not neuroprotective)
-      - Dopaminergic medications - MAINSTAY
-      - Levodopa/carbidopa (Sinemet) - MOST EFFECTIVE symptomatic treatment
-      - Levodopa crosses blood-brain barrier → converted to dopamine (carbidopa blocks peripheral conversion, reduces nausea)
-      - Dosing - Start 25/100 mg TID, increase gradually to 25/100 mg QID or more (typical maintenance 300-1000 mg/day levodopa in divided doses)
-      - Take 30-60 min before meals (protein competes for absorption)
-      - Response - 70-100% improvement initially ("honeymoon period" 3-5 years)
-      - Side effects - Nausea (carbidopa reduces but doesn't eliminate), orthostatic hypotension, dyskinesias (involuntary movements, 40-50% after 5 years, 80-90% after 10 years), motor fluctuations
-      - Motor complications (after 5-10 years) - Wearing off (end-of-dose deterioration), on-off fluctuations, dyskinesias (peak-dose or diphasic)
-      - Strategies for motor fluctuations - More frequent dosing, controlled-release formulations, add dopamine agonist/MAO-B inhibitor/COMT inhibitor, consider advanced therapies
-      - Dopamine agonists - Pramipexole (Mirapex), ropinirole (Requip), rotigotine patch (Neupro)
-      - Directly stimulate dopamine receptors (bypass need for functioning dopaminergic neurons)
-      - Less effective than levodopa (50-70% improvement) but lower risk dyskinesias
-      - Preferred initial monotherapy if age <60-65 years (delay levodopa, avoid dyskinesias)
-      - Side effects - Nausea, orthostatic hypotension, leg edema, somnolence, impulse control disorders (gambling, hypersexuality, compulsive shopping 15-20%), hallucinations
-      - Avoid in elderly (increased hallucinations, confusion)
-      - MAO-B inhibitors - Selegiline (Eldepryl), rasagiline (Azilect)
-      - Inhibit monoamine oxidase B (metabolizes dopamine) → increase dopamine availability
-      - Mild symptomatic benefit (monotherapy or adjunct to levodopa)
-      - May have modest neuroprotective effect (controversial)
-      - Side effects - Insomnia (if taken late in day), serotonin syndrome (rare, with SSRIs)
-      - COMT inhibitors - Entacapone (Comtan), tolcapone (Tasmar)
-      - Inhibit catechol-O-methyltransferase (metabolizes levodopa) → prolong levodopa half-life
-      - Always used WITH levodopa (reduces wearing off)
-      - Side effects - Diarrhea (10-20%), urine discoloration (orange, harmless), increased dyskinesias (reduce levodopa dose)
-      - Tolcapone more effective but hepatotoxicity risk (requires liver monitoring)
-      - Stalevo - Combination levodopa/carbidopa/entacapone
-      - Amantadine - Glutamate (NMDA) antagonist
-      - Mild antiparkinsonian effect
-      - Most effective for levodopa-induced dyskinesias (reduce dyskinesias 40-60%)
-      - Side effects - Livedo reticularis (mottled skin legs), leg edema, confusion (elderly), hallucinations
-      - Anticholinergics - Trihexyphenidyl (Artane), benztropine (Cogentin)
-      - Effective for tremor, less effective bradykinesia/rigidity
-      - Avoid in elderly (cognitive impairment, confusion, urinary retention, constipation)
-      - Only use young patients with prominent tremor
-      - Non-motor symptom management - IMPORTANT
-      - Orthostatic hypotension - Increase salt/fluid intake, compression stockings, fludrocortisone 0.1-0.2 mg daily, midodrine 2.5-10 mg TID
-      - Constipation - Fiber, fluids, stool softeners, polyethylene glycol
-      - REM sleep behavior disorder - Melatonin 3-12 mg qhs (first-line), clonazepam 0.5-2 mg qhs
-      - Depression - SSRIs (sertraline, citalopram), SNRIs, psychotherapy
-      - Psychosis/hallucinations - Reduce/discontinue dopaminergic medications (if possible), quetiapine 25-100 mg qhs (atypical antipsychotic, minimal motor worsening), pimavanserin (Nuplazid) 34 mg daily (selective serotonin inverse agonist, FDA-approved PD psychosis)
-      - AVOID typical antipsychotics (haloperidol, chlorpromazine) - worsen parkinsonism
-      - Dementia - Rivastigmine (Exelon) 3-12 mg/day (cholinesterase inhibitor, FDA-approved PD dementia)
-      - Drooling - Glycopyrrolate, botulinum toxin to salivary glands
-      - Advanced therapies - When medications inadequate
-      - Deep brain stimulation (DBS) - MOST COMMON advanced therapy
-      - Electrodes implanted subthalamic nucleus (STN) or globus pallidus interna (GPi)
-      - Indications - Motor fluctuations/dyskinesias despite optimal medical therapy, tremor refractory to medications, good levodopa response (confirms dopamine-responsive PD), no significant cognitive impairment, age typically <70 years
-      - Benefits - Reduce off time 4-6 hours/day, improve motor scores 30-60%, reduce dyskinesias 60-80%, reduce medication doses 30-50%
-      - Complications - Infection (3-5%), hemorrhage (1-2%), hardware malfunction, cognitive/speech side effects (stimulation-related, reversible)
-      - Levodopa-carbidopa intestinal gel (LCIG, Duopa) - Continuous infusion via PEG-J tube
-      - Reduces motor fluctuations, increases on time
-      - Invasive (requires surgery), expensive
-      - Apomorphine - Subcutaneous dopamine agonist injection (rescue for off episodes)
-      - Exercise - CRITICAL for all stages
-      - Improves motor function, balance, gait, reduces falls
-      - Aerobic exercise, strength training, tai chi, boxing programs
-      - Physical therapy - Gait training, balance exercises, fall prevention
-      - Speech therapy - For hypophonia (Lee Silverman Voice Treatment LSVT LOUD)
-      - Occupational therapy - Adaptive strategies for ADLs
-      - Prognosis - Progressive but variable
-      - Median time diagnosis to:
-      - Hoehn & Yahr stage 3 (postural instability) - 7-8 years
-      - Wheelchair dependence - 15-20 years
-      - Death - 15-25 years (earlier if PIGD phenotype, older age at onset)
-      - Mortality - Not directly from PD, but complications (aspiration pneumonia, falls)
-      - Life expectancy reduced 5-10 years vs. general population
-      - Quality of life - Motor fluctuations, dyskinesias, falls, dementia main drivers of disability
+treatment:
+  - Levodopa/carbidopa (gold standard): most effective treatment, carbidopa 25 mg/levodopa 100 mg start one tablet TID, titrate gradually
+  - Start low, go slow: begin when functional impairment significant enough to warrant treatment
+  - Young patients (<60-65): consider dopamine agonist first (pramipexole 0.125-1.5 mg TID or ropinirole 0.25-8 mg TID) to delay levodopa and motor complications
+  - Motor fluctuations (wearing-off): as disease progresses, shorter duration of benefit from each levodopa dose
+  - Management of fluctuations: increase levodopa frequency, add COMT inhibitor (entacapone 200 mg with each levodopa dose - extends duration), add MAO-B inhibitor (rasagiline 1 mg daily or selegiline), or dopamine agonist
+  - Dyskinesias: involuntary movements from chronic levodopa use, manage by decreasing individual dose and increasing frequency, or add amantadine 100 mg TID
+  - Non-motor symptoms: treat depression (SSRIs), constipation (fiber, stool softeners, polyethylene glycol), orthostatic hypotension (midodrine, fludrocortisone), REM sleep behavior disorder (clonazepam, melatonin)
+  - Dementia: common late complication, treat with rivastigmine or donepezil
+  - Psychosis: quetiapine 25-100 mg or pimavanserin 34 mg daily (most antipsychotics worsen parkinsonism)
+  - Deep brain stimulation (DBS): for advanced disease with motor fluctuations and dyskinesias despite optimal medications, dramatically improves motor symptoms
+  - Physical therapy: gait training, balance exercises, prevent falls
+  - Speech therapy: for hypophonia and dysphagia
+
+clinical_pearls:
+  - Bradykinesia plus resting tremor or rigidity diagnostic
+  - Resting tremor 4-6 Hz pill-rolling, unilateral onset classic
+  - Levodopa/carbidopa most effective treatment - dramatic response typical
+  - Start treatment when functional impairment significant
+  - Young patients consider dopamine agonist first to delay levodopa
+  - Motor fluctuations and dyskinesias develop with chronic levodopa use
+  - Non-motor symptoms (depression, constipation, orthostasis, dementia) common
+  - DBS for advanced disease with motor complications
+  - Falls, symmetry, poor levodopa response suggest atypical parkinsonism
+
+differentials:
+  - Essential tremor: action tremor (not resting), bilateral, family history, improves with alcohol
+  - Drug-induced parkinsonism: history of antipsychotic or metoclopramide use, bilateral, may reverse with drug discontinuation
+  - Progressive supranuclear palsy: early falls, vertical gaze palsy, poor levodopa response
+  - Multiple system atrophy: early autonomic failure, cerebellar signs, poor levodopa response
+
+trace: |
+  A 68-year-old man presented with 18 months of right hand tremor at rest, handwriting getting smaller, and slowed movements. Noticed tremor watching TV or sitting at rest, improved with intentional movement. Progressive difficulty with fine motor tasks (buttoning shirt, typing). Exam showed right hand resting tremor 4-5 Hz, bradykinesia (slow finger taps and hand movements), cogwheel rigidity right arm, masked facies, reduced right arm swing with gait. Left side normal. No postural instability. Brain MRI normal. Diagnosed with early Parkinson disease (Hoehn and Yahr stage 1-2 unilateral involvement). Mild functional impairment, patient desired treatment. Started carbidopa/levodopa 25/100 one tablet TID with meals. At 2 weeks tremor 70% improved, movement speed improved, handwriting better (excellent levodopa response confirms diagnosis). At 3 months increased to 25/100 one and a half tablets TID for sustained benefit. At 6 months motor symptoms well-controlled, returned to all activities. Referred to physical therapy for gait training and fall prevention. At 18 months disease progressed with mild left-sided symptoms emerging (expected progression), increased levodopa to two tablets TID. At 3 years continues excellent functional status on levodopa monotherapy without motor complications.

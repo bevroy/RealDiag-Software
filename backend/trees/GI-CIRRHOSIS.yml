@@ -1,66 +1,53 @@
 tree_id: GI-CIRRHOSIS
 name: Cirrhosis
-family: Gastrointestinal
-specialty: Gastroenterology
-chief_complaint: Abdominal distension
-description: End-stage liver disease with irreversible fibrosis and nodular regeneration causing portal hypertension and hepatic dysfunction
-
+family: Gastroenterology
+specialty: Hepatology
+chief_complaint: Chronic liver disease complications
+description: End-stage liver disease with fibrosis and architectural distortion causing portal hypertension and hepatic dysfunction. Manage complications, screen for hepatocellular carcinoma, and consider transplantation for decompensated disease.
 icd10: K74.60
-
-urgency: routine_urgent
+urgency: non-urgent
 
 workup:
-  - Clinical presentation compensated: often asymptomatic, incidental lab abnormalities, or nonspecific (fatigue, anorexia, weight loss)
-  - Clinical presentation decompensated: ascites, variceal hemorrhage, hepatic encephalopathy, jaundice (indicates decompensation and worse prognosis)
-  - Exam: spider angiomata, palmar erythema, gynecomastia, testicular atrophy, jaundice, ascites, splenomegaly, caput medusae, asterixis (hepatic encephalopathy)
-  - Laboratory: CBC (thrombocytopenia from splenomegaly/portal hypertension, anemia), CMP (hypoalbuminemia, hyperbilirubinemia, elevated transaminases AST/ALT - AST greater than ALT suggests alcohol, prolonged PT/INR from synthetic dysfunction), ammonia if encephalopathy
-  - Etiology workup: hepatitis B surface antigen, hepatitis C antibody with RNA, iron studies (ferritin, transferrin saturation for hemochromatosis), ceruloplasmin (Wilson disease if age less than 40), ANA/anti-smooth muscle antibody (autoimmune hepatitis), alpha-1 antitrypsin level
-  - Imaging ultrasound with Doppler: nodular liver, increased echogenicity, portal vein patency and direction of flow, splenomegaly, ascites
-  - Fibroscan (transient elastography): assess degree of fibrosis noninvasively, liver stiffness greater than 12.5 kPa suggests cirrhosis
-  - Liver biopsy: gold standard for diagnosis and staging (Metavir or Ishak score) but often not needed if clinical/lab/imaging consistent
-  - Screen for complications: EGD (esophageal varices screening), ultrasound with AFP every 6 months (hepatocellular carcinoma surveillance), CT or MRI if liver mass
-  - Child-Pugh score: classifies severity using bilirubin, albumin, INR, ascites, encephalopathy - Class A (5-6 points, 1-year survival 100 percent), Class B (7-9 points, 80 percent), Class C (10-15 points, 45 percent)
-  - MELD score: predicts 3-month mortality, used for transplant allocation, calculated from bilirubin, INR, creatinine
+  - Clinical diagnosis: stigmata of chronic liver disease (spider angiomata, palmar erythema, gynecomastia, testicular atrophy, caput medusae)
+  - Labs: thrombocytopenia (portal hypertension and hypersplenism), elevated INR (synthetic dysfunction), hypoalbuminemia, elevated bilirubin
+  - Imaging: abdominal ultrasound with Doppler shows nodular liver, splenomegaly, ascites, portal vein patency and flow direction
+  - FibroScan (transient elastography): non-invasive assessment of liver stiffness (>12-14 kPa suggests cirrhosis)
+  - Liver biopsy: gold standard for diagnosis and staging but rarely needed (clinical and imaging often sufficient)
+  - Identify etiology: alcohol history, hepatitis B and C serology, iron studies (hemochromatosis), ceruloplasmin (Wilson disease), ANA/ASMA (autoimmune hepatitis), metabolic syndrome (NASH)
+  - Child-Pugh score: grades severity (bilirubin, albumin, INR, ascites, encephalopathy) - Class A 5-6 compensated, B 7-9 decompensated, C 10-15 end-stage
+  - MELD score: predicts 3-month mortality, used for transplant allocation (creatinine, bilirubin, INR)
+  - Screen for complications: upper endoscopy (varices), ultrasound plus AFP every 6 months (hepatocellular carcinoma surveillance)
 
 treatment:
-  - Treat underlying cause: alcohol abstinence (improves survival), antiviral therapy for hepatitis B (tenofovir, entecavir) or C (sofosbuvir/velpatasvir cure rates over 95 percent), immunosuppression for autoimmune hepatitis, phlebotomy for hemochromatosis, copper chelation for Wilson disease
-  - Ascites management: sodium restriction (2 grams daily), diuretics (spironolactone 100-400 mg daily plus furosemide 40-160 mg daily - start spironolactone first, maintain ratio 100:40), large-volume paracentesis if tense ascites (remove up to 5 L, give albumin 6-8 grams per liter removed if more than 5 L)
-  - Spontaneous bacterial peritonitis (SBP) treatment: ceftriaxone 2 grams IV daily or cefotaxime 2 grams every 8 hours x 5 days, plus albumin 1.5 grams/kg day 1 and 1 gram/kg day 3 (reduces renal dysfunction/mortality), SBP prophylaxis if prior SBP or ascites protein less than 1.5 grams/dL (norfloxacin 400 mg daily or ciprofloxacin 500 mg daily)
-  - Hepatic encephalopathy: lactulose 15-30 mL TID titrate to 2-3 soft bowel movements daily (reduces ammonia), rifaximin 550 mg BID (adjunct to lactulose, reduces recurrence), identify precipitants (GI bleed, infection, constipation, medications)
-  - Variceal bleeding prevention: nonselective beta-blockers (propranolol, nadolol, carvedilol) reduce portal pressure, goal HR 55-60 bpm or 25 percent reduction, endoscopic band ligation if large varices or beta-blocker intolerance
-  - Acute variceal hemorrhage: resuscitation (2 large-bore IVs, blood products), octreotide 50 mcg bolus then 50 mcg/hr infusion (reduces portal pressure), ceftriaxone 1 gram daily (prophylaxis), emergent EGD for band ligation or sclerotherapy, TIPS if refractory
-  - Hepatocellular carcinoma surveillance: ultrasound with AFP every 6 months, curative options if early-stage (resection, transplant, ablation)
-  - Liver transplant evaluation if decompensated (Child-Pugh B/C or MELD greater than 15) - definitive treatment
+  - Treat underlying cause: alcohol abstinence (most important), HCV treatment with DAAs, HBV suppression with tenofovir or entecavir, weight loss for NASH
+  - Avoid hepatotoxins: alcohol, NSAIDs, acetaminophen >2 g/day
+  - Portal hypertension management: non-selective beta-blocker (propranolol 20-80 mg BID or nadolol 20-80 mg daily) reduces variceal bleeding risk if medium-large varices
+  - Varices screening: upper endoscopy at diagnosis, repeat every 1-3 years based on size
+  - Variceal bleeding: octreotide 50 mcg bolus then infusion plus prophylactic antibiotics (ceftriaxone 1 g daily) plus urgent endoscopy for band ligation
+  - Ascites: sodium restriction <2 g/day, diuretics (spironolactone 100-400 mg daily plus furosemide 40-160 mg daily), large-volume paracentesis if tense ascites (give albumin 6-8 g per liter removed if >5 L)
+  - Spontaneous bacterial peritonitis (SBP): if ascites fluid PMN >250, start ceftriaxone 2 g IV daily x5-7 days plus albumin 1.5 g/kg day 1 and 1 g/kg day 3
+  - SBP prophylaxis: if prior SBP, GI bleed, or ascites protein <1.5 g/dL - norfloxacin 400 mg daily or ciprofloxacin 500 mg weekly
+  - Hepatic encephalopathy: lactulose 15-30 mL TID titrate to 2-3 soft stools daily, rifaximin 550 mg BID (reduces recurrent episodes)
+  - Hepatorenal syndrome: midodrine plus octreotide plus albumin, or dialysis bridge to transplant
+  - Hepatocellular carcinoma surveillance: ultrasound plus AFP every 6 months (early detection improves outcomes)
+  - Liver transplant evaluation: if decompensated cirrhosis (ascites, variceal bleeding, encephalopathy, HRS) or HCC within Milan criteria
 
 clinical_pearls:
-  - Most common causes alcohol (30 percent), hepatitis C (25 percent), NAFLD (20 percent)
-  - Compensated cirrhosis often asymptomatic, decompensation (ascites, variceal bleed, encephalopathy, jaundice) indicates poor prognosis
-  - Thrombocytopenia and splenomegaly suggest portal hypertension
-  - Screen for varices with EGD, HCC with ultrasound plus AFP every 6 months
-  - SBP diagnosed by ascitic fluid PMN count 250 or more cells/microL, treat with ceftriaxone plus albumin
-  - MELD score predicts mortality and guides transplant listing
-  - Alcohol abstinence improves survival even with established cirrhosis
+  - Stigmata: spider angiomata, palmar erythema, jaundice, ascites, splenomegaly
+  - Child-Pugh and MELD scores assess severity and prognosis
+  - Screen for varices with upper endoscopy, HCC with ultrasound plus AFP every 6 months
+  - Beta-blockers prevent variceal bleeding if medium-large varices
+  - Ascites: sodium restriction plus spironolactone plus furosemide
+  - SBP diagnosed by ascites PMN >250 - treat with ceftriaxone plus albumin
+  - Hepatic encephalopathy: lactulose plus rifaximin
+  - Transplant evaluation if decompensated or HCC
+  - Alcohol abstinence most important intervention
 
 differentials:
-  - Acute liver failure (rapid onset hepatic dysfunction with coagulopathy and encephalopathy within weeks, no prior chronic liver disease)
-  - Cardiac cirrhosis (right heart failure causing hepatic congestion, elevated JVP, leg edema, echo shows RV dysfunction)
-  - Budd-Chiari syndrome (hepatic vein thrombosis, acute abdominal pain, hepatomegaly, ascites, Doppler shows occluded hepatic veins)
-  - Portal vein thrombosis (acute or chronic, causes portal hypertension without cirrhosis, imaging shows thrombus)
+  - Acute liver failure: rapid onset hepatic dysfunction with encephalopathy in <26 weeks, high mortality
+  - Budd-Chiari syndrome: hepatic vein thrombosis, acute abdominal pain, ascites, hepatomegaly
+  - Cardiac cirrhosis: right heart failure causes hepatic congestion and fibrosis
+  - Schistosomiasis: parasitic infection causes periportal fibrosis without cirrhosis (portal hypertension but preserved synthetic function)
 
-trace:
-  - 58-year-old man with 30-year history alcohol use disorder (drinking stopped 3 months ago) presents with progressive abdominal distension x 1 month, leg swelling, easy bruising
-  - Exam: jaundice, spider angiomata chest, palmar erythema, distended abdomen with shifting dullness (ascites), splenomegaly, 2+ pitting edema legs, no asterixis, alert and oriented
-  - Labs: platelet 72K (thrombocytopenia), albumin 2.6 grams/dL (low), bilirubin 3.2 mg/dL (elevated), AST 98, ALT 45 (AST:ALT ratio greater than 2 suggests alcohol), INR 1.8 (prolonged), ammonia 45 mcmol/L (normal)
-  - Hepatitis B surface antigen negative, hepatitis C antibody negative (exclude viral hepatitis)
-  - Ultrasound: nodular liver consistent with cirrhosis, patent portal vein with hepatopetal flow, splenomegaly, moderate ascites
-  - Diagnostic paracentesis: SAAG (serum-ascites albumin gradient) 1.8 (greater than 1.1 confirms portal hypertension), ascitic fluid protein 1.1 grams/dL, WBC 150 cells/microL with 60 PMNs (no SBP), Gram stain/culture negative
-  - EGD: medium esophageal varices, no bleeding
-  - Child-Pugh score: bilirubin 3.2 (2 points), albumin 2.6 (3 points), INR 1.8 (2 points), moderate ascites (2 points), no encephalopathy (1 point) = 10 points Class C
-  - MELD score: 19 (high risk, transplant evaluation indicated)
-  - Diagnosis: decompensated cirrhosis (alcoholic) with ascites, thrombocytopenia, coagulopathy, Child-Pugh Class C
-  - Started spironolactone 100 mg daily, furosemide 40 mg daily, sodium restriction 2 grams daily, propranolol 20 mg BID (variceal prophylaxis titrate up)
-  - Alcohol cessation counseling, referred to addiction services
-  - Referred to transplant center for liver transplant evaluation
-  - 2 weeks: losing fluid, weight decreased 10 pounds, ascites improved, continues diuretics
-  - Started HCC surveillance ultrasound with AFP every 6 months
-  - Listed for liver transplant, MELD 19, awaiting donor
+trace: |
+  A 54-year-old man with 30-year alcohol use disorder (1 pint vodka daily) presented with 2 months progressive abdominal distension, leg swelling, and fatigue. Exam showed jaundice, spider angiomata, palmar erythema, massive ascites, bilateral pitting edema. Labs showed platelets 68,000 (thrombocytopenia), albumin 2.4 (low), bilirubin 3.2 (elevated), INR 1.8 (elevated), creatinine 1.1. Ultrasound showed nodular cirrhotic liver, splenomegaly, large ascites. Hepatitis B and C negative. Diagnosed with decompensated alcoholic cirrhosis. Child-Pugh score 10 (Class C), MELD 18. Admitted for large-volume paracentesis (8 liters removed with albumin replacement). Started spironolactone 100 mg plus furosemide 40 mg daily, sodium restriction <2 g/day. Upper endoscopy showed medium esophageal varices, started propranolol 20 mg BID (primary prophylaxis). Counseled on alcohol abstinence, referred to addiction treatment program. At 2 weeks ascites decreased, stopped drinking alcohol. At 3 months with abstinence and diuretics, ascites well-controlled, liver function improved (albumin 2.9, bilirubin 2.1, INR 1.5), Child-Pugh improved to Class B. Referred for transplant evaluation. HCC surveillance ultrasound plus AFP every 6 months started. At 12 months remains abstinent, listed for liver transplant with MELD 14.
