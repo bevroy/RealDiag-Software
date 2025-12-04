@@ -1,42 +1,217 @@
 tree_id: NEURO-MULTIPLE-SCLEROSIS
 name: Multiple Sclerosis
-family: Neurology
+family: neurologic
 specialty: Neurology
-chief_complaint: Neurologic symptoms with relapsing-remitting pattern
-description: |
-  Autoimmune demyelinating disease of CNS. Inflammation causes plaques in white matter.
-  Four types - relapsing-remitting (85-90% at onset), secondary progressive, primary progressive, progressive relapsing. Peak onset age 20-40, more common in women (3:1).
+chief_complaint: Vision changes, weakness, numbness, incoordination
+description: Chronic autoimmune demyelinating disease of CNS with relapsing-remitting or progressive course
 icd10: G35
-urgency: Moderate
+urgency: routine-to-urgent
 workup:
-  - MRI brain and spine with gadolinium (gold standard) - shows demyelinating plaques (T2 hyperintense lesions), periventricular white matter involvement, enhancement indicates active inflammation
-  - McDonald criteria for diagnosis - dissemination in space (2 or more CNS locations) and time (2 or more episodes or new MRI lesions)
-  - Lumbar puncture - CSF shows oligoclonal bands (present in 90-95%), elevated IgG index, mild lymphocytic pleocytosis
-  - Visual evoked potentials if optic neuritis suspected (prolonged P100 latency)
-  - Rule out mimics - Lyme disease, vitamin B12 deficiency, sarcoidosis, vasculitis (check Lyme serology, B12, ACE, ESR, ANA)
-treatment:
-  - Acute relapse treatment - high-dose IV methylprednisolone 1000 mg daily x 3-5 days (shortens attack duration)
-  - Plasma exchange if severe relapse not responding to steroids
-  - Disease-modifying therapies (DMTs) to reduce relapse rate and slow progression
-  - Injectable DMTs - interferon beta-1a (Avonex, Rebif) 30 mcg IM weekly or 44 mcg SC TIW, glatiramer acetate 20-40mg SC daily
-  - Oral DMTs - fingolimod 0.5mg daily, dimethyl fumarate 240mg BID, teriflunomide 14mg daily
-  - Infusion DMTs - natalizumab 300mg IV monthly (risk of PML, requires JCV antibody monitoring), ocrelizumab 600mg IV q6 months
-  - High-efficacy DMTs (natalizumab, ocrelizumab, alemtuzumab) for aggressive disease
-  - Symptomatic treatment - baclofen or tizanidine for spasticity, gabapentin for neuropathic pain, modafinil for fatigue, oxybutynin for bladder dysfunction
-  - Physical therapy, occupational therapy, cognitive rehabilitation
-clinical_pearls:
-  - Classic presentation includes optic neuritis (painful vision loss, Marcus Gunn pupil), transverse myelitis, brainstem syndromes (diplopia, ataxia), Lhermitte sign (neck flexion causes electric shock sensation down spine)
+  - Clinical presentation - dissemination in time and space (multiple CNS lesions at different times)
+  - Most common initial presentations
+  - Optic neuritis (20-30%) - unilateral painful vision loss, decreased color vision, central scotoma, afferent pupillary defect
+  - Sensory symptoms (40%) - numbness, tingling, paresthesias (limbs, trunk)
+  - Motor weakness (30%) - monoparesis, hemiparesis, paraparesis
+  - Brainstem/cerebellar (20%) - diplopia, vertigo, ataxia, dysarthria, dysphagia
+  - Transverse myelitis (10%) - bilateral weakness, sensory level, bladder/bowel dysfunction
+  - Other symptoms
+  - Lhermitte's sign - electric shock sensation down spine with neck flexion (cervical demyelination)
   - Uhthoff phenomenon - symptoms worsen with heat (hot shower, exercise, fever)
-  - Charcot triad - nystagmus, intention tremor, scanning speech (advanced disease)
-  - Clinically isolated syndrome (CIS) is first episode, 60-80% develop MS within 10 years if abnormal MRI
-  - Progression independent of relapse activity (PIRA) occurs even in treated patients
-  - Early treatment with high-efficacy DMTs improves long-term outcomes
+  - Fatigue (very common, 80%)
+  - Cognitive impairment (memory, processing speed)
+  - Bladder dysfunction (urgency, frequency, retention)
+  - Sexual dysfunction
+  - Depression (50%)
+  - Trigeminal neuralgia (more common in MS than general population)
+  - Age of onset - typically 20-40 years, female:male 3:1
+  - Course types
+  - Relapsing-remitting MS (RRMS) - 85% at onset, discrete attacks with recovery
+  - Secondary progressive MS (SPMS) - 50% of RRMS converts after 10-15 years, gradual worsening
+  - Primary progressive MS (PPMS) - 10-15%, gradual worsening from onset without relapses
+  - Progressive-relapsing MS - rare, progressive with superimposed relapses
+  - Physical examination
+  - Neurologic exam - focal deficits corresponding to CNS lesions
+  - Optic disc pallor (prior optic neuritis)
+  - Afferent pupillary defect (Marcus Gunn pupil)
+  - Internuclear ophthalmoplegia (INO) - impaired adduction one eye, nystagmus abducting eye (medial longitudinal fasciculus lesion, highly specific for MS)
+  - Hyperreflexia, Babinski sign (upper motor neuron lesions)
+  - Sensory deficits, decreased vibration/proprioception
+  - Ataxia, dysmetria, intention tremor (cerebellar)
+  - Spasticity
+  - MRI brain and spine - GOLD STANDARD for diagnosis
+  - T2/FLAIR - hyperintense lesions (demyelinating plaques)
+  - Periventricular location (perpendicular to ventricles - Dawson fingers)
+  - Corpus callosum involvement
+  - Juxtacortical, infratentorial (brainstem, cerebellum)
+  - Spinal cord lesions (typically peripheral, less than 2 vertebral segments, partial cord)
+  - T1 with gadolinium - enhancing lesions (active inflammation, breakdown blood-brain barrier)
+  - T1 hypointense lesions (black holes - axonal loss, chronic)
+  - McDonald criteria for MS diagnosis (2017 revision)
+  - Dissemination in space (DIS) - 2 or more areas of CNS
+  - Dissemination in time (DIT) - new lesions on repeat MRI OR simultaneous enhancing and non-enhancing lesions
+  - No better explanation for clinical presentation
+  - Cerebrospinal fluid analysis
+  - Oligoclonal bands (OCBs) - present in 90-95% MS (IgG bands in CSF not serum)
+  - Elevated IgG index (CSF IgG synthesis)
+  - Mild lymphocytic pleocytosis (5-50 WBCs/μL)
+  - Normal or mildly elevated protein
+  - Normal glucose
+  - CSF OCBs can substitute for DIT in McDonald criteria
+  - Evoked potentials - prolonged latency (demyelination slows conduction)
+  - Visual evoked potentials (VEP) - delayed in optic neuritis
+  - Brainstem auditory evoked potentials (BAEP)
+  - Somatosensory evoked potentials (SSEP)
+  - Laboratory studies - rule out MS mimics
+  - Vitamin B12 (deficiency mimics MS)
+  - ANA, anti-dsDNA (lupus)
+  - Neuromyelitis optica (NMO) antibodies - aquaporin-4 (AQP4) antibodies (NMO different disease)
+  - Lyme serology (if endemic area)
+  - Syphilis serology (RPR)
+  - HIV
+treatment:
+  - Disease-modifying therapies (DMTs) - reduce relapse rate, slow disability progression
+  - First-line injectable DMTs (older agents)
+  - Interferon beta-1a (Avonex 30 mcg IM weekly, Rebif 44 mcg SC 3x/week)
+  - Interferon beta-1b (Betaseron 250 mcg SC every other day)
+  - Glatiramer acetate (Copaxone 20 mg SC daily or 40 mg 3x/week)
+  - Reduce relapse rate 30%, slow progression, flu-like side effects
+  - Oral DMTs - higher efficacy, convenient
+  - Teriflunomide (Aubagio 14 mg daily) - pyrimidine synthesis inhibitor
+  - Dimethyl fumarate (Tecfidera 240 mg BID) - Nrf2 pathway activator, flushing common
+  - Siponimod (Mayzent 2 mg daily) - S1P receptor modulator, SPMS indication
+  - Fingolimod (Gilenya 0.5 mg daily) - S1P receptor modulator, first-dose monitoring (bradycardia)
+  - Cladribine (Mavenclad 3.5 mg/kg total over 2 years, given in short courses) - purine analog
+  - High-efficacy DMTs (monoclonal antibodies, infusions)
+  - Natalizumab (Tysabri 300 mg IV monthly) - anti-VLA-4, very effective but risk PML (progressive multifocal leukoencephalopathy)
+  - JC virus serology required before starting (PML risk if JC positive)
+  - Ocrelizumab (Ocrevus 300 mg IV x2 initial, then 600 mg q6 months) - anti-CD20, RRMS and PPMS indication
+  - Alemtuzumab (Lemtrada 12 mg IV daily x5 days year 1, x3 days year 2) - anti-CD52, very effective but high risk autoimmune complications
+  - Ofatumumab (Kesimpta 20 mg SC monthly) - anti-CD20, self-injectable
+  - Treatment strategy
+  - Treat early with DMT (prevent disability accumulation)
+  - Higher efficacy DMTs for aggressive disease (frequent relapses, enhancing lesions, EDSS progression)
+  - Monitor MRI annually for disease activity
+  - Acute relapse treatment
+  - High-dose IV methylprednisolone 1000 mg daily x 3-5 days
+  - Shortens duration of relapse, does not change long-term outcome
+  - Oral prednisone alternative if IV not feasible
+  - Plasma exchange (PLEX) if severe relapse not responding to steroids
+  - Symptomatic management
+  - Spasticity - baclofen 5-20 mg TID, tizanidine 2-8 mg TID, physical therapy
+  - Fatigue - amantadine 100 mg BID, modafinil 100-200 mg daily
+  - Neuropathic pain - gabapentin 300-900 mg TID, pregabalin 75-150 mg BID, duloxetine 60 mg daily
+  - Bladder dysfunction - oxybutynin 5 mg BID-TID (urgency), bethanechol (retention), intermittent catheterization
+  - Depression - SSRIs (sertraline, citalopram)
+  - Cognitive rehabilitation
+  - Avoid heat exposure (Uhthoff phenomenon)
+  - Supportive care
+  - Physical therapy, occupational therapy
+  - Assistive devices (cane, walker, wheelchair as needed)
+  - Psychosocial support
+  - Vaccinations (especially before high-efficacy DMTs)
+clinical_pearls:
+  - Most common demyelinating disease, prevalence 200 per 100,000 in northern latitudes
+  - Female:male 3:1, typical onset 20-40 years
+  - Internuclear ophthalmoplegia (INO) highly specific for MS in young adults
+  - Lhermitte's sign and Uhthoff phenomenon classic MS features
+  - MRI most important diagnostic test - periventricular lesions perpendicular to ventricles (Dawson fingers)
+  - Oligoclonal bands in CSF 90-95% sensitive
+  - Early treatment with DMT critical to prevent disability accumulation
+  - Natalizumab very effective but requires JC virus monitoring (PML risk)
+  - Ocrelizumab only DMT approved for PPMS
+  - Vitamin D supplementation may reduce relapse risk (controversial)
+  - Pregnancy often protective (relapses decrease), but postpartum flare common
 differentials:
-  - Neuromyelitis optica spectrum disorder (NMOSD)
-  - Acute disseminated encephalomyelitis (ADEM)
-  - Lyme disease
-  - Sarcoidosis
-  - CNS vasculitis
-  - Vitamin B12 deficiency
+  - Neuromyelitis optica spectrum disorder (NMOSD) - AQP4 antibodies, longitudinally extensive spinal cord lesions (3+ segments), severe optic neuritis, different treatment
+  - MOG antibody disease - myelin oligodendrocyte glycoprotein antibodies, pediatric onset common
+  - Acute disseminated encephalomyelitis (ADEM) - monophasic, post-infectious, children
+  - CNS vasculitis (lupus, primary CNS vasculitis) - systemic features, positive autoantibodies
+  - Sarcoidosis - basilar meningitis, cranial neuropathies, systemic involvement
+  - Lyme disease (if endemic) - positive serology
+  - Vitamin B12 deficiency - subacute combined degeneration, macrocytic anemia
+  - Mitochondrial disorders (MELAS) - strokes, seizures, metabolic
 trace:
-  - 28-year-old woman with sudden vision loss and pain in right eye x 3 days → Exam shows decreased visual acuity, RAPD, pain with eye movement → MRI brain shows multiple periventricular white matter T2 hyperintense lesions, enhancing right optic nerve → CSF shows oligoclonal bands → Diagnose relapsing-remitting multiple sclerosis with optic neuritis → IV methylprednisolone 1000mg daily x 5 days → Vision improves to baseline → Start ocrelizumab 300mg IV, repeat in 2 weeks, then 600mg q6 months → No relapses over 2 years, stable MRI
+  - 32-year-old woman presents to ophthalmology with 3-day history of right eye vision loss
+  - Progressive blurred vision, especially central vision
+  - Pain with eye movement
+  - Colors appear washed out, less vivid (decreased color vision)
+  - No headache, no other neurologic symptoms
+  - Past medical history - episode of numbness in left leg 2 years ago, resolved spontaneously over 2 weeks (not evaluated at time)
+  - No other medical problems
+  - Family history - aunt with MS
+  - Medications - oral contraceptives
+  - Physical exam - vitals normal
+  - Right eye visual acuity 20/200 (decreased from baseline 20/20)
+  - Left eye visual acuity 20/20 (normal)
+  - Ishihara color plates - marked deficit right eye
+  - Central scotoma (blind spot) on visual field testing
+  - Afferent pupillary defect right eye (Marcus Gunn pupil)
+  - Fundoscopy - right optic disc appears normal (disc swelling occurs in 1/3)
+  - Left eye examination completely normal
+  - Extraocular movements - pain with right eye movement
+  - Diagnosis - Right optic neuritis (clinical diagnosis)
+  - MRI brain and orbits with and without gadolinium ordered
+  - MRI brain findings
+  - Multiple T2/FLAIR hyperintense lesions (10+ lesions)
+  - Periventricular white matter (perpendicular to ventricles - Dawson fingers)
+  - Corpus callosum involvement (callosal-septal interface)
+  - Juxtacortical lesions
+  - One small infratentorial lesion (pons)
+  - T1 with gadolinium - one enhancing periventricular lesion (active), several non-enhancing lesions (old)
+  - Right optic nerve enhancement and T2 hyperintensity
+  - Findings - dissemination in space (multiple CNS locations) and time (enhancing and non-enhancing lesions)
+  - MRI cervical spine - one small T2 hyperintense lesion C3 level, peripheral location, less than 1 vertebral segment
+  - Diagnosis - MULTIPLE SCLEROSIS (clinically isolated syndrome progressing to MS)
+  - McDonald criteria met - optic neuritis (clinical event), DIS (brain + spinal lesions in multiple locations), DIT (simultaneous enhancing and non-enhancing lesions)
+  - Lumbar puncture performed
+  - Opening pressure 14 cm H2O (normal)
+  - CSF - WBC 12/μL (mild lymphocytic pleocytosis, normal less than 5)
+  - Protein 48 mg/dL (mildly elevated, normal 15-45)
+  - Glucose 62 mg/dL (normal, serum glucose 95)
+  - Oligoclonal bands - POSITIVE (present in CSF, absent in serum)
+  - IgG index 0.85 (elevated, normal less than 0.7)
+  - Gram stain negative, culture negative
+  - Rule out mimics
+  - Vitamin B12 - 450 pg/mL (normal)
+  - ANA - negative
+  - NMO (aquaporin-4) antibodies - negative
+  - Lyme antibody - negative
+  - RPR - negative
+  - HIV - negative
+  - Diagnosis confirmed - MULTIPLE SCLEROSIS, relapsing-remitting type (RRMS)
+  - Treatment plan discussed
+  - Acute relapse treatment - IV methylprednisolone for optic neuritis
+  - IV methylprednisolone 1000 mg daily x 3 days
+  - Vision began improving day 3
+  - At 2 weeks: right eye vision 20/40 (significantly improved)
+  - At 6 weeks: right eye vision 20/25 (near-complete recovery)
+  - Residual mild color desaturation
+  - Disease-modifying therapy (DMT) - critical to start early
+  - Discussed options - injectable vs oral vs infusion
+  - Patient preference for oral therapy
+  - Started dimethyl fumarate (Tecfidera) 120 mg BID x 1 week, then 240 mg BID
+  - Side effects - flushing, GI upset (take with food, aspirin 30 min before helps flushing)
+  - Monitor CBC (risk lymphopenia), LFTs every 3 months
+  - MRI surveillance annually
+  - Symptomatic management
+  - Fatigue - patient reports no significant fatigue currently
+  - Counseled on Uhthoff phenomenon (avoid overheating)
+  - Physical therapy referral
+  - Support group referral
+  - Vitamin D supplementation 2000 IU daily
+  - 6-month follow-up - doing well
+  - No new symptoms, no relapses
+  - Vision stable 20/25 right eye
+  - Tolerating Tecfidera (initial flushing resolved)
+  - Labs - CBC normal, LFTs normal
+  - 1-year follow-up - MRI brain
+  - No new T2 lesions (stable lesion burden)
+  - No enhancing lesions (no active inflammation)
+  - NEDA (no evidence of disease activity) - excellent response to DMT
+  - Continue Tecfidera
+  - 3-year follow-up - remains stable
+  - No clinical relapses
+  - Annual MRI - stable, no new lesions
+  - EDSS 1.5 (minimal disability)
+  - Working full-time, active lifestyle
+  - Outcome - Excellent response to early DMT initiation, achieved NEDA, minimal disability

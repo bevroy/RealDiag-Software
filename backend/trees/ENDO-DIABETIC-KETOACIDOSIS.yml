@@ -1,45 +1,258 @@
 tree_id: ENDO-DIABETIC-KETOACIDOSIS
 name: Diabetic Ketoacidosis
-family: Endocrinology
-specialty: Endocrinology
-chief_complaint: Nausea, vomiting, and altered mental status
-description: |
-  Life-threatening complication of diabetes with hyperglycemia, ketosis, and metabolic acidosis.
-  Most common in type 1 diabetes but can occur in type 2. Mortality 1-5% with treatment. Precipitated by infection, non-adherence, new-onset diabetes.
+family: endocrine-metabolic
+specialty: Endocrinology/Emergency Medicine
+chief_complaint: Nausea, vomiting, abdominal pain, altered mental status, hyperglycemia
+description: Life-threatening complication of diabetes with hyperglycemia, ketosis, and metabolic acidosis
 icd10: E10.10
-urgency: Critical
+urgency: emergency
 workup:
-  - Diagnostic triad - hyperglycemia (glucose greater than 250 mg/dL), ketosis (serum or urine ketones), metabolic acidosis (pH less than 7.3, bicarbonate less than 18 mEq/L)
-  - Anion gap elevated (greater than 10-12) - calculate as sodium minus (chloride plus bicarbonate)
-  - Beta-hydroxybutyrate most accurate ketone measurement (greater than 3 mmol/L)
-  - Basic metabolic panel (potassium critical, initially elevated but total body depleted)
-  - Severity - mild (pH 7.25-7.30), moderate (pH 7.0-7.24), severe (pH less than 7.0)
-  - Search for precipitant - infection (urinalysis, chest X-ray, blood cultures), medication non-adherence, MI (ECG, troponin)
-  - Serum osmolality if altered mental status
+  - Clinical presentation - MEDICAL EMERGENCY
+  - Triad of DKA - hyperglycemia (usually greater than 250 mg/dL), ketosis, metabolic acidosis (pH less than 7.3)
+  - Symptoms - usually develop over hours to 1-2 days
+  - Nausea, vomiting (very common, 80%)
+  - Abdominal pain (may mimic acute abdomen)
+  - Polyuria, polydipsia (osmotic diuresis from hyperglycemia)
+  - Weakness, fatigue
+  - Altered mental status (confusion, lethargy) - correlates with osmolality
+  - Coma (less than 10%, if present suggests severe DKA or concurrent illness)
+  - Physical examination
+  - Vital signs - tachycardia, tachypnea (Kussmaul respirations - deep rapid breathing, respiratory compensation for metabolic acidosis)
+  - Hypotension (volume depletion from osmotic diuresis)
+  - Fever (may indicate precipitating infection, or absence of expected fever suggests DKA itself)
+  - Fruity breath odor (acetone)
+  - Signs of dehydration - dry mucous membranes, poor skin turgor, sunken eyes
+  - Abdominal tenderness (pseudoperitonitis from metabolic acidosis)
+  - Altered mental status
+  - Precipitating factors - identify and treat
+  - Infection (30-40%) - pneumonia, UTI, skin/soft tissue, gastroenteritis
+  - Insulin noncompliance or inadequate insulin (20-30%)
+  - New-onset type 1 diabetes (20-25%)
+  - Myocardial infarction, stroke
+  - Pancreatitis
+  - Medications (corticosteroids, atypical antipsychotics, SGLT2 inhibitors - euglycemic DKA)
+  - Pregnancy
+  - Alcohol, drug use
+  - Laboratory diagnosis - DKA criteria
+  - Hyperglycemia - glucose typically 250-600 mg/dL (occasionally higher, rarely "euglycemic DKA" with glucose less than 250)
+  - Metabolic acidosis - arterial pH less than 7.3, venous pH less than 7.3
+  - Bicarbonate less than 18 mEq/L
+  - Anion gap elevated - AG = Na - (Cl + HCO3), normal 8-12, DKA typically greater than 20
+  - Ketosis - positive serum or urine ketones
+  - Beta-hydroxybutyrate (most abundant ketone) greater than 3 mmol/L
+  - Urine ketones positive (dipstick)
+  - Serum ketones positive (nitroprusside test)
+  - Severity classification
+  - Mild DKA - pH 7.25-7.30, HCO3 15-18, alert
+  - Moderate DKA - pH 7.00-7.24, HCO3 10-15, alert to drowsy
+  - Severe DKA - pH less than 7.0, HCO3 less than 10, stupor or coma
+  - Additional labs
+  - CMP - assess electrolytes, renal function
+  - Sodium - falsely low (pseudohyponatremia from hyperglycemia, correct by adding 1.6 mEq/L for every 100 mg/dL glucose above 100)
+  - Potassium - KEY electrolyte, often falsely normal or high initially (shifts out of cells with acidosis), but total body potassium DEPLETED
+  - Profound hypokalemia will develop with insulin therapy (shifts K into cells)
+  - BUN/Cr elevated (prerenal azotemia from volume depletion)
+  - CBC - leukocytosis common (stress response, may indicate infection)
+  - Hemoglobin elevated (hemoconcentration from dehydration)
+  - Urinalysis - glucose 4+, ketones positive, may have signs of UTI
+  - Serum osmolality - calculated = 2(Na) + (glucose/18) + (BUN/2.8)
+  - Elevated (typically 300-320 mOsm/kg), correlates with mental status
+  - Arterial blood gas - metabolic acidosis with respiratory compensation
+  - Low pH, low HCO3 (metabolic acidosis), low pCO2 (respiratory compensation)
+  - Search for precipitant
+  - Chest X-ray (pneumonia)
+  - Urinalysis and culture (UTI)
+  - Blood cultures if febrile
+  - EKG (myocardial infarction, peaked T waves if hyperkalemia)
+  - Lipase (pancreatitis)
 treatment:
-  - Aggressive IV fluid resuscitation - 0.9% normal saline 1-1.5 L bolus, then 250-500 mL/hr
-  - Switch to 0.45% saline once hemodynamically stable
-  - Add dextrose to fluids when glucose less than 200 mg/dL (continue insulin while giving dextrose to clear ketones)
-  - Regular insulin infusion 0.1 units/kg/hr IV (do NOT give bolus unless severe acidosis)
-  - Potassium replacement critical - add 20-40 mEq/L to fluids if potassium 3.3-5.3 mEq/L
-  - Hold insulin if potassium less than 3.3 mEq/L (risk of fatal arrhythmia), replete aggressively
-  - Monitor glucose hourly, electrolytes every 2-4 hours, venous pH every 2-4 hours until resolved
-  - Resolution criteria - glucose less than 200 mg/dL, anion gap less than 12, bicarbonate greater than 18 mEq/L, pH greater than 7.3
-  - Transition to subcutaneous insulin when resolution criteria met AND patient able to eat
-  - Overlap IV and subcutaneous insulin by 1-2 hours to prevent recurrence
+  - MEDICAL EMERGENCY - requires ICU or stepdown monitoring
+  - Fluid resuscitation - MOST IMPORTANT initial therapy
+  - Profound volume depletion (average 5-10 L deficit)
+  - Initial fluid - 0.9% normal saline (isotonic)
+  - Bolus 1-2 L over first 1-2 hours
+  - Then 250-500 mL/hr depending on volume status
+  - When glucose less than 250 mg/dL - switch to D5 0.45% NS (prevent hypoglycemia, continue insulin to clear ketones)
+  - Goal - positive fluid balance, improve tissue perfusion, dilute glucose
+  - Insulin therapy - clear ketones, correct hyperglycemia
+  - Do NOT give insulin until potassium greater than 3.3 mEq/L (risk fatal hypokalemia)
+  - IV regular insulin - continuous infusion
+  - Bolus 0.1 units/kg IV, then infusion 0.1 units/kg/hr
+  - Alternative - infusion 0.14 units/kg/hr without bolus
+  - Goal glucose decrease 50-75 mg/dL per hour (not too fast)
+  - When glucose less than 250 mg/dL - decrease insulin to 0.05 units/kg/hr and add dextrose (D5 fluids)
+  - Continue insulin infusion until ketones clear (not just glucose normalization)
+  - Transition to subcutaneous insulin only when patient eating, acidosis resolved, anion gap closed
+  - Overlap IV and SC insulin by 1-2 hours (prevent rebound hyperglycemia)
+  - Potassium replacement - CRITICAL
+  - Total body potassium depleted despite normal/high initial serum K
+  - Insulin drives K into cells (serum K will drop dramatically)
+  - If K less than 3.3 mEq/L - hold insulin, give aggressive K repletion (risk fatal arrhythmia)
+  - If K 3.3-5.0 mEq/L - add 20-30 mEq K to each liter IV fluids
+  - If K greater than 5.0 mEq/L - do not give K initially, recheck in 2 hours
+  - Goal K 4-5 mEq/L
+  - Monitor K every 2-4 hours initially
+  - Bicarbonate therapy - controversial, generally NOT recommended
+  - May consider if pH less than 6.9 (severe acidosis, cardiac instability)
+  - NaHCO3 100 mEq in 400 mL sterile water over 2 hours
+  - Risk of hypokalemia, paradoxical CNS acidosis, cerebral edema (especially children)
+  - Acidosis corrects with insulin and fluids (treat underlying cause, not just pH)
+  - Phosphate - usually low but routine replacement not recommended (risk hypocalcemia)
+  - Consider if severe hypophosphatemia (less than 1.0 mg/dL) with cardiac/respiratory compromise
+  - Treat precipitating cause
+  - Antibiotics for infection
+  - Stop offending medications
+  - Adjust insulin regimen
+  - Monitoring - frequent reassessment
+  - Glucose - hourly initially
+  - Electrolytes (especially K) - every 2-4 hours
+  - Venous pH or anion gap - every 4 hours until resolved
+  - Mental status
+  - Urine output
+  - Resolution criteria - all must be met
+  - Glucose less than 200 mg/dL
+  - Anion gap less than 12 (normal)
+  - Venous pH greater than 7.3
+  - Bicarbonate greater than 18 mEq/L
+  - Patient able to eat
+  - Transition to subcutaneous insulin
+  - Calculate total daily dose based on weight (0.5-0.8 units/kg/day)
+  - Give 50% basal (long-acting insulin glargine or detemir), 50% bolus (rapid-acting insulin lispro/aspart with meals)
+  - Overlap IV insulin x 1-2 hours after first SC dose
+  - Complications
+  - Hypokalemia (most common preventable cause of death)
+  - Hypoglycemia (from excessive insulin)
+  - Cerebral edema (rare, mostly children, from overly rapid correction)
+  - Headache, altered mental status, bradycardia - stop fluids, give mannitol
+  - Acute kidney injury (prerenal from volume depletion)
+  - Thrombosis (hypercoagulable state)
 clinical_pearls:
-  - Classic triad includes polyuria, polydipsia, weight loss; presentation may include Kussmaul respirations (deep, rapid breathing), fruity breath odor
-  - Cerebral edema most common in children (1%), presents with headache, altered mental status, seizures (reduce IV fluid rate, give mannitol)
-  - Most common precipitants - infection (30-40%), insulin non-adherence (20-30%), new-onset diabetes (20%)
-  - Anion gap closure but persistent acidosis suggests hyperchloremic acidosis from normal saline (benign)
-  - DKA in type 2 diabetes called ketosis-prone type 2 diabetes
-  - Never stop insulin infusion until subcutaneous insulin on board and ketones cleared
+  - DKA triad - hyperglycemia, ketosis (beta-hydroxybutyrate greater than 3), metabolic acidosis (pH less than 7.3, AG greater than 12)
+  - Most important initial treatment is IV FLUIDS (corrects volume depletion, dilutes glucose, improves tissue perfusion)
+  - Do NOT give insulin if K less than 3.3 mEq/L (risk fatal arrhythmia from hypokalemia)
+  - Potassium will DROP with insulin therapy (shifts intracellular) - aggressive K repletion essential
+  - Continue insulin infusion until KETONES clear, not just glucose normalization (anion gap closed, pH greater than 7.3)
+  - When glucose less than 250 mg/dL, add dextrose (D5 fluids) and decrease insulin rate (continue clearing ketones)
+  - Kussmaul respirations (deep rapid breathing) - respiratory compensation for metabolic acidosis
+  - Abdominal pain in DKA often pseudoperitonitis (from acidosis, not surgical abdomen) - resolves with treatment
+  - SGLT2 inhibitors can cause euglycemic DKA (glucose less than 250 but ketoacidosis)
+  - Mortality 1-5% (higher if elderly, severe DKA, comorbidities)
 differentials:
-  - Hyperosmolar hyperglycemic state (HHS)
-  - Alcoholic ketoacidosis
-  - Starvation ketosis
-  - Lactic acidosis
-  - Toxic ingestion (methanol, ethylene glycol, salicylates)
-  - Uremia
+  - Hyperosmolar hyperglycemic state (HHS) - glucose greater than 600, minimal ketones, pH greater than 7.3, type 2 diabetes
+  - Alcoholic ketoacidosis - ketones positive but glucose normal/low, history of binge drinking
+  - Starvation ketosis - mild ketones, minimal acidosis, low glucose
+  - Lactic acidosis (sepsis, shock) - elevated lactate, normal glucose
+  - Toxic alcohol ingestion (methanol, ethylene glycol) - anion gap acidosis, osmolar gap, no ketones
+  - Salicylate toxicity - mixed respiratory alkalosis and metabolic acidosis
+  - Uremia - anion gap acidosis, elevated BUN/Cr
 trace:
-  - Nausea, vomiting, abdominal pain x 2 days, increasing confusion → Glucose 420 mg/dL, pH 7.15, bicarbonate 10 mEq/L, anion gap 24, beta-hydroxybutyrate 5.8 mmol/L, potassium 5.2 mEq/L → Diagnose moderate DKA → Normal saline 1L bolus, then 500 mL/hr → Regular insulin infusion 0.1 units/kg/hr → Potassium repletion 40 mEq/L added to fluids → Glucose decreases to 180 mg/dL by hour 4, add dextrose to fluids → Anion gap closes, pH 7.32 by hour 8 → Transition to subcutaneous insulin basal-bolus regimen → Identify UTI as precipitant, treat with antibiotics
+  - 22-year-old woman with type 1 diabetes presents to ED with nausea, vomiting, and abdominal pain x 1 day
+  - Nausea started yesterday morning, multiple episodes vomiting
+  - Unable to keep down food or fluids
+  - Diffuse abdominal pain, cramping
+  - Feeling very weak, thirsty
+  - Urinating frequently
+  - Checking blood sugars at home - readings 350-450 mg/dL
+  - Gave extra rapid-acting insulin but sugars remain high
+  - Type 1 diabetes diagnosed age 12 (10 years ago)
+  - Insulin pump (Omnipod) for past 3 years
+  - States she has been sick with "stomach flu" x 2 days (possible viral gastroenteritis precipitating DKA)
+  - Decreased oral intake because of nausea, also decreased insulin doses because not eating (common mistake - should continue basal insulin)
+  - Past medical history - type 1 diabetes, no other conditions
+  - Medications - insulin pump (basal rate 0.8 units/hr, bolus insulin with meals)
+  - No recent insulin pump failures that she knows of
+  - Physical exam - appears ill, dehydrated
+  - Vitals - temp 37.5C, HR 118 (tachycardia), BP 95/60 (hypotension), RR 28 (tachypnea), SpO2 98% room air
+  - General - alert but lethargic, answers questions appropriately
+  - Breathing deeply and rapidly (Kussmaul respirations)
+  - Fruity breath odor noted (acetone)
+  - HEENT - dry mucous membranes, sunken eyes (dehydration)
+  - Cardiovascular - tachycardia, regular rhythm
+  - Lungs - clear, deep rapid breathing
+  - Abdomen - diffuse tenderness, no guarding or rebound, no rigidity, active bowel sounds
+  - Neurologic - alert and oriented x 3, lethargic but conversant
+  - Labs - fingerstick glucose 485 mg/dL (severely elevated)
+  - Venous blood gas - pH 7.18 (acidotic, normal 7.35-7.45), pCO2 22 mmHg (low, respiratory compensation), HCO3 8 mEq/L (low)
+  - CMP - sodium 131 mEq/L (falsely low from hyperglycemia - corrected sodium 131 + (1.6 x (485-100)/100) = 137 mEq/L)
+  - Potassium 5.2 mEq/L (falsely normal/high - total body K depleted, will drop with insulin)
+  - Chloride 98 mEq/L
+  - Bicarbonate 8 mEq/L (low)
+  - BUN 32 mg/dL (elevated, prerenal azotemia)
+  - Creatinine 1.4 mg/dL (elevated, baseline 0.8 - acute kidney injury from volume depletion)
+  - Glucose 478 mg/dL (serum, consistent with fingerstick)
+  - Anion gap = 131 - (98 + 8) = 25 (elevated, normal 8-12)
+  - Serum beta-hydroxybutyrate 5.8 mmol/L (elevated, normal less than 0.6, confirms ketosis)
+  - Serum osmolality calculated = 2(137) + (478/18) + (32/2.8) = 300 mOsm/kg (elevated)
+  - CBC - WBC 18,500/μL (leukocytosis, stress response), hemoglobin 15.8 g/dL (hemoconcentration)
+  - Urinalysis - glucose 4+, ketones 3+, no WBCs, no nitrites (no UTI)
+  - Chest X-ray - clear (no pneumonia)
+  - EKG - sinus tachycardia, no peaked T waves (K 5.2, not severely elevated)
+  - Diagnosis - DIABETIC KETOACIDOSIS (DKA), moderate severity
+  - Hyperglycemia (glucose 478 mg/dL)
+  - Metabolic acidosis (pH 7.18, HCO3 8 mEq/L)
+  - Elevated anion gap (25)
+  - Ketosis (beta-hydroxybutyrate 5.8 mmol/L, urine ketones positive)
+  - Moderate severity (pH 7.18 between 7.0-7.24, alert)
+  - Precipitating factor - viral gastroenteritis with decreased oral intake and decreased insulin dosing (inadequate insulin)
+  - Admitted to ICU for DKA management
+  - Treatment initiated
+  - IV fluid resuscitation - MOST IMPORTANT
+  - 0.9% normal saline 2 L IV bolus over 2 hours
+  - Then 0.9% NS at 250 mL/hr
+  - Insulin therapy
+  - Potassium 5.2 mEq/L (greater than 3.3, safe to start insulin)
+  - Regular insulin 0.1 units/kg IV bolus = 0.1 x 60 kg = 6 units IV
+  - Then regular insulin infusion 0.1 units/kg/hr = 0.1 x 60 = 6 units/hr IV
+  - Potassium replacement
+  - Current K 5.2 mEq/L - do not give K initially
+  - Will recheck in 2 hours (expect to drop with insulin)
+  - Monitoring - glucose every 1 hour, electrolytes every 2 hours, mental status
+  - Hour 2 - glucose 410 mg/dL (decreased from 478, appropriate rate)
+  - K 4.3 mEq/L (dropped from 5.2 as expected)
+  - Add 20 mEq KCl to each liter IV fluids (prevent hypokalemia)
+  - Continue insulin infusion 6 units/hr
+  - Hour 4 - glucose 295 mg/dL
+  - K 3.8 mEq/L (stable with K repletion)
+  - VBG - pH 7.25, HCO3 12 mEq/L (improving)
+  - Continue current regimen
+  - Hour 6 - glucose 225 mg/dL (less than 250 mg/dL - change fluids to prevent hypoglycemia)
+  - Switch to D5 0.45% NS at 150 mL/hr (add dextrose)
+  - Decrease insulin to 3 units/hr (0.05 units/kg/hr)
+  - Continue clearing ketones (don't stop insulin just because glucose improved)
+  - Hour 10 - glucose 180 mg/dL (stable on D5 fluids)
+  - VBG - pH 7.32, HCO3 16 mEq/L (almost resolved)
+  - Anion gap 14 (near normal)
+  - K 4.1 mEq/L
+  - Beta-hydroxybutyrate 1.2 mmol/L (markedly improved from 5.8)
+  - Feeling better, nausea resolved
+  - Hour 14 - DKA resolved
+  - Glucose 165 mg/dL
+  - VBG - pH 7.35, HCO3 19 mEq/L (NORMAL)
+  - Anion gap 11 (normal)
+  - Beta-hydroxybutyrate 0.8 mmol/L (near normal)
+  - Patient hungry, wants to eat
+  - DKA RESOLVED - meet all criteria (glucose less than 200, AG normal, pH greater than 7.3, able to eat)
+  - Transition to subcutaneous insulin
+  - Calculate total daily dose - 0.6 units/kg x 60 kg = 36 units daily
+  - 50% basal (long-acting) - glargine 18 units SC once daily
+  - 50% bolus (rapid-acting) - lispro 6 units SC with each meal
+  - Give first SC dose (glargine 18 units + lispro 6 units with meal)
+  - Continue IV insulin x 2 hours, then stop (overlap prevents rebound hyperglycemia)
+  - Patient ate meal, tolerated well
+  - Insulin pump restarted (preferred for type 1 diabetes)
+  - Basal rate 0.8 units/hr, bolus insulin with meals
+  - IV insulin stopped 2 hours after SC insulin
+  - Discharge Day 2 - stable
+  - Glucose 140-180 mg/dL on insulin pump
+  - Tolerating regular diet
+  - Creatinine 0.9 mg/dL (improved to near-baseline, rehydrated)
+  - Discharge home
+  - Continue insulin pump
+  - Endocrinology follow-up in 1 week
+  - Diabetes education - NEVER stop basal insulin even if not eating (common precipitant of DKA)
+  - Sick day management - check glucose and ketones frequently, continue basal insulin, give extra bolus insulin for high glucose, call if persistent vomiting or ketones
+  - 1-week follow-up - doing well
+  - No further episodes
+  - Understanding sick day management
+  - HbA1c 7.8% (good control overall)
+  - Outcome - Successful treatment of moderate DKA with IV fluids, insulin, and potassium repletion, full recovery

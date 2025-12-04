@@ -1,60 +1,246 @@
 tree_id: PSYCH-BIPOLAR-DISORDER
 name: Bipolar Disorder
-family: Psychiatry
+family: psychiatric
 specialty: Psychiatry
-chief_complaint: Mood swings and decreased need for sleep
-description: |
-  Mood disorder characterized by episodes of mania or hypomania alternating with depression. Bipolar I requires at least one manic episode (may have depressive episodes).
-  Bipolar II requires at least one hypomanic episode and one major depressive episode (no full manic episodes). Cyclothymic disorder has chronic fluctuating mood but not meeting criteria for mania or major depression. Lifetime prevalence 1-2%.
+chief_complaint: Mood swings, depression alternating with elevated mood, impulsivity
+description: Mood disorder with manic/hypomanic episodes and depressive episodes
 icd10: F31.9
-urgency: High
+urgency: routine-to-emergency
 workup:
-  - Detailed psychiatric history - age of onset (typically late teens/early 20s), episode duration, symptom patterns, family history (strong genetic component)
-  - Screen for manic/hypomanic episodes - elated or irritable mood, increased energy, decreased need for sleep (less than 3 hours yet not tired), racing thoughts, pressured speech, grandiosity, impulsivity, risky behavior
-  - Manic episode - symptoms last at least 7 days (or hospitalization required), significant functional impairment or psychosis
-  - Hypomanic episode - symptoms last at least 4 days, noticeable change but not severe impairment, no psychosis
-  - Screen for depressive episodes - DSM-5 criteria for major depression (depressed mood, anhedonia, sleep/appetite changes, fatigue, guilt, concentration difficulty, suicidality)
-  - Rule out substance-induced - amphetamines, cocaine, corticosteroids can mimic mania
-  - Urine drug screen, alcohol use assessment
-  - Medical workup to exclude secondary causes - TSH (hyperthyroidism), CBC, CMP, HIV, syphilis if indicated
-  - Brain imaging (CT or MRI) if first episode, atypical features, or focal neurologic signs - rule out tumor, stroke, MS
-  - Mood charting - daily tracking of mood, sleep, medications helps identify patterns and triggers
-  - Assess suicide risk - bipolar disorder has high suicide rate (15-20% lifetime)
-  - Screen for comorbidities - anxiety disorders (75%), substance use disorders (50%), ADHD (20%)
+  - Clinical presentation - distinct episodes of mood elevation and depression
+  - Bipolar I disorder - at least one manic episode (may also have depressive episodes)
+  - Manic episode criteria (DSM-5) - at least 1 week (or any duration if hospitalized)
+  - Abnormally elevated, expansive, or irritable mood
+  - Increased energy or goal-directed activity
+  - Plus 3 or more (4 if mood only irritable):
+  - Inflated self-esteem or grandiosity
+  - Decreased need for sleep (feels rested after 3 hours)
+  - More talkative than usual, pressured speech
+  - Flight of ideas, racing thoughts
+  - Distractibility
+  - Increase in goal-directed activity (social, work, sexual) or psychomotor agitation
+  - Excessive involvement in pleasurable activities with high potential for painful consequences (buying sprees, sexual indiscretions, foolish investments)
+  - Marked impairment in functioning, psychotic features, or hospitalization required
+  - Bipolar II disorder - at least one hypomanic episode AND at least one major depressive episode (NO full manic episodes)
+  - Hypomanic episode - similar to mania but shorter duration (4+ days), less severe
+  - Observable mood elevation and behavior change
+  - NOT severe enough to cause marked impairment or require hospitalization
+  - No psychotic features
+  - Major depressive episode criteria
+  - At least 2 weeks of depressed mood or anhedonia (loss of interest/pleasure)
+  - Plus 5 or more of: depressed mood, anhedonia, weight/appetite change, insomnia/hypersomnia, psychomotor agitation/retardation, fatigue, worthlessness/guilt, poor concentration, suicidal ideation
+  - Significant distress or impairment
+  - Mixed features - symptoms of mania AND depression occurring simultaneously
+  - Very high suicide risk
+  - Cyclothymic disorder - chronic fluctuating mood (hypomanic and depressive symptoms not meeting full criteria) for 2+ years
+  - Rapid cycling - 4 or more mood episodes per year (worse prognosis)
+  - Age of onset - typically late teens to early 20s (earlier than unipolar depression)
+  - Strong family history (heritability 70-90%)
+  - Psychiatric assessment
+  - Detailed history - mood episodes (onset, duration, severity, triggers)
+  - Screen for substance use (can induce mania or depression)
+  - Medication history (antidepressants can trigger mania)
+  - Family history of bipolar disorder
+  - Suicide risk assessment (lifetime risk 15-20%)
+  - Functional impairment (work, relationships, legal, financial)
+  - Prior psychiatric hospitalizations
+  - Mental status exam during manic episode
+  - Appearance - colorful clothes, excessive makeup, disheveled
+  - Behavior - hyperactive, intrusive, poor boundaries
+  - Speech - rapid, loud, pressured, difficult to interrupt
+  - Mood - euphoric, irritable, labile
+  - Affect - expansive
+  - Thought process - flight of ideas, tangential, circumstantial
+  - Thought content - grandiosity, racing thoughts
+  - Perception - may have psychotic features (delusions, hallucinations)
+  - Insight - poor (lacks awareness of illness)
+  - Judgment - impaired (high-risk behaviors)
+  - Laboratory and imaging - rule out medical causes
+  - TSH, free T4 (hyperthyroidism mimics mania)
+  - Urine drug screen (stimulants cause mania-like symptoms)
+  - Comprehensive metabolic panel (electrolyte abnormalities)
+  - CBC
+  - RPR (neurosyphilis)
+  - HIV
+  - Brain MRI if first episode (rule out structural lesions, demyelinating disease)
+  - Mood charting - track mood episodes over time (useful for diagnosis and treatment monitoring)
 treatment:
-  - Mood stabilizers first-line for acute mania and maintenance
-  - Lithium 300-600mg BID to TID, target level 0.8-1.2 mEq/L acute mania, 0.6-0.8 mEq/L maintenance
-  - Check level 5 days after dose change, then q3-6 months when stable
-  - Monitor TSH, creatinine, calcium q6-12 months (thyroid and renal toxicity)
-  - Narrow therapeutic window - toxicity causes tremor, ataxia, confusion, arrhythmias
-  - Valproate (divalproex) 250-500mg BID, target level 50-125 mcg/mL
-  - Hepatotoxicity, thrombocytopenia, weight gain, teratogenic (avoid in pregnancy)
-  - Carbamazepine 200-400mg BID, target level 4-12 mcg/mL
-  - Drug interactions (CYP inducer), agranulocytosis, hyponatremia
-  - Second-generation antipsychotics effective for acute mania
-  - Quetiapine 300-800mg daily, olanzapine 10-20mg daily, aripiprazole 15-30mg daily, risperidone 2-6mg daily
-  - Metabolic side effects - weight gain, diabetes, dyslipidemia (monitor weight, glucose, lipids)
-  - Bipolar depression treatment - lamotrigine, quetiapine, lurasidone, or lithium
-  - Lamotrigine 25-200mg daily, titrate slowly to prevent Stevens-Johnson syndrome (start 25mg daily x 2 weeks, increase by 25mg q2 weeks)
-  - Avoid antidepressant monotherapy - can trigger mania or rapid cycling
-  - If antidepressant needed, combine with mood stabilizer (SSRI or bupropion preferred)
-  - Rapid cycling (4 or more episodes per year) - valproate or lamotrigine preferred over lithium
-  - Psychotherapy adjunct - cognitive behavioral therapy (CBT), family-focused therapy, interpersonal and social rhythm therapy
-  - Lifestyle - regular sleep schedule critical, avoid alcohol and drugs, stress management
-  - Maintenance treatment lifelong - prevents recurrence (risk 90% within 5 years without treatment)
+  - Acute mania treatment - stabilize mood, prevent harm
+  - Hospitalization if severe (psychosis, danger to self/others, unable to care for self)
+  - Mood stabilizers - first-line
+  - Lithium 300-600 mg BID-TID, target level 0.8-1.2 mEq/L (acute), 0.6-1.0 (maintenance)
+  - Check lithium level 5 days after dose change (steady state)
+  - Narrow therapeutic window (toxic greater than 1.5)
+  - Monitor renal function (Cr), thyroid (TSH), baseline EKG
+  - Side effects - tremor, polyuria, polydipsia, weight gain, cognitive dulling
+  - Valproate (divalproex) 500-1500 mg/day divided, target level 50-125 mcg/mL
+  - Monitor LFTs, CBC, ammonia
+  - Side effects - weight gain, tremor, hair loss, hepatotoxicity, teratogenic (avoid in women of childbearing age)
+  - Carbamazepine 200-400 mg BID, target level 4-12 mcg/mL
+  - Monitor CBC (risk aplastic anemia), LFTs, sodium (SIADH)
+  - Drug interactions (induces CYP450)
+  - Atypical antipsychotics - effective for acute mania
+  - Olanzapine 10-20 mg daily
+  - Risperidone 2-6 mg daily
+  - Quetiapine 400-800 mg daily
+  - Aripiprazole 15-30 mg daily
+  - Monitor weight, glucose, lipids (metabolic syndrome risk)
+  - Combination therapy - mood stabilizer + antipsychotic often needed for severe mania
+  - Benzodiazepines - adjunct for agitation, insomnia
+  - Lorazepam 1-2 mg q4-6h PRN
+  - Clonazepam 0.5-2 mg BID
+  - Discontinue antidepressants if present (can worsen mania)
+  - Acute bipolar depression treatment
+  - Mood stabilizers - lithium, lamotrigine, valproate
+  - Lamotrigine particularly effective for bipolar depression (less effective for mania)
+  - Start 25 mg daily x2 weeks, then 50 mg x2 weeks, target 200 mg daily
+  - Slow titration to prevent Stevens-Johnson syndrome
+  - Atypical antipsychotics with antidepressant properties
+  - Quetiapine 300 mg at bedtime
+  - Lurasidone 20-120 mg daily (with food)
+  - Cariprazine 1.5-3 mg daily
+  - Olanzapine-fluoxetine combination (Symbyax)
+  - Antidepressants - controversial, risk triggering mania or rapid cycling
+  - If used, MUST be combined with mood stabilizer
+  - SSRIs (sertraline, citalopram) or bupropion preferred
+  - Avoid TCAs (higher risk mania)
+  - ECT (electroconvulsive therapy) - highly effective for severe bipolar depression, treatment-resistant
+  - Maintenance treatment - prevent relapses
+  - Lifelong mood stabilizer essential
+  - Lithium - most evidence for preventing both manic and depressive episodes, reduces suicide risk
+  - Lamotrigine - better for preventing depressive episodes
+  - Valproate - better for preventing manic episodes
+  - Atypical antipsychotics - aripiprazole, olanzapine, quetiapine for maintenance
+  - Combination therapy common (e.g., lithium + lamotrigine)
+  - Psychotherapy
+  - Psychoeducation - recognize early warning signs of episodes
+  - Cognitive-behavioral therapy (CBT)
+  - Interpersonal and social rhythm therapy (IPSRT) - regulate sleep-wake cycles
+  - Family-focused therapy
+  - Lifestyle interventions
+  - Regular sleep-wake schedule (disrupted sleep can trigger mania)
+  - Avoid alcohol and drugs (trigger episodes, interfere with medications)
+  - Stress management
+  - Monitor for medication side effects
+  - Lithium - renal function, thyroid, lithium level
+  - Valproate - LFTs, CBC
+  - Atypical antipsychotics - weight, glucose, lipids
+  - Carbamazepine - CBC, LFTs, sodium
 clinical_pearls:
-  - Bipolar I (mania) vs Bipolar II (hypomania plus major depression) - II has more chronic depression, higher suicide risk
-  - Antidepressants alone can induce mania - always use with mood stabilizer in bipolar disorder
-  - Mixed episodes (simultaneous manic and depressive symptoms) highest suicide risk
-  - Postpartum period high risk for mood episodes - consider prophylactic treatment
-  - Cyclothymia (chronic mild mood swings x 2+ years) can progress to bipolar disorder
-  - Screen family members - first-degree relatives have 10x increased risk
+  - Lifetime prevalence 1-2%, equal in men and women, onset typically late teens to early 20s
+  - Strong genetic component (heritability 70-90%), family history common
+  - Bipolar I - at least one manic episode, Bipolar II - hypomanic episodes with major depression
+  - Often misdiagnosed as unipolar depression initially (antidepressant monotherapy can trigger mania)
+  - Lithium most effective mood stabilizer, also reduces suicide risk (only psych medication with suicide reduction evidence)
+  - Lamotrigine effective for bipolar depression, slow titration required (Stevens-Johnson syndrome risk)
+  - Rapid cycling (4+ episodes/year) associated with worse prognosis, antidepressant use, hypothyroidism
+  - Mixed episodes highest suicide risk (depressive thoughts with manic energy/impulsivity)
+  - Substance use disorders very common comorbidity (50-60%), worsens prognosis
+  - Pregnancy considerations - avoid valproate (neural tube defects), lithium controversial (Ebstein anomaly risk low), antipsychotics variable risk
 differentials:
-  - Major depressive disorder (unipolar depression)
-  - Borderline personality disorder
-  - ADHD
-  - Substance use disorder
-  - Schizoaffective disorder
-  - Hyperthyroidism
+  - Major depressive disorder (unipolar depression) - no history of mania/hypomania, distinguished by careful history
+  - Substance-induced mood disorder (stimulants, cocaine, steroids) - temporal relationship with substance use
+  - Borderline personality disorder (chronic mood instability, not distinct episodes, interpersonal hypersensitivity)
+  - ADHD (hyperactivity, distractibility throughout life, not episodic)
+  - Schizoaffective disorder (psychotic symptoms persist beyond mood episodes)
+  - Hyperthyroidism (elevated T4/TSH suppressed, no mood cycling)
+  - Neurosyphilis, HIV-related mania (positive serology, systemic symptoms)
 trace:
-  - 24-year-old woman with 3 days of elevated mood, racing thoughts, decreased sleep (2-3 hours nightly but feels energized) → Uncharacteristic spending spree ($5000 on credit cards), hypersexual behavior, pressured speech → Family reports similar episode 2 years ago followed by 3-month depression → No substance use, urine drug screen negative → TSH normal → Family history significant - mother has bipolar disorder → Diagnose bipolar I disorder, current episode manic → Voluntary hospitalization for safety → Start olanzapine 15mg nightly and lithium 300mg TID → Lithium level 0.9 mEq/L after 5 days → Manic symptoms resolve over 10 days, discharge on olanzapine 10mg and lithium 900mg daily → Refer to psychiatrist and therapist for CBT → Educate on importance of medication adherence, sleep hygiene → Mood stabilizes, continues lithium monotherapy long-term, no recurrence at 2-year follow-up
+  - 24-year-old man brought to ED by police after being found on highway median at 3 AM directing traffic
+  - Reports he is helping organize traffic flow, believes he has special abilities
+  - Extremely talkative, difficult to interrupt
+  - Has not slept in 3 days, states he does not need sleep
+  - Family reports 1-week history of unusual behavior
+  - Started cleaning house obsessively, started multiple projects
+  - Excessive spending - bought $5000 worth of electronic equipment on credit cards in 2 days
+  - Very talkative, making grandiose plans to start multiple businesses
+  - Increasingly irritable when family questions his plans
+  - Past psychiatric history - 2 episodes of severe depression (age 19 and 22)
+  - Treated with sertraline 100 mg daily for past 6 months (started after last depressive episode)
+  - No prior mania or hospitalizations
+  - Family history - father has bipolar disorder, on lithium
+  - Substance use - denies alcohol or drug use
+  - Medications - sertraline 100 mg daily
+  - Physical exam - appears disheveled, wearing bright mismatched clothes
+  - Vitals - temp 37.1C, HR 102 (tachycardia), BP 135/85, RR 20, SpO2 98%
+  - Alert, hyperactive, pacing, intrusive
+  - Mental status exam
+  - Appearance - disheveled, bright clothing, excessive energy
+  - Behavior - hyperactive, intrusive, poor boundaries, touches examiner
+  - Speech - rapid, pressured, loud, difficult to interrupt, talks over examiner
+  - Mood - "fantastic, best I've ever felt"
+  - Affect - euphoric, expansive
+  - Thought process - flight of ideas, tangential (jumps from topic to topic)
+  - Thought content - grandiosity ("I have special powers," "going to be CEO of major company"), racing thoughts
+  - Perception - denies hallucinations
+  - Insight - very poor, does not believe anything is wrong
+  - Judgment - severely impaired (dangerous behaviors, excessive spending)
+  - Suicidal ideation - denies
+  - Labs - TSH 2.1 mIU/L (normal, rules out hyperthyroidism)
+  - Urine drug screen - negative (rules out stimulant-induced)
+  - CMP - normal electrolytes, glucose, renal function
+  - CBC - normal
+  - RPR - negative
+  - Diagnosis - BIPOLAR I DISORDER, current episode manic, severe
+  - First manic episode (age 24)
+  - Prior depressive episodes age 19 and 22 (initially diagnosed as major depressive disorder, but now clear diagnosis is bipolar disorder)
+  - Antidepressant (sertraline) likely triggered/contributed to manic episode
+  - Admitted to inpatient psychiatric unit (involuntary - danger to self due to impaired judgment)
+  - Treatment plan
+  - Discontinue sertraline immediately (antidepressant can worsen mania)
+  - Start mood stabilizer - lithium carbonate
+  - Lithium 300 mg TID (total 900 mg daily)
+  - Baseline labs - Cr 0.9 mg/dL, TSH 2.1, EKG normal sinus rhythm
+  - Add atypical antipsychotic for acute mania - olanzapine
+  - Olanzapine 10 mg nightly (sedating, helps with sleep and agitation)
+  - Benzodiazepine for agitation/insomnia - lorazepam 2 mg q6h PRN
+  - Hospital course - Day 1-2: Extremely hyperactive, little sleep despite medications
+  - Required several PRN lorazepam doses
+  - Pressured speech continues, grandiose thoughts
+  - Day 3-4: Sleeping 4-5 hours per night (improvement)
+  - Less hyperactive, still talkative
+  - Lithium level drawn day 5: 0.7 mEq/L (sub-therapeutic)
+  - Increase lithium to 300 mg QAM, 600 mg QPM (total 900 mg but different dosing)
+  - Day 7: Lithium level 0.9 mEq/L (therapeutic)
+  - Significant improvement - less talkative, better insight
+  - Sleeping 6-7 hours
+  - States "I think I was out of control, I see that now"
+  - Day 10: Much improved
+  - Euthymic mood (normal, not elevated or depressed)
+  - Good insight into illness
+  - Embarrassed about behavior (directing traffic, excessive spending)
+  - No longer grandiose
+  - Discharge planning initiated
+  - Day 12: Discharged home
+  - Medications - lithium 300 mg QAM, 600 mg QPM (900 mg total daily)
+  - Olanzapine 10 mg nightly (will taper after 4-6 weeks if stable)
+  - Discontinue lorazepam (no longer needed)
+  - Discharge planning
+  - Outpatient psychiatry follow-up in 1 week
+  - Lithium level and renal function in 1 week
+  - Monitor for side effects - tremor, polyuria, nausea
+  - Psychoeducation - bipolar disorder, importance of medication adherence, avoid antidepressants without mood stabilizer, regular sleep schedule, avoid alcohol/drugs
+  - 1-week follow-up - doing well
+  - Euthymic mood, good sleep
+  - Lithium level 0.85 mEq/L (therapeutic)
+  - Cr 0.9 mg/dL (stable)
+  - Mild hand tremor (lithium side effect, tolerable)
+  - Continue lithium, start tapering olanzapine (decrease to 5 mg)
+  - 1-month follow-up - stable
+  - Mood normal, no depression or mania
+  - Tapered off olanzapine (no longer needed)
+  - Continue lithium monotherapy
+  - Gained 8 pounds (likely olanzapine, now discontinued)
+  - Working with therapist (CBT)
+  - 3-month follow-up - maintaining stability
+  - Lithium level 0.75 mEq/L, TSH 3.8 mIU/L (monitor thyroid on lithium)
+  - Adherent to medications
+  - Regular sleep schedule, no alcohol
+  - Returned to work
+  - Dealing with financial consequences of manic spending (credit card debt)
+  - 1-year follow-up - no further episodes
+  - Continues lithium maintenance
+  - Quarterly lithium levels and renal function monitoring
+  - Engaged in psychotherapy
+  - Recognizes early warning signs (decreased sleep, increased energy)
+  - Outcome - Successful treatment of first manic episode, stable on lithium maintenance, good insight and medication adherence

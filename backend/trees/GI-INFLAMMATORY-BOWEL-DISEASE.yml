@@ -1,45 +1,219 @@
 tree_id: GI-INFLAMMATORY-BOWEL-DISEASE
-name: Inflammatory Bowel Disease (Crohn's and Ulcerative Colitis)
-family: Gastroenterology
+name: Inflammatory Bowel Disease (Crohn's Disease and Ulcerative Colitis)
+family: gastrointestinal
 specialty: Gastroenterology
-chief_complaint: Chronic diarrhea with blood and abdominal pain
-description: |
-  Chronic inflammatory conditions of gastrointestinal tract. Crohn disease (CD) affects any part GI tract transmurally, skip lesions, fistulas common.
-  Ulcerative colitis (UC) limited to colon, continuous inflammation from rectum proximally, mucosal only. Peak onset 15-35 years.
+chief_complaint: Chronic diarrhea, abdominal pain, bloody stools, weight loss
+description: Chronic inflammatory conditions of GI tract - Crohn's (transmural, any GI location) vs UC (mucosal, colon only)
 icd10: K50.90
-urgency: Moderate
+urgency: routine-to-urgent
 workup:
-  - Complete blood count - anemia (chronic disease or blood loss), thrombocytosis, leukocytosis
-  - Comprehensive metabolic panel - hypoalbuminemia, electrolyte abnormalities
-  - Inflammatory markers - ESR and CRP elevated during active disease
-  - Fecal calprotectin - elevated (greater than 150 mcg/g suggests IBD), useful for monitoring disease activity
-  - Stool studies - culture, ova and parasites, C. difficile toxin (rule out infectious causes)
-  - Colonoscopy with multiple biopsies (gold standard) - CD shows skip lesions, cobblestoning, linear ulcers, perianal disease; UC shows continuous inflammation starting from rectum, friability, loss of vascular pattern
-  - Upper endoscopy if Crohn suspected (can involve upper GI)
-  - CT or MRI enterography - evaluate small bowel in Crohn disease, assess complications (abscess, fistula, stricture)
-  - Serologic markers - pANCA positive in 60% UC, ASCA positive in 60% CD (not diagnostic but supportive)
+  - Clinical presentation - chronic relapsing inflammatory bowel disease
+  - Ulcerative colitis (UC) - inflammation limited to colon, continuous from rectum
+  - Bloody diarrhea (hallmark) - blood and mucus in stool
+  - Abdominal pain (usually lower abdomen, cramping)
+  - Urgency, tenesmus (feeling of incomplete evacuation)
+  - Weight loss (less common than Crohn's)
+  - Extent of disease - proctitis (rectum only), left-sided colitis, pancolitis
+  - Extraintestinal manifestations (10-20%) - arthritis, uveitis, erythema nodosum, pyoderma gangrenosum, primary sclerosing cholangitis
+  - Crohn's disease (CD) - transmural inflammation, any part of GI tract (mouth to anus)
+  - Abdominal pain (often right lower quadrant)
+  - Non-bloody diarrhea (typically, but can have bleeding)
+  - Weight loss, malnutrition (more common than UC)
+  - Perianal disease (fistulas, abscesses) - 30-40% of patients
+  - Skip lesions (normal bowel between diseased segments)
+  - Strictures, fistulas, abscesses (complications from transmural inflammation)
+  - Most common location - terminal ileum and right colon (ileocolonic 40-50%)
+  - Extraintestinal manifestations similar to UC
+  - Laboratory assessment
+  - CBC - anemia (chronic disease, iron deficiency, B12 deficiency in Crohn's), elevated WBC, thrombocytosis
+  - ESR, CRP - elevated (markers of inflammation, useful for monitoring)
+  - Albumin - low (malnutrition, protein-losing enteropathy)
+  - Fecal calprotectin - elevated (sensitive marker of intestinal inflammation, useful for screening and monitoring)
+  - Greater than 250 mcg/g suggests active IBD
+  - Stool studies - rule out infectious causes
+  - Stool culture (Salmonella, Shigella, Campylobacter, E. coli O157)
+  - C. difficile toxin (common cause of flares or mimics IBD)
+  - Ova and parasites (Giardia, Entamoeba)
+  - Serologic markers (not diagnostic but may help differentiate)
+  - ASCA (anti-Saccharomyces cerevisiae antibodies) - positive in 50-60% Crohn's
+  - p-ANCA (perinuclear anti-neutrophil cytoplasmic antibodies) - positive in 60-70% UC
+  - Endoscopy with biopsy - GOLD STANDARD for diagnosis
+  - Colonoscopy with ileoscopy and multiple biopsies
+  - Ulcerative colitis findings
+  - Continuous inflammation starting from rectum, extends proximally
+  - Mucosal erythema, friability, loss of vascular pattern
+  - Ulceration, pseudopolyps (regenerating mucosa)
+  - Biopsy - crypt abscesses, crypt distortion, basal plasmacytosis
+  - Inflammation limited to mucosa and submucosa (not transmural)
+  - Crohn's disease findings
+  - Skip lesions (diseased segments with normal bowel in between)
+  - Cobblestone appearance (deep ulcers with edematous mucosa)
+  - Aphthous ulcers, linear ulcers, strictures
+  - Biopsy - transmural inflammation, non-caseating granulomas (30%, pathognomonic)
+  - Upper endoscopy if upper GI symptoms (gastric/duodenal Crohn's)
+  - Imaging
+  - CT enterography or MR enterography - evaluate small bowel (Crohn's)
+  - Assess for strictures, fistulas, abscesses, penetrating disease
+  - Wall thickening, mesenteric fat stranding
+  - Abdominal CT/MRI - assess complications (abscess, perforation)
+  - Small bowel follow-through or video capsule endoscopy - small bowel Crohn's
 treatment:
-  - 5-aminosalicylic acid (5-ASA) for mild-moderate UC - mesalamine 2.4-4.8g daily oral plus rectal suppositories or enemas
-  - Corticosteroids for moderate-severe flares - prednisone 40-60mg daily, taper over 8-12 weeks; budesonide 9mg daily for ileal/right colon Crohn (fewer systemic effects)
-  - Immunomodulators for steroid-dependent or maintenance - azathioprine 2-2.5 mg/kg/day, 6-mercaptopurine 1-1.5 mg/kg/day, methotrexate 15-25mg weekly (Crohn)
-  - Biologic therapy for moderate-severe disease - anti-TNF agents (infliximab 5 mg/kg IV at 0, 2, 6 weeks then q8 weeks, adalimumab 160mg SC then 80mg week 2 then 40mg q2 weeks)
-  - Alternative biologics - vedolizumab (gut-selective integrin inhibitor), ustekinumab (IL-12/23 inhibitor)
-  - Surgery for complications - colectomy curative for UC, bowel resection for Crohn strictures/fistulas (recurrence common)
-  - Nutritional support - vitamin D, calcium, B12 supplementation, iron replacement
-  - Treat complications - abscess drainage, fistula management, osteoporosis prevention
+  - Goals - induce remission, maintain remission, prevent complications, improve quality of life
+  - Ulcerative colitis treatment - based on disease severity and extent
+  - Mild to moderate UC (proctitis or left-sided colitis)
+  - 5-ASA (mesalamine) - first-line
+  - Rectal therapy - mesalamine suppositories 1000 mg daily (proctitis) or enemas 4 g nightly (left-sided)
+  - Oral mesalamine 2.4-4.8 g daily in divided doses
+  - Response 40-80% within 4-8 weeks
+  - Topical corticosteroids if 5-ASA insufficient (hydrocortisone enema)
+  - Moderate to severe UC or pancolitis
+  - Systemic corticosteroids - prednisone 40-60 mg daily x 2-4 weeks, then taper
+  - Induces remission but NOT for maintenance (side effects)
+  - Add oral 5-ASA for maintenance
+  - Steroid-dependent or steroid-refractory UC
+  - Immunomodulators - azathioprine 2-2.5 mg/kg/day or 6-mercaptopurine 1-1.5 mg/kg/day
+  - Slow onset (3-4 months), steroid-sparing
+  - Check TPMT enzyme level before starting (risk myelosuppression)
+  - Biologics - TNF-alpha inhibitors (infliximab 5 mg/kg IV at 0, 2, 6 weeks then q8 weeks, adalimumab 160 mg SC then 80 mg week 2, then 40 mg q2 weeks)
+  - Anti-integrin (vedolizumab 300 mg IV at 0, 2, 6 weeks then q8 weeks) - gut-selective
+  - JAK inhibitor (tofacitinib 10 mg BID x 8 weeks induction, then 5 mg BID maintenance)
+  - Acute severe UC (fulminant colitis) - EMERGENCY
+  - Hospitalization, NPO, IV fluids, IV corticosteroids (methylprednisolone 60 mg daily or hydrocortisone 100 mg q6-8h)
+  - Monitor for toxic megacolon (abdominal X-ray daily, colon greater than 6 cm)
+  - If no improvement 3-5 days - IV cyclosporine 2-4 mg/kg/day or infliximab
+  - Surgery (total colectomy) if medical failure or perforation/toxic megacolon
+  - Crohn's disease treatment - based on location and severity
+  - Mild to moderate Crohn's (ileocolonic)
+  - Budesonide 9 mg daily x 8 weeks (enteric-coated steroid, fewer side effects) - induction
+  - Oral 5-ASA less effective in Crohn's than UC but may be tried
+  - Antibiotics for perianal disease - metronidazole 500 mg TID and/or ciprofloxacin 500 mg BID
+  - Moderate to severe Crohn's
+  - Systemic corticosteroids - prednisone 40-60 mg daily, taper over 8-12 weeks
+  - Immunomodulators - azathioprine 2-2.5 mg/kg/day or methotrexate 25 mg SC weekly (steroid-sparing)
+  - Biologics - first-line for moderate-severe disease
+  - TNF-alpha inhibitors - infliximab, adalimumab, certolizumab
+  - Anti-integrin - vedolizumab (gut-selective)
+  - Anti-IL12/23 - ustekinumab 390-520 mg IV (weight-based) at 0, then 90 mg SC q8-12 weeks
+  - JAK inhibitor - upadacitinib 45 mg daily induction x 12 weeks, then 15-30 mg maintenance
+  - Perianal Crohn's disease
+  - MRI pelvis to assess fistulas/abscesses
+  - Antibiotics - metronidazole + ciprofloxacin
+  - TNF-alpha inhibitors (infliximab most effective)
+  - Surgical drainage if abscess, seton placement for fistulas
+  - Maintenance therapy (both UC and Crohn's)
+  - Continue biologics or immunomodulators
+  - Discontinue corticosteroids (not for maintenance)
+  - Monitor fecal calprotectin, CRP, clinical symptoms
+  - Surveillance colonoscopy q1-2 years (increased risk colorectal cancer after 8-10 years)
+  - Surgical management
+  - UC - total proctocolectomy with ileal pouch-anal anastomosis (IPAA) - CURATIVE
+  - Indications - refractory disease, dysplasia/cancer, toxic megacolon
+  - Crohn's - bowel-sparing resection (NOT curative, high recurrence)
+  - Indications - strictures causing obstruction, fistulas, abscesses not responding to medical therapy
+  - Supportive care
+  - Nutrition - high protein, vitamin supplementation (B12, vitamin D, iron, folate)
+  - Smoking cessation (worsens Crohn's, protective for UC paradoxically)
+  - Vaccinations (pneumococcal, influenza, hepatitis B before immunosuppression)
 clinical_pearls:
-  - Crohn disease involves mouth to anus (most common terminal ileum and colon), transmural inflammation causes fistulas, strictures, abscesses
-  - UC limited to colon, always involves rectum, extends proximally in continuous fashion, superficial mucosal inflammation
-  - Extraintestinal manifestations in both - arthritis, erythema nodosum, pyoderma gangrenosum, primary sclerosing cholangitis (UC), uveitis, episcleritis
-  - Toxic megacolon medical emergency - colon diameter greater than 6 cm with systemic toxicity, risk of perforation
-  - UC increases colorectal cancer risk - start surveillance colonoscopy 8 years after diagnosis
-  - Smoking worsens Crohn but protective for UC (mechanism unclear)
+  - UC prevalence 250 per 100,000, Crohn's 200 per 100,000, peak onset 15-35 years
+  - Bloody diarrhea suggests UC, non-bloody diarrhea with RLQ pain suggests Crohn's
+  - Perianal disease (fistulas, abscesses) highly specific for Crohn's (30-40%)
+  - Smoking worsens Crohn's but paradoxically protective for UC (unknown mechanism)
+  - 5-ASA highly effective for UC, less effective for Crohn's
+  - TNF-alpha inhibitors highly effective for moderate-severe disease (both UC and Crohn's)
+  - Toxic megacolon - medical emergency, colon greater than 6 cm on X-ray with systemic toxicity
+  - Primary sclerosing cholangitis strongly associated with UC (5%), not Crohn's
+  - Colorectal cancer risk increased after 8-10 years (surveillance colonoscopy q1-2 years)
+  - Crohn's NOT curable surgically (high recurrence), UC curable with total colectomy
+  - C. difficile infection common trigger for IBD flares (test all flares)
 differentials:
-  - Infectious colitis
-  - Ischemic colitis
-  - Celiac disease
-  - Irritable bowel syndrome
-  - Colorectal cancer
-  - Diverticulitis
+  - Infectious colitis (acute onset, positive stool culture, resolves with treatment)
+  - C. difficile colitis (recent antibiotics, toxin assay positive)
+  - Celiac disease (diarrhea, malabsorption, positive TTG antibodies, duodenal biopsy villous atrophy)
+  - Irritable bowel syndrome (functional, no inflammation, normal labs/endoscopy)
+  - Ischemic colitis (older patients, abdominal pain, watershed areas, acute onset)
+  - Colorectal cancer (chronic bleeding, weight loss, mass on colonoscopy)
+  - Diverticulitis (left lower quadrant pain, older patients, CT shows diverticular inflammation)
 trace:
-  - 25-year-old with bloody diarrhea 8-10 times daily, urgency, weight loss 20 lbs x 3 months → Colonoscopy shows continuous inflammation from rectum to splenic flexure, friability, loss of vascular pattern → Biopsies show chronic inflammation, crypt abscesses, no granulomas → Fecal calprotectin 850 mcg/g → Diagnose moderate ulcerative colitis → Start prednisone 40mg daily, mesalamine 4.8g daily plus 1g rectal suppositories nightly → No response after 2 weeks → Add infliximab 5 mg/kg IV at weeks 0, 2, 6 → Symptoms improve, taper prednisone → Continue infliximab q8 weeks and mesalamine maintenance → Clinical remission, fecal calprotectin normalizes
+  - 28-year-old man presents to gastroenterology clinic with 4-month history of diarrhea and abdominal pain
+  - Diarrhea 6-8 times daily, sometimes bloody with mucus
+  - Lower abdominal cramping, urgency, tenesmus
+  - 15-pound weight loss
+  - Fatigue
+  - No fever, no nausea/vomiting
+  - No recent travel, no sick contacts
+  - Past medical history - none
+  - Family history - mother has ulcerative colitis
+  - Medications - none
+  - Social - non-smoker, occasional alcohol
+  - Physical exam - appears thin
+  - Vitals - temp 37.0C, HR 88, BP 115/70, RR 14, SpO2 99% room air, weight 68 kg (down from 75 kg)
+  - Abdomen - soft, mild lower abdominal tenderness, no rebound, no masses, normal bowel sounds
+  - No perianal disease
+  - Labs - CBC: WBC 11,200/μL (mild leukocytosis), hemoglobin 10.5 g/dL (anemia), MCV 78 fL (microcytic), platelets 485,000/μL (thrombocytosis)
+  - CMP - normal electrolytes, albumin 3.2 g/dL (low)
+  - ESR 45 mm/hr (elevated), CRP 22 mg/L (elevated)
+  - Iron panel - ferritin 8 ng/mL (low), iron saturation 10% (iron deficiency anemia from chronic bleeding)
+  - Stool studies - negative for Salmonella, Shigella, Campylobacter, C. difficile toxin negative, O&P negative
+  - Fecal calprotectin 850 mcg/g (markedly elevated, normal less than 50)
+  - Serologies - p-ANCA positive, ASCA negative (suggests UC)
+  - Diagnosis - likely inflammatory bowel disease, UC vs Crohn's
+  - Colonoscopy scheduled
+  - Colonoscopy findings
+  - Continuous inflammation from rectum to mid-transverse colon (left-sided colitis)
+  - Mucosal erythema, friability (bleeds easily with touch)
+  - Loss of normal vascular pattern
+  - Multiple superficial ulcerations
+  - Pseudopolyps (islands of regenerating mucosa)
+  - NO skip lesions (continuous inflammation)
+  - Terminal ileum examined - normal (rules out ileocolonic Crohn's)
+  - Multiple biopsies obtained
+  - Biopsy results - active chronic colitis with crypt abscesses, crypt distortion, basal plasmacytosis
+  - Inflammation limited to mucosa (not transmural)
+  - NO granulomas
+  - Consistent with ulcerative colitis
+  - Diagnosis - ULCERATIVE COLITIS (left-sided colitis, moderate severity)
+  - Treatment plan
+  - Moderate disease (bloody diarrhea, anemia, elevated inflammatory markers)
+  - Induction therapy - systemic corticosteroids plus 5-ASA
+  - Prednisone 40 mg daily x 4 weeks, then taper by 5 mg weekly
+  - Mesalamine 4.8 g daily (1.2 g QID)
+  - Mesalamine enema 4 g nightly (topical therapy for left-sided disease)
+  - Iron supplementation - ferrous sulfate 325 mg daily for anemia
+  - Smoking cessation counseling (if applicable)
+  - Close follow-up
+  - 4-week follow-up - symptoms improved
+  - Diarrhea decreased to 2-3 times daily, no blood
+  - Weight increased to 70 kg
+  - Repeat labs - hemoglobin 11.8 g/dL, CRP 8 mg/L
+  - Fecal calprotectin 180 mcg/g (decreased but still elevated)
+  - Continue prednisone taper, continue mesalamine
+  - 12-week follow-up - prednisone tapered off
+  - Symptoms well-controlled, formed stools once daily
+  - Weight 72 kg
+  - Fecal calprotectin 85 mcg/g (near normal)
+  - Continue mesalamine 4.8 g daily maintenance therapy
+  - Discontinue enema (symptoms controlled)
+  - 6-month follow-up - doing well, no symptoms
+  - Fecal calprotectin 55 mcg/g (normal)
+  - Continue mesalamine maintenance
+  - Discussed need for surveillance colonoscopy in 8-10 years (colorectal cancer screening)
+  - 18-month follow-up - symptoms recurred (flare)
+  - Bloody diarrhea 5-6 times daily x 2 weeks
+  - Stool C. difficile negative
+  - Fecal calprotectin 420 mcg/g
+  - Flare despite mesalamine maintenance
+  - Treatment adjustment - escalate therapy
+  - Prednisone 40 mg daily x 4 weeks, taper
+  - Start azathioprine 150 mg daily (2 mg/kg) - steroid-sparing immunomodulator
+  - Check TPMT level - normal
+  - Continue mesalamine
+  - Responded to prednisone, tapered off over 8 weeks
+  - Azathioprine continued - symptoms controlled
+  - Monitor CBC q3 months (risk myelosuppression from azathioprine)
+  - 2-year follow-up - stable on azathioprine + mesalamine maintenance
+  - No flares, normal bowel movements
+  - Fecal calprotectin 40 mcg/g (normal)
+  - Hemoglobin 13.5 g/dL (anemia resolved)
+  - Plan for surveillance colonoscopy at 8-10 years
+  - Outcome - Successful management of UC with 5-ASA and azathioprine, achieving clinical and biochemical remission
