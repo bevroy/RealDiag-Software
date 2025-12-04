@@ -1,48 +1,198 @@
 tree_id: GI-HEPATITIS-C
 name: Hepatitis C Virus Infection
-family: Gastroenterology
-specialty: Gastroenterology
-chief_complaint: Elevated liver enzymes or chronic liver disease
-description: |
-  Chronic viral infection transmitted parenterally. Leading indication for liver transplantation in US until direct-acting antivirals (DAAs).
-  Chronic infection develops in 75-85% of exposed individuals. Genotypes 1-6, genotype 1 most common in US. Cure rates greater than 95% with DAAs.
+family: gastrointestinal
+specialty: Gastroenterology/Infectious Disease
+chief_complaint: Often asymptomatic, fatigue, detected on screening
+description: Chronic viral hepatitis from HCV causing progressive liver disease and cirrhosis
 icd10: B18.2
-urgency: Moderate
+urgency: routine
 workup:
-  - Screen high-risk populations - baby boomers (born 1945-1965) one-time screening, injection drug use, hemodialysis, HIV infection, incarceration, unregulated tattoos, blood transfusion before 1992, needlestick injury
-  - HCV antibody screening test - if positive, confirm with HCV RNA (quantitative PCR) to distinguish active infection from resolved infection
-  - HCV antibody positive, RNA negative - cleared infection (spontaneous or treated), no further action
-  - HCV antibody positive, RNA positive - chronic HCV, needs treatment
-  - HCV genotype and viral load for treatment planning
-  - Assess liver disease severity - ALT, AST, bilirubin, albumin, INR, platelet count
-  - Noninvasive fibrosis assessment - FIB-4 score, APRI score, transient elastography (FibroScan)
-  - Liver biopsy if diagnosis uncertain or significant comorbid liver disease
-  - Hepatitis A and B serology - vaccinate if not immune
-  - Screen for hepatocellular carcinoma if cirrhosis - ultrasound and AFP every 6 months
+  - Clinical presentation - most asymptomatic until cirrhosis develops
+  - Acute HCV infection (rare to diagnose, usually asymptomatic)
+  - Acute hepatitis symptoms in only 20-30% (fatigue, nausea, jaundice)
+  - Most cases never diagnosed acutely
+  - 75-85% progress to chronic infection
+  - 15-25% spontaneously clear virus
+  - Chronic HCV infection - asymptomatic for years
+  - Fatigue most common symptom
+  - Right upper quadrant discomfort
+  - Discovered incidentally on routine labs (elevated ALT)
+  - Or diagnosed during screening
+  - Progressive liver disease over 20-30 years
+  - 20-30% develop cirrhosis
+  - Once cirrhotic - 3-5% per year develop hepatocellular carcinoma
+  - Extrahepatic manifestations
+  - Mixed cryoglobulinemia (vasculitis, purpura, arthralgias, glomerulonephritis)
+  - Porphyria cutanea tarda (blistering skin lesions)
+  - Lichen planus
+  - Diabetes (HCV increases insulin resistance)
+  - B-cell lymphoma
+  - Risk factors for HCV transmission
+  - Injection drug use (IDU) - most common in US
+  - Blood transfusion before 1992 (screening started 1992)
+  - Needlestick exposure (healthcare workers)
+  - Hemodialysis
+  - Intranasal cocaine use
+  - Tattoos/piercings with unsterile equipment
+  - Mother-to-child transmission (vertical, 5%)
+  - Sexual transmission (low risk, 0.1% per year in monogamous couples)
+  - Screening recommendations
+  - One-time screening for all adults 18+ (CDC 2020, USPSTF 2020)
+  - Baby boomers (born 1945-1965) - high prevalence cohort
+  - All pregnant women
+  - People with HIV
+  - Current or former injection drug users
+  - Recipients of blood products before 1992
+  - Hemodialysis patients
+  - Healthcare workers after needlestick
+  - Diagnostic testing
+  - HCV antibody (anti-HCV) - initial screening test
+  - Positive indicates exposure to HCV (current or past infection)
+  - Does NOT distinguish active from cleared infection
+  - Remains positive for life even if virus cleared
+  - HCV RNA (viral load, PCR) - confirmatory test
+  - Detects active viral replication
+  - If positive - chronic HCV infection confirmed
+  - If negative - past infection that cleared (or false positive antibody)
+  - Quantitative HCV RNA (viral load) - baseline before treatment
+  - HCV genotype - determines treatment regimen
+  - Genotype 1 most common in US (75%)
+  - Genotypes 2, 3, 4, 5, 6 less common
+  - Liver function tests - assess liver injury
+  - ALT, AST - typically mild-moderate elevation (50-200 U/L)
+  - Can be normal despite active infection
+  - Bilirubin, albumin, INR - assess synthetic function (abnormal if cirrhosis)
+  - Liver fibrosis assessment - stage disease
+  - FibroScan (transient elastography) - non-invasive, measures liver stiffness
+  - Less than 7 kPa - no fibrosis (F0-F1)
+  - 7-10 kPa - moderate fibrosis (F2)
+  - 10-14 kPa - advanced fibrosis (F3)
+  - Greater than 14 kPa - cirrhosis (F4)
+  - FIB-4 score or APRI score - non-invasive fibrosis scores
+  - Liver biopsy - gold standard but rarely needed now (non-invasive tests sufficient)
+  - Hepatocellular carcinoma screening if cirrhosis
+  - Ultrasound abdomen every 6 months
+  - AFP (alpha-fetoprotein) controversial, no longer recommended by guidelines
+  - Coinfection screening
+  - HIV (HCV/HIV coinfection common in IDU)
+  - Hepatitis A and B serology (vaccinate if not immune)
 treatment:
-  - Direct-acting antivirals (DAAs) cure HCV in greater than 95% - pan-genotypic regimens preferred (treat all genotypes)
-  - Sofosbuvir/velpatasvir 400/100mg once daily x 12 weeks (all genotypes, treatment-naive and experienced)
-  - Glecaprevir/pibrentasvir 300/120mg (3 tablets) once daily x 8 weeks (genotypes 1-6, no cirrhosis) or 12 weeks (compensated cirrhosis)
-  - Ledipasvir/sofosbuvir 90/400mg once daily x 12 weeks (genotypes 1, 4, 5, 6)
-  - Treatment-experienced or decompensated cirrhosis may need longer duration (16-24 weeks) or add ribavirin
-  - Check for drug interactions - contraindicated with certain anticonvulsants, rifampin, St. John's wort, proton pump inhibitors (some regimens)
-  - Monitor HCV RNA at 12 weeks post-treatment (sustained virologic response, SVR12) - undetectable RNA indicates cure
-  - Counsel on preventing transmission - do not share needles, razors, toothbrushes, practice safe sex (low risk but possible)
-  - Avoid alcohol and hepatotoxic medications
-  - Continue HCC surveillance if cirrhosis even after cure (cancer risk persists but reduced)
+  - Direct-acting antivirals (DAAs) - curative, greater than 95% SVR
+  - Revolutionized HCV treatment (replaced interferon-based regimens)
+  - Short duration (8-12 weeks for most)
+  - Oral medications, minimal side effects
+  - All HCV patients should be treated (treat regardless of fibrosis stage)
+  - Treatment regimens - pangenotypic (all genotypes) preferred
+  - Sofosbuvir/velpatasvir (Epclusa) 400/100 mg daily x 12 weeks
+  - Pangenotypic, once-daily, well-tolerated
+  - First-line for most patients
+  - Glecaprevir/pibrentasvir (Mavyrik) 100/40 mg (3 tabs daily) x 8 weeks
+  - Pangenotypic, shorter duration
+  - Contraindicated if decompensated cirrhosis (Child-Pugh B or C)
+  - Genotype-specific regimens (if pangenotypic not available)
+  - Ledipasvir/sofosbuvir (Harvoni) - genotype 1, 4, 5, 6
+  - Elbasvir/grazoprevir (Zepatier) - genotype 1, 4
+  - Special populations
+  - Cirrhosis (compensated) - extend treatment to 12 weeks, add ribavirin for some
+  - Cirrhosis (decompensated) - sofosbuvir/velpatasvir + ribavirin
+  - Treatment-experienced - extend duration, add ribavirin
+  - CKD/ESRD - glecaprevir/pibrentasvir (renally safe)
+  - HIV coinfection - check drug interactions with antiretrovirals
+  - Sustained virologic response (SVR) - cure
+  - HCV RNA undetectable 12 weeks after completing treatment (SVR12)
+  - SVR12 equivalent to cure (relapse less than 1%)
+  - Greater than 95% achieve SVR with DAAs
+  - SVR reduces risk of cirrhosis, HCC, liver-related mortality
+  - Does NOT eliminate HCC risk if cirrhosis already present (continue HCC screening)
+  - Monitoring during treatment
+  - Baseline - HCV RNA, genotype, CBC, CMP, INR
+  - On-treatment - adherence assessment, side effects (minimal with DAAs)
+  - Post-treatment - HCV RNA at 12 weeks (SVR12)
+  - If SVR achieved - repeat ALT at 6-12 months (should normalize)
+  - Prevention and harm reduction
+  - Screen high-risk populations
+  - Harm reduction for IDU - needle exchange, supervised injection sites
+  - Hepatitis A and B vaccination
+  - Avoid alcohol (accelerates liver disease)
+  - Screen sexual partners (low transmission risk but recommend)
+  - No longer infectious after achieving SVR (can donate blood after 6 months)
 clinical_pearls:
-  - Acute HCV often asymptomatic, 20-30% develop jaundice, most don't clear virus and progress to chronic infection
-  - Chronic HCV typically asymptomatic until advanced liver disease (cirrhosis develops in 20-30% over 20-30 years)
-  - Extrahepatic manifestations - mixed cryoglobulinemia, membranoproliferative glomerulonephritis, porphyria cutanea tarda, lymphoma
-  - SVR (cure) reduces but does not eliminate HCC risk if cirrhosis present
-  - DAAs well-tolerated, few side effects compared to old interferon-based regimens
-  - Reinfection possible - counsel on harm reduction for injection drug users
+  - Most common bloodborne infection in US, prevalence 1% (3-4 million)
+  - Most asymptomatic for decades until cirrhosis develops
+  - One-time screening recommended for all adults 18+
+  - HCV antibody positive requires confirmatory HCV RNA
+  - Direct-acting antivirals curative, greater than 95% SVR
+  - Treatment duration 8-12 weeks, minimal side effects
+  - All HCV patients should be treated regardless of fibrosis stage
+  - SVR (cure) reduces liver-related mortality but does not eliminate HCC risk if cirrhosis present
+  - Continue HCC surveillance (ultrasound q6 months) if cirrhosis even after cure
+  - Baby boomers (born 1945-1965) high prevalence, screen all
 differentials:
-  - Hepatitis B
-  - Alcoholic liver disease
-  - Non-alcoholic fatty liver disease
-  - Autoimmune hepatitis
-  - Hemochromatosis
-  - Primary biliary cholangitis
+  - Hepatitis B (HBsAg positive)
+  - Alcoholic hepatitis (AST greater than ALT, history of heavy alcohol)
+  - Non-alcoholic fatty liver disease (NAFLD) - metabolic syndrome, obesity
+  - Autoimmune hepatitis (ANA, ASMA positive, elevated IgG)
+  - Hemochromatosis (elevated ferritin, transferrin saturation)
+  - Wilson disease (low ceruloplasmin, young age)
+  - Drug-induced liver injury (medication history)
 trace:
-  - 62-year-old baby boomer presents for routine screening → HCV antibody positive → HCV RNA 2.5 million IU/mL (confirms chronic infection) → Genotype 1a → ALT 78 U/L, AST 65 U/L, platelets 185K, albumin 3.8, INR 1.1 → FibroScan shows F2 fibrosis (moderate), no cirrhosis → Hepatitis A and B immune → Start sofosbuvir/velpatasvir 400/100mg once daily x 12 weeks → Well-tolerated, no side effects → HCV RNA undetectable at week 4 → Complete 12-week treatment → HCV RNA undetectable at week 12 post-treatment (SVR12) - cured → Counsel on preventing reinfection, annual monitoring of liver enzymes
+  - 58-year-old man with no symptoms presents for routine physical exam
+  - No complaints, feels well
+  - Routine labs show ALT 85 U/L (elevated, normal less than 40)
+  - AST 72 U/L (elevated)
+  - Otherwise normal labs
+  - Past medical history - none
+  - No liver disease known
+  - Denies alcohol use
+  - Social history - history of injection drug use in 20s-30s (stopped 25 years ago)
+  - Physical exam - appears well
+  - Vitals normal, BMI 26
+  - No jaundice, no stigmata of chronic liver disease
+  - Abdomen soft, no hepatomegaly, no splenomegaly, no ascites
+  - Follow-up testing for elevated transaminases
+  - Hepatitis panel ordered
+  - HCV antibody - POSITIVE
+  - Confirms exposure to hepatitis C (current or past)
+  - Confirmatory HCV RNA - POSITIVE, 2.5 million IU/mL
+  - Active chronic hepatitis C infection confirmed
+  - HCV genotype - genotype 1a (most common in US)
+  - Hepatitis B serology - HBsAg negative, HBcAb negative, HBsAb negative (not immune, needs vaccination)
+  - Hepatitis A serology - HAV IgG negative (not immune, needs vaccination)
+  - HIV - negative
+  - Liver fibrosis assessment
+  - FIB-4 score calculated - 1.8 (suggests F2 moderate fibrosis)
+  - FibroScan (transient elastography) - 9.2 kPa (F2 moderate fibrosis, not cirrhosis)
+  - Ultrasound abdomen - normal liver echogenicity, no masses, spleen normal size
+  - Diagnosis - Chronic hepatitis C, genotype 1a, moderate fibrosis (F2)
+  - Likely acquired from injection drug use 25-30 years ago
+  - Asymptomatic, discovered on screening labs
+  - Moderate fibrosis - at risk for progression to cirrhosis if untreated
+  - Treatment plan discussed
+  - Direct-acting antivirals - curative, greater than 95% success
+  - Pangenotypic regimen recommended - sofosbuvir/velpatasvir (Epclusa)
+  - 400/100 mg once daily x 12 weeks
+  - No cirrhosis, treatment-naive - standard 12-week course
+  - Minimal side effects expected
+  - Vaccinate for hepatitis A and B (not immune)
+  - Started sofosbuvir/velpatasvir 400/100 mg daily x 12 weeks
+  - Hepatitis A vaccine (2-dose series) and hepatitis B vaccine (3-dose series) initiated
+  - Week 4 of treatment - tolerating well
+  - No side effects, adherent to medications
+  - Completed 12 weeks of treatment successfully
+  - No issues, excellent adherence
+  - 4 weeks post-treatment - HCV RNA checked - undetectable (less than 15 IU/mL)
+  - Virologic response at week 4 post-treatment
+  - 12 weeks post-treatment (SVR12) - HCV RNA undetectable
+  - SUSTAINED VIROLOGIC RESPONSE ACHIEVED - CURED
+  - SVR12 equivalent to cure, relapse rate less than 1%
+  - ALT normalized to 28 U/L, AST 32 U/L
+  - 6-month post-SVR - HCV RNA remains undetectable
+  - Transaminases normal
+  - Completed hepatitis A and B vaccination series (now immune)
+  - Long-term follow-up plan
+  - No further HCV treatment needed (cured)
+  - Moderate fibrosis (F2) pre-treatment - low risk HCC but follow ALT annually
+  - If cirrhosis had been present - would need HCC surveillance (ultrasound q6 months) indefinitely
+  - Avoid alcohol, maintain healthy weight
+  - Educate - no longer infectious, can donate blood after 6 months
+  - Outcome - Cured of chronic hepatitis C with 12 weeks of direct-acting antivirals, prevented progression to cirrhosis

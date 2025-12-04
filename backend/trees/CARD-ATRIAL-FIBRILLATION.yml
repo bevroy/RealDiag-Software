@@ -1,55 +1,91 @@
 tree_id: CARD-ATRIAL-FIBRILLATION
 name: Atrial Fibrillation
-family: Cardiology
+family: cardiovascular
 specialty: Cardiology
-chief_complaint: Palpitations and irregular heartbeat
-description: |
-  Most common sustained cardiac arrhythmia, irregular atrial activation causing irregularly irregular ventricular response. Affects 2-4% of population, increases with age (9% over 65).
-  Classified as paroxysmal (self-terminating within 7 days), persistent (lasting greater than 7 days), long-standing persistent (greater than 12 months), or permanent. Major complications stroke and heart failure.
+chief_complaint: Palpitations, irregular heartbeat, shortness of breath, fatigue
+description: Most common sustained cardiac arrhythmia with irregular atrial activation and ineffective atrial contraction
 icd10: I48.91
-urgency: High
+urgency: routine-to-emergency
 workup:
-  - ECG diagnostic - irregularly irregular rhythm, absent P waves, fibrillatory waves, variable RR intervals
-  - Distinguish from atrial flutter (saw-tooth flutter waves), multifocal atrial tachycardia (distinct P waves)
-  - Assess for reversible causes - hyperthyroidism (TSH), electrolyte abnormalities (K, Mg), alcohol (holiday heart), pulmonary disease, cardiac surgery
-  - Echocardiogram - assess left atrial size, LV function, valvular disease, structural abnormalities
-  - Thyroid function tests (TSH, free T4) - hyperthyroidism causes or exacerbates AF
-  - Chest X-ray if heart failure or pulmonary disease suspected
-  - Holter monitor or event recorder if paroxysmal AF suspected but not captured on ECG
-  - Transesophageal echo (TEE) before cardioversion if AF duration greater than 48 hours and inadequate anticoagulation - assess for left atrial appendage thrombus
-  - CHA2DS2-VASc score for stroke risk - CHF (1), Hypertension (1), Age 75+ (2), Diabetes (1), Stroke/TIA (2), Vascular disease (1), Age 65-74 (1), Sex female (1)
-  - HAS-BLED score for bleeding risk - Hypertension, Abnormal renal/liver, Stroke, Bleeding, Labile INR, Elderly, Drugs/alcohol (each 1 point)
+  - Clinical presentation - irregular rhythm, often asymptomatic
+  - Symptoms (50% asymptomatic)
+  - Palpitations (awareness of irregular heartbeat)
+  - Dyspnea, reduced exercise tolerance
+  - Fatigue, weakness
+  - Chest discomfort, lightheadedness
+  - Syncope (if rapid ventricular response)
+  - Stroke or TIA (thromboembolic complication)
+  - Heart failure symptoms (if LV dysfunction develops)
+  - Types of atrial fibrillation
+  - Paroxysmal AF - self-terminating, typically less than 7 days
+  - Persistent AF - sustained greater than 7 days, requires cardioversion
+  - Long-standing persistent AF - continuous AF greater than 12 months
+  - Permanent AF - accepted, no further attempts at rhythm control
+  - Physical examination findings
+  - Irregularly irregular pulse (hallmark)
+  - Tachycardia common (HR 110-140 if untreated)
+  - Pulse deficit - apical rate greater than radial rate
+  - Variable S1 intensity
+  - Listen for murmurs (valvular disease as cause)
+  - Signs of heart failure if LV dysfunction
+  - Risk factors and causes
+  - Age (most important), hypertension, heart failure
+  - Valvular disease, CAD, prior MI
+  - Hyperthyroidism, sleep apnea, obesity, diabetes
+  - Medications (diuretics, stimulants)
+  - Alcohol, cardiac surgery, pulmonary disease
+  - Diagnostic testing with EKG showing irregularly irregular rhythm, no distinct P waves
+  - Fibrillatory waves, narrow QRS
+  - Holter monitor for paroxysmal AF
+  - Echocardiography for structural assessment
+  - TSH check (hyperthyroidism causes AF)
+  - CHA2DS2-VASc score for stroke risk stratification
+  - Score 2+ (men) or 3+ (women) requires anticoagulation
 treatment:
-  - Rate control vs rhythm control - both strategies similar outcomes, individualized approach
-  - Rate control preferred for elderly, minimal symptoms, persistent AF
-  - Rhythm control for young, highly symptomatic, first episode, heart failure from AF
-  - Rate control medications - beta-blockers (metoprolol 25-200mg BID, carvedilol 3.125-25mg BID) or non-dihydropyridine CCBs (diltiazem 120-360mg daily, verapamil)
-  - Goal resting heart rate less than 110 bpm (lenient control) or less than 80 bpm (strict control)
-  - Digoxin 0.125-0.25mg daily if beta-blockers/CCBs inadequate or contraindicated (less effective, narrow therapeutic window)
-  - Rhythm control - cardioversion (electrical or pharmacologic) followed by antiarrhythmic drugs
-  - Electrical cardioversion under sedation - synchronized shock 100-200J biphasic
-  - Pharmacologic cardioversion - flecainide 300mg PO (pill-in-pocket if no structural heart disease), ibutilide 1mg IV over 10 min
-  - Antiarrhythmic drugs to maintain sinus rhythm - flecainide 50-150mg BID (no structural heart disease), sotalol 80-160mg BID, amiodarone 200mg daily (most effective but toxicity), dronedarone 400mg BID
-  - Catheter ablation (pulmonary vein isolation) for symptomatic AF refractory to medications or first-line in selected patients - 70-80% success for paroxysmal AF, 50-60% for persistent
-  - Anticoagulation for stroke prevention based on CHA2DS2-VASc score
-  - Score 0 (men) or 1 (women) - no anticoagulation
-  - Score 1 (men) - consider anticoagulation
-  - Score 2 or greater - anticoagulation recommended
-  - DOACs (direct oral anticoagulants) preferred over warfarin - apixaban 5mg BID, rivaroxaban 20mg daily, edoxaban 60mg daily, dabigatran 150mg BID
-  - Warfarin (INR 2-3) if mechanical valve, severe mitral stenosis, or DOAC contraindicated
-  - Left atrial appendage occlusion (Watchman device) if high stroke risk but contraindication to anticoagulation
+  - Acute management - assess stability
+  - Unstable requires urgent cardioversion
+  - Stable - rate control or rhythm control strategy
+  - Rate control with beta-blockers (first-line), calcium channel blockers, digoxin
+  - Target HR less than 110 bpm lenient or less than 80 strict
+  - Rhythm control with cardioversion (electrical or pharmacologic)
+  - Anticoagulation before cardioversion if AF greater than 48 hours
+  - Long-term rhythm control with antiarrhythmic drugs
+  - Catheter ablation (pulmonary vein isolation) for paroxysmal AF
+  - Anticoagulation (stroke prevention) - most important
+  - DOACs first-line (apixaban, rivaroxaban, edoxaban, dabigatran)
+  - Warfarin if valvular AF or mechanical valve
+  - Continue indefinitely if CHA2DS2-VASc indicates high risk
+  - Left atrial appendage closure if anticoagulation contraindicated
+  - Lifestyle modifications - avoid alcohol, weight loss, treat sleep apnea
 clinical_pearls:
-  - RVR (rapid ventricular response) with heart rate greater than 100 requires urgent rate control
-  - Cardioversion contraindicated if AF duration greater than 48 hours without 3 weeks anticoagulation or TEE to exclude thrombus
-  - Anticoagulation must continue 4 weeks after cardioversion (atrial stunning)
-  - Lone AF (no structural heart disease, age less than 60) has low stroke risk
-  - AF with WPW (Wolff-Parkinson-White) - avoid AV nodal blockers (can cause VF), use procainamide
-  - Obesity, sleep apnea, alcohol key modifiable risk factors - aggressive management improves outcomes
+  - Most common arrhythmia, prevalence increases with age
+  - Irregularly irregular rhythm hallmark
+  - CHA2DS2-VASc score guides anticoagulation
+  - DOACs preferred over warfarin for most patients
+  - Rate control as effective as rhythm control for many
+  - Catheter ablation curative for paroxysmal AF (70-80% success)
+  - AF increases stroke risk 5-fold
+  - Continue anticoagulation even if sinus rhythm restored
 differentials:
-  - Atrial flutter
-  - Multifocal atrial tachycardia
-  - Sinus tachycardia with frequent PACs
-  - Artifact on ECG
-  - Ventricular tachycardia (if wide complex)
+  - Atrial flutter (regular sawtooth pattern)
+  - Multifocal atrial tachycardia (MAT)
+  - Frequent PACs
+  - Sinus arrhythmia
 trace:
-  - 68-year-old man presents with palpitations, dyspnea x 2 days → Heart rate 145 bpm, irregularly irregular rhythm → ECG shows atrial fibrillation with RVR → No prior AF, symptom onset 48 hours ago → CHA2DS2-VASc score 3 (age 1, hypertension 1, diabetes 1) - high stroke risk → Admit for rate control and anticoagulation → Metoprolol 25mg PO, titrate to 50mg BID, heart rate decreases to 85 bpm → Start apixaban 5mg BID → TEE shows no left atrial thrombus → Electrical cardioversion 150J successfully restores sinus rhythm → Continue apixaban indefinitely, metoprolol for rate control → Remains in sinus rhythm at 3-month follow-up
+  - 72-year-old man with hypertension, diabetes presents with palpitations and dyspnea x 6 hours
+  - Sudden onset, heart racing and irregular
+  - No chest pain, no syncope, first episode
+  - Exam shows irregular pulse HR 142, BP 135/85
+  - EKG shows irregularly irregular rhythm, no P waves, fibrillatory waves
+  - Diagnosis - new-onset AF with RVR, hemodynamically stable
+  - TSH normal, echo shows normal EF, mildly dilated LA
+  - CHA2DS2-VASc score 3 (HTN, age, diabetes) - high stroke risk
+  - Treated with IV diltiazem, rate controlled to 110 bpm
+  - Started apixaban 5 mg BID for anticoagulation
+  - Cardioversion performed (AF less than 24 hours) - successful
+  - Converted to sinus rhythm
+  - Discharged on apixaban indefinitely, metoprolol for rate control
+  - Event monitor x 30 days - detected paroxysmal AF recurrence at 1 year
+  - Referred for catheter ablation, underwent pulmonary vein isolation
+  - No AF recurrence 1 year post-ablation, continues anticoagulation
+  - Outcome - successful rhythm control with ablation, on anticoagulation for stroke prevention
