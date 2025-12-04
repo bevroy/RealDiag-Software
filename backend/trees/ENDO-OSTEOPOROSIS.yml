@@ -1,63 +1,49 @@
 tree_id: ENDO-OSTEOPOROSIS
 name: Osteoporosis
-family: Endocrine-Metabolic
+family: Endocrinology
 specialty: Endocrinology
-chief_complaint: Low bone density
-description: Systemic skeletal disease characterized by low bone mass and microarchitectural deterioration increasing fracture risk
-
+chief_complaint: Low bone density or fragility fracture
+description: Systemic skeletal disease characterized by low bone mass and microarchitectural deterioration leading to increased fracture risk. Screening and treatment prevent fragility fractures which cause significant morbidity and mortality.
 icd10: M81.0
-
-urgency: routine
+urgency: non-urgent
 
 workup:
-  - Definition: T-score -2.5 or less on DXA (dual-energy X-ray absorptiometry), or osteopenia (T-score -1.0 to -2.5) with fragility fracture
-  - Risk factors: age (postmenopausal women, men 50 or more), low body weight (BMI less than 20), prior fragility fracture, family history hip fracture, smoking, excessive alcohol (3 or more drinks daily), glucocorticoid use (prednisone 5 mg or more daily x 3 months or more), secondary causes (hyperparathyroidism, hyperthyroidism, hypogonadism, malabsorption, rheumatoid arthritis)
-  - DXA scan screening: women 65 or more, men 70 or more, postmenopausal women less than 65 with risk factors, adults with fragility fracture, chronic glucocorticoid use
-  - DXA measures BMD at lumbar spine, total hip, femoral neck: T-score (compared to young healthy adults) - normal (-1.0 or more), osteopenia (-1.0 to -2.5), osteoporosis (-2.5 or less), severe osteoporosis (-2.5 or less with fracture)
-  - FRAX score: 10-year probability of major osteoporotic fracture and hip fracture (uses age, BMI, femoral neck BMD, risk factors), treat if high risk (major fracture 20 percent or more, hip fracture 3 percent or more)
-  - Laboratory: calcium, phosphate, alkaline phosphatase, 25-OH vitamin D, TSH, creatinine, CBC, testosterone (men), consider PTH if hypercalcemia, serum protein electrophoresis if elevated calcium/alkaline phosphatase
-  - Exclude secondary causes: measure 24-hour urine calcium (hypercalciuria), celiac serology if malabsorption symptoms, bone turnover markers (CTX, P1NP) optional
+  - DEXA scan (DXA): gold standard for bone mineral density at hip and lumbar spine
+  - T-score interpretation: normal >-1.0, osteopenia -1.0 to -2.5, osteoporosis <-2.5
+  - Screening: all women ≥65, men ≥70, or younger with risk factors (fracture history, glucocorticoid use, smoking, low BMI <20)
+  - FRAX score: 10-year probability of major osteoporotic fracture (guides treatment threshold)
+  - Labs to exclude secondary causes: CBC, CMP, calcium, phosphate, 25-OH vitamin D, TSH, testosterone (men)
+  - Consider celiac serology, serum protein electrophoresis if clinical suspicion for secondary causes
+  - Vertebral fracture assessment (VFA): lateral spine imaging on DEXA to detect asymptomatic compression fractures
 
 treatment:
-  - Lifestyle modifications (all patients): weight-bearing exercise, balance training (reduce fall risk), adequate nutrition, fall prevention (assess home hazards, avoid sedatives, treat vision problems)
-  - Calcium 1200 mg daily total (diet plus supplement if needed), vitamin D 800-1000 IU daily (target 25-OH vitamin D greater than 30 ng/mL)
-  - Pharmacologic therapy indications: osteoporosis on DXA (T-score -2.5 or less), osteopenia with prior fragility fracture, osteopenia with high FRAX score (major fracture 20 percent or more, hip fracture 3 percent or more)
-  - Bisphosphonates first-line: alendronate 70 mg weekly or risedronate 35 mg weekly or ibandronate 150 mg monthly (oral), zoledronic acid 5 mg IV annually - reduce vertebral and hip fractures 40-50 percent, continue 3-5 years then reassess, rare adverse effects osteonecrosis of jaw (dental exam before starting), atypical femoral fractures (if thigh pain obtain X-ray)
-  - Denosumab alternative: RANKL inhibitor 60 mg subcutaneous every 6 months, more potent than bisphosphonates, good option if renal insufficiency (bisphosphonates contraindicated if CrCl less than 30-35), requires calcium/vitamin D supplementation (hypocalcemia risk), rapid bone loss if stopped (transition to bisphosphonate)
-  - Selective estrogen receptor modulators: raloxifene 60 mg daily (reduces vertebral fractures but not hip, increases VTE risk), postmenopausal women concerned about breast cancer risk (reduces breast cancer)
-  - Anabolic agents for severe osteoporosis: teriparatide (PTH analog) 20 mcg subcutaneous daily x 2 years max (increases bone formation), romosozumab (sclerostin inhibitor) 210 mg subcutaneous monthly x 12 months (increases formation, decreases resorption), indications very high risk (T-score -3.5 or less, multiple fractures, fracture on therapy), follow with antiresorptive (bisphosphonate or denosumab)
-  - Glucocorticoid-induced osteoporosis prevention: calcium/vitamin D for all, bisphosphonate or denosumab if prednisone 2.5 mg or more daily x 3 months or more and age 40 or more
-  - Duration of therapy: bisphosphonates 3-5 years then drug holiday if low-moderate risk, continue if high risk (prior hip/vertebral fracture, T-score -2.5 or less on therapy), denosumab continue or transition to bisphosphonate (do not stop abruptly)
-  - Monitor: repeat DXA every 1-2 years on therapy (expect stable or slight increase BMD)
+  - Calcium supplementation: 1200 mg daily from diet plus supplements if needed
+  - Vitamin D: 800-1000 IU daily, maintain 25-OH vitamin D >30 ng/mL
+  - Bisphosphonates first-line: alendronate 70 mg PO weekly or risedronate 35 mg weekly or zoledronic acid 5 mg IV annually
+  - Take oral bisphosphonates on empty stomach with full glass water, remain upright 30 minutes (prevent esophagitis)
+  - Denosumab 60 mg SC every 6 months: alternative if intolerant to bisphosphonates, inhibits RANK ligand
+  - Teriparatide or abaloparatide (anabolic agents): for very high risk (T-score <-3.5 or multiple fractures), SC daily x2 years max
+  - Romosozumab: anabolic sclerostin inhibitor for very high risk, monthly SC x12 months followed by antiresorptive
+  - Fall prevention: home safety assessment, balance exercises, vision correction, avoid sedatives
+  - Weight-bearing and resistance exercise
+  - Follow-up DEXA every 1-2 years to monitor response
+  - Treatment duration: bisphosphonates 3-5 years then reassess (drug holiday if low risk), denosumab indefinite (rebound risk if stopped)
 
 clinical_pearls:
-  - Screen women 65 or more, men 70 or more with DXA (earlier if risk factors)
-  - Osteoporosis diagnosed if T-score -2.5 or less, or osteopenia with fragility fracture
-  - FRAX score predicts 10-year fracture risk (guides treatment if osteopenia)
-  - Bisphosphonates first-line (alendronate 70 mg weekly), reduce fractures 40-50 percent
-  - All patients need calcium 1200 mg plus vitamin D 800-1000 IU daily
-  - Anabolic agents (teriparatide, romosozumab) for severe osteoporosis or fracture on therapy
-  - Denosumab causes rapid bone loss if stopped (transition to bisphosphonate)
+  - Screen all women ≥65, men ≥70 with DEXA
+  - T-score <-2.5 or fragility fracture diagnostic
+  - Bisphosphonates first-line - alendronate 70 mg weekly with calcium and vitamin D
+  - Take oral bisphosphonates upright fasting 30 minutes before food to improve absorption and prevent esophagitis
+  - Denosumab alternative if bisphosphonate intolerant or renal dysfunction
+  - Anabolic agents (teriparatide, romosozumab) for very high risk
+  - Hip fracture 20% one-year mortality - prevention crucial
+  - Drug holiday after 3-5 years bisphosphonates if low risk but continue calcium and vitamin D
 
 differentials:
-  - Osteomalacia (low bone mineralization from vitamin D deficiency, low calcium/phosphate, elevated alkaline phosphatase, bone pain, proximal weakness)
-  - Multiple myeloma (bone pain, pathologic fractures, anemia, hypercalcemia, renal insufficiency, SPEP shows monoclonal protein)
-  - Hyperparathyroidism (elevated calcium and PTH, bone resorption, kidney stones)
-  - Paget disease (localized bone pain, elevated alkaline phosphatase, X-ray shows sclerosis/expansion)
+  - Osteomalacia: vitamin D deficiency causes defective bone mineralization, elevated alkaline phosphatase, low calcium and phosphate
+  - Multiple myeloma: bone pain, hypercalcemia, anemia, elevated protein gap, lytic lesions
+  - Hyperparathyroidism: elevated PTH and calcium cause bone resorption
+  - Paget disease: localized bone pain, elevated alkaline phosphatase, mixed lytic-sclerotic lesions
 
-trace:
-  - 68-year-old postmenopausal woman presents for health maintenance, menopause at age 52, mother had hip fracture at age 75, never had DXA scan
-  - Risk factors: postmenopausal, family history hip fracture, thin (BMI 21), no prior fractures
-  - Exam: height 5 feet 3 inches (lost 1 inch from young adult height), kyphosis (dowager hump), no focal tenderness
-  - DXA scan: lumbar spine T-score -2.8, total hip T-score -2.6, femoral neck T-score -2.9 (osteoporosis)
-  - Labs: calcium 9.4 mg/dL, phosphate 3.8 mg/dL, alkaline phosphatase 82 U/L (all normal), 25-OH vitamin D 18 ng/mL (deficiency), TSH 2.1 mIU/L, creatinine 0.8 mg/dL (eGFR greater than 90)
-  - FRAX score: 10-year probability major osteoporotic fracture 28 percent, hip fracture 9.5 percent (high risk)
-  - Diagnosis: postmenopausal osteoporosis with high fracture risk
-  - Counseling: weight-bearing exercise (walking 30 min daily), balance exercises (tai chi, yoga), fall prevention (remove throw rugs, improve lighting, avoid sedatives)
-  - Started vitamin D3 2000 IU daily x 8 weeks to replete deficiency (then maintenance 1000 IU daily), calcium carbonate 600 mg BID with meals (total 1200 mg daily)
-  - Dental exam: no active issues, cleared for bisphosphonate therapy
-  - Started alendronate 70 mg weekly (take first thing in morning with 8 oz water, remain upright 30 minutes, nothing to eat/drink except water x 30 minutes)
-  - 3 months: 25-OH vitamin D 38 ng/mL (repleted), tolerating alendronate well, no GI side effects, continues weight-bearing exercise
-  - 1 year: repeat DXA shows lumbar spine T-score -2.6 (improved from -2.8), total hip T-score -2.5 (stable), excellent response
-  - 3 years: continues alendronate, repeat DXA lumbar spine -2.4, total hip -2.4 (stable improvement), no fractures
-  - 5 years: assess need for drug holiday given T-score improved to -2.4 and no fractures, decision to continue alendronate given initial T-score -2.9 and high-risk (older age, family history), will continue therapy
+trace: |
+  A 68-year-old postmenopausal woman underwent screening DEXA which showed lumbar spine T-score -2.8 and femoral neck T-score -2.6 (osteoporosis). Height loss of 2 inches from age 40. Labs showed calcium 9.2, vitamin D 18 (low), PTH 52 (normal), TSH 2.1 (normal). VFA showed mild T12 compression fracture (asymptomatic). FRAX score 22% major osteoporotic fracture risk. Started alendronate 70 mg weekly with calcium 600 mg BID and vitamin D 2000 IU daily. Counseled on taking alendronate first thing in morning on empty stomach with full glass water, remain upright 30 minutes before eating. Started weight-bearing exercise and fall prevention interventions. At 6 months vitamin D improved to 38. At 18 months repeat DEXA showed lumbar spine T-score improved to -2.5 and femoral neck stable at -2.6. No new fractures. Continues alendronate with plan to reassess at 5 years.
