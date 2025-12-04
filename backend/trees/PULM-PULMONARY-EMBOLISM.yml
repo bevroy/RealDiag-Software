@@ -1,75 +1,71 @@
 tree_id: PULM-PULMONARY-EMBOLISM
 name: Pulmonary Embolism
-family: Pulmonology
-specialty: Pulmonology/Cardiology
-chief_complaint: Sudden onset shortness of breath and chest pain
-description: |
-  Blood clot in pulmonary arteries, usually from deep vein thrombosis (DVT). Third most common cardiovascular disease after MI and stroke. Affects 600,000 annually in US, 10-30% mortality if untreated.
-  Risk factors - Virchow triad (stasis, hypercoagulability, endothelial injury). Presentation ranges from asymptomatic to massive PE with hemodynamic collapse. Anticoagulation prevents recurrence and mortality.
+family: Pulmonary
+specialty: Pulmonology
+chief_complaint: Shortness of breath and chest pain
+description: Blockage of pulmonary artery or branches by thrombus (usually from DVT) causing dyspnea, pleuritic chest pain, and hypoxemia
+
 icd10: I26.99
-urgency: Critical
+
+urgency: emergent
+
 workup:
-  - Clinical presentation - sudden dyspnea (most common), pleuritic chest pain, cough, hemoptysis, syncope (massive PE)
-  - Tachypnea, tachycardia often present; hypoxia less common than expected
-  - Massive PE - hypotension, shock, cardiac arrest
-  - Submassive PE - normotensive but RV strain on echo or elevated troponin/BNP
-  - Risk factors - recent surgery/trauma, immobilization, malignancy, pregnancy, oral contraceptives, prior VTE, thrombophilia, long flight
-  - Wells score for PE probability
-  - Clinical signs of DVT (3 points), PE most likely diagnosis (3), HR greater than 100 (1.5), immobilization/surgery in past 4 weeks (1.5), prior DVT/PE (1.5), hemoptysis (1), malignancy (1)
-  - Score less than 2 low probability, 2-6 moderate, greater than 6 high
-  - D-dimer - if low pretest probability (Wells less than 2), negative D-dimer (less than 500 ng/mL) rules out PE (high sensitivity, low specificity)
-  - Elevated D-dimer nonspecific (pregnancy, infection, malignancy, advanced age) - requires imaging
-  - CT pulmonary angiography (CTPA) - gold standard, 95% sensitivity and specificity
-  - Shows filling defects in pulmonary arteries, can assess RV size (RV/LV ratio greater than 0.9 suggests strain)
-  - Segmental or larger PE clinically significant, subsegmental significance uncertain
-  - V/Q scan alternative if contrast contraindicated (renal failure, allergy) - high probability scan diagnostic
-  - Lower extremity venous duplex ultrasound - if DVT found, no further testing needed (treat as PE)
-  - ECG - often normal or sinus tachycardia, classic S1Q3T3 pattern (large S in I, Q in III, inverted T in III) uncommon but specific
-  - Right heart strain - RBBB, T wave inversions V1-V4
-  - ABG - hypoxemia, respiratory alkalosis, increased A-a gradient (but can be normal)
-  - Labs - troponin (RV strain), BNP (RV dysfunction), CBC, CMP
-  - Echocardiogram if massive or submassive PE - assess RV function, McConnell sign (RV free wall hypokinesis with apical sparing), elevated PA pressures
+  - Clinical presentation: acute onset dyspnea, pleuritic chest pain, tachypnea, tachycardia, hypoxemia, cough, hemoptysis (less common), syncope if massive PE
+  - Risk factors (Virchow triad): stasis (immobility, long travel, hospitalization, stroke, heart failure), hypercoagulability (malignancy, thrombophilia, oral contraceptives, pregnancy, HRT), endothelial injury (surgery, trauma, central venous catheter)
+  - Wells score predicts probability: clinical signs DVT (3 points), PE most likely diagnosis (3 points), HR greater than 100 (1.5 points), immobilization/surgery within 4 weeks (1.5 points), prior PE/DVT (1.5 points), hemoptysis (1 point), malignancy (1 point) - score less than 2 low probability, 2-6 moderate, greater than 6 high
+  - D-dimer: high sensitivity but low specificity, if negative (less than 500 ng/mL) rules out PE (negative predictive value 99 percent), only order if low-moderate probability (do not order if high probability - go straight to imaging)
+  - CT pulmonary angiography (CTPA): diagnostic test of choice, shows filling defect in pulmonary artery, sensitivity/specificity greater than 95 percent
+  - V/Q scan alternative if contrast contraindicated (renal insufficiency, contrast allergy): normal V/Q rules out PE, high-probability V/Q diagnostic for PE, intermediate/low-probability indeterminate
+  - Venous duplex ultrasound lower extremities: if positive (DVT found) treat as PE without CTPA needed (same treatment), if negative does not rule out PE (30 percent PE without DVT)
+  - ECG: sinus tachycardia most common, signs RV strain (S1Q3T3, new RBBB, T wave inversions V1-V4) suggest massive PE
+  - Arterial blood gas: hypoxemia (PaO2 less than 80 mmHg), respiratory alkalosis (low PaCO2), A-a gradient elevated
+  - Troponin and BNP: if elevated suggest RV strain and worse prognosis
+  - Echocardiogram: if massive PE shows RV dilation/dysfunction, McConnell sign (RV free wall hypokinesis with apical sparing)
+
 treatment:
-  - Anticoagulation - cornerstone of treatment, prevents clot propagation and recurrence
-  - Hemodynamically stable - start anticoagulation immediately (even before imaging if high suspicion)
-  - DOAC (direct oral anticoagulant) preferred over warfarin
-  - Apixaban 10mg BID x 7 days then 5mg BID
-  - Rivaroxaban 15mg BID x 21 days then 20mg daily
-  - Edoxaban 60mg daily (requires 5-10 days LMWH/UFH lead-in)
-  - Dabigatran 150mg BID (requires 5-10 days LMWH/UFH lead-in)
-  - Advantages - fixed dosing, no monitoring, rapid onset, fewer drug/food interactions
-  - Warfarin if DOAC contraindicated (mechanical valve, antiphospholipid syndrome) - overlap with LMWH until INR 2-3 x 2 days, maintain INR 2-3
-  - LMWH (enoxaparin 1 mg/kg SC q12h or 1.5 mg/kg daily) or UFH (heparin infusion) if DOAC/warfarin contraindicated
-  - Duration of anticoagulation
-  - Provoked PE (surgery, trauma, temporary risk factor) - 3 months
-  - Unprovoked PE (no identifiable risk factor) - 3-6 months minimum, consider indefinite if low bleeding risk
-  - Recurrent unprovoked VTE - indefinite anticoagulation
-  - Active cancer - indefinite (LMWH preferred over DOAC/warfarin)
-  - Massive PE (hemodynamic instability, shock) - systemic thrombolysis
-  - Alteplase (tPA) 100mg IV over 2 hours or 0.6 mg/kg bolus (max 50mg)
-  - Contraindications - recent surgery, active bleeding, prior ICH, ischemic stroke less than 3 months
-  - If thrombolysis contraindicated - catheter-directed therapy or surgical embolectomy
-  - Submassive PE (RV strain but normotensive) - controversial, consider thrombolysis if low bleeding risk and significant RV dysfunction
-  - IVC filter if anticoagulation contraindicated (active bleeding, high bleeding risk) or recurrent PE despite anticoagulation
-  - Retrievable filters preferred (remove when safe to anticoagulate)
-  - Supportive care - supplemental oxygen, IV fluids (if hypotensive, but avoid overload in RV failure), vasopressors if shock
-  - Thrombophilia testing if unprovoked PE, age less than 50, family history, recurrent VTE - factor V Leiden, prothrombin G20210A, protein C/S, antithrombin III, antiphospholipid antibodies
-  - Test after acute phase (not during anticoagulation)
-  - Prevention - VTE prophylaxis in hospitalized patients (LMWH, UFH, or sequential compression devices)
+  - Hemodynamically stable PE: anticoagulation immediately (do NOT wait for imaging if high suspicion), prevents extension and recurrence
+  - Anticoagulation options: DOAC preferred (rivaroxaban 15 mg BID x 21 days then 20 mg daily, apixaban 10 mg BID x 7 days then 5 mg BID, edoxaban 60 mg daily after 5 days parenteral anticoagulation), LMWH (enoxaparin 1 mg/kg SC every 12 hours) bridged to warfarin (INR goal 2-3), unfractionated heparin IV if renal insufficiency or high bleeding risk
+  - Duration anticoagulation: provoked PE (surgery, trauma, immobilization) treat 3 months, unprovoked PE treat at least 3 months then reassess (may need indefinite if low bleeding risk), recurrent PE or cancer-associated treat indefinitely
+  - IVC filter: only if contraindication to anticoagulation (active bleeding, recent neurosurgery), retrieve when safe to anticoagulate
+  - Massive PE (hemodynamic instability, systolic BP less than 90 mmHg, shock, cardiac arrest): thrombolysis if no contraindications (alteplase 100 mg IV over 2 hours), surgical embolectomy or catheter-directed thrombolysis if thrombolysis contraindicated or failed
+  - Submassive PE (hemodynamically stable but RV dysfunction on echo or elevated troponin/BNP): anticoagulation alone usually sufficient, consider thrombolysis if clinical deterioration
+  - Oxygen to maintain SpO2 greater than 90 percent
+  - Analgesia for pleuritic chest pain
+  - Avoid long travel or immobility during first 3 months
+
 clinical_pearls:
-  - PE often missed - maintain high index of suspicion in dyspneic patients with risk factors
-  - Normal oxygen saturation does not rule out PE
-  - Hampton hump (wedge-shaped opacity) and Westermark sign (oligemia) on CXR rare but specific
-  - Saddle embolus (thrombus at bifurcation of main pulmonary artery) high mortality
-  - Paradoxical embolism - DVT crosses patent foramen ovale causing stroke
-  - Pregnancy - CTPA safe (lower radiation to fetus than V/Q), LMWH preferred anticoagulant (warfarin/DOACs contraindicated)
-  - Subsegmental PE - unclear significance, consider anticoagulation if risk factors present
+  - Acute dyspnea plus pleuritic chest pain with risk factors think PE
+  - Wells score plus D-dimer guides testing: low probability with negative D-dimer rules out PE
+  - CTPA diagnostic test of choice (filling defect in pulmonary artery)
+  - Start anticoagulation immediately if high suspicion (do not wait for imaging)
+  - DOACs preferred over warfarin (rivaroxaban, apixaban, edoxaban - no monitoring needed)
+  - Duration: provoked 3 months, unprovoked at least 3 months (consider indefinite)
+  - Massive PE (hemodynamically unstable) requires thrombolysis or embolectomy
+
 differentials:
-  - Myocardial infarction
-  - Pneumonia
-  - Pneumothorax
-  - Aortic dissection
-  - Pericarditis
-  - Anxiety/panic attack
+  - Pneumonia (fever, cough, infiltrate on X-ray, elevated WBC)
+  - Myocardial infarction (anginal chest pain, ECG changes, troponin elevated)
+  - Pneumothorax (sudden dyspnea, diminished breath sounds, X-ray shows collapsed lung)
+  - Aortic dissection (tearing chest pain radiating to back, pulse differential, widened mediastinum)
+
 trace:
-  - 58-year-old woman 2 weeks post total hip replacement presents with sudden dyspnea and pleuritic chest pain → Tachypneic RR 24, tachycardic HR 110, BP 128/78, oxygen saturation 92% on room air → No signs of DVT on exam (calf swelling, tenderness) → Wells score 4.5 (surgery in past month 1.5, HR greater than 100 1.5, PE likely diagnosis 3) - moderate probability → D-dimer 1820 ng/mL (elevated) → CTPA shows filling defects in right lower lobe pulmonary arteries (segmental PE) → Troponin normal, no RV strain on ECG → Hemodynamically stable → Start rivaroxaban 15mg BID x 21 days → Admit for monitoring overnight → Oxygen saturation improves to 95% on room air → Discharge on rivaroxaban, transition to 20mg daily after 21 days → Provoked PE (post-surgery) - plan 3 months anticoagulation → Lower extremity ultrasound shows small non-occlusive DVT right popliteal vein → Continue anticoagulation, compression stockings → Repeat ultrasound at 3 months shows resolved DVT → Complete 3 months anticoagulation, discontinue (provoked event, low recurrence risk)
+  - 54-year-old woman presents to ED with 6 hours acute dyspnea and right-sided pleuritic chest pain, worse with deep breath
+  - History: underwent total knee replacement 10 days ago, has been relatively immobile at home, no prior PE/DVT
+  - Exam: tachypneic RR 26, tachycardic HR 108, BP 118/74, SpO2 89 percent on room air (hypoxemia), lungs clear, no leg swelling
+  - ECG: sinus tachycardia, no ST changes, no S1Q3T3
+  - Wells score: 6 (surgery within 4 weeks 1.5, HR greater than 100 1.5, PE most likely diagnosis 3) - moderate-high probability
+  - D-dimer: 3850 ng/mL (markedly elevated) - but with moderate-high Wells score proceed to imaging
+  - Oxygen 4 L nasal cannula (SpO2 improved to 94 percent)
+  - CT pulmonary angiography: filling defect in right lower lobe pulmonary artery (diagnostic for PE)
+  - Labs: troponin 0.04 ng/mL (mildly elevated), BNP 185 pg/mL (mildly elevated), suggests RV strain but hemodynamically stable
+  - Venous duplex lower extremities: right popliteal DVT (source of embolism)
+  - Diagnosis: acute pulmonary embolism right lower lobe, provoked by recent surgery, submassive (RV strain by troponin/BNP but hemodynamically stable)
+  - Started rivaroxaban 15 mg BID (DOAC, no need for heparin bridge)
+  - Admitted for observation given RV strain
+  - Day 2: dyspnea improved, oxygen weaned to 2 L, chest pain resolved, hemodynamically stable
+  - Discharge day 3: SpO2 95 percent on room air, continues rivaroxaban 15 mg BID x 21 days total then switch to 20 mg daily
+  - Duration anticoagulation: provoked PE (surgery) plan 3 months total
+  - Education: avoid long travel/immobility first 3 months, call if worsening dyspnea/chest pain
+  - Follow-up 1 week: doing well, back to baseline activity, continues anticoagulation
+  - 3 months: completed anticoagulation course, repeat venous duplex shows resolved DVT, stopped rivaroxaban (provoked PE, no further anticoagulation needed)
+  - No recurrence at 1 year
