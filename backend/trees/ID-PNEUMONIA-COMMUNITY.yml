@@ -1,0 +1,74 @@
+tree_id: ID-PNEUMONIA-COMMUNITY
+name: Community-Acquired Pneumonia
+family: Infectious Disease
+specialty: Infectious Disease
+chief_complaint: Cough and fever
+description: Acute infection of lung parenchyma acquired outside hospital causing cough, fever, dyspnea, and infiltrate on chest imaging
+
+icd10: J18.9
+
+urgency: urgent
+
+workup:
+  - Clinical presentation: cough (productive or dry), fever, dyspnea, pleuritic chest pain, rigors, sputum production (purulent), myalgias, fatigue
+  - Exam: fever, tachypnea, tachycardia, hypoxia, crackles or bronchial breath sounds on auscultation, dullness to percussion (consolidation), egophony (E to A changes)
+  - Severity assessment critical: determines inpatient vs outpatient management
+  - CURB-65 score predicts mortality: Confusion (1 point), Urea greater than 20 mg/dL (BUN greater than 20, 1 point), Respiratory rate greater than or equal to 30 (1 point), Blood pressure systolic less than 90 or diastolic less than or equal to 60 (1 point), age greater than or equal to 65 (1 point) - score 0-1 outpatient, 2 consider admission, 3-5 admit to hospital or ICU
+  - PSI (Pneumonia Severity Index): more complex, incorporates age, comorbidities, vitals, labs - Class I-II outpatient, III hospital or observation, IV-V hospital
+  - Chest X-ray: confirms diagnosis, lobar consolidation (typical bacterial), interstitial or patchy infiltrates (atypical), pleural effusion (parapneumonic effusion or empyema if complicated)
+  - Laboratory: CBC (leukocytosis with left shift, leukopenia concerning), CMP (assess renal function, electrolytes, BUN for CURB-65), procalcitonin (if elevated greater than 0.25 ng/mL suggests bacterial), arterial blood gas if severe hypoxia
+  - Sputum Gram stain and culture: if hospitalized, quality sputum (less than 10 squamous cells per low-power field), can guide therapy
+  - Blood cultures x 2: if hospitalized or severe, positive in 5-15 percent (usually S. pneumoniae)
+  - Urinary antigens: Streptococcus pneumoniae antigen (sensitive and specific), Legionella antigen (only detects L. pneumophila serogroup 1)
+  - Pathogens: Streptococcus pneumoniae most common overall (30-50 percent), atypical pathogens (Mycoplasma pneumoniae, Chlamydophila pneumoniae, Legionella - 10-20 percent), viruses (influenza, RSV, COVID-19), Haemophilus influenzae, Staphylococcus aureus (post-influenza)
+
+treatment:
+  - Outpatient CAP (CURB-65 0-1, PSI I-II): otherwise healthy use amoxicillin 1000 mg TID x 5-7 days or doxycycline 100 mg BID x 5-7 days, if comorbidities (COPD, diabetes, heart failure, immunosuppression) or recent antibiotics use respiratory fluoroquinolone (levofloxacin 750 mg daily or moxifloxacin 400 mg daily) or amoxicillin-clavulanate 2000/125 mg BID plus macrolide (azithromycin 500 mg day 1 then 250 mg days 2-5)
+  - Inpatient non-ICU CAP: beta-lactam (ceftriaxone 1-2 grams IV daily, cefotaxime, or ampicillin-sulbactam) PLUS macrolide (azithromycin 500 mg IV daily) OR respiratory fluoroquinolone monotherapy (levofloxacin 750 mg IV daily, moxifloxacin 400 mg IV daily)
+  - ICU CAP: beta-lactam (ceftriaxone 2 grams IV daily or cefotaxime) PLUS either azithromycin 500 mg IV daily OR respiratory fluoroquinolone, add vancomycin or linezolid if MRSA risk (influenza, IV drug use, prior MRSA), add antipseudomonal coverage if risk factors (bronchiectasis, prior Pseudomonas)
+  - Influenza treatment: if influenza season or positive test add oseltamivir 75 mg BID x 5 days (most effective if started within 48 hours but give up to 5 days in hospitalized)
+  - Duration: 5 days adequate for most uncomplicated CAP if clinically improving and afebrile x 48 hours, extend to 7-14 days if complicated (empyema, bacteremia, slow response)
+  - Supportive care: oxygen to maintain SpO2 greater than 90 percent, IV fluids if dehydrated, incentive spirometry, early mobilization
+  - Switch to oral antibiotics: when clinically improving, afebrile x 24-48 hours, tolerating oral intake, hemodynamically stable
+  - Complications: parapneumonic effusion (exudative fluid, thoracentesis if greater than 10 mm on lateral decubitus film), empyema (pus in pleural space, pH less than 7.2, glucose less than 60 mg/dL, requires chest tube drainage), lung abscess (thick-walled cavity, prolonged antibiotics), bacteremia, respiratory failure requiring mechanical ventilation
+  - Prevention: pneumococcal vaccination (PCV20 or PCV15 plus PPSV23), annual influenza vaccine, smoking cessation
+
+clinical_pearls:
+  - Cough, fever, dyspnea with crackles and infiltrate on chest X-ray diagnostic
+  - CURB-65 score guides disposition (0-1 outpatient, 2 consider admission, 3-5 admit)
+  - Streptococcus pneumoniae most common pathogen
+  - Outpatient healthy: amoxicillin or doxycycline
+  - Inpatient: beta-lactam plus macrolide or fluoroquinolone monotherapy
+  - ICU: beta-lactam plus macrolide or fluoroquinolone, consider MRSA coverage if risk factors
+  - Duration 5 days adequate if improving and afebrile
+
+differentials:
+  - Acute bronchitis (cough but no infiltrate on chest X-ray, no fever)
+  - Pulmonary embolism (sudden dyspnea, pleuritic pain, risk factors, D-dimer elevated)
+  - Heart failure (dyspnea, orthopnea, elevated BNP, pulmonary edema on X-ray)
+  - Lung cancer (chronic cough, weight loss, smoking history, mass on imaging)
+
+trace:
+  - 72-year-old man presents to ED with 3 days cough (productive yellow-green sputum), fever (103 F at home), dyspnea, right-sided pleuritic chest pain, rigors
+  - History: COPD on inhalers, diabetes type 2, smoker 40 pack-years
+  - Exam: appears ill, temp 101.8 F, RR 28 (tachypneic), HR 108, BP 118/72, SpO2 88 percent on room air (hypoxemic), decreased breath sounds and crackles right lower lung, dullness to percussion right base
+  - CURB-65 score: Confusion 0, Urea (BUN 28 mg/dL, 1 point), Respiratory rate 28 (close to 30, 0 points but concerning), Blood pressure 118/72 (0 points), age 72 (1 point) - total 2 points (consider admission)
+  - Labs: WBC 18.5K with 88 percent neutrophils and bands (left shift), hemoglobin 13.2 g/dL, platelets 245K, sodium 132 mEq/L, creatinine 1.3 mg/dL, glucose 245 mg/dL, procalcitonin 2.8 ng/mL (elevated, suggests bacterial)
+  - Chest X-ray: right lower lobe consolidation (lobar pneumonia)
+  - Blood cultures x 2 sets obtained
+  - Urinary pneumococcal antigen: positive (Streptococcus pneumoniae)
+  - Diagnosis: community-acquired pneumonia right lower lobe, likely Streptococcus pneumoniae, moderate severity (CURB-65 2, hypoxia, comorbidities COPD and diabetes)
+  - Decision: admit to medical floor (not ICU, hemodynamically stable but moderate severity)
+  - Started oxygen 3 L nasal cannula (SpO2 improved to 93 percent)
+  - Started antibiotics: ceftriaxone 1 gram IV daily (beta-lactam for S. pneumoniae) plus azithromycin 500 mg IV daily (macrolide for atypical coverage)
+  - IV fluids normal saline (mild dehydration)
+  - Day 2: fever decreased to 100.2 F, dyspnea improved, SpO2 94 percent on 2 L oxygen, tolerating oral intake
+  - Blood cultures: negative at 48 hours (later negative at 5 days)
+  - Day 3: afebrile (temp 98.6 F), dyspnea much improved, weaned off oxygen (SpO2 95 percent on room air), ambulating
+  - Switched to oral antibiotics: cefpodoxime 200 mg BID (oral cephalosporin) plus azithromycin 250 mg daily to complete 5-day course
+  - Discharge day 4: clinically improved, afebrile x 48 hours, ambulating, oxygen saturation normal on room air
+  - Discharge antibiotics: cefpodoxime 200 mg BID x 2 more days (total 5 days ceftriaxone IV + cefpodoxime oral), azithromycin 250 mg daily x 1 more day (total 5 days)
+  - Counseling: complete antibiotics, smoking cessation (critical, smoking worsens COPD and increases pneumonia risk), pneumococcal vaccine and annual flu vaccine
+  - Follow-up 1 week: cough resolving, no dyspnea, afebrile, follow-up chest X-ray in 6 weeks (ensure resolution, rule out underlying malignancy especially in smoker)
+  - Pneumococcal vaccine given: PCV20 (one-time dose, protects against 20 serotypes)
+  - 6 weeks: follow-up chest X-ray shows resolved infiltrate (complete radiographic resolution)
