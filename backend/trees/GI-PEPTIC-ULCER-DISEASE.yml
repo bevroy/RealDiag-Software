@@ -1,76 +1,69 @@
 tree_id: GI-PEPTIC-ULCER-DISEASE
 name: Peptic Ulcer Disease
-family: Gastroenterology
+family: Gastrointestinal
 specialty: Gastroenterology
-chief_complaint: Epigastric pain and indigestion
-description: |
-  Mucosal ulceration in stomach (gastric ulcer) or duodenum (duodenal ulcer). Affects 10% of population lifetime. Main causes - H. pylori infection (70-90%) and NSAIDs (20%).
-  Duodenal ulcers 4x more common than gastric. Classic symptom - burning epigastric pain relieved by food (DU) or worsened by food (GU). Complications include bleeding, perforation, obstruction.
+chief_complaint: Epigastric pain
+description: Mucosal ulceration in stomach or duodenum from H. pylori infection or NSAID use causing epigastric pain and potential complications (bleeding, perforation)
+
 icd10: K27.9
-urgency: Moderate
+
+urgency: urgent
+
 workup:
-  - Clinical presentation - burning epigastric pain, often at night or between meals
-  - Duodenal ulcer - pain 2-3 hours after meals, relieved by food/antacids (food stimulates acid neutralizing bicarbonate)
-  - Gastric ulcer - pain worsened by food (food stimulates acid)
-  - Associated - nausea, bloating, early satiety, weight loss (gastric ulcer more than duodenal)
-  - Alarm symptoms require urgent endoscopy - age greater than 60 with new onset, dysphagia, weight loss, GI bleeding (melena, hematemesis), anemia, palpable mass
-  - Upper endoscopy (EGD) - visualizes ulcer, obtains biopsies (rule out malignancy in gastric ulcers, assess H. pylori)
-  - Duodenal ulcer - first portion of duodenum, usually benign (biopsy not needed unless atypical)
-  - Gastric ulcer - multiple biopsies of ulcer margin mandatory (5-10% are malignant)
-  - H. pylori testing
-  - Endoscopic biopsy with rapid urease test (CLOtest) or histology - most accurate
-  - Non-invasive tests (if not having endoscopy)
-  - Urea breath test (highly accurate, preferred for test-of-cure)
-  - Stool antigen test
-  - Serology (IgG antibody) - cannot distinguish active from past infection, not for test-of-cure
-  - Stop PPIs 2 weeks before testing (false negatives)
-  - Barium upper GI series less sensitive than endoscopy, cannot biopsy
-  - CBC if GI bleeding suspected - assess for anemia
-  - Fecal occult blood test or FIT
-  - Screen for complications - upright chest X-ray/abdominal X-ray if perforation suspected (free air under diaphragm)
+  - Clinical presentation: epigastric pain or discomfort (burning, gnawing), duodenal ulcer pain typically 2-5 hours after meals or at night (improves with food), gastric ulcer pain worse with food, nausea, early satiety, bloating
+  - Alarm features requiring urgent endoscopy: GI bleeding (hematemesis, melena), unintended weight loss, dysphagia, persistent vomiting, age greater than 60 with new onset, anemia, palpable mass
+  - Risk factors: H. pylori infection (70 percent duodenal ulcers, 50 percent gastric ulcers), NSAID use (second most common cause), smoking, alcohol, physiologic stress (ICU, burns, sepsis causes stress ulcers)
+  - Complications: bleeding (hematemesis, melena, anemia - most common complication 15 percent), perforation (acute severe pain, peritonitis, free air under diaphragm on X-ray), gastric outlet obstruction (chronic ulcer causes scarring)
+  - Upper endoscopy (EGD): gold standard for diagnosis, visualizes ulcer, allows biopsy (rule out malignancy for gastric ulcers, duodenal ulcers rarely malignant), can test for H. pylori (rapid urease test on biopsy), can treat bleeding if present
+  - H. pylori testing: if endoscopy not performed can use non-invasive tests - stool antigen test (high sensitivity/specificity), urea breath test (high sensitivity/specificity), serology (IgG antibody - less preferred, stays positive after treatment cannot confirm eradication)
+  - Must be OFF PPIs for 2 weeks before testing H. pylori (PPIs suppress H. pylori, cause false-negative tests)
+  - Upper GI series (barium swallow): alternative if endoscopy not available, shows crater with surrounding edema, but cannot biopsy or test H. pylori
+  - Laboratory: CBC (anemia if bleeding), stool hemoccult (occult blood)
+
 treatment:
-  - H. pylori eradication if positive - cures 90% of ulcers, prevents recurrence
-  - Triple therapy (preferred) - PPI BID plus amoxicillin 1g BID plus clarithromycin 500mg BID x 14 days
-  - Quadruple therapy if penicillin allergy or clarithromycin resistance high (greater than 15%)
-  - Bismuth-based - PPI BID, bismuth subsalicylate 524mg QID, metronidazole 500mg TID, tetracycline 500mg QID x 10-14 days
-  - Concomitant non-bismuth - PPI BID, amoxicillin 1g BID, clarithromycin 500mg BID, metronidazole 500mg BID x 10-14 days
-  - Sequential therapy less recommended (more complex)
-  - Test-of-cure 4 weeks after completing treatment - urea breath test or stool antigen (not serology)
-  - If first-line fails, try salvage regimen with different antibiotics
-  - PPI therapy - if H. pylori negative or after eradication
-  - Omeprazole 20-40mg daily, lansoprazole 30mg daily, esomeprazole 40mg daily, pantoprazole 40mg daily x 4-8 weeks
-  - Duodenal ulcer heals in 4 weeks (90%), gastric ulcer 8 weeks (90%)
-  - Repeat endoscopy for gastric ulcer at 8-12 weeks to confirm healing (rule out malignancy)
-  - Duodenal ulcer does not require repeat EGD if symptoms resolve
-  - Stop NSAIDs if possible (ulcer heals faster)
-  - If NSAID must continue, continue PPI indefinitely (or switch to selective COX-2 inhibitor celecoxib plus PPI)
-  - H2 receptor antagonists less effective than PPI - famotidine 40mg nightly (if PPI contraindicated)
-  - Sucralfate 1g QID - forms protective barrier over ulcer, effective but inconvenient dosing
-  - Refractory ulcers (not healing after 8-12 weeks PPI) - check compliance, continued NSAIDs, persistent H. pylori, Zollinger-Ellison syndrome (gastrinoma), malignancy, consider increasing PPI to BID
-  - Complications
-  - GI bleeding (15-20%) - hematemesis, melena, anemia
-  - Resuscitation (IV fluids, transfusion), IV PPI (pantoprazole 80mg bolus then 8 mg/hr infusion), urgent endoscopy with hemostasis (injection, cautery, clips)
-  - Perforation (5-10%) - sudden severe abdominal pain, peritonitis, free air
-  - Surgical repair (Graham patch), IV antibiotics, IV PPI
-  - Gastric outlet obstruction (2-5%) - chronic scarring at pylorus, persistent vomiting, early satiety
-  - Endoscopic balloon dilation or surgery (pyloroplasty, antrectomy)
-  - Zollinger-Ellison syndrome - gastrinoma causing excessive acid, multiple/refractory ulcers, diarrhea
-  - Fasting gastrin greater than 1000 pg/mL diagnostic, secretin stimulation test, CT/MRI abdomen to locate tumor
-  - High-dose PPI, surgical resection if localized
+  - Proton pump inhibitor (PPI): suppress acid to allow healing, omeprazole 20 mg daily, lansoprazole 30 mg daily, or pantoprazole 40 mg daily, take 30 minutes before breakfast, duration 4-8 weeks
+  - H. pylori positive: eradicate H. pylori (heals ulcer and prevents recurrence), triple therapy 14 days - PPI (omeprazole 20 mg BID or equivalent) plus amoxicillin 1000 mg BID plus clarithromycin 500 mg BID
+  - Alternative if penicillin allergy: PPI plus metronidazole 500 mg TID plus clarithromycin 500 mg BID x 14 days
+  - Quadruple therapy if high clarithromycin resistance: PPI plus bismuth subsalicylate 525 mg QID plus metronidazole 500 mg TID-QID plus tetracycline 500 mg QID x 10-14 days
+  - Confirm H. pylori eradication: urea breath test or stool antigen test at least 4 weeks after completing therapy (must be off PPIs for 2 weeks before testing)
+  - NSAID-induced ulcer: discontinue NSAID if possible, if must continue NSAID then PPI maintenance therapy indefinitely, switch to selective COX-2 inhibitor (celecoxib) less ulcerogenic
+  - Maintenance PPI: if H. pylori eradicated and NSAIDs stopped can discontinue PPI after ulcer heals (4-8 weeks), continue PPI long-term if refractory ulcer, recurrent ulcers, ongoing NSAIDs, or complications
+  - Lifestyle: avoid NSAIDs, smoking cessation (impairs healing, increases recurrence), limit alcohol
+  - Follow-up endoscopy: repeat EGD in 8-12 weeks for gastric ulcers (ensure healing and rule out gastric cancer - gastric ulcers can be malignant), duodenal ulcers do not require repeat endoscopy unless refractory
+  - Complications management: bleeding ulcer requires endoscopy with hemostasis (injection, cautery, clips), perforated ulcer requires emergent surgery (close perforation)
+
 clinical_pearls:
-  - Most duodenal ulcers due to H. pylori (90%), most gastric ulcers H. pylori (70%) or NSAIDs (20%)
-  - Duodenal ulcer virtually never malignant, gastric ulcer 5-10% malignant (always biopsy)
-  - NSAID-induced ulcers - gastric more than duodenal, often painless (silent ulcers), higher bleeding risk
-  - Misoprostol 200mcg QID prevents NSAID ulcers but poorly tolerated (diarrhea, cramping)
-  - Aspirin even at 81mg daily increases ulcer risk (continue for cardiac protection but add PPI)
-  - Smoking delays healing, increases recurrence - smoking cessation important
-  - Alcohol and spicy foods do not cause ulcers (myth) but may exacerbate symptoms
+  - H. pylori and NSAIDs cause 90 percent of peptic ulcers
+  - Duodenal ulcer pain improves with food (2-5 hours after meals), gastric ulcer worse with food
+  - Endoscopy gold standard (visualize, biopsy, test H. pylori)
+  - Triple therapy 14 days eradicates H. pylori (PPI plus amoxicillin plus clarithromycin)
+  - Confirm eradication with urea breath test or stool antigen (at least 4 weeks post-treatment, off PPIs x 2 weeks)
+  - Gastric ulcers require repeat endoscopy to ensure healing and rule out cancer
+  - Stop NSAIDs if possible, if not use PPI maintenance
+
 differentials:
-  - Gastroesophageal reflux disease
-  - Gastritis
-  - Non-ulcer dyspepsia (functional dyspepsia)
-  - Gastric cancer
-  - Pancreatitis
-  - Biliary colic
+  - Gastroesophageal reflux disease (GERD) - heartburn, regurgitation, no ulcer on endoscopy
+  - Functional dyspepsia (epigastric pain but normal endoscopy)
+  - Gastritis (inflammation but no discrete ulcer)
+  - Gastric cancer (weight loss, anemia, gastric ulcer that does not heal)
+  - Biliary colic (RUQ pain, post-prandial, ultrasound shows gallstones)
+
 trace:
-  - 45-year-old man with 2 months of burning epigastric pain, worse 2-3 hours after meals and at night → Pain temporarily relieved by food and antacids → No weight loss, no GI bleeding → Takes ibuprofen 800mg TID for chronic back pain → Upper endoscopy shows 8 mm duodenal ulcer in first portion of duodenum → Biopsy rapid urease test positive for H. pylori → Prescribe PPI triple therapy - omeprazole 20mg BID, amoxicillin 1g BID, clarithromycin 500mg BID x 14 days → Discontinue ibuprofen, switch to acetaminophen for back pain → Complete 14-day antibiotic course → Continue omeprazole 20mg daily x additional 2 weeks (total 4 weeks PPI) → Symptoms completely resolve within 1 week of starting treatment → Urea breath test 4 weeks after completing antibiotics - negative (H. pylori eradicated) → Discontinue omeprazole → Counsel to avoid NSAIDs or use with PPI if absolutely necessary → No recurrence at 6-month follow-up
+  - 45-year-old man presents with 2 months epigastric pain (burning, gnawing), worse 2-3 hours after meals and at night (wakes him from sleep), improves temporarily with food or antacids
+  - History: takes ibuprofen 400 mg TID x 6 months for chronic low back pain, smokes 1 pack per day x 25 years, drinks 3-4 beers on weekends
+  - Exam: mild epigastric tenderness, no guarding or rebound, no masses, stool hemoccult positive (occult blood)
+  - Labs: hemoglobin 11.2 g/dL (anemia, baseline 14.5 g/dL 1 year ago), MCV 76 fL (microcytic), ferritin 18 ng/mL (iron deficiency from chronic GI blood loss)
+  - Upper endoscopy (EGD): 8 mm duodenal ulcer in duodenal bulb with clean base (not actively bleeding), gastric mucosa normal, rapid urease test positive (H. pylori detected on biopsy)
+  - Diagnosis: duodenal peptic ulcer disease due to H. pylori infection and NSAID use (dual etiology)
+  - Discontinued ibuprofen (contributory to ulcer), started acetaminophen for back pain instead
+  - H. pylori triple therapy x 14 days: omeprazole 20 mg BID, amoxicillin 1000 mg BID, clarithromycin 500 mg BID
+  - Continued omeprazole 20 mg daily x 8 weeks total (to heal ulcer)
+  - Smoking cessation counseling (impairs ulcer healing)
+  - Iron supplementation for anemia: ferrous sulfate 325 mg daily
+  - 8 weeks: epigastric pain resolved completely, repeat hemoglobin 12.8 g/dL (improved)
+  - 12 weeks (4 weeks after completing antibiotics): urea breath test to confirm H. pylori eradication - held omeprazole x 2 weeks before test - NEGATIVE (H. pylori successfully eradicated)
+  - Discontinued omeprazole (no longer needed, H. pylori eradicated and NSAID stopped)
+  - Counseling: avoid NSAIDs (use acetaminophen instead), if NSAID absolutely necessary take with PPI, quit smoking
+  - 6 months: remains asymptomatic, no recurrence
+  - Repeat endoscopy NOT needed for duodenal ulcer (only for gastric ulcers)
+  - 1 year: continues to avoid NSAIDs, quit smoking (switched to nicotine patch), no recurrent symptoms, hemoglobin normalized 14.2 g/dL
