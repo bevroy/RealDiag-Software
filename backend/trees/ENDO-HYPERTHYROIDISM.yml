@@ -1,66 +1,64 @@
 tree_id: ENDO-HYPERTHYROIDISM
 name: Hyperthyroidism
-family: endocrine
+family: Endocrine-Metabolic
 specialty: Endocrinology
-chief_complaint: Heat intolerance, weight loss, palpitations, tremor
-description: Excessive thyroid hormone production causing hypermetabolic state
+chief_complaint: Palpitations and weight loss
+description: Clinical syndrome from excessive thyroid hormone causing hypermetabolic state
+
 icd10: E05.90
-urgency: routine
+
+urgency: urgent
+
 workup:
-  - TSH (suppressed less than 0.1 mIU/L)
-  - Free T4 (elevated greater than 1.7 ng/dL) and Free T3 (elevated greater than 4.4 pg/mL)
-  - Thyroid-stimulating immunoglobulin (TSI) if Graves disease suspected
-  - Radioactive iodine uptake (RAIU) scan to differentiate causes
-  - Thyroid ultrasound if nodular disease suspected
-  - ECG (may show atrial fibrillation, sinus tachycardia)
-  - Complete blood count (CBC) - monitor for agranulocytosis with antithyroid drugs
-  - Liver function tests before starting antithyroid medications
-  - Thyroid peroxidase antibody (TPOAb) if autoimmune suspected
-  - Thyroid receptor antibody (TRAb) for Graves disease
+  - Clinical presentation: palpitations, weight loss despite increased appetite, heat intolerance, tremor, anxiety, diarrhea, hyperdefecation, menstrual irregularities
+  - Exam: tachycardia (may have atrial fibrillation), systolic hypertension with wide pulse pressure, fine tremor, hyperreflexia, warm moist skin, lid lag
+  - Laboratory: TSH suppressed (less than 0.1 mIU/L), free T4 elevated, free T3 elevated (T3 toxicosis if only T3 elevated), pattern confirms primary hyperthyroidism
+  - Etiology determination: radioactive iodine uptake and scan (RAIU) - increased uptake diffuse (Graves disease), increased uptake focal (toxic adenoma or toxic multinodular goiter), decreased uptake (thyroiditis, exogenous thyroid hormone, struma ovarii)
+  - Graves disease (most common 60-80 percent): diffuse goiter, ophthalmopathy (exophthalmos, proptosis, lid retraction, diplopia), pretibial myxedema, TSH receptor antibodies (TRAb) positive
+  - Thyroid ultrasound: assess nodules if palpable, increased vascularity suggests Graves
+  - Thyroiditis: painful (subacute/de Quervain) or painless (postpartum, lymphocytic), transient hyperthyroid phase (2-8 weeks) followed by hypothyroid phase then recovery, low RAIU, elevated ESR if subacute
+  - Subclinical hyperthyroidism: low TSH with normal T4/T3, often asymptomatic, consider treatment if TSH less than 0.1 or cardiovascular disease or osteoporosis
+
 treatment:
-  - Methimazole 10-40 mg daily (first-line antithyroid drug, fewer side effects than PTU)
-  - Propylthiouracil (PTU) 100-200 mg TID (preferred in first trimester pregnancy, thyroid storm)
-  - Radioactive iodine-131 (RAI) ablation for definitive treatment (contraindicated in pregnancy)
-  - Thyroidectomy for large goiters, compression symptoms, pregnancy planning, or malignancy concern
-  - Beta-blockers for symptom control - propranolol 10-40 mg QID or atenolol 25-100 mg daily
-  - Treat underlying cause (stop amiodarone if drug-induced, manage TSH-secreting adenoma)
-  - Monitor TSH and free T4 every 4-6 weeks initially, then every 3-6 months when stable
-  - Calcium and vitamin D supplementation (increased bone resorption)
-  - Ophthalmology referral for Graves ophthalmopathy (proptosis, diplopia)
-  - Selenium supplementation 200 mcg daily may help mild Graves eye disease
+  - Symptom control: beta-blockers for palpitations/tremor/anxiety (propranolol 10-40 mg TID or QID, atenolol 25-100 mg daily, metoprolol 25-100 mg BID) - use nonselective beta-blocker if severe (propranolol also blocks T4 to T3 conversion)
+  - Definitive therapy for Graves disease: antithyroid drugs (ATDs), radioactive iodine ablation, or thyroidectomy
+  - Antithyroid drugs: methimazole 10-40 mg daily preferred (once daily dosing, less hepatotoxic than PTU), propylthiouracil (PTU) 50-150 mg TID (second-line, use in first trimester pregnancy or thyroid storm), check CBC and LFTs baseline (risk agranulocytosis, hepatotoxicity), check free T4 every 4-6 weeks and titrate dose, treatment duration 12-18 months then trial off (remission rate 30-50 percent)
+  - Radioactive iodine (I-131) ablation: definitive therapy, single dose 10-15 mCi, results in permanent hypothyroidism (requires lifelong levothyroxine), contraindicated in pregnancy/breastfeeding, may worsen ophthalmopathy (give steroids if moderate-severe), preferred for toxic nodular goiter
+  - Thyroidectomy: definitive, indicated if large goiter with compressive symptoms, inability to tolerate ATDs, pregnancy planning (do after achieving euthyroid state), complications include hypoparathyroidism and recurrent laryngeal nerve injury
+  - Toxic nodular goiter: radioactive iodine or surgery (remission after ATDs rare)
+  - Thyroiditis: supportive care (NSAIDs for pain if subacute), beta-blockers for symptoms, no ATDs (not overproducing hormone, just releasing preformed), transient hyperthyroid phase resolves spontaneously in 2-8 weeks
+  - Thyroid storm (rare life-threatening): high fever, tachycardia, altered mental status, heart failure, GI symptoms, mortality 10-30 percent, treatment intensive care with PTU 500-1000 mg loading then 250 mg every 4 hours (blocks synthesis and T4 to T3 conversion), iodine (Lugol solution or potassium iodide 5 drops every 6 hours - give 1 hour after PTU), propranolol IV, hydrocortisone 100 mg every 8 hours, cooling, supportive care
+
 clinical_pearls:
-  - Graves disease (autoimmune) accounts for 60-80% of hyperthyroidism cases
-  - Elderly patients may present with apathetic hyperthyroidism (weight loss, depression, AF without classic symptoms)
-  - Thyroid storm is life-threatening emergency - fever over 104F, severe tachycardia, altered mental status
-  - Subclinical hyperthyroidism (low TSH, normal T4/T3) increases risk of atrial fibrillation and osteoporosis
-  - Postpartum thyroiditis causes transient hyperthyroid phase followed by hypothyroid phase
-  - Amiodarone can cause hyperthyroidism (type 1 iodine-induced, type 2 destructive thyroiditis)
-  - PTU preferred over methimazole in thyroid storm (blocks peripheral T4 to T3 conversion)
-  - Agranulocytosis is rare (0.2-0.5%) but serious side effect of antithyroid drugs - check CBC if fever/sore throat
-  - After RAI ablation, most patients become hypothyroid requiring lifelong levothyroxine
-  - Graves ophthalmopathy may worsen after RAI treatment - consider corticosteroids
+  - TSH best screening test, suppressed in hyperthyroidism (negative feedback)
+  - Graves disease most common cause (60-80 percent), autoimmune with TRAb antibodies
+  - RAIU differentiates Graves (high uptake diffuse) from thyroiditis (low uptake)
+  - Methimazole preferred over PTU (once daily, less hepatotoxic) except first trimester pregnancy or thyroid storm
+  - Radioactive iodine causes permanent hypothyroidism (requires lifelong levothyroxine)
+  - Graves ophthalmopathy may worsen after radioactive iodine (give steroids if moderate-severe)
+  - Atrial fibrillation occurs in 10-15 percent, rate control with beta-blockers, consider anticoagulation
+
 differentials:
-  - Graves disease
-  - Toxic multinodular goiter
-  - Toxic adenoma (solitary hot nodule)
-  - Subacute thyroiditis (painful thyroid, elevated ESR)
-  - Postpartum thyroiditis
-  - Drug-induced (amiodarone, lithium, interferon)
-  - Factitious thyrotoxicosis (exogenous thyroid hormone)
-  - TSH-secreting pituitary adenoma (elevated TSH)
-  - Struma ovarii (ectopic thyroid tissue in ovarian teratoma)
+  - Anxiety disorder (palpitations, tremor, but normal TSH, no weight loss or heat intolerance)
+  - Pheochromocytoma (palpitations, sweating, headache, episodic hypertension, normal TSH, elevated metanephrines)
+  - Factitious hyperthyroidism (exogenous thyroid hormone, low TSH, high T4/T3, but low thyroglobulin and low RAIU)
+  - Subclinical hyperthyroidism (low TSH but normal T4/T3, often asymptomatic)
+
 trace:
-  - 45-year-old woman with 3-month history of 15-pound weight loss despite increased appetite
-  - Heat intolerance, palpitations, tremor, anxiety, frequent bowel movements
-  - Physical exam - heart rate 110 bpm regular, fine tremor, warm moist skin, diffuse thyroid enlargement, lid lag
-  - Labs - TSH less than 0.01 mIU/L (suppressed), free T4 2.8 ng/dL (elevated), free T3 8.2 pg/mL (elevated)
-  - TSI positive 3.5 IU/L (elevated, confirms Graves disease)
-  - RAIU scan - diffusely increased uptake 45% at 24 hours (normal 10-30%)
-  - ECG - sinus tachycardia, no atrial fibrillation
-  - Started methimazole 20 mg daily and propranolol 20 mg TID for symptom control
-  - Ophthalmology evaluation - mild proptosis, no diplopia or vision changes
-  - Follow-up at 6 weeks - improved symptoms, TSH still suppressed, free T4 1.5 ng/dL
-  - Methimazole continued at 10 mg daily maintenance dose
-  - Plan for definitive treatment with RAI ablation after 6-12 months of medical management
-  - Patient counseled on need for lifelong thyroid hormone replacement after ablation
-  - Outcome - Achieved euthyroid state on methimazole 10 mg daily, proceeding with RAI ablation
+  - 34-year-old woman presents with 3 months palpitations, 15-pound weight loss despite increased appetite, heat intolerance (wearing t-shirts in winter), tremor, anxiety, frequent bowel movements, irregular menses
+  - Exam: HR 112 regular, BP 142/68, anxious, fine tremor hands, hyperreflexia, warm moist skin, diffuse nontender goiter, bilateral proptosis with lid lag, no thyroid bruit
+  - Labs: TSH less than 0.01 mIU/L (suppressed), free T4 3.8 ng/dL (elevated, normal 0.8-1.8), free T3 12.5 pg/mL (elevated, normal 2.3-4.2)
+  - TSH receptor antibodies (TRAb) positive (confirms Graves disease)
+  - Radioactive iodine uptake: 45 percent at 24 hours (elevated, normal 10-30 percent), diffuse uptake
+  - Diagnosis: Graves disease with hyperthyroidism and ophthalmopathy
+  - Started methimazole 20 mg daily, propranolol 20 mg TID (symptom control), selenium 100 mcg BID (for ophthalmopathy)
+  - Counseled: CBC and LFTs to monitor for agranulocytosis/hepatotoxicity, report fever/sore throat immediately
+  - 4 weeks: symptoms improved, HR 82, free T4 2.1 ng/dL (still elevated), continued methimazole 20 mg
+  - 8 weeks: free T4 1.2 ng/dL (normalized), reduced methimazole to 10 mg daily
+  - 12 weeks: euthyroid, free T4 1.0, TSH still suppressed (takes months to normalize), continues methimazole maintenance
+  - Ophthalmology referral for Graves ophthalmopathy (mild, observation)
+  - 18 months: remains euthyroid on methimazole 5 mg daily, discussed definitive therapy options (continue ATDs vs radioactive iodine vs surgery), patient prefers trial off medication
+  - Stopped methimazole, monitoring TSH/T4 every 6-8 weeks
+  - 3 months off medication: TSH 0.03 mIU/L, free T4 2.8 ng/dL (recurrence common after stopping ATDs)
+  - Patient opts for radioactive iodine ablation (definitive therapy), received I-131 15 mCi
+  - 6 months post-ablation: hypothyroid TSH 45 mIU/L, free T4 0.5 ng/dL (expected), started levothyroxine 100 mcg daily, lifelong thyroid hormone replacement

@@ -1,0 +1,65 @@
+tree_id: NEURO-STROKE-ISCHEMIC
+name: Ischemic Stroke
+family: Neurologic
+specialty: Neurology
+chief_complaint: Sudden neurologic deficit
+description: Acute neurologic deficit from focal brain ischemia due to arterial occlusion causing irreversible brain injury if not promptly treated
+
+icd10: I63.9
+
+urgency: emergent
+
+workup:
+  - Time is brain - door to CT within 20 minutes, door to needle (tPA) within 60 minutes
+  - Clinical presentation: sudden onset focal neurologic deficit (weakness, numbness, speech difficulty, vision loss, ataxia, vertigo), symptoms depend on vascular territory
+  - NIHSS (NIH Stroke Scale) quantify severity: 0 normal, 1-4 minor, 5-15 moderate, 16-20 moderate-severe, 21-42 severe
+  - Head CT noncontrast STAT: exclude hemorrhage (contraindication to tPA), assess for early ischemic changes (hyperdense MCA sign, loss of gray-white differentiation, sulcal effacement), CT may be normal in first 6-12 hours
+  - CT angiography head/neck: identify large vessel occlusion (LVO) - ICA, MCA M1/M2 - candidate for thrombectomy
+  - MRI brain with DWI (diffusion-weighted imaging): more sensitive than CT for acute infarct (lights up within minutes), can see posterior circulation strokes missed on CT
+  - Laboratory: glucose (hypoglycemia mimics stroke), CBC, coagulation studies (PT/PTT/INR), type and screen
+  - ECG and telemetry: atrial fibrillation common cause (cardioembolic)
+  - Echocardiogram TTE or TEE: identify cardioembolic source (thrombus, valvular disease, PFO)
+  - Vascular imaging carotids: ultrasound or CTA for stenosis (CEA or stenting if 70 percent or more stenosis)
+
+treatment:
+  - Acute phase hyperacute management ABCS: airway, oxygen if hypoxic (target SpO2 greater than 94 percent), IV access, cardiac monitoring
+  - IV alteplase (tPA) 0.9 mg/kg (max 90 mg) give 10 percent bolus then 90 percent over 60 minutes if within 4.5 hours of symptom onset and no contraindications: absolute contraindications include active bleeding, recent surgery within 3 months, intracranial hemorrhage history, BP greater than 185/110 despite treatment, platelets less than 100K, INR greater than 1.7, glucose less than 50
+  - Mechanical thrombectomy for large vessel occlusion if within 6 hours (up to 24 hours in selected patients with favorable imaging): retrieve clot via catheter, dramatically improves outcomes for LVO
+  - Blood pressure management: permissive hypertension if NOT giving tPA (allow BP up to 220/120 to maintain cerebral perfusion), if giving tPA lower BP to less than 185/110 before and less than 180/105 after (labetalol 10-20 mg IV, nicardipine drip)
+  - Aspirin 325 mg within 24-48 hours (not if received tPA - wait 24 hours)
+  - Admit to stroke unit: reduces mortality and disability
+  - DVT prophylaxis: subcutaneous heparin or enoxaparin, pneumatic compression devices
+  - Swallow evaluation before oral intake (aspiration risk if dysphagia)
+  - Secondary prevention: antiplatelet therapy (aspirin 81 mg daily, or clopidogrel 75 mg daily, or aspirin plus extended-release dipyridamole), dual antiplatelet (aspirin plus clopidogrel) for 21 days if minor stroke/high-risk TIA, high-intensity statin (atorvastatin 80 mg) regardless of LDL, anticoagulation if atrial fibrillation (apixaban, rivaroxaban, warfarin), BP control target less than 130/80, CEA or carotid stenting if 70 percent or more stenosis symptomatic or 80 percent or more asymptomatic
+
+clinical_pearls:
+  - Time is brain - 1.9 million neurons die per minute in untreated stroke
+  - IV tPA within 4.5 hours improves outcomes (number needed to treat 8-10 for good outcome)
+  - Mechanical thrombectomy for LVO within 6 hours (up to 24 hours selected patients) dramatically improves outcomes
+  - Do NOT lower BP acutely unless giving tPA or BP greater than 220/120 (permissive hypertension maintains cerebral perfusion)
+  - Wake-up strokes (unknown time of onset) may be eligible for tPA if DWI/FLAIR mismatch on MRI
+  - Aspirin plus clopidogrel for 21 days reduces recurrent stroke in minor stroke/high-risk TIA
+
+differentials:
+  - Hemorrhagic stroke (sudden severe headache, vomiting, altered mental status, CT shows blood)
+  - Hypoglycemia (check glucose immediately, resolves with dextrose, can perfectly mimic stroke)
+  - Complex migraine with aura (younger, history of migraines, aura develops over minutes, stroke symptoms abrupt)
+  - Seizure with Todd paralysis (postictal weakness after seizure, resolves over hours)
+
+trace:
+  - 72-year-old woman with hypertension and hyperlipidemia awakens with right arm and leg weakness, difficulty speaking (slurred speech), husband calls 911 immediately
+  - EMS arrival 10 minutes, symptom onset estimated 30 minutes ago (last seen normal at bedtime)
+  - ED arrival: BP 178/94, HR 88 irregular, alert, right hemiparesis (arm 1/5, leg 3/5), facial droop right, slurred speech (dysarthria), able to follow commands, NIHSS 12 (moderate stroke)
+  - Head CT noncontrast at 15 minutes: no hemorrhage, no early ischemic changes
+  - CT angiography: left MCA M1 occlusion (large vessel occlusion)
+  - ECG: atrial fibrillation (cardioembolic source)
+  - Labs: glucose 128 mg/dL, INR 1.0, platelets 245K (eligible for tPA)
+  - Last known normal 8 hours ago (went to bed), but patient awakens with symptoms (wake-up stroke), MRI brain obtained: DWI positive (acute infarct left MCA territory), FLAIR negative (infarct less than 4.5 hours old based on DWI/FLAIR mismatch)
+  - Eligible for IV tPA based on imaging, BP lowered to 168/88 with IV labetalol
+  - IV alteplase 0.9 mg/kg given at 55 minutes from door (door to needle 55 minutes)
+  - Interventional neuroradiology consulted for thrombectomy given LVO, mechanical thrombectomy performed successfully at 90 minutes, TICI 3 reperfusion (complete)
+  - Post-procedure: arm strength improves to 4/5, leg 4/5, speech clearer, NIHSS 4 (dramatic improvement)
+  - Admitted to stroke unit, aspirin 325 mg at 24 hours post-tPA
+  - Day 2: continues to improve, PT/OT/speech therapy, started apixaban 5 mg BID (anticoagulation for atrial fibrillation), atorvastatin 80 mg
+  - Discharge day 4: ambulating with walker, mild residual right arm weakness, independent with ADLs, NIHSS 2
+  - Outpatient follow-up: continues anticoagulation, statin, rehab therapy, 3 months near complete recovery, modified Rankin Scale 1 (excellent outcome)
