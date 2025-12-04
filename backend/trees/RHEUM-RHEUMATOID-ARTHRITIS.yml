@@ -1,67 +1,57 @@
 tree_id: RHEUM-RHEUMATOID-ARTHRITIS
 name: Rheumatoid Arthritis
-family: Rheumatology
+family: Musculoskeletal
 specialty: Rheumatology
-chief_complaint: Joint pain, stiffness, and swelling
-description: |
-  Chronic systemic autoimmune disease causing symmetric inflammatory polyarthritis. Affects 0.5-1% of population, women 3:1, peak onset 40-60 years.
-  Inflammation targets synovium causing joint destruction, deformity, and disability. Extra-articular manifestations include rheumatoid nodules, interstitial lung disease, vasculitis, Felty syndrome. Early aggressive treatment prevents joint damage.
-icd10: M06.9
-urgency: Moderate
+chief_complaint: Joint pain and swelling
+description: Chronic systemic autoimmune disease causing symmetric inflammatory polyarthritis with potential for joint destruction and extra-articular manifestations
+
+icd10: M05.9
+
+urgency: routine
+
 workup:
-  - Clinical presentation - symmetric polyarthritis of small joints (MCPs, PIPs, wrists, MTPs), morning stiffness greater than 1 hour, improves with activity
-  - Spare DIPs (distinguishes from osteoarthritis)
-  - Physical exam - tender, warm, swollen joints, symmetric distribution, reduced range of motion
-  - Deformities in advanced disease - swan neck (PIP hyperextension, DIP flexion), boutonniere (PIP flexion, DIP hyperextension), ulnar deviation, Z-thumb
-  - Extra-articular - rheumatoid nodules (extensor surfaces, pressure points), interstitial lung disease, scleritis, pericarditis, splenomegaly
-  - Labs - RF (rheumatoid factor) positive in 70-80% (can be false positive in elderly, infections, other autoimmune diseases)
-  - Anti-CCP (anti-cyclic citrullinated peptide) antibody more specific (95-98%), predicts erosive disease
-  - ESR and CRP elevated (markers of inflammation, correlate with disease activity)
-  - CBC - anemia of chronic disease common, thrombocytosis
-  - 2010 ACR/EULAR classification criteria - score greater than 6 diagnostic
-  - Joint involvement (0-5 points), serology (RF and anti-CCP, 0-3 points), acute phase reactants (ESR/CRP, 0-1 point), duration greater than 6 weeks (0-1 point)
-  - X-rays of hands and feet - early shows soft tissue swelling, periarticular osteopenia
-  - Late shows joint space narrowing, marginal erosions (specific for RA)
-  - Ultrasound or MRI more sensitive for early erosions and synovitis (power Doppler signal)
-  - Baseline chest X-ray (ILD), hepatitis B and C serology, tuberculosis screening (interferon-gamma release assay or PPD) before starting immunosuppression
+  - Clinical diagnosis: symmetric polyarthritis (>3 joints), morning stiffness >1 hour, involvement of small joints of hands/feet (MCPs, PIPs, MTPs - DIP sparing), rheumatoid nodules
+  - Laboratory: RF positive in 70-80%, anti-CCP antibodies more specific (95%), ESR/CRP elevated (markers of inflammation), CBC (anemia of chronic disease common)
+  - Imaging: radiographs hands/feet show periarticular osteopenia early, then joint space narrowing/erosions (diagnostic but late finding), ultrasound/MRI detect synovitis and erosions earlier
+  - 2010 ACR/EULAR classification criteria: score ≥6/10 definite RA (points for number/size joints involved, serology RF/anti-CCP, duration ≥6 weeks, acute phase reactants ESR/CRP)
+  - Extra-articular: pulmonary (interstitial lung disease, pleural effusion), cardiac (pericarditis, accelerated atherosclerosis), ocular (keratoconjunctivitis sicca, scleritis), Felty syndrome (RA + splenomegaly + neutropenia)
+
 treatment:
-  - Treat-to-target approach - aim for remission or low disease activity, escalate therapy until goal achieved
-  - Disease-modifying antirheumatic drugs (DMARDs) - start early, within 3 months of symptom onset
-  - Methotrexate first-line DMARD - 15-25mg PO or SC weekly plus folic acid 1mg daily (reduces side effects)
-  - Monitor CBC, CMP, LFTs q8-12 weeks (hepatotoxicity, bone marrow suppression)
-  - Contraindications - pregnancy, alcoholism, liver disease (teratogenic, hepatotoxic)
-  - Hydroxychloroquine 200-400mg daily (mild disease or combination therapy) - takes 3-6 months to work, ophthalmology exams yearly (retinal toxicity rare)
-  - Sulfasalazine 2-3g daily in divided doses - alternative to MTX
-  - Leflunomide 20mg daily - alternative to MTX, similar efficacy
-  - Combination DMARDs if inadequate response to monotherapy - MTX plus hydroxychloroquine plus sulfasalazine (triple therapy)
-  - Biologic DMARDs if inadequate response to conventional DMARDs (usually after 3 months MTX)
-  - TNF inhibitors - adalimumab 40mg SC q2 weeks, etanercept 50mg SC weekly, infliximab 3-10 mg/kg IV q8 weeks, certolizumab, golimumab
-  - Screen for latent TB before starting (reactivation risk)
-  - Non-TNF biologics - abatacept (T-cell costimulation blocker), rituximab (B-cell depleting, anti-CD20), tocilizumab (IL-6 receptor antagonist)
-  - JAK inhibitors - tofacitinib 5mg BID, baricitinib 2mg daily, upadacitinib 15mg daily (oral small molecules)
-  - Increased VTE risk, monitor lipids
-  - Glucocorticoids for bridging therapy while DMARDs take effect - prednisone 5-10mg daily, taper as able
-  - Avoid long-term use (osteoporosis, infection, cardiovascular risk)
-  - Intra-articular corticosteroid injections for persistent single joint inflammation
-  - NSAIDs for symptomatic relief (not disease-modifying) - use lowest effective dose
-  - Physical therapy, occupational therapy, assistive devices
-  - Surgical options for severe joint damage - arthroplasty (total joint replacement), synovectomy, tendon repair
-  - Monitor disease activity - DAS28 (Disease Activity Score), CDAI (Clinical Disease Activity Index) q3-6 months
-  - Vaccinations - influenza, pneumococcal, herpes zoster (avoid live vaccines on biologics), COVID-19
+  - Early aggressive DMARD therapy prevents joint damage - start within 3 months of diagnosis
+  - First-line: methotrexate 15-25 mg weekly (DMARD anchor drug) with folic acid 1 mg daily (reduces side effects), monitor CBC/CMP/LFTs every 8-12 weeks
+  - Add hydroxychloroquine 200-400 mg daily or sulfasalazine 2-3 g daily for combination DMARD therapy if inadequate response to methotrexate monotherapy
+  - Biologic DMARDs if inadequate response to conventional DMARDs: TNF inhibitors first-line biologics (etanercept 50 mg SC weekly, adalimumab 40 mg SC every 2 weeks, infliximab 3-10 mg/kg IV at 0/2/6 weeks then every 8 weeks), screen for latent TB before starting
+  - Alternative biologics: IL-6 inhibitor (tocilizumab), B-cell depleting (rituximab), T-cell costimulation blocker (abatacept), JAK inhibitors (tofacitinib, baricitinib)
+  - Glucocorticoids: prednisone 5-10 mg daily bridging therapy while waiting for DMARD to work (takes 6-12 weeks), taper to lowest effective dose or discontinue (long-term side effects)
+  - NSAIDs for symptomatic relief but do not modify disease
+  - Target: clinical remission or low disease activity (DAS28 <2.6 remission, <3.2 low disease activity)
+  - Physical/occupational therapy for joint protection and function
+  - Vaccinations: pneumococcal, influenza, avoid live vaccines if on immunosuppression
+
 clinical_pearls:
-  - Window of opportunity - early treatment (first 3 months) prevents irreversible joint damage
-  - Palindromic rheumatism (episodic arthritis with complete resolution) often precedes RA
-  - Felty syndrome - RA plus splenomegaly plus neutropenia (increased infection risk)
-  - Caplan syndrome - RA plus pneumoconiosis (coal worker) with pulmonary nodules
-  - Atlanto-axial subluxation in cervical spine - high cervical spinal cord compression risk (assess before intubation)
-  - Seronegative RA (RF and anti-CCP negative) 20-30%, treat same as seropositive
-  - Methotrexate pneumonitis rare but serious - acute dyspnea, cough, fever (discontinue MTX, give steroids)
+  - Symmetric polyarthritis with morning stiffness >1 hour classic presentation
+  - Anti-CCP more specific than RF and predicts erosive disease
+  - Early aggressive DMARD therapy (within 3 months) prevents joint destruction
+  - Methotrexate is anchor DMARD - most patients require combination therapy
+  - Treat to target: remission or low disease activity assessed every 3-6 months
+  - Screen for latent TB before starting biologics (TNF inhibitors reactivate TB)
+  - Extra-articular manifestations increase morbidity/mortality
+  - Increased cardiovascular risk - manage traditional risk factors aggressively
+
 differentials:
-  - Osteoarthritis
-  - Psoriatic arthritis
-  - Systemic lupus erythematosus
-  - Polymyalgia rheumatica
-  - Viral arthritis
-  - Crystal arthropathy (gout, pseudogout)
+  - Psoriatic arthritis (asymmetric oligoarthritis, DIP involvement, nail pitting/onycholysis, dactylitis, enthesitis, psoriatic skin lesions)
+  - Systemic lupus erythematosus (non-erosive arthritis, malar rash, photosensitivity, serositis, renal disease, ANA/anti-dsDNA positive)
+  - Osteoarthritis (DIP/PIP involvement, Heberden/Bouchard nodes, worse with use, no prolonged morning stiffness, not inflammatory)
+  - Polymyalgia rheumatica (elderly, shoulder/hip girdle pain and stiffness, ESR markedly elevated >50, dramatic response to prednisone)
+
 trace:
-  - 48-year-old woman with 4 months of bilateral hand and wrist pain, morning stiffness lasting 2 hours → Exam shows symmetric swelling and tenderness of bilateral MCPs, PIPs, wrists → No DIP involvement → Labs - RF 185 IU/mL (positive), anti-CCP 240 U/mL (strongly positive), ESR 52 mm/hr, CRP 18 mg/L → X-rays hands show soft tissue swelling, no erosions yet → Diagnose early rheumatoid arthritis → Start methotrexate 15mg weekly plus folic acid 1mg daily → Prednisone 10mg daily for bridging → Baseline labs, hepatitis/TB screening negative → Improvement at 6 weeks but DAS28 5.2 (moderate activity) → Increase methotrexate to 20mg weekly → DAS28 3.1 at 12 weeks (low disease activity) → Continue current regimen, taper prednisone to 5mg then off → DAS28 2.4 at 6 months (remission) → Continues MTX, monitor q3 months, remains in remission at 1 year
+  - 45-year-old woman presents with 4 months progressive joint pain and swelling in hands/wrists/feet, worst in mornings with stiffness lasting 2-3 hours, improves with activity, difficulty making fist/opening jars, 10-pound weight loss, fatigue
+  - Exam: synovitis (boggy swelling/warmth/tenderness) bilateral MCPs/PIPs/wrists/MTPs symmetric, decreased grip strength, no rash/nodules
+  - Labs: RF 156 IU/mL (elevated), anti-CCP >200 U/mL (markedly elevated), ESR 48 mm/hr, CRP 3.2 mg/dL (both elevated), CBC with mild anemia Hgb 11.2 g/dL
+  - Radiographs hands/feet: periarticular osteopenia, no erosions yet (early disease)
+  - Diagnosis: seropositive rheumatoid arthritis (2010 criteria score 8/10 - symmetric polyarthritis small joints 5 points, RF/anti-CCP positive 3 points, ESR/CRP elevated 1 point, duration >6 weeks)
+  - Started methotrexate 15 mg weekly with folic acid 1 mg daily, prednisone 10 mg daily bridging therapy
+  - 6 weeks: some improvement but still significant synovitis, increased methotrexate to 20 mg weekly, added hydroxychloroquine 400 mg daily
+  - 3 months: marked improvement, morning stiffness 15 minutes, tapered prednisone to 5 mg daily
+  - 6 months: clinical remission (no tender/swollen joints, ESR/CRP normal), stopped prednisone, continued methotrexate/hydroxychloroquine maintenance
+  - 1 year: sustained remission, repeat radiographs show no progression/new erosions, excellent functional status
