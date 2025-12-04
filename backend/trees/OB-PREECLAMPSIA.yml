@@ -1,43 +1,73 @@
 tree_id: OB-PREECLAMPSIA
 name: Preeclampsia
-family: Obstetrics
+family: Obstetric
 specialty: Obstetrics
-chief_complaint: Elevated blood pressure during pregnancy
-description: |
-  Hypertensive disorder of pregnancy characterized by new-onset hypertension (≥140/90) and proteinuria or end-organ dysfunction after 20 weeks.
-  Affects 5-8% of pregnancies. Placental dysfunction causes endothelial damage and systemic inflammation.
-icd10: O14.9
-urgency: High
+chief_complaint: Elevated blood pressure in pregnancy
+description: Hypertensive disorder of pregnancy after 20 weeks gestation with proteinuria or end-organ dysfunction, potentially life-threatening for mother and fetus
+
+icd10: O14.90
+
+urgency: emergent
+
 workup:
-  - Blood pressure measurement (≥140/90 mmHg on two occasions 4 hours apart, or ≥160/110 once)
-  - Urinalysis and urine protein-to-creatinine ratio (≥0.3 diagnostic, or 24-hour urine protein ≥300mg)
-  - Complete metabolic panel (elevated creatinine >1.1 mg/dL indicates renal involvement)
-  - Liver enzymes (AST/ALT >2x upper limit indicates hepatic involvement)
-  - Complete blood count (thrombocytopenia <100k indicates severe features)
-  - LDH and peripheral smear if HELLP syndrome suspected
-  - Fetal monitoring: Non-stress test, biophysical profile, umbilical artery Doppler
-  - Fundoscopic exam if visual symptoms (retinal edema, exudates)
+  - Diagnostic criteria preeclampsia: new-onset hypertension after 20 weeks gestation (BP greater than or equal to 140/90 mmHg on two occasions 4 hours apart) PLUS proteinuria (greater than or equal to 300 mg per 24 hours or protein-to-creatinine ratio greater than or equal to 0.3) OR in absence of proteinuria any of thrombocytopenia, renal insufficiency, liver transaminases elevated, pulmonary edema, new-onset headache or visual disturbances
+  - Severe features: BP greater than or equal to 160/110 mmHg, platelets less than 100K, creatinine greater than 1.1 mg/dL or doubled from baseline, transaminases greater than 2 times normal, pulmonary edema, persistent severe headache or visual changes
+  - Gestational hypertension: hypertension after 20 weeks without proteinuria or end-organ dysfunction (may progress to preeclampsia)
+  - Risk factors: nulliparity (first pregnancy), age extremes (less than 20 or greater than 40), obesity, chronic hypertension, diabetes, renal disease, autoimmune disease, prior preeclampsia (highest risk), multifetal gestation
+  - Clinical presentation: often asymptomatic (detected on routine prenatal visit), severe features cause severe persistent headache, visual changes (blurred vision, scotomata, photophobia), right upper quadrant or epigastric pain (liver capsule distension), nausea/vomiting
+  - Laboratory: CBC (thrombocytopenia, hemolysis if HELLP syndrome), CMP (elevated creatinine, elevated transaminases AST/ALT), LDH (elevated if hemolysis), uric acid elevated
+  - Urine: spot protein-to-creatinine ratio or 24-hour urine protein (greater than or equal to 300 mg diagnostic)
+  - Fetal assessment: non-stress test (fetal heart rate monitoring), ultrasound (fetal growth, amniotic fluid volume, biophysical profile)
+  - HELLP syndrome: severe variant (Hemolysis, Elevated Liver enzymes, Low Platelets), LDH greater than 600 U/L, AST/ALT elevated, platelets less than 100K, schistocytes on smear, life-threatening
+  - Eclampsia: preeclampsia plus seizures (grand mal, medical emergency)
+
 treatment:
-  - Delivery is definitive treatment: ≥37 weeks regardless of severity, or earlier if severe features
-  - Antihypertensives if BP ≥160/110: IV labetalol or hydralazine acutely, oral labetalol or nifedipine for maintenance
-  - Magnesium sulfate for seizure prophylaxis (4g IV load, then 1-2g/hr infusion during labor and 24 hours postpartum)
-  - Corticosteroids (betamethasone) for fetal lung maturity if <34 weeks and delivery anticipated
-  - Expectant management only if <34 weeks without severe features, with intensive monitoring
-  - Monitor for HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets)
-  - Postpartum monitoring for 72 hours (25% of eclampsia occurs postpartum)
+  - Delivery is definitive cure: only treatment that resolves disease
+  - Timing of delivery: depends on gestational age and severity
+  - Severe preeclampsia: deliver at 34 weeks or greater (benefits outweigh risks), if less than 34 weeks give betamethasone (fetal lung maturity) and deliver within 48 hours, if less than 23 weeks consider termination (extremely high maternal risk, fetus previable)
+  - Preeclampsia without severe features: deliver at 37 weeks gestation, expectant management with close monitoring (twice weekly BP, labs, fetal testing) until 37 weeks
+  - Blood pressure management: goal less than 160/110 mmHg (prevent stroke), if greater than or equal to 160/110 mmHg give antihypertensive urgently (within 30-60 minutes), labetalol 20 mg IV then 40-80 mg every 10 minutes (max 300 mg) or hydralazine 5-10 mg IV every 20 minutes or nifedipine immediate-release 10-20 mg PO every 20 minutes
+  - Magnesium sulfate for seizure prophylaxis: if severe features or during labor/delivery (prevents eclampsia), 4-6 grams IV load over 15-20 minutes then 2 grams per hour continuous infusion, continue until 24 hours post-delivery, monitor reflexes (loss indicates toxicity), calcium gluconate antidote
+  - Delivery method: induction of labor (vaginal delivery preferred if cervix favorable), cesarean section if maternal/fetal distress or failed induction
+  - Postpartum monitoring: preeclampsia can worsen or develop postpartum (monitor BP closely, magnesium sulfate for 24 hours post-delivery if severe features)
+  - Postpartum hypertension: continue or start antihypertensive (labetalol, nifedipine), avoid methyldopa postpartum (increases depression), NSAIDs safe short-term
+  - Prevention next pregnancy: low-dose aspirin 81-162 mg daily starting 12-16 weeks gestation (reduces preeclampsia risk by 10-15 percent if high-risk)
+  - Long-term: preeclampsia increases lifetime cardiovascular risk (counsel on lifestyle, screen for hypertension, diabetes)
+
 clinical_pearls:
-  - Severe features: BP ≥160/110, thrombocytopenia <100k, creatinine >1.1, liver enzymes 2x normal, pulmonary edema, visual symptoms, severe headache
-  - Eclampsia = seizures in preeclampsia patient (life-threatening, treat with magnesium sulfate)
-  - HELLP syndrome can occur without hypertension or proteinuria
-  - Risk factors: nulliparity, multiple gestation, chronic hypertension, diabetes, obesity, prior preeclampsia
-  - Low-dose aspirin 81mg daily from 12-36 weeks reduces preeclampsia risk by 15% in high-risk patients
-  - Postpartum preeclampsia can occur up to 6 weeks after delivery
+  - New-onset hypertension after 20 weeks plus proteinuria or end-organ dysfunction
+  - Severe features: BP greater than or equal to 160/110, platelets less than 100K, elevated creatinine or transaminases, symptoms
+  - Delivery is definitive cure (deliver at 34 weeks if severe features, 37 weeks if not severe)
+  - Lower BP urgently if greater than or equal to 160/110 mmHg (prevent stroke) - labetalol or hydralazine IV
+  - Magnesium sulfate for seizure prophylaxis (4-6 grams load then 2 grams per hour)
+  - HELLP syndrome severe variant (hemolysis, elevated liver enzymes, low platelets)
+  - Aspirin 81 mg daily from 12-16 weeks prevents preeclampsia in high-risk
+
 differentials:
-  - Chronic hypertension
-  - Gestational hypertension
-  - HELLP syndrome
-  - Acute fatty liver of pregnancy
-  - Thrombotic thrombocytopenic purpura
-  - Hemolytic uremic syndrome
+  - Chronic hypertension (hypertension before 20 weeks or pre-existing)
+  - Gestational hypertension (hypertension after 20 weeks but no proteinuria or end-organ dysfunction)
+  - HELLP syndrome (hemolysis, elevated liver enzymes, low platelets - variant of severe preeclampsia)
+  - Acute fatty liver of pregnancy (similar presentation but hypoglycemia, coagulopathy, microvesicular steatosis)
+
 trace:
-  - New-onset hypertension after 20 weeks → Check urine protein and labs → Preeclampsia diagnosed if proteinuria or end-organ dysfunction → Assess for severe features → Magnesium sulfate if indicated → Antihypertensives if BP ≥160/110 → Deliver at ≥37 weeks or earlier if severe → Postpartum monitoring for 72 hours
+  - 32-year-old G1P0 (first pregnancy) at 34 weeks gestation presents to obstetric triage with severe persistent headache x 4 hours and blurred vision
+  - History: pregnancy uncomplicated until today, prenatal labs normal, no proteinuria at 28 weeks
+  - Exam: BP 168/112 mmHg (severe hypertension), repeated 15 minutes later 172/108 mmHg (confirms sustained elevation), HR 88, weight gain 5 pounds in past week, 2+ edema bilateral lower extremities, 3+ reflexes (hyperreflexia), fundoscopic exam normal, no right upper quadrant tenderness
+  - Urine dipstick: 3+ protein
+  - Labs: platelets 88K (thrombocytopenia, normal 150-450K), creatinine 1.3 mg/dL (elevated, baseline 0.7 mg/dL), AST 245 U/L (elevated, normal less than 40), ALT 198 U/L (elevated), LDH 450 U/L (mildly elevated), hemoglobin 10.8 g/dL
+  - Spot urine protein-to-creatinine ratio: 2.8 (markedly elevated, greater than 0.3 diagnostic)
+  - Diagnosis: severe preeclampsia at 34 weeks gestation with severe features (BP greater than or equal to 160/110, thrombocytopenia, elevated creatinine, elevated transaminases, severe headache and visual changes)
+  - Fetal assessment: non-stress test reactive (fetal heart rate reassuring), ultrasound shows estimated fetal weight 2100 grams (appropriate for gestational age), amniotic fluid normal
+  - Admitted to labor and delivery for urgent delivery (34 weeks with severe features, deliver within 48 hours)
+  - Antihypertensive given urgently: IV labetalol 20 mg, repeated 40 mg x 2 doses, BP decreased to 148/94 mmHg (less than 160/110, goal achieved)
+  - Magnesium sulfate started for seizure prophylaxis: 6 grams IV load over 20 minutes then 2 grams per hour continuous infusion (prevents eclampsia)
+  - Betamethasone given: 12 mg IM x 2 doses 24 hours apart (accelerate fetal lung maturity)
+  - 48 hours later (after betamethasone course complete): labor induced with cervical ripening (misoprostol then oxytocin)
+  - Labor progressed, vaginal delivery healthy girl 2150 grams, Apgar scores 8 and 9, admitted to NICU for prematurity monitoring (34 weeks)
+  - Magnesium sulfate continued 24 hours post-delivery (total 30 hours)
+  - Postpartum day 1: BP 152/96 mmHg, started oral labetalol 200 mg BID
+  - Postpartum day 2: BP 138/88 mmHg (improved), platelets 92K (still low), creatinine 1.1 mg/dL (improving), AST/ALT decreasing
+  - Discharge postpartum day 3: BP controlled on labetalol 200 mg BID, headache resolved, vision normal, labs improving
+  - Postpartum follow-up 1 week: BP 128/82 (normalized), platelets 145K (normalized), creatinine 0.8 mg/dL (baseline), transaminases normal, discontinued labetalol
+  - Baby discharged NICU day 8: healthy, no complications from prematurity
+  - Counseling future pregnancy: high-risk due to prior preeclampsia (30-50 percent recurrence risk), start aspirin 81 mg daily at 12 weeks gestation, close monitoring, increased lifetime cardiovascular risk (lifestyle modifications, annual screening)
