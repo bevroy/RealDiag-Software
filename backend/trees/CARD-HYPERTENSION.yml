@@ -1,304 +1,66 @@
 tree_id: CARD-HYPERTENSION
-name: Hypertension Evaluation and Management
-family: CARDIOLOGY
-specialty: Cardiology/Primary Care/Internal Medicine
-chief_complaint: Elevated Blood Pressure
-description: Diagnostic decision tree for hypertension evaluation and management
-version: "1.0"
-author: RealDiag Team
-entry_point: bp_measurement
+name: Hypertension
+family: Cardiovascular
+specialty: Cardiology
+chief_complaint: Elevated blood pressure
+description: Sustained elevation of systolic BP 130 or more or diastolic BP 80 or more increasing risk of cardiovascular disease, stroke, and kidney disease
 
-nodes:
-  - id: bp_measurement
-    type: question
-    text: "Blood pressure reading?"
-    options:
-      - label: "≥ 180/120 mmHg with symptoms"
-        next: hypertensive_emergency
-      - label: "≥ 180/120 mmHg without symptoms"
-        next: hypertensive_urgency
-      - label: "140-179/90-119 mmHg (Stage 2)"
-        next: stage2_htn
-      - label: "130-139/80-89 mmHg (Stage 1)"
-        next: stage1_htn
-      - label: "120-129/<80 mmHg (Elevated)"
-        next: elevated_bp
+icd10: I10
 
-  - id: hypertensive_emergency
-    type: question
-    text: "End-organ damage present?"
-    options:
-      - label: "Chest pain, ECG changes"
-        next: acute_coronary
-      - label: "Severe headache, altered mental status, seizures"
-        next: hypertensive_encephalopathy
-      - label: "Dyspnea, pulmonary edema"
-        next: acute_heart_failure
-      - label: "Back pain, pulse differential"
-        next: aortic_dissection
+urgency: routine
 
-  - id: acute_coronary
-    type: diagnosis
-    diagnosis: Hypertensive Emergency with ACS
-    icd10: I16.1
-    urgency: critical
-    workup:
-      - ECG
-      - Troponin
-      - CXR
-      - Echocardiogram
-    treatment:
-      - IV nitroglycerin or labetalol
-      - Aspirin
-      - Cardiology consult
-      - Reduce BP 10-20% in first hour
-      - ICU admission
+workup:
+  - Definition (ACC/AHA 2017): normal (less than 120/80), elevated (120-129 and less than 80), stage 1 hypertension (130-139 or 80-89), stage 2 hypertension (140 or more or 90 or more), hypertensive crisis (180 or more and/or 120 or more)
+  - Diagnosis: average of 2 or more readings on 2 or more occasions, proper technique (seated 5 minutes, back supported, feet flat, arm at heart level, appropriate cuff size)
+  - Out-of-office BP measurement confirms diagnosis: home BP monitoring (preferred) or ambulatory BP monitoring (ABPM) to exclude white coat hypertension
+  - Initial evaluation: electrolytes (potassium before starting diuretics), creatinine/eGFR (renal function), glucose/HbA1c (diabetes), lipid panel (cardiovascular risk), urinalysis (proteinuria, hematuria), ECG (LVH, prior MI)
+  - Assess 10-year ASCVD risk: use pooled cohort equations (age, sex, race, total cholesterol, HDL, systolic BP, diabetes, smoking)
+  - Screen for secondary hypertension if young age (less than 30), severe/resistant hypertension, sudden onset, hypokalemia: renal artery stenosis (abdominal bruit, asymmetric kidney size), primary aldosteronism (aldosterone/renin ratio), pheochromocytoma (episodic symptoms, plasma metanephrines), Cushing syndrome (clinical features), sleep apnea (snoring, daytime sleepiness), coarctation of aorta (young, upper extremity hypertension with diminished femoral pulses)
 
-  - id: hypertensive_encephalopathy
-    type: diagnosis
-    diagnosis: Hypertensive Encephalopathy
-    icd10: I67.4
-    urgency: critical
-    workup:
-      - CT head
-      - Fundoscopic exam (papilledema)
-      - BMP, creatinine
-    treatment:
-      - IV labetalol or nicardipine
-      - Reduce BP 10-25% in first hour
-      - Seizure precautions
-      - ICU admission
-      - Neurology consult
+treatment:
+  - Lifestyle modifications (all patients): weight loss if overweight (5-10 kg reduces BP 5-20 mmHg), DASH diet (fruits, vegetables, low-fat dairy, reduced saturated fat), sodium restriction (less than 2.3 grams daily ideally 1.5 grams), regular aerobic exercise (150 min/week moderate reduces BP 5-8 mmHg), limit alcohol (2 or less drinks daily men, 1 or less women), smoking cessation
+  - Initiate antihypertensive therapy: stage 1 hypertension (130-139/80-89) if ASCVD risk 10 percent or more or existing ASCVD/diabetes/CKD, stage 2 hypertension (140 or more/90 or more) regardless of risk
+  - BP goal: less than 130/80 for most adults, individualize based on age, comorbidities, tolerability
+  - First-line agents (thiazide diuretics, ACE inhibitors, ARBs, CCBs): start monotherapy if BP less than 20/10 above goal, start 2 agents if 20/10 or more above goal
+  - Thiazide or thiazide-like diuretics: chlorthalidone 12.5-25 mg daily (preferred, longer acting), hydrochlorothiazide 25-50 mg daily, monitor potassium (hypokalemia)
+  - ACE inhibitors: lisinopril 10-40 mg daily, enalapril 5-20 mg BID, check creatinine/potassium in 2-4 weeks (may increase both), monitor for cough (10-20 percent), contraindicated in pregnancy
+  - ARBs: losartan 50-100 mg daily, valsartan 80-320 mg daily - alternative if ACE intolerance (cough), same contraindications as ACE inhibitors
+  - Calcium channel blockers: amlodipine 5-10 mg daily (dihydropyridine, peripheral edema common), diltiazem 120-360 mg daily (non-dihydropyridine)
+  - Combination therapy if inadequate response to monotherapy: ACE inhibitor or ARB plus CCB or thiazide (never combine ACE plus ARB - increases adverse events)
+  - Black patients: CCB or thiazide preferred first-line (ACE/ARB less effective monotherapy in black patients without CKD)
+  - CKD or diabetes with albuminuria: ACE inhibitor or ARB first-line (renoprotective)
+  - Resistant hypertension (uncontrolled on 3 agents including diuretic): ensure adherence, proper BP technique, exclude secondary causes, add spironolactone 25-50 mg daily (most effective fourth agent), alternatives include hydralazine, clonidine, minoxidil
+  - Hypertensive emergency (BP 180 or more/120 or more with end-organ damage): admit ICU, IV antihypertensives (labetalol, nicardipine, clevidipine), reduce BP 10-20 percent first hour, then 5-15 percent over next 23 hours (avoid rapid reduction - cerebral hypoperfusion)
+  - Hypertensive urgency (BP 180 or more/120 or more without end-organ damage): resume or intensify oral therapy, recheck in days to weeks, no need for ER
 
-  - id: acute_heart_failure
-    type: diagnosis
-    diagnosis: Hypertensive Emergency with Acute HF
-    icd10: I16.1
-    urgency: critical
-    workup:
-      - CXR
-      - BNP/NT-proBNP
-      - Echocardiogram
-      - ECG
-    treatment:
-      - IV nitroglycerin or nitroprusside
-      - IV furosemide
-      - Reduce BP 10-20% in first hour
-      - Non-invasive ventilation if needed
-      - ICU admission
+clinical_pearls:
+  - 2017 ACC/AHA guidelines lowered threshold for hypertension to 130/80 (previously 140/90)
+  - Proper BP measurement technique essential (seated 5 minutes, appropriate cuff)
+  - Home BP monitoring confirms diagnosis and excludes white coat hypertension
+  - Lifestyle modifications reduce BP 5-20 mmHg (weight loss, DASH diet, sodium restriction, exercise)
+  - First-line agents: thiazide diuretics, ACE inhibitors, ARBs, CCBs
+  - Most patients require 2 or more agents to achieve BP goal less than 130/80
+  - ACE inhibitors or ARBs first-line if CKD or diabetes with albuminuria (renoprotective)
+  - Resistant hypertension: spironolactone most effective fourth agent
 
-  - id: aortic_dissection
-    type: diagnosis
-    diagnosis: Aortic Dissection
-    icd10: I71.00
-    urgency: critical
-    workup:
-      - CT angiography chest
-      - Transthoracic echocardiogram
-      - ECG
-    treatment:
-      - IV esmolol + nitroprusside
-      - Target SBP 100-120 mmHg
-      - Emergent cardiothoracic surgery consult
-      - ICU admission
-      - Control heart rate first
+differentials:
+  - White coat hypertension (elevated in office, normal at home - confirm with home BP monitoring)
+  - Masked hypertension (normal in office, elevated at home - worse prognosis than white coat)
+  - Secondary hypertension (renal artery stenosis, primary aldosteronism, pheochromocytoma, Cushing, sleep apnea, coarctation)
+  - Pseudohypertension (falsely elevated BP from stiff arteries in elderly, Osler maneuver positive)
 
-  - id: hypertensive_urgency
-    type: diagnosis
-    diagnosis: Hypertensive Urgency
-    icd10: I16.0
-    urgency: high
-    workup:
-      - BMP, creatinine
-      - Urinalysis
-      - ECG
-      - Assess for end-organ damage
-    treatment:
-      - Oral antihypertensives
-      - Reduce BP over 24-48 hours
-      - Close outpatient follow-up in 1-3 days
-      - Avoid rapid BP reduction
-      - Address medication compliance
-
-  - id: stage2_htn
-    type: question
-    text: "Previous diagnosis of hypertension?"
-    options:
-      - label: "Newly diagnosed"
-        next: new_stage2
-      - label: "Known HTN, uncontrolled on meds"
-        next: uncontrolled_htn
-      - label: "White coat hypertension suspected"
-        next: white_coat_eval
-
-  - id: new_stage2
-    type: question
-    text: "CV risk factors present?"
-    options:
-      - label: "High CV risk or diabetes"
-        next: high_risk_stage2
-      - label: "Low-moderate risk"
-        next: standard_stage2
-
-  - id: high_risk_stage2
-    type: diagnosis
-    diagnosis: Stage 2 Hypertension (High Risk)
-    icd10: I10
-    urgency: high
-    workup:
-      - BMP, creatinine, eGFR
-      - Lipid panel
-      - HbA1c
-      - Urinalysis
-      - ECG
-      - Consider echocardiogram
-    treatment:
-      - Start 2 antihypertensives immediately
-      - ACE-I/ARB + CCB or thiazide diuretic
-      - Lifestyle modifications
-      - Follow-up in 1 month
-      - Target < 130/80
-
-  - id: standard_stage2
-    type: diagnosis
-    diagnosis: Stage 2 Hypertension
-    icd10: I10
-    urgency: medium
-    workup:
-      - BMP, creatinine
-      - Lipid panel
-      - Urinalysis
-      - ECG
-    treatment:
-      - Start 2 antihypertensives
-      - Lifestyle modifications
-      - Follow-up in 1 month
-      - Target < 130/80
-
-  - id: uncontrolled_htn
-    type: question
-    text: "Medication adherence?"
-    options:
-      - label: "Poor adherence"
-        next: adherence_intervention
-      - label: "Good adherence, inadequate control"
-        next: treatment_intensification
-      - label: "Resistant hypertension (on 3+ meds)"
-        next: resistant_htn
-
-  - id: adherence_intervention
-    type: diagnosis
-    diagnosis: Non-Adherence to Antihypertensive Therapy
-    icd10: Z91.14
-    urgency: medium
-    workup:
-      - Medication reconciliation
-      - Identify barriers
-    treatment:
-      - Simplify regimen
-      - Address cost/side effects
-      - Patient education
-      - Consider combination pills
-      - Close follow-up
-
-  - id: treatment_intensification
-    type: diagnosis
-    diagnosis: Uncontrolled Hypertension
-    icd10: I10
-    urgency: medium
-    workup:
-      - Review current regimen
-      - BMP, creatinine
-      - Check for secondary causes
-    treatment:
-      - Increase dose or add medication
-      - Optimize drug classes
-      - Lifestyle reinforcement
-      - Follow-up in 2-4 weeks
-
-  - id: resistant_htn
-    type: diagnosis
-    diagnosis: Resistant Hypertension
-    icd10: I10
-    urgency: high
-    workup:
-      - Screen for secondary causes
-      - Aldosterone/renin ratio
-      - Renal artery duplex
-      - Sleep study (OSA)
-      - 24-hour ambulatory BP monitoring
-    treatment:
-      - Add spironolactone
-      - Cardiology/nephrology referral
-      - Rule out pseudoresistance
-      - Consider renal denervation
-
-  - id: white_coat_eval
-    type: diagnosis
-    diagnosis: White Coat Hypertension (Suspected)
-    icd10: R03.0
-    urgency: low
-    workup:
-      - Home BP monitoring
-      - 24-hour ambulatory BP monitoring
-      - Office BP rechecks
-    treatment:
-      - Confirm diagnosis
-      - Lifestyle modifications
-      - Monitor annually if confirmed
-      - May not need medications
-
-  - id: stage1_htn
-    type: question
-    text: "Cardiovascular risk assessment?"
-    options:
-      - label: "High CV risk (>10% 10-year ASCVD risk)"
-        next: high_risk_stage1
-      - label: "Low-moderate risk"
-        next: lifestyle_first
-
-  - id: high_risk_stage1
-    type: diagnosis
-    diagnosis: Stage 1 Hypertension (High CV Risk)
-    icd10: I10
-    urgency: medium
-    workup:
-      - ASCVD risk calculator
-      - BMP, lipids, HbA1c
-      - Urinalysis, ECG
-    treatment:
-      - Start antihypertensive (ACE-I/ARB, CCB, or thiazide)
-      - Lifestyle modifications
-      - Statin if indicated
-      - Follow-up in 1 month
-      - Target < 130/80
-
-  - id: lifestyle_first
-    type: diagnosis
-    diagnosis: Stage 1 Hypertension
-    icd10: I10
-    urgency: low
-    workup:
-      - Baseline labs
-      - Cardiovascular risk assessment
-    treatment:
-      - Lifestyle modifications (DASH diet, exercise, weight loss, limit alcohol/sodium)
-      - Recheck BP in 3-6 months
-      - Start medication if not improved
-      - Home BP monitoring
-
-  - id: elevated_bp
-    type: diagnosis
-    diagnosis: Elevated Blood Pressure
-    icd10: R03.0
-    urgency: low
-    workup:
-      - Confirm with repeat measurements
-      - Assess CV risk factors
-    treatment:
-      - Lifestyle modifications
-      - Weight management
-      - DASH diet
-      - Regular exercise
-      - Limit sodium and alcohol
-      - Recheck BP in 3-6 months
+trace:
+  - 52-year-old man presents for health maintenance, no complaints, BP readings at pharmacy consistently 140s/90s x 3 months
+  - Past medical history: no known medical conditions, family history father with MI at age 58
+  - Exam: BMI 32 (obese), BP 146/92 (repeated 5 minutes later 142/88), normal cardiovascular/pulmonary exam
+  - Labs: creatinine 0.9 mg/dL (eGFR greater than 90), potassium 4.2 mEq/L, glucose 102 mg/dL (impaired fasting), HbA1c 5.9 percent (prediabetes), lipid panel total cholesterol 220, LDL 145, HDL 42, triglycerides 165, urinalysis normal (no proteinuria)
+  - ECG: normal sinus rhythm, no LVH
+  - 10-year ASCVD risk: 12 percent (age 52, male, systolic BP 146, total cholesterol 220, HDL 42, nonsmoker, no diabetes)
+  - Home BP monitoring: average 138/86 over 1 week (confirms hypertension)
+  - Diagnosis: stage 2 hypertension (140 or more/90 or more), obesity, prediabetes, dyslipidemia, 10-year ASCVD risk 12 percent (warrants treatment)
+  - Lifestyle counseling: weight loss goal 10 percent (current 220 pounds, goal 198), DASH diet, sodium restriction less than 2.3 grams daily, regular exercise 30 min moderate 5 days/week
+  - Started chlorthalidone 12.5 mg daily (thiazide diuretic first-line), atorvastatin 20 mg nightly (statin for ASCVD risk reduction)
+  - Follow-up 4 weeks: home BP average 128/80, potassium 3.8 mEq/L (mild hypokalemia from diuretic but asymptomatic), weight 215 pounds (5-pound loss)
+  - Continues chlorthalidone 12.5 mg daily, BP at goal less than 130/80
+  - 3 months: home BP average 124/78 (excellent control), weight 208 pounds (12-pound loss), continues lifestyle modifications and chlorthalidone
+  - Annual follow-up: sustained BP control, weight 200 pounds (20-pound loss from baseline), HbA1c 5.6 percent (improved), LDL 98 mg/dL on statin
