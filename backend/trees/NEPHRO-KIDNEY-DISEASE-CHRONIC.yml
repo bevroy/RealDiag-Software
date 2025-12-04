@@ -1,0 +1,50 @@
+tree_id: NEPHRO-KIDNEY-DISEASE-CHRONIC
+name: Chronic Kidney Disease
+family: Nephrology
+specialty: Nephrology
+chief_complaint: Elevated creatinine or reduced kidney function
+description: Progressive irreversible decline in kidney function defined by GFR less than 60 for greater than 3 months or kidney damage markers. Early detection, BP control, and RAAS blockade slow progression and reduce cardiovascular risk.
+icd10: N18.9
+urgency: non-urgent
+
+workup:
+  - Serum creatinine and eGFR: estimate kidney function using CKD-EPI equation (more accurate than MDRD)
+  - CKD staging by eGFR: Stage 1 (≥90 with kidney damage), Stage 2 (60-89), Stage 3a (45-59), Stage 3b (30-44), Stage 4 (15-29), Stage 5 (<15 or dialysis)
+  - Urinalysis: check for proteinuria, hematuria, pyuria
+  - Urine albumin-to-creatinine ratio (UACR): quantify albuminuria (normal <30, microalbuminuria 30-300, macroalbuminuria >300 mg/g)
+  - Renal ultrasound: assess kidney size (small echogenic kidneys suggest chronic disease), rule out obstruction or masses
+  - Identify etiology: diabetes (most common 40%), hypertension (30%), glomerulonephritis, polycystic kidney disease
+  - Complications labs: CBC (anemia), calcium/phosphate/PTH (mineral bone disease), potassium (hyperkalemia), bicarbonate (metabolic acidosis)
+  - Screen for cardiovascular disease: lipid panel, ECG (CKD increases CV risk)
+
+treatment:
+  - Blood pressure control: goal <130/80, ACE inhibitor or ARB first-line (slow progression by reducing proteinuria and intraglomerular pressure)
+  - RAAS blockade: lisinopril 10-40 mg daily or losartan 50-100 mg daily (renoprotective even if BP normal but proteinuric)
+  - Diabetes control: HbA1c <7% reduces microvascular complications, SGLT2 inhibitors (empagliflozin, dapagliflozin) slow CKD progression
+  - Avoid nephrotoxins: NSAIDs, aminoglycosides, IV contrast (if needed pre-hydrate), adjust medications for renal function
+  - Dietary: protein restriction 0.8 g/kg/day if Stage 3-5, sodium <2 g/day, potassium restriction if hyperkalemic
+  - Anemia management (if Hgb <10): erythropoiesis-stimulating agents (epoetin alfa, darbepoetin) plus iron supplementation (IV iron preferred)
+  - Mineral bone disease: phosphate binders with meals if elevated phosphate, calcitriol if low vitamin D, treat secondary hyperparathyroidism
+  - Metabolic acidosis: sodium bicarbonate 650 mg TID if bicarb <22 (slows CKD progression)
+  - Cardiovascular risk reduction: statin therapy, aspirin if ASCVD
+  - Nephrology referral: Stage 4-5 (eGFR <30), rapidly progressive (eGFR decline >5/year), difficult-to-control hypertension, significant proteinuria >1 g/day
+  - Dialysis or transplant: when eGFR <15 (Stage 5) or symptomatic uremia
+
+clinical_pearls:
+  - eGFR <60 for >3 months or kidney damage markers diagnostic
+  - ACE inhibitor or ARB first-line for BP and proteinuria (renoprotective)
+  - SGLT2 inhibitors slow CKD progression in diabetics
+  - Avoid NSAIDs (reduce GFR and worsen kidney function)
+  - Adjust medications for renal function (antibiotics, anticoagulants)
+  - Screen for complications: anemia, mineral bone disease, hyperkalemia, metabolic acidosis
+  - Nephrology referral if Stage 4-5 or proteinuria >1 g/day
+  - CKD increases cardiovascular risk - aggressive risk factor management
+
+differentials:
+  - Acute kidney injury: rapid rise in creatinine over hours-days, often reversible if treated promptly
+  - Prerenal azotemia: dehydration or decreased perfusion, improves with volume resuscitation, bland urinalysis
+  - Nephrotic syndrome: heavy proteinuria >3.5 g/day, edema, hypoalbuminemia, hyperlipidemia
+  - Obstructive uropathy: bilateral hydronephrosis on ultrasound, BPH or stones
+
+trace: |
+  A 58-year-old man with type 2 diabetes x15 years and hypertension presented for routine follow-up. Labs showed creatinine 1.8 (baseline 1.0 two years ago), eGFR 38 (Stage 3b CKD), repeat 3 months later confirmed eGFR 36. UACR 450 mg/g (macroalbuminuria). Urinalysis showed 2+ protein, no blood or cells. Renal ultrasound showed mildly decreased kidney size bilaterally without obstruction. HbA1c 8.2%, BP 148/92. Diagnosed with diabetic nephropathy causing CKD Stage 3b. Started lisinopril 20 mg daily for renoprotection and BP control. Added empagliflozin 10 mg daily (SGLT2 inhibitor slows CKD progression). Discontinued ibuprofen (nephrotoxic NSAID). Low-sodium diet counseling. At 3 months BP 128/78, creatinine stable 1.9, eGFR 37 (progression slowed), UACR improved to 320. At 6 months HbA1c 7.1%, anemia developed (Hgb 10.2), started epoetin alfa and iron supplementation. At 12 months eGFR stable at 36, excellent BP control, anemia improved. Referred to nephrology for ongoing management. Continues lisinopril, empagliflozin, monitoring every 3 months.
