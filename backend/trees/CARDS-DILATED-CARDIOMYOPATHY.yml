@@ -1,0 +1,99 @@
+tree_id: CARDS-DILATED-CARDIOMYOPATHY
+name: Dilated Cardiomyopathy (DCM)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Shortness of breath and leg swelling
+description: LV dilatation with systolic dysfunction causing heart failure, multiple etiologies including idiopathic, alcohol, viral, familial. Standard heart failure therapy with ACE inhibitors, beta blockers, diuretics. ICD for primary prevention if EF below 35%, cardiac resynchronization therapy if wide QRS.
+icd10: I42.0
+urgency: urgent
+
+workup:
+  - Symptoms: heart failure symptoms
+  - Dyspnea: exertional dyspnea, orthopnea, PND
+  - Fatigue: low cardiac output
+  - Peripheral edema: volume overload
+  - Palpitations: atrial fibrillation, ventricular arrhythmias
+  - Chest pain: less common than ischemic cardiomyopathy
+  - Physical exam:
+  - Elevated JVP: volume overload
+  - Displaced apical impulse: LV dilatation (lateral and inferior displacement)
+  - S3 gallop: volume overload and systolic dysfunction
+  - Mitral regurgitation murmur: functional MR from annular dilatation
+  - Peripheral edema, ascites: right heart failure
+  - Rales: pulmonary edema
+  - Hypotension: low cardiac output
+  - Causes (many etiologies):
+  - Idiopathic (50%): no identifiable cause, diagnosis of exclusion
+  - Alcohol (20-30%): chronic heavy alcohol use, reversible if abstinence
+  - Viral myocarditis: coxsackievirus, adenovirus, HIV, post-viral DCM
+  - Familial/genetic (20-35%): mutations in sarcomeric or cytoskeletal proteins (TTN, LMNA), autosomal dominant
+  - Peripartum cardiomyopathy: last month of pregnancy to 5 months postpartum
+  - Chemotherapy: anthracyclines (doxorubicin), trastuzumab
+  - Tachycardia-induced: chronic uncontrolled atrial fibrillation or VT causes DCM, reversible with rate control
+  - Infiltrative: hemochromatosis, sarcoidosis
+  - Endocrine: hypothyroidism, hyperthyroidism
+  - Nutritional: thiamine deficiency (beriberi), selenium deficiency
+  - Echocardiogram (diagnostic):
+  - LV dilatation: increased end-diastolic dimension (over 55 mm)
+  - Reduced systolic function: EF below 40% (mild 40-50%, moderate 30-40%, severe below 30%)
+  - Global hypokinesis: diffuse wall motion abnormalities (vs regional in ischemic)
+  - LV spherical remodeling: loss of elliptical shape
+  - Functional mitral regurgitation: annular dilatation prevents leaflet coaptation
+  - RV dilatation and dysfunction: if advanced
+  - Exclude other causes:
+  - Coronary angiography: rule out ischemic cardiomyopathy (CAD causing DCM)
+  - Cardiac MRI: distinguish ischemic vs non-ischemic, late gadolinium enhancement pattern, infiltrative disease
+  - Labs: TSH (thyroid), HIV, iron studies (hemochromatosis), B12 and thiamine (nutritional)
+  - Genetic testing: if family history or age below 50
+  - ECG: non-specific ST-T changes, left bundle branch block (LBBB), atrial fibrillation, low voltage
+  - Chest X-ray: cardiomegaly, pulmonary edema
+
+treatment:
+  - Standard heart failure therapy (guideline-directed medical therapy - GDMT):
+  - ACE inhibitors or ARBs: enalapril 10-20 mg BID, lisinopril 20-40 mg daily, reduce mortality
+  - Sacubitril/valsartan (Entresto): ARNi, superior to ACE inhibitors, 97/103 mg BID
+  - Beta blockers: carvedilol 25 mg BID, metoprolol succinate 200 mg daily, bisoprolol 10 mg daily
+  - Start low, titrate slowly, reduce mortality
+  - MRAs (mineralocorticoid receptor antagonists): spironolactone 25-50 mg daily or eplerenone, reduce mortality
+  - SGLT2 inhibitors: dapagliflozin 10 mg daily or empagliflozin 10 mg daily, reduce HF hospitalizations and mortality
+  - Diuretics: furosemide for volume overload, titrate to euvolemia
+  - Loop diuretics do NOT reduce mortality (symptom relief only)
+  - Hydralazine/isosorbide dinitrate: if intolerant to ACE inhibitors or ARBs, especially African Americans
+  - Digoxin: if symptoms persist despite GDMT, reduces hospitalizations
+  - Anticoagulation: if atrial fibrillation or LV thrombus
+  - ICD (implantable cardioverter-defibrillator):
+  - Primary prevention: EF below 35% despite 3 months optimal medical therapy
+  - Reduces sudden cardiac death
+  - Secondary prevention: survived cardiac arrest or sustained VT
+  - Cardiac resynchronization therapy (CRT - biventricular pacemaker):
+  - If EF below 35%, LBBB with QRS over 150 ms, NYHA class II-IV on optimal therapy
+  - Improves symptoms, reduces hospitalizations, reduces mortality
+  - CRT-D: combined ICD and CRT
+  - Treat underlying cause:
+  - Alcohol: strict abstinence (EF may improve 10-20%)
+  - Tachycardia-induced: rate control or ablation (reversible)
+  - Hemochromatosis: phlebotomy
+  - Thyroid disease: treat thyroid disorder
+  - Advanced therapies:
+  - LVAD (left ventricular assist device): bridge to transplant or destination therapy if end-stage
+  - Heart transplantation: if refractory end-stage heart failure
+  - Family screening: first-degree relatives get echo if familial/genetic DCM
+
+clinical_pearls:
+  - LV dilatation with reduced EF (below 40%) and global hypokinesis
+  - Idiopathic most common (50%), alcohol second (20-30%)
+  - GDMT four pillars: ACE inhibitor/ARB (or ARNi), beta blocker, MRA, SGLT2 inhibitor
+  - ICD if EF below 35% after 3 months optimal therapy
+  - CRT if LBBB with QRS over 150 ms and EF below 35%
+  - Rule out ischemic cardiomyopathy with coronary angiography
+  - Alcohol-induced reversible with abstinence
+  - 20-35% familial - screen first-degree relatives
+
+differentials:
+  - Ischemic cardiomyopathy: CAD on angiography, regional wall motion abnormalities (vs global in DCM)
+  - Hypertrophic cardiomyopathy: hypertrophy not dilation, hyperdynamic not reduced EF
+  - Restrictive cardiomyopathy: normal or small LV cavity, diastolic dysfunction, preserved EF
+  - Valvular heart disease: specific valve lesion causes symptoms
+
+trace: |
+  A 48-year-old man with heavy alcohol use x20 years presented with 3 months of progressive dyspnea and leg swelling. Short of breath climbing stairs, orthopnea (sleeps on 3 pillows), PND awakens at night gasping for air. Lower extremity edema. Exam: BP 95/65, HR 105, elevated JVP 14 cm, displaced apical impulse to anterior axillary line (LV dilatation), S3 gallop, 2/6 holosystolic murmur at apex (functional MR), bibasilar rales, 2+ pitting edema to knees. ECG: sinus tachycardia, left bundle branch block QRS 160 ms, low voltage. CXR: cardiomegaly (cardiothoracic ratio 0.65), pulmonary edema. BNP 1850 (markedly elevated). Echocardiogram: severely dilated LV with end-diastolic dimension 72 mm (normal below 55), severely reduced systolic function EF 20% (severe below 30%), global hypokinesis (all walls move poorly - not regional), moderate functional mitral regurgitation from annular dilatation, RV mildly dilated with reduced function. Diagnosed with dilated cardiomyopathy with advanced systolic heart failure (NYHA class III). Admitted for diuresis and initiation of GDMT. Workup for etiology: TSH normal, HIV negative, iron studies normal. Coronary angiography: normal coronaries (ruled out ischemic cardiomyopathy). Cardiac MRI: dilated LV, global dysfunction, mid-wall late gadolinium enhancement pattern (non-ischemic), no infiltrative disease. Diagnosed with alcohol-induced dilated cardiomyopathy given 20-year heavy alcohol history. Counseled on strict alcohol abstinence (may improve EF 10-20% if stops). Started guideline-directed medical therapy: furosemide 40 mg BID IV for acute decompensation, then transitioned to PO. Started sacubitril/valsartan (Entresto) 24/26 mg BID, increase to 97/103 mg BID over weeks. Started carvedilol 3.125 mg BID, up-titrate slowly to 25 mg BID. Started spironolactone 25 mg daily. Started dapagliflozin (SGLT2 inhibitor) 10 mg daily. At 1 week diuresed 15 pounds, dyspnea improved 60%, edema resolved. Discharged on GDMT with close follow-up. Referred to addiction services for alcohol cessation. At 3 months on optimal GDMT: abstinent from alcohol, EF improved from 20% to 30% (partial recovery with abstinence), still EF below 35%. ICD implanted for primary prevention of sudden cardiac death. LBBB with QRS 160 ms and EF 30% - meets criteria for CRT. Upgraded to CRT-D (combined ICD and biventricular pacemaker). At 6 months: EF improved to 38% (continued recovery with abstinence and CRT), NYHA class I-II, excellent symptom control. At 1 year: EF 42%, continues abstinence, optimal medical therapy, CRT functioning well. Alcohol-induced DCM partially reversible with abstinence and GDMT.
