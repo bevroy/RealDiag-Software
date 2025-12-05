@@ -154,3 +154,264 @@ async def evaluate_tree(
             response["search_limit"]["register_url"] = "/users/register"
     
     return response
+
+
+# Data models for manual patient history
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import date
+
+
+class ManualVisitNote(BaseModel):
+    date: Optional[str] = None
+    type: Optional[str] = None
+    author: Optional[str] = None
+    specialty: Optional[str] = None
+    content: Optional[str] = None
+
+
+class ManualDiagnosticTest(BaseModel):
+    date: Optional[str] = None
+    test_name: Optional[str] = None
+    test_type: Optional[str] = None
+    result: Optional[str] = None
+    abnormal: bool = False
+    critical: bool = False
+    interpretation: Optional[str] = None
+
+
+class ManualHP(BaseModel):
+    date: Optional[str] = None
+    author: Optional[str] = None
+    chief_complaint: Optional[str] = None
+    history_of_present_illness: Optional[str] = None
+    past_medical_history: List[str] = []
+    past_surgical_history: List[str] = []
+    medications: List[str] = []
+    allergies: List[str] = []
+    family_history: Optional[str] = None
+    social_history: Optional[str] = None
+    review_of_systems: Optional[str] = None
+    physical_exam: Optional[str] = None
+    assessment: Optional[str] = None
+    plan: Optional[str] = None
+
+
+class ManualProcedure(BaseModel):
+    date: Optional[str] = None
+    procedure_name: Optional[str] = None
+    indication: Optional[str] = None
+    outcome: Optional[str] = None
+    complications: Optional[str] = None
+    operator: Optional[str] = None
+
+
+class ManualImagingStudy(BaseModel):
+    date: Optional[str] = None
+    modality: Optional[str] = None
+    body_site: Optional[str] = None
+    indication: Optional[str] = None
+    findings: Optional[str] = None
+    impression: Optional[str] = None
+    radiologist: Optional[str] = None
+
+
+class ManualCondition(BaseModel):
+    code: Optional[str] = None
+    status: str = "active"
+    recorded_date: Optional[str] = None
+    onset: Optional[str] = None
+
+
+class ManualMedication(BaseModel):
+    name: Optional[str] = None
+    status: str = "active"
+    dosage: Optional[str] = None
+    date_prescribed: Optional[str] = None
+
+
+class ManualAllergy(BaseModel):
+    allergen: Optional[str] = None
+    reaction: Optional[str] = None
+
+
+class ManualPatientHistory(BaseModel):
+    patient_id: str
+    patient_name: Optional[str] = None
+    age: Optional[str] = None
+    gender: Optional[str] = None
+    visit_notes: List[ManualVisitNote] = []
+    diagnostic_tests: List[ManualDiagnosticTest] = []
+    history_and_physicals: List[ManualHP] = []
+    procedures: List[ManualProcedure] = []
+    imaging_studies: List[ManualImagingStudy] = []
+    active_conditions: List[ManualCondition] = []
+    current_medications: List[ManualMedication] = []
+    allergies: List[ManualAllergy] = []
+    family_history: Optional[str] = None
+    social_history: Optional[str] = None
+
+
+# In-memory storage for manual patient histories (in production, use database)
+_manual_patient_histories: Dict[str, ManualPatientHistory] = {}
+
+
+@router.post("/manual-history")
+async def save_manual_patient_history(
+    history: ManualPatientHistory,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Save manually entered patient history for non-EMR instances.
+    
+    This endpoint allows clinicians to enter comprehensive patient history
+    using dropdown lists and text fields when EMR integration is not available.
+    
+    **Features:**
+    - Demographics entry
+    - Visit notes documentation
+    - Diagnostic test results
+    - History & Physical examinations
+    - Procedures performed
+    - Imaging studies
+    - Active medical conditions
+    - Current medications
+    - Allergies and intolerances
+    - Family and social history
+    
+    **Returns:**
+    - Confirmation of saved data
+    - Patient ID for future retrieval
+    - Summary of entered data
+    """
+    # Validate patient_id
+    if not history.patient_id:
+        raise HTTPException(status_code=400, detail="Patient ID is required")
+    
+    # Store in memory (in production, save to database)
+    _manual_patient_histories[history.patient_id] = history
+    
+    # Generate summary
+    summary = {
+        "patient_id": history.patient_id,
+        "patient_name": history.patient_name,
+        "demographics": {
+            "age": history.age,
+            "gender": history.gender
+        },
+        "data_summary": {
+            "visit_notes_count": len(history.visit_notes),
+            "diagnostic_tests_count": len(history.diagnostic_tests),
+            "abnormal_tests_count": sum(1 for test in history.diagnostic_tests if test.abnormal),
+            "critical_tests_count": sum(1 for test in history.diagnostic_tests if test.critical),
+            "h_and_p_count": len(history.history_and_physicals),
+            "procedures_count": len(history.procedures),
+            "imaging_studies_count": len(history.imaging_studies),
+            "active_conditions_count": len(history.active_conditions),
+            "current_medications_count": len(history.current_medications),
+            "allergies_count": len(history.allergies)
+        },
+        "message": "Patient history saved successfully"
+    }
+    
+    return summary
+
+
+@router.get("/manual-history/{patient_id}")
+async def get_manual_patient_history(
+    patient_id: str,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Retrieve manually entered patient history.
+    
+    Returns comprehensive patient history previously entered through
+    the manual entry interface.
+    
+    **Parameters:**
+    - `patient_id`: Patient identifier
+    
+    **Returns:**
+    - Complete patient history including all entered data
+    - Same format as EMR-pulled comprehensive history for consistency
+    """
+    # Retrieve from memory (in production, fetch from database)
+    if patient_id not in _manual_patient_histories:
+        raise HTTPException(status_code=404, detail=f"No manual history found for patient {patient_id}")
+    
+    history = _manual_patient_histories[patient_id]
+    
+    # Format response similar to EMR comprehensive history
+    response = {
+        "patient_id": history.patient_id,
+        "patient_name": history.patient_name,
+        "demographics": {
+            "age": history.age,
+            "gender": history.gender
+        },
+        "visit_notes": [note.dict() for note in history.visit_notes],
+        "diagnostic_tests": [test.dict() for test in history.diagnostic_tests],
+        "history_and_physicals": [hp.dict() for hp in history.history_and_physicals],
+        "procedures": [proc.dict() for proc in history.procedures],
+        "imaging_studies": [img.dict() for img in history.imaging_studies],
+        "problem_list": {
+            "active": [cond.dict() for cond in history.active_conditions if cond.status == "active"],
+            "resolved": [cond.dict() for cond in history.active_conditions if cond.status == "resolved"]
+        },
+        "medications": {
+            "current": [med.dict() for med in history.current_medications if med.status == "active"],
+            "historical": [med.dict() for med in history.current_medications if med.status != "active"]
+        },
+        "allergies": [f"{allergy.allergen} ({allergy.reaction})" for allergy in history.allergies],
+        "family_history": history.family_history,
+        "social_history": history.social_history,
+        "data_source": "manual_entry",
+        "data_quality": {
+            "visit_notes_count": len(history.visit_notes),
+            "diagnostic_tests_count": len(history.diagnostic_tests),
+            "abnormal_tests_count": sum(1 for test in history.diagnostic_tests if test.abnormal),
+            "critical_tests_count": sum(1 for test in history.diagnostic_tests if test.critical),
+            "h_and_p_count": len(history.history_and_physicals),
+            "procedures_count": len(history.procedures),
+            "imaging_studies_count": len(history.imaging_studies)
+        }
+    }
+    
+    return response
+
+
+@router.get("/manual-history/list/all")
+async def list_manual_patient_histories(
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    List all manually entered patient histories.
+    
+    Returns a summary of all patients with manual history entries.
+    Useful for browsing and selecting patients for evaluation.
+    
+    **Returns:**
+    - List of patient summaries with basic demographics and data counts
+    """
+    patients = []
+    
+    for patient_id, history in _manual_patient_histories.items():
+        patients.append({
+            "patient_id": history.patient_id,
+            "patient_name": history.patient_name,
+            "age": history.age,
+            "gender": history.gender,
+            "data_summary": {
+                "visit_notes": len(history.visit_notes),
+                "tests": len(history.diagnostic_tests),
+                "conditions": len(history.active_conditions),
+                "medications": len(history.current_medications),
+                "allergies": len(history.allergies)
+            }
+        })
+    
+    return {
+        "total_patients": len(patients),
+        "patients": patients
+    }
+

@@ -891,3 +891,122 @@ async def create_cpoe_order(
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
+
+
+@router.get("/ehr/fhir/comprehensive-history/{patient_id}")
+async def get_comprehensive_patient_history(
+    patient_id: str,
+    config_name: str = "main_ehr",
+    lookback_days: int = 365,
+    include_resolved: bool = True,
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
+):
+    """
+    Retrieve comprehensive patient history including visit notes, diagnostic tests, H&Ps, and more.
+    
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
+    
+    This endpoint provides complete patient history for comprehensive diagnostic decision support:
+    
+    **Retrieved Data:**
+    - **Visit Notes**: All clinical documentation from prior encounters
+    - **Diagnostic Tests**: Lab results, imaging reports, diagnostic procedures
+    - **History & Physicals**: Complete H&P examinations with structured sections
+    - **Procedures**: Surgical and interventional procedures performed
+    - **Imaging Studies**: CT, MRI, X-Ray, Ultrasound reports with findings
+    - **Problem List**: Active and resolved medical conditions
+    - **Medications**: Current and historical medication lists
+    - **Allergies**: All documented allergies and intolerances
+    - **Family History**: Hereditary conditions and risk factors
+    - **Social History**: Smoking, alcohol, occupation, living situation
+    
+    **Parameters:**
+    - `patient_id`: FHIR Patient resource ID
+    - `config_name`: Name of configured FHIR server (default: "main_ehr")
+    - `lookback_days`: Number of days to look back for historical data (default: 365)
+    - `include_resolved`: Include resolved/inactive conditions (default: true)
+    
+    **Example:**
+    ```bash
+    curl -X GET "https://api.realdiag.com/integration/ehr/fhir/comprehensive-history/patient-12345?lookback_days=730" \\
+      -H "X-API-Key: your_api_key"
+    ```
+    
+    **Response includes:**
+    - Complete patient demographics
+    - Chronological visit notes with content
+    - All diagnostic test results with abnormal flags
+    - Structured H&P documents
+    - Procedure history
+    - Imaging study results
+    - Active and past problem lists
+    - Comprehensive medication history
+    - Clinical summary narrative
+    
+    **Use Case:**
+    Use this endpoint to pull complete patient context before diagnostic evaluation,
+    enabling the decision support system to consider:
+    - Prior similar presentations
+    - Trending lab values
+    - Comorbidities and risk factors
+    - Previous diagnostic workups
+    - Treatment history and responses
+    """
+    from backend.services.patient_history_service import PatientHistoryService
+    
+    if config_name not in fhir_configs:
+        raise HTTPException(status_code=404, detail=f"FHIR configuration '{config_name}' not found")
+    
+    config_data = fhir_configs[config_name]
+    
+    # Initialize patient history service
+    history_service = PatientHistoryService(
+        fhir_base_url=config_data["base_url"],
+        auth_token=config_data.get("token")
+    )
+    
+    try:
+        comprehensive_history = await history_service.get_comprehensive_history(
+            patient_id=patient_id,
+            lookback_days=lookback_days,
+            include_resolved=include_resolved
+        )
+        
+        return {
+            "patient_id": comprehensive_history.patient_id,
+            "patient_name": comprehensive_history.patient_name,
+            "demographics": {
+                "date_of_birth": comprehensive_history.date_of_birth,
+                "age": comprehensive_history.age,
+                "gender": comprehensive_history.gender
+            },
+            "visit_notes": [note.dict() for note in comprehensive_history.visit_notes],
+            "diagnostic_tests": [test.dict() for test in comprehensive_history.diagnostic_tests],
+            "history_and_physicals": [hp.dict() for hp in comprehensive_history.history_and_physicals],
+            "procedures": [proc.dict() for proc in comprehensive_history.procedures],
+            "imaging_studies": [img.dict() for img in comprehensive_history.imaging_studies],
+            "problem_list": {
+                "active": comprehensive_history.active_conditions,
+                "resolved": comprehensive_history.past_conditions
+            },
+            "medications": {
+                "current": comprehensive_history.current_medications,
+                "historical": comprehensive_history.medication_history
+            },
+            "allergies": comprehensive_history.allergies,
+            "family_history": comprehensive_history.family_history,
+            "social_history": comprehensive_history.social_history,
+            "summary": comprehensive_history.summary,
+            "data_quality": {
+                "visit_notes_count": len(comprehensive_history.visit_notes),
+                "diagnostic_tests_count": len(comprehensive_history.diagnostic_tests),
+                "abnormal_tests_count": len([t for t in comprehensive_history.diagnostic_tests if t.abnormal]),
+                "critical_tests_count": len([t for t in comprehensive_history.diagnostic_tests if t.critical]),
+                "h_and_p_count": len(comprehensive_history.history_and_physicals),
+                "procedures_count": len(comprehensive_history.procedures),
+                "imaging_studies_count": len(comprehensive_history.imaging_studies),
+                "lookback_days": lookback_days
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve patient history: {str(e)}")
