@@ -1,0 +1,85 @@
+tree_id: CARDS-INFECTIVE-ENDOCARDITIS
+name: Infective Endocarditis
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Fever and new heart murmur
+description: Infection of heart valves causing fever, new murmur, and systemic emboli. Duke criteria for diagnosis requiring blood cultures and echocardiographic findings. Prolonged IV antibiotics (4-6 weeks) and surgery for complications. High mortality without treatment.
+icd10: I33.0
+urgency: emergent
+
+workup:
+  - Clinical presentation: fever plus new cardiac murmur in at-risk patient
+  - Classic triad: fever, new murmur, positive blood cultures
+  - Risk factors: prosthetic valve, prior endocarditis, IV drug use, structural heart disease, poor dentition
+  - Symptoms: fever (90%), chills, night sweats, malaise, weight loss, anorexia
+  - New or changing murmur (85%): regurgitant murmurs (MR, AR, TR)
+  - Heart failure: dyspnea from valve destruction
+  - Embolic phenomena:
+  - CNS: stroke, mycotic aneurysm, brain abscess (20%)
+  - Spleen: splenic abscess or infarct, left upper quadrant pain
+  - Kidneys: glomerulonephritis, flank pain, hematuria
+  - Peripheral emboli: painful ischemic digits
+  - Immunologic phenomena:
+  - Osler nodes: painful red nodules on finger/toe pads (immune complex deposition)
+  - Janeway lesions: painless erythematous macules on palms/soles (septic emboli)
+  - Roth spots: retinal hemorrhages with white centers (25%)
+  - Glomerulonephritis: hematuria, RBC casts, elevated creatinine
+  - Blood cultures (most important test):
+  - Three sets from different sites before starting antibiotics
+  - Drawn at least 1 hour apart
+  - Positive in 90% (continuous bacteremia)
+  - Common organisms: Staph aureus (35% acute), Viridans strep (35% subacute), Enterococcus (10%), HACEK, culture-negative (5-10%)
+  - Staph aureus: acute, IV drug users, aggressive, destructive
+  - Viridans strep: subacute, after dental procedures, more indolent
+  - Echocardiogram:
+  - Transthoracic echo (TTE) first: 60-70% sensitivity for vegetations
+  - Transesophageal echo (TEE): 95% sensitivity, better for prosthetic valves, perivalvular abscess
+  - Vegetations: mobile masses on valve leaflets
+  - Valve perforation or destruction
+  - Perivalvular abscess: echogenic mass adjacent to valve
+  - Duke criteria (diagnostic):
+  - Definite IE: 2 major, 1 major + 3 minor, or 5 minor criteria
+  - Major: (1) positive blood cultures (typical organism in 2 separate cultures), (2) endocardial involvement (vegetation, abscess, new valve regurgitation on echo)
+  - Minor: predisposing condition, fever above 38°C, vascular phenomena, immunologic phenomena, positive blood culture not meeting major
+
+treatment:
+  - Empiric antibiotics (start after blood cultures drawn):
+  - Native valve: vancomycin 15 mg/kg IV q12h plus ceftriaxone 2 g IV daily
+  - Prosthetic valve: vancomycin plus ceftriaxone plus rifampin 300 mg PO q8h
+  - Targeted antibiotics (based on culture and sensitivities):
+  - Staph aureus MSSA: nafcillin 2 g IV q4h or cefazolin 2 g IV q8h x4-6 weeks
+  - Staph aureus MRSA: vancomycin or daptomycin 6-10 mg/kg IV daily x4-6 weeks
+  - Viridans strep: penicillin G 18-24 million units IV continuous or divided q4h x4 weeks OR ceftriaxone 2 g IV daily x4 weeks
+  - Add gentamicin 3 mg/kg IV daily x2 weeks for synergy (shorten to 2 weeks if strep)
+  - Enterococcus: ampicillin 2 g IV q4h plus gentamicin or ceftriaxone x4-6 weeks (double beta-lactam therapy)
+  - HACEK organisms: ceftriaxone 2 g IV daily x4 weeks
+  - Duration: 4-6 weeks IV antibiotics (start counting from first negative blood culture)
+  - Longer (6 weeks) if prosthetic valve or complicated
+  - Surgery (required in 40-50%):
+  - Indications: heart failure from severe valve regurgitation (most common, emergent), uncontrolled infection despite antibiotics, perivalvular abscess, large vegetations over 10 mm with embolic events, fungal endocarditis
+  - Valve replacement: mechanical or bioprosthetic
+  - Continue antibiotics x4-6 weeks post-op
+  - Antibiotic prophylaxis: for high-risk patients (prosthetic valve, prior IE) before dental procedures (amoxicillin 2 g PO 1 hour before)
+  - Complications: heart failure (most common, 40-50%), embolic stroke (20%), mycotic aneurysm, septic emboli, perivalvular abscess, conduction abnormalities (AV block if abscess extends)
+  - Prognosis: mortality 15-30% even with treatment, worse with Staph aureus, prosthetic valve, or heart failure
+
+clinical_pearls:
+  - Fever plus new murmur in at-risk patient - think endocarditis
+  - Three sets of blood cultures before starting antibiotics (90% positive)
+  - TEE more sensitive than TTE (95% vs 70%), essential for prosthetic valves
+  - Duke criteria for diagnosis (2 major or 1 major + 3 minor)
+  - Staph aureus most common in acute IE and IV drug users (aggressive)
+  - Viridans strep most common in subacute IE (indolent, after dental work)
+  - 4-6 weeks IV antibiotics required (prolonged bacteremia)
+  - Surgery in 40-50% (heart failure, uncontrolled infection, abscess)
+  - Osler nodes painful, Janeway lesions painless (mnemonic: Osler = ouch)
+
+differentials:
+  - Acute rheumatic fever: fever and new murmur but prior strep pharyngitis, migratory polyarthritis, negative blood cultures
+  - Atrial myxoma: fever, emboli, murmur but sterile blood cultures, mass in atrium on echo
+  - Marantic endocarditis: sterile vegetations in cancer patients, no fever
+  - Sepsis from other source: fever and bacteremia but no cardiac findings
+  - Vasculitis: fever, emboli, but negative blood cultures, no vegetations
+
+trace: |
+  A 55-year-old man with history of bicuspid aortic valve presented with 2 weeks of fever and malaise. Temperature 39.2°C daily, night sweats, lost 10 pounds. Two days ago developed confusion and left arm weakness (embolic stroke). IV drug use 20 years ago but clean x15 years. Exam: temperature 39°C, HR 105, BP 108/45 (wide pulse pressure), early diastolic murmur at left sternal border (aortic regurgitation - new compared to prior exams), Osler nodes on fingertips (painful red nodules), splinter hemorrhages under nails. Neuro exam: left arm weakness. Three sets of blood cultures drawn from separate sites 1 hour apart before antibiotics. CBC: WBC 16500, ESR 88, CRP 125. Creatinine 1.8 (baseline 1.0 - glomerulonephritis). Urinalysis: RBC 100, RBC casts (glomerulonephritis from immune complexes). ECG: sinus tachycardia, prolonged PR interval 240 ms (first-degree AV block suggests perivalvular abscess extension). Transthoracic echo: bicuspid aortic valve with large 12 mm oscillating vegetation on non-coronary cusp (vegetation), severe aortic regurgitation (valve destruction), normal LV function. CT head: right MCA territory acute infarct (septic embolus). Diagnosed with infective endocarditis (Duke criteria: 2 major criteria - positive blood cultures pending and vegetation on echo plus severe new AR, plus multiple minor criteria). Started empiric vancomycin 1 g IV q12h plus ceftriaxone 2 g IV daily (broad coverage before culture results). At 24 hours all 3 blood culture sets growing Gram-positive cocci in clusters. At 48 hours identified as Staph aureus MSSA (methicillin-sensitive). Changed to nafcillin 2 g IV q4h (targeted therapy for MSSA). Transesophageal echo (TEE) performed: confirmed 12 mm vegetation, perivalvular abscess at aortic root (complication). Cardiothoracic surgery consulted. Indications for surgery: large vegetation with embolic stroke, perivalvular abscess, severe AR with early heart failure. Underwent urgent aortic valve replacement (mechanical valve) with abscess debridement. Intraoperative findings: large vegetation, abscess cavity at annulus, severe valve destruction. Post-op: continued nafcillin x6 weeks from first negative blood culture (post-op day 1). Warfarin for mechanical valve. At 2 weeks repeat blood cultures negative (clearance), inflammatory markers improving. At 6 weeks completed antibiotic course, repeat TEE: prosthetic valve well-seated, no vegetation, no abscess. Neurologic recovery 80%. At 3 months follow-up: no fever, no recurrence, on warfarin for mechanical valve. Counseled on antibiotic prophylaxis before dental procedures (high risk - prosthetic valve and prior IE).
