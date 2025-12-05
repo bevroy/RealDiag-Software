@@ -259,7 +259,7 @@ export default function SourcesPage() {
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 16 }}>
               RealDiag integrates evidence-based clinical guidelines and medical literature
-              to support diagnostic decision-making across 415+ disease processes. Below are the sources used across
+              to support diagnostic decision-making across 424+ disease processes. Below are the sources used across
               our diagnostic modules covering 17 medical specialties.
             </p>
 
