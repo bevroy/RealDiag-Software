@@ -5,9 +5,11 @@ from .decision_tree_engine import DecisionTreeEngine
 from .auth_service import get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
 from .subscription_gate import SubscriptionGate
+from .medication_safety_service import MedicationSafetyService
 
 router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
 _trees = DecisionTreeEngine()
+_med_safety = MedicationSafetyService()
 
 # Import user subscriptions from subscription_router
 # In production, this would be a database connection
@@ -111,6 +113,40 @@ async def evaluate_tree(
     # Perform the evaluation
     result = _trees.evaluate(tree_id, patient)
     
+    # Check medication safety if medications provided
+    medication_alerts = None
+    if result and not result.get("error"):
+        current_medications = patient.get("current_medications", [])
+        proposed_medications = []
+        
+        # Extract proposed medications from management recommendations
+        if result.get("management"):
+            # Parse management text for medication recommendations
+            for mgmt in result.get("management", []):
+                if any(keyword in mgmt.lower() for keyword in ["aspirin", "statin", "beta blocker", "ace inhibitor", "metformin", "insulin"]):
+                    # Extract medication names (simplified - would be more sophisticated)
+                    if "aspirin" in mgmt.lower():
+                        proposed_medications.append("aspirin")
+                    if "statin" in mgmt.lower() or "atorvastatin" in mgmt.lower():
+                        proposed_medications.append("atorvastatin")
+                    if "metoprolol" in mgmt.lower() or "beta blocker" in mgmt.lower():
+                        proposed_medications.append("metoprolol")
+                    if "lisinopril" in mgmt.lower() or "ace inhibitor" in mgmt.lower():
+                        proposed_medications.append("lisinopril")
+        
+        # Run medication safety check if we have medications
+        if current_medications or proposed_medications:
+            medication_alerts = _med_safety.check_medication_safety(
+                current_medications=current_medications,
+                proposed_medications=proposed_medications,
+                patient_conditions=patient.get("conditions", []),
+                patient_allergies=patient.get("allergies", []),
+                age=patient.get("age"),
+                renal_function=patient.get("renal_function"),
+                hepatic_function=patient.get("hepatic_function"),
+                pregnancy=patient.get("pregnancy", False)
+            )
+    
     # Save to search history for authenticated users
     if current_user and result:
         try:
@@ -138,8 +174,32 @@ async def evaluate_tree(
             # Don't fail the evaluation if history saving fails
             print(f"Failed to save search history: {e}")
     
-    # Return result with search limit info
+    # Return result with search limit info and medication alerts
     response = {"tree_result": result}
+    
+    # Add medication safety alerts if available
+    if medication_alerts:
+        response["medication_safety"] = medication_alerts
+        
+        # Add prominent warnings for critical issues
+        if medication_alerts.get("contraindicated_medications"):
+            response["critical_warnings"] = [
+                f"🚫 CONTRAINDICATED: {med}" 
+                for med in medication_alerts["contraindicated_medications"]
+            ]
+        
+        # Add major interaction warnings
+        major_interactions = medication_alerts.get("major_interactions", [])
+        if major_interactions:
+            if "warnings" not in response:
+                response["warnings"] = []
+            for alert in major_interactions:
+                response["warnings"].append({
+                    "type": "major_drug_interaction",
+                    "message": f"⚠️ Major interaction: {alert['medication']} + {alert['interacting_medication']}",
+                    "details": alert['clinical_effect'],
+                    "recommendation": alert['recommendation']
+                })
     
     # Add search limit info to response
     if not current_user:
@@ -414,4 +474,105 @@ async def list_manual_patient_histories(
         "total_patients": len(patients),
         "patients": patients
     }
+
+
+@router.post("/medication-safety-check")
+async def check_medication_safety(
+    current_medications: List[str] = Body(...),
+    proposed_medications: List[str] = Body(default=[]),
+    patient_conditions: List[str] = Body(default=[]),
+    patient_allergies: List[str] = Body(default=[]),
+    age: Optional[int] = Body(default=None),
+    renal_function: Optional[str] = Body(default=None),
+    hepatic_function: Optional[str] = Body(default=None),
+    pregnancy: bool = Body(default=False),
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Comprehensive medication safety check.
+    
+    Analyzes current and proposed medications for:
+    - **Drug-drug interactions** - Dangerous combinations
+    - **Contraindications** - Medications unsafe for patient's conditions
+    - **Allergen cross-reactivity** - Risk of allergic reactions
+    - **Duplicate therapy** - Multiple drugs from same class
+    - **Age-specific warnings** - Elderly (Beers Criteria) and pediatric
+    - **Renal adjustments** - Dose modifications for kidney disease
+    - **Hepatic adjustments** - Dose modifications for liver disease
+    - **Pregnancy warnings** - Teratogenic medications
+    
+    **Use Cases:**
+    - Before prescribing new medication
+    - During diagnostic evaluation
+    - Medication reconciliation
+    - Pharmacy consult
+    
+    **Parameters:**
+    - `current_medications`: List of current medications (e.g., ["aspirin", "warfarin"])
+    - `proposed_medications`: List of medications being considered (e.g., ["ibuprofen"])
+    - `patient_conditions`: List of medical conditions (e.g., ["asthma", "kidney disease"])
+    - `patient_allergies`: List of known allergies (e.g., ["penicillin", "sulfa"])
+    - `age`: Patient age in years
+    - `renal_function`: Kidney function ("normal", "mild", "moderate", "severe", "esrd")
+    - `hepatic_function`: Liver function ("normal", "mild", "moderate", "severe", "cirrhosis")
+    - `pregnancy`: Whether patient is pregnant
+    
+    **Returns:**
+    - `alerts`: List of all medication safety alerts
+    - `safety_score`: Overall safety score (0-100, higher = safer)
+    - `summary`: Human-readable safety summary
+    - `contraindicated_medications`: List of absolutely contraindicated medications
+    - `major_interactions`: List of major drug interactions requiring intervention
+    - `requires_monitoring`: Medications requiring close monitoring
+    
+    **Example:**
+    ```bash
+    curl -X POST "http://localhost:8000/diagnostic/medication-safety-check" \\
+      -H "Content-Type: application/json" \\
+      -d '{
+        "current_medications": ["warfarin", "aspirin"],
+        "proposed_medications": ["ibuprofen"],
+        "patient_conditions": ["atrial fibrillation"],
+        "patient_allergies": ["penicillin"],
+        "age": 75,
+        "renal_function": "moderate"
+      }'
+    ```
+    
+    **Response:**
+    ```json
+    {
+      "alerts": [
+        {
+          "alert_type": "drug_interaction",
+          "severity": "major",
+          "medication": "warfarin",
+          "interacting_medication": "ibuprofen",
+          "description": "Interaction between warfarin and ibuprofen",
+          "clinical_effect": "Increased bleeding risk, GI bleeding",
+          "recommendation": "Use acetaminophen for pain instead",
+          "monitoring": "Monitor for bleeding, especially GI",
+          "alternatives": ["acetaminophen"]
+        }
+      ],
+      "safety_score": 70,
+      "summary": "⚠️ Moderate safety concerns - review alternatives",
+      "contraindicated_medications": [],
+      "major_interactions": [...],
+      "requires_monitoring": ["warfarin", "aspirin"]
+    }
+    ```
+    """
+    result = _med_safety.check_medication_safety(
+        current_medications=current_medications,
+        proposed_medications=proposed_medications,
+        patient_conditions=patient_conditions,
+        patient_allergies=patient_allergies,
+        age=age,
+        renal_function=renal_function,
+        hepatic_function=hepatic_function,
+        pregnancy=pregnancy
+    )
+    
+    return result
 
