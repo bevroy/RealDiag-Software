@@ -1,0 +1,116 @@
+tree_id: CARDS-ATRIAL-FIBRILLATION
+name: Atrial Fibrillation
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Irregular heart rate and palpitations
+description: Most common sustained arrhythmia causing irregularly irregular rhythm from chaotic atrial electrical activity. Increased stroke risk from LA thrombus formation. Rate control vs rhythm control, anticoagulation critical based on CHA2DS2-VASc score, catheter ablation for selected patients.
+icd10: I48.91
+urgency: urgent
+
+workup:
+  - Symptoms: variable from asymptomatic to debilitating
+  - Palpitations: irregular rapid heartbeat, most common symptom
+  - Dyspnea: from rapid rate reducing diastolic filling time
+  - Fatigue: reduced cardiac output
+  - Chest discomfort: rarely
+  - Syncope or presyncope: if very rapid rate
+  - Stroke or TIA: thromboembolic complication from LA thrombus
+  - Asymptomatic: discovered incidentally (20-30%)
+  - Classifications:
+  - Paroxysmal: self-terminating within 7 days (usually under 48 hours)
+  - Persistent: sustained over 7 days, requires cardioversion
+  - Long-standing persistent: over 12 months
+  - Permanent: accepted, no further attempts at rhythm control
+  - Physical exam:
+  - Irregularly irregular pulse: hallmark finding
+  - Variable intensity S1: irregular ventricular filling
+  - Pulse deficit: apical rate higher than radial pulse
+  - Signs of heart failure if rapid rate or underlying disease
+  - ECG (diagnostic):
+  - Absent P waves: replaced by fibrillatory waves
+  - Irregularly irregular R-R intervals: no pattern
+  - Narrow QRS: unless aberrancy or bundle branch block
+  - Fibrillatory waves: best seen in V1 (fine or coarse)
+  - Risk factors and associated conditions:
+  - Hypertension: most common (60-80%)
+  - Valvular disease: mitral stenosis or regurgitation
+  - Heart failure: reduced EF or HFpEF
+  - Coronary artery disease
+  - Hyperthyroidism: check TSH in all new AFib
+  - Sleep apnea: strong association
+  - Obesity, alcohol (holiday heart syndrome)
+  - Pulmonary disease: COPD, pulmonary embolism
+  - Pericarditis, myocarditis
+  - Age: prevalence increases (10% over age 80)
+  - Workup for new AFib:
+  - ECG: confirm diagnosis
+  - Echocardiogram: assess LA size, LV function, valvular disease, structural abnormalities
+  - TSH: rule out hyperthyroidism (10% of new AFib)
+  - Electrolytes, renal function, liver function
+  - CBC: anemia can exacerbate
+  - Chest X-ray: heart size, lung disease
+  - Consider Holter monitor if paroxysmal suspected
+  - Stroke risk stratification:
+  - CHA2DS2-VASc score (0-9 points):
+  - C: Congestive heart failure (1 point)
+  - H: Hypertension (1 point)
+  - A2: Age 75 or older (2 points)
+  - D: Diabetes (1 point)
+  - S2: Prior stroke/TIA/thromboembolism (2 points)
+  - V: Vascular disease (CAD, PAD, aortic plaque) (1 point)
+  - A: Age 65-74 (1 point)
+  - Sc: Sex category female (1 point)
+  - Score 0 (men) or 1 (women): no anticoagulation
+  - Score 1 (men) or 2 (women): consider anticoagulation
+  - Score 2 or more (men) or 3 or more (women): anticoagulate
+
+treatment:
+  - Acute management:
+  - Hemodynamically unstable: immediate cardioversion (if AFib with RVR causing hypotension, AMS, ischemia)
+  - Stable: rate control or rhythm control
+  - Rate control (first-line for most):
+  - Beta blockers: metoprolol 25-100 mg BID, esmolol IV for acute
+  - Calcium channel blockers: diltiazem 30-90 mg QID, verapamil, diltiazem IV for acute
+  - Digoxin: 0.125-0.25 mg daily (less effective, used as adjunct)
+  - Goal heart rate: under 110 bpm lenient (under 80 bpm strict if symptoms persist)
+  - Rhythm control (for selected patients):
+  - Indications: young, first episode, symptomatic despite rate control, heart failure from AFib
+  - Cardioversion: electrical (more effective) or pharmacologic (ibutilide, flecainide, amiodarone)
+  - If AFib over 48 hours: anticoagulate x3 weeks before cardioversion OR TEE to exclude LA thrombus
+  - Antiarrhythmic medications to maintain sinus rhythm:
+  - No structural heart disease: flecainide 50-150 mg BID or propafenone
+  - Structural heart disease: amiodarone 200 mg daily or sotalol (avoid class IC like flecainide)
+  - Dofetilide: requires in-hospital initiation for QT monitoring
+  - Anticoagulation (most critical intervention to prevent stroke):
+  - DOACs (direct oral anticoagulants) preferred: apixaban 5 mg BID, rivaroxaban 20 mg daily, edoxaban, dabigatran
+  - Warfarin: INR 2-3 if DOAC contraindicated (mechanical valve, severe renal disease)
+  - Indications: CHA2DS2-VASc score 2 or more in men, 3 or more in women
+  - DO NOT use aspirin alone (ineffective for stroke prevention)
+  - Continue anticoagulation even if sinus rhythm restored (AFib may recur)
+  - Catheter ablation (pulmonary vein isolation):
+  - Indications: symptomatic despite medications, young patients, prefer to avoid long-term antiarrhythmics
+  - Success rate 60-80% (higher for paroxysmal, lower for persistent)
+  - Complications: tamponade, stroke, pulmonary vein stenosis, atrial-esophageal fistula (rare but fatal)
+  - Left atrial appendage occlusion (Watchman device):
+  - If high stroke risk but contraindication to anticoagulation (bleeding)
+  - LA appendage source of 90% of thrombi in non-valvular AFib
+  - Treat underlying causes: control hypertension, treat hyperthyroidism, sleep apnea, reduce alcohol, weight loss
+
+clinical_pearls:
+  - Irregularly irregular pulse with absent P waves on ECG
+  - Most common sustained arrhythmia
+  - CHA2DS2-VASc score guides anticoagulation (score 2+ in men or 3+ in women anticoagulate)
+  - DOACs preferred over warfarin for anticoagulation
+  - Rate control vs rhythm control: outcomes similar, rate control easier
+  - Check TSH in all new AFib (hyperthyroidism 10%)
+  - Anticoagulate x3 weeks before cardioversion if AFib over 48 hours (or TEE to exclude thrombus)
+  - Catheter ablation option for symptomatic patients
+
+differentials:
+  - Atrial flutter: regular sawtooth flutter waves, not irregularly irregular
+  - Multifocal atrial tachycardia: irregular but P waves present (3+ morphologies)
+  - Frequent PACs: irregular but P waves visible
+  - Sinus arrhythmia: regular pattern varying with respiration
+
+trace: |
+  A 72-year-old man with hypertension presented with 2 days of palpitations and dyspnea. Heart racing irregularly, short of breath with minimal exertion, fatigue. No chest pain, no syncope. Exam: BP 145/90, HR 135 irregularly irregular (hallmark), lungs clear, no heart failure signs. ECG: absent P waves replaced by fibrillatory waves, irregularly irregular R-R intervals, narrow QRS, ventricular rate 130-140 bpm (AFib with RVR - rapid ventricular response). Diagnosed with new-onset atrial fibrillation with RVR. Workup: TSH normal (ruled out hyperthyroidism - critical to check), echocardiogram showed mild LA enlargement 4.5 cm, preserved LV function EF 55%, no valvular disease. CHA2DS2-VASc score calculation: Congestive heart failure 0, Hypertension 1, Age 75+ 0 (but age 65-74 so 1), Diabetes 0, prior Stroke 0, Vascular disease 0, Age 65-74 1 (already counted), female Sex 0. Total score 2 (anticoagulation indicated). Acute management: started IV metoprolol 5 mg for rate control, heart rate decreased to 90-100 bpm (lenient rate control under 110 acceptable). Transitioned to oral metoprolol 50 mg BID. Symptom duration under 48 hours (onset 2 days ago) so considered cardioversion without prolonged anticoagulation. However, decided on rate control strategy given age and comorbidities (rate vs rhythm control outcomes similar, rate control easier). Started apixaban 5 mg BID (DOAC preferred over warfarin, no INR monitoring needed) for stroke prevention (CHA2DS2-VASc score 2). At 48 hours heart rate well-controlled 75-85 bpm on metoprolol, palpitations resolved, dyspnea improved. Discharged on metoprolol 50 mg BID, apixaban 5 mg BID, lisinopril for hypertension. Counseled on lifelong anticoagulation (critical to prevent stroke - even if converts to sinus rhythm, AFib may recur). At 2 weeks: still in AFib, heart rate controlled 70-80s, asymptomatic. Continues rate control strategy. At 3 months: spontaneously converted to normal sinus rhythm (common for paroxysmal AFib), continues apixaban (lifelong - AFib will likely recur). At 1 year: several episodes of paroxysmal AFib, asymptomatic due to rate control with beta blocker, continues anticoagulation without any strokes. Excellent outcome with rate control and anticoagulation strategy.

@@ -1,0 +1,108 @@
+tree_id: CARDS-VENTRICULAR-TACHYCARDIA
+name: Ventricular Tachycardia
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Rapid heart rate with dizziness
+description: Three or more consecutive ventricular beats at rate over 100 bpm, wide QRS over 120 ms. Sustained VT (over 30 seconds) medical emergency. Ischemic heart disease most common cause. Immediate cardioversion if unstable, amiodarone if stable, ICD for recurrence prevention.
+icd10: I47.2
+urgency: emergent
+
+workup:
+  - Symptoms: depend on rate, duration, underlying cardiac function
+  - Palpitations: rapid heart rate
+  - Dyspnea, chest pain
+  - Lightheadedness, syncope: impaired cerebral perfusion
+  - Sudden cardiac death: if degenerates to ventricular fibrillation
+  - May be asymptomatic: if short runs or slow VT
+  - Hemodynamic instability: hypotension, altered mental status, pulmonary edema
+  - Classifications:
+  - Non-sustained VT (NSVT): 3 or more beats but under 30 seconds
+  - Sustained VT: over 30 seconds or requires termination due to hemodynamic compromise
+  - Monomorphic VT: uniform QRS morphology (single focus or reentry circuit)
+  - Polymorphic VT: varying QRS morphology (multiple foci, torsades de pointes)
+  - Physical exam:
+  - Tachycardia: rapid regular or irregular pulse
+  - Cannon A waves: in jugular veins from AV dissociation (atria contract against closed tricuspid valve)
+  - Variable S1 intensity: from AV dissociation
+  - Hypotension if hemodynamically unstable
+  - Pulmonary edema if decompensated
+  - ECG (diagnostic):
+  - Wide complex tachycardia: QRS over 120 ms (usually over 140 ms)
+  - Rate over 100 bpm (usually 120-250 bpm)
+  - Monomorphic: uniform QRS morphology throughout
+  - Polymorphic: varying QRS morphology
+  - AV dissociation: P waves and QRS independent (hallmark of VT but seen only 20-50%)
+  - Fusion beats: occasional normal-appearing QRS from fusion of ventricular and supraventricular beat
+  - Capture beats: occasional narrow QRS from supraventricular beat capturing ventricles
+  - Brugada criteria for VT: absence of RS complex in precordial leads, R to S over 100 ms, AV dissociation, morphology criteria
+  - Torsades de pointes: polymorphic VT with twisting QRS axis, prolonged QT interval
+  - Causes:
+  - Ischemic heart disease: most common (70-80%), scar from prior MI provides substrate for reentry
+  - Non-ischemic cardiomyopathy: dilated, hypertrophic, ARVC
+  - Structural heart disease: valvular, congenital
+  - Channelopathies: long QT syndrome, Brugada syndrome, CPVT
+  - Electrolyte abnormalities: hypokalemia, hypomagnesemia
+  - Medications: proarrhythmic (class IA, IC, III antiarrhythmics)
+  - Idiopathic VT: structurally normal heart (RVOT VT, fascicular VT)
+  - Workup:
+  - 12-lead ECG during VT: distinguish from SVT with aberrancy
+  - Echocardiogram: assess LV function, structural disease
+  - Coronary angiography: rule out acute ischemia
+  - Cardiac MRI: assess for scar, infiltrative disease
+  - Electrolytes: potassium, magnesium
+  - QT interval on baseline ECG: long QT syndrome
+
+treatment:
+  - Acute management:
+  - Hemodynamically unstable (hypotension, altered mental status, chest pain, heart failure):
+  - Immediate synchronized cardioversion: 100-200 J (monomorphic VT)
+  - Unsynchronized defibrillation: if pulseless or polymorphic VT
+  - Hemodynamically stable:
+  - Amiodarone: 150 mg IV over 10 minutes, then 1 mg/min x6 hours, then 0.5 mg/min (first-line)
+  - Lidocaine: 1-1.5 mg/kg IV bolus, then infusion (alternative)
+  - Procainamide: if amiodarone and lidocaine ineffective
+  - Synchronized cardioversion: if refractory to medications
+  - Torsades de pointes (polymorphic VT with long QT):
+  - Magnesium sulfate: 2 grams IV over 15 minutes (first-line even if magnesium normal)
+  - Correct electrolytes: replete potassium over 4.5 mEq/L
+  - Stop QT-prolonging drugs
+  - Overdrive pacing or isoproterenol: increase heart rate to shorten QT
+  - Unsynchronized defibrillation if unstable
+  - Treat underlying cause:
+  - Acute MI: revascularization (PCI or CABG)
+  - Electrolyte abnormalities: correct potassium, magnesium
+  - Ischemia: anti-ischemic therapy
+  - Long-term management:
+  - ICD (implantable cardioverter-defibrillator):
+  - Secondary prevention: survived cardiac arrest or sustained VT (class I indication)
+  - Primary prevention: ischemic cardiomyopathy with EF under 35%, non-ischemic cardiomyopathy with EF under 35%
+  - Most effective intervention to prevent sudden cardiac death
+  - Antiarrhythmic medications:
+  - Amiodarone 200 mg daily: reduce VT recurrence, adjunct to ICD
+  - Sotalol: class III antiarrhythmic
+  - Mexiletine: adjunct to amiodarone
+  - Beta blockers: essential in ischemic heart disease, reduce VT burden
+  - Catheter ablation:
+  - For recurrent VT despite medications (VT storm - 3+ episodes in 24 hours)
+  - Map and ablate scar substrate (ischemic VT) or focus (idiopathic VT)
+  - Success rate 50-80% depending on substrate
+  - Revascularization: if ischemic VT from active ischemia
+
+clinical_pearls:
+  - Wide complex tachycardia (QRS over 120 ms) rate over 100 bpm
+  - Always assume VT until proven otherwise (treat as VT if uncertain)
+  - AV dissociation, fusion beats, capture beats diagnostic of VT
+  - Ischemic heart disease most common cause (prior MI provides scar substrate)
+  - Hemodynamically unstable: immediate cardioversion
+  - Stable: amiodarone first-line
+  - ICD essential for secondary prevention (survived VT or cardiac arrest)
+  - Torsades: give magnesium even if levels normal
+
+differentials:
+  - SVT with aberrancy: wide QRS from bundle branch block, but supraventricular origin
+  - Antidromic AVRT: WPW with antegrade conduction down accessory pathway (wide QRS)
+  - Artifact: loose leads mimicking VT
+  - Atrial flutter with aberrancy: sawtooth waves may be visible
+
+trace: |
+  A 65-year-old man with prior inferior MI x5 years ago presented with palpitations and lightheadedness. Sudden onset rapid heart rate x15 minutes, dizzy, diaphoretic, chest discomfort. History of CAD status post stents to RCA. On aspirin, statin, beta blocker, ACE inhibitor. EF 35% on prior echo (ischemic cardiomyopathy). Exam: BP 85/60 (hypotensive - hemodynamically unstable), HR 180 regular, diaphoretic, cool extremities, lungs clear. ECG: wide complex tachycardia rate 185 bpm, QRS 160 ms (wide), monomorphic (uniform QRS morphology), AV dissociation visible (P waves marching independently - diagnostic of VT), right bundle branch block morphology with left axis deviation. Diagnosed with sustained monomorphic ventricular tachycardia (wide complex tachycardia, AV dissociation, prior MI with scar provides substrate). Hemodynamically unstable (hypotension, altered mental status - lightheadedness). Immediate synchronized cardioversion indicated (unstable VT). Conscious sedation with midazolam and fentanyl. Synchronized cardioversion 150 J delivered. Successfully converted to normal sinus rhythm rate 75 bpm. Blood pressure improved to 110/70. Symptoms resolved immediately. Post-cardioversion ECG: sinus rhythm, evidence of old inferior MI (Q waves in II, III, aVF), no acute changes. Troponin 0.15 (mildly elevated, no acute MI). Admitted to CCU. Echocardiogram: inferior wall akinesis (old MI), EF 32% (severely reduced - ischemic cardiomyopathy), no acute wall motion abnormalities. Coronary angiography: patent stents in RCA, no new lesions, no acute ischemia (VT from scar reentry not acute ischemia). Electrolytes: potassium 3.8, magnesium 1.9 (repleted both). Started amiodarone 400 mg BID loading dose for VT suppression. Continued beta blocker (metoprolol increased to 100 mg BID). Discussed ICD implantation: secondary prevention indication (survived sustained VT with hemodynamic compromise - class I indication, most important treatment to prevent sudden death). At 48 hours hemodynamically stable, no recurrent VT on telemetry. Underwent ICD implantation (single-chamber ICD). Device programmed for VT detection and therapy. At 1 week discharged on amiodarone 200 mg daily (adjunct to ICD to reduce VT burden), metoprolol 100 mg BID, optimal medical therapy for heart failure. At 3 months: no ICD shocks, amiodarone dose decreased to 200 mg daily maintenance. At 6 months: ICD fired once for VT episode rate 190 bpm, successfully terminated with shock (ICD saved his life, justified implantation). At 1 year: total of 3 ICD shocks for recurrent VT (VT storm - 3+ episodes in 24 hours). Referred for VT ablation. Underwent catheter ablation: mapped scar substrate in inferior wall (old MI), ablated reentry circuits with radiofrequency energy. Post-ablation no inducible VT. At 18 months post-ablation: no further VT episodes, no ICD shocks. Continues amiodarone, beta blocker, ICD monitoring. Ablation reduced VT burden significantly. ICD essential for sudden death prevention.

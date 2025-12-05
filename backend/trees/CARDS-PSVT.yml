@@ -1,0 +1,97 @@
+tree_id: CARDS-PSVT
+name: Paroxysmal Supraventricular Tachycardia (PSVT)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Sudden onset rapid regular heart rate
+description: Sudden onset regular narrow complex tachycardia from reentry circuits involving AV node or accessory pathways. AVNRT most common type. Abrupt onset and termination. Vagal maneuvers or adenosine terminate. Catheter ablation curative if recurrent.
+icd10: I47.1
+urgency: urgent
+
+workup:
+  - Symptoms: sudden onset and termination (key feature)
+  - Palpitations: abrupt start of rapid regular heart rate
+  - Dyspnea, lightheadedness, anxiety
+  - Chest discomfort: rarely
+  - Polyuria: from atrial natriuretic peptide release during tachycardia
+  - Syncope: rare unless very rapid rate or underlying heart disease
+  - Episodes last minutes to hours, terminate abruptly (vs gradual in sinus tachycardia)
+  - Often triggered by stress, caffeine, alcohol, exercise, sudden position change
+  - Types:
+  - AVNRT (AV nodal reentrant tachycardia): 60% of PSVT, dual AV nodal pathways
+  - AVRT (AV reentrant tachycardia): 30%, accessory pathway (WPW if pre-excitation visible)
+  - Atrial tachycardia: 10%, focus in atrium
+  - Physical exam during episode:
+  - Regular tachycardia: rate 150-250 bpm
+  - Frog sign: prominent A waves in neck from atria contracting against closed AV valves (AVNRT)
+  - Blood pressure usually maintained unless prolonged
+  - ECG during tachycardia (diagnostic):
+  - Regular narrow complex tachycardia: QRS under 120 ms (unless aberrancy)
+  - P waves often hidden: buried in QRS or T wave
+  - AVNRT: P wave buried in QRS or pseudo R' in V1, pseudo S in inferior leads
+  - AVRT: P wave visible after QRS (retrograde P), RP interval short
+  - Atrial tachycardia: P wave before QRS, abnormal P wave morphology
+  - Rate 150-250 bpm
+  - ECG in sinus rhythm:
+  - Usually normal
+  - WPW pattern if AVRT with manifest accessory pathway: short PR, delta wave, wide QRS
+  - Workup:
+  - 12-lead ECG during episode: essential for diagnosis
+  - Holter monitor or event monitor: capture episodes
+  - Echocardiogram: assess for structural heart disease (usually structurally normal heart)
+  - TSH: rule out hyperthyroidism
+  - Electrolyte panel
+  - EP study: if diagnosis unclear or planning ablation
+
+treatment:
+  - Acute termination (AV nodal blocking maneuvers):
+  - Vagal maneuvers (first-line):
+  - Valsalva maneuver: bear down like bowel movement x10-15 seconds
+  - Carotid sinus massage: massage carotid at angle of jaw x5-10 seconds (check for bruits first, avoid if carotid stenosis)
+  - Diving reflex: immerse face in ice water
+  - Cough, gag reflex
+  - Modified Valsalva most effective: supine, strain x15 seconds, then lie flat with legs elevated x15 seconds
+  - Success rate 20-50%
+  - Adenosine (drug of choice):
+  - 6 mg IV rapid push followed by 20 mL saline flush
+  - If no response: 12 mg IV (can repeat 12 mg once)
+  - Transient complete AV block terminates reentry circuit (AVNRT, AVRT)
+  - Success rate over 90% for AVNRT and AVRT
+  - Side effects: chest tightness, dyspnea, flushing (very brief, under 10 seconds - warn patient)
+  - Contraindications: asthma (bronchospasm), second/third-degree AV block
+  - Does NOT terminate atrial tachycardia or flutter (but may unmask by blocking AV node)
+  - Calcium channel blockers: diltiazem 0.25 mg/kg IV or verapamil 5-10 mg IV
+  - Beta blockers: metoprolol 5 mg IV
+  - Electrical cardioversion: if hemodynamically unstable or refractory to medications
+  - Chronic management:
+  - Observation: if rare episodes, brief, well-tolerated, terminate with vagal maneuvers
+  - Daily medications (prophylaxis):
+  - Beta blockers: metoprolol, atenolol (first-line)
+  - Calcium channel blockers: diltiazem, verapamil
+  - Class IC: flecainide, propafenone (if no structural heart disease)
+  - Digoxin: less effective
+  - Avoid in WPW with AFib (can accelerate conduction down accessory pathway)
+  - Catheter ablation (curative treatment):
+  - Indications: recurrent symptomatic episodes, patient preference to avoid long-term medications, WPW
+  - AVNRT ablation: slow pathway modification, success over 95%, AV block risk under 1%
+  - AVRT ablation: ablate accessory pathway, success over 90%, AV block risk low
+  - First-line if WPW with pre-excitation (risk of sudden death if develop AFib)
+  - Pill-in-pocket: self-administer single dose during episode (flecainide 300 mg or diltiazem 120 mg)
+
+clinical_pearls:
+  - Sudden onset and termination (abrupt start and stop)
+  - Regular narrow complex tachycardia rate 150-250 bpm
+  - AVNRT most common (60%), dual AV nodal pathways
+  - Vagal maneuvers first-line, adenosine 90% effective
+  - Warn patient about adenosine side effects (brief chest tightness, dyspnea)
+  - Catheter ablation curative over 95% success for AVNRT
+  - Polyuria during or after episode (ANP release)
+  - Structurally normal heart in most cases
+
+differentials:
+  - Sinus tachycardia: gradual onset/termination, P waves before QRS, rate usually under 150
+  - Atrial flutter: sawtooth flutter waves, rate often 150 (2:1 block from 300)
+  - Atrial fibrillation: irregularly irregular, no organized atrial activity
+  - Ventricular tachycardia: wide complex (QRS over 120 ms)
+
+trace: |
+  A 28-year-old woman presented to ED with palpitations x2 hours. Abrupt onset while at work (sudden start - classic for PSVT), heart racing regularly, lightheaded, chest tightness, anxiety. Similar episodes x3 in past year, self-resolved. No syncope. Exam: BP 115/70, HR 185 regular, lungs clear, no heart failure signs. ECG: regular narrow complex tachycardia rate 185 bpm, no visible P waves (buried in QRS - consistent with AVNRT), pseudo R' in V1 (terminal positive deflection from retrograde P wave superimposed on QRS - classic for AVNRT). Diagnosed with paroxysmal supraventricular tachycardia, most likely AVNRT (AV nodal reentrant tachycardia - most common type 60%). Attempted vagal maneuvers: modified Valsalva (strain x15 seconds supine, then lie flat with legs elevated x15 seconds). No response (vagal maneuvers 20-50% success). Proceeded with adenosine 6 mg IV rapid push followed by 20 mL saline flush. Warned patient about transient chest tightness and dyspnea (very brief under 10 seconds). Adenosine caused transient complete AV block, tachycardia terminated abruptly (adenosine 90% effective for AVNRT), converted to normal sinus rhythm rate 75 bpm. Patient experienced intense chest tightness and dyspnea x5 seconds (expected adenosine side effect, resolved quickly). Post-conversion ECG: normal sinus rhythm, normal PR interval, no delta wave (rules out WPW), structurally normal. Palpitations and symptoms completely resolved. Discharged from ED with follow-up. Workup: TSH normal, electrolytes normal, echocardiogram showed structurally normal heart (EF 60%, no abnormalities). Event monitor x30 days captured 2 more episodes of narrow complex tachycardia rate 180-190 bpm, self-terminated after 10-15 minutes. Diagnosed with recurrent AVNRT. Options discussed: daily beta blocker prophylaxis vs catheter ablation vs observation. Patient preferred definitive treatment (ablation) over long-term medications. Referred to EP lab for catheter ablation. EP study confirmed dual AV nodal physiology (fast and slow pathways - AVNRT mechanism). Tachycardia easily induced with programmed stimulation. Underwent radiofrequency ablation of slow pathway (modified slow pathway ablation technique to avoid AV block). Confirmed elimination of slow pathway conduction, no inducible AVNRT post-ablation. Procedure successful, no complications, discharged same day. At 2 weeks: no palpitations, no recurrence. At 3 months: completely asymptomatic, no episodes. At 1 year: cured, no PSVT recurrence, no medications needed. Excellent outcome from catheter ablation (over 95% cure rate for AVNRT).
