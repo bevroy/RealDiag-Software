@@ -185,6 +185,7 @@ export default function IntegrationPage() {
           gap: '16px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
             <h1 style={{ marginBottom: 0, color: '#78350f' }}>
               EHR Integration & API Access
             </h1>

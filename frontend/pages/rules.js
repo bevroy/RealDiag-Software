@@ -260,7 +260,7 @@ export default function ReferencePage() {
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
-          Search across all disease processes (neurology, cardiology, endocrinology) to find
+          Search across 415+ diagnostic rules covering all disease processes (neurology, cardiology, endocrinology, and more) to find
           relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
         </p>
         <p style={{ margin: 0, fontSize: 12, color: "#94a3b8" }}>

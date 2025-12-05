@@ -686,9 +686,12 @@ export default function PatientHistory() {
 
       <header className={styles.header}>
         <div className={styles.headerContent} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
-          <div>
-            <h1 style={{ marginBottom: '0.5rem' }}>📋 Manual Patient History Entry</h1>
-            <p style={{ margin: 0 }}>For non-EMR instances: Enter comprehensive patient history using dropdown lists</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
+            <div>
+              <h1 style={{ marginBottom: '0.5rem' }}>Manual Patient History Entry</h1>
+              <p style={{ margin: 0 }}>For non-EMR instances: Enter comprehensive patient history using dropdown lists</p>
+            </div>
           </div>
           <a href="/" style={{
             padding: '8px 16px',
