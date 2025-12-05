@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%);
   padding: 2rem 1rem;
 }
 
@@ -56,7 +56,7 @@
 
 .activeSection {
   background: white;
-  color: #667eea;
+  color: #0f766e;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
@@ -91,9 +91,9 @@
 
 .section h2 {
   margin: 0 0 1.5rem 0;
-  color: #1f2937;
+  color: #0f766e;
   font-size: 1.8rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #14b8a6;
   padding-bottom: 0.5rem;
 }
 
@@ -167,8 +167,8 @@
 .formGroupFull input:focus,
 .formGroupFull textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
 }
 
 .card {
@@ -239,7 +239,7 @@
 
 .saveButton {
   padding: 1rem 3rem;
-  background: #667eea;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -247,13 +247,13 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
 }
 
 .saveButton:hover {
-  background: #5568d3;
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
 }
 
 .successMessage {
@@ -572,7 +572,7 @@
 
 .primaryButton {
   padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -584,7 +584,7 @@
 
 .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
 }
 
 /* Responsive Design */
