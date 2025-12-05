@@ -276,6 +276,317 @@
   font-size: 1.1rem;
 }
 
+/* Medication Safety Button */
+.safetyButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.safetyButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.safetyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.5rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #ef4444;
+}
+
+.modalBody {
+  padding: 2rem;
+}
+
+.modalFooter {
+  padding: 1.5rem 2rem;
+  border-top: 2px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  position: sticky;
+  bottom: 0;
+  background: white;
+}
+
+/* Safety Score */
+.safetyScore {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.scoreCircle {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid #10b981;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.scoreNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.scoreLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scoreSummary {
+  flex: 1;
+  margin: 0;
+  font-size: 1.1rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* Alerts Section */
+.alertsSection {
+  margin-bottom: 2rem;
+}
+
+.alertsSection h3 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+  font-size: 1.25rem;
+}
+
+.alertCard {
+  background: white;
+  border-left: 4px solid;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alertCard.critical {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.alertCard.major {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.alertCard.moderate {
+  border-color: #eab308;
+  background: #fefce8;
+}
+
+.alertCard.minor {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.alertHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.alertType {
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.severityBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.alertCard.critical .severityBadge {
+  background: #dc2626;
+  color: white;
+}
+
+.alertCard.major .severityBadge {
+  background: #f59e0b;
+  color: white;
+}
+
+.alertCard.moderate .severityBadge {
+  background: #eab308;
+  color: white;
+}
+
+.alertCard.minor .severityBadge {
+  background: #3b82f6;
+  color: white;
+}
+
+.alertMedication {
+  margin: 0.5rem 0;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.alertEffect {
+  margin: 0.5rem 0;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.alertRecommendation {
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 6px;
+  color: #1e40af;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.alertMonitoring {
+  margin: 0.5rem 0;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* No Alerts */
+.noAlerts {
+  padding: 2rem;
+  background: #d1fae5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.noAlerts p {
+  margin: 0;
+  color: #065f46;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Additional Info */
+.infoSection {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.infoSection h4 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+}
+
+.infoSection ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #4b5563;
+}
+
+.infoSection li {
+  margin-bottom: 0.5rem;
+}
+
+.primaryButton {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .sectionNav {
@@ -296,5 +607,27 @@
 
   .content {
     padding: 1rem;
+  }
+
+  .safetyScore {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .modalOverlay {
+    padding: 1rem;
+  }
+
+  .modalBody {
+    padding: 1rem;
+  }
+
+  .scoreCircle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .scoreNumber {
+    font-size: 2rem;
   }
 }

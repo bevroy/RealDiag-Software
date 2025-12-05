@@ -22,6 +22,9 @@ export default function PatientHistory() {
   
   const [currentSection, setCurrentSection] = useState('demographics')
   const [savedMessage, setSavedMessage] = useState('')
+  const [medicationSafetyResult, setMedicationSafetyResult] = useState(null)
+  const [showSafetyModal, setShowSafetyModal] = useState(false)
+  const [checkingSafety, setCheckingSafety] = useState(false)
 
   // Get API base
   useEffect(() => {
@@ -468,6 +471,53 @@ export default function PatientHistory() {
         allergy.id === id ? { ...allergy, [field]: value } : allergy
       )
     }))
+  }
+
+  // Check medication safety
+  const checkMedicationSafety = async () => {
+    setCheckingSafety(true)
+    try {
+      const activeMeds = patientData.current_medications
+        .filter(med => med.status === 'active' && med.name && med.name !== '')
+        .map(med => med.name)
+      
+      if (activeMeds.length === 0) {
+        alert('Please add at least one active medication to check safety.')
+        setCheckingSafety(false)
+        return
+      }
+
+      const conditions = patientData.active_conditions
+        .filter(cond => cond.condition_name && cond.condition_name !== '')
+        .map(cond => cond.condition_name)
+      
+      const allergies = patientData.allergies
+        .filter(allergy => allergy.allergen && allergy.allergen !== '')
+        .map(allergy => allergy.allergen)
+
+      const response = await fetch(`${apiBase}/diagnostic/medication-safety-check`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          current_medications: activeMeds,
+          conditions: conditions,
+          known_allergies: allergies
+        })
+      })
+
+      if (response.ok) {
+        const result = await response.json()
+        setMedicationSafetyResult(result)
+        setShowSafetyModal(true)
+      } else {
+        alert('Failed to check medication safety. Please try again.')
+      }
+    } catch (err) {
+      console.error('Medication safety check failed:', err)
+      alert('Error checking medication safety. Please check your connection.')
+    } finally {
+      setCheckingSafety(false)
+    }
   }
 
   // Save data
@@ -1104,7 +1154,17 @@ export default function PatientHistory() {
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2>💊 Current Medications</h2>
-                <button onClick={addMedication} className={styles.addButton}>+ Add Medication</button>
+                <div>
+                  <button 
+                    onClick={checkMedicationSafety} 
+                    className={styles.safetyButton}
+                    disabled={checkingSafety}
+                    style={{ marginRight: '10px' }}
+                  >
+                    {checkingSafety ? '⏳ Checking...' : '🛡️ Check Safety'}
+                  </button>
+                  <button onClick={addMedication} className={styles.addButton}>+ Add Medication</button>
+                </div>
               </div>
 
               {patientData.current_medications.length === 0 && (
@@ -1275,6 +1335,113 @@ export default function PatientHistory() {
           )}
         </div>
       </div>
+
+      {/* Medication Safety Modal */}
+      {showSafetyModal && medicationSafetyResult && (
+        <div className={styles.modalOverlay} onClick={() => setShowSafetyModal(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2>🛡️ Medication Safety Report</h2>
+              <button className={styles.closeButton} onClick={() => setShowSafetyModal(false)}>✕</button>
+            </div>
+            
+            <div className={styles.modalBody}>
+              {/* Safety Score */}
+              <div className={styles.safetyScore}>
+                <div className={styles.scoreCircle} style={{
+                  borderColor: medicationSafetyResult.safety_score >= 90 ? '#10b981' :
+                               medicationSafetyResult.safety_score >= 70 ? '#f59e0b' : '#ef4444'
+                }}>
+                  <span className={styles.scoreNumber}>{medicationSafetyResult.safety_score}</span>
+                  <span className={styles.scoreLabel}>Safety Score</span>
+                </div>
+                <p className={styles.scoreSummary}>{medicationSafetyResult.summary}</p>
+              </div>
+
+              {/* Alerts */}
+              {medicationSafetyResult.alerts && medicationSafetyResult.alerts.length > 0 && (
+                <div className={styles.alertsSection}>
+                  <h3>⚠️ Safety Alerts ({medicationSafetyResult.alerts.length})</h3>
+                  {medicationSafetyResult.alerts.map((alert, index) => (
+                    <div key={index} className={`${styles.alertCard} ${styles[alert.severity]}`}>
+                      <div className={styles.alertHeader}>
+                        <span className={styles.alertType}>
+                          {alert.alert_type === 'drug_interaction' ? '💊' :
+                           alert.alert_type === 'contraindication' ? '🚫' :
+                           alert.alert_type === 'allergen_cross_reactivity' ? '⚠️' :
+                           alert.alert_type === 'dose_concern' ? '📊' :
+                           alert.alert_type === 'pregnancy_risk' ? '🤰' :
+                           alert.alert_type === 'renal_adjustment' ? '🩺' :
+                           alert.alert_type === 'hepatic_adjustment' ? '🩺' : '⚠️'}
+                          {' '}
+                          {alert.alert_type.replace(/_/g, ' ').toUpperCase()}
+                        </span>
+                        <span className={styles.severityBadge}>{alert.severity}</span>
+                      </div>
+                      
+                      <p className={styles.alertMedication}>
+                        <strong>Medication:</strong> {alert.medication}
+                        {alert.interacting_medication && (
+                          <span> + {alert.interacting_medication}</span>
+                        )}
+                        {alert.condition && (
+                          <span> with {alert.condition}</span>
+                        )}
+                        {alert.allergen && alert.cross_reactive_drug && (
+                          <span> ({alert.allergen} → {alert.cross_reactive_drug})</span>
+                        )}
+                      </p>
+
+                      {alert.clinical_effect && (
+                        <p className={styles.alertEffect}>
+                          <strong>Clinical Effect:</strong> {alert.clinical_effect}
+                        </p>
+                      )}
+
+                      {alert.recommendation && (
+                        <p className={styles.alertRecommendation}>
+                          <strong>Recommendation:</strong> {alert.recommendation}
+                        </p>
+                      )}
+
+                      {alert.monitoring && (
+                        <p className={styles.alertMonitoring}>
+                          <strong>Monitoring:</strong> {alert.monitoring}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* No Alerts */}
+              {(!medicationSafetyResult.alerts || medicationSafetyResult.alerts.length === 0) && (
+                <div className={styles.noAlerts}>
+                  <p>✅ No safety concerns detected with current medication regimen.</p>
+                </div>
+              )}
+
+              {/* Additional Info */}
+              {medicationSafetyResult.requires_monitoring && medicationSafetyResult.requires_monitoring.length > 0 && (
+                <div className={styles.infoSection}>
+                  <h4>📋 Requires Monitoring</h4>
+                  <ul>
+                    {medicationSafetyResult.requires_monitoring.map((med, index) => (
+                      <li key={index}>{med}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className={styles.modalFooter}>
+              <button className={styles.primaryButton} onClick={() => setShowSafetyModal(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
