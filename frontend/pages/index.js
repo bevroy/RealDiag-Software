@@ -167,7 +167,7 @@ export default function Home() {
           Real-Time Diagnostic Assistant
         </p>
         <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
-          415+ diagnoses • 17 specialties • Evidence-based
+          424+ diagnoses • 17 specialties • Evidence-based
         </p>
       </div>
 
