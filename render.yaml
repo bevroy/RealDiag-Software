@@ -16,3 +16,16 @@ services:
     # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
     healthCheckPath: /health
     autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: FHIR_BASE_URL
+        value: http://localhost:8080/fhir  # UPDATE THIS with your EMR FHIR URL
+      - key: FHIR_AUTH_TOKEN
+        sync: false  # Set this securely in Render dashboard
+      - key: PREVIEW_ORIGIN_REGEX
+        value: ^https?://(?:localhost(?::\\d+)?|.*\\.netlify\\.app|www\\.realdiag\\.com)$
