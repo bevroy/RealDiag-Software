@@ -2,80 +2,100 @@ tree_id: CARDS-MITRAL-STENOSIS
 name: Mitral Stenosis
 family: Cardiology
 specialty: Cardiology
-chief_complaint: Shortness of breath and palpitations
-description: Narrowing of mitral valve causing obstruction to LV filling and elevated left atrial pressure, almost always rheumatic in origin. Classic opening snap and diastolic rumble at apex. Atrial fibrillation common complication worsens symptoms. Percutaneous balloon valvuloplasty or surgical commissurotomy for severe symptomatic MS.
+chief_complaint: Dyspnea and palpitations with opening snap
+description: Narrowing of mitral valve causing impaired LV filling and elevated left atrial pressure. Almost always from rheumatic heart disease (history of rheumatic fever). Classic auscultation includes loud S1, opening snap, diastolic rumble. Severe MS defined as valve area under 1.5 cm², mean gradient over 10 mmHg. AFib common (enlarged LA). Symptomatic severe MS requires intervention with PMBC (percutaneous mitral balloon commissurotomy) if suitable anatomy or surgical valve replacement.
 icd10: I05.0
 urgency: urgent
 
 workup:
-  - Symptoms:
-  - Dyspnea: exertional dyspnea, orthopnea, PND (elevated LA pressure causing pulmonary congestion)
-  - Palpitations: atrial fibrillation develops in 30-40% (enlarged LA substrate)
-  - Hemoptysis: pulmonary venous hypertension causes rupture of bronchial veins
-  - Hoarseness: Ortner syndrome (enlarged LA compresses left recurrent laryngeal nerve)
-  - Thromboembolic events: LA stasis and AFib increase stroke risk
-  - Physical exam:
-  - Diastolic rumbling murmur at apex: low-pitched, best heard with bell, patient in left lateral decubitus position
-  - Opening snap (OS): high-pitched early diastolic sound after S2 from abrupt opening of stenotic valve
-  - Shorter S2-OS interval indicates more severe stenosis (higher LA pressure forces valve open earlier)
-  - Loud S1: from forceful valve closure (mobile leaflets snap shut)
-  - In severe MS: S1 soft (calcified immobile valve), no OS (immobile)
-  - Diastolic thrill at apex: palpable in severe MS
-  - Right ventricular heave: pulmonary hypertension from chronic LA pressure elevation
-  - Malar flush: peripheral cyanosis from low cardiac output
-  - Causes:
-  - Rheumatic heart disease (95%): only significant cause, latency 20-40 years after acute rheumatic fever
-  - Rare causes: severe mitral annular calcification, congenital, carcinoid
+  - Clinical presentation:
+  - Dyspnea on exertion (most common, from elevated LA pressure and pulmonary congestion)
+  - Orthopnea and PND
+  - Palpitations (from atrial fibrillation - very common in MS)
+  - Hemoptysis (from pulmonary hypertension, ruptured bronchial veins)
+  - Hoarseness (Ortner syndrome from enlarged LA compressing left recurrent laryngeal nerve)
+  - Systemic embolism (from LA thrombus, especially if AFib)
+  - Etiology:
+  - Rheumatic heart disease (almost all cases, history of rheumatic fever 10-20 years prior)
+  - Rare causes include congenital MS, calcific MS in elderly, carcinoid, SLE
+  - Physical exam (classic findings):
+  - Loud S1 (forceful closure of stenotic valve)
+  - Opening snap after S2 (stenotic valve opens abruptly, shorter S2-OS interval indicates more severe stenosis)
+  - Low-pitched diastolic rumble at apex (best heard in left lateral decubitus position with bell)
+  - Accentuated with exercise or leg raise (increased flow across valve)
+  - Presystolic accentuation if sinus rhythm (atrial contraction)
+  - RV heave if pulmonary hypertension (from chronic elevated LA pressure)
+  - Mitral facies (malar flush from low cardiac output and chronic hypoxemia)
+  - Imaging:
   - Echocardiogram (diagnostic):
-  - Mitral valve area (MVA): normal 4-6 cm², mild 1.5-2 cm², moderate 1-1.5 cm², severe below 1 cm²
-  - Mean gradient: mild below 5 mmHg, moderate 5-10 mmHg, severe over 10 mmHg
-  - Valve morphology: thickened leaflets, commissural fusion, restricted motion, calcification
-  - Wilkins score: grades leaflet mobility, thickening, calcification, subvalvular apparatus (score 0-16, score below 8 favorable for balloon valvuloplasty)
-  - Left atrial enlargement: LA diameter often over 5 cm
-  - Pulmonary hypertension: elevated PA systolic pressure (PASP)
-  - Exclude mitral regurgitation: must be absent or mild for balloon valvuloplasty candidacy
-  - Exclude LA thrombus: TEE before intervention
-  - ECG: left atrial enlargement (P mitrale - notched P in lead II), atrial fibrillation (30-40%), right ventricular hypertrophy if pulmonary hypertension
-  - Chest X-ray: straightening of left heart border (enlarged LA), double density (LA behind RV), Kerley B lines (pulmonary edema)
+  - Severity grading:
+  - Mild MS (valve area over 2.0 cm², mean gradient under 5 mmHg, PA pressure under 30 mmHg)
+  - Moderate MS (valve area 1.5-2.0 cm², mean gradient 5-10 mmHg, PA pressure 30-50 mmHg)
+  - Severe MS (valve area under 1.5 cm², mean gradient over 10 mmHg, PA pressure over 50 mmHg)
+  - Very severe MS (valve area under 1.0 cm²)
+  - Valve morphology (Wilkins score for PMBC suitability, score under 8 favorable)
+  - LA size (often dilated)
+  - LA thrombus (contraindication to PMBC)
+  - MR assessment (significant MR may preclude PMBC)
+  - PA pressure (assess pulmonary hypertension)
+  - TEE (if transthoracic echo inadequate, assess LA thrombus before PMBC)
+  - Chest X-ray:
+  - LA enlargement (straightening of left heart border, double density, elevated left main bronchus)
+  - Pulmonary congestion or edema
+  - ECG:
+  - P mitrale (broad notched P waves in lead II from LA enlargement)
+  - Atrial fibrillation (very common)
+  - RVH if pulmonary hypertension
 
 treatment:
-  - Medical management (symptom relief, does NOT alter stenosis):
-  - Diuretics: furosemide for pulmonary congestion
-  - Beta blockers: slow heart rate, prolongs diastolic filling time (metoprolol)
-  - Critical in AFib (rapid ventricular rate shortens diastole worsening symptoms)
-  - Digoxin: rate control in AFib
-  - Anticoagulation: warfarin if atrial fibrillation (INR 2-3) or prior embolism, reduces stroke risk
-  - Rate vs rhythm control in AFib: rate control usually preferred (MS makes cardioversion difficult)
-  - Percutaneous mitral balloon valvuloplasty (PMBV) - first-line intervention:
-  - Indications: symptomatic severe MS (MVA below 1.5 cm² and symptoms) with favorable valve morphology (Wilkins score below 8)
-  - Technique: transseptal puncture, balloon inflation at valve splits fused commissures
-  - Success rate 80-90% if favorable anatomy
-  - Increases MVA by 1-2 cm² typically
-  - Contraindications: moderate-severe MR, LA thrombus (do TEE first), heavily calcified valve (Wilkins over 8)
-  - Complications: mitral regurgitation (most common), atrial septal defect, cardiac perforation (rare)
-  - Durability: 10-year freedom from reintervention 50-70%
-  - Surgical mitral valve repair or replacement:
-  - Indications: severe MS not candidate for PMBV (unfavorable anatomy, heavy calcification, moderate-severe MR)
-  - Open mitral commissurotomy: surgical splitting of fused commissures (if pliable valve)
-  - Mitral valve replacement: mechanical or bioprosthetic (if heavily calcified or failed PMBV)
-  - Rheumatic fever prophylaxis: secondary prevention with penicillin if history of rheumatic fever (prevent recurrence)
-  - Pregnancy: MS poorly tolerated (increased blood volume worsens pulmonary congestion), PMBV safe in pregnancy if severe symptomatic
+  - Medical management (symptom control):
+  - Diuretics for congestion (furosemide)
+  - Rate control if AFib (beta blocker or diltiazem, goal HR 60-80 to maximize diastolic filling time)
+  - Anticoagulation:
+  - If AFib, LA thrombus, or prior embolism (warfarin with INR 2-3)
+  - Consider even if sinus rhythm with severe MS and LA enlargement over 55 mm
+  - Endocarditis prophylaxis
+  - Avoid excessive activity if severe MS
+  - Serial monitoring if asymptomatic:
+  - Severe MS annually
+  - Moderate MS every 1-2 years
+  - Mild MS every 3-5 years
+  - Intervention indications:
+  - Symptomatic severe MS (NYHA class II-IV symptoms)
+  - Asymptomatic severe MS with new-onset AFib or pulmonary hypertension (PA pressure over 50 mmHg)
+  - PMBC (percutaneous mitral balloon commissurotomy):
+  - First-line therapy if suitable anatomy
+  - Criteria for PMBC:
+  - Favorable valve morphology (Wilkins score under 8, pliable leaflets, minimal calcification, minimal subvalvular thickening)
+  - No or mild MR (greater than 2+ MR contraindication)
+  - No LA thrombus on TEE
+  - Balloon inflated across valve to separate fused commissures
+  - Avoids open-heart surgery
+  - Success rate 80-90% with excellent long-term results
+  - Surgical mitral valve replacement or repair:
+  - If unfavorable anatomy for PMBC (Wilkins score over 8, heavily calcified, significant MR, LA thrombus)
+  - Valve replacement with mechanical or bioprosthetic valve
+  - Valve repair (commissurotomy) if suitable
+  - Post-intervention management:
+  - Anticoagulation if mechanical valve (warfarin INR 2.5-3.5 for mitral position)
+  - Antiplatelet if bioprosthetic valve (aspirin)
+  - Continue rate control if AFib persists
+  - Serial echo to assess valve function
 
 clinical_pearls:
-  - Diastolic rumbling murmur at apex with opening snap - pathognomonic for MS
-  - Almost always rheumatic in origin (95%), latency 20-40 years after ARF
+  - MS almost always from rheumatic heart disease (rheumatic fever 10-20 years prior)
+  - Classic auscultation (loud S1, opening snap, diastolic rumble at apex)
   - Shorter S2-OS interval indicates more severe stenosis
-  - Atrial fibrillation in 30-40% worsens symptoms dramatically (loss of atrial kick and rapid rate)
-  - Severe MS: MVA below 1 cm², mean gradient over 10 mmHg
-  - PMBV first-line intervention if favorable anatomy (Wilkins score below 8)
-  - Anticoagulation essential if AFib (LA stasis and AFib increase stroke risk)
-  - Beta blockers critical to slow heart rate and prolong diastolic filling time
+  - AFib very common (enlarged LA)
+  - Severe MS defined as valve area under 1.5 cm², mean gradient over 10 mmHg
+  - PMBC first-line therapy if suitable anatomy (Wilkins score under 8, no significant MR, no LA thrombus)
+  - Anticoagulation if AFib, LA thrombus, or prior embolism
 
 differentials:
-  - Aortic regurgitation: Austin Flint murmur mimics MS (diastolic rumble at apex) but wide pulse pressure
-  - Tricuspid stenosis: diastolic murmur at left lower sternal border, increases with inspiration
-  - Left atrial myxoma: diastolic murmur changes with position, tumor plop sound
-  - Mitral regurgitation: holosystolic murmur radiating to axilla, not diastolic
+  - Mitral regurgitation (holosystolic murmur, not diastolic rumble)
+  - Tricuspid stenosis (similar diastolic rumble but at left lower sternal border)
+  - Left atrial myxoma (similar symptoms but tumor plop, not opening snap)
+  - Aortic regurgitation (Austin Flint murmur similar to MS rumble)
 
 trace: |
-  A 48-year-old woman from India presented with 1 year of progressive dyspnea on exertion and palpitations. History of rheumatic fever in childhood (age 8). Previously asymptomatic until last year. Now short of breath climbing stairs, orthopnea, PND. Palpitations started 2 months ago (atrial fibrillation). Episode of hemoptysis 1 week ago (pulmonary venous hypertension). Exam: irregularly irregular rhythm (AFib), HR 110, low-pitched diastolic rumbling murmur at apex best heard with bell in left lateral decubitus position, opening snap 0.06 seconds after S2 (short S2-OS interval indicates severe stenosis), loud S1, diastolic thrill palpable at apex, right ventricular heave (pulmonary hypertension), malar flush. ECG: atrial fibrillation with rapid ventricular response 110 bpm, right ventricular hypertrophy. CXR: straightening of left heart border (enlarged LA), double density behind sternum (enlarged LA), Kerley B lines (pulmonary edema). Echocardiogram: severe mitral stenosis, mitral valve area 0.9 cm² (severe below 1.0), mean gradient 14 mmHg (severe over 10), thickened mitral leaflets with commissural fusion, Wilkins score 6 (favorable for balloon valvuloplasty - below 8), no significant mitral regurgitation (trace only), LA severely enlarged 6.2 cm, pulmonary hypertension PASP 55 mmHg. Transesophageal echo (TEE): no LA thrombus (must exclude before intervention). Diagnosed with severe symptomatic rheumatic mitral stenosis with atrial fibrillation (classic presentation: dyspnea, AFib, opening snap, rheumatic origin). Started metoprolol 50 mg BID for rate control (slow heart rate prolongs diastole improves filling), furosemide 40 mg daily for pulmonary congestion, warfarin for AFib (INR goal 2-3, stroke prevention). At 1 week heart rate controlled 70s, symptoms improved 30%. Candidate for percutaneous mitral balloon valvuloplasty (PMBV): symptomatic severe MS with favorable valve anatomy (Wilkins 6), no LA thrombus, minimal MR. Underwent PMBV: transseptal puncture, balloon inflation at mitral valve, heard pop as commissures split. Post-procedure echocardiogram: MVA increased from 0.9 to 2.3 cm² (excellent result, target over 1.5), mean gradient decreased from 14 to 4 mmHg, mild mitral regurgitation (acceptable), no ASD. At 24 hours dramatic symptom improvement: dyspnea resolved, able to walk without shortness of breath. Discharged on metoprolol, furosemide (lower dose), warfarin (continue lifelong for AFib). At 1 month no dyspnea, AFib rate-controlled, excellent functional status. At 6 months back to baseline activity. PMBV successful treatment for rheumatic mitral stenosis. 10-year freedom from reintervention 50-70%. Annual echo monitoring.
+  A 52-year-old woman from India presented with 1 year progressive dyspnea on exertion. Now dyspneic walking half block (NYHA class III). Orthopnea, PND. Palpitations daily (irregular rhythm). History of rheumatic fever at age 12 (40 years ago - classic for MS). No prior cardiac evaluation. Exam: irregularly irregular rhythm (atrial fibrillation), BP 110/75, loud S1 (forceful closure of stenotic valve), opening snap shortly after S2 (short S2-OS interval indicates severe stenosis), low-pitched diastolic rumble at apex heard best in left lateral decubitus position with bell, accentuated with leg raise (increased flow). RV heave palpable (pulmonary hypertension from chronic elevated LA pressure). Malar flush (mitral facies). ECG: atrial fibrillation with ventricular rate 110 bpm (rapid, poor diastolic filling time), RVH (pulmonary hypertension). Chest X-ray: LA enlargement (straightening of left heart border, double density sign, elevated left main bronchus), pulmonary vascular congestion. Echocardiogram: rheumatic mitral stenosis with thickened doming leaflets (classic appearance), severe stenosis with valve area 0.9 cm² (very severe MS - under 1.0), mean gradient 14 mmHg (severe MS - over 10), PA systolic pressure 65 mmHg (severe pulmonary hypertension - over 50). Severely enlarged LA (6.2 cm - normal under 4 cm). Wilkins score 6 (favorable for PMBC: pliable leaflets, minimal calcification, minimal subvalvular disease). Trace MR only (no significant MR - good for PMBC). Diagnosed with severe rheumatic mitral stenosis with AFib and pulmonary hypertension. Symptomatic NYHA class III is class I indication for intervention. TEE performed to assess for LA thrombus before PMBC: no thrombus seen (safe to proceed with PMBC). Given favorable valve morphology (Wilkins score 6 under 8), minimal MR, no LA thrombus, patient is excellent PMBC candidate. Started anticoagulation with heparin (bridging for AFib), metoprolol 50 mg BID (rate control for AFib, goal HR 60-80 to maximize diastolic filling), furosemide 40 mg daily (diuresis for congestion). Underwent PMBC (percutaneous mitral balloon commissurotomy). Procedure: transseptal puncture to access LA, advanced balloon catheter across mitral valve, inflated balloon to separate fused commissures. Immediate improvement in hemodynamics. Post-procedure echo: valve area increased from 0.9 cm² to 2.1 cm² (excellent result - normal over 1.5), mean gradient decreased from 14 mmHg to 4 mmHg (excellent), PA pressure decreased from 65 mmHg to 45 mmHg (improved). Trace to 1+ MR (acceptable increase, under 2+ MR is acceptable). No complications. Discharged on day 2 with warfarin (target INR 2-3 for AFib), metoprolol continued (rate control), furosemide. At 2 weeks: outpatient follow-up, symptoms dramatically improved. Walking without dyspnea, no orthopnea. INR therapeutic 2.4. At 1 month: NYHA class I, asymptomatic. HR controlled 70-80 bpm on metoprolol. Repeat echo: valve area stable 2.0 cm² (maintained excellent result), mean gradient 5 mmHg, PA pressure 40 mmHg (continued improvement as LA pressure normalized). At 6 months: remains asymptomatic, excellent exercise tolerance. At 1 year: stable valve function, no restenosis. AFib persists (often does not convert after PMBC even with improved hemodynamics). This case demonstrates severe rheumatic mitral stenosis with classic history (rheumatic fever 40 years prior), classic exam findings (loud S1, opening snap, diastolic rumble), severe hemodynamics (valve area 0.9 cm², mean gradient 14 mmHg, PA pressure 65 mmHg), and AFib with pulmonary hypertension. PMBC first-line therapy with favorable anatomy (Wilkins score 6, minimal MR, no LA thrombus), excellent immediate and long-term results. PMBC preferred over surgery (less invasive, excellent outcomes, faster recovery).
