@@ -1,0 +1,84 @@
+tree_id: CARDS-PULMONARY-HYPERTENSION
+name: Pulmonary Hypertension
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Shortness of breath and fatigue with exertion
+description: Elevated pulmonary artery pressure (mean PAP above 20 mmHg) causing progressive dyspnea, fatigue, and right heart failure. Multiple groups including idiopathic, associated with left heart disease or lung disease, CTEPH. Right heart catheterization confirms diagnosis, treatment varies by group from pulmonary vasodilators to treating underlying cause.
+icd10: I27.0
+urgency: urgent
+
+workup:
+  - Symptoms: progressive dyspnea on exertion, fatigue, weakness, exertional chest pain, syncope
+  - Right heart failure signs: peripheral edema, ascites, elevated JVP, hepatomegaly
+  - Physical exam: loud P2 (pulmonic component of S2), right ventricular heave, tricuspid regurgitation murmur
+  - Definition: mean pulmonary artery pressure (mPAP) above 20 mmHg at rest on right heart catheterization
+  - WHO Classification (5 groups based on etiology):
+  - Group 1 PAH (pulmonary arterial hypertension): idiopathic, heritable, drugs (fenfluramine, methamphetamine), connective tissue disease (scleroderma), HIV, portal hypertension, congenital heart disease
+  - Group 2: left heart disease (most common overall) - HFpEF, HFrEF, valvular disease
+  - Group 3: lung disease and hypoxia - COPD, ILD, OSA
+  - Group 4: CTEPH (chronic thromboembolic pulmonary hypertension) - after PE
+  - Group 5: unclear/multifactorial - sarcoidosis, hematologic disorders
+  - Echocardiogram (screening test):
+  - Estimates RVSP (right ventricular systolic pressure) from TR jet velocity
+  - RVSP above 40 mmHg suggests pulmonary hypertension
+  - Right ventricular dilatation and dysfunction
+  - Does NOT definitively diagnose PH (requires right heart cath)
+  - Right heart catheterization (gold standard):
+  - Confirms PH: mean PAP above 20 mmHg
+  - Distinguishes pre-capillary vs post-capillary:
+  - Pre-capillary (Groups 1,3,4,5): PCWP below 15 mmHg, PVR above 3 Wood units (isolated pulmonary vascular disease)
+  - Post-capillary (Group 2): PCWP above 15 mmHg (left heart disease causing backup)
+  - Vasoreactivity testing: acute vasodilator challenge with inhaled nitric oxide, IV adenosine, or IV epoprostenol (only in Group 1 PAH)
+  - Workup for etiology:
+  - PFTs with DLCO: evaluate lung disease
+  - High-resolution CT chest: ILD, emphysema
+  - V/Q scan: screen for CTEPH (more sensitive than CTPE for chronic PE)
+  - Labs: BNP (elevated), HIV, hepatitis, ANA/scleroderma antibodies, TSH
+  - 6-minute walk test: functional capacity, prognostic
+
+treatment:
+  - Treat underlying cause:
+  - Group 2 (left heart): optimize heart failure management, diuretics, afterload reduction
+  - Group 3 (lung disease): treat COPD/ILD, supplemental oxygen if hypoxic, CPAP for OSA
+  - Group 4 (CTEPH): pulmonary thromboendarterectomy surgery (potentially curative), lifelong anticoagulation
+  - Supportive care (all groups):
+  - Supplemental oxygen: if hypoxic, maintain O2 sat above 90%
+  - Diuretics: furosemide for volume overload and edema
+  - Anticoagulation: warfarin for Group 1 PAH and Group 4 CTEPH
+  - Pregnancy avoidance: high maternal mortality
+  - Influenza and pneumococcal vaccines
+  - Group 1 PAH specific therapies (pulmonary vasodilators):
+  - Calcium channel blockers: ONLY if vasoreactive on testing (5-10% of patients), nifedipine 30-240 mg daily or diltiazem 120-720 mg daily
+  - Endothelin receptor antagonists: ambrisentan 5-10 mg daily, bosentan 125 mg BID, macitentan 10 mg daily
+  - Reduce pulmonary vascular remodeling
+  - Monitor LFTs (hepatotoxicity risk)
+  - Phosphodiesterase-5 inhibitors: sildenafil 20 mg TID, tadalafil 40 mg daily
+  - Vasodilation via cGMP pathway
+  - Prostacyclin analogs (severe disease):
+  - Epoprostenol IV: continuous infusion via central line, most potent
+  - Treprostinil: SC, IV, or inhaled
+  - Iloprost: inhaled 6-9 times daily
+  - Combination therapy: often use 2-3 agents from different classes for severe PAH
+  - Lung transplantation: for refractory severe PAH
+  - Prognosis: Group 1 PAH median survival 5-7 years with treatment (vs 2-3 years untreated)
+
+clinical_pearls:
+  - Progressive dyspnea and fatigue with loud P2 and RV heave
+  - Most common cause is left heart disease (Group 2)
+  - Right heart catheterization required for definitive diagnosis (echo only screens)
+  - Mean PAP above 20 mmHg diagnostic
+  - Distinguish pre-capillary (PCWP below 15 - Groups 1,3,4,5) vs post-capillary (PCWP above 15 - Group 2)
+  - V/Q scan for CTEPH screening (not CT - V/Q more sensitive for chronic PE)
+  - Pulmonary vasodilators for Group 1 PAH only
+  - CTEPH potentially curable with surgery
+  - Pregnancy contraindicated (high mortality)
+
+differentials:
+  - Heart failure: dyspnea and edema but PCWP elevated (post-capillary PH)
+  - COPD: dyspnea, PFTs show obstruction, may have mild secondary PH
+  - Interstitial lung disease: dyspnea, restrictive PFTs, DLCO reduced, may have PH
+  - Chronic PE: dyspnea, positive V/Q scan, may develop CTEPH
+  - Deconditioning: dyspnea on exertion but normal echo and normal hemodynamics
+
+trace: |
+  A 42-year-old woman with scleroderma presented with 18 months of progressive dyspnea on exertion and fatigue. Previously could walk 2 miles, now short of breath after one block. Occasional exertional chest discomfort. Mild lower extremity edema. Known limited scleroderma (CREST syndrome) x8 years with Raynaud phenomenon, skin thickening on fingers. Exam: BP 118/72, HR 88, O2 sat 94% on room air, elevated JVP 12 cm, loud P2 (pulmonic component of second heart sound), RV heave, 2/6 systolic murmur at left sternal border (tricuspid regurgitation), 1+ pitting edema. Echocardiogram: estimated RVSP 65 mmHg (elevated, suggests PH), dilated RV with reduced function, dilated RA, moderate TR, normal LV function, PCWP cannot be determined on echo. BNP 340 (elevated). Diagnosed with suspected pulmonary hypertension in setting of scleroderma (connective tissue disease-associated PAH - Group 1). Referred for right heart catheterization: mean PAP 42 mmHg (normal below 20 - confirms severe PH), PCWP 12 mmHg (below 15 confirms pre-capillary PH - Group 1 PAH), PVR 8 Wood units (above 3 confirms isolated pulmonary vascular disease), cardiac output 3.8 L/min (reduced). Vasoreactivity testing with inhaled nitric oxide: mean PAP dropped to 30 mmHg (positive vasoreactive response - rare, predicts response to calcium channel blockers). Workup: PFTs normal, DLCO 52% predicted (reduced common in scleroderma-PAH), V/Q scan low probability for PE (ruled out CTEPH), HIV negative, high-resolution CT chest no significant ILD. 6-minute walk distance 310 meters (reduced, poor prognostic sign). Diagnosed with scleroderma-associated pulmonary arterial hypertension (PAH Group 1) with positive vasoreactivity testing. Started nifedipine extended-release 30 mg daily (calcium channel blocker for vasoreactive patients). Increased to 60 mg daily, then 120 mg daily over 2 months. Started warfarin for anticoagulation (INR goal 2-3). Diuretics: furosemide 20 mg daily for edema. At 3 months repeat right heart cath: mean PAP improved to 28 mmHg on nifedipine (excellent response to CCB - only occurs in 5-10% vasoreactive patients). 6-minute walk improved to 410 meters. Dyspnea improved significantly (WHO functional class III to II). At 6 months mean PAP 32, continues nifedipine 120 mg daily with good functional status. If PAP had not improved, would add endothelin receptor antagonist and PDE5 inhibitor. Close rheumatology and pulmonary hypertension specialist follow-up.

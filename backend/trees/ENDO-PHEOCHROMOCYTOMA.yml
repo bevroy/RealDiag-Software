@@ -1,108 +1,73 @@
 tree_id: ENDO-PHEOCHROMOCYTOMA
-name: Pheochromocytoma Evaluation
-family: ENDOCRINOLOGY
-specialty: Endocrinology, Surgery
-chief_complaint: Hypertension, Palpitations, Headache, Sweating
-description: Evaluation and management of pheochromocytoma
-version: "1.0"
-author: RealDiag Clinical Team
+name: Pheochromocytoma
+family: Endocrinology
+specialty: Endocrinology
+chief_complaint: Episodic severe headaches with palpitations and sweating
+description: Catecholamine-secreting tumor of adrenal medulla (or extra-adrenal paraganglioma) causing paroxysmal or sustained hypertension with classic triad of headache, palpitations, and sweating. Diagnose with plasma or urine metanephrines, localize with CT/MRI, treat with alpha then beta blockade before surgical resection.
+icd10: D35.00
+urgency: urgent
 
-entry_point: pheochromocytoma_evaluation
+workup:
+  - Classic triad (90% have at least one symptom):
+  - Headache: severe, pounding, episodic
+  - Palpitations: sensation of rapid forceful heartbeat
+  - Diaphoresis: profuse sweating (especially upper body)
+  - Hypertension: paroxysmal (48%) or sustained (29%) or paroxysmal on sustained (23%)
+  - Paroxysmal spells: sudden onset, last minutes to hours, occur multiple times daily to once monthly
+  - Triggered by physical activity, abdominal pressure, certain foods (tyramine), medications (metoclopramide, opioids)
+  - Other symptoms: pallor, tremor, anxiety/panic feeling, nausea, chest or abdominal pain
+  - Hypertensive crisis: BP can reach 250/150 or higher during spell
+  - Rule of 10s: 10% bilateral, 10% extra-adrenal (paraganglioma), 10% malignant, 10% familial, 10% in children
+  - Genetic syndromes (40% hereditary): MEN2, von Hippel-Lindau, neurofibromatosis type 1, familial paraganglioma syndromes
+  - Biochemical diagnosis (first step):
+  - Plasma free metanephrines: most sensitive test (97-99% sensitivity)
+  - 24-hour urine fractionated metanephrines and catecholamines: alternative, less convenient
+  - Measure during or soon after spell (highest yield)
+  - Levels typically 2-4 times upper limit of normal or higher (over 4x ULN essentially diagnostic)
+  - False positives: medications (tricyclic antidepressants, acetaminophen, labetalol), stress, OSA
+  - Imaging localization (after biochemical diagnosis):
+  - CT abdomen/pelvis with contrast or MRI: locate tumor (adrenal vs extra-adrenal)
+  - Tumors typically over 3 cm, highly vascular, bright on T2 MRI
+  - MIBG scan (meta-iodobenzylguanidine): functional imaging, confirms tumor takes up catecholamines
+  - PET scan: with 18F-DOPA or 68Ga-DOTATATE for extra-adrenal or metastatic disease
+  - Genetic testing: recommend for all patients (40% have germline mutation)
 
-nodes:
-  - id: pheochromocytoma_evaluation
-    type: diagnosis
-    name: "Pheochromocytoma"
-    icd10: "D35.00"
-    urgency: high
-    workup:
-      - Pheochromocytoma - Catecholamine-secreting tumor from chromaffin cells
-      - Location - Adrenal medulla 85-90%, extra-adrenal (paraganglioma) 10-15% (organ of Zuckerkandl near aortic bifurcation, bladder, thorax)
-      - Incidence - Rare (2-8 per million per year), 0.1-0.6% of hypertensive patients
-      - "Rule of 10s - 10% bilateral, 10% extra-adrenal, 10% malignant, 10% familial (NOW 30-40% familial with genetic testing)"
-      - Genetic syndromes - Screen if diagnosed <40 years, bilateral, paraganglioma, family history, malignant
-      - MEN 2A - Medullary thyroid cancer + pheochromocytoma + primary hyperparathyroidism (RET mutation)
-      - MEN 2B - Medullary thyroid cancer + pheochromocytoma + marfanoid habitus + mucosal neuromas (RET mutation)
-      - Von Hippel-Lindau (VHL) - Retinal/CNS hemangioblastomas, renal cell carcinoma, pheochromocytoma (VHL mutation)
-      - Neurofibromatosis type 1 (NF1) - Café-au-lait spots, neurofibromas, pheochromocytoma
-      - SDH mutations (succinate dehydrogenase) - Paraganglioma-pheochromocytoma syndrome (SDHB, SDHD)
-      - Clinical presentation - "Classic triad" (5Ps: Pressure, Pain, Palpitations, Perspiration, Pallor)
-      - Hypertension - Sustained (50%) or paroxysmal (50%)
-      - Severe, refractory to multiple antihypertensives
-      - Paroxysmal "spells" - Sudden onset, last minutes to hours, occur multiple times per day to monthly
-      - Headache (sudden, severe, throbbing)
-      - Palpitations (tachycardia, arrhythmias)
-      - Diaphoresis (profuse sweating)
-      - Pallor (vasoconstriction) or flushing
-      - Anxiety, sense of impending doom
-      - Chest/abdominal pain
-      - Nausea
-      - Triggers - Tyramine-rich foods (cheese, wine), abdominal pressure (micturition if bladder pheo), surgery/anesthesia, medications (metoclopramide, opioids, steroids)
-      - Complications - Hypertensive crisis, MI, stroke, cardiomyopathy (catecholamine-induced, Takotsubo), arrhythmias
-      - Physical exam - Hypertension (persistent or orthostatic), tachycardia, pallor, rare abdominal mass
-      - Biochemical testing - FIRST step (confirm excess catecholamine production)
-      - Plasma free metanephrines - BEST initial test
-      - Sensitivity 97-99%, specificity 85-89%
-      - Fasting, supine for 30 min (upright position increases false positives)
-      - Normal excludes pheo (high negative predictive value)
-      - 24-hour urine metanephrines and catecholamines - Alternative/confirmatory
-      - Metanephrines (metanephrine + normetanephrine) - Metabolites of epinephrine/norepinephrine
-      - More stable than catecholamines (epinephrine/norepinephrine)
-      - Chromogranin A - Nonspecific marker (elevated in neuroendocrine tumors, PPI use, renal failure)
-      - Interpretation - >3-4x upper limit normal virtually diagnostic
-      - Mild elevation (1-2x ULN) - Consider repeat, rule out interfering medications
-      - Interfering medications - Tricyclic antidepressants, sympathomimetics (decongestants, cocaine, amphetamines), withdrawal (clonidine, alcohol), beta-blockers (increase normetanephrine)
-      - Hold interfering meds 2 weeks before testing if possible
-      - Anatomic localization - AFTER biochemical confirmation
-      - CT abdomen/pelvis with IV contrast - First-line imaging
-      - Adrenal mass (>2 cm typical), high attenuation (>10 HU), heterogeneous, avid enhancement
-      - Sensitivity 90-95%
-      - MRI abdomen/pelvis - Alternative (especially if contrast allergy, pregnancy)
-      - T2-weighted "light bulb sign" (very bright hyperintensity)
-      - Functional imaging - If CT/MRI negative or extra-adrenal suspected
-      - 123I-MIBG scintigraphy - Taken up by chromaffin cells
-      - Sensitivity 85-90% for pheo, 70% for paraganglioma
-      - 68Ga-DOTATATE PET - Somatostatin receptor imaging, high sensitivity for SDH-mutated tumors
-      - 18F-FDG PET - Hypermetabolic, useful for malignant/metastatic
-      - Genetic testing - Consider all patients (40% have germline mutation)
-      - Especially if <40 years, bilateral, paraganglioma, family history, malignant
-      - Panel - RET, VHL, NF1, SDHB, SDHD, SDHC, SDHAF2, TMEM127, MAX
-    treatment:
-      - Preoperative medical management - ESSENTIAL (prevent intraoperative hypertensive crisis)
-      - Alpha-adrenergic blockade - FIRST-LINE
-      - Phenoxybenzamine (non-selective irreversible) 10 mg BID, increase to 20-40 mg TID
-      - Start 10-14 days before surgery
-      - Goal - Control BP, allow volume expansion (chronic vasoconstriction → volume contraction)
-      - Side effects - Orthostatic hypotension, nasal congestion, reflex tachycardia
-      - Doxazosin, terazosin (selective alpha-1 blockers) - Alternative, shorter-acting
-      - Beta-adrenergic blockade - Add AFTER alpha blockade (control tachycardia/arrhythmias)
-      - NEVER give beta-blocker first (unopposed alpha → severe hypertension)
-      - Propranolol 20-40 mg TID or metoprolol 25-50 mg BID
-      - Calcium channel blockers - Amlodipine, nicardipine (adjunct for BP control)
-      - Metyrosine (Demser) - Tyrosine hydroxylase inhibitor, blocks catecholamine synthesis
-      - 250 mg QID, increase to 1-4 g/day
-      - Reserve for refractory hypertension or if alpha-blockers contraindicated
-      - Side effects - Sedation, depression, diarrhea, crystalluria
-      - Fluid resuscitation - High-sodium diet, IV fluids before surgery (expand intravascular volume)
-      - Goals preop optimization - SBP <130 mmHg, HR 60-80 bpm, orthostatic hypotension (indicates adequate alpha blockade), no PVCs for 1 week
-      - Surgical resection - CURATIVE treatment
-      - Laparoscopic adrenalectomy - Preferred approach (minimally invasive, faster recovery)
-      - Open adrenalectomy - Large tumors (>6 cm), invasive, malignant
-      - Intraoperative management - Experienced anesthesia team
-      - Tumor manipulation → massive catecholamine release → hypertensive crisis (SBP >200)
-      - Treat - Phentolamine IV bolus 5 mg, sodium nitroprusside infusion
-      - Post-tumor removal → catecholamine levels plummet → hypotension (requires fluid, vasopressors)
-      - Cortical-sparing adrenalectomy - Consider if bilateral pheo (preserve cortical function, avoid lifelong steroid replacement)
-      - Postoperative - Monitor BP closely (hypotension common first 24-48 hours)
-      - Biochemical testing - Repeat plasma/urine metanephrines at 2-6 weeks post-op (confirm cure)
-      - If elevated → residual disease, metastases, or incomplete resection
-      - Surveillance - Annual biochemical testing (recurrence 5-15%), imaging if biochemistry positive
-      - Lifelong for hereditary syndromes
-      - Malignant pheochromocytoma (10%) - Defined by presence of metastases (bone, liver, lung, lymph nodes)
-      - Cannot predict from histology (benign and malignant look identical)
-      - SDHB mutation highest malignant risk (30-70%)
-      - Treatment - Surgical debulking, MIBG therapy (radiolabeled 131I-MIBG targets tumor), chemotherapy (cyclophosphamide, vincristine, dacarbazine), tyrosine kinase inhibitors (sunitinib)
-      - 5-year survival 40-50%
-      - Prognosis - Excellent if benign and completely resected (cure >95%)
-      - Hypertension resolves 70-80% (may persist if prolonged HTN caused vascular damage)
-      - Recurrence 5-15% (higher if hereditary)
+treatment:
+  - Alpha blockade (MUST start before beta blockade):
+  - Phenoxybenzamine 10 mg BID-TID: non-selective alpha blocker, increase every 2-3 days to goal BP
+  - Target dose 20-100 mg/day divided, continue x10-14 days before surgery
+  - Side effects: orthostatic hypotension, nasal congestion, fatigue
+  - Doxazosin 2-8 mg daily: selective alpha-1 blocker, alternative to phenoxybenzamine
+  - Beta blockade (start ONLY AFTER adequate alpha blockade):
+  - Propranolol 10-40 mg TID or metoprolol 25-50 mg BID: prevent reflex tachycardia
+  - NEVER give beta blocker first (unopposed alpha causes hypertensive crisis)
+  - High salt diet: liberalize salt to expand intravascular volume (prevent hypotension post-op)
+  - Calcium channel blockers: nicardipine or amlodipine, adjunctive BP control
+  - Surgical resection (definitive treatment):
+  - Laparoscopic adrenalectomy: for adrenal pheochromocytoma (most cases)
+  - Must have adequate alpha and beta blockade preoperatively (x10-14 days)
+  - Intraoperative: anesthesia prepared for hypertensive crisis during tumor manipulation, hypotension after tumor removal
+  - Post-operative: hypotension common in first 24-48 hours (catecholamine withdrawal), IV fluids and pressors
+  - Malignant pheochromocytoma (10%): metastases to lymph nodes, bone, liver, lung
+  - No curative treatment if metastatic: CVD chemotherapy (cyclophosphamide, vincristine, dacarbazine), radionuclide therapy (I-131 MIBG)
+  - Lifelong follow-up: 5-15% recurrence, annual plasma metanephrines and BP monitoring
+
+clinical_pearls:
+  - Classic triad: headache, palpitations, sweating (90% have at least one)
+  - Paroxysmal or sustained hypertension in young patient - think pheochromocytoma
+  - Plasma free metanephrines most sensitive test (97-99%)
+  - Rule of 10s: 10% bilateral, extra-adrenal, malignant, familial, pediatric
+  - Alpha blockade MUST precede beta blockade (unopposed alpha causes crisis)
+  - 40% hereditary - genetic testing for all patients
+  - Surgical resection curative for benign tumors
+  - Hypertensive crisis during tumor manipulation at surgery
+
+differentials:
+  - Panic disorder: anxiety, palpitations, sweating, but normal metanephrines
+  - Essential hypertension: sustained BP elevation, no spells, normal metanephrines
+  - Hyperthyroidism: palpitations, tremor, weight loss, elevated TSH, normal metanephrines
+  - Carcinoid syndrome: flushing, diarrhea, elevated 5-HIAA, normal metanephrines
+  - Menopause: hot flashes, night sweats, but no severe hypertension
+
+trace: |
+  A 38-year-old woman presented with 6 months of episodic severe spells occurring 2-3 times weekly. During spells experiences sudden onset severe pounding headache, racing heart (palpitations), drenching sweats, feeling of panic and impending doom, tremor. BP during spell at home 220/130 (baseline 140/85). Spells last 20-40 minutes then resolve spontaneously. Between spells feels normal. Spells triggered by bending over, exercise, and once after taking metoclopramide for nausea. No weight loss or diarrhea. Mother had "adrenal tumor" requiring surgery. Exam between spells: BP 145/90, HR 88, otherwise normal. During observed spell in office: BP 235/140, HR 125, diaphoretic, pale, tremulous (classic spell). Labs during spell: plasma free metanephrines markedly elevated 850 pg/mL (normal below 60 - over 14 times upper limit, highly diagnostic of pheochromocytoma). Plasma free normetanephrine 1200 pg/mL (normal below 150 - over 8 times elevated). Diagnosed with pheochromocytoma based on markedly elevated metanephrines during spell. CT abdomen with contrast: 4.5 cm heterogeneous enhancing mass in right adrenal gland (confirmed adrenal pheochromocytoma). Started phenoxybenzamine 10 mg BID for alpha blockade. Increased to 20 mg TID over 10 days with goal BP below 140/90 and orthostatic hypotension (indicates adequate blockade). After adequate alpha blockade, started propranolol 20 mg TID for reflex tachycardia control. High salt diet to expand intravascular volume. After 14 days preoperative medical preparation, underwent laparoscopic right adrenalectomy. Intraoperative: BP peaked to 260/150 during tumor manipulation (expected), then dropped to 75/40 after tumor removal (catecholamine withdrawal - expected, managed with IV fluids and pressors). Post-op ICU: required pressors x24 hours for hypotension. At 48 hours BP stabilized, pressors weaned. Pathology confirmed benign pheochromocytoma. At 2 weeks postop: plasma metanephrines normal (confirmed biochemical cure), BP 125/75 off all medications. Sent for genetic testing: VHL mutation detected (von Hippel-Lindau syndrome - explains family history). Referred to genetics for counseling and cancer surveillance (VHL associated with renal cell carcinoma, CNS hemangioblastomas). Annual follow-up with plasma metanephrines and BP monitoring for recurrence.
