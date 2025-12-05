@@ -1,0 +1,101 @@
+tree_id: CARDS-ACUTE-CORONARY-SYNDROME
+name: Acute Coronary Syndrome (ACS)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest pain and shortness of breath
+description: Spectrum of myocardial ischemia from plaque rupture including STEMI, NSTEMI, and unstable angina. ST elevations indicate transmural infarction requiring emergent reperfusion. Troponin distinguishes NSTEMI from unstable angina. Dual antiplatelet therapy, anticoagulation, early invasive strategy for high-risk NSTEMI.
+icd10: I24.9
+urgency: life-threatening
+
+workup:
+  - Symptoms: acute coronary ischemia
+  - Chest pain: substernal pressure, crushing, squeezing
+  - Radiation: left arm, jaw, back, epigastrium
+  - Associated symptoms: dyspnea, diaphoresis, nausea, vomiting
+  - Duration: prolonged (over 20 minutes), not relieved by rest or nitroglycerin
+  - Levine sign: patient holds fist to chest
+  - Atypical presentations: women, elderly, diabetics may have dyspnea without chest pain, epigastric discomfort, fatigue
+  - Physical exam: often normal
+  - Diaphoresis, pallor, anxiety
+  - Hypotension: if cardiogenic shock or RV infarction
+  - Tachycardia or bradycardia
+  - S4 gallop: stiff LV from ischemia
+  - New murmur: papillary muscle dysfunction (mitral regurgitation), VSD (septal rupture)
+  - Rales: pulmonary edema if heart failure
+  - JVD: RV infarction
+  - ECG (critical for diagnosis and triage):
+  - STEMI: ST elevation over 1 mm in two contiguous leads (transmural infarction)
+  - Anterior: V1-V4 (LAD territory)
+  - Inferior: II, III, aVF (RCA or LCx)
+  - Lateral: I, aVL, V5-V6 (LCx)
+  - Posterior: ST depression V1-V3 with tall R waves (mirror image)
+  - New LBBB: treat as STEMI equivalent
+  - NSTEMI/Unstable angina: ST depression, T wave inversion, or non-diagnostic ECG
+  - Cardiac biomarkers:
+  - Troponin I or T: most sensitive and specific
+  - Elevated in NSTEMI (myocardial necrosis)
+  - Normal in unstable angina (ischemia without necrosis)
+  - Rises 3-6 hours after onset, peaks 12-24 hours, remains elevated x1-2 weeks
+  - Serial troponins: 0 and 3-6 hours
+  - CK-MB: less specific, rises earlier (3-4 hours)
+  - Classification:
+  - STEMI: ST elevations, troponin elevated, transmural infarction
+  - NSTEMI: No ST elevations, troponin elevated, subendocardial infarction
+  - Unstable angina: No ST elevations, troponin normal, reversible ischemia
+  - Risk stratification (NSTEMI/UA):
+  - TIMI risk score: age, CAD risk factors, known CAD, aspirin use, angina episodes, ST changes, troponin
+  - GRACE score: predicts mortality
+  - High risk: refractory angina, hemodynamic instability, ventricular arrhythmias, elevated troponin
+
+treatment:
+  - STEMI (emergent reperfusion):
+  - Primary PCI: door-to-balloon under 90 minutes (preferred if available)
+  - Fibrinolysis: if PCI not available within 120 minutes, door-to-needle under 30 minutes
+  - Goal: reperfusion within 12 hours of symptom onset
+  - NSTEMI/Unstable angina:
+  - Early invasive strategy: coronary angiography within 24-72 hours (high risk)
+  - Ischemia-guided strategy: medical management, angiography only if recurrent ischemia (low risk)
+  - Acute medical management (MONA-BAH):
+  - Morphine: for pain relief if severe (controversial, use cautiously)
+  - Oxygen: if hypoxic (saturation under 90%), avoid routine oxygen
+  - Nitroglycerin: sublingual 0.4 mg Q5min x3, then IV infusion (contraindicated if RV infarction, hypotension, recent PDE5 inhibitor)
+  - Aspirin: 325 mg chewed immediately (most important)
+  - Beta blocker: metoprolol 25-50 mg PO (avoid if heart failure, bradycardia, hypotension)
+  - ACE inhibitor: within 24 hours if anterior MI, heart failure, or EF under 40%
+  - Heparin: unfractionated or enoxaparin (anticoagulation)
+  - Antiplatelet therapy:
+  - Dual antiplatelet therapy (DAPT): aspirin plus P2Y12 inhibitor
+  - Aspirin 81-325 mg daily (lifelong)
+  - P2Y12 inhibitor: ticagrelor 180 mg load then 90 mg BID (preferred) or clopidogrel 600 mg load then 75 mg daily or prasugrel 60 mg load then 10 mg daily
+  - Continue DAPT x12 months post-ACS
+  - Anticoagulation:
+  - Heparin infusion or enoxaparin 1 mg/kg SC BID
+  - Bivalirudin if PCI planned
+  - Additional therapies:
+  - Statin: high-intensity (atorvastatin 80 mg or rosuvastatin 40 mg)
+  - Beta blocker: metoprolol, carvedilol
+  - ACE inhibitor or ARB: if EF under 40%, anterior MI, diabetes, hypertension
+  - Aldosterone antagonist: if EF under 40% and heart failure or diabetes
+  - Complications:
+  - Cardiogenic shock: IABP, Impella, ECMO
+  - Ventricular arrhythmias: amiodarone, ICD if persistent after 40 days
+  - Heart failure: diuretics, GDMT
+  - Mechanical complications: VSD, papillary muscle rupture, free wall rupture (surgical emergencies)
+
+clinical_pearls:
+  - STEMI: ST elevations require emergent reperfusion (PCI or fibrinolysis)
+  - NSTEMI: elevated troponin without ST elevations, early invasive strategy if high risk
+  - Unstable angina: normal troponin but crescendo pattern or rest angina
+  - Aspirin 325 mg chewed immediately (most important initial treatment)
+  - DAPT x12 months: aspirin plus ticagrelor or clopidogrel
+  - Door-to-balloon under 90 minutes for STEMI
+  - Contraindications to nitroglycerin: RV infarction, hypotension, recent sildenafil/tadalafil
+
+differentials:
+  - Aortic dissection: tearing pain, pulse differential, widened mediastinum
+  - Pulmonary embolism: dyspnea, pleuritic chest pain, hypoxia
+  - Pericarditis: pleuritic pain, worse with lying down, PR depression
+  - GERD: burning, related to meals, relieved by antacids
+
+trace: |
+  A 58-year-old man with hypertension and hyperlipidemia presented to ED with severe substernal chest pain x2 hours. Crushing pressure radiating to left arm and jaw (classic anginal distribution), diaphoresis, nausea. Pain 9/10 severity, not relieved by rest. No prior cardiac history. Smoker x30 years. Exam: BP 145/90, HR 95, diaphoretic and anxious, lungs clear, S4 gallop (stiff LV from ischemia), no murmurs. ECG: ST elevations 3 mm in V2-V4 (anterior leads - LAD territory), reciprocal ST depressions in inferior leads. Diagnosed with acute anterior STEMI (ST elevations in contiguous anterior leads - transmural infarction from LAD occlusion). Activated cath lab for emergent PCI (door-to-balloon goal under 90 minutes). Immediate treatment: aspirin 325 mg chewed (most important initial treatment - antiplatelet), sublingual nitroglycerin 0.4 mg (reduced pain 30%), IV morphine 4 mg for pain (controversial but severe pain), started heparin bolus and infusion (anticoagulation). Ticagrelor 180 mg loading dose (P2Y12 inhibitor for dual antiplatelet therapy). Started metoprolol 25 mg PO (beta blocker - avoid if hypotension or heart failure). Troponin I 0.5 ng/mL (elevated - confirms MI). To cath lab 35 minutes after arrival (excellent door-to-balloon time). Coronary angiography: 100% thrombotic occlusion of proximal LAD (culprit lesion), 50% stenosis RCA, normal LCx. Primary PCI to LAD: aspiration thrombectomy, drug-eluting stent to proximal LAD, TIMI 3 flow restored (successful reperfusion). Total door-to-balloon time 65 minutes (under 90 minute goal - excellent). Post-PCI ECG: ST elevations resolved 80% (successful reperfusion), residual ST elevation and Q waves in V2-V4 (anterior MI). Peak troponin 45 ng/mL at 12 hours (large anterior MI). Admitted to CCU. Echocardiogram: anterior wall akinesis, apical akinesis, EF 40% (moderately reduced from anterior MI), no complications. Started optimal medical therapy: aspirin 81 mg daily (lifelong), ticagrelor 90 mg BID (continue x12 months for DAPT), atorvastatin 80 mg daily (high-intensity statin), metoprolol 50 mg BID (beta blocker), lisinopril 10 mg daily (ACE inhibitor - EF under 40% and anterior MI). At 48 hours stable, transferred to step-down unit. Cardiac rehab. Smoking cessation counseling. At 1 week discharged on DAPT, statin, beta blocker, ACE inhibitor. At 6 weeks repeat echo: EF improved to 45% (partial recovery common with early reperfusion), anterior wall still akinetic (permanent damage). At 6 months: quit smoking, optimal medical therapy, no angina, functional status excellent. DAPT continues x12 months total. Survived large anterior STEMI due to rapid door-to-balloon time and optimal medical therapy.

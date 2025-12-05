@@ -1,0 +1,102 @@
+tree_id: CARDS-CORONARY-ARTERY-DISEASE
+name: Coronary Artery Disease (CAD)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest discomfort with exertion and dyspnea
+description: Atherosclerotic narrowing of coronary arteries causing ischemia, stable angina, ACS, or silent ischemia. Risk factors include smoking, hypertension, diabetes, hyperlipidemia, family history. Antiplatelet therapy, statin, beta blocker, risk factor modification reduce events. Revascularization for refractory symptoms or high-risk anatomy.
+icd10: I25.10
+urgency: urgent
+
+workup:
+  - Risk factors (assess cardiovascular risk):
+  - Non-modifiable: age, male sex, family history premature CAD (male first-degree relative under 55, female under 65)
+  - Modifiable: smoking, hypertension, diabetes, hyperlipidemia, obesity, sedentary lifestyle
+  - Clinical presentations:
+  - Stable angina: exertional chest discomfort, predictable
+  - Acute coronary syndrome: STEMI, NSTEMI, unstable angina
+  - Silent ischemia: no symptoms, discovered on screening (diabetes, elderly)
+  - Heart failure: from ischemic cardiomyopathy
+  - Sudden cardiac death: ventricular arrhythmia
+  - Physical exam: often normal
+  - May have signs of atherosclerosis: carotid bruits, diminished pulses, xanthelasmas
+  - Risk assessment calculators:
+  - ASCVD risk calculator: 10-year risk of MI or stroke
+  - Framingham risk score
+  - Low risk under 5%, intermediate 5-20%, high over 20%
+  - Resting ECG: often normal
+  - May show prior MI (Q waves), LV hypertrophy, ischemic changes
+  - Stress testing (detect ischemia):
+  - Exercise ECG: first-line if able to exercise
+  - Stress imaging: echo or nuclear if baseline ECG abnormal or need localization
+  - Duke treadmill score: risk stratification
+  - Coronary calcium score: CT-based assessment of plaque burden
+  - Score 0: very low risk
+  - Score over 400: high risk, consider as CAD equivalent
+  - Coronary CT angiography: non-invasive visualization of coronary arteries
+  - Exclude CAD if low pretest probability
+  - High negative predictive value
+  - Coronary angiography: gold standard
+  - If high-risk stress test, refractory symptoms, or ACS
+  - Assess severity and extent of CAD
+  - Labs:
+  - Lipid panel: total cholesterol, LDL, HDL, triglycerides
+  - Fasting glucose or HbA1c: screen for diabetes
+  - Hs-CRP: inflammatory marker (controversial for screening)
+
+treatment:
+  - Medical therapy (reduce events and improve survival):
+  - Antiplatelet: aspirin 81 mg daily (primary prevention if high risk, secondary prevention if known CAD)
+  - Statin: high-intensity for secondary prevention (atorvastatin 40-80 mg or rosuvastatin 20-40 mg)
+  - Moderate-intensity for primary prevention if 10-year ASCVD risk over 7.5%
+  - LDL goal under 70 mg/dL for secondary prevention
+  - Beta blocker: metoprolol or carvedilol if prior MI or reduced EF
+  - ACE inhibitor or ARB: if EF under 40%, diabetes, hypertension
+  - Ezetimibe: add if LDL not at goal on statin
+  - PCSK9 inhibitor: if very high risk and LDL over 70 despite statin plus ezetimibe
+  - Symptom relief (if angina):
+  - Beta blocker: first-line, reduce heart rate and oxygen demand
+  - Calcium channel blocker: if beta blocker contraindicated
+  - Long-acting nitrates: add-on therapy
+  - Ranolazine: refractory angina
+  - Sublingual nitroglycerin: acute symptom relief
+  - Revascularization (PCI or CABG):
+  - Indications:
+  - ACS: emergent/urgent revascularization
+  - Stable CAD with refractory symptoms despite optimal medical therapy
+  - High-risk anatomy: left main stenosis, 3-vessel disease, proximal LAD stenosis
+  - Large area of ischemia (over 10% myocardium)
+  - Reduced EF with viable myocardium
+  - PCI: percutaneous coronary intervention with stent
+  - Single or 2-vessel disease
+  - Less invasive, faster recovery
+  - CABG: coronary artery bypass grafting
+  - Left main disease, 3-vessel disease
+  - Diabetes with multivessel disease (superior long-term outcomes)
+  - Complex anatomy, chronic total occlusions
+  - Risk factor modification (critical):
+  - Smoking cessation: most important, reduces risk 50%
+  - Blood pressure: goal under 130/80
+  - LDL cholesterol: under 70 mg/dL with statin
+  - Diabetes: HbA1c under 7%
+  - Weight loss: BMI under 25
+  - Exercise: 150 minutes moderate intensity per week
+  - Diet: Mediterranean diet, low saturated fat
+  - Cardiac rehabilitation: structured program post-ACS or revascularization
+
+clinical_pearls:
+  - Atherosclerotic narrowing of coronary arteries causing ischemia
+  - Major risk factors: smoking, hypertension, diabetes, hyperlipidemia, family history
+  - Aspirin and high-intensity statin cornerstones of secondary prevention
+  - LDL goal under 70 mg/dL for known CAD (secondary prevention)
+  - Revascularization for refractory symptoms or high-risk anatomy
+  - CABG superior to PCI for left main, 3-vessel disease, diabetes with multivessel disease
+  - Smoking cessation most important modifiable risk factor
+
+differentials:
+  - Non-cardiac chest pain: GERD, musculoskeletal, anxiety
+  - Valvular disease: aortic stenosis causes angina
+  - Hypertrophic cardiomyopathy: exertional chest pain
+  - Pulmonary embolism: dyspnea, pleuritic pain
+
+trace: |
+  A 58-year-old man with hypertension, diabetes, and hyperlipidemia presented for cardiovascular risk assessment. Asymptomatic, no chest pain or dyspnea. Father had MI at age 52 (premature CAD in first-degree relative - high risk). Smoker x30 years. Exam: BP 138/85, BMI 32 (obese), otherwise normal. Resting ECG: normal. Labs: total cholesterol 245 mg/dL, LDL 165 mg/dL (very elevated), HDL 38 mg/dL (low), triglycerides 210 mg/dL (elevated), HbA1c 7.8% (diabetes not well controlled). ASCVD 10-year risk calculator: 25% (high risk - over 20%). Diagnosed with high cardiovascular risk (multiple risk factors, high ASCVD risk score, likely has subclinical CAD). Ordered coronary calcium score: 385 (high, indicates significant plaque burden, CAD equivalent). Given high calcium score in asymptomatic patient with diabetes, ordered stress test. Exercise nuclear stress test: exercised 6 minutes, peak HR 135, moderate-sized reversible perfusion defect in inferior and lateral walls (ischemia in RCA and LCx territories). Diagnosed with significant CAD (positive stress test with moderate ischemia in 2 territories). Referred for coronary angiography. Angiography: 80% stenosis mid RCA, 75% stenosis LCx, mild disease LAD. 2-vessel disease. Discussed revascularization: opted for PCI (less invasive, good for 2-vessel disease). Underwent PCI with drug-eluting stents to RCA and LCx, excellent results. Started optimal medical therapy: aspirin 81 mg daily (antiplatelet), ticagrelor 90 mg BID x12 months (DAPT post-PCI), atorvastatin 80 mg daily (high-intensity statin - LDL goal under 70), metoprolol 50 mg BID (beta blocker), lisinopril 20 mg daily (ACE inhibitor - diabetes and hypertension). Intensive risk factor modification: smoking cessation program, diabetes management (metformin increased, started GLP-1 agonist), weight loss program, cardiac rehab. At 3 months: quit smoking (major achievement), lost 15 pounds, LDL decreased from 165 to 68 mg/dL on statin (goal under 70 achieved), HbA1c improved to 6.9%, BP 125/78 (controlled). Asymptomatic, exercise tolerance excellent. At 12 months: completed DAPT, transitioned to aspirin monotherapy, continues statin/beta blocker/ACE inhibitor. Weight down 25 pounds, regular exercise, Mediterranean diet. LDL 62 mg/dL, HbA1c 6.5%, BP 122/76. Repeat stress test: no ischemia (successful revascularization). At 2 years: remains asymptomatic, excellent cardiovascular risk factor control. CAD successfully managed with revascularization, optimal medical therapy, and aggressive risk factor modification.
