@@ -104,7 +104,7 @@ spec:
       
       containers:
         - name: realdiag-api
-          image: ghcr.io/bevroy/realdiag-api:v1.4.0
+          image: ghcr.io/bevroy/realdiag-backend:latest
           imagePullPolicy: Always
           
           # Security context for container
@@ -270,7 +270,7 @@ spec:
       
       containers:
         - name: realdiag-web
-          image: ghcr.io/bevroy/realdiag-web:v1.4.0
+          image: ghcr.io/bevroy/realdiag-frontend:latest
           imagePullPolicy: Always
           
           securityContext:
