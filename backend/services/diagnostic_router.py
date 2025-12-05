@@ -6,14 +6,32 @@ from .auth_service import get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
 from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
+from .patient_history_service import PatientHistoryService
+import os
 
 router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
 _trees = DecisionTreeEngine()
 _med_safety = MedicationSafetyService()
 
+# Initialize patient history service for EMR integration
+# FHIR server configuration from environment variables
+FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "http://localhost:8080/fhir")
+FHIR_AUTH_TOKEN = os.getenv("FHIR_AUTH_TOKEN", None)
+_patient_history = None  # Will be initialized on first use
+
 # Import user subscriptions from subscription_router
 # In production, this would be a database connection
 from .subscription_router import user_subscriptions
+
+async def get_patient_history_service() -> PatientHistoryService:
+    """Get or initialize patient history service for EMR integration."""
+    global _patient_history
+    if _patient_history is None:
+        _patient_history = PatientHistoryService(
+            fhir_base_url=FHIR_BASE_URL,
+            auth_token=FHIR_AUTH_TOKEN
+        )
+    return _patient_history
 
 @router.get("/search-limit")
 def get_search_limit_status(
@@ -110,6 +128,40 @@ async def evaluate_tree(
         # Paid users have unlimited searches (handled by subscription)
         limit_check = {"searches_used": 0, "searches_remaining": float('inf')}
     
+    # Pull patient history from EMR if patient_id provided (EMR instances)
+    emr_data_pulled = False
+    if patient.get("emr_patient_id"):
+        try:
+            history_service = await get_patient_history_service()
+            patient_history = await history_service.get_comprehensive_history(
+                patient_id=patient["emr_patient_id"],
+                lookback_days=patient.get("lookback_days", 365)
+            )
+            
+            # Merge EMR data into patient object
+            if patient_history.current_medications:
+                # Convert medication objects to simple medication names
+                emr_medications = [med.get("name") for med in patient_history.current_medications if med.get("name")]
+                patient["current_medications"] = emr_medications
+                emr_data_pulled = True
+            
+            if patient_history.allergies:
+                patient["allergies"] = patient_history.allergies
+            
+            if patient_history.active_conditions:
+                patient["conditions"] = [cond.get("code") for cond in patient_history.active_conditions if cond.get("code")]
+            
+            # Add patient demographics if not provided
+            if not patient.get("age") and patient_history.age:
+                patient["age"] = patient_history.age
+            
+            if not patient.get("gender") and patient_history.gender:
+                patient["gender"] = patient_history.gender
+            
+        except Exception as e:
+            # Log error but continue with diagnostic evaluation
+            print(f"Warning: Could not fetch EMR data for patient {patient.get('emr_patient_id')}: {e}")
+    
     # Perform the evaluation
     result = _trees.evaluate(tree_id, patient)
     
@@ -146,6 +198,11 @@ async def evaluate_tree(
                 hepatic_function=patient.get("hepatic_function"),
                 pregnancy=patient.get("pregnancy", False)
             )
+    
+    # Add EMR data source indicator
+    if emr_data_pulled:
+        result["emr_data_source"] = "FHIR"
+        result["emr_data_pulled"] = True
     
     # Save to search history for authenticated users
     if current_user and result:
@@ -474,6 +531,125 @@ async def list_manual_patient_histories(
         "total_patients": len(patients),
         "patients": patients
     }
+
+
+@router.get("/emr/patient/{patient_id}/medications")
+async def get_emr_patient_medications(
+    patient_id: str,
+    include_safety_check: bool = True,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Retrieve current medications from EMR for a patient.
+    
+    **EMR Integration Endpoint**
+    
+    Pulls patient medications directly from FHIR-compliant EMR system.
+    Optionally performs comprehensive medication safety checking.
+    
+    **Use Cases:**
+    - View patient's current medication list
+    - Pre-diagnostic medication reconciliation
+    - Pharmacy review before adding new medications
+    - Clinical decision support with automatic safety checking
+    
+    **Parameters:**
+    - `patient_id`: FHIR Patient resource ID
+    - `include_safety_check`: Run medication safety analysis (default: true)
+    
+    **Returns:**
+    - `patient_id`: FHIR patient identifier
+    - `medications`: List of active medications with dosage
+    - `conditions`: Active medical conditions
+    - `allergies`: Known allergies
+    - `medication_safety`: Safety analysis (if requested)
+    
+    **Example Response:**
+    ```json
+    {
+      "patient_id": "12345",
+      "patient_name": "John Doe",
+      "age": 65,
+      "medications": [
+        {
+          "name": "warfarin",
+          "dosage": "5mg once daily",
+          "date_prescribed": "2024-01-15"
+        },
+        {
+          "name": "aspirin",
+          "dosage": "81mg once daily",
+          "date_prescribed": "2024-02-01"
+        }
+      ],
+      "conditions": ["atrial fibrillation", "hypertension"],
+      "allergies": ["penicillin"],
+      "medication_safety": {
+        "alerts": [
+          {
+            "alert_type": "drug_interaction",
+            "severity": "major",
+            "medication": "warfarin",
+            "interacting_medication": "aspirin",
+            "clinical_effect": "Increased bleeding risk"
+          }
+        ],
+        "safety_score": 70,
+        "summary": "⚠️ Major interaction identified"
+      }
+    }
+    ```
+    
+    **Configuration:**
+    - Set `FHIR_BASE_URL` environment variable (default: http://localhost:8080/fhir)
+    - Set `FHIR_AUTH_TOKEN` for authenticated FHIR access (optional)
+    """
+    try:
+        # Get patient history service
+        history_service = await get_patient_history_service()
+        
+        # Fetch comprehensive patient history
+        patient_history = await history_service.get_comprehensive_history(
+            patient_id=patient_id,
+            lookback_days=365
+        )
+        
+        # Extract medication names
+        medication_names = [med.get("name") for med in patient_history.current_medications if med.get("name")]
+        condition_names = [cond.get("code") for cond in patient_history.active_conditions if cond.get("code")]
+        
+        response = {
+            "patient_id": patient_id,
+            "patient_name": patient_history.patient_name,
+            "age": patient_history.age,
+            "gender": patient_history.gender,
+            "medications": patient_history.current_medications,
+            "conditions": condition_names,
+            "allergies": patient_history.allergies,
+            "data_source": "FHIR EMR"
+        }
+        
+        # Run medication safety check if requested
+        if include_safety_check and medication_names:
+            medication_safety = _med_safety.check_medication_safety(
+                current_medications=medication_names,
+                proposed_medications=[],
+                patient_conditions=condition_names,
+                patient_allergies=patient_history.allergies,
+                age=patient_history.age,
+                renal_function=None,  # Would be extracted from observations if available
+                hepatic_function=None,
+                pregnancy=False
+            )
+            response["medication_safety"] = medication_safety
+        
+        return response
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error fetching patient medications from EMR: {str(e)}"
+        )
 
 
 @router.post("/medication-safety-check")
