@@ -697,6 +697,7 @@ export default function EducationPage() {
               <a href="/integration">🔌 API</a>
               <a href="/features-demo">✨ Features</a>
               <a href="/sources">📖 Sources</a>
+              <a href="/patient-history">📋 Patient History</a>
               <a href="/account">👤 Account</a>
             </div>
           </details>
