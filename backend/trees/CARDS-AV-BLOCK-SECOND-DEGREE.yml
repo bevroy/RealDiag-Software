@@ -1,0 +1,79 @@
+tree_id: CARDS-AV-BLOCK-SECOND-DEGREE
+name: Second-Degree AV Block
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Dropped beats on ECG
+description: Intermittent failure of AV conduction causing some P waves not followed by QRS. Mobitz I (Wenckebach) benign with progressive PR prolongation until dropped beat. Mobitz II more serious with sudden dropped beats and risk of progression to complete heart block, requires pacemaker.
+icd10: I44.1
+urgency: urgent
+
+workup:
+  - Symptoms: depend on ventricular rate and type
+  - Often asymptomatic: if adequate ventricular rate
+  - Dizziness, lightheadedness: from dropped beats and pauses
+  - Fatigue, dyspnea: if ventricular rate too slow
+  - Syncope: if frequent dropped beats or progression to complete block
+  - Types (critical distinction):
+  - Mobitz I (Wenckebach): AV nodal level block (usually benign)
+  - Mobitz II: infranodal (His-Purkinje) block (dangerous, high risk progression to complete block)
+  - ECG findings:
+  - Mobitz I (Wenckebach):
+  - Progressive prolongation of PR interval with each beat until a P wave is not conducted (dropped QRS)
+  - After dropped beat, PR interval resets to baseline and cycle repeats
+  - Grouped beating pattern: clusters of QRS complexes
+  - RR interval progressively shortens before dropped beat
+  - QRS usually narrow (AV nodal level block)
+  - Usually occurs in cycles (3:2, 4:3 Wenckebach)
+  - Mobitz II:
+  - Fixed PR interval for conducted beats (no progressive prolongation)
+  - Sudden dropped QRS without warning (intermittent non-conducted P waves)
+  - PR interval constant before and after dropped beat
+  - QRS often wide (bundle branch block pattern - infranodal block)
+  - Can have 2:1, 3:1, or variable conduction ratios
+  - 2:1 AV block: cannot distinguish Mobitz I vs II (every other P wave conducted)
+  - Narrow QRS suggests Mobitz I (AV nodal)
+  - Wide QRS suggests Mobitz II (infranodal)
+  - Causes:
+  - Mobitz I: enhanced vagal tone, medications (beta blockers, calcium channel blockers, digoxin), inferior MI
+  - Mobitz II: structural disease (anterior MI, fibrosis, infiltrative disease), more serious pathology
+  - Physical exam:
+  - Irregular pulse: from dropped beats
+  - Variable S1 intensity: changing AV interval
+  - Bradycardia: if many dropped beats
+
+treatment:
+  - Mobitz I (Wenckebach):
+  - Usually no treatment needed if asymptomatic
+  - Often benign, especially if narrow QRS
+  - Address reversible causes: stop AV nodal blockers, treat inferior MI
+  - Observation: usually does not progress to complete block
+  - Pacemaker rarely needed: only if symptomatic (dizziness, syncope, severe bradycardia)
+  - Mobitz II:
+  - Permanent pacemaker indicated (class I indication)
+  - High risk of progression to complete heart block (up to 50%)
+  - Risk of sudden cardiac death
+  - Do NOT wait for symptoms (pacemaker indicated even if asymptomatic)
+  - Dual-chamber pacemaker (DDD) preferred
+  - 2:1 AV block:
+  - If narrow QRS: likely Mobitz I, observe, consider pacemaker if symptomatic
+  - If wide QRS: likely Mobitz II, permanent pacemaker indicated
+  - Acute management:
+  - If symptomatic with bradycardia: atropine 0.5 mg IV (may help Mobitz I, less effective for Mobitz II)
+  - Temporary transvenous pacemaker: if hemodynamically unstable or acute MI with Mobitz II
+  - Treat underlying cause: reperfusion for acute MI
+
+clinical_pearls:
+  - Mobitz I (Wenckebach): progressive PR prolongation until dropped beat, benign, AV nodal level
+  - Mobitz II: fixed PR with sudden dropped beats, dangerous, infranodal block, high risk progression to complete block
+  - Mobitz II requires pacemaker even if asymptomatic (class I indication)
+  - Mobitz I rarely needs pacemaker (only if symptomatic)
+  - Wide QRS with 2:1 block suggests Mobitz II (pacemaker indicated)
+  - Narrow QRS with 2:1 block suggests Mobitz I (observe)
+
+differentials:
+  - First-degree AV block: all P waves conducted, just prolonged PR
+  - Third-degree AV block: complete dissociation, no P waves conducted
+  - Non-conducted PACs: P wave morphology different, not regular sinus P waves
+
+trace: |
+  A 72-year-old man with history of anterior MI x5 years ago presented with episodes of lightheadedness x2 weeks. Noticed irregular heart rate. On metoprolol for CAD. Exam: BP 120/70, HR 55 irregular (dropped beats), otherwise normal. ECG: sinus rhythm with some P waves not followed by QRS, fixed PR interval 180 ms for all conducted beats (no progressive prolongation), sudden dropped QRS without warning (Mobitz II pattern), wide QRS 140 ms with RBBB morphology (suggests infranodal block). Diagnosed with Mobitz II second-degree AV block (fixed PR, sudden dropped beats, wide QRS, anterior MI history - all consistent with infranodal block). High risk of progression to complete heart block (up to 50% risk). Permanent pacemaker indicated even if symptoms mild (class I indication - do not wait for complete block or syncope). Stopped metoprolol (beta blocker may worsen block). Echocardiogram: anterior wall akinesis from prior MI, EF 40%, no acute changes. Admitted for pacemaker implantation. Underwent dual-chamber pacemaker (DDD): leads in right atrium and right ventricle, lower rate limit 60 bpm. Pacemaker interrogation: intrinsic rhythm had 3:2 and 2:1 AV block, pacemaker pacing ventricle frequently (preventing pauses). At 1 week: lightheadedness resolved completely, pacing 40% of time (intermittent block). Restarted metoprolol safely (pacemaker prevents bradycardia). At 3 months: pacemaker check shows progression to complete heart block intermittently (justifies early pacemaker implantation - prevented sudden complete block and potential syncope or death). At 1 year: pacing nearly 100% of time (complete progression to third-degree block), asymptomatic. Pacemaker prevented progression to symptomatic complete heart block.
