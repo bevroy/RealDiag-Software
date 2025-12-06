@@ -6,6 +6,16 @@
 # Render and the `render.yaml` will allow Render to create/update the service.
 
 services:
+  # PostgreSQL Database
+  - type: pserv
+    name: realdiag-database
+    plan: starter  # $7/month - change to 'free' for 90-day trial
+    region: ohio
+    databaseName: realdiag_prod
+    databaseUser: realdiag_user
+    ipAllowList: []  # Only accessible from Render services
+
+  # Backend Web Service
   - type: web
     name: realdiag-backend
     env: docker
@@ -23,6 +33,10 @@ services:
         value: production
       - key: LOG_LEVEL
         value: INFO
+      - key: DATABASE_URL
+        fromDatabase:
+          name: realdiag-database
+          property: connectionString
       - key: FHIR_BASE_URL
         value: http://localhost:8080/fhir  # UPDATE THIS with your EMR FHIR URL
       - key: FHIR_AUTH_TOKEN
