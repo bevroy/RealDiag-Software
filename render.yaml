@@ -21,7 +21,7 @@ services:
     env: docker
     branch: main
     plan: free
-    repo: bevroy/RealDiag-Software
+    repo: https://github.com/bevroy/RealDiag-Software
     dockerfilePath: backend/Dockerfile
     # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
     healthCheckPath: /health
