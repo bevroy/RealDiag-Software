@@ -40,27 +40,29 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
     
-    # Ensure DATABASE_URL has correct sslmode for Render PostgreSQL
+    # Ensure DATABASE_URL has correct SSL settings for Render PostgreSQL
     db_url = DATABASE_URL
+    connect_args = {}
+    
     if db_url and "postgresql" in db_url:
-        # Remove sslrootcert=system since we can't verify certificates
-        # Use sslmode=require instead (encrypts but doesn't verify cert)
-        if "sslrootcert=system" in db_url:
-            db_url = db_url.replace("&sslrootcert=system", "").replace("?sslrootcert=system&", "?").replace("?sslrootcert=system", "")
+        import re
+        # Remove all SSL parameters from URL - we'll set them via connect_args
+        db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslkey=[^&]*', '', db_url)
         
-        # Ensure sslmode=require is set for Render PostgreSQL
-        if "sslmode=" in db_url:
-            # Replace any existing sslmode with require
-            import re
-            db_url = re.sub(r'sslmode=[^&]*', 'sslmode=require', db_url)
-        else:
-            # Add sslmode=require if not present
-            separator = "&" if "?" in db_url else "?"
-            db_url = f"{db_url}{separator}sslmode=require"
+        # Set SSL mode via connect_args for better control
+        # Use 'require' which encrypts but doesn't verify certificates
+        connect_args = {
+            'sslmode': 'require',
+            'connect_timeout': 10
+        }
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
         db_url,
+        connect_args=connect_args,
         poolclass=QueuePool,
         pool_size=10,  # Number of connections to maintain
         max_overflow=20,  # Additional connections if pool is full
