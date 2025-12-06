@@ -40,25 +40,22 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
     
-    # Configure SSL for PostgreSQL connections (Render requires SSL)
-    connect_args = {}
-    if DATABASE_URL and DATABASE_URL.startswith("postgresql"):
-        # Add SSL parameters for secure connections
-        connect_args = {
-            "sslmode": "require",
-            "connect_timeout": 10
-        }
+    # Ensure DATABASE_URL has sslmode parameter for Render PostgreSQL
+    db_url = DATABASE_URL
+    if db_url and "postgresql" in db_url and "sslmode" not in db_url:
+        # Add sslmode=prefer to the connection string
+        separator = "&" if "?" in db_url else "?"
+        db_url = f"{db_url}{separator}sslmode=prefer"
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
-        DATABASE_URL,
+        db_url,
         poolclass=QueuePool,
         pool_size=10,  # Number of connections to maintain
         max_overflow=20,  # Additional connections if pool is full
         pool_pre_ping=True,  # Verify connections before using
         pool_recycle=3600,  # Recycle connections after 1 hour
-        echo=False,  # Set to True for SQL query logging
-        connect_args=connect_args  # SSL and connection parameters
+        echo=False  # Set to True for SQL query logging
     )
     
     # Session factory
