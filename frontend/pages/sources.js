@@ -5,12 +5,26 @@ export default function SourcesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sources, setSources] = useState([]);
+  const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
 
   useEffect(() => {
     async function loadSources() {
       try {
         const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
         const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+        
+        // Fetch the total tree count from backend
+        try {
+          const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+          if (treesRes.ok) {
+            const treesData = await treesRes.json();
+            if (treesData.trees) {
+              setTreeCount(treesData.trees.length);
+            }
+          }
+        } catch (err) {
+          console.error('Failed to load tree count:', err);
+        }
         
         const families = [
           "neurology",
@@ -259,7 +273,7 @@ export default function SourcesPage() {
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 16 }}>
               RealDiag integrates evidence-based clinical guidelines and medical literature
-              to support diagnostic decision-making across 424+ disease processes. Below are the sources used across
+              to support diagnostic decision-making across {treeCount ? `${treeCount}+` : '424+'} disease processes. Below are the sources used across
               our diagnostic modules covering 17 medical specialties.
             </p>
 

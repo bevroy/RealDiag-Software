@@ -21,6 +21,7 @@ export default function ReferencePage() {
   const [query, setQuery] = useState("");
   const [expandedId, setExpandedId] = useState(null);
   const [selectedFamily, setSelectedFamily] = useState("all");
+  const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
 
   useEffect(() => {
     let cancelled = false;
@@ -34,6 +35,15 @@ export default function ReferencePage() {
       setExpandedId(null);
       setAllRules([]); // Clear existing data before loading
       try {
+        // Fetch the total tree count from backend
+        const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+        if (treesRes.ok) {
+          const treesData = await treesRes.json();
+          if (!cancelled && treesData.trees) {
+            setTreeCount(treesData.trees.length);
+          }
+        }
+        
         const results = await Promise.all(
           FAMILIES.map(async (f) => {
             const res = await fetch(`${apiBase}/reference/${f.id}`);
@@ -260,7 +270,7 @@ export default function ReferencePage() {
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
-          Search across 424+ disease processes covering 17 specialties (neurology, cardiology, endocrinology, and more) to find
+          Search across {treeCount ? `${treeCount}+` : '424+'} disease processes covering 17 specialties (neurology, cardiology, endocrinology, and more) to find
           relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
         </p>
         <p style={{ margin: 0, fontSize: 12, color: "#94a3b8" }}>

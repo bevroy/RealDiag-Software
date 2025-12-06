@@ -1,6 +1,29 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [treeCount, setTreeCount] = useState(null);
+
+  useEffect(() => {
+    async function loadTreeCount() {
+      try {
+        const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+        
+        const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+        if (treesRes.ok) {
+          const treesData = await treesRes.json();
+          if (treesData.trees) {
+            setTreeCount(treesData.trees.length);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load tree count:', err);
+      }
+    }
+    loadTreeCount();
+  }, []);
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -167,7 +190,7 @@ export default function Home() {
           Real-Time Diagnostic Assistant
         </p>
         <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
-          424+ diagnoses • 17 specialties • Evidence-based
+          {treeCount ? `${treeCount}+` : '424+'} diagnoses • 17 specialties • Evidence-based
         </p>
       </div>
 
