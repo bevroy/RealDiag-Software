@@ -33,10 +33,26 @@ services:
         value: production
       - key: LOG_LEVEL
         value: INFO
-      - key: DATABASE_URL
+      - key: DATABASE_HOST
         fromDatabase:
           name: realdiag-database
-          property: connectionString
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: realdiag-database
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: realdiag-database
+          property: database
+      - key: DATABASE_USER
+        fromDatabase:
+          name: realdiag-database
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: realdiag-database
+          property: password
       - key: FHIR_BASE_URL
         value: http://localhost:8080/fhir  # UPDATE THIS with your EMR FHIR URL
       - key: FHIR_AUTH_TOKEN

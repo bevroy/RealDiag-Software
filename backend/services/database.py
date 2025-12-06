@@ -28,6 +28,19 @@ except ImportError:
 # Database configuration
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# If DATABASE_URL not set, try to construct from individual components
+if not DATABASE_URL:
+    db_host = os.getenv("DATABASE_HOST")
+    db_port = os.getenv("DATABASE_PORT", "5432")
+    db_name = os.getenv("DATABASE_NAME")
+    db_user = os.getenv("DATABASE_USER")
+    db_password = os.getenv("DATABASE_PASSWORD")
+    
+    if all([db_host, db_name, db_user, db_password]):
+        # Construct URL without SSL parameters - we'll add them via connect_args
+        DATABASE_URL = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+        logger.info(f"📝 Constructed DATABASE_URL from components (host: {db_host})")
+
 if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
     if not DATABASE_URL:
         logger.warning("⚠️  DATABASE_URL not set - using in-memory storage")
