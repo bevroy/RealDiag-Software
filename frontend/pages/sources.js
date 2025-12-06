@@ -53,26 +53,37 @@ export default function SourcesPage() {
           "urology",
         ];
 
-        const sourcesData = [];
-
-        for (const family of families) {
+        // Load all families in parallel with timeout
+        const fetchPromises = families.map(async (family) => {
           try {
-            const res = await fetch(`${apiBase}/reference/${family}`);
-            if (!res.ok) continue;
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
+            const res = await fetch(`${apiBase}/reference/${family}`, {
+              signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            
+            if (!res.ok) return null;
             const data = await res.json();
             
-            sourcesData.push({
+            return {
               family: family,
               familyLabel: family.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
               version: data.version || "N/A",
               source: data.source || "RealDiag Clinical Guidelines",
               rules: data.rules || [],
-            });
+              count: data.count || (data.rules || []).length,
+            };
           } catch (err) {
             console.error(`Failed to load ${family}:`, err);
+            return null;
           }
-        }
+        });
 
+        const results = await Promise.all(fetchPromises);
+        const sourcesData = results.filter(s => s !== null);
+        
         setSources(sourcesData);
         setLoading(false);
       } catch (err) {
@@ -351,8 +362,8 @@ export default function SourcesPage() {
                         <div style={{ fontSize: 14, color: "#374151" }}>
                           <strong>Source:</strong> {fam.source}
                         </div>
-                        <div style={{ fontSize: 13, color: "#6b7280", marginTop: 4 }}>
-                          {fam.rules.length} diagnostic rule{fam.rules.length !== 1 ? "s" : ""} available
+                        <div style={{ fontSize: 14, color: "#0f766e", marginTop: 8, fontWeight: 600 }}>
+                          {fam.count || fam.rules.length} decision tree{(fam.count || fam.rules.length) !== 1 ? "s" : ""} available
                         </div>
                       </div>
                     ))}
