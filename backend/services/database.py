@@ -59,16 +59,21 @@ else:
     
     if db_url and "postgresql" in db_url:
         import re
-        # Remove sslrootcert=system which conflicts with sslmode=require
+        # Remove all SSL parameters and use sslmode=allow via connect_args
+        # This will attempt SSL but fall back to unencrypted if SSL fails
+        db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
         db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslkey=[^&]*', '', db_url)
         # Clean up any trailing ? or &
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
         
         connect_args = {
+            'sslmode': 'allow',
             'connect_timeout': 10
         }
-        logger.info(f"🔧 Using Render connection string without sslrootcert")
+        logger.info(f"🔧 Using sslmode=allow (SSL optional, fallback to unencrypted)")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
