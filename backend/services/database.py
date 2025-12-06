@@ -53,17 +53,22 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
     
-    # Use DATABASE_URL exactly as provided by Render
+    # Use DATABASE_URL but strip sslrootcert parameter
     db_url = DATABASE_URL
     connect_args = {}
     
     if db_url and "postgresql" in db_url:
-        # Don't modify the connection string - use it exactly as Render provides it
-        # Just add a connection timeout for safety
+        import re
+        # Remove sslrootcert=system which conflicts with sslmode=require
+        db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        # Clean up any trailing ? or &
+        db_url = re.sub(r'\?&', '?', db_url)
+        db_url = re.sub(r'[?&]$', '', db_url)
+        
         connect_args = {
             'connect_timeout': 10
         }
-        logger.info(f"🔧 Using Render's connection string as-is with timeout")
+        logger.info(f"🔧 Using Render connection string without sslrootcert")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
