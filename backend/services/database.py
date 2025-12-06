@@ -53,31 +53,17 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
     
-    # Ensure DATABASE_URL has correct SSL settings for Render PostgreSQL
+    # Use DATABASE_URL exactly as provided by Render
     db_url = DATABASE_URL
     connect_args = {}
     
     if db_url and "postgresql" in db_url:
-        import re
-        # Remove all SSL parameters from URL - we'll set them via connect_args
-        db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
-        db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
-        db_url = re.sub(r'[?&]sslcert=[^&]*', '', db_url)
-        db_url = re.sub(r'[?&]sslkey=[^&]*', '', db_url)
-        # Clean up any trailing ? or & from removed parameters
-        db_url = re.sub(r'\?&', '?', db_url)
-        db_url = re.sub(r'[?&]$', '', db_url)
-        
-        # Use 'require' mode but disable certificate verification
-        # This ensures SSL is used but doesn't validate the certificate
+        # Don't modify the connection string - use it exactly as Render provides it
+        # Just add a connection timeout for safety
         connect_args = {
-            'sslmode': 'require',
-            'sslcert': None,
-            'sslkey': None,
-            'sslrootcert': None,
             'connect_timeout': 10
         }
-        logger.info(f"🔧 Using sslmode=require with no cert verification")
+        logger.info(f"🔧 Using Render's connection string as-is with timeout")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
