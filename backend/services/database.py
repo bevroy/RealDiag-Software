@@ -41,12 +41,6 @@ if not DATABASE_URL:
         DATABASE_URL = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
         logger.info(f"📝 Constructed DATABASE_URL from components (host: {db_host})")
 
-# Replace external Render hostname with internal hostname for better connectivity
-if DATABASE_URL and ".ohio-postgres.render.com" in DATABASE_URL:
-    # Use internal hostname instead of external for Render-to-Render connections
-    DATABASE_URL = DATABASE_URL.replace(".ohio-postgres.render.com", "")
-    logger.info("🔄 Using internal Render hostname for database connection")
-
 if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
     if not DATABASE_URL:
         logger.warning("⚠️  DATABASE_URL not set - using in-memory storage")
