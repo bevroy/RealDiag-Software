@@ -68,13 +68,16 @@ else:
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
         
-        # Try 'prefer' mode which attempts SSL but falls back to unencrypted if SSL fails
-        # This should work around SSL handshake issues
+        # Use 'require' mode but disable certificate verification
+        # This ensures SSL is used but doesn't validate the certificate
         connect_args = {
-            'sslmode': 'prefer',
+            'sslmode': 'require',
+            'sslcert': None,
+            'sslkey': None,
+            'sslrootcert': None,
             'connect_timeout': 10
         }
-        logger.info(f"🔧 Using sslmode=prefer for database connection")
+        logger.info(f"🔧 Using sslmode=require with no cert verification")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
