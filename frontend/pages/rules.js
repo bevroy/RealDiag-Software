@@ -1,17 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
 
 const FAMILIES = [
-  { id: "neurology", label: "Neurology" },
+  { id: "allergy", label: "Allergy/Immunology" },
   { id: "cardiology", label: "Cardiology" },
+  { id: "dentistry", label: "Dentistry" },
+  { id: "dermatology", label: "Dermatology" },
+  { id: "emergency", label: "Emergency Medicine" },
   { id: "endocrinology", label: "Endocrinology" },
-  { id: "pulmonology", label: "Pulmonology" },
+  { id: "ent", label: "ENT (Otolaryngology)" },
   { id: "gastroenterology", label: "Gastroenterology" },
+  { id: "general", label: "General Medicine" },
+  { id: "hematology", label: "Hematology" },
   { id: "infectious_disease", label: "Infectious Disease" },
   { id: "nephrology", label: "Nephrology" },
-  { id: "rheumatology", label: "Rheumatology" },
-  { id: "dermatology", label: "Dermatology" },
-  { id: "psychiatry", label: "Psychiatry" },
+  { id: "neurology", label: "Neurology" },
   { id: "obstetrics_gynecology", label: "OB/GYN" },
+  { id: "oncology", label: "Oncology" },
+  { id: "ophthalmology", label: "Ophthalmology" },
+  { id: "orthopedics", label: "Orthopedics" },
+  { id: "pediatrics", label: "Pediatrics" },
+  { id: "psychiatry", label: "Psychiatry" },
+  { id: "pulmonology", label: "Pulmonology" },
+  { id: "rheumatology", label: "Rheumatology" },
+  { id: "surgery", label: "Surgery" },
+  { id: "trauma", label: "Trauma" },
+  { id: "urology", label: "Urology" },
 ];
 
 export default function ReferencePage() {
@@ -270,7 +283,7 @@ export default function ReferencePage() {
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
-          Search across {treeCount ? `${treeCount}+` : '424+'} disease processes covering 17 specialties (neurology, cardiology, endocrinology, and more) to find
+          Search across {treeCount ? `${treeCount}+` : '424+'} disease processes covering 24+ specialties (cardiology, neurology, endocrinology, pediatrics, and more) to find
           relevant diagnoses based on symptoms, ICD-10, or SNOMED codes.
         </p>
         <p style={{ margin: 0, fontSize: 12, color: "#94a3b8" }}>

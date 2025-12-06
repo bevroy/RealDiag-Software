@@ -190,7 +190,7 @@ export default function Home() {
           Real-Time Diagnostic Assistant
         </p>
         <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
-          {treeCount ? `${treeCount}+` : '424+'} diagnoses • 17 specialties • Evidence-based
+          {treeCount ? `${treeCount}+` : '424+'} diagnoses • 24+ specialties • Evidence-based
         </p>
       </div>
 
@@ -282,7 +282,7 @@ export default function Home() {
             </li>
             <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
               <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>🏥</span>
-              <span><strong style={{ color: '#0f766e' }}>17 Specialties:</strong> Cardiology, neurology, emergency medicine, and 14 other medical specialties</span>
+              <span><strong style={{ color: '#0f766e' }}>24+ Specialties:</strong> Cardiology, neurology, emergency medicine, orthopedics, pediatrics, and many more medical specialties</span>
             </li>
             <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
               <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>🔬</span>
