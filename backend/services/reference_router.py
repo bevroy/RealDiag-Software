@@ -86,13 +86,26 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
           tree_id = tree_data.get("id") or tree_data.get("tree_id") or tree_file.stem
           tree_title = tree_data.get("title") or tree_data.get("name") or tree_id
           
+          # Ensure citations are always strings (not objects or dicts)
+          citations_raw = tree_data.get("citations", [])
+          citations = []
+          if isinstance(citations_raw, list):
+            for citation in citations_raw:
+              if isinstance(citation, str):
+                citations.append(citation)
+              elif isinstance(citation, dict):
+                # Convert dict to string (take first key or value)
+                citations.append(str(list(citation.keys())[0]) if citation else "")
+              else:
+                citations.append(str(citation))
+          
           trees.append({
             "id": tree_id,
             "label": tree_title,
             "presentations": [],  # Could extract from nodes if needed
             "icd10": [tree_data.get("icd10")] if tree_data.get("icd10") else [],
             "snomed": [],
-            "citations": tree_data.get("citations", []),
+            "citations": citations,
             "source": "Clinical Decision Tree"
           })
       except Exception as e:
