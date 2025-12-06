@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 # Try to import SQLAlchemy - graceful fallback if not available
 try:
-    from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON
+    from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON, text
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import sessionmaker, scoped_session, relationship
     from sqlalchemy.pool import QueuePool
@@ -319,7 +319,7 @@ def check_database_connection() -> bool:
     
     try:
         with get_db_session() as db:
-            db.execute("SELECT 1")
+            db.execute(text("SELECT 1"))
         logger.info("✅ Database connection verified")
         return True
     except Exception as e:
