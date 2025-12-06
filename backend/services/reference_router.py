@@ -77,13 +77,20 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
         with tree_file.open("r", encoding="utf-8") as f:
           tree_data = yaml.safe_load(f) or {}
           
+          # Skip empty or invalid files
+          if not tree_data:
+            continue
+          
           # Convert tree structure to rule-like format for compatibility
-          tree_id = tree_data.get("id", tree_file.stem)
+          # Support both 'id' and 'tree_id' field names
+          tree_id = tree_data.get("id") or tree_data.get("tree_id") or tree_file.stem
+          tree_title = tree_data.get("title") or tree_data.get("name") or tree_id
+          
           trees.append({
             "id": tree_id,
-            "label": tree_data.get("title", tree_id),
+            "label": tree_title,
             "presentations": [],  # Could extract from nodes if needed
-            "icd10": [],
+            "icd10": [tree_data.get("icd10")] if tree_data.get("icd10") else [],
             "snomed": [],
             "citations": tree_data.get("citations", []),
             "source": "Clinical Decision Tree"
