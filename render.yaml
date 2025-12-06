@@ -5,15 +5,15 @@
 # `backend/Dockerfile` and runs the FastAPI app. Connect your GitHub repo to
 # Render and the `render.yaml` will allow Render to create/update the service.
 
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: realdiag-database
+databases:
+  - name: realdiag-database
+    databaseName: realdiag_prod
+    user: realdiag_user
     plan: free  # 90-day free trial, then expires (change to 'starter' for $7/month paid plan)
     region: ohio
-    databaseName: realdiag_prod
-    databaseUser: realdiag_user
     ipAllowList: []  # Only accessible from Render services
+
+services:
 
   # Backend Web Service
   - type: web
