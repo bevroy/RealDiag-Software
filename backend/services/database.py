@@ -43,13 +43,20 @@ else:
     # Ensure DATABASE_URL has correct sslmode for Render PostgreSQL
     db_url = DATABASE_URL
     if db_url and "postgresql" in db_url:
-        # If sslrootcert=system is present, must use sslmode=verify-full
-        if "sslrootcert=system" in db_url and "sslmode=require" in db_url:
-            db_url = db_url.replace("sslmode=require", "sslmode=verify-full")
-        elif "sslmode" not in db_url:
-            # Add sslmode=prefer if no sslmode specified
+        # Remove sslrootcert=system since we can't verify certificates
+        # Use sslmode=require instead (encrypts but doesn't verify cert)
+        if "sslrootcert=system" in db_url:
+            db_url = db_url.replace("&sslrootcert=system", "").replace("?sslrootcert=system&", "?").replace("?sslrootcert=system", "")
+        
+        # Ensure sslmode=require is set for Render PostgreSQL
+        if "sslmode=" in db_url:
+            # Replace any existing sslmode with require
+            import re
+            db_url = re.sub(r'sslmode=[^&]*', 'sslmode=require', db_url)
+        else:
+            # Add sslmode=require if not present
             separator = "&" if "?" in db_url else "?"
-            db_url = f"{db_url}{separator}sslmode=prefer"
+            db_url = f"{db_url}{separator}sslmode=require"
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
