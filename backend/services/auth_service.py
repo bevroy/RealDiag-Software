@@ -289,23 +289,8 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             db.add(user)
             db.flush()  # Get user.id without committing
             
-            # Initialize user settings
-            settings = UserSettings(
-                user_id=user_id,
-                default_specialty=user_data.specialty,
-                notification_preferences={
-                    "email_updates": True,
-                    "new_features": True,
-                    "weekly_digest": False
-                },
-                display_preferences={
-                    "theme": "light",
-                    "results_per_page": 10,
-                    "show_icd_codes": True,
-                    "show_snomed_codes": False
-                }
-            )
-            db.add(settings)
+            # Note: User settings will be stored as part of the User model
+            # No separate settings table needed for now
             
             return user.to_dict()
     
