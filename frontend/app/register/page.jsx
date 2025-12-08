@@ -82,7 +82,14 @@ export default function RegisterPage() {
         localStorage.setItem('realdiag_authenticated', 'true');
       }
       
-      alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}! Your account has been created.`);
+      // Check if employee account
+      const isEmployee = formData.email.toLowerCase().endsWith('@realdiag.org');
+      
+      if (isEmployee) {
+        alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}!\n\nYour employee account has been created. Please check your @realdiag.org email for a verification link to activate full access.`);
+      } else {
+        alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}! Your account has been created.`);
+      }
       
       // Redirect to main site
       window.location.href = 'https://realdiag.netlify.app/';
@@ -98,6 +105,29 @@ export default function RegisterPage() {
       <div style={styles.card}>
         <h1 style={styles.title}>Create Account</h1>
         <p style={styles.subtitle}>Join RealDiag Clinical Decision Support</p>
+        
+        {formData.email.toLowerCase().endsWith('@realdiag.org') && (
+          <div style={{
+            background: '#dbeafe',
+            border: '2px solid #3b82f6',
+            borderRadius: '8px',
+            padding: '16px',
+            marginBottom: '20px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+              <span style={{ fontSize: '24px', marginTop: '-2px' }}>👔</span>
+              <div>
+                <strong style={{ color: '#1e40af', display: 'block', marginBottom: '4px' }}>
+                  RealDiag Employee Account Detected
+                </strong>
+                <p style={{ fontSize: '14px', color: '#1e3a8a', margin: 0 }}>
+                  Your @realdiag.org email qualifies you for a <strong>free employee account</strong> with full access to all features. 
+                  After registration, please check your email to verify your account.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {error && (
           <div style={styles.error}>

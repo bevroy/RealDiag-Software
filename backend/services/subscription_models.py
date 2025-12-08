@@ -23,6 +23,7 @@ except ImportError:
 class PlanType(str, Enum):
     """Subscription plan types."""
     FREE = "free"
+    EMPLOYEE = "employee"
     INDIVIDUAL_STARTER = "individual_starter"
     INDIVIDUAL_PROFESSIONAL = "individual_professional"
     INDIVIDUAL_PROFESSIONAL_PLUS = "individual_professional_plus"
@@ -69,6 +70,31 @@ PRICING = {
             "api_access": False,
             "priority_support": False,
             "modules": [],
+        }
+    },
+    PlanType.EMPLOYEE: {
+        "name": "RealDiag Employee",
+        "description": "Full access for RealDiag team members",
+        "price_monthly": 0,
+        "price_yearly": 0,
+        "requires_verification": True,
+        "email_domain": "realdiag.org",
+        "features": {
+            "diagnostic_searches": "unlimited",
+            "diagnostic_searches_unlimited": True,
+            "save_favorites": True,
+            "search_history": True,
+            "custom_lists": True,
+            "export_pdf": True,
+            "export_fhir": True,
+            "api_access": True,
+            "priority_support": True,
+            "admin_access": True,
+            "modules": "all",
+            "max_modules": "unlimited",
+            "analytics_dashboard": True,
+            "ehr_integration": True,
+            "white_label": False,
         }
     },
     PlanType.INDIVIDUAL_STARTER: {

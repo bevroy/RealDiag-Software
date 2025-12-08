@@ -21,6 +21,13 @@ from backend.services.auth_service import (
     get_user_analytics,
     users_db, user_settings_db
 )
+from backend.services.email_service import (
+    is_token_expired, send_welcome_email
+)
+from backend.services.subscription_router import create_subscription
+from backend.services.subscription_models import PlanType, BillingInterval
+from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
+from datetime import datetime
 from backend.services.auth_cookies import (
     cookie_auth,
     create_cookie_response,
@@ -125,6 +132,132 @@ async def logout_user(response: Response):
     """
     cookie_auth.clear_auth_cookies(response)
     return {"message": "Logout successful"}
+
+@router.post("/verify-email")
+async def verify_employee_email(token: str):
+    """
+    Verify employee email address using token sent via email.
+    
+    This endpoint verifies @realdiag.org email addresses and automatically
+    creates a free employee subscription.
+    """
+    if not DATABASE_AVAILABLE:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database not available"
+        )
+    
+    with get_db_session() as db:
+        # Find user by verification token
+        user = db.query(User).filter_by(email_verification_token=token).first()
+        
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid verification token"
+            )
+        
+        # Check if already verified
+        if user.email_verified:
+            return {
+                "message": "Email already verified",
+                "user": user.to_dict()
+            }
+        
+        # Check if token expired
+        if is_token_expired(user.email_verification_sent_at):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Verification token has expired. Please request a new one."
+            )
+        
+        # Verify email
+        user.email_verified = True
+        user.email_verification_token = None
+        user.is_verified = True
+        db.flush()
+        
+        # Create employee subscription
+        try:
+            from backend.services.subscription_router import user_subscriptions
+            
+            subscription_id = f"sub_{secrets.token_urlsafe(16)}"
+            subscription = {
+                "subscription_id": subscription_id,
+                "user_id": user.user_id,
+                "plan_type": PlanType.EMPLOYEE,
+                "status": "active",
+                "billing_interval": BillingInterval.YEARLY,
+                "start_date": datetime.utcnow().isoformat(),
+                "current_period_start": datetime.utcnow().isoformat(),
+                "current_period_end": None,  # No expiration for employees
+                "trial_end": None,
+                "auto_renew": True,
+                "amount": 0,
+                "currency": "USD",
+                "created_at": datetime.utcnow().isoformat(),
+                "updated_at": datetime.utcnow().isoformat(),
+            }
+            
+            user_subscriptions[user.user_id] = subscription
+            
+        except Exception as e:
+            # Don't fail verification if subscription creation fails
+            pass
+        
+        # Send welcome email
+        send_welcome_email(user.email, user.full_name)
+        
+        return {
+            "message": "Email verified successfully! Your employee account is now active.",
+            "user": user.to_dict(),
+            "subscription": "employee"
+        }
+
+@router.post("/resend-verification")
+async def resend_verification_email(email: EmailStr):
+    """
+    Resend verification email to employee.
+    """
+    if not DATABASE_AVAILABLE:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database not available"
+        )
+    
+    with get_db_session() as db:
+        user = db.query(User).filter_by(email=email).first()
+        
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found"
+            )
+        
+        if not user.is_employee:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email verification only required for employee accounts"
+            )
+        
+        if user.email_verified:
+            return {
+                "message": "Email already verified"
+            }
+        
+        # Generate new token
+        from backend.services.email_service import generate_verification_token, send_verification_email
+        
+        new_token = generate_verification_token()
+        user.email_verification_token = new_token
+        user.email_verification_sent_at = datetime.utcnow()
+        
+        # Send email
+        send_verification_email(user.email, new_token, user.full_name)
+        
+        return {
+            "message": "Verification email sent. Please check your inbox."
+        }
 
 @router.get("/me", response_model=UserProfile)
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):

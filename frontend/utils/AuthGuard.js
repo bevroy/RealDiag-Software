@@ -6,6 +6,8 @@ import { getStoredUser, isStoredAuthenticated } from './clientAuth';
 const PUBLIC_ROUTES = [
   '/login',
   '/register',
+  '/pricing',
+  '/verify-email',
   '/legal-disclaimer',
   '/_error',
   '/404'

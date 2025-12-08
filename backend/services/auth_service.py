@@ -42,6 +42,22 @@ except (ImportError, Exception) as e:
     logger = logging.getLogger(__name__)
     logger.warning(f"⚠️  Database module not available - using in-memory storage: {e}")
 
+# Import email service for verification
+try:
+    from .email_service import (
+        is_employee_email,
+        generate_verification_token,
+        send_verification_email
+    )
+except ImportError:
+    # Fallback if email service not available
+    def is_employee_email(email: str) -> bool:
+        return email.lower().endswith("@realdiag.org")
+    def generate_verification_token() -> str:
+        return secrets.token_urlsafe(32)
+    def send_verification_email(email: str, token: str, full_name: str = None) -> bool:
+        return False
+
 # JWT Configuration
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_urlsafe(32))  # Load from env in production
 ALGORITHM = "HS256"
@@ -272,6 +288,14 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             user_id = f"user_{secrets.token_urlsafe(16)}"
             hashed_pwd = hash_password(user_data.password)
             
+            # Check if this is an employee email
+            is_employee = is_employee_email(user_data.email)
+            verification_token = None
+            
+            if is_employee:
+                # Generate verification token for employee
+                verification_token = generate_verification_token()
+            
             user = User(
                 user_id=user_id,
                 email=user_data.email,
@@ -282,12 +306,20 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
                 institution=user_data.institution,
                 created_at=datetime.utcnow(),
                 is_active=True,
+                is_employee=is_employee,
+                email_verified=False,
+                email_verification_token=verification_token,
+                email_verification_sent_at=datetime.utcnow() if is_employee else None,
                 search_count=0,
                 favorite_count=0
             )
             
             db.add(user)
             db.flush()  # Get user.id without committing
+            
+            # Send verification email for employees
+            if is_employee and verification_token:
+                send_verification_email(user_data.email, verification_token, user_data.full_name)
             
             # Note: User settings will be stored as part of the User model
             # No separate settings table needed for now
