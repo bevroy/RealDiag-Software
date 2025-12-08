@@ -42,13 +42,22 @@ export default function LoginPage() {
         throw new Error(data.detail || 'Login failed');
       }
 
-      // Login successful - store CSRF token if provided
+      // Login successful - store user data and token
       if (data.csrf_token) {
         sessionStorage.setItem('csrf_token', data.csrf_token);
       }
+      
+      // Store user data for cross-domain authentication
+      if (data.user) {
+        localStorage.setItem('realdiag_user', JSON.stringify(data.user));
+        localStorage.setItem('realdiag_authenticated', 'true');
+      }
 
-      // Redirect to dashboard or home
-      router.push('/diagnostic');
+      // Show success message
+      alert(`Welcome back, ${data.user?.full_name || data.user?.email}!`);
+      
+      // Redirect to main site
+      window.location.href = 'https://realdiag.netlify.app/';
     } catch (err) {
       setError(err.message);
     } finally {

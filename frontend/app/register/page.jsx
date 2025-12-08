@@ -71,9 +71,21 @@ export default function RegisterPage() {
         throw new Error(data.detail || 'Registration failed');
       }
 
-      // Registration successful
-      alert('Registration successful! You can now log in.');
-      router.push('/login');
+      // Registration successful - auto login
+      if (data.csrf_token) {
+        sessionStorage.setItem('csrf_token', data.csrf_token);
+      }
+      
+      // Store user data
+      if (data.user) {
+        localStorage.setItem('realdiag_user', JSON.stringify(data.user));
+        localStorage.setItem('realdiag_authenticated', 'true');
+      }
+      
+      alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}! Your account has been created.`);
+      
+      // Redirect to main site
+      window.location.href = 'https://realdiag.netlify.app/';
     } catch (err) {
       setError(err.message);
     } finally {
