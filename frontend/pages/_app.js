@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import '../styles/globals.css'
 import '../styles/accessibility-tablet.css'
+import { AuthGuard } from '../utils/AuthGuard'
 
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)
@@ -113,7 +114,9 @@ export default function App({Component, pageProps}){
           Install App
         </button>
       )}
-      <Component {...pageProps} />
+      <AuthGuard>
+        <Component {...pageProps} />
+      </AuthGuard>
     </>
   )
 }
