@@ -167,6 +167,8 @@ class User(Base):
             "role": self.role,
             "is_active": self.is_active,
             "is_verified": self.is_verified,
+            "is_employee": getattr(self, 'is_employee', False),
+            "email_verified": getattr(self, 'email_verified', False),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "last_login": self.last_login.isoformat() if self.last_login else None,
             "search_count": self.search_count,

@@ -289,30 +289,40 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             hashed_pwd = hash_password(user_data.password)
             
             # Check if this is an employee email
-            is_employee = is_employee_email(user_data.email)
+            is_employee_flag = is_employee_email(user_data.email)
             verification_token = None
             
-            if is_employee:
+            if is_employee_flag:
                 # Generate verification token for employee
                 verification_token = generate_verification_token()
             
-            user = User(
-                user_id=user_id,
-                email=user_data.email,
-                username=user_data.email.split('@')[0],  # Default username from email
-                hashed_password=hashed_pwd,
-                full_name=user_data.full_name,
-                specialty=user_data.specialty,
-                institution=user_data.institution,
-                created_at=datetime.utcnow(),
-                is_active=True,
-                is_employee=is_employee,
-                email_verified=False,
-                email_verification_token=verification_token,
-                email_verification_sent_at=datetime.utcnow() if is_employee else None,
-                search_count=0,
-                favorite_count=0
-            )
+            # Create user with backward compatibility for old database schema
+            user_kwargs = {
+                "user_id": user_id,
+                "email": user_data.email,
+                "username": user_data.email.split('@')[0],  # Default username from email
+                "hashed_password": hashed_pwd,
+                "full_name": user_data.full_name,
+                "specialty": user_data.specialty,
+                "institution": user_data.institution,
+                "created_at": datetime.utcnow(),
+                "is_active": True,
+                "search_count": 0,
+                "favorite_count": 0
+            }
+            
+            # Add employee fields only if they exist in the schema
+            try:
+                # Test if these columns exist
+                if hasattr(User, 'is_employee'):
+                    user_kwargs["is_employee"] = is_employee_flag
+                    user_kwargs["email_verified"] = False
+                    user_kwargs["email_verification_token"] = verification_token
+                    user_kwargs["email_verification_sent_at"] = datetime.utcnow() if is_employee_flag else None
+            except:
+                pass  # Old schema without employee fields
+            
+            user = User(**user_kwargs)
             
             db.add(user)
             db.flush()  # Get user.id without committing
