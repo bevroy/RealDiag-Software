@@ -19,7 +19,7 @@ try:
     from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON, text
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import sessionmaker, scoped_session, relationship
-    from sqlalchemy.pool import QueuePool
+    from sqlalchemy.pool import QueuePool, NullPool
     SQLALCHEMY_AVAILABLE = True
 except ImportError:
     logger.warning("⚠️  SQLAlchemy not installed - database features disabled")
@@ -80,16 +80,25 @@ else:
         logger.info(f"🔧 Using asyncpg driver with SSL required (better compatibility)")
     
     # SQLAlchemy engine with connection pooling
-    engine = create_engine(
-        db_url,
-        connect_args=connect_args,
-        poolclass=QueuePool,
-        pool_size=10,  # Number of connections to maintain
-        max_overflow=20,  # Additional connections if pool is full
-        pool_pre_ping=True,  # Verify connections before using
-        pool_recycle=3600,  # Recycle connections after 1 hour
-        echo=False  # Set to True for SQL query logging
-    )
+    # Use NullPool for asyncpg driver (QueuePool not compatible with async)
+    poolclass = NullPool if 'asyncpg' in db_url else QueuePool
+    
+    engine_args = {
+        'connect_args': connect_args,
+        'poolclass': poolclass,
+        'echo': False  # Set to True for SQL query logging
+    }
+    
+    # Add pool settings only for non-async drivers
+    if poolclass == QueuePool:
+        engine_args.update({
+            'pool_size': 10,
+            'max_overflow': 20,
+            'pool_pre_ping': True,
+            'pool_recycle': 3600
+        })
+    
+    engine = create_engine(db_url, **engine_args)
     
     # Session factory
     SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
