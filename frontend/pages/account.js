@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
+import { getStoredUser, isStoredAuthenticated, clearStoredAuth } from '../utils/clientAuth';
 
 export default function AccountPage() {
   const router = useRouter();
@@ -29,11 +30,19 @@ export default function AccountPage() {
 
   useEffect(() => {
     const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-backend.onrender.com';
     setApiBase(base.replace(/\/$/, ''));
 
-    // Check if already logged in (via HttpOnly cookie)
-    if (isAuthenticated()) {
+    // Check if already logged in (try localStorage first for cross-domain auth)
+    const storedUser = getStoredUser();
+    if (storedUser && isStoredAuthenticated()) {
+      setUser(storedUser);
+      setIsUserAuthenticated(true);
+      setActiveTab('dashboard');
+      // Try to load dashboard data if backend supports it
+      loadDashboardData();
+    } else if (isAuthenticated()) {
+      // Fallback to cookie-based auth
       fetchUserProfile();
     }
   }, []);
@@ -52,6 +61,7 @@ export default function AccountPage() {
       }
     } catch (err) {
       console.error('Failed to fetch profile:', err);
+      // Don't show error to user - endpoint might not exist yet
       setIsUserAuthenticated(false);
       setUser(null);
     }
@@ -88,6 +98,8 @@ export default function AccountPage() {
       }
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
+      // Don't show error - these endpoints may not be implemented yet
+      // User can still see their profile information
     }
   };
 
@@ -138,7 +150,11 @@ export default function AccountPage() {
       await authLogout();
     } catch (err) {
       console.error('Logout error:', err);
+      // Continue with logout even if backend call fails
     } finally {
+      // Clear stored auth data
+      clearStoredAuth();
+      
       setUser(null);
       setIsUserAuthenticated(false);
       setActiveTab('login');
