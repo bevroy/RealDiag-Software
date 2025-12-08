@@ -59,28 +59,22 @@ else:
     
     if db_url and "postgresql" in db_url:
         import re
-        import ssl
         
-        # Remove all SSL parameters from URL
-        db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
+        # Remove only sslrootcert parameter - keep sslmode=require from Render
         db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
-        db_url = re.sub(r'[?&]sslcert=[^&]*', '', db_url)
-        db_url = re.sub(r'[?&]sslkey=[^&]*', '', db_url)
         # Clean up any trailing ? or &
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
         
-        # Create a custom SSL context that doesn't verify certificates
-        ssl_context = ssl.create_default_context()
-        ssl_context.check_hostname = False
-        ssl_context.verify_mode = ssl.CERT_NONE
+        # Ensure sslmode=require is in the URL
+        if 'sslmode' not in db_url:
+            separator = '&' if '?' in db_url else '?'
+            db_url = f"{db_url}{separator}sslmode=require"
         
         connect_args = {
-            'sslmode': 'require',
-            'sslcontext': ssl_context,
             'connect_timeout': 10
         }
-        logger.info(f"🔧 Using custom SSL context with sslmode=require (no cert verification)")
+        logger.info(f"🔧 Using sslmode=require in URL (removed conflicting sslrootcert)")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
