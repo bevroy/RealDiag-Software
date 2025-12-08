@@ -53,28 +53,31 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
     
-    # Use DATABASE_URL but strip sslrootcert parameter
+    # Use DATABASE_URL and switch to asyncpg driver for better SSL compatibility
     db_url = DATABASE_URL
     connect_args = {}
     
     if db_url and "postgresql" in db_url:
         import re
         
-        # Remove only sslrootcert parameter - keep sslmode=require from Render
+        # Switch from psycopg2 to asyncpg driver (better SSL support)
+        db_url = db_url.replace('postgresql://', 'postgresql+asyncpg://')
+        
+        # Remove sslrootcert parameter - asyncpg handles SSL differently
         db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
         # Clean up any trailing ? or &
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
         
-        # Ensure sslmode=require is in the URL
-        if 'sslmode' not in db_url:
-            separator = '&' if '?' in db_url else '?'
-            db_url = f"{db_url}{separator}sslmode=require"
+        # asyncpg uses 'ssl' parameter instead of 'sslmode'
+        separator = '&' if '?' in db_url else '?'
+        db_url = f"{db_url}{separator}ssl=require"
         
         connect_args = {
-            'connect_timeout': 10
+            'timeout': 10
         }
-        logger.info(f"🔧 Using sslmode=require in URL (removed conflicting sslrootcert)")
+        logger.info(f"🔧 Using asyncpg driver with SSL required (better compatibility)")
     
     # SQLAlchemy engine with connection pooling
     engine = create_engine(
