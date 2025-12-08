@@ -83,6 +83,27 @@ export default function LoginPage() {
 
         <div style={styles.divider}></div>
 
+        {/* Demo Video Section */}
+        <div style={styles.videoSection}>
+          <h3 style={styles.videoTitle}>See RealDiag in Action</h3>
+          <p style={styles.videoSubtitle}>Watch our quick demo before signing in</p>
+          <div style={styles.videoWrapper}>
+            <video 
+              controls 
+              style={styles.video}
+              poster="/logo.png"
+            >
+              <source src="/demo-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p style={styles.videoCaption}>
+            <em>55-second overview of RealDiag's key features</em>
+          </p>
+        </div>
+
+        <div style={styles.divider}></div>
+
         <h2 style={styles.welcomeTitle}>Welcome Back</h2>
         <p style={styles.subtitle}>Sign in to your account</p>
 
@@ -268,5 +289,41 @@ const styles = {
     color: '#0f766e',
     fontWeight: '600',
     textDecoration: 'none'
+  },
+  videoSection: {
+    marginTop: '24px',
+    marginBottom: '24px',
+    textAlign: 'center'
+  },
+  videoTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#78350f',
+    marginBottom: '8px'
+  },
+  videoSubtitle: {
+    fontSize: '14px',
+    color: '#64748b',
+    marginBottom: '16px'
+  },
+  videoWrapper: {
+    position: 'relative',
+    width: '100%',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    border: '2px solid #ccfbf1',
+    marginBottom: '12px'
+  },
+  video: {
+    width: '100%',
+    height: 'auto',
+    display: 'block',
+    backgroundColor: '#000'
+  },
+  videoCaption: {
+    fontSize: '12px',
+    color: '#94a3b8',
+    fontStyle: 'italic'
   }
 };
