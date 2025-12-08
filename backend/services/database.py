@@ -60,45 +60,33 @@ else:
     if db_url and "postgresql" in db_url:
         import re
         
-        # Switch from psycopg2 to asyncpg driver (better SSL support)
-        db_url = db_url.replace('postgresql://', 'postgresql+asyncpg://')
-        
-        # Remove sslrootcert parameter - asyncpg handles SSL differently
-        db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        # Strip all SSL parameters and add only what works with Render
         db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
-        # Clean up any trailing ? or &
+        db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslcert=[^&]*', '', db_url)
+        db_url = re.sub(r'[?&]sslkey=[^&]*', '', db_url)
+        # Clean up trailing separators
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
         
-        # asyncpg uses 'ssl' parameter instead of 'sslmode'
+        # Add simple sslmode parameter in the URL
         separator = '&' if '?' in db_url else '?'
-        db_url = f"{db_url}{separator}ssl=require"
+        db_url = f"{db_url}{separator}sslmode=require"
         
-        connect_args = {
-            'timeout': 10
-        }
-        logger.info(f"🔧 Using asyncpg driver with SSL required (better compatibility)")
+        connect_args = {}
+        logger.info(f"🔧 Using psycopg2 with sslmode=require in URL")
     
-    # SQLAlchemy engine with connection pooling
-    # Use NullPool for asyncpg driver (QueuePool not compatible with async)
-    poolclass = NullPool if 'asyncpg' in db_url else QueuePool
-    
-    engine_args = {
-        'connect_args': connect_args,
-        'poolclass': poolclass,
-        'echo': False  # Set to True for SQL query logging
-    }
-    
-    # Add pool settings only for non-async drivers
-    if poolclass == QueuePool:
-        engine_args.update({
-            'pool_size': 10,
-            'max_overflow': 20,
-            'pool_pre_ping': True,
-            'pool_recycle': 3600
-        })
-    
-    engine = create_engine(db_url, **engine_args)
+    # SQLAlchemy engine with standard connection pooling
+    engine = create_engine(
+        db_url,
+        connect_args=connect_args,
+        poolclass=QueuePool,
+        pool_size=5,
+        max_overflow=10,
+        pool_pre_ping=True,
+        pool_recycle=3600,
+        echo=False
+    )
     
     # Session factory
     SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
