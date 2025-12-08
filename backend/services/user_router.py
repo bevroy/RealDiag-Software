@@ -108,7 +108,11 @@ async def login_user(request: Request, credentials: UserLogin):
     Returns tokens in secure HttpOnly cookies instead of response body.
     Client should check for 'csrf_token' in response to use in X-CSRF-Token header.
     """
-    user = authenticate_user(credentials.email, credentials.password)
+    try:
+        user = authenticate_user(credentials.email, credentials.password)
+    except Exception as e:
+        logger.error(f"Login error for {credentials.email}: {str(e)}")
+        raise
     access_token = create_access_token(user["user_id"], user["email"])
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     

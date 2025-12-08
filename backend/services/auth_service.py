@@ -392,25 +392,39 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
     """Authenticate user and return user data."""
     if DATABASE_AVAILABLE:
         # Database version
-        with get_db_session() as db:
-            user = db.query(User).filter_by(email=email).first()
-            
-            if not user:
-                raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND,
-                    detail="User not found"
-                )
-            
-            if not verify_password(password, user.hashed_password):
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Incorrect password"
-                )
-            
-            # Update last login
-            user.last_login = datetime.utcnow()
-            
-            return user.to_dict()
+        try:
+            with get_db_session() as db:
+                user = db.query(User).filter_by(email=email).first()
+                
+                if not user:
+                    raise HTTPException(
+                        status_code=status.HTTP_404_NOT_FOUND,
+                        detail="User not found"
+                    )
+                
+                if not verify_password(password, user.hashed_password):
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail="Incorrect password"
+                    )
+                
+                # Update last login
+                try:
+                    user.last_login = datetime.utcnow()
+                    db.commit()
+                except:
+                    # Don't fail login if we can't update last_login
+                    pass
+                
+                return user.to_dict()
+        except HTTPException:
+            raise  # Re-raise HTTP exceptions
+        except Exception as e:
+            logger.error(f"Database error during authentication: {e}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Authentication error: {str(e)}"
+            )
     
     else:
         # In-memory version (fallback)
