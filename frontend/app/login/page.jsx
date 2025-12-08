@@ -86,7 +86,7 @@ export default function LoginPage() {
         {/* Demo Video Section */}
         <div style={styles.videoSection}>
           <h3 style={styles.videoTitle}>See RealDiag in Action</h3>
-          <p style={styles.videoSubtitle}>Watch our quick demo before signing in</p>
+          <p style={styles.videoSubtitle}>Watch our diagnostic tool demonstration</p>
           <div style={styles.videoWrapper}>
             <video 
               controls 
@@ -98,7 +98,7 @@ export default function LoginPage() {
             </video>
           </div>
           <p style={styles.videoCaption}>
-            <em>55-second overview of RealDiag's key features</em>
+            <em>2-minute demonstration of AI-powered diagnostic features</em>
           </p>
         </div>
 
