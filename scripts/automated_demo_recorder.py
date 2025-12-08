@@ -409,7 +409,7 @@ class DemoRecorder:
         # Start browser
         print("\n🌐 Launching browser...")
         async with async_playwright() as p:
-            self.browser = await p.chromium.launch(headless=False)  # Set to True for background
+            self.browser = await p.chromium.launch(headless=True)  # Headless mode for dev container
             self.context = await self.browser.new_context(
                 viewport={"width": VIDEO_WIDTH, "height": VIDEO_HEIGHT},
                 record_video_dir=str(self.output_dir),
