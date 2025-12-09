@@ -1,497 +1,520 @@
 family: obstetrics_gynecology
 version: 0.1.0
-source: "American College of Obstetricians and Gynecologists (ACOG) Practice Bulletins, Society for Maternal-Fetal Medicine (SMFM)"
+source: American College of Obstetricians and Gynecologists (ACOG) Practice Bulletins,
+  Society for Maternal-Fetal Medicine (SMFM)
 rules:
-  - id: OB-PREECLAMPSIA
-    label: Preeclampsia
-    presentations:
-      - Hypertension (BP ≥ 140/90)
-      - Proteinuria
-      - Onset after 20 weeks gestation
-      - Headache
-      - Visual changes
-      - RUQ pain
-      - Edema
-    icd10:
-      - O14.90
-      - O14.92
-      - O14.94
-    snomed:
-      - "398254007"
-
-  - id: OB-ECTOPIC
-    label: Ectopic Pregnancy
-    presentations:
-      - Abdominal or pelvic pain
-      - Vaginal bleeding
-      - Positive pregnancy test
-      - Adnexal mass
-      - Shoulder pain (if rupture)
-      - Hypotension/shock (if rupture)
-    icd10:
-      - O00.9
-      - O00.90
-    snomed:
-      - "34801009"
-
-  - id: OB-HYPEREMESIS
-    label: Hyperemesis Gravidarum
-    presentations:
-      - Severe nausea and vomiting
-      - Weight loss > 5%
-      - Dehydration
-      - Electrolyte abnormalities
-      - Ketonuria
-      - Unable to tolerate oral intake
-    icd10:
-      - O21.0
-      - O21.1
-    snomed:
-      - "237241001"
-
-  - id: OB-GDM
-    label: Gestational Diabetes Mellitus
-    presentations:
-      - Abnormal glucose tolerance test
-      - Onset during pregnancy
-      - Risk factors (obesity, family history, previous GDM)
-      - Polyuria and polydipsia
-      - Macrosomia
-    icd10:
-      - O24.419
-      - O24.919
-    snomed:
-      - "11687002"
-
-  - id: GYN-PCOS
-    label: Polycystic Ovary Syndrome
-    presentations:
-      - Irregular menstrual cycles
-      - Hirsutism and acne
-      - Obesity
-      - Infertility
-      - Insulin resistance
-      - Polycystic ovaries on ultrasound
-    icd10:
-      - E28.2
-    snomed:
-      - "69878008"
-
-  - id: GYN-ENDOMETRIOSIS
-    label: Endometriosis
-    presentations:
-      - Dysmenorrhea
-      - Chronic pelvic pain
-      - Dyspareunia
-      - Infertility
-      - Cyclical bowel or bladder symptoms
-    icd10:
-      - N80.9
-      - N80.0
-    snomed:
-      - "129103003"
-
-  - id: GYN-PID
-    label: Pelvic Inflammatory Disease
-    presentations:
-      - Lower abdominal pain
-      - Cervical motion tenderness
-      - Adnexal tenderness
-      - Fever
-      - Abnormal vaginal discharge
-      - STI risk factors
-    icd10:
-      - N73.9
-      - N70.91
-    snomed:
-      - "198130006"
-
-  - id: GYN-FIBROIDS
-    label: Uterine Fibroids (Leiomyoma)
-    presentations:
-      - Heavy menstrual bleeding
-      - Pelvic pressure or fullness
-      - Urinary frequency
-      - Constipation
-      - Palpable pelvic mass
-      - Infertility or pregnancy complications
-    icd10:
-      - D25.9
-      - D25.1
-    snomed:
-      - "95315005"
-
-  - id: GYN-OVARIAN-CYST
-    label: Ovarian Cyst
-    presentations:
-      - Pelvic or abdominal pain
-      - Bloating or fullness
-      - Pain with intercourse
-      - Irregular menstrual cycles
-      - Adnexal mass on exam or imaging
-    icd10:
-      - N83.20
-      - N83.29
-    snomed:
-      - "399492000"
-
-  - id: GYN-MENOPAUSE
-    label: Menopause
-    presentations:
-      - Cessation of menses > 12 months
-      - Hot flashes
-      - Night sweats
-      - Vaginal dryness
-      - Mood changes
-      - Sleep disturbances
-    icd10:
-      - N95.1
-      - N95.9
-    snomed:
-      - "289903006"
-
-  - id: GYN-CERVICAL-CA
-    label: Cervical Cancer
-    presentations:
-      - Abnormal vaginal bleeding
-      - Postcoital bleeding
-      - Vaginal discharge
-      - Pelvic pain
-      - Abnormal Pap smear
-      - HPV infection
-    icd10:
-      - C53.9
-      - D06.9
-    snomed:
-      - "363354003"
-
-  - id: GYN-OVARIAN-CA
-    label: Ovarian Cancer
-    presentations:
-      - Abdominal bloating or distention
-      - Pelvic pain
-      - Early satiety
-      - Urinary symptoms
-      - Weight loss
-      - Palpable adnexal mass
-      - Elevated CA-125
-    icd10:
-      - C56.9
-      - D39.10
-    snomed:
-      - "363443007"
-
-  - id: OBGYN-PREECLAMPSIA
-    label: Preeclampsia
-    presentations:
-      - New-onset hypertension after 20 weeks gestation (BP ≥140/90 on 2 occasions 4hr apart)
-      - Proteinuria (≥300 mg/24hr or protein/Cr ratio ≥0.3) OR end-organ dysfunction
-      - "Severe features: BP ≥160/110, thrombocytopenia (<100K), Cr >1.1, elevated LFTs, pulmonary edema, visual symptoms, RUQ pain"
-      - Headache (severe, persistent), visual changes (scotomata, blurred vision)
-      - Right upper quadrant or epigastric pain (liver capsule distension)
-      - Sudden weight gain, edema (hands, face - not specific but common)
-    clinical_pearls:
-      - "Delivery is definitive treatment: Only cure for preeclampsia"
-      - "Severe preeclampsia: Deliver at ≥34 weeks, give betamethasone if <34 weeks"
-      - "Magnesium sulfate: Seizure prophylaxis (prevents eclampsia), load 4-6g IV, then 2g/hr"
-      - "Blood pressure control: Labetalol or hydralazine if ≥160/110 (goal 140-150/90-100)"
-      - "HELLP syndrome: Hemolysis, Elevated Liver enzymes, Low Platelets (severe form of preeclampsia)"
-    management:
-      - "Deliver if ≥37 weeks or severe features at ≥34 weeks"
-      - "Magnesium sulfate: 4-6g IV load over 15-20min, then 2g/hr infusion (seizure prophylaxis)"
-      - "Antihypertensives if ≥160/110: Labetalol 20mg IV (double q10min) or hydralazine 5-10mg IV"
-      - "Betamethasone 12mg IM x2 doses 24hr apart if <34 weeks (fetal lung maturity)"
-      - "Postpartum: Continue mag sulfate 24hr, monitor BP closely (can develop preeclampsia postpartum)"
-    tests:
-      - BP monitoring (≥140/90 diagnostic)
-      - Urinalysis (protein), 24hr urine protein or protein/Cr ratio
-      - CBC (platelets), CMP (Cr, LFTs)
-      - Uric acid (elevated in preeclampsia)
-      - Fetal monitoring (NST, biophysical profile)
-    referrals:
-      - OB/GYN for all preeclampsia
-      - Maternal-fetal medicine if severe or <34 weeks
-      - ICU if HELLP syndrome, eclampsia, or severe features
-    sensitivity: 0.88
-    specificity: 0.85
-    icd10:
-      - O14.90   # Preeclampsia, unspecified trimester
-      - O14.12   # Severe preeclampsia, second trimester
-    snomed:
-      - "398254007"  # Pre-eclampsia
-
-  - id: OBGYN-ECLAMPSIA
-    label: Eclampsia
-    presentations:
-      - Seizures in pregnant woman with preeclampsia (tonic-clonic, lasting 60-90 seconds)
-      - "Preeclampsia criteria: Hypertension + proteinuria or end-organ dysfunction after 20 weeks"
-      - May occur antepartum (50%), intrapartum (25%), or postpartum (25%, up to 6 weeks)
-      - Postictal confusion, headache, visual changes
-      - Can progress to status epilepticus
-      - Maternal mortality 2%, fetal mortality 8-10%
-    clinical_pearls:
-      - "Eclampsia = preeclampsia + seizures (NOT due to other neurologic causes)"
-      - "Magnesium sulfate: Treatment of choice (more effective than phenytoin/benzos)"
-      - "Deliver after stabilization: Delivery is definitive treatment"
-      - "Recurrent seizures: Give additional magnesium 2g IV bolus"
-      - "Monitor for complications: Stroke, pulmonary edema, HELLP syndrome, placental abruption"
-    management:
-      - "During seizure: Left lateral position, oxygen, protect airway, suction"
-      - "Magnesium sulfate: 4-6g IV bolus over 15-20min, then 2g/hr infusion"
-      - "If seizures recur: Additional 2g magnesium IV bolus"
-      - "Antihypertensives: Labetalol or hydralazine if BP ≥160/110"
-      - "Delivery: After maternal stabilization, deliver urgently (C-section if unstable)"
-    tests:
-      - BP monitoring, continuous fetal monitoring
-      - CBC (platelets), CMP (Cr, LFTs)
-      - Magnesium level (therapeutic 4-8 mEq/L)
-      - CT/MRI head if atypical features (focal deficit, prolonged postictal)
-    referrals:
-      - OB/GYN immediately
-      - ICU admission
-      - Neurology if atypical presentation
-    sensitivity: 0.95
-    specificity: 0.92
-    icd10:
-      - O15.00   # Eclampsia in pregnancy, unspecified trimester
-      - O15.1    # Eclampsia in labor
-      - O15.2    # Eclampsia in the puerperium
-    snomed:
-      - "15938005"  # Eclampsia
-
-  - id: OBGYN-HELLP-SYNDROME
-    label: HELLP Syndrome
-    presentations:
-      - "Hemolysis: Schistocytes on smear, elevated LDH (>600 U/L), low haptoglobin, elevated indirect bilirubin"
-      - "Elevated Liver enzymes: AST/ALT >2x ULN (often >70 U/L)"
-      - "Low Platelets: <100,000/μL"
-      - Right upper quadrant or epigastric pain (60-90%)
-      - Nausea, vomiting, malaise, headache
-      - Usually occurs 27-37 weeks (70%) or postpartum (30%, up to 7 days)
-      - May occur WITHOUT severe hypertension or proteinuria
-    clinical_pearls:
-      - "HELLP is severe form of preeclampsia (microangiopathic hemolytic anemia + hepatic dysfunction)"
-      - "15% of HELLP do not have severe hypertension or heavy proteinuria"
-      - "Delivery is only definitive treatment: Deliver regardless of gestational age if maternal instability"
-      - "Maternal mortality 1%, risk of DIC, liver hematoma/rupture, placental abruption"
-      - "Postpartum HELLP: Can develop up to 7 days after delivery"
-    management:
-      - "Magnesium sulfate: 4-6g IV load, then 2g/hr (seizure prophylaxis)"
-      - "Deliver: Urgently if ≥34 weeks or maternal instability, betamethasone if <34 weeks"
-      - "Blood pressure control: If ≥160/110 (labetalol, hydralazine)"
-      - "Transfuse if needed: Platelets if <20K or bleeding, pRBCs if anemia"
-      - "Monitor postpartum: Platelets, LFTs q6-12hr (may worsen 24-48hr post-delivery)"
-    tests:
-      - CBC (platelets, hemoglobin, schistocytes)
-      - CMP (AST, ALT, LDH, bilirubin)
-      - Haptoglobin (low in hemolysis)
-      - Coagulation panel (PT, PTT, fibrinogen - assess for DIC)
-      - Type & screen (anticipate transfusion needs)
-    referrals:
-      - OB/GYN immediately
-      - Maternal-fetal medicine
-      - ICU admission
-    sensitivity: 0.85
-    specificity: 0.90
-    icd10:
-      - O14.2    # HELLP syndrome
-    snomed:
-      - "307534008"  # HELLP syndrome
-
-  - id: OBGYN-PLACENTAL-ABRUPTION
-    label: Placental Abruption
-    presentations:
-      - Vaginal bleeding (80%) - may be concealed (20%)
-      - Abdominal pain (usually severe, constant)
-      - Uterine tenderness, firmness, or contractions (tetanic uterus)
-      - "Fetal distress: Abnormal heart rate tracing, late decelerations"
-      - Maternal shock out of proportion to visible bleeding (if concealed abruption)
-      - "Risk factors: Hypertension, preeclampsia, trauma, cocaine, smoking, prior abruption (10% recurrence)"
-    clinical_pearls:
-      - "Clinical diagnosis: Ultrasound only 50% sensitive (don't rule out if negative)"
-      - "Concealed abruption (20%): Blood trapped behind placenta, severe maternal/fetal compromise"
-      - "DIC complication (10%): Tissue factor release from placenta"
-      - "Severe abruption: Emergent C-section (fetal distress) or rapid vaginal delivery if imminent"
-      - "Kleihauer-Betke test: Detects fetal-maternal hemorrhage, give RhoGAM if Rh-negative"
-    management:
-      - "Stabilize mother: Two large-bore IVs, fluids, type & cross 4 units PRBC"
-      - "Continuous fetal monitoring: Assess for fetal distress"
-      - "If fetal distress or maternal instability: Emergent C-section"
-      - "If stable + preterm: Tocolytics controversial, betamethasone for fetal lung maturity"
-      - "RhoGAM: 300 mcg IM if Rh-negative mother (Kleihauer-Betke to determine dose)"
-    tests:
-      - Continuous fetal heart monitoring (most important)
-      - CBC (assess anemia, monitor for DIC)
-      - Type & screen/cross 4 units
-      - Coagulation panel (PT, PTT, fibrinogen - watch for DIC)
-      - Kleihauer-Betke test (fetal-maternal hemorrhage)
-      - Ultrasound (may show retroplacental hematoma but often negative)
-    referrals:
-      - OB/GYN immediately
-      - Operating room if fetal distress
-      - ICU if maternal shock or DIC
-    sensitivity: 0.75
-    specificity: 0.80
-    icd10:
-      - O45.90   # Premature separation of placenta, unspecified
-      - O45.93   # Premature separation of placenta, third trimester
-    snomed:
-      - "415105001"  # Placental abruption
-
-  - id: OBGYN-PLACENTA-PREVIA
-    label: Placenta Previa
-    presentations:
-      - Painless vaginal bleeding (hallmark, usually in 3rd trimester)
-      - Bleeding may be provoked by intercourse or vaginal exam
-      - Uterus soft, non-tender (unlike abruption)
-      - Fetal heart tracing usually normal (unlike abruption)
-      - "Complete previa: Placenta completely covers cervical os"
-      - "Marginal previa: Placenta edge reaches but doesn't cover os"
-      - Diagnosed by ultrasound (transvaginal safest and most accurate)
-    clinical_pearls:
-      - "Never perform digital vaginal exam if previa suspected: Can provoke massive hemorrhage"
-      - "Transvaginal ultrasound is SAFE and more accurate than transabdominal"
-      - "Most previa diagnosed on 20-week anatomy scan (many resolve by term as uterus grows)"
-      - "Complete previa: Deliver by C-section at 36-37 weeks (before labor)"
-      - "Risk factors: Prior C-section, multiparity, advanced maternal age, smoking"
-    management:
-      - "Stable bleeding: Admit for observation, pelvic rest (no intercourse, no vaginal exams)"
-      - "If <37 weeks: Betamethasone for fetal lung maturity, expectant management"
-      - "Active bleeding: IV access x2, type & cross 4 units, continuous fetal monitoring"
-      - "Delivery: C-section for complete previa at 36-37 weeks (or earlier if bleeding)"
-      - "Accreta risk: If prior C-section + previa, evaluate for accreta (MRI)"
-    tests:
-      - Ultrasound (transvaginal most accurate - SAFE to perform)
-      - Continuous fetal monitoring
-      - CBC (assess blood loss)
-      - Type & screen/cross 4 units
-      - RhoGAM if Rh-negative
-      - Consider MRI if concern for accreta (prior C-section)
-    referrals:
-      - OB/GYN for all previa
-      - Maternal-fetal medicine if accreta suspected
-      - Operating room if active hemorrhage
-    sensitivity: 0.90
-    specificity: 0.88
-    icd10:
-      - O44.10   # Placenta previa with hemorrhage, unspecified trimester
-      - O44.12   # Placenta previa with hemorrhage, second trimester
-    snomed:
-      - "237294000"  # Placenta previa
-
-  - id: OBGYN-ECTOPIC-PREGNANCY
-    label: Ectopic Pregnancy
-    presentations:
-      - Abdominal/pelvic pain (usually unilateral, may be diffuse)
-      - Vaginal bleeding (lighter than normal period)
-      - Positive pregnancy test (urine or serum beta-hCG)
-      - Cervical motion tenderness, adnexal tenderness on exam
-      - "If ruptured: Hypotension, tachycardia, shoulder pain (Kehr sign from diaphragmatic irritation)"
-      - Beta-hCG doesn't rise appropriately (should double every 48-72hr in early pregnancy)
-      - "Ultrasound: No intrauterine pregnancy, may see adnexal mass or free fluid"
-    clinical_pearls:
-      - "Any woman of childbearing age with abdominal pain = pregnancy test"
-      - "Discriminatory zone: beta-hCG >1500-2000 should see intrauterine gestational sac on transvaginal U/S"
-      - "If hCG >discriminatory zone + no IUP → presumed ectopic"
-      - "Ruptured ectopic: Surgical emergency, go to OR immediately if unstable"
-      - "Methotrexate: For stable ectopic if hCG <5000, no cardiac activity, <3.5cm, hemodynamically stable"
-    management:
-      - "Stable: Serial beta-hCG (should rise 53% in 48hr if viable IUP)"
-      - "Methotrexate 50mg/m² IM: If stable, unruptured, hCG <5000, no fetal cardiac activity, compliant patient"
-      - "Surgery (salpingectomy or salpingostomy): If ruptured, unstable, or methotrexate contraindicated"
-      - "If ruptured: IV access x2, fluids, type & cross, emergent OB/GYN consult, OR"
-      - "RhoGAM 50-300 mcg if Rh-negative"
-    tests:
-      - Beta-hCG (quantitative serum)
-      - Transvaginal ultrasound (look for IUP vs ectopic mass)
-      - CBC (if ruptured)
-      - Type & screen
-      - Repeat beta-hCG in 48hr (should rise appropriately if viable IUP)
-    referrals:
-      - OB/GYN for all ectopic pregnancies
-      - Emergent OR if ruptured
-    sensitivity: 0.85
-    specificity: 0.90
-    icd10:
-      - O00.90   # Unspecified ectopic pregnancy without intrauterine pregnancy
-      - O00.10   # Tubal pregnancy without intrauterine pregnancy
-    snomed:
-      - "34801009"  # Ectopic pregnancy
-
-  - id: OBGYN-PELVIC-INFLAMMATORY-DISEASE
-    label: Pelvic Inflammatory Disease (PID)
-    presentations:
-      - Lower abdominal/pelvic pain (bilateral)
-      - Cervical motion tenderness (chandelier sign)
-      - Uterine tenderness, adnexal tenderness
-      - Abnormal vaginal discharge (purulent)
-      - Fever (may be absent in mild cases)
-      - Abnormal uterine bleeding
-      - "Caused by ascending infection: Chlamydia trachomatis, Neisseria gonorrhoeae most common"
-    clinical_pearls:
-      - "Low threshold for diagnosis: Treat empirically if sexually active + pelvic pain + CMT"
-      - "Minimal criteria (CDC): Pelvic pain + cervical motion or uterine or adnexal tenderness"
-      - "Test for gonorrhea AND chlamydia: Both common, often coinfection"
-      - "Complications: Tubo-ovarian abscess, Fitz-Hugh-Curtis syndrome (perihepatitis), infertility, chronic pain"
-      - "Admit if: TOA, pregnancy, severe illness, unable to tolerate PO, failed outpatient treatment"
-    management:
-      - "Outpatient: Ceftriaxone 500mg IM x 1 + doxycycline 100mg PO BID x 14 days + metronidazole 500mg BID x 14d"
-      - "Inpatient: Cefotetan 2g IV q12h + doxycycline 100mg IV/PO q12h, OR cefoxitin 2g IV q6h + doxycycline"
-      - "Alternative: Clindamycin + gentamicin IV"
-      - "Treat sexual partners: Empiric treatment for gonorrhea and chlamydia"
-      - "Follow-up: 48-72 hours to ensure improving, repeat testing in 3 months (test of cure)"
-    tests:
-      - "Cervical swabs: NAAT for gonorrhea and chlamydia"
-      - Pregnancy test (rule out ectopic)
-      - Wet mount (trichomonas, BV)
-      - CBC (leukocytosis)
-      - Pelvic ultrasound if TOA suspected (complex adnexal mass)
-    referrals:
-      - OB/GYN if TOA or severe
-      - "Admission if: TOA, unable to tolerate PO, pregnancy, severe illness"
-      - Surgery if TOA ruptured
-    sensitivity: 0.80
-    specificity: 0.75
-    icd10:
-      - N73.9    # Female pelvic inflammatory disease, unspecified
-      - N70.93   # Salpingitis and oophoritis, unspecified
-    snomed:
-      - "198130006"  # Pelvic inflammatory disease
-
-  - id: OBGYN-OVARIAN-TORSION
-    label: Ovarian Torsion
-    presentations:
-      - Sudden onset severe unilateral pelvic pain
-      - Nausea, vomiting (90%)
-      - Intermittent pain (if intermittent torsion/detorsion)
-      - Adnexal mass on exam or imaging (ovarian cyst or mass causes torsion)
-      - Fever less common (unless necrosis)
-      - Most common in reproductive age women
-      - "Risk factors: Ovarian mass (>5 cm), pregnancy, ovarian hyperstimulation"
-    clinical_pearls:
-      - "Surgical emergency: Ovarian necrosis occurs after 4-8 hours"
-      - "Doppler ultrasound: Absent or decreased ovarian blood flow (but can be normal if intermittent torsion)"
-      - "Whirlpool sign: Twisted vascular pedicle on ultrasound (specific but not sensitive)"
-      - "Don't delay surgery for imaging if high suspicion: Ultrasound can be falsely negative"
-      - "Laparoscopy diagnostic and therapeutic: Detorsion + cystectomy or oophoropexy"
-    management:
-      - "Immediate: IV access, analgesia, anti-emetics, OB/GYN consult"
-      - "Pelvic ultrasound with Doppler: Assess ovarian blood flow, identify mass"
-      - "Emergent laparoscopy: Detorsion (untwist ovary), assess viability, remove cyst if present"
-      - "Oophoropexy: Fix ovary to prevent recurrence (if no mass removed)"
-      - "Oophorectomy: Only if ovary clearly necrotic (try to preserve if viable)"
-    tests:
-      - Pelvic ultrasound with Doppler (decreased/absent ovarian flow, enlarged ovary, whirlpool sign)
-      - Beta-hCG (rule out ectopic pregnancy)
-      - CBC (leukocytosis suggests necrosis)
-      - Urinalysis (rule out kidney stone)
-    referrals:
-      - Emergent OB/GYN or gynecologic surgery consult
-      - Operating room for diagnostic laparoscopy
-    sensitivity: 0.75
-    specificity: 0.85
-    icd10:
-      - N83.511  # Torsion of right ovary and ovarian pedicle
-      - N83.512  # Torsion of left ovary and ovarian pedicle
-    snomed:
-      - "65200003"  # Torsion of ovary
+- id: OB-PREECLAMPSIA
+  label: Preeclampsia
+  presentations:
+  - Hypertension (BP ≥ 140/90)
+  - Proteinuria
+  - Onset after 20 weeks gestation
+  - Headache
+  - Visual changes
+  - RUQ pain
+  - Edema
+  icd10:
+  - O14.90
+  - O14.92
+  - O14.94
+  snomed:
+  - '398254007'
+- id: OB-ECTOPIC
+  label: Ectopic Pregnancy
+  presentations:
+  - Abdominal or pelvic pain
+  - Vaginal bleeding
+  - Positive pregnancy test
+  - Adnexal mass
+  - Shoulder pain (if rupture)
+  - Hypotension/shock (if rupture)
+  icd10:
+  - O00.9
+  - O00.90
+  snomed:
+  - '34801009'
+- id: OB-HYPEREMESIS
+  label: Hyperemesis Gravidarum
+  presentations:
+  - Severe nausea and vomiting
+  - Weight loss > 5%
+  - Dehydration
+  - Electrolyte abnormalities
+  - Ketonuria
+  - Unable to tolerate oral intake
+  icd10:
+  - O21.0
+  - O21.1
+  snomed:
+  - '237241001'
+- id: OB-GDM
+  label: Gestational Diabetes Mellitus
+  presentations:
+  - Abnormal glucose tolerance test
+  - Onset during pregnancy
+  - Risk factors (obesity, family history, previous GDM)
+  - Polyuria and polydipsia
+  - Macrosomia
+  icd10:
+  - O24.419
+  - O24.919
+  snomed:
+  - '11687002'
+- id: GYN-PCOS
+  label: Polycystic Ovary Syndrome
+  presentations:
+  - Irregular menstrual cycles
+  - Hirsutism and acne
+  - Obesity
+  - Infertility
+  - Insulin resistance
+  - Polycystic ovaries on ultrasound
+  icd10:
+  - E28.2
+  snomed:
+  - '69878008'
+- id: GYN-ENDOMETRIOSIS
+  label: Endometriosis
+  presentations:
+  - Dysmenorrhea
+  - Chronic pelvic pain
+  - Dyspareunia
+  - Infertility
+  - Cyclical bowel or bladder symptoms
+  icd10:
+  - N80.9
+  - N80.0
+  snomed:
+  - '129103003'
+- id: GYN-PID
+  label: Pelvic Inflammatory Disease
+  presentations:
+  - Lower abdominal pain
+  - Cervical motion tenderness
+  - Adnexal tenderness
+  - Fever
+  - Abnormal vaginal discharge
+  - STI risk factors
+  icd10:
+  - N73.9
+  - N70.91
+  snomed:
+  - '198130006'
+- id: GYN-FIBROIDS
+  label: Uterine Fibroids (Leiomyoma)
+  presentations:
+  - Heavy menstrual bleeding
+  - Pelvic pressure or fullness
+  - Urinary frequency
+  - Constipation
+  - Palpable pelvic mass
+  - Infertility or pregnancy complications
+  icd10:
+  - D25.9
+  - D25.1
+  snomed:
+  - '95315005'
+- id: GYN-OVARIAN-CYST
+  label: Ovarian Cyst
+  presentations:
+  - Pelvic or abdominal pain
+  - Bloating or fullness
+  - Pain with intercourse
+  - Irregular menstrual cycles
+  - Adnexal mass on exam or imaging
+  icd10:
+  - N83.20
+  - N83.29
+  snomed:
+  - '399492000'
+- id: GYN-MENOPAUSE
+  label: Menopause
+  presentations:
+  - Cessation of menses > 12 months
+  - Hot flashes
+  - Night sweats
+  - Vaginal dryness
+  - Mood changes
+  - Sleep disturbances
+  icd10:
+  - N95.1
+  - N95.9
+  snomed:
+  - '289903006'
+- id: GYN-CERVICAL-CA
+  label: Cervical Cancer
+  presentations:
+  - Abnormal vaginal bleeding
+  - Postcoital bleeding
+  - Vaginal discharge
+  - Pelvic pain
+  - Abnormal Pap smear
+  - HPV infection
+  icd10:
+  - C53.9
+  - D06.9
+  snomed:
+  - '363354003'
+- id: GYN-OVARIAN-CA
+  label: Ovarian Cancer
+  presentations:
+  - Abdominal bloating or distention
+  - Pelvic pain
+  - Early satiety
+  - Urinary symptoms
+  - Weight loss
+  - Palpable adnexal mass
+  - Elevated CA-125
+  icd10:
+  - C56.9
+  - D39.10
+  snomed:
+  - '363443007'
+- id: OBGYN-PREECLAMPSIA
+  label: Preeclampsia
+  presentations:
+  - New-onset hypertension after 20 weeks gestation (BP ≥140/90 on 2 occasions 4hr
+    apart)
+  - Proteinuria (≥300 mg/24hr or protein/Cr ratio ≥0.3) OR end-organ dysfunction
+  - 'Severe features: BP ≥160/110, thrombocytopenia (<100K), Cr >1.1, elevated LFTs,
+    pulmonary edema, visual symptoms, RUQ pain'
+  - Headache (severe, persistent), visual changes (scotomata, blurred vision)
+  - Right upper quadrant or epigastric pain (liver capsule distension)
+  - Sudden weight gain, edema (hands, face - not specific but common)
+  clinical_pearls:
+  - 'Delivery is definitive treatment: Only cure for preeclampsia'
+  - 'Severe preeclampsia: Deliver at ≥34 weeks, give betamethasone if <34 weeks'
+  - 'Magnesium sulfate: Seizure prophylaxis (prevents eclampsia), load 4-6g IV, then
+    2g/hr'
+  - 'Blood pressure control: Labetalol or hydralazine if ≥160/110 (goal 140-150/90-100)'
+  - 'HELLP syndrome: Hemolysis, Elevated Liver enzymes, Low Platelets (severe form
+    of preeclampsia)'
+  management:
+  - 'Guideline-based treatment options for Preeclampsia include:'
+  - Deliver if ≥37 weeks or severe features at ≥34 weeks
+  - 'Magnesium sulfate: 4-6g IV load over 15-20min, then 2g/hr infusion (seizure prophylaxis)'
+  - 'Antihypertensives if ≥160/110: Labetalol 20mg IV (double q10min) or hydralazine
+    5-10mg IV'
+  - Betamethasone 12mg IM x2 doses 24hr apart if <34 weeks (fetal lung maturity)
+  - 'Postpartum: Continue mag sulfate 24hr, monitor BP closely (can develop preeclampsia
+    postpartum)'
+  tests:
+  - BP monitoring (≥140/90 diagnostic)
+  - Urinalysis (protein), 24hr urine protein or protein/Cr ratio
+  - CBC (platelets), CMP (Cr, LFTs)
+  - Uric acid (elevated in preeclampsia)
+  - Fetal monitoring (NST, biophysical profile)
+  referrals:
+  - OB/GYN for all preeclampsia
+  - Maternal-fetal medicine if severe or <34 weeks
+  - ICU if HELLP syndrome, eclampsia, or severe features
+  sensitivity: 0.88
+  specificity: 0.85
+  icd10:
+  - O14.90
+  - O14.12
+  snomed:
+  - '398254007'
+- id: OBGYN-ECLAMPSIA
+  label: Eclampsia
+  presentations:
+  - Seizures in pregnant woman with preeclampsia (tonic-clonic, lasting 60-90 seconds)
+  - 'Preeclampsia criteria: Hypertension + proteinuria or end-organ dysfunction after
+    20 weeks'
+  - May occur antepartum (50%), intrapartum (25%), or postpartum (25%, up to 6 weeks)
+  - Postictal confusion, headache, visual changes
+  - Can progress to status epilepticus
+  - Maternal mortality 2%, fetal mortality 8-10%
+  clinical_pearls:
+  - Eclampsia = preeclampsia + seizures (NOT due to other neurologic causes)
+  - 'Magnesium sulfate: Treatment of choice (more effective than phenytoin/benzos)'
+  - 'Deliver after stabilization: Delivery is definitive treatment'
+  - 'Recurrent seizures: Give additional magnesium 2g IV bolus'
+  - 'Monitor for complications: Stroke, pulmonary edema, HELLP syndrome, placental
+    abruption'
+  management:
+  - 'Guideline-based treatment options for Eclampsia include:'
+  - 'During seizure: Left lateral position, oxygen, protect airway, suction'
+  - 'Magnesium sulfate: 4-6g IV bolus over 15-20min, then 2g/hr infusion'
+  - 'If seizures recur: Additional 2g magnesium IV bolus'
+  - 'Antihypertensives: Labetalol or hydralazine if BP ≥160/110'
+  - 'Delivery: After maternal stabilization, deliver urgently (C-section if unstable)'
+  tests:
+  - BP monitoring, continuous fetal monitoring
+  - CBC (platelets), CMP (Cr, LFTs)
+  - Magnesium level (therapeutic 4-8 mEq/L)
+  - CT/MRI head if atypical features (focal deficit, prolonged postictal)
+  referrals:
+  - OB/GYN immediately
+  - ICU admission
+  - Neurology if atypical presentation
+  sensitivity: 0.95
+  specificity: 0.92
+  icd10:
+  - O15.00
+  - O15.1
+  - O15.2
+  snomed:
+  - '15938005'
+- id: OBGYN-HELLP-SYNDROME
+  label: HELLP Syndrome
+  presentations:
+  - 'Hemolysis: Schistocytes on smear, elevated LDH (>600 U/L), low haptoglobin, elevated
+    indirect bilirubin'
+  - 'Elevated Liver enzymes: AST/ALT >2x ULN (often >70 U/L)'
+  - 'Low Platelets: <100,000/μL'
+  - Right upper quadrant or epigastric pain (60-90%)
+  - Nausea, vomiting, malaise, headache
+  - Usually occurs 27-37 weeks (70%) or postpartum (30%, up to 7 days)
+  - May occur WITHOUT severe hypertension or proteinuria
+  clinical_pearls:
+  - HELLP is severe form of preeclampsia (microangiopathic hemolytic anemia + hepatic
+    dysfunction)
+  - 15% of HELLP do not have severe hypertension or heavy proteinuria
+  - 'Delivery is only definitive treatment: Deliver regardless of gestational age
+    if maternal instability'
+  - Maternal mortality 1%, risk of DIC, liver hematoma/rupture, placental abruption
+  - 'Postpartum HELLP: Can develop up to 7 days after delivery'
+  management:
+  - 'Guideline-based treatment options for HELLP Syndrome include:'
+  - 'Magnesium sulfate: 4-6g IV load, then 2g/hr (seizure prophylaxis)'
+  - 'Deliver: Urgently if ≥34 weeks or maternal instability, betamethasone if <34
+    weeks'
+  - 'Blood pressure control: If ≥160/110 (labetalol, hydralazine)'
+  - 'Transfuse if needed: Platelets if <20K or bleeding, pRBCs if anemia'
+  - 'Monitor postpartum: Platelets, LFTs q6-12hr (may worsen 24-48hr post-delivery)'
+  tests:
+  - CBC (platelets, hemoglobin, schistocytes)
+  - CMP (AST, ALT, LDH, bilirubin)
+  - Haptoglobin (low in hemolysis)
+  - Coagulation panel (PT, PTT, fibrinogen - assess for DIC)
+  - Type & screen (anticipate transfusion needs)
+  referrals:
+  - OB/GYN immediately
+  - Maternal-fetal medicine
+  - ICU admission
+  sensitivity: 0.85
+  specificity: 0.9
+  icd10:
+  - O14.2
+  snomed:
+  - '307534008'
+- id: OBGYN-PLACENTAL-ABRUPTION
+  label: Placental Abruption
+  presentations:
+  - Vaginal bleeding (80%) - may be concealed (20%)
+  - Abdominal pain (usually severe, constant)
+  - Uterine tenderness, firmness, or contractions (tetanic uterus)
+  - 'Fetal distress: Abnormal heart rate tracing, late decelerations'
+  - Maternal shock out of proportion to visible bleeding (if concealed abruption)
+  - 'Risk factors: Hypertension, preeclampsia, trauma, cocaine, smoking, prior abruption
+    (10% recurrence)'
+  clinical_pearls:
+  - 'Clinical diagnosis: Ultrasound only 50% sensitive (don''t rule out if negative)'
+  - 'Concealed abruption (20%): Blood trapped behind placenta, severe maternal/fetal
+    compromise'
+  - 'DIC complication (10%): Tissue factor release from placenta'
+  - 'Severe abruption: Emergent C-section (fetal distress) or rapid vaginal delivery
+    if imminent'
+  - 'Kleihauer-Betke test: Detects fetal-maternal hemorrhage, give RhoGAM if Rh-negative'
+  management:
+  - 'Guideline-based treatment options for Placental Abruption include:'
+  - 'Stabilize mother: Two large-bore IVs, fluids, type & cross 4 units PRBC'
+  - 'Continuous fetal monitoring: Assess for fetal distress'
+  - 'If fetal distress or maternal instability: Emergent C-section'
+  - 'If stable + preterm: Tocolytics controversial, betamethasone for fetal lung maturity'
+  - 'RhoGAM: 300 mcg IM if Rh-negative mother (Kleihauer-Betke to determine dose)'
+  tests:
+  - Continuous fetal heart monitoring (most important)
+  - CBC (assess anemia, monitor for DIC)
+  - Type & screen/cross 4 units
+  - Coagulation panel (PT, PTT, fibrinogen - watch for DIC)
+  - Kleihauer-Betke test (fetal-maternal hemorrhage)
+  - Ultrasound (may show retroplacental hematoma but often negative)
+  referrals:
+  - OB/GYN immediately
+  - Operating room if fetal distress
+  - ICU if maternal shock or DIC
+  sensitivity: 0.75
+  specificity: 0.8
+  icd10:
+  - O45.90
+  - O45.93
+  snomed:
+  - '415105001'
+- id: OBGYN-PLACENTA-PREVIA
+  label: Placenta Previa
+  presentations:
+  - Painless vaginal bleeding (hallmark, usually in 3rd trimester)
+  - Bleeding may be provoked by intercourse or vaginal exam
+  - Uterus soft, non-tender (unlike abruption)
+  - Fetal heart tracing usually normal (unlike abruption)
+  - 'Complete previa: Placenta completely covers cervical os'
+  - 'Marginal previa: Placenta edge reaches but doesn''t cover os'
+  - Diagnosed by ultrasound (transvaginal safest and most accurate)
+  clinical_pearls:
+  - 'Never perform digital vaginal exam if previa suspected: Can provoke massive hemorrhage'
+  - Transvaginal ultrasound is SAFE and more accurate than transabdominal
+  - Most previa diagnosed on 20-week anatomy scan (many resolve by term as uterus
+    grows)
+  - 'Complete previa: Deliver by C-section at 36-37 weeks (before labor)'
+  - 'Risk factors: Prior C-section, multiparity, advanced maternal age, smoking'
+  management:
+  - 'Guideline-based treatment options for Placenta Previa include:'
+  - 'Stable bleeding: Admit for observation, pelvic rest (no intercourse, no vaginal
+    exams)'
+  - 'If <37 weeks: Betamethasone for fetal lung maturity, expectant management'
+  - 'Active bleeding: IV access x2, type & cross 4 units, continuous fetal monitoring'
+  - 'Delivery: C-section for complete previa at 36-37 weeks (or earlier if bleeding)'
+  - 'Accreta risk: If prior C-section + previa, evaluate for accreta (MRI)'
+  tests:
+  - Ultrasound (transvaginal most accurate - SAFE to perform)
+  - Continuous fetal monitoring
+  - CBC (assess blood loss)
+  - Type & screen/cross 4 units
+  - RhoGAM if Rh-negative
+  - Consider MRI if concern for accreta (prior C-section)
+  referrals:
+  - OB/GYN for all previa
+  - Maternal-fetal medicine if accreta suspected
+  - Operating room if active hemorrhage
+  sensitivity: 0.9
+  specificity: 0.88
+  icd10:
+  - O44.10
+  - O44.12
+  snomed:
+  - '237294000'
+- id: OBGYN-ECTOPIC-PREGNANCY
+  label: Ectopic Pregnancy
+  presentations:
+  - Abdominal/pelvic pain (usually unilateral, may be diffuse)
+  - Vaginal bleeding (lighter than normal period)
+  - Positive pregnancy test (urine or serum beta-hCG)
+  - Cervical motion tenderness, adnexal tenderness on exam
+  - 'If ruptured: Hypotension, tachycardia, shoulder pain (Kehr sign from diaphragmatic
+    irritation)'
+  - Beta-hCG doesn't rise appropriately (should double every 48-72hr in early pregnancy)
+  - 'Ultrasound: No intrauterine pregnancy, may see adnexal mass or free fluid'
+  clinical_pearls:
+  - Any woman of childbearing age with abdominal pain = pregnancy test
+  - 'Discriminatory zone: beta-hCG >1500-2000 should see intrauterine gestational
+    sac on transvaginal U/S'
+  - If hCG >discriminatory zone + no IUP → presumed ectopic
+  - 'Ruptured ectopic: Surgical emergency, go to OR immediately if unstable'
+  - 'Methotrexate: For stable ectopic if hCG <5000, no cardiac activity, <3.5cm, hemodynamically
+    stable'
+  management:
+  - 'Guideline-based treatment options for Ectopic Pregnancy include:'
+  - 'Stable: Serial beta-hCG (should rise 53% in 48hr if viable IUP)'
+  - 'Methotrexate 50mg/m² IM: If stable, unruptured, hCG <5000, no fetal cardiac activity,
+    compliant patient'
+  - 'Surgery (salpingectomy or salpingostomy): If ruptured, unstable, or methotrexate
+    contraindicated'
+  - 'If ruptured: IV access x2, fluids, type & cross, emergent OB/GYN consult, OR'
+  - RhoGAM 50-300 mcg if Rh-negative
+  tests:
+  - Beta-hCG (quantitative serum)
+  - Transvaginal ultrasound (look for IUP vs ectopic mass)
+  - CBC (if ruptured)
+  - Type & screen
+  - Repeat beta-hCG in 48hr (should rise appropriately if viable IUP)
+  referrals:
+  - OB/GYN for all ectopic pregnancies
+  - Emergent OR if ruptured
+  sensitivity: 0.85
+  specificity: 0.9
+  icd10:
+  - O00.90
+  - O00.10
+  snomed:
+  - '34801009'
+- id: OBGYN-PELVIC-INFLAMMATORY-DISEASE
+  label: Pelvic Inflammatory Disease (PID)
+  presentations:
+  - Lower abdominal/pelvic pain (bilateral)
+  - Cervical motion tenderness (chandelier sign)
+  - Uterine tenderness, adnexal tenderness
+  - Abnormal vaginal discharge (purulent)
+  - Fever (may be absent in mild cases)
+  - Abnormal uterine bleeding
+  - 'Caused by ascending infection: Chlamydia trachomatis, Neisseria gonorrhoeae most
+    common'
+  clinical_pearls:
+  - 'Low threshold for diagnosis: Treat empirically if sexually active + pelvic pain
+    + CMT'
+  - 'Minimal criteria (CDC): Pelvic pain + cervical motion or uterine or adnexal tenderness'
+  - 'Test for gonorrhea AND chlamydia: Both common, often coinfection'
+  - 'Complications: Tubo-ovarian abscess, Fitz-Hugh-Curtis syndrome (perihepatitis),
+    infertility, chronic pain'
+  - 'Admit if: TOA, pregnancy, severe illness, unable to tolerate PO, failed outpatient
+    treatment'
+  management:
+  - 'Guideline-based treatment options for Pelvic Inflammatory Disease (PID) include:'
+  - 'Outpatient: Ceftriaxone 500mg IM x 1 + doxycycline 100mg PO BID x 14 days + metronidazole
+    500mg BID x 14d'
+  - 'Inpatient: Cefotetan 2g IV q12h + doxycycline 100mg IV/PO q12h, OR cefoxitin
+    2g IV q6h + doxycycline'
+  - 'Alternative: Clindamycin + gentamicin IV'
+  - 'Treat sexual partners: Empiric treatment for gonorrhea and chlamydia'
+  - 'Follow-up: 48-72 hours to ensure improving, repeat testing in 3 months (test
+    of cure)'
+  tests:
+  - 'Cervical swabs: NAAT for gonorrhea and chlamydia'
+  - Pregnancy test (rule out ectopic)
+  - Wet mount (trichomonas, BV)
+  - CBC (leukocytosis)
+  - Pelvic ultrasound if TOA suspected (complex adnexal mass)
+  referrals:
+  - OB/GYN if TOA or severe
+  - 'Admission if: TOA, unable to tolerate PO, pregnancy, severe illness'
+  - Surgery if TOA ruptured
+  sensitivity: 0.8
+  specificity: 0.75
+  icd10:
+  - N73.9
+  - N70.93
+  snomed:
+  - '198130006'
+- id: OBGYN-OVARIAN-TORSION
+  label: Ovarian Torsion
+  presentations:
+  - Sudden onset severe unilateral pelvic pain
+  - Nausea, vomiting (90%)
+  - Intermittent pain (if intermittent torsion/detorsion)
+  - Adnexal mass on exam or imaging (ovarian cyst or mass causes torsion)
+  - Fever less common (unless necrosis)
+  - Most common in reproductive age women
+  - 'Risk factors: Ovarian mass (>5 cm), pregnancy, ovarian hyperstimulation'
+  clinical_pearls:
+  - 'Surgical emergency: Ovarian necrosis occurs after 4-8 hours'
+  - 'Doppler ultrasound: Absent or decreased ovarian blood flow (but can be normal
+    if intermittent torsion)'
+  - 'Whirlpool sign: Twisted vascular pedicle on ultrasound (specific but not sensitive)'
+  - 'Don''t delay surgery for imaging if high suspicion: Ultrasound can be falsely
+    negative'
+  - 'Laparoscopy diagnostic and therapeutic: Detorsion + cystectomy or oophoropexy'
+  management:
+  - 'Guideline-based treatment options for Ovarian Torsion include:'
+  - 'Immediate: IV access, analgesia, anti-emetics, OB/GYN consult'
+  - 'Pelvic ultrasound with Doppler: Assess ovarian blood flow, identify mass'
+  - 'Emergent laparoscopy: Detorsion (untwist ovary), assess viability, remove cyst
+    if present'
+  - 'Oophoropexy: Fix ovary to prevent recurrence (if no mass removed)'
+  - 'Oophorectomy: Only if ovary clearly necrotic (try to preserve if viable)'
+  tests:
+  - Pelvic ultrasound with Doppler (decreased/absent ovarian flow, enlarged ovary,
+    whirlpool sign)
+  - Beta-hCG (rule out ectopic pregnancy)
+  - CBC (leukocytosis suggests necrosis)
+  - Urinalysis (rule out kidney stone)
+  referrals:
+  - Emergent OB/GYN or gynecologic surgery consult
+  - Operating room for diagnostic laparoscopy
+  sensitivity: 0.75
+  specificity: 0.85
+  icd10:
+  - N83.511
+  - N83.512
+  snomed:
+  - '65200003'

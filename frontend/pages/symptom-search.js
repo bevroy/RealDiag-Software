@@ -83,6 +83,8 @@ export default function SymptomSearch() {
   const [expandedComparison, setExpandedComparison] = useState({});
   const [selectedCalculator, setSelectedCalculator] = useState(null);
   const [calculatorResults, setCalculatorResults] = useState({});
+  const [homeopathyData, setHomeopathyData] = useState({});
+  const [expandedHomeopathy, setExpandedHomeopathy] = useState({});
   
   // Mobile features state
   const [offlineStats, setOfflineStats] = useState(null);
@@ -707,6 +709,28 @@ export default function SymptomSearch() {
       setResults([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchHomeopathyForResult = async (diagnosis, index) => {
+    if (homeopathyData[index]) return; // Already fetched
+    
+    try {
+      const response = await fetch(`${apiBase}/homeopathy/suggest`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ condition: diagnosis })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setHomeopathyData(prev => ({
+          ...prev,
+          [index]: data
+        }));
+      }
+    } catch (err) {
+      console.error('Failed to fetch homeopathy suggestions:', err);
     }
   };
 
@@ -2237,7 +2261,7 @@ export default function SymptomSearch() {
                                 }}>
                                   <span>💊</span> Management
                                 </h4>
-                                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#0f766e' }}>
+                                <ul style={{ margin: '0 0 0.75rem', paddingLeft: '1.5rem', color: '#0f766e' }}>
                                   {result.management.map((step, i) => (
                                     <li key={i} style={{ 
                                       marginBottom: '0.5rem', 
@@ -2249,8 +2273,208 @@ export default function SymptomSearch() {
                                     </li>
                                   ))}
                                 </ul>
+                                <div style={{
+                                  marginTop: '0.75rem',
+                                  padding: '0.5rem',
+                                  background: '#f0fdfa',
+                                  borderRadius: '4px',
+                                  fontSize: '0.8rem',
+                                  fontStyle: 'italic',
+                                  color: '#0f766e'
+                                }}>
+                                  These options are based on published guidelines and are not a substitute for clinical judgment.
+                                </div>
                               </div>
                             )}
+
+                            {/* Homeopathic Remedies Section (Optional/Complementary) */}
+                            <div style={{ 
+                              marginBottom: '1.5rem',
+                              border: '2px solid #e0e7ff',
+                              borderRadius: '8px',
+                              overflow: 'hidden'
+                            }}>
+                              <button
+                                onClick={() => {
+                                  const isExpanding = !expandedHomeopathy[idx];
+                                  setExpandedHomeopathy({...expandedHomeopathy, [idx]: isExpanding});
+                                  if (isExpanding && !homeopathyData[idx]) {
+                                    fetchHomeopathyForResult(result.label, idx);
+                                  }
+                                }}
+                                style={{
+                                  width: '100%',
+                                  padding: '1rem',
+                                  background: 'linear-gradient(to right, #e0e7ff, #ede9fe)',
+                                  color: '#4c1d95',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                  fontWeight: '700',
+                                  fontSize: '0.95rem',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
+                                  textAlign: 'left'
+                                }}
+                              >
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                  🌿 Complementary Homeopathic Remedies
+                                  <span style={{ 
+                                    fontSize: '0.75rem', 
+                                    padding: '0.2rem 0.5rem', 
+                                    background: '#c7d2fe', 
+                                    borderRadius: '4px',
+                                    fontWeight: '600'
+                                  }}>
+                                    OPTIONAL
+                                  </span>
+                                </span>
+                                <span>{expandedHomeopathy[idx] ? '▼' : '▶'}</span>
+                              </button>
+                              
+                              {expandedHomeopathy[idx] && (
+                                <div style={{ padding: '1.5rem', background: 'white' }}>
+                                  {/* Disclaimer */}
+                                  <div style={{ 
+                                    padding: '1rem', 
+                                    background: '#fef3c7', 
+                                    border: '2px solid #f59e0b',
+                                    borderRadius: '6px',
+                                    marginBottom: '1rem',
+                                    fontSize: '0.85rem',
+                                    lineHeight: '1.6'
+                                  }}>
+                                    <strong style={{ color: '#92400e', display: 'block', marginBottom: '0.5rem' }}>
+                                      ⚠️ IMPORTANT DISCLAIMER
+                                    </strong>
+                                    <p style={{ margin: '0 0 0.5rem', color: '#78350f' }}>
+                                      Homeopathic remedies are complementary suggestions based on classical homeopathic literature. 
+                                      <strong> These should NOT replace conventional medical diagnosis, treatment, or medications.</strong>
+                                    </p>
+                                    <p style={{ margin: 0, color: '#78350f' }}>
+                                      Always consult with a licensed healthcare provider for medical conditions. 
+                                      Homeopathy should be used as a complementary approach under professional guidance.
+                                    </p>
+                                  </div>
+                                  
+                                  {/* Loading state */}
+                                  {!homeopathyData[idx] && (
+                                    <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
+                                      Loading homeopathic suggestions...
+                                    </div>
+                                  )}
+                                  
+                                  {/* Remedies */}
+                                  {homeopathyData[idx] && homeopathyData[idx].remedies && homeopathyData[idx].remedies.length > 0 ? (
+                                    <>
+                                      <div style={{ marginBottom: '1rem' }}>
+                                        {homeopathyData[idx].remedies.map((remedy, remedyIdx) => (
+                                          <div key={remedyIdx} style={{ 
+                                            marginBottom: '1.5rem',
+                                            padding: '1rem',
+                                            background: '#f8fafc',
+                                            border: '1px solid #cbd5e1',
+                                            borderRadius: '6px'
+                                          }}>
+                                            <div style={{ marginBottom: '0.75rem' }}>
+                                              <strong style={{ 
+                                                color: '#4c1d95', 
+                                                fontSize: '1.05rem',
+                                                display: 'block',
+                                                marginBottom: '0.25rem'
+                                              }}>
+                                                {remedy.name}
+                                              </strong>
+                                              {remedy.common_name && (
+                                                <span style={{ 
+                                                  fontSize: '0.85rem', 
+                                                  color: '#64748b',
+                                                  fontStyle: 'italic'
+                                                }}>
+                                                  ({remedy.common_name})
+                                                </span>
+                                              )}
+                                              <span style={{ 
+                                                marginLeft: '0.5rem',
+                                                padding: '0.2rem 0.5rem',
+                                                background: '#ddd6fe',
+                                                color: '#5b21b6',
+                                                borderRadius: '4px',
+                                                fontSize: '0.75rem',
+                                                fontWeight: '600'
+                                              }}>
+                                                {remedy.potency}
+                                              </span>
+                                            </div>
+                                            
+                                            {remedy.indications && remedy.indications.length > 0 && (
+                                              <div style={{ marginBottom: '0.75rem' }}>
+                                                <div style={{ 
+                                                  fontSize: '0.8rem', 
+                                                  color: '#475569', 
+                                                  fontWeight: '600',
+                                                  marginBottom: '0.5rem'
+                                                }}>
+                                                  Key Indications:
+                                                </div>
+                                                <ul style={{ 
+                                                  margin: 0, 
+                                                  paddingLeft: '1.5rem',
+                                                  fontSize: '0.85rem',
+                                                  color: '#334155'
+                                                }}>
+                                                  {remedy.indications.map((indication, i) => (
+                                                    <li key={i} style={{ marginBottom: '0.25rem' }}>
+                                                      {indication}
+                                                    </li>
+                                                  ))}
+                                                </ul>
+                                              </div>
+                                            )}
+                                            
+                                            {remedy.modalities && (
+                                              <div style={{ 
+                                                fontSize: '0.8rem', 
+                                                color: '#64748b',
+                                                fontStyle: 'italic',
+                                                marginBottom: '0.5rem'
+                                              }}>
+                                                <strong>Modalities:</strong> {remedy.modalities}
+                                              </div>
+                                            )}
+                                            
+                                            {remedy.constitution && (
+                                              <div style={{ 
+                                                fontSize: '0.8rem', 
+                                                color: '#64748b',
+                                                fontStyle: 'italic'
+                                              }}>
+                                                <strong>Constitutional type:</strong> {remedy.constitution}
+                                              </div>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                      
+                                      {/* Sources */}
+                                      <div style={{ 
+                                        padding: '0.75rem',
+                                        background: '#f1f5f9',
+                                        borderRadius: '4px',
+                                        fontSize: '0.75rem',
+                                        color: '#475569'
+                                      }}>
+                                        <strong>Sources:</strong> {homeopathyData[idx].sources && homeopathyData[idx].sources.join(', ')}
+                                      </div>
+                                    </>
+                                  ) : homeopathyData[idx] && (
+                                    <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
+                                      No homeopathic suggestions available for this condition.
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
 
                             {/* Advanced Clinical Decision Support Features */}
                             

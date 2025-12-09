@@ -720,9 +720,11 @@ Content-Type: application/json
       "Time is muscle - early intervention critical"
     ],
     "management": [
+      "Guideline-based treatment options for Acute Coronary Syndrome (ACC/AHA) include:",
       "Aspirin 325mg immediately",
       "Heparin anticoagulation",
-      "Consider PCI vs fibrinolysis"
+      "Consider PCI vs fibrinolysis",
+      "Note: These options are based on published guidelines and are not a substitute for clinical judgment."
     ],
     "tests": ["ECG", "Troponin I/T", "CK-MB"],
     "referrals": ["Cardiology STAT"]

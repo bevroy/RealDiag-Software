@@ -1,519 +1,680 @@
 family: ent
 version: 0.1.0
-source: "American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical Practice Guidelines"
+source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
+  Practice Guidelines
 rules:
-  - id: ENT-OTITIS-MEDIA
-    label: Acute Otitis Media
-    presentations:
-      - Ear pain (otalgia)
-      - Fever
-      - Hearing loss
-      - Bulging, erythematous tympanic membrane
-      - Possible purulent drainage if TM rupture
-      - Common in children
-      - May follow upper respiratory infection
-    clinical_pearls:
-      - "Most common bacterial infection in children (peak age 6-24 months)"
-      - "Organisms: S. pneumoniae (most common), H. influenzae, M. catarrhalis, Streptococcus pyogenes"
-      - "Bulging TM with loss of landmarks = acute infection. Retracted TM = OME (effusion without infection)"
-      - "Spontaneous TM perforation occurs in 5% - pain suddenly improves with drainage"
-      - "Risk factors: Daycare, smoke exposure, bottle feeding (vs breastfeeding), pacifier use, cleft palate"
-    management:
-      - "Observation 48-72hrs if: Age >2 years, mild symptoms, unilateral, no fever, reliable follow-up"
-      - "Antibiotics if: Age <6 months (always treat), severe symptoms, bilateral, fever >39°C, immunocompromised"
-      - "First-line: Amoxicillin 80-90 mg/kg/day divided BID × 10 days (5-7 days if age >2 years)"
-      - "If penicillin allergy: Cefdinir 14 mg/kg/day OR azithromycin 10 mg/kg day 1, then 5 mg/kg days 2-5"
-      - "Treatment failure at 48-72hrs: Switch to amoxicillin-clavulanate 90 mg/kg/day (covers beta-lactamase)"
-    tests:
-      - "Clinical diagnosis based on pneumatic otoscopy (bulging, immobile TM with decreased mobility)"
-      - "Tympanometry if diagnosis uncertain (flat Type B curve in AOM)"
-      - "Tympanocentesis for culture if refractory or recurrent (rarely needed)"
-    referrals:
-      - "ENT if: Recurrent AOM (≥3 episodes in 6 months or ≥4 in 12 months) for tympanostomy tubes consideration"
-      - "ENT if: Persistent effusion >3 months or hearing loss >25 dB"
-      - "Emergency department if: Mastoiditis (postauricular swelling, ear protruding forward), meningitis signs"
-    icd10:
-      - H66.90
-    snomed:
-      - 3110003
-
-  - id: ENT-OTITIS-EXTERNA
-    label: Otitis Externa (Swimmer's Ear)
-    presentations:
-      - Ear pain, especially with movement of tragus or pinna
-      - Itching in ear canal
-      - Drainage from ear
-      - Hearing loss
-      - Swollen, erythematous ear canal
-      - Pain with chewing
-      - Associated with water exposure or trauma
-    clinical_pearls:
-      - "Pathognomonic: Tragal tenderness (pain with pulling on tragus or pinna) - distinguishes from otitis media"
-      - "Organisms: Pseudomonas aeruginosa (50%), Staphylococcus aureus, fungi (Aspergillus in chronic cases)"
-      - "Risk factors: Swimming, high humidity, hearing aids, Q-tips (disrupts protective cerumen), diabetes"
-      - "Malignant (necrotizing) otitis externa in diabetics/immunocompromised: Life-threatening, extends to skull base"
-      - "Prevention: Acidifying drops (Swim-Ear) after swimming, avoid Q-tips"
-    management:
-      - "Gentle debridement of ear canal debris to allow drops to penetrate"
-      - "Topical fluoroquinolone: Ciprofloxacin 0.3% + dexamethasone 0.1% otic drops 4 drops BID × 7 days"
-      - "Alternative: Ofloxacin 0.3% otic drops 5-10 drops BID × 7 days (safe if TM perforation)"
-      - "If canal too swollen for drops: Insert wick (compressed sponge) to allow medication delivery, remove in 2-3 days"
-      - "Pain control: NSAIDs (ibuprofen 400-600mg q6h), may need opioids for severe pain first 48hrs"
-    tests:
-      - "Clinical diagnosis based on tragal tenderness + canal inflammation"
-      - "Culture only if: Refractory to treatment, immunocompromised, or concern for resistant organism"
-      - "CT temporal bone if malignant OE suspected (diabetes + severe pain, granulation tissue, CN palsies)"
-    referrals:
-      - "ENT if: Malignant otitis externa, refractory to treatment, extensive canal stenosis"
-      - "Hospital admission for IV antibiotics (ciprofloxacin or piperacillin-tazobactam) if malignant OE"
-    icd10:
-      - H60.90
-    snomed:
-      - 3135009
-
-  - id: ENT-ACUTE-SINUSITIS
-    label: Acute Sinusitis
-    presentations:
-      - Facial pain or pressure (over maxillary or frontal sinuses)
-      - Purulent nasal discharge
-      - Nasal congestion
-      - Decreased sense of smell
-      - Fever (in bacterial sinusitis)
-      - Symptoms > 7 days or worsening after initial improvement
-      - Maxillary tooth pain
-    clinical_pearls:
-      - "Viral URI (90%): Symptoms peak at 3-5 days, improve by 10 days. Bacterial (10%): Symptoms >10 days or worsen after initial improvement"
-      - "Double-sickening: Initial improvement from viral URI, then worsening suggests bacterial superinfection"
-      - "Organisms: S. pneumoniae, H. influenzae, M. catarrhalis (same as otitis media)"
-      - "Red flags for complications: Periorbital edema, vision changes, severe headache, altered mental status, high fever"
-      - "Sinus transillumination has poor sensitivity/specificity - not recommended"
-    management:
-      - "Viral (first 7-10 days): Supportive care only - saline irrigation BID, intranasal steroids (fluticasone 2 sprays/nostril daily)"
-      - "Antibiotics ONLY if: Symptoms >10 days, severe symptoms with fever >39°C, or worsening after initial improvement"
-      - "First-line: Amoxicillin-clavulanate 875/125 mg BID or 2000/125 mg ER BID × 5-7 days"
-      - "If penicillin allergy: Doxycycline 100mg BID or levofloxacin 500mg daily × 5-7 days"
-      - "Symptomatic: Pseudoephedrine 30-60mg q4-6h (decongestant), acetaminophen/ibuprofen for pain"
-    tests:
-      - "Clinical diagnosis - imaging NOT needed for uncomplicated acute sinusitis"
-      - "CT sinus (with contrast) if: Suspected complication (orbital cellulitis, cavernous sinus thrombosis, meningitis)"
-      - "MRI brain if intracranial extension suspected"
-    referrals:
-      - "ENT if: Recurrent acute sinusitis (≥4 episodes/year), refractory to antibiotics, suspected fungal sinusitis"
-      - "Hospital admission + IV antibiotics if: Orbital cellulitis, cavernous sinus thrombosis, intracranial extension"
-      - "Ophthalmology if visual changes (orbital apex syndrome, optic nerve compression)"
-    icd10:
-      - J01.90
-    snomed:
-      - 36971009
-
-  - id: ENT-CHRONIC-SINUSITIS
-    label: Chronic Sinusitis
-    presentations:
-      - Symptoms lasting > 12 weeks
-      - Nasal congestion, obstruction
-      - Facial pressure or fullness
-      - Postnasal drip
-      - Decreased sense of smell
-      - May have nasal polyps
-      - Recurrent acute exacerbations
-    clinical_pearls:
-      - "Inflammation of sinuses >12 weeks (vs acute <4 weeks, subacute 4-12 weeks)"
-      - "Pathophysiology: Ostiomeatal complex obstruction → impaired drainage → chronic inflammation"
-      - "With nasal polyps: Suspect aspirin-exacerbated respiratory disease (Samter's triad: polyps, asthma, aspirin sensitivity)"
-      - "Fungal sinusitis: Allergic fungal sinusitis (thick mucin, eosinophils) vs invasive (immunocompromised, life-threatening)"
-      - "Medical therapy fails in 20-30% - functional endoscopic sinus surgery (FESS) improves drainage"
-    management:
-      - "Saline nasal irrigation (neti pot or squeeze bottle) BID - most effective medical therapy"
-      - "Intranasal corticosteroids: Fluticasone 2 sprays each nostril daily × 3-6 months (first-line)"
-      - "Trial of prolonged antibiotics: Amoxicillin-clavulanate or doxycycline × 3 weeks (culture-directed if available)"
-      - "Oral corticosteroids: Prednisone 40-60mg daily × 5-7 days for acute exacerbations or nasal polyps"
-      - "If refractory: FESS (functional endoscopic sinus surgery) to restore drainage pathways"
-    tests:
-      - "CT sinus without contrast (REQUIRED for diagnosis) - shows mucosal thickening, opacification, polyps"
-      - "Nasal endoscopy by ENT - visualize polyps, purulent discharge, anatomic obstruction"
-      - "Allergy testing if suspected allergic component (IgE, skin testing)"
-      - "Sweat chloride or genetic testing if concern for cystic fibrosis (children/young adults with polyps)"
-    referrals:
-      - "ENT for all chronic sinusitis - nasal endoscopy and FESS evaluation"
-      - "Allergy/Immunology if refractory or allergic fungal sinusitis"
-      - "Immunology workup if recurrent infections (consider immunodeficiency)"
-    icd10:
-      - J32.9
-    snomed:
-      - 40055000
-
-  - id: ENT-PHARYNGITIS-STREP
-    label: Streptococcal Pharyngitis (Strep Throat)
-    presentations:
-      - Sore throat (sudden onset)
-      - Fever
-      - Tonsillar exudates
-      - Tender anterior cervical lymphadenopathy
-      - Absence of cough
-      - Palatal petechiae
-      - Positive rapid strep test or throat culture
-    clinical_pearls:
-      - "Caused by Group A Streptococcus (Streptococcus pyogenes) - peak age 5-15 years"
-      - "Centor criteria (score 0-4): Fever, tonsillar exudates, tender cervical nodes, absence of cough. Score ≥3 test/treat"
-      - "Complications if untreated: Acute rheumatic fever (2-3 weeks), post-strep glomerulonephritis (1-3 weeks), peritonsillar abscess"
-      - "Scarlet fever: Strep pharyngitis + sandpaper rash (erythematous, blanching, starts trunk/neck)"
-      - "Rapid strep test 85-90% sensitive - if negative with high suspicion, send throat culture (gold standard)"
-    management:
-      - "Penicillin V 500mg PO BID × 10 days (first-line, narrow spectrum, cheap) OR amoxicillin 500mg TID × 10 days"
-      - "Single-dose option: Benzathine penicillin G 1.2 million units IM × 1 (ensures compliance)"
-      - "If penicillin allergy: Cephalexin 500mg BID × 10 days OR azithromycin 500mg day 1, then 250mg days 2-5"
-      - "Symptomatic: NSAIDs (ibuprofen 400-600mg q6h), throat lozenges, salt water gargles"
-      - "Return to school/work 24 hours after starting antibiotics (no longer contagious)"
-    tests:
-      - "Rapid antigen detection test (RADT) - 85-90% sensitive, 95% specific"
-      - "Throat culture if RADT negative but high clinical suspicion (Centor ≥3) - results in 24-48hrs"
-      - "DO NOT test/treat if: Centor score 0-1 (low probability), age <3 years (rare, complications rare)"
-    referrals:
-      - "ENT if: Recurrent strep throat (≥7 episodes in 1 year) - consider tonsillectomy"
-      - "Emergency department if: Peritonsillar abscess, inability to swallow/drooling, respiratory distress"
-    icd10:
-      - J02.0
-    snomed:
-      - 43878008
-
-  - id: ENT-PHARYNGITIS-VIRAL
-    label: Viral Pharyngitis
-    presentations:
-      - Sore throat
-      - Usually associated with other URI symptoms (cough, rhinorrhea)
-      - Low-grade or no fever
-      - Pharyngeal erythema without exudates
-      - Gradual onset
-      - Self-limited course
-    clinical_pearls:
-      - "Most common cause of pharyngitis (85-95%) - adenovirus, rhinovirus, coronavirus, EBV, influenza"
-      - "Infectious mononucleosis (EBV): Severe pharyngitis + fatigue + posterior cervical nodes + splenomegaly"
-      - "DO NOT give amoxicillin if mono suspected - causes morbilliform rash in 80-90%"
-      - "Herpangina (coxsackievirus): Vesicles/ulcers on posterior pharynx, common in children summer/fall"
-      - "Antibiotics do NOT help viral pharyngitis and contribute to resistance - supportive care only"
-    management:
-      - "Symptomatic treatment only: NSAIDs (ibuprofen 400-600mg q6h), acetaminophen 650-1000mg q6h"
-      - "Throat lozenges with benzocaine or menthol, warm salt water gargles (1/2 tsp salt in 8oz water)"
-      - "Increase oral fluids, rest, humidified air"
-      - "If EBV (mono): Avoid contact sports for 3-4 weeks (risk of splenic rupture), corticosteroids if severe tonsillar enlargement"
-      - "Duration: Usually resolves in 5-7 days"
-    tests:
-      - "Clinical diagnosis - testing NOT needed if viral features present (cough, rhinorrhea, conjunctivitis)"
-      - "Rapid strep test only if Centor score ≥2-3 to rule out bacterial infection"
-      - "EBV testing (Monospot, EBV VCA IgM) if: Severe pharyngitis + fatigue + posterior cervical nodes + splenomegaly"
-    referrals:
-      - "Emergency department if: Severe dysphagia with dehydration, respiratory distress, suspected peritonsillar abscess"
-      - "Return precautions: If symptoms worsen or don't improve in 7-10 days"
-    icd10:
-      - J02.9
-    snomed:
-      - 1532007
-
-  - id: ENT-TONSILLITIS
-    label: Acute Tonsillitis
-    presentations:
-      - Severe sore throat
-      - Fever
-      - Enlarged, erythematous tonsils with exudates
-      - Dysphagia
-      - Tender cervical lymphadenopathy
-      - Muffled voice (hot potato voice)
-      - May progress to peritonsillar abscess
-    clinical_pearls:
-      - "Usually bacterial (Group A Strep most common) but can be viral (EBV, adenovirus)"
-      - "Grading: 0 (within tonsillar fossa), 1+ (beyond pillars), 2+ (midline), 3+ (midline touching), 4+ (kissing tonsils)"
-      - "Hot potato voice: Muffled quality suggests peritonsillar involvement or abscess"
-      - "Recurrent tonsillitis: ≥7 episodes in 1 year OR ≥5/year for 2 years OR ≥3/year for 3 years = tonsillectomy indication"
-      - "Complications: Peritonsillar abscess (most common), retropharyngeal abscess, Lemierre syndrome (internal jugular thrombophlebitis)"
-    management:
-      - "If bacterial suspected (exudates, fever, anterior cervical nodes, no cough): Rapid strep test"
-      - "Antibiotics if strep positive: Penicillin V 500mg BID or amoxicillin 500mg TID × 10 days"
-      - "If severe/unable to swallow: Dexamethasone 10mg IM/PO × 1 (reduces pain, speeds recovery)"
-      - "Pain control: NSAIDs (ibuprofen 600-800mg q6-8h), opioids (hydrocodone 5-10mg q4-6h PRN) if severe"
-      - "Hydration critical - IV fluids if unable to tolerate PO"
-    tests:
-      - "Rapid strep test + throat culture to confirm bacterial etiology"
-      - "Monospot if severe pharyngitis + fatigue + splenomegaly (EBV)"
-      - "CT neck with contrast if concern for abscess (unilateral swelling, trismus, uvular deviation)"
-    referrals:
-      - "ENT if: Recurrent tonsillitis meeting criteria for tonsillectomy"
-      - "Hospital admission if: Unable to swallow/dehydrated, respiratory compromise, suspected abscess"
-      - "Emergency department if: Trismus, drooling, respiratory distress, unilateral tonsillar swelling"
-    icd10:
-      - J03.90
-    snomed:
-      - 90176007
-
-  - id: ENT-PERITONSILLAR-ABSCESS
-    label: Peritonsillar Abscess
-    presentations:
-      - Severe unilateral throat pain
-      - Trismus (difficulty opening mouth)
-      - Muffled voice (hot potato voice)
-      - Drooling
-      - Unilateral tonsillar swelling with uvular deviation
-      - High fever
-      - Medical emergency requiring drainage
-    clinical_pearls:
-      - "Most common deep space infection of head/neck - usually complication of bacterial tonsillitis"
-      - "Classic triad: Trismus + uvular deviation + hot potato voice"
-      - "Organisms: Group A Strep, Staph aureus, anaerobes (Fusobacterium, Prevotella)"
-      - "Needle aspiration yields pus (confirms diagnosis) - aspirate at point of maximal fluctuance"
-      - "Complications: Airway obstruction, extension to retropharyngeal space, carotid sheath, mediastinum (necrotizing fasciitis)"
-    management:
-      - "Needle aspiration or incision & drainage (I&D) REQUIRED - medical therapy alone insufficient"
-      - "Anesthesia: Topical benzocaine spray + lidocaine 1% with epinephrine injection at aspiration site"
-      - "Aspirate at point of maximal fluctuance (usually superior and lateral to tonsil) with 18-gauge needle"
-      - "Antibiotics: Ampicillin-sulbactam 3g IV q6h OR clindamycin 600mg IV q8h (covers anaerobes)"
-      - "Corticosteroids: Dexamethasone 10mg IV × 1 (reduces pain, inflammation)"
-    tests:
-      - "Clinical diagnosis + needle aspiration yielding purulent material"
-      - "CT neck with IV contrast if diagnosis uncertain or concern for deeper extension (retropharyngeal abscess)"
-      - "Culture aspirated pus to guide antibiotic therapy"
-    referrals:
-      - "ENT urgent consult for drainage (needle aspiration or I&D)"
-      - "Hospital admission for IV antibiotics, hydration, airway monitoring"
-      - "Consider quinsy tonsillectomy (immediate) or interval tonsillectomy (4-6 weeks) to prevent recurrence"
-    icd10:
-      - J36
-    snomed:
-      - 44612001
-
-  - id: ENT-HEARING-LOSS-CONDUCTIVE
-    label: Conductive Hearing Loss
-    presentations:
-      - Difficulty hearing
-      - Abnormal Rinne test (bone conduction > air conduction)
-      - Weber lateralizes to affected ear
-      - Causes - cerumen impaction, otitis media, otosclerosis, TM perforation
-      - May be reversible with treatment of underlying cause
-    clinical_pearls:
-      - "Problem in outer/middle ear preventing sound transmission to inner ear - often reversible"
-      - "Rinne test: Tuning fork on mastoid (bone conduction) then near ear canal (air). Normally AC > BC. If BC > AC = conductive loss"
-      - "Weber test: Tuning fork on forehead. Lateralizes TO affected ear in conductive loss (bone conduction bypasses blockage)"
-      - "Causes: Cerumen (most common), OME (effusion), TM perforation, cholesteatoma, otosclerosis, ossicular chain disruption"
-      - "Otosclerosis: Familial condition with stapes fixation, starts age 20-40, slow progressive loss, may hear better in noise (paracusis)"
-    management:
-      - "Cerumen impaction: Irrigation (warm water, contraindicated if TM perforation) OR manual removal with curette/suction"
-      - "OME (effusion): Observation 3 months, then myringotomy + tubes if persistent or bilateral with hearing loss >25 dB"
-      - "TM perforation: Most heal spontaneously in 2-3 months. Keep dry (ear plugs when swimming). If >3 months, tympanoplasty"
-      - "Otosclerosis: Stapedectomy (surgical - removes fixed stapes, replaces with prosthesis, 90% success) OR hearing aid"
-      - "Cholesteatoma: Surgical excision (can erode ossicles, mastoid, cause complications)"
-    tests:
-      - "Otoscopy to visualize ear canal and TM (cerumen, effusion, perforation, cholesteatoma)"
-      - "Rinne and Weber tuning fork tests (512 Hz) - bedside screening"
-      - "Audiometry: Air and bone conduction thresholds (air-bone gap >10 dB = conductive loss)"
-      - "Tympanometry: Flat Type B curve (OME, perforation), Type As (stiffness/otosclerosis)"
-    referrals:
-      - "ENT for: Persistent OME >3 months, TM perforation >3 months, suspected cholesteatoma or otosclerosis"
-      - "Audiology for hearing aid evaluation if not surgical candidate"
-    icd10:
-      - H90.2
-    snomed:
-      - 44057004
-
-  - id: ENT-HEARING-LOSS-SENSORINEURAL
-    label: Sensorineural Hearing Loss
-    presentations:
-      - Difficulty hearing, especially high frequencies
-      - Normal Rinne test (air > bone conduction)
-      - Weber lateralizes to better ear
-      - Causes - presbycusis (aging), noise exposure, ototoxic drugs, Meniere's
-      - Often permanent
-      - May have tinnitus
-    clinical_pearls:
-      - "Problem in inner ear (cochlea) or auditory nerve - usually permanent"
-      - "Rinne test: AC > BC bilaterally (normal). Weber: Lateralizes to BETTER ear (away from affected ear)"
-      - "Presbycusis (age-related): Bilateral high-frequency loss, difficulty with speech discrimination, starts age 50-60"
-      - "Sudden sensorineural hearing loss (SSNHL): Hearing loss over <72 hours - EMERGENCY, treat within 2 weeks for best outcome"
-      - "Ototoxic drugs: Aminoglycosides (gentamicin), cisplatin, loop diuretics (furosemide), aspirin high-dose"
-    management:
-      - "Presbycusis: Hearing aids (amplification) - improve quality of life, reduce social isolation"
-      - "Sudden SSNHL: HIGH-DOSE corticosteroids (prednisone 60mg daily × 10-14 days) within 2 weeks - may recover 50-60%"
-      - "Alternative for SSNHL: Intratympanic dexamethasone injections (4mg/mL) if oral steroids contraindicated"
-      - "Severe bilateral: Cochlear implant candidacy evaluation (if hearing aids insufficient)"
-      - "Prevention: Hearing protection in noisy environments (>85 dB), avoid ototoxic drugs when possible"
-    tests:
-      - "Audiometry: Air and bone conduction thresholds (both decreased equally, no air-bone gap)"
-      - "Speech discrimination testing (word recognition scores) - helps predict hearing aid benefit"
-      - "MRI internal auditory canals with contrast if: Asymmetric loss, sudden loss, tinnitus (rule out acoustic neuroma)"
-      - "If sudden SSNHL: CBC, ESR, TSH, RPR, Lyme, ANA (autoimmune workup)"
-    referrals:
-      - "ENT urgent (within 24-48hrs) if sudden sensorineural hearing loss - time-sensitive treatment"
-      - "Audiology for hearing aid evaluation and fitting"
-      - "ENT for cochlear implant evaluation if severe-profound bilateral loss"
-    icd10:
-      - H90.5
-    snomed:
-      - 60700002
-
-  - id: ENT-MENIERES-DISEASE
-    label: Meniere's Disease
-    presentations:
-      - Episodic vertigo (hours duration)
-      - Fluctuating hearing loss (typically low frequency)
-      - Tinnitus (roaring quality)
-      - Aural fullness (sensation of ear pressure)
-      - Nausea and vomiting during episodes
-      - Progressive hearing loss over time
-    clinical_pearls:
-      - "Classic triad: Episodic vertigo + fluctuating hearing loss + tinnitus (must have all 3 for diagnosis)"
-      - "Pathophysiology: Endolymphatic hydrops (fluid buildup in inner ear)"
-      - "Vertigo episodes last 20 minutes to 12 hours (typically 2-4 hours) - shorter or longer suggests alternate diagnosis"
-      - "Hearing loss: Initially low-frequency, fluctuating. Over years becomes permanent high-frequency loss"
-      - "Tumarkin attacks (drop attacks): Sudden falls without warning or loss of consciousness in advanced disease"
-    management:
-      - "Acute episode: Meclizine 25-50mg q6h PRN, promethazine 25mg PO/PR q6h, or diazepam 2-5mg PO (vestibular suppressants)"
-      - "Dietary: Low-sodium diet (<2g/day), avoid caffeine, alcohol, tobacco (reduce endolymphatic pressure)"
-      - "Diuretic: Hydrochlorothiazide 25mg + triamterene 37.5mg daily (Dyazide) - reduces fluid retention"
-      - "Refractory: Intratympanic gentamicin injections (ablates vestibular function) or betahistine 16-24mg TID (not FDA approved in US)"
-      - "Surgical (last resort): Endolymphatic sac decompression or vestibular nerve section if medically refractory"
-    tests:
-      - "Clinical diagnosis based on symptoms (episodic vertigo + hearing loss + tinnitus)"
-      - "Audiometry: Low-frequency sensorineural hearing loss (fluctuating early, progressive later)"
-      - "MRI internal auditory canals with contrast to rule out acoustic neuroma (mimics Meniere's)"
-      - "Electrocochleography (ECoG) or VEMP testing if diagnosis uncertain"
-    referrals:
-      - "ENT/Neurotology for all suspected Meniere's disease - specialized testing and management"
-      - "Vestibular rehabilitation therapy if persistent dysequilibrium"
-    icd10:
-      - H81.09
-    snomed:
-      - 13445001
-
-  - id: ENT-EPISTAXIS
-    label: Epistaxis (Nosebleed)
-    presentations:
-      - Bleeding from nose
-      - Anterior epistaxis (90%) - visible bleeding from Little's area
-      - Posterior epistaxis (10%) - blood in posterior pharynx
-      - Risk factors - trauma, dry air, anticoagulation, hypertension
-      - May be severe requiring packing or cauterization
-    clinical_pearls:
-      - "Anterior: Kiesselbach's plexus (Little's area) on anterior septum - visible, easier to control"
-      - "Posterior: Woodruff's plexus (posterior/superior nasal cavity) - more severe, harder to control, elderly patients"
-      - "Risk factors: Digital trauma (nose picking), dry air, anticoagulation, hypertension, NSAIDs, intranasal drugs (cocaine, steroid sprays)"
-      - "Hereditary hemorrhagic telangiectasia (HHT/Osler-Weber-Rendu): Recurrent epistaxis + telangiectasias + family history"
-      - "Hypertension doesn't cause epistaxis but makes it harder to control once started"
-    management:
-      - "First-aid: Pinch soft part of nose (NOT bridge) for 10-15 minutes, lean forward (prevent swallowing blood), ice to nose"
-      - "If continues: Topical vasoconstrictor (oxymetazoline spray or phenylephrine-soaked cotton) + silver nitrate cautery to bleeding site"
-      - "Anterior packing: Nasal tampon (Rapid Rhino) or petroleum gauze packing if cautery fails - remove in 2-3 days"
-      - "Posterior packing: Foley catheter or posterior pack if anterior pack fails - admit for monitoring, O2, IV antibiotics (toxic shock risk)"
-      - "Prevention: Saline gel or Vaseline to nares BID, humidifier, treat hypertension, reverse coagulopathy"
-    tests:
-      - "Nasal endoscopy to identify bleeding source (especially posterior)"
-      - "If severe or recurrent: CBC (anemia), PT/INR, PTT (coagulopathy), Type & Screen"
-      - "Blood pressure check (control hypertension)"
-    referrals:
-      - "ENT if: Posterior epistaxis, refractory to anterior packing, recurrent epistaxis, or visible mass/lesion"
-      - "Hospital admission if: Posterior pack placed, severe bleeding, hemodynamically unstable, coagulopathy"
-      - "ENT may do: Endoscopic cautery or arterial ligation (sphenopalatine artery) for refractory cases"
-    icd10:
-      - R04.0
-    snomed:
-      - 12441001
-
-  - id: ENT-EPIGLOTTITIS
-    label: Epiglottitis
-    presentations:
-      - Severe sore throat
-      - High fever
-      - Drooling
-      - Stridor
-      - Tripod position (leaning forward)
-      - Muffled voice
-      - Dysphagia
-      - Medical emergency - airway obstruction risk
-      - Thumb sign on lateral neck X-ray
-    clinical_pearls:
-      - "Life-threatening airway emergency - can progress to complete obstruction in hours"
-      - "4 D's: Drooling, Dysphagia, Dysphonia (muffled voice), Distress (respiratory)"
-      - "Organism: H. influenzae type B (rare now due to Hib vaccine), Strep species, Staph aureus"
-      - "Peak age: Adults (20-40 years) now more common than children since Hib vaccine introduced"
-      - "DO NOT examine oropharynx with tongue depressor - may precipitate laryngospasm and airway obstruction"
-    management:
-      - "Call anesthesia/ENT IMMEDIATELY - do not leave patient unattended"
-      - "Keep patient calm, sitting upright in position of comfort (tripod position)"
-      - "Secure airway in controlled setting (OR): Intubation or tracheostomy (difficult intubation - swollen epiglottis)"
-      - "Antibiotics AFTER airway secured: Ceftriaxone 2g IV q24h OR cefotaxime 2g IV q8h"
-      - "Add vancomycin 15-20mg/kg IV q12h if concern for MRSA"
-    tests:
-      - "DO NOT obtain labs or imaging if diagnosis suspected - risk of airway obstruction during procedures"
-      - "Lateral neck X-ray (portable at bedside if stable): Thumb sign (swollen epiglottis) - but don't delay treatment"
-      - "Visualization of cherry-red epiglottis with fiberoptic laryngoscopy - only in controlled setting by ENT/anesthesia"
-      - "Blood cultures after airway secured"
-    referrals:
-      - "ENT + Anesthesia STAT - airway emergency"
-      - "ICU admission for airway monitoring after intubation"
-      - "Average intubation duration 2-3 days, then extubation when epiglottis improved on direct visualization"
-    icd10:
-      - J05.10
-    snomed:
-      - 80384002
-
-  - id: ENT-LARYNGITIS
-    label: Acute Laryngitis
-    presentations:
-      - Hoarseness or voice loss
-      - Dry cough
-      - Sore throat (mild)
-      - Usually follows viral URI
-      - Voice worsens with use
-      - Self-limited (typically 1-2 weeks)
-    clinical_pearls:
-      - "Viral laryngitis (95%): Self-limited inflammation of larynx, peak symptoms 2-3 days, resolves in 1-2 weeks"
-      - "Causes: Rhinovirus, adenovirus, influenza, RSV (follows URI symptoms)"
-      - "Voice rest: Don't whisper (causes more strain) - speak softly or write notes"
-      - "Chronic hoarseness >3 weeks: Red flag for vocal cord nodules, polyps, paralysis, or laryngeal cancer - needs laryngoscopy"
-      - "Reinke's edema: Chronic smoking causes diffuse polypoid degeneration of vocal cords (deep, hoarse voice)"
-    management:
-      - "Voice rest (most important): Minimize talking for 2-3 days, don't whisper"
-      - "Hydration: Increase fluids (8+ glasses/day), humidified air"
-      - "Avoid irritants: No smoking, alcohol, caffeine (dehydrating)"
-      - "Symptomatic: Throat lozenges, warm tea with honey (soothes throat)"
-      - "NO ANTIBIOTICS (viral) - corticosteroids only if professional voice user (singer) with urgent need"
-    tests:
-      - "Clinical diagnosis - no testing needed for acute viral laryngitis"
-      - "Laryngoscopy (by ENT) if: Hoarseness >3 weeks, no URI symptoms, smoker, unilateral symptoms, dysphagia"
-    referrals:
-      - "ENT for direct laryngoscopy if: Hoarseness >3 weeks (rule out vocal cord pathology, cancer)"
-      - "Speech-language pathology for voice therapy if chronic voice strain or vocal cord nodules"
-    icd10:
-      - J04.0
-    snomed:
-      - 45913009
-
-  - id: ENT-ALLERGIC-RHINITIS
-    label: Allergic Rhinitis
-    presentations:
-      - Nasal congestion, rhinorrhea
-      - Sneezing
-      - Itchy nose, eyes, throat
-      - Postnasal drip
-      - Watery eyes
-      - Seasonal or perennial
-      - Pale, boggy nasal mucosa on exam
-    clinical_pearls:
-      - "IgE-mediated hypersensitivity: Seasonal (pollens - spring/fall) or perennial (dust mites, mold, pet dander)"
-      - "Allergic shiners: Dark circles under eyes from venous congestion. Allergic salute: Upward nose rubbing causing transverse nasal crease"
-      - "Differentiate from viral URI: Itching (eyes, nose, throat) = allergy. Purulent discharge, fever = viral/bacterial"
-      - "Associated conditions: Asthma (80% of asthmatics have allergic rhinitis), sinusitis, otitis media with effusion"
-      - "Perennial triggers: Dust mites (bedroom most important), pet dander, cockroach, mold"
-    management:
-      - "Avoidance: Allergen-impermeable pillow/mattress covers, HEPA filters, remove pets from bedroom, reduce indoor humidity <50%"
-      - "First-line: Intranasal corticosteroids (fluticasone 2 sprays each nostril daily) - most effective, takes 2-4 weeks for full benefit"
-      - "Second-gen oral antihistamines: Cetirizine 10mg or loratadine 10mg daily (less sedating than first-gen)"
-      - "Add if inadequate response: Intranasal antihistamine (azelastine 2 sprays BID) + pseudoephedrine 30-60mg q4-6h for congestion"
-      - "Severe/refractory: Allergen immunotherapy (allergy shots) - only treatment that modifies disease, 80-90% effective"
-    tests:
-      - "Clinical diagnosis - testing not routinely needed"
-      - "Allergy testing (skin prick or specific IgE) if: Considering immunotherapy, unclear triggers, refractory to treatment"
-      - "Nasal cytology (rarely done): Eosinophils on nasal smear support allergic etiology"
-    referrals:
-      - "Allergy/Immunology if: Considering immunotherapy, refractory to medical management, unclear diagnosis"
-      - "ENT if: Nasal polyps, chronic sinusitis, or structural abnormalities (deviated septum)"
-    icd10:
-      - J30.9
-    snomed:
-      - 61582004
+- id: ENT-OTITIS-MEDIA
+  label: Acute Otitis Media
+  presentations:
+  - Ear pain (otalgia)
+  - Fever
+  - Hearing loss
+  - Bulging, erythematous tympanic membrane
+  - Possible purulent drainage if TM rupture
+  - Common in children
+  - May follow upper respiratory infection
+  clinical_pearls:
+  - Most common bacterial infection in children (peak age 6-24 months)
+  - 'Organisms: S. pneumoniae (most common), H. influenzae, M. catarrhalis, Streptococcus
+    pyogenes'
+  - Bulging TM with loss of landmarks = acute infection. Retracted TM = OME (effusion
+    without infection)
+  - Spontaneous TM perforation occurs in 5% - pain suddenly improves with drainage
+  - 'Risk factors: Daycare, smoke exposure, bottle feeding (vs breastfeeding), pacifier
+    use, cleft palate'
+  management:
+  - 'Guideline-based treatment options for Acute Otitis Media include:'
+  - 'Observation 48-72hrs if: Age >2 years, mild symptoms, unilateral, no fever, reliable
+    follow-up'
+  - 'Antibiotics if: Age <6 months (always treat), severe symptoms, bilateral, fever
+    >39°C, immunocompromised'
+  - 'First-line: Amoxicillin 80-90 mg/kg/day divided BID × 10 days (5-7 days if age
+    >2 years)'
+  - 'If penicillin allergy: Cefdinir 14 mg/kg/day OR azithromycin 10 mg/kg day 1,
+    then 5 mg/kg days 2-5'
+  - 'Treatment failure at 48-72hrs: Switch to amoxicillin-clavulanate 90 mg/kg/day
+    (covers beta-lactamase)'
+  tests:
+  - Clinical diagnosis based on pneumatic otoscopy (bulging, immobile TM with decreased
+    mobility)
+  - Tympanometry if diagnosis uncertain (flat Type B curve in AOM)
+  - Tympanocentesis for culture if refractory or recurrent (rarely needed)
+  referrals:
+  - 'ENT if: Recurrent AOM (≥3 episodes in 6 months or ≥4 in 12 months) for tympanostomy
+    tubes consideration'
+  - 'ENT if: Persistent effusion >3 months or hearing loss >25 dB'
+  - 'Emergency department if: Mastoiditis (postauricular swelling, ear protruding
+    forward), meningitis signs'
+  icd10:
+  - H66.90
+  snomed:
+  - 3110003
+- id: ENT-OTITIS-EXTERNA
+  label: Otitis Externa (Swimmer's Ear)
+  presentations:
+  - Ear pain, especially with movement of tragus or pinna
+  - Itching in ear canal
+  - Drainage from ear
+  - Hearing loss
+  - Swollen, erythematous ear canal
+  - Pain with chewing
+  - Associated with water exposure or trauma
+  clinical_pearls:
+  - 'Pathognomonic: Tragal tenderness (pain with pulling on tragus or pinna) - distinguishes
+    from otitis media'
+  - 'Organisms: Pseudomonas aeruginosa (50%), Staphylococcus aureus, fungi (Aspergillus
+    in chronic cases)'
+  - 'Risk factors: Swimming, high humidity, hearing aids, Q-tips (disrupts protective
+    cerumen), diabetes'
+  - 'Malignant (necrotizing) otitis externa in diabetics/immunocompromised: Life-threatening,
+    extends to skull base'
+  - 'Prevention: Acidifying drops (Swim-Ear) after swimming, avoid Q-tips'
+  management:
+  - 'Guideline-based treatment options for Otitis Externa (Swimmer''s Ear) include:'
+  - Gentle debridement of ear canal debris to allow drops to penetrate
+  - 'Topical fluoroquinolone: Ciprofloxacin 0.3% + dexamethasone 0.1% otic drops 4
+    drops BID × 7 days'
+  - 'Alternative: Ofloxacin 0.3% otic drops 5-10 drops BID × 7 days (safe if TM perforation)'
+  - 'If canal too swollen for drops: Insert wick (compressed sponge) to allow medication
+    delivery, remove in 2-3 days'
+  - 'Pain control: NSAIDs (ibuprofen 400-600mg q6h), may need opioids for severe pain
+    first 48hrs'
+  tests:
+  - Clinical diagnosis based on tragal tenderness + canal inflammation
+  - 'Culture only if: Refractory to treatment, immunocompromised, or concern for resistant
+    organism'
+  - CT temporal bone if malignant OE suspected (diabetes + severe pain, granulation
+    tissue, CN palsies)
+  referrals:
+  - 'ENT if: Malignant otitis externa, refractory to treatment, extensive canal stenosis'
+  - Hospital admission for IV antibiotics (ciprofloxacin or piperacillin-tazobactam)
+    if malignant OE
+  icd10:
+  - H60.90
+  snomed:
+  - 3135009
+- id: ENT-ACUTE-SINUSITIS
+  label: Acute Sinusitis
+  presentations:
+  - Facial pain or pressure (over maxillary or frontal sinuses)
+  - Purulent nasal discharge
+  - Nasal congestion
+  - Decreased sense of smell
+  - Fever (in bacterial sinusitis)
+  - Symptoms > 7 days or worsening after initial improvement
+  - Maxillary tooth pain
+  clinical_pearls:
+  - 'Viral URI (90%): Symptoms peak at 3-5 days, improve by 10 days. Bacterial (10%):
+    Symptoms >10 days or worsen after initial improvement'
+  - 'Double-sickening: Initial improvement from viral URI, then worsening suggests
+    bacterial superinfection'
+  - 'Organisms: S. pneumoniae, H. influenzae, M. catarrhalis (same as otitis media)'
+  - 'Red flags for complications: Periorbital edema, vision changes, severe headache,
+    altered mental status, high fever'
+  - Sinus transillumination has poor sensitivity/specificity - not recommended
+  management:
+  - 'Guideline-based treatment options for Acute Sinusitis include:'
+  - 'Viral (first 7-10 days): Supportive care only - saline irrigation BID, intranasal
+    steroids (fluticasone 2 sprays/nostril daily)'
+  - 'Antibiotics ONLY if: Symptoms >10 days, severe symptoms with fever >39°C, or
+    worsening after initial improvement'
+  - 'First-line: Amoxicillin-clavulanate 875/125 mg BID or 2000/125 mg ER BID × 5-7
+    days'
+  - 'If penicillin allergy: Doxycycline 100mg BID or levofloxacin 500mg daily × 5-7
+    days'
+  - 'Symptomatic: Pseudoephedrine 30-60mg q4-6h (decongestant), acetaminophen/ibuprofen
+    for pain'
+  tests:
+  - Clinical diagnosis - imaging NOT needed for uncomplicated acute sinusitis
+  - 'CT sinus (with contrast) if: Suspected complication (orbital cellulitis, cavernous
+    sinus thrombosis, meningitis)'
+  - MRI brain if intracranial extension suspected
+  referrals:
+  - 'ENT if: Recurrent acute sinusitis (≥4 episodes/year), refractory to antibiotics,
+    suspected fungal sinusitis'
+  - 'Hospital admission + IV antibiotics if: Orbital cellulitis, cavernous sinus thrombosis,
+    intracranial extension'
+  - Ophthalmology if visual changes (orbital apex syndrome, optic nerve compression)
+  icd10:
+  - J01.90
+  snomed:
+  - 36971009
+- id: ENT-CHRONIC-SINUSITIS
+  label: Chronic Sinusitis
+  presentations:
+  - Symptoms lasting > 12 weeks
+  - Nasal congestion, obstruction
+  - Facial pressure or fullness
+  - Postnasal drip
+  - Decreased sense of smell
+  - May have nasal polyps
+  - Recurrent acute exacerbations
+  clinical_pearls:
+  - Inflammation of sinuses >12 weeks (vs acute <4 weeks, subacute 4-12 weeks)
+  - 'Pathophysiology: Ostiomeatal complex obstruction → impaired drainage → chronic
+    inflammation'
+  - 'With nasal polyps: Suspect aspirin-exacerbated respiratory disease (Samter''s
+    triad: polyps, asthma, aspirin sensitivity)'
+  - 'Fungal sinusitis: Allergic fungal sinusitis (thick mucin, eosinophils) vs invasive
+    (immunocompromised, life-threatening)'
+  - Medical therapy fails in 20-30% - functional endoscopic sinus surgery (FESS) improves
+    drainage
+  management:
+  - 'Guideline-based treatment options for Chronic Sinusitis include:'
+  - Saline nasal irrigation (neti pot or squeeze bottle) BID - most effective medical
+    therapy
+  - 'Intranasal corticosteroids: Fluticasone 2 sprays each nostril daily × 3-6 months
+    (first-line)'
+  - 'Trial of prolonged antibiotics: Amoxicillin-clavulanate or doxycycline × 3 weeks
+    (culture-directed if available)'
+  - 'Oral corticosteroids: Prednisone 40-60mg daily × 5-7 days for acute exacerbations
+    or nasal polyps'
+  - 'If refractory: FESS (functional endoscopic sinus surgery) to restore drainage
+    pathways'
+  tests:
+  - CT sinus without contrast (REQUIRED for diagnosis) - shows mucosal thickening,
+    opacification, polyps
+  - Nasal endoscopy by ENT - visualize polyps, purulent discharge, anatomic obstruction
+  - Allergy testing if suspected allergic component (IgE, skin testing)
+  - Sweat chloride or genetic testing if concern for cystic fibrosis (children/young
+    adults with polyps)
+  referrals:
+  - ENT for all chronic sinusitis - nasal endoscopy and FESS evaluation
+  - Allergy/Immunology if refractory or allergic fungal sinusitis
+  - Immunology workup if recurrent infections (consider immunodeficiency)
+  icd10:
+  - J32.9
+  snomed:
+  - 40055000
+- id: ENT-PHARYNGITIS-STREP
+  label: Streptococcal Pharyngitis (Strep Throat)
+  presentations:
+  - Sore throat (sudden onset)
+  - Fever
+  - Tonsillar exudates
+  - Tender anterior cervical lymphadenopathy
+  - Absence of cough
+  - Palatal petechiae
+  - Positive rapid strep test or throat culture
+  clinical_pearls:
+  - Caused by Group A Streptococcus (Streptococcus pyogenes) - peak age 5-15 years
+  - 'Centor criteria (score 0-4): Fever, tonsillar exudates, tender cervical nodes,
+    absence of cough. Score ≥3 test/treat'
+  - 'Complications if untreated: Acute rheumatic fever (2-3 weeks), post-strep glomerulonephritis
+    (1-3 weeks), peritonsillar abscess'
+  - 'Scarlet fever: Strep pharyngitis + sandpaper rash (erythematous, blanching, starts
+    trunk/neck)'
+  - Rapid strep test 85-90% sensitive - if negative with high suspicion, send throat
+    culture (gold standard)
+  management:
+  - 'Guideline-based treatment options for Streptococcal Pharyngitis (Strep Throat)
+    include:'
+  - Penicillin V 500mg PO BID × 10 days (first-line, narrow spectrum, cheap) OR amoxicillin
+    500mg TID × 10 days
+  - 'Single-dose option: Benzathine penicillin G 1.2 million units IM × 1 (ensures
+    compliance)'
+  - 'If penicillin allergy: Cephalexin 500mg BID × 10 days OR azithromycin 500mg day
+    1, then 250mg days 2-5'
+  - 'Symptomatic: NSAIDs (ibuprofen 400-600mg q6h), throat lozenges, salt water gargles'
+  - Return to school/work 24 hours after starting antibiotics (no longer contagious)
+  tests:
+  - Rapid antigen detection test (RADT) - 85-90% sensitive, 95% specific
+  - Throat culture if RADT negative but high clinical suspicion (Centor ≥3) - results
+    in 24-48hrs
+  - 'DO NOT test/treat if: Centor score 0-1 (low probability), age <3 years (rare,
+    complications rare)'
+  referrals:
+  - 'ENT if: Recurrent strep throat (≥7 episodes in 1 year) - consider tonsillectomy'
+  - 'Emergency department if: Peritonsillar abscess, inability to swallow/drooling,
+    respiratory distress'
+  icd10:
+  - J02.0
+  snomed:
+  - 43878008
+- id: ENT-PHARYNGITIS-VIRAL
+  label: Viral Pharyngitis
+  presentations:
+  - Sore throat
+  - Usually associated with other URI symptoms (cough, rhinorrhea)
+  - Low-grade or no fever
+  - Pharyngeal erythema without exudates
+  - Gradual onset
+  - Self-limited course
+  clinical_pearls:
+  - Most common cause of pharyngitis (85-95%) - adenovirus, rhinovirus, coronavirus,
+    EBV, influenza
+  - 'Infectious mononucleosis (EBV): Severe pharyngitis + fatigue + posterior cervical
+    nodes + splenomegaly'
+  - DO NOT give amoxicillin if mono suspected - causes morbilliform rash in 80-90%
+  - 'Herpangina (coxsackievirus): Vesicles/ulcers on posterior pharynx, common in
+    children summer/fall'
+  - Antibiotics do NOT help viral pharyngitis and contribute to resistance - supportive
+    care only
+  management:
+  - 'Guideline-based treatment options for Viral Pharyngitis include:'
+  - 'Symptomatic treatment only: NSAIDs (ibuprofen 400-600mg q6h), acetaminophen 650-1000mg
+    q6h'
+  - Throat lozenges with benzocaine or menthol, warm salt water gargles (1/2 tsp salt
+    in 8oz water)
+  - Increase oral fluids, rest, humidified air
+  - 'If EBV (mono): Avoid contact sports for 3-4 weeks (risk of splenic rupture),
+    corticosteroids if severe tonsillar enlargement'
+  - 'Duration: Usually resolves in 5-7 days'
+  tests:
+  - Clinical diagnosis - testing NOT needed if viral features present (cough, rhinorrhea,
+    conjunctivitis)
+  - Rapid strep test only if Centor score ≥2-3 to rule out bacterial infection
+  - 'EBV testing (Monospot, EBV VCA IgM) if: Severe pharyngitis + fatigue + posterior
+    cervical nodes + splenomegaly'
+  referrals:
+  - 'Emergency department if: Severe dysphagia with dehydration, respiratory distress,
+    suspected peritonsillar abscess'
+  - 'Return precautions: If symptoms worsen or don''t improve in 7-10 days'
+  icd10:
+  - J02.9
+  snomed:
+  - 1532007
+- id: ENT-TONSILLITIS
+  label: Acute Tonsillitis
+  presentations:
+  - Severe sore throat
+  - Fever
+  - Enlarged, erythematous tonsils with exudates
+  - Dysphagia
+  - Tender cervical lymphadenopathy
+  - Muffled voice (hot potato voice)
+  - May progress to peritonsillar abscess
+  clinical_pearls:
+  - Usually bacterial (Group A Strep most common) but can be viral (EBV, adenovirus)
+  - 'Grading: 0 (within tonsillar fossa), 1+ (beyond pillars), 2+ (midline), 3+ (midline
+    touching), 4+ (kissing tonsils)'
+  - 'Hot potato voice: Muffled quality suggests peritonsillar involvement or abscess'
+  - 'Recurrent tonsillitis: ≥7 episodes in 1 year OR ≥5/year for 2 years OR ≥3/year
+    for 3 years = tonsillectomy indication'
+  - 'Complications: Peritonsillar abscess (most common), retropharyngeal abscess,
+    Lemierre syndrome (internal jugular thrombophlebitis)'
+  management:
+  - 'Guideline-based treatment options for Acute Tonsillitis include:'
+  - 'If bacterial suspected (exudates, fever, anterior cervical nodes, no cough):
+    Rapid strep test'
+  - 'Antibiotics if strep positive: Penicillin V 500mg BID or amoxicillin 500mg TID
+    × 10 days'
+  - 'If severe/unable to swallow: Dexamethasone 10mg IM/PO × 1 (reduces pain, speeds
+    recovery)'
+  - 'Pain control: NSAIDs (ibuprofen 600-800mg q6-8h), opioids (hydrocodone 5-10mg
+    q4-6h PRN) if severe'
+  - Hydration critical - IV fluids if unable to tolerate PO
+  tests:
+  - Rapid strep test + throat culture to confirm bacterial etiology
+  - Monospot if severe pharyngitis + fatigue + splenomegaly (EBV)
+  - CT neck with contrast if concern for abscess (unilateral swelling, trismus, uvular
+    deviation)
+  referrals:
+  - 'ENT if: Recurrent tonsillitis meeting criteria for tonsillectomy'
+  - 'Hospital admission if: Unable to swallow/dehydrated, respiratory compromise,
+    suspected abscess'
+  - 'Emergency department if: Trismus, drooling, respiratory distress, unilateral
+    tonsillar swelling'
+  icd10:
+  - J03.90
+  snomed:
+  - 90176007
+- id: ENT-PERITONSILLAR-ABSCESS
+  label: Peritonsillar Abscess
+  presentations:
+  - Severe unilateral throat pain
+  - Trismus (difficulty opening mouth)
+  - Muffled voice (hot potato voice)
+  - Drooling
+  - Unilateral tonsillar swelling with uvular deviation
+  - High fever
+  - Medical emergency requiring drainage
+  clinical_pearls:
+  - Most common deep space infection of head/neck - usually complication of bacterial
+    tonsillitis
+  - 'Classic triad: Trismus + uvular deviation + hot potato voice'
+  - 'Organisms: Group A Strep, Staph aureus, anaerobes (Fusobacterium, Prevotella)'
+  - Needle aspiration yields pus (confirms diagnosis) - aspirate at point of maximal
+    fluctuance
+  - 'Complications: Airway obstruction, extension to retropharyngeal space, carotid
+    sheath, mediastinum (necrotizing fasciitis)'
+  management:
+  - 'Guideline-based treatment options for Peritonsillar Abscess include:'
+  - Needle aspiration or incision & drainage (I&D) REQUIRED - medical therapy alone
+    insufficient
+  - 'Anesthesia: Topical benzocaine spray + lidocaine 1% with epinephrine injection
+    at aspiration site'
+  - Aspirate at point of maximal fluctuance (usually superior and lateral to tonsil)
+    with 18-gauge needle
+  - 'Antibiotics: Ampicillin-sulbactam 3g IV q6h OR clindamycin 600mg IV q8h (covers
+    anaerobes)'
+  - 'Corticosteroids: Dexamethasone 10mg IV × 1 (reduces pain, inflammation)'
+  tests:
+  - Clinical diagnosis + needle aspiration yielding purulent material
+  - CT neck with IV contrast if diagnosis uncertain or concern for deeper extension
+    (retropharyngeal abscess)
+  - Culture aspirated pus to guide antibiotic therapy
+  referrals:
+  - ENT urgent consult for drainage (needle aspiration or I&D)
+  - Hospital admission for IV antibiotics, hydration, airway monitoring
+  - Consider quinsy tonsillectomy (immediate) or interval tonsillectomy (4-6 weeks)
+    to prevent recurrence
+  icd10:
+  - J36
+  snomed:
+  - 44612001
+- id: ENT-HEARING-LOSS-CONDUCTIVE
+  label: Conductive Hearing Loss
+  presentations:
+  - Difficulty hearing
+  - Abnormal Rinne test (bone conduction > air conduction)
+  - Weber lateralizes to affected ear
+  - Causes - cerumen impaction, otitis media, otosclerosis, TM perforation
+  - May be reversible with treatment of underlying cause
+  clinical_pearls:
+  - Problem in outer/middle ear preventing sound transmission to inner ear - often
+    reversible
+  - 'Rinne test: Tuning fork on mastoid (bone conduction) then near ear canal (air).
+    Normally AC > BC. If BC > AC = conductive loss'
+  - 'Weber test: Tuning fork on forehead. Lateralizes TO affected ear in conductive
+    loss (bone conduction bypasses blockage)'
+  - 'Causes: Cerumen (most common), OME (effusion), TM perforation, cholesteatoma,
+    otosclerosis, ossicular chain disruption'
+  - 'Otosclerosis: Familial condition with stapes fixation, starts age 20-40, slow
+    progressive loss, may hear better in noise (paracusis)'
+  management:
+  - 'Guideline-based treatment options for Conductive Hearing Loss include:'
+  - 'Cerumen impaction: Irrigation (warm water, contraindicated if TM perforation)
+    OR manual removal with curette/suction'
+  - 'OME (effusion): Observation 3 months, then myringotomy + tubes if persistent
+    or bilateral with hearing loss >25 dB'
+  - 'TM perforation: Most heal spontaneously in 2-3 months. Keep dry (ear plugs when
+    swimming). If >3 months, tympanoplasty'
+  - 'Otosclerosis: Stapedectomy (surgical - removes fixed stapes, replaces with prosthesis,
+    90% success) OR hearing aid'
+  - 'Cholesteatoma: Surgical excision (can erode ossicles, mastoid, cause complications)'
+  tests:
+  - Otoscopy to visualize ear canal and TM (cerumen, effusion, perforation, cholesteatoma)
+  - Rinne and Weber tuning fork tests (512 Hz) - bedside screening
+  - 'Audiometry: Air and bone conduction thresholds (air-bone gap >10 dB = conductive
+    loss)'
+  - 'Tympanometry: Flat Type B curve (OME, perforation), Type As (stiffness/otosclerosis)'
+  referrals:
+  - 'ENT for: Persistent OME >3 months, TM perforation >3 months, suspected cholesteatoma
+    or otosclerosis'
+  - Audiology for hearing aid evaluation if not surgical candidate
+  icd10:
+  - H90.2
+  snomed:
+  - 44057004
+- id: ENT-HEARING-LOSS-SENSORINEURAL
+  label: Sensorineural Hearing Loss
+  presentations:
+  - Difficulty hearing, especially high frequencies
+  - Normal Rinne test (air > bone conduction)
+  - Weber lateralizes to better ear
+  - Causes - presbycusis (aging), noise exposure, ototoxic drugs, Meniere's
+  - Often permanent
+  - May have tinnitus
+  clinical_pearls:
+  - Problem in inner ear (cochlea) or auditory nerve - usually permanent
+  - 'Rinne test: AC > BC bilaterally (normal). Weber: Lateralizes to BETTER ear (away
+    from affected ear)'
+  - 'Presbycusis (age-related): Bilateral high-frequency loss, difficulty with speech
+    discrimination, starts age 50-60'
+  - 'Sudden sensorineural hearing loss (SSNHL): Hearing loss over <72 hours - EMERGENCY,
+    treat within 2 weeks for best outcome'
+  - 'Ototoxic drugs: Aminoglycosides (gentamicin), cisplatin, loop diuretics (furosemide),
+    aspirin high-dose'
+  management:
+  - 'Guideline-based treatment options for Sensorineural Hearing Loss include:'
+  - 'Presbycusis: Hearing aids (amplification) - improve quality of life, reduce social
+    isolation'
+  - 'Sudden SSNHL: HIGH-DOSE corticosteroids (prednisone 60mg daily × 10-14 days)
+    within 2 weeks - may recover 50-60%'
+  - 'Alternative for SSNHL: Intratympanic dexamethasone injections (4mg/mL) if oral
+    steroids contraindicated'
+  - 'Severe bilateral: Cochlear implant candidacy evaluation (if hearing aids insufficient)'
+  - 'Prevention: Hearing protection in noisy environments (>85 dB), avoid ototoxic
+    drugs when possible'
+  tests:
+  - 'Audiometry: Air and bone conduction thresholds (both decreased equally, no air-bone
+    gap)'
+  - Speech discrimination testing (word recognition scores) - helps predict hearing
+    aid benefit
+  - 'MRI internal auditory canals with contrast if: Asymmetric loss, sudden loss,
+    tinnitus (rule out acoustic neuroma)'
+  - 'If sudden SSNHL: CBC, ESR, TSH, RPR, Lyme, ANA (autoimmune workup)'
+  referrals:
+  - ENT urgent (within 24-48hrs) if sudden sensorineural hearing loss - time-sensitive
+    treatment
+  - Audiology for hearing aid evaluation and fitting
+  - ENT for cochlear implant evaluation if severe-profound bilateral loss
+  icd10:
+  - H90.5
+  snomed:
+  - 60700002
+- id: ENT-MENIERES-DISEASE
+  label: Meniere's Disease
+  presentations:
+  - Episodic vertigo (hours duration)
+  - Fluctuating hearing loss (typically low frequency)
+  - Tinnitus (roaring quality)
+  - Aural fullness (sensation of ear pressure)
+  - Nausea and vomiting during episodes
+  - Progressive hearing loss over time
+  clinical_pearls:
+  - 'Classic triad: Episodic vertigo + fluctuating hearing loss + tinnitus (must have
+    all 3 for diagnosis)'
+  - 'Pathophysiology: Endolymphatic hydrops (fluid buildup in inner ear)'
+  - Vertigo episodes last 20 minutes to 12 hours (typically 2-4 hours) - shorter or
+    longer suggests alternate diagnosis
+  - 'Hearing loss: Initially low-frequency, fluctuating. Over years becomes permanent
+    high-frequency loss'
+  - 'Tumarkin attacks (drop attacks): Sudden falls without warning or loss of consciousness
+    in advanced disease'
+  management:
+  - 'Guideline-based treatment options for Meniere''s Disease include:'
+  - 'Acute episode: Meclizine 25-50mg q6h PRN, promethazine 25mg PO/PR q6h, or diazepam
+    2-5mg PO (vestibular suppressants)'
+  - 'Dietary: Low-sodium diet (<2g/day), avoid caffeine, alcohol, tobacco (reduce
+    endolymphatic pressure)'
+  - 'Diuretic: Hydrochlorothiazide 25mg + triamterene 37.5mg daily (Dyazide) - reduces
+    fluid retention'
+  - 'Refractory: Intratympanic gentamicin injections (ablates vestibular function)
+    or betahistine 16-24mg TID (not FDA approved in US)'
+  - 'Surgical (last resort): Endolymphatic sac decompression or vestibular nerve section
+    if medically refractory'
+  tests:
+  - Clinical diagnosis based on symptoms (episodic vertigo + hearing loss + tinnitus)
+  - 'Audiometry: Low-frequency sensorineural hearing loss (fluctuating early, progressive
+    later)'
+  - MRI internal auditory canals with contrast to rule out acoustic neuroma (mimics
+    Meniere's)
+  - Electrocochleography (ECoG) or VEMP testing if diagnosis uncertain
+  referrals:
+  - ENT/Neurotology for all suspected Meniere's disease - specialized testing and
+    management
+  - Vestibular rehabilitation therapy if persistent dysequilibrium
+  icd10:
+  - H81.09
+  snomed:
+  - 13445001
+- id: ENT-EPISTAXIS
+  label: Epistaxis (Nosebleed)
+  presentations:
+  - Bleeding from nose
+  - Anterior epistaxis (90%) - visible bleeding from Little's area
+  - Posterior epistaxis (10%) - blood in posterior pharynx
+  - Risk factors - trauma, dry air, anticoagulation, hypertension
+  - May be severe requiring packing or cauterization
+  clinical_pearls:
+  - 'Anterior: Kiesselbach''s plexus (Little''s area) on anterior septum - visible,
+    easier to control'
+  - 'Posterior: Woodruff''s plexus (posterior/superior nasal cavity) - more severe,
+    harder to control, elderly patients'
+  - 'Risk factors: Digital trauma (nose picking), dry air, anticoagulation, hypertension,
+    NSAIDs, intranasal drugs (cocaine, steroid sprays)'
+  - 'Hereditary hemorrhagic telangiectasia (HHT/Osler-Weber-Rendu): Recurrent epistaxis
+    + telangiectasias + family history'
+  - Hypertension doesn't cause epistaxis but makes it harder to control once started
+  management:
+  - 'Guideline-based treatment options for Epistaxis (Nosebleed) include:'
+  - 'First-aid: Pinch soft part of nose (NOT bridge) for 10-15 minutes, lean forward
+    (prevent swallowing blood), ice to nose'
+  - 'If continues: Topical vasoconstrictor (oxymetazoline spray or phenylephrine-soaked
+    cotton) + silver nitrate cautery to bleeding site'
+  - 'Anterior packing: Nasal tampon (Rapid Rhino) or petroleum gauze packing if cautery
+    fails - remove in 2-3 days'
+  - 'Posterior packing: Foley catheter or posterior pack if anterior pack fails -
+    admit for monitoring, O2, IV antibiotics (toxic shock risk)'
+  - 'Prevention: Saline gel or Vaseline to nares BID, humidifier, treat hypertension,
+    reverse coagulopathy'
+  tests:
+  - Nasal endoscopy to identify bleeding source (especially posterior)
+  - 'If severe or recurrent: CBC (anemia), PT/INR, PTT (coagulopathy), Type & Screen'
+  - Blood pressure check (control hypertension)
+  referrals:
+  - 'ENT if: Posterior epistaxis, refractory to anterior packing, recurrent epistaxis,
+    or visible mass/lesion'
+  - 'Hospital admission if: Posterior pack placed, severe bleeding, hemodynamically
+    unstable, coagulopathy'
+  - 'ENT may do: Endoscopic cautery or arterial ligation (sphenopalatine artery) for
+    refractory cases'
+  icd10:
+  - R04.0
+  snomed:
+  - 12441001
+- id: ENT-EPIGLOTTITIS
+  label: Epiglottitis
+  presentations:
+  - Severe sore throat
+  - High fever
+  - Drooling
+  - Stridor
+  - Tripod position (leaning forward)
+  - Muffled voice
+  - Dysphagia
+  - Medical emergency - airway obstruction risk
+  - Thumb sign on lateral neck X-ray
+  clinical_pearls:
+  - Life-threatening airway emergency - can progress to complete obstruction in hours
+  - '4 D''s: Drooling, Dysphagia, Dysphonia (muffled voice), Distress (respiratory)'
+  - 'Organism: H. influenzae type B (rare now due to Hib vaccine), Strep species,
+    Staph aureus'
+  - 'Peak age: Adults (20-40 years) now more common than children since Hib vaccine
+    introduced'
+  - DO NOT examine oropharynx with tongue depressor - may precipitate laryngospasm
+    and airway obstruction
+  management:
+  - 'Guideline-based treatment options for Epiglottitis include:'
+  - Call anesthesia/ENT IMMEDIATELY - do not leave patient unattended
+  - Keep patient calm, sitting upright in position of comfort (tripod position)
+  - 'Secure airway in controlled setting (OR): Intubation or tracheostomy (difficult
+    intubation - swollen epiglottis)'
+  - 'Antibiotics AFTER airway secured: Ceftriaxone 2g IV q24h OR cefotaxime 2g IV
+    q8h'
+  - Add vancomycin 15-20mg/kg IV q12h if concern for MRSA
+  tests:
+  - DO NOT obtain labs or imaging if diagnosis suspected - risk of airway obstruction
+    during procedures
+  - 'Lateral neck X-ray (portable at bedside if stable): Thumb sign (swollen epiglottis)
+    - but don''t delay treatment'
+  - Visualization of cherry-red epiglottis with fiberoptic laryngoscopy - only in
+    controlled setting by ENT/anesthesia
+  - Blood cultures after airway secured
+  referrals:
+  - ENT + Anesthesia STAT - airway emergency
+  - ICU admission for airway monitoring after intubation
+  - Average intubation duration 2-3 days, then extubation when epiglottis improved
+    on direct visualization
+  icd10:
+  - J05.10
+  snomed:
+  - 80384002
+- id: ENT-LARYNGITIS
+  label: Acute Laryngitis
+  presentations:
+  - Hoarseness or voice loss
+  - Dry cough
+  - Sore throat (mild)
+  - Usually follows viral URI
+  - Voice worsens with use
+  - Self-limited (typically 1-2 weeks)
+  clinical_pearls:
+  - 'Viral laryngitis (95%): Self-limited inflammation of larynx, peak symptoms 2-3
+    days, resolves in 1-2 weeks'
+  - 'Causes: Rhinovirus, adenovirus, influenza, RSV (follows URI symptoms)'
+  - 'Voice rest: Don''t whisper (causes more strain) - speak softly or write notes'
+  - 'Chronic hoarseness >3 weeks: Red flag for vocal cord nodules, polyps, paralysis,
+    or laryngeal cancer - needs laryngoscopy'
+  - 'Reinke''s edema: Chronic smoking causes diffuse polypoid degeneration of vocal
+    cords (deep, hoarse voice)'
+  management:
+  - 'Guideline-based treatment options for Acute Laryngitis include:'
+  - 'Voice rest (most important): Minimize talking for 2-3 days, don''t whisper'
+  - 'Hydration: Increase fluids (8+ glasses/day), humidified air'
+  - 'Avoid irritants: No smoking, alcohol, caffeine (dehydrating)'
+  - 'Symptomatic: Throat lozenges, warm tea with honey (soothes throat)'
+  - NO ANTIBIOTICS (viral) - corticosteroids only if professional voice user (singer)
+    with urgent need
+  tests:
+  - Clinical diagnosis - no testing needed for acute viral laryngitis
+  - 'Laryngoscopy (by ENT) if: Hoarseness >3 weeks, no URI symptoms, smoker, unilateral
+    symptoms, dysphagia'
+  referrals:
+  - 'ENT for direct laryngoscopy if: Hoarseness >3 weeks (rule out vocal cord pathology,
+    cancer)'
+  - Speech-language pathology for voice therapy if chronic voice strain or vocal cord
+    nodules
+  icd10:
+  - J04.0
+  snomed:
+  - 45913009
+- id: ENT-ALLERGIC-RHINITIS
+  label: Allergic Rhinitis
+  presentations:
+  - Nasal congestion, rhinorrhea
+  - Sneezing
+  - Itchy nose, eyes, throat
+  - Postnasal drip
+  - Watery eyes
+  - Seasonal or perennial
+  - Pale, boggy nasal mucosa on exam
+  clinical_pearls:
+  - 'IgE-mediated hypersensitivity: Seasonal (pollens - spring/fall) or perennial
+    (dust mites, mold, pet dander)'
+  - 'Allergic shiners: Dark circles under eyes from venous congestion. Allergic salute:
+    Upward nose rubbing causing transverse nasal crease'
+  - 'Differentiate from viral URI: Itching (eyes, nose, throat) = allergy. Purulent
+    discharge, fever = viral/bacterial'
+  - 'Associated conditions: Asthma (80% of asthmatics have allergic rhinitis), sinusitis,
+    otitis media with effusion'
+  - 'Perennial triggers: Dust mites (bedroom most important), pet dander, cockroach,
+    mold'
+  management:
+  - 'Guideline-based treatment options for Allergic Rhinitis include:'
+  - 'Avoidance: Allergen-impermeable pillow/mattress covers, HEPA filters, remove
+    pets from bedroom, reduce indoor humidity <50%'
+  - 'First-line: Intranasal corticosteroids (fluticasone 2 sprays each nostril daily)
+    - most effective, takes 2-4 weeks for full benefit'
+  - 'Second-gen oral antihistamines: Cetirizine 10mg or loratadine 10mg daily (less
+    sedating than first-gen)'
+  - 'Add if inadequate response: Intranasal antihistamine (azelastine 2 sprays BID)
+    + pseudoephedrine 30-60mg q4-6h for congestion'
+  - 'Severe/refractory: Allergen immunotherapy (allergy shots) - only treatment that
+    modifies disease, 80-90% effective'
+  tests:
+  - Clinical diagnosis - testing not routinely needed
+  - 'Allergy testing (skin prick or specific IgE) if: Considering immunotherapy, unclear
+    triggers, refractory to treatment'
+  - 'Nasal cytology (rarely done): Eosinophils on nasal smear support allergic etiology'
+  referrals:
+  - 'Allergy/Immunology if: Considering immunotherapy, refractory to medical management,
+    unclear diagnosis'
+  - 'ENT if: Nasal polyps, chronic sinusitis, or structural abnormalities (deviated
+    septum)'
+  icd10:
+  - J30.9
+  snomed:
+  - 61582004

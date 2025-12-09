@@ -1,468 +1,631 @@
 family: rheumatology
 version: 0.1.0
-source: "American College of Rheumatology (ACR) Guidelines, European League Against Rheumatism (EULAR)"
+source: American College of Rheumatology (ACR) Guidelines, European League Against
+  Rheumatism (EULAR)
 rules:
-  - id: RHEUM-RA
-    label: Rheumatoid Arthritis
-    presentations:
-      - Symmetric polyarticular arthritis
-      - Morning stiffness > 1 hour
-      - Hand and wrist involvement (MCP, PIP)
-      - Rheumatoid nodules
-      - Positive RF or anti-CCP
-    clinical_pearls:
-      - "Autoimmune inflammatory arthritis - 1% of population, female 3:1, peak onset 40-60 years"
-      - "Symmetric small joints (MCP, PIP, wrists) - spares DIP joints (vs OA which affects DIP)"
-      - "Anti-CCP antibody: 95% specific for RA (more specific than RF which is only 70%), predicts erosive disease"
-      - "Extraarticular manifestations: Rheumatoid nodules (elbows, pressure points), interstitial lung disease, pericarditis, scleritis, Felty syndrome"
-      - "Swan neck (PIP hyperextension + DIP flexion) and boutonniere (PIP flexion + DIP hyperextension) deformities from chronic inflammation"
-    management:
-      - "DMARD therapy EARLY (within 3 months): Methotrexate 15-25mg weekly + folic acid 1mg daily (reduces erosions, preserves joint function)"
-      - "Triple therapy: Methotrexate + hydroxychloroquine 200-400mg daily + sulfasalazine 2-3g daily (if methotrexate alone insufficient)"
-      - "Biologics (if failed methotrexate): Anti-TNF (etanercept, adalimumab, infliximab), IL-6 inhibitor (tocilizumab), JAK inhibitors (tofacitinib)"
-      - "Bridge therapy: Prednisone 5-10mg daily short-term while awaiting DMARD response (takes 2-3 months)"
-      - "NSAIDs for symptom relief only (don't prevent joint damage): Ibuprofen 600mg TID, naproxen 500mg BID"
-    tests:
-      - "RF (rheumatoid factor): 70% sensitive, 70% specific - can be negative early (seronegative RA)"
-      - "Anti-CCP antibodies: 70% sensitive, 95% specific - earlier and more specific than RF"
-      - "ESR/CRP: Elevated, correlates with disease activity"
-      - "X-ray hands/feet: Early (periarticular osteopenia, soft tissue swelling), Late (erosions, joint space narrowing, subluxation)"
-      - "Ultrasound or MRI: More sensitive than X-ray for early erosions and synovitis"
-    referrals:
-      - "Rheumatology urgently (within 3 months of symptom onset) - early DMARD treatment prevents joint damage"
-      - "Treat-to-target approach: Adjust DMARDs every 3 months until remission or low disease activity"
-    icd10:
-      - M06.9
-      - M05.9
-    snomed:
-      - "69896004"
-
-  - id: RHEUM-OA
-    label: Osteoarthritis
-    presentations:
-      - Joint pain worse with activity
-      - Morning stiffness < 30 minutes
-      - Bony enlargement (Heberden's, Bouchard's nodes)
-      - Crepitus
-      - Loss of range of motion
-    clinical_pearls:
-      - "Most common arthritis - degenerative 'wear and tear' of cartilage, 50% of adults >65 have radiographic OA"
-      - "Weight-bearing joints (knees, hips) and hands (DIP, PIP, CMC thumb) most affected"
-      - "Heberden nodes (DIP) and Bouchard nodes (PIP) - bony osteophytes pathognomonic for OA"
-      - "Pain worse with activity, improves with rest (vs RA which is worse with rest, improves with activity)"
-      - "Morning stiffness <30 minutes (vs RA >1 hour) - 'gel phenomenon' from synovial fluid stasis"
-    management:
-      - "Weight loss if overweight: 5-10% weight loss reduces knee pain 50% (most effective non-pharmacologic intervention)"
-      - "Physical therapy: Quadriceps strengthening for knee OA, range of motion exercises"
-      - "Acetaminophen 1g TID-QID: First-line (safer than NSAIDs, less effective)"
-      - "NSAIDs: Ibuprofen 600mg TID or naproxen 500mg BID (more effective than acetaminophen, GI/CV/renal risks)"
-      - "Intra-articular steroid injections: Triamcinolone 40-80mg for knee/hip - 3-6 months relief, max 3-4 per year"
-      - "Joint replacement (total knee/hip arthroplasty): If severe pain limiting function despite medical management"
-    tests:
-      - "Clinical diagnosis usually sufficient"
-      - "X-ray: Joint space narrowing, osteophytes, subchondral sclerosis, subchondral cysts"
-      - "Kellgren-Lawrence grading: 0 (normal), 1 (doubtful), 2 (minimal), 3 (moderate), 4 (severe)"
-      - "Labs: Normal ESR/CRP, normal RF/anti-CCP (helps differentiate from RA if unclear)"
-    referrals:
-      - "Orthopedics for joint replacement if severe pain limiting daily activities despite conservative management"
-      - "Rheumatology if diagnostic uncertainty (atypical age, inflammatory features)"
-    icd10:
-      - M19.90
-      - M17.9
-      - M16.9
-    snomed:
-      - "396275006"
-
-  - id: RHEUM-GOUT
-    label: Gout
-    presentations:
-      - Sudden onset severe joint pain
-      - First MTP joint (podagra) most common
-      - Joint erythema and swelling
-      - Elevated uric acid
-      - Monosodium urate crystals
-    clinical_pearls:
-      - "Most common inflammatory arthritis in men - monosodium urate crystal deposition from hyperuricemia (>6.8 mg/dL)"
-      - "Podagra (first MTP joint): 50% of initial attacks, 90% affected at some point - exquisitely painful, can't tolerate bedsheet touch"
-      - "Hyperuricemia: Overproduction (10% - HGPRT deficiency, lymphoproliferative, high purine diet) or underexcretion (90% - renal insufficiency, diuretics)"
-      - "Tophus: Urate crystal deposits in soft tissues (ears, elbows, fingers) - appear after 10+ years of untreated gout"
-      - "Acute attacks triggered by: Alcohol, red meat, seafood, dehydration, diuretics, trauma, surgery"
-    management:
-      - "Acute attack: NSAIDs (indomethacin 50mg TID or naproxen 500mg BID) OR colchicine 1.2mg then 0.6mg 1h later OR prednisone 40mg daily x5 days"
-      - "DO NOT start allopurinol during acute attack (worsens flare) - treat acute inflammation first"
-      - "Urate-lowering therapy (ULT): Allopurinol 100mg daily, increase by 100mg q2-4 weeks to achieve uric acid <6 mg/dL (goal <5 if tophaceous)"
-      - "Colchicine prophylaxis: 0.6mg daily during first 6 months of ULT (prevents flares from urate mobilization)"
-      - "Lifestyle: Limit alcohol, red meat, seafood (high purines). Increase water, low-fat dairy, cherries"
-    tests:
-      - "Synovial fluid analysis (GOLD STANDARD): Monosodium urate crystals (needle-shaped, negatively birefringent under polarized light), WBC 2,000-100,000"
-      - "Serum uric acid: >6.8 mg/dL (can be NORMAL during acute attack - 30% have normal uric acid during flare)"
-      - "X-ray: Normal early. Chronic: Punched-out erosions with overhanging edges (rat-bite erosions), tophi"
-      - "Ultrasound: Double contour sign (urate on cartilage surface) - more sensitive than X-ray"
-    referrals:
-      - "Rheumatology if: Atypical presentation, polyarticular gout, refractory to treatment, tophaceous gout"
-      - "Most gout managed by primary care with NSAIDs/colchicine (acute) and allopurinol (chronic)"
-    icd10:
-      - M10.9
-      - M10.00
-    snomed:
-      - "90560007"
-
-  - id: RHEUM-PSEUDOGOUT
-    label: Pseudogout (CPPD)
-    presentations:
-      - Acute joint pain and swelling
-      - Knee most commonly affected
-      - Calcium pyrophosphate crystals
-      - Chondrocalcinosis on X-ray
-    clinical_pearls:
-      - "CPPD (calcium pyrophosphate deposition disease) - calcium pyrophosphate crystals in cartilage causing arthritis"
-      - "Knee most common (50%), then wrist, shoulder. Often polyarticular in elderly"
-      - "Risk factors: Age >60, hyperparathyroidism, hemochromatosis, hypomagnesemia, hypophosphatasia (check calcium, PTH, iron, Mg, alk phos)"
-      - "Chondrocalcinosis: Calcification of fibrocartilage (menisci, triangular fibrocartilage of wrist) on X-ray - present in CPPD but also asymptomatic elderly"
-      - "Mimics septic arthritis: Acute monoarticular arthritis with fever, elevated WBC - must aspirate to rule out infection"
-    management:
-      - "Acute attack: NSAIDs (naproxen 500mg BID, indomethacin 50mg TID) OR colchicine 0.6mg BID OR prednisone 40mg daily x5 days"
-      - "Intra-articular steroids: Triamcinolone 40-80mg if monoarticular (after ruling out septic arthritis)"
-      - "No cure or urate-lowering equivalent: Unlike gout, no medication prevents CPPD crystal formation"
-      - "Treat underlying: Correct hyperparathyroidism, hemochromatosis if present"
-      - "Prophylaxis: Colchicine 0.6mg daily if frequent recurrent attacks (reduces flare frequency)"
-    tests:
-      - "Synovial fluid analysis (GOLD STANDARD): Calcium pyrophosphate crystals (rhomboid-shaped, weakly positively birefringent), WBC 2,000-100,000"
-      - "X-ray: Chondrocalcinosis (linear calcification of cartilage - menisci in knee, triangular fibrocartilage in wrist)"
-      - "Screen for metabolic diseases: Calcium, PTH (hyperparathyroidism), ferritin/iron (hemochromatosis), magnesium (hypomagnesemia), alkaline phosphatase (hypophosphatasia)"
-    referrals:
-      - "Rheumatology if: Polyarticular CPPD, young patient (<55 years - suggests metabolic disease), refractory to treatment"
-      - "Most pseudogout managed by primary care with NSAIDs/colchicine"
-    icd10:
-      - M11.9
-      - M11.20
-    snomed:
-      - "6404008"
-
-  - id: RHEUM-SLE
-    label: Systemic Lupus Erythematosus
-    presentations:
-      - Malar rash
-      - Photosensitivity
-      - Oral ulcers
-      - Arthritis
-      - Serositis
-      - Renal involvement
-      - Positive ANA, anti-dsDNA
-    clinical_pearls:
-      - "Multisystem autoimmune disease - female 9:1, peak onset 20-40 years, African American > Caucasian"
-      - "Malar (butterfly) rash: Spares nasolabial folds - pathognomonic but only present 50%"
-      - "Lupus nephritis (50%): Most serious complication, leading cause of morbidity/mortality, requires aggressive immunosuppression"
-      - "Drug-induced lupus: Hydralazine, procainamide, isoniazid, minocycline - resolves after stopping drug, anti-histone antibodies positive"
-      - "Antiphospholipid syndrome (30%): Thrombosis, recurrent miscarriages, thrombocytopenia - requires anticoagulation"
-    management:
-      - "Mild disease (arthritis, rash): Hydroxychloroquine 200-400mg daily (reduces flares, protects against organ damage), NSAIDs, sunscreen SPF 50+"
-      - "Moderate disease: Prednisone 0.5-1mg/kg daily, taper after control, add steroid-sparing agent (methotrexate 15-25mg weekly, azathioprine 2mg/kg daily)"
-      - "Severe disease (lupus nephritis, CNS lupus): High-dose prednisone 1mg/kg + cyclophosphamide IV monthly x6 months OR mycophenolate 2-3g daily"
-      - "Belimumab (monoclonal anti-BLyS): For active disease despite standard therapy"
-      - "Pregnancy: High-risk (preeclampsia, flares), hydroxychloroquine continued, avoid methotrexate/cyclophosphamide (teratogenic)"
-    tests:
-      - "ANA: 95% sensitive but only 50% specific - if negative, SLE very unlikely. Titer >1:160 significant"
-      - "Anti-dsDNA: 70% sensitive, 95% specific - rises with disease activity, correlates with nephritis"
-      - "Anti-Smith: 30% sensitive, 99% specific - most specific for SLE"
-      - "Complement (C3, C4): Low in active disease (consumption)"
-      - "UA with micro: Proteinuria, RBC casts (lupus nephritis). 24-hour urine protein if positive"
-      - "CBC: Anemia (hemolytic or chronic disease), leukopenia, thrombocytopenia"
-    referrals:
-      - "Rheumatology urgently for all SLE diagnoses - requires disease activity monitoring and immunosuppression"
-      - "Nephrology if proteinuria >500mg/day or active urine sediment (lupus nephritis)"
-    icd10:
-      - M32.9
-      - M32.10
-    snomed:
-      - "55464009"
-
-  - id: RHEUM-SJOGREN
-    label: Sjögren's Syndrome
-    presentations:
-      - Dry eyes (keratoconjunctivitis sicca)
-      - Dry mouth (xerostomia)
-      - Parotid gland enlargement
-      - Dental caries
-      - Positive anti-SSA/SSB
-    clinical_pearls:
-      - "Autoimmune exocrinopathy - lymphocytic infiltration of lacrimal and salivary glands, female 9:1"
-      - "Primary Sjögren's (50%): Isolated dry eyes/mouth. Secondary (50%): Associated with RA, SLE, scleroderma"
-      - "Extraglandular: Arthritis (60%), interstitial lung disease, renal tubular acidosis, peripheral neuropathy, lymphoma risk (5-10%, 40x general population)"
-      - "Dental complications: Rampant caries, candidiasis from dry mouth - needs aggressive dental prevention"
-      - "Parotid enlargement: Bilateral, recurrent - if unilateral/hard, consider lymphoma (MALT)"
-    management:
-      - "Dry eyes: Artificial tears (preservative-free) q2-4h, cyclosporine 0.05% drops BID (increases tear production), punctal plugs if severe"
-      - "Dry mouth: Sugar-free gum, sips of water, saliva substitutes, pilocarpine 5mg QID or cevimeline 30mg TID (stimulate secretions)"
-      - "Dental care: Fluoride rinses, frequent dental cleanings, avoid sugary foods"
-      - "Systemic symptoms: Hydroxychloroquine 200-400mg daily for arthritis/fatigue"
-      - "Monitor for lymphoma: Annual exam for persistent parotid swelling, lymphadenopathy, constitutional symptoms"
-    tests:
-      - "Anti-SSA (Ro) antibodies: 70% sensitive, 95% specific for primary Sjögren's"
-      - "Anti-SSB (La) antibodies: 40% sensitive, 98% specific - if positive, almost always has anti-SSA too"
-      - "ANA: Positive in 80%, RF positive in 50%"
-      - "Schirmer test: <5mm wetting of filter paper in 5 minutes = dry eyes (normal >15mm)"
-      - "Salivary gland biopsy (minor salivary glands in lip): Focal lymphocytic sialadenitis - gold standard but rarely needed"
-    referrals:
-      - "Rheumatology for diagnosis confirmation and management"
-      - "Ophthalmology for dry eye management (punctal plugs, cyclosporine drops)"
-      - "Dentistry for preventive care"
-    icd10:
-      - M35.00
-      - M35.09
-    snomed:
-      - "83901003"
-
-  - id: RHEUM-SCLERODERMA
-    label: Systemic Sclerosis (Scleroderma)
-    presentations:
-      - Skin thickening and tightening
-      - Raynaud's phenomenon
-      - Dysphagia
-      - GERD
-      - Pulmonary fibrosis
-      - Digital ulcers
-    clinical_pearls:
-      - "Autoimmune fibrotic disease - excess collagen deposition in skin and organs, female 4:1"
-      - "Limited cutaneous (lcSSc, CREST): Skin involvement distal to elbows/knees, better prognosis. Calcinosis, Raynaud's, Esophageal dysmotility, Sclerodactyly, Telangiectasias"
-      - "Diffuse cutaneous (dcSSc): Skin involvement proximal to elbows/knees + trunk, worse prognosis, rapid progression, renal crisis risk"
-      - "Raynaud's phenomenon: Triphasic color change (white → blue → red) with cold/stress - present in 95% of scleroderma"
-      - "Scleroderma renal crisis: Malignant hypertension, acute kidney injury, microangiopathic hemolytic anemia - EMERGENCY, treat with ACE inhibitor"
-    management:
-      - "Raynaud's: Calcium channel blockers (nifedipine XL 30-90mg daily or amlodipine 5-10mg daily), avoid cold, stop smoking"
-      - "GERD/dysphagia: PPI (omeprazole 40mg daily), prokinetics (metoclopramide 10mg TID), small frequent meals"
-      - "Pulmonary fibrosis: Immunosuppression (mycophenolate 2-3g daily or cyclophosphamide), monitor with PFTs annually"
-      - "Pulmonary hypertension: Screen with echo annually, treat with endothelin receptor antagonists (bosentan), PDE5 inhibitors (sildenafil)"
-      - "Scleroderma renal crisis: ACE inhibitor (captopril 6.25-25mg TID, titrate rapidly) - started even if normotensive, dialysis if needed"
-    tests:
-      - "Anti-Scl-70 (anti-topoisomerase I): 30% positive, specific for diffuse cutaneous SSc, predicts pulmonary fibrosis"
-      - "Anti-centromere antibodies: 50% positive in limited cutaneous SSc (CREST), lower risk of organ involvement"
-      - "ANA: Positive in 95%, speckled or nucleolar pattern"
-      - "PFTs: Restrictive pattern (low FVC, low DLCO) - monitor annually for interstitial lung disease"
-      - "Echo: Screen for pulmonary hypertension (estimated RVSP >40 mmHg)"
-      - "Barium swallow: Esophageal dysmotility, dilated atonic esophagus"
-    referrals:
-      - "Rheumatology for all scleroderma - requires organ monitoring and immunosuppression"
-      - "Pulmonology for interstitial lung disease or pulmonary hypertension"
-      - "Nephrology urgently if scleroderma renal crisis (malignant HTN, AKI)"
-    icd10:
-      - M34.9
-      - M34.0
-    snomed:
-      - "89155008"
-
-  - id: RHEUM-POLYMYALGIA
-    label: Polymyalgia Rheumatica
-    presentations:
-      - Bilateral shoulder and hip girdle pain
-      - Morning stiffness
-      - Age > 50 years
-      - Elevated ESR/CRP
-      - Dramatic response to low-dose steroids
-    clinical_pearls:
-      - "Inflammatory condition of proximal muscles - age >50 years (average 70), female 2:1, northern European ancestry"
-      - "Bilateral shoulder and hip girdle pain/stiffness (symmetric) - 'can't raise arms to comb hair, can't get out of chair'"
-      - "Dramatic response to prednisone: 70% improve within 24-48 hours (diagnostic feature)"
-      - "Association with giant cell arteritis: 15% of PMR have GCA, 50% of GCA have PMR - screen for GCA symptoms (headache, jaw claudication, vision changes)"
-      - "ESR >40 mm/hr typical (often >50) - if normal ESR, reconsider diagnosis"
-    management:
-      - "Prednisone 15-20mg daily: Start dose, should see dramatic improvement within 48-72 hours"
-      - "Slow taper: After 2-4 weeks, taper by 2.5mg every 2-4 weeks to 10mg, then 1mg every 4-8 weeks. Total duration 1-2 years"
-      - "Monitor ESR/CRP: Check every 2-4 weeks during taper - if rising or symptoms return, increase prednisone back up"
-      - "Steroid-sparing agents: Methotrexate 10-15mg weekly if unable to taper prednisone below 10mg or frequent relapses"
-      - "Bone protection: Calcium 1200mg + vitamin D 800-1000 IU daily, bisphosphonate (alendronate 70mg weekly) if long-term steroids"
-    tests:
-      - "ESR: Typically >40 mm/hr, often >50 (sensitive but not specific)"
-      - "CRP: Elevated, correlates with disease activity"
-      - "CBC: Mild anemia of chronic disease, normal or elevated platelets"
-      - "CPK: Normal (vs polymyositis which has elevated CPK)"
-      - "Screen for GCA: Ask about new headache, jaw claudication, vision changes - if present, start prednisone 60mg and get temporal artery biopsy"
-    referrals:
-      - "Rheumatology if: Atypical features (age <60, asymmetric, normal ESR), not responding to prednisone, difficulty tapering"
-      - "Most PMR managed by primary care with prednisone taper over 1-2 years"
-    icd10:
-      - M35.3
-    snomed:
-      - "399130002"
-
-  - id: RHEUM-GCA
-    label: Giant Cell Arteritis
-    presentations:
-      - New headache
-      - Temporal artery tenderness
-      - Jaw claudication
-      - Vision changes (amaurosis fugax)
-      - Elevated ESR/CRP
-      - Age > 50 years
-    clinical_pearls:
-      - "Large vessel vasculitis - age >50 years (average 70), MEDICAL EMERGENCY due to risk of irreversible blindness"
-      - "Anterior ischemic optic neuropathy (AION): 15-20% develop vision loss, often sudden and permanent if untreated"
-      - "Jaw claudication: Most specific symptom (95% specific for GCA) - pain with chewing, relieved by rest"
-      - "Temporal artery: Tender, thickened, non-pulsatile, nodular - but normal exam doesn't rule out GCA"
-      - "Association with PMR: 50% of GCA have PMR symptoms"
-    management:
-      - "Start prednisone 1mg/kg (60mg) IMMEDIATELY if high clinical suspicion - do NOT wait for biopsy (vision loss is emergency)"
-      - "Temporal artery biopsy within 2 weeks: Confirms diagnosis (giant cells, skip lesions). Steroids don't affect biopsy results for 2 weeks"
-      - "Initial steroids: Prednisone 60mg daily x4 weeks, if vision loss give methylprednisolone 1g IV daily x3 days first"
-      - "Slow taper: After 4 weeks, taper by 10mg every 2 weeks to 20mg, then 2.5mg every 2-4 weeks to 10mg, then 1mg every 4-8 weeks. Total duration 1-2 years"
-      - "Monitor ESR/CRP: Check monthly during taper - if rising, increase prednisone. Add methotrexate 15-25mg weekly or tocilizumab if steroid-dependent"
-    tests:
-      - "ESR: Typically >50 mm/hr, often >100 (very high ESR suggests GCA)"
-      - "CRP: Elevated, often very high"
-      - "Temporal artery biopsy (3-5 cm segment): Giant cells, intimal thickening, skip lesions - 80% sensitive (false negatives due to skip lesions)"
-      - "Biopsy both sides if first negative and high suspicion (skip lesions can cause false negatives)"
-      - "CTA or MRA head/neck: If biopsy negative but high suspicion - shows vessel wall thickening, stenosis"
-    referrals:
-      - "Rheumatology urgently - same day if vision symptoms"
-      - "Ophthalmology urgently if any vision changes"
-      - "Vascular surgery for temporal artery biopsy within 2 weeks"
-    icd10:
-      - M31.6
-      - M31.5
-    snomed:
-      - "400130008"
-
-  - id: RHEUM-AS
-    label: Ankylosing Spondylitis
-    presentations:
-      - Lower back pain and stiffness
-      - Pain worse at rest, improves with activity
-      - Morning stiffness > 30 minutes
-      - Reduced spinal mobility
-      - HLA-B27 positive
-      - Sacroiliitis on imaging
-    clinical_pearls:
-      - "Seronegative spondyloarthropathy - chronic inflammatory back pain, male 3:1, onset <40 years (average 26)"
-      - "Inflammatory back pain features: Age <40, insidious onset, >3 months, morning stiffness >30 min, improves with exercise (vs mechanical back pain worse with exercise)"
-      - "Bamboo spine: Late finding - syndesmophytes (bony bridges between vertebrae), complete spinal fusion"
-      - "Extraspinal: Uveitis (25-40% - anterior, unilateral, recurrent), aortitis, apical pulmonary fibrosis, enthesitis (Achilles, plantar fascia)"
-      - "HLA-B27: 90% of AS patients positive (vs 8% general population), but most HLA-B27+ people never develop AS"
-    management:
-      - "NSAIDs (first-line): Indomethacin 50mg TID or naproxen 500mg BID continuously (not PRN) - improves stiffness, slows radiographic progression"
-      - "Physical therapy: Spinal extension exercises, posture training, swimming - prevent fixed flexion deformity"
-      - "Anti-TNF biologics: If failed NSAIDs x3 months or active disease. Etanercept 50mg SQ weekly, adalimumab 40mg SQ q2 weeks, infliximab 5mg/kg IV q6-8 weeks"
-      - "IL-17 inhibitors: Secukinumab, ixekizumab - alternative to anti-TNF"
-      - "Smoking cessation: Worse outcomes in smokers (faster radiographic progression)"
-    tests:
-      - "HLA-B27: 90% sensitive (positive in 90% of AS), but low specificity (8% general population positive)"
-      - "ESR/CRP: Elevated in 50-70% (normal ESR doesn't rule out AS)"
-      - "X-ray pelvis (AP): Sacroiliitis (erosions, sclerosis, fusion), bamboo spine (late - syndesmophytes)"
-      - "MRI SI joints: More sensitive than X-ray for early sacroiliitis - bone marrow edema on STIR sequence"
-      - "Schober test: Mark L5, measure 10cm up. Flex forward. <5cm increase = reduced lumbar flexion (normal >5cm)"
-    referrals:
-      - "Rheumatology for diagnosis confirmation and biologic therapy"
-      - "Ophthalmology if uveitis (red eye, photophobia, pain)"
-    icd10:
-      - M45.9
-    snomed:
-      - "9631008"
-
-  - id: RHEUM-PSORIATIC
-    label: Psoriatic Arthritis
-    presentations:
-      - Joint pain and swelling
-      - Psoriatic skin lesions
-      - Nail pitting or onycholysis
-      - Dactylitis (sausage digits)
-      - Enthesitis
-    clinical_pearls:
-      - "Inflammatory arthritis associated with psoriasis - 30% of psoriasis patients develop arthritis (usually skin lesions precede arthritis by 10 years)"
-      - "DIP joint involvement: Classic feature distinguishing from RA (RA spares DIP). Nail changes (pitting, onycholysis) correlate with DIP arthritis"
-      - "Dactylitis (sausage digit): Entire finger/toe swollen - pathognomonic for psoriatic arthritis or reactive arthritis"
-      - "Enthesitis: Inflammation at tendon/ligament insertion (Achilles, plantar fascia) - distinguishes spondyloarthropathies from RA"
-      - "Five patterns: DIP (5%), asymmetric oligoarticular (70%), symmetric polyarticular (15%, RA-like), spondylitis (5%), arthritis mutilans (5%, very destructive)"
-    management:
-      - "NSAIDs: Ibuprofen 600mg TID or naproxen 500mg BID for mild disease"
-      - "DMARDs: Methotrexate 15-25mg weekly (treats both skin and joints) - first-line"
-      - "Anti-TNF biologics: If failed methotrexate. Etanercept, adalimumab, infliximab, certolizumab, golimumab - very effective for joints and skin"
-      - "IL-17 inhibitors: Secukinumab, ixekizumab - excellent for skin, effective for joints"
-      - "IL-12/23 inhibitor: Ustekinumab - effective for skin and joints"
-      - "Topical steroids for skin: Betamethasone 0.05% BID, coal tar, vitamin D analogs"
-    tests:
-      - "RF and anti-CCP: Negative (seronegative arthritis)"
-      - "ESR/CRP: Elevated in 50%"
-      - "X-ray: Pencil-in-cup deformity (severe erosions), periostitis (new bone formation), ankylosis"
-      - "Psoriasis: Look at scalp, elbows, knees, umbilicus, gluteal cleft, nails (pitting, onycholysis, oil spots)"
-      - "Nail changes: 80% with psoriatic arthritis have nail involvement (vs 40% with psoriasis without arthritis)"
-    referrals:
-      - "Rheumatology for all psoriatic arthritis - early DMARD/biologic prevents joint damage"
-      - "Dermatology for psoriasis management"
-    icd10:
-      - L40.50
-      - L40.59
-      - M07.60
-    snomed:
-      - "33339001"
-
-  - id: RHEUM-FIBROMYALGIA
-    label: Fibromyalgia
-    presentations:
-      - Widespread musculoskeletal pain
-      - Fatigue
-      - Sleep disturbance
-      - Cognitive difficulties (fibro fog)
-      - Multiple tender points
-      - Normal lab tests
-    clinical_pearls:
-      - "Central pain amplification syndrome - 2-4% of population, female 7:1, peak onset 30-50 years"
-      - "Diagnosis: Widespread pain >3 months + Widespread Pain Index >7 + Symptom Severity Score >5 (2016 criteria - tender point exam no longer required)"
-      - "Normal labs: Normal ESR/CRP, normal RF/ANA, normal CPK - helps distinguish from inflammatory arthritis or myositis"
-      - "Comorbidities: Depression (50%), anxiety, irritable bowel syndrome, migraine, TMJ, interstitial cystitis - often coexist"
-      - "NOT a diagnosis of exclusion: Can coexist with RA, lupus, other rheumatic diseases"
-    management:
-      - "Education: Explain central sensitization, chronic pain neurobiology - sets realistic expectations (management, not cure)"
-      - "Exercise: Aerobic exercise (walking, swimming, cycling) 30 min 3-5x/week - MOST effective non-pharmacologic treatment"
-      - "Cognitive behavioral therapy (CBT): Addresses maladaptive thoughts, improves coping strategies"
-      - "Medications: Duloxetine 60mg daily (SNRI) OR pregabalin 150-450mg divided BID (for pain) OR amitriptyline 10-25mg qHS (for sleep)"
-      - "Avoid opioids: Not effective for fibromyalgia, high risk of dependence/adverse effects"
-    tests:
-      - "Clinical diagnosis: No specific lab test"
-      - "ESR/CRP: Normal (if elevated, consider alternative diagnosis like inflammatory arthritis)"
-      - "CBC, CMP: Normal"
-      - "TSH: Rule out hypothyroidism (can mimic fibromyalgia)"
-      - "Vitamin D: If low, replace (may improve pain/fatigue)"
-      - "RF, anti-CCP, ANA: Not routinely needed unless features of inflammatory arthritis or connective tissue disease"
-    referrals:
-      - "Rheumatology if: Diagnostic uncertainty (elevated inflammatory markers, synovitis, abnormal labs suggesting alternative diagnosis)"
-      - "Most fibromyalgia managed by primary care with exercise, CBT, duloxetine/pregabalin/amitriptyline"
-    icd10:
-      - M79.7
-    snomed:
-      - "203082005"
-
-  - id: RHEUM-VASCULITIS
-    label: Systemic Vasculitis
-    presentations:
-      - Fever and weight loss
-      - Purpura or skin ulcers
-      - Neuropathy
-      - Renal involvement
-      - Elevated inflammatory markers
-      - Organ-specific symptoms
-    clinical_pearls:
-      - "Inflammation of blood vessels - classified by vessel size: Large (GCA, Takayasu), Medium (PAN, Kawasaki), Small (GPA, MPA, EGPA)"
-      - "ANCA-associated vasculitis: GPA (Wegener's - c-ANCA/PR3), MPA (p-ANCA/MPO), EGPA (Churg-Strauss - eosinophilia, asthma)"
-      - "GPA (granulomatosis with polyangiitis): Upper/lower respiratory (sinusitis, pulmonary nodules) + glomerulonephritis - 'saddle nose deformity'"
-      - "PAN (polyarteritis nodosa): Medium vessel - renal artery aneurysms, mesenteric ischemia, mononeuritis multiplex, ANCA-negative"
-      - "Red flags: Constitutional symptoms (fever, weight loss) + multisystem involvement (kidneys, lungs, skin, nerves) + elevated ESR/CRP"
-    management:
-      - "Induction (severe/organ-threatening): Cyclophosphamide IV 500-750 mg/m2 monthly x6 months + prednisone 1mg/kg daily"
-      - "Alternative induction: Rituximab 375 mg/m2 IV weekly x4 (non-inferior to cyclophosphamide, less toxicity)"
-      - "Maintenance (after remission): Rituximab 500-1000mg IV q6 months OR azathioprine 2mg/kg daily x18-24 months"
-      - "Plasma exchange: If rapidly progressive glomerulonephritis (creatinine >5.8 mg/dL) or pulmonary hemorrhage"
-      - "Steroid taper: After 4-6 weeks, taper prednisone by 10-20% every 2 weeks to 10mg, then slower taper to 5mg by 6 months"
-    tests:
-      - "ANCA: c-ANCA/PR3 (GPA), p-ANCA/MPO (MPA, EGPA) - 80-90% sensitive in active disease"
-      - "ESR/CRP: Markedly elevated"
-      - "UA with micro: RBC casts, proteinuria (glomerulonephritis)"
-      - "Creatinine: Renal function (rapidly progressive GN can cause renal failure in days-weeks)"
-      - "Chest X-ray/CT: Pulmonary nodules, cavitation, infiltrates, hemorrhage"
-      - "Biopsy (kidney, lung, skin): Necrotizing vasculitis, granulomas (GPA), eosinophils (EGPA) - gold standard"
-    referrals:
-      - "Rheumatology EMERGENTLY - vasculitis is medical emergency, untreated can cause irreversible organ damage/death"
-      - "Nephrology if renal involvement (glomerulonephritis)"
-    icd10:
-      - M31.9
-      - M31.30
-    snomed:
-      - "31996006"
+- id: RHEUM-RA
+  label: Rheumatoid Arthritis
+  presentations:
+  - Symmetric polyarticular arthritis
+  - Morning stiffness > 1 hour
+  - Hand and wrist involvement (MCP, PIP)
+  - Rheumatoid nodules
+  - Positive RF or anti-CCP
+  clinical_pearls:
+  - Autoimmune inflammatory arthritis - 1% of population, female 3:1, peak onset 40-60
+    years
+  - Symmetric small joints (MCP, PIP, wrists) - spares DIP joints (vs OA which affects
+    DIP)
+  - 'Anti-CCP antibody: 95% specific for RA (more specific than RF which is only 70%),
+    predicts erosive disease'
+  - 'Extraarticular manifestations: Rheumatoid nodules (elbows, pressure points),
+    interstitial lung disease, pericarditis, scleritis, Felty syndrome'
+  - Swan neck (PIP hyperextension + DIP flexion) and boutonniere (PIP flexion + DIP
+    hyperextension) deformities from chronic inflammation
+  management:
+  - 'Guideline-based treatment options for Rheumatoid Arthritis include:'
+  - 'DMARD therapy EARLY (within 3 months): Methotrexate 15-25mg weekly + folic acid
+    1mg daily (reduces erosions, preserves joint function)'
+  - 'Triple therapy: Methotrexate + hydroxychloroquine 200-400mg daily + sulfasalazine
+    2-3g daily (if methotrexate alone insufficient)'
+  - 'Biologics (if failed methotrexate): Anti-TNF (etanercept, adalimumab, infliximab),
+    IL-6 inhibitor (tocilizumab), JAK inhibitors (tofacitinib)'
+  - 'Bridge therapy: Prednisone 5-10mg daily short-term while awaiting DMARD response
+    (takes 2-3 months)'
+  - 'NSAIDs for symptom relief only (don''t prevent joint damage): Ibuprofen 600mg
+    TID, naproxen 500mg BID'
+  tests:
+  - 'RF (rheumatoid factor): 70% sensitive, 70% specific - can be negative early (seronegative
+    RA)'
+  - 'Anti-CCP antibodies: 70% sensitive, 95% specific - earlier and more specific
+    than RF'
+  - 'ESR/CRP: Elevated, correlates with disease activity'
+  - 'X-ray hands/feet: Early (periarticular osteopenia, soft tissue swelling), Late
+    (erosions, joint space narrowing, subluxation)'
+  - 'Ultrasound or MRI: More sensitive than X-ray for early erosions and synovitis'
+  referrals:
+  - Rheumatology urgently (within 3 months of symptom onset) - early DMARD treatment
+    prevents joint damage
+  - 'Treat-to-target approach: Adjust DMARDs every 3 months until remission or low
+    disease activity'
+  icd10:
+  - M06.9
+  - M05.9
+  snomed:
+  - '69896004'
+- id: RHEUM-OA
+  label: Osteoarthritis
+  presentations:
+  - Joint pain worse with activity
+  - Morning stiffness < 30 minutes
+  - Bony enlargement (Heberden's, Bouchard's nodes)
+  - Crepitus
+  - Loss of range of motion
+  clinical_pearls:
+  - Most common arthritis - degenerative 'wear and tear' of cartilage, 50% of adults
+    >65 have radiographic OA
+  - Weight-bearing joints (knees, hips) and hands (DIP, PIP, CMC thumb) most affected
+  - Heberden nodes (DIP) and Bouchard nodes (PIP) - bony osteophytes pathognomonic
+    for OA
+  - Pain worse with activity, improves with rest (vs RA which is worse with rest,
+    improves with activity)
+  - Morning stiffness <30 minutes (vs RA >1 hour) - 'gel phenomenon' from synovial
+    fluid stasis
+  management:
+  - 'Guideline-based treatment options for Osteoarthritis include:'
+  - 'Weight loss if overweight: 5-10% weight loss reduces knee pain 50% (most effective
+    non-pharmacologic intervention)'
+  - 'Physical therapy: Quadriceps strengthening for knee OA, range of motion exercises'
+  - 'Acetaminophen 1g TID-QID: First-line (safer than NSAIDs, less effective)'
+  - 'NSAIDs: Ibuprofen 600mg TID or naproxen 500mg BID (more effective than acetaminophen,
+    GI/CV/renal risks)'
+  - 'Intra-articular steroid injections: Triamcinolone 40-80mg for knee/hip - 3-6
+    months relief, max 3-4 per year'
+  - 'Joint replacement (total knee/hip arthroplasty): If severe pain limiting function
+    despite medical management'
+  tests:
+  - Clinical diagnosis usually sufficient
+  - 'X-ray: Joint space narrowing, osteophytes, subchondral sclerosis, subchondral
+    cysts'
+  - 'Kellgren-Lawrence grading: 0 (normal), 1 (doubtful), 2 (minimal), 3 (moderate),
+    4 (severe)'
+  - 'Labs: Normal ESR/CRP, normal RF/anti-CCP (helps differentiate from RA if unclear)'
+  referrals:
+  - Orthopedics for joint replacement if severe pain limiting daily activities despite
+    conservative management
+  - Rheumatology if diagnostic uncertainty (atypical age, inflammatory features)
+  icd10:
+  - M19.90
+  - M17.9
+  - M16.9
+  snomed:
+  - '396275006'
+- id: RHEUM-GOUT
+  label: Gout
+  presentations:
+  - Sudden onset severe joint pain
+  - First MTP joint (podagra) most common
+  - Joint erythema and swelling
+  - Elevated uric acid
+  - Monosodium urate crystals
+  clinical_pearls:
+  - Most common inflammatory arthritis in men - monosodium urate crystal deposition
+    from hyperuricemia (>6.8 mg/dL)
+  - 'Podagra (first MTP joint): 50% of initial attacks, 90% affected at some point
+    - exquisitely painful, can''t tolerate bedsheet touch'
+  - 'Hyperuricemia: Overproduction (10% - HGPRT deficiency, lymphoproliferative, high
+    purine diet) or underexcretion (90% - renal insufficiency, diuretics)'
+  - 'Tophus: Urate crystal deposits in soft tissues (ears, elbows, fingers) - appear
+    after 10+ years of untreated gout'
+  - 'Acute attacks triggered by: Alcohol, red meat, seafood, dehydration, diuretics,
+    trauma, surgery'
+  management:
+  - 'Guideline-based treatment options for Gout include:'
+  - 'Acute attack: NSAIDs (indomethacin 50mg TID or naproxen 500mg BID) OR colchicine
+    1.2mg then 0.6mg 1h later OR prednisone 40mg daily x5 days'
+  - DO NOT start allopurinol during acute attack (worsens flare) - treat acute inflammation
+    first
+  - 'Urate-lowering therapy (ULT): Allopurinol 100mg daily, increase by 100mg q2-4
+    weeks to achieve uric acid <6 mg/dL (goal <5 if tophaceous)'
+  - 'Colchicine prophylaxis: 0.6mg daily during first 6 months of ULT (prevents flares
+    from urate mobilization)'
+  - 'Lifestyle: Limit alcohol, red meat, seafood (high purines). Increase water, low-fat
+    dairy, cherries'
+  tests:
+  - 'Synovial fluid analysis (GOLD STANDARD): Monosodium urate crystals (needle-shaped,
+    negatively birefringent under polarized light), WBC 2,000-100,000'
+  - 'Serum uric acid: >6.8 mg/dL (can be NORMAL during acute attack - 30% have normal
+    uric acid during flare)'
+  - 'X-ray: Normal early. Chronic: Punched-out erosions with overhanging edges (rat-bite
+    erosions), tophi'
+  - 'Ultrasound: Double contour sign (urate on cartilage surface) - more sensitive
+    than X-ray'
+  referrals:
+  - 'Rheumatology if: Atypical presentation, polyarticular gout, refractory to treatment,
+    tophaceous gout'
+  - Most gout managed by primary care with NSAIDs/colchicine (acute) and allopurinol
+    (chronic)
+  icd10:
+  - M10.9
+  - M10.00
+  snomed:
+  - '90560007'
+- id: RHEUM-PSEUDOGOUT
+  label: Pseudogout (CPPD)
+  presentations:
+  - Acute joint pain and swelling
+  - Knee most commonly affected
+  - Calcium pyrophosphate crystals
+  - Chondrocalcinosis on X-ray
+  clinical_pearls:
+  - CPPD (calcium pyrophosphate deposition disease) - calcium pyrophosphate crystals
+    in cartilage causing arthritis
+  - Knee most common (50%), then wrist, shoulder. Often polyarticular in elderly
+  - 'Risk factors: Age >60, hyperparathyroidism, hemochromatosis, hypomagnesemia,
+    hypophosphatasia (check calcium, PTH, iron, Mg, alk phos)'
+  - 'Chondrocalcinosis: Calcification of fibrocartilage (menisci, triangular fibrocartilage
+    of wrist) on X-ray - present in CPPD but also asymptomatic elderly'
+  - 'Mimics septic arthritis: Acute monoarticular arthritis with fever, elevated WBC
+    - must aspirate to rule out infection'
+  management:
+  - 'Guideline-based treatment options for Pseudogout (CPPD) include:'
+  - 'Acute attack: NSAIDs (naproxen 500mg BID, indomethacin 50mg TID) OR colchicine
+    0.6mg BID OR prednisone 40mg daily x5 days'
+  - 'Intra-articular steroids: Triamcinolone 40-80mg if monoarticular (after ruling
+    out septic arthritis)'
+  - 'No cure or urate-lowering equivalent: Unlike gout, no medication prevents CPPD
+    crystal formation'
+  - 'Treat underlying: Correct hyperparathyroidism, hemochromatosis if present'
+  - 'Prophylaxis: Colchicine 0.6mg daily if frequent recurrent attacks (reduces flare
+    frequency)'
+  tests:
+  - 'Synovial fluid analysis (GOLD STANDARD): Calcium pyrophosphate crystals (rhomboid-shaped,
+    weakly positively birefringent), WBC 2,000-100,000'
+  - 'X-ray: Chondrocalcinosis (linear calcification of cartilage - menisci in knee,
+    triangular fibrocartilage in wrist)'
+  - 'Screen for metabolic diseases: Calcium, PTH (hyperparathyroidism), ferritin/iron
+    (hemochromatosis), magnesium (hypomagnesemia), alkaline phosphatase (hypophosphatasia)'
+  referrals:
+  - 'Rheumatology if: Polyarticular CPPD, young patient (<55 years - suggests metabolic
+    disease), refractory to treatment'
+  - Most pseudogout managed by primary care with NSAIDs/colchicine
+  icd10:
+  - M11.9
+  - M11.20
+  snomed:
+  - '6404008'
+- id: RHEUM-SLE
+  label: Systemic Lupus Erythematosus
+  presentations:
+  - Malar rash
+  - Photosensitivity
+  - Oral ulcers
+  - Arthritis
+  - Serositis
+  - Renal involvement
+  - Positive ANA, anti-dsDNA
+  clinical_pearls:
+  - Multisystem autoimmune disease - female 9:1, peak onset 20-40 years, African American
+    > Caucasian
+  - 'Malar (butterfly) rash: Spares nasolabial folds - pathognomonic but only present
+    50%'
+  - 'Lupus nephritis (50%): Most serious complication, leading cause of morbidity/mortality,
+    requires aggressive immunosuppression'
+  - 'Drug-induced lupus: Hydralazine, procainamide, isoniazid, minocycline - resolves
+    after stopping drug, anti-histone antibodies positive'
+  - 'Antiphospholipid syndrome (30%): Thrombosis, recurrent miscarriages, thrombocytopenia
+    - requires anticoagulation'
+  management:
+  - 'Guideline-based treatment options for Systemic Lupus Erythematosus include:'
+  - 'Mild disease (arthritis, rash): Hydroxychloroquine 200-400mg daily (reduces flares,
+    protects against organ damage), NSAIDs, sunscreen SPF 50+'
+  - 'Moderate disease: Prednisone 0.5-1mg/kg daily, taper after control, add steroid-sparing
+    agent (methotrexate 15-25mg weekly, azathioprine 2mg/kg daily)'
+  - 'Severe disease (lupus nephritis, CNS lupus): High-dose prednisone 1mg/kg + cyclophosphamide
+    IV monthly x6 months OR mycophenolate 2-3g daily'
+  - 'Belimumab (monoclonal anti-BLyS): For active disease despite standard therapy'
+  - 'Pregnancy: High-risk (preeclampsia, flares), hydroxychloroquine continued, avoid
+    methotrexate/cyclophosphamide (teratogenic)'
+  tests:
+  - 'ANA: 95% sensitive but only 50% specific - if negative, SLE very unlikely. Titer
+    >1:160 significant'
+  - 'Anti-dsDNA: 70% sensitive, 95% specific - rises with disease activity, correlates
+    with nephritis'
+  - 'Anti-Smith: 30% sensitive, 99% specific - most specific for SLE'
+  - 'Complement (C3, C4): Low in active disease (consumption)'
+  - 'UA with micro: Proteinuria, RBC casts (lupus nephritis). 24-hour urine protein
+    if positive'
+  - 'CBC: Anemia (hemolytic or chronic disease), leukopenia, thrombocytopenia'
+  referrals:
+  - Rheumatology urgently for all SLE diagnoses - requires disease activity monitoring
+    and immunosuppression
+  - Nephrology if proteinuria >500mg/day or active urine sediment (lupus nephritis)
+  icd10:
+  - M32.9
+  - M32.10
+  snomed:
+  - '55464009'
+- id: RHEUM-SJOGREN
+  label: Sjögren's Syndrome
+  presentations:
+  - Dry eyes (keratoconjunctivitis sicca)
+  - Dry mouth (xerostomia)
+  - Parotid gland enlargement
+  - Dental caries
+  - Positive anti-SSA/SSB
+  clinical_pearls:
+  - Autoimmune exocrinopathy - lymphocytic infiltration of lacrimal and salivary glands,
+    female 9:1
+  - 'Primary Sjögren''s (50%): Isolated dry eyes/mouth. Secondary (50%): Associated
+    with RA, SLE, scleroderma'
+  - 'Extraglandular: Arthritis (60%), interstitial lung disease, renal tubular acidosis,
+    peripheral neuropathy, lymphoma risk (5-10%, 40x general population)'
+  - 'Dental complications: Rampant caries, candidiasis from dry mouth - needs aggressive
+    dental prevention'
+  - 'Parotid enlargement: Bilateral, recurrent - if unilateral/hard, consider lymphoma
+    (MALT)'
+  management:
+  - 'Guideline-based treatment options for Sjögren''s Syndrome include:'
+  - 'Dry eyes: Artificial tears (preservative-free) q2-4h, cyclosporine 0.05% drops
+    BID (increases tear production), punctal plugs if severe'
+  - 'Dry mouth: Sugar-free gum, sips of water, saliva substitutes, pilocarpine 5mg
+    QID or cevimeline 30mg TID (stimulate secretions)'
+  - 'Dental care: Fluoride rinses, frequent dental cleanings, avoid sugary foods'
+  - 'Systemic symptoms: Hydroxychloroquine 200-400mg daily for arthritis/fatigue'
+  - 'Monitor for lymphoma: Annual exam for persistent parotid swelling, lymphadenopathy,
+    constitutional symptoms'
+  tests:
+  - 'Anti-SSA (Ro) antibodies: 70% sensitive, 95% specific for primary Sjögren''s'
+  - 'Anti-SSB (La) antibodies: 40% sensitive, 98% specific - if positive, almost always
+    has anti-SSA too'
+  - 'ANA: Positive in 80%, RF positive in 50%'
+  - 'Schirmer test: <5mm wetting of filter paper in 5 minutes = dry eyes (normal >15mm)'
+  - 'Salivary gland biopsy (minor salivary glands in lip): Focal lymphocytic sialadenitis
+    - gold standard but rarely needed'
+  referrals:
+  - Rheumatology for diagnosis confirmation and management
+  - Ophthalmology for dry eye management (punctal plugs, cyclosporine drops)
+  - Dentistry for preventive care
+  icd10:
+  - M35.00
+  - M35.09
+  snomed:
+  - '83901003'
+- id: RHEUM-SCLERODERMA
+  label: Systemic Sclerosis (Scleroderma)
+  presentations:
+  - Skin thickening and tightening
+  - Raynaud's phenomenon
+  - Dysphagia
+  - GERD
+  - Pulmonary fibrosis
+  - Digital ulcers
+  clinical_pearls:
+  - Autoimmune fibrotic disease - excess collagen deposition in skin and organs, female
+    4:1
+  - 'Limited cutaneous (lcSSc, CREST): Skin involvement distal to elbows/knees, better
+    prognosis. Calcinosis, Raynaud''s, Esophageal dysmotility, Sclerodactyly, Telangiectasias'
+  - 'Diffuse cutaneous (dcSSc): Skin involvement proximal to elbows/knees + trunk,
+    worse prognosis, rapid progression, renal crisis risk'
+  - 'Raynaud''s phenomenon: Triphasic color change (white → blue → red) with cold/stress
+    - present in 95% of scleroderma'
+  - 'Scleroderma renal crisis: Malignant hypertension, acute kidney injury, microangiopathic
+    hemolytic anemia - EMERGENCY, treat with ACE inhibitor'
+  management:
+  - 'Guideline-based treatment options for Systemic Sclerosis (Scleroderma) include:'
+  - 'Raynaud''s: Calcium channel blockers (nifedipine XL 30-90mg daily or amlodipine
+    5-10mg daily), avoid cold, stop smoking'
+  - 'GERD/dysphagia: PPI (omeprazole 40mg daily), prokinetics (metoclopramide 10mg
+    TID), small frequent meals'
+  - 'Pulmonary fibrosis: Immunosuppression (mycophenolate 2-3g daily or cyclophosphamide),
+    monitor with PFTs annually'
+  - 'Pulmonary hypertension: Screen with echo annually, treat with endothelin receptor
+    antagonists (bosentan), PDE5 inhibitors (sildenafil)'
+  - 'Scleroderma renal crisis: ACE inhibitor (captopril 6.25-25mg TID, titrate rapidly)
+    - started even if normotensive, dialysis if needed'
+  tests:
+  - 'Anti-Scl-70 (anti-topoisomerase I): 30% positive, specific for diffuse cutaneous
+    SSc, predicts pulmonary fibrosis'
+  - 'Anti-centromere antibodies: 50% positive in limited cutaneous SSc (CREST), lower
+    risk of organ involvement'
+  - 'ANA: Positive in 95%, speckled or nucleolar pattern'
+  - 'PFTs: Restrictive pattern (low FVC, low DLCO) - monitor annually for interstitial
+    lung disease'
+  - 'Echo: Screen for pulmonary hypertension (estimated RVSP >40 mmHg)'
+  - 'Barium swallow: Esophageal dysmotility, dilated atonic esophagus'
+  referrals:
+  - Rheumatology for all scleroderma - requires organ monitoring and immunosuppression
+  - Pulmonology for interstitial lung disease or pulmonary hypertension
+  - Nephrology urgently if scleroderma renal crisis (malignant HTN, AKI)
+  icd10:
+  - M34.9
+  - M34.0
+  snomed:
+  - '89155008'
+- id: RHEUM-POLYMYALGIA
+  label: Polymyalgia Rheumatica
+  presentations:
+  - Bilateral shoulder and hip girdle pain
+  - Morning stiffness
+  - Age > 50 years
+  - Elevated ESR/CRP
+  - Dramatic response to low-dose steroids
+  clinical_pearls:
+  - Inflammatory condition of proximal muscles - age >50 years (average 70), female
+    2:1, northern European ancestry
+  - Bilateral shoulder and hip girdle pain/stiffness (symmetric) - 'can't raise arms
+    to comb hair, can't get out of chair'
+  - 'Dramatic response to prednisone: 70% improve within 24-48 hours (diagnostic feature)'
+  - 'Association with giant cell arteritis: 15% of PMR have GCA, 50% of GCA have PMR
+    - screen for GCA symptoms (headache, jaw claudication, vision changes)'
+  - ESR >40 mm/hr typical (often >50) - if normal ESR, reconsider diagnosis
+  management:
+  - 'Guideline-based treatment options for Polymyalgia Rheumatica include:'
+  - 'Prednisone 15-20mg daily: Start dose, should see dramatic improvement within
+    48-72 hours'
+  - 'Slow taper: After 2-4 weeks, taper by 2.5mg every 2-4 weeks to 10mg, then 1mg
+    every 4-8 weeks. Total duration 1-2 years'
+  - 'Monitor ESR/CRP: Check every 2-4 weeks during taper - if rising or symptoms return,
+    increase prednisone back up'
+  - 'Steroid-sparing agents: Methotrexate 10-15mg weekly if unable to taper prednisone
+    below 10mg or frequent relapses'
+  - 'Bone protection: Calcium 1200mg + vitamin D 800-1000 IU daily, bisphosphonate
+    (alendronate 70mg weekly) if long-term steroids'
+  tests:
+  - 'ESR: Typically >40 mm/hr, often >50 (sensitive but not specific)'
+  - 'CRP: Elevated, correlates with disease activity'
+  - 'CBC: Mild anemia of chronic disease, normal or elevated platelets'
+  - 'CPK: Normal (vs polymyositis which has elevated CPK)'
+  - 'Screen for GCA: Ask about new headache, jaw claudication, vision changes - if
+    present, start prednisone 60mg and get temporal artery biopsy'
+  referrals:
+  - 'Rheumatology if: Atypical features (age <60, asymmetric, normal ESR), not responding
+    to prednisone, difficulty tapering'
+  - Most PMR managed by primary care with prednisone taper over 1-2 years
+  icd10:
+  - M35.3
+  snomed:
+  - '399130002'
+- id: RHEUM-GCA
+  label: Giant Cell Arteritis
+  presentations:
+  - New headache
+  - Temporal artery tenderness
+  - Jaw claudication
+  - Vision changes (amaurosis fugax)
+  - Elevated ESR/CRP
+  - Age > 50 years
+  clinical_pearls:
+  - Large vessel vasculitis - age >50 years (average 70), MEDICAL EMERGENCY due to
+    risk of irreversible blindness
+  - 'Anterior ischemic optic neuropathy (AION): 15-20% develop vision loss, often
+    sudden and permanent if untreated'
+  - 'Jaw claudication: Most specific symptom (95% specific for GCA) - pain with chewing,
+    relieved by rest'
+  - 'Temporal artery: Tender, thickened, non-pulsatile, nodular - but normal exam
+    doesn''t rule out GCA'
+  - 'Association with PMR: 50% of GCA have PMR symptoms'
+  management:
+  - 'Guideline-based treatment options for Giant Cell Arteritis include:'
+  - Start prednisone 1mg/kg (60mg) IMMEDIATELY if high clinical suspicion - do NOT
+    wait for biopsy (vision loss is emergency)
+  - 'Temporal artery biopsy within 2 weeks: Confirms diagnosis (giant cells, skip
+    lesions). Steroids don''t affect biopsy results for 2 weeks'
+  - 'Initial steroids: Prednisone 60mg daily x4 weeks, if vision loss give methylprednisolone
+    1g IV daily x3 days first'
+  - 'Slow taper: After 4 weeks, taper by 10mg every 2 weeks to 20mg, then 2.5mg every
+    2-4 weeks to 10mg, then 1mg every 4-8 weeks. Total duration 1-2 years'
+  - 'Monitor ESR/CRP: Check monthly during taper - if rising, increase prednisone.
+    Add methotrexate 15-25mg weekly or tocilizumab if steroid-dependent'
+  tests:
+  - 'ESR: Typically >50 mm/hr, often >100 (very high ESR suggests GCA)'
+  - 'CRP: Elevated, often very high'
+  - 'Temporal artery biopsy (3-5 cm segment): Giant cells, intimal thickening, skip
+    lesions - 80% sensitive (false negatives due to skip lesions)'
+  - Biopsy both sides if first negative and high suspicion (skip lesions can cause
+    false negatives)
+  - 'CTA or MRA head/neck: If biopsy negative but high suspicion - shows vessel wall
+    thickening, stenosis'
+  referrals:
+  - Rheumatology urgently - same day if vision symptoms
+  - Ophthalmology urgently if any vision changes
+  - Vascular surgery for temporal artery biopsy within 2 weeks
+  icd10:
+  - M31.6
+  - M31.5
+  snomed:
+  - '400130008'
+- id: RHEUM-AS
+  label: Ankylosing Spondylitis
+  presentations:
+  - Lower back pain and stiffness
+  - Pain worse at rest, improves with activity
+  - Morning stiffness > 30 minutes
+  - Reduced spinal mobility
+  - HLA-B27 positive
+  - Sacroiliitis on imaging
+  clinical_pearls:
+  - Seronegative spondyloarthropathy - chronic inflammatory back pain, male 3:1, onset
+    <40 years (average 26)
+  - 'Inflammatory back pain features: Age <40, insidious onset, >3 months, morning
+    stiffness >30 min, improves with exercise (vs mechanical back pain worse with
+    exercise)'
+  - 'Bamboo spine: Late finding - syndesmophytes (bony bridges between vertebrae),
+    complete spinal fusion'
+  - 'Extraspinal: Uveitis (25-40% - anterior, unilateral, recurrent), aortitis, apical
+    pulmonary fibrosis, enthesitis (Achilles, plantar fascia)'
+  - 'HLA-B27: 90% of AS patients positive (vs 8% general population), but most HLA-B27+
+    people never develop AS'
+  management:
+  - 'Guideline-based treatment options for Ankylosing Spondylitis include:'
+  - 'NSAIDs (first-line): Indomethacin 50mg TID or naproxen 500mg BID continuously
+    (not PRN) - improves stiffness, slows radiographic progression'
+  - 'Physical therapy: Spinal extension exercises, posture training, swimming - prevent
+    fixed flexion deformity'
+  - 'Anti-TNF biologics: If failed NSAIDs x3 months or active disease. Etanercept
+    50mg SQ weekly, adalimumab 40mg SQ q2 weeks, infliximab 5mg/kg IV q6-8 weeks'
+  - 'IL-17 inhibitors: Secukinumab, ixekizumab - alternative to anti-TNF'
+  - 'Smoking cessation: Worse outcomes in smokers (faster radiographic progression)'
+  tests:
+  - 'HLA-B27: 90% sensitive (positive in 90% of AS), but low specificity (8% general
+    population positive)'
+  - 'ESR/CRP: Elevated in 50-70% (normal ESR doesn''t rule out AS)'
+  - 'X-ray pelvis (AP): Sacroiliitis (erosions, sclerosis, fusion), bamboo spine (late
+    - syndesmophytes)'
+  - 'MRI SI joints: More sensitive than X-ray for early sacroiliitis - bone marrow
+    edema on STIR sequence'
+  - 'Schober test: Mark L5, measure 10cm up. Flex forward. <5cm increase = reduced
+    lumbar flexion (normal >5cm)'
+  referrals:
+  - Rheumatology for diagnosis confirmation and biologic therapy
+  - Ophthalmology if uveitis (red eye, photophobia, pain)
+  icd10:
+  - M45.9
+  snomed:
+  - '9631008'
+- id: RHEUM-PSORIATIC
+  label: Psoriatic Arthritis
+  presentations:
+  - Joint pain and swelling
+  - Psoriatic skin lesions
+  - Nail pitting or onycholysis
+  - Dactylitis (sausage digits)
+  - Enthesitis
+  clinical_pearls:
+  - Inflammatory arthritis associated with psoriasis - 30% of psoriasis patients develop
+    arthritis (usually skin lesions precede arthritis by 10 years)
+  - 'DIP joint involvement: Classic feature distinguishing from RA (RA spares DIP).
+    Nail changes (pitting, onycholysis) correlate with DIP arthritis'
+  - 'Dactylitis (sausage digit): Entire finger/toe swollen - pathognomonic for psoriatic
+    arthritis or reactive arthritis'
+  - 'Enthesitis: Inflammation at tendon/ligament insertion (Achilles, plantar fascia)
+    - distinguishes spondyloarthropathies from RA'
+  - 'Five patterns: DIP (5%), asymmetric oligoarticular (70%), symmetric polyarticular
+    (15%, RA-like), spondylitis (5%), arthritis mutilans (5%, very destructive)'
+  management:
+  - 'Guideline-based treatment options for Psoriatic Arthritis include:'
+  - 'NSAIDs: Ibuprofen 600mg TID or naproxen 500mg BID for mild disease'
+  - 'DMARDs: Methotrexate 15-25mg weekly (treats both skin and joints) - first-line'
+  - 'Anti-TNF biologics: If failed methotrexate. Etanercept, adalimumab, infliximab,
+    certolizumab, golimumab - very effective for joints and skin'
+  - 'IL-17 inhibitors: Secukinumab, ixekizumab - excellent for skin, effective for
+    joints'
+  - 'IL-12/23 inhibitor: Ustekinumab - effective for skin and joints'
+  - 'Topical steroids for skin: Betamethasone 0.05% BID, coal tar, vitamin D analogs'
+  tests:
+  - 'RF and anti-CCP: Negative (seronegative arthritis)'
+  - 'ESR/CRP: Elevated in 50%'
+  - 'X-ray: Pencil-in-cup deformity (severe erosions), periostitis (new bone formation),
+    ankylosis'
+  - 'Psoriasis: Look at scalp, elbows, knees, umbilicus, gluteal cleft, nails (pitting,
+    onycholysis, oil spots)'
+  - 'Nail changes: 80% with psoriatic arthritis have nail involvement (vs 40% with
+    psoriasis without arthritis)'
+  referrals:
+  - Rheumatology for all psoriatic arthritis - early DMARD/biologic prevents joint
+    damage
+  - Dermatology for psoriasis management
+  icd10:
+  - L40.50
+  - L40.59
+  - M07.60
+  snomed:
+  - '33339001'
+- id: RHEUM-FIBROMYALGIA
+  label: Fibromyalgia
+  presentations:
+  - Widespread musculoskeletal pain
+  - Fatigue
+  - Sleep disturbance
+  - Cognitive difficulties (fibro fog)
+  - Multiple tender points
+  - Normal lab tests
+  clinical_pearls:
+  - Central pain amplification syndrome - 2-4% of population, female 7:1, peak onset
+    30-50 years
+  - 'Diagnosis: Widespread pain >3 months + Widespread Pain Index >7 + Symptom Severity
+    Score >5 (2016 criteria - tender point exam no longer required)'
+  - 'Normal labs: Normal ESR/CRP, normal RF/ANA, normal CPK - helps distinguish from
+    inflammatory arthritis or myositis'
+  - 'Comorbidities: Depression (50%), anxiety, irritable bowel syndrome, migraine,
+    TMJ, interstitial cystitis - often coexist'
+  - 'NOT a diagnosis of exclusion: Can coexist with RA, lupus, other rheumatic diseases'
+  management:
+  - 'Guideline-based treatment options for Fibromyalgia include:'
+  - 'Education: Explain central sensitization, chronic pain neurobiology - sets realistic
+    expectations (management, not cure)'
+  - 'Exercise: Aerobic exercise (walking, swimming, cycling) 30 min 3-5x/week - MOST
+    effective non-pharmacologic treatment'
+  - 'Cognitive behavioral therapy (CBT): Addresses maladaptive thoughts, improves
+    coping strategies'
+  - 'Medications: Duloxetine 60mg daily (SNRI) OR pregabalin 150-450mg divided BID
+    (for pain) OR amitriptyline 10-25mg qHS (for sleep)'
+  - 'Avoid opioids: Not effective for fibromyalgia, high risk of dependence/adverse
+    effects'
+  tests:
+  - 'Clinical diagnosis: No specific lab test'
+  - 'ESR/CRP: Normal (if elevated, consider alternative diagnosis like inflammatory
+    arthritis)'
+  - 'CBC, CMP: Normal'
+  - 'TSH: Rule out hypothyroidism (can mimic fibromyalgia)'
+  - 'Vitamin D: If low, replace (may improve pain/fatigue)'
+  - 'RF, anti-CCP, ANA: Not routinely needed unless features of inflammatory arthritis
+    or connective tissue disease'
+  referrals:
+  - 'Rheumatology if: Diagnostic uncertainty (elevated inflammatory markers, synovitis,
+    abnormal labs suggesting alternative diagnosis)'
+  - Most fibromyalgia managed by primary care with exercise, CBT, duloxetine/pregabalin/amitriptyline
+  icd10:
+  - M79.7
+  snomed:
+  - '203082005'
+- id: RHEUM-VASCULITIS
+  label: Systemic Vasculitis
+  presentations:
+  - Fever and weight loss
+  - Purpura or skin ulcers
+  - Neuropathy
+  - Renal involvement
+  - Elevated inflammatory markers
+  - Organ-specific symptoms
+  clinical_pearls:
+  - 'Inflammation of blood vessels - classified by vessel size: Large (GCA, Takayasu),
+    Medium (PAN, Kawasaki), Small (GPA, MPA, EGPA)'
+  - 'ANCA-associated vasculitis: GPA (Wegener''s - c-ANCA/PR3), MPA (p-ANCA/MPO),
+    EGPA (Churg-Strauss - eosinophilia, asthma)'
+  - 'GPA (granulomatosis with polyangiitis): Upper/lower respiratory (sinusitis, pulmonary
+    nodules) + glomerulonephritis - ''saddle nose deformity'''
+  - 'PAN (polyarteritis nodosa): Medium vessel - renal artery aneurysms, mesenteric
+    ischemia, mononeuritis multiplex, ANCA-negative'
+  - 'Red flags: Constitutional symptoms (fever, weight loss) + multisystem involvement
+    (kidneys, lungs, skin, nerves) + elevated ESR/CRP'
+  management:
+  - 'Guideline-based treatment options for Systemic Vasculitis include:'
+  - 'Induction (severe/organ-threatening): Cyclophosphamide IV 500-750 mg/m2 monthly
+    x6 months + prednisone 1mg/kg daily'
+  - 'Alternative induction: Rituximab 375 mg/m2 IV weekly x4 (non-inferior to cyclophosphamide,
+    less toxicity)'
+  - 'Maintenance (after remission): Rituximab 500-1000mg IV q6 months OR azathioprine
+    2mg/kg daily x18-24 months'
+  - 'Plasma exchange: If rapidly progressive glomerulonephritis (creatinine >5.8 mg/dL)
+    or pulmonary hemorrhage'
+  - 'Steroid taper: After 4-6 weeks, taper prednisone by 10-20% every 2 weeks to 10mg,
+    then slower taper to 5mg by 6 months'
+  tests:
+  - 'ANCA: c-ANCA/PR3 (GPA), p-ANCA/MPO (MPA, EGPA) - 80-90% sensitive in active disease'
+  - 'ESR/CRP: Markedly elevated'
+  - 'UA with micro: RBC casts, proteinuria (glomerulonephritis)'
+  - 'Creatinine: Renal function (rapidly progressive GN can cause renal failure in
+    days-weeks)'
+  - 'Chest X-ray/CT: Pulmonary nodules, cavitation, infiltrates, hemorrhage'
+  - 'Biopsy (kidney, lung, skin): Necrotizing vasculitis, granulomas (GPA), eosinophils
+    (EGPA) - gold standard'
+  referrals:
+  - Rheumatology EMERGENTLY - vasculitis is medical emergency, untreated can cause
+    irreversible organ damage/death
+  - Nephrology if renal involvement (glomerulonephritis)
+  icd10:
+  - M31.9
+  - M31.30
+  snomed:
+  - '31996006'

@@ -155,6 +155,20 @@ class PDFReportGenerator:
             story.append(Paragraph("Management", self.styles['SectionHeader']))
             for mgmt in diagnosis['management']:
                 story.append(Paragraph(f"• {mgmt}", self.styles['Normal']))
+            # Add disclaimer
+            disclaimer_style = ParagraphStyle(
+                'Disclaimer',
+                parent=self.styles['Normal'],
+                fontSize=8,
+                textColor=colors.HexColor('#0f766e'),
+                fontName='Helvetica-Oblique',
+                spaceBefore=6,
+                spaceAfter=6
+            )
+            story.append(Paragraph(
+                "<i>These options are based on published guidelines and are not a substitute for clinical judgment.</i>",
+                disclaimer_style
+            ))
             story.append(Spacer(1, 0.2*inch))
         
         # Tests
@@ -291,6 +305,19 @@ class PDFReportGenerator:
                 story.append(Paragraph("<b>Management:</b>", self.styles['Normal']))
                 for mgmt in dx['management'][:3]:  # Top 3 management points
                     story.append(Paragraph(f"• {mgmt}", self.styles['Normal']))
+                # Add disclaimer for management
+                disclaimer_style_summary = ParagraphStyle(
+                    'DisclaimerSummary',
+                    parent=self.styles['Normal'],
+                    fontSize=7,
+                    textColor=colors.HexColor('#0f766e'),
+                    fontName='Helvetica-Oblique',
+                    spaceBefore=4
+                )
+                story.append(Paragraph(
+                    "<i>These options are based on published guidelines and are not a substitute for clinical judgment.</i>",
+                    disclaimer_style_summary
+                ))
             
             if idx < 3:
                 story.append(Spacer(1, 0.2*inch))

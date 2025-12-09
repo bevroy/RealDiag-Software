@@ -589,7 +589,11 @@ async def export_diagnosis_pdf(
         "snomed": ["394659003"],
         "presentations": ["chest pain", "dyspnea"],
         "clinical_pearls": ["Troponin elevation is key"],
-        "management": ["Aspirin 325mg", "Heparin"],
+        "management": [
+          "Guideline-based treatment options for Acute Coronary Syndrome include:",
+          "Aspirin 325mg (ACC/AHA)",
+          "Heparin (ACC/AHA)"
+        ],
         "tests": ["ECG", "Troponin"],
         "referrals": ["Cardiology"]
       },

@@ -205,12 +205,14 @@ class CaseLibrary:
                 "differential": ["CARD-STEMI", "CARD-UNSTABLE-ANGINA", "CARD-PERICARDITIS", "PULM-PE"],
                 "explanation": "This is a classic presentation of inferior STEMI. Key features include: (1) Cardiac risk factors (smoking, HTN, DM, HLD, family history), (2) Classic anginal chest pain with radiation, (3) Associated symptoms (diaphoresis, dyspnea), (4) Elevated troponin, (5) ST elevation in inferior leads (II, III, aVF). Time is muscle - activate cath lab immediately!",
                 "management_pearls": [
+                    "Guideline-based treatment options for STEMI (ACC/AHA 2017) include:",
                     "MONA: Morphine, Oxygen (if hypoxic), Nitroglycerin, Aspirin 325mg",
                     "Activate cath lab for emergent PCI (door-to-balloon <90 min)",
                     "Dual antiplatelet therapy: Aspirin + P2Y12 inhibitor (ticagrelor or prasugrel)",
                     "Anticoagulation: Heparin or bivalirudin",
                     "Beta-blocker and ACE inhibitor within 24 hours",
-                    "High-intensity statin (atorvastatin 80mg)"
+                    "High-intensity statin (atorvastatin 80mg)",
+                    "Note: These options are based on published guidelines and are not a substitute for clinical judgment."
                 ],
                 "references": [
                     "2017 ACC/AHA STEMI Guidelines",
@@ -258,12 +260,14 @@ class CaseLibrary:
                 "differential": ["NEU-SAH", "NEU-MENINGITIS", "NEU-MIGRAINE", "NEU-CVT"],
                 "explanation": "Classic subarachnoid hemorrhage presentation: 'thunderclap headache' (sudden, severe, maximal at onset), meningismus (neck stiffness), photophobia. CT shows blood in basilar cisterns. LP confirms SAH with persistent RBCs and xanthochromia (breakdown of hemoglobin). Key is recognizing 'worst headache of life' red flag.",
                 "management_pearls": [
+                    "Guideline-based treatment options for subarachnoid hemorrhage (AHA/ASA) include:",
                     "Immediate neurosurgery consult",
                     "CT angiography to identify aneurysm source",
                     "Nimodipine 60mg q4h to prevent vasospasm",
                     "Blood pressure control: SBP <160 mmHg (avoid hypotension)",
                     "Serial neuro exams for deterioration",
-                    "Prevent rebleeding: early aneurysm securement (coiling or clipping)"
+                    "Prevent rebleeding: early aneurysm securement (coiling or clipping)",
+                    "Note: These options are based on published guidelines and are not a substitute for clinical judgment."
                 ],
                 "references": [
                     "AHA/ASA Guidelines for SAH Management",

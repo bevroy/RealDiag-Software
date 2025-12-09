@@ -1,707 +1,785 @@
 family: nephrology
 version: 0.1.0
-source: "Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American Society of Nephrology (ASN)"
+source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American Society
+  of Nephrology (ASN)'
 rules:
-  - id: NEPHRO-AKI
-    label: Acute Kidney Injury
-    presentations:
-      - Decreased urine output
-      - Elevated creatinine
-      - Fluid overload
-      - Nausea and vomiting
-      - Confusion
-      - Uremic symptoms
-    clinical_pearls:
-      - "KDIGO criteria: Cr increase ≥0.3 mg/dL in 48hr OR increase ≥1.5x baseline in 7 days OR UOP <0.5 mL/kg/hr x 6hr"
-      - "Classify etiology: Prerenal (70% - volume depletion), intrinsic (ATN, GN, AIN), postrenal (obstruction)"
-      - "FeNa <1% = prerenal; >2% = ATN/intrinsic (not reliable if on diuretics - use FeUrea)"
-      - "Muddy brown casts = ATN; RBC casts = glomerulonephritis; WBC casts = pyelonephritis/AIN"
-      - "Mortality increases with stage: Stage 1 (10%), Stage 2 (25%), Stage 3 (50%)"
-    management:
-      - "Identify and treat underlying cause: Fluids if prerenal, stop nephrotoxins (NSAIDs, aminoglycosides)"
-      - "Monitor ins/outs, daily weights, strict fluid balance"
-      - "Adjust medication doses for GFR, avoid contrast if possible"
-      - "Indications for dialysis (AEIOU): Acidosis (pH <7.1), Electrolytes (K+ >6.5), Ingestion (toxins), Overload (pulmonary edema), Uremia (pericarditis, encephalopathy)"
-      - "Supportive: Nutrition, prevent complications"
-    tests:
-      - "Basic metabolic panel (Cr, BUN, electrolytes) - serial monitoring"
-      - "Urinalysis with microscopy (casts, cells)"
-      - "Urine sodium, FeNa (fractional excretion of sodium)"
-      - "Renal ultrasound (assess size, hydronephrosis, obstruction)"
-      - "Consider renal biopsy if unclear etiology after workup"
-    referrals:
-      - "Nephrology consult for all AKI"
-      - "Dialysis if AEIOU criteria met"
-      - "ICU if severe (oliguric, hyperkalemia, acidosis)"
-    icd10:
-      - N17.9
-      - N17.0
-      - N17.1
-    snomed:
-      - "14669001"
-
-  - id: NEPHRO-CKD
-    label: Chronic Kidney Disease
-    presentations:
-      - Gradual decline in kidney function
-      - Hypertension
-      - Anemia
-      - Bone disease
-      - Proteinuria
-      - Edema
-    clinical_pearls:
-      - "Stages: G1 (eGFR ≥90), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29), G5 (<15 or dialysis)"
-      - "Most common causes: Diabetes (40%), hypertension (25%), glomerulonephritis"
-      - "Complications: Anemia (low EPO), bone disease (high PTH), hyperkalemia, acidosis, uremia"
-      - "ACEi/ARBs slow progression (reduce proteinuria), especially if diabetes"
-      - "Monitor: eGFR, electrolytes, calcium, phosphate, PTH, hemoglobin every 3-6 months"
-      - "Nephrology referral when eGFR <30 (stage G4) or rapidly declining"
-    management:
-      - "Treat underlying cause: Tight glucose control (diabetes), BP control (goal <130/80)"
-      - "ACEi or ARB (slow progression, reduce proteinuria) - monitor Cr, K+"
-      - "Anemia: Erythropoietin (EPO) if Hgb <10, iron supplementation"
-      - "Bone disease: Phosphate binders (sevelamer, calcium acetate), vitamin D"
-      - "Prepare for dialysis: AV fistula placement when eGFR <20"
-    tests:
-      - "eGFR (calculated from Cr using CKD-EPI equation)"
-      - "Urinalysis + urine albumin-to-creatinine ratio (UACR)"
-      - "Basic metabolic panel, CBC, calcium, phosphate, PTH"
-      - "Renal ultrasound (kidney size - small kidneys suggest chronic disease)"
-    referrals:
-      - "Nephrology when eGFR <30 (stage G4), rapidly declining (≥5 mL/min/year), or resistant HTN"
-      - "Vascular surgery for AV fistula placement when eGFR <20"
-      - "Transplant evaluation when eGFR <20"
-    icd10:
-      - N18.3
-      - N18.4
-      - N18.5
-      - N18.6
-    snomed:
-      - "709044004"
-
-  - id: NEPHRO-NEPHROTIC
-    label: Nephrotic Syndrome
-    presentations:
-      - Massive proteinuria (>3.5 g/day)
-      - Hypoalbuminemia
-      - Edema (periorbital, pedal)
-      - Hyperlipidemia
-      - Frothy urine
-    clinical_pearls:
-      - "Classic tetrad: Proteinuria >3.5g/day, hypoalbuminemia <3.0, edema, hyperlipidemia"
-      - "Most common primary causes: Minimal change disease (children), FSGS, membranous nephropathy (adults)"
-      - "Secondary causes: Diabetes (most common overall), amyloidosis, lupus, NSAIDs, infections (HIV, hepatitis)"
-      - "Hypercoagulable state: Loss of antithrombin III → increased VTE risk"
-      - "Minimal change disease: Responds to steroids (95% remission), most common in children"
-    management:
-      - "Treat edema: Diuretics (furosemide 40-80mg daily), sodium restriction <2g/day"
-      - "ACEi or ARB (reduce proteinuria)"
-      - "Statins for hyperlipidemia"
-      - "Anticoagulation if albumin <2.5 (high VTE risk)"
-      - "Primary glomerular disease: Steroids (minimal change), immunosuppression (FSGS, membranous)"
-    tests:
-      - "24-hour urine protein or spot urine protein-to-creatinine ratio (>3.5g/day or >3.0)"
-      - "Serum albumin (<3.0 g/dL)"
-      - "Lipid panel (elevated cholesterol, triglycerides)"
-      - "Renal biopsy (definitive diagnosis, determines specific glomerular disease)"
-      - "Consider: Hepatitis B/C serologies, ANA, complement levels, SPEP/UPEP (amyloid, myeloma)"
-    referrals:
-      - "Nephrology for all nephrotic syndrome (renal biopsy, management)"
-      - "Consider renal biopsy if not responsive to initial therapy or unclear etiology"
-    icd10:
-      - N04.9
-    snomed:
-      - "52254009"
-
-  - id: NEPHRO-NEPHRITIC
-    label: Acute Nephritic Syndrome
-    presentations:
-      - Hematuria
-      - Proteinuria (< 3.5 g/day)
-      - Hypertension
-      - Edema
-      - Oliguria
-      - Red cell casts
-    clinical_pearls:
-      - "Glomerular inflammation → hematuria (tea/cola-colored urine), RBC casts, hypertension, edema"
-      - "Post-streptococcal GN: Most common pediatric cause, 1-3 weeks after strep pharyngitis or impetigo"
-      - "IgA nephropathy (Berger disease): Most common primary GN worldwide, hematuria during URI"
-      - "RPGN (rapidly progressive GN): Crescent formation, rapid decline in GFR (weeks) - needs urgent treatment"
-      - "Low C3/C4 complement: Post-strep GN, lupus nephritis, MPGN"
-    management:
-      - "Supportive: Fluid/sodium restriction, diuretics for edema, antihypertensives"
-      - "Post-strep GN: Supportive only (self-limited in 4-6 weeks), antibiotics if active infection"
-      - "RPGN: Urgent therapy - steroids, cyclophosphamide, plasmapheresis (based on etiology)"
-      - "IgA nephropathy: ACEi/ARB to reduce proteinuria, steroids if rapidly progressive"
-      - "Dialysis if severe AKI"
-    tests:
-      - "Urinalysis: RBC casts (pathognomonic for GN), dysmorphic RBCs, proteinuria"
-      - "Serum creatinine, BUN (assess kidney function)"
-      - "Complement levels (C3, C4) - low suggests post-infectious, lupus, MPGN"
-      - "ASO titer, anti-DNase B (post-streptococcal GN)"
-      - "ANA, anti-dsDNA (lupus nephritis), ANCA (vasculitis), anti-GBM (Goodpasture)"
-      - "Renal biopsy if diagnosis unclear or suspected RPGN"
-    referrals:
-      - "Nephrology for all nephritic syndrome (urgent if RPGN suspected)"
-      - "Renal biopsy if diagnosis unclear or suspected RPGN"
-    icd10:
-      - N00.9
-      - N05.9
-    snomed:
-      - "236455006"
-
-  - id: NEPHRO-KIDNEY-STONE
-    label: Nephrolithiasis (Kidney Stones)
-    presentations:
-      - Severe colicky flank pain
-      - Hematuria
-      - Nausea and vomiting
-      - Pain radiating to groin
-      - Unable to find comfortable position
-    clinical_pearls:
-      - "Most common type: Calcium oxalate (80%), then uric acid (10%), struvite (infection), cystine (rare)"
-      - "Stones <5mm: 90% pass spontaneously with conservative management"
-      - "Stones >10mm: Unlikely to pass, usually need intervention"
-      - "CT without contrast is gold standard (100% sensitivity), detects all stone types"
-      - "Tamsulosin (alpha-blocker) facilitates stone passage (medical expulsive therapy)"
-      - "Recurrence rate 50% at 5-10 years"
-    management:
-      - "Pain control: NSAIDs (ketorolac 30mg IV) preferred over opioids (equally effective, less nausea)"
-      - "Antiemetics: Ondansetron 4-8mg IV PRN"
-      - "Hydration: Encourage PO fluids (no benefit to IV fluids unless unable to tolerate PO)"
-      - "Medical expulsive therapy: Tamsulosin 0.4mg daily (helps stones 5-10mm pass)"
-      - "Intervention if: Stone >10mm, obstruction with infection, intractable pain, solitary kidney"
-    tests:
-      - "CT abdomen/pelvis without contrast (gold standard, 100% sensitive)"
-      - "Urinalysis (hematuria in 85%, but absence doesn't rule out stone)"
-      - "Basic metabolic panel (Cr, assess for AKI if obstruction)"
-      - "Stone analysis if passed (guides prevention)"
-      - "24-hour urine collection (calcium, oxalate, citrate, uric acid) if recurrent"
-    referrals:
-      - "Urology if: Stone >10mm, obstruction with infection, intractable pain, failed conservative management"
-      - "Procedures: Shock wave lithotripsy (ESWL), ureteroscopy, percutaneous nephrolithotomy (PCNL)"
-      - "Nephrology if recurrent stones for metabolic workup"
-    icd10:
-      - N20.0
-      - N20.2
-    snomed:
-      - "95570007"
-
-  - id: NEPHRO-PYELONEPHRITIS
-    label: Acute Pyelonephritis
-    presentations:
-      - Fever and chills
-      - Flank pain
-      - CVA tenderness
-      - Dysuria and urinary frequency
-      - Nausea and vomiting
-    clinical_pearls:
-      - "Upper urinary tract infection (kidney), E. coli causes 80%"
-      - "WBC casts pathognomonic for pyelonephritis"
-      - "Uncomplicated: Young, healthy women - outpatient oral antibiotics"
-      - "Complicated: Male, pregnant, catheter, obstruction, immunocompromised - admission for IV antibiotics"
-      - "Imaging not needed for uncomplicated; CT if severe or no improvement in 48-72 hours (rule out abscess)"
-      - "Sepsis can develop rapidly - low threshold for admission"
-    management:
-      - "Outpatient: Ciprofloxacin 500mg PO BID x 7 days or levofloxacin 750mg daily x 5 days"
-      - "Alternative: Ceftriaxone 1g IV/IM x 1 dose, then cefpodoxime or ciprofloxacin PO"
-      - "Inpatient: Ceftriaxone 1-2g IV daily or fluoroquinolone IV (levofloxacin 750mg)"
-      - "If severe/septic: Piperacillin-tazobactam 3.375g IV q6h or carbapenem"
-      - "Duration: 7 days (fluoroquinolone) or 10-14 days (beta-lactam)"
-    tests:
-      - "Urinalysis (pyuria, WBC casts, bacteriuria)"
-      - "Urine culture (before antibiotics)"
-      - "Blood cultures if admitted or severe"
-      - "CT abdomen/pelvis with IV contrast if complicated or no improvement in 48-72hr (rule out abscess, obstruction)"
-      - "Renal ultrasound if pregnant (avoid radiation)"
-    referrals:
-      - "Admission if: Sepsis, pregnant, obstruction, immunocompromised, unable to tolerate PO, social concerns"
-      - "Urology if obstruction or recurrent infections"
-      - "Interventional radiology if abscess needs drainage"
-    icd10:
-      - N10
-      - N12
-    snomed:
-      - "45816000"
-
-  - id: NEPHRO-GN
-    label: Glomerulonephritis
-    presentations:
-      - Hematuria (tea-colored urine)
-      - Proteinuria
-      - Hypertension
-      - Edema
-      - Recent infection (post-streptococcal)
-    clinical_pearls:
-      - "Glomerular inflammation → hematuria, RBC casts, proteinuria, hypertension"
-      - "Post-streptococcal GN: 1-3 weeks after strep pharyngitis or impetigo, low C3, self-limited"
-      - "IgA nephropathy: Most common primary GN, hematuria concurrent with URI (synpharyngitic)"
-      - "RPGN: Rapidly progressive GN with crescent formation, GFR declines over days-weeks (urgent treatment)"
-      - "RBC casts pathognomonic for glomerulonephritis"
-    management:
-      - "Supportive: Fluid/sodium restriction, diuretics (furosemide), antihypertensives (ACEi/ARB)"
-      - "Post-strep GN: Supportive only, resolves spontaneously in 4-6 weeks"
-      - "IgA nephropathy: ACEi/ARB (reduce proteinuria), fish oil, steroids if progressive"
-      - "RPGN: Urgent immunosuppression - high-dose steroids (methylprednisolone 1g IV daily x 3d) + cyclophosphamide"
-      - "Plasmapheresis if anti-GBM disease (Goodpasture) or severe ANCA vasculitis"
-    tests:
-      - "Urinalysis: RBC casts (pathognomonic), dysmorphic RBCs, proteinuria"
-      - "Serum Cr, BUN (assess kidney function, follow serial Cr if RPGN suspected)"
-      - "Complement (C3, C4): Low in post-strep, lupus, MPGN"
-      - "Serologies: ASO/anti-DNase B (post-strep), ANA/anti-dsDNA (lupus), ANCA (vasculitis), anti-GBM (Goodpasture)"
-      - "Renal biopsy (definitive diagnosis, especially if RPGN or unclear etiology)"
-    referrals:
-      - "Nephrology for all glomerulonephritis (URGENT if RPGN suspected)"
-      - "Renal biopsy if diagnosis unclear or rapidly progressive"
-      - "Dialysis if severe AKI"
-    icd10:
-      - N05.9
-      - N03.9
-    snomed:
-      - "36171008"
-
-  - id: NEPHRO-ESRD
-    label: End-Stage Renal Disease
-    presentations:
-      - Uremic symptoms
-      - Requiring dialysis
-      - Severe fluid overload
-      - Metabolic acidosis
-      - Hyperkalemia
-      - Anemia
-    clinical_pearls:
-      - "CKD Stage 5 (eGFR <15 mL/min/1.73m²) or requiring dialysis"
-      - "Uremic symptoms: Nausea, anorexia, pruritus, metallic taste, confusion, pericarditis, platelet dysfunction"
-      - "Dialysis indications (AEIOU): Acidosis, Electrolytes (K+ >6.5), Ingestion, Overload (pulmonary edema), Uremia"
-      - "Three dialysis options: Hemodialysis (in-center 3x/week), peritoneal dialysis (home daily), or transplant (best outcomes)"
-      - "AV fistula creation when eGFR <20 (needs 2-3 months to mature before use)"
-    management:
-      - "Dialysis: Hemodialysis 3-4 hours 3x/week or peritoneal dialysis daily"
-      - "Erythropoietin (EPO) for anemia (target Hgb 10-11.5 g/dL)"
-      - "Phosphate binders with meals (sevelamer, calcium acetate)"
-      - "Vitamin D supplementation (calcitriol or paricalcitol)"
-      - "Kidney transplant evaluation (best long-term outcomes)"
-    tests:
-      - "Basic metabolic panel (Cr, K+, bicarb, calcium, phosphate) - frequent monitoring"
-      - "CBC (anemia), PTH (secondary hyperparathyroidism)"
-      - "Kt/V (dialysis adequacy measure)"
-      - "Echocardiogram (assess for uremic cardiomyopathy)"
-    referrals:
-      - "Nephrology managing care"
-      - "Vascular surgery for AV fistula creation"
-      - "Transplant surgery for kidney transplant evaluation (best if done before dialysis initiation)"
-      - "Palliative care for symptom management and goals of care discussions"
-    icd10:
-      - N18.6
-    snomed:
-      - "46177005"
-
-  - id: NEPHRO-POLYCYSTIC
-    label: Polycystic Kidney Disease
-    presentations:
-      - Flank pain
-      - Hematuria
-      - Hypertension
-      - Palpable kidneys
-      - Family history
-      - Progressive renal insufficiency
-    clinical_pearls:
-      - "Autosomal dominant PKD (ADPKD) most common, presents 30-50 years old"
-      - "Bilateral kidney cysts, also liver cysts (75%), intracranial aneurysms (10%), mitral valve prolapse"
-      - "Screen for aneurysms: MRA brain if family history of aneurysm or hemorrhagic stroke"
-      - "Complications: Hypertension (75%), kidney stones, UTIs, hematuria, ruptured cysts"
-      - "50% progress to ESRD by age 60"
-      - "Tolvaptan (vasopressin antagonist) slows cyst growth and eGFR decline in select patients"
-    management:
-      - "Hypertension control: Goal <120/80, ACEi or ARB first-line"
-      - "Tolvaptan 45-120mg daily if rapidly progressive (slows cyst growth, only if eGFR >25)"
-      - "Treat complications: Antibiotics for cyst infections (fluoroquinolones penetrate cysts), lithotripsy for stones"
-      - "Hydration: Encourage fluid intake 3-4L/day"
-      - "Screen family members (ultrasound at age 20-30)"
-    tests:
-      - "Renal ultrasound (multiple bilateral cysts, enlarged kidneys)"
-      - "CT or MRI (more sensitive, quantifies total kidney volume)"
-      - "Basic metabolic panel, eGFR (monitor kidney function)"
-      - "MRA brain if family history of aneurysm or hemorrhagic stroke (screen for intracranial aneurysms)"
-      - "Genetic testing if diagnosis uncertain"
-    referrals:
-      - "Nephrology for all PKD (monitor progression, consider tolvaptan)"
-      - "Neurosurgery if intracranial aneurysm detected"
-      - "Genetic counseling for family planning"
-      - "Transplant evaluation if eGFR <20"
-    icd10:
-      - Q61.3
-      - Q61.2
-    snomed:
-      - "28728004"
-
-  - id: NEPHRO-RTA
-    label: Renal Tubular Acidosis
-    presentations:
-      - Metabolic acidosis
-      - Normal anion gap
-      - Hypokalemia or hyperkalemia
-      - Nephrolithiasis
-      - Growth retardation (children)
-    clinical_pearls:
-      - "Type 1 (distal RTA): Cannot acidify urine (urine pH >5.5), hypokalemia, kidney stones (calcium phosphate)"
-      - "Type 2 (proximal RTA): Impaired bicarb reabsorption, hypokalemia, Fanconi syndrome"
-      - "Type 4: Hypoaldosteronism (diabetes, NSAIDs), hyperkalemia, mild acidosis"
-      - "Normal anion gap metabolic acidosis (urine anion gap positive differentiates RTA from diarrhea)"
-      - "Type 1 causes: Sjögren's, lupus, sickle cell, amphotericin B, lithium"
-    management:
-      - "Type 1 (distal): Sodium bicarbonate or potassium citrate 1-2 mEq/kg/day (replace bicarb losses)"
-      - "Type 2 (proximal): High-dose sodium bicarbonate 10-15 mEq/kg/day + potassium supplementation"
-      - "Type 4: Treat hyperkalemia - kayexalate, fludrocortisone 0.1-0.2mg daily (mineralocorticoid)"
-      - "Discontinue offending medications if possible (NSAIDs, ACEi/ARB in type 4)"
-      - "Treat underlying autoimmune disease if present"
-    tests:
-      - "ABG (low pH, low HCO3, normal pCO2 = metabolic acidosis)"
-      - "Basic metabolic panel (low HCO3, normal anion gap, K+ low or high)"
-      - "Urine pH (>5.5 in type 1 despite acidosis, <5.5 in type 2/4)"
-      - "Urine anion gap (positive in RTA, negative in diarrhea)"
-      - "Workup for etiology: ANA, SSA/SSB (Sjögren's), SPEP/UPEP (Fanconi), renin/aldosterone (type 4)"
-    referrals:
-      - "Nephrology for all RTA (diagnosis confirmation, management)"
-      - "Rheumatology if autoimmune etiology (Sjögren's, lupus)"
-      - "Endocrinology if hypoaldosteronism suspected"
-    icd10:
-      - N25.89
-    snomed:
-      - "236467001"
-
-  - id: NEPHRO-AKI-PRERENAL
-    label: Acute Kidney Injury - Prerenal
-    presentations:
-      - Elevated BUN/Cr ratio (>20:1)
-      - Oliguria, concentrated urine (dark, low urine sodium <20 mEq/L)
-      - "Dehydration signs: Dry mucous membranes, decreased skin turgor, orthostatic hypotension"
-      - "Recent volume loss: Vomiting, diarrhea, diuretics, bleeding, poor oral intake"
-      - FeNa <1% (fractional excretion of sodium)
-      - Responds to IV fluids (Cr improves with rehydration)
-    clinical_pearls:
-      - "Most common cause of AKI (70%) and most reversible"
-      - "BUN rises more than Cr in prerenal (>20:1 ratio)"
-      - "FeNa <1% indicates kidney holding onto sodium (appropriate response to low perfusion)"
-      - "Give fluid challenge: 500-1000mL NS, if Cr improves → prerenal confirmed"
-      - "Causes: Hypovolemia, heart failure, cirrhosis, sepsis (vasodilation)"
-    management:
-      - "IV fluid resuscitation: NS or LR 500-1000mL bolus, then 100-200 mL/hr"
-      - "Monitor urine output (goal >0.5 mL/kg/hr)"
-      - "Hold nephrotoxic medications (NSAIDs, ACEi/ARB, diuretics temporarily)"
-      - "Treat underlying cause: Antibiotics for sepsis, stop GI losses"
-      - "Serial creatinine: Should improve with fluids in 24-48 hours"
-    tests:
-      - Basic metabolic panel (BUN, Cr, electrolytes)
-      - Urinalysis (concentrated, high specific gravity >1.020)
-      - Urine sodium (<20 mEq/L prerenal)
-      - FeNa (fractional excretion Na <1%)
-      - Renal ultrasound (rule out obstruction if no improvement)
-    referrals:
-      - Nephrology if Cr not improving with fluids after 48-72 hours
-      - ICU if severe (Cr >3, oliguria, hyperkalemia)
-    sensitivity: 0.90
-    specificity: 0.88
-    icd10:
-      - N17.0    # Acute kidney failure with tubular necrosis
-    snomed:
-      - "35455006"  # Acute renal failure syndrome
-
-  - id: NEPHRO-AKI-ATN
-    label: Acute Tubular Necrosis (ATN)
-    presentations:
-      - Muddy brown casts on urinalysis (pathognomonic)
-      - FeNa >2% (kidneys cannot concentrate urine)
-      - Isosthenuria (urine specific gravity ~1.010, same as plasma)
-      - Oliguria or anuria
-      - History of prolonged hypotension, sepsis, or nephrotoxin exposure
-      - Does NOT rapidly improve with fluids (unlike prerenal)
-    clinical_pearls:
-      - "Most common intrinsic cause of AKI"
-      - "Ischemic ATN: Prolonged prerenal state (hypotension, shock)"
-      - "Nephrotoxic ATN: Aminoglycosides, contrast dye, rhabdomyolysis (myoglobin), tumor lysis"
-      - "Recovery phase: Polyuria (2-3 weeks after injury), watch electrolytes"
-      - "Mortality high if requiring dialysis (50-80% in ICU setting)"
-    management:
-      - "Supportive care: IV fluids to maintain euvolemia (not excessive)"
-      - "Avoid further nephrotoxins: Hold NSAIDs, aminoglycosides, contrast if possible"
-      - "Dialysis if: Severe hyperkalemia (>6.5), acidosis (pH <7.15), uremia, volume overload"
-      - "Treat underlying: Antibiotics for sepsis, resuscitation for shock"
-      - "Monitor for recovery: Urine output should gradually increase over 1-3 weeks"
-    tests:
-      - Urinalysis (muddy brown casts, tubular epithelial cells)
-      - FeNa >2%, urine sodium >40 mEq/L
-      - Serial BMP (monitor Cr, K+, phosphate)
-      - Creatine kinase if rhabdomyolysis suspected
-      - Renal ultrasound (rule out obstruction)
-    referrals:
-      - Nephrology consult for all ATN
-      - Dialysis if refractory hyperkalemia, acidosis, or uremia
-    sensitivity: 0.85
-    specificity: 0.82
-    icd10:
-      - N17.0    # Acute kidney failure with tubular necrosis
-    snomed:
-      - "197774008"  # Acute tubular necrosis
-
-  - id: NEPHRO-AKI-POSTRENAL
-    label: Acute Kidney Injury - Postrenal (Obstructive)
-    presentations:
-      - Anuria or fluctuating oliguria/polyuria
-      - Suprapubic or flank pain
-      - Palpable bladder (urinary retention)
-      - Bilateral hydronephrosis on ultrasound (or unilateral if single kidney)
-      - History of BPH, nephrolithiasis, malignancy, neurogenic bladder
-      - Rapid rise in Cr after obstruction develops
-    clinical_pearls:
-      - "Requires bilateral obstruction (or unilateral with single functioning kidney)"
-      - "Bladder outlet obstruction most common: BPH, prostate cancer, neurogenic bladder"
-      - "Upper tract: Bilateral kidney stones, retroperitoneal fibrosis, malignancy"
-      - "Relief of obstruction → dramatic improvement in Cr within hours to days"
-      - "Post-obstructive diuresis: Massive polyuria after relief (replace losses carefully)"
-    management:
-      - "Relieve obstruction emergently"
-      - "Lower tract: Foley catheter (BPH, retention)"
-      - "Upper tract: Nephrostomy tubes or ureteral stents (stones, extrinsic compression)"
-      - "Post-obstructive diuresis: Replace urine output (0.5 mL per mL urine initially)"
-      - "Monitor electrolytes closely (K+, Na+, Mg2+, PO4 can drop rapidly)"
-    tests:
-      - Renal ultrasound (hydronephrosis diagnostic)
-      - Bladder scan (assess post-void residual >200mL suggests retention)
-      - CT abdomen/pelvis if ultrasound equivocal (better for stones, masses)
-      - Urinalysis, urine culture
-      - PSA if BPH/prostate cancer suspected
-    referrals:
-      - Urology STAT for obstruction relief
-      - Nephrology if Cr not improving after decompression
-    sensitivity: 0.92
-    specificity: 0.90
-    icd10:
-      - N13.1    # Hydronephrosis with ureteral stricture
-      - N13.6    # Pyonephrosis
-    snomed:
-      - "236440002"  # Obstructive nephropathy
-
-  - id: NEPHRO-HYPERKALEMIA
-    label: Hyperkalemia
-    presentations:
-      - Often asymptomatic until severe (>6.5 mEq/L)
-      - Muscle weakness, paresthesias
-      - Nausea, palpitations
-      - "ECG changes: Peaked T waves (earliest), widened QRS, prolonged PR, loss of P wave"
-      - Sine wave pattern on ECG (pre-arrest, >8.0 mEq/L)
-      - "Causes: Renal failure, ACEi/ARB, K-sparing diuretics, rhabdomyolysis, tumor lysis"
-    clinical_pearls:
-      - "ECG changes correlate poorly with K+ level (always check ECG!)"
-      - "Peaked T waves: Earliest sign (K+ 6.0-6.5)"
-      - "Widened QRS, loss of P wave: Severe (K+ >7.0) → high risk cardiac arrest"
-      - "Treatment priorities: Stabilize myocardium (Ca), shift K+ into cells (insulin/glucose), remove K+ (kayexalate, dialysis)"
-      - "Pseudohyperkalemia: Hemolysis, thrombocytosis, leukocytosis (repeat sample)"
-    management:
-      - "If ECG changes: Calcium gluconate 1-2g IV over 2-5 min (membrane stabilization)"
-      - "Shift K+ into cells: Regular insulin 10 units IV + D50 25g (or D10 250mL if not hypoglycemic)"
-      - "Albuterol nebulized 10-20mg (lowers K+ 0.5-1 mEq/L)"
-      - "Remove K+: Sodium polystyrene sulfonate (Kayexalate) 15-30g PO, or patiromer"
-      - "Dialysis if: Refractory, severe (>7.0), renal failure"
-    tests:
-      - Basic metabolic panel (K+, Cr)
-      - ECG (assess for cardiac toxicity)
-      - ABG if metabolic acidosis suspected (worsens hyperkalemia)
-      - Urinalysis, urine electrolytes (assess renal K+ excretion)
-    referrals:
-      - Nephrology if severe or refractory
-      - Dialysis if K+ >7.0 or refractory to medical management
-      - CCU if ECG changes or K+ >7.0
-    sensitivity: 0.95
-    specificity: 0.90
-    icd10:
-      - E87.5    # Hyperkalemia
-    snomed:
-      - "14140009"  # Hyperkalemia
-
-  - id: NEPHRO-HYPONATREMIA
-    label: Hyponatremia
-    presentations:
-      - "Mild (130-135): Often asymptomatic"
-      - "Moderate (120-130): Nausea, malaise, confusion, headache"
-      - "Severe (<120): Seizures, coma, respiratory arrest"
-      - "Assess volume status: Hypovolemic (dehydration), euvolemic (SIADH), hypervolemic (CHF, cirrhosis)"
-      - "Urine sodium: <20 (hypovolemic), >40 (SIADH or renal loss)"
-      - "Causes: SIADH, diuretics, adrenal insufficiency, hypothyroidism, psychogenic polydipsia"
-    clinical_pearls:
-      - "Acute (<48hr): Can correct faster (1-2 mEq/L/hr), high seizure risk"
-      - "Chronic (>48hr): Correct slowly (<8 mEq/L in 24hr) to avoid osmotic demyelination syndrome"
-      - "Osmotic demyelination (central pontine myelinolysis): Quadriplegia, dysarthria, dysphagia - IRREVERSIBLE"
-      - "SIADH: Urine Na >40, urine osm >100, euvolemic, normal thyroid/adrenal function"
-      - "Treatment depends on cause: Fluid restriction (SIADH), NS (hypovolemic), diuresis (hypervolemic)"
-    management:
-      - "Symptomatic (seizures, coma): 3% hypertonic saline 100mL IV bolus (can repeat x2-3)"
-      - "Hypovolemic: Normal saline IV (corrects hyponatremia by improving volume)"
-      - "SIADH: Fluid restriction <800 mL/day, salt tabs, consider tolvaptan (vasopressin antagonist)"
-      - "Hypervolemic (CHF): Diuresis + fluid restriction"
-      - "Correct <8 mEq/L in 24 hours (chronic cases) to avoid osmotic demyelination"
-    tests:
-      - Basic metabolic panel (Na, osmolality)
-      - Urine sodium and osmolality
-      - Assess volume status (clinical exam, orthostatics)
-      - TSH, cortisol (rule out hypothyroid, adrenal insufficiency)
-      - Chest X-ray if SIADH suspected (malignancy, pneumonia)
-    referrals:
-      - ICU if symptomatic or severe (<120)
-      - Nephrology consult for SIADH or complex cases
-    sensitivity: 0.92
-    specificity: 0.88
-    icd10:
-      - E87.1    # Hypo-osmolality and hyponatremia
-    snomed:
-      - "89627008"  # Hyponatremia
-
-  - id: NEPHRO-METABOLIC-ACIDOSIS
-    label: Metabolic Acidosis
-    presentations:
-      - Kussmaul respirations (deep, rapid breathing to blow off CO2)
-      - Confusion, lethargy, nausea
-      - Low serum bicarbonate (<22 mEq/L), low pH (<7.35)
-      - "Anion gap (AG) = Na - (Cl + HCO3): Normal 8-12"
-      - "High AG: MUDPILES (Methanol, Uremia, DKA, Propylene glycol, Isoniazid, Lactic acidosis, Ethylene glycol, Salicylates)"
-      - "Normal AG (hyperchloremic): Diarrhea, RTA, ureteral diversion"
-    clinical_pearls:
-      - "Always calculate anion gap to narrow differential"
-      - "High AG acidosis: Think toxins, ketones, lactate, uremia"
-      - "Lactic acidosis: Type A (tissue hypoxia - sepsis, shock) vs Type B (metformin, malignancy)"
-      - "DKA: High glucose, high AG, positive ketones"
-      - "Treat underlying cause, not just pH (bicarb only if pH <7.1 or severe hyperkalemia)"
-    management:
-      - "Treat underlying cause: Insulin for DKA, fluids/pressors for shock, dialysis for uremia"
-      - "Sodium bicarbonate: Only if pH <7.1 or severe hyperkalemia (give 1-2 amps IV)"
-      - "Toxins: Fomepizole for ethylene glycol/methanol, dialysis for severe"
-      - "Aggressive fluid resuscitation if lactic acidosis from shock"
-      - "Monitor serial ABG, electrolytes (K+ shifts with bicarb treatment)"
-    tests:
-      - ABG (pH, pCO2, HCO3)
-      - Basic metabolic panel (calculate anion gap)
-      - Lactate (if lactic acidosis suspected)
-      - Glucose, ketones (DKA), toxicology screen
-      - Osmolar gap if toxic ingestion suspected
-    referrals:
-      - ICU if severe (pH <7.1) or hemodynamically unstable
-      - Nephrology if uremic or renal etiology
-      - Toxicology if ingestion suspected
-    sensitivity: 0.90
-    specificity: 0.85
-    icd10:
-      - E87.2    # Acidosis
-    snomed:
-      - "12499000"  # Metabolic acidosis
-
-  - id: NEPHRO-RHABDOMYOLYSIS
-    label: Rhabdomyolysis
-    presentations:
-      - Muscle pain, swelling, weakness (myalgias)
-      - Dark (tea-colored) urine (myoglobinuria)
-      - Markedly elevated CK (>5,000 U/L, often >10,000)
-      - AKI (Cr rising, oliguria from myoglobin-induced ATN)
-      - Hyperkalemia, hyperphosphatemia, hypocalcemia (acute), hyperuricemia
-      - "Causes: Trauma, prolonged immobilization, seizures, statins, cocaine, heat stroke, severe exercise"
-    clinical_pearls:
-      - "Myoglobin precipitates in renal tubules → ATN"
-      - "Urine dipstick positive for blood but no RBCs on microscopy (detects myoglobin)"
-      - "CK >15,000 or rapidly rising → high risk for AKI"
-      - "Aggressive IV hydration (200-300 mL/hr) is KEY to prevent AKI"
-      - "Compartment syndrome: Tense, swollen compartment + pain with passive stretch → needs fasciotomy"
-    management:
-      - "Aggressive IV fluid resuscitation: NS or LR 200-300 mL/hr (goal UOP 200-300 mL/hr)"
-      - "Target urine output 3 mL/kg/hr to flush myoglobin"
-      - "Correct electrolytes: Treat hyperkalemia (Ca, insulin/glucose), hold calcium initially (hypocalcemia)"
-      - "Monitor CK daily until trending down"
-      - "Dialysis if: AKI with oliguria, refractory hyperkalemia, severe acidosis"
-    tests:
-      - CK (markedly elevated >5,000, often >10,000)
-      - Basic metabolic panel (Cr, K+, PO4, Ca2+)
-      - Urinalysis (myoglobin, no RBCs on microscopy)
-      - Urine myoglobin (if available)
-      - Liver function tests (transaminases often elevated from muscle injury)
-    referrals:
-      - Nephrology if AKI developing
-      - ICU if severe (CK >50,000, AKI, severe electrolyte abnormalities)
-      - Orthopedic surgery if compartment syndrome suspected
-    sensitivity: 0.88
-    specificity: 0.90
-    icd10:
-      - M62.82   # Rhabdomyolysis
-      - T79.6    # Traumatic ischemia of muscle
-    snomed:
-      - "240131006"  # Rhabdomyolysis
-
-  - id: NEPHRO-CONTRAST-NEPHROPATHY
-    label: Contrast-Induced Nephropathy (CIN)
-    presentations:
-      - Rise in Cr (>0.5 mg/dL or >25% from baseline) within 48-72 hours of contrast administration
-      - Typically non-oliguric (urine output maintained)
-      - Peaks at 3-5 days, then gradual recovery over 7-14 days
-      - "Risk factors: Pre-existing CKD, diabetes, age >75, CHF, volume depletion, high contrast volume"
-      - Muddy brown casts may be present (ATN)
-    clinical_pearls:
-      - "Prevention is key: IV hydration before and after contrast"
-      - "IV fluids (NS or sodium bicarb) reduce risk by 50%"
-      - "Hold metformin 48hr after contrast (risk of lactic acidosis if AKI develops)"
-      - "N-acetylcysteine (NAC) controversial - likely not effective"
-      - "Use lowest contrast volume possible, consider alternative imaging (MRI, ultrasound)"
-    management:
-      - "Prevention: IV NS 1 mL/kg/hr x 12hr before and after contrast"
-      - "Alternative: Sodium bicarbonate 150 mEq/L at 3 mL/kg/hr x 1hr before, then 1 mL/kg/hr x 6hr after"
-      - "Hold nephrotoxins: NSAIDs, ACEi/ARB 24-48hr before/after if high risk"
-      - "If CIN develops: Supportive care, IV fluids, monitor electrolytes"
-      - "Dialysis if severe AKI with oliguria/anuria"
-    tests:
-      - Baseline Cr before contrast
-      - Repeat Cr at 48-72 hours post-contrast
-      - Urinalysis (may show muddy brown casts)
-      - Electrolytes (monitor K+, bicarb)
-    referrals:
-      - Nephrology if Cr rising or not recovering by 7-10 days
-      - Consider dialysis if severe AKI
-    sensitivity: 0.80
-    specificity: 0.75
-    icd10:
-      - N17.0    # Acute kidney failure with tubular necrosis
-    snomed:
-      - "431855005"  # Chronic kidney disease stage 3
-
-  - id: NEPHRO-TUMOR-LYSIS-SYNDROME
-    label: Tumor Lysis Syndrome
-    presentations:
-      - Hyperkalemia, hyperphosphatemia, hypocalcemia, hyperuricemia
-      - Acute kidney injury (uric acid nephropathy)
-      - Occurs 12-72 hours after chemotherapy initiation
-      - Nausea, vomiting, diarrhea, lethargy, seizures (from electrolyte abnormalities)
-      - "High-risk: Bulky lymphoma, acute leukemia, high WBC count"
-      - ECG changes from hyperkalemia (peaked T waves, widened QRS)
-    clinical_pearls:
-      - "Prevent with: Aggressive hydration (3L/m²/day), allopurinol (or rasburicase if high risk)"
-      - "Rasburicase: Recombinant urate oxidase, rapidly lowers uric acid (expensive, use if high risk)"
-      - "Avoid allopurinol if already elevated uric acid (slow onset) - use rasburicase"
-      - "Monitor labs q6-8hr for first 24-48hr after chemotherapy"
-      - "Dialysis if: Refractory hyperkalemia, severe AKI, or calcium-phosphate product >70"
-    management:
-      - "Prevention: IV fluids 3 L/m²/day (200-300 mL/hr)"
-      - "Allopurinol 300-600mg daily (start 24-48hr before chemo)"
-      - "Rasburicase 0.2 mg/kg IV if high risk (bulky disease, high WBC, elevated uric acid)"
-      - "Treat electrolytes: Insulin/glucose for K+, avoid calcium unless symptomatic (forms Ca-PO4 crystals)"
-      - "Dialysis if: K+ >6.5, Cr >10, or Ca x PO4 >70"
-    tests:
-      - Basic metabolic panel q6-8hr (K+, PO4, Ca2+, Cr, uric acid)
-      - ECG (assess for hyperkalemia)
-      - LDH (marker of cell turnover)
-      - Urinalysis (uric acid crystals)
-    referrals:
-      - Nephrology consult for all tumor lysis syndrome
-      - Oncology (manage chemotherapy)
-      - ICU if severe electrolyte abnormalities
-      - Dialysis if refractory
-    sensitivity: 0.90
-    specificity: 0.88
-    icd10:
-      - E88.3    # Tumor lysis syndrome
-    snomed:
-      - "42182001"  # Tumor lysis syndrome
+- id: NEPHRO-AKI
+  label: Acute Kidney Injury
+  presentations:
+  - Decreased urine output
+  - Elevated creatinine
+  - Fluid overload
+  - Nausea and vomiting
+  - Confusion
+  - Uremic symptoms
+  clinical_pearls:
+  - 'KDIGO criteria: Cr increase ≥0.3 mg/dL in 48hr OR increase ≥1.5x baseline in
+    7 days OR UOP <0.5 mL/kg/hr x 6hr'
+  - 'Classify etiology: Prerenal (70% - volume depletion), intrinsic (ATN, GN, AIN),
+    postrenal (obstruction)'
+  - FeNa <1% = prerenal; >2% = ATN/intrinsic (not reliable if on diuretics - use FeUrea)
+  - Muddy brown casts = ATN; RBC casts = glomerulonephritis; WBC casts = pyelonephritis/AIN
+  - 'Mortality increases with stage: Stage 1 (10%), Stage 2 (25%), Stage 3 (50%)'
+  management:
+  - 'Guideline-based treatment options for Acute Kidney Injury include:'
+  - 'Identify and treat underlying cause: Fluids if prerenal, stop nephrotoxins (NSAIDs,
+    aminoglycosides)'
+  - Monitor ins/outs, daily weights, strict fluid balance
+  - Adjust medication doses for GFR, avoid contrast if possible
+  - 'Indications for dialysis (AEIOU): Acidosis (pH <7.1), Electrolytes (K+ >6.5),
+    Ingestion (toxins), Overload (pulmonary edema), Uremia (pericarditis, encephalopathy)'
+  - 'Supportive: Nutrition, prevent complications'
+  tests:
+  - Basic metabolic panel (Cr, BUN, electrolytes) - serial monitoring
+  - Urinalysis with microscopy (casts, cells)
+  - Urine sodium, FeNa (fractional excretion of sodium)
+  - Renal ultrasound (assess size, hydronephrosis, obstruction)
+  - Consider renal biopsy if unclear etiology after workup
+  referrals:
+  - Nephrology consult for all AKI
+  - Dialysis if AEIOU criteria met
+  - ICU if severe (oliguric, hyperkalemia, acidosis)
+  icd10:
+  - N17.9
+  - N17.0
+  - N17.1
+  snomed:
+  - '14669001'
+- id: NEPHRO-CKD
+  label: Chronic Kidney Disease
+  presentations:
+  - Gradual decline in kidney function
+  - Hypertension
+  - Anemia
+  - Bone disease
+  - Proteinuria
+  - Edema
+  clinical_pearls:
+  - 'Stages: G1 (eGFR ≥90), G2 (60-89), G3a (45-59), G3b (30-44), G4 (15-29), G5 (<15
+    or dialysis)'
+  - 'Most common causes: Diabetes (40%), hypertension (25%), glomerulonephritis'
+  - 'Complications: Anemia (low EPO), bone disease (high PTH), hyperkalemia, acidosis,
+    uremia'
+  - ACEi/ARBs slow progression (reduce proteinuria), especially if diabetes
+  - 'Monitor: eGFR, electrolytes, calcium, phosphate, PTH, hemoglobin every 3-6 months'
+  - Nephrology referral when eGFR <30 (stage G4) or rapidly declining
+  management:
+  - 'Guideline-based treatment options for Chronic Kidney Disease include:'
+  - 'Treat underlying cause: Tight glucose control (diabetes), BP control (goal <130/80)'
+  - ACEi or ARB (slow progression, reduce proteinuria) - monitor Cr, K+
+  - 'Anemia: Erythropoietin (EPO) if Hgb <10, iron supplementation'
+  - 'Bone disease: Phosphate binders (sevelamer, calcium acetate), vitamin D'
+  - 'Prepare for dialysis: AV fistula placement when eGFR <20'
+  tests:
+  - eGFR (calculated from Cr using CKD-EPI equation)
+  - Urinalysis + urine albumin-to-creatinine ratio (UACR)
+  - Basic metabolic panel, CBC, calcium, phosphate, PTH
+  - Renal ultrasound (kidney size - small kidneys suggest chronic disease)
+  referrals:
+  - Nephrology when eGFR <30 (stage G4), rapidly declining (≥5 mL/min/year), or resistant
+    HTN
+  - Vascular surgery for AV fistula placement when eGFR <20
+  - Transplant evaluation when eGFR <20
+  icd10:
+  - N18.3
+  - N18.4
+  - N18.5
+  - N18.6
+  snomed:
+  - '709044004'
+- id: NEPHRO-NEPHROTIC
+  label: Nephrotic Syndrome
+  presentations:
+  - Massive proteinuria (>3.5 g/day)
+  - Hypoalbuminemia
+  - Edema (periorbital, pedal)
+  - Hyperlipidemia
+  - Frothy urine
+  clinical_pearls:
+  - 'Classic tetrad: Proteinuria >3.5g/day, hypoalbuminemia <3.0, edema, hyperlipidemia'
+  - 'Most common primary causes: Minimal change disease (children), FSGS, membranous
+    nephropathy (adults)'
+  - 'Secondary causes: Diabetes (most common overall), amyloidosis, lupus, NSAIDs,
+    infections (HIV, hepatitis)'
+  - 'Hypercoagulable state: Loss of antithrombin III → increased VTE risk'
+  - 'Minimal change disease: Responds to steroids (95% remission), most common in
+    children'
+  management:
+  - 'Guideline-based treatment options for Nephrotic Syndrome include:'
+  - 'Treat edema: Diuretics (furosemide 40-80mg daily), sodium restriction <2g/day'
+  - ACEi or ARB (reduce proteinuria)
+  - Statins for hyperlipidemia
+  - Anticoagulation if albumin <2.5 (high VTE risk)
+  - 'Primary glomerular disease: Steroids (minimal change), immunosuppression (FSGS,
+    membranous)'
+  tests:
+  - 24-hour urine protein or spot urine protein-to-creatinine ratio (>3.5g/day or
+    >3.0)
+  - Serum albumin (<3.0 g/dL)
+  - Lipid panel (elevated cholesterol, triglycerides)
+  - Renal biopsy (definitive diagnosis, determines specific glomerular disease)
+  - 'Consider: Hepatitis B/C serologies, ANA, complement levels, SPEP/UPEP (amyloid,
+    myeloma)'
+  referrals:
+  - Nephrology for all nephrotic syndrome (renal biopsy, management)
+  - Consider renal biopsy if not responsive to initial therapy or unclear etiology
+  icd10:
+  - N04.9
+  snomed:
+  - '52254009'
+- id: NEPHRO-NEPHRITIC
+  label: Acute Nephritic Syndrome
+  presentations:
+  - Hematuria
+  - Proteinuria (< 3.5 g/day)
+  - Hypertension
+  - Edema
+  - Oliguria
+  - Red cell casts
+  clinical_pearls:
+  - Glomerular inflammation → hematuria (tea/cola-colored urine), RBC casts, hypertension,
+    edema
+  - 'Post-streptococcal GN: Most common pediatric cause, 1-3 weeks after strep pharyngitis
+    or impetigo'
+  - 'IgA nephropathy (Berger disease): Most common primary GN worldwide, hematuria
+    during URI'
+  - 'RPGN (rapidly progressive GN): Crescent formation, rapid decline in GFR (weeks)
+    - needs urgent treatment'
+  - 'Low C3/C4 complement: Post-strep GN, lupus nephritis, MPGN'
+  management:
+  - 'Guideline-based treatment options for Acute Nephritic Syndrome include:'
+  - 'Supportive: Fluid/sodium restriction, diuretics for edema, antihypertensives'
+  - 'Post-strep GN: Supportive only (self-limited in 4-6 weeks), antibiotics if active
+    infection'
+  - 'RPGN: Urgent therapy - steroids, cyclophosphamide, plasmapheresis (based on etiology)'
+  - 'IgA nephropathy: ACEi/ARB to reduce proteinuria, steroids if rapidly progressive'
+  - Dialysis if severe AKI
+  tests:
+  - 'Urinalysis: RBC casts (pathognomonic for GN), dysmorphic RBCs, proteinuria'
+  - Serum creatinine, BUN (assess kidney function)
+  - Complement levels (C3, C4) - low suggests post-infectious, lupus, MPGN
+  - ASO titer, anti-DNase B (post-streptococcal GN)
+  - ANA, anti-dsDNA (lupus nephritis), ANCA (vasculitis), anti-GBM (Goodpasture)
+  - Renal biopsy if diagnosis unclear or suspected RPGN
+  referrals:
+  - Nephrology for all nephritic syndrome (urgent if RPGN suspected)
+  - Renal biopsy if diagnosis unclear or suspected RPGN
+  icd10:
+  - N00.9
+  - N05.9
+  snomed:
+  - '236455006'
+- id: NEPHRO-KIDNEY-STONE
+  label: Nephrolithiasis (Kidney Stones)
+  presentations:
+  - Severe colicky flank pain
+  - Hematuria
+  - Nausea and vomiting
+  - Pain radiating to groin
+  - Unable to find comfortable position
+  clinical_pearls:
+  - 'Most common type: Calcium oxalate (80%), then uric acid (10%), struvite (infection),
+    cystine (rare)'
+  - 'Stones <5mm: 90% pass spontaneously with conservative management'
+  - 'Stones >10mm: Unlikely to pass, usually need intervention'
+  - CT without contrast is gold standard (100% sensitivity), detects all stone types
+  - Tamsulosin (alpha-blocker) facilitates stone passage (medical expulsive therapy)
+  - Recurrence rate 50% at 5-10 years
+  management:
+  - 'Guideline-based treatment options for Nephrolithiasis (Kidney Stones) include:'
+  - 'Pain control: NSAIDs (ketorolac 30mg IV) preferred over opioids (equally effective,
+    less nausea)'
+  - 'Antiemetics: Ondansetron 4-8mg IV PRN'
+  - 'Hydration: Encourage PO fluids (no benefit to IV fluids unless unable to tolerate
+    PO)'
+  - 'Medical expulsive therapy: Tamsulosin 0.4mg daily (helps stones 5-10mm pass)'
+  - 'Intervention if: Stone >10mm, obstruction with infection, intractable pain, solitary
+    kidney'
+  tests:
+  - CT abdomen/pelvis without contrast (gold standard, 100% sensitive)
+  - Urinalysis (hematuria in 85%, but absence doesn't rule out stone)
+  - Basic metabolic panel (Cr, assess for AKI if obstruction)
+  - Stone analysis if passed (guides prevention)
+  - 24-hour urine collection (calcium, oxalate, citrate, uric acid) if recurrent
+  referrals:
+  - 'Urology if: Stone >10mm, obstruction with infection, intractable pain, failed
+    conservative management'
+  - 'Procedures: Shock wave lithotripsy (ESWL), ureteroscopy, percutaneous nephrolithotomy
+    (PCNL)'
+  - Nephrology if recurrent stones for metabolic workup
+  icd10:
+  - N20.0
+  - N20.2
+  snomed:
+  - '95570007'
+- id: NEPHRO-PYELONEPHRITIS
+  label: Acute Pyelonephritis
+  presentations:
+  - Fever and chills
+  - Flank pain
+  - CVA tenderness
+  - Dysuria and urinary frequency
+  - Nausea and vomiting
+  clinical_pearls:
+  - Upper urinary tract infection (kidney), E. coli causes 80%
+  - WBC casts pathognomonic for pyelonephritis
+  - 'Uncomplicated: Young, healthy women - outpatient oral antibiotics'
+  - 'Complicated: Male, pregnant, catheter, obstruction, immunocompromised - admission
+    for IV antibiotics'
+  - Imaging not needed for uncomplicated; CT if severe or no improvement in 48-72
+    hours (rule out abscess)
+  - Sepsis can develop rapidly - low threshold for admission
+  management:
+  - 'Guideline-based treatment options for Acute Pyelonephritis include:'
+  - 'Outpatient: Ciprofloxacin 500mg PO BID x 7 days or levofloxacin 750mg daily x
+    5 days'
+  - 'Alternative: Ceftriaxone 1g IV/IM x 1 dose, then cefpodoxime or ciprofloxacin
+    PO'
+  - 'Inpatient: Ceftriaxone 1-2g IV daily or fluoroquinolone IV (levofloxacin 750mg)'
+  - 'If severe/septic: Piperacillin-tazobactam 3.375g IV q6h or carbapenem'
+  - 'Duration: 7 days (fluoroquinolone) or 10-14 days (beta-lactam)'
+  tests:
+  - Urinalysis (pyuria, WBC casts, bacteriuria)
+  - Urine culture (before antibiotics)
+  - Blood cultures if admitted or severe
+  - CT abdomen/pelvis with IV contrast if complicated or no improvement in 48-72hr
+    (rule out abscess, obstruction)
+  - Renal ultrasound if pregnant (avoid radiation)
+  referrals:
+  - 'Admission if: Sepsis, pregnant, obstruction, immunocompromised, unable to tolerate
+    PO, social concerns'
+  - Urology if obstruction or recurrent infections
+  - Interventional radiology if abscess needs drainage
+  icd10:
+  - N10
+  - N12
+  snomed:
+  - '45816000'
+- id: NEPHRO-GN
+  label: Glomerulonephritis
+  presentations:
+  - Hematuria (tea-colored urine)
+  - Proteinuria
+  - Hypertension
+  - Edema
+  - Recent infection (post-streptococcal)
+  clinical_pearls:
+  - Glomerular inflammation → hematuria, RBC casts, proteinuria, hypertension
+  - 'Post-streptococcal GN: 1-3 weeks after strep pharyngitis or impetigo, low C3,
+    self-limited'
+  - 'IgA nephropathy: Most common primary GN, hematuria concurrent with URI (synpharyngitic)'
+  - 'RPGN: Rapidly progressive GN with crescent formation, GFR declines over days-weeks
+    (urgent treatment)'
+  - RBC casts pathognomonic for glomerulonephritis
+  management:
+  - 'Guideline-based treatment options for Glomerulonephritis include:'
+  - 'Supportive: Fluid/sodium restriction, diuretics (furosemide), antihypertensives
+    (ACEi/ARB)'
+  - 'Post-strep GN: Supportive only, resolves spontaneously in 4-6 weeks'
+  - 'IgA nephropathy: ACEi/ARB (reduce proteinuria), fish oil, steroids if progressive'
+  - 'RPGN: Urgent immunosuppression - high-dose steroids (methylprednisolone 1g IV
+    daily x 3d) + cyclophosphamide'
+  - Plasmapheresis if anti-GBM disease (Goodpasture) or severe ANCA vasculitis
+  tests:
+  - 'Urinalysis: RBC casts (pathognomonic), dysmorphic RBCs, proteinuria'
+  - Serum Cr, BUN (assess kidney function, follow serial Cr if RPGN suspected)
+  - 'Complement (C3, C4): Low in post-strep, lupus, MPGN'
+  - 'Serologies: ASO/anti-DNase B (post-strep), ANA/anti-dsDNA (lupus), ANCA (vasculitis),
+    anti-GBM (Goodpasture)'
+  - Renal biopsy (definitive diagnosis, especially if RPGN or unclear etiology)
+  referrals:
+  - Nephrology for all glomerulonephritis (URGENT if RPGN suspected)
+  - Renal biopsy if diagnosis unclear or rapidly progressive
+  - Dialysis if severe AKI
+  icd10:
+  - N05.9
+  - N03.9
+  snomed:
+  - '36171008'
+- id: NEPHRO-ESRD
+  label: End-Stage Renal Disease
+  presentations:
+  - Uremic symptoms
+  - Requiring dialysis
+  - Severe fluid overload
+  - Metabolic acidosis
+  - Hyperkalemia
+  - Anemia
+  clinical_pearls:
+  - CKD Stage 5 (eGFR <15 mL/min/1.73m²) or requiring dialysis
+  - 'Uremic symptoms: Nausea, anorexia, pruritus, metallic taste, confusion, pericarditis,
+    platelet dysfunction'
+  - 'Dialysis indications (AEIOU): Acidosis, Electrolytes (K+ >6.5), Ingestion, Overload
+    (pulmonary edema), Uremia'
+  - 'Three dialysis options: Hemodialysis (in-center 3x/week), peritoneal dialysis
+    (home daily), or transplant (best outcomes)'
+  - AV fistula creation when eGFR <20 (needs 2-3 months to mature before use)
+  management:
+  - 'Guideline-based treatment options for End-Stage Renal Disease include:'
+  - 'Dialysis: Hemodialysis 3-4 hours 3x/week or peritoneal dialysis daily'
+  - Erythropoietin (EPO) for anemia (target Hgb 10-11.5 g/dL)
+  - Phosphate binders with meals (sevelamer, calcium acetate)
+  - Vitamin D supplementation (calcitriol or paricalcitol)
+  - Kidney transplant evaluation (best long-term outcomes)
+  tests:
+  - Basic metabolic panel (Cr, K+, bicarb, calcium, phosphate) - frequent monitoring
+  - CBC (anemia), PTH (secondary hyperparathyroidism)
+  - Kt/V (dialysis adequacy measure)
+  - Echocardiogram (assess for uremic cardiomyopathy)
+  referrals:
+  - Nephrology managing care
+  - Vascular surgery for AV fistula creation
+  - Transplant surgery for kidney transplant evaluation (best if done before dialysis
+    initiation)
+  - Palliative care for symptom management and goals of care discussions
+  icd10:
+  - N18.6
+  snomed:
+  - '46177005'
+- id: NEPHRO-POLYCYSTIC
+  label: Polycystic Kidney Disease
+  presentations:
+  - Flank pain
+  - Hematuria
+  - Hypertension
+  - Palpable kidneys
+  - Family history
+  - Progressive renal insufficiency
+  clinical_pearls:
+  - Autosomal dominant PKD (ADPKD) most common, presents 30-50 years old
+  - Bilateral kidney cysts, also liver cysts (75%), intracranial aneurysms (10%),
+    mitral valve prolapse
+  - 'Screen for aneurysms: MRA brain if family history of aneurysm or hemorrhagic
+    stroke'
+  - 'Complications: Hypertension (75%), kidney stones, UTIs, hematuria, ruptured cysts'
+  - 50% progress to ESRD by age 60
+  - Tolvaptan (vasopressin antagonist) slows cyst growth and eGFR decline in select
+    patients
+  management:
+  - 'Guideline-based treatment options for Polycystic Kidney Disease include:'
+  - 'Hypertension control: Goal <120/80, ACEi or ARB first-line'
+  - Tolvaptan 45-120mg daily if rapidly progressive (slows cyst growth, only if eGFR
+    >25)
+  - 'Treat complications: Antibiotics for cyst infections (fluoroquinolones penetrate
+    cysts), lithotripsy for stones'
+  - 'Hydration: Encourage fluid intake 3-4L/day'
+  - Screen family members (ultrasound at age 20-30)
+  tests:
+  - Renal ultrasound (multiple bilateral cysts, enlarged kidneys)
+  - CT or MRI (more sensitive, quantifies total kidney volume)
+  - Basic metabolic panel, eGFR (monitor kidney function)
+  - MRA brain if family history of aneurysm or hemorrhagic stroke (screen for intracranial
+    aneurysms)
+  - Genetic testing if diagnosis uncertain
+  referrals:
+  - Nephrology for all PKD (monitor progression, consider tolvaptan)
+  - Neurosurgery if intracranial aneurysm detected
+  - Genetic counseling for family planning
+  - Transplant evaluation if eGFR <20
+  icd10:
+  - Q61.3
+  - Q61.2
+  snomed:
+  - '28728004'
+- id: NEPHRO-RTA
+  label: Renal Tubular Acidosis
+  presentations:
+  - Metabolic acidosis
+  - Normal anion gap
+  - Hypokalemia or hyperkalemia
+  - Nephrolithiasis
+  - Growth retardation (children)
+  clinical_pearls:
+  - 'Type 1 (distal RTA): Cannot acidify urine (urine pH >5.5), hypokalemia, kidney
+    stones (calcium phosphate)'
+  - 'Type 2 (proximal RTA): Impaired bicarb reabsorption, hypokalemia, Fanconi syndrome'
+  - 'Type 4: Hypoaldosteronism (diabetes, NSAIDs), hyperkalemia, mild acidosis'
+  - Normal anion gap metabolic acidosis (urine anion gap positive differentiates RTA
+    from diarrhea)
+  - 'Type 1 causes: Sjögren''s, lupus, sickle cell, amphotericin B, lithium'
+  management:
+  - 'Guideline-based treatment options for Renal Tubular Acidosis include:'
+  - 'Type 1 (distal): Sodium bicarbonate or potassium citrate 1-2 mEq/kg/day (replace
+    bicarb losses)'
+  - 'Type 2 (proximal): High-dose sodium bicarbonate 10-15 mEq/kg/day + potassium
+    supplementation'
+  - 'Type 4: Treat hyperkalemia - kayexalate, fludrocortisone 0.1-0.2mg daily (mineralocorticoid)'
+  - Discontinue offending medications if possible (NSAIDs, ACEi/ARB in type 4)
+  - Treat underlying autoimmune disease if present
+  tests:
+  - ABG (low pH, low HCO3, normal pCO2 = metabolic acidosis)
+  - Basic metabolic panel (low HCO3, normal anion gap, K+ low or high)
+  - Urine pH (>5.5 in type 1 despite acidosis, <5.5 in type 2/4)
+  - Urine anion gap (positive in RTA, negative in diarrhea)
+  - 'Workup for etiology: ANA, SSA/SSB (Sjögren''s), SPEP/UPEP (Fanconi), renin/aldosterone
+    (type 4)'
+  referrals:
+  - Nephrology for all RTA (diagnosis confirmation, management)
+  - Rheumatology if autoimmune etiology (Sjögren's, lupus)
+  - Endocrinology if hypoaldosteronism suspected
+  icd10:
+  - N25.89
+  snomed:
+  - '236467001'
+- id: NEPHRO-AKI-PRERENAL
+  label: Acute Kidney Injury - Prerenal
+  presentations:
+  - Elevated BUN/Cr ratio (>20:1)
+  - Oliguria, concentrated urine (dark, low urine sodium <20 mEq/L)
+  - 'Dehydration signs: Dry mucous membranes, decreased skin turgor, orthostatic hypotension'
+  - 'Recent volume loss: Vomiting, diarrhea, diuretics, bleeding, poor oral intake'
+  - FeNa <1% (fractional excretion of sodium)
+  - Responds to IV fluids (Cr improves with rehydration)
+  clinical_pearls:
+  - Most common cause of AKI (70%) and most reversible
+  - BUN rises more than Cr in prerenal (>20:1 ratio)
+  - FeNa <1% indicates kidney holding onto sodium (appropriate response to low perfusion)
+  - 'Give fluid challenge: 500-1000mL NS, if Cr improves → prerenal confirmed'
+  - 'Causes: Hypovolemia, heart failure, cirrhosis, sepsis (vasodilation)'
+  management:
+  - 'Guideline-based treatment options for Acute Kidney Injury - Prerenal include:'
+  - 'IV fluid resuscitation: NS or LR 500-1000mL bolus, then 100-200 mL/hr'
+  - Monitor urine output (goal >0.5 mL/kg/hr)
+  - Hold nephrotoxic medications (NSAIDs, ACEi/ARB, diuretics temporarily)
+  - 'Treat underlying cause: Antibiotics for sepsis, stop GI losses'
+  - 'Serial creatinine: Should improve with fluids in 24-48 hours'
+  tests:
+  - Basic metabolic panel (BUN, Cr, electrolytes)
+  - Urinalysis (concentrated, high specific gravity >1.020)
+  - Urine sodium (<20 mEq/L prerenal)
+  - FeNa (fractional excretion Na <1%)
+  - Renal ultrasound (rule out obstruction if no improvement)
+  referrals:
+  - Nephrology if Cr not improving with fluids after 48-72 hours
+  - ICU if severe (Cr >3, oliguria, hyperkalemia)
+  sensitivity: 0.9
+  specificity: 0.88
+  icd10:
+  - N17.0
+  snomed:
+  - '35455006'
+- id: NEPHRO-AKI-ATN
+  label: Acute Tubular Necrosis (ATN)
+  presentations:
+  - Muddy brown casts on urinalysis (pathognomonic)
+  - FeNa >2% (kidneys cannot concentrate urine)
+  - Isosthenuria (urine specific gravity ~1.010, same as plasma)
+  - Oliguria or anuria
+  - History of prolonged hypotension, sepsis, or nephrotoxin exposure
+  - Does NOT rapidly improve with fluids (unlike prerenal)
+  clinical_pearls:
+  - Most common intrinsic cause of AKI
+  - 'Ischemic ATN: Prolonged prerenal state (hypotension, shock)'
+  - 'Nephrotoxic ATN: Aminoglycosides, contrast dye, rhabdomyolysis (myoglobin), tumor
+    lysis'
+  - 'Recovery phase: Polyuria (2-3 weeks after injury), watch electrolytes'
+  - Mortality high if requiring dialysis (50-80% in ICU setting)
+  management:
+  - 'Guideline-based treatment options for Acute Tubular Necrosis (ATN) include:'
+  - 'Supportive care: IV fluids to maintain euvolemia (not excessive)'
+  - 'Avoid further nephrotoxins: Hold NSAIDs, aminoglycosides, contrast if possible'
+  - 'Dialysis if: Severe hyperkalemia (>6.5), acidosis (pH <7.15), uremia, volume
+    overload'
+  - 'Treat underlying: Antibiotics for sepsis, resuscitation for shock'
+  - 'Monitor for recovery: Urine output should gradually increase over 1-3 weeks'
+  tests:
+  - Urinalysis (muddy brown casts, tubular epithelial cells)
+  - FeNa >2%, urine sodium >40 mEq/L
+  - Serial BMP (monitor Cr, K+, phosphate)
+  - Creatine kinase if rhabdomyolysis suspected
+  - Renal ultrasound (rule out obstruction)
+  referrals:
+  - Nephrology consult for all ATN
+  - Dialysis if refractory hyperkalemia, acidosis, or uremia
+  sensitivity: 0.85
+  specificity: 0.82
+  icd10:
+  - N17.0
+  snomed:
+  - '197774008'
+- id: NEPHRO-AKI-POSTRENAL
+  label: Acute Kidney Injury - Postrenal (Obstructive)
+  presentations:
+  - Anuria or fluctuating oliguria/polyuria
+  - Suprapubic or flank pain
+  - Palpable bladder (urinary retention)
+  - Bilateral hydronephrosis on ultrasound (or unilateral if single kidney)
+  - History of BPH, nephrolithiasis, malignancy, neurogenic bladder
+  - Rapid rise in Cr after obstruction develops
+  clinical_pearls:
+  - Requires bilateral obstruction (or unilateral with single functioning kidney)
+  - 'Bladder outlet obstruction most common: BPH, prostate cancer, neurogenic bladder'
+  - 'Upper tract: Bilateral kidney stones, retroperitoneal fibrosis, malignancy'
+  - Relief of obstruction → dramatic improvement in Cr within hours to days
+  - 'Post-obstructive diuresis: Massive polyuria after relief (replace losses carefully)'
+  management:
+  - 'Guideline-based treatment options for Acute Kidney Injury - Postrenal (Obstructive)
+    include:'
+  - Relieve obstruction emergently
+  - 'Lower tract: Foley catheter (BPH, retention)'
+  - 'Upper tract: Nephrostomy tubes or ureteral stents (stones, extrinsic compression)'
+  - 'Post-obstructive diuresis: Replace urine output (0.5 mL per mL urine initially)'
+  - Monitor electrolytes closely (K+, Na+, Mg2+, PO4 can drop rapidly)
+  tests:
+  - Renal ultrasound (hydronephrosis diagnostic)
+  - Bladder scan (assess post-void residual >200mL suggests retention)
+  - CT abdomen/pelvis if ultrasound equivocal (better for stones, masses)
+  - Urinalysis, urine culture
+  - PSA if BPH/prostate cancer suspected
+  referrals:
+  - Urology STAT for obstruction relief
+  - Nephrology if Cr not improving after decompression
+  sensitivity: 0.92
+  specificity: 0.9
+  icd10:
+  - N13.1
+  - N13.6
+  snomed:
+  - '236440002'
+- id: NEPHRO-HYPERKALEMIA
+  label: Hyperkalemia
+  presentations:
+  - Often asymptomatic until severe (>6.5 mEq/L)
+  - Muscle weakness, paresthesias
+  - Nausea, palpitations
+  - 'ECG changes: Peaked T waves (earliest), widened QRS, prolonged PR, loss of P
+    wave'
+  - Sine wave pattern on ECG (pre-arrest, >8.0 mEq/L)
+  - 'Causes: Renal failure, ACEi/ARB, K-sparing diuretics, rhabdomyolysis, tumor lysis'
+  clinical_pearls:
+  - ECG changes correlate poorly with K+ level (always check ECG!)
+  - 'Peaked T waves: Earliest sign (K+ 6.0-6.5)'
+  - 'Widened QRS, loss of P wave: Severe (K+ >7.0) → high risk cardiac arrest'
+  - 'Treatment priorities: Stabilize myocardium (Ca), shift K+ into cells (insulin/glucose),
+    remove K+ (kayexalate, dialysis)'
+  - 'Pseudohyperkalemia: Hemolysis, thrombocytosis, leukocytosis (repeat sample)'
+  management:
+  - 'Guideline-based treatment options for Hyperkalemia include:'
+  - 'If ECG changes: Calcium gluconate 1-2g IV over 2-5 min (membrane stabilization)'
+  - 'Shift K+ into cells: Regular insulin 10 units IV + D50 25g (or D10 250mL if not
+    hypoglycemic)'
+  - Albuterol nebulized 10-20mg (lowers K+ 0.5-1 mEq/L)
+  - 'Remove K+: Sodium polystyrene sulfonate (Kayexalate) 15-30g PO, or patiromer'
+  - 'Dialysis if: Refractory, severe (>7.0), renal failure'
+  tests:
+  - Basic metabolic panel (K+, Cr)
+  - ECG (assess for cardiac toxicity)
+  - ABG if metabolic acidosis suspected (worsens hyperkalemia)
+  - Urinalysis, urine electrolytes (assess renal K+ excretion)
+  referrals:
+  - Nephrology if severe or refractory
+  - Dialysis if K+ >7.0 or refractory to medical management
+  - CCU if ECG changes or K+ >7.0
+  sensitivity: 0.95
+  specificity: 0.9
+  icd10:
+  - E87.5
+  snomed:
+  - '14140009'
+- id: NEPHRO-HYPONATREMIA
+  label: Hyponatremia
+  presentations:
+  - 'Mild (130-135): Often asymptomatic'
+  - 'Moderate (120-130): Nausea, malaise, confusion, headache'
+  - 'Severe (<120): Seizures, coma, respiratory arrest'
+  - 'Assess volume status: Hypovolemic (dehydration), euvolemic (SIADH), hypervolemic
+    (CHF, cirrhosis)'
+  - 'Urine sodium: <20 (hypovolemic), >40 (SIADH or renal loss)'
+  - 'Causes: SIADH, diuretics, adrenal insufficiency, hypothyroidism, psychogenic
+    polydipsia'
+  clinical_pearls:
+  - 'Acute (<48hr): Can correct faster (1-2 mEq/L/hr), high seizure risk'
+  - 'Chronic (>48hr): Correct slowly (<8 mEq/L in 24hr) to avoid osmotic demyelination
+    syndrome'
+  - 'Osmotic demyelination (central pontine myelinolysis): Quadriplegia, dysarthria,
+    dysphagia - IRREVERSIBLE'
+  - 'SIADH: Urine Na >40, urine osm >100, euvolemic, normal thyroid/adrenal function'
+  - 'Treatment depends on cause: Fluid restriction (SIADH), NS (hypovolemic), diuresis
+    (hypervolemic)'
+  management:
+  - 'Guideline-based treatment options for Hyponatremia include:'
+  - 'Symptomatic (seizures, coma): 3% hypertonic saline 100mL IV bolus (can repeat
+    x2-3)'
+  - 'Hypovolemic: Normal saline IV (corrects hyponatremia by improving volume)'
+  - 'SIADH: Fluid restriction <800 mL/day, salt tabs, consider tolvaptan (vasopressin
+    antagonist)'
+  - 'Hypervolemic (CHF): Diuresis + fluid restriction'
+  - Correct <8 mEq/L in 24 hours (chronic cases) to avoid osmotic demyelination
+  tests:
+  - Basic metabolic panel (Na, osmolality)
+  - Urine sodium and osmolality
+  - Assess volume status (clinical exam, orthostatics)
+  - TSH, cortisol (rule out hypothyroid, adrenal insufficiency)
+  - Chest X-ray if SIADH suspected (malignancy, pneumonia)
+  referrals:
+  - ICU if symptomatic or severe (<120)
+  - Nephrology consult for SIADH or complex cases
+  sensitivity: 0.92
+  specificity: 0.88
+  icd10:
+  - E87.1
+  snomed:
+  - '89627008'
+- id: NEPHRO-METABOLIC-ACIDOSIS
+  label: Metabolic Acidosis
+  presentations:
+  - Kussmaul respirations (deep, rapid breathing to blow off CO2)
+  - Confusion, lethargy, nausea
+  - Low serum bicarbonate (<22 mEq/L), low pH (<7.35)
+  - 'Anion gap (AG) = Na - (Cl + HCO3): Normal 8-12'
+  - 'High AG: MUDPILES (Methanol, Uremia, DKA, Propylene glycol, Isoniazid, Lactic
+    acidosis, Ethylene glycol, Salicylates)'
+  - 'Normal AG (hyperchloremic): Diarrhea, RTA, ureteral diversion'
+  clinical_pearls:
+  - Always calculate anion gap to narrow differential
+  - 'High AG acidosis: Think toxins, ketones, lactate, uremia'
+  - 'Lactic acidosis: Type A (tissue hypoxia - sepsis, shock) vs Type B (metformin,
+    malignancy)'
+  - 'DKA: High glucose, high AG, positive ketones'
+  - Treat underlying cause, not just pH (bicarb only if pH <7.1 or severe hyperkalemia)
+  management:
+  - 'Guideline-based treatment options for Metabolic Acidosis include:'
+  - 'Treat underlying cause: Insulin for DKA, fluids/pressors for shock, dialysis
+    for uremia'
+  - 'Sodium bicarbonate: Only if pH <7.1 or severe hyperkalemia (give 1-2 amps IV)'
+  - 'Toxins: Fomepizole for ethylene glycol/methanol, dialysis for severe'
+  - Aggressive fluid resuscitation if lactic acidosis from shock
+  - Monitor serial ABG, electrolytes (K+ shifts with bicarb treatment)
+  tests:
+  - ABG (pH, pCO2, HCO3)
+  - Basic metabolic panel (calculate anion gap)
+  - Lactate (if lactic acidosis suspected)
+  - Glucose, ketones (DKA), toxicology screen
+  - Osmolar gap if toxic ingestion suspected
+  referrals:
+  - ICU if severe (pH <7.1) or hemodynamically unstable
+  - Nephrology if uremic or renal etiology
+  - Toxicology if ingestion suspected
+  sensitivity: 0.9
+  specificity: 0.85
+  icd10:
+  - E87.2
+  snomed:
+  - '12499000'
+- id: NEPHRO-RHABDOMYOLYSIS
+  label: Rhabdomyolysis
+  presentations:
+  - Muscle pain, swelling, weakness (myalgias)
+  - Dark (tea-colored) urine (myoglobinuria)
+  - Markedly elevated CK (>5,000 U/L, often >10,000)
+  - AKI (Cr rising, oliguria from myoglobin-induced ATN)
+  - Hyperkalemia, hyperphosphatemia, hypocalcemia (acute), hyperuricemia
+  - 'Causes: Trauma, prolonged immobilization, seizures, statins, cocaine, heat stroke,
+    severe exercise'
+  clinical_pearls:
+  - Myoglobin precipitates in renal tubules → ATN
+  - Urine dipstick positive for blood but no RBCs on microscopy (detects myoglobin)
+  - CK >15,000 or rapidly rising → high risk for AKI
+  - Aggressive IV hydration (200-300 mL/hr) is KEY to prevent AKI
+  - 'Compartment syndrome: Tense, swollen compartment + pain with passive stretch
+    → needs fasciotomy'
+  management:
+  - 'Guideline-based treatment options for Rhabdomyolysis include:'
+  - 'Aggressive IV fluid resuscitation: NS or LR 200-300 mL/hr (goal UOP 200-300 mL/hr)'
+  - Target urine output 3 mL/kg/hr to flush myoglobin
+  - 'Correct electrolytes: Treat hyperkalemia (Ca, insulin/glucose), hold calcium
+    initially (hypocalcemia)'
+  - Monitor CK daily until trending down
+  - 'Dialysis if: AKI with oliguria, refractory hyperkalemia, severe acidosis'
+  tests:
+  - CK (markedly elevated >5,000, often >10,000)
+  - Basic metabolic panel (Cr, K+, PO4, Ca2+)
+  - Urinalysis (myoglobin, no RBCs on microscopy)
+  - Urine myoglobin (if available)
+  - Liver function tests (transaminases often elevated from muscle injury)
+  referrals:
+  - Nephrology if AKI developing
+  - ICU if severe (CK >50,000, AKI, severe electrolyte abnormalities)
+  - Orthopedic surgery if compartment syndrome suspected
+  sensitivity: 0.88
+  specificity: 0.9
+  icd10:
+  - M62.82
+  - T79.6
+  snomed:
+  - '240131006'
+- id: NEPHRO-CONTRAST-NEPHROPATHY
+  label: Contrast-Induced Nephropathy (CIN)
+  presentations:
+  - Rise in Cr (>0.5 mg/dL or >25% from baseline) within 48-72 hours of contrast administration
+  - Typically non-oliguric (urine output maintained)
+  - Peaks at 3-5 days, then gradual recovery over 7-14 days
+  - 'Risk factors: Pre-existing CKD, diabetes, age >75, CHF, volume depletion, high
+    contrast volume'
+  - Muddy brown casts may be present (ATN)
+  clinical_pearls:
+  - 'Prevention is key: IV hydration before and after contrast'
+  - IV fluids (NS or sodium bicarb) reduce risk by 50%
+  - Hold metformin 48hr after contrast (risk of lactic acidosis if AKI develops)
+  - N-acetylcysteine (NAC) controversial - likely not effective
+  - Use lowest contrast volume possible, consider alternative imaging (MRI, ultrasound)
+  management:
+  - 'Guideline-based treatment options for Contrast-Induced Nephropathy (CIN) include:'
+  - 'Prevention: IV NS 1 mL/kg/hr x 12hr before and after contrast'
+  - 'Alternative: Sodium bicarbonate 150 mEq/L at 3 mL/kg/hr x 1hr before, then 1
+    mL/kg/hr x 6hr after'
+  - 'Hold nephrotoxins: NSAIDs, ACEi/ARB 24-48hr before/after if high risk'
+  - 'If CIN develops: Supportive care, IV fluids, monitor electrolytes'
+  - Dialysis if severe AKI with oliguria/anuria
+  tests:
+  - Baseline Cr before contrast
+  - Repeat Cr at 48-72 hours post-contrast
+  - Urinalysis (may show muddy brown casts)
+  - Electrolytes (monitor K+, bicarb)
+  referrals:
+  - Nephrology if Cr rising or not recovering by 7-10 days
+  - Consider dialysis if severe AKI
+  sensitivity: 0.8
+  specificity: 0.75
+  icd10:
+  - N17.0
+  snomed:
+  - '431855005'
+- id: NEPHRO-TUMOR-LYSIS-SYNDROME
+  label: Tumor Lysis Syndrome
+  presentations:
+  - Hyperkalemia, hyperphosphatemia, hypocalcemia, hyperuricemia
+  - Acute kidney injury (uric acid nephropathy)
+  - Occurs 12-72 hours after chemotherapy initiation
+  - Nausea, vomiting, diarrhea, lethargy, seizures (from electrolyte abnormalities)
+  - 'High-risk: Bulky lymphoma, acute leukemia, high WBC count'
+  - ECG changes from hyperkalemia (peaked T waves, widened QRS)
+  clinical_pearls:
+  - 'Prevent with: Aggressive hydration (3L/m²/day), allopurinol (or rasburicase if
+    high risk)'
+  - 'Rasburicase: Recombinant urate oxidase, rapidly lowers uric acid (expensive,
+    use if high risk)'
+  - Avoid allopurinol if already elevated uric acid (slow onset) - use rasburicase
+  - Monitor labs q6-8hr for first 24-48hr after chemotherapy
+  - 'Dialysis if: Refractory hyperkalemia, severe AKI, or calcium-phosphate product
+    >70'
+  management:
+  - 'Guideline-based treatment options for Tumor Lysis Syndrome include:'
+  - 'Prevention: IV fluids 3 L/m²/day (200-300 mL/hr)'
+  - Allopurinol 300-600mg daily (start 24-48hr before chemo)
+  - Rasburicase 0.2 mg/kg IV if high risk (bulky disease, high WBC, elevated uric
+    acid)
+  - 'Treat electrolytes: Insulin/glucose for K+, avoid calcium unless symptomatic
+    (forms Ca-PO4 crystals)'
+  - 'Dialysis if: K+ >6.5, Cr >10, or Ca x PO4 >70'
+  tests:
+  - Basic metabolic panel q6-8hr (K+, PO4, Ca2+, Cr, uric acid)
+  - ECG (assess for hyperkalemia)
+  - LDH (marker of cell turnover)
+  - Urinalysis (uric acid crystals)
+  referrals:
+  - Nephrology consult for all tumor lysis syndrome
+  - Oncology (manage chemotherapy)
+  - ICU if severe electrolyte abnormalities
+  - Dialysis if refractory
+  sensitivity: 0.9
+  specificity: 0.88
+  icd10:
+  - E88.3
+  snomed:
+  - '42182001'

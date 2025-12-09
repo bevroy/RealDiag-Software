@@ -1,437 +1,474 @@
 family: dermatology
 version: 0.1.0
-source: "American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer Network (NCCN) for skin cancers"
+source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer
+  Network (NCCN) for skin cancers
 rules:
-  - id: DERM-ECZEMA
-    label: Atopic Dermatitis (Eczema)
-    presentations:
-      - Pruritic erythematous patches
-      - Dry, scaly skin
-      - Flexural involvement
-      - Personal or family history of atopy
-      - Chronic relapsing course
-    clinical_pearls:
-      - "Atopic triad: Eczema, asthma, allergic rhinitis (personal or family history)"
-      - "Rule of twos: Face/extensor in infants <2yr, flexural surfaces after age 2"
-      - "Avoid triggers: Harsh soaps, hot water, wool clothing, stress"
-      - "Secondary infection common: Look for crusting, weeping (Staph aureus or HSV)"
-      - "Bleach baths (1/2 cup bleach in full tub, 2x/week) reduce bacterial colonization"
-    management:
-      - "Moisturize aggressively: Apply thick emollients (CeraVe, Vanicream) 2-3x daily, especially after bathing"
-      - "Topical corticosteroids: Low-potency (hydrocortisone 2.5%) for face, medium-high potency (triamcinolone 0.1%) for body"
-      - "Steroid-sparing: Tacrolimus 0.1% or pimecrolimus 1% for face/sensitive areas (avoid sun)"
-      - "Antihistamines: Hydroxyzine or cetirizine at bedtime for pruritus"
-      - "Treat infections: Mupirocin ointment for impetigo, oral antibiotics if extensive"
-    tests:
-      - IgE levels (often elevated but not diagnostic)
-      - Skin prick testing or RAST if food allergies suspected
-      - Skin culture if concern for secondary infection
-      - Patch testing if contact dermatitis suspected
-    referrals:
-      - Dermatology for severe/refractory cases or systemic therapy consideration
-      - Allergy/Immunology for testing and environmental control
-    icd10:
-      - L20.9
-      - L20.89
-    snomed:
-      - "24079001"
-
-  - id: DERM-PSORIASIS
-    label: Psoriasis
-    presentations:
-      - Well-demarcated erythematous plaques
-      - Silvery scale
-      - Extensor surface involvement
-      - Nail pitting or onycholysis
-      - Koebner phenomenon
-    clinical_pearls:
-      - "Auspitz sign: Pinpoint bleeding when scale removed"
-      - "Koebner phenomenon: New lesions at sites of trauma"
-      - "Nail changes in 50%: Pitting, oil spots, onycholysis, subungual hyperkeratosis"
-      - "Psoriatic arthritis in 30%: Screen with joint exam, consider TNF inhibitors"
-      - "Avoid triggers: Stress, infections (strep throat), medications (beta-blockers, lithium), alcohol"
-    management:
-      - "Mild (<5% BSA): Topical corticosteroids (clobetasol 0.05%) + vitamin D analog (calcipotriene)"
-      - "Moderate (5-10% BSA): Add phototherapy (narrowband UVB 3x/week)"
-      - "Severe (>10% BSA) or psoriatic arthritis: Systemic therapy (methotrexate, biologics like adalimumab)"
-      - "Scalp: Tar shampoos, topical steroids in solution form"
-      - "Coal tar or salicylic acid for thick plaques"
-    tests:
-      - Clinical diagnosis (usually no tests needed)
-      - Skin biopsy if diagnosis uncertain
-      - Rheumatoid factor and anti-CCP if arthritis suspected (usually negative in psoriatic arthritis)
-      - Baseline labs before systemic therapy (CBC, LFTs, Cr, TB test)
-    referrals:
-      - Dermatology for moderate-severe disease or systemic therapy
-      - Rheumatology if psoriatic arthritis
-    icd10:
-      - L40.0
-      - L40.9
-    snomed:
-      - "9014002"
-
-  - id: DERM-CELLULITIS
-    label: Cellulitis
-    presentations:
-      - Erythema and warmth
-      - Pain and tenderness
-      - Swelling
-      - Fever
-      - Regional lymphadenopathy
-    clinical_pearls:
-      - "Most common organisms: Strep pyogenes (group A strep) and Staph aureus"
-      - "Mark borders with pen to track progression on antibiotics"
-      - "MRSA risk factors: IV drug use, recent hospitalization, prior MRSA, purulent drainage"
-      - "Recurrent cellulitis: Treat tinea pedis, maintain skin integrity"
-      - "Purpura or bullae suggest necrotizing fasciitis - surgical emergency"
-    management:
-      - "Mild (outpatient): Cephalexin 500mg PO q6h or clindamycin 300mg PO q8h for 5-10 days"
-      - "MRSA coverage: Add TMP-SMX DS BID or doxycycline 100mg BID to beta-lactam"
-      - "Moderate-severe (admit): Vancomycin 15-20mg/kg IV q12h or cefazolin 1-2g IV q8h"
-      - "Elevation and rest of affected limb"
-      - "NSAIDs for pain and inflammation"
-    tests:
-      - Blood cultures if febrile or systemically ill (low yield but important if positive)
-      - CBC with differential (leukocytosis expected)
-      - Wound culture if purulent drainage present
-      - Imaging (ultrasound or MRI) if concern for abscess or necrotizing infection
-    referrals:
-      - Hospital admission for severe infection, immunocompromise, facial involvement, or failed outpatient therapy
-      - Surgery consult if concern for necrotizing fasciitis or deep abscess
-    icd10:
-      - L03.90
-      - L03.115
-    snomed:
-      - "128045006"
-
-  - id: DERM-MELANOMA
-    label: Malignant Melanoma
-    presentations:
-      - Asymmetric pigmented lesion
-      - Irregular borders
-      - Color variation
-      - Diameter > 6mm
-      - Evolving lesion (ABCDEs)
-    clinical_pearls:
-      - "ABCDE: Asymmetry, Border irregular, Color variation, Diameter >6mm, Evolving"
-      - "'Ugly duckling sign': Lesion that looks different from other moles"
-      - "High-risk: Personal/family history, >50 nevi, atypical moles, fair skin, sunburns"
-      - "Breslow depth (thickness) is most important prognostic factor"
-      - "Amelanotic melanoma exists (pink/red) - don't miss it"
-    management:
-      - "DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth"
-      - "After diagnosis: Wide local excision with margins based on depth (0.5-2cm)"
-      - "Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated"
-      - "Staging workup for Stage IIB+ or node-positive: CT chest/abdomen/pelvis, brain MRI"
-      - "Adjuvant therapy: Interferon, anti-PD1 (pembrolizumab), or BRAF/MEK inhibitors if indicated"
-    tests:
-      - Excisional biopsy with narrow margins (1-3mm) for diagnosis
-      - Sentinel lymph node biopsy if Breslow >0.8mm
-      - LDH (elevated suggests metastatic disease)
-      - CT chest/abdomen/pelvis and brain MRI for staging if high-risk
-    referrals:
-      - Dermatology or surgical oncology for biopsy and wide excision
-      - Medical oncology if Stage IIB or higher for adjuvant therapy
-      - Plastic surgery for complex reconstructions
-    icd10:
-      - C43.9
-      - D03.9
-    snomed:
-      - "372244006"
-
-  - id: DERM-BCC
-    label: Basal Cell Carcinoma
-    presentations:
-      - Pearly or translucent papule
-      - Telangiectasias
-      - Central ulceration
-      - Sun-exposed area
-      - Slow-growing
-    clinical_pearls:
-      - "Most common skin cancer (80% of non-melanoma skin cancers)"
-      - "Locally invasive but rarely metastasizes (<0.1%)"
-      - "Subtypes: Nodular (most common), superficial, morpheaform (sclerosing - worst prognosis)"
-      - "Recurrence risk higher with morpheaform type and incomplete excision"
-      - "Sun exposure is main risk factor, also arsenic, radiation, immunosuppression"
-    management:
-      - "Surgical excision with 4mm margins (standard treatment, ~95% cure)"
-      - "Mohs micrographic surgery for high-risk areas (face, ears, recurrent) - highest cure rate"
-      - "Electrodesiccation & curettage (ED&C) for small, low-risk, superficial BCCs"
-      - "Topical imiquimod 5% or 5-FU for superficial BCCs only"
-      - "Radiation therapy for poor surgical candidates or unresectable tumors"
-    tests:
-      - Shave or punch biopsy for histologic confirmation
-      - No imaging needed unless extensive/invasive
-    referrals:
-      - Dermatology or surgical oncology for excision
-      - Mohs surgeon for high-risk locations or recurrent disease
-    icd10:
-      - C44.91
-      - C44.319
-    snomed:
-      - "254701007"
-
-  - id: DERM-SCC
-    label: Squamous Cell Carcinoma
-    presentations:
-      - Scaly erythematous plaque
-      - Central ulceration or crusting
-      - Sun-exposed area
-      - History of actinic keratosis
-      - Rapidly growing
-    clinical_pearls:
-      - "Second most common skin cancer (16% of non-melanoma)"
-      - "Can metastasize (2-5% overall, higher risk in ear, lip, immunosuppressed)"
-      - "Arises from actinic keratoses (5-10% transform over 10 years)"
-      - "High-risk features: >2cm, poorly differentiated, perineural invasion, depth >4mm"
-      - "Immunosuppressed patients (transplant) have 65-250x increased risk"
-    management:
-      - "Surgical excision with 4-6mm margins (standard treatment)"
-      - "Mohs surgery for high-risk locations (face, ears, genitals) or high-risk features"
-      - "Sentinel lymph node biopsy if high-risk features or clinically positive nodes"
-      - "Adjuvant radiation for perineural invasion, positive margins, or node-positive"
-      - "Systemic therapy (cemiplimab, pembrolizumab) for metastatic or unresectable disease"
-    tests:
-      - Shave or punch biopsy for histologic diagnosis
-      - Palpate regional lymph nodes
-      - CT or MRI if concern for deep invasion or metastasis
-    referrals:
-      - Dermatology or surgical oncology for excision
-      - Mohs surgeon for high-risk cases
-      - Medical oncology if metastatic disease
-    icd10:
-      - C44.92
-      - C44.329
-    snomed:
-      - "254703005"
-
-  - id: DERM-ACNE
-    label: Acne Vulgaris
-    presentations:
-      - Comedones (blackheads, whiteheads)
-      - Inflammatory papules and pustules
-      - Face, chest, back involvement
-      - Adolescent or young adult
-      - May have nodules or cysts
-    clinical_pearls:
-      - "Pathophysiology: Follicular hyperkeratinization + sebum production + P. acnes + inflammation"
-      - "Mild: Comedonal only. Moderate: Inflammatory papules/pustules. Severe: Nodules/cysts"
-      - "Isotretinoin is only cure - consider for severe, scarring, or refractory acne"
-      - "PCOS in women: Check if associated with hirsutism, irregular periods, obesity"
-      - "Avoid picking/squeezing - leads to scarring and prolonged inflammation"
-    management:
-      - "Mild (comedonal): Topical retinoid (tretinoin 0.025-0.1% or adapalene 0.1%) nightly"
-      - "Moderate (inflammatory): Retinoid + benzoyl peroxide 5% + topical clindamycin"
-      - "Add oral antibiotic if extensive: Doxycycline 100mg BID or minocycline 100mg BID (3-6 months)"
-      - "Severe (nodulocystic): Isotretinoin 0.5-1mg/kg/day (requires iPLEDGE program, pregnancy prevention)"
-      - "Women: Consider combined oral contraceptives or spironolactone 50-200mg daily"
-    tests:
-      - Clinical diagnosis (no tests usually needed)
-      - Pregnancy test before isotretinoin (required monthly with iPLEDGE)
-      - Consider DHEA-S, testosterone, LH/FSH if PCOS suspected
-    referrals:
-      - Dermatology for severe, scarring, or refractory acne
-      - Endocrinology if PCOS suspected
-    icd10:
-      - L70.0
-      - L70.9
-    snomed:
-      - "88714009"
-
-  - id: DERM-ROSACEA
-    label: Rosacea
-    presentations:
-      - Facial erythema and flushing
-      - Telangiectasias
-      - Papules and pustules
-      - Rhinophyma
-      - Central face involvement
-      - Triggers (heat, alcohol, spicy foods)
-    clinical_pearls:
-      - "Four subtypes: Erythematotelangiectatic, papulopustular, phymatous, ocular"
-      - "No comedones (unlike acne) - helps distinguish"
-      - "Ocular rosacea in 50%: Dry eyes, blepharitis, foreign body sensation"
-      - "Triggers: Sun, heat, alcohol, spicy food, stress, hot beverages"
-      - "Rhinophyma (bulbous nose) is late-stage complication, more common in men"
-    management:
-      - "Erythematotelangiectatic: Avoid triggers, gentle skincare, topical metronidazole 0.75% BID"
-      - "Papulopustular: Topical metronidazole or azelaic acid 15% BID + oral doxycycline 40mg daily"
-      - "Severe: Oral doxycycline 100mg BID or isotretinoin"
-      - "Telangiectasias: Laser therapy (PDL or IPL)"
-      - "Rhinophyma: Surgical debulking or CO2 laser"
-    tests:
-      - Clinical diagnosis (no specific tests)
-      - Skin biopsy only if diagnosis uncertain
-    referrals:
-      - Dermatology for refractory cases or laser therapy
-      - Ophthalmology if ocular symptoms
-    icd10:
-      - L71.9
-      - L71.0
-    snomed:
-      - "398909004"
-
-  - id: DERM-URTICARIA
-    label: Urticaria (Hives)
-    presentations:
-      - Pruritic wheals
-      - Transient lesions (< 24 hours)
-      - Central pallor with erythematous border
-      - May have angioedema
-      - Triggered by allergens, medications, or stress
-    clinical_pearls:
-      - "Acute (<6 weeks): Usually identifiable trigger. Chronic (>6 weeks): Often idiopathic"
-      - "Individual lesions resolve in <24 hours (if longer, consider urticarial vasculitis)"
-      - "Angioedema without urticaria: Think ACE inhibitor, hereditary angioedema, C1 esterase deficiency"
-      - "Common triggers: Foods (shellfish, nuts), medications (NSAIDs, antibiotics), infections"
-      - "Physical urticaria: Dermatographism (skin writing), cold-induced, exercise-induced"
-    management:
-      - "Acute: H1 antihistamine (cetirizine 10mg or fexofenadine 180mg daily), can increase up to 4x dose"
-      - "Add H2 blocker (famotidine 20mg BID) if inadequate response"
-      - "Severe/angioedema: Prednisone 40-60mg daily for 3-5 days, epinephrine if airway compromise"
-      - "Chronic: Daily non-sedating H1 antihistamine, increase to 4x dose if needed"
-      - "Refractory chronic: Omalizumab 150-300mg SQ monthly (anti-IgE)"
-    tests:
-      - Usually clinical diagnosis, no tests needed for acute urticaria
-      - For chronic urticaria: CBC, ESR/CRP, TSH, tryptase (if mastocytosis suspected)
-      - Skin biopsy if concern for urticarial vasculitis (lesions >24hrs, bruising)
-    referrals:
-      - Allergy/Immunology for chronic urticaria or recurrent angioedema
-      - Consider allergy testing if clear food/medication trigger suspected
-    icd10:
-      - L50.9
-      - L50.0
-    snomed:
-      - "126485001"
-
-  - id: DERM-TINEA
-    label: Tinea Corporis (Ringworm)
-    presentations:
-      - Annular erythematous patch
-      - Central clearing
-      - Scaly advancing border
-      - Pruritic
-      - KOH positive for hyphae
-    clinical_pearls:
-      - "Dermatophyte infection: Trichophyton, Microsporum, Epidermophyton species"
-      - "Named by location: Corporis (body), cruris (groin), pedis (feet), capitis (scalp)"
-      - "Tinea capitis requires oral therapy (topicals don't penetrate hair follicles)"
-      - "Steroid use can modify appearance ('tinea incognito') - looks atypical"
-      - "Majocchi granuloma: Deep follicular infection, requires systemic therapy"
-    management:
-      - "Tinea corporis/cruris: Topical azole (clotrimazole, ketoconazole) BID for 2-4 weeks"
-      - "Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective)"
-      - "Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks"
-      - "Tinea capitis: Oral griseofulvin 20-25mg/kg/day for 6-8 weeks (first-line in children)"
-      - "Alternative for capitis: Oral terbinafine or fluconazole"
-    tests:
-      - KOH prep: Scrape scale, add KOH, look for hyphae (quick office test)
-      - Fungal culture if KOH negative but high suspicion (takes 2-4 weeks)
-      - Wood's lamp (no longer used - only works for rare Microsporum species)
-    referrals:
-      - Dermatology if refractory, extensive, or tinea capitis with scarring
-    icd10:
-      - B35.4
-      - B35.9
-    snomed:
-      - "414941008"
-
-  - id: DERM-HERPES-ZOSTER
-    label: Herpes Zoster (Shingles)
-    presentations:
-      - Painful vesicular rash
-      - Dermatomal distribution
-      - Unilateral
-      - Prodrome of pain or tingling
-      - More common in elderly or immunocompromised
-    clinical_pearls:
-      - "Reactivation of varicella-zoster virus (VZV) dormant in dorsal root ganglia"
-      - "Start antivirals within 72 hours of rash onset for maximum benefit"
-      - "Postherpetic neuralgia (PHN) in 10-15%: Pain >90 days after rash, increases with age"
-      - "Herpes zoster ophthalmicus: V1 distribution, can cause blindness - ophthalmology emergency"
-      - "Hutchinson sign: Vesicles on tip/side of nose predicts ocular involvement"
-    management:
-      - "Antivirals within 72hrs: Valacyclovir 1g TID or famciclovir 500mg TID for 7 days"
-      - "Pain control: Gabapentin 300-900mg TID, pregabalin 75-150mg BID, or lidocaine patches"
-      - "If V1/ophthalmicus: Ophthalmology referral same day, start antivirals immediately"
-      - "PHN prevention: Early antivirals + aggressive pain control during acute phase"
-      - "PHN treatment: Gabapentin, pregabalin, TCAs (amitriptyline), lidocaine patches, capsaicin"
-    tests:
-      - Clinical diagnosis (usually no testing needed)
-      - Tzanck smear or DFA if atypical presentation (low sensitivity)
-      - PCR of vesicle fluid (gold standard but rarely needed)
-    referrals:
-      - Ophthalmology STAT if V1/herpes zoster ophthalmicus (Hutchinson sign, eye involvement)
-      - Pain management if severe PHN
-    icd10:
-      - B02.9
-      - B02.29
-    snomed:
-      - "4740000"
-
-  - id: DERM-VITILIGO
-    label: Vitiligo
-    presentations:
-      - Depigmented patches
-      - Well-demarcated borders
-      - Often symmetric
-      - Face, hands, body folds
-      - May be associated with autoimmune disease
-    clinical_pearls:
-      - "Autoimmune destruction of melanocytes - associated with thyroid disease (20%), type 1 DM, Addison's"
-      - "Types: Generalized (most common), segmental (unilateral, follows dermatome), focal/localized"
-      - "Koebner phenomenon: New lesions at sites of trauma"
-      - "Wood's lamp enhances depigmented areas, helps identify in fair-skinned patients"
-      - "Psychological impact significant - provide emotional support and counseling resources"
-    management:
-      - "Topical corticosteroids (clobetasol 0.05%) BID for 3-4 months - best for localized disease"
-      - "Topical calcineurin inhibitors (tacrolimus 0.1%) for face/intertriginous areas"
-      - "Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo"
-      - "Excimer laser for focal lesions"
-      - "Cosmetic camouflage makeup, self-tanners for psychosocial impact"
-    tests:
-      - Clinical diagnosis with Wood's lamp examination
-      - Screen for autoimmune: TSH, CBC, comprehensive metabolic panel, ANA
-      - Skin biopsy rarely needed (shows absence of melanocytes)
-    referrals:
-      - Dermatology for phototherapy or advanced treatments
-      - Endocrinology if associated autoimmune disease
-      - Psychology/psychiatry for significant emotional distress
-    icd10:
-      - L80
-    snomed:
-      - "56727007"
-
-  - id: DERM-ALOPECIA
-    label: Alopecia Areata
-    presentations:
-      - Patchy hair loss
-      - Smooth, non-scarring
-      - Exclamation point hairs at periphery
-      - May progress to totalis or universalis
-      - Associated with autoimmune conditions
-    clinical_pearls:
-      - "Autoimmune attack on hair follicles - associated with thyroid disease, vitiligo, celiac"
-      - "Exclamation point hairs: Short broken hairs with tapered proximal end (pathognomonic)"
-      - "Variants: Areata (patches), totalis (entire scalp), universalis (entire body)"
-      - "Nail changes in 20%: Pitting, ridging, trachyonychia (rough nails)"
-      - "Spontaneous remission in 50% within 1 year, but often recurs"
-    management:
-      - "Limited patches (<50% scalp): Intralesional triamcinolone 5-10mg/mL monthly"
-      - "Topical corticosteroids (clobetasol 0.05%) BID - less effective than injections"
-      - "Extensive (>50% scalp): Topical immunotherapy (DPCP or SADBE) - highest success rate"
-      - "JAK inhibitors (tofacitinib, baricitinib) for severe refractory cases - emerging therapy"
-      - "Minoxidil 5% BID may help with regrowth (adjunct therapy)"
-    tests:
-      - Clinical diagnosis based on appearance and exclamation point hairs
-      - Pull test: Gentle hair pull yields >6 hairs in active disease
-      - Screen for autoimmune: TSH, CBC, tissue transglutaminase (celiac)
-      - Scalp biopsy rarely needed (shows peribulbar lymphocytic infiltrate)
-    referrals:
-      - Dermatology for intralesional injections or topical immunotherapy
-      - Consider wig consultation if extensive hair loss
-    icd10:
-      - L63.9
-      - L63.0
-    snomed:
-      - "68225006"
+- id: DERM-ECZEMA
+  label: Atopic Dermatitis (Eczema)
+  presentations:
+  - Pruritic erythematous patches
+  - Dry, scaly skin
+  - Flexural involvement
+  - Personal or family history of atopy
+  - Chronic relapsing course
+  clinical_pearls:
+  - 'Atopic triad: Eczema, asthma, allergic rhinitis (personal or family history)'
+  - 'Rule of twos: Face/extensor in infants <2yr, flexural surfaces after age 2'
+  - 'Avoid triggers: Harsh soaps, hot water, wool clothing, stress'
+  - 'Secondary infection common: Look for crusting, weeping (Staph aureus or HSV)'
+  - Bleach baths (1/2 cup bleach in full tub, 2x/week) reduce bacterial colonization
+  management:
+  - 'Guideline-based treatment options for Atopic Dermatitis (Eczema) include:'
+  - 'Moisturize aggressively: Apply thick emollients (CeraVe, Vanicream) 2-3x daily,
+    especially after bathing'
+  - 'Topical corticosteroids: Low-potency (hydrocortisone 2.5%) for face, medium-high
+    potency (triamcinolone 0.1%) for body'
+  - 'Steroid-sparing: Tacrolimus 0.1% or pimecrolimus 1% for face/sensitive areas
+    (avoid sun)'
+  - 'Antihistamines: Hydroxyzine or cetirizine at bedtime for pruritus'
+  - 'Treat infections: Mupirocin ointment for impetigo, oral antibiotics if extensive'
+  tests:
+  - IgE levels (often elevated but not diagnostic)
+  - Skin prick testing or RAST if food allergies suspected
+  - Skin culture if concern for secondary infection
+  - Patch testing if contact dermatitis suspected
+  referrals:
+  - Dermatology for severe/refractory cases or systemic therapy consideration
+  - Allergy/Immunology for testing and environmental control
+  icd10:
+  - L20.9
+  - L20.89
+  snomed:
+  - '24079001'
+- id: DERM-PSORIASIS
+  label: Psoriasis
+  presentations:
+  - Well-demarcated erythematous plaques
+  - Silvery scale
+  - Extensor surface involvement
+  - Nail pitting or onycholysis
+  - Koebner phenomenon
+  clinical_pearls:
+  - 'Auspitz sign: Pinpoint bleeding when scale removed'
+  - 'Koebner phenomenon: New lesions at sites of trauma'
+  - 'Nail changes in 50%: Pitting, oil spots, onycholysis, subungual hyperkeratosis'
+  - 'Psoriatic arthritis in 30%: Screen with joint exam, consider TNF inhibitors'
+  - 'Avoid triggers: Stress, infections (strep throat), medications (beta-blockers,
+    lithium), alcohol'
+  management:
+  - 'Guideline-based treatment options for Psoriasis include:'
+  - 'Mild (<5% BSA): Topical corticosteroids (clobetasol 0.05%) + vitamin D analog
+    (calcipotriene)'
+  - 'Moderate (5-10% BSA): Add phototherapy (narrowband UVB 3x/week)'
+  - 'Severe (>10% BSA) or psoriatic arthritis: Systemic therapy (methotrexate, biologics
+    like adalimumab)'
+  - 'Scalp: Tar shampoos, topical steroids in solution form'
+  - Coal tar or salicylic acid for thick plaques
+  tests:
+  - Clinical diagnosis (usually no tests needed)
+  - Skin biopsy if diagnosis uncertain
+  - Rheumatoid factor and anti-CCP if arthritis suspected (usually negative in psoriatic
+    arthritis)
+  - Baseline labs before systemic therapy (CBC, LFTs, Cr, TB test)
+  referrals:
+  - Dermatology for moderate-severe disease or systemic therapy
+  - Rheumatology if psoriatic arthritis
+  icd10:
+  - L40.0
+  - L40.9
+  snomed:
+  - '9014002'
+- id: DERM-CELLULITIS
+  label: Cellulitis
+  presentations:
+  - Erythema and warmth
+  - Pain and tenderness
+  - Swelling
+  - Fever
+  - Regional lymphadenopathy
+  clinical_pearls:
+  - 'Most common organisms: Strep pyogenes (group A strep) and Staph aureus'
+  - Mark borders with pen to track progression on antibiotics
+  - 'MRSA risk factors: IV drug use, recent hospitalization, prior MRSA, purulent
+    drainage'
+  - 'Recurrent cellulitis: Treat tinea pedis, maintain skin integrity'
+  - Purpura or bullae suggest necrotizing fasciitis - surgical emergency
+  management:
+  - 'Guideline-based treatment options for Cellulitis include:'
+  - 'Mild (outpatient): Cephalexin 500mg PO q6h or clindamycin 300mg PO q8h for 5-10
+    days'
+  - 'MRSA coverage: Add TMP-SMX DS BID or doxycycline 100mg BID to beta-lactam'
+  - 'Moderate-severe (admit): Vancomycin 15-20mg/kg IV q12h or cefazolin 1-2g IV q8h'
+  - Elevation and rest of affected limb
+  - NSAIDs for pain and inflammation
+  tests:
+  - Blood cultures if febrile or systemically ill (low yield but important if positive)
+  - CBC with differential (leukocytosis expected)
+  - Wound culture if purulent drainage present
+  - Imaging (ultrasound or MRI) if concern for abscess or necrotizing infection
+  referrals:
+  - Hospital admission for severe infection, immunocompromise, facial involvement,
+    or failed outpatient therapy
+  - Surgery consult if concern for necrotizing fasciitis or deep abscess
+  icd10:
+  - L03.90
+  - L03.115
+  snomed:
+  - '128045006'
+- id: DERM-MELANOMA
+  label: Malignant Melanoma
+  presentations:
+  - Asymmetric pigmented lesion
+  - Irregular borders
+  - Color variation
+  - Diameter > 6mm
+  - Evolving lesion (ABCDEs)
+  clinical_pearls:
+  - 'ABCDE: Asymmetry, Border irregular, Color variation, Diameter >6mm, Evolving'
+  - '''Ugly duckling sign'': Lesion that looks different from other moles'
+  - 'High-risk: Personal/family history, >50 nevi, atypical moles, fair skin, sunburns'
+  - Breslow depth (thickness) is most important prognostic factor
+  - Amelanotic melanoma exists (pink/red) - don't miss it
+  management:
+  - 'Guideline-based treatment options for Malignant Melanoma include:'
+  - DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth
+  - 'After diagnosis: Wide local excision with margins based on depth (0.5-2cm)'
+  - Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated
+  - 'Staging workup for Stage IIB+ or node-positive: CT chest/abdomen/pelvis, brain
+    MRI'
+  - 'Adjuvant therapy: Interferon, anti-PD1 (pembrolizumab), or BRAF/MEK inhibitors
+    if indicated'
+  tests:
+  - Excisional biopsy with narrow margins (1-3mm) for diagnosis
+  - Sentinel lymph node biopsy if Breslow >0.8mm
+  - LDH (elevated suggests metastatic disease)
+  - CT chest/abdomen/pelvis and brain MRI for staging if high-risk
+  referrals:
+  - Dermatology or surgical oncology for biopsy and wide excision
+  - Medical oncology if Stage IIB or higher for adjuvant therapy
+  - Plastic surgery for complex reconstructions
+  icd10:
+  - C43.9
+  - D03.9
+  snomed:
+  - '372244006'
+- id: DERM-BCC
+  label: Basal Cell Carcinoma
+  presentations:
+  - Pearly or translucent papule
+  - Telangiectasias
+  - Central ulceration
+  - Sun-exposed area
+  - Slow-growing
+  clinical_pearls:
+  - Most common skin cancer (80% of non-melanoma skin cancers)
+  - Locally invasive but rarely metastasizes (<0.1%)
+  - 'Subtypes: Nodular (most common), superficial, morpheaform (sclerosing - worst
+    prognosis)'
+  - Recurrence risk higher with morpheaform type and incomplete excision
+  - Sun exposure is main risk factor, also arsenic, radiation, immunosuppression
+  management:
+  - 'Guideline-based treatment options for Basal Cell Carcinoma include:'
+  - Surgical excision with 4mm margins (standard treatment, ~95% cure)
+  - Mohs micrographic surgery for high-risk areas (face, ears, recurrent) - highest
+    cure rate
+  - Electrodesiccation & curettage (ED&C) for small, low-risk, superficial BCCs
+  - Topical imiquimod 5% or 5-FU for superficial BCCs only
+  - Radiation therapy for poor surgical candidates or unresectable tumors
+  tests:
+  - Shave or punch biopsy for histologic confirmation
+  - No imaging needed unless extensive/invasive
+  referrals:
+  - Dermatology or surgical oncology for excision
+  - Mohs surgeon for high-risk locations or recurrent disease
+  icd10:
+  - C44.91
+  - C44.319
+  snomed:
+  - '254701007'
+- id: DERM-SCC
+  label: Squamous Cell Carcinoma
+  presentations:
+  - Scaly erythematous plaque
+  - Central ulceration or crusting
+  - Sun-exposed area
+  - History of actinic keratosis
+  - Rapidly growing
+  clinical_pearls:
+  - Second most common skin cancer (16% of non-melanoma)
+  - Can metastasize (2-5% overall, higher risk in ear, lip, immunosuppressed)
+  - Arises from actinic keratoses (5-10% transform over 10 years)
+  - 'High-risk features: >2cm, poorly differentiated, perineural invasion, depth >4mm'
+  - Immunosuppressed patients (transplant) have 65-250x increased risk
+  management:
+  - 'Guideline-based treatment options for Squamous Cell Carcinoma include:'
+  - Surgical excision with 4-6mm margins (standard treatment)
+  - Mohs surgery for high-risk locations (face, ears, genitals) or high-risk features
+  - Sentinel lymph node biopsy if high-risk features or clinically positive nodes
+  - Adjuvant radiation for perineural invasion, positive margins, or node-positive
+  - Systemic therapy (cemiplimab, pembrolizumab) for metastatic or unresectable disease
+  tests:
+  - Shave or punch biopsy for histologic diagnosis
+  - Palpate regional lymph nodes
+  - CT or MRI if concern for deep invasion or metastasis
+  referrals:
+  - Dermatology or surgical oncology for excision
+  - Mohs surgeon for high-risk cases
+  - Medical oncology if metastatic disease
+  icd10:
+  - C44.92
+  - C44.329
+  snomed:
+  - '254703005'
+- id: DERM-ACNE
+  label: Acne Vulgaris
+  presentations:
+  - Comedones (blackheads, whiteheads)
+  - Inflammatory papules and pustules
+  - Face, chest, back involvement
+  - Adolescent or young adult
+  - May have nodules or cysts
+  clinical_pearls:
+  - 'Pathophysiology: Follicular hyperkeratinization + sebum production + P. acnes
+    + inflammation'
+  - 'Mild: Comedonal only. Moderate: Inflammatory papules/pustules. Severe: Nodules/cysts'
+  - Isotretinoin is only cure - consider for severe, scarring, or refractory acne
+  - 'PCOS in women: Check if associated with hirsutism, irregular periods, obesity'
+  - Avoid picking/squeezing - leads to scarring and prolonged inflammation
+  management:
+  - 'Guideline-based treatment options for Acne Vulgaris include:'
+  - 'Mild (comedonal): Topical retinoid (tretinoin 0.025-0.1% or adapalene 0.1%) nightly'
+  - 'Moderate (inflammatory): Retinoid + benzoyl peroxide 5% + topical clindamycin'
+  - 'Add oral antibiotic if extensive: Doxycycline 100mg BID or minocycline 100mg
+    BID (3-6 months)'
+  - 'Severe (nodulocystic): Isotretinoin 0.5-1mg/kg/day (requires iPLEDGE program,
+    pregnancy prevention)'
+  - 'Women: Consider combined oral contraceptives or spironolactone 50-200mg daily'
+  tests:
+  - Clinical diagnosis (no tests usually needed)
+  - Pregnancy test before isotretinoin (required monthly with iPLEDGE)
+  - Consider DHEA-S, testosterone, LH/FSH if PCOS suspected
+  referrals:
+  - Dermatology for severe, scarring, or refractory acne
+  - Endocrinology if PCOS suspected
+  icd10:
+  - L70.0
+  - L70.9
+  snomed:
+  - '88714009'
+- id: DERM-ROSACEA
+  label: Rosacea
+  presentations:
+  - Facial erythema and flushing
+  - Telangiectasias
+  - Papules and pustules
+  - Rhinophyma
+  - Central face involvement
+  - Triggers (heat, alcohol, spicy foods)
+  clinical_pearls:
+  - 'Four subtypes: Erythematotelangiectatic, papulopustular, phymatous, ocular'
+  - No comedones (unlike acne) - helps distinguish
+  - 'Ocular rosacea in 50%: Dry eyes, blepharitis, foreign body sensation'
+  - 'Triggers: Sun, heat, alcohol, spicy food, stress, hot beverages'
+  - Rhinophyma (bulbous nose) is late-stage complication, more common in men
+  management:
+  - 'Guideline-based treatment options for Rosacea include:'
+  - 'Erythematotelangiectatic: Avoid triggers, gentle skincare, topical metronidazole
+    0.75% BID'
+  - 'Papulopustular: Topical metronidazole or azelaic acid 15% BID + oral doxycycline
+    40mg daily'
+  - 'Severe: Oral doxycycline 100mg BID or isotretinoin'
+  - 'Telangiectasias: Laser therapy (PDL or IPL)'
+  - 'Rhinophyma: Surgical debulking or CO2 laser'
+  tests:
+  - Clinical diagnosis (no specific tests)
+  - Skin biopsy only if diagnosis uncertain
+  referrals:
+  - Dermatology for refractory cases or laser therapy
+  - Ophthalmology if ocular symptoms
+  icd10:
+  - L71.9
+  - L71.0
+  snomed:
+  - '398909004'
+- id: DERM-URTICARIA
+  label: Urticaria (Hives)
+  presentations:
+  - Pruritic wheals
+  - Transient lesions (< 24 hours)
+  - Central pallor with erythematous border
+  - May have angioedema
+  - Triggered by allergens, medications, or stress
+  clinical_pearls:
+  - 'Acute (<6 weeks): Usually identifiable trigger. Chronic (>6 weeks): Often idiopathic'
+  - Individual lesions resolve in <24 hours (if longer, consider urticarial vasculitis)
+  - 'Angioedema without urticaria: Think ACE inhibitor, hereditary angioedema, C1
+    esterase deficiency'
+  - 'Common triggers: Foods (shellfish, nuts), medications (NSAIDs, antibiotics),
+    infections'
+  - 'Physical urticaria: Dermatographism (skin writing), cold-induced, exercise-induced'
+  management:
+  - 'Guideline-based treatment options for Urticaria (Hives) include:'
+  - 'Acute: H1 antihistamine (cetirizine 10mg or fexofenadine 180mg daily), can increase
+    up to 4x dose'
+  - Add H2 blocker (famotidine 20mg BID) if inadequate response
+  - 'Severe/angioedema: Prednisone 40-60mg daily for 3-5 days, epinephrine if airway
+    compromise'
+  - 'Chronic: Daily non-sedating H1 antihistamine, increase to 4x dose if needed'
+  - 'Refractory chronic: Omalizumab 150-300mg SQ monthly (anti-IgE)'
+  tests:
+  - Usually clinical diagnosis, no tests needed for acute urticaria
+  - For chronic urticaria: CBC, ESR/CRP, TSH, tryptase (if mastocytosis suspected)
+  - Skin biopsy if concern for urticarial vasculitis (lesions >24hrs, bruising)
+  referrals:
+  - Allergy/Immunology for chronic urticaria or recurrent angioedema
+  - Consider allergy testing if clear food/medication trigger suspected
+  icd10:
+  - L50.9
+  - L50.0
+  snomed:
+  - '126485001'
+- id: DERM-TINEA
+  label: Tinea Corporis (Ringworm)
+  presentations:
+  - Annular erythematous patch
+  - Central clearing
+  - Scaly advancing border
+  - Pruritic
+  - KOH positive for hyphae
+  clinical_pearls:
+  - 'Dermatophyte infection: Trichophyton, Microsporum, Epidermophyton species'
+  - 'Named by location: Corporis (body), cruris (groin), pedis (feet), capitis (scalp)'
+  - Tinea capitis requires oral therapy (topicals don't penetrate hair follicles)
+  - Steroid use can modify appearance ('tinea incognito') - looks atypical
+  - 'Majocchi granuloma: Deep follicular infection, requires systemic therapy'
+  management:
+  - 'Guideline-based treatment options for Tinea Corporis (Ringworm) include:'
+  - 'Tinea corporis/cruris: Topical azole (clotrimazole, ketoconazole) BID for 2-4
+    weeks'
+  - 'Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective)'
+  - 'Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks'
+  - 'Tinea capitis: Oral griseofulvin 20-25mg/kg/day for 6-8 weeks (first-line in
+    children)'
+  - 'Alternative for capitis: Oral terbinafine or fluconazole'
+  tests:
+  - KOH prep: Scrape scale, add KOH, look for hyphae (quick office test)
+  - Fungal culture if KOH negative but high suspicion (takes 2-4 weeks)
+  - Wood's lamp (no longer used - only works for rare Microsporum species)
+  referrals:
+  - Dermatology if refractory, extensive, or tinea capitis with scarring
+  icd10:
+  - B35.4
+  - B35.9
+  snomed:
+  - '414941008'
+- id: DERM-HERPES-ZOSTER
+  label: Herpes Zoster (Shingles)
+  presentations:
+  - Painful vesicular rash
+  - Dermatomal distribution
+  - Unilateral
+  - Prodrome of pain or tingling
+  - More common in elderly or immunocompromised
+  clinical_pearls:
+  - Reactivation of varicella-zoster virus (VZV) dormant in dorsal root ganglia
+  - Start antivirals within 72 hours of rash onset for maximum benefit
+  - 'Postherpetic neuralgia (PHN) in 10-15%: Pain >90 days after rash, increases with
+    age'
+  - 'Herpes zoster ophthalmicus: V1 distribution, can cause blindness - ophthalmology
+    emergency'
+  - 'Hutchinson sign: Vesicles on tip/side of nose predicts ocular involvement'
+  management:
+  - 'Guideline-based treatment options for Herpes Zoster (Shingles) include:'
+  - 'Antivirals within 72hrs: Valacyclovir 1g TID or famciclovir 500mg TID for 7 days'
+  - 'Pain control: Gabapentin 300-900mg TID, pregabalin 75-150mg BID, or lidocaine
+    patches'
+  - 'If V1/ophthalmicus: Ophthalmology referral same day, start antivirals immediately'
+  - 'PHN prevention: Early antivirals + aggressive pain control during acute phase'
+  - 'PHN treatment: Gabapentin, pregabalin, TCAs (amitriptyline), lidocaine patches,
+    capsaicin'
+  tests:
+  - Clinical diagnosis (usually no testing needed)
+  - Tzanck smear or DFA if atypical presentation (low sensitivity)
+  - PCR of vesicle fluid (gold standard but rarely needed)
+  referrals:
+  - Ophthalmology STAT if V1/herpes zoster ophthalmicus (Hutchinson sign, eye involvement)
+  - Pain management if severe PHN
+  icd10:
+  - B02.9
+  - B02.29
+  snomed:
+  - '4740000'
+- id: DERM-VITILIGO
+  label: Vitiligo
+  presentations:
+  - Depigmented patches
+  - Well-demarcated borders
+  - Often symmetric
+  - Face, hands, body folds
+  - May be associated with autoimmune disease
+  clinical_pearls:
+  - Autoimmune destruction of melanocytes - associated with thyroid disease (20%),
+    type 1 DM, Addison's
+  - 'Types: Generalized (most common), segmental (unilateral, follows dermatome),
+    focal/localized'
+  - 'Koebner phenomenon: New lesions at sites of trauma'
+  - Wood's lamp enhances depigmented areas, helps identify in fair-skinned patients
+  - Psychological impact significant - provide emotional support and counseling resources
+  management:
+  - 'Guideline-based treatment options for Vitiligo include:'
+  - Topical corticosteroids (clobetasol 0.05%) BID for 3-4 months - best for localized
+    disease
+  - Topical calcineurin inhibitors (tacrolimus 0.1%) for face/intertriginous areas
+  - Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo
+  - Excimer laser for focal lesions
+  - Cosmetic camouflage makeup, self-tanners for psychosocial impact
+  tests:
+  - Clinical diagnosis with Wood's lamp examination
+  - Screen for autoimmune: TSH, CBC, comprehensive metabolic panel, ANA
+  - Skin biopsy rarely needed (shows absence of melanocytes)
+  referrals:
+  - Dermatology for phototherapy or advanced treatments
+  - Endocrinology if associated autoimmune disease
+  - Psychology/psychiatry for significant emotional distress
+  icd10:
+  - L80
+  snomed:
+  - '56727007'
+- id: DERM-ALOPECIA
+  label: Alopecia Areata
+  presentations:
+  - Patchy hair loss
+  - Smooth, non-scarring
+  - Exclamation point hairs at periphery
+  - May progress to totalis or universalis
+  - Associated with autoimmune conditions
+  clinical_pearls:
+  - Autoimmune attack on hair follicles - associated with thyroid disease, vitiligo,
+    celiac
+  - 'Exclamation point hairs: Short broken hairs with tapered proximal end (pathognomonic)'
+  - 'Variants: Areata (patches), totalis (entire scalp), universalis (entire body)'
+  - 'Nail changes in 20%: Pitting, ridging, trachyonychia (rough nails)'
+  - Spontaneous remission in 50% within 1 year, but often recurs
+  management:
+  - 'Guideline-based treatment options for Alopecia Areata include:'
+  - 'Limited patches (<50% scalp): Intralesional triamcinolone 5-10mg/mL monthly'
+  - Topical corticosteroids (clobetasol 0.05%) BID - less effective than injections
+  - 'Extensive (>50% scalp): Topical immunotherapy (DPCP or SADBE) - highest success
+    rate'
+  - JAK inhibitors (tofacitinib, baricitinib) for severe refractory cases - emerging
+    therapy
+  - Minoxidil 5% BID may help with regrowth (adjunct therapy)
+  tests:
+  - Clinical diagnosis based on appearance and exclamation point hairs
+  - Pull test: Gentle hair pull yields >6 hairs in active disease
+  - Screen for autoimmune: TSH, CBC, tissue transglutaminase (celiac)
+  - Scalp biopsy rarely needed (shows peribulbar lymphocytic infiltrate)
+  referrals:
+  - Dermatology for intralesional injections or topical immunotherapy
+  - Consider wig consultation if extensive hair loss
+  icd10:
+  - L63.9
+  - L63.0
+  snomed:
+  - '68225006'
