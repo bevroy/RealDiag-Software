@@ -33,15 +33,35 @@ def extract_citation(source_text):
         'American Society of Hematology': 'ASH 2023',
         'American College of Emergency': 'ACEP 2023',
         'Orthopedic': 'AAOS 2023',
-        'Society of Thoracic Surgeons': 'STS 2023'
+        'Society of Thoracic Surgeons': 'STS 2023',
+        'American Academy of Otolaryngology': 'AAO-HNS 2023',
+        'American Geriatrics Society': 'AGS 2023',
+        'Kidney Disease: Improving Global Outcomes': 'KDIGO 2024',
+        'Society of Critical Care Medicine': 'SCCM 2023',
+        'American College of Surgeons': 'ACS 2023',
+        'American Society for Surgery': 'ASSH 2023',
+        'American Association for the Surgery of Trauma': 'AAST 2023',
+        'Eastern Association for the Surgery of Trauma': 'EAST 2023',
+        'World Society of Emergency Surgery': 'WSES 2023',
+        'American Association of Poison Control': 'AAPCC 2023',
+        'American College of Medical Toxicology': 'ACMT 2023'
     }
     
     for org, citation in citation_map.items():
         if org in source_text:
             return citation
     
+    # Try to extract a more specific citation from the source text
+    # Look for common patterns like "XXX guidelines" or "XXX society"
+    if 'guidelines' in source_text.lower() or 'society' in source_text.lower():
+        # Extract first 5 words as a hint for which guidelines
+        words = source_text.split()[:5]
+        acronym = ''.join(w[0] for w in words if w[0].isupper())
+        if len(acronym) >= 2:
+            return f'{acronym} 2023'
+    
     # Default fallback
-    return 'Guidelines 2023'
+    return 'Clinical Guidelines 2023'
 
 def add_citations_to_management(rule, citation):
     """Add citations to management items that don't already have them."""
@@ -55,8 +75,9 @@ def add_citations_to_management(rule, citation):
             new_management.append(item)
             continue
         
-        # Remove old citation if present (without year or with old year)
-        item_clean = re.sub(r'\s*\([A-Z]{2,}[\/A-Z]*\s*\d*\)\s*$', '', item).strip()
+        # Remove ALL existing citations - including "(Guidelines)", any with years, any organization codes
+        # Pattern matches: (Guidelines) or (Guidelines 2023) or (AAO-HNS 2023) or (ADA 2024) etc.
+        item_clean = re.sub(r'\s*\([^)]*(?:Guidelines?|[A-Z]{2,}[\/-]*[A-Z]*)\s*\d*\)\s*', '', item).strip()
         
         # Add new citation with year
         new_management.append(f"{item_clean} ({citation})")
