@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 
 export default function SourcesPage() {
@@ -109,10 +109,16 @@ export default function SourcesPage() {
           }
         });
 
-        const results = await Promise.all(fetchPromises);
-        const sourcesData = results.filter(s => s !== null);
+        // Progressive loading - show results as they arrive
+        const results = [];
+        for (const promise of fetchPromises) {
+          const result = await promise;
+          if (result !== null) {
+            results.push(result);
+            setSources([...results]); // Update UI with each result
+          }
+        }
         
-        setSources(sourcesData);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -124,19 +130,18 @@ export default function SourcesPage() {
     loadSources();
   }, []);
 
-  // Collect all unique citations across all rules
-  const allCitations = [];
-  sources.forEach((fam) => {
-    fam.rules.forEach((rule) => {
-      if (rule.citations && Array.isArray(rule.citations)) {
-        rule.citations.forEach((citation) => {
-          if (!allCitations.includes(citation)) {
-            allCitations.push(citation);
-          }
-        });
-      }
+  // Collect all unique citations across all rules (memoized)
+  const allCitations = useMemo(() => {
+    const citationsSet = new Set();
+    sources.forEach((fam) => {
+      fam.rules.forEach((rule) => {
+        if (rule.citations && Array.isArray(rule.citations)) {
+          rule.citations.forEach((citation) => citationsSet.add(citation));
+        }
+      });
     });
-  });
+    return Array.from(citationsSet);
+  }, [sources]);
 
   return (
     <>

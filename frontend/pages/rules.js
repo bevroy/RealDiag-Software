@@ -35,6 +35,7 @@ export default function ReferencePage() {
   const [expandedId, setExpandedId] = useState(null);
   const [selectedFamily, setSelectedFamily] = useState("all");
   const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
+  const [displayCount, setDisplayCount] = useState(50); // Start with 50 items
 
   useEffect(() => {
     let cancelled = false;
@@ -57,14 +58,21 @@ export default function ReferencePage() {
           }
         }
         
-        const results = await Promise.all(
-          FAMILIES.map(async (f) => {
+        // Progressive loading - load families sequentially to show results faster
+        const allLoadedRules = [];
+        for (const f of FAMILIES) {
+          if (cancelled) break;
+          
+          try {
             const res = await fetch(`${apiBase}/reference/${f.id}`);
-            if (!res.ok) throw new Error(`Failed to load ${f.label}`);
+            if (!res.ok) {
+              console.warn(`Failed to load ${f.label}`);
+              continue;
+            }
             const data = await res.json();
             
             // Map rules and ensure familyId is set correctly
-            return (data.rules || [])
+            const familyRules = (data.rules || [])
               .filter(rule => rule && rule.id) // Filter out invalid rules
               .map(rule => ({
                 ...rule,
@@ -76,10 +84,16 @@ export default function ReferencePage() {
                 snomed: Array.isArray(rule.snomed) ? rule.snomed.map(String) : [],
                 citations: Array.isArray(rule.citations) ? rule.citations.map(String) : [],
               }));
-          })
-        );
-        if (!cancelled) {
-          setAllRules(results.flat().filter(r => r && r.id));
+            
+            allLoadedRules.push(...familyRules);
+            
+            // Update state after each family loads
+            if (!cancelled) {
+              setAllRules([...allLoadedRules]);
+            }
+          } catch (err) {
+            console.warn(`Error loading ${f.label}:`, err);
+          }
         }
       } catch (e) {
         if (!cancelled) {
@@ -126,6 +140,11 @@ export default function ReferencePage() {
       );
     });
   }, [allRules, query, selectedFamily]);
+  
+  // Reset display count when filter changes
+  useEffect(() => {
+    setDisplayCount(50);
+  }, [query, selectedFamily]);
 
   function toggleExpanded(id) {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -446,8 +465,8 @@ export default function ReferencePage() {
           <div>Details</div>
         </div>
 
-        {/* Rows */}
-        {(filtered || []).map((r, idx) => {
+        /* Rows */}
+        {(filtered || []).slice(0, displayCount).map((r, idx) => {
           if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
           
@@ -571,6 +590,28 @@ export default function ReferencePage() {
           </div>
         )}
       </div>
+      
+      {/* Load More Button */}
+      {!loading && filtered.length > displayCount && (
+        <div style={{ marginTop: 16, textAlign: 'center' }}>
+          <button
+            onClick={() => setDisplayCount(prev => prev + 50)}
+            style={{
+              padding: '12px 24px',
+              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+          >
+            Load More ({filtered.length - displayCount} remaining)
+          </button>
+        </div>
+      )}
       </div>
     </main>
   );
