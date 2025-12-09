@@ -10,6 +10,7 @@ export default function PatientHistory() {
     patient_name: '',
     age: '',
     gender: '',
+    vital_signs: [],
     visit_notes: [],
     diagnostic_tests: [],
     history_and_physicals: [],
@@ -1952,6 +1953,49 @@ export default function PatientHistory() {
     }))
   }
 
+  // Add vital signs
+  const addVitalSigns = () => {
+    const newVitals = {
+      id: Date.now(),
+      date: '',
+      time: '',
+      temperature: '',
+      temperature_unit: 'F',
+      blood_pressure_systolic: '',
+      blood_pressure_diastolic: '',
+      heart_rate: '',
+      respiratory_rate: '',
+      oxygen_saturation: '',
+      weight: '',
+      weight_unit: 'lbs',
+      height: '',
+      height_unit: 'inches',
+      bmi: '',
+      pain_scale: '',
+      notes: ''
+    }
+    setPatientData(prev => ({
+      ...prev,
+      vital_signs: [...prev.vital_signs, newVitals]
+    }))
+  }
+
+  const removeVitalSigns = (id) => {
+    setPatientData(prev => ({
+      ...prev,
+      vital_signs: prev.vital_signs.filter(vital => vital.id !== id)
+    }))
+  }
+
+  const updateVitalSigns = (id, field, value) => {
+    setPatientData(prev => ({
+      ...prev,
+      vital_signs: prev.vital_signs.map(vital =>
+        vital.id === id ? { ...vital, [field]: value } : vital
+      )
+    }))
+  }
+
   // Add diagnostic test
   const addDiagnosticTest = () => {
     const newTest = {
@@ -2255,6 +2299,7 @@ export default function PatientHistory() {
 
   const sections = [
     { id: 'demographics', label: 'Demographics', icon: '👤' },
+    { id: 'vital_signs', label: 'Vital Signs', icon: '🩺' },
     { id: 'visit_notes', label: 'Visit Notes', icon: '📋' },
     { id: 'diagnostic_tests', label: 'Diagnostic Tests', icon: '🧪' },
     { id: 'history_physicals', label: 'H&P', icon: '📝' },
@@ -2554,6 +2599,190 @@ export default function PatientHistory() {
                         onChange={(e) => updateVisitNote(note.id, 'content', e.target.value)}
                         rows={6}
                         placeholder="Enter clinical note..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Vital Signs Section */}
+          {currentSection === 'vital_signs' && (
+            <div className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2>🩺 Vital Signs</h2>
+                <button onClick={addVitalSigns} className={styles.addButton}>+ Add Vital Signs</button>
+              </div>
+              
+              {patientData.vital_signs.length === 0 && (
+                <p className={styles.emptyState}>No vital signs recorded yet. Click "+ Add Vital Signs" to begin.</p>
+              )}
+
+              {patientData.vital_signs.map(vital => (
+                <div key={vital.id} className={styles.card}>
+                  <div className={styles.cardHeader}>
+                    <h3>Vital Signs Record</h3>
+                    <button onClick={() => removeVitalSigns(vital.id)} className={styles.removeButton}>✕</button>
+                  </div>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label>Date</label>
+                      <input
+                        type="date"
+                        value={vital.date}
+                        onChange={(e) => updateVitalSigns(vital.id, 'date', e.target.value)}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Time</label>
+                      <input
+                        type="time"
+                        value={vital.time}
+                        onChange={(e) => updateVitalSigns(vital.id, 'time', e.target.value)}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Temperature</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={vital.temperature}
+                          onChange={(e) => updateVitalSigns(vital.id, 'temperature', e.target.value)}
+                          placeholder="98.6"
+                          style={{ flex: 1 }}
+                        />
+                        <select
+                          value={vital.temperature_unit}
+                          onChange={(e) => updateVitalSigns(vital.id, 'temperature_unit', e.target.value)}
+                          style={{ width: '70px' }}
+                        >
+                          <option value="F">°F</option>
+                          <option value="C">°C</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Blood Pressure</label>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <input
+                          type="number"
+                          value={vital.blood_pressure_systolic}
+                          onChange={(e) => updateVitalSigns(vital.id, 'blood_pressure_systolic', e.target.value)}
+                          placeholder="120"
+                          style={{ flex: 1 }}
+                        />
+                        <span>/</span>
+                        <input
+                          type="number"
+                          value={vital.blood_pressure_diastolic}
+                          onChange={(e) => updateVitalSigns(vital.id, 'blood_pressure_diastolic', e.target.value)}
+                          placeholder="80"
+                          style={{ flex: 1 }}
+                        />
+                        <span style={{ fontSize: '12px', color: '#666' }}>mmHg</span>
+                      </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Heart Rate (bpm)</label>
+                      <input
+                        type="number"
+                        value={vital.heart_rate}
+                        onChange={(e) => updateVitalSigns(vital.id, 'heart_rate', e.target.value)}
+                        placeholder="72"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Respiratory Rate (breaths/min)</label>
+                      <input
+                        type="number"
+                        value={vital.respiratory_rate}
+                        onChange={(e) => updateVitalSigns(vital.id, 'respiratory_rate', e.target.value)}
+                        placeholder="16"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Oxygen Saturation (%)</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        value={vital.oxygen_saturation}
+                        onChange={(e) => updateVitalSigns(vital.id, 'oxygen_saturation', e.target.value)}
+                        placeholder="98"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Weight</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={vital.weight}
+                          onChange={(e) => updateVitalSigns(vital.id, 'weight', e.target.value)}
+                          placeholder="150"
+                          style={{ flex: 1 }}
+                        />
+                        <select
+                          value={vital.weight_unit}
+                          onChange={(e) => updateVitalSigns(vital.id, 'weight_unit', e.target.value)}
+                          style={{ width: '70px' }}
+                        >
+                          <option value="lbs">lbs</option>
+                          <option value="kg">kg</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Height</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={vital.height}
+                          onChange={(e) => updateVitalSigns(vital.id, 'height', e.target.value)}
+                          placeholder="68"
+                          style={{ flex: 1 }}
+                        />
+                        <select
+                          value={vital.height_unit}
+                          onChange={(e) => updateVitalSigns(vital.id, 'height_unit', e.target.value)}
+                          style={{ width: '90px' }}
+                        >
+                          <option value="inches">inches</option>
+                          <option value="cm">cm</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>BMI</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        value={vital.bmi}
+                        onChange={(e) => updateVitalSigns(vital.id, 'bmi', e.target.value)}
+                        placeholder="Calculated or entered"
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label>Pain Scale (0-10)</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="10"
+                        value={vital.pain_scale}
+                        onChange={(e) => updateVitalSigns(vital.id, 'pain_scale', e.target.value)}
+                        placeholder="0"
+                      />
+                    </div>
+                    <div className={styles.formGroupFull}>
+                      <label>Notes</label>
+                      <textarea
+                        value={vital.notes}
+                        onChange={(e) => updateVitalSigns(vital.id, 'notes', e.target.value)}
+                        rows={2}
+                        placeholder="Additional notes about vital signs..."
                       />
                     </div>
                   </div>
