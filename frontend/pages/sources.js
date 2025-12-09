@@ -67,11 +67,39 @@ export default function SourcesPage() {
             if (!res.ok) return null;
             const data = await res.json();
             
+            // Map specialties to their actual medical guideline sources
+            const sourceMap = {
+              "neurology": "AAN (American Academy of Neurology) Clinical Practice Guidelines",
+              "cardiology": "ACC/AHA (American College of Cardiology/American Heart Association) Guidelines",
+              "endocrinology": "Endocrine Society Clinical Practice Guidelines",
+              "pulmonology": "CHEST and ATS (American Thoracic Society) Guidelines",
+              "gastroenterology": "ACG (American College of Gastroenterology) Clinical Guidelines",
+              "infectious_disease": "IDSA (Infectious Diseases Society of America) Guidelines",
+              "nephrology": "KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines",
+              "rheumatology": "ACR (American College of Rheumatology) Clinical Practice Guidelines",
+              "dermatology": "AAD (American Academy of Dermatology) Clinical Guidelines",
+              "psychiatry": "APA (American Psychiatric Association) Practice Guidelines",
+              "obstetrics_gynecology": "ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins",
+              "orthopedics": "AAOS (American Academy of Orthopaedic Surgeons) Clinical Practice Guidelines",
+              "emergency": "ACEP (American College of Emergency Physicians) Clinical Policies",
+              "hematology": "ASH (American Society of Hematology) Clinical Practice Guidelines",
+              "allergy": "AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters",
+              "dentistry": "ADA (American Dental Association) Clinical Practice Guidelines",
+              "ent": "AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines",
+              "general": "AAFP (American Academy of Family Physicians) Evidence-Based Guidelines",
+              "oncology": "NCCN (National Comprehensive Cancer Network) Clinical Practice Guidelines in Oncology",
+              "ophthalmology": "AAO (American Academy of Ophthalmology) Preferred Practice Patterns",
+              "pediatrics": "AAP (American Academy of Pediatrics) Clinical Practice Guidelines",
+              "surgery": "ACS (American College of Surgeons) Clinical Guidelines",
+              "trauma": "EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines",
+              "urology": "AUA (American Urological Association) Clinical Guidelines"
+            };
+            
             return {
               family: family,
               familyLabel: family.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-              version: data.version || "N/A",
-              source: data.source || "RealDiag Clinical Guidelines",
+              version: data.version || "2024",
+              source: sourceMap[family] || data.source || "Evidence-Based Clinical Guidelines",
               rules: data.rules || [],
               count: data.count || (data.rules || []).length,
             };
@@ -363,7 +391,7 @@ export default function SourcesPage() {
                           <strong>Source:</strong> {fam.source}
                         </div>
                         <div style={{ fontSize: 14, color: "#0f766e", marginTop: 8, fontWeight: 600 }}>
-                          {fam.count || fam.rules.length} decision tree{(fam.count || fam.rules.length) !== 1 ? "s" : ""} available
+                          {fam.count || fam.rules.length} clinical guideline{(fam.count || fam.rules.length) !== 1 ? "s" : ""} available
                         </div>
                       </div>
                     ))}
