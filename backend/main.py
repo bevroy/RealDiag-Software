@@ -18,6 +18,7 @@ from backend.services.education_router import router as education_router
 from backend.services.smart_router import router as smart_router
 from backend.services.subscription_router import router as subscription_router
 from backend.services.homeopathy_router import router as homeopathy_router
+from backend.services.mfa_router import router as mfa_router
 
 # Import security features with fallback
 try:
@@ -125,6 +126,7 @@ app.include_router(education_router)
 app.include_router(smart_router)
 app.include_router(subscription_router)
 app.include_router(homeopathy_router)
+app.include_router(mfa_router)
 
 # Include monitoring router if available
 try:

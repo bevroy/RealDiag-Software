@@ -1,11 +1,19 @@
 /**
  * Offline Data Manager
  * Handles downloading and managing offline rule database
+ * NOW WITH ENCRYPTION: All sensitive data encrypted using Web Crypto API
  */
+
+import { 
+  encryptData, 
+  decryptData, 
+  getEncryptionKey, 
+  isCryptoAvailable 
+} from './crypto.js';
 
 // IndexedDB configuration
 const DB_NAME = 'RealDiagOfflineDB';
-const DB_VERSION = 3;
+const DB_VERSION = 4; // Incremented for encryption migration
 const STORES = {
   RULES: 'rules',
   SEARCHES: 'searches',
@@ -13,6 +21,11 @@ const STORES = {
   SYNC_QUEUE: 'syncQueue',
   USER_DATA: 'userData'
 };
+
+// Encryption settings
+const ENCRYPT_SEARCHES = true; // Searches may contain PHI
+const ENCRYPT_USER_DATA = true; // User data may contain sensitive info
+const ENCRYPT_RULES = false; // Rules are public medical knowledge
 
 // Open IndexedDB connection
 export async function openDB() {
@@ -100,7 +113,7 @@ export async function getRulesByFamily(family) {
   return await index.getAll(family);
 }
 
-// Save search to offline storage
+// Save search to offline storage (ENCRYPTED)
 export async function saveSearch(search) {
   const db = await openDB();
   const transaction = db.transaction([STORES.SEARCHES], 'readwrite');
@@ -112,21 +125,62 @@ export async function saveSearch(search) {
     synced: false
   };
   
-  const request = await store.add(searchWithMeta);
+  // Encrypt if encryption is enabled and key is available
+  let dataToStore = searchWithMeta;
+  if (ENCRYPT_SEARCHES && isCryptoAvailable()) {
+    const encKey = getEncryptionKey();
+    if (encKey) {
+      try {
+        const { encrypted, salt, iv } = await encryptData(searchWithMeta, encKey);
+        dataToStore = {
+          _encrypted: true,
+          data: encrypted,
+          salt,
+          iv,
+          timestamp: searchWithMeta.timestamp,
+          synced: searchWithMeta.synced
+        };
+      } catch (error) {
+        console.warn('[OfflineManager] Encryption failed, storing unencrypted:', error);
+      }
+    }
+  }
+  
+  const request = await store.add(dataToStore);
   return request;
 }
 
-// Get all searches
+// Get all searches (DECRYPT if encrypted)
 export async function getAllSearches() {
   const db = await openDB();
   const transaction = db.transaction([STORES.SEARCHES], 'readonly');
   const store = transaction.objectStore(STORES.SEARCHES);
   const searches = await store.getAll();
-  // Ensure searches is an array before sorting
+  
+  // Ensure searches is an array
   if (!Array.isArray(searches)) {
     return [];
   }
-  return searches.sort((a, b) => b.timestamp - a.timestamp);
+  
+  // Decrypt encrypted searches
+  const decrypted = [];
+  const encKey = getEncryptionKey();
+  
+  for (const search of searches) {
+    if (search._encrypted && encKey) {
+      try {
+        const decryptedData = await decryptData(search.data, search.salt, search.iv, encKey);
+        decrypted.push(decryptedData);
+      } catch (error) {
+        console.error('[OfflineManager] Failed to decrypt search:', error);
+        // Skip corrupted/undecryptable searches
+      }
+    } else {
+      decrypted.push(search);
+    }
+  }
+  
+  return decrypted.sort((a, b) => b.timestamp - a.timestamp);
 }
 
 // Get unsynced searches
@@ -155,10 +209,31 @@ export async function saveFavorite(favorite) {
   const db = await openDB();
   const transaction = db.transaction([STORES.FAVORITES], 'readwrite');
   const store = transaction.objectStore(STORES.FAVORITES);
-  return await store.add({
+  
+  const favoriteData = {
     ...favorite,
     addedAt: Date.now()
-  });
+  };
+  
+  // Encrypt if encryption is available (favorites may contain patient context)
+  const encKey = getEncryptionKey();
+  if (encKey && isCryptoAvailable()) {
+    try {
+      const { encrypted, salt, iv } = await encryptData(favoriteData, encKey);
+      return await store.add({
+        _encrypted: true,
+        data: encrypted,
+        salt,
+        iv,
+        addedAt: favoriteData.addedAt
+      });
+    } catch (error) {
+      console.error('[OfflineManager] Favorite encryption failed, storing unencrypted:', error);
+    }
+  }
+  
+  // Fallback to unencrypted
+  return await store.add(favoriteData);
 }
 
 // Get all favorites
@@ -167,10 +242,30 @@ export async function getAllFavorites() {
   const transaction = db.transaction([STORES.FAVORITES], 'readonly');
   const store = transaction.objectStore(STORES.FAVORITES);
   const favorites = await store.getAll();
+  
   if (!Array.isArray(favorites)) {
     return [];
   }
-  return favorites;
+  
+  // Decrypt encrypted favorites
+  const decrypted = [];
+  const encKey = getEncryptionKey();
+  
+  for (const favorite of favorites) {
+    if (favorite._encrypted && encKey) {
+      try {
+        const decryptedData = await decryptData(favorite.data, favorite.salt, favorite.iv, encKey);
+        decrypted.push(decryptedData);
+      } catch (error) {
+        console.error('[OfflineManager] Failed to decrypt favorite:', error);
+        // Skip corrupted/undecryptable favorites
+      }
+    } else {
+      decrypted.push(favorite);
+    }
+  }
+  
+  return decrypted;
 }
 
 // Delete favorite
@@ -347,6 +442,76 @@ export function listenForSyncMessages(callback) {
   });
 }
 
+// Save user data with encryption
+export async function saveUserData(key, value) {
+  const db = await openDB();
+  const transaction = db.transaction([STORES.USER_DATA], 'readwrite');
+  const store = transaction.objectStore(STORES.USER_DATA);
+  
+  const userData = {
+    key,
+    value,
+    updatedAt: Date.now()
+  };
+  
+  // Encrypt if enabled
+  const encKey = getEncryptionKey();
+  if (ENCRYPT_USER_DATA && encKey && isCryptoAvailable()) {
+    try {
+      const { encrypted, salt, iv } = await encryptData(userData, encKey);
+      return await store.put({
+        key, // Keep key unencrypted for lookup
+        _encrypted: true,
+        data: encrypted,
+        salt,
+        iv,
+        updatedAt: userData.updatedAt
+      });
+    } catch (error) {
+      console.error('[OfflineManager] User data encryption failed, storing unencrypted:', error);
+    }
+  }
+  
+  // Fallback to unencrypted
+  return await store.put(userData);
+}
+
+// Get user data with decryption
+export async function getUserData(key) {
+  const db = await openDB();
+  const transaction = db.transaction([STORES.USER_DATA], 'readonly');
+  const store = transaction.objectStore(STORES.USER_DATA);
+  const userData = await store.get(key);
+  
+  if (!userData) return null;
+  
+  // Decrypt if encrypted
+  if (userData._encrypted) {
+    const encKey = getEncryptionKey();
+    if (encKey) {
+      try {
+        return await decryptData(userData.data, userData.salt, userData.iv, encKey);
+      } catch (error) {
+        console.error('[OfflineManager] Failed to decrypt user data:', error);
+        return null;
+      }
+    } else {
+      console.warn('[OfflineManager] User data is encrypted but no key available');
+      return null;
+    }
+  }
+  
+  return userData;
+}
+
+// Delete user data
+export async function deleteUserData(key) {
+  const db = await openDB();
+  const transaction = db.transaction([STORES.USER_DATA], 'readwrite');
+  const store = transaction.objectStore(STORES.USER_DATA);
+  await store.delete(key);
+}
+
 // Get online status
 export function isOnline() {
   return navigator.onLine;
@@ -371,6 +536,9 @@ export default {
   saveFavorite,
   getAllFavorites,
   deleteFavorite,
+  saveUserData,
+  getUserData,
+  deleteUserData,
   downloadAllRules,
   getOfflineStats,
   clearAllOfflineData,
