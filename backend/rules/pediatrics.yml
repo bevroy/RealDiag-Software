@@ -27,14 +27,15 @@ rules:
   - Most improve within 48 hours, but can worsen at night
   management:
   - 'Guideline-based treatment options for Croup (Laryngotracheobronchitis) include:'
-  - 'All patients: Dexamethasone 0.6mg/kg PO or IM (max 10mg), single dose'
-  - 'Mild croup (no stridor at rest): Dexamethasone and discharge with precautions'
+  - 'All patients: Dexamethasone 0.6mg/kg PO or IM (max 10mg), single dose (AAP)'
+  - 'Mild croup (no stridor at rest): Dexamethasone and discharge with precautions
+    (AAP)'
   - 'Moderate-severe (stridor at rest): Racemic epinephrine 0.5mL (2.25%) + 3mL NS
-    nebulizer'
+    nebulizer (AAP)'
   - 'Observe 2-3 hours after epinephrine: Rebound stridor can occur, may need repeat
-    dosing'
+    dosing (AAP)'
   - 'Disposition: Discharge if mild and improved, admit if severe, persistent stridor,
-    or respiratory distress'
+    or respiratory distress (AAP)'
   icd10:
   - J05.0
   snomed:
@@ -60,15 +61,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Bronchiolitis include:'
   - 'Supportive care: Nasal suctioning (before feeds), supplemental O2 if SpO2 <90%,
-    maintain hydration'
+    maintain hydration (AAP)'
   - 'Mild (SpO2 >90%, feeding well): Outpatient with close follow-up, nasal saline
-    + bulb suction'
+    + bulb suction (AAP)'
   - 'Moderate-severe: High-flow nasal cannula 2 L/kg/min, NG/IV fluids if poor PO
-    intake'
+    intake (AAP)'
   - 'Avoid: Bronchodilators (albuterol trial only if uncertain diagnosis), steroids,
-    antibiotics (unless secondary pneumonia)'
+    antibiotics (unless secondary pneumonia) (AAP)'
   - 'Disposition: Admit if age <3 months, SpO2 <90%, apnea, dehydration, or unable
-    to feed'
+    to feed (AAP)'
   icd10:
   - J21.0
   - J21.9
@@ -99,13 +100,16 @@ rules:
   - Do NOT give live vaccines for 11 months after IVIG (antibody interference)
   management:
   - 'Guideline-based treatment options for Kawasaki Disease include:'
-  - 'Immediate: Cardiology consult, echocardiogram, labs (CBC, CRP, ESR, liver enzymes)'
+  - 'Immediate: Cardiology consult, echocardiogram, labs (CBC, CRP, ESR, liver enzymes)
+    (AAP)'
   - IVIG 2 g/kg IV over 10-12 hours as single dose (within 10 days of fever onset)
+    (AAP)
   - 'Aspirin: High-dose 80-100 mg/kg/day divided QID until afebrile 48-72hr, then
-    low-dose 3-5 mg/kg daily ×6-8 weeks'
-  - 'If IVIG resistant: 2nd dose IVIG 2 g/kg or add methylprednisolone 2 mg/kg/day'
+    low-dose 3-5 mg/kg daily ×6-8 weeks (AAP)'
+  - 'If IVIG resistant: 2nd dose IVIG 2 g/kg or add methylprednisolone 2 mg/kg/day
+    (AAP)'
   - 'Disposition: Admit for IVIG infusion, follow-up echo at 6-8 weeks, long-term
-    cardiology follow-up if aneurysms'
+    cardiology follow-up if aneurysms (AAP)'
   icd10:
   - M30.3
   snomed:
@@ -134,12 +138,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Intussusception include:'
   - 'Immediate: IV access, NPO, NG tube if significant vomiting, IV fluids (NS bolus
-    20 mL/kg)'
-  - 'Ultrasound: Target sign confirms diagnosis, assess for lead point'
-  - 'Air enema: Diagnostic and therapeutic (80-90% success), fluoroscopy-guided'
-  - 'If enema successful: Observe 24hr for recurrence, advance diet slowly'
+    20 mL/kg) (AAP)'
+  - 'Ultrasound: Target sign confirms diagnosis, assess for lead point (AAP)'
+  - 'Air enema: Diagnostic and therapeutic (80-90% success), fluoroscopy-guided (AAP)'
+  - 'If enema successful: Observe 24hr for recurrence, advance diet slowly (AAP)'
   - 'If enema fails or contraindications: Emergent surgical consultation for manual
-    reduction or resection'
+    reduction or resection (AAP)'
   icd10:
   - K56.1
   snomed:
@@ -169,13 +173,14 @@ rules:
   management:
   - 'Guideline-based treatment options for Hypertrophic Pyloric Stenosis include:'
   - 'Immediate: NPO, NG tube for decompression, IV fluids (D5 1/2NS with 20 mEq/L
-    KCl)'
+    KCl) (AAP)'
   - 'Correct dehydration and electrolytes: Goal Cl >100, K >3.5, normalized bicarb
-    before surgery'
-  - 'Ultrasound: Pyloric thickness >3mm and length >15mm diagnostic'
-  - 'Surgery consult: Pyloromyotomy (laparoscopic preferred) once electrolytes corrected'
+    before surgery (AAP)'
+  - 'Ultrasound: Pyloric thickness >3mm and length >15mm diagnostic (AAP)'
+  - 'Surgery consult: Pyloromyotomy (laparoscopic preferred) once electrolytes corrected
+    (AAP)'
   - 'Post-op: Resume feeds 4-6 hours after surgery, advance slowly, expect some vomiting
-    initially'
+    initially (AAP)'
   icd10:
   - Q40.0
   snomed:
@@ -218,15 +223,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Febrile Seizure include:'
   - 'During seizure: Protect from injury, position on side, maintain airway, do NOT
-    restrain'
+    restrain (AAP)'
   - 'If seizure >5 minutes: Benzodiazepine (lorazepam 0.1 mg/kg IV or midazolam 0.2
-    mg/kg IM/IN)'
+    mg/kg IM/IN) (AAP)'
   - 'Workup: Identify source of fever (otitis, URI, UTI, etc.), NO routine CT/EEG/labs
-    for simple FS'
+    for simple FS (AAP)'
   - 'LP if: Age <12 months, clinical concern for meningitis, complex features, or
-    antibiotics given before presentation'
+    antibiotics given before presentation (AAP)'
   - 'Disposition: Discharge if simple FS, reassure parents, fever management education,
-    recurrence precautions'
+    recurrence precautions (AAP)'
   icd10:
   - R56.00
   - R56.01

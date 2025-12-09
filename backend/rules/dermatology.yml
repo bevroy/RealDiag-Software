@@ -20,13 +20,14 @@ rules:
   management:
   - 'Guideline-based treatment options for Atopic Dermatitis (Eczema) include:'
   - 'Moisturize aggressively: Apply thick emollients (CeraVe, Vanicream) 2-3x daily,
-    especially after bathing'
+    especially after bathing (AAD)'
   - 'Topical corticosteroids: Low-potency (hydrocortisone 2.5%) for face, medium-high
-    potency (triamcinolone 0.1%) for body'
+    potency (triamcinolone 0.1%) for body (AAD)'
   - 'Steroid-sparing: Tacrolimus 0.1% or pimecrolimus 1% for face/sensitive areas
-    (avoid sun)'
-  - 'Antihistamines: Hydroxyzine or cetirizine at bedtime for pruritus'
-  - 'Treat infections: Mupirocin ointment for impetigo, oral antibiotics if extensive'
+    (avoid sun) (AAD)'
+  - 'Antihistamines: Hydroxyzine or cetirizine at bedtime for pruritus (AAD)'
+  - 'Treat infections: Mupirocin ointment for impetigo, oral antibiotics if extensive
+    (AAD)'
   tests:
   - IgE levels (often elevated but not diagnostic)
   - Skin prick testing or RAST if food allergies suspected
@@ -58,12 +59,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Psoriasis include:'
   - 'Mild (<5% BSA): Topical corticosteroids (clobetasol 0.05%) + vitamin D analog
-    (calcipotriene)'
-  - 'Moderate (5-10% BSA): Add phototherapy (narrowband UVB 3x/week)'
+    (calcipotriene) (AAD)'
+  - 'Moderate (5-10% BSA): Add phototherapy (narrowband UVB 3x/week) (AAD)'
   - 'Severe (>10% BSA) or psoriatic arthritis: Systemic therapy (methotrexate, biologics
-    like adalimumab)'
-  - 'Scalp: Tar shampoos, topical steroids in solution form'
-  - Coal tar or salicylic acid for thick plaques
+    like adalimumab) (AAD)'
+  - 'Scalp: Tar shampoos, topical steroids in solution form (AAD)'
+  - Coal tar or salicylic acid for thick plaques (AAD)
   tests:
   - Clinical diagnosis (usually no tests needed)
   - Skin biopsy if diagnosis uncertain
@@ -96,11 +97,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Cellulitis include:'
   - 'Mild (outpatient): Cephalexin 500mg PO q6h or clindamycin 300mg PO q8h for 5-10
-    days'
-  - 'MRSA coverage: Add TMP-SMX DS BID or doxycycline 100mg BID to beta-lactam'
-  - 'Moderate-severe (admit): Vancomycin 15-20mg/kg IV q12h or cefazolin 1-2g IV q8h'
-  - Elevation and rest of affected limb
-  - NSAIDs for pain and inflammation
+    days (AAD)'
+  - 'MRSA coverage: Add TMP-SMX DS BID or doxycycline 100mg BID to beta-lactam (AAD)'
+  - 'Moderate-severe (admit): Vancomycin 15-20mg/kg IV q12h or cefazolin 1-2g IV q8h
+    (AAD)'
+  - Elevation and rest of affected limb (AAD)
+  - NSAIDs for pain and inflammation (AAD)
   tests:
   - Blood cultures if febrile or systemically ill (low yield but important if positive)
   - CBC with differential (leukocytosis expected)
@@ -131,13 +133,13 @@ rules:
   - Amelanotic melanoma exists (pink/red) - don't miss it
   management:
   - 'Guideline-based treatment options for Malignant Melanoma include:'
-  - DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth
-  - 'After diagnosis: Wide local excision with margins based on depth (0.5-2cm)'
-  - Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated
+  - DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth (AAD)
+  - 'After diagnosis: Wide local excision with margins based on depth (0.5-2cm) (AAD)'
+  - Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated (AAD)
   - 'Staging workup for Stage IIB+ or node-positive: CT chest/abdomen/pelvis, brain
-    MRI'
+    MRI (AAD)'
   - 'Adjuvant therapy: Interferon, anti-PD1 (pembrolizumab), or BRAF/MEK inhibitors
-    if indicated'
+    if indicated (AAD)'
   tests:
   - Excisional biopsy with narrow margins (1-3mm) for diagnosis
   - Sentinel lymph node biopsy if Breslow >0.8mm
@@ -169,12 +171,12 @@ rules:
   - Sun exposure is main risk factor, also arsenic, radiation, immunosuppression
   management:
   - 'Guideline-based treatment options for Basal Cell Carcinoma include:'
-  - Surgical excision with 4mm margins (standard treatment, ~95% cure)
+  - Surgical excision with 4mm margins (standard treatment, ~95% cure) (AAD)
   - Mohs micrographic surgery for high-risk areas (face, ears, recurrent) - highest
-    cure rate
-  - Electrodesiccation & curettage (ED&C) for small, low-risk, superficial BCCs
-  - Topical imiquimod 5% or 5-FU for superficial BCCs only
-  - Radiation therapy for poor surgical candidates or unresectable tumors
+    cure rate (AAD)
+  - Electrodesiccation & curettage (ED&C) for small, low-risk, superficial BCCs (AAD)
+  - Topical imiquimod 5% or 5-FU for superficial BCCs only (AAD)
+  - Radiation therapy for poor surgical candidates or unresectable tumors (AAD)
   tests:
   - Shave or punch biopsy for histologic confirmation
   - No imaging needed unless extensive/invasive
@@ -202,11 +204,15 @@ rules:
   - Immunosuppressed patients (transplant) have 65-250x increased risk
   management:
   - 'Guideline-based treatment options for Squamous Cell Carcinoma include:'
-  - Surgical excision with 4-6mm margins (standard treatment)
+  - Surgical excision with 4-6mm margins (standard treatment) (AAD)
   - Mohs surgery for high-risk locations (face, ears, genitals) or high-risk features
+    (AAD)
   - Sentinel lymph node biopsy if high-risk features or clinically positive nodes
+    (AAD)
   - Adjuvant radiation for perineural invasion, positive margins, or node-positive
+    (AAD)
   - Systemic therapy (cemiplimab, pembrolizumab) for metastatic or unresectable disease
+    (AAD)
   tests:
   - Shave or punch biopsy for histologic diagnosis
   - Palpate regional lymph nodes
@@ -237,13 +243,16 @@ rules:
   - Avoid picking/squeezing - leads to scarring and prolonged inflammation
   management:
   - 'Guideline-based treatment options for Acne Vulgaris include:'
-  - 'Mild (comedonal): Topical retinoid (tretinoin 0.025-0.1% or adapalene 0.1%) nightly'
-  - 'Moderate (inflammatory): Retinoid + benzoyl peroxide 5% + topical clindamycin'
+  - 'Mild (comedonal): Topical retinoid (tretinoin 0.025-0.1% or adapalene 0.1%) nightly
+    (AAD)'
+  - 'Moderate (inflammatory): Retinoid + benzoyl peroxide 5% + topical clindamycin
+    (AAD)'
   - 'Add oral antibiotic if extensive: Doxycycline 100mg BID or minocycline 100mg
-    BID (3-6 months)'
+    BID (3-6 months) (AAD)'
   - 'Severe (nodulocystic): Isotretinoin 0.5-1mg/kg/day (requires iPLEDGE program,
-    pregnancy prevention)'
-  - 'Women: Consider combined oral contraceptives or spironolactone 50-200mg daily'
+    pregnancy prevention) (AAD)'
+  - 'Women: Consider combined oral contraceptives or spironolactone 50-200mg daily
+    (AAD)'
   tests:
   - Clinical diagnosis (no tests usually needed)
   - Pregnancy test before isotretinoin (required monthly with iPLEDGE)
@@ -274,12 +283,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Rosacea include:'
   - 'Erythematotelangiectatic: Avoid triggers, gentle skincare, topical metronidazole
-    0.75% BID'
+    0.75% BID (AAD)'
   - 'Papulopustular: Topical metronidazole or azelaic acid 15% BID + oral doxycycline
-    40mg daily'
-  - 'Severe: Oral doxycycline 100mg BID or isotretinoin'
-  - 'Telangiectasias: Laser therapy (PDL or IPL)'
-  - 'Rhinophyma: Surgical debulking or CO2 laser'
+    40mg daily (AAD)'
+  - 'Severe: Oral doxycycline 100mg BID or isotretinoin (AAD)'
+  - 'Telangiectasias: Laser therapy (PDL or IPL) (AAD)'
+  - 'Rhinophyma: Surgical debulking or CO2 laser (AAD)'
   tests:
   - Clinical diagnosis (no specific tests)
   - Skin biopsy only if diagnosis uncertain
@@ -310,12 +319,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Urticaria (Hives) include:'
   - 'Acute: H1 antihistamine (cetirizine 10mg or fexofenadine 180mg daily), can increase
-    up to 4x dose'
-  - Add H2 blocker (famotidine 20mg BID) if inadequate response
+    up to 4x dose (AAD)'
+  - Add H2 blocker (famotidine 20mg BID) if inadequate response (AAD)
   - 'Severe/angioedema: Prednisone 40-60mg daily for 3-5 days, epinephrine if airway
-    compromise'
-  - 'Chronic: Daily non-sedating H1 antihistamine, increase to 4x dose if needed'
-  - 'Refractory chronic: Omalizumab 150-300mg SQ monthly (anti-IgE)'
+    compromise (AAD)'
+  - 'Chronic: Daily non-sedating H1 antihistamine, increase to 4x dose if needed (AAD)'
+  - 'Refractory chronic: Omalizumab 150-300mg SQ monthly (anti-IgE) (AAD)'
   tests:
   - Usually clinical diagnosis, no tests needed for acute urticaria
   - For chronic urticaria: CBC, ESR/CRP, TSH, tryptase (if mastocytosis suspected)
@@ -345,12 +354,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Tinea Corporis (Ringworm) include:'
   - 'Tinea corporis/cruris: Topical azole (clotrimazole, ketoconazole) BID for 2-4
-    weeks'
-  - 'Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective)'
-  - 'Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks'
+    weeks (AAD)'
+  - 'Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective) (AAD)'
+  - 'Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks (AAD)'
   - 'Tinea capitis: Oral griseofulvin 20-25mg/kg/day for 6-8 weeks (first-line in
-    children)'
-  - 'Alternative for capitis: Oral terbinafine or fluconazole'
+    children) (AAD)'
+  - 'Alternative for capitis: Oral terbinafine or fluconazole (AAD)'
   tests:
   - KOH prep: Scrape scale, add KOH, look for hyphae (quick office test)
   - Fungal culture if KOH negative but high suspicion (takes 2-4 weeks)
@@ -380,13 +389,16 @@ rules:
   - 'Hutchinson sign: Vesicles on tip/side of nose predicts ocular involvement'
   management:
   - 'Guideline-based treatment options for Herpes Zoster (Shingles) include:'
-  - 'Antivirals within 72hrs: Valacyclovir 1g TID or famciclovir 500mg TID for 7 days'
+  - 'Antivirals within 72hrs: Valacyclovir 1g TID or famciclovir 500mg TID for 7 days
+    (AAD)'
   - 'Pain control: Gabapentin 300-900mg TID, pregabalin 75-150mg BID, or lidocaine
-    patches'
-  - 'If V1/ophthalmicus: Ophthalmology referral same day, start antivirals immediately'
-  - 'PHN prevention: Early antivirals + aggressive pain control during acute phase'
+    patches (AAD)'
+  - 'If V1/ophthalmicus: Ophthalmology referral same day, start antivirals immediately
+    (AAD)'
+  - 'PHN prevention: Early antivirals + aggressive pain control during acute phase
+    (AAD)'
   - 'PHN treatment: Gabapentin, pregabalin, TCAs (amitriptyline), lidocaine patches,
-    capsaicin'
+    capsaicin (AAD)'
   tests:
   - Clinical diagnosis (usually no testing needed)
   - Tzanck smear or DFA if atypical presentation (low sensitivity)
@@ -418,11 +430,12 @@ rules:
   management:
   - 'Guideline-based treatment options for Vitiligo include:'
   - Topical corticosteroids (clobetasol 0.05%) BID for 3-4 months - best for localized
-    disease
+    disease (AAD)
   - Topical calcineurin inhibitors (tacrolimus 0.1%) for face/intertriginous areas
-  - Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo
-  - Excimer laser for focal lesions
-  - Cosmetic camouflage makeup, self-tanners for psychosocial impact
+    (AAD)
+  - Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo (AAD)
+  - Excimer laser for focal lesions (AAD)
+  - Cosmetic camouflage makeup, self-tanners for psychosocial impact (AAD)
   tests:
   - Clinical diagnosis with Wood's lamp examination
   - Screen for autoimmune: TSH, CBC, comprehensive metabolic panel, ANA
@@ -452,13 +465,14 @@ rules:
   - Spontaneous remission in 50% within 1 year, but often recurs
   management:
   - 'Guideline-based treatment options for Alopecia Areata include:'
-  - 'Limited patches (<50% scalp): Intralesional triamcinolone 5-10mg/mL monthly'
+  - 'Limited patches (<50% scalp): Intralesional triamcinolone 5-10mg/mL monthly (AAD)'
   - Topical corticosteroids (clobetasol 0.05%) BID - less effective than injections
+    (AAD)
   - 'Extensive (>50% scalp): Topical immunotherapy (DPCP or SADBE) - highest success
-    rate'
+    rate (AAD)'
   - JAK inhibitors (tofacitinib, baricitinib) for severe refractory cases - emerging
-    therapy
-  - Minoxidil 5% BID may help with regrowth (adjunct therapy)
+    therapy (AAD)
+  - Minoxidil 5% BID may help with regrowth (adjunct therapy) (AAD)
   tests:
   - Clinical diagnosis based on appearance and exclamation point hairs
   - Pull test: Gentle hair pull yields >6 hairs in active disease

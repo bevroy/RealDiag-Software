@@ -31,15 +31,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Acetaminophen (Tylenol) Overdose include:'
   - 'Immediate: Acetaminophen level at 4hr post-ingestion (earlier levels unreliable),
-    AST/ALT, INR, consider activated charcoal if <1hr'
+    AST/ALT, INR, consider activated charcoal if <1hr (Guidelines)'
   - 'Plot level on Rumack-Matthew nomogram: If above treatment line or unknown time,
-    start NAC'
+    start NAC (Guidelines)'
   - 'NAC IV protocol: 150 mg/kg in 200mL D5W over 1hr, then 50 mg/kg in 500mL over
-    4hr, then 100 mg/kg in 1L over 16hr'
+    4hr, then 100 mg/kg in 1L over 16hr (Guidelines)'
   - 'Monitor: Serial AST/ALT, INR q12-24h, continue NAC if transaminases rising or
-    INR elevated'
+    INR elevated (Guidelines)'
   - 'Disposition: Admit if NAC needed, psychiatry consult if intentional, liver transplant
-    evaluation if fulminant hepatic failure'
+    evaluation if fulminant hepatic failure (Guidelines)'
   icd10:
   - T39.1X1A
   - T39.1X2A
@@ -73,15 +73,15 @@ rules:
   - 'Guideline-based treatment options for Salicylate Toxicity (Aspirin Overdose)
     include:'
   - 'Immediate: Salicylate level, VBG (pH), BMP (anion gap), glucose, activated charcoal
-    if <1hr, consider whole bowel irrigation if sustained-release'
+    if <1hr, consider whole bowel irrigation if sustained-release (Guidelines)'
   - 'Urine alkalinization: 3 amps (150 mEq) NaHCO3 in 1L D5W at 150-250 mL/hr, target
-    urine pH 7.5-8'
+    urine pH 7.5-8 (Guidelines)'
   - 'Avoid intubation if possible: Hypoventilation worsens acidosis and increases
-    CNS salicylate'
+    CNS salicylate (Guidelines)'
   - 'Hemodialysis: If level >100, pH <7.2, altered mental status, pulmonary edema,
-    or refractory despite alkalinization'
+    or refractory despite alkalinization (Guidelines)'
   - 'Disposition: ICU if severe (level >80, acidosis, altered MS), nephrology for
-    dialysis, serial levels until downtrending'
+    dialysis, serial levels until downtrending (Guidelines)'
   icd10:
   - T39.011A
   - T39.012A
@@ -114,13 +114,14 @@ rules:
   management:
   - 'Guideline-based treatment options for Opioid Overdose include:'
   - 'Immediate: Airway (bag-valve-mask if apneic), naloxone 0.4mg IV/IM/intranasal,
-    repeat q2-3min PRN'
+    repeat q2-3min PRN (Guidelines)'
   - 'Titrate naloxone: Goal RR >10, adequate ventilation (not full alertness - avoid
-    withdrawal)'
-  - 'If IV access difficult: Intranasal naloxone 2-4mg (Narcan spray) or IM 0.4-2mg'
-  - 'Continuous monitoring: Pulse ox, cardiac monitor, serial neuro exams'
+    withdrawal) (Guidelines)'
+  - 'If IV access difficult: Intranasal naloxone 2-4mg (Narcan spray) or IM 0.4-2mg
+    (Guidelines)'
+  - 'Continuous monitoring: Pulse ox, cardiac monitor, serial neuro exams (Guidelines)'
   - 'Disposition: Observe 4-6hr minimum (re-sedation risk), naloxone drip if recurrent,
-    psychiatry if intentional, addiction resources'
+    psychiatry if intentional, addiction resources (Guidelines)'
   icd10:
   - T40.2X1A
   - T40.2X2A
@@ -166,13 +167,13 @@ rules:
   management:
   - 'Guideline-based treatment options for Serotonin Syndrome include:'
   - 'Immediate: Stop all serotonergic agents, supportive care (cooling, fluids, sedation
-    with benzos)'
-  - 'Benzodiazepines: Lorazepam 1-2mg IV for agitation, tremor, rigidity'
-  - 'Cyproheptadine: 12mg PO load (can crush and give via NG), then 8mg PO q6h'
+    with benzos) (Guidelines)'
+  - 'Benzodiazepines: Lorazepam 1-2mg IV for agitation, tremor, rigidity (Guidelines)'
+  - 'Cyproheptadine: 12mg PO load (can crush and give via NG), then 8mg PO q6h (Guidelines)'
   - 'Severe cases: ICU admission, intubation for hyperthermia >41°C, paralysis with
-    non-depolarizing agent (rocuronium)'
+    non-depolarizing agent (rocuronium) (Guidelines)'
   - 'Disposition: Mild (outpatient after observation), moderate-severe (admit for
-    monitoring 24-48hr), psychiatry medication reconciliation'
+    monitoring 24-48hr), psychiatry medication reconciliation (Guidelines)'
   icd10:
   - G93.89
   snomed:
@@ -231,14 +232,14 @@ rules:
   - 'Guideline-based treatment options for Tricyclic Antidepressant (TCA) Overdose
     include:'
   - 'Immediate: Continuous cardiac monitoring, IV access, 12-lead ECG (look for QRS
-    >100ms, terminal R in aVR)'
+    >100ms, terminal R in aVR) (Guidelines)'
   - 'Sodium bicarbonate: 1-2 mEq/kg (1-2 amps) IV bolus if QRS >100ms or arrhythmias,
-    repeat until QRS <100ms'
+    repeat until QRS <100ms (Guidelines)'
   - 'Target serum pH 7.50-7.55: Start NaHCO3 infusion (3 amps in 1L D5W at 150-200
-    mL/hr)'
-  - 'Seizures: Benzodiazepines (lorazepam 2-4mg IV), avoid phenytoin'
+    mL/hr) (Guidelines)'
+  - 'Seizures: Benzodiazepines (lorazepam 2-4mg IV), avoid phenytoin (Guidelines)'
   - 'Disposition: ICU admission, continuous telemetry for 24hr after QRS normalizes,
-    psychiatry consult if intentional'
+    psychiatry consult if intentional (Guidelines)'
   icd10:
   - T43.011A
   - T43.012A
