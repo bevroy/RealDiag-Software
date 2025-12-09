@@ -138,10 +138,29 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
 def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   """
   Generalized endpoint: /reference/{family}
-  Now loads decision trees from backend/trees/ instead of backend/rules/
+  Loads clinical rules from backend/rules/ with full presentation and SNOMED data.
   Rate limit: 100 requests per minute per IP.
   """
-  # Load trees from the trees directory
+  # Try to load from rules file first (has complete data)
+  rules_file = RULES_PATH / f"{family}.yml"
+  
+  if rules_file.exists():
+    try:
+      with rules_file.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+        rules = data.get("rules", [])
+        
+        return {
+          "family": family,
+          "version": data.get("version", "2.0.0"),
+          "source": data.get("source", "Clinical Practice Guidelines"),
+          "count": len(rules),
+          "rules": rules,
+        }
+    except Exception as e:
+      print(f"Error loading rules file {rules_file}: {e}")
+  
+  # Fallback to trees if rules file doesn't exist
   trees = _load_trees_by_family(family)
   
   return {
