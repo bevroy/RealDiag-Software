@@ -76,6 +76,26 @@ class ImagingStudy(BaseModel):
     radiologist: Optional[str] = None
 
 
+class VitalSigns(BaseModel):
+    """Vital signs measurement."""
+    date: str
+    time: Optional[str] = None
+    temperature: Optional[float] = None
+    temperature_unit: Optional[str] = 'F'
+    blood_pressure_systolic: Optional[int] = None
+    blood_pressure_diastolic: Optional[int] = None
+    heart_rate: Optional[int] = None
+    respiratory_rate: Optional[int] = None
+    oxygen_saturation: Optional[float] = None
+    weight: Optional[float] = None
+    weight_unit: Optional[str] = 'lbs'
+    height: Optional[float] = None
+    height_unit: Optional[str] = 'inches'
+    bmi: Optional[float] = None
+    pain_scale: Optional[int] = None
+    notes: Optional[str] = None
+
+
 class ComprehensivePatientHistory(BaseModel):
     """Complete patient history for diagnosis."""
     patient_id: str
@@ -90,6 +110,7 @@ class ComprehensivePatientHistory(BaseModel):
     
     # Historical data
     visit_notes: List[VisitNote] = []
+    vital_signs: List[VitalSigns] = []
     diagnostic_tests: List[DiagnosticTest] = []
     history_and_physicals: List[HistoryAndPhysical] = []
     procedures: List[Procedure] = []
@@ -158,6 +179,9 @@ class PatientHistoryService:
         # Fetch visit notes (DocumentReference)
         visit_notes = await self._fetch_visit_notes(patient_id, lookback_date, headers)
         
+        # Fetch vital signs (Observation with vital-signs category)
+        vital_signs = await self._fetch_vital_signs(patient_id, lookback_date, headers)
+        
         # Fetch diagnostic tests (Observation + DiagnosticReport)
         diagnostic_tests = await self._fetch_diagnostic_tests(patient_id, lookback_date, headers)
         
@@ -198,6 +222,7 @@ class PatientHistoryService:
             age=patient_data.get('age'),
             gender=patient_data.get('gender'),
             visit_notes=visit_notes,
+            vital_signs=vital_signs,
             diagnostic_tests=diagnostic_tests,
             history_and_physicals=history_and_physicals,
             procedures=procedures,
@@ -315,6 +340,113 @@ class PatientHistoryService:
             print(f"Error fetching visit notes: {e}")
         
         return visit_notes
+    
+    async def _fetch_vital_signs(self, patient_id: str, lookback_date: str, headers: Dict) -> List[VitalSigns]:
+        """Fetch vital signs from FHIR Observations with vital-signs category."""
+        vital_signs_list = []
+        
+        try:
+            response = await self.client.get(
+                f"{self.fhir_base_url}/Observation?patient={patient_id}&category=vital-signs&date=ge{lookback_date}&_sort=-date&_count=100",
+                headers=headers
+            )
+            
+            if response.status_code == 200:
+                bundle = response.json()
+                
+                # Group observations by date/time
+                vitals_by_datetime = {}
+                
+                for entry in bundle.get('entry', []):
+                    obs = entry.get('resource', {})
+                    
+                    # Get date and time
+                    effective_datetime = obs.get('effectiveDateTime', '')
+                    if not effective_datetime:
+                        continue
+                    
+                    # Parse date and time
+                    try:
+                        dt = datetime.fromisoformat(effective_datetime.replace('Z', '+00:00'))
+                        date_key = dt.strftime('%Y-%m-%d')
+                        time_key = dt.strftime('%H:%M')
+                        datetime_key = f"{date_key}_{time_key}"
+                    except:
+                        date_key = effective_datetime.split('T')[0] if 'T' in effective_datetime else effective_datetime
+                        time_key = effective_datetime.split('T')[1][:5] if 'T' in effective_datetime else ''
+                        datetime_key = f"{date_key}_{time_key}"
+                    
+                    # Initialize vital signs record if not exists
+                    if datetime_key not in vitals_by_datetime:
+                        vitals_by_datetime[datetime_key] = {
+                            'date': date_key,
+                            'time': time_key
+                        }
+                    
+                    # Get vital sign type and value
+                    code_coding = obs.get('code', {}).get('coding', [{}])[0]
+                    loinc_code = code_coding.get('code', '')
+                    display = code_coding.get('display', '').lower()
+                    
+                    value_quantity = obs.get('valueQuantity', {})
+                    value = value_quantity.get('value')
+                    unit = value_quantity.get('unit', '')
+                    
+                    if not value:
+                        continue
+                    
+                    # Map LOINC codes and display names to vital sign fields
+                    vitals = vitals_by_datetime[datetime_key]
+                    
+                    # Temperature
+                    if loinc_code in ['8310-5', '8331-1'] or 'temperature' in display:
+                        vitals['temperature'] = float(value)
+                        vitals['temperature_unit'] = 'F' if 'f' in unit.lower() or 'fahrenheit' in unit.lower() else 'C'
+                    
+                    # Blood Pressure
+                    elif loinc_code == '8480-6' or 'systolic' in display:
+                        vitals['blood_pressure_systolic'] = int(value)
+                    elif loinc_code == '8462-4' or 'diastolic' in display:
+                        vitals['blood_pressure_diastolic'] = int(value)
+                    
+                    # Heart Rate
+                    elif loinc_code == '8867-4' or 'heart rate' in display or 'pulse' in display:
+                        vitals['heart_rate'] = int(value)
+                    
+                    # Respiratory Rate
+                    elif loinc_code == '9279-1' or 'respiratory rate' in display:
+                        vitals['respiratory_rate'] = int(value)
+                    
+                    # Oxygen Saturation
+                    elif loinc_code in ['2708-6', '59408-5'] or 'oxygen saturation' in display or 'spo2' in display:
+                        vitals['oxygen_saturation'] = float(value)
+                    
+                    # Weight
+                    elif loinc_code in ['29463-7', '3141-9'] or 'body weight' in display or 'weight' in display:
+                        vitals['weight'] = float(value)
+                        vitals['weight_unit'] = 'kg' if 'kg' in unit.lower() else 'lbs'
+                    
+                    # Height
+                    elif loinc_code in ['8302-2', '8306-3'] or 'body height' in display or 'height' in display:
+                        vitals['height'] = float(value)
+                        vitals['height_unit'] = 'cm' if 'cm' in unit.lower() else 'inches'
+                    
+                    # BMI
+                    elif loinc_code == '39156-5' or 'bmi' in display or 'body mass index' in display:
+                        vitals['bmi'] = float(value)
+                    
+                    # Pain Scale
+                    elif 'pain' in display and 'scale' in display:
+                        vitals['pain_scale'] = int(value)
+                
+                # Convert grouped vitals to VitalSigns objects
+                for datetime_key, vitals in vitals_by_datetime.items():
+                    vital_signs_list.append(VitalSigns(**vitals))
+        
+        except Exception as e:
+            print(f"Error fetching vital signs: {e}")
+        
+        return vital_signs_list
     
     async def _fetch_diagnostic_tests(self, patient_id: str, lookback_date: str, headers: Dict) -> List[DiagnosticTest]:
         """Fetch diagnostic test results (labs, etc.)."""
