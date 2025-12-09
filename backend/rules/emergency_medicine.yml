@@ -24,11 +24,12 @@ rules:
   - Observe 4-6 hours (longer if severe), prescribe EpiPen on discharge
   management:
   - 'Guideline-based treatment options for Anaphylaxis include:'
-  - 'Immediate: IM epinephrine, airway management, IV access (ACEP)'
-  - 'Supportive: Oxygen, cardiac monitoring, IV fluids (ACEP)'
-  - 'Medications: Antihistamines, corticosteroids, bronchodilators PRN (ACEP)'
-  - 'Disposition: Observe 4-6 hours minimum, admit if severe or refractory (ACEP)'
-  - 'Discharge: EpiPen prescription, allergy referral, avoidance counseling (ACEP)'
+  - 'Immediate: IM epinephrine, airway management, IV access (ACEP 2023)'
+  - 'Supportive: Oxygen, cardiac monitoring, IV fluids (ACEP 2023)'
+  - 'Medications: Antihistamines, corticosteroids, bronchodilators PRN (ACEP 2023)'
+  - 'Disposition: Observe 4-6 hours minimum, admit if severe or refractory (ACEP 2023)'
+  - 'Discharge: EpiPen prescription, allergy referral, avoidance counseling (ACEP
+    2023)'
   icd10:
   - T78.2XXA
   - T78.00XA
@@ -54,13 +55,15 @@ rules:
   - Thiamine 100mg IV before dextrose if malnourished/alcoholic
   management:
   - 'Guideline-based treatment options for Status Epilepticus include:'
-  - '0-5 min: ABCs, O2, IV access, check glucose, give thiamine if indicated (ACEP)'
-  - '5-10 min: Lorazepam 4mg IV (may repeat once) or midazolam 10mg IM (ACEP)'
+  - '0-5 min: ABCs, O2, IV access, check glucose, give thiamine if indicated (ACEP
+    2023)'
+  - '5-10 min: Lorazepam 4mg IV (may repeat once) or midazolam 10mg IM (ACEP 2023)'
   - '10-20 min: Fosphenytoin 20 PE/kg IV or levetiracetam 60mg/kg IV (max 4500mg)
-    (ACEP)'
-  - '20-40 min: Refractory status - intubate, propofol/midazolam drip, ICU, EEG (ACEP)'
+    (ACEP 2023)'
+  - '20-40 min: Refractory status - intubate, propofol/midazolam drip, ICU, EEG (ACEP
+    2023)'
   - 'Workup: Labs (CBC, CMP, tox screen, AED levels), LP if concern for infection,
-    MRI brain (ACEP)'
+    MRI brain (ACEP 2023)'
   icd10:
   - G41.9
   - G41.901
@@ -91,15 +94,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Hypovolemic Shock include:'
   - 'Immediate: IV access (two large-bore or central line), 30 mL/kg NS/LR bolus,
-    oxygen, cardiac monitor (ACEP)'
+    oxygen, cardiac monitor (ACEP 2023)'
   - 'Hemorrhage control: Direct pressure, tourniquet, activate massive transfusion
-    protocol if Class III/IV (ACEP)'
+    protocol if Class III/IV (ACEP 2023)'
   - 'Blood products: PRBC for Hgb <7 (or <8 if cardiac disease), FFP if INR >1.5,
-    platelets if <50K and bleeding (ACEP)'
+    platelets if <50K and bleeding (ACEP 2023)'
   - 'Monitoring: Continuous vitals, urine output (Foley), serial lactate, Hgb q1-2hr,
-    coags (ACEP)'
+    coags (ACEP 2023)'
   - 'Disposition: ICU for ongoing resuscitation, OR for surgical hemorrhage control,
-    admit for Class II or higher (ACEP)'
+    admit for Class II or higher (ACEP 2023)'
   icd10:
   - R57.1
   - T79.4XXA
@@ -133,15 +136,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Cardiogenic Shock include:'
   - 'Immediate: IV access, continuous cardiac monitoring, arterial line, minimize
-    fluids (ACEP)'
+    fluids (ACEP 2023)'
   - 'Inotropic support: Dobutamine 2-20 mcg/kg/min IV (or milrinone 0.375-0.75 mcg/kg/min
-    if on beta-blockers) (ACEP)'
+    if on beta-blockers) (ACEP 2023)'
   - 'If MAP <65: Add norepinephrine 0.05-0.2 mcg/kg/min (balance BP support vs afterload)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Diuresis: Furosemide 40-80mg IV (or continuous infusion 5-10 mg/hr) for pulmonary
-    edema (ACEP)'
+    edema (ACEP 2023)'
   - 'Disposition: CCU/ICU, cardiology consult, consider mechanical support (IABP,
-    Impella), urgent cath if MI (ACEP)'
+    Impella), urgent cath if MI (ACEP 2023)'
   icd10:
   - R57.0
   - I21.0
@@ -171,15 +174,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Septic Shock include:'
   - 'Immediate: IV access, blood cultures ×2 (before antibiotics), lactate, broad-spectrum
-    antibiotics (ACEP)'
+    antibiotics (ACEP 2023)'
   - 'Fluid resuscitation: 30 mL/kg crystalloid, reassess after each bolus (lung sounds,
-    JVP, lactate) (ACEP)'
+    JVP, lactate) (ACEP 2023)'
   - 'Vasopressors: Norepinephrine via central line if MAP <65 despite fluids (can
-    start peripherally if needed) (ACEP)'
+    start peripherally if needed) (ACEP 2023)'
   - 'Source control: CT imaging to identify abscess/infection, urgent surgery/IR consult
-    if needed (ACEP)'
+    if needed (ACEP 2023)'
   - 'Disposition: ICU admission for all septic shock patients, continuous hemodynamic
-    monitoring (ACEP)'
+    monitoring (ACEP 2023)'
   icd10:
   - R65.21
   - A41.9
@@ -211,15 +214,15 @@ rules:
   - 'Guideline-based treatment options for Acute Coronary Syndrome (STEMI/NSTEMI)
     include:'
   - 'Immediate: Aspirin 325mg chewed, sublingual nitroglycerin if SBP >90, oxygen
-    if hypoxic (ACEP)'
+    if hypoxic (ACEP 2023)'
   - 'STEMI: Activate cath lab (PCI <90 min) or give tPA if PCI not available <120
-    min (ACEP)'
+    min (ACEP 2023)'
   - 'NSTEMI: Dual antiplatelet, anticoagulation (heparin/enoxaparin), cardiology consult
-    for cath timing (ACEP)'
+    for cath timing (ACEP 2023)'
   - 'High-risk features (urgent cath): Ongoing pain, hemodynamic instability, arrhythmia,
-    GRACE >140 (ACEP)'
+    GRACE >140 (ACEP 2023)'
   - 'Disposition: CCU admission for STEMI/high-risk NSTEMI, telemetry for low-risk,
-    discharge if rule-out (ACEP)'
+    discharge if rule-out (ACEP 2023)'
   icd10:
   - I21.9
   - I21.3
@@ -249,15 +252,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Pulmonary Embolism include:'
   - 'Immediate: Oxygen, IV access, anticoagulation if high suspicion (heparin or LMWH)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Massive PE (shock/hypotension): Thrombolysis (tPA), consider ECMO/surgical embolectomy
-    (ACEP)'
+    (ACEP 2023)'
   - 'Submassive PE (RV strain, no shock): Anticoagulation, monitor closely, consider
-    half-dose tPA (ACEP)'
+    half-dose tPA (ACEP 2023)'
   - 'Anticoagulation: Apixaban 10mg BID ×7d then 5mg BID, or rivaroxaban 15mg BID
-    ×21d then 20mg daily, or LMWH→warfarin (INR 2-3) (ACEP)'
+    ×21d then 20mg daily, or LMWH→warfarin (INR 2-3) (ACEP 2023)'
   - 'Disposition: Admit for massive/submassive PE, discharge if low-risk with outpatient
-    anticoagulation follow-up (ACEP)'
+    anticoagulation follow-up (ACEP 2023)'
   icd10:
   - I26.99
   - I26.09
@@ -287,14 +290,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Aortic Dissection include:'
   - 'Immediate: IV access (two large-bore), arterial line, pain control (morphine),
-    BP control (ACEP)'
+    BP control (ACEP 2023)'
   - 'BP control: Beta-blocker FIRST (esmolol 0.5mg/kg bolus, then 50-200 mcg/kg/min
-    infusion, or labetalol 20mg IV q10min) (ACEP)'
+    infusion, or labetalol 20mg IV q10min) (ACEP 2023)'
   - 'After HR <60: Add vasodilator if needed (nicardipine 5mg/hr IV, titrate to SBP
-    100-120) (ACEP)'
-  - 'Type A: Emergent cardiothoracic surgery consult, OR as soon as possible (ACEP)'
+    100-120) (ACEP 2023)'
+  - 'Type A: Emergent cardiothoracic surgery consult, OR as soon as possible (ACEP
+    2023)'
   - 'Type B uncomplicated: Medical management (BP/HR control), admit to ICU, serial
-    imaging (ACEP)'
+    imaging (ACEP 2023)'
   icd10:
   - I71.00
   - I71.01
@@ -324,15 +328,16 @@ rules:
   - 'Exception: Aortic dissection needs aggressive BP reduction (SBP <120 in 20 min)'
   management:
   - 'Guideline-based treatment options for Hypertensive Emergency include:'
-  - 'Workup: ECG, troponin, BNP, Cr, UA, CXR, CT head if neurologic symptoms (ACEP)'
+  - 'Workup: ECG, troponin, BNP, Cr, UA, CXR, CT head if neurologic symptoms (ACEP
+    2023)'
   - 'IV antihypertensives: Nicardipine 5mg/hr (titrate by 2.5mg/hr q5-15min, max 15mg/hr)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Alternative: Labetalol 20mg IV bolus, repeat 40-80mg q10min (max 300mg) or infusion
-    0.5-2mg/min (ACEP)'
+    0.5-2mg/min (ACEP 2023)'
   - 'Specific scenarios: Dissection (esmolol+nicardipine), stroke (permissive hypertension
-    unless >220/120), eclampsia (magnesium+labetalol/hydralazine) (ACEP)'
+    unless >220/120), eclampsia (magnesium+labetalol/hydralazine) (ACEP 2023)'
   - 'Disposition: ICU admission for continuous BP monitoring and IV medication titration
-    (ACEP)'
+    (ACEP 2023)'
   icd10:
   - I16.9
   - I16.1
@@ -360,14 +365,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Acute Ischemic Stroke include:'
   - 'Immediate: Noncontrast CT head, IV access, labs (glucose, CBC, coags, troponin),
-    ECG (ACEP)'
-  - 'tPA if <4.5hr: Alteplase 0.9mg/kg IV (10% bolus, rest over 1hr), max 90mg (ACEP)'
+    ECG (ACEP 2023)'
+  - 'tPA if <4.5hr: Alteplase 0.9mg/kg IV (10% bolus, rest over 1hr), max 90mg (ACEP
+    2023)'
   - 'Thrombectomy consult: Neurology/IR for large vessel occlusion <24hr if perfusion
-    mismatch (ACEP)'
+    mismatch (ACEP 2023)'
   - 'BP management: Permissive hypertension unless >220/120 or tPA given (then <185/110)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Disposition: Stroke unit or ICU, NPO until swallow eval, DVT prophylaxis, PT/OT/speech
-    therapy (ACEP)'
+    therapy (ACEP 2023)'
   icd10:
   - I63.9
   - I63.30
@@ -398,15 +404,15 @@ rules:
   - 'Guideline-based treatment options for Hemorrhagic Stroke (Intracerebral Hemorrhage)
     include:'
   - 'Immediate: Noncontrast CT head, reverse anticoagulation, BP control, neurosurgery
-    consult (ACEP)'
+    consult (ACEP 2023)'
   - 'Reverse anticoagulation: Warfarin (PCC + vit K), DOACs (idarucizumab for dabigatran,
-    andexanet for Xa inhibitors) (ACEP)'
+    andexanet for Xa inhibitors) (ACEP 2023)'
   - 'BP control: Nicardipine 5mg/hr IV titrated to SBP 140-160 (avoid aggressive lowering)
-    (ACEP)'
+    (ACEP 2023)'
   - 'ICP management: Elevate HOB 30°, maintain CPP >60, consider mannitol/hypertonic
-    saline if herniation (ACEP)'
+    saline if herniation (ACEP 2023)'
   - 'Disposition: ICU admission, neurosurgery evaluation for surgical evacuation vs
-    observation (ACEP)'
+    observation (ACEP 2023)'
   icd10:
   - I61.9
   - I61.0
@@ -438,14 +444,14 @@ rules:
   management:
   - 'Guideline-based treatment options for Subarachnoid Hemorrhage (SAH) include:'
   - 'Immediate: Noncontrast CT head, if negative → LP (tube 4 for xanthochromia),
-    neurosurgery consult (ACEP)'
+    neurosurgery consult (ACEP 2023)'
   - 'CTA or MRA: Identify aneurysm location for endovascular coiling vs surgical clipping
-    (ACEP)'
+    (ACEP 2023)'
   - 'Nimodipine 60mg PO q4h: Start immediately, continue 21 days to prevent vasospasm
-    (ACEP)'
-  - 'BP control: Nicardipine or labetalol to SBP <160 (avoid hypotension) (ACEP)'
+    (ACEP 2023)'
+  - 'BP control: Nicardipine or labetalol to SBP <160 (avoid hypotension) (ACEP 2023)'
   - 'Disposition: ICU admission, neurosurgery/IR for urgent aneurysm repair, daily
-    TCDs to monitor vasospasm (ACEP)'
+    TCDs to monitor vasospasm (ACEP 2023)'
   icd10:
   - I60.9
   - I60.7
@@ -479,14 +485,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Acute Bacterial Meningitis include:'
   - 'Immediate: Blood cultures ×2, empiric antibiotics + dexamethasone (don''t wait
-    for LP) (ACEP)'
+    for LP) (ACEP 2023)'
   - 'Empiric antibiotics: <50yr (vancomycin 15-20mg/kg + ceftriaxone 2g IV), >50yr
-    (add ampicillin 2g IV q4h) (ACEP)'
-  - 'Dexamethasone: 0.15mg/kg IV (max 10mg) before or with first antibiotic dose (ACEP)'
+    (add ampicillin 2g IV q4h) (ACEP 2023)'
+  - 'Dexamethasone: 0.15mg/kg IV (max 10mg) before or with first antibiotic dose (ACEP
+    2023)'
   - 'LP when safe: Opening pressure, cell count with differential, glucose, protein,
-    Gram stain, culture (ACEP)'
+    Gram stain, culture (ACEP 2023)'
   - 'Disposition: ICU admission, respiratory isolation if N. meningitidis suspected,
-    prophylaxis for close contacts (ACEP)'
+    prophylaxis for close contacts (ACEP 2023)'
   icd10:
   - G00.9
   - G03.9
@@ -516,15 +523,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Diabetic Ketoacidosis (DKA) include:'
   - 'Immediate: IV access, labs (VBG, BMP, glucose, ketones), aggressive fluid resuscitation
-    (ACEP)'
+    (ACEP 2023)'
   - 'Fluids: 1L NS bolus, then 250-500 mL/hr (10-14 mL/kg/hr), switch to D5 1/2NS
-    when glucose <250 (ACEP)'
+    when glucose <250 (ACEP 2023)'
   - 'Insulin: Regular insulin 0.1 units/kg/hr IV infusion (don''t bolus), continue
-    until anion gap closes (ACEP)'
+    until anion gap closes (ACEP 2023)'
   - 'Potassium: Measure q2-4hr, replace if <5.2 (20-40 mEq/L in fluids), hold insulin
-    if <3.3 (ACEP)'
+    if <3.3 (ACEP 2023)'
   - 'Disposition: ICU if severe (pH <7.0, bicarb <10, altered mental status), telemetry
-    for moderate, discharge when eating/drinking (ACEP)'
+    for moderate, discharge when eating/drinking (ACEP 2023)'
   icd10:
   - E10.10
   - E11.10
@@ -555,14 +562,14 @@ rules:
   - 'Guideline-based treatment options for Acute Adrenal Crisis (Addisonian Crisis)
     include:'
   - 'Immediate: IV access, NS bolus 1-2L, hydrocortisone 100mg IV STAT (before labs)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Fluids: Aggressive NS resuscitation (D5NS if hypoglycemic), may need 4-6L in
-    first 24hr (ACEP)'
-  - 'Hydrocortisone: 100mg IV bolus, then 50mg q6h (or 200mg/day infusion) (ACEP)'
+    first 24hr (ACEP 2023)'
+  - 'Hydrocortisone: 100mg IV bolus, then 50mg q6h (or 200mg/day infusion) (ACEP 2023)'
   - 'Labs: Cortisol level before hydrocortisone (if possible), ACTH, aldosterone,
-    electrolytes, glucose (ACEP)'
+    electrolytes, glucose (ACEP 2023)'
   - 'Disposition: ICU admission, identify precipitant (infection, MI, etc.), taper
-    steroids once stable (ACEP)'
+    steroids once stable (ACEP 2023)'
   icd10:
   - E27.2
   snomed:
@@ -592,15 +599,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Thyroid Storm include:'
   - 'Immediate: IV access, cooling measures (ice packs, cooling blanket), acetaminophen
-    1g (ACEP)'
+    1g (ACEP 2023)'
   - '(1) Block synthesis: PTU 500-1000mg PO load then 250mg q4h, or methimazole 20mg
-    q4h (ACEP)'
+    q4h (ACEP 2023)'
   - '(2) Beta-blocker: Propranolol 1-2mg IV q10-15min (or 60-80mg PO q4h), esmolol
-    if unstable (ACEP)'
+    if unstable (ACEP 2023)'
   - '(3) Block release (1hr after PTU): Iodine solution (Lugol''s 8 drops q6h or SSKI
-    5 drops q6h) (ACEP)'
+    5 drops q6h) (ACEP 2023)'
   - '(4) Hydrocortisone 100mg IV q8h: Blocks T4→T3 conversion, treats possible adrenal
-    insufficiency (ACEP)'
+    insufficiency (ACEP 2023)'
   icd10:
   - E05.5
   snomed:
@@ -628,15 +635,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Tension Pneumothorax include:'
   - 'Immediate: Needle decompression if tension suspected - 14-16G needle/catheter,
-    2nd ICS midclavicular line (ACEP)'
+    2nd ICS midclavicular line (ACEP 2023)'
   - Insert needle perpendicular to chest wall, advance until gush of air, secure catheter
-    (ACEP)
+    (ACEP 2023)
   - 'Definitive: Chest tube placement (28-32 Fr) in 4th/5th intercostal space, anterior
-    axillary line (ACEP)'
+    axillary line (ACEP 2023)'
   - 'If needle decompression fails: Consider finger thoracostomy (open pneumothorax,
-    then chest tube) (ACEP)'
+    then chest tube) (ACEP 2023)'
   - 'Disposition: Admit for chest tube management, serial CXRs, respiratory therapy
-    (ACEP)'
+    (ACEP 2023)'
   icd10:
   - J93.0
   snomed:
@@ -670,15 +677,15 @@ rules:
   management:
   - 'Guideline-based treatment options for Cardiac Tamponade include:'
   - 'Immediate: IV access (two large-bore), aggressive fluid resuscitation (preload),
-    oxygen, bedside ultrasound (ACEP)'
+    oxygen, bedside ultrasound (ACEP 2023)'
   - 'Fluids: NS bolus 1-2L to increase preload (temporizing measure - buys time for
-    pericardiocentesis) (ACEP)'
+    pericardiocentesis) (ACEP 2023)'
   - 'Avoid: Positive pressure ventilation (worsens preload), diuretics (worsens preload)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Emergent pericardiocentesis: Subxiphoid or parasternal approach, ultrasound-guided,
-    aspirate fluid (send for culture, cytology, Gram stain) (ACEP)'
+    aspirate fluid (send for culture, cytology, Gram stain) (ACEP 2023)'
   - 'Disposition: ICU after pericardiocentesis, cardiothoracic surgery consult if
-    traumatic/post-MI, pericardial drain placement (ACEP)'
+    traumatic/post-MI, pericardial drain placement (ACEP 2023)'
   tests:
   - 'Bedside ultrasound (RUSH exam): Circumferential pericardial effusion, RV diastolic
     collapse (80% sensitive), RA systolic collapse (best predictor)'
@@ -721,13 +728,13 @@ rules:
   management:
   - 'Guideline-based treatment options for Ruptured Ectopic Pregnancy include:'
   - 'Immediate: IV access (two large-bore), aggressive fluid resuscitation, T&C 4
-    units PRBC (ACEP)'
-  - 'Labs: Beta-hCG, CBC, type & screen, coags (ACEP)'
-  - 'FAST exam: Assess for free fluid (hemoperitoneum) (ACEP)'
+    units PRBC (ACEP 2023)'
+  - 'Labs: Beta-hCG, CBC, type & screen, coags (ACEP 2023)'
+  - 'FAST exam: Assess for free fluid (hemoperitoneum) (ACEP 2023)'
   - 'If unstable: Emergent OB/GYN consult, OR for exploratory laparotomy/laparoscopy
-    (ACEP)'
+    (ACEP 2023)'
   - 'If stable: Transvaginal ultrasound (look for intrauterine pregnancy vs ectopic
-    mass), may need serial hCG (ACEP)'
+    mass), may need serial hCG (ACEP 2023)'
   icd10:
   - O00.90
   - O00.10
@@ -755,15 +762,15 @@ rules:
     for aqueous drainage'
   management:
   - 'Guideline-based treatment options for Acute Angle-Closure Glaucoma include:'
-  - 'Immediate: Ophthalmology consult, measure IOP, start topical drops (ACEP)'
+  - 'Immediate: Ophthalmology consult, measure IOP, start topical drops (ACEP 2023)'
   - 'Topical drops (give all): (1) Timolol 0.5% 1 drop, (2) Apraclonidine 1% 1 drop,
-    (3) Prednisolone 1% 1 drop (ACEP)'
+    (3) Prednisolone 1% 1 drop (ACEP 2023)'
   - 'Systemic: Acetazolamide 500mg IV or PO (carbonic anhydrase inhibitor), antiemetics
-    (ACEP)'
+    (ACEP 2023)'
   - 'If IOP still elevated: Mannitol 1-2 g/kg IV over 30-45 min (osmotic diuresis)
-    (ACEP)'
+    (ACEP 2023)'
   - 'Definitive: Laser peripheral iridotomy (ophthalmology) once IOP controlled, treat
-    fellow eye prophylactically (ACEP)'
+    fellow eye prophylactically (ACEP 2023)'
   icd10:
   - H40.211
   - H40.212
@@ -797,14 +804,14 @@ rules:
   management:
   - 'Guideline-based treatment options for Testicular Torsion include:'
   - 'Immediate: IV access, analgesia (morphine, ketorolac), urgent urology consult
-    (ACEP)'
+    (ACEP 2023)'
   - 'Manual detorsion attempt: Rotate affected testis OUTWARD (medial border toward
-    thigh) 180-720° until pain relief (ACEP)'
-  - 'If pain worsens: Stop and rotate in opposite direction (ACEP)'
+    thigh) 180-720° until pain relief (ACEP 2023)'
+  - 'If pain worsens: Stop and rotate in opposite direction (ACEP 2023)'
   - 'Ultrasound only if diagnosis uncertain AND surgery will not be delayed: Color
-    Doppler shows decreased flow (ACEP)'
+    Doppler shows decreased flow (ACEP 2023)'
   - 'Disposition: Emergent OR for surgical detorsion + bilateral orchiopexy (fix both
-    testes to prevent recurrence) (ACEP)'
+    testes to prevent recurrence) (ACEP 2023)'
   tests:
   - 'Cremasteric reflex: Absent in 99% of torsion (stroke inner thigh, normal = testicle
     retracts)'

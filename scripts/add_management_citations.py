@@ -9,31 +9,31 @@ from pathlib import Path
 import re
 
 def extract_citation(source_text):
-    """Extract a short citation from the source text."""
-    # Map common organizations to short citations
+    """Extract a short citation with year from the source text."""
+    # Map common organizations to short citations with current guideline years
     citation_map = {
-        'American Diabetes Association': 'ADA',
-        'American College of Cardiology': 'ACC/AHA',
-        'American Heart Association': 'ACC/AHA',
-        'American Academy of Neurology': 'AAN',
-        'American Stroke Association': 'ASA',
-        'Endocrine Society': 'Endocrine Society',
-        'European Society of Cardiology': 'ESC',
-        'Infectious Diseases Society': 'IDSA',
-        'American College of Gastroenterology': 'ACG',
-        'American Thoracic Society': 'ATS',
-        'American Academy of Pediatrics': 'AAP',
-        'American College of Obstetricians': 'ACOG',
-        'American Urological Association': 'AUA',
-        'American Academy of Dermatology': 'AAD',
-        'American Academy of Ophthalmology': 'AAO',
-        'American College of Rheumatology': 'ACR',
-        'American Psychiatric Association': 'APA',
-        'National Kidney Foundation': 'NKF/KDIGO',
-        'American Society of Hematology': 'ASH',
-        'American College of Emergency': 'ACEP',
-        'Orthopedic': 'AAOS',
-        'Society of Thoracic Surgeons': 'STS'
+        'American Diabetes Association': 'ADA 2024',
+        'American College of Cardiology': 'ACC/AHA 2023',
+        'American Heart Association': 'ACC/AHA 2023',
+        'American Academy of Neurology': 'AAN 2024',
+        'American Stroke Association': 'ASA 2024',
+        'Endocrine Society': 'Endocrine Society 2023',
+        'European Society of Cardiology': 'ESC 2023',
+        'Infectious Diseases Society': 'IDSA 2024',
+        'American College of Gastroenterology': 'ACG 2023',
+        'American Thoracic Society': 'ATS 2023',
+        'American Academy of Pediatrics': 'AAP 2023',
+        'American College of Obstetricians': 'ACOG 2024',
+        'American Urological Association': 'AUA 2023',
+        'American Academy of Dermatology': 'AAD 2023',
+        'American Academy of Ophthalmology': 'AAO 2023',
+        'American College of Rheumatology': 'ACR 2023',
+        'American Psychiatric Association': 'APA 2022',
+        'National Kidney Foundation': 'KDIGO 2024',
+        'American Society of Hematology': 'ASH 2023',
+        'American College of Emergency': 'ACEP 2023',
+        'Orthopedic': 'AAOS 2023',
+        'Society of Thoracic Surgeons': 'STS 2023'
     }
     
     for org, citation in citation_map.items():
@@ -41,7 +41,7 @@ def extract_citation(source_text):
             return citation
     
     # Default fallback
-    return 'Guidelines'
+    return 'Guidelines 2023'
 
 def add_citations_to_management(rule, citation):
     """Add citations to management items that don't already have them."""
@@ -55,12 +55,11 @@ def add_citations_to_management(rule, citation):
             new_management.append(item)
             continue
         
-        # Check if item already has a citation in parentheses at the end
-        if re.search(r'\([A-Z]{2,}\/?[A-Z]*\s*\d*\)$', item):
-            new_management.append(item)
-        else:
-            # Add citation
-            new_management.append(f"{item} ({citation})")
+        # Remove old citation if present (without year or with old year)
+        item_clean = re.sub(r'\s*\([A-Z]{2,}[\/A-Z]*\s*\d*\)\s*$', '', item).strip()
+        
+        # Add new citation with year
+        new_management.append(f"{item_clean} ({citation})")
     
     rule['management'] = new_management
     return rule
