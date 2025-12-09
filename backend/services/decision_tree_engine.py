@@ -104,4 +104,17 @@ class DecisionTreeEngine:
                 elif "default" in branch and isinstance(branch["default"], str):
                     nxt=branch["default"]
             cur=nxt
-        return {"tree":{"id":t["id"],"title":t.get("title")}, "path":path, "tests":sorted(set(tests)), "provisional_dx":sorted(set(dx)), "referrals":sorted(set(referrals)), "trace":trace_all}
+        
+        # Get ICD-10 code from the tree metadata
+        tree_icd10 = t.get("icd10", [])
+        if isinstance(tree_icd10, str):
+            tree_icd10 = [tree_icd10]
+        
+        return {
+            "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10}, 
+            "path": path, 
+            "tests": sorted(set(tests)), 
+            "provisional_dx": sorted(set(dx)), 
+            "referrals": sorted(set(referrals)), 
+            "trace": trace_all
+        }

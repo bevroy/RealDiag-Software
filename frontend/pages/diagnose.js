@@ -455,6 +455,20 @@ export default function Diagnose() {
                             <li key={i}>{dx}</li>
                           ))}
                         </ul>
+                        {result.tree && result.tree.icd10 && result.tree.icd10.length > 0 && (
+                          <div style={{
+                            marginTop: '0.75rem',
+                            padding: '0.75rem',
+                            background: '#f9fafb',
+                            borderRadius: '6px',
+                            borderLeft: '3px solid #0f766e'
+                          }}>
+                            <strong style={{color: '#0f766e'}}>📋 ICD-10:</strong>{' '}
+                            <span style={{fontFamily: 'monospace', fontSize: '0.9rem'}}>
+                              {result.tree.icd10.join(', ')}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     )}
                     
