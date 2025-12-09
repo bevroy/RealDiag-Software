@@ -465,7 +465,7 @@ export default function ReferencePage() {
           <div>Details</div>
         </div>
 
-        /* Rows */}
+        {/* Rows */}
         {(filtered || []).slice(0, displayCount).map((r, idx) => {
           if (!r || !r.id) return null;
           const isExpanded = expandedId === r.id;
