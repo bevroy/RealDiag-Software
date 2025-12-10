@@ -20,6 +20,20 @@ from backend.services.subscription_router import router as subscription_router
 from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 
+# Import test environment utilities
+try:
+    from backend.services.test_environment import (
+        TestEnvironmentMiddleware,
+        is_test_mode,
+        should_bypass_subscription
+    )
+    TEST_ENVIRONMENT_AVAILABLE = True
+except ImportError:
+    TEST_ENVIRONMENT_AVAILABLE = False
+    TestEnvironmentMiddleware = None
+    def is_test_mode(): return False
+    def should_bypass_subscription(): return False
+
 # Import security features with fallback
 try:
     from backend.services.security import security_middleware, limiter
@@ -41,6 +55,15 @@ logger = logging.getLogger("realdiag")
 # Initialize Sentry for error tracking (production)
 SENTRY_DSN = os.getenv("SENTRY_DSN")
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+# Log environment and test mode status
+logger.info(f"🌍 Environment: {ENVIRONMENT}")
+if is_test_mode():
+    logger.info("🧪 TEST MODE ENABLED - All users granted enterprise access")
+    logger.info("🔓 Subscription checks: BYPASSED")
+    logger.info("⚠️  This should NEVER appear in production!")
+else:
+    logger.info("🔒 Production mode - Subscription checks active")
 
 if SENTRY_DSN:
     try:
@@ -78,6 +101,11 @@ app = FastAPI(
     version="1.4.0", 
     description="Clinical Decision Support System with Enhanced Security and Medical Training Tools"
 )
+
+# Add test environment middleware FIRST if test mode is enabled
+if TEST_ENVIRONMENT_AVAILABLE and is_test_mode():
+    app.add_middleware(TestEnvironmentMiddleware)
+    logger.info("✅ Test environment middleware enabled")
 
 # Add rate limiter to app state if security is enabled
 if SECURITY_ENABLED:
@@ -191,6 +219,39 @@ logger.info(f"✅ CORS configured for {ENVIRONMENT} (permissive)")
 def metrics():
     """Expose Prometheus metrics."""
     return generate_latest()
+
+
+@app.get("/health")
+def health_check():
+    """
+    Health check endpoint with environment status.
+    Shows test mode status and feature availability.
+    """
+    health_status = {
+        "status": "healthy",
+        "version": Config.APP_VERSION,
+        "environment": ENVIRONMENT,
+        "test_mode": is_test_mode(),
+    }
+    
+    # Add test mode specific info
+    if is_test_mode():
+        health_status["test_info"] = {
+            "subscription_checks": "bypassed",
+            "user_access_level": "enterprise",
+            "rate_limiting": "disabled",
+            "payment_processing": "disabled",
+            "warning": "Test environment - not for production use"
+        }
+    
+    # Add feature flags
+    health_status["features"] = {
+        "security_enabled": SECURITY_ENABLED,
+        "test_environment_available": TEST_ENVIRONMENT_AVAILABLE,
+        "subscription_bypass": should_bypass_subscription(),
+    }
+    
+    return health_status
 
 
 @app.get("/")

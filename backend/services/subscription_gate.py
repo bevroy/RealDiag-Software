@@ -10,10 +10,27 @@ from fastapi import HTTPException, Request, Depends
 from typing import Optional, Callable, Any
 from backend.services.subscription_models import PlanType, check_feature_access, get_plan_features
 
+# Import test environment utilities
+try:
+    from backend.services.test_environment import (
+        should_bypass_subscription,
+        get_effective_plan,
+        check_feature_access_test_aware,
+        is_test_mode
+    )
+    TEST_MODE_AVAILABLE = True
+except ImportError:
+    TEST_MODE_AVAILABLE = False
+    def should_bypass_subscription(): return False
+    def get_effective_plan(user, plan): return plan
+    def check_feature_access_test_aware(plan, feature, user=None): return check_feature_access(plan, feature)
+    def is_test_mode(): return False
+
 
 def get_user_plan(user: Optional[dict], subscriptions_store: dict) -> PlanType:
     """
     Get the plan type for a user.
+    Test mode aware: Returns enterprise plan in test environment.
     
     Args:
         user: User object from authentication
@@ -22,6 +39,11 @@ def get_user_plan(user: Optional[dict], subscriptions_store: dict) -> PlanType:
     Returns:
         PlanType enum value
     """
+    # In test mode, everyone gets enterprise access
+    if should_bypass_subscription():
+        from backend.services.test_environment import get_test_mode_plan
+        return get_test_mode_plan()
+    
     if not user:
         return PlanType.FREE
     
@@ -35,6 +57,7 @@ def get_user_plan(user: Optional[dict], subscriptions_store: dict) -> PlanType:
 def require_feature(feature_name: str, user_subscriptions: dict):
     """
     Decorator to require a specific feature access.
+    Test mode aware: Grants all access in test environment.
     
     Usage:
         @router.get("/premium-endpoint")
@@ -52,6 +75,10 @@ def require_feature(feature_name: str, user_subscriptions: dict):
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         async def wrapper(*args, **kwargs):
+            # In test mode, bypass all checks
+            if should_bypass_subscription():
+                return await func(*args, **kwargs)
+            
             # Extract user from kwargs
             user = kwargs.get("current_user") or kwargs.get("user")
             
@@ -64,8 +91,8 @@ def require_feature(feature_name: str, user_subscriptions: dict):
             # Get user's plan
             plan = get_user_plan(user, user_subscriptions)
             
-            # Check feature access
-            has_access = check_feature_access(plan, feature_name)
+            # Check feature access (test-aware)
+            has_access = check_feature_access_test_aware(plan, feature_name, user)
             
             if not has_access:
                 features = get_plan_features(plan)
@@ -92,6 +119,7 @@ def require_feature(feature_name: str, user_subscriptions: dict):
 def require_plan(minimum_plan: PlanType, user_subscriptions: dict):
     """
     Decorator to require a minimum subscription plan level.
+    Test mode aware: Bypasses checks in test environment.
     
     Usage:
         @router.get("/professional-feature")
@@ -124,6 +152,10 @@ def require_plan(minimum_plan: PlanType, user_subscriptions: dict):
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         async def wrapper(*args, **kwargs):
+            # In test mode, bypass all checks
+            if should_bypass_subscription():
+                return await func(*args, **kwargs)
+            
             # Extract user from kwargs
             user = kwargs.get("current_user") or kwargs.get("user")
             

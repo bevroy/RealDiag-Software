@@ -166,14 +166,32 @@ def calculate_match_score_optimized(normalized_symptoms: List[str], original_sym
             if symptom in presentation:
                 score += 5.0
                 presentation_matched = True
-            # Word overlap (lower weight)
+            # Word overlap - but require anatomical qualifiers to match
             else:
-                symptom_words = set(symptom.split())
-                presentation_words = set(presentation.split())
-                overlap = symptom_words & presentation_words
-                if overlap:
-                    score += len(overlap) * 1.0
-                    presentation_matched = True
+                symptom_words = symptom.split()
+                presentation_words = presentation.split()
+                
+                # If symptom has multiple words (e.g., "facial pain"), require first word to match
+                # This prevents "facial pain" from matching "chest pain", "back pain", etc.
+                if len(symptom_words) > 1:
+                    first_word = symptom_words[0]
+                    # Check if the anatomical qualifier appears in the presentation
+                    if first_word in presentation_words or any(first_word in pw for pw in presentation_words):
+                        # First word matches, now check for other word overlap
+                        symptom_word_set = set(symptom_words)
+                        presentation_word_set = set(presentation_words)
+                        overlap = symptom_word_set & presentation_word_set
+                        if len(overlap) >= 2:  # Require at least 2 words to match
+                            score += len(overlap) * 1.0
+                            presentation_matched = True
+                else:
+                    # Single-word symptom - use original logic
+                    symptom_word_set = set(symptom_words)
+                    presentation_word_set = set(presentation_words)
+                    overlap = symptom_word_set & presentation_word_set
+                    if overlap:
+                        score += len(overlap) * 1.0
+                        presentation_matched = True
         
         if presentation_matched:
             matched.append(string_presentations[presentation_idx])  # Keep original case
@@ -194,7 +212,10 @@ def calculate_match_score_optimized(normalized_symptoms: List[str], original_sym
 def calculate_match_score(symptom_input: List[str], presentations: List[str], rule: Dict[str, Any] = None) -> tuple:
     """
     Calculate match score between input symptoms and rule presentations.
-    Enhanced with clinical likelihood modifiers.
+    Enhanced with clinical likelihood modifiers and improved matching logic.
+    
+    Multi-word symptoms (e.g., "facial pain") require the anatomical qualifier (first word)
+    to match to prevent false positives like "facial pain" matching "chest pain".
     
     Returns:
         (score, matched_presentations)
@@ -217,14 +238,32 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str], ru
             if symptom in presentation:
                 score += 5.0
                 presentation_matched = True
-            # Word overlap (lower weight)
+            # Word overlap - but require anatomical qualifiers to match
             else:
-                symptom_words = set(symptom.split())
-                presentation_words = set(presentation.split())
-                overlap = symptom_words & presentation_words
-                if overlap:
-                    score += len(overlap) * 1.0
-                    presentation_matched = True
+                symptom_words = symptom.split()
+                presentation_words = presentation.split()
+                
+                # If symptom has multiple words (e.g., "facial pain"), require first word to match
+                # This prevents "facial pain" from matching "chest pain", "back pain", etc.
+                if len(symptom_words) > 1:
+                    first_word = symptom_words[0]
+                    # Check if the anatomical qualifier appears in the presentation
+                    if first_word in presentation_words or any(first_word in pw for pw in presentation_words):
+                        # First word matches, now check for other word overlap
+                        symptom_word_set = set(symptom_words)
+                        presentation_word_set = set(presentation_words)
+                        overlap = symptom_word_set & presentation_word_set
+                        if len(overlap) >= 2:  # Require at least 2 words to match
+                            score += len(overlap) * 1.0
+                            presentation_matched = True
+                else:
+                    # Single-word symptom - use original logic
+                    symptom_word_set = set(symptom_words)
+                    presentation_word_set = set(presentation_words)
+                    overlap = symptom_word_set & presentation_word_set
+                    if overlap:
+                        score += len(overlap) * 1.0
+                        presentation_matched = True
         
         if presentation_matched:
             matched.append(string_presentations[presentation_idx])  # Keep original case
