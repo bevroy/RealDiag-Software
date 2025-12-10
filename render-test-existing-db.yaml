@@ -1,20 +1,12 @@
 # Render Blueprint for RealDiag TEST Environment
-# Deploy with: Render Dashboard → New Blueprint → Select this file
+# Uses EXISTING database (realdiag-database) to avoid downgrade issues
 # 
 # This configuration deploys:
 # - Backend API with test mode enabled
-# - PostgreSQL database (free tier)
 # - Frontend static site
+# - Connects to your existing database
 #
 # All users automatically get ENTERPRISE access in test mode
-
-databases:
-  - name: realdiag-test-db-v2
-    databaseName: realdiag_test_v2
-    user: realdiag_test_user
-    plan: starter  # $7/month - or use existing database
-    region: ohio
-    ipAllowList: []  # Only accessible from Render services
 
 services:
 
@@ -44,10 +36,10 @@ services:
       - key: SUBSCRIPTION_CHECK_ENABLED
         value: false
       
-      # Database
+      # Database - Using EXISTING database
       - key: DATABASE_URL
         fromDatabase:
-          name: realdiag-test-db-v2
+          name: realdiag-database
           property: connectionString
       
       # Security (relaxed for testing)
