@@ -1,21 +1,36 @@
-# Deployment Status - Medical Rules Update
+# Deployment Status - Medical Rules & Homeopathy Updates ✅
 
-## Issue Identified
-The updated medical rule presentations (standardized to 10-14+ presentations each) are **committed to GitHub** but **not yet deployed to Render production**.
+## Issue Resolution Summary
+1. ✅ **Medical rule presentations** - Expanded to 10-14+ presentations (commit `342d4e2`)
+2. ✅ **Homeopathic remedies not showing** - Fixed with disease alias mapping (commit `54ca9a7`)
 
 ## Current Status
-- ✅ **GitHub Repository**: All changes committed (commit `342d4e2`)
-- ✅ **Backend YAML Files**: Updated with comprehensive presentations
-- ❌ **Render Production**: Still serving old rule files (0 presentations for many conditions)
+- ✅ **GitHub Repository**: All changes committed
+  - `342d4e2` - Rule expansions and standardizations  
+  - `54ca9a7` - Homeopathy service alias mapping fix
+- ✅ **Backend Files**: Updated and tested locally
+- ⏳ **Render Production**: Needs redeployment to serve updated files
 - ✅ **Frontend**: Correctly configured to fetch from API
+- ✅ **Tests**: All homeopathy alias tests passing (17/17)
 
 ## What Was Updated
+
+### 1. Medical Rules Database
 - **25+ duplicate conditions** standardized across specialties
 - All conditions now have **10-14 comprehensive presentations** including:
   - Cardiac: Anaphylaxis, PE, Cardiac Tamponade, Pericarditis, Hypertensive Emergency
   - GI: Cholecystitis, Diverticulitis, Pancreatitis (multiple versions)
   - Infections: Pyelonephritis, Cellulitis, Endocarditis, Encephalitis
   - Others: Glaucoma, Nephrolithiasis, Osteomyelitis, Osteoporosis, Polymyalgia Rheumatica
+
+### 2. Homeopathy Service
+- **Added:** Disease name alias dictionary (`_initialize_condition_aliases()`)
+- **Maps:** 50+ diagnostic names to symptom keys in remedy database
+- **Examples:**
+  - "Myocardial Infarction" → chest_pain remedies (3 remedies)
+  - "Asthma" → dyspnea remedies (2 remedies)
+  - "IBS" → abdominal_pain remedies (2 remedies)
+- **Verified:** All test cases passing locally
 
 ## How to Deploy to Render
 
