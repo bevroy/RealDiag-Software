@@ -783,13 +783,20 @@ rules:
 - id: CARD-HYPERTENSIVE-EMERGENCY
   label: Hypertensive Emergency
   presentations:
-  - 'Severely elevated BP: SBP >180 or DBP >120 mmHg'
-  - WITH acute end-organ damage (distinguishes from urgency)
-  - 'Hypertensive encephalopathy: Headache, confusion, seizures, vision changes'
-  - Acute pulmonary edema, flash pulmonary edema
-  - Acute coronary syndrome, acute aortic dissection
-  - Acute renal failure, microangiopathic hemolytic anemia
-  - Retinal hemorrhages, papilledema on fundoscopy
+  - 'Severe hypertension: SBP >180 mmHg or DBP >120 mmHg'
+  - Evidence of acute end-organ damage (distinguishes from urgency)
+  - 'CNS: Hypertensive encephalopathy (confusion, headache, seizures, vision changes)'
+  - 'Cardiac: Acute MI, acute heart failure, pulmonary edema (flash pulmonary edema)'
+  - 'Renal: Acute kidney injury (Creatinine elevated, reduced urine output)'
+  - 'Vascular: Aortic dissection, acute stroke (hemorrhagic or ischemic)'
+  - 'Retinal: Hemorrhages, exudates, papilledema on fundoscopy (grade III-IV hypertensive
+    retinopathy)'
+  - 'Hematologic: Microangiopathic hemolytic anemia (MAHA), thrombocytopenia'
+  - 'Risk factors: Medication noncompliance, chronic kidney disease, stimulant use
+    (cocaine, amphetamines)'
+  - Chest pain if cardiac ischemia or dissection
+  - Dyspnea if pulmonary edema or heart failure
+  - Nausea, vomiting if increased intracranial pressure
   clinical_pearls:
   - Emergency = end-organ damage (needs IV meds, ICU)
   - Urgency = high BP alone (oral meds, outpatient follow-up)
@@ -828,13 +835,19 @@ rules:
   label: Acute Pericarditis
   presentations:
   - Sharp, pleuritic chest pain (90%), worse with lying flat, better leaning forward
-  - Pain may radiate to trapezius ridge (pathognomonic)
-  - Pericardial friction rub on auscultation (30%, best heard at left sternal border)
-  - 'ECG: Diffuse ST elevation (in multiple leads), PR depression'
-  - Fever, malaise common if infectious etiology
+  - Pain may radiate to trapezius ridge (pathognomonic for pericarditis)
+  - Pericardial friction rub on auscultation (30%, best heard at left sternal border,
+    patient leaning forward)
+  - 'ECG: Diffuse ST elevation in multiple leads (unlike regional in MI), PR depression'
+  - Fever, malaise common if infectious etiology (viral most common)
   - 'Most common causes: Viral (coxsackie, echovirus), post-MI (Dressler syndrome),
-    uremia, autoimmune'
-  - Pericardial effusion may be present (seen on echo)
+    uremia, autoimmune (SLE, RA)'
+  - Pericardial effusion may be present (seen on echocardiogram)
+  - Dyspnea if large effusion or associated myocarditis
+  - Tachycardia common (compensatory or inflammatory response)
+  - Positional symptoms - relieved by sitting up and leaning forward
+  - May have prodromal viral illness (URI symptoms 1-2 weeks prior)
+  - Risk of progression to cardiac tamponade if large effusion develops
   clinical_pearls:
   - 'ECG: Diffuse ST elevation + PR depression (unlike MI: regional ST elevation)'
   - Troponin may be mildly elevated (myopericarditis) - doesn't mean ACS
