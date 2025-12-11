@@ -12,9 +12,8 @@ databases:
   - name: realdiag-test-database
     databaseName: realdiag_test
     user: realdiag_test_user
-    plan: free  # Free PostgreSQL database
-    region: ohio
-    ipAllowList: []  # Only accessible from Render services
+    plan: free
+    ipAllowList: []
 
 services:
 
