@@ -8,28 +8,32 @@ FATAL: MaxClientsInSessionMode: max clients reached - in Session mode max client
 
 ## Root Cause
 - **Supabase free tier** has strict connection limits in **Session mode pooler**
-- **2 gunicorn workers** × **5 pool_size** × **10 max_overflow** = up to **30 connections**
-- Supabase Session mode limit: typically **15 connections** on free tier
+- Even with reduced pool settings, connection limits were exceeded
+- Session mode: ~15 connection limit, one connection per client session
 - Result: Connection pool exhaustion and startup failure
 
-## Immediate Fix Applied ✅
+## Current Fix Applied ✅
 
-### 1. Reduced Connection Pool (database.py)
+### NullPool - No Connection Pooling (database.py)
 ```python
-pool_size=2,          # Reduced from 5 to 2 per worker
-max_overflow=3,       # Reduced from 10 to 3
-pool_recycle=300,     # Recycle connections every 5 min
-pool_timeout=30,      # Add connection timeout
+poolclass=NullPool,  # Creates new connection per request, closes immediately
 ```
 
-### 2. Reduced Workers (Dockerfile)
-```
--w 1  # Reduced from 2 to 1 worker
-```
+**How it works:**
+- No persistent connections maintained
+- New connection created for each database operation
+- Connection closed immediately after use
+- Maximum possible connections: Number of concurrent requests (typically < 5)
 
-**New max connections:** 1 worker × (2 pool + 3 overflow) = **5 connections max**
+**Trade-offs:**
+- ✅ **Reliable:** Never exceeds connection limits
+- ✅ **Simple:** No pool management complexity
+- ⚠️ **Slower:** Connection overhead on each request (~50-100ms)
+- ⚠️ **Less efficient:** No connection reuse
 
-## Better Long-Term Solution: Transaction Mode Pooler
+**Status:** This will allow deployment to succeed on Supabase free tier.
+
+## RECOMMENDED: Switch to Transaction Mode Pooler 🎯
 
 Supabase offers two pooler modes:
 - **Session mode** (current): Low connection limit, one connection per client session
