@@ -136,12 +136,18 @@ rules:
 - id: PULM-PE
   label: Pulmonary Embolism
   presentations:
-  - Sudden onset dyspnea
-  - Pleuritic chest pain
-  - Tachycardia and tachypnea
-  - Hemoptysis
-  - Lower extremity swelling or pain
-  - Risk factors (surgery, immobility, malignancy)
+  - Acute dyspnea (most common symptom, 73%)
+  - Pleuritic chest pain (sharp, worse with inspiration, 44%)
+  - Tachypnea (respiratory rate >20 breaths/min)
+  - Tachycardia (heart rate >100 bpm)
+  - Hypoxia (SpO2 <95%) - but normal O2 doesn't rule out PE
+  - Cough
+  - Hemoptysis (less common, 8%)
+  - Lower extremity swelling or pain (DVT symptoms)
+  - Syncope or presyncope (suggests massive PE)
+  - Hypotension or shock if massive PE (5% of cases)
+  - 'Risk factors: Recent surgery, immobilization >3 days, malignancy, pregnancy/postpartum, oral contraceptives, thrombophilia'
+  - Sudden onset of symptoms (seconds to minutes)
   clinical_pearls:
   - 'Wells score guides testing: Low risk + negative D-dimer rules out PE (high NPV)'
   - 'Massive PE: Hypotension (SBP <90) or cardiac arrest - consider thrombolytics'
