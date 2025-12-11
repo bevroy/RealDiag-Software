@@ -3,17 +3,11 @@
 # 
 # This configuration deploys:
 # - Backend API with test mode enabled
-# - PostgreSQL database (free tier)
-# - Frontend static site
+# - Uses EXISTING production database (shared with production)
 #
 # All users automatically get ENTERPRISE access in test mode
 
-databases:
-  - name: realdiag-test-database
-    databaseName: realdiag_test
-    user: realdiag_test_user
-    plan: free
-    ipAllowList: []
+# No new database - using existing realdiag-database from production
 
 services:
 
@@ -43,10 +37,11 @@ services:
       - key: SUBSCRIPTION_CHECK_ENABLED
         value: false
       
-      # Database
+      # Database - Using existing production database
+      # Both test and production will share the same database
       - key: DATABASE_URL
         fromDatabase:
-          name: realdiag-test-database
+          name: realdiag-database
           property: connectionString
       
       # Security (relaxed for testing)
