@@ -127,6 +127,54 @@ class HomeopathyService:
             "gad": "anxiety",
             "stress": "anxiety",
             "nervousness": "anxiety",
+            
+            # Endocrine/metabolic (map to most relevant symptom)
+            "diabetes": "nausea_vomiting",  # GI symptoms common in DM
+            "diabetes_mellitus": "nausea_vomiting",
+            "type_1_diabetes": "nausea_vomiting",
+            "type_2_diabetes": "nausea_vomiting",
+            "type_2_diabetes_mellitus": "nausea_vomiting",
+            "hypoglycemia": "anxiety",  # Anxiety/tremor common
+            "hypothyroidism": "fever",  # Fatigue/lethargy
+            "hyperthyroidism": "anxiety",  # Anxiety/palpitations
+            "thyroid_disorder": "anxiety",
+            
+            # More respiratory
+            "pneumonia_community_acquired": "cough",
+            "acute_bronchiolitis": "cough",
+            "croup": "cough",
+            "pertussis": "cough",
+            "whooping_cough": "cough",
+            "tuberculosis": "cough",
+            "tb": "cough",
+            "pleural_effusion": "dyspnea",
+            "pulmonary_edema": "dyspnea",
+            "congestive_heart_failure": "dyspnea",
+            "chf": "dyspnea",
+            "heart_failure": "dyspnea",
+            
+            # More GI
+            "peptic_ulcer": "abdominal_pain",
+            "duodenal_ulcer": "abdominal_pain",
+            "gastric_ulcer": "abdominal_pain",
+            "pancreatitis": "abdominal_pain",
+            "appendicitis": "abdominal_pain",
+            "cholecystitis": "abdominal_pain",
+            "gallstones": "abdominal_pain",
+            "inflammatory_bowel_disease": "abdominal_pain",
+            "crohns_disease": "abdominal_pain",
+            "ulcerative_colitis": "abdominal_pain",
+            
+            # Neurological
+            "stroke": "headache",
+            "cva": "headache",
+            "cerebrovascular_accident": "headache",
+            "tia": "headache",
+            "transient_ischemic_attack": "headache",
+            "seizure": "headache",
+            "epilepsy": "headache",
+            "meningitis": "headache",
+            "encephalitis": "headache",
         }
     
     def _initialize_remedy_database(self) -> Dict[str, Dict[str, Any]]:
