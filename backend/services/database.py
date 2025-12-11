@@ -76,15 +76,17 @@ else:
         connect_args = {}
         logger.info(f"🔧 Using psycopg2 with sslmode=require in URL")
     
-    # SQLAlchemy engine with NullPool for Supabase Session mode
-    # NullPool creates a new connection for each request and closes it immediately
-    # This prevents connection exhaustion on Supabase free tier strict limits
-    # Trade-off: Slightly slower (connection overhead) but reliable on free tier
+    # SQLAlchemy engine optimized for Supabase Transaction mode pooler
+    # Transaction mode has 6000+ connection limit vs 15 in Session mode
+    # With 2 workers: 2 × (5 pool + 10 overflow) = max 30 connections (well under limit)
     engine = create_engine(
         db_url,
         connect_args=connect_args,
-        poolclass=NullPool,      # No connection pooling - new connection per request
-        pool_pre_ping=True,
+        poolclass=QueuePool,
+        pool_size=5,              # Connections per worker
+        max_overflow=10,          # Additional connections when busy
+        pool_pre_ping=True,       # Verify connections are alive
+        pool_recycle=3600,        # Recycle connections every hour
         echo=False
     )
     

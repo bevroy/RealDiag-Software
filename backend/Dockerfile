@@ -22,6 +22,5 @@ RUN apt-get update \
 EXPOSE 8000
 	# Use gunicorn with the Uvicorn worker for production. Wrap in a shell so ${PORT} is expanded at runtime
 	# (Render provides $PORT). Fall back to 8000 when not set. Log to stdout/stderr so platform logs capture output.
-	# Using 1 worker to minimize database connections (Supabase free tier has low limits)
-	# Can increase to 2 workers if using Transaction mode pooler or paid Supabase tier
-	CMD ["sh", "-c", "exec gunicorn -k uvicorn.workers.UvicornWorker -w 1 backend.main:app --bind 0.0.0.0:${PORT:-8000} --timeout 120 --access-logfile - --error-logfile -"]
+	# Using 2 workers for better concurrency (Transaction mode pooler supports high connection count)
+	CMD ["sh", "-c", "exec gunicorn -k uvicorn.workers.UvicornWorker -w 2 backend.main:app --bind 0.0.0.0:${PORT:-8000} --timeout 120 --access-logfile - --error-logfile -"]
