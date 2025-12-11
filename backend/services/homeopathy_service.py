@@ -30,58 +30,113 @@ class HomeopathyService:
     
     def __init__(self):
         self.remedy_database = self._initialize_remedy_database()
+        self.condition_aliases = self._initialize_condition_aliases()
+    
+    def _initialize_condition_aliases(self) -> Dict[str, str]:
+        """
+        Map disease diagnosis names to symptom keys in the remedy database.
+        This allows the API to accept both symptom descriptions and diagnostic names.
+        """
+        return {
+            # Cardiac conditions → chest_pain
+            "acute_coronary_syndrome": "chest_pain",
+            "myocardial_infarction": "chest_pain",
+            "angina": "chest_pain",
+            "heart_attack": "chest_pain",
+            "cardiac_ischemia": "chest_pain",
+            "unstable_angina": "chest_pain",
+            
+            # Neurological conditions → headache
+            "migraine": "headache",
+            "tension_headache": "headache",
+            "cluster_headache": "headache",
+            "cephalalgia": "headache",
+            
+            # Vertigo/dizziness → vertigo
+            "dizziness": "vertigo",
+            "benign_positional_vertigo": "vertigo",
+            "bppv": "vertigo",
+            
+            # Respiratory conditions → cough
+            "bronchitis": "cough",
+            "acute_bronchitis": "cough",
+            "chronic_bronchitis": "cough",
+            "pneumonia": "cough",
+            "community_acquired_pneumonia": "cough",
+            "upper_respiratory_infection": "cough",
+            "uri": "cough",
+            "common_cold": "cough",
+            "influenza": "cough",
+            "flu": "cough",
+            "tracheitis": "cough",
+            
+            # Respiratory conditions → dyspnea
+            "shortness_of_breath": "dyspnea",
+            "asthma": "dyspnea",
+            "copd": "dyspnea",
+            "chronic_obstructive_pulmonary_disease": "dyspnea",
+            "wheezing": "dyspnea",
+            "respiratory_distress": "dyspnea",
+            
+            # GI conditions → nausea_vomiting
+            "gastritis": "nausea_vomiting",
+            "gastroenteritis": "nausea_vomiting",
+            "food_poisoning": "nausea_vomiting",
+            "morning_sickness": "nausea_vomiting",
+            "hyperemesis": "nausea_vomiting",
+            
+            # GI conditions → diarrhea
+            "acute_diarrhea": "diarrhea",
+            "travelers_diarrhea": "diarrhea",
+            "infectious_diarrhea": "diarrhea",
+            
+            # GI conditions → abdominal_pain
+            "colitis": "abdominal_pain",
+            "ibs": "abdominal_pain",
+            "irritable_bowel_syndrome": "abdominal_pain",
+            "gerd": "abdominal_pain",
+            "acid_reflux": "abdominal_pain",
+            "stomach_pain": "abdominal_pain",
+            "gastric_pain": "abdominal_pain",
+            
+            # Fever conditions
+            "pyrexia": "fever",
+            "febrile_illness": "fever",
+            "high_fever": "fever",
+            
+            # Musculoskeletal → joint_pain
+            "arthritis": "joint_pain",
+            "osteoarthritis": "joint_pain",
+            "rheumatoid_arthritis": "joint_pain",
+            "arthralgia": "joint_pain",
+            "joint_stiffness": "joint_pain",
+            "polyarthralgia": "joint_pain",
+            
+            # Musculoskeletal → back_pain
+            "low_back_pain": "back_pain",
+            "lumbago": "back_pain",
+            "sciatica": "back_pain",
+            "spinal_pain": "back_pain",
+            "dorsalgia": "back_pain",
+            
+            # Mental health → anxiety
+            "anxiety_disorder": "anxiety",
+            "panic_disorder": "anxiety",
+            "panic_attack": "anxiety",
+            "generalized_anxiety_disorder": "anxiety",
+            "gad": "anxiety",
+            "stress": "anxiety",
+            "nervousness": "anxiety",
+        }
     
     def _initialize_remedy_database(self) -> Dict[str, Dict[str, Any]]:
         """
         Initialize remedy database based on Boericke's Materia Medica and Kent's Repertory.
         Organized by symptom patterns and clinical conditions.
         """
-        # Define cardiac remedies (reused for multiple conditions)
-        cardiac_remedies = [
-            {
-                "name": "Aconitum napellus",
-                "common_name": "Monkshood",
-                "potency": "30C",
-                "indications": ["Sudden onset chest pain", "Anxiety with chest pain", "Fear of death", "Palpitations"],
-                "modalities": "Worse: Evening, night, warm room. Better: Open air",
-                "constitution": "Acute, sudden onset conditions with anxiety"
-            },
-            {
-                "name": "Cactus grandiflorus",
-                "common_name": "Night-blooming Cereus",
-                "potency": "30C",
-                "indications": ["Constriction around chest", "Heart feels gripped", "Angina-like symptoms"],
-                "modalities": "Worse: Lying on left side, 11am and 11pm",
-                "constitution": "Cardiac affections with constriction"
-            },
-            {
-                "name": "Arnica montana",
-                "common_name": "Leopard's Bane",
-                "potency": "30C",
-                "indications": ["Chest pain after injury or exertion", "Bruised feeling", "Fear of being touched"],
-                "modalities": "Worse: Touch, motion. Better: Lying down",
-                "constitution": "Trauma, overexertion"
-            }
-        ]
-        
         return {
-            # Cardiovascular conditions - symptoms
+            # Cardiovascular conditions
             "chest_pain": {
-                "remedies": cardiac_remedies
-            },
-            
-            # Cardiovascular conditions - diagnoses (aliases)
-            "acute_coronary_syndrome": {
-                "remedies": cardiac_remedies
-            },
-            "myocardial_infarction": {
-                "remedies": cardiac_remedies
-            },
-            "angina": {
-                "remedies": cardiac_remedies
-            },
-            "heart_attack": {
-                "remedies": cardiac_remedies
                 "remedies": [
                     {
                         "name": "Aconitum napellus",
@@ -110,7 +165,7 @@ class HomeopathyService:
                 ]
             },
             
-            # Neurological conditions - symptoms
+            # Neurological conditions
             "headache": {
                 "remedies": [
                     {
@@ -140,86 +195,6 @@ class HomeopathyService:
                 ]
             },
             
-            # Headache/Migraine diagnoses (aliases)
-            "migraine": {
-                "remedies": [
-                    {
-                        "name": "Belladonna",
-                        "common_name": "Deadly Nightshade",
-                        "potency": "30C",
-                        "indications": ["Throbbing headache", "Sudden violent onset", "Red face", "Photophobia"],
-                        "modalities": "Worse: Light, noise, jarring. Better: Dark room, pressure",
-                        "constitution": "Acute inflammatory conditions"
-                    },
-                    {
-                        "name": "Gelsemium sempervirens",
-                        "common_name": "Yellow Jasmine",
-                        "potency": "30C",
-                        "indications": ["Occipital headache", "Heavy eyelids", "Drowsiness", "Visual disturbances"],
-                        "modalities": "Worse: Heat, humidity, anticipation. Better: Urination",
-                        "constitution": "Nervous exhaustion, anticipatory anxiety"
-                    },
-                    {
-                        "name": "Natrum muriaticum",
-                        "common_name": "Table Salt",
-                        "potency": "30C",
-                        "indications": ["Blinding headache", "Worse from sun", "Migraine with visual aura", "Numbness"],
-                        "modalities": "Worse: 10-11am, sun, consolation. Better: Open air, cold applications",
-                        "constitution": "Introverted, sensitive to criticism"
-                    }
-                ]
-            },
-            "tension_headache": {
-                "remedies": [
-                    {
-                        "name": "Belladonna",
-                        "common_name": "Deadly Nightshade",
-                        "potency": "30C",
-                        "indications": ["Throbbing headache", "Sudden violent onset", "Red face", "Photophobia"],
-                        "modalities": "Worse: Light, noise, jarring. Better: Dark room, pressure",
-                        "constitution": "Acute inflammatory conditions"
-                    },
-                    {
-                        "name": "Gelsemium sempervirens",
-                        "common_name": "Yellow Jasmine",
-                        "potency": "30C",
-                        "indications": ["Occipital headache", "Heavy eyelids", "Drowsiness", "Visual disturbances"],
-                        "modalities": "Worse: Heat, humidity, anticipation. Better: Urination",
-                        "constitution": "Nervous exhaustion, anticipatory anxiety"
-                    },
-                    {
-                        "name": "Natrum muriaticum",
-                        "common_name": "Table Salt",
-                        "potency": "30C",
-                        "indications": ["Blinding headache", "Worse from sun", "Migraine with visual aura", "Numbness"],
-                        "modalities": "Worse: 10-11am, sun, consolation. Better: Open air, cold applications",
-                        "constitution": "Introverted, sensitive to criticism"
-                    }
-                ]
-            },
-            
-            # Vertigo/Dizziness diagnoses (aliases)
-            "dizziness": {
-                "remedies": [
-                    {
-                        "name": "Conium maculatum",
-                        "common_name": "Poison Hemlock",
-                        "potency": "30C",
-                        "indications": ["Vertigo on turning in bed", "Worse lying down", "Objects seem to move"],
-                        "modalities": "Worse: Turning head, lying down, light. Better: Motion, pressure",
-                        "constitution": "Elderly, debility, trembling"
-                    },
-                    {
-                        "name": "Cocculus indicus",
-                        "common_name": "Indian Cockle",
-                        "potency": "30C",
-                        "indications": ["Vertigo with nausea", "Motion sickness", "Worse rising from lying"],
-                        "modalities": "Worse: Loss of sleep, motion, open air. Better: Lying quietly",
-                        "constitution": "Travel sickness, sleep deprivation"
-                    }
-                ]
-            },
-            
             "vertigo": {
                 "remedies": [
                     {
@@ -241,8 +216,8 @@ class HomeopathyService:
                 ]
             },
             
-            # Respiratory conditions - symptoms
-            respiratory_cough_remedies = {
+            # Respiratory conditions
+            "cough": {
                 "remedies": [
                     {
                         "name": "Bryonia alba",
@@ -269,22 +244,9 @@ class HomeopathyService:
                         "constitution": "Tall, slender, sensitive, anxious"
                     }
                 ]
-            }
+            },
             
-            # Add respiratory keys
-            self.remedy_database["cough"] = respiratory_cough_remedies
-            self.remedy_database["bronchitis"] = respiratory_cough_remedies
-            self.remedy_database["acute_bronchitis"] = respiratory_cough_remedies
-            self.remedy_database["chronic_bronchitis"] = respiratory_cough_remedies
-            self.remedy_database["pneumonia"] = respiratory_cough_remedies
-            self.remedy_database["community_acquired_pneumonia"] = respiratory_cough_remedies
-            self.remedy_database["upper_respiratory_infection"] = respiratory_cough_remedies
-            self.remedy_database["uri"] = respiratory_cough_remedies
-            self.remedy_database["common_cold"] = respiratory_cough_remedies
-            self.remedy_database["influenza"] = respiratory_cough_remedies
-            self.remedy_database["flu"] = respiratory_cough_remedies
-            
-            respiratory_dyspnea_remedies = {
+            "dyspnea": {
                 "remedies": [
                     {
                         "name": "Arsenicum album",
@@ -303,18 +265,10 @@ class HomeopathyService:
                         "constitution": "Weakness, rattling mucus"
                     }
                 ]
-            }
+            },
             
-            # Add dyspnea keys
-            self.remedy_database["dyspnea"] = respiratory_dyspnea_remedies
-            self.remedy_database["shortness_of_breath"] = respiratory_dyspnea_remedies
-            self.remedy_database["asthma"] = respiratory_dyspnea_remedies
-            self.remedy_database["copd"] = respiratory_dyspnea_remedies
-            self.remedy_database["chronic_obstructive_pulmonary_disease"] = respiratory_dyspnea_remedies
-            self.remedy_database["wheezing"] = respiratory_dyspnea_remedies
-            
-            # Gastrointestinal conditions - symptoms
-            gi_nausea_remedies = {
+            # Gastrointestinal conditions
+            "nausea_vomiting": {
                 "remedies": [
                     {
                         "name": "Ipecacuanha",
@@ -333,17 +287,9 @@ class HomeopathyService:
                         "constitution": "Type A personality, overworked, stimulant abuse"
                     }
                 ]
-            }
+            },
             
-            # Add GI nausea keys
-            self.remedy_database["nausea_vomiting"] = gi_nausea_remedies
-            self.remedy_database["nausea"] = gi_nausea_remedies
-            self.remedy_database["vomiting"] = gi_nausea_remedies
-            self.remedy_database["gastritis"] = gi_nausea_remedies
-            self.remedy_database["gastroenteritis"] = gi_nausea_remedies
-            self.remedy_database["food_poisoning"] = gi_nausea_remedies
-            
-            gi_diarrhea_remedies = {
+            "diarrhea": {
                 "remedies": [
                     {
                         "name": "Podophyllum peltatum",
@@ -362,15 +308,9 @@ class HomeopathyService:
                         "constitution": "Urgent, explosive diarrhea"
                     }
                 ]
-            }
+            },
             
-            # Add diarrhea keys
-            self.remedy_database["diarrhea"] = gi_diarrhea_remedies
-            self.remedy_database["acute_diarrhea"] = gi_diarrhea_remedies
-            self.remedy_database["travelers_diarrhea"] = gi_diarrhea_remedies
-            self.remedy_database["infectious_diarrhea"] = gi_diarrhea_remedies
-            
-            gi_abdominal_pain_remedies = {
+            "abdominal_pain": {
                 "remedies": [
                     {
                         "name": "Colocynthis",
@@ -389,20 +329,10 @@ class HomeopathyService:
                         "constitution": "Cramping, spasmodic pains"
                     }
                 ]
-            }
+            },
             
-            # Add abdominal pain keys
-            self.remedy_database["abdominal_pain"] = gi_abdominal_pain_remedies
-            self.remedy_database["stomach_pain"] = gi_abdominal_pain_remedies
-            self.remedy_database["colitis"] = gi_abdominal_pain_remedies
-            self.remedy_database["ibs"] = gi_abdominal_pain_remedies
-            self.remedy_database["irritable_bowel_syndrome"] = gi_abdominal_pain_remedies
-            self.remedy_database["cramps"] = gi_abdominal_pain_remedies
-            self.remedy_database["gerd"] = gi_abdominal_pain_remedies
-            self.remedy_database["acid_reflux"] = gi_abdominal_pain_remedies
-            
-            # Infectious/inflammatory - symptoms
-            fever_remedies = {
+            # Infectious/inflammatory
+            "fever": {
                 "remedies": [
                     {
                         "name": "Aconitum napellus",
@@ -421,16 +351,10 @@ class HomeopathyService:
                         "constitution": "First stage inflammation, vague symptoms"
                     }
                 ]
-            }
+            },
             
-            # Add fever keys
-            self.remedy_database["fever"] = fever_remedies
-            self.remedy_database["high_fever"] = fever_remedies
-            self.remedy_database["pyrexia"] = fever_remedies
-            self.remedy_database["febrile_illness"] = fever_remedies
-            
-            # Musculoskeletal - symptoms
-            joint_pain_remedies = {
+            # Musculoskeletal
+            "joint_pain": {
                 "remedies": [
                     {
                         "name": "Rhus toxicodendron",
@@ -449,17 +373,9 @@ class HomeopathyService:
                         "constitution": "Wants to be still, irritable"
                     }
                 ]
-            }
+            },
             
-            # Add joint pain keys
-            self.remedy_database["joint_pain"] = joint_pain_remedies
-            self.remedy_database["arthritis"] = joint_pain_remedies
-            self.remedy_database["osteoarthritis"] = joint_pain_remedies
-            self.remedy_database["rheumatoid_arthritis"] = joint_pain_remedies
-            self.remedy_database["arthralgia"] = joint_pain_remedies
-            self.remedy_database["joint_stiffness"] = joint_pain_remedies
-            
-            back_pain_remedies = {
+            "back_pain": {
                 "remedies": [
                     {
                         "name": "Arnica montana",
@@ -478,17 +394,10 @@ class HomeopathyService:
                         "constitution": "Nerve injuries, puncture wounds"
                     }
                 ]
-            }
+            },
             
-            # Add back pain keys
-            self.remedy_database["back_pain"] = back_pain_remedies
-            self.remedy_database["low_back_pain"] = back_pain_remedies
-            self.remedy_database["lumbago"] = back_pain_remedies
-            self.remedy_database["sciatica"] = back_pain_remedies
-            self.remedy_database["spinal_pain"] = back_pain_remedies
-            
-            # Anxiety/Mental - symptoms
-            anxiety_remedies = {
+            # Anxiety/Mental
+            "anxiety": {
                 "remedies": [
                     {
                         "name": "Argentum nitricum",
@@ -508,16 +417,6 @@ class HomeopathyService:
                     }
                 ]
             }
-            
-            # Add anxiety keys
-            self.remedy_database["anxiety"] = anxiety_remedies
-            self.remedy_database["anxiety_disorder"] = anxiety_remedies
-            self.remedy_database["panic_disorder"] = anxiety_remedies
-            self.remedy_database["panic_attack"] = anxiety_remedies
-            self.remedy_database["generalized_anxiety_disorder"] = anxiety_remedies
-            self.remedy_database["gad"] = anxiety_remedies
-            self.remedy_database["stress"] = anxiety_remedies
-            self.remedy_database["nervousness"] = anxiety_remedies
         }
     
     def get_remedies_for_condition(self, condition: str) -> List[HomeopathicRemedy]:
@@ -533,7 +432,11 @@ class HomeopathyService:
         # Normalize condition name
         condition_key = condition.lower().replace(" ", "_").replace("-", "_")
         
-        # Try exact match first
+        # Check if this is an alias for another condition
+        if condition_key in self.condition_aliases:
+            condition_key = self.condition_aliases[condition_key]
+        
+        # Try exact match
         if condition_key in self.remedy_database:
             remedies_data = self.remedy_database[condition_key]["remedies"]
             return [HomeopathicRemedy(**remedy) for remedy in remedies_data]
