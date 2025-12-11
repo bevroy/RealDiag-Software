@@ -76,15 +76,18 @@ else:
         connect_args = {}
         logger.info(f"🔧 Using psycopg2 with sslmode=require in URL")
     
-    # SQLAlchemy engine with standard connection pooling
+    # SQLAlchemy engine with reduced pooling for Supabase/serverless
+    # Supabase free tier has strict connection limits in Session mode
+    # With 2 gunicorn workers: 2 workers × (2 pool + 3 overflow) = max 10 connections
     engine = create_engine(
         db_url,
         connect_args=connect_args,
         poolclass=QueuePool,
-        pool_size=5,
-        max_overflow=10,
+        pool_size=2,          # Reduced from 5 to 2 per worker
+        max_overflow=3,       # Reduced from 10 to 3
         pool_pre_ping=True,
-        pool_recycle=3600,
+        pool_recycle=300,     # Recycle connections every 5 min (was 3600)
+        pool_timeout=30,      # Add connection timeout
         echo=False
     )
     
