@@ -132,15 +132,27 @@ export default function SourcesPage() {
 
   // Collect all unique citations across all rules (memoized)
   const allCitations = useMemo(() => {
-    const citationsSet = new Set();
-    sources.forEach((fam) => {
-      fam.rules.forEach((rule) => {
-        if (rule.citations && Array.isArray(rule.citations)) {
-          rule.citations.forEach((citation) => citationsSet.add(citation));
-        }
+    try {
+      const citationsSet = new Set();
+      if (!sources || !Array.isArray(sources)) return [];
+      
+      sources.forEach((fam) => {
+        if (!fam || !fam.rules || !Array.isArray(fam.rules)) return;
+        fam.rules.forEach((rule) => {
+          if (rule && rule.citations && Array.isArray(rule.citations)) {
+            rule.citations.forEach((citation) => {
+              if (citation && typeof citation === 'string') {
+                citationsSet.add(citation);
+              }
+            });
+          }
+        });
       });
-    });
-    return Array.from(citationsSet);
+      return Array.from(citationsSet);
+    } catch (err) {
+      console.error('Error processing citations:', err);
+      return [];
+    }
   }, [sources]);
 
   return (
@@ -354,7 +366,7 @@ export default function SourcesPage() {
               </div>
             )}
 
-            {!loading && !error && (
+            {!loading && !error && sources && sources.length > 0 && (
               <>
                 {/* Family-Level Sources */}
                 <section style={{ marginBottom: 48 }}>
