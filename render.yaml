@@ -76,24 +76,7 @@ services:
       - key: LOG_LEVEL
         value: DEBUG
 
-  # Frontend Static Site (Test Mode)  
-  - type: web
-    name: realdiag-test-frontend
-    env: static
-    branch: main
-    plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/out
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: NODE_VERSION
-        value: "20"
-      - key: NEXT_PUBLIC_ENVIRONMENT
-        value: test
-      - key: NEXT_PUBLIC_API_BASE
-        value: https://realdiag-test-backend.onrender.com
-      - key: NEXT_PUBLIC_SHOW_TEST_BANNER
-        value: true
+  # Frontend Static Site (Test Mode) - REMOVED
+  # Static sites require paid plan on Render ($7/month)
+  # Host frontend on Vercel or Netlify for free instead
+  # Then point NEXT_PUBLIC_API_BASE to: https://realdiag-test-backend.onrender.com
