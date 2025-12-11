@@ -1,4 +1,7 @@
 
+# RealDiag Backend API - Version 1.0.1
+# Updated 2025-12-11: Comprehensive medical presentations and homeopathy aliases
+
 import os
 import re
 from fastapi import FastAPI, Request
