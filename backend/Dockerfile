@@ -1,6 +1,11 @@
 
 FROM python:3.11-slim
 WORKDIR /app
+
+# Cache-busting: Force rebuild when rules change
+# Update this timestamp when YAML rules are updated to bypass Docker cache
+ENV RULES_VERSION=2025-12-11-rules-update
+
 COPY backend /app/backend
 # Copy shared top-level modules/config used by the backend
 COPY config.py /app/config.py
