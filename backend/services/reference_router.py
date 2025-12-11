@@ -119,10 +119,29 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
 @limiter.limit("100/minute") if LIMITER_AVAILABLE else lambda f: f
 def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
   """
-  Return endocrinology decision trees.
+  Return endocrinology clinical rules with presentations.
   Rate limit: 100 requests per minute per IP.
   """
-  # Use the new trees-based function instead of old rules file
+  # Load from rules file (has complete presentation data)
+  rules_file = RULES_PATH / "endocrinology.yml"
+  
+  if rules_file.exists():
+    try:
+      with rules_file.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+        rules = data.get("rules", [])
+        
+        return {
+          "family": "endocrinology",
+          "version": data.get("version", "2.0.0"),
+          "source": data.get("source", "Clinical Practice Guidelines"),
+          "count": len(rules),
+          "rules": rules,
+        }
+    except Exception as e:
+      print(f"Error loading endocrinology rules: {e}")
+  
+  # Fallback to trees if rules file doesn't exist
   trees = _load_trees_by_family("endocrinology")
   return {
     "family": "endocrinology",
