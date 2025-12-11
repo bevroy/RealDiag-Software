@@ -1,45 +1,99 @@
-# Render infrastructure-as-code manifest to deploy the backend service.
-# See: https://render.com/docs/deploy-anything#render-yaml
+# Render Blueprint for RealDiag TEST Environment
+# Deploy with: Render Dashboard → New Blueprint → Select this file
+# 
+# This configuration deploys:
+# - Backend API with test mode enabled
+# - PostgreSQL database (free tier)
+# - Frontend static site
 #
-# This describes a Docker-backed web service that builds from the repo's
-# `backend/Dockerfile` and runs the FastAPI app. Connect your GitHub repo to
-# Render and the `render.yaml` will allow Render to create/update the service.
+# All users automatically get ENTERPRISE access in test mode
 
 databases:
-  - name: realdiag-database
-    databaseName: realdiag_prod
-    user: realdiag_user
-    plan: free  # 90-day free trial, then expires (change to 'starter' for $7/month paid plan)
+  - name: realdiag-test-database
+    databaseName: realdiag_test
+    user: realdiag_test_user
+    plan: free  # Free PostgreSQL database
     region: ohio
     ipAllowList: []  # Only accessible from Render services
 
 services:
 
-  # Backend Web Service
+  # Backend Web Service (Test Mode)
   - type: web
-    name: realdiag-backend
+    name: realdiag-test-backend
     env: docker
     branch: main
     plan: free
     repo: https://github.com/bevroy/RealDiag-Software
     dockerfilePath: backend/Dockerfile
-    # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
     healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: PORT
         value: 8000
+      
+      # TEST MODE CONFIGURATION
       - key: ENVIRONMENT
-        value: production
-      - key: LOG_LEVEL
-        value: INFO
+        value: test
+      - key: FREE_ACCESS_TESTING
+        value: true
+      - key: BYPASS_SUBSCRIPTION_CHECKS
+        value: true
+      - key: RATE_LIMIT_ENABLED
+        value: false
+      - key: SUBSCRIPTION_CHECK_ENABLED
+        value: false
+      
+      # Database
       - key: DATABASE_URL
         fromDatabase:
-          name: realdiag-database
+          name: realdiag-test-database
           property: connectionString
-      - key: FHIR_BASE_URL
-        value: http://localhost:8080/fhir  # UPDATE THIS with your EMR FHIR URL
-      - key: FHIR_AUTH_TOKEN
-        sync: false  # Set this securely in Render dashboard
+      
+      # Security (relaxed for testing)
+      - key: SECURITY_ENABLED
+        value: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      
+      # CORS (allow all origins for testing)
+      - key: CORS_ORIGINS
+        value: "*"
       - key: PREVIEW_ORIGIN_REGEX
-        value: ^https?://(?:localhost(?::\\d+)?|.*\\.netlify\\.app|www\\.realdiag\\.com)$
+        value: ^https?://.*$
+      
+      # Optional: Disable external services
+      - key: EMAIL_ENABLED
+        value: false
+      - key: STRIPE_ENABLED
+        value: false
+      - key: FHIR_ENABLED
+        value: false
+      
+      # Logging
+      - key: LOG_LEVEL
+        value: DEBUG
+
+  # Frontend Static Site (Test Mode)  
+  - type: web
+    name: realdiag-test-frontend
+    env: static
+    branch: main
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/out
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXT_PUBLIC_ENVIRONMENT
+        value: test
+      - key: NEXT_PUBLIC_API_BASE
+        value: https://realdiag-test-backend.onrender.com
+      - key: NEXT_PUBLIC_SHOW_TEST_BANNER
+        value: true
