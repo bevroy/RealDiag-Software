@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Cache-busting: Force rebuild when rules change
 # Update this timestamp when YAML rules are updated to bypass Docker cache
-ENV RULES_VERSION=2025-12-11-rules-update
+ENV RULES_VERSION=2025-12-11-transaction-mode-ready
 
 COPY backend /app/backend
 # Copy shared top-level modules/config used by the backend
