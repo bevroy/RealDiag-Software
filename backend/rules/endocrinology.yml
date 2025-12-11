@@ -6,8 +6,18 @@ rules:
 - id: ENDO-DM1
   label: Type 1 diabetes mellitus
   presentations:
-  - polyuria, polydipsia, weight loss
-  - insulin deficiency, often younger onset
+  - Polyuria (excessive urination, including nocturia)
+  - Polydipsia (excessive thirst)
+  - Unintentional weight loss despite increased appetite (polyphagia)
+  - Fatigue and weakness
+  - Blurred vision
+  - Recurrent infections (candidal, urinary, skin)
+  - Slow wound healing
+  - Typically presents in children, adolescents, or young adults (<30 years)
+  - May present with diabetic ketoacidosis (DKA) as first manifestation
+  - Acute onset of symptoms (days to weeks)
+  - Family history of autoimmune diseases
+  - No obesity (unlike Type 2 DM)
   clinical_pearls:
   - Autoimmune destruction of pancreatic beta cells - 90% loss before symptoms
   - 'Honeymoon period: Temporary insulin independence after diagnosis (weeks to months)'
@@ -40,8 +50,18 @@ rules:
 - id: ENDO-DM2
   label: Type 2 diabetes mellitus
   presentations:
-  - hyperglycemia in adults with insulin resistance
-  - may be asymptomatic or present with polyuria/polydipsia
+  - Often asymptomatic (found on routine screening)
+  - Polyuria and polydipsia (if symptomatic)
+  - Fatigue and lethargy
+  - Blurred vision
+  - Recurrent infections (yeast, urinary, skin)
+  - Slow wound healing
+  - Acanthosis nigricans (dark velvety skin in neck, axilla, groin)
+  - Typically adults >45 years, but increasing in younger patients with obesity
+  - Gradual onset of symptoms (months to years)
+  - Strong family history (genetic component)
+  - Associated with obesity, metabolic syndrome, hypertension
+  - May have peripheral neuropathy at diagnosis (in 10-20%)
   clinical_pearls:
   - Insulin resistance + relative insulin deficiency (beta cells produce insulin but
     body can't use it)
@@ -79,8 +99,18 @@ rules:
 - id: ENDO-DKA
   label: Diabetic ketoacidosis (DKA)
   presentations:
-  - hyperglycemia with ketosis and metabolic acidosis
-  - abdominal pain, vomiting, Kussmaul respirations, fruity breath
+  - Polyuria and polydipsia
+  - Nausea and vomiting
+  - Abdominal pain (can mimic acute abdomen)
+  - Altered mental status (confusion, lethargy, coma in severe cases)
+  - Kussmaul respirations (deep, labored breathing)
+  - Fruity (acetone) breath odor
+  - Dehydration (dry mucous membranes, poor skin turgor, tachycardia)
+  - Weakness and fatigue
+  - Hyperglycemia >250 mg/dL
+  - Often triggered by infection, medication noncompliance, or new-onset Type 1 DM
+  - Hypotension in severe cases
+  - More common in Type 1 DM but can occur in Type 2
   clinical_pearls:
   - 'Triad: Hyperglycemia (>250 mg/dL), anion gap metabolic acidosis (pH <7.3, HCO3
     <18), ketonemia/ketonuria'
@@ -116,8 +146,16 @@ rules:
 - id: ENDO-HHS
   label: Hyperosmolar hyperglycemic state (HHS)
   presentations:
-  - severe hyperglycemia, hyperosmolality, dehydration
-  - minimal or absent ketosis, altered mental status
+  - Severe hyperglycemia (typically >600 mg/dL)
+  - Profound dehydration (dry mucous membranes, poor skin turgor)
+  - Altered mental status (confusion, lethargy, obtundation)
+  - Polyuria and polydipsia (early symptoms)
+  - Weakness and fatigue
+  - Tachycardia and hypotension
+  - Focal neurologic deficits or seizures (from hyperosmolality)
+  - Minimal or absent ketosis (unlike DKA)
+  - Typically older adults (>60 years) with Type 2 diabetes
+  - Often triggered by infection, stroke, MI, or medication noncompliance
   clinical_pearls:
   - Severe hyperglycemia (>600 mg/dL), hyperosmolality (>320 mOsm/kg), minimal ketosis
     (pH >7.3)
@@ -152,9 +190,18 @@ rules:
 - id: ENDO-HYPOGLYCEMIA
   label: Hypoglycemia
   presentations:
-  - adrenergic symptoms (tremor, palpitations, sweating, hunger)
-  - neuroglycopenic symptoms (confusion, seizure, loss of consciousness)
-  - low plasma glucose at time of symptoms
+  - Tremor and shakiness
+  - Palpitations and tachycardia
+  - Sweating (diaphoresis)
+  - Hunger and nausea
+  - Anxiety and nervousness
+  - Confusion and difficulty concentrating
+  - Slurred speech
+  - Blurred or double vision
+  - Weakness and fatigue
+  - Headache and dizziness
+  - In severe cases: Seizures, loss of consciousness, coma
+  - Symptoms occur when glucose <70 mg/dL (or <54 mg/dL for severe)
   clinical_pearls:
   - 'Whipple''s triad: Symptoms consistent with hypoglycemia + documented low glucose
     (<70 mg/dL) + relief with treatment'
@@ -195,8 +242,18 @@ rules:
 - id: ENDO-HYPERTHYROIDISM
   label: Hyperthyroidism / thyrotoxicosis
   presentations:
-  - weight loss, heat intolerance, palpitations, tremor
-  - suppressed TSH, elevated free T4/T3
+  - Unintentional weight loss despite increased appetite
+  - Heat intolerance and excessive sweating
+  - Palpitations and tachycardia
+  - Tremor (fine tremor of hands)
+  - Anxiety, nervousness, irritability
+  - Insomnia
+  - Fatigue and muscle weakness (especially proximal muscles)
+  - Frequent bowel movements or diarrhea
+  - Menstrual irregularities (oligomenorrhea)
+  - Warm, moist skin
+  - Hair thinning
+  - In Graves' disease: Exophthalmos (bulging eyes), lid lag, goiter
   clinical_pearls:
   - 'Causes: Graves'' disease (70% - diffuse goiter + ophthalmopathy), toxic multinodular
     goiter, solitary toxic adenoma'
@@ -235,8 +292,17 @@ rules:
 - id: ENDO-THYROID_STORM
   label: Thyroid storm (thyrotoxic crisis)
   presentations:
-  - severe thyrotoxicosis with fever, tachycardia, CNS changes
-  - precipitated by infection, surgery, or other stressor
+  - High fever (>38.5°C / 101.3°F)
+  - Severe tachycardia (often >140 bpm) or atrial fibrillation
+  - Agitation, restlessness, or altered mental status
+  - Confusion, psychosis, or coma in severe cases
+  - Profuse sweating
+  - Nausea, vomiting, diarrhea
+  - Tremor
+  - Congestive heart failure
+  - Hypotension or shock
+  - Jaundice (hepatic dysfunction)
+  - Precipitated by infection, surgery, trauma, or discontinuation of antithyroid medication
   clinical_pearls:
   - Medical emergency with 10-20% mortality - requires ICU admission
   - Burch-Wartofsky score ≥45 supports diagnosis (fever, tachycardia, CNS changes,
@@ -271,8 +337,20 @@ rules:
 - id: ENDO-HYPOTHYROIDISM
   label: Hypothyroidism
   presentations:
-  - fatigue, cold intolerance, weight gain, constipation, dry skin
-  - elevated TSH with low free T4 (primary)
+  - Fatigue and lethargy
+  - Cold intolerance
+  - Weight gain (modest, 5-10 lbs)
+  - Constipation
+  - Dry, coarse skin
+  - Hair loss (scalp and lateral eyebrows)
+  - Hoarseness
+  - Muscle aches and cramps
+  - Depression and cognitive impairment ("brain fog")
+  - Menstrual irregularities (menorrhagia)
+  - Bradycardia
+  - Delayed deep tendon reflexes (slow relaxation phase)
+  - Periorbital edema and non-pitting edema
+  - Gradual onset of symptoms (months to years)
   clinical_pearls:
   - 'Primary (95%): Thyroid gland failure (Hashimoto''s, post-RAI, post-thyroidectomy).
     Secondary (5%): Pituitary failure'
@@ -310,8 +388,16 @@ rules:
 - id: ENDO-THYROID_NODULE
   label: Thyroid nodule (benign or indeterminate)
   presentations:
-  - palpable or incidentally discovered thyroid nodule
-  - normal or abnormal thyroid function depending on etiology
+  - Palpable neck mass or lump (anterior neck)
+  - Often discovered incidentally on imaging (CT, MRI, ultrasound)
+  - Usually asymptomatic
+  - May have compressive symptoms if large (dysphagia, hoarseness, dyspnea)
+  - Visible neck swelling
+  - Thyroid function typically normal (euthyroid)
+  - May cause hyperthyroidism if autonomous ("hot" nodule)
+  - Rarely causes hypothyroidism
+  - More common in women and with age
+  - Risk factors: Radiation exposure, family history, iodine deficiency
   clinical_pearls:
   - 'Very common: 50-60% of population has nodules on ultrasound, most benign (90-95%)'
   - 'Risk factors for malignancy: Age <30 or >60, male, radiation exposure, family
@@ -350,8 +436,17 @@ rules:
 - id: ENDO-THYROID_CANCER
   label: Thyroid carcinoma
   presentations:
-  - thyroid nodule with suspicious ultrasound features or FNA results
-  - local compressive symptoms (hoarseness, dysphagia) or lymphadenopathy
+  - Palpable thyroid nodule (usually painless)
+  - Hard, fixed, irregular nodule on palpation
+  - Rapid growth of thyroid mass
+  - Cervical lymphadenopathy (enlarged neck lymph nodes)
+  - Hoarseness (recurrent laryngeal nerve involvement)
+  - Dysphagia (difficulty swallowing)
+  - Dyspnea or stridor (tracheal compression)
+  - Hemoptysis (rare, advanced disease)
+  - Often discovered on ultrasound with suspicious features
+  - May present with distant metastases (lung, bone)
+  - Family history of thyroid cancer or MEN syndrome
   clinical_pearls:
   - 'Papillary (85%): Best prognosis, lymph node spread common but survival excellent.
     Follicular (10%): Vascular invasion'
@@ -389,8 +484,18 @@ rules:
 - id: ENDO-HYPERCALCEMIA
   label: Hypercalcemia
   presentations:
-  - elevated serum calcium
-  - may cause polyuria, constipation, confusion, arrhythmia
+  - Polyuria and polydipsia
+  - Constipation
+  - Nausea, vomiting, anorexia
+  - Abdominal pain
+  - Confusion, lethargy, altered mental status
+  - Weakness and fatigue
+  - Bone pain
+  - Kidney stones
+  - Cardiac arrhythmias (shortened QT interval)
+  - Depression and psychosis in severe cases
+  - Symptoms correlate with degree of elevation (mild may be asymptomatic)
+  - "Stones, bones, groans, psychiatric overtones"
   clinical_pearls:
   - Stones, bones, groans, psychiatric overtones (kidney stones, bone pain, abdominal
     pain, confusion/depression)
@@ -430,8 +535,17 @@ rules:
 - id: ENDO-PRIMARY-HPT
   label: Primary hyperparathyroidism
   presentations:
-  - chronic hypercalcemia with inappropriately elevated PTH
-  - nephrolithiasis, bone loss, nonspecific symptoms
+  - Often asymptomatic (discovered on routine labs)
+  - Kidney stones (nephrolithiasis) in 20% of patients
+  - Bone pain and osteoporosis
+  - Fatigue and weakness
+  - Depression and cognitive dysfunction
+  - Polyuria and polydipsia
+  - Constipation
+  - Nausea and peptic ulcer disease
+  - Hypertension
+  - Consistently elevated serum calcium on multiple measurements
+  - Inappropriately normal or elevated PTH in setting of hypercalcemia
   clinical_pearls:
   - Most common cause of hypercalcemia in outpatients (malignancy is most common in
     inpatients)
@@ -471,9 +585,18 @@ rules:
 - id: ENDO-ADRENAL-CRISIS
   label: Adrenal crisis
   presentations:
-  - hypotension, shock, abdominal pain, vomiting
-  - hyponatremia, hyperkalemia, hypoglycemia
-  - often in known adrenal insufficiency with stressor
+  - Severe hypotension or shock (refractory to fluids)
+  - Acute abdominal pain (can mimic acute abdomen)
+  - Nausea and vomiting
+  - Severe weakness and fatigue
+  - Confusion, altered mental status, or coma
+  - Fever (often without clear infection)
+  - Hyponatremia
+  - Hyperkalemia
+  - Hypoglycemia
+  - Usually occurs in patient with known adrenal insufficiency + stressor (infection, surgery, trauma)
+  - Can occur with abrupt discontinuation of chronic steroids
+  - May present as unexplained cardiovascular collapse
   clinical_pearls:
   - Life-threatening emergency - treat empirically if suspected, don't wait for cortisol
     results
@@ -510,8 +633,18 @@ rules:
 - id: ENDO-ADRENAL-INSUFF
   label: Adrenal insufficiency
   presentations:
-  - chronic fatigue, weight loss, hyperpigmentation (primary)
-  - hyponatremia, hyperkalemia, low cortisol
+  - Chronic fatigue and weakness
+  - Unintentional weight loss
+  - Hyperpigmentation (primary AI only - darkening of skin creases, nipples, mucosa)
+  - Hypotension (especially orthostatic)
+  - Salt craving (primary AI only)
+  - Nausea, vomiting, diarrhea
+  - Abdominal pain
+  - Depression and irritability
+  - Dizziness and syncope
+  - Hyponatremia
+  - Hyperkalemia (primary AI only)
+  - Gradual onset of symptoms (months to years)
   clinical_pearls:
   - 'Primary (Addison''s): Adrenal gland destruction (autoimmune 80%, TB, hemorrhage).
     Low cortisol + aldosterone'
