@@ -142,11 +142,20 @@ rules:
 - id: GI-CHOLECYSTITIS
   label: Acute Cholecystitis
   presentations:
-  - RUQ pain radiating to right shoulder
-  - Pain worse after fatty meals
+  - Right upper quadrant pain, often worse after fatty meals
+  - 'Murphy''s sign: Inspiratory arrest with RUQ palpation (90% specific)'
+  - Positive sonographic Murphy's sign on ultrasound
+  - Fever (often low-grade), chills
   - Nausea and vomiting
-  - Fever
-  - Positive Murphy's sign
+  - 'Ultrasound findings: Gallstones, gallbladder wall thickening >4mm, pericholecystic
+    fluid'
+  - Pain radiating to right shoulder or scapula (referred pain)
+  - '95% due to gallstone obstruction of cystic duct'
+  - Leukocytosis (elevated WBC count)
+  - May have mild jaundice if Mirizzi syndrome (stone compresses CBD)
+  - 'Complications: Gangrenous cholecystitis, perforation, emphysematous cholecystitis
+    (diabetics)'
+  - 'Risk factors: 4 F''s - Female, Forty, Fertile, Fat (obesity)'
   clinical_pearls:
   - Murphy's sign (inspiratory arrest with RUQ palpation) highly specific (90%)
   - 95% due to gallstone obstruction of cystic duct
@@ -183,11 +192,19 @@ rules:
 - id: GI-PANCREATITIS
   label: Acute Pancreatitis
   presentations:
-  - Severe epigastric pain radiating to back
-  - Nausea and vomiting
-  - Alcohol use or gallstones
-  - Abdominal distention
-  - Elevated lipase and amylase
+  - Severe, constant epigastric pain radiating to back (hallmark symptom)
+  - Nausea and vomiting (often severe and persistent)
+  - Abdominal tenderness and distention
+  - 'Elevated lipase and amylase (>3x upper limit of normal) - lipase more specific'
+  - 'Common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (>1000 mg/dL)'
+  - Fever, tachycardia if severe inflammation
+  - 'Cullen sign: Periumbilical ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'Grey-Turner sign: Flank ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'CT findings: Pancreatic inflammation, edema, peripancreatic fluid, or necrosis'
+  - Hypotension, shock if severe (SIRS, third-spacing of fluids)
+  - 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
+  - 'Risk factors: Alcohol, gallstones, medications (azathioprine, thiazides), ERCP,
+    trauma'
   clinical_pearls:
   - 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
   - Lipase more sensitive and specific than amylase
@@ -317,11 +334,19 @@ rules:
 - id: GI-DIVERTICULITIS
   label: Acute Diverticulitis
   presentations:
-  - LLQ abdominal pain
-  - Fever
-  - Change in bowel habits
-  - Nausea
-  - Leukocytosis
+  - Left lower quadrant abdominal pain (most common presentation)
+  - Fever, chills (signs of infection/inflammation)
+  - Change in bowel habits (constipation or diarrhea)
+  - Nausea, vomiting, anorexia
+  - Tenderness and guarding in LLQ
+  - Leukocytosis (elevated WBC count)
+  - 'CT findings: Colonic wall thickening, pericolic fat stranding, inflamed diverticula'
+  - 'Diverticulosis common (50% by age 60); 10-25% develop diverticulitis'
+  - May have urinary symptoms (frequency, urgency) from bladder irritation
+  - Occult blood in stool possible (avoid colonoscopy during acute episode)
+  - 'Hinchey classification: I (phlegmon), II (abscess), III (purulent), IV (fecal
+    peritonitis)'
+  - Risk factors - low fiber diet, obesity, lack of exercise, NSAIDs
   clinical_pearls:
   - Diverticulosis common (50% by age 60), most asymptomatic; 10-25% develop diverticulitis
   - 'Hinchey classification: I (phlegmon), II (abscess), III (purulent peritonitis),
@@ -756,12 +781,19 @@ rules:
 - id: GASTRO-ACUTE-PANCREATITIS
   label: Acute Pancreatitis
   presentations:
-  - Severe, constant epigastric pain radiating to back
-  - Nausea, vomiting, anorexia
-  - Elevated lipase (>3x ULN) or amylase
-  - 'Imaging: Pancreatic inflammation, edema, or necrosis on CT'
-  - 'Causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia, medications, trauma'
-  - 'Severe pancreatitis: Organ failure, necrosis, SIRS'
+  - Severe, constant epigastric pain radiating to back (hallmark symptom)
+  - Nausea and vomiting (often severe and persistent)
+  - Abdominal tenderness and distention
+  - 'Elevated lipase and amylase (>3x upper limit of normal) - lipase more specific'
+  - 'Common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (>1000 mg/dL)'
+  - Fever, tachycardia if severe inflammation
+  - 'Cullen sign: Periumbilical ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'Grey-Turner sign: Flank ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'CT findings: Pancreatic inflammation, edema, peripancreatic fluid, or necrosis'
+  - Hypotension, shock if severe (SIRS, third-spacing of fluids)
+  - 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
+  - 'Risk factors: Alcohol, gallstones, medications (azathioprine, thiazides), ERCP,
+    trauma'
   clinical_pearls:
   - 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
   - Lipase more specific than amylase
@@ -836,12 +868,20 @@ rules:
 - id: GASTRO-CHOLECYSTITIS
   label: Acute Cholecystitis
   presentations:
-  - Right upper quadrant pain, often after fatty meal
-  - 'Murphy''s sign: Inspiratory arrest with RUQ palpation'
-  - Fever, nausea, vomiting
-  - 'Ultrasound: Gallstones, thickened gallbladder wall (>4mm), pericholecystic fluid'
-  - Positive sonographic Murphy's sign
-  - Elevated WBC, sometimes elevated bilirubin/alkaline phosphatase
+  - Right upper quadrant pain, often worse after fatty meals
+  - 'Murphy''s sign: Inspiratory arrest with RUQ palpation (90% specific)'
+  - Positive sonographic Murphy's sign on ultrasound
+  - Fever (often low-grade), chills
+  - Nausea and vomiting
+  - 'Ultrasound findings: Gallstones, gallbladder wall thickening >4mm, pericholecystic
+    fluid'
+  - Pain radiating to right shoulder or scapula (referred pain)
+  - '95% due to gallstone obstruction of cystic duct'
+  - Leukocytosis (elevated WBC count)
+  - May have mild jaundice if Mirizzi syndrome (stone compresses CBD)
+  - 'Complications: Gangrenous cholecystitis, perforation, emphysematous cholecystitis
+    (diabetics)'
+  - 'Risk factors: 4 F''s - Female, Forty, Fertile, Fat (obesity)'
   clinical_pearls:
   - Cholecystitis = inflammation of gallbladder (usually due to stone obstruction)
   - Murphy's sign highly specific (90%)

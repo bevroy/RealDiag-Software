@@ -72,12 +72,20 @@ rules:
 - id: SURG-CHOLECYSTITIS
   label: Acute Cholecystitis
   presentations:
-  - Right upper quadrant pain
-  - Murphy's sign (inspiratory arrest)
-  - Fever
+  - Right upper quadrant pain, often worse after fatty meals
+  - 'Murphy''s sign: Inspiratory arrest with RUQ palpation (90% specific)'
+  - Positive sonographic Murphy's sign on ultrasound
+  - Fever (often low-grade), chills
   - Nausea and vomiting
-  - Positive sonographic Murphy sign
-  - Gallbladder wall thickening on ultrasound
+  - 'Ultrasound findings: Gallstones, gallbladder wall thickening >4mm, pericholecystic
+    fluid'
+  - Pain radiating to right shoulder or scapula (referred pain)
+  - '95% due to gallstone obstruction of cystic duct'
+  - Leukocytosis (elevated WBC count)
+  - May have mild jaundice if Mirizzi syndrome (stone compresses CBD)
+  - 'Complications: Gangrenous cholecystitis, perforation, emphysematous cholecystitis
+    (diabetics)'
+  - 'Risk factors: 4 F''s - Female, Forty, Fertile, Fat (obesity)'
   icd10:
   - K81.0
   snomed:
@@ -85,12 +93,19 @@ rules:
 - id: SURG-PANCREATITIS
   label: Acute Pancreatitis
   presentations:
-  - Severe epigastric pain radiating to back
-  - Nausea and vomiting
-  - Elevated amylase and lipase (> 3x normal)
-  - Alcohol or gallstone history
-  - May have Cullen or Grey-Turner sign
-  - CT shows pancreatic inflammation
+  - Severe, constant epigastric pain radiating to back (hallmark symptom)
+  - Nausea and vomiting (often severe and persistent)
+  - Abdominal tenderness and distention
+  - 'Elevated lipase and amylase (>3x upper limit of normal) - lipase more specific'
+  - 'Common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (>1000 mg/dL)'
+  - Fever, tachycardia if severe inflammation
+  - 'Cullen sign: Periumbilical ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'Grey-Turner sign: Flank ecchymosis (hemorrhagic pancreatitis, rare)'
+  - 'CT findings: Pancreatic inflammation, edema, peripancreatic fluid, or necrosis'
+  - Hypotension, shock if severe (SIRS, third-spacing of fluids)
+  - 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
+  - 'Risk factors: Alcohol, gallstones, medications (azathioprine, thiazides), ERCP,
+    trauma'
   icd10:
   - K85.90
   snomed:
@@ -351,12 +366,19 @@ rules:
 - id: SURG-DIVERTICULITIS
   label: Acute Diverticulitis
   presentations:
-  - Left lower quadrant pain
-  - Fever
-  - Change in bowel habits
-  - Tenderness and guarding LLQ
-  - Elevated WBC
-  - CT shows colonic wall thickening and fat stranding
+  - Left lower quadrant abdominal pain (most common presentation)
+  - Fever, chills (signs of infection/inflammation)
+  - Change in bowel habits (constipation or diarrhea)
+  - Nausea, vomiting, anorexia
+  - Tenderness and guarding in LLQ
+  - Leukocytosis (elevated WBC count)
+  - 'CT findings: Colonic wall thickening, pericolic fat stranding, inflamed diverticula'
+  - 'Diverticulosis common (50% by age 60); 10-25% develop diverticulitis'
+  - May have urinary symptoms (frequency, urgency) from bladder irritation
+  - Occult blood in stool possible (avoid colonoscopy during acute episode)
+  - 'Hinchey classification: I (phlegmon), II (abscess), III (purulent), IV (fecal
+    peritonitis)'
+  - Risk factors - low fiber diet, obesity, lack of exercise, NSAIDs
   icd10:
   - K57.92
   snomed:
