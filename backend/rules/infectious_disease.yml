@@ -77,11 +77,19 @@ rules:
 - id: ID-CELLULITIS
   label: Cellulitis
   presentations:
-  - Erythema and warmth
-  - Swelling and tenderness
-  - Fever
-  - Regional lymphadenopathy
-  - Clearly demarcated borders (vs diffuse)
+  - Erythema and warmth (localized skin redness)
+  - Pain and tenderness of affected area
+  - Swelling, edema
+  - Fever, chills if systemic infection
+  - Regional lymphadenopathy (swollen lymph nodes)
+  - 'Poorly demarcated borders (vs erysipelas with sharp, raised borders)'
+  - 'Most common organisms: Streptococcus pyogenes (Group A Strep), Staphylococcus
+    aureus'
+  - 'Risk factors: Skin breaks, lymphedema, venous insufficiency, obesity, diabetes'
+  - Lymphangitis (red streaks extending from infection site)
+  - 'Purulent drainage suggests abscess - needs incision and drainage (I&D)'
+  - 'MRSA risk factors: IVDU, recent hospitalization, prior MRSA, purulent drainage'
+  - Mark borders with pen to track progression or improvement on antibiotics
   clinical_pearls:
   - Strep pyogenes (Group A Strep) and Staph aureus most common organisms
   - 'Purulent cellulitis (abscess/drainage): Suspect MRSA, needs I&D + antibiotics'
@@ -162,12 +170,20 @@ rules:
 - id: ID-ENCEPHALITIS
   label: Viral Encephalitis
   presentations:
-  - Fever
-  - Altered mental status
-  - Seizures
-  - Focal neurologic deficits
-  - Headache
-  - Behavioral changes
+  - Altered mental status, confusion, disorientation (hallmark of encephalitis)
+  - Fever, headache, neck stiffness
+  - Seizures (focal or generalized, 50% of HSV cases)
+  - Focal neurologic deficits (weakness, aphasia, ataxia)
+  - Personality changes, behavioral abnormalities, agitation
+  - 'HSV encephalitis: Temporal lobe involvement on MRI (most common treatable cause)'
+  - 'CSF findings: Lymphocytic pleocytosis, elevated protein, normal/low glucose,
+    RBCs if hemorrhagic'
+  - 'MRI: Temporal lobe enhancement, hemorrhagic changes (HSV); thalamic (arbovirus)'
+  - 'EEG: PLEDS (periodic lateralizing epileptiform discharges) suggests HSV'
+  - 'Viral causes: HSV-1 (most common), VZV, enteroviruses, arboviruses (West Nile),
+    EBV'
+  - Mortality 70% if HSV untreated; 30% with acyclovir treatment
+  - Start empiric acyclovir immediately - do NOT wait for PCR confirmation
   clinical_pearls:
   - HSV encephalitis most common viral cause (and most important to treat)
   - Start acyclovir empirically if encephalitis suspected - don't wait for PCR results
@@ -335,15 +351,19 @@ rules:
 - id: ID-ENDOCARDITIS
   label: Infective Endocarditis
   presentations:
-  - 'Duke criteria: 2 major, 1 major + 3 minor, or 5 minor criteria'
-  - 'Major: Positive blood cultures (typical organisms in 2 cultures), echo findings
-    (vegetation, abscess, new regurgitation)'
-  - 'Minor: Fever >38°C, vascular phenomena (emboli, septic infarcts, Janeway lesions),
-    immunologic (Osler nodes, Roth spots), predisposing condition'
-  - Persistent bacteremia (S. aureus, Streptococcus, Enterococcus)
-  - New heart murmur (especially regurgitant)
-  - Splinter hemorrhages (subungual), petechiae
-  - 'Risk factors: IV drug use, prosthetic valve, previous endocarditis'
+  - Fever (85% of cases, most common symptom)
+  - New or changed heart murmur (regurgitant murmur)
+  - 'Osler nodes: Painful nodules on fingers/toes (immunologic phenomenon)'
+  - 'Janeway lesions: Painless erythematous macules on palms/soles (septic emboli)'
+  - Splinter hemorrhages (subungual linear hemorrhages)
+  - Roth spots (retinal hemorrhages with pale centers)
+  - 'Modified Duke criteria for diagnosis: 2 major, 1 major + 3 minor, or 5 minor'
+  - Persistent bacteremia (S. aureus, Viridans strep, Enterococcus)
+  - 'Risk factors: IV drug use (tricuspid), prosthetic valve, previous endocarditis,
+    structural heart disease'
+  - Heart failure from valve destruction
+  - Septic emboli (stroke, splenic/renal infarcts)
+  - 'IVDU pattern: Tricuspid valve involvement, right-sided symptoms (cough, dyspnea)'
   clinical_pearls:
   - 3 sets of blood cultures from different sites before starting antibiotics
   - Transthoracic echo first, TEE if high suspicion and TTE negative (more sensitive)
@@ -761,12 +781,19 @@ rules:
 - id: ID-ACUTE-PYELONEPHRITIS
   label: Acute Pyelonephritis
   presentations:
-  - Fever, chills, flank pain (CVA tenderness)
-  - Nausea, vomiting, malaise
-  - Dysuria, frequency, urgency (cystitis symptoms may be present)
-  - Positive CVA tenderness (punch percussion over kidneys)
-  - 'Urinalysis: Pyuria, WBC casts, bacteriuria, +/- hematuria'
-  - 'Urine culture: Greater than 100,000 CFU/mL (typically E. coli 80%)'
+  - Fever, chills (high-grade fever often >38.5°C)
+  - Flank pain, CVA tenderness (costovertebral angle tenderness, hallmark finding)
+  - Dysuria, urinary frequency, urgency (cystitis symptoms often present)
+  - Nausea and vomiting (systemic symptoms)
+  - 'Urinalysis: Pyuria, bacteriuria, WBC casts (pathognomonic for kidney infection)'
+  - 'E. coli (80% of cases), Klebsiella, Proteus, Enterococcus'
+  - More severe than simple cystitis - systemic toxicity present
+  - 'Complicated cases: Pregnancy, diabetes, immunosuppression, obstruction, catheter'
+  - May progress to sepsis if untreated
+  - 'Emphysematous pyelonephritis: Gas in kidney tissue (diabetics), surgical emergency'
+  - 'Diagnosis: Clinical (fever + CVA tenderness) + UA with WBC casts + urine culture
+    >100K CFU/mL'
+  - Risk factors - female, urinary stasis, vesicoureteral reflux, kidney stones
   clinical_pearls:
   - 'Uncomplicated: Outpatient PO fluoroquinolone or ceftriaxone x 1, then PO'
   - 'Complicated: Admission for IV antibiotics (obstruction, pregnancy, immunocompromised)'
@@ -798,44 +825,6 @@ rules:
   - N12
   snomed:
   - '36689008'
-- id: ID-CELLULITIS
-  label: Cellulitis
-  presentations:
-  - Erythema, warmth, swelling, tenderness (localized skin infection)
-  - 'Poorly demarcated borders (vs erysipelas: well-demarcated, raised)'
-  - Fever, chills if systemic
-  - Lymphangitis (red streaks), lymphadenopathy
-  - 'Most common organisms: Strep pyogenes, Staph aureus'
-  - 'Risk factors: Break in skin, lymphedema, venous insufficiency, obesity, diabetes'
-  clinical_pearls:
-  - 'Purulent cellulitis (abscess/drainage): Think MRSA, needs incision and drainage'
-  - 'Non-purulent cellulitis: Beta-hemolytic strep most likely, use beta-lactam'
-  - Mark borders with pen to track progression
-  - Elevation + NSAIDs help in addition to antibiotics
-  - 'Recurrent cellulitis: Consider prophylaxis (penicillin VK 250-500mg daily)'
-  management:
-  - 'Guideline-based treatment options for Cellulitis include:'
-  - 'Non-purulent: Cephalexin 500mg PO QID x 5-7d or dicloxacillin 500mg PO QID (IDSA
-    2024)'
-  - 'MRSA risk: TMP-SMX DS 1-2 tabs BID or doxycycline 100mg BID (IDSA 2024)'
-  - 'Severe/systemic: Admit for IV antibiotics (IDSA 2024)'
-  - 'If abscess: Incision and drainage REQUIRED (IDSA 2024)'
-  - Elevation of affected limb, NSAIDs for pain/inflammation (IDSA 2024)
-  tests:
-  - Clinical diagnosis (no tests needed for uncomplicated)
-  - Blood cultures if systemic symptoms
-  - Wound culture if drainage/abscess
-  - Consider ultrasound if abscess suspected
-  referrals:
-  - 'Admission if: Systemic toxicity, failed outpatient therapy, immunocompromised'
-  - Surgery if necrotizing fasciitis suspected
-  sensitivity: 0.8
-  specificity: 0.75
-  icd10:
-  - L03.90
-  - L03.115
-  snomed:
-  - '128045006'
 - id: ID-NECROTIZING-FASCIITIS
   label: Necrotizing Fasciitis
   presentations:
