@@ -169,17 +169,19 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
         data = yaml.safe_load(f) or {}
         rules = data.get("rules", [])
         
-        return {
-          "family": family,
-          "version": data.get("version", "2.0.0"),
-          "source": data.get("source", "Clinical Practice Guidelines"),
-          "count": len(rules),
-          "rules": rules,
-        }
+        # Only use rules file if it has content
+        if rules:
+          return {
+            "family": family,
+            "version": data.get("version", "2.0.0"),
+            "source": data.get("source", "Clinical Practice Guidelines"),
+            "count": len(rules),
+            "rules": rules,
+          }
     except Exception as e:
       print(f"Error loading rules file {rules_file}: {e}")
   
-  # Fallback to trees if rules file doesn't exist
+  # Fallback to trees if rules file doesn't exist or is empty
   trees = _load_trees_by_family(family)
   
   return {
