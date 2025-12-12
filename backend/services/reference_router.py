@@ -156,12 +156,16 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
   
   # Fallback to trees if rules file doesn't exist
   trees = _load_trees_by_family("endocrinology")
+  
+  # Sort alphabetically by label
+  trees_sorted = sorted(trees, key=lambda x: x.get("label", "").lower())
+  
   return {
     "family": "endocrinology",
     "version": "2.0.0",
     "source": "RealDiag Clinical Decision Trees",
-    "count": len(trees),
-    "rules": trees,
+    "count": len(trees_sorted),
+    "rules": trees_sorted,
   }
 
 
@@ -184,12 +188,15 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
         
         # Only use rules file if it has content
         if rules:
+          # Sort alphabetically by label
+          rules_sorted = sorted(rules, key=lambda x: x.get("label", "").lower())
+          
           return {
             "family": family,
             "version": data.get("version", "2.0.0"),
             "source": data.get("source", "Clinical Practice Guidelines"),
-            "count": len(rules),
-            "rules": rules,
+            "count": len(rules_sorted),
+            "rules": rules_sorted,
           }
     except Exception as e:
       print(f"Error loading rules file {rules_file}: {e}")
@@ -197,10 +204,13 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   # Fallback to trees if rules file doesn't exist or is empty
   trees = _load_trees_by_family(family)
   
+  # Sort alphabetically by label
+  trees_sorted = sorted(trees, key=lambda x: x.get("label", "").lower())
+  
   return {
     "family": family,
     "version": "2.0.0",
     "source": "RealDiag Clinical Decision Trees",
-    "count": len(trees),
-    "rules": trees,
+    "count": len(trees_sorted),
+    "rules": trees_sorted,
   }
