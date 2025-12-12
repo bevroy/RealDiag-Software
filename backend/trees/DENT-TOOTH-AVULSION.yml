@@ -1,0 +1,134 @@
+tree_id: DENT-TOOTH-AVULSION
+name: Dental Avulsion Management
+family: DENTISTRY
+specialty: Dentistry, Emergency Medicine
+chief_complaint: Knocked out tooth, dental trauma
+description: Emergency management of avulsed teeth - time-critical reimplantation
+version: "1.0"
+icd10: S03.2XXA
+author: RealDiag Clinical Team
+
+entry_point: tooth_type
+
+nodes:
+  - id: tooth_type
+    type: question
+    text: "What type of tooth was avulsed?"
+    options:
+      - label: "Permanent tooth (adult tooth)"
+        next: permanent_tooth_timing
+      - label: "Primary tooth (baby tooth)"
+        next: primary_tooth_avulsion
+
+  - id: permanent_tooth_timing
+    type: question
+    text: "How long has the tooth been out of the socket?"
+    options:
+      - label: "<60 minutes AND tooth brought to ED"
+        next: immediate_reimplantation
+      - label: ">60 minutes or dry storage >30 minutes"
+        next: delayed_presentation
+      - label: "Patient already reimplanted tooth at scene"
+        next: already_reimplanted
+
+  - id: immediate_reimplantation
+    type: diagnosis
+    name: "Permanent Tooth Avulsion - Immediate Reimplantation"
+    icd10: "S03.2XXA"
+    urgency: critical
+    workup:
+      - Dental X-rays (periapical and occlusal)
+      - Assess for other facial fractures
+      - Check tetanus status
+      - Document time of avulsion and storage medium
+    treatment:
+      - "TIME CRITICAL - Best prognosis if <60 minutes"
+      - "Tooth handling: NEVER touch root surface, hold by crown only"
+      - "If contaminated: Rinse gently with saline (do not scrub root)"
+      - "Storage until reimplantation: Hank's Balanced Salt Solution > cold milk > saline > saliva"
+      - "Reimplantation procedure:"
+      - Anesthetize with local anesthetic
+      - Irrigate socket with saline
+      - Gently reimplant tooth with steady pressure
+      - Verify position clinically and radiographically
+      - "Splinting: Flexible splint for 7-10 days (NOT rigid)"
+      - Use orthodontic wire and composite
+      - "Medications:"
+      - Antibiotics - Doxycycline 100mg PO BID x 7 days OR Amoxicillin 500mg TID x 7 days
+      - NSAIDs for pain
+      - Tetanus update if needed
+      - "Root canal: Needed in 7-10 days for mature teeth"
+      - Immediate dental referral (within 24 hours)
+      - Soft diet for 2 weeks
+      - Avoid contact sports for 2-4 weeks
+
+  - id: delayed_presentation
+    type: diagnosis
+    name: "Delayed Presentation - Poor Prognosis"
+    icd10: "S03.2XXA"
+    urgency: high
+    workup:
+      - Dental X-rays
+      - Assess socket condition
+    treatment:
+      - "Prognosis poor if >60 minutes dry time"
+      - May still attempt reimplantation if <2 hours
+      - Root canal before reimplantation if closed apex (mature tooth)
+      - Soak tooth in doxycycline solution
+      - Reimplant and splint as above
+      - Expect eventual ankylosis and root resorption
+      - Dental referral urgent
+      - Discuss long-term options (implant after growth complete)
+
+  - id: already_reimplanted
+    type: diagnosis
+    name: "Self-Reimplanted Tooth"
+    icd10: "S03.2XXA"
+    urgency: high
+    workup:
+      - Dental X-rays to verify position
+      - Assess for other injuries
+    treatment:
+      - "Excellent - best chance if done immediately at scene"
+      - Verify tooth position radiographically
+      - Apply flexible splint if not already done
+      - Antibiotics (doxycycline or amoxicillin) x 7 days
+      - Arrange root canal in 7-10 days
+      - Dental follow-up within 24 hours
+      - Monitor for complications (ankylosis, root resorption, infection)
+
+  - id: primary_tooth_avulsion
+    type: diagnosis
+    name: "Primary Tooth Avulsion"
+    icd10: "S03.2XXA"
+    urgency: low
+    workup:
+      - Dental X-ray to rule out intrusion
+      - Ensure tooth completely avulsed (not intruded)
+    treatment:
+      - "NEVER reimplant primary teeth - risk of damage to permanent tooth bud"
+      - Reassure parents tooth will not be replaced
+      - Explain permanent tooth will erupt normally
+      - Soft diet until healing
+      - Maintain oral hygiene
+      - Dental follow-up in 1-2 weeks
+      - Monitor for permanent tooth eruption issues
+      - Space maintainer not usually needed for single tooth
+
+metadata:
+  evidence_based: true
+  guidelines:
+    - "International Association of Dental Traumatology (IADT) Guidelines"
+    - "American Association of Endodontists Guidelines"
+  clinical_pearls:
+    - "Golden hour: <60 min = >90% success, >60 min = <50% success"
+    - "Storage media hierarchy: Hank's > cold milk > saliva > saline (NEVER water)"
+    - "NEVER touch the root surface - damages periodontal ligament cells"
+    - "NEVER scrub or sterilize root - gentl
+
+e rinse only"
+    - "Primary teeth NEVER reimplanted - will damage permanent tooth bud"
+    - "Flexible splint (NOT rigid) allows physiologic tooth movement"
+    - "Root canal needed at 7-10 days for mature teeth to prevent inflammatory resorption"
+    - "Closed apex (mature) tooth = root canal before or shortly after reimplantation"
+    - "Open apex (immature) tooth = may revascularize, monitor before root canal"
