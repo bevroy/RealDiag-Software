@@ -146,7 +146,8 @@ rules:
   - Lower extremity swelling or pain (DVT symptoms)
   - Syncope or presyncope (suggests massive PE)
   - Hypotension or shock if massive PE (5% of cases)
-  - 'Risk factors: Recent surgery, immobilization >3 days, malignancy, pregnancy/postpartum, oral contraceptives, thrombophilia'
+  - 'Risk factors: Recent surgery, immobilization >3 days, malignancy, pregnancy/postpartum,
+    oral contraceptives, thrombophilia'
   - Sudden onset of symptoms (seconds to minutes)
   clinical_pearls:
   - 'Wells score guides testing: Low risk + negative D-dimer rules out PE (high NPV)'
@@ -182,93 +183,47 @@ rules:
   - I26.02
   snomed:
   - '59282003'
-- id: PULM-PTX
+- id: PULM-PNEUMOTHORAX
   label: Pneumothorax
   presentations:
-  - Sudden onset unilateral chest pain
-  - Dyspnea
-  - Decreased breath sounds on affected side
-  - Hyperresonance to percussion
-  - Subcutaneous emphysema
+  - Sudden onset sharp pleuritic chest pain, dyspnea
+  - Decreased breath sounds, hyperresonance to percussion on affected side
+  - 'Chest X-ray: Visceral pleural line, absence of lung markings beyond'
+  - 'Tension pneumothorax: Hypotension, JVD, tracheal deviation (emergency!)'
+  - 'Primary spontaneous: Tall, thin, young males (ruptured bleb)'
+  - 'Secondary: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia)'
+  - 'Traumatic: Rib fracture, penetrating injury, iatrogenic (central line, thoracentesis)'
   clinical_pearls:
-  - 'Primary spontaneous: Tall, thin, young males (ruptured apical bleb), no underlying
-    lung disease'
-  - 'Secondary spontaneous: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia
-    in HIV)'
-  - 'Tension pneumothorax: Hypotension, JVD, tracheal deviation - immediate needle
-    decompression (2nd ICS MCL)'
-  - 'Small (<2 cm apex to cupola) + stable: Observe, 100% oxygen accelerates reabsorption
-    4x'
-  - Recurrence risk 20-30% after first episode, 50% after second - consider pleurodesis
+  - Tension pneumothorax = clinical diagnosis, treat immediately (needle decompression,
+    don't wait for CXR)
+  - 'Small (<2 cm apex to cupola): Observe if stable and asymptomatic'
+  - 'Large (>2 cm): Chest tube (or aspiration if primary spontaneous)'
+  - 100% oxygen accelerates reabsorption (4x faster)
+  - Recurrence risk 20-30% after first episode
   management:
   - 'Guideline-based treatment options for Pneumothorax include:'
-  - 'Tension pneumothorax: Immediate needle decompression (14-16G, 2nd ICS midclavicular
-    line), then chest tube (ATS 2023)'
-  - 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal suction (-20 cm
-    H2O) (ATS 2023)'
-  - 'Small (<2 cm) primary + stable: Observation, 100% oxygen, repeat CXR in 6 hours
-    (ATS 2023)'
-  - 'Alternative for primary: Aspiration with small-bore catheter (14-16F) (ATS 2023)'
-  - 'If persistent air leak >5 days: VATS with pleurodesis or bleb resection (ATS
+  - 'Tension: Immediate needle decompression (2nd ICS midclavicular line), then chest
+    tube (ATS 2023)'
+  - 'Small (<2 cm) + stable: Observation, 100% oxygen, repeat CXR in 6 hours (ATS
     2023)'
+  - 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal (ATS 2023)'
+  - 'Alternative for primary: Aspiration with small catheter (ATS 2023)'
+  - 'If persistent air leak >5 days: VATS with pleurodesis (ATS 2023)'
   tests:
-  - Chest X-ray PA upright (visceral pleural line, absence of lung markings)
-  - Expiratory CXR increases sensitivity (not routinely needed)
+  - Chest X-ray (PA upright, expiratory view increases sensitivity)
   - CT chest if small or uncertain diagnosis
-  - ABG if respiratory distress or underlying lung disease
+  - ABG if respiratory distress
   referrals:
-  - Cardiothoracic surgery STAT if tension pneumothorax
-  - CT surgery for persistent air leak (>5 days), recurrent, or bilateral
-  - Pulmonology for recurrent pneumothorax (pleurodesis consideration)
+  - Cardiothoracic surgery if persistent air leak, recurrent, or tension
+  - Pulmonology for recurrent pneumothorax (consider pleurodesis)
+  sensitivity: 0.85
+  specificity: 0.95
   icd10:
   - J93.0
   - J93.11
-  - J93.9
+  - J93.12
   snomed:
   - '36118008'
-- id: PULM-PLEURAL-EFFUSION
-  label: Pleural Effusion
-  presentations:
-  - Progressive dyspnea
-  - Dull chest pain
-  - Decreased breath sounds at lung base
-  - Dullness to percussion
-  - Reduced tactile fremitus
-  clinical_pearls:
-  - 'Transudate (low protein): CHF most common, also cirrhosis, nephrotic syndrome'
-  - 'Exudate (high protein): Pneumonia (parapneumonic), malignancy, TB, PE'
-  - 'Light''s criteria: Exudate if pleural protein/serum >0.5, pleural LDH/serum >0.6,
-    OR pleural LDH >2/3 ULN'
-  - 'Complicated parapneumonic (pH <7.2, glucose <60, LDH >1000): Needs drainage'
-  - 'Empyema (pus): Chest tube drainage required, often needs VATS decortication'
-  - 'Malignant effusion: Exudative, often bloody, positive cytology (50-60% first
-    tap)'
-  management:
-  - 'Guideline-based treatment options for Pleural Effusion include:'
-  - Diagnostic thoracentesis if effusion >10mm on lateral decubitus CXR (ATS 2023)
-  - 'Transudate: Treat underlying cause (diuretics for CHF, manage cirrhosis) (ATS
-    2023)'
-  - 'Uncomplicated parapneumonic: Antibiotics alone may suffice (ATS 2023)'
-  - 'Complicated parapneumonic or empyema: Chest tube drainage 24-28F, consider fibrinolytics
-    (tPA + DNase) (ATS 2023)'
-  - 'Recurrent malignant: Pleurodesis (talc) or tunneled pleural catheter (PleurX)
-    (ATS 2023)'
-  tests:
-  - Chest X-ray PA/lateral (blunts costophrenic angle if >200mL), lateral decubitus
-    (layers if free-flowing)
-  - Ultrasound (detects 5-50mL, guides thoracentesis, identifies septations)
-  - 'Thoracentesis: Cell count/diff, protein, LDH, glucose, pH, gram stain, culture,
-    cytology'
-  - Serum protein and LDH (for Light's criteria)
-  referrals:
-  - Pulmonology for thoracentesis or complex/recurrent effusions
-  - Cardiothoracic surgery if empyema, loculated, or need VATS/decortication
-  - Oncology if malignant effusion
-  icd10:
-  - J90
-  - J91.8
-  snomed:
-  - '60046008'
 - id: PULM-ILD
   label: Interstitial Lung Disease
   presentations:
@@ -827,44 +782,3 @@ rules:
   - J94.0
   snomed:
   - '60046008'
-- id: PULM-PNEUMOTHORAX
-  label: Pneumothorax
-  presentations:
-  - Sudden onset sharp pleuritic chest pain, dyspnea
-  - Decreased breath sounds, hyperresonance to percussion on affected side
-  - 'Chest X-ray: Visceral pleural line, absence of lung markings beyond'
-  - 'Tension pneumothorax: Hypotension, JVD, tracheal deviation (emergency!)'
-  - 'Primary spontaneous: Tall, thin, young males (ruptured bleb)'
-  - 'Secondary: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia)'
-  - 'Traumatic: Rib fracture, penetrating injury, iatrogenic (central line, thoracentesis)'
-  clinical_pearls:
-  - Tension pneumothorax = clinical diagnosis, treat immediately (needle decompression,
-    don't wait for CXR)
-  - 'Small (<2 cm apex to cupola): Observe if stable and asymptomatic'
-  - 'Large (>2 cm): Chest tube (or aspiration if primary spontaneous)'
-  - 100% oxygen accelerates reabsorption (4x faster)
-  - Recurrence risk 20-30% after first episode
-  management:
-  - 'Guideline-based treatment options for Pneumothorax include:'
-  - 'Tension: Immediate needle decompression (2nd ICS midclavicular line), then chest
-    tube (ATS 2023)'
-  - 'Small (<2 cm) + stable: Observation, 100% oxygen, repeat CXR in 6 hours (ATS
-    2023)'
-  - 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal (ATS 2023)'
-  - 'Alternative for primary: Aspiration with small catheter (ATS 2023)'
-  - 'If persistent air leak >5 days: VATS with pleurodesis (ATS 2023)'
-  tests:
-  - Chest X-ray (PA upright, expiratory view increases sensitivity)
-  - CT chest if small or uncertain diagnosis
-  - ABG if respiratory distress
-  referrals:
-  - Cardiothoracic surgery if persistent air leak, recurrent, or tension
-  - Pulmonology for recurrent pneumothorax (consider pleurodesis)
-  sensitivity: 0.85
-  specificity: 0.95
-  icd10:
-  - J93.0
-  - J93.11
-  - J93.12
-  snomed:
-  - '36118008'
