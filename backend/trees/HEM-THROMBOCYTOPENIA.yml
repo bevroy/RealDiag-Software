@@ -1,0 +1,783 @@
+tree_id: HEM-THROMBOCYTOPENIA
+name: Thrombocytopenia Evaluation
+family: Hematology
+specialty: Hematology
+chief_complaint: Low platelet count, easy bruising, petechiae, bleeding
+description: Systematic approach to thrombocytopenia (platelet count <150,000/μL) including determination of severity, identification of cause, and management based on etiology. Critical distinction between decreased production, increased destruction, and sequestration. Emphasizes recognition of life-threatening causes requiring urgent intervention.
+
+nodes:
+  - id: initial_platelet_count
+    type: question
+    question: "Platelet count confirmed on peripheral blood smear (to rule out pseudothrombocytopenia from EDTA-induced clumping). What is the severity?"
+    options:
+      - label: "Severe: <20,000/μL"
+        next: bleeding_assessment_severe
+      - label: "Moderate: 20,000-50,000/μL"
+        next: bleeding_assessment_moderate
+      - label: "Mild: 50,000-150,000/μL"
+        next: history_workup
+      - label: "Platelet clumping on smear - pseudothrombocytopenia"
+        next: dx_pseudothrombocytopenia
+
+  - id: bleeding_assessment_severe
+    type: question
+    question: "SEVERE thrombocytopenia (<20,000). Active bleeding present?"
+    options:
+      - label: "Intracranial hemorrhage (headache, AMS, focal deficits)"
+        next: dx_life_threatening_bleeding
+      - label: "Major bleeding (GI, GU, respiratory, hemodynamic instability)"
+        next: dx_life_threatening_bleeding
+      - label: "Mucosal bleeding (gums, epistaxis, menorrhagia)"
+        next: urgent_workup_severe
+      - label: "Petechiae/purpura only, no active bleeding"
+        next: urgent_workup_severe
+
+  - id: bleeding_assessment_moderate
+    type: question
+    question: "Moderate thrombocytopenia (20,000-50,000). Clinical presentation?"
+    options:
+      - label: "Post-transfusion, new onset after platelet transfusion"
+        next: dx_post_transfusion_purpura
+      - label: "Pregnant patient"
+        next: pregnancy_thrombocytopenia
+      - label: "Recent infection or vaccine (within 4 weeks)"
+        next: history_workup
+      - label: "Chronic, stable, asymptomatic"
+        next: history_workup
+
+  - id: urgent_workup_severe
+    type: question
+    question: "Severe thrombocytopenia workup. Review peripheral smear and associated findings?"
+    options:
+      - label: "Schistocytes on smear + anemia + elevated LDH/low haptoglobin"
+        next: microangiopathic_workup
+      - label: "Fever + neurologic changes + renal dysfunction"
+        next: microangiopathic_workup
+      - label: "Recent heparin exposure (within 5-14 days)"
+        next: hit_workup
+      - label: "Isolated thrombocytopenia, smear otherwise normal"
+        next: itp_workup
+      - label: "Pancytopenia (anemia + leukopenia + thrombocytopenia)"
+        next: bone_marrow_failure
+
+  - id: history_workup
+    type: question
+    question: "Detailed history for thrombocytopenia etiology. Key findings?"
+    options:
+      - label: "Medications: heparin, quinine, sulfonamides, valproic acid, linezolid"
+        next: medication_induced
+      - label: "Alcohol abuse history"
+        next: alcohol_related
+      - label: "Recent viral illness (EBV, CMV, HIV, hepatitis C)"
+        next: viral_associated
+      - label: "Chronic liver disease, splenomegaly"
+        next: liver_spleen_workup
+      - label: "Family history of thrombocytopenia"
+        next: hereditary_workup
+      - label: "Recent infection followed by bleeding (especially children)"
+        next: itp_workup
+      - label: "Pregnancy"
+        next: pregnancy_thrombocytopenia
+
+  - id: microangiopathic_workup
+    type: question
+    question: "Microangiopathic hemolytic anemia (MAHA) suspected. Additional features?"
+    options:
+      - label: "Bloody diarrhea (especially E. coli O157:H7), renal failure"
+        next: dx_hus
+      - label: "Fever + neurologic symptoms + renal dysfunction + no diarrhea"
+        next: dx_ttp
+      - label: "Pregnant (>20 weeks) or postpartum + hypertension + proteinuria"
+        next: dx_hellp_preeclampsia
+      - label: "Recent medication: ticlopidine, clopidogrel, quinine"
+        next: dx_drug_induced_ttp
+
+  - id: hit_workup
+    type: question
+    question: "Heparin exposure within 5-14 days. Calculate 4Ts score (Thrombocytopenia timing, Thrombosis, oTher causes, Timing of platelet fall). Score?"
+    options:
+      - label: "4Ts score ≥6 (high probability HIT)"
+        next: dx_hit_high_probability
+      - label: "4Ts score 4-5 (intermediate probability)"
+        next: dx_hit_intermediate
+      - label: "4Ts score <4 (low probability)"
+        next: alternative_diagnosis
+
+  - id: itp_workup
+    type: question
+    question: "Immune thrombocytopenia (ITP) suspected. Exclusion criteria met (no other cause found)?"
+    options:
+      - label: "Children: acute onset after viral illness, <6 months duration"
+        next: dx_itp_acute
+      - label: "Adults: insidious onset, >6 months duration typical"
+        next: dx_itp_chronic
+      - label: "Other findings suggest alternative diagnosis"
+        next: alternative_diagnosis
+
+  - id: bone_marrow_failure
+    type: question
+    question: "Pancytopenia present. Additional clinical features?"
+    options:
+      - label: "Acute onset, recent chemotherapy or radiation"
+        next: dx_chemotherapy_induced
+      - label: "Megaloblastic changes on smear (hypersegmented neutrophils, macrocytic RBCs)"
+        next: b12_folate_deficiency
+      - label: "Young patient, short stature, café-au-lait spots, thumb abnormalities"
+        next: dx_fanconi_anemia
+      - label: "Adults, aplastic anemia suspected"
+        next: dx_aplastic_anemia
+
+  - id: liver_spleen_workup
+    type: question
+    question: "Hepatosplenomegaly or liver disease. Laboratory findings?"
+    options:
+      - label: "Splenomegaly + normal liver function"
+        next: dx_splenic_sequestration
+      - label: "Cirrhosis (elevated bili, INR, low albumin) + splenomegaly"
+        next: dx_cirrhosis_sequestration
+      - label: "Hepatitis C positive"
+        next: dx_hcv_thrombocytopenia
+
+  - id: pregnancy_thrombocytopenia
+    type: question
+    question: "Pregnant patient with thrombocytopenia. Timing and severity?"
+    options:
+      - label: "Mild (>70,000), 2nd/3rd trimester, no symptoms"
+        next: dx_gestational_thrombocytopenia
+      - label: "Severe (<50,000) + hypertension + elevated LFTs + hemolysis"
+        next: dx_hellp_preeclampsia
+      - label: "Any trimester, isolated thrombocytopenia, otherwise normal"
+        next: dx_itp_pregnancy
+
+  - id: medication_induced
+    type: question
+    question: "Medication exposure with temporal relationship. Naranjo score ≥5 (probable drug reaction)?"
+    options:
+      - label: "Heparin: thrombocytopenia + thrombosis"
+        next: dx_hit_high_probability
+      - label: "Other drugs: improvement after discontinuation expected in 7-10 days"
+        next: dx_drug_induced_thrombocytopenia
+      - label: "Chemotherapy: predictable bone marrow suppression"
+        next: dx_chemotherapy_induced
+
+  - id: alcohol_related
+    type: question
+    question: "Alcohol abuse. Other cytopenias or liver dysfunction?"
+    options:
+      - label: "Isolated thrombocytopenia, resolves 1-2 weeks after abstinence"
+        next: dx_alcohol_direct_effect
+      - label: "Cirrhosis + splenomegaly + thrombocytopenia"
+        next: dx_cirrhosis_sequestration
+
+  - id: viral_associated
+    type: question
+    question: "Recent viral illness. Specific findings?"
+    options:
+      - label: "HIV positive with low CD4 count"
+        next: dx_hiv_thrombocytopenia
+      - label: "Hepatitis C positive"
+        next: dx_hcv_thrombocytopenia
+      - label: "Acute EBV or CMV infection"
+        next: dx_viral_thrombocytopenia
+
+  - id: hereditary_workup
+    type: question
+    question: "Family history of thrombocytopenia or bleeding. Smear findings?"
+    options:
+      - label: "Large platelets, lifelong mild thrombocytopenia"
+        next: dx_hereditary_macrothrombocytopenia
+      - label: "Small platelets, eczema, immunodeficiency (males)"
+        next: dx_wiskott_aldrich
+
+  - id: b12_folate_deficiency
+    type: question
+    question: "Megaloblastic anemia suspected. B12 and folate levels?"
+    options:
+      - label: "B12 <200 pg/mL"
+        next: dx_b12_deficiency
+      - label: "Folate <2 ng/mL"
+        next: dx_folate_deficiency
+
+  - id: alternative_diagnosis
+    type: diagnosis
+    diagnosis: "Continue Diagnostic Workup"
+    icd10: D69.6
+    description: "Thrombocytopenia of unclear etiology. Further investigation required including bone marrow biopsy, genetic testing, or specialist consultation."
+    recommendations:
+      - "Hematology consultation"
+      - "Consider bone marrow biopsy if diagnosis unclear"
+      - "Flow cytometry if lymphoproliferative disorder suspected"
+      - "Genetic testing if hereditary disorder suspected"
+      - "Serial CBCs to assess trend"
+      - "Avoid antiplatelet agents (aspirin, NSAIDs)"
+      - "Bleeding precautions if platelets <50,000"
+
+  - id: dx_pseudothrombocytopenia
+    type: diagnosis
+    diagnosis: "Pseudothrombocytopenia (Laboratory Artifact)"
+    icd10: D69.6
+    description: "Falsely low platelet count due to EDTA-induced platelet clumping in vitro. No clinical significance. Confirmed by normal platelet count in citrate or heparin tube, and platelet clumps visible on peripheral smear."
+    recommendations:
+      - "Repeat CBC in sodium citrate tube (blue top) or heparin tube"
+      - "Peripheral smear review confirms platelet clumps"
+      - "True platelet count is normal - no treatment needed"
+      - "Document in chart to avoid unnecessary workup in future"
+      - "Patient education: lab artifact, not a true medical condition"
+
+  - id: dx_life_threatening_bleeding
+    type: diagnosis
+    diagnosis: "Life-Threatening Bleeding with Thrombocytopenia"
+    icd10: D69.59
+    description: "EMERGENCY: Major bleeding with severe thrombocytopenia. Requires immediate platelet transfusion regardless of etiology while workup proceeds. Goal platelet count >50,000 for major bleeding, >100,000 for intracranial hemorrhage."
+    recommendations:
+      - "EMERGENCY platelet transfusion immediately:"
+      - "  - 1 apheresis unit OR 4-6 pooled units"
+      - "  - Goal >50,000 for major bleeding, >100,000 for ICH"
+      - "  - May need repeated transfusions q12-24h"
+      - "Tranexamic acid 1g IV over 10 min, then 1g IV over 8h if active bleeding"
+      - "If ITP suspected: IVIG 1g/kg IV × 1-2 days + dexamethasone 40mg IV daily × 4 days"
+      - "If TTP suspected: emergent plasmapheresis"
+      - "If HIT suspected: stop ALL heparin, start argatroban or fondaparinux"
+      - "Type and cross for RBC transfusion if significant blood loss"
+      - "Neurosurgery consultation if intracranial hemorrhage"
+      - "Hematology consultation STAT"
+      - "ICU admission for close monitoring"
+
+  - id: dx_post_transfusion_purpura
+    type: diagnosis
+    diagnosis: "Post-Transfusion Purpura"
+    icd10: D69.51
+    description: "Rare severe thrombocytopenia 5-12 days after blood product transfusion due to alloantibodies against platelet antigens (usually HPA-1a). Paradoxically, platelet transfusions may worsen condition. Requires IVIG therapy."
+    recommendations:
+      - "IVIG 1g/kg/day IV × 2 days (first-line treatment)"
+      - "Plasmapheresis if IVIG fails or severe bleeding"
+      - "AVOID platelet transfusions unless life-threatening bleeding (may worsen condition)"
+      - "Corticosteroids: methylprednisolone 1g IV daily × 3 days"
+      - "Platelet count typically recovers within 1-2 weeks"
+      - "HPA typing if available to confirm diagnosis"
+      - "Future transfusions: use HPA-1a negative blood products if possible"
+      - "Hematology consultation"
+
+  - id: dx_hus
+    type: diagnosis
+    diagnosis: "Hemolytic Uremic Syndrome (HUS)"
+    icd10: D59.3
+    description: "Microangiopathic hemolytic anemia + thrombocytopenia + acute kidney injury, typically following Shiga toxin-producing E. coli (STEC) infection. Most common in children. Supportive care is mainstay - NO antibiotics for STEC (increases toxin release), NO platelet transfusions unless life-threatening bleeding."
+    recommendations:
+      - "ADMIT to hospital, often requires ICU"
+      - "DO NOT give antibiotics for STEC-HUS (increases Shiga toxin release)"
+      - "DO NOT transfuse platelets unless life-threatening bleeding (may worsen thrombosis)"
+      - "Supportive care:"
+      - "  - IV hydration: NS 1.5× maintenance"
+      - "  - Monitor renal function, fluid balance, electrolytes q12-24h"
+      - "  - Dialysis if severe renal failure (50% require temporary dialysis)"
+      - "RBC transfusion if Hgb <7 g/dL or symptomatic anemia"
+      - "Monitor for complications: hypertension, seizures, colitis"
+      - "Stool culture for STEC, Shiga toxin PCR"
+      - "Nephrology consultation"
+      - "Eculizumab (anti-C5 antibody) for atypical HUS (non-STEC) only"
+      - "Prognosis: 90-95% recovery in children with STEC-HUS, but 5% mortality"
+      - "Long-term follow-up for chronic kidney disease risk"
+
+  - id: dx_ttp
+    type: diagnosis
+    diagnosis: "Thrombotic Thrombocytopenic Purpura (TTP)"
+    icd10: M31.19
+    description: "MEDICAL EMERGENCY: Life-threatening disorder caused by ADAMTS13 deficiency leading to microvascular thrombosis. Classic pentad (only 40% have all): thrombocytopenia, MAHA, fever, renal dysfunction, neurologic symptoms. Mortality 90% if untreated, <10% with plasma exchange. Do NOT wait for ADAMTS13 results - treat empirically if suspected."
+    recommendations:
+      - "EMERGENCY plasma exchange (plasmapheresis) daily until platelets >150,000 × 2 days + LDH normalizing (typically 5-10 sessions)"
+      - "  - Remove 1.5 plasma volumes daily"
+      - "  - Replace with FFP or preferably solvent-detergent plasma"
+      - "  - DO NOT DELAY for ADAMTS13 results - treat empirically"
+      - "Corticosteroids: methylprednisolone 1g IV daily × 3 days OR prednisone 1mg/kg daily"
+      - "Rituximab 375mg/m² IV weekly × 4 weeks (reduces relapse)"
+      - "Caplacizumab (anti-vWF) if available: 10mg IV, then 10mg SC daily (accelerates platelet recovery)"
+      - "Send ADAMTS13 activity and inhibitor BEFORE first plasma exchange"
+      - "AVOID platelet transfusions (may worsen thrombosis) - only if life-threatening bleeding"
+      - "Avoid antiplatelet agents"
+      - "ICU admission for close monitoring"
+      - "Hematology consultation STAT"
+      - "Monitor: daily CBC, LDH, creatinine, neurologic exam"
+      - "Relapse rate 20-50% - long-term follow-up required"
+
+  - id: dx_hellp_preeclampsia
+    type: diagnosis
+    diagnosis: "HELLP Syndrome/Severe Preeclampsia"
+    icd10: O14.2
+    description: "Pregnancy complication with Hemolysis, Elevated Liver enzymes, Low Platelets occurring in 2nd/3rd trimester or postpartum. Medical emergency requiring delivery. Risk of maternal death from hepatic rupture, DIC, stroke. Delivery is definitive treatment."
+    recommendations:
+      - "OBSTETRICS CONSULTATION IMMEDIATELY"
+      - "DELIVERY is definitive treatment (timing depends on gestational age and severity)"
+      - "Blood pressure control: labetalol 20mg IV, double q10min to max 300mg OR hydralazine 5-10mg IV q20min"
+      - "Magnesium sulfate 4-6g IV load over 15-20min, then 2g/hr infusion for seizure prophylaxis"
+      - "Corticosteroids if <34 weeks: betamethasone 12mg IM q24h × 2 doses for fetal lung maturity"
+      - "Platelet transfusion if platelets <20,000 or <50,000 before cesarean section"
+      - "Monitor: BP q15min, urine output, symptoms (headache, vision changes, RUQ pain)"
+      - "Labs q6-12h: CBC, LFTs, creatinine, LDH"
+      - "Liver imaging (ultrasound or CT) if RUQ pain or LFTs >500 (rule out subcapsular hematoma)"
+      - "DELIVERY: induce labor if favorable cervix, cesarean if unfavorable or fetal distress"
+      - "Platelets usually recover 2-5 days postpartum"
+      - "Continue magnesium 24-48h postpartum"
+
+  - id: dx_drug_induced_ttp
+    type: diagnosis
+    diagnosis: "Drug-Induced TTP"
+    icd10: M31.19
+    description: "TTP triggered by medications, most commonly quinine, ticlopidine (rare now), clopidogrel. Treat as TTP with plasma exchange but also STOP offending drug immediately. Prognosis better than congenital TTP if drug recognized and stopped."
+    recommendations:
+      - "STOP offending medication immediately"
+      - "Treat as TTP: emergent plasma exchange daily"
+      - "Corticosteroids: methylprednisolone 1g IV daily × 3 days"
+      - "ADAMTS13 activity typically >10% (vs <10% in congenital TTP)"
+      - "Usually single episode - does not recur if drug avoided"
+      - "Do NOT re-challenge with offending medication ever"
+      - "Hematology consultation"
+      - "ICU monitoring"
+
+  - id: dx_hit_high_probability
+    type: diagnosis
+    diagnosis: "Heparin-Induced Thrombocytopenia (HIT)"
+    icd10: D75.82
+    description: "Life-threatening prothrombotic disorder caused by antibodies against heparin-platelet factor 4 complex. Platelet count falls 5-14 days after heparin exposure. PARADOXICAL thrombosis risk 30-50% despite low platelets. STOP ALL HEPARIN immediately and start non-heparin anticoagulant."
+    recommendations:
+      - "STOP ALL HEPARIN immediately (including heparin flushes, LMWH, heparin-coated catheters)"
+      - "Start alternative anticoagulation immediately (do NOT wait for antibody results):"
+      - "  - Argatroban 2 mcg/kg/min IV (reduce to 0.5 if liver dysfunction)"
+      - "  - OR bivalirudin 0.15mg/kg/hr IV"
+      - "  - OR fondaparinux 7.5mg SC daily (if platelet >50,000)"
+      - "Send HIT antibody (anti-PF4/heparin ELISA) and serotonin release assay"
+      - "DO NOT transfuse platelets (may worsen thrombosis)"
+      - "Doppler ultrasound of all extremities to screen for DVT"
+      - "Continue alternative anticoagulation until platelet >150,000"
+      - "Transition to warfarin only after platelets >150,000 (overlap ≥5 days, avoid warfarin in acute phase)"
+      - "Warfarin goal INR 2-3 × 3 months minimum"
+      - "Avoid heparin for life - document allergy in chart"
+      - "Future surgeries: use argatroban or bivalirudin instead of heparin"
+      - "Hematology consultation"
+
+  - id: dx_hit_intermediate
+    type: diagnosis
+    diagnosis: "Possible Heparin-Induced Thrombocytopenia"
+    icd10: D75.82
+    description: "Intermediate probability of HIT based on 4Ts score. Send antibody testing but may need to treat empirically while awaiting results depending on clinical urgency and thrombosis risk."
+    recommendations:
+      - "Send HIT antibody panel (anti-PF4/heparin ELISA)"
+      - "If HIGH clinical suspicion or active thrombosis: STOP heparin and treat as HIT"
+      - "If LOWER suspicion: may continue heparin cautiously while awaiting results (discuss with hematology)"
+      - "Alternative anticoagulation options if stopping heparin:"
+      - "  - Argatroban 2 mcg/kg/min IV OR fondaparinux 7.5mg SC daily"
+      - "Monitor platelet count daily"
+      - "Hematology consultation"
+      - "If HIT antibody negative: HIT unlikely, can resume heparin"
+      - "If HIT antibody positive: treat as confirmed HIT"
+
+  - id: dx_itp_acute
+    type: diagnosis
+    diagnosis: "Acute Immune Thrombocytopenia (ITP) - Childhood"
+    icd10: D69.3
+    description: "Acute self-limited thrombocytopenia in children following viral infection. Autoantibodies against platelet antigens. 80% spontaneously resolve within 6 months. Treatment only if bleeding or platelets <20,000-30,000. Avoid platelet transfusions (ineffective - antibodies destroy transfused platelets)."
+    recommendations:
+      - "If platelets >30,000 and no/minimal bleeding: OBSERVATION ONLY (80% resolve spontaneously)"
+      - "If platelets <20,000 or significant mucosal bleeding, treat with:"
+      - "  - IVIG 0.8-1 g/kg IV × 1 dose (works within 24-48h, lasts 2-4 weeks)"
+      - "  - OR corticosteroids: prednisone 2-4mg/kg/day × 2-3 weeks, then taper"
+      - "  - OR anti-D (WinRho) 50-75 mcg/kg IV × 1 dose (only if Rh+ and non-splenectomized)"
+      - "Avoid platelet transfusions (ineffective - rapidly destroyed)"
+      - "Activity restrictions:"
+      - "  - No contact sports if platelets <50,000"
+      - "  - Avoid intramuscular injections"
+      - "Bleeding precautions: avoid aspirin, NSAIDs"
+      - "Monitor platelets weekly until stable recovery"
+      - "80% recover within 6 months without recurrence"
+      - "Hematology follow-up if persistent >6 months (becomes chronic ITP)"
+
+  - id: dx_itp_chronic
+    type: diagnosis
+    diagnosis: "Chronic Immune Thrombocytopenia (ITP) - Adults"
+    icd10: D69.3
+    description: "Chronic autoimmune thrombocytopenia in adults, often insidious onset, rarely spontaneously resolves (only 5-10%). Diagnosis of exclusion after ruling out other causes. Treatment based on bleeding symptoms and platelet count, not count alone."
+    recommendations:
+      - "Treatment thresholds:"
+      - "  - Platelets >50,000: usually no treatment needed"
+      - "  - Platelets 30,000-50,000: treat if bleeding or high-risk activity"
+      - "  - Platelets <30,000: usually treat"
+      - "First-line treatment:"
+      - "  - Corticosteroids: dexamethasone 40mg PO daily × 4 days (short course preferred)"
+      - "  - OR prednisone 1mg/kg/day × 2-4 weeks, taper over 4-6 weeks"
+      - "  - IVIG 1g/kg IV × 1-2 days for urgent situations (surgery, severe bleeding)"
+      - "Second-line treatment (if steroid-refractory or relapsing):"
+      - "  - Thrombopoietin receptor agonists: romiplostim 1-10 mcg/kg SC weekly OR eltrombopag 50mg PO daily"
+      - "  - Rituximab 375mg/m² IV weekly × 4 weeks (60% response rate)"
+      - "  - Splenectomy (70-80% response, consider if failed medical therapy)"
+      - "Third-line: fostamatinib, cyclosporine, azathioprine, mycophenolate"
+      - "Avoid antiplatelet agents (aspirin, NSAIDs, clopidogrel)"
+      - "H. pylori testing and eradication if positive (improves ITP in some)"
+      - "Hematology follow-up every 3-6 months"
+      - "Bone marrow biopsy if atypical features or before splenectomy"
+
+  - id: dx_itp_pregnancy
+    type: diagnosis
+    diagnosis: "ITP in Pregnancy"
+    icd10: O99.119
+    description: "ITP complicating pregnancy. Risk of maternal bleeding during delivery and neonatal thrombocytopenia (10-15%) from transplacental transfer of antiplatelet antibodies. Goal platelets >50,000 for vaginal delivery, >80,000 for cesarean section."
+    recommendations:
+      - "Platelet goals:"
+      - "  - >50,000 for vaginal delivery"
+      - "  - >80,000 for cesarean section or epidural anesthesia"
+      - "  - >30,000 generally safe during pregnancy (no spontaneous bleeding)"
+      - "Treatment during pregnancy:"
+      - "  - Prednisone 1mg/kg/day (Category B) if needed to reach delivery threshold"
+      - "  - IVIG 1g/kg IV if urgent increase needed (safe in pregnancy)"
+      - "  - Avoid splenectomy in pregnancy if possible (highest risk procedure)"
+      - "Delivery planning:"
+      - "  - Check maternal platelets weekly in 3rd trimester"
+      - "  - IVIG 1-2 days before scheduled delivery if needed"
+      - "  - Avoid fetal scalp electrodes, forceps, vacuum delivery"
+      - "  - Mode of delivery based on obstetric indications, not platelet count alone"
+      - "Neonatal management:"
+      - "  - Check neonatal platelets at birth and day 2-4 (nadir typically day 2-4)"
+      - "  - 10-15% neonates have thrombocytopenia <50,000"
+      - "  - If neonatal platelets <30,000: IVIG 1g/kg IV"
+      - "  - Avoid circumcision until platelets normal"
+      - "Maternal platelets typically improve postpartum"
+
+  - id: dx_chemotherapy_induced
+    type: diagnosis
+    diagnosis: "Chemotherapy-Induced Thrombocytopenia"
+    icd10: D69.59
+    description: "Expected dose-dependent bone marrow suppression from chemotherapy, typically nadir at 7-14 days after treatment. Management depends on bleeding risk and platelet count. Prophylactic platelet transfusions for count <10,000 or <50,000 if bleeding/procedure planned."
+    recommendations:
+      - "Prophylactic platelet transfusion thresholds:"
+      - "  - <10,000: transfuse to prevent spontaneous bleeding"
+      - "  - <50,000: transfuse before invasive procedures"
+      - "  - <100,000: transfuse before neurosurgery or eye surgery"
+      - "Platelet transfusion: 1 apheresis unit or 4-6 pooled units (raises count ~30,000-50,000)"
+      - "Bleeding precautions:"
+      - "  - Avoid aspirin, NSAIDs, anticoagulants"
+      - "  - Soft toothbrush, electric razor"
+      - "  - Avoid intramuscular injections"
+      - "Monitor CBC at least twice weekly during nadir period"
+      - "Consider dose reduction or chemotherapy delay if:"
+      - "  - Platelets <25,000 at time of next cycle"
+      - "  - Grade 4 thrombocytopenia requiring multiple transfusions"
+      - "Thrombopoietin receptor agonists (romiplostim, eltrombopag) for persistent thrombocytopenia"
+      - "Platelets typically recover 14-21 days after chemotherapy"
+      - "Oncology and hematology co-management"
+
+  - id: dx_fanconi_anemia
+    type: diagnosis
+    diagnosis: "Fanconi Anemia"
+    icd10: D61.09
+    description: "Inherited bone marrow failure syndrome with physical anomalies (short stature, thumb/radius abnormalities, café-au-lait spots) and high cancer risk. Diagnosis by chromosomal breakage test. Requires bone marrow transplant for cure."
+    recommendations:
+      - "Chromosomal breakage test with mitomycin C or diepoxybutane (diagnostic)"
+      - "Bone marrow biopsy: hypocellular with fatty replacement"
+      - "Genetic testing: mutations in Fanconi anemia genes (FANCA most common)"
+      - "Hematology and genetics consultation"
+      - "Treatment:"
+      - "  - Androgens: oxymetholone 1-5mg/kg/day (70% respond, temporary)"
+      - "  - Hematopoietic stem cell transplant: ONLY curative treatment"
+      - "  - Transfusion support as needed"
+      - "Cancer surveillance: high risk of AML, MDS, solid tumors (head/neck, GI, gynecologic)"
+      - "Avoid DNA-damaging agents (radiation, alkylating chemotherapy)"
+      - "Family genetic counseling"
+
+  - id: dx_aplastic_anemia
+    type: diagnosis
+    diagnosis: "Aplastic Anemia"
+    icd10: D61.9
+    description: "Bone marrow failure with pancytopenia due to stem cell destruction. Causes: idiopathic (50%), drugs (chloramphenicol, NSAIDs), chemicals (benzene), viruses (hepatitis, EBV, HIV). Severe disease requires immunosuppression or transplant."
+    recommendations:
+      - "Bone marrow biopsy: hypocellular (<25% cellularity) with fatty replacement"
+      - "Severity classification:"
+      - "  - Severe: ANC <500, platelets <20,000, retics <20,000 (2 of 3)"
+      - "  - Very severe: ANC <200"
+      - "  - Non-severe: not meeting severe criteria"
+      - "Hematology consultation urgently"
+      - "Treatment based on severity and age:"
+      - "  - Age <40 with matched sibling donor: allogeneic HSCT (first-line, 70-90% survival)"
+      - "  - Age >40 or no donor: immunosuppressive therapy (horse ATG + cyclosporine, 60-70% response)"
+      - "  - Eltrombopag added to immunosuppression improves response"
+      - "Supportive care:"
+      - "  - Transfuse RBCs to keep Hgb >7-8 g/dL"
+      - "  - Transfuse platelets if <10,000 or bleeding"
+      - "  - G-CSF for severe neutropenia with infection"
+      - "  - Prophylactic antibiotics if ANC <500"
+      - "Screen for PNH (flow cytometry for CD55/CD59) - 30% develop PNH clone"
+      - "Screen for clonal evolution to MDS/AML (annual bone marrow)"
+
+  - id: dx_splenic_sequestration
+    type: diagnosis
+    diagnosis: "Splenic Sequestration"
+    icd10: D73.1
+    description: "Thrombocytopenia due to pooling of platelets in enlarged spleen. Up to 90% of platelets can be sequestered. Usually mild thrombocytopenia (50,000-100,000). Treatment is for underlying cause of splenomegaly, splenectomy reserved for severe cases."
+    recommendations:
+      - "Identify cause of splenomegaly:"
+      - "  - Portal hypertension from cirrhosis"
+      - "  - Lymphoproliferative disorder (CLL, lymphoma)"
+      - "  - Myeloproliferative neoplasm (myelofibrosis)"
+      - "  - Infiltrative disease (Gaucher, sarcoid)"
+      - "  - Infectious (malaria, leishmaniasis)"
+      - "Ultrasound abdomen with Doppler to assess portal vein flow"
+      - "Treatment of underlying condition may reduce spleen size"
+      - "Platelet transfusions generally ineffective (sequestered in spleen)"
+      - "Splenectomy considered if:"
+      - "  - Platelets <30,000 with bleeding"
+      - "  - Symptomatic splenomegaly (pain, early satiety)"
+      - "  - Hypersplenism with pancytopenia"
+      - "If splenectomy planned: vaccinate 2 weeks prior (pneumococcus, Haemophilus, meningococcus)"
+      - "Post-splenectomy: lifelong penicillin prophylaxis"
+
+  - id: dx_cirrhosis_sequestration
+    type: diagnosis
+    diagnosis: "Cirrhosis with Thrombocytopenia"
+    icd10: K74.60
+    description: "Thrombocytopenia in cirrhosis is multifactorial: splenic sequestration (most common), decreased thrombopoietin production, alcohol direct toxicity. Usually mild-moderate (50,000-100,000). Treatment rarely needed unless invasive procedure planned."
+    recommendations:
+      - "Assess severity of liver disease: Child-Pugh score, MELD score"
+      - "Ultrasound abdomen: assess splenomegaly, portal vein thrombosis"
+      - "Thrombocytopenia usually does NOT require treatment unless:"
+      - "  - Invasive procedure planned requiring higher platelet count"
+      - "  - Active bleeding"
+      - "For procedures:"
+      - "  - If platelets <50,000 before procedure: platelet transfusion (short-lived effect)"
+      - "  - OR thrombopoietin receptor agonist: avatrombopag 60mg PO daily × 5 days before procedure (FDA approved for this indication)"
+      - "  - OR lusutrombopag 3mg PO daily × 7 days before procedure"
+      - "Hepatology consultation for cirrhosis management"
+      - "Address underlying causes:"
+      - "  - Alcohol cessation if alcohol-related"
+      - "  - Treat hepatitis B/C if applicable"
+      - "  - Consider liver transplantation evaluation if decompensated"
+      - "Splenectomy or splenic artery embolization rarely indicated (high surgical risk)"
+
+  - id: dx_hcv_thrombocytopenia
+    type: diagnosis
+    diagnosis: "Hepatitis C-Associated Thrombocytopenia"
+    icd10: B18.2
+    description: "Thrombocytopenia in HCV can be from multiple mechanisms: immune-mediated destruction, splenic sequestration from cirrhosis, or direct viral bone marrow suppression. HCV treatment with DAAs often improves platelet count."
+    recommendations:
+      - "HCV RNA PCR quantitative, genotype"
+      - "Assess liver fibrosis: FibroScan or liver biopsy"
+      - "If cirrhosis present: see cirrhosis management"
+      - "If no cirrhosis and platelets <75,000: consider immune-mediated"
+      - "Hepatology consultation for HCV treatment"
+      - "Treat HCV with direct-acting antivirals (DAAs):"
+      - "  - High cure rates >95% with 8-12 week courses"
+      - "  - Platelet count often improves after viral clearance"
+      - "If severe thrombocytopenia interfering with HCV treatment:"
+      - "  - IVIG or corticosteroids short-term"
+      - "  - Thrombopoietin receptor agonists: eltrombopag 25mg daily initially"
+      - "Monitor CBC during and after HCV treatment"
+      - "Sustained virologic response (SVR) leads to platelet recovery in 30-50%"
+
+  - id: dx_hiv_thrombocytopenia
+    type: diagnosis
+    diagnosis: "HIV-Associated Thrombocytopenia"
+    icd10: B20
+    description: "Thrombocytopenia occurs in 10-15% of HIV patients, most common in advanced disease. Mechanisms: immune-mediated destruction (similar to ITP), bone marrow suppression, medications, opportunistic infections. Antiretroviral therapy is primary treatment."
+    recommendations:
+      - "Check HIV RNA viral load, CD4 count"
+      - "Start or optimize antiretroviral therapy (ART):"
+      - "  - ART is most effective treatment - platelets improve in 70% within 2-6 months"
+      - "  - Continue ART even if platelets low"
+      - "Review medications for culprits: zidovudine (AZT), ganciclovir, TMP-SMX"
+      - "If platelets <30,000 or bleeding despite ART:"
+      - "  - Corticosteroids: prednisone 1mg/kg daily × 2-3 weeks (use cautiously in HIV)"
+      - "  - IVIG 1g/kg IV × 1-2 days for urgent situations"
+      - "  - Anti-D (WinRho) if Rh positive and non-splenectomized"
+      - "  - Thrombopoietin receptor agonists: romiplostim or eltrombopag"
+      - "Screen for HCV co-infection (common)"
+      - "Avoid splenectomy due to immunodeficiency risk"
+      - "Infectious disease consultation"
+      - "Monitor CD4 and viral load - immune reconstitution improves platelets"
+
+  - id: dx_viral_thrombocytopenia
+    type: diagnosis
+    diagnosis: "Viral-Associated Thrombocytopenia"
+    icd10: D69.59
+    description: "Transient thrombocytopenia associated with acute viral infections (EBV, CMV, parvovirus B19, dengue). Typically self-limited, resolves within 1-4 weeks after viral illness resolves. Supportive care usually sufficient."
+    recommendations:
+      - "Viral serologies to identify causative virus if unclear"
+      - "Most cases resolve spontaneously as viral infection clears"
+      - "Treatment usually NOT required unless:"
+      - "  - Platelets <20,000 with bleeding"
+      - "  - Severe thrombocytopenia with concerning symptoms"
+      - "If treatment needed:"
+      - "  - IVIG 0.8-1 g/kg IV × 1 dose"
+      - "  - Corticosteroids: prednisone 1mg/kg/day × 1-2 weeks"
+      - "Monitor platelet count weekly until recovery"
+      - "Bleeding precautions: avoid aspirin, NSAIDs, contact sports"
+      - "If dengue: supportive care, monitor for warning signs (severe abdominal pain, persistent vomiting, bleeding, lethargy)"
+      - "Return precautions: new bleeding, severe headache, altered mental status"
+      - "Expected recovery: 1-4 weeks"
+      - "If not recovered by 6 months → re-evaluate as possible chronic ITP"
+
+  - id: dx_drug_induced_thrombocytopenia
+    type: diagnosis
+    diagnosis: "Drug-Induced Thrombocytopenia"
+    icd10: D69.59
+    description: "Immune-mediated thrombocytopenia triggered by medications. Common culprits: quinidine, quinine, sulfonamides, vancomycin, valproic acid, linezolid, heparin. Recovery expected 7-10 days after drug discontinuation."
+    recommendations:
+      - "STOP suspected offending medication immediately"
+      - "Review medication timeline: typically 5-14 days after exposure (or sooner if re-exposure)"
+      - "Common causative drugs:"
+      - "  - Antibiotics: vancomycin, linezolid, rifampin, sulfonamides"
+      - "  - Cardiac: quinidine, quinine, eptifibatide, tirofiban"
+      - "  - Anticonvulsants: valproic acid, phenytoin, carbamazepine"
+      - "  - Other: heparin (HIT), NSAIDs, acetaminophen"
+      - "Naranjo adverse drug reaction probability scale to assess causality"
+      - "Platelets should recover within 7-10 days of drug discontinuation"
+      - "If severe bleeding or platelets <10,000:"
+      - "  - IVIG 1g/kg IV × 1 dose (accelerates recovery)"
+      - "  - Platelet transfusion if life-threatening bleeding (less effective while drug present)"
+      - "Monitor CBC every 2-3 days until recovery"
+      - "Document drug allergy in medical record"
+      - "NEVER re-challenge with suspected drug"
+      - "If no recovery after 10-14 days → consider alternative diagnosis"
+
+  - id: dx_alcohol_direct_effect
+    type: diagnosis
+    diagnosis: "Alcohol-Induced Thrombocytopenia"
+    icd10: D69.59
+    description: "Direct toxic effect of alcohol on megakaryocytes causing decreased platelet production. Typically resolves within 1-2 weeks of alcohol abstinence. Must distinguish from cirrhosis with sequestration (slower recovery)."
+    recommendations:
+      - "Alcohol cessation counseling and support"
+      - "Consider addiction medicine or psychiatry referral"
+      - "Thiamine 100mg PO daily (prevent Wernicke-Korsakoff)"
+      - "Folate 1mg PO daily (alcohol depletes folate)"
+      - "Multivitamin daily"
+      - "Assess for liver disease:"
+      - "  - LFTs (AST:ALT ratio >2:1 suggests alcohol)"
+      - "  - Ultrasound abdomen to assess for cirrhosis, splenomegaly"
+      - "  - If cirrhosis: see cirrhosis management"
+      - "Monitor CBC weekly during abstinence"
+      - "Expected recovery: platelets rise within 1-2 weeks of abstinence, normalize by 4-6 weeks"
+      - "If no recovery with abstinence → consider other diagnosis (nutritional deficiency, occult cirrhosis)"
+      - "Screen for other alcohol-related complications: anemia, coagulopathy, pancreatitis"
+
+  - id: dx_hereditary_macrothrombocytopenia
+    type: diagnosis
+    diagnosis: "Hereditary Macrothrombocytopenia"
+    icd10: D69.42
+    description: "Inherited disorder with large platelets and mild thrombocytopenia (50,000-150,000), lifelong and asymptomatic. Most common: MYH9-related disorders, Bernard-Soulier syndrome. Important to recognize to avoid unnecessary treatment. Often misdiagnosed as ITP."
+    recommendations:
+      - "Peripheral smear review: large platelets (>3 microns), some as large as RBCs"
+      - "Automated platelet count may be inaccurate due to large size (counted as RBCs)"
+      - "Family history: ask about lifelong low platelets in relatives"
+      - "Genetic testing if diagnosis unclear: MYH9, GP1BA (Bernard-Soulier), TUBB1"
+      - "No treatment required if asymptomatic (usually no bleeding despite low count)"
+      - "Bleeding time often normal despite thrombocytopenia"
+      - "Important to diagnose correctly:"
+      - "  - Avoid unnecessary ITP treatment (steroids, IVIG, splenectomy)"
+      - "  - Prevent misdiagnosis in future healthcare encounters"
+      - "Genetic counseling if considering having children"
+      - "Counsel patients: this is benign condition, not true ITP"
+      - "Document in medical record to prevent future mismanagement"
+      - "Surgery: may need platelet transfusion if significant bleeding (but often tolerate procedures well)"
+
+  - id: dx_wiskott_aldrich
+    type: diagnosis
+    diagnosis: "Wiskott-Aldrich Syndrome"
+    icd10: D82.0
+    description: "X-linked disorder (affects males) with eczema, thrombocytopenia with small platelets, and recurrent infections from immunodeficiency. Increased risk of autoimmune disease and lymphoma. Requires stem cell transplant for cure."
+    recommendations:
+      - "Clinical triad: eczema + thrombocytopenia + recurrent infections"
+      - "Peripheral smear: SMALL platelets (vs large in most hereditary thrombocytopenias)"
+      - "Low IgM, elevated IgA and IgE"
+      - "Poor response to polysaccharide vaccines"
+      - "Genetic testing: WAS gene mutation (X-linked)"
+      - "Flow cytometry: absent WAS protein expression"
+      - "Hematology and immunology consultation"
+      - "Treatment:"
+      - "  - Hematopoietic stem cell transplant: ONLY curative treatment (80-90% survival if done early)"
+      - "  - Splenectomy: increases platelet count but increases infection risk (controversial)"
+      - "  - IVIG monthly for antibody deficiency"
+      - "  - Prophylactic antibiotics"
+      - "  - Platelet transfusions for serious bleeding"
+      - "  - Eczema management: topical steroids, emollients"
+      - "Avoid live vaccines (immunodeficiency)"
+      - "High risk of lymphoma (10-15% lifetime risk) - surveillance"
+      - "Genetic counseling for family (X-linked inheritance)"
+
+  - id: dx_b12_deficiency
+    type: diagnosis
+    diagnosis: "Vitamin B12 Deficiency"
+    icd10: D51.9
+    description: "Megaloblastic anemia with pancytopenia including thrombocytopenia. Causes: pernicious anemia (most common), malabsorption, dietary (strict vegans), medications (metformin, PPIs). B12 replacement corrects cytopenias within weeks."
+    recommendations:
+      - "Confirm B12 deficiency: B12 <200 pg/mL, methylmalonic acid elevated, homocysteine elevated"
+      - "Peripheral smear: hypersegmented neutrophils (>5 lobes), macro-ovalocytes"
+      - "If B12 <200: check intrinsic factor antibodies (pernicious anemia)"
+      - "Treatment:"
+      - "  - Cyanocobalamin 1000 mcg IM daily × 1 week, then weekly × 4 weeks, then monthly lifelong"
+      - "  - OR high-dose oral: cyanocobalamin 1000-2000 mcg PO daily (equally effective if not pernicious anemia)"
+      - "  - If neurologic symptoms: more aggressive repletion (1000 mcg IM daily × 2 weeks)"
+      - "Expected response:"
+      - "  - Reticulocytosis in 3-5 days"
+      - "  - Platelets normalize in 1-2 weeks"
+      - "  - Hemoglobin normalizes in 4-8 weeks"
+      - "  - Neurologic symptoms may take 6-12 months (may be permanent if long-standing)"
+      - "Monitor CBC, retic count at 1 week to confirm response"
+      - "If pernicious anemia: lifelong B12 replacement required"
+      - "Screen for other autoimmune disorders (thyroid, vitiligo)"
+      - "Folate supplementation if also low (but never folate alone without B12)"
+
+  - id: dx_folate_deficiency
+    type: diagnosis
+    diagnosis: "Folate Deficiency"
+    icd10: D52.9
+    description: "Megaloblastic anemia with pancytopenia from folate deficiency. Causes: poor diet (alcoholism, tea-and-toast diet in elderly), malabsorption (celiac, tropical sprue), medications (methotrexate, trimethoprim, phenytoin), increased demand (pregnancy, hemolysis)."
+    recommendations:
+      - "Confirm folate deficiency: serum folate <2 ng/mL OR RBC folate <140 ng/mL"
+      - "ALWAYS check B12 level before treating (must rule out B12 deficiency - folate alone can worsen B12 neuropathy)"
+      - "Peripheral smear: hypersegmented neutrophils, macro-ovalocytes (identical to B12 deficiency)"
+      - "Treatment:"
+      - "  - Folic acid 1mg PO daily × 1-4 months (until corrected)"
+      - "  - If malabsorption: may need 5mg PO daily"
+      - "  - If on methotrexate: folinic acid (leucovorin) 5-10mg weekly"
+      - "Expected response:"
+      - "  - Reticulocytosis in 3-5 days"
+      - "  - Platelets normalize in 1-2 weeks"
+      - "  - Hemoglobin normalizes in 4-8 weeks"
+      - "Identify and treat underlying cause:"
+      - "  - Improve diet (green leafy vegetables, fortified grains)"
+      - "  - Alcohol cessation if applicable"
+      - "  - Celiac screening if malabsorption suspected"
+      - "Monitor CBC at 1 week to confirm response"
+      - "Continue folate supplementation if ongoing risk (pregnancy, hemolytic anemia, dialysis)"
+      - "Pregnant women: prenatal vitamins contain 400-800 mcg folic acid"
+
+metadata:
+  guidelines:
+    - name: "American Society of Hematology"
+      url: "https://www.hematology.org"
+      description: "ITP and TTP management guidelines"
+  
+  key_medications:
+    - name: IVIG (Immune Globulin IV)
+      dose: "0.8-1 g/kg IV × 1-2 days"
+      indication: "ITP, urgent platelet increase needed"
+      
+    - name: Dexamethasone
+      dose: "40mg PO/IV daily × 4 days"
+      indication: "First-line ITP treatment in adults"
+      
+    - name: Plasma Exchange
+      dose: "1.5 plasma volumes daily"
+      indication: "TTP treatment - emergent"
+
+  red_flags:
+    - "Platelets <20,000 + schistocytes + elevated LDH + renal/neuro symptoms = TTP → emergent plasma exchange"
+    - "Heparin exposure + thrombocytopenia + thrombosis = HIT → stop ALL heparin, start alternative anticoagulation"
+    - "Pregnant + platelets <100,000 + hypertension + elevated LFTs + hemolysis = HELLP → deliver"
+    - "Intracranial hemorrhage with thrombocytopenia = medical emergency → platelet transfusion immediately regardless of cause"
+    - "Floor of mouth elevation + thrombocytopenia = Ludwig's angina with possible DIC"
+
+  key_concepts:
+    - "Never transfuse platelets for TTP or HIT (worsens thrombosis) - only if life-threatening bleeding"
+    - "ITP is diagnosis of exclusion - must rule out TTP, HIT, drug-induced, viral, HIV, HCV"
+    - "TTP mortality 90% untreated vs <10% with plasma exchange - do NOT delay treatment"
+    - "ADAMTS13 <10% confirms TTP diagnosis, but treat empirically while awaiting results"
+    - "Splenectomy for ITP: 70-80% response rate but permanent increased infection and thrombosis risk"
+    - "Gestational thrombocytopenia: benign, most common cause in pregnancy, no treatment needed"
+    - "Pseudothrombocytopenia from EDTA: always check smear before workup - 0.1% of population"

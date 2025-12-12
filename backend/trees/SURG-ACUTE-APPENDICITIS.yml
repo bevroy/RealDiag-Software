@@ -1,0 +1,260 @@
+tree_id: SURG-ACUTE-APPENDICITIS
+name: Acute Appendicitis
+family: Surgery
+specialty: General Surgery
+chief_complaint: Right lower quadrant pain, abdominal pain, periumbilical pain migrating to RLQ
+description: Systematic evaluation and management of suspected acute appendicitis using clinical criteria, imaging, and surgical decision-making. Emphasizes early recognition, appropriate imaging selection, and timely surgical intervention to prevent perforation and complications.
+
+nodes:
+  - id: initial_assessment
+    type: question
+    question: "Patient presents with abdominal pain. What is the pain location and migration pattern?"
+    options:
+      - label: "Periumbilical pain that migrated to RLQ within 24 hours"
+        next: mcburney_exam
+      - label: "Constant RLQ pain, no migration"
+        next: mcburney_exam
+      - label: "Diffuse abdominal pain"
+        next: consider_other
+      - label: "LLQ, epigastric, or RUQ pain"
+        next: consider_other
+
+  - id: mcburney_exam
+    type: question
+    question: "Physical examination findings at McBurney's point (1/3 distance from ASIS to umbilicus)?"
+    options:
+      - label: "Tenderness at McBurney's point + rebound + guarding"
+        next: alvarado_score
+      - label: "Tenderness at McBurney's point, no peritoneal signs"
+        next: alvarado_score
+      - label: "Rovsing's sign positive (RLQ pain with LLQ palpation)"
+        next: alvarado_score
+      - label: "Psoas sign positive (pain with right hip extension)"
+        next: alvarado_score
+      - label: "Obturator sign positive (pain with internal hip rotation)"
+        next: alvarado_score
+
+  - id: alvarado_score
+    type: question
+    question: "Calculate Alvarado Score: Migration of pain (1), Anorexia (1), Nausea/Vomiting (1), RLQ tenderness (2), Rebound (1), Fever >37.3°C (1), Leukocytosis >10k (2), Left shift (1). What is the total score?"
+    options:
+      - label: "Score 7-10 (high probability)"
+        next: imaging_high_risk
+      - label: "Score 5-6 (moderate probability)"
+        next: imaging_moderate_risk
+      - label: "Score 1-4 (low probability)"
+        next: consider_other
+
+  - id: imaging_high_risk
+    type: question
+    question: "For high-risk patients (Alvarado 7-10), what is the patient's body habitus and clinical urgency?"
+    options:
+      - label: "Peritoneal signs, hemodynamically unstable"
+        next: dx_perforated_appendicitis
+      - label: "Thin/normal body habitus, stable"
+        next: ultrasound_first
+      - label: "Obese, stable"
+        next: ct_scan
+      - label: "Pregnant patient"
+        next: mri_pregnancy
+
+  - id: imaging_moderate_risk
+    type: question
+    question: "For moderate-risk patients (Alvarado 5-6), proceed with imaging. What modality?"
+    options:
+      - label: "Ultrasound (children, thin adults, no radiation)"
+        next: ultrasound_result
+      - label: "CT scan (adults, better sensitivity 95%)"
+        next: ct_result
+      - label: "MRI (pregnant patients, children if US nondiagnostic)"
+        next: mri_result
+
+  - id: ultrasound_first
+    type: question
+    question: "Ultrasound findings?"
+    options:
+      - label: "Non-compressible appendix >6mm diameter + target sign"
+        next: dx_acute_appendicitis
+      - label: "Appendix not visualized or equivocal"
+        next: ct_scan
+      - label: "Normal appendix <6mm, compressible"
+        next: consider_other
+
+  - id: ct_scan
+    type: question
+    question: "CT abdomen/pelvis with IV contrast findings?"
+    options:
+      - label: "Appendix >6mm, wall thickening, periappendiceal fat stranding"
+        next: dx_acute_appendicitis
+      - label: "Appendix >6mm + appendicolith + free fluid"
+        next: dx_acute_appendicitis
+      - label: "Appendix >6mm + abscess/phlegmon formation"
+        next: dx_complicated_appendicitis
+      - label: "Appendix >6mm + free air + diffuse peritonitis"
+        next: dx_perforated_appendicitis
+      - label: "Normal appendix"
+        next: consider_other
+
+  - id: ultrasound_result
+    type: question
+    question: "Ultrasound findings in moderate-risk patient?"
+    options:
+      - label: "Positive for appendicitis (>6mm, non-compressible)"
+        next: dx_acute_appendicitis
+      - label: "Negative or equivocal"
+        next: ct_scan
+
+  - id: ct_result
+    type: question
+    question: "CT findings in moderate-risk patient?"
+    options:
+      - label: "Positive for appendicitis"
+        next: dx_acute_appendicitis
+      - label: "Negative, alternative diagnosis found"
+        next: consider_other
+      - label: "Negative, no alternative diagnosis"
+        next: observation_protocol
+
+  - id: mri_pregnancy
+    type: question
+    question: "MRI findings in pregnant patient?"
+    options:
+      - label: "Appendix >7mm on MRI + periappendiceal edema"
+        next: dx_acute_appendicitis_pregnancy
+      - label: "Normal or nondiagnostic MRI"
+        next: observation_protocol
+
+  - id: mri_result
+    type: question
+    question: "MRI findings?"
+    options:
+      - label: "Positive for appendicitis"
+        next: dx_acute_appendicitis
+      - label: "Negative"
+        next: consider_other
+
+  - id: observation_protocol
+    type: diagnosis
+    diagnosis: "Active Observation Protocol"
+    icd10: R10.31
+    description: "Unclear diagnosis despite imaging. Admit for serial abdominal exams q4-6h, NPO, IV fluids, repeat labs (WBC, CRP) at 12-24h. If symptoms progress or labs worsen → surgical consultation. If symptoms resolve → discharge with 24-48h surgical follow-up. Diagnostic laparoscopy if persistent symptoms without improvement."
+    recommendations:
+      - "NPO, IV hydration (maintenance rate)"
+      - "Serial abdominal exams q4-6h by same examiner if possible"
+      - "Repeat CBC, CRP at 12-24 hours"
+      - "Pain control with acetaminophen (avoid NSAIDs/opioids initially)"
+      - "Surgical consultation if worsening peritoneal signs"
+      - "Consider diagnostic laparoscopy if persistent RLQ pain >24h"
+
+  - id: dx_acute_appendicitis
+    type: diagnosis
+    diagnosis: "Acute Appendicitis"
+    icd10: K35.80
+    description: "Acute inflammation of the appendix requiring urgent appendectomy. Laparoscopic appendectomy is preferred approach with benefits of reduced wound infection, shorter hospital stay, and faster return to activities. Preoperative antibiotics reduce infectious complications."
+    recommendations:
+      - "NPO immediately"
+      - "IV hydration: NS or LR at maintenance + deficit replacement"
+      - "Preoperative antibiotics within 1 hour: cefoxitin 2g IV OR cefazolin 1-2g + metronidazole 500mg IV"
+      - "Urgent appendectomy (laparoscopic preferred): within 12-24 hours"
+      - "Pain control: IV acetaminophen 1g q6h, morphine 0.1mg/kg IV q4h PRN"
+      - "Antiemetics: ondansetron 4mg IV q8h PRN"
+      - "Postoperative antibiotics NOT needed for uncomplicated appendicitis"
+      - "Expected discharge POD#1 if laparoscopic, POD#2-3 if open"
+      - "Return precautions: fever >38.5°C, wound redness/drainage, severe pain"
+
+  - id: dx_acute_appendicitis_pregnancy
+    type: diagnosis
+    diagnosis: "Acute Appendicitis in Pregnancy"
+    icd10: O99.611
+    description: "Appendicitis in pregnancy carries higher risk of perforation (especially 2nd/3rd trimester) due to diagnostic delay. Laparoscopic approach safe in 1st/2nd trimester with modifications. Fetal monitoring and obstetric consultation essential."
+    recommendations:
+      - "Immediate surgical and obstetrics consultation"
+      - "NPO, IV hydration"
+      - "Preoperative antibiotics: cefoxitin 2g IV (pregnancy category B)"
+      - "Laparoscopic appendectomy preferred if <30 weeks gestation"
+      - "Open approach considered if >30 weeks or complicated appendicitis"
+      - "Fetal monitoring: continuous in 3rd trimester, intermittent in 2nd trimester"
+      - "Tocolytics NOT routinely indicated unless preterm contractions"
+      - "Low pneumoperitoneum pressure 10-12mmHg if laparoscopic"
+      - "Left lateral tilt positioning during surgery to avoid IVC compression"
+
+  - id: dx_complicated_appendicitis
+    type: diagnosis
+    diagnosis: "Complicated Appendicitis with Abscess/Phlegmon"
+    icd10: K35.33
+    description: "Appendicitis with abscess or phlegmon formation. Management depends on size and patient stability. Small abscesses may respond to antibiotics alone. Large abscesses (>3cm) benefit from percutaneous drainage. Interval appendectomy controversial but recommended if recurrent symptoms."
+    recommendations:
+      - "NPO, IV hydration"
+      - "Broad-spectrum antibiotics: piperacillin-tazobactam 3.375g IV q6h OR ceftriaxone 1-2g IV daily + metronidazole 500mg IV q8h"
+      - "If abscess >3cm: percutaneous CT-guided drainage by interventional radiology"
+      - "If abscess <3cm or phlegmon: antibiotics alone for 7-14 days"
+      - "Serial imaging (ultrasound or CT) to monitor abscess resolution"
+      - "If failed medical management or worsening sepsis → urgent appendectomy"
+      - "Interval appendectomy: controversial, consider at 6-12 weeks if recurrent symptoms or appendicolith present"
+      - "Colonoscopy at 6 weeks to rule out cecal malignancy in patients >40 years"
+
+  - id: dx_perforated_appendicitis
+    type: diagnosis
+    diagnosis: "Perforated Appendicitis with Peritonitis"
+    icd10: K35.32
+    description: "Surgical emergency with appendiceal rupture and generalized peritonitis. High risk of sepsis and intra-abdominal abscess. Requires urgent surgical intervention with washout and drainage. Extended antibiotic course needed postoperatively."
+    recommendations:
+      - "EMERGENCY: Immediate surgical consultation"
+      - "NPO, aggressive IV resuscitation: 20-30 mL/kg bolus if hypotensive"
+      - "Broad-spectrum antibiotics STAT: piperacillin-tazobactam 4.5g IV OR meropenem 1g IV if severely septic"
+      - "Source control: urgent exploratory laparotomy (open preferred) or laparoscopy"
+      - "Intraoperative: copious irrigation, appendectomy, consider drains if contamination"
+      - "Postoperative antibiotics: continue until afebrile 24h + WBC normalizing + tolerating diet (typically 5-7 days)"
+      - "Monitor for complications: intra-abdominal abscess (5-20%), wound infection (10-20%), ileus"
+      - "CT scan at 7-10 days if persistent fever/leukocytosis to rule out abscess"
+      - "Expected hospital stay: 5-7 days"
+
+  - id: consider_other
+    type: diagnosis
+    diagnosis: "Alternative Diagnosis - Not Appendicitis"
+    icd10: R10.9
+    description: "Clinical presentation and imaging not consistent with appendicitis. Consider alternative diagnoses based on patient demographics and presentation."
+    recommendations:
+      - "Differential diagnosis by demographics:"
+      - "Women of reproductive age: ectopic pregnancy (βhCG), ovarian torsion (pelvic US with Doppler), PID (cervical motion tenderness), ruptured ovarian cyst"
+      - "All adults: mesenteric adenitis, Crohn disease, diverticulitis (older adults), kidney stone (urinalysis), gastroenteritis"
+      - "Children: intussusception (currant jelly stool), mesenteric adenitis (recent URI), Meckel diverticulitis"
+      - "Elderly: diverticulitis, mesenteric ischemia, cholecystitis, perforated peptic ulcer"
+      - "If RLQ pain persists without diagnosis: consider diagnostic laparoscopy"
+      - "Follow-up with primary care or surgery in 24-48 hours if symptoms persist"
+
+metadata:
+  guidelines:
+    - name: "American College of Surgeons"
+      url: "https://www.facs.org"
+      description: "Guidelines for management of acute appendicitis"
+  
+  key_medications:
+    - name: Cefoxitin
+      dose: "2g IV"
+      indication: "Preoperative antibiotic prophylaxis"
+      
+    - name: Piperacillin-Tazobactam
+      dose: "3.375-4.5g IV q6h"
+      indication: "Complicated or perforated appendicitis"
+      
+    - name: Ceftriaxone + Metronidazole
+      dose: "1-2g IV daily + 500mg IV q8h"
+      indication: "Alternative for complicated appendicitis"
+
+  red_flags:
+    - "Diffuse peritonitis with rigidity → perforated appendicitis"
+    - "Hypotension + tachycardia → septic shock, immediate resuscitation"
+    - "Free air on imaging → perforation, urgent surgery"
+    - "Pregnant patient with RLQ pain → higher perforation risk due to diagnostic delay"
+    - "Elderly/immunocompromised → atypical presentation, lower threshold for imaging"
+
+  key_concepts:
+    - "Alvarado Score ≥7 has 93% sensitivity for appendicitis"
+    - "CT sensitivity 95%, specificity 95% - gold standard imaging"
+    - "Ultrasound sensitivity 85%, specificity 90% - operator dependent, first-line in children/pregnancy"
+    - "Appendicolith present in 25% of cases, increases perforation risk"
+    - "Perforation risk increases after 36-48 hours of symptoms"
+    - "Negative appendectomy rate should be <15% (acceptable to avoid perforation)"
+    - "Laparoscopic approach: lower wound infection, shorter stay, faster recovery"
+    - "Antibiotics alone may treat uncomplicated appendicitis in 60-70% (controversial, surgery still standard)"
