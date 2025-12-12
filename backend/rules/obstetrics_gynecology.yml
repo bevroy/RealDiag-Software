@@ -3,34 +3,96 @@ version: 0.1.0
 source: American College of Obstetricians and Gynecologists (ACOG) Practice Bulletins,
   Society for Maternal-Fetal Medicine (SMFM)
 rules:
-- id: OB-PREECLAMPSIA
+- id: OBGYN-PREECLAMPSIA
   label: Preeclampsia
   presentations:
-  - Hypertension (BP ≥ 140/90)
-  - Proteinuria
-  - Onset after 20 weeks gestation
-  - Headache
-  - Visual changes
-  - RUQ pain
-  - Edema
+  - New-onset hypertension after 20 weeks gestation (BP ≥140/90 on 2 occasions 4hr
+    apart)
+  - Proteinuria (≥300 mg/24hr or protein/Cr ratio ≥0.3) OR end-organ dysfunction
+  - 'Severe features: BP ≥160/110, thrombocytopenia (<100K), Cr >1.1, elevated LFTs,
+    pulmonary edema, visual symptoms, RUQ pain'
+  - Headache (severe, persistent), visual changes (scotomata, blurred vision)
+  - Right upper quadrant or epigastric pain (liver capsule distension)
+  - Sudden weight gain, edema (hands, face - not specific but common)
+  clinical_pearls:
+  - 'Delivery is definitive treatment: Only cure for preeclampsia'
+  - 'Severe preeclampsia: Deliver at ≥34 weeks, give betamethasone if <34 weeks'
+  - 'Magnesium sulfate: Seizure prophylaxis (prevents eclampsia), load 4-6g IV, then
+    2g/hr'
+  - 'Blood pressure control: Labetalol or hydralazine if ≥160/110 (goal 140-150/90-100)'
+  - 'HELLP syndrome: Hemolysis, Elevated Liver enzymes, Low Platelets (severe form
+    of preeclampsia)'
+  management:
+  - 'Guideline-based treatment options for Preeclampsia include:'
+  - Deliver if ≥37 weeks or severe features at ≥34 weeks (ACOG 2024)
+  - 'Magnesium sulfate: 4-6g IV load over 15-20min, then 2g/hr infusion (seizure prophylaxis)
+    (ACOG 2024)'
+  - 'Antihypertensives if ≥160/110: Labetalol 20mg IV (double q10min) or hydralazine
+    5-10mg IV (ACOG 2024)'
+  - Betamethasone 12mg IM x2 doses 24hr apart if <34 weeks (fetal lung maturity) (ACOG
+    2024)
+  - 'Postpartum: Continue mag sulfate 24hr, monitor BP closely (can develop preeclampsia
+    postpartum) (ACOG 2024)'
+  tests:
+  - BP monitoring (≥140/90 diagnostic)
+  - Urinalysis (protein), 24hr urine protein or protein/Cr ratio
+  - CBC (platelets), CMP (Cr, LFTs)
+  - Uric acid (elevated in preeclampsia)
+  - Fetal monitoring (NST, biophysical profile)
+  referrals:
+  - OB/GYN for all preeclampsia
+  - Maternal-fetal medicine if severe or <34 weeks
+  - ICU if HELLP syndrome, eclampsia, or severe features
+  sensitivity: 0.88
+  specificity: 0.85
   icd10:
   - O14.90
-  - O14.92
-  - O14.94
+  - O14.12
   snomed:
   - '398254007'
-- id: OB-ECTOPIC
+- id: OBGYN-ECTOPIC-PREGNANCY
   label: Ectopic Pregnancy
   presentations:
-  - Abdominal or pelvic pain
-  - Vaginal bleeding
-  - Positive pregnancy test
-  - Adnexal mass
-  - Shoulder pain (if rupture)
-  - Hypotension/shock (if rupture)
+  - Abdominal/pelvic pain (usually unilateral, may be diffuse)
+  - Vaginal bleeding (lighter than normal period)
+  - Positive pregnancy test (urine or serum beta-hCG)
+  - Cervical motion tenderness, adnexal tenderness on exam
+  - 'If ruptured: Hypotension, tachycardia, shoulder pain (Kehr sign from diaphragmatic
+    irritation)'
+  - Beta-hCG doesn't rise appropriately (should double every 48-72hr in early pregnancy)
+  - 'Ultrasound: No intrauterine pregnancy, may see adnexal mass or free fluid'
+  clinical_pearls:
+  - Any woman of childbearing age with abdominal pain = pregnancy test
+  - 'Discriminatory zone: beta-hCG >1500-2000 should see intrauterine gestational
+    sac on transvaginal U/S'
+  - If hCG >discriminatory zone + no IUP → presumed ectopic
+  - 'Ruptured ectopic: Surgical emergency, go to OR immediately if unstable'
+  - 'Methotrexate: For stable ectopic if hCG <5000, no cardiac activity, <3.5cm, hemodynamically
+    stable'
+  management:
+  - 'Guideline-based treatment options for Ectopic Pregnancy include:'
+  - 'Stable: Serial beta-hCG (ACOG 2024)'
+  - 'Methotrexate 50mg/m² IM: If stable, unruptured, hCG <5000, no fetal cardiac activity,
+    compliant patient (ACOG 2024)'
+  - 'Surgery (salpingectomy or salpingostomy): If ruptured, unstable, or methotrexate
+    contraindicated (ACOG 2024)'
+  - 'If ruptured: IV access x2, fluids, type & cross, emergent OB/GYN consult, OR
+    (ACOG 2024)'
+  - RhoGAM 50-300 mcg if Rh-negative (ACOG 2024)
+  tests:
+  - Beta-hCG (quantitative serum)
+  - Transvaginal ultrasound (look for IUP vs ectopic mass)
+  - CBC (if ruptured)
+  - Type & screen
+  - Repeat beta-hCG in 48hr (should rise appropriately if viable IUP)
+  referrals:
+  - OB/GYN for all ectopic pregnancies
+  - Emergent OR if ruptured
+  sensitivity: 0.85
+  specificity: 0.9
   icd10:
-  - O00.9
   - O00.90
+  - O00.10
   snomed:
   - '34801009'
 - id: OB-HYPEREMESIS
@@ -86,20 +148,6 @@ rules:
   - N80.0
   snomed:
   - '129103003'
-- id: GYN-PID
-  label: Pelvic Inflammatory Disease
-  presentations:
-  - Lower abdominal pain
-  - Cervical motion tenderness
-  - Adnexal tenderness
-  - Fever
-  - Abnormal vaginal discharge
-  - STI risk factors
-  icd10:
-  - N73.9
-  - N70.91
-  snomed:
-  - '198130006'
 - id: GYN-FIBROIDS
   label: Uterine Fibroids (Leiomyoma)
   presentations:
@@ -170,53 +218,6 @@ rules:
   - D39.10
   snomed:
   - '363443007'
-- id: OBGYN-PREECLAMPSIA
-  label: Preeclampsia
-  presentations:
-  - New-onset hypertension after 20 weeks gestation (BP ≥140/90 on 2 occasions 4hr
-    apart)
-  - Proteinuria (≥300 mg/24hr or protein/Cr ratio ≥0.3) OR end-organ dysfunction
-  - 'Severe features: BP ≥160/110, thrombocytopenia (<100K), Cr >1.1, elevated LFTs,
-    pulmonary edema, visual symptoms, RUQ pain'
-  - Headache (severe, persistent), visual changes (scotomata, blurred vision)
-  - Right upper quadrant or epigastric pain (liver capsule distension)
-  - Sudden weight gain, edema (hands, face - not specific but common)
-  clinical_pearls:
-  - 'Delivery is definitive treatment: Only cure for preeclampsia'
-  - 'Severe preeclampsia: Deliver at ≥34 weeks, give betamethasone if <34 weeks'
-  - 'Magnesium sulfate: Seizure prophylaxis (prevents eclampsia), load 4-6g IV, then
-    2g/hr'
-  - 'Blood pressure control: Labetalol or hydralazine if ≥160/110 (goal 140-150/90-100)'
-  - 'HELLP syndrome: Hemolysis, Elevated Liver enzymes, Low Platelets (severe form
-    of preeclampsia)'
-  management:
-  - 'Guideline-based treatment options for Preeclampsia include:'
-  - Deliver if ≥37 weeks or severe features at ≥34 weeks (ACOG 2024)
-  - 'Magnesium sulfate: 4-6g IV load over 15-20min, then 2g/hr infusion (seizure prophylaxis)
-    (ACOG 2024)'
-  - 'Antihypertensives if ≥160/110: Labetalol 20mg IV (double q10min) or hydralazine
-    5-10mg IV (ACOG 2024)'
-  - Betamethasone 12mg IM x2 doses 24hr apart if <34 weeks (fetal lung maturity) (ACOG
-    2024)
-  - 'Postpartum: Continue mag sulfate 24hr, monitor BP closely (can develop preeclampsia
-    postpartum) (ACOG 2024)'
-  tests:
-  - BP monitoring (≥140/90 diagnostic)
-  - Urinalysis (protein), 24hr urine protein or protein/Cr ratio
-  - CBC (platelets), CMP (Cr, LFTs)
-  - Uric acid (elevated in preeclampsia)
-  - Fetal monitoring (NST, biophysical profile)
-  referrals:
-  - OB/GYN for all preeclampsia
-  - Maternal-fetal medicine if severe or <34 weeks
-  - ICU if HELLP syndrome, eclampsia, or severe features
-  sensitivity: 0.88
-  specificity: 0.85
-  icd10:
-  - O14.90
-  - O14.12
-  snomed:
-  - '398254007'
 - id: OBGYN-ECLAMPSIA
   label: Eclampsia
   presentations:
@@ -396,51 +397,6 @@ rules:
   - O44.12
   snomed:
   - '237294000'
-- id: OBGYN-ECTOPIC-PREGNANCY
-  label: Ectopic Pregnancy
-  presentations:
-  - Abdominal/pelvic pain (usually unilateral, may be diffuse)
-  - Vaginal bleeding (lighter than normal period)
-  - Positive pregnancy test (urine or serum beta-hCG)
-  - Cervical motion tenderness, adnexal tenderness on exam
-  - 'If ruptured: Hypotension, tachycardia, shoulder pain (Kehr sign from diaphragmatic
-    irritation)'
-  - Beta-hCG doesn't rise appropriately (should double every 48-72hr in early pregnancy)
-  - 'Ultrasound: No intrauterine pregnancy, may see adnexal mass or free fluid'
-  clinical_pearls:
-  - Any woman of childbearing age with abdominal pain = pregnancy test
-  - 'Discriminatory zone: beta-hCG >1500-2000 should see intrauterine gestational
-    sac on transvaginal U/S'
-  - If hCG >discriminatory zone + no IUP → presumed ectopic
-  - 'Ruptured ectopic: Surgical emergency, go to OR immediately if unstable'
-  - 'Methotrexate: For stable ectopic if hCG <5000, no cardiac activity, <3.5cm, hemodynamically
-    stable'
-  management:
-  - 'Guideline-based treatment options for Ectopic Pregnancy include:'
-  - 'Stable: Serial beta-hCG (ACOG 2024)'
-  - 'Methotrexate 50mg/m² IM: If stable, unruptured, hCG <5000, no fetal cardiac activity,
-    compliant patient (ACOG 2024)'
-  - 'Surgery (salpingectomy or salpingostomy): If ruptured, unstable, or methotrexate
-    contraindicated (ACOG 2024)'
-  - 'If ruptured: IV access x2, fluids, type & cross, emergent OB/GYN consult, OR
-    (ACOG 2024)'
-  - RhoGAM 50-300 mcg if Rh-negative (ACOG 2024)
-  tests:
-  - Beta-hCG (quantitative serum)
-  - Transvaginal ultrasound (look for IUP vs ectopic mass)
-  - CBC (if ruptured)
-  - Type & screen
-  - Repeat beta-hCG in 48hr (should rise appropriately if viable IUP)
-  referrals:
-  - OB/GYN for all ectopic pregnancies
-  - Emergent OR if ruptured
-  sensitivity: 0.85
-  specificity: 0.9
-  icd10:
-  - O00.90
-  - O00.10
-  snomed:
-  - '34801009'
 - id: OBGYN-PELVIC-INFLAMMATORY-DISEASE
   label: Pelvic Inflammatory Disease (PID)
   presentations:

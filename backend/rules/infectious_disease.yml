@@ -82,12 +82,12 @@ rules:
   - Swelling, edema
   - Fever, chills if systemic infection
   - Regional lymphadenopathy (swollen lymph nodes)
-  - 'Poorly demarcated borders (vs erysipelas with sharp, raised borders)'
+  - Poorly demarcated borders (vs erysipelas with sharp, raised borders)
   - 'Most common organisms: Streptococcus pyogenes (Group A Strep), Staphylococcus
     aureus'
   - 'Risk factors: Skin breaks, lymphedema, venous insufficiency, obesity, diabetes'
   - Lymphangitis (red streaks extending from infection site)
-  - 'Purulent drainage suggests abscess - needs incision and drainage (I&D)'
+  - Purulent drainage suggests abscess - needs incision and drainage (I&D)
   - 'MRSA risk factors: IVDU, recent hospitalization, prior MRSA, purulent drainage'
   - Mark borders with pen to track progression or improvement on antibiotics
   clinical_pearls:
@@ -124,49 +124,53 @@ rules:
   - L03.119
   snomed:
   - '128045006'
-- id: ID-MENINGITIS
+- id: ID-BACTERIAL-MENINGITIS
   label: Bacterial Meningitis
   presentations:
-  - Severe headache
-  - Fever
-  - Neck stiffness
-  - Photophobia
-  - Altered mental status
-  - Kernig's or Brudzinski's sign
+  - 'Classic triad: Fever, neck stiffness, altered mental status (only 44% have all
+    3)'
+  - Severe headache, photophobia, nausea/vomiting
+  - Kernig's sign (pain with leg extension), Brudzinski's sign (neck flexion → hip
+    flexion)
+  - Petechial rash (Neisseria meningitidis)
+  - Seizures, focal neurologic deficits (complications)
+  - 'CSF: Elevated WBC (>1000, PMN predominant), low glucose, high protein, elevated
+    opening pressure'
   clinical_pearls:
-  - Classic triad (fever, neck stiffness, altered mental status) present in only 44%
-    of cases
-  - Don't delay antibiotics for LP or imaging - empiric treatment immediately if suspected
+  - Don't delay antibiotics for LP or imaging! Give empiric antibiotics if high suspicion
+  - 'LP contraindicated if: Focal deficit, papilledema, immunocompromised → get CT
+    first'
   - 'Empiric: Vancomycin + ceftriaxone (add ampicillin if >50yo or immunocompromised
     for Listeria)'
-  - Dexamethasone 10mg IV before or with first antibiotic dose reduces mortality and
-    sequelae
-  - 'CSF: WBC >1000 (PMN predominant), glucose <40 mg/dL, protein >200 mg/dL'
-  - Mortality 15-25% despite treatment; neurologic sequelae (hearing loss, seizures)
-    common
+  - Dexamethasone 10mg IV 15-20 min before or with first antibiotic dose (reduces
+    mortality)
+  - Mortality 15-25% even with treatment; neurologic sequelae common
   management:
   - 'Guideline-based treatment options for Bacterial Meningitis include:'
-  - Blood cultures, then empiric antibiotics IMMEDIATELY (IDSA 2024)
-  - Vancomycin 15-20mg/kg IV q8-12h + ceftriaxone 2g IV q12h (IDSA 2024)
-  - 'If >50yo or immunocompromised: Add ampicillin 2g IV q4h (covers Listeria) (IDSA
+  - Blood cultures, then empiric antibiotics immediately (don't wait for LP!) (IDSA
+    2024)
+  - Vancomycin 15-20mg/kg IV + ceftriaxone 2g IV q12h (IDSA 2024)
+  - 'If >50yo or immunocompromised: Add ampicillin 2g IV q4h (for Listeria) (IDSA
     2024)'
   - Dexamethasone 10mg IV q6h x 4 days (start with or before antibiotics) (IDSA 2024)
-  - LP when safe (after CT if focal deficit, papilledema, immunocompromised) (IDSA
-    2024)
+  - LP when safe (after CT if focal signs); send CSF for cell count, glucose, protein,
+    gram stain, culture (IDSA 2024)
   tests:
-  - Blood cultures x2 before antibiotics
-  - CT head if focal deficit, papilledema, immunocompromised, or seizure BEFORE LP
   - 'Lumbar puncture: CSF cell count, glucose, protein, gram stain, culture'
-  - Procalcitonin (elevated suggests bacterial vs viral)
+  - Blood cultures x2 before antibiotics
+  - CT head if focal neurologic signs before LP
+  - Procalcitonin (elevated in bacterial)
   referrals:
   - ICU admission for all bacterial meningitis
   - Infectious disease consult
-  - Neurology if complications (seizures, stroke, hydrocephalus)
+  - Neurology if complications (seizures, stroke)
+  sensitivity: 0.85
+  specificity: 0.9
   icd10:
   - G00.9
-  - G03.9
+  - G00.2
   snomed:
-  - '23572006'
+  - '95883001'
 - id: ID-ENCEPHALITIS
   label: Viral Encephalitis
   presentations:
@@ -348,34 +352,43 @@ rules:
   - Z21
   snomed:
   - '86406008'
-- id: ID-ENDOCARDITIS
+- id: ID-INFECTIVE-ENDOCARDITIS
   label: Infective Endocarditis
   presentations:
-  - Fever (85% of cases, most common symptom)
-  - New or changed heart murmur (regurgitant murmur)
-  - 'Osler nodes: Painful nodules on fingers/toes (immunologic phenomenon)'
-  - 'Janeway lesions: Painless erythematous macules on palms/soles (septic emboli)'
-  - Splinter hemorrhages (subungual linear hemorrhages)
-  - Roth spots (retinal hemorrhages with pale centers)
-  - 'Modified Duke criteria for diagnosis: 2 major, 1 major + 3 minor, or 5 minor'
-  - Persistent bacteremia (S. aureus, Viridans strep, Enterococcus)
-  - 'Risk factors: IV drug use (tricuspid), prosthetic valve, previous endocarditis,
-    structural heart disease'
-  - Heart failure from valve destruction
-  - Septic emboli (stroke, splenic/renal infarcts)
-  - 'IVDU pattern: Tricuspid valve involvement, right-sided symptoms (cough, dyspnea)'
+  - Fever (most common, 85%), new heart murmur (regurgitant)
+  - 'Signs of septic emboli: Osler nodes (painful finger/toe nodules), Janeway lesions
+    (palms/soles)'
+  - Roth spots (retinal hemorrhages), splinter hemorrhages (under nails)
+  - Heart failure (valve destruction), stroke (septic emboli)
+  - Modified Duke criteria for diagnosis (clinical + echo + blood cultures)
+  - 'Risk factors: Prosthetic valve, IV drug use, structural heart disease'
   clinical_pearls:
-  - 3 sets of blood cultures from different sites before starting antibiotics
-  - Transthoracic echo first, TEE if high suspicion and TTE negative (more sensitive)
-  - 'Empiric antibiotics: Vancomycin + ceftriaxone (native valve), + gentamicin (prosthetic)'
-  - 'S. aureus endocarditis: High mortality, surgical evaluation for complications'
-  - 'Surgery indications: Heart failure, persistent infection, large vegetation (>10mm),
-    abscess'
+  - 3 sets of blood cultures from different sites before antibiotics
+  - 'IVDU: Think tricuspid valve endocarditis (Staph aureus)'
+  - 'Dental procedures: Viridans strep; IVDU: Staph aureus; Healthcare: Enterococcus'
+  - 'Empiric: Vancomycin + ceftriaxone (native valve) or + gentamicin (prosthetic)'
+  - 'Surgery for: Severe heart failure, abscess, large vegetation (>10mm), persistent
+    bacteremia'
+  management:
+  - 'Guideline-based treatment options for Infective Endocarditis include:'
+  - Blood cultures x3 before antibiotics (IDSA 2024)
+  - 'Empiric: Vancomycin 15-20mg/kg q12h + ceftriaxone 2g IV q24h (IDSA 2024)'
+  - 'If prosthetic valve: Add gentamicin 1mg/kg q8h (IDSA 2024)'
+  - 'Tailor to organism: S. aureus, Streptococcus, Enterococcus (IDSA 2024)'
+  - 'Duration: 4-6 weeks IV antibiotics, surgery if indicated (IDSA 2024)'
+  tests:
+  - Blood cultures x3 (from different sites, before antibiotics)
+  - 'Echocardiogram: TTE first, TEE if high suspicion and TTE negative'
+  - CBC, ESR/CRP, basic metabolic panel
+  - ECG (conduction abnormalities suggest abscess)
+  referrals:
+  - Infectious disease consult (all cases)
+  - Cardiology consult
+  - Cardiac surgery if heart failure, abscess, large vegetation, persistent bacteremia
   sensitivity: 0.8
-  specificity: 0.96
+  specificity: 0.9
   icd10:
   - I33.0
-  - I33.9
   snomed:
   - '56819008'
 - id: ID-OSTEOMYELITIS
@@ -537,97 +550,6 @@ rules:
   - A04.72
   snomed:
   - '186431008'
-- id: ID-SEPSIS
-  label: Sepsis and Septic Shock
-  presentations:
-  - 'SIRS criteria: Temp >38°C or <36°C, HR >90, RR >20, WBC >12K or <4K'
-  - 'Sepsis: Infection + organ dysfunction (qSOFA ≥2 - RR ≥22, AMS, SBP ≤100)'
-  - 'Septic shock: Sepsis + hypotension requiring vasopressors + lactate >2 mmol/L'
-  - 'Source: Pneumonia, UTI, intra-abdominal, skin/soft tissue most common'
-  - 'Signs: Fever/hypothermia, tachycardia, tachypnea, hypotension, altered mental
-    status'
-  - Elevated lactate (more than 2), elevated WBC or bandemia
-  clinical_pearls:
-  - 'Sepsis-3 definition: Infection + SOFA score increase ≥2'
-  - 'Septic shock: Sepsis + vasopressors + lactate >2 despite fluids (mortality 40%)'
-  - 'Sepsis bundle: Blood cultures, antibiotics within 1 hour, 30mL/kg fluids'
-  - 'Source control essential: Drain abscess, remove infected device, debridement'
-  - Broad-spectrum antibiotics initially, then narrow based on culture
-  management:
-  - 'Guideline-based treatment options for Sepsis and Septic Shock include:'
-  - Blood cultures x2 (before antibiotics), then broad-spectrum antibiotics within
-    1 hour (IDSA 2024)
-  - 'IV fluids: 30 mL/kg crystalloid bolusin first 3 hours (IDSA 2024)'
-  - 'Antibiotics: Vancomycin + piperacillin-tazobactam (or cefepime or meropenem)
-    (IDSA 2024)'
-  - 'Vasopressors if hypotensive after fluids: Norepinephrine first-line (IDSA 2024)'
-  - 'Source control: Remove infected catheter, drain abscess, debride necrotic tissue
-    (IDSA 2024)'
-  tests:
-  - Blood cultures x2 (different sites, before antibiotics)
-  - Lactate (elevated >2, recheck in 2-4hr if elevated)
-  - CBC with differential, comprehensive metabolic panel
-  - Procalcitonin (elevated in bacterial infection)
-  - Imaging to identify source (chest X-ray, CT abdomen/pelvis, etc.)
-  referrals:
-  - ICU admission for septic shock or severe sepsis
-  - Surgery if source control needed (abscess, bowel perforation)
-  - Infectious disease consult for complex cases
-  sensitivity: 0.88
-  specificity: 0.8
-  icd10:
-  - A41.9
-  - R65.20
-  - R65.21
-  snomed:
-  - '91302008'
-- id: ID-BACTERIAL-MENINGITIS
-  label: Bacterial Meningitis
-  presentations:
-  - 'Classic triad: Fever, neck stiffness, altered mental status (only 44% have all
-    3)'
-  - Severe headache, photophobia, nausea/vomiting
-  - Kernig's sign (pain with leg extension), Brudzinski's sign (neck flexion → hip
-    flexion)
-  - Petechial rash (Neisseria meningitidis)
-  - Seizures, focal neurologic deficits (complications)
-  - 'CSF: Elevated WBC (>1000, PMN predominant), low glucose, high protein, elevated
-    opening pressure'
-  clinical_pearls:
-  - Don't delay antibiotics for LP or imaging! Give empiric antibiotics if high suspicion
-  - 'LP contraindicated if: Focal deficit, papilledema, immunocompromised → get CT
-    first'
-  - 'Empiric: Vancomycin + ceftriaxone (add ampicillin if >50yo or immunocompromised
-    for Listeria)'
-  - Dexamethasone 10mg IV 15-20 min before or with first antibiotic dose (reduces
-    mortality)
-  - Mortality 15-25% even with treatment; neurologic sequelae common
-  management:
-  - 'Guideline-based treatment options for Bacterial Meningitis include:'
-  - Blood cultures, then empiric antibiotics immediately (don't wait for LP!) (IDSA
-    2024)
-  - Vancomycin 15-20mg/kg IV + ceftriaxone 2g IV q12h (IDSA 2024)
-  - 'If >50yo or immunocompromised: Add ampicillin 2g IV q4h (for Listeria) (IDSA
-    2024)'
-  - Dexamethasone 10mg IV q6h x 4 days (start with or before antibiotics) (IDSA 2024)
-  - LP when safe (after CT if focal signs); send CSF for cell count, glucose, protein,
-    gram stain, culture (IDSA 2024)
-  tests:
-  - 'Lumbar puncture: CSF cell count, glucose, protein, gram stain, culture'
-  - Blood cultures x2 before antibiotics
-  - CT head if focal neurologic signs before LP
-  - Procalcitonin (elevated in bacterial)
-  referrals:
-  - ICU admission for all bacterial meningitis
-  - Infectious disease consult
-  - Neurology if complications (seizures, stroke)
-  sensitivity: 0.85
-  specificity: 0.9
-  icd10:
-  - G00.9
-  - G00.2
-  snomed:
-  - '95883001'
 - id: ID-VIRAL-MENINGITIS
   label: Viral (Aseptic) Meningitis
   presentations:
@@ -796,7 +718,7 @@ rules:
   - Dysuria, urinary frequency, urgency (cystitis symptoms often present)
   - Nausea and vomiting (systemic symptoms)
   - 'Urinalysis: Pyuria, bacteriuria, WBC casts (pathognomonic for kidney infection)'
-  - 'E. coli (80% of cases), Klebsiella, Proteus, Enterococcus'
+  - E. coli (80% of cases), Klebsiella, Proteus, Enterococcus
   - More severe than simple cystitis - systemic toxicity present
   - 'Complicated cases: Pregnancy, diabetes, immunosuppression, obstruction, catheter'
   - May progress to sepsis if untreated
@@ -874,45 +796,6 @@ rules:
   - M72.6
   snomed:
   - '419402002'
-- id: ID-INFECTIVE-ENDOCARDITIS
-  label: Infective Endocarditis
-  presentations:
-  - Fever (most common, 85%), new heart murmur (regurgitant)
-  - 'Signs of septic emboli: Osler nodes (painful finger/toe nodules), Janeway lesions
-    (palms/soles)'
-  - Roth spots (retinal hemorrhages), splinter hemorrhages (under nails)
-  - Heart failure (valve destruction), stroke (septic emboli)
-  - Modified Duke criteria for diagnosis (clinical + echo + blood cultures)
-  - 'Risk factors: Prosthetic valve, IV drug use, structural heart disease'
-  clinical_pearls:
-  - 3 sets of blood cultures from different sites before antibiotics
-  - 'IVDU: Think tricuspid valve endocarditis (Staph aureus)'
-  - 'Dental procedures: Viridans strep; IVDU: Staph aureus; Healthcare: Enterococcus'
-  - 'Empiric: Vancomycin + ceftriaxone (native valve) or + gentamicin (prosthetic)'
-  - 'Surgery for: Severe heart failure, abscess, large vegetation (>10mm), persistent
-    bacteremia'
-  management:
-  - 'Guideline-based treatment options for Infective Endocarditis include:'
-  - Blood cultures x3 before antibiotics (IDSA 2024)
-  - 'Empiric: Vancomycin 15-20mg/kg q12h + ceftriaxone 2g IV q24h (IDSA 2024)'
-  - 'If prosthetic valve: Add gentamicin 1mg/kg q8h (IDSA 2024)'
-  - 'Tailor to organism: S. aureus, Streptococcus, Enterococcus (IDSA 2024)'
-  - 'Duration: 4-6 weeks IV antibiotics, surgery if indicated (IDSA 2024)'
-  tests:
-  - Blood cultures x3 (from different sites, before antibiotics)
-  - 'Echocardiogram: TTE first, TEE if high suspicion and TTE negative'
-  - CBC, ESR/CRP, basic metabolic panel
-  - ECG (conduction abnormalities suggest abscess)
-  referrals:
-  - Infectious disease consult (all cases)
-  - Cardiology consult
-  - Cardiac surgery if heart failure, abscess, large vegetation, persistent bacteremia
-  sensitivity: 0.8
-  specificity: 0.9
-  icd10:
-  - I33.0
-  snomed:
-  - '56819008'
 - id: ID-TUBERCULOSIS-PULMONARY
   label: Pulmonary Tuberculosis (TB)
   presentations:
