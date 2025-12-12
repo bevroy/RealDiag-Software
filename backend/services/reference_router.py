@@ -86,6 +86,19 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
           tree_id = tree_data.get("id") or tree_data.get("tree_id") or tree_file.stem
           tree_title = tree_data.get("title") or tree_data.get("name") or tree_id
           
+          # Extract presentations from chief_complaint and description
+          presentations = []
+          chief_complaint = tree_data.get("chief_complaint", "")
+          description = tree_data.get("description", "")
+          
+          if chief_complaint:
+            # Split by comma and clean up each item
+            complaints = [c.strip() for c in chief_complaint.split(",")]
+            presentations.extend(complaints)
+          
+          if description and description not in presentations:
+            presentations.append(description)
+          
           # Ensure citations are always strings (not objects or dicts)
           citations_raw = tree_data.get("citations", [])
           citations = []
@@ -102,7 +115,7 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
           trees.append({
             "id": tree_id,
             "label": tree_title,
-            "presentations": [],  # Could extract from nodes if needed
+            "presentations": presentations,
             "icd10": [tree_data.get("icd10")] if tree_data.get("icd10") else [],
             "snomed": [],
             "citations": citations,
