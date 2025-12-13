@@ -4,6 +4,7 @@ import { getStoredUser, isStoredAuthenticated } from './clientAuth';
 
 // Pages that don't require authentication
 const PUBLIC_ROUTES = [
+  '/',
   '/login',
   '/register',
   '/pricing',
