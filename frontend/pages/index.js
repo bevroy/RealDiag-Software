@@ -196,6 +196,60 @@ export default function Home() {
 
       {/* Main Content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Demo Video Section */}
+        <div style={{
+          background: 'white',
+          padding: '2rem',
+          borderRadius: '16px',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          marginBottom: '3rem',
+          border: '1px solid rgba(20, 184, 166, 0.1)'
+        }}>
+          <h2 style={{ 
+            margin: '0 0 1.5rem', 
+            fontSize: '1.75rem', 
+            color: '#0f766e',
+            fontWeight: '600',
+            textAlign: 'center'
+          }}>
+            🎥 Watch Demo
+          </h2>
+          <div style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            position: 'relative',
+            paddingBottom: '56.25%', // 16:9 aspect ratio
+            height: 0,
+            overflow: 'hidden',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+          }}>
+            <video 
+              controls 
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                borderRadius: '12px'
+              }}
+              poster="/logo.png"
+            >
+              <source src="/RealDiag_Demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <p style={{
+            margin: '1rem 0 0',
+            textAlign: 'center',
+            color: '#64748b',
+            fontSize: '0.95rem'
+          }}>
+            See RealDiag in action - learn how to use our diagnostic assistant
+          </p>
+        </div>
+
         {/* Call to Action */}
         <div style={{
           background: 'white',
