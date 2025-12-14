@@ -18,6 +18,8 @@ export function AuthGuard({ children }) {
 
   useEffect(() => {
     const checkAuth = () => {
+      setIsChecking(true);
+      
       // Check if current route is public
       const isPublicRoute = PUBLIC_ROUTES.some(route => {
         // Exact match for most routes
@@ -40,9 +42,9 @@ export function AuthGuard({ children }) {
 
       if (!authenticated || !user) {
         // Not authenticated - redirect to account page (login/register)
-        router.push('/account?redirect=' + encodeURIComponent(router.asPath));
         setIsAuthorized(false);
         setIsChecking(false);
+        router.push('/account?redirect=' + encodeURIComponent(router.asPath));
       } else {
         // Authenticated - allow access
         setIsAuthorized(true);
@@ -50,22 +52,8 @@ export function AuthGuard({ children }) {
       }
     };
 
-    // Check auth on mount and route change
+    // Check auth whenever pathname changes
     checkAuth();
-
-    // Re-check auth on every route change event
-    const handleRouteChange = () => {
-      setIsChecking(true);
-      checkAuth();
-    };
-
-    router.events.on('routeChangeStart', handleRouteChange);
-    router.events.on('routeChangeComplete', checkAuth);
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-      router.events.off('routeChangeComplete', checkAuth);
-    };
   }, [router.pathname, router.asPath]);
 
   // Show loading while checking authentication
