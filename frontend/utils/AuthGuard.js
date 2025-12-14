@@ -19,9 +19,14 @@ export function AuthGuard({ children }) {
   useEffect(() => {
     const checkAuth = () => {
       // Check if current route is public
-      const isPublicRoute = PUBLIC_ROUTES.some(route => 
-        router.pathname === route || router.pathname.startsWith(route)
-      );
+      const isPublicRoute = PUBLIC_ROUTES.some(route => {
+        // Exact match for most routes
+        if (route === '/') {
+          return router.pathname === '/';
+        }
+        // For other routes, match exact or with trailing content (like /account?redirect=...)
+        return router.pathname === route || router.pathname.startsWith(route + '/');
+      });
 
       if (isPublicRoute) {
         setIsAuthorized(true);
