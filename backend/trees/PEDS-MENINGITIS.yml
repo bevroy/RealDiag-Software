@@ -32,8 +32,8 @@ nodes:
       - Blood culture x2
       - Urine culture (catheterized specimen)
       - Lumbar puncture (unless contraindicated)
-        * CSF cell count, glucose, protein, Gram stain, culture
-        * CSF PCR panel (HSV, enterovirus if available)
+        - CSF cell count, glucose, protein, Gram stain, culture
+        - CSF PCR panel (HSV, enterovirus if available)
       - CBC with differential, CRP, procalcitonin
       - CMP
       - Chest X-ray
@@ -54,50 +54,41 @@ nodes:
     urgency: critical
     workup:
       - Blood cultures x2 BEFORE antibiotics if possible
-      - Lumbar puncture (unless contraindicated)
-        * Contraindications: signs of increased ICP (papilledema, focal neuro signs, altered mental status), hemodynamic instability, infection at LP site, coagulopathy
-        * If contraindicated - give antibiotics immediately, do LP later or get CT first
-      - CSF Studies:
-        * Opening pressure (elevated in bacterial)
-        * Cell count and differential
-        * Glucose (low in bacterial - <40 mg/dL or CSF/serum <0.4)
-        * Protein (elevated in bacterial - >100 mg/dL)
-        * Gram stain and culture (GOLD STANDARD)
-        * Bacterial antigens (S. pneumoniae, N. meningitidis, H. flu)
-        * PCR if available
+      - "Lumbar puncture (unless contraindicated): Contraindications include signs of increased ICP (papilledema, focal neuro signs, altered mental status), hemodynamic instability, infection at LP site, coagulopathy. If contraindicated give antibiotics immediately, do LP later or get CT first"
+      - "CSF Studies: Opening pressure (elevated in bacterial), Cell count and differential, Glucose (low in bacterial - less than 40 mg/dL or CSF/serum less than 0.4), Protein (elevated in bacterial - greater than 100 mg/dL), Gram stain and culture (GOLD STANDARD), Bacterial antigens (S. pneumoniae, N. meningitidis, H. flu), PCR if available"
       - CBC, CMP, coagulation studies
       - CT head BEFORE LP if:
-        * Altered mental status
-        * New-onset seizure
-        * Focal neurologic signs
-        * Papilledema
-        * Immunocompromised
+        - Altered mental status
+        - New-onset seizure
+        - Focal neurologic signs
+        - Papilledema
+        - Immunocompromised
     treatment:
       - DO NOT DELAY antibiotics for imaging or LP
       - TIME IS CRITICAL - give antibiotics within 30 minutes of suspicion
       - Empiric Antibiotics (adjust by age):
-        * 1-3 months: Ampicillin 75 mg/kg IV q6h + Cefotaxime 50 mg/kg IV q6h
-        * >3 months: Ceftriaxone 100 mg/kg/day IV divided q12h (max 4g/day) + Vancomycin 15 mg/kg IV q6h
-        * Add ampicillin if <50 years (Listeria coverage)
+        - "1-3 months: Ampicillin 75 mg/kg IV q6h + Cefotaxime 50 mg/kg IV q6h"
+        - ">3 months: Ceftriaxone 100 mg/kg/day IV divided q12h (max 4g/day) + Vancomycin 15 mg/kg IV q6h"
+        - "Add ampicillin if age under 50 years (Listeria coverage)"
       - Dexamethasone 0.15 mg/kg IV q6h x2-4 days
-        * Give BEFORE or WITH first antibiotic dose
-        * Reduces neurologic sequelae in pneumococcal meningitis
-        * Controversy in children - typically used if pneumococcal suspected
+        - Give BEFORE or WITH first antibiotic dose
+        - Reduces neurologic sequelae in pneumococcal meningitis
+        - Controversy in children - typically used if pneumococcal suspected
       - Supportive Care:
-        * IV fluids - careful with SIADH risk
-        * Monitor sodium closely (SIADH common)
-        * Seizure precautions
-        * Maintain normoglycemia
-        * Treat increased ICP if present
+        - IV fluids - careful with SIADH risk
+        - Monitor sodium closely (SIADH common)
+        - Seizure precautions
+        - Maintain normoglycemia
+        - Treat increased ICP if present
       - PICU admission
       - Isolation precautions until bacterial etiology ruled out (droplet for first 24 hours)
       - Chemoprophylaxis for close contacts if N. meningitidis or H. influenzae
-        * Rifampin, ciprofloxacin, or ceftriaxone for contacts
+        - Rifampin, ciprofloxacin, or ceftriaxone for contacts
       - Duration of treatment:
-        * N. meningitidis: 7 days
-        * H. influenzae: 7-10 days
-        * S. pneumoniae: 10-14 days
-        * Gram-negative: 21 days
+        - N. meningitidis: 7 days
+        - H. influenzae: 7-10 days
+        - S. pneumoniae: 10-14 days
+        - Gram-negative: 21 days
       - Repeat LP at 48 hours if not improving
       - Audiology follow-up (hearing loss common complication)
       - Developmental follow-up
@@ -110,10 +101,10 @@ nodes:
     urgency: high
     workup:
       - Lumbar puncture
-        * CSF lymphocytic predominance (viral)
-        * Normal or mildly elevated protein
-        * Normal glucose
-        * Negative Gram stain
+        - CSF lymphocytic predominance (viral)
+        - Normal or mildly elevated protein
+        - Normal glucose
+        - Negative Gram stain
       - CSF viral PCR (enterovirus, HSV if severe)
       - Blood work
     treatment:

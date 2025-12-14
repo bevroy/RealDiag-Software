@@ -57,51 +57,47 @@ nodes:
     treatment:
       - IMMEDIATE Management
       - Fluid Resuscitation
-        * Initial - NS 1-2 L bolus over first hour (15-20 mL/kg/hr)
-        * Maintenance - NS 250-500 mL/hr (adjust based on hydration status, cardiac function)
-        * When glucose <250 mg/dL switch to D5 1/2 NS at 150-250 mL/hr
-        * Goal - positive fluid balance of 3-5L in first 24 hours
+        - Initial - NS 1-2 L bolus over first hour (15-20 mL/kg/hr)
+        - Maintenance - NS 250-500 mL/hr (adjust based on hydration status, cardiac function)
+        - "When glucose <250 mg/dL switch to D5 1/2 NS at 150-250 mL/hr"
+        - Goal - positive fluid balance of 3-5L in first 24 hours
       - Insulin Protocol
-        * DO NOT START until K+ >3.3 mEq/L
-        * Regular insulin 0.1 units/kg IV bolus (optional, can omit bolus)
-        * Then regular insulin 0.1 units/kg/hr IV continuous infusion
-        * When glucose <250 mg/dL reduce to 0.05 units/kg/hr AND add D5 to fluids
-        * Continue insulin until anion gap closes (<12) AND bicarb >18 AND pH >7.3
-        * Then transition to subcutaneous insulin (overlap 1-2 hours)
+        - "DO NOT START until K+ >3.3 mEq/L"
+        - Regular insulin 0.1 units/kg IV bolus (optional, can omit bolus)
+        - Then regular insulin 0.1 units/kg/hr IV continuous infusion
+        - "When glucose <250 mg/dL reduce to 0.05 units/kg/hr AND add D5 to fluids"
+        - "Continue insulin until anion gap closes (<12) AND bicarb >18 AND pH >7.3"
+        - Then transition to subcutaneous insulin (overlap 1-2 hours)
       - Potassium Replacement (CRITICAL)
-        * K+ >5.2 mEq/L - no replacement, recheck q2h
-        * K+ 3.3-5.2 mEq/L - add 20-30 mEq/L to IV fluids
-        * K+ <3.3 mEq/L - HOLD INSULIN, give 20-40 mEq K+ until >3.3
-        * Most DKA patients are total body K+ depleted despite normal levels
-      - Bicarbonate (ONLY if pH <6.9)
-        * 100 mEq NaHCO3 in 400 mL sterile water with 20 mEq KCl
-        * Infuse over 2 hours
-        * Recheck pH after 2 hours
-        * Generally avoid unless severe acidosis with cardiovascular instability
+        - "K+ >5.2 mEq/L - no replacement, recheck q2h"
+        - K+ 3.3-5.2 mEq/L - add 20-30 mEq/L to IV fluids
+        - "K+ <3.3 mEq/L - HOLD INSULIN, give 20-40 mEq K+ until >3.3"
+        - Most DKA patients are total body K+ depleted despite normal levels
+      - "Bicarbonate (ONLY if pH less than 6.9) - 100 mEq NaHCO3 in 400 mL sterile water with 20 mEq KCl, Infuse over 2 hours, Recheck pH after 2 hours, Generally avoid unless severe acidosis with cardiovascular instability"
       - Phosphate Replacement
-        * Usually not needed acutely
-        * If severe hypophosphatemia (<1.0 mg/dL) or cardiac/respiratory compromise
-        * Sodium phosphate 20-30 mEq/L added to fluids
+        - Usually not needed acutely
+        - "If severe hypophosphatemia (<1.0 mg/dL) or cardiac/respiratory compromise"
+        - Sodium phosphate 20-30 mEq/L added to fluids
       - Search for Precipitating Cause
-        * Infection (most common) - pneumonia, UTI, cellulitis
-        * Insulin non-compliance or pump failure
-        * MI or stroke
-        * Pancreatitis
-        * Medications (steroids, antipsychotics, diuretics)
-        * New diagnosis of diabetes
+        - Infection (most common) - pneumonia, UTI, cellulitis
+        - Insulin non-compliance or pump failure
+        - MI or stroke
+        - Pancreatitis
+        - Medications (steroids, antipsychotics, diuretics)
+        - New diagnosis of diabetes
       - ICU Admission
       - Monitoring
-        * Glucose hourly (fingerstick)
-        * Electrolytes, anion gap, venous pH q2-4h initially
-        * Mental status
-        * Urine output
-        * Cardiac monitor (K+ changes)
+        - Glucose hourly (fingerstick)
+        - Electrolytes, anion gap, venous pH q2-4h initially
+        - Mental status
+        - Urine output
+        - Cardiac monitor (K+ changes)
       - Complications to Watch For
-        * Cerebral edema (especially in children and young adults)
-        * Hypokalemia from insulin treatment
-        * Hypoglycemia from excessive insulin
-        * Cardiac arrhythmias
-        * Mucormycosis (rare)
+        - Cerebral edema (especially in children and young adults)
+        - Hypokalemia from insulin treatment
+        - Hypoglycemia from excessive insulin
+        - Cardiac arrhythmias
+        - Mucormycosis (rare)
     prognosis: "Mortality 1-5% with proper treatment; higher in elderly or with severe comorbidities"
 
   - id: moderate_dka
@@ -145,7 +141,7 @@ nodes:
     urgency: critical
     workup:
       - Same workup as DKA
-      - Serum osmolality (usually >320 mOsm/kg)
+      - "Serum osmolality (usually >320 mOsm/kg)"
     treatment:
       - MORE AGGRESSIVE fluid resuscitation than DKA
       - NS 1-2 L in first hour, then 500 mL/hr

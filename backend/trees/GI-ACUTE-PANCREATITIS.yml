@@ -1,0 +1,174 @@
+tree_id: GI-ACUTE-PANCREATITIS
+name: Acute Pancreatitis
+family: GASTROENTEROLOGY
+specialty: Gastroenterology, Emergency Medicine, Surgery
+chief_complaint: Severe Abdominal Pain, Nausea, Vomiting
+description: Diagnosis and management of acute pancreatitis with severity assessment and complication monitoring
+version: "1.0"
+icd10: K85.90
+author: RealDiag Clinical Team
+
+entry_point: pancreatitis_screening
+
+nodes:
+  - id: pancreatitis_screening
+    type: question
+    text: "Patient with suspected pancreatitis?"
+    options:
+      - label: "Severe epigastric pain + lipase >3x normal"
+        next: pancreatitis_severity
+      - label: "Mild abdominal pain, lipase mildly elevated"
+        next: mild_pancreatitis
+      - label: "Recurrent episodes of pancreatitis"
+        next: chronic_pancreatitis
+
+  - id: pancreatitis_severity
+    type: question
+    text: "Assess pancreatitis severity"
+    options:
+      - label: "Organ failure OR extensive necrosis"
+        next: severe_pancreatitis
+      - label: "Local complications (fluid collections, necrosis) but no organ failure"
+        next: moderately_severe_pancreatitis
+      - label: "No complications, stable vital signs"
+        next: mild_acute_pancreatitis
+
+  - id: severe_pancreatitis
+    type: diagnosis
+    name: "Severe Acute Pancreatitis"
+    icd10: "K85.90"
+    urgency: critical
+    workup:
+      - Diagnosis requires 2 of 3:
+        - Characteristic abdominal pain (epigastric, radiating to back)
+        - "Lipase or amylase greater than 3x upper limit normal"
+        - Imaging findings (CT, MRI, or ultrasound)
+      - Labs:
+        - Lipase (more specific than amylase)
+        - Amylase
+        - CBC (elevated WBC, falling Hct suggests bleeding)
+        - CMP (BUN, Cr, calcium, glucose)
+        - "LFTs (ALT greater than 150 suggests gallstone etiology)"
+        - "Triglycerides (if greater than 1000 mg/dL - hypertriglyceridemic pancreatitis)"
+        - Calcium (hypocalcemia poor prognostic sign)
+        - ABG if hypoxic
+        - Blood cultures if septic
+      - Imaging:
+        - Right upper quadrant ultrasound (gallstones - do within 24 hours)
+        - CT abdomen with IV contrast ONLY if:
+          - Diagnosis uncertain
+          - Not improving after 48-72 hours
+          - Suspicion for complications
+        - Avoid CT in first 48 hours (pancreatic necrosis evolves over days)
+      - Severity Scoring:
+        - APACHE II score
+        - Ranson criteria
+        - "BISAP score (BUN greater than 25, Impaired mental status, SIRS, Age greater than 60, Pleural effusion)"
+    treatment:
+      - ICU Admission
+      - "Aggressive IV Fluid Resuscitation (CRITICAL) - Lactated Ringers preferred over normal saline, Initial 20 mL/kg bolus then 3 mL/kg/hr, Goal UOP greater than 0.5 mL/kg/hr normalize Hct to 35-44%, Reassess fluid status frequently, Over-resuscitation increases complications"
+      - NPO initially
+      - Pain Management
+        - Opioids acceptable (morphine does NOT worsen pancreatitis)
+        - Dilaudid, fentanyl commonly used
+        - Patient-controlled analgesia
+      - Nutrition
+        - Early enteral feeding (within 24-48 hours) REDUCES mortality
+        - Oral diet if tolerating vs nasogastric/nasojejunal feeds
+        - Low-fat diet when starting
+        - TPN only if enteral feeding fails
+      - NO prophylactic antibiotics (unless infected necrosis confirmed)
+      - Treat Underlying Cause:
+        - Gallstone pancreatitis:
+          - ERCP with sphincterotomy if cholangitis or persistent biliary obstruction
+          - Cholecystectomy during same admission (once improved) to prevent recurrence
+        - Alcohol-induced: alcohol cessation counseling
+        - Hypertriglyceridemia: insulin + heparin infusion, plasmapheresis if severe
+      - Monitor for Complications:
+        - Infected necrosis (fever, increasing WBC after initial improvement - needs CT + FNA)
+        - Pancreatic pseudocyst
+        - Walled-off necrosis
+        - Splenic/portal vein thrombosis
+        - GI bleeding
+        - ACS (abdominal compartment syndrome)
+      - Invasive Interventions (if needed):
+        - Infected necrosis → antibiotics + debridement (endoscopic or surgical)
+        - "Pseudocyst: drainage if symptomatic and older than 6 weeks"
+      - Surgery Consultation
+    prognosis: "Mortality 15-30% in severe cases; infected necrosis has 30% mortality"
+
+  - id: moderately_severe_pancreatitis
+    type: diagnosis
+    name: "Moderately Severe Acute Pancreatitis"
+    icd10: "K85.90"
+    urgency: high
+    workup:
+      - Same as severe pancreatitis
+    treatment:
+      - Hospital admission (floor or step-down)
+      - Aggressive IV fluids (LR 200-300 mL/hr)
+      - NPO initially, advance diet as tolerated
+      - Pain control
+      - Monitor for progression to severe disease
+      - Ultrasound for gallstones
+      - ERCP if indicated
+    prognosis: "Good; most resolve with supportive care"
+
+  - id: mild_acute_pancreatitis
+    type: diagnosis
+    name: "Mild Acute Pancreatitis"
+    icd10: "K85.90"
+    urgency: moderate
+    workup:
+      - Lipase, amylase
+      - CMP, CBC
+      - RUQ ultrasound
+    treatment:
+      - Hospital observation (can consider discharge if very mild and reliable)
+      - IV fluids
+      - Early oral feeding when pain improves
+      - Pain management
+      - Identify and treat underlying cause
+      - Cholecystectomy if gallstone pancreatitis (same admission or within 2 weeks)
+    prognosis: "Excellent; 80-90% resolve in 3-7 days"
+
+  - id: chronic_pancreatitis
+    type: diagnosis
+    name: "Chronic Pancreatitis"
+    icd10: "K86.1"
+    urgency: moderate
+    workup:
+      - CT or MRI abdomen (calcifications, duct changes, atrophy)
+      - MRCP or ERCP for duct anatomy
+      - Fecal elastase (pancreatic insufficiency)
+      - HgbA1c (diabetes)
+    treatment:
+      - Pancreatic enzyme replacement (Creon, Zenpep)
+      - Fat-soluble vitamins (A, D, E, K)
+      - Pain management
+      - Treat diabetes if present
+      - Alcohol cessation
+      - Small frequent meals, low-fat diet
+      - Consider ERCP for strictures
+      - Surgery if intractable pain (Whipple, lateral pancreaticojejunostomy)
+    prognosis: "Chronic condition; increased cancer risk"
+
+clinical_pearls:
+  - "Most common causes: Gallstones (40%), alcohol (30%), idiopathic (20%)"
+  - "Other causes: hypertriglyceridemia, hypercalcemia, medications (azathioprine, 6-MP, valproate, thiazides), ERCP, trauma"
+  - "Lipase more sensitive and specific than amylase"
+  - "Grey-Turner sign: flank ecchymosis (retroperitoneal bleeding)"
+  - "Cullen sign: periumbilical ecchymosis (hemorrhagic pancreatitis)"
+  - "Ranson criteria: On admission (age >55, WBC >16K, glucose >200, LDH >350, AST >250) + 48h (Hct drop >10%, BUN rise >5, Ca <8, PaO2 <60, Base deficit >4, fluid sequestration >6L)"
+  - "80-90% are mild and self-limited"
+  - "Infected necrosis develops in 10-20% of severe cases"
+  - "Early enteral nutrition reduces infection and mortality"
+
+red_flags:
+  - "Persistent organ failure >48 hours (mortality 36%)"
+  - "Infected necrosis (fever, gas in necrosis on CT)"
+  - "Worsening after initial improvement"
+  - "Hemoconcentration (Hct >44%) despite fluids"
+  - "Hypocalcemia <7 mg/dL (sign of fat necrosis)"
+  - "Ranson score ≥3 or BISAP ≥3"
+  - "Rising BUN despite fluids"

@@ -42,13 +42,8 @@ nodes:
       - 100% oxygen, intubation if needed
       - Aggressive IV fluids (500-1000 mL NS bolus) - but avoid overload (can worsen RV)
       - Vasopressors if needed (norepinephrine preferred)
-      - THROMBOLYSIS - EMERGENT if hemodynamically unstable
-        * tPA 100 mg IV over 2 hours OR
-        * tPA 50 mg IV bolus (if extreme instability)
-        * Contraindications: active bleeding, recent surgery <2 weeks, stroke <3 months, brain lesion
-      - Anticoagulation
-        * Heparin bolus 80 units/kg IV then 18 units/kg/hr OR
-        * Enoxaparin 1 mg/kg SC q12h (if not getting thrombolytics)
+      - THROMBOLYSIS - EMERGENT if hemodynamically unstable - tPA 100 mg IV over 2 hours OR tPA 50 mg IV bolus if extreme instability - Contraindications include active bleeding, recent surgery under 2 weeks, stroke under 3 months, brain lesion
+      - Anticoagulation - Heparin bolus 80 units/kg IV then 18 units/kg/hr OR Enoxaparin 1 mg/kg SC q12h if not getting thrombolytics
       - Consider catheter-directed thrombolysis if available
       - Consider surgical embolectomy if thrombolysis contraindicated
       - ICU admission
@@ -74,8 +69,8 @@ nodes:
     urgency: emergency
     workup:
       - CT angiography chest (GOLD STANDARD)
-        * Direct visualization of thrombus in pulmonary arteries
-        * Assess RV/LV ratio (>1.0 suggests RV strain)
+        - Direct visualization of thrombus in pulmonary arteries
+        - "Assess RV/LV ratio (greater than 1.0 suggests RV strain)"
       - Troponin, BNP (risk stratification)
       - ECG
       - ABG or pulse oximetry
@@ -83,35 +78,27 @@ nodes:
       - Consider sPESI or PESI score for risk stratification
     treatment:
       - Risk Stratification for Treatment Location
-        * High risk (sPESI ≥1, RV dysfunction, troponin elevated) → ICU
-        * Intermediate risk → Telemetry/step-down
-        * Low risk (sPESI 0, no RV dysfunction) → Consider outpatient if good support
-      - Anticoagulation (START IMMEDIATELY)
-        * Option 1: Apixaban 10 mg PO BID x7 days, then 5 mg PO BID
-        * Option 2: Rivaroxaban 15 mg PO BID x21 days, then 20 mg daily
-        * Option 3: Enoxaparin 1 mg/kg SC q12h bridged to warfarin (INR 2-3)
-        * Option 4: Heparin IV (80 units/kg bolus, 18 units/kg/hr) if high bleeding risk or renal failure
-      - Duration of anticoagulation
-        * Provoked (surgery, trauma, estrogen) → 3 months
-        * Unprovoked → 3-6 months minimum, consider indefinite
-        * Recurrent PE → Indefinite
-        * Cancer-associated → LMWH or DOAC indefinitely
+        - High risk (sPESI ≥1, RV dysfunction, troponin elevated) → ICU
+        - Intermediate risk → Telemetry/step-down
+        - Low risk (sPESI 0, no RV dysfunction) → Consider outpatient if good support
+      - "Anticoagulation (START IMMEDIATELY) - Option 1: Apixaban 10 mg PO BID x7 days then 5 mg PO BID, Option 2: Rivaroxaban 15 mg PO BID x21 days then 20 mg daily, Option 3: Enoxaparin 1 mg/kg SC q12h bridged to warfarin (INR 2-3), Option 4: Heparin IV (80 units/kg bolus, 18 units/kg/hr) if high bleeding risk or renal failure"
+      - "Duration of anticoagulation - Provoked (surgery, trauma, estrogen) 3 months, Unprovoked 3-6 months minimum consider indefinite, Recurrent PE indefinite, Cancer-associated LMWH or DOAC indefinitely"
       - Supportive care
-        * Supplemental oxygen to maintain SpO2 >90%
-        * Pain control
-        * Avoid dehydration
+        - "Supplemental oxygen to maintain SpO2 greater than 90%"
+        - Pain control
+        - Avoid dehydration
       - IVC filter if:
-        * Absolute contraindication to anticoagulation
-        * Recurrent PE despite adequate anticoagulation
-        * Free-floating IVC/iliofemoral thrombus
+        - Absolute contraindication to anticoagulation
+        - Recurrent PE despite adequate anticoagulation
+        - Free-floating IVC/iliofemoral thrombus
       - Thrombolysis if submassive with clinical deterioration
-        * RV dysfunction + troponin elevation + worsening
-        * tPA 100 mg over 2 hours
+        - RV dysfunction + troponin elevation + worsening
+        - tPA 100 mg over 2 hours
       - Thrombophilia workup (in select patients)
-        * Unprovoked PE at young age (<50)
-        * Recurrent VTE
-        * Family history
-        * Test: Factor V Leiden, Prothrombin G20210A, Protein C/S, Antithrombin, Antiphospholipid antibodies
+        - "Unprovoked PE at young age (under 50)"
+        - Recurrent VTE
+        - Family history
+        - "Test for Factor V Leiden, Prothrombin G20210A, Protein C/S, Antithrombin, Antiphospholipid antibodies"
     prognosis: "Mortality 2-10% acute phase; excellent with proper anticoagulation"
 
   - id: d_dimer_test
@@ -159,8 +146,8 @@ nodes:
     workup:
       - Lower extremity venous duplex (if positive, treat for PE without further imaging)
       - If duplex negative AND high suspicion:
-        * V/Q scan preferred over CT (less fetal radiation)
-        * CT angiography with shielding if V/Q unavailable
+        - V/Q scan preferred over CT (less fetal radiation)
+        - CT angiography with shielding if V/Q unavailable
       - D-dimer unreliable in pregnancy (often elevated)
     treatment:
       - LMWH (enoxaparin 1 mg/kg SC q12h) - preferred in pregnancy
