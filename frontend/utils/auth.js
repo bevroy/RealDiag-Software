@@ -31,11 +31,13 @@ export function getCsrfToken() {
 
 /**
  * Check if user is authenticated
- * We check if the access_token cookie exists
+ * Checks localStorage instead of cookies for cross-domain compatibility
  */
 export function isAuthenticated() {
-  // Check if access_token cookie exists
-  return document.cookie.includes('access_token=');
+  // Check localStorage for authentication state
+  // This works across domains unlike HttpOnly cookies
+  if (typeof window === 'undefined') return false;
+  return localStorage.getItem('realdiag_authenticated') === 'true';
 }
 
 /**
