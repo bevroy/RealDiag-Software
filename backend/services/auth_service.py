@@ -328,8 +328,12 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             db.flush()  # Get user.id without committing
             
             # Send verification email for employees
-            if is_employee and verification_token:
+            if is_employee_flag and verification_token:
                 send_verification_email(user_data.email, verification_token, user_data.full_name)
+            
+            # Commit the transaction to persist the user
+            db.commit()
+            db.refresh(user)
             
             # Note: User settings will be stored as part of the User model
             # No separate settings table needed for now
