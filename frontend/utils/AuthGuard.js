@@ -4,14 +4,11 @@ import { getStoredUser, isStoredAuthenticated } from './clientAuth';
 
 // Pages that don't require authentication
 const PUBLIC_ROUTES = [
-  '/',
-  '/login',
-  '/register',
-  '/pricing',
-  '/verify-email',
-  '/legal-disclaimer',
-  '/_error',
-  '/404'
+  '/',                    // Landing page with demo video
+  '/account',             // Login/Register page
+  '/legal-disclaimer',    // Legal information
+  '/_error',              // Error pages
+  '/404'                  // Not found page
 ];
 
 export function AuthGuard({ children }) {
@@ -36,8 +33,8 @@ export function AuthGuard({ children }) {
     const user = getStoredUser();
 
     if (!authenticated || !user) {
-      // Not authenticated - redirect to login
-      router.push('/login?redirect=' + encodeURIComponent(router.asPath));
+      // Not authenticated - redirect to account page (login/register)
+      router.push('/account?redirect=' + encodeURIComponent(router.asPath));
       setIsAuthorized(false);
       setIsChecking(false);
     } else {
