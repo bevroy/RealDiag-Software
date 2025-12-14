@@ -66,7 +66,7 @@ class TokenResponse(BaseModel):
     user: Dict[str, Any]
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
-@limiter.limit("5/15minutes") if LIMITER_AVAILABLE else lambda f: f
+@limiter.limit("5/15minutes")
 async def register_user(request: Request, user_data: UserCreate):
     """
     Register a new user account.
