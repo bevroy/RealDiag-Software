@@ -164,7 +164,7 @@ export default function AccountPage() {
       console.error('Logout error:', err);
       // Continue with logout even if backend call fails
     } finally {
-      // Clear stored auth data
+      // Clear stored auth data (including cookies)
       clearStoredAuth();
       
       // Clear all local state
@@ -176,8 +176,9 @@ export default function AccountPage() {
       setCustomLists([]);
       setAnalytics(null);
       
-      // Redirect to home page to show demo video
-      router.push('/');
+      // Force a hard redirect to home page (not router.push which is soft)
+      // This ensures all state is cleared and the page reloads
+      window.location.href = '/';
     }
   };
 

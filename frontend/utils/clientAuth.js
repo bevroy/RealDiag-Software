@@ -20,9 +20,16 @@ export function isStoredAuthenticated() {
 export function clearStoredAuth() {
   if (typeof window === 'undefined') return;
   
+  // Clear localStorage
   localStorage.removeItem('realdiag_user');
   localStorage.removeItem('realdiag_authenticated');
   sessionStorage.removeItem('csrf_token');
+  
+  // Clear cookies - set them to expire immediately
+  // Note: These are the readable cookies. HttpOnly cookies can only be cleared by the backend
+  document.cookie = 'csrf_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 }
 
 export function storeAuthData(user, csrfToken) {
