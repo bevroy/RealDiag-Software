@@ -127,19 +127,31 @@ export async function register(userData) {
  * Backend clears HttpOnly cookies
  */
 export async function logout() {
-  const apiBase = getApiBase();
-  const response = await authenticatedFetch(`${apiBase}/users/logout`, {
-    method: 'POST'
-  });
-  
-  // Clear CSRF token from sessionStorage
-  sessionStorage.removeItem('csrf_token');
-  
-  if (!response.ok) {
-    throw new Error('Logout failed');
+  try {
+    const apiBase = getApiBase();
+    const response = await authenticatedFetch(`${apiBase}/users/logout`, {
+      method: 'POST'
+    });
+    
+    // Clear CSRF token from sessionStorage
+    sessionStorage.removeItem('csrf_token');
+    
+    if (response.ok) {
+      try {
+        return await response.json();
+      } catch (e) {
+        // If JSON parsing fails, that's okay - logout still worked
+        return { message: 'Logout successful' };
+      }
+    }
+  } catch (error) {
+    console.error('Logout API error:', error);
+    // Don't throw - we want to clear local state even if API fails
   }
   
-  return await response.json();
+  // Always clear sessionStorage even if API call failed
+  sessionStorage.removeItem('csrf_token');
+  return { message: 'Logged out' };
 }
 
 /**
