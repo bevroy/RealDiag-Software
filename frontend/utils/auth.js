@@ -9,6 +9,17 @@
  */
 
 /**
+ * Get API base URL from runtime config
+ */
+function getApiBase() {
+  if (typeof window !== 'undefined') {
+    const runtimeConfig = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__;
+    return runtimeConfig?.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+  }
+  return 'https://realdiag-software.onrender.com';
+}
+
+/**
  * Get CSRF token from response or cookie
  * This token must be sent in X-CSRF-Token header for state-changing requests
  */
@@ -60,7 +71,8 @@ export async function authenticatedFetch(url, options = {}) {
  * Tokens are set in HttpOnly cookies by the backend
  */
 export async function login(email, password) {
-  const response = await fetch('/api/users/login', {
+  const apiBase = getApiBase();
+  const response = await fetch(`${apiBase}/users/login`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -88,7 +100,8 @@ export async function login(email, password) {
  * Tokens are set in HttpOnly cookies by the backend
  */
 export async function register(userData) {
-  const response = await fetch('/api/users/register', {
+  const apiBase = getApiBase();
+  const response = await fetch(`${apiBase}/users/register`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -114,7 +127,8 @@ export async function register(userData) {
  * Backend clears HttpOnly cookies
  */
 export async function logout() {
-  const response = await authenticatedFetch('/api/users/logout', {
+  const apiBase = getApiBase();
+  const response = await authenticatedFetch(`${apiBase}/users/logout`, {
     method: 'POST'
   });
   
@@ -132,7 +146,8 @@ export async function logout() {
  * Get current user profile
  */
 export async function getCurrentUser() {
-  const response = await authenticatedFetch('/api/users/me');
+  const apiBase = getApiBase();
+  const response = await authenticatedFetch(`${apiBase}/users/me`);
   
   if (!response.ok) {
     if (response.status === 401) {
