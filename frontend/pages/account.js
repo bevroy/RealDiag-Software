@@ -374,23 +374,6 @@ export default function AccountPage() {
             }}>
               🏠 Home
             </a>
-            {isUserAuthenticated && (
-              <button
-                onClick={handleLogout}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  background: '#ef4444',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  fontWeight: '600'
-                }}
-              >
-                Logout
-              </button>
-            )}
           </div>
         </div>
 
