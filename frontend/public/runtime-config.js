@@ -15,7 +15,7 @@ window.__RUNTIME_CONFIG = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__ |
     ? "http://localhost:8000"
     : window.location.hostname.includes("github.dev")
     ? window.location.origin.replace(/-8080\.app\.github\.dev/, "-8000.app.github.dev")
-    : "https://realdiag-backend.onrender.com"
+    : "https://realdiag-software.onrender.com"
 };
 
 // Ensure both variables reference the same object
