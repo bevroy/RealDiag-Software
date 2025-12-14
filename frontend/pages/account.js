@@ -113,6 +113,12 @@ export default function AccountPage() {
       setUser(data.user);
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
+      // Store auth data for AuthGuard on other pages
+      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
+      localStorage.setItem('realdiag_authenticated', 'true');
+      if (data.csrf_token) {
+        sessionStorage.setItem('csrf_token', data.csrf_token);
+      }
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -137,6 +143,12 @@ export default function AccountPage() {
       setUser(data.user);
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
+      // Store auth data for AuthGuard on other pages
+      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
+      localStorage.setItem('realdiag_authenticated', 'true');
+      if (data.csrf_token) {
+        sessionStorage.setItem('csrf_token', data.csrf_token);
+      }
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -155,6 +167,7 @@ export default function AccountPage() {
       // Clear stored auth data
       clearStoredAuth();
       
+      // Clear all local state
       setUser(null);
       setIsUserAuthenticated(false);
       setActiveTab('login');
@@ -162,6 +175,9 @@ export default function AccountPage() {
       setFavorites([]);
       setCustomLists([]);
       setAnalytics(null);
+      
+      // Redirect to home page to show demo video
+      router.push('/');
     }
   };
 
