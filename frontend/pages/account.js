@@ -404,26 +404,44 @@ export default function AccountPage() {
         )}
 
         {isUserAuthenticated && (
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
             {['dashboard', 'history', 'favorites', 'lists', 'analytics'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 style={{
                   padding: '0.75rem 1.5rem',
-                  background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
-                  color: activeTab === tab ? '#14b8a6' : 'white',
-                  border: 'none',
+                  background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.7)',
+                  color: activeTab === tab ? '#14b8a6' : '#0f766e',
+                  border: activeTab === tab ? '2px solid #14b8a6' : '2px solid transparent',
                   borderRadius: '8px',
                   fontSize: '1rem',
                   fontWeight: '600',
                   cursor: 'pointer',
-                  textTransform: 'capitalize'
+                  textTransform: 'capitalize',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 {tab}
               </button>
             ))}
+            <div style={{ flex: 1 }}></div>
+            <button
+              onClick={handleLogout}
+              style={{
+                padding: '0.75rem 1.5rem',
+                background: '#ef4444',
+                color: 'white',
+                border: '2px solid #dc2626',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              🚪 Logout
+            </button>
           </div>
         )}
 
