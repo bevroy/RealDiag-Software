@@ -386,14 +386,15 @@ export default function AccountPage() {
                 onClick={() => setActiveTab(tab)}
                 style={{
                   padding: '0.75rem 1.5rem',
-                  background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.2)',
-                  color: activeTab === tab ? '#14b8a6' : 'white',
-                  border: 'none',
+                  background: activeTab === tab ? 'white' : 'rgba(255,255,255,0.7)',
+                  color: activeTab === tab ? '#14b8a6' : '#0f766e',
+                  border: activeTab === tab ? '2px solid #14b8a6' : '2px solid transparent',
                   borderRadius: '8px',
                   fontSize: '1rem',
                   fontWeight: '600',
                   cursor: 'pointer',
-                  textTransform: 'capitalize'
+                  textTransform: 'capitalize',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 {tab}
