@@ -34,6 +34,9 @@ from backend.services.auth_cookies import (
     get_token_from_cookie
 )
 import secrets
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Import rate limiter
 try:
@@ -42,6 +45,16 @@ try:
 except ImportError:
     LIMITER_AVAILABLE = False
     limiter = None
+    
+# Create a no-op limiter when security module unavailable
+class NoOpLimiter:
+    def limit(self, *args, **kwargs):
+        def decorator(f):
+            return f
+        return decorator
+
+if not LIMITER_AVAILABLE:
+    limiter = NoOpLimiter()
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -91,7 +104,7 @@ async def register_user(request: Request, user_data: UserCreate):
     )
 
 @router.post("/login")
-@limiter.limit("5/15minutes") if LIMITER_AVAILABLE else lambda f: f
+@limiter.limit("5/15minutes")
 async def login_user(request: Request, credentials: UserLogin):
     """
     Authenticate user and get access token.
