@@ -17,32 +17,51 @@ export function AuthGuard({ children }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    // Check if current route is public
-    const isPublicRoute = PUBLIC_ROUTES.some(route => 
-      router.pathname === route || router.pathname.startsWith(route)
-    );
+    const checkAuth = () => {
+      // Check if current route is public
+      const isPublicRoute = PUBLIC_ROUTES.some(route => 
+        router.pathname === route || router.pathname.startsWith(route)
+      );
 
-    if (isPublicRoute) {
-      setIsAuthorized(true);
-      setIsChecking(false);
-      return;
-    }
+      if (isPublicRoute) {
+        setIsAuthorized(true);
+        setIsChecking(false);
+        return;
+      }
 
-    // Check if user is authenticated
-    const authenticated = isStoredAuthenticated();
-    const user = getStoredUser();
+      // Check if user is authenticated
+      const authenticated = isStoredAuthenticated();
+      const user = getStoredUser();
 
-    if (!authenticated || !user) {
-      // Not authenticated - redirect to account page (login/register)
-      router.push('/account?redirect=' + encodeURIComponent(router.asPath));
-      setIsAuthorized(false);
-      setIsChecking(false);
-    } else {
-      // Authenticated - allow access
-      setIsAuthorized(true);
-      setIsChecking(false);
-    }
-  }, [router.pathname]);
+      if (!authenticated || !user) {
+        // Not authenticated - redirect to account page (login/register)
+        router.push('/account?redirect=' + encodeURIComponent(router.asPath));
+        setIsAuthorized(false);
+        setIsChecking(false);
+      } else {
+        // Authenticated - allow access
+        setIsAuthorized(true);
+        setIsChecking(false);
+      }
+    };
+
+    // Check auth on mount and route change
+    checkAuth();
+
+    // Re-check auth on every route change event
+    const handleRouteChange = () => {
+      setIsChecking(true);
+      checkAuth();
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+    router.events.on('routeChangeComplete', checkAuth);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+      router.events.off('routeChangeComplete', checkAuth);
+    };
+  }, [router.pathname, router.asPath]);
 
   // Show loading while checking authentication
   if (isChecking) {
