@@ -1,0 +1,141 @@
+tree_id: ORTHO-FRACTURE-HIP
+name: Hip Fracture
+family: ORTHOPEDICS
+specialty: Orthopedics, Emergency Medicine, Geriatrics
+chief_complaint: Hip Pain After Fall, Unable to Bear Weight
+description: Diagnosis and management of hip fractures with surgical decision-making
+version: "1.0"
+icd10: S72.009A
+author: RealDiag Clinical Team
+
+entry_point: hip_injury_assessment
+
+nodes:
+  - id: hip_injury_assessment
+    type: question
+    text: "Patient presentation after hip trauma?"
+    options:
+      - label: "Unable to bear weight, shortened/externally rotated leg"
+        next: hip_fracture_suspected
+      - label: "Able to bear weight, normal exam"
+        next: hip_contusion
+      - label: "Severe trauma, multiple injuries"
+        next: polytrauma_hip
+
+  - id: hip_fracture_suspected
+    type: diagnosis
+    name: "Hip Fracture"
+    icd10: "S72.009A"
+    urgency: emergency
+    workup:
+      - AP pelvis and lateral hip X-rays (REQUIRED)
+      - If X-rays negative but high suspicion:
+        * MRI hip (most sensitive) OR
+        * CT hip OR
+        * Bone scan (if MRI unavailable)
+      - Preoperative labs:
+        * CBC, CMP, coagulation studies
+        * Type and screen
+        * ECG
+        * Chest X-ray
+      - Classify fracture type:
+        * Femoral neck (intracapsular) - high risk AVN
+        * Intertrochanteric - between trochanters
+        * Subtrochanteric - below lesser trochanter
+    treatment:
+      - IMMEDIATE Management
+        * NPO for surgery
+        * IV access, fluids
+        * Pain control (avoid NSAIDs if surgery planned)
+          - Nerve block (femoral or fascia iliaca block) preferred
+          - Opioids if needed
+        * Keep leg in neutral position, avoid rotation
+        * DVT prophylaxis (mechanical until surgery)
+      - Orthopedic Surgery Consultation - EMERGENT
+      - Medical Optimization
+        * Cardiology clearance if indicated
+        * Optimize anticoagulation status
+        * Control blood pressure, glucose
+        * Blood transfusion if Hgb <8 g/dL or symptomatic
+      - Surgical Management (within 24-48 hours preferred)
+        * Femoral Neck Fractures:
+          - Non-displaced (Garden I-II) - Internal fixation with screws
+          - Displaced (Garden III-IV) - Hemiarthroplasty or total hip arthroplasty
+          - Young patients (<65) - ORIF to preserve native hip
+          - Elderly (>65) - Arthroplasty (hemi vs total based on activity level)
+        * Intertrochanteric Fractures:
+          - Sliding hip screw (dynamic hip screw) for stable fractures
+          - Intramedullary nail for unstable or reverse oblique fractures
+        * Subtrochanteric Fractures:
+          - Intramedullary nail (cephalomedullary nail)
+      - Postoperative Care
+        * Early mobilization (POD 1)
+        * Physical therapy
+        * Weight-bearing as tolerated (usually immediate)
+        * DVT prophylaxis (enoxaparin 40 mg SC daily x 4-6 weeks)
+        * Pain management
+        * Fall prevention assessment
+        * Osteoporosis treatment (bisphosphonates, calcium, vitamin D)
+        * Delirium prevention protocol
+      - Non-Surgical Management (RARE)
+        * Only if:
+          - Non-ambulatory at baseline
+          - Severe medical comorbidities prohibiting surgery
+          - Patient/family preference for comfort care
+        * Comfort care, pain control
+        * High mortality with non-operative management
+    prognosis: "1-year mortality 20-30%; early surgery improves outcomes; complications include AVN, nonunion, DVT/PE"
+
+  - id: polytrauma_hip
+    type: diagnosis
+    name: "Hip Fracture in Polytrauma Patient"
+    icd10: "S72.009A"
+    urgency: critical
+    workup:
+      - Trauma protocol
+      - FAST exam
+      - Pelvis X-ray (part of trauma series)
+      - CT chest/abdomen/pelvis
+      - Full trauma labs
+    treatment:
+      - ATLS protocol
+      - Stabilize life-threatening injuries first
+      - Orthopedic surgery consultation
+      - May require damage control orthopedics
+      - Delayed definitive fixation if unstable
+    prognosis: "Depends on overall injuries"
+
+  - id: hip_contusion
+    type: diagnosis
+    name: "Hip Contusion Without Fracture"
+    icd10: "S70.01XA"
+    urgency: low
+    workup:
+      - X-rays to rule out fracture
+    treatment:
+      - Rest, ice, elevation
+      - NSAIDs for pain
+      - Weight-bearing as tolerated
+      - Follow-up in 1-2 weeks
+      - Return if unable to bear weight
+    prognosis: "Excellent; resolves in 1-2 weeks"
+
+clinical_pearls:
+  - "Hip fractures are primarily a disease of elderly (average age 80)"
+  - "95% occur from ground-level falls"
+  - "Classic presentation: shortened, externally rotated leg"
+  - "Risk factors: osteoporosis, female, advanced age, prior fracture"
+  - "Early surgery (<24-48 hours) reduces mortality and complications"
+  - "Femoral neck fractures disrupt blood supply - high AVN risk if not promptly treated"
+  - "Garden classification (femoral neck): I-IV based on displacement"
+  - "Up to 10% of hip fractures are occult (negative initial X-ray)"
+  - "MRI is gold standard for occult fractures"
+  - "Post-op mortality highest in first 6 months"
+
+red_flags:
+  - "Hemodynamic instability (consider pelvic fracture with bleeding)"
+  - "Open fracture (rare, requires emergent surgery)"
+  - "Neurovascular compromise"
+  - "Compartment syndrome (rare in hip)"
+  - "Multiple injuries (polytrauma)"
+  - "Pathologic fracture (cancer, infection)"
