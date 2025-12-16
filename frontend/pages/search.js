@@ -95,6 +95,7 @@ export default function Search() {
     <AuthGuard>
       <Head>
         <title>Search Diagnoses - RealDiag</title>
+        <meta name="description" content="Search medical diagnoses by name, ICD-10 code, or specialty" />
       </Head>
 
       <div style={{
