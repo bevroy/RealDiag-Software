@@ -363,7 +363,7 @@ export default function SourcesPage() {
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 16 }}>
               RealDiag integrates evidence-based clinical guidelines and medical literature
-              to support diagnostic decision-making across {treeCount ? `${treeCount}+` : '424+'} disease processes. Below are the sources used across
+              to support diagnostic decision-making across {treeCount ? `${treeCount}+` : '364+'} disease processes. Below are the sources used across
               our diagnostic modules covering 24+ medical specialties.
             </p>
 
