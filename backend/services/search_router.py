@@ -148,23 +148,59 @@ async def search_diagnoses(
             tree_id = tree_data.get('tree_id', '').upper()
             chief_complaint = tree_data.get('chief_complaint', '').upper()
             
-            # Search in name, description, ICD-10, tree ID, or chief complaint
-            if (query in name or 
-                query in description or 
-                query in icd10 or 
-                query in tree_id or
-                query in chief_complaint):
-                
+            # Calculate match score for relevance ranking
+            match_score = 0
+            matched = False
+            
+            # Exact name match (highest priority)
+            if query == name:
+                match_score = 1000
+                matched = True
+            # Name starts with query
+            elif name.startswith(query):
+                match_score = 500
+                matched = True
+            # Name contains query as whole word
+            elif f" {query} " in f" {name} " or f" {query}," in name:
+                match_score = 300
+                matched = True
+            # Name contains query
+            elif query in name:
+                match_score = 200
+                matched = True
+            # Exact ICD-10 match
+            elif query == icd10:
+                match_score = 900
+                matched = True
+            # ICD-10 starts with query
+            elif icd10.startswith(query):
+                match_score = 400
+                matched = True
+            # Tree ID match
+            elif query in tree_id:
+                match_score = 250
+                matched = True
+            # Chief complaint contains query
+            elif query in chief_complaint:
+                match_score = 150
+                matched = True
+            # Description contains query (lowest priority)
+            elif query in description:
+                match_score = 50
+                matched = True
+            
+            if matched:
                 # Extract comprehensive clinical information
                 clinical_info = _extract_clinical_info(tree_data)
+                clinical_info['match_score'] = match_score
                 results.append(clinical_info)
                 
         except Exception as e:
             print(f"Error processing {tree_file}: {e}")
             continue
     
-    # Sort by name
-    results.sort(key=lambda x: x.get('name', ''))
+    # Sort by match score (highest first), then by name
+    results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
     
     return {
         'query': q,
