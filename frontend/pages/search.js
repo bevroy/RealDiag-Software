@@ -12,6 +12,14 @@ export default function Search() {
   const [error, setError] = useState(null);
   const [families, setFamilies] = useState([]);
   const [selectedFamily, setSelectedFamily] = useState('');
+  const [expandedResults, setExpandedResults] = useState({});
+
+  const toggleExpanded = (idx) => {
+    setExpandedResults(prev => ({
+      ...prev,
+      [idx]: !prev[idx]
+    }));
+  };
 
   // Load available families on mount
   useEffect(() => {
@@ -551,95 +559,106 @@ export default function Search() {
                       )}
                     </div>
 
-                    {/* Clinical Details Grid */}
+                    {/* Expand/Collapse Button */}
+                    <button
+                      onClick={() => toggleExpanded(idx)}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        background: expandedResults[idx] ? '#14b8a6' : '#ccfbf1',
+                        color: expandedResults[idx] ? 'white' : '#0f766e',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontWeight: '600',
+                        fontSize: '0.9rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.2s',
+                        marginTop: '1rem'
+                      }}
+                    >
+                      <span>{expandedResults[idx] ? '▼' : '▶'}</span>
+                      {expandedResults[idx] ? 'Show Less' : 'Show All Details'}
+                    </button>
+
+                    {/* Clinical Details - Horizontal Grid Layout (Collapsible) */}
+                    {expandedResults[idx] && (
                     <div style={{
                       display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                       gap: '1rem',
                       marginTop: '1rem'
                     }}>
-                      {/* Clinical Pearls */}
-                      {result.clinical_pearls && result.clinical_pearls.length > 0 && (
-                        <div style={{
-                          padding: '1rem',
-                          background: '#fef3c7',
-                          borderLeft: '4px solid #f59e0b',
-                          borderRadius: '6px'
-                        }}>
-                          <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#92400e',
-                            fontSize: '0.875rem',
-                            fontWeight: '700',
-                            textTransform: 'uppercase'
-                          }}>
-                            💎 Clinical Pearls
-                          </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#78350f'
-                          }}>
-                            {result.clinical_pearls.map((pearl, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{pearl}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
                       {/* Presentations */}
                       {result.presentations && result.presentations.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#dbeafe',
-                          borderLeft: '4px solid #3b82f6',
-                          borderRadius: '6px'
+                          background: 'linear-gradient(to right, #ecfdf5, #f0fdf4)',
+                          borderLeft: '4px solid #10b981',
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#1e40af',
+                            margin: '0 0 0.75rem',
+                            color: '#065f46',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            🩺 Typical Presentations
+                            <span>🩺</span> Presentations
                           </h4>
                           <ul style={{
                             margin: 0,
                             paddingLeft: '1.25rem',
-                            color: '#1e3a8a'
+                            color: '#047857',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
                           }}>
                             {result.presentations.map((pres, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{pres}</li>
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{pres}</li>
                             ))}
                           </ul>
                         </div>
                       )}
 
-                      {/* Diagnostic Workup */}
+                      {/* Workup */}
                       {result.workup && result.workup.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#f3e8ff',
-                          borderLeft: '4px solid #a855f7',
-                          borderRadius: '6px'
+                          background: 'linear-gradient(to right, #ccfbf1, #f0fdfa)',
+                          borderLeft: '4px solid #14b8a6',
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#6b21a8',
+                            margin: '0 0 0.75rem',
+                            color: '#0f766e',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            🔬 Diagnostic Workup
+                            <span>🔬</span> Diagnostic Workup
                           </h4>
                           <ul style={{
                             margin: 0,
                             paddingLeft: '1.25rem',
-                            color: '#581c87'
+                            color: '#0f766e',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
                           }}>
                             {result.workup.map((test, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{test}</li>
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{test}</li>
                             ))}
                           </ul>
                         </div>
@@ -649,26 +668,69 @@ export default function Search() {
                       {result.treatment && result.treatment.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#d1fae5',
-                          borderLeft: '4px solid #10b981',
-                          borderRadius: '6px'
+                          background: 'linear-gradient(to right, #fce7f3, #fdf2f8)',
+                          borderLeft: '4px solid #ec4899',
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#065f46',
+                            margin: '0 0 0.75rem',
+                            color: '#9f1239',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            💊 Treatment & Management
+                            <span>💊</span> Treatment
                           </h4>
                           <ul style={{
                             margin: 0,
                             paddingLeft: '1.25rem',
-                            color: '#064e3b'
+                            color: '#9f1239',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
                           }}>
                             {result.treatment.map((tx, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{tx}</li>
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{tx}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Clinical Pearls */}
+                      {result.clinical_pearls && result.clinical_pearls.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: 'linear-gradient(to right, #fef3c7, #fef9e7)',
+                          borderLeft: '4px solid #f59e0b',
+                          borderRadius: '8px',
+                          height: 'fit-content'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.75rem',
+                            color: '#92400e',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                          }}>
+                            <span>💎</span> Clinical Pearls
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#78350f',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
+                          }}>
+                            {result.clinical_pearls.map((pearl, i) => (
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{pearl}</li>
                             ))}
                           </ul>
                         </div>
@@ -678,26 +740,33 @@ export default function Search() {
                       {result.referrals && result.referrals.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#fce7f3',
-                          borderLeft: '4px solid #ec4899',
-                          borderRadius: '6px'
+                          background: 'linear-gradient(to right, #dbeafe, #eff6ff)',
+                          borderLeft: '4px solid #3b82f6',
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#9f1239',
+                            margin: '0 0 0.75rem',
+                            color: '#1e40af',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            🏥 Referrals
+                            <span>👨‍⚕️</span> Referrals
                           </h4>
                           <ul style={{
                             margin: 0,
                             paddingLeft: '1.25rem',
-                            color: '#831843'
+                            color: '#1e40af',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
                           }}>
                             {result.referrals.map((ref, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{ref}</li>
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{ref}</li>
                             ))}
                           </ul>
                         </div>
@@ -707,26 +776,33 @@ export default function Search() {
                       {result.homeopathic_remedies && result.homeopathic_remedies.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#e0f2fe',
-                          borderLeft: '4px solid #0ea5e9',
-                          borderRadius: '6px'
+                          background: 'linear-gradient(to right, #e0e7ff, #eef2ff)',
+                          borderLeft: '4px solid #6366f1',
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
-                            color: '#075985',
+                            margin: '0 0 0.75rem',
+                            color: '#4338ca',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            🌿 Homeopathic Remedies
+                            <span>🌿</span> Homeopathic Options
                           </h4>
                           <ul style={{
                             margin: 0,
                             paddingLeft: '1.25rem',
-                            color: '#0c4a6e'
+                            color: '#4338ca',
+                            fontSize: '0.875rem',
+                            lineHeight: '1.6'
                           }}>
                             {result.homeopathic_remedies.map((remedy, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{remedy}</li>
+                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{remedy}</li>
                             ))}
                           </ul>
                         </div>
@@ -736,31 +812,83 @@ export default function Search() {
                       {result.snomed && result.snomed.length > 0 && (
                         <div style={{
                           padding: '1rem',
-                          background: '#e5e7eb',
+                          background: 'linear-gradient(to right, #f3f4f6, #f9fafb)',
                           borderLeft: '4px solid #6b7280',
-                          borderRadius: '6px'
+                          borderRadius: '8px',
+                          height: 'fit-content'
                         }}>
                           <h4 style={{
-                            margin: '0 0 0.5rem',
+                            margin: '0 0 0.75rem',
                             color: '#374151',
                             fontSize: '0.875rem',
                             fontWeight: '700',
-                            textTransform: 'uppercase'
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                           }}>
-                            🔢 SNOMED Codes
+                            <span>🔖</span> SNOMED Codes
                           </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#1f2937'
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '0.5rem'
                           }}>
                             {result.snomed.map((code, i) => (
-                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{code}</li>
+                              <span key={i} style={{
+                                padding: '0.25rem 0.75rem',
+                                background: '#e5e7eb',
+                                color: '#374151',
+                                borderRadius: '6px',
+                                fontSize: '0.75rem',
+                                fontWeight: '600',
+                                fontFamily: 'monospace'
+                              }}>
+                                {code}
+                              </span>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
                     </div>
+                    )}
+                    {/* End collapsible section */}
+
+                    {/* ICD-10 Code (always visible) */}
+                    {result.icd10 && (
+                      <div style={{
+                        marginTop: '1rem',
+                        padding: '0.75rem',
+                        background: 'linear-gradient(to right, #f9fafb, #ffffff)',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                      }}>
+                        <span style={{
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
+                          color: '#6b7280',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px'
+                        }}>
+                          ICD-10:
+                        </span>
+                        <span style={{
+                          padding: '0.25rem 0.75rem',
+                          background: '#f3f4f6',
+                          color: '#374151',
+                          borderRadius: '6px',
+                          fontSize: '0.875rem',
+                          fontWeight: '700',
+                          fontFamily: 'monospace'
+                        }}>
+                          {result.icd10}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
