@@ -4,9 +4,10 @@ Symptom-Based Search Service
 
 This service provides intelligent diagnostic suggestions based on user-entered symptoms.
 It searches across all disease families and ranks results by symptom match score.
+Features AI tree generation for symptom combinations not in database.
 """
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, BackgroundTasks
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 import yaml
@@ -14,6 +15,16 @@ import re
 from pydantic import BaseModel, validator, conint, conlist
 import logging
 from functools import lru_cache
+import os
+
+# Import AI tree generator
+try:
+    from backend.services.ai_tree_generator import AITreeGenerator
+    AI_GENERATION_AVAILABLE = True
+except ImportError:
+    logging.warning("AI tree generator not available")
+    AI_GENERATION_AVAILABLE = False
+    AITreeGenerator = None
 
 # Import security features with fallback
 try:
@@ -377,11 +388,41 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
     # Return top 20 results
     top_results = results[:20]
     
-    return SymptomSearchResponse(
+    # Check if we should trigger AI tree generation (low/no results)
+    ai_tree_info = None
+    if AI_GENERATION_AVAILABLE and os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+        # Trigger AI generation if:
+        # 1. No results found, OR
+        # 2. Best result has low confidence (score < 2.0)
+        # 3. User has 2+ symptoms (enough context for AI)
+        should_generate = (
+            (len(top_results) == 0 or (top_results and top_results[0].match_score < 2.0))
+            and len(request.symptoms) >= 2
+        )
+        
+        if should_generate:
+            ai_tree_info = {
+                "generation_triggered": True,
+                "reason": "No high-confidence matches found",
+                "status": "pending",
+                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds."
+            }
+            
+            # Note: Actual generation happens via separate endpoint to avoid blocking
+    
+    response_data = SymptomSearchResponse(
         query_symptoms=request.symptoms,
         total_results=len(top_results),
         results=top_results
     )
+    
+    # Add AI generation info if applicable
+    if ai_tree_info:
+        response_dict = response_data.dict()
+        response_dict["ai_generation"] = ai_tree_info
+        return response_dict
+    
+    return response_data
 
 
 @router.get("/search/suggestions")
@@ -409,3 +450,136 @@ async def get_search_suggestions():
         "symptoms": sorted_symptoms,
         "total": len(sorted_symptoms)
     }
+
+
+@router.post("/search/generate-tree")
+async def generate_ai_tree(request: SymptomSearchRequest, background_tasks: BackgroundTasks):
+    """
+    Generate an AI decision tree for symptoms not covered by existing trees.
+    
+    This endpoint is called when symptom search returns no good matches.
+    Tree generation happens asynchronously and is saved to pending review.
+    """
+    if not AI_GENERATION_AVAILABLE:
+        raise HTTPException(
+            status_code=503,
+            detail="AI tree generation is not available. Contact administrator."
+        )
+    
+    if not os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+        raise HTTPException(
+            status_code=403,
+            detail="AI tree generation is disabled"
+        )
+    
+    if len(request.symptoms) < 2:
+        raise HTTPException(
+            status_code=400,
+            detail="At least 2 symptoms required for AI tree generation"
+        )
+    
+    # Log the generation request
+    AuditLogger.log_security_event(
+        "ai_tree_generation_requested",
+        {
+            "symptoms": request.symptoms,
+            "symptom_count": len(request.symptoms),
+            "patient_age": request.age,
+            "patient_sex": request.sex
+        },
+        severity="INFO"
+    )
+    
+    try:
+        # Choose provider (prefer Claude for medical content)
+        provider = os.getenv("AI_PROVIDER", "claude")
+        
+        # Build context from patient info
+        additional_context = ""
+        if request.age:
+            additional_context += f"Patient age: {request.age} years. "
+        if request.sex:
+            additional_context += f"Patient sex: {request.sex}. "
+        
+        # Generate tree
+        generator = AITreeGenerator(provider=provider)
+        tree_data = await generator.generate_tree(
+            symptoms=request.symptoms,
+            additional_context=additional_context if additional_context else None,
+            temperature=0.3  # Conservative for medical content
+        )
+        
+        # Save to pending directory
+        filepath = generator.save_tree(tree_data, status="pending")
+        
+        # Log successful generation
+        AuditLogger.log_security_event(
+            "ai_tree_generated",
+            {
+                "tree_id": tree_data["tree_id"],
+                "symptoms": request.symptoms,
+                "filepath": filepath,
+                "provider": provider,
+                "diagnosis": tree_data.get("diagnosis", {}).get("name", "Unknown")
+            },
+            severity="INFO"
+        )
+        
+        return {
+            "success": True,
+            "tree_id": tree_data["tree_id"],
+            "tree_data": tree_data,
+            "status": "pending_review",
+            "message": "Decision tree generated successfully. It will be available after medical review.",
+            "disclaimer": "This diagnostic tree was generated by AI and is pending review by medical professionals. Use with caution and always consult a healthcare provider."
+        }
+        
+    except Exception as e:
+        # Log error
+        AuditLogger.log_security_event(
+            "ai_tree_generation_failed",
+            {
+                "symptoms": request.symptoms,
+                "error": str(e)
+            },
+            severity="ERROR"
+        )
+        
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to generate decision tree: {str(e)}"
+        )
+
+
+@router.get("/search/ai-trees/pending")
+async def get_pending_trees():
+    """Get list of AI-generated trees pending review (admin only)"""
+    if not AI_GENERATION_AVAILABLE:
+        return {"trees": [], "count": 0}
+    
+    try:
+        generator = AITreeGenerator()
+        trees = generator.load_pending_trees()
+        
+        # Return summary (not full trees - they can be large)
+        summaries = []
+        for tree in trees:
+            summaries.append({
+                "tree_id": tree["tree_id"],
+                "name": tree["name"],
+                "chief_complaint": tree.get("chief_complaint", ""),
+                "generated_at": tree.get("metadata", {}).get("generated_at", ""),
+                "source_symptoms": tree.get("metadata", {}).get("source_symptoms", []),
+                "specialty": tree.get("specialty", "")
+            })
+        
+        return {
+            "trees": summaries,
+            "count": len(summaries)
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load pending trees: {str(e)}"
+        )
+

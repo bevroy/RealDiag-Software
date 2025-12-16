@@ -24,6 +24,15 @@ from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
 
+# Import admin router for AI tree management
+try:
+    from backend.services.admin_router import router as admin_router
+    ADMIN_ROUTER_AVAILABLE = True
+except ImportError as e:
+    logging.warning(f"Admin router not available: {e}")
+    ADMIN_ROUTER_AVAILABLE = False
+    admin_router = None
+
 # Import test environment utilities
 try:
     from backend.services.test_environment import (
@@ -160,6 +169,11 @@ app.include_router(subscription_router)
 app.include_router(homeopathy_router)
 app.include_router(mfa_router)
 app.include_router(search_router)
+
+# Include admin router if available
+if ADMIN_ROUTER_AVAILABLE and admin_router:
+    app.include_router(admin_router)
+    logger.info("✅ Admin endpoints enabled for AI tree management")
 
 # Include monitoring router if available
 try:
