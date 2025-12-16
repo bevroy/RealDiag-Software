@@ -800,52 +800,56 @@ export default function Search() {
                         </div>
                       )}
 
-                      {/* SNOMED Codes */}
-                      {result.snomed && result.snomed.length > 0 && (
-                        <div style={{
-                          padding: '1rem',
-                          background: 'linear-gradient(to right, #f3f4f6, #f9fafb)',
-                          borderLeft: '4px solid #6b7280',
-                          borderRadius: '8px',
-                          height: 'fit-content'
-                        }}>
-                          <h4 style={{
-                            margin: '0 0 0.75rem',
-                            color: '#374151',
-                            fontSize: '0.875rem',
-                            fontWeight: '700',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.5px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem'
-                          }}>
-                            <span>🔖</span> SNOMED Codes
-                          </h4>
-                          <div style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            gap: '0.5rem'
-                          }}>
-                            {result.snomed.map((code, i) => (
-                              <span key={i} style={{
-                                padding: '0.25rem 0.75rem',
-                                background: '#e5e7eb',
-                                color: '#374151',
-                                borderRadius: '6px',
-                                fontSize: '0.75rem',
-                                fontWeight: '600',
-                                fontFamily: 'monospace'
-                              }}>
-                                {code}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
                     </div>
                     )}
                     {/* End collapsible section */}
+
+                    {/* SNOMED Codes (always visible) */}
+                    {result.snomed && result.snomed.length > 0 && (
+                      <div style={{
+                        marginTop: '1rem',
+                        padding: '0.75rem',
+                        background: 'linear-gradient(to right, #f9fafb, #ffffff)',
+                        border: '1px solid #e5e7eb',
+                        borderRadius: '6px'
+                      }}>
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          marginBottom: '0.5rem'
+                        }}>
+                          <span style={{
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            color: '#6b7280',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px'
+                          }}>
+                            SNOMED CT:
+                          </span>
+                        </div>
+                        <div style={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          gap: '0.5rem'
+                        }}>
+                          {result.snomed.map((code, i) => (
+                            <span key={i} style={{
+                              padding: '0.25rem 0.75rem',
+                              background: '#f3f4f6',
+                              color: '#374151',
+                              borderRadius: '6px',
+                              fontSize: '0.875rem',
+                              fontWeight: '700',
+                              fontFamily: 'monospace'
+                            }}>
+                              {code}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* ICD-10 Code (always visible) */}
                     {result.icd10 && (
