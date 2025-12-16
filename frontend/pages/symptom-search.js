@@ -977,41 +977,6 @@ export default function SymptomSearch() {
           }}>
             🏠 Home
           </Link>
-          <button
-            onClick={() => setShowPreferences(!showPreferences)}
-            style={{
-              padding: '0.5rem 1rem',
-              background: darkMode ? '#0d9488' : '#ccfbf1',
-              color: darkMode ? 'white' : '#0f766e',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
-              fontWeight: '500',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              minHeight: '44px'
-            }}
-          >
-            ⚙️ Settings
-          </button>
-          <Link href="/account" style={{
-            padding: '0.5rem 1rem',
-            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-            color: 'white',
-            borderRadius: '6px',
-            textDecoration: 'none',
-            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
-            fontWeight: '500',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            minHeight: '44px',
-            boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)'
-          }}>
-            {isUserAuthenticated ? `👤 ${user?.full_name?.split(' ')[0] || 'Account'}` : '👤 Sign In'}
-          </Link>
         </div>
       </div>
 
