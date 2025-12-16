@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import AuthGuard from '../utils/AuthGuard';
+import { AuthGuard } from '../utils/AuthGuard';
 
 export default function Search() {
   const router = useRouter();
