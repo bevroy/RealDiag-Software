@@ -614,17 +614,15 @@ export default function Search() {
                           }}>
                             <span>🩺</span> Presentations
                           </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#047857',
-                            fontSize: '0.875rem',
-                            lineHeight: '1.6'
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '0.5rem'
                           }}>
                             {result.presentations.map((pres, i) => (
-                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{pres}</li>
+                              <span key={i} style={{ padding: '0.25rem 0.75rem', background: '#d1fae5', color: '#065f46', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{pres}</span>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
 
@@ -686,17 +684,15 @@ export default function Search() {
                           }}>
                             <span>💊</span> Treatment
                           </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#9f1239',
-                            fontSize: '0.875rem',
-                            lineHeight: '1.6'
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '0.5rem'
                           }}>
                             {result.treatment.map((tx, i) => (
-                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{tx}</li>
+                              <span key={i} style={{ padding: '0.25rem 0.75rem', background: '#fce7f3', color: '#9f1239', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{tx}</span>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
 
@@ -722,17 +718,15 @@ export default function Search() {
                           }}>
                             <span>💎</span> Clinical Pearls
                           </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#78350f',
-                            fontSize: '0.875rem',
-                            lineHeight: '1.6'
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '0.5rem'
                           }}>
                             {result.clinical_pearls.map((pearl, i) => (
-                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{pearl}</li>
+                              <span key={i} style={{ padding: '0.25rem 0.75rem', background: '#fef3c7', color: '#92400e', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{pearl}</span>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
 
@@ -758,17 +752,15 @@ export default function Search() {
                           }}>
                             <span>👨‍⚕️</span> Referrals
                           </h4>
-                          <ul style={{
-                            margin: 0,
-                            paddingLeft: '1.25rem',
-                            color: '#1e40af',
-                            fontSize: '0.875rem',
-                            lineHeight: '1.6'
+                          <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '0.5rem'
                           }}>
                             {result.referrals.map((ref, i) => (
-                              <li key={i} style={{ marginBottom: '0.5rem', fontWeight: '500' }}>{ref}</li>
+                              <span key={i} style={{ padding: '0.25rem 0.75rem', background: '#dbeafe', color: '#1e40af', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{ref}</span>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
 
