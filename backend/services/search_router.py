@@ -50,7 +50,15 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
     workup_tests = set()
     treatments = set()
     referrals = set()
+    
+    # Get SNOMED codes from top-level tree data
     snomed_codes = set()
+    tree_snomed = tree_data.get('snomed', [])
+    if tree_snomed:
+        if isinstance(tree_snomed, list):
+            snomed_codes.update(tree_snomed)
+        else:
+            snomed_codes.add(str(tree_snomed))
     homeopathic_remedies = set()
     
     # Parse nodes for clinical details
