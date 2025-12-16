@@ -202,9 +202,29 @@ export default function Home() {
           <br />
           Real-Time Diagnostic Assistant
         </p>
-        <p style={{ margin: '0', color: '#94a3b8', fontSize: '1rem' }}>
+        <p style={{ margin: '0 0 1.5rem', color: '#94a3b8', fontSize: '1rem' }}>
           {treeCount ? `${treeCount}+` : '424+'} diagnoses • 24+ specialties • Evidence-based
         </p>
+
+        {/* Action Buttons */}
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="/account" style={{
+            padding: '0.75rem 1.5rem',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontSize: '1rem',
+            fontWeight: '600',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            boxShadow: '0 4px 12px rgba(20, 184, 166, 0.3)',
+            transition: 'all 0.2s'
+          }}>
+            👤 Sign In / Register
+          </a>
+        </div>
       </div>
 
       {/* Main Content */}
