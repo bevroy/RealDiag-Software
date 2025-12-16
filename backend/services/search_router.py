@@ -20,6 +20,7 @@ async def search_diagnoses(
     Search for diagnoses by name or ICD-10 code.
     
     Returns matching decision trees with their metadata.
+    Searches in: name, description, ICD-10, tree_id, chief_complaint, and node-level diagnoses.
     """
     query = q.strip().upper()
     results = []
@@ -34,6 +35,16 @@ async def search_diagnoses(
         family = tree_data.get('family', '')
         specialty = tree_data.get('specialty', '')
         chief_complaint = tree_data.get('chief_complaint', '')
+        
+        # Collect all suggested diagnoses from nodes
+        suggested_diagnoses = set()
+        nodes = tree_data.get('nodes', {})
+        for node_name, node_data in nodes.items():
+            if isinstance(node_data, dict):
+                suggest_dx = node_data.get('suggest_dx', [])
+                if suggest_dx:
+                    for dx in suggest_dx:
+                        suggested_diagnoses.add(str(dx).strip())
         
         # Check if query matches
         matches = False
@@ -63,6 +74,11 @@ async def search_diagnoses(
         elif tree_id and query in tree_id.upper():
             matches = True
             match_type = 'tree_id'
+        
+        # Check node-level suggested diagnoses
+        elif any(query in dx.upper() for dx in suggested_diagnoses):
+            matches = True
+            match_type = 'suggested_diagnosis'
         
         if matches:
             results.append({
