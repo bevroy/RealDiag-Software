@@ -408,77 +408,82 @@ export default function Search() {
 
               <div style={{
                 display: 'grid',
-                gap: '0.75rem'
+                gap: '1rem'
               }}>
                 {searchResults.map((result, index) => (
                   <div
                     key={index}
-                    onClick={() => navigateToDiagnosis(result.tree_id)}
                     style={{
-                      padding: '1.25rem',
+                      padding: '1.5rem',
                       border: '2px solid #e5e7eb',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s',
+                      borderRadius: '12px',
                       background: 'white'
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#0d9488';
-                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(13,148,136,0.15)';
-                      e.currentTarget.style.background = '#f0fdfa';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#e5e7eb';
-                      e.currentTarget.style.boxShadow = 'none';
-                      e.currentTarget.style.background = 'white';
-                    }}
                   >
+                    {/* Header */}
                     <div style={{
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'flex-start',
-                      marginBottom: '0.5rem',
+                      marginBottom: '1rem',
                       gap: '1rem',
-                      flexWrap: 'wrap'
+                      flexWrap: 'wrap',
+                      paddingBottom: '1rem',
+                      borderBottom: '2px solid #e7f5f3'
                     }}>
                       <h3 style={{
                         margin: 0,
-                        color: '#1a202c',
-                        fontSize: '1.125rem',
-                        fontWeight: '600'
+                        color: '#0d9488',
+                        fontSize: '1.5rem',
+                        fontWeight: '700'
                       }}>
                         {result.name}
                       </h3>
-                      {result.icd10 && (
-                        <span style={{
-                          padding: '0.25rem 0.75rem',
-                          background: '#0d9488',
-                          color: 'white',
-                          borderRadius: '6px',
-                          fontSize: '0.875rem',
-                          fontWeight: '600',
-                          whiteSpace: 'nowrap'
-                        }}>
-                          {result.icd10}
-                        </span>
-                      )}
+                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        {result.icd10 && (
+                          <span style={{
+                            padding: '0.5rem 1rem',
+                            background: '#0d9488',
+                            color: 'white',
+                            borderRadius: '6px',
+                            fontSize: '0.875rem',
+                            fontWeight: '600'
+                          }}>
+                            ICD-10: {result.icd10}
+                          </span>
+                        )}
+                        {result.urgency && (
+                          <span style={{
+                            padding: '0.5rem 1rem',
+                            background: result.urgency === 'critical' ? '#dc2626' : result.urgency === 'urgent' ? '#f59e0b' : '#10b981',
+                            color: 'white',
+                            borderRadius: '6px',
+                            fontSize: '0.875rem',
+                            fontWeight: '600'
+                          }}>
+                            {result.urgency.toUpperCase()}
+                          </span>
+                        )}
+                      </div>
                     </div>
 
+                    {/* Description */}
                     {result.description && (
                       <p style={{
-                        margin: '0.5rem 0',
-                        color: '#6b7280',
-                        fontSize: '0.95rem',
-                        lineHeight: '1.5'
+                        margin: '0 0 1rem',
+                        color: '#4b5563',
+                        fontSize: '1rem',
+                        lineHeight: '1.6'
                       }}>
                         {result.description}
                       </p>
                     )}
 
+                    {/* Metadata */}
                     <div style={{
                       display: 'flex',
                       gap: '0.5rem',
-                      marginTop: '0.75rem',
+                      marginBottom: '1rem',
                       flexWrap: 'wrap'
                     }}>
                       {result.family && (
@@ -498,6 +503,230 @@ export default function Search() {
                           padding: '0.25rem 0.75rem',
                           background: '#e7f5f3',
                           color: '#0d9488',
+                          borderRadius: '6px',
+                          fontSize: '0.875rem',
+                          fontWeight: '500'
+                        }}>
+                          🏥 {result.specialty}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Clinical Details Grid */}
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                      gap: '1rem',
+                      marginTop: '1rem'
+                    }}>
+                      {/* Clinical Pearls */}
+                      {result.clinical_pearls && result.clinical_pearls.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#fef3c7',
+                          borderLeft: '4px solid #f59e0b',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#92400e',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            💎 Clinical Pearls
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#78350f'
+                          }}>
+                            {result.clinical_pearls.map((pearl, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{pearl}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Presentations */}
+                      {result.presentations && result.presentations.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#dbeafe',
+                          borderLeft: '4px solid #3b82f6',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#1e40af',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            🩺 Typical Presentations
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#1e3a8a'
+                          }}>
+                            {result.presentations.map((pres, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{pres}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Diagnostic Workup */}
+                      {result.workup && result.workup.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#f3e8ff',
+                          borderLeft: '4px solid #a855f7',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#6b21a8',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            🔬 Diagnostic Workup
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#581c87'
+                          }}>
+                            {result.workup.map((test, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{test}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Treatment */}
+                      {result.treatment && result.treatment.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#d1fae5',
+                          borderLeft: '4px solid #10b981',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#065f46',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            💊 Treatment & Management
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#064e3b'
+                          }}>
+                            {result.treatment.map((tx, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{tx}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Referrals */}
+                      {result.referrals && result.referrals.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#fce7f3',
+                          borderLeft: '4px solid #ec4899',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#9f1239',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            🏥 Referrals
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#831843'
+                          }}>
+                            {result.referrals.map((ref, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{ref}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Homeopathic Remedies */}
+                      {result.homeopathic_remedies && result.homeopathic_remedies.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#e0f2fe',
+                          borderLeft: '4px solid #0ea5e9',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#075985',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            🌿 Homeopathic Remedies
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#0c4a6e'
+                          }}>
+                            {result.homeopathic_remedies.map((remedy, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{remedy}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* SNOMED Codes */}
+                      {result.snomed && result.snomed.length > 0 && (
+                        <div style={{
+                          padding: '1rem',
+                          background: '#e5e7eb',
+                          borderLeft: '4px solid #6b7280',
+                          borderRadius: '6px'
+                        }}>
+                          <h4 style={{
+                            margin: '0 0 0.5rem',
+                            color: '#374151',
+                            fontSize: '0.875rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase'
+                          }}>
+                            🔢 SNOMED Codes
+                          </h4>
+                          <ul style={{
+                            margin: 0,
+                            paddingLeft: '1.25rem',
+                            color: '#1f2937'
+                          }}>
+                            {result.snomed.map((code, i) => (
+                              <li key={i} style={{ marginBottom: '0.25rem', fontSize: '0.875rem' }}>{code}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
                           borderRadius: '6px',
                           fontSize: '0.875rem',
                           fontWeight: '500'

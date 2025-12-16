@@ -1,120 +1,170 @@
 """
-Search Router - Search decision trees by diagnosis name or ICD-10 code
+Diagnosis Search Router - Comprehensive clinical reference search
+Provides detailed clinical information including presentations, workup, treatment, codes, and remedies
 """
 
 from fastapi import APIRouter, Query
 from typing import List, Dict, Optional
-import re
-from backend.services.decision_tree_engine import DecisionTreeEngine
+from pathlib import Path
+import yaml
 
 router = APIRouter(prefix="/api", tags=["search"])
 
-# Initialize the decision tree engine
-engine = DecisionTreeEngine()
+TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
+
+def _extract_clinical_info(tree_data: Dict) -> Dict:
+    """Extract comprehensive clinical information from a decision tree"""
+    
+    # Basic metadata
+    tree_id = tree_data.get('tree_id', '')
+    name = tree_data.get('name', '')
+    description = tree_data.get('description', '')
+    icd10 = tree_data.get('icd10', '')
+    family = tree_data.get('family', '')
+    specialty = tree_data.get('specialty', '')
+    chief_complaint = tree_data.get('chief_complaint', '')
+    urgency = tree_data.get('urgency', '')
+    
+    # Collect clinical information from nodes
+    clinical_pearls = set()
+    presentations = set()
+    workup_tests = set()
+    treatments = set()
+    referrals = set()
+    snomed_codes = set()
+    homeopathic_remedies = set()
+    
+    # Parse nodes for clinical details
+    nodes = tree_data.get('nodes', [])
+    if isinstance(nodes, list):
+        for node in nodes:
+            if not isinstance(node, dict):
+                continue
+                
+            # Clinical pearls
+            pearls = node.get('clinical_pearls', [])
+            if pearls:
+                for pearl in pearls:
+                    clinical_pearls.add(str(pearl))
+            
+            # Presentations/symptoms
+            when_conditions = node.get('when', {})
+            if when_conditions:
+                symptoms_any = when_conditions.get('symptoms_contains_any', [])
+                if symptoms_any:
+                    for symptom in symptoms_any:
+                        presentations.add(str(symptom))
+            
+            # Workup/tests
+            tests = node.get('tests', [])
+            if tests:
+                for test in tests:
+                    workup_tests.add(str(test))
+            
+            # Treatments/management
+            management = node.get('management', [])
+            if management:
+                for tx in management:
+                    treatments.add(str(tx))
+            
+            treatment = node.get('treatment', [])
+            if treatment:
+                for tx in treatment:
+                    treatments.add(str(tx))
+            
+            # Referrals
+            refs = node.get('referrals', [])
+            if refs:
+                for ref in refs:
+                    referrals.add(str(ref))
+            
+            # Homeopathic remedies
+            homeopathy = node.get('homeopathy', [])
+            if homeopathy:
+                for remedy in homeopathy:
+                    if isinstance(remedy, dict):
+                        remedy_name = remedy.get('remedy', '')
+                        indications = remedy.get('indications', '')
+                        if remedy_name:
+                            homeopathic_remedies.add(f"{remedy_name}: {indications}" if indications else remedy_name)
+                    else:
+                        homeopathic_remedies.add(str(remedy))
+    
+    # Add chief complaint to presentations
+    if chief_complaint:
+        for complaint in chief_complaint.split(','):
+            presentations.add(complaint.strip())
+    
+    return {
+        'tree_id': tree_id,
+        'name': name,
+        'description': description,
+        'icd10': icd10,
+        'snomed': list(snomed_codes) if snomed_codes else [],
+        'family': family,
+        'specialty': specialty,
+        'urgency': urgency,
+        'clinical_pearls': sorted(list(clinical_pearls)),
+        'presentations': sorted(list(presentations)),
+        'workup': sorted(list(workup_tests)),
+        'treatment': sorted(list(treatments)),
+        'referrals': sorted(list(referrals)),
+        'homeopathic_remedies': sorted(list(homeopathic_remedies))
+    }
 
 @router.get("/search")
 async def search_diagnoses(
     q: str = Query(..., min_length=1, description="Search query (diagnosis name or ICD-10 code)")
 ) -> Dict:
     """
-    Search for diagnoses by name or ICD-10 code.
+    Search for diagnoses and return comprehensive clinical information.
     
-    Returns matching decision trees with their metadata.
-    Searches in: name, description, ICD-10, tree_id, chief_complaint, and node-level diagnoses.
+    Returns: Clinical pearls, presentations, diagnostic workup, treatment recommendations,
+    ICD-10/SNOMED codes, and homeopathic remedies.
     """
     query = q.strip().upper()
     results = []
     
-    # Load all trees and their metadata
-    for tree_path, tree_data in engine.trees.items():
-        # Extract metadata
-        tree_id = tree_data.get('tree_id', '')
-        name = tree_data.get('name', '')
-        icd10 = tree_data.get('icd10', '')
-        description = tree_data.get('description', '')
-        family = tree_data.get('family', '')
-        specialty = tree_data.get('specialty', '')
-        chief_complaint = tree_data.get('chief_complaint', '')
-        
-        # Collect all suggested diagnoses from nodes
-        suggested_diagnoses = set()
-        nodes = tree_data.get('nodes', [])
-        
-        # Handle both dict format (old) and list format (new)
-        if isinstance(nodes, dict):
-            for node_name, node_data in nodes.items():
-                if isinstance(node_data, dict):
-                    suggest_dx = node_data.get('suggest_dx', [])
-                    if suggest_dx:
-                        for dx in suggest_dx:
-                            suggested_diagnoses.add(str(dx).strip())
-        elif isinstance(nodes, list):
-            for node in nodes:
-                if isinstance(node, dict):
-                    suggest_dx = node.get('suggest_dx', [])
-                    if suggest_dx:
-                        for dx in suggest_dx:
-                            suggested_diagnoses.add(str(dx).strip())
-        
-        # Check if query matches
-        matches = False
-        match_type = None
-        
-        # Check ICD-10 code (exact or partial match)
-        if icd10 and query in str(icd10).upper():
-            matches = True
-            match_type = 'icd10'
-        
-        # Check diagnosis name
-        elif name and query in name.upper():
-            matches = True
-            match_type = 'name'
-        
-        # Check description
-        elif description and query in description.upper():
-            matches = True
-            match_type = 'description'
-        
-        # Check chief complaint
-        elif chief_complaint and query in chief_complaint.upper():
-            matches = True
-            match_type = 'chief_complaint'
-        
-        # Check tree ID (for code-based searches like "CARD-" or "NEURO-")
-        elif tree_id and query in tree_id.upper():
-            matches = True
-            match_type = 'tree_id'
-        
-        # Check node-level suggested diagnoses
-        elif any(query in dx.upper() for dx in suggested_diagnoses):
-            matches = True
-            match_type = 'suggested_diagnosis'
-        
-        if matches:
-            results.append({
-                'tree_id': tree_id,
-                'name': name,
-                'icd10': icd10,
-                'description': description,
-                'family': family,
-                'specialty': specialty,
-                'chief_complaint': chief_complaint,
-                'match_type': match_type
-            })
+    # Search through all tree files
+    if not TREES_PATH.exists():
+        return {
+            'query': q,
+            'count': 0,
+            'results': []
+        }
     
-    # Sort results: exact ICD-10 matches first, then by name
-    def sort_key(item):
-        if item['match_type'] == 'icd10':
-            # Exact matches first
-            if item['icd10'] and item['icd10'].upper() == query:
-                return (0, item['name'])
-            return (1, item['name'])
-        elif item['match_type'] == 'name':
-            return (2, item['name'])
-        else:
-            return (3, item['name'])
+    for tree_file in TREES_PATH.glob("*.yml"):
+        try:
+            with tree_file.open("r", encoding="utf-8") as f:
+                tree_data = yaml.safe_load(f) or {}
+            
+            if not tree_data:
+                continue
+            
+            # Check if query matches
+            name = tree_data.get('name', '').upper()
+            description = tree_data.get('description', '').upper()
+            icd10 = str(tree_data.get('icd10', '')).upper()
+            tree_id = tree_data.get('tree_id', '').upper()
+            chief_complaint = tree_data.get('chief_complaint', '').upper()
+            
+            # Search in name, description, ICD-10, tree ID, or chief complaint
+            if (query in name or 
+                query in description or 
+                query in icd10 or 
+                query in tree_id or
+                query in chief_complaint):
+                
+                # Extract comprehensive clinical information
+                clinical_info = _extract_clinical_info(tree_data)
+                results.append(clinical_info)
+                
+        except Exception as e:
+            print(f"Error processing {tree_file}: {e}")
+            continue
     
-    results.sort(key=sort_key)
+    # Sort by name
+    results.sort(key=lambda x: x.get('name', ''))
     
     return {
         'query': q,
@@ -128,26 +178,37 @@ async def search_by_family(
     family: str = Query(..., description="Medical family/specialty")
 ) -> Dict:
     """
-    Get all decision trees in a specific medical family.
+    Get all diagnoses in a specific medical family with full clinical details.
     """
     family_query = family.strip().upper()
     results = []
     
-    for tree_path, tree_data in engine.trees.items():
-        tree_family = tree_data.get('family', '').upper()
-        
-        if family_query in tree_family:
-            results.append({
-                'tree_id': tree_data.get('tree_id', ''),
-                'name': tree_data.get('name', ''),
-                'icd10': tree_data.get('icd10', ''),
-                'description': tree_data.get('description', ''),
-                'family': tree_data.get('family', ''),
-                'specialty': tree_data.get('specialty', ''),
-                'chief_complaint': tree_data.get('chief_complaint', '')
-            })
+    if not TREES_PATH.exists():
+        return {
+            'family': family,
+            'count': 0,
+            'results': []
+        }
     
-    results.sort(key=lambda x: x['name'])
+    for tree_file in TREES_PATH.glob("*.yml"):
+        try:
+            with tree_file.open("r", encoding="utf-8") as f:
+                tree_data = yaml.safe_load(f) or {}
+            
+            if not tree_data:
+                continue
+            
+            tree_family = tree_data.get('family', '').upper()
+            
+            if family_query in tree_family:
+                clinical_info = _extract_clinical_info(tree_data)
+                results.append(clinical_info)
+                
+        except Exception as e:
+            print(f"Error processing {tree_file}: {e}")
+            continue
+    
+    results.sort(key=lambda x: x.get('name', ''))
     
     return {
         'family': family,
@@ -163,10 +224,20 @@ async def get_families() -> Dict:
     """
     families = set()
     
-    for tree_path, tree_data in engine.trees.items():
-        family = tree_data.get('family', '')
-        if family:
-            families.add(family)
+    if not TREES_PATH.exists():
+        return {'families': []}
+    
+    for tree_file in TREES_PATH.glob("*.yml"):
+        try:
+            with tree_file.open("r", encoding="utf-8") as f:
+                tree_data = yaml.safe_load(f) or {}
+            
+            family = tree_data.get('family', '')
+            if family:
+                families.add(family)
+                
+        except Exception as e:
+            continue
     
     return {
         'families': sorted(list(families))
