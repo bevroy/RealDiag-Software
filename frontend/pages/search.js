@@ -766,31 +766,6 @@ export default function Search() {
               </div>
             </div>
           )}
-                          borderRadius: '6px',
-                          fontSize: '0.875rem',
-                          fontWeight: '500'
-                        }}>
-                          🏥 {result.specialty}
-                        </span>
-                      )}
-                      {result.chief_complaint && (
-                        <span style={{
-                          padding: '0.25rem 0.75rem',
-                          background: '#e7f5f3',
-                          color: '#0d9488',
-                          borderRadius: '6px',
-                          fontSize: '0.875rem',
-                          fontWeight: '500'
-                        }}>
-                          💬 {result.chief_complaint}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* No Results */}
           {!isSearching && searchResults.length === 0 && (searchQuery || selectedFamily) && (
