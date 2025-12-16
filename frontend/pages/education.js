@@ -692,11 +692,13 @@ export default function EducationPage() {
               <span>☰ Navigation</span>
             </summary>
             <div className="nav-links">
-              <a href="/symptom-search">🔍 Symptom Search</a>
+              <a href="/">🏠 Home</a>
+              <a href="/symptom-search">🔬 Symptom Search</a>
               <a href="/search">🔍 Diagnosis Search</a>
               <a href="/rules">📋 Browse Rules</a>
               <a href="/integration">🔌 API</a>
               <a href="/features-demo">✨ Features</a>
+              <a href="/education">📚 Training</a>
               <a href="/sources">📖 Sources</a>
               <a href="/patient-history">📋 Patient History</a>
               <a href="/account">👤 Account</a>

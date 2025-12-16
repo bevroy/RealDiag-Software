@@ -163,6 +163,19 @@ export default function Search() {
               }}>
                 🔬 Symptom Search
               </a>
+              <a href="/search" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                🔍 Diagnosis Search
+              </a>
               <a href="/rules" style={{
                 padding: '0.75rem',
                 background: '#f0fdfa',
@@ -227,6 +240,32 @@ export default function Search() {
                 fontSize: '0.9rem'
               }}>
                 📖 Sources
+              </a>
+              <a href="/patient-history" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                📋 Patient History
+              </a>
+              <a href="/account" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                👤 Account
               </a>
             </div>
           </details>
