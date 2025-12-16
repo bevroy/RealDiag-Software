@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import AuthGuard from '../utils/AuthGuard';
-import getConfig from 'next/config';
 
 export default function Search() {
   const router = useRouter();
-  const { publicRuntimeConfig } = getConfig() || {};
-  const apiBase = publicRuntimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+  
+  // Use the same API base pattern as other pages
+  const apiBase = typeof window !== 'undefined' 
+    ? (window.runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com')
+    : 'https://realdiag-software.onrender.com';
   
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
