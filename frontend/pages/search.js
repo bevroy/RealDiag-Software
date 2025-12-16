@@ -114,75 +114,107 @@ export default function Search() {
             padding: '0.75rem 1.25rem',
             borderRadius: '10px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+            border: '1px solid #e2e8f0',
             marginBottom: '1rem',
             cursor: 'pointer'
           }}>
             <summary style={{
+              color: '#0f766e',
+              fontSize: '1rem',
               fontWeight: '600',
-              color: '#0d9488',
-              fontSize: '0.95rem',
               listStyle: 'none',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem'
             }}>
-              <span>📍</span> Navigation
+              <span>☰ Navigation</span>
             </summary>
             <div style={{
-              marginTop: '0.75rem',
-              paddingTop: '0.75rem',
-              borderTop: '1px solid #e5e7eb'
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '0.75rem',
+              marginTop: '1rem',
+              paddingTop: '1rem',
+              borderTop: '1px solid #e2e8f0'
             }}>
-              <Link href="/" style={{
-                display: 'block',
-                padding: '0.5rem',
-                color: '#0d9488',
+              <a href="/symptom-search" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
                 textDecoration: 'none',
-                borderRadius: '6px',
-                transition: 'background 0.2s'
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
               }}>
-                🏠 Home
-              </Link>
-              <Link href="/symptom-search" style={{
-                display: 'block',
-                padding: '0.5rem',
-                color: '#0d9488',
+                🔬 Symptom Search
+              </a>
+              <a href="/rules" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
                 textDecoration: 'none',
-                borderRadius: '6px',
-                transition: 'background 0.2s'
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
               }}>
-                🔍 Symptom Search
-              </Link>
-              <Link href="/rules" style={{
-                display: 'block',
-                padding: '0.5rem',
-                color: '#0d9488',
+                📋 Browse Rules
+              </a>
+              <a href="/integration" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
                 textDecoration: 'none',
-                borderRadius: '6px',
-                transition: 'background 0.2s'
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
               }}>
-                📚 Clinical Reference
-              </Link>
-              <Link href="/education" style={{
-                display: 'block',
-                padding: '0.5rem',
-                color: '#0d9488',
+                🔌 API
+              </a>
+              <a href="/features-demo" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
                 textDecoration: 'none',
-                borderRadius: '6px',
-                transition: 'background 0.2s'
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
               }}>
-                🎓 Medical Education
-              </Link>
-              <Link href="/account" style={{
-                display: 'block',
-                padding: '0.5rem',
-                color: '#0d9488',
+                ✨ Features
+              </a>
+              <a href="/education" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
                 textDecoration: 'none',
-                borderRadius: '6px',
-                transition: 'background 0.2s'
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
               }}>
-                👤 Account
-              </Link>
+                📚 Training
+              </a>
+              <a href="/sources" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                📖 Sources
+              </a>
             </div>
           </details>
 
