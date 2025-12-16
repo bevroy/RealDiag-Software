@@ -820,6 +820,19 @@ export default function SymptomSearch() {
             paddingTop: '1rem',
             borderTop: `1px solid ${darkMode ? '#374151' : '#e2e8f0'}`
           }}>
+            <a href="/" style={{
+              padding: '0.75rem',
+              background: darkMode ? '#1f2937' : '#f0fdfa',
+              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: darkMode ? '#5eead4' : '#0f766e',
+              fontWeight: '600',
+              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+            }}>
+              🏠 Home
+            </a>
             <a href="/rules" style={{
               padding: '0.75rem',
               background: darkMode ? '#1f2937' : '#f0fdfa',
@@ -938,11 +951,11 @@ export default function SymptomSearch() {
         boxShadow: darkMode ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         gap: '1rem'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: '1 1 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Image 
             src="/logo.png" 
             alt="RealDiag Logo" 
@@ -958,25 +971,6 @@ export default function SymptomSearch() {
           }}>
             🔍 Symptom Search
           </h1>
-        </div>
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <Link href="/" style={{
-            padding: '0.5rem 1rem',
-            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: `${0.85 * getFontSizeMultiplier()}rem`,
-            fontWeight: '500',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            minHeight: '44px',
-            textDecoration: 'none'
-          }}>
-            🏠 Home
-          </Link>
         </div>
       </div>
 

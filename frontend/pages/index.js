@@ -62,6 +62,19 @@ export default function Home() {
             paddingTop: '1rem',
             borderTop: '1px solid #e2e8f0'
           }}>
+            <a href="/" style={{
+              padding: '0.75rem',
+              background: '#f0fdfa',
+              border: '1px solid #ccfbf1',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: '#0f766e',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              🏠 Home
+            </a>
             <a href="/symptom-search" style={{
               padding: '0.75rem',
               background: '#f0fdfa',
@@ -73,7 +86,7 @@ export default function Home() {
               fontWeight: '600',
               fontSize: '0.9rem'
             }}>
-              🔍 Symptom Search
+              🔬 Symptom Search
             </a>
             <a href="/search" style={{
               padding: '0.75rem',
