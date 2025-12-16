@@ -9,7 +9,7 @@ from pathlib import Path
 import yaml
 import sys
 
-# Add data directory to path for ICD-10 database
+# Add data directory to path for ICD-10 and SNOMED databases
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "data"))
 try:
     from icd10_codes import ICD10_DATABASE, get_diagnosis_from_icd10
@@ -17,6 +17,15 @@ except ImportError:
     ICD10_DATABASE = {}
     def get_diagnosis_from_icd10(code: str) -> str:
         return None
+
+try:
+    from snomed_codes import SNOMED_DATABASE, get_diagnosis_from_snomed, get_snomed_codes_for_diagnosis
+except ImportError:
+    SNOMED_DATABASE = {}
+    def get_diagnosis_from_snomed(code: str) -> str:
+        return None
+    def get_snomed_codes_for_diagnosis(diagnosis_name: str) -> list:
+        return []
 
 router = APIRouter(prefix="/api", tags=["search"])
 
@@ -105,6 +114,12 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
         for complaint in chief_complaint.split(','):
             presentations.add(complaint.strip())
     
+    # Enrich with SNOMED codes if available
+    if name and not snomed_codes:
+        snomed_matches = get_snomed_codes_for_diagnosis(name)
+        if snomed_matches:
+            snomed_codes.update(snomed_matches)
+    
     return {
         'tree_id': tree_id,
         'name': name,
@@ -158,6 +173,9 @@ async def search_diagnoses(
             tree_id = tree_data.get('tree_id', '').upper()
             chief_complaint = tree_data.get('chief_complaint', '').upper()
             
+            # Check SNOMED database for match
+            snomed_diagnosis = get_diagnosis_from_snomed(query)
+            
             # Calculate match score for relevance ranking
             match_score = 0
             matched = False
@@ -181,6 +199,10 @@ async def search_diagnoses(
             # Exact ICD-10 match
             elif query == icd10:
                 match_score = 900
+                matched = True
+            # SNOMED code match
+            elif snomed_diagnosis and snomed_diagnosis.upper() in name:
+                match_score = 850
                 matched = True
             # ICD-10 starts with query
             elif icd10.startswith(query):
@@ -295,6 +317,76 @@ async def search_diagnoses(
                         unique_icd[diagnosis_name] = result
             
             results = list(unique_icd.values())
+            results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
+    
+    # If still no results, search SNOMED database
+    if len(results) == 0 and SNOMED_DATABASE:
+        # Check if query is a SNOMED code
+        snomed_diagnosis = get_diagnosis_from_snomed(query)
+        if snomed_diagnosis:
+            results.append({
+                'tree_id': '',
+                'name': snomed_diagnosis,
+                'description': f'SNOMED CT: {query}',
+                'icd10': '',
+                'snomed': [query],
+                'family': 'General',
+                'specialty': 'General Medicine',
+                'urgency': '',
+                'clinical_pearls': [],
+                'presentations': [],
+                'workup': [],
+                'treatment': ['Consult clinical guidelines for specific treatment recommendations'],
+                'referrals': [],
+                'homeopathic_remedies': [],
+                'match_score': 850
+            })
+        else:
+            # Search SNOMED database by diagnosis name
+            for snomed_code, diagnosis_name in SNOMED_DATABASE.items():
+                if query in diagnosis_name.upper():
+                    # Calculate match score
+                    if query == diagnosis_name.upper():
+                        score = 1000
+                    elif diagnosis_name.upper().startswith(query):
+                        score = 500
+                    elif f" {query} " in f" {diagnosis_name.upper()} ":
+                        score = 300
+                    else:
+                        score = 200
+                    
+                    results.append({
+                        'tree_id': '',
+                        'name': diagnosis_name,
+                        'description': f'SNOMED CT: {snomed_code}',
+                        'icd10': '',
+                        'snomed': [snomed_code],
+                        'family': 'General',
+                        'specialty': 'General Medicine',
+                        'urgency': '',
+                        'clinical_pearls': [],
+                        'presentations': [],
+                        'workup': [],
+                        'treatment': ['Consult clinical guidelines for specific treatment recommendations'],
+                        'referrals': [],
+                        'homeopathic_remedies': [],
+                        'match_score': score
+                    })
+            
+            # Deduplicate and sort SNOMED results
+            unique_snomed = {}
+            for result in results:
+                diagnosis_name = result.get('name', '').upper()
+                current_score = result.get('match_score', 0)
+                
+                if diagnosis_name not in unique_snomed:
+                    unique_snomed[diagnosis_name] = result
+                else:
+                    existing_score = unique_snomed[diagnosis_name].get('match_score', 0)
+                    if current_score > existing_score:
+                        unique_snomed[diagnosis_name] = result
+            
+            results = list(unique_snomed.values())
             results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
     
     return {
