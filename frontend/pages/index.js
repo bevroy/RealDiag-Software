@@ -249,7 +249,7 @@ export default function Home() {
               }}
               poster="/logo.png"
             >
-              <source src="/RealDiag_Demo.mp4" type="video/mp4" />
+              <source src="/RealDiag_Demo_v2.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

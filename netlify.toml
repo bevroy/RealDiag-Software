@@ -24,6 +24,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Video files should be revalidated (to allow updates)
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
 [[headers]]
   for = "/sw.js"
   [headers.values]
