@@ -5,12 +5,6 @@ import AuthGuard from '../utils/AuthGuard';
 
 export default function Search() {
   const router = useRouter();
-  
-  // Use the same API base pattern as other pages
-  const apiBase = typeof window !== 'undefined' 
-    ? (window.runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com')
-    : 'https://realdiag-software.onrender.com';
-  
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -20,6 +14,10 @@ export default function Search() {
 
   // Load available families on mount
   useEffect(() => {
+    // Get API base inside useEffect to ensure runtime-config.js has loaded
+    const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+    const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+    
     fetch(`${apiBase}/api/search/families`)
       .then(res => res.json())
       .then(data => setFamilies(data.families || []))
@@ -34,6 +32,9 @@ export default function Search() {
     setError(null);
 
     try {
+      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+      
       const response = await fetch(
         `${apiBase}/api/search?q=${encodeURIComponent(searchQuery)}`
       );
@@ -58,6 +59,9 @@ export default function Search() {
     setError(null);
 
     try {
+      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+      
       const response = await fetch(
         `${apiBase}/api/search/by-family?family=${encodeURIComponent(family)}`
       );
