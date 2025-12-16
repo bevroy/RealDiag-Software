@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import AuthGuard from '../utils/AuthGuard';
+import getConfig from 'next/config';
 
 export default function Search() {
   const router = useRouter();
+  const { publicRuntimeConfig } = getConfig() || {};
+  const apiBase = publicRuntimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -14,7 +18,7 @@ export default function Search() {
 
   // Load available families on mount
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/search/families`)
+    fetch(`${apiBase}/api/search/families`)
       .then(res => res.json())
       .then(data => setFamilies(data.families || []))
       .catch(err => console.error('Failed to load families:', err));
@@ -29,7 +33,7 @@ export default function Search() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}`
+        `${apiBase}/api/search?q=${encodeURIComponent(searchQuery)}`
       );
       
       if (!response.ok) {
@@ -53,7 +57,7 @@ export default function Search() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/search/by-family?family=${encodeURIComponent(family)}`
+        `${apiBase}/api/search/by-family?family=${encodeURIComponent(family)}`
       );
       
       if (!response.ok) {
