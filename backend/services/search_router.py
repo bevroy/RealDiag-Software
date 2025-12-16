@@ -7,6 +7,16 @@ from fastapi import APIRouter, Query
 from typing import List, Dict, Optional
 from pathlib import Path
 import yaml
+import sys
+
+# Add data directory to path for ICD-10 database
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "data"))
+try:
+    from icd10_codes import ICD10_DATABASE, get_diagnosis_from_icd10
+except ImportError:
+    ICD10_DATABASE = {}
+    def get_diagnosis_from_icd10(code: str) -> str:
+        return None
 
 router = APIRouter(prefix="/api", tags=["search"])
 
@@ -216,6 +226,76 @@ async def search_diagnoses(
     # Convert back to list and sort by match score (highest first), then by name
     results = list(unique_results.values())
     results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
+    
+    # If no results from trees, search ICD-10 database
+    if len(results) == 0 and ICD10_DATABASE:
+        # Check if query is an ICD-10 code
+        icd10_diagnosis = get_diagnosis_from_icd10(query)
+        if icd10_diagnosis:
+            results.append({
+                'tree_id': '',
+                'name': icd10_diagnosis,
+                'description': f'ICD-10: {query}',
+                'icd10': query,
+                'snomed': [],
+                'family': 'General',
+                'specialty': 'General Medicine',
+                'urgency': '',
+                'clinical_pearls': [],
+                'presentations': [],
+                'workup': [],
+                'treatment': ['Consult clinical guidelines for specific treatment recommendations'],
+                'referrals': [],
+                'homeopathic_remedies': [],
+                'match_score': 900
+            })
+        else:
+            # Search ICD-10 database by diagnosis name
+            for icd_code, diagnosis_name in ICD10_DATABASE.items():
+                if query in diagnosis_name.upper():
+                    # Calculate match score
+                    if query == diagnosis_name.upper():
+                        score = 1000
+                    elif diagnosis_name.upper().startswith(query):
+                        score = 500
+                    elif f" {query} " in f" {diagnosis_name.upper()} ":
+                        score = 300
+                    else:
+                        score = 200
+                    
+                    results.append({
+                        'tree_id': '',
+                        'name': diagnosis_name,
+                        'description': f'ICD-10: {icd_code}',
+                        'icd10': icd_code,
+                        'snomed': [],
+                        'family': 'General',
+                        'specialty': 'General Medicine',
+                        'urgency': '',
+                        'clinical_pearls': [],
+                        'presentations': [],
+                        'workup': [],
+                        'treatment': ['Consult clinical guidelines for specific treatment recommendations'],
+                        'referrals': [],
+                        'homeopathic_remedies': [],
+                        'match_score': score
+                    })
+            
+            # Deduplicate and sort ICD-10 results
+            unique_icd = {}
+            for result in results:
+                diagnosis_name = result.get('name', '').upper()
+                current_score = result.get('match_score', 0)
+                
+                if diagnosis_name not in unique_icd:
+                    unique_icd[diagnosis_name] = result
+                else:
+                    existing_score = unique_icd[diagnosis_name].get('match_score', 0)
+                    if current_score > existing_score:
+                        unique_icd[diagnosis_name] = result
+            
+            results = list(unique_icd.values())
+            results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
     
     return {
         'query': q,
