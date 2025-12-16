@@ -584,11 +584,11 @@ export default function Search() {
                       {expandedResults[index] ? 'Show Less' : 'Show All Details'}
                     </button>
 
-                    {/* Clinical Details - Horizontal Grid Layout (Collapsible) */}
+                    {/* Clinical Details - Vertical Layout (Collapsible) */}
                     {expandedResults[index] && (
                     <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                      display: 'flex',
+                      flexDirection: 'column',
                       gap: '1rem',
                       marginTop: '1rem'
                     }}>
