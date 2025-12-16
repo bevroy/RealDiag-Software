@@ -343,29 +343,11 @@ export default function SourcesPage() {
 
         {/* Header */}
         <div style={{ maxWidth: 1200, margin: "0 auto", width: '100%' }}>
-          <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+          <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
               <h1 style={{ marginBottom: 0, color: '#92400e' }}>Medical Sources & References</h1>
             </div>
-            <a
-              href="/"
-              style={{
-                padding: "8px 16px",
-                background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
-                color: "white",
-                textDecoration: "none",
-                borderRadius: "6px",
-                fontSize: 14,
-                fontWeight: 600,
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                whiteSpace: "nowrap"
-              }}
-            >
-              🏠 Home
-            </a>
           </div>
 
         {/* Content */}

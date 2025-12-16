@@ -711,7 +711,6 @@ export default function EducationPage() {
             <img src="/logo.png" alt="RealDiag Logo" />
             <h1>Medical Training Center</h1>
           </div>
-          <a href="/" className="home-button">🏠 Home</a>
         </header>
 
         <div className="education-tabs">

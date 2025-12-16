@@ -2480,7 +2480,7 @@ export default function PatientHistory() {
       </div>
 
       <header className={styles.header}>
-        <div className={styles.headerContent} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+        <div className={styles.headerContent}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
             <div>
@@ -2488,21 +2488,6 @@ export default function PatientHistory() {
               <p style={{ margin: 0 }}>For non-EMR instances: Enter comprehensive patient history using dropdown lists</p>
             </div>
           </div>
-          <a href="/" style={{
-            padding: '8px 16px',
-            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '6px',
-            fontSize: '14px',
-            fontWeight: 600,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            whiteSpace: 'nowrap'
-          }}>
-            🏠 Home
-          </a>
         </div>
       </header>
 

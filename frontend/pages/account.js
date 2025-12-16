@@ -383,24 +383,6 @@ export default function AccountPage() {
               </p>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem', whiteSpace: 'nowrap' }}>
-            <a href="/" style={{
-              padding: '0.75rem 1.5rem',
-              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '1rem',
-              cursor: 'pointer',
-              fontWeight: '600',
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}>
-              🏠 Home
-            </a>
-          </div>
         </div>
 
         {/* Tabs */}
