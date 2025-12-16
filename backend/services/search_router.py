@@ -38,13 +38,23 @@ async def search_diagnoses(
         
         # Collect all suggested diagnoses from nodes
         suggested_diagnoses = set()
-        nodes = tree_data.get('nodes', {})
-        for node_name, node_data in nodes.items():
-            if isinstance(node_data, dict):
-                suggest_dx = node_data.get('suggest_dx', [])
-                if suggest_dx:
-                    for dx in suggest_dx:
-                        suggested_diagnoses.add(str(dx).strip())
+        nodes = tree_data.get('nodes', [])
+        
+        # Handle both dict format (old) and list format (new)
+        if isinstance(nodes, dict):
+            for node_name, node_data in nodes.items():
+                if isinstance(node_data, dict):
+                    suggest_dx = node_data.get('suggest_dx', [])
+                    if suggest_dx:
+                        for dx in suggest_dx:
+                            suggested_diagnoses.add(str(dx).strip())
+        elif isinstance(nodes, list):
+            for node in nodes:
+                if isinstance(node, dict):
+                    suggest_dx = node.get('suggest_dx', [])
+                    if suggest_dx:
+                        for dx in suggest_dx:
+                            suggested_diagnoses.add(str(dx).strip())
         
         # Check if query matches
         matches = False
