@@ -1,6 +1,7 @@
 """
 Diagnosis Search Router - Comprehensive clinical reference search
 Provides detailed clinical information including presentations, workup, treatment, codes, and remedies
+With AI-powered content enrichment for incomplete diagnoses
 """
 
 from fastapi import APIRouter, Query
@@ -8,6 +9,7 @@ from typing import List, Dict, Optional
 from pathlib import Path
 import yaml
 import sys
+import os
 
 # Add data directory to path for ICD-10 and SNOMED databases
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "data"))
@@ -27,7 +29,25 @@ except ImportError:
     def get_snomed_codes_for_diagnosis(diagnosis_name: str) -> list:
         return []
 
+# Import AI content enricher
+try:
+    from backend.services.ai_content_enricher import AIContentEnricher
+    AI_ENRICHMENT_ENABLED = True
+except ImportError:
+    AI_ENRICHMENT_ENABLED = False
+    AIContentEnricher = None
+
 router = APIRouter(prefix="/api", tags=["search"])
+
+# Initialize AI enricher if API keys are available
+ai_enricher = None
+if AI_ENRICHMENT_ENABLED and (os.getenv("ANTHROPIC_API_KEY") or os.getenv("OPENAI_API_KEY")):
+    try:
+        provider = os.getenv("AI_PROVIDER", "claude")
+        ai_enricher = AIContentEnricher(provider=provider)
+    except Exception as e:
+        print(f"Warning: Could not initialize AI enricher: {e}")
+        ai_enricher = None
 
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
@@ -389,10 +409,49 @@ async def search_diagnoses(
             results = list(unique_snomed.values())
             results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
     
+    # AI-powered content enrichment for incomplete diagnoses
+    if ai_enricher and results:
+        for result in results:
+            # Check if this diagnosis has missing content
+            missing_sections = []
+            if not result.get('workup') or len(result.get('workup', [])) == 0:
+                missing_sections.append('workup')
+            if not result.get('treatment') or len(result.get('treatment', [])) == 0:
+                missing_sections.append('treatment')
+            if not result.get('clinical_pearls') or len(result.get('clinical_pearls', [])) == 0:
+                missing_sections.append('clinical_pearls')
+            if not result.get('referrals') or len(result.get('referrals', [])) == 0:
+                missing_sections.append('referrals')
+            if not result.get('homeopathic_remedies') or len(result.get('homeopathic_remedies', [])) == 0:
+                missing_sections.append('homeopathic_remedies')
+            
+            # Only enrich if there are missing sections
+            if missing_sections:
+                try:
+                    enriched = await ai_enricher.enrich_diagnosis(
+                        diagnosis_name=result.get('name', ''),
+                        icd10=result.get('icd10', ''),
+                        existing_data=result,
+                        temperature=0.3  # Conservative for medical content
+                    )
+                    
+                    # Update result with enriched content
+                    result.update(enriched)
+                    
+                    # Add indicator that content was AI-generated
+                    result['ai_enriched'] = True
+                    result['ai_enriched_sections'] = missing_sections
+                    
+                except Exception as e:
+                    print(f"Warning: Could not enrich {result.get('name', '')}: {e}")
+                    # Continue without enrichment if it fails
+                    pass
+    
     return {
         'query': q,
         'count': len(results),
-        'results': results
+        'results': results,
+        'ai_enrichment_enabled': ai_enricher is not None
     }
 
 
