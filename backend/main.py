@@ -22,6 +22,7 @@ from backend.services.smart_router import router as smart_router
 from backend.services.subscription_router import router as subscription_router
 from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
+from backend.services.search_router import router as search_router
 
 # Import test environment utilities
 try:
@@ -158,6 +159,7 @@ app.include_router(smart_router)
 app.include_router(subscription_router)
 app.include_router(homeopathy_router)
 app.include_router(mfa_router)
+app.include_router(search_router)
 
 # Include monitoring router if available
 try:

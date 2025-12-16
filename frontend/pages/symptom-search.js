@@ -833,6 +833,19 @@ export default function SymptomSearch() {
             }}>
               📋 Browse Rules
             </a>
+            <a href="/search" style={{
+              padding: '0.75rem',
+              background: darkMode ? '#1f2937' : '#f0fdfa',
+              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+              borderRadius: '8px',
+              textDecoration: 'none',
+              textAlign: 'center',
+              color: darkMode ? '#5eead4' : '#0f766e',
+              fontWeight: '600',
+              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+            }}>
+              🔍 Diagnosis Search
+            </a>
             <a href="/integration" style={{
               padding: '0.75rem',
               background: darkMode ? '#1f2937' : '#f0fdfa',

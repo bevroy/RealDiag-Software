@@ -239,6 +239,19 @@ export default function AccountPage() {
               }}>
                 🔍 Symptom Search
               </a>
+              <a href="/search" style={{
+                padding: '0.75rem',
+                background: '#f0fdfa',
+                border: '1px solid #ccfbf1',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#0f766e',
+                fontWeight: '600',
+                fontSize: '0.9rem'
+              }}>
+                🔍 Diagnosis Search
+              </a>
               <a href="/rules" style={{
                 padding: '0.75rem',
                 background: '#f0fdfa',
