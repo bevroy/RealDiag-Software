@@ -1,0 +1,75 @@
+tree_id: URO-UTI
+name: Urinary Tract Infection
+family: Urology
+specialty: Urology, Primary Care, Infectious Disease
+chief_complaint: Dysuria, frequency, urgency
+description: Bacterial infection of urinary tract ranging from cystitis (bladder) to pyelonephritis (kidney). Most common bacterial infection in outpatient setting.
+
+icd10: N39.0
+snomed: ["68566005", "312097001"]
+
+urgency: medium
+
+homeopathy:
+  - remedy: "Cantharis 30C"
+    indications: "Intense burning before, during, and after urination, constant urging"
+  - remedy: "Sarsaparilla 30C"
+    indications: "Severe pain at end of urination, dribbling, inability to empty bladder"
+  - remedy: "Berberis vulgaris 30C"
+    indications: "Burning pain radiating to thighs, back pain, dark urine"
+  - remedy: "Apis mellifica 30C"
+    indications: "Burning-stinging pain, scanty urine, worse from heat"
+  - remedy: "Staphysagria 30C"
+    indications: "UTI after sexual intercourse, suppressed emotions, urging after urination"
+
+workup:
+  - Uncomplicated cystitis (women): dysuria, frequency, urgency, suprapubic pain, no systemic symptoms, no risk factors
+  - Complicated UTI: men, pregnancy, hospital-acquired, catheter-associated, immunosuppression, anatomic abnormality, kidney stones, diabetes
+  - Pyelonephritis: flank pain, costovertebral angle tenderness, fever, nausea/vomiting, systemic symptoms
+  - Urinalysis (UA): leukocyte esterase (WBC), nitrites (gram-negative bacteria), WBCs, bacteria, blood
+  - Urine culture: obtain before treatment if complicated UTI, pyelonephritis, recurrent infections, pregnant, or symptoms not improving after 48-72 hours
+  - Nitrites positive: highly specific for UTI (but only 50% sensitive)
+  - Pyuria (WBCs) without bacteriuria: consider urethritis (gonorrhea, chlamydia), interstitial cystitis, kidney stones
+  - Risk factors women: sexual activity, spermicide use, new sexual partner, previous UTI, postmenopausal (estrogen deficiency), anatomic abnormalities
+  - Risk factors men: prostatitis, enlarged prostate, lack of circumcision, anal intercourse
+  - Pathogens: E. coli (80-90%), Klebsiella, Proteus, Staphylococcus saprophyticus (young women), Enterococcus
+
+treatment:
+  - Uncomplicated cystitis (women): first-line nitrofurantoin 100 mg PO BID x5 days (avoid if eGFR <30) OR trimethoprim-sulfamethoxazole DS 160/800 mg PO BID x3 days (if local resistance <20%) OR fosfomycin 3 gram single-dose packet
+  - Alternative: ciprofloxacin 250 mg PO BID x3 days or levofloxacin 250 mg daily x3 days (reserve fluoroquinolones for complicated UTI due to side effects)
+  - Uncomplicated cystitis (men): same antibiotics but 7-day duration (higher risk prostatitis)
+  - Pyelonephritis outpatient: ciprofloxacin 500 mg PO BID x7 days OR levofloxacin 750 mg daily x5 days, obtain urine culture
+  - Pyelonephritis inpatient: ceftriaxone 1-2 gram IV daily or fluoroquinolone IV, switch to PO when improving
+  - Complicated UTI: obtain culture, treat 7-14 days based on culture results
+  - Asymptomatic bacteriuria: do NOT treat except in pregnancy or before urologic procedure (treatment increases resistance without benefit)
+  - Recurrent UTI (≥2 in 6 months or ≥3 in 12 months): post-coital prophylaxis (trimethoprim-sulfamethoxazole SS 1 tablet or nitrofurantoin 50-100 mg after intercourse), daily prophylaxis (nitrofurantoin 50 mg daily or TMP-SMX SS daily x6 months), cranberry products (modest benefit), vaginal estrogen cream if postmenopausal
+  - Catheter-associated UTI: remove catheter if possible, culture before treatment, treat 7 days if catheter removed, 10-14 days if catheter remains
+  - Phenazopyridine 200 mg TID x2 days for dysuria symptom relief (OTC), warn patient urine turns orange
+
+clinical_pearls:
+  - UTI is most common bacterial infection in women (50% lifetime risk)
+  - Nitrofurantoin and TMP-SMX are first-line for uncomplicated cystitis
+  - Avoid fluoroquinolones for simple cystitis (tendon rupture, neuropathy risk)
+  - Urine culture not needed for uncomplicated cystitis in women (clinical diagnosis sufficient)
+  - Do NOT treat asymptomatic bacteriuria (except pregnancy or pre-procedure)
+  - Recurrent UTI in women usually reinfection not relapse (different bacteria)
+  - Post-coital voiding reduces UTI risk
+  - Cranberry products have modest benefit for prevention (reduce UTI by 25%)
+  - Catheter-associated UTI most common hospital-acquired infection
+  - Men with UTI need evaluation for prostatitis or anatomic abnormality
+  - Pyuria without bacteriuria consider STI (gonorrhea, chlamydia) - test and treat
+
+referrals:
+  - Urology: recurrent UTI despite prophylaxis, hematuria, kidney stones, anatomic abnormality, men with recurrent UTI
+  - Nephrology: pyelonephritis with AKI, renal abscess
+  - OB/GYN: postmenopausal women with recurrent UTI (vaginal estrogen)
+
+presentations:
+  - Dysuria (painful urination)
+  - Frequency (urinating more often than usual)
+  - Urgency (sudden strong need to urinate)
+  - Suprapubic pain or pressure
+  - Hematuria (blood in urine)
+  - Cloudy or foul-smelling urine
+  - Pyelonephritis: fever, flank pain, CVA tenderness, nausea, vomiting
+  - Elderly: confusion, delirium, falls (may lack typical symptoms)
