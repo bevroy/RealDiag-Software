@@ -588,7 +588,7 @@ export default function Search() {
                     {expandedResults[index] && (
                     <div style={{
                       display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
                       gap: '1rem',
                       marginTop: '1rem'
                     }}>
