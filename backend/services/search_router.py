@@ -168,15 +168,15 @@ async def search_diagnoses(
             
             # Check if query matches
             name = tree_data.get('name', '').upper()
-            description = tree_data.get('description', '').upper()
             icd10 = str(tree_data.get('icd10', '')).upper()
             tree_id = tree_data.get('tree_id', '').upper()
-            chief_complaint = tree_data.get('chief_complaint', '').upper()
             
             # Check SNOMED database for match
             snomed_diagnosis = get_diagnosis_from_snomed(query)
             
             # Calculate match score for relevance ranking
+            # NOTE: Only match on NAME, ICD-10, SNOMED, or TREE_ID
+            # Do NOT match on description/chief_complaint to avoid false positives
             match_score = 0
             matched = False
             
@@ -184,41 +184,33 @@ async def search_diagnoses(
             if query == name:
                 match_score = 1000
                 matched = True
-            # Name starts with query
-            elif name.startswith(query):
-                match_score = 500
-                matched = True
-            # Name contains query as whole word
-            elif f" {query} " in f" {name} " or f" {query}," in name:
-                match_score = 300
-                matched = True
-            # Name contains query
-            elif query in name:
-                match_score = 200
-                matched = True
             # Exact ICD-10 match
             elif query == icd10:
                 match_score = 900
                 matched = True
-            # SNOMED code match
-            elif snomed_diagnosis and snomed_diagnosis.upper() in name:
+            # SNOMED code match (query is a SNOMED code that matches this diagnosis)
+            elif snomed_diagnosis and snomed_diagnosis.upper() == name:
                 match_score = 850
                 matched = True
-            # ICD-10 starts with query
+            # Name starts with query
+            elif name.startswith(query):
+                match_score = 500
+                matched = True
+            # ICD-10 starts with query (partial code match)
             elif icd10.startswith(query):
                 match_score = 400
+                matched = True
+            # Name contains query as whole word
+            elif f" {query} " in f" {name} " or f" {query}," in name or name.endswith(f" {query}"):
+                match_score = 300
                 matched = True
             # Tree ID match
             elif query in tree_id:
                 match_score = 250
                 matched = True
-            # Chief complaint contains query
-            elif query in chief_complaint:
-                match_score = 150
-                matched = True
-            # Description contains query (lowest priority)
-            elif query in description:
-                match_score = 50
+            # Name contains query (substring)
+            elif query in name:
+                match_score = 200
                 matched = True
             
             if matched:
