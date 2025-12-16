@@ -199,7 +199,22 @@ async def search_diagnoses(
             print(f"Error processing {tree_file}: {e}")
             continue
     
-    # Sort by match score (highest first), then by name
+    # Deduplicate by diagnosis name - keep only highest scoring match for each unique diagnosis
+    unique_results = {}
+    for result in results:
+        diagnosis_name = result.get('name', '').upper()
+        current_score = result.get('match_score', 0)
+        
+        if diagnosis_name not in unique_results:
+            unique_results[diagnosis_name] = result
+        else:
+            # Keep the one with higher score
+            existing_score = unique_results[diagnosis_name].get('match_score', 0)
+            if current_score > existing_score:
+                unique_results[diagnosis_name] = result
+    
+    # Convert back to list and sort by match score (highest first), then by name
+    results = list(unique_results.values())
     results.sort(key=lambda x: (-x.get('match_score', 0), x.get('name', '')))
     
     return {
