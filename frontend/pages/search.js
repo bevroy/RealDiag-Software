@@ -561,12 +561,12 @@ export default function Search() {
 
                     {/* Expand/Collapse Button */}
                     <button
-                      onClick={() => toggleExpanded(idx)}
+                      onClick={() => toggleExpanded(index)}
                       style={{
                         width: '100%',
                         padding: '0.75rem',
-                        background: expandedResults[idx] ? '#14b8a6' : '#ccfbf1',
-                        color: expandedResults[idx] ? 'white' : '#0f766e',
+                        background: expandedResults[index] ? '#14b8a6' : '#ccfbf1',
+                        color: expandedResults[index] ? 'white' : '#0f766e',
                         border: 'none',
                         borderRadius: '6px',
                         cursor: 'pointer',
@@ -580,12 +580,12 @@ export default function Search() {
                         marginTop: '1rem'
                       }}
                     >
-                      <span>{expandedResults[idx] ? '▼' : '▶'}</span>
-                      {expandedResults[idx] ? 'Show Less' : 'Show All Details'}
+                      <span>{expandedResults[index] ? '▼' : '▶'}</span>
+                      {expandedResults[index] ? 'Show Less' : 'Show All Details'}
                     </button>
 
                     {/* Clinical Details - Horizontal Grid Layout (Collapsible) */}
-                    {expandedResults[idx] && (
+                    {expandedResults[index] && (
                     <div style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
