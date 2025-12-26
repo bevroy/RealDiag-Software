@@ -23,8 +23,10 @@ const FAMILIES = [
   { id: "pulmonology", label: "Pulmonology" },
   { id: "rheumatology", label: "Rheumatology" },
   { id: "surgery", label: "Surgery" },
+  { id: "toxicology", label: "Toxicology" },
   { id: "trauma", label: "Trauma" },
   { id: "urology", label: "Urology" },
+  { id: "geriatrics", label: "Geriatrics" },
 ];
 
 export default function ReferencePage() {

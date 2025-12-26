@@ -41,8 +41,10 @@ FAMILY_TO_PREFIX = {
     "ophthalmology": ["OPHTHO", "OPTH"],
     "pediatrics": ["PEDS"],
     "surgery": ["SURG"],
+    "toxicology": ["TOX"],
     "trauma": ["TRAUMA"],
     "urology": ["URO", "UROLOGY"],
+    "geriatrics": ["GER"],
 }
 
 

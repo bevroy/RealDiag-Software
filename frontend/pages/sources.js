@@ -49,8 +49,10 @@ export default function SourcesPage() {
           "ophthalmology",
           "pediatrics",
           "surgery",
+          "toxicology",
           "trauma",
           "urology",
+          "geriatrics",
         ];
 
         // Load all families in parallel with timeout
@@ -91,8 +93,10 @@ export default function SourcesPage() {
               "ophthalmology": "AAO (American Academy of Ophthalmology) Preferred Practice Patterns",
               "pediatrics": "AAP (American Academy of Pediatrics) Clinical Practice Guidelines",
               "surgery": "ACS (American College of Surgeons) Clinical Guidelines",
+              "toxicology": "ACMT (American College of Medical Toxicology) Practice Guidelines",
               "trauma": "EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines",
-              "urology": "AUA (American Urological Association) Clinical Guidelines"
+              "urology": "AUA (American Urological Association) Clinical Guidelines",
+              "geriatrics": "AGS (American Geriatrics Society) Clinical Practice Guidelines"
             };
             
             return {
