@@ -58,3 +58,9 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md", "*.yml", "*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "backend/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test"]
+python_functions = ["test_"]
