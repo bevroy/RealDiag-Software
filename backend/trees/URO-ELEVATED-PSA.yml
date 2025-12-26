@@ -1,0 +1,103 @@
+tree_id: URO-ELEVATED-PSA
+name: Elevated PSA (Prostate-Specific Antigen)
+family: urology
+specialty: Urology/Primary Care
+icd10: R97.20
+snomed: 165416005
+urgency: []
+homeopathy: []
+presentations:
+  - Asymptomatic elevation detected on screening (most common)
+  - PSA reference ranges (age-specific)
+  - "40-49 years: 0-2.5 ng/mL"
+  - "50-59 years: 0-3.5 ng/mL"
+  - "60-69 years: 0-4.5 ng/mL"
+  - "70-79 years: 0-6.5 ng/mL"
+  - May have lower urinary tract symptoms if concurrent BPH
+  - Usually no symptoms from early prostate cancer
+  - Advanced cancer: bone pain, weight loss, hematuria
+workup:
+  - Confirm PSA elevation
+  - Repeat PSA in 1-3 months (can be transiently elevated)
+  - Avoid recent ejaculation (48 hours), prostate manipulation, vigorous exercise, prostatitis within 4 weeks
+  - Digital rectal examination (DRE)
+  - Assess for nodules, induration, asymmetry (suggests cancer)
+  - Smooth, symmetric enlargement suggests BPH
+  - Tenderness suggests prostatitis
+  - Calculate PSA density and velocity
+  - PSA density: PSA / prostate volume (from ultrasound)
+  - Greater than 0.15 ng/mL/g suggests higher cancer risk
+  - PSA velocity: change in PSA over time
+  - Greater than 0.75 ng/mL/year concerning for cancer
+  - Free PSA percentage (if total PSA 4-10 ng/mL)
+  - Percent free PSA = (free PSA / total PSA) × 100
+  - "Less than 10%: high cancer risk (50% probability)"
+  - "10-15%: moderate risk (25% probability)"
+  - "15-25%: borderline risk (15% probability)"
+  - "Greater than 25%: low risk (8% probability)"
+  - Lower % free PSA suggests cancer over BPH
+  - Consider causes of elevated PSA besides cancer
+  - Benign prostatic hyperplasia (most common benign cause)
+  - Prostatitis or UTI (can elevate PSA significantly)
+  - Recent prostate manipulation (DRE, cystoscopy, catheterization, biopsy)
+  - Ejaculation within 48 hours
+  - Vigorous exercise or bike riding
+  - Medications: 5-alpha reductase inhibitors (finasteride, dutasteride) LOWER PSA by 50%
+  - Prostate MRI (multiparametric MRI)
+  - Increasingly used before biopsy to detect clinically significant cancer
+  - PI-RADS score 1-5 (1-2: low suspicion, 3: equivocal, 4-5: high suspicion)
+  - Can guide targeted biopsy
+  - Prostate biopsy (definitive diagnosis)
+  - Indications: PSA greater than 10 ng/mL, abnormal DRE, PI-RADS 4-5 lesion
+  - Consider if PSA 4-10 ng/mL with low free PSA (less than 15%), rising PSA velocity, or family history
+  - Transrectal ultrasound (TRUS) guided biopsy: 12-core systematic sampling
+  - MRI-fusion biopsy: targeted biopsy of suspicious lesions
+  - Complications: bleeding, infection (1-3%), urinary retention
+treatment:
+  - Management based on PSA level, DRE findings, and patient factors
+  - PSA less than 4 ng/mL with normal DRE
+  - Reassurance, repeat PSA in 1-2 years
+  - Consider age-specific reference ranges
+  - PSA 4-10 ng/mL with normal DRE (gray zone)
+  - Check free PSA percentage
+  - If free PSA greater than 25%: likely BPH, repeat PSA in 6-12 months
+  - If free PSA less than 15%: higher cancer risk, consider MRI or urology referral
+  - PSA greater than 10 ng/mL or abnormal DRE
+  - Urology referral for biopsy consideration
+  - MRI before biopsy increasingly standard
+  - If prostatitis suspected
+  - Treat with antibiotics (ciprofloxacin 500 mg twice daily for 4 weeks)
+  - Recheck PSA 4-6 weeks after treatment
+  - If BPH with 5-ARI treatment
+  - PSA should decrease 50% within 6 months
+  - Must adjust PSA interpretation: multiply result by 2 for cancer screening
+  - If biopsy negative with persistent elevated PSA
+  - Repeat MRI and biopsy in 6-12 months if high suspicion
+  - Annual PSA monitoring
+  - Shared decision-making for PSA screening
+  - Discuss benefits (early cancer detection) vs harms (overdiagnosis, anxiety, biopsy complications)
+  - USPSTF recommends individualized decision-making for men 55-69 years
+  - Not recommended for men 70+ years or life expectancy less than 10 years
+clinical_pearls:
+  - "PSA 0-4 ng/mL traditionally considered normal, but 15% of prostate cancers occur with PSA less than 4"
+  - "PSA 4-10 ng/mL is gray zone - 25% have cancer on biopsy"
+  - "PSA greater than 10 ng/mL - 50% have cancer on biopsy"
+  - "Percent free PSA less than 10% suggests 50% cancer probability in PSA 4-10 range"
+  - "Prostatitis can elevate PSA dramatically - always treat first and recheck before biopsy"
+  - "5-alpha reductase inhibitors (finasteride, dutasteride) reduce PSA by 50% - must multiply by 2 for screening"
+  - "MRI-guided biopsy detects 30% more clinically significant cancers than standard TRUS biopsy"
+  - "Not all prostate cancers need treatment - low-grade cancers can be monitored with active surveillance"
+referrals:
+  - Urology referral for PSA greater than 10 ng/mL or abnormal DRE
+  - Urology referral for PSA 4-10 ng/mL with low free PSA (less than 15%) or rising velocity
+  - Urology for MRI and biopsy consideration
+differentials:
+  - Prostate cancer (elevated PSA, abnormal DRE, confirmed on biopsy)
+  - Benign prostatic hyperplasia (elevated PSA, smooth enlarged prostate, high free PSA percentage)
+  - Prostatitis (elevated PSA, tender prostate, responds to antibiotics)
+  - Recent prostate manipulation (DRE, catheter, cystoscopy, ejaculation within 48 hours)
+  - Urinary tract infection (dysuria, pyuria, elevated PSA)
+trace:
+  source: American Urological Association PSA Guidelines, USPSTF PSA Screening Recommendations, European Association of Urology Guidelines
+  version: '1.0'
+  last_updated: '2025-12-26'
