@@ -175,9 +175,12 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   """
   Generalized endpoint: /reference/{family}
   Loads clinical rules from backend/rules/ with full presentation and SNOMED data.
+  Also includes decision trees from backend/trees/ for the same family.
   Rate limit: 100 requests per minute per IP.
   """
-  # Try to load from rules file first (has complete data)
+  all_rules = []
+  
+  # Load from rules file first (has complete data)
   rules_file = RULES_PATH / f"{family}.yml"
   
   if rules_file.exists():
@@ -185,32 +188,28 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
       with rules_file.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}
         rules = data.get("rules", [])
-        
-        # Only use rules file if it has content
         if rules:
-          # Sort alphabetically by label
-          rules_sorted = sorted(rules, key=lambda x: x.get("label", "").lower())
-          
-          return {
-            "family": family,
-            "version": data.get("version", "2.0.0"),
-            "source": data.get("source", "Clinical Practice Guidelines"),
-            "count": len(rules_sorted),
-            "rules": rules_sorted,
-          }
+          all_rules.extend(rules)
     except Exception as e:
       print(f"Error loading rules file {rules_file}: {e}")
   
-  # Fallback to trees if rules file doesn't exist or is empty
+  # Also load from trees directory to include new decision trees
   trees = _load_trees_by_family(family)
   
+  # Merge trees with rules, avoiding duplicates by ID
+  existing_ids = {rule.get("id") for rule in all_rules if rule.get("id")}
+  for tree in trees:
+    tree_id = tree.get("id")
+    if tree_id and tree_id not in existing_ids:
+      all_rules.append(tree)
+  
   # Sort alphabetically by label
-  trees_sorted = sorted(trees, key=lambda x: x.get("label", "").lower())
+  all_rules_sorted = sorted(all_rules, key=lambda x: x.get("label", "").lower())
   
   return {
     "family": family,
     "version": "2.0.0",
-    "source": "RealDiag Clinical Decision Trees",
-    "count": len(trees_sorted),
-    "rules": trees_sorted,
+    "source": "Clinical Practice Guidelines + Decision Trees",
+    "count": len(all_rules_sorted),
+    "rules": all_rules_sorted,
   }
