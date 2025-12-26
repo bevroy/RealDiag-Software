@@ -86,18 +86,26 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
           tree_id = tree_data.get("id") or tree_data.get("tree_id") or tree_file.stem
           tree_title = tree_data.get("title") or tree_data.get("name") or tree_id
           
-          # Extract presentations from chief_complaint and description
+          # Extract presentations from multiple possible sources
           presentations = []
-          chief_complaint = tree_data.get("chief_complaint", "")
-          description = tree_data.get("description", "")
           
-          if chief_complaint:
-            # Split by comma and clean up each item
-            complaints = [c.strip() for c in chief_complaint.split(",")]
-            presentations.extend(complaints)
+          # Primary source: presentations list (new tree format)
+          presentations_list = tree_data.get("presentations", [])
+          if isinstance(presentations_list, list):
+            presentations.extend([str(p).strip() for p in presentations_list if p])
           
-          if description and description not in presentations:
-            presentations.append(description)
+          # Fallback: chief_complaint and description (older format)
+          if not presentations:
+            chief_complaint = tree_data.get("chief_complaint", "")
+            description = tree_data.get("description", "")
+            
+            if chief_complaint:
+              # Split by comma and clean up each item
+              complaints = [c.strip() for c in chief_complaint.split(",")]
+              presentations.extend(complaints)
+            
+            if description and description not in presentations:
+              presentations.append(description)
           
           # Ensure citations are always strings (not objects or dicts)
           citations_raw = tree_data.get("citations", [])
