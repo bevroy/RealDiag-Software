@@ -174,34 +174,23 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
 def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   """
   Generalized endpoint: /reference/{family}
-  Loads clinical rules from backend/rules/ with full presentation and SNOMED data.
-  Also includes decision trees from backend/trees/ for the same family.
+  Loads all clinical decision trees from backend/trees/ for the given specialty family.
   Deduplicates entries that refer to the same condition.
   Rate limit: 100 requests per minute per IP.
   """
+  # Load all trees for this family
+  trees = _load_trees_by_family(family)
   all_rules = []
   
-  # Load from rules file first (has complete data)
-  rules_file = RULES_PATH / f"{family}.yml"
-  
-  if rules_file.exists():
-    try:
-      with rules_file.open("r", encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
-        rules = data.get("rules", [])
-        if rules:
-          all_rules.extend(rules)
-    except Exception as e:
-      print(f"Error loading rules file {rules_file}: {e}")
-  
-  # Also load from trees directory to include new decision trees
+  # Load all trees for this family
   trees = _load_trees_by_family(family)
+  all_rules = []
   
-  # Merge trees with rules, avoiding duplicates by both ID and normalized name
-  existing_ids = {rule.get("id") for rule in all_rules if rule.get("id")}
+  # Deduplication: track IDs and normalized names
+  existing_ids = set()
+  existing_names = {}
   
-  # Create normalized name index to detect semantic duplicates
-  # Normalize by lowercasing and removing common suffixes like "evaluation", "management", etc.
+  # Normalize name for duplicate detection
   def normalize_name(name):
     """Normalize condition name for duplicate detection."""
     if not name:
@@ -209,7 +198,7 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     import re
     normalized = name.lower().strip()
     
-    # Remove content in parentheses (e.g., "(Willis-Ekbom Disease)", "(Lumbar Radiculopathy)")
+    # Remove content in parentheses
     normalized = re.sub(r'\s*\([^)]*\)', '', normalized)
     
     # Remove common prefixes
@@ -218,7 +207,7 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
       if normalized.startswith(prefix):
         normalized = normalized[len(prefix):]
     
-    # Remove common suffixes that don't change the core condition
+    # Remove common suffixes
     suffixes_to_remove = [
       " evaluation", " evaluation and management", " management",
       " diagnostic tree", " - general evaluation", " disorder/epilepsy",
@@ -228,19 +217,9 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
       if normalized.endswith(suffix):
         normalized = normalized[:-len(suffix)]
     
-    # Normalize plural forms
-    if normalized.endswith("s syndrome"):
-      normalized = normalized[:-1]  # "legs" -> "leg"
-    
     return normalized.strip()
   
-  existing_names = {
-    normalize_name(rule.get("label", "")): rule.get("id")
-    for rule in all_rules 
-    if rule.get("label")
-  }
-  
-  # Add trees that don't duplicate existing rules
+  # Add trees while deduplicating
   for tree in trees:
     tree_id = tree.get("id")
     tree_label = tree.get("label", "")
@@ -250,10 +229,10 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     if tree_id and tree_id in existing_ids:
       continue
     
-    # Skip if a rule with the same normalized name already exists
+    # Skip if normalized name already exists
     if tree_name_normalized and tree_name_normalized in existing_names:
       existing_id = existing_names[tree_name_normalized]
-      print(f"Skipping duplicate tree {tree_id} ('{tree_label}') - already have rule {existing_id}")
+      print(f"Skipping duplicate tree {tree_id} ('{tree_label}') - already have {existing_id}")
       continue
     
     # Add this tree
@@ -269,7 +248,7 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   return {
     "family": family,
     "version": "2.0.0",
-    "source": "Clinical Practice Guidelines + Decision Trees",
+    "source": "RealDiag Clinical Decision Trees",
     "count": len(all_rules_sorted),
     "rules": all_rules_sorted,
   }
