@@ -176,6 +176,7 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   Generalized endpoint: /reference/{family}
   Loads clinical rules from backend/rules/ with full presentation and SNOMED data.
   Also includes decision trees from backend/trees/ for the same family.
+  Deduplicates entries that refer to the same condition.
   Rate limit: 100 requests per minute per IP.
   """
   all_rules = []
@@ -196,12 +197,55 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   # Also load from trees directory to include new decision trees
   trees = _load_trees_by_family(family)
   
-  # Merge trees with rules, avoiding duplicates by ID
+  # Merge trees with rules, avoiding duplicates by both ID and normalized name
   existing_ids = {rule.get("id") for rule in all_rules if rule.get("id")}
+  
+  # Create normalized name index to detect semantic duplicates
+  # Normalize by lowercasing and removing common suffixes like "evaluation", "management", etc.
+  def normalize_name(name):
+    """Normalize condition name for duplicate detection."""
+    if not name:
+      return ""
+    normalized = name.lower().strip()
+    # Remove common suffixes that don't change the core condition
+    suffixes_to_remove = [
+      " evaluation", " evaluation and management", " management",
+      " diagnostic tree", " - general evaluation", " (epilepsy)",
+      " disorder/epilepsy", " and dizziness"
+    ]
+    for suffix in suffixes_to_remove:
+      if normalized.endswith(suffix):
+        normalized = normalized[:-len(suffix)]
+    return normalized.strip()
+  
+  existing_names = {
+    normalize_name(rule.get("label", "")): rule.get("id")
+    for rule in all_rules 
+    if rule.get("label")
+  }
+  
+  # Add trees that don't duplicate existing rules
   for tree in trees:
     tree_id = tree.get("id")
-    if tree_id and tree_id not in existing_ids:
-      all_rules.append(tree)
+    tree_label = tree.get("label", "")
+    tree_name_normalized = normalize_name(tree_label)
+    
+    # Skip if ID already exists
+    if tree_id and tree_id in existing_ids:
+      continue
+    
+    # Skip if a rule with the same normalized name already exists
+    if tree_name_normalized and tree_name_normalized in existing_names:
+      existing_id = existing_names[tree_name_normalized]
+      print(f"Skipping duplicate tree {tree_id} ('{tree_label}') - already have rule {existing_id}")
+      continue
+    
+    # Add this tree
+    all_rules.append(tree)
+    if tree_id:
+      existing_ids.add(tree_id)
+    if tree_name_normalized:
+      existing_names[tree_name_normalized] = tree_id
   
   # Sort alphabetically by label
   all_rules_sorted = sorted(all_rules, key=lambda x: x.get("label", "").lower())
