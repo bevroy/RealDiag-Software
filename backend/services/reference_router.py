@@ -131,7 +131,12 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
           
           # Extract source from trace section or use default
           trace_info = tree_data.get("trace", {})
-          source = trace_info.get("source") if isinstance(trace_info, dict) else "Clinical Decision Tree"
+          # Handle both old format (trace as list) and new format (trace as dict with source)
+          if isinstance(trace_info, dict):
+            source = trace_info.get("source", "Clinical Decision Tree")
+          else:
+            # Old format - trace is a list (case study), no source field
+            source = "Clinical Decision Tree"
           if not source:
             source = "Clinical Decision Tree"
           
