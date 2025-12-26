@@ -5,6 +5,13 @@ description: Decision tree for evaluating acute abdominal pain
 version: "1.0"
 icd10: R10.9
 snomed: 21522001
+presentations:
+  - Abdominal pain (location, quality, duration)
+  - Associated nausea, vomiting, diarrhea
+  - Fever, anorexia
+  - Peritoneal signs (guarding, rebound)
+  - Changes with eating or bowel movements
+  - Prior similar episodes
 entry_point: initial_triage
 
 nodes:

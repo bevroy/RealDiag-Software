@@ -7,6 +7,13 @@ description: Diagnostic decision tree for evaluating acute and chronic cough
 version: "1.0"
 icd10: R05
 snomed: 49727002
+presentations:
+  - Acute (<3 weeks) or chronic (>8 weeks)
+  - Dry or productive
+  - Associated symptoms: fever, dyspnea, chest pain
+  - Postnasal drip, heartburn
+  - Triggers: exercise, cold air
+  - Hemoptysis (red flag)
 author: RealDiag Team
 entry_point: duration
 

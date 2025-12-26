@@ -5,6 +5,13 @@ description: Decision tree for evaluating palpitations and irregular heartbeat
 version: "1.0"
 icd10: R00.2
 snomed: 80313002
+presentations:
+  - Sensation of rapid, irregular, or forceful heartbeat
+  - Fluttering or pounding sensation in chest or neck
+  - May be paroxysmal (sudden onset/offset) or sustained
+  - Associated lightheadedness, dyspnea, or chest discomfort
+  - Syncope or near-syncope with palpitations (concerning)
+  - Triggers: caffeine, alcohol, stress, exercise, or medications
 entry_point: initial_assessment
 
 nodes:

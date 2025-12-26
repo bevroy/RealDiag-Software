@@ -5,6 +5,13 @@ description: Decision tree for evaluating fever and sepsis screening
 version: "1.0"
 icd10: R50.9
 snomed: 386661006
+presentations:
+  - Temperature ≥38°C (100.4°F)
+  - Chills, rigors
+  - Sweats
+  - Malaise, myalgias
+  - Localizing symptoms (cough, dysuria, etc.)
+  - Source may be obvious or occult
 entry_point: initial_assessment
 
 nodes:

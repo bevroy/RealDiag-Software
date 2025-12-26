@@ -5,6 +5,13 @@ description: Decision tree for evaluating acute chest pain
 version: "1.0"
 icd10: R07.9
 snomed: 29857009
+presentations:
+  - Location: substernal, left-sided, or right-sided chest discomfort
+  - Quality: sharp, dull, pressure, burning, or stabbing
+  - Radiation: to arms, jaw, back, or abdomen
+  - Associated symptoms: dyspnea, palpitations, diaphoresis, nausea
+  - Timing: acute onset, chronic/recurrent, positional, or exertional
+  - Red flags: severe pain, hemodynamic instability, syncope
 entry_point: initial_assessment
 
 nodes:
