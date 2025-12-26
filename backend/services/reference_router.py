@@ -120,14 +120,29 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
               else:
                 citations.append(str(citation))
           
+          # Extract SNOMED code (can be string, number, or list)
+          snomed_codes = []
+          snomed_raw = tree_data.get("snomed")
+          if snomed_raw:
+            if isinstance(snomed_raw, list):
+              snomed_codes = [str(code) for code in snomed_raw]
+            else:
+              snomed_codes = [str(snomed_raw)]
+          
+          # Extract source from trace section or use default
+          trace_info = tree_data.get("trace", {})
+          source = trace_info.get("source") if isinstance(trace_info, dict) else "Clinical Decision Tree"
+          if not source:
+            source = "Clinical Decision Tree"
+          
           trees.append({
             "id": tree_id,
             "label": tree_title,
             "presentations": presentations,
             "icd10": [tree_data.get("icd10")] if tree_data.get("icd10") else [],
-            "snomed": [],
+            "snomed": snomed_codes,
             "citations": citations,
-            "source": "Clinical Decision Tree"
+            "source": source
           })
       except Exception as e:
         print(f"Error loading tree {tree_file}: {e}")
