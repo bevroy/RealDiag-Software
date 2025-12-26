@@ -24,6 +24,19 @@ author: RealDiag Clinical Team
 
 entry_point: malaria_evaluation
 
+referrals:
+  emergency:
+    - Sepsis
+    - Meningitis
+    - Systemic severe infection
+  urgent:
+    - Suspected endocarditis
+    - Complicated infection
+  routine:
+    - Chronic infection
+    - Prevention
+    - Immunization
+
 nodes:
   - id: malaria_evaluation
     type: diagnosis

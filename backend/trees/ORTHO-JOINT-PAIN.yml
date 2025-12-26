@@ -20,6 +20,16 @@ differentials:
   - Trauma
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Septic arthritis
+    - Fracture
+  urgent:
+    - Suspected inflammatory arthritis
+    - Persistent joint pain
+  routine:
+    - Chronic arthritis
+    - OA management
 nodes:
   initial_assessment:
     when:

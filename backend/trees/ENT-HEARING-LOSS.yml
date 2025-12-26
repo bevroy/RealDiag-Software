@@ -24,6 +24,23 @@ author: RealDiag Clinical Team
 
 entry_point: hearing_loss_evaluation
 
+referrals:
+  emergency:
+    - Airway compromise
+    - Peritonsillar abscess with trismus
+    - Sudden hearing loss
+    - Severe epistaxis
+  urgent:
+    - Suspected malignancy
+    - Persistent hoarseness >2 weeks
+    - Recurrent acute sinusitis
+    - Vertigo with neurological signs
+  routine:
+    - Chronic sinusitis
+    - Hearing loss evaluation
+    - Tinnitus
+    - Allergy management
+
 nodes:
   - id: hearing_loss_evaluation
     type: question

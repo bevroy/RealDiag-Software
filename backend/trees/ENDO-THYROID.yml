@@ -17,6 +17,16 @@ differentials:
   - Thyroiditis
   - Thyroid cancer
 
+referrals:
+  emergency:
+    - Thyroid storm
+    - Myxedema coma
+  urgent:
+    - Thyroid nodule >4cm
+    - Suspected thyroid cancer
+  routine:
+    - Thyroid nodule surveillance
+    - Hypothyroidism management
 nodes:
 - id: assess_thyroid
   when: {}

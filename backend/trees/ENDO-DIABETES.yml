@@ -18,6 +18,16 @@ differentials:
   - Steroid-induced diabetes
   - Pancreatogenic diabetes
 
+referrals:
+  emergency:
+    - DKA
+    - HHS
+  urgent:
+    - New diabetes with A1C >10
+    - Uncontrolled diabetes
+  routine:
+    - Routine diabetes management
+    - Medication optimization
 nodes:
 - id: assess_glucose
   when: {}

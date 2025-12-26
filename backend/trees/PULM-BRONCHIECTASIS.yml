@@ -24,6 +24,23 @@ author: RealDiag Clinical Team
 
 entry_point: bronchiectasis_evaluation
 
+referrals:
+  emergency:
+    - Respiratory failure
+    - Massive hemoptysis
+    - Tension pneumothorax
+    - Severe COPD exacerbation
+  urgent:
+    - Suspected lung cancer
+    - Moderate COPD exacerbation
+    - Recurrent pneumonia
+    - New oxygen requirement
+  routine:
+    - Chronic cough
+    - Asthma management
+    - OSA evaluation
+    - Smoking cessation
+
 nodes:
   - id: bronchiectasis_evaluation
     type: diagnosis

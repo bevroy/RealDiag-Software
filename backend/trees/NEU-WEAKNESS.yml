@@ -20,6 +20,17 @@ differentials:
   - Myopathy
 entry_point: initial_weakness
 
+referrals:
+  emergency:
+    - Acute stroke
+    - Spinal cord compression
+    - GBS
+  urgent:
+    - Progressive weakness
+    - New focal deficit
+  routine:
+    - Chronic weakness
+    - Myopathy workup
 nodes:
   initial_weakness:
     when:

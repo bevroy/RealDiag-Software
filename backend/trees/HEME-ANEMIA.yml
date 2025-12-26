@@ -24,6 +24,21 @@ author: RealDiag Clinical Team
 
 entry_point: anemia_presentation
 
+referrals:
+  emergency:
+    - Acute leukemia
+    - TTP/HUS
+    - DIC
+    - Hgb <7 with symptoms
+  urgent:
+    - New lymphadenopathy
+    - Plt <20k
+    - Severe anemia
+  routine:
+    - Mild anemia
+    - Clotting disorder
+    - Anticoagulation
+
 nodes:
   - id: anemia_presentation
     type: question

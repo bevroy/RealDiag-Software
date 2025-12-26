@@ -24,6 +24,21 @@ author: RealDiag Clinical Team
 
 entry_point: hepatitis_presentation
 
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+
 nodes:
   - id: hepatitis_presentation
     type: question

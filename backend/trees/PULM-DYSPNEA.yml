@@ -21,6 +21,16 @@ differentials:
   - Anemia
 entry_point: acute_vs_chronic
 
+referrals:
+  emergency:
+    - Respiratory failure
+    - Severe dyspnea
+  urgent:
+    - Moderate dyspnea
+    - New oxygen requirement
+  routine:
+    - Chronic dyspnea
+    - COPD/asthma management
 nodes:
   acute_vs_chronic:
     when:

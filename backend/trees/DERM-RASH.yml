@@ -21,6 +21,16 @@ differentials:
   - Psoriasis
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Stevens-Johnson syndrome
+    - Anaphylaxis
+  urgent:
+    - Suspected malignancy
+    - Severe drug reaction
+  routine:
+    - Chronic dermatitis
+    - Acne management
 nodes:
   initial_assessment:
     when:

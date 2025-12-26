@@ -21,6 +21,16 @@ differentials:
   - Malignancy
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Cauda equina syndrome
+    - Spinal cord compression
+  urgent:
+    - Radiculopathy
+    - Suspected fracture
+  routine:
+    - Chronic back pain
+    - Physical therapy
 nodes:
   initial_assessment:
     when:

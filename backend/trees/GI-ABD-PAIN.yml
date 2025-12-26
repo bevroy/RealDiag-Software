@@ -21,6 +21,16 @@ differentials:
   - Gastroenteritis
 entry_point: initial_triage
 
+referrals:
+  emergency:
+    - Acute abdomen
+    - Perforated viscus
+  urgent:
+    - Suspected malignancy
+    - Persistent pain
+  routine:
+    - Chronic abdominal pain
+    - IBS management
 nodes:
   initial_triage:
     when:

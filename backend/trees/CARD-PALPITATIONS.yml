@@ -21,6 +21,16 @@ differentials:
   - Anemia
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Unstable arrhythmia
+    - Syncope with arrhythmia
+  urgent:
+    - Symptomatic palpitations
+    - New-onset AFib
+  routine:
+    - Benign palpitations workup
+    - Asymptomatic palpitations
 nodes:
   initial_assessment:
     when:

@@ -21,6 +21,16 @@ differentials:
   - Intoxication
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+  urgent:
+    - Progressive confusion
+    - Delirium
+  routine:
+    - Chronic cognitive changes
+    - Dementia workup
 nodes:
   initial_assessment:
     when:

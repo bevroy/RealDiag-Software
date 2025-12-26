@@ -24,6 +24,23 @@ author: RealDiag Clinical Team
 
 entry_point: bladder_cancer_evaluation
 
+referrals:
+  emergency:
+    - Acute urinary retention with renal failure
+    - Fournier gangrene
+    - Testicular torsion
+    - Priapism
+  urgent:
+    - Suspected bladder/kidney cancer
+    - Renal mass
+    - Recurrent UTIs
+    - Hematuria workup
+  routine:
+    - BPH management
+    - Kidney stones
+    - Erectile dysfunction
+    - PSA elevation
+
 nodes:
   - id: bladder_cancer_evaluation
     type: diagnosis

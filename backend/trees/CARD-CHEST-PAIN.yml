@@ -22,6 +22,19 @@ differentials:
   - Anxiety
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+  routine:
+    - Stable angina evaluation
+    - Hypertension management
+    - Risk stratification
 nodes:
   initial_assessment:
     when:

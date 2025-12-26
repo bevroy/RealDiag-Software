@@ -24,6 +24,20 @@ author: RealDiag Clinical Team
 
 entry_point: myopathy_evaluation
 
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New neurological deficits
+    - Seizure
+  routine:
+    - Headache management
+    - Neuropathy
+    - Movement disorders
+
 nodes:
   - id: myopathy_evaluation
     type: question

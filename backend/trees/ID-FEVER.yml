@@ -20,6 +20,16 @@ differentials:
   - Factitious fever
 entry_point: initial_assessment
 
+referrals:
+  emergency:
+    - Sepsis
+    - Meningitis
+  urgent:
+    - Fever of unknown origin
+    - Suspected serious infection
+  routine:
+    - Chronic fever
+    - Immunization
 nodes:
   initial_assessment:
     when:

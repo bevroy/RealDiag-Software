@@ -21,6 +21,17 @@ differentials:
   - TBI
 entry_point: initial_triage
 
+referrals:
+  emergency:
+    - Severe head injury
+    - Intracranial hemorrhage
+    - GCS <13
+  urgent:
+    - Moderate head injury
+    - GCS 13-15 with symptoms
+  routine:
+    - Minor head injury follow-up
+    - Concussion management
 nodes:
   initial_triage:
     when:
