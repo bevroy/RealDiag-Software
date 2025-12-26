@@ -1,0 +1,52 @@
+tree_id: ID-HEALTHCARE-ACQUIRED-PNEUMONIA
+name: Hospital-Acquired Pneumonia (HAP) / Ventilator-Associated Pneumonia (VAP)
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- J18.9
+- J95.851
+snomed:
+- '434531000124109'
+urgency: medium
+description: Comprehensive evaluation and management of Hospital-Acquired Pneumonia
+  (HAP) / Ventilator-Associated Pneumonia (VAP)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Pneumonia >48 hours after hospital admission (HAP) or >48hr after intubation (VAP)
+- Fever, leukocytosis, purulent sputum
+- New infiltrate on chest X-ray
+- Worsening oxygenation, increased ventilatory support requirements
+- 'High risk for resistant organisms: MRSA, Pseudomonas, Acinetobacter'
+workup:
+- Chest X-ray (new infiltrate)
+- Sputum culture (including quantitative if VAP)
+- Blood cultures x2
+- CBC, basic metabolic panel, procalcitonin
+treatment:
+- 'Guideline-based treatment options for Hospital-Acquired Pneumonia (HAP) / Ventilator-Associated
+  Pneumonia (VAP) include:'
+- 'Empiric: Vancomycin 15-20mg/kg q12h + anti-pseudomonal beta-lactam (IDSA 2024)'
+- 'Anti-pseudomonal: Piperacillin-tazobactam 4.5g q6h, cefepime 2g q8h, or meropenem
+  1g q8h (IDSA 2024)'
+- 'If high resistance risk: Add aminoglycoside or fluoroquinolone (IDSA 2024)'
+- Narrow based on cultures and sensitivities (IDSA 2024)
+- 'Duration: 7-8 days for most; 14 days if poor response or non-fermenting GNR (IDSA
+  2024)'
+clinical_pearls:
+- Empiric coverage for MRSA + Pseudomonas required
+- De-escalate based on cultures (most important intervention)
+- '8-day course adequate for most (exception: non-fermenting GNR like Pseudomonas)'
+- 'Prevention: Elevate HOB 30-45°, daily sedation vacation, chlorhexidine oral care'
+- Mortality 20-50% depending on pathogen and severity
+referrals:
+- ICU if respiratory failure
+- Infectious disease consult for multidrug-resistant organisms
+- Pulmonology if complicated
+differentials: []
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

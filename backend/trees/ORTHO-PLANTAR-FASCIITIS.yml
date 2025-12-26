@@ -2,49 +2,62 @@ tree_id: ORTHO-PLANTAR-FASCIITIS
 name: Plantar Fasciitis
 family: Orthopedics
 specialty: Orthopedics
-chief_complaint: Heel pain worse with first steps in morning
-description: Degenerative condition of plantar fascia causing heel pain worse with initial weight-bearing after rest. Conservative management with stretching, orthotics, and NSAIDs effective in over 90% of cases.
-icd10: M72.2
-urgency: non-urgent
-
+icd10:
+- M72.2
+snomed:
+- 202882003
+urgency: medium
+description: Comprehensive evaluation and management of Plantar Fasciitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Heel pain, especially with first steps in morning
+- Pain worse after prolonged standing or activity
+- Tenderness at medial calcaneal tuberosity
+- Pain improves with rest
+- X-ray may show heel spur (not diagnostic)
 workup:
-  - Clinical diagnosis: sharp stabbing heel pain worse with first steps in morning or after prolonged sitting, improves with activity then worsens with prolonged standing
-  - Tenderness to palpation: medial calcaneal tuberosity at origin of plantar fascia (most sensitive physical exam finding)
-  - Pain with passive dorsiflexion of toes (stretches plantar fascia)
-  - Risk factors: obesity, prolonged standing, running, flat feet or high arches, tight Achilles tendon, age 40-60
-  - No imaging needed: clinical diagnosis sufficient in typical presentation
-  - X-ray heel: only if atypical features or no improvement with conservative treatment (may show heel spur but spur does NOT cause symptoms - seen in 50% asymptomatic people)
-  - MRI: rarely needed, only if diagnosis uncertain or ruling out other causes (stress fracture, tarsal tunnel syndrome)
-
+- 'Clinical diagnosis: Point tenderness at medial calcaneal tuberosity (origin of
+  plantar fascia), pain with passive dorsiflexion of toes'
+- 'Windlass test: Passively dorsiflex great toe. Reproduces heel pain = positive (stretches
+  plantar fascia)'
+- 'X-ray foot (lateral, AP): Rule out stress fracture, calcaneal spur (present in
+  50% but not diagnostic)'
+- 'MRI or ultrasound: Only if diagnosis unclear - shows thickened plantar fascia (>4mm),
+  edema. NOT routinely needed'
 treatment:
-  - Conservative management (first-line): effective in over 90% within 6-12 months
-  - Plantar fascia stretching: most important intervention, calf stretches and toe dorsiflexion stretches 3-4 times daily
-  - Night splints: maintain dorsiflexion overnight, prevents morning contracture (effective but compliance often poor)
-  - Arch support: over-the-counter arch supports or custom orthotics, cushioned heel cups
-  - Footwear: supportive shoes with good arch support and cushioning, avoid flat shoes and walking barefoot
-  - Activity modification: reduce high-impact activities temporarily, ice after activity 15-20 minutes
-  - NSAIDs: ibuprofen 400-600 mg TID or naproxen 500 mg BID PRN for pain (short-term)
-  - Physical therapy: guided stretching program, strengthening exercises, ultrasound therapy
-  - Corticosteroid injection: methylprednisolone 40 mg with lidocaine at point of maximal tenderness if conservative fails after 6 weeks (provides temporary relief, risk of plantar fascia rupture)
-  - Extracorporeal shockwave therapy: if refractory to conservative treatment after 6 months
-  - Surgery (plantar fascia release): rarely needed, only if conservative treatment fails after 12 months (less than 5% of cases)
-  - Natural history: 80-90% resolve with conservative treatment within 6-12 months
-
+- 'Guideline-based treatment options for Plantar Fasciitis include:'
+- 'Conservative (first-line): Plantar fascia stretching exercises (towel stretch,
+  wall calf stretch) x10 reps TID, ice massage, NSAIDs (AAOS 2023)'
+- 'Orthotics: Over-the-counter arch supports or custom orthotics (provide cushioning,
+  reduce tension on plantar fascia) (AAOS 2023)'
+- 'Night splint: Dorsiflexion splint prevents plantar fascia contracture overnight
+  - effective but compliance poor (uncomfortable) (AAOS 2023)'
+- 'Steroid injection: Methylprednisolone 40mg + 1 mL lidocaine at medial calcaneal
+  tuberosity - 70% improve but 50% recur, max 3 injections (risk plantar fascia rupture)
+  (AAOS 2023)'
+- 'Extracorporeal shockwave therapyor platelet-rich plasma: If failed 6-12 months
+  conservative treatment (AAOS 2023)'
 clinical_pearls:
-  - Sharp heel pain worse with first steps in morning highly suggestive
-  - Tenderness at medial calcaneal tuberosity most sensitive finding
-  - Stretching exercises most important treatment - do daily
-  - Over 90% resolve with conservative treatment within 6-12 months
-  - Heel spurs on X-ray do NOT cause symptoms - incidental finding
-  - Avoid corticosteroid injection initially - risk fascia rupture
-  - Night splints effective but compliance poor
-  - Proper footwear and arch support critical
-
-differentials:
-  - Calcaneal stress fracture: heel pain with point tenderness over calcaneus, worse with activity, MRI shows fracture line
-  - Tarsal tunnel syndrome: heel and plantar foot pain with burning/tingling, positive Tinel sign posterior to medial malleolus
-  - Fat pad atrophy: heel pain in elderly, tenderness central heel (not medial), worse with prolonged standing
-  - Achilles tendinopathy: posterior heel pain at Achilles insertion, tenderness posterior heel not plantar
-
-trace: |
-  A 48-year-old overweight woman (BMI 32) presented with 3 months of right heel pain. Pain described as sharp and stabbing, worst with first steps in morning (excruciating for first 5-10 minutes), improves somewhat with activity, then worsens after prolonged standing at work (retail job standing 8 hours daily). Exam showed point tenderness to palpation at medial calcaneal tuberosity, pain with passive dorsiflexion of toes. No swelling or erythema. Diagnosed with plantar fasciitis. Started conservative management: demonstrated plantar fascia stretches (calf stretch wall lean and towel toe pulls) instructed to perform 3 times daily holding each stretch 30 seconds for 10 repetitions. Recommended over-the-counter arch support inserts and cushioned heel cups. Prescribed ibuprofen 600 mg TID with meals for 2 weeks. Advised ice after work 15-20 minutes, avoid walking barefoot, supportive shoes only. At 6 weeks 40% improvement, pain less severe in morning but still present. Added night splint to maintain dorsiflexion overnight (improved morning pain significantly). Referred to physical therapy for guided stretching program. At 3 months 70% improved, morning pain minimal. At 6 months 90% resolved, occasional mild discomfort after very long days only. Lost 10 pounds. Continues daily stretching exercises. No injection or surgery needed.
+- Most common cause of heel pain in adults - degenerative process (not inflammatory
+  fasciitis), 10% of population affected
+- Pain maximal with first steps in morning (post-static dyskinesia) - improves with
+  walking, worsens with prolonged activity
+- 'Risk factors: Pes planus (flat feet), limited ankle dorsiflexion, obesity, prolonged
+  standing, running'
+- 'Heel spur on X-ray: Present in 50% with plantar fasciitis AND 15% without symptoms
+  - NOT causative, just association'
+- 'Natural history: 80-90% resolve with conservative treatment in 6-12 months (very
+  slow resolution)'
+referrals:
+- Podiatry or orthopedic foot/ankle if failed 6-12 months conservative treatment (stretching,
+  orthotics, NSAIDs)
+- Most cases resolve with stretching exercises and orthotics - surgery (plantar fascia
+  release) rarely needed (<5%)
+differentials: []
+trace:
+  source: American Academy of Orthopaedic Surgeons (AAOS) Clinical Practice Guidelines,
+    Orthopaedic Trauma Association (OTA)
+  version: 0.1.0
+  last_updated: '2024-12-26'

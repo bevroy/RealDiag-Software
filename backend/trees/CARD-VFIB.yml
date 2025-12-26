@@ -1,0 +1,56 @@
+tree_id: CARD-VFIB
+name: Ventricular Fibrillation
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I49.01
+snomed:
+- '71908006'
+urgency: medium
+description: Comprehensive evaluation and management of Ventricular Fibrillation
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- cardiac arrest
+- no pulse, no consciousness
+- requires immediate defibrillation
+- medical emergency
+- Pulseless, unresponsive, no breathing (cardiac arrest)
+- 'ECG: Chaotic, irregular waveform with no identifiable QRS complexes'
+- Shockable rhythm on defibrillator
+- 'Causes: MI, cardiomyopathy, long QT, Brugada, hypokalemia, hypothermia'
+workup:
+- 'ECG: Chaotic irregular waveform (VF)'
+- 'Post-ROSC: ECG (look for STEMI), troponin, labs (K, Mg, lactate)'
+- 'Coronary angiography: If STEMI or suspected ACS as cause'
+- 'Echocardiogram: Assess LV function'
+- 'Neurologic evaluation: Assess for anoxic brain injury'
+treatment:
+- 'Guideline-based treatment options for Ventricular Fibrillation include:'
+- 'Immediate defibrillation: 200J biphasic (or 360J monophasic), don''t delay (ACC/AHA
+  2023)'
+- 'CPR: 2 minutes, then reassess rhythm and shock again if still VF (ACC/AHA 2023)'
+- Epinephrine 1mg IV q3-5min during CPR (ACC/AHA 2023)
+- Amiodarone 300mg IV bolus if VF persists after 3 shocks, then 150mg if needed (ACC/AHA
+  2023)
+- 'Post-ROSC: Targeted temperature management, cardiac cath if STEMI, neurology consult
+  (ACC/AHA 2023)'
+clinical_pearls:
+- 'Immediate defibrillation: Only definitive treatment, delays reduce survival 10%
+  per minute'
+- 'CPR + defibrillation: 2 minutes CPR, then shock, repeat'
+- 'ACLS protocol: Epinephrine 1mg IV q3-5min, amiodarone 300mg IV if refractory'
+- 'Post-cardiac arrest: Targeted temperature management (33-36°C x24hr), cardiac cath
+  if STEMI'
+- 'ICD placement: Secondary prevention (survived VF arrest)'
+referrals:
+- Cardiology STAT for post-cardiac arrest care
+- EP for ICD placement (secondary prevention)
+- ICU for targeted temperature management, hemodynamic support
+differentials: []
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

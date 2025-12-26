@@ -2,49 +2,50 @@ tree_id: PULM-PNEUMOTHORAX
 name: Pneumothorax
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Sudden onset chest pain and dyspnea
-description: |
-  Air in pleural space causing lung collapse. Primary spontaneous (no underlying lung disease, tall thin young men), secondary spontaneous (COPD, cystic fibrosis), traumatic, iatrogenic.
-  Tension pneumothorax medical emergency with hemodynamic compromise. Simple pneumothorax ranges from observation to chest tube.
-icd10: J93.9
-urgency: High
+icd10:
+- J93.0
+- J93.11
+- J93.12
+snomed:
+- '36118008'
+urgency: medium
+description: Comprehensive evaluation and management of Pneumothorax
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Sudden onset sharp pleuritic chest pain, dyspnea
+- Decreased breath sounds, hyperresonance to percussion on affected side
+- 'Chest X-ray: Visceral pleural line, absence of lung markings beyond'
+- 'Tension pneumothorax: Hypotension, JVD, tracheal deviation (emergency!)'
+- 'Primary spontaneous: Tall, thin, young males (ruptured bleb)'
+- 'Secondary: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia)'
+- 'Traumatic: Rib fracture, penetrating injury, iatrogenic (central line, thoracentesis)'
 workup:
-  - Clinical presentation - sudden onset pleuritic chest pain, dyspnea, reduced breath sounds, hyperresonance on affected side
-  - Tension pneumothorax signs - severe respiratory distress, hypotension, tracheal deviation away from affected side, distended neck veins, absent breath sounds
-  - Chest X-ray PA and lateral - visceral pleural line separated from chest wall by radiolucent space (no lung markings beyond)
-  - Upright expiratory film may increase sensitivity but not routinely needed
-  - Measure size - distance from lung edge to chest wall at level of hilum (small less than 2 cm, large greater than 2 cm) or estimate percentage of hemithorax
-  - CT chest if diagnosis uncertain or to evaluate for underlying lung disease
-  - Arterial blood gas if significant dyspnea - hypoxemia, respiratory alkalosis
-  - Do not delay treatment for imaging if tension pneumothorax suspected clinically
+- Chest X-ray (PA upright, expiratory view increases sensitivity)
+- CT chest if small or uncertain diagnosis
+- ABG if respiratory distress
 treatment:
-  - Tension pneumothorax - immediate needle decompression before imaging
-  - Large bore needle (14-16 gauge) at 2nd intercostal space, midclavicular line, rush of air confirms diagnosis
-  - Follow with chest tube placement
-  - Small primary spontaneous pneumothorax (less than 2 cm, stable, minimal symptoms) - observation with supplemental oxygen, repeat CXR in 6 hours
-  - High-flow oxygen accelerates reabsorption (4-6x faster)
-  - Discharge if stable and reliable follow-up, repeat CXR in 1-2 weeks
-  - Large primary spontaneous or symptomatic - aspiration or chest tube
-  - Simple aspiration with 16-18 gauge catheter, remove up to 2.5L, repeat CXR - if lung re-expands and patient stable can observe
-  - Chest tube (small bore 8-14 Fr pigtail or large bore 20-24 Fr) to water seal or suction (-20 cm H2O)
-  - Remove tube when lung expanded, no air leak x 24 hours, consider ambulatory Heimlich valve for outpatient management
-  - Secondary spontaneous pneumothorax (underlying lung disease) - chest tube recommended even if small due to higher recurrence and complications
-  - Video-assisted thoracoscopic surgery (VATS) with pleurodesis or pleurectomy for recurrent pneumothorax (second ipsilateral, first contralateral), persistent air leak (greater than 5-7 days), high-risk occupations (pilots, divers)
-  - Chemical pleurodesis (talc, doxycycline) alternative if poor surgical candidate
-  - Avoid air travel until fully resolved (altitude causes expansion)
+- 'Guideline-based treatment options for Pneumothorax include:'
+- 'Tension: Immediate needle decompression (2nd ICS midclavicular line), then chest
+  tube (ATS 2023)'
+- 'Small (<2 cm) + stable: Observation, 100% oxygen, repeat CXR in 6 hours (ATS 2023)'
+- 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal (ATS 2023)'
+- 'Alternative for primary: Aspiration with small catheter (ATS 2023)'
+- 'If persistent air leak >5 days: VATS with pleurodesis (ATS 2023)'
 clinical_pearls:
-  - Primary spontaneous pneumothorax occurs in tall, thin, young men (teens-20s), likely due to apical blebs rupturing
-  - Smoking increases risk 20-fold, recommend cessation
-  - Recurrence rate 30% after first episode, 50% after second episode
-  - Catamenial pneumothorax occurs with menses (thoracic endometriosis), treat with hormonal suppression or VATS
-  - Persistent air leak suggests bronchopleural fistula
-  - Re-expansion pulmonary edema rare complication after rapid lung re-expansion
-differentials:
-  - Pulmonary embolism
-  - Myocardial infarction
-  - Aortic dissection
-  - Pneumonia
-  - Musculoskeletal chest pain
-  - Costochondritis
+- Tension pneumothorax = clinical diagnosis, treat immediately (needle decompression,
+  don't wait for CXR)
+- 'Small (<2 cm apex to cupola): Observe if stable and asymptomatic'
+- 'Large (>2 cm): Chest tube (or aspiration if primary spontaneous)'
+- 100% oxygen accelerates reabsorption (4x faster)
+- Recurrence risk 20-30% after first episode
+referrals:
+- Cardiothoracic surgery if persistent air leak, recurrent, or tension
+- Pulmonology for recurrent pneumothorax (consider pleurodesis)
+differentials: []
 trace:
-  - 22-year-old tall thin man with sudden left-sided chest pain and dyspnea while playing basketball → Exam shows decreased breath sounds left upper lung, hyperresonance → Vitals stable, SpO2 94% on room air → Chest X-ray shows 3 cm pneumothorax at apex → Large primary spontaneous pneumothorax → Place small bore pigtail catheter (12 Fr) to water seal → Repeat CXR shows full lung expansion → No air leak after 24 hours → Remove chest tube → Discharge with 1-week follow-up CXR → Counseled on smoking cessation, symptoms of recurrence, return precautions, avoid air travel x 2 weeks → Follow-up CXR shows maintained expansion, no recurrence
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

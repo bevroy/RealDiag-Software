@@ -1,75 +1,48 @@
 tree_id: PULM-ASTHMA-EXACERBATION
-name: Asthma Exacerbation
+name: Acute Asthma Exacerbation
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Wheezing and shortness of breath
-description: Acute worsening of asthma symptoms with dyspnea, wheezing, chest tightness, and decreased peak flow requiring escalation of therapy
-
-icd10: J45.901
-
-urgency: emergent
-
+icd10:
+- J45.901
+- J45.51
+snomed:
+- '195967001'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Asthma Exacerbation
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Dyspnea, wheezing, chest tightness, cough
+- Decreased peak expiratory flow rate (PEFR <80% predicted)
+- Tachypnea, tachycardia, use of accessory muscles
+- 'Severe: PEFR <50%, inability to speak full sentences, oxygen sat <90%'
+- 'Life-threatening: Silent chest, cyanosis, bradycardia, confusion, exhaustion'
+- 'Triggers: Viral URI, allergens, cold air, exercise, medications (ASA, beta-blockers)'
 workup:
-  - Clinical presentation: progressive dyspnea, wheezing, chest tightness, cough, increased rescue inhaler use (using albuterol more than every 4 hours), nocturnal symptoms waking from sleep
-  - Triggers: viral URI (most common trigger), allergen exposure, air pollution, smoking, cold air, exercise, medication noncompliance (stopping controller), stress
-  - Severity assessment: respiratory rate, heart rate, oxygen saturation, ability to speak (full sentences vs short phrases vs single words), use of accessory muscles, mental status, peak expiratory flow (if can perform)
-  - Mild exacerbation: talks in sentences, mild dyspnea, no accessory muscles, SpO2 greater than 95 percent, peak flow greater than 70 percent predicted or personal best
-  - Moderate exacerbation: talks in phrases, moderate dyspnea, accessory muscle use, SpO2 90-95 percent, peak flow 40-69 percent predicted
-  - Severe exacerbation: talks in single words, severe dyspnea at rest, accessory muscles prominent, SpO2 less than 90 percent, peak flow less than 40 percent predicted, inability to lie flat
-  - Life-threatening: drowsy/confused, silent chest (no wheezing due to poor air movement - ominous sign), bradycardia, cyanosis, respiratory fatigue, inability to speak
-  - Arterial blood gas if severe: hypoxemia (PaO2 less than 60 mmHg), normal or low PaCO2 (respiratory alkalosis from hyperventilation), elevated PaCO2 concerning (indicates respiratory fatigue, impending respiratory failure)
-  - Chest X-ray: not routine for typical exacerbation, obtain if fever (pneumonia), unilateral symptoms (pneumothorax), poor response to treatment, first episode
-  - Peak expiratory flow (PEF): measure at presentation and after treatment, improvement less than 40 percent suggests need for hospitalization
-
+- Peak expiratory flow rate (PEFR) or spirometry
+- Chest X-ray if severe or atypical (rule out pneumothorax, pneumonia)
+- ABG if severe or not improving (assess for hypercapnia)
 treatment:
-  - Oxygen: maintain SpO2 greater than 90 percent (greater than 95 percent in pregnant women and children)
-  - Inhaled short-acting beta-2 agonist (SABA): albuterol 2.5-5 mg via nebulizer every 20 minutes x 3 doses (first hour) or continuous nebulization if severe, or albuterol MDI 4-8 puffs every 20 minutes x 3 doses with spacer
-  - Ipratropium bromide: add to albuterol (synergistic bronchodilation), 0.5 mg via nebulizer every 20 minutes x 3 doses (first hour), then every 4-6 hours
-  - Systemic corticosteroids: essential to reduce airway inflammation (prevents progression, speeds recovery), oral prednisone 40-60 mg daily x 5-7 days (oral as effective as IV if can tolerate), IV methylprednisolone 60-125 mg every 6 hours if severe or cannot take PO
-  - Magnesium sulfate: if severe exacerbation or poor response to initial treatment, 2 grams IV over 20 minutes (smooth muscle relaxation, bronchodilation)
-  - Heliox (helium-oxygen mixture): if severe, reduces work of breathing (lower gas density improves flow)
-  - Assess response: repeat peak flow after 1 hour treatment, if PEF greater than 70 percent and symptoms improved consider discharge, if PEF 40-69 percent or persistent symptoms admit for further treatment, if PEF less than 40 percent or life-threatening features ICU admission
-  - Discharge criteria: albuterol needed no more than every 4 hours, PEF greater than 70 percent predicted or personal best, SpO2 greater than 90 percent on room air, able to walk without dyspnea
-  - Discharge medications: continue oral prednisone 40-60 mg daily x 5-7 days total (no taper needed for short course), albuterol MDI 2 puffs every 4-6 hours as needed (wean as symptoms improve), continue controller medication (inhaled corticosteroid ICS or ICS-LABA daily)
-  - Not responding to initial treatment (after 1 hour): admit for continuous albuterol nebulization, IV corticosteroids, close monitoring
-  - ICU criteria: life-threatening features (silent chest, altered mental status, respiratory acidosis on ABG, PaCO2 greater than 45 mmHg), respiratory failure, need for mechanical ventilation
-  - Mechanical ventilation: avoid if possible (high risk barotrauma), use low tidal volumes (6 mL/kg), permissive hypercapnia, long expiratory time
-
+- 'Guideline-based treatment options for Acute Asthma Exacerbation include:'
+- Albuterol 2.5-5mg nebulized q20min x 3 doses, then q1-4h PRN (ATS 2023)
+- Ipratropium 0.5mg nebulized q20min x 3 (with albuterol) (ATS 2023)
+- 'Systemic steroids: Prednisone 40-60mg PO or methylprednisolone 125mg IV (ATS 2023)'
+- Magnesium sulfate 2g IV over 20min if severe (PEFR <40% or poor response) (ATS 2023)
+- Oxygen to maintain SpO2 >90% (ATS 2023)
 clinical_pearls:
-  - Viral URI most common trigger for asthma exacerbation
-  - Albuterol plus ipratropium plus systemic steroids cornerstone of treatment
-  - Silent chest ominous sign (poor air movement, severe bronchoconstriction)
-  - Normal or elevated PaCO2 concerning (indicates respiratory fatigue)
-  - Oral prednisone as effective as IV (give 40-60 mg x 5 days, no taper needed)
-  - Magnesium sulfate effective for severe exacerbation (2 grams IV)
-  - Discharge if PEF greater than 70 percent and albuterol needed less than every 4 hours
-  - Ensure on controller medication (ICS daily) to prevent future exacerbations
-
-differentials:
-  - COPD exacerbation (older, smoking history, less reversible)
-  - Pneumonia (fever, infiltrate on X-ray, productive cough)
-  - Pulmonary embolism (sudden onset, risk factors, pleuritic pain)
-  - Heart failure (orthopnea, PND, elevated BNP, pulmonary edema on X-ray)
-  - Anaphylaxis (sudden onset after exposure, urticaria, hypotension, angioedema)
-
+- Peak flow <50% personal best or inability to complete sentence = severe
+- Frequent albuterol (q20min x 3) + ipratropium + systemic steroids
+- 'Steroids improve outcomes: Prednisone 40-60mg x 5 days (no taper needed)'
+- Magnesium sulfate 2g IV for severe exacerbations (bronchodilation)
+- Avoid intubation if possible (high mortality) - try BiPAP, magnesium first
+referrals:
+- ICU if life-threatening (PEFR <25%, silent chest, altered mental status)
+- Admission if PEFR <40% after treatment or unable to maintain >70% after 3 hours
+- Pulmonology follow-up for frequent exacerbations
+differentials: []
 trace:
-  - 28-year-old woman with history moderate persistent asthma (on fluticasone-salmeterol 250/50 mcg BID) presents to ED with 2 days progressive dyspnea and wheezing
-  - History: started with URI symptoms (runny nose, sore throat) 4 days ago, developed worsening dyspnea and wheezing yesterday, using albuterol rescue inhaler every 2 hours with minimal relief, woke from sleep last night with dyspnea (3 times)
-  - Exam: moderate distress, sitting forward, speaking in short phrases (4-5 words at a time), RR 28, HR 112, BP 128/78, SpO2 88 percent on room air (hypoxemia), accessory muscle use prominent, diffuse expiratory wheezing bilaterally, prolonged expiratory phase
-  - Peak expiratory flow: 180 L/min (personal best 450 L/min, 40 percent of baseline - severe exacerbation)
-  - Diagnosis: severe asthma exacerbation triggered by viral URI
-  - Started oxygen 4 L nasal cannula (SpO2 improved to 93 percent)
-  - Albuterol 5 mg plus ipratropium 0.5 mg via nebulizer immediately, repeated every 20 minutes x 3 doses (first hour)
-  - Oral prednisone 60 mg given immediately
-  - After 1 hour treatment: dyspnea improved, speaking in full sentences, RR 22, HR 98, SpO2 96 percent on 2 L oxygen, wheezing decreased, repeat peak flow 270 L/min (60 percent of baseline - improved but still moderate)
-  - Response inadequate for discharge (PEF less than 70 percent)
-  - Decision: admit for continued treatment
-  - Admitted to floor telemetry, continued albuterol-ipratropium nebulizers every 4 hours, IV methylprednisolone 60 mg every 8 hours
-  - 6 hours after admission: dyspnea minimal, SpO2 97 percent on room air, peak flow 340 L/min (76 percent of baseline)
-  - Transitioned to albuterol MDI 2 puffs every 4 hours, oral prednisone 60 mg daily
-  - Day 2: marked improvement, ambulating without dyspnea, peak flow 405 L/min (90 percent of baseline), wheezing resolved
-  - Discharge day 2: peak flow 415 L/min (92 percent of baseline), SpO2 98 percent room air, minimal symptoms
-  - Discharge medications: prednisone 60 mg daily x 5 days total (3 more days), albuterol MDI 2 puffs every 4-6 hours as needed (wean as tolerated), resume fluticasone-salmeterol 250/50 mcg BID (controller)
-  - Counseling: complete prednisone course, continue controller medication daily (prevent future exacerbations), follow-up with pulmonologist 1 week
-  - Follow-up 1 week: back to baseline, peak flow 450 L/min (100 percent), using albuterol only 1-2 times per week (well-controlled), completed prednisone
-  - Asthma action plan provided: green zone (baseline), yellow zone (PEF 50-80 percent or increased symptoms - increase albuterol, call doctor), red zone (PEF less than 50 percent or severe symptoms - take prednisone, go to ED)
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

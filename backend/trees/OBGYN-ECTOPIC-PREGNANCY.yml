@@ -1,0 +1,56 @@
+tree_id: OBGYN-ECTOPIC-PREGNANCY
+name: Ectopic Pregnancy
+family: Obstetrics Gynecology
+specialty: Obstetrics Gynecology
+icd10:
+- O00.90
+- O00.10
+snomed:
+- '34801009'
+urgency: medium
+description: Comprehensive evaluation and management of Ectopic Pregnancy
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Abdominal/pelvic pain (usually unilateral, may be diffuse)
+- Vaginal bleeding (lighter than normal period)
+- Positive pregnancy test (urine or serum beta-hCG)
+- Cervical motion tenderness, adnexal tenderness on exam
+- 'If ruptured: Hypotension, tachycardia, shoulder pain (Kehr sign from diaphragmatic
+  irritation)'
+- Beta-hCG doesn't rise appropriately (should double every 48-72hr in early pregnancy)
+- 'Ultrasound: No intrauterine pregnancy, may see adnexal mass or free fluid'
+workup:
+- Beta-hCG (quantitative serum)
+- Transvaginal ultrasound (look for IUP vs ectopic mass)
+- CBC (if ruptured)
+- Type & screen
+- Repeat beta-hCG in 48hr (should rise appropriately if viable IUP)
+treatment:
+- 'Guideline-based treatment options for Ectopic Pregnancy include:'
+- 'Stable: Serial beta-hCG (ACOG 2024)'
+- 'Methotrexate 50mg/m² IM: If stable, unruptured, hCG <5000, no fetal cardiac activity,
+  compliant patient (ACOG 2024)'
+- 'Surgery (salpingectomy or salpingostomy): If ruptured, unstable, or methotrexate
+  contraindicated (ACOG 2024)'
+- 'If ruptured: IV access x2, fluids, type & cross, emergent OB/GYN consult, OR (ACOG
+  2024)'
+- RhoGAM 50-300 mcg if Rh-negative (ACOG 2024)
+clinical_pearls:
+- Any woman of childbearing age with abdominal pain = pregnancy test
+- 'Discriminatory zone: beta-hCG >1500-2000 should see intrauterine gestational sac
+  on transvaginal U/S'
+- If hCG >discriminatory zone + no IUP → presumed ectopic
+- 'Ruptured ectopic: Surgical emergency, go to OR immediately if unstable'
+- 'Methotrexate: For stable ectopic if hCG <5000, no cardiac activity, <3.5cm, hemodynamically
+  stable'
+referrals:
+- OB/GYN for all ectopic pregnancies
+- Emergent OR if ruptured
+differentials: []
+trace:
+  source: American College of Obstetricians and Gynecologists (ACOG) Practice Bulletins,
+    Society for Maternal-Fetal Medicine (SMFM)
+  version: 0.1.0
+  last_updated: '2024-12-26'

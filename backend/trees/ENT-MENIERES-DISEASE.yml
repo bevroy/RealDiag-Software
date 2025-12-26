@@ -1,62 +1,58 @@
 tree_id: ENT-MENIERES-DISEASE
 name: Meniere's Disease
-family: Otolaryngology
-specialty: Otolaryngology
-chief_complaint: Episodic vertigo with hearing loss
-description: |
-  Inner ear disorder causing episodic vertigo, fluctuating sensorineural hearing loss, tinnitus, and aural fullness. Caused by endolymphatic hydrops (excess fluid in inner ear).
-  Typically unilateral initially but can become bilateral (30-40%). Affects 0.5-1 per 1000 population, peak age 40-60 years. Progressive hearing loss over time.
-icd10: H81.09
-urgency: Moderate
+family: Ent
+specialty: Ent
+icd10:
+- H81.09
+snomed:
+- 13445001
+urgency: medium
+description: Comprehensive evaluation and management of Meniere's Disease
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Episodic vertigo (hours duration)
+- Fluctuating hearing loss (typically low frequency)
+- Tinnitus (roaring quality)
+- Aural fullness (sensation of ear pressure)
+- Nausea and vomiting during episodes
+- Progressive hearing loss over time
 workup:
-  - Clinical diagnosis based on AAO-HNS criteria (2015)
-  - Definite Meniere's - two or more spontaneous vertigo episodes lasting 20 minutes to 12 hours, audiometrically documented low-to-medium frequency sensorineural hearing loss in affected ear, fluctuating aural symptoms (hearing, tinnitus, fullness) in affected ear, not better explained by another diagnosis
-  - Probable Meniere's - two or more episodes of vertigo lasting 20 minutes to 24 hours, fluctuating aural symptoms, not better explained by another diagnosis
-  - Audiometry (pure tone and speech) - low-frequency sensorineural hearing loss (250-1000 Hz) early, may progress to all frequencies
-  - Fluctuating hearing loss characteristic - improves between attacks initially, becomes fixed over time
-  - Tympanometry and acoustic reflexes - normal (middle ear function intact)
-  - Electronystagmography (ENG) or videonystagmography (VNG) - horizontal nystagmus during acute attack, may show unilateral vestibular weakness
-  - Electrocochleography (ECoG) - elevated summating potential/action potential ratio suggests hydrops (not routinely needed)
-  - MRI brain with gadolinium - rule out acoustic neuroma, multiple sclerosis, stroke (important to exclude central causes)
-  - Vestibular evoked myogenic potentials (VEMP) - may show abnormalities
-  - Rule out other causes - migraine-associated vertigo, BPPV, vestibular neuritis, autoimmune inner ear disease
+- Clinical diagnosis based on symptoms (episodic vertigo + hearing loss + tinnitus)
+- 'Audiometry: Low-frequency sensorineural hearing loss (fluctuating early, progressive
+  later)'
+- MRI internal auditory canals with contrast to rule out acoustic neuroma (mimics
+  Meniere's)
+- Electrocochleography (ECoG) or VEMP testing if diagnosis uncertain
 treatment:
-  - Acute attack management
-  - Meclizine 25-50mg q4-6h PRN - antihistamine, reduces vertigo, sedating
-  - Diazepam 2-10mg or lorazepam 0.5-2mg - vestibular suppressant for severe episodes
-  - Promethazine 25-50mg or ondansetron 4-8mg - antiemetic for nausea/vomiting
-  - Avoid vestibular suppressants long-term (delay central compensation)
-  - Maintenance therapy to prevent attacks
-  - Low sodium diet (1500-2000 mg daily) - reduces endolymphatic pressure, first-line
-  - Thiazide diuretics - hydrochlorothiazide 25-50mg daily or triamterene/HCTZ 37.5/25mg daily
-  - Betahistine 16-48mg TID (not FDA-approved in US but widely used internationally) - improves microcirculation, may reduce attack frequency
-  - Lifestyle modifications - limit caffeine, alcohol, tobacco (vasoconstrictors), stress reduction, adequate sleep
-  - Intratympanic corticosteroid injections if medical management fails
-  - Dexamethasone or methylprednisolone through tympanic membrane into middle ear
-  - 60-80% reduce vertigo frequency, preserves hearing
-  - Intratympanic gentamicin for refractory vertigo - chemical ablation of vestibular function
-  - 85-95% control vertigo but 10-30% risk of hearing loss
-  - Reserved for refractory cases, unilateral disease
-  - Surgical options if intractable symptoms despite medical/intratympanic treatment
-  - Endolymphatic sac decompression - shunt drains excess fluid, 60-70% vertigo control, hearing preservation
-  - Vestibular nerve section - cuts vestibular nerve, 90-95% vertigo control, preserves hearing
-  - Labyrinthectomy - removes inner ear structures, 100% vertigo control but sacrifices hearing (only if ear already non-functional)
-  - Hearing rehabilitation - hearing aids for hearing loss, cochlear implant if severe bilateral hearing loss
-  - Vestibular rehabilitation therapy after destructive procedures to promote central compensation
+- 'Guideline-based treatment options for Meniere''s Disease include:'
+- 'Acute episode: Meclizine 25-50mg q6h PRN, promethazine 25mg PO/PR q6h, or diazepam
+  2-5mg PO (vestibular suppressants) (AAO-HNS 2023)'
+- 'Dietary: Low-sodium diet (<2g/day), avoid caffeine, alcohol, tobacco (reduce endolymphatic
+  pressure) (AAO-HNS 2023)'
+- 'Diuretic: Hydrochlorothiazide 25mg + triamterene 37.5mg daily (Dyazide) - reduces
+  fluid retention (AAO-HNS 2023)'
+- 'Refractory: Intratympanic gentamicin injections (ablates vestibular function) or
+  betahistine 16-24mg TID (AAO-HNS 2023)'
+- 'Surgical (last resort): Endolymphatic sac decompression or vestibular nerve section
+  if medically refractory (AAO-HNS 2023)'
 clinical_pearls:
-  - Classic triad - episodic vertigo, hearing loss, tinnitus (roaring or low-pitched)
-  - Attacks unpredictable, sudden onset, last 20 minutes to 12 hours (typically 2-4 hours)
-  - Aural fullness or pressure often precedes attack (prodrome)
-  - Drop attacks (Tumarkin otolithic crisis) - sudden fall without loss of consciousness or vertigo, occur in late disease
-  - Bilateral Meniere's develops in 30-40% over time
-  - Natural history - attacks may decrease over time (burnout) but hearing loss progresses
-  - Distinguished from vestibular migraine (longer duration, visual aura, headache) and BPPV (brief positional vertigo, no hearing loss)
-differentials:
-  - Vestibular migraine
-  - Benign paroxysmal positional vertigo (BPPV)
-  - Vestibular neuritis
-  - Labyrinthitis
-  - Acoustic neuroma
-  - Autoimmune inner ear disease
+- 'Classic triad: Episodic vertigo + fluctuating hearing loss + tinnitus (must have
+  all 3 for diagnosis)'
+- 'Pathophysiology: Endolymphatic hydrops (fluid buildup in inner ear)'
+- Vertigo episodes last 20 minutes to 12 hours (typically 2-4 hours) - shorter or
+  longer suggests alternate diagnosis
+- 'Hearing loss: Initially low-frequency, fluctuating. Over years becomes permanent
+  high-frequency loss'
+- 'Tumarkin attacks (drop attacks): Sudden falls without warning or loss of consciousness
+  in advanced disease'
+referrals:
+- ENT/Neurotology for all suspected Meniere's disease - specialized testing and management
+- Vestibular rehabilitation therapy if persistent dysequilibrium
+differentials: []
 trace:
-  - 48-year-old man with three episodes of severe spinning vertigo lasting 3-4 hours over past 6 months → Associated with right ear fullness, roaring tinnitus, decreased hearing during attacks → Hearing improves between attacks but not to baseline → Nausea and vomiting during episodes, unable to work → No headache, no neurologic symptoms → Exam during attack shows horizontal nystagmus beating away from right ear, positive head impulse test right → Between attacks exam normal except Weber lateralizes to left (right hearing loss) → Audiogram shows right low-frequency sensorineural hearing loss 40-50 dB at 250-1000 Hz → MRI brain with gadolinium normal, no acoustic neuroma → Diagnose definite Meniere's disease right ear → Start low sodium diet 1500mg daily, hydrochlorothiazide 25mg daily → Prescribe meclizine 25mg q6h PRN for acute attacks → Attacks decrease from 3-4 per month to 1 every 2-3 months → Hearing stabilizes with mild persistent loss → Counseled on prognosis, possibility of bilateral disease, continues diuretic long-term
+  source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
+    Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

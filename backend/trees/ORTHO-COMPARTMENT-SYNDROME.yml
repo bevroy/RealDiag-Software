@@ -1,191 +1,62 @@
 tree_id: ORTHO-COMPARTMENT-SYNDROME
-name: Acute Compartment Syndrome
+name: Compartment Syndrome
 family: Orthopedics
-specialty: Orthopedic Surgery
-chief_complaint: Severe pain out of proportion, tense swollen extremity after trauma
-description: Surgical emergency caused by increased pressure within confined muscle compartment leading to ischemia
-icd10: T79.A0XA
-urgency: emergency
+specialty: Orthopedics
+icd10:
+- T79.A19A
+snomed:
+- 111243008
+urgency: medium
+description: Comprehensive evaluation and management of Compartment Syndrome
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Severe pain out of proportion to exam
+- Pain with passive stretch of muscles
+- Tense, swollen compartment
+- Paresthesias, weakness
+- 'Late findings: pulselessness, pallor (indicates irreversible damage)'
+- Follows trauma, fracture, or prolonged limb compression
+- Compartment pressure > 30 mmHg
 workup:
-  - Clinical presentation - EMERGENCY requiring high index of suspicion
-  - Severe pain out of proportion to injury - HALLMARK symptom
-  - Pain unrelieved by narcotics
-  - Pain increases with passive stretch of muscles in affected compartment
-  - Progressive pain despite immobilization
-  - Most common sites - lower leg (anterior, lateral, deep posterior, superficial posterior compartments), forearm (volar, dorsal)
-  - Risk factors and causes
-  - Fractures (most common) - tibial shaft fracture 20-30% risk, both-bone forearm fractures
-  - Soft tissue injury - crush injury, burns, vascular injury
-  - Reperfusion injury after vascular repair
-  - Constrictive dressings, casts, or splints
-  - Prolonged limb compression (lying on limb, unconscious patient)
-  - Bleeding disorders, anticoagulation
-  - Snake bites (venom causes tissue necrosis)
-  - Vigorous exercise (exertional compartment syndrome - chronic, different entity)
-  - Classic "5 P's" - late findings, unreliable (damage already occurred if present)
-  - Pain (out of proportion)
-  - Pressure (tense, swollen compartment)
-  - Paresthesias (numbness, tingling)
-  - Pallor (pale skin)
-  - Pulselessness (absent pulses) - LATE sign, muscle necrosis already occurred
-  - Paralysis - LATE sign
-  - Physical examination - EARLY diagnosis critical
-  - Inspect - tense, swollen compartment, shiny skin
-  - Palpate - firm, woody compartment on palpation
-  - Pain with passive stretch - KEY finding
-  - Lower leg anterior compartment - pain with passive plantarflexion
-  - Lower leg deep posterior compartment - pain with passive dorsiflexion
-  - Forearm volar compartment - pain with passive finger extension
-  - Sensory testing - paresthesias or numbness (nerve ischemia)
-  - Peroneal nerve (lower leg anterior) - numbness first web space
-  - Tibial nerve (lower leg deep posterior) - numbness plantar foot
-  - Motor testing - weakness late finding (muscle ischemia)
-  - Pulses - presence of pulses does NOT rule out compartment syndrome
-  - Compartment pressure measurement - if clinical diagnosis uncertain
-  - Normal compartment pressure less than 10 mmHg
-  - Compartment syndrome if absolute pressure greater than 30 mmHg OR delta pressure less than 30 mmHg
-  - Delta pressure = diastolic BP minus compartment pressure
-  - Delta pressure less than 30 mmHg diagnostic (inadequate perfusion pressure)
-  - Measurement technique - insert catheter into compartment, connect to pressure transducer
-  - Measure all compartments if lower leg (4 compartments)
-  - CAUTION - do NOT delay surgery if clinical diagnosis clear
-  - Imaging - limited role
-  - X-rays to identify fractures
-  - Do NOT obtain MRI or CT if delaying surgery
-  - Diagnosis primarily CLINICAL
+- 'Clinical diagnosis: Pain out of proportion, pain with passive stretch (earliest
+  signs), tense compartment'
+- 'Compartment pressure measurement: >30 mmHg absolute OR delta P <30 mmHg (diastolic
+  BP minus compartment pressure) = fasciotomy'
+- 'Late findings (indicates damage already occurred): Paresthesias, paralysis, pulselessness,
+  pallor'
+- 'X-ray: Identify fracture (tibial shaft most common), but don''t delay treatment
+  for imaging'
 treatment:
-  - SURGICAL EMERGENCY - fasciotomy within 6 hours to prevent irreversible damage
-  - Immediate interventions while preparing for surgery
-  - Remove all constricting dressings, casts, splints immediately
-  - Elevate limb to heart level only (not above, avoid reducing arterial inflow)
-  - Supplemental oxygen
-  - IV fluids, correct hypotension (maintain perfusion)
-  - Pain control (but pain out of proportion should prompt diagnosis)
-  - NPO for surgery
-  - Emergent fasciotomy - definitive treatment
-  - Lower leg - two-incision four-compartment fasciotomy
-  - Anterolateral incision - releases anterior and lateral compartments
-  - Posteromedial incision - releases superficial and deep posterior compartments
-  - Forearm - volar and dorsal incisions, release carpal tunnel
-  - Extend incisions across joints if needed
-  - Do NOT close fascia (leave open)
-  - Skin left open or loosely approximated
-  - Assess muscle viability - debride necrotic muscle (noncontractile, does not bleed)
-  - Wound management after fasciotomy
-  - Negative pressure wound therapy (wound VAC)
-  - Serial irrigation and debridement every 48-72 hours
-  - Delayed primary closure or skin grafting after 3-7 days once swelling resolved
-  - Supportive care
-  - IV fluids - risk of rhabdomyolysis from muscle necrosis
-  - Monitor creatine kinase (CK), myoglobin
-  - Aggressive hydration, alkalinize urine if rhabdomyolysis
-  - Monitor for acute kidney injury
-  - DVT prophylaxis
-  - Antibiotics if open fracture or contaminated wound
-  - Physical therapy - early mobilization, prevent contractures
-  - Complications of missed or delayed diagnosis
-  - Muscle necrosis, contractures (Volkmann contracture in forearm)
-  - Permanent nerve damage
-  - Limb ischemia requiring amputation
-  - Rhabdomyolysis, acute kidney injury
-  - Infection
-  - Chronic pain, disability
+- 'Guideline-based treatment options for Compartment Syndrome include:'
+- 'EMERGENCY fasciotomy: If clinical diagnosis (pain out of proportion + passive stretch
+  pain) OR compartment pressure >30 mmHg (or delta P <30 mmHg) (AAOS 2023)'
+- 'Delta P: Diastolic BP minus compartment pressure. If <30 mmHg = inadequate perfusion
+  pressure, needs fasciotomy (AAOS 2023)'
+- 'Remove all constricting dressings/casts immediately: May be sufficient if caught
+  early (AAOS 2023)'
+- Elevate limb to heart level only (NOT above heart - decreases arterial inflow) (AAOS
+  2023)
+- DO NOT delay fasciotomy for imaging or pressure measurement if high clinical suspicion
+  (AAOS 2023)
 clinical_pearls:
-  - Orthopedic emergency - irreversible damage occurs within 6-8 hours
-  - High index of suspicion crucial - do NOT wait for classic "5 P's" (too late)
-  - Pain out of proportion to examination and unrelieved by narcotics - KEY early sign
-  - Pain with passive stretch of muscles most sensitive early finding
-  - Presence of pulses does NOT rule out compartment syndrome (arterial flow preserved until late)
-  - When in doubt, measure compartment pressures - but do NOT delay surgery if clinically obvious
-  - Fasciotomy within 6 hours has best outcomes - delay increases risk permanent damage
-  - Always remove casts/dressings completely if concern for compartment syndrome
-  - Tibial shaft fractures highest risk (especially high-energy mechanisms)
-  - Children can develop compartment syndrome - may be difficult to assess, high suspicion needed
-  - Exertional compartment syndrome different entity (chronic, exercise-induced, resolves with rest)
-differentials:
-  - Deep vein thrombosis (swelling, pain, positive D-dimer, no pain with passive stretch)
-  - Cellulitis (erythema, warmth, fever, gradual onset)
-  - Necrotizing fasciitis (rapidly progressive, systemic toxicity, crepitus, urgent surgical debridement)
-  - Peripheral vascular disease (chronic, diminished pulses, no trauma)
-  - Complex regional pain syndrome (chronic pain syndrome, allodynia, no acute trauma)
-  - Nerve injury (sensory/motor deficits without compartment tension)
-  - Rhabdomyolysis without compartment syndrome (elevated CK, dark urine, no compartment tension)
+- ORTHOPEDIC EMERGENCY - irreversible muscle/nerve damage within 6-8 hours if untreated
+- Increased pressure in fascial compartment compromises perfusion - ischemia, necrosis,
+  Volkmann contracture
+- 'Pain out of proportion + pain with passive stretch: Most sensitive early findings
+  (5 P''s are late: Pain, Pallor, Paresthesias, Pulselessness, Paralysis)'
+- Pulse present does NOT rule out compartment syndrome - arterial pressure higher
+  than capillary/venous pressure
+- 'Common causes: Tibial fracture (40%), crush injury, burns, tight casts/dressings,
+  prolonged limb compression (unconscious patient)'
+referrals:
+- Orthopedic surgery EMERGENTLY - call immediately for fasciotomy
+- If high clinical suspicion, DO NOT wait for pressure measurement - irreversible
+  damage occurs in 6-8 hours
+differentials: []
 trace:
-  - 24-year-old man presents to ED 6 hours after motorcycle accident
-  - High-speed collision, thrown from bike
-  - Right lower leg severe pain since accident
-  - Initially pain 8/10, now 10/10 despite morphine 10 mg IV x2
-  - Feels like leg is going to explode
-  - Tingling and numbness in foot
-  - EMS placed right lower leg splint at scene
-  - No loss of consciousness, no other major injuries
-  - Past medical history - none
-  - Medications - none
-  - Physical exam - appears in severe pain, agitated
-  - Vitals - temp 36.9C, HR 110, BP 135/85, RR 22, SpO2 98% room air
-  - Right lower leg examination
-  - Splint removed immediately
-  - Lower leg markedly swollen, tense, shiny skin
-  - Anterior compartment feels rock-hard on palpation
-  - Exquisite pain with passive plantarflexion of ankle and toes (stretches anterior compartment)
-  - Pain out of proportion to examination
-  - Numbness in first dorsal web space (peroneal nerve distribution)
-  - Weak ankle dorsiflexion, weak toe extension
-  - Dorsalis pedis and posterior tibial pulses PRESENT (pulses do not rule out compartment syndrome)
-  - Capillary refill 2 seconds
-  - X-rays right lower leg - comminuted mid-shaft tibia and fibula fractures, displaced
-  - Diagnosis - ACUTE COMPARTMENT SYNDROME right lower leg with tibial shaft fracture
-  - Clinical diagnosis based on pain out of proportion, tense compartment, pain with passive stretch, sensory changes
-  - ORTHOPEDIC EMERGENCY
-  - Compartment pressure measurement performed while preparing for OR
-  - Anterior compartment 55 mmHg (severely elevated, normal less than 10)
-  - Lateral compartment 48 mmHg
-  - Delta pressure (diastolic BP 85 - compartment pressure 55) = 30 mmHg (marginal perfusion)
-  - Confirms diagnosis
-  - Emergent management
-  - Orthopedic surgery stat consultation
-  - Patient NPO, IV access x2
-  - Typed and crossed for blood
-  - IV fluids - normal saline bolus
-  - Supplemental oxygen
-  - Limb elevated to heart level (not above)
-  - Pain control continued
-  - To OR within 45 minutes of arrival (total 7 hours from injury - cutting it close)
-  - Emergent fasciotomy performed
-  - Two-incision four-compartment fasciotomy
-  - Anterolateral incision - released anterior and lateral compartments
-  - Massive pressure release, muscle bulged through fasciotomy
-  - Muscle viable, pink, contractile (good sign)
-  - Posteromedial incision - released superficial and deep posterior compartments
-  - All four compartments decompressed
-  - Fascia left completely open, skin loosely approximated
-  - Tibial fracture stabilized with external fixator (cannot place intramedullary nail with open fasciotomy wounds)
-  - Postoperative course - ICU monitoring
-  - Aggressive IV hydration (risk of rhabdomyolysis)
-  - CK 8500 U/L (elevated, muscle injury but not massive necrosis)
-  - Urine myoglobin positive
-  - Creatinine monitored - remained stable 1.0 mg/dL (no acute kidney injury)
-  - Pain dramatically improved after fasciotomy
-  - Wounds - negative pressure wound therapy (wound VAC) applied
-  - POD 3 - return to OR for irrigation and debridement, wound assessment
-  - Muscle viable, no necrosis requiring debridement
-  - Swelling decreased
-  - POD 7 - return to OR for delayed primary closure and split-thickness skin grafting
-  - Anterior and lateral compartments - primary closure
-  - Posterior compartments - split-thickness skin graft (too much swelling for primary closure)
-  - POD 10 - skin graft taking well, wounds healing
-  - Physical therapy initiated - ankle ROM, strengthening
-  - Discharge POD 14 to inpatient rehabilitation
-  - Non-weight bearing right lower extremity
-  - External fixator in place (will convert to intramedullary nail in 6-8 weeks)
-  - 6-week follow-up - fracture healing, wounds healed
-  - Persistent mild foot drop (peroneal nerve injury, improving)
-  - AFO brace prescribed
-  - 3-month follow-up - external fixator removed, intramedullary nail placed
-  - Foot drop significantly improved, ankle dorsiflexion 4/5 strength
-  - Ambulating with cane
-  - 6-month follow-up - fracture healed
-  - Ankle dorsiflexion 4+/5, no AFO needed
-  - Minimal numbness first web space
-  - Full weight bearing, returned to work
-  - Outcome - Good recovery with early fasciotomy, avoided amputation and permanent disability
+  source: American Academy of Orthopaedic Surgeons (AAOS) Clinical Practice Guidelines,
+    Orthopaedic Trauma Association (OTA)
+  version: 0.1.0
+  last_updated: '2024-12-26'

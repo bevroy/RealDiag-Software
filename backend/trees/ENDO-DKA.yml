@@ -1,0 +1,61 @@
+tree_id: ENDO-DKA
+name: Diabetic ketoacidosis (DKA)
+family: Endocrinology
+specialty: Endocrinology
+icd10:
+- E10.10
+- E11.10
+snomed: []
+urgency: medium
+description: Comprehensive evaluation and management of Diabetic ketoacidosis (DKA)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Polyuria and polydipsia
+- Nausea and vomiting
+- Abdominal pain (can mimic acute abdomen)
+- Altered mental status (confusion, lethargy, coma in severe cases)
+- Kussmaul respirations (deep, labored breathing)
+- Fruity (acetone) breath odor
+- Dehydration (dry mucous membranes, poor skin turgor, tachycardia)
+- Weakness and fatigue
+- Hyperglycemia >250 mg/dL
+- Often triggered by infection, medication noncompliance, or new-onset Type 1 DM
+- Hypotension in severe cases
+- More common in Type 1 DM but can occur in Type 2
+workup:
+- 'Basic metabolic panel: Glucose, electrolytes, BUN/Cr, anion gap (repeat q2-4h)'
+- 'Arterial or venous blood gas: pH, HCO3, pCO2'
+- Serum or urine ketones (beta-hydroxybutyrate preferred over acetoacetate)
+- 'Search for precipitant: UA/culture, CXR, blood cultures, troponin, lipase'
+treatment:
+- 'Guideline-based treatment options for Diabetic ketoacidosis (DKA) include:'
+- 'ABC''s: Airway, breathing, circulation - ICU if pH <7.0 or altered mental status
+  (ADA 2024)'
+- 'Fluids: 1L NS bolus, then 250-500 mL/hr (correct dehydration over 24-48 hours)
+  (ADA 2024)'
+- 'Insulin: 0.1 units/kg/hr IV infusion (DON''T give bolus) - goal glucose decrease
+  50-75 mg/dL/hr (ADA 2024)'
+- When glucose <200, switch to D5-NS and continue insulin until anion gap closes (ketones
+  cleared) (ADA 2024)
+- 'Potassium: Add KCl 20-40 mEq/L to fluids (monitor q2-4h, DKA causes total body
+  K depletion despite normal/high initial level) (ADA 2024)'
+clinical_pearls:
+- 'Triad: Hyperglycemia (>250 mg/dL), anion gap metabolic acidosis (pH <7.3, HCO3
+  <18), ketonemia/ketonuria'
+- 'Common precipitants: Infection (30-40%), insulin noncompliance, new-onset Type
+  1 DM, MI, pancreatitis'
+- 'Kussmaul respirations: Deep sighing breaths compensating for metabolic acidosis'
+- 'Monitor for cerebral edema (especially in children): Headache, altered mental status,
+  bradycardia - MANNITOL'
+- Anion gap = Na - (Cl + HCO3), expect >12 in DKA
+referrals:
+- ICU admission if pH <7.0, altered mental status, hemodynamic instability
+- Endocrinology consult for transition to subcutaneous insulin and outpatient management
+differentials: []
+trace:
+  source: American Diabetes Association (ADA) Standards of Care, Endocrine Society
+    Clinical Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

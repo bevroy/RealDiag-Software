@@ -1,175 +1,54 @@
 tree_id: PULM-ILD
-name: Interstitial Lung Disease (ILD) Evaluation
+name: Interstitial Lung Disease
 family: Pulmonology
-specialty: Pulmonology, Rheumatology
-chief_complaint: Progressive Dyspnea, Chronic Cough, Abnormal Chest Imaging
-description: Comprehensive evaluation and management of interstitial lung disease
-version: "1.0"
-icd10: G45.9
+specialty: Pulmonology
+icd10:
+- J84.9
+- J84.10
+- J84.112
+snomed:
+- '51615001'
+urgency: medium
+description: Comprehensive evaluation and management of Interstitial Lung Disease
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: ild_presentation
-
-nodes:
-  - id: ild_presentation
-    type: question
-    text: "ILD classification?"
-    options:
-      - label: "Idiopathic pulmonary fibrosis (IPF) suspected"
-        next: ipf
-      - label: "Connective tissue disease-related ILD"
-        next: ctd_ild
-      - label: "Hypersensitivity pneumonitis (HP)"
-        next: hypersensitivity_pneumonitis
-      - label: "Sarcoidosis"
-        next: sarcoidosis_ild
-
-  - id: ipf
-    type: diagnosis
-    name: "Idiopathic Pulmonary Fibrosis (IPF)"
-    icd10: "J84.112"
-    urgency: medium
-    workup:
-      - Clinical presentation - Progressive dyspnea, chronic dry cough, bibasilar inspiratory crackles (velcro crackles), clubbing (25-50%)
-      - Age typically >50 years, male predominance, smoking history common
-      - Pulmonary function tests (PFTs) - Restrictive pattern (reduced FVC, reduced TLC), reduced DLCO, normal or increased FEV1/FVC ratio, impaired gas exchange
-      - 6-minute walk test - Reduced distance, oxygen desaturation
-      - High-resolution CT chest (HRCT) - DIAGNOSTIC in classic cases
-      - Usual interstitial pneumonia (UIP) pattern - Subpleural and basal predominant reticular opacities, honeycombing (dilated cystic airspaces with thick walls), traction bronchiectasis, minimal ground-glass opacity, absence of features inconsistent with UIP (upper lobe predominance, peribronchovascular predominance, extensive ground-glass, nodules, consolidation)
-      - Possible UIP pattern - Some but not all features of UIP
-      - Labs - Rule out secondary causes: ANA, RF, anti-CCP, anti-Scl-70, myositis panel, hypersensitivity panel (serum precipitins if HP suspected)
-      - Surgical lung biopsy (if HRCT non-diagnostic and no high surgical risk) - Histologic UIP pattern confirms IPF
-      - Bronchoscopy with BAL - Low diagnostic yield for IPF, mainly to rule out infection, malignancy, eosinophilic pneumonia
-      - Diagnosis requires - UIP pattern on HRCT in appropriate clinical context (>50 years, progressive dyspnea, bibasilar crackles) AND exclusion of other causes (CTD, HP, drug-induced)
-    treatment:
-      - Antifibrotic therapy (slows progression, does NOT reverse fibrosis)
-      - Nintedanib (Ofev) 150mg PO BID - Tyrosine kinase inhibitor, slows decline in FVC by ~50%, side effects (diarrhea 60%, nausea, LFT elevation)
-      - Pirfenidone (Esbriet) 801mg PO TID - Antifibrotic/anti-inflammatory, similar efficacy to nintedanib, side effects (nausea, rash, photosensitivity)
-      - Start early (mild-moderate disease, FVC >50% predicted)
-      - Both reduce rate of FVC decline and possibly reduce mortality
-      - Avoid corticosteroids and immunosuppression (NOT effective in IPF, increase mortality)
-      - Supplemental oxygen - If resting SpO2 <88% or exertional desaturation
-      - Pulmonary rehabilitation - Improves exercise capacity and quality of life
-      - Treat comorbidities
-      - Gastroesophageal reflux (very common) - PPI therapy (reflux may worsen fibrosis)
-      - Pulmonary hypertension (common in advanced IPF) - Right heart catheterization, consider pulmonary vasodilators
-      - Obstructive sleep apnea - Sleep study, CPAP
-      - Lung transplant evaluation - Refer early (FVC <80% or DLCO <40% or significant decline)
-      - IPF is leading indication for lung transplant
-      - Palliative care - Discuss prognosis (median survival 3-5 years from diagnosis), advance directives, hospice when appropriate
-      - Avoid triggering factors - Smoking cessation (critical), avoid environmental exposures
-      - Pulmonology referral, ideally ILD specialist
-      - Prognosis - Progressive, irreversible, median survival 3-5 years, worse with older age, lower FVC/DLCO, greater extent on HRCT, acute exacerbations (sudden worsening with high mortality)
-
-  - id: ctd_ild
-    type: diagnosis
-    name: "Connective Tissue Disease-Associated ILD"
-    icd10: "J99"
-    urgency: medium
-    workup:
-      - CTD-ILD can occur with any connective tissue disease
-      - Most common - Systemic sclerosis (scleroderma) 80%, rheumatoid arthritis 10-20%, polymyositis/dermatomyositis 30-50%, Sjögren syndrome, mixed connective tissue disease, lupus (rare)
-      - ILD may precede CTD diagnosis (interstitial pneumonia with autoimmune features - IPAF)
-      - HRCT patterns
-      - Nonspecific interstitial pneumonia (NSIP) - Most common in CTD-ILD, ground-glass opacities, reticular opacities, subpleural sparing, better prognosis than UIP
-      - UIP pattern - Can occur especially in RA (RA-UIP), worse prognosis
-      - Organizing pneumonia (OP) - Consolidations, peribronchovascular/subpleural, more responsive to treatment
-      - PFTs - Restrictive pattern, reduced DLCO
-      - Autoimmune serologies - ANA, RF, anti-CCP, anti-Scl-70 (scleroderma-ILD), anti-Jo-1 (antisynthetase syndrome with myositis and ILD), anti-Ro/La (Sjögren), myositis-specific antibodies (MDA5, TIF1-gamma)
-      - Lung biopsy if diagnosis unclear (pattern helps guide treatment)
-    treatment:
-      - Immunosuppression (unlike IPF, CTD-ILD responsive to immunosuppression)
-      - Mycophenolate mofetil 1500-3000mg PO daily in divided doses - First-line for most CTD-ILD (especially scleroderma-ILD), takes 3-6 months for effect
-      - Corticosteroids - Prednisone 0.5-1mg/kg/day initially, taper slowly over months (useful for acute flares or NSIP/OP patterns)
-      - Cyclophosphamide IV monthly x 6-12 months - For severe progressive CTD-ILD not responding to MMF, risk of toxicity
-      - Azathioprine - Alternative steroid-sparing agent
-      - Rituximab (anti-CD20) - For refractory CTD-ILD, especially RA-ILD or myositis-ILD
-      - Tocilizumab (IL-6 inhibitor) - Emerging option for scleroderma-ILD
-      - Nintedanib - FDA-approved for slowing progression of scleroderma-ILD (can combine with immunosuppression)
-      - Treat underlying CTD
-      - Pulmonary rehabilitation
-      - Supplemental oxygen as needed
-      - Lung transplant evaluation if progressive despite treatment
-      - Rheumatology and pulmonology co-management
-      - Prognosis - Better than IPF overall, especially NSIP pattern, UIP pattern has worse prognosis similar to IPF
-
-  - id: hypersensitivity_pneumonitis
-    type: diagnosis
-    name: "Hypersensitivity Pneumonitis (HP)"
-    icd10: "J67.9"
-    urgency: medium
-    workup:
-      - Immune-mediated lung disease from inhalation of organic antigens
-      - Common exposures - Birds (feather duvets, pet birds - bird fancier's lung), mold (hot tubs, humidifiers, water damage), hay/grain (farmer's lung), occupational (metalworking fluids, isocyanates)
-      - Acute HP - Hours after exposure, dyspnea, cough, fever, myalgias, resolves with avoidance
-      - Chronic HP - Insidious onset, progressive dyspnea, weight loss, may have no identifiable exposure
-      - HRCT patterns
-      - Acute/subacute - Ground-glass opacities, poorly defined centrilobular nodules, mosaic attenuation/air trapping (on expiratory images)
-      - Chronic (fibrotic) HP - Upper/mid-lung predominant fibrosis (unlike IPF which is basal), reticular opacities, traction bronchiectasis, honeycombing, mosaic attenuation
-      - Three-density sign - Ground-glass, normal lung, air trapping on same image
-      - Centrilobular nodules distinguish from IPF
-      - PFTs - Restrictive or mixed obstructive-restrictive, reduced DLCO
-      - Serum precipitins (IgG antibodies to specific antigens) - Low sensitivity/specificity (positive in exposed individuals without disease, negative in some with HP)
-      - Bronchoscopy with BAL - Lymphocytosis (>30%, often >50%) with reduced CD4/CD8 ratio (<1) supports HP
-      - Lung biopsy - Poorly formed noncaseating granulomas, chronic bronchiolitis, chronic interstitial inflammation
-      - Diagnosis - Compatible clinical/radiologic/pathologic findings + identified exposure (if possible)
-    treatment:
-      - Antigen avoidance (MOST IMPORTANT)
-      - Remove bird from home, replace feather bedding
-      - Remediate mold exposure (dehumidify, fix water leaks, professional mold removal)
-      - Occupational change if work-related
-      - Complete avoidance can lead to improvement or resolution (if caught early)
-      - Corticosteroids (for acute or progressive disease)
-      - Prednisone 0.5-1mg/kg/day x 1-3 months, then slow taper over 6-12 months
-      - Used for acute symptomatic HP or chronic progressive HP
-      - Immunosuppression (if progressive fibrotic HP despite steroids and avoidance)
-      - Mycophenolate mofetil or azathioprine (steroid-sparing)
-      - Supplemental oxygen
-      - Pulmonary rehabilitation
-      - Lung transplant if progressive fibrosis despite treatment
-      - Prognosis - Excellent if exposure identified and avoided early, chronic fibrotic HP has poor prognosis (similar to IPF) if advanced
-
-  - id: sarcoidosis_ild
-    type: diagnosis
-    name: "Pulmonary Sarcoidosis"
-    icd10: "D86.0"
-    urgency: low
-    workup:
-      - Multisystem granulomatous disease, lungs involved in >90%
-      - Clinical - Often asymptomatic (incidental CXR finding), dyspnea, cough, chest pain, Löfgren syndrome (acute sarcoidosis with erythema nodosum, bilateral hilar lymphadenopathy, arthritis - excellent prognosis)
-      - Extrapulmonary manifestations - Lymph nodes, eyes (uveitis), skin (erythema nodosum, lupus pernio), heart (conduction abnormalities, cardiomyopathy), nervous system, liver, spleen, hypercalcemia/hypercalciuria (granulomas produce calcitriol)
-      - Chest X-ray staging
-      - Stage 0 - Normal CXR
-      - Stage I - Bilateral hilar lymphadenopathy (BHL) alone
-      - Stage II - BHL + parenchymal infiltrates
-      - Stage III - Parenchymal infiltrates without BHL
-      - Stage IV - Pulmonary fibrosis
-      - HRCT - Perilymphatic nodules (along bronchovascular bundles, interlobular septa, pleura), upper/mid-lung predominant, fibrosis in advanced disease
-      - PFTs - Restrictive pattern (can be normal in early disease), reduced DLCO
-      - Labs - Elevated ACE (60% sensitive, not specific), hypercalcemia, elevated alkaline phosphatase, lymphopenia, elevated ESR
-      - Tissue biopsy (required for diagnosis) - Noncaseating granulomas, rule out infection (AFB/fungal stains negative)
-      - Bronchoscopy with transbronchial biopsy and EBUS-TBNA (lymph node sampling) - High yield
-      - Endobronchial biopsy if mucosal involvement visible
-      - BAL - Elevated CD4/CD8 ratio (>3.5) supports sarcoidosis
-      - Ophthalmology exam (screen for uveitis)
-      - ECG, consider cardiac MRI if cardiac symptoms (PVCs, heart block, heart failure)
-    treatment:
-      - Observation - Asymptomatic stage I (BHL alone) often spontaneously resolves, no treatment needed, follow with CXR every 6-12 months
-      - Indications for treatment - Progressive pulmonary disease (worsening PFTs or imaging), symptomatic disease, extrapulmonary involvement (cardiac, neuro, eyes, hypercalcemia)
-      - Corticosteroids (first-line)
-      - Prednisone 20-40mg PO daily x 3-6 months, taper slowly over 9-12 months total
-      - Monitor PFTs and CXR for response
-      - High relapse rate when steroids tapered (50%)
-      - Steroid-sparing agents (if relapse on taper or chronic steroid need)
-      - Methotrexate 10-25mg PO weekly + folic acid
-      - Azathioprine 1-2mg/kg/day
-      - Mycophenolate mofetil
-      - Hydroxychloroquine 200-400mg daily (for cutaneous and pulmonary)
-      - Biologics (refractory disease)
-      - Infliximab (anti-TNF) 3-5mg/kg IV - Very effective for refractory pulmonary, cardiac, neuro sarcoidosis
-      - Adalimumab (anti-TNF)
-      - Hypercalcemia - Prednisone, hydration, avoid vitamin D and calcium
-      - Cardiac sarcoidosis - Prednisone essential, ICD placement if conduction disease or ventricular arrhythmias
-      - Neurosarcoidosis - High-dose prednisone, often requires steroid-sparing agents or biologics
-      - Lung transplant if end-stage fibrosis
-      - Prognosis - Variable, 60% spontaneous remission (especially Löfgren syndrome), chronic or progressive in 30%, stage IV fibrosis irreversible
+homeopathy: []
+presentations:
+- Progressive dyspnea on exertion
+- Dry cough
+- Inspiratory crackles (Velcro rales)
+- Digital clubbing
+- Restrictive pattern on PFTs
+workup:
+- High-resolution CT chest (HRCT) - diagnostic for UIP pattern
+- 'PFTs: Restrictive (low FVC, FEV1/FVC normal or high), reduced DLCO'
+- 6-minute walk test with oxygen desaturation
+- 'CTD workup: ANA, RF, anti-CCP, anti-Scl-70, Jo-1, myositis panel'
+- Lung biopsy (surgical or transbronchial) if diagnosis uncertain after HRCT
+treatment:
+- 'Guideline-based treatment options for Interstitial Lung Disease include:'
+- 'IPF: Antifibrotics - pirfenidone 801mg TID or nintedanib 150mg BID (slow progression)
+  (ATS 2023)'
+- 'CTD-ILD: Immunosuppression - mycophenolate 1000-1500mg BID or cyclophosphamide
+  (ATS 2023)'
+- Oxygen therapy if SpO2 <88% at rest or with exertion (ATS 2023)
+- Pulmonary rehabilitation (ATS 2023)
+- Lung transplant referral if FVC <70% predicted or rapid decline (>10% FVC/year)
+  (ATS 2023)
+clinical_pearls:
+- Idiopathic pulmonary fibrosis (IPF) most common ILD, median survival 3-5 years
+- 'UIP pattern on HRCT: Honeycombing, subpleural/basal predominance, traction bronchiectasis'
+- Avoid corticosteroids in IPF (ineffective and increase mortality)
+- Antifibrotics (pirfenidone, nintedanib) slow decline by ~50% in IPF
+- 'Connective tissue disease-ILD: Scleroderma, RA, polymyositis - responds to immunosuppression'
+- 'Hypersensitivity pneumonitis: Exposure history (birds, mold) - remove exposure'
+referrals:
+- Pulmonology for all suspected ILD (HRCT interpretation, treatment)
+- Rheumatology if CTD-ILD suspected
+- Lung transplant center if FVC <70% or progressive despite treatment
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

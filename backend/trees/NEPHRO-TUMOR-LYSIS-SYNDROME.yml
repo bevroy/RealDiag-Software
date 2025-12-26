@@ -1,0 +1,54 @@
+tree_id: NEPHRO-TUMOR-LYSIS-SYNDROME
+name: Tumor Lysis Syndrome
+family: Nephrology
+specialty: Nephrology
+icd10:
+- E88.3
+snomed:
+- '42182001'
+urgency: medium
+description: Comprehensive evaluation and management of Tumor Lysis Syndrome
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Hyperkalemia, hyperphosphatemia, hypocalcemia, hyperuricemia
+- Acute kidney injury (uric acid nephropathy)
+- Occurs 12-72 hours after chemotherapy initiation
+- Nausea, vomiting, diarrhea, lethargy, seizures (from electrolyte abnormalities)
+- 'High-risk: Bulky lymphoma, acute leukemia, high WBC count'
+- ECG changes from hyperkalemia (peaked T waves, widened QRS)
+workup:
+- Basic metabolic panel q6-8hr (K+, PO4, Ca2+, Cr, uric acid)
+- ECG (assess for hyperkalemia)
+- LDH (marker of cell turnover)
+- Urinalysis (uric acid crystals)
+treatment:
+- 'Guideline-based treatment options for Tumor Lysis Syndrome include:'
+- 'Prevention: IV fluids 3 L/m²/day (200-300 mL/hr) (KDIGO 2024)'
+- Allopurinol 300-600mg daily (start 24-48hr before chemo) (KDIGO 2024)
+- Rasburicase 0.2 mg/kg IV if high risk (bulky disease, high WBC, elevated uric acid)
+  (KDIGO 2024)
+- 'Treat electrolytes: Insulin/glucose for K+, avoid calcium unless symptomatic (forms
+  Ca-PO4 crystals) (KDIGO 2024)'
+- 'Dialysis if: K+ >6.5, Cr >10, or Ca x PO4 >70 (KDIGO 2024)'
+clinical_pearls:
+- 'Prevent with: Aggressive hydration (3L/m²/day), allopurinol (or rasburicase if
+  high risk)'
+- 'Rasburicase: Recombinant urate oxidase, rapidly lowers uric acid (expensive, use
+  if high risk)'
+- Avoid allopurinol if already elevated uric acid (slow onset) - use rasburicase
+- Monitor labs q6-8hr for first 24-48hr after chemotherapy
+- 'Dialysis if: Refractory hyperkalemia, severe AKI, or calcium-phosphate product
+  >70'
+referrals:
+- Nephrology consult for all tumor lysis syndrome
+- Oncology (manage chemotherapy)
+- ICU if severe electrolyte abnormalities
+- Dialysis if refractory
+differentials: []
+trace:
+  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
+    Society of Nephrology (ASN)'
+  version: 0.1.0
+  last_updated: '2024-12-26'

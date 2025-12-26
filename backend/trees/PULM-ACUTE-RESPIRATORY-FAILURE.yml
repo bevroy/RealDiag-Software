@@ -2,389 +2,52 @@ tree_id: PULM-ACUTE-RESPIRATORY-FAILURE
 name: Acute Respiratory Failure
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Dyspnea with hypoxemia and/or hypercapnia requiring respiratory support
-description: Acute respiratory failure (ARF) is life-threatening inability of the respiratory system to maintain adequate gas exchange, resulting in hypoxemia (PaO2 under 60 mmHg on room air or SpO2 under 90%) and/or hypercapnia (PaCO2 over 50 mmHg with pH under 7.35). Classified as Type 1 (hypoxemic, PaO2 under 60) or Type 2 (hypercapnic, PaCO2 over 50). Type 1 from V/Q mismatch, shunt, or diffusion impairment (pneumonia, ARDS, pulmonary edema, PE). Type 2 from hypoventilation or increased CO2 production (COPD, asthma, neuromuscular weakness, CNS depression). Clinical manifestations include dyspnea, tachypnea, use of accessory muscles, altered mental status, cyanosis. ABG is diagnostic. Treatment depends on underlying cause and includes supplemental oxygen, mechanical ventilation (invasive or non-invasive), and treatment of precipitating condition. Complications include multiorgan failure, barotrauma, ventilator-associated pneumonia. Mortality ranges from 15-40% depending on etiology and severity.
-icd10: J96.00, J96.01, J96.02
-urgency: emergent
-
-workup:
-  - Acute respiratory failure classification:
-    - Type 1 (Hypoxemic respiratory failure):
-      - Definition: PaO2 under 60 mmHg on room air (or SpO2 under 90%)
-      - PaCO2 normal or low (respiratory alkalosis from hyperventilation)
-      - Mechanism: V/Q mismatch, shunt, or diffusion impairment
-      - Causes:
-        - Pneumonia (bacterial, viral, fungal)
-        - ARDS (acute respiratory distress syndrome)
-        - Pulmonary edema (cardiogenic or non-cardiogenic)
-        - Pulmonary embolism
-        - Pneumothorax
-        - Pulmonary hemorrhage
-        - Interstitial lung disease
-        - Atelectasis
-      - Responds to supplemental oxygen (increases FiO2)
-    - Type 2 (Hypercapnic respiratory failure):
-      - Definition: PaCO2 over 50 mmHg with pH under 7.35 (respiratory acidosis)
-      - PaO2 variable (may be normal or low)
-      - Mechanism: Hypoventilation (decreased minute ventilation or increased dead space)
-      - Causes:
-        - COPD exacerbation (most common cause of chronic Type 2)
-        - Severe asthma
-        - Neuromuscular weakness (myasthenia gravis, ALS, Guillain-Barré)
-        - CNS depression (opioids, sedatives, stroke, increased ICP)
-        - Chest wall abnormalities (kyphoscoliosis, obesity hypoventilation)
-        - Upper airway obstruction
-        - Fatigue of respiratory muscles
-      - Requires ventilation support (NIV or intubation)
-    - Mixed Type 1 and Type 2:
-      - Both hypoxemia AND hypercapnia
-      - Severe underlying lung disease or respiratory muscle fatigue
-  - Clinical presentation:
-    - Respiratory symptoms:
-      - Dyspnea (subjective shortness of breath)
-      - Tachypnea (respiratory rate over 20-24 breaths/min)
-      - Use of accessory muscles (sternocleidomastoid, scalenes)
-      - Nasal flaring
-      - Paradoxical abdominal breathing (respiratory muscle fatigue)
-      - Inability to speak in full sentences
-      - Tripod positioning (leaning forward to recruit accessory muscles)
-    - Neurologic symptoms (from hypoxemia or hypercapnia):
-      - Agitation, restlessness, confusion
-      - Altered mental status or lethargy
-      - Headache (from hypercapnia-induced cerebral vasodilation)
-      - Somnolence or coma (severe hypercapnia)
-      - Asterixis (CO2 retention)
-    - Cardiovascular:
-      - Tachycardia
-      - Hypertension (early, from catecholamine release)
-      - Hypotension (late, from severe hypoxemia or respiratory arrest)
-      - Arrhythmias
-      - Cyanosis (central=lips/tongue, peripheral=nail beds)
-    - Other:
-      - Diaphoresis
-      - Fatigue and exhaustion
-  - Physical examination:
-    - Vital signs:
-      - Respiratory rate (tachypnea over 24, bradypnea under 12 ominous)
-      - Oxygen saturation (SpO2 under 90% on room air)
-      - Heart rate (tachycardia)
-      - Blood pressure (assess for shock)
-      - Temperature (fever suggests infection)
-    - General appearance:
-      - Distress level (mild, moderate, severe)
-      - Position (tripod, unable to lie flat)
-      - Cyanosis
-      - Level of consciousness
-    - Respiratory exam:
-      - Accessory muscle use
-      - Paradoxical breathing (abdomen moves in during inspiration)
-      - Chest expansion (asymmetric suggests pneumothorax, effusion)
-      - Percussion (dullness = consolidation/effusion, hyperresonance = pneumothorax)
-      - Auscultation:
-        - Crackles/rales (pneumonia, pulmonary edema)
-        - Wheezing (asthma, COPD, heart failure)
-        - Diminished breath sounds (pneumothorax, effusion, atelectasis)
-        - Bronchial breath sounds (consolidation)
-        - Stridor (upper airway obstruction)
-    - Cardiovascular:
-      - JVD (elevated in heart failure, cor pulmonale)
-      - Peripheral edema (heart failure)
-      - Heart sounds (S3 gallop in heart failure)
-    - Neurologic:
-      - Mental status (confusion, lethargy, coma)
-      - Asterixis (CO2 retention)
-      - Focal deficits (stroke)
-  - Arterial blood gas (CRITICAL for diagnosis):
-    - PaO2:
-      - Normal: 80-100 mmHg on room air
-      - Mild hypoxemia: 60-79 mmHg
-      - Moderate hypoxemia: 40-59 mmHg
-      - Severe hypoxemia: Under 40 mmHg
-    - PaCO2:
-      - Normal: 35-45 mmHg
-      - Hypocapnia: Under 35 mmHg
-      - Hypercapnia: Over 45 mmHg
-      - Severe hypercapnia: Over 50 mmHg with acidosis
-    - pH:
-      - Normal: 7.35-7.45
-      - Respiratory acidosis: pH under 7.35 with elevated PaCO2
-      - Respiratory alkalosis: pH over 7.45 with low PaCO2
-    - Bicarbonate (HCO3):
-      - Normal: 22-26 mEq/L
-      - Elevated: Metabolic compensation for chronic respiratory acidosis
-      - Low: Metabolic acidosis or compensation for respiratory alkalosis
-    - A-a gradient (alveolar-arterial oxygen gradient):
-      - Calculate: A-a gradient = PAO2 - PaO2
-      - PAO2 = (FiO2 x [Patm - PH2O]) - (PaCO2 / RQ)
-      - PAO2 = (0.21 x [760 - 47]) - (PaCO2 / 0.8) on room air
-      - Normal A-a gradient: Age/4 + 4 (increases with age)
-      - Elevated A-a gradient: V/Q mismatch, shunt, diffusion impairment
-      - Normal A-a gradient: Hypoventilation
-  - Pulse oximetry:
-    - Continuous monitoring
-    - SpO2 under 90% correlates with PaO2 under 60 mmHg
-    - Limitations: Inaccurate in shock, hypothermia, carbon monoxide poisoning, methemoglobinemia
-  - Additional laboratory tests:
-    - Complete blood count:
-      - Leukocytosis (infection)
-      - Anemia (decreased oxygen carrying capacity)
-      - Polycythemia (chronic hypoxemia)
-    - Basic metabolic panel:
-      - Electrolyte abnormalities
-      - Renal function
-    - Lactate (tissue hypoxia, sepsis)
-    - Troponin (myocardial ischemia from hypoxemia)
-    - BNP or NT-proBNP (heart failure)
-    - Procalcitonin (bacterial infection)
-    - Sputum culture (pneumonia)
-    - Blood cultures (sepsis)
-  - Imaging:
-    - Chest X-ray (ALWAYS obtain):
-      - Pneumonia (consolidation, infiltrates)
-      - Pulmonary edema (bilateral infiltrates, cardiomegaly)
-      - ARDS (bilateral diffuse infiltrates)
-      - Pneumothorax (absent lung markings, pleural line)
-      - Pleural effusion (blunted costophrenic angles)
-      - Atelectasis
-    - CT chest (if diagnosis unclear):
-      - PE (CT pulmonary angiogram)
-      - Interstitial lung disease
-      - Pulmonary hemorrhage
-    - Echocardiogram:
-      - Assess cardiac function (EF, wall motion)
-      - Valvular disease
-      - Pulmonary hypertension
-      - Pericardial effusion
-  - Other diagnostic tests:
-    - ECG (myocardial ischemia, PE, arrhythmias)
-    - Pulmonary function tests (not in acute setting)
-    - Bronchoscopy (if hemoptysis, foreign body, infection in immunocompromised)
-
-treatment:
-  - ABC stabilization and initial management:
-    - Airway:
-      - Assess patency
-      - Position airway (jaw thrust, chin lift)
-      - Consider airway adjuncts (oropharyngeal or nasopharyngeal airway)
-      - Intubation if unable to protect airway, apnea, or impending respiratory arrest
-    - Breathing:
-      - Supplemental oxygen (see below)
-      - Ventilation support (NIV or mechanical ventilation)
-    - Circulation:
-      - IV access
-      - Fluid resuscitation if hypotensive
-      - Vasopressors if shock
-    - Monitor:
-      - Continuous pulse oximetry (goal SpO2 88-92% in COPD, 92-96% in others)
-      - Cardiac monitoring
-      - Frequent vital signs
-  - Oxygen therapy (for Type 1 hypoxemic respiratory failure):
-    - Goal: PaO2 over 60 mmHg or SpO2 88-92% (COPD) or 92-96% (others)
-    - Low-flow oxygen devices (variable FiO2):
-      - Nasal cannula: 1-6 L/min (FiO2 24-44%)
-      - Simple face mask: 6-10 L/min (FiO2 35-50%)
-      - Non-rebreather mask: 10-15 L/min (FiO2 60-80%)
-    - High-flow oxygen devices (fixed FiO2):
-      - Venturi mask: Precise FiO2 (24%, 28%, 31%, 35%, 40%, 50%)
-      - Preferred in COPD (avoid oxygen-induced hypercapnia)
-    - High-flow nasal cannula (HFNC):
-      - Flow rates up to 60 L/min, FiO2 up to 100%
-      - Provides PEEP, washes out dead space, improves comfort
-      - May avoid intubation in some patients
-      - Consider for moderate-severe hypoxemia (PaO2/FiO2 under 300)
-    - Caution in COPD where oxygen can worsen hypercapnia (blunt hypoxic drive)
-      - Target SpO2 88-92% in COPD (not higher)
-      - Monitor for worsening hypercapnia with serial ABGs
-  - Non-invasive ventilation (NIV) (for Type 2 hypercapnic respiratory failure or refractory hypoxemia):
-    - Indications:
-      - COPD exacerbation with pH 7.25-7.35 (most effective)
-      - Cardiogenic pulmonary edema
-      - Hypoxemic respiratory failure (pneumonia, ARDS) - less effective
-      - Post-extubation respiratory failure
-      - Immunocompromised patients (avoid intubation)
-    - Contraindications:
-      - Inability to protect airway
-      - Impaired consciousness (GCS under 11-12)
-      - Hemodynamic instability or shock
-      - Copious secretions
-      - Facial trauma or surgery
-      - Recent upper GI surgery
-      - Patient unable to tolerate mask
-    - BiPAP (bilevel positive airway pressure):
-      - Most common NIV mode
-      - IPAP (inspiratory positive airway pressure): Start 8-12 cm H2O, titrate up
-      - EPAP (expiratory positive airway pressure): Start 3-5 cm H2O
-      - Provides ventilatory support (reduces work of breathing, improves alveolar ventilation)
-    - CPAP (continuous positive airway pressure):
-      - Single pressure level (5-10 cm H2O)
-      - Best for cardiogenic pulmonary edema (reduces preload and afterload)
-    - Monitor response within 1-2 hours:
-      - Clinical improvement (decreased RR, improved mental status)
-      - ABG improvement (decreased PaCO2, increased PaO2, improved pH)
-      - If no improvement or worsening: Intubate
-    - NIV success rates:
-      - COPD: 80-85% avoid intubation
-      - Cardiogenic pulmonary edema: 70%
-      - Pneumonia/ARDS: 50-60%
-  - Mechanical ventilation (intubation and invasive ventilation):
-    - Indications:
-      - Severe hypoxemia despite maximal oxygen (PaO2 under 50-60 on 100% FiO2)
-      - Severe hypercapnia (pH under 7.25) or worsening despite NIV
-      - Respiratory arrest or apnea
-      - Inability to protect airway (GCS under 8)
-      - Hemodynamic instability
-      - Respiratory muscle fatigue
-      - Impending respiratory arrest (severe distress, paradoxical breathing)
-      - NIV failure
-    - Rapid sequence intubation (RSI):
-      - Pre-oxygenate with 100% FiO2 (non-rebreather or bag-valve-mask)
-      - Induction agent:
-        - Etomidate 0.3 mg/kg IV (hemodynamically stable)
-        - Ketamine 1-2 mg/kg IV (hypotensive, bronchospasm)
-        - Propofol 1-2 mg/kg IV (hemodynamically stable, caution in shock)
-      - Paralytic agent:
-        - Succinylcholine 1-1.5 mg/kg IV (rapid onset, contraindicated in hyperkalemia)
-        - Rocuronium 1-1.2 mg/kg IV (alternative to succinylcholine)
-      - Post-intubation sedation and analgesia:
-        - Propofol 5-50 mcg/kg/min (short-acting)
-        - Fentanyl 25-100 mcg IV bolus, then 25-200 mcg/hr infusion
-        - Midazolam 1-5 mg IV bolus, then 1-5 mg/hr infusion
-    - Mechanical ventilation settings:
-      - Mode:
-        - Assist-control (AC) or volume control (VC): Most common
-        - SIMV (synchronized intermittent mandatory ventilation)
-        - Pressure support (PS)
-      - Initial settings:
-        - Tidal volume: 6-8 mL/kg ideal body weight (lower in ARDS)
-        - Respiratory rate: 12-16 breaths/min
-        - FiO2: Start 100%, titrate down to maintain SpO2 88-92% (COPD) or 92-96%
-        - PEEP: 5 cm H2O (higher in ARDS, up to 10-15 cm H2O)
-      - Lung-protective ventilation (for ARDS):
-        - Tidal volume 6 mL/kg ideal body weight (not actual weight)
-        - Plateau pressure under 30 cm H2O
-        - Permissive hypercapnia (allow PaCO2 to rise if needed to avoid barotrauma)
-        - Higher PEEP (10-15 cm H2O)
-  - Treatment of underlying cause (CRITICAL):
-    - Pneumonia:
-      - Antibiotics (empiric coverage, then narrow based on cultures)
-      - Supportive care
-    - COPD exacerbation:
-      - Bronchodilators (albuterol, ipratropium)
-      - Corticosteroids (prednisone 40 mg daily or methylprednisolone)
-      - Antibiotics if purulent sputum
-      - NIV
-    - Asthma exacerbation:
-      - Bronchodilators (albuterol continuous nebulizers)
-      - Corticosteroids (methylprednisolone IV or prednisone PO)
-      - Magnesium sulfate 2 grams IV
-      - Consider heliox, ketamine, or ECMO if refractory
-    - Cardiogenic pulmonary edema:
-      - Diuretics (furosemide 40-80 mg IV)
-      - Nitroglycerin (SL or IV infusion)
-      - BiPAP or CPAP
-      - Treat underlying cause (MI, hypertensive crisis)
-    - Pulmonary embolism:
-      - Anticoagulation (heparin)
-      - Thrombolysis if massive PE with hemodynamic instability
-    - ARDS:
-      - Lung-protective ventilation
-      - Prone positioning (if P/F ratio under 150)
-      - Conservative fluid strategy
-      - Treat underlying cause (sepsis, pneumonia, trauma)
-    - Neuromuscular weakness:
-      - Treat underlying cause (e.g., pyridostigmine for myasthenia gravis)
-      - Mechanical ventilation support
-    - Opioid overdose:
-      - Naloxone 0.4-2 mg IV (repeat every 2-3 minutes)
-      - Ventilation support
-  - Monitoring during treatment:
-    - Continuous:
-      - Pulse oximetry (SpO2)
-      - Cardiac monitoring
-      - Respiratory rate
-    - Serial ABGs:
-      - Every 30-60 minutes initially during NIV or after ventilator changes
-      - Goal: PaO2 over 60 mmHg, pH over 7.3, PaCO2 improving
-    - Chest X-ray daily (assess for complications, progression)
-    - Labs: BMP, CBC, lactate
-  - Complications:
-    - Barotrauma:
-      - Pneumothorax (from high airway pressures)
-      - Pneumomediastinum
-      - Subcutaneous emphysema
-      - Treat with chest tube
-    - Ventilator-associated pneumonia (VAP):
-      - Occurs after 48 hours of mechanical ventilation
-      - Prevention: Elevate head of bed 30-45°, daily sedation vacation, oral care
-      - Treatment: Broad-spectrum antibiotics
-    - Ventilator-induced lung injury (VILI):
-      - From high tidal volumes or plateau pressures
-      - Prevention: Lung-protective ventilation (6 mL/kg, plateau under 30)
-    - Hypotension:
-      - From positive pressure ventilation (decreased venous return)
-      - Treat with fluids, reduce PEEP if needed
-    - Oxygen toxicity:
-      - From prolonged high FiO2 (over 60% for over 48 hours)
-      - Titrate FiO2 to lowest level maintaining adequate oxygenation
-    - Multiorgan failure (kidney, liver, CNS from prolonged hypoxemia)
-    - ICU-acquired weakness
-    - Delirium
-  - Liberation from mechanical ventilation (weaning):
-    - Daily spontaneous breathing trials (SBT):
-      - Once improving (FiO2 under 40-50%, PEEP under 5-8, no vasopressors)
-      - T-piece trial or low pressure support (5-7 cm H2O) for 30-120 minutes
-      - Success: RR under 35, SpO2 over 90%, no distress
-      - If successful SBT: Consider extubation
-    - Extubation criteria:
-      - Able to protect airway (cough, gag reflex)
-      - Alert and following commands
-      - Minimal secretions
-      - Hemodynamically stable
-      - Passed SBT
-    - Post-extubation:
-      - Monitor closely for stridor or respiratory distress
-      - Consider NIV after extubation to prevent reintubation (especially COPD)
-
-clinical_pearls:
-  - ARF classified as Type 1 (hypoxemic, PaO2 under 60) or Type 2 (hypercapnic, PaCO2 over 50 with pH under 7.35)
-  - Type 1 causes: pneumonia, ARDS, pulmonary edema, PE (V/Q mismatch or shunt)
-  - Type 2 causes: COPD, asthma, neuromuscular weakness, CNS depression (hypoventilation)
-  - ABG is diagnostic - always obtain to confirm respiratory failure and guide treatment
-  - A-a gradient distinguishes hypoventilation (normal gradient) from V/Q mismatch/shunt (elevated gradient)
-  - In COPD, target SpO2 88-92% (not higher) to avoid oxygen-induced hypercapnia
-  - NIV most effective for COPD exacerbation (80-85% avoid intubation) and cardiogenic pulmonary edema
-  - BiPAP reduces work of breathing and improves alveolar ventilation (Type 2 failure)
-  - CPAP reduces preload and afterload (best for cardiogenic pulmonary edema)
-  - Lung-protective ventilation for ARDS: Tidal volume 6 mL/kg ideal body weight, plateau pressure under 30
-  - Indications for intubation: Severe hypoxemia despite maximal O2, pH under 7.25, respiratory arrest, inability to protect airway
-  - Monitor NIV response within 1-2 hours - if no improvement or worsening, intubate
-  - Treat underlying cause (antibiotics for pneumonia, bronchodilators for COPD, diuretics for heart failure)
-  - Mortality 15-40% depending on etiology (ARDS worst, COPD best with treatment)
-
-presentations:
-  - Dyspnea
-  - Tachypnea
-  - Use of accessory muscles
-  - Hypoxemia (SpO2 under 90%)
-  - Hypercapnia (PaCO2 over 50)
-  - Altered mental status
-  - Confusion or lethargy
-  - Cyanosis
-  - Tachycardia
-  - Diaphoresis
-  - Inability to speak in full sentences
-  - Tripod positioning
-  - Respiratory distress
-  - Agitation or restlessness
-
+icd10:
+- J96.00
+- J96.01
+- J96.02
 snomed:
-  - "409622000"  # Acute respiratory failure
-  - "65710008"   # Acute respiratory failure with hypoxia
-  - "444932008"  # Acute respiratory failure with hypercapnia
-
-citations:
-  - Roussos C et al. Respiratory failure. Eur Respir J Suppl 2003;47:3s-14s
-  - Rochwerg B et al. Official ERS/ATS clinical practice guidelines: Noninvasive ventilation for acute respiratory failure. Eur Respir J 2017;50:1602426
-  - Brochard L et al. Mechanical ventilation to minimize progression of lung injury in acute respiratory failure. Am J Respir Crit Care Med 2017;195:438-442
-  - UpToDate - Approach to the adult with acute dyspnea in the emergency department
-  - ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med 2000;342:1301-1308
+- '409622000'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Respiratory Failure
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Dyspnea, tachypnea (RR >30), use of accessory muscles
+- 'Hypoxemic (Type I): PaO2 <60 mmHg on ABG, SpO2 <90%'
+- 'Hypercapnic (Type II): PaCO2 >50 mmHg with acidosis (pH <7.35)'
+- Altered mental status (from hypoxia or hypercapnia)
+- Cyanosis, diaphoresis, agitation or lethargy
+- 'Causes: Pneumonia, COPD, pulmonary edema, PE, ARDS, neuromuscular disease'
+workup:
+- 'ABG (definitive diagnosis: PaO2, PaCO2, pH)'
+- Chest X-ray (identify cause)
+- CBC, BNP, lactate
+- ECG, troponin (if cardiac suspected)
+treatment:
+- 'Guideline-based treatment options for Acute Respiratory Failure include:'
+- 'Oxygen: Titrate to SpO2 >90% (ATS 2023)'
+- 'Type I: High-flow nasal cannula, non-rebreather mask, consider intubation (ATS
+  2023)'
+- 'Type II: BiPAP (IPAP 10-15, EPAP 5-8), treat underlying cause (ATS 2023)'
+- 'Treat underlying: Antibiotics (pneumonia), diuretics (pulmonary edema), bronchodilators
+  (COPD/asthma) (ATS 2023)'
+- 'Intubation if: Respiratory arrest, severe acidosis (pH <7.25), mental status decline
+  (ATS 2023)'
+clinical_pearls:
+- 'Type I (hypoxemic): VQ mismatch - give oxygen (pneumonia, PE, ARDS)'
+- 'Type II (hypercapnic): Hypoventilation - needs ventilatory support (COPD, neuromuscular)'
+- BiPAP first-line for COPD with hypercapnia (reduces intubation)
+- High-flow nasal cannula (HFNC) for hypoxemic failure
+- 'Intubation criteria: RR >35, pH <7.25, mental status decline, hypoxia despite max
+  O2'
+referrals:
+- ICU admission for all acute respiratory failure
+- Pulmonology consult
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

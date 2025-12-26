@@ -1,76 +1,53 @@
 tree_id: DERM-HERPES-ZOSTER
 name: Herpes Zoster (Shingles)
 family: Dermatology
-specialty: Dermatology/Infectious Disease
-chief_complaint: Painful rash in band distribution
-description: |
-  Reactivation of varicella-zoster virus (VZV) from dorsal root ganglion causing painful dermatomal rash. Occurs in 30% of people lifetime, increases with age and immunosuppression.
-  Prodrome of pain precedes rash by 1-5 days. Classic unilateral dermatomal vesicular eruption. Complications include postherpetic neuralgia (most common, 10-20%), ophthalmic involvement (herpes zoster ophthalmicus), dissemination. Antiviral treatment reduces duration and complications.
-icd10: B02.9
-urgency: Moderate
+specialty: Dermatology
+icd10:
+- B02.9
+- B02.29
+snomed:
+- '4740000'
+urgency: medium
+description: Comprehensive evaluation and management of Herpes Zoster (Shingles)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Painful vesicular rash
+- Dermatomal distribution
+- Unilateral
+- Prodrome of pain or tingling
+- More common in elderly or immunocompromised
 workup:
-  - Clinical diagnosis - characteristic dermatomal distribution and vesicular lesions
-  - Prodrome - pain, burning, tingling in dermatomal distribution 1-5 days before rash
-  - Rash evolution - erythematous macules/papules progress to grouped vesicles on erythematous base ("dew drops on a rose petal"), then pustules, crusts over 7-10 days
-  - Distribution - unilateral, dermatomal (does not cross midline), most common thoracic (50%), trigeminal (10-20%, especially ophthalmic division)
-  - Grouped vesicles in dermatomal pattern pathognomonic
-  - Hutchinson sign - vesicles on tip of nose (nasociliary branch of ophthalmic nerve) predicts ocular involvement
-  - Exam - assess distribution, look for dissemination (greater than 20 lesions outside primary dermatome suggests immunosuppression)
-  - Ophthalmic zoster - eye exam for keratitis, uveitis, increased intraocular pressure (ophthalmology referral)
-  - Ramsay Hunt syndrome - zoster of geniculate ganglion causing facial paralysis, ear vesicles, vertigo, hearing loss
-  - Lab confirmation rarely needed (typical presentation clinical diagnosis)
-  - Tzanck smear - multinucleated giant cells (cannot distinguish VZV from HSV)
-  - Direct fluorescent antibody (DFA) - rapid, specific for VZV
-  - PCR of vesicle fluid - most sensitive and specific (if atypical presentation, immunocompromised)
-  - Viral culture slow (3-5 days), less sensitive
-  - Assess risk factors - age greater than 50, immunosuppression (HIV, cancer, steroids, biologics)
+- Clinical diagnosis (usually no testing needed)
+- Tzanck smear or DFA if atypical presentation (low sensitivity)
+- PCR of vesicle fluid (gold standard but rarely needed)
 treatment:
-  - Antiviral therapy - most effective if started within 72 hours of rash onset
-  - Indications - all patients greater than 50 years, immunocompromised, ophthalmic involvement, disseminated, Ramsay Hunt, moderate-severe disease
-  - Valacyclovir 1000mg TID x 7 days (preferred, better bioavailability than acyclovir)
-  - Famciclovir 500mg TID x 7 days (alternative)
-  - Acyclovir 800mg 5 times daily x 7 days (least convenient dosing)
-  - Adjust dose for renal insufficiency
-  - Benefit beyond 72 hours uncertain but consider if new lesions forming or complications
-  - Immunocompromised - IV acyclovir 10 mg/kg q8h if severe or disseminated
-  - Analgesia - pain can be severe
-  - Acetaminophen, NSAIDs first-line
-  - Opioids (oxycodone, tramadol) if inadequate control
-  - Gabapentin 300-3600mg daily in divided doses or pregabalin 150-600mg daily for neuropathic pain
-  - Topical lidocaine 5% patch for localized pain
-  - Ophthalmic zoster - urgent ophthalmology referral
-  - Oral antivirals plus topical steroids if intraocular inflammation
-  - Topical antibiotics if keratitis
-  - Ramsay Hunt syndrome - antivirals plus corticosteroids (prednisone 60mg daily x 7 days taper)
-  - Eye protection if incomplete eye closure
-  - Postherpetic neuralgia (PHN) - pain persisting greater than 90 days after rash
-  - Risk factors - age greater than 60, severe acute pain, severe rash, trigeminal involvement
-  - Early antiviral treatment reduces PHN risk 50%
-  - Treatment - gabapentin 900-3600mg daily, pregabalin 150-600mg daily (first-line)
-  - Tricyclic antidepressants (amitriptyline 25-100mg nightly, nortriptyline 25-100mg nightly)
-  - Topical lidocaine 5% patch or capsaicin 8% patch
-  - Opioids if refractory
-  - Supportive care - calamine lotion, cool compresses for itching, keep lesions clean and dry
-  - Avoid contact with pregnant women, infants, immunocompromised (contagious until crusted)
-  - Prevention - vaccination
-  - Shingrix (recombinant zoster vaccine) 2 doses 2-6 months apart - 97% effective preventing zoster, greater than 90% effective preventing PHN
-  - Recommended age greater than 50 years, immunocompromised greater than 19 years
-  - Zostavax (live attenuated vaccine) no longer preferred (less effective, contraindicated if immunocompromised)
+- 'Guideline-based treatment options for Herpes Zoster (Shingles) include:'
+- 'Antivirals within 72hrs: Valacyclovir 1g TID or famciclovir 500mg TID for 7 days
+  (AAD 2023)'
+- 'Pain control: Gabapentin 300-900mg TID, pregabalin 75-150mg BID, or lidocaine patches
+  (AAD 2023)'
+- 'If V1/ophthalmicus: Ophthalmology referral same day, start antivirals immediately
+  (AAD 2023)'
+- 'PHN prevention: Early antivirals + aggressive pain control during acute phase (AAD
+  2023)'
+- 'PHN treatment: Gabapentin, pregabalin, TCAs (amitriptyline), lidocaine patches,
+  capsaicin (AAD 2023)'
 clinical_pearls:
-  - Zoster cannot occur without prior varicella (chickenpox) exposure - reactivation of latent VZV
-  - Pain often precedes rash by days (can cause diagnostic confusion)
-  - Disseminated zoster (greater than 20 lesions outside dermatome) suggests immunocompromised - check HIV
-  - Herpes zoster ophthalmicus (V1 distribution) - high risk corneal scarring, vision loss (urgent ophthalmology)
-  - Zoster sine herpete - dermatomal pain without rash (PCR saliva can confirm VZV)
-  - Secondary bacterial infection uncommon but possible (Streptococcus, Staphylococcus)
-  - Chronic corticosteroids (prednisone greater than 20mg daily x 2+ weeks) increase zoster risk
-  - Immunosuppressed patients can have recurrent zoster (rare in immunocompetent)
-differentials:
-  - Herpes simplex virus
-  - Contact dermatitis
-  - Cellulitis
-  - Impetigo
-  - Burns
-  - Dermatitis herpetiformis
+- Reactivation of varicella-zoster virus (VZV) dormant in dorsal root ganglia
+- Start antivirals within 72 hours of rash onset for maximum benefit
+- 'Postherpetic neuralgia (PHN) in 10-15%: Pain >90 days after rash, increases with
+  age'
+- 'Herpes zoster ophthalmicus: V1 distribution, can cause blindness - ophthalmology
+  emergency'
+- 'Hutchinson sign: Vesicles on tip/side of nose predicts ocular involvement'
+referrals:
+- Ophthalmology STAT if V1/herpes zoster ophthalmicus (Hutchinson sign, eye involvement)
+- Pain management if severe PHN
+differentials: []
 trace:
-  - 67-year-old woman with 2 days of burning pain left chest → Rash developed yesterday - grouped vesicles on erythematous base in band from spine to anterior chest, does not cross midline → Corresponds to T5 dermatome → No eye involvement → Past medical history - hypothyroidism, no immunosuppression → Exam shows grouped vesicles and early pustules in T5 distribution, no dissemination → Clinical diagnosis herpes zoster → Within 72-hour window for antiviral → Start valacyclovir 1000mg TID x 7 days → Gabapentin 300mg nightly for pain, titrate to 300mg TID → Acetaminophen 1000mg q6h PRN → Advise keep rash covered, avoid contact with pregnant women and infants → Pain improves within 3 days, new vesicle formation stops → Lesions crust over by day 7, complete valacyclovir course → Pain resolves completely by 6 weeks, no postherpetic neuralgia → Counsel on Shingrix vaccination when acute episode resolved (wait 1 year per guidelines, or can give sooner)
+  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
+    Cancer Network (NCCN) for skin cancers
+  version: 0.1.0
+  last_updated: '2024-12-26'

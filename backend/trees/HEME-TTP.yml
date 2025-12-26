@@ -1,0 +1,61 @@
+tree_id: HEME-TTP
+name: Thrombotic Thrombocytopenic Purpura (TTP)
+family: Hematology Oncology
+specialty: Hematology Oncology
+icd10:
+- M31.1
+snomed:
+- 78129009
+urgency: medium
+description: Comprehensive evaluation and management of Thrombotic Thrombocytopenic
+  Purpura (TTP)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Pentad (often incomplete): thrombocytopenia, microangiopathic hemolytic anemia,
+  neurologic symptoms, renal dysfunction, fever'
+- Schistocytes on blood smear
+- Elevated LDH
+- Normal PT/PTT/fibrinogen (unlike DIC)
+- Low ADAMTS13 activity
+workup:
+- 'CBC: Thrombocytopenia (often <30k), anemia with elevated reticulocyte count'
+- 'Peripheral smear: Schistocytes (fragmented RBCs) - KEY diagnostic feature'
+- 'Hemolysis labs: Elevated indirect bilirubin, elevated LDH (often >1000), low/undetectable
+  haptoglobin, negative Coombs'
+- 'PT/PTT/fibrinogen: Normal (differentiates from DIC which has prolonged PT/PTT,
+  low fibrinogen)'
+- ADAMTS13 activity <10% with inhibitor = acquired TTP. Send before starting treatment
+  but DON'T wait for results
+treatment:
+- 'Guideline-based treatment options for Thrombotic Thrombocytopenic Purpura (TTP)
+  include:'
+- EMERGENT plasmapheresis (plasma exchange) 1-1.5 plasma volumes daily - continue
+  until platelets >150k × 2 days (ASH 2023)
+- 'If plasmapheresis delayed: Fresh frozen plasma 30 mL/kg IVuntil pheresis available
+  (ASH 2023)'
+- 'Corticosteroids: Prednisone 1mg/kg/day or methylprednisolone 1g IV daily (ASH 2023)'
+- Rituximab 375mg/m2 IV weekly × 4 doses added to plasmapheresis (reduces relapses)
+  (ASH 2023)
+- Caplacizumab (anti-vWF antibody) 10mg IV then SQ daily - newer therapy, reduces
+  time to remission (ASH 2023)
+clinical_pearls:
+- 'Medical emergency: 90% mortality without treatment, <10% with plasmapheresis -
+  start treatment before ADAMTS13 results'
+- 'Pathophysiology: ADAMTS13 deficiency → large vWF multimers → platelet microthrombi
+  → microangiopathic hemolysis + organ ischemia'
+- Classic pentad rarely complete (40%) - thrombocytopenia + MAHA + neurologic or renal
+  = enough to treat empirically
+- 'Neurologic: Waxing/waning confusion, headache, seizures, stroke, coma (differentiates
+  from HUS which spares CNS)'
+- DO NOT transfuse platelets (worsens thrombosis) unless life-threatening bleeding
+referrals:
+- Hematology STAT + ICU admission - initiate plasmapheresis emergently
+- Nephrology if severe renal dysfunction (may need hemodialysis)
+differentials: []
+trace:
+  source: National Comprehensive Cancer Network (NCCN) Guidelines, American Society
+    of Hematology (ASH) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

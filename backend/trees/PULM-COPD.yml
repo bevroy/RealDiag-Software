@@ -1,51 +1,54 @@
 tree_id: PULM-COPD
-name: Chronic Obstructive Pulmonary Disease
+name: Chronic Obstructive Pulmonary Disease (COPD)
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Shortness of breath and chronic cough
-description: Progressive airflow limitation caused by chronic bronchitis and emphysema, primarily from cigarette smoking. Smoking cessation, bronchodilators, and inhaled corticosteroids reduce exacerbations and slow progression.
-icd10: J44.9
-urgency: non-urgent
-
+icd10:
+- J44.0
+- J44.1
+- J44.9
+snomed:
+- '13645005'
+urgency: medium
+description: Comprehensive evaluation and management of Chronic Obstructive Pulmonary
+  Disease (COPD)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Chronic productive cough
+- Progressive dyspnea on exertion
+- Wheezing and chest tightness
+- History of smoking or environmental exposure
+- Reduced exercise tolerance
 workup:
-  - Clinical diagnosis: chronic dyspnea, cough, sputum production in smoker >40 years old with >10 pack-year history
-  - Spirometry (required for diagnosis): post-bronchodilator FEV1/FVC <0.70 confirms airflow obstruction
-  - GOLD severity staging by FEV1: GOLD 1 (FEV1 ≥80% predicted), GOLD 2 (50-79%), GOLD 3 (30-49%), GOLD 4 (<30%)
-  - GOLD ABCD classification: combines symptoms (mMRC or CAT score) and exacerbation history to guide treatment
-  - Chest X-ray: hyperinflation, flattened diaphragms, increased AP diameter (barrel chest)
-  - Alpha-1 antitrypsin level: if early onset <45 years, minimal smoking history, or lower lobe predominant emphysema
-  - Arterial blood gas: if severe COPD or acute exacerbation to assess hypoxemia and hypercapnia
-  - 6-minute walk test: assess functional capacity and oxygen desaturation
-
+- Spirometry with bronchodilator (diagnostic, assess severity)
+- Chest X-ray (hyperinflation, flattened diaphragms, rule out complications)
+- ABG if severe or exacerbation (assess hypoxia, hypercapnia)
+- Alpha-1 antitrypsin level if age <45 or minimal smoking history
 treatment:
-  - Smoking cessation: MOST IMPORTANT intervention, only treatment that slows FEV1 decline
-  - Influenza vaccine annually, pneumococcal vaccines (PCV20 or PPSV23)
-  - Bronchodilators (all patients with symptoms): LABA (long-acting beta-agonist) and/or LAMA (long-acting muscarinic antagonist)
-  - Inhaled corticosteroids (ICS): add if frequent exacerbations (≥2 per year or ≥1 requiring hospitalization) or high eosinophils >300
-  - Triple therapy (LABA/LAMA/ICS): for frequent exacerbators, single inhaler improves adherence
-  - Common regimens: fluticasone/umeclidinium/vilanterol (Trelegy) once daily, or budesonide/glycopyrrolate/formoterol (Breztri) twice daily
-  - SAMA or SABA: albuterol as needed for acute symptoms
-  - Supplemental oxygen: if resting PaO2 <55 mmHg or O2 sat <88% (improves survival)
-  - Pulmonary rehabilitation: exercise training, education, nutrition - improves symptoms and reduces hospitalizations
-  - Roflumilast (PDE4 inhibitor): if severe COPD with chronic bronchitis and frequent exacerbations despite triple therapy
-  - Azithromycin prophylaxis 250 mg daily or three times weekly: reduces exacerbations in former smokers with frequent exacerbations
-  - Acute exacerbation treatment: systemic corticosteroids (prednisone 40 mg daily x5 days), antibiotics if increased sputum purulence, increased bronchodilators
-
+- 'Guideline-based treatment options for Chronic Obstructive Pulmonary Disease (COPD)
+  include:'
+- Smoking cessation counseling + varenicline or bupropion (ATS 2023)
+- 'Bronchodilators: LAMA (tiotropium 18mcg daily) or LABA (ATS 2023)'
+- Add ICS (fluticasone) if ≥2 exacerbations/year or blood eosinophils ≥300 (ATS 2023)
+- Long-term oxygen if PaO2 <55 mmHg or SpO2 <88% at rest (ATS 2023)
+- 'Vaccinations: Pneumococcal, annual influenza (ATS 2023)'
 clinical_pearls:
-  - Smoking cessation most important - only treatment that slows FEV1 decline
-  - Spirometry required for diagnosis - FEV1/FVC <0.70 post-bronchodilator
-  - All symptomatic patients need bronchodilator - LABA and/or LAMA
-  - Add ICS if ≥2 exacerbations per year or eosinophils >300
-  - Triple therapy (LABA/LAMA/ICS) for frequent exacerbators
-  - Supplemental oxygen if PaO2 <55 or O2 sat <88% improves survival
-  - Pulmonary rehab improves symptoms and reduces hospitalizations
-  - Acute exacerbation: prednisone 40 mg x5 days plus antibiotics if purulent sputum
-
-differentials:
-  - Asthma: younger onset, reversible airflow obstruction, atopy, eosinophilia, FEV1/FVC normalizes post-bronchodilator
-  - Bronchiectasis: chronic productive cough, recurrent infections, dilated airways on CT
-  - Heart failure: orthopnea, paroxysmal nocturnal dyspnea, elevated BNP, pulmonary edema on imaging
-  - Interstitial lung disease: restrictive pattern on spirometry, reticular opacities on CT
-
-trace: |
-  A 62-year-old man with 45 pack-year smoking history presented with 3 years progressive dyspnea on exertion and chronic productive cough. Spirometry showed FEV1 52% predicted, FEV1/FVC 0.58 post-bronchodilator (GOLD 2 moderate obstruction). mMRC dyspnea score 2, one exacerbation requiring antibiotics in past year. Chest X-ray showed hyperinflation. Diagnosed with COPD GOLD 2 Group B. Counseled extensively on smoking cessation, referred to cessation program. Started fluticasone/umeclidinium/vilanterol (Trelegy) one inhalation daily plus albuterol inhaler as needed. Influenza and pneumococcal vaccines given. Referred to pulmonary rehabilitation. At 3 months quit smoking (most important achievement), dyspnea improved, completed pulmonary rehab. At 12 months FEV1 stable at 54%, no exacerbations. At 2 years remains smoke-free, FEV1 stable, excellent symptom control on triple therapy with significantly improved quality of life.
+- 'Spirometry diagnostic: FEV1/FVC <0.70 post-bronchodilator (confirms obstruction)'
+- 'GOLD staging: Mild (FEV1 ≥80%), Moderate (50-80%), Severe (30-50%), Very severe
+  (<30%)'
+- Smoking cessation most effective intervention (slows decline in FEV1)
+- Triple therapy (LABA+LAMA+ICS) for frequent exacerbations (≥2/year or 1 hospitalization)
+- Pulmonary rehab improves exercise capacity and quality of life
+- Oxygen therapy (>15 hours/day) improves survival if chronic hypoxia (PaO2 <55 or
+  SpO2 <88%)
+referrals:
+- Pulmonology for initial diagnosis, frequent exacerbations, or oxygen evaluation
+- Pulmonary rehabilitation program
+- Lung transplant evaluation if FEV1 <25% or severe symptoms despite therapy
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

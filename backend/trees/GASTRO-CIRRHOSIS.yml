@@ -1,0 +1,50 @@
+tree_id: GASTRO-CIRRHOSIS
+name: Cirrhosis
+family: Gastroenterology
+specialty: Gastroenterology
+icd10:
+- K74.60
+- K70.30
+snomed:
+- '19943007'
+urgency: medium
+description: Comprehensive evaluation and management of Cirrhosis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Ascites, peripheral edema
+- Jaundice, spider angiomata, palmar erythema
+- Hepatomegaly (early), then atrophic liver (late)
+- Splenomegaly, varices (portal hypertension)
+- 'Hepatic encephalopathy: Confusion, asterixis, altered mental status'
+- 'Causes: Alcohol (most common US), HCV, NAFLD, HBV, autoimmune, hemochromatosis'
+workup:
+- Liver ultrasound (nodular liver, splenomegaly, ascites)
+- Liver function tests, albumin, PT/INR
+- Hepatitis serologies (HBV, HCV), ferritin (hemochromatosis), ANA (autoimmune)
+- EGD (screen for varices)
+- Ultrasound + AFP every 6 months (HCC screening)
+treatment:
+- 'Guideline-based treatment options for Cirrhosis include:'
+- 'Treat underlying cause: Alcohol cessation, antiviral therapy (ACG 2023)'
+- 'Ascites: Sodium restriction (<2g/day), spironolactone 100mg + furosemide 40mg (ACG
+  2023)'
+- 'Hepatic encephalopathy: Lactulose 30mL TID, rifaximin 550mg BID (ACG 2023)'
+- 'Variceal prophylaxis: Propranolol 20mg BID (titrate to HR 55-60) (ACG 2023)'
+- Liver transplant evaluation if decompensated (MELD >15) (ACG 2023)
+clinical_pearls:
+- Cirrhosis = end-stage liver disease with fibrosis and nodule formation
+- 'Child-Pugh score: A (5-6 points), B (7-9), C (10-15) predicts mortality'
+- MELD score used for transplant allocation
+- 'Screen for HCC: Ultrasound + AFP every 6 months'
+- 'Variceal screening: EGD at diagnosis, if large varices → propranolol'
+referrals:
+- Gastroenterology/hepatology for all cirrhosis
+- Transplant hepatology if decompensated or MELD >15
+differentials: []
+trace:
+  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
+    Association (AGA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

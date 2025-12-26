@@ -2,66 +2,57 @@ tree_id: DERM-CELLULITIS
 name: Cellulitis
 family: Dermatology
 specialty: Dermatology
-chief_complaint: Red swollen skin
-description: Acute bacterial infection of dermis and subcutaneous tissue, most commonly caused by Streptococcus pyogenes and Staphylococcus aureus
-
-icd10: L03.90
-
-urgency: urgent
-
+icd10:
+- L03.90
+- L03.115
+snomed:
+- '128045006'
+urgency: medium
+description: Comprehensive evaluation and management of Cellulitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Erythema and warmth (localized skin redness)
+- Pain and tenderness of affected area
+- Swelling, edema
+- Fever, chills if systemic infection
+- Regional lymphadenopathy (swollen lymph nodes)
+- Poorly demarcated borders (vs erysipelas with sharp, raised borders)
+- 'Most common organisms: Streptococcus pyogenes (Group A Strep), Staphylococcus aureus'
+- 'Risk factors: Skin breaks, lymphedema, venous insufficiency, obesity, diabetes'
+- Lymphangitis (red streaks extending from infection site)
+- Purulent drainage suggests abscess - needs incision and drainage (I&D)
+- 'MRSA risk factors: IVDU, recent hospitalization, prior MRSA, purulent drainage'
+- Mark borders with pen to track progression or improvement on antibiotics
 workup:
-  - Clinical presentation: acute onset erythema, warmth, swelling, tenderness of affected area, poorly demarcated borders (versus erysipelas which has sharply demarcated raised borders), most commonly lower extremities
-  - Systemic symptoms: fever, chills, malaise, lymphangitis (red streaks), regional lymphadenopathy
-  - Risk factors: skin trauma or breakdown (tinea pedis, wounds, insect bites, ulcers), edema (venous insufficiency, lymphedema), obesity, diabetes, immunosuppression
-  - Portal of entry: examine for tinea pedis (toe web intertrigo), onychomycosis, wounds, ulcers - treat underlying to prevent recurrence
-  - Exam: erythema, edema, warmth, tenderness, poorly demarcated borders, crepitus suggests necrotizing fasciitis (surgical emergency), purpura/bullae suggest more severe infection
-  - Mark borders with pen: document extent and monitor progression or improvement
-  - Laboratory: usually not needed for uncomplicated cellulitis, consider CBC if systemic symptoms (leukocytosis), blood cultures if febrile/toxic appearing (positive in less than 5 percent), CRP/ESR elevated but nonspecific
-  - Imaging: not routinely needed, ultrasound can exclude DVT if diagnostic uncertainty, MRI or CT if concern for necrotizing fasciitis or deep abscess
-  - Exclude mimics: DVT (venous duplex ultrasound), necrotizing fasciitis (severe pain out of proportion, skin necrosis, crepitus, systemic toxicity - emergent surgical consult)
-
+- Blood cultures if febrile or systemically ill (low yield but important if positive)
+- CBC with differential (leukocytosis expected)
+- Wound culture if purulent drainage present
+- Imaging (ultrasound or MRI) if concern for abscess or necrotizing infection
 treatment:
-  - Mild-moderate cellulitis outpatient: oral antibiotics covering Streptococcus and Staphylococcus
-  - Non-purulent cellulitis (no abscess): cephalexin 500 mg QID or dicloxacillin 500 mg QID x 5-10 days, alternative if penicillin allergy (clindamycin 300-450 mg TID or doxycycline 100 mg BID)
-  - Purulent cellulitis (associated abscess): cover MRSA with trimethoprim-sulfamethoxazole DS BID plus cephalexin 500 mg QID, or clindamycin 300-450 mg TID alone, or doxycycline 100 mg BID alone, incision and drainage if abscess present (mainstay of therapy for abscess)
-  - MRSA risk factors: prior MRSA infection, injection drug use, recent hospitalization, healthcare exposure, purulent drainage
-  - Elevation: elevate affected limb above heart level (reduces edema, improves venous return)
-  - Analgesia: NSAIDs (ibuprofen 600-800 mg TID) or acetaminophen
-  - Mark borders and reassess in 24-48 hours: expect improvement in 48-72 hours (decreased erythema, warmth, pain), worsening or no improvement consider alternative diagnosis, resistant organism, or need hospitalization
-  - Severe cellulitis requiring hospitalization: extensive involvement, systemic toxicity (high fever, hypotension, tachycardia), immunocompromised, failed outpatient therapy, facial cellulitis (periorbital/orbital), concern for deeper infection
-  - Inpatient IV antibiotics: cefazolin 1-2 grams every 8 hours or nafcillin 1-2 grams every 4 hours (if no MRSA risk), vancomycin 15-20 mg/kg every 8-12 hours (if MRSA risk or severe), transition to oral when improving and afebrile x 24 hours
-  - Recurrent cellulitis prevention: treat predisposing factors (tinea pedis with antifungals, venous insufficiency with compression stockings, lymphedema with compression), good skin hygiene, emollients for dry skin, prophylactic antibiotics if frequent recurrences (penicillin VK 250 mg BID or erythromycin 250 mg BID)
-
+- 'Guideline-based treatment options for Cellulitis include:'
+- 'Mild (outpatient): Cephalexin 500mg PO q6h or clindamycin 300mg PO q8h for 5-10
+  days (AAD 2023)'
+- 'MRSA coverage: Add TMP-SMX DS BID or doxycycline 100mg BID to beta-lactam (AAD
+  2023)'
+- 'Moderate-severe (admit): Vancomycin 15-20mg/kg IV q12h or cefazolin 1-2g IV q8h
+  (AAD 2023)'
+- Elevation and rest of affected limb (AAD 2023)
+- NSAIDs for pain and inflammation (AAD 2023)
 clinical_pearls:
-  - Cellulitis is clinical diagnosis (cultures rarely helpful or necessary)
-  - Streptococcus pyogenes and Staphylococcus aureus most common organisms
-  - Poorly demarcated erythema and edema (versus erysipelas sharply demarcated raised borders)
-  - Mark borders with pen to monitor progression
-  - Expect improvement in 48-72 hours on antibiotics (erythema may worsen initially before improving)
-  - Lower extremity most common site (look for portal of entry like tinea pedis)
-  - Blood cultures low yield (positive less than 5 percent) in uncomplicated cellulitis
-  - Recurrent cellulitis treat underlying predisposing factors (tinea pedis, venous insufficiency)
-
-differentials:
-  - Deep vein thrombosis (unilateral leg swelling, pain, no warmth/erythema typically, venous duplex ultrasound diagnostic)
-  - Necrotizing fasciitis (severe pain out of proportion, skin necrosis, bullae, crepitus, systemic toxicity, surgical emergency)
-  - Erysipelas (sharply demarcated raised borders, brighter red, more superficial than cellulitis, face or lower legs)
-  - Stasis dermatitis (bilateral, chronic, hyperpigmentation, varicose veins, no fever)
-  - Contact dermatitis (pruritic, history of exposure, bilateral often, no fever)
-
+- 'Most common organisms: Strep pyogenes (group A strep) and Staph aureus'
+- Mark borders with pen to track progression on antibiotics
+- 'MRSA risk factors: IV drug use, recent hospitalization, prior MRSA, purulent drainage'
+- 'Recurrent cellulitis: Treat tinea pedis, maintain skin integrity'
+- Purpura or bullae suggest necrotizing fasciitis - surgical emergency
+referrals:
+- Hospital admission for severe infection, immunocompromise, facial involvement, or
+  failed outpatient therapy
+- Surgery consult if concern for necrotizing fasciitis or deep abscess
+differentials: []
 trace:
-  - 52-year-old man with diabetes presents with 2 days progressive right lower leg redness, swelling, pain, fever to 101.2 F
-  - History: noticed small cut on right foot 4 days ago while walking barefoot, now entire lower leg red and swollen
-  - Exam: temp 100.8 F, HR 98, BP 138/82, right lower leg from ankle to mid-calf with erythema, warmth, edema, tenderness, poorly demarcated borders, no crepitus, no skin necrosis, tinea pedis present bilateral feet (toe web maceration)
-  - Marked borders of erythema with pen
-  - Labs: WBC 13.5K (mild leukocytosis), glucose 185 mg/dL, creatinine 1.0 mg/dL (normal)
-  - Diagnosis: acute cellulitis right lower leg, likely portal of entry from foot trauma with underlying tinea pedis
-  - Decision for outpatient management (mild-moderate severity, reliable patient, able to follow up)
-  - Started cephalexin 500 mg QID x 10 days (covers Streptococcus and Staphylococcus), clotrimazole cream BID to feet for tinea pedis
-  - Instructions: elevate leg above heart when sitting/lying, ibuprofen 600 mg TID for pain/inflammation, return if worsening or not improving in 48 hours
-  - Follow-up phone call day 2: fever resolved, pain improved, erythema not spreading (borders marked)
-  - Office visit day 4: significant improvement, erythema decreased, swelling reduced, afebrile, continues antibiotics
-  - Completed 10-day antibiotic course, full resolution
-  - Follow-up 2 weeks: skin completely normal, counseling on prevention (treat tinea pedis with antifungals, avoid walking barefoot, good foot hygiene especially with diabetes, compression stockings for venous insufficiency if present)
-  - Prescribed terbinafine cream daily for tinea pedis maintenance
-  - No recurrence at 6 months
+  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
+    Cancer Network (NCCN) for skin cancers
+  version: 0.1.0
+  last_updated: '2024-12-26'

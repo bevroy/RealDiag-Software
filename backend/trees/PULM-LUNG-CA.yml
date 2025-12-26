@@ -1,0 +1,61 @@
+tree_id: PULM-LUNG-CA
+name: Lung Cancer
+family: Pulmonology
+specialty: Pulmonology
+icd10:
+- C34.90
+- C34.91
+- C78.00
+snomed:
+- '363358000'
+urgency: medium
+description: Comprehensive evaluation and management of Lung Cancer
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Persistent cough or change in chronic cough
+- Hemoptysis
+- Unintentional weight loss
+- Chest pain
+- Dyspnea
+- Hoarseness
+- Smoking history
+workup:
+- CT chest with contrast (assess size, location, lymph nodes, metastases)
+- PET-CT (staging, assess for distant metastases)
+- 'Tissue diagnosis: Bronchoscopy with biopsy, CT-guided needle biopsy, or surgical
+  biopsy'
+- 'Molecular testing: EGFR, ALK, ROS1, PD-L1 (guides targeted/immunotherapy)'
+- Brain MRI (staging, rule out CNS metastases)
+treatment:
+- 'Guideline-based treatment options for Lung Cancer include:'
+- 'NSCLC: Surgery if resectable (lobectomy/pneumonectomy), stereotactic radiation
+  if unresectable (ATS 2023)'
+- 'NSCLC advanced: Systemic therapy (platinum doublet, immunotherapy, targeted therapy
+  if EGFR/ALK mutation) (ATS 2023)'
+- 'SCLC limited: Chemotherapy (cisplatin + etoposide) + radiation (ATS 2023)'
+- 'SCLC extensive: Chemotherapy + immunotherapy (atezolizumab) (ATS 2023)'
+- 'Supportive: Pain control, palliative radiation, smoking cessation (ATS 2023)'
+clinical_pearls:
+- Most common cancer death worldwide, 85% associated with smoking
+- 'Non-small cell (NSCLC) 85%: Adenocarcinoma (most common, peripheral), squamous
+  (central), large cell'
+- 'Small cell (SCLC) 15%: Aggressive, central, paraneoplastic syndromes (SIADH, Cushing),
+  chemotherapy-sensitive'
+- 'Screen high-risk: Age 50-80, 20 pack-year smoking, current or quit <15 years -
+  annual low-dose CT'
+- 'Pancoast tumor: Apical mass with Horner syndrome (ptosis, miosis, anhidrosis) and
+  shoulder pain'
+- 'SVC syndrome: Facial swelling, venous distension - often SCLC or lymphoma'
+referrals:
+- Pulmonology for bronchoscopy and tissue diagnosis
+- Thoracic oncology for treatment planning (multidisciplinary tumor board)
+- Cardiothoracic surgery if potentially resectable
+- Palliative care early for symptom management and goals of care
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

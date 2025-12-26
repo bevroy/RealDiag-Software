@@ -2,80 +2,53 @@ tree_id: PULM-ASTHMA
 name: Asthma
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Wheezing, shortness of breath, chest tightness, cough
-description: Chronic inflammatory airway disease causing reversible airflow obstruction
-icd10: J45.909
-urgency: routine-to-emergency
+icd10:
+- J45.20
+- J45.40
+- J45.50
+- J45.901
+snomed:
+- '195967001'
+urgency: medium
+description: Comprehensive evaluation and management of Asthma
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Episodic wheezing and dyspnea
+- Nocturnal cough
+- Chest tightness
+- Symptoms worse with triggers (cold air, exercise, allergens)
+- Reversible airflow obstruction
 workup:
-  - Clinical presentation with episodic respiratory symptoms
-  - Wheezing, dyspnea, chest tightness, cough (often nocturnal or early morning)
-  - Symptoms triggered by allergens, exercise, cold air, respiratory infections, stress
-  - Variable airflow obstruction (symptoms come and go)
-  - Physical exam during exacerbation shows wheezing, prolonged expiration, tachypnea
-  - Between exacerbations exam may be normal
-  - Atopic history common (allergic rhinitis, eczema, family history)
-  - Spirometry confirms diagnosis showing reversible obstruction
-  - FEV1/FVC ratio less than 0.70 (obstruction)
-  - Bronchodilator reversibility - FEV1 improves greater than 12% and 200 mL after albuterol
-  - Peak flow variability greater than 20% supports diagnosis
-  - Methacholine challenge positive if PC20 less than 8 mg/mL (if spirometry normal but suspect asthma)
-  - Chest X-ray normal (rules out other causes)
-  - Classify asthma severity for treatment planning
-  - Intermittent (symptoms less than 2 days/week, no nighttime awakenings)
-  - Mild persistent (symptoms greater than 2 days/week but not daily)
-  - Moderate persistent (daily symptoms, nighttime awakenings greater than 1/week)
-  - Severe persistent (symptoms throughout day, frequent nighttime awakenings)
+- Spirometry with bronchodilator (FEV1 improves ≥12% and 200mL = reversible obstruction)
+- Peak expiratory flow rate (PEFR) monitoring
+- Methacholine challenge if spirometry normal but clinical suspicion high
+- Allergy testing (skin prick or IgE) if allergic triggers suspected
 treatment:
-  - Step-wise approach based on severity and control
-  - All patients need short-acting beta-agonist (SABA) rescue inhaler
-  - Albuterol MDI 2 puffs every 4-6 hours PRN
-  - If using more than 2 days/week, need controller therapy
-  - Intermittent asthma - SABA alone sufficient
-  - Mild persistent - low-dose ICS (inhaled corticosteroid)
-  - Fluticasone 88-176 mcg daily or budesonide 180-360 mcg daily
-  - Moderate persistent - medium-dose ICS or low-dose ICS plus LABA
-  - Fluticasone/salmeterol (Advair) 250/50 one puff BID
-  - Budesonide/formoterol (Symbicort) 160/4.5 two puffs BID
-  - Severe persistent - high-dose ICS/LABA plus consider add-on therapy
-  - Add LAMA (tiotropium), leukotriene modifier (montelukast), or biologic
-  - Biologics for severe allergic asthma (omalizumab anti-IgE, mepolizumab anti-IL5)
-  - Oral corticosteroids for exacerbations
-  - Prednisone 40-60 mg daily x 5-7 days
-  - Asthma action plan for all patients
-  - Green zone (well-controlled), yellow zone (worsening), red zone (emergency)
-  - Environmental control - avoid triggers, allergen avoidance
-  - Assess control at each visit - adjust therapy up or down based on control
+- 'Guideline-based treatment options for Asthma include:'
+- 'Mild intermittent: Albuterol MDI 2 puffs PRN (if using >2 days/week, add controller)
+  (ATS 2023)'
+- 'Mild-moderate persistent: ICS (ATS 2023)'
+- 'Moderate-severe: ICS-LABA (ATS 2023)'
+- 'Uncontrolled on ICS-LABA: Add LAMA (tiotropium) or biologics (omalizumab if allergic,
+  dupilumab if eosinophilic) (ATS 2023)'
+- Asthma action plan (green-yellow-red zones based on symptoms/peak flow) (ATS 2023)
 clinical_pearls:
-  - Reversible airflow obstruction distinguishes asthma from COPD
-  - Spirometry essential for diagnosis - FEV1/FVC less than 0.70 with bronchodilator reversibility
-  - ICS cornerstone of treatment - prevents exacerbations and improves lung function
-  - LABA never used alone (increases mortality) - always with ICS
-  - Nocturnal or early morning symptoms suggest poor control
-  - Eosinophils greater than 300 suggest allergic/eosinophilic asthma (may benefit from biologics)
-  - Assess inhaler technique at every visit (most common cause of poor control)
-differentials:
-  - COPD (older, smoking history, not reversible)
-  - GERD (can trigger asthma-like symptoms)
-  - Vocal cord dysfunction (inspiratory stridor)
-  - Heart failure (dyspnea, crackles, elevated BNP)
-  - Pulmonary embolism
+- 'Diagnosis: Episodic symptoms + reversible obstruction (FEV1 improves ≥12% and 200mL
+  post-bronchodilator)'
+- 'Intermittent: Symptoms ≤2 days/week. Persistent: Symptoms >2 days/week'
+- 'Step-up therapy: Add ICS if symptoms >2 days/week, add LABA if daily symptoms'
+- Avoid LABA monotherapy (increased mortality risk) - always use with ICS
+- 'Peak flow monitoring: <80% personal best = action needed, <50% = severe'
+- 'Aspirin-exacerbated respiratory disease (AERD): Asthma + nasal polyps + ASA sensitivity'
+referrals:
+- Pulmonology if severe or uncontrolled despite step 4 therapy (ICS-LABA + LAMA)
+- Allergy/immunology for biologic therapy consideration
+- 'Consider if: ≥2 ED visits/year, 1+ hospitalization, or frequent steroid bursts'
+differentials: []
 trace:
-  - 28-year-old woman with childhood asthma (inactive for years) presents with 3 months of worsening dyspnea and wheeze
-  - Symptoms 3-4 times per week, waking at night with cough twice weekly
-  - Using albuterol inhaler 4-5 times per week (borrowed from friend)
-  - Triggered by exercise, cold air, recently adopted cat
-  - History of allergic rhinitis, eczema as child
-  - Exam shows diffuse expiratory wheezing, no respiratory distress
-  - Spirometry shows FEV1 70% predicted, FEV1/FVC 0.68 (obstruction)
-  - Post-bronchodilator FEV1 improves to 85% predicted (15% improvement, reversible)
-  - Diagnosis - moderate persistent asthma (daily symptoms, nighttime awakenings greater than 1/week)
-  - Started fluticasone/salmeterol (Advair) 250/50 one puff BID (ICS/LABA combination)
-  - Albuterol MDI 2 puffs q4-6h PRN rescue
-  - Inhaler technique education with spacer
-  - Asthma action plan provided
-  - Environmental control - discussed cat allergen (consider rehoming or keep out of bedroom)
-  - 4 weeks later symptoms much improved, using albuterol only twice weekly
-  - 3 months spirometry FEV1 88% predicted (improved)
-  - Well-controlled on current regimen
-  - Annual flu vaccine, continue controller therapy
-  - Outcome - well-controlled asthma on ICS/LABA maintenance therapy
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

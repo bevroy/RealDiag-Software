@@ -1,157 +1,58 @@
 tree_id: ENT-PERITONSILLAR-ABSCESS
-name: Peritonsillar Abscess (Quinsy)
-family: Otolaryngology
-specialty: Otolaryngology
-chief_complaint: Severe unilateral throat pain, fever, difficulty swallowing, trismus
-description: Collection of pus between tonsillar capsule and pharyngeal muscles, most common deep space infection of head and neck
-icd10: J36
-urgency: urgent
+name: Peritonsillar Abscess
+family: Ent
+specialty: Ent
+icd10:
+- J36
+snomed:
+- 44612001
+urgency: medium
+description: Comprehensive evaluation and management of Peritonsillar Abscess
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Severe unilateral throat pain
+- Trismus (difficulty opening mouth)
+- Muffled voice (hot potato voice)
+- Drooling
+- Unilateral tonsillar swelling with uvular deviation
+- High fever
+- Medical emergency requiring drainage
 workup:
-  - Clinical presentation - acute onset of severe symptoms
-  - Severe unilateral throat pain (sudden worsening of pharyngitis)
-  - Odynophagia (painful swallowing), dysphagia, drooling
-  - Fever, malaise, chills
-  - Trismus (inability to open mouth fully) - 50-75% of cases
-  - Muffled "hot potato" voice
-  - Otalgia ipsilateral (referred pain)
-  - Usually follows acute pharyngitis/tonsillitis by 3-5 days
-  - Physical examination
-  - Patient appears toxic, often leaning toward affected side
-  - Trismus (difficulty opening mouth to examine)
-  - Unilateral tonsillar enlargement with peritonsillar swelling
-  - Uvular deviation away from affected side (classic finding)
-  - Soft palate erythema and edema on affected side
-  - Fluctuant mass superior and lateral to tonsil (if abscess formed)
-  - Contralateral tonsil may appear normal or have tonsillitis
-  - Cervical lymphadenopathy ipsilateral (tender, enlarged nodes)
-  - Laboratory studies
-  - Complete blood count - leukocytosis with left shift (WBC 12-20 K/uL typical)
-  - Monospot or EBV serology if suspect mononucleosis
-  - Throat culture or rapid strep (often positive for Group A Streptococcus)
-  - Imaging - not always necessary if clinical diagnosis clear
-  - Intraoral ultrasound - can differentiate cellulitis vs abscess (abscess shows fluid collection)
-  - CT neck with IV contrast if diagnosis uncertain or concern for complications
-  - Shows rim-enhancing fluid collection, differentiates from peritonsillar cellulitis
-  - Useful if trismus prevents adequate examination
-  - Identifies complications - parapharyngeal abscess extension, jugular vein thrombosis, airway compromise
-  - Assess airway patency and stability
-  - Stridor, respiratory distress require urgent intervention
+- Clinical diagnosis + needle aspiration yielding purulent material
+- CT neck with IV contrast if diagnosis uncertain or concern for deeper extension
+  (retropharyngeal abscess)
+- Culture aspirated pus to guide antibiotic therapy
 treatment:
-  - Needle aspiration - initial treatment of choice
-  - Local anesthesia (topical lidocaine spray plus lidocaine injection)
-  - 18-gauge needle attached to syringe
-  - Aspirate at point of maximal fluctuance (usually superior-lateral to tonsil)
-  - Avoid lateral aspiration (carotid artery 2.5 cm lateral to tonsil)
-  - Send pus for Gram stain and culture
-  - Diagnostic (confirms abscess) and therapeutic (drains abscess)
-  - Success rate 85-90%
-  - Incision and drainage - if needle aspiration unsuccessful or large abscess
-  - Incise at point of maximal fluctuance with #11 blade
-  - Use hemostat to break up loculations
-  - More definitive drainage but more painful
-  - Antibiotics - essential adjunct to drainage
-  - Empiric coverage for Streptococcus pyogenes, Staphylococcus aureus, oral anaerobes
-  - First-line - ampicillin-sulbactam (Unasyn) 3 g IV every 6 hours
-  - Alternative - penicillin G 2-4 million units IV every 4-6 hours PLUS metronidazole 500 mg IV every 8 hours
-  - If penicillin allergy - clindamycin 600-900 mg IV every 8 hours (excellent anaerobic coverage)
-  - Outpatient oral options after initial drainage (if not toxic, able to swallow)
-  - Amoxicillin-clavulanate 875/125 mg BID for 10 days
-  - Clindamycin 300 mg QID for 10 days (if penicillin allergy)
-  - Pain control and supportive care
-  - IV fluids for hydration (often dehydrated from poor oral intake)
-  - Opioid analgesics (IV morphine, hydrocodone-acetaminophen)
-  - NSAIDs (ibuprofen)
-  - Corticosteroids - dexamethasone 10 mg IV single dose (reduces pain, edema, improves swallowing)
-  - Admission criteria
-  - Unable to tolerate oral intake or oral antibiotics
-  - Airway compromise or severe trismus
-  - Failed outpatient management
-  - Concern for complications (parapharyngeal extension, sepsis)
-  - Immunocompromised
-  - Acute (quinsy) tonsillectomy - immediate tonsillectomy during acute infection
-  - Reserved for failure of needle aspiration/I&D, recurrent abscesses, inability to drain adequately
-  - Higher bleeding risk but definitive treatment
-  - Interval tonsillectomy - elective tonsillectomy 4-6 weeks after resolution
-  - Recommended for recurrent peritonsillar abscess (2 or more episodes)
-  - Recurrent severe tonsillitis (greater than 3-4 episodes per year)
-  - Approximately 10-15% recurrence rate if tonsils not removed
+- 'Guideline-based treatment options for Peritonsillar Abscess include:'
+- Needle aspiration or incision & drainage (I&D) REQUIRED - medical therapy alone
+  insufficient (AAO-HNS 2023)
+- 'Anesthesia: Topical benzocaine spray + lidocaine 1% with epinephrine injection
+  at aspiration site (AAO-HNS 2023)'
+- Aspirate at point of maximal fluctuance (usually superior and lateral to tonsil)
+  with 18-gauge needle (AAO-HNS 2023)
+- 'Antibiotics: Ampicillin-sulbactam 3g IV q6h OR clindamycin 600mg IV q8h (covers
+  anaerobes) (AAO-HNS 2023)'
+- 'Corticosteroids: Dexamethasone 10mg IV × 1 (reduces pain, inflammation) (AAO-HNS
+  2023)'
 clinical_pearls:
-  - Most common deep space infection of head and neck in adults
-  - Incidence 30 per 100,000, peak age 20-40 years (rare in children)
-  - Progression - acute tonsillitis → peritonsillar cellulitis → peritonsillar abscess (over 3-7 days)
-  - Microbiology - polymicrobial, Group A Streptococcus most common, also Streptococcus milleri group, Staphylococcus aureus, Fusobacterium, Bacteroides
-  - Uvular deviation away from affected side is classic physical exam finding
-  - Trismus indicates inflammation has spread to pterygoid muscles
-  - Hot potato voice (muffled, thick voice) characteristic
-  - Needle aspiration both diagnostic and therapeutic - do not wait for imaging if clinical diagnosis clear
-  - Complications rare but serious - airway obstruction, aspiration, parapharyngeal abscess, mediastinitis, jugular vein thrombosis (Lemierre syndrome), carotid artery erosion
-  - Single dose dexamethasone significantly improves symptoms and recovery time
-  - Most patients can be treated as outpatient after drainage if able to tolerate oral intake
-differentials:
-  - Peritonsillar cellulitis (unilateral pharyngeal erythema/edema without abscess formation, no fluctuance)
-  - Acute tonsillitis (bilateral tonsillar erythema, no uvular deviation, no trismus)
-  - Infectious mononucleosis (bilateral tonsillar enlargement, exudates, hepatosplenomegaly, positive monospot)
-  - Parapharyngeal abscess (extends deep to tonsil, more neck swelling, higher risk airway compromise)
-  - Retropharyngeal abscess (more common in children, posterior pharyngeal wall bulging, neck stiffness)
-  - Epiglottitis (stridor, drooling, toxic appearance, cherry-red epiglottis on laryngoscopy)
-  - Ludwig angina (bilateral submandibular/sublingual space infection, brawny induration of floor of mouth)
+- Most common deep space infection of head/neck - usually complication of bacterial
+  tonsillitis
+- 'Classic triad: Trismus + uvular deviation + hot potato voice'
+- 'Organisms: Group A Strep, Staph aureus, anaerobes (Fusobacterium, Prevotella)'
+- Needle aspiration yields pus (confirms diagnosis) - aspirate at point of maximal
+  fluctuance
+- 'Complications: Airway obstruction, extension to retropharyngeal space, carotid
+  sheath, mediastinum (necrotizing fasciitis)'
+referrals:
+- ENT urgent consult for drainage (needle aspiration or I&D)
+- Hospital admission for IV antibiotics, hydration, airway monitoring
+- Consider quinsy tonsillectomy (immediate) or interval tonsillectomy (4-6 weeks)
+  to prevent recurrence
+differentials: []
 trace:
-  - 26-year-old man presents to ED with 2-day history of worsening left-sided throat pain
-  - Had sore throat past week, treated with ibuprofen
-  - Sudden worsening left throat pain 2 days ago, now 10/10 severity
-  - Unable to swallow saliva, drooling into tissues
-  - Fever to 39.2C at home
-  - Cannot open mouth fully to eat or drink
-  - Voice sounds muffled
-  - Left ear pain
-  - No shortness of breath, no stridor
-  - Past medical history - recurrent pharyngitis (3-4 episodes per year), no prior abscess
-  - Medications - ibuprofen
-  - Physical exam - appears uncomfortable, tilting head to left, drooling
-  - Vitals - temp 38.8C, HR 102, BP 125/78, RR 18, SpO2 98% room air
-  - Oral exam - limited mouth opening (trismus), can open 2 cm (normal 4-5 cm)
-  - Left tonsillar enlargement with peritonsillar swelling and erythema
-  - Uvula deviated to right (away from affected side) - CLASSIC FINDING
-  - Soft palate fullness and fluctuance superior-lateral to left tonsil
-  - Right tonsil mildly erythematous but normal size
-  - Tender left cervical lymphadenopathy
-  - Airway patent, no stridor, no respiratory distress
-  - Labs - WBC 16.8 K/uL with 88% neutrophils (leukocytosis)
-  - Monospot negative
-  - Diagnosis - Left peritonsillar abscess (clinical diagnosis clear, no imaging needed)
-  - Treatment plan - needle aspiration in ED
-  - Procedure - topical lidocaine spray to oropharynx, local anesthesia 1% lidocaine with epinephrine injected at site
-  - 18-gauge needle on 10 mL syringe
-  - Aspirated at point of maximal fluctuance (superior-lateral pole left tonsil)
-  - 8 mL purulent material aspirated
-  - Sent for Gram stain and culture
-  - Immediate relief of pain after aspiration
-  - Patient able to swallow sips of water
-  - Started IV antibiotics - ampicillin-sulbactam 3 g IV
-  - Dexamethasone 10 mg IV (single dose for symptom relief)
-  - IV normal saline 1 liter bolus for hydration
-  - IV morphine 4 mg for pain
-  - Gram stain - polymicrobial, gram-positive cocci in chains, gram-negative rods
-  - Observation in ED for 4 hours - tolerating oral fluids and medications
-  - No respiratory issues, pain improved to 4/10
-  - Discharged home with oral antibiotics and close follow-up
-  - Amoxicillin-clavulanate 875/125 mg BID for 10 days
-  - Hydrocodone-acetaminophen 5/325 mg every 4-6 hours PRN pain
-  - Ibuprofen 600 mg every 6 hours
-  - ENT follow-up in 48 hours
-  - Return precautions for worsening symptoms, difficulty breathing
-  - 48-hour follow-up - significant improvement
-  - Pain down to 2/10, able to eat soft foods
-  - Mouth opening improved, minimal trismus
-  - Afebrile
-  - Oropharynx - left tonsillar swelling decreased, uvula midline now
-  - No reaccumulation of abscess
-  - Continue antibiotics for full 10-day course
-  - 2-week follow-up - complete resolution
-  - No pain, eating normal diet
-  - Physical exam normal, tonsils normal size
-  - Culture final results - Group A Streptococcus, Fusobacterium
-  - Sensitive to amoxicillin-clavulanate (appropriate therapy)
-  - Discussed interval tonsillectomy given recurrent tonsillitis
-  - Patient declines surgery at this time, will reconsider if another episode
-  - Outcome - Complete resolution with needle aspiration and antibiotics
+  source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
+    Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

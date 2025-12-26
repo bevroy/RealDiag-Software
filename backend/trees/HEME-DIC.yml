@@ -1,141 +1,60 @@
 tree_id: HEME-DIC
-name: Disseminated Intravascular Coagulation Evaluation
-family: Hematology
-specialty: Hematology, Critical Care, Internal Medicine
-chief_complaint: Bleeding, Bruising, Thrombosis, Multi-organ Dysfunction
-description: Comprehensive evaluation of DIC and management
-version: "1.0"
-icd10: D65
+name: Disseminated Intravascular Coagulation (DIC)
+family: Hematology Oncology
+specialty: Hematology Oncology
+icd10:
+- D65
+snomed:
+- 67406007
+urgency: medium
+description: Comprehensive evaluation and management of Disseminated Intravascular
+  Coagulation (DIC)
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: dic_presentation
-
-nodes:
-  - id: dic_presentation
-    type: question
-    text: "Clinical presentation?"
-    options:
-      - label: "Acute DIC (bleeding predominant)"
-        next: acute_dic_bleeding
-      - label: "Chronic DIC (thrombosis predominant)"
-        next: chronic_dic_thrombosis
-      - label: "Suspected DIC - diagnostic workup"
-        next: dic_diagnosis
-
-  - id: dic_diagnosis
-    type: diagnosis
-    name: "Disseminated Intravascular Coagulation - Diagnosis"
-    icd10: "D65"
-    urgency: critical
-    workup:
-      - Definition - Systemic activation of coagulation → widespread microvascular thrombosis + consumption of platelets/clotting factors → paradoxical bleeding
-      - Pathophysiology - Underlying disease triggers excessive thrombin generation → fibrin deposition in microvasculature → consumes clotting factors and platelets → secondary fibrinolysis (elevated D-dimer, FDPs) → bleeding AND thrombosis
-      - Clinical presentations - Two patterns
-      - Acute DIC (overt, decompensated) - Bleeding predominates (oozing from IV sites, surgical wounds, GI bleed, petechiae, purpura), hypotension, organ dysfunction
-      - Chronic DIC (non-overt, compensated) - Thrombosis predominates (venous thromboembolism, arterial thrombosis, microvascular thrombosis causing organ ischemia), minimal or no bleeding
-      - Common underlying causes - "STOP Making New Thrombi"
-      - Sepsis (most common, especially gram-negative, meningococcemia with purpura fulminans)
-      - Trauma (massive tissue injury, head injury, burns, crush injury, fat embolism)
-      - Obstetric (amniotic fluid embolism, placental abruption, HELLP, retained dead fetus, septic abortion)
-      - Pancreatitis (severe acute necrotizing pancreatitis)
-      - Malignancy (acute promyelocytic leukemia APL most classic, other leukemias, solid tumors - pancreatic, prostate, mucin-secreting adenocarcinomas)
-      - Nephrotic syndrome
-      - Transfusion (massive transfusion, hemolytic transfusion reaction)
-      - Labs - Constellation of abnormalities (no single test diagnostic)
-      - Thrombocytopenia - Platelets <100K (consumed in clot formation), progressive decline
-      - Prolonged PT/INR and PTT - Consumption of clotting factors (factors V, VIII, fibrinogen)
-      - Low fibrinogen <100-150 mg/dL - Consumed (converted to fibrin)
-      - Elevated D-dimer and fibrin degradation products (FDPs) - Secondary fibrinolysis (breakdown of clots)
-      - D-dimer >3-5x upper limit normal highly suggestive
-      - Microangiopathic hemolytic anemia (MAHA) - Schistocytes on blood smear (RBCs fragmented passing through fibrin strands), elevated LDH, low haptoglobin, indirect hyperbilirubinemia
-      - Scoring systems
-      - ISTH DIC score (overt DIC) - ≥5 points compatible with overt DIC
-      - Platelets (>100=0, 50-100=1, <50=2)
-      - D-dimer (no increase=0, moderate=2, strong=3)
-      - PT prolongation (<3 sec=0, 3-6 sec=1, >6 sec=2)
-      - Fibrinogen (>100=0, <100=1)
-      - Differential diagnosis - TTP/HUS (more severe thrombocytopenia, neurologic/renal, ADAMTS13 deficiency in TTP), liver disease (similar coagulopathy but D-dimer not as elevated), massive transfusion (dilutional coagulopathy)
-    treatment:
-      - Treat underlying cause - MOST IMPORTANT, DIC will not resolve until trigger addressed
-      - Sepsis - Antibiotics, source control
-      - Obstetric - Deliver placenta/fetus
-      - APL - ATRA (all-trans retinoic acid) + chemotherapy
-      - Supportive care and component therapy
-      - Bleeding patient - Replace consumed factors
-      - Platelets - Transfuse if <50K and bleeding (or <20K prophylactically if high bleeding risk)
-      - FFP - 15-30 mL/kg (4-6 units) if PT/PTT prolonged and bleeding, or before invasive procedures
-      - Cryoprecipitate - If fibrinogen <100 mg/dL (each unit raises fibrinogen ~5-10 mg/dL), goal >100-150 mg/dL
-      - PRBCs - If anemia from bleeding
-      - Do NOT transfuse just to "correct" labs if not bleeding (can theoretically "feed the fire" by providing more substrate for clot formation, though clinical evidence mixed)
-      - Thrombosis predominant - Anticoagulation controversial but consider if thrombosis clinically significant
-      - Heparin 5-10 units/kg/hr (lower dose than therapeutic) - May reduce thrombin generation, improve outcomes in some studies (chronic DIC, purpura fulminans)
-      - Risk worsening bleeding, use cautiously
-      - Antifibrinolytic agents (TXA, aminocaproic acid) - Generally CONTRAINDICATED in DIC (can worsen thrombosis), exception: hyperfibrinolysis-predominant DIC (rare, seen in APL, prostate cancer)
-
-  - id: acute_dic_bleeding
-    type: diagnosis
-    name: "Acute DIC (Overt, Bleeding)"
-    icd10: "D65"
-    urgency: critical
-    workup:
-      - Acute decompensated DIC - Bleeding predominates, life-threatening
-      - Clinical - Diffuse bleeding (oozing from venipuncture sites, IV lines, surgical wounds, mucosal bleeding, GI bleed, hematuria), petechiae, purpura, ecchymoses, hypotension, organ dysfunction (AKI, ARDS, altered mental status from microvascular thrombosis)
-      - Purpura fulminans - Most severe form, hemorrhagic skin necrosis (symmetric peripheral gangrene), DIC + vascular thrombosis, seen with sepsis (meningococcemia, severe strep), protein C/S deficiency
-      - Labs - Marked abnormalities
-      - Severe thrombocytopenia (<50K, often <20K)
-      - Prolonged PT/PTT (often >1.5x normal)
-      - Fibrinogen <100 mg/dL (severe consumption)
-      - D-dimer markedly elevated (>5-10x ULN)
-      - Schistocytes on smear (MAHA)
-      - Underlying causes - Usually acute catastrophic events
-      - Septic shock (gram-negative or positive)
-      - Major trauma, burns
-      - Obstetric emergencies (amniotic fluid embolism, placental abruption, HELLP)
-      - Acute promyelocytic leukemia (APL, M3) - Classic, release of procoagulants from leukemic promyelocytes
-      - Massive transfusion
-    treatment:
-      - ICU care - Close monitoring, supportive care
-      - Treat underlying cause urgently - Antibiotics for sepsis, deliver fetus/placenta, ATRA for APL
-      - Aggressive blood product replacement - Active bleeding, life-threatening hemorrhage
-      - Platelets - Keep >50K if bleeding (transfuse 1 unit/10kg or apheresis unit)
-      - FFP - 15-30 mL/kg (4-6 units), goal PT/INR near normal
-      - Cryoprecipitate - 10 units (1-2 pools), goal fibrinogen >100-150 mg/dL
-      - PRBCs - Maintain Hgb >7-8 g/dL
-      - Repeat labs q4-6h, retransfuse as needed (ongoing consumption)
-      - Consider massive transfusion protocol if hemorrhaging (1:1:1 ratio PRBC:FFP:platelets)
-      - Recombinant factor VIIa - Rescue therapy if refractory bleeding despite component therapy (off-label, controversial)
-      - Heparin - Generally avoided in acute bleeding DIC, exception: purpura fulminans or thrombosis predominant
-      - Protein C concentrate - If purpura fulminans with protein C deficiency (severe sepsis)
-
-  - id: chronic_dic_thrombosis
-    type: diagnosis
-    name: "Chronic DIC (Non-overt, Thrombosis)"
-    icd10: "D65"
-    urgency: high
-    workup:
-      - Chronic compensated DIC - Low-grade ongoing coagulation activation, thrombosis predominates over bleeding
-      - Liver and bone marrow compensate by producing more platelets and clotting factors
-      - Clinical - Thrombosis (DVT, PE, arterial thrombosis, microvascular thrombosis causing renal failure, digital ischemia), minimal or no bleeding, organ dysfunction from chronic microvascular occlusion
-      - Trousseau syndrome - Migratory superficial thrombophlebitis in cancer patients (classic with pancreatic cancer)
-      - Labs - Milder abnormalities than acute DIC
-      - Platelets normal or mildly decreased (100-150K)
-      - PT/PTT normal or mildly prolonged
-      - Fibrinogen normal or even elevated (acute phase reactant, compensated production)
-      - D-dimer elevated (moderate, 2-5x normal) - Key finding
-      - Schistocytes may be absent or rare
-      - Underlying causes - Chronic conditions
-      - Solid tumors (pancreatic, lung, gastric, colon, prostate - mucin-secreting adenocarcinomas)
-      - Myeloproliferative disorders
-      - Chronic infections
-      - Retained dead fetus
-      - Giant hemangiomas (Kasabach-Merritt syndrome - localized DIC in hemangioma)
-      - Aortic aneurysm (chronic low-grade DIC from turbulent flow)
-    treatment:
-      - Treat underlying cause - Tumor resection, chemotherapy
-      - Anticoagulation - Consider prophylactic or therapeutic anticoagulation (thrombosis predominates)
-      - LMWH (enoxaparin 1 mg/kg SC q12h therapeutic or 40mg daily prophylactic) preferred in cancer
-      - Warfarin less effective in cancer-associated thrombosis
-      - DOACs (rivaroxaban, apixaban) emerging data
-      - Low-dose heparin - 5-10 units/kg/hr may reduce DIC activity
-      - Monitor for bleeding complications (still consuming factors, platelet dysfunction)
-      - Component therapy - Usually not needed unless bleeding occurs or platelets <20K
+homeopathy: []
+presentations:
+- Thrombocytopenia and prolonged PT/PTT
+- Elevated D-dimer and fibrin split products
+- Low fibrinogen
+- Bleeding and thrombosis
+- Underlying trigger (sepsis, trauma, malignancy, obstetric complication)
+workup:
+- 'PT/PTT: Prolonged (consumption of clotting factors)'
+- 'Fibrinogen: Low (<100 mg/dL) - KEY distinguishing feature (normal/high in TTP/HUS)'
+- 'D-dimer and fibrin split products: Markedly elevated (>1000)'
+- 'Platelets: Low (<100k) from consumption'
+- 'Peripheral smear: Schistocytes (if microangiopathic hemolysis component)'
+- 'DIC score (ISTH): Platelets, PT, fibrinogen, D-dimer - score ≥5 = overt DIC'
+treatment:
+- 'Guideline-based treatment options for Disseminated Intravascular Coagulation (DIC)
+  include:'
+- 'Treat underlying condition: Antibiotics for sepsis, delivery for obstetric complications,
+  chemotherapy for APL (ASH 2023)'
+- 'Supportive transfusions: Platelets if <50k and bleeding (or <20k prophylactic),
+  FFP if prolonged PT/PTT and bleeding (ASH 2023)'
+- Cryoprecipitate if fibrinogen <100 mg/dL (ASH 2023)
+- 'Heparin: Controversial, only consider if thrombosis predominates (DVT, PE, acral
+  ischemia) - may worsen bleeding (ASH 2023)'
+- NO transfusion if not bleeding and stable - may worsen thrombosis ('adding fuel
+  to fire') (ASH 2023)
+clinical_pearls:
+- 'Consumption coagulopathy: Widespread activation of coagulation → consumes platelets/factors
+  → bleeding + thrombosis'
+- 'Causes: Sepsis (gram-negative most common), trauma, malignancy (acute promyelocytic
+  leukemia, adenocarcinoma), obstetric (abruption, amniotic fluid embolism, HELLP)'
+- DIC is NEVER primary diagnosis - always secondary to underlying trigger (treat the
+  trigger)
+- 'Overt DIC: Bleeding + thrombosis + lab abnormalities. Non-overt: Labs abnormal
+  but no clinical bleeding/clotting'
+- 'APL (M3 AML): Severe DIC from release of procoagulant granules - treat with ATRA
+  + chemotherapy urgently'
+referrals:
+- ICU admission - often critically ill with multiorgan dysfunction
+- Hematology for transfusion guidance and complex coagulation management
+- 'If APL: Hematology EMERGENTLY for ATRA initiation'
+differentials: []
+trace:
+  source: National Comprehensive Cancer Network (NCCN) Guidelines, American Society
+    of Hematology (ASH) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -2,43 +2,64 @@ tree_id: ENDO-HYPERCALCEMIA
 name: Hypercalcemia
 family: Endocrinology
 specialty: Endocrinology
-chief_complaint: Elevated serum calcium with fatigue and confusion
-description: |
-  Serum calcium greater than 10.5 mg/dL. Most common causes primary hyperparathyroidism (outpatient) and malignancy (inpatient).
-  Symptoms depend on severity and rapidity of onset. Stones, bones, groans, psychiatric overtones mnemonic. Severe hypercalcemia (greater than 14 mg/dL) medical emergency.
-icd10: E83.52
-urgency: High
+icd10:
+- E83.52
+snomed: []
+urgency: medium
+description: Comprehensive evaluation and management of Hypercalcemia
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Polyuria and polydipsia
+- Constipation
+- Nausea, vomiting, anorexia
+- Abdominal pain
+- Confusion, lethargy, altered mental status
+- Weakness and fatigue
+- Bone pain
+- Kidney stones
+- Cardiac arrhythmias (shortened QT interval)
+- Depression and psychosis in severe cases
+- Symptoms correlate with degree of elevation (mild may be asymptomatic)
+- Stones, bones, groans, psychiatric overtones
 workup:
-  - Measure serum calcium, ionized calcium (if low albumin), albumin - corrected calcium equals measured calcium plus 0.8 times (4 minus albumin)
-  - Parathyroid hormone (PTH) differentiates causes - elevated or inappropriately normal PTH suggests primary hyperparathyroidism, suppressed PTH (less than 20 pg/mL) suggests PTH-independent causes
-  - If elevated PTH - measure 24-hour urine calcium (low in familial hypocalciuric hypercalcemia), vitamin D levels, parathyroid imaging (sestamibi scan, ultrasound) if surgery planned
-  - If suppressed PTH - check PTHrP (elevated in malignancy), vitamin D levels (1,25-OH and 25-OH), serum and urine protein electrophoresis (multiple myeloma), TSH (hyperthyroidism), consider chest X-ray or CT (sarcoidosis, malignancy)
-  - ECG - shortened QT interval
-  - Assess for medications - thiazides, lithium, vitamin D/A intoxication, calcium supplements
+- Total and ionized calcium (or correct for albumin)
+- PTH (intact) - must interpret in context of calcium level
+- 'If PTH low: PTHrP (malignancy), vitamin D (25-OH and 1,25), SPEP/UPEP (myeloma),
+  TSH'
+- Basic metabolic panel (phosphorus often low in hyperparathyroidism, high in malignancy),
+  ECG (shortened QT)
 treatment:
-  - Mild hypercalcemia (calcium 10.5-12 mg/dL) asymptomatic - treat underlying cause, avoid dehydration, stop contributing medications
-  - Moderate to severe hypercalcemia (calcium greater than 12 mg/dL) or symptomatic - aggressive IV fluid resuscitation
-  - Normal saline 200-300 mL/hour (4-6L over 24 hours), monitor volume status and electrolytes
-  - Calcitonin 4 IU/kg SC or IM q12h (rapid onset 4-6 hours, lowers calcium 1-2 mg/dL, tachyphylaxis after 48 hours)
-  - Bisphosphonates after volume repletion - zoledronic acid 4mg IV over 15 minutes (onset 2-4 days, peak effect 7 days, duration 2-4 weeks) or pamidronate 60-90mg IV over 2-4 hours
-  - Denosumab 120mg SC if bisphosphonates ineffective or contraindicated (renal failure)
-  - Glucocorticoids if vitamin D intoxication, granulomatous disease, lymphoma - prednisone 20-40mg daily
-  - Dialysis for severe refractory hypercalcemia or renal failure
-  - Treat underlying cause - parathyroidectomy for primary hyperparathyroidism (cure), treat malignancy, stop vitamin D supplementation
-  - Primary hyperparathyroidism indications for surgery - symptomatic, calcium greater than 1 mg/dL above upper limit, age less than 50, creatinine clearance less than 60, osteoporosis, kidney stones
+- 'Guideline-based treatment options for Hypercalcemia include:'
+- 'Mild (<12 mg/dL) asymptomatic: Hydration, treat underlying cause, avoid thiazides
+  and lithium (ADA 2024)'
+- 'Moderate-severe (≥12 mg/dL) or symptomatic: IV fluids (NS 200-300 mL/hr to restore
+  volume) (ADA 2024)'
+- Calcitonin 4 units/kg SQ/IM q12h (rapid onset but tachyphylaxis after 48hrs) (ADA
+  2024)
+- 'Bisphosphonate: Zoledronic acid 4mg IV over 15 min (slower onset but sustained
+  effect, lowers Ca in 2-4 days) (ADA 2024)'
+- 'If malignancy-related: Treat underlying cancer, consider denosumab if bisphosphonates
+  fail (ADA 2024)'
 clinical_pearls:
-  - Stones (kidney stones, nephrocalcinosis), bones (osteitis fibrosa cystica, bone pain), groans (constipation, nausea, pancreatitis), psychiatric overtones (confusion, depression, coma)
-  - Primary hyperparathyroidism caused by parathyroid adenoma (85%), hyperplasia (15%), carcinoma (less than 1%)
-  - Malignancy-associated hypercalcemia mechanisms - PTHrP secretion (squamous cell, renal, breast), osteolytic metastases, 1,25-vitamin D production (lymphoma)
-  - Familial hypocalciuric hypercalcemia (FHH) - benign condition, low urine calcium, no treatment needed, distinguish from primary hyperparathyroidism
-  - Thiazide diuretics increase renal calcium reabsorption, can unmask or worsen hyperparathyroidism
-  - Hypercalcemia of malignancy poor prognosis (median survival 1-3 months)
-differentials:
-  - Primary hyperparathyroidism
-  - Malignancy (PTHrP, osteolytic metastases, lymphoma)
-  - Vitamin D intoxication
-  - Thiazide diuretics
-  - Granulomatous disease (sarcoidosis, tuberculosis)
-  - Familial hypocalciuric hypercalcemia
+- Stones, bones, groans, psychiatric overtones (kidney stones, bone pain, abdominal
+  pain, confusion/depression)
+- '90% of cases: Primary hyperparathyroidism (outpatient) or malignancy (inpatient)'
+- 'Measure ionized calcium or correct for albumin: Corrected Ca = measured Ca + 0.8(4.0
+  - albumin)'
+- 'PTH differentiates: High/inappropriately normal PTH = hyperparathyroidism. Low
+  PTH = malignancy or other'
+- Severe hypercalcemia (>14 mg/dL) is medical emergency - can cause cardiac arrhythmias,
+  renal failure, coma
+referrals:
+- Endocrinology for elevated PTH (primary hyperparathyroidism workup and management)
+- Oncology if malignancy suspected (PTHrP elevated, known cancer history)
+- Hospital admission if calcium >14 mg/dL or symptomatic (confusion, arrhythmia, renal
+  failure)
+differentials: []
 trace:
-  - 65-year-old man with fatigue, constipation, polyuria x 3 months → Labs show calcium 13.2 mg/dL, albumin 4.0 (no correction needed), PTH 8 pg/mL (suppressed) → Chest X-ray shows hilar lymphadenopathy → CT chest shows mediastinal and hilar lymphadenopathy → Bronchoscopy with biopsy shows non-caseating granulomas → Elevated ACE level, 1,25-vitamin D 95 pg/mL (elevated) → Diagnose sarcoidosis with hypercalcemia → Start IV normal saline 200 mL/hour, prednisone 40mg daily → Calcium normalizes to 9.8 mg/dL → Taper prednisone, calcium remains normal, sarcoidosis symptoms improve
+  source: American Diabetes Association (ADA) Standards of Care, Endocrine Society
+    Clinical Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

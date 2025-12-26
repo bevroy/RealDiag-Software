@@ -1,0 +1,58 @@
+tree_id: ONCO-CML
+name: Chronic Myeloid Leukemia (CML)
+family: Hematology Oncology
+specialty: Hematology Oncology
+icd10:
+- C92.1
+snomed:
+- 92814006
+urgency: medium
+description: Comprehensive evaluation and management of Chronic Myeloid Leukemia (CML)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Often asymptomatic, found incidentally
+- Fatigue, weight loss, night sweats
+- Splenomegaly (massive)
+- Leukocytosis with left shift
+- Philadelphia chromosome (BCR-ABL fusion) positive
+- Responsive to tyrosine kinase inhibitors (imatinib)
+workup:
+- 'CBC: Leukocytosis (often >100k) with left shift (myelocytes, metamyelocytes, basophilia)'
+- 'Philadelphia chromosome: Cytogenetics showing t(9;22) OR BCR-ABL PCR (quantitative,
+  for monitoring)'
+- 'Bone marrow biopsy: Hypercellular with myeloid predominance, <10% blasts (chronic
+  phase)'
+- 'Monitor: BCR-ABL PCR q3 months to assess treatment response'
+treatment:
+- 'Guideline-based treatment options for Chronic Myeloid Leukemia (CML) include:'
+- 'First-line TKI: Imatinib 400mg daily (1st generation) OR dasatinib/nilotinib (2nd
+  generation, faster/deeper responses) (ASH 2023)'
+- 'Monitor response: BCR-ABL PCR q3 months - goal is major molecular response (BCR-ABL
+  ≤0.1%) (ASH 2023)'
+- 'If resistance/intolerance: Switch to 2nd generation TKI (dasatinib, nilotinib,
+  bosutinib) or 3rd generation (ponatinib) (ASH 2023)'
+- 'Allogeneic HSCT: Reserved for TKI failure, blast crisis, or T315I mutation (ponatinib
+  only TKI that works) (ASH 2023)'
+- Hydroxyurea initially if WBC >100kto prevent leukostasis (ASH 2023)
+clinical_pearls:
+- 'Philadelphia chromosome t(9;22): BCR-ABL fusion creates constitutively active tyrosine
+  kinase - diagnostic for CML'
+- 'Three phases: Chronic (asymptomatic, 90%), Accelerated (worsening cytopenias),
+  Blast crisis (acute leukemia transformation)'
+- Tyrosine kinase inhibitors (TKIs) transformed CML from fatal (median survival 3-5
+  years) to chronic manageable disease
+- WBC often >100k at presentation with entire myeloid series (myelocytes, metamyelocytes,
+  bands) - 'left shift'
+- Treatment-free remission possible in 40-50% after years of TKI therapy with deep
+  molecular response
+referrals:
+- Hematology/oncology for all CML diagnoses - lifelong TKI management
+- Bone marrow transplant evaluation if TKI failure or blast crisis
+differentials: []
+trace:
+  source: National Comprehensive Cancer Network (NCCN) Guidelines, American Society
+    of Hematology (ASH) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

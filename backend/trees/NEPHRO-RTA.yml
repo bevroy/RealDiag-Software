@@ -1,0 +1,55 @@
+tree_id: NEPHRO-RTA
+name: Renal Tubular Acidosis
+family: Nephrology
+specialty: Nephrology
+icd10:
+- N25.89
+snomed:
+- '236467001'
+urgency: medium
+description: Comprehensive evaluation and management of Renal Tubular Acidosis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Metabolic acidosis
+- Normal anion gap
+- Hypokalemia or hyperkalemia
+- Nephrolithiasis
+- Growth retardation (children)
+workup:
+- ABG (low pH, low HCO3, normal pCO2 = metabolic acidosis)
+- Basic metabolic panel (low HCO3, normal anion gap, K+ low or high)
+- Urine pH (>5.5 in type 1 despite acidosis, <5.5 in type 2/4)
+- Urine anion gap (positive in RTA, negative in diarrhea)
+- 'Workup for etiology: ANA, SSA/SSB (Sjögren''s), SPEP/UPEP (Fanconi), renin/aldosterone
+  (type 4)'
+treatment:
+- 'Guideline-based treatment options for Renal Tubular Acidosis include:'
+- 'Type 1 (distal): Sodium bicarbonate or potassium citrate 1-2 mEq/kg/day (replace
+  bicarb losses) (KDIGO 2024)'
+- 'Type 2 (proximal): High-dose sodium bicarbonate 10-15 mEq/kg/day + potassium supplementation
+  (KDIGO 2024)'
+- 'Type 4: Treat hyperkalemia - kayexalate, fludrocortisone 0.1-0.2mg daily (mineralocorticoid)
+  (KDIGO 2024)'
+- Discontinue offending medications if possible (NSAIDs, ACEi/ARB in type 4) (KDIGO
+  2024)
+- Treat underlying autoimmune disease if present (KDIGO 2024)
+clinical_pearls:
+- 'Type 1 (distal RTA): Cannot acidify urine (urine pH >5.5), hypokalemia, kidney
+  stones (calcium phosphate)'
+- 'Type 2 (proximal RTA): Impaired bicarb reabsorption, hypokalemia, Fanconi syndrome'
+- 'Type 4: Hypoaldosteronism (diabetes, NSAIDs), hyperkalemia, mild acidosis'
+- Normal anion gap metabolic acidosis (urine anion gap positive differentiates RTA
+  from diarrhea)
+- 'Type 1 causes: Sjögren''s, lupus, sickle cell, amphotericin B, lithium'
+referrals:
+- Nephrology for all RTA (diagnosis confirmation, management)
+- Rheumatology if autoimmune etiology (Sjögren's, lupus)
+- Endocrinology if hypoaldosteronism suspected
+differentials: []
+trace:
+  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
+    Society of Nephrology (ASN)'
+  version: 0.1.0
+  last_updated: '2024-12-26'

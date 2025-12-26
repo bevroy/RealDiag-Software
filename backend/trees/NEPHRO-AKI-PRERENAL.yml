@@ -1,0 +1,48 @@
+tree_id: NEPHRO-AKI-PRERENAL
+name: Acute Kidney Injury - Prerenal
+family: Nephrology
+specialty: Nephrology
+icd10:
+- N17.0
+snomed:
+- '35455006'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Kidney Injury - Prerenal
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Elevated BUN/Cr ratio (>20:1)
+- Oliguria, concentrated urine (dark, low urine sodium <20 mEq/L)
+- 'Dehydration signs: Dry mucous membranes, decreased skin turgor, orthostatic hypotension'
+- 'Recent volume loss: Vomiting, diarrhea, diuretics, bleeding, poor oral intake'
+- FeNa <1% (fractional excretion of sodium)
+- Responds to IV fluids (Cr improves with rehydration)
+workup:
+- Basic metabolic panel (BUN, Cr, electrolytes)
+- Urinalysis (concentrated, high specific gravity >1.020)
+- Urine sodium (<20 mEq/L prerenal)
+- FeNa (fractional excretion Na <1%)
+- Renal ultrasound (rule out obstruction if no improvement)
+treatment:
+- 'Guideline-based treatment options for Acute Kidney Injury - Prerenal include:'
+- 'IV fluid resuscitation: NS or LR 500-1000mL bolus, then 100-200 mL/hr (KDIGO 2024)'
+- Monitor urine output (goal >0.5 mL/kg/hr) (KDIGO 2024)
+- Hold nephrotoxic medications (NSAIDs, ACEi/ARB, diuretics temporarily) (KDIGO 2024)
+- 'Treat underlying cause: Antibiotics for sepsis, stop GI losses (KDIGO 2024)'
+- 'Serial creatinine: Should improve with fluids in 24-48 hours (KDIGO 2024)'
+clinical_pearls:
+- Most common cause of AKI (70%) and most reversible
+- BUN rises more than Cr in prerenal (>20:1 ratio)
+- FeNa <1% indicates kidney holding onto sodium (appropriate response to low perfusion)
+- 'Give fluid challenge: 500-1000mL NS, if Cr improves → prerenal confirmed'
+- 'Causes: Hypovolemia, heart failure, cirrhosis, sepsis (vasodilation)'
+referrals:
+- Nephrology if Cr not improving with fluids after 48-72 hours
+- ICU if severe (Cr >3, oliguria, hyperkalemia)
+differentials: []
+trace:
+  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
+    Society of Nephrology (ASN)'
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,75 +1,53 @@
 tree_id: PSYCH-BIPOLAR-DISORDER
-name: Bipolar Disorder
+name: Bipolar I Disorder
 family: Psychiatry
 specialty: Psychiatry
-chief_complaint: Mood swings and decreased need for sleep
-description: Mood disorder with episodes of mania or hypomania alternating with depression, causing significant functional impairment
-
-icd10: F31.9
-
-urgency: urgent
-
+icd10:
+- F31.10
+- F31.31
+snomed:
+- '13746004'
+urgency: medium
+description: Comprehensive evaluation and management of Bipolar I Disorder
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Manic episode: ≥1 week of elevated/expansive or irritable mood'
+- Inflated self-esteem or grandiosity, decreased need for sleep (3 hours feels sufficient)
+- More talkative than usual, pressured speech, flight of ideas
+- Distractibility, increased goal-directed activity, psychomotor agitation
+- Excessive involvement in pleasurable activities (spending sprees, sexual indiscretions,
+  risky investments)
+- Marked functional impairment, may require hospitalization
+- Depressive episodes also common (but not required for diagnosis)
 workup:
-  - Distinguish bipolar I (mania) vs bipolar II (hypomania plus major depression) vs cyclothymic disorder
-  - Bipolar I: at least one manic episode (may also have depressive episodes), most severe form
-  - Bipolar II: at least one hypomanic episode AND at least one major depressive episode (no full mania)
-  - Manic episode criteria: abnormally elevated or irritable mood lasting at least 1 week (or any duration if hospitalization required), plus 3 or more symptoms (4 if mood only irritable) - inflated self-esteem/grandiosity, decreased need for sleep (feels rested after 3 hours), more talkative (pressured speech), flight of ideas/racing thoughts, distractibility, increased goal-directed activity or psychomotor agitation, excessive involvement in risky activities (spending sprees, sexual indiscretions, foolish investments)
-  - Hypomanic episode: same symptoms as mania but duration at least 4 days (not 7), less severe (no marked impairment, no psychotic features, no hospitalization)
-  - Depressive episode: same criteria as major depressive disorder (depressed mood or anhedonia plus 4 additional symptoms for at least 2 weeks)
-  - Mixed episode: criteria met for both manic and depressive episode simultaneously
-  - Psychotic features: delusions or hallucinations may occur during severe mania
-  - Assess suicide risk: bipolar disorder has high suicide rate (15-20 percent lifetime), especially during depressive or mixed episodes
-  - Rule out secondary causes: thyroid (TSH), substance use (urine drug screen), medications (corticosteroids, stimulants, antidepressants can trigger mania)
-  - Medical workup before starting mood stabilizer: CBC, CMP (baseline renal and hepatic function), TSH, pregnancy test, lithium requires baseline renal function and TSH
-  - Consider neuroimaging if first episode with atypical features or neurologic signs
-
+- Mood Disorder Questionnaire (MDQ) for screening
+- 'Lithium level (if on lithium): Therapeutic 0.6-1.2 mEq/L'
+- TSH, Cr, CBC (baseline and monitor with mood stabilizers)
+- Urine drug screen (substance-induced mania)
 treatment:
-  - Acute mania: mood stabilizer (lithium 300-600 mg TID titrate to level 0.8-1.2 mEq/L, or valproate loading 20-30 mg/kg/day then 750-2000 mg daily in divided doses titrate to level 50-125 mcg/mL) plus antipsychotic for rapid control (risperidone 2-6 mg daily, olanzapine 10-20 mg daily, quetiapine 400-800 mg daily, aripiprazole 15-30 mg daily)
-  - Severe mania with psychosis: antipsychotic essential, may need hospitalization for safety
-  - Acute bipolar depression: first-line is mood stabilizer (lithium or lamotrigine 200-400 mg daily) or atypical antipsychotic (quetiapine 300 mg HS, lurasidone 20-120 mg daily), avoid antidepressant monotherapy (can trigger mania, use only with mood stabilizer if needed)
-  - Maintenance treatment: mood stabilizer long-term to prevent recurrence (lithium most evidence for suicide prevention, or lamotrigine, or valproate)
-  - Lithium monitoring: serum lithium level 0.6-1.0 mEq/L for maintenance (check every 3-6 months), TSH and creatinine every 6-12 months (can cause hypothyroidism and renal toxicity), narrow therapeutic window (toxicity greater than 1.5 mEq/L causes tremor, confusion, seizures)
-  - Valproate monitoring: serum level 50-125 mcg/mL, CBC and LFTs every 6 months (hepatotoxicity risk, thrombocytopenia), teratogenic (avoid in women of childbearing potential)
-  - Lamotrigine titration: start 25 mg daily x 2 weeks, increase slowly to avoid Stevens-Johnson syndrome (serious rash), target dose 200-400 mg daily for maintenance, more effective for bipolar depression
-  - Antipsychotic continuation: may continue long-term if needed for mood stability, monitor for metabolic side effects (weight gain, diabetes, dyslipidemia)
-  - Psychotherapy: adjunct to medication, cognitive-behavioral therapy, interpersonal and social rhythm therapy, psychoeducation about illness and medication adherence
-  - Avoid triggers: maintain regular sleep schedule (sleep deprivation triggers mania), avoid substance use (alcohol, stimulants), minimize stress
-
+- 'Guideline-based treatment options for Bipolar I Disorder include:'
+- 'Acute mania: Atypical antipsychotic (olanzapine 10-20mg, risperidone 2-6mg, quetiapine
+  400-800mg) (APA 2022)'
+- 'Mood stabilizer: Lithium 300mg BID-TID (titrate to level 0.6-1.2), or valproate
+  500-1500mg/day (APA 2022)'
+- 'Depressive episode: Lamotrigine 200mg daily, or quetiapine, or add antidepressant
+  (with mood stabilizer) (APA 2022)'
+- 'Avoid: Antidepressants alone (risk mania), benzodiazepines long-term (APA 2022)'
+- 'Psychotherapy: CBT, family-focused therapy, psychoeducation (APA 2022)'
 clinical_pearls:
-  - Bipolar I requires one manic episode (elevated mood, decreased sleep, risky behavior, lasting 1 week)
-  - Bipolar II has hypomania (milder, 4 days) plus major depression (no full mania)
-  - Antidepressant monotherapy can trigger mania (always use with mood stabilizer)
-  - Lithium most evidence for suicide prevention
-  - Acute mania treat with mood stabilizer plus antipsychotic
-  - Lamotrigine effective for bipolar depression (slow titration to avoid rash)
-  - High suicide risk (15-20 percent lifetime)
-
-differentials:
-  - Major depressive disorder (depression only, no mania or hypomania)
-  - Borderline personality disorder (mood instability but brief, reactive to interpersonal stress)
-  - ADHD (distractibility, hyperactivity, but chronic not episodic)
-  - Substance-induced mood disorder (mania from stimulants or steroids, depression from alcohol)
-  - Schizoaffective disorder (psychotic symptoms plus mood episodes)
-
+- 'Bipolar I: At least one manic episode (depressive episodes common but not required)'
+- 'Bipolar II: Hypomanic episodes + major depressive episodes (no full mania)'
+- 'Mood stabilizers first-line: Lithium, valproate, lamotrigine, atypical antipsychotics'
+- 'Avoid antidepressants alone: Can trigger mania or rapid cycling'
+- 'Lithium levels: Therapeutic 0.6-1.2 mEq/L, check levels q3-6 months + TSH, Cr'
+referrals:
+- Psychiatry for all bipolar disorder
+- Hospitalization if manic with psychosis, danger to self/others, or severe impairment
+differentials: []
 trace:
-  - 26-year-old woman brought to ED by family for bizarre behavior past 5 days
-  - History from family: sleeping only 2 hours per night but full of energy, talking nonstop (difficult to interrupt), spent $15,000 on credit cards buying clothes and jewelry (cannot afford), made plans to start 3 businesses (no prior business experience), believes she has special powers, hypersexual behavior (inappropriate with strangers)
-  - Past history: 2 prior episodes of severe depression (age 19 and 23, each lasting 2-3 months with suicidal thoughts, treated with sertraline which helped initially)
-  - Currently taking sertraline 100 mg daily x 6 months (started for depression), family reports current episode started 2 weeks after sertraline increased from 50 to 100 mg
-  - Exam: well-groomed, very talkative (pressured speech), difficult to redirect, euphoric mood, grandiose (believes she will be CEO of major company), flight of ideas, no hallucinations, poor insight
-  - Mental status: alert, oriented x 3, thought process tangential, mood elevated/expansive, affect bright, thought content grandiose (no delusions), no suicidal ideation currently
-  - Labs: urine drug screen negative, TSH 1.8 mIU/L (normal), CBC and CMP normal, pregnancy test negative
-  - Diagnosis: manic episode likely triggered by antidepressant (sertraline increased dose), consistent with bipolar I disorder (first manic episode, prior depressive episodes suggest bipolar not unipolar depression)
-  - Sertraline discontinued immediately (antidepressants can trigger mania)
-  - Admitted to inpatient psychiatry unit for safety and stabilization
-  - Started valproate 500 mg TID (loading dose 30 mg/kg/day for rapid control) plus risperidone 3 mg HS (antipsychotic for rapid symptom control and sleep)
-  - Day 3: sleeping better (6 hours), less agitated, valproate level 68 mcg/mL
-  - Day 5: mood less elevated, speech less pressured, recognizes spending was excessive, valproate level 85 mcg/mL (therapeutic), risperidone continued 3 mg HS
-  - Day 7: significant improvement, insight improved, no longer grandiose, spending behavior stopped
-  - Discharge day 10: euthymic mood, good insight, valproate 750 mg TID (valproate level 95 mcg/mL), risperidone 2 mg HS
-  - Outpatient follow-up arranged with psychiatrist
-  - Psychoeducation: bipolar I disorder, lifelong condition, medication adherence critical, recognize early warning signs of mania (decreased sleep), avoid antidepressants without mood stabilizer
-  - 1 month: euthymic (normal mood), valproate level 88 mcg/mL therapeutic, risperidone tapered to 1 mg HS
-  - 3 months: mood stable, valproate continued long-term for maintenance, risperodone discontinued (no longer needed), engaged in psychotherapy (CBT plus interpersonal and social rhythm therapy)
-  - 6 months: no recurrence of mania or depression, working full-time, credit card debt being managed, excellent medication adherence, regular sleep schedule
-  - Counseled on avoiding triggers (alcohol, sleep deprivation, stress), family educated on early warning signs
+  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
+    Criteria
+  version: 0.1.0
+  last_updated: '2024-12-26'

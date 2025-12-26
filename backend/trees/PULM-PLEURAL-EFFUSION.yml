@@ -1,116 +1,52 @@
 tree_id: PULM-PLEURAL-EFFUSION
-name: Pleural Effusion Evaluation
+name: Pleural Effusion
 family: Pulmonology
-specialty: Pulmonology, Internal Medicine
-chief_complaint: Dyspnea, Pleuritic Chest Pain, Cough
-description: Evaluation and management of pleural effusion
-version: "1.0"
-icd10: J90
+specialty: Pulmonology
+icd10:
+- J90
+- J94.0
+snomed:
+- '60046008'
+urgency: medium
+description: Comprehensive evaluation and management of Pleural Effusion
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: pleural_effusion_evaluation
-
-nodes:
-  - id: pleural_effusion_evaluation
-    type: diagnosis
-    name: "Pleural Effusion"
-    icd10: "J90"
-    urgency: medium
-    workup:
-      - Pleural effusion - Abnormal accumulation of fluid in pleural space (between visceral and parietal pleura)
-      - Normal pleural space contains 5-15 mL fluid (lubricates, allows frictionless movement during breathing)
-      - Prevalence - 1.5 million cases/year US
-      - Pathophysiology - Imbalance between fluid production and removal
-      - Increased production - Increased hydrostatic pressure (heart failure), increased capillary permeability (pneumonia, inflammation)
-      - Decreased removal - Decreased oncotic pressure (hypoalbuminemia), lymphatic obstruction (malignancy), increased pleural membrane permeability
-      - Classification - Transudative vs. exudative (Light's criteria)
-      - Transudative - Ultrafiltrate of plasma (systemic factors altering hydrostatic/oncotic forces), pleura not diseased
-      - Exudative - Pleural/lung disease (increased capillary permeability, inflammation, infection, malignancy)
-      - Causes
-      - Transudative (30%) - Heart failure (most common cause all effusions, 40%), cirrhosis with ascites, nephrotic syndrome, peritoneal dialysis, hypoalbuminemia, constrictive pericarditis, atelectasis
-      - Exudative (70%) - Pneumonia/parapneumonic effusion (25%), malignancy (15%, lung cancer, breast, lymphoma, mesothelioma), pulmonary embolism (10%), viral infection, TB, post-cardiac injury syndrome, rheumatologic (SLE, RA), pancreatitis, esophageal rupture, chylothorax (lymphatic obstruction)
-      - Clinical presentation
-      - Dyspnea (most common) - Worsens with exertion, orthopnea if large
-      - Pleuritic chest pain (50%) - Sharp, worse with inspiration, coughing (suggests pleural inflammation, exudative)
-      - Cough (nonproductive typically)
-      - Fever (if infectious)
-      - Symptoms of underlying cause - Leg edema (heart failure), ascites (cirrhosis), weight loss/night sweats (malignancy, TB)
-      - Physical exam
-      - Inspection - Decreased chest wall movement affected side
-      - Percussion - Dullness to percussion (fluid)
-      - Auscultation - Decreased or absent breath sounds, decreased tactile fremitus
-      - Egophony - Above effusion (compressed lung)
-      - Small effusions (<300 mL) may have normal exam
-      - Imaging
-      - Chest X-ray - Initial test
-      - Upright PA/lateral - Blunting costophrenic angle (>175 mL), meniscus sign (>500 mL), complete opacification hemithorax if large
-      - Lateral decubitus - Detect smaller effusions (50-100 mL), assess if free-flowing (layers) vs. loculated (does not layer)
-      - Ultrasound - More sensitive than CXR (detects 5-50 mL), guides thoracentesis (reduces complication risk), differentiates solid vs. fluid, septations/loculations
-      - CT chest with contrast - Define underlying lung/pleural pathology (mass, consolidation, PE), characterize effusion (loculated, empyema)
-      - Thoracentesis - Diagnostic AND therapeutic
-      - Indications - New unexplained effusion >1 cm on lateral decubitus or ultrasound (diagnostic), symptomatic large effusion (therapeutic)
-      - Contraindications - Small effusion (<1 cm), bleeding diathesis (relative, correct if possible INR <1.5, platelets >50K), mechanical ventilation with high PEEP
-      - Procedure - Ultrasound-guided preferred (reduces pneumothorax risk 50%), insert needle posterolateral chest wall (midscapular or posterior axillary line), above rib (avoid neurovascular bundle), aspirate fluid for analysis
-      - Remove 1-1.5 L maximum (risk re-expansion pulmonary edema if remove >1.5 L rapidly)
-      - Complications - Pneumothorax (5-10%, reduced to 1-3% with ultrasound guidance), hemothorax, infection, re-expansion pulmonary edema
-      - Pleural fluid analysis - CRITICAL
-      - Appearance - Straw-colored (transudate), cloudy (exudate, infection), bloody (malignancy, PE, trauma), milky (chylothorax), purulent (empyema), brown (chronic, old blood)
-      - Light's criteria - Distinguish transudate vs. exudate
-      - Exudate if ANY 1 of 3 criteria met (sensitivity 98%, specificity 80%)
-      - Pleural fluid protein / serum protein >0.5
-      - Pleural fluid LDH / serum LDH >0.6
-      - Pleural fluid LDH > 2/3 upper limit normal serum LDH
-      - If borderline, calculate serum-pleural fluid albumin gradient - Transudate if gradient >1.2 g/dL
-      - Cell count and differential
-      - WBC - Transudates <1000, exudates >1000
-      - Neutrophils predominant (>50%) - Acute process (parapneumonic, PE, pancreatitis)
-      - Lymphocytes predominant (>50%) - Chronic (TB, malignancy, sarcoid, chylothorax)
-      - Eosinophils (>10%) - Blood/air in pleural space, drugs, parasites, asbestos
-      - Glucose - Low (<60 mg/dL or <serum) suggests complicated parapneumonic, empyema, TB, rheumatoid pleurisy, malignancy, esophageal rupture
-      - pH - Low (<7.2) same causes as low glucose, indicates need for chest tube drainage (parapneumonic/empyema)
-      - Gram stain and culture - If suspect infection (positive only 40% parapneumonic, more sensitive if empyema)
-      - Cytology - Malignant cells (sensitivity 60%, send 3 separate samples increase yield to 80%)
-      - AFB smear and culture - If suspect TB (low yield smear <10%, culture better 50%, consider pleural biopsy increase yield 80%)
-      - Triglycerides - If milky (chylothorax), >110 mg/dL diagnostic
-      - Amylase - Elevated if pancreatitis, esophageal rupture
-    treatment:
-      - Treat underlying cause
-      - Transudative effusions
-      - Heart failure - Diuretics (furosemide), sodium restriction, optimize heart failure management
-      - Effusion resolves with treatment (no thoracentesis unless symptomatic)
-      - Cirrhosis - Sodium restriction, diuretics (spironolactone), therapeutic thoracentesis if symptomatic, TIPS if refractory
-      - Nephrotic syndrome - Treat underlying kidney disease, diuretics
-      - Exudative effusions
-      - Parapneumonic effusion - Associated with pneumonia (40-60% bacterial pneumonia develop effusion)
-      - Uncomplicated - Small, free-flowing, pH >7.2, glucose >60, negative Gram stain/culture
-      - Treat pneumonia with antibiotics (effusion resolves spontaneously)
-      - Complicated - pH <7.2 or glucose <60 or LDH >1000 or positive Gram stain/bacteria
-      - Antibiotics + chest tube drainage (prevent empyema, loculation, fibrosis)
-      - Empyema - Frank pus (purulent, pH <7.0, glucose <40, positive culture)
-      - Chest tube drainage MANDATORY + antibiotics 3-6 weeks
-      - Intrapleural fibrinolytics (tPA + DNase) - Break down loculations, improve drainage (MIST2 trial)
-      - Video-assisted thoracoscopic surgery (VATS) or open decortication - If failed chest tube drainage (thick loculations, pleural peel)
-      - Malignant effusion - Recurrent symptomatic
-      - Therapeutic thoracentesis (palliation, may recur rapidly)
-      - Pleurodesis - Instill sclerosing agent (talc, doxycycline, bleomycin) into pleural space → inflammatory response → visceral/parietal pleura adhere (prevent reaccumulation)
-      - Success rate 70-90% (talc most effective)
-      - Indications - Recurrent symptomatic malignant effusion, life expectancy >3 months, lung re-expands after drainage (trapped lung will not pleurodese)
-      - Indwelling pleural catheter (IPC) - Tunneled catheter, patient drains at home PRN
-      - Quality of life better (avoid repeated thoracentesis), spontaneous pleurodesis 40-50% (then can remove)
-      - TB effusion - Rifampin, isoniazid, pyrazinamide, ethambutol (RIPE) x 6 months
-      - Effusion resolves with treatment
-      - Steroids controversial (may reduce pleural thickening)
-      - Chylothorax - Lymphatic obstruction (malignancy, trauma, surgery)
-      - Conservative - Low-fat diet (medium-chain triglycerides), TPN if severe
-      - Chest tube drainage + octreotide (reduce lymph flow)
-      - Surgery (thoracic duct ligation, pleurodesis) if failed conservative (>1-2 weeks)
-      - Hemothorax - Trauma, malignancy, anticoagulation, aortic dissection
-      - Chest tube drainage
-      - Surgery if >1500 mL initial drainage or >200 mL/hour ongoing
-      - Therapeutic thoracentesis - Large symptomatic effusion
-      - Improves dyspnea immediately
-      - Remove up to 1-1.5 L per session (re-expansion pulmonary edema risk if >1.5 L)
-      - Prognosis - Depends on underlying cause
-      - Transudative (heart failure, cirrhosis) - Treatable, effusion resolves with treatment
-      - Malignant - Poor prognosis (median survival 3-12 months)
-      - Empyema - Mortality 10-20% (higher if delayed treatment)
+homeopathy: []
+presentations:
+- Dyspnea, pleuritic chest pain, cough
+- Decreased breath sounds, dullness to percussion
+- 'Chest X-ray: Blunting of costophrenic angle (>200mL), meniscus sign'
+- Ultrasound more sensitive than X-ray (detects 5-50mL)
+- 'Transudative: CHF, cirrhosis, nephrotic syndrome'
+- 'Exudative: Pneumonia (parapneumonic), malignancy, TB, PE'
+workup:
+- Chest X-ray (PA, lateral, lateral decubitus)
+- 'Thoracentesis: Send fluid for cell count, protein, LDH, glucose, pH, gram stain,
+  culture, cytology'
+- Serum protein, LDH (for Light's criteria)
+- Chest ultrasound (localize, assess septations)
+treatment:
+- 'Guideline-based treatment options for Pleural Effusion include:'
+- Diagnostic thoracentesis if >10mm on lateral decubitus film (ATS 2023)
+- 'Transudate: Treat underlying (ATS 2023)'
+- 'Exudative: Treat cause (antibiotics for parapneumonic, chemotherapy for malignant)
+  (ATS 2023)'
+- 'Complicated parapneumonic or empyema: Chest tube drainage, consider VATS (ATS 2023)'
+- 'Recurrent malignant: Pleurodesis or tunneled pleural catheter (ATS 2023)'
+clinical_pearls:
+- Light's criteria distinguish transudate vs exudate (use if serum protein 5-8 g/dL)
+- 'Exudate if: Pleural protein/serum protein >0.5, pleural LDH/serum LDH >0.6, OR
+  pleural LDH >2/3 upper limit normal'
+- 'Parapneumonic effusion: Needs drainage if pH <7.2, glucose <60, or positive gram
+  stain/culture'
+- 'Empyema: Pus in pleural space, needs chest tube drainage'
+- 'Malignant effusion: Exudative, often bloody, positive cytology'
+referrals:
+- Pulmonology for thoracentesis or complex effusions
+- Cardiothoracic surgery if empyema or need for VATS/decortication
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

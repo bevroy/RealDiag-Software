@@ -1,0 +1,56 @@
+tree_id: CARD-HFREF
+name: Heart Failure with Reduced Ejection Fraction (HFrEF)
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I50.22
+- I50.23
+snomed:
+- '441530006'
+urgency: medium
+description: Comprehensive evaluation and management of Heart Failure with Reduced
+  Ejection Fraction (HFrEF)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Exertional dyspnea, orthopnea, paroxysmal nocturnal dyspnea
+- Lower extremity edema, weight gain, fatigue
+- 'Exam: Rales, JVD, S3 gallop, displaced PMI'
+- 'Echocardiogram: LVEF <40%'
+- BNP >400 or NT-proBNP >900 pg/mL
+- 'Etiologies: Ischemic (CAD), nonischemic (dilated cardiomyopathy, viral, toxins)'
+workup:
+- Echocardiogram (assess EF, valves, wall motion)
+- BNP or NT-proBNP
+- ECG, chest X-ray
+- Basic metabolic panel (renal function, K+)
+- Coronary angiography (assess for ischemic etiology)
+treatment:
+- 'Guideline-based treatment options for Heart Failure with Reduced Ejection Fraction
+  (HFrEF) include:'
+- 'ACE inhibitor: Lisinopril 2.5-40mg daily, or ARB if ACEi-intolerant (ACC/AHA 2023)'
+- Sacubitril-valsartan (Entresto) 24/26mg BID → titrate to 97/103mg BID (if tolerated)
+  (ACC/AHA 2023)
+- 'Beta-blocker: Carvedilol 3.125mg BID → 25mg BID, or metoprolol succinate (ACC/AHA
+  2023)'
+- 'Mineralocorticoid antagonist: Spironolactone 12.5-25mg daily (watch K+) (ACC/AHA
+  2023)'
+- 'SGLT2 inhibitor: Dapagliflozin 10mg daily (even if not diabetic!) (ACC/AHA 2023)'
+- 'Loop diuretic: Furosemide 20-80mg daily PRN for volume overload (ACC/AHA 2023)'
+clinical_pearls:
+- HFrEF (EF <40%) vs HFpEF (EF ≥50%) - treatments differ
+- 'Quadruple therapy improves survival: ACEi/ARB/ARNI, BB, MRA, SGLT2i'
+- Sacubitril-valsartan (Entresto) superior to ACEi for HFrEF
+- Avoid NSAIDs (worsen fluid retention), diltiazem/verapamil (negative inotropes)
+- ICD if EF ≤35% despite optimal medical therapy (primary prevention SCD)
+referrals:
+- Cardiology for new diagnosis
+- Heart failure clinic for chronic management
+- Consider ICD if EF ≤35%, CRT if LBBB and QRS ≥150ms
+differentials: []
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

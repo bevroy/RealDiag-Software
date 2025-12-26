@@ -1,174 +1,32 @@
 tree_id: PSYCH-SUBSTANCE-USE
-name: Substance Use Disorders and Intoxication
+name: Substance Use Disorder
 family: Psychiatry
-specialty: Psychiatry, Emergency Medicine, Addiction Medicine
-chief_complaint: Altered Mental Status, Intoxication, Withdrawal, Substance Abuse
-description: Comprehensive evaluation and management of substance use disorders, intoxication, and withdrawal syndromes
-version: "1.0"
-icd10: N92.6
+specialty: Psychiatry
+icd10:
+- F10.20
+- F11.20
+- F19.20
+snomed:
+- '191816009'
+urgency: medium
+description: Comprehensive evaluation and management of Substance Use Disorder
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: substance_presentation
-
-nodes:
-  - id: substance_presentation
-    type: question
-    text: "Primary clinical presentation?"
-    options:
-      - label: "Alcohol withdrawal or concern for delirium tremens"
-        next: alcohol_withdrawal
-      - label: "Opioid intoxication or overdose"
-        next: opioid_overdose
-      - label: "Stimulant intoxication (cocaine, methamphetamine)"
-        next: stimulant_intoxication
-      - label: "Benzodiazepine or sedative withdrawal"
-        next: benzo_withdrawal
-      - label: "Chronic substance use disorder - seeking treatment"
-        next: substance_use_disorder_treatment
-
-  - id: alcohol_withdrawal
-    type: diagnosis
-    name: "Alcohol Withdrawal Syndrome"
-    icd10: "F10.239"
-    urgency: critical
-    workup:
-      - Clinical diagnosis based on history and exam
-      - Timing - Symptoms begin 6-24 hours after last drink, peak 24-48 hours
-      - CIWA-Ar score (Clinical Institute Withdrawal Assessment for Alcohol - Revised) - 10-item scale assessing nausea, tremor, sweating, anxiety, agitation, tactile/auditory/visual disturbances, headache, orientation
-      - Mild withdrawal (CIWA <10) - Anxiety, tremor, insomnia, GI upset
-      - Moderate withdrawal (CIWA 10-20) - Increased autonomic symptoms, hallucinations (tactile, visual, auditory while aware they're not real)
-      - Severe withdrawal (CIWA >20) or delirium tremens - Confusion, disorientation, severe autonomic instability (fever, tachycardia, hypertension, diaphoresis), seizures (6-48 hours post-cessation)
-      - Labs - CBC, CMP (hypokalemia, hypomagnesemia, hypophosphatemia), LFTs (elevated AST/ALT, AST:ALT ratio >2:1 suggests alcohol), lipase, blood alcohol level, UDS, thiamine level
-      - Consider head CT if fall/trauma or focal findings
-    treatment:
-      - Hospital admission for moderate-severe withdrawal or DTs
-      - Benzodiazepines (GABA agonist - mainstay of treatment)
-      - CIWA-protocol (symptom-triggered) - Assess CIWA q1-2h, give lorazepam 2-4mg PO/IV OR diazepam 10-20mg PO/IV if CIWA ≥10, repeat until CIWA <10
-      - Fixed-dose regimen (if unable to assess CIWA) - Lorazepam 2mg PO/IV q6h scheduled + 2mg q1h PRN OR diazepam 10mg PO/IV q6h scheduled + 10mg q1h PRN
-      - Lorazepam preferred in liver disease (no active metabolites), diazepam has longer half-life (better for withdrawal prevention)
-      - Delirium tremens (medical emergency, 5-15% mortality if untreated)
-      - ICU admission, high-dose benzodiazepines (lorazepam 2-4mg IV q15-30min or diazepam 10-20mg IV q15-30min until calm)
-      - Phenobarbital 130-260mg IV q15-30min as adjunct if refractory (GABA + glutamate effects)
-      - Dexmedetomidine infusion (alpha-2 agonist) as adjunct
-      - Avoid antipsychotics (lower seizure threshold) - use only if severe agitation despite benzos
-      - Supportive care
-      - Thiamine 500mg IV TID x 3 days (BEFORE glucose - prevent Wernicke's encephalopathy), then 100mg PO daily
-      - Folate 1mg PO daily
-      - Multivitamin
-      - Replete electrolytes (K, Mg, PO4)
-      - Seizure management - Benzodiazepines (no need for AEDs unless seizure refractory or underlying epilepsy)
-      - Long-term treatment - Naltrexone (reduces cravings, blocks opioid receptors), acamprosate (reduces cravings), disulfiram (aversion therapy), or gabapentin
-      - Addiction counseling, AA referral, outpatient addiction medicine follow-up
-
-  - id: opioid_overdose
-    type: diagnosis
-    name: "Opioid Intoxication and Overdose"
-    icd10: "T40.2X1A"
-    urgency: critical
-    workup:
-      - Clinical diagnosis - Classic triad: Miosis (pinpoint pupils), respiratory depression, altered mental status/coma
-      - Vital signs - Bradypnea (<12), hypoxia, bradycardia, hypotension
-      - UDS (opiates) - May not detect fentanyl or synthetic opioids on standard immunoassay
-      - ABG if severe respiratory depression
-      - Consider co-ingestion (alcohol, benzodiazepines)
-    treatment:
-      - Airway management (PRIORITY)
-      - Stimulate, assess responsiveness
-      - Bag-valve-mask ventilation if apneic or severe respiratory depression
-      - Intubation if unable to protect airway or refractory hypoxia
-      - Naloxone (opioid antagonist)
-      - 0.4-2mg IV/IM/IN, repeat q2-3min (can give up to 10mg total)
-      - Intranasal naloxone 4mg (Narcan nasal spray) - easy prehospital administration
-      - IM naloxone 2mg (auto-injector)
-      - Onset - IV (1-2 min), IM/SC (3-5 min), IN (2-3 min)
-      - Duration - 30-90 minutes (SHORTER than most opioids, especially methadone, fentanyl - watch for re-sedation)
-      - Titrate to adequate respirations (RR >10, SpO2 >90%), NOT full consciousness (risk precipitating severe withdrawal)
-      - Opioid withdrawal after naloxone - Agitation, tachycardia, hypertension, vomiting, diarrhea, mydriasis
-      - Observation period - Minimum 4-6 hours after last naloxone dose (longer for long-acting opioids like methadone, fentanyl)
-      - Naloxone infusion if recurrent respiratory depression (2/3 of effective bolus dose per hour)
-      - Admit if persistent altered mental status, aspiration, prolonged observation needed
-      - Harm reduction counseling - Overdose risk, avoid using alone, naloxone kit prescription for home use
-      - Medication for opioid use disorder (MOUD)
-      - Buprenorphine (Suboxone) - Partial agonist, initiate in ED or inpatient (start when moderate withdrawal, COWS ≥8)
-      - Methadone - Full agonist, outpatient opioid treatment program only
-      - Naltrexone - Antagonist, requires 7-10 days opioid-free before initiation
-      - Addiction medicine referral, outpatient MOUD program
-
-  - id: stimulant_intoxication
-    type: diagnosis
-    name: "Stimulant Intoxication (Cocaine, Methamphetamine)"
-    icd10: "F15.929"
-    urgency: high
-    workup:
-      - Clinical features - Agitation, paranoia, hallucinations, hyperthermia, tachycardia, hypertension, diaphoresis, mydriasis
-      - Complications - Acute coronary syndrome, stroke, seizures, intracranial hemorrhage, rhabdomyolysis, excited delirium
-      - ECG - Assess for ischemia, arrhythmias, QRS widening (cocaine is sodium channel blocker)
-      - Labs - CBC, CMP (hyponatremia from water intoxication with MDMA), CK (rhabdomyolysis), troponin (ACS), UDS
-      - Head CT if focal neurologic findings or severe headache (ICH)
-    treatment:
-      - Supportive care (no specific antidote)
-      - Agitation and psychosis
-      - Benzodiazepines (first-line) - Lorazepam 2-4mg IV/PO q15-30min PRN, diazepam 5-10mg IV/PO
-      - Antipsychotics ONLY if refractory to benzos - Haloperidol 5mg IM (avoid if hyperthermia or severe tachycardia - lowers seizure threshold)
-      - Hypertension - Usually responds to benzodiazepines alone, if persistent and severe - Nicardipine or nitroprusside (avoid beta-blockers in cocaine - risk unopposed alpha-mediated vasoconstriction)
-      - Chest pain / ACS - Benzodiazepines, aspirin, nitroglycerin, consider PCI if STEMI (avoid beta-blockers)
-      - Hyperthermia - Active cooling (ice packs, cooling blankets, evaporative cooling), benzodiazepines for shivering/agitation
-      - Seizures - Benzodiazepines first-line
-      - Rhabdomyolysis - Aggressive IV hydration, monitor CK and renal function
-      - Observation until symptom resolution (typically 4-6 hours)
-      - Methamphetamine-induced psychosis can persist days-weeks - May need antipsychotic bridge (olanzapine, quetiapine)
-      - Substance use disorder treatment referral - Behavioral therapy (no FDA-approved medications for stimulant use disorder), contingency management
-
-  - id: benzo_withdrawal
-    type: diagnosis
-    name: "Benzodiazepine or Sedative Withdrawal"
-    icd10: "F13.239"
-    urgency: critical
-    workup:
-      - Clinical features - Anxiety, insomnia, tremor, sweating, tachycardia, hypertension, seizures (life-threatening)
-      - Timing - Short-acting (alprazolam, lorazepam) withdrawal starts 1-2 days, peaks 2-4 days; Long-acting (diazepam, clonazepam) starts 2-7 days, peaks 4-7 days
-      - Similar presentation to alcohol withdrawal (both GABA-ergic)
-      - Labs - UDS (benzodiazepines), CMP, CBC
-    treatment:
-      - Hospital admission for moderate-severe withdrawal
-      - Benzodiazepine taper (replace short-acting with long-acting)
-      - Calculate total daily benzodiazepine dose (convert to diazepam equivalents)
-      - Diazepam 10mg = lorazepam 1mg = alprazolam 0.5mg = clonazepam 0.5mg
-      - Initiate diazepam at equivalent dose divided TID-QID
-      - Taper 10-25% every 1-3 days (slower taper for chronic high-dose use - may take weeks-months)
-      - Phenobarbital protocol alternative (especially if polysubstance or unclear history)
-      - Loading dose phenobarbital 10-15mg/kg (max 20mg/kg) divided over 24 hours, monitor for sedation
-      - Maintenance based on symptoms
-      - Seizure management - Benzodiazepines (lorazepam 2-4mg IV)
-      - Supportive care - Monitor vitals, reorient, calm environment
-      - Outpatient taper if mild symptoms and reliable patient with support
-      - Addiction psychiatry follow-up
-
-  - id: substance_use_disorder_treatment
-    type: diagnosis
-    name: "Substance Use Disorder - Chronic Management"
-    icd10: "F19.20"
-    urgency: medium
-    workup:
-      - Detailed substance use history - Types, amounts, frequency, route, last use, prior treatments
-      - DSM-5 criteria - 2+ criteria in 12-month period (impaired control, social impairment, risky use, tolerance/withdrawal)
-      - Assess readiness to change (stages of change model)
-      - Screen for co-occurring psychiatric disorders (depression, anxiety, PTSD, bipolar) - very common
-      - Social history - Housing, employment, legal issues, support system
-      - Labs - UDS, HIV, hepatitis B/C, STI screening
-    treatment:
-      - Medication for addiction treatment (MAT)
-      - Opioid use disorder - Buprenorphine (Suboxone 8-16mg daily) OR methadone (40-120mg daily at OTP) OR naltrexone (Vivitrol 380mg IM monthly)
-      - Alcohol use disorder - Naltrexone 50mg PO daily or 380mg IM monthly, acamprosate 666mg PO TID, disulfiram 250mg PO daily
-      - Tobacco - Varenicline, bupropion, nicotine replacement
-      - No FDA-approved medications for stimulant or cannabis use disorder
-      - Behavioral therapy
-      - Cognitive behavioral therapy (CBT)
-      - Motivational interviewing
-      - Contingency management
-      - 12-step programs (AA, NA)
-      - Residential treatment if severe or repeated failed outpatient treatment
-      - Treat co-occurring psychiatric disorders - Antidepressants (SSRIs), mood stabilizers, antipsychotics as indicated
-      - Harm reduction - Naloxone kits, clean needles, safe injection sites, fentanyl test strips
-      - Addiction medicine or addiction psychiatry referral
-      - Long-term follow-up (chronic relapsing disease)
+homeopathy: []
+presentations:
+- Impaired control over substance use
+- Continued use despite harm
+- Tolerance
+- Withdrawal symptoms
+- Social/occupational impairment
+- Craving
+workup: []
+treatment: []
+clinical_pearls: []
+referrals: []
+differentials: []
+trace:
+  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
+    Criteria
+  version: 0.1.0
+  last_updated: '2024-12-26'

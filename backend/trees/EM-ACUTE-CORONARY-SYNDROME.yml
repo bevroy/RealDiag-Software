@@ -1,0 +1,55 @@
+tree_id: EM-ACUTE-CORONARY-SYNDROME
+name: Acute Coronary Syndrome (STEMI/NSTEMI)
+family: Emergency Medicine
+specialty: Emergency Medicine
+icd10:
+- I21.9
+- I21.3
+- I24.9
+snomed:
+- '394659003'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Coronary Syndrome (STEMI/NSTEMI)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Chest pain or pressure (substernal, crushing, "elephant on chest")
+- Radiation to left arm, jaw, neck, back, or epigastrium
+- 'Associated symptoms: Dyspnea, diaphoresis, nausea/vomiting, lightheadedness'
+- Atypical presentations common in women, elderly, diabetics (may lack chest pain)
+- 'STEMI: ST elevation ≥1mm in ≥2 contiguous leads (or new LBBB)'
+- 'NSTEMI: Elevated troponin without ST elevation (may have ST depression, T-wave
+  inversion)'
+- 'Killip classification: I (no HF), II (rales, S3), III (pulmonary edema), IV (cardiogenic
+  shock)'
+workup: []
+treatment:
+- 'Guideline-based treatment options for Acute Coronary Syndrome (STEMI/NSTEMI) include:'
+- 'Immediate: Aspirin 325mg chewed, sublingual nitroglycerin if SBP >90, oxygen if
+  hypoxic (ACEP 2023)'
+- 'STEMI: Activate cath lab (PCI <90 min) or give tPA if PCI not available <120 min
+  (ACEP 2023)'
+- 'NSTEMI: Dual antiplatelet, anticoagulation (heparin/enoxaparin), cardiology consult
+  for cath timing (ACEP 2023)'
+- 'High-risk features (urgent cath): Ongoing pain, hemodynamic instability, arrhythmia,
+  GRACE >140 (ACEP 2023)'
+- 'Disposition: CCU admission for STEMI/high-risk NSTEMI, telemetry for low-risk,
+  discharge if rule-out (ACEP 2023)'
+clinical_pearls:
+- 'STEMI = medical emergency: Door-to-balloon <90 min or door-to-needle (tPA) <30
+  min'
+- 'MONA therapy: Morphine (if severe pain), Oxygen (if SpO2 <90%), Nitroglycerin,
+  Aspirin 325mg'
+- 'Antiplatelet therapy: Aspirin 325mg + P2Y12 inhibitor (ticagrelor 180mg or clopidogrel
+  600mg)'
+- 'High-sensitivity troponin: 0-hour and 1-hour protocol for rapid rule-out'
+- Avoid NSAIDs (increase mortality), avoid beta-blockers if HF or hypotension
+- 'Posterior MI: ST depression V1-V3 (check posterior leads V7-V9 for ST elevation)'
+referrals: []
+differentials: []
+trace:
+  source: American College of Emergency Physicians (ACEP) Clinical Policies, Emergency
+    Medicine Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

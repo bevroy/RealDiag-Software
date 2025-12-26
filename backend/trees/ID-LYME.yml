@@ -1,0 +1,55 @@
+tree_id: ID-LYME
+name: Lyme Disease
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- A69.20
+- A69.23
+snomed:
+- '23502006'
+urgency: medium
+description: Comprehensive evaluation and management of Lyme Disease
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Erythema migrans (bulls-eye rash)
+- Fever and chills
+- Fatigue
+- Headache
+- Joint pain
+- Tick exposure in endemic area
+workup:
+- Clinical diagnosis if EM rash present (no testing needed)
+- 'Two-tier serology: ELISA screening, if positive confirm with Western blot'
+- Testing not useful in first 3-4 weeks (antibodies not yet developed)
+- CSF analysis if neurologic symptoms (lymphocytic pleocytosis)
+- ECG if carditis suspected (AV block)
+treatment:
+- 'Guideline-based treatment options for Lyme Disease include:'
+- 'Early localized or disseminated: Doxycycline 100mg PO BID x 10-21 days (IDSA 2024)'
+- 'Alternative: Amoxicillin 500mg TID or cefuroxime 500mg BID (if pregnant or <8 years
+  old) (IDSA 2024)'
+- 'Lyme carditis: Ceftriaxone 2g IV daily x 14-21 days (IDSA 2024)'
+- 'Lyme meningitis/encephalitis: Ceftriaxone 2g IV daily x 14-28 days (IDSA 2024)'
+- 'Lyme arthritis: Doxycycline 100mg BID x 28 days (IDSA 2024)'
+clinical_pearls:
+- Borrelia burgdorferi transmitted by Ixodes tick (deer tick), endemic in Northeast/Upper
+  Midwest US
+- Erythema migrans (EM) rash diagnostic if present (70-80% of cases) - treat clinically,
+  no testing needed
+- 'Early localized: EM rash. Early disseminated: Multiple EM, facial palsy, carditis,
+  meningitis'
+- 'Late: Lyme arthritis (knee), encephalopathy'
+- 'Two-tier testing: ELISA screening, if positive confirm with Western blot'
+- Doxycycline preferred (also covers anaplasmosis, another tick-borne disease)
+referrals:
+- Infectious disease if neurologic involvement, carditis, or refractory symptoms
+- Cardiology if Lyme carditis (AV block may need temporary pacing)
+- Rheumatology if Lyme arthritis refractory to antibiotics
+differentials: []
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,118 +1,50 @@
 tree_id: PULM-ARDS
 name: Acute Respiratory Distress Syndrome (ARDS)
 family: Pulmonology
-specialty: Pulmonary/Critical Care, Emergency Medicine
-chief_complaint: Acute Respiratory Failure, Bilateral Infiltrates, Hypoxemia
-description: Comprehensive evaluation and management of ARDS
-version: "1.0"
-icd10: J80
+specialty: Pulmonology
+icd10:
+- J80
+snomed:
+- '67782005'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Respiratory Distress
+  Syndrome (ARDS)
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: ards_presentation
-
-nodes:
-  - id: ards_presentation
-    type: question
-    text: "Severity of ARDS?"
-    options:
-      - label: "Severe ARDS (PaO2/FiO2 <100)"
-        next: severe_ards
-      - label: "Moderate ARDS (PaO2/FiO2 100-200)"
-        next: moderate_ards
-      - label: "Mild ARDS (PaO2/FiO2 200-300)"
-        next: mild_ards
-
-  - id: severe_ards
-    type: diagnosis
-    name: "Severe ARDS"
-    icd10: "J80"
-    urgency: critical
-    workup:
-      - Berlin criteria for ARDS (all required)
-      - Timing - Within 1 week of known insult or new/worsening respiratory symptoms
-      - Chest imaging - Bilateral opacities not fully explained by effusions, collapse, or nodules
-      - Origin of edema - Not fully explained by cardiac failure or fluid overload (need objective assessment like echo if uncertain)
-      - Oxygenation defect - PaO2/FiO2 ratio (P/F ratio) on PEEP ≥5 cm H2O
-      - Mild ARDS - P/F 200-300
-      - Moderate ARDS - P/F 100-200  
-      - Severe ARDS - P/F <100
-      - Common causes (direct vs indirect lung injury)
-      - Direct - Pneumonia (most common), aspiration, pulmonary contusion, inhalation injury, near-drowning
-      - Indirect - Sepsis (most common indirect), trauma, pancreatitis, massive transfusion, drug overdose
-      - Labs - ABG (assess P/F ratio, CO2, pH), CBC, CMP, lactate, procalcitonin/cultures (if infectious), coagulation studies
-      - Chest X-ray - Bilateral infiltrates
-      - CT chest - Ground-glass opacities, consolidation (not needed for diagnosis but helps assess distribution)
-      - Echocardiogram - Rule out cardiogenic pulmonary edema (normal LV function, no wall motion abnormalities)
-    treatment:
-      - ICU admission with mechanical ventilation
-      - Lung-protective ventilation (cornerstone - reduces mortality)
-      - Tidal volume 6 mL/kg ideal body weight (IBW) - Lower tidal volumes reduce volutrauma
-      - IBW (male) = 50 + 2.3 x (height in inches - 60)
-      - IBW (female) = 45.5 + 2.3 x (height in inches - 60)
-      - Plateau pressure <30 cm H2O - Limit barotrauma
-      - PEEP - Higher PEEP (10-15 cm H2O) to recruit alveoli and prevent atelectrauma, titrate based on oxygenation and hemodynamics
-      - Permissive hypercapnia - Accept higher CO2 (pH >7.20) to maintain lung-protective parameters
-      - FiO2 - Target SpO2 88-95% or PaO2 55-80 (avoid hyperoxia)
-      - Prone positioning (for severe ARDS with P/F <150)
-      - Prone 16-18 hours per day, supine 6-8 hours
-      - Improves oxygenation and reduces mortality by 50% in severe ARDS
-      - Contraindications - Unstable spine, increased ICP, recent abdominal surgery, pregnancy
-      - Neuromuscular blockade (if severe ARDS in first 48 hours)
-      - Cisatracurium 15 mg/hr continuous infusion x 48 hours
-      - Improves patient-ventilator synchrony, reduces ventilator-induced lung injury
-      - Monitor with train-of-four
-      - Conservative fluid management
-      - Target CVP <4 or PAOP <8 (once shock resolved)
-      - Diuresis to negative fluid balance reduces duration of mechanical ventilation
-      - Balance with organ perfusion (MAP ≥65, urine output, lactate clearance)
-      - Avoid excessive fluid accumulation (worsens pulmonary edema)
-      - Rescue therapies for refractory hypoxemia (P/F <100 despite above measures)
-      - Inhaled pulmonary vasodilators - Inhaled nitric oxide 5-20 ppm OR inhaled epoprostenol (Flolan) 50 ng/kg/min - Reduces V/Q mismatch by vasodilating only ventilated areas
-      - Recruitment maneuvers - Sustained inflation (40 cm H2O x 40 seconds) - use cautiously, may cause barotrauma or hypotension
-      - ECMO (extracorporeal membrane oxygenation) - Venovenous ECMO for refractory hypoxemia despite maximal ventilator support, transfer to ECMO center if available
-      - Treat underlying cause
-      - Antibiotics if pneumonia/sepsis (broad-spectrum, de-escalate based on cultures)
-      - Source control (drain abscess, remove infected devices)
-      - Avoid - Corticosteroids (no benefit in early ARDS unless from specific cause like COVID-19), high tidal volumes, excessive PEEP without benefit, routine pulmonary artery catheters
-      - Supportive care
-      - Sedation (propofol, dexmedetomidine) - Target RASS -1 to 0 (light sedation)
-      - Analgesia (fentanyl)
-      - DVT prophylaxis (heparin SC)
-      - Stress ulcer prophylaxis (PPI)
-      - Nutrition (enteral preferred, start within 24-48 hours)
-      - Prognosis - Mortality 30-40% overall, higher in severe ARDS (40-50%)
-
-  - id: moderate_ards
-    type: diagnosis
-    name: "Moderate ARDS"
-    icd10: "J80"
-    urgency: critical
-    workup:
-      - Same as severe ARDS
-      - P/F ratio 100-200 on PEEP ≥5
-    treatment:
-      - ICU admission, mechanical ventilation
-      - Lung-protective ventilation (6 mL/kg IBW, plateau pressure <30, higher PEEP)
-      - Consider prone positioning if P/F <150 or worsening
-      - Conservative fluid management
-      - Neuromuscular blockade - Consider if P/F deteriorating or difficult ventilator synchrony
-      - Treat underlying cause
-      - Supportive care
-      - Monitor for progression to severe ARDS (escalate therapies as needed)
-
-  - id: mild_ards
-    type: diagnosis
-    name: "Mild ARDS"
-    icd10: "J80"
-    urgency: high
-    workup:
-      - Same as moderate/severe
-      - P/F ratio 200-300 on PEEP ≥5
-    treatment:
-      - ICU admission, mechanical ventilation
-      - Lung-protective ventilation (6 mL/kg IBW, plateau pressure <30, moderate PEEP 5-10)
-      - Conservative fluid management
-      - Treat underlying cause
-      - Supportive care
-      - Some patients may be managed with high-flow nasal cannula or NIPPV initially (if cooperative and improving), but low threshold for intubation if worsening
-      - Monitor closely for progression to moderate/severe ARDS
+homeopathy: []
+presentations:
+- Acute onset (<1 week) of severe hypoxemia
+- Bilateral infiltrates on chest imaging (not fully explained by effusions/atelectasis)
+- Respiratory failure not explained by heart failure (PCWP <18 or clinical assessment)
+- 'Berlin criteria: PaO2/FiO2 ratio ≤300 (Mild 200-300, Moderate 100-200, Severe <100)'
+- Dyspnea, tachypnea, hypoxia refractory to oxygen
+- 'Causes: Sepsis (most common), pneumonia, aspiration, trauma, pancreatitis'
+workup:
+- ABG (PaO2/FiO2 ratio)
+- Chest X-ray or CT (bilateral infiltrates)
+- Echocardiogram (rule out cardiogenic pulmonary edema)
+- 'Consider: Bronchoscopy (BAL) if infectious etiology unclear'
+treatment:
+- 'Guideline-based treatment options for Acute Respiratory Distress Syndrome (ARDS)
+  include:'
+- 'Mechanical ventilation: Low tidal volume 6 mL/kg IBW, PEEP 5-15 (ATS 2023)'
+- Plateau pressure goal <30 cm H2O (ATS 2023)
+- Prone positioning 16 hours/day if severe (PaO2/FiO2 <150) (ATS 2023)
+- Conservative fluid management after resuscitation (prevent pulmonary edema) (ATS
+  2023)
+- 'Treat underlying cause: Antibiotics, source control, supportive care (ATS 2023)'
+clinical_pearls:
+- 'Lung-protective ventilation: Tidal volume 6 mL/kg ideal body weight (prevents VILI)'
+- Plateau pressure <30 cm H2O (prevents barotrauma)
+- Prone positioning improves mortality in severe ARDS (PaO2/FiO2 <150)
+- Conservative fluid strategy after initial resuscitation
+- Mortality 30-40% even with optimal treatment
+referrals:
+- ICU admission (all ARDS)
+- Consider ECMO if refractory hypoxemia despite optimal ventilation
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

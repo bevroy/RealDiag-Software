@@ -1,0 +1,63 @@
+tree_id: PULM-PE
+name: Pulmonary Embolism
+family: Pulmonology
+specialty: Pulmonology
+icd10:
+- I26.99
+- I26.90
+- I26.02
+snomed:
+- '59282003'
+urgency: medium
+description: Comprehensive evaluation and management of Pulmonary Embolism
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Acute dyspnea (most common symptom, 73%)
+- Pleuritic chest pain (sharp, worse with inspiration, 44%)
+- Tachypnea (respiratory rate >20 breaths/min)
+- Tachycardia (heart rate >100 bpm)
+- Hypoxia (SpO2 <95%) - but normal O2 doesn't rule out PE
+- Cough
+- Hemoptysis (less common, 8%)
+- Lower extremity swelling or pain (DVT symptoms)
+- Syncope or presyncope (suggests massive PE)
+- Hypotension or shock if massive PE (5% of cases)
+- 'Risk factors: Recent surgery, immobilization >3 days, malignancy, pregnancy/postpartum,
+  oral contraceptives, thrombophilia'
+- Sudden onset of symptoms (seconds to minutes)
+workup:
+- CTPA (CT pulmonary angiography) - diagnostic test of choice
+- D-dimer if low-moderate pretest probability (Wells <4), negative rules out
+- Lower extremity Doppler ultrasound (if positive, can treat as PE without CTPA)
+- 'ECG (most common: sinus tachycardia, may see S1Q3T3 pattern)'
+- Troponin, BNP (elevated suggests RV strain, worse prognosis)
+treatment:
+- 'Guideline-based treatment options for Pulmonary Embolism include:'
+- 'Hemodynamically stable: Apixaban 10mg BID x 7 days then 5mg BID OR rivaroxaban
+  15mg BID x 21 days then 20mg daily (ATS 2023)'
+- 'Massive PE (shock): Thrombolytics - tPA 100mg IV over 2 hours, then anticoagulation
+  (ATS 2023)'
+- 'Contraindication to anticoagulation: IVC filter placement (ATS 2023)'
+- 'Duration: 3 months if provoked, 3-6 months if unprovoked (consider indefinite),
+  indefinite if recurrent (ATS 2023)'
+- Reduce dose after initial treatment (e.g., apixaban 2.5mg BID for extended therapy)
+  (ATS 2023)
+clinical_pearls:
+- 'Wells score guides testing: Low risk + negative D-dimer rules out PE (high NPV)'
+- 'Massive PE: Hypotension (SBP <90) or cardiac arrest - consider thrombolytics'
+- 'Submassive PE: Normotensive but RV strain on echo/CT - higher mortality, controversial
+  thrombolytics'
+- CTPA gold standard (sensitivity 83%, specificity 96%), V/Q scan if contrast contraindicated
+- 'Unprovoked PE: Anticoagulate ≥3 months, consider indefinite if low bleed risk'
+referrals:
+- ICU if massive PE (hypotension, cardiac arrest)
+- Cardiology or interventional radiology if considering catheter-directed thrombolysis
+- Hematology if unprovoked PE or recurrent VTE (thrombophilia workup)
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

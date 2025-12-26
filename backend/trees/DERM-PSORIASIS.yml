@@ -2,80 +2,50 @@ tree_id: DERM-PSORIASIS
 name: Psoriasis
 family: Dermatology
 specialty: Dermatology
-chief_complaint: Scaly skin plaques
-description: Chronic autoimmune inflammatory skin disease causing erythematous plaques with silvery scales, commonly on extensor surfaces
-
-icd10: L40.9
-
-urgency: routine
-
+icd10:
+- L40.0
+- L40.9
+snomed:
+- '9014002'
+urgency: medium
+description: Comprehensive evaluation and management of Psoriasis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Well-demarcated erythematous plaques
+- Silvery scale
+- Extensor surface involvement
+- Nail pitting or onycholysis
+- Koebner phenomenon
 workup:
-  - Clinical presentation: well-demarcated erythematous plaques with silvery-white scale, symmetric distribution, commonly extensor surfaces (elbows, knees), scalp, lower back, nails
-  - Plaque psoriasis: most common type (90 percent), thick scaly plaques
-  - Guttate psoriasis: small droplet-like lesions, often post-streptococcal infection (check ASO titer if acute guttate)
-  - Inverse psoriasis: smooth erythematous plaques in skin folds (axilla, groin, under breasts), no scale due to moisture
-  - Pustular psoriasis: sterile pustules on erythematous base, generalized (medical emergency) or localized (palms/soles)
-  - Erythrodermic psoriasis: extensive (greater than 90 percent body surface area), medical emergency (temperature dysregulation, high-output heart failure)
-  - Nail changes: pitting (ice pick-like depressions), oil drop discoloration, onycholysis (separation from nail bed), subungual hyperkeratosis
-  - Scalp involvement: thick silvery scale on erythematous base, extends beyond hairline (unlike seborrheic dermatitis)
-  - Auspitz sign: pinpoint bleeding when scale removed (dilated capillaries in dermis)
-  - Koebner phenomenon: new lesions at sites of trauma (scratching, tattoos, surgery)
-  - Associated conditions: psoriatic arthritis (30 percent, inflammatory arthritis often asymmetric affecting DIPs), metabolic syndrome (obesity, diabetes, hyperlipidemia, hypertension), cardiovascular disease (increased MI/stroke risk), depression
-  - Diagnosis: clinical (typical appearance and distribution), skin biopsy rarely needed (shows parakeratosis, acanthosis, elongated rete ridges, neutrophils in stratum corneum forming Munro microabscesses)
-  - Assess severity: body surface area (BSA) affected - mild less than 3 percent, moderate 3-10 percent, severe greater than 10 percent, or Psoriasis Area and Severity Index (PASI)
-  - Screen for psoriatic arthritis: joint pain, stiffness, swelling (especially DIPs, dactylitis sausage digits, enthesitis)
-  - Screen for metabolic syndrome: BMI, blood pressure, lipid panel, hemoglobin A1c
-
+- Clinical diagnosis (usually no tests needed)
+- Skin biopsy if diagnosis uncertain
+- Rheumatoid factor and anti-CCP if arthritis suspected (usually negative in psoriatic
+  arthritis)
+- Baseline labs before systemic therapy (CBC, LFTs, Cr, TB test)
 treatment:
-  - Mild psoriasis (less than 3 percent BSA): topical therapy, topical corticosteroids (betamethasone dipropionate 0.05 percent cream BID, clobetasol propionate 0.05 percent cream BID for thick plaques - limit to 2 weeks then weekend pulse to avoid atrophy), vitamin D analog (calcipotriene 0.005 percent cream BID), combination betamethasone-calcipotriene (more effective than either alone)
-  - Scalp psoriasis: betamethasone valerate 0.12 percent foam or clobetasol 0.05 percent solution/shampoo
-  - Avoid triggers: stress, smoking, alcohol, streptococcal infection
-  - Moderate-severe psoriasis (greater than 3 percent BSA or affecting quality of life): phototherapy or systemic therapy
-  - Phototherapy: narrowband UVB 3 times weekly (effective, 70-80 percent achieve clearance, requires clinic visits), PUVA (psoralen plus UVA) alternative
-  - Systemic conventional agents: methotrexate 7.5-25 mg weekly (monitor CBC, LFTs, effective and inexpensive), cyclosporine 2.5-5 mg/kg daily (rapid onset but nephrotoxic, short-term use), acitretin 25-50 mg daily (retinoid, teratogenic, avoid in women of childbearing potential)
-  - Biologic agents (very effective): TNF-alpha inhibitors (etanercept 50 mg SC weekly, adalimumab 40 mg SC every 2 weeks, infliximab 5 mg/kg IV at 0, 2, 6 weeks then every 8 weeks), IL-12/23 inhibitor (ustekinumab 45-90 mg SC at 0, 4 weeks then every 12 weeks), IL-17 inhibitors (secukinumab, ixekizumab - very effective for skin), IL-23 inhibitors (guselkumab, risankizumab - excellent efficacy, dosing every 12 weeks)
-  - Screen for TB before starting biologics (TNF inhibitors increase reactivation risk): PPD or IGRA, chest X-ray
-  - Oral small molecules: apremilast (PDE4 inhibitor, 30 mg BID, moderate efficacy, good safety profile), tofacitinib (JAK inhibitor)
-  - Psoriatic arthritis: requires systemic therapy (methotrexate or biologics), NSAIDs for mild symptoms
-  - Lifestyle: weight loss improves response to treatment, smoking cessation, limit alcohol, moisturize (improves scale and itch)
-
+- 'Guideline-based treatment options for Psoriasis include:'
+- 'Mild: Topical corticosteroids (clobetasol 0.05%) + vitamin D analog (calcipotriene)
+  (AAD 2023)'
+- 'Moderate: Add phototherapy (narrowband UVB 3x/week) (AAD 2023)'
+- 'Severeor psoriatic arthritis: Systemic therapy (methotrexate, biologics like adalimumab)
+  (AAD 2023)'
+- 'Scalp: Tar shampoos, topical steroids in solution form (AAD 2023)'
+- Coal tar or salicylic acid for thick plaques (AAD 2023)
 clinical_pearls:
-  - Well-demarcated erythematous plaques with silvery scale on extensor surfaces (elbows, knees) classic
-  - Nail pitting and onycholysis common (help distinguish from eczema)
-  - 30 percent develop psoriatic arthritis (asymmetric, DIPs, dactylitis)
-  - Mild (less than 3 percent BSA) treat with topical steroids plus vitamin D analog
-  - Moderate-severe phototherapy or systemic therapy (methotrexate, biologics)
-  - IL-23 inhibitors excellent efficacy (guselkumab, risankizumab every 12 weeks dosing)
-  - Increased cardiovascular risk (screen for metabolic syndrome)
-
-differentials:
-  - Eczema (atopic dermatitis) - ill-defined erythema with lichenification, flexural surfaces, no nail pitting
-  - Seborrheic dermatitis (greasy yellow scale on scalp, face, central chest - not thick silvery scale)
-  - Tinea corporis (ringworm) - annular lesions with central clearing, KOH shows hyphae
-  - Cutaneous T-cell lymphoma (mycosis fungoides) - patches and plaques, biopsy shows atypical lymphocytes
-  - Pityriasis rosea (herald patch followed by Christmas tree distribution, resolves spontaneously)
-
+- 'Auspitz sign: Pinpoint bleeding when scale removed'
+- 'Koebner phenomenon: New lesions at sites of trauma'
+- 'Nail changes in 50%: Pitting, oil spots, onycholysis, subungual hyperkeratosis'
+- 'Psoriatic arthritis in 30%: Screen with joint exam, consider TNF inhibitors'
+- 'Avoid triggers: Stress, infections (strep throat), medications (beta-blockers,
+  lithium), alcohol'
+referrals:
+- Dermatology for moderate-severe disease or systemic therapy
+- Rheumatology if psoriatic arthritis
+differentials: []
 trace:
-  - 38-year-old man presents with 5 years recurrent scaly skin lesions, worsening past 6 months
-  - History: plaques on elbows and knees since age 33, initially small now covering larger areas, itchy, embarrassing (avoids short sleeves), father has psoriasis
-  - Exam: well-demarcated erythematous plaques with thick silvery-white scale on bilateral elbows, knees, lower back, extensor forearms, involves approximately 8 percent BSA (moderate severity), scalp has thick scale extending beyond hairline, nails show multiple pits and onycholysis (separation) bilateral thumbs
-  - Auspitz sign positive (pinpoint bleeding when scale removed)
-  - No joint pain or swelling (no psoriatic arthritis currently)
-  - Diagnosis: chronic plaque psoriasis, moderate severity (8 percent BSA), with nail involvement
-  - Labs: hemoglobin A1c 6.2 percent (prediabetes), lipid panel shows elevated triglycerides 220 mg/dL, cholesterol 245 mg/dL (metabolic syndrome screening), BMI 32 (obese)
-  - Prior treatment: over-the-counter hydrocortisone 1 percent with minimal benefit
-  - Started topical combination betamethasone dipropionate 0.064 percent plus calcipotriene 0.005 percent ointment BID to plaques
-  - Scalp: clobetasol 0.05 percent solution BID x 2 weeks then taper to weekends only
-  - Counseling: weight loss goal (improves treatment response), smoking cessation, stress management
-  - 4 weeks: improvement 30 percent, scale reduced, less erythema, but still extensive involvement
-  - 8 weeks: plateaued at 40 percent improvement, continues to affect quality of life significantly
-  - Decision: escalate to phototherapy vs systemic therapy given moderate severity and inadequate response to topicals
-  - Patient preference: wants more effective treatment, concerned about clinic visits for phototherapy (works full-time)
-  - Workup for systemic therapy: CBC normal, CMP normal (creatinine 0.9 mg/dL, AST 28, ALT 32), hepatitis B/C serology negative
-  - Started methotrexate 10 mg weekly (plan to increase to 15-20 mg if needed), folic acid 1 mg daily (reduces side effects)
-  - 12 weeks on methotrexate 15 mg weekly: marked improvement, approximately 75 percent clearance, BSA reduced to 2 percent (mild), no side effects
-  - Monitoring: CBC and LFTs every 8 weeks (stable)
-  - 6 months: sustained improvement PASI 90 (90 percent improvement), minimal residual plaques, nails improving (pitting decreased), excellent quality of life
-  - Weight loss 18 pounds with diet and exercise (BMI 29), hemoglobin A1c improved to 5.7 percent
-  - Continues methotrexate 15 mg weekly maintenance, topical betamethasone-calcipotriene as needed for any flares
-  - 1 year: remains well-controlled, minimal disease activity, no joint symptoms, improved metabolic parameters
+  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
+    Cancer Network (NCCN) for skin cancers
+  version: 0.1.0
+  last_updated: '2024-12-26'

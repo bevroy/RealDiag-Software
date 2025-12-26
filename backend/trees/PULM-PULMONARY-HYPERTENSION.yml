@@ -1,47 +1,54 @@
 tree_id: PULM-PULMONARY-HYPERTENSION
-name: Pulmonary Hypertension
+name: Pulmonary Hypertension (PH)
 family: Pulmonology
 specialty: Pulmonology
-chief_complaint: Dyspnea on exertion and fatigue
-description: |
-  Elevated pulmonary artery pressure (mean PAP greater than 20 mmHg at rest). Five WHO groups based on etiology.
-  Group 1 (pulmonary arterial hypertension), Group 2 (left heart disease), Group 3 (lung disease/hypoxia), Group 4 (CTEPH), Group 5 (unclear/multifactorial). Progressive disease leads to right heart failure.
-icd10: I27.0
-urgency: Moderate
+icd10:
+- I27.20
+- I27.0
+snomed:
+- '70995007'
+urgency: medium
+description: Comprehensive evaluation and management of Pulmonary Hypertension (PH)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Exertional dyspnea (most common), fatigue
+- Chest pain (angina-like), syncope with exertion
+- Lower extremity edema, ascites (right heart failure)
+- Loud P2 (pulmonic component of S2), RV heave
+- Elevated JVP, hepatomegaly
+- 'Echo: Elevated RVSP (>40 mmHg), RV dilation/hypertrophy'
+- 'Right heart catheterization: Mean PAP ≥20 mmHg (diagnostic)'
 workup:
-  - Transthoracic echocardiogram (TTE) screening tool - estimates right ventricular systolic pressure (RVSP) from tricuspid regurgitation jet velocity
-  - RVSP greater than 40 mmHg suggests PH, but echo alone cannot definitively diagnose
-  - Right heart catheterization gold standard - mean PAP greater than 20 mmHg diagnostic
-  - Measure pulmonary capillary wedge pressure (PCWP) - distinguishes precapillary (PCWP less than 15, groups 1, 3, 4, 5) from postcapillary (PCWP greater than 15, group 2)
-  - Pulmonary function tests and arterial blood gas (assess for lung disease, hypoxemia)
-  - High-resolution CT chest (evaluate for interstitial lung disease, emphysema)
-  - V/Q scan to rule out chronic thromboembolic disease (CTEPH)
-  - 6-minute walk test (assess functional capacity and prognosis)
-  - Labs - BNP (elevated indicates RV strain), CBC, comprehensive metabolic panel, HIV, hepatitis serologies, ANA, scleroderma antibodies
+- Echocardiogram (estimate RVSP, assess RV function)
+- Right heart catheterization (definitive diagnosis)
+- 6-minute walk test (functional assessment)
+- Chest CT, PFTs, V/Q scan (identify etiology)
+- Connective tissue disease workup (ANA, anti-Scl-70)
 treatment:
-  - Treat underlying cause - optimize left heart failure, treat lung disease, anticoagulation and consider pulmonary thromboendarterectomy for CTEPH
-  - Group 1 PAH-specific therapies (do not use in groups 2-5 unless specialized center)
-  - Calcium channel blockers if vasoreactive on testing (only 5-10% respond) - amlodipine 10-20mg or diltiazem 240-720mg
-  - Endothelin receptor antagonists - ambrisentan 5-10mg daily, bosentan 125mg BID (monitor liver enzymes)
-  - Phosphodiesterase-5 inhibitors - sildenafil 20mg TID, tadalafil 40mg daily
-  - Prostacyclin analogs - epoprostenol IV continuous infusion (most effective), treprostinil SC or IV, inhaled iloprost
-  - Combination therapy often required for WHO functional class III-IV
-  - Diuretics for volume overload and right heart failure
-  - Supplemental oxygen if SpO2 less than 90%
-  - Lung transplant or heart-lung transplant for refractory severe disease
+- 'Guideline-based treatment options for Pulmonary Hypertension (PH) include:'
+- 'Group 1: Prostacyclins (epoprostenol), ERAs (bosentan), PDE5i (sildenafil) (ATS
+  2023)'
+- 'Group 2: Treat LV dysfunction (diuretics, HF meds), NOT PAH-specific drugs (ATS
+  2023)'
+- 'Group 3: Oxygen, treat underlying lung disease (ATS 2023)'
+- Diuretics for volume overload, oxygen if hypoxic (ATS 2023)
+- Anticoagulation if idiopathic PAH (ATS 2023)
 clinical_pearls:
-  - Symptoms nonspecific in early disease - dyspnea, fatigue, chest pain, syncope
-  - Physical exam shows elevated JVP, loud P2, tricuspid regurgitation murmur, hepatomegaly, peripheral edema
-  - Screening recommended for high-risk populations (scleroderma, portal hypertension, congenital heart disease, HIV)
-  - WHO functional class predicts prognosis (I minimal symptoms, II mild limitation, III marked limitation, IV symptoms at rest)
-  - BNP and 6-minute walk distance important prognostic markers
-  - Avoid pregnancy (high maternal mortality 30-50%)
-differentials:
-  - Heart failure with preserved ejection fraction
-  - Chronic obstructive pulmonary disease
-  - Interstitial lung disease
-  - Pulmonary embolism
-  - Valvular heart disease
-  - Sleep apnea
+- 'WHO Group 1 (PAH): Idiopathic, connective tissue disease, drugs, congenital heart
+  disease'
+- 'WHO Group 2 (left heart): Most common cause (treat underlying LV dysfunction)'
+- 'WHO Group 3 (lung disease): COPD, ILD'
+- Diagnosis requires right heart catheterization (RHC)
+- Vasoreactivity testing determines treatment eligibility (CCB responders)
+referrals:
+- Pulmonary hypertension specialist (all Group 1)
+- Cardiology if Group 2
+- Heart-lung transplant evaluation if severe
+differentials: []
 trace:
-  - Progressive dyspnea on exertion x 1 year, now short of breath climbing stairs → Exam shows elevated JVP, loud P2 → Echo shows RVSP 65 mmHg, dilated right ventricle → PFTs normal, V/Q scan low probability → Right heart catheterization shows mean PAP 38 mmHg, PCWP 12 mmHg → Diagnose Group 1 pulmonary arterial hypertension (idiopathic) → Start sildenafil 20mg TID plus ambrisentan 5mg daily → 6-minute walk improves from 320m to 410m → Continue dual therapy, follow with serial echocardiograms and functional assessments
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

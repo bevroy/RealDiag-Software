@@ -1,166 +1,65 @@
 tree_id: RHEUM-SLE
-name: Systemic Lupus Erythematosus (SLE) Evaluation
+name: Systemic Lupus Erythematosus
 family: Rheumatology
-specialty: Rheumatology, Internal Medicine
-chief_complaint: Joint Pain, Rash, Fatigue, Fever, Kidney Problems
-description: Comprehensive evaluation and management of systemic lupus erythematosus
-version: "1.0"
-icd10: M32.9
+specialty: Rheumatology
+icd10:
+- M32.9
+- M32.10
+snomed:
+- '55464009'
+urgency: medium
+description: Comprehensive evaluation and management of Systemic Lupus Erythematosus
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: sle_presentation
-
-nodes:
-  - id: sle_presentation
-    type: question
-    text: "SLE presentation severity?"
-    options:
-      - label: "Severe/life-threatening (lupus nephritis, CNS lupus, severe hematologic, cardiopulmonary)"
-        next: severe_sle
-      - label: "New diagnosis or mild-moderate SLE"
-        next: sle_diagnosis
-
-  - id: severe_sle
-    type: question
-    text: "Type of severe organ involvement?"
-    options:
-      - label: "Lupus nephritis"
-        next: lupus_nephritis
-      - label: "CNS lupus (seizures, psychosis, stroke)"
-        next: cns_lupus
-      - label: "Other severe manifestations (severe cytopenia, myocarditis, alveolar hemorrhage)"
-        next: severe_sle_other
-
-  - id: lupus_nephritis
-    type: diagnosis
-    name: "Lupus Nephritis"
-    icd10: "M32.14"
-    urgency: critical
-    workup:
-      - Clinical - Edema, hypertension, hematuria, proteinuria, rising creatinine
-      - Urinalysis - Hematuria (RBC casts = glomerular), proteinuria (spot urine protein/creatinine ratio >0.5 or 24-hour urine protein >500mg)
-      - Labs - BMP (Cr, BUN), CBC, complement levels (C3, C4 LOW in active lupus), anti-dsDNA (elevated in active disease), albumin
-      - Kidney biopsy (gold standard for diagnosis and classification)
-      - Class I - Minimal mesangial (normal by light microscopy)
-      - Class II - Mesangial proliferative (mild, good prognosis)
-      - Class III - Focal proliferative (<50% glomeruli) - Requires immunosuppression
-      - Class IV - Diffuse proliferative (>50% glomeruli) - Most severe, requires aggressive treatment
-      - Class V - Membranous (nephrotic syndrome)
-      - Class VI - Advanced sclerosing (chronic kidney disease)
-      - Activity index and chronicity index guide treatment and prognosis
-    treatment:
-      - Hospital admission for severe/new diagnosis
-      - Induction therapy (for class III, IV, or V with nephrotic-range proteinuria)
-      - Cyclophosphamide IV (Euro-Lupus low-dose 500mg IV q2 weeks x 6 doses OR NIH high-dose 0.5-1 g/m² monthly x 6 months) PLUS prednisone 1mg/kg/day (max 60mg) tapered over 6 months OR
-      - Mycophenolate mofetil (MMF) 2-3g PO daily in divided doses PLUS prednisone (equivalent efficacy to cyclophosphamide, fewer side effects, preferred in some patients)
-      - Both regimens include hydroxychloroquine 200-400mg daily (all SLE patients should be on this)
-      - Maintenance therapy (after 6-month induction)
-      - Mycophenolate mofetil 1-2g daily OR azathioprine 2mg/kg/day
-      - Low-dose prednisone (≤5-10mg daily) or discontinue if possible
-      - Continue hydroxychloroquine
-      - Duration - Minimum 3-5 years, often indefinite
-      - Adjunctive therapy
-      - ACE inhibitor or ARB (for proteinuria reduction and renal protection) - Target BP <130/80
-      - Belimumab (Benlysta) 10mg/kg IV monthly - Biologic, can add to standard therapy for refractory cases
-      - Rituximab (anti-CD20) - For refractory lupus nephritis
-      - Monitoring - Urine protein/Cr ratio, Cr, complement, anti-dsDNA monthly initially then q3 months
-      - Goal - Complete remission (urine P/Cr <0.5, normal Cr) or partial remission (≥50% decrease in proteinuria, stable Cr)
-      - Renal biopsy repeat if treatment failure or unclear response
-      - Dialysis if ESRD (can still have remission with continued immunosuppression)
-      - Nephrology and rheumatology co-management
-
-  - id: cns_lupus
-    type: diagnosis
-    name: "CNS Lupus (Neuropsychiatric SLE)"
-    icd10: "M32.19"
-    urgency: critical
-    workup:
-      - Manifestations - Seizures (most common), psychosis, acute confusional state, aseptic meningitis, stroke, transverse myelitis, peripheral neuropathy, cognitive dysfunction
-      - Rule out infection (especially in immunosuppressed patients) - Meningitis, encephalitis
-      - MRI brain - May show infarcts, white matter lesions, atrophy (often normal)
-      - LP - Rule out infection, may show mild pleocytosis, elevated protein
-      - EEG if seizures
-      - Labs - Anti-ribosomal P antibodies (associated with psychosis), antiphospholipid antibodies (associated with stroke)
-    treatment:
-      - High-dose corticosteroids - Methylprednisolone 1000mg IV daily x 3-5 days, then prednisone 1mg/kg/day taper
-      - Cyclophosphamide IV monthly x 6 months (for severe refractory CNS lupus)
-      - Rituximab (anti-CD20) for refractory cases
-      - Seizures - Antiepileptic drugs (levetiracetam preferred, avoid phenytoin which can worsen lupus)
-      - Psychosis - Antipsychotics (risperidone, olanzapine) + immunosuppression
-      - Stroke - Anticoagulation if antiphospholipid antibodies present (treat as antiphospholipid syndrome), antiplatelet if thrombotic event without aPL antibodies
-      - Neurology consultation
-
-  - id: severe_sle_other
-    type: diagnosis
-    name: "Severe SLE Manifestations (Other Organ Systems)"
-    icd10: "M32.10"
-    urgency: critical
-    workup:
-      - Severe cytopenia
-      - Hemolytic anemia - Coombs positive, elevated LDH, low haptoglobin, elevated indirect bilirubin
-      - Thrombocytopenia - Platelets <50,000 (bleeding risk)
-      - Myocarditis - Troponin elevated, ECG changes, echocardiogram (reduced EF, wall motion abnormalities)
-      - Pericarditis - Chest pain, pericardial rub, ECG (diffuse ST elevation, PR depression), echo (effusion)
-      - Pulmonary alveolar hemorrhage - Hemoptysis, bilateral infiltrates, anemia, hypoxemia
-      - Thrombotic thrombocytopenic purpura (TTP) - Fever, microangiopathic hemolytic anemia, thrombocytopenia, renal failure, neurologic changes (may overlap with severe lupus)
-    treatment:
-      - ICU if hemodynamically unstable or respiratory failure
-      - High-dose corticosteroids - Methylprednisolone 1g IV daily x 3 days (pulse dose)
-      - Severe hemolytic anemia or thrombocytopenia
-      - IVIG 1-2 g/kg over 2-5 days
-      - Rituximab for refractory cases
-      - Transfusion support (PRBC for Hgb <7 or symptomatic, platelets if <10k or bleeding)
-      - Myocarditis - Heart failure management, corticosteroids, immunosuppression
-      - Alveolar hemorrhage - Mechanical ventilation, pulse steroids, cyclophosphamide, plasmapheresis
-      - Rheumatology consultation, consider ICU
-
-  - id: sle_diagnosis
-    type: diagnosis
-    name: "SLE Diagnosis and Management"
-    icd10: "M32.10"
-    urgency: medium
-    workup:
-      - EULAR/ACR 2019 classification criteria - Entry criterion: ANA ≥1:80, then score ≥10 from additive weighted criteria
-      - Constitutional - Fever (2 points)
-      - Hematologic - Leukopenia (3), thrombocytopenia (4), hemolytic anemia (4)
-      - Neuropsychiatric - Delirium (2), psychosis (3), seizure (5)
-      - Mucocutaneous - Non-scarring alopecia (2), oral ulcers (2), subacute or discoid lupus (4), acute cutaneous lupus (6)
-      - Serosal - Pleural or pericardial effusion (5), acute pericarditis (6)
-      - Musculoskeletal - Joint involvement (6)
-      - Renal - Proteinuria >0.5g/24hr (4), Class II or V lupus nephritis (8), Class III or IV (10)
-      - Immunologic - Low C3 or C4 (3), low C3 AND C4 (4), anti-dsDNA (6), anti-Smith (6)
-      - Labs
-      - ANA (>95% sensitive, nearly always positive in SLE) - If negative, SLE unlikely
-      - Anti-dsDNA (60-70% sensitive, highly specific for SLE, correlates with disease activity especially nephritis)
-      - Anti-Smith (25% sensitive, highly specific for SLE)
-      - Anti-Ro (SS-A), anti-La (SS-B) - Associated with photosensitivity, neonatal lupus, congenital heart block
-      - Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I) - If positive, increased thrombosis risk
-      - Complement levels - C3, C4 LOW in active disease (consumed)
-      - CBC - Anemia (chronic disease or hemolytic), leukopenia, lymphopenia, thrombocytopenia
-      - CMP - Assess renal function
-      - Urinalysis - Hematuria, proteinuria (assess for lupus nephritis)
-      - ESR elevated (CRP often normal in lupus unless infection/serositis)
-      - Baseline assessments - Chest X-ray, ECG, ophthalmology exam (hydroxychloroquine baseline)
-    treatment:
-      - All SLE patients
-      - Hydroxychloroquine 200-400mg PO daily (reduces flares, improves survival, prevents thrombosis) - Baseline and annual ophthalmology exams (retinopathy risk after >5 years)
-      - Sun protection - Sunscreen SPF 50+, protective clothing (photosensitivity common)
-      - Mild SLE (constitutional, arthralgias, rash without organ involvement)
-      - Hydroxychloroquine alone may be sufficient
-      - NSAIDs for arthritis/arthralgias
-      - Topical or low-dose oral corticosteroids (prednisone ≤10mg daily) for rash
-      - Moderate SLE (arthritis, serositis, significant rash)
-      - Hydroxychloroquine
-      - Prednisone 0.5mg/kg/day, taper to <7.5mg daily
-      - Methotrexate 15-25mg PO weekly (steroid-sparing for arthritis) OR
-      - Azathioprine 1-2mg/kg/day (steroid-sparing)
-      - Belimumab 10mg/kg IV monthly (biologic option, reduces flares)
-      - Severe SLE - See lupus nephritis, CNS lupus sections
-      - Antiphospholipid syndrome (if aPL antibodies + thrombosis or pregnancy loss)
-      - Anticoagulation - Warfarin (target INR 2-3, or 3-4 if arterial thrombosis), continue indefinitely
-      - Aspirin 81mg daily for primary prevention if aPL positive without thrombosis
-      - Pregnancy - High-risk, close monitoring (lupus can flare, preeclampsia risk, fetal heart block risk if anti-Ro positive), continue hydroxychloroquine, low-dose aspirin, avoid MMF and cyclophosphamide (teratogenic)
-      - Monitoring - Clinical assessment q3-6 months, labs (CBC, CMP, UA, complement, anti-dsDNA) q3-6 months
-      - Vaccinations - Pneumococcal, influenza, avoid live vaccines if on immunosuppression
-      - Comorbidities - Increased cardiovascular risk (statins, control BP/lipids), osteoporosis (calcium, vitamin D, bisphosphonates if on chronic steroids)
-      - Rheumatology follow-up
+homeopathy: []
+presentations:
+- Malar rash
+- Photosensitivity
+- Oral ulcers
+- Arthritis
+- Serositis
+- Renal involvement
+- Positive ANA, anti-dsDNA
+workup:
+- 'ANA: 95% sensitive but only 50% specific - if negative, SLE very unlikely. Titer
+  >1:160 significant'
+- 'Anti-dsDNA: 70% sensitive, 95% specific - rises with disease activity, correlates
+  with nephritis'
+- 'Anti-Smith: 30% sensitive, 99% specific - most specific for SLE'
+- 'Complement (C3, C4): Low in active disease (consumption)'
+- 'UA with micro: Proteinuria, RBC casts (lupus nephritis). 24-hour urine protein
+  if positive'
+- 'CBC: Anemia (hemolytic or chronic disease), leukopenia, thrombocytopenia'
+treatment:
+- 'Guideline-based treatment options for Systemic Lupus Erythematosus include:'
+- 'Mild disease (arthritis, rash): Hydroxychloroquine 200-400mg daily (reduces flares,
+  protects against organ damage), NSAIDs, sunscreen SPF 50+ (ACR 2023)'
+- 'Moderate disease: Prednisone 0.5-1mg/kg daily, taper after control, add steroid-sparing
+  agent (methotrexate 15-25mg weekly, azathioprine 2mg/kg daily) (ACR 2023)'
+- 'Severe disease (lupus nephritis, CNS lupus): High-dose prednisone 1mg/kg + cyclophosphamide
+  IV monthly x6 months OR mycophenolate 2-3g daily (ACR 2023)'
+- 'Belimumab (monoclonal anti-BLyS): For active disease despite standard therapy (ACR
+  2023)'
+- 'Pregnancy: High-risk (preeclampsia, flares), hydroxychloroquine continued, avoid
+  methotrexate/cyclophosphamide (teratogenic) (ACR 2023)'
+clinical_pearls:
+- Multisystem autoimmune disease - female 9:1, peak onset 20-40 years, African American
+  > Caucasian
+- 'Malar (butterfly) rash: Spares nasolabial folds - pathognomonic but only present
+  50%'
+- 'Lupus nephritis (50%): Most serious complication, leading cause of morbidity/mortality,
+  requires aggressive immunosuppression'
+- 'Drug-induced lupus: Hydralazine, procainamide, isoniazid, minocycline - resolves
+  after stopping drug, anti-histone antibodies positive'
+- 'Antiphospholipid syndrome (30%): Thrombosis, recurrent miscarriages, thrombocytopenia
+  - requires anticoagulation'
+referrals:
+- Rheumatology urgently for all SLE diagnoses - requires disease activity monitoring
+  and immunosuppression
+- Nephrology if proteinuria >500mg/day or active urine sediment (lupus nephritis)
+differentials: []
+trace:
+  source: American College of Rheumatology (ACR) Guidelines, European League Against
+    Rheumatism (EULAR)
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,0 +1,49 @@
+tree_id: ID-ENCEPHALITIS
+name: Encephalitis
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- G04.90
+- B00.4
+snomed:
+- '45170000'
+urgency: medium
+description: Comprehensive evaluation and management of Encephalitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Altered mental status, confusion, disorientation (hallmark)
+- Fever, headache, seizures
+- Focal neurologic deficits (weakness, aphasia, ataxia)
+- Personality changes, behavioral abnormalities
+- 'HSV encephalitis: Temporal lobe involvement, hemorrhagic changes on MRI'
+- 'CSF: Lymphocytic pleocytosis, elevated protein, RBCs (if hemorrhagic)'
+workup:
+- MRI brain with contrast (temporal lobe involvement suggests HSV)
+- 'Lumbar puncture: CSF PCR for HSV, VZV, enteroviruses'
+- EEG (PLEDS suggest HSV)
+- Blood cultures, CSF cell count/glucose/protein
+treatment:
+- 'Guideline-based treatment options for Encephalitis include:'
+- Empiric acyclovir 10mg/kg IV q8h immediately (IDSA 2024)
+- 'Supportive care: IVF, anticonvulsants if seizures (IDSA 2024)'
+- Antibiotics if bacterial meningitis not ruled out (vanc + ceftriaxone) (IDSA 2024)
+- Continue acyclovir 14-21 days if HSV confirmed (IDSA 2024)
+- Treat elevated ICP if present (IDSA 2024)
+clinical_pearls:
+- HSV encephalitis most common viral cause (and most treatable)
+- Start acyclovir empirically if encephalitis suspected (don't wait for PCR)
+- 'MRI more sensitive than CT: Temporal lobe enhancement (HSV)'
+- 'EEG: PLEDS (periodic lateralizing epileptiform discharges) suggests HSV'
+- Mortality 70% if untreated HSV; 30% with treatment
+referrals:
+- ICU admission
+- Neurology consult
+- Infectious disease consult
+differentials: []
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

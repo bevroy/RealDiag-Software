@@ -1,73 +1,55 @@
 tree_id: NEPHRO-RHABDOMYOLYSIS
-name: Rhabdomyolysis Evaluation
+name: Rhabdomyolysis
 family: Nephrology
-specialty: Nephrology, Critical Care, Emergency Medicine
-chief_complaint: Muscle Pain, Dark Urine, Weakness, Elevated CK
-description: Comprehensive evaluation and management of rhabdomyolysis
-version: "1.0"
+specialty: Nephrology
+icd10:
+- M62.82
+- T79.6
+snomed:
+- '240131006'
+urgency: medium
+description: Comprehensive evaluation and management of Rhabdomyolysis
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: rhabdomyolysis_evaluation
-
-nodes:
-  - id: rhabdomyolysis_evaluation
-    type: diagnosis
-    name: "Rhabdomyolysis"
-    icd10: "M62.82"
-    urgency: high
-    workup:
-      - Definition - Breakdown of skeletal muscle with release of intracellular contents into circulation (myoglobin, CK, potassium, phosphate, uric acid)
-      - Diagnostic criteria - CK >1000 U/L (often >5000, can be >100,000), clinical context
-      - Classic triad (only 10% have all three) - Myalgia, weakness, dark urine (tea/cola-colored from myoglobinuria)
-      - Causes - "TRAMPLES"
-      - Trauma/Crush injury - Most common, compartment syndrome, prolonged immobilization (fall, coma, surgery)
-      - Rhabdo from strenuous exercise - CrossFit, marathons, military training (exertional rhabdo)
-      - Alcohol/drugs - Cocaine, amphetamines, MDMA, heroin, statins (especially with fibrates), colchicine
-      - Medications - Statins (0.1% per year, risk with CYP3A4 inhibitors), antipsychotics (neuroleptic malignant syndrome), anesthetics (malignant hyperthermia)
-      - Poisons/toxins - Carbon monoxide, snake venom, mushrooms
-      - Low potassium/phosphate - Hypokalemia, hypophosphatemia (refeeding syndrome, DKA)
-      - Electrolyte abnormalities - Hyponatremia, hypernatremia
-      - Seizures - Prolonged or status epilepticus
-      - Complications - Acute kidney injury (most serious, 10-50% require dialysis), hyperkalemia (life-threatening, cardiac arrest), hypocalcemia (early, calcium deposits in damaged muscle), hypercalcemia (late, mobilization from muscle), compartment syndrome, DIC
-      - Labs
-      - CK markedly elevated (>1000, often >5000-10,000) - Degree correlates with AKI risk (>15,000-20,000 high risk)
-      - Myoglobin - Serum (peaks 1-6 hours, short half-life), urine (dipstick positive for blood but no RBCs, myoglobinuria)
-      - Electrolytes - Hyperkalemia (CRITICAL, check immediately), hyperphosphatemia, hyperuricemia, hypocalcemia (early), hypercalcemia (recovery phase)
-      - Renal function - BUN/Cr elevated if AKI, Cr rises out of proportion to BUN (muscle breakdown releases creatinine)
-      - Urinalysis - Pigmented granular casts, positive blood (myoglobin) without RBCs
-      - AST/ALT mildly elevated (muscle enzymes), LDH elevated
-      - Anion gap metabolic acidosis (lactic acid from muscle ischemia)
-      - Risk factors for AKI - CK >15,000-20,000, dehydration, acidosis, sepsis, pre-existing CKD, delayed treatment
-    treatment:
-      - Aggressive IV fluid resuscitation - CORNERSTONE of treatment, prevent AKI
-      - NS 200-400 mL/hr (or 1-2 L/hr initially if severe), goal urine output 200-300 mL/hr (3 mL/kg/hr)
-      - Continue until CK declining and <1000, myoglobinuria resolved (usually 24-72 hours)
-      - Volume can be massive (10-20 L/day), monitor for volume overload
-      - Alkalinization of urine - Controversial, theoretical benefit (myoglobin less toxic in alkaline urine, prevents cast formation)
-      - Add sodium bicarbonate to IV fluids (150 mEq/L D5W or 3 amps NaHCO3 in 1L D5W) if pH <6.5 or severe
-      - Goal urine pH >6.5, avoid if hypocalcemia severe (alkalosis worsens symptoms)
-      - Not proven to reduce AKI in RCTs, use selectively
-      - Mannitol - Osmotic diuretic, theoretical benefits (increases urine flow, free radical scavenger)
-      - 0.5-1 g/kg IV if urine output inadequate despite fluids
-      - Risk volume overload, acute tubular necrosis if hypovolemic, not routinely recommended
-      - Electrolyte management
-      - Hyperkalemia - URGENT, life-threatening
-      - Severe (>6.5 or ECG changes) - Calcium gluconate 1-2 g IV (cardiac membrane stabilization), insulin + dextrose (10 units regular insulin + 1 amp D50), albuterol nebulizer, sodium bicarbonate if acidotic
-      - Consider emergent dialysis if refractory
-      - Hypocalcemia - Do NOT treat unless symptomatic (tetany, seizures, prolonged QT) - Giving calcium can worsen soft tissue calcification
-      - Hyperphosphatemia - Phosphate binders if severe, dialysis if refractory
-      - Monitor for rebound hypercalcemia during recovery (mobilization from muscles)
-      - Treat underlying cause - Stop offending drugs (statins), treat compartment syndrome (fasciotomy), manage infections
-      - Renal replacement therapy (dialysis) - Indications
-      - Refractory hyperkalemia
-      - Severe metabolic acidosis
-      - Volume overload unresponsive to diuretics
-      - Uremic symptoms
-      - 10-20% of severe rhabdomyolysis require dialysis
-      - Compartment syndrome - Surgical emergency
-      - Suspect if pain out of proportion, tense swollen compartment, paresthesias, pain with passive stretch
-      - Measure compartment pressures (>30 mmHg or within 30 mmHg of diastolic BP = critical)
-      - Urgent fasciotomy (delay >6 hours = permanent damage)
-      - Monitoring - CK daily (should peak 24-48 hours then decline), electrolytes (K, Ca, Phos) q6h initially, renal function daily, urine output hourly
-      - Prognosis - Mortality 5-10% overall, higher if AKI requiring dialysis (20-50% mortality), most recover renal function if survive acute phase
-
+homeopathy: []
+presentations:
+- Muscle pain, swelling, weakness (myalgias)
+- Dark (tea-colored) urine (myoglobinuria)
+- Markedly elevated CK (>5,000 U/L, often >10,000)
+- AKI (Cr rising, oliguria from myoglobin-induced ATN)
+- Hyperkalemia, hyperphosphatemia, hypocalcemia (acute), hyperuricemia
+- 'Causes: Trauma, prolonged immobilization, seizures, statins, cocaine, heat stroke,
+  severe exercise'
+workup:
+- CK (markedly elevated >5,000, often >10,000)
+- Basic metabolic panel (Cr, K+, PO4, Ca2+)
+- Urinalysis (myoglobin, no RBCs on microscopy)
+- Urine myoglobin (if available)
+- Liver function tests (transaminases often elevated from muscle injury)
+treatment:
+- 'Guideline-based treatment options for Rhabdomyolysis include:'
+- 'Aggressive IV fluid resuscitation: NS or LR 200-300 mL/hr (goal UOP 200-300 mL/hr)
+  (KDIGO 2024)'
+- Target urine output 3 mL/kg/hr to flush myoglobin (KDIGO 2024)
+- 'Correct electrolytes: Treat hyperkalemia (Ca, insulin/glucose), hold calcium initially
+  (hypocalcemia) (KDIGO 2024)'
+- Monitor CK daily until trending down (KDIGO 2024)
+- 'Dialysis if: AKI with oliguria, refractory hyperkalemia, severe acidosis (KDIGO
+  2024)'
+clinical_pearls:
+- Myoglobin precipitates in renal tubules → ATN
+- Urine dipstick positive for blood but no RBCs on microscopy (detects myoglobin)
+- CK >15,000 or rapidly rising → high risk for AKI
+- Aggressive IV hydration (200-300 mL/hr) is KEY to prevent AKI
+- 'Compartment syndrome: Tense, swollen compartment + pain with passive stretch →
+  needs fasciotomy'
+referrals:
+- Nephrology if AKI developing
+- ICU if severe (CK >50,000, AKI, severe electrolyte abnormalities)
+- Orthopedic surgery if compartment syndrome suspected
+differentials: []
+trace:
+  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
+    Society of Nephrology (ASN)'
+  version: 0.1.0
+  last_updated: '2024-12-26'

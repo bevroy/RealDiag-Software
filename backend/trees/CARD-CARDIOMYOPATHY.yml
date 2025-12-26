@@ -1,158 +1,59 @@
 tree_id: CARD-CARDIOMYOPATHY
-name: Cardiomyopathy Evaluation and Management
+name: Cardiomyopathy
 family: Cardiology
-specialty: Cardiology, Heart Failure
-chief_complaint: Dyspnea, Fatigue, Edema, Chest Pain
-description: Comprehensive evaluation and management of cardiomyopathies
-version: "1.0"
-icd10: I42.9
+specialty: Cardiology
+icd10:
+- I42.9
+- I42.0
+snomed:
+- '57809008'
+urgency: medium
+description: Comprehensive evaluation and management of Cardiomyopathy
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: cardiomyopathy_presentation
-
-nodes:
-  - id: cardiomyopathy_presentation
-    type: question
-    text: "Type of cardiomyopathy?"
-    options:
-      - label: "Dilated cardiomyopathy (DCM) - LV dilation and reduced EF"
-        next: dilated_cardiomyopathy
-      - label: "Hypertrophic cardiomyopathy (HCM) - LV hypertrophy, preserved/hyperdynamic EF"
-        next: hypertrophic_cardiomyopathy
-      - label: "Restrictive cardiomyopathy - impaired filling, normal LV size/EF"
-        next: restrictive_cardiomyopathy
-
-  - id: dilated_cardiomyopathy
-    type: diagnosis
-    name: "Dilated Cardiomyopathy"
-    icd10: "I42.0"
-    urgency: high
-    workup:
-      - Definition - LV dilation (LVEDD >5.5 cm in women, >6.0 cm in men) with reduced ejection fraction (EF <40%), systolic dysfunction
-      - Clinical - Dyspnea, orthopnea, PND, fatigue, edema, chest pain (rare), palpitations, syncope
-      - Heart failure symptoms - NYHA class I-IV
-      - Etiologies (determine cause - impacts treatment)
-      - Ischemic - CAD, prior MI (most common overall, 60-70%)
-      - Idiopathic (30-40%) - Diagnosis of exclusion
-      - Toxic - Alcohol (most common toxic cause, reversible if stop drinking), chemotherapy (anthracyclines, trastuzumab), cocaine, methamphetamine
-      - Viral myocarditis - Coxsackie B, adenovirus, parvovirus B19, HIV, COVID-19 (can progress to DCM)
-      - Peripartum cardiomyopathy - Last month of pregnancy to 5 months postpartum, EF often recovers
-      - Familial/genetic - Lamin A/C, TTN (titin), others (10-30% of idiopathic DCM has genetic cause)
-      - Tachycardia-induced - Chronic uncontrolled AFib with RVR (reversible with rate control)
-      - Infiltrative - Hemochromatosis, sarcoidosis
-      - Nutritional - Thiamine deficiency (beriberi), selenium deficiency
-      - Endocrine - Hypothyroidism, hyperthyroidism, pheochromocytoma
-      - Autoimmune - Lupus, scleroderma
-      - Physical exam - S3 gallop, JVD, crackles, peripheral edema, displaced PMI, mitral regurgitation murmur (functional MR from dilation)
-      - Echocardiogram - LV dilation, reduced EF, global hypokinesis (vs regional wall motion abnormalities in ischemic), assess valves (MR, TR common)
-      - ECG - May show Q waves (prior MI), LVH, BBB (LBBB common in DCM), AFib
-      - Chest X-ray - Cardiomegaly, pulmonary edema, pleural effusions
-      - BNP/NT-proBNP - Elevated, correlates with severity
-      - Labs - CBC, CMP, Mg, phosphorus, TSH, iron studies (hemochromatosis screen), HIV, consider genetic testing
-      - Cardiac catheterization - If concern for ischemic etiology (rule out CAD), coronary angiography
-      - Cardiac MRI - Assess for myocarditis, infiltrative disease, viability, LGE patterns
-      - Endomyocardial biopsy - Rarely needed, consider if suspect giant cell myocarditis, sarcoidosis, hemochromatosis
-    treatment:
-      - Treat heart failure with reduced EF (HFrEF) - Same as any systolic HF
-      - Guideline-directed medical therapy (GDMT) - "Fantastic Four"
-      - ACE inhibitor or ARB - Lisinopril 20-40mg daily, losartan 50-100mg daily (reduce mortality)
-      - Beta-blocker - Metoprolol succinate 200mg daily, carvedilol 25mg BID, bisoprolol 10mg daily (reduce mortality, start LOW and titrate up)
-      - MRA (mineralocorticoid receptor antagonist) - Spironolactone 25mg daily or eplerenone 50mg daily (reduce mortality, monitor K+ and Cr)
-      - SGLT2 inhibitor - Dapagliflozin 10mg daily or empagliflozin 10mg daily (reduce HF hospitalization and mortality, even if no diabetes)
-      - ARNI (angiotensin receptor-neprilysin inhibitor) - Sacubitril/valsartan 97/103mg BID (superior to ACE/ARB, switch if still symptomatic on GDMT)
-      - Diuretics - Loop diuretic (furosemide 20-240mg daily) for volume overload, titrate to euvolemia
-      - Ivabradine - If sinus rhythm, HR >70 despite beta-blocker, EF ≤35%
-      - Hydralazine + isosorbide dinitrate - If ACE/ARB/ARNI not tolerated (black patients benefit even if tolerating ACE/ARB)
-      - Address underlying cause
-      - Alcohol - Complete abstinence (EF may improve significantly)
-      - Ischemic - Revascularization if viable myocardium
-      - Tachycardia-induced - Rate/rhythm control (EF often normalizes)
-      - Hemochromatosis - Phlebotomy, chelation
-      - Peripartum - Bromocriptine 2.5mg BID x 6 weeks (new data suggests benefit)
-      - ICD (implantable cardioverter-defibrillator) - PRIMARY prevention if EF ≤35% despite 3 months optimal medical therapy, life expectancy >1 year, NYHA II-III (reduces sudden cardiac death)
-      - CRT (cardiac resynchronization therapy) - Biventricular pacing if EF ≤35%, LBBB with QRS ≥150 ms, NYHA II-IV (improves symptoms and mortality)
-      - Advanced therapies - If refractory despite maximal therapy
-      - LVAD (left ventricular assist device) - Bridge to transplant or destination therapy
-      - Heart transplant - Refractory NYHA IV, age <70, no contraindications
-      - Lifestyle - Low sodium <2g/day, fluid restriction if severe HF, exercise as tolerated, avoid NSAIDs and alcohol
-      - Anticoagulation - If AFib (high stroke risk), LV thrombus on echo, or EF <30% with AFib
-      - Prognosis - Variable, 5-year mortality 20-50% without treatment, much better with GDMT
-
-  - id: hypertrophic_cardiomyopathy
-    type: diagnosis
-    name: "Hypertrophic Cardiomyopathy (HCM)"
-    icd10: "I42.1"
-    urgency: medium
-    workup:
-      - Definition - LV hypertrophy (wall thickness ≥15 mm, or ≥13 mm with family history) without another cause (HTN, AS)
-      - Asymmetric septal hypertrophy most common (septum >> posterior wall), apical variant
-      - Subtypes - Obstructive (HOCM) with LVOT obstruction (70%), non-obstructive (30%)
-      - Clinical - Often asymptomatic, dyspnea, chest pain (angina from microvascular ischemia and high O2 demand), syncope/presyncope (especially with exertion), palpitations, sudden cardiac death (most common cause of SCD in young athletes)
-      - Family history - Autosomal dominant (50% have family history), sudden death in relatives
-      - Physical exam - Systolic ejection murmur at LLSB (LVOT obstruction), louder with Valsalva/standing (decreased preload → increased obstruction), softer with squatting/handgrip (increased afterload → decreased obstruction), bisferiens pulse (double-peaked), S4
-      - Echocardiogram - LV hypertrophy (septal thickness ≥15 mm), SAM (systolic anterior motion of mitral valve), LVOT gradient (resting or with provocation), hyperdynamic EF, small LV cavity, diastolic dysfunction, mitral regurgitation (from SAM)
-      - Measure LVOT gradient - Resting gradient >30 mmHg = obstructive, provoked gradient (Valsalva, amyl nitrite) >50 mmHg = labile obstruction
-      - ECG - LVH with deep T-wave inversions (especially lateral and inferior leads), LAE, Q waves (septal hypertrophy mimics MI)
-      - Cardiac MRI - Better characterizes extent of hypertrophy, apical variant, LGE (fibrosis, increased SCD risk)
-      - Genetic testing - 60-70% have sarcomeric protein mutations (MYH7, MYBPC3), family screening recommended
-      - SCD risk stratification - Important (1% annual risk overall, higher in certain features)
-      - Major risk factors - Prior cardiac arrest/VT, family history of SCD, unexplained syncope, massive LVH (≥30 mm), abnormal BP response to exercise, extensive LGE on MRI, apical aneurysm
-    treatment:
-      - Avoid strenuous exercise and competitive sports (SCD risk)
-      - Medical management - Symptoms or LVOT obstruction
-      - Beta-blockers - Metoprolol 100-200mg daily, first-line for symptoms (reduce HR, increase filling time, reduce obstruction)
-      - Calcium channel blockers - Verapamil 240-480mg daily (if beta-blocker not tolerated), avoid in severe obstruction (can worsen hypotension)
-      - Disopyramide - Negative inotrope, reduces LVOT gradient (added to beta-blocker if refractory symptoms)
-      - AVOID - Vasodilators (ACE/ARB, nitrates - worsen obstruction), diuretics (reduce preload → worsen obstruction), digoxin (increases contractility → worsen obstruction)
-      - AFib management - Common (20-25%), high stroke risk
-      - Anticoagulation with warfarin (CHA2DS2-VASc underestimates risk in HCM)
-      - Rhythm control preferred (amiodarone or dofetilide, avoid sotalol if LVH)
-      - Procedural interventions - If refractory symptoms despite maximal medical therapy AND LVOT gradient >50 mmHg
-      - Septal myectomy (Morrow procedure) - Surgical resection of basal septum, gold standard, reduces gradient and improves symptoms
-      - Alcohol septal ablation - Percutaneous, inject alcohol into septal perforator artery → controlled MI of septum, alternative if poor surgical candidate, risk of complete heart block (10% need PPM)
-      - ICD - For primary prevention if high SCD risk
-      - Indications - Prior cardiac arrest/VT, massive LVH ≥30 mm, family history SCD, unexplained syncope, abnormal BP response to exercise, extensive LGE, LVOT gradient >50 mmHg
-      - Risk calculator (HCM Risk-SCD) - Estimate 5-year SCD risk, consider ICD if >6%
-      - Family screening - First-degree relatives, echo and ECG q5 years (or q12-18 months during adolescent growth spurt), genetic testing if mutation identified
-      - Pregnancy - Generally well-tolerated, avoid dehydration, continue beta-blockers, avoid epidural hypotension
-
-  - id: restrictive_cardiomyopathy
-    type: diagnosis
-    name: "Restrictive Cardiomyopathy"
-    icd10: "I42.5"
-    urgency: medium
-    workup:
-      - Definition - Impaired ventricular filling (diastolic dysfunction) with normal or near-normal LV size and EF, increased filling pressures
-      - Least common cardiomyopathy
-      - Etiologies
-      - Infiltrative - Amyloidosis (most common restrictive CM), sarcoidosis, hemochromatosis
-      - Storage diseases - Gaucher, Fabry, glycogen storage diseases
-      - Endomyocardial - Radiation, anthracycline toxicity, hypereosinophilic syndrome, endomyocardial fibrosis
-      - Idiopathic
-      - Clinical - Right heart failure predominates (JVD, hepatomegaly, ascites, edema), dyspnea, fatigue, exercise intolerance
-      - Kussmaul sign (JVP rises with inspiration)
-      - Physical exam - Elevated JVP, S3/S4, hepatomegaly, ascites, peripheral edema
-      - Differentiate from constrictive pericarditis - Similar presentation, but restrictive is myocardial disease, constrictive is pericardial
-      - Echocardiogram - Normal LV size and EF (or mildly reduced), biatrial enlargement, restrictive filling pattern (short deceleration time <160 ms, E/A ratio >2), thickened myocardium (infiltrative), reduced GLS (longitudinal strain), "granular sparkling" appearance in amyloidosis
-      - Cardiac catheterization - Elevated and equalized diastolic pressures (RVEDP = LVEDP within 5 mmHg), "dip and plateau" or "square root sign"
-      - Cardiac MRI - Late gadolinium enhancement patterns help identify etiology (diffuse subendocardial LGE in amyloidosis), pericardial thickness (differentiate from constrictive)
-      - Labs - BNP elevated, serum/urine protein electrophoresis with immunofixation (monoclonal protein in AL amyloidosis), free light chains (kappa/lambda), troponin (often chronically elevated in amyloidosis)
-      - Endomyocardial biopsy - Confirm diagnosis and etiology (Congo red staining for amyloidosis, apple-green birefringence), typing (AL vs ATTR)
-      - Amyloidosis workup - Most common cause
-      - AL (light chain) - Plasma cell dyscrasia, worse prognosis, treat with chemotherapy
-      - ATTR (transthyretin) - Wild-type (elderly, "senile amyloidosis") or hereditary variant, better prognosis, tafamidis treatment available
-      - Tc-99m PYP scan - Positive uptake in ATTR amyloidosis (non-invasive test)
-    treatment:
-      - Treat underlying cause if possible
-      - AL amyloidosis - Chemotherapy (bortezomib, melphalan, dexamethasone), autologous stem cell transplant if eligible
-      - ATTR amyloidosis - Tafamidis 80mg daily or 61mg daily (slows progression), liver transplant if hereditary variant
-      - Hemochromatosis - Phlebotomy, chelation
-      - Sarcoidosis - Corticosteroids, immunosuppression
-      - Heart failure management - Challenging (standard HF meds often not tolerated)
-      - Diuretics - LOW DOSE, cautiously (patients preload-dependent, avoid over-diuresis which drops cardiac output)
-      - AVOID - ACE/ARB (hypotension), beta-blockers (need HR to maintain CO), digoxin (can bind amyloid fibrils and cause toxicity), calcium channel blockers
-      - AFib management - Very common, maintain sinus rhythm if possible, anticoagulate (stroke risk high)
-      - Pacemaker - If conduction disease (common in amyloidosis and sarcoidosis)
-      - ICD - If sustained VT/VF, cardiac sarcoidosis with EF <35%
-      - Advanced therapies - Heart transplant (if young, no systemic involvement in amyloidosis), LVAD not effective (RV failure)
-      - Prognosis - Poor, especially AL amyloidosis (median survival <1 year if untreated), ATTR better (median 3-5 years)
+homeopathy: []
+presentations:
+- dyspnea, fatigue, edema
+- may be dilated, hypertrophic, or restrictive
+- reduced cardiac output
+- arrhythmias
+- 'Three main types: Dilated (most common, reduced EF), hypertrophic (LVH, outflow
+  obstruction), restrictive (stiff ventricles)'
+- 'Dilated: Heart failure symptoms, EF <40%, global LV dilation'
+- 'Hypertrophic: Dyspnea, syncope, systolic murmur increases with Valsalva'
+- 'Restrictive: Heart failure, preserved EF, impaired filling, mimics constrictive
+  pericarditis'
+workup:
+- 'Echocardiogram: EF, chamber size, wall thickness, diastolic function'
+- 'Cardiac MRI: Fibrosis pattern (helps identify etiology)'
+- 'ECG: LVH (hypertrophic), low voltage (restrictive/amyloid), LBBB (dilated)'
+- 'BNP: Elevated in all types with heart failure'
+- 'Consider: Endomyocardial biopsy if restrictive (amyloidosis, sarcoidosis)'
+treatment:
+- 'Guideline-based treatment options for Cardiomyopathy include:'
+- 'Dilated: GDMT for HFrEF (sacubitril-valsartan, BB, MRA, SGLT2i), ICD if EF ≤35%
+  (ACC/AHA 2023)'
+- 'Hypertrophic: Beta-blockers (metoprolol) or verapamil, avoid ACEi/ARBs/nitrates,
+  ICD if high risk (ACC/AHA 2023)'
+- 'Restrictive: Treat underlying cause (amyloidosis, hemochromatosis), diuretics for
+  volume (ACC/AHA 2023)'
+- 'All types: Anticoagulation if AFib, avoid NSAIDs, manage arrhythmias (ACC/AHA 2023)'
+clinical_pearls:
+- 'Dilated cardiomyopathy: Ischemic (CAD) vs non-ischemic (alcohol, viral, idiopathic,
+  peripartum)'
+- 'Hypertrophic cardiomyopathy: Genetic (sarcomere mutations), avoid dehydration/nitrates/ACEi'
+- 'Restrictive cardiomyopathy: Amyloidosis (most common), sarcoidosis, hemochromatosis,
+  radiation'
+- 'Echo distinguishes types: Dilated (big thin heart), hypertrophic (thick septum),
+  restrictive (small stiff heart)'
+- 'Cardiac MRI: Helps identify etiology (fibrosis pattern, infiltration)'
+referrals:
+- Cardiology for all new diagnoses
+- Genetic counseling if hypertrophic or familial dilated cardiomyopathy
+- Advanced HF team if refractory (LVAD, transplant)
+differentials: []
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

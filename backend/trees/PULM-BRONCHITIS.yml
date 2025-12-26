@@ -1,0 +1,55 @@
+tree_id: PULM-BRONCHITIS
+name: Acute Bronchitis
+family: Pulmonology
+specialty: Pulmonology
+icd10:
+- J20.9
+- J20.8
+snomed:
+- '10509002'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Bronchitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Acute cough (< 3 weeks)
+- Productive or non-productive cough
+- Chest discomfort
+- Low-grade fever or absent fever
+- Wheezing or rhonchi
+workup:
+- None routinely needed (clinical diagnosis)
+- 'Chest X-ray only if: Vital sign abnormalities (RR >24, HR >100, fever >38°C), or
+  exam suggests pneumonia'
+- Influenza PCR if flu season and within 48 hours of onset (guides oseltamivir use)
+- Pertussis PCR if cough >2 weeks or paroxysmal
+treatment:
+- 'Guideline-based treatment options for Acute Bronchitis include:'
+- 'Supportive care: Hydration, rest, honey for cough (>1 year old) (ATS 2023)'
+- 'Symptomatic relief: Dextromethorphan 10-20mg q4h PRN or benzonatate 100-200mg TID
+  (ATS 2023)'
+- Short-acting bronchodilator (albuterol) if wheezing present (ATS 2023)
+- Antibiotics NOT recommended (viral etiology) (ATS 2023)
+- Oseltamivir 75mg BID x 5 days if influenza suspected and <48 hours from onset (ATS
+  2023)
+clinical_pearls:
+- Viral in 90-95% (rhinovirus, coronavirus, influenza, RSV) - antibiotics NOT indicated
+- 'Diagnosis clinical: Cough <3 weeks without pneumonia on exam or CXR'
+- Antibiotics do NOT reduce cough duration (Cochrane review) - only use if pneumonia
+  suspected
+- Post-viral cough can persist 3-8 weeks after infection resolves
+- 'Differentiate from pneumonia: No focal consolidation, tachypnea, hypoxia'
+- 'Pertussis (whooping cough): Paroxysmal cough with inspiratory whoop, test if >2
+  weeks'
+referrals:
+- No referral needed for uncomplicated acute bronchitis
+- Follow-up if cough persists >3 weeks (rule out pneumonia, pertussis, asthma, post-nasal
+  drip)
+- Pulmonology if concern for underlying COPD or asthma
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

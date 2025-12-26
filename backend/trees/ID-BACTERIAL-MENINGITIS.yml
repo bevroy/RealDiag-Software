@@ -1,0 +1,54 @@
+tree_id: ID-BACTERIAL-MENINGITIS
+name: Bacterial Meningitis
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- G00.9
+- G00.2
+snomed:
+- '95883001'
+urgency: medium
+description: Comprehensive evaluation and management of Bacterial Meningitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Classic triad: Fever, neck stiffness, altered mental status (only 44% have all
+  3)'
+- Severe headache, photophobia, nausea/vomiting
+- Kernig's sign (pain with leg extension), Brudzinski's sign (neck flexion → hip flexion)
+- Petechial rash (Neisseria meningitidis)
+- Seizures, focal neurologic deficits (complications)
+- 'CSF: Elevated WBC (>1000, PMN predominant), low glucose, high protein, elevated
+  opening pressure'
+workup:
+- 'Lumbar puncture: CSF cell count, glucose, protein, gram stain, culture'
+- Blood cultures x2 before antibiotics
+- CT head if focal neurologic signs before LP
+- Procalcitonin (elevated in bacterial)
+treatment:
+- 'Guideline-based treatment options for Bacterial Meningitis include:'
+- Blood cultures, then empiric antibiotics immediately (don't wait for LP!) (IDSA
+  2024)
+- Vancomycin 15-20mg/kg IV + ceftriaxone 2g IV q12h (IDSA 2024)
+- 'If >50yo or immunocompromised: Add ampicillin 2g IV q4h (for Listeria) (IDSA 2024)'
+- Dexamethasone 10mg IV q6h x 4 days (start with or before antibiotics) (IDSA 2024)
+- LP when safe (after CT if focal signs); send CSF for cell count, glucose, protein,
+  gram stain, culture (IDSA 2024)
+clinical_pearls:
+- Don't delay antibiotics for LP or imaging! Give empiric antibiotics if high suspicion
+- 'LP contraindicated if: Focal deficit, papilledema, immunocompromised → get CT first'
+- 'Empiric: Vancomycin + ceftriaxone (add ampicillin if >50yo or immunocompromised
+  for Listeria)'
+- Dexamethasone 10mg IV 15-20 min before or with first antibiotic dose (reduces mortality)
+- Mortality 15-25% even with treatment; neurologic sequelae common
+referrals:
+- ICU admission for all bacterial meningitis
+- Infectious disease consult
+- Neurology if complications (seizures, stroke)
+differentials: []
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

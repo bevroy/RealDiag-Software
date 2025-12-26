@@ -1,0 +1,51 @@
+tree_id: EM-STROKE-ISCHEMIC
+name: Acute Ischemic Stroke
+family: Emergency Medicine
+specialty: Emergency Medicine
+icd10:
+- I63.9
+- I63.30
+snomed:
+- '422504002'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Ischemic Stroke
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Sudden focal neurologic deficit (onset within minutes)
+- 'FAST criteria: Facial droop, Arm weakness, Speech difficulty, Time critical'
+- Hemiparesis or hemiplegia
+- Aphasia (Broca's or Wernicke's), dysarthria
+- Visual field defects, diplopia
+- Ataxia, vertigo, nystagmus (posterior circulation)
+- Time of symptom onset MUST be established for tPA eligibility
+- NIHSS score 0-42 (quantifies stroke severity)
+workup: []
+treatment:
+- 'Guideline-based treatment options for Acute Ischemic Stroke include:'
+- 'Immediate: Noncontrast CT head, IV access, labs (glucose, CBC, coags, troponin),
+  ECG (ACEP 2023)'
+- 'tPA if <4.5hr: Alteplase 0.9mg/kg IV (10% bolus, rest over 1hr), max 90mg (ACEP
+  2023)'
+- 'Thrombectomy consult: Neurology/IR for large vessel occlusion <24hr if perfusion
+  mismatch (ACEP 2023)'
+- 'BP management: Permissive hypertension unless >220/120 or tPA given (then <185/110)
+  (ACEP 2023)'
+- 'Disposition: Stroke unit or ICU, NPO until swallow eval, DVT prophylaxis, PT/OT/speech
+  therapy (ACEP 2023)'
+clinical_pearls:
+- CT head FIRST to rule out hemorrhage before tPA - noncontrast CT is gold standard
+- 'tPA eligibility: <4.5 hours from symptom onset, no hemorrhage, no recent surgery/stroke'
+- 'Thrombectomy: Up to 24 hours for large vessel occlusion (MCA, ICA) if perfusion
+  mismatch'
+- 'Permissive hypertension: Allow SBP <220, DBP <120 (brain needs perfusion to penumbra)'
+- 'After tPA: Lower BP if >185/110, monitor q15min for 2hr then q30min for 6hr'
+- Give aspirin 325mg after hemorrhage excluded (24hr after tPA)
+referrals: []
+differentials: []
+trace:
+  source: American College of Emergency Physicians (ACEP) Clinical Policies, Emergency
+    Medicine Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

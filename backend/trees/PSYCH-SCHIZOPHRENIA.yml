@@ -2,50 +2,57 @@ tree_id: PSYCH-SCHIZOPHRENIA
 name: Schizophrenia
 family: Psychiatry
 specialty: Psychiatry
-chief_complaint: Psychosis and disordered thinking
-description: Chronic psychotic disorder characterized by hallucinations, delusions, disorganized thinking, and negative symptoms causing functional impairment. Antipsychotic medications reduce positive symptoms, psychosocial interventions improve outcomes.
-icd10: F20.9
-urgency: urgent
-
+icd10:
+- F20.9
+- F20.0
+snomed:
+- '58214004'
+urgency: medium
+description: Comprehensive evaluation and management of Schizophrenia
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Positive symptoms: Delusions, hallucinations (auditory most common), disorganized
+  speech/behavior'
+- 'Negative symptoms: Flat affect, alogia (poverty of speech), avolition (lack of
+  motivation), anhedonia'
+- 'Cognitive symptoms: Impaired attention, memory, executive function'
+- Symptoms ≥6 months, with ≥1 month of active-phase symptoms
+- Significant functional decline (work, relationships, self-care)
+- 'First-episode psychosis: Typically late teens to early 30s'
 workup:
-  - Clinical diagnosis (DSM-5 criteria): two or more of five symptoms for ≥1 month (delusions, hallucinations, disorganized speech, grossly disorganized or catatonic behavior, negative symptoms), with continuous signs for ≥6 months
-  - Positive symptoms: hallucinations (auditory most common - hearing voices), delusions (fixed false beliefs - paranoid, grandiose, referential)
-  - Negative symptoms: flat affect, alogia (poverty of speech), avolition (lack of motivation), anhedonia, social withdrawal
-  - Rule out medical causes: CBC, CMP, TSH, RPR (syphilis), HIV, toxicology screen (amphetamines, PCP, cocaine can mimic psychosis)
-  - Brain imaging: MRI to rule out structural lesions, mass, stroke (not diagnostic for schizophrenia)
-  - Assess safety: suicidal ideation (15% lifetime suicide risk), homicidal ideation, ability to care for self
-  - Rule out other diagnoses: bipolar disorder with psychotic features (mood episodes prominent), schizoaffective disorder (mood episodes concurrent with psychosis), substance-induced psychotic disorder
-
+- Urine drug screen (rule out substance-induced psychosis)
+- CBC, CMP, TSH (medical causes)
+- MRI brain if atypical presentation (first episode, focal neuro signs)
+- 'Baseline: Weight, BMI, glucose, HgA1c, lipid panel (before starting antipsychotics)'
 treatment:
-  - Antipsychotic medications (essential): reduce positive symptoms, prevent relapse
-  - Second-generation (atypical) antipsychotics preferred: fewer extrapyramidal side effects than first-generation
-  - Risperidone 2-6 mg daily, olanzapine 10-20 mg daily, quetiapine 300-800 mg daily, aripiprazole 10-30 mg daily
-  - First-generation (typical) antipsychotics: haloperidol 5-20 mg daily (high EPS risk - dystonia, parkinsonism, akathisia, tardive dyskinesia)
-  - Clozapine: most effective antipsychotic for treatment-resistant schizophrenia (failed two adequate trials), requires weekly CBC monitoring (agranulocytosis risk 1%)
-  - Long-acting injectable (LAI) antipsychotics: improve adherence (paliperidone palmitate monthly, aripiprazole monohydrate monthly, risperidone microspheres)
-  - Monitor metabolic side effects: weight gain, diabetes, dyslipidemia (especially olanzapine and clozapine) - check fasting glucose, lipids, weight regularly
-  - Extrapyramidal symptoms: treat with benztropine 1-2 mg BID or diphenhydramine 25-50 mg TID
-  - Tardive dyskinesia: involuntary movements from chronic antipsychotic use, prevent with lowest effective dose, treat with VMAT2 inhibitors (valbenazine, deutetrabenazine)
-  - Psychosocial interventions: cognitive behavioral therapy for psychosis (CBTp), supported employment, family psychoeducation, assertive community treatment
-  - Treat comorbidities: substance use disorder (50% prevalence - integrated treatment), depression (SSRIs)
-  - Acute agitation: IM olanzapine 10 mg, IM haloperidol 5 mg plus lorazepam 2 mg, or PO risperidone 2 mg
-  - First episode psychosis: early intervention programs improve long-term outcomes
-
+- 'Guideline-based treatment options for Schizophrenia include:'
+- 'Atypical antipsychotic: Risperidone 2-6mg/day, olanzapine 10-20mg/day, or quetiapine
+  400-800mg/day (APA 2022)'
+- 'Aripiprazole 10-30mg/day: Lower metabolic side effects (APA 2022)'
+- 'Clozapine 300-450mg/day: If treatment-resistant (failed 2+ antipsychotics), requires
+  weekly CBC (APA 2022)'
+- 'Psychosocial: Supported employment, cognitive remediation, family psychoeducation
+  (APA 2022)'
+- 'Hospitalization if: Acute psychosis with danger to self/others, unable to care
+  for self (APA 2022)'
 clinical_pearls:
-  - Hallucinations, delusions, disorganized speech with functional impairment for ≥6 months diagnostic
-  - Auditory hallucinations most common - hearing voices commenting or conversing
-  - Second-generation antipsychotics first-line - fewer EPS than first-generation
-  - Clozapine most effective for treatment-resistant disease but requires CBC monitoring
-  - Monitor metabolic side effects - weight, glucose, lipids (olanzapine and clozapine highest risk)
-  - Long-acting injectables improve adherence
-  - 15% lifetime suicide risk - assess regularly
-  - Substance use comorbidity 50% - treat concurrently
-
-differentials:
-  - Bipolar disorder with psychotic features: prominent mood episodes (mania or depression), psychosis only during mood episodes
-  - Schizoaffective disorder: mood episodes concurrent with psychotic symptoms, not just during active psychosis
-  - Substance-induced psychotic disorder: temporal relationship with substance use (amphetamines, PCP, cocaine), resolves with abstinence
-  - Brief psychotic disorder: psychotic symptoms <1 month duration, full return to baseline
-
-trace: |
-  A 22-year-old man brought by family with 8 months progressive social withdrawal, declining school performance, and 2 months of auditory hallucinations (hearing multiple voices commenting on his actions and telling him he's being monitored). Paranoid delusions that government is spying on him through his phone. Disorganized speech with tangential thought process. Flat affect, poor hygiene, stopped attending classes. No substance use. Labs including CBC, CMP, TSH, RPR, HIV, urine drug screen all negative. Brain MRI normal. Diagnosed with first episode schizophrenia. Admitted voluntarily for stabilization. Started risperidone 2 mg nightly, increased to 4 mg over 1 week. At 2 weeks hallucinations decreased 50%, less paranoid, better organization. At 4 weeks hallucinations rare, able to reality-test delusions. At discharge on risperidone 4 mg daily with outpatient psychiatry follow-up and first episode psychosis program enrollment. At 3 months significantly improved, hallucinations resolved, functioning improved, returned to school part-time. Gained 15 pounds on risperidone (metabolic side effect), fasting glucose 102, lipids normal. At 12 months remains stable on risperidone, working with supported employment program, attending CBT for psychosis groups, family involved in care, excellent adherence.
+- 'Rule out medical/substance causes: Drugs (stimulants, cannabis), delirium, brain
+  tumor, autoimmune encephalitis'
+- 'Atypical antipsychotics first-line: Risperidone, olanzapine, quetiapine, aripiprazole'
+- 'Clozapine for treatment-resistant: Most effective but requires weekly CBC (agranulocytosis
+  risk)'
+- 'Long-acting injectables: Improve adherence (paliperidone, risperidone, aripiprazole
+  monthly)'
+- 'Monitor: Weight, glucose, lipids (metabolic syndrome common with antipsychotics)'
+referrals:
+- Psychiatry for all schizophrenia
+- Hospitalization if acute psychosis, danger to self/others
+- Assertive community treatment (ACT) team for severe cases
+differentials: []
+trace:
+  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
+    Criteria
+  version: 0.1.0
+  last_updated: '2024-12-26'

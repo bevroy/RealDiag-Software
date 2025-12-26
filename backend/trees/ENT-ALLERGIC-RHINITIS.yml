@@ -1,44 +1,60 @@
 tree_id: ENT-ALLERGIC-RHINITIS
 name: Allergic Rhinitis
-family: Otolaryngology
-specialty: Otolaryngology
-chief_complaint: Nasal congestion, sneezing, and itchy eyes
-description: |
-  IgE-mediated inflammatory response to inhaled allergens. Affects 10-30% of population.
-  Two types - seasonal (hay fever, specific pollens) and perennial (year-round, dust mites, mold, pet dander). Often coexists with asthma, eczema (atopic triad).
-icd10: J30.1
-urgency: Low
+family: Ent
+specialty: Ent
+icd10:
+- J30.9
+snomed:
+- 61582004
+urgency: medium
+description: Comprehensive evaluation and management of Allergic Rhinitis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Nasal congestion, rhinorrhea
+- Sneezing
+- Itchy nose, eyes, throat
+- Postnasal drip
+- Watery eyes
+- Seasonal or perennial
+- Pale, boggy nasal mucosa on exam
 workup:
-  - Clinical diagnosis - nasal congestion, rhinorrhea, sneezing, nasal/ocular pruritus triggered by allergen exposure
-  - Physical exam - pale, boggy nasal mucosa, clear rhinorrhea, allergic shiners (infraorbital darkening), allergic crease (horizontal nasal crease from rubbing)
-  - Distinguish from infectious rhinitis (purulent discharge, fever, sore throat) and vasomotor rhinitis (triggered by temperature, irritants, not allergens)
-  - Allergy testing if symptoms severe, poorly controlled, or considering immunotherapy
-  - Skin prick testing (immediate results, 85% sensitive) or serum specific IgE (less sensitive but useful if on antihistamines or extensive skin disease)
-  - Common allergens - tree pollen (spring), grass pollen (summer), ragweed (fall), dust mites, mold, pet dander
+- Clinical diagnosis - testing not routinely needed
+- 'Allergy testing (skin prick or specific IgE) if: Considering immunotherapy, unclear
+  triggers, refractory to treatment'
+- 'Nasal cytology (rarely done): Eosinophils on nasal smear support allergic etiology'
 treatment:
-  - Allergen avoidance - dust mite covers, HEPA filters, remove pets (if possible), keep windows closed during pollen season
-  - Intranasal corticosteroids most effective - fluticasone 2 sprays each nostril daily, mometasone 2 sprays daily, budesonide 1-2 sprays BID
-  - Onset 12 hours, maximum effect 1-2 weeks, use regularly (not PRN)
-  - Oral antihistamines - second-generation preferred (less sedating): cetirizine 10mg daily, loratadine 10mg daily, fexofenadine 180mg daily
-  - First-generation antihistamines (diphenhydramine) more sedating, anticholinergic effects, avoid in elderly
-  - Intranasal antihistamines - azelastine 2 sprays each nostril BID (rapid onset, can combine with intranasal steroid)
-  - Leukotriene receptor antagonist - montelukast 10mg nightly (less effective than intranasal steroids, consider if concomitant asthma)
-  - Decongestants for severe congestion - oral pseudoephedrine 30-60mg q4-6h (avoid in hypertension), intranasal oxymetazoline (limit to 3 days to prevent rebound congestion)
-  - Allergen immunotherapy (allergy shots or sublingual tablets) for severe symptoms refractory to medications - 3-5 years treatment, modifies disease, reduces symptoms long-term
-  - Ocular symptoms - topical antihistamines (olopatadine, ketotifen), mast cell stabilizers (cromolyn)
+- 'Guideline-based treatment options for Allergic Rhinitis include:'
+- 'Avoidance: Allergen-impermeable pillow/mattress covers, HEPA filters, remove pets
+  from bedroom, reduce indoor humidity <50% (AAO-HNS 2023)'
+- 'First-line: Intranasal corticosteroids (fluticasone 2 sprays each nostril daily)
+  - most effective, takes 2-4 weeks for full benefit (AAO-HNS 2023)'
+- 'Second-gen oral antihistamines: Cetirizine 10mg or loratadine 10mg daily (less
+  sedating than first-gen) (AAO-HNS 2023)'
+- 'Add if inadequate response: Intranasal antihistamine+ pseudoephedrine 30-60mg q4-6h
+  for congestion (AAO-HNS 2023)'
+- 'Severe/refractory: Allergen immunotherapy (allergy shots) - only treatment that
+  modifies disease, 80-90% effective (AAO-HNS 2023)'
 clinical_pearls:
-  - Intranasal corticosteroids superior to oral antihistamines for moderate-severe symptoms
-  - Combination intranasal steroid plus intranasal antihistamine more effective than either alone
-  - Start intranasal steroids 1-2 weeks before pollen season (prophylaxis)
-  - Rhinitis medicamentosa from prolonged intranasal decongestant use (greater than 3 days) - wean with intranasal steroids
-  - Empty nose syndrome rare complication of turbinate surgery
-  - Associated conditions - sinusitis, otitis media with effusion, sleep disturbance
-differentials:
-  - Viral upper respiratory infection
-  - Bacterial rhinosinusitis
-  - Vasomotor rhinitis
-  - Nasal polyps
-  - Medication-induced rhinitis
-  - Cerebrospinal fluid leak
+- 'IgE-mediated hypersensitivity: Seasonal (pollens - spring/fall) or perennial (dust
+  mites, mold, pet dander)'
+- 'Allergic shiners: Dark circles under eyes from venous congestion. Allergic salute:
+  Upward nose rubbing causing transverse nasal crease'
+- 'Differentiate from viral URI: Itching (eyes, nose, throat) = allergy. Purulent
+  discharge, fever = viral/bacterial'
+- 'Associated conditions: Asthma (80% of asthmatics have allergic rhinitis), sinusitis,
+  otitis media with effusion'
+- 'Perennial triggers: Dust mites (bedroom most important), pet dander, cockroach,
+  mold'
+referrals:
+- 'Allergy/Immunology if: Considering immunotherapy, refractory to medical management,
+  unclear diagnosis'
+- 'ENT if: Nasal polyps, chronic sinusitis, or structural abnormalities (deviated
+  septum)'
+differentials: []
 trace:
-  - 28-year-old with seasonal nasal congestion, sneezing, itchy watery eyes every spring x 5 years → Exam shows pale boggy nasal mucosa, clear rhinorrhea, conjunctival injection → Diagnose seasonal allergic rhinitis (likely tree pollen) → Start fluticasone nasal spray 2 sprays each nostril daily plus cetirizine 10mg daily → Symptoms improve significantly → Continue daily during pollen season → Symptoms persist despite medications → Refer for skin prick testing → Positive for birch, oak, maple pollens → Start subcutaneous immunotherapy (allergy shots) → After 3 years, reduced medication needs and improved quality of life
+  source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
+    Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,66 +1,60 @@
 tree_id: GI-GERD
-name: Gastroesophageal Reflux Disease
+name: Gastroesophageal Reflux Disease (GERD)
 family: Gastroenterology
 specialty: Gastroenterology
-chief_complaint: Heartburn
-description: Chronic reflux of gastric contents into esophagus causing heartburn, regurgitation, and potential complications (esophagitis, Barrett esophagus)
-
-icd10: K21.9
-
-urgency: routine
-
+icd10:
+- K21.9
+- K21.0
+snomed:
+- '235595009'
+urgency: medium
+description: Comprehensive evaluation and management of Gastroesophageal Reflux Disease
+  (GERD)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Heartburn (pyrosis)
+- Regurgitation
+- Dysphagia
+- Chronic cough
+- Laryngitis or hoarseness
+- Symptoms worse when lying down
 workup:
-  - Clinical presentation: heartburn (retrosternal burning), regurgitation (sour taste), dysphagia (difficulty swallowing), odynophagia (painful swallowing), chronic cough, hoarseness, asthma exacerbation
-  - Typical symptoms: heartburn and regurgitation worse after meals, lying down, bending over, improved with antacids
-  - Atypical/extraesophageal symptoms: chronic cough, laryngitis, asthma, dental erosions (from acid)
-  - Alarm features requiring endoscopy: dysphagia, odynophagia, GI bleeding, unintended weight loss, anemia, age greater than 60 with new-onset symptoms, persistent vomiting, family history esophageal or gastric cancer
-  - Diagnosis: clinical (typical symptoms heartburn and regurgitation sufficient for diagnosis, empiric PPI trial)
-  - Upper endoscopy (EGD): indicated if alarm features, refractory to PPI, or long-standing GERD (screen for Barrett esophagus), findings include erosive esophagitis (LA classification Grade A-D), Barrett esophagus (salmon-colored mucosa, requires biopsies), stricture, ulcers
-  - Ambulatory pH monitoring: gold standard if diagnosis uncertain or refractory symptoms on PPI (measures esophageal acid exposure over 24-48 hours), normal pH greater than 4 more than 90 percent of time
-  - Esophageal manometry: if dysphagia present (rule out motility disorder like achalasia before anti-reflux surgery)
-  - Barrett esophagus: intestinal metaplasia of distal esophagus (replacement of squamous with columnar epithelium), precancerous (0.5 percent per year progress to esophageal adenocarcinoma), requires surveillance endoscopy every 3-5 years
-
+- None needed for typical symptoms (empiric PPI trial)
+- 'EGD if: Alarm symptoms, refractory symptoms, or long-standing GERD (screen for
+  Barrett''s)'
+- Esophageal pH monitoring if diagnosis uncertain or evaluating for anti-reflux surgery
+- Esophageal manometry if dysphagia present (rule out achalasia, scleroderma)
 treatment:
-  - Lifestyle modifications: elevate head of bed 6-8 inches, avoid eating 2-3 hours before bedtime, weight loss if overweight (most effective intervention), avoid trigger foods (caffeine, alcohol, chocolate, mint, spicy foods, acidic foods), smoking cessation, avoid tight-fitting clothes
-  - Proton pump inhibitor (PPI): most effective treatment, omeprazole 20 mg daily, lansoprazole 30 mg daily, or pantoprazole 40 mg daily, take 30 minutes before breakfast, duration 8 weeks for healing esophagitis
-  - PPI dosing: once daily for mild-moderate, twice daily (before breakfast and dinner) if severe or refractory
-  - H2 receptor antagonist: less effective than PPI, famotidine 20-40 mg BID or ranitidine (if available), option for mild symptoms or nocturnal symptoms
-  - Antacids: rapid relief but short duration, calcium carbonate or aluminum/magnesium hydroxide PRN
-  - Maintenance therapy: step down to lowest effective dose (PPI once daily or every other day, or H2 blocker, or PRN therapy), continue indefinitely if erosive esophagitis or Barrett esophagus
-  - Refractory GERD (symptoms persist despite PPI BID): confirm diagnosis with pH monitoring (rule out functional heartburn), optimize PPI timing (30 minutes before meals), add H2 blocker at bedtime, consider nocturnal acid breakthrough
-  - Surgical therapy: laparoscopic Nissen fundoplication if severe refractory GERD despite maximal medical therapy, or patient preference to avoid lifelong medication, 85-90 percent effective, requires normal esophageal motility (check manometry pre-op)
-  - Barrett esophagus management: continue PPI indefinitely, surveillance endoscopy every 3-5 years (no dysplasia), endoscopic ablation if high-grade dysplasia (radiofrequency ablation)
-  - Complications: erosive esophagitis (grades A-D), peptic stricture (requires dilation), Barrett esophagus, esophageal adenocarcinoma
-
+- 'Guideline-based treatment options for Gastroesophageal Reflux Disease (GERD) include:'
+- 'Lifestyle: Weight loss, elevate head of bed 6-8 inches, avoid meals 3 hours before
+  bed (ACG 2023)'
+- 'Avoid triggers: Caffeine, alcohol, chocolate, peppermint, fatty foods, smoking
+  (ACG 2023)'
+- 'PPI therapy: Omeprazole 20mg daily or pantoprazole 40mg daily x 8 weeks (take 30-60min
+  before breakfast) (ACG 2023)'
+- 'If refractory: Increase PPI to BID dosing or switch PPI (ACG 2023)'
+- Consider H2 blocker at bedtime for nocturnal symptoms (ranitidine, famotidine) (ACG
+  2023)
 clinical_pearls:
-  - Heartburn and regurgitation classic symptoms (worse after meals, lying down)
-  - Empiric PPI trial diagnostic and therapeutic for typical symptoms
-  - Alarm features (dysphagia, weight loss, bleeding, age greater than 60 new-onset) require endoscopy
-  - PPI most effective (omeprazole 20 mg daily x 8 weeks)
-  - Lifestyle modifications essential: weight loss, elevate head of bed, avoid eating before bed
-  - Barrett esophagus precancerous (surveillance endoscopy every 3-5 years)
-  - Nissen fundoplication for refractory GERD (85-90 percent effective)
-
-differentials:
-  - Coronary artery disease (angina can mimic heartburn - rule out cardiac cause especially if risk factors)
-  - Peptic ulcer disease (epigastric pain but associated with food, not position)
-  - Esophageal motility disorders (achalasia, diffuse esophageal spasm - dysphagia prominent)
-  - Eosinophilic esophagitis (dysphagia, food impaction, young males, eosinophils on biopsy)
-  - Functional heartburn (symptoms but normal pH monitoring)
-
+- 'Clinical diagnosis: Typical symptoms (heartburn, regurgitation) - no testing needed'
+- 'PPI trial: If symptoms improve on PPI, confirms GERD (diagnostic and therapeutic)'
+- 'Alarm symptoms: Dysphagia, weight loss, anemia, vomiting - need EGD'
+- 'Barrett''s esophagus: Chronic GERD causes intestinal metaplasia (increased cancer
+  risk)'
+- 'Extraesophageal manifestations: Chronic cough, asthma, laryngitis (less responsive
+  to PPI)'
+- 'Lifestyle modifications: Elevate head of bed, avoid late meals, lose weight, avoid
+  triggers'
+referrals:
+- 'Gastroenterology if: Refractory to PPI, alarm symptoms, Barrett''s esophagus, or
+  surgical candidate'
+- Surgery (Nissen fundoplication) if medical therapy fails or patient preference
+- ENT if extraesophageal symptoms (laryngitis, chronic cough)
+differentials: []
 trace:
-  - 45-year-old man presents with 1 year heartburn (retrosternal burning) occurring 3-4 times per week, worse after meals especially dinner, worse lying down at night (wakes him from sleep), improved with over-the-counter antacids temporarily
-  - History: overweight BMI 31, eats large meals late (dinner at 9 PM, bedtime 11 PM), drinks 2-3 cups coffee daily, occasional alcohol
-  - No alarm features: no dysphagia, no weight loss, no bleeding, no persistent vomiting
-  - Diagnosis: gastroesophageal reflux disease (GERD) based on typical symptoms
-  - Started lifestyle modifications: weight loss goal 10 percent, elevate head of bed 6 inches, avoid eating 3 hours before bedtime, limit coffee to morning only, avoid trigger foods (chocolate, spicy foods)
-  - Started omeprazole 20 mg daily, take 30 minutes before breakfast
-  - 2 weeks: heartburn improved 50 percent (occurring 1-2 times per week, less severe)
-  - 8 weeks: heartburn improved 90 percent (rare episodes, only if eats late or large meal), weight loss 8 pounds
-  - Attempted to discontinue omeprazole: heartburn recurred within 1 week
-  - Maintenance therapy: omeprazole 20 mg daily continued, continues lifestyle modifications
-  - 6 months: weight loss 22 pounds (BMI 28), excellent symptom control on omeprazole daily
-  - Attempted step down to every other day omeprazole: tolerated well, heartburn controlled
-  - 1 year: maintains weight loss, continues omeprazole every other day with excellent control
-  - No endoscopy needed (typical symptoms, no alarm features, good response to PPI)
-  - Counseled: lifelong management, continue weight loss and lifestyle modifications, increase PPI if symptoms recur, endoscopy if develop alarm features
+  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
+    Association (AGA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

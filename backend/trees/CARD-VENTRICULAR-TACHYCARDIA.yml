@@ -1,0 +1,51 @@
+tree_id: CARD-VENTRICULAR-TACHYCARDIA
+name: Ventricular Tachycardia (VT)
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I47.2
+snomed:
+- '25569003'
+urgency: medium
+description: Comprehensive evaluation and management of Ventricular Tachycardia (VT)
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Wide-complex tachycardia (QRS >120ms) at rate >100 bpm, usually 150-250
+- 'Pulseless VT: No pulse, cardiac arrest (needs immediate defibrillation)'
+- 'Stable VT: Pulse present, may have symptoms (dizziness, dyspnea, chest pain)'
+- AV dissociation, fusion beats, capture beats on ECG (specific for VT)
+- Common in setting of structural heart disease, prior MI, cardiomyopathy
+- Can degenerate into ventricular fibrillation (VF) and cardiac arrest
+workup:
+- ECG (wide-complex tachycardia, AV dissociation)
+- Electrolytes (K, Mg, Ca)
+- Troponin (ischemia as trigger)
+- Echocardiogram (assess EF, structural disease)
+- Coronary angiography if suspect ischemic VT
+treatment:
+- 'Guideline-based treatment options for Ventricular Tachycardia (VT) include:'
+- 'Pulseless VT: Immediate defibrillation 200J biphasic, then CPR (ACC/AHA 2023)'
+- 'Stable VT: Amiodarone 150mg IV over 10min, or synchronized cardioversion (ACC/AHA
+  2023)'
+- 'Correct electrolytes: Mg, K (hypokalemia/hypomagnesemia lower VT threshold) (ACC/AHA
+  2023)'
+- Beta-blockers for chronic suppression if recurrent (ACC/AHA 2023)
+- ICD placement for sustained VT, especially if EF <35% (ACC/AHA 2023)
+clinical_pearls:
+- Wide-complex tachycardia = VT until proven otherwise (treat as VT!)
+- 'Pulseless VT: Immediate defibrillation (same as VF)'
+- 'Stable VT: Amiodarone or cardioversion'
+- Brugada criteria help distinguish VT from SVT with aberrancy
+- 'Post-MI VT (>48hr): High risk for recurrence, needs ICD'
+referrals:
+- Cardiology/EP (electrophysiology) consult
+- Consider ICD placement if sustained VT or cardiac arrest survivor
+- EP study and ablation for recurrent VT
+differentials: []
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

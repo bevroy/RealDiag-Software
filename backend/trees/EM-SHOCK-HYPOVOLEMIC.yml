@@ -1,0 +1,54 @@
+tree_id: EM-SHOCK-HYPOVOLEMIC
+name: Hypovolemic Shock
+family: Emergency Medicine
+specialty: Emergency Medicine
+icd10:
+- R57.1
+- T79.4XXA
+snomed:
+- '39419009'
+urgency: medium
+description: Comprehensive evaluation and management of Hypovolemic Shock
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Hypotension (SBP <90 mmHg, MAP <65 mmHg)
+- Tachycardia, weak thready pulses
+- Cool, clammy, pale or mottled skin
+- Delayed capillary refill (>2 seconds)
+- Altered mental status, confusion, agitation
+- Oliguria (<0.5 mL/kg/hr), decreased urine output
+- Narrow pulse pressure
+- 'Sources: Hemorrhage (trauma, GI bleed, AAA rupture), fluid loss (vomiting, diarrhea,
+  burns, DKA)'
+- 'Classes: I (<15% loss, minimal), II (15-30%, tachycardia), III (30-40%, hypotension),
+  IV (>40%, life-threatening)'
+workup: []
+treatment:
+- 'Guideline-based treatment options for Hypovolemic Shock include:'
+- 'Immediate: IV access (two large-bore or central line), 30 mL/kg NS/LR bolus, oxygen,
+  cardiac monitor (ACEP 2023)'
+- 'Hemorrhage control: Direct pressure, tourniquet, activate massive transfusion protocol
+  if Class III/IV (ACEP 2023)'
+- 'Blood products: PRBC for Hgb <7 (or <8 if cardiac disease), FFP if INR >1.5, platelets
+  if <50K and bleeding (ACEP 2023)'
+- 'Monitoring: Continuous vitals, urine output (Foley), serial lactate, Hgb q1-2hr,
+  coags (ACEP 2023)'
+- 'Disposition: ICU for ongoing resuscitation, OR for surgical hemorrhage control,
+  admit for Class II or higher (ACEP 2023)'
+clinical_pearls:
+- 'Resuscitate with crystalloids first: 30 mL/kg bolus (e.g., 2L for 70kg adult)'
+- 'Blood transfusion if hemorrhagic shock: Target Hgb >7 g/dL (>8 if cardiac disease)'
+- 'Massive transfusion protocol: 1:1:1 ratio (PRBC:FFP:Platelets) if ongoing hemorrhage'
+- 'Permissive hypotension in trauma: SBP 80-90 until hemorrhage controlled (avoid
+  overresuscitation)'
+- Two large-bore IVs (14-16G) or central line for rapid infusion
+- 'Identify and control source: Surgery for bleeding, fluids/antibiotics for dehydration/sepsis'
+referrals: []
+differentials: []
+trace:
+  source: American College of Emergency Physicians (ACEP) Clinical Policies, Emergency
+    Medicine Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

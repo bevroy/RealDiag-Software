@@ -1,64 +1,64 @@
 tree_id: ENDO-HYPERTHYROIDISM
-name: Hyperthyroidism
+name: Hyperthyroidism / thyrotoxicosis
 family: Endocrinology
 specialty: Endocrinology
-chief_complaint: Palpitations and weight loss
-description: Clinical syndrome from excessive thyroid hormone causing hypermetabolic state
-
-icd10: E05.90
-
-urgency: urgent
-
+icd10:
+- E05.90
+snomed: []
+urgency: medium
+description: Comprehensive evaluation and management of Hyperthyroidism / thyrotoxicosis
+version: '1.0'
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Unintentional weight loss despite increased appetite
+- Heat intolerance and excessive sweating
+- Palpitations and tachycardia
+- Tremor (fine tremor of hands)
+- Anxiety, nervousness, irritability
+- Insomnia
+- Fatigue and muscle weakness (especially proximal muscles)
+- Frequent bowel movements or diarrhea
+- Menstrual irregularities (oligomenorrhea)
+- Warm, moist skin
+- Hair thinning
+- In Graves' disease: Exophthalmos (bulging eyes), lid lag, goiter
 workup:
-  - Clinical presentation: palpitations, weight loss despite increased appetite, heat intolerance, tremor, anxiety, diarrhea, hyperdefecation, menstrual irregularities
-  - Exam: tachycardia (may have atrial fibrillation), systolic hypertension with wide pulse pressure, fine tremor, hyperreflexia, warm moist skin, lid lag
-  - Laboratory: TSH suppressed (less than 0.1 mIU/L), free T4 elevated, free T3 elevated (T3 toxicosis if only T3 elevated), pattern confirms primary hyperthyroidism
-  - Etiology determination: radioactive iodine uptake and scan (RAIU) - increased uptake diffuse (Graves disease), increased uptake focal (toxic adenoma or toxic multinodular goiter), decreased uptake (thyroiditis, exogenous thyroid hormone, struma ovarii)
-  - Graves disease (most common 60-80 percent): diffuse goiter, ophthalmopathy (exophthalmos, proptosis, lid retraction, diplopia), pretibial myxedema, TSH receptor antibodies (TRAb) positive
-  - Thyroid ultrasound: assess nodules if palpable, increased vascularity suggests Graves
-  - Thyroiditis: painful (subacute/de Quervain) or painless (postpartum, lymphocytic), transient hyperthyroid phase (2-8 weeks) followed by hypothyroid phase then recovery, low RAIU, elevated ESR if subacute
-  - Subclinical hyperthyroidism: low TSH with normal T4/T3, often asymptomatic, consider treatment if TSH less than 0.1 or cardiovascular disease or osteoporosis
-
+- TSH (suppressed <0.1), free T4 (elevated), free T3 (elevated)
+- 'Radioactive iodine uptake (RAIU): High uptake = Graves'' or toxic nodule, Low =
+  thyroiditis or exogenous T4'
+- Thyroid stimulating immunoglobulin (TSI) or TSH receptor antibodies (TRAb) if Graves'
+  suspected
+- Thyroid ultrasound to evaluate nodules if toxic multinodular goiter suspected
 treatment:
-  - Symptom control: beta-blockers for palpitations/tremor/anxiety (propranolol 10-40 mg TID or QID, atenolol 25-100 mg daily, metoprolol 25-100 mg BID) - use nonselective beta-blocker if severe (propranolol also blocks T4 to T3 conversion)
-  - Definitive therapy for Graves disease: antithyroid drugs (ATDs), radioactive iodine ablation, or thyroidectomy
-  - Antithyroid drugs: methimazole 10-40 mg daily preferred (once daily dosing, less hepatotoxic than PTU), propylthiouracil (PTU) 50-150 mg TID (second-line, use in first trimester pregnancy or thyroid storm), check CBC and LFTs baseline (risk agranulocytosis, hepatotoxicity), check free T4 every 4-6 weeks and titrate dose, treatment duration 12-18 months then trial off (remission rate 30-50 percent)
-  - Radioactive iodine (I-131) ablation: definitive therapy, single dose 10-15 mCi, results in permanent hypothyroidism (requires lifelong levothyroxine), contraindicated in pregnancy/breastfeeding, may worsen ophthalmopathy (give steroids if moderate-severe), preferred for toxic nodular goiter
-  - Thyroidectomy: definitive, indicated if large goiter with compressive symptoms, inability to tolerate ATDs, pregnancy planning (do after achieving euthyroid state), complications include hypoparathyroidism and recurrent laryngeal nerve injury
-  - Toxic nodular goiter: radioactive iodine or surgery (remission after ATDs rare)
-  - Thyroiditis: supportive care (NSAIDs for pain if subacute), beta-blockers for symptoms, no ATDs (not overproducing hormone, just releasing preformed), transient hyperthyroid phase resolves spontaneously in 2-8 weeks
-  - Thyroid storm (rare life-threatening): high fever, tachycardia, altered mental status, heart failure, GI symptoms, mortality 10-30 percent, treatment intensive care with PTU 500-1000 mg loading then 250 mg every 4 hours (blocks synthesis and T4 to T3 conversion), iodine (Lugol solution or potassium iodide 5 drops every 6 hours - give 1 hour after PTU), propranolol IV, hydrocortisone 100 mg every 8 hours, cooling, supportive care
-
+- 'Guideline-based treatment options for Hyperthyroidism / thyrotoxicosis include:'
+- 'Beta-blocker for symptomatic relief: Propranolol 20-40mg TID or metoprolol 25-50mg
+  BID (ADA 2024)'
+- Methimazole 10-30mg daily (ADA 2024)
+- 'PTU 50-150mg TID only if: First trimester pregnancy, thyroid storm, or methimazole
+  allergy (ADA 2024)'
+- 'Radioactive iodine ablation (I-131): Definitive therapy, causes permanent hypothyroidism
+  (requires lifelong levothyroxine) (ADA 2024)'
+- 'Thyroidectomy if: Large goiter with compressive symptoms, pregnancy planning, patient
+  preference (ADA 2024)'
 clinical_pearls:
-  - TSH best screening test, suppressed in hyperthyroidism (negative feedback)
-  - Graves disease most common cause (60-80 percent), autoimmune with TRAb antibodies
-  - RAIU differentiates Graves (high uptake diffuse) from thyroiditis (low uptake)
-  - Methimazole preferred over PTU (once daily, less hepatotoxic) except first trimester pregnancy or thyroid storm
-  - Radioactive iodine causes permanent hypothyroidism (requires lifelong levothyroxine)
-  - Graves ophthalmopathy may worsen after radioactive iodine (give steroids if moderate-severe)
-  - Atrial fibrillation occurs in 10-15 percent, rate control with beta-blockers, consider anticoagulation
-
-differentials:
-  - Anxiety disorder (palpitations, tremor, but normal TSH, no weight loss or heat intolerance)
-  - Pheochromocytoma (palpitations, sweating, headache, episodic hypertension, normal TSH, elevated metanephrines)
-  - Factitious hyperthyroidism (exogenous thyroid hormone, low TSH, high T4/T3, but low thyroglobulin and low RAIU)
-  - Subclinical hyperthyroidism (low TSH but normal T4/T3, often asymptomatic)
-
+- 'Causes: Graves'' disease (70% - diffuse goiter + ophthalmopathy), toxic multinodular
+  goiter, solitary toxic adenoma'
+- 'Graves'' ophthalmopathy: Proptosis, lid lag, diplopia (specific to Graves'', not
+  other causes)'
+- TSH always low in primary hyperthyroidism - if normal/high, consider TSH-secreting
+  pituitary adenoma
+- 'Subclinical hyperthyroidism: Low TSH with normal free T4/T3 - treat if age >65
+  or cardiac disease'
+- 'Apathetic thyrotoxicosis in elderly: Minimal symptoms, presents with atrial fibrillation
+  or heart failure'
+referrals:
+- Endocrinology for all new hyperthyroidism diagnoses for treatment planning
+- Ophthalmology if Graves' ophthalmopathy (proptosis, diplopia, vision changes)
+- Cardiology if atrial fibrillation or heart failure present
+differentials: []
 trace:
-  - 34-year-old woman presents with 3 months palpitations, 15-pound weight loss despite increased appetite, heat intolerance (wearing t-shirts in winter), tremor, anxiety, frequent bowel movements, irregular menses
-  - Exam: HR 112 regular, BP 142/68, anxious, fine tremor hands, hyperreflexia, warm moist skin, diffuse nontender goiter, bilateral proptosis with lid lag, no thyroid bruit
-  - Labs: TSH less than 0.01 mIU/L (suppressed), free T4 3.8 ng/dL (elevated, normal 0.8-1.8), free T3 12.5 pg/mL (elevated, normal 2.3-4.2)
-  - TSH receptor antibodies (TRAb) positive (confirms Graves disease)
-  - Radioactive iodine uptake: 45 percent at 24 hours (elevated, normal 10-30 percent), diffuse uptake
-  - Diagnosis: Graves disease with hyperthyroidism and ophthalmopathy
-  - Started methimazole 20 mg daily, propranolol 20 mg TID (symptom control), selenium 100 mcg BID (for ophthalmopathy)
-  - Counseled: CBC and LFTs to monitor for agranulocytosis/hepatotoxicity, report fever/sore throat immediately
-  - 4 weeks: symptoms improved, HR 82, free T4 2.1 ng/dL (still elevated), continued methimazole 20 mg
-  - 8 weeks: free T4 1.2 ng/dL (normalized), reduced methimazole to 10 mg daily
-  - 12 weeks: euthyroid, free T4 1.0, TSH still suppressed (takes months to normalize), continues methimazole maintenance
-  - Ophthalmology referral for Graves ophthalmopathy (mild, observation)
-  - 18 months: remains euthyroid on methimazole 5 mg daily, discussed definitive therapy options (continue ATDs vs radioactive iodine vs surgery), patient prefers trial off medication
-  - Stopped methimazole, monitoring TSH/T4 every 6-8 weeks
-  - 3 months off medication: TSH 0.03 mIU/L, free T4 2.8 ng/dL (recurrence common after stopping ATDs)
-  - Patient opts for radioactive iodine ablation (definitive therapy), received I-131 15 mCi
-  - 6 months post-ablation: hypothyroid TSH 45 mIU/L, free T4 0.5 ng/dL (expected), started levothyroxine 100 mcg daily, lifelong thyroid hormone replacement
+  source: American Diabetes Association (ADA) Standards of Care, Endocrine Society
+    Clinical Practice Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,146 +1,59 @@
 tree_id: PULM-PNEUMONIA
-name: Community-Acquired Pneumonia Evaluation
+name: Community-Acquired Pneumonia
 family: Pulmonology
-specialty: Emergency Medicine, Pulmonology, Internal Medicine
-chief_complaint: Cough, Fever, Dyspnea, Productive Sputum
-description: Comprehensive evaluation and management of community-acquired pneumonia with severity assessment and antibiotic selection
-version: "1.0"
-icd10: J18.9
+specialty: Pulmonology
+icd10:
+- J18.9
+- J15.9
+- J13
+snomed:
+- '385093006'
+urgency: medium
+description: Comprehensive evaluation and management of Community-Acquired Pneumonia
+version: '1.0'
 author: RealDiag Clinical Team
-
-entry_point: pneumonia_presentation
-
-nodes:
-  - id: pneumonia_presentation
-    type: question
-    text: "Patient with suspected pneumonia - Severity assessment?"
-    options:
-      - label: "Severe - ICU criteria present (septic shock requiring vasopressors OR mechanical ventilation)"
-        next: severe_cap
-      - label: "Moderate-Severe - PSI Class IV-V or CURB-65 ≥3"
-        next: moderate_severe_cap
-      - label: "Mild-Moderate - PSI Class I-III or CURB-65 0-2"
-        next: mild_moderate_cap
-
-  - id: severe_cap
-    type: diagnosis
-    name: "Severe Community-Acquired Pneumonia"
-    icd10: "J18.9"
-    urgency: critical
-    workup:
-      - Chest X-ray (PA and lateral) or CT chest if CXR equivocal
-      - Blood cultures x2 sets before antibiotics
-      - Sputum culture and Gram stain (if able to produce)
-      - CBC with differential (leukocytosis or leukopenia)
-      - CMP (assess renal function, electrolytes)
-      - Lactate (sepsis marker)
-      - Procalcitonin (bacterial vs viral, trending)
-      - ABG or VBG (assess oxygenation and acid-base)
-      - Urinary antigen tests (Strep pneumoniae, Legionella)
-      - Respiratory viral panel (influenza, COVID-19, RSV)
-      - Consider bronchoscopy with BAL if intubated
-      - CURB-65 score (Confusion, Urea >20, RR ≥30, BP <90/60, age ≥65)
-      - PSI (Pneumonia Severity Index) score
-    treatment:
-      - ICU admission
-      - Broad-spectrum antibiotics - Combination therapy
-      - Beta-lactam (ceftriaxone 2g IV q24h OR cefotaxime 2g IV q8h OR ampicillin-sulbactam 3g IV q6h) PLUS
-      - Macrolide (azithromycin 500mg IV q24h) OR fluoroquinolone (levofloxacin 750mg IV q24h or moxifloxacin 400mg IV q24h)
-      - Add vancomycin 15-20mg/kg IV q8-12h OR linezolid 600mg IV q12h if MRSA risk factors (prior MRSA, cavitary lesion, necrotizing pneumonia, post-influenza)
-      - Add anti-Pseudomonal coverage if risk factors (bronchiectasis, prior Pseudomonas, recent hospitalization) - piperacillin-tazobactam 4.5g IV q6h or cefepime 2g IV q8h or meropenem 1g IV q8h
-      - Oxygen therapy to maintain SpO2 >90%
-      - Mechanical ventilation if respiratory failure (intubate for hypoxemia, work of breathing, altered mental status)
-      - IV fluids for sepsis resuscitation (30mL/kg crystalloid if hypotensive or lactate ≥4)
-      - Vasopressors (norepinephrine first-line) if fluid-refractory shock
-      - Corticosteroids (methylprednisolone 0.5mg/kg IV q12h or hydrocortisone 50mg IV q6h) if refractory septic shock
-      - Consider oseltamivir 75mg PO BID if influenza positive (within 48 hours of symptom onset)
-      - DVT prophylaxis (heparin 5000 units SC q8h or enoxaparin 40mg SC daily)
-      - Stress ulcer prophylaxis (pantoprazole 40mg IV daily)
-      - Early mobility when stable
-
-  - id: moderate_severe_cap
-    type: diagnosis
-    name: "Moderate-Severe Community-Acquired Pneumonia"
-    icd10: "J18.9"
-    urgency: high
-    workup:
-      - Chest X-ray (PA and lateral)
-      - Blood cultures x2 before antibiotics
-      - Sputum culture if productive
-      - CBC with differential
-      - CMP
-      - Lactate if sepsis concern
-      - Procalcitonin
-      - Pulse oximetry or ABG if SpO2 <92%
-      - Urinary antigens (Strep pneumoniae, Legionella)
-      - Respiratory viral panel
-      - CURB-65 and PSI scoring
-    treatment:
-      - Hospital admission (floor or step-down unit)
-      - Combination antibiotic therapy
-      - Beta-lactam (ceftriaxone 1-2g IV q24h OR cefotaxime 1-2g IV q8h OR ampicillin-sulbactam 1.5-3g IV q6h) PLUS
-      - Macrolide (azithromycin 500mg IV/PO q24h) OR fluoroquinolone (levofloxacin 750mg IV/PO q24h or moxifloxacin 400mg IV/PO q24h)
-      - Fluoroquinolone monotherapy is acceptable alternative (levofloxacin or moxifloxacin)
-      - Oxygen supplementation to maintain SpO2 >92% (nasal cannula or face mask)
-      - IV fluids if dehydrated or hypotensive
-      - Switch to oral antibiotics when afebrile x24hrs, hemodynamically stable, improving clinically, able to take PO
-      - Total antibiotic duration 5-7 days (minimum 5 days and afebrile x48-72hrs)
-      - Consider MRSA coverage if risk factors
-      - Incentive spirometry
-      - Early mobility
-      - Monitor for complications (pleural effusion, empyema, abscess)
-
-  - id: mild_moderate_cap
-    type: question
-    text: "Outpatient management appropriate? (No comorbidities, stable vitals, able to take PO, reliable for follow-up)"
-    options:
-      - label: "Yes - CURB-65 0-1, PSI Class I-II, no significant comorbidities"
-        next: outpatient_cap
-      - label: "No - CURB-65 2, PSI Class III, or has comorbidities (COPD, CHF, DM, immunosuppression)"
-        next: inpatient_cap_observation
-
-  - id: outpatient_cap
-    type: diagnosis
-    name: "Mild Community-Acquired Pneumonia (Outpatient)"
-    icd10: "J18.9"
-    urgency: medium
-    workup:
-      - Chest X-ray (PA and lateral)
-      - Consider pulse oximetry
-      - CBC and CMP if available (not required for outpatient)
-      - No blood cultures needed for outpatient management
-      - No sputum culture unless treatment failure
-    treatment:
-      - Outpatient oral antibiotics
-      - Previously healthy, no antibiotic use in past 3 months - Amoxicillin 1g PO TID x 5-7 days OR doxycycline 100mg PO BID x 5-7 days OR macrolide (azithromycin 500mg day 1, then 250mg daily x 4 days - use if local pneumococcal resistance <25%)
-      - Comorbidities or antibiotic use in past 3 months - Combination therapy - Amoxicillin-clavulanate 875mg PO BID or cefpodoxime 200mg PO BID or cefuroxime 500mg PO BID PLUS macrolide (azithromycin) OR doxycycline 100mg PO BID ALONE
-      - Fluoroquinolone monotherapy (levofloxacin 750mg PO daily or moxifloxacin 400mg PO daily) - reserve for PCN allergy or macrolide-resistant areas
-      - Supportive care - Hydration, rest, antipyretics (acetaminophen or ibuprofen), cough suppressants PRN
-      - Close follow-up in 48-72 hours (phone call or return visit)
-      - Return precautions - Worsening dyspnea, persistent fever >72hrs, hemoptysis, altered mental status
-      - Smoking cessation counseling
-      - Vaccination (pneumococcal and influenza vaccines after recovery)
-
-  - id: inpatient_cap_observation
-    type: diagnosis
-    name: "Mild-Moderate CAP Requiring Hospitalization"
-    icd10: "J18.9"
-    urgency: high
-    workup:
-      - Chest X-ray
-      - Blood cultures x2
-      - CBC, CMP
-      - Sputum culture if productive
-      - Procalcitonin
-      - Urinary antigens
-      - Pulse oximetry
-    treatment:
-      - Hospital admission (observation or inpatient floor)
-      - Beta-lactam PLUS macrolide OR fluoroquinolone monotherapy (same as moderate-severe)
-      - Ceftriaxone 1g IV q24h + azithromycin 500mg IV/PO q24h (most common regimen)
-      - Oxygen if SpO2 <92%
-      - IV fluids if needed
-      - Transition to oral antibiotics when stable (cefpodoxime or amoxicillin-clavulanate + azithromycin OR levofloxacin)
-      - Total duration 5-7 days
-      - Discharge when afebrile x24hrs, stable vitals, SpO2 >92% on room air, tolerating PO
-      - Follow-up chest X-ray in 6 weeks if >50 years old or smoker (to exclude malignancy)
+homeopathy: []
+presentations:
+- Fever and chills
+- Productive cough with purulent sputum
+- Pleuritic chest pain
+- Dyspnea and tachypnea
+- Crackles on lung auscultation
+workup:
+- Chest X-ray (lobar consolidation, interstitial infiltrates)
+- Sputum gram stain and culture if hospitalized
+- Blood cultures x 2 if hospitalized (before antibiotics)
+- Procalcitonin or CRP if diagnosis uncertain
+- 'Consider: Legionella urinary antigen, pneumococcal urinary antigen'
+treatment:
+- 'Guideline-based treatment options for Community-Acquired Pneumonia include:'
+- 'Outpatient healthy: Amoxicillin 1g TID x 5 days OR doxycycline 100mg BID x 5 days
+  (ATS 2023)'
+- 'Outpatient with comorbidities: Amoxicillin-clavulanate 875/125mg BID + azithromycin
+  500mg daily x 5 days (ATS 2023)'
+- 'Inpatient non-ICU: Ceftriaxone 1g daily + azithromycin 500mg daily (ATS 2023)'
+- 'ICU: Ceftriaxone 2g daily + azithromycin 500mg daily (or levofloxacin 750mg daily)
+  (ATS 2023)'
+- Add vancomycin or linezolid if MRSA suspected (influenza, IV drug use, recent hospitalization)
+  (ATS 2023)
+clinical_pearls:
+- 'Most common bacterial causes: Streptococcus pneumoniae (most common), Mycoplasma,
+  Chlamydia, Haemophilus'
+- 'CURB-65 score predicts mortality: Confusion, Urea >20, RR ≥30, BP <90/60, age ≥65
+  (score ≥2 = consider admission)'
+- 'Atypical features: Gradual onset, dry cough, extrapulmonary symptoms (Mycoplasma,
+  Legionella)'
+- 'Healthcare-associated pneumonia (HCAP): Within 90 days hospitalization - covers
+  MRSA/Pseudomonas'
+- Blood cultures positive in only 5-14% (send before antibiotics but don't delay treatment)
+referrals:
+- Admission if CURB-65 ≥2, hypoxia (SpO2 <90%), inability to tolerate PO, or social
+  concerns
+- ICU if CURB-65 ≥3, mechanical ventilation needed, or septic shock
+- Pulmonology if slow resolution or concern for post-obstructive pneumonia (lung cancer)
+differentials: []
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'
