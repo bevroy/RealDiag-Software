@@ -501,6 +501,7 @@ export default function ReferencePage() {
           const icd10 = r.icd10 || [];
           const snomed = r.snomed || [];
           const citations = r.citations || [];
+          const source = r.source || '';
           
           return (
             <div key={r.id}>
@@ -586,9 +587,15 @@ export default function ReferencePage() {
                       <span style={{ color: "#999" }}>Not specified</span>
                     )}
                   </div>
+                  {source && source !== "Clinical Decision Tree" && (
+                    <div style={{ marginTop: 8 }}>
+                      <strong>📚 Source:</strong>{" "}
+                      <span style={{ fontStyle: 'italic' }}>{source}</span>
+                    </div>
+                  )}
                   {citations.length > 0 && (
                     <div style={{ marginTop: 8 }}>
-                      <strong>📚 Sources & References:</strong>
+                      <strong>📚 Additional References:</strong>
                       <ol style={{ fontSize: 12, marginTop: 4, paddingLeft: 18 }}>
                         {citations.map((c, i) => (
                           <li key={i}>{c}</li>
@@ -596,7 +603,7 @@ export default function ReferencePage() {
                       </ol>
                     </div>
                   )}
-                  {citations.length === 0 && (
+                  {!source && citations.length === 0 && (
                     <div style={{ marginTop: 8, fontSize: 11, color: "#666" }}>
                       <strong>Sources:</strong> Clinical guidelines and medical literature. See{" "}
                       <a href="/sources" style={{ color: "#14b8a6" }}>Medical Sources page</a> for complete references.
