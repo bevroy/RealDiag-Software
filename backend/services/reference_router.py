@@ -206,16 +206,32 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     """Normalize condition name for duplicate detection."""
     if not name:
       return ""
+    import re
     normalized = name.lower().strip()
+    
+    # Remove content in parentheses (e.g., "(Willis-Ekbom Disease)", "(Lumbar Radiculopathy)")
+    normalized = re.sub(r'\s*\([^)]*\)', '', normalized)
+    
+    # Remove common prefixes
+    prefixes_to_remove = ["acute ", "bacterial ", "chronic "]
+    for prefix in prefixes_to_remove:
+      if normalized.startswith(prefix):
+        normalized = normalized[len(prefix):]
+    
     # Remove common suffixes that don't change the core condition
     suffixes_to_remove = [
       " evaluation", " evaluation and management", " management",
-      " diagnostic tree", " - general evaluation", " (epilepsy)",
-      " disorder/epilepsy", " and dizziness"
+      " diagnostic tree", " - general evaluation", " disorder/epilepsy",
+      " and dizziness", " disorder", "/epilepsy"
     ]
     for suffix in suffixes_to_remove:
       if normalized.endswith(suffix):
         normalized = normalized[:-len(suffix)]
+    
+    # Normalize plural forms
+    if normalized.endswith("s syndrome"):
+      normalized = normalized[:-1]  # "legs" -> "leg"
+    
     return normalized.strip()
   
   existing_names = {
