@@ -125,199 +125,210 @@ def get_db_session():
         session.close()
 
 
-# ORM Models
-class User(Base):
-    """User account model."""
-    __tablename__ = "users"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String(255), unique=True, nullable=False, index=True)
-    email = Column(String(255), unique=True, nullable=False, index=True)
-    username = Column(String(255), unique=True, nullable=True, index=True)
-    hashed_password = Column(Text, nullable=False)
-    full_name = Column(String(255), nullable=True)
-    specialty = Column(String(100), nullable=True)
-    institution = Column(String(255), nullable=True)
-    role = Column(String(50), default="user")
-    is_active = Column(Boolean, default=True)
-    is_verified = Column(Boolean, default=False)
-    is_employee = Column(Boolean, default=False)
-    email_verified = Column(Boolean, default=False)
-    email_verification_token = Column(String(255), nullable=True)
-    email_verification_sent_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    last_login = Column(DateTime, nullable=True)
-    search_count = Column(Integer, default=0)
-    favorite_count = Column(Integer, default=0)
-    
-    # Relationships
-    sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
-    search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
-    favorites = relationship("Favorite", back_populates="user", cascade="all, delete-orphan")
-    custom_lists = relationship("CustomList", back_populates="user", cascade="all, delete-orphan")
-    settings = relationship("UserSettings", back_populates="user", uselist=False, cascade="all, delete-orphan")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "user_id": self.user_id,
-            "email": self.email,
-            "username": self.username,
-            "full_name": self.full_name,
-            "specialty": self.specialty,
-            "institution": self.institution,
-            "role": self.role,
-            "is_active": self.is_active,
-            "is_verified": self.is_verified,
-            "is_employee": getattr(self, 'is_employee', False),
-            "email_verified": getattr(self, 'email_verified', False),
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-            "last_login": self.last_login.isoformat() if self.last_login else None,
-            "search_count": self.search_count,
-            "favorite_count": self.favorite_count
-        }
+# ORM Models - only define if database is available
+if DATABASE_AVAILABLE and Base is not None:
+    # ORM Models
+    class User(Base):
+        """User account model."""
+        __tablename__ = "users"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        user_id = Column(String(255), unique=True, nullable=False, index=True)
+        email = Column(String(255), unique=True, nullable=False, index=True)
+        username = Column(String(255), unique=True, nullable=True, index=True)
+        hashed_password = Column(Text, nullable=False)
+        full_name = Column(String(255), nullable=True)
+        specialty = Column(String(100), nullable=True)
+        institution = Column(String(255), nullable=True)
+        role = Column(String(50), default="user")
+        is_active = Column(Boolean, default=True)
+        is_verified = Column(Boolean, default=False)
+        is_employee = Column(Boolean, default=False)
+        email_verified = Column(Boolean, default=False)
+        email_verification_token = Column(String(255), nullable=True)
+        email_verification_sent_at = Column(DateTime, nullable=True)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        last_login = Column(DateTime, nullable=True)
+        search_count = Column(Integer, default=0)
+        favorite_count = Column(Integer, default=0)
+        
+        # Relationships
+        sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
+        search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
+        favorites = relationship("Favorite", back_populates="user", cascade="all, delete-orphan")
+        custom_lists = relationship("CustomList", back_populates="user", cascade="all, delete-orphan")
+        settings = relationship("UserSettings", back_populates="user", uselist=False, cascade="all, delete-orphan")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "user_id": self.user_id,
+                "email": self.email,
+                "username": self.username,
+                "full_name": self.full_name,
+                "specialty": self.specialty,
+                "institution": self.institution,
+                "role": self.role,
+                "is_active": self.is_active,
+                "is_verified": self.is_verified,
+                "is_employee": getattr(self, 'is_employee', False),
+                "email_verified": getattr(self, 'email_verified', False),
+                "created_at": self.created_at.isoformat() if self.created_at else None,
+                "last_login": self.last_login.isoformat() if self.last_login else None,
+                "search_count": self.search_count,
+                "favorite_count": self.favorite_count
+            }
 
 
-class Session(Base):
-    """User session model."""
-    __tablename__ = "sessions"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    session_id = Column(String(255), unique=True, nullable=False, index=True)
-    user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
-    token = Column(Text, nullable=False)
-    expires_at = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    # Relationships
-    user = relationship("User", back_populates="sessions")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "session_id": self.session_id,
-            "user_id": self.user_id,
-            "expires_at": self.expires_at.isoformat(),
-            "created_at": self.created_at.isoformat() if self.created_at else None
-        }
+    class Session(Base):
+        """User session model."""
+        __tablename__ = "sessions"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        session_id = Column(String(255), unique=True, nullable=False, index=True)
+        user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
+        token = Column(Text, nullable=False)
+        expires_at = Column(DateTime, nullable=False)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        
+        # Relationships
+        user = relationship("User", back_populates="sessions")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "session_id": self.session_id,
+                "user_id": self.user_id,
+                "expires_at": self.expires_at.isoformat(),
+                "created_at": self.created_at.isoformat() if self.created_at else None
+            }
 
 
-class SearchHistory(Base):
-    """Search history model."""
-    __tablename__ = "search_history"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    search_id = Column(String(255), unique=True, nullable=False, index=True)
-    user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
-    symptoms = Column(JSON, nullable=False)  # Store as JSON array
-    age = Column(Integer, nullable=True)
-    sex = Column(String(20), nullable=True)
-    family = Column(String(100), nullable=True)
-    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
-    result_count = Column(Integer, default=0)
-    top_diagnosis = Column(String(255), nullable=True)
-    
-    # Relationships
-    user = relationship("User", back_populates="search_history")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "search_id": self.search_id,
-            "user_id": self.user_id,
-            "symptoms": self.symptoms,
-            "age": self.age,
-            "sex": self.sex,
-            "family": self.family,
-            "timestamp": self.timestamp.isoformat() if self.timestamp else None,
-            "result_count": self.result_count,
-            "top_diagnosis": self.top_diagnosis
-        }
+    class SearchHistory(Base):
+        """Search history model."""
+        __tablename__ = "search_history"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        search_id = Column(String(255), unique=True, nullable=False, index=True)
+        user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
+        symptoms = Column(JSON, nullable=False)  # Store as JSON array
+        age = Column(Integer, nullable=True)
+        sex = Column(String(20), nullable=True)
+        family = Column(String(100), nullable=True)
+        timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+        result_count = Column(Integer, default=0)
+        top_diagnosis = Column(String(255), nullable=True)
+        
+        # Relationships
+        user = relationship("User", back_populates="search_history")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "search_id": self.search_id,
+                "user_id": self.user_id,
+                "symptoms": self.symptoms,
+                "age": self.age,
+                "sex": self.sex,
+                "family": self.family,
+                "timestamp": self.timestamp.isoformat() if self.timestamp else None,
+                "result_count": self.result_count,
+                "top_diagnosis": self.top_diagnosis
+            }
 
 
-class Favorite(Base):
-    """Favorite diagnosis model."""
-    __tablename__ = "favorites"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    favorite_id = Column(String(255), unique=True, nullable=False, index=True)
-    user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
-    rule_id = Column(String(255), nullable=False, index=True)
-    diagnosis_label = Column(String(255), nullable=False)
-    family = Column(String(100), nullable=True)
-    notes = Column(Text, nullable=True)
-    added_at = Column(DateTime, default=datetime.utcnow)
-    
-    # Relationships
-    user = relationship("User", back_populates="favorites")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "favorite_id": self.favorite_id,
-            "user_id": self.user_id,
-            "rule_id": self.rule_id,
-            "diagnosis_label": self.diagnosis_label,
-            "family": self.family,
-            "notes": self.notes,
-            "added_at": self.added_at.isoformat() if self.added_at else None
-        }
+    class Favorite(Base):
+        """Favorite diagnosis model."""
+        __tablename__ = "favorites"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        favorite_id = Column(String(255), unique=True, nullable=False, index=True)
+        user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
+        rule_id = Column(String(255), nullable=False, index=True)
+        diagnosis_label = Column(String(255), nullable=False)
+        family = Column(String(100), nullable=True)
+        notes = Column(Text, nullable=True)
+        added_at = Column(DateTime, default=datetime.utcnow)
+        
+        # Relationships
+        user = relationship("User", back_populates="favorites")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "favorite_id": self.favorite_id,
+                "user_id": self.user_id,
+                "rule_id": self.rule_id,
+                "diagnosis_label": self.diagnosis_label,
+                "family": self.family,
+                "notes": self.notes,
+                "added_at": self.added_at.isoformat() if self.added_at else None
+            }
 
 
-class CustomList(Base):
-    """Custom differential diagnosis list model."""
-    __tablename__ = "custom_lists"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    list_id = Column(String(255), unique=True, nullable=False, index=True)
-    user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
-    name = Column(String(255), nullable=False)
-    description = Column(Text, nullable=True)
-    specialty = Column(String(100), nullable=True)
-    diagnoses = Column(JSON, nullable=False)  # Store as JSON array
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    is_public = Column(Boolean, default=False)
-    
-    # Relationships
-    user = relationship("User", back_populates="custom_lists")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "list_id": self.list_id,
-            "user_id": self.user_id,
-            "name": self.name,
-            "description": self.description,
-            "specialty": self.specialty,
-            "diagnoses": self.diagnoses,
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
-            "is_public": self.is_public
-        }
+    class CustomList(Base):
+        """Custom differential diagnosis list model."""
+        __tablename__ = "custom_lists"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        list_id = Column(String(255), unique=True, nullable=False, index=True)
+        user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
+        name = Column(String(255), nullable=False)
+        description = Column(Text, nullable=True)
+        specialty = Column(String(100), nullable=True)
+        diagnoses = Column(JSON, nullable=False)  # Store as JSON array
+        created_at = Column(DateTime, default=datetime.utcnow)
+        updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+        is_public = Column(Boolean, default=False)
+        
+        # Relationships
+        user = relationship("User", back_populates="custom_lists")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "list_id": self.list_id,
+                "user_id": self.user_id,
+                "name": self.name,
+                "description": self.description,
+                "specialty": self.specialty,
+                "diagnoses": self.diagnoses,
+                "created_at": self.created_at.isoformat() if self.created_at else None,
+                "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+                "is_public": self.is_public
+            }
 
 
-class UserSettings(Base):
-    """User settings and preferences model."""
-    __tablename__ = "user_settings"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String(255), ForeignKey("users.user_id"), unique=True, nullable=False, index=True)
-    default_specialty = Column(String(100), nullable=True)
-    notification_preferences = Column(JSON, default={})  # Store as JSON object
-    display_preferences = Column(JSON, default={})  # Store as JSON object
-    
-    # Relationships
-    user = relationship("User", back_populates="settings")
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary."""
-        return {
-            "user_id": self.user_id,
-            "default_specialty": self.default_specialty,
-            "notification_preferences": self.notification_preferences or {},
-            "display_preferences": self.display_preferences or {}
-        }
+    class UserSettings(Base):
+        """User settings and preferences model."""
+        __tablename__ = "user_settings"
+        
+        id = Column(Integer, primary_key=True, index=True)
+        user_id = Column(String(255), ForeignKey("users.user_id"), unique=True, nullable=False, index=True)
+        default_specialty = Column(String(100), nullable=True)
+        notification_preferences = Column(JSON, default={})  # Store as JSON object
+        display_preferences = Column(JSON, default={})  # Store as JSON object
+        
+        # Relationships
+        user = relationship("User", back_populates="settings")
+        
+        def to_dict(self) -> Dict[str, Any]:
+            """Convert to dictionary."""
+            return {
+                "user_id": self.user_id,
+                "default_specialty": self.default_specialty,
+                "notification_preferences": self.notification_preferences or {},
+                "display_preferences": self.display_preferences or {}
+            }
+
+else:
+    # Define placeholder values when database is not available
+    User = None
+    Session = None
+    SearchHistory = None
+    Favorite = None
+    CustomList = None
+    UserSettings = None
 
 
 # Database initialization
