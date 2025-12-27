@@ -228,8 +228,15 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     import re
     normalized = name.lower().strip()
     
-    # Remove content in parentheses
-    normalized = re.sub(r'\s*\([^)]*\)', '', normalized)
+    # Preserve important clinical distinctions in parentheses (e.g., incontinence types)
+    # Only remove general descriptive parentheticals
+    preserved_terms = ["stress", "urge", "overflow", "mixed", "functional", "geriatric"]
+    if any(term in normalized for term in preserved_terms):
+      # Keep the full name including parentheses for these specific conditions
+      pass
+    else:
+      # Remove content in parentheses for general cases
+      normalized = re.sub(r'\s*\([^)]*\)', '', normalized)
     
     # Remove common prefixes
     prefixes_to_remove = ["acute ", "bacterial ", "chronic "]
