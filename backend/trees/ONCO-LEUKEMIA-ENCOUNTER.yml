@@ -1,0 +1,160 @@
+tree_id: ONCO-LEUKEMIA-ENCOUNTER
+name: Leukemia (Encounter)
+family: Hematology Oncology
+specialty: Hematology Oncology
+chief_complaint: Fatigue, easy bruising, recurrent infections
+description: Malignant proliferation of hematopoietic cells in bone marrow and blood, includes acute and chronic forms affecting lymphoid or myeloid lineages
+icd10: C95.90
+snomed: 93143009
+presentations:
+  - Fatigue, weakness, pallor (anemia)
+  - Easy bruising, petechiae, bleeding (thrombocytopenia)
+  - Fever, recurrent infections (neutropenia)
+  - Bone pain (marrow infiltration)
+  - Lymphadenopathy, hepatosplenomegaly
+  - Weight loss, night sweats (B symptoms)
+  - Symptoms vary by subtype and acuity
+urgency: urgent
+referrals:
+  emergency:
+    - Acute leukemia with blast crisis
+    - Severe pancytopenia with bleeding or infection
+    - Hyperleukocytosis (WBC greater than 100,000) with leukostasis
+    - Tumor lysis syndrome
+    - DIC with severe bleeding
+  urgent:
+    - Suspected acute leukemia
+    - New diagnosis requiring bone marrow biopsy
+    - Symptomatic cytopenias
+  routine:
+    - Chronic leukemia monitoring
+    - Surveillance visits
+
+workup:
+  - Leukemia classification - acute vs chronic, lymphoid vs myeloid
+  - Acute leukemia - rapidly progressive, immature blast cells, requires urgent treatment (AML, ALL)
+  - Chronic leukemia - indolent, mature cells, may be asymptomatic (CML, CLL)
+  - Clinical presentation varies by type
+  - Acute leukemia (AML, ALL) - rapid onset days to weeks
+  - Cytopenias - fatigue/pallor (anemia), infections/fever (neutropenia), bleeding/bruising (thrombocytopenia)
+  - Bone pain (marrow infiltration), gingival hyperplasia (AML with monocytic differentiation)
+  - CNS involvement (ALL more common) - headache, cranial nerve palsies, meningismus
+  - Chronic leukemia (CML, CLL) - indolent, often asymptomatic, discovered incidentally
+  - Lymphocytosis (CLL) or leukocytosis (CML) on routine CBC
+  - Splenomegaly, lymphadenopathy (CLL)
+  - Constitutional symptoms - weight loss, night sweats, fatigue
+  - Physical examination
+  - Pallor, petechiae, ecchymoses
+  - Lymphadenopathy (especially CLL, ALL)
+  - Hepatosplenomegaly (more common in chronic leukemias)
+  - Gingival hyperplasia (acute monocytic leukemia)
+  - Skin infiltration (leukemia cutis) - firm violaceous nodules
+  - Laboratory studies - CBC with differential critical
+  - Acute leukemia - pancytopenia with circulating blasts, or elevated WBC with blasts
+  - Blasts greater than 20% in blood or marrow diagnostic for acute leukemia
+  - Chronic lymphocytic leukemia (CLL) - lymphocytosis (greater than 5,000/μL), small mature lymphocytes, smudge cells
+  - Chronic myeloid leukemia (CML) - leukocytosis (often WBC 50,000-200,000), left shift (myelocytes, metamyelocytes), basophilia
+  - Peripheral blood smear - morphology of cells, identify blasts
+  - Auer rods (AML), lymphoblasts with high nuclear-to-cytoplasmic ratio (ALL)
+  - Bone marrow biopsy and aspiration - diagnostic gold standard
+  - Cellularity, blast percentage, dysplasia
+  - Flow cytometry - immunophenotyping to classify lineage (B-cell, T-cell, myeloid)
+  - Cytogenetics and molecular testing - prognostic and therapeutic implications
+  - AML - FLT3, NPM1, CEBPA mutations guide therapy
+  - ALL - Philadelphia chromosome (BCR-ABL1), MLL rearrangements
+  - CML - BCR-ABL1 (Philadelphia chromosome) diagnostic
+  - CLL - FISH for del(17p), del(11q), trisomy 12; IGHV mutation status; TP53 mutations
+  - Chemistry panel - uric acid, LDH, potassium, phosphate, calcium (tumor lysis syndrome risk)
+  - Coagulation studies - PT, PTT, fibrinogen, D-dimer (DIC in acute promyelocytic leukemia)
+  - Imaging
+  - Chest X-ray - mediastinal mass (T-cell ALL, some lymphoid leukemias)
+  - CT chest/abdomen/pelvis - lymphadenopathy, hepatosplenomegaly, staging
+  - Lumbar puncture - if CNS symptoms or high-risk ALL (check CSF for blasts, give intrathecal chemotherapy)
+treatment:
+  - Treatment highly specific to leukemia subtype - requires hematology/oncology
+  - Acute Myeloid Leukemia (AML)
+  - Induction chemotherapy - cytarabine + anthracycline (7+3 regimen) - goal complete remission
+  - Consolidation chemotherapy - high-dose cytarabine or allogeneic stem cell transplant
+  - Targeted therapy - FLT3 inhibitors (midostaurin, gilteritinib) if FLT3 mutation, IDH inhibitors (ivosidenib, enasidenib) if IDH mutation
+  - Acute promyelocytic leukemia (APL) - all-trans retinoic acid (ATRA) + arsenic trioxide - 90% cure rate
+  - 5-year survival 25-40% overall, better in younger patients and favorable cytogenetics
+  - Acute Lymphoblastic Leukemia (ALL)
+  - Multi-agent chemotherapy - induction, consolidation, maintenance (total 2-3 years)
+  - Includes vincristine, daunorubicin, asparaginase, methotrexate, 6-mercaptopurine
+  - CNS prophylaxis - intrathecal chemotherapy (all patients due to CNS sanctuary site)
+  - Philadelphia chromosome positive (Ph+) - add TKI (imatinib, dasatinib)
+  - Allogeneic stem cell transplant for high-risk or relapsed disease
+  - 5-year survival 40% adults, 90% children
+  - Chronic Myeloid Leukemia (CML)
+  - Tyrosine kinase inhibitors (TKIs) - imatinib (first-line), dasatinib, nilotinib
+  - Oral medication, blocks BCR-ABL1 kinase, induces complete molecular response
+  - Transformed CML to chronic manageable disease
+  - Monitor BCR-ABL1 transcript levels (qPCR) every 3 months
+  - Near-normal life expectancy with TKI therapy
+  - Chronic Lymphocytic Leukemia (CLL)
+  - Watch and wait if asymptomatic, early stage (Rai 0-I or Binet A)
+  - Treat if symptomatic (cytopenias, massive lymphadenopathy, constitutional symptoms)
+  - Targeted therapy - BTK inhibitors (ibrutinib, acalabrutinib) or BCL-2 inhibitor (venetoclax) + anti-CD20 (obinutuzumab)
+  - Chemoimmunotherapy (FCR - fludarabine, cyclophosphamide, rituximab) alternative for young fit patients without TP53 mutation
+  - Median survival 10+ years, indolent course
+  - Supportive care (all types)
+  - Transfusions - RBC for anemia (Hgb less than 7-8 g/dL), platelets for thrombocytopenia (less than 10,000 or bleeding)
+  - Antibiotics for febrile neutropenia (broad-spectrum, empiric)
+  - Growth factors - G-CSF (filgrastim) for neutropenia
+  - Tumor lysis syndrome prophylaxis - allopurinol or rasburicase, hydration, monitor electrolytes
+  - Allogeneic stem cell transplant - curative potential for acute leukemias, young patients with high-risk features or relapsed disease
+clinical_pearls:
+  - Leukemia classified by acuity (acute vs chronic) and lineage (myeloid vs lymphoid) - four main types (AML, ALL, CML, CLL)
+  - Acute leukemia (AML, ALL) - medical emergency, requires urgent treatment, rapidly fatal if untreated
+  - Chronic leukemia (CML, CLL) - indolent, often asymptomatic at diagnosis, may not require immediate treatment
+  - Blasts greater than 20% in blood or bone marrow diagnostic for acute leukemia
+  - Auer rods pathognomonic for AML
+  - Acute promyelocytic leukemia (APL) - medical emergency, DIC common, treat with ATRA + arsenic (90% cure)
+  - Philadelphia chromosome (BCR-ABL1) diagnostic for CML, also present in 25% adult ALL (worse prognosis, requires TKI)
+  - CML transformed from fatal disease to chronic condition with TKIs (imatinib revolution in 2001)
+  - CLL most common leukemia in adults (Western countries), median age 70 years, often asymptomatic
+  - Smudge cells on peripheral smear characteristic of CLL (fragile lymphocytes broken during slide preparation)
+  - Tumor lysis syndrome risk in acute leukemia with high WBC - hyperuricemia, hyperkalemia, hyperphosphatemia, hypocalcemia, AKI
+  - Leukostasis in hyperleukocytosis (WBC greater than 100,000) - sludging in microvasculature causes stroke, MI, pulmonary failure - treat with leukapheresis + chemotherapy
+  - Neutropenic fever (ANC less than 500) medical emergency - empiric broad-spectrum antibiotics (cefepime or meropenem)
+  - CNS prophylaxis mandatory in ALL (intrathecal chemotherapy) - CNS sanctuary site
+differentials:
+  - Myelodysplastic syndrome (MDS) - dysplasia with cytopenias, blasts less than 20%, pre-leukemic
+  - Myeloproliferative neoplasms (polycythemia vera, essential thrombocytosis) - proliferation without blasts
+  - Aplastic anemia - pancytopenia with hypocellular marrow (not hypercellular like leukemia)
+  - Infectious mononucleosis (EBV) - atypical lymphocytosis, but not malignant
+  - Reactive leukocytosis - infection, inflammation, steroids (no blasts, resolves with treatment)
+  - Lymphoma with leukemic phase (non-Hodgkin) - mature lymphoid malignancy
+  - Autoimmune lymphoproliferative syndrome (ALPS) - lymphocytosis with autoimmune cytopenias
+trace:
+  - 45-year-old woman presents with 3-week history of progressive fatigue, easy bruising, and low-grade fevers
+  - Noticed multiple bruises on legs without trauma, gums bleed when brushing teeth
+  - Severe fatigue, barely able to climb stairs
+  - Low-grade fevers (100-101°F) daily, no localizing infection symptoms
+  - No prior medical history, no medications, non-smoker
+  - Physical examination - pallor, multiple ecchymoses on legs and arms, petechiae on lower extremities, no lymphadenopathy, spleen palpable 2 cm below costal margin
+  - Laboratory studies - CBC shows WBC 2.8 (low), hemoglobin 7.2 g/dL (severe anemia), platelets 18,000 (severe thrombocytopenia), ANC 400 (neutropenic)
+  - Peripheral blood smear - 35% circulating blasts, large cells with high nuclear-to-cytoplasmic ratio, prominent nucleoli, occasional Auer rods
+  - Comprehensive metabolic panel - creatinine 0.9, potassium 4.2, uric acid 6.8, LDH 850 (elevated)
+  - Coagulation studies - PT 14 sec, PTT 32 sec, fibrinogen 320 mg/dL (normal - not APL)
+  - Admitted to hospital for suspected acute myeloid leukemia
+  - Bone marrow biopsy performed - hypercellular marrow with 70% myeloblasts, trilineage dysplasia
+  - Flow cytometry - blasts positive for CD13, CD33, CD117, MPO (myeloid markers), negative for CD34
+  - Cytogenetics - normal karyotype, molecular testing shows NPM1 mutation (favorable), FLT3-ITD negative
+  - Diagnosis - Acute Myeloid Leukemia with NPM1 mutation
+  - Started tumor lysis syndrome prophylaxis - allopurinol 300 mg daily, IV hydration
+  - Placed central venous catheter (PICC line) for chemotherapy
+  - Induction chemotherapy initiated - cytarabine 100 mg/m² continuous infusion days 1-7 + daunorubicin 60 mg/m² IV days 1-3 (7+3 regimen)
+  - Hospital course complicated by febrile neutropenia day 10 (ANC 0) - started cefepime, defervesced after 3 days, blood cultures negative
+  - Transfusion support - 4 units PRBCs, 6 units platelets during hospitalization
+  - Day 28 bone marrow biopsy - less than 5% blasts, complete remission achieved
+  - Consolidation chemotherapy - high-dose cytarabine 3 g/m² every 12 hours days 1, 3, 5 for 4 cycles
+  - Completed consolidation without major complications
+  - At 6 months post-remission, remains in complete remission, blood counts recovered
+  - Surveillance bone marrow biopsies every 3-6 months - continued complete remission at 2 years
+
+citations:
+  - NCCN (National Comprehensive Cancer Network) Guidelines for Acute Myeloid Leukemia, Acute Lymphoblastic Leukemia, Chronic Myeloid Leukemia, Chronic Lymphocytic Leukemia
+  - ASH (American Society of Hematology) Clinical Practice Guidelines
+  - ELN (European LeukemiaNet) Recommendations
+  - UpToDate - Hematology and Oncology
