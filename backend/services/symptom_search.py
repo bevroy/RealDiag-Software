@@ -123,13 +123,12 @@ class SymptomSearchResponse(BaseModel):
 
 
 # Helper functions
-@lru_cache(maxsize=1)
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
-    Load all diagnostic tree YAML files with caching.
-    Cache is automatically cleared on app reload.
+    Load all diagnostic tree YAML files.
     
     Supports both old format (rules: array) and new format (individual tree files).
+    Note: Removed caching to ensure fresh data loads after code changes.
     """
     # Try trees directory first (new format)
     trees_dir = Path(__file__).parent.parent / "trees"
