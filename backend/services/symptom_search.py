@@ -339,10 +339,13 @@ def calculate_match_score_optimized(normalized_symptoms: List[str], original_sym
         score = score / len(string_presentations)
     
     # Apply clinical likelihood modifier
-    if rule and 'sensitivity' in rule:
-        sensitivity = float(rule['sensitivity'])
-        sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2
-        score = score * sensitivity_modifier
+    if rule and 'sensitivity' in rule and rule['sensitivity'] is not None:
+        try:
+            sensitivity = float(rule['sensitivity'])
+            sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2
+            score = score * sensitivity_modifier
+        except (ValueError, TypeError):
+            pass  # Skip if sensitivity can't be converted to float
     
     return (score, matched)
 
@@ -411,12 +414,15 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str], ru
         score = score / len(string_presentations)
     
     # Apply clinical likelihood modifier based on sensitivity/specificity if available
-    if rule and 'sensitivity' in rule:
-        sensitivity = float(rule['sensitivity'])
-        # Higher sensitivity = higher pre-test probability for this condition
-        # Apply a small boost (max 10% increase) for high-sensitivity diagnoses
-        sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2  # Range: 0.9 to 1.1
-        score = score * sensitivity_modifier
+    if rule and 'sensitivity' in rule and rule['sensitivity'] is not None:
+        try:
+            sensitivity = float(rule['sensitivity'])
+            # Higher sensitivity = higher pre-test probability for this condition
+            # Apply a small boost (max 10% increase) for high-sensitivity diagnoses
+            sensitivity_modifier = 1.0 + (sensitivity - 0.5) * 0.2  # Range: 0.9 to 1.1
+            score = score * sensitivity_modifier
+        except (ValueError, TypeError):
+            pass  # Skip if sensitivity can't be converted to float
     
     return (score, matched)
 
