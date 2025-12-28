@@ -58,7 +58,7 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
     tree_id = tree_data.get('tree_id', '')
     name = tree_data.get('name', '')
     description = tree_data.get('description', '')
-    icd10 = tree_data.get('icd10', '')
+    icd10 = tree_data.get('icd10', '') or tree_data.get('icd10_code', '')
     family = tree_data.get('family', '')
     specialty = tree_data.get('specialty', '')
     chief_complaint = tree_data.get('chief_complaint', '')
@@ -81,7 +81,123 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
             snomed_codes.add(str(tree_snomed))
     homeopathic_remedies = set()
     
-    # Parse nodes for clinical details
+    # First, check for TOP-LEVEL clinical information (newer format)
+    # Presentations
+    top_presentations = tree_data.get('presentations', [])
+    if top_presentations:
+        if isinstance(top_presentations, list):
+            for pres in top_presentations:
+                presentations.add(str(pres))
+        else:
+            presentations.add(str(top_presentations))
+    
+    # Workup
+    top_workup = tree_data.get('workup', [])
+    if top_workup:
+        if isinstance(top_workup, list):
+            for item in top_workup:
+                if isinstance(item, dict):
+                    # Handle nested workup structure
+                    for key, value in item.items():
+                        if isinstance(value, list):
+                            for subitem in value:
+                                workup_tests.add(f"{key}: {subitem}" if key else str(subitem))
+                        else:
+                            workup_tests.add(f"{key}: {value}")
+                else:
+                    workup_tests.add(str(item))
+        elif isinstance(top_workup, dict):
+            for key, value in top_workup.items():
+                if isinstance(value, list):
+                    for item in value:
+                        workup_tests.add(f"{key}: {item}" if key else str(item))
+                else:
+                    workup_tests.add(f"{key}: {value}")
+        else:
+            workup_tests.add(str(top_workup))
+    
+    # Treatment
+    top_treatment = tree_data.get('treatment', [])
+    if top_treatment:
+        if isinstance(top_treatment, list):
+            for item in top_treatment:
+                if isinstance(item, dict):
+                    # Handle nested treatment structure
+                    for key, value in item.items():
+                        if isinstance(value, list):
+                            for subitem in value:
+                                treatments.add(f"{key}: {subitem}" if key else str(subitem))
+                        elif isinstance(value, dict):
+                            for subkey, subvalue in value.items():
+                                if isinstance(subvalue, list):
+                                    for subitem in subvalue:
+                                        treatments.add(f"{key} - {subkey}: {subitem}")
+                                else:
+                                    treatments.add(f"{key} - {subkey}: {subvalue}")
+                        else:
+                            treatments.add(f"{key}: {value}")
+                else:
+                    treatments.add(str(item))
+        elif isinstance(top_treatment, dict):
+            for key, value in top_treatment.items():
+                if isinstance(value, list):
+                    for item in value:
+                        treatments.add(f"{key}: {item}" if key else str(item))
+                elif isinstance(value, dict):
+                    for subkey, subvalue in value.items():
+                        if isinstance(subvalue, list):
+                            for item in subvalue:
+                                treatments.add(f"{key} - {subkey}: {item}")
+                        else:
+                            treatments.add(f"{key} - {subkey}: {subvalue}")
+                else:
+                    treatments.add(f"{key}: {value}")
+        else:
+            treatments.add(str(top_treatment))
+    
+    # Clinical pearls
+    top_pearls = tree_data.get('clinical_pearls', [])
+    if top_pearls:
+        if isinstance(top_pearls, list):
+            for pearl in top_pearls:
+                clinical_pearls.add(str(pearl))
+        else:
+            clinical_pearls.add(str(top_pearls))
+    
+    # Referrals
+    top_referrals = tree_data.get('referrals', [])
+    if top_referrals:
+        if isinstance(top_referrals, list):
+            for ref in top_referrals:
+                if isinstance(ref, dict):
+                    for key, value in ref.items():
+                        if isinstance(value, list):
+                            for item in value:
+                                referrals.add(f"{key}: {item}")
+                        else:
+                            referrals.add(f"{key}: {value}")
+                else:
+                    referrals.add(str(ref))
+        elif isinstance(top_referrals, dict):
+            for key, value in top_referrals.items():
+                if isinstance(value, list):
+                    for item in value:
+                        referrals.add(f"{key}: {item}")
+                else:
+                    referrals.add(f"{key}: {value}")
+        else:
+            referrals.add(str(top_referrals))
+    
+    # Homeopathic remedies
+    top_remedies = tree_data.get('homeopathic_remedies', [])
+    if top_remedies:
+        if isinstance(top_remedies, list):
+            for remedy in top_remedies:
+                homeopathic_remedies.add(str(remedy))
+        else:
+            homeopathic_remedies.add(str(top_remedies))
+    
+    # Parse nodes for clinical details (older format)
     nodes = tree_data.get('nodes', [])
     if isinstance(nodes, list):
         for node in nodes:
@@ -106,6 +222,11 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
             tests = node.get('tests', [])
             if tests:
                 for test in tests:
+                    workup_tests.add(str(test))
+            
+            node_workup = node.get('workup', [])
+            if node_workup:
+                for test in node_workup:
                     workup_tests.add(str(test))
             
             # Treatments/management
