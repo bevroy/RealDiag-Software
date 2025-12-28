@@ -15,7 +15,7 @@ presentations:
 urgency: Low
 workup:
   screening_recommendations_uspstf:
-    - All women age ≥65
+    - All women age >=65
     - Postmenopausal women <65 with increased fracture risk
     - Men - consider screening if risk factors present
   risk_factors:
@@ -25,16 +25,13 @@ workup:
     - Family history of hip fracture
     - Current smoking
     - Excessive alcohol use (>3 drinks/day)
-    - Glucocorticoid use ≥3 months
+    - Glucocorticoid use >=3 months
     - Rheumatoid arthritis
     - Secondary causes (hyperthyroidism, hyperparathyroidism, malabsorption)
   dexa_scan:
     - Dual-energy X-ray absorptiometry of hip and spine
-    - T-score interpretation:
-      * Normal: T-score ≥-1.0
-      * Osteopenia: T-score -1.0 to -2.5
-      * Osteoporosis: T-score ≤-2.5
-      * Severe osteoporosis: T-score ≤-2.5 with fracture
+    - T-score interpretation - Normal greater than or equal to -1.0, Osteopenia -1.0 to -2.5, Osteoporosis less than or equal to -2.5
+    - Severe osteoporosis is T-score less than or equal to -2.5 with fracture
   frax_score:
     - 10-year probability of hip fracture and major osteoporotic fracture
     - Incorporates clinical risk factors with or without BMD
@@ -48,19 +45,18 @@ treatment:
     - Limit alcohol
   osteopenia:
     - Calcium and vitamin D
-    - Consider pharmacotherapy if high FRAX score (≥3% hip fracture or ≥20% major osteoporotic fracture)
+    - Consider pharmacotherapy if high FRAX score (>=3% hip fracture or >=20% major osteoporotic fracture)
   osteoporosis:
     - Calcium and vitamin D
-    - Pharmacotherapy:
-      * First-line: Bisphosphonates (alendronate 70mg weekly, risedronate, ibandronate, zoledronic acid)
-      * Second-line: Denosumab (Prolia) 60mg SC every 6 months
-      * Anabolic: Teriparatide (PTH analog) or romosozumab for severe osteoporosis
+    - Pharmacotherapy - First-line bisphosphonates (alendronate 70mg weekly, risedronate, ibandronate, zoledronic acid)
+    - Second-line Denosumab (Prolia) 60mg SC every 6 months
+    - Anabolic agents teriparatide (PTH analog) or romosozumab for severe osteoporosis
   monitoring:
     - Repeat DEXA every 2 years on treatment
     - Can space out to 5 years if stable
 clinical_pearls:
   - DEXA scan is gold standard for diagnosis
-  - T-score compares to young healthy adult (used for postmenopausal women and men ≥50)
+  - T-score compares to young healthy adult (used for postmenopausal women and men >=50)
   - Z-score compares to age-matched controls (used for premenopausal women and men <50)
   - Bisphosphonates reduce fracture risk by 50%
   - Must take bisphosphonates on empty stomach, upright for 30 minutes
