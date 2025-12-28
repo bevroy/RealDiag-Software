@@ -1,0 +1,66 @@
+tree_id: ONCO-BREAST-CANCER
+name: Breast Cancer
+family: oncology
+specialty: Oncology, Surgery, Primary Care
+chief_complaint: Breast lump, breast mass, abnormal mammogram
+description: |
+  Breast cancer is the most common cancer in women. Early detection through screening mammography and clinical breast exams
+  significantly improves outcomes. Risk factors include age, family history, BRCA mutations, early menarche, late menopause.
+icd10: C50.919
+snomed: "254837009"
+presentations:
+  - Palpable breast lump or mass
+  - Breast pain or tenderness
+  - Nipple discharge (especially bloody)
+  - Nipple retraction or inversion
+  - Skin changes (dimpling, peau d'orange)
+  - Breast asymmetry or change in shape
+  - Axillary lymphadenopathy
+  - Abnormal screening mammogram
+  - Thickening of breast tissue
+urgency: High
+referrals:
+  emergency:
+    - Signs of metastatic disease with acute complications
+  urgent:
+    - New breast mass
+    - Suspicious mammogram findings
+    - Bloody nipple discharge
+  breast_surgery:
+    - All suspected or confirmed breast cancer
+  oncology:
+    - Confirmed breast cancer for treatment planning
+workup:
+  - Clinical breast exam
+  - Imaging - diagnostic mammogram, ultrasound, MRI if indicated
+  - Tissue diagnosis - core needle biopsy (gold standard)
+  - Staging workup if cancer confirmed - chest imaging, liver function tests, consider bone scan or PET scan
+  - Receptor status - ER, PR, HER2
+  - Genetic testing if family history or young age
+treatment:
+  - Surgical options - lumpectomy with radiation vs mastectomy
+  - Sentinel lymph node biopsy
+  - Adjuvant chemotherapy based on stage and receptor status
+  - Hormonal therapy if ER/PR positive
+  - HER2-targeted therapy if HER2 positive
+  - Radiation therapy
+  - Multidisciplinary care
+clinical_pearls:
+  - Most common cancer in women
+  - Screening mammography recommended starting age 40-50
+  - BRCA mutations significantly increase risk
+  - Triple negative breast cancer has poorest prognosis
+  - Core needle biopsy preferred over fine needle aspiration
+differentials:
+  - Fibroadenoma
+  - Breast cyst
+  - Fibrocystic changes
+  - Mastitis or abscess
+  - Fat necrosis
+  - Phyllodes tumor
+trace:
+  - 55-year-old woman presents with self-detected left breast lump. Clinical exam reveals 2cm firm irregular mass in upper outer quadrant. Diagnostic mammogram shows suspicious spiculated mass. Ultrasound-guided core needle biopsy confirms invasive ductal carcinoma, ER positive, PR positive, HER2 negative. Staging workup negative for metastases. Referred to breast surgeon and oncologist. Undergoes lumpectomy with sentinel lymph node biopsy. Final pathology stage IIA. Receives adjuvant chemotherapy followed by hormonal therapy and radiation.
+citations:
+  - American Cancer Society Breast Cancer Guidelines
+  - NCCN Breast Cancer Guidelines
+  - UpToDate - Oncology

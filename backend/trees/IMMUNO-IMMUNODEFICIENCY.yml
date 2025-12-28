@@ -1,0 +1,91 @@
+tree_id: IMMUNO-IMMUNODEFICIENCY
+name: Immunodeficiency (Encounter)
+family: immunology
+specialty: Immunology, Infectious Disease, Primary Care
+chief_complaint: Recurrent infections, suspected immune deficiency
+description: |
+  Immunodeficiency is impaired immune system function leading to increased susceptibility to infections.
+  Can be primary (genetic) or secondary (acquired - HIV, medications, malignancy).
+  Requires systematic evaluation to identify specific defect.
+icd10: D84.9
+snomed: "234532001"
+presentations:
+  - Recurrent or severe infections (sinopulmonary, skin, opportunistic)
+  - Infections with unusual organisms
+  - Chronic infections not responding to treatment
+  - Failure to thrive (in children)
+  - Chronic diarrhea
+  - Autoimmune manifestations
+  - Family history of immunodeficiency or early deaths from infection
+urgency: Medium
+referrals:
+  immunology:
+    - Suspected primary immunodeficiency
+    - Recurrent serious infections
+    - Abnormal immune studies
+    - Need for immunoglobulin replacement
+  infectious_disease:
+    - Opportunistic infections
+    - HIV/AIDS management
+workup:
+  initial_screening:
+    - CBC with differential - check lymphocyte count
+    - Quantitative immunoglobulins - IgG, IgA, IgM, IgE
+    - HIV testing
+    - Vaccine titers - assess antibody response (tetanus, pneumococcal, Hib)
+  advanced_testing:
+    - Lymphocyte subset analysis - CD4, CD8, B cells, NK cells
+    - Complement levels - CH50, C3, C4
+    - Functional antibody response - pre/post vaccination titers
+    - Neutrophil function tests - if recurrent bacterial infections
+    - Genetic testing - if primary immunodeficiency suspected
+treatment:
+  depends_on_type:
+    antibody_deficiency:
+      - Immunoglobulin replacement (IVIG or SCIG) - monthly infusions
+      - Prophylactic antibiotics if recurrent infections
+      - Aggressive treatment of infections
+    cellular_immunodeficiency:
+      - Avoid live vaccines
+      - Prophylaxis against opportunistic infections (PCP, fungal)
+      - Consider bone marrow transplant for severe combined immunodeficiency
+    complement_deficiency:
+      - Vaccination against encapsulated organisms (pneumococcal, meningococcal, Hib)
+      - Prophylactic antibiotics
+    secondary_immunodeficiency:
+      - Treat underlying cause (HIV antiretroviral therapy, adjust immunosuppressive medications)
+      - Immunoglobulin replacement if low IgG
+      - Prophylactic antibiotics
+  general_management:
+    - Prompt treatment of infections
+    - Vaccination (avoid live vaccines if severe deficiency)
+    - Avoid exposure to infections
+    - Genetic counseling for primary immunodeficiency
+clinical_pearls:
+  - Warning signs - 8+ ear infections/year, 2+ pneumonias/year, recurrent deep abscesses, chronic thrush
+  - Common variable immunodeficiency (CVID) - most common symptomatic primary immunodeficiency in adults
+  - Selective IgA deficiency - most common primary immunodeficiency (usually asymptomatic)
+  - Recurrent sinopulmonary infections suggest antibody deficiency
+  - Opportunistic infections (PCP, CMV, fungal) suggest cellular immunodeficiency
+  - Secondary immunodeficiency more common than primary
+differentials:
+  primary_immunodeficiency:
+    - Common variable immunodeficiency (CVID)
+    - Selective IgA deficiency
+    - X-linked agammaglobulinemia
+    - Severe combined immunodeficiency (SCID)
+    - Chronic granulomatous disease
+    - Complement deficiencies
+  secondary_immunodeficiency:
+    - HIV/AIDS
+    - Medications (chemotherapy, immunosuppressants, corticosteroids)
+    - Malignancy (lymphoma, leukemia, multiple myeloma)
+    - Protein-losing conditions (nephrotic syndrome, protein-losing enteropathy)
+    - Malnutrition
+    - Diabetes mellitus
+trace:
+  - 28-year-old with history of 6 sinus infections and 3 pneumonias in past 2 years. Workup shows low IgG 400 mg/dL (normal 700-1600), low IgA, normal IgM. Poor vaccine response to pneumococcal vaccine. Diagnose common variable immunodeficiency. Start IVIG replacement monthly. Infections decrease dramatically on IVIG therapy. Refer to immunology for ongoing management.
+citations:
+  - American Academy of Allergy, Asthma and Immunology
+  - Jeffrey Modell Foundation - Primary Immunodeficiency
+  - UpToDate - Immunology

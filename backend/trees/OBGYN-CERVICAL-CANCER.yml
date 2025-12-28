@@ -1,0 +1,56 @@
+tree_id: OBGYN-CERVICAL-CANCER
+name: Cervical Cancer
+family: obstetrics_gynecology
+specialty: OB/GYN, Oncology
+chief_complaint: Abnormal Pap smear, vaginal bleeding, post-coital bleeding
+description: |
+  Cervical cancer is caused by persistent high-risk HPV infection. Screening with Pap smear and HPV testing allows early detection.
+  HPV vaccination has significantly reduced incidence. Most common in women aged 35-44.
+icd10: C53.9
+snomed: "363354003"
+presentations:
+  - Abnormal Pap smear or HPV test
+  - Post-coital bleeding
+  - Intermenstrual bleeding
+  - Abnormal vaginal discharge
+  - Pelvic pain
+  - Visible cervical lesion on exam
+  - Advanced disease - weight loss, leg swelling, urinary or bowel symptoms
+urgency: High
+referrals:
+  urgent:
+    - Abnormal Pap with high-grade changes
+    - Visible cervical lesion
+    - Persistent abnormal bleeding
+  gynecologic_oncology:
+    - Confirmed or suspected cervical cancer
+workup:
+  - Pelvic exam with visualization of cervix
+  - Pap smear and HPV co-testing
+  - Colposcopy with directed biopsies if abnormal screening
+  - Cervical biopsy or LEEP for diagnosis
+  - Staging if cancer confirmed - pelvic exam under anesthesia, imaging (MRI pelvis, CT chest/abdomen/pelvis), cystoscopy/proctoscopy if advanced
+treatment:
+  - Early stage (IA) - cone biopsy or simple hysterectomy
+  - Stage IB-IIA - radical hysterectomy with lymphadenectomy or primary chemoradiation
+  - Advanced stage - concurrent chemoradiation
+  - Recurrent disease - pelvic exenteration or palliative care
+  - Fertility-sparing options for early stage in young women
+clinical_pearls:
+  - HPV 16 and 18 cause 70% of cervical cancers
+  - HPV vaccination dramatically reduces risk
+  - Screening guidelines - start age 21, Pap every 3 years age 21-29, Pap + HPV co-testing every 5 years age 30-65
+  - Squamous cell carcinoma (70%) and adenocarcinoma (25%) are most common types
+  - Prognosis excellent if caught early
+differentials:
+  - Cervical dysplasia (CIN)
+  - Cervicitis
+  - Cervical polyp
+  - Endometrial cancer
+  - Vaginal cancer
+trace:
+  - 42-year-old woman with abnormal Pap showing HSIL. Colposcopy performed with biopsies. Pathology confirms cervical intraepithelial neoplasia grade 3 (CIN 3) with focal invasion. MRI shows 2.5cm cervical mass without parametrial invasion. Diagnosed with stage IB1 cervical cancer. Referred to gynecologic oncologist. Undergoes radical hysterectomy with pelvic lymphadenectomy. Final pathology shows stage IB2 with negative margins and lymph nodes. Receives adjuvant radiation therapy. Excellent prognosis with close surveillance.
+citations:
+  - ACOG Cervical Cancer Screening Guidelines
+  - NCCN Cervical Cancer Guidelines
+  - UpToDate - Gynecologic Oncology

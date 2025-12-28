@@ -1,0 +1,76 @@
+tree_id: HEME-LEUKOPENIA
+name: Leukopenia (Encounter)
+family: hematology
+specialty: Hematology, Primary Care
+chief_complaint: Low white blood cell count
+description: |
+  Leukopenia is a reduction in white blood cell count (WBC <4,000/μL).
+  Most commonly due to neutropenia. Can be drug-induced, infectious, autoimmune, or from bone marrow disorders.
+  Increases infection risk if severe.
+icd10: D72.819
+snomed: "416780008"
+presentations:
+  - WBC count less than 4,000/μL
+  - Often asymptomatic (incidental finding)
+  - Recurrent infections if severe neutropenia (ANC <500)
+  - Fever
+  - Oral ulcers, gingivitis
+  - Skin infections
+urgency: High
+referrals:
+  emergency:
+    - Severe neutropenia (ANC <500) with fever (neutropenic fever)
+    - Signs of severe infection
+  hematology:
+    - ANC <1,000/μL
+    - No clear reversible cause
+    - Progressive or persistent leukopenia
+    - Concern for bone marrow disorder
+workup:
+  - CBC with differential - determine which cell line affected (neutrophils, lymphocytes)
+  - Absolute neutrophil count (ANC) - most important for infection risk
+  - Medication review - many drugs cause leukopenia
+  - Peripheral blood smear
+  - Viral studies - HIV, hepatitis B/C, CMV, EBV
+  - Autoimmune workup - ANA, rheumatoid factor (lupus, RA can cause)
+  - Vitamin B12 and folate levels
+  - Bone marrow biopsy if etiology unclear or concern for marrow disorder
+treatment:
+  depends_on_cause:
+    drug_induced:
+      - Discontinue offending medication
+      - Monitor CBC recovery
+      - G-CSF (filgrastim) if severe and not recovering
+    infection_related:
+      - Treat underlying infection
+      - Prophylactic antibiotics if ANC <500
+    nutritional:
+      - B12 or folate supplementation
+    autoimmune:
+      - Treat underlying autoimmune disease
+      - Consider immunosuppression if severe
+    neutropenic_fever:
+      - Emergency - immediate broad-spectrum antibiotics
+      - Hospitalization
+      - G-CSF support
+clinical_pearls:
+  - Neutropenia (low neutrophils) is most clinically significant type of leukopenia
+  - ANC <1,500 is neutropenia, ANC <500 is severe (high infection risk)
+  - Common drug causes - chemotherapy, antibiotics (beta-lactams), antithyroid drugs, anticonvulsants
+  - Benign ethnic neutropenia common in African ancestry (ANC 1,000-1,500 baseline)
+  - Neutropenic fever is medical emergency requiring immediate antibiotics
+  - Chronic mild leukopenia often benign if no symptoms or infections
+differentials:
+  - Drug-induced leukopenia
+  - Viral infection (HIV, EBV, CMV)
+  - Autoimmune disease (lupus, rheumatoid arthritis)
+  - Nutritional deficiency (B12, folate, copper)
+  - Bone marrow failure or infiltration
+  - Aplastic anemia
+  - Leukemia or myelodysplastic syndrome
+  - Hypersplenism
+trace:
+  - 32-year-old on propylthiouracil for hyperthyroidism presents with WBC 2,500 and ANC 800. No fever or infections. Diagnose drug-induced leukopenia. Discontinue propylthiouracil, switch to methimazole. WBC recovers to 5,000 in 2 weeks. Continue monitoring.
+citations:
+  - American Society of Hematology Guidelines
+  - UpToDate - Hematology

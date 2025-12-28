@@ -1,0 +1,89 @@
+tree_id: IMMUNO-AUTOIMMUNE-DISORDER
+name: Autoimmune Disorder, Unspecified (Encounter)
+family: immunology
+specialty: Rheumatology, Immunology, Primary Care
+chief_complaint: Suspected autoimmune disease, positive autoantibodies
+description: |
+  Encounter for patient with suspected or documented autoimmune disease without specific diagnosis.
+  Autoimmune diseases result from immune system attacking body's own tissues.
+  Requires systematic evaluation to identify specific condition and guide treatment.
+icd10: M35.9
+snomed: "85828009"
+presentations:
+  - Fatigue (often profound)
+  - Arthralgia or myalgia
+  - Fever of unknown origin
+  - Rash (malar rash, photosensitivity, other patterns)
+  - Raynaud phenomenon
+  - Sicca symptoms (dry eyes, dry mouth)
+  - Serositis (pleurisy, pericarditis)
+  - Positive autoantibodies (ANA, RF, others)
+  - Multi-system involvement
+  - Symptoms wax and wane (flares and remissions)
+urgency: Medium
+referrals:
+  rheumatology:
+    - Suspected systemic autoimmune disease
+    - Positive ANA with symptoms
+    - Inflammatory arthritis
+    - Multi-system involvement
+  appropriate_specialist:
+    - Endocrinology for thyroid disease
+    - Gastroenterology for inflammatory bowel disease
+    - Neurology for neurologic autoimmune conditions
+workup:
+  initial_screening:
+    - Antinuclear antibody (ANA) - sensitive screening test
+    - CBC with differential - check for cytopenias
+    - Comprehensive metabolic panel
+    - ESR and CRP - inflammatory markers
+    - Urinalysis - check for proteinuria, hematuria
+  specific_autoantibodies:
+    - Anti-dsDNA, anti-Smith - lupus specific
+    - Anti-Ro (SSA), anti-La (SSB) - Sjögren syndrome, lupus
+    - Anti-centromere - limited scleroderma
+    - Anti-Scl-70 - diffuse scleroderma
+    - Anti-Jo-1 - polymyositis
+    - Rheumatoid factor (RF), anti-CCP - rheumatoid arthritis
+    - Thyroid antibodies - Hashimoto thyroiditis, Graves disease
+  organ_specific_evaluation:
+    - Imaging as indicated by symptoms
+    - Biopsy if specific organ involvement (skin, kidney, muscle)
+treatment:
+  depends_on_specific_diagnosis:
+    mild_disease:
+      - NSAIDs for inflammatory symptoms
+      - Hydroxychloroquine for skin and joint manifestations
+    moderate_severe_disease:
+      - Corticosteroids (prednisone) - for active inflammation
+      - Steroid-sparing agents - methotrexate, azathioprine, mycophenolate
+      - Biologics - for specific conditions (anti-TNF, rituximab, belimumab)
+  general_management:
+    - Sun protection (if photosensitive)
+    - Regular monitoring of disease activity and medication side effects
+    - Vaccination (influenza, pneumococcal) - before starting immunosuppression
+    - Bone protection if on chronic steroids (calcium, vitamin D, bisphosphonates)
+clinical_pearls:
+  - Positive ANA is sensitive but not specific (10-15% of healthy people have low-titer ANA)
+  - ANA titer and pattern help guide further testing
+  - Diagnosis requires correlation of clinical features with laboratory findings
+  - Many autoimmune diseases overlap (mixed connective tissue disease)
+  - Women affected more than men (90% of lupus patients are women)
+  - Autoimmune diseases often run in families
+  - One autoimmune disease increases risk for others
+differentials:
+  - Systemic lupus erythematosus (SLE)
+  - Rheumatoid arthritis
+  - Sjögren syndrome
+  - Scleroderma (systemic sclerosis)
+  - Mixed connective tissue disease
+  - Polymyositis or dermatomyositis
+  - Vasculitis
+  - Autoimmune thyroid disease
+  - Antiphospholipid syndrome
+  - Undifferentiated connective tissue disease
+trace:
+  - 35-year-old woman with 6-month history of fatigue, joint pain, and photosensitive rash. ANA positive 1:320 speckled pattern. Anti-Ro positive. CBC shows mild leukopenia. Urinalysis shows trace proteinuria. Refer to rheumatology. Diagnosed with systemic lupus erythematosus. Started hydroxychloroquine and low-dose prednisone. Symptoms improve significantly.
+citations:
+  - American College of Rheumatology Guidelines
+  - UpToDate - Rheumatology and Immunology

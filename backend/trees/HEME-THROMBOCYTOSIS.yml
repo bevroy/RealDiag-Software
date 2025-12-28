@@ -1,0 +1,62 @@
+tree_id: HEME-THROMBOCYTOSIS
+name: Thrombocytosis (Encounter)
+family: hematology
+specialty: Hematology, Primary Care
+chief_complaint: Elevated platelet count
+description: |
+  Thrombocytosis is an elevated platelet count (>450,000/μL). 
+  Can be primary (clonal disorder) or secondary (reactive to underlying condition).
+  Most cases are reactive and asymptomatic, but primary thrombocytosis can cause thrombosis or bleeding.
+icd10: D75.838
+snomed: "415116008"
+presentations:
+  - Platelet count greater than 450,000/μL
+  - Often asymptomatic (incidental finding)
+  - Primary thrombocytosis symptoms - headache, dizziness, visual disturbances
+  - Thrombotic complications (if severe) - DVT, PE, stroke, MI
+  - Paradoxical bleeding (if extreme thrombocytosis >1,000,000)
+  - Splenomegaly (in myeloproliferative disorders)
+urgency: Medium
+referrals:
+  hematology:
+    - Platelet count >1,000,000/μL
+    - Suspected primary thrombocytosis or myeloproliferative disorder
+    - Thrombotic or bleeding complications
+    - No clear secondary cause identified
+workup:
+  - CBC with differential - confirm elevated platelets, check for other cytopenias
+  - Peripheral blood smear - assess platelet morphology
+  - Iron studies - iron deficiency is common cause of reactive thrombocytosis
+  - Inflammatory markers - CRP, ESR (reactive causes)
+  - Rule out secondary causes - infection, inflammation, malignancy, iron deficiency, post-splenectomy, hemolysis
+  - If primary suspected - JAK2 V617F mutation, BCR-ABL1 (rule out CML), calreticulin and MPL mutations
+  - Bone marrow biopsy if myeloproliferative disorder suspected
+treatment:
+  reactive_thrombocytosis:
+    - Treat underlying cause (iron deficiency, infection, inflammation, malignancy)
+    - Usually no specific platelet therapy needed unless >1,000,000
+    - Monitor platelet count
+  primary_thrombocytosis:
+    - Low-dose aspirin 81mg daily - reduce thrombotic risk (if no bleeding)
+    - Hydroxyurea - for high-risk patients (age >60, platelets >1,000,000, prior thrombosis)
+    - Anagrelide - alternative platelet-reducing agent
+    - Hematology management
+clinical_pearls:
+  - Most thrombocytosis is reactive (secondary) and benign
+  - Common reactive causes - iron deficiency, infection, inflammation, malignancy, post-operative
+  - Primary thrombocytosis (essential thrombocythemia) is myeloproliferative disorder
+  - Thrombotic risk increases with platelets >1,000,000
+  - JAK2 V617F mutation present in 50-60% of essential thrombocythemia
+  - Extreme thrombocytosis can paradoxically cause bleeding due to acquired von Willebrand deficiency
+differentials:
+  - Reactive thrombocytosis (iron deficiency, infection, inflammation, malignancy)
+  - Essential thrombocythemia
+  - Polycythemia vera
+  - Primary myelofibrosis
+  - Chronic myeloid leukemia
+  - Post-splenectomy
+trace:
+  - 45-year-old presents with incidental platelet count of 650,000. No symptoms. Iron studies show iron deficiency anemia. Diagnose reactive thrombocytosis secondary to iron deficiency. Start iron supplementation. Platelet count normalizes to 250,000 after 3 months of iron therapy.
+citations:
+  - American Society of Hematology Guidelines
+  - UpToDate - Hematology

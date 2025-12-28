@@ -1,0 +1,72 @@
+tree_id: ALLERGY-ANGIOEDEMA
+name: Angioedema
+family: allergy
+specialty: Allergy and Immunology, Emergency Medicine
+chief_complaint: Swelling of face, lips, tongue, or throat
+description: |
+  Angioedema is non-pitting edema of deeper skin layers and mucous membranes.
+  Can be allergic (histamine-mediated), hereditary (C1 esterase inhibitor deficiency), or ACE inhibitor-induced.
+  Life-threatening if involves airway.
+icd10: T78.3
+snomed: "41291007"
+presentations:
+  - Swelling of face, lips, tongue, or throat
+  - Non-pitting, non-pruritic edema
+  - Can involve extremities, genitals, bowel wall
+  - Airway compromise (stridor, difficulty breathing, difficulty swallowing)
+  - May occur with urticaria (allergic) or without (hereditary, ACE inhibitor)
+  - Abdominal pain if bowel wall involved
+urgency: Emergency
+referrals:
+  emergency:
+    - Any airway involvement or respiratory symptoms
+    - Rapidly progressive swelling
+    - Severe tongue or throat swelling
+  allergy:
+    - Recurrent episodes
+    - Suspected hereditary angioedema
+    - Need for long-term management
+workup:
+  - Assess airway patency - priority
+  - Medication history - ACE inhibitors (can occur years after starting)
+  - C4 level - low in hereditary angioedema
+  - C1 esterase inhibitor level and function - if hereditary angioedema suspected
+  - Tryptase level - if anaphylaxis suspected (draw within 1-2 hours of reaction)
+treatment:
+  emergency_management:
+    - Secure airway if compromised - intubation or cricothyroidotomy
+    - Monitor oxygen saturation and respiratory status
+  allergic_angioedema:
+    - Epinephrine 0.3-0.5mg IM (if anaphylaxis or airway involvement)
+    - Antihistamines - diphenhydramine 25-50mg IV/PO, H2 blocker (ranitidine)
+    - Corticosteroids - methylprednisolone 125mg IV or prednisone 60mg PO
+    - Observation 4-6 hours minimum
+  ace_inhibitor_angioedema:
+    - Discontinue ACE inhibitor permanently
+    - Avoid ARBs (10% cross-reactivity)
+    - Fresh frozen plasma or C1 esterase inhibitor concentrate if severe
+    - Epinephrine less effective but consider if airway involvement
+  hereditary_angioedema:
+    - C1 esterase inhibitor concentrate (Berinert, Cinryze)
+    - Icatibant (Firazyr) - bradykinin B2 receptor antagonist
+    - Ecallantide (Kalbitor) - kallikrein inhibitor
+    - Prophylaxis - attenuated androgens (danazol) or C1-INH replacement
+clinical_pearls:
+  - Airway management is priority - can progress rapidly
+  - ACE inhibitor angioedema can occur years after starting medication
+  - Hereditary angioedema does NOT respond well to epinephrine/antihistamines
+  - Hereditary angioedema - low C4 level is screening test, confirm with C1-INH level
+  - Abdominal attacks of hereditary angioedema can mimic acute abdomen
+  - If urticaria present, likely allergic; if no urticaria, consider non-allergic causes
+differentials:
+  - Allergic angioedema (IgE-mediated)
+  - ACE inhibitor-induced angioedema
+  - Hereditary angioedema (C1 esterase inhibitor deficiency)
+  - Acquired angioedema (C1 esterase inhibitor acquired deficiency)
+  - Idiopathic angioedema
+  - Anaphylaxis
+trace:
+  - 55-year-old on lisinopril for 3 years develops sudden lip and tongue swelling. No urticaria. Airway patent but progressive swelling. Diagnose ACE inhibitor-induced angioedema. Discontinue lisinopril permanently. Give diphenhydramine, ranitidine, methylprednisolone. Observe 6 hours, swelling improves. Discharge with instructions to avoid all ACE inhibitors and ARBs. Switch to calcium channel blocker for blood pressure.
+citations:
+  - American Academy of Allergy, Asthma and Immunology
+  - UpToDate - Allergy and Immunology

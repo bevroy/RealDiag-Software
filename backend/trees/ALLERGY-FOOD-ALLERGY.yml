@@ -1,0 +1,76 @@
+tree_id: ALLERGY-FOOD-ALLERGY
+name: Food Allergy (Encounter)
+family: allergy
+specialty: Allergy and Immunology, Primary Care
+chief_complaint: Suspected or documented food allergy
+description: |
+  Food allergy is an immune-mediated adverse reaction to food proteins.
+  Can range from mild (oral allergy syndrome) to severe (anaphylaxis).
+  Most common food allergens are milk, egg, peanut, tree nuts, soy, wheat, fish, and shellfish.
+icd10: Z91.018
+snomed: "414285001"
+presentations:
+  - Immediate reactions (minutes to 2 hours after ingestion)
+  - Urticaria (hives) and itching
+  - Angioedema (lip, tongue, throat swelling)
+  - Nausea, vomiting, abdominal pain, diarrhea
+  - Respiratory symptoms (wheezing, throat tightness, difficulty breathing)
+  - Anaphylaxis (severe, life-threatening systemic reaction)
+  - Oral allergy syndrome (itching/tingling of lips, mouth, throat with raw fruits/vegetables)
+  - Eosinophilic esophagitis (chronic, non-IgE mediated)
+urgency: High
+referrals:
+  emergency:
+    - Anaphylaxis or signs of airway compromise
+    - Severe reactions
+  allergy:
+    - Confirmed or suspected IgE-mediated food allergy
+    - Multiple food allergies
+    - Unclear triggers
+    - Need for oral food challenge
+workup:
+  - Detailed food and symptom history - timing, reproducibility, foods consumed
+  - Skin prick testing - identify specific food allergens
+  - Specific IgE testing (blood test) - quantify allergen-specific antibodies
+  - Oral food challenge (gold standard) - supervised feeding under medical supervision
+  - Elimination diet trial - remove suspected food for 2-4 weeks, then reintroduce
+  - Consider eosinophilic esophagitis if chronic GI symptoms
+treatment:
+  strict_avoidance:
+    - Eliminate confirmed allergen from diet
+    - Read food labels carefully
+    - Educate about cross-contamination
+    - Medical alert bracelet
+  emergency_action_plan:
+    - Epinephrine auto-injector (EpiPen) prescription
+    - Train patient/family on use
+    - Carry two auto-injectors at all times
+    - Call 911 after using epinephrine
+  antihistamines:
+    - For mild reactions (urticaria, itching)
+    - Diphenhydramine 25-50mg or cetirizine 10mg
+  oral_immunotherapy:
+    - Consider referral to allergy specialist
+    - Gradual desensitization under supervision
+clinical_pearls:
+  - Most common food allergens (top 8) - milk, egg, peanut, tree nuts, soy, wheat, fish, shellfish
+  - Children often outgrow milk and egg allergies, rarely outgrow peanut/tree nut allergies
+  - Oral allergy syndrome (pollen-food syndrome) - cross-reaction between pollen and raw fruits/vegetables
+  - Anaphylaxis is medical emergency requiring immediate epinephrine
+  - Biphasic reactions can occur 4-12 hours after initial reaction
+  - Food allergy testing (skin prick, IgE) has high false positive rate - clinical correlation essential
+  - Negative testing does not completely rule out allergy if history suggestive
+differentials:
+  - IgE-mediated food allergy
+  - Food intolerance (lactose, fructose)
+  - Oral allergy syndrome
+  - Eosinophilic esophagitis
+  - Food protein-induced enterocolitis syndrome (FPIES)
+  - Celiac disease
+  - Irritable bowel syndrome
+trace:
+  - 5-year-old develops urticaria, vomiting, and wheezing 30 minutes after eating peanut butter. Treated with epinephrine and antihistamines in ED, symptoms resolve. Follow-up skin prick testing confirms peanut allergy. Prescribe two EpiPens. Provide food allergy action plan. Educate family on strict peanut avoidance and label reading. Refer to allergist for ongoing management.
+citations:
+  - NIAID Guidelines for Food Allergy
+  - American Academy of Allergy, Asthma and Immunology
+  - UpToDate - Allergy and Immunology
