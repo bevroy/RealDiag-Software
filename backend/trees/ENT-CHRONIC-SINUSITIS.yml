@@ -1,69 +1,90 @@
 tree_id: ENT-CHRONIC-SINUSITIS
 name: Chronic Sinusitis
 family: ent
-specialty: Ent
-icd10:
-- J32.9
-snomed:
-- 40055000
-urgency: medium
-description: Comprehensive evaluation and management of Chronic Sinusitis
-version: '1.0'
-citations:
-  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
-  - British Society of Otology Guidelines
-  - UpToDate - Otolaryngology
-author: RealDiag Clinical Team
-homeopathy: []
+specialty: Otolaryngology
+icd10_code: J32.9
+
 presentations:
-- Symptoms lasting > 12 weeks
-- Nasal congestion, obstruction
-- Facial pressure or fullness
-- Postnasal drip
-- Decreased sense of smell
-- May have nasal polyps
-- Recurrent acute exacerbations
+  - Nasal congestion or obstruction (>12 weeks)
+  - Purulent nasal drainage (anterior or posterior)
+  - Facial pain or pressure
+  - Hyposmia or anosmia (reduced sense of smell)
+  - Postnasal drip
+  - Chronic cough (especially nocturnal)
+  - Halitosis
+  - Fatigue
+  - Dental pain (maxillary sinusitis)
+  - Recurrent acute sinusitis episodes
+
 workup:
-- CT sinus without contrast (REQUIRED for diagnosis) - shows mucosal thickening, opacification,
-  polyps
-- Nasal endoscopy by ENT - visualize polyps, purulent discharge, anatomic obstruction
-- Allergy testing if suspected allergic component (IgE, skin testing)
-- Sweat chloride or genetic testing if concern for cystic fibrosis (children/young
-  adults with polyps)
+  - History:
+    - Duration and chronicity of symptoms (>12 weeks diagnostic)
+    - Prior treatments and response
+    - History of allergies or asthma
+    - Prior sinus surgery
+    - Immunodeficiency or immunosuppression
+    - Occupational or environmental exposures
+    - Tobacco use
+    - Recent dental procedures or dental disease
+  - Physical exam:
+    - Anterior rhinoscopy (purulent drainage, mucosal edema, polyps)
+    - Transillumination of sinuses (limited sensitivity)
+    - Nasal endoscopy (purulence from middle meatus, polyps, anatomic obstruction)
+    - Examine for nasal septal deviation
+    - Palpation and percussion over sinuses
+    - Dentition examination
+  - Diagnostic studies:
+    - CT sinus (non-contrast) - gold standard imaging
+    - Allergy testing (skin prick or IgE) if allergic component suspected
+    - Nasal endoscopy in ENT clinic
+    - Consider sweat chloride test or genetic testing if cystic fibrosis suspected
+    - Immunoglobulin levels if recurrent or refractory
+    - Aspergillus IgE if allergic fungal sinusitis suspected
+    - Nasal culture (limited utility unless post-operative or recurrent)
+
 treatment:
-- 'Guideline-based treatment options for Chronic Sinusitis include:'
-- Saline nasal irrigation (neti pot or squeeze bottle) BID - most effective medical
-  therapy (AAO-HNS 2023)
-- 'Intranasal corticosteroids: Fluticasone 2 sprays each nostril daily × 3-6 months
-  (first-line) (AAO-HNS 2023)'
-- 'Trial of prolonged antibiotics: Amoxicillin-clavulanate or doxycycline × 3 weeks
-  (culture-directed if available) (AAO-HNS 2023)'
-- 'Oral corticosteroids: Prednisone 40-60mg daily × 5-7 days for acute exacerbations
-  or nasal polyps (AAO-HNS 2023)'
-- 'If refractory: FESS (functional endoscopic sinus surgery) to restore drainage pathways
-  (AAO-HNS 2023)'
+  medical_management:
+    - Intranasal corticosteroids (first-line) - Fluticasone 2 sprays each nostril daily or mometasone 2 sprays each nostril daily
+    - Saline nasal irrigation BID-TID (high-volume, isotonic or hypertonic)
+    - Systemic corticosteroids for severe exacerbations - Prednisone 20-40mg daily x 5-7 days
+    - Prolonged antibiotic course (3-4 weeks) if bacterial superinfection suspected - Amoxicillin-clavulanate 875mg PO BID or doxycycline 100mg PO BID
+    - Macrolide antibiotics for anti-inflammatory effect - Azithromycin 250mg PO 3x/week x 12 weeks
+    - Oral antihistamines if allergic component (cetirizine, loratadine)
+    - Leukotriene antagonist (montelukast 10mg daily) if asthma or aspirin sensitivity
+    - Decongestants (pseudoephedrine) - use with caution, avoid prolonged use
+  allergy_management:
+    - Environmental allergen avoidance
+    - Allergy testing and immunotherapy if appropriate
+  surgical_management:
+    - Functional endoscopic sinus surgery (FESS) if refractory to medical therapy
+    - Indications - Failed medical management (>12 weeks optimal therapy), anatomic obstruction, nasal polyps, recurrent acute sinusitis
+    - Balloon sinuplasty (less invasive option for select patients)
+  special_considerations:
+    - Allergic fungal sinusitis - requires surgery plus oral corticosteroids
+    - Aspirin-exacerbated respiratory disease (Samter triad) - aspirin desensitization may help
+    - Cystic fibrosis - aggressive medical therapy, consider dornase alfa nasal irrigation
+
 clinical_pearls:
-- Inflammation of sinuses >12 weeks (vs acute <4 weeks, subacute 4-12 weeks)
-- 'Pathophysiology: Ostiomeatal complex obstruction → impaired drainage → chronic
-  inflammation'
-- 'With nasal polyps: Suspect aspirin-exacerbated respiratory disease (Samter''s triad:
-  polyps, asthma, aspirin sensitivity)'
-- 'Fungal sinusitis: Allergic fungal sinusitis (thick mucin, eosinophils) vs invasive
-  (immunocompromised, life-threatening)'
-- Medical therapy fails in 20-30% - functional endoscopic sinus surgery (FESS) improves
-  drainage
-referrals:
-- ENT for all chronic sinusitis - nasal endoscopy and FESS evaluation
-- Allergy/Immunology if refractory or allergic fungal sinusitis
-- Immunology workup if recurrent infections (consider immunodeficiency)
-differentials:
-  - Allergic rhinitis
-  - Nasal polyps
-  - Deviated septum
-  - Migraine
-  - Dental infection
+  - Chronic rhinosinusitis requires symptoms >12 weeks plus objective findings (CT or endoscopy)
+  - Most common organisms are polymicrobial (Staph aureus, coagulase-negative Staph, anaerobes)
+  - Nasal saline irrigation is as effective as antibiotics for symptom relief
+  - Intranasal corticosteroids are the cornerstone of medical therapy
+  - Acute bacterial exacerbations may require antibiotics, but prolonged courses (3-4 weeks) needed
+  - CT scan should be obtained after maximal medical therapy to guide surgical planning
+  - Nasal polyps are common in chronic sinusitis and suggest need for surgery
+  - Unilateral symptoms or findings warrant evaluation for tumor
+  - Consider cystic fibrosis in children with chronic sinusitis and nasal polyps
+  - Allergic fungal sinusitis presents with thick, eosinophilic mucin and requires surgery
+  - Samter triad (asthma, aspirin sensitivity, nasal polyps) has high recurrence after surgery
+  - Dental disease can cause maxillary sinusitis (odontogenic sinusitis)
+
 trace:
-  source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
-    Practice Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+  - Diagnostic criteria for chronic rhinosinusitis
+  - Medical management algorithm
+  - Indications for functional endoscopic sinus surgery
+  - Management of allergic fungal sinusitis
+
+citations:
+  - Rosenfeld RM, et al. (2015). Clinical Practice Guideline (Update): Adult Sinusitis. Otolaryngol Head Neck Surg, 152(2 Suppl), S1-S39.
+  - Orlandi RR, et al. (2016). International Consensus Statement on Allergy and Rhinology: Rhinosinusitis. Int Forum Allergy Rhinol, 6 Suppl 1, S22-209.
+  - Fokkens WJ, et al. (2020). European Position Paper on Rhinosinusitis and Nasal Polyps 2020. Rhinology, 58(Suppl S29), 1-464.

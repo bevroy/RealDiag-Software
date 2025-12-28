@@ -1,379 +1,97 @@
 tree_id: GI-DIARRHEA
 name: Diarrhea Evaluation
 family: gastroenterology
-specialty: Gastroenterology, Infectious Disease, Primary Care
-chief_complaint: Diarrhea
-description: Diagnostic decision tree for evaluating acute and chronic diarrhea
-version: "1.0"
-icd10: R19.7
-snomed: 62315008
-presentations:
-  - Frequent loose or watery stools
-  - Abdominal cramping
-  - Urgency, fecal incontinence
-  - Nausea, vomiting
-  - Fever, bloody stools (inflammatory)
-  - Dehydration signs
-differentials:
-  - Gastroenteritis
-  - IBD
-  - IBS-D
-  - Celiac disease
-  - Medication effect
-  - Overflow diarrhea
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
-author: RealDiag Team
-entry_point: duration
+specialty: Gastroenterology
+icd10_code: K59.1
 
-referrals:
-  emergency:
-    - GI bleeding with instability
-    - Acute liver failure
-    - Perforated viscus
-    - Cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting
-  routine:
-    - IBS management
-    - GERD treatment
-    - Screening colonoscopy
+presentations:
+  - Increased stool frequency (>3 per day)
+  - Loose or watery stools
+  - Urgency or fecal incontinence
+  - Abdominal cramping or pain
+  - Bloating and gas
+  - Blood or mucus in stool
+  - Fever (if infectious)
+  - Recent travel or sick contacts
+  - Recent antibiotic use
+
+workup:
+  - History:
+    - Duration (acute <2 weeks, persistent 2-4 weeks, chronic >4 weeks)
+    - Stool characteristics (watery, bloody, mucoid, fatty)
+    - Associated symptoms (fever, weight loss, abdominal pain)
+    - Recent travel, camping, or well water exposure
+    - Food exposures (undercooked meat, unpasteurized dairy, seafood)
+    - Sick contacts or daycare exposure
+    - Recent antibiotic use (C. difficile risk)
+    - Medications (laxatives, antacids, metformin, SSRIs)
+    - Medical history (IBD, IBS, celiac disease, immunosuppression)
+  - Physical exam:
+    - Vital signs (fever, tachycardia, orthostatic hypotension)
+    - Volume status (skin turgor, mucous membranes, capillary refill)
+    - Abdominal exam (tenderness, distension, bowel sounds)
+    - Rectal exam (fissures, hemorrhoids, stool occult blood)
+  - Laboratory studies:
+    - Stool culture (if bloody diarrhea, fever, severe illness, or travel)
+    - Stool ova and parasites (if travel to endemic area, >7 days duration)
+    - C. difficile toxin assay (if recent antibiotic use or hospitalization)
+    - Fecal leukocytes or lactoferrin (inflammatory vs non-inflammatory)
+    - Stool for Giardia and Cryptosporidium antigen
+    - CBC (anemia, leukocytosis)
+    - BMP (electrolytes, kidney function if dehydration)
+    - Celiac serology (if chronic diarrhea)
+  - Imaging:
+    - Abdominal CT if concern for complications (toxic megacolon, perforation, abscess)
+
+treatment:
+  acute_watery_diarrhea:
+    - Oral rehydration therapy (ORS) or IV fluids if severe dehydration
+    - Electrolyte replacement
+    - Avoid antidiarrheals if bloody diarrhea or high fever
+    - Loperamide 4mg initially, then 2mg after each loose stool (max 16mg/day) if non-inflammatory
+    - Bismuth subsalicylate 524mg PO q30min to 1 hour PRN (max 8 doses/day)
+    - Supportive care, clear liquid diet advancing as tolerated
+  infectious_diarrhea:
+    - Most viral and bacterial gastroenteritis is self-limited
+    - Antibiotics if severe, immunocompromised, or specific pathogens (Shigella, Campylobacter)
+    - Ciprofloxacin 500mg PO BID x 3-5 days or azithromycin 500mg PO daily x 3 days
+    - Avoid antibiotics for E. coli O157:H7 (increases HUS risk)
+  c_difficile_infection:
+    - Discontinue offending antibiotic if possible
+    - Vancomycin 125mg PO QID x 10 days (first-line)
+    - Fidaxomicin 200mg PO BID x 10 days (alternative, lower recurrence)
+    - Avoid antidiarrheals
+    - Infection control precautions
+  giardiasis:
+    - Metronidazole 250mg PO TID x 5-7 days
+    - Tinidazole 2g PO x 1 dose (alternative)
+  travelers_diarrhea:
+    - Fluoroquinolone or azithromycin
+    - Rifaximin 200mg PO TID x 3 days for non-invasive
+  chronic_diarrhea:
+    - Treat underlying cause (IBD, celiac, IBS, malabsorption)
+    - Consider empiric trial of cholestyramine if bile acid diarrhea suspected
+    - GI referral for colonoscopy if alarm features
 
 clinical_pearls:
-  - Acute (<2 weeks) usually infectious; chronic (>4 weeks) needs workup
-  - Avoid antidiarrheals in bloody diarrhea (may worsen infection)
-  - Dehydration assessment: vital signs, mucous membranes, urine output
-  - Recent antibiotics: think C. difficile
+  - Acute diarrhea (<2 weeks) is usually infectious and self-limited
+  - Bloody diarrhea suggests invasive bacterial infection, IBD, or ischemic colitis
+  - Watery diarrhea without fever suggests viral, toxin-mediated, or non-inflammatory cause
+  - C. difficile should be suspected with recent antibiotics or healthcare exposure
+  - Chronic diarrhea (>4 weeks) requires evaluation for IBD, celiac, malabsorption, IBS
+  - Red flags include blood, weight loss, nocturnal symptoms, fever, age >50 with new onset
+  - Stool studies have low yield in immunocompetent patients with non-bloody diarrhea <7 days
+  - Avoid loperamide if bloody diarrhea or suspected C. difficile (risk of toxic megacolon)
+  - Most cases of traveler's diarrhea are due to enterotoxigenic E. coli (ETEC)
+  - Cryptosporidium and Giardia cause persistent diarrhea in immunocompromised patients
 
-nodes:
-  - id: duration
-    type: question
-    text: "Duration of diarrhea?"
-    options:
-      - label: "< 2 weeks (Acute)"
-        next: acute_features
-      - label: "2-4 weeks (Persistent)"
-        next: persistent_eval
-      - label: "> 4 weeks (Chronic)"
-        next: chronic_features
+trace:
+  - Diagnostic approach to acute and chronic diarrhea
+  - Indications for stool studies and imaging
+  - Antibiotic selection for infectious diarrhea
+  - Management of C. difficile infection
 
-  - id: acute_features
-    type: question
-    text: "Associated symptoms?"
-    options:
-      - label: "Bloody diarrhea, fever"
-        next: invasive_diarrhea
-      - label: "Watery diarrhea, vomiting, no fever"
-        next: noninvasive_diarrhea
-      - label: "Recent antibiotics"
-        next: cdiff_concern
-      - label: "Travel history"
-        next: travelers_diarrhea
-
-  - id: invasive_diarrhea
-    type: question
-    text: "Risk factors and severity?"
-    options:
-      - label: "Recent camping, untreated water"
-        next: giardia_concern
-      - label: "Undercooked poultry"
-        next: campylobacter
-      - label: "Severe abdominal pain, toxic appearance"
-        next: severe_colitis
-      - label: "Outbreak setting"
-        next: shigella_ecoli
-
-  - id: giardia_concern
-    type: diagnosis
-    diagnosis: Giardiasis
-    icd10: A07.1
-    urgency: medium
-    workup:
-      - Stool O&P (3 specimens)
-      - Giardia antigen test
-    treatment:
-      - Metronidazole 250mg TID x 5-7 days
-      - Tinidazole 2g single dose (alternative)
-      - Hydration
-
-  - id: campylobacter
-    type: diagnosis
-    diagnosis: Campylobacter Enteritis
-    icd10: A04.5
-    urgency: medium
-    workup:
-      - Stool culture
-      - CBC if severe
-    treatment:
-      - Usually self-limited
-      - Azithromycin 500mg x 3 days if severe
-      - Hydration
-      - Avoid antimotility agents
-
-  - id: severe_colitis
-    type: diagnosis
-    diagnosis: Severe Infectious Colitis
-    icd10: A09
-    urgency: high
-    workup:
-      - Stool culture, O&P, C. diff
-      - CBC, BMP, lactate
-      - CT abdomen if toxic megacolon suspected
-    treatment:
-      - IV fluids
-      - Empiric antibiotics (fluoroquinolone)
-      - Consider hospitalization
-      - Monitor for complications
-
-  - id: shigella_ecoli
-    type: diagnosis
-    diagnosis: Shigella/E. coli Enteritis
-    icd10: A03.9
-    urgency: medium
-    workup:
-      - Stool culture
-      - CBC
-      - Consider HUS in children (Shiga toxin)
-    treatment:
-      - Azithromycin or fluoroquinolone
-      - Hydration
-      - Avoid antimotility agents
-      - Monitor for HUS
-
-  - id: noninvasive_diarrhea
-    type: diagnosis
-    diagnosis: Viral Gastroenteritis
-    icd10: A08.4
-    urgency: low
-    workup:
-      - Clinical diagnosis
-      - BMP if dehydration
-    treatment:
-      - Oral rehydration (ORS)
-      - Probiotics
-      - Bland diet when tolerating
-      - Loperamide prn (if no fever/blood)
-
-  - id: cdiff_concern
-    type: diagnosis
-    diagnosis: Clostridioides difficile Infection
-    icd10: A04.7
-    urgency: high
-    workup:
-      - C. diff PCR or toxin assay
-      - CBC, BMP
-      - CT abdomen if severe
-    treatment:
-      - Stop offending antibiotic
-      - Vancomycin 125mg PO QID x 10 days
-      - Fidaxomicin (alternative)
-      - Consider fecal transplant if recurrent
-
-  - id: travelers_diarrhea
-    type: diagnosis
-    diagnosis: Travelers' Diarrhea
-    icd10: A09
-    urgency: low
-    workup:
-      - Usually clinical
-      - Stool culture if severe/persistent
-    treatment:
-      - Azithromycin 1000mg single dose
-      - Loperamide for symptomatic relief
-      - Hydration
-      - Probiotics
-
-  - id: persistent_eval
-    type: question
-    text: "Additional evaluation?"
-    options:
-      - label: "Recent antibiotics"
-        next: cdiff_concern
-      - label: "Immunocompromised"
-        next: opportunistic_infection
-      - label: "Otherwise healthy"
-        next: postinfectious_ibs
-
-  - id: opportunistic_infection
-    type: diagnosis
-    diagnosis: Opportunistic GI Infection
-    icd10: K52.9
-    urgency: high
-    workup:
-      - Stool culture, O&P, Cryptosporidium
-      - CMV testing if indicated
-      - Colonoscopy with biopsy
-    treatment:
-      - Treat specific organism
-      - Optimize immune function
-      - Supportive care
-      - ID consultation
-
-  - id: postinfectious_ibs
-    type: diagnosis
-    diagnosis: Post-Infectious IBS
-    icd10: K58.0
-    urgency: low
-    workup:
-      - Exclude persistent infection
-      - Consider colonoscopy if red flags
-    treatment:
-      - Dietary modifications (low FODMAP)
-      - Probiotics
-      - Loperamide prn
-      - Reassurance and follow-up
-
-  - id: chronic_features
-    type: question
-    text: "Stool characteristics?"
-    options:
-      - label: "Watery, large volume"
-        next: secretory_diarrhea
-      - label: "Fatty, foul-smelling (steatorrhea)"
-        next: malabsorption
-      - label: "Bloody, mucoid"
-        next: inflammatory_diarrhea
-      - label: "Small volume, urgency"
-        next: functional_diarrhea
-
-  - id: secretory_diarrhea
-    type: question
-    text: "Associated factors?"
-    options:
-      - label: "Flushing, wheezing"
-        next: carcinoid_syndrome
-      - label: "Episodic, stress-related"
-        next: ibs_diarrhea
-      - label: "Persistent despite fasting"
-        next: secretory_causes
-
-  - id: carcinoid_syndrome
-    type: diagnosis
-    diagnosis: Carcinoid Syndrome
-    icd10: E34.0
-    urgency: medium
-    workup:
-      - 24-hour urine 5-HIAA
-      - CT abdomen/pelvis
-      - Octreotide scan
-    treatment:
-      - Octreotide
-      - Surgical resection if localized
-      - Oncology referral
-
-  - id: ibs_diarrhea
-    type: diagnosis
-    diagnosis: IBS with Diarrhea
-    icd10: K58.0
-    urgency: low
-    workup:
-      - Clinical diagnosis (Rome criteria)
-      - Basic labs to exclude other causes
-    treatment:
-      - Dietary modifications (low FODMAP)
-      - Loperamide prn
-      - Rifaximin if indicated
-      - Eluxadoline or alosetron
-
-  - id: secretory_causes
-    type: diagnosis
-    diagnosis: Secretory Diarrhea
-    icd10: K59.1
-    urgency: medium
-    workup:
-      - Stool electrolytes
-      - Fasting stool output
-      - VIPoma workup if indicated
-      - Colonoscopy
-    treatment:
-      - Treat underlying cause
-      - Octreotide if secretory tumor
-      - Cholestyramine if bile acid diarrhea
-
-  - id: malabsorption
-    type: question
-    text: "Risk factors?"
-    options:
-      - label: "Alcohol use, chronic pancreatitis"
-        next: pancreatic_insufficiency
-      - label: "Prior intestinal surgery"
-        next: short_bowel_syndrome
-      - label: "Otherwise healthy"
-        next: celiac_disease
-
-  - id: pancreatic_insufficiency
-    type: diagnosis
-    diagnosis: Pancreatic Insufficiency
-    icd10: K86.81
-    urgency: medium
-    workup:
-      - Fecal elastase
-      - CT abdomen
-      - Consider ERCP
-    treatment:
-      - Pancreatic enzyme replacement (PERT)
-      - Fat-soluble vitamin supplementation
-      - Treat underlying cause
-
-  - id: short_bowel_syndrome
-    type: diagnosis
-    diagnosis: Short Bowel Syndrome
-    icd10: K91.2
-    urgency: medium
-    workup:
-      - Nutritional assessment
-      - Vitamin levels
-    treatment:
-      - Dietary modifications
-      - Antimotility agents
-      - Vitamin/mineral supplementation
-      - Consider TPN if severe
-
-  - id: celiac_disease
-    type: diagnosis
-    diagnosis: Celiac Disease
-    icd10: K90.0
-    urgency: low
-    workup:
-      - Tissue transglutaminase IgA
-      - Total IgA
-      - Upper endoscopy with duodenal biopsy
-    treatment:
-      - Strict gluten-free diet
-      - Nutritional supplementation
-      - Monitor response
-      - Dietitian referral
-
-  - id: inflammatory_diarrhea
-    type: diagnosis
-    diagnosis: Inflammatory Bowel Disease
-    icd10: K51.90
-    urgency: high
-    workup:
-      - CBC, CRP, ESR
-      - Fecal calprotectin
-      - Colonoscopy with biopsy
-      - Consider imaging
-    treatment:
-      - Refer to gastroenterology
-      - 5-ASA compounds
-      - Corticosteroids if active
-      - Consider biologics
-
-  - id: functional_diarrhea
-    type: diagnosis
-    diagnosis: Functional Diarrhea
-    icd10: K59.1
-    urgency: low
-    workup:
-      - Exclude organic causes
-      - Basic labs
-    treatment:
-      - Dietary fiber
-      - Loperamide prn
-      - Behavioral therapy
-      - Reassurance
+citations:
+  - Riddle MS, et al. (2017). ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol, 112(5), 726-738.
+  - Schiller LR, et al. (2017). Chronic diarrhea: diagnosis and management. Clin Gastroenterol Hepatol, 15(2), 182-193.
+  - McDonald LC, et al. (2018). Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by the IDSA and SHEA. Clin Infect Dis, 66(7), e1-e48.

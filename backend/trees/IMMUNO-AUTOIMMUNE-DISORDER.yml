@@ -1,89 +1,116 @@
 tree_id: IMMUNO-AUTOIMMUNE-DISORDER
 name: Autoimmune Disorder, Unspecified (Encounter)
 family: immunology
-specialty: Rheumatology, Immunology, Primary Care
-chief_complaint: Suspected autoimmune disease, positive autoantibodies
-description: |
-  Encounter for patient with suspected or documented autoimmune disease without specific diagnosis.
-  Autoimmune diseases result from immune system attacking body's own tissues.
-  Requires systematic evaluation to identify specific condition and guide treatment.
-icd10: M35.9
-snomed: "85828009"
+specialty: Immunology
+icd10_code: M35.9
+
 presentations:
-  - Fatigue (often profound)
-  - Arthralgia or myalgia
-  - Fever of unknown origin
-  - Rash (malar rash, photosensitivity, other patterns)
+  - Multisystem involvement (joints, skin, kidneys, lungs, heart)
+  - Fatigue and malaise
+  - Unexplained fever
+  - Inflammatory arthritis or arthralgias
+  - Skin rashes (malar rash, photosensitivity, livedo reticularis)
   - Raynaud phenomenon
+  - Oral or nasal ulcers
+  - Unexplained weight loss
   - Sicca symptoms (dry eyes, dry mouth)
-  - Serositis (pleurisy, pericarditis)
-  - Positive autoantibodies (ANA, RF, others)
-  - Multi-system involvement
-  - Symptoms wax and wane (flares and remissions)
-urgency: Medium
-referrals:
-  rheumatology:
-    - Suspected systemic autoimmune disease
-    - Positive ANA with symptoms
-    - Inflammatory arthritis
-    - Multi-system involvement
-  appropriate_specialist:
-    - Endocrinology for thyroid disease
-    - Gastroenterology for inflammatory bowel disease
-    - Neurology for neurologic autoimmune conditions
+  - Hair loss
+  - Muscle weakness or myalgias
+  - Peripheral neuropathy
+  - Recurrent miscarriages or thrombosis
+
 workup:
-  initial_screening:
-    - Antinuclear antibody (ANA) - sensitive screening test
-    - CBC with differential - check for cytopenias
-    - Comprehensive metabolic panel
-    - ESR and CRP - inflammatory markers
-    - Urinalysis - check for proteinuria, hematuria
-  specific_autoantibodies:
-    - Anti-dsDNA, anti-Smith - lupus specific
-    - Anti-Ro (SSA), anti-La (SSB) - Sjögren syndrome, lupus
-    - Anti-centromere - limited scleroderma
-    - Anti-Scl-70 - diffuse scleroderma
-    - Anti-Jo-1 - polymyositis
-    - Rheumatoid factor (RF), anti-CCP - rheumatoid arthritis
-    - Thyroid antibodies - Hashimoto thyroiditis, Graves disease
-  organ_specific_evaluation:
-    - Imaging as indicated by symptoms
-    - Biopsy if specific organ involvement (skin, kidney, muscle)
+  - History:
+    - Onset and duration of symptoms
+    - Pattern of organ involvement
+    - Family history of autoimmune disease
+    - Medication history (drug-induced lupus)
+    - Environmental exposures
+    - Smoking history
+    - Response to previous treatments
+  - Physical exam:
+    - Skin examination (rashes, photosensitivity, vasculitis, alopecia)
+    - Joint examination (synovitis, deformities)
+    - Muscle strength testing
+    - Cardiovascular exam (pericardial rub, murmurs)
+    - Pulmonary exam (crackles suggesting ILD)
+    - Neurologic exam (peripheral neuropathy, cranial nerves)
+    - Lymphadenopathy or hepatosplenomegaly
+  - Laboratory studies:
+    - Complete blood count with differential (cytopenias)
+    - Comprehensive metabolic panel (kidney function, liver enzymes)
+    - Urinalysis (proteinuria, hematuria, cellular casts)
+    - Inflammatory markers (ESR, CRP)
+    - Antinuclear antibody (ANA) with reflex to specific antibodies
+    - Rheumatoid factor (RF) and anti-CCP
+    - Complement levels (C3, C4, CH50) - low in active SLE
+    - Anti-dsDNA (specific for SLE)
+    - Anti-Smith (highly specific for SLE)
+    - Anti-Ro/SSA and Anti-La/SSB (Sjogren, neonatal lupus)
+    - Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein)
+    - ANCA (vasculitis)
+    - Thyroid function tests and thyroid antibodies
+    - Creatine kinase (if myositis suspected)
+  - Imaging and procedures:
+    - Chest X-ray (ILD, pleural effusions, cardiomegaly)
+    - Echocardiogram if cardiac involvement suspected
+    - CT chest if ILD suspected
+    - MRI for CNS involvement
+    - Joint X-rays or ultrasound
+    - Tissue biopsy (skin, kidney, muscle) for definitive diagnosis
+
 treatment:
-  depends_on_specific_diagnosis:
-    mild_disease:
-      - NSAIDs for inflammatory symptoms
-      - Hydroxychloroquine for skin and joint manifestations
-    moderate_severe_disease:
-      - Corticosteroids (prednisone) - for active inflammation
-      - Steroid-sparing agents - methotrexate, azathioprine, mycophenolate
-      - Biologics - for specific conditions (anti-TNF, rituximab, belimumab)
   general_management:
-    - Sun protection (if photosensitive)
-    - Regular monitoring of disease activity and medication side effects
-    - Vaccination (influenza, pneumococcal) - before starting immunosuppression
-    - Bone protection if on chronic steroids (calcium, vitamin D, bisphosphonates)
+    - Identify and treat specific autoimmune condition when possible
+    - Avoid triggers (UV exposure in SLE, smoking)
+    - NSAIDs for mild arthritis and pain
+    - Hydroxychloroquine 200-400mg daily (SLE, inflammatory arthritis)
+    - Corticosteroids for moderate to severe disease
+    - Low dose (prednisone 5-10mg daily) for maintenance
+    - Moderate to high dose (prednisone 20-60mg daily) for flares
+    - Steroid-sparing immunosuppressants
+  immunosuppressive_therapy:
+    - Methotrexate 10-25mg weekly (RA, inflammatory arthritis)
+    - Azathioprine 1-2.5 mg/kg/day (lupus, vasculitis)
+    - Mycophenolate mofetil 1000-1500mg BID (lupus nephritis)
+    - Cyclophosphamide (severe organ-threatening disease)
+    - Rituximab (B-cell depletion for refractory disease)
+  biologic_therapy:
+    - TNF inhibitors (infliximab, adalimumab, etanercept) for RA, SpA
+    - Belimumab (anti-BLyS) for SLE
+    - Abatacept (T-cell costimulation blocker) for RA
+    - IL-6 inhibitors (tocilizumab, sarilumab) for RA, GCA
+  supportive_care:
+    - Calcium and vitamin D supplementation
+    - Bone density monitoring (DEXA scan)
+    - Cardiovascular risk reduction
+    - Vaccination (pneumococcal, influenza, hepatitis B before immunosuppression)
+    - Avoid live vaccines on immunosuppression
+    - Ophthalmology monitoring if on hydroxychloroquine
+    - Pregnancy planning and contraception counseling
+    - Mental health support
+
 clinical_pearls:
-  - Positive ANA is sensitive but not specific (10-15% of healthy people have low-titer ANA)
-  - ANA titer and pattern help guide further testing
-  - Diagnosis requires correlation of clinical features with laboratory findings
-  - Many autoimmune diseases overlap (mixed connective tissue disease)
-  - Women affected more than men (90% of lupus patients are women)
-  - Autoimmune diseases often run in families
-  - One autoimmune disease increases risk for others
-differentials:
-  - Systemic lupus erythematosus (SLE)
-  - Rheumatoid arthritis
-  - Sjögren syndrome
-  - Scleroderma (systemic sclerosis)
-  - Mixed connective tissue disease
-  - Polymyositis or dermatomyositis
-  - Vasculitis
-  - Autoimmune thyroid disease
-  - Antiphospholipid syndrome
-  - Undifferentiated connective tissue disease
+  - Positive ANA is sensitive but not specific (can be positive in 5-10% of healthy individuals)
+  - Pattern and titer of ANA guide further testing (homogeneous suggests anti-dsDNA, speckled suggests anti-Sm, anti-Ro/La)
+  - Low complement (C3, C4) with positive anti-dsDNA suggests active lupus nephritis
+  - Autoimmune disorders often overlap or evolve over time (undifferentiated connective tissue disease)
+  - Women are disproportionately affected by autoimmune diseases (9:1 ratio in SLE)
+  - Drug-induced lupus (hydralazine, procainamide, anti-TNF) typically has anti-histone antibodies
+  - Antiphospholipid syndrome requires positive antibodies on two occasions 12+ weeks apart
+  - Hydroxychloroquine has immunomodulatory effects and reduces flares in SLE
+  - Raynaud phenomenon occurs in many autoimmune conditions (scleroderma, SLE, Sjogren)
+  - Screen for malignancy in new-onset autoimmune disease in older adults (paraneoplastic)
+  - Monitor for infection on immunosuppression (TB screening, opportunistic infection prophylaxis)
+  - Autoimmune diseases increase cardiovascular risk independent of traditional risk factors
+
 trace:
-  - 35-year-old woman with 6-month history of fatigue, joint pain, and photosensitive rash. ANA positive 1:320 speckled pattern. Anti-Ro positive. CBC shows mild leukopenia. Urinalysis shows trace proteinuria. Refer to rheumatology. Diagnosed with systemic lupus erythematosus. Started hydroxychloroquine and low-dose prednisone. Symptoms improve significantly.
+  - Diagnostic approach to suspected autoimmune disease
+  - Interpretation of autoantibody panels
+  - Immunosuppressive therapy selection and monitoring
+  - Management of autoimmune disease flares
+
 citations:
-  - American College of Rheumatology Guidelines
-  - UpToDate - Rheumatology and Immunology
+  - Aringer M, et al. (2019). 2019 EULAR/ACR Classification Criteria for Systemic Lupus Erythematosus. Arthritis Rheumatol, 71(9), 1400-1412.
+  - Smolen JS, et al. (2020). Rheumatoid arthritis. Lancet, 388(10055), 2023-2038.
+  - Agmon-Levin N, et al. (2014). International recommendations for the assessment of autoantibodies to cellular antigens referred to as anti-nuclear antibodies. Ann Rheum Dis, 73(1), 17-23.
