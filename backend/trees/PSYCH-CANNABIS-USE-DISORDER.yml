@@ -1,0 +1,134 @@
+tree_id: PSYCH-CANNABIS-USE-DISORDER
+name: Cannabis Use Disorder
+family: psychiatry
+specialty: Psychiatry / Addiction Medicine
+presentations:
+  - Persistent desire or unsuccessful efforts to cut down cannabis use
+  - Cannabis taken in larger amounts or over longer period than intended
+  - Craving or strong urge to use cannabis
+  - Recurrent use resulting in failure to fulfill obligations (work, school, home)
+  - Continued use despite social or interpersonal problems
+  - Important activities given up or reduced because of cannabis use
+  - Recurrent use in physically hazardous situations
+  - Tolerance (need more to achieve effect or diminished effect with same amount)
+  - Withdrawal symptoms when stopping (irritability, anxiety, insomnia, appetite changes)
+icd10:
+  - F12.10 # Cannabis abuse, uncomplicated
+  - F12.20 # Cannabis dependence, uncomplicated
+  - F12.21 # Cannabis dependence, in remission
+  - F12.23 # Cannabis dependence with withdrawal
+snomed:
+  - "191910008" # Cannabis dependence
+  - "361055000" # Cannabis abuse
+urgency: Low
+urgency_explanation: Chronic condition requiring treatment; urgent if severe withdrawal, psychosis, or suicidal ideation
+
+referrals:
+  addiction_medicine: For comprehensive substance use disorder treatment
+  psychiatry: For co-occurring psychiatric disorders (anxiety, depression, psychosis)
+  outpatient_treatment: IOP or PHP programs for structured support
+
+workup:
+  screening_and_diagnosis:
+    - DSM-5 criteria - at least 2 of 11 criteria in 12-month period
+    - Mild (2-3 criteria), Moderate (4-5 criteria), Severe (6 or more criteria)
+    - AUDIT-C or CAGE-AID screening tools
+    - Urine drug screen: THC-COOH (positive up to 30 days in chronic users)
+  assessment:
+    - Pattern and frequency of use
+    - Age of first use and duration of use
+    - Method of use (smoking, edibles, vaping, concentrates)
+    - Motivation for use (recreation, self-medication, peer pressure)
+    - Previous quit attempts and barriers
+    - Functional impairment (occupational, academic, social)
+    - Co-occurring substance use (alcohol, nicotine, other drugs)
+    - Co-occurring mental health disorders (depression, anxiety, PTSD, psychosis)
+    - Family history of substance use disorders
+  laboratory:
+    - Urine drug screen (UDS) for cannabis and other substances
+    - Consider: hepatitis C, HIV (if IV drug use history)
+    - Mental health screening (PHQ-9, GAD-7)
+
+treatment:
+  psychosocial_interventions:
+    first_line:
+      - Cognitive behavioral therapy (CBT): most evidence-based
+      - Motivational enhancement therapy (MET): addresses ambivalence
+      - Contingency management: rewards for abstinence
+      - Combination approaches often most effective
+    adjunctive:
+      - Individual counseling
+      - Group therapy
+      - Family therapy (especially adolescents)
+      - 12-step programs (Marijuana Anonymous)
+      - Peer support groups
+  pharmacotherapy:
+    no_fda_approved_medications:
+      - N-acetylcysteine (NAC) 1200mg BID: emerging evidence, especially in adolescents
+      - Gabapentin: may reduce withdrawal symptoms
+      - Synthetic THC (dronabinol): may help severe withdrawal, but limited use
+    treat_co_occurring_disorders:
+      - SSRIs/SNRIs for depression/anxiety
+      - Mood stabilizers for bipolar disorder
+      - Antipsychotics if cannabis-induced psychosis
+      - Bupropion for nicotine co-dependence
+  cannabis_withdrawal_management:
+    symptoms:
+      - Irritability, anger, aggression
+      - Nervousness, anxiety
+      - Sleep difficulty (insomnia, vivid dreams)
+      - Decreased appetite, weight loss
+      - Restlessness
+      - Depressed mood
+      - Physical symptoms: abdominal pain, shakiness, sweating, fever, chills, headache
+    timeline:
+      - Onset: 1-3 days after cessation
+      - Peak: 2-6 days
+      - Duration: 1-2 weeks (up to 4 weeks in heavy users)
+    management:
+      - Supportive care
+      - Sleep hygiene, exercise, healthy diet
+      - Consider short-term sleep aids (trazodone, melatonin)
+      - Anxiolytics (buspirone) if severe anxiety
+      - Avoid benzodiazepines (addiction potential)
+  relapse_prevention:
+    - Identify triggers and high-risk situations
+    - Develop coping strategies
+    - Build sober social network
+    - Address underlying mental health issues
+    - Regular follow-up and monitoring (UDS)
+    - Continued therapy/support groups
+
+clinical_pearls:
+  - Cannabis use disorder affects ~9% of users (increases to 17% if start in adolescence)
+  - Most common illicit substance use disorder in US
+  - Legalization has led to increased potency (THC content now 15-30% vs 3-5% in 1990s)
+  - High-potency cannabis (concentrates, dabs) associated with increased risk of psychosis and dependence
+  - Adolescent use associated with cognitive impairment, decreased educational attainment
+  - Cannabis use disorder often co-occurs with depression, anxiety, PTSD
+  - Withdrawal is real but less severe than alcohol or opioid withdrawal
+  - Pregnant women: advise against use (risk to fetal development)
+  - "Amotivational syndrome": decreased motivation, apathy with chronic heavy use
+
+differentials:
+  - Other substance use disorders (alcohol, opioids, stimulants)
+  - Primary psychiatric disorders (depression, anxiety, schizophrenia)
+  - ADHD (self-medication with cannabis)
+  - Chronic pain syndromes (cannabis used for pain relief)
+
+trace:
+  - Screen for cannabis use in routine care
+  - If positive screen, assess for use disorder using DSM-5 criteria
+  - Evaluate severity (mild, moderate, severe)
+  - Assess motivation to change (motivational interviewing)
+  - Treat co-occurring psychiatric disorders
+  - Initiate evidence-based therapy (CBT, MET, contingency management)
+  - Consider pharmacotherapy for co-occurring conditions or severe withdrawal
+  - Regular follow-up with UDS and relapse prevention
+
+citations:
+  - "SAMHSA Treatment Improvement Protocol (TIP) 35: Counseling for Substance Abuse"
+  - "American Psychiatric Association: DSM-5 Cannabis Use Disorder"
+  - "NIDA: Marijuana Research Report - Treatment"
+  - "UpToDate: Cannabis use and cannabis use disorder"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"
