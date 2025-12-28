@@ -1,0 +1,73 @@
+tree_id: PREV-CANCER-SCREENING
+name: Cancer Screening Encounter (Colon/Breast/Cervical)
+family: preventive
+specialty: Primary Care, Family Medicine
+chief_complaint: Cancer screening
+description: |
+  Comprehensive cancer screening encounter for common cancers.
+  Focuses on colon, breast, and cervical cancer screening per evidence-based guidelines.
+icd10: Z12.11
+snomed: "171149006"
+presentations:
+  - Routine cancer screening
+  - Age-appropriate screening due
+urgency: Low
+workup:
+  colorectal_cancer_screening:
+    recommendations:
+      - Age 45-75 - routine screening recommended
+      - Age 76-85 - individualized decision
+      - Earlier if family history or high-risk conditions
+    screening_options:
+      - Colonoscopy every 10 years (preferred)
+      - FIT (fecal immunochemical test) annually
+      - Stool DNA (Cologuard) every 3 years
+      - CT colonography every 5 years
+      - Flexible sigmoidoscopy every 5-10 years
+  breast_cancer_screening:
+    recommendations:
+      - Age 40-49 - shared decision making (biennial or annual)
+      - Age 50-74 - biennial mammography
+      - Age 75+ - individualized decision
+      - Earlier if high risk (BRCA, family history, prior chest radiation)
+    screening_test:
+      - Mammography
+      - Consider breast MRI if very high risk
+  cervical_cancer_screening:
+    recommendations:
+      - Age 21-29 - Pap smear every 3 years
+      - Age 30-65 - Pap + HPV co-testing every 5 years (preferred) OR Pap alone every 3 years
+      - Age 65+ - stop if adequate prior screening and not high risk
+      - Post-hysterectomy with cervix removal - stop screening
+    screening_tests:
+      - Pap smear (cytology)
+      - HPV testing (high-risk types)
+treatment:
+  abnormal_colorectal_screening:
+    - Positive FIT or stool DNA - colonoscopy
+    - Polyps found - surveillance colonoscopy per guidelines
+    - Cancer diagnosed - surgical referral
+  abnormal_mammogram:
+    - BI-RADS 0 - additional imaging needed
+    - BI-RADS 3 - probably benign, short-interval follow-up
+    - BI-RADS 4-5 - suspicious, biopsy indicated
+  abnormal_pap_smear:
+    - ASCUS HPV positive or LSIL - colposcopy
+    - HSIL or ASC-H - colposcopy
+    - AGC - colposcopy and endocervical curettage
+clinical_pearls:
+  - Colonoscopy is gold standard and most effective colorectal screening
+  - Screening reduces colorectal cancer mortality by 70%
+  - Breast cancer screening most beneficial ages 50-69
+  - Cervical cancer screening prevents invasive cancer
+  - HPV vaccination (up to age 26) primary prevention for cervical cancer
+  - Stop cervical screening age 65 if adequate prior screening
+differentials:
+  - Normal screening - continue routine screening
+  - Abnormal screening - further evaluation indicated
+  - High-risk patient - intensified screening protocol
+trace:
+  - 52-year-old woman presents for cancer screening. Last colonoscopy age 42 (normal), last mammogram 2 years ago (normal), last Pap 4 years ago (normal). Order colonoscopy (overdue). Schedule mammogram. Perform Pap + HPV co-test today. All results normal. Continue routine screening per guidelines.
+citations:
+  - USPSTF Cancer Screening Recommendations
+  - American Cancer Society Guidelines

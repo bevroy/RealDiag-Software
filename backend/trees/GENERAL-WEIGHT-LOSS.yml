@@ -1,0 +1,89 @@
+tree_id: GENERAL-WEIGHT-LOSS
+name: Unintentional Weight Loss (Encounter)
+family: general
+specialty: Primary Care, Internal Medicine
+chief_complaint: Unintentional weight loss
+description: |
+  Unintentional weight loss (>5% body weight over 6-12 months) requires evaluation for underlying cause.
+  Differential is broad - malignancy, GI disorders, endocrine, psychiatric, medication side effects.
+icd10: R63.4
+snomed: "448765001"
+presentations:
+  - Weight loss without trying to lose weight
+  - Clothes fitting more loosely
+  - Decreased appetite or normal appetite with weight loss
+  - Fatigue, weakness
+  - May have symptoms of underlying condition
+urgency: Medium
+referrals:
+  oncology:
+    - Suspected malignancy
+  gastroenterology:
+    - Suspected malabsorption, celiac disease, IBD
+  endocrinology:
+    - Suspected hyperthyroidism, diabetes, adrenal insufficiency
+workup:
+  history:
+    - Quantify weight loss (amount and timeframe)
+    - Diet and appetite changes
+    - GI symptoms (diarrhea, nausea, dysphagia, abdominal pain)
+    - Fever, night sweats
+    - Depression, anxiety
+    - Substance use
+    - Medications
+  physical_exam:
+    - Vital signs including orthostatics
+    - General appearance, muscle wasting
+    - Thyroid exam
+    - Lymphadenopathy
+    - Abdominal exam (masses, organomegaly)
+    - Skin exam
+  initial_laboratory_workup:
+    - CBC
+    - Comprehensive metabolic panel
+    - TSH
+    - Urinalysis
+    - Fecal occult blood
+    - HIV testing (if risk factors)
+  additional_testing_based_on_clinical_suspicion:
+    - Hemoglobin A1c (diabetes)
+    - Celiac panel (anti-TTG IgA)
+    - Inflammatory markers (ESR, CRP)
+    - Chest X-ray
+    - CT chest/abdomen/pelvis (if concern for malignancy)
+    - Upper endoscopy or colonoscopy
+treatment:
+  treat_underlying_cause:
+    - Hyperthyroidism - antithyroid medications
+    - Diabetes - insulin or oral agents
+    - Malabsorption - treat underlying cause, nutritional support
+    - Depression - antidepressants, counseling
+    - Malignancy - oncology referral
+  nutritional_support:
+    - Calorie-dense foods, frequent small meals
+    - Nutritional supplements (Ensure, Boost)
+    - Referral to dietitian
+    - Consider appetite stimulants if appropriate
+clinical_pearls:
+  - Unintentional weight loss >5% over 6 months is significant
+  - In elderly, most common causes are depression, cancer, cardiac disease
+  - Malignancy found in 15-25% of cases with significant weight loss
+  - Up to 25% may remain unexplained after workup
+  - Always consider depression and medication side effects
+  - Document baseline weight for future comparison
+differentials:
+  - Malignancy (especially GI, lung, hematologic)
+  - Hyperthyroidism
+  - Diabetes mellitus
+  - GI disorders (celiac, IBD, malabsorption, peptic ulcer)
+  - Chronic infections (TB, HIV, endocarditis)
+  - Depression or psychiatric disorder
+  - Medications (especially in elderly)
+  - Substance abuse
+  - Dementia or cognitive decline
+  - Heart failure or COPD
+trace:
+  - 62-year-old man with 20 lb unintentional weight loss over 4 months. Decreased appetite, fatigue. No GI symptoms. Labs show mild anemia, elevated ESR. CT shows pancreatic mass. Refer to oncology. Diagnosed with pancreatic cancer. Begin treatment.
+citations:
+  - UpToDate - Internal Medicine
+  - American Family Physician Guidelines

@@ -1,0 +1,73 @@
+tree_id: PREV-SMOKING-CESSATION
+name: Smoking Cessation Counseling (Encounter)
+family: preventive
+specialty: Primary Care, Family Medicine
+chief_complaint: Quit smoking, smoking cessation
+description: |
+  Encounter focused on smoking cessation counseling and treatment.
+  Smoking leading preventable cause of death - cessation dramatically reduces risk.
+icd10: Z71.6
+snomed: "710081004"
+presentations:
+  - Current smoker interested in quitting
+  - Request for smoking cessation assistance
+  - May be motivated by health scare or family pressure
+urgency: Low
+workup:
+  - Smoking history - pack-years, quit attempts, triggers
+  - Fagerstrom Test for Nicotine Dependence
+  - Assess readiness to quit (stages of change)
+  - Identify barriers and concerns
+  - Social support assessment
+treatment:
+  five_as_approach:
+    ask:
+      - Screen all patients for tobacco use
+    advise:
+      - Urge all smokers to quit in clear, personalized manner
+    assess:
+      - Determine willingness to make quit attempt
+    assist:
+      - Help patient with quit plan
+      - Provide counseling and pharmacotherapy
+    arrange:
+      - Schedule follow-up contact
+  behavioral_counseling:
+    - Set quit date (within 2 weeks)
+    - Tell family and friends
+    - Remove tobacco products from environment
+    - Identify triggers and develop coping strategies
+    - Problem-solving counseling
+    - Referral to quitline (1-800-QUIT-NOW)
+    - Consider group counseling or smartphone apps
+  pharmacotherapy:
+    first_line:
+      - Varenicline (Chantix) 0.5mg daily x3 days, then 0.5mg BID x4 days, then 1mg BID x 12 weeks
+      - Bupropion SR 150mg daily x3 days, then 150mg BID x 12 weeks (start 1 week before quit date)
+      - Nicotine replacement therapy (NRT) - patch, gum, lozenge, inhaler, nasal spray
+    combination_therapy:
+      - Nicotine patch PLUS short-acting NRT (gum, lozenge) more effective than either alone
+      - Can combine varenicline with NRT patch
+    second_line:
+      - Clonidine
+      - Nortriptyline
+  follow_up:
+    - Contact within first week after quit date
+    - Follow-up visits at 1, 4, 8, and 12 weeks
+    - Address slips and relapses without judgment
+clinical_pearls:
+  - Average smoker requires 5-7 quit attempts before success
+  - Combination of counseling plus medication most effective
+  - Even brief (3-minute) counseling increases quit rates
+  - Relapse is part of process - encourage continued attempts
+  - Weight gain common (5-10 lbs) - address proactively
+  - Benefits begin immediately and continue to accrue over time
+differentials:
+  - Motivated to quit
+  - Ambivalent about quitting
+  - Not ready to quit (provide resources for future)
+trace:
+  - 48-year-old 20 pack-year smoker motivated to quit after father's MI. Set quit date 2 weeks out. Prescribe varenicline and nicotine patch. Provide counseling on triggers and coping. Refer to quitline. Follow-up in 1 week. At 12 weeks, successfully quit smoking. Continue varenicline full course.
+citations:
+  - USPSTF Tobacco Cessation Recommendations
+  - American Lung Association Guidelines

@@ -1,0 +1,84 @@
+tree_id: PREV-LIPID-SCREENING
+name: Hyperlipidemia Screening Encounter
+family: preventive
+specialty: Primary Care, Cardiology
+chief_complaint: Cholesterol check, lipid screening
+description: |
+  Screening for dyslipidemia to assess cardiovascular disease risk.
+  Elevated LDL cholesterol is major modifiable risk factor for ASCVD.
+icd10: Z13.220
+snomed: "274780007"
+presentations:
+  - Routine lipid screening
+  - Cardiovascular risk assessment
+urgency: Low
+workup:
+  screening_recommendations_uspstf:
+    - Age 40-75 - screen all adults
+    - Age 20-39 - screen if increased CVD risk
+    - Repeat every 5 years if normal, more frequently if borderline
+  lipid_panel_fasting_or_non_fasting:
+    - Total cholesterol
+    - LDL cholesterol (calculated or direct)
+    - HDL cholesterol
+    - Triglycerides
+    - Non-HDL cholesterol
+  interpretation:
+    desirable:
+      - Total cholesterol <200 mg/dL
+      - LDL <100 mg/dL
+      - HDL >40 mg/dL men, >50 mg/dL women
+      - Triglycerides <150 mg/dL
+    borderline:
+      - Total cholesterol 200-239
+      - LDL 100-159
+    high:
+      - Total cholesterol ≥240
+      - LDL ≥160
+      - Triglycerides ≥200
+  cardiovascular_risk_assessment:
+    - Calculate 10-year ASCVD risk (pooled cohort equation)
+    - Risk categories - low (<5%), borderline (5-7.5%), intermediate (7.5-20%), high (≥20%)
+treatment:
+  lifestyle_modifications_all_patients:
+    - Mediterranean or DASH diet
+    - Reduce saturated fat (<7% of calories)
+    - Increase fiber (10-25g/day)
+    - Regular aerobic exercise
+    - Weight loss if overweight
+    - Smoking cessation
+  statin_therapy_indications:
+    - Clinical ASCVD (MI, stroke, PAD) - high-intensity statin
+    - LDL ≥190 mg/dL - high-intensity statin
+    - Diabetes age 40-75 - moderate to high-intensity statin
+    - 10-year ASCVD risk ≥7.5% age 40-75 - moderate to high-intensity statin
+  statin_intensity:
+    high_intensity:
+      - Atorvastatin 40-80mg or rosuvastatin 20-40mg
+      - Lowers LDL ≥50%
+    moderate_intensity:
+      - Atorvastatin 10-20mg, rosuvastatin 5-10mg, simvastatin 20-40mg
+      - Lowers LDL 30-50%
+  monitoring:
+    - Recheck lipids in 4-12 weeks after starting statin
+    - Monitor for side effects (myalgias, elevated liver enzymes)
+    - Once at goal, recheck annually
+clinical_pearls:
+  - LDL is primary target for ASCVD risk reduction
+  - Statins reduce ASCVD events by 25-35%
+  - Non-fasting lipids acceptable for screening
+  - HDL is protective - higher is better
+  - Triglycerides ≥500 mg/dL increase pancreatitis risk
+  - Lifestyle modifications lower LDL 5-10%
+differentials:
+  - Normal lipids
+  - Borderline dyslipidemia
+  - Hypercholesterolemia
+  - Hypertriglyceridemia
+  - Mixed dyslipidemia
+  - Familial hypercholesterolemia (if LDL ≥190)
+trace:
+  - 55-year-old man with no CVD history. Lipid panel shows total cholesterol 240, LDL 165, HDL 42, triglycerides 180. 10-year ASCVD risk 18%. Lifestyle counseling provided. Start atorvastatin 20mg daily. Recheck in 8 weeks - LDL improved to 95. Continue statin long-term.
+citations:
+  - ACC/AHA Cholesterol Guidelines
+  - USPSTF Lipid Screening Recommendations

@@ -1,0 +1,75 @@
+tree_id: PREV-DIABETES-SCREENING
+name: Diabetes Screening Encounter
+family: preventive
+specialty: Primary Care, Endocrinology
+chief_complaint: Diabetes screening
+description: |
+  Screening for diabetes mellitus (type 2) in asymptomatic adults.
+  Early detection allows intervention to prevent complications.
+icd10: Z13.1
+snomed: "427571000"
+presentations:
+  - Routine diabetes screening
+  - Risk factors for diabetes
+  - Prediabetes follow-up
+urgency: Low
+workup:
+  screening_indications_uspstf:
+    - All adults age 35-70 with overweight or obesity (BMI ≥25)
+    - Screen every 3 years if normal
+    - Earlier and more frequent if additional risk factors
+  risk_factors:
+    - Family history of diabetes
+    - History of gestational diabetes
+    - Polycystic ovary syndrome
+    - Physical inactivity
+    - High-risk race/ethnicity (African American, Hispanic, Native American, Asian American, Pacific Islander)
+    - Hypertension or dyslipidemia
+    - Cardiovascular disease
+  screening_tests:
+    - Fasting plasma glucose (FPG) - preferred
+    - Hemoglobin A1c
+    - Oral glucose tolerance test (OGTT) - most sensitive but least convenient
+  interpretation:
+    normal:
+      - FPG <100 mg/dL
+      - A1c <5.7%
+    prediabetes:
+      - FPG 100-125 mg/dL
+      - A1c 5.7-6.4%
+    diabetes:
+      - FPG ≥126 mg/dL (confirm with repeat test)
+      - A1c ≥6.5%
+      - Random glucose ≥200 with symptoms
+treatment:
+  normal_result:
+    - Rescreen in 3 years
+    - Encourage healthy lifestyle
+  prediabetes:
+    - Lifestyle modification counseling (diet, exercise, weight loss)
+    - Goal - 7% weight loss, 150 min/week physical activity
+    - Diabetes Prevention Program referral
+    - Metformin 850mg BID if high risk (BMI ≥35, age <60, prior gestational diabetes)
+    - Rescreen annually
+  diabetes_diagnosis:
+    - Confirm with repeat test (unless symptomatic)
+    - Initiate diabetes management
+    - Refer to diabetes education
+    - Screen for complications
+    - Start metformin if no contraindications
+clinical_pearls:
+  - Prediabetes affects 1 in 3 US adults
+  - Lifestyle intervention can prevent or delay diabetes in prediabetes
+  - A1c may be falsely low in certain conditions (anemia, hemoglobinopathy)
+  - Screening identifies diabetes early when intervention most effective
+  - Many people with type 2 diabetes are asymptomatic for years
+differentials:
+  - Normal glucose metabolism
+  - Prediabetes
+  - Type 2 diabetes
+  - Type 1 diabetes (less common in adults)
+trace:
+  - 52-year-old woman BMI 32 presents for diabetes screening. Fasting glucose 115 mg/dL, A1c 6.2%. Diagnose prediabetes. Comprehensive counseling on diet and exercise. Refer to diabetes prevention program. Start metformin 850mg BID. Recheck in 6 months - A1c improved to 5.9% with 10 lb weight loss.
+citations:
+  - USPSTF Diabetes Screening Recommendations
+  - American Diabetes Association Standards of Care

@@ -1,0 +1,71 @@
+tree_id: PREV-OBESITY-COUNSELING
+name: Obesity Counseling (Encounter)
+family: preventive
+specialty: Primary Care, Family Medicine, Endocrinology
+chief_complaint: Weight management, obesity counseling
+description: |
+  Encounter focused on obesity evaluation and weight management counseling.
+  BMI ≥30 defines obesity - associated with increased risk of diabetes, cardiovascular disease, and cancer.
+icd10: Z71.3
+snomed: "700156004"
+presentations:
+  - Elevated BMI (≥30)
+  - Request for weight loss assistance
+  - Obesity-related comorbidities
+urgency: Low
+workup:
+  - Height, weight, BMI calculation
+  - Waist circumference
+  - Weight history and previous weight loss attempts
+  - Diet and eating patterns assessment
+  - Physical activity level
+  - Screen for eating disorders
+  - Assess for obesity-related comorbidities (diabetes, hypertension, sleep apnea, NAFLD)
+  - Labs - fasting glucose, lipids, liver enzymes, TSH
+treatment:
+  lifestyle_modification:
+    diet:
+      - Calorie reduction (500-750 cal/day deficit for 1-2 lb/week loss)
+      - Balanced diet - Mediterranean, DASH, or low-carb
+      - Portion control
+      - Food diary/tracking
+      - Referral to registered dietitian
+    physical_activity:
+      - Goal - 150-300 minutes moderate activity per week for weight loss
+      - Combine aerobic and strength training
+      - Start gradually and build
+    behavioral_therapy:
+      - Self-monitoring
+      - Goal setting
+      - Stimulus control
+      - Problem-solving
+      - Consider referral to behavioral psychologist
+  pharmacotherapy_if_bmi_greater_27_with_comorbidity_or_greater_30:
+    - GLP-1 agonists - semaglutide 2.4mg weekly (Wegovy) most effective
+    - Tirzepatide (Mounjaro/Zepbound) - dual GLP-1/GIP agonist
+    - Phentermine-topiramate (Qsymia)
+    - Naltrexone-bupropion (Contrave)
+    - Orlistat (Alli/Xenical) - lipase inhibitor
+  bariatric_surgery_if_bmi_greater_40_or_greater_35_with_comorbidity:
+    - Most effective long-term treatment
+    - Options - gastric bypass, sleeve gastrectomy, gastric banding
+    - Requires multidisciplinary evaluation
+  comorbidity_management:
+    - Aggressive treatment of diabetes, hypertension, dyslipidemia
+    - Sleep apnea screening and treatment
+clinical_pearls:
+  - Even 5-10% weight loss significantly improves health outcomes
+  - Lifestyle modification is foundation of all treatment
+  - Most patients regain weight without ongoing support
+  - Medications can help but require continued use
+  - Bariatric surgery most effective for severe obesity
+  - Address psychological factors and eating disorders
+differentials:
+  - Primary obesity
+  - Secondary obesity (hypothyroidism, Cushing's, medications)
+  - Eating disorder
+trace:
+  - 42-year-old woman BMI 35 with prediabetes and hypertension. Motivated for weight loss. Previous attempts unsuccessful. Comprehensive counseling on diet and exercise. Start semaglutide 0.25mg weekly, titrate up. Refer to dietitian and consider group program. At 6 months, lost 25 lbs, prediabetes resolved, BP improved. Continue medication and lifestyle.
+citations:
+  - AHA/ACC/TOS Obesity Guidelines
+  - USPSTF Obesity Screening Recommendations

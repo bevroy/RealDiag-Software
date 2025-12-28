@@ -1,0 +1,92 @@
+tree_id: PREV-ANNUAL-PHYSICAL
+name: Annual Physical Exam (Encounter)
+family: preventive
+specialty: Primary Care, Family Medicine, Internal Medicine
+chief_complaint: Annual checkup, routine physical exam
+description: |
+  Annual comprehensive physical examination for health maintenance and disease prevention.
+  Includes health history, physical exam, age-appropriate screening, immunizations, and counseling.
+icd10: Z00.00
+snomed: "225365006"
+presentations:
+  - Routine health maintenance visit
+  - No acute complaints
+  - Update on chronic conditions
+  - Review of systems
+urgency: Low
+referrals:
+  specialist:
+    - As indicated by screening results or chronic conditions
+workup:
+  history:
+    - Complete medical history update
+    - Surgical history
+    - Family history
+    - Social history (smoking, alcohol, drugs, sexual history, diet, exercise)
+    - Medication review and reconciliation
+    - Review of systems
+  physical_exam:
+    - Vital signs (BP, HR, weight, height, BMI)
+    - General appearance
+    - HEENT exam
+    - Cardiovascular exam
+    - Pulmonary exam
+    - Abdominal exam
+    - Skin exam
+    - Neurologic screening
+    - Musculoskeletal screening
+  age_appropriate_screening:
+    adults_18_39:
+      - BP screening every 2 years if normal
+      - Lipid screening men ≥35, women ≥45
+      - Diabetes screening if risk factors
+      - Depression screening
+      - Alcohol/substance use screening
+      - STI screening if sexually active
+    adults_40_64:
+      - All above screenings
+      - Diabetes screening every 3 years
+      - Lipid screening every 5 years
+      - Colorectal cancer screening starting age 45-50
+      - Mammogram women starting age 40-50
+      - Cervical cancer screening every 3-5 years
+    adults_65_plus:
+      - All above screenings
+      - Osteoporosis screening women
+      - Abdominal aortic aneurysm screening men age 65-75 who ever smoked
+      - Fall risk assessment
+      - Cognitive screening
+treatment:
+  health_maintenance:
+    - Immunizations per CDC schedule (flu, pneumococcal, Td/Tdap, shingles, COVID)
+    - Aspirin for cardiovascular prevention if indicated
+    - Statin for ASCVD risk reduction if indicated
+  counseling:
+    - Diet and nutrition
+    - Exercise (150 min moderate activity per week)
+    - Weight management
+    - Smoking cessation
+    - Alcohol moderation
+    - Safe sex practices
+    - Injury prevention
+  chronic_disease_management:
+    - Review and optimize management of existing conditions
+    - Medication adjustments as needed
+clinical_pearls:
+  - Annual exam opportunity for preventive care and screening
+  - Focus on health maintenance and risk reduction
+  - Age-appropriate screening guidelines vary by organization (USPSTF, ACS, etc)
+  - Build therapeutic alliance and address patient concerns
+  - Document advance directives and healthcare proxy
+  - Assess for social determinants of health
+differentials:
+  - Healthy patient
+  - Undiagnosed conditions identified on screening
+  - Poorly controlled chronic diseases
+  - Need for specialist referral
+trace:
+  - 52-year-old man presents for annual physical. No complaints. BP 138/88, BMI 28. Lipid panel shows LDL 145. Colonoscopy overdue (last at age 45). Pneumococcal vaccine due. Counsel on weight loss and exercise. Start statin for ASCVD risk. Order colonoscopy. Give pneumococcal vaccine. Return in 1 year.
+citations:
+  - USPSTF Recommendations
+  - CDC Adult Immunization Schedule
+  - American Heart Association Guidelines

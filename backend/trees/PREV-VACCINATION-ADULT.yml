@@ -1,0 +1,80 @@
+tree_id: PREV-VACCINATION-ADULT
+name: Vaccination Encounter (Adult)
+family: preventive
+specialty: Primary Care, Family Medicine
+chief_complaint: Immunization update, vaccine administration
+description: |
+  Adult immunization encounter per CDC recommended schedule.
+  Vaccines prevent serious infections and are key component of preventive care.
+icd10: Z23
+snomed: "33879002"
+presentations:
+  - Routine immunization update
+  - Travel vaccine preparation
+  - Occupational exposure vaccines
+  - Catch-up immunizations
+urgency: Low
+workup:
+  - Review immunization history
+  - Screen for contraindications (severe allergy, pregnancy, immunocompromise)
+  - Assess risk factors and indications
+treatment:
+  routine_adult_vaccines:
+    influenza:
+      - Annual for all adults
+      - Inactivated or recombinant (not live)
+    tdap_td:
+      - Tdap once in adulthood (includes pertussis)
+      - Td booster every 10 years
+      - Tdap for each pregnancy (27-36 weeks)
+    covid_19:
+      - Per current CDC recommendations
+      - Updated boosters as recommended
+    pneumococcal:
+      - PCV20 once at age 65+ (or if immunocompromised)
+      - Or PCV15 followed by PPSV23
+    shingles:
+      - Shingrix (recombinant) 2 doses age 50+
+      - Give even if prior zoster or live vaccine
+    hpv:
+      - Ages 9-26 - recommended
+      - Ages 27-45 - shared decision making
+      - 2-3 dose series depending on age at first dose
+  special_populations:
+    pregnancy:
+      - Tdap each pregnancy
+      - Flu vaccine any trimester
+      - COVID vaccine
+    immunocompromised:
+      - Avoid live vaccines
+      - Consider additional vaccines (meningococcal, Hib)
+      - May need higher doses or additional doses
+    healthcare_workers:
+      - Hepatitis B series
+      - MMR (if no immunity)
+      - Varicella (if no immunity)
+      - Annual flu
+  travel_vaccines:
+    - Hepatitis A
+    - Hepatitis B  
+    - Typhoid
+    - Yellow fever
+    - Japanese encephalitis
+    - Meningococcal
+    - Rabies (high-risk travel)
+clinical_pearls:
+  - Can give multiple vaccines same visit (different injection sites)
+  - Most vaccines can be given regardless of interval from prior vaccines
+  - Minor illness not contraindication to vaccination
+  - Pregnancy is NOT contraindication to inactivated vaccines
+  - Live vaccines contraindicated in pregnancy and severe immunocompromise
+  - Document in state immunization registry
+differentials:
+  - Up-to-date immunizations
+  - Overdue vaccines requiring catch-up
+  - Contraindication to vaccination
+trace:
+  - 66-year-old presents for vaccine update. Last flu shot 2 years ago. Never had pneumococcal or shingles vaccine. Give influenza, PCV20, and first dose of Shingrix today. Schedule Shingrix dose 2 in 2-6 months. Document in registry. No adverse reactions. Follow up as needed.
+citations:
+  - CDC Adult Immunization Schedule
+  - ACIP Recommendations
