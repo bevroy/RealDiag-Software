@@ -1,0 +1,125 @@
+tree_id: ENT-FOREIGN-BODY-EAR-NOSE
+name: Foreign Body in Ear or Nose (Encounter)
+family: ent
+specialty: ENT / Emergency Medicine
+presentations:
+  - Unilateral ear pain or fullness (ear foreign body)
+  - Decreased hearing or ear discharge (ear)
+  - Unilateral nasal discharge or obstruction (nasal foreign body)
+  - Foul-smelling unilateral rhinorrhea (nasal)
+  - Visible foreign object
+  - Epistaxis (nose)
+  - Often in children (beads, beans, insects, toys)
+  - History of insertion or insect crawling into ear
+icd10:
+  - T16.1XXA # Foreign body in right ear, initial encounter
+  - T16.2XXA # Foreign body in left ear, initial encounter
+  - T17.0XXA # Foreign body in nasal sinus, initial encounter
+  - T17.1XXA # Foreign body in nostril, initial encounter
+snomed:
+  - "34299000" # Foreign body in ear
+  - "267095009" # Foreign body in nose
+urgency: Moderate
+urgency_explanation: Usually not emergent; urgent if airway compromise, live insect, button battery, or sharp object
+
+referrals:
+  ent: If unable to remove, deep/impacted foreign body, or failed attempt in clinic
+
+workup:
+  history:
+    - Type of object (if known)
+    - Duration of time in place
+    - Circumstances of insertion
+    - Prior removal attempts
+    - Symptoms: pain, bleeding, discharge, hearing loss
+  physical_examination:
+    ear:
+      - Otoscopy: visualize foreign body location and type
+      - Assess for trauma, perforation, infection
+      - Check tympanic membrane if visible
+    nose:
+      - Anterior rhinoscopy: visualize foreign body
+      - Check for mucosal trauma or bleeding
+      - Bilateral examination (rule out bilateral)
+      - Assess airway patency
+
+treatment:
+  general_principles:
+    - Adequate lighting and visualization essential
+    - Patient cooperation (sedation may be needed in children)
+    - One attempt in clinic; refer to ENT if unsuccessful
+    - Never push object deeper
+    - Consider type of object (living, magnetic, button battery)
+  ear_foreign_body_removal:
+    live_insect:
+      - Kill insect first: fill canal with mineral oil or lidocaine
+      - Then remove with forceps or irrigation
+    non_organic_object:
+      - Irrigation with warm water (avoid if TM perforation or organic object)
+      - Forceps or alligator forceps for graspable objects
+      - Suction catheter
+      - Ear curette for smooth objects
+      - Cyanoacrylate glue on cotton swab (for smooth, round objects)
+    organic_object:
+      - Avoid irrigation (will swell)
+      - Remove with forceps or suction
+    button_battery:
+      - URGENT removal (can cause necrosis in 1-2 hours)
+      - ENT consultation immediately
+  nose_foreign_body_removal:
+    techniques:
+      - "Parent's kiss" or "positive pressure" technique: occlude unaffected nostril, parent blows into child's mouth
+      - Alligator forceps or bayonet forceps
+      - Right-angle hook (pass behind object and pull forward)
+      - Fogarty catheter (pass beyond, inflate, withdraw)
+      - Suction catheter
+    button_battery:
+      - EMERGENCY removal (severe tissue damage within hours)
+      - Irrigate with saline
+      - Refer to ENT immediately
+  post_removal:
+    - Re-examine for additional objects
+    - Assess for trauma or perforation
+    - Topical antibiotics if trauma (ofloxacin otic drops)
+    - Oral antibiotics if secondary infection
+    - Nasal saline if nasal mucosal trauma
+  failed_removal:
+    - Do not persist beyond 1-2 attempts
+    - Refer to ENT for removal under anesthesia
+    - Avoid pushing object deeper
+
+clinical_pearls:
+  - Most common in children aged 2-5 years
+  - Ear: beads, beans, erasers, insects, toy parts
+  - Nose: beads, beans, pebbles, foam pieces, button batteries
+  - Button batteries are EMERGENCIES (tissue necrosis begins in 1-2 hours)
+  - Unilateral foul nasal discharge in child = foreign body until proven otherwise
+  - Live insects cause significant discomfort; immobilize before removal
+  - Avoid irrigation for organic materials (seeds, beans) - they swell
+  - Magnets can be dangerous if multiple ingested (attract through tissue)
+  - One gentle attempt in clinic; if unsuccessful, refer to ENT
+  - Sedation or general anesthesia often needed for young children
+
+differentials:
+  - Otitis externa (ear discharge)
+  - Cerumen impaction (ear fullness)
+  - Acute rhinosinusitis (nasal discharge)
+  - Nasal polyp
+  - Tumor (if unilateral chronic symptoms)
+  - Choanal atresia (congenital)
+
+trace:
+  - Patient (often child) presents with unilateral symptoms
+  - Visualize foreign body with otoscope or rhinoscopy
+  - Determine type of object (living, button battery, organic)
+  - If button battery: URGENT removal
+  - If live insect: immobilize, then remove
+  - Attempt removal with appropriate technique
+  - If unsuccessful after 1-2 attempts: refer to ENT
+  - Examine for additional objects and assess for trauma
+  - Post-removal care and parent education
+
+citations:
+  - "AAO-HNSF Clinical Guidelines"
+  - "UpToDate: Foreign bodies of the ear and nose"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

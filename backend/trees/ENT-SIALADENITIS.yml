@@ -1,0 +1,120 @@
+tree_id: ENT-SIALADENITIS
+name: Sialadenitis (Encounter)
+family: ent
+specialty: ENT / Oral Surgery
+presentations:
+  - Painful swelling of salivary gland (parotid or submandibular)
+  - Erythema and warmth over affected gland
+  - Purulent discharge from duct orifice
+  - Fever and malaise
+  - Difficulty eating or swallowing
+  - Dry mouth (reduced salivary flow)
+  - Trismus if severe parotitis
+  - Pain worsens with eating
+icd10:
+  - K11.20 # Sialoadenitis, unspecified
+  - K11.21 # Acute sialoadenitis
+  - K11.22 # Acute recurrent sialoadenitis
+  - K11.23 # Chronic sialoadenitis
+snomed:
+  - "81098002" # Sialadenitis
+urgency: Moderate
+urgency_explanation: Requires prompt treatment; risk of abscess formation and airway compromise if severe
+
+referrals:
+  ent: For sialendoscopy, duct dilation, or surgical drainage if abscess
+  oral_surgery: For stone removal or gland excision if indicated
+
+workup:
+  history:
+    - Duration and progression of swelling
+    - Unilateral vs bilateral
+    - Recurrent episodes
+    - Associated fever
+    - Recent dental procedures
+    - Medications causing xerostomia (anticholinergics, antihistamines, diuretics)
+    - Sjögren's syndrome symptoms (dry eyes, dry mouth)
+    - HIV risk factors
+  physical_examination:
+    - Inspect and palpate affected gland: size, firmness, tenderness
+    - Examine duct orifice (Stensen's for parotid, Wharton's for submandibular)
+    - Milk gland to express pus or saliva
+    - Bimanual palpation (submandibular gland)
+    - Assess for fluctuance (abscess)
+    - Cervical lymphadenopathy
+    - Trismus, airway assessment
+  laboratory:
+    - CBC: leukocytosis
+    - Culture of expressed purulent material
+    - Consider: amylase (elevated), HIV, Sjögren antibodies (anti-Ro, anti-La)
+  imaging:
+    - Ultrasound: first-line to assess for abscess, stone, ductal dilation
+    - CT with contrast: if abscess suspected or severe infection
+    - MRI sialography or conventional sialography: for chronic/recurrent disease
+    - Plain X-ray: may show radiopaque stone
+
+treatment:
+  conservative_management:
+    - Adequate hydration (IV if needed)
+    - Sialagogues: lemon drops, sour candies (stimulate saliva)
+    - Warm compresses to affected area
+    - Gland massage (milk secretions toward duct)
+    - Good oral hygiene
+  antibiotics:
+    empiric_therapy:
+      - Amoxicillin-clavulanate 875 mg PO BID x7-10 days
+      - If penicillin allergic: clindamycin 300 mg PO TID
+      - Or cephalexin 500 mg PO QID
+    severe_infection:
+      - IV antibiotics: ampicillin-sulbactam or cefoxitin
+      - Add vancomycin if MRSA concern
+      - Transition to oral when improving
+    coverage:
+      - Target S. aureus, oral anaerobes, gram-negative organisms
+  procedural_interventions:
+    - Incision and drainage if abscess formation
+    - Sialendoscopy with irrigation for ductal obstruction
+    - Stone removal (sialolithotomy) if sialolithiasis
+    - Gland excision for chronic recurrent cases
+  treat_underlying_cause:
+    - Remove or adjust xerostomia-causing medications
+    - Treat Sjögren's syndrome if present
+    - HIV management if indicated
+
+clinical_pearls:
+  - Parotid gland most commonly affected (Staphylococcus aureus)
+  - Submandibular gland: often stone-related (calcium deposits)
+  - Risk factors: dehydration, poor oral hygiene, ductal obstruction, xerostomia
+  - Elderly, postoperative, immunocompromised at higher risk
+  - Parotitis: Stensen's duct opens opposite upper 2nd molar
+  - Submandibular: Wharton's duct opens at floor of mouth near frenulum
+  - Bilateral parotid swelling: consider mumps (if unvaccinated), HIV, Sjögren's
+  - Recurrent sialadenitis suggests ductal stenosis or stone
+  - Most cases respond to conservative management + antibiotics
+  - Chronic cases may require gland excision
+
+differentials:
+  - Viral parotitis (mumps, HIV, EBV, CMV)
+  - Sialolithiasis (salivary stone)
+  - Sjögren's syndrome
+  - Salivary gland tumor
+  - Lymphadenitis
+  - Dental abscess
+  - Parotid cyst or ranula
+  - Masseteric hypertrophy
+
+trace:
+  - Patient presents with painful gland swelling and fever
+  - Examine gland and express pus from duct
+  - Obtain culture and CBC
+  - Ultrasound to assess for abscess or stone
+  - Start empiric antibiotics (amoxicillin-clavulanate)
+  - Hydration and sialagogues
+  - If abscess: I&D
+  - If stone: refer for removal
+  - Monitor for improvement within 48-72 hours
+
+citations:
+  - "AAO-HNSF Clinical Practice Guidelines"
+  - "UpToDate: Sialadenitis"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

@@ -1,0 +1,125 @@
+tree_id: ENT-HOARSENESS
+name: Hoarseness
+family: ent
+specialty: ENT (Otolaryngology)
+presentations:
+  - Raspy, strained, or breathy voice quality
+  - Voice fatigue with prolonged speaking
+  - Pitch changes or breaks in voice
+  - Reduced vocal range or volume
+  - Throat clearing or coughing
+  - Throat pain or discomfort (sometimes)
+  - Difficulty being heard in noisy environments
+icd10:
+  - R49.0 # Dysphonia (hoarseness)
+  - J38.00 # Paralysis of vocal cords and larynx, unspecified
+  - J37.0 # Chronic laryngitis
+snomed:
+  - "50219008" # Hoarseness
+  - "267064002" # Dysphonia
+urgency: Low
+urgency_explanation: Usually benign; urgent if acute onset with stridor, respiratory distress, or suspicion of malignancy
+
+referrals:
+  ent: If hoarseness >2-3 weeks, recurrent, or suspected serious pathology
+  speech_language_pathology: For voice therapy if functional dysphonia or vocal cord nodules
+
+workup:
+  history:
+    - Duration: acute (<3 weeks) vs chronic (>3 weeks)
+    - Onset: sudden vs gradual
+    - Voice use: occupational or recreational singing, public speaking
+    - Associated symptoms: dysphagia, odynophagia, hemoptysis, dyspnea, stridor
+    - Smoking history and alcohol use
+    - GERD symptoms
+    - Recent intubation or neck surgery
+    - Neurologic symptoms
+    - Weight loss, night sweats
+  physical_examination:
+    - Assess voice quality
+    - Neck palpation: masses, lymphadenopathy, thyroid
+    - Cranial nerve exam (especially CN X)
+    - Respiratory assessment: stridor, dyspnea
+  laryngoscopy:
+    - Indicated if hoarseness >2-3 weeks
+    - Flexible fiberoptic laryngoscopy or videostroboscopy
+    - Visualize vocal cords: masses, nodules, polyps, erythema, mobility
+  imaging:
+    - CT neck/chest: if concern for malignancy or mass
+    - Chest X-ray: lung pathology, mediastinal mass affecting recurrent laryngeal nerve
+  additional_testing:
+    - TSH: hypothyroidism
+    - Consider neurologic workup if concern for neurologic cause
+
+treatment:
+  general_voice_hygiene:
+    - Voice rest (relative, not absolute)
+    - Adequate hydration (6-8 glasses water/day)
+    - Humidification
+    - Avoid throat clearing (gentle cough or swallow instead)
+    - Avoid whispering (strains vocal cords)
+    - Limit caffeine and alcohol
+    - Smoking cessation
+  acute_laryngitis:
+    - Usually viral, self-limited (1-2 weeks)
+    - Voice rest, hydration, humidification
+    - Avoid steroids unless professional voice user with urgent need
+    - Analgesics for pain
+  gerd_related:
+    - Proton pump inhibitor (omeprazole 20-40 mg daily)
+    - Lifestyle modifications: avoid late meals, elevate head of bed, avoid triggers
+    - May take 2-3 months to see improvement
+  vocal_cord_nodules_polyps:
+    - Speech therapy first-line
+    - Surgery if failed conservative management or large lesions
+  reinke_edema:
+    - Smoking cessation essential
+    - Voice therapy
+    - Surgery if severe
+  vocal_cord_paralysis:
+    - Identify and treat underlying cause
+    - Voice therapy
+    - Medialization procedures (injection laryngoplasty, thyroplasty)
+  muscle_tension_dysphonia:
+    - Speech therapy (primary treatment)
+    - Address contributing factors (stress, GERD)
+  laryngeal_cancer:
+    - Biopsy for diagnosis
+    - Staging with imaging
+    - Treatment: surgery, radiation, chemotherapy (stage-dependent)
+
+clinical_pearls:
+  - Any hoarseness >2-3 weeks requires laryngoscopy to rule out malignancy
+  - Most common cause: acute viral laryngitis (self-limited)
+  - Red flags: >3 weeks duration, smoking history, hemoptysis, dysphagia, weight loss
+  - Vocal cord nodules common in teachers, singers, cheerleaders
+  - Unilateral vocal cord paralysis: consider lung cancer, thyroid surgery, aortic aneurysm
+  - GERD can cause chronic laryngitis without typical reflux symptoms
+  - Hypothyroidism can cause voice changes (deepening, hoarseness)
+  - Reinke's edema (polypoid corditis) strongly associated with smoking
+  - Professional voice users (singers, teachers) benefit from voice therapy
+
+differentials:
+  - Acute laryngitis (viral)
+  - Vocal cord nodules or polyps
+  - GERD/laryngopharyngeal reflux
+  - Vocal cord paralysis
+  - Laryngeal cancer
+  - Reinke's edema
+  - Muscle tension dysphonia
+  - Hypothyroidism
+  - Laryngeal papillomatosis
+
+trace:
+  - Patient presents with hoarseness
+  - Assess duration and red flag symptoms
+  - If <2 weeks + viral symptoms: treat as acute laryngitis
+  - If >2-3 weeks or red flags: refer to ENT for laryngoscopy
+  - Treat underlying cause once identified
+  - Voice therapy for functional causes
+  - Smoking cessation and GERD management as needed
+
+citations:
+  - "AAO-HNSF Clinical Practice Guideline: Hoarseness (Dysphonia)"
+  - "UpToDate: Evaluation of hoarseness in adults"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"
