@@ -1,0 +1,115 @@
+tree_id: RHEUM-MYALGIA
+name: Myalgia (Muscle Pain)
+family: rheumatology
+specialty: Rheumatology, Primary Care, Sports Medicine
+chief_complaint: Muscle pain, muscle aches
+description: |
+  Myalgia refers to muscle pain or aching, which can be localized or generalized. Common causes include overuse, viral infections,
+  medications (statins), autoimmune disorders, and systemic diseases. Approach focuses on differentiating benign self-limited causes
+  from serious conditions requiring specific treatment.
+icd10: M79.1
+snomed: "68962001"
+presentations:
+  - Muscle pain or aching (localized or generalized)
+  - Muscle tenderness to palpation
+  - Muscle stiffness, especially in morning
+  - Muscle weakness (if myositis present)
+  - Fatigue
+  - Fever (if infectious or inflammatory cause)
+  - Recent exercise or physical activity
+  - Recent viral illness symptoms (URI, GI symptoms)
+  - Multiple muscle groups involved
+urgency: Low
+referrals:
+  emergency:
+    - Severe muscle pain with dark urine (rhabdomyolysis)
+    - Muscle weakness with difficulty breathing or swallowing
+    - Severe systemic symptoms (high fever, altered mental status)
+  urgent:
+    - Progressive muscle weakness
+    - Persistent symptoms >2 weeks without improvement
+    - Associated weight loss or other constitutional symptoms
+  rheumatology:
+    - Chronic or recurrent myalgia
+    - Suspected autoimmune or inflammatory myopathy
+    - Abnormal labs suggesting systemic disease
+workup:
+  - History: onset, location, severity, aggravating/relieving factors, recent infections, medications (especially statins), exercise, trauma
+  - Associated symptoms: fever, rash, joint pain, weakness, systemic symptoms
+  - Medication review: statins (most common drug cause), fibrates, colchicine, hydroxychloroquine, glucocorticoids
+  - Physical exam: muscle tenderness, strength testing (distinguish pain from weakness), ROM, joint exam, skin exam for rash
+  - Labs (if indicated based on history/exam):
+    - CK (creatine kinase): elevated in myositis, rhabdomyolysis, statin myopathy
+    - ESR, CRP: elevated in inflammatory conditions (PMR, myositis, systemic diseases)
+    - CBC: anemia, leukocytosis/leukopenia in systemic disease
+    - TSH: hypothyroidism can cause myalgia
+    - Vitamin D: deficiency associated with muscle pain
+    - Electrolytes, calcium, magnesium: abnormalities can cause muscle symptoms
+  - Additional testing if specific diagnosis suspected:
+    - ANA, RF, anti-CCP: if connective tissue disease suspected
+    - Aldolase: elevated in inflammatory myopathies
+    - Myositis-specific antibodies (anti-Jo-1, anti-Mi-2): if dermatomyositis/polymyositis suspected
+    - EMG/NCS: if myopathy or neuropathy suspected
+    - Muscle biopsy: gold standard for inflammatory myopathies
+treatment:
+  general_approach:
+    - Treat underlying cause if identified
+    - Symptomatic relief with NSAIDs or acetaminophen
+    - Rest and avoid overexertion initially
+    - Gradual return to activity as symptoms improve
+    - Hydration
+  specific_causes:
+    viral_myalgia:
+      - Supportive care, NSAIDs for pain
+      - Usually resolves in 1-2 weeks
+      - Common with influenza, COVID-19, other viral infections
+    exercise_induced_overuse:
+      - Rest, ice, NSAIDs
+      - Gentle stretching and gradual return to activity
+      - Usually resolves in days to weeks
+    statin_myopathy:
+      - Discontinue or reduce statin dose
+      - Switch to different statin or alternative lipid-lowering agent
+      - CK usually normalizes within weeks after stopping
+      - Consider coenzyme Q10 supplementation (limited evidence)
+    hypothyroidism:
+      - Thyroid hormone replacement (levothyroxine)
+      - Myalgia improves with normalization of thyroid function
+    vitamin_d_deficiency:
+      - Vitamin D supplementation (1000-2000 IU daily or 50,000 IU weekly if severe deficiency)
+      - Recheck 25-OH vitamin D in 8-12 weeks
+    polymyalgia_rheumatica:
+      - Prednisone 15-20mg daily with gradual taper
+      - Dramatic response to steroids is diagnostic
+    inflammatory_myopathies:
+      - Refer to rheumatology for high-dose steroids and immunosuppression
+clinical_pearls:
+  - Most myalgia is benign and self-limited (viral, overuse)
+  - Statins are the most common medication cause of myalgia
+  - True muscle weakness (not just pain with movement) suggests myopathy and requires further workup
+  - CK >10x normal or dark urine suggests rhabdomyolysis - check renal function urgently
+  - Polymyalgia rheumatica: age >50, bilateral shoulder/hip pain, elevated ESR/CRP, dramatic steroid response
+  - Fibromyalgia: widespread pain, tender points, normal labs, associated fatigue and sleep disturbance
+  - Vitamin D deficiency is common and can cause diffuse myalgia
+  - If CK elevated, stop statins and recheck in 2-4 weeks
+differentials:
+  - Viral myalgia (influenza, COVID-19, other viruses)
+  - Exercise-induced muscle soreness (DOMS)
+  - Statin-induced myopathy
+  - Fibromyalgia
+  - Polymyalgia rheumatica
+  - Inflammatory myopathies (polymyositis, dermatomyositis)
+  - Hypothyroidism
+  - Vitamin D deficiency
+  - Electrolyte abnormalities (hypokalemia, hypocalcemia, hypomagnesemia)
+  - Rhabdomyolysis
+  - Chronic fatigue syndrome
+  - Lyme disease
+  - Medication side effects (beyond statins: fibrates, colchicine, hydroxychloroquine)
+  - Autoimmune connective tissue diseases (lupus, RA, scleroderma)
+trace:
+  - 45-year-old presents with generalized muscle aches x 5 days, recent URI symptoms → No weakness on exam, normal strength testing → Check CK, TSH, vitamin D → CK normal, TSH normal, vitamin D low at 18 ng/mL → Diagnose viral myalgia with vitamin D deficiency → Treat with NSAIDs, rest, vitamin D 2000 IU daily → Symptoms improve over 1 week → Follow-up vitamin D in 8 weeks
+citations:
+  - American College of Rheumatology Guidelines
+  - UpToDate - Rheumatology and Primary Care
+  - Evaluation of patients with muscle disease - Neurology
