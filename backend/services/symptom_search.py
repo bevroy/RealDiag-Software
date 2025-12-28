@@ -126,24 +126,151 @@ class SymptomSearchResponse(BaseModel):
 @lru_cache(maxsize=1)
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
-    Load all disease family YAML files with caching.
+    Load all diagnostic tree YAML files with caching.
     Cache is automatically cleared on app reload.
+    
+    Supports both old format (rules: array) and new format (individual tree files).
     """
+    # Try trees directory first (new format)
+    trees_dir = Path(__file__).parent.parent / "trees"
     rules_dir = Path(__file__).parent.parent / "rules"
     families = {}
+    total_trees = 0
     
-    for yaml_file in rules_dir.glob("*.yml"):
-        family_name = yaml_file.stem
-        try:
-            with open(yaml_file, 'r', encoding='utf-8') as f:
-                data = yaml.safe_load(f)
-                if data and 'rules' in data:
-                    families[family_name] = data['rules']
-        except Exception as e:
-            logging.error(f"Error loading {family_name}: {e}")
-            continue
+    # Load from trees directory (new format - individual tree files)
+    if trees_dir.exists():
+        for yaml_file in trees_dir.glob("*.yml"):
+            try:
+                with open(yaml_file, 'r', encoding='utf-8') as f:
+                    tree_data = yaml.safe_load(f)
+                    
+                if not tree_data:
+                    continue
+                
+                # Convert tree format to rule format for compatibility
+                family = tree_data.get('family', 'general')
+                
+                # Extract and flatten presentations
+                presentations = tree_data.get('presentations', [])
+                if isinstance(presentations, dict):
+                    presentations = list(presentations.values())
+                elif not isinstance(presentations, list):
+                    presentations = [presentations] if presentations else []
+                
+                # Extract and flatten workup/tests
+                workup = tree_data.get('workup', [])
+                tests = []
+                if isinstance(workup, list):
+                    for item in workup:
+                        if isinstance(item, dict):
+                            # Flatten nested dict structure
+                            for key, value in item.items():
+                                if isinstance(value, list):
+                                    tests.extend([f"{key}: {v}" for v in value])
+                                else:
+                                    tests.append(f"{key}: {value}")
+                        else:
+                            tests.append(str(item))
+                elif isinstance(workup, dict):
+                    for key, value in workup.items():
+                        if isinstance(value, list):
+                            tests.extend([f"{key}: {v}" for v in value])
+                        else:
+                            tests.append(f"{key}: {value}")
+                else:
+                    tests = [str(workup)] if workup else []
+                
+                # Extract and flatten treatment/management
+                treatment = tree_data.get('treatment', [])
+                management = []
+                if isinstance(treatment, list):
+                    for item in treatment:
+                        if isinstance(item, dict):
+                            # Flatten nested dict structure
+                            for key, value in item.items():
+                                if isinstance(value, list):
+                                    management.extend([f"{key}: {v}" for v in value])
+                                elif isinstance(value, dict):
+                                    for subkey, subvalue in value.items():
+                                        if isinstance(subvalue, list):
+                                            management.extend([f"{key} - {subkey}: {v}" for v in subvalue])
+                                        else:
+                                            management.append(f"{key} - {subkey}: {subvalue}")
+                                else:
+                                    management.append(f"{key}: {value}")
+                        else:
+                            management.append(str(item))
+                elif isinstance(treatment, dict):
+                    for key, value in treatment.items():
+                        if isinstance(value, list):
+                            management.extend([f"{key}: {v}" for v in value])
+                        elif isinstance(value, dict):
+                            for subkey, subvalue in value.items():
+                                if isinstance(subvalue, list):
+                                    management.extend([f"{key} - {subkey}: {v}" for v in subvalue])
+                                else:
+                                    management.append(f"{key} - {subkey}: {subvalue}")
+                        else:
+                            management.append(f"{key}: {value}")
+                else:
+                    management = [str(treatment)] if treatment else []
+                
+                # Extract referrals
+                referrals = tree_data.get('referrals', [])
+                referral_list = []
+                if isinstance(referrals, list):
+                    referral_list = [str(r) for r in referrals]
+                elif isinstance(referrals, dict):
+                    for key, value in referrals.items():
+                        if isinstance(value, list):
+                            referral_list.extend([f"{key}: {v}" for v in value])
+                        else:
+                            referral_list.append(f"{key}: {value}")
+                else:
+                    referral_list = [str(referrals)] if referrals else []
+                
+                # Build rule-compatible format
+                rule = {
+                    'id': tree_data.get('tree_id', yaml_file.stem),
+                    'label': tree_data.get('name', yaml_file.stem),
+                    'presentations': presentations,
+                    'icd10': [tree_data.get('icd10', '') or tree_data.get('icd10_code', '')],
+                    'snomed': tree_data.get('snomed', []),
+                    'sensitivity': tree_data.get('sensitivity'),
+                    'specificity': tree_data.get('specificity'),
+                    'clinical_pearls': tree_data.get('clinical_pearls', []),
+                    'management': management,
+                    'tests': tests,
+                    'referrals': referral_list
+                }
+                
+                # Add to family
+                if family not in families:
+                    families[family] = []
+                families[family].append(rule)
+                total_trees += 1
+                
+            except Exception as e:
+                logging.error(f"Error loading tree {yaml_file.name}: {e}")
+                continue
     
-    logging.info(f"Loaded {len(families)} disease families with {sum(len(rules) for rules in families.values())} total rules")
+    # Also load from rules directory (old format) if it exists
+    if rules_dir.exists():
+        for yaml_file in rules_dir.glob("*.yml"):
+            family_name = yaml_file.stem
+            try:
+                with open(yaml_file, 'r', encoding='utf-8') as f:
+                    data = yaml.safe_load(f)
+                    if data and 'rules' in data:
+                        if family_name not in families:
+                            families[family_name] = []
+                        families[family_name].extend(data['rules'])
+                        total_trees += len(data['rules'])
+            except Exception as e:
+                logging.error(f"Error loading {family_name}: {e}")
+                continue
+    
+    logging.info(f"Loaded {len(families)} disease families with {total_trees} total diagnostic trees")
     return families
 
 
