@@ -123,13 +123,28 @@ class SymptomSearchResponse(BaseModel):
 
 
 # Helper functions
+# Cache with TTL to prevent stale data but avoid reloading on every request
+_families_cache = None
+_cache_time = 0
+
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
-    Load all diagnostic tree YAML files.
+    Load all diagnostic tree YAML files with simple caching.
     
     Supports both old format (rules: array) and new format (individual tree files).
-    Note: Removed caching to ensure fresh data loads after code changes.
+    Uses simple cache to avoid loading 676 files on every request.
     """
+    global _families_cache, _cache_time
+    
+    # Return cached data if available and fresh (within 5 minutes)
+    import time
+    current_time = time.time()
+    if _families_cache is not None and (current_time - _cache_time) < 300:
+        logging.debug(f"Using cached families data ({len(_families_cache)} families)")
+        return _families_cache
+    
+    logging.info("Loading diagnostic trees (cache miss or expired)")
+    
     # Try trees directory first (new format)
     trees_dir = Path(__file__).parent.parent / "trees"
     rules_dir = Path(__file__).parent.parent / "rules"
@@ -273,6 +288,11 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 continue
     
     logging.info(f"Loaded {len(families)} disease families with {total_trees} total diagnostic trees")
+    
+    # Update cache
+    _families_cache = families
+    _cache_time = current_time
+    
     return families
 
 
