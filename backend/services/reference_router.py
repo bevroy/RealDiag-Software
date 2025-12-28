@@ -37,7 +37,7 @@ FAMILY_TO_PREFIX = {
     "dentistry": ["DENT"],
     "ent": ["ENT"],
     "general": ["GEN", "GENERAL"],
-    "oncology": ["ONCOLOGY"],
+    "oncology": ["ONCOLOGY", "ONCO"],
     "ophthalmology": ["OPHTHO", "OPTH"],
     "pediatrics": ["PEDS"],
     "surgery": ["SURG"],
