@@ -289,11 +289,22 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     
     logging.info(f"Loaded {len(families)} disease families with {total_trees} total diagnostic trees")
     
-    # Update cache
+    # Update cache (permanent - only loads once per server restart)
     _families_cache = families
-    _cache_time = current_time
     
     return families
+
+
+# Preload families at module import time to avoid timeout on first request
+# This runs once when the server starts
+try:
+    logging.info("Preloading diagnostic trees at startup...")
+    _families_cache = load_all_families()
+    logging.info(f"✓ Preloaded {len(_families_cache)} families with diagnostic trees")
+except Exception as e:
+    logging.error(f"Failed to preload diagnostic trees: {e}")
+    # Don't crash the server - will load on first request instead
+    _families_cache = None
 
 
 def normalize_text(text: str) -> str:
