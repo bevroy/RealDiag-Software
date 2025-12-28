@@ -12,6 +12,7 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 import yaml
 import re
+import time
 from pydantic import BaseModel, validator, conint, conlist
 import logging
 from functools import lru_cache
@@ -136,7 +137,6 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
     global _families_cache, _cache_time
     
-    # Return cached data if available and fresh (within 5 minutes)
     import time
     current_time = time.time()
     if _families_cache is not None and (current_time - _cache_time) < 300:
