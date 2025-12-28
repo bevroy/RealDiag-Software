@@ -136,6 +136,9 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     families = {}
     total_trees = 0
     
+    logging.info(f"Loading diagnostic trees from: {trees_dir}")
+    logging.info(f"Trees directory exists: {trees_dir.exists()}")
+    
     # Load from trees directory (new format - individual tree files)
     if trees_dir.exists():
         for yaml_file in trees_dir.glob("*.yml"):
@@ -442,23 +445,30 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
     
     Returns ranked list of possible diagnoses with match scores.
     """
-    # Audit log the search
-    client_ip = request_obj.client.host if request_obj and request_obj.client else "unknown"
-    AuditLogger.log_security_event(
-        "symptom_search",
-        {
-            "symptom_count": len(request.symptoms),
-            "age": request.age,
-            "family": request.family,
-            "ip": client_ip
-        }
-    )
-    
-    if not request.symptoms:
-        raise HTTPException(status_code=400, detail="At least one symptom is required")
-    
-    # Load all families
-    all_families = load_all_families()
+    try:
+        # Audit log the search
+        client_ip = request_obj.client.host if request_obj and request_obj.client else "unknown"
+        AuditLogger.log_security_event(
+            "symptom_search",
+            {
+                "symptom_count": len(request.symptoms),
+                "age": request.age,
+                "family": request.family,
+                "ip": client_ip
+            }
+        )
+        
+        if not request.symptoms:
+            raise HTTPException(status_code=400, detail="At least one symptom is required")
+        
+        logging.info(f"Symptom search request: {request.symptoms}")
+        
+        # Load all families
+        all_families = load_all_families()
+        logging.info(f"Loaded {len(all_families)} families")
+    except Exception as e:
+        logging.error(f"Error in symptom search: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
     
     # Filter by family if specified
     if request.family:
