@@ -1,0 +1,108 @@
+tree_id: OBGYN-VULVOVAGINAL-CANDIDIASIS
+name: Vulvovaginal Candidiasis (Yeast Infection)
+family: obstetrics_gynecology
+specialty: OB/GYN, Primary Care
+presentations:
+  - Vulvar pruritus (itching) - most common symptom
+  - Thick, white, cottage cheese-like vaginal discharge (non-malodorous)
+  - Vulvar burning or irritation
+  - Dyspareunia (painful intercourse)
+  - Dysuria (external burning with urination)
+  - Vulvar erythema and edema on exam
+  - May worsen before menses
+icd10:
+  - B37.3 # Candidiasis of vulva and vagina
+  - N77.1 # Vaginitis, vulvitis and vulvovaginitis in diseases classified elsewhere
+snomed:
+  - "78048006" # Candidal vulvovaginitis
+urgency: Low
+urgency_explanation: Common, benign condition; can be treated empirically; urgent if severe symptoms or immunocompromised
+
+referrals:
+  gynecology: For recurrent infections (≥4 episodes/year) or refractory cases
+  infectious_disease: If immunocompromised with complicated infection
+
+workup:
+  clinical_diagnosis:
+    - History: symptoms, prior episodes, recent antibiotics, diabetes, immunosuppression
+    - Physical exam: vulvar erythema, edema, excoriation, vaginal discharge
+    - pH testing: normal pH (4-4.5) in candidiasis
+  microscopy:
+    - Wet mount with saline: budding yeast, pseudohyphae
+    - KOH prep: enhances visualization of yeast and hyphae
+    - Whiff test: negative (fishy odor suggests bacterial vaginosis)
+  culture:
+    - Not routinely needed for uncomplicated cases
+    - Indicated for: recurrent infections, atypical presentation, failed treatment
+    - Identifies Candida species (C. albicans vs non-albicans)
+
+treatment:
+  uncomplicated_vulvovaginal_candidiasis:
+    topical_antifungals_first_line:
+      - Miconazole 2% cream 5g intravaginally qhs x7 days
+      - Clotrimazole 1% cream 5g intravaginally qhs x7-14 days
+      - Clotrimazole 100mg vaginal tablet qhs x7 days or 200mg x3 days
+      - Terconazole 0.4% cream 5g intravaginally qhs x7 days
+      - Terconazole 80mg vaginal suppository qhs x3 days
+      - Butoconazole 2% cream (sustained release) single dose
+    oral_therapy_alternative:
+      - Fluconazole 150mg PO single dose (preferred for ease of use)
+      - Effective within 2-3 days
+      - May repeat if symptoms persist after 3 days
+    supportive:
+      - Avoid tight-fitting clothing
+      - Keep area dry
+      - May use topical corticosteroid for severe pruritus (short-term)
+  complicated_vulvovaginal_candidiasis:
+    recurrent_vvc_4_or_more_episodes_per_year:
+      - Induction: Fluconazole 150mg PO on days 1, 4, and 7
+      - Maintenance: Fluconazole 150mg PO weekly x6 months
+      - Or topical antifungal weekly x6 months
+      - Address predisposing factors (diabetes control, avoid douching)
+    severe_infection:
+      - Topical azole therapy x7-14 days
+      - Or fluconazole 150mg PO x2 doses (day 1 and day 3)
+    non_albicans_candida:
+      - Longer duration topical azole (7-14 days)
+      - Boric acid 600mg vaginal suppository daily x14 days (C. glabrata)
+    pregnancy:
+      - Only topical azoles (7-day course)
+      - Fluconazole contraindicated in pregnancy
+  preventive_strategies:
+    - Treat underlying diabetes
+    - Discontinue unnecessary antibiotics
+    - Probiotics (limited evidence)
+    - Avoid douching, scented products
+    - Cotton underwear
+
+clinical_pearls:
+  - 75% of women experience at least one episode in their lifetime
+  - 40-45% have two or more episodes
+  - Most caused by Candida albicans (80-90%)
+  - Non-albicans species (C. glabrata, C. krusei) may be resistant to fluconazole
+  - Risk factors: antibiotics, diabetes, pregnancy, immunosuppression, OCPs, tight clothing
+  - Sexual transmission is rare; partner treatment not routinely recommended
+  - Recurrent VVC (RVVC): rule out diabetes, HIV, consider chronic suppressive therapy
+  - Self-diagnosis often inaccurate; 1/3 of self-treated women have other conditions
+
+differentials:
+  - Bacterial vaginosis (thin gray discharge, fishy odor, pH >4.5, clue cells)
+  - Trichomoniasis (frothy yellow-green discharge, pH >4.5, motile trichomonads)
+  - Atrophic vaginitis (postmenopausal, thin dry vagina)
+  - Contact dermatitis or allergic reaction
+  - Lichen sclerosus
+  - Cervicitis (gonorrhea, chlamydia)
+
+trace:
+  - Patient presents with vulvar itching and thick white discharge
+  - Perform vaginal exam and obtain vaginal pH
+  - Wet mount/KOH prep shows budding yeast and pseudohyphae
+  - Diagnose uncomplicated vulvovaginal candidiasis
+  - Treat with topical azole x7 days OR fluconazole 150mg single dose
+  - If recurrent (≥4/year), consider suppressive therapy and workup for predisposing factors
+
+citations:
+  - "CDC Guidelines: Vulvovaginal Candidiasis"
+  - "ACOG Practice Bulletin: Vaginitis in Nonpregnant Patients"
+  - "UpToDate: Treatment of vulvovaginal candidiasis"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"
