@@ -18,6 +18,7 @@ RULES_PATH = Path(__file__).resolve().parents[1] / "rules"
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
 # Map family IDs to tree prefixes (multiple prefixes per family due to naming variations)
+# Updated: 2025-12-28 to ensure all gastroenterology trees load properly
 FAMILY_TO_PREFIX = {
     "neurology": ["NEU", "NEURO"],
     "cardiology": ["CARD", "CARDS"],
