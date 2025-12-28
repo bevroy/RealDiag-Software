@@ -1,0 +1,106 @@
+tree_id: RHEUM-OSTEOARTHRITIS
+name: Osteoarthritis (OA)
+family: rheumatology
+specialty: Rheumatology / Orthopedics
+presentations:
+  - Joint pain worsened by activity, relieved by rest
+  - Morning stiffness <30 minutes
+  - Joint crepitus and decreased range of motion
+  - Bony enlargement (Heberden's nodes at DIPs, Bouchard's nodes at PIPs)
+  - Most commonly affects knees, hips, hands, spine
+  - Usually asymmetric distribution
+icd10:
+  - M19.90 # Unspecified osteoarthritis, unspecified site
+  - M17.9 # Osteoarthritis of knee, unspecified
+  - M16.9 # Osteoarthritis of hip, unspecified
+  - M19.04 # Primary osteoarthritis, hand
+snomed:
+  - "396275006" # Osteoarthritis
+urgency: Low
+urgency_explanation: Chronic condition; urgent evaluation if severe pain, loss of function, or suspicion of joint infection
+
+referrals:
+  rheumatology: For diagnostic uncertainty or refractory symptoms
+  orthopedics: For consideration of joint replacement surgery
+  physical_therapy: For exercise program and functional optimization
+  pain_management: For refractory pain
+
+workup:
+  clinical_diagnosis:
+    - History: mechanical pain pattern, risk factors (age, obesity, prior joint injury)
+    - Physical exam: crepitus, bony enlargement, reduced ROM, joint line tenderness
+  laboratory:
+    - Usually not needed for typical OA
+    - Consider if atypical features to rule out inflammatory arthritis
+    - ESR/CRP (normal in OA)
+    - RF and anti-CCP (negative in OA)
+  imaging:
+    - X-ray (weight-bearing views for knees/hips):
+      - Joint space narrowing
+      - Osteophytes (bone spurs)
+      - Subchondral sclerosis
+      - Subchondral cysts
+    - MRI rarely needed unless considering surgery or trauma
+
+treatment:
+  nonpharmacologic:
+    first_line:
+      - Weight loss if overweight (5-10% reduction improves symptoms)
+      - Exercise: low-impact aerobic (swimming, cycling) and strengthening
+      - Physical therapy
+      - Assistive devices (cane, walker, braces)
+      - Heat/cold therapy
+    education:
+      - Joint protection techniques
+      - Activity modification
+      - Shoe modifications for knee/hip OA
+  pharmacologic:
+    topical:
+      - Topical NSAIDs (diclofenac gel) for hand and knee OA - first-line
+      - Capsaicin cream
+    oral:
+      - Acetaminophen: up to 3-4 g/day (limited efficacy, use cautiously)
+      - NSAIDs: ibuprofen, naproxen (use lowest effective dose, monitor for GI/CV/renal effects)
+      - Tramadol for moderate to severe pain if NSAIDs contraindicated
+      - Duloxetine (SNRI): for chronic OA pain
+      - Avoid opioids except as last resort
+    intra_articular:
+      - Corticosteroid injections (temporary relief 4-12 weeks)
+      - Hyaluronic acid injections (controversial efficacy)
+      - PRP (platelet-rich plasma) - investigational
+  surgical:
+    - Arthroscopy with debridement (NOT recommended for knee OA)
+    - Osteotomy (younger patients with unicompartmental disease)
+    - Total joint replacement (definitive for severe, refractory disease)
+
+clinical_pearls:
+  - OA is primarily a clinical diagnosis; imaging confirms but may not correlate with symptoms
+  - Radiographic severity does not always correlate with pain severity
+  - Morning stiffness <30 min distinguishes OA from inflammatory arthritis (>60 min)
+  - No role for routine lab testing unless considering inflammatory arthropathy
+  - Glucosamine/chondroitin supplements lack strong evidence but low risk
+  - Erosive hand OA is aggressive variant with inflammatory component
+  - Risk factors: age, obesity, female sex, genetics, joint injury, repetitive stress
+
+differentials:
+  - Rheumatoid arthritis (symmetric, prolonged stiffness, systemic symptoms)
+  - Gout or pseudogout (acute, inflammatory)
+  - Psoriatic arthritis
+  - Septic arthritis (acute, fever, severe pain)
+  - Avascular necrosis
+  - Periarticular disorders (bursitis, tendinitis)
+
+trace:
+  - Patient presents with chronic joint pain and mechanical symptoms
+  - Clinical exam reveals crepitus, bony enlargement, limited ROM
+  - X-rays show classic features of OA
+  - Initiate conservative management: weight loss, exercise, topical NSAIDs
+  - Add oral medications if needed
+  - Consider injection therapy for refractory symptoms
+  - Refer to orthopedics if candidate for joint replacement
+
+citations:
+  - "American College of Rheumatology Guidelines for Management of Osteoarthritis"
+  - "OARSI (Osteoarthritis Research Society International) Guidelines"
+  - "UpToDate: Clinical manifestations and diagnosis of osteoarthritis"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

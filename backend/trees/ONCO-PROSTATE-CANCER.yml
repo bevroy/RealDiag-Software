@@ -1,0 +1,114 @@
+tree_id: ONCO-PROSTATE-CANCER
+name: Prostate Cancer
+family: oncology
+specialty: Oncology / Urology
+presentations:
+  - Often asymptomatic (detected by screening)
+  - Urinary symptoms: frequency, urgency, weak stream, nocturia
+  - Hematuria or hematospermia
+  - Erectile dysfunction
+  - Bone pain (metastatic disease)
+  - Elevated PSA on screening
+  - Abnormal digital rectal exam (hard nodule, asymmetry)
+icd10:
+  - C61 # Malignant neoplasm of prostate
+  - N40.0 # Benign prostatic hyperplasia with lower urinary tract symptoms
+snomed:
+  - "399068003" # Malignant tumor of prostate
+  - "254900004" # Carcinoma of prostate
+urgency: Moderate
+urgency_explanation: Usually slow-growing; exceptions include high-grade tumors or metastatic disease requiring prompt treatment
+
+referrals:
+  urology: For biopsy, staging, and treatment planning
+  oncology: For systemic therapy in advanced disease
+  radiation_oncology: For radiation therapy consideration
+
+workup:
+  screening:
+    - PSA (prostate-specific antigen): Discuss screening ages 50-70 (earlier if high-risk)
+    - Digital rectal exam (DRE)
+    - Shared decision-making about screening (benefits vs harms)
+  diagnosis:
+    - Transrectal ultrasound (TRUS) guided biopsy (12-core standard)
+    - MRI-guided biopsy (increasingly common)
+    - Gleason score (pathology grading): sum of two most common patterns (2-10)
+    - Grade groups: 1 (Gleason 6), 2 (3+4=7), 3 (4+3=7), 4 (Gleason 8), 5 (Gleason 9-10)
+  staging:
+    - Clinical stage (DRE, imaging): T1-T4
+    - PSA level
+    - Gleason score/Grade group
+    - Bone scan if PSA >20 or symptoms of bone pain
+    - CT or MRI abdomen/pelvis if high-risk features
+    - Prostate MRI (mpMRI) for local staging
+  risk_stratification:
+    - Very low risk: T1c, Grade group 1, PSA <10, <3 positive cores
+    - Low risk: T1-T2a, Grade group 1, PSA <10
+    - Intermediate risk: T2b-T2c or Grade group 2-3 or PSA 10-20
+    - High risk: T3a or Grade group 4-5 or PSA >20
+    - Very high/Regional: T3b-T4 or N1
+
+treatment:
+  localized_disease:
+    very_low_and_low_risk:
+      - Active surveillance (preferred): PSA q6mo, DRE annually, repeat biopsy
+      - Radical prostatectomy (if patient preference, life expectancy >10 years)
+      - Radiation therapy (external beam or brachytherapy)
+    intermediate_risk:
+      - Radical prostatectomy + pelvic lymph node dissection
+      - Radiation therapy + short-term ADT (4-6 months)
+      - Active surveillance (favorable intermediate risk)
+    high_risk:
+      - Radical prostatectomy + extended lymph node dissection
+      - Radiation therapy + long-term ADT (2-3 years)
+  locally_advanced:
+    - Radiation therapy + long-term ADT (2-3 years)
+    - Consider radical prostatectomy in select cases
+  metastatic_disease:
+    - Androgen deprivation therapy (ADT): LHRH agonist or antagonist
+    - Add abiraterone or enzalutamide to ADT (improves survival)
+    - Add docetaxel chemotherapy (high-volume metastatic disease)
+    - Radiation to primary tumor (debulking) and metastases (palliative)
+  castration_resistant:
+    - Abiraterone or enzalutamide
+    - Docetaxel or cabazitaxel chemotherapy
+    - Radium-223 (bone metastases)
+    - PARP inhibitors (BRCA mutations)
+    - Pembrolizumab (MSI-high/dMMR tumors)
+  supportive:
+    - Management of ADT side effects: hot flashes, osteoporosis, metabolic syndrome
+    - Bone health: calcium, vitamin D, bisphosphonates
+    - Sexual function and quality of life
+
+clinical_pearls:
+  - Most common cancer in men (excluding skin cancer)
+  - Usually slow-growing; many men die with, not from, prostate cancer
+  - PSA screening controversial: reduces mortality but leads to overdiagnosis/overtreatment
+  - Active surveillance appropriate for low-risk disease (avoid treatment toxicity)
+  - Gleason score most important prognostic factor
+  - African American men and men with family history at higher risk
+  - Treatment side effects: incontinence, erectile dysfunction, bowel changes
+  - Genomic testing (Oncotype Dx, Decipher, Prolaris) can guide treatment decisions
+
+differentials:
+  - Benign prostatic hyperplasia (BPH)
+  - Prostatitis (acute or chronic)
+  - Bladder cancer
+  - Urinary tract infection
+  - Urinary retention from other causes
+
+trace:
+  - Elevated PSA or abnormal DRE prompts prostate biopsy
+  - Biopsy confirms adenocarcinoma with Gleason score
+  - Risk stratification based on PSA, Gleason, and clinical stage
+  - Low-risk: Consider active surveillance
+  - Intermediate/high-risk: Surgery or radiation ± ADT
+  - Metastatic: ADT + novel hormonal agent ± chemotherapy
+  - Monitor PSA for biochemical recurrence
+
+citations:
+  - "NCCN Guidelines: Prostate Cancer"
+  - "AUA Guidelines: Clinically Localized Prostate Cancer"
+  - "ASCO Guidelines: Advanced Prostate Cancer"
+  - "UpToDate: Screening for prostate cancer"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

@@ -1,0 +1,108 @@
+tree_id: SURG-CHOLECYSTITIS
+name: Acute Cholecystitis
+family: surgery
+specialty: General Surgery / Gastroenterology
+presentations:
+  - Right upper quadrant pain (colicky progressing to constant)
+  - Fever and chills
+  - Nausea and vomiting
+  - Pain radiating to right shoulder or scapula
+  - Positive Murphy's sign (inspiratory arrest with RUQ palpation)
+  - Onset often after fatty meal
+  - May have history of biliary colic
+icd10:
+  - K81.0 # Acute cholecystitis
+  - K80.00 # Calculus of gallbladder with acute cholecystitis without obstruction
+  - K80.01 # Calculus of gallbladder with acute cholecystitis with obstruction
+snomed:
+  - "76581006" # Acute cholecystitis
+urgency: High
+urgency_explanation: Acute inflammation requiring hospital admission; risk of complications (gangrene, perforation, sepsis)
+
+referrals:
+  general_surgery: For cholecystectomy planning
+  gastroenterology: If ERCP needed for choledocholithiasis
+  interventional_radiology: For cholecystostomy tube if not surgical candidate
+
+workup:
+  clinical_assessment:
+    - Murphy's sign
+    - Assess for sepsis or complications
+    - Risk stratify: age, comorbidities, signs of perforation
+  laboratory:
+    - CBC (leukocytosis with left shift)
+    - CMP, LFTs (transaminases mildly elevated, alkaline phosphatase elevated if CBD stone)
+    - Total and direct bilirubin
+    - Lipase (rule out pancreatitis)
+    - Blood cultures if septic
+  imaging:
+    - Right upper quadrant ultrasound (first-line):
+      - Gallstones
+      - Gallbladder wall thickening (>3-4 mm)
+      - Pericholecystic fluid
+      - Sonographic Murphy's sign
+      - Distended gallbladder
+    - HIDA scan if ultrasound equivocal (non-filling gallbladder confirms diagnosis)
+    - CT abdomen/pelvis if complications suspected (perforation, abscess)
+
+treatment:
+  acute_management:
+    - NPO (nothing by mouth)
+    - IV fluids for resuscitation
+    - IV antibiotics:
+      - Mild-moderate: Ceftriaxone + metronidazole OR piperacillin-tazobactam
+      - Severe/complicated: Piperacillin-tazobactam or meropenem
+    - Pain control: NSAIDs (ketorolac), opioids if needed
+    - Antiemetics
+  definitive_treatment:
+    early_cholecystectomy:
+      - Laparoscopic cholecystectomy within 72 hours of symptom onset (preferred)
+      - Reduces hospital stay and complications vs delayed surgery
+      - Convert to open if difficult anatomy or complications
+    delayed_cholecystectomy:
+      - If presentation >72 hours, may treat medically first
+      - Interval cholecystectomy 6-8 weeks later
+      - Higher conversion rate to open if delayed
+    percutaneous_cholecystostomy:
+      - High-risk surgical patients (severe comorbidities)
+      - Temporizing measure for septic patients
+      - Interval cholecystectomy once stabilized
+  complications:
+    - Gangrenous cholecystitis: emergent surgery
+    - Perforated cholecystitis: emergent surgery, percutaneous drainage
+    - Emphysematous cholecystitis (gas in wall): emergent surgery, broader antibiotics
+    - Gallbladder empyema: emergent surgery
+
+clinical_pearls:
+  - Most common complication of gallstones (cholelithiasis)
+  - 95% of cases associated with gallstones
+  - Four F's risk factors: Female, Forty, Fertile, Fat (plus Fair)
+  - Murphy's sign: 97% sensitive, 48% specific
+  - Tokyo Guidelines grade severity: Grade I (mild), II (moderate), III (severe)
+  - Early cholecystectomy (<72h) superior to delayed approach
+  - Acalculous cholecystitis (5%): ICU patients, TPN, sepsis, major surgery, burns
+  - Gangrenous cholecystitis more common in elderly men and diabetics
+
+differentials:
+  - Biliary colic (resolves, no fever/leukocytosis)
+  - Choledocholithiasis (jaundice, elevated bilirubin)
+  - Acute pancreatitis (elevated lipase >3x ULN)
+  - Peptic ulcer disease or perforation
+  - Hepatitis
+  - Right lower lobe pneumonia
+  - Acute hepatitis
+  - Fitz-Hugh-Curtis syndrome (perihepatitis from PID)
+
+trace:
+  - Patient presents with RUQ pain, fever, positive Murphy's sign
+  - Order RUQ ultrasound showing gallstones, wall thickening, pericholecystic fluid
+  - Start IV antibiotics and fluid resuscitation
+  - NPO and pain control
+  - Consult surgery for laparoscopic cholecystectomy within 72 hours
+  - If high-risk surgical candidate, consider percutaneous cholecystostomy
+
+citations:
+  - "Tokyo Guidelines for Acute Cholecystitis"
+  - "American College of Surgeons Guidelines"
+  - "UpToDate: Acute calculous cholecystitis - Clinical features and diagnosis"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

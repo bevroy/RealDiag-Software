@@ -1,0 +1,110 @@
+tree_id: ID-SEPSIS
+name: Sepsis and Septic Shock
+family: infectious_disease
+specialty: Critical Care / Infectious Disease
+presentations:
+  - Fever or hypothermia (temperature >38°C or <36°C)
+  - Tachycardia (heart rate >90 bpm)
+  - Tachypnea (respiratory rate >20/min)
+  - Altered mental status
+  - Hypotension (systolic BP <90 mmHg)
+  - Hypoperfusion signs: mottled skin, decreased urine output, lactic acidosis
+  - Source of infection may be apparent (pneumonia, UTI, abdominal, skin/soft tissue)
+icd10:
+  - A41.9 # Sepsis, unspecified organism
+  - R65.20 # Severe sepsis without septic shock
+  - R65.21 # Severe sepsis with septic shock
+snomed:
+  - "91302008" # Sepsis
+  - "76571007" # Septic shock
+urgency: Critical
+urgency_explanation: Medical emergency requiring immediate intervention; high mortality without rapid treatment
+
+referrals:
+  critical_care: Immediate ICU consultation for septic shock or severe sepsis
+  infectious_disease: For antibiotic stewardship and source control guidance
+
+workup:
+  immediate_assessment:
+    - SIRS criteria (2+ of: temp, HR, RR, WBC abnormalities)
+    - qSOFA score (mental status, SBP ≤100, RR ≥22)
+    - SOFA score for organ dysfunction
+  laboratory:
+    - Blood cultures x2 (before antibiotics if possible, but don't delay treatment)
+    - CBC with differential
+    - Comprehensive metabolic panel
+    - Lactic acid (repeat q2-4h to assess response)
+    - Procalcitonin
+    - Coagulation studies (PT/INR, PTT, fibrinogen, D-dimer if DIC suspected)
+    - Urinalysis and urine culture
+    - Cultures from suspected source (sputum, wound, CSF, etc)
+  imaging:
+    - Chest X-ray (pneumonia)
+    - CT imaging based on suspected source
+    - Ultrasound for abscess or fluid collections
+
+treatment:
+  sepsis_six_bundle:
+    within_1_hour:
+      - Administer high-flow oxygen
+      - Obtain blood cultures
+      - Administer broad-spectrum antibiotics
+      - Measure serum lactate
+      - Start IV fluid resuscitation
+      - Measure urine output (consider Foley catheter)
+  fluid_resuscitation:
+    - Initial: 30 mL/kg crystalloid bolus within 3 hours
+    - Target MAP ≥65 mmHg
+    - Reassess volume status frequently
+    - Avoid excessive fluids after initial resuscitation
+  antibiotics:
+    empiric_therapy:
+      - Community-acquired: Vancomycin + piperacillin-tazobactam or cefepime
+      - Healthcare-associated: Add coverage for MRSA, Pseudomonas, resistant gram-negatives
+      - Neutropenic: Cefepime or meropenem ± vancomycin
+      - Post-splenectomy: Add ceftriaxone for encapsulated organisms
+      - Abdominal source: Add metronidazole or use carbapenem
+    principles:
+      - Administer within 1 hour of recognition
+      - De-escalate based on culture results
+      - Source control within 12 hours if possible
+  vasopressors:
+    - First-line: Norepinephrine (target MAP ≥65)
+    - Second-line: Add vasopressin or epinephrine
+    - Consider hydrocortisone if refractory shock
+  adjunctive:
+    - Stress-dose steroids (hydrocortisone 200 mg/day) if refractory to fluids/vasopressors
+    - Blood transfusion if Hgb <7 g/dL
+    - Mechanical ventilation if respiratory failure
+
+clinical_pearls:
+  - Time to antibiotics is critical: each hour delay increases mortality
+  - Lactate >4 mmol/L or persistent elevation indicates poor prognosis
+  - Sepsis-3 definitions: Sepsis = infection + SOFA score ≥2; Septic shock = sepsis + vasopressors + lactate >2 despite fluids
+  - Most common sources: pneumonia (50%), abdominal (25%), urinary (10%)
+  - Procalcitonin helps differentiate bacterial vs viral and guide antibiotic duration
+  - Early goal-directed therapy improves outcomes
+
+differentials:
+  - SIRS from non-infectious causes (pancreatitis, trauma, burns)
+  - Cardiogenic shock
+  - Hypovolemic shock
+  - Anaphylactic shock
+  - Adrenal crisis
+  - Thyroid storm
+  - Toxic ingestion
+
+trace:
+  - Recognize infection with organ dysfunction
+  - Activate sepsis protocol immediately
+  - Obtain cultures and start antibiotics within 1 hour
+  - Aggressive fluid resuscitation (30 mL/kg)
+  - Start vasopressors if hypotension persists despite fluids
+  - Identify and control source of infection
+  - ICU admission for close monitoring
+
+citations:
+  - "Surviving Sepsis Campaign Guidelines 2021"
+  - "SCCM/ESICM: The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3)"
+  - "UpToDate: Evaluation and management of suspected sepsis and septic shock in adults"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

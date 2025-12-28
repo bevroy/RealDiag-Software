@@ -1,0 +1,90 @@
+tree_id: HEME-DVT
+name: Deep Vein Thrombosis (DVT)
+family: hematology
+specialty: Hematology / Vascular Medicine
+presentations:
+  - Unilateral leg swelling and pain
+  - Warmth and erythema over affected vein
+  - Palpable cord (superficial thrombophlebitis)
+  - Positive Homan's sign (dorsiflexion pain)
+  - May be asymptomatic
+  - Risk factors: immobility, surgery, malignancy, oral contraceptives, pregnancy, thrombophilia
+icd10:
+  - I82.40 # Acute embolism and thrombosis of unspecified deep veins of lower extremity
+  - I82.401 # Acute embolism and thrombosis of unspecified deep veins of right lower extremity
+  - I82.402 # Acute embolism and thrombosis of unspecified deep veins of left lower extremity
+snomed:
+  - "132281000119108" # Deep vein thrombosis of lower extremity
+urgency: High
+urgency_explanation: Risk of pulmonary embolism; requires prompt anticoagulation
+
+referrals:
+  hematology: For recurrent DVT, suspected thrombophilia, or anticoagulation management
+  vascular_surgery: For extensive iliofemoral DVT or phlegmasia cerulea dolens
+
+workup:
+  initial_assessment:
+    - Complete history including risk factors
+    - Physical examination of both lower extremities
+    - Calculate Wells score for DVT probability
+  laboratory:
+    - D-dimer (if low/moderate pretest probability)
+    - CBC with platelet count
+    - PT/INR, aPTT (baseline before anticoagulation)
+    - Creatinine (for DOAC dosing)
+    - Consider thrombophilia workup if unprovoked or recurrent
+  imaging:
+    - Compression ultrasonography with Doppler (first-line)
+    - CT or MR venography (if ultrasound inconclusive or suspicion of pelvic/IVC thrombus)
+
+treatment:
+  anticoagulation:
+    acute_phase:
+      - LMWH: Enoxaparin 1 mg/kg SC q12h or 1.5 mg/kg SC daily
+      - Fondaparinux: Weight-based dosing
+      - Direct oral anticoagulants (DOACs): Apixaban, rivaroxaban (no bridging needed)
+      - Unfractionated heparin IV (if high bleeding risk or renal impairment)
+    chronic_phase:
+      - Warfarin: Target INR 2-3 (bridge with LMWH for 5+ days until INR therapeutic)
+      - DOACs: Apixaban, rivaroxaban, edoxaban, dabigatran (preferred for ease of use)
+      - Duration: 3 months minimum (provoked), 6-12+ months (unprovoked or recurrent)
+  supportive:
+    - Compression stockings (controversial for post-thrombotic syndrome prevention)
+    - Early mobilization once anticoagulated
+    - Leg elevation
+  special_situations:
+    - Massive iliofemoral DVT: Consider catheter-directed thrombolysis
+    - Phlegmasia cerulea dolens: Emergent thrombectomy/thrombolysis
+    - Pregnancy: LMWH throughout pregnancy (warfarin contraindicated)
+    - Active cancer: LMWH or DOACs (rivaroxaban, edoxaban)
+
+clinical_pearls:
+  - Wells score helps stratify pretest probability
+  - Negative D-dimer + low Wells score effectively rules out DVT
+  - Isolated calf vein thrombosis may be managed with serial ultrasounds vs anticoagulation
+  - Post-thrombotic syndrome occurs in 20-50% despite treatment
+  - Screen for occult malignancy in unprovoked DVT (age >50)
+  - May-Thurner syndrome: Left iliac vein compression by right iliac artery
+
+differentials:
+  - Cellulitis
+  - Ruptured Baker's cyst
+  - Muscle strain or hematoma
+  - Chronic venous insufficiency
+  - Lymphedema
+  - Compartment syndrome
+  - Superficial thrombophlebitis
+
+trace:
+  - Patient presents with unilateral leg swelling
+  - Calculate Wells score
+  - If low/moderate probability: Order D-dimer
+  - If high probability or positive D-dimer: Compression ultrasound
+  - If DVT confirmed: Initiate anticoagulation
+  - Risk stratify for recurrence and determine treatment duration
+
+citations:
+  - "American College of Chest Physicians (CHEST) Antithrombotic Therapy Guidelines"
+  - "UpToDate: Deep vein thrombosis in adults - Treatment"
+  - "NICE Guidelines: Venous thromboembolic diseases"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"
