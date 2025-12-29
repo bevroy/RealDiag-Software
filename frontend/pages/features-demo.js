@@ -45,6 +45,21 @@ export default function FeaturesDemo() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)', padding: '2rem' }}>
+      <style>{`
+        details summary span:first-child {
+          transition: transform 0.2s ease;
+          display: inline-block;
+        }
+        details[open] summary span:first-child {
+          transform: rotate(90deg);
+        }
+        details summary:hover {
+          background: rgba(15, 118, 110, 0.05);
+          border-radius: 6px;
+          padding: 0.5rem;
+          margin: -0.5rem;
+        }
+      `}</style>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Task 6.1: Skip Link */}
         <SkipLink targetId="main-content" />
@@ -234,9 +249,22 @@ export default function FeaturesDemo() {
         </section>
 
         {/* Core Diagnostic Features */}
-        <section aria-labelledby="diagnostic-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="diagnostic-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔬 Core Diagnostic Features</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🔬 Core Diagnostic Features
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Symptom Search</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -271,12 +299,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Patient Safety Features */}
-        <section aria-labelledby="safety-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="safety-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🛡️ Patient Safety Features</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🛡️ Patient Safety Features
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Medication Safety</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -313,12 +354,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Clinical Decision Support */}
-        <section aria-labelledby="decision-support-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="decision-support-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🧠 Advanced Decision Support</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🧠 Advanced Decision Support
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Likelihood Analysis</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -353,12 +407,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Educational Features */}
-        <section aria-labelledby="education-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="education-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>📚 Medical Education & Training</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            📚 Medical Education & Training
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Case Library</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -393,12 +460,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Integration Features */}
-        <section aria-labelledby="integration-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="integration-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔌 Integration & Interoperability</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🔌 Integration & Interoperability
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>FHIR/EHR Integration</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -433,12 +513,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Mobile & Offline */}
-        <section aria-labelledby="mobile-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="mobile-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>📱 Mobile & Offline Capabilities</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            📱 Mobile & Offline Capabilities
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Progressive Web App</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -473,12 +566,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Security & Compliance */}
-        <section aria-labelledby="security-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="security-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔒 Security & Compliance</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🔒 Security & Compliance
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Data Encryption</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -513,12 +619,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* User Management */}
-        <section aria-labelledby="user-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="user-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>👤 User Management & Personalization</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            👤 User Management & Personalization
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Account Management</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -553,12 +672,25 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Patient-Facing Features */}
-        <section aria-labelledby="patient-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="patient-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🏥 Patient-Facing Features</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🏥 Patient-Facing Features
+          </summary>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', paddingTop: '1rem' }}>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Patient Portal</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
@@ -632,13 +764,26 @@ export default function FeaturesDemo() {
               </ul>
             </div>
           </div>
-        </section>
+        </details>
 
         {/* Task 6.1: Accessibility Features */}
-        <section aria-labelledby="accessibility-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="accessibility-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>♿ Accessibility (WCAG 2.1 AA)</h2>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            ♿ Accessibility (WCAG 2.1 AA)
+          </summary>
           
-          <div style={{ 
+          <div style={{ paddingTop: '1rem', 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
             gap: '1.5rem',
@@ -698,13 +843,26 @@ export default function FeaturesDemo() {
               </div>
             </div>
           </div>
-        </section>
+        </details>
         
         {/* Task 4.3: Tablet Optimization */}
-        <section aria-labelledby="tablet-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="tablet-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Tablet Optimization</h2>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            📱 Tablet Optimization
+          </summary>
           
-          <div className="tablet-split-screen" style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          <div className="tablet-split-screen" style={{ paddingTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             <div className="tablet-search-panel" style={{ 
               padding: '1.5rem', 
               background: 'white', 
@@ -764,14 +922,27 @@ export default function FeaturesDemo() {
               </div>
             </div>
           </div>
-        </section>
+        </details>
         
         {/* Task 3.3: Advanced Decision Support */}
-        <section aria-labelledby="decision-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="decision-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Advanced Decision Support</h2>
+        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <summary style={{ 
+            color: '#0f766e', 
+            fontSize: '1.5rem', 
+            fontWeight: '600',
+            cursor: 'pointer',
+            listStyle: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1rem'
+          }}>
+            <span style={{ fontSize: '0.875rem' }}>▶</span>
+            🧮 Advanced Decision Support
+          </summary>
           
           <div style={{ 
-            marginTop: '1rem',
+            paddingTop: '1rem',
             padding: '2rem',
             background: 'white',
             borderRadius: '8px',
@@ -864,7 +1035,7 @@ export default function FeaturesDemo() {
               </div>
             </div>
           </div>
-        </section>
+        </details>
         
         {/* Live Region Demo */}
         <LiveRegion 
