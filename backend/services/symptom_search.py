@@ -259,6 +259,18 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 # Filter out empty strings
                 icd10_value = [str(code) for code in icd10_value if code]
                 
+                # Normalize clinical_pearls to list of strings (convert dicts to "key: value" format)
+                clinical_pearls_raw = tree_data.get('clinical_pearls', [])
+                clinical_pearls = []
+                if isinstance(clinical_pearls_raw, list):
+                    for pearl in clinical_pearls_raw:
+                        if isinstance(pearl, dict):
+                            # Convert dict to "key: value" string format
+                            for key, value in pearl.items():
+                                clinical_pearls.append(f"{key}: {value}")
+                        elif isinstance(pearl, str):
+                            clinical_pearls.append(pearl)
+                
                 rule = {
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
@@ -267,7 +279,7 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'snomed': snomed_value,
                     'sensitivity': tree_data.get('sensitivity'),
                     'specificity': tree_data.get('specificity'),
-                    'clinical_pearls': tree_data.get('clinical_pearls', []),
+                    'clinical_pearls': clinical_pearls,
                     'management': management,
                     'tests': tests,
                     'referrals': referral_list
