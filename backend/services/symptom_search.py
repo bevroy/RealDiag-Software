@@ -491,12 +491,9 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         # Load all families
         all_families = load_all_families()
         logging.info(f"Loaded {len(all_families)} families")
-    except Exception as e:
-        logging.error(f"Error in symptom search: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
-    
-    # Filter by family if specified
-    if request.family:
+        
+        # Filter by family if specified
+        if request.family:
         if request.family not in all_families:
             raise HTTPException(status_code=404, detail=f"Family not found: {request.family}")
         families_to_search = {request.family: all_families[request.family]}
@@ -590,6 +587,10 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         return response_dict
     
     return response_data
+    
+    except Exception as e:
+        logging.error(f"Error in symptom search: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Symptom search error: {str(e)}")
 
 
 @router.get("/search/suggestions")
