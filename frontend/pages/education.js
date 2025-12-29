@@ -28,7 +28,6 @@ export default function EducationPage() {
   const [weakAreas, setWeakAreas] = useState([]);
   const [recentActivity, setRecentActivity] = useState([]);
   const [studyPlan, setStudyPlan] = useState(null);
-  const [expandedCases, setExpandedCases] = useState(new Set());
 
   // Use runtime config for API base, with fallback to env var or Render URL
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
@@ -458,11 +457,13 @@ export default function EducationPage() {
           border: 2px solid #e0e0e0;
           border-radius: 12px;
           padding: 20px;
+          cursor: pointer;
           transition: all 0.3s;
         }
 
         .case-card:hover {
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
           border-color: #14b8a6;
         }
 
@@ -1740,67 +1741,19 @@ export default function EducationPage() {
               </div>
             ) : (
               <div className="cases-grid">
-                {cases.map((caseItem) => {
-                  const isExpanded = expandedCases.has(caseItem.case_id);
-                  return (
-                    <div 
-                      key={caseItem.case_id} 
-                      className="case-card"
-                    >
-                      <h3>{caseItem.title}</h3>
-                      {isExpanded && (
-                        <>
-                          <p style={{ marginTop: '12px', color: '#555' }}>{caseItem.presentation}</p>
-                          <div style={{ marginTop: '12px' }}>
-                            <span className={`badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
-                            <span className="badge">{caseItem.specialty}</span>
-                          </div>
-                        </>
-                      )}
-                      <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const newExpanded = new Set(expandedCases);
-                            if (isExpanded) {
-                              newExpanded.delete(caseItem.case_id);
-                            } else {
-                              newExpanded.add(caseItem.case_id);
-                            }
-                            setExpandedCases(newExpanded);
-                          }}
-                          style={{
-                            padding: '6px 12px',
-                            fontSize: '14px',
-                            background: '#f0f9ff',
-                            border: '1px solid #14b8a6',
-                            borderRadius: '6px',
-                            color: '#14b8a6',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                          }}
-                        >
-                          {isExpanded ? '▲ Show Less' : '▼ Show More'}
-                        </button>
-                        <button
-                          onClick={() => setSelectedCase(caseItem)}
-                          style={{
-                            padding: '6px 12px',
-                            fontSize: '14px',
-                            background: '#14b8a6',
-                            border: 'none',
-                            borderRadius: '6px',
-                            color: 'white',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                          }}
-                        >
-                          📖 View Full Case
-                        </button>
-                      </div>
+                {cases.map((caseItem) => (
+                  <div 
+                    key={caseItem.case_id} 
+                    className="case-card"
+                    onClick={() => setSelectedCase(caseItem)}
+                  >
+                    <h3>{caseItem.title}</h3>
+                    <div style={{ marginTop: '8px' }}>
+                      <span className={`badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
+                      <span className="badge">{caseItem.specialty}</span>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             )}
           </div>
