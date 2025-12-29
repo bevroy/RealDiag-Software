@@ -115,6 +115,8 @@ class DiagnosisMatch(BaseModel):
     management: Optional[List[str]] = None
     tests: Optional[List[str]] = None  # Diagnostic tests to order
     referrals: Optional[List[str]] = None  # Specialist referrals
+    has_tree: Optional[bool] = True  # Whether a decision tree exists for this diagnosis
+    case_examples: Optional[List[str]] = None  # Case IDs that match this diagnosis
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -325,6 +327,151 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
 logging.info("Symptom search module loaded - trees will be loaded on first request")
 
 
+# Cache for clinical cases
+_cases_cache = None
+_cases_cache_time = 0
+
+def load_clinical_cases() -> List[Dict[str, Any]]:
+    """
+    Load clinical cases from JSON database.
+    Uses simple caching to avoid reloading on every request.
+    """
+    global _cases_cache, _cases_cache_time
+    
+    current_time = time.time()
+    if _cases_cache is not None and (current_time - _cases_cache_time) < 300:
+        logging.debug(f"Using cached cases data ({len(_cases_cache)} cases)")
+        return _cases_cache
+    
+    logging.info("Loading clinical cases (cache miss or expired)")
+    
+    cases_file = Path(__file__).parent.parent / "data" / "clinical_cases.json"
+    
+    if not cases_file.exists():
+        logging.warning(f"Clinical cases file not found: {cases_file}")
+        return []
+    
+    try:
+        import json
+        with open(cases_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            cases = data.get('cases', [])
+            logging.info(f"Loaded {len(cases)} clinical cases")
+            
+            # Update cache
+            _cases_cache = cases
+            _cases_cache_time = current_time
+            
+            return cases
+    except Exception as e:
+        logging.error(f"Error loading clinical cases: {e}")
+        return []
+
+
+def search_clinical_cases(normalized_symptoms: List[str], original_symptoms: List[str]) -> Dict[str, Dict]:
+    """
+    Search clinical cases database for diagnoses matching symptoms.
+    Returns dict of {diagnosis_id: match_data} for diagnoses found in cases but not in trees.
+    
+    Args:
+        normalized_symptoms: List of normalized symptom strings for matching
+        original_symptoms: Original symptom strings for display
+        
+    Returns:
+        Dict mapping diagnosis IDs to match information including:
+        - diagnosis: str (diagnosis name)
+        - specialty: str
+        - score: float
+        - matched_presentations: list
+        - case_ids: list
+        - icd10: list
+    """
+    cases = load_clinical_cases()
+    diagnosis_matches = {}
+    
+    for case in cases:
+        # Extract searchable text from case
+        presentation = case.get('presentation', '')
+        correct_diagnosis = case.get('correct_diagnosis', '')
+        differential = case.get('differential', [])
+        tags = case.get('tags', [])
+        specialty = case.get('specialty', '')
+        case_id = case.get('case_id', '')
+        
+        # Combine searchable text
+        searchable_text = f"{presentation} {' '.join(tags)}".lower()
+        
+        # Calculate match score for this case
+        score = 0.0
+        matched = []
+        
+        for symptom in normalized_symptoms:
+            if symptom in searchable_text:
+                score += 5.0  # Exact phrase match
+                matched.append(symptom)
+            else:
+                # Word overlap
+                symptom_words = set(symptom.split())
+                text_words = set(searchable_text.split())
+                overlap = symptom_words & text_words
+                if overlap:
+                    score += len(overlap) * 1.0
+                    if symptom not in matched:
+                        matched.append(symptom)
+        
+        # Only include if there's a match
+        if score > 0:
+            # Add correct diagnosis
+            if correct_diagnosis:
+                if correct_diagnosis not in diagnosis_matches:
+                    diagnosis_matches[correct_diagnosis] = {
+                        'diagnosis': correct_diagnosis,
+                        'specialty': specialty,
+                        'score': 0.0,
+                        'matched_presentations': [],
+                        'case_ids': [],
+                        'icd10': [],
+                        'all_presentations': []
+                    }
+                
+                # Update with best score for this diagnosis
+                if score > diagnosis_matches[correct_diagnosis]['score']:
+                    diagnosis_matches[correct_diagnosis]['score'] = score
+                    diagnosis_matches[correct_diagnosis]['matched_presentations'] = matched
+                    diagnosis_matches[correct_diagnosis]['all_presentations'].append(presentation)
+                
+                # Always add case ID
+                if case_id not in diagnosis_matches[correct_diagnosis]['case_ids']:
+                    diagnosis_matches[correct_diagnosis]['case_ids'].append(case_id)
+            
+            # Add differential diagnoses (with lower scores)
+            for diff_dx in differential:
+                if diff_dx and diff_dx != correct_diagnosis:
+                    if diff_dx not in diagnosis_matches:
+                        diagnosis_matches[diff_dx] = {
+                            'diagnosis': diff_dx,
+                            'specialty': specialty,
+                            'score': 0.0,
+                            'matched_presentations': [],
+                            'case_ids': [],
+                            'icd10': [],
+                            'all_presentations': []
+                        }
+                    
+                    # Differential diagnoses get 50% of the case's score
+                    diff_score = score * 0.5
+                    if diff_score > diagnosis_matches[diff_dx]['score']:
+                        diagnosis_matches[diff_dx]['score'] = diff_score
+                        diagnosis_matches[diff_dx]['matched_presentations'] = matched
+                        diagnosis_matches[diff_dx]['all_presentations'].append(presentation)
+                    
+                    # Add case ID as differential example
+                    if case_id not in diagnosis_matches[diff_dx]['case_ids']:
+                        diagnosis_matches[diff_dx]['case_ids'].append(case_id)
+    
+    return diagnosis_matches
+
+
 def normalize_text(text: str) -> str:
     """Normalize text for comparison (lowercase, remove punctuation)."""
     text = text.lower()
@@ -527,8 +674,9 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         # Pre-normalize input symptoms once
         normalized_input = [normalize_text(s) for s in request.symptoms]
         
-        # Search and score all rules
+        # Search and score all rules from decision trees
         results = []
+        tree_diagnosis_ids = set()  # Track which diagnoses have trees
         
         for family_name, rules in families_to_search.items():
             # Apply filters
@@ -550,9 +698,12 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                 
                 # Only include if there's a match
                 if score > 0:
+                    rule_id = rule.get('id', '')
+                    tree_diagnosis_ids.add(rule_id)  # Track that this diagnosis has a tree
+                    
                     # Prepare result with enhanced metadata
                     diagnosis_match = DiagnosisMatch(
-                        rule_id=rule.get('id', ''),
+                        rule_id=rule_id,
                         label=rule.get('label', ''),
                         family=family_name,
                         match_score=round(score, 2),
@@ -565,10 +716,39 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                         clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
                         management=rule.get('management'),
                         tests=rule.get('tests'),
-                        referrals=rule.get('referrals')
+                        referrals=rule.get('referrals'),
+                        has_tree=True,
+                        case_examples=None
                     )
                     
                     results.append(diagnosis_match)
+        
+        # Search clinical cases database for additional diagnoses without trees
+        case_diagnoses = search_clinical_cases(normalized_input, request.symptoms)
+        
+        # Add case-based diagnoses that don't have decision trees
+        for diagnosis_id, match_data in case_diagnoses.items():
+            if diagnosis_id not in tree_diagnosis_ids:  # Only add if no tree exists
+                # Create a diagnosis match from case data
+                diagnosis_match = DiagnosisMatch(
+                    rule_id=diagnosis_id,
+                    label=match_data['diagnosis'],
+                    family=match_data['specialty'],
+                    match_score=round(match_data['score'] / len(match_data['all_presentations']) if match_data['all_presentations'] else match_data['score'], 2),
+                    matched_presentations=match_data['matched_presentations'],
+                    all_presentations=match_data['all_presentations'],
+                    icd10=match_data.get('icd10', []),
+                    snomed=[],
+                    sensitivity=None,
+                    specificity=None,
+                    clinical_pearls=None,
+                    management=None,
+                    tests=None,
+                    referrals=None,
+                    has_tree=False,  # Flag indicating no decision tree exists
+                    case_examples=match_data['case_ids']  # Link to example cases
+                )
+                results.append(diagnosis_match)
         
         # Sort by score (descending)
         results.sort(key=lambda x: x.match_score, reverse=True)
