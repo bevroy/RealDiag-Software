@@ -1,0 +1,668 @@
+{
+  "cases": [
+    {
+      "case_id": "CASE-001",
+      "title": "Acute Chest Pain in Middle-Aged Man",
+      "specialty": "cardiology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Differentiate acute coronary syndrome from other causes of chest pain",
+        "Apply HEART score for risk stratification",
+        "Recognize STEMI criteria on ECG"
+      ],
+      "presentation": "55-year-old man with sudden-onset crushing chest pain radiating to left arm, associated with diaphoresis and dyspnea",
+      "history": {
+        "chief_complaint": "Chest pain for 1 hour",
+        "hpi": "Patient was mowing lawn when developed severe substernal chest pressure. Pain radiates to left arm and jaw. Associated with shortness of breath and sweating. No relief with rest.",
+        "pmh": "Hypertension, hyperlipidemia, type 2 diabetes",
+        "medications": "Metformin, lisinopril, atorvastatin",
+        "social": "Smoking 1 PPD x 30 years, occasional alcohol",
+        "family": "Father had MI at age 60"
+      },
+      "physical_exam": {
+        "vitals": "BP 160/95, HR 105, RR 22, O2 96% RA, Temp 98.6\u00b0F",
+        "general": "Diaphoretic, anxious, in moderate distress",
+        "cardiac": "Tachycardic, regular rhythm, no murmurs",
+        "lungs": "Clear bilaterally",
+        "extremities": "No edema, pulses intact"
+      },
+      "labs": {
+        "troponin": "0.8 ng/mL (elevated)",
+        "ck_mb": "Elevated",
+        "ecg": "ST elevation in leads II, III, aVF"
+      },
+      "imaging": {
+        "cxr": "Cardiomegaly, no acute findings"
+      },
+      "correct_diagnosis": "CARD-STEMI",
+      "differential": [
+        "CARD-STEMI",
+        "CARD-UNSTABLE-ANGINA",
+        "CARD-PERICARDITIS",
+        "PULM-PE"
+      ],
+      "explanation": "This is a classic presentation of inferior STEMI. Key features include: (1) Cardiac risk factors (smoking, HTN, DM, HLD, family history), (2) Classic anginal chest pain with radiation, (3) Associated symptoms (diaphoresis, dyspnea), (4) Elevated troponin, (5) ST elevation in inferior leads (II, III, aVF). Time is muscle - activate cath lab immediately!",
+      "management_pearls": [
+        "MONA: Morphine, Oxygen (if hypoxic), Nitroglycerin, Aspirin 325mg",
+        "Activate cath lab for emergent PCI (door-to-balloon <90 min)",
+        "Dual antiplatelet therapy: Aspirin + P2Y12 inhibitor (ticagrelor or prasugrel)",
+        "Anticoagulation: Heparin or bivalirudin",
+        "Beta-blocker and ACE inhibitor within 24 hours",
+        "High-intensity statin (atorvastatin 80mg)"
+      ],
+      "references": [
+        "2017 ACC/AHA STEMI Guidelines",
+        "UpToDate: ST-elevation myocardial infarction: Management"
+      ],
+      "tags": [
+        "chest pain",
+        "cardiology",
+        "emergency",
+        "STEMI",
+        "ACS"
+      ],
+      "created_at": "2025-11-19T00:47:31.758781",
+      "author": "Dr. Teaching Attending"
+    },
+    {
+      "case_id": "CASE-002",
+      "title": "Young Woman with Severe Headache",
+      "specialty": "neurology",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize red flags for secondary headache",
+        "Diagnose subarachnoid hemorrhage",
+        "Interpret LP findings in SAH"
+      ],
+      "presentation": "28-year-old woman with sudden-onset 'worst headache of life', associated with neck stiffness and photophobia",
+      "history": {
+        "chief_complaint": "Severe headache for 2 hours",
+        "hpi": "Patient was at work when suddenly developed explosive headache. Describes it as 'thunderclap' - reached maximum intensity within seconds. Associated with nausea, vomiting, and neck pain. No trauma.",
+        "pmh": "Migraine headaches (different character), no previous similar episodes",
+        "medications": "OCPs, sumatriptan PRN",
+        "social": "Non-smoker, social drinker",
+        "family": "Mother has migraines"
+      },
+      "physical_exam": {
+        "vitals": "BP 145/90, HR 88, RR 18, Temp 99.0\u00b0F",
+        "general": "Photophobic, prefers dark room",
+        "neuro": "Alert and oriented, cranial nerves intact, no focal deficits",
+        "neck": "Nuchal rigidity present",
+        "fundoscopy": "No papilledema"
+      },
+      "labs": {
+        "cbc": "Normal",
+        "coags": "Normal"
+      },
+      "imaging": {
+        "ct_head": "Subtle hyperdensity in basilar cisterns",
+        "lp": "Opening pressure 25 cm H2O, RBC 50,000 (tube 1) and 48,000 (tube 4), xanthochromia present"
+      },
+      "correct_diagnosis": "NEU-SAH",
+      "differential": [
+        "NEU-SAH",
+        "NEU-MENINGITIS",
+        "NEU-MIGRAINE",
+        "NEU-CVT"
+      ],
+      "explanation": "Classic subarachnoid hemorrhage presentation: 'thunderclap headache' (sudden, severe, maximal at onset), meningismus (neck stiffness), photophobia. CT shows blood in basilar cisterns. LP confirms SAH with persistent RBCs and xanthochromia (breakdown of hemoglobin). Key is recognizing 'worst headache of life' red flag.",
+      "management_pearls": [
+        "Immediate neurosurgery consult",
+        "CT angiography to identify aneurysm source",
+        "Nimodipine 60mg q4h to prevent vasospasm",
+        "Blood pressure control: SBP <160 mmHg (avoid hypotension)",
+        "Serial neuro exams for deterioration",
+        "Prevent rebleeding: early aneurysm securement (coiling or clipping)"
+      ],
+      "references": [
+        "AHA/ASA Guidelines for SAH Management",
+        "Subarachnoid Hemorrhage: Diagnosis and Management"
+      ],
+      "tags": [
+        "headache",
+        "neurology",
+        "emergency",
+        "SAH",
+        "thunderclap"
+      ],
+      "created_at": "2025-11-19T00:47:31.758796",
+      "author": "Dr. Neurology Attending"
+    },
+    {
+      "case_id": "CASE-003",
+      "title": "Elderly Man with Fever and Productive Cough",
+      "specialty": "pulmonology",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Diagnose community-acquired pneumonia",
+        "Apply CURB-65 score for severity assessment",
+        "Select appropriate antibiotic therapy"
+      ],
+      "presentation": "72-year-old man with 3 days of fever, productive cough with green sputum, and shortness of breath",
+      "history": {
+        "chief_complaint": "Cough and fever for 3 days",
+        "hpi": "Patient developed fever, chills, and productive cough 3 days ago. Sputum is green-yellow. Associated with pleuritic chest pain on right side. Progressive dyspnea.",
+        "pmh": "COPD, hypertension, prior smoker",
+        "medications": "Albuterol inhaler, amlodipine",
+        "social": "Former smoker (quit 5 years ago), 40 pack-year history",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 135/80, HR 98, RR 24, O2 91% RA, Temp 101.5°F",
+        "general": "Ill-appearing, using accessory muscles",
+        "lungs": "Decreased breath sounds right lower lobe, crackles, egophony",
+        "cardiac": "Tachycardic, regular",
+        "extremities": "No cyanosis or edema"
+      },
+      "labs": {
+        "wbc": "15,000 with left shift",
+        "creatinine": "1.2 mg/dL",
+        "bun": "25 mg/dL"
+      },
+      "imaging": {
+        "cxr": "Right lower lobe consolidation"
+      },
+      "correct_diagnosis": "PULM-PNEUMONIA-CAP",
+      "differential": [
+        "PULM-PNEUMONIA-CAP",
+        "PULM-COPD-EXACERBATION",
+        "PULM-BRONCHITIS-ACUTE",
+        "CARDS-CHF"
+      ],
+      "explanation": "Community-acquired pneumonia with typical presentation: fever, productive cough, pleuritic chest pain, hypoxia, tachypnea. Physical exam shows focal findings (crackles, egophony). CXR confirms consolidation. CURB-65 score: 2 points (age >65, elevated BUN) suggests moderate severity requiring hospitalization.",
+      "management_pearls": [
+        "CURB-65: Confusion, Urea >7 mmol/L, RR ≥30, BP <90/60, age ≥65",
+        "Empiric antibiotics: Ceftriaxone + azithromycin or respiratory fluoroquinolone",
+        "Supplemental oxygen to maintain SpO2 >90%",
+        "IV fluids for hydration",
+        "Blood cultures before antibiotics",
+        "Consider MRSA/Pseudomonas coverage if risk factors present"
+      ],
+      "references": [
+        "IDSA/ATS CAP Guidelines 2019",
+        "Community-Acquired Pneumonia in Adults: Diagnosis and Management"
+      ],
+      "tags": [
+        "cough",
+        "pneumonia",
+        "pulmonology",
+        "fever",
+        "respiratory"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Pulmonology Attending"
+    },
+    {
+      "case_id": "CASE-004",
+      "title": "Young Adult with Abdominal Pain",
+      "specialty": "gastroenterology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize classic appendicitis presentation",
+        "Understand Alvarado score",
+        "Differentiate surgical vs non-surgical acute abdomen"
+      ],
+      "presentation": "22-year-old man with 12 hours of progressive right lower quadrant abdominal pain, nausea, and fever",
+      "history": {
+        "chief_complaint": "Belly pain for 12 hours",
+        "hpi": "Pain started periumbilically this morning, then migrated to RLQ. Worsening over time. Associated with anorexia, nausea, one episode of vomiting. No diarrhea. Pain worse with movement.",
+        "pmh": "None",
+        "medications": "None",
+        "social": "College student, occasional alcohol",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 125/75, HR 102, RR 18, Temp 100.8°F",
+        "general": "Lying still, appears uncomfortable",
+        "abdomen": "RLQ tenderness maximal at McBurney's point, rebound and guarding present, positive Rovsing's sign",
+        "rectal": "Normal tone, no masses"
+      },
+      "labs": {
+        "wbc": "13,500 with left shift",
+        "neutrophils": "85%",
+        "urinalysis": "Normal",
+        "pregnancy_test": "Negative"
+      },
+      "imaging": {
+        "ct_abdomen": "Dilated appendix 12mm with periappendiceal fat stranding"
+      },
+      "correct_diagnosis": "GI-APPENDICITIS",
+      "differential": [
+        "GI-APPENDICITIS",
+        "GI-GASTROENTERITIS",
+        "GU-ECTOPIC-PREGNANCY",
+        "GI-MESENTERIC-ADENITIS"
+      ],
+      "explanation": "Classic acute appendicitis: periumbilical pain migrating to RLQ, anorexia, fever, leukocytosis. Physical exam findings (McBurney's point tenderness, rebound, guarding, Rovsing's sign) strongly suggest appendicitis. CT confirms diagnosis. Alvarado score ≥7 indicates high probability requiring surgical consultation.",
+      "management_pearls": [
+        "NPO and IV fluids for resuscitation",
+        "Antibiotics: Ceftriaxone + metronidazole or piperacillin-tazobactam",
+        "Pain control: IV opioids after surgical evaluation",
+        "Urgent surgical consultation for appendectomy",
+        "Laparoscopic preferred over open if available",
+        "Single-dose pre-operative antibiotics if uncomplicated"
+      ],
+      "references": [
+        "JAMA: Appendicitis - Clinical Manifestations and Diagnosis",
+        "World Society of Emergency Surgery guidelines for appendicitis"
+      ],
+      "tags": [
+        "abdominal pain",
+        "appendicitis",
+        "surgery",
+        "gastroenterology",
+        "acute abdomen"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. General Surgery Attending"
+    },
+    {
+      "case_id": "CASE-005",
+      "title": "Diabetic Patient with Altered Mental Status",
+      "specialty": "emergency",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize diabetic ketoacidosis",
+        "Understand DKA treatment protocol",
+        "Identify precipitating factors"
+      ],
+      "presentation": "28-year-old woman with type 1 diabetes presenting with confusion, polyuria, and abdominal pain",
+      "history": {
+        "chief_complaint": "My daughter is confused and breathing fast",
+        "hpi": "Patient ran out of insulin 3 days ago. Developed polyuria, polydipsia, nausea, vomiting, and abdominal pain. Today became confused and lethargic. Fruity breath odor noted by family.",
+        "pmh": "Type 1 diabetes x 10 years, depression",
+        "medications": "Insulin glargine, insulin lispac (ran out 3 days ago)",
+        "social": "Lives with parents, works retail",
+        "family": "Mother has type 2 diabetes"
+      },
+      "physical_exam": {
+        "vitals": "BP 95/60, HR 118, RR 32 (Kussmaul respirations), Temp 98.2°F",
+        "general": "Lethargic, dehydrated, fruity breath",
+        "cardiac": "Tachycardic, regular",
+        "abdomen": "Diffuse tenderness without guarding",
+        "neuro": "GCS 13, oriented to person only"
+      },
+      "labs": {
+        "glucose": "542 mg/dL",
+        "ph": "7.12",
+        "bicarb": "10 mEq/L",
+        "anion_gap": "28",
+        "beta_hydroxybutyrate": "Elevated",
+        "potassium": "5.2 mEq/L",
+        "creatinine": "1.8 mg/dL"
+      },
+      "imaging": {
+        "cxr": "Clear"
+      },
+      "correct_diagnosis": "ENDO-DKA",
+      "differential": [
+        "ENDO-DKA",
+        "ENDO-HHS",
+        "GI-GASTROENTERITIS",
+        "ID-SEPSIS"
+      ],
+      "explanation": "Classic DKA triad: hyperglycemia (>250), metabolic acidosis (pH <7.3, bicarb <18), and ketonemia. Precipitating factor: insulin non-compliance. Clinical features include Kussmaul respirations (respiratory compensation), fruity breath (acetone), dehydration, altered mental status, and abdominal pain (pseudoperitonitis).",
+      "management_pearls": [
+        "ABC stabilization: 2 large-bore IVs, oxygen if needed",
+        "Aggressive IV fluids: 1L NS bolus, then 250-500 mL/hr",
+        "Insulin infusion: 0.1 units/kg/hr (DO NOT give bolus if K+ <3.3)",
+        "Potassium replacement crucial: monitor q2-4h (K+ drops with insulin)",
+        "When glucose <250: switch to D5 1/2 NS, continue insulin until anion gap closes",
+        "Identify precipitating cause: infection, MI, non-compliance most common",
+        "Bicarbonate only if pH <6.9 (controversial)",
+        "Transition to subQ insulin when: eating, anion gap normal, pH >7.3"
+      ],
+      "references": [
+        "ADA: Hyperglycemic Crises in Adults with Diabetes",
+        "DKA Management Protocol - Endocrine Society"
+      ],
+      "tags": [
+        "diabetes",
+        "DKA",
+        "emergency",
+        "endocrinology",
+        "altered mental status"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Emergency Medicine Attending"
+    },
+    {
+      "case_id": "CASE-006",
+      "title": "Febrile Child with Stiff Neck",
+      "specialty": "emergency",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize bacterial meningitis",
+        "Interpret CSF analysis",
+        "Understand empiric antibiotic selection"
+      ],
+      "presentation": "18-month-old girl with fever, irritability, and decreased oral intake brought by worried parents",
+      "history": {
+        "chief_complaint": "High fever and won't stop crying",
+        "hpi": "Fever to 103°F for 12 hours. Progressive irritability. Vomiting twice. Decreased PO intake. Parents note child cries when picked up. No known sick contacts. Immunizations up to date.",
+        "pmh": "Healthy, born full-term",
+        "medications": "Acetaminophen given at home",
+        "social": "In daycare",
+        "family": "No recent travel"
+      },
+      "physical_exam": {
+        "vitals": "BP 95/60, HR 155, RR 28, Temp 103.2°F",
+        "general": "Toxic-appearing, lethargic between crying spells",
+        "heent": "Fontanelle full/bulging, no papilledema",
+        "neck": "Nuchal rigidity, positive Kernig and Brudzinski signs",
+        "skin": "Petechial rash on trunk and extremities",
+        "neuro": "GCS 12, weak cry"
+      },
+      "labs": {
+        "wbc": "22,000 with left shift",
+        "crp": "150 mg/L",
+        "blood_culture": "Pending",
+        "lp": "Opening pressure 28 cm H2O, WBC 3,500 (90% PMNs), protein 180 mg/dL, glucose 25 mg/dL"
+      },
+      "imaging": {
+        "ct_head": "No mass effect, LP safe to perform"
+      },
+      "correct_diagnosis": "ID-MENINGITIS-BACTERIAL",
+      "differential": [
+        "ID-MENINGITIS-BACTERIAL",
+        "ID-MENINGITIS-VIRAL",
+        "ID-SEPSIS",
+        "NEU-ENCEPHALITIS"
+      ],
+      "explanation": "Bacterial meningitis: fever, altered mental status, meningismus (nuchal rigidity, Kernig/Brudzinski signs). Petechial rash suggests Neisseria meningitidis. CSF shows: elevated WBC with PMN predominance, elevated protein, low glucose. Classic CSF formula: 'High cells, high protein, low glucose' = bacterial. This is a medical emergency requiring immediate antibiotics.",
+      "management_pearls": [
+        "Do NOT delay antibiotics for LP if unstable or coagulopathy",
+        "Empiric antibiotics STAT: Vancomycin + Ceftriaxone (add ampicillin if <1 month or >50 years for Listeria)",
+        "Dexamethasone 0.15 mg/kg before/with first antibiotic dose (reduces mortality)",
+        "Aggressive IV fluids and supportive care",
+        "Droplet precautions until bacterial meningitis ruled out",
+        "Prophylaxis for close contacts if N. meningitidis confirmed (rifampin or cipro)",
+        "Monitor for complications: increased ICP, seizures, SIADH, septic shock"
+      ],
+      "references": [
+        "IDSA Practice Guidelines for Bacterial Meningitis",
+        "Pediatric Bacterial Meningitis: Recognition and Management"
+      ],
+      "tags": [
+        "meningitis",
+        "fever",
+        "pediatrics",
+        "emergency",
+        "infectious disease"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Pediatric Emergency Medicine"
+    },
+    {
+      "case_id": "CASE-007",
+      "title": "Man with Sudden Severe Back Pain",
+      "specialty": "emergency",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize ruptured abdominal aortic aneurysm",
+        "Understand hemodynamic management",
+        "Identify risk factors for AAA"
+      ],
+      "presentation": "68-year-old man with sudden-onset severe abdominal and back pain, feeling lightheaded",
+      "history": {
+        "chief_complaint": "My back is killing me",
+        "hpi": "Sudden onset severe abdominal pain radiating to back 1 hour ago while lifting groceries. Describes tearing sensation. Feels dizzy. Wife notes he looks pale and sweaty.",
+        "pmh": "Hypertension, hyperlipidemia, known 5cm AAA on surveillance",
+        "medications": "Amlodipine, atorvastatin, aspirin",
+        "social": "Former smoker (quit 10 years ago), 50 pack-year history",
+        "family": "Father died of 'burst blood vessel'"
+      },
+      "physical_exam": {
+        "vitals": "BP 85/50 (initially 120/80), HR 115, RR 24, O2 94% RA",
+        "general": "Diaphoretic, anxious, pale",
+        "abdomen": "Tender, pulsatile mass, guarding, no bowel sounds",
+        "back": "Flank ecchymosis (Grey-Turner sign)",
+        "extremities": "Cool, delayed cap refill"
+      },
+      "labs": {
+        "hgb": "10.2 g/dL (baseline 14)",
+        "lactate": "4.5 mmol/L",
+        "creatinine": "1.8 mg/dL"
+      },
+      "imaging": {
+        "bedside_us": "Large AAA with hypoechoic rim, free fluid in abdomen",
+        "ct_abdomen": "DEFERRED - patient too unstable"
+      },
+      "correct_diagnosis": "CARDS-AAA-RUPTURE",
+      "differential": [
+        "CARDS-AAA-RUPTURE",
+        "GI-UPPER-GI-BLEED",
+        "CARDS-AORTIC-DISSECTION",
+        "GU-KIDNEY-STONE"
+      ],
+      "explanation": "Ruptured AAA: classic triad of abdominal/back pain, hypotension, and pulsatile abdominal mass. Risk factors present: known AAA, age >65, male, smoking history, HTN. Grey-Turner sign (flank ecchymosis) indicates retroperitoneal hemorrhage. This is immediately life-threatening. Do NOT delay for CT if unstable - go directly to OR!",
+      "management_pearls": [
+        "CALL VASCULAR SURGERY IMMEDIATELY - this is a surgical emergency",
+        "Permissive hypotension: Target SBP 80-100 (avoid overresuscitation causing more bleeding)",
+        "Massive transfusion protocol: 1:1:1 PRBC:FFP:platelets",
+        "2 large-bore IVs, type and cross 10 units PRBC",
+        "Do NOT delay for CT if hemodynamically unstable - STAT to OR",
+        "Endovascular repair (EVAR) preferred if anatomy suitable and available",
+        "Mortality 50% even with surgery - counsel family",
+        "Post-op complications: renal failure, bowel ischemia, compartment syndrome"
+      ],
+      "references": [
+        "SVS Practice Guidelines for Ruptured AAA",
+        "Emergency Management of Ruptured Abdominal Aortic Aneurysm"
+      ],
+      "tags": [
+        "AAA",
+        "rupture",
+        "emergency",
+        "vascular",
+        "back pain"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Vascular Surgery"
+    },
+    {
+      "case_id": "CASE-008",
+      "title": "Woman with Painful Swollen Leg",
+      "specialty": "emergency",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Diagnose deep vein thrombosis",
+        "Apply Wells criteria for DVT",
+        "Understand D-dimer utility"
+      ],
+      "presentation": "45-year-old woman with 2 days of left leg pain and swelling after long flight from Europe",
+      "history": {
+        "chief_complaint": "My left leg is swollen and hurts",
+        "hpi": "Returned from 10-hour flight 3 days ago. Left calf started hurting 2 days ago. Progressive swelling. Pain worse with walking. No trauma. No chest pain or shortness of breath.",
+        "pmh": "Obesity (BMI 35), takes OCPs",
+        "medications": "Oral contraceptive pills",
+        "social": "Works office job, sedentary",
+        "family": "Mother had 'blood clots' after surgery"
+      },
+      "physical_exam": {
+        "vitals": "BP 135/82, HR 85, RR 16, Temp 98.8°F",
+        "general": "Comfortable at rest",
+        "extremities": "Left calf swollen, 3cm larger than right, tender to palpation, warm, positive Homan's sign",
+        "lungs": "Clear bilaterally",
+        "cardiac": "Regular rate and rhythm"
+      },
+      "labs": {
+        "d_dimer": "1,850 ng/mL (elevated)",
+        "cbc": "Normal",
+        "coags": "Normal"
+      },
+      "imaging": {
+        "doppler_ultrasound": "Non-compressible left popliteal and femoral veins, intraluminal echogenic material consistent with thrombus"
+      },
+      "correct_diagnosis": "CARDS-DVT",
+      "differential": [
+        "CARDS-DVT",
+        "MSK-MUSCLE-STRAIN",
+        "ID-CELLULITIS",
+        "MSK-BAKER-CYST"
+      ],
+      "explanation": "Provoked DVT with multiple risk factors: recent prolonged travel (>8 hours), OCPs, obesity, sedentary lifestyle, family history. Wells score: leg swelling (1), calf tenderness (1), entire leg swollen (1), recently bedridden/surgery (1.5) = 4.5 points = DVT likely. Ultrasound confirms non-compressible vein with thrombus.",
+      "management_pearls": [
+        "Anticoagulation immediately: Apixaban 10mg BID x 7 days, then 5mg BID OR Rivaroxaban 15mg BID x 21 days, then 20mg daily",
+        "Alternative: Enoxaparin 1mg/kg BID bridge to warfarin (if DOACs contraindicated)",
+        "Discontinue estrogen-containing contraceptives (thrombogenic)",
+        "Compression stockings for symptom relief (not proven to prevent post-thrombotic syndrome)",
+        "Encourage early mobilization (bedrest not recommended)",
+        "Screen for PE: ask about chest pain, dyspnea, hemoptysis",
+        "Duration: Minimum 3 months, consider extended if unprovoked",
+        "Repeat ultrasound at 1 week if symptoms worsen (rule out extension)"
+      ],
+      "references": [
+        "ACCP Antithrombotic Therapy Guidelines",
+        "Diagnosis and Management of Acute Deep Vein Thrombosis"
+      ],
+      "tags": [
+        "DVT",
+        "leg swelling",
+        "anticoagulation",
+        "vascular",
+        "emergency"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Vascular Medicine"
+    },
+    {
+      "case_id": "CASE-009",
+      "title": "Elderly Woman Feeling Weak and Tired",
+      "specialty": "endocrinology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize hypothyroidism presentation",
+        "Interpret thyroid function tests",
+        "Understand levothyroxine dosing"
+      ],
+      "presentation": "62-year-old woman with several months of fatigue, weight gain, cold intolerance, and constipation",
+      "history": {
+        "chief_complaint": "I'm always tired and cold",
+        "hpi": "Progressive fatigue over 6 months. Gained 15 lbs without dietary changes. Feels cold even in warm rooms. Constipation worsening. Dry skin. Hair thinning. Depressed mood.",
+        "pmh": "Type 2 diabetes, hypertension",
+        "medications": "Metformin, lisinopril",
+        "social": "Retired teacher",
+        "family": "Sister has hypothyroidism"
+      },
+      "physical_exam": {
+        "vitals": "BP 145/88, HR 58, RR 14, Temp 97.2°F",
+        "general": "Appears fatigued, slow speech",
+        "skin": "Dry, coarse, cool",
+        "thyroid": "Mildly enlarged, non-tender",
+        "cardiac": "Bradycardic, regular",
+        "neuro": "Delayed deep tendon reflexes (slow relaxation phase)"
+      },
+      "labs": {
+        "tsh": "28.5 mIU/L (elevated)",
+        "free_t4": "0.6 ng/dL (low)",
+        "anti_tpo": "Positive (elevated)",
+        "cholesterol": "285 mg/dL"
+      },
+      "imaging": {
+        "thyroid_us": "Heterogeneous echotexture consistent with chronic thyroiditis"
+      },
+      "correct_diagnosis": "ENDO-HYPOTHYROIDISM",
+      "differential": [
+        "ENDO-HYPOTHYROIDISM",
+        "PSYCH-DEPRESSION",
+        "CARDS-CHF",
+        "ENDO-ADRENAL-INSUFFICIENCY"
+      ],
+      "explanation": "Primary hypothyroidism (likely Hashimoto's thyroiditis based on positive anti-TPO antibodies). Classic symptoms: fatigue, weight gain, cold intolerance, constipation, dry skin, hair loss, bradycardia, delayed reflexes. Labs show elevated TSH with low free T4. Hypercholesterolemia is common secondary finding.",
+      "management_pearls": [
+        "Levothyroxine: Start 1.6 mcg/kg/day (round to 50, 75, 88, 100 mcg tablets)",
+        "Take on empty stomach, 30-60 minutes before breakfast",
+        "Recheck TSH in 6-8 weeks, adjust dose by 12.5-25 mcg increments",
+        "Goal TSH: 0.5-2.5 mIU/L (lower end for young patients)",
+        "Elderly/cardiac disease: Start low (25 mcg), go slow (risk of precipitating MI)",
+        "Drug interactions: Iron, calcium, PPIs decrease absorption (separate by 4 hours)",
+        "Monitor symptoms and TSH every 6-12 months once stable",
+        "Lifelong therapy required in most cases"
+      ],
+      "references": [
+        "ATA Guidelines for Hypothyroidism Treatment",
+        "Management of Hypothyroidism in Adults"
+      ],
+      "tags": [
+        "hypothyroidism",
+        "fatigue",
+        "endocrinology",
+        "thyroid",
+        "Hashimoto"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Endocrinology"
+    },
+    {
+      "case_id": "CASE-010",
+      "title": "Man with Sudden Vision Loss",
+      "specialty": "emergency",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize central retinal artery occlusion",
+        "Understand ophthalmologic emergencies",
+        "Know treatment timeframe for CRAO"
+      ],
+      "presentation": "65-year-old man with sudden, painless loss of vision in right eye 1 hour ago",
+      "history": {
+        "chief_complaint": "I can't see out of my right eye",
+        "hpi": "Sudden onset complete vision loss in right eye while reading newspaper. Painless. No preceding symptoms. No trauma. No flashing lights or floaters. Left eye vision normal.",
+        "pmh": "Hypertension, hyperlipidemia, atrial fibrillation (not anticoagulated)",
+        "medications": "Amlodipine, atorvastatin, metoprolol",
+        "social": "Smoker 1 PPD x 40 years",
+        "family": "Father had stroke"
+      },
+      "physical_exam": {
+        "vitals": "BP 165/95, HR 88 irregular, RR 16",
+        "eye_exam": "Right eye: Light perception only, RAPD present, fundoscopy shows pale retina with cherry red spot at macula",
+        "neuro": "Otherwise intact, no focal deficits",
+        "cardiac": "Irregular rhythm, no murmurs",
+        "carotid": "Bruit present on right"
+      },
+      "labs": {
+        "esr": "60 mm/hr",
+        "crp": "15 mg/L",
+        "glucose": "Normal",
+        "lipid_panel": "LDL 180 mg/dL"
+      },
+      "imaging": {
+        "ecg": "Atrial fibrillation",
+        "carotid_doppler": "70% stenosis right internal carotid"
+      },
+      "correct_diagnosis": "OPTH-CRAO",
+      "differential": [
+        "OPTH-CRAO",
+        "OPTH-RETINAL-DETACHMENT",
+        "NEU-STROKE-OCCIPITAL",
+        "OPTH-GIANT-CELL-ARTERITIS"
+      ],
+      "explanation": "Central retinal artery occlusion (CRAO): sudden, painless, complete vision loss. Classic fundoscopic finding is cherry red spot (fovea has dual blood supply, stands out against pale ischemic retina). This is an ocular stroke - 'time is retina'. RAPD confirms afferent pupillary defect. Risk factors: AFib (embolic), carotid stenosis, smoking, HTN. ESR not markedly elevated, making GCA less likely.",
+      "management_pearls": [
+        "THIS IS AN EMERGENCY - Permanent vision loss occurs after 90-100 minutes",
+        "Immediate ophthalmology consult",
+        "Ocular massage: Firm pressure on eye for 5 sec, release 5 sec, repeat x 5 cycles",
+        "Anterior chamber paracentesis (by ophthalmology) to lower IOP",
+        "Hyperbaric oxygen if available and <24 hours from onset",
+        "ASA 325mg (prevent recurrence)",
+        "Start anticoagulation for AFib (warfarin or DOAC)",
+        "Workup embolic source: Echo, carotid ultrasound",
+        "Consider CEA if severe carotid stenosis (>70%)",
+        "Visual recovery poor even with treatment (15-30%)"
+      ],
+      "references": [
+        "AAO Acute Retinal Artery Occlusion Guidelines",
+        "Central Retinal Artery Occlusion: Diagnosis and Management"
+      ],
+      "tags": [
+        "vision loss",
+        "CRAO",
+        "ophthalmology",
+        "emergency",
+        "stroke"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Ophthalmology"
+    }
+  ]
+}
