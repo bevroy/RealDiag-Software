@@ -296,15 +296,9 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
 
 
 # Preload families at module import time to avoid timeout on first request
-# This runs once when the server starts
-try:
-    logging.info("Preloading diagnostic trees at startup...")
-    _families_cache = load_all_families()
-    logging.info(f"✓ Preloaded {len(_families_cache)} families with diagnostic trees")
-except Exception as e:
-    logging.error(f"Failed to preload diagnostic trees: {e}")
-    # Don't crash the server - will load on first request instead
-    _families_cache = None
+# Disabled for now - loading 676 files at startup causes deployment issues
+# Data will be loaded and cached on first request instead
+logging.info("Symptom search module loaded - trees will be loaded on first request")
 
 
 def normalize_text(text: str) -> str:
@@ -756,3 +750,32 @@ async def get_pending_trees():
             detail=f"Failed to load pending trees: {str(e)}"
         )
 
+
+@router.get("/search/warmup")
+async def warmup_cache():
+    """
+    Warmup endpoint to preload diagnostic trees after deployment.
+    Call this after deployment to avoid timeout on first user request.
+    """
+    try:
+        start_time = time.time()
+        logging.info("Warmup: Loading diagnostic trees...")
+        
+        families = load_all_families()
+        
+        load_time = time.time() - start_time
+        total_trees = sum(len(rules) for rules in families.values())
+        
+        return {
+            "success": True,
+            "families_loaded": len(families),
+            "total_trees": total_trees,
+            "load_time_seconds": round(load_time, 2),
+            "message": f"Cache warmed up successfully in {load_time:.2f}s"
+        }
+    except Exception as e:
+        logging.error(f"Warmup failed: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Warmup failed: {str(e)}"
+        )
