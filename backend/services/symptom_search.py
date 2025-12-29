@@ -252,11 +252,18 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 if not isinstance(snomed_value, list):
                     snomed_value = [snomed_value] if snomed_value is not None else []
                 
+                # Normalize icd10 to always be a list of strings
+                icd10_value = tree_data.get('icd10', tree_data.get('icd10_code', ''))
+                if not isinstance(icd10_value, list):
+                    icd10_value = [icd10_value] if icd10_value else []
+                # Filter out empty strings
+                icd10_value = [str(code) for code in icd10_value if code]
+                
                 rule = {
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
                     'presentations': presentations,
-                    'icd10': [tree_data.get('icd10', '') or tree_data.get('icd10_code', '')],
+                    'icd10': icd10_value,
                     'snomed': snomed_value,
                     'sensitivity': tree_data.get('sensitivity'),
                     'specificity': tree_data.get('specificity'),
