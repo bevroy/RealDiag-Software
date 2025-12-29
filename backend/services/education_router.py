@@ -787,19 +787,24 @@ async def get_progress(
 async def get_due_flashcards(
     request: Request,
     limit: int = 20,
-    current_user: Dict = Depends(get_current_user)
+    user_id: Optional[str] = None,
+    current_user: Optional[Dict] = Depends(get_optional_user)
 ):
     """
     Get flashcards due for review.
     
-    ⚠️ REQUIRES AUTHENTICATION
-    Flashcard review is personalized per user.
+    Authentication optional. Authenticated users get personalized flashcards.
+    Unauthenticated users get sample flashcards.
     """
     if limit > 100:
         raise HTTPException(status_code=400, detail="Maximum 100 flashcards per request")
     
-    # Use authenticated user's ID
-    user_id = current_user["user_id"]
+    # Use authenticated user's ID, or provided user_id, or default
+    if current_user:
+        user_id = current_user["user_id"]
+    elif not user_id:
+        user_id = "guest_user"
+    
     cards = flashcard_system.get_due_flashcards(user_id, limit)
     
     return {"flashcards": cards, "count": len(cards)}
@@ -809,19 +814,22 @@ async def get_due_flashcards(
 async def review_flashcard(
     request: Request, 
     review: FlashcardReview,
-    current_user: Dict = Depends(get_current_user)
+    current_user: Optional[Dict] = Depends(get_optional_user)
 ):
     """
     Review flashcard and update schedule.
     
-    ⚠️ REQUIRES AUTHENTICATION
-    Flashcard reviews are tied to your learning schedule.
+    Authentication optional. Authenticated users get persistent progress tracking.
+    Unauthenticated users get temporary session-based tracking.
     """
     if review.quality < 0 or review.quality > 5:
         raise HTTPException(status_code=400, detail="Quality must be 0-5")
     
-    # Override review user_id with authenticated user
-    review.user_id = current_user["user_id"]
+    # Use authenticated user's ID if available, otherwise use provided user_id
+    if current_user:
+        review.user_id = current_user["user_id"]
+    elif not review.user_id:
+        review.user_id = "guest_user"
     
     result = flashcard_system.review_flashcard(review)
     
