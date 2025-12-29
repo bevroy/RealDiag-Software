@@ -247,12 +247,17 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     referral_list = [str(referrals)] if referrals else []
                 
                 # Build rule-compatible format
+                # Normalize snomed to always be a list
+                snomed_value = tree_data.get('snomed', [])
+                if not isinstance(snomed_value, list):
+                    snomed_value = [snomed_value] if snomed_value is not None else []
+                
                 rule = {
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
                     'presentations': presentations,
                     'icd10': [tree_data.get('icd10', '') or tree_data.get('icd10_code', '')],
-                    'snomed': tree_data.get('snomed', []),
+                    'snomed': snomed_value,
                     'sensitivity': tree_data.get('sensitivity'),
                     'specificity': tree_data.get('specificity'),
                     'clinical_pearls': tree_data.get('clinical_pearls', []),
