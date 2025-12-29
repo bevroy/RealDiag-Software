@@ -494,100 +494,100 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         
         # Filter by family if specified
         if request.family:
-        if request.family not in all_families:
-            raise HTTPException(status_code=404, detail=f"Family not found: {request.family}")
-        families_to_search = {request.family: all_families[request.family]}
-    else:
-        families_to_search = all_families
-    
-    # Pre-normalize input symptoms once
-    normalized_input = [normalize_text(s) for s in request.symptoms]
-    
-    # Search and score all rules
-    results = []
-    
-    for family_name, rules in families_to_search.items():
-        # Apply filters
-        filtered_rules = apply_filters(rules, request.age, request.sex)
+            if request.family not in all_families:
+                raise HTTPException(status_code=404, detail=f"Family not found: {request.family}")
+            families_to_search = {request.family: all_families[request.family]}
+        else:
+            families_to_search = all_families
         
-        for rule in filtered_rules:
-            # Get presentations - filter to only strings
-            presentations = rule.get('presentations', [])
-            # Filter out non-string presentations (sometimes YAML has dicts or other types)
-            string_presentations = [p for p in presentations if isinstance(p, str)]
+        # Pre-normalize input symptoms once
+        normalized_input = [normalize_text(s) for s in request.symptoms]
+        
+        # Search and score all rules
+        results = []
+        
+        for family_name, rules in families_to_search.items():
+            # Apply filters
+            filtered_rules = apply_filters(rules, request.age, request.sex)
             
-            if not string_presentations:
-                continue
-            
-            # Calculate match score with clinical likelihood (pass pre-normalized input)
-            score, matched_presentations = calculate_match_score_optimized(
-                normalized_input, request.symptoms, string_presentations, rule
-            )
-            
-            # Only include if there's a match
-            if score > 0:
-                # Prepare result with enhanced metadata
-                diagnosis_match = DiagnosisMatch(
-                    rule_id=rule.get('id', ''),
-                    label=rule.get('label', ''),
-                    family=family_name,
-                    match_score=round(score, 2),
-                    matched_presentations=matched_presentations,
-                    all_presentations=string_presentations,  # Use filtered list
-                    icd10=rule.get('icd10', []),
-                    snomed=rule.get('snomed', []),
-                    sensitivity=rule.get('sensitivity'),
-                    specificity=rule.get('specificity'),
-                    clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
-                    management=rule.get('management'),
-                    tests=rule.get('tests'),
-                    referrals=rule.get('referrals')
+            for rule in filtered_rules:
+                # Get presentations - filter to only strings
+                presentations = rule.get('presentations', [])
+                # Filter out non-string presentations (sometimes YAML has dicts or other types)
+                string_presentations = [p for p in presentations if isinstance(p, str)]
+                
+                if not string_presentations:
+                    continue
+                
+                # Calculate match score with clinical likelihood (pass pre-normalized input)
+                score, matched_presentations = calculate_match_score_optimized(
+                    normalized_input, request.symptoms, string_presentations, rule
                 )
                 
-                results.append(diagnosis_match)
-    
-    # Sort by score (descending)
-    results.sort(key=lambda x: x.match_score, reverse=True)
-    
-    # Return top 20 results
-    top_results = results[:20]
-    
-    # Check if we should trigger AI tree generation (low/no results)
-    ai_tree_info = None
-    if AI_GENERATION_AVAILABLE and os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
-        # Trigger AI generation if:
-        # 1. No results found, OR
-        # 2. Best result has low confidence (score < 2.0)
-        # 3. User has 2+ symptoms (enough context for AI)
-        should_generate = (
-            (len(top_results) == 0 or (top_results and top_results[0].match_score < 2.0))
-            and len(request.symptoms) >= 2
+                # Only include if there's a match
+                if score > 0:
+                    # Prepare result with enhanced metadata
+                    diagnosis_match = DiagnosisMatch(
+                        rule_id=rule.get('id', ''),
+                        label=rule.get('label', ''),
+                        family=family_name,
+                        match_score=round(score, 2),
+                        matched_presentations=matched_presentations,
+                        all_presentations=string_presentations,  # Use filtered list
+                        icd10=rule.get('icd10', []),
+                        snomed=rule.get('snomed', []),
+                        sensitivity=rule.get('sensitivity'),
+                        specificity=rule.get('specificity'),
+                        clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
+                        management=rule.get('management'),
+                        tests=rule.get('tests'),
+                        referrals=rule.get('referrals')
+                    )
+                    
+                    results.append(diagnosis_match)
+        
+        # Sort by score (descending)
+        results.sort(key=lambda x: x.match_score, reverse=True)
+        
+        # Return top 20 results
+        top_results = results[:20]
+        
+        # Check if we should trigger AI tree generation (low/no results)
+        ai_tree_info = None
+        if AI_GENERATION_AVAILABLE and os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+            # Trigger AI generation if:
+            # 1. No results found, OR
+            # 2. Best result has low confidence (score < 2.0)
+            # 3. User has 2+ symptoms (enough context for AI)
+            should_generate = (
+                (len(top_results) == 0 or (top_results and top_results[0].match_score < 2.0))
+                and len(request.symptoms) >= 2
+            )
+            
+            if should_generate:
+                ai_tree_info = {
+                    "generation_triggered": True,
+                    "reason": "No high-confidence matches found",
+                    "status": "pending",
+                    "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds."
+                }
+                
+                # Note: Actual generation happens via separate endpoint to avoid blocking
+        
+        response_data = SymptomSearchResponse(
+            query_symptoms=request.symptoms,
+            total_results=len(top_results),
+            results=top_results
         )
         
-        if should_generate:
-            ai_tree_info = {
-                "generation_triggered": True,
-                "reason": "No high-confidence matches found",
-                "status": "pending",
-                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds."
-            }
-            
-            # Note: Actual generation happens via separate endpoint to avoid blocking
-    
-    response_data = SymptomSearchResponse(
-        query_symptoms=request.symptoms,
-        total_results=len(top_results),
-        results=top_results
-    )
-    
-    # Add AI generation info if applicable
-    if ai_tree_info:
-        response_dict = response_data.dict()
-        response_dict["ai_generation"] = ai_tree_info
-        return response_dict
-    
-    return response_data
-    
+        # Add AI generation info if applicable
+        if ai_tree_info:
+            response_dict = response_data.dict()
+            response_dict["ai_generation"] = ai_tree_info
+            return response_dict
+        
+        return response_data
+        
     except Exception as e:
         logging.error(f"Error in symptom search: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Symptom search error: {str(e)}")
