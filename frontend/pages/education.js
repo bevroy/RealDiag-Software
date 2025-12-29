@@ -29,6 +29,7 @@ export default function EducationPage() {
   const [recentActivity, setRecentActivity] = useState([]);
   const [studyPlan, setStudyPlan] = useState(null);
   const [expandedCaseId, setExpandedCaseId] = useState(null);
+  const [availableSpecialties, setAvailableSpecialties] = useState([]);
 
   // Use runtime config for API base, with fallback to env var or Render URL
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
@@ -49,6 +50,20 @@ export default function EducationPage() {
       console.error('Error loading cases:', error);
     }
     setLoading(false);
+  };
+
+  const loadAvailableSpecialties = async () => {
+    try {
+      // Load all cases without filters to get unique specialties
+      const response = await fetch(`${API_BASE}/education/cases`);
+      const allCases = await response.json();
+      
+      // Extract unique specialties and sort them
+      const specialties = [...new Set(allCases.map(c => c.specialty))].sort();
+      setAvailableSpecialties(specialties);
+    } catch (error) {
+      console.error('Error loading specialties:', error);
+    }
   };
 
   const searchCases = async () => {
@@ -228,6 +243,7 @@ export default function EducationPage() {
     loadCases();
     loadProgress();
     loadStudyAnalytics();
+    loadAvailableSpecialties();
   }, []);
 
   useEffect(() => {
@@ -1657,11 +1673,11 @@ export default function EducationPage() {
             onChange={(e) => setFilters({...filters, specialty: e.target.value})}
           >
             <option value="">All Specialties</option>
-            <option value="cardiology">Cardiology</option>
-            <option value="neurology">Neurology</option>
-            <option value="gastroenterology">Gastroenterology</option>
-            <option value="pulmonology">Pulmonology</option>
-            <option value="emergency">Emergency Medicine</option>
+            {availableSpecialties.map(specialty => (
+              <option key={specialty} value={specialty}>
+                {specialty.charAt(0).toUpperCase() + specialty.slice(1).replace(/_/g, ' ')}
+              </option>
+            ))}
           </select>
 
           <select 
