@@ -28,6 +28,7 @@ export default function EducationPage() {
   const [weakAreas, setWeakAreas] = useState([]);
   const [recentActivity, setRecentActivity] = useState([]);
   const [studyPlan, setStudyPlan] = useState(null);
+  const [expandedCaseId, setExpandedCaseId] = useState(null);
 
   // Use runtime config for API base, with fallback to env var or Render URL
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
@@ -520,6 +521,92 @@ export default function EducationPage() {
         .difficulty-badge.advanced {
           background: #fee2e2;
           color: #991b1b;
+        }
+
+        .case-list-item.expanded {
+          background: white !important;
+        }
+
+        .case-details {
+          padding: 24px;
+          margin-top: 16px;
+          background: #fafafa;
+          border-radius: 8px;
+          border-top: 2px solid #e5e7eb;
+        }
+
+        .case-section {
+          margin-bottom: 20px;
+        }
+
+        .case-section h4 {
+          color: #14b8a6;
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          border-bottom: 2px solid #14b8a6;
+          padding-bottom: 4px;
+        }
+
+        .case-section p {
+          color: #374151;
+          line-height: 1.6;
+          margin: 8px 0;
+        }
+
+        .case-section ul {
+          margin: 8px 0;
+          padding-left: 20px;
+        }
+
+        .case-section li {
+          color: #374151;
+          line-height: 1.8;
+          margin: 6px 0;
+        }
+
+        .history-item, .exam-item, .lab-item, .imaging-item {
+          padding: 8px;
+          margin: 4px 0;
+          background: white;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        .history-item strong, .exam-item strong, .lab-item strong, .imaging-item strong {
+          color: #14b8a6;
+          display: inline-block;
+          min-width: 150px;
+          text-transform: capitalize;
+        }
+
+        .diagnosis-section {
+          background: #f0fdfa;
+          padding: 16px;
+          border-radius: 8px;
+          border-left: 4px solid #14b8a6;
+        }
+
+        .diagnosis {
+          font-size: 18px;
+          font-weight: 600;
+          color: #0f766e;
+        }
+
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .tag {
+          background: #e0f2fe;
+          color: #075985;
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 500;
         }
 
         .no-progress {
@@ -1778,17 +1865,6 @@ export default function EducationPage() {
 
             {loading ? (
               <div className="loading">Loading cases...</div>
-            ) : selectedCase ? (
-              <div>
-                <button onClick={() => setSelectedCase(null)}>← Back to Cases</button>
-                <h2>{selectedCase.title}</h2>
-                <div>
-                  <span className={`badge ${selectedCase.difficulty}`}>{selectedCase.difficulty}</span>
-                  <span className="badge">{selectedCase.specialty}</span>
-                </div>
-                <p>{selectedCase.presentation}</p>
-                <h3>Diagnosis: {selectedCase.correct_diagnosis}</h3>
-              </div>
             ) : (
               <div className="cases-list">
                 {cases
@@ -1796,18 +1872,127 @@ export default function EducationPage() {
                     const difficultyOrder = { 'beginner': 1, 'intermediate': 2, 'advanced': 3 };
                     return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
                   })
-                  .map((caseItem) => (
-                    <div 
-                      key={caseItem.case_id} 
-                      className={`case-list-item difficulty-${caseItem.difficulty}`}
-                      onClick={() => setSelectedCase(caseItem)}
-                    >
-                      <div className="case-list-content">
-                        <span className="case-title">{caseItem.title}</span>
-                        <span className={`difficulty-badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
+                  .map((caseItem) => {
+                    const isExpanded = expandedCaseId === caseItem.case_id;
+                    return (
+                      <div 
+                        key={caseItem.case_id} 
+                        className={`case-list-item difficulty-${caseItem.difficulty} ${isExpanded ? 'expanded' : ''}`}
+                      >
+                        <div 
+                          className="case-list-content"
+                          onClick={() => setExpandedCaseId(isExpanded ? null : caseItem.case_id)}
+                        >
+                          <span className="case-title">
+                            {isExpanded ? '▼' : '▶'} {caseItem.title}
+                          </span>
+                          <span className={`difficulty-badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
+                        </div>
+                        {isExpanded && (
+                          <div className="case-details">
+                            <div className="case-section">
+                              <h4>Presentation</h4>
+                              <p>{caseItem.presentation}</p>
+                            </div>
+                            {caseItem.learning_objectives && (
+                              <div className="case-section">
+                                <h4>Learning Objectives</h4>
+                                <ul>
+                                  {caseItem.learning_objectives.map((obj, i) => (
+                                    <li key={i}>{obj}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            <div className="case-section">
+                              <h4>History</h4>
+                              {caseItem.history && Object.entries(caseItem.history).map(([key, value]) => (
+                                <div key={key} className="history-item">
+                                  <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {value}
+                                </div>
+                              ))}
+                            </div>
+                            <div className="case-section">
+                              <h4>Physical Exam</h4>
+                              {caseItem.physical_exam && Object.entries(caseItem.physical_exam).map(([key, value]) => (
+                                <div key={key} className="exam-item">
+                                  <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {value}
+                                </div>
+                              ))}
+                            </div>
+                            {caseItem.labs && (
+                              <div className="case-section">
+                                <h4>Laboratory Results</h4>
+                                {Object.entries(caseItem.labs).map(([key, value]) => (
+                                  <div key={key} className="lab-item">
+                                    <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {value}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            {caseItem.imaging && (
+                              <div className="case-section">
+                                <h4>Imaging</h4>
+                                {Object.entries(caseItem.imaging).map(([key, value]) => (
+                                  <div key={key} className="imaging-item">
+                                    <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {value}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            <div className="case-section diagnosis-section">
+                              <h4>Correct Diagnosis</h4>
+                              <p className="diagnosis">{caseItem.correct_diagnosis}</p>
+                            </div>
+                            {caseItem.differential && (
+                              <div className="case-section">
+                                <h4>Differential Diagnosis</h4>
+                                <ul>
+                                  {caseItem.differential.map((dx, i) => (
+                                    <li key={i}>{dx}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            <div className="case-section">
+                              <h4>Explanation</h4>
+                              <p>{caseItem.explanation}</p>
+                            </div>
+                            {caseItem.management_pearls && (
+                              <div className="case-section">
+                                <h4>Management Pearls</h4>
+                                <ul>
+                                  {caseItem.management_pearls.map((pearl, i) => (
+                                    <li key={i}>{pearl}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {caseItem.pitfalls && (
+                              <div className="case-section">
+                                <h4>Common Pitfalls</h4>
+                                <ul>
+                                  {caseItem.pitfalls.map((pitfall, i) => (
+                                    <li key={i}>{pitfall}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {caseItem.tags && (
+                              <div className="case-section">
+                                <h4>Tags</h4>
+                                <div className="tags">
+                                  {caseItem.tags.map((tag, i) => (
+                                    <span key={i} className="tag">{tag}</span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
               </div>
             )}
           </div>
