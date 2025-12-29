@@ -555,6 +555,85 @@ export default function FeaturesDemo() {
           </div>
         </section>
 
+        {/* Patient-Facing Features */}
+        <section aria-labelledby="patient-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="patient-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🏥 Patient-Facing Features</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Patient Portal</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Secure patient account access</li>
+                <li>View diagnostic results & recommendations</li>
+                <li>Access test results & lab reports</li>
+                <li>Medication list management</li>
+                <li>Appointment scheduling integration</li>
+                <li>Direct messaging with providers</li>
+                <li>Educational resources library</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Wearable Device Integration</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Apple Health integration</li>
+                <li>Google Fit compatibility</li>
+                <li>Fitbit data sync</li>
+                <li>Heart rate monitoring</li>
+                <li>Activity & sleep tracking</li>
+                <li>Blood pressure trend analysis</li>
+                <li>Glucose monitor connectivity (CGM)</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Health Tracking & Monitoring</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Symptom diary & tracking</li>
+                <li>Medication adherence reminders</li>
+                <li>Vital signs logging (BP, temp, weight)</li>
+                <li>Pain scale tracking</li>
+                <li>Mood & wellness journals</li>
+                <li>Custom health goals</li>
+                <li>Progress visualization charts</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Telehealth Ready</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Virtual visit scheduling</li>
+                <li>Pre-visit symptom questionnaires</li>
+                <li>Video consultation support</li>
+                <li>Post-visit care instructions</li>
+                <li>Remote monitoring dashboard</li>
+                <li>e-Prescriptions & refill requests</li>
+                <li>Insurance verification</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Mobile Health Features</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Native iOS & Android apps</li>
+                <li>Offline access to health records</li>
+                <li>Push notifications for appointments</li>
+                <li>Photo upload (skin conditions, wounds)</li>
+                <li>QR code check-in at clinics</li>
+                <li>HealthKit & Android Health Connect</li>
+                <li>Biometric authentication (Face ID, Touch ID)</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Patient Education</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Condition-specific information</li>
+                <li>Interactive anatomy diagrams</li>
+                <li>Video explanations & tutorials</li>
+                <li>Medication guides & side effects</li>
+                <li>Procedure preparation instructions</li>
+                <li>Multilingual support (10+ languages)</li>
+                <li>Reading level adaptation</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* Task 6.1: Accessibility Features */}
         <section aria-labelledby="accessibility-heading" style={{ marginBottom: '3rem' }}>
           <h2 id="accessibility-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>♿ Accessibility (WCAG 2.1 AA)</h2>
