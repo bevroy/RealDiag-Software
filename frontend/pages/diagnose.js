@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/Diagnose.module.css'
+import PatientContext from '../components/PatientContext'
+import ContextResults from '../components/ContextResults'
 
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
@@ -13,6 +15,7 @@ export default function Diagnose() {
     age: '',
     onset_hours: ''
   })
+  const [patientContext, setPatientContext] = useState({})
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [apiBase, setApiBase] = useState('')
@@ -74,7 +77,10 @@ export default function Diagnose() {
       const response = await fetch(`${apiBase}/diagnostic/evaluate/${selectedTree}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(patientData)
+        body: JSON.stringify({
+          ...patientData,
+          patient_context: Object.keys(patientContext).length > 0 ? patientContext : undefined
+        })
       })
       const data = await response.json()
       setResult(data.tree_result)
@@ -95,6 +101,7 @@ export default function Diagnose() {
       age: '',
       onset_hours: ''
     })
+    setPatientContext({})
     setResult(null)
     setCurrentStep(1)
   }
@@ -360,6 +367,15 @@ export default function Diagnose() {
               </div>
             </section>
 
+            {/* Patient Context Modifiers */}
+            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 5) ? 'block' : 'none'}}>
+              <PatientContext
+                value={patientContext}
+                onChange={setPatientContext}
+                apiBase={apiBase}
+              />
+            </section>
+
             {/* Actions / Wizard Navigation */}
             <section className={styles.actions}>
               {showWizardMode ? (
@@ -506,7 +522,10 @@ export default function Diagnose() {
                     )}
                   </div>
                 )}
-
+                {/* Context-Based Modifications */}
+                {result.context && (
+                  <ContextResults contextData={result.context} />
+                )}
                 {(!result.path || result.path.length === 0) && (
                   <div className={styles.noMatch}>
                     <p>No matching diagnostic pathway found with current inputs.</p>
