@@ -2780,6 +2780,683 @@
       ],
       "created_at": "2025-12-29T14:00:00.000000",
       "author": "Dr. Cardiology"
+    },
+    {
+      "case_id": "CASE-041",
+      "title": "Young Adult with Sore Throat and Fever",
+      "specialty": "primary care",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Differentiate viral from bacterial pharyngitis",
+        "Apply Centor criteria for strep throat",
+        "Understand appropriate antibiotic use"
+      ],
+      "presentation": "22-year-old woman with 3 days of sore throat, fever, and difficulty swallowing",
+      "history": {
+        "chief_complaint": "My throat is killing me and I have a fever",
+        "hpi": "Patient reports sudden onset sore throat 3 days ago. Pain worse with swallowing. Fever up to 101.5°F at home. Decreased oral intake due to pain. No cough, no runny nose, no congestion. Roommate had similar symptoms last week. Took ibuprofen with some relief.",
+        "pmh": "Healthy, no chronic conditions",
+        "medications": "Ibuprofen as needed, oral contraceptive",
+        "social": "College student, non-smoker, no alcohol",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 118/72, HR 88, RR 16, O2 99% RA, Temp 100.8°F",
+        "general": "Appears mildly ill but not toxic",
+        "oropharynx": "Tonsillar erythema and exudates bilaterally, no uvular deviation, no trismus",
+        "neck": "Tender anterior cervical lymphadenopathy bilaterally",
+        "lungs": "Clear to auscultation",
+        "skin": "No rash"
+      },
+      "labs": {
+        "rapid_strep_test": "Positive for Group A Streptococcus",
+        "monospot": "Negative"
+      },
+      "imaging": {
+        "none": "Not indicated for uncomplicated pharyngitis"
+      },
+      "correct_diagnosis": "ID-STREPTOCOCCAL-PHARYNGITIS",
+      "differential": [
+        "ID-STREPTOCOCCAL-PHARYNGITIS",
+        "ID-VIRAL-PHARYNGITIS",
+        "ID-INFECTIOUS-MONONUCLEOSIS",
+        "ID-PERITONSILLAR-ABSCESS"
+      ],
+      "explanation": "Streptococcal pharyngitis (strep throat) caused by Group A Streptococcus is common in young adults. Key features: (1) Sudden onset sore throat with fever, (2) Tonsillar exudates and erythema, (3) Tender anterior cervical lymphadenopathy, (4) ABSENCE of cough/rhinorrhea (suggests viral if present), (5) Centor score 4/4 (fever, exudates, tender LAD, no cough) = 50% probability strep. Positive rapid strep confirms diagnosis. Untreated strep can lead to rheumatic fever and post-strep glomerulonephritis.",
+      "management_pearls": [
+        "Centor criteria (1 point each): Fever, Tonsillar exudates, Tender anterior cervical LAD, Absence of cough. Score 0-1: no testing/treatment (viral likely), Score 2-3: rapid strep test, Score 4: treat empirically or test",
+        "Treatment: Penicillin V 500mg PO BID x 10 days OR Amoxicillin 500mg TID x 10 days (first-line, cheap, narrow spectrum)",
+        "PCN allergy: Azithromycin 500mg day 1, then 250mg days 2-5 OR Cephalexin 500mg BID x 10 days (if not severe allergy)",
+        "Symptomatic relief: NSAIDs, throat lozenges, warm salt water gargles",
+        "Return to work/school after 24 hours on antibiotics and fever-free",
+        "Complications if untreated: acute rheumatic fever (2-3 weeks), post-strep glomerulonephritis (1-3 weeks), peritonsillar abscess"
+      ],
+      "pitfalls": [
+        "Viral pharyngitis is 5-10x more common than strep - don't over-prescribe antibiotics",
+        "Mononucleosis: Tonsillar exudates + posterior cervical LAD + fatigue + splenomegaly. Avoid amoxicillin (causes rash in mono)",
+        "Peritonsillar abscess: Unilateral findings, uvular deviation, trismus, 'hot potato voice' - needs ENT drainage",
+        "Complete 10-day antibiotic course to prevent rheumatic fever (even if symptoms improve)"
+      ],
+      "tags": [
+        "sore throat",
+        "pharyngitis",
+        "strep throat",
+        "primary care",
+        "infectious disease"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Primary Care"
+    },
+    {
+      "case_id": "CASE-042",
+      "title": "Woman with Burning on Urination",
+      "specialty": "primary care",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize uncomplicated urinary tract infection",
+        "Understand empiric antibiotic choices for UTI",
+        "Identify when further workup is needed"
+      ],
+      "presentation": "28-year-old woman with 2 days of burning with urination and urinary frequency",
+      "history": {
+        "chief_complaint": "It burns when I pee and I have to go all the time",
+        "hpi": "Patient reports sudden onset dysuria 2 days ago. Urinary frequency and urgency. Feels like she has to urinate constantly but only small amounts. Suprapubic discomfort. No fever, no flank pain, no nausea/vomiting. No vaginal discharge or itching. Sexually active with one partner. Last UTI 2 years ago. Not pregnant (recent period).",
+        "pmh": "No chronic conditions, rare UTIs",
+        "medications": "None",
+        "social": "Software engineer, sexually active, uses condoms inconsistently",
+        "family": "Mother has recurrent UTIs"
+      },
+      "physical_exam": {
+        "vitals": "BP 112/68, HR 72, RR 14, O2 99% RA, Temp 98.4°F",
+        "general": "Comfortable, no acute distress",
+        "abdomen": "Soft, suprapubic tenderness, no CVA tenderness",
+        "pelvic": "Deferred (not indicated for uncomplicated cystitis)"
+      },
+      "labs": {
+        "urinalysis": "Large leukocyte esterase, positive nitrites, 50-100 WBC/hpf, few bacteria, no RBC",
+        "urine_pregnancy": "Negative",
+        "urine_culture": "Pending (not routinely needed for uncomplicated UTI)"
+      },
+      "imaging": {
+        "none": "Not indicated for uncomplicated cystitis"
+      },
+      "correct_diagnosis": "NEPHRO-UNCOMPLICATED-CYSTITIS",
+      "differential": [
+        "NEPHRO-UNCOMPLICATED-CYSTITIS",
+        "NEPHRO-PYELONEPHRITIS",
+        "GYN-VAGINITIS",
+        "ID-SEXUALLY-TRANSMITTED-INFECTION"
+      ],
+      "explanation": "Uncomplicated acute cystitis (bladder infection) is extremely common in young women. Key features: (1) Dysuria, frequency, urgency (classic triad), (2) Suprapubic pain, (3) NO fever, flank pain, or systemic symptoms (rules out pyelonephritis), (4) Positive urinalysis with leukocyte esterase and nitrites, (5) Non-pregnant, no immunocompromise, no structural abnormalities. E. coli causes 75-90% of cases. Diagnosis is clinical with UA support - culture not needed for uncomplicated cases.",
+      "management_pearls": [
+        "First-line antibiotics: Nitrofurantoin 100mg BID x 5 days OR Trimethoprim-sulfamethoxazole (Bactrim) DS BID x 3 days (if local resistance <20%)",
+        "Alternative: Fosfomycin 3g single dose (convenient but expensive)",
+        "Avoid fluoroquinolones (ciprofloxacin) for uncomplicated UTI - reserve for pyelonephritis, resistance concerns",
+        "Phenazopyridine (Pyridium) 200mg TID x 2 days for dysuria relief (warn about orange urine)",
+        "No need for test-of-cure UA in asymptomatic patients",
+        "Prevention: hydration, urinate after intercourse, avoid spermicides, cranberry products (modest benefit)"
+      ],
+      "pitfalls": [
+        "Pyelonephritis: fever, flank pain, CVA tenderness, nausea/vomiting - needs hospitalization if toxic or can't tolerate PO",
+        "Recurrent UTIs (>2 in 6 months or >3 in 1 year): consider prophylaxis, imaging to rule out structural abnormalities",
+        "Complicated UTI: pregnancy, male, catheter, immunocompromised, recent antibiotics, structural abnormality - get culture, consider 7-10 day course",
+        "STI symptoms (discharge, partner symptoms): test for chlamydia/gonorrhea"
+      ],
+      "tags": [
+        "UTI",
+        "cystitis",
+        "dysuria",
+        "urinary tract infection",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Primary Care"
+    },
+    {
+      "case_id": "CASE-043",
+      "title": "Patient with Severe Heartburn",
+      "specialty": "gastroenterology",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize gastroesophageal reflux disease (GERD)",
+        "Understand lifestyle modifications and medical therapy",
+        "Identify alarm symptoms requiring endoscopy"
+      ],
+      "presentation": "45-year-old man with 6 months of burning chest pain, worse after meals and lying down",
+      "history": {
+        "chief_complaint": "Burning pain in my chest that won't go away",
+        "hpi": "Patient reports progressive burning sensation in chest for 6 months. Pain starts in upper abdomen and rises to chest/throat. Worse after large meals, spicy foods, coffee, and when lying flat at night. Occasionally wakes him from sleep. Sour taste in mouth. Some relief with over-the-counter antacids but symptoms return quickly. No difficulty swallowing, no weight loss, no vomiting blood.",
+        "pmh": "Hypertension, obesity (BMI 33)",
+        "medications": "Lisinopril, ibuprofen PRN for back pain",
+        "social": "Construction worker, smokes half pack/day x 20 years, drinks 2-3 beers nightly, eats late dinners",
+        "family": "Father had Barrett's esophagus"
+      },
+      "physical_exam": {
+        "vitals": "BP 142/88, HR 76, RR 14, O2 98% RA, Temp 98.6°F, BMI 33",
+        "general": "Obese, no acute distress",
+        "abdomen": "Obese, soft, mild epigastric tenderness, no masses",
+        "cardiac": "Regular rate and rhythm, no murmurs",
+        "lungs": "Clear bilaterally"
+      },
+      "labs": {
+        "cbc": "Normal",
+        "h_pylori_stool_antigen": "Negative"
+      },
+      "imaging": {
+        "egd": "Not needed for typical GERD without alarm symptoms. If done: shows esophagitis"
+      },
+      "correct_diagnosis": "GI-GASTROESOPHAGEAL-REFLUX-DISEASE",
+      "differential": [
+        "GI-GASTROESOPHAGEAL-REFLUX-DISEASE",
+        "CARD-CORONARY-ARTERY-DISEASE",
+        "GI-PEPTIC-ULCER-DISEASE",
+        "GI-ESOPHAGEAL-STRICTURE"
+      ],
+      "explanation": "Gastroesophageal reflux disease (GERD) is extremely common, affecting 20% of adults. Key features: (1) Burning retrosternal chest pain (heartburn), (2) Worse after meals and when supine, (3) Acid regurgitation/sour taste, (4) Relief with antacids, (5) Risk factors: obesity, smoking, large meals, alcohol, NSAIDs, late-night eating. Lower esophageal sphincter dysfunction allows stomach acid to reflux into esophagus. Diagnosis is clinical - no testing needed for typical symptoms without alarm features.",
+      "management_pearls": [
+        "Lifestyle modifications FIRST: weight loss if obese, elevate head of bed 6-8 inches, avoid late meals (3 hours before bed), stop smoking, limit alcohol/caffeine/fatty foods/chocolate/peppermint/citrus, small frequent meals",
+        "Medical therapy: PPI (proton pump inhibitor) is first-line. Omeprazole 20mg daily 30 min before breakfast x 8 weeks. Other PPIs: pantoprazole, esomeprazole, lansoprazole",
+        "H2 blockers (ranitidine, famotidine): less effective than PPIs but reasonable for mild/intermittent symptoms",
+        "If no response to PPI: increase to BID dosing (before breakfast and dinner), ensure taking 30 min before meals, rule out non-compliance",
+        "Successful treatment: taper PPI to lowest effective dose, consider on-demand therapy",
+        "Long-term PPI risks: C. diff, pneumonia, osteoporosis, B12/magnesium deficiency - use lowest dose needed"
+      ],
+      "pitfalls": [
+        "Alarm symptoms requiring urgent EGD: dysphagia, odynophagia, weight loss, GI bleeding, anemia, family history of GI cancer, age >60 with new-onset symptoms",
+        "Cardiac chest pain mimics GERD - if ANY cardiac risk factors or atypical features, work up for ACS first",
+        "Barrett's esophagus: intestinal metaplasia from chronic GERD, precancerous. Screen with EGD if chronic GERD >5 years + male + white + age >50 + obesity + smoking + family history",
+        "Refractory GERD: consider non-compliance, inadequate PPI dosing, delayed gastric emptying, eosinophilic esophagitis, functional heartburn"
+      ],
+      "tags": [
+        "GERD",
+        "heartburn",
+        "reflux",
+        "gastroesophageal reflux",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Gastroenterology"
+    },
+    {
+      "case_id": "CASE-044",
+      "title": "Man with High Blood Pressure on Routine Check",
+      "specialty": "primary care",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Diagnose hypertension using proper criteria",
+        "Understand staged approach to BP management",
+        "Select appropriate first-line antihypertensive"
+      ],
+      "presentation": "52-year-old man with elevated blood pressure 158/96 found on routine visit",
+      "history": {
+        "chief_complaint": "Here for annual physical, no complaints",
+        "hpi": "Patient presents for routine checkup. Feels well. BP elevated today 158/96. Checked BP at pharmacy last month and was told 'a little high'. No symptoms of headache, chest pain, vision changes, or shortness of breath. Family history significant for hypertension and heart disease. Diet high in processed foods and salt. Sedentary job.",
+        "pmh": "Prediabetes (A1C 6.1%), hyperlipidemia, obesity",
+        "medications": "Atorvastatin 20mg daily",
+        "social": "Office manager, sedentary, smokes 5 cigarettes/day, drinks socially, no exercise",
+        "family": "Father had MI at 58, mother has hypertension and diabetes"
+      },
+      "physical_exam": {
+        "vitals": "BP 158/96 (repeat 156/94), HR 78, RR 14, O2 98% RA, Temp 98.6°F, BMI 31, waist circumference 42 inches",
+        "general": "Obese, well-appearing",
+        "cardiac": "Regular rate and rhythm, no murmurs, PMI not displaced",
+        "lungs": "Clear bilaterally",
+        "abdomen": "Obese, soft, non-tender, no bruits",
+        "extremities": "No edema, pulses 2+ throughout",
+        "fundoscopic": "No papilledema, mild AV nicking"
+      },
+      "labs": {
+        "basic_metabolic_panel": "Normal, Creatinine 1.0",
+        "lipid_panel": "Total cholesterol 210, LDL 135, HDL 38, Triglycerides 185",
+        "hba1c": "6.1% (prediabetes)",
+        "tsh": "Normal",
+        "urinalysis": "No protein, no blood",
+        "ekg": "Normal sinus rhythm, no LVH"
+      },
+      "imaging": {
+        "none_initially": "No imaging needed for uncomplicated essential hypertension"
+      },
+      "correct_diagnosis": "CARD-ESSENTIAL-HYPERTENSION",
+      "differential": [
+        "CARD-ESSENTIAL-HYPERTENSION",
+        "CARD-SECONDARY-HYPERTENSION",
+        "CARD-WHITE-COAT-HYPERTENSION",
+        "ENDO-HYPERALDOSTERONISM"
+      ],
+      "explanation": "Essential (primary) hypertension affects 30% of US adults. Key features: (1) Sustained elevated BP ≥130/80 on multiple occasions, (2) No secondary cause identified, (3) Risk factors: obesity, sedentary lifestyle, high sodium diet, smoking, family history, (4) Usually asymptomatic (silent killer), (5) Stage 2 HTN (≥140/90) requires lifestyle + medication. Diagnosis requires: elevated BP on ≥2 occasions on ≥2 separate visits OR home BP monitoring confirming HTN. This patient has Stage 2 HTN with multiple cardiovascular risk factors.",
+      "management_pearls": [
+        "BP Classification: Normal <120/80, Elevated 120-129/<80, Stage 1 HTN 130-139/80-89, Stage 2 HTN ≥140/90",
+        "Stage 2 HTN: Lifestyle modifications PLUS medication. Stage 1: lifestyle first if ASCVD risk <10%, medication if risk ≥10%",
+        "Lifestyle: DASH diet (low sodium <2g/day, high K+), weight loss (1mm Hg per kg lost), exercise 150 min/week, limit alcohol (≤2 drinks/day men, ≤1 women), smoking cessation",
+        "First-line medications: Thiazide diuretic (HCTZ, chlorthalidone), ACE inhibitor (lisinopril), ARB (losartan), or CCB (amlodipine). This patient: ACE-I or ARB (prediabetic - renoprotective)",
+        "Start: Lisinopril 10mg daily, recheck BP in 2-4 weeks. Goal <130/80. Titrate or add second agent if needed",
+        "Monitoring: Check BMP 2-4 weeks after starting ACE-I (watch creatinine and K+), annual A1C and lipids, assess for target organ damage"
+      ],
+      "pitfalls": [
+        "Must confirm HTN diagnosis - single elevated reading is NOT sufficient. Home BP monitoring or repeat office measurements required",
+        "Secondary HTN causes (rare 5-10%): renal artery stenosis, primary aldosteronism, pheochromocytoma, Cushing's, OSA. Suspect if: age <30, resistant HTN, sudden onset, hypokalemia",
+        "Resistant HTN (uncontrolled on 3 agents including diuretic): check compliance, proper BP measurement technique, white coat effect, secondary causes, OSA",
+        "Target organ damage: check for LVH (EKG/echo), proteinuria (UA), retinopathy (fundoscopy), kidney disease (Cr, eGFR)"
+      ],
+      "tags": [
+        "hypertension",
+        "high blood pressure",
+        "HTN",
+        "cardiovascular",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Primary Care"
+    },
+    {
+      "case_id": "CASE-045",
+      "title": "Woman with Severe Throbbing Headache",
+      "specialty": "neurology",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize typical migraine presentation",
+        "Differentiate migraine from dangerous headaches",
+        "Understand acute and preventive migraine treatment"
+      ],
+      "presentation": "32-year-old woman with severe unilateral throbbing headache with nausea and light sensitivity",
+      "history": {
+        "chief_complaint": "Worst headache, feels like my head is going to explode",
+        "hpi": "Patient reports severe left-sided throbbing headache that started this morning. Pain is 8/10, pulsating quality. Associated with nausea, vomiting x1, and extreme sensitivity to light and sound - had to lie in dark quiet room. Has had similar headaches monthly for past 5 years, usually around menses. This one more severe than usual. Took ibuprofen with minimal relief. Denies vision changes, weakness, or confusion. No recent trauma. Headaches last 12-24 hours typically.",
+        "pmh": "No significant medical history, similar headaches since college",
+        "medications": "Oral contraceptive, ibuprofen as needed",
+        "social": "Marketing executive, stressful job, drinks 3 cups coffee daily, occasional wine, non-smoker",
+        "family": "Mother and sister both have migraines"
+      },
+      "physical_exam": {
+        "vitals": "BP 118/72, HR 82, RR 16, O2 99% RA, Temp 98.4°F",
+        "general": "Lying in dark room, appears uncomfortable, photophobic",
+        "neuro": "Alert and oriented x3. Cranial nerves II-XII intact. Motor 5/5 all extremities. Sensation intact. Reflexes 2+ symmetric. Gait not tested due to pain. No meningismus, no papilledema.",
+        "heent": "Normocephalic, atraumatic, no scalp tenderness, temporal arteries non-tender"
+      },
+      "labs": {
+        "none_needed": "Neuroimaging not indicated for typical recurrent migraine without red flags"
+      },
+      "imaging": {
+        "none_needed": "MRI/CT not indicated unless red flags present"
+      },
+      "correct_diagnosis": "NEURO-MIGRAINE-WITHOUT-AURA",
+      "differential": [
+        "NEURO-MIGRAINE-WITHOUT-AURA",
+        "NEURO-TENSION-HEADACHE",
+        "NEURO-CLUSTER-HEADACHE",
+        "NEURO-SUBARACHNOID-HEMORRHAGE"
+      ],
+      "explanation": "Migraine is extremely common, affecting 12% of population (18% women, 6% men). Key features: (1) Severe unilateral throbbing/pulsating headache, (2) Associated symptoms: nausea/vomiting, photophobia, phonophobia, (3) Duration 4-72 hours if untreated, (4) Recurrent pattern, often menstrual, (5) Family history common, (6) Triggers: stress, hormones, foods, sleep changes, weather. Diagnosis is CLINICAL using POUND criteria (Pulsating, One-day duration, Unilateral, Nausea, Disabling) - imaging NOT needed for typical migraine.",
+      "management_pearls": [
+        "ACUTE treatment (take early in attack): NSAIDs (ibuprofen 600-800mg, naproxen 500mg), Triptans (sumatriptan 100mg PO, rizatriptan 10mg ODT - abortive, most effective), Antiemetics (metoclopramide, prochlorperazine - also treat nausea)",
+        "Avoid opioids and butalbital (rebound headaches, dependence)",
+        "PREVENTIVE therapy if ≥4 headaches/month, ≥8 headache days/month, or disabling: Propranolol 80-240mg/day, Topiramate 50-200mg/day, Amitriptyline 25-100mg qHS, or CGRP inhibitors (erenumab)",
+        "Lifestyle: identify triggers (diary), regular sleep, hydration, avoid trigger foods (alcohol, aged cheese, processed meats, caffeine withdrawal), stress management",
+        "Medication overuse headache: if using abortive >10 days/month for 3+ months - wean off, start preventive"
+      ],
+      "pitfalls": [
+        "RED FLAGS requiring imaging: sudden thunderclap headache, new headache >50yo, progressive worsening, neurologic deficits, fever/meningismus, position-dependent, post-trauma, immunocompromised",
+        "Thunderclap headache: subarachnoid hemorrhage until proven otherwise - CT head, LP if negative CT",
+        "Migraine with aura: visual (zigzag lines, scotoma) or sensory symptoms preceding headache. Estrogen contraceptives increase stroke risk - avoid if migraine with aura",
+        "Cluster headache: brief (15-180 min), unilateral periorbital pain, autonomic symptoms (lacrimation, rhinorrhea, ptosis), occurs in clusters. Men>women. Oxygen and triptans for acute"
+      ],
+      "tags": [
+        "migraine",
+        "headache",
+        "neurology",
+        "primary care",
+        "pain"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Neurology"
+    },
+    {
+      "case_id": "CASE-046",
+      "title": "Man with New Diagnosis of Elevated Blood Sugar",
+      "specialty": "endocrinology",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Diagnose type 2 diabetes mellitus",
+        "Understand initial management and goals",
+        "Screen for diabetic complications"
+      ],
+      "presentation": "58-year-old man with fasting glucose of 215 mg/dL on routine labs, increased thirst and urination",
+      "history": {
+        "chief_complaint": "Doctor says my blood sugar is high",
+        "hpi": "Patient had routine labs drawn last week showing glucose 215 mg/dL (fasting). When asked, reports increased thirst and urination for past 3 months - thought it was just getting older. Drinks more water, urinates 8-10 times daily including 2-3 times at night. Some blurry vision. No weight loss. Wife notes he's been more tired lately. No history of diabetes but never checked before.",
+        "pmh": "Hypertension, hyperlipidemia, obesity",
+        "medications": "Lisinopril 20mg daily, atorvastatin 40mg daily",
+        "social": "Truck driver, sedentary, eats fast food frequently, non-smoker, no alcohol, no exercise",
+        "family": "Father and two siblings have type 2 diabetes"
+      },
+      "physical_exam": {
+        "vitals": "BP 142/88, HR 76, RR 14, O2 98% RA, Temp 98.6°F, BMI 34, waist 44 inches",
+        "general": "Obese, well-appearing",
+        "cardiac": "Regular rate and rhythm",
+        "lungs": "Clear bilaterally",
+        "abdomen": "Obese, soft, non-tender",
+        "extremities": "No edema, dorsalis pedis pulses 2+ bilaterally",
+        "neuro": "Alert, intact sensation to monofilament on feet bilaterally",
+        "skin": "Acanthosis nigricans on neck"
+      },
+      "labs": {
+        "fasting_glucose": "215 mg/dL (repeat 198 mg/dL)",
+        "hba1c": "9.2% (diagnostic for diabetes)",
+        "basic_metabolic_panel": "Normal, Creatinine 1.1, eGFR 72",
+        "lipid_panel": "Total cholesterol 220, LDL 145, HDL 35, Triglycerides 210",
+        "liver_function": "Normal",
+        "tsh": "Normal",
+        "urine_microalbumin_creatinine_ratio": "45 mg/g (elevated, microalbuminuria)"
+      },
+      "imaging": {
+        "none_initially": "No imaging needed at diagnosis"
+      },
+      "correct_diagnosis": "ENDO-TYPE-2-DIABETES-MELLITUS",
+      "differential": [
+        "ENDO-TYPE-2-DIABETES-MELLITUS",
+        "ENDO-PREDIABETES",
+        "ENDO-TYPE-1-DIABETES",
+        "ENDO-SECONDARY-DIABETES"
+      ],
+      "explanation": "Type 2 diabetes mellitus (T2DM) affects 10% of US adults and is increasing with obesity epidemic. Key features: (1) Hyperglycemia from insulin resistance and relative insulin deficiency, (2) Polyuria, polydipsia (classic symptoms), (3) Risk factors: obesity (BMI 34), sedentary lifestyle, family history, acanthosis nigricans (insulin resistance marker), (4) Diagnosis: Fasting glucose ≥126 mg/dL on 2 occasions OR HbA1c ≥6.5% OR random glucose ≥200 with symptoms. This patient meets diagnostic criteria with FG 215 and A1C 9.2%. Already has microvascular complication (microalbuminuria).",
+      "management_pearls": [
+        "Goals: A1C <7% (individualize), fasting glucose 80-130, postprandial <180, BP <130/80, LDL <70 (if ASCVD)",
+        "Lifestyle first: Medical nutrition therapy (MNT) - carb counting, weight loss goal 5-7%, exercise 150 min/week, diabetes education",
+        "Metformin first-line: Start 500mg daily, titrate to 1000mg BID (max 2000mg/day). Take with meals to reduce GI side effects. Check renal function (avoid if eGFR <30)",
+        "If A1C >9% at diagnosis (like this patient): consider starting metformin PLUS second agent. Options: SGLT2 inhibitor (empagliflozin - CV/renal benefit, expensive), GLP-1 agonist (semaglutide - weight loss, CV benefit), DPP-4 inhibitor, sulfonylurea (cheap but hypoglycemia risk), insulin if very high glucose",
+        "This patient: Metformin 1000mg BID + Empagliflozin 10mg daily (renoprotective given microalbuminuria)",
+        "Monitoring: A1C every 3 months until goal, then every 6 months. Home glucose monitoring if on insulin or sulfonylurea",
+        "Screening for complications: Annual: diabetic eye exam, foot exam with monofilament, microalbuminuria, lipids. Baseline EKG."
+      ],
+      "pitfalls": [
+        "Microvascular complications: retinopathy (annual dilated eye exam), nephropathy (annual microalbumin, monitor Cr/eGFR), neuropathy (annual monofilament exam, foot care education)",
+        "Macrovascular complications: ASCVD risk very high. Aspirin 81mg if ≥50yo with CV risk factor. Statin high-intensity (this patient already on statin - good). ACE-I/ARB for HTN and renal protection (already on lisinopril - good).",
+        "Hypoglycemia risk: educate on symptoms, glucose monitoring. Metformin and SGLT2i do NOT cause hypoglycemia. Sulfonylureas and insulin do.",
+        "SGLT2i precautions: risk of genital mycotic infections, DKA (rare), Fournier's gangrene (very rare). Avoid if eGFR <30. Hold during illness.",
+        "Type 1 vs Type 2: T1DM in younger patients, acute presentation, DKA, positive antibodies. Consider checking C-peptide if unclear."
+      ],
+      "tags": [
+        "diabetes",
+        "type 2 diabetes",
+        "hyperglycemia",
+        "endocrinology",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Endocrinology"
+    },
+    {
+      "case_id": "CASE-047",
+      "title": "Young Woman with Nausea, Vomiting, and Diarrhea",
+      "specialty": "primary care",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize acute viral gastroenteritis",
+        "Assess for dehydration",
+        "Understand supportive management"
+      ],
+      "presentation": "24-year-old woman with 2 days of nausea, vomiting, watery diarrhea, and crampy abdominal pain",
+      "history": {
+        "chief_complaint": "Can't stop throwing up and having diarrhea",
+        "hpi": "Patient reports sudden onset nausea and vomiting 2 days ago. Had 6-7 episodes of non-bloody, non-bilious vomiting yesterday. Watery diarrhea started yesterday, now 8-10 loose stools daily, no blood. Crampy periumbilical abdominal pain. Subjective fever and chills. Unable to keep down food or liquids. Feeling weak and dizzy. Several coworkers had similar illness last week. No recent travel. No antibiotic use.",
+        "pmh": "Healthy, no chronic conditions",
+        "medications": "None",
+        "social": "Graduate student, lives in dorm, non-smoker, no alcohol recently",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 102/68 (orthostatic: 88/60 standing), HR 108, RR 16, O2 98% RA, Temp 99.8°F",
+        "general": "Appears ill, mildly dehydrated",
+        "heent": "Dry mucous membranes, decreased skin turgor",
+        "cardiac": "Tachycardic, regular rhythm",
+        "abdomen": "Soft, diffusely tender, hyperactive bowel sounds, no rebound or guarding",
+        "skin": "Delayed capillary refill"
+      },
+      "labs": {
+        "basic_metabolic_panel": "Sodium 142, Potassium 3.3 (low), Chloride 105, Bicarb 20 (low), BUN 22 (elevated), Creatinine 1.2 (mildly elevated), Glucose 92",
+        "cbc": "WBC 11,000 (mild leukocytosis), Hgb/Hct normal",
+        "stool_studies": "Not needed for typical viral gastroenteritis unless bloody, severe, immunocompromised, or >7 days"
+      },
+      "imaging": {
+        "none": "Not indicated for uncomplicated gastroenteritis"
+      },
+      "correct_diagnosis": "ID-ACUTE-VIRAL-GASTROENTERITIS",
+      "differential": [
+        "ID-ACUTE-VIRAL-GASTROENTERITIS",
+        "ID-BACTERIAL-GASTROENTERITIS",
+        "ID-FOOD-POISONING",
+        "GI-APPENDICITIS"
+      ],
+      "explanation": "Acute viral gastroenteritis ('stomach flu') is extremely common. Key features: (1) Abrupt onset nausea, vomiting, watery diarrhea, (2) Crampy abdominal pain, (3) Low-grade fever, (4) Self-limited (2-3 days), (5) Outbreak setting (coworkers affected), (6) No blood in stool (viral). Common causes: norovirus (most common, outbreaks in closed settings), rotavirus (children), adenovirus. This patient has mild dehydration from poor PO intake and fluid losses. Diagnosis is clinical - no testing needed for typical presentation.",
+      "management_pearls": [
+        "Oral rehydration is KEY: Small frequent sips of clear liquids - water, sports drinks, oral rehydration solution (Pedialyte). Goal 1.5-2L over 24 hours. Avoid sugary drinks if diarrhea severe.",
+        "Antiemetics: Ondansetron 4-8mg PO/ODT (dissolving tablet) q8h PRN - helps retain fluids",
+        "Antidiarrheals: Loperamide 4mg initial, then 2mg after each loose stool (max 16mg/day). AVOID if fever or bloody diarrhea (can worsen bacterial infections)",
+        "Diet: Start bland foods when tolerated (BRAT diet: bananas, rice, applesauce, toast), advance as tolerated",
+        "IV fluids if severe dehydration or unable to tolerate PO: NS 1-2L bolus, then maintenance",
+        "This patient: Ondansetron 8mg ODT, start oral rehydration, loperamide after vomiting controlled, recheck in 24 hours or sooner if worsens",
+        "Prevention: hand hygiene, avoid food prep when ill, clean contaminated surfaces with bleach"
+      ],
+      "pitfalls": [
+        "RED FLAGS: bloody diarrhea, high fever >101.5°F, severe abdominal pain, signs of severe dehydration, immunocompromised, recent antibiotics, symptoms >7 days, recent travel - consider bacterial etiology, need stool studies",
+        "Bacterial gastroenteritis: Salmonella, Shigella, Campylobacter, E. coli O157:H7 - often bloody, higher fever, fecal leukocytes. May need antibiotics if severe or high-risk patient",
+        "C. difficile colitis: watery diarrhea after recent antibiotics - check C. diff toxin, treat with vancomycin or fidaxomicin",
+        "Appendicitis: pain migrates to RLR, rebound tenderness, fever - get CT if suspicious",
+        "Dehydration severity: Mild (thirst, dry mouth), Moderate (orthostasis, tachycardia, decreased UOP), Severe (hypotension, AMS, anuric)"
+      ],
+      "tags": [
+        "gastroenteritis",
+        "vomiting",
+        "diarrhea",
+        "stomach flu",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Primary Care"
+    },
+    {
+      "case_id": "CASE-048",
+      "title": "Man with Acute Lower Back Pain",
+      "specialty": "primary care",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize acute mechanical low back pain",
+        "Screen for red flags requiring imaging",
+        "Understand conservative management approach"
+      ],
+      "presentation": "35-year-old man with sudden onset severe lower back pain after lifting heavy boxes",
+      "history": {
+        "chief_complaint": "My back went out when I was lifting at work",
+        "hpi": "Patient was lifting heavy boxes yesterday when he felt sudden sharp pain in lower back. Pain is 8/10, located in lumbar spine, worse with movement, bending, and twisting. Some radiation to right buttock but no leg pain. No numbness, tingling, or weakness in legs. No bowel or bladder changes. Took ibuprofen with minimal relief. Unable to work today due to pain. No prior back problems.",
+        "pmh": "Healthy, no chronic conditions",
+        "medications": "Ibuprofen 400mg PRN",
+        "social": "Warehouse worker, heavy lifting daily, occasional smoker, exercises irregularly",
+        "family": "Father has chronic back pain"
+      },
+      "physical_exam": {
+        "vitals": "BP 128/78, HR 72, RR 14, O2 99% RA, Temp 98.6°F",
+        "general": "Guarding back, moves slowly, in moderate discomfort",
+        "back": "Paraspinal muscle spasm and tenderness, no midline tenderness, no CVA tenderness",
+        "neuro": "Lower extremity: strength 5/5 bilaterally (hip flexion, knee extension, ankle dorsiflexion/plantarflexion), sensation intact, reflexes 2+ symmetric, negative straight leg raise bilaterally",
+        "gait": "Antalgic but able to bear weight, able to toe/heel walk"
+      },
+      "labs": {
+        "none_needed": "Labs not indicated for acute mechanical low back pain without red flags"
+      },
+      "imaging": {
+        "none_initially": "X-ray/MRI NOT indicated for acute back pain <4-6 weeks without red flags"
+      },
+      "correct_diagnosis": "ORTHO-ACUTE-MECHANICAL-LOW-BACK-PAIN",
+      "differential": [
+        "ORTHO-ACUTE-MECHANICAL-LOW-BACK-PAIN",
+        "ORTHO-LUMBAR-DISC-HERNIATION",
+        "ORTHO-VERTEBRAL-COMPRESSION-FRACTURE",
+        "NEPHRO-KIDNEY-STONE"
+      ],
+      "explanation": "Acute mechanical low back pain is EXTREMELY common - 80% of people experience it in lifetime. Key features: (1) Sudden onset with lifting/twisting (mechanical trigger), (2) Localized lumbar pain worse with movement, (3) NO red flags: no neurologic deficits (strength/sensation/reflexes normal), no saddle anesthesia, no bowel/bladder dysfunction, no fever, no trauma, age <50, no cancer history, no unexplained weight loss, (4) Muscle spasm and tenderness. Most cases resolve within 4-6 weeks with conservative management. Imaging is NOT helpful and often shows incidental findings leading to unnecessary interventions.",
+      "management_pearls": [
+        "Conservative management is FIRST-LINE: NSAIDs (ibuprofen 600-800mg TID, naproxen 500mg BID), acetaminophen 1000mg q6h, muscle relaxants (cyclobenzaprine 5-10mg TID PRN for severe spasm)",
+        "Activity modification: avoid heavy lifting and aggravating activities, but AVOID bed rest. Stay active within pain tolerance - walking, gentle stretching. Bed rest >48 hours delays recovery.",
+        "Physical therapy referral if not improving in 2-4 weeks: core strengthening, stretching, proper lifting mechanics",
+        "Heat therapy: heating pad 20 min TID-QID for muscle relaxation",
+        "Expected course: 50% better in 1 week, 90% better in 4-6 weeks. Return to work with light duty if possible.",
+        "Return precautions: progressive weakness, numbness, bowel/bladder changes - return immediately"
+      ],
+      "pitfalls": [
+        "RED FLAGS requiring urgent imaging (X-ray or MRI): Age >50 with new-onset pain, significant trauma, cancer history, unexplained weight loss, fever, IV drug use, chronic steroid use, neurologic deficits (weakness, sensory loss, absent reflexes), bowel/bladder dysfunction, saddle anesthesia",
+        "Cauda equina syndrome: bilateral leg weakness, saddle anesthesia, urinary retention - SURGICAL EMERGENCY, needs urgent MRI and decompression",
+        "Radiculopathy (sciatica): leg pain > back pain, follows dermatomal pattern, positive straight leg raise - suggests disc herniation. Consider MRI if severe or not improving in 4-6 weeks.",
+        "Avoid early imaging in uncomplicated back pain - leads to unnecessary procedures, no better outcomes, higher costs",
+        "Opioids NOT recommended for acute back pain - no better than NSAIDs, addiction risk"
+      ],
+      "tags": [
+        "low back pain",
+        "back pain",
+        "lumbar strain",
+        "musculoskeletal",
+        "primary care"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Primary Care"
+    },
+    {
+      "case_id": "CASE-049",
+      "title": "Elderly Woman with Cough, Fever, and Shortness of Breath",
+      "specialty": "pulmonology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize community-acquired pneumonia",
+        "Apply severity assessment (CURB-65)",
+        "Select appropriate empiric antibiotics"
+      ],
+      "presentation": "72-year-old woman with 4 days of productive cough, fever, and progressive shortness of breath",
+      "history": {
+        "chief_complaint": "Cough, fever, and can't catch my breath",
+        "hpi": "Patient reports cough started 4 days ago, initially dry, now productive of yellow-green sputum. Fever to 101.8°F at home. Progressive shortness of breath, worse with exertion. Right-sided chest pain, worse with deep breathing (pleuritic). Fatigue and decreased appetite. No nausea, vomiting, or diarrhea. Lives alone, has not left house in 2 weeks (not hospital-acquired).",
+        "pmh": "COPD, hypertension, type 2 diabetes",
+        "medications": "Albuterol inhaler PRN, metformin, lisinopril",
+        "social": "Retired teacher, lives alone, former smoker (quit 10 years ago, 40 pack-year history), no alcohol",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 108/65, HR 98, RR 24, O2 89% on RA (92% on 2L NC), Temp 100.9°F",
+        "general": "Elderly woman, mild respiratory distress, tachypneic",
+        "lungs": "Decreased breath sounds right base, crackles and bronchial breath sounds right lower lobe, egophony present, dullness to percussion right base",
+        "cardiac": "Tachycardic, regular rhythm",
+        "heent": "Dry mucous membranes"
+      },
+      "labs": {
+        "cbc": "WBC 16,500 with left shift, Hgb 12.8",
+        "basic_metabolic_panel": "Sodium 132, BUN 28, Creatinine 1.4 (baseline 1.0), Glucose 185",
+        "blood_cultures": "Pending (drawn before antibiotics)",
+        "sputum_gram_stain": "Many PMNs, Gram-positive diplococci"
+      },
+      "imaging": {
+        "cxr": "Right lower lobe consolidation with air bronchograms, no pleural effusion"
+      },
+      "correct_diagnosis": "PULM-COMMUNITY-ACQUIRED-PNEUMONIA",
+      "differential": [
+        "PULM-COMMUNITY-ACQUIRED-PNEUMONIA",
+        "PULM-COPD-EXACERBATION",
+        "PULM-PULMONARY-EMBOLISM",
+        "PULM-LUNG-CANCER"
+      ],
+      "explanation": "Community-acquired pneumonia (CAP) is common in elderly and those with comorbidities. Key features: (1) Productive cough, fever, dyspnea (classic triad), (2) Pleuritic chest pain, (3) Crackles, bronchial breath sounds, egophony (consolidation), (4) CXR confirms lobar consolidation, (5) Elevated WBC with left shift, (6) Risk factors: age >65, COPD, diabetes. CURB-65 score 3 (Confusion=0, Urea>20=1, RR≥30=1, BP<90/60=0, age≥65=1) = mortality 15%, needs HOSPITALIZATION. Streptococcus pneumoniae most common (suggested by Gram-positive diplococci).",
+      "management_pearls": [
+        "Severity assessment CURB-65: Confusion, Urea >20 (BUN >28), RR ≥30, BP <90 systolic or ≤60 diastolic, age ≥65. Score 0-1: outpatient, 2: consider admission, ≥3: hospitalization recommended",
+        "This patient: CURB-65=3 → ADMIT to hospital",
+        "Empiric antibiotics for hospitalized CAP (non-ICU): Beta-lactam (ceftriaxone 1g IV daily or ampicillin-sulbactam 1.5-3g IV q6h) PLUS Macrolide (azithromycin 500mg IV daily) OR Respiratory fluoroquinolone monotherapy (levofloxacin 750mg IV daily)",
+        "Start this patient: Ceftriaxone 1g IV daily + Azithromycin 500mg IV daily",
+        "Supportive care: Supplemental O2 (goal >90%), IV fluids for dehydration, antipyretics",
+        "Blood cultures before antibiotics, sputum culture if able",
+        "Typical duration: 5-7 days if clinical improvement (afebrile 48-72hrs, improving symptoms, able to take PO)",
+        "Switch to PO antibiotics when improving: Amoxicillin 1g TID or levofloxacin 750mg daily to complete course"
+      ],
+      "pitfalls": [
+        "Healthcare-associated pneumonia risk factors: recent hospitalization, nursing home resident, dialysis, immunosuppressed - need broader coverage for MRSA and Pseudomonas (vancomycin + piperacillin-tazobactam)",
+        "Aspiration pneumonia: impaired swallowing, alcoholism, elderly - often right lower lobe, may need anaerobic coverage (ampicillin-sulbactam or clindamycin)",
+        "Legionella: GI symptoms, hyponatremia, elevated LFTs - add fluoroquinolone, test urine antigen",
+        "Complications: parapneumonic effusion/empyema (tap if >1cm or loculated), lung abscess, respiratory failure, sepsis",
+        "Follow-up CXR in 6-8 weeks to confirm resolution, especially if smoker or age >50 (rule out underlying cancer)"
+      ],
+      "tags": [
+        "pneumonia",
+        "CAP",
+        "community-acquired pneumonia",
+        "respiratory infection",
+        "pulmonology"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Pulmonology"
+    },
+    {
+      "case_id": "CASE-050",
+      "title": "Young Adult with Panic and Racing Heart",
+      "specialty": "psychiatry",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize panic attack presentation",
+        "Differentiate anxiety from medical causes",
+        "Understand acute and long-term management"
+      ],
+      "presentation": "26-year-old woman with sudden onset racing heart, chest tightness, shortness of breath, and feeling of impending doom",
+      "history": {
+        "chief_complaint": "I thought I was having a heart attack, I couldn't breathe",
+        "hpi": "Patient reports sudden episode 2 hours ago while at work. Heart started racing 'out of nowhere', felt like it was pounding out of chest. Chest tightness, difficulty getting deep breath, felt like couldn't get enough air. Sweating, trembling, felt dizzy and lightheaded. Overwhelming sense of fear and feeling like she was going to die. Episode lasted about 20 minutes, gradually resolved. Has had 3 similar episodes in past 2 months, increasing in frequency. Now worried about having another attack. Stress at work and relationship issues. No cardiac history.",
+        "pmh": "No significant medical history",
+        "medications": "None",
+        "social": "Marketing analyst, high-stress job, drinks 3 cups coffee daily, occasional alcohol, non-smoker, no drugs",
+        "family": "Mother has anxiety disorder"
+      },
+      "physical_exam": {
+        "vitals": "BP 118/72, HR 78 (regular), RR 16, O2 99% RA, Temp 98.6°F",
+        "general": "Anxious-appearing, comfortable at rest",
+        "cardiac": "Regular rate and rhythm, no murmurs",
+        "lungs": "Clear bilaterally, normal effort",
+        "neuro": "Alert, oriented, no focal deficits",
+        "psychiatric": "Anxious affect, appropriate, no suicidal ideation"
+      },
+      "labs": {
+        "ekg": "Normal sinus rhythm, no ischemic changes",
+        "tsh": "Normal (rule out hyperthyroidism)",
+        "cbc_bmp": "Normal"
+      },
+      "imaging": {
+        "none_needed": "Cardiac workup negative"
+      },
+      "correct_diagnosis": "PSYCH-PANIC-DISORDER",
+      "differential": [
+        "PSYCH-PANIC-DISORDER",
+        "CARD-ARRHYTHMIA",
+        "ENDO-HYPERTHYROIDISM",
+        "CARD-MYOCARDIAL-INFARCTION"
+      ],
+      "explanation": "Panic disorder is characterized by recurrent unexpected panic attacks. Key features: (1) Sudden onset discrete episodes of intense fear/discomfort, (2) Physical symptoms: palpitations, chest pain, dyspnea, dizziness, sweating, trembling, (3) Psychological symptoms: fear of dying, derealization, fear of losing control, (4) Peak within 10 minutes, last 20-30 minutes, (5) Recurrent attacks with worry about future attacks (anticipatory anxiety), (6) No medical cause after workup (cardiac ruled out). Affects 2-3% of population, more common in women. Diagnosis requires: recurrent unexpected attacks + ≥1 month of worry/behavioral change.",
+      "management_pearls": [
+        "ACUTE panic attack: Reassurance, calm environment, breathing exercises (slow deep breaths), grounding techniques (5-4-3-2-1 sensory awareness). Benzodiazepines (lorazepam 0.5-1mg, alprazolam 0.25-0.5mg) for severe acute episodes - use sparingly due to dependence risk.",
+        "LONG-TERM management: Combination of psychotherapy + medication is most effective",
+        "Psychotherapy: Cognitive behavioral therapy (CBT) is first-line, exposure therapy, relaxation techniques",
+        "Medications: SSRIs are first-line (sertraline 50mg daily, escitalopram 10mg daily, paroxetine 20mg daily). Takes 4-6 weeks for full effect. Start low, titrate slowly.",
+        "This patient: Start sertraline 25mg daily x 1 week, then increase to 50mg daily. Refer for CBT. Lorazepam 0.5mg PRN for breakthrough (max 2-3x/week to avoid dependence).",
+        "Lifestyle: reduce caffeine (3 cups coffee worsening anxiety), regular exercise, adequate sleep, stress management",
+        "Follow-up in 2-4 weeks to assess response, titrate medication"
+      ],
+      "pitfalls": [
+        "Must rule out medical causes first: cardiac (MI, arrhythmia - EKG), pulmonary (PE - rare in young healthy), endocrine (hyperthyroidism - check TSH), substance-induced (caffeine, stimulants, cocaine, withdrawal from alcohol/benzos)",
+        "Panic disorder often coexists with agoraphobia (fear/avoidance of situations where escape difficult) - ask about avoidance behaviors",
+        "Benzodiazepines provide quick relief but: tolerance develops, dependence risk, rebound anxiety with discontinuation. Use as bridge while starting SSRI, not long-term solution.",
+        "Depression commonly coexists (50-60%) - screen with PHQ-9, ask about anhedonia, sleep, appetite, suicidal ideation",
+        "Substance use: some patients self-medicate with alcohol - screen and address"
+      ],
+      "tags": [
+        "panic attack",
+        "anxiety",
+        "panic disorder",
+        "psychiatry",
+        "mental health"
+      ],
+      "created_at": "2025-12-29T16:00:00.000000",
+      "author": "Dr. Psychiatry"
     }
   ]
 }
