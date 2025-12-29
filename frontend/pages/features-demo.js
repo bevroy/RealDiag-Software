@@ -222,9 +222,342 @@ export default function FeaturesDemo() {
       </header>
       
       <main id="main-content" role="main">
+        
+        {/* Overview Section */}
+        <section style={{ marginBottom: '3rem', background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <h2 style={{ color: '#0f766e', fontSize: '1.75rem', marginBottom: '1rem' }}>Complete Feature List</h2>
+          <p style={{ fontSize: '1.1rem', color: '#374151', lineHeight: '1.8' }}>
+            RealDiag is a comprehensive clinical decision support system with 100+ features across diagnostic search, 
+            patient safety, clinical education, EHR integration, and advanced analytics. All features are HIPAA-compliant 
+            and designed for real-world clinical workflows.
+          </p>
+        </section>
+
+        {/* Core Diagnostic Features */}
+        <section aria-labelledby="diagnostic-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="diagnostic-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔬 Core Diagnostic Features</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Symptom Search</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Multi-symptom differential diagnosis</li>
+                <li>676+ diagnostic trees across 55 specialties</li>
+                <li>Real-time likelihood scoring</li>
+                <li>Match confidence indicators</li>
+                <li>Sensitivity & specificity data</li>
+                <li>Free trial: 10 searches/week for anonymous users</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Diagnosis Search</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Direct diagnosis lookup</li>
+                <li>Comprehensive clinical details</li>
+                <li>Presentations & red flags</li>
+                <li>Workup recommendations</li>
+                <li>Treatment protocols</li>
+                <li>Clinical pearls & evidence</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>AI Tree Generation</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>GPT-4 & Claude 3.5 integration</li>
+                <li>Automatic gap detection</li>
+                <li>Evidence-based tree generation</li>
+                <li>Medical review workflow</li>
+                <li>Quality control validation</li>
+                <li>Admin approval system</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Patient Safety Features */}
+        <section aria-labelledby="safety-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="safety-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🛡️ Patient Safety Features</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Medication Safety</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Drug-drug interaction checking (50+ meds)</li>
+                <li>Contraindication detection</li>
+                <li>Allergen cross-reactivity alerts</li>
+                <li>Duplicate therapy detection</li>
+                <li>Beers Criteria for elderly</li>
+                <li>Renal/hepatic dose adjustments</li>
+                <li>Pregnancy risk warnings</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Drug Interactions</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Major, moderate, minor severity</li>
+                <li>Clinical effect descriptions</li>
+                <li>Alternative medication suggestions</li>
+                <li>Monitoring recommendations</li>
+                <li>Color-coded severity badges</li>
+                <li>Automatic extraction from management</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Clinical Calculators</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Wells Score (DVT & PE)</li>
+                <li>HEART Score (chest pain)</li>
+                <li>CHA₂DS₂-VASc (AFib stroke risk)</li>
+                <li>HAS-BLED (bleeding risk)</li>
+                <li>CURB-65 (pneumonia severity)</li>
+                <li>Centor Score (strep pharyngitis)</li>
+                <li>Ottawa Ankle Rules</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Clinical Decision Support */}
+        <section aria-labelledby="decision-support-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="decision-support-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🧠 Advanced Decision Support</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Likelihood Analysis</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Bayesian probability calculations</li>
+                <li>Confidence level indicators</li>
+                <li>Decision trace visualization</li>
+                <li>What-if scenario analysis</li>
+                <li>Test characteristics (sensitivity/specificity)</li>
+                <li>Match score explanations</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Cost-Effectiveness</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Diagnostic pathway analysis</li>
+                <li>Cost comparisons ($, $$, $$$)</li>
+                <li>Time-to-diagnosis estimates</li>
+                <li>Recommended pathway selection</li>
+                <li>Coverage for PE, DVT, ACS, stroke</li>
+                <li>Value-based decision making</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Patient History</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Comprehensive HPI documentation</li>
+                <li>Structured history capture</li>
+                <li>Medication list management</li>
+                <li>Allergy tracking</li>
+                <li>Social & family history</li>
+                <li>Auto-sync with diagnostic searches</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Educational Features */}
+        <section aria-labelledby="education-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="education-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>📚 Medical Education & Training</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Case Library</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Searchable clinical scenarios</li>
+                <li>Beginner, intermediate, advanced levels</li>
+                <li>Multi-specialty coverage</li>
+                <li>Complete patient presentations</li>
+                <li>Lab & imaging results</li>
+                <li>Differential diagnosis teaching</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Interactive Quizzes</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Timed quiz mode (45-60 sec/question)</li>
+                <li>Instant feedback with explanations</li>
+                <li>Single & multiple choice questions</li>
+                <li>Differential ranking exercises</li>
+                <li>Scoring system with points</li>
+                <li>Performance tracking</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Progress Tracking</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Overall accuracy rates</li>
+                <li>Cases attempted & completed</li>
+                <li>Quiz performance metrics</li>
+                <li>Average time per case</li>
+                <li>Learning objectives mapping</li>
+                <li>USMLE topic correlation</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Integration Features */}
+        <section aria-labelledby="integration-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="integration-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔌 Integration & Interoperability</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>FHIR/EHR Integration</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>FHIR R4 client</li>
+                <li>Epic & Cerner connectivity</li>
+                <li>Patient data pull (demographics, meds, labs)</li>
+                <li>Multiple auth methods (OAuth, Bearer, Basic)</li>
+                <li>Smart on FHIR ready</li>
+                <li>HL7 v2 message support</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Export & Reporting</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>PDF report generation</li>
+                <li>Multi-format export (JSON, XML, CSV)</li>
+                <li>FHIR resource export</li>
+                <li>Custom report templates</li>
+                <li>Batch export capabilities</li>
+                <li>Branded clinical reports</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>RESTful API</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Comprehensive REST API</li>
+                <li>API key authentication</li>
+                <li>Rate limiting & quotas</li>
+                <li>Webhook support</li>
+                <li>Interactive API docs (Swagger/ReDoc)</li>
+                <li>Third-party integration ready</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Mobile & Offline */}
+        <section aria-labelledby="mobile-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="mobile-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>📱 Mobile & Offline Capabilities</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Progressive Web App</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Install to home screen</li>
+                <li>Full offline functionality</li>
+                <li>Service worker caching</li>
+                <li>IndexedDB storage</li>
+                <li>Background sync</li>
+                <li>Push notifications</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Offline Database</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Download all 676 diagnostic trees</li>
+                <li>Progress tracking during download</li>
+                <li>Specialty-based organization</li>
+                <li>Offline search history</li>
+                <li>Automatic sync when online</li>
+                <li>Storage statistics dashboard</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Mobile Optimization</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Touch-optimized interface</li>
+                <li>Gesture navigation</li>
+                <li>Responsive design (320px-2560px)</li>
+                <li>Tablet split-screen layout</li>
+                <li>Stylus support (iPad Pencil)</li>
+                <li>Low-bandwidth mode</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Security & Compliance */}
+        <section aria-labelledby="security-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="security-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>🔒 Security & Compliance</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Data Encryption</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>AES-256-GCM client-side encryption</li>
+                <li>Fernet database encryption</li>
+                <li>PBKDF2 key derivation (100k iterations)</li>
+                <li>16 PHI fields encrypted at rest</li>
+                <li>TLS 1.3 in transit</li>
+                <li>Session key management</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Authentication</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Multi-factor authentication (TOTP)</li>
+                <li>Backup recovery codes</li>
+                <li>Session management</li>
+                <li>API key authentication</li>
+                <li>OAuth 2.0 support</li>
+                <li>Role-based access control</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Compliance</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>HIPAA-compliant architecture</li>
+                <li>Audit logging for PHI access</li>
+                <li>Automatic session timeout</li>
+                <li>Data retention policies</li>
+                <li>BAA-ready infrastructure</li>
+                <li>SOC 2 Type II preparation</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* User Management */}
+        <section aria-labelledby="user-heading" style={{ marginBottom: '3rem' }}>
+          <h2 id="user-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>👤 User Management & Personalization</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Account Management</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Free account creation</li>
+                <li>Email verification</li>
+                <li>Password reset flow</li>
+                <li>Profile customization</li>
+                <li>Specialty selection</li>
+                <li>Notification preferences</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Personalization</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Search history tracking</li>
+                <li>Favorites & bookmarks</li>
+                <li>Custom diagnostic lists</li>
+                <li>Personalized recommendations</li>
+                <li>Recently viewed diagnoses</li>
+                <li>Specialty-based ranking</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Subscription Plans</h3>
+              <ul style={{ lineHeight: '1.8', color: '#374151' }}>
+                <li>Free tier with search limits</li>
+                <li>Starter ($29/month)</li>
+                <li>Professional ($49/month)</li>
+                <li>Professional Plus ($69/month)</li>
+                <li>Team & enterprise plans</li>
+                <li>14-day free trial</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* Task 6.1: Accessibility Features */}
         <section aria-labelledby="accessibility-heading" style={{ marginBottom: '3rem' }}>
-          <h2 id="accessibility-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Accessibility (WCAG 2.1 AA)</h2>
+          <h2 id="accessibility-heading" style={{ color: '#0f766e', fontSize: '1.5rem', marginBottom: '1.5rem' }}>♿ Accessibility (WCAG 2.1 AA)</h2>
           
           <div style={{ 
             display: 'grid', 
