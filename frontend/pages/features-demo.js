@@ -46,14 +46,14 @@ export default function FeaturesDemo() {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)', padding: '2rem' }}>
       <style>{`
-        details summary span:first-child {
+        details.feature-section summary span:first-child {
           transition: transform 0.2s ease;
           display: inline-block;
         }
-        details[open] summary span:first-child {
+        details.feature-section[open] summary span:first-child {
           transform: rotate(90deg);
         }
-        details summary:hover {
+        details.feature-section summary:hover {
           background: rgba(15, 118, 110, 0.05);
           border-radius: 6px;
           padding: 0.5rem;
@@ -249,7 +249,7 @@ export default function FeaturesDemo() {
         </section>
 
         {/* Core Diagnostic Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -302,7 +302,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Patient Safety Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -357,7 +357,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Clinical Decision Support */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -410,7 +410,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Educational Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -463,7 +463,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Integration Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -516,7 +516,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Mobile & Offline */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -569,7 +569,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Security & Compliance */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -622,7 +622,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* User Management */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -675,7 +675,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Patient-Facing Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -767,7 +767,7 @@ export default function FeaturesDemo() {
         </details>
 
         {/* Task 6.1: Accessibility Features */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -846,7 +846,7 @@ export default function FeaturesDemo() {
         </details>
         
         {/* Task 4.3: Tablet Optimization */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
@@ -925,7 +925,7 @@ export default function FeaturesDemo() {
         </details>
         
         {/* Task 3.3: Advanced Decision Support */}
-        <details style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <details className="feature-section" style={{ marginBottom: '2rem', background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
           <summary style={{ 
             color: '#0f766e', 
             fontSize: '1.5rem', 
