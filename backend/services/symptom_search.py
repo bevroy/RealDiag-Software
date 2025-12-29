@@ -115,8 +115,6 @@ class DiagnosisMatch(BaseModel):
     management: Optional[List[str]] = None
     tests: Optional[List[str]] = None  # Diagnostic tests to order
     referrals: Optional[List[str]] = None  # Specialist referrals
-    has_tree: Optional[bool] = True  # Whether a decision tree exists for this diagnosis
-    case_examples: Optional[List[str]] = None  # Case IDs that match this diagnosis
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -674,9 +672,8 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         # Pre-normalize input symptoms once
         normalized_input = [normalize_text(s) for s in request.symptoms]
         
-        # Search and score all rules from decision trees
+        # Search and score all rules
         results = []
-        tree_diagnosis_ids = set()  # Track which diagnoses have trees
         
         for family_name, rules in families_to_search.items():
             # Apply filters
@@ -698,12 +695,9 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                 
                 # Only include if there's a match
                 if score > 0:
-                    rule_id = rule.get('id', '')
-                    tree_diagnosis_ids.add(rule_id)  # Track that this diagnosis has a tree
-                    
                     # Prepare result with enhanced metadata
                     diagnosis_match = DiagnosisMatch(
-                        rule_id=rule_id,
+                        rule_id=rule.get('id', ''),
                         label=rule.get('label', ''),
                         family=family_name,
                         match_score=round(score, 2),
@@ -716,39 +710,10 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                         clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
                         management=rule.get('management'),
                         tests=rule.get('tests'),
-                        referrals=rule.get('referrals'),
-                        has_tree=True,
-                        case_examples=None
+                        referrals=rule.get('referrals')
                     )
                     
                     results.append(diagnosis_match)
-        
-        # Search clinical cases database for additional diagnoses without trees
-        case_diagnoses = search_clinical_cases(normalized_input, request.symptoms)
-        
-        # Add case-based diagnoses that don't have decision trees
-        for diagnosis_id, match_data in case_diagnoses.items():
-            if diagnosis_id not in tree_diagnosis_ids:  # Only add if no tree exists
-                # Create a diagnosis match from case data
-                diagnosis_match = DiagnosisMatch(
-                    rule_id=diagnosis_id,
-                    label=match_data['diagnosis'],
-                    family=match_data['specialty'],
-                    match_score=round(match_data['score'] / len(match_data['all_presentations']) if match_data['all_presentations'] else match_data['score'], 2),
-                    matched_presentations=match_data['matched_presentations'],
-                    all_presentations=match_data['all_presentations'],
-                    icd10=match_data.get('icd10', []),
-                    snomed=[],
-                    sensitivity=None,
-                    specificity=None,
-                    clinical_pearls=None,
-                    management=None,
-                    tests=None,
-                    referrals=None,
-                    has_tree=False,  # Flag indicating no decision tree exists
-                    case_examples=match_data['case_ids']  # Link to example cases
-                )
-                results.append(diagnosis_match)
         
         # Sort by score (descending)
         results.sort(key=lambda x: x.match_score, reverse=True)
