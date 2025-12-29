@@ -57,7 +57,7 @@ async with SubscriptionGate(current_user, user_subscriptions) as gate:
 ## 📋 Plan Types
 
 ```python
-PlanType.FREE                           # Free trial (10 searches/week)
+PlanType.FREE                           # Free trial (10 searches total)
 PlanType.INDIVIDUAL_STARTER             # $29/mo (1 module)
 PlanType.INDIVIDUAL_PROFESSIONAL        # $49/mo (all modules)
 PlanType.INDIVIDUAL_PROFESSIONAL_PLUS   # $69/mo (+ API, analytics)

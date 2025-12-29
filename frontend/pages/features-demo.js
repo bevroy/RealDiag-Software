@@ -245,7 +245,7 @@ export default function FeaturesDemo() {
                 <li>Real-time likelihood scoring</li>
                 <li>Match confidence indicators</li>
                 <li>Sensitivity & specificity data</li>
-                <li>Free trial: 10 searches/week for anonymous users</li>
+                <li>Free trial: 10 searches total for anonymous users</li>
               </ul>
             </div>
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>

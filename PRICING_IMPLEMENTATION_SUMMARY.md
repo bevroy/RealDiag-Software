@@ -139,7 +139,7 @@ A comprehensive subscription and pricing system has been implemented for RealDia
 ### Individual Plans
 | Plan | Monthly | Yearly | Features |
 |------|---------|--------|----------|
-| **Free** | $0 | - | 10 searches/week, 1 module |
+| **Free** | $0 | - | 10 searches total, 1 module |
 | **Starter** | $29 | $290 | Unlimited searches, 1 module, JSON export |
 | **Professional** | $49 | $490 | All modules, FHIR export, priority support |
 | **Professional Plus** | $69 | $690 | API access, analytics, phone support |
