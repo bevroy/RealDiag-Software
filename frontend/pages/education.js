@@ -446,30 +446,80 @@ export default function EducationPage() {
           font-weight: 600;
         }
 
-        .cases-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 20px;
-        }
-
-        .case-card {
+        .cases-list {
           background: white;
-          border: 2px solid #e0e0e0;
           border-radius: 12px;
-          padding: 20px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .case-list-item {
+          padding: 16px 24px;
           cursor: pointer;
-          transition: all 0.3s;
+          transition: all 0.2s;
+          border-left: 4px solid transparent;
         }
 
-        .case-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-          border-color: #14b8a6;
+        .case-list-item:not(:last-child) {
+          border-bottom: 1px solid #f0f0f0;
         }
 
-        .case-card h3 {
-          margin: 0 0 12px 0;
-          color: #333;
+        .case-list-item.difficulty-beginner {
+          border-left-color: #10b981;
+          background: linear-gradient(90deg, rgba(16, 185, 129, 0.05) 0%, white 100%);
+        }
+
+        .case-list-item.difficulty-intermediate {
+          border-left-color: #f59e0b;
+          background: linear-gradient(90deg, rgba(245, 158, 11, 0.05) 0%, white 100%);
+        }
+
+        .case-list-item.difficulty-advanced {
+          border-left-color: #ef4444;
+          background: linear-gradient(90deg, rgba(239, 68, 68, 0.05) 0%, white 100%);
+        }
+
+        .case-list-item:hover {
+          background: #f8fafc;
+          transform: translateX(4px);
+        }
+
+        .case-list-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .case-title {
+          font-size: 16px;
+          font-weight: 500;
+          color: #1f2937;
+          flex: 1;
+        }
+
+        .difficulty-badge {
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .difficulty-badge.beginner {
+          background: #d1fae5;
+          color: #065f46;
+        }
+
+        .difficulty-badge.intermediate {
+          background: #fef3c7;
+          color: #92400e;
+        }
+
+        .difficulty-badge.advanced {
+          background: #fee2e2;
+          color: #991b1b;
         }
 
         .no-progress {
@@ -1740,20 +1790,24 @@ export default function EducationPage() {
                 <h3>Diagnosis: {selectedCase.correct_diagnosis}</h3>
               </div>
             ) : (
-              <div className="cases-grid">
-                {cases.map((caseItem) => (
-                  <div 
-                    key={caseItem.case_id} 
-                    className="case-card"
-                    onClick={() => setSelectedCase(caseItem)}
-                  >
-                    <h3>{caseItem.title}</h3>
-                    <div style={{ marginTop: '8px' }}>
-                      <span className={`badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
-                      <span className="badge">{caseItem.specialty}</span>
+              <div className="cases-list">
+                {cases
+                  .sort((a, b) => {
+                    const difficultyOrder = { 'beginner': 1, 'intermediate': 2, 'advanced': 3 };
+                    return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+                  })
+                  .map((caseItem) => (
+                    <div 
+                      key={caseItem.case_id} 
+                      className={`case-list-item difficulty-${caseItem.difficulty}`}
+                      onClick={() => setSelectedCase(caseItem)}
+                    >
+                      <div className="case-list-content">
+                        <span className="case-title">{caseItem.title}</span>
+                        <span className={`difficulty-badge ${caseItem.difficulty}`}>{caseItem.difficulty}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>
