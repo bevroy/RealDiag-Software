@@ -62,7 +62,8 @@ class ClinicalCase(BaseModel):
     differential: List[str]
     explanation: str
     management_pearls: List[str]
-    references: List[str]
+    pitfalls: Optional[List[str]] = None
+    references: Optional[List[str]] = None
     tags: List[str]
     created_at: str
     author: Optional[str] = None
