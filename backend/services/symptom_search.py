@@ -115,6 +115,8 @@ class DiagnosisMatch(BaseModel):
     management: Optional[List[str]] = None
     tests: Optional[List[str]] = None  # Diagnostic tests to order
     referrals: Optional[List[str]] = None  # Specialist referrals
+    has_tree: bool = True  # Whether a decision tree exists
+    ai_suggested: bool = False  # Whether suggested by AI (no tree yet)
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -631,6 +633,111 @@ def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> 
     return rules
 
 
+async def query_ai_for_diagnoses(symptoms: List[str], age: Optional[int] = None, sex: Optional[str] = None) -> List[Dict[str, Any]]:
+    """
+    Query AI for possible diagnoses based on symptoms.
+    Used when tree search returns insufficient results.
+    
+    Returns list of AI-suggested diagnoses with structure:
+    {
+        'diagnosis': str,
+        'specialty': str,
+        'icd10': List[str],
+        'likelihood': str,
+        'key_features': List[str]
+    }
+    """
+    if not AI_GENERATION_AVAILABLE:
+        logging.warning("AI not available for diagnosis suggestions")
+        return []
+    
+    # Check if AI generation is enabled
+    if not os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+        return []
+    
+    try:
+        # Build context
+        context = f"Patient presenting with: {', '.join(symptoms)}"
+        if age:
+            context += f"\nAge: {age} years"
+        if sex:
+            context += f"\nSex: {sex}"
+        
+        # Create prompt for AI
+        prompt = f"""Given these symptoms, list the top 10 most likely diagnoses.
+
+{context}
+
+For each diagnosis, provide:
+1. Diagnosis name (use standard medical terminology)
+2. Medical specialty
+3. ICD-10 code(s)
+4. Likelihood (high/moderate/low)
+5. Key clinical features that match
+
+Return ONLY a JSON array with this structure:
+[
+  {{
+    "diagnosis": "Diagnosis Name",
+    "specialty": "cardiology",
+    "icd10": ["I21.9"],
+    "likelihood": "high",
+    "key_features": ["feature 1", "feature 2"]
+  }}
+]
+
+No additional text, just the JSON array."""
+        
+        # Query AI
+        provider = os.getenv("AI_PROVIDER", "claude")
+        
+        if provider == "claude":
+            from anthropic import Anthropic
+            client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+            
+            response = client.messages.create(
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=2000,
+                temperature=0.3,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            
+            content = response.content[0].text
+        else:
+            # OpenAI
+            import openai
+            openai.api_key = os.getenv("OPENAI_API_KEY")
+            
+            response = openai.chat.completions.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=2000
+            )
+            
+            content = response.choices[0].message.content
+        
+        # Parse JSON response
+        import json
+        # Extract JSON from response (handle potential markdown code blocks)
+        content = content.strip()
+        if content.startswith("```json"):
+            content = content[7:]
+        if content.startswith("```"):
+            content = content[3:]
+        if content.endswith("```"):
+            content = content[:-3]
+        content = content.strip()
+        
+        diagnoses = json.loads(content)
+        logging.info(f"AI suggested {len(diagnoses)} diagnoses for symptoms: {symptoms}")
+        return diagnoses
+        
+    except Exception as e:
+        logging.error(f"Error querying AI for diagnoses: {e}", exc_info=True)
+        return []
+
+
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
 async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request):
     """
@@ -717,6 +824,67 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         
         # Sort by score (descending)
         results.sort(key=lambda x: x.match_score, reverse=True)
+        
+        # Check if we should query AI for additional suggestions
+        # Query AI if: <5 tree results OR best score < 3.0
+        should_query_ai = len(results) < 5 or (results and results[0].match_score < 3.0)
+        
+        if should_query_ai and AI_GENERATION_AVAILABLE:
+            logging.info(f"Insufficient tree results ({len(results)}), querying AI for additional diagnoses")
+            
+            try:
+                ai_diagnoses = await query_ai_for_diagnoses(request.symptoms, request.age, request.sex)
+                
+                # Get set of existing diagnosis IDs from tree results
+                existing_ids = {r.rule_id.upper() for r in results}
+                
+                # Add AI suggestions that aren't already in tree results
+                for ai_dx in ai_diagnoses:
+                    diagnosis_name = ai_dx.get('diagnosis', '')
+                    # Create simple ID from diagnosis name
+                    dx_id = diagnosis_name.upper().replace(' ', '-').replace(',', '')
+                    
+                    # Skip if we already have this from trees
+                    if dx_id in existing_ids or diagnosis_name.upper() in existing_ids:
+                        continue
+                    
+                    # Map likelihood to score
+                    likelihood = ai_dx.get('likelihood', 'moderate').lower()
+                    if likelihood == 'high':
+                        ai_score = 4.0
+                    elif likelihood == 'moderate':
+                        ai_score = 2.5
+                    else:
+                        ai_score = 1.5
+                    
+                    # Create diagnosis match from AI suggestion
+                    ai_match = DiagnosisMatch(
+                        rule_id=dx_id,
+                        label=diagnosis_name,
+                        family=ai_dx.get('specialty', 'general'),
+                        match_score=ai_score,
+                        matched_presentations=ai_dx.get('key_features', []),
+                        all_presentations=[f"AI suggestion based on: {', '.join(request.symptoms)}"],
+                        icd10=ai_dx.get('icd10', []),
+                        snomed=[],
+                        sensitivity=None,
+                        specificity=None,
+                        clinical_pearls=None,
+                        management=None,
+                        tests=None,
+                        referrals=None,
+                        has_tree=False,
+                        ai_suggested=True
+                    )
+                    
+                    results.append(ai_match)
+                
+                # Re-sort after adding AI suggestions
+                results.sort(key=lambda x: x.match_score, reverse=True)
+                
+                logging.info(f"Added {len(ai_diagnoses)} AI-suggested diagnoses")
+            except Exception as e:
+                logging.error(f"Failed to get AI diagnosis suggestions: {e}")
         
         # Return top 20 results
         top_results = results[:20]
