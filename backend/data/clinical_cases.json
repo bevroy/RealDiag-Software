@@ -663,6 +663,718 @@
       ],
       "created_at": "2025-12-29T00:00:00.000000",
       "author": "Dr. Ophthalmology"
+    },
+    {
+      "case_id": "CASE-011",
+      "title": "Hypotensive Patient with Fever and Altered Mental Status",
+      "specialty": "emergency",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize septic shock",
+        "Apply Surviving Sepsis Campaign guidelines",
+        "Understand early goal-directed therapy"
+      ],
+      "presentation": "58-year-old man brought by ambulance with fever, confusion, and low blood pressure",
+      "history": {
+        "chief_complaint": "Found confused at home with fever",
+        "hpi": "Family found patient confused this morning. Had urinary symptoms (dysuria, frequency) for 3 days but didn't seek care. Now febrile, lethargic, and incontinent of urine.",
+        "pmh": "BPH, diabetes type 2",
+        "medications": "Tamsulosin, metformin",
+        "social": "Lives alone, retired",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 78/45, HR 125, RR 28, Temp 103.5°F, O2 89% RA",
+        "general": "Lethargic, responds to painful stimuli only",
+        "skin": "Mottled, cool extremities, delayed cap refill >4 seconds",
+        "lungs": "Tachypneic, clear",
+        "abdomen": "Suprapubic tenderness",
+        "neuro": "GCS 10 (E3V2M5)"
+      },
+      "labs": {
+        "wbc": "22,000 with 15% bands",
+        "lactate": "6.2 mmol/L",
+        "creatinine": "2.8 mg/dL (baseline 1.0)",
+        "procalcitonin": "15 ng/mL",
+        "ua": "WBC >100, nitrite positive, bacteria present",
+        "blood_culture": "Pending (2 sets drawn)"
+      },
+      "imaging": {
+        "cxr": "Clear"
+      },
+      "correct_diagnosis": "ID-SEPTIC-SHOCK",
+      "differential": [
+        "ID-SEPTIC-SHOCK",
+        "CARDS-CARDIOGENIC-SHOCK",
+        "ENDO-ADRENAL-CRISIS",
+        "NEU-CVA"
+      ],
+      "explanation": "Septic shock from urosepsis: SIRS criteria met (temp >38°C, HR >90, RR >20, WBC >12k with bandemia). Hypotension refractory to fluids + elevated lactate = septic shock. Source is urinary (UA findings, suprapubic tenderness). Organ dysfunction: AKI (Cr elevated), altered mental status, hypoxia. qSOFA score 3 (AMS, RR ≥22, SBP ≤100) predicts high mortality.",
+      "management_pearls": [
+        "HOUR-1 BUNDLE (start immediately):",
+        "1. Measure lactate (remeasure if >2)",
+        "2. Obtain blood cultures BEFORE antibiotics",
+        "3. Broad-spectrum antibiotics within 1 hour: Pip-tazo or cefepime + vancomycin",
+        "4. 30 mL/kg crystalloid bolus for hypotension/lactate ≥4",
+        "5. Vasopressors if hypotensive during/after fluid resuscitation (target MAP ≥65)",
+        "Norepinephrine is first-line vasopressor",
+        "Source control: Foley catheter (relieve obstruction), consider urology consult",
+        "Monitor: Central line, arterial line, continuous vitals",
+        "ICU admission for close monitoring",
+        "Steroid (hydrocortisone 200mg/day) if vasopressor-dependent"
+      ],
+      "references": [
+        "Surviving Sepsis Campaign Guidelines 2021",
+        "Recognition and Management of Septic Shock"
+      ],
+      "tags": [
+        "sepsis",
+        "shock",
+        "emergency",
+        "critical care",
+        "urosepsis"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Critical Care"
+    },
+    {
+      "case_id": "CASE-012",
+      "title": "Man with Sudden Right-Sided Weakness",
+      "specialty": "neurology",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize acute ischemic stroke",
+        "Apply NIH Stroke Scale",
+        "Understand tPA eligibility criteria"
+      ],
+      "presentation": "67-year-old man with sudden onset right-sided weakness and slurred speech 90 minutes ago",
+      "history": {
+        "chief_complaint": "Right side not working, can't talk right",
+        "hpi": "Wife reports patient was fine at breakfast. Suddenly developed right arm/leg weakness and difficulty speaking at 8:00 AM. Last known normal time 7:30 AM (90 min ago). No seizure, no head trauma. EMS activated stroke alert.",
+        "pmh": "Atrial fibrillation (not anticoagulated), hypertension, hyperlipidemia",
+        "medications": "Metoprolol, amlodipine, atorvastatin",
+        "social": "No smoking, occasional alcohol",
+        "family": "Father had stroke"
+      },
+      "physical_exam": {
+        "vitals": "BP 185/100, HR 90 irregular, RR 16",
+        "general": "Alert but aphasic",
+        "neuro": "NIHSS 15 - right hemiparesis (arm 3/5, leg 4/5), right facial droop, expressive aphasia, right visual field cut, gaze deviation to left",
+        "cardiac": "Irregular rhythm",
+        "other": "No carotid bruits"
+      },
+      "labs": {
+        "glucose": "145 mg/dL",
+        "inr": "1.0",
+        "platelets": "250k",
+        "creatinine": "1.1 mg/dL",
+        "troponin": "Normal"
+      },
+      "imaging": {
+        "ct_head": "No hemorrhage, early loss of grey-white differentiation in left MCA territory",
+        "cta_head_neck": "Left MCA M1 segment occlusion, no carotid stenosis",
+        "ct_perfusion": "Large penumbra, small core infarct"
+      },
+      "correct_diagnosis": "NEU-STROKE-ISCHEMIC",
+      "differential": [
+        "NEU-STROKE-ISCHEMIC",
+        "NEU-HEMORRHAGIC-STROKE",
+        "NEU-TODD-PARALYSIS",
+        "NEU-HEMIPLEGIC-MIGRAINE"
+      ],
+      "explanation": "Acute ischemic stroke in left MCA distribution: sudden onset focal neurological deficit (right hemiparesis, aphasia, gaze deviation). NIHSS 15 = moderate-severe. Risk factors: AFib (cardioembolic source), HTN. Within therapeutic window for both tPA (IV thrombolysis) and mechanical thrombectomy. Large vessel occlusion on CTA makes this thrombectomy candidate.",
+      "management_pearls": [
+        "TIME IS BRAIN - Door-to-needle goal <60 minutes",
+        "tPA eligibility: <4.5 hours from symptom onset, no hemorrhage on CT, no contraindications",
+        "Alteplase 0.9 mg/kg (max 90mg): 10% bolus, 90% over 1 hour",
+        "BP management: Keep <185/110 before tPA, <180/105 after tPA",
+        "Mechanical thrombectomy: Large vessel occlusion + <6 hours (up to 24h with favorable imaging)",
+        "Stat neurology and neurointerventional consult",
+        "NPO, aspirin held x 24h post-tPA",
+        "Start anticoagulation for AFib after 24h (prevent recurrence)",
+        "Stroke unit admission for neuro checks q1-2h",
+        "Rehab evaluation early"
+      ],
+      "references": [
+        "AHA/ASA Acute Ischemic Stroke Guidelines 2019",
+        "Mechanical Thrombectomy for Acute Stroke"
+      ],
+      "tags": [
+        "stroke",
+        "neurology",
+        "emergency",
+        "tPA",
+        "thrombectomy"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Stroke Neurology"
+    },
+    {
+      "case_id": "CASE-013",
+      "title": "Man with Severe Epigastric Pain After Drinking",
+      "specialty": "gastroenterology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Diagnose acute pancreatitis",
+        "Apply Ranson criteria",
+        "Understand fluid resuscitation importance"
+      ],
+      "presentation": "42-year-old man with severe upper abdominal pain radiating to back after binge drinking",
+      "history": {
+        "chief_complaint": "Worst stomach pain of my life",
+        "hpi": "Severe epigastric pain started 6 hours ago after drinking heavily at party. Pain constant, boring, radiates to back. Multiple episodes of vomiting. Pain worse lying flat, better leaning forward. No relief with antacids.",
+        "pmh": "Alcohol use disorder, prior episode of pancreatitis 2 years ago",
+        "medications": "None",
+        "social": "Alcohol 8-12 beers daily, smoking 1 PPD",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 110/70, HR 108, RR 22, Temp 100.2°F",
+        "general": "In severe distress, diaphoretic",
+        "abdomen": "Epigastric tenderness without rebound, hypoactive bowel sounds, no Murphy's sign",
+        "other": "No jaundice, no Grey-Turner or Cullen signs"
+      },
+      "labs": {
+        "lipase": "1,250 U/L (>3x ULN)",
+        "amylase": "890 U/L",
+        "wbc": "16,000",
+        "calcium": "7.8 mg/dL (low)",
+        "triglycerides": "Normal",
+        "alt_ast": "Normal",
+        "bilirubin": "Normal"
+      },
+      "imaging": {
+        "ct_abdomen": "Pancreatic edema and peripancreatic fat stranding, no necrosis or pseudocyst"
+      },
+      "correct_diagnosis": "GI-PANCREATITIS-ACUTE",
+      "differential": [
+        "GI-PANCREATITIS-ACUTE",
+        "GI-PEPTIC-ULCER-PERFORATION",
+        "CARDS-MI-INFERIOR",
+        "GI-CHOLECYSTITIS"
+      ],
+      "explanation": "Acute pancreatitis diagnosis requires 2 of 3: (1) Characteristic pain ✓, (2) Lipase >3x ULN ✓, (3) Imaging findings ✓. Etiology is alcohol (GET SMASHED mnemonic). Pain radiating to back, worse supine, better leaning forward is classic. Hypocalcemia suggests more severe disease. No signs of necrotizing pancreatitis (no Grey-Turner/Cullen signs).",
+      "management_pearls": [
+        "Aggressive IV fluid resuscitation: Lactated Ringer's 250-500 mL/hr (decreases mortality)",
+        "Goal: UOP >0.5 mL/kg/hr, Hct stable, BUN decreasing",
+        "Pain control: IV opioids (morphine, hydromorphone)",
+        "NPO initially, advance diet when pain improves (no need to wait for lipase normalization)",
+        "Ranson criteria at admission and 48h (predicts mortality)",
+        "ERCP only if gallstone pancreatitis with cholangitis/obstruction",
+        "No routine antibiotics (unless infected necrosis)",
+        "Monitor for complications: necrosis, pseudocyst, abscess, ARDS, AKI",
+        "Alcohol cessation counseling and addiction treatment referral"
+      ],
+      "references": [
+        "ACG Guidelines for Management of Acute Pancreatitis",
+        "Acute Pancreatitis: Diagnosis and Treatment"
+      ],
+      "tags": [
+        "pancreatitis",
+        "abdominal pain",
+        "gastroenterology",
+        "alcohol",
+        "GI"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Gastroenterology"
+    },
+    {
+      "case_id": "CASE-014",
+      "title": "Woman with Decreased Urine Output",
+      "specialty": "nephrology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Diagnose acute kidney injury",
+        "Classify AKI (prerenal, intrinsic, postrenal)",
+        "Interpret urinalysis and FENa"
+      ],
+      "presentation": "68-year-old woman with 2 days of decreased urine output, nausea, and confusion",
+      "history": {
+        "chief_complaint": "Not peeing much, feeling sick",
+        "hpi": "Started new BP medication (lisinopril) 1 week ago. Developed diarrhea 3 days ago (viral gastroenteritis). Urine output markedly decreased past 2 days. Nausea, vomiting. Daughter notes confusion.",
+        "pmh": "Hypertension, CKD stage 3 (baseline Cr 1.8)",
+        "medications": "Lisinopril (new), amlodipine, NSAID for arthritis",
+        "social": "Lives with daughter",
+        "family": "Father had kidney disease"
+      },
+      "physical_exam": {
+        "vitals": "BP 95/60 (orthostatic), HR 105, RR 20",
+        "general": "Lethargic, dry mucous membranes",
+        "skin": "Poor turgor, no rash",
+        "cardiac": "Tachycardic",
+        "abdomen": "Soft, no masses",
+        "extremities": "No edema"
+      },
+      "labs": {
+        "creatinine": "4.2 mg/dL (from 1.8 baseline)",
+        "bun": "85 mg/dL",
+        "bun_cr_ratio": "20:1",
+        "potassium": "5.8 mEq/L",
+        "bicarb": "18 mEq/L",
+        "urinalysis": "Specific gravity 1.030, no protein, no blood, no casts",
+        "fena": "0.5% (prerenal)",
+        "urine_sodium": "12 mEq/L"
+      },
+      "imaging": {
+        "renal_us": "Normal-sized kidneys, no hydronephrosis"
+      },
+      "correct_diagnosis": "RENAL-AKI-PRERENAL",
+      "differential": [
+        "RENAL-AKI-PRERENAL",
+        "RENAL-AKI-ATN",
+        "RENAL-AKI-POSTRENAL",
+        "RENAL-CKD-ESRD"
+      ],
+      "explanation": "Acute kidney injury (Cr increased 2.4x from baseline) with prerenal etiology. Risk factors: volume depletion (diarrhea, poor PO intake), ACE inhibitor (decreases GFR), NSAIDs (decrease renal perfusion), CKD. Physical exam shows hypovolemia (orthostasis, dry mucous membranes, tachycardia). Labs support prerenal: BUN:Cr ratio >20:1, FENa <1%, urine Na <20, concentrated urine (high specific gravity). No hydronephrosis rules out postrenal.",
+      "management_pearls": [
+        "STOP nephrotoxins: ACE inhibitor, NSAIDs, any other offending drugs",
+        "IV fluid resuscitation: Normal saline 500-1000 mL bolus, then maintenance",
+        "Monitor UOP, daily weights, strict I/Os",
+        "Trend Cr daily (should improve with fluids if prerenal)",
+        "Hyperkalemia management if K >6.0 or EKG changes: Calcium gluconate, insulin/dextrose, kayexalate",
+        "Avoid contrast, aminoglycosides, other nephrotoxins",
+        "Adjust medication doses for renal function",
+        "Urology consult only if hydronephrosis (postrenal)",
+        "Nephrology consult if: No improvement with fluids, intrinsic AKI, need dialysis (K >6.5, pH <7.1, volume overload, uremia)"
+      ],
+      "references": [
+        "KDIGO AKI Guidelines",
+        "Acute Kidney Injury: Diagnosis and Management"
+      ],
+      "tags": [
+        "AKI",
+        "kidney",
+        "nephrology",
+        "prerenal",
+        "dehydration"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Nephrology"
+    },
+    {
+      "case_id": "CASE-015",
+      "title": "Woman with Sudden Difficulty Breathing After Bee Sting",
+      "specialty": "emergency",
+      "difficulty": "beginner",
+      "learning_objectives": [
+        "Recognize anaphylaxis",
+        "Understand epinephrine administration",
+        "Identify biphasic reactions"
+      ],
+      "presentation": "32-year-old woman with sudden onset shortness of breath, throat tightness, and rash 5 minutes after bee sting",
+      "history": {
+        "chief_complaint": "Can't breathe, throat closing up",
+        "hpi": "Stung by bee in garden 5 minutes ago. Immediately developed itching, then hives over whole body. Now complains throat feels tight, hard to swallow, difficulty breathing. Dizzy and nauseated. No prior bee sting reactions.",
+        "pmh": "Seasonal allergies",
+        "medications": "Cetirizine PRN",
+        "social": "Teacher, married",
+        "family": "Sister has peanut allergy"
+      },
+      "physical_exam": {
+        "vitals": "BP 85/55, HR 125, RR 30, O2 88% RA",
+        "general": "Anxious, distressed, using accessory muscles",
+        "heent": "Lip and tongue swelling (angioedema)",
+        "skin": "Diffuse urticaria, flushed",
+        "lungs": "Bilateral wheezing, stridor",
+        "cardiac": "Tachycardic",
+        "abdomen": "Cramping"
+      },
+      "labs": {
+        "tryptase": "Elevated (if checked)",
+        "ige": "Can check later for confirmation"
+      },
+      "imaging": {
+        "none": "Clinical diagnosis, no imaging needed"
+      },
+      "correct_diagnosis": "EMER-ANAPHYLAXIS",
+      "differential": [
+        "EMER-ANAPHYLAXIS",
+        "PULM-ASTHMA-EXACERBATION",
+        "CARDS-ACUTE-CORONARY-SYNDROME",
+        "ENT-ANGIOEDEMA"
+      ],
+      "explanation": "Classic anaphylaxis: rapid onset (<minutes) of allergic symptoms involving ≥2 organ systems after allergen exposure (bee sting). Criteria met: (1) Skin involvement (urticaria, angioedema) + (2) Respiratory compromise (wheezing, stridor) + (3) Cardiovascular compromise (hypotension, tachycardia). Life-threatening emergency requiring immediate epinephrine.",
+      "management_pearls": [
+        "EPINEPHRINE FIRST: 0.3-0.5 mg IM (1:1000) in anterolateral thigh - DO NOT DELAY",
+        "Can repeat q5-15 min if no improvement",
+        "Call for help/activate emergency response",
+        "Position supine with legs elevated (or left lateral if pregnant/vomiting)",
+        "High-flow oxygen via non-rebreather",
+        "IV access: 1-2L NS bolus for hypotension",
+        "Adjunct therapy (NOT substitutes for epi): H1-blocker (diphenhydramine 50mg IV), H2-blocker (ranitidine 50mg IV), steroid (methylprednisolone 125mg IV), albuterol nebulizer",
+        "Monitor 4-6 hours minimum (biphasic reaction occurs in 20%)",
+        "Discharge with EpiPen x2 and education on use",
+        "Allergy/immunology referral for venom immunotherapy"
+      ],
+      "references": [
+        "World Allergy Organization Anaphylaxis Guidelines",
+        "Anaphylaxis: Recognition and Management"
+      ],
+      "tags": [
+        "anaphylaxis",
+        "allergy",
+        "emergency",
+        "epinephrine",
+        "bee sting"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Emergency Medicine"
+    },
+    {
+      "case_id": "CASE-016",
+      "title": "COPD Patient with Worsening Shortness of Breath",
+      "specialty": "pulmonology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize COPD exacerbation",
+        "Understand GOLD staging",
+        "Apply appropriate pharmacotherapy"
+      ],
+      "presentation": "65-year-old man with known COPD presenting with 3 days of increased dyspnea, cough, and purulent sputum",
+      "history": {
+        "chief_complaint": "Can't catch my breath",
+        "hpi": "COPD on home O2 (2L NC baseline). Developed URI symptoms 5 days ago. Progressive dyspnea, increased cough with yellow-green sputum, chest tightness. Using rescue inhaler every 2 hours without relief. No fever.",
+        "pmh": "COPD (FEV1 35% predicted), hypertension, prior pneumonia",
+        "medications": "Albuterol, tiotropium, fluticasone/salmeterol, home O2",
+        "social": "60 pack-year smoking history (quit 2 years ago)",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 145/85, HR 102, RR 28, O2 85% on 2L NC, Temp 98.6°F",
+        "general": "Tripod position, using accessory muscles, speaking in short sentences",
+        "lungs": "Diffuse expiratory wheezing, prolonged expiratory phase, decreased breath sounds",
+        "cardiac": "Tachycardic, distant heart sounds",
+        "extremities": "No cyanosis or edema",
+        "neuro": "Alert, no asterixis"
+      },
+      "labs": {
+        "wbc": "12,500",
+        "abg": "pH 7.32, pCO2 58, pO2 55, HCO3 30 (acute on chronic respiratory acidosis)",
+        "bmp": "Normal"
+      },
+      "imaging": {
+        "cxr": "Hyperinflation, flattened diaphragms, no consolidation or pneumothorax"
+      },
+      "correct_diagnosis": "PULM-COPD-EXACERBATION",
+      "differential": [
+        "PULM-COPD-EXACERBATION",
+        "PULM-PNEUMONIA-CAP",
+        "CARDS-CHF-ACUTE",
+        "PULM-ASTHMA-EXACERBATION"
+      ],
+      "explanation": "COPD exacerbation defined by acute worsening of respiratory symptoms beyond normal variation. Anthonisen criteria present: (1) Increased dyspnea ✓, (2) Increased sputum volume ✓, (3) Sputum purulence ✓ = Type 1 (most severe). ABG shows acute on chronic hypercapnic respiratory failure. No evidence of pneumonia (afebrile, no consolidation on CXR). Triggered by viral URI.",
+      "management_pearls": [
+        "Oxygen: Titrate to SpO2 88-92% (avoid CO2 retention from over-oxygenation)",
+        "Bronchodilators: Albuterol/ipratropium nebs q4h or continuous",
+        "Systemic steroids: Prednisone 40mg PO daily x 5 days (decreases recovery time, prevents relapse)",
+        "Antibiotics if purulent sputum: Azithromycin or doxycycline x 5 days",
+        "Consider BiPAP if: pH <7.35, pCO2 >45, RR >25, accessory muscle use",
+        "Intubation criteria: pH <7.25, declining mental status, BiPAP failure",
+        "Avoid sedatives (worsen hypoventilation)",
+        "Smoking cessation counseling",
+        "Pulmonary rehab referral",
+        "Ensure proper inhaler technique and adherence"
+      ],
+      "references": [
+        "GOLD Guidelines for COPD Management 2023",
+        "Acute Exacerbations of COPD"
+      ],
+      "tags": [
+        "COPD",
+        "dyspnea",
+        "pulmonology",
+        "exacerbation",
+        "respiratory"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Pulmonary Medicine"
+    },
+    {
+      "case_id": "CASE-017",
+      "title": "Man Vomiting Blood",
+      "specialty": "gastroenterology",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize upper GI bleeding",
+        "Apply Glasgow-Blatchford score",
+        "Understand resuscitation and endoscopy timing"
+      ],
+      "presentation": "52-year-old man with history of alcohol abuse presenting with hematemesis and melena",
+      "history": {
+        "chief_complaint": "Throwing up blood",
+        "hpi": "Two episodes of vomiting large amounts of bright red blood in past hour. Reports black, tarry stools x 2 days. Feeling dizzy and weak. Drinks heavily, history of chronic liver disease. No NSAIDs or anticoagulants.",
+        "pmh": "Cirrhosis (alcohol-related), known esophageal varices, no prior bleeds",
+        "medications": "Lactulose, spironolactone (stopped propranolol 1 week ago)",
+        "social": "Alcohol abuse, vodka 1 pint daily",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 90/55, HR 118, RR 22, Temp 98.9°F",
+        "general": "Pale, diaphoretic, anxious",
+        "abdomen": "Distended, fluid wave, mild tenderness, liver edge palpable, splenomegaly",
+        "rectal": "Melena present",
+        "skin": "Jaundice, spider angiomas, palmar erythema",
+        "neuro": "Alert but confused, asterixis present"
+      },
+      "labs": {
+        "hgb": "7.2 g/dL (from 11 baseline)",
+        "platelets": "65k",
+        "inr": "2.1",
+        "bun": "68 mg/dL",
+        "creatinine": "1.4 mg/dL",
+        "albumin": "2.5 g/dL",
+        "bilirubin": "3.5 mg/dL"
+      },
+      "imaging": {
+        "cxr": "No free air"
+      },
+      "correct_diagnosis": "GI-UPPER-GI-BLEED-VARICEAL",
+      "differential": [
+        "GI-UPPER-GI-BLEED-VARICEAL",
+        "GI-UPPER-GI-BLEED-PUD",
+        "GI-MALLORY-WEISS",
+        "GI-GASTRITIS"
+      ],
+      "explanation": "Variceal upper GI bleed in cirrhotic patient: hematemesis (bright red blood = active bleeding), melena, hemodynamic instability. Glasgow-Blatchford score high (predicts need for intervention). Risk factors: known varices, stopped beta-blocker prophylaxis. Signs of chronic liver disease: ascites, jaundice, coagulopathy, thrombocytopenia, spider angiomas. BUN:Cr ratio >30 suggests upper GI source. This is life-threatening emergency.",
+      "management_pearls": [
+        "ABC resuscitation: 2 large-bore IVs (16-18G), aggressive crystalloid",
+        "Blood products: Transfuse PRBC goal Hgb 7-9 (over-transfusion increases portal pressure), FFP if INR >2.5, platelets if <50k",
+        "Octreotide 50 mcg bolus, then 50 mcg/hr infusion (decreases splanchnic blood flow)",
+        "Antibiotics: Ceftriaxone 1g IV (reduces mortality, prevents SBP)",
+        "PPI: Pantoprazole 80mg bolus, then 8mg/hr infusion",
+        "URGENT EGD within 12 hours (preferably <6h if unstable)",
+        "Band ligation preferred over sclerotherapy for varices",
+        "If refractory: Sengstaken-Blakemore tube (temporizing), TIPS",
+        "Secondary prophylaxis: Non-selective beta-blocker (propranolol or carvedilol) + repeat EGD for surveillance"
+      ],
+      "references": [
+        "ACG Guidelines for Management of Variceal Hemorrhage",
+        "Upper GI Bleeding: Management and Outcomes"
+      ],
+      "tags": [
+        "GI bleed",
+        "varices",
+        "gastroenterology",
+        "emergency",
+        "cirrhosis"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Gastroenterology"
+    },
+    {
+      "case_id": "CASE-018",
+      "title": "Elderly Woman with Shortness of Breath and Leg Swelling",
+      "specialty": "cardiology",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Recognize acute heart failure",
+        "Understand diuretic therapy",
+        "Apply Framingham criteria"
+      ],
+      "presentation": "78-year-old woman with progressive shortness of breath, orthopnea, and bilateral leg swelling over 1 week",
+      "history": {
+        "chief_complaint": "Can't breathe when I lie down",
+        "hpi": "Progressive dyspnea over 1 week. Now can only sleep propped up on 3 pillows (orthopnea). Wakes up gasping for air at night (PND). Bilateral leg swelling. 10 lb weight gain. Cough with pink frothy sputum. Ran out of 'water pill' 2 weeks ago.",
+        "pmh": "CHF with reduced EF 30%, CAD s/p MI, hypertension, diabetes",
+        "medications": "Lisinopril, metoprolol, atorvastatin, furosemide (stopped 2 weeks ago)",
+        "social": "Lives alone, diet non-compliant (ate salty foods)",
+        "family": "Father died of heart attack"
+      },
+      "physical_exam": {
+        "vitals": "BP 160/95, HR 95, RR 26, O2 88% RA, Temp 98.6°F",
+        "general": "Sitting upright, labored breathing",
+        "cardiac": "S3 gallop, JVP 12 cm",
+        "lungs": "Bilateral crackles to mid-lung fields",
+        "abdomen": "Soft, hepatomegaly",
+        "extremities": "3+ bilateral pitting edema to knees"
+      },
+      "labs": {
+        "bnp": "1,850 pg/mL (elevated)",
+        "troponin": "0.08 (mildly elevated, chronic)",
+        "creatinine": "1.6 mg/dL (baseline 1.2)",
+        "sodium": "132 mEq/L"
+      },
+      "imaging": {
+        "cxr": "Cardiomegaly, bilateral pleural effusions, Kerley B lines, cephalization",
+        "echo": "EF 25%, global hypokinesis, dilated LV"
+      },
+      "correct_diagnosis": "CARDS-HEART-FAILURE-ACUTE",
+      "differential": [
+        "CARDS-HEART-FAILURE-ACUTE",
+        "PULM-PNEUMONIA",
+        "PULM-PE",
+        "CARDS-ACS"
+      ],
+      "explanation": "Acute decompensated heart failure (ADHF): Framingham criteria met with multiple major criteria (PND, orthopnea, JVP elevated, S3 gallop, pulmonary edema on CXR) and minor criteria (edema, hepatomegaly). Precipitating factors: medication non-compliance (stopped furosemide), dietary indiscretion (high salt intake). BNP >500 confirms CHF. Wet and warm hemodynamic profile (volume overload without hypoperfusion).",
+      "management_pearls": [
+        "Oxygen: Non-rebreather or BiPAP if severe respiratory distress",
+        "IV diuretics: Furosemide 40-80mg IV bolus (2.5x home dose if on chronic furosemide)",
+        "Goal: Net negative 1-2L daily, monitor strict I/Os, daily weights",
+        "ACE inhibitor: Continue home dose if normotensive (already on lisinopril)",
+        "Nitroglycerin: If HTN or flash pulmonary edema (reduces preload/afterload)",
+        "Avoid IV fluids (worsens volume overload)",
+        "Morphine controversial (may increase mortality)",
+        "Telemetry monitoring, troponin to rule out ACS",
+        "Once euvolemic: Restart GDMT (ACE-I, beta-blocker, aldosterone antagonist)",
+        "Discharge planning: Low-sodium diet (<2g/day), daily weights, medication adherence, cardiology follow-up"
+      ],
+      "references": [
+        "ACC/AHA Heart Failure Guidelines 2022",
+        "Acute Decompensated Heart Failure Management"
+      ],
+      "tags": [
+        "heart failure",
+        "CHF",
+        "cardiology",
+        "dyspnea",
+        "edema"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Cardiology"
+    },
+    {
+      "case_id": "CASE-019",
+      "title": "Young Man with Convulsions",
+      "specialty": "neurology",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Recognize status epilepticus",
+        "Understand benzodiazepine protocol",
+        "Identify refractory seizures"
+      ],
+      "presentation": "24-year-old man brought by EMS actively seizing for 10 minutes, no improvement with 2 doses midazolam",
+      "history": {
+        "chief_complaint": "Seizure won't stop",
+        "hpi": "Per EMS: Found seizing at home by roommate. Generalized tonic-clonic activity ongoing. Given midazolam 5mg IM x 2 without cessation. Total seizure time now 10 minutes. Known epileptic, ran out of medications 1 week ago.",
+        "pmh": "Epilepsy (on phenytoin), depression",
+        "medications": "Phenytoin (stopped 1 week ago), sertraline",
+        "social": "College student, occasional alcohol",
+        "family": "Mother has epilepsy"
+      },
+      "physical_exam": {
+        "vitals": "BP 165/100, HR 135, RR 28, O2 90% on NRB, Temp 100.8°F",
+        "general": "Actively seizing, generalized tonic-clonic movements",
+        "pupils": "Equal, reactive",
+        "other": "Tongue bite, urinary incontinence noted"
+      },
+      "labs": {
+        "glucose": "Normal (checked at bedside)",
+        "phenytoin_level": "Undetectable",
+        "cbc": "Normal",
+        "cmp": "Normal",
+        "tox_screen": "Negative",
+        "abg": "Metabolic acidosis (lactic acidosis from seizure)"
+      },
+      "imaging": {
+        "ct_head": "No acute findings (done after seizure controlled)"
+      },
+      "correct_diagnosis": "NEU-STATUS-EPILEPTICUS",
+      "differential": [
+        "NEU-STATUS-EPILEPTICUS",
+        "PSYCH-PSYCHOGENIC-SEIZURE",
+        "NEU-STROKE",
+        "TOX-DRUG-INTOXICATION"
+      ],
+      "explanation": "Status epilepticus: continuous seizure >5 minutes or recurrent seizures without return to baseline. This is medical emergency with high mortality if not controlled rapidly. Cause: antiepileptic medication non-compliance (phenytoin level undetectable). Failed prehospital benzodiazepines = established status epilepticus requiring escalation. Complications: hypoxia, hyperthermia, rhabdomyolysis, cerebral edema.",
+      "management_pearls": [
+        "TIME-BASED PROTOCOL:",
+        "0-5 min: ABC stabilization, check glucose (if low give D50), benzodiazepine",
+        "Lorazepam 4mg IV (or diazepam 10mg IV, or midazolam 10mg IM if no IV)",
+        "Can repeat once after 5 min if continues",
+        "5-20 min (established SE): Second-line AED",
+        "Fosphenytoin 20 PE/kg IV at max 150 PE/min OR",
+        "Levetiracetam 60 mg/kg IV (max 4500mg) OR",
+        "Valproic acid 40 mg/kg IV",
+        "20-40 min (refractory SE): Continuous infusion + intubation",
+        "Propofol, midazolam, or pentobarbital drip",
+        "EEG monitoring for burst suppression",
+        "ICU admission for refractory cases",
+        "Identify and treat underlying cause"
+      ],
+      "references": [
+        "Neurocritical Care Society Status Epilepticus Guidelines",
+        "Status Epilepticus: Treatment and Management"
+      ],
+      "tags": [
+        "seizure",
+        "status epilepticus",
+        "neurology",
+        "emergency",
+        "epilepsy"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Neurology"
+    },
+    {
+      "case_id": "CASE-020",
+      "title": "Man with Painful Swollen Knee",
+      "specialty": "rheumatology",
+      "difficulty": "advanced",
+      "learning_objectives": [
+        "Diagnose septic arthritis",
+        "Interpret synovial fluid analysis",
+        "Understand surgical urgency"
+      ],
+      "presentation": "56-year-old man with severe right knee pain, swelling, and fever, unable to bear weight",
+      "history": {
+        "chief_complaint": "My knee is killing me",
+        "hpi": "Woke up 2 days ago with right knee pain. Rapidly worsening, now can't walk on it. Knee hot, swollen, extremely painful with any movement. Fever and chills. No trauma. Had cortisone injection in same knee 1 week ago for osteoarthritis.",
+        "pmh": "Diabetes, osteoarthritis, prior gout attacks",
+        "medications": "Metformin, occasional NSAIDs",
+        "social": "Works construction",
+        "family": "Non-contributory"
+      },
+      "physical_exam": {
+        "vitals": "BP 135/80, HR 102, RR 18, Temp 102.3°F",
+        "general": "Uncomfortable, holding knee flexed",
+        "knee": "Large effusion, erythema, warmth, exquisite tenderness, ROM severely limited by pain",
+        "other_joints": "Normal",
+        "skin": "No rash or tophi"
+      },
+      "labs": {
+        "wbc": "18,000 with left shift",
+        "esr": "85 mm/hr",
+        "crp": "120 mg/L",
+        "blood_culture": "Pending",
+        "arthrocentesis": "60,000 WBC (90% PMNs), Gram stain shows Gram-positive cocci in clusters, glucose 20 mg/dL (low), LDH elevated, no crystals"
+      },
+      "imaging": {
+        "knee_xray": "Joint effusion, no fracture, degenerative changes"
+      },
+      "correct_diagnosis": "RHEUM-SEPTIC-ARTHRITIS",
+      "differential": [
+        "RHEUM-SEPTIC-ARTHRITIS",
+        "RHEUM-GOUT",
+        "RHEUM-PSEUDOGOUT",
+        "MSK-REACTIVE-ARTHRITIS"
+      ],
+      "explanation": "Septic arthritis: acute monoarticular arthritis with fever. Synovial fluid WBC >50,000 with PMN predominance strongly suggests bacterial infection. Gram stain positive for Staph aureus (most common organism). Risk factors: recent intra-articular injection, diabetes. This is orthopedic emergency - untreated leads to joint destruction. Cannot be gout (no crystals, WBC typically lower in gout).",
+      "management_pearls": [
+        "URGENT ORTHOPEDIC CONSULT - This is surgical emergency",
+        "Arthrocentesis: Drain joint completely, send for cell count, Gram stain, culture",
+        "Empiric IV antibiotics immediately after cultures: Vancomycin + ceftriaxone (covers MRSA and GNRs)",
+        "Switch to organism-specific therapy when culture results available",
+        "Surgical drainage: Arthroscopic washout preferred (open if hip/shoulder)",
+        "Daily aspirations if not surgical candidate",
+        "IV antibiotics minimum 2 weeks, then PO to complete 4-6 weeks total",
+        "Monitor inflammatory markers (ESR, CRP) - should downtrend",
+        "Physical therapy once infection controlled",
+        "Complications if untreated: cartilage destruction, osteomyelitis, sepsis"
+      ],
+      "references": [
+        "IDSA Guidelines for Septic Arthritis Management",
+        "Acute Septic Arthritis: Diagnosis and Treatment"
+      ],
+      "tags": [
+        "septic arthritis",
+        "joint pain",
+        "rheumatology",
+        "orthopedics",
+        "infection"
+      ],
+      "created_at": "2025-12-29T00:00:00.000000",
+      "author": "Dr. Orthopedic Surgery"
     }
   ]
 }
