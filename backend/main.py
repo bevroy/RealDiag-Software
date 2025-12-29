@@ -23,6 +23,7 @@ from backend.services.subscription_router import router as subscription_router
 from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
+from backend.services.context_router import router as context_router
 
 # Import admin router for AI tree management
 try:
@@ -169,6 +170,7 @@ app.include_router(subscription_router)
 app.include_router(homeopathy_router)
 app.include_router(mfa_router)
 app.include_router(search_router)
+app.include_router(context_router)
 
 # Include admin router if available
 if ADMIN_ROUTER_AVAILABLE and admin_router:

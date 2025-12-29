@@ -1,0 +1,266 @@
+{
+  "variables": [
+    {
+      "id": "seafood_frequency_per_week",
+      "label": "How many servings of seafood do you consume per week?",
+      "category": "Diet",
+      "type": "numeric",
+      "units": "servings/week",
+      "help_text": "Include fish, shellfish, and sea vegetables. One serving = approximately 4 oz.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Dietary Iodine Intake and Thyroid Function",
+          "organization": "American Thyroid Association",
+          "year": 2022,
+          "url_or_citation": "https://www.thyroid.org/iodine-deficiency/"
+        }
+      ]
+    },
+    {
+      "id": "seaweed_kelp_supplement",
+      "label": "Do you take seaweed or kelp supplements?",
+      "category": "Supplements",
+      "type": "boolean",
+      "help_text": "Include kelp, spirulina, chlorella, or other sea vegetable supplements.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Iodine-Induced Thyroid Dysfunction",
+          "organization": "Endocrine Society",
+          "year": 2023,
+          "url_or_citation": "J Clin Endocrinol Metab. 2023;108(5):1123-1135"
+        }
+      ]
+    },
+    {
+      "id": "iodized_salt_use",
+      "label": "How often do you use iodized salt?",
+      "category": "Diet",
+      "type": "single_select",
+      "options": [
+        {"value": "never", "label": "Never or rarely"},
+        {"value": "sometimes", "label": "Sometimes (few times per week)"},
+        {"value": "often", "label": "Daily or almost daily"}
+      ],
+      "help_text": "Check your salt package label for 'iodized' designation.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Global Iodine Nutrition Status",
+          "organization": "WHO/UNICEF/ICCIDD",
+          "year": 2020,
+          "url_or_citation": "WHO Technical Report"
+        }
+      ]
+    },
+    {
+      "id": "recent_iodinated_contrast",
+      "label": "Have you had a CT scan or angiography with iodinated contrast in the past 6 months?",
+      "category": "Medical Procedures",
+      "type": "boolean",
+      "help_text": "Iodinated contrast used in CT scans can affect thyroid function for weeks to months.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Iodinated Contrast and Thyroid Function",
+          "organization": "Radiological Society of North America",
+          "year": 2022,
+          "url_or_citation": "Radiology. 2022;302(3):567-574"
+        }
+      ]
+    },
+    {
+      "id": "amiodarone_use",
+      "label": "Are you currently taking or have you recently taken amiodarone?",
+      "category": "Medications",
+      "type": "boolean",
+      "help_text": "Amiodarone is a heart rhythm medication that contains high amounts of iodine.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Amiodarone-Induced Thyroid Dysfunction",
+          "organization": "American Heart Association",
+          "year": 2021,
+          "url_or_citation": "Circulation. 2021;143(12):e678-e692"
+        }
+      ]
+    },
+    {
+      "id": "country_of_birth",
+      "label": "Country of birth (optional)",
+      "category": "Geographic",
+      "type": "text",
+      "help_text": "This information may help identify endemic disease risks or dietary patterns. Never required.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Geographic Variations in Disease Patterns",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/travel"
+        }
+      ]
+    },
+    {
+      "id": "years_in_us",
+      "label": "If born outside the US, how many years have you lived in the US?",
+      "category": "Geographic",
+      "type": "numeric",
+      "units": "years",
+      "help_text": "Helps assess risk factors from previous residence and vaccination history.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Immigrant Health Assessment Guidelines",
+          "organization": "CDC",
+          "year": 2022,
+          "url_or_citation": "https://www.cdc.gov/immigrantrefugeehealth"
+        }
+      ]
+    },
+    {
+      "id": "recent_travel_regions",
+      "label": "Have you traveled to any of these regions in the past 6 months?",
+      "category": "Travel",
+      "type": "multi_select",
+      "options": [
+        {"value": "south_asia", "label": "South Asia (India, Pakistan, Bangladesh, Nepal)"},
+        {"value": "southeast_asia", "label": "Southeast Asia (Thailand, Vietnam, Indonesia, Philippines)"},
+        {"value": "sub_saharan_africa", "label": "Sub-Saharan Africa"},
+        {"value": "central_south_america", "label": "Central/South America"},
+        {"value": "middle_east", "label": "Middle East"},
+        {"value": "east_asia", "label": "East Asia (China, Japan, Korea)"},
+        {"value": "caribbean", "label": "Caribbean"},
+        {"value": "none", "label": "No recent international travel"}
+      ],
+      "help_text": "Recent travel may affect infectious disease risk assessment.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Yellow Book: Travelers' Health",
+          "organization": "CDC",
+          "year": 2024,
+          "url_or_citation": "https://wwwnc.cdc.gov/travel/yellowbook"
+        }
+      ]
+    },
+    {
+      "id": "raw_fish_consumption",
+      "label": "How often do you consume raw or undercooked fish?",
+      "category": "Diet",
+      "type": "single_select",
+      "options": [
+        {"value": "never", "label": "Never"},
+        {"value": "occasionally", "label": "Occasionally (less than once per month)"},
+        {"value": "frequently", "label": "Frequently (weekly or more)"}
+      ],
+      "help_text": "Include sushi, sashimi, ceviche, or undercooked fish dishes.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Foodborne Parasitic Infections",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/parasites/food.html"
+        }
+      ]
+    },
+    {
+      "id": "unpasteurized_dairy",
+      "label": "Do you consume unpasteurized (raw) dairy products?",
+      "category": "Diet",
+      "type": "boolean",
+      "help_text": "Include raw milk, cheese made from raw milk, or other unpasteurized dairy.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Raw Milk and Foodborne Illness",
+          "organization": "FDA",
+          "year": 2023,
+          "url_or_citation": "https://www.fda.gov/food/milk-guidance-documents"
+        }
+      ]
+    },
+    {
+      "id": "herbal_traditional_meds",
+      "label": "Do you take herbal remedies or traditional medicines?",
+      "category": "Supplements",
+      "type": "boolean",
+      "help_text": "Include Ayurvedic, Traditional Chinese Medicine, or other herbal supplements.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Herb-Drug Interactions",
+          "organization": "NIH Office of Dietary Supplements",
+          "year": 2023,
+          "url_or_citation": "https://ods.od.nih.gov/"
+        }
+      ]
+    },
+    {
+      "id": "occupational_exposure_metals",
+      "label": "Are you exposed to heavy metals or chemicals at work?",
+      "category": "Occupational",
+      "type": "boolean",
+      "help_text": "Include lead, mercury, arsenic, pesticides, or industrial chemicals.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Occupational Health Guidelines",
+          "organization": "OSHA",
+          "year": 2023,
+          "url_or_citation": "https://www.osha.gov/occupational-health"
+        }
+      ]
+    },
+    {
+      "id": "well_water_use",
+      "label": "Do you use well water as your primary water source?",
+      "category": "Environmental",
+      "type": "boolean",
+      "help_text": "Private wells may contain contaminants not present in municipal water.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Private Well Water Safety",
+          "organization": "EPA",
+          "year": 2023,
+          "url_or_citation": "https://www.epa.gov/privatewells"
+        }
+      ]
+    },
+    {
+      "id": "biotin_supplement",
+      "label": "Do you take biotin supplements (>1mg per day)?",
+      "category": "Supplements",
+      "type": "boolean",
+      "help_text": "High-dose biotin can interfere with thyroid and cardiac lab tests.",
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Biotin Interference in Laboratory Tests",
+          "organization": "FDA Safety Communication",
+          "year": 2019,
+          "url_or_citation": "FDA Safety Alert 11/2019"
+        }
+      ]
+    },
+    {
+      "id": "recreational_water_exposure",
+      "label": "Do you regularly swim in lakes, rivers, or hot springs?",
+      "category": "Environmental",
+      "type": "boolean",
+      "help_text": "Natural water sources may carry infectious agents.",
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Recreational Water Illness Prevention",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/healthywater/swimming/"
+        }
+      ]
+    }
+  ]
+}

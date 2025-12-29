@@ -7,11 +7,13 @@ from .search_limiter import check_search_limit, get_search_limit_info
 from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
+from .context_engine import get_context_engine
 import os
 
 router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
 _trees = DecisionTreeEngine()
 _med_safety = MedicationSafetyService()
+_context_engine = get_context_engine()
 
 # Initialize patient history service for EMR integration
 # FHIR server configuration from environment variables
@@ -233,6 +235,23 @@ async def evaluate_tree(
     
     # Return result with search limit info and medication alerts
     response = {"tree_result": result}
+    
+    # Apply patient context modifiers if provided
+    patient_context = patient.get("patient_context", {})
+    if patient_context and tree_id:
+        try:
+            context_result = _context_engine.apply_context(
+                diagnosis_module_id=tree_id,
+                patient_context=patient_context,
+                base_result=result
+            )
+            
+            if context_result.get("has_context"):
+                response["context"] = context_result
+                response["context_summary"] = _context_engine.get_context_summary(patient_context)
+        except Exception as e:
+            print(f"Error applying context: {e}")
+            # Continue without context if there's an error
     
     # Add medication safety alerts if available
     if medication_alerts:
