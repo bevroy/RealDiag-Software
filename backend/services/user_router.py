@@ -132,6 +132,17 @@ async def login_user(request: Request, credentials: UserLogin):
     # Remove sensitive data
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
     
+    # Add role based on email/specialty
+    email = user_safe.get("email", "").lower()
+    specialty = user_safe.get("specialty", "")
+    
+    if "admin" in email or email == "admin@realdiag.org":
+        user_safe["role"] = "admin"
+    elif specialty or email.endswith(("@hospital.com", "@clinic.com", "@medical.com", "@health.org", "@realdiag.org")):
+        user_safe["role"] = "provider" if "provider" in email else "doctor"
+    else:
+        user_safe["role"] = "patient"
+    
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
         data={
@@ -279,7 +290,20 @@ async def resend_verification_email(email: EmailStr):
 @router.get("/me", response_model=UserProfile)
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
-    return {k: v for k, v in current_user.items() if k != "password_hash"}
+    profile = {k: v for k, v in current_user.items() if k != "password_hash"}
+    
+    # Determine user role based on email/specialty
+    email = profile.get("email", "").lower()
+    specialty = profile.get("specialty", "")
+    
+    if "admin" in email or email == "admin@realdiag.org":
+        profile["role"] = "admin"
+    elif specialty or email.endswith(("@hospital.com", "@clinic.com", "@medical.com", "@health.org", "@realdiag.org")):
+        profile["role"] = "provider" if "provider" in email else "doctor"
+    else:
+        profile["role"] = "patient"
+    
+    return profile
 
 @router.put("/me")
 async def update_my_profile(

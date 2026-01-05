@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
+import RoleBasedNavigation from '../components/RoleBasedNavigation';
 
 export default function SourcesPage() {
   const [loading, setLoading] = useState(true);
@@ -178,171 +179,12 @@ export default function SourcesPage() {
           padding: '2rem'
         }}
       >
-        {/* Navigation Dropdown */}
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto 1rem',
           width: '100%'
         }}>
-          <details style={{
-            background: 'white',
-            padding: '0.75rem 1.25rem',
-            borderRadius: '10px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0',
-            cursor: 'pointer'
-          }}>
-            <summary style={{ 
-              color: '#0f766e', 
-              fontSize: '1rem',
-              fontWeight: '600',
-              listStyle: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}>
-              <span>☰ Navigation</span>
-            </summary>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-              gap: '0.75rem',
-              marginTop: '1rem',
-              paddingTop: '1rem',
-              borderTop: '1px solid #e2e8f0'
-            }}>
-              <a href="/" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                🏠 Home
-              </a>
-              <a href="/symptom-search" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                🔬 Symptom Search
-              </a>
-              <a href="/search" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                🔍 Diagnosis Search
-              </a>
-              <a href="/rules" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                📋 Browse Rules
-              </a>
-              <a href="/integration" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                🔌 API
-              </a>
-              <a href="/features-demo" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                ✨ Features
-              </a>
-              <a href="/education" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                📚 Training
-              </a>
-              <a href="/sources" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                📖 Sources
-              </a>
-              <a href="/patient-history" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                📋 Patient History
-              </a>
-              <a href="/account" style={{
-                padding: '0.75rem',
-                background: '#f0fdfa',
-                border: '1px solid #ccfbf1',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                textAlign: 'center',
-                color: '#0f766e',
-                fontWeight: '600',
-                fontSize: '0.9rem'
-              }}>
-                👤 Account
-              </a>
-            </div>
-          </details>
+          <RoleBasedNavigation />
         </div>
 
         {/* Header */}

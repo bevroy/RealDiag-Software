@@ -1595,25 +1595,7 @@ export default function EducationPage() {
 
       <div className="education-container">
         {/* Navigation Dropdown */}
-        <div className="nav-dropdown">
-          <details>
-            <summary>
-              <span>☰ Navigation</span>
-            </summary>
-            <div className="nav-links">
-              <a href="/">🏠 Home</a>
-              <a href="/symptom-search">🔬 Symptom Search</a>
-              <a href="/search">🔍 Diagnosis Search</a>
-              <a href="/rules">📋 Browse Rules</a>
-              <a href="/integration">🔌 API</a>
-              <a href="/features-demo">✨ Features</a>
-              <a href="/education">📚 Training</a>
-              <a href="/sources">📖 Sources</a>
-              <a href="/patient-history">📋 Patient History</a>
-              <a href="/account">👤 Account</a>
-            </div>
-          </details>
-        </div>
+        <RoleBasedNavigation />
 
         <header className="education-header">
           <div className="header-content">

@@ -84,6 +84,7 @@ class UserProfile(BaseModel):
     user_id: str
     email: str
     full_name: str
+    role: str = "patient"
     specialty: Optional[str] = None
     institution: Optional[str] = None
     created_at: str

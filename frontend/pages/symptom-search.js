@@ -74,6 +74,7 @@ export default function SymptomSearch() {
   const [displayLimit, setDisplayLimit] = useState(5); // New: Show only 5 results initially
   const [user, setUser] = useState(null);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
   
   // Advanced features state
   const [expandedRedFlags, setExpandedRedFlags] = useState({});
@@ -126,6 +127,37 @@ export default function SymptomSearch() {
       // Check authentication (via HttpOnly cookie)
       if (isAuthenticated()) {
         fetchUserProfile();
+      }
+      
+      // Load user role from localStorage
+      const userStr = localStorage.getItem('realdiag_user');
+      if (userStr) {
+        try {
+          const userData = JSON.parse(userStr);
+          setUserRole(userData.role);
+          console.log('✅ Symptom-search: Loaded role from localStorage:', userData.role);
+        } catch (err) {
+          console.error('Failed to parse user data:', err);
+        }
+      } else {
+        // If no localStorage, fetch from API
+        console.log('⚠️ Symptom-search: No localStorage, fetching from API...');
+        fetch('https://realdiag-software.onrender.com/users/me', {
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then(res => res.ok ? res.json() : null)
+          .then(userData => {
+            if (userData) {
+              console.log('✅ Symptom-search: Fetched user from API:', userData);
+              localStorage.setItem('realdiag_user', JSON.stringify(userData));
+              localStorage.setItem('realdiag_authenticated', 'true');
+              setUserRole(userData.role);
+            } else {
+              console.log('⚠️ Symptom-search: Not logged in');
+            }
+          })
+          .catch(err => console.error('❌ Symptom-search: Error fetching user:', err));
       }
       
       // Initialize mobile features
@@ -833,7 +865,7 @@ export default function SymptomSearch() {
             }}>
               🏠 Home
             </a>
-            <a href="/rules" style={{
+            <a href="/symptom-search" style={{
               padding: '0.75rem',
               background: darkMode ? '#1f2937' : '#f0fdfa',
               border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
@@ -844,47 +876,92 @@ export default function SymptomSearch() {
               fontWeight: '600',
               fontSize: `${0.9 * getFontSizeMultiplier()}rem`
             }}>
-              📋 Browse Rules
+              🔬 Symptom Search
             </a>
-            <a href="/search" style={{
-              padding: '0.75rem',
-              background: darkMode ? '#1f2937' : '#f0fdfa',
-              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
-              borderRadius: '8px',
-              textDecoration: 'none',
-              textAlign: 'center',
-              color: darkMode ? '#5eead4' : '#0f766e',
-              fontWeight: '600',
-              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
-            }}>
-              🔍 Diagnosis Search
-            </a>
-            <a href="/integration" style={{
-              padding: '0.75rem',
-              background: darkMode ? '#1f2937' : '#f0fdfa',
-              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
-              borderRadius: '8px',
-              textDecoration: 'none',
-              textAlign: 'center',
-              color: darkMode ? '#5eead4' : '#0f766e',
-              fontWeight: '600',
-              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
-            }}>
-              🔌 API
-            </a>
-            <a href="/features-demo" style={{
-              padding: '0.75rem',
-              background: darkMode ? '#1f2937' : '#f0fdfa',
-              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
-              borderRadius: '8px',
-              textDecoration: 'none',
-              textAlign: 'center',
-              color: darkMode ? '#5eead4' : '#0f766e',
-              fontWeight: '600',
-              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
-            }}>
-              ✨ Features
-            </a>
+            {userRole && userRole !== 'patient' && (
+              <>
+                <a href="/search" style={{
+                  padding: '0.75rem',
+                  background: darkMode ? '#1f2937' : '#f0fdfa',
+                  border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  color: darkMode ? '#5eead4' : '#0f766e',
+                  fontWeight: '600',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+                }}>
+                  🔍 Diagnosis Search
+                </a>
+                <a href="/rules" style={{
+                  padding: '0.75rem',
+                  background: darkMode ? '#1f2937' : '#f0fdfa',
+                  border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  color: darkMode ? '#5eead4' : '#0f766e',
+                  fontWeight: '600',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+                }}>
+                  📋 Browse Rules
+                </a>
+                <a href="/integration" style={{
+                  padding: '0.75rem',
+                  background: darkMode ? '#1f2937' : '#f0fdfa',
+                  border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  color: darkMode ? '#5eead4' : '#0f766e',
+                  fontWeight: '600',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+                }}>
+                  🔌 API
+                </a>
+                <a href="/patient-history" style={{
+                  padding: '0.75rem',
+                  background: darkMode ? '#1f2937' : '#f0fdfa',
+                  border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  color: darkMode ? '#5eead4' : '#0f766e',
+                  fontWeight: '600',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+                }}>
+                  📋 Patient History
+                </a>
+                <a href="/sources" style={{
+                  padding: '0.75rem',
+                  background: darkMode ? '#1f2937' : '#f0fdfa',
+                  border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  color: darkMode ? '#5eead4' : '#0f766e',
+                  fontWeight: '600',
+                  fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+                }}>
+                  📖 Sources
+                </a>
+              </>
+            )}
+            {(userRole === 'admin' || userRole === 'provider') && (
+              <a href="/features-demo" style={{
+                padding: '0.75rem',
+                background: darkMode ? '#1f2937' : '#f0fdfa',
+                border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: darkMode ? '#5eead4' : '#0f766e',
+                fontWeight: '600',
+                fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+              }}>
+                ✨ Features
+              </a>
+            )}
             <a href="/education" style={{
               padding: '0.75rem',
               background: darkMode ? '#1f2937' : '#f0fdfa',
@@ -898,32 +975,21 @@ export default function SymptomSearch() {
             }}>
               📚 Training
             </a>
-            <a href="/sources" style={{
-              padding: '0.75rem',
-              background: darkMode ? '#1f2937' : '#f0fdfa',
-              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
-              borderRadius: '8px',
-              textDecoration: 'none',
-              textAlign: 'center',
-              color: darkMode ? '#5eead4' : '#0f766e',
-              fontWeight: '600',
-              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
-            }}>
-              📖 Sources
-            </a>
-            <a href="/patient-history" style={{
-              padding: '0.75rem',
-              background: darkMode ? '#1f2937' : '#f0fdfa',
-              border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
-              borderRadius: '8px',
-              textDecoration: 'none',
-              textAlign: 'center',
-              color: darkMode ? '#5eead4' : '#0f766e',
-              fontWeight: '600',
-              fontSize: `${0.9 * getFontSizeMultiplier()}rem`
-            }}>
-              📋 Patient History
-            </a>
+            {userRole === 'patient' && (
+              <a href="/health-manager" style={{
+                padding: '0.75rem',
+                background: darkMode ? '#1f2937' : '#f0fdfa',
+                border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,
+                borderRadius: '8px',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: darkMode ? '#5eead4' : '#0f766e',
+                fontWeight: '600',
+                fontSize: `${0.9 * getFontSizeMultiplier()}rem`
+              }}>
+                🏥 Health Manager
+              </a>
+            )}
             <a href="/account" style={{
               padding: '0.75rem',
               background: darkMode ? '#1f2937' : '#f0fdfa',
