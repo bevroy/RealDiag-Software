@@ -3,52 +3,33 @@ import Link from 'next/link';
 
 export default function HealthManagerPage() {
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check authentication - use cookie-based auth
-    const checkAuth = async () => {
+    // Load user data from localStorage (already authenticated via AuthGuard)
+    const userStr = localStorage.getItem('realdiag_user');
+    if (userStr) {
       try {
-        const response = await fetch('https://realdiag-software.onrender.com/users/me', {
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' }
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-          setLoading(false);
-        } else {
-          // Not authenticated, redirect to login
-          window.location.href = '/app/login';
-        }
+        const data = JSON.parse(userStr);
+        setUserData(data);
       } catch (error) {
-        console.error('Authentication check failed:', error);
-        setLoading(false);
+        console.error('Failed to parse user data:', error);
       }
-    };
-    
-    checkAuth();
+    } else {
+      // Try to fetch from API if not in localStorage
+      fetch('https://realdiag-software.onrender.com/users/me', {
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(response => response.ok ? response.json() : null)
+        .then(data => {
+          if (data) {
+            localStorage.setItem('realdiag_user', JSON.stringify(data));
+            setUserData(data);
+          }
+        })
+        .catch(error => console.error('Failed to fetch user data:', error));
+    }
   }, []);
-
-  if (loading) {
-    return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)'
-      }}>
-        <div style={{
-          fontSize: '1.5rem',
-          color: '#0f766e'
-        }}>
-          Loading...
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div style={{
