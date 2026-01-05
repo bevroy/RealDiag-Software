@@ -978,7 +978,7 @@ export default function SymptomSearch() {
               </a>
             )}
             {userRole === 'patient' && (
-              <a href="/health-manager" style={{
+              <a href="/health-manager/" style={{
                 padding: '0.75rem',
                 background: darkMode ? '#1f2937' : '#f0fdfa',
                 border: `1px solid ${darkMode ? '#374151' : '#ccfbf1'}`,

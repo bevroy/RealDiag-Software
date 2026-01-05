@@ -70,7 +70,7 @@ export default function RoleBasedNavigation() {
     { href: '/education', label: '📚 Training', roles: ['admin', 'provider', 'doctor'] },
     { href: '/sources', label: '📖 Sources', roles: ['admin', 'provider', 'doctor'] },
     { href: '/patient-history', label: '📋 Patient History', roles: ['admin', 'provider', 'doctor'] },
-    { href: '/health-manager', label: '🏥 Health Manager', roles: ['patient'] },
+    { href: '/health-manager/', label: '🏥 Health Manager', roles: ['patient'] },
     { href: '/account', label: '👤 Account', roles: ['all'] }
   ];
 
