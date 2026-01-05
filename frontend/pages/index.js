@@ -40,51 +40,7 @@ export default function Home() {
       padding: '2rem'
     }}>
       {/* Navigation Dropdown */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto 1rem'
-      }}>
-        <details style={{
-          background: 'white',
-          padding: '0.75rem 1.25rem',
-          borderRadius: '10px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-          border: '1px solid #e2e8f0',
-          cursor: 'pointer'
-        }}>
-          <summary style={{ 
-            color: '#0f766e', 
-            fontSize: '1rem',
-            fontWeight: '600',
-            listStyle: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            <span>☰ Navigation</span>
-          </summary>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-            gap: '0.75rem',
-            marginTop: '1rem',
-            paddingTop: '1rem',
-            borderTop: '1px solid #e2e8f0'
-          }}>
-            {visibleNavItems.map((item) => (
-              <a 
-       RoleBasedNavigation / fontSize: '1rem',
-            fontWeight: '600',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            boxShadow: '0 4px 12px rgba(20, 184, 166, 0.3)',
-            transition: 'all 0.2s'
-          }}>
-            👤 Sign In / Register
-          </a>
-        </div>
-      </div>
+      <RoleBasedNavigation />
 
       {/* Main Content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
