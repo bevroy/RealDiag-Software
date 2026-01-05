@@ -67,7 +67,7 @@ export default function RoleBasedNavigation() {
     { href: '/rules', label: '📋 Browse Rules', roles: ['admin', 'provider', 'doctor'] },
     { href: '/integration', label: '🔌 API', roles: ['admin', 'provider', 'doctor'] },
     { href: '/features-demo', label: '✨ Features', roles: ['admin', 'provider'] },
-    { href: '/education', label: '📚 Training', roles: ['all'] },
+    { href: '/education', label: '📚 Training', roles: ['admin', 'provider', 'doctor'] },
     { href: '/sources', label: '📖 Sources', roles: ['admin', 'provider', 'doctor'] },
     { href: '/patient-history', label: '📋 Patient History', roles: ['admin', 'provider', 'doctor'] },
     { href: '/health-manager', label: '🏥 Health Manager', roles: ['patient'] },

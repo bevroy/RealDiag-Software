@@ -183,7 +183,7 @@ def main():
             "full_name": "Dr. John Smith",
             "specialty": "Cardiology",
             "institution": "City Medical Center",
-            "role_display": "Regular User (Doctor)"
+            "role_display": "Resident/Intern"
         },
         {
             "email": "patient@example.com",
