@@ -1,94 +1,37 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import HealthDashboard from '../../components/health-manager/HealthDashboard';
-import WearableSync from '../../components/health-manager/WearableSync';
-import EHRIntegration from '../../components/health-manager/EHRIntegration';
-import HealthMetrics from '../../components/health-manager/HealthMetrics';
-import SymptomTracker from '../../components/health-manager/SymptomTracker';
-import DiagnosticSearch from '../../components/health-manager/DiagnosticSearch';
+import Link from 'next/link';
 
 export default function HealthManagerPage() {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState('dashboard');
   const [userData, setUserData] = useState(null);
-  const [wearableData, setWearableData] = useState(null);
-  const [ehrData, setEHRData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/login?redirect=/health-manager');
-      return;
-    }
-
-    // Load user data
-    loadUserData();
-    loadWearableData();
-    loadEHRData();
+    // Check authentication - use cookie-based auth
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('https://realdiag-software.onrender.com/users/me', {
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data);
+          setLoading(false);
+        } else {
+          // Not authenticated, redirect to login
+          window.location.href = '/app/login';
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error);
+        setLoading(false);
+      }
+    };
+    
+    checkAuth();
   }, []);
-
-  const loadUserData = async () => {
-    try {
-      const response = await fetch('/api/users/profile', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data);
-      }
-    } catch (error) {
-      console.error('Failed to load user data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadWearableData = async () => {
-    try {
-      const response = await fetch('/api/health/wearable', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setWearableData(data);
-      }
-    } catch (error) {
-      console.error('Failed to load wearable data:', error);
-    }
-  };
-
-  const loadEHRData = async () => {
-    try {
-      const response = await fetch('/api/health/ehr', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setEHRData(data);
-      }
-    } catch (error) {
-      console.error('Failed to load EHR data:', error);
-    }
-  };
-
-  const tabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'metrics', label: 'Health Metrics', icon: '❤️' },
-    { id: 'symptoms', label: 'Symptom Tracker', icon: '🩺' },
-    { id: 'diagnostics', label: 'Diagnostic Search', icon: '🔍' },
-    { id: 'wearable', label: 'Wearable Devices', icon: '⌚' },
-    { id: 'ehr', label: 'Medical Records', icon: '📋' }
-  ];
 
   if (loading) {
     return (
@@ -97,11 +40,13 @@ export default function HealthManagerPage() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)'
       }}>
-        <div style={{ textAlign: 'center', color: 'white' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚕️</div>
-          <h2>Loading Health Manager...</h2>
+        <div style={{
+          fontSize: '1.5rem',
+          color: '#0f766e'
+        }}>
+          Loading...
         </div>
       </div>
     );
@@ -110,152 +55,180 @@ export default function HealthManagerPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
       padding: '2rem'
     }}>
-      {/* Header */}
       <div style={{
-        background: 'white',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        marginBottom: '2rem',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        maxWidth: '1200px',
+        margin: '0 auto'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        {/* Header */}
+        <div style={{
+          background: 'white',
+          borderRadius: '12px',
+          padding: '2rem',
+          marginBottom: '2rem',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem'
+        }}>
           <div>
-            <h1 style={{ margin: 0, color: '#2d3748', fontSize: '2rem' }}>
+            <h1 style={{
+              margin: '0 0 0.5rem 0',
+              color: '#0f766e',
+              fontSize: '2rem'
+            }}>
               🏥 Health Manager
             </h1>
-            <p style={{ margin: '0.5rem 0 0 0', color: '#718096' }}>
-              Your personal health tracking and diagnostic assistant
+            <p style={{
+              margin: 0,
+              color: '#64748b',
+              fontSize: '1rem'
+            }}>
+              Welcome back, {userData?.full_name || 'Patient'}
             </p>
           </div>
-          <button
-            onClick={() => router.push('/dashboard')}
-            style={{
-              padding: '0.75rem 1.5rem',
-              background: '#667eea',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontWeight: '600'
-            }}
-          >
-            ← Back to Dashboard
-          </button>
+          <Link href="/" style={{
+            padding: '0.75rem 1.5rem',
+            background: '#0f766e',
+            color: 'white',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            fontWeight: '600'
+          }}>
+            ← Back to Home
+          </Link>
         </div>
-      </div>
 
-      {/* Tab Navigation */}
-      <div style={{
-        background: 'white',
-        borderRadius: '12px',
-        padding: '1rem',
-        marginBottom: '2rem',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-      }}>
+        {/* Quick Actions */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-          gap: '0.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '1.5rem',
+          marginBottom: '2rem'
         }}>
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              style={{
-                padding: '1rem',
-                background: activeTab === tab.id ? '#667eea' : 'transparent',
-                color: activeTab === tab.id ? 'white' : '#4a5568',
-                border: activeTab === tab.id ? 'none' : '2px solid #e2e8f0',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '600',
-                transition: 'all 0.2s',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.25rem'
-              }}
-            >
-              <span style={{ fontSize: '1.5rem' }}>{tab.icon}</span>
-              <span style={{ fontSize: '0.875rem' }}>{tab.label}</span>
-            </button>
-          ))}
+          <div style={{
+            background: 'white',
+            borderRadius: '12px',
+            padding: '1.5rem',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            border: '2px solid #ccfbf1'
+          }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔬</div>
+            <h3 style={{ margin: '0 0 0.5rem 0', color: '#0f766e' }}>
+              Symptom Search
+            </h3>
+            <p style={{ margin: '0 0 1rem 0', color: '#64748b', fontSize: '0.875rem' }}>
+              Check symptoms and get diagnostic suggestions
+            </p>
+            <Link href="/symptom-search" style={{
+              padding: '0.5rem 1rem',
+              background: '#0f766e',
+              color: 'white',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              fontSize: '0.875rem',
+              display: 'inline-block'
+            }}>
+              Start Search →
+            </Link>
+          </div>
+
+          <div style={{
+            background: 'white',
+            borderRadius: '12px',
+            padding: '1.5rem',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            border: '2px solid #ccfbf1'
+          }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📋</div>
+            <h3 style={{ margin: '0 0 0.5rem 0', color: '#0f766e' }}>
+              Medical Records (Coming Soon)
+            </h3>
+            <p style={{ margin: '0', color: '#64748b', fontSize: '0.875rem' }}>
+              Connect to your EHR and view health records, medications, and lab results
+            </p>
+          </div>
+
+          <div style={{
+            background: 'white',
+            borderRadius: '12px',
+            padding: '1.5rem',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            border: '2px solid #ccfbf1'
+          }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>⌚</div>
+            <h3 style={{ margin: '0 0 0.5rem 0', color: '#0f766e' }}>
+              Wearable Devices (Coming Soon)
+            </h3>
+            <p style={{ margin: '0', color: '#64748b', fontSize: '0.875rem' }}>
+              Sync data from Apple Watch, Fitbit, and other health trackers
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Content Area */}
-      <div style={{
-        background: 'white',
-        borderRadius: '12px',
-        padding: '2rem',
-        minHeight: '500px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-      }}>
-        {activeTab === 'dashboard' && (
-          <HealthDashboard
-            userData={userData}
-            wearableData={wearableData}
-            ehrData={ehrData}
-            onRefresh={() => {
-              loadUserData();
-              loadWearableData();
-              loadEHRData();
-            }}
-          />
-        )}
+        {/* Information Section */}
+        <div style={{
+          background: 'white',
+          borderRadius: '12px',
+          padding: '2rem',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        }}>
+          <h2 style={{ margin: '0 0 1rem 0', color: '#0f766e' }}>
+            📊 Patient Health Dashboard
+          </h2>
+          <p style={{ color: '#64748b', marginBottom: '1.5rem' }}>
+            The Health Manager is your personal health hub for managing medical records, tracking symptoms, and accessing diagnostic tools.
+          </p>
+          
+          <div style={{
+            background: '#f0fdfa',
+            border: '1px solid #ccfbf1',
+            borderRadius: '8px',
+            padding: '1.5rem',
+            marginTop: '1rem'
+          }}>
+            <h3 style={{ margin: '0 0 1rem 0', color: '#0f766e' }}>
+              🚀 Coming Soon Features:
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#64748b' }}>
+              <li style={{ marginBottom: '0.5rem' }}>EHR Integration with Epic, Cerner, and other major systems</li>
+              <li style={{ marginBottom: '0.5rem' }}>Personal Health Records (PHR) management</li>
+              <li style={{ marginBottom: '0.5rem' }}>Medication tracking and reminders</li>
+              <li style={{ marginBottom: '0.5rem' }}>Lab results and imaging reports</li>
+              <li style={{ marginBottom: '0.5rem' }}>Wearable device integration (Apple Health, Fitbit, etc.)</li>
+              <li style={{ marginBottom: '0.5rem' }}>Symptom diary and health journal</li>
+              <li style={{ marginBottom: '0.5rem' }}>Appointment scheduling and reminders</li>
+              <li>Health metrics visualization and trends</li>
+            </ul>
+          </div>
 
-        {activeTab === 'metrics' && (
-          <HealthMetrics
-            wearableData={wearableData}
-            ehrData={ehrData}
-            onSync={loadWearableData}
-          />
-        )}
+          <div style={{
+            marginTop: '1.5rem',
+            padding: '1rem',
+            background: '#fef3c7',
+            border: '1px solid #fde047',
+            borderRadius: '8px'
+          }}>
+            <p style={{ margin: 0, color: '#78350f', fontSize: '0.875rem' }}>
+              <strong>🔒 Privacy & Security:</strong> All health data is encrypted end-to-end and complies with HIPAA regulations. 
+              You have full control over who can access your health information.
+            </p>
+          </div>
+        </div>
 
-        {activeTab === 'symptoms' && (
-          <SymptomTracker
-            userData={userData}
-            onSave={loadUserData}
-          />
-        )}
-
-        {activeTab === 'diagnostics' && (
-          <DiagnosticSearch
-            userData={userData}
-            wearableData={wearableData}
-            ehrData={ehrData}
-          />
-        )}
-
-        {activeTab === 'wearable' && (
-          <WearableSync
-            wearableData={wearableData}
-            onSync={loadWearableData}
-          />
-        )}
-
-        {activeTab === 'ehr' && (
-          <EHRIntegration
-            ehrData={ehrData}
-            onSync={loadEHRData}
-          />
-        )}
-      </div>
-
-      {/* Footer */}
-      <div style={{
-        textAlign: 'center',
-        marginTop: '2rem',
-        color: 'white',
-        fontSize: '0.875rem',
-        opacity: 0.8
-      }}>
-        <p>
-          🔒 Your health data is encrypted and HIPAA-compliant
-        </p>
+        {/* Footer */}
+        <div style={{
+          textAlign: 'center',
+          marginTop: '2rem',
+          color: '#64748b',
+          fontSize: '0.875rem'
+        }}>
+          <p>Need help? <a href="/account" style={{ color: '#0f766e' }}>Contact Support</a></p>
+        </div>
       </div>
     </div>
   );
