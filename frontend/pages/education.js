@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import RoleBasedNavigation from '../components/RoleBasedNavigation';
 
 export default function EducationPage() {
   const [activeTab, setActiveTab] = useState('overview');
