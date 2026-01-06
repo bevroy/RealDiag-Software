@@ -38,7 +38,7 @@ export default function ReferencePage() {
   const [expandedId, setExpandedId] = useState(null);
   const [selectedFamily, setSelectedFamily] = useState("all");
   const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
-  const [displayCount, setDisplayCount] = useState(50); // Start with 50 items
+  const [displayCount, setDisplayCount] = useState(100); // Start with 100 items to show more diagnoses initially
 
   useEffect(() => {
     let cancelled = false;
@@ -90,6 +90,11 @@ export default function ReferencePage() {
                 citations: Array.isArray(rule.citations) ? rule.citations.map(String) : [],
               }));
             
+            // Debug logging for specific diagnoses
+            if (f.id === 'allergy' || f.id === 'ent') {
+              console.log(`${f.label} loaded ${familyRules.length} rules:`, familyRules.map(r => r.label));
+            }
+            
             allLoadedRules.push(...familyRules);
             
             // Update state after each family loads
@@ -128,27 +133,35 @@ export default function ReferencePage() {
     }
     
     // Then filter by search query
-    if (!q) return rulesToFilter;
-
-    return (rulesToFilter || []).filter((r) => {
-      const label = (r.label || "").toLowerCase();
-      const id = (r.id || "").toLowerCase();
-      const present = (r.presentations || []).join(" ").toLowerCase();
-      const icd = (r.icd10 || []).join(" ").toLowerCase();
-      const snomed = (r.snomed || []).join(" ").toLowerCase();
-      return (
-        label.includes(q) ||
-        id.includes(q) ||
-        present.includes(q) ||
-        icd.includes(q) ||
-        snomed.includes(q)
-      );
+    let results = rulesToFilter;
+    if (q) {
+      results = (rulesToFilter || []).filter((r) => {
+        const label = (r.label || "").toLowerCase();
+        const id = (r.id || "").toLowerCase();
+        const present = (r.presentations || []).join(" ").toLowerCase();
+        const icd = (r.icd10 || []).join(" ").toLowerCase();
+        const snomed = (r.snomed || []).join(" ").toLowerCase();
+        return (
+          label.includes(q) ||
+          id.includes(q) ||
+          present.includes(q) ||
+          icd.includes(q) ||
+          snomed.includes(q)
+        );
+      });
+    }
+    
+    // Sort alphabetically by label for consistent display
+    return results.sort((a, b) => {
+      const labelA = (a.label || a.id || '').toLowerCase();
+      const labelB = (b.label || b.id || '').toLowerCase();
+      return labelA.localeCompare(labelB);
     });
   }, [allRules, query, selectedFamily]);
   
   // Reset display count when filter changes
   useEffect(() => {
-    setDisplayCount(50);
+    setDisplayCount(100); // Reset to 100 when filter changes
   }, [query, selectedFamily]);
 
   function toggleExpanded(id) {
