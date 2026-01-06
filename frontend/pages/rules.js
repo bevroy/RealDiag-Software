@@ -63,11 +63,13 @@ export default function ReferencePage() {
         
         // Progressive loading - load families sequentially to show results faster
         const allLoadedRules = [];
+        // Add cache-busting timestamp to ensure fresh data
+        const cacheBuster = `?_=${Date.now()}`;
         for (const f of FAMILIES) {
           if (cancelled) break;
           
           try {
-            const res = await fetch(`${apiBase}/reference/${f.id}`);
+            const res = await fetch(`${apiBase}/reference/${f.id}${cacheBuster}`);
             if (!res.ok) {
               console.warn(`Failed to load ${f.label}`);
               continue;
