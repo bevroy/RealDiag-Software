@@ -18,7 +18,7 @@ RULES_PATH = Path(__file__).resolve().parents[1] / "rules"
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
 # Map family IDs to tree prefixes (multiple prefixes per family due to naming variations)
-# Updated: 2025-12-28 to ensure all gastroenterology trees load properly
+# Updated: 2025-01-05 to include immunology trees under allergy family
 FAMILY_TO_PREFIX = {
     "neurology": ["NEU", "NEURO"],
     "cardiology": ["CARD", "CARDS"],
@@ -34,8 +34,7 @@ FAMILY_TO_PREFIX = {
     "orthopedics": ["ORTHO"],
     "emergency": ["EMERGENCY", "EM"],
     "hematology": ["HEM", "HEME"],
-    "allergy": ["ALLERGY"],
-    "immunology": ["IMMUNO"],
+    "allergy": ["ALLERGY", "IMMUNO"],
     "dentistry": ["DENT"],
     "ent": ["ENT"],
     "general": ["GEN", "GENERAL", "PREV"],
