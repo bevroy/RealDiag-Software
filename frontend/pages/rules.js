@@ -92,7 +92,10 @@ export default function ReferencePage() {
             
             // Debug logging for specific diagnoses
             if (f.id === 'allergy' || f.id === 'ent') {
-              console.log(`${f.label} loaded ${familyRules.length} rules:`, familyRules.map(r => r.label));
+              console.log(`✓ ${f.label} loaded ${familyRules.length} rules`);
+              familyRules.forEach(r => {
+                console.log(`  - ${r.label} (id: ${r.id}, familyId: ${r.familyId})`);
+              });
             }
             
             allLoadedRules.push(...familyRules);
@@ -130,6 +133,10 @@ export default function ReferencePage() {
         // Strict comparison with explicit type checking
         return r && r.familyId && String(r.familyId) === String(selectedFamily);
       });
+      console.log(`Filtered by family '${selectedFamily}': ${rulesToFilter.length} rules out of ${allRules.length} total`);
+      if (selectedFamily === 'allergy' || selectedFamily === 'ent') {
+        console.log(`Rules in ${selectedFamily}:`, rulesToFilter.map(r => r.label));
+      }
     }
     
     // Then filter by search query
