@@ -276,6 +276,10 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 rule = {
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
+                    'family': family,
+                    'applies_to': tree_data.get('applies_to'),  # Add sex-specific metadata
+                    'age_min': tree_data.get('age_min'),  # Add age restrictions
+                    'age_max': tree_data.get('age_max'),  # Add age restrictions
                     'presentations': presentations,
                     'icd10': icd10_value,
                     'snomed': snomed_value,
@@ -626,11 +630,98 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str], ru
 
 
 def apply_filters(rules: List[Dict], age: Optional[int], sex: Optional[str]) -> List[Dict]:
-    """Apply age and sex filters to rules (placeholder for future enhancement)."""
-    # For now, return all rules. In future, could filter based on:
-    # - Age-specific conditions (pediatric vs geriatric)
-    # - Sex-specific conditions (obstetric/gynecologic)
-    return rules
+    """Apply age and sex filters to rules."""
+    filtered = []
+    
+    # Normalize sex input
+    normalized_sex = None
+    if sex:
+        sex_upper = sex.upper()
+        if sex_upper in ['M', 'MALE']:
+            normalized_sex = 'male'
+        elif sex_upper in ['F', 'FEMALE']:
+            normalized_sex = 'female'
+    
+    for rule in rules:
+        # Check age-specific applicability
+        if age is not None:
+            age_min = rule.get('age_min')
+            age_max = rule.get('age_max')
+            
+            # Skip if explicit age restrictions are violated
+            if age_min is not None and age < age_min:
+                continue
+            if age_max is not None and age > age_max:
+                continue
+            
+            # Keyword-based age filtering as fallback
+            rule_id = rule.get('id', '').upper()
+            label = rule.get('label', '').upper()
+            family = rule.get('family', '').upper()
+            
+            # Pediatric conditions (typically < 18 years)
+            if age >= 18:
+                pediatric_keywords = ['PEDS-', 'PEDIATRIC', 'CROUP', 'BRONCHIOLITIS', 
+                                     'DEVELOPMENTAL DELAY', 'AUTISM', 'WELL-CHILD',
+                                     'FEBRILE SEIZURE', 'HAND FOOT MOUTH']
+                if family == 'PEDIATRICS':
+                    continue
+                if any(keyword in rule_id or keyword in label for keyword in pediatric_keywords):
+                    continue
+            
+            # Geriatric conditions (typically 65+ years)
+            if age < 65:
+                geriatric_keywords = ['GER-', 'GERIATRIC', 'SARCOPENIA', 'FRAILTY',
+                                     'DELIRIUM', 'POLYPHARMACY', 'FALLS RISK',
+                                     'PRESSURE ULCER']
+                if family == 'GERIATRICS':
+                    continue
+                if any(keyword in rule_id or keyword in label for keyword in geriatric_keywords):
+                    continue
+        
+        # Check sex-specific applicability
+        applies_to = rule.get('applies_to', None)
+        
+        if applies_to:
+            # If rule has explicit sex restriction, filter accordingly
+            if normalized_sex:
+                if applies_to.lower() != normalized_sex:
+                    # Skip this rule - it's for the opposite sex
+                    continue
+            # If no sex provided, include sex-specific conditions with warning
+            # (they might be reviewing differential diagnoses)
+        
+        # Check if rule_id or label contains sex-specific keywords
+        if normalized_sex:
+            rule_id = rule.get('id', '').upper()
+            label = rule.get('label', '').upper()
+            family = rule.get('family', '').upper()
+            
+            # Male-only conditions
+            if normalized_sex == 'female':
+                male_keywords = [
+                    'PROSTAT', 'TESTIC', 'PENILE', 'ERECTILE', 
+                    'EPIDIDYM', 'ORCHITIS', 'SPERMAT'
+                ]
+                if any(keyword in rule_id or keyword in label for keyword in male_keywords):
+                    continue
+            
+            # Female-only conditions
+            if normalized_sex == 'male':
+                female_keywords = [
+                    'PREGNAN', 'OVARIAN', 'MENSTRUAL', 'CERVIC', 'UTERIN',
+                    'VAGINAL', 'ENDOMETRIO', 'MENOPAUSE', 'DYSMENORRHEA',
+                    'AMENORRHEA', 'MENORRHAGIA', 'ECTOPIC', 'PLACENTA',
+                    'OVARY', 'VULVO', 'PCOS', 'POLYCYSTIC OVARY'
+                ]
+                if family == 'OBSTETRICS GYNECOLOGY' or family == 'OBGYN':
+                    continue
+                if any(keyword in rule_id or keyword in label for keyword in female_keywords):
+                    continue
+        
+        filtered.append(rule)
+    
+    return filtered
 
 
 async def query_ai_for_diagnoses(symptoms: List[str], age: Optional[int] = None, sex: Optional[str] = None) -> List[Dict[str, Any]]:
