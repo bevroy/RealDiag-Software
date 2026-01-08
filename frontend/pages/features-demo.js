@@ -109,7 +109,7 @@ export default function FeaturesDemo() {
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Symptom Search</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
                 <li>Multi-symptom differential diagnosis</li>
-                <li>676+ diagnostic trees across 55 specialties</li>
+                <li>400+ diagnostic trees across 24+ specialties</li>
                 <li>Real-time likelihood scoring</li>
                 <li>Match confidence indicators</li>
                 <li>Sensitivity & specificity data</li>
@@ -386,7 +386,7 @@ export default function FeaturesDemo() {
             <div style={{ padding: '1.5rem', background: 'white', borderRadius: '8px', border: '1px solid #d1d5db', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ color: '#0f766e', fontSize: '1.125rem', marginTop: 0 }}>Offline Database</h3>
               <ul style={{ lineHeight: '1.8', color: '#374151' }}>
-                <li>Download all 676 diagnostic trees</li>
+                <li>Download all 400 diagnostic trees</li>
                 <li>Progress tracking during download</li>
                 <li>Specialty-based organization</li>
                 <li>Offline search history</li>

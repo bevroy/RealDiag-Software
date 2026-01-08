@@ -223,33 +223,47 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   
   # Normalize name for duplicate detection
   def normalize_name(name):
-    """Normalize condition name for duplicate detection."""
+    """
+    Normalize condition name for duplicate detection.
+    
+    Updated 2026-01-08: Preserve clinically important distinctions:
+    - Keep "acute" vs "chronic" (different conditions)
+    - Keep "(pediatric)" vs "(adult)" (different approaches)
+    - Keep specialty prefixes in parentheses
+    """
     if not name:
       return ""
     import re
     normalized = name.lower().strip()
     
-    # Preserve important clinical distinctions in parentheses (e.g., incontinence types)
-    # Only remove general descriptive parentheticals
-    preserved_terms = ["stress", "urge", "overflow", "mixed", "functional", "geriatric"]
-    if any(term in normalized for term in preserved_terms):
-      # Keep the full name including parentheses for these specific conditions
+    # Preserve important clinical distinctions in parentheses
+    # These terms indicate clinically distinct conditions that should NOT be merged
+    preserved_parenthetical_terms = [
+      "stress", "urge", "overflow", "mixed", "functional", "geriatric",
+      "pediatric", "adult", "encounter", "bph", "copd", "dvt", "aki", "ckd",
+      "hay fever", "hives", "pink eye", "heart attack", "stye", "tennis elbow",
+      "sciatica", "athlete's foot", "ringworm", "warts", "cold sores",
+      "swimmer's ear", "strep throat", "yeast infection", "epilepsy"
+    ]
+    
+    # Keep parenthetical content if it contains preserved terms
+    if any(term in normalized for term in preserved_parenthetical_terms):
+      # Keep the full name including important parentheses
       pass
     else:
-      # Remove content in parentheses for general cases
-      normalized = re.sub(r'\s*\([^)]*\)', '', normalized)
+      # Only remove generic descriptive parentheticals
+      # But preserve specialty indicators like (suspected), (confirmed), etc.
+      normalized = re.sub(r'\s*\(encounter\)', '', normalized, flags=re.IGNORECASE)
     
-    # Remove common prefixes
-    prefixes_to_remove = ["acute ", "bacterial ", "chronic "]
-    for prefix in prefixes_to_remove:
-      if normalized.startswith(prefix):
-        normalized = normalized[len(prefix):]
+    # DO NOT remove "acute" or "chronic" - these are clinically distinct
+    # DO NOT remove "bacterial" prefix - indicates different condition
     
-    # Remove common suffixes
+    # Only remove truly redundant suffixes
     suffixes_to_remove = [
-      " evaluation", " evaluation and management", " management",
-      " diagnostic tree", " - general evaluation", " disorder/epilepsy",
-      " and dizziness", " disorder", "/epilepsy"
+      " evaluation and management",
+      " - general evaluation", 
+      " diagnostic tree",
+      " - comprehensive evaluation"
     ]
     for suffix in suffixes_to_remove:
       if normalized.endswith(suffix):
