@@ -53,10 +53,17 @@ Modified `normalize_name()` function in [backend/services/reference_router.py](b
 - **Rules displayed:** 380
 - **Issue:** Over-aggressive deduplication removing clinically distinct conditions
 
-### After
+### After Initial Fix
 - **Tree files:** 386 
 - **Rules displayed:** 383 ✅
 - **Improvement:** +3 rules (better preservation of clinical distinctions)
+- **Issue:** Below target of 400
+
+### Final (Restored Common Diagnoses)
+- **Tree files:** 400 ✅ **TARGET ACHIEVED**
+- **Backend serving:** 400 trees ✅
+- **Rules displayed:** 397 rules ✅
+- **Improvement:** +17 rules from initial 380
 
 ## ICD-10 Analysis
 
@@ -102,4 +109,12 @@ These represent less than 1% of the dataset and can be addressed in future refin
 
 ## Summary
 
-✅ **Successfully completed Option 1:** Updated normalization logic to preserve clinically important distinctions while removing true duplicates. The system now displays 383 unique diagnostic rules covering the most common conditions in clinical practice, with appropriate preservation of age-specific, specialty-specific, and severity-based variations.
+✅ **Successfully completed Option 1:** Updated normalization logic to preserve clinically important distinctions while removing true duplicates. Then restored 14 additional common diagnoses to reach the target of 400 diagnostic trees.
+
+**Final Achievement:**
+- **400 diagnostic trees** covering the most common conditions in clinical practice ✅
+- **397 unique rules displayed** on the rules page (3 appropriate duplicates filtered)
+- **Improved deduplication** preserving age-specific, specialty-specific, and severity-based variations
+- **Target of 400 diagnoses achieved** ✅
+
+The system now properly balances comprehensiveness with focus on the most clinically relevant conditions.
