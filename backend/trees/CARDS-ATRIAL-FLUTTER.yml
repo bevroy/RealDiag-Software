@@ -1,0 +1,121 @@
+tree_id: CARDS-ATRIAL-FLUTTER
+name: Atrial Flutter
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Regular rapid heart rate
+description: Organized atrial arrhythmia causing regular atrial rate 250-350 bpm with sawtooth flutter waves on ECG, typically 2:1 AV block producing ventricular rate 150 bpm. Often coexists with AFib. Catheter ablation curative for typical flutter, anticoagulation same as AFib.
+icd10: I48.92
+snomed: 5370000
+presentations:
+  - Palpitations: regular rapid heartbeat (often 150 bpm with 2:1 block)
+  - Dyspnea, reduced exercise tolerance
+  - Lightheadedness, presyncope
+  - Chest discomfort
+  - May be asymptomatic
+  - Risk of thromboembolic events similar to AFib
+urgency: urgent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Symptoms: similar to AFib but may be better tolerated
+  - Palpitations: regular rapid heart rate
+  - Dyspnea: if rapid ventricular rate
+  - Fatigue, lightheadedness
+  - Chest discomfort: rarely
+  - Asymptomatic: if slow ventricular response (higher degree block)
+  - Classifications:
+  - Typical (counterclockwise): 90%, reentry circuit around tricuspid annulus, inferior leads show negative flutter waves
+  - Atypical (clockwise or other): 10%, various circuits
+  - Physical exam:
+  - Regular tachycardia: distinguishes from AFib (irregularly irregular)
+  - Rapid regular pulse: often 150 bpm (2:1 block)
+  - Flutter waves may be visible in jugular venous pulsations
+  - ECG (diagnostic):
+  - Sawtooth flutter waves: best seen in inferior leads (II, III, aVF) and V1
+  - Regular atrial rate: 250-350 bpm (typically 300 bpm)
+  - AV block: usually 2:1 (ventricular rate 150 bpm), can be 3:1, 4:1, or variable
+  - Narrow QRS: unless aberrancy or bundle branch block
+  - No isoelectric baseline: continuous flutter waves
+  - Negative flutter waves in inferior leads (II, III, aVF) if typical counterclockwise
+  - Positive flutter waves in inferior leads if atypical clockwise
+  - Diagnosis challenging if 2:1 block hides flutter waves: use carotid massage or adenosine to increase AV block temporarily, unmask flutter waves
+  - Associated conditions: similar to AFib
+  - Structural heart disease: CAD, valvular disease
+  - Atrial dilation: from any cause
+  - Hyperthyroidism: check TSH
+  - Pulmonary disease: COPD, pulmonary hypertension
+  - Post-cardiac surgery: common (20-30%)
+  - Often coexists with AFib (50% of flutter patients also have AFib)
+  - Stroke risk: same as AFib (anticoagulation decisions same)
+
+treatment:
+  - Acute management:
+  - Hemodynamically unstable: immediate cardioversion (50-100 J often sufficient - more organized than AFib)
+  - Stable with rapid rate: rate control or cardioversion
+  - Rate control (challenging - often requires multiple agents):
+  - Beta blockers: metoprolol, esmolol IV
+  - Calcium channel blockers: diltiazem, verapamil IV or PO
+  - Digoxin: adjunct
+  - Goal: slow ventricular rate (difficult to achieve 1:1 AV conduction dangerous)
+  - Higher degree AV block desirable (3:1 or 4:1 better than 2:1)
+  - Rhythm control:
+  - Cardioversion: electrical highly effective (over 90% success)
+  - If flutter over 48 hours: anticoagulate x3 weeks OR TEE to exclude thrombus (same as AFib)
+  - Pharmacologic cardioversion: ibutilide 1 mg IV (most effective for flutter), amiodarone
+  - Caution with class IC drugs alone (flecainide, propafenone): can slow flutter rate, paradoxically improve AV conduction, cause 1:1 conduction with very rapid ventricular rate (give with AV nodal blocker)
+  - Catheter ablation (treatment of choice for typical flutter):
+  - Cavotricuspid isthmus (CTI) ablation: create line of block in reentry circuit
+  - Curative for typical flutter (over 95% success, under 5% recurrence)
+  - Low complication rate
+  - First-line for recurrent flutter or symptomatic flutter
+  - Does NOT prevent AFib (50% develop AFib after successful flutter ablation)
+  - Anticoagulation:
+  - Same indications as AFib: CHA2DS2-VASc score 2 or more (men) or 3 or more (women)
+  - DOACs preferred: apixaban, rivaroxaban, edoxaban, dabigatran
+  - Warfarin: INR 2-3 if DOAC contraindicated
+  - Continue even after successful ablation (may develop AFib)
+  - Antiarrhythmic medications (if ablation not pursued):
+  - Dofetilide, sotalol, amiodarone
+  - Less effective than for AFib
+  - Always combine class IC drugs with AV nodal blocker
+
+clinical_pearls:
+  - Sawtooth flutter waves with regular atrial rate 250-350 bpm
+  - Typically 2:1 AV block producing ventricular rate 150 bpm
+  - Regular rhythm distinguishes from AFib (irregularly irregular)
+  - Use adenosine or carotid massage to unmask flutter waves if 2:1 block
+  - Catheter ablation curative for typical flutter (CTI ablation over 95% success)
+  - Anticoagulation decisions same as AFib
+  - 50% coexist with AFib or develop AFib after flutter ablation
+  - Never give class IC drugs alone (risk 1:1 conduction) - always with AV nodal blocker
+
+differentials:
+  - Atrial fibrillation: irregularly irregular, no organized atrial activity
+  - Sinus tachycardia: P waves before each QRS, rate usually under 150
+  - AVNRT: regular narrow complex tachycardia, no flutter waves
+  - Atrial tachycardia: regular P waves but different morphology and rate
+
+trace: |
+  A 58-year-old man post-CABG x3 weeks presented with palpitations x2 days. Heart racing regularly (not irregular like AFib), dyspnea with exertion, lightheaded. No syncope. Post-cardiac surgery high risk for atrial arrhythmias. Exam: BP 120/75, HR 150 regular (not irregular - distinguishes from AFib), lungs clear, sternotomy healing well. ECG: regular narrow complex tachycardia rate 150 bpm, difficult to see P waves at first glance. Gave adenosine 6 mg IV rapid push to increase AV block temporarily and unmask atrial activity. Transient complete AV block unmasked sawtooth flutter waves in inferior leads (II, III, aVF) with atrial rate 300 bpm (exactly 2:1 block producing ventricular rate 150). Negative flutter waves in inferior leads (typical counterclockwise flutter - most common 90%). Diagnosed with typical atrial flutter post-cardiac surgery (common complication 20-30% after cardiac surgery). CHA2DS2-VASc score: 1 (Vascular disease from CAD). Symptom onset 2 days ago (under 48 hours). Options discussed: rate control vs cardioversion vs catheter ablation. Given post-surgical etiology and recent onset, attempted cardioversion. TEE first to rule out LA thrombus (even though under 48 hours, post-surgical patients higher risk). TEE: no LA thrombus, mild LA enlargement. Proceeded with electrical cardioversion 50 J synchronized (lower energy sufficient for flutter). Successfully converted to normal sinus rhythm (cardioversion highly effective for flutter over 90%). Started metoprolol 25 mg BID to prevent recurrence, started apixaban 5 mg BID for anticoagulation (CHA2DS2-VASc score 1 borderline but post-surgical and will likely need ablation). At 1 week: sinus rhythm, asymptomatic. At 4 weeks: flutter recurred, ventricular rate 145 bpm. Rate control challenging (difficult to slow flutter adequately). Referred for catheter ablation (definitive treatment for recurrent flutter). Underwent cavotricuspid isthmus (CTI) ablation: created line of block in flutter circuit, confirmed bidirectional block across isthmus (curative). Procedure uncomplicated, discharge same day. At 2 weeks post-ablation: normal sinus rhythm, stopped metoprolol, continues apixaban (may develop AFib despite successful flutter ablation - 50% risk). At 3 months: remains in sinus rhythm, no flutter recurrence. At 1 year: developed paroxysmal AFib x2 episodes (common after flutter ablation 50% - ablation cures flutter but not AFib). AFib episodes brief and self-limited. Continues apixaban for stroke prevention. Excellent outcome from flutter ablation, managing AFib with beta blocker and anticoagulation.
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
