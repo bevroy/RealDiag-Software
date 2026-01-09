@@ -47,6 +47,15 @@ docs/
 *.md
 !README.md
 
+# Build artifacts and cache
+*.log
+*.txt
+!requirements.txt
+.pytest_cache/
+.coverage
+*.pyc
+load_test*
+
 # Kubernetes
 k8s/
 
