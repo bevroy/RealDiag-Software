@@ -1,0 +1,115 @@
+tree_id: HEME-LEUKEMIA
+name: Leukemia (Acute and Chronic)
+family: hematology
+specialty: Hematology / Oncology
+presentations:
+  - Fatigue and weakness (anemia)
+  - Easy bruising and bleeding (thrombocytopenia)
+  - Recurrent infections (neutropenia)
+  - Fever
+  - Bone pain (acute leukemia)
+  - Lymphadenopathy
+  - Splenomegaly, hepatomegaly
+  - Gingival hypertrophy (acute monocytic leukemia)
+  - Leukostasis symptoms (very high WBC - AML, CML blast crisis)
+  - Petechiae, purpura
+  - Weight loss
+  - May be asymptomatic (chronic leukemia found on routine labs)
+icd10:
+  - C91.00 # Acute lymphoblastic leukemia not achieved remission
+  - C92.00 # Acute myeloid leukemia not achieved remission
+  - C91.10 # Chronic lymphocytic leukemia not achieved remission
+  - C92.10 # Chronic myeloid leukemia not achieved remission
+  - C95.90 # Leukemia, unspecified
+snomed:
+  - "91861009" # Acute lymphoblastic leukemia
+  - "353431000119107" # Acute myeloid leukemia
+  - "92814006" # Chronic lymphocytic leukemia
+  - "413448007" # Chronic myeloid leukemia
+urgency: Emergency (acute leukemia), High (chronic leukemia)
+urgency_explanation: Acute leukemia requires immediate treatment; chronic types may be less urgent but need prompt evaluation
+
+referrals:
+  hematology_oncology: Immediate for diagnosis and treatment
+  bone_marrow_transplant: For allogeneic transplant evaluation if indicated
+
+workup:
+  initial_laboratory:
+    - CBC with differential (often shows blasts, cytopenias or leukocytosis)
+    - Peripheral blood smear (manual differential, blast morphology)
+    - CMP (renal/hepatic function, electrolytes, LDH, uric acid)
+    - Coagulation studies (PT/PTT, fibrinogen, D-dimer for DIC)
+    - Uric acid (tumor lysis risk)
+  bone_marrow_evaluation:
+    - Bone marrow aspirate and biopsy (diagnosis and classification)
+    - Flow cytometry (immunophenotyping)
+    - Cytogenetics (karyotype)
+    - FISH (specific translocations)
+    - Molecular testing (mutations: FLT3, NPM1, CEBPA for AML; BCR-ABL for CML)
+  imaging:
+    - Chest X-ray (mediastinal mass in T-ALL)
+    - CT chest/abdomen/pelvis if lymphadenopathy or organomegaly
+    - Lumbar puncture (CNS evaluation if symptoms or high-risk ALL)
+  tumor_lysis_monitoring:
+    - Potassium, phosphorus, calcium, uric acid, LDH, creatinine
+    - EKG if hyperkalemia
+
+treatment:
+  acute_myeloid_leukemia_AML:
+    - Induction chemotherapy: 7+3 (cytarabine x7 days + anthracycline x3 days)
+    - Consolidation: high-dose cytarabine (HiDAC) for 3-4 cycles
+    - Allogeneic stem cell transplant in first remission if high-risk features or relapse
+    - Supportive care: transfusions, antimicrobials, tumor lysis prophylaxis
+    - Targeted therapy: midostaurin (FLT3+), venetoclax + azacitidine (elderly/unfit)
+  acute_lymphoblastic_leukemia_ALL:
+    - Multi-agent intensive chemotherapy (hyperCVAD, CALGB, or pediatric-inspired regimens)
+    - CNS prophylaxis: intrathecal chemotherapy
+    - TKI therapy for Philadelphia chromosome positive (Ph+): imatinib, dasatinib
+    - Allogeneic stem cell transplant in first remission for high-risk or Ph+
+    - Blinatumomab (BiTE antibody) for relapsed/refractory
+  chronic_myeloid_leukemia_CML:
+    - Tyrosine kinase inhibitors (TKI) first-line: imatinib, dasatinib, nilotinib
+    - Monitor BCR-ABL transcript levels every 3 months (molecular monitoring)
+    - Goal: complete cytogenetic response and major molecular response
+    - Switch TKI if inadequate response or intolerance
+    - Allogeneic transplant reserved for blast crisis or TKI failure
+  chronic_lymphocytic_leukemia_CLL:
+    - Watch and wait if asymptomatic and no adverse features (Rai stage 0-I)
+    - Treat if symptomatic, progressive cytopenias, bulky lymphadenopathy
+    - First-line: ibrutinib (BTK inhibitor) or venetoclax + obinutuzumab
+    - FCR regimen (fludarabine, cyclophosphamide, rituximab) if young and fit
+    - FISH testing (del 17p, del 11q prognostic)
+  supportive_care:
+    - Tumor lysis prophylaxis: allopurinol or rasburicase, aggressive hydration
+    - Transfusion support: packed RBCs, platelets
+    - Antimicrobial prophylaxis: antibacterial, antifungal, antiviral
+    - Growth factors: G-CSF for neutropenia
+    - Central line placement for chemotherapy
+
+clinical_pearls:
+  - Acute leukemias (AML, ALL) are medical emergencies requiring immediate treatment
+  - Chronic leukemias (CML, CLL) often asymptomatic and may be discovered incidentally
+  - AML: ≥20% blasts in bone marrow or peripheral blood diagnostic
+  - ALL: most common childhood cancer, better prognosis in children than adults
+  - CML: Philadelphia chromosome (BCR-ABL) present in 95%, TKIs revolutionized treatment
+  - CLL: most common adult leukemia, often indolent, watch-and-wait common initially
+  - Auer rods pathognomonic for AML (not seen in ALL)
+  - Tumor lysis syndrome risk high with acute leukemias (monitor and prophylaxis)
+  - Hyperleukocytosis (WBC >100k) risk for leukostasis (pulmonary/CNS complications)
+  - Allogeneic transplant only curative option for many but significant morbidity/mortality
+
+differentials:
+  - Myelodysplastic syndrome (MDS) - dysplasia, <20% blasts
+  - Aplastic anemia (pancytopenia without blasts)
+  - Lymphoma with bone marrow involvement
+  - Viral infections (EBV, CMV causing atypical lymphocytes)
+  - Myeloproliferative neoplasms (polycythemia vera, essential thrombocythemia)
+  - Reactive leukocytosis (infection, steroids)
+
+trace: |
+  A 35-year-old woman presented to ED with 3 weeks of progressive fatigue, easy bruising, and gingival bleeding. Also noted fevers and bone pain. Physical exam showed pallor, petechiae, ecchymoses, and splenomegaly. No lymphadenopathy. Labs: WBC 42,000/µL with 60% blasts, Hgb 7.2 g/dL, platelets 18,000/µL. Peripheral smear showed numerous myeloblasts with Auer rods. CMP: LDH 850 U/L, uric acid 9.5 mg/dL. Admitted for emergent evaluation. Bone marrow biopsy: 75% blasts with myeloid markers (CD13, CD33, MPO positive). Flow cytometry confirmed acute myeloid leukemia. Cytogenetics: normal karyotype. Molecular: FLT3-ITD mutation positive, NPM1 mutation positive (favorable prognosis if NPM1+ without FLT3-ITD, but FLT3-ITD is adverse). Started tumor lysis prophylaxis (allopurinol, aggressive hydration). Placed PICC line. Initiated 7+3 induction chemotherapy (cytarabine continuous infusion x7 days + daunorubicin x3 days) plus midostaurin (FLT3 inhibitor). Developed febrile neutropenia on day 10, started broad-spectrum antibiotics (cefepime + vancomycin). Required platelet and RBC transfusions. Day 28 bone marrow: complete remission achieved (blasts <5%). Proceeded with consolidation chemotherapy: high-dose cytarabine x4 cycles with continued midostaurin. Given high-risk FLT3-ITD mutation, evaluated for allogeneic stem cell transplant. Matched sibling donor identified. Underwent myeloablative conditioning and allogeneic transplant in first remission. Post-transplant course complicated by grade II acute GVHD (skin, GI) managed with steroids and immunosuppression. At 18-month post-transplant follow-up, remains in complete molecular remission with no evidence of AML, full donor chimerism.
+
+citations:
+  - NCCN Guidelines for Acute Myeloid Leukemia, Acute Lymphoblastic Leukemia, CML, and CLL
+  - European LeukemiaNet (ELN) AML Risk Stratification
+  - UpToDate - Hematology and Oncology

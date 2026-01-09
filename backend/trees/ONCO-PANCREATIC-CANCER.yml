@@ -1,0 +1,101 @@
+tree_id: ONCO-PANCREATIC-CANCER
+name: Pancreatic Cancer
+family: oncology
+specialty: Oncology / Gastroenterology
+presentations:
+  - Painless jaundice (head of pancreas)
+  - Abdominal pain radiating to back
+  - Unintentional weight loss (>10% body weight)
+  - New-onset diabetes in older adults
+  - Steatorrhea (fatty stools)
+  - Nausea and vomiting
+  - Courvoisier sign (palpable non-tender gallbladder)
+  - Trousseau syndrome (migratory thrombophlebitis)
+  - Often asymptomatic until advanced
+icd10:
+  - C25.9 # Malignant neoplasm of pancreas, unspecified
+  - C25.0 # Malignant neoplasm of head of pancreas
+  - C25.1 # Malignant neoplasm of body of pancreas
+  - C25.2 # Malignant neoplasm of tail of pancreas
+snomed:
+  - "363418001" # Malignant tumor of pancreas
+urgency: High
+urgency_explanation: Aggressive malignancy with poor prognosis; early evaluation and staging critical for potential surgical resection
+
+referrals:
+  gastroenterology: For EUS and tissue diagnosis
+  hepatobiliary_surgery: For surgical evaluation (Whipple procedure)
+  oncology: For chemotherapy planning
+  interventional_radiology: For biliary stent if obstructive jaundice
+  palliative_care: Early integration recommended
+
+workup:
+  initial_assessment:
+    - Complete history including risk factors (smoking, chronic pancreatitis, family history)
+    - Physical exam (jaundice, cachexia, abdominal mass, hepatomegaly)
+  laboratory:
+    - CBC, CMP
+    - LFTs (elevated direct bilirubin, alkaline phosphatase)
+    - CA 19-9 (tumor marker, elevated in 80% but not diagnostic)
+    - Amylase, lipase
+  imaging:
+    - Pancreatic protocol CT with contrast (triple-phase)
+    - MRI/MRCP if CT contraindicated
+    - Endoscopic ultrasound (EUS) with FNA biopsy for tissue diagnosis
+    - PET-CT for staging if borderline resectable
+    - Staging laparoscopy to rule out peritoneal metastases
+  tissue_diagnosis:
+    - EUS-guided FNA (fine needle aspiration)
+    - CT-guided biopsy if not amenable to EUS
+    - Cytology and histology
+
+treatment:
+  resectable:
+    - Surgical resection:
+      - Pancreaticoduodenectomy (Whipple) for head tumors
+      - Distal pancreatectomy with splenectomy for body/tail
+    - Adjuvant chemotherapy (modified FOLFIRINOX or gemcitabine + capecitabine for 6 months)
+    - Consider adjuvant chemoradiation for positive margins
+  borderline_resectable:
+    - Neoadjuvant chemotherapy (FOLFIRINOX or gemcitabine-based)
+    - Reassess for surgical resection after 2-4 months
+    - Surgery if downstaged, followed by adjuvant chemotherapy
+  locally_advanced_unresectable:
+    - Chemotherapy (FOLFIRINOX or gemcitabine + nab-paclitaxel)
+    - Consider chemoradiation for local control
+    - Palliative biliary stent if obstruction
+  metastatic:
+    - First-line: FOLFIRINOX (if good performance status) or gemcitabine + nab-paclitaxel
+    - Second-line: Switch regimen or liposomal irinotecan
+    - Palliative care integration
+    - Biliary decompression (ERCP with stent) for jaundice
+    - Pain management (celiac plexus block)
+  supportive:
+    - Pancreatic enzyme replacement for exocrine insufficiency
+    - Insulin for diabetes
+    - Nutrition support (often require enteral or parenteral)
+    - Anticoagulation for Trousseau syndrome
+
+clinical_pearls:
+  - Only 15-20% present with resectable disease; most have locally advanced or metastatic at diagnosis
+  - New-onset diabetes in adults >50 may be presenting sign (paraneoplastic)
+  - CA 19-9 useful for monitoring response but not screening (false positives with biliary obstruction)
+  - Surgical resection only curative option but 5-year survival still only 20-30% after Whipple
+  - FOLFIRINOX most effective but requires good performance status (ECOG 0-1)
+  - Trousseau syndrome (migratory thrombophlebitis) classic paraneoplastic manifestation
+  - Weight loss nearly universal due to anorexia, malabsorption, and cachexia
+
+differentials:
+  - Chronic pancreatitis (calcifications, history of alcohol, recurrent pain)
+  - Cholangiocarcinoma (similar presentation with jaundice)
+  - Ampullary carcinoma (better prognosis, jaundice earlier)
+  - Pancreatic neuroendocrine tumor (functional symptoms, better prognosis)
+  - Lymphoma (younger patients, B symptoms)
+
+trace: |
+  A 68-year-old man with 30-pack-year smoking history presented with 3 months of progressive mid-epigastric pain radiating to back, 25-pound weight loss, and 2 weeks of painless jaundice. New-onset diabetes diagnosed 4 months ago. Physical exam showed scleral icterus, cachexia, and palpable non-tender gallbladder (Courvoisier sign). Labs: total bilirubin 12.5 mg/dL (direct 10.2), alkaline phosphatase 520 U/L, CA 19-9 1,850 U/mL. CT abdomen with pancreatic protocol showed 3.5 cm mass in head of pancreas with encasement of SMV but patent SMA (borderline resectable). EUS-guided FNA confirmed pancreatic ductal adenocarcinoma. Staging CT chest showed no metastases. Started neoadjuvant FOLFIRINOX chemotherapy. ERCP with biliary stent placed for jaundice relief. After 4 cycles (2 months), repeat CT showed stable disease with improved SMV involvement. Underwent successful Whipple procedure (pancreaticoduodenectomy) with negative margins. Pathology: 3.2 cm moderately differentiated adenocarcinoma, 2 of 18 lymph nodes positive (stage IIB). Started adjuvant modified FOLFIRINOX for 6 months. Pancreatic enzyme replacement and nutritional support. At 1 year post-surgery, CA 19-9 normalized, CT shows no recurrence. Continues surveillance every 3 months.
+
+citations:
+  - NCCN (National Comprehensive Cancer Network) Guidelines for Pancreatic Adenocarcinoma
+  - ASCO (American Society of Clinical Oncology) Guidelines
+  - UpToDate - Oncology

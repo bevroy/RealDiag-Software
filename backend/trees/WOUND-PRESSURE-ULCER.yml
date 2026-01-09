@@ -1,0 +1,126 @@
+tree_id: WOUND-PRESSURE-ULCER
+name: Pressure Ulcer / Pressure Injury
+family: wound_care
+specialty: Wound Care / Primary Care / Surgery
+chief_complaint: Non-healing wound or skin breakdown over bony prominence
+description: Localized damage to skin and underlying soft tissue over bony prominence from prolonged pressure, shear, friction, or moisture. Stages range from non-blanchable erythema to full-thickness tissue loss with bone exposure. Prevention critical in immobile patients. Treatment includes pressure relief, wound care, nutrition, and surgical repair if needed.
+icd10:
+  - L89.90 # Pressure ulcer of unspecified site, unspecified stage
+  - L89.150 # Pressure ulcer of sacral region, unstageable
+  - L89.200 # Pressure ulcer of unspecified hip, unstageable
+snomed:
+  - "399912005" # Pressure ulcer
+urgency: Medium to High (depending on stage and complications)
+urgency_explanation: Stage III-IV ulcers require prompt treatment; osteomyelitis or sepsis are emergencies
+
+referrals:
+  wound_care_specialist: For stage III-IV ulcers or non-healing wounds
+  plastic_surgery: For flap reconstruction of stage IV ulcers
+  infectious_disease: If osteomyelitis suspected
+  nutrition: For malnutrition or pressure ulcer healing support
+  physical_therapy: For mobility and positioning strategies
+
+workup:
+  assessment:
+    - Location: sacrum (most common 40%), heels (30%), ischial tuberosities, trochanters, occiput, elbows
+    - Stage using NPUAP/EPUAP classification system:
+      - Stage I: Non-blanchable erythema of intact skin
+      - Stage II: Partial-thickness skin loss with exposed dermis (blister or shallow ulcer)
+      - Stage III: Full-thickness skin loss exposing subcutaneous fat
+      - Stage IV: Full-thickness tissue loss with exposed bone, tendon, or muscle
+      - Unstageable: Obscured by eschar or slough (cannot determine depth)
+      - Deep tissue injury: Purple or maroon discoloration or blood-filled blister
+    - Measure dimensions: length, width, depth (cm)
+    - Describe wound bed: granulation, slough, necrotic tissue, eschar
+    - Assess wound edges and surrounding skin
+    - Evaluate exudate: amount, color, odor
+    - Assess for signs of infection: erythema, warmth, purulent drainage, odor, delayed healing
+  laboratory:
+    - CBC (leukocytosis if infection)
+    - CMP (renal function, albumin for nutrition)
+    - ESR, CRP (elevated if osteomyelitis or infection)
+    - Prealbumin (nutritional marker, short half-life)
+    - Hemoglobin A1c (if diabetic)
+  imaging:
+    - X-ray if osteomyelitis suspected (bone destruction, periosteal reaction)
+    - MRI if X-ray negative but high suspicion (best for osteomyelitis)
+    - Bone scan or tagged WBC scan alternative
+  microbiology:
+    - Tissue biopsy for culture (gold standard if infection suspected)
+    - Avoid swab cultures (contaminated with colonizers)
+  risk_assessment:
+    - Braden scale: assesses pressure ulcer risk (sensory perception, moisture, activity, mobility, nutrition, friction/shear)
+
+treatment:
+  prevention:
+    - Pressure redistribution:
+      - Reposition every 2 hours (or more frequently if high risk)
+      - Pressure-redistributing mattress or overlay (foam, air, alternating pressure)
+      - Heel offloading devices (pillows, boots)
+    - Skin care:
+      - Keep clean and dry, moisture barrier cream for incontinence
+      - Avoid harsh soaps, moisturize dry skin
+    - Nutrition: adequate protein (1.2-1.5 g/kg/day), calories, vitamin C, zinc
+    - Minimize friction and shear: lift don't drag, head of bed <30 degrees when possible
+  stage_I:
+    - Pressure relief: reposition frequently, pressure-redistributing surface
+    - Protect area: transparent film dressing or hydrocolloid
+    - Monitor for progression
+  stage_II:
+    - Pressure relief mandatory
+    - Moist wound healing:
+      - Hydrocolloid dressing or foam dressing (absorbs exudate, maintains moisture)
+      - Change every 3-7 days or when saturated
+    - Protect surrounding skin with barrier cream
+  stage_III:
+    - Pressure relief essential
+    - Debridement if necrotic tissue or slough present:
+      - Sharp/surgical debridement (fastest, most effective)
+      - Enzymatic debridement (collagenase ointment)
+      - Autolytic debridement (hydrogel dressings)
+    - Wound bed preparation: promote granulation tissue
+    - Dressings:
+      - Foam dressing for moderate exudate
+      - Alginate or hydrofiber for heavy exudate
+      - Negative pressure wound therapy (NPWT/VAC) for large wounds
+    - Antibiotics only if evidence of infection (not routine)
+  stage_IV:
+    - All measures for stage III
+    - Evaluate for osteomyelitis: probe-to-bone test, imaging, bone biopsy
+    - Prolonged antibiotics if osteomyelitis (6-12 weeks IV)
+    - Surgical consultation for debridement and flap closure
+    - NPWT to prepare wound bed for surgery
+  nutrition:
+    - High protein diet: 1.2-1.5 g/kg/day (wound healing requires protein)
+    - Adequate calories: 30-35 kcal/kg/day
+    - Vitamin C supplementation: 500 mg twice daily
+    - Zinc supplementation if deficient
+    - Arginine, glutamine, HMB in specialized wound healing formulas
+
+clinical_pearls:
+  - Pressure ulcers develop within hours in high-risk patients (OR, ICU, immobile)
+  - Sacrum and heels are most common sites
+  - "Tip of the iceberg" phenomenon: visible wound smaller than underlying tissue damage
+  - Prevention is key: reposition every 2 hours, pressure-redistributing surfaces
+  - Do NOT massage over bony prominences (can cause deep tissue injury)
+  - Eschar on heels may be left intact if dry and no signs of infection (natural barrier)
+  - Osteomyelitis common in stage IV ulcers near bone (probe-to-bone test)
+  - Nutrition critical: cannot heal without adequate protein (albumin >3.5 g/dL, prealbumin >15 mg/dL)
+  - NPWT (VAC) promotes granulation and reduces wound size
+  - Flap surgery has high failure rate if pressure relief not maintained post-op
+
+differentials:
+  - Venous stasis ulcer (lower leg, gaiter area, hemosiderin staining, not over bony prominence)
+  - Arterial ulcer (distal toes/feet, pale wound bed, absent pulses, pain)
+  - Diabetic neuropathic ulcer (plantar foot, callus rim, loss of protective sensation)
+  - Malignancy (Marjolin ulcer in chronic wound)
+  - Pyoderma gangrenosum (inflammatory, undermined borders, pathergy)
+  - Calciphylaxis (painful, necrotic, end-stage renal disease)
+
+trace: |
+  An 82-year-old woman with dementia and recent hip fracture (bedbound 3 weeks post-op) transferred from nursing home for evaluation of sacral wound. Facility reported wound developed over 5 days despite repositioning efforts. Exam showed 7 cm x 5 cm x 3 cm deep sacral ulcer with exposed subcutaneous fat, 30% yellow slough covering wound bed, moderate serous drainage, no odor, surrounding skin intact (stage III pressure ulcer). No fever. Labs: WBC 7.5k, albumin 2.8 g/dL (low - malnutrition), prealbumin 12 mg/dL (low). X-ray sacrum no evidence of osteomyelitis. Admitted for wound care and nutrition optimization. Placed on low air loss mattress, repositioned every 2 hours alternating left/right lateral positions (30-degree tilt) and prone when tolerated. Sacral ulcer: sharp debridement of slough performed at bedside, NPWT (VAC) applied at 125 mmHg continuous. Nutrition consult: started high-protein supplements (Ensure Plus TID), protein goal 1.5 g/kg/day, vitamin C 500 mg BID, zinc 220 mg daily. VAC changed every 3 days. At 2 weeks wound bed 80% granulation tissue, decreased to 6 x 4 x 2 cm, albumin improved to 3.2 g/dL. Transitioned to foam dressing with alginate filler. Physical therapy initiated: able to sit in chair with pressure-relief cushion 2 hours twice daily. At 6 weeks wound decreased to 3 x 2 x 0.5 cm with 100% granulation. At 10 weeks complete epithelialization, healed. Discharged to skilled nursing facility with special mattress, repositioning protocol, and high-protein diet maintenance plan.
+
+citations:
+  - NPUAP/EPUAP Pressure Ulcer Classification System
+  - Wound, Ostomy and Continence Nurses Society (WOCN) Guidelines
+  - UpToDate - Wound Care

@@ -1,0 +1,101 @@
+tree_id: DERM-ALOPECIA-AREATA
+name: Alopecia Areata
+family: dermatology
+specialty: Dermatology
+chief_complaint: Patchy hair loss
+description: Autoimmune disorder causing non-scarring hair loss in well-demarcated circular or oval patches. T-cell mediated attack on hair follicles. Can progress to total scalp hair loss (alopecia totalis) or complete body hair loss (alopecia universalis). Often spontaneous regrowth but unpredictable course.
+icd10: L63.9
+snomed: "68225006"
+presentations:
+  - Sudden onset smooth, round patches of hair loss
+  - No scaling, erythema, or scarring
+  - "Exclamation point" hairs at periphery (broken hairs narrower at base)
+  - Scalp most common, but can affect beard, eyebrows, eyelashes, body hair
+  - Nail changes (pitting, ridging, trachyonychia)
+  - May have atopic history (asthma, eczema, allergies)
+  - Associated with other autoimmune diseases (thyroid, vitiligo, type 1 diabetes)
+urgency: non-urgent
+
+referrals:
+  dermatology:
+    - Extensive hair loss (>50% scalp)
+    - Alopecia totalis or universalis
+    - Failed initial treatment
+    - Uncertain diagnosis
+    - Consideration for advanced therapies (JAK inhibitors)
+  endocrinology:
+    - If thyroid dysfunction identified
+
+workup:
+  - Clinical diagnosis: characteristic appearance (smooth, round patches without scarring or inflammation)
+  - Dermoscopy: yellow dots, black dots, broken hairs, exclamation point hairs
+  - Hair pull test: gentle traction on ~50 hairs, >6 hairs removed suggests active disease
+  - Scalp biopsy rarely needed (if atypical features or scarring suspected)
+    - Shows lymphocytic infiltrate around hair bulbs ("swarm of bees")
+  - Laboratory evaluation:
+    - TSH (screen for thyroid disease - common association)
+    - CBC (if associated with autoimmune conditions)
+    - Consider: ANA, vitamin D, zinc level
+  - Assess extent:
+    - Patchy alopecia areata (<50% scalp)
+    - Extensive alopecia areata (>50% scalp)
+    - Alopecia totalis (complete scalp hair loss)
+    - Alopecia universalis (complete body hair loss)
+
+treatment:
+  limited_patchy_disease:
+    - Observation: 50% spontaneous regrowth within 1 year, especially if limited patches
+    - Intralesional corticosteroids (first-line):
+      - Triamcinolone acetonide 5-10 mg/mL injected into patches every 4-6 weeks
+      - Effective for small patches, avoid if extensive
+    - Topical corticosteroids: high-potency (clobetasol 0.05%) twice daily
+      - Less effective than intralesional but non-invasive option
+    - Topical minoxidil 5% solution or foam twice daily: promotes regrowth, not disease-modifying
+  extensive_disease:
+    - Topical immunotherapy (contact sensitizers):
+      - DPCP (diphenylcyclopropenone) or SADBE (squaric acid dibutyl ester)
+      - Applied by dermatologist weekly to induce allergic contact dermatitis
+      - 40-60% response rate, requires ongoing treatment
+    - JAK inhibitors (new, promising):
+      - Baricitinib, tofacitinib, ruxolitinib
+      - Oral or topical formulations
+      - Significant hair regrowth in clinical trials
+      - Reserved for severe disease due to cost and side effects
+    - Systemic corticosteroids: pulse therapy may halt progression but high relapse rate
+  alopecia_totalis_universalis:
+    - Refer to dermatology for advanced therapies
+    - JAK inhibitors showing promise
+    - Wigs, hairpieces, cosmetic camouflage
+    - Support groups and counseling
+  other_modalities:
+    - Anthralin (irritant therapy) 0.5-1% cream
+    - Platelet-rich plasma (PRP) injections: limited evidence
+    - Phototherapy: limited efficacy
+
+clinical_pearls:
+  - Autoimmune T-cell mediated attack on hair follicles (hair follicle is immune-privileged site)
+  - Exclamation point hairs at margins diagnostic (broken hairs tapered at base)
+  - Non-scarring alopecia (follicles remain intact, regrowth possible)
+  - Unpredictable course: may regrow spontaneously or progress to totalis/universalis
+  - 50% regrow within 1 year with limited patchy disease
+  - Poor prognostic factors: young age at onset, extensive loss, long duration, nail changes, atopy
+  - Associated with autoimmune thyroid disease (20%), vitiligo, type 1 diabetes
+  - Nail changes in 10-66%: pitting, ridging, trachyonychia (rough, sandpaper nails)
+  - Psychological impact significant: support groups helpful
+
+differentials:
+  - Tinea capitis (dermatophyte infection, scaling, broken hairs, KOH positive)
+  - Trichotillomania (compulsive hair pulling, irregular pattern, broken hairs at different lengths)
+  - Telogen effluvium (diffuse thinning, not patchy, triggered by stress/illness/medications)
+  - Androgenetic alopecia (male/female pattern, gradual thinning, family history)
+  - Traction alopecia (from tight hairstyles, temporal and frontal)
+  - Scarring alopecias (lichen planopilaris, DLE, folliculitis decalvans - follicular destruction, permanent)
+  - Secondary syphilis (moth-eaten pattern, serologic testing)
+
+trace: |
+  A 28-year-old woman presented with 2 months of sudden hair loss. Initially noticed one quarter-sized smooth patch on left temporal scalp, now has 3 patches total. No scalp symptoms, no skin changes. History of seasonal allergies. Mother has hypothyroidism. Exam showed three well-demarcated circular patches of complete hair loss on scalp (largest 3 cm), smooth skin with no erythema, scaling, or scarring. Several "exclamation point" hairs at periphery of patches (short broken hairs tapered at base). Hair pull test positive at margins (8 hairs removed). Dermoscopy showed yellow dots and broken hairs. Nail exam revealed subtle pitting on several fingernails. Diagnosed with alopecia areata. Labs: TSH 2.5 mIU/L (normal). Discussed unpredictable course and good prognosis with limited patches (50% spontaneous regrowth within 1 year). Started intralesional triamcinolone acetonide 5 mg/mL injections to all three patches. Applied minoxidil 5% foam to patches twice daily. At 6 weeks, vellus hair regrowth visible in patches. Repeat injections. At 3 months, significant terminal hair regrowth, patches 70% filled in. At 6 months, complete regrowth with normal hair density, no new patches. Discontinued minoxidil, advised to monitor for recurrence.
+
+citations:
+  - AAD (American Academy of Dermatology) Guidelines for Alopecia Areata
+  - National Alopecia Areata Foundation
+  - UpToDate - Dermatology

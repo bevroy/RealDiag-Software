@@ -1,0 +1,162 @@
+tree_id: HEME-SICKLE-CELL-DISEASE
+name: Sickle Cell Disease
+family: Hematology
+specialty: Hematology
+chief_complaint: Acute pain crisis, chronic anemia complications
+description: |
+  Inherited hemoglobinopathy caused by mutation in beta-globin gene producing hemoglobin S (HbS). 
+  HbS polymerizes under deoxygenation causing RBC sickling, leading to vaso-occlusion, hemolysis, and organ damage.
+  Most common genotypes: HbSS (sickle cell anemia, most severe), HbSC (milder), HbS-beta-thalassemia.
+  Predominantly affects individuals of African, Mediterranean, Middle Eastern, and Indian ancestry.
+  Chronic disease with acute complications requiring comprehensive disease-modifying therapy and acute crisis management.
+icd10: D57.1
+snomed: 417357006
+presentations:
+  - Acute vaso-occlusive pain crisis (bones, joints, abdomen)
+  - Chronic hemolytic anemia (fatigue, pallor, jaundice)
+  - Acute chest syndrome (fever, cough, chest pain, hypoxia)
+  - Splenic sequestration crisis (splenomegaly, severe anemia, shock)
+  - Aplastic crisis (parvovirus B19, profound anemia, low reticulocytes)
+  - Priapism (painful sustained erection)
+  - Stroke (pediatric population)
+  - Chronic complications: avascular necrosis, pulmonary hypertension, chronic kidney disease, retinopathy
+  - Hand-foot syndrome (dactylitis) in infants and young children
+urgency: High (acute crises are emergencies)
+referrals:
+  emergency:
+    - Acute chest syndrome
+    - Stroke or neurologic deficits
+    - Priapism >4 hours
+    - Splenic sequestration with shock
+    - Severe pain crisis uncontrolled
+  urgent:
+    - New pain crisis requiring hospitalization
+    - Fever with focal infection
+    - Aplastic crisis
+    - Multi-organ failure
+  routine:
+    - Stable disease management
+    - Chronic complications monitoring
+    - Hematology follow-up
+
+workup:
+  - Newborn screening - all states screen for sickle cell disease, hemoglobin electrophoresis on dried blood spot
+  - Hemoglobin electrophoresis - diagnostic test showing hemoglobin S (HbS), differentiates HbSS from HbSC or HbS-beta-thalassemia
+  - HbSS (sickle cell anemia) - 80-95% HbS, 2-20% HbF (fetal hemoglobin), no HbA (normal adult hemoglobin)
+  - HbSC disease - approximately 50% HbS, 50% HbC (another abnormal hemoglobin), milder than HbSS
+  - HbS-beta-thalassemia - variable HbS percentage depending on type (beta-plus vs beta-zero)
+  - CBC - chronic anemia (Hgb typically 6-9 g/dL in HbSS, higher in HbSC), elevated reticulocyte count (5-15%, compensatory response to hemolysis), elevated WBC (baseline leukocytosis common)
+  - Peripheral smear - sickled RBCs (irreversibly sickled cells present even when oxygenated), target cells, Howell-Jolly bodies (functional asplenia), nucleated RBCs, polychromasia
+  - Baseline labs for chronic management - comprehensive metabolic panel (renal function, LFTs), LDH elevated (hemolysis marker), indirect bilirubin elevated (unconjugated hyperbilirubinemia from hemolysis), low haptoglobin
+  - Transcranial Doppler ultrasound (TCD) - screen for stroke risk in children ages 2-16 years annually, elevated velocities (>200 cm/sec) indicate high stroke risk requiring chronic transfusions
+  - Echocardiogram - screen for pulmonary hypertension (tricuspid regurgitant jet velocity >2.5 m/sec concerning)
+  - Ophthalmology exam - screen for proliferative sickle retinopathy annually starting age 10
+  - Renal function monitoring - urine protein-to-creatinine ratio, microalbuminuria screening (chronic kidney disease common)
+  - During acute pain crisis - CBC (check for acute anemia drop suggesting sequestration or aplastic crisis), reticulocyte count (should be elevated unless aplastic crisis), CMP (hydration status, renal function), type and screen (in case transfusion needed)
+  - Acute chest syndrome workup - chest X-ray (new infiltrate), pulse oximetry/ABG (hypoxia), blood and sputum cultures, assess for fat embolism
+  - Infection workup - blood cultures, urinalysis and urine culture (asplenia increases infection risk, encapsulated organisms especially Streptococcus pneumoniae, Haemophilus influenzae)
+
+treatment:
+  disease_modifying_therapy:
+    - Hydroxyurea first-line disease-modifying agent for ALL patients with HbSS or HbS-beta-zero-thalassemia
+    - Start 15-20 mg/kg daily, increase by 5 mg/kg every 8-12 weeks to maximum tolerated dose (typically 25-35 mg/kg, max 35 mg/kg)
+    - Mechanism - increases fetal hemoglobin (HbF) which inhibits sickling, reduces WBC and adhesion molecules, decreases vaso-occlusion frequency
+    - Benefits - reduces pain crises by 50%, reduces acute chest syndrome, reduces mortality, may reduce chronic organ damage
+    - Monitor CBC every 2-4 weeks initially, then every 8-12 weeks when stable
+    - Hold if ANC <2000, platelets <80k, hemoglobin drops >2 g/dL from baseline, reticulocytes <80k with anemia
+    - Side effects - myelosuppression (dose-dependent, reversible), requires contraception (teratogenic)
+    - Voxelotor (Oxbryta) - hemoglobin polymerization inhibitor, increases hemoglobin by 1-2 g/dL, reduces hemolysis markers, 1500mg daily
+    - Crizanlizumab (Adakveo) - P-selectin inhibitor, reduces pain crisis frequency by 45%, 5mg/kg IV monthly
+    - L-glutamine - reduces oxidative stress, 5-15 grams PO BID based on weight, reduces pain crises
+    
+  chronic_transfusion_therapy:
+    - Indications - stroke prevention (abnormal TCD), history of stroke (secondary prevention), recurrent severe acute chest syndrome, chronic multi-organ failure
+    - Simple transfusion or exchange transfusion to maintain HbS <30-50%
+    - Goal hemoglobin 9-10 g/dL (avoid hyperviscosity)
+    - Complications - iron overload (requires chelation therapy with deferasirox or deferoxamine), alloimmunization (develop antibodies to donor RBC antigens)
+    - Extended RBC phenotype matching (C, E, Kell antigens) reduces alloimmunization risk
+    
+  acute_pain_crisis_management:
+    - Aggressive analgesia - opioids first-line for severe pain
+    - Morphine 0.1 mg/kg IV q2-4h PRN or hydromorphone 0.015 mg/kg IV q3-4h PRN
+    - Patient-controlled analgesia (PCA) for hospitalized patients - continuous infusion plus patient-activated boluses
+    - NSAIDs as adjunct - ketorolac 15-30mg IV q6h (max 5 days), ibuprofen 10 mg/kg PO q6h
+    - Avoid excessive delays - analgesia within 30 minutes of presentation (quality metric)
+    - Aggressive IV hydration - 1.5x maintenance fluids, oral hydration if able
+    - Avoid over-hydration (risk of acute chest syndrome)
+    - Incentive spirometry every 2 hours while awake (prevents acute chest syndrome)
+    - Oxygen only if hypoxic (SpO2 <92%) - routine oxygen may suppress erythropoiesis
+    - Assess for complications - acute chest syndrome, splenic sequestration, infection
+    
+  acute_chest_syndrome:
+    - Potentially life-threatening, leading cause of death in adults with sickle cell disease
+    - Definition - new infiltrate on chest X-ray plus fever, chest pain, cough, dyspnea, or hypoxia
+    - Aggressive hydration, supplemental oxygen to maintain SpO2 >92%
+    - Broad-spectrum antibiotics - ceftriaxone 1-2g IV daily PLUS azithromycin 500mg IV daily (cover typical and atypical organisms)
+    - Incentive spirometry every 2 hours while awake
+    - Simple transfusion to Hgb 10 g/dL OR exchange transfusion if severe (decreases HbS fraction rapidly)
+    - Exchange transfusion preferred if baseline Hgb >9 g/dL or multi-lobar infiltrates
+    - Bronchodilators if wheezing
+    - ICU admission for severe hypoxia, respiratory distress, or multi-organ failure
+    
+  priapism:
+    - Ischemic priapism (low-flow) is medical emergency
+    - Initial management - hydration, analgesia, oral pseudoephedrine 30-60mg or phenylephrine
+    - Urologic emergency consultation if >4 hours
+    - Aspiration and irrigation of corpora cavernosa
+    - Intracavernous phenylephrine injection
+    - Exchange transfusion if refractory (controversial, risk of neurologic complications)
+    - Preventive strategies for recurrent stuttering priapism - sildenafil, finasteride, GnRH agonists
+    
+  infection_management:
+    - Functional asplenia starting in childhood - increased risk encapsulated organisms
+    - Fever >38.5°C (101.3°F) requires urgent evaluation
+    - Blood cultures, urinalysis and culture, chest X-ray
+    - Empiric broad-spectrum antibiotics immediately - ceftriaxone 1-2g IV (covers S. pneumoniae, H. influenzae)
+    - Add vancomycin if ill-appearing or concern for resistant organisms
+    - Prophylactic penicillin VK 125mg PO BID (children <3 years) or 250mg PO BID (children >3 years, lifelong)
+    - Vaccinations critical - pneumococcal (PCV13, PPSV23), Haemophilus influenzae type B, meningococcal, annual influenza
+    
+  hematopoietic_stem_cell_transplant:
+    - Only curative therapy
+    - Indications - severe disease (frequent pain crises, stroke, recurrent acute chest syndrome), matched sibling donor available
+    - Best outcomes in children <16 years, cure rate 85-95% with matched sibling donor
+    - Risks - graft-versus-host disease, graft failure, mortality 5-10%
+    - Gene therapy emerging (lentiviral gene addition, CRISPR-Cas9 gene editing) - promising results
+
+  chronic_complications_management:
+    - Avascular necrosis (hip, shoulder) - NSAIDs, physical therapy, consider core decompression or joint replacement
+    - Chronic kidney disease - ACE inhibitor or ARB for proteinuria
+    - Pulmonary hypertension - oxygen, consider sildenafil, chronic transfusions, or transplant evaluation
+    - Leg ulcers - wound care, compression if arterial supply adequate, arginine butyrate
+    - Cholelithiasis (pigmented gallstones from chronic hemolysis) - cholecystectomy if symptomatic
+
+clinical_pearls:
+  - Sickle cell trait (HbAS, one sickle gene) usually asymptomatic, does not require treatment, can sickle under extreme hypoxia (high altitude, severe dehydration)
+  - Hydroxyurea recommended for ALL patients with HbSS regardless of severity - even "mild" disease benefits
+  - Higher HbF (fetal hemoglobin) levels correlate with milder disease - HbF inhibits sickling
+  - Alpha-thalassemia trait co-inheritance with sickle cell disease reduces hemolysis and anemia severity but may increase vaso-occlusion
+  - Acute chest syndrome often develops 48-72 hours after pain crisis - vigilant monitoring critical
+  - Never delay pain medication for "objective findings" - pain is subjective, trust patient report, treat promptly
+  - Avoid tourniquets, maintain normothermia (cold triggers sickling), avoid high altitudes
+  - Pregnancy high-risk - increased maternal and fetal complications, requires hematology and maternal-fetal medicine co-management
+  - Aplastic crisis from parvovirus B19 - reticulocyte count drops to <1%, profound anemia, may require transfusion, self-limited (7-10 days)
+  - Acute stroke in children - exchange transfusion emergently, maintain HbS <30% lifelong to prevent recurrence
+  - Pain crisis cannot be distinguished from acute abdominal emergency (appendicitis, cholecystitis) by pain alone - maintain low threshold for imaging
+
+differentials:
+  - Other hemoglobinopathies (HbC disease, beta-thalassemia major)
+  - Hereditary spherocytosis (hemolytic anemia, different smear findings)
+  - G6PD deficiency (episodic hemolysis with triggers)
+  - Autoimmune hemolytic anemia (positive Coombs test)
+  - Bone infarction from other causes (osteomyelitis, septic arthritis, trauma)
+  - Acute abdomen from surgical causes (must rule out in crisis with abdominal pain)
+
+trace: |
+  A 28-year-old African American woman with known HbSS sickle cell disease (diagnosed at birth via newborn screening) presented to ED with 8/10 severe pain in back, chest, and bilateral thighs x 12 hours. Describes pain as "bone-deep aching and stabbing" similar to previous pain crises. Last crisis 4 months ago. Taking hydroxyurea 1500mg daily. No recent illness, denies fever, cough, dyspnea. Exam showed moderate distress from pain, vital signs T 37.2°C, HR 105, BP 118/72, RR 18, SpO2 98% on room air. No focal tenderness to palpation, lungs clear, no hepatosplenomegaly. Labs - CBC shows Hgb 7.8 g/dL (baseline 8.2 g/dL), WBC 13.5k (baseline elevated), platelets 385k, reticulocyte count 8.5% (appropriately elevated for chronic hemolysis), CMP normal except indirect bilirubin 2.8 mg/dL (chronic hemolysis). Chest X-ray clear. Diagnosed with acute vaso-occlusive pain crisis. Started IV normal saline at 150 mL/hr. Given hydromorphone 1mg IV within 20 minutes of arrival, pain decreased to 5/10. Repeat hydromorphone 1mg IV q3h PRN. Started PCA (hydromorphone 0.2mg bolus q10min lockout, 1mg hourly max). Ketorolac 30mg IV q6h as adjunct. Incentive spirometry q2h while awake. Pain controlled to 3-4/10with PCA. At 36 hours developed fever 38.8°C with new cough and chest discomfort. Repeat chest X-ray showed new right lower lobe infiltrate. Diagnosed with acute chest syndrome (common complication during pain crisis). Started ceftriaxone 2g IV daily plus azithromycin 500mg IV daily. Simple transfusion 2 units PRBC (baseline Hgb 8.2, now 7.8, goal 10 g/dL, extended phenotype matched). Post-transfusion Hgb 9.6 g/dL. Oxygen 2L nasal cannula to maintain SpO2 >95%. Over next 48 hours respiratory symptoms improved, infiltrate began resolving, pain crisis resolving. Transitioned to oral oxycodone. Discharged on hospital day 5 on oral oxycodone x 5 days taper, continued hydroxyurea 1500mg daily. Outpatient hematology follow-up in 1 week. Discussed increasing hydroxyurea dose to reduce crisis frequency. At follow-up hydroxyurea increased to 2000mg daily (monitoring CBC). Patient counseled on early presentation for future crises, hydration, avoiding triggers. At 3 months no further crises, Hgb stable 8.5 g/dL, MCV increased (HbF rising), tolerating higher hydroxyurea dose. Continued close hematology follow-up.
+
+citations:
+  - NHLBI Evidence-Based Management of Sickle Cell Disease (2014)
+  - ASH (American Society of Hematology) Guidelines for Sickle Cell Disease
+  - British Committee for Standards in Haematology Guidelines
+  - UpToDate - Hematology

@@ -1,0 +1,110 @@
+tree_id: HEME-NON-HODGKIN-LYMPHOMA
+name: Non-Hodgkin Lymphoma
+family: hematology
+specialty: Hematology / Oncology
+presentations:
+  - Painless lymphadenopathy (persistent >2 weeks)
+  - B symptoms (fever, night sweats, weight loss >10%)
+  - Fatigue and weakness
+  - Extranodal involvement (GI, CNS, skin)
+  - Splenomegaly, hepatomegaly
+  - Superior vena cava syndrome (mediastinal mass)
+  - CNS symptoms if primary CNS lymphoma
+  - Pruritus
+  - Cytopenias (bone marrow involvement)
+icd10:
+  - C85.90 # Non-Hodgkin lymphoma, unspecified
+  - C82.90 # Follicular lymphoma, unspecified
+  - C83.30 # Diffuse large B-cell lymphoma, unspecified
+snomed:
+  - "118600007" # Non-Hodgkin lymphoma
+  - "109979007" # Diffuse large B-cell lymphoma
+  - "277569000" # Follicular lymphoma
+urgency: High
+urgency_explanation: Requires prompt tissue diagnosis and staging; some subtypes are rapidly progressive
+
+referrals:
+  hematology_oncology: For diagnosis, staging, and treatment
+  surgery: For excisional lymph node biopsy
+  radiation_oncology: For consolidation or localized disease
+
+workup:
+  tissue_diagnosis:
+    - Excisional lymph node biopsy (preferred over FNA)
+    - Core needle biopsy acceptable if excisional not feasible
+    - Pathology: architecture, immunohistochemistry, flow cytometry
+    - Molecular studies: FISH, cytogenetics (translocation, gene rearrangements)
+  laboratory:
+    - CBC with differential (cytopenias)
+    - CMP (LDH elevated indicates high tumor burden, renal/liver function)
+    - ESR
+    - Uric acid (tumor lysis risk)
+    - Hepatitis B and C serologies (reactivation risk)
+    - HIV testing (NHL increased in HIV)
+    - Beta-2 microglobulin (prognostic)
+  imaging:
+    - PET-CT for staging (standard)
+    - CT chest/abdomen/pelvis with contrast
+    - MRI brain if CNS symptoms or high-risk subtype
+  bone_marrow_biopsy:
+    - Bilateral iliac crest aspirate and biopsy
+    - Stage involvement and baseline marrow function
+  staging:
+    - Ann Arbor staging system (I-IV)
+    - IPI score (International Prognostic Index) for aggressive NHL
+
+treatment:
+  aggressive_lymphomas_DLBCL:
+    - Limited stage (I-II): R-CHOP x 3-4 cycles + involved-site radiation
+    - Advanced stage (III-IV): R-CHOP x 6 cycles (rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone)
+    - CNS prophylaxis: intrathecal methotrexate if high risk (testicular, paranasal sinus, epidural)
+    - Relapsed/refractory: salvage chemotherapy → autologous stem cell transplant
+    - CAR T-cell therapy for relapsed disease
+  indolent_lymphomas_follicular:
+    - Stage I-II: involved-site radiation therapy (potentially curative)
+    - Advanced stage asymptomatic: watch and wait (no survival benefit from early treatment)
+    - Advanced stage symptomatic: rituximab-based chemotherapy (R-CHOP, bendamustine-rituximab)
+    - Maintenance rituximab after response
+  burkitt_lymphoma:
+    - Intensive chemotherapy (dose-adjusted EPOCH-R or CODOX-M/IVAC)
+    - CNS prophylaxis mandatory
+    - High cure rate with aggressive treatment
+  mantle_cell_lymphoma:
+    - Intensive induction: hyperCVAD or NORDIC regimen
+    - Autologous stem cell transplant consolidation in first remission
+    - Maintenance rituximab
+    - BTK inhibitors (ibrutinib) for relapsed disease
+  supportive_care:
+    - Tumor lysis prophylaxis: allopurinol or rasburicase, hydration
+    - Antimicrobial prophylaxis during chemotherapy
+    - Growth factor support (G-CSF)
+    - Antiemetics
+
+clinical_pearls:
+  - Heterogeneous group of over 60 subtypes classified as aggressive vs indolent
+  - Diffuse large B-cell lymphoma (DLBCL) most common (30%)
+  - Follicular lymphoma most common indolent subtype (20%)
+  - Excisional lymph node biopsy critical for accurate diagnosis and classification
+  - R-CHOP standard for DLBCL with cure rate 60-70%
+  - Indolent lymphomas often watch-and-wait unless symptomatic
+  - PET-CT essential for staging and response assessment
+  - LDH correlates with tumor burden and prognosis
+  - B symptoms indicate more advanced disease
+  - CAR T-cell therapy revolutionary for relapsed DLBCL
+
+differentials:
+  - Hodgkin lymphoma (Reed-Sternberg cells, better prognosis)
+  - Reactive lymphadenopathy (viral, bacterial)
+  - Metastatic carcinoma to lymph nodes
+  - Chronic lymphocytic leukemia (CLL)
+  - Infectious mononucleosis (EBV)
+  - Tuberculosis (scrofula)
+  - Sarcoidosis
+
+trace: |
+  A 55-year-old woman presented with 6 weeks of progressively enlarging painless left neck mass. Also noted 15-pound weight loss and drenching night sweats (B symptoms). Physical exam revealed 4 cm firm, non-tender left cervical lymph node plus multiple smaller nodes bilaterally. Splenomegaly present. Labs: WBC 8.5k, Hgb 11.2 g/dL, platelets 185k, LDH 420 U/L (elevated). CT chest/abdomen/pelvis showed diffuse lymphadenopathy (cervical, mediastinal, retroperitoneal) and splenomegaly. Excisional biopsy of left cervical node performed. Pathology: diffuse large B-cell lymphoma (DLBCL), germinal center B-cell subtype, CD20+. Flow cytometry confirmed B-cell clonality. FISH negative for MYC/BCL2/BCL6 (not double/triple hit). PET-CT showed extensive FDG-avid lymphadenopathy above and below diaphragm with spleen involvement (Stage IV). Bone marrow biopsy negative for lymphoma. IPI score 3 (high-intermediate risk). HIV and hepatitis negative. Diagnosed with advanced stage DLBCL with B symptoms. Started R-CHOP chemotherapy (rituximab 375 mg/m2 + cyclophosphamide, doxorubicin, vincristine, prednisone) every 21 days. Received 6 cycles with G-CSF support. Interim PET-CT after 3 cycles showed excellent metabolic response (Deauville score 2). End-of-treatment PET-CT showed complete metabolic response. At 18-month follow-up, remains in complete remission with surveillance imaging every 6 months.
+
+citations:
+  - NCCN Guidelines for Non-Hodgkin Lymphomas
+  - Lugano Classification of Lymphoid Neoplasms
+  - UpToDate - Hematology and Oncology
