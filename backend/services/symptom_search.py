@@ -18,6 +18,28 @@ import logging
 from functools import lru_cache
 import os
 
+# Import cache service for performance
+try:
+    from backend.services.cache_service import CacheService
+    cache = CacheService()
+    CACHE_AVAILABLE = True
+    logging.info("✅ Cache service initialized")
+except ImportError:
+    logging.warning("Cache service not available - using simple caching")
+    CACHE_AVAILABLE = False
+    cache = None
+
+# Import search index for fast lookups
+try:
+    from backend.services.search_index import SearchIndex
+    search_index = SearchIndex()
+    INDEX_AVAILABLE = True
+    logging.info("✅ Search index initialized")
+except ImportError:
+    logging.warning("Search index not available - using standard search")
+    INDEX_AVAILABLE = False
+    search_index = None
+
 # Import AI tree generator
 try:
     from backend.services.ai_tree_generator import AITreeGenerator
@@ -132,17 +154,29 @@ _cache_time = 0
 
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
-    Load all diagnostic tree YAML files with simple caching.
+    Load all diagnostic tree YAML files with distributed caching.
     
     Supports both old format (rules: array) and new format (individual tree files).
-    Uses simple cache to avoid loading 676 files on every request.
+    Uses Redis cache if available, falls back to in-memory cache.
+    Cache TTL: 1 hour (3600 seconds)
     """
     global _families_cache, _cache_time
     
     import time
     current_time = time.time()
+    
+    # Try distributed cache first (Redis)
+    if CACHE_AVAILABLE and cache:
+        cached_data = cache.get("diagnostic_trees_all_families")
+        if cached_data is not None:
+            logging.debug(f"Using distributed cache ({len(cached_data)} families)")
+            _families_cache = cached_data
+            _cache_time = current_time
+            return cached_data
+    
+    # Try in-memory cache (5 min TTL for in-memory, 1 hour for distributed)
     if _families_cache is not None and (current_time - _cache_time) < 300:
-        logging.debug(f"Using cached families data ({len(_families_cache)} families)")
+        logging.debug(f"Using in-memory cache ({len(_families_cache)} families)")
         return _families_cache
     
     logging.info("Loading diagnostic trees (cache miss or expired)")
@@ -319,8 +353,22 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     
     logging.info(f"Loaded {len(families)} disease families with {total_trees} total diagnostic trees")
     
-    # Update cache (permanent - only loads once per server restart)
+    # Update in-memory cache
     _families_cache = families
+    _cache_time = current_time
+    
+    # Update distributed cache (1 hour TTL)
+    if CACHE_AVAILABLE and cache:
+        cache.set("diagnostic_trees_all_families", families, ttl=3600)
+        logging.info("✅ Diagnostic trees cached in Redis (1 hour TTL)")
+    
+    # Build search index for fast lookups
+    if INDEX_AVAILABLE and search_index:
+        try:
+            search_index.build_index(families)
+            logging.info("✅ Search index built successfully")
+        except Exception as e:
+            logging.warning(f"Failed to build search index: {e}")
     
     return families
 
