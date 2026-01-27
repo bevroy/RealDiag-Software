@@ -17,9 +17,9 @@ RUN apt-get update \
 COPY backend /app/backend
 COPY config.py /app/config.py
 COPY diagnostics /app/diagnostics
+COPY gunicorn.conf.py /app/gunicorn.conf.py
 
 EXPOSE 8000
-	# Use gunicorn with the Uvicorn worker for production. Wrap in a shell so ${PORT} is expanded at runtime
-	# (Render provides $PORT). Fall back to 8000 when not set. Log to stdout/stderr so platform logs capture output.
-	# Using 2 workers for better concurrency (Transaction mode pooler supports high connection count)
-	CMD ["sh", "-c", "exec gunicorn -k uvicorn.workers.UvicornWorker -w 2 backend.main:app --bind 0.0.0.0:${PORT:-8000} --timeout 120 --access-logfile - --error-logfile -"]
+# Use optimized gunicorn configuration for production
+# gunicorn.conf.py sets worker count, threads, preload, and other performance settings
+CMD ["sh", "-c", "exec gunicorn -c gunicorn.conf.py backend.main:app"]

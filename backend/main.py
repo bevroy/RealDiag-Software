@@ -121,6 +121,14 @@ if TEST_ENVIRONMENT_AVAILABLE and is_test_mode():
     app.add_middleware(TestEnvironmentMiddleware)
     logger.info("✅ Test environment middleware enabled")
 
+# Add compression middleware for better performance
+try:
+    from backend.services.compression_middleware import CompressionMiddleware
+    app.add_middleware(CompressionMiddleware, min_size=500, compression_level=6)
+    logger.info("✅ Response compression enabled (gzip)")
+except ImportError:
+    logger.warning("⚠️  Compression middleware not available")
+
 # Add rate limiter to app state if security is enabled
 if SECURITY_ENABLED:
     app.state.limiter = limiter

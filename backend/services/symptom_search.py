@@ -18,6 +18,25 @@ import logging
 from functools import lru_cache
 import os
 
+# Import cache service
+try:
+    from backend.services.cache_service import cache, cache_response
+    CACHE_AVAILABLE = True
+except ImportError:
+    logger.warning("Cache service not available")
+    CACHE_AVAILABLE = False
+    cache = None
+
+# Import search index
+try:
+    from backend.services.search_index import SearchIndex, build_search_index_from_families
+    SEARCH_INDEX_AVAILABLE = True
+except ImportError:
+    logger.warning("Search index not available")
+    SEARCH_INDEX_AVAILABLE = False
+    SearchIndex = None
+    build_search_index_from_families = None
+
 # Import AI tree generator
 try:
     from backend.services.ai_tree_generator import AITreeGenerator
@@ -56,6 +75,9 @@ class SymptomSearchRequest(BaseModel):
     age: Optional[int] = None  # Patient age
     sex: Optional[str] = None
     family: Optional[str] = None  # Optional filter by disease family
+    page: Optional[int] = 1  # Page number for pagination
+    page_size: Optional[int] = 20  # Results per page (max 50)
+    fields: Optional[List[str]] = None  # Field filtering for response
     
     @validator('symptoms')
     def validate_symptoms(cls, v):
@@ -98,6 +120,23 @@ class SymptomSearchRequest(BaseModel):
         if v:
             return InputValidator.sanitize_string(v, max_length=50)
         return v
+    
+    @validator('page')
+    def validate_page(cls, v):
+        """Validate page number"""
+        if v is not None and v < 1:
+            raise ValueError("Page must be >= 1")
+        return v or 1
+    
+    @validator('page_size')
+    def validate_page_size(cls, v):
+        """Validate page size"""
+        if v is not None:
+            if v < 1:
+                raise ValueError("Page size must be >= 1")
+            if v > 50:
+                return 50  # Cap at 50
+        return v or 20
 
 class DiagnosisMatch(BaseModel):
     """Model for a matched diagnosis."""
@@ -117,19 +156,32 @@ class DiagnosisMatch(BaseModel):
     referrals: Optional[List[str]] = None  # Specialist referrals
     has_tree: bool = True  # Whether a decision tree exists
     ai_suggested: bool = False  # Whether suggested by AI (no tree yet)
-
-class SymptomSearchResponse(BaseModel):
-    """Response model for symptom search."""
-    query_symptoms: List[str]
-    total_results: int
-    results: List[DiagnosisMatch]
-
-
-# Helper functions
-# Cache with TTL to prevent stale data but avoid reloading on every request
+extended TTL for better performance
 _families_cache = None
 _cache_time = 0
+CACHE_TTL = 3600  # 1 hour instead of 5 minutes
 
+# Pre-computed search index for faster lookups
+_symptom_index = None model for symptom searcRedis caching.
+    
+    Supports both old format (rules: array) and new format (individual tree files).
+    Uses Redis for distributed caching across server instances, with 1-hour TTL.
+    """
+    global _families_cache, _cache_time
+    
+    # Try Redis cache first
+    if CACHE_AVAILABLE and cache:
+        cached_families = cache.get("diagnostic_trees:all_families")
+        if cached_families:
+            logging.debug(f"Using Redis cached families data ({len(cached_families)} families)")
+            _families_cache = cached_families
+            return cached_families
+    
+    # Fall back to in-memory cache
+    import time
+    current_time = time.time()
+    if _families_cache is not None and (current_time - _cache_time) < CACHE_TTL:
+        logging.debug(f"Using in-memory
 def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
     """
     Load all diagnostic tree YAML files with simple caching.
@@ -306,8 +358,14 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
         for yaml_file in rules_dir.glob("*.yml"):
             family_name = yaml_file.stem
             try:
-                with open(yaml_file, 'r', encoding='utf-8') as f:
-                    data = yaml.safe_load(f)
+             in-memory cache
+    _families_cache = families
+    _cache_time = current_time
+    
+    # Update Redis cache
+    if CACHE_AVAILABLE and cache:
+        cache.set("diagnostic_trees:all_families", families, ttl=CACHE_TTL)
+        logging.info("✅ Cached families in Redis")l.safe_load(f)
                     if data and 'rules' in data:
                         if family_name not in families:
                             families[family_name] = []
