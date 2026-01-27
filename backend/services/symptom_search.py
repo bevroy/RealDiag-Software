@@ -374,8 +374,7 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
 
 
 # Preload families at module import time to avoid timeout on first request
-# Disabled for now - loading 676 files at startup causes deployment issues
-# Data will be loaded and cached on first request instead
+# Data will be loaded and cached on first request to avoid deployment timeouts
 logging.info("Symptom search module loaded - trees will be loaded on first request")
 
 
