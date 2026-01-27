@@ -52,6 +52,25 @@ clinical_pearls:
   - Give beta-blocker BEFORE iodine (to prevent worsening)
   - ICU-level care required; mortality 20-30% even with treatment
 
+treatment:
+  - 'ICU admission required - thyroid storm is life-threatening emergency with 20-30% mortality'
+  - 'Beta-blockade (FIRST): Propranolol 60-80mg PO Q4H OR 0.5-1mg IV Q4H (blocks peripheral conversion T4→T3, controls tachycardia)'
+  - Alternative beta-blockers - esmolol IV infusion (short-acting, titratable), metoprolol, or atenolol
+  - 'If beta-blocker contraindicated: Diltiazem 60-90mg PO Q6H OR 0.25mg/kg IV'
+  - 'Thionamide (SECOND): Propylthiouracil (PTU) preferred - 500-1000mg loading dose, then 250mg Q4H (blocks synthesis AND peripheral conversion)'
+  - 'Alternative thionamide: Methimazole 20mg Q4-6H (if PTU unavailable or contraindicated - pregnancy first trimester)'
+  - 'Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
+  - 'Corticosteroids: Hydrocortisone 100mg IV Q8H OR dexamethasone 2mg Q6H (blocks T4→T3 conversion, treats potential adrenal insufficiency)'
+  - Supportive care - aggressive cooling (acetaminophen 650mg Q4H, cooling blankets), avoid aspirin (displaces thyroid hormone from binding proteins)
+  - IV fluids - patients often volume depleted from fever, vomiting, diarrhea (2-3L NS in first 24 hours)
+  - Treat precipitating cause - antibiotics for infection, control DKA, treat MI
+  - Consider cholestyramine 4g Q6H - binds thyroid hormone in gut, enhances elimination
+  - Plasmapheresis or dialysis for refractory cases unresponsive to medical therapy
+  - Monitor for complications - heart failure, arrhythmias (especially atrial fibrillation), hepatic dysfunction
+  - 'DO NOT use aspirin for fever (increases free thyroid hormone)'
+  - Transition to oral therapy once stable - continue thionamide, reduce beta-blocker, taper steroids
+  - Definitive therapy after stabilization - radioactive iodine ablation or thyroidectomy to prevent recurrence
+
 nodes:
   - id: severity
     type: question
