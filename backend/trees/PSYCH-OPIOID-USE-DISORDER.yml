@@ -1,0 +1,106 @@
+tree_id: PSYCH-OPIOID-USE-DISORDER
+name: Opioid Use Disorder
+family: Psychiatry
+specialty: Psychiatry, Addiction Medicine
+chief_complaint: Opioid dependence, miosis, drowsiness
+description: Problematic pattern of opioid use leading to clinically significant impairment or distress
+
+icd10: F11.20
+snomed: ["191816009"]
+
+urgency: high
+
+presentations:
+- Miosis and drowsiness
+- Pinpoint pupils and drowsiness
+- Drowsiness with constricted pupils
+- Chronic miosis from opioid use
+- Using opioids more or longer than intended
+- Unsuccessful attempts to cut down opioid use
+- Spending much time obtaining or recovering from opioids
+- Craving or strong urge to use opioids
+- Opioid use interfering with work school or home responsibilities
+- Continued opioid use despite social or relationship problems
+- Giving up activities due to opioid use
+- Using opioids in hazardous situations
+- Continued use despite physical or psychological problems caused by opioids
+- Tolerance needing more opioids for same effect
+- Withdrawal symptoms when stopping (sweating, nausea, diarrhea, muscle aches, dilated pupils, anxiety)
+- Track marks or injection sites
+- Heroin use
+- Prescription opioid misuse (taking more than prescribed, using without prescription)
+- Doctor shopping for opioid prescriptions
+- Fentanyl use
+- Nodding off or sedation during day
+- Constipation from chronic opioid use
+- Social isolation or secretive behavior
+- Financial problems from drug costs
+- Legal problems related to opioid use
+
+differentials:
+  - Opioid intoxication/overdose
+  - Other substance use disorders
+  - Depression with self-medication
+  - Chronic pain syndrome
+  - Benzodiazepine use disorder
+
+workup:
+  - Urine drug screen (UDS) - detects opioids, distinguish prescribed vs illicit use
+  - Comprehensive metabolic panel (CMP) - assess liver/kidney function
+  - HIV, Hepatitis B and C testing - high risk from IV drug use
+  - Pregnancy test in women of childbearing age - affects treatment options
+  - Screen for co-occurring psychiatric disorders (depression, anxiety, PTSD, bipolar)
+  - Assess severity using DSM-5 criteria - mild (2-3 symptoms), moderate (4-5 symptoms), severe (≥6 symptoms)
+  - Assess readiness for treatment (motivational interviewing, stages of change)
+  - Evaluate social support, housing stability, employment
+  - Screen for infectious complications - endocarditis, cellulitis, abscesses from IV use
+  - ECG if considering methadone (QT prolongation risk)
+
+treatment:
+  - Medication for Opioid Use Disorder (MOUD) - first-line, most effective treatment
+  - Buprenorphine/naloxone (Suboxone) 8-16mg sublingual daily - partial agonist, lower overdose risk, office-based (preferred first-line)
+  - Methadone 30-120mg daily - full agonist, requires specialized clinic, higher efficacy for severe dependence
+  - Naltrexone 380mg IM monthly (Vivitrol) - antagonist, requires 7-10 days opioid-free, prevents relapse
+  - Behavioral therapy - cognitive behavioral therapy (CBT), contingency management, motivational enhancement
+  - Treat withdrawal if present - clonidine 0.1-0.2mg q6h, ondansetron, loperamide, NSAIDs (symptomatic only, not definitive treatment)
+  - Address co-occurring psychiatric disorders - antidepressants, mood stabilizers as indicated
+  - Harm reduction - naloxone (Narcan) prescription for overdose reversal, fentanyl test strips, clean needle exchange
+  - Psychosocial support - case management, housing assistance, vocational rehabilitation
+  - Mutual support groups - Narcotics Anonymous (NA), SMART Recovery, medication-assisted recovery groups
+  - Long-term maintenance - indefinite MOUD recommended, not time-limited detox
+  - Treat medical complications - infectious disease consultation if HIV/HCV, wound care for abscesses
+
+clinical_pearls:
+  - Medication for Opioid Use Disorder (MOUD) reduces mortality by 50%, most effective treatment
+  - Buprenorphine preferred first-line - can be prescribed in office, lower abuse potential than methadone
+  - NEVER require detox before starting MOUD - "abstinence-first" approach increases overdose risk
+  - Naloxone co-prescription essential - all patients on opioids should have naloxone available
+  - Fentanyl contamination - most street "heroin" now contains fentanyl (50-100x more potent)
+  - Miosis (pinpoint pupils) classic sign of opioid intoxication, persists with chronic use
+  - Withdrawal uncomfortable but not life-threatening (unlike alcohol/benzodiazepine withdrawal)
+  - Pregnancy - continue MOUD (buprenorphine or methadone), DO NOT detox (risks fetal demise)
+  - Relapse is part of recovery - return to MOUD after relapse, do not discharge from treatment
+  - IV drug use - screen for endocarditis (new murmur, fever, embolic phenomena)
+  - QT prolongation - methadone can prolong QT, get baseline ECG especially if dose >100mg
+  - Medication diversion - buprenorphine/naloxone combo (Suboxone) reduces diversion vs buprenorphine alone
+
+referrals:
+  - Addiction medicine or psychiatry for MOUD initiation and management
+  - Opioid Treatment Program (OTP) for methadone (requires DEA-licensed facility)
+  - Intensive outpatient program (IOP) or residential treatment for complex cases
+  - Emergency department if overdose, severe withdrawal, or medical complications
+  - Infectious disease if HIV, Hepatitis C, or endocarditis
+  - Case management for housing, employment, social services
+
+citations:
+  - American Society of Addiction Medicine (ASAM) National Practice Guideline
+  - SAMHSA Treatment Improvement Protocol (TIP) 63 - Medications for Opioid Use Disorder
+  - CDC Clinical Practice Guideline for Prescribing Opioids
+  - American Psychiatric Association (APA) - DSM-5-TR Diagnostic Criteria
+
+version: "1.0"
+author: RealDiag Clinical Team
+trace:
+  source: ASAM National Practice Guideline, SAMHSA TIP 63, CDC Guidelines
+  version: 1.0.0
+  last_updated: "2026-01-27"
