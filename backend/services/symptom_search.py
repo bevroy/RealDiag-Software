@@ -536,9 +536,10 @@ def calculate_match_score_optimized(normalized_symptoms: List[str], original_sym
         if presentation_matched:
             matched.append(string_presentations[presentation_idx])  # Keep original case
     
-    # Normalize score by number of presentations
-    if string_presentations:
-        score = score / len(string_presentations)
+    # REMOVED: Normalization by presentation count - this penalized comprehensive diagnoses
+    # OLD: score = score / len(string_presentations)
+    # NEW: Keep raw score to reward actual symptom matches
+    # Diagnoses with more matching presentations should rank higher
     
     # Apply clinical likelihood modifier
     if rule and 'sensitivity' in rule and rule['sensitivity'] is not None:
@@ -611,9 +612,11 @@ def calculate_match_score(symptom_input: List[str], presentations: List[str], ru
         if presentation_matched:
             matched.append(string_presentations[presentation_idx])  # Keep original case
     
-    # Normalize score by number of presentations (avoid bias toward diagnoses with many presentations)
-    if string_presentations:
-        score = score / len(string_presentations)
+    # REMOVED: Normalization by presentation count - this penalized comprehensive diagnoses
+    # OLD: score = score / len(string_presentations)
+    # NEW: Keep raw score to reward actual symptom matches
+    # A diagnosis matching 3 patient symptoms should rank higher than one matching 1 symptom
+    # regardless of how many total presentations each diagnosis has in the database
     
     # Apply clinical likelihood modifier based on sensitivity/specificity if available
     if rule and 'sensitivity' in rule and rule['sensitivity'] is not None:
