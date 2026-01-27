@@ -132,9 +132,6 @@ class RulesEngine:
                 if rule.get("id") == rule_id:
                     return {
                         "family": fam,
-                        "id": rule.get("id"),
-                        "label": rule.get("label"),
-                        "presentations": rule.get("presentations", []),
-                        "icd10": rule.get("icd10", [])
+                        **rule  # Return all rule fields
                     }
         return {"error": f"rule '{rule_id}' not found"}
