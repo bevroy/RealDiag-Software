@@ -13,13 +13,6 @@ databases:
     region: ohio
     ipAllowList: []  # Only accessible from Render services
 
-  # Redis Cache for Performance Optimization
-  - name: realdiag-redis
-    type: redis
-    plan: free  # 25MB free tier (sufficient for caching)
-    ipAllowList: []  # Only accessible from Render services
-    maxmemoryPolicy: allkeys-lru  # Evict least recently used keys when full
-
 services:
 
   # Backend Web Service
@@ -44,10 +37,10 @@ services:
         fromDatabase:
           name: realdiag-database
           property: connectionString
-      - key: REDIS_URL
-        fromDatabase:
-          name: realdiag-redis
-          property: connectionString
+      # Redis URL - Add manually in Render dashboard if using external Redis
+      # The app will use in-memory caching if REDIS_URL is not set
+      # - key: REDIS_URL
+      #   value: redis://your-redis-url:6379
       - key: WEB_CONCURRENCY
         value: 4  # Number of Gunicorn workers (auto-calculated if not set)
       - key: FHIR_BASE_URL
