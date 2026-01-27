@@ -1,0 +1,95 @@
+tree_id: PSYCH-ALCOHOL-USE-DISORDER
+name: Alcohol Use Disorder
+family: Psychiatry
+specialty: Psychiatry, Addiction Medicine
+chief_complaint: Alcohol dependence, tremor, blackouts
+description: Problematic pattern of alcohol use leading to clinically significant impairment or distress
+
+icd10: F10.20
+snomed: ["7200002"]
+
+urgency: medium
+
+presentations:
+- Tremor and blackouts
+- Blackouts and tremor
+- Memory blackouts from drinking
+- Alcohol-related tremor
+- Drinking more or longer than intended
+- Unsuccessful attempts to cut down drinking
+- Spending much time obtaining or recovering from alcohol
+- Craving or strong urge to drink
+- Alcohol interfering with work, school, or home responsibilities
+- Continued drinking despite social or relationship problems
+- Giving up activities due to alcohol use
+- Drinking in hazardous situations (driving, operating machinery)
+- Continued drinking despite physical or psychological problems
+- Tolerance (needing more alcohol for same effect)
+- Withdrawal symptoms when stopping (tremor, sweating, anxiety, seizures)
+- History of blackouts (amnesia for events while drinking)
+- Family history of alcohol problems
+- Daily or binge drinking pattern
+- Morning drinking to avoid withdrawal
+- Failed attempts at abstinence
+
+differentials:
+  - Alcohol withdrawal syndrome
+  - Depression with alcohol misuse
+  - Anxiety disorder with self-medication
+  - Bipolar disorder
+  - Other substance use disorders
+
+workup:
+  - CAGE questionnaire (Cut down, Annoyed, Guilty, Eye-opener) - score ≥2 suggests problem drinking
+  - AUDIT (Alcohol Use Disorders Identification Test) - score ≥8 indicates hazardous drinking
+  - Complete blood count (CBC) - macrocytosis (elevated MCV) suggests chronic alcohol use
+  - Liver function tests (ALT, AST, GGT) - AST:ALT ratio >2:1 suggests alcoholic liver disease, elevated GGT
+  - Blood alcohol level if acute intoxication suspected
+  - Assess for complications - liver disease, pancreatitis, neuropathy, cardiomyopathy
+  - Screen for co-occurring psychiatric disorders (depression, anxiety, PTSD)
+  - Assess social support and readiness for change (motivational interviewing)
+  - DSM-5 criteria - mild (2-3 symptoms), moderate (4-5 symptoms), severe (≥6 symptoms) over 12 months
+
+treatment:
+  - Psychosocial interventions (first-line) - motivational enhancement, cognitive behavioral therapy (CBT), 12-step facilitation
+  - Medication for alcohol use disorder - naltrexone 50 mg daily (reduces craving, blocks euphoria), acamprosate 666 mg TID (reduces cravings), or disulfiram 250 mg daily (aversion therapy)
+  - Thiamine supplementation - 100 mg daily PO or 100 mg IV (prevent Wernicke encephalopathy in malnourished patients)
+  - Manage withdrawal if present - benzodiazepines (CIWA protocol), supportive care
+  - Treat co-occurring psychiatric disorders - antidepressants if depression, anxiolytics if severe anxiety (avoid benzodiazepines long-term)
+  - Referral to addiction medicine or psychiatry for complex cases
+  - Consider intensive outpatient program (IOP), partial hospitalization (PHP), or inpatient rehabilitation
+  - Mutual support groups - Alcoholics Anonymous (AA), SMART Recovery, Refuge Recovery
+  - Address medical complications - hepatology if liver disease, cardiology if cardiomyopathy
+  - Long-term follow-up and relapse prevention planning
+
+clinical_pearls:
+  - Alcohol use disorder affects 10-15% of US population, higher in men
+  - Blackouts indicate high blood alcohol levels causing anterograde amnesia (inability to form new memories)
+  - Tremor suggests physical dependence and risk of withdrawal seizures if alcohol stopped abruptly
+  - Never stop alcohol abruptly in dependent patients - risk of life-threatening withdrawal (seizures, delirium tremens)
+  - Thiamine before glucose in suspected alcoholics to prevent precipitating Wernicke encephalopathy
+  - AST:ALT >2:1 with both elevated suggests alcoholic hepatitis
+  - Naltrexone most effective for reducing heavy drinking days and cravings
+  - Acamprosate most effective for maintaining abstinence after detox
+  - Combination of medication + psychotherapy more effective than either alone
+  - Screen all adults for unhealthy alcohol use (USPSTF Grade B recommendation)
+
+referrals:
+  - Addiction medicine or psychiatry for medication management and complex cases
+  - Intensive outpatient program (IOP) or inpatient rehabilitation for moderate-severe use disorder
+  - Emergency department if severe withdrawal symptoms (seizures, confusion, hallucinations)
+  - Hepatology if signs of liver disease (cirrhosis, ascites, jaundice)
+  - Social work for housing, employment, family support resources
+
+citations:
+  - American Psychiatric Association (APA) - DSM-5-TR Diagnostic Criteria
+  - American Society of Addiction Medicine (ASAM) Guidelines
+  - USPSTF Screening and Behavioral Counseling for Alcohol Misuse
+  - SAMHSA Treatment Improvement Protocol (TIP) 63
+
+version: "1.0"
+author: RealDiag Clinical Team
+trace:
+  source: APA DSM-5-TR, ASAM Clinical Practice Guidelines, USPSTF
+  version: 1.0.0
+  last_updated: "2026-01-27"
