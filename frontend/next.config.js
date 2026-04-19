@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isNetlifyBuild = process.env.NETLIFY === 'true'
+
 const nextConfig = {
   reactStrictMode: true,
-  // output: 'export',  // Disabled for dev server - enable for static export
+  ...(isNetlifyBuild ? { output: 'export' } : {}),
   distDir: 'out',
   trailingSlash: true,
   images: {
