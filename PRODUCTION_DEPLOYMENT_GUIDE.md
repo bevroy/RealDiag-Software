@@ -83,6 +83,22 @@ Last Updated: November 20, 2025
      ```
    - Check Sentry dashboard for the error event
 
+4. **Custom Domain 404 Quick Check (Netlify):**
+    - Confirm `netlify.toml` uses `publish = "frontend/out"`.
+    - Confirm `frontend/next.config.js` enables export for Netlify builds (`process.env.NETLIFY === 'true'`).
+    - Verify local Netlify-style build output:
+       ```bash
+       cd frontend
+       NETLIFY=true npm run build
+       test -f out/index.html && echo "OK: out/index.html exists"
+       ```
+    - Validate domain routing headers:
+       ```bash
+       curl -I -L https://realdiag.com
+       ```
+       Expected: `301` to `https://www.realdiag.com/` and final `200` from Netlify.
+    - In Netlify domain settings, ensure both apex and `www` are attached to the same site and one is marked primary.
+
 ---
 
 ## 2. 🔒 Security Headers Configuration

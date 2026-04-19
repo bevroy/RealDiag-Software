@@ -58,6 +58,11 @@ jobs:
         run: |
           cd frontend
           npm run build
+      - name: Verify Netlify static export output
+        run: |
+          cd frontend
+          NETLIFY=true npm run build
+          test -f out/index.html
 
   publish:
     name: Publish containers
@@ -151,6 +156,11 @@ jobs:
         run: |
           cd frontend
           npm run build
+      - name: Verify Netlify static export output
+        run: |
+          cd frontend
+          NETLIFY=true npm run build
+          test -f out/index.html
 
   cross-region-verify:
     name: Cross-region GHCR pull verification
