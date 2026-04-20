@@ -4,12 +4,14 @@ from typing import Callable
 
 from backend.schemas.diagnostic import AnalyzeRequest, AnalyzeResponse
 from backend.services.domains.cardiovascular import analyze_cardiovascular_case
+from backend.services.domains.first_seizure import evaluate_first_seizure
 from backend.services.domains.neurology import analyze_neurology_case
 from backend.services.utils.common import build_default_response, normalize_request
 
 DomainAnalyzer = Callable[[AnalyzeRequest], AnalyzeResponse | None]
 
 DOMAIN_ANALYZERS: list[DomainAnalyzer] = [
+    evaluate_first_seizure,
     analyze_cardiovascular_case,
     analyze_neurology_case,
 ]
