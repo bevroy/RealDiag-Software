@@ -1,3 +1,5 @@
+import '../styles/globals.css'
+
 export const metadata = {
   title: 'RealDiag - Clinical Decision Support',
   description: 'Real-time diagnostic decision support system with Epic/EHR integration',
