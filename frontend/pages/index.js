@@ -53,27 +53,10 @@ export default function Home() {
             src="/logo.png"
             alt="RealDiag Logo"
             style={{
-              maxHeight: '120px',
-              width: 'auto',
-              marginBottom: '0.75rem'
+              maxHeight: '240px',
+              width: 'auto'
             }}
           />
-          <h1 style={{
-            margin: 0,
-            fontSize: '2rem',
-            color: '#0f766e',
-            fontWeight: '700',
-            letterSpacing: '-0.01em'
-          }}>
-            RealDiag
-          </h1>
-          <p style={{
-            margin: '0.5rem 0 0',
-            color: '#64748b',
-            fontSize: '1rem'
-          }}>
-            Clinical Decision Support
-          </p>
         </div>
 
         {/* Demo Section */}
