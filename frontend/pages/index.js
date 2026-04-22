@@ -44,58 +44,51 @@ export default function Home() {
 
       {/* Main Content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Demo Video Section */}
+        {/* Demo Section */}
         <div style={{
           background: 'white',
-          padding: '2rem',
+          padding: '3rem 2rem',
           borderRadius: '16px',
           boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
           marginBottom: '3rem',
-          border: '1px solid rgba(20, 184, 166, 0.1)'
+          border: '1px solid rgba(20, 184, 166, 0.1)',
+          textAlign: 'center'
         }}>
-          <h2 style={{ 
-            margin: '0 0 1.5rem', 
-            fontSize: '1.75rem', 
+          <h2 style={{
+            margin: '0 0 1rem',
+            fontSize: '1.75rem',
             color: '#0f766e',
-            fontWeight: '600',
-            textAlign: 'center'
+            fontWeight: '600'
           }}>
-            🎥 Watch Demo
+            🎬 See RealDiag in Action
           </h2>
-          <div style={{
-            maxWidth: '900px',
-            margin: '0 auto',
-            position: 'relative',
-            paddingBottom: '56.25%', // 16:9 aspect ratio
-            height: 0,
-            overflow: 'hidden',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-          }}>
-            <video 
-              controls 
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                borderRadius: '12px'
-              }}
-              poster="/logo.png"
-            >
-              <source src="/RealDiag_Demo_v2.mp4?v=20251216" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
           <p style={{
-            margin: '1rem 0 0',
-            textAlign: 'center',
+            margin: '0 0 2rem',
             color: '#64748b',
-            fontSize: '0.95rem'
+            fontSize: '1.05rem',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            lineHeight: '1.6'
           }}>
-            See RealDiag in action - learn how to use our diagnostic assistant
+            Walk through an interactive clinical scenario showing how RealDiag generates a ranked differential, recommends workup, and flags red flags in real time.
           </p>
+          <Link href="/demo">
+            <a style={{
+              display: 'inline-block',
+              padding: '1rem 2.5rem',
+              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+              color: 'white',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              boxShadow: '0 4px 12px rgba(20, 184, 166, 0.25)',
+              transition: 'all 0.3s'
+            }}>
+              ▶ Launch Interactive Demo
+            </a>
+          </Link>
         </div>
 
         {/* Call to Action */}
