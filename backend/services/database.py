@@ -147,6 +147,8 @@ if DATABASE_AVAILABLE and Base is not None:
         email_verified = Column(Boolean, default=False)
         email_verification_token = Column(String(255), nullable=True)
         email_verification_sent_at = Column(DateTime, nullable=True)
+        password_reset_token = Column(String(255), nullable=True)
+        password_reset_sent_at = Column(DateTime, nullable=True)
         created_at = Column(DateTime, default=datetime.utcnow)
         last_login = Column(DateTime, nullable=True)
         search_count = Column(Integer, default=0)
@@ -345,10 +347,39 @@ def init_database():
         # Create all tables
         Base.metadata.create_all(bind=engine)
         logger.info("✅ Database tables created successfully")
+        # Apply lightweight column migrations for tables that already exist
+        _ensure_user_columns()
         return True
     except Exception as e:
         logger.error(f"❌ Failed to initialize database: {e}")
         raise
+
+
+def _ensure_user_columns():
+    """
+    Idempotently add columns to the users table that may be missing on
+    pre-existing databases (no formal migration tool is in use).
+    Safe to run on every startup.
+    """
+    if not DATABASE_AVAILABLE:
+        return
+    try:
+        from sqlalchemy import inspect, text
+        inspector = inspect(engine)
+        if "users" not in inspector.get_table_names():
+            return
+        existing = {col["name"] for col in inspector.get_columns("users")}
+        wanted = {
+            "password_reset_token": "VARCHAR(255)",
+            "password_reset_sent_at": "TIMESTAMP",
+        }
+        with engine.begin() as conn:
+            for name, col_type in wanted.items():
+                if name not in existing:
+                    conn.execute(text(f'ALTER TABLE users ADD COLUMN {name} {col_type}'))
+                    logger.info(f"✅ Added column users.{name}")
+    except Exception as e:
+        logger.warning(f"Column auto-migration skipped: {e}")
 
 
 def drop_all_tables():

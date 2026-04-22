@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
 import { getStoredUser, isStoredAuthenticated, clearStoredAuth } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
@@ -373,6 +374,11 @@ export default function AccountPage() {
                 >
                   {loading ? 'Signing In...' : 'Sign In'}
                 </button>
+                <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+                  <Link href="/forgot-password" style={{ color: '#0f766e', textDecoration: 'none', fontWeight: 600 }}>
+                    Forgot your password?
+                  </Link>
+                </p>
               </form>
             </div>
           )}

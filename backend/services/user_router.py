@@ -287,6 +287,109 @@ async def resend_verification_email(email: EmailStr):
             "message": "Verification email sent. Please check your inbox."
         }
 
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+
+
+@router.post("/forgot-password")
+@limiter.limit("5/15minutes")
+async def forgot_password(request: Request, body: ForgotPasswordRequest):
+    """
+    Request a password reset link by email.
+    Always returns a success message regardless of whether the email exists,
+    to prevent account enumeration.
+    Rate limit: 5 attempts per 15 minutes per IP.
+    """
+    generic_response = {
+        "message": "If an account exists for that email, a password reset link has been sent."
+    }
+
+    if not DATABASE_AVAILABLE:
+        # Don't leak that the database is down to the caller
+        logger.warning("Password reset requested but database is unavailable")
+        return generic_response
+
+    from backend.services.email_service import (
+        generate_verification_token,
+        send_password_reset_email,
+    )
+
+    try:
+        with get_db_session() as db:
+            user = db.query(User).filter_by(email=body.email).first()
+            if user is None or not getattr(user, "is_active", True):
+                return generic_response
+
+            token = generate_verification_token()
+            user.password_reset_token = token
+            user.password_reset_sent_at = datetime.utcnow()
+            db.flush()
+
+            send_password_reset_email(user.email, token, user.full_name)
+    except Exception as e:
+        logger.error(f"forgot_password error for {body.email}: {e}")
+
+    return generic_response
+
+
+@router.post("/reset-password")
+@limiter.limit("10/15minutes")
+async def reset_password(request: Request, body: ResetPasswordRequest):
+    """
+    Reset password using the token sent to the user's email.
+    Rate limit: 10 attempts per 15 minutes per IP.
+    """
+    if not DATABASE_AVAILABLE:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database not available"
+        )
+
+    if not body.new_password or len(body.new_password) < 8:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password must be at least 8 characters."
+        )
+
+    from backend.services.auth_service import hash_password
+
+    with get_db_session() as db:
+        user = db.query(User).filter_by(password_reset_token=body.token).first()
+        if user is None:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid or expired reset token."
+            )
+
+        if is_token_expired(user.password_reset_sent_at):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Reset link has expired. Please request a new one."
+            )
+
+        user.hashed_password = hash_password(body.new_password)
+        user.password_reset_token = None
+        user.password_reset_sent_at = None
+        db.flush()
+
+        # Keep the in-memory mirror in sync so existing code paths see the new hash
+        try:
+            if user.user_id in users_db:
+                users_db[user.user_id]["password_hash"] = user.hashed_password
+        except Exception:
+            pass
+
+        return {
+            "message": "Password updated successfully. You can now sign in with your new password."
+        }
+
+
 @router.get("/me", response_model=UserProfile)
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
