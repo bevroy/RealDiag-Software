@@ -1,9 +1,27 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 
-export default function VerifyEmail() {
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      }}>
+        <div style={{ color: 'white', fontSize: '18px' }}>Loading...</div>
+      </div>
+    }>
+      <VerifyEmail />
+    </Suspense>
+  )
+}
+
+function VerifyEmail() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [status, setStatus] = useState('verifying') // verifying, success, error

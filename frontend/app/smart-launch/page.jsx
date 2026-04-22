@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 /**
@@ -13,7 +13,22 @@ import { useSearchParams } from 'next/navigation';
  * 2. Component fetches patient data and evaluations
  * 3. Displays interactive diagnostic view with actual patient data
  */
-export default function SmartLaunch() {
+export default function SmartLaunchPage() {
+  return (
+    <Suspense fallback={
+      <div style={styles.container}>
+        <div style={styles.loadingContainer}>
+          <div style={styles.spinner}></div>
+          <p style={styles.loadingText}>Loading...</p>
+        </div>
+      </div>
+    }>
+      <SmartLaunch />
+    </Suspense>
+  );
+}
+
+function SmartLaunch() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
