@@ -1,16 +1,107 @@
-/* Minimal global styles for the Next.js frontend */
+/* Global styles for the Next.js frontend
+   Brand palette aligned with realdiag.org (teal + slate) and
+   typography aligned with elionyx.com (Poppins). */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,body,#__next{
+:root{
+  /* Brand — teal, mirrors realdiag.org's "teal-700" accent */
+  --rd-brand-50:  #f0fdfa;
+  --rd-brand-100: #ccfbf1;
+  --rd-brand-200: #99f6e4;
+  --rd-brand-400: #2dd4bf;
+  --rd-brand-500: #14b8a6;
+  --rd-brand-600: #0d9488;
+  --rd-brand-700: #0f766e;
+  --rd-brand-800: #115e59;
+  --rd-brand-900: #134e4a;
+
+  /* Neutrals — slate, mirrors realdiag.org's "slate-*" palette */
+  --rd-ink-50:  #f8fafc;
+  --rd-ink-100: #f1f5f9;
+  --rd-ink-200: #e2e8f0;
+  --rd-ink-300: #cbd5e1;
+  --rd-ink-400: #94a3b8;
+  --rd-ink-500: #64748b;
+  --rd-ink-600: #475569;
+  --rd-ink-700: #334155;
+  --rd-ink-800: #1e293b;
+  --rd-ink-900: #0f172a;
+
+  /* Surfaces & accents */
+  --rd-surface:        #ffffff;
+  --rd-surface-muted:  #f8fafc;
+  --rd-page-bg:        linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 50%, #f8fafc 100%);
+  --rd-cta-gradient:   linear-gradient(135deg, var(--rd-brand-500) 0%, var(--rd-brand-700) 100%);
+  --rd-hero-gradient:  linear-gradient(135deg, var(--rd-ink-900) 0%, var(--rd-brand-700) 100%);
+
+  /* Effects */
+  --rd-shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.08);
+  --rd-shadow-md:  0 4px 12px rgba(15, 118, 110, 0.18);
+  --rd-shadow-lg:  0 10px 30px rgba(15, 23, 42, 0.10);
+  --rd-radius-sm:  10px;
+  --rd-radius-md:  16px;
+  --rd-radius-lg:  24px;   /* matches realdiag.org rounded-3xl cards */
+  --rd-radius-pill: 9999px;
+
+  /* Typography */
+  --rd-font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto,
+                  'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body, #__next{
   height: 100%;
   margin: 0;
 }
+
 body{
-  font-family: system-ui, -apple-system, Roboto, Arial, sans-serif;
-  background: #fff;
-  color: #111;
+  font-family: var(--rd-font-sans);
+  background: var(--rd-surface);
+  color: var(--rd-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-pre{white-space: pre-wrap;}
+h1, h2, h3, h4, h5, h6{
+  font-family: var(--rd-font-sans);
+  color: var(--rd-ink-900);
+  letter-spacing: -0.01em;
+}
+
+a{ color: var(--rd-brand-700); }
+a:hover{ color: var(--rd-brand-800); }
+
+pre{ white-space: pre-wrap; }
+
+/* Reusable brand primitives (opt-in) */
+.rd-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-family: var(--rd-font-sans);
+  border-radius: var(--rd-radius-pill);
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.rd-btn-primary{
+  background: var(--rd-cta-gradient);
+  color: #fff;
+  box-shadow: var(--rd-shadow-md);
+}
+.rd-btn-primary:hover{ transform: translateY(-1px); opacity: .95; }
+.rd-btn-dark{
+  background: var(--rd-hero-gradient);
+  color: #fff;
+}
+.rd-card{
+  background: var(--rd-surface);
+  border: 1px solid var(--rd-ink-200);
+  border-radius: var(--rd-radius-lg);
+  box-shadow: var(--rd-shadow-lg);
+}

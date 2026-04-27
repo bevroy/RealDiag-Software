@@ -36,8 +36,10 @@ export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
-      padding: '2rem'
+      background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 50%, #f8fafc 100%)',
+      padding: '2rem',
+      fontFamily: "'Poppins', system-ui, -apple-system, sans-serif",
+      color: '#0f172a'
     }}>
       {/* Navigation Dropdown */}
       <RoleBasedNavigation />
@@ -63,10 +65,10 @@ export default function Home() {
         <div style={{
           background: 'white',
           padding: '3rem 2rem',
-          borderRadius: '16px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          borderRadius: '24px',
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
           marginBottom: '3rem',
-          border: '1px solid rgba(20, 184, 166, 0.1)',
+          border: '1px solid #e2e8f0',
           textAlign: 'center'
         }}>
           <h2 style={{
@@ -92,13 +94,13 @@ export default function Home() {
             <a style={{
               display: 'inline-block',
               padding: '1rem 2.5rem',
-              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+              background: 'linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)',
               color: 'white',
-              borderRadius: '10px',
+              borderRadius: '9999px',
               textDecoration: 'none',
               fontSize: '1.1rem',
               fontWeight: '600',
-              boxShadow: '0 4px 12px rgba(20, 184, 166, 0.25)',
+              boxShadow: '0 4px 12px rgba(15, 118, 110, 0.25)',
               transition: 'all 0.3s'
             }}>
               ▶ Launch Interactive Demo
@@ -110,11 +112,11 @@ export default function Home() {
         <div style={{
           background: 'white',
           padding: '3rem 2rem',
-          borderRadius: '16px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          borderRadius: '24px',
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
           marginBottom: '3rem',
           textAlign: 'center',
-          border: '1px solid rgba(20, 184, 166, 0.1)'
+          border: '1px solid #e2e8f0'
         }}>
           <h2 style={{ 
             margin: '0 0 1rem', 
@@ -139,13 +141,13 @@ export default function Home() {
             <a style={{
               display: 'inline-block',
               padding: '1rem 2.5rem',
-              background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+              background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
               color: 'white',
-              borderRadius: '10px',
+              borderRadius: '9999px',
               textDecoration: 'none',
               fontSize: '1.1rem',
               fontWeight: '600',
-              boxShadow: '0 4px 12px rgba(20, 184, 166, 0.25)',
+              boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)',
               transition: 'all 0.3s'
             }}>
               🔍 Search Symptoms
@@ -157,8 +159,8 @@ export default function Home() {
         <div style={{
           background: 'white',
           padding: '2rem 2.5rem',
-          borderRadius: '12px',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          borderRadius: '24px',
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
           border: '1px solid #e2e8f0',
           marginBottom: '3rem'
         }}>
@@ -215,15 +217,14 @@ export default function Home() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{
           margin: '0 0 2rem',
-          padding: '1rem 1.5rem',
-          background: 'linear-gradient(135deg, #0f766e 0%, #0d9488 100%)',
-          borderRadius: '10px',
+          padding: '1.25rem 1.75rem',
+          background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
+          borderRadius: '24px',
           color: 'white',
           textAlign: 'center',
-          boxShadow: '0 2px 8px rgba(15, 118, 110, 0.2)',
-          border: '1px solid rgba(204, 251, 241, 0.3)'
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.18)'
         }}>
-          <strong style={{ fontSize: '0.95rem' }}>⚠️ MEDICAL DISCLAIMER: NOT FOR CLINICAL USE</strong>
+          <strong style={{ fontSize: '0.95rem', letterSpacing: '0.02em' }}>⚠️ MEDICAL DISCLAIMER: NOT FOR CLINICAL USE</strong>
           <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.95 }}>
             Educational purposes only. Not FDA-approved. Not a substitute for professional medical judgment.
             See <Link href="/legal-disclaimer" style={{ color: '#ccfbf1', textDecoration: 'underline' }}>Legal Disclaimer</Link> for complete terms.
@@ -231,16 +232,23 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer — dark slate, mirrors realdiag.org */}
       <div style={{
+        background: '#0f172a',
+        color: '#cbd5e1',
+        borderRadius: '24px',
         maxWidth: '1200px',
-        margin: '0 auto',
+        margin: '0 auto 2rem',
+        padding: '2rem 1.5rem',
         textAlign: 'center',
-        color: '#94a3b8',
-        fontSize: '0.85rem',
-        paddingBottom: '2rem'
+        fontSize: '0.875rem'
       }}>
-        <p style={{ margin: 0 }}>RealDiag Clinical Decision Support • Evidence-based diagnostics • For educational purposes</p>
+        <p style={{ margin: 0 }}>
+          RealDiag Clinical Decision Support • Evidence-based diagnostics • For educational purposes
+        </p>
+        <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+          © {new Date().getFullYear()} RealDiag, LLC. All rights reserved.
+        </p>
       </div>
     </div>
   );

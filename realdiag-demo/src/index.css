@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* RealDiag brand tokens — mirrors realdiag.org (teal+slate) and elionyx.com (Poppins). */
+:root{
+  --rd-brand-500:#14b8a6;
+  --rd-brand-700:#0f766e;
+  --rd-ink-200:#e2e8f0;
+  --rd-ink-500:#64748b;
+  --rd-ink-900:#0f172a;
+  --rd-page-bg: linear-gradient(135deg,#f0fdfa 0%,#e7f5f3 50%,#f8fafc 100%);
+  --rd-font-sans:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+html,body{margin:0;}
+body{
+  font-family:var(--rd-font-sans);
+  background:var(--rd-page-bg);
+  color:var(--rd-ink-900);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,h5,h6{font-family:var(--rd-font-sans);color:var(--rd-ink-900);letter-spacing:-0.01em;}
+a{color:var(--rd-brand-700);} a:hover{color:#115e59;}
