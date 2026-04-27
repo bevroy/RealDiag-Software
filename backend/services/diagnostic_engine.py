@@ -48,8 +48,8 @@ DOMAIN_ANALYZERS: list[DomainAnalyzer] = [
     _headache_adapter,
     _concussion_adapter,
     _cognitive_impairment_adapter,
-    analyze_cardiovascular_case,
     analyze_neurology_case,
+    analyze_cardiovascular_case,
 ]
 
 
