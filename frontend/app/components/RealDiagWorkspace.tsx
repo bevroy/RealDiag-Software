@@ -17,14 +17,17 @@ type ClinicalCase = {
   workup: string[];
   referral: string[];
   redFlags?: string[];
+  matched_signals?: string[];
+  red_flags?: string[];
+  next_actions?: string[];
 };
 
 const cases: ClinicalCase[] = [
   {
     id: 'Case 0',
-    patient: '24M',
+    patient: '42M',
     concern: 'First seizure episode',
-    symptoms: ['Loss of consciousness', 'Generalized shaking', 'Postictal confusion', 'Tongue biting'],
+    symptoms: ['First seizure', 'Tongue biting', 'Postictal confusion'],
     history: ['No prior seizure history', 'Recent sleep deprivation'],
     differential: [
       { dx: 'New-onset generalized seizure disorder', prob: 58 },
@@ -44,6 +47,19 @@ const cases: ClinicalCase[] = [
       'Persistent altered mental status',
       'Focal neurological deficits',
       'Repeated seizures without recovery'
+    ],
+    matched_signals: [
+      'First seizure language detected',
+      'Post-ictal confusion identified',
+      'Tongue biting identified'
+    ],
+    red_flags: [
+      'Potential neurologic event'
+    ],
+    next_actions: [
+      'MRI brain',
+      'EEG',
+      'Neurology referral'
     ]
   },
   {
@@ -418,6 +434,39 @@ export default function RealDiagWorkspace() {
                       <ul className='list-disc ml-5 space-y-2'>
                         {selectedCase.referral.map((r) => <li key={r}>{r}</li>)}
                       </ul>
+
+                      {(selectedCase.matched_signals?.length ?? 0) > 0 && (
+                        <div>
+                          <h3 className='font-semibold mt-5 mb-2'>Matched Clinical Signals</h3>
+                          <ul className='list-disc ml-5 space-y-2'>
+                            {selectedCase.matched_signals!.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {(selectedCase.red_flags?.length ?? 0) > 0 && (
+                        <div>
+                          <h3 className='font-semibold mt-5 mb-2 text-red-600'>Red Flags Identified</h3>
+                          <ul className='list-disc ml-5 space-y-2 text-red-600'>
+                            {selectedCase.red_flags!.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {(selectedCase.next_actions?.length ?? 0) > 0 && (
+                        <div>
+                          <h3 className='font-semibold mt-5 mb-2'>Recommended Next Actions</h3>
+                          <ul className='list-disc ml-5 space-y-2'>
+                            {selectedCase.next_actions!.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </Card>
                   </div>
                 </motion.div>

@@ -25,4 +25,7 @@ export type AnalyzeResponse = {
   referral: string[];
   codes: CodeBundle;
   rationale: string;
+  matched_signals?: string[];
+  red_flags?: string[];
+  next_actions?: string[];
 };

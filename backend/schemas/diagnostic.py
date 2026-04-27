@@ -32,3 +32,6 @@ class AnalyzeResponse(BaseModel):
     referral: list[str]
     codes: CodeBundle
     rationale: str
+    matched_signals: list[str] = Field(default_factory=list)
+    red_flags: list[str] = Field(default_factory=list)
+    next_actions: list[str] = Field(default_factory=list)

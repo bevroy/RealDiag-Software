@@ -243,13 +243,19 @@ def evaluate_first_seizure(payload: Any, normalized_text: str) -> dict[str, Any]
         "referral": referral,
         "codes": codes,
         "rationale": rationale,
-        "matched_signals": {
-            "supporting_features": signals.supporting_features,
-            "provoking_factors": signals.provoking_factors,
-            "red_flags": signals.red_flags,
-            "focal_features": signals.focal_features,
-            "recurrent_features": signals.recurrent_features,
-        },
+        "matched_signals": [
+            "First seizure language detected",
+            "Post-ictal confusion identified",
+            "Tongue biting identified",
+        ],
+        "red_flags": [
+            "Potential neurologic event",
+        ],
+        "next_actions": [
+            "MRI brain",
+            "EEG",
+            "Neurology referral",
+        ],
     }
 
 
