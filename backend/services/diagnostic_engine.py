@@ -4,6 +4,7 @@ from typing import Any, Callable
 
 from backend.schemas.diagnostic import AnalyzeRequest, AnalyzeResponse
 from backend.services.domains.cardiovascular import analyze_cardiovascular_case
+from backend.services.domains.cognitive_impairment import evaluate_cognitive_impairment
 from backend.services.domains.concussion import evaluate_concussion
 from backend.services.domains.first_seizure import evaluate_first_seizure
 from backend.services.domains.headache import evaluate_headache
@@ -36,10 +37,17 @@ def _concussion_adapter(payload: AnalyzeRequest) -> Any:
     return evaluate_concussion(payload, _normalized_text(payload))
 
 
+def _cognitive_impairment_adapter(payload: AnalyzeRequest) -> Any:
+    """Adapt evaluate_cognitive_impairment's (payload, normalized_text) signature
+    to the single-argument DomainAnalyzer contract used by the orchestrator."""
+    return evaluate_cognitive_impairment(payload, _normalized_text(payload))
+
+
 DOMAIN_ANALYZERS: list[DomainAnalyzer] = [
     evaluate_first_seizure,
     _headache_adapter,
     _concussion_adapter,
+    _cognitive_impairment_adapter,
     analyze_cardiovascular_case,
     analyze_neurology_case,
 ]
