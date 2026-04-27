@@ -25,6 +25,12 @@ def _normalized_text(payload: AnalyzeRequest) -> str:
     return f"{extract_symptom_text(payload)} {extract_history_text(payload)}".strip()
 
 
+def _first_seizure_adapter(payload: AnalyzeRequest) -> Any:
+    """Adapt evaluate_first_seizure's (payload, normalized_text) signature to the
+    single-argument DomainAnalyzer contract used by the orchestrator."""
+    return evaluate_first_seizure(payload, _normalized_text(payload))
+
+
 def _headache_adapter(payload: AnalyzeRequest) -> Any:
     """Adapt evaluate_headache's (payload, normalized_text) signature to the
     single-argument DomainAnalyzer contract used by the orchestrator."""
@@ -44,7 +50,7 @@ def _cognitive_impairment_adapter(payload: AnalyzeRequest) -> Any:
 
 
 DOMAIN_ANALYZERS: list[DomainAnalyzer] = [
-    evaluate_first_seizure,
+    _first_seizure_adapter,
     _headache_adapter,
     _concussion_adapter,
     _cognitive_impairment_adapter,
@@ -65,7 +71,7 @@ def analyze_case(payload: AnalyzeRequest) -> AnalyzeResponse:
 
     for analyzer in DOMAIN_ANALYZERS:
         response = analyzer(normalized_payload)
-        if response is not None:
+        if response:
             return response
 
     return build_default_response(normalized_payload)
