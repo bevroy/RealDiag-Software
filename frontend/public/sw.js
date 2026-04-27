@@ -1,6 +1,6 @@
 // Enhanced Service Worker for RealDiag PWA - Field-Ready Offline Mode
-const CACHE_VERSION = '3.0.1';
-const CACHE_NAME = `realdiag-v${CACHE_VERSION}-2025-11-19`;
+const CACHE_VERSION = '4.0.0';
+const CACHE_NAME = `realdiag-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `realdiag-runtime-v${CACHE_VERSION}`;
 const RULES_CACHE = `realdiag-rules-v${CACHE_VERSION}`;
 const API_CACHE = `realdiag-api-v${CACHE_VERSION}`;
@@ -125,7 +125,14 @@ self.addEventListener('install', (event) => {
       })
     ])
   );
-  self.skipWaiting();
+  // Don't auto-skipWaiting; let the page decide so it can reload cleanly.
+});
+
+// Allow the page to trigger activation of a newly-installed SW.
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 // Activate event - clean up old caches and claim clients
@@ -221,6 +228,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Always-fresh small files: runtime config + manifest must never be stale.
+  if (url.pathname === '/runtime-config.js' || url.pathname === '/manifest.json') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, responseClone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
   // Navigation requests - Network first with offline fallback
   if (request.mode === 'navigate') {
     event.respondWith(
@@ -250,9 +273,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets - Cache first with network fallback
-  if (url.pathname.startsWith('/_next/static/') || 
-      url.pathname.match(/\.(js|css|woff|woff2|ttf|otf)$/)) {
+  // Hash-busted Next.js bundles - safe to cache-first (filename changes on update).
+  if (url.pathname.startsWith('/_next/static/')) {
     event.respondWith(
       caches.match(request).then((cached) => {
         if (cached) return cached;
@@ -270,7 +292,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Images - Cache first with stale-while-revalidate
+  // Non-hashed scripts, styles, fonts - stale-while-revalidate so a new
+  // version replaces the cache on the very next load (no manual refresh).
+  if (url.pathname.match(/\.(js|css|woff|woff2|ttf|otf)$/)) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        const fetchPromise = fetch(request).then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return response;
+        }).catch(() => cached);
+        return cached || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // Images - stale-while-revalidate
   if (url.pathname.match(/\.(png|jpg|jpeg|svg|gif|webp|ico)$/)) {
     event.respondWith(
       caches.match(request).then((cached) => {
@@ -282,7 +322,7 @@ self.addEventListener('fetch', (event) => {
             });
           }
           return response;
-        });
+        }).catch(() => cached);
         return cached || fetchPromise;
       })
     );

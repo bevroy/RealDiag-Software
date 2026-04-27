@@ -15,15 +15,43 @@ export default function App({Component, pageProps}){
       })
     }
 
-    // Register service worker for PWA
+    // Register service worker for PWA, with auto-update on new versions.
     if ('serviceWorker' in navigator) {
+      let reloading = false;
+      // When a new SW takes control, reload once so the page picks up fresh assets.
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (reloading) return;
+        reloading = true;
+        window.location.reload();
+      });
+
       navigator.serviceWorker.register('/sw.js')
         .then(registration => {
-          console.log('Service Worker registered:', registration.scope)
+          console.log('Service Worker registered:', registration.scope);
+
+          // Helper: tell a waiting SW to take over immediately.
+          const promote = (worker) => {
+            if (worker && worker.state === 'installed' && navigator.serviceWorker.controller) {
+              worker.postMessage({ type: 'SKIP_WAITING' });
+            }
+          };
+
+          // If an update is already waiting at load time, promote it.
+          if (registration.waiting) promote(registration.waiting);
+
+          // Watch for updates installed after page load.
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener('statechange', () => promote(newWorker));
+          });
+
+          // Poll for updates periodically so long-lived tabs notice new deploys.
+          setInterval(() => registration.update().catch(() => {}), 60 * 1000);
         })
         .catch(error => {
-          console.error('Service Worker registration failed:', error)
-        })
+          console.error('Service Worker registration failed:', error);
+        });
     }
 
     // Handle PWA install prompt
