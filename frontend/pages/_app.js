@@ -16,7 +16,23 @@ export default function App({Component, pageProps}){
     }
 
     // Register service worker for PWA, with auto-update on new versions.
-    if ('serviceWorker' in navigator) {
+    // Skip in dev (localhost / codespaces) and proactively unregister any
+    // SW left over from a previous prod visit so hot-reload works cleanly.
+    const isDevHost =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname.endsWith('.github.dev') ||
+        window.location.hostname.endsWith('.app.github.dev'));
+
+    if ('serviceWorker' in navigator && isDevHost) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        regs.forEach((reg) => reg.unregister());
+      });
+      if (window.caches) {
+        caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+      }
+    } else if ('serviceWorker' in navigator) {
       let reloading = false;
       // When a new SW takes control, reload once so the page picks up fresh assets.
       navigator.serviceWorker.addEventListener('controllerchange', () => {
