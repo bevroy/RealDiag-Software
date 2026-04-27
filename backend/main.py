@@ -180,6 +180,15 @@ app.include_router(mfa_router)
 app.include_router(search_router)
 app.include_router(context_router)
 
+# /analyze endpoint backed by the modular DOMAIN_ANALYZERS chain
+from backend.schemas.diagnostic import AnalyzeRequest
+from backend.services.diagnostic_engine import analyze_case
+
+
+@app.post("/analyze", tags=["analyze"])
+def analyze_endpoint(payload: AnalyzeRequest):
+    return analyze_case(payload)
+
 # Include admin router if available
 if ADMIN_ROUTER_AVAILABLE and admin_router:
     app.include_router(admin_router)

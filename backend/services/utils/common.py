@@ -51,28 +51,43 @@ def contains_any(text: str, terms: Iterable[str]) -> bool:
 
 
 
-def build_default_response(payload: AnalyzeRequest) -> AnalyzeResponse:
-    return AnalyzeResponse(
-        summary="General diagnostic pathway triggered.",
-        differentials=[
+def build_default_response(payload: AnalyzeRequest) -> dict:
+    """Fallback response returned when no domain analyzer claims the case.
+
+    Returns a plain dict matching the shape produced by domain modules
+    (first_seizure / headache / concussion / cognitive_impairment) rather
+    than the strict AnalyzeResponse pydantic schema, whose required field
+    shape differs from what these rule modules naturally produce.
+    """
+    age = getattr(payload, "patient_age", getattr(payload, "age", "unknown"))
+    sex = getattr(payload, "patient_sex", getattr(payload, "sex", "unknown"))
+    return {
+        "primary_assessment": "Undifferentiated presentation",
+        "confidence": 0.35,
+        "urgency": "routine",
+        "differential": [
             {
-                "name": "Undifferentiated presentation",
-                "confidence": 35,
-                "rationale": "No domain-specific module was triggered strongly enough to take ownership of the case.",
+                "diagnosis": "Undifferentiated presentation",
+                "confidence": 0.35,
+                "priority": "routine",
             }
         ],
-        workup=[
+        "workup": [
             "Expand the symptom set and clinical history.",
             "Apply a domain-specific RealDiag pathway module.",
         ],
-        referral={
+        "referral": {
             "specialty": "Primary Care / Triage",
             "urgency": "routine",
             "reason": "Additional information is needed before a domain-specific recommendation is made.",
         },
-        codes={"icd10": ["R69"], "snomed": ["74964007"], "cpt": []},
-        rationale=[
-            "The modular engine framework is in place, but this case did not match a stronger deployed pathway.",
-            f"Age: {payload.age}; sex: {payload.sex}.",
+        "codes": [
+            {"system": "ICD-10", "code": "R69", "description": "Illness, unspecified"},
+            {"system": "SNOMED", "code": "74964007", "description": "Other (qualifier value)"},
         ],
-    )
+        "rationale": [
+            "The modular engine framework is in place, but this case did not match a stronger deployed pathway.",
+            f"Age: {age}; sex: {sex}.",
+        ],
+        "disclaimer": "Decision support only; not a substitute for clinical judgment.",
+    }
