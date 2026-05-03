@@ -2316,19 +2316,17 @@ export default function PatientHistory() {
   return (
     <div className={styles.container}>
       <div style={{
-        maxWidth: '1400px',
+        maxWidth: '1200px',
         margin: '0 auto 1rem'
       }}>
         <RoleBasedNavigation />
       </div>
 
       <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <PageHeader
-            title="Manual Patient History Entry"
-            subtitle="For non-EMR instances: Enter comprehensive patient history using dropdown lists"
-          />
-        </div>
+        <PageHeader
+          title="Manual Patient History Entry"
+          subtitle="For non-EMR instances: Enter comprehensive patient history using dropdown lists"
+        />
       </header>
 
       <div className={styles.main}>
