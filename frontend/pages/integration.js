@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 export default function IntegrationPage() {
   const [apiBase, setApiBase] = useState('');
@@ -52,20 +53,7 @@ export default function IntegrationPage() {
         <RoleBasedNavigation />
 
         {/* Header */}
-        <div style={{ 
-          background: 'white', 
-          borderRadius: '12px', 
-          padding: '1.5rem', 
-          marginBottom: '2rem',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-            <h1 style={{ marginBottom: 0, color: '#78350f' }}>
-              EHR Integration & API Access
-            </h1>
-          </div>
-        </div>
+        <PageHeader title="EHR Integration & API Access" />
 
         {/* API Key Input */}
         <div style={{

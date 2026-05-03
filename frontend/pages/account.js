@@ -5,6 +5,7 @@ import Link from "next/link";
 import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
 import { getStoredUser, isStoredAuthenticated, clearStoredAuth } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 export default function AccountPage() {
   const router = useRouter();
@@ -202,29 +203,10 @@ export default function AccountPage() {
         <RoleBasedNavigation />
 
         {/* Header */}
-        <div style={{
-          background: 'white',
-          borderRadius: '12px',
-          padding: '1.5rem',
-          marginBottom: '2rem',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '16px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1 }}>
-            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-            <div>
-              <h1 style={{ marginBottom: 0, color: '#78350f' }}>
-                My Account
-              </h1>
-              <p style={{ margin: '0.25rem 0 0', color: '#666', fontSize: '0.9rem' }}>
-                {isUserAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}
-              </p>
-            </div>
-          </div>
-        </div>
+        <PageHeader
+          title="My Account"
+          subtitle={isUserAuthenticated ? `Welcome back, ${user?.full_name || 'User'}!` : 'Sign in to save your diagnostic searches'}
+        />
 
         {/* Tabs */}
         {!isUserAuthenticated && (

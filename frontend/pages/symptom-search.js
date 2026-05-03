@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
 import { isAuthenticated } from '../utils/auth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
 import { assessUrgency, getUrgencyBadge } from '../utils/timeSensitiveAlerts';
 import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor, getSeverityIcon } from '../utils/drugInteractions';
@@ -824,37 +825,9 @@ export default function SymptomSearch() {
       {/* Navigation Dropdown (shared component, matches Home page) */}
       <RoleBasedNavigation />
 
-      {/* Mobile-optimized header */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto 1rem',
-        background: getCardBackground(),
-        padding: '1rem',
-        borderRadius: '8px',
-        boxShadow: darkMode ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        flexWrap: 'wrap',
-        gap: '1rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Image 
-            src="/logo.png" 
-            alt="RealDiag Logo" 
-            width={50} 
-            height={50}
-            style={{ maxHeight: '50px', width: 'auto' }}
-          />
-          <h1 style={{ 
-            margin: 0, 
-            fontSize: `${1.5 * getFontSizeMultiplier()}rem`, 
-            color: '#78350f',
-            fontWeight: '700'
-          }}>
-            🔍 Symptom Search
-          </h1>
-        </div>
+      {/* Page header (shared component for consistent sizing across pages) */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto 1rem' }}>
+        <PageHeader title="🔍 Symptom Search" />
       </div>
 
       {/* Preferences Panel */}

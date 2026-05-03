@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 export default function SourcesPage() {
   const [loading, setLoading] = useState(true);
@@ -189,12 +190,7 @@ export default function SourcesPage() {
 
         {/* Header */}
         <div style={{ maxWidth: 1200, margin: "0 auto", width: '100%' }}>
-          <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-              <h1 style={{ marginBottom: 0, color: '#92400e' }}>Medical Sources & References</h1>
-            </div>
-          </div>
+          <PageHeader title="Medical Sources & References" color="#92400e" />
 
         {/* Content */}
         <div

@@ -12,6 +12,7 @@ import {
   useFocusTrap 
 } from '../components/AccessibilityHelpers';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 import { 
   calculateLikelihood, 
   getConfidenceLevel, 
@@ -68,12 +69,7 @@ export default function FeaturesDemo() {
         <RoleBasedNavigation />
 
       <header role="banner" style={{ marginBottom: '2rem' }}>
-        <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-            <h1 style={{ marginBottom: 0, color: '#78350f', fontSize: '1.75rem' }}>RealDiag Features</h1>
-          </div>
-        </div>
+        <PageHeader title="RealDiag Features" />
       </header>
       
       <main id="main-content" role="main">

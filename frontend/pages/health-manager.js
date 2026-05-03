@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 export default function HealthManagerPage() {
   const [userData, setUserData] = useState(null);
@@ -46,45 +47,11 @@ export default function HealthManagerPage() {
         <RoleBasedNavigation />
 
         {/* Header */}
-        <div style={{
-          background: 'white',
-          borderRadius: '12px',
-          padding: '2rem',
-          marginBottom: '2rem',
-          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}>
-          <div>
-            <h1 style={{
-              margin: '0 0 0.5rem 0',
-              color: '#0f766e',
-              fontSize: '2rem'
-            }}>
-              🏥 Health Manager
-            </h1>
-            <p style={{
-              margin: 0,
-              color: '#64748b',
-              fontSize: '1rem'
-            }}>
-              Welcome back, {userData?.full_name || 'Patient'}
-            </p>
-          </div>
-          <Link href="/" style={{
-            padding: '0.75rem 1.5rem',
-            background: '#0f766e',
-            color: 'white',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600'
-          }}>
-            ← Back to Home
-          </Link>
-        </div>
+        <PageHeader
+          title="🏥 Health Manager"
+          subtitle={`Welcome back, ${userData?.full_name || 'Patient'}`}
+          color="#0f766e"
+        />
 
         {/* Quick Actions */}
         <div style={{

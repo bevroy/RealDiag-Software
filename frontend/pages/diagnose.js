@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from '../styles/Diagnose.module.css'
 import PatientContext from '../components/PatientContext'
 import ContextResults from '../components/ContextResults'
+import PageHeader from '../components/PageHeader'
 
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
@@ -172,11 +173,10 @@ export default function Diagnose() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div style={{background: 'white', borderRadius: '12px', padding: '2rem', maxWidth: '800px', margin: '0 auto 2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
-          <img src="/logo.png" alt="RealDiag Logo" style={{maxHeight: '80px', marginBottom: '1rem'}} />
-          <h1>RealDiag - Clinical Decision Support</h1>
-          <p style={{color: '#4a5568', marginTop: '0.5rem'}}>Interactive diagnostic decision trees for clinical evaluation</p>
-        </div>
+        <PageHeader
+          title="RealDiag - Clinical Decision Support"
+          subtitle="Interactive diagnostic decision trees for clinical evaluation"
+        />
       </header>
 
       <div className={styles.main}>

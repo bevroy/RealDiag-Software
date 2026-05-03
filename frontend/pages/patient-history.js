@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styles from '../styles/PatientHistory.module.css'
 import RoleBasedNavigation from '../components/RoleBasedNavigation'
+import PageHeader from '../components/PageHeader'
 
 export default function PatientHistory() {
   const [apiBase, setApiBase] = useState('')
@@ -2323,13 +2324,10 @@ export default function PatientHistory() {
 
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-            <div>
-              <h1 style={{ marginBottom: '0.5rem' }}>Manual Patient History Entry</h1>
-              <p style={{ margin: 0 }}>For non-EMR instances: Enter comprehensive patient history using dropdown lists</p>
-            </div>
-          </div>
+          <PageHeader
+            title="Manual Patient History Entry"
+            subtitle="For non-EMR instances: Enter comprehensive patient history using dropdown lists"
+          />
         </div>
       </header>
 

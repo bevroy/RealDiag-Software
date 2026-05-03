@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 export default function EducationPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -1598,12 +1599,7 @@ export default function EducationPage() {
         {/* Navigation Dropdown */}
         <RoleBasedNavigation />
 
-        <header className="education-header">
-          <div className="header-content">
-            <img src="/logo.png" alt="RealDiag Logo" />
-            <h1>Medical Training Center</h1>
-          </div>
-        </header>
+        <PageHeader title="Medical Training Center" />
 
         <div className="education-tabs">
           <button 

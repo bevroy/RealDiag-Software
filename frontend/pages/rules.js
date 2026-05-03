@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
 
 const FAMILIES = [
   { id: "allergy", label: "Allergy/Immunology" },
@@ -180,12 +181,7 @@ export default function ReferencePage() {
       {/* Navigation Dropdown */}
       <RoleBasedNavigation />
 
-      <div style={{ background: 'white', borderRadius: '12px', padding: '1.5rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <img src="/logo.png" alt="RealDiag Logo" style={{ height: '50px' }} />
-          <h1 style={{ marginBottom: 0, color: '#78350f' }}>Reference: Diagnostic Rules & Codes</h1>
-        </div>
-      </div>
+      <PageHeader title="Reference: Diagnostic Rules & Codes" />
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
