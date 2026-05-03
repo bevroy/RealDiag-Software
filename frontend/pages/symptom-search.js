@@ -834,7 +834,7 @@ export default function SymptomSearch() {
         boxShadow: darkMode ? '0 1px 3px rgba(0,0,0,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         flexWrap: 'wrap',
         gap: '1rem'
       }}>

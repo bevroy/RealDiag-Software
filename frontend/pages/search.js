@@ -284,23 +284,33 @@ export default function Search() {
             borderRadius: '12px',
             padding: '1.5rem',
             marginBottom: '1rem',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
           }}>
-            <h1 style={{
-              margin: '0 0 0.5rem 0',
-              color: '#0d9488',
-              fontSize: '1.75rem',
-              fontWeight: '700'
-            }}>
-              🔍 Search Diagnoses
-            </h1>
-            <p style={{
-              margin: 0,
-              color: '#6b7280',
-              fontSize: '0.95rem'
-            }}>
-              Search by diagnosis name, ICD-10 code, or browse by specialty
-            </p>
+            <img
+              src="/logo.png"
+              alt="RealDiag Logo"
+              style={{ height: '60px', width: 'auto' }}
+            />
+            <div>
+              <h1 style={{
+                margin: '0 0 0.5rem 0',
+                color: '#0d9488',
+                fontSize: '1.75rem',
+                fontWeight: '700'
+              }}>
+                🔍 Search Diagnoses
+              </h1>
+              <p style={{
+                margin: 0,
+                color: '#6b7280',
+                fontSize: '0.95rem'
+              }}>
+                Search by diagnosis name, ICD-10 code, or browse by specialty
+              </p>
+            </div>
           </div>
 
           {/* Search Form */}
