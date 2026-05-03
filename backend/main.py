@@ -238,6 +238,7 @@ app.add_middleware(
         # Production domains
         "https://realdiag.com",
         "https://www.realdiag.com",
+        "https://app.realdiag.com",
         "https://api.realdiag.com",
         # Development/Staging domains
         "http://localhost:3000",
