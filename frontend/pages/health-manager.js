@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import RoleBasedNavigation from '../components/RoleBasedNavigation';
 
 export default function HealthManagerPage() {
   const [userData, setUserData] = useState(null);
@@ -41,6 +42,9 @@ export default function HealthManagerPage() {
         maxWidth: '1200px',
         margin: '0 auto'
       }}>
+        {/* Navigation Dropdown */}
+        <RoleBasedNavigation />
+
         {/* Header */}
         <div style={{
           background: 'white',
