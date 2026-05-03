@@ -75,12 +75,9 @@ export default function RoleBasedNavigation() {
   ];
 
   // Filter navigation based on user role
-  // NOTE: Sign-in is temporarily disabled, so when there is no logged-in user
-  // we show all navigation items (otherwise the nav would only contain Home,
-  // Symptom Search, and Account).
   const visibleNavItems = navItems.filter(item => {
     if (item.roles.includes('all')) return true;
-    if (!userRole) return true; // Auth disabled: show everything when not logged in
+    if (!userRole) return false; // Hide role-specific items if not logged in
     return item.roles.includes(userRole);
   });
   
