@@ -61,53 +61,6 @@ export default function Home() {
           />
         </div>
 
-        {/* Demo Section */}
-        <div style={{
-          background: 'white',
-          padding: '3rem 2rem',
-          borderRadius: '24px',
-          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
-          marginBottom: '3rem',
-          border: '1px solid #e2e8f0',
-          textAlign: 'center'
-        }}>
-          <h2 style={{
-            margin: '0 0 1rem',
-            fontSize: '1.75rem',
-            color: '#0f766e',
-            fontWeight: '600'
-          }}>
-            🎬 See RealDiag in Action
-          </h2>
-          <p style={{
-            margin: '0 0 2rem',
-            color: '#64748b',
-            fontSize: '1.05rem',
-            maxWidth: '600px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            lineHeight: '1.6'
-          }}>
-            Walk through an interactive clinical scenario showing how RealDiag generates a ranked differential, recommends workup, and flags red flags in real time.
-          </p>
-          <Link href="/demo">
-            <a style={{
-              display: 'inline-block',
-              padding: '1rem 2.5rem',
-              background: 'linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)',
-              color: 'white',
-              borderRadius: '9999px',
-              textDecoration: 'none',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              boxShadow: '0 4px 12px rgba(15, 118, 110, 0.25)',
-              transition: 'all 0.3s'
-            }}>
-              ▶ Launch Interactive Demo
-            </a>
-          </Link>
-        </div>
-
         {/* Call to Action */}
         <div style={{
           background: 'white',
