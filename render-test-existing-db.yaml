@@ -12,6 +12,7 @@ databases:
   # Test Database (separate from production)
   - name: realdiag-test-database
     plan: free
+    region: virginia
     databaseName: realdiag_test
     user: realdiag_test_user
 
@@ -21,6 +22,7 @@ services:
   - type: web
     name: realdiag-test-backend
     env: docker
+    region: virginia
     branch: main
     plan: free
     repo: https://github.com/bevroy/RealDiag-Software
@@ -30,6 +32,8 @@ services:
     envVars:
       - key: PORT
         value: 8000
+      - key: TZ
+        value: America/New_York
       
       # TEST MODE CONFIGURATION
       - key: ENVIRONMENT
@@ -83,6 +87,7 @@ services:
   - type: web
     name: realdiag-test-frontend
     env: static
+    region: virginia
     branch: main
     plan: free
     buildCommand: cd frontend && npm install && npm run build
