@@ -62,6 +62,14 @@ export default function SymptomSearch() {
   const [ageRange, setAgeRange] = useState('');
   const [sex, setSex] = useState('');
   const [family, setFamily] = useState('');
+  // Vital signs state
+  const [heartRate, setHeartRate] = useState('');
+  const [bpSystolic, setBpSystolic] = useState('');
+  const [bpDiastolic, setBpDiastolic] = useState('');
+  const [temperature, setTemperature] = useState('');
+  const [respiratoryRate, setRespiratoryRate] = useState('');
+  const [oxygenSaturation, setOxygenSaturation] = useState('');
+  const [showVitalSigns, setShowVitalSigns] = useState(false);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -690,7 +698,16 @@ export default function SymptomSearch() {
         symptoms: symptoms,
         ...(ageValue && { age: parseInt(ageValue) }),
         ...(sex && { sex: sex }),
-        ...(family && { family: family })
+        ...(family && { family: family }),
+        ...(heartRate || bpSystolic || bpDiastolic || temperature || respiratoryRate || oxygenSaturation ? {
+          vital_signs: {
+            ...(heartRate && { heart_rate: parseInt(heartRate) }),
+            ...(bpSystolic && bpDiastolic && { blood_pressure: { systolic: parseInt(bpSystolic), diastolic: parseInt(bpDiastolic) } }),
+            ...(temperature && { temperature: parseFloat(temperature) }),
+            ...(respiratoryRate && { respiratory_rate: parseInt(respiratoryRate) }),
+            ...(oxygenSaturation && { oxygen_saturation: parseFloat(oxygenSaturation) })
+          }
+        } : {})
       };
 
       const response = await fetch(`${apiBase}/search/by-symptoms`, {
@@ -775,6 +792,12 @@ export default function SymptomSearch() {
     setAgeRange('');
     setSex('');
     setFamily('');
+    setHeartRate('');
+    setBpSystolic('');
+    setBpDiastolic('');
+    setTemperature('');
+    setRespiratoryRate('');
+    setOxygenSaturation('');
     setResults([]);
     setHasSearched(false);
     setError(null);
@@ -1535,6 +1558,159 @@ export default function SymptomSearch() {
                 </select>
               </div>
             </div>
+          </div>
+
+          {/* Vital Signs */}
+          <div style={{ marginBottom: '1.5rem' }}>
+            <button
+              onClick={() => setShowVitalSigns(!showVitalSigns)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: '#1a202c',
+                fontSize: '1rem',
+                fontWeight: '600',
+                marginBottom: showVitalSigns ? '1rem' : 0
+              }}
+            >
+              <span>❤️ Vital Signs (Optional)</span>
+              <span style={{ fontSize: '0.8rem', color: '#6b7280' }}>{showVitalSigns ? '▲ Hide' : '▼ Show'}</span>
+            </button>
+            {showVitalSigns && (
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '1rem'
+              }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Heart Rate (bpm)
+                  </label>
+                  <input
+                    type="number"
+                    value={heartRate}
+                    onChange={(e) => setHeartRate(e.target.value)}
+                    placeholder="e.g., 72"
+                    min="20"
+                    max="300"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Blood Pressure — Systolic (mmHg)
+                  </label>
+                  <input
+                    type="number"
+                    value={bpSystolic}
+                    onChange={(e) => setBpSystolic(e.target.value)}
+                    placeholder="e.g., 120"
+                    min="50"
+                    max="300"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Blood Pressure — Diastolic (mmHg)
+                  </label>
+                  <input
+                    type="number"
+                    value={bpDiastolic}
+                    onChange={(e) => setBpDiastolic(e.target.value)}
+                    placeholder="e.g., 80"
+                    min="20"
+                    max="200"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Temperature (°F)
+                  </label>
+                  <input
+                    type="number"
+                    value={temperature}
+                    onChange={(e) => setTemperature(e.target.value)}
+                    placeholder="e.g., 98.6"
+                    min="90"
+                    max="115"
+                    step="0.1"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Respiratory Rate (breaths/min)
+                  </label>
+                  <input
+                    type="number"
+                    value={respiratoryRate}
+                    onChange={(e) => setRespiratoryRate(e.target.value)}
+                    placeholder="e.g., 16"
+                    min="4"
+                    max="60"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                    Oxygen Saturation — SpO₂ (%)
+                  </label>
+                  <input
+                    type="number"
+                    value={oxygenSaturation}
+                    onChange={(e) => setOxygenSaturation(e.target.value)}
+                    placeholder="e.g., 98"
+                    min="50"
+                    max="100"
+                    step="0.1"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '6px',
+                      fontSize: '0.95rem'
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}

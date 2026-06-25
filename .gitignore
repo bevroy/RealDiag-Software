@@ -1,29 +1,7 @@
-<<<<<<< HEAD
-=======
 # Python
 __pycache__/
-*.pyc
-
-# Node
-frontend/node_modules/
-frontend/.next/
-npm-debug.log
-
-# Environment & Secrets
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-*.crt
-secrets/
-credentials/
-.secrets
-config/*.secret.*
->>>>>>> origin/main
-# Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 
 # C extensions
@@ -38,12 +16,9 @@ downloads/
 eggs/
 .eggs/
 lib/
-<<<<<<< HEAD
-=======
 !frontend/app/lib/
 !frontend/app/lib/api.ts
 !frontend/app/lib/types.ts
->>>>>>> origin/main
 lib64/
 parts/
 sdist/
@@ -94,15 +69,28 @@ Thumbs.db
 # Logs
 *.log
 
+# Node
+frontend/node_modules/
+frontend/.next/
+npm-debug.log
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+.secrets
+config/*.secret.*
+
 # Diagnostic reports
 reports/
 *.json
-<<<<<<< HEAD
-*.csv
-=======
 !frontend/tsconfig.json
 !realdiag-demo/**/*.json
 *.csv
 frontend/out/
 backups/
->>>>>>> origin/main

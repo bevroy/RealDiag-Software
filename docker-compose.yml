@@ -7,8 +7,6 @@ services:
       dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
-<<<<<<< HEAD
-=======
     # Example env var to override the preview-origin regex used by the backend CORS
     # handler. Set this in CI or your preview environment if your preview hostnames
     # use a different pattern than the default (which matches `*-3000.app.github.dev`).
@@ -20,19 +18,12 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
->>>>>>> origin/main
   web:
     build:
       context: .
       dockerfile: frontend/Dockerfile
     ports:
       - "3000:3000"
-<<<<<<< HEAD
-    environment:
-      - NEXT_PUBLIC_API_BASE=http://localhost:8000
-    depends_on:
-      - api
-=======
     # Runtime-exposed env vars for the frontend (available to the browser as
     # window.__RUNTIME_CONFIG and to Next.js at build-time as NEXT_PUBLIC_*).
     # Set these in your environment or here in compose. Example values are
@@ -50,4 +41,3 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
->>>>>>> origin/main

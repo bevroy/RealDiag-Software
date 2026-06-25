@@ -1,11 +1,8 @@
 # RealDiag-Software
 
-<<<<<<< HEAD
-Real Time Diagnostic Assistant Software - A comprehensive system diagnostic tool for monitoring and analyzing system health, network connectivity, and performance metrics.
-=======
-![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
+[![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
 
-Real Time Diagnostic Assistant Software - A comprehensive clinical decision support system for medical education and reference.
+Real Time Diagnostic Assistant Software - A comprehensive clinical decision support system for medical education and reference, with a standalone system monitoring CLI tool.
 
 ## ⚠️ **CRITICAL DISCLAIMER**
 
@@ -21,7 +18,6 @@ See [LEGAL_DISCLAIMER.md](./LEGAL_DISCLAIMER.md) and [SECURITY.md](./SECURITY.md
 **For Healthcare Professionals:** This is a reference tool only. Always apply professional judgment and verify information independently.
 
 **For Patients:** Do not use for self-diagnosis. Always consult a qualified healthcare provider. Call 911 for emergencies.
->>>>>>> origin/main
 
 ## Quick Start
 
@@ -34,8 +30,6 @@ Access:
 - API → http://localhost:8000/health
 - Web → http://localhost:3000/diagnostic
 
-<<<<<<< HEAD
-=======
 Runtime config note
 -------------------
 
@@ -44,7 +38,6 @@ preview host handling (e.g. Codespaces / GitHub preview), see `docs/RUNTIME_CONF
 It documents the `runtime-config.js` pattern and the `PREVIEW_ORIGIN_REGEX` env var used by
 the backend CORS configuration.
 
->>>>>>> origin/main
 ### Option 2: Command-Line Tool (Standalone Python)
 Run diagnostics from the command line:
 ```bash
@@ -54,17 +47,6 @@ python main.py --all
 
 ## Features
 
-<<<<<<< HEAD
-- **System Diagnostics**: Monitor CPU, memory, and disk usage with configurable thresholds
-- **Network Diagnostics**: Check network connectivity, interface information, and network statistics
-- **Performance Monitoring**: Track system uptime, process information, and load averages
-- **Real-time Analysis**: Get instant insights into your system's health
-- **Report Generation**: Save diagnostic reports in JSON format for later analysis
-- **Color-coded Output**: Easy-to-read, color-coded console output
-- **Flexible CLI**: Command-line interface with multiple options for targeted diagnostics
-- **Web Interface**: Modern web-based diagnostic interface (via Docker)
-- **REST API**: Backend API for diagnostic services (via Docker)
-=======
 ### Core Diagnostic Capabilities
 - **21 Medical Specialties**: Comprehensive coverage including Cardiology, Neurology, Emergency Medicine, and more
 - **8,000+ Diagnostic Rules**: Evidence-based criteria from major medical organizations
@@ -86,7 +68,12 @@ python main.py --all
 - **SMART Launch Page**: Native Epic integration interface
 - **Educational Mode**: Learning tools for medical students
 - **Report Generation**: PDF export and clinical documentation
->>>>>>> origin/main
+
+### System Monitoring CLI
+- **System Diagnostics**: Monitor CPU, memory, and disk usage with configurable thresholds
+- **Network Diagnostics**: Check network connectivity, interface information, and network statistics
+- **Performance Monitoring**: Track system uptime, process information, and load averages
+- **Report Generation**: Save diagnostic reports in JSON format for later analysis
 
 ## Installation
 
@@ -135,8 +122,6 @@ Run performance diagnostics only:
 python main.py --performance
 ```
 
-<<<<<<< HEAD
-=======
 ## Usage - Epic Integration 🆕
 
 ### Setup for Epic/EHR Connection
@@ -165,7 +150,6 @@ SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
 
 For complete Epic integration documentation, see [EPIC_INTEGRATION_GUIDE.md](./EPIC_INTEGRATION_GUIDE.md).
 
->>>>>>> origin/main
 ### Combining Options
 
 Run system and network diagnostics:
@@ -218,42 +202,6 @@ The application can be configured by editing the `config.py` file. Available set
 - **Network Settings**: Default test host and timeout values
 - **Report Settings**: Report directory and log file locations
 - **Check Interval**: Frequency of diagnostic checks
-
-## Output Examples
-
-### System Diagnostics
-Shows CPU usage, memory utilization, and disk space with status indicators:
-- ✓ **OK**: Metrics within normal thresholds
-- ⚠ **WARNING**: Metrics exceeding configured thresholds
-
-### Network Diagnostics
-Displays:
-- Connectivity status to test hosts
-- Network interface information
-- Network I/O statistics (bytes sent/received, packets, errors)
-
-### Performance Diagnostics
-Provides:
-- System uptime information
-- Total running processes
-- Top 5 processes by CPU usage
-- Load averages (on supported platforms)
-
-## Report Files
-
-Diagnostic reports are saved in the `reports/` directory with the following naming convention:
-```
-{diagnostic_type}_report_{timestamp}.json
-```
-
-Example: `full_report_20241103_162530.json`
-
-## Dependencies
-
-- **psutil**: Cross-platform library for system and process utilities
-- **colorama**: Cross-platform colored terminal text
-
-See `requirements.txt` for specific versions.
 
 ## Architecture
 
