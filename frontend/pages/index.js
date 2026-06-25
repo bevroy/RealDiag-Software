@@ -191,12 +191,13 @@ export default function Home() {
               <a style={{
                 padding: '0.85rem 1rem',
                 borderRadius: '12px',
-                border: '1px solid #ccfbf1',
-                background: '#f0fdfa',
+                border: '1px solid #0f172a',
+                background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
                 textDecoration: 'none',
-                color: '#0f766e',
+                color: '#ffffff',
                 fontWeight: '600',
-                textAlign: 'center'
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 🖨️ Printable User Guide
               </a>
@@ -205,12 +206,13 @@ export default function Home() {
               <a style={{
                 padding: '0.85rem 1rem',
                 borderRadius: '12px',
-                border: '1px solid #dbeafe',
-                background: '#eff6ff',
+                border: '1px solid #0f172a',
+                background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
                 textDecoration: 'none',
-                color: '#1d4ed8',
+                color: '#ffffff',
                 fontWeight: '600',
-                textAlign: 'center'
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 🧠 Technical and Medical Overview
               </a>
@@ -219,12 +221,13 @@ export default function Home() {
               <a style={{
                 padding: '0.85rem 1rem',
                 borderRadius: '12px',
-                border: '1px solid #fde68a',
-                background: '#fffbeb',
+                border: '1px solid #0f172a',
+                background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
                 textDecoration: 'none',
-                color: '#92400e',
+                color: '#ffffff',
                 fontWeight: '600',
-                textAlign: 'center'
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 📋 Diagnostic Rulse and Codes
               </a>
@@ -233,12 +236,13 @@ export default function Home() {
               <a style={{
                 padding: '0.85rem 1rem',
                 borderRadius: '12px',
-                border: '1px solid #ddd6fe',
-                background: '#f5f3ff',
+                border: '1px solid #0f172a',
+                background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
                 textDecoration: 'none',
-                color: '#5b21b6',
+                color: '#ffffff',
                 fontWeight: '600',
-                textAlign: 'center'
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 📖 Sources
               </a>
