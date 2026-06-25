@@ -229,6 +229,20 @@ export default function Home() {
                 📋 Diagnostic Rulse and Codes
               </a>
             </Link>
+            <Link href="/sources">
+              <a style={{
+                padding: '0.85rem 1rem',
+                borderRadius: '12px',
+                border: '1px solid #ddd6fe',
+                background: '#f5f3ff',
+                textDecoration: 'none',
+                color: '#5b21b6',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}>
+                📖 Sources
+              </a>
+            </Link>
           </div>
         </div>
 
