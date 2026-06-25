@@ -177,7 +177,8 @@ export default function Home() {
             margin: '0 0 1rem',
             color: '#0f766e',
             fontSize: '1.2rem',
-            fontWeight: '600'
+            fontWeight: '600',
+            textAlign: 'center'
           }}>
             Guides and Reference
           </h3>
