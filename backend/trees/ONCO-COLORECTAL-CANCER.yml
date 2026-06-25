@@ -1,0 +1,125 @@
+tree_id: ONCO-COLORECTAL-CANCER
+name: Colorectal Cancer
+family: oncology
+specialty: Oncology / Gastroenterology
+presentations:
+  - Change in bowel habits and anemia
+  - Change in bowel habits with iron deficiency anemia
+  - Altered bowel habits and anemia
+  - Change in bowel habits and rectal bleeding
+  - Change in bowel habits with blood in stool
+  - Change in bowel habits and weight loss
+  - Change in bowel habits (diarrhea, constipation, narrowing of stool)
+  - Rectal bleeding or blood in stool
+  - Hematochezia (bright red blood per rectum)
+  - Melena (dark tarry stools)
+  - Abdominal pain or cramping
+  - Unintentional weight loss
+  - Iron deficiency anemia
+  - Weakness and fatigue
+  - Bowel obstruction (late presentation)
+  - May be asymptomatic (screening detection)
+icd10:
+  - C18.9 # Malignant neoplasm of colon, unspecified
+  - C19 # Malignant neoplasm of rectosigmoid junction
+  - C20 # Malignant neoplasm of rectum
+snomed:
+  - "363406005" # Malignant tumor of colon
+  - "363351006" # Malignant tumor of rectum
+urgency: High
+urgency_explanation: Requires prompt evaluation and staging; obstructing or perforated tumors are surgical emergencies
+
+referrals:
+  gastroenterology: For colonoscopy and diagnosis
+  colorectal_surgery: For surgical resection
+  oncology: For chemotherapy planning
+  radiation_oncology: For rectal cancer (neoadjuvant or adjuvant)
+  genetics: If suspected Lynch syndrome or familial polyposis
+
+workup:
+  screening_and_diagnosis:
+    - Colonoscopy with biopsy (gold standard)
+    - Alternative: Flexible sigmoidoscopy, CT colonography, stool DNA test
+    - Complete colonoscopy to rule out synchronous lesions
+  laboratory:
+    - CBC (anemia)
+    - CMP, LFTs
+    - CEA (carcinoembryonic antigen) - baseline and monitoring
+  imaging:
+    - CT chest/abdomen/pelvis with contrast for staging
+    - MRI pelvis for rectal cancer (T and N staging)
+    - PET-CT not routinely recommended
+  molecular_testing:
+    - Microsatellite instability (MSI) or mismatch repair (MMR) testing
+    - KRAS, NRAS, BRAF mutations
+    - HER2 amplification (in specific cases)
+    - All stage II and above should have tumor profiling
+
+treatment:
+  colon_cancer:
+    stage_I:
+      - Surgical resection alone (hemicolectomy or segmental resection)
+      - Adequate lymph node sampling (≥12 nodes)
+    stage_II:
+      - Surgery ± adjuvant chemotherapy
+      - Consider chemotherapy if high-risk features: T4, perforation, obstruction, <12 nodes sampled
+    stage_III:
+      - Surgery followed by adjuvant chemotherapy (FOLFOX or CapeOx for 3-6 months)
+    stage_IV:
+      - Resection of primary if symptomatic or risk of complications
+      - Systemic chemotherapy:
+        - FOLFOX or FOLFIRI ± biologics (bevacizumab, cetuximab, panitumumab)
+        - Selection based on RAS/BRAF status
+      - Resection of metastases if oligometastatic and resectable
+      - Immunotherapy (pembrolizumab, nivolumab) if MSI-high or dMMR
+  rectal_cancer:
+    stage_I:
+      - Transanal excision (T1) or total mesorectal excision (TME)
+    stage_II_III:
+      - Neoadjuvant chemoradiation (long-course or short-course)
+      - Followed by TME surgery (6-8 weeks after radiation)
+      - Adjuvant chemotherapy (FOLFOX or CapeOx)
+      - Consider total neoadjuvant therapy (TNT)
+    stage_IV:
+      - Similar to colon cancer stage IV
+      - Consider local therapy for primary to prevent obstruction/bleeding
+  supportive:
+    - Stoma care if ostomy created
+    - Nutritional support
+    - Pain management
+    - Psychosocial support
+
+clinical_pearls:
+  - Third most common cancer worldwide
+  - 90% of cases occur in people >50 years old
+  - Screening reduces mortality: start at age 45 (average risk), earlier if family history
+  - Most colorectal cancers arise from adenomatous polyps (adenoma-carcinoma sequence)
+  - Lynch syndrome accounts for 3% of colorectal cancers (earlier onset, right-sided)
+  - MSI-high tumors have excellent prognosis and respond to immunotherapy
+  - Left-sided tumors generally have better prognosis than right-sided
+  - Elevated CEA suggests metastatic disease but is not diagnostic
+
+differentials:
+  - Inflammatory bowel disease (Crohn's, ulcerative colitis)
+  - Diverticular disease
+  - Hemorrhoids
+  - Anal fissure
+  - Infectious colitis
+  - Ischemic colitis
+  - Benign polyps
+
+trace:
+  - Patient presents with concerning symptoms or positive screening
+  - Colonoscopy with biopsy confirms adenocarcinoma
+  - CT staging and molecular profiling
+  - Multidisciplinary tumor board discussion
+  - Surgery for resectable disease
+  - Adjuvant chemotherapy for stage III or high-risk stage II
+  - Surveillance with CEA and colonoscopy
+
+citations:
+  - "NCCN Guidelines: Colon Cancer"
+  - "NCCN Guidelines: Rectal Cancer"
+  - "ASCO Guidelines: Adjuvant Chemotherapy for Stage II Colon Cancer"
+  - "UpToDate: Clinical presentation, diagnosis, and staging of colorectal cancer"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

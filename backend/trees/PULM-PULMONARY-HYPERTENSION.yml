@@ -1,0 +1,62 @@
+tree_id: PULM-PULMONARY-HYPERTENSION
+name: Pulmonary Hypertension (PH)
+family: Pulmonology
+specialty: Pulmonology
+icd10:
+- I27.20
+- I27.0
+snomed:
+- '70995007'
+urgency: medium
+description: Comprehensive evaluation and management of Pulmonary Hypertension (PH)
+version: '1.0'
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Exertional dyspnea (most common), fatigue
+- Chest pain (angina-like), syncope with exertion
+- Lower extremity edema, ascites (right heart failure)
+- Loud P2 (pulmonic component of S2), RV heave
+- Elevated JVP, hepatomegaly
+- 'Echo: Elevated RVSP (>40 mmHg), RV dilation/hypertrophy'
+- 'Right heart catheterization: Mean PAP ≥20 mmHg (diagnostic)'
+workup:
+- Echocardiogram (estimate RVSP, assess RV function)
+- Right heart catheterization (definitive diagnosis)
+- 6-minute walk test (functional assessment)
+- Chest CT, PFTs, V/Q scan (identify etiology)
+- Connective tissue disease workup (ANA, anti-Scl-70)
+treatment:
+- 'Guideline-based treatment options for Pulmonary Hypertension (PH) include:'
+- 'Group 1: Prostacyclins (epoprostenol), ERAs (bosentan), PDE5i (sildenafil) (ATS
+  2023)'
+- 'Group 2: Treat LV dysfunction (diuretics, HF meds), NOT PAH-specific drugs (ATS
+  2023)'
+- 'Group 3: Oxygen, treat underlying lung disease (ATS 2023)'
+- Diuretics for volume overload, oxygen if hypoxic (ATS 2023)
+- Anticoagulation if idiopathic PAH (ATS 2023)
+clinical_pearls:
+- 'WHO Group 1 (PAH): Idiopathic, connective tissue disease, drugs, congenital heart
+  disease'
+- 'WHO Group 2 (left heart): Most common cause (treat underlying LV dysfunction)'
+- 'WHO Group 3 (lung disease): COPD, ILD'
+- Diagnosis requires right heart catheterization (RHC)
+- Vasoreactivity testing determines treatment eligibility (CCB responders)
+referrals:
+- Pulmonary hypertension specialist (all Group 1)
+- Cardiology if Group 2
+- Heart-lung transplant evaluation if severe
+differentials:
+  - Left heart failure
+  - Chronic lung disease
+  - Chronic PE
+  - Sleep apnea
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

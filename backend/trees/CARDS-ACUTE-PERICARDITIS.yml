@@ -1,0 +1,114 @@
+tree_id: CARDS-ACUTE-PERICARDITIS
+name: Acute Pericarditis
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Sharp chest pain worse when lying flat
+description: Inflammation of pericardium causing sharp pleuritic chest pain relieved by sitting forward, friction rub, and diffuse ST elevations on ECG. Most commonly idiopathic or viral, treat with NSAIDs and colchicine, monitor for complications (effusion, tamponade, constriction).
+icd10: I30.9
+snomed: 3238004
+presentations:
+  - Sharp, pleuritic chest pain worse with inspiration and lying flat
+  - Pain improved by sitting up and leaning forward
+  - Pain may radiate to trapezius ridge (highly specific)
+  - Fever, malaise, myalgias
+  - Pericardial friction rub (pathognomonic but not always present)
+  - Dyspnea if associated pericardial effusion
+urgency: urgent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical diagnosis: at least 2 of 4 criteria
+  - Chest pain (95%): sharp, pleuritic, substernal or precordial
+  - Worse lying flat, improved sitting forward and leaning
+  - Radiates to trapezius ridge (specific for pericarditis)
+  - Pericardial friction rub (30%): scratchy or squeaky, triphasic (best heard at left sternal border with patient leaning forward)
+  - ECG changes (60%): diffuse ST elevations and PR depressions
+  - Stage 1: diffuse ST elevation (concave up) with PR depression in most leads
+  - Stage 2: ST normalizes, T waves flatten
+  - Stage 3: T wave inversions diffuse
+  - Stage 4: normalization or permanent T inversions
+  - Distinguishes from STEMI: ST elevations diffuse not localized, concave up not convex, PR depression present
+  - Pericardial effusion (60%): seen on echocardiogram
+  - Labs:
+  - Troponin: may be mildly elevated if myopericarditis (epicardial myocardial involvement)
+  - Inflammatory markers: ESR and CRP elevated (helps confirm inflammation and monitor response)
+  - CBC: mild leukocytosis
+  - Echocardiogram: assess for pericardial effusion and tamponade physiology
+  - Small effusion common and benign
+  - Large effusion or hemodynamic compromise indicates tamponade (emergent)
+  - Causes:
+  - Idiopathic (85-90%): presumed viral, most common
+  - Viral: coxsackievirus, echovirus, adenovirus, influenza, EBV, CMV, HIV
+  - Post-MI: early (24-96 hours, transmural infarct) or Dressler syndrome (weeks to months post-MI, autoimmune)
+  - Uremia: end-stage renal disease
+  - Autoimmune: SLE, rheumatoid arthritis, scleroderma
+  - Malignancy: lung, breast, lymphoma (worse prognosis)
+  - TB: suspect in endemic areas or immunocompromised
+  - Bacterial: rare, usually post-cardiac surgery or immunocompromised
+  - Medications: hydralazine, procainamide, isoniazid
+  - Trauma or post-cardiac surgery
+
+treatment:
+  - Hospitalize if: large effusion, tamponade, fever, immunosuppressed, trauma, anticoagulation use, myopericarditis (elevated troponin)
+  - NSAIDs (first-line): anti-inflammatory
+  - Ibuprofen 600-800 mg TID x1-2 weeks (preferred, fewer side effects)
+  - Indomethacin 50 mg TID x1-2 weeks (more potent but more GI side effects)
+  - Aspirin 750-1000 mg TID (preferred if post-MI pericarditis)
+  - PPI: omeprazole 20 mg daily for GI protection
+  - Colchicine (reduce recurrence): MUST add to NSAIDs
+  - Colchicine 0.6 mg BID x3 months (weight above 70 kg) or 0.6 mg daily (weight below 70 kg)
+  - Reduces recurrence from 30% to 10%
+  - COLCOT and COPE trials showed benefit
+  - Side effect: diarrhea (dose-dependent)
+  - Activity restriction: avoid strenuous exercise until symptoms resolve and CRP normalizes (typically 4-6 weeks)
+  - Athletes: restrict competitive sports x3 months
+  - Corticosteroids: AVOID as first-line (increase recurrence risk)
+  - Only if contraindication to NSAIDs (renal failure, GI bleed) or refractory to NSAIDs and colchicine
+  - Prednisone 0.25-0.5 mg/kg daily taper over weeks if needed
+  - Treat underlying cause: dialysis for uremic, antibiotics for bacterial, treat autoimmune disease
+  - Monitor CRP: repeat at 1-2 weeks, should normalize, guides duration of therapy
+  - Recurrent pericarditis (15-30%): occurs within weeks to months of initial episode
+  - Treat with NSAIDs plus colchicine x6 months
+  - If multiple recurrences, prolonged colchicine (6-12 months), low-dose steroids, or biologics (anakinra, rilonacept)
+
+clinical_pearls:
+  - Sharp pleuritic chest pain relieved by sitting forward
+  - Friction rub pathognomonic (scratchy, triphasic)
+  - Diffuse ST elevations and PR depressions on ECG (not localized like STEMI)
+  - NSAIDs plus colchicine first-line - colchicine reduces recurrence 30% to 10%
+  - CRP monitoring guides treatment duration (should normalize)
+  - Avoid steroids as first-line (increase recurrence)
+  - Restrict exercise until symptoms and CRP normalize
+  - Most cases idiopathic/viral, self-limited
+
+differentials:
+  - STEMI: localized ST elevations (not diffuse), convex ST segments, reciprocal depressions, elevated troponin
+  - Myocarditis: elevated troponin, heart failure symptoms, wall motion abnormalities
+  - Pulmonary embolism: pleuritic chest pain, dyspnea, tachycardia, normal ECG or RBBB/S1Q3T3
+  - Pneumonia: pleuritic pain, fever, cough, infiltrate on CXR
+  - Aortic dissection: tearing pain radiating to back, pulse differential, widened mediastinum
+
+trace: |
+  A 35-year-old healthy man presented with 2 days of sharp chest pain. Pain substernal, sharp, worse with deep breaths and lying flat, improved sitting forward and leaning. Radiates to left trapezius ridge. Recent viral URI 1 week ago (presumed viral trigger). No dyspnea, no palpitations. Exam: temperature 37.8°C, BP 125/75, HR 88, O2 sat 98%, pericardial friction rub heard at left sternal border with patient leaning forward (scratchy triphasic sound - pathognomonic). ECG: diffuse ST elevations in leads I, II, III, aVF, V2-V6 with concave upward morphology, PR segment depressions in II, aVF, V4-V6 (classic Stage 1 acute pericarditis ECG - diffuse ST elevation distinguishes from localized STEMI). Labs: troponin 0.08 (mildly elevated suggests myopericarditis - epicardial involvement), ESR 45, CRP 38 (elevated inflammatory markers). Echocardiogram: small pericardial effusion, no tamponade physiology, normal LV function. Diagnosed with acute myopericarditis (meets 3 of 4 criteria for pericarditis: chest pain, friction rub, ECG changes, plus mild troponin elevation). Admitted for observation given myopericarditis. Started ibuprofen 800 mg TID and colchicine 0.6 mg BID (weight 85 kg). Omeprazole 20 mg daily for GI protection. Restricted physical activity. At 24 hours chest pain improved 70%, friction rub still present. Troponin peaked at 0.15 then downtrended (myopericarditis pattern). At 48 hours pain 90% improved, no friction rub. Repeat echo: unchanged small effusion, no tamponade. Discharged on ibuprofen and colchicine. At 1 week pain resolved, CRP 15 (improving). At 2 weeks CRP 8, continued NSAIDs and colchicine. At 4 weeks CRP normalized to 3, discontinued ibuprofen, continued colchicine to complete 3 months to prevent recurrence. Activity restriction x6 weeks then gradual return to exercise. At 3 months completed colchicine course, no recurrence (colchicine reduced recurrence risk from 30% to 10%). ECG normalized by 6 weeks. Counseled on 15-30% recurrence risk, return if chest pain recurs.
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature

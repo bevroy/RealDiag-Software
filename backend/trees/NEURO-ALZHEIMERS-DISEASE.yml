@@ -1,0 +1,81 @@
+tree_id: NEURO-ALZHEIMERS-DISEASE
+name: Alzheimer's Disease
+family: Neurology
+specialty: Neurology
+chief_complaint: Progressive memory loss and cognitive decline
+description: |
+  Most common cause of dementia, accounts for 60-80% of cases. Progressive neurodegenerative disease with amyloid plaques and neurofibrillary tangles.
+  Onset typically after age 65, early-onset (before 65) often familial. Progresses over 8-10 years from mild cognitive impairment to severe dementia.
+icd10: G30.9
+snomed: 26929004
+presentations:
+  - Progressive memory loss (especially recent memories)
+  - Impaired judgment, reasoning
+  - Language difficulties (word-finding)
+  - Disorientation to time, place
+  - Personality changes
+  - Difficulty with complex tasks
+  - Progressive functional decline
+urgency: Moderate
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New neurological deficits
+    - Seizure
+  routine:
+    - Headache management
+    - Neuropathy
+    - Movement disorders
+
+workup:
+  - Clinical diagnosis based on history and cognitive testing - gradual onset, progressive worsening of memory and other cognitive domains
+  - Detailed history from patient and informant (family member) - memory loss affecting daily function, getting lost, repeating questions, difficulty with complex tasks
+  - Cognitive screening - Mini-Mental State Exam (MMSE) or Montreal Cognitive Assessment (MoCA)
+  - MMSE scores - 24-30 normal, 20-23 mild dementia, 10-19 moderate, 0-9 severe
+  - Neuropsychological testing if diagnosis uncertain - memory, language, visuospatial, executive function
+  - Rule out reversible causes - vitamin B12, TSH, RPR (syphilis), HIV (if risk factors)
+  - Brain MRI - exclude structural lesions (tumor, subdural, normal pressure hydrocephalus), shows hippocampal atrophy in AD
+  - Avoid routine CSF testing unless atypical presentation - can show low beta-amyloid 42, elevated tau and phospho-tau
+  - PET imaging (amyloid PET or FDG-PET) if diagnosis uncertain - shows amyloid deposition or temporoparietal hypometabolism
+  - APOE genotyping not recommended for diagnosis (E4 allele increases risk but not deterministic)
+treatment:
+  - Cholinesterase inhibitors for mild-moderate AD - donepezil 5-10mg daily, rivastigmine 3-6mg BID or patch 4.6-13.3 mg/24h, galantamine 8-12mg BID
+  - Modest benefit (2-4 point MMSE improvement), delay nursing home placement by 6 months
+  - Side effects GI (nausea, diarrhea, can give with food), bradycardia, syncope
+  - NMDA antagonist for moderate-severe AD - memantine 10mg BID (start 5mg daily, titrate up)
+  - Can combine memantine with cholinesterase inhibitor
+  - Lecanemab 10 mg/kg IV every 2 weeks (anti-amyloid antibody) - FDA approved 2023, removes amyloid plaques, slows cognitive decline 27% over 18 months
+  - Requires confirmed amyloid on PET or CSF, MRI monitoring for ARIA (amyloid-related imaging abnormalities)
+  - Behavioral and psychological symptoms - non-pharmacologic first (structured activities, music therapy, avoid restraints)
+  - Antipsychotics (risperidone, quetiapine) for severe agitation/psychosis only if safety risk (black box warning increased mortality)
+  - SSRIs for depression (citalopram 10-20mg, sertraline 50-100mg)
+  - Trazodone 25-100mg for insomnia
+  - Safety measures - home safety evaluation, remove driving privileges, wandering precautions, ID bracelet
+  - Caregiver support critical - education, respite care, support groups
+  - Advanced care planning early while patient has capacity
+clinical_pearls:
+  - Insidious onset and gradual progression distinguish from vascular dementia (stepwise) and Lewy body dementia (fluctuating cognition, visual hallucinations, parkinsonism)
+  - Short-term memory loss earliest and most prominent feature
+  - Language difficulties progress from word-finding to fluent aphasia
+  - Apraxia, agnosia, executive dysfunction develop as disease advances
+  - Behavioral changes include apathy, depression, agitation, wandering, sundowning
+  - Preserved social graces early in disease (can mask severity in brief encounters)
+  - Average survival 8-10 years from diagnosis, range 3-20 years
+differentials:
+  - Vascular dementia
+  - Lewy body dementia
+  - Frontotemporal dementia
+  - Normal pressure hydrocephalus
+  - Depression (pseudodementia)
+  - Vitamin B12 deficiency
+trace:
+  - 72-year-old woman brought by daughter for memory problems x 2 years, worsening x 6 months → Repeating questions, forgot stove on twice, missed appointments, difficulty managing medications → MoCA score 18/30 (impaired memory and visuospatial) → Exam shows no focal neurologic deficits → Labs (B12, TSH, CBC, CMP) normal → MRI shows bilateral hippocampal atrophy, no stroke or mass → Diagnose probable Alzheimer disease, mild-moderate stage → Start donepezil 5mg nightly, increase to 10mg after 4 weeks → Refer to neuropsychology for full testing, social work for caregiver resources → Discuss advanced directives, driving safety, home safety modifications → Consider lecanemab after amyloid PET confirmation → Establish care plan with neurology follow-up every 6 months, support for daughter as primary caregiver
+
+citations:
+  - AAN (American Academy of Neurology) Clinical Practice Guidelines
+  - EAN (European Academy of Neurology) Guidelines
+  - UpToDate - Neurology

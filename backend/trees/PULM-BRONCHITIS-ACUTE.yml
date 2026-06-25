@@ -1,0 +1,79 @@
+tree_id: PULM-BRONCHITIS-ACUTE
+name: Acute Bronchitis
+family: pulmonology
+specialty: Primary Care
+chief_complaint: Cough
+description: Self-limited inflammation of bronchi causing acute cough, typically viral. Antibiotics NOT indicated in otherwise healthy patients, supportive care sufficient.
+icd10: J20.9
+snomed: 10509002
+presentations:
+  - Acute cough (productive or dry)
+  - Chest discomfort
+  - Dyspnea (mild)
+  - Wheezing
+  - Preceding URI
+  - Self-limited (typically <3 weeks)
+urgency: routine
+
+referrals:
+  emergency:
+    - Respiratory failure
+    - Massive hemoptysis
+    - Tension pneumothorax
+    - Severe COPD exacerbation
+  urgent:
+    - Suspected lung cancer
+    - Moderate COPD exacerbation
+    - Recurrent pneumonia
+    - New oxygen requirement
+  routine:
+    - Chronic cough
+    - Asthma management
+    - OSA evaluation
+    - Smoking cessation
+
+workup:
+  - Clinical diagnosis: acute cough (lasting <3 weeks) with or without sputum production, often following upper respiratory infection
+  - Fever uncommon or low-grade, dyspnea minimal
+  - Chest exam: normal or scattered rhonchi/wheezes (clear with cough), no crackles or consolidation
+  - Chest X-ray NOT routinely indicated: only if concern for pneumonia (high fever, dyspnea, tachycardia, crackles, elderly, comorbidities)
+  - Pneumonia suggested by: fever >100.4°F, tachycardia >100, tachypnea >24, focal consolidation on exam
+  - Pulse oximetry: if dyspnea present (should be normal in uncomplicated bronchitis)
+  - Etiology: over 90% viral (rhinovirus, coronavirus, influenza, RSV), occasionally Mycoplasma or Chlamydia pneumoniae but still usually self-limited
+
+treatment:
+  - Antibiotics NOT recommended: over 90% viral, antibiotics provide no benefit, increase resistance and side effects
+  - Symptomatic treatment: cough suppression, bronchodilation if wheezing
+  - Dextromethorphan 10-20 mg PO Q4H PRN for cough suppression (marginally effective)
+  - Guaifenesin 200-400 mg PO Q4H (expectorant) if thick sputum
+  - Honey 1-2 teaspoons for cough relief (as effective as dextromethorphan, especially children >1 year)
+  - Bronchodilators: albuterol inhaler 2 puffs Q4-6H PRN if wheezing present (modestly reduces cough duration)
+  - Antipyretics: acetaminophen or ibuprofen for fever and malaise
+  - Supportive care: rest, hydration, humidified air
+  - Expected course: cough usually lasts 2-3 weeks (counsel patients on expected duration to prevent unnecessary antibiotic use)
+  - Antibiotics only if: COPD exacerbation with increased dyspnea/sputum purulence (azithromycin or doxycycline), suspected pertussis (macrolide)
+  - Pertussis consideration: prolonged cough >2 weeks with paroxysms, post-tussive emesis, inspiratory whoop (especially if unvaccinated)
+
+clinical_pearls:
+  - Acute cough <3 weeks usually viral bronchitis - self-limited
+  - Antibiotics NOT indicated in otherwise healthy patients - no benefit
+  - Cough lasts 2-3 weeks typically - patient education prevents unnecessary antibiotics
+  - Chest X-ray only if pneumonia concern (fever, crackles, dyspnea, tachycardia)
+  - Symptomatic treatment: dextromethorphan, honey, albuterol if wheezing
+  - Differentiate from pneumonia: bronchitis no crackles or consolidation, normal vital signs
+  - Pertussis if prolonged paroxysmal cough with whoop - needs macrolide
+  - Patient education most important - set expectations for duration, avoid antibiotics
+
+differentials:
+  - Pneumonia: fever, crackles, dyspnea, tachycardia, infiltrate on chest X-ray
+  - Asthma exacerbation: wheezing, dyspnea, history of asthma, responds to bronchodilators
+  - Pertussis: prolonged paroxysmal cough >2 weeks with inspiratory whoop, post-tussive emesis
+  - COPD exacerbation: underlying COPD, increased dyspnea and sputum purulence beyond baseline
+
+trace: |
+  A 32-year-old healthy woman presented with 5 days of persistent cough following 3-day upper respiratory infection (congestion, sore throat resolved). Productive cough with clear-white sputum, no fever, no dyspnea. Able to work but cough disruptive, especially at night. No wheezing. Exam showed normal vital signs (temp 98.6°F, HR 76, RR 14, O2 sat 98%), clear lungs with occasional scattered rhonchi clearing with cough, no crackles. Diagnosed with acute viral bronchitis. Counseled that cough will likely last 2-3 weeks (setting expectations), antibiotics NOT helpful. Recommended dextromethorphan 15 mg PO Q4-6H PRN for cough suppression, honey 1-2 teaspoons before bed, increased hydration, humidified air at night. Albuterol inhaler prescribed for use if any wheezing develops. Instructed to return if fever develops, dyspnea worsens, or symptoms persist beyond 3 weeks. At 1 week phone follow-up, cough improved 30%, using dextromethorphan at night only. At 2 weeks cough 70% resolved, occasional dry cough only. At 3 weeks cough completely resolved. No antibiotics used, excellent outcome with supportive care alone.
+
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine

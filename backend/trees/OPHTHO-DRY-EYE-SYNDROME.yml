@@ -1,0 +1,70 @@
+tree_id: OPHTHO-DRY-EYE-SYNDROME
+name: Dry Eye Syndrome (Keratoconjunctivitis Sicca)
+family: ophthalmology
+specialty: Ophthalmology, Primary Care
+chief_complaint: Dry, gritty eyes, eye discomfort
+description: |
+  Dry eye syndrome results from inadequate tear production or excessive tear evaporation leading to ocular surface inflammation.
+  Common causes include aging, medications, autoimmune diseases (Sjögren's syndrome), environmental factors, and meibomian gland dysfunction.
+icd10: H04.12
+snomed: "46152009"
+presentations:
+  - Dry, gritty sensation in eyes
+  - Burning or stinging eyes
+  - Foreign body sensation
+  - Eye redness
+  - Blurred vision (improves with blinking)
+  - Excessive tearing (paradoxical reflex tearing)
+  - Eye fatigue
+  - Sensitivity to light (photophobia)
+  - Difficulty wearing contact lenses
+  - Symptoms worse at end of day or with prolonged screen use
+urgency: Low
+referrals:
+  ophthalmology:
+    - Severe dry eye not responding to treatment
+    - Suspected Sjögren's syndrome
+    - Corneal complications
+workup:
+  - History - duration, symptoms, aggravating factors, medications, medical conditions
+  - Slit-lamp examination - tear film quality, corneal staining with fluorescein
+  - Schirmer test - measure tear production (abnormal less than 10mm in 5 minutes)
+  - Tear breakup time - assess tear film stability (abnormal less than 10 seconds)
+  - Meibomian gland evaluation - check for gland dysfunction
+  - Screen for systemic disease - Sjögren's syndrome (SS-A, SS-B antibodies, ANA, RF)
+treatment:
+  first_line:
+    - Artificial tears - preservative-free preferred, use q2-4h as needed
+    - Lubricating ointment at bedtime
+    - Environmental modifications - humidifier, reduce screen time, take breaks, avoid wind/fans
+    - Warm compresses and eyelid hygiene for meibomian gland dysfunction
+  second_line:
+    - Cyclosporine 0.05% ophthalmic emulsion (Restasis) BID - reduces inflammation
+    - Lifitegrast 5% ophthalmic solution (Xiidra) BID - inhibits inflammation
+    - Omega-3 fatty acid supplements
+  advanced:
+    - Punctal plugs - block tear drainage to retain tears on ocular surface
+    - Autologous serum eye drops
+    - Scleral contact lenses
+  treat_underlying_cause:
+    - Adjust medications if possible (antihistamines, decongestants, antidepressants)
+    - Manage autoimmune disease
+clinical_pearls:
+  - Very common condition, especially in older adults and postmenopausal women
+  - Paradoxical tearing occurs because poor tear quality triggers reflex tearing
+  - Screen time and low humidity environments worsen symptoms
+  - Many medications cause or worsen dry eye
+  - Sjögren's syndrome should be considered in severe cases or with systemic symptoms
+  - Artificial tears are first-line but need frequent application
+differentials:
+  - Blepharitis
+  - Conjunctivitis
+  - Meibomian gland dysfunction
+  - Sjögren's syndrome
+  - Medication side effect
+  - Environmental factors
+trace:
+  - 62-year-old woman presents with 6-month history of gritty, burning eyes, worse at end of day and with computer use. Slit-lamp exam shows reduced tear meniscus and corneal punctate staining. Schirmer test shows 6mm in 5 minutes bilaterally. Diagnose moderate dry eye syndrome. Start preservative-free artificial tears q3h and lubricating ointment at bedtime. Recommend warm compresses for meibomian gland dysfunction. Symptoms improve 50% in 2 weeks. Continue artificial tears maintenance therapy.
+citations:
+  - American Academy of Ophthalmology Dry Eye Guidelines
+  - UpToDate - Ophthalmology

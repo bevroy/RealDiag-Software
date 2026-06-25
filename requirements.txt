@@ -1,2 +1,58 @@
 psutil>=5.9.0
 colorama>=0.4.6
+<<<<<<< HEAD
+=======
+
+# Runtime dependencies required by the FastAPI app (used by Render's Python build)
+fastapi
+uvicorn[standard]
+gunicorn
+pyyaml
+prometheus_client
+jinja2
+pydantic
+pydantic[email]
+httpx
+reportlab
+pyjwt
+python-multipart
+
+# Security enhancements
+slowapi>=0.1.9
+bcrypt>=4.0.1
+cryptography>=41.0.0
+pyotp>=2.9.0
+qrcode[pil]>=7.4.2
+Pillow>=12.2.0
+
+# Testing and Quality
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+locust>=2.15.0
+bandit>=1.7.5
+safety>=2.3.5
+
+# Monitoring and Error Tracking
+sentry-sdk>=1.38.0
+prometheus-client>=0.18.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Caching
+redis>=5.0.0
+hiredis>=2.2.0
+
+# E2E Testing
+playwright>=1.40.0
+
+# AI Tree Generation (optional)
+openai>=1.0.0
+anthropic>=0.18.0
+
+# Performance
+aiofiles>=23.0.0
+orjson>=3.9.0
+>>>>>>> origin/main

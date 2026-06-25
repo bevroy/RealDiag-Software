@@ -1,0 +1,25 @@
+=== RealDiag Load Test ===
+Started: Thu Nov 20 00:48:53 UTC 2025
+
+Test 1: Symptom Search (/search/by-symptoms)
+Testing with 20 concurrent requests...
+Duration: 33s
+
+Test 2: Health Endpoint (/health)
+Testing with 50 concurrent requests...
+Duration: 2s
+
+Test 3: Education Cases (/education/cases)
+Testing with 15 concurrent requests...
+Duration: 1s
+
+Test 4: Quiz Questions (/education/quiz/questions)
+Testing with 15 concurrent requests...
+Duration: 0s
+
+Test 5: Rate Limiting Test
+Sending 65 requests in rapid succession (should hit 60/min limit)...
+Successful: 32, Rate Limited: 0, Duration: 54s
+
+Completed: Thu Nov 20 00:50:23 UTC 2025
+=== Results saved to load_test_results.txt ===

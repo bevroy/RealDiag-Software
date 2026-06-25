@@ -1,0 +1,36 @@
+[build]
+  command = "cd frontend && npm install && npm run build"
+  publish = "frontend/out"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_PUBLIC_API_BASE = "https://realdiag-software.onrender.com"
+  # Updated: 2025-12-16 - Fixed video caching and removed old demo files
+
+# HTML pages should not be cached
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Static assets can be cached longer
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Video files should be revalidated (to allow updates)
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

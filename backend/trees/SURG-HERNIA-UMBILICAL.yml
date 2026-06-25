@@ -1,0 +1,146 @@
+tree_id: SURG-HERNIA-UMBILICAL
+name: Umbilical Hernia (Surgical Evaluation)
+family: surgery
+specialty: Surgery, Primary Care, Pediatrics
+chief_complaint: Umbilical bulge, belly button protrusion
+description: |
+  Umbilical hernia is protrusion of abdominal contents through umbilical ring defect.
+  In children: congenital, usually closes spontaneously by age 4-5 years.
+  In adults: acquired from increased intra-abdominal pressure, often requires surgical repair.
+icd10: K42.9
+snomed: "396347007"
+presentations:
+  - Bulge or protrusion at umbilicus
+  - More prominent with crying (infants), coughing, straining, standing
+  - Reducible in most cases
+  - Soft, non-tender if uncomplicated
+  - May be asymptomatic or cause dull ache
+  - Adults - risk factors include obesity, pregnancy, ascites, chronic cough, heavy lifting
+  - Children - more common in premature infants, African descent
+urgency: Low
+referrals:
+  emergency:
+    - Incarcerated hernia (irreducible, tender, firm)
+    - Strangulated hernia (severe pain, nausea, vomiting, fever, skin changes)
+    - Signs of bowel obstruction
+  pediatric_surgery:
+    - Umbilical hernias in children >4-5 years
+    - Large defects (>2 cm)
+    - Symptomatic pediatric hernias
+  general_surgery:
+    - All symptomatic adult umbilical hernias
+    - Asymptomatic hernias with large defect (>2 cm)
+    - Progressive enlargement
+workup:
+  - History
+    - Duration of hernia
+    - Reducibility
+    - Associated pain or discomfort
+    - Change in size
+    - Predisposing factors - pregnancy history, ascites, obesity, chronic cough
+    - Previous abdominal surgeries
+  - Physical examination
+    - Inspect umbilicus while standing and with Valsalva
+    - Palpate defect to assess size (measure in cm)
+    - Assess reducibility - gentle pressure with patient supine
+    - Check for complications - incarceration (irreducible, tender), skin changes
+    - Examine for ascites (fluid wave, shifting dullness)
+    - Assess for other hernias
+  - Imaging
+    - Clinical diagnosis - imaging not routinely needed
+    - Ultrasound if uncertain diagnosis or to assess defect size
+    - CT abdomen if concern for incarceration, obstruction, or intra-abdominal pathology
+    - Cirrhotic patients with ascites - paracentesis to rule out spontaneous bacterial peritonitis before surgery
+treatment:
+  pediatric_management:
+    - Observation for children <4-5 years
+      - Most close spontaneously by age 4-5 (80-90%)
+      - Even defects up to 2 cm often close
+    - Indications for pediatric surgery
+      - Persistence beyond age 4-5 years
+      - Large defect (>2 cm) unlikely to close
+      - Incarceration (rare, <1%)
+      - Symptomatic hernia
+      - Parental preference (cosmetic)
+    - Taping or binding NOT effective
+  adult_management:
+    - Conservative management
+      - Observation option for small (<1 cm), asymptomatic hernias
+      - Risk of incarceration 10-20% over lifetime
+      - Treat underlying causes - weight loss, manage ascites, smoking cessation
+      - No role for trusses or binders
+    - Surgical repair indications
+      - Symptomatic hernias (pain, discomfort)
+      - Large hernias (>2 cm)
+      - Progressive enlargement
+      - Patient preference (most surgeons recommend repair)
+      - Cirrhotic patients are high-risk (optimize before surgery)
+    - Surgical techniques
+      - Primary suture repair (small defects <2 cm, low tension)
+        - Simple closure of fascia
+        - Higher recurrence (10-20%)
+      - Mesh repair (defects >2 cm or high-risk patients)
+        - Onlay, sublay, or underlay mesh
+        - Lower recurrence (1-5%)
+        - Open or laparoscopic approach
+      - Laparoscopic repair
+        - Intraperitoneal onlay mesh (IPOM)
+        - Benefits - less postoperative pain, lower wound complications
+        - Requires general anesthesia
+  special_populations:
+    - Cirrhotic patients with ascites
+      - High surgical risk (mortality 10-30%)
+      - Control ascites medically before surgery if possible
+      - Preoperative assessment - MELD score, Child-Pugh class
+      - Consider TIPS (transjugular intrahepatic portosystemic shunt) before hernia repair if refractory ascites
+      - Postoperative ascites increases recurrence risk
+    - Pregnant women
+      - Defer surgery until after delivery if possible
+      - Incarceration risk during pregnancy is low
+      - Repair 6 months postpartum
+    - Obese patients
+      - Weight loss before surgery improves outcomes
+      - Higher recurrence risk
+      - Consider component separation for large defects
+  postoperative_care:
+    - Most procedures outpatient or 23-hour observation
+    - Pain control - NSAIDs and acetaminophen, minimal opioids
+    - Activity restrictions
+      - Light activity immediately
+      - No heavy lifting (>10 lbs) for 4-6 weeks
+      - Return to full activity 6-8 weeks
+    - Complications
+      - Seroma (10-20%) - fluid collection, usually resolves spontaneously
+      - Wound infection (2-5%)
+      - Recurrence (1-5% with mesh, 10-20% without mesh)
+      - Chronic pain (5-10%)
+      - Mesh complications (infection, erosion) rare but serious
+clinical_pearls:
+  - Pediatric umbilical hernias usually close spontaneously - defer surgery until age 4-5
+  - Taping or binding umbilical hernias does NOT work and may cause skin irritation
+  - Adult umbilical hernias do NOT close spontaneously - will progressively enlarge
+  - Cirrhotic patients are high surgical risk - control ascites before repair
+  - Incarceration risk higher in adults than inguinal hernias
+  - Small fascial defect with large hernia sac ("neck of a bottle") - high incarceration risk
+  - Mesh reduces recurrence but adds risk of infection and chronic complications
+  - Laparoscopic repair has advantages but requires general anesthesia and is more expensive
+  - Sister Mary Joseph nodule - umbilical metastasis from intra-abdominal malignancy (firm, non-reducible)
+  - Recurrence higher with obesity, smoking, diabetes, steroid use, connective tissue disorders
+differentials:
+  - Umbilical hernia (reducible)
+  - Incarcerated umbilical hernia
+  - Strangulated umbilical hernia
+  - Umbilical granuloma (pediatric)
+  - Omphalitis (umbilical infection)
+  - Diastasis recti (midline fascial laxity, not true hernia)
+  - Sister Mary Joseph nodule (umbilical metastasis)
+  - Lipoma
+trace: |
+  38-year-old woman with 2-year history of umbilical bulge, first noticed during second pregnancy 3 years ago. Bulge persists postpartum, slowly enlarging. Intermittent dull ache especially after lifting children. Reducible, disappears when lying down. No nausea, vomiting, or skin changes. Past medical history: 2 pregnancies, gestational diabetes (resolved), BMI 32 (obese). Exam showed 3 cm soft, reducible umbilical hernia, 2 cm fascial defect, no tenderness, skin intact. No ascites. Clinical diagnosis of umbilical hernia. Options discussed: observation vs surgical repair. Given enlarging hernia and symptoms, patient desires repair. Referred to general surgery. Preoperative optimization: counseled on weight loss, smoking cessation counseling (non-smoker), good glycemic control. Underwent elective open umbilical hernia repair with mesh under general anesthesia. Mesh placed in sublay position (between fascia and peritoneum), secured with sutures, no fixation tacks. Umbilicus preserved for cosmesis. Procedure 60 minutes, no complications. Discharged home same day. Pain controlled with ibuprofen 600mg q8h and acetaminophen 1000mg q6h. Post-op day 3: small seroma noted (2x2 cm, soft, non-tender), no drainage, observation. Instructed no heavy lifting >10 lbs x 6 weeks, no abdominal exercises x 6 weeks. At 2 weeks: incision healed, seroma smaller. At 6 weeks: seroma resolved completely, minimal discomfort, cleared for normal activity. At 6 months: no recurrence, no chronic pain, excellent cosmetic result, satisfied with outcome.
+citations:
+  - HerniaSurge Group International Guidelines
+  - American Pediatric Surgical Association - Umbilical Hernia Guidelines
+  - American College of Surgeons - Ventral Hernia Repair
+  - UpToDate - Umbilical Hernia in Children and Adults
+  - British Hernia Society Guidelines
+author: RealDiag Team

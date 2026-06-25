@@ -1,0 +1,409 @@
+tree_id: PSYCH-ANXIETY
+name: Anxiety Disorders
+id: PSYCH-ANXIETY
+title: Anxiety Disorders Diagnostic Tree
+family: Psychiatry
+specialty: Psychiatry
+version: 1.0
+icd10: F41.9
+snomed: 197480006
+presentations:
+  - Excessive worry, difficult to control
+  - Restlessness, on edge
+  - Fatigue, irritability
+  - Muscle tension
+  - Sleep disturbance
+  - Difficulty concentrating
+  - Physical symptoms: palpitations, sweating, trembling
+last_updated: 2025-11-20
+evidence_level: DSM-5-TR, APA Practice Guidelines
+entry: screening
+
+workup:
+  - PHQ-9 and GAD-7 questionnaires for screening and severity assessment
+  - TSH to rule out hyperthyroidism
+  - ECG if palpitations (rule out arrhythmia)
+  - Urine drug screen if substance use suspected
+  - Rule out medical causes: anemia (CBC), hypoglycemia (glucose), pheochromocytoma (rare)
+  - Consider PTSD screening (PCL-5) if trauma history
+
+treatment:
+  - First-line: SSRIs (sertraline 50-200mg daily, escitalopram 10-20mg daily)
+  - Acute: benzodiazepines SHORT-TERM only (lorazepam 0.5-1mg PRN)
+  - CBT (cognitive behavioral therapy) - most effective long-term
+  - Buspirone 15-30mg BID for generalized anxiety (non-habit forming)
+  - Avoid long-term benzodiazepines (dependence, tolerance)
+  - Beta-blockers for performance anxiety: propranolol 10-40mg PRN
+
+clinical_pearls:
+  - GAD-7 ≥10 suggests moderate-to-severe anxiety requiring treatment
+  - Always rule out medical causes - hyperthyroidism, pheochromocytoma, cardiac arrhythmias
+  - Panic attacks are symptom, not diagnosis - identify underlying disorder
+  - 50% of anxiety disorder patients have comorbid depression
+  - Benzodiazepines effective short-term but cause dependence - avoid long-term use
+  - SSRIs are first-line treatment for most anxiety disorders
+
+red_flags:
+  - Chest pain with anxiety (rule out ACS, PE, pneumothorax)
+  - New-onset anxiety in elderly (medical cause until proven otherwise)
+  - Anxiety with altered mental status (delirium, intoxication, withdrawal)
+  - Suicidal ideation (up to 25% of anxiety patients)
+  - Substance use disorder (alcohol, benzodiazepines)
+
+differentials:
+  - Depression
+  - Hyperthyroidism
+  - Cardiac arrhythmia
+  - Substance use
+  - PTSD
+
+referrals:
+  emergency:
+    - Acute panic with medical concern
+    - Severe anxiety with danger
+  urgent:
+    - Medication-resistant anxiety
+    - Panic disorder
+  routine:
+    - Routine anxiety management
+    - Therapy
+nodes:
+- id: screening
+  when: {}
+  description: Initial anxiety disorder screening
+  tests:
+  - GAD-7 (Generalized Anxiety Disorder-7)
+  - PHQ-9 (screen for comorbid depression)
+  - Vital signs (HR, BP, temp)
+  - ECG if chest pain or palpitations
+  - TSH, CBC, CMP, glucose
+  - Urine drug screen
+  - Caffeine and medication history
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - chest pain
+      - shortness of breath
+      - palpitations
+    go: cardiac_workup
+  - when:
+      symptoms_contains_any:
+      - panic attack
+      - discrete episodes
+      - fear of dying
+      - derealization
+    go: panic_assessment
+  - when:
+      all_of:
+      - symptoms_contains_any:
+        - excessive worry
+        - restlessness
+        - muscle tension
+      - duration: '>=6 months'
+    go: generalized_anxiety
+  - when:
+      symptoms_contains_any:
+      - social situations
+      - public speaking
+      - fear of embarrassment
+    go: social_anxiety
+  - when:
+      symptoms_contains_any:
+      - obsessions
+      - compulsions
+      - intrusive thoughts
+    go: ocd_screen
+  - when:
+      symptoms_contains_any:
+      - trauma history
+      - flashbacks
+      - nightmares
+      - avoidance
+    go: ptsd_screen
+  - default: medical_anxiety
+
+- id: cardiac_workup
+  when:
+    symptoms_contains_any:
+    - chest pain
+    - palpitations
+    - shortness of breath
+  description: Rule out cardiac and pulmonary causes
+  tests:
+  - ECG (rule out arrhythmia, MI, PE)
+  - Troponin if chest pain
+  - D-dimer if PE risk factors
+  - Chest X-ray
+  - Consider echocardiogram if murmur or structural concern
+  - Holter monitor if palpitations intermittent
+  suggest_dx:
+  - Rule out acute coronary syndrome
+  - Rule out pulmonary embolism
+  - Rule out arrhythmia
+  - Panic disorder after medical clearance
+  referrals:
+  - Cardiology if abnormal ECG or persistent symptoms
+  - Emergency department if acute cardiac concern
+  management:
+  - Do NOT attribute chest pain to anxiety until cardiac ruled out
+  - Young healthy patient + typical panic features = lower cardiac risk
+  - Atypical features or risk factors = full cardiac workup
+  next:
+  - when:
+      cardiac_negative: true
+    go: panic_assessment
+  - default: null
+
+- id: panic_assessment
+  when:
+    symptoms_contains_any:
+    - panic attack
+    - discrete episodes
+    - fear of dying
+    - fear of losing control
+  description: Panic disorder evaluation
+  tests:
+  - Detailed description of panic episodes
+  - Frequency and duration of attacks
+  - Agoraphobia assessment (avoidance of situations)
+  - Rule out substance-induced (caffeine, stimulants, withdrawal)
+  suggest_dx:
+  - Panic disorder (F41.0)
+  - Panic disorder with agoraphobia (F40.01)
+  - Panic attack as symptom of other disorder
+  referrals:
+  - Psychiatry for medication management
+  - CBT with exposure therapy - highly effective
+  - Panic-focused psychodynamic psychotherapy
+  management:
+  - SSRIs first-line - sertraline 25mg start, increase to 50-200mg
+  - Escitalopram 5-10mg, fluoxetine 10-20mg also effective
+  - SNRIs (venlafaxine) alternative
+  - Benzodiazepines (clonazepam, alprazolam) for acute relief only
+  - Avoid long-term benzodiazepine use due to dependence
+  - CBT with interoceptive exposure essential
+  - Takes 4-6 weeks for SSRI to work
+  monitoring:
+  - GAD-7 to track overall anxiety
+  - Panic diary - frequency and severity of attacks
+  - Benzodiazepine use tracking
+  - Screen for agoraphobia development
+  next:
+  - default: null
+
+- id: generalized_anxiety
+  when:
+    all_of:
+    - symptoms_contains_any:
+      - excessive worry
+      - restlessness
+      - difficulty concentrating
+    - duration: '>=6 months'
+    - gad7_score: '>=10'
+  description: Generalized Anxiety Disorder assessment
+  tests:
+  - GAD-7 score for severity and monitoring
+  - PHQ-9 (50% have comorbid depression)
+  - Substance use screening
+  - TSH (rule out hyperthyroidism)
+  suggest_dx:
+  - Generalized anxiety disorder (F41.1)
+  - Mild (GAD-7 5-9), Moderate (10-14), Severe (15-21)
+  referrals:
+  - Psychiatry within 2-4 weeks if moderate-severe
+  - CBT or ACT (Acceptance and Commitment Therapy)
+  - Consider mindfulness-based stress reduction
+  management:
+  - SSRIs first-line - escitalopram 10-20mg, sertraline 50-200mg
+  - SNRIs - duloxetine 60mg, venlafaxine XR 75-225mg
+  - Buspirone 15-60mg divided doses (non-addictive alternative)
+  - Pregabalin 150-600mg if SSRI/SNRI ineffective
+  - Avoid benzodiazepines for chronic anxiety
+  - Psychotherapy is as effective as medication
+  - Combination therapy superior to monotherapy
+  lifestyle:
+  - Regular exercise (30min most days)
+  - Sleep hygiene
+  - Limit caffeine and alcohol
+  - Stress management techniques
+  monitoring:
+  - GAD-7 at each visit
+  - Response typically by 4-6 weeks
+  - Full remission may take 8-12 weeks
+  next:
+  - default: null
+
+- id: social_anxiety
+  when:
+    all_of:
+    - symptoms_contains_any:
+      - fear of social situations
+      - fear of embarrassment
+      - avoidance of social interactions
+    - duration: '>=6 months'
+  description: Social anxiety disorder evaluation
+  tests:
+  - Liebowitz Social Anxiety Scale
+  - Assess specific vs generalized social anxiety
+  - Impact on functioning (work, relationships)
+  - Rule out avoidant personality disorder
+  suggest_dx:
+  - Social anxiety disorder (social phobia) (F40.10)
+  - Performance only subtype if limited to public speaking
+  referrals:
+  - CBT with exposure therapy - gold standard
+  - Group therapy specifically for social anxiety
+  - Psychiatry if severe or medication needed
+  management:
+  - SSRIs first-line - sertraline, paroxetine, fluvoxamine FDA-approved
+  - Escitalopram, fluoxetine also effective
+  - Venlafaxine XR alternative
+  - Propranolol 10-40mg PRN for performance anxiety only
+  - Benzodiazepines NOT recommended (dependence risk)
+  - Exposure therapy essential component
+  - Addresses safety behaviors and anticipatory anxiety
+  next:
+  - default: null
+
+- id: ocd_screen
+  when:
+    symptoms_contains_any:
+    - obsessions
+    - compulsions
+    - intrusive thoughts
+    - repetitive behaviors
+  description: OCD screening and referral
+  tests:
+  - Yale-Brown Obsessive Compulsive Scale (Y-BOCS)
+  - Distinguish obsessions (thoughts) from compulsions (behaviors)
+  - Time spent on rituals per day
+  - Insight level (good, fair, poor, absent)
+  suggest_dx:
+  - Obsessive-compulsive disorder (F42.2)
+  - OCD with good/fair insight vs poor insight/delusional
+  referrals:
+  - Psychiatry referral required
+  - ERP (Exposure and Response Prevention) therapy - gold standard
+  - Specialized OCD treatment programs if severe
+  management:
+  - SSRIs at HIGH doses - fluoxetine 60-80mg, sertraline 200mg
+  - Takes 10-12 weeks for response (longer than depression/anxiety)
+  - Clomipramine (TCA) most effective but side effects
+  - ERP therapy essential - medication alone insufficient
+  - Do NOT provide reassurance - reinforces compulsions
+  note: OCD requires specialized treatment - primary care management not recommended
+  next:
+  - default: null
+
+- id: ptsd_screen
+  when:
+    symptoms_contains_any:
+    - trauma history
+    - flashbacks
+    - nightmares
+    - hypervigilance
+    - avoidance
+  description: PTSD screening and trauma assessment
+  tests:
+  - PC-PTSD-5 (Primary Care PTSD Screen)
+  - PCL-5 (PTSD Checklist) if positive screen
+  - Trauma history (type, duration, age at exposure)
+  - Assess for dissociative symptoms
+  suggest_dx:
+  - Post-traumatic stress disorder (F43.10)
+  - Acute stress disorder if <1 month since trauma
+  - PTSD with dissociative symptoms (depersonalization, derealization)
+  referrals:
+  - Psychiatry or trauma specialist
+  - Trauma-focused CBT or EMDR (Eye Movement Desensitization)
+  - Veterans Affairs if military trauma
+  management:
+  - SSRIs first-line - sertraline, paroxetine FDA-approved
+  - Fluoxetine, venlafaxine also effective
+  - Prazosin 1-15mg qhs for nightmares
+  - Avoid benzodiazepines - may worsen PTSD outcomes
+  - Trauma-focused psychotherapy essential
+  - EMDR highly effective
+  note: PTSD requires specialized trauma-informed care
+  next:
+  - default: null
+
+- id: medical_anxiety
+  when: {}
+  description: Rule out medical causes of anxiety
+  tests:
+  - TSH, free T4 (hyperthyroidism)
+  - CBC (anemia)
+  - CMP, calcium (hypercalcemia)
+  - Glucose (hypoglycemia)
+  - Urine metanephrines (pheochromocytoma if refractory)
+  - ECG (arrhythmia)
+  - Consider pulmonary function tests if dyspnea
+  suggest_dx:
+  - Secondary anxiety disorder due to medical condition
+  - Substance-induced anxiety disorder
+  - Rule out hyperthyroidism, pheochromocytoma, hypoglycemia
+  referrals:
+  - Endocrinology if thyroid or adrenal concern
+  - Cardiology if arrhythmia suspected
+  management:
+  - Treat underlying medical condition first
+  - Avoid attributing all symptoms to anxiety until medical cleared
+  - New-onset anxiety in elderly = medical cause until proven otherwise
+  next:
+  - when:
+      medical_cause_ruled_out: true
+    go: generalized_anxiety
+  - default: null
+
+differential_diagnosis:
+  - Medical causes
+    - Hyperthyroidism (check TSH)
+    - Cardiac arrhythmias (ECG, Holter)
+    - Pheochromocytoma (urine metanephrines if refractory)
+    - Hypoglycemia (glucose)
+    - Hypercalcemia (calcium level)
+    - Mitral valve prolapse
+    - Pulmonary embolism
+  - Substance-induced
+    - Caffeine intoxication
+    - Stimulant use (amphetamines, cocaine)
+    - Alcohol or benzodiazepine withdrawal
+    - Cannabis intoxication
+    - Medication (albuterol, levothyroxine, corticosteroids)
+  - Psychiatric
+    - Depression with anxious distress
+    - Bipolar disorder (anxiety during mood episodes)
+    - Psychotic disorders
+    - Adjustment disorder with anxiety
+
+disposition_guidance:
+  admit:
+  - Acute suicidal ideation
+  - Severe panic with inability to function
+  - Substance withdrawal requiring medical management
+  - Comorbid psychiatric emergency
+  discharge:
+  - Medically stable
+  - No acute safety concerns
+  - Follow-up arranged within 1 week
+  - Medication started or continued
+  - Written anxiety management plan
+  follow_up:
+  - Primary care within 1 week to assess medication response
+  - Psychiatry within 2-4 weeks if moderate-severe
+  - Psychotherapy referral arranged (CBT, exposure therapy)
+  - GAD-7 at each visit to track progress
+
+references:
+  - American Psychiatric Association. DSM-5-TR Diagnostic Criteria. 2022.
+  - APA Practice Guideline for Treatment of Patients with Panic Disorder. 2009.
+  - Spitzer RL et al. A brief measure for assessing generalized anxiety disorder - the GAD-7. Arch Intern Med. 2006.
+  - Bandelow B et al. World Federation of Societies of Biological Psychiatry (WFSBP) guidelines for the pharmacological treatment of anxiety disorders. World J Biol Psychiatry. 2012.
+  - NICE Guidelines - Generalised anxiety disorder and panic disorder in adults. 2019.
+
+citations:
+  - APA (American Psychiatric Association) Practice Guidelines
+  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+  - UpToDate - Psychiatry

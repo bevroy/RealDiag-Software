@@ -1,0 +1,63 @@
+tree_id: PULM-ASTHMA
+name: Asthma
+family: pulmonology
+specialty: Pulmonology
+icd10:
+- J45.20
+- J45.40
+- J45.50
+- J45.901
+snomed:
+- '195967001'
+urgency: medium
+description: Comprehensive evaluation and management of Asthma
+version: '1.0'
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Episodic wheezing and dyspnea
+- Nocturnal cough
+- Chest tightness
+- Symptoms worse with triggers (cold air, exercise, allergens)
+- Reversible airflow obstruction
+workup:
+- Spirometry with bronchodilator (FEV1 improves ≥12% and 200mL = reversible obstruction)
+- Peak expiratory flow rate (PEFR) monitoring
+- Methacholine challenge if spirometry normal but clinical suspicion high
+- Allergy testing (skin prick or IgE) if allergic triggers suspected
+treatment:
+- 'Guideline-based treatment options for Asthma include:'
+- 'Mild intermittent: Albuterol MDI 2 puffs PRN (if using >2 days/week, add controller)
+  (ATS 2023)'
+- 'Mild-moderate persistent: ICS (ATS 2023)'
+- 'Moderate-severe: ICS-LABA (ATS 2023)'
+- 'Uncontrolled on ICS-LABA: Add LAMA (tiotropium) or biologics (omalizumab if allergic,
+  dupilumab if eosinophilic) (ATS 2023)'
+- Asthma action plan (green-yellow-red zones based on symptoms/peak flow) (ATS 2023)
+clinical_pearls:
+- 'Diagnosis: Episodic symptoms + reversible obstruction (FEV1 improves ≥12% and 200mL
+  post-bronchodilator)'
+- 'Intermittent: Symptoms ≤2 days/week. Persistent: Symptoms >2 days/week'
+- 'Step-up therapy: Add ICS if symptoms >2 days/week, add LABA if daily symptoms'
+- Avoid LABA monotherapy (increased mortality risk) - always use with ICS
+- 'Peak flow monitoring: <80% personal best = action needed, <50% = severe'
+- 'Aspirin-exacerbated respiratory disease (AERD): Asthma + nasal polyps + ASA sensitivity'
+referrals:
+- Pulmonology if severe or uncontrolled despite step 4 therapy (ICS-LABA + LAMA)
+- Allergy/immunology for biologic therapy consideration
+- 'Consider if: ≥2 ED visits/year, 1+ hospitalization, or frequent steroid bursts'
+differentials:
+  - COPD
+  - Bronchitis
+  - Heart failure
+  - PE
+  - Vocal cord dysfunction
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

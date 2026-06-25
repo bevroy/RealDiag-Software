@@ -1,0 +1,417 @@
+tree_id: EMERGENCY-HEAT-STROKE
+name: Heat Stroke
+family: Emergency Medicine
+specialty: Emergency Medicine
+chief_complaint: Core body temperature over 40°C (104°F) with altered mental status after heat exposure
+description: Heat stroke is the most severe heat-related illness, defined as core temperature over 40°C (104°F) with central nervous system dysfunction (altered mental status, seizures, coma). Life-threatening medical emergency with mortality 10-50% if not rapidly treated. Two forms include classic heat stroke (passive environmental heat exposure, affects elderly/chronically ill during heat waves) and exertional heat stroke (strenuous physical activity, affects young healthy individuals). Pathophysiology involves thermoregulatory failure leading to multiorgan dysfunction from direct cellular injury and systemic inflammatory response. Classic triad includes hyperthermia, anhidrosis (absence of sweating), altered mental status but sweating may be present in exertional heat stroke. Treatment is IMMEDIATE rapid cooling to under 39°C within 30 minutes (goal temp 38-39°C). Evaporative cooling (misting and fanning) and ice water immersion most effective. Benzodiazepines for seizures or shivering. Avoid antipyretics (ineffective). Complications include rhabdomyolysis, AKI, DIC, ARDS, liver failure.
+icd10: T67.0
+urgency: emergent
+
+differentials:
+  - Sepsis
+  - Thyroid storm
+  - Drug-induced hyperthermia
+  - Malignant hyperthermia
+  - CNS infection
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Core temperature measurement (CRITICAL):
+    - Use core temperature probe (rectal, esophageal, or bladder)
+    - Rectal temperature preferred for initial measurement
+    - Esophageal preferred during active cooling (responds faster)
+    - Oral and tympanic unreliable (underestimate core temp)
+    - Heat stroke definition: Core temp over 40°C (104°F) with CNS dysfunction
+  - Heat stroke classification:
+    - Classic (non-exertional) heat stroke:
+      - Passive environmental heat exposure
+      - Typically affects elderly, chronically ill, socially isolated
+      - Occurs during heat waves
+      - Gradual onset over days
+      - Anhidrosis (dry skin) typical
+      - Higher mortality (up to 50%)
+    - Exertional heat stroke:
+      - Strenuous physical activity in hot environment
+      - Affects young, healthy individuals (athletes, military, laborers)
+      - Rapid onset (minutes to hours)
+      - Sweating often PRESENT (diaphoretic)
+      - Lower mortality if treated rapidly (10-15%)
+      - Higher risk of rhabdomyolysis and AKI
+  - Clinical presentation:
+    - Neurologic symptoms (ALWAYS present by definition):
+      - Altered mental status (confusion, disorientation, irritability)
+      - Delirium or psychosis
+      - Seizures (20% of patients)
+      - Ataxia
+      - Coma (11% at presentation)
+      - Focal deficits (rare, suggests stroke as alternative diagnosis)
+    - Hyperthermia:
+      - Core temperature over 40°C (104°F)
+      - Often over 41°C (106°F) at presentation
+    - Anhidrosis (ABSENCE of sweating):
+      - Classic finding in non-exertional heat stroke
+      - Dry, hot skin
+      - However, sweating may be PRESENT in exertional heat stroke
+      - Presence of sweating does NOT exclude heat stroke
+    - Cardiovascular:
+      - Tachycardia (often over 130 bpm)
+      - Hypotension (distributive shock from vasodilation)
+      - Initial hypertension possible (catecholamine surge)
+      - Arrhythmias
+    - Respiratory:
+      - Tachypnea (hyperventilation)
+      - Respiratory alkalosis initially
+      - ARDS (later complication)
+    - Gastrointestinal:
+      - Nausea and vomiting
+      - Diarrhea
+      - Liver injury (elevated transaminases)
+      - Liver failure (late, poor prognosis)
+    - Renal:
+      - Oliguria or anuria
+      - Acute kidney injury (multifactorial: rhabdomyolysis, dehydration, ATN)
+    - Hematologic:
+      - Disseminated intravascular coagulation (DIC) in severe cases
+      - Thrombocytopenia
+      - Elevated PT/PTT
+      - Bleeding
+  - Risk factors:
+    - Environmental factors:
+      - High ambient temperature and humidity
+      - Poor ventilation
+      - Lack of acclimatization to heat
+      - Heat wave (multiple consecutive hot days)
+    - Individual factors:
+      - Age extremes (elderly over 65, infants)
+      - Chronic medical conditions:
+        - Cardiovascular disease
+        - Diabetes mellitus
+        - Obesity
+        - Mental illness
+        - Neurologic disease (Parkinson, dementia)
+        - Skin disorders (psoriasis, eczema, scleroderma - impaired sweating)
+      - Lack of air conditioning
+      - Social isolation
+      - Dehydration
+      - Sleep deprivation
+      - Poor physical fitness
+    - Medications:
+      - Anticholinergics (impair sweating)
+      - Antihistamines
+      - Diuretics (volume depletion)
+      - Beta-blockers (impair cardiac response to heat)
+      - Antipsychotics (impair thermoregulation, neuroleptic malignant syndrome)
+      - Sympathomimetics (amphetamines, cocaine)
+      - Alcohol
+    - Exertional factors:
+      - Strenuous exercise in heat
+      - Heavy/occlusive clothing or equipment
+      - Lack of breaks or hydration during activity
+  - Physical examination:
+    - Vital signs:
+      - Core temperature (rectal probe): Over 40°C (104°F)
+      - Heart rate (tachycardia, often over 130)
+      - Blood pressure (hypotension or hypertension)
+      - Respiratory rate (tachypnea)
+      - Oxygen saturation
+    - Neurologic:
+      - Mental status (GCS, confusion, delirium, coma)
+      - Pupillary response
+      - Motor exam (weakness, hyperreflexia, clonus)
+      - Seizure activity
+    - Skin:
+      - Temperature (hot to touch)
+      - Moisture (dry in classic, may be wet in exertional)
+      - Color (flushed or pale)
+    - Cardiovascular:
+      - Tachycardia
+      - Peripheral pulses
+      - Capillary refill
+    - Respiratory:
+      - Lung auscultation (crackles suggest ARDS)
+      - Respiratory effort
+    - Abdomen:
+      - Tenderness
+      - Bowel sounds
+  - Laboratory evaluation:
+    - Basic metabolic panel:
+      - Hypernatremia or hyponatremia (depends on fluid losses and intake)
+      - Hyperkalemia (rhabdomyolysis, AKI)
+      - Acute kidney injury (elevated BUN and creatinine)
+      - Hypocalcemia (with rhabdomyolysis)
+      - Hypoglycemia or hyperglycemia
+    - Complete blood count:
+      - Hemoconcentration (elevated Hct from dehydration)
+      - Leukocytosis (stress response)
+      - Thrombocytopenia (DIC)
+    - Liver function tests:
+      - Elevated transaminases (AST and ALT, often over 1000 U/L)
+      - Hyperbilirubinemia
+      - Prolonged PT/INR (hepatic dysfunction or DIC)
+      - Liver injury occurs in 30% of heat stroke patients
+      - Fulminant hepatic failure (poor prognosis)
+    - Coagulation studies:
+      - Prolonged PT and PTT (DIC)
+      - Low fibrinogen (under 100 mg/dL)
+      - Elevated D-dimer
+      - DIC present in 25-45% of severe heat stroke
+    - Creatine kinase:
+      - Markedly elevated in exertional heat stroke (rhabdomyolysis)
+      - CK over 5000 U/L common, can exceed 100,000 U/L
+      - Monitor for AKI from myoglobinuria
+    - Arterial blood gas:
+      - Respiratory alkalosis (hyperventilation, early)
+      - Metabolic acidosis (lactate, late)
+      - Mixed disorders common
+    - Lactate:
+      - Elevated (tissue hypoperfusion, mitochondrial dysfunction)
+    - Troponin:
+      - May be elevated (myocardial injury from heat)
+    - Urinalysis:
+      - Myoglobinuria (positive blood on dipstick without RBCs)
+      - Proteinuria
+      - Granular casts
+    - Toxicology screen (if suspected drug ingestion)
+  - Imaging:
+    - Chest X-ray:
+      - ARDS (diffuse bilateral infiltrates)
+      - Aspiration pneumonia
+    - Head CT:
+      - If persistent altered mental status after cooling
+      - Rule out intracranial hemorrhage or stroke
+      - Cerebral edema (uncommon)
+    - Echocardiogram (if myocardial dysfunction suspected)
+  - Differential diagnosis (exclude other causes of hyperthermia with altered mental status):
+    - Sepsis (infectious source, WBC, blood cultures)
+    - Neuroleptic malignant syndrome (NMS):
+      - Antipsychotic use
+      - Rigidity, elevated CK
+      - Treat with dantrolene and bromocriptine
+    - Serotonin syndrome:
+      - Serotonergic medication use
+      - Hyperreflexia, clonus, mydriasis
+      - Treat with cyproheptadine
+    - Malignant hyperthermia:
+      - Exposure to volatile anesthetics or succinylcholine
+      - Treat with dantrolene
+    - Thyroid storm:
+      - History of hyperthyroidism
+      - Goiter, exophthalmos
+      - Elevated TSH, free T4
+    - CNS infection (meningitis, encephalitis)
+    - Intracranial hemorrhage or stroke
+    - Drug intoxication (sympathomimetics, anticholinergics)
+
+treatment:
+  - IMMEDIATE RAPID COOLING (highest priority, DO NOT delay):
+    - Goal: Reduce core temperature to under 39°C (102.2°F) within 30 minutes
+    - Target temperature: 38-39°C (avoid overcooling below 38°C)
+    - Do NOT wait for laboratory results - start cooling immediately based on clinical diagnosis
+  - Cooling methods (use most effective available):
+    - BEST method is ice water immersion:
+      - Most rapid cooling (0.15-0.35°C per minute)
+      - Submerge patient in ice water bath (1-5°C)
+      - Best for young healthy patients (exertional heat stroke)
+      - Difficult to monitor and perform CPR if needed
+      - May cause shivering (treat with benzodiazepines)
+    - BEST method is evaporative cooling:
+      - Spray lukewarm water over entire body surface
+      - Direct fans at patient (promotes evaporation)
+      - Cooling rate 0.05-0.10°C per minute
+      - Allows continuous monitoring and access
+      - Preferred method in most EDs
+      - Remove all clothing
+    - Cold water immersion (10-15°C):
+      - If ice water not available
+      - Cooling rate 0.10-0.20°C per minute
+    - Ice packs:
+      - Place on groin, axillae, neck (large vessels)
+      - Adjunct to evaporative cooling
+      - Less effective as sole method
+    - Cooling blankets:
+      - Adjunct only (slow cooling rate)
+      - Not adequate as sole method
+    - Cold IV fluids:
+      - Adjunct (limited cooling capacity)
+      - Do NOT delay other methods to obtain IV access
+    - Invasive cooling (if refractory or cardiac arrest):
+      - Peritoneal lavage with cold saline
+      - Bladder or gastric lavage with cold saline
+      - Intravascular cooling catheter
+      - ECMO or cardiopulmonary bypass (rare, for cardiac arrest)
+  - Stop cooling when core temp reaches 38-39°C (avoid overcooling and shivering)
+  - DO NOT use antipyretics (acetaminophen, NSAIDs):
+    - Ineffective (hypothalamic set point not elevated in heat stroke)
+    - Waste of time
+    - May worsen hepatic or renal injury
+  - ABC stabilization:
+    - Airway:
+      - Position airway
+      - Intubation if GCS under 8 or unable to protect airway
+      - Avoid succinylcholine (risk of hyperkalemia with rhabdomyolysis)
+    - Breathing:
+      - Supplemental oxygen
+      - Mechanical ventilation if respiratory failure
+    - Circulation:
+      - IV access (two large-bore IVs)
+      - Cardiac monitoring
+  - IV fluid resuscitation:
+    - Normal saline 1-2 liters initial bolus
+    - Goal: Maintain urine output 0.5-1 mL/kg/hr
+    - Caution: Avoid fluid overload (risk of ARDS, cerebral edema)
+    - If rhabdomyolysis:
+      - Aggressive fluids 200-1000 mL/hr to maintain urine output over 200 mL/hr
+      - Goal: Flush myoglobin, prevent AKI
+      - Consider urine alkalinization (sodium bicarbonate) if pH under 6.5
+  - Seizure management:
+    - Benzodiazepines first-line:
+      - Lorazepam 2-4 mg IV or diazepam 5-10 mg IV
+      - Repeat every 5-10 minutes as needed
+    - Avoid phenytoin (may worsen hypotension)
+    - Continue cooling (seizures often resolve with temperature reduction)
+  - Shivering management (impedes cooling):
+    - Benzodiazepines:
+      - Lorazepam 1-2 mg IV or diazepam 5 mg IV
+    - Consider neuromuscular blockade if severe shivering:
+      - Rocuronium or vecuronium (avoid succinylcholine)
+      - Requires intubation and mechanical ventilation
+  - Avoid medications that impair heat dissipation:
+    - No antipyretics (ineffective)
+    - Avoid dantrolene (no benefit in heat stroke, only for malignant hyperthermia or NMS)
+    - Avoid chlorpromazine (impairs heat dissipation)
+  - Rhabdomyolysis management (especially exertional heat stroke):
+    - Aggressive IV fluids (see above)
+    - Monitor CK, BUN/Cr, potassium, calcium
+    - Urine alkalinization if severe:
+      - Add 3 amps sodium bicarbonate (150 mEq) to 1L D5W
+      - Infuse at 150-200 mL/hr
+      - Goal: Urine pH over 6.5 (prevents myoglobin precipitation in tubules)
+    - Dialysis if AKI with hyperkalemia or volume overload
+  - DIC management:
+    - Supportive care
+    - Transfuse PRBCs if anemia and bleeding
+    - Transfuse platelets if under 10,000-20,000 or active bleeding
+    - Fresh frozen plasma if active bleeding and prolonged PT/PTT
+    - Cryoprecipitate if fibrinogen under 100 mg/dL
+  - Liver failure management:
+    - Supportive care
+    - Avoid hepatotoxic medications
+    - Monitor PT/INR, ammonia, bilirubin
+    - Liver transplant consultation if fulminant hepatic failure
+  - Monitoring during treatment:
+    - Continuous:
+      - Cardiac monitoring (telemetry)
+      - Core temperature (every 5-10 minutes during active cooling)
+      - Vital signs
+      - Mental status
+    - Serial laboratory monitoring:
+      - Electrolytes, BUN/Cr every 2-4 hours
+      - CK if rhabdomyolysis (daily)
+      - Liver function tests daily
+      - Coagulation studies if DIC (every 6-12 hours)
+      - ABG as needed
+  - ICU admission for:
+    - All heat stroke patients (high risk of complications)
+    - Multiorgan dysfunction
+    - Persistent altered mental status
+    - Rhabdomyolysis
+    - DIC
+    - Liver or renal failure
+  - Complications (monitor and treat):
+    - Acute kidney injury (30-50% of cases)
+    - Rhabdomyolysis (especially exertional heat stroke)
+    - DIC (25-45% of severe cases)
+    - Liver failure (AST/ALT over 1000, INR over 2.0)
+    - ARDS
+    - Cardiac arrhythmias
+    - Myocardial injury
+    - Hypoglycemia
+    - Cerebral edema (rare)
+    - Seizures
+  - Prognosis:
+    - Mortality 10-50% depending on:
+      - Duration of hyperthermia (time to cooling)
+      - Peak temperature
+      - Age (elderly worse)
+      - Comorbidities
+      - Complications (DIC, liver failure, AKI)
+    - Best outcomes: Rapid cooling within 30 minutes to under 39°C
+    - Poor prognostic factors:
+      - Coma at presentation
+      - Peak temp over 42°C
+      - Cooling time over 60 minutes
+      - AST over 1000 U/L
+      - Creatinine over 2.0 mg/dL
+      - Hypotension
+      - Age over 65
+  - Prevention education:
+    - Acclimatization (gradual increase in heat exposure over 1-2 weeks)
+    - Hydration before, during, and after activity
+    - Avoid strenuous activity during peak heat hours (10am-4pm)
+    - Wear light, loose clothing
+    - Take frequent breaks in shade or air conditioning
+    - Recognize early warning signs (heat exhaustion: fatigue, dizziness, nausea)
+
+clinical_pearls:
+  - Heat stroke defined as core temp over 40°C (104°F) with CNS dysfunction (altered mental status)
+  - Two forms: classic (elderly, passive heat exposure, dry skin) and exertional (young athletes, sweating often present)
+  - Sweating may be PRESENT in exertional heat stroke (do not rely on anhidrosis for diagnosis)
+  - IMMEDIATE RAPID COOLING is treatment - goal under 39°C within 30 minutes
+  - Ice water immersion most rapid cooling (0.15-0.35°C/min), evaporative cooling (misting+fans) most practical
+  - Antipyretics (acetaminophen, NSAIDs) are INEFFECTIVE (hypothalamic set point not elevated)
+  - Do NOT delay cooling for lab results or IV access - start cooling immediately
+  - Stop cooling at 38-39°C to avoid overcooling and shivering
+  - Benzodiazepines for seizures and shivering (impedes cooling)
+  - Complications: rhabdomyolysis (CK over 5000), AKI, DIC (25-45%), liver failure (AST over 1000), ARDS
+  - Mortality 10-50%, best outcomes with cooling within 30 minutes
+  - Poor prognosis: Coma, temp over 42°C, cooling time over 60 min, AST over 1000, age over 65
+  - Exertional heat stroke has higher risk of rhabdomyolysis - treat with aggressive fluids (200-1000 mL/hr)
+  - Classic heat stroke affects elderly during heat waves, higher mortality (up to 50%)
+  - Dantrolene has NO role in heat stroke (only for malignant hyperthermia or NMS)
+
+presentations:
+  - Hyperthermia (temp over 40°C)
+  - Altered mental status
+  - Confusion or delirium
+  - Seizures
+  - Coma
+  - Hot skin
+  - Anhidrosis (dry skin) in classic
+  - Diaphoresis (sweating) in exertional
+  - Tachycardia
+  - Hypotension
+  - Tachypnea
+  - Nausea and vomiting
+  - Weakness
+  - Heat exposure history
+  - Rhabdomyolysis
+  - Acute kidney injury
+
+snomed:
+  - "95868003"   # Heat stroke
+  - "52702003"   # Exertional heat stroke
+  - "444814009"  # Classic heat stroke
+
+citations:
+  - Bouchama A et al. Heat stroke. N Engl J Med 2002;346:1978-1988 (comprehensive review)
+  - Epstein Y et al. Heatstroke. N Engl J Med 2019;380:2449-2459 (updated review)
+  - Casa DJ et al. National Athletic Trainers' Association position statement: Exertional heat illness. J Athl Train 2015;50:986-1000
+  - UpToDate - Severe nonexertional hyperthermia (classic heat stroke) in adults
+  - Walter EJ et al. The pathophysiological basis and consequences of fever. Crit Care 2016;20:200

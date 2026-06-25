@@ -1,0 +1,95 @@
+tree_id: OB-PRETERM-LABOR
+name: Preterm Labor
+family: Obstetrics and Gynecology
+specialty: Obstetrics
+applies_to: female
+chief_complaint: Contractions before 37 weeks gestation
+description: |
+  Regular uterine contractions with cervical change before 37 weeks gestation. Affects 10% of pregnancies, leading cause of neonatal morbidity and mortality.
+  Risk factors include prior preterm birth (strongest predictor), multiple gestation, infection, uterine anomalies, cervical insufficiency, African American race, low socioeconomic status. Prevention and early recognition critical.
+icd10: O60.00
+snomed: 79586000
+presentations:
+  - Regular uterine contractions <37 weeks
+  - Cervical dilation, effacement
+  - Pelvic pressure
+  - Lower back pain
+  - Vaginal bleeding or discharge
+  - Risk factors: prior preterm birth, multiple gestation
+urgency: High
+referrals:
+  emergency:
+    - Eclampsia
+    - Abruption
+    - Cord prolapse
+    - Hemorrhage
+  urgent:
+    - Preeclampsia
+    - Preterm labor
+    - IUGR
+  routine:
+    - Prenatal care
+    - GDM management
+    - Routine pregnancy
+
+workup:
+  - Gestational age critical - weeks and days (by first trimester ultrasound)
+  - Viable fetus generally 23-24 weeks, survival improves dramatically each week
+  - Clinical presentation - regular uterine contractions (4-6 per hour), pelvic pressure, low back pain, vaginal discharge or bleeding
+  - Speculum exam before digital exam - assess cervical dilation, effacement, fetal fibronectin (fFN), rule out rupture of membranes (nitrazine, ferning)
+  - Do not perform digital exam if suspected preterm premature rupture of membranes (PPROM)
+  - Cervical length by transvaginal ultrasound - short cervix (less than 25 mm at 24 weeks) predicts preterm birth
+  - Fetal fibronectin (fFN) - if negative (less than 50 ng/mL), very unlikely to deliver within 2 weeks (high negative predictive value 99%)
+  - If positive, only modest predictive value (positive in many who don't deliver preterm)
+  - Most useful 24-34 weeks if symptoms of preterm labor
+  - Assess for precipitating factors - urinary tract infection (UA/culture), bacterial vaginosis (wet mount, treat with metronidazole), chorioamnionitis
+  - Signs of chorioamnionitis - fever, maternal or fetal tachycardia, uterine tenderness, foul-smelling amniotic fluid
+  - Ultrasound - confirm gestational age, fetal presentation, amniotic fluid volume, placental location, rule out anomalies
+  - Non-stress test (NST) - assess fetal well-being
+  - Group B strep (GBS) culture if available or empiric treatment if unknown
+treatment:
+  - Admit for observation if preterm labor suspected (less than 37 weeks with contractions and cervical change)
+  - Tocolytics - suppress contractions to allow time for interventions (48-72 hours), do not improve long-term outcomes
+  - Indications - 24-34 weeks, no contraindications (chorioamnionitis, fetal distress, severe preeclampsia, abruption)
+  - Nifedipine 20mg PO then 10-20mg q4-6h (first-line, fewer side effects) - calcium channel blocker
+  - Indomethacin 50-100mg PR/PO then 25-50mg q6h x 48h (if less than 32 weeks) - NSAID, risk of oligohydramnios and premature closure of ductus arteriosus if prolonged use
+  - Terbutaline 0.25mg SC q20min-6h - beta-agonist, maternal tachycardia, hyperglycemia
+  - Magnesium sulfate 4-6g IV bolus then 2g/hr - less effective than alternatives, monitor for toxicity
+  - Antenatal corticosteroids - accelerate fetal lung maturity, reduce neonatal morbidity/mortality
+  - Betamethasone 12mg IM q24h x 2 doses (preferred, longer half-life) or dexamethasone 6mg IM q12h x 4 doses
+  - Give if 24-34 weeks with threatened preterm delivery within 7 days
+  - Maximal benefit 24 hours to 7 days after completion, some benefit up to 14 days
+  - Rescue course if greater than 14 days since prior course and threatened preterm delivery again
+  - Magnesium sulfate for neuroprotection if delivery expected before 32 weeks
+  - 4-6g IV bolus then 1-2g/hr until delivery or 24 hours (whichever comes first)
+  - Reduces cerebral palsy risk 30-40%
+  - GBS prophylaxis if delivery imminent - penicillin G 5 million units IV then 2.5 million units q4h or ampicillin 2g IV then 1g q4h
+  - If penicillin allergic - cefazolin, clindamycin (if susceptible), or vancomycin
+  - Progesterone supplementation for prevention in high-risk patients
+  - 17-hydroxyprogesterone caproate (17-OHP) 250mg IM weekly starting 16-20 weeks until 36 weeks (prior spontaneous preterm birth)
+  - Vaginal progesterone 200mg nightly if short cervix (less than 20 mm) at 20-24 weeks
+  - Cervical cerclage if short cervix (less than 25 mm) before 24 weeks and prior spontaneous preterm birth - transvaginal placement, remove at 36-37 weeks
+  - Delivery if 34 weeks or greater (outcomes similar to expectant management)
+  - If 32-34 weeks and stable, may manage expectantly with close monitoring
+clinical_pearls:
+  - Prior spontaneous preterm birth increases risk 2-3 fold (strongest risk factor)
+  - Negative fFN very reassuring (can discharge home), positive fFN low positive predictive value
+  - Corticosteroids single most important intervention - reduce RDS, IVH, NEC, death by 30-50%
+  - Do not continue tocolytics beyond 48 hours (no proven benefit, only buys time for steroids)
+  - Antibiotics do not prolong pregnancy in preterm labor without PPROM (don't use unless specific indication like GBS prophylaxis)
+  - Magnesium for neuroprotection separate indication from tocolysis (lower dose, better evidence)
+  - Each additional week of gestation dramatically improves neonatal outcomes
+differentials:
+  - Braxton-Hicks contractions
+  - Round ligament pain
+  - Urinary tract infection
+  - Preterm premature rupture of membranes
+  - Placental abruption
+  - Appendicitis
+trace:
+  - 28-year-old G2P1 at 30 weeks with regular contractions q5 min x 2 hours, pelvic pressure → Prior preterm birth at 33 weeks → Exam shows cervix 2 cm dilated, 80% effaced (was 1 cm, 50% at last visit 2 weeks ago) → Speculum exam - no rupture of membranes, fFN positive → Ultrasound confirms 30 weeks 3 days, cephalic presentation, normal amniotic fluid → NST reactive → Admit for preterm labor → Start nifedipine 20mg PO, then 10mg q6h → Betamethasone 12mg IM x 2 doses (24 hours apart) for fetal lung maturity → Magnesium sulfate 6g IV bolus then 2g/hr x 12 hours for neuroprotection → GBS culture sent, start penicillin G prophylaxis → Contractions decrease, cervix stable at 2 cm → Continue nifedipine x 48 hours then discontinue → Observe x 24 hours after stopping tocolytics, no further cervical change → Discharge home on modified bed rest, close outpatient follow-up → Successfully reaches 36 weeks, spontaneous labor, delivers healthy 2800g infant
+
+citations:
+  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+  - SMFM (Society for Maternal-Fetal Medicine) Clinical Guidelines
+  - UpToDate - Obstetrics

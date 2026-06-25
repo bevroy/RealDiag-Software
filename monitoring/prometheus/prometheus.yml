@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'realdiag'
+    static_configs:
+      # If you run monitoring via the provided compose file on the same Docker host
+      # you can point Prometheus at host.docker.internal:8000 (Docker Desktop) or
+      # at the api service name if monitoring is run in the same compose network.
+      - targets: ['host.docker.internal:8000']

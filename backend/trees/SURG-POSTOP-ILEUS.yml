@@ -1,0 +1,67 @@
+tree_id: SURG-POSTOP-ILEUS
+name: Postoperative Ileus
+family: Surgery
+specialty: Surgery
+icd10:
+- K56.7
+snomed:
+- 44186003
+urgency: medium
+description: Comprehensive evaluation and management of Postoperative Ileus
+version: '1.0'
+citations:
+  - ACS (American College of Surgeons) Clinical Guidelines
+  - RCS (Royal College of Surgeons) Guidelines
+  - UpToDate - General Surgery
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Abdominal distension after surgery
+- Nausea and vomiting
+- Absent or hypoactive bowel sounds
+- No passage of stool or flatus
+- Typically resolves with conservative management
+- Prolonged ileus > 5 days concerning
+workup: []
+treatment:
+  - 'Supportive care - usually resolves spontaneously in 3-5 days'
+  - 'NPO until return of bowel function (flatus, bowel movement)'
+  - 'IV fluids to maintain hydration and electrolytes'
+  - 'Nasogastric tube if severe nausea/vomiting or gastric distension'
+  - 'Minimize opioids - switch to non-opioid pain control (acetaminophen, NSAIDs, gabapentin)'
+  - 'Early ambulation - walk QID'
+  - 'Chewing gum QID for 30 minutes - stimulates GI motility'
+  - 'Avoid unnecessary lab tests and CT scans unless fever or peritoneal signs'
+  - 'Alvimopan (Entereg) 12mg BID if available - peripherally acting mu-opioid antagonist, reduces ileus duration'
+  - 'Discontinue anticholinergics, avoid calcium channel blockers'
+  - 'NG decompression if severe distension'
+  - 'If prolonged (>5-7 days): CT to rule out mechanical obstruction, anastomotic leak, abscess'
+  - 'Neostigmine 2mg IV slowly for Ogilvie syndrome (pseudo-obstruction)'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute abdomen
+    - Peritonitis
+    - Perforated viscus
+    - Ruptured AAA
+    - Necrotizing fasciitis
+  urgent:
+    - Suspected malignancy
+    - Bowel obstruction
+    - Incarcerated hernia
+    - Acute cholecystitis
+  routine:
+    - Elective hernia repair
+    - Gallstones without cholecystitis
+    - Benign masses
+    - Screening abnormalities
+differentials:
+  - Bowel obstruction
+  - Anastomotic leak
+  - Infection
+  - Medication effect
+trace:
+  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
+    and Endoscopic Surgeons (SAGES)
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,0 +1,213 @@
+tree_id: ENT-HEARING-LOSS
+name: Hearing Loss Evaluation
+family: Otolaryngology
+specialty: Otolaryngology, Audiology
+chief_complaint: Decreased Hearing, Difficulty Hearing
+description: Evaluation and management of hearing loss
+version: "1.0"
+icd10: H91.90
+snomed: 15188001
+presentations:
+  - Gradual or sudden onset
+  - Unilateral or bilateral
+  - Tinnitus
+  - Difficulty understanding speech
+  - Conductive vs sensorineural
+  - Associated vertigo, ear pain
+differentials:
+  - Presbycusis
+  - Otitis media
+  - Cerumen impaction
+  - Acoustic neuroma
+  - Meniere disease
+citations:
+  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+  - British Society of Otology Guidelines
+  - UpToDate - Otolaryngology
+author: RealDiag Clinical Team
+
+
+treatment:
+  - 'Identify type - conductive (middle ear) vs sensorineural (inner ear/nerve) vs mixed'
+  - 'Remove cerumen impaction - irrigation, mineral oil drops, manual extraction'
+  - 'Sensorineural: Hearing aids first-line for bilateral hearing loss >40 dB'
+  - 'Cochlear implant for severe-profound bilateral loss unresponsive to hearing aids'
+  - 'Sudden sensorineural loss: HIGH-DOSE oral prednisone 60mg daily x10-14 days within 72 hours (urgent!)'
+  - 'Intratympanic steroid injection if systemic steroids fail or contraindicated'
+  - 'Chronic suppurative otitis media: Topical fluoroquinolone drops, consider tympanoplasty'
+  - 'Ossicular chain disruption: Surgical reconstruction'
+  - 'Ménière disease: Salt restriction, diuretics, betahistine'
+  - 'Assistive devices - amplified phones, captioning, FM systems'
+  - 'Communication strategies - face patient, reduce background noise'
+
+entry_point: hearing_loss_evaluation
+
+referrals:
+  emergency:
+    - Airway compromise
+    - Peritonsillar abscess with trismus
+    - Sudden hearing loss
+    - Severe epistaxis
+  urgent:
+    - Suspected malignancy
+    - Persistent hoarseness >2 weeks
+    - Recurrent acute sinusitis
+    - Vertigo with neurological signs
+  routine:
+    - Chronic sinusitis
+    - Hearing loss evaluation
+    - Tinnitus
+    - Allergy management
+
+clinical_pearls:
+  - Sudden sensorineural hearing loss is emergency; steroids within 72 hours
+  - Conductive loss: Weber lateralizes to affected side; Rinne negative
+  - Sensorineural loss: Weber to good ear; Rinne positive both sides
+  - Presbycusis affects high frequencies first; bilateral and symmetric
+
+nodes:
+  - id: hearing_loss_evaluation
+    type: question
+    text: "Type of hearing loss?"
+    options:
+      - label: "Conductive hearing loss"
+        next: conductive_loss
+      - label: "Sensorineural hearing loss"
+        next: sensorineural_loss
+      - label: "Sudden sensorineural hearing loss"
+        next: sudden_hearing_loss
+
+  - id: conductive_loss
+    type: diagnosis
+    name: "Conductive Hearing Loss"
+    icd10: "H90.2"
+    urgency: low
+    workup:
+      - Conductive hearing loss - Problem transmitting sound from outer/middle ear to inner ear
+      - Mechanisms - External auditory canal obstruction, tympanic membrane perforation, ossicular chain disruption
+      - Causes
+      - Cerumen impaction - Most common (wax buildup)
+      - Otitis media with effusion - Fluid in middle ear (serous, mucoid)
+      - Chronic suppurative otitis media - Chronic ear infection, perforation, drainage
+      - Cholesteatoma - Abnormal skin growth in middle ear, erosive, can destroy ossicles
+      - Otosclerosis - Abnormal bone growth (stapes footplate fixation), hereditary, onset 20-40 years, female predominance, progressive
+      - Tympanic membrane perforation - Trauma, infection, barotrauma
+      - Ossicular discontinuity - Trauma, cholesteatoma erosion
+      - Presentation - Decreased hearing (unilateral or bilateral), may have ear fullness, otorrhea (drainage) if infection
+      - No tinnitus or vertigo (distinguishes from sensorineural)
+      - Physical exam
+      - Otoscopy - Visualize tympanic membrane, canal
+      - Cerumen impaction - Occluding wax (brown/yellow/black)
+      - Otitis media with effusion - Fluid level, bubbles, retracted/dull tympanic membrane
+      - Perforation - Hole in TM
+      - Cholesteatoma - White debris, foul odor, polyp
+      - Tuning fork tests - Weber and Rinne
+      - Weber - 512 Hz tuning fork on forehead midline
+      - Lateralizes to affected ear (conductive loss louder in bad ear, masks ambient noise)
+      - Rinne - 512 Hz tuning fork on mastoid (bone conduction) then near ear canal (air conduction)
+      - Negative Rinne - Bone conduction > air conduction (abnormal, conductive loss)
+      - Audiometry - Pure tone audiogram
+      - Air-bone gap >10 dB (air conduction worse than bone conduction)
+      - Tympanometry - Assess middle ear pressure, TM mobility
+      - Imaging - CT temporal bones if cholesteatoma, ossicular pathology, trauma
+    treatment:
+      - Cerumen impaction - Removal (curette, irrigation, suction)
+      - Mineral oil drops soften wax
+      - Otitis media with effusion - Observation (most resolve 3 months), if persistent >3 months or recurrent → tympanostomy tubes (PE tubes, ventilate middle ear)
+      - Chronic suppurative otitis media - Topical antibiotics (fluoroquinolone otic drops), dry ear precautions (no water), tympanoplasty (repair perforation)
+      - Cholesteatoma - SURGERY (mastoidectomy, remove cholesteatoma, reconstruct ossicles if needed)
+      - Can cause complications (meningitis, brain abscess, facial nerve paralysis) if untreated
+      - Otosclerosis - Stapedectomy (remove fixed stapes, replace with prosthesis)
+      - Success rate 90%, restore hearing
+      - Alternative - Hearing aid
+      - Tympanic membrane perforation - Small perforations may heal spontaneously, large or persistent → tympanoplasty (graft repair)
+      - Hearing aids - Amplify sound, effective for conductive loss
+
+  - id: sensorineural_loss
+    type: diagnosis
+    name: "Sensorineural Hearing Loss"
+    icd10: "H90.3"
+    urgency: low
+    workup:
+      - Sensorineural hearing loss (SNHL) - Problem in inner ear (cochlea) or auditory nerve (CN VIII)
+      - Mechanisms - Hair cell damage, auditory nerve dysfunction
+      - Causes
+      - Presbycusis - Age-related hearing loss (most common), bilateral symmetric high-frequency loss, gradual onset
+      - Affects 30-50% adults >65 years
+      - Cumulative hair cell loss over lifetime
+      - Noise-induced hearing loss - Loud noise exposure (occupational, recreational), high-frequency loss (3000-6000 Hz "notch"), bilateral
+      - ">85 dB chronic exposure (machinery, concerts, firearms)"
+      - Ototoxic medications - Aminoglycosides (gentamicin, tobramycin), cisplatin, loop diuretics (furosemide), aspirin high-dose, vancomycin
+      - Aminoglycosides - Permanent bilateral high-frequency loss
+      - Meniere's disease - Episodic vertigo + tinnitus + hearing loss + ear fullness, low-frequency loss initially, unilateral (70%)
+      - Acoustic neuroma (vestibular schwannoma) - Benign tumor CN VIII, unilateral progressive hearing loss + tinnitus, may have imbalance (NOT vertigo)
+      - Autoimmune inner ear disease - Rapidly progressive bilateral SNHL (weeks to months), may respond to steroids
+      - Genetic - Congenital (connexin 26 mutations most common), syndromic (Usher, Waardenburg, Pendred)
+      - Infections - Meningitis, measles, mumps, congenital CMV
+      - Presentation - Decreased hearing, difficulty understanding speech (especially in noise), tinnitus (ringing), may have vertigo (if vestibular involvement)
+      - Physical exam - Otoscopy normal (distinguishes from conductive)
+      - Tuning fork tests
+      - Weber - Lateralizes to better ear (opposite conductive)
+      - Rinne - Positive (air conduction > bone conduction, normal)
+      - Audiometry - Pure tone audiogram
+      - No air-bone gap (air and bone conduction equally affected)
+      - High-frequency loss (presbycusis, noise-induced), low-frequency (Meniere's)
+      - Speech discrimination - Reduced (can hear but can't understand words)
+      - MRI brain/IAC with gadolinium - If asymmetric SNHL or unilateral (rule out acoustic neuroma)
+      - Labs - CBC, ESR, CRP, ANA, thyroid (if autoimmune suspected)
+    treatment:
+      - Hearing aids - FIRST-LINE for most SNHL
+      - Amplify sound, digital processing (filter background noise)
+      - Behind-the-ear (BTE), in-the-ear (ITE), completely-in-canal (CIC)
+      - Effective for mild-moderate loss
+      - Cochlear implants - If profound bilateral SNHL, inadequate benefit from hearing aids
+      - Surgically implanted device, electrode array in cochlea, directly stimulates auditory nerve
+      - Bypasses damaged hair cells
+      - Eligibility - Severe-profound bilateral SNHL, speech recognition <50% with hearing aids
+      - Outcomes - 80-90% achieve open-set speech recognition (understand without lip-reading)
+      - FDA approved adults and children (>12 months)
+      - Assistive listening devices - FM systems, captioning
+      - Treat underlying cause
+      - Meniere's disease - Low-sodium diet, diuretics (HCTZ), intratympanic gentamicin or steroids if refractory
+      - Acoustic neuroma - Observation (small tumors, elderly), stereotactic radiosurgery (Gamma Knife), or surgical resection (large tumors, young patients)
+      - Autoimmune - Systemic corticosteroids (prednisone 1 mg/kg/day), immunosuppressants
+      - Ototoxicity - Stop offending drug if possible, monitor levels (aminoglycosides)
+      - Prevention - Noise protection (earplugs, earmuffs for >85 dB exposure), limit ototoxic drugs, baseline hearing test before aminoglycosides
+
+  - id: sudden_hearing_loss
+    type: diagnosis
+    name: "Sudden Sensorineural Hearing Loss"
+    icd10: "H91.2"
+    urgency: critical
+    workup:
+      - Sudden sensorineural hearing loss (SSNHL) - ≥30 dB hearing loss in ≥3 contiguous frequencies over <72 hours
+      - OTOLOGIC EMERGENCY - Prompt treatment improves recovery
+      - Incidence - 5-20 per 100,000 per year
+      - Causes - Idiopathic 90% (presumed viral labyrinthitis or vascular occlusion)
+      - Viral - HSV, CMV, mumps, measles (inflammation, hair cell damage)
+      - Vascular - Microvascular occlusion (diabetes, hypercoagulable)
+      - Autoimmune - Cogan syndrome, systemic vasculitis
+      - Acoustic neuroma - 1-2% (tumor growth disrupts blood supply)
+      - Ototoxic - Sudden exposure high-dose
+      - Presentation - Sudden unilateral hearing loss (wake up with it, or notice during day), tinnitus 70%, vertigo/imbalance 40%, ear fullness
+      - Physical exam - Otoscopy normal, Rinne positive (SNHL), Weber lateralizes to better ear
+      - Audiometry - URGENT (within 24-48 hours), confirm SNHL, quantify degree (mild/moderate/severe/profound)
+      - MRI brain/IAC with gadolinium - Rule out acoustic neuroma, labyrinthitis, stroke (URGENT, within 1-2 weeks)
+      - Labs - Consider CBC, ESR, CRP, RPR, Lyme, if suspecting systemic disease
+    treatment:
+      - URGENT treatment - Window for recovery narrows (best if treated within 2 weeks)
+      - Systemic corticosteroids - FIRST-LINE
+      - Prednisone 1 mg/kg/day (60-80 mg) or equivalent for 10-14 days, then taper
+      - OR high-dose dexamethasone taper
+      - Mechanism - Reduce inflammation, improve blood flow
+      - Improves hearing recovery 2-3x (60% recover vs 30% spontaneous)
+      - Intratympanic corticosteroids - Inject dexamethasone into middle ear
+      - Salvage therapy if failed systemic steroids (at 2-4 weeks)
+      - OR primary therapy if contraindication to systemic steroids (diabetes, immunosuppression)
+      - OR adjunct to systemic (combination may be superior)
+      - Antiviral therapy - Controversial, no proven benefit (routine use NOT recommended)
+      - Consider if suspected viral etiology + within 72 hours (valacyclovir 1 g TID x 7-10 days)
+      - Hyperbaric oxygen - Consider if failed steroids, within 2 weeks (increases oxygen delivery to cochlea)
+      - Prognosis - 60-70% have some recovery (spontaneous 30%, with steroids 60%)
+      - Better prognosis - Mild-moderate loss, no vertigo, younger age, early treatment
+      - Worse prognosis - Profound loss, vertigo, downsloping audiogram, delay >2 weeks

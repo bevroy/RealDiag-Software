@@ -1,0 +1,67 @@
+tree_id: GASTRO-ACUTE-PANCREATITIS
+name: Acute Pancreatitis
+family: gastroenterology
+specialty: Gastroenterology
+icd10:
+- K85.90
+- K85.00
+snomed:
+- '197456007'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Pancreatitis
+version: '1.0'
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Severe, constant epigastric pain radiating to back (hallmark symptom)
+- Nausea and vomiting (often severe and persistent)
+- Abdominal tenderness and distention
+- Elevated lipase and amylase (>3x upper limit of normal) - lipase more specific
+- 'Common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (>1000 mg/dL)'
+- Fever, tachycardia if severe inflammation
+- 'Cullen sign: Periumbilical ecchymosis (hemorrhagic pancreatitis, rare)'
+- 'Grey-Turner sign: Flank ecchymosis (hemorrhagic pancreatitis, rare)'
+- 'CT findings: Pancreatic inflammation, edema, peripancreatic fluid, or necrosis'
+- Hypotension, shock if severe (SIRS, third-spacing of fluids)
+- 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
+- 'Risk factors: Alcohol, gallstones, medications (azathioprine, thiazides), ERCP,
+  trauma'
+workup:
+- Lipase (elevated >3x ULN)
+- Liver function tests (if gallstone etiology)
+- Triglycerides (if hypertriglyceridemia suspected, >1000 mg/dL)
+- CT abdomen with IV contrast (if severe or uncertain diagnosis, delay 48-72hr)
+- Right upper quadrant ultrasound (assess for gallstones)
+treatment:
+- 'Guideline-based treatment options for Acute Pancreatitis include:'
+- 'Aggressive IV fluids: LR 250-500 mL/hr (goal UOP 0.5-1 mL/kg/hr) (ACG 2023)'
+- NPO initially, advance diet as tolerated (ACG 2023)
+- 'Pain control: Opioids (morphine, hydromorphone) (ACG 2023)'
+- 'Treat underlying cause: ERCP for gallstone pancreatitis with cholangitis/obstruction
+  (ACG 2023)'
+- 'ICU if severe: Organ failure, necrosis, SIRS (ACG 2023)'
+clinical_pearls:
+- 'Diagnosis: 2 of 3 criteria (pain, lipase >3x ULN, imaging findings)'
+- Lipase more specific than amylase
+- CT not needed for mild cases; delay 48-72hr if imaging needed (IV contrast)
+- Ranson's criteria or APACHE II score for severity assessment
+- Early aggressive IV hydration (LR preferred) improves outcomes
+referrals:
+- Gastroenterology for all cases
+- Surgery for complications (necrosis, abscess, pseudocyst)
+- ERCP if gallstone with cholangitis/obstruction
+differentials:
+  - Chronic pancreatitis
+  - Cholecystitis
+  - Perforated ulcer
+  - Mesenteric ischemia
+  - Aortic dissection
+trace:
+  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
+    Association (AGA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

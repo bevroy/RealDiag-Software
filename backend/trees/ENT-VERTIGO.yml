@@ -1,0 +1,538 @@
+tree_id: ENT-VERTIGO
+name: Vertigo / Dizziness
+id: ENT-VERTIGO
+title: Vertigo Diagnostic Tree
+family: Otolaryngology
+specialty: Otolaryngology/Neurology/Emergency Medicine
+version: 1.0
+icd10: R42
+snomed: 399153001
+presentations:
+  - Spinning sensation
+  - Nausea, vomiting
+  - Nystagmus
+  - Imbalance, gait instability
+  - Triggered by head movement or position change
+  - Hearing loss, tinnitus (peripheral)
+last_updated: 2025-11-20
+evidence_level: AAO-HNS Clinical Practice Guidelines, AAN Guidelines
+entry: initial_assessment
+
+workup:
+  - Dix-Hallpike maneuver for BPPV (diagnostic and therapeutic)
+  - Head impulse, nystagmus, test of skew (HINTS) to differentiate central vs peripheral
+  - Audiometry if hearing loss (Ménière disease)
+  - Brain MRI if central signs: vertical nystagmus, negative head impulse, severe ataxia
+  - ECG if palpitations or syncope associated
+  - Basic labs: CBC, BMP, glucose (rule out anemia, electrolyte abnormalities)
+
+treatment:
+  - BPPV: Epley maneuver (canalith repositioning) - 80% success rate
+  - Vestibular neuritis: meclizine 25mg PO TID, prochlorperazine 10mg PO/IM q6h PRN
+  - Short course steroids if vestibular neuritis: prednisone 60mg taper
+  - Ménières: low-sodium diet, diuretics (HCTZ), meclizine PRN
+  - Central causes: admit, neurology consult, treat underlying etiology
+  - Vestibular rehabilitation therapy for chronic symptoms
+
+clinical_pearls:
+  - True vertigo = illusion of movement (spinning), not lightheadedness
+  - Peripheral vertigo - severe spinning, hearing loss/tinnitus, nystagmus fatigues
+  - Central vertigo - milder, neurologic signs, vertical nystagmus, does not fatigue
+  - BPPV most common cause, Dix-Hallpike diagnostic, Epley curative
+  - HINTS exam (Head Impulse, Nystagmus, Test of Skew) differentiates peripheral vs central
+  - Meniere's triad - vertigo, hearing loss, tinnitus
+
+red_flags:
+  - Sudden onset with headache (cerebellar stroke)
+  - Vertical nystagmus (central lesion)
+  - Focal neurologic deficits (stroke, MS, tumor)
+  - New diplopia, dysarthria, dysphagia (brainstem)
+  - Severe headache (worst ever - SAH, vertebral dissection)
+  - Direction-changing nystagmus (central)
+
+differentials:
+  - BPPV
+  - Vestibular neuritis
+  - Meniere disease
+  - Stroke
+  - Migraine
+
+referrals:
+  emergency:
+    - Vertigo with stroke signs
+    - Severe vertigo with vomiting
+  urgent:
+    - Persistent vertigo
+    - Suspected Meniere
+  routine:
+    - Chronic vertigo
+    - BPPV management
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial vertigo evaluation
+  tests:
+  - History
+    - True vertigo (spinning) vs lightheadedness/presyncope
+    - Duration of episodes (seconds, minutes, hours, days)
+    - Triggers (head movement, standing, none)
+    - Associated symptoms (hearing loss, tinnitus, ear fullness, headache, neurologic)
+    - Onset (sudden vs gradual)
+  - Vital signs (orthostatic hypotension)
+  - Cardiovascular exam (arrhythmia)
+  - Neurologic exam (cranial nerves, coordination, gait, Romberg)
+  - HINTS exam (if acute vestibular syndrome)
+    - Head Impulse Test
+    - Nystagmus assessment
+    - Test of Skew
+  - Otoscopy (middle ear effusion, cholesteatoma)
+  - Audiometry (if hearing loss)
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - presentation: acute_vestibular_syndrome
+      - duration: '>24 hours'
+    go: acute_vestibular_syndrome
+  - when:
+      symptoms_contains_any:
+      - focal_neurologic_deficit
+      - diplopia
+      - dysarthria
+      - severe_headache
+    go: central_vertigo
+  - when:
+      trigger: positional
+    go: positional_vertigo
+  - when:
+      all_of:
+      - symptoms_contains_all:
+        - hearing_loss
+        - tinnitus
+      - duration: 'minutes to hours'
+    go: meniere_disease
+  - default: peripheral_vertigo_assessment
+
+- id: acute_vestibular_syndrome
+  when:
+    all_of:
+    - acute_onset: true
+    - duration: '>24 hours'
+    - nausea: severe
+  description: Acute vestibular syndrome - distinguish peripheral vs central
+  tests:
+  - HINTS exam (Head Impulse, Nystagmus, Test of Skew)
+    - Head Impulse Test (HIT)
+      - Rapidly rotate head 10-20° to each side while patient fixates on nose
+      - Abnormal (peripheral) = corrective saccade when head stops
+      - Normal (central, concerning) = no saccade, eyes stay fixed
+    - Nystagmus assessment
+      - Direction (unidirectional = peripheral, direction-changing = central)
+      - Vertical nystagmus = CENTRAL until proven otherwise
+      - Horizontal peripheral nystagmus does NOT cross midline
+    - Test of Skew (alternate cover test)
+      - Cover each eye alternately while patient fixates
+      - Vertical correction movement = skew deviation (CENTRAL)
+  - Audiometry (hearing loss)
+  - MRI brain and brainstem with DWI (if any central features)
+  suggest_dx: []
+  next:
+  - when:
+      HINTS_exam: central_features
+    go: central_vertigo
+  - when:
+      all_of:
+      - HINTS_exam: peripheral_features
+      - hearing_loss: present
+    go: labyrinthitis
+  - when:
+      all_of:
+      - HINTS_exam: peripheral_features
+      - hearing_loss: absent
+    go: vestibular_neuritis
+  - default: vestibular_neuritis
+
+- id: central_vertigo
+  when:
+    symptoms_contains_any:
+    - focal_neurologic_deficit
+    - vertical_nystagmus
+    - direction_changing_nystagmus
+    - diplopia
+    - dysarthria
+    - ataxia
+    - severe_headache
+  description: Central causes of vertigo - STROKE UNTIL PROVEN OTHERWISE
+  tests:
+  - NIHSS (stroke scale)
+  - MRI brain with DWI (gold standard for posterior circulation stroke)
+    - CT brain often MISSES posterior fossa strokes (bone artifact)
+  - MRA neck (vertebral artery dissection)
+  - Cardiac monitoring (atrial fibrillation)
+  - Echo (if suspect cardioembolic source)
+  - Neurologic exam - complete cranial nerves, cerebellar testing
+  suggest_dx:
+  - Cerebellar stroke (most common - PICA territory)
+  - Brainstem stroke (basilar, vertebral)
+  - Vertebral artery dissection
+  - Cerebellar hemorrhage
+  - Multiple sclerosis
+  - Posterior circulation TIA
+  - Cerebellopontine angle tumor
+  - Migraine-associated vertigo
+  - Chiari malformation
+  referrals:
+  - Neurology STAT
+  - Stroke team activation if acute (<24 hours)
+  - Neurosurgery if cerebellar hemorrhage or mass effect
+  - Admit for stroke workup
+  management:
+  - Acute stroke protocol if within window
+    - IV tPA if <4.5 hours and meets criteria
+    - Thrombectomy if large vessel occlusion <24 hours
+  - Admit for monitoring (posterior circulation stroke can deteriorate)
+  - Antiplatelet or anticoagulation (after hemorrhage ruled out)
+  - ICU if large cerebellar stroke (risk of obstructive hydrocephalus)
+  - Neurosurgical decompression if mass effect or hydrocephalus
+  - Vertebral dissection
+    - Anticoagulation (heparin, then warfarin or DOAC)
+    - Endovascular treatment if progressive
+  complications:
+  - Obstructive hydrocephalus (cerebellar stroke)
+  - Brainstem compression
+  - Coma, death
+  next:
+  - default: null
+
+- id: positional_vertigo
+  when:
+    trigger: head_movement_or_position_change
+  description: Positional vertigo evaluation
+  tests:
+  - Dix-Hallpike maneuver (diagnostic for BPPV)
+    - Patient sits upright on exam table
+    - Turn head 45° to one side
+    - Rapidly lower patient to supine with head hanging 20° below horizontal
+    - Watch for nystagmus (5-40 second delay, rotatory/torsional, fatigues)
+    - Positive test reproduces vertigo and nystagmus
+    - Repeat on other side
+  - Supine roll test (for horizontal canal BPPV)
+  suggest_dx: []
+  next:
+  - when:
+      dix_hallpike: positive
+    go: bppv
+  - when:
+      dix_hallpike: negative
+    go: other_positional_vertigo
+  - default: bppv
+
+- id: bppv
+  when:
+    dix_hallpike: positive
+  description: Benign paroxysmal positional vertigo (BPPV)
+  tests:
+  - Dix-Hallpike maneuver (diagnostic)
+    - Positive = vertigo and torsional nystagmus after 5-40 seconds
+    - Nystagmus fatigues with repeated testing (hallmark of peripheral)
+    - Posterior canal most common (90%)
+  - Determine affected side (side patient's head turned toward when positive)
+  - Audiometry usually normal (if hearing loss, reconsider diagnosis)
+  suggest_dx:
+  - Benign paroxysmal positional vertigo (H81.1)
+  - Posterior semicircular canal (90%)
+  - Horizontal canal (5-10%)
+  - Anterior canal (rare)
+  referrals:
+  - ENT or vestibular rehabilitation if refractory
+  management:
+  - Epley maneuver (canalith repositioning)
+    - Curative in 80-90% after 1-3 treatments
+    - Steps
+      1. Dix-Hallpike position (affected ear down, reproduces vertigo)
+      2. Wait 1-2 minutes for nystagmus to stop
+      3. Turn head 90° to opposite side (hold 1 minute)
+      4. Roll onto opposite shoulder (hold 1 minute)
+      5. Sit up slowly (particle moved from canal to utricle)
+  - Semont maneuver (alternative)
+  - Brandt-Daroff exercises (home exercises if Epley fails)
+  - Medications (NOT curative, only symptomatic)
+    - Meclizine 25mg PO q8h PRN (antihistamine)
+    - Or dimenhydrinate 50mg PO q6h PRN
+    - Use short-term only (delays central compensation)
+  - Post-treatment instructions
+    - Keep head upright for 24-48 hours (avoid lying flat)
+    - Sleep with head elevated 45° for 1-2 nights
+    - Avoid rapid head movements for few days
+  - Repeat Epley if symptoms persist
+  - Vestibular rehabilitation therapy (VRT) if chronic or refractory
+  patient_education:
+  - Very common, benign (not dangerous)
+  - Caused by crystals (otoliths) in semicircular canal
+  - Epley maneuver repositions crystals (curative)
+  - May recur (50% recurrence within 5 years)
+  - Can repeat Epley at home if recurs
+  prognosis:
+  - Excellent, 80-90% cured with 1-3 Epley maneuvers
+  - Spontaneous resolution in 50% within weeks to months
+  next:
+  - default: null
+
+- id: other_positional_vertigo
+  when:
+    all_of:
+    - trigger: positional
+    - dix_hallpike: negative
+  description: Positional vertigo without positive Dix-Hallpike
+  tests:
+  - Supine roll test (horizontal canal BPPV)
+  - Consider central causes if atypical features
+  - MRI brain if red flags present
+  suggest_dx:
+  - Horizontal canal BPPV
+  - Central positional vertigo (rare)
+  referrals:
+  - ENT or vestibular rehabilitation
+  management:
+  - Barbecue roll (for horizontal canal BPPV)
+  - Vestibular rehabilitation therapy
+  next:
+  - default: null
+
+- id: vestibular_neuritis
+  when:
+    all_of:
+    - acute_onset: true
+    - duration: 'hours to days'
+    - hearing_loss: absent
+    - HINTS: peripheral
+  description: Vestibular neuritis (no hearing loss)
+  tests:
+  - Head Impulse Test (HIT) - positive (corrective saccade)
+  - Nystagmus - horizontal, unidirectional, does not change with gaze
+  - Audiometry - NORMAL (no hearing loss, differentiates from labyrinthitis)
+  - MRI brain (if any concern for central cause)
+  suggest_dx:
+  - Vestibular neuritis (H81.2)
+  - Viral infection of vestibular nerve (presumed)
+  - Post-viral, HSV, VZV
+  referrals:
+  - ENT follow-up (1-2 weeks)
+  - Vestibular rehabilitation therapy (VRT)
+  management:
+  - Acute phase (first 24-72 hours)
+    - Vestibular suppressants (short-term ONLY)
+      - Meclizine 25mg PO q8h
+      - Or dimenhydrinate 50mg PO q6h
+      - Or prochlorperazine 10mg PO/IV q6h
+    - Antiemetics
+      - Ondansetron 4-8mg PO/IV q8h PRN
+    - Benzodiazepines (if severe)
+      - Diazepam 2-5mg PO q8h (use <3 days)
+    - Corticosteroids (controversial, may hasten recovery)
+      - Methylprednisolone 100mg PO daily x 3 days, then taper
+      - Or prednisone 60mg daily x 3-5 days, then taper
+  - After 48-72 hours - STOP vestibular suppressants
+    - Delays central compensation
+    - Encourages early mobilization
+  - Vestibular rehabilitation therapy (VRT)
+    - Start as soon as tolerated (after acute phase)
+    - Gaze stabilization exercises
+    - Balance training
+    - Habituation exercises
+    - Significantly improves recovery
+  - Hydration (IV if unable to tolerate PO)
+  patient_education:
+  - Viral infection of balance nerve
+  - Will improve over days to weeks
+  - Prolonged use of meclizine delays recovery
+  - VRT exercises speed recovery
+  prognosis:
+  - Most recover fully in weeks to months
+  - May have residual imbalance for months
+  - Rarely converts to BPPV after recovery
+  next:
+  - default: null
+
+- id: labyrinthitis
+  when:
+    all_of:
+    - acute_onset: true
+    - duration: 'hours to days'
+    - hearing_loss: present
+    - HINTS: peripheral
+  description: Labyrinthitis (vestibular neuritis + hearing loss)
+  tests:
+  - Audiometry - sensorineural hearing loss (differentiates from vestibular neuritis)
+  - MRI IAC with gadolinium (rule out acoustic neuroma, central causes)
+  - Head Impulse Test - positive (corrective saccade)
+  - Nystagmus - horizontal, unidirectional
+  suggest_dx:
+  - Labyrinthitis (H83.0)
+  - Viral (HSV, VZV, CMV, mumps)
+  - Bacterial (rare, complication of meningitis or otitis media)
+  referrals:
+  - ENT urgently (hearing loss requires evaluation)
+  - Audiology
+  - Vestibular rehabilitation
+  management:
+  - Same as vestibular neuritis PLUS
+  - Corticosteroids (for hearing loss)
+    - Prednisone 60mg PO daily x 7 days, then taper
+    - Start as soon as possible
+  - Antiviral therapy (if suspect HSV/VZV)
+    - Valacyclovir 1g PO TID x 7-10 days
+  - Admit if bacterial labyrinthitis suspected
+    - IV antibiotics (ceftriaxone + vancomycin)
+    - May need mastoidectomy if mastoiditis
+  - Vestibular suppressants (short-term, <72 hours)
+  - Vestibular rehabilitation therapy
+  complications:
+  - Permanent hearing loss (common)
+  - Chronic imbalance
+  - Hearing aid if persistent loss
+  next:
+  - default: null
+
+- id: meniere_disease
+  when:
+    symptoms_contains_all:
+    - episodic_vertigo
+    - hearing_loss
+    - tinnitus
+    - aural_fullness
+  description: Meniere's disease evaluation
+  tests:
+  - Audiometry - low-frequency sensorineural hearing loss (fluctuating)
+  - Tympanometry - normal
+  - MRI IAC with gadolinium - rule out acoustic neuroma (MUST do for unilateral hearing loss)
+  - Electrocochleography (ECoG) - elevated SP/AP ratio (confirmatory, not routine)
+  suggest_dx:
+  - Meniere's disease (H81.0)
+  - Endolymphatic hydrops (increased endolymph pressure)
+  - Diagnosis criteria (AAO-HNS)
+    - 2 or more spontaneous vertigo episodes, each lasting 20 minutes to 12 hours
+    - Audiometrically documented low-to-mid frequency SNHL in affected ear
+    - Fluctuating aural symptoms (hearing, tinnitus, fullness)
+    - Not better explained by another diagnosis
+  referrals:
+  - ENT for diagnosis confirmation and long-term management
+  - Audiology for serial audiograms
+  management:
+  - Acute attack
+    - Vestibular suppressants
+      - Meclizine 25mg PO q8h
+      - Diazepam 2-5mg PO q8h (if severe)
+    - Antiemetics (ondansetron, prochlorperazine)
+    - Lie still in dark, quiet room
+  - Maintenance therapy (reduce attack frequency)
+    - Dietary modifications
+      - Low sodium diet (<1500-2000 mg/day)
+      - Avoid caffeine, alcohol, MSG
+      - Adequate hydration
+    - Diuretics (controversial efficacy)
+      - Hydrochlorothiazide 25mg PO daily
+      - Or acetazolamide 250mg PO BID
+    - Betahistine 16mg PO TID (not FDA approved in US, used in Europe)
+  - Intratympanic injections (if medical management fails)
+    - Dexamethasone (preserves hearing)
+    - Gentamicin (ablates vestibular function, risk of hearing loss)
+  - Surgical options (refractory cases)
+    - Endolymphatic sac decompression
+    - Vestibular nerve section (preserves hearing)
+    - Labyrinthectomy (destroys hearing, for non-serviceable ear)
+  patient_education:
+  - Chronic disease with episodic attacks
+  - Attacks unpredictable
+  - Low-salt diet may help
+  - Hearing may progressively decline
+  - Hearing aid if needed
+  prognosis:
+  - Attacks typically decrease in frequency after 5-10 years
+  - Hearing loss usually progressive (may stabilize)
+  next:
+  - default: null
+
+- id: peripheral_vertigo_assessment
+  when: {}
+  description: Other peripheral causes of vertigo
+  tests:
+  - Otoscopy (middle ear pathology)
+  - Fistula test (press on tragus - vertigo suggests perilymphatic fistula)
+  - Audiometry
+  - Consider temporal bone CT (if trauma, cholesteatoma)
+  suggest_dx:
+  - Vestibular migraine
+  - Perilymphatic fistula
+  - Superior semicircular canal dehiscence
+  - Medication-induced (ototoxic)
+  - Cervical vertigo (controversial entity)
+  referrals:
+  - ENT for further evaluation
+  management:
+  - Treat underlying cause
+  - Vestibular migraine
+    - Migraine prophylaxis (propranolol, topiramate, amitriptyline)
+    - Avoid migraine triggers
+  - Perilymphatic fistula
+    - Bed rest, head elevation
+    - Avoid straining, Valsalva
+    - Surgical repair if persistent
+  next:
+  - default: null
+
+differential_diagnosis:
+  peripheral:
+    - BPPV (most common, 20-30% of vertigo)
+    - Vestibular neuritis (second most common)
+    - Labyrinthitis (vestibular neuritis + hearing loss)
+    - Meniere's disease (vertigo, hearing loss, tinnitus, fullness)
+    - Vestibular migraine
+    - Perilymphatic fistula (trauma, barotrauma)
+    - Cholesteatoma
+    - Superior canal dehiscence syndrome
+    - Ototoxicity (aminoglycosides, loop diuretics)
+    - Acoustic neuroma (usually gradual imbalance, not true vertigo)
+  central:
+    - Cerebellar stroke or hemorrhage (EMERGENCY)
+    - Brainstem stroke (vertebrobasilar)
+    - Vertebral artery dissection
+    - Multiple sclerosis
+    - Chiari malformation
+    - Cerebellopontine angle tumor
+    - Migraine-associated vertigo
+  other:
+    - Orthostatic hypotension (not true vertigo)
+    - Medication-induced (sedatives, antihypertensives)
+    - Arrhythmia
+    - Anemia
+    - Anxiety/panic disorder
+
+disposition_guidance:
+  admit:
+    - Central vertigo features (stroke workup)
+    - Inability to ambulate safely
+    - Intractable vomiting, dehydration
+    - Elderly with fall risk
+    - Uncertain diagnosis with red flags
+  discharge:
+    - BPPV after Epley maneuver
+    - Vestibular neuritis (if able to ambulate, tolerate PO)
+    - Meniere's disease (acute attack controlled)
+    - No red flags, safe to ambulate
+  follow_up:
+    - BPPV - return if symptoms persist (may need repeat Epley)
+    - Vestibular neuritis - ENT in 1-2 weeks, VRT referral
+    - Labyrinthitis - ENT within days (hearing loss requires follow-up)
+    - Meniere's - ENT for long-term management, serial audiograms
+
+references:
+  - Bhattacharyya N et al. AAO-HNS Clinical Practice Guideline - Benign Paroxysmal Positional Vertigo. Otolaryngol Head Neck Surg. 2017.
+  - Basura GJ et al. AAO-HNS Clinical Practice Guideline - Meniere's Disease. Otolaryngol Head Neck Surg. 2020.
+  - Kattah JC et al. HINTS to Diagnose Stroke in Acute Vestibular Syndrome. Stroke. 2009.
+  - Tarnutzer AA et al. Does My Dizzy Patient Have a Stroke? A Systematic Review of Bedside Diagnosis in Acute Vestibular Syndrome. CMAJ. 2011.
+
+citations:
+  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+  - British Society of Otology Guidelines
+  - UpToDate - Otolaryngology

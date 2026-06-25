@@ -1,0 +1,61 @@
+tree_id: NEPHRO-HYPERKALEMIA
+name: Hyperkalemia
+family: Nephrology
+specialty: Nephrology
+icd10:
+- E87.5
+snomed:
+- '14140009'
+urgency: medium
+description: Comprehensive evaluation and management of Hyperkalemia
+version: '1.0'
+citations:
+  - KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines
+  - NKF (National Kidney Foundation) Clinical Practice Guidelines
+  - UpToDate - Nephrology
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Often asymptomatic until severe (>6.5 mEq/L)
+- Muscle weakness, paresthesias
+- Nausea, palpitations
+- 'ECG changes: Peaked T waves (earliest), widened QRS, prolonged PR, loss of P wave'
+- Sine wave pattern on ECG (pre-arrest, >8.0 mEq/L)
+- 'Causes: Renal failure, ACEi/ARB, K-sparing diuretics, rhabdomyolysis, tumor lysis'
+workup:
+- Basic metabolic panel (K+, Cr)
+- ECG (assess for cardiac toxicity)
+- ABG if metabolic acidosis suspected (worsens hyperkalemia)
+- Urinalysis, urine electrolytes (assess renal K+ excretion)
+treatment:
+- 'Guideline-based treatment options for Hyperkalemia include:'
+- 'If ECG changes: Calcium gluconate 1-2g IV over 2-5 min (membrane stabilization)
+  (KDIGO 2024)'
+- 'Shift K+ into cells: Regular insulin 10 units IV + D50 25g (or D10 250mL if not
+  hypoglycemic) (KDIGO 2024)'
+- Albuterol nebulized 10-20mg (lowers K+ 0.5-1 mEq/L) (KDIGO 2024)
+- 'Remove K+: Sodium polystyrene sulfonate (Kayexalate) 15-30g PO, or patiromer (KDIGO
+  2024)'
+- 'Dialysis if: Refractory, severe (>7.0), renal failure (KDIGO 2024)'
+clinical_pearls:
+- ECG changes correlate poorly with K+ level (always check ECG!)
+- 'Peaked T waves: Earliest sign (K+ 6.0-6.5)'
+- 'Widened QRS, loss of P wave: Severe (K+ >7.0) → high risk cardiac arrest'
+- 'Treatment priorities: Stabilize myocardium (Ca), shift K+ into cells (insulin/glucose),
+  remove K+ (kayexalate, dialysis)'
+- 'Pseudohyperkalemia: Hemolysis, thrombocytosis, leukocytosis (repeat sample)'
+referrals:
+- Nephrology if severe or refractory
+- Dialysis if K+ >7.0 or refractory to medical management
+- CCU if ECG changes or K+ >7.0
+differentials:
+  - Pseudohyperkalemia
+  - Medication effect
+  - Renal failure
+  - Adrenal insufficiency
+  - Hemolysis
+trace:
+  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
+    Society of Nephrology (ASN)'
+  version: 0.1.0
+  last_updated: '2024-12-26'

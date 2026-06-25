@@ -1,0 +1,78 @@
+tree_id: TOX-ACETAMINOPHEN-OD
+name: Acetaminophen (Tylenol) Overdose
+family: Toxicology
+specialty: Toxicology
+icd10:
+- T39.1X1A
+- T39.1X2A
+snomed:
+- '86977007'
+urgency: medium
+description: Comprehensive evaluation and management of Acetaminophen (Tylenol) Overdose
+version: '1.0'
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Stage 1 (0-24h): Nausea, vomiting, malaise, or asymptomatic (most common presentation)'
+- 'Stage 2 (24-72h): RUQ pain, rising AST/ALT (>1000), elevated INR'
+- 'Stage 3 (72-96h): Hepatic failure (peak transaminases), jaundice, coagulopathy,
+  encephalopathy, lactic acidosis'
+- 'Stage 4 (4 days-2 weeks): Recovery or death from liver failure'
+- 'Toxic dose: >150 mg/kg (child) or >7.5g total (adult) in single acute ingestion'
+- 'Chronic toxicity: >4g/day for several days (alcoholics, malnourished at higher
+  risk)'
+- Many patients asymptomatic initially despite lethal dose
+workup: []
+treatment:
+- 'Guideline-based treatment options for Acetaminophen (Tylenol) Overdose include:'
+- 'Immediate: Acetaminophen level at 4hr post-ingestion (earlier levels unreliable),
+  AST/ALT, INR, consider activated charcoal if <1hr (AAPCC 2023)'
+- 'Plot level on Rumack-Matthew nomogram: If above treatment line or unknown time,
+  start NAC (AAPCC 2023)'
+- 'NAC IV protocol: 150 mg/kg in 200mL D5W over 1hr, then 50 mg/kg in 500mL over 4hr,
+  then 100 mg/kg in 1L over 16hr (AAPCC 2023)'
+- 'Monitor: Serial AST/ALT, INR q12-24h, continue NAC if transaminases rising or INR
+  elevated (AAPCC 2023)'
+- 'Disposition: Admit if NAC needed, psychiatry consult if intentional, liver transplant
+  evaluation if fulminant hepatic failure (AAPCC 2023)'
+clinical_pearls:
+- '4-hour acetaminophen level: Plot on Rumack-Matthew nomogram to determine treatment
+  need'
+- 'NAC (N-acetylcysteine) = antidote: Most effective if started <8hr, but give up
+  to 24hr or beyond if elevated AST/ALT'
+- 'NAC dosing: 150 mg/kg IV load over 1hr, then 50 mg/kg over 4hr, then 100 mg/kg
+  over 16hr (total 21hr protocol)'
+- 'Oral NAC alternative: 140 mg/kg load, then 70 mg/kg q4h ×17 doses (can use if IV
+  unavailable)'
+- If level >150 mcg/mL at 4hr or >75 at 8hr or >35 at 12hr → treatment line, give
+  NAC
+- 'Check AST/ALT, INR: If elevated despite NAC, continue NAC until transaminases downtrending
+  and INR <2'
+referrals:
+  emergency:
+    - Altered mental status from toxin
+    - Severe poisoning
+    - Drug overdose with respiratory depression
+    - Serotonin syndrome
+  urgent:
+    - Toxic ingestion without symptoms
+    - Suspected toxic exposure
+    - Drug overdose stable
+  routine:
+    - Substance use disorder treatment
+    - Chronic exposure evaluation
+    - Lead screening
+differentials:
+  - Viral hepatitis
+  - Alcoholic hepatitis
+  - Drug-induced hepatitis from other cause
+  - Ischemic hepatitis
+trace:
+  source: American College of Medical Toxicology (ACMT) Guidelines, American Association
+    of Poison Control Centers (AAPCC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

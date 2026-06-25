@@ -1,0 +1,79 @@
+tree_id: GENERAL-ABNORMAL-LAB
+name: Abnormal Lab Result (Encounter)
+family: general
+specialty: Primary Care, Internal Medicine
+chief_complaint: Abnormal lab results, follow-up of test results
+description: |
+  Encounter to evaluate and manage abnormal laboratory test results.
+  Approach depends on specific abnormality - may require repeat testing, additional workup, or referral.
+icd10: R79.9
+snomed: "441742003"
+presentations:
+  - Incidental abnormal lab finding
+  - Targeted testing with abnormal result
+  - Screening test abnormality
+urgency: Variable
+workup:
+  general_approach:
+    - Review specific abnormal results
+    - Assess clinical significance (mild vs severe abnormality)
+    - Determine if acute or chronic
+    - Correlate with symptoms and clinical context
+    - Check for laboratory error (hemolysis, improper collection)
+    - Review medications that could cause abnormality
+    - Repeat if borderline or unexplained
+  common_abnormalities:
+    anemia:
+      - CBC with indices, reticulocyte count
+      - Iron studies, B12, folate
+      - Peripheral smear
+    thrombocytopenia:
+      - Repeat CBC, peripheral smear
+      - Rule out pseudothrombocytopenia
+      - Hematology referral if persistent
+    elevated_liver_enzymes:
+      - Hepatitis panel, autoimmune markers
+      - Abdominal ultrasound
+      - Review medications and alcohol use
+    elevated_creatinine:
+      - Repeat BMP, urinalysis
+      - Calculate GFR
+      - Renal ultrasound if concern for obstruction
+    hyperglycemia:
+      - Repeat fasting glucose or A1c
+      - Diabetes workup
+    electrolyte_abnormalities:
+      - Repeat to confirm
+      - Assess severity and symptoms
+      - Identify underlying cause
+treatment:
+  approach:
+    - Treat underlying cause of abnormality
+    - Adjust or discontinue offending medications
+    - Repeat testing to monitor trend
+    - Refer to specialist if appropriate
+  mild_abnormalities:
+    - Often can observe with repeat testing
+    - Address modifiable factors
+  moderate_to_severe_abnormalities:
+    - May require urgent intervention
+    - Specialist referral
+    - Hospitalization if severe
+clinical_pearls:
+  - Not all abnormalities are clinically significant
+  - Always repeat borderline results before extensive workup
+  - Consider laboratory error or specimen issues
+  - Correlate lab findings with clinical picture
+  - Trending values over time more informative than single result
+  - Document discussion of results with patient
+differentials:
+  - Laboratory error
+  - Benign or physiologic variation
+  - Medication effect
+  - Underlying disease requiring treatment
+  - Requires specialist evaluation
+trace:
+  - 40-year-old asymptomatic woman with elevated ALT 85, AST 72 on routine screening. BMI 32. No alcohol use. Negative viral hepatitis panel. Ultrasound shows hepatic steatosis. Diagnose non-alcoholic fatty liver disease (NAFLD). Counsel on weight loss and exercise. Repeat LFTs in 3 months show improvement to ALT 58. Continue lifestyle modifications.
+citations:
+  - UpToDate - Laboratory Medicine
+  - American Family Physician Guidelines

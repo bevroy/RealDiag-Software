@@ -1,0 +1,100 @@
+tree_id: ENT-PHARYNGITIS
+name: Pharyngitis
+family: ent
+specialty: Otolaryngology
+icd10: J02.9
+snomed: "405737000"
+
+presentations:
+  - Sore throat or throat pain
+  - Odynophagia (painful swallowing)
+  - Fever
+  - Pharyngeal erythema
+  - Tonsillar exudates
+  - Tender anterior cervical lymphadenopathy
+  - Hoarseness
+  - Cough
+  - Rhinorrhea and nasal congestion (viral)
+  - Headache and myalgias
+
+workup:
+  - History:
+    - Onset and duration of symptoms
+    - Associated symptoms (fever, cough, rhinorrhea, conjunctivitis)
+    - Sick contacts or recent exposures
+    - Immunization status (pertussis, COVID-19)
+    - Sexual history (gonorrhea, HIV risk factors)
+    - Recent antibiotic use
+  - Physical exam:
+    - Oral temperature
+    - Pharyngeal and tonsillar examination (erythema, exudates, petechiae, ulcers)
+    - Cervical lymph node examination
+    - Presence of cough, conjunctivitis, or coryza (suggests viral)
+    - Sandpaper rash (scarlet fever)
+    - Grayish pseudomembrane (diphtheria)
+    - Trismus or muffled voice (peritonsillar abscess)
+  - Centor criteria (for bacterial pharyngitis likelihood):
+    - Tonsillar exudates (+1 point)
+    - Tender anterior cervical adenopathy (+1 point)
+    - Fever >38°C (+1 point)
+    - Absence of cough (+1 point)
+    - Age 3-14 years (+1 point), Age 15-44 (0 points), Age >45 (-1 point)
+  - Diagnostic studies:
+    - Rapid antigen detection test (RADT) for Group A Streptococcus (if Centor score 2-3)
+    - Throat culture (if RADT negative but high clinical suspicion)
+    - Monospot or EBV serology (if infectious mononucleosis suspected)
+    - COVID-19 testing if indicated
+    - Gonorrhea/Chlamydia pharyngeal culture (if sexual exposure)
+
+treatment:
+  group_a_streptococcus:
+    - First-line Amoxicillin 500mg PO TID x 10 days (or 1000mg PO BID)
+    - Pediatric Amoxicillin 50mg/kg/day divided BID-TID (max 1000mg/dose) x 10 days
+    - Penicillin allergy Cephalexin 500mg PO BID x 10 days or azithromycin 500mg day 1, then 250mg daily x 4 days
+    - Severe penicillin allergy Clindamycin 300mg PO TID x 10 days
+    - IM option Penicillin G benzathine 1.2 million units IM x 1 (if adherence concern)
+  viral_pharyngitis:
+    - Supportive care (rest, hydration)
+    - Acetaminophen or ibuprofen for pain and fever
+    - Throat lozenges or sprays (benzocaine, menthol)
+    - Saltwater gargles
+    - Humidified air
+  infectious_mononucleosis:
+    - Supportive care
+    - Avoid contact sports for 4 weeks (risk of splenic rupture)
+    - Avoid ampicillin/amoxicillin (high risk of morbilliform rash)
+    - Corticosteroids only for severe tonsillar hypertrophy with airway compromise
+  gonorrhea_pharyngitis:
+    - Ceftriaxone 500mg IM x 1 (250mg if <150 kg)
+    - Test for co-infection with chlamydia and HIV
+    - Partner treatment and STI counseling
+  complications:
+    - Peritonsillar abscess - requires incision and drainage
+    - Retropharyngeal abscess - requires ENT consultation and possible surgical drainage
+    - Rheumatic fever prophylaxis if recurrent Group A Strep infections
+
+clinical_pearls:
+  - Most pharyngitis (80-90%) is viral and does not require antibiotics
+  - Group A Streptococcus (Strep pyogenes) is most common bacterial cause (5-15% of adult pharyngitis)
+  - Centor score 0-1 suggests low risk - no testing or treatment needed
+  - Centor score 2-3 suggests intermediate risk - RADT recommended
+  - Centor score 4+ suggests high risk - empiric treatment or RADT with treatment
+  - Antibiotics reduce symptom duration by only 16 hours but prevent rheumatic fever and suppurative complications
+  - Treatment prevents rheumatic fever if started within 9 days of symptom onset
+  - Posterior pharyngeal exudates without tonsillar involvement suggest EBV (mononucleosis)
+  - Conjunctivitis, coryza, and cough suggest viral etiology (adenovirus)
+  - Vesicles or ulcers suggest viral (HSV, coxsackievirus, herpangina)
+  - Unilateral tonsillar enlargement or severe trismus should raise concern for peritonsillar abscess
+  - Diphtheria presents with gray pseudomembrane but extremely rare in vaccinated populations
+  - Fusobacterium necrophorum can cause Lemierre syndrome (suppurative thrombophlebitis of internal jugular vein)
+
+trace:
+  - Centor criteria and modified McIsaac score for streptococcal pharyngitis
+  - Antibiotic treatment regimens for Group A Streptococcus
+  - Management of infectious mononucleosis and complications
+  - Prevention of acute rheumatic fever
+
+citations:
+  - Shulman ST, et al. (2012). Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update by the Infectious Diseases Society of America. Clin Infect Dis, 55(10), e86-e102.
+  - Fine AM, et al. (2012). Large-scale validation of the Centor and McIsaac scores to predict group A streptococcal pharyngitis. Arch Intern Med, 172(11), 847-52.
+  - Bisno AL. (2001). Acute pharyngitis. N Engl J Med, 344(3), 205-11.

@@ -1,0 +1,105 @@
+tree_id: ENDO-THYROID-NODULE
+name: Thyroid Nodule
+family: Endocrinology
+specialty: Endocrinology
+chief_complaint: Neck lump
+description: Discrete lesion within thyroid gland, usually benign but requires evaluation to exclude malignancy
+
+icd10: E04.1
+snomed: 237490009
+presentations:
+  - Palpable neck mass
+  - Usually asymptomatic
+  - Dysphagia, hoarseness (large nodules)
+  - Most are benign
+  - Red flags: rapid growth, fixed, lymphadenopathy, family history thyroid cancer
+
+urgency: routine
+
+referrals:
+  emergency:
+    - DKA
+    - HHS
+    - Thyroid storm
+    - Myxedema coma
+    - Adrenal crisis
+  urgent:
+    - New diabetes with poor control
+    - Thyroid nodule >4cm
+    - Severe hypercalcemia
+    - Pituitary mass
+  routine:
+    - Diabetes management
+    - Thyroid nodule surveillance
+    - Osteoporosis management
+    - Lipid disorders
+
+workup:
+  - Epidemiology: very common (palpable in 5 percent, ultrasound detects in 50-70 percent), most benign (greater than 90 percent), 5-10 percent malignant
+  - Risk factors for malignancy: history head/neck radiation in childhood, family history thyroid cancer (especially medullary, papillary), age less than 20 or greater than 70, male sex, rapid nodule growth, hoarseness, dysphagia, lymphadenopathy
+  - Clinical presentation: often asymptomatic (incidental finding on imaging or physical exam), may notice neck lump, rarely compressive symptoms (dysphagia, dyspnea, hoarseness)
+  - Exam: palpate thyroid (size, consistency, mobility), assess for cervical lymphadenopathy, hoarseness (vocal cord paralysis suggests malignancy)
+  - TSH: first test (determines thyroid function), if TSH low (hyperthyroid) suggests autonomous hyperfunctioning nodule (hot nodule, rarely malignant), if TSH normal or high proceed with ultrasound
+  - Thyroid ultrasound: essential for all palpable nodules and incidental nodules greater than 1 cm, assesses size, composition (solid, cystic, mixed), echogenicity, margins, calcifications (microcalcifications concerning), vascularity, lymph nodes
+  - Ultrasound risk stratification: ACR TI-RADS (Thyroid Imaging Reporting and Data System) 1-5, based on features (composition, echogenicity, shape, margins, echogenic foci), guides FNA decision
+  - High-risk features: hypoechoic solid nodule, microcalcifications, taller-than-wide shape, irregular margins, extrathyroidal extension
+  - Fine needle aspiration (FNA): indicated if high-risk features OR size greater than 1 cm with intermediate features OR size greater than 1.5-2 cm with low-risk features, ultrasound-guided preferred
+  - FNA cytology Bethesda classification: I nondiagnostic (repeat FNA), II benign (95-99 percent benign, follow with ultrasound), III atypia of undetermined significance (15-30 percent malignant, consider molecular testing or repeat FNA), IV follicular neoplasm (25-40 percent malignant, surgery or molecular testing), V suspicious for malignancy (60-75 percent malignant, surgery), VI malignant (97-99 percent malignant, surgery)
+  - Molecular testing: if indeterminate cytology (Bethesda III or IV), gene expression classifiers (Afirma) or mutation panels help stratify risk
+  - Radioiodine scan: only if TSH low (hyperfunctioning nodule), hot nodule rarely malignant (no FNA needed)
+
+treatment:
+  - Benign nodule (Bethesda II): observation with ultrasound surveillance, repeat ultrasound at 12-24 months (assess for growth), if stable repeat every 3-5 years, suppressive levothyroxine NOT recommended (ineffective, causes hyperthyroidism)
+  - Indeterminate cytology (Bethesda III or IV): molecular testing to stratify risk, if high risk or patient preference proceed to surgery (lobectomy), if low risk consider observation with repeat FNA
+  - Suspicious or malignant cytology (Bethesda V or VI): thyroidectomy (total or lobectomy depending on tumor size and features), lymph node dissection if lymph node involvement
+  - Papillary thyroid cancer: most common thyroid cancer (80 percent), excellent prognosis (greater than 95 percent 10-year survival), treatment thyroidectomy plus radioactive iodine ablation if high-risk, TSH suppression with levothyroxine
+  - Follicular thyroid cancer: second most common (10 percent), also excellent prognosis, treatment thyroidectomy plus radioactive iodine
+  - Medullary thyroid cancer: arises from C cells (calcitonin-producing), check serum calcitonin if concern, may be familial (MEN 2 syndrome, check RET mutation)
+  - Anaplastic thyroid cancer: rare (less than 2 percent), very aggressive, poor prognosis
+  - Hyperfunctioning nodule (toxic adenoma): if causing hyperthyroidism treat with radioactive iodine ablation or surgery
+  - Follow-up post-surgery: monitor thyroglobulin (tumor marker for papillary/follicular cancer), TSH suppression with levothyroxine (reduce recurrence), surveillance ultrasound
+
+clinical_pearls:
+  - Very common (ultrasound detects in 50-70 percent), most benign (greater than 90 percent)
+  - Check TSH first (if low suggests hot nodule, rarely malignant)
+  - Ultrasound risk stratification guides FNA decision (TI-RADS)
+  - High-risk features: hypoechoic, microcalcifications, taller-than-wide, irregular margins
+  - FNA Bethesda classification: II benign observe, III-IV indeterminate (consider molecular testing), V-VI malignant (surgery)
+  - Papillary thyroid cancer most common (excellent prognosis greater than 95 percent 10-year survival)
+  - Suppressive levothyroxine NOT recommended for benign nodules
+
+differentials:
+  - Thyroid cyst (anechoic on ultrasound, benign)
+  - Multinodular goiter (multiple nodules, may cause hyperthyroidism)
+  - Thyroiditis (painful if subacute, diffuse rather than nodular)
+  - Lymphoma (rare, rapidly enlarging, B symptoms)
+  - Parathyroid adenoma (posterior to thyroid, elevated PTH and calcium)
+
+trace:
+  - 48-year-old woman referred to endocrinology for thyroid nodule found on carotid ultrasound (ordered for carotid bruit)
+  - History: asymptomatic, no neck lump noticed, no compressive symptoms, no prior radiation, no family history thyroid cancer
+  - Exam: 2 cm firm non-tender nodule palpable right thyroid lobe, moves with swallowing, no cervical lymphadenopathy, voice normal
+  - TSH: 2.1 mIU/L (normal, 0.4-4.5), rules out hyperfunctioning nodule
+  - Thyroid ultrasound: 2.2 cm solid hypoechoic nodule right lobe with microcalcifications and irregular margins (high-risk features, ACR TI-RADS 5), no lymphadenopathy
+  - FNA indicated: size greater than 1 cm with high-risk features
+  - Ultrasound-guided FNA performed: 3 passes from nodule
+  - Cytology: Bethesda VI malignant, consistent with papillary thyroid carcinoma
+  - Diagnosis: papillary thyroid cancer right lobe, 2.2 cm
+  - Referred to endocrine surgery
+  - Pre-operative: laryngoscopy shows normal vocal cord function, ultrasound neck no lymph node involvement, chest X-ray normal
+  - Surgery: total thyroidectomy (remove entire thyroid to allow radioactive iodine treatment), intraoperative nerve monitoring (protect recurrent laryngeal nerve)
+  - Pathology: 2.2 cm papillary thyroid carcinoma right lobe, margins negative, no lymphovascular invasion, 2 lymph nodes removed negative, stage T1N0M0 (excellent prognosis)
+  - Post-operative day 1: calcium 8.0 mg/dL (low-normal, monitor for hypoparathyroidism from surgery), started calcium 1000 mg TID plus calcitriol 0.25 mcg BID temporarily
+  - Discharge day 2: voice normal (no recurrent laryngeal nerve injury), calcium stable
+  - 4 weeks post-op: stopped levothyroxine (allow TSH to rise for radioactive iodine uptake), thyroglobulin 12 ng/mL (baseline tumor marker)
+  - 6 weeks post-op: TSH 78 mIU/L (elevated, allows RAI uptake), radioactive iodine ablation 30 mCi I-131 (destroy remnant thyroid tissue and micrometastases)
+  - Post-ablation scan: uptake in thyroid bed only (no distant metastases)
+  - Started levothyroxine 150 mcg daily (TSH suppression goal less than 0.5 mIU/L to reduce recurrence)
+  - 3 months: TSH 0.3 mIU/L (suppressed, goal achieved), thyroglobulin undetectable less than 0.1 ng/mL (excellent, no residual cancer), calcium normalized (stopped supplements)
+  - 1 year: surveillance ultrasound neck normal (no recurrence), thyroglobulin undetectable, TSH 0.4 mIU/L (continues suppression)
+  - Prognosis: papillary thyroid cancer stage T1N0M0 has greater than 99 percent 10-year survival, annual monitoring with thyroglobulin and ultrasound
+
+citations:
+  - Endocrine Society Clinical Practice Guidelines
+  - ADA (American Diabetes Association) Standards of Care
+  - UpToDate - Endocrinology and Diabetes

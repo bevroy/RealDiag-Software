@@ -1,0 +1,913 @@
+{
+  "rules": [
+    {
+      "id": "ctx_rule_001",
+      "diagnosis_module_id": "endocrine_hyperthyroidism",
+      "name": "High Iodine Exposure - Hyperthyroidism",
+      "triggers": [
+        {
+          "expression": "seaweed_kelp_supplement == true",
+          "description": "Patient takes seaweed/kelp supplements"
+        },
+        {
+          "expression": "recent_iodinated_contrast == true",
+          "description": "Recent iodinated contrast exposure"
+        },
+        {
+          "expression": "seafood_frequency_per_week >= 5",
+          "description": "High seafood consumption (≥5 servings/week)"
+        },
+        {
+          "expression": "amiodarone_use == true",
+          "description": "Current or recent amiodarone use"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Iodine-induced hyperthyroidism (Jod-Basedow phenomenon)",
+          "Amiodarone-induced thyrotoxicosis (if amiodarone exposure)",
+          "Iodine-induced thyroiditis"
+        ],
+        "add_questions": [
+          "When did the high iodine exposure begin?",
+          "Any recent CT scans or angiography with contrast?",
+          "Are you taking any kelp, seaweed, or iodine supplements?",
+          "If on amiodarone: Duration of use? Any plans to continue?",
+          "Any symptoms that started shortly after the exposure?"
+        ],
+        "add_workup": [
+          "TSH, free T4, total T3 (baseline thyroid function)",
+          "24-hour urinary iodine excretion (if clinically indicated)",
+          "Thyroid antibodies (TPO, TSI) to distinguish from Graves' disease",
+          "Thyroid ultrasound with Doppler (assess vascularity)",
+          "Consider thyroid uptake scan (typically low in iodine-induced thyrotoxicosis)"
+        ],
+        "add_red_flags": [
+          "Severe tachycardia or new atrial fibrillation",
+          "Signs of thyroid storm (fever, altered mental status, severe agitation)",
+          "Pregnancy (iodine excess can affect fetal thyroid)",
+          "Pre-existing cardiac disease with new arrhythmias"
+        ],
+        "adjust_urgency": "consider_urgent_if_cardiac_symptoms",
+        "referral_notes": [
+          "Consider endocrinology referral for: severe symptoms, cardiac complications, pregnancy, or diagnostic uncertainty",
+          "Cardiology consultation if new or worsening arrhythmia",
+          "If amiodarone-induced: coordinate with prescribing cardiologist regarding medication continuation"
+        ],
+        "reasoning": "Excess iodine intake can trigger thyrotoxicosis in susceptible individuals, particularly those with underlying thyroid autonomy or nodular disease. The Jod-Basedow phenomenon describes iodine-induced hyperthyroidism, most common in iodine-deficient populations exposed to iodine load. Amiodarone contains 37% iodine by weight and can cause both hyper- and hypothyroidism. Diagnosis requires correlation of exposure history with thyroid function tests and imaging. Treatment may require beta-blockers, thionamides, and removal of iodine source when possible.",
+        "clinical_pearls": [
+          "Jod-Basedow is more common in areas with chronic iodine deficiency",
+          "Amiodarone-induced thyrotoxicosis has two types: Type 1 (iodine excess) and Type 2 (destructive thyroiditis)",
+          "Thyroid uptake scan shows low uptake in iodine-induced thyrotoxicosis (vs. high in Graves')",
+          "Some patients may require temporary glucocorticoids if destructive thyroiditis is present"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Guidelines for the Treatment of Hypothyroidism",
+          "organization": "American Thyroid Association",
+          "year": 2014,
+          "url_or_citation": "Thyroid. 2014;24(12):1670-1751"
+        },
+        {
+          "title": "Amiodarone and the Thyroid",
+          "organization": "Endocrine Society",
+          "year": 2018,
+          "url_or_citation": "J Clin Endocrinol Metab. 2018;103(11):4020-4030"
+        },
+        {
+          "title": "Iodine-Induced Thyroid Dysfunction",
+          "organization": "European Thyroid Association",
+          "year": 2020,
+          "url_or_citation": "Eur Thyroid J. 2020;9(2):57-65"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_002",
+      "diagnosis_module_id": "endocrine_goiter_nodules",
+      "name": "High Iodine Exposure - Goiter/Nodules",
+      "triggers": [
+        {
+          "expression": "seaweed_kelp_supplement == true",
+          "description": "Patient takes seaweed/kelp supplements"
+        },
+        {
+          "expression": "seafood_frequency_per_week >= 5",
+          "description": "High seafood consumption"
+        },
+        {
+          "expression": "iodized_salt_use == 'often' AND seafood_frequency_per_week >= 3",
+          "description": "Combined high iodine from multiple sources"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Iodine-induced goiter",
+          "Wolff-Chaikoff effect (transient hypothyroidism from iodine excess)",
+          "Multinodular goiter with iodine excess"
+        ],
+        "add_questions": [
+          "How long have you been consuming high amounts of iodine?",
+          "Any family history of thyroid disease?",
+          "Have you noticed changes in thyroid size or symptoms?",
+          "Any difficulty swallowing or breathing?",
+          "Previous thyroid imaging or function tests?"
+        ],
+        "add_workup": [
+          "TSH, free T4 (may be normal, high, or low)",
+          "Thyroid ultrasound (assess goiter size, nodules, vascularity)",
+          "If nodules >1cm: Consider FNA biopsy per ATA guidelines",
+          "Urinary iodine if diagnosis uncertain",
+          "Thyroid antibodies if autoimmune component suspected"
+        ],
+        "add_red_flags": [
+          "Rapidly enlarging goiter",
+          "Compressive symptoms (dysphagia, dyspnea, hoarseness)",
+          "Suspicious ultrasound features (irregular margins, microcalcifications)",
+          "Persistent hypothyroidism despite iodine restriction"
+        ],
+        "adjust_urgency": "routine_unless_compressive",
+        "referral_notes": [
+          "Endocrinology referral for nodules requiring biopsy or complex thyroid dysfunction",
+          "ENT/Surgery referral if compressive symptoms or malignancy concern"
+        ],
+        "reasoning": "Chronic iodine excess can lead to goiter formation and thyroid dysfunction. The Wolff-Chaikoff effect describes temporary inhibition of thyroid hormone synthesis with acute iodine loads. In individuals with underlying thyroid abnormalities, excess iodine may unmask or worsen goiter or nodular disease. Management focuses on identifying and modifying iodine sources, monitoring thyroid function, and evaluating for malignancy risk per established guidelines.",
+        "clinical_pearls": [
+          "Most healthy individuals can tolerate high iodine intake due to autoregulation",
+          "Iodine-induced goiter is more common in those with pre-existing thyroid autonomy",
+          "Tolerable Upper Intake Level (UL) for iodine is 1,100 mcg/day for adults",
+          "Kelp supplements can contain highly variable and excessive iodine amounts"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Management of Thyroid Nodules",
+          "organization": "American Thyroid Association",
+          "year": 2015,
+          "url_or_citation": "Thyroid. 2016;26(1):1-133"
+        },
+        {
+          "title": "Iodine Nutrition and Thyroid Disease",
+          "organization": "Endocrine Society",
+          "year": 2019,
+          "url_or_citation": "Endocr Rev. 2019;40(4):1058-1081"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_003",
+      "diagnosis_module_id": "gi_gastroenteritis",
+      "name": "Raw Fish Consumption - GI Illness",
+      "triggers": [
+        {
+          "expression": "raw_fish_consumption == 'frequently'",
+          "description": "Frequent raw or undercooked fish consumption"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Anisakiasis (parasitic infection from raw fish)",
+          "Scombroid fish poisoning (histamine)",
+          "Ciguatera fish poisoning",
+          "Vibrio species infection (particularly V. parahaemolyticus)",
+          "Diphyllobothrium latum (fish tapeworm)"
+        ],
+        "add_questions": [
+          "What type of fish was consumed and when?",
+          "Where was the fish sourced from (restaurant, home, region)?",
+          "Any others who ate the same fish with similar symptoms?",
+          "Timing of symptom onset after fish consumption?",
+          "Any neurologic symptoms (paresthesias, temperature reversal)?",
+          "Any allergic-type symptoms (flushing, urticaria, palpitations)?"
+        ],
+        "add_workup": [
+          "Stool culture (if bacterial pathogen suspected)",
+          "Stool ova and parasites x3 (if parasitic infection suspected)",
+          "Serum IgE to Anisakis (if allergic symptoms)",
+          "CBC with differential (eosinophilia may suggest parasitic infection)",
+          "Consider endoscopy if severe abdominal pain and negative initial workup"
+        ],
+        "add_red_flags": [
+          "Severe dehydration requiring IV fluids",
+          "Neurologic symptoms (suggest ciguatera or severe scombroid)",
+          "High fever with bloody diarrhea",
+          "Symptoms persisting >7 days",
+          "Immunocompromised patient"
+        ],
+        "adjust_urgency": "urgent_if_severe_or_neurologic",
+        "referral_notes": [
+          "Consider gastroenterology referral if symptoms persist or complications develop",
+          "Infectious disease consultation for severe or atypical presentations",
+          "Allergy/immunology if recurrent reactions to seafood"
+        ],
+        "reasoning": "Raw or undercooked fish consumption carries risk of parasitic and bacterial infections as well as toxin-mediated illnesses. Anisakis species (roundworms) can cause acute gastric symptoms and allergic reactions. Scombroid poisoning results from histamine in improperly stored fish (tuna, mackerel, mahi-mahi) and presents with flushing and GI symptoms. Ciguatera toxin affects large reef fish and causes distinctive GI and neurologic symptoms. Vibrio species are common in raw shellfish and fish from warm coastal waters. Diagnosis requires careful exposure history and targeted testing.",
+        "clinical_pearls": [
+          "Anisakis can be seen on endoscopy as a whitish worm embedded in gastric mucosa",
+          "Scombroid poisoning mimics allergic reaction but is histamine toxicity (antihistamines help)",
+          "Ciguatera's pathognomonic feature is 'temperature reversal' (cold feels hot and vice versa)",
+          "Most cases are self-limited; treatment is supportive",
+          "Prevention: fish should be frozen to -20°C for 7 days to kill Anisakis larvae"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Diagnosis and Management of Foodborne Illnesses",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "MMWR Recomm Rep. 2023"
+        },
+        {
+          "title": "Fish and Shellfish Poisoning",
+          "organization": "FDA Bad Bug Book",
+          "year": 2022,
+          "url_or_citation": "https://www.fda.gov/food/bad-bug-book"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_004",
+      "diagnosis_module_id": "id_travel_fever",
+      "name": "Travel to South Asia - Fever Evaluation",
+      "triggers": [
+        {
+          "expression": "recent_travel_regions includes 'south_asia'",
+          "description": "Recent travel to South Asia"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Malaria (primarily P. vivax in South Asia)",
+          "Typhoid fever (Salmonella typhi)",
+          "Dengue fever",
+          "Chikungunya",
+          "Enteric fever",
+          "Tuberculosis (subacute/chronic presentation)",
+          "Hepatitis A or E"
+        ],
+        "add_questions": [
+          "Specific countries visited? Rural vs urban areas?",
+          "Mosquito bite prevention measures used?",
+          "Malaria prophylaxis taken? Which medication and compliance?",
+          "Vaccination history (typhoid, hepatitis A, others)?",
+          "Consumed street food, raw vegetables, or unfiltered water?",
+          "Duration of travel and timing of fever onset?",
+          "Any sick contacts during travel?",
+          "Animal exposures?"
+        ],
+        "add_workup": [
+          "Thick and thin blood smears for malaria (repeat q12-24h x3 if negative)",
+          "Malaria rapid diagnostic test (RDT)",
+          "Blood cultures (for typhoid and other bacteremia)",
+          "CBC with differential (thrombocytopenia common in malaria and dengue)",
+          "Liver enzymes (elevated in many tropical infections)",
+          "Dengue NS1 antigen and IgM/IgG serology",
+          "Typhoid IgM serology or Widal test (low sensitivity)",
+          "Urinalysis and urine culture",
+          "CXR if respiratory symptoms or prolonged fever (TB screening)"
+        ],
+        "add_red_flags": [
+          "Altered mental status (cerebral malaria)",
+          "Severe headache with photophobia (meningitis)",
+          "Jaundice with fever (severe malaria, hepatitis, leptospirosis)",
+          "Respiratory distress (severe malaria, pneumonia)",
+          "Bleeding manifestations (dengue, hemorrhagic fever)",
+          "Persistent fever >7 days without diagnosis"
+        ],
+        "adjust_urgency": "urgent",
+        "referral_notes": [
+          "URGENT infectious disease consultation recommended for febrile returned traveler",
+          "Consider ED evaluation if severe symptoms, altered mental status, or high malaria risk",
+          "Admit if malaria confirmed or severe symptoms regardless of etiology",
+          "Isolate if hemorrhagic fever or highly contagious pathogen suspected"
+        ],
+        "reasoning": "Fever in returned travelers from South Asia requires systematic evaluation for region-specific pathogens. Malaria is a medical emergency and must be ruled out urgently in any febrile traveler from endemic areas. South Asia has high burden of typhoid fever, dengue, and other mosquito-borne diseases. Timing of symptom onset relative to travel helps narrow differential: malaria typically presents within weeks, typhoid in 1-3 weeks, dengue in 4-7 days. Empiric treatment should not delay diagnostic testing. Many conditions require specific antimicrobials (e.g., artemisinin-based therapy for malaria, fluoroquinolones or ceftriaxone for typhoid in regions with resistance).",
+        "clinical_pearls": [
+          "Malaria can present weeks to months after travel; P. vivax can have delayed onset",
+          "Negative initial malaria smear does NOT exclude malaria; repeat testing essential",
+          "Dengue: warning signs include abdominal pain, persistent vomiting, bleeding, lethargy",
+          "Typhoid: 'step-ladder' fever pattern, relative bradycardia, rose spots are classic but not always present",
+          "Always ask about pre-travel vaccines and malaria prophylaxis compliance",
+          "Drug-resistant typhoid and malaria are increasing in South Asia"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "CDC Yellow Book: Travelers' Health",
+          "organization": "CDC",
+          "year": 2024,
+          "url_or_citation": "https://wwwnc.cdc.gov/travel/yellowbook"
+        },
+        {
+          "title": "Fever in the Returning Traveler",
+          "organization": "Infectious Diseases Society of America",
+          "year": 2022,
+          "url_or_citation": "Clin Infect Dis. 2022;75(1):e1-e16"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_005",
+      "diagnosis_module_id": "id_travel_fever",
+      "name": "Travel to Sub-Saharan Africa - Fever Evaluation",
+      "triggers": [
+        {
+          "expression": "recent_travel_regions includes 'sub_saharan_africa'",
+          "description": "Recent travel to Sub-Saharan Africa"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Malaria (primarily P. falciparum - potentially severe)",
+          "Typhoid fever",
+          "Rickettsial infections (African tick bite fever)",
+          "Acute HIV infection",
+          "Dengue fever",
+          "Yellow fever (if unvaccinated)",
+          "Tuberculosis",
+          "Schistosomiasis (Katayama fever)",
+          "Viral hemorrhagic fevers (rare but life-threatening)"
+        ],
+        "add_questions": [
+          "Specific countries and regions visited?",
+          "Safari or rural exposure? Freshwater swimming?",
+          "Yellow fever vaccination status?",
+          "Malaria prophylaxis used and compliance?",
+          "Tick bites or insect exposures?",
+          "Sexual contacts or blood exposure?",
+          "Bushmeat consumption or contact with wild animals?",
+          "Any known Ebola or other outbreak in travel region?"
+        ],
+        "add_workup": [
+          "STAT malaria smears and RDT (repeat q12-24h x3) - P. falciparum can be rapidly fatal",
+          "Blood cultures for typhoid and bacteremia",
+          "CBC with differential (thrombocytopenia, anemia in malaria)",
+          "Comprehensive metabolic panel (renal function, liver enzymes)",
+          "Dengue serology and NS1 antigen",
+          "HIV 4th generation Ag/Ab test",
+          "Rickettsial serology if eschar or severe headache",
+          "Viral hemorrhagic fever testing if high-risk exposure and severe symptoms (in isolation)",
+          "Schistosomiasis serology if freshwater exposure and eosinophilia"
+        ],
+        "add_red_flags": [
+          "HIGH PRIORITY: Any concern for viral hemorrhagic fever (Ebola, Marburg, Lassa) - ISOLATE IMMEDIATELY",
+          "Severe malaria signs: altered mental status, seizures, severe anemia, renal failure, pulmonary edema",
+          "Bleeding manifestations",
+          "Jaundice with fever and thrombocytopenia",
+          "Rapid clinical deterioration",
+          "Multiple organ dysfunction"
+        ],
+        "adjust_urgency": "urgent",
+        "referral_notes": [
+          "IMMEDIATE infectious disease consultation required",
+          "ED evaluation strongly recommended - do not delay",
+          "Hospital admission likely needed for workup and monitoring",
+          "Contact infection control and public health if viral hemorrhagic fever suspected",
+          "Strict isolation precautions if hemorrhagic fever in differential"
+        ],
+        "reasoning": "Fever in travelers from Sub-Saharan Africa is a medical emergency requiring urgent evaluation. P. falciparum malaria predominates and can progress to severe disease and death within hours if untreated. Unlike other regions, Africa has higher risk of viral hemorrhagic fevers, though rare. HIV seroconversion illness should be considered in those with sexual exposure. Schistosomiasis can cause acute febrile illness (Katayama fever) 2-8 weeks after freshwater exposure. Yellow fever vaccination is required for many African countries, and disease can occur in unvaccinated travelers. Early diagnosis and appropriate treatment are critical for malaria and bacterial infections. Any suspicion of viral hemorrhagic fever requires immediate isolation and public health notification.",
+        "clinical_pearls": [
+          "P. falciparum malaria can be rapidly fatal; parasitemia >5% or any organ dysfunction = severe malaria",
+          "Severe malaria requires IV artesunate (preferred) or quinidine + ICU care",
+          "African tick bite fever: look for eschar (black necrotic lesion at tick bite site)",
+          "Viral hemorrhagic fevers: extremely rare but high mortality; fever + bleeding + travel to outbreak area = isolation",
+          "Katayama fever: acute schistosomiasis presents with fever, urticaria, eosinophilia 2-8 weeks post-exposure",
+          "Always verify yellow fever vaccination status in Africa travelers"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "CDC Yellow Book: Travelers' Health",
+          "organization": "CDC",
+          "year": 2024,
+          "url_or_citation": "https://wwwnc.cdc.gov/travel/yellowbook"
+        },
+        {
+          "title": "Guidelines for Malaria Diagnosis and Treatment",
+          "organization": "WHO",
+          "year": 2023,
+          "url_or_citation": "https://www.who.int/malaria"
+        },
+        {
+          "title": "Management of Suspected Viral Hemorrhagic Fever",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/vhf/index.html"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_006",
+      "diagnosis_module_id": "id_pneumonia",
+      "name": "Travel to Endemic Fungal Regions",
+      "triggers": [
+        {
+          "expression": "recent_travel_regions includes 'central_south_america'",
+          "description": "Travel to histoplasmosis or coccidioidomycosis endemic area"
+        },
+        {
+          "expression": "country_of_birth in ['Mexico', 'Brazil', 'Colombia', 'Venezuela', 'Peru']",
+          "description": "From region with endemic mycoses"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Histoplasmosis",
+          "Coccidioidomycosis (Valley Fever) - if southwestern US or Central/South America",
+          "Paracoccidioidomycosis - if South America",
+          "Tuberculosis"
+        ],
+        "add_questions": [
+          "Exposure to caves, bat or bird droppings?",
+          "Construction, excavation, or soil disturbance activities?",
+          "Duration in endemic area?",
+          "Immunocompromised status (HIV, immunosuppressants)?",
+          "Chronic symptoms vs acute presentation?"
+        ],
+        "add_workup": [
+          "Fungal blood cultures (Histoplasma, Coccidioides)",
+          "Urine Histoplasma antigen",
+          "Serum Coccidioides IgM and IgG",
+          "Fungal stains and cultures of sputum",
+          "Chest CT (may show cavitation, nodules, mediastinal lymphadenopathy)",
+          "HIV testing",
+          "Tuberculin skin test or IGRA"
+        ],
+        "add_red_flags": [
+          "Immunocompromised patient (higher risk of disseminated disease)",
+          "Respiratory failure",
+          "CNS symptoms (disseminated fungal infection)",
+          "Pancytopenia (disseminated histoplasmosis)"
+        ],
+        "adjust_urgency": "urgent_if_immunocompromised_or_severe",
+        "referral_notes": [
+          "Consider infectious disease consultation for diagnostic guidance and treatment",
+          "Pulmonology referral if bronchoscopy needed for diagnosis",
+          "Immunocompromised patients require aggressive workup and treatment"
+        ],
+        "reasoning": "Endemic mycoses should be considered in patients with pneumonia and exposure to specific geographic regions. Histoplasmosis is endemic in Ohio/Mississippi River valleys and parts of Central/South America, associated with bat/bird droppings. Coccidioidomycosis (Valley Fever) occurs in southwestern US and parts of Mexico/Central/South America. These infections can range from asymptomatic to severe disseminated disease, especially in immunocompromised hosts. Diagnosis requires high index of suspicion and specialized testing.",
+        "clinical_pearls": [
+          "Most endemic fungal infections are mild and self-limited in immunocompetent hosts",
+          "Disseminated disease more common in HIV/AIDS, transplant recipients, immunosuppressants",
+          "Histoplasmosis: can cause acute pulmonary infection or chronic cavitary disease",
+          "Valley Fever: classic 'desert rheumatism' triad = fever, rash, arthralgias",
+          "Treatment: itraconazole for mild-moderate, amphotericin B for severe disease"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Clinical Practice Guidelines for Histoplasmosis",
+          "organization": "Infectious Diseases Society of America",
+          "year": 2020,
+          "url_or_citation": "Clin Infect Dis. 2020;71(5):e74-e94"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_007",
+      "diagnosis_module_id": "labs_abnormal_thyroid",
+      "name": "Biotin Supplement Interference",
+      "triggers": [
+        {
+          "expression": "biotin_supplement == true",
+          "description": "Patient takes high-dose biotin supplements"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Biotin interference causing falsely abnormal thyroid tests",
+          "Pseudohyperthyroidism (falsely elevated T4/T3, falsely low TSH)",
+          "May also affect troponin, BNP, and other immunoassays"
+        ],
+        "add_questions": [
+          "What dose of biotin are you taking daily?",
+          "When did you start the supplement?",
+          "When was the last dose before blood draw?",
+          "Are you taking 'hair, skin, and nails' supplements? (often contain biotin)",
+          "Any cardiac symptoms or concerns?"
+        ],
+        "add_workup": [
+          "Hold biotin for 48-72 hours before repeating labs",
+          "Repeat thyroid function tests after biotin washout",
+          "If urgent: Request biotin-interference-resistant assay",
+          "Check troponin and BNP if cardiac concerns (also affected by biotin)"
+        ],
+        "add_red_flags": [
+          "Do NOT make clinical decisions based on potentially biotin-interfered results",
+          "Ensure biotin status documented before starting therapy",
+          "Patient may falsely appear hyperthyroid or have masked hypothyroidism"
+        ],
+        "adjust_urgency": "routine_recheck_after_washout",
+        "referral_notes": [
+          "Counsel patient to discontinue biotin at least 48 hours before any laboratory testing",
+          "Endocrinology referral if thyroid dysfunction confirmed after biotin washout"
+        ],
+        "reasoning": "High-dose biotin (>1mg daily) can cause significant interference with laboratory immunoassays that use biotin-streptavidin technology. For thyroid tests, biotin typically causes falsely elevated T4 and T3 with falsely suppressed TSH, mimicking hyperthyroidism. This can lead to misdiagnosis and inappropriate treatment. Biotin is increasingly common in over-the-counter supplements for hair, skin, and nails. The FDA issued a safety alert in 2019 warning about biotin interference. Diagnosis requires clinical suspicion and repeat testing after biotin washout (48-72 hours).",
+        "clinical_pearls": [
+          "Biotin doses >1mg can interfere; some supplements contain 5-10mg or more",
+          "Interference pattern: TSH low, T4/T3 high (looks like hyperthyroidism)",
+          "Also affects: troponin (falsely low), BNP (falsely low), testosterone, others",
+          "48-72 hour washout is sufficient for most assays",
+          "Always ask about supplements before interpreting discordant labs"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "FDA Safety Alert: Biotin Interference with Lab Tests",
+          "organization": "FDA",
+          "year": 2019,
+          "url_or_citation": "FDA Safety Communication 11/2019"
+        },
+        {
+          "title": "Biotin Interference in Clinical Immunoassays",
+          "organization": "Endocrine Society",
+          "year": 2021,
+          "url_or_citation": "J Clin Endocrinol Metab. 2021;106(5):e2096-e2103"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_008",
+      "diagnosis_module_id": "gi_diarrhea_acute",
+      "name": "Unpasteurized Dairy - Infectious Risk",
+      "triggers": [
+        {
+          "expression": "unpasteurized_dairy == true",
+          "description": "Consumes raw/unpasteurized dairy products"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Salmonella infection",
+          "E. coli O157:H7 (hemolytic uremic syndrome risk)",
+          "Campylobacter jejuni",
+          "Listeria monocytogenes (if fever/systemic symptoms)",
+          "Brucellosis (if recent travel or occupational exposure)",
+          "Cryptosporidium"
+        ],
+        "add_questions": [
+          "What type of unpasteurized dairy (milk, cheese, etc.)?",
+          "Source of the dairy (farm, store, region)?",
+          "When was it consumed?",
+          "Anyone else ill with similar symptoms?",
+          "Any fever, bloody diarrhea, or severe abdominal pain?",
+          "Pregnant or immunocompromised?"
+        ],
+        "add_workup": [
+          "Stool culture for Salmonella, Shigella, Campylobacter, E. coli O157",
+          "Stool Shiga toxin assay (for E. coli O157:H7)",
+          "CBC (watch for thrombocytopenia, hemolytic anemia if HUS suspected)",
+          "BMP and creatinine (renal function if HUS concern)",
+          "Blood cultures if fever/systemic symptoms (Listeria, Salmonella)",
+          "Brucella serology if risk factors present"
+        ],
+        "add_red_flags": [
+          "Bloody diarrhea with abdominal cramps (E. coli O157:H7)",
+          "Pregnancy (Listeria risk to fetus)",
+          "Immunocompromised status",
+          "Signs of hemolytic uremic syndrome: decreased urine output, pallor, petechiae",
+          "Severe dehydration",
+          "Persistent high fever"
+        ],
+        "adjust_urgency": "urgent_if_pregnant_or_severe",
+        "referral_notes": [
+          "Report to public health if E. coli O157, Listeria, or outbreak suspected",
+          "Nephrology consultation if HUS develops",
+          "Infectious disease consultation for Brucella or complicated cases",
+          "OB consultation if pregnant patient with Listeria concern"
+        ],
+        "reasoning": "Unpasteurized dairy products can harbor numerous foodborne pathogens eliminated by pasteurization. E. coli O157:H7 can cause hemolytic uremic syndrome (HUS), a life-threatening complication particularly in children. Listeria monocytogenes can cause severe infection in pregnant women, elderly, and immunocompromised, with high risk of fetal loss or neonatal infection. Campylobacter and Salmonella cause acute gastroenteritis. Brucellosis should be considered in those with occupational exposure or travel to endemic areas. Most cases are self-limited but severe cases or high-risk patients may require antibiotics. Antibiotic use in E. coli O157:H7 is controversial and may increase HUS risk.",
+        "clinical_pearls": [
+          "Do NOT use antibiotics if E. coli O157:H7 suspected (may increase HUS risk)",
+          "Listeria: treat with ampicillin + gentamicin in severe cases",
+          "HUS triad: microangiopathic hemolytic anemia, thrombocytopenia, acute kidney injury",
+          "Raw milk outbreaks are increasing; CDC recommends avoiding unpasteurized dairy",
+          "Pregnant women should strictly avoid raw dairy due to Listeria risk"
+        ]
+      },
+      "evidence_level": "High",
+      "references": [
+        {
+          "title": "Risks of Consuming Raw Milk",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/foodsafety/rawmilk/raw-milk-index.html"
+        },
+        {
+          "title": "E. coli O157:H7 and HUS",
+          "organization": "American Academy of Pediatrics",
+          "year": 2022,
+          "url_or_citation": "Pediatrics. 2022;150(2):e2022057466"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_009",
+      "diagnosis_module_id": "neuro_headache_chronic",
+      "name": "Occupational Metal Exposure - Headache",
+      "triggers": [
+        {
+          "expression": "occupational_exposure_metals == true",
+          "description": "Occupational exposure to heavy metals"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Heavy metal poisoning (lead, mercury, arsenic)",
+          "Carbon monoxide exposure (if also combustion exposure)",
+          "Organic solvent exposure",
+          "Chronic toxic encephalopathy"
+        ],
+        "add_questions": [
+          "What is your occupation and specific exposures?",
+          "Use of personal protective equipment?",
+          "Other workers with similar symptoms?",
+          "Symptoms worse at work, improve on days off?",
+          "Other neurologic symptoms: memory, mood, tremor, paresthesias?",
+          "GI symptoms (common in lead and arsenic poisoning)?",
+          "Home exposures (old paint, contaminated water)?"
+        ],
+        "add_workup": [
+          "Blood lead level (if lead exposure)",
+          "24-hour urine heavy metal screen",
+          "CBC (lead causes anemia with basophilic stippling)",
+          "Comprehensive metabolic panel (renal function)",
+          "Nerve conduction studies if peripheral neuropathy symptoms",
+          "Consider occupational medicine or toxicology consultation"
+        ],
+        "add_red_flags": [
+          "Acute severe symptoms suggesting high-level exposure",
+          "Multiple workers affected (indicates workplace hazard)",
+          "Peripheral neuropathy or encephalopathy",
+          "Severe anemia",
+          "Renal dysfunction"
+        ],
+        "adjust_urgency": "urgent_if_severe_or_multiple_affected",
+        "referral_notes": [
+          "Occupational medicine referral for workplace assessment",
+          "Toxicology consultation for chelation therapy consideration",
+          "Report to OSHA if workplace hazard identified",
+          "Neurology referral if persistent symptoms or neuropathy"
+        ],
+        "reasoning": "Occupational exposures to heavy metals and solvents can cause chronic headaches along with other neurologic symptoms. Lead poisoning presents with headaches, abdominal pain, anemia, and peripheral neuropathy. Mercury can cause tremor, cognitive impairment, and mood changes. Arsenic causes peripheral neuropathy and GI symptoms. Carbon monoxide causes headaches, confusion, and can be fatal. Diagnosis requires occupational history, exposure assessment, and targeted laboratory testing. Treatment includes removal from exposure and, in some cases, chelation therapy. Workplace evaluation is critical to prevent further cases.",
+        "clinical_pearls": [
+          "Lead: 'lead line' on gingiva, basophilic stippling on blood smear, wrist/foot drop",
+          "Mercury: 'Mad Hatter syndrome' - tremor, erethism (personality change)",
+          "Arsenic: 'Mees lines' on nails, hyperpigmentation, peripheral neuropathy",
+          "CO: 'cherry red' skin is rare; carboxyhemoglobin level diagnostic",
+          "Chelation therapy indicated for symptomatic lead poisoning or very high levels"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Adult Blood Lead Epidemiology and Surveillance",
+          "organization": "CDC/NIOSH",
+          "year": 2022,
+          "url_or_citation": "https://www.cdc.gov/niosh/topics/ables/"
+        },
+        {
+          "title": "Recognition and Management of Occupational Disease",
+          "organization": "American College of Occupational and Environmental Medicine",
+          "year": 2021,
+          "url_or_citation": "JOEM. 2021;63(8):e511-e538"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_010",
+      "diagnosis_module_id": "gi_diarrhea_chronic",
+      "name": "Herbal Supplements - GI Effects",
+      "triggers": [
+        {
+          "expression": "herbal_traditional_meds == true",
+          "description": "Takes herbal or traditional medicines"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Herbal supplement-induced diarrhea (senna, cascara, aloe)",
+          "Drug-herb interaction affecting GI motility",
+          "Heavy metal contamination in supplements (lead, mercury, arsenic)",
+          "Hepatotoxicity from herbs affecting bile/digestion"
+        ],
+        "add_questions": [
+          "Which specific herbal products are you taking?",
+          "Dosage and duration of use?",
+          "Source of supplements (store, imported, homemade)?",
+          "Timing: did GI symptoms start after beginning supplements?",
+          "Any other medications that might interact?",
+          "Liver symptoms: jaundice, dark urine, light stools?"
+        ],
+        "add_workup": [
+          "Comprehensive metabolic panel (liver enzymes, bilirubin)",
+          "CBC (anemia from GI bleeding or heavy metal toxicity)",
+          "Review supplement ingredients for known GI effects",
+          "Consider heavy metal screen if imported/unregulated supplements",
+          "Medication reconciliation for drug-herb interactions"
+        ],
+        "add_red_flags": [
+          "Jaundice or significant hepatotoxicity",
+          "Severe electrolyte abnormalities from diarrhea",
+          "Symptoms of heavy metal poisoning",
+          "Bleeding or severe abdominal pain"
+        ],
+        "adjust_urgency": "routine_unless_hepatotoxicity",
+        "referral_notes": [
+          "Consider gastroenterology if symptoms persist after stopping herbs",
+          "Hepatology referral if significant liver enzyme elevation",
+          "Recommend stopping herbal supplements and reassessing"
+        ],
+        "reasoning": "Many herbal supplements can cause GI side effects including diarrhea. Common culprits include senna, cascara sagrada, aloe vera, and various 'detox' or 'cleanse' products. Some herbs interact with medications affecting GI motility. Additionally, imported or unregulated supplements may be contaminated with heavy metals or adulterants. Some traditional medicines contain deliberately added pharmaceuticals. Herbal hepatotoxicity can cause cholestatic changes affecting digestion. Diagnosis requires detailed supplement history and trial of discontinuation. Many cases resolve with stopping the offending agent.",
+        "clinical_pearls": [
+          "Senna, cascara, aloe: stimulant laxatives causing cramping and diarrhea",
+          "St. John's Wort: induces CYP450, numerous drug interactions",
+          "Ayurvedic and Traditional Chinese Medicine products: risk of heavy metal contamination",
+          "Kava, germander, comfrey: hepatotoxic",
+          "Many patients don't report supplements unless specifically asked"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Dietary Supplements and Liver Injury",
+          "organization": "NIH LiverTox Database",
+          "year": 2023,
+          "url_or_citation": "https://livertox.nih.gov"
+        },
+        {
+          "title": "Herb-Drug Interactions",
+          "organization": "NIH Office of Dietary Supplements",
+          "year": 2022,
+          "url_or_citation": "https://ods.od.nih.gov/"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_011",
+      "diagnosis_module_id": "gi_hepatitis",
+      "name": "Well Water - Infectious Risk",
+      "triggers": [
+        {
+          "expression": "well_water_use == true",
+          "description": "Uses well water as primary water source"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Hepatitis A (fecal-oral transmission from contaminated water)",
+          "Hepatitis E (similar transmission, especially genotype 3)",
+          "Leptospirosis (if also recreational water exposure)",
+          "Heavy metal toxicity (arsenic, lead in groundwater)",
+          "Nitrate/nitrite toxicity (primarily infant methemoglobinemia)"
+        ],
+        "add_questions": [
+          "Well water tested recently? When and results?",
+          "Well maintenance and depth?",
+          "Proximity to septic systems, agricultural runoff, or industrial sites?",
+          "Others in household affected?",
+          "Hepatitis vaccination status?",
+          "Use water filter? Type?",
+          "Flooding or heavy rain recently?"
+        ],
+        "add_workup": [
+          "Hepatitis A IgM (acute infection)",
+          "Hepatitis E IgM and PCR",
+          "Comprehensive hepatic panel",
+          "Well water testing: bacterial (coliforms, E. coli), chemical (nitrates, heavy metals)",
+          "Heavy metal screen if chronic exposure suspected"
+        ],
+        "add_red_flags": [
+          "Acute liver failure",
+          "Multiple household members affected",
+          "Infants with cyanosis (methemoglobinemia from nitrates)",
+          "Jaundice with coagulopathy"
+        ],
+        "adjust_urgency": "urgent_if_severe_hepatitis",
+        "referral_notes": [
+          "Report to local health department if hepatitis A or contaminated well suspected",
+          "Environmental health assessment of well water needed",
+          "Gastroenterology/hepatology for significant hepatitis",
+          "Recommend immediate cessation of well water use until tested"
+        ],
+        "reasoning": "Private well water can be contaminated with infectious agents and chemicals, unlike treated municipal water. Hepatitis A and E can be transmitted via fecally contaminated water. Agricultural runoff may introduce bacterial pathogens. Heavy metals (arsenic, lead) and nitrates from fertilizers can leach into groundwater, causing chronic toxicity. Wells should be tested annually for bacteria and every 3-5 years for chemicals. Contamination risk increases after flooding, near septic systems, or in agricultural areas. Diagnosis requires water testing and appropriate serologic or toxicologic studies.",
+        "clinical_pearls": [
+          "EPA does not regulate private wells; owner's responsibility to test",
+          "Hepatitis E genotype 3 is emerging in US, associated with contaminated water and undercooked pork",
+          "Arsenic in groundwater: chronic exposure causes hepatotoxicity, neuropathy, skin changes, cancer risk",
+          "Nitrates >10 ppm unsafe for infants (methemoglobinemia)",
+          "Boiling water does NOT remove chemical contaminants or heavy metals"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Private Well Water Safety",
+          "organization": "EPA",
+          "year": 2023,
+          "url_or_citation": "https://www.epa.gov/privatewells"
+        },
+        {
+          "title": "Hepatitis E Virus Infection",
+          "organization": "CDC",
+          "year": 2022,
+          "url_or_citation": "https://www.cdc.gov/hepatitis/hev/"
+        }
+      ]
+    },
+    {
+      "id": "ctx_rule_012",
+      "diagnosis_module_id": "id_meningitis",
+      "name": "Recreational Water Exposure - CNS Infection",
+      "triggers": [
+        {
+          "expression": "recreational_water_exposure == true",
+          "description": "Regular swimming in natural water sources"
+        }
+      ],
+      "trigger_logic": "any",
+      "effects": {
+        "add_to_differential": [
+          "Primary amebic meningoencephalitis (Naegleria fowleri) - rare but rapidly fatal",
+          "Leptospirosis (Weil's disease with CNS involvement)",
+          "Bacterial meningitis (typical pathogens)",
+          "Viral meningoencephalitis"
+        ],
+        "add_questions": [
+          "What type of water (lake, river, pond, hot spring)?",
+          "Geographic location of water exposure?",
+          "Recent warm weather? Water temperature?",
+          "Water activities: diving, jumping, water sports (forcing water up nose)?",
+          "Timing: symptoms within 1-9 days of exposure?",
+          "Headache, fever, neck stiffness, altered mental status, seizures?",
+          "Loss of smell or taste?"
+        ],
+        "add_workup": [
+          "URGENT: LP with CSF analysis (cell count, protein, glucose, Gram stain, culture)",
+          "CSF: bacterial culture, viral PCR panel (HSV, enterovirus)",
+          "CSF: wet mount for amoeba (requires immediate fresh specimen examination)",
+          "CSF: Naegleria PCR if available (send to CDC if suspected)",
+          "Brain MRI with contrast (may show hemorrhagic changes in Naegleria)",
+          "Blood cultures",
+          "Leptospira serology and PCR"
+        ],
+        "add_red_flags": [
+          "CRITICAL: Rapidly progressive meningoencephalitis in recent freshwater swimmer = Naegleria until proven otherwise",
+          "Altered mental status",
+          "Seizures",
+          "Rapid deterioration despite antibiotics",
+          "Anosmia (loss of smell) with recent warm freshwater exposure"
+        ],
+        "adjust_urgency": "urgent",
+        "referral_notes": [
+          "IMMEDIATE neurology and infectious disease consultation",
+          "ICU admission for any CNS infection",
+          "If Naegleria suspected: contact CDC Emergency Operations Center immediately (770-488-7100)",
+          "Naegleria treatment: IV and intrathecal/intraventricular amphotericin B + miltefosine + others"
+        ],
+        "reasoning": "Primary amebic meningoencephalitis (PAM) caused by Naegleria fowleri is a rare but almost universally fatal infection. The amoeba enters through the nose during swimming/diving in warm freshwater and migrates to the brain. PAM typically presents 1-9 days after exposure with severe frontal headache, fever, nausea, vomiting, progressing rapidly to altered mental status, seizures, and coma. Mortality is >97% but early diagnosis and aggressive treatment may be lifesaving. CSF shows neutrophilic pleocytosis with low glucose, mimicking bacterial meningitis. Diagnosis requires high index of suspicion and immediate fresh CSF examination for motile trophozoites. Leptospirosis can occur after freshwater exposure and may have CNS involvement.",
+        "clinical_pearls": [
+          "Naegleria: 'brain-eating amoeba' - infects via nose, not from swallowing water",
+          "Most cases in southern US during summer; warm water <30°C (86°F)",
+          "Loss of smell (anosmia) is early sign - amoeba destroys olfactory neuroepithelium",
+          "CSF: must examine fresh, warm specimen immediately - amoeba stops moving when cooled",
+          "Survival requires early diagnosis and multimodal therapy including miltefosine (investigational)",
+          "Leptospirosis: ask about animal exposure (rats), jaundice, conjunctival suffusion"
+        ]
+      },
+      "evidence_level": "Moderate",
+      "references": [
+        {
+          "title": "Naegleria fowleri - Primary Amebic Meningoencephalitis",
+          "organization": "CDC",
+          "year": 2023,
+          "url_or_citation": "https://www.cdc.gov/parasites/naegleria/"
+        },
+        {
+          "title": "Recreational Water-Associated Disease Outbreaks",
+          "organization": "CDC",
+          "year": 2022,
+          "url_or_citation": "MMWR Surveill Summ. 2022"
+        }
+      ]
+    }
+  ]
+}

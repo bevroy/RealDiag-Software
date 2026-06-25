@@ -1,0 +1,73 @@
+tree_id: ID-OSTEOMYELITIS
+name: Osteomyelitis
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- M86.9
+- M86.8X9
+snomed:
+- '60168000'
+urgency: medium
+description: Comprehensive evaluation and management of Osteomyelitis
+version: '1.0'
+citations:
+  - IDSA (Infectious Diseases Society of America) Guidelines
+  - CDC (Centers for Disease Control and Prevention) Guidelines
+  - UpToDate - Infectious Diseases
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Bone pain (localized, constant, deep pain)
+- Fever, chills (if acute hematogenous spread)
+- Localized swelling, warmth, and erythema over affected bone
+- Draining sinus tract (chronic osteomyelitis)
+- 'Causes: Hematogenous spread (children, IVDU), contiguous spread (trauma, surgery,
+  diabetic foot), direct inoculation'
+- 'Organisms: S. aureus (50%, most common), S. epidermidis (prosthetic), Pseudomonas
+  (IVDU, diabetic foot), Salmonella (sickle cell)'
+- 'MRI shows: Bone marrow edema (T2 bright, T1 dark), enhancement, periosteal reaction'
+- 'X-ray changes lag 10-14 days: Periosteal elevation, lytic lesions (2-4 weeks)'
+- 'Diabetic foot osteomyelitis: Probe-to-bone test (95% specific if probe touches
+  bone through ulcer)'
+- History of trauma, surgery, diabetic foot ulcer, or IVDU
+- Elevated ESR/CRP (typically ESR >50, CRP >10)
+- 'Treatment: 4-6 weeks IV antibiotics, surgical debridement if abscess/sequestrum'
+workup:
+- MRI (most sensitive, detects marrow edema within 3-5 days)
+- Bone biopsy with culture (gold standard for organism identification)
+- Blood cultures, ESR, CRP (elevated, track response to treatment)
+- X-ray (shows changes after 10-14 days - periosteal elevation, lytic lesions)
+- Probe-to-bone test (diabetic foot) - positive if probe contacts bone
+treatment:
+- 'Guideline-based treatment options for Osteomyelitis include:'
+- 'Empiric: Vancomycin 15-20mg/kg IV q12huntil culture results (IDSA 2024)'
+- 'If MSSA: Switch to nafcillin or cefazolin (IDSA 2024)'
+- 'Diabetic foot (polymicrobial): Vancomycin + piperacillin-tazobactam (IDSA 2024)'
+- 'Duration: 4-6 weeks IV antibiotics, may transition to PO after 2 weeks if improving
+  (IDSA 2024)'
+- 'Surgery if: Abscess, sequestrum (dead bone), failed medical therapy, hardware infection
+  (IDSA 2024)'
+clinical_pearls:
+- 'Hematogenous (children, IVDU): Long bones, vertebrae; Staph aureus most common'
+- 'Contiguous (adults): From adjacent infection, surgery, trauma; polymicrobial if
+  diabetic foot'
+- MRI is most sensitive test (detects within days), bone scan less specific
+- Bone biopsy for culture (gold standard) - guides antibiotic choice
+- 'Duration: 4-6 weeks IV antibiotics, may need PICC line'
+- 'Diabetic foot osteomyelitis: Probe-to-bone test (if probe touches bone = likely
+  osteo)'
+referrals:
+- Infectious disease for antibiotic management (long-term IV)
+- Orthopedic surgery if abscess, sequestrum, or hardware-associated
+- Vascular surgery if diabetic foot with ischemia
+- PICC line placement for prolonged IV antibiotics
+differentials:
+  - Cellulitis
+  - Septic arthritis
+  - Gout
+  - Bone tumor
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

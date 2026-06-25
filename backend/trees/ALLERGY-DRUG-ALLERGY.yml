@@ -1,0 +1,206 @@
+tree_id: ALLERGY-DRUG-ALLERGY
+name: Drug Allergy Evaluation
+family: Allergy and Immunology
+specialty: Allergy/Immunology, Internal Medicine, Emergency Medicine
+chief_complaint: Rash After Medication, Drug Reaction
+description: Evaluation and management of suspected drug allergies
+version: "1.0"
+icd10: C91.00
+snomed: 91861009
+presentations:
+  - Cutaneous reactions: maculopapular rash, urticaria, angioedema (most common)
+  - Systemic reactions: fever, lymphadenopathy, arthralgias
+  - Anaphylaxis: acute onset dyspnea, hypotension, throat swelling
+  - Delayed reactions: serum sickness-like syndrome (7-14 days after exposure)
+  - Organ-specific: hepatitis, nephritis, pneumonitis
+differentials:
+  - Viral exanthem
+  - Drug eruption (non-immune)
+  - Contact dermatitis
+  - Urticaria from other cause
+  - Serum sickness
+citations:
+  - AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters
+  - EAACI (European Academy of Allergy and Clinical Immunology) Guidelines
+  - UpToDate - Allergy and Immunology
+author: RealDiag Clinical Team
+
+
+treatment:
+  - 'STOP suspected drug immediately'
+  - 'Mild reaction (rash): Antihistamines (cetirizine 10mg daily, hydroxyzine 25-50mg QID), topical corticosteroids'
+  - 'Stevens-Johnson Syndrome/TEN: Immediate dermatology/burn unit admission, IVIG 2-3g/kg over 3-5 days, supportive care'
+  - 'Anaphylaxis: Epinephrine 0.3-0.5mg IM (repeat Q5-15min PRN), IV fluids, H1/H2 blockers, corticosteroids'
+  - 'Document allergy clearly in medical record - drug name, reaction type, severity'
+  - 'Desensitization protocols available for essential drugs (penicillin, aspirin, chemotherapy)'
+  - 'Penicillin allergy: 90% can tolerate after formal testing (most are not true IgE-mediated)'
+
+entry_point: drug_allergy_evaluation
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+clinical_pearls:
+  - True drug allergy is IgE-mediated; distinguish from side effects and intolerances
+  - Penicillin allergy is often over-reported; 90% lose sensitivity after 10 years
+  - Cross-reactivity between penicillin and cephalosporins is <2% despite structural similarity
+  - Document timing, symptoms, and severity of reaction for future reference
+
+nodes:
+  - id: drug_allergy_evaluation
+    type: question
+    text: "Type of reaction?"
+    options:
+      - label: "Immediate hypersensitivity (IgE-mediated)"
+        next: immediate_hypersensitivity
+      - label: "Delayed hypersensitivity (T-cell mediated)"
+        next: delayed_hypersensitivity
+      - label: "Severe cutaneous adverse reactions (SCAR)"
+        next: severe_reactions
+
+  - id: immediate_hypersensitivity
+    type: diagnosis
+    name: "Immediate Drug Hypersensitivity"
+    icd10: "T88.6XXA"
+    urgency: high
+    workup:
+      - Immediate hypersensitivity - IgE-mediated (Type I), onset within minutes to 1 hour of drug exposure
+      - Most common drugs - Beta-lactam antibiotics (penicillin, cephalosporins), aspirin/NSAIDs, biologics (monoclonal antibodies), neuromuscular blocking agents, chemotherapy (platinum compounds, taxanes)
+      - Clinical manifestations
+      - Urticaria/angioedema - Hives, swelling (lips, tongue, face)
+      - Bronchospasm - Wheezing, dyspnea, chest tightness
+      - Anaphylaxis - Multisystem (skin + respiratory + cardiovascular + GI)
+      - Hypotension, tachycardia, loss of consciousness, shock
+      - Penicillin allergy - Most commonly reported drug allergy (10% patients claim), but 90% NOT truly allergic (lose sensitivity over time 10 years)
+      - Cross-reactivity - Beta-lactams share structure
+      - Penicillin ↔ ampicillin/amoxicillin (same class, 100% cross-react)
+      - Penicillin ↔ cephalosporins (1-3% cross-reactivity, similar side chains higher risk)
+      - Penicillin ↔ carbapenems (1% cross-reactivity)
+      - Penicillin ↔ aztreonam (no cross-reactivity, safe)
+      - Aspirin/NSAID hypersensitivity - 0.5-2% population
+      - Respiratory reactions - Aspirin-exacerbated respiratory disease (AERD, Samter's triad: asthma + nasal polyps + aspirin sensitivity)
+      - Aspirin/NSAIDs trigger bronchospasm
+      - Cross-react to all COX-1 inhibitors (avoid all NSAIDs)
+      - Selective COX-2 inhibitors (celecoxib) usually safe
+      - Cutaneous reactions - Urticaria/angioedema
+      - Diagnosis
+      - Clinical history - Detailed timeline (drug exposure, onset, symptoms, resolution)
+      - Skin testing - Available for penicillin, select antibiotics
+      - Penicillin skin test - PrePen (major determinant), minor determinant mixture, penicillin G
+      - Negative predictive value >95% (safe to give penicillin if negative)
+      - If positive → avoid penicillin
+      - Specific IgE - Serum testing (less sensitive than skin testing)
+      - Drug challenge - Graded doses under observation (if history low-risk or negative skin test)
+    treatment:
+      - Acute management
+      - Urticaria/angioedema - Antihistamines (diphenhydramine 25-50 mg, cetirizine 10 mg), H2 blockers (famotidine), corticosteroids (prednisone 40-60 mg) if severe
+      - Anaphylaxis - Epinephrine 0.3-0.5 mg IM (anterolateral thigh), repeat q5-15 min PRN
+      - Airway management, IV fluids, vasopressors if hypotension
+      - Observe 4-6 hours (biphasic reactions 20%)
+      - Avoidance - Stop offending drug, document allergy in medical record
+      - Alternative antibiotics
+      - Penicillin allergy → use non-beta-lactam (fluoroquinolone, macrolide, doxycycline) OR cephalosporin (low cross-reactivity)
+      - If NEED penicillin (e.g., syphilis, endocarditis) → penicillin allergy testing + desensitization
+      - Desensitization - Induce temporary tolerance (no alternative drug available)
+      - Graduated doses (start very low, double q15-30 min) over 4-12 hours
+      - ICU setting, resuscitation available
+      - Temporary (wears off hours after stopping drug)
+      - For penicillin, cephalosporins, aspirin, platinum chemotherapy
+      - Allergy testing and delabeling - Most "penicillin allergies" NOT true allergy
+      - Penicillin skin testing + oral challenge → 95% can safely use penicillin
+      - Benefits - Access to first-line antibiotics, avoid broad-spectrum (C. diff risk)
+
+  - id: delayed_hypersensitivity
+    type: diagnosis
+    name: "Delayed Drug Hypersensitivity"
+    icd10: "L27.0"
+    urgency: medium
+    workup:
+      - Delayed hypersensitivity - T-cell mediated (Type IV), onset days to weeks after drug exposure
+      - Most common drugs - Antibiotics (penicillins, sulfonamides), anticonvulsants (phenytoin, carbamazepine, lamotrigine), allopurinol, NSAIDs
+      - Clinical manifestations
+      - Maculopapular rash - Most common (90%)
+      - Erythematous macules/papules, trunk/extremities, symmetric
+      - Pruritic, NOT painful
+      - Onset 7-14 days after starting drug (or 1-3 days if re-exposure)
+      - Contact dermatitis - Topical drugs (neomycin, bacitracin)
+      - Fixed drug eruption - Localized dark patches, recur same site with re-exposure
+      - Diagnosis - Clinical (history + timeline + rash appearance)
+      - Biopsy - If uncertain (rule out SCAR)
+      - Patch testing - For contact dermatitis
+    treatment:
+      - Mild maculopapular rash
+      - Continue drug if mild, not spreading, no mucosal involvement, no systemic symptoms (many rashes self-resolve)
+      - OR stop drug (resolve 1-2 weeks)
+      - Symptomatic - Antihistamines (cetirizine, loratadine), topical steroids (hydrocortisone)
+      - Avoidance - Document allergy, avoid culprit drug
+
+  - id: severe_reactions
+    type: diagnosis
+    name: "Severe Cutaneous Adverse Reactions (SCAR)"
+    icd10: "L51.1"
+    urgency: critical
+    workup:
+      - SCAR - Life-threatening drug reactions (Stevens-Johnson syndrome, TEN, DRESS)
+      - Mortality 10-30%
+      - Stevens-Johnson syndrome (SJS) / Toxic epidermal necrolysis (TEN)
+      - SJS <10% body surface area (BSA) epidermal detachment, TEN >30%, overlap 10-30%
+      - Onset 1-3 weeks after drug exposure
+      - High-risk drugs - Allopurinol (most common), anticonvulsants (phenytoin, carbamazepine, lamotrigine), sulfonamides (TMP-SMX), NSAIDs, antibiotics (fluoroquinolones)
+      - HLA associations - Carbamazepine + HLA-B*1502 (Asians), allopurinol + HLA-B*5801 (Asians, Africans), abacavir + HLA-B*5701
+      - Clinical features
+      - Prodrome - Fever, flu-like symptoms (2-3 days)
+      - Rash - Erythematous macules with dusky centers ("targetoid"), coalesce
+      - Blisters, epidermal detachment (Nikolsky sign positive - skin sloughs with gentle pressure)
+      - Mucosal involvement - CLASSIC (oral, ocular, genital), painful erosions 90%
+      - Lips crusting, conjunctivitis, erosions
+      - Systemic - Fever, hepatitis, renal failure, respiratory failure
+      - SCORTEN score - Predict mortality (age >40, malignancy, tachycardia, BSA >10%, BUN >28, HCO3 <20, glucose >252)
+      - Mortality 0-3 points 3%, 5+ points >90%
+      - DRESS (Drug Reaction with Eosinophilia and Systemic Symptoms)
+      - Onset 2-8 weeks after drug exposure (longer latency than SJS/TEN)
+      - High-risk drugs - Anticonvulsants (phenytoin, carbamazepine, phenobarbital), allopurinol, sulfonamides, minocycline, dapsone
+      - Clinical features
+      - Rash - Morbilliform (measles-like), facial edema, NOT blistering/epidermal detachment (distinguishes from SJS/TEN)
+      - Fever, lymphadenopathy
+      - Organ involvement - Hepatitis (80%, elevated LFTs), eosinophilia (>1000 cells/μL), atypical lymphocytes, nephritis, pneumonitis, myocarditis
+      - Reactivation HHV-6, EBV, CMV (20-40%)
+      - Prolonged course (weeks to months), can relapse
+      - Diagnosis - Clinical + labs
+      - CBC (eosinophilia, atypical lymphocytes), CMP (hepatitis, renal), LDH elevated
+      - Skin biopsy (confirm, rule out other causes)
+    treatment:
+      - STOP offending drug IMMEDIATELY - Most important
+      - Hospitalize - ICU or burn unit (for SJS/TEN)
+      - Supportive care
+      - Wound care - Like burn management, sterile technique, nonadherent dressings, pain control
+      - Fluids - Large volume losses (maintain urine output)
+      - Temperature regulation - Hypothermia risk (loss of skin barrier)
+      - Nutrition - High-calorie, high-protein
+      - Infection prevention - Antibiotics only if proven infection (NOT prophylactic)
+      - Ophthalmology consult - Daily eye care (prevent synechiae, blindness)
+      - Specific therapies - Controversial, no proven benefit
+      - IVIG 1-2 g/kg - May halt progression SJS/TEN (block Fas-FasL apoptosis)
+      - Cyclosporine 3-5 mg/kg/day - Immunosuppression
+      - Systemic corticosteroids - Controversial for SJS/TEN (increased infection risk), helpful for DRESS (prednisone 0.5-1 mg/kg/day, taper over weeks to months)
+      - Avoid in SJS/TEN (may worsen outcome)
+      - Prognosis
+      - SJS/TEN - Mortality 10-30%, sequelae (ocular scarring, skin pigmentation changes)
+      - DRESS - Mortality 5-10%, prolonged course, autoimmune sequelae (hypothyroidism, diabetes)
+      - Prevention - Avoid culprit drug FOREVER (cross-reactivity with structurally similar drugs)
+      - Genetic screening - Consider HLA-B*1502 before carbamazepine (Asians), HLA-B*5701 before abacavir

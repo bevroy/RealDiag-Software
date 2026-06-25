@@ -1,0 +1,94 @@
+tree_id: PULM-CHRONIC-BRONCHITIS
+name: Chronic Bronchitis (COPD)
+family: Pulmonology
+specialty: Pulmonology
+chief_complaint: Chronic productive cough and dyspnea
+description: |
+  Clinical diagnosis - productive cough for at least 3 months per year for 2 consecutive years. Type of chronic obstructive pulmonary disease (COPD) characterized by airway inflammation and mucus hypersecretion.
+  Blue bloater phenotype - overweight, cyanotic, peripheral edema, chronic hypoxemia and hypercapnia. Contrasts with emphysema (pink puffer). Smoking causes 85-90% of COPD. Third leading cause of death in US.
+icd10: J44.0
+snomed: 63480004
+presentations:
+  - Chronic productive cough ≥3 months for ≥2 consecutive years
+  - Sputum production
+  - Dyspnea on exertion
+  - Wheezing
+  - Smoking history
+  - May have cor pulmonale
+urgency: Moderate
+referrals:
+  emergency:
+    - Respiratory failure
+    - Massive hemoptysis
+    - Tension pneumothorax
+    - Severe COPD exacerbation
+  urgent:
+    - Suspected lung cancer
+    - Moderate COPD exacerbation
+    - Recurrent pneumonia
+    - New oxygen requirement
+  routine:
+    - Chronic cough
+    - Asthma management
+    - OSA evaluation
+    - Smoking cessation
+
+workup:
+  - Clinical diagnosis - chronic productive cough (3+ months per year x 2 years), dyspnea, wheezing, smoking history
+  - Spirometry required to diagnose and stage COPD - post-bronchodilator FEV1/FVC less than 0.70 confirms airflow obstruction
+  - GOLD classification by FEV1 - mild (FEV1 greater than 80%), moderate (50-79%), severe (30-49%), very severe (less than 30%)
+  - Chronic bronchitis clinical diagnosis, emphysema anatomic/radiographic diagnosis
+  - Chest X-ray - hyperinflation, flattened diaphragms, increased AP diameter (barrel chest), enlarged retrosternal space
+  - Often normal in mild disease
+  - CT chest without contrast if diagnostic uncertainty - bronchial wall thickening in chronic bronchitis vs panlobular or centrilobular emphysema
+  - Alpha-1 antitrypsin level if age less than 45, minimal smoking history, basilar emphysema - deficiency causes early-onset COPD
+  - Arterial blood gas during exacerbation or if severe disease - assess for hypoxemia, hypercapnia, respiratory acidosis
+  - CBC - polycythemia (elevated hematocrit) from chronic hypoxemia
+  - Chronic hypoxemia triggers erythropoietin production
+  - ECG and echocardiogram if cor pulmonale suspected - right ventricular hypertrophy, pulmonary hypertension
+  - 6-minute walk test assesses functional capacity, oxygen desaturation
+treatment:
+  - Smoking cessation most important intervention - slows disease progression, only treatment proven to reduce mortality
+  - Counseling plus nicotine replacement (patch, gum, lozenge) or varenicline or bupropion
+  - Bronchodilators mainstay of symptomatic treatment
+  - Short-acting beta-agonist (SABA) - albuterol 2 puffs q4-6h PRN
+  - Long-acting beta-agonist (LABA) - salmeterol 50mcg q12h or formoterol 12mcg q12h or indacaterol 75mcg daily
+  - Long-acting muscarinic antagonist (LAMA) - tiotropium 18mcg daily or umeclidinium 62.5mcg daily or glycopyrrolate 15.6mcg q12h
+  - LAMA preferred over LABA for COPD (opposite of asthma)
+  - Combination LABA/LAMA (Anoro, Stiolto, Bevespi) for improved bronchodilation
+  - Inhaled corticosteroids (ICS) only if frequent exacerbations (2+ per year) or blood eosinophils greater than 300
+  - LABA/ICS combination - fluticasone/salmeterol (Advair), budesonide/formoterol (Symbicort)
+  - Triple therapy (ICS/LABA/LAMA) for severe disease with exacerbations
+  - Roflumilast (PDE4 inhibitor) 500mcg daily for severe COPD with chronic bronchitis and frequent exacerbations - anti-inflammatory
+  - Supplemental oxygen if resting SpO2 less than 88% or PaO2 less than 55 mmHg - improves survival
+  - Goal oxygen saturation 88-92% (avoid hyperoxia, can worsen hypercapnia)
+  - Pulmonary rehabilitation - supervised exercise, education, nutritional support (improves quality of life and reduces hospitalizations)
+  - Vaccinations - influenza annually, pneumococcal (PCV20 or PCV15 plus PPSV23), COVID-19, Tdap
+  - COPD exacerbation treatment
+  - Increased dyspnea, cough, sputum production or purulence
+  - Systemic corticosteroids - prednisone 40mg PO daily x 5 days
+  - Antibiotics if increased sputum purulence or mechanical ventilation needed - azithromycin, doxycycline, amoxicillin-clavulanate, levofloxacin x 5-7 days
+  - Bronchodilators - increase frequency or add nebulized albuterol/ipratropium
+  - Oxygen to maintain SpO2 88-92%
+  - Non-invasive positive pressure ventilation (BiPAP) if hypercapnic respiratory failure (pH less than 7.35, PaCO2 greater than 45)
+clinical_pearls:
+  - Blue bloater (chronic bronchitis) vs pink puffer (emphysema) classic distinction but most have mixed disease
+  - Chronic bronchitis - cyanosis, overweight, peripheral edema, hypercapnia, respiratory acidosis
+  - Emphysema - thin, pursed-lip breathing, hyperinflation, normal/low PaCO2 until late
+  - Cor pulmonale (right heart failure from pulmonary hypertension) - JVD, hepatomegaly, peripheral edema
+  - COPD overlap with asthma (ACO) - younger age, atopy, reversibility on spirometry, higher eosinophils (use ICS)
+  - Bullectomy or lung volume reduction surgery for giant bullae or severe upper lobe emphysema in select patients
+differentials:
+  - Asthma
+  - Bronchiectasis
+  - Congestive heart failure
+  - Interstitial lung disease
+  - Lung cancer
+  - Chronic pulmonary embolism
+trace:
+  - 64-year-old man with chronic productive cough x 4 years, progressive dyspnea limiting activities → 45 pack-year smoking history, currently smokes → Exam shows barrel chest, diminished breath sounds, scattered wheezes, no crackles → Spirometry - FEV1/FVC 0.58, FEV1 48% predicted (GOLD 2 moderate COPD), minimal bronchodilator response → Chest X-ray shows hyperinflation, no infiltrate → Diagnose moderate COPD, chronic bronchitis phenotype → Smoking cessation counseling, start varenicline → Initiate tiotropium 18mcg daily (LAMA), continue albuterol PRN → Dyspnea improves but still limited → Add indacaterol 75mcg daily (LABA), switch to combination LABA/LAMA → Pulmonary rehabilitation referral → Vaccinations updated (influenza, PCV20) → Successfully quit smoking after 3 months → Symptoms stable on LABA/LAMA, exercise tolerance improved → Annual spirometry shows stable lung function
+
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine

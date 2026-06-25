@@ -1,0 +1,327 @@
+tree_id: ENDO-THYROID-STORM
+name: Thyroid Storm and Thyrotoxicosis
+family: Endocrinology
+specialty: Endocrinology/Emergency Medicine/Internal Medicine
+chief_complaint: Thyrotoxicosis
+description: Diagnostic decision tree for thyroid storm and severe thyrotoxicosis
+version: "1.0"
+icd10: E07.9
+snomed: 10273003
+presentations:
+  - Severe hyperthyroidism
+  - High fever (>38.5°C)
+  - Tachycardia, atrial fibrillation
+  - Altered mental status, confusion, agitation
+  - Nausea, vomiting, diarrhea
+  - Heart failure, shock
+  - Precipitated by infection, surgery, trauma
+differentials:
+  - Sepsis
+  - Heat stroke
+  - Malignant hyperthermia
+  - Sympathomimetic toxicity
+  - Thyrotoxicosis
+citations:
+  - Endocrine Society Clinical Practice Guidelines
+  - ADA (American Diabetes Association) Standards of Care
+  - UpToDate - Endocrinology and Diabetes
+author: RealDiag Team
+entry_point: severity
+
+referrals:
+  emergency:
+    - DKA
+    - HHS
+    - Thyroid storm
+    - Myxedema coma
+    - Adrenal crisis
+  urgent:
+    - New diabetes with poor control
+    - Thyroid nodule >4cm
+    - Severe hypercalcemia
+    - Pituitary mass
+  routine:
+    - Diabetes management
+    - Thyroid nodule surveillance
+    - Osteoporosis management
+    - Lipid disorders
+
+clinical_pearls:
+  - Thyroid storm is clinical diagnosis; do not wait for labs
+  - Treat with propylthiouracil (blocks production AND conversion)
+  - Give beta-blocker BEFORE iodine (to prevent worsening)
+  - ICU-level care required; mortality 20-30% even with treatment
+
+treatment:
+  - 'ICU admission required - thyroid storm is life-threatening emergency with 20-30% mortality'
+  - 'Beta-blockade (FIRST): Propranolol 60-80mg PO Q4H OR 0.5-1mg IV Q4H (blocks peripheral conversion T4→T3, controls tachycardia)'
+  - Alternative beta-blockers - esmolol IV infusion (short-acting, titratable), metoprolol, or atenolol
+  - 'If beta-blocker contraindicated: Diltiazem 60-90mg PO Q6H OR 0.25mg/kg IV'
+  - 'Thionamide (SECOND): Propylthiouracil (PTU) preferred - 500-1000mg loading dose, then 250mg Q4H (blocks synthesis AND peripheral conversion)'
+  - 'Alternative thionamide: Methimazole 20mg Q4-6H (if PTU unavailable or contraindicated - pregnancy first trimester)'
+  - 'Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
+  - 'Corticosteroids: Hydrocortisone 100mg IV Q8H OR dexamethasone 2mg Q6H (blocks T4→T3 conversion, treats potential adrenal insufficiency)'
+  - Supportive care - aggressive cooling (acetaminophen 650mg Q4H, cooling blankets), avoid aspirin (displaces thyroid hormone from binding proteins)
+  - IV fluids - patients often volume depleted from fever, vomiting, diarrhea (2-3L NS in first 24 hours)
+  - Treat precipitating cause - antibiotics for infection, control DKA, treat MI
+  - Consider cholestyramine 4g Q6H - binds thyroid hormone in gut, enhances elimination
+  - Plasmapheresis or dialysis for refractory cases unresponsive to medical therapy
+  - Monitor for complications - heart failure, arrhythmias (especially atrial fibrillation), hepatic dysfunction
+  - 'DO NOT use aspirin for fever (increases free thyroid hormone)'
+  - Transition to oral therapy once stable - continue thionamide, reduce beta-blocker, taper steroids
+  - Definitive therapy after stabilization - radioactive iodine ablation or thyroidectomy to prevent recurrence
+
+nodes:
+  - id: severity
+    type: question
+    text: "Clinical severity assessment?"
+    options:
+      - label: "Thyroid storm (fever, altered mental status, severe tachycardia)"
+        next: thyroid_storm
+      - label: "Severe thyrotoxicosis without storm"
+        next: severe_thyrotoxicosis
+      - label: "Symptomatic hyperthyroidism"
+        next: hyperthyroidism
+      - label: "Subclinical hyperthyroidism"
+        next: subclinical_hyperthyroid
+
+  - id: thyroid_storm
+    type: diagnosis
+    diagnosis: Thyroid Storm
+    icd10: E05.91
+    urgency: critical
+    workup:
+      - TSH (suppressed), free T4, free T3 (markedly elevated)
+      - CBC, CMP
+      - Cardiac enzymes
+      - Blood cultures
+      - ECG
+      - CXR
+      - Identify precipitant (infection, surgery, RAI, contrast, MI)
+    treatment:
+      - ICU admission
+      - Beta-blocker (propranolol 60-80mg PO q4h OR 1-2mg IV q10-15min, then 1-10mg/h infusion)
+      - Esmolol if cardiac disease (250-500 mcg/kg load, then 50-100 mcg/kg/min)
+      - Thionamide (PTU 500-1000mg load, then 250mg q4h OR methimazole 20mg q4-6h)
+      - Iodine solution 1 hour after thionamide (SSKI 5 drops q6h OR Lugol's solution 10 drops q8h)
+      - Dexamethasone 2mg IV q6h (blocks T4→T3 conversion)
+      - Cooling measures (acetaminophen, cooling blankets - avoid aspirin)
+      - Aggressive hydration
+      - Treat precipitant
+      - Consider plasmapheresis or dialysis if refractory
+      - Endocrinology consult
+      - Mortality 10-30% even with treatment
+
+  - id: severe_thyrotoxicosis
+    type: question
+    text: "Cardiac complications?"
+    options:
+      - label: "Atrial fibrillation with RVR"
+        next: thyrotoxic_afib
+      - label: "Heart failure"
+        next: thyrotoxic_cardiomyopathy
+      - label: "Stable but severe symptoms"
+        next: symptomatic_graves
+
+  - id: thyrotoxic_afib
+    type: diagnosis
+    diagnosis: Thyrotoxicosis with Atrial Fibrillation
+    icd10: E05.90
+    urgency: high
+    workup:
+      - TSH, free T4, free T3
+      - ECG
+      - Echocardiogram
+      - TSI or TBII (Graves disease)
+      - Thyroid ultrasound
+    treatment:
+      - Beta-blocker for rate control (metoprolol, propranolol, or esmolol)
+      - Target HR <110
+      - Anticoagulation (high stroke risk - use CHA2DS2-VASc)
+      - Start antithyroid medication
+      - Methimazole 10-40mg daily (preferred) OR PTU 100mg TID
+      - Hospital admission if hemodynamically unstable
+      - AFib often converts to sinus rhythm once euthyroid (3-6 months)
+      - Continue anticoagulation until euthyroid x 4 weeks, then reassess
+      - Endocrinology and cardiology consult
+
+  - id: thyrotoxic_cardiomyopathy
+    type: diagnosis
+    diagnosis: Thyrotoxic Cardiomyopathy
+    icd10: E05.90
+    urgency: high
+    workup:
+      - TSH, free T4, free T3
+      - BNP
+      - Echocardiogram (assess EF)
+      - ECG
+    treatment:
+      - Hospital admission
+      - Beta-blocker (cautiously - may worsen HF initially)
+      - Diuretics for volume overload
+      - ACE-I or ARB
+      - Aggressive antithyroid therapy
+      - Consider steroids if autoimmune
+      - Usually reversible once euthyroid
+      - May take 3-6 months to recover
+      - Endocrinology and cardiology consult
+
+  - id: symptomatic_graves
+    type: diagnosis
+    diagnosis: Graves Disease (Symptomatic)
+    icd10: E05.00
+    urgency: medium
+    workup:
+      - TSH (suppressed), free T4, free T3
+      - TSI or TBII (positive in 95%)
+      - CBC (baseline before methimazole)
+      - LFTs
+      - Thyroid ultrasound with Doppler (increased vascularity)
+      - Radioactive iodine uptake scan (diffusely increased)
+      - Ophthalmology exam if eye signs
+    treatment:
+      - Beta-blocker for symptoms (propranolol 20-40mg TID-QID)
+      - Antithyroid medication (methimazole 10-40mg daily preferred)
+      - Monitor CBC weekly x 4 weeks (agranulocytosis risk)
+      - Treat for 12-18 months, then attempt discontinuation
+      - 50% relapse rate
+      - Definitive therapy if refractory: RAI ablation or thyroidectomy
+      - Selenium 200 mcg daily for mild eye disease
+      - Endocrinology referral
+
+  - id: hyperthyroidism
+    type: question
+    text: "Etiology determination?"
+    options:
+      - label: "Toxic multinodular goiter"
+        next: toxic_mng
+      - label: "Toxic adenoma"
+        next: toxic_adenoma
+      - label: "Subacute thyroiditis"
+        next: subacute_thyroiditis
+      - label: "Medication-induced"
+        next: medication_hyperthyroid
+
+  - id: toxic_mng
+    type: diagnosis
+    diagnosis: Toxic Multinodular Goiter
+    icd10: E05.20
+    urgency: medium
+    workup:
+      - TSH (suppressed), free T4, free T3
+      - Thyroid ultrasound (multiple nodules)
+      - RAI uptake scan (patchy increased uptake)
+      - TSI usually negative
+    treatment:
+      - Beta-blocker for symptoms
+      - Methimazole 10-30mg daily
+      - Definitive treatment recommended (rarely remits)
+      - RAI ablation (preferred if no compression symptoms) OR
+      - Thyroidectomy (if large goiter, compression, or suspicious nodules)
+      - Pretreat with methimazole before RAI (stop 3 days before RAI)
+      - Endocrinology referral
+
+  - id: toxic_adenoma
+    type: diagnosis
+    diagnosis: Toxic Adenoma (Autonomous Nodule)
+    icd10: E05.10
+    urgency: medium
+    workup:
+      - TSH (suppressed), free T4, free T3
+      - Thyroid ultrasound (single dominant nodule)
+      - RAI uptake scan (single hot nodule, suppressed background)
+      - FNA not needed if hot nodule (rarely malignant)
+    treatment:
+      - Beta-blocker for symptoms
+      - Definitive treatment (will not remit)
+      - RAI ablation OR
+      - Thyroid lobectomy
+      - No role for antithyroid drugs long-term
+      - Endocrinology referral
+
+  - id: subacute_thyroiditis
+    type: diagnosis
+    diagnosis: Subacute (De Quervain) Thyroiditis
+    icd10: E06.1
+    urgency: low
+    workup:
+      - TSH (low), free T4 (elevated initially)
+      - ESR markedly elevated (>50)
+      - Thyroid very tender on exam
+      - RAI uptake LOW (<5%) - distinguishes from Graves
+      - Thyroglobulin elevated
+      - Often post-viral illness
+    treatment:
+      - Beta-blocker for thyrotoxic symptoms (propranolol)
+      - NSAIDs or aspirin for pain
+      - Prednisone 40mg daily x 1-2 weeks if severe pain, then taper
+      - Self-limited (3-6 months)
+      - May have hypothyroid phase later (transient, rarely permanent)
+      - Monitor thyroid function
+      - Endocrinology follow-up
+
+  - id: medication_hyperthyroid
+    type: diagnosis
+    diagnosis: Medication-Induced Thyrotoxicosis
+    icd10: E06.4
+    urgency: medium
+    workup:
+      - TSH, free T4, free T3
+      - Medication review (amiodarone, lithium, interferon, levothyroxine)
+      - RAI uptake if amiodarone (distinguish type 1 vs 2)
+    treatment:
+      - Amiodarone type 1 (increased synthesis): thionamide + potassium perchlorate
+      - Amiodarone type 2 (destructive): prednisone 40mg daily
+      - Levothyroxine excess: reduce dose
+      - Beta-blocker for symptoms
+      - Discontinue offending medication if possible
+      - Cardiology consult if amiodarone
+      - Endocrinology consult
+
+  - id: subclinical_hyperthyroid
+    type: question
+    text: "TSH level and symptoms?"
+    options:
+      - label: "TSH <0.1, symptomatic or high-risk"
+        next: treat_subclinical
+      - label: "TSH 0.1-0.4, asymptomatic"
+        next: monitor_subclinical
+
+  - id: treat_subclinical
+    type: diagnosis
+    diagnosis: Subclinical Hyperthyroidism (Treat)
+    icd10: E05.90
+    urgency: low
+    workup:
+      - Repeat TSH, free T4 in 1-3 months
+      - TSI or TBII
+      - Thyroid ultrasound
+      - Consider RAI uptake scan
+      - Bone density (osteoporosis risk)
+      - ECG (atrial fibrillation risk)
+    treatment:
+      - Treat if TSH <0.1 AND:
+        - Age >65
+        - Cardiac disease or risk factors
+        - Osteoporosis
+        - Symptoms
+      - Beta-blocker if symptoms
+      - Methimazole 5-15mg daily OR definitive therapy
+      - Treat underlying cause
+      - Monitor thyroid function q3-6 months
+      - Endocrinology referral
+
+  - id: monitor_subclinical
+    type: diagnosis
+    diagnosis: Subclinical Hyperthyroidism (Monitor)
+    icd10: E05.90
+    urgency: low
+    workup:
+      - Repeat TSH in 3-6 months
+      - Free T4 if TSH remains low
+    treatment:
+      - Observation if TSH 0.1-0.4 and asymptomatic
+      - Monitor TSH q3-6 months
+      - Treat if TSH becomes <0.1 or develops symptoms
+      - Screen for complications (AFib, osteoporosis)
+      - Endocrinology referral if persistent

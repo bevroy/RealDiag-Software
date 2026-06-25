@@ -1,0 +1,64 @@
+tree_id: SURG-VOLVULUS
+name: Colonic Volvulus
+family: Surgery
+specialty: Surgery
+icd10:
+- K56.2
+snomed:
+- 235509008
+urgency: medium
+description: Comprehensive evaluation and management of Colonic Volvulus
+version: '1.0'
+citations:
+  - ACS (American College of Surgeons) Clinical Guidelines
+  - RCS (Royal College of Surgeons) Guidelines
+  - UpToDate - General Surgery
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Sudden onset abdominal pain and distension
+- Obstipation
+- Coffee-bean sign on X-ray (sigmoid)
+- Elderly or institutionalized patients
+- Nausea and vomiting
+- May require urgent detorsion
+workup: []
+treatment:
+  - 'Sigmoid volvulus: Attempt endoscopic detorsion first (rectal tube placed)'
+  - 'Successful detorsion: Elective sigmoid colectomy within 1-2 weeks (high recurrence risk)'
+  - 'Failed detorsion or peritonitis: Emergency surgery - resection ± primary anastomosis vs Hartmann'
+  - 'Cecal volvulus: Emergency surgical right hemicolectomy (endoscopy usually unsuccessful)'
+  - 'NPO, NG decompression, IV fluid resuscitation'
+  - 'Gastrografin enema diagnostic (bird beak sign)'
+  - 'CT abdomen/pelvis shows whirl sign'
+  - 'Risk of ischemia and perforation - monitor for peritonitis'
+  - 'Mortality 20-40% if ischemic or perforated'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute abdomen
+    - Peritonitis
+    - Perforated viscus
+    - Ruptured AAA
+    - Necrotizing fasciitis
+  urgent:
+    - Suspected malignancy
+    - Bowel obstruction
+    - Incarcerated hernia
+    - Acute cholecystitis
+  routine:
+    - Elective hernia repair
+    - Gallstones without cholecystitis
+    - Benign masses
+    - Screening abnormalities
+differentials:
+  - Bowel obstruction
+  - Ileus
+  - Hernia
+  - Intussusception
+  - Adhesions
+trace:
+  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
+    and Endoscopic Surgeons (SAGES)
+  version: 0.1.0
+  last_updated: '2024-12-26'

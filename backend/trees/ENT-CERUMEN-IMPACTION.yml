@@ -1,0 +1,95 @@
+tree_id: ENT-CERUMEN-IMPACTION
+name: Cerumen Impaction
+family: ent
+specialty: ENT (Otolaryngology)
+presentations:
+  - Hearing loss or decreased hearing (most common)
+  - Ear fullness or plugged sensation
+  - Earache or discomfort
+  - Tinnitus
+  - Itching in ear canal
+  - Cough (referred from vagal nerve stimulation)
+  - May be asymptomatic (discovered on routine exam)
+icd10:
+  - H61.20 # Impacted cerumen, unspecified ear
+  - H61.21 # Impacted cerumen, right ear
+  - H61.22 # Impacted cerumen, left ear
+  - H61.23 # Impacted cerumen, bilateral
+snomed:
+  - "21186006" # Impacted cerumen
+urgency: Low
+urgency_explanation: Benign condition; urgent only if complete hearing loss, severe pain, or suspected perforation
+
+referrals:
+  ent: For difficult removal, impacted foreign body, or recurrent impactions
+
+workup:
+  clinical_diagnosis:
+    - Otoscopic examination: visualization of cerumen occluding external auditory canal
+    - Assess degree of occlusion (partial vs complete)
+    - Check tympanic membrane if visible
+    - Rinne and Weber tests if hearing loss suspected
+  history:
+    - Duration of symptoms
+    - Prior impactions or cleaning attempts
+    - Use of cotton swabs or hearing aids
+    - History of narrow ear canals or excessive cerumen production
+
+treatment:
+  observation:
+    - If asymptomatic and not interfering with exam, no treatment needed
+  cerumenolytic_agents:
+    - Carbamide peroxide (Debrox) drops: 5-10 drops BID x3-4 days
+    - Mineral oil: 2-3 drops BID
+    - Hydrogen peroxide 3%: 5-10 drops
+    - Docusate sodium (Colace) ear drops
+    - Soften cerumen before irrigation or manual removal
+  irrigation:
+    - Warm water (body temperature) to avoid vertigo
+    - Use syringe or ear irrigation system
+    - Direct stream posteriorly along canal wall
+    - Contraindications: TM perforation, prior ear surgery, otitis externa
+  manual_removal:
+    - Curette, forceps, or suction under direct visualization
+    - Preferred if irrigation contraindicated
+    - May require microscope for deep impaction
+  post_removal:
+    - Inspect tympanic membrane
+    - Document any trauma or perforation
+    - Acetic acid drops if canal trauma or otitis externa develops
+  prevention:
+    - Avoid cotton swabs (push wax deeper)
+    - Periodic cerumenolytic use if recurrent
+    - Professional cleaning as needed
+    - Properly fitted hearing aids
+
+clinical_pearls:
+  - Cerumen naturally migrates outward; cleaning usually unnecessary
+  - Cotton swabs push wax deeper and can cause impaction
+  - Darker, drier cerumen more likely to impact
+  - Hearing aids and earplugs increase impaction risk
+  - Elderly and those with narrow canals at higher risk
+  - Never irrigate if TM perforation suspected or history of ear surgery
+  - Irrigation can cause vertigo if water too cold or hot
+  - Self-removal attempts often worsen impaction
+
+differentials:
+  - Foreign body in ear canal
+  - Otitis externa
+  - Exostosis or osteoma (bony canal narrowing)
+  - Cholesteatoma
+  - Otitis media with effusion
+  - Sensorineural hearing loss
+
+trace:
+  - Patient presents with hearing loss or ear fullness
+  - Otoscopy reveals cerumen completely occluding canal
+  - Attempt cerumenolytic drops x3-4 days if not urgent
+  - Perform irrigation or manual removal
+  - Inspect TM after removal
+  - Educate on prevention
+
+citations:
+  - "AAO-HNSF Clinical Practice Guideline: Cerumen Impaction"
+  - "UpToDate: Cerumen impaction"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

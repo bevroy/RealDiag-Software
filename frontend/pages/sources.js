@@ -1,0 +1,371 @@
+import React, { useState, useEffect, useMemo } from "react";
+import Head from "next/head";
+import RoleBasedNavigation from '../components/RoleBasedNavigation';
+import PageHeader from '../components/PageHeader';
+
+export default function SourcesPage() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [sources, setSources] = useState([]);
+  const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
+
+  useEffect(() => {
+    async function loadSources() {
+      try {
+        const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
+        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+        
+        // Fetch the total tree count from backend
+        try {
+          const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+          if (treesRes.ok) {
+            const treesData = await treesRes.json();
+            if (treesData.trees) {
+              setTreeCount(treesData.trees.length);
+            }
+          }
+        } catch (err) {
+          console.error('Failed to load tree count:', err);
+        }
+        
+        const families = [
+          "neurology",
+          "cardiology",
+          "endocrinology",
+          "pulmonology",
+          "gastroenterology",
+          "infectious_disease",
+          "nephrology",
+          "rheumatology",
+          "dermatology",
+          "psychiatry",
+          "obstetrics_gynecology",
+          "orthopedics",
+          "emergency",
+          "hematology",
+          "allergy",
+          "dentistry",
+          "ent",
+          "general",
+          "oncology",
+          "ophthalmology",
+          "pediatrics",
+          "surgery",
+          "toxicology",
+          "trauma",
+          "urology",
+          "geriatrics",
+        ];
+
+        // Load all families in parallel with timeout
+        const fetchPromises = families.map(async (family) => {
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+            
+            const res = await fetch(`${apiBase}/reference/${family}`, {
+              signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            
+            if (!res.ok) return null;
+            const data = await res.json();
+            
+            // Map specialties to their actual medical guideline sources
+            const sourceMap = {
+              "neurology": "AAN (American Academy of Neurology) Clinical Practice Guidelines",
+              "cardiology": "ACC/AHA (American College of Cardiology/American Heart Association) Guidelines",
+              "endocrinology": "Endocrine Society Clinical Practice Guidelines",
+              "pulmonology": "CHEST and ATS (American Thoracic Society) Guidelines",
+              "gastroenterology": "ACG (American College of Gastroenterology) Clinical Guidelines",
+              "infectious_disease": "IDSA (Infectious Diseases Society of America) Guidelines",
+              "nephrology": "KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines",
+              "rheumatology": "ACR (American College of Rheumatology) Clinical Practice Guidelines",
+              "dermatology": "AAD (American Academy of Dermatology) Clinical Guidelines",
+              "psychiatry": "APA (American Psychiatric Association) Practice Guidelines",
+              "obstetrics_gynecology": "ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins",
+              "orthopedics": "AAOS (American Academy of Orthopaedic Surgeons) Clinical Practice Guidelines",
+              "emergency": "ACEP (American College of Emergency Physicians) Clinical Policies",
+              "hematology": "ASH (American Society of Hematology) Clinical Practice Guidelines",
+              "allergy": "AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters",
+              "dentistry": "ADA (American Dental Association) Clinical Practice Guidelines",
+              "ent": "AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines",
+              "general": "AAFP (American Academy of Family Physicians) Evidence-Based Guidelines",
+              "oncology": "NCCN (National Comprehensive Cancer Network) Clinical Practice Guidelines in Oncology",
+              "ophthalmology": "AAO (American Academy of Ophthalmology) Preferred Practice Patterns",
+              "pediatrics": "AAP (American Academy of Pediatrics) Clinical Practice Guidelines",
+              "surgery": "ACS (American College of Surgeons) Clinical Guidelines",
+              "toxicology": "ACMT (American College of Medical Toxicology) Practice Guidelines",
+              "trauma": "EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines",
+              "urology": "AUA (American Urological Association) Clinical Guidelines",
+              "geriatrics": "AGS (American Geriatrics Society) Clinical Practice Guidelines"
+            };
+            
+            return {
+              family: family,
+              familyLabel: family.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+              version: data.version || "2024",
+              source: sourceMap[family] || data.source || "Evidence-Based Clinical Guidelines",
+              rules: data.rules || [],
+              count: data.count || (data.rules || []).length,
+            };
+          } catch (err) {
+            console.error(`Failed to load ${family}:`, err);
+            return null;
+          }
+        });
+
+        // Progressive loading - show results as they arrive
+        const results = [];
+        for (const promise of fetchPromises) {
+          const result = await promise;
+          if (result !== null) {
+            results.push(result);
+            setSources([...results]); // Update UI with each result
+          }
+        }
+        
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+        setLoading(false);
+      }
+    }
+
+    loadSources();
+  }, []);
+
+  // Collect all unique citations across all rules (memoized)
+  const allCitations = useMemo(() => {
+    try {
+      const citationsSet = new Set();
+      if (!sources || !Array.isArray(sources)) return [];
+      
+      sources.forEach((fam) => {
+        if (!fam || !fam.rules || !Array.isArray(fam.rules)) return;
+        fam.rules.forEach((rule) => {
+          if (rule && rule.citations && Array.isArray(rule.citations)) {
+            rule.citations.forEach((citation) => {
+              if (citation && typeof citation === 'string') {
+                citationsSet.add(citation);
+              }
+            });
+          }
+        });
+      });
+      return Array.from(citationsSet);
+    } catch (err) {
+      console.error('Error processing citations:', err);
+      return [];
+    }
+  }, [sources]);
+
+  return (
+    <>
+      <Head>
+        <title>Medical Sources & References | RealDiag</title>
+        <meta
+          name="description"
+          content="Medical guidelines, references, and sources used in RealDiag diagnostic system"
+        />
+      </Head>
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          fontFamily: "system-ui, sans-serif",
+          background: 'linear-gradient(135deg, #f0fdfa 0%, #e7f5f3 100%)',
+          padding: '2rem'
+        }}
+      >
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto 1rem',
+          width: '100%'
+        }}>
+          <RoleBasedNavigation />
+        </div>
+
+        {/* Header */}
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: '100%' }}>
+          <PageHeader title="Medical Sources & References" color="#92400e" />
+
+        {/* Content */}
+        <div
+          style={{
+            background: 'white',
+            borderRadius: '12px',
+            padding: '1rem',
+            marginBottom: '1rem',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <p style={{ fontSize: 16, color: "#6b7280", marginBottom: 16 }}>
+              RealDiag integrates evidence-based clinical guidelines and medical literature
+              to support diagnostic decision-making across {treeCount ? `${treeCount}+` : '364+'} disease processes. Below are the sources used across
+              our diagnostic modules covering 24+ medical specialties.
+            </p>
+
+            {loading && (
+              <div style={{ textAlign: "center", padding: 40, color: "#6b7280" }}>
+                Loading sources...
+              </div>
+            )}
+
+            {error && (
+              <div
+                style={{
+                  background: "#fee",
+                  border: "1px solid #fcc",
+                  padding: 16,
+                  borderRadius: 8,
+                  color: "#c00",
+                }}
+              >
+                Error loading sources: {error}
+              </div>
+            )}
+
+            {!loading && !error && sources && sources.length > 0 && (
+              <>
+                {/* Family-Level Sources */}
+                <section style={{ marginBottom: 48 }}>
+                  <h2 style={{ fontSize: 24, marginBottom: 16, color: "#0f766e" }}>
+                    Core Clinical Guidelines by Specialty
+                  </h2>
+                  <div style={{ display: "grid", gap: 16 }}>
+                    {sources.map((fam) => (
+                      <div
+                        key={fam.family}
+                        style={{
+                          background: "white",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: 8,
+                          padding: 16,
+                          boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", marginBottom: 8 }}>
+                          <span
+                            style={{
+                              display: "inline-block",
+                              padding: "4px 12px",
+                              borderRadius: 999,
+                              fontSize: 12,
+                              marginRight: 12,
+                              background: "#ccfbf1",
+                              color: "#0f766e",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {fam.familyLabel}
+                          </span>
+                          <span style={{ fontSize: 12, color: "#9ca3af" }}>
+                            Version {fam.version}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 14, color: "#374151" }}>
+                          <strong>Source:</strong> {fam.source}
+                        </div>
+                        <div style={{ fontSize: 14, color: "#0f766e", marginTop: 8, fontWeight: 600 }}>
+                          {fam.count || fam.rules.length} clinical guideline{(fam.count || fam.rules.length) !== 1 ? "s" : ""} available
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Rule-Specific Citations */}
+                {allCitations.length > 0 && (
+                  <section>
+                    <h2 style={{ fontSize: 24, marginBottom: 16, color: "#0f766e" }}>
+                      Specific Guidelines & References
+                    </h2>
+                    <div
+                      style={{
+                        background: "white",
+                        border: "1px solid #e5e7eb",
+                        borderRadius: 8,
+                        padding: 24,
+                        boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+                      }}
+                    >
+                      <ol style={{ fontSize: 14, lineHeight: 1.8, paddingLeft: 20 }}>
+                        {allCitations.map((citation, idx) => (
+                          <li key={idx} style={{ marginBottom: 12 }}>
+                            {citation}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </section>
+                )}
+
+                {allCitations.length === 0 && (
+                  <section>
+                    <div
+                      style={{
+                        background: "#fefce8",
+                        border: "1px solid #fde047",
+                        borderRadius: 8,
+                        padding: 16,
+                        fontSize: 14,
+                        color: "#854d0e",
+                      }}
+                    >
+                      <strong>Note:</strong> Specific citations are being compiled and will be added
+                      to individual diagnostic rules. All rules are based on established clinical
+                      guidelines and evidence-based medical literature.
+                    </div>
+                  </section>
+                )}
+
+                {/* Disclaimer */}
+                <section style={{ marginTop: 48, paddingTop: 24, borderTop: "1px solid #e5e7eb" }}>
+                  <h3 style={{ fontSize: 18, marginBottom: 12, color: "#0f766e" }}>
+                    Medical Disclaimer
+                  </h3>
+                  <p style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.7 }}>
+                    RealDiag is designed to support clinical decision-making and should not
+                    replace professional medical judgment. All diagnostic recommendations should
+                    be verified with current clinical guidelines and adapted to individual
+                    patient circumstances. This system aggregates information from multiple
+                    authoritative sources but may not reflect the most recent updates to all
+                    guidelines. Healthcare providers are responsible for confirming diagnostic
+                    criteria and treatment recommendations.
+                  </p>
+                </section>
+              </>
+            )}
+          </div>
+        </div>
+        </div>
+
+        {/* Footer */}
+        <footer
+          style={{
+            background: "#f3f4f6",
+            borderTop: "1px solid #e5e7eb",
+            padding: "24px",
+            textAlign: "center",
+            fontSize: 14,
+            color: "#6b7280",
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div style={{ marginBottom: 12 }}>
+              <a href="/" style={{ marginRight: 16, color: "#667eea" }}>Home</a>
+              <a href="/symptom" style={{ marginRight: 16, color: "#667eea" }}>Symptom Checker</a>
+              <a href="/rules" style={{ marginRight: 16, color: "#667eea" }}>Diagnostic Rules</a>
+              <a href="/sources" style={{ color: "#667eea" }}>Medical Sources</a>
+            </div>
+            <div>© 2025 RealDiag. All rights reserved.</div>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+}

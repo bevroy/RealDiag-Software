@@ -1,0 +1,66 @@
+tree_id: SURG-SURGICAL-SITE-INFECTION
+name: Surgical Site Infection
+family: surgery
+specialty: Surgery
+icd10:
+- T81.4XXA
+snomed:
+- 433202001
+urgency: medium
+description: Comprehensive evaluation and management of Surgical Site Infection
+version: '1.0'
+citations:
+  - ACS (American College of Surgeons) Clinical Guidelines
+  - RCS (Royal College of Surgeons) Guidelines
+  - UpToDate - General Surgery
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Wound erythema and warmth
+- Purulent drainage
+- Pain and tenderness at incision
+- Fever
+- Postoperative day 3-7 typically
+- May require wound opening and drainage
+workup: []
+treatment:
+  - 'Superficial SSI: Open incision, drain purulence, pack wound, allow healing by secondary intention'
+  - 'Oral antibiotics if cellulitis extends >2cm from wound - cephalexin 500mg QID or clindamycin 450mg TID x7 days'
+  - 'MRSA risk: TMP-SMX DS BID + cephalexin OR clindamycin alone'
+  - 'Deep/organ-space SSI: CT imaging, broad-spectrum IV antibiotics (piperacillin-tazobactam 4.5g Q6H)'
+  - 'Operative debridement if necrotizing fasciitis or deep abscess'
+  - 'Wound VAC (negative pressure therapy) for complex wounds'
+  - 'Daily dressing changes - wet-to-dry or saline-moistened gauze'
+  - 'Culture wound fluid - adjust antibiotics based on sensitivities'
+  - 'Monitor for systemic infection - fever, leukocytosis, sepsis'
+  - 'Necrotizing fasciitis: Emergency surgical debridement + clindamycin 900mg IV Q8H + penicillin G 4 million units IV Q4H'
+  - 'Prevention: Perioperative antibiotic prophylaxis, chlorhexidine skin prep, glucose control'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute abdomen
+    - Peritonitis
+    - Perforated viscus
+    - Ruptured AAA
+    - Necrotizing fasciitis
+  urgent:
+    - Suspected malignancy
+    - Bowel obstruction
+    - Incarcerated hernia
+    - Acute cholecystitis
+  routine:
+    - Elective hernia repair
+    - Gallstones without cholecystitis
+    - Benign masses
+    - Screening abnormalities
+differentials:
+  - Cellulitis
+  - Abscess
+  - Seroma
+  - Hematoma
+  - Dehiscence
+trace:
+  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
+    and Endoscopic Surgeons (SAGES)
+  version: 0.1.0
+  last_updated: '2024-12-26'

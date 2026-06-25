@@ -1,0 +1,130 @@
+tree_id: CARD-PERIPHERAL-ARTERY-DISEASE
+name: Peripheral Artery Disease (PAD)
+family: Cardiology
+specialty: Vascular Surgery/Cardiology
+chief_complaint: Leg pain with walking, non-healing leg wounds, or asymptomatic
+description: Atherosclerotic narrowing of peripheral arteries causing reduced blood flow to extremities
+icd10: I73.9
+snomed: 399957001
+presentations:
+  - Intermittent claudication: leg pain with walking, relieved by rest
+  - Pain typically in calf, thigh, or buttock (depends on lesion location)
+  - Cool, pale extremities with diminished pulses
+  - Hair loss, shiny skin, brittle nails on affected limb
+  - Chronic wounds or ulcers (especially on toes/heels)
+  - Critical limb ischemia: rest pain, non-healing wounds, gangrene
+urgency: routine-to-urgent
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+
+workup:
+  - Clinical history - intermittent claudication (reproducible leg pain with walking, relieved by rest)
+  - Classify severity using Fontaine classification or Rutherford categories
+  - Fontaine I (asymptomatic), II (claudication), III (rest pain), IV (tissue loss)
+  - Physical examination - diminished or absent pulses (femoral, popliteal, dorsalis pedis, posterior tibial)
+  - Bruits over femoral or iliac arteries
+  - Skin changes - hair loss, shiny skin, cool temperature, pallor on elevation
+  - Ankle-brachial index (ABI) - diagnostic test, compares ankle to arm systolic BP
+  - ABI 0.91-1.40 normal, 0.70-0.90 mild PAD, 0.40-0.69 moderate PAD, less than 0.40 severe PAD
+  - ABI greater than 1.40 suggests non-compressible calcified vessels (diabetes, CKD)
+  - Exercise ABI (treadmill test) if resting ABI normal but symptoms suggestive
+  - Toe-brachial index (TBI) if ABI greater than 1.40 (less affected by calcification)
+  - Segmental limb pressures to localize lesion level
+  - Duplex ultrasound - assess stenosis location and severity
+  - CT angiography or MR angiography - detailed vascular anatomy for intervention planning
+  - Conventional angiography if intervention planned
+  - Assess cardiovascular risk factors - lipid panel, HbA1c, smoking history
+  - Screen for coronary and carotid artery disease (high association)
+treatment:
+  - Risk factor modification (critical for all patients)
+  - Smoking cessation - most important intervention, slows progression
+  - Antiplatelet therapy - aspirin 81 mg daily or clopidogrel 75 mg daily (reduces cardiovascular events)
+  - Statin therapy - high-intensity statin (atorvastatin 40-80 mg, rosuvastatin 20-40 mg) regardless of baseline LDL
+  - Blood pressure control - target less than 130/80 mmHg, ACE inhibitors or ARBs preferred
+  - Diabetes management - target HbA1c less than 7%
+  - Supervised exercise therapy - 30-45 minutes walking 3-5 times per week (first-line for claudication)
+  - Walk until near-maximal pain, rest, repeat - improves symptoms and walking distance
+  - Pharmacotherapy for claudication
+  - Cilostazol 100 mg BID (phosphodiesterase inhibitor) - improves walking distance 40-60%
+  - Contraindicated in heart failure
+  - Pentoxifylline 400 mg TID (less effective alternative if cilostazol contraindicated)
+  - Revascularization for lifestyle-limiting claudication despite medical therapy or critical limb ischemia
+  - Endovascular intervention (angioplasty with or without stenting) - first-line for focal lesions
+  - Surgical bypass (femoral-popliteal, aortobifemoral) - for extensive disease or failed endovascular
+  - Critical limb ischemia (rest pain, tissue loss) requires urgent revascularization
+  - Wound care for ulcers, debridement of necrotic tissue
+  - Amputation if tissue non-viable or uncontrolled infection
+clinical_pearls:
+  - Affects 8-12 million Americans, prevalence increases with age (12-20% over age 70)
+  - Major risk factors - smoking (strongest modifiable risk), diabetes, hypertension, hyperlipidemia, age greater than 65
+  - Classic claudication only in 10-30% of PAD patients, 40-50% have atypical leg symptoms, 20-50% asymptomatic
+  - Intermittent claudication reproducible with consistent walking distance (claudication distance)
+  - Calf claudication suggests femoral-popliteal disease, buttock/thigh claudication suggests aortoiliac disease
+  - Leriche syndrome - aortoiliac occlusion causing bilateral buttock claudication, impotence, absent femoral pulses
+  - PAD is marker of systemic atherosclerosis - 5-year mortality 10-15% (mostly cardiovascular death)
+  - Annual risk of cardiovascular events (MI, stroke, death) 5-7% in PAD patients
+  - Critical limb ischemia - rest pain requiring narcotics for 2+ weeks, ulceration, or gangrene
+  - One-year amputation rate 25-40% in critical limb ischemia if not revascularized
+differentials:
+  - Spinal stenosis (neurogenic claudication - bilateral leg pain, worse with standing/extension, better with sitting/flexion)
+  - Lumbar radiculopathy (dermatomal distribution, positive straight leg raise)
+  - Chronic venous insufficiency (edema, varicose veins, hyperpigmentation, pain relieved with elevation)
+  - Musculoskeletal pain (joint-related, not reproducible with walking distance)
+  - Deep vein thrombosis (acute onset, unilateral swelling, positive D-dimer)
+  - Diabetic neuropathy (burning/tingling, symmetric stocking distribution, normal pulses)
+  - Compartment syndrome (acute severe pain, tense compartments, recent trauma)
+trace:
+  - 68-year-old man with 50-pack-year smoking history presents with 6-month history of bilateral calf pain with walking
+  - Pain starts after walking 2 blocks (about 200 yards), cramping in both calves
+  - Pain resolves within 2-3 minutes of rest, reproducible with same walking distance
+  - Denies rest pain, no foot wounds or ulcers
+  - Past medical history - hypertension, hyperlipidemia, type 2 diabetes, former smoker (quit 1 year ago)
+  - Medications - metformin, lisinopril, simvastatin 20 mg
+  - Physical exam - vitals BP 145/88, HR 78, otherwise normal
+  - Cardiovascular exam - distant femoral pulses bilaterally, absent dorsalis pedis and posterior tibial pulses bilaterally
+  - No bruits appreciated, no edema
+  - Feet cool to touch, hair loss on lower legs, prolonged capillary refill
+  - No ulcers or gangrene
+  - Ankle-brachial index performed
+  - Right ABI 0.62, Left ABI 0.58 (moderate PAD bilaterally)
+  - Labs - HbA1c 7.2%, LDL 145 mg/dL, HDL 38 mg/dL, triglycerides 180 mg/dL
+  - Diagnosis - Moderate peripheral artery disease, Fontaine stage IIa (mild claudication)
+  - Treatment plan initiated
+  - Smoking cessation reinforced, congratulated on quitting, avoid relapse
+  - Started aspirin 81 mg daily
+  - Increased statin to atorvastatin 80 mg daily (high-intensity statin)
+  - Blood pressure goal less than 130/80, increased lisinopril dose
+  - Diabetes management optimized
+  - Referred to supervised exercise therapy program
+  - Started cilostazol 100 mg BID for claudication
+  - Vascular surgery consultation for risk stratification
+  - 3-month follow-up - significant improvement in walking distance
+  - Now able to walk 4-5 blocks before onset of claudication
+  - Attending exercise program 3 times per week
+  - LDL decreased to 75 mg/dL on high-intensity statin
+  - BP 125/75 on increased lisinopril
+  - 6-month follow-up - continued improvement, walking distance 6-7 blocks
+  - Quality of life markedly improved, able to perform desired activities
+  - Continues cilostazol, exercise program, risk factor modification
+  - No need for revascularization at this time
+  - Outcome - Successful medical management with exercise and pharmacotherapy
+
+citations:
+  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+  - ESC (European Society of Cardiology) Clinical Practice Guidelines
+  - UpToDate - Cardiovascular Medicine

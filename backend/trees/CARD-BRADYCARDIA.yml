@@ -1,0 +1,62 @@
+tree_id: CARD-BRADYCARDIA
+name: Bradycardia
+family: Cardiology
+specialty: Cardiology
+icd10:
+- R00.1
+snomed:
+- '48867003'
+urgency: medium
+description: Comprehensive evaluation and management of Bradycardia
+version: '1.0'
+citations:
+  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+  - ESC (European Society of Cardiology) Clinical Practice Guidelines
+  - UpToDate - Cardiovascular Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- heart rate < 60 bpm
+- may be asymptomatic or cause fatigue, dizziness
+- may require pacemaker
+- HR <60 bpm (sinus bradycardia, junctional rhythm, heart block)
+- 'Symptomatic: Fatigue, dizziness, syncope, dyspnea, chest pain, altered mental status'
+- 'Asymptomatic: Common in athletes, sleep, vagal tone'
+- 'Causes: Medications (BB, CCB, digoxin, amiodarone), MI, sick sinus syndrome, heart
+  block'
+workup:
+- 'ECG: Identify type (sinus bradycardia, junctional, heart block)'
+- 'Holter monitor: If intermittent symptoms, correlate symptoms with HR'
+- 'Electrolytes: K, Mg, Ca'
+- 'Digoxin level: If on digoxin (toxicity causes bradycardia)'
+- 'Troponin: Rule out MI as cause'
+treatment:
+- 'Guideline-based treatment options for Bradycardia include:'
+- 'Asymptomatic: No treatment if HR >40 and asymptomatic (physiologic) (ACC/AHA 2023)'
+- 'Symptomatic: Atropine 0.5-1mg IV (may repeat q3-5min, max 3mg) (ACC/AHA 2023)'
+- 'If atropine fails: Transcutaneous pacing, dopamine 5-20 mcg/kg/min, or epinephrine
+  2-10 mcg/min (ACC/AHA 2023)'
+- 'Stop offending medications: Beta-blockers, CCB, digoxin (ACC/AHA 2023)'
+- 'Permanent pacemaker: If symptomatic despite treatment or high-degree block (ACC/AHA
+  2023)'
+clinical_pearls:
+- 'Physiologic bradycardia: Athletes, sleep, increased vagal tone - no treatment needed'
+- 'Symptomatic bradycardia: Dizziness, syncope, hypotension, confusion - needs treatment'
+- 'Acute MI: Inferior MI often causes bradycardia (RCA supplies AV node)'
+- 'Medications: Beta-blockers, calcium channel blockers, digoxin, amiodarone'
+- 'Pacemaker indications: Symptomatic bradycardia, complete heart block, sinus node
+  dysfunction with symptoms'
+referrals:
+- 'Cardiology if: Symptomatic bradycardia, high-degree heart block, need for pacemaker'
+- EP for permanent pacemaker placement
+differentials:
+  - Sinus bradycardia (athletic)
+  - Hypothyroidism
+  - Medication effect
+  - Heart block
+  - Increased ICP
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

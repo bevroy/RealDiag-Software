@@ -1,0 +1,455 @@
+tree_id: PSYCH-SUICIDAL-IDEATION
+name: Suicidal Ideation
+id: PSYCH-SUICIDAL-IDEATION
+title: Suicidal Ideation Assessment Tree
+family: Psychiatry
+specialty: Psychiatry/Emergency Medicine
+version: 1.0
+icd10: R45.851
+snomed: 271594007
+presentations:
+  - Thoughts of death or self-harm
+  - Suicidal ideation (passive or active)
+  - Plan, intent, means
+  - Hopelessness, helplessness
+  - Recent stressors, losses
+  - Prior attempts
+  - Risk factors: depression, substance use, isolation
+last_updated: 2025-11-20
+evidence_level: APA Practice Guidelines, Joint Commission Standards
+entry: initial_screening
+
+workup:
+  - Columbia Suicide Severity Rating Scale (C-SSRS) to assess risk
+  - Urine drug screen and alcohol level
+  - Basic labs: CBC, CMP, TSH (rule out medical causes)
+  - Non-contrast head CT if altered mental status or head injury
+  - Collateral information: family, friends, prior psychiatric records
+  - Assess protective factors: support system, reasons for living, future plans
+
+treatment:
+  - Safety first: constant observation, remove means (sharps, medications)
+  - Psychiatric emergency: involuntary hold if imminent danger
+  - Assess intent, plan, access to means, prior attempts, support system
+  - Pharmacotherapy: treat underlying depression/anxiety (SSRIs)
+  - Acute agitation: olanzapine 5-10mg IM or haloperidol 2-5mg IM
+  - Disposition: psychiatric admission if active plan/intent, crisis team if passive
+
+clinical_pearls:
+  - Ask directly about suicide - does NOT increase risk, may save lives
+  - Highest risk - plan + intent + means + prior attempt + psychiatric disorder
+  - Safety contract or no-harm contract does NOT reduce suicide risk
+  - 50% of suicide deaths occur on first attempt - prevention is critical
+  - Most suicidal crises are temporary (minutes to hours)
+  - Remove access to lethal means (firearms, medications) - single most effective intervention
+  - Depression with agitation/anxiety higher risk than depression alone
+
+red_flags_immediate_action:
+  - Active plan with intent and access to means (HIGHEST RISK)
+  - Recent suicide attempt or aborted attempt
+  - Command hallucinations to harm self
+  - Giving away possessions or saying goodbye
+  - Severe hopelessness or psychic pain
+  - Recent psychiatric hospitalization discharge (especially first 7 days)
+  - Recent loss (relationship, job, legal, financial)
+  - Intoxication (impairs judgment, increases impulsivity)
+
+differentials:
+  - Major depression
+  - Bipolar disorder
+  - Borderline personality
+  - Substance use
+  - Adjustment disorder
+
+referrals:
+  emergency:
+    - Acute SI with plan
+    - Suicide attempt
+  urgent:
+    - SI without plan
+    - Severe depression
+  routine:
+    - Depression management
+    - Therapy referral
+nodes:
+- id: initial_screening
+  when: {}
+  description: Universal suicide risk screening
+  tests:
+  - ASQ (Ask Suicide-Screening Questions) or P4 Screener
+  - Direct questions - Are you thinking about killing yourself?
+  - Do you have a plan? Do you intend to act on it?
+  - PHQ-9 item 9 (suicidal ideation frequency)
+  suggest_dx: []
+  next:
+  - when:
+      suicidal_ideation: present
+    go: c_ssrs_assessment
+  - when:
+      recent_attempt: true
+    go: post_attempt_evaluation
+  - when:
+      all_of:
+      - suicidal_ideation: absent
+      - recent_attempt: false
+    go: no_acute_risk
+  - default: c_ssrs_assessment
+
+- id: c_ssrs_assessment
+  when:
+    suicidal_ideation: present
+  description: Columbia Suicide Severity Rating Scale (C-SSRS)
+  tests:
+  - C-SSRS - Severity of Ideation
+    - Wish to be dead (passive ideation)
+    - Non-specific active suicidal thoughts
+    - Active suicidal ideation with method (no plan, no intent)
+    - Active suicidal ideation with intent (no plan)
+    - Active suicidal ideation with plan and intent
+  - C-SSRS - Suicidal Behavior
+    - Preparatory acts
+    - Aborted attempt
+    - Interrupted attempt
+    - Actual attempt
+  - Lifetime history of attempts
+  - Family history of suicide
+  suggest_dx:
+  - Suicidal ideation requiring risk stratification
+  next:
+  - when:
+      symptoms_contains_any:
+      - active plan with intent
+      - preparatory acts
+      - access to lethal means
+    go: high_risk
+  - when:
+      all_of:
+      - active_ideation: true
+      - plan: present
+      - intent: absent
+    go: moderate_risk
+  - when:
+      all_of:
+      - passive_ideation: true
+      - plan: absent
+      - intent: absent
+    go: low_risk
+  - default: moderate_risk
+
+- id: high_risk
+  when:
+    symptoms_contains_any:
+    - active plan with intent
+    - preparatory acts
+    - recent attempt
+    - command hallucinations
+  description: HIGH RISK - Immediate psychiatric intervention required
+  tests:
+  - Mental status examination
+  - Collateral information (family, friends, prior records)
+  - Assess access to firearms, medications, other means
+  - Protective factors (children, religious beliefs, social support)
+  - Psychiatric comorbidities (depression, psychosis, substance use)
+  - Recent stressors and losses
+  suggest_dx:
+  - High suicide risk requiring emergency psychiatric evaluation
+  - May require involuntary psychiatric hold
+  referrals:
+  - Emergency psychiatry consultation STAT
+  - Psychiatric hospitalization (voluntary or involuntary)
+  - 5150/72-hour hold if patient refuses evaluation
+  - 1:1 constant observation until disposition
+  management:
+  - DO NOT DISCHARGE - patient requires psychiatric admission
+  - Remove all dangerous items (belts, shoelaces, sharps)
+  - Search belongings for weapons or medications
+  - Place in safe environment (empty room, line of sight)
+  - Involuntary hold if patient attempts to leave
+  - Family notified (break confidentiality if imminent danger)
+  - Remove access to firearms - consider ERPO (Extreme Risk Protection Order)
+  - Medication for agitation if needed (lorazepam, olanzapine)
+  documentation:
+  - Document plan, intent, means, risk factors, protective factors
+  - Document why patient cannot be safely discharged
+  - Quote patient statements about suicide
+  - Document involuntary hold criteria if applicable
+  next:
+  - default: null
+
+- id: moderate_risk
+  when:
+    all_of:
+    - suicidal_ideation: present
+    - plan: present_or_absent
+    - intent: absent_or_low
+  description: MODERATE RISK - Enhanced safety planning and close follow-up
+  tests:
+  - Full psychiatric evaluation
+  - Risk and protective factors assessment
+  - Access to means
+  - Social support system
+  - Prior suicide attempts
+  - Current psychiatric treatment and medications
+  - Substance use
+  suggest_dx:
+  - Moderate suicide risk requiring intervention
+  referrals:
+  - Psychiatry evaluation within 24-48 hours
+  - Consider emergency department observation
+  - Partial hospitalization program (PHP) if available
+  - Intensive outpatient program (IOP)
+  - Crisis stabilization unit
+  management:
+  - May discharge with STRONG safety plan if adequate support
+  - Safety planning intervention (Stanley-Brown model)
+    1. Warning signs
+    2. Internal coping strategies
+    3. Social contacts for distraction
+    4. Family/friends who can help
+    5. Mental health professionals to contact
+    6. Means restriction (remove firearms, medications)
+    7. Make environment safe
+  - 988 Suicide & Crisis Lifeline - save in phone
+  - Crisis text line - 741741
+  - Responsible adult to monitor patient 24/7
+  - Remove firearms from home (stored by family/police)
+  - Limit access to medications (daily dosing by family)
+  - Start or adjust psychiatric medication
+  - Schedule psychiatry appointment before discharge
+  - Provide written crisis resources
+  discharge_criteria:
+  - Patient agrees to safety plan
+  - Responsible adult committed to 24/7 supervision
+  - Access to means restricted
+  - Follow-up within 24-48 hours confirmed
+  - Patient can identify coping strategies
+  - Substance use not impairing judgment
+  do_not_discharge_if:
+  - No social support or supervision
+  - Active intoxication
+  - Persistent high intent
+  - Cannot engage in safety planning
+  - Prior attempt with similar method available
+  next:
+  - default: null
+
+- id: low_risk
+  when:
+    all_of:
+    - passive_ideation: true
+    - active_ideation: absent
+    - plan: absent
+    - intent: absent
+  description: LOW RISK - Passive ideation without plan or intent
+  tests:
+  - Mental status examination
+  - Underlying psychiatric disorder assessment
+  - Substance use screening
+  - Social stressors and support
+  suggest_dx:
+  - Low acute suicide risk with passive ideation
+  - Underlying depression, anxiety, or other psychiatric disorder
+  referrals:
+  - Outpatient psychiatry within 1-2 weeks
+  - Psychotherapy (CBT, DBT)
+  - Primary care follow-up within 1 week
+  management:
+  - Safety planning still recommended
+  - 988 Suicide & Crisis Lifeline education
+  - Treat underlying psychiatric disorder
+  - Start or optimize antidepressant if depressed
+  - Address social stressors
+  - Limit access to lethal means (firearms, medications)
+  - Family education about warning signs
+  - Follow-up within 1 week
+  monitoring:
+  - PHQ-9 to track depression severity
+  - Reassess suicidal ideation at each visit
+  - Watch for escalation to active ideation
+  next:
+  - default: null
+
+- id: post_attempt_evaluation
+  when:
+    recent_attempt: true
+  description: Post-suicide attempt evaluation
+  tests:
+  - Medical stabilization (if needed)
+  - Lethality of method (high lethality = high intent)
+  - Likelihood of discovery (isolated attempt = higher intent)
+  - Patient's perception of lethality
+  - Regret vs wish they had succeeded
+  - Why attempt failed (rescued vs method didn't work)
+  - Current suicidal ideation - still present?
+  - Psychiatric evaluation
+  suggest_dx:
+  - Post-suicide attempt requiring psychiatric hospitalization
+  referrals:
+  - Psychiatric hospitalization required (voluntary or involuntary)
+  - DO NOT DISCHARGE after suicide attempt without psychiatric clearance
+  - Highest risk period is 3 months after attempt
+  management:
+  - Medical treatment of injuries/overdose
+  - Psychiatric admission for stabilization
+  - Intensive treatment of underlying disorder
+  - May require long-term intensive therapy (DBT for BPD)
+  - Means restriction critical
+  - Family education and involvement
+  prognosis:
+  - Prior attempt increases risk of future attempt 5-6 fold
+  - 10-15% of attempters eventually die by suicide
+  - Close follow-up critical after discharge
+  next:
+  - default: null
+
+- id: no_acute_risk
+  when:
+    all_of:
+    - suicidal_ideation: absent
+    - recent_attempt: false
+  description: No acute suicidal ideation identified
+  tests:
+  - Brief mental status exam
+  - Screen for depression, anxiety
+  - Substance use
+  suggest_dx:
+  - No acute suicide risk identified
+  - May have underlying psychiatric disorder requiring treatment
+  referrals:
+  - Routine mental health follow-up if psychiatric symptoms present
+  - Primary care for ongoing depression/anxiety management
+  management:
+  - Education about 988 Suicide & Crisis Lifeline
+  - Warning signs to watch for
+  - When to seek emergency help
+  - Treat underlying psychiatric disorder if present
+  next:
+  - default: null
+
+special_populations:
+  adolescents:
+    - Suicide is 2nd leading cause of death ages 10-24
+    - Bullying, social media, academic pressure are risk factors
+    - Higher impulsivity - less time between thought and action
+    - Screen all adolescents annually (recommended by AAP)
+    - Involve parents in safety planning (with patient permission)
+    - School-based interventions
+    - Restrict access to means (especially firearms)
+  elderly:
+    - Highest suicide rate of any age group (especially elderly white men)
+    - More lethal methods (firearms)
+    - Higher intent - more likely to die on first attempt
+    - Medical illness, chronic pain, social isolation are risk factors
+    - May not report depression - somatic complaints instead
+    - Less likely to seek help
+  veterans:
+    - Suicide rate 1.5x higher than civilians
+    - Combat exposure, PTSD, TBI are risk factors
+    - Veterans Crisis Line - 988 then press 1
+    - VA mental health services
+  lgbtq:
+    - 4x higher suicide attempt rate than heterosexual peers
+    - Discrimination, rejection, bullying are risk factors
+    - Family acceptance is strongly protective
+    - Trevor Project crisis line - 1-866-488-7386
+
+means_restriction:
+  firearms:
+    - Most lethal method (85% fatality rate)
+    - Temporarily remove from home
+    - Stored by family member, friend, or police
+    - Gun lock or safe if cannot remove
+    - Extreme Risk Protection Order (ERPO) in some states
+  medications:
+    - Limit quantities (7-day supply)
+    - Family dispenses daily
+    - Lock up potentially lethal medications
+    - Dispose of unused medications
+  other:
+    - Remove sharps, ropes, plastic bags
+    - Monitor charcoal grills (carbon monoxide risk)
+    - Lower water heater temperature (burn risk)
+
+crisis_resources:
+  - 988 Suicide & Crisis Lifeline (call or text)
+  - Crisis Text Line - Text HOME to 741741
+  - Veterans Crisis Line - 988 then press 1
+  - Trevor Project (LGBTQ youth) - 1-866-488-7386
+  - Trans Lifeline - 877-565-8860
+  - SAMHSA National Helpline - 1-800-662-4357
+
+documentation_requirements:
+  - Risk assessment with C-SSRS or equivalent
+  - Plan, intent, means, access
+  - Risk factors (prior attempt, psychiatric disorder, substance use, recent loss)
+  - Protective factors (social support, children, religious beliefs)
+  - Collateral information sources
+  - Safety planning interventions
+  - Disposition rationale - why safe to discharge or why admission needed
+  - Follow-up plan with specific appointments
+  - Family education provided
+  - Quote patient statements about suicidality
+
+differential_diagnosis:
+  psychiatric:
+    - Major depressive disorder (60% of suicides)
+    - Bipolar disorder (15x higher risk)
+    - Schizophrenia (10x higher risk)
+    - Borderline personality disorder (chronic suicidality)
+    - PTSD
+    - Substance use disorder (especially alcohol)
+    - Eating disorders (anorexia nervosa)
+    - Adjustment disorder with depressed mood
+  medical:
+    - Chronic pain syndromes
+    - Terminal illness
+    - Traumatic brain injury
+    - Multiple sclerosis
+    - Huntington disease
+    - Epilepsy (3x higher risk)
+  situational:
+    - Recent loss (relationship, job, financial)
+    - Legal problems
+    - Social isolation
+    - Bullying or harassment
+    - Intimate partner violence
+
+disposition_guidance:
+  psychiatric_hospitalization_required:
+    - High risk with plan, intent, and means
+    - Recent serious suicide attempt
+    - Command hallucinations to self-harm
+    - Persistent high intent despite intervention
+    - Inability to engage in safety planning
+    - No social support or supervision
+    - Active psychosis with suicidal ideation
+    - Severe depression with agitation
+  may_discharge_with_safety_plan:
+    - Low-moderate risk
+    - No current intent
+    - Can engage in safety planning
+    - Responsible adult for 24/7 supervision
+    - Access to means restricted
+    - Follow-up within 24-48 hours confirmed
+    - Substance use not impairing judgment
+    - Patient agrees to treatment plan
+  follow_up:
+    - Psychiatry within 24-48 hours (moderate risk)
+    - Primary care within 1 week (low risk)
+    - Crisis line numbers saved in phone
+    - Written safety plan provided
+    - Family education completed
+    - Means restriction verified
+
+references:
+  - Posner K et al. Columbia-Suicide Severity Rating Scale (C-SSRS). Am J Psychiatry. 2011.
+  - Stanley B, Brown GK. Safety Planning Intervention - A Brief Intervention to Mitigate Suicide Risk. Cogn Behav Pract. 2012.
+  - APA Practice Guideline for the Assessment and Treatment of Patients with Suicidal Behaviors. 2003.
+  - Joint Commission Sentinel Event Alert 56 - Detecting and treating suicide ideation in all settings. 2016.
+  - Means Matter - Harvard School of Public Health. https://www.hsph.harvard.edu/means-matter/
+  - Zero Suicide Framework. https://zerosuicide.edc.org/
+
+citations:
+  - APA (American Psychiatric Association) Practice Guidelines
+  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+  - UpToDate - Psychiatry

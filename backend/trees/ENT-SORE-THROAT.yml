@@ -1,0 +1,507 @@
+tree_id: ENT-SORE-THROAT
+name: Sore Throat / Pharyngitis
+id: ENT-SORE-THROAT
+title: Sore Throat Diagnostic Tree
+family: Otolaryngology
+specialty: Otolaryngology/Emergency Medicine/Primary Care
+version: 1.0
+icd10: R07.0
+snomed: 162397003
+presentations:
+  - Pharyngeal pain, odynophagia
+  - Fever
+  - Pharyngeal erythema, exudates
+  - Tender cervical lymphadenopathy
+  - Hoarseness
+  - Cough, rhinorrhea
+last_updated: 2025-11-20
+evidence_level: IDSA Guidelines, AAO-HNS Clinical Practice Guidelines
+entry: initial_assessment
+
+workup:
+  - Rapid strep test (RAST) - sensitivity 70-90%, specificity >95%
+  - Throat culture if RAST negative but high clinical suspicion (gold standard)
+  - Monospot or EBV serologies if suspect mononucleosis
+  - Soft tissue neck CT if suspect peritonsillar/retropharyngeal abscess
+  - CBC with differential if severe or toxic appearing
+  - Consider GC/Chlamydia PCR if sexually active and pharyngeal symptoms
+
+treatment:
+  - Viral pharyngitis: supportive care (acetaminophen/ibuprofen, fluids, throat lozenges)
+  - Strep pharyngitis: penicillin VK 500mg PO BID x10d or amoxicillin 500mg PO BID x10d
+  - Penicillin allergy: azithromycin 500mg day 1, then 250mg daily x4d
+  - Severe: consider IM penicillin G benzathine 1.2 million units
+  - Peritonsillar abscess: needle aspiration or I&D + antibiotics + ENT referral
+  - Symptomatic relief: salt water gargles, humidified air, adequate hydration
+
+clinical_pearls:
+  - Centor criteria predict strep pharyngitis (fever, exudates, anterior cervical LAD, no cough)
+  - Monospot can be falsely negative first week of EBV infection
+  - Trismus (inability to open mouth) suggests peritonsillar abscess
+  - Muffled voice, drooling, inability to swallow secretions = airway emergency
+  - Lateral neck X-ray for suspected epiglottitis (thumb sign)
+  - Most pharyngitis is viral - avoid unnecessary antibiotics
+
+red_flags:
+  - Stridor or respiratory distress (airway compromise)
+  - Drooling, inability to swallow (epiglottitis, retropharyngeal abscess)
+  - Trismus with severe pain (peritonsillar abscess, deep space infection)
+  - Muffled or hot potato voice (peritonsillar abscess)
+  - Neck stiffness, torticollis (retropharyngeal abscess)
+  - Severe unilateral throat pain (abscess, Lemierre syndrome)
+
+differentials:
+  - Viral pharyngitis
+  - Strep throat
+  - Mononucleosis
+  - Peritonsillar abscess
+  - Epiglottitis
+
+referrals:
+  emergency:
+    - Airway compromise
+    - Peritonsillar abscess
+  urgent:
+    - Recurrent tonsillitis
+    - Suspected malignancy
+  routine:
+    - Chronic sore throat
+    - Tonsillectomy evaluation
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial sore throat evaluation
+  tests:
+  - Vital signs (fever, tachycardia, respiratory rate)
+  - Oropharyngeal examination (tonsillar exudates, erythema, asymmetry)
+  - Neck examination (lymphadenopathy, masses)
+  - Assess ability to swallow, handle secretions
+  - Look for trismus (limited jaw opening)
+  - Voice quality (muffled, hot potato voice)
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - stridor
+      - respiratory_distress
+      - drooling
+      - unable_to_swallow
+    go: airway_emergency
+  - when:
+      exam_findings_any:
+      - trismus
+      - peritonsillar_bulge
+      - uvula_deviation
+    go: peritonsillar_abscess
+  - when:
+      all_of:
+      - neck_stiffness: present
+      - fever: '>38.5'
+      - difficulty_swallowing: severe
+    go: deep_space_infection
+  - when:
+      exam_findings: tonsillar_exudates
+    go: exudative_pharyngitis
+  - default: pharyngitis_assessment
+
+- id: airway_emergency
+  when:
+    symptoms_contains_any:
+    - stridor
+    - respiratory_distress
+    - drooling
+    - tripod_positioning
+  description: Acute airway compromise - epiglottitis or severe infection
+  tests:
+  - DO NOT examine throat with tongue depressor if epiglottitis suspected (can precipitate obstruction)
+  - Vital signs, oxygen saturation
+  - Lateral neck X-ray (if stable) - thumb sign
+  - Do NOT send unstable patient for imaging
+  - Direct laryngoscopy in OR if epiglottitis suspected
+  suggest_dx:
+  - Epiglottitis (H. influenzae type B, S. pneumoniae)
+  - Severe retropharyngeal abscess
+  - Ludwig angina
+  - Lemierre syndrome with airway swelling
+  referrals:
+  - ENT STAT
+  - Anesthesia for airway management
+  - ICU
+  - Operating room for intubation or tracheostomy
+  management:
+  - PROTECT AIRWAY - priority
+  - Keep patient calm, sitting upright
+  - 100% oxygen
+  - Do NOT lay patient flat
+  - Do NOT agitate patient (crying can worsen obstruction)
+  - IV access
+  - Broad-spectrum antibiotics
+    - Ceftriaxone 2g IV + vancomycin 15 mg/kg IV
+    - Or ampicillin-sulbactam 3g IV
+  - Dexamethasone 10mg IV (reduce airway edema)
+  - Prepare for emergent airway
+    - Intubation in OR with ENT backup
+    - Difficult airway cart available
+    - Prepare for cricothyroidotomy or tracheostomy
+  - Admit to ICU
+  next:
+  - default: null
+
+- id: peritonsillar_abscess
+  when:
+    exam_findings_any:
+    - trismus
+    - peritonsillar_bulge
+    - uvula_deviation
+    - hot_potato_voice
+  description: Peritonsillar abscess (quinsy)
+  tests:
+  - Oropharyngeal exam - unilateral tonsillar swelling, uvula deviation
+  - Trismus (limited mouth opening)
+  - Hot potato or muffled voice
+  - Asymmetric tonsillar enlargement
+  - CT neck with contrast (if diagnosis uncertain or concern for deep space extension)
+  - Aspiration or I&D confirms diagnosis (pus)
+  suggest_dx:
+  - Peritonsillar abscess (J36)
+  - Group A Strep, anaerobes, S. aureus
+  referrals:
+  - ENT consultation (same day or next day)
+  - Consider admission if
+    - Unable to tolerate PO
+    - Airway concern
+    - Immunocompromised
+    - Failed outpatient drainage
+  management:
+  - Needle aspiration or incision and drainage (landmark - point of maximal fluctuance, superior and lateral to affected tonsil, aspiration with 18-22G needle 1-1.5cm deep, I&D if aspiration yields pus)
+  - Antibiotics
+    - Ampicillin-sulbactam 3g IV q6h
+    - Or clindamycin 600-900mg IV q8h (if penicillin allergic)
+    - Transition to PO when improving (amoxicillin-clavulanate 875/125mg BID)
+  - Analgesia
+    - Opioids for severe pain
+    - Lidocaine viscous 2% swish and spit
+  - IV fluids if dehydrated
+  - Corticosteroids
+    - Dexamethasone 10mg IV (faster symptom resolution)
+  - Tonsillectomy (interval, 4-6 weeks later)
+    - Consider if recurrent PTA
+    - Consider immediate tonsillectomy (quinsy tonsillectomy) if severe
+  discharge_criteria:
+  - Able to swallow
+  - Adequate pain control
+  - ENT follow-up in 24-48 hours
+  - Return precautions for worsening symptoms
+  next:
+  - default: null
+
+- id: deep_space_infection
+  when:
+    symptoms_contains_any:
+    - neck_stiffness
+    - torticollis
+    - severe_dysphagia
+    - odynophagia
+  description: Deep neck space infection (retropharyngeal, parapharyngeal, Ludwig angina)
+  tests:
+  - CT neck with IV contrast (gold standard)
+    - Retropharyngeal space widening
+    - Fluid collection or abscess
+    - Gas (suggests necrotizing infection)
+  - Lateral neck X-ray (if CT not immediately available)
+    - Prevertebral soft tissue >7mm at C2, >22mm at C6 (adults)
+  - CBC, CMP, lactate
+  - Blood cultures
+  suggest_dx:
+  - Retropharyngeal abscess (most common in children <5yo)
+  - Parapharyngeal abscess
+  - Ludwig angina (bilateral submandibular space)
+  - Lemierre syndrome (internal jugular vein thrombophlebitis)
+  referrals:
+  - ENT STAT
+  - ICU admission
+  - OR for drainage if abscess present
+  management:
+  - IV antibiotics immediately
+    - Ampicillin-sulbactam 3g IV q6h
+    - Or piperacillin-tazobactam 4.5g IV q6h
+    - Add vancomycin if MRSA risk
+    - Add metronidazole if necrotizing infection
+  - NPO (may need surgery)
+  - IV fluids
+  - Airway monitoring (ICU)
+  - Surgical drainage (ENT)
+    - Transoral or transcervical approach
+    - Retropharyngeal abscess >2cm usually requires drainage
+  - CT chest (if Lemierre syndrome - look for septic emboli)
+  - Anticoagulation controversial in Lemierre syndrome
+  complications:
+  - Airway obstruction
+  - Mediastinitis
+  - Jugular vein thrombosis (Lemierre syndrome)
+  - Carotid artery erosion
+  - Septic shock
+  next:
+  - default: null
+
+- id: exudative_pharyngitis
+  when:
+    exam_findings: tonsillar_exudates
+  description: Pharyngitis with exudates
+  tests:
+  - Centor criteria (1 point each)
+    - Fever >38°C
+    - Tonsillar exudates
+    - Tender anterior cervical lymphadenopathy
+    - Absence of cough
+  - Rapid strep test (0-1 Centor - no test, 2-3 test, 4 treat)
+  - Throat culture (if rapid strep negative but high suspicion)
+  - Monospot or EBV serology if suspect mononucleosis
+  suggest_dx: []
+  next:
+  - when:
+      rapid_strep: positive
+    go: strep_pharyngitis
+  - when:
+      all_of:
+      - symptoms_contains_any:
+        - fatigue
+        - posterior_cervical_LAD
+        - splenomegaly
+      - monospot: positive
+    go: infectious_mononucleosis
+  - when:
+      exam_findings: gray_pseudomembrane
+    go: diphtheria_assessment
+  - default: viral_pharyngitis
+
+- id: strep_pharyngitis
+  when:
+    rapid_strep: positive
+  description: Group A Streptococcal pharyngitis
+  tests:
+  - Rapid strep antigen test (sensitivity 85-95%)
+  - Throat culture if rapid negative (takes 24-48 hours)
+  - Clinical diagnosis with positive test
+  suggest_dx:
+  - Group A Streptococcal pharyngitis (Strep pyogenes) (J02.0)
+  referrals:
+  - None for uncomplicated strep throat
+  - Infectious disease if recurrent infections
+  management:
+  - First-line antibiotics
+    - Penicillin VK 500mg PO BID-TID x 10 days
+    - Or amoxicillin 500mg PO TID x 10 days (better taste)
+  - Penicillin-allergic (non-severe)
+    - Cephalexin 500mg PO BID x 10 days (if no anaphylaxis to penicillin)
+  - Penicillin-allergic (severe/anaphylaxis)
+    - Azithromycin 500mg day 1, then 250mg days 2-5
+    - Or clindamycin 300mg PO TID x 10 days
+  - Symptomatic treatment
+    - Acetaminophen or ibuprofen for pain/fever
+    - Throat lozenges
+    - Salt water gargles
+    - Adequate hydration
+  - Return to school/work after 24 hours of antibiotics and fever-free
+  - No benefit to treating asymptomatic carriers
+  patient_education:
+  - Complete full antibiotic course (prevent rheumatic fever)
+  - Contagious until 24 hours after starting antibiotics
+  - Replace toothbrush after 24 hours of antibiotics
+  - Return if symptoms worsen or no improvement in 48-72 hours
+  complications:
+  - Acute rheumatic fever (rare in US, prevented by antibiotics)
+  - Post-streptococcal glomerulonephritis (not prevented by antibiotics)
+  - Peritonsillar abscess
+  - Scarlet fever (strep with rash)
+  next:
+  - default: null
+
+- id: infectious_mononucleosis
+  when:
+    symptoms_contains_any:
+    - severe_fatigue
+    - posterior_cervical_LAD
+    - splenomegaly
+  description: Infectious mononucleosis (EBV)
+  tests:
+  - Monospot (heterophile antibody) - sensitivity 70-90%
+    - May be negative first week of symptoms
+    - If negative and high suspicion, repeat in 1 week or check EBV serology
+  - EBV serology
+    - VCA-IgM (acute infection)
+    - VCA-IgG (acute or past infection)
+    - EBNA (past infection, negative in acute)
+  - CBC - lymphocytosis with atypical lymphocytes
+  - LFTs - transaminitis common (mild elevation)
+  - Throat culture (to rule out concurrent strep - 5-10% co-infection)
+  suggest_dx:
+  - Infectious mononucleosis (B27.0)
+  - Epstein-Barr virus (EBV)
+  referrals:
+  - Routine follow-up with primary care
+  - Infectious disease if severe or complicated
+  management:
+  - Supportive care only (no specific antiviral)
+  - Rest (avoid strenuous activity for 3-4 weeks)
+  - Avoid contact sports for 4 weeks (risk of splenic rupture)
+  - Hydration
+  - Analgesics (acetaminophen, NSAIDs)
+  - Corticosteroids (controversial, only for severe cases)
+    - Severe tonsillar enlargement with airway compromise
+    - Severe thrombocytopenia
+    - Hemolytic anemia
+  - AVOID AMOXICILLIN/AMPICILLIN
+    - Causes diffuse maculopapular rash in 90% of mono patients
+    - Not true allergy, specific to EBV infection
+  patient_education:
+  - Fatigue may persist for weeks to months
+  - No contact sports until cleared by physician (splenic rupture risk)
+  - Highly contagious through saliva (kissing disease)
+  - May shed virus for months after symptoms resolve
+  complications:
+  - Splenic rupture (0.1-0.5%, usually week 2-3)
+  - Airway obstruction from massive tonsillar enlargement
+  - Hemolytic anemia, thrombocytopenia
+  - Neurologic complications (rare) - meningitis, encephalitis, Guillain-Barré
+  next:
+  - default: null
+
+- id: diphtheria_assessment
+  when:
+    exam_findings: gray_pseudomembrane
+  description: Diphtheria evaluation
+  tests:
+  - Gray pseudomembrane on tonsils/pharynx (bleeds when removed)
+  - Throat culture on Loeffler or tellurite media
+  - Toxin testing
+  - ECG (myocarditis)
+  - Vaccination history (diphtheria rare in vaccinated)
+  suggest_dx:
+  - Diphtheria (Corynebacterium diphtheriae) (A36.0)
+  - Rare in US due to vaccination
+  referrals:
+  - Infectious disease STAT
+  - ICU admission
+  - Report to public health immediately
+  management:
+  - Diphtheria antitoxin (DAT) - obtain from CDC
+  - Antibiotics
+    - Erythromycin 500mg IV q6h x 14 days
+    - Or penicillin G 1.2-2.4 million units IV q4-6h x 14 days
+  - Airway management (tracheostomy may be needed)
+  - Cardiac monitoring (myocarditis)
+  - Isolation precautions
+  - Contact tracing and prophylaxis
+  next:
+  - default: null
+
+- id: pharyngitis_assessment
+  when: {}
+  description: Pharyngitis without exudates
+  tests:
+  - Centor score
+  - Consider rapid strep if Centor 2-3
+  - Viral symptoms (cough, rhinorrhea, conjunctivitis)
+  suggest_dx: []
+  next:
+  - when:
+      centor_score: '>=4'
+    go: strep_pharyngitis
+  - when:
+      all_of:
+      - centor_score: '2-3'
+      - rapid_strep: positive
+    go: strep_pharyngitis
+  - when:
+      symptoms_contains_any:
+      - cough
+      - rhinorrhea
+      - conjunctivitis
+      - hoarseness
+    go: viral_pharyngitis
+  - default: viral_pharyngitis
+
+- id: viral_pharyngitis
+  when: {}
+  description: Viral pharyngitis - supportive care
+  tests:
+  - Clinical diagnosis
+  - No testing needed for typical viral URI
+  suggest_dx:
+  - Viral pharyngitis (J02.9)
+  - Adenovirus, rhinovirus, coronavirus, influenza, parainfluenza
+  referrals:
+  - None for uncomplicated viral pharyngitis
+  management:
+  - Symptomatic treatment only
+    - Acetaminophen or ibuprofen for pain
+    - Throat lozenges, hard candy
+    - Salt water gargles (1/4 to 1/2 tsp salt in 8 oz warm water)
+    - Honey (for cough, age >1 year)
+    - Adequate hydration
+  - NO antibiotics (not effective, increase resistance)
+  - Humidifier or steam inhalation
+  - Rest
+  patient_education:
+  - Self-limited, resolves in 5-7 days
+  - Antibiotics not helpful for viral infection
+  - Return if symptoms worsen or persist >7-10 days
+  - Red flags - difficulty breathing, drooling, severe pain, inability to swallow
+  next:
+  - default: null
+
+differential_diagnosis:
+  bacterial:
+    - Group A Streptococcus (most important bacterial cause)
+    - Group C and G Streptococcus
+    - Neisseria gonorrhoeae (pharyngeal gonorrhea - sexual contact)
+    - Corynebacterium diphtheriae (diphtheria - rare)
+    - Fusobacterium necrophorum (Lemierre syndrome)
+    - Mycoplasma pneumoniae
+    - Chlamydia pneumoniae
+  viral:
+    - Adenovirus (most common)
+    - Rhinovirus
+    - Coronavirus (including SARS-CoV-2)
+    - Influenza, parainfluenza
+    - Epstein-Barr virus (mononucleosis)
+    - Cytomegalovirus
+    - HIV (acute retroviral syndrome)
+    - Herpes simplex virus
+    - Coxsackievirus (herpangina, hand-foot-mouth disease)
+  other:
+    - Candida (thrush - immunocompromised)
+    - Kawasaki disease (children)
+    - Peritonsillar abscess
+    - Retropharyngeal abscess
+    - Epiglottitis
+
+disposition_guidance:
+  admit:
+    - Airway compromise or concern
+    - Peritonsillar abscess unable to tolerate PO
+    - Deep neck space infection
+    - Epiglottitis
+    - Severe mononucleosis with airway obstruction
+    - Inability to maintain hydration
+  discharge:
+    - Uncomplicated strep pharyngitis (on antibiotics)
+    - Viral pharyngitis
+    - Peritonsillar abscess after drainage (if able to swallow)
+    - Mononucleosis without complications
+  follow_up:
+    - Strep throat - only if not improving in 48-72 hours
+    - Peritonsillar abscess - ENT in 24-48 hours
+    - Mononucleosis - primary care in 1 week, avoid contact sports 4 weeks
+
+references:
+  - Shulman ST et al. Clinical Practice Guideline for Diagnosis and Management of Group A Streptococcal Pharyngitis - 2012 Update by IDSA. Clin Infect Dis. 2012.
+  - Centor RM et al. The diagnosis of strep throat in adults in the emergency room. Med Decis Making. 1981.
+  - American Academy of Otolaryngology-Head and Neck Surgery. Clinical Practice Guideline - Tonsillectomy in Children. Otolaryngol Head Neck Surg. 2019.
+  - Galioto NJ. Peritonsillar Abscess. Am Fam Physician. 2017.
+
+citations:
+  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+  - British Society of Otology Guidelines
+  - UpToDate - Otolaryngology

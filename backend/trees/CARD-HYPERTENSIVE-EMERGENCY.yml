@@ -1,0 +1,71 @@
+tree_id: CARD-HYPERTENSIVE-EMERGENCY
+name: Hypertensive Emergency
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I16.9
+- I16.1
+snomed:
+- '38341003'
+urgency: urgent
+description: Comprehensive evaluation and management of Hypertensive Emergency
+version: '1.0'
+citations:
+  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+  - ESC (European Society of Cardiology) Clinical Practice Guidelines
+  - UpToDate - Cardiovascular Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- 'Severe hypertension: SBP >180 mmHg or DBP >120 mmHg'
+- Evidence of acute end-organ damage (distinguishes from urgency)
+- 'CNS: Hypertensive encephalopathy (confusion, headache, seizures, vision changes)'
+- 'Cardiac: Acute MI, acute heart failure, pulmonary edema (flash pulmonary edema)'
+- 'Renal: Acute kidney injury (Creatinine elevated, reduced urine output)'
+- 'Vascular: Aortic dissection, acute stroke (hemorrhagic or ischemic)'
+- 'Retinal: Hemorrhages, exudates, papilledema on fundoscopy (grade III-IV hypertensive
+  retinopathy)'
+- 'Hematologic: Microangiopathic hemolytic anemia (MAHA), thrombocytopenia'
+- 'Risk factors: Medication noncompliance, chronic kidney disease, stimulant use (cocaine,
+  amphetamines)'
+- Chest pain if cardiac ischemia or dissection
+- Dyspnea if pulmonary edema or heart failure
+- Nausea, vomiting if increased intracranial pressure
+workup:
+- ECG (ischemia)
+- Chest X-ray (pulmonary edema, widened mediastinum)
+- Basic metabolic panel (renal function)
+- Urinalysis (proteinuria, RBC casts)
+- Troponin (ACS)
+- CT head if neuro symptoms (stroke vs encephalopathy)
+- 'Consider: Echocardiogram, CTA chest (dissection)'
+treatment:
+- 'Guideline-based treatment options for Hypertensive Emergency include:'
+- 'IV antihypertensives: Nicardipine drip 5-15 mg/hr (preferred), or Labetalol 20mg
+  IV bolus (ACC/AHA 2023)'
+- 'Goal: Reduce MAP by 10-20% in first hour, max 25% in 24 hours (ACC/AHA 2023)'
+- 'Treat underlying emergency: Nitroprusside for dissection, diuretics for pulmonary
+  edema (ACC/AHA 2023)'
+- 'Avoid: Oral/sublingual nifedipine (unpredictable drops) (ACC/AHA 2023)'
+- ICU admission for continuous BP monitoring (ACC/AHA 2023)
+clinical_pearls:
+- Emergency = end-organ damage (needs IV meds, ICU)
+- Urgency = high BP alone (oral meds, outpatient follow-up)
+- Reduce BP 10-20% in first hour, then 25% over 24 hours (don't drop too fast!)
+- Too-rapid BP reduction can cause stroke, blindness, renal failure
+- Nicardipine or labetalol drips most common first-line agents
+referrals:
+- ICU admission for IV drip and monitoring
+- Cardiology consult
+- Nephrology if acute renal failure
+differentials:
+  - Hypertensive urgency
+  - Acute coronary syndrome
+  - Stroke
+  - Acute heart failure
+  - Acute kidney injury
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

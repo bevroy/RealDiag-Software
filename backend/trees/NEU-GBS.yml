@@ -1,0 +1,65 @@
+tree_id: NEU-GBS
+name: Guillain-Barré syndrome
+family: Neurology
+specialty: Neurology
+icd10:
+- G61.0
+snomed:
+- '40956001'
+urgency: medium
+description: Comprehensive evaluation and management of Guillain-Barré syndrome
+version: '1.0'
+citations:
+  - AAN (American Academy of Neurology) Clinical Practice Guidelines
+  - EAN (European Academy of Neurology) Guidelines
+  - UpToDate - Neurology
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- ascending weakness and areflexia
+- often follows infection
+- respiratory muscle involvement possible
+- Acute inflammatory demyelinating polyneuropathy (AIDP, 90% in US)
+- Progressive symmetric weakness over days to 4 weeks
+- 'Areflexia: Loss of deep tendon reflexes (hallmark)'
+- 'Preceding infection (70%): Campylobacter jejuni, CMV, EBV, Zika'
+workup:
+- 'LP: Elevated protein (>45 mg/dL, peaks at 4-6 weeks), normal WBC (<10 cells)'
+- 'EMG/NCS: Demyelinating features (prolonged distal latencies, conduction block,
+  slow velocities)'
+- 'Pulmonary function: Serial FVC (intubate <15 mL/kg), NIF (<-30 cmH2O concerning)'
+- 'Serology: Anti-GQ1b antibodies (Miller Fisher variant - ataxia, areflexia, ophthalmoplegia)'
+treatment:
+- 'Guideline-based treatment options for Guillain-Barré syndrome include:'
+- 'ICU monitoring: Serial FVC q4-6h, NIF (negative inspiratory force), intubate if
+  FVC <15 mL/kg or declining (AAN 2024)'
+- IVIG 0.4 g/kg/day x5 days OR plasmapheresis 5 sessions over 10-14 days (start within
+  2 weeks) (AAN 2024)
+- 'Supportive: DVT prophylaxis (heparin), monitor autonomic instability (arrhythmias,
+  BP swings), pain control (AAN 2024)'
+- 'Physical therapy: Early mobilization after acute phase to prevent contractures
+  (AAN 2024)'
+- 'Pain management: Gabapentin 300-900mg TID, carbamazepine for neuropathic pain (AAN
+  2024)'
+clinical_pearls:
+- 'Ascending paralysis: Starts legs, ascends to arms, trunk, face (30% need intubation)'
+- 'Albuminocytologic dissociation: Elevated CSF protein (>45), normal WBC count'
+- 'Respiratory monitoring: Serial FVC (intubate if <15 mL/kg or declining), NIF'
+- 'IVIG or plasmapheresis: Equally effective, shorten recovery time'
+- 'Axonal variants (Asia): Acute motor axonal neuropathy (AMAN), worse prognosis'
+- 'Recovery: Weeks to months, 80% fully recover, 5% mortality'
+referrals:
+- 'Neurology STAT: For diagnosis confirmation, IVIG vs plasmapheresis decision'
+- 'ICU admission: All GBS patients need monitoring for respiratory failure'
+- 'Physical medicine & rehab: Acute and long-term rehabilitation'
+differentials:
+  - Myasthenia gravis
+  - Botulism
+  - Tick paralysis
+  - Transverse myelitis
+  - CIDP
+trace:
+  source: American Academy of Neurology (AAN) Practice Guidelines, American Stroke
+    Association (ASA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

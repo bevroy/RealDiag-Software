@@ -1,0 +1,76 @@
+/* RealDiag backend landing styles — brand palette mirrors realdiag.org (teal+slate)
+   and typography mirrors elionyx.com (Poppins). */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --rd-brand-500:#14b8a6;
+  --rd-brand-700:#0f766e;
+  --rd-brand-900:#134e4a;
+  --rd-ink-200:#e2e8f0;
+  --rd-ink-500:#64748b;
+  --rd-ink-700:#334155;
+  --rd-ink-900:#0f172a;
+  --rd-surface:#ffffff;
+  --rd-page-bg:linear-gradient(135deg,#f0fdfa 0%,#e7f5f3 50%,#f8fafc 100%);
+  --rd-cta-gradient:linear-gradient(135deg,#14b8a6 0%,#0f766e 100%);
+  --rd-hero-gradient:linear-gradient(135deg,#0f172a 0%,#0f766e 100%);
+  --rd-radius-lg:24px;
+  --rd-radius-pill:9999px;
+  --rd-shadow-card:0 10px 30px rgba(15,23,42,0.10);
+  --rd-font-sans:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+body{
+  font-family:var(--rd-font-sans);
+  margin:0;
+  color:var(--rd-ink-900);
+  background:var(--rd-page-bg);
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3,h4,h5,h6{font-family:var(--rd-font-sans);color:var(--rd-ink-900);letter-spacing:-0.01em;margin:0 0 .5em;}
+h1{font-size:32px;font-weight:700;}
+.tagline{margin:0 0 20px;color:var(--rd-ink-500);font-size:1.05rem;}
+
+.hero{
+  background:var(--rd-hero-gradient);
+  color:#fff;
+  padding:64px 16px;
+  border-bottom:1px solid var(--rd-ink-200);
+}
+.hero h1{color:#fff;}
+.hero .tagline{color:#ccfbf1;}
+.hero-inner{max-width:980px;margin:0 auto;}
+
+.actions{margin-top:16px;}
+.button{
+  display:inline-block;
+  padding:12px 28px;
+  background:var(--rd-cta-gradient);
+  color:#fff;
+  text-decoration:none;
+  border-radius:var(--rd-radius-pill);
+  margin-right:10px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(15,118,110,0.25);
+  transition:transform .15s ease, opacity .2s ease;
+}
+.button:hover{transform:translateY(-1px);opacity:.95;}
+.button.ghost{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.6);
+  box-shadow:none;
+}
+.button.ghost:hover{background:rgba(255,255,255,0.08);}
+
+.meta{max-width:980px;margin:32px auto;padding:0 16px;}
+.meta .card,
+.meta pre{
+  background:var(--rd-surface);
+  padding:20px;
+  border-radius:var(--rd-radius-lg);
+  border:1px solid var(--rd-ink-200);
+  box-shadow:var(--rd-shadow-card);
+}
+pre{white-space:pre-wrap;}

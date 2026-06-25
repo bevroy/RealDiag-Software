@@ -1,0 +1,70 @@
+tree_id: OB-GESTATIONAL-DIABETES
+name: Gestational Diabetes Mellitus
+family: Obstetrics and Gynecology
+specialty: Obstetrics
+applies_to: female
+chief_complaint: Abnormal glucose screening in pregnancy
+description: |
+  Glucose intolerance with onset during pregnancy. Affects 6-9% of pregnancies.
+  Increases risk of macrosomia, birth trauma, neonatal hypoglycemia, cesarean delivery. Mother at increased risk for type 2 diabetes later.
+icd10: O24.419
+snomed: 11687002
+presentations:
+  - Often asymptomatic (screening diagnosis)
+  - Polyuria, polydipsia if severe
+  - Increased fetal growth (macrosomia)
+  - Risk factors: obesity, PCOS, family history
+  - Diagnosed 24-28 weeks gestation
+urgency: Moderate
+referrals:
+  emergency:
+    - Eclampsia
+    - Abruption
+    - Cord prolapse
+    - Hemorrhage
+  urgent:
+    - Preeclampsia
+    - Preterm labor
+    - IUGR
+  routine:
+    - Prenatal care
+    - GDM management
+    - Routine pregnancy
+
+workup:
+  - Universal screening at 24-28 weeks gestation (earlier if risk factors present)
+  - One-step approach - 75g oral glucose tolerance test (OGTT) fasting, abnormal if fasting greater than 92 mg/dL, 1-hour greater than 180 mg/dL, or 2-hour greater than 153 mg/dL
+  - Two-step approach - 50g glucose challenge test (GCT) non-fasting, if greater than 140 mg/dL then proceed to 100g OGTT
+  - 100g OGTT diagnostic if 2 or more values abnormal - fasting greater than 95 mg/dL, 1-hour greater than 180 mg/dL, 2-hour greater than 155 mg/dL, 3-hour greater than 140 mg/dL
+  - Hemoglobin A1c not recommended for screening or diagnosis of GDM
+  - Risk factors include obesity, prior GDM, family history of diabetes, PCOS, prior macrosomic infant
+treatment:
+  - Medical nutrition therapy (MNT) with dietitian consultation - carbohydrate-controlled diet (175g/day minimum)
+  - Self-monitoring blood glucose - fasting and 1-hour or 2-hour postprandial readings
+  - Glycemic targets - fasting less than 95 mg/dL, 1-hour postprandial less than 140 mg/dL, 2-hour postprandial less than 120 mg/dL
+  - Insulin therapy if unable to achieve targets with diet alone (20-50% require insulin)
+  - NPH and regular insulin preferred (do not cross placenta), rapid-acting analogs (lispro, aspart) safe
+  - Metformin or glyburide alternative to insulin (cross placenta, second-line)
+  - Fetal surveillance - ultrasound for growth every 3-4 weeks starting at 28-32 weeks, assess for macrosomia and polyhydramnios
+  - Antenatal testing (NST or BPP) weekly starting at 32-34 weeks if on medication
+  - Delivery timing - 39-40 weeks if well-controlled on diet alone, 37-39 weeks if on medication or poor control
+  - Consider cesarean delivery if estimated fetal weight greater than 4500g (prevent shoulder dystocia)
+clinical_pearls:
+  - GDM typically develops in second or third trimester when placental hormones peak (increase insulin resistance)
+  - Stop diabetes medications at delivery (insulin resistance resolves immediately postpartum)
+  - Screen for persistent diabetes at 4-12 weeks postpartum with 75g OGTT
+  - 50% of women with GDM develop type 2 diabetes within 10 years (annual screening recommended)
+  - Encourage breastfeeding (reduces maternal diabetes risk and infant obesity risk)
+  - Lifestyle modifications (weight loss, exercise) reduce progression to type 2 diabetes
+differentials:
+  - Pre-existing diabetes (type 1 or type 2) undiagnosed before pregnancy
+  - Impaired glucose tolerance
+  - Medication-induced hyperglycemia (corticosteroids)
+  - Pancreatic insufficiency
+trace:
+  - 50g GCT at 26 weeks shows glucose 165 mg/dL → 100g OGTT shows fasting 98 mg/dL, 1-hour 190 mg/dL, 2-hour 165 mg/dL, 3-hour 145 mg/dL (3 values abnormal) → Diagnose gestational diabetes mellitus → Dietitian consultation, carbohydrate-controlled diet → Self-monitor fasting and postprandial glucose → Fasting consistently 100-105 mg/dL despite diet → Start NPH insulin 10 units at bedtime → Glycemic targets achieved → Weekly NSTs starting at 32 weeks → Induce labor at 39 weeks → Healthy baby, no complications → 75g OGTT at 6 weeks postpartum normal → Annual screening for type 2 diabetes
+
+citations:
+  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+  - SMFM (Society for Maternal-Fetal Medicine) Clinical Guidelines
+  - UpToDate - Obstetrics

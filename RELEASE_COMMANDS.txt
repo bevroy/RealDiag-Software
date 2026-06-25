@@ -1,0 +1,91 @@
+================================================================================
+RealDiag-Software v1.0.0 - Quick Release Commands
+================================================================================
+
+STEP 1: MERGE PR
+----------------
+Action: Merge PR #2 on GitHub web interface
+URL: https://github.com/bevroy/RealDiag-Software/pull/2
+
+
+STEP 2: CREATE GITHUB RELEASE
+------------------------------
+Action: Create new release
+URL: https://github.com/bevroy/RealDiag-Software/releases/new
+
+Configuration:
+- Tag: v1.0.0
+- Target: main
+- Title: RealDiag-Software v1.0.0
+- Description: Copy from RELEASE_INSTRUCTIONS.md (Step 2, section 3)
+
+
+STEP 3: BUILD DISTRIBUTION (if needed)
+---------------------------------------
+Run these commands locally:
+
+  git clone https://github.com/bevroy/RealDiag-Software.git
+  cd RealDiag-Software
+  pip install -r requirements.txt
+  python setup.py sdist bdist_wheel
+
+Output files will be in dist/:
+  - realdiag-software-1.0.0.tar.gz
+  - realdiag_software-1.0.0-py3-none-any.whl
+
+
+STEP 4: UPLOAD ARTIFACTS TO RELEASE
+------------------------------------
+Action: Attach the distribution files to the GitHub release
+Files:
+  - dist/realdiag-software-1.0.0.tar.gz
+  - dist/realdiag_software-1.0.0-py3-none-any.whl
+
+
+VERIFICATION COMMANDS
+---------------------
+Before release, verify:
+
+  # Run tests
+  python -m unittest discover -s tests -p "test_*.py" -v
+
+  # Check version
+  python main.py --version
+
+  # Test CLI
+  python main.py --all
+
+  # Verify build
+  python setup.py check
+
+
+SHA256 CHECKSUMS
+----------------
+realdiag-software-1.0.0.tar.gz:
+4d29842b409851b2b7dbb6aec724ee4b1e024614a05ad2c1e8ee163c2062f216
+
+realdiag_software-1.0.0-py3-none-any.whl:
+2311dd0fd560ae4f9dbb30c747947e60de29b7399d06f5025556dde6e42cdb82
+
+
+QUICK LINKS
+-----------
+Repository: https://github.com/bevroy/RealDiag-Software
+Pull Request: https://github.com/bevroy/RealDiag-Software/pull/2
+New Release: https://github.com/bevroy/RealDiag-Software/releases/new
+Issues: https://github.com/bevroy/RealDiag-Software/issues
+
+
+POST-RELEASE
+------------
+After publishing the release:
+1. Delete the PR branch (optional)
+2. Update repository description/topics
+3. Monitor issues for feedback
+
+================================================================================
+Status: READY FOR RELEASE ✓
+Version: 1.0.0
+Date: 2025-11-03
+License: MIT
+================================================================================

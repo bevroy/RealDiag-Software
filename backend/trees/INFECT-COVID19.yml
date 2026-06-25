@@ -1,0 +1,89 @@
+tree_id: INFECT-COVID19
+name: COVID-19 (Coronavirus Disease 2019)
+family: Infectious Disease
+specialty: Infectious Disease, Pulmonology
+chief_complaint: Fever, cough, fatigue, loss of taste/smell
+description: Respiratory illness caused by SARS-CoV-2 virus ranging from asymptomatic to severe pneumonia and ARDS. Transmission via respiratory droplets and aerosols.
+
+icd10: U07.1
+snomed: ["840539006", "840544004"]
+
+urgency: medium-to-urgent
+
+homeopathy:
+  - remedy: "Arsenicum album 30C"
+    indications: "Anxiety, restlessness, burning sensations, worse at night, exhaustion"
+  - remedy: "Bryonia 30C"
+    indications: "Dry cough, chest pain, worse with movement, wants to lie still"
+  - remedy: "Gelsemium 30C"
+    indications: "Extreme fatigue, heavy limbs, drowsiness, aching muscles"
+  - remedy: "Phosphorus 30C"
+    indications: "Dry cough, chest tightness, anxiety, desires cold drinks"
+  - remedy: "Antimonium tartaricum 30C"
+    indications: "Productive cough with difficulty expectorating, rattling chest"
+
+differentials:
+  - Influenza
+  - Other viral pneumonia
+  - Bacterial pneumonia
+  - Allergies
+  - Common cold
+
+workup:
+  - Clinical presentation: fever, cough, fatigue, dyspnea, loss of taste (ageusia) or smell (anosmia), myalgias, headache, sore throat
+  - Incubation period: 2-14 days (median 5 days)
+  - Testing: RT-PCR (gold standard, nasal swab), rapid antigen test (less sensitive but faster), home tests available
+  - Severity assessment: mild (no dyspnea, SpO2 >94%), moderate (dyspnea, SpO2 90-94%), severe (SpO2 <90%, respiratory rate >30), critical (respiratory failure, shock, multiorgan dysfunction)
+  - Laboratory: CBC (lymphopenia common), CMP (renal function), D-dimer (elevated in severe), ferritin, CRP, procalcitonin (if bacterial superinfection suspected)
+  - Imaging: chest X-ray or CT if moderate-severe (bilateral ground-glass opacities, consolidations)
+  - Risk factors for severe disease: age >65, obesity, diabetes, cardiovascular disease, chronic lung disease, immunosuppression, chronic kidney disease, smoking
+  - Long COVID: symptoms persisting >4 weeks (fatigue, dyspnea, brain fog, POTS)
+
+treatment:
+  - Mild outpatient: supportive care, rest, hydration, acetaminophen or ibuprofen for fever/pain, pulse oximetry monitoring at home
+  - Antiviral therapy (high-risk patients within 5-7 days of symptom onset): Paxlovid (nirmatrelvir/ritonavir) 300/100 mg PO BID x5 days (preferred, reduces hospitalization by 89%), contraindicated with certain medications (check interactions)
+  - Alternative antivirals: molnupiravir 800 mg PO BID x5 days (if Paxlovid contraindicated, less effective), remdesivir (hospitalized patients)
+  - Monoclonal antibodies: efficacy varies by variant, consult current guidelines
+  - Dexamethasone 6 mg daily x10 days: hospitalized patients requiring supplemental oxygen (reduces mortality)
+  - Anticoagulation: prophylactic (enoxaparin 40 mg SC daily or heparin 5000 units SC TID) for hospitalized patients
+  - Supplemental oxygen: maintain SpO2 >90-92%, high-flow nasal cannula, non-invasive ventilation, or mechanical ventilation as needed
+  - Prone positioning: improves oxygenation in moderate-severe ARDS
+  - NOT recommended: hydroxychloroquine, ivermectin, colchicine (no proven benefit)
+  - Isolation: minimum 5 days if asymptomatic/improving and fever-free 24 hours without antipyretics, mask until day 10
+  - Prevention: vaccination (primary series plus boosters), masking in crowded indoor settings, ventilation, hand hygiene
+
+clinical_pearls:
+  - Loss of taste/smell is highly specific for COVID-19 (differentiates from other URI)
+  - Paxlovid most effective treatment for high-risk outpatients if started early (<5-7 days)
+  - Check drug interactions before prescribing Paxlovid (especially with statins, immunosuppressants)
+  - Dexamethasone reduces mortality in hospitalized patients on oxygen but harmful in mild cases
+  - Prophylactic anticoagulation for all hospitalized patients (high VTE risk)
+  - Long COVID affects 10-30% of patients, even after mild acute illness
+  - Vaccination significantly reduces risk of severe disease and long COVID
+  - Rebound COVID can occur 2-8 days after Paxlovid completion in some patients
+  - Pulse oximetry monitoring at home for high-risk patients ("silent hypoxia" can occur)
+
+referrals:
+  - Emergency department: SpO2 <90%, severe dyspnea, confusion, inability to maintain hydration
+  - Hospitalist: moderate-severe disease requiring oxygen or monitoring
+  - Pulmonology: persistent dyspnea, long COVID with respiratory symptoms
+  - Cardiology: myocarditis, arrhythmias, long COVID with cardiac symptoms
+  - Neurology: persistent neurological symptoms, encephalopathy
+
+presentations:
+  - Fever or chills
+  - Cough (typically dry initially)
+  - Fatigue, malaise
+  - Loss of taste (ageusia) or smell (anosmia)
+  - Shortness of breath, dyspnea
+  - Myalgias, body aches
+  - Headache
+  - Sore throat
+  - Congestion or runny nose
+  - Nausea, vomiting, diarrhea
+  - Brain fog, difficulty concentrating
+
+citations:
+  - IDSA (Infectious Diseases Society of America) Guidelines
+  - CDC (Centers for Disease Control and Prevention) Guidelines
+  - UpToDate - Infectious Diseases

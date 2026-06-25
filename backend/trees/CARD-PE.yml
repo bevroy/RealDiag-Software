@@ -1,0 +1,78 @@
+tree_id: CARD-PE
+name: Pulmonary embolism
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I26.9
+- I26.0
+snomed:
+- '59282003'
+urgency: medium
+description: Comprehensive evaluation and management of Pulmonary embolism
+version: '1.0'
+citations:
+  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+  - ESC (European Society of Cardiology) Clinical Practice Guidelines
+  - UpToDate - Cardiovascular Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Sudden onset dyspnea (most common symptom)
+- Pleuritic chest pain, tachycardia (HR >100)
+- Tachypnea (RR >20), hypoxia
+- Hemoptysis (less common, 10-15%)
+- 'Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state'
+- Wells criteria for risk stratification (≥4 points = high probability)
+- 'PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative'
+- 'D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)'
+workup: []
+treatment: []
+clinical_pearls:
+- CTA pulmonary angiography is gold standard for diagnosis
+- V/Q scan alternative if contrast contraindicated
+- 'Massive PE: Hemodynamic instability, consider thrombolysis'
+- Start anticoagulation immediately if high suspicion, don't wait for imaging
+- Check for DVT with duplex ultrasound (present in ~50% of PE cases)
+treatment:
+  - Immediate anticoagulation if high clinical suspicion (don't wait for imaging confirmation)
+  - Low molecular weight heparin (enoxaparin 1 mg/kg SC Q12H or 1.5 mg/kg daily) OR
+  - Unfractionated heparin IV (bolus 80 units/kg, then 18 units/kg/hr, adjust to aPTT 1.5-2.5x control) OR
+  - Direct oral anticoagulants (DOACs) - apixaban 10mg BID x7 days then 5mg BID, or rivaroxaban 15mg BID x21 days then 20mg daily
+  - 'Hemodynamically stable: Anticoagulation alone (LMWH bridge to warfarin OR DOAC)'
+  - 'Submassive PE with RV strain: Consider catheter-directed thrombolysis or systemic thrombolysis in selected cases'
+  - 'Massive PE (hemodynamically unstable): Systemic thrombolysis (alteplase 100mg IV over 2 hours) OR surgical embolectomy OR catheter-directed therapy'
+  - 'Contraindications to anticoagulation: IVC filter placement (retrievable preferred)'
+  - Supportive care - supplemental oxygen to maintain SpO2 >90%, IV fluids for hypotension (avoid excessive fluids - can worsen RV strain)
+  - Pain control with opioids if needed (avoid NSAIDs due to bleeding risk)
+  - 'Duration of anticoagulation: Provoked (surgery, immobility) - 3 months, Unprovoked or recurrent - 6-12 months or indefinite if high risk'
+  - Warfarin - target INR 2-3, overlap with heparin until INR therapeutic for 2 consecutive days
+  - Monitor for bleeding complications - most common adverse effect
+  - Compression stockings not recommended for post-PE syndrome prevention
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+differentials:
+  - Pneumonia
+  - Acute coronary syndrome
+  - Pneumothorax
+  - Pleuritis
+  - Musculoskeletal pain
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

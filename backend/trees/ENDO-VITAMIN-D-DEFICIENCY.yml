@@ -1,0 +1,76 @@
+tree_id: ENDO-VITAMIN-D-DEFICIENCY
+name: Vitamin D Deficiency
+family: Endocrinology
+specialty: Endocrinology
+chief_complaint: Low vitamin D level
+description: Inadequate vitamin D causing impaired calcium absorption and bone health. High-dose supplementation corrects deficiency, maintenance dosing prevents recurrence.
+icd10: E55.9
+snomed: 34713006
+presentations:
+  - Often asymptomatic
+  - Bone pain, muscle weakness
+  - Fatigue
+  - Increased fracture risk
+  - Osteomalacia, rickets (severe)
+  - Hypocalcemia symptoms if severe
+urgency: non-urgent
+
+referrals:
+  emergency:
+    - DKA
+    - HHS
+    - Thyroid storm
+    - Myxedema coma
+    - Adrenal crisis
+  urgent:
+    - New diabetes with poor control
+    - Thyroid nodule >4cm
+    - Severe hypercalcemia
+    - Pituitary mass
+  routine:
+    - Diabetes management
+    - Thyroid nodule surveillance
+    - Osteoporosis management
+    - Lipid disorders
+
+workup:
+  - Screening: not universally recommended, check if at-risk (osteoporosis, malabsorption, chronic kidney disease, dark skin, limited sun exposure, obesity)
+  - 25-hydroxyvitamin D (25-OH vitamin D): best indicator of vitamin D status
+  - Interpretation: deficiency below 20 ng/mL, insufficiency 20-29 ng/mL, sufficiency 30-50 ng/mL, optimal 30-50 ng/mL
+  - Toxicity rare: above 150 ng/mL (causes hypercalcemia)
+  - Secondary labs if severe deficiency: calcium (usually normal or low), PTH (elevated - secondary hyperparathyroidism), alkaline phosphatase (elevated if osteomalacia), phosphate (low)
+  - Causes: inadequate sun exposure (most common), malabsorption (celiac, IBD, bariatric surgery), chronic kidney disease (impaired activation), medications (anticonvulsants), dark skin pigmentation
+
+treatment:
+  - Repletion phase (if deficient below 20 ng/mL): high-dose ergocalciferol (vitamin D2) 50,000 IU weekly x8 weeks or cholecalciferol (vitamin D3) 6000 IU daily x8 weeks
+  - Vitamin D3 (cholecalciferol) preferred over D2 (ergocalciferol): more effective at raising and maintaining 25-OH vitamin D levels
+  - Maintenance phase (after repletion): 800-2000 IU daily lifelong (prevents recurrence)
+  - Higher maintenance if ongoing risk factors: 2000-4000 IU daily if obesity, malabsorption, dark skin
+  - Calcium supplementation: if dietary calcium inadequate, add calcium 1000-1200 mg daily (enhances vitamin D effectiveness for bone health)
+  - Recheck level: 3 months after starting repletion to confirm adequacy
+  - Goal level: 30-50 ng/mL for bone health (higher levels above 50 ng/mL no additional benefit)
+  - Address underlying cause: treat malabsorption, increase sun exposure (15 minutes several times per week), dietary sources (fatty fish, fortified dairy)
+  - Chronic kidney disease: use calcitriol (active form) instead of cholecalciferol if stage 4-5 CKD
+
+clinical_pearls:
+  - Deficiency below 20 ng/mL, insufficiency 20-29 ng/mL, sufficiency above 30 ng/mL
+  - Repletion: 50,000 IU weekly x8 weeks or 6000 IU daily x8 weeks
+  - Vitamin D3 preferred over D2
+  - Maintenance: 800-2000 IU daily lifelong prevents recurrence
+  - Goal level 30-50 ng/mL for bone health
+  - Common in dark skin, limited sun exposure, malabsorption, obesity
+  - Severe deficiency causes osteomalacia (bone pain, muscle weakness, fractures)
+  - Secondary hyperparathyroidism if prolonged deficiency
+
+differentials:
+  - Primary hyperparathyroidism: elevated calcium and PTH (vs low-normal calcium and elevated PTH in vitamin D deficiency)
+  - Osteomalacia: severe vitamin D deficiency with bone pain, proximal muscle weakness, low calcium and phosphate, elevated alkaline phosphatase
+  - Hypophosphatemia: isolated low phosphate from renal wasting or malabsorption
+
+trace: |
+  A 45-year-old woman with fatigue and generalized bone pain presented for evaluation. Office worker with limited outdoor sun exposure. Labs showed 25-OH vitamin D 14 ng/mL (deficient), calcium 8.9 mg/dL (low-normal), PTH 82 (elevated - secondary hyperparathyroidism), alkaline phosphatase 140 (mildly elevated). Diagnosed with vitamin D deficiency with secondary hyperparathyroidism. Started ergocalciferol 50,000 IU weekly x8 weeks for repletion plus calcium carbonate 600 mg BID with meals. Counseled on increasing sun exposure 15 minutes several times weekly and dietary sources (salmon, fortified milk). At 10 weeks completed repletion course, switched to cholecalciferol 2000 IU daily maintenance. At 3 months recheck showed 25-OH vitamin D 38 ng/mL (replete), calcium 9.4 (normal), PTH 52 (normalized), alkaline phosphatase 95 (normalized). Bone pain resolved, energy improved. Continues cholecalciferol 2000 IU daily maintenance indefinitely. At 12 months vitamin D level stable at 42 ng/mL on maintenance dosing.
+
+citations:
+  - Endocrine Society Clinical Practice Guidelines
+  - ADA (American Diabetes Association) Standards of Care
+  - UpToDate - Endocrinology and Diabetes

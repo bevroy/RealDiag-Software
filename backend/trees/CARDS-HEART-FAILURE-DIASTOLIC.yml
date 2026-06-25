@@ -1,0 +1,119 @@
+tree_id: CARDS-HEART-FAILURE-DIASTOLIC
+name: Heart Failure with Preserved Ejection Fraction (HFpEF)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Dyspnea on exertion with normal systolic function
+description: Heart failure with EF over 50%, diastolic dysfunction with impaired LV relaxation and filling. Common in elderly, hypertension, obesity, diabetes. No proven mortality-reducing therapy. Management focuses on diuretics for congestion, treating comorbidities (BP control, weight loss, AFib management). SGLT2 inhibitors reduce hospitalizations.
+icd10: I50.33
+snomed: 418304008
+presentations:
+  - Dyspnea on exertion, orthopnea, PND
+  - Preserved ejection fraction (HFpEF)
+  - Peripheral edema, ascites
+  - Fatigue, exercise intolerance
+  - Often hypertensive, elderly
+  - Pulmonary rales, JVD
+urgency: urgent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical presentation:
+  - Dyspnea on exertion: most common symptom
+  - Orthopnea and PND: less common than HFrEF
+  - Lower extremity edema: volume overload
+  - Exercise intolerance: diastolic dysfunction impairs cardiac output reserve
+  - Symptoms often worse with AFib (loss of atrial kick)
+  - Risk factors:
+  - Elderly: age over 65
+  - Hypertension: most common cause (LV hypertrophy, impaired relaxation)
+  - Obesity: epicardial fat, metabolic syndrome
+  - Diabetes: myocardial fibrosis
+  - Female sex: more common in women
+  - Atrial fibrillation: very common (over 50%)
+  - Physical exam:
+  - Often similar to HFrEF: elevated JVP, crackles, edema, S4 gallop (atrial kick against stiff LV)
+  - May have signs of hypertension: LV heave, loud S2
+  - Imaging:
+  - Echocardiogram: diagnostic
+  - EF over 50% (normal systolic function)
+  - Diastolic dysfunction: E/e' ratio over 14 (elevated LV filling pressures)
+  - LA enlargement (chronic elevated pressures)
+  - LV hypertrophy common
+  - Normal or small LV chamber size
+  - Chest X-ray: pulmonary edema despite normal EF
+  - Labs:
+  - BNP or NT-proBNP: often lower than HFrEF but still elevated (BNP over 100 pg/mL)
+  - Renal function, electrolytes
+  - ECG: may show LVH, AFib common
+
+treatment:
+  - No proven mortality-reducing therapy (unlike HFrEF)
+  - Diuretics: symptom relief
+  - Loop diuretic: furosemide, torsemide for congestion
+  - Cautious dosing (preload-dependent, overly aggressive diuresis worsens filling)
+  - SGLT2 inhibitor: empagliflozin or dapagliflozin
+  - Reduce HF hospitalizations in HFpEF (EMPEROR-Preserved, DELIVER trials)
+  - Blood pressure control:
+  - Goal BP under 130/80
+  - ACE inhibitor or ARB: reduce LV hypertrophy
+  - Beta blocker: if hypertension or AFib
+  - Calcium channel blocker: alternative if beta blocker intolerant
+  - Heart rate control (important for diastolic filling):
+  - Beta blocker: lengthen diastolic filling time
+  - If AFib, rate control essential (loss of atrial kick worsens HFpEF)
+  - Atrial fibrillation management:
+  - Common comorbidity (over 50%)
+  - Rhythm control may improve symptoms (restore atrial kick)
+  - Anticoagulation per CHA2DS2-VASc score
+  - Weight loss: if obese
+  - Reduces LV mass, improves diastolic function
+  - Target BMI under 30
+  - Exercise training:
+  - Improves exercise capacity, quality of life
+  - Cardiac rehab beneficial
+  - Treat comorbidities:
+  - Diabetes: tight control, SGLT2 inhibitor preferred
+  - Hypertension: aggressive control
+  - Sleep apnea: CPAP improves diastolic function
+  - Coronary disease: revascularization if ischemia
+  - Avoid: medications that worsen diastolic dysfunction (NSAIDs, thiazolidinediones)
+
+clinical_pearls:
+  - HFpEF: EF over 50%, diastolic dysfunction with impaired relaxation
+  - Common in elderly, hypertensive, obese, diabetic patients
+  - No proven mortality-reducing therapy (unlike HFrEF)
+  - SGLT2 inhibitors reduce hospitalizations
+  - Blood pressure control, weight loss, exercise most important
+  - AFib common (over 50%), rhythm control may improve symptoms
+  - Diuretics for congestion but cautious dosing (preload-dependent)
+
+differentials:
+  - HFrEF: EF under 40%, different treatment
+  - COPD: dyspnea but no elevated BNP or diastolic dysfunction
+  - Pulmonary hypertension: dyspnea, but RV dysfunction on echo
+  - Constrictive pericarditis: diastolic dysfunction but pericardial thickening
+
+trace: |
+  A 72-year-old woman with hypertension, obesity (BMI 34), and diabetes presented with 6 months progressive dyspnea on exertion. Previously walked 1 mile, now dyspneic after half block (NYHA class III). Orthopnea requiring 2 pillows. Lower extremity edema. History of paroxysmal AFib. Exam: BP 148/88 (hypertensive), BMI 34 (obese), JVP 10 cm H2O (elevated), bibasilar crackles, S4 gallop (atrial kick against stiff LV), 1+ pitting edema. Chest X-ray: mild cardiomegaly, pulmonary vascular congestion. BNP 285 pg/mL (elevated but lower than typical HFrEF). ECG: sinus rhythm (currently), LVH with strain pattern (chronic hypertension). Echocardiogram: EF 62% (preserved systolic function), grade 2 diastolic dysfunction with E/e' ratio 18 (elevated LV filling pressures - over 14 diagnostic), LA enlargement (chronic elevated pressures), concentric LV hypertrophy (from hypertension), normal LV chamber size. Diagnosed with HFpEF (EF 62% with diastolic dysfunction, clinical HF syndrome). Admitted for diuresis. IV furosemide 40 mg BID, diuresed 8 pounds over 3 days to euvolemia (JVP normalized, crackles resolved). Started medical therapy: empagliflozin 10 mg daily (SGLT2 inhibitor - reduces HFpEF hospitalizations), torsemide 20 mg daily (loop diuretic for maintenance), lisinopril 20 mg daily (ACE inhibitor for BP and LV hypertrophy), metoprolol succinate 50 mg daily (beta blocker for BP and HR control - lengthen diastolic filling time). Counseled on weight loss (diet and exercise), sodium restriction under 2 grams daily, daily weights. At 1 month: outpatient follow-up, BP 158/92 still elevated (not at goal under 130/80), uptitrated lisinopril to 40 mg daily. Symptoms improved, NYHA class II. At 3 months: lost 12 pounds from diet and exercise (excellent compliance), BP 128/78 (at goal), dyspnea much improved. Repeat echo: E/e' ratio improved from 18 to 15 (still elevated but better), LV mass index decreased (weight loss and BP control reducing LV hypertrophy). At 6 months: experienced AFib with RVR episode, dyspnea worsened acutely (loss of atrial kick worsens HFpEF, rapid HR shortens diastolic filling). Converted to sinus rhythm with IV diltiazem, increased metoprolol to 100 mg daily. Given recurrent symptomatic AFib in HFpEF patient, discussed rhythm control strategy. Started amiodarone 200 mg daily (rhythm control - restore atrial kick), continued anticoagulation with apixaban (CHA2DS2-VASc score 4 - high stroke risk). At 1 year: maintained sinus rhythm on amiodarone (rhythm control successful), weight down 25 pounds (BMI decreased from 34 to 30), BP consistently under 130/80, HbA1c improved from 7.8% to 6.9%. Symptoms NYHA class I-II, exercise tolerance excellent. Repeat echo: EF 65%, E/e' ratio 13 (improved from 18 - better diastolic function), LA size decreased (lower chronic pressures), LV mass index normalized (reversal of LV hypertrophy from BP control and weight loss). No HF hospitalizations. HFpEF successfully managed with weight loss, BP control, SGLT2 inhibitor, rhythm control for AFib, and diuretics.
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature

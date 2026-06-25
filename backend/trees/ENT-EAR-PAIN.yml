@@ -1,0 +1,632 @@
+tree_id: ENT-EAR-PAIN
+name: Ear Pain / Otalgia
+id: ENT-EAR-PAIN
+title: Ear Pain (Otalgia) Diagnostic Tree
+family: Otolaryngology
+specialty: Otolaryngology/Emergency Medicine/Primary Care
+version: 1.0
+icd10: H92.00
+snomed: 16001004
+presentations:
+  - Otalgia (ear pain)
+  - May be referred (TMJ, dental)
+  - Associated hearing loss, discharge
+  - Fever (if infection)
+  - Tugging at ear (children)
+  - Recent URI, swimming
+last_updated: 2025-11-20
+evidence_level: AAO-HNS Clinical Practice Guidelines
+entry: initial_assessment
+
+workup:
+  - Otoscopy: assess tympanic membrane (bulging, erythema, effusion, perforation)
+  - Pneumatic otoscopy to assess TM mobility
+  - Tympanometry if chronic/recurrent OM or effusion
+  - CT temporal bones if suspect mastoiditis or complications
+  - Audiometry if hearing loss or chronic OM
+  - Consider throat exam (referred pain from pharyngitis) and TMJ assessment
+
+treatment:
+  - Otitis media: amoxicillin 500mg PO TID x5-7 days (or 10 days if <2 years)
+  - Amoxicillin failure: amoxicillin-clavulanate 875mg BID
+  - Penicillin allergy: azithromycin or cefdinir
+  - Otitis externa: ciprofloxacin-dexamethasone otic drops QID x7 days
+  - Pain control: ibuprofen 400mg PO q6h, acetaminophen 1000mg PO q6h
+  - Mastoiditis: IV antibiotics (ceftriaxone), ENT consult, consider CT
+
+clinical_pearls:
+  - Otitis media most common cause in children, otitis externa in adults
+  - Normal TM rules out acute otitis media
+  - Swimming history suggests otitis externa (swimmer's ear)
+  - Tragal tenderness highly specific for otitis externa
+  - Referred otalgia (normal ear exam) - dental, TMJ, pharyngeal, cervical causes
+  - Malignant otitis externa (necrotizing) in diabetics and immunocompromised
+
+red_flags:
+  - Cranial nerve palsy (facial nerve VII, malignant otitis externa)
+  - Severe headache, altered mental status (intracranial extension)
+  - Mastoid tenderness, postauricular swelling (mastoiditis)
+  - Uncontrolled diabetes + OE (malignant otitis externa risk)
+  - Severe otalgia with normal ear exam (occult malignancy)
+  - Perichondritis (cartilage infection, auricular deformity risk)
+
+differentials:
+  - Otitis media
+  - Otitis externa
+  - TMJ disorder
+  - Dental pain
+  - Pharyngitis (referred)
+
+referrals:
+  emergency:
+    - Mastoiditis
+    - Temporal bone osteomyelitis
+  urgent:
+    - Persistent otitis media
+    - Hearing loss
+  routine:
+    - Chronic ear pain
+    - Hearing evaluation
+nodes:
+- id: initial_assessment
+  when: {}
+  description: Initial ear pain evaluation
+  tests:
+  - Otoscopic examination (TM appearance, perforation, discharge)
+  - Tragal tenderness test (pull on tragus)
+  - Mastoid tenderness (palpate behind ear)
+  - Cranial nerve VII function (facial symmetry, smile, eye closure)
+  - Oral cavity, pharynx, dentition examination (referred pain)
+  - TMJ palpation, range of motion
+  - Cervical lymph node examination
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - facial_weakness
+      - severe_headache
+      - altered_mental_status
+    go: complicated_infection
+  - when:
+      exam_findings_any:
+      - postauricular_swelling
+      - mastoid_tenderness
+      - protruding_auricle
+    go: mastoiditis
+  - when:
+      all_of:
+      - otoscopy: abnormal_TM
+      - age: '<18'
+    go: otitis_media
+  - when:
+      all_of:
+      - tragal_tenderness: positive
+      - otoscopy: normal_TM_or_canal_inflammation
+    go: otitis_externa
+  - when:
+      exam_findings: foreign_body_visible
+    go: foreign_body
+  - when:
+      all_of:
+      - otoscopy: normal
+      - referred_pain_source: identified
+    go: referred_otalgia
+  - default: otitis_externa_assessment
+
+- id: complicated_infection
+  when:
+    symptoms_contains_any:
+    - facial_weakness
+    - cranial_neuropathy
+    - severe_headache
+    - altered_mental_status
+  description: Complicated otologic infection with intracranial or cranial nerve involvement
+  tests:
+  - Cranial nerve examination (especially CN VII, VI, IX, X, XI, XII)
+  - Otoscopic exam
+  - CT temporal bones without contrast (evaluate mastoid, middle ear)
+  - MRI brain with and without contrast (if intracranial extension suspected)
+  - CBC, CMP, ESR, CRP
+  - Blood cultures
+  suggest_dx:
+  - Malignant (necrotizing) otitis externa (P. aeruginosa)
+  - Intracranial extension - meningitis, epidural abscess, brain abscess
+  - Sigmoid sinus thrombosis
+  - Petrous apicitis (Gradenigo syndrome - CN VI palsy, facial pain)
+  referrals:
+  - ENT STAT
+  - Neurosurgery if intracranial complication
+  - Infectious disease
+  - ICU admission
+  management:
+  - Admit immediately
+  - IV antibiotics (antipseudomonal)
+    - Piperacillin-tazobactam 4.5g IV q6h
+    - Or cefepime 2g IV q8h + vancomycin 15 mg/kg IV q12h
+    - Or meropenem 2g IV q8h
+  - Surgical debridement if malignant OE with osteomyelitis
+  - Hyperbaric oxygen (adjunct for malignant OE)
+  - Long-term antibiotics (4-6 weeks IV, then PO fluoroquinolone)
+  - Neurosurgery if abscess drainage needed
+  next:
+  - default: null
+
+- id: mastoiditis
+  when:
+    exam_findings_any:
+    - postauricular_swelling
+    - mastoid_tenderness
+    - protruding_auricle
+    - postauricular_erythema
+  description: Acute mastoiditis
+  tests:
+  - Otoscopy - often abnormal TM (bulging, perforation)
+  - CT temporal bones without contrast
+    - Mastoid air cell opacification
+    - Bone destruction
+    - Subperiosteal abscess
+  - CBC, CMP, blood cultures
+  - Tympanocentesis (if no perforation) - culture and sensitivity
+  suggest_dx:
+  - Acute mastoiditis (H70.0)
+  - Usually S. pneumoniae, H. influenzae, S. pyogenes, S. aureus (including MRSA)
+  - Complication of acute otitis media
+  referrals:
+  - ENT STAT
+  - Admit for IV antibiotics
+  - Surgical consultation (may need mastoidectomy)
+  management:
+  - IV antibiotics
+    - Ceftriaxone 2g IV daily + vancomycin 15 mg/kg IV q12h
+    - Or ampicillin-sulbactam 3g IV q6h + vancomycin
+  - Tympanocentesis or myringotomy (drain middle ear)
+  - Mastoidectomy if
+    - Subperiosteal abscess
+    - Coalescent mastoiditis (bony destruction)
+    - Failed medical therapy after 48-72 hours
+    - Intracranial complications
+  - Serial CT if not improving
+  - Switch to PO antibiotics when improving (complete 3-4 weeks total)
+  complications:
+  - Subperiosteal abscess
+  - Bezold abscess (tracks to neck)
+  - Intracranial extension (meningitis, epidural abscess, brain abscess)
+  - Sigmoid sinus thrombosis
+  - Facial nerve palsy
+  next:
+  - default: null
+
+- id: otitis_media
+  when:
+    otoscopy: abnormal_TM
+  description: Acute otitis media evaluation
+  tests:
+  - Pneumatic otoscopy (reduced TM mobility)
+  - TM appearance
+    - Bulging, erythema, opacity
+    - Air-fluid level or bubbles
+    - Perforation with purulent drainage
+  - Hearing assessment (may have conductive hearing loss)
+  suggest_dx: []
+  next:
+  - when:
+      exam_findings_any:
+      - TM_perforation
+      - otorrhea
+    go: perforated_otitis_media
+  - when:
+      all_of:
+      - TM: bulging_or_erythema
+      - symptoms: acute_onset
+    go: acute_otitis_media
+  - when:
+      all_of:
+      - TM: retracted_or_bubbles
+      - symptoms: chronic_or_recurrent
+    go: otitis_media_with_effusion
+  - default: acute_otitis_media
+
+- id: acute_otitis_media
+  when:
+    TM: bulging_or_erythema
+  description: Acute otitis media (AOM)
+  tests:
+  - Clinical diagnosis based on otoscopy
+  - Pneumatic otoscopy (reduced mobility)
+  - Tympanometry (Type B - flat curve)
+  suggest_dx:
+  - Acute otitis media (H66.9)
+  - S. pneumoniae, H. influenzae, M. catarrhalis, S. pyogenes
+  referrals:
+  - ENT if recurrent (≥3 episodes in 6 months or ≥4 in 1 year)
+  - Audiology if persistent hearing loss
+  management:
+  - Observation (watchful waiting) if
+    - Age ≥6 months
+    - Non-severe illness (mild otalgia, fever <39°C)
+    - Unilateral disease in age ≥2 years
+    - Follow-up ensured in 48-72 hours
+  - Antibiotics indicated if
+    - Age <6 months (always treat)
+    - Severe illness (moderate-severe otalgia, fever ≥39°C)
+    - Bilateral AOM in age <2 years
+    - TM perforation with otorrhea
+  - First-line antibiotic
+    - Amoxicillin 80-90 mg/kg/day divided BID (high-dose), max 3000 mg/day, duration 10 days if age <2 or severe, 5-7 days if age ≥2 and mild-moderate
+  - Penicillin allergy (non-severe)
+    - Cefdinir 14 mg/kg/day divided BID
+    - Or cefuroxime 30 mg/kg/day divided BID
+  - Penicillin allergy (severe/anaphylaxis)
+    - Azithromycin 10 mg/kg day 1, then 5 mg/kg days 2-5
+  - Failed initial therapy (not improved after 48-72 hours)
+    - Amoxicillin-clavulanate 90 mg/kg/day (of amoxicillin) divided BID
+  - Pain management
+    - Ibuprofen or acetaminophen
+    - Benzocaine otic drops (if TM intact, age >5)
+  patient_education:
+  - No benefit to antihistamines or decongestants
+  - Follow-up if not improving in 48-72 hours
+  - Hearing may be decreased temporarily (OME may persist)
+  - Hearing check in 3 months if effusion present
+  next:
+  - default: null
+
+- id: perforated_otitis_media
+  when:
+    exam_findings: TM_perforation
+  description: Perforated tympanic membrane with otorrhea
+  tests:
+  - Otoscopy - perforation visible, purulent drainage
+  - Culture otorrhea (if chronic or recurrent)
+  - Audiometry (once acute infection resolved)
+  suggest_dx:
+  - Perforated tympanic membrane with AOM (H66.0)
+  referrals:
+  - ENT follow-up in 3-4 weeks
+    - Most TM perforations heal spontaneously in 2-3 months
+    - May need tympanoplasty if not healed
+  management:
+  - Topical antibiotic drops (preferred over oral)
+    - Ofloxacin 0.3% otic drops 10 drops BID x 7-10 days
+    - Or ciprofloxacin-dexamethasone otic drops 4 drops BID x 7 days
+  - Oral antibiotics if severe or systemic symptoms
+    - Amoxicillin-clavulanate 875/125 mg PO BID x 10 days
+  - Keep ear dry (no swimming, earplugs in shower)
+  - Pain management
+  patient_education:
+  - Most perforations heal spontaneously
+  - Keep water out of ear
+  - ENT follow-up to confirm healing
+  - May need tympanoplasty if not healed in 3 months
+  next:
+  - default: null
+
+- id: otitis_media_with_effusion
+  when:
+    TM: effusion_or_bubbles
+  description: Otitis media with effusion (OME) - fluid without acute infection
+  tests:
+  - Otoscopy - air-fluid level, bubbles, retracted TM
+  - Pneumatic otoscopy (reduced TM mobility)
+  - Tympanometry (Type B flat curve)
+  - Audiometry if persistent >3 months
+  suggest_dx:
+  - Otitis media with effusion (H65.9)
+  - Post-viral, Eustachian tube dysfunction
+  referrals:
+  - ENT if persistent >3 months with hearing loss
+  - May need tympanostomy tubes if
+    - Persistent effusion ≥3 months with hearing loss
+    - Recurrent AOM despite OME
+    - Speech delay or learning problems
+  management:
+  - Observation (most resolve spontaneously in 3 months)
+  - NO antibiotics (not effective for OME)
+  - Intranasal corticosteroids if allergic rhinitis present
+  - Audiometry at 3 months if persistent
+  - Tympanostomy tubes if indicated
+  patient_education:
+  - Not an infection, no antibiotics needed
+  - Usually resolves on its own
+  - May cause temporary hearing loss (like underwater)
+  - Follow-up in 3 months
+  next:
+  - default: null
+
+- id: otitis_externa_assessment
+  when: {}
+  description: Otitis externa evaluation
+  tests:
+  - Otoscopy - canal edema, erythema, debris
+  - Tragal tenderness (pull tragus - painful)
+  - TM often difficult to visualize due to canal swelling
+  - Otorrhea culture if severe or immunocompromised
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - patient_characteristics_any:
+        - diabetes
+        - immunocompromised
+        - elderly
+      - symptoms: severe_pain
+    go: malignant_otitis_externa
+  - when:
+      exam_findings_any:
+      - auricular_erythema
+      - auricular_swelling
+      - perichondrial_involvement
+    go: perichondritis
+  - default: otitis_externa
+
+- id: otitis_externa
+  when:
+    exam_findings: external_canal_inflammation
+  description: Acute otitis externa (swimmer's ear)
+  tests:
+  - Otoscopy - canal erythema, edema, debris, possible otorrhea
+  - Tragal tenderness
+  - Culture if severe, recurrent, or immunocompromised
+  suggest_dx:
+  - Acute otitis externa (H60.5)
+  - P. aeruginosa, S. aureus, fungi (Aspergillus, Candida)
+  referrals:
+  - ENT if severe canal stenosis (may need wick placement)
+  - ENT if not responding to treatment in 48-72 hours
+  management:
+  - Topical antibiotic drops (first-line)
+    - Ciprofloxacin-dexamethasone 0.3%/0.1% 4 drops BID x 7 days
+    - Or ofloxacin 0.3% 10 drops BID x 7 days
+    - Or neomycin-polymyxin-hydrocortisone 4 drops TID-QID x 7 days (avoid if TM perforation)
+  - Wick placement if canal severely stenotic
+    - Insert wick, saturate with antibiotic drops
+    - Remove wick in 24-48 hours once swelling decreased
+  - Oral antibiotics if
+    - Cellulitis extending beyond canal
+    - Immunocompromised
+    - Diabetes
+    - Failed topical therapy
+    - Ciprofloxacin 500mg PO BID x 7-10 days
+  - Pain management
+    - Ibuprofen or acetaminophen
+    - Opioids if severe pain
+  - Ear hygiene
+    - Gentle cleansing, suction debris (in office)
+    - Do NOT use cotton swabs
+  patient_education:
+  - Keep ear dry (no swimming until healed)
+  - Earplugs with petroleum jelly in shower
+  - Avoid cotton swabs (trauma risk)
+  - Prevention - acetic acid 2% drops after swimming (acidify canal)
+  - Warm compress for pain
+  complications:
+  - Malignant otitis externa (diabetics, immunocompromised)
+  - Perichondritis (cartilage infection)
+  - Hearing loss (temporary from edema)
+  next:
+  - default: null
+
+- id: malignant_otitis_externa
+  when:
+    all_of:
+    - patient_characteristics_any:
+      - diabetes
+      - immunocompromised
+    - symptoms: severe_otalgia
+  description: Malignant (necrotizing) otitis externa
+  tests:
+  - Otoscopy - granulation tissue at bony-cartilaginous junction (pathognomonic)
+  - CT temporal bones without contrast (bony erosion)
+  - MRI temporal bones with contrast (soft tissue extension)
+  - ESR, CRP (usually markedly elevated, >100)
+  - Biopsy granulation tissue (rule out malignancy, culture)
+  - Gallium or technetium bone scan (assess extent of osteomyelitis)
+  - Cranial nerve exam (especially CN VII)
+  suggest_dx:
+  - Malignant otitis externa (H60.2)
+  - P. aeruginosa (90%)
+  referrals:
+  - ENT STAT
+  - Infectious disease
+  - Admit if severe, cranial neuropathy, or systemic toxicity
+  management:
+  - Admit if
+    - Cranial nerve involvement
+    - Severe disease
+    - Unable to tolerate PO
+    - Extensive bony involvement
+  - Antibiotics (long-term, 4-6 weeks minimum)
+    - IV initially (at least 2 weeks)
+      - Cefepime 2g IV q8h + tobramycin 5-7 mg/kg IV q24h
+      - Or piperacillin-tazobactam 4.5g IV q6h
+      - Or meropenem 1g IV q8h
+    - Transition to PO fluoroquinolone when improving
+      - Ciprofloxacin 750mg PO BID (complete 4-6 weeks total)
+  - Surgical debridement if extensive necrosis
+  - Hyperbaric oxygen (adjunct therapy)
+  - Tight glucose control
+  - Monitor ESR/CRP (trend to assess response)
+  - Follow-up CT/MRI to assess healing
+  - ENT follow-up every 1-2 weeks until healed
+  complications:
+  - Cranial neuropathy (CN VII most common)
+  - Skull base osteomyelitis
+  - Temporomandibular joint involvement
+  - Intracranial extension (meningitis, brain abscess)
+  - Death (rare with modern treatment)
+  next:
+  - default: null
+
+- id: perichondritis
+  when:
+    exam_findings_any:
+    - auricular_erythema
+    - auricular_swelling
+    - auricular_tenderness
+  description: Perichondritis of the auricle
+  tests:
+  - Exam - auricular swelling, erythema, tenderness
+  - Sparing of earlobe (no cartilage in lobe)
+  - History of trauma, piercing (especially cartilage piercing)
+  - Culture if purulent drainage
+  suggest_dx:
+  - Perichondritis (H61.0)
+  - P. aeruginosa, S. aureus (including MRSA)
+  referrals:
+  - ENT if severe or not responding to treatment
+  - Admit if systemic toxicity, abscess, or severe
+  management:
+  - Oral antibiotics (antipseudomonal)
+    - Ciprofloxacin 750mg PO BID x 14-21 days
+    - If MRSA suspected, add
+      - Doxycycline 100mg PO BID
+      - Or TMP-SMX DS PO BID
+  - IV antibiotics if severe
+    - Piperacillin-tazobactam 4.5g IV q6h
+    - Or ceftazidime 2g IV q8h + vancomycin 15 mg/kg IV q12h
+  - Incision and drainage if abscess present
+  - Remove foreign body (earring)
+  - Warm compresses
+  - Pain management
+  complications:
+  - Auricular deformity (cauliflower ear)
+  - Cartilage necrosis
+  - Chronic perichondritis
+  patient_education:
+  - Do NOT pierce cartilage (high infection risk)
+  - Complete full antibiotic course
+  next:
+  - default: null
+
+- id: foreign_body
+  when:
+    exam_findings: foreign_body
+  description: Ear canal foreign body
+  tests:
+  - Otoscopy - visualize foreign body
+  - Assess TM integrity (if visible)
+  suggest_dx:
+  - Foreign body in ear (T16)
+  - Common objects: beads, insects, cotton, food
+  referrals:
+  - ENT if
+    - Unable to remove safely
+    - Button battery (emergent removal required)
+    - Sharp object near TM
+    - Multiple failed attempts
+  management:
+  - Removal techniques (depending on object)
+    - Alligator forceps (irregular objects)
+    - Suction (soft objects)
+    - Irrigation (NOT for button batteries, organic material that swells, TM perforation)
+    - Right-angle hook (round smooth objects)
+    - Cyanoacrylate glue on wooden applicator (smooth round objects)
+  - Button battery - EMERGENT removal (liquefaction necrosis)
+  - Live insect - kill first
+    - 2% lidocaine or mineral oil in canal (suffocate insect)
+    - Then remove with forceps or irrigation
+  - Do NOT attempt if
+    - Button battery (ENT emergently)
+    - Multiple failed attempts (risk pushing deeper, TM perforation)
+    - Sharp object near TM
+    - Uncooperative patient (especially child)
+  - Post-removal
+    - Re-examine TM (ensure no perforation)
+    - Antibiotic drops if canal trauma
+      - Ofloxacin 0.3% 5 drops BID x 3-5 days
+  patient_education:
+  - Keep small objects away from children
+  - Do NOT use cotton swabs (can push objects deeper)
+  next:
+  - default: null
+
+- id: referred_otalgia
+  when:
+    otoscopy: normal
+  description: Referred otalgia (normal ear exam)
+  tests:
+  - Oral cavity and dentition exam
+  - Pharyngeal examination
+  - TMJ examination (palpation, range of motion, crepitus)
+  - Cranial nerve exam
+  - Neck examination (masses, lymphadenopathy)
+  - Nasopharyngoscopy (if >40 years old with persistent otalgia)
+  suggest_dx:
+  - Dental pathology (caries, abscess, pericoronitis)
+  - TMJ dysfunction
+  - Pharyngitis, tonsillitis
+  - Nasopharyngeal carcinoma (consider in adults >40)
+  - Cervical spine pathology
+  - Trigeminal neuralgia
+  - Glossopharyngeal neuralgia
+  - Eagle syndrome (elongated styloid process)
+  referrals:
+  - Dentist if dental pathology
+  - ENT if persistent unexplained otalgia (rule out malignancy)
+  - Neurology if neuralgia suspected
+  management:
+  - Treat underlying cause
+  - TMJ dysfunction
+    - NSAIDs
+    - Soft diet
+    - Jaw exercises
+    - Avoid chewing gum
+    - Nightguard if bruxism
+  - Nasopharyngoscopy if >40 years old and persistent (rule out nasopharyngeal CA)
+  next:
+  - default: null
+
+differential_diagnosis:
+  primary_otologic:
+    - Acute otitis media (most common in children)
+    - Otitis externa (most common in adults, swimmers)
+    - Malignant otitis externa (diabetics, immunocompromised)
+    - Mastoiditis (complication of AOM)
+    - Perichondritis (trauma, piercing)
+    - TM perforation (traumatic or infectious)
+    - Otitis media with effusion
+    - Foreign body
+    - Cerumen impaction
+    - Cholesteatoma
+    - Barotrauma
+  referred_otalgia:
+    - Dental pathology (caries, abscess, impacted tooth)
+    - TMJ dysfunction
+    - Pharyngitis, tonsillitis
+    - Nasopharyngeal carcinoma
+    - Glossopharyngeal neuralgia
+    - Trigeminal neuralgia
+    - Cervical spine pathology
+    - Eagle syndrome
+    - Myofascial pain
+    - Parotid pathology
+
+disposition_guidance:
+  admit:
+    - Mastoiditis (IV antibiotics)
+    - Malignant otitis externa with complications
+    - Severe perichondritis with systemic toxicity
+    - Intracranial complications (meningitis, abscess)
+  discharge:
+    - Uncomplicated AOM with observation or antibiotics
+    - Otitis externa with topical antibiotics
+    - Foreign body removed successfully
+    - Referred otalgia with identified cause
+  follow_up:
+    - AOM - only if not improved in 48-72 hours
+    - AOM with effusion - 3 months (hearing check)
+    - Otitis externa - only if not improved in 48-72 hours
+    - Malignant OE - ENT every 1-2 weeks until healed
+    - Recurrent AOM - ENT (consider tubes)
+    - Persistent otalgia with normal exam - ENT (nasopharyngoscopy)
+
+references:
+  - Lieberthal AS et al. AAP/AAFP Clinical Practice Guideline - Diagnosis and Management of Acute Otitis Media. Pediatrics. 2013.
+  - Rosenfeld RM et al. AAO-HNS Clinical Practice Guideline - Acute Otitis Externa. Otolaryngol Head Neck Surg. 2014.
+  - Rosenfeld RM et al. AAO-HNS Clinical Practice Guideline - Otitis Media with Effusion. Otolaryngol Head Neck Surg. 2016.
+  - Sander R. Otitis Externa - A Practical Guide to Treatment and Prevention. Am Fam Physician. 2001.
+
+citations:
+  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+  - British Society of Otology Guidelines
+  - UpToDate - Otolaryngology

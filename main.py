@@ -14,12 +14,17 @@ try:
     from colorama import init, Fore, Style
     init(autoreset=True)
     COLORS_AVAILABLE = True
+<<<<<<< HEAD
     COLOR_RESET = Style.RESET_ALL
 except ImportError:
     COLORS_AVAILABLE = False
     COLOR_RESET = ""
     Fore = None
     Style = None
+=======
+except ImportError:
+    COLORS_AVAILABLE = False
+>>>>>>> origin/main
 
 from config import Config
 from diagnostics import SystemDiagnostics, NetworkDiagnostics, PerformanceMonitor
@@ -28,7 +33,11 @@ from diagnostics import SystemDiagnostics, NetworkDiagnostics, PerformanceMonito
 def print_colored(text, color=None):
     """Print colored text if colorama is available"""
     if COLORS_AVAILABLE and color:
+<<<<<<< HEAD
         print(f"{color}{text}{COLOR_RESET}")
+=======
+        print(f"{color}{text}{Style.RESET_ALL}")
+>>>>>>> origin/main
     else:
         print(text)
 

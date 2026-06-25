@@ -1,0 +1,64 @@
+tree_id: PULM-SLEEP-APNEA
+name: Obstructive Sleep Apnea
+family: pulmonology
+specialty: Pulmonology
+icd10:
+- G47.33
+snomed:
+- '78275009'
+urgency: medium
+description: Comprehensive evaluation and management of Obstructive Sleep Apnea
+version: '1.0'
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Loud snoring
+- Witnessed apneic episodes
+- Excessive daytime sleepiness
+- Morning headaches
+- Obesity
+- Hypertension
+workup:
+- 'Polysomnography (in-lab sleep study): Gold standard, measures AHI, oxygen desaturation,
+  sleep stages'
+- 'Home sleep apnea test (HSAT): Limited channels, lower cost, for high pretest probability'
+- 'Epworth Sleepiness Scale (ESS): Subjective daytime sleepiness assessment'
+- ECG, echocardiogram if concern for arrhythmia or pulmonary hypertension
+treatment:
+- 'Guideline-based treatment options for Obstructive Sleep Apnea include:'
+- CPAP (continuous positive airway pressure) first-line therapy - use >4 hours/night
+  for benefit (ATS 2023)
+- Weight loss (10% reduces AHI by 25%), avoid alcohol/sedatives before bed (ATS 2023)
+- Positional therapy if supine-predominant OSA (sleep on side) (ATS 2023)
+- Oral appliance (mandibular advancement device) if mild-moderate OSA or CPAP intolerant
+  (ATS 2023)
+- Surgery (uvulopalatopharyngoplasty, septoplasty) if anatomic obstruction or failed
+  medical therapy (ATS 2023)
+clinical_pearls:
+- 'Apnea-Hypopnea Index (AHI): Mild 5-15, Moderate 15-30, Severe >30 events/hour'
+- 'STOP-BANG score predicts OSA risk: Snoring, Tired, Observed apnea, Pressure (HTN),
+  BMI >35, Age >50, Neck >40cm, Gender (male)'
+- CPAP reduces cardiovascular events (stroke, MI), improves daytime sleepiness
+- 'Central sleep apnea: Brain doesn''t signal breathing (heart failure, opioids) -
+  different treatment'
+- 'Untreated OSA increases risk: HTN (50%), atrial fibrillation, stroke, MI, diabetes'
+referrals:
+- Sleep medicine for polysomnography and CPAP titration
+- ENT if anatomic obstruction (enlarged tonsils, severe septal deviation) or surgical
+  candidate
+- Bariatric surgery consultation if BMI >40 and weight loss unsuccessful
+differentials:
+  - Insomnia
+  - Narcolepsy
+  - Depression
+  - Hypothyroidism
+  - Heart failure
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

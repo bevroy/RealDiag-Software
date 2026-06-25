@@ -1,0 +1,86 @@
+tree_id: NEURO-VERTIGO
+name: Vertigo and Dizziness
+family: Neurology
+specialty: Neurology, ENT, Primary Care
+chief_complaint: Spinning sensation, dizziness, imbalance
+description: Sensation of motion (usually spinning) when no motion occurring. Can be peripheral (inner ear) or central (brainstem/cerebellum) in origin.
+
+icd10: H81.9
+snomed: ["399153001", "404640003"]
+
+urgency: medium
+
+homeopathy:
+  - remedy: "Conium maculatum 30C"
+    indications: "Vertigo worse lying down, turning in bed, elderly patients"
+  - remedy: "Cocculus 30C"
+    indications: "Vertigo with nausea, worse from motion, loss of sleep, car sickness"
+  - remedy: "Gelsemium 30C"
+    indications: "Vertigo with visual disturbances, heavy eyelids, weakness"
+  - remedy: "Bryonia 30C"
+    indications: "Vertigo worse from any movement, nausea, wants to lie still"
+  - remedy: "Petroleum 30C"
+    indications: "Motion sickness, nausea, worse in car/boat, occipital headache"
+
+differentials:
+  - BPPV
+  - Vestibular neuritis
+  - Meniere disease
+  - Stroke
+  - Migraine
+
+workup:
+  - Distinguish vertigo (spinning) from dizziness (lightheadedness), pre-syncope, disequilibrium
+  - Peripheral vertigo (inner ear): BPPV (benign paroxysmal positional vertigo), vestibular neuritis, Ménière disease, labyrinthitis
+  - Central vertigo (brainstem/cerebellum): stroke, TIA, multiple sclerosis, tumor, migraine
+  - BPPV (most common cause 50%): brief episodes (<1 minute) triggered by head position changes, no hearing loss or tinnitus, Dix-Hallpike test positive (rotatory nystagmus with latency), posterior canal most common
+  - Vestibular neuritis: sudden severe vertigo lasting hours-days, nausea/vomiting, no hearing loss, horizontal nystagmus, head impulse test positive
+  - Labyrinthitis: vertigo plus hearing loss (viral infection affecting both vestibular and cochlear nerves)
+  - Ménière disease: episodic vertigo (20 minutes to hours), fluctuating hearing loss, tinnitus, aural fullness (classic triad)
+  - Central vertigo red flags: sudden severe headache, diplopia, dysarthria, dysphagia, ataxia, focal weakness/numbness, vertical or direction-changing nystagmus, negative head impulse test
+  - HINTS exam (for acute vestibular syndrome): Head Impulse test, Nystagmus pattern, Test of Skew - helps distinguish central from peripheral
+  - MRI brain if central vertigo suspected (stroke, MS, tumor)
+  - Audiometry if hearing loss present (Ménière, labyrinthitis, acoustic neuroma)
+
+treatment:
+  - BPPV: Epley maneuver (canalith repositioning) - 80% cure rate with single treatment, Semont maneuver alternative, Brandt-Daroff exercises for home use
+  - Vestibular neuritis: vestibular suppressants for acute phase only (meclizine 25 mg TID, dimenhydrinate 50 mg Q6H, promethazine 25 mg Q6H) - use <3 days to avoid delayed compensation, prednisone 60 mg daily x3 days then taper (improves recovery), vestibular rehabilitation exercises after acute phase (promote central compensation)
+  - Ménière disease: low-salt diet (<1.5 grams/day), diuretics (hydrochlorothiazide 25 mg daily), betahistine 16 mg TID (not FDA approved in US), intratympanic gentamicin or surgery if refractory
+  - Vestibular migraine: migraine prophylaxis (propranolol, topiramate, verapamil), avoid triggers
+  - Central vertigo: treat underlying cause (stroke, MS, tumor)
+  - Symptomatic relief: meclizine 25 mg TID PRN, ondansetron 4-8 mg for nausea
+  - Avoid prolonged use of vestibular suppressants (>3 days) - delays compensation
+
+clinical_pearls:
+  - BPPV is most common cause of vertigo (50%) - diagnose with Dix-Hallpike, treat with Epley
+  - Vestibular neuritis second most common - treat with short course suppressants plus steroids
+  - Central vertigo less common but more serious - look for HINTS red flags
+  - Ménière disease classic triad: episodic vertigo, hearing loss, tinnitus
+  - Vestibular suppressants (meclizine) only for acute phase <3 days - prolonged use delays recovery
+  - Vestibular rehabilitation therapy promotes central compensation and recovery
+  - Vertical nystagmus or direction-changing nystagmus suggests central cause
+  - Head impulse test normal in central vertigo, abnormal in peripheral
+  - BPPV episodes typically <1 minute, vestibular neuritis hours-days
+  - Epley maneuver highly effective for BPPV - can teach patients to do at home
+
+referrals:
+  - ENT: Ménière disease, persistent BPPV, hearing loss, suspected acoustic neuroma
+  - Neurology: suspected central vertigo, vestibular migraine, multiple sclerosis
+  - Emergency department: acute vertigo with neurologic deficits, suspected stroke
+  - Physical therapy: vestibular rehabilitation therapy
+
+presentations:
+  - Spinning sensation (vertigo)
+  - Nausea and vomiting
+  - Nystagmus
+  - Imbalance, difficulty walking
+  - Oscillopsia (visual blurring with head movement)
+  - BPPV: brief episodes with position changes
+  - Vestibular neuritis: continuous severe vertigo
+  - Ménière: episodic vertigo with hearing loss
+  - Central: sudden onset with neurologic symptoms
+
+citations:
+  - AAN (American Academy of Neurology) Clinical Practice Guidelines
+  - EAN (European Academy of Neurology) Guidelines
+  - UpToDate - Neurology

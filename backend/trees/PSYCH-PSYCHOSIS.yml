@@ -1,0 +1,506 @@
+tree_id: PSYCH-PSYCHOSIS
+name: Psychosis
+id: PSYCH-PSYCHOSIS
+title: Psychosis Diagnostic Tree
+family: Psychiatry
+specialty: Psychiatry
+version: 1.0
+icd10: F29
+snomed: 69322001
+presentations:
+  - Delusions (fixed false beliefs)
+  - Hallucinations (auditory, visual)
+  - Disorganized speech, behavior
+  - Negative symptoms (flat affect, avolition)
+  - Impaired functioning
+  - May have mood symptoms
+last_updated: 2025-11-20
+evidence_level: DSM-5-TR, APA Practice Guidelines
+entry: safety_assessment
+
+workup:
+  - Rule out medical causes: CBC, CMP, TSH, B12, RPR, HIV
+  - Urine drug screen and alcohol level (substance-induced psychosis)
+  - Non-contrast head CT or MRI to rule out structural lesions
+  - LP if fever, meningismus, or immunocompromised (CNS infection)
+  - EEG if concern for seizure activity or post-ictal state
+  - Collateral history crucial: timeline, baseline function, substance use
+
+treatment:
+  - Acute agitation: olanzapine 5-10mg IM or haloperidol 2-5mg IM + lorazepam 2mg
+  - First-episode psychosis: start low-dose atypical antipsychotic
+  - Schizophrenia: risperidone 2-6mg daily, olanzapine 10-20mg daily, or quetiapine
+  - Treatment-resistant: clozapine (requires CBC monitoring)
+  - Avoid typical antipsychotics long-term (high EPS risk)
+  - Safety: psychiatric admission if danger to self/others or gravely disabled
+
+clinical_pearls:
+  - First-episode psychosis ALWAYS requires neuroimaging (CT/MRI)
+  - Drug-induced psychosis (stimulants, cannabis) can last weeks after use
+  - Brief psychotic disorder <1 month, schizophreniform 1-6 months, schizophrenia >6 months
+  - Negative symptoms (flat affect, avolition, alogia) harder to treat than positive symptoms
+  - Early treatment improves long-term outcomes - minimize duration of untreated psychosis
+  - Second-generation antipsychotics preferred over first-generation (fewer EPS)
+
+red_flags:
+  - Command hallucinations to harm self or others (immediate psychiatric hold)
+  - Grossly disorganized or catatonic (may require hospitalization)
+  - Risk of violence or self-harm
+  - Inability to care for basic needs
+  - New-onset seizures with psychosis (may indicate neurologic cause)
+  - Fever with psychosis (neuroleptic malignant syndrome, infection)
+
+differentials:
+  - Schizophrenia
+  - Bipolar with psychosis
+  - Drug-induced
+  - Delirium
+  - Brief psychotic disorder
+
+referrals:
+  emergency:
+    - Psychotic break with danger
+    - Catatonia
+  urgent:
+    - New psychosis
+    - Medication non-response
+  routine:
+    - Schizophrenia management
+    - Therapy
+nodes:
+- id: safety_assessment
+  when: {}
+  description: Immediate safety and acuity evaluation
+  tests:
+  - Mental status examination
+  - Assess for command hallucinations
+  - Homicidal or suicidal ideation
+  - Ability to care for self
+  - Collateral information from family/EMS
+  suggest_dx: []
+  next:
+  - when:
+      symptoms_contains_any:
+      - command hallucinations to harm
+      - acute suicidal ideation
+      - homicidal ideation
+      - grave disability
+    go: emergency_psychiatry
+  - when:
+      symptoms_contains_any:
+      - fever
+      - rigidity
+      - altered mental status
+      - autonomic instability
+    go: medical_emergency
+  - when:
+      first_episode: true
+    go: first_episode_workup
+  - when:
+      symptoms_contains_any:
+      - recent substance use
+      - positive drug screen
+    go: substance_induced
+  - default: psychotic_disorder_assessment
+
+- id: emergency_psychiatry
+  when:
+    symptoms_contains_any:
+    - command hallucinations to harm
+    - acute danger to self or others
+    - grave disability
+  description: Acute psychiatric emergency requiring immediate intervention
+  tests:
+  - Mental status exam
+  - Urine drug screen
+  - Basic labs (CBC, CMP)
+  - CT head if first episode or trauma
+  suggest_dx:
+  - Acute psychotic episode with safety concerns
+  - Requires psychiatric hospitalization
+  referrals:
+  - Emergency psychiatry consultation STAT
+  - Psychiatric hold (5150/involuntary commitment)
+  - 1:1 observation until psychiatric evaluation
+  - Consider police escort if violent or elopement risk
+  management:
+  - Do NOT discharge patient
+  - IM antipsychotic if agitated (haloperidol 5mg, olanzapine 10mg, ziprasidone 20mg)
+  - Benzodiazepine if severe agitation (lorazepam 2mg IM)
+  - Remove potential weapons or dangerous items
+  - Quiet, low-stimulation environment
+  next:
+  - default: null
+
+- id: medical_emergency
+  when:
+    symptoms_contains_any:
+    - fever
+    - rigidity
+    - autonomic instability
+    - severe altered mental status
+  description: Rule out life-threatening medical causes
+  tests:
+  - Vital signs (temp, BP, HR, O2 sat)
+  - CBC with differential (infection)
+  - CMP (electrolytes, renal function)
+  - CK (rhabdomyolysis in NMS)
+  - LFTs
+  - Urinalysis and culture
+  - Blood cultures if febrile
+  - CT head with contrast
+  - Lumbar puncture if meningitis/encephalitis suspected
+  - EEG if seizure concern
+  suggest_dx:
+  - Neuroleptic malignant syndrome (if on antipsychotics)
+  - Serotonin syndrome (if on serotonergic drugs)
+  - Encephalitis
+  - Meningitis
+  - CNS infection
+  - Metabolic encephalopathy
+  referrals:
+  - ICU if hemodynamically unstable
+  - Neurology consultation STAT
+  - Infectious disease if CNS infection suspected
+  management:
+  - STOP all antipsychotics and serotonergic drugs
+  - Supportive care, IV fluids
+  - Treat underlying medical cause
+  - NMS - dantrolene, bromocriptine may be needed
+  next:
+  - default: null
+
+- id: first_episode_workup
+  when:
+    first_episode: true
+  description: Comprehensive first-episode psychosis evaluation
+  tests:
+  - MRI brain with contrast (preferred) or CT head
+  - EEG if seizure concern
+  - CBC, CMP, LFTs
+  - TSH, free T4
+  - RPR (syphilis)
+  - HIV testing
+  - Vitamin B12, folate
+  - Ceruloplasmin (Wilson disease if <40yo)
+  - ANA, ESR (autoimmune)
+  - Urine drug screen (including synthetic cannabinoids)
+  - Consider lumbar puncture if infection suspected
+  - Neuropsychological testing
+  suggest_dx:
+  - First episode psychosis - etiology to be determined
+  - Rule out neurologic, infectious, autoimmune causes
+  referrals:
+  - Neurology if abnormal imaging or neuro signs
+  - First-episode psychosis clinic/program
+  - Psychiatry consultation within 24-48 hours
+  management:
+  - Start antipsychotic promptly after medical clearance
+  - Risperidone 1-2mg or olanzapine 5-10mg typical starting doses
+  - Early intervention critical for better outcomes
+  - Minimize duration of untreated psychosis
+  - Family education essential
+  next:
+  - when:
+      medical_workup_negative: true
+    go: primary_psychotic_disorder
+  - default: null
+
+- id: substance_induced
+  when:
+    symptoms_contains_any:
+    - recent substance use
+    - positive drug screen
+  description: Substance-induced psychotic disorder
+  tests:
+  - Comprehensive urine drug screen
+  - Blood alcohol level
+  - Synthetic cannabinoids, bath salts if suspected
+  - Time of last use
+  - Collateral history from family/friends
+  suggest_dx:
+  - Substance/medication-induced psychotic disorder
+  - Stimulant-induced (methamphetamine, cocaine) - common
+  - Cannabis-induced psychosis - increasing with high-potency THC
+  - Hallucinogen-induced (LSD, psilocybin, PCP)
+  - Alcohol withdrawal with hallucinations
+  referrals:
+  - Psychiatry if psychosis persists >1 month after abstinence
+  - Addiction medicine/substance use treatment
+  - Dual diagnosis program if co-occurring primary psychosis
+  management:
+  - Supportive care, safe environment
+  - Benzodiazepines for alcohol withdrawal
+  - Antipsychotics if severe (olanzapine, quetiapine)
+  - Most substance-induced psychosis resolves within days to weeks
+  - If persists >1 month, likely primary psychotic disorder
+  - Stimulant psychosis can last weeks after last use
+  - Cannabis-induced may reveal underlying schizophrenia vulnerability
+  monitoring:
+  - Observe for 6-12 hours if acute intoxication
+  - May discharge if clinically sober and safe
+  - Follow-up in 1 week to reassess
+  next:
+  - when:
+      psychosis_persists: '>1 month'
+    go: primary_psychotic_disorder
+  - default: null
+
+- id: primary_psychotic_disorder
+  when:
+    medical_workup_negative: true
+  description: Primary psychiatric psychotic disorder assessment
+  tests:
+  - Duration of symptoms
+  - Presence of negative symptoms (flat affect, avolition, alogia)
+  - Mood symptoms (depression, mania)
+  - Functional decline
+  - Family psychiatric history
+  - Premorbid functioning
+  suggest_dx: []
+  next:
+  - when:
+      all_of:
+      - duration: '<1 month'
+      - identifiable_stressor: true
+    go: brief_psychotic_disorder
+  - when:
+      all_of:
+      - duration: '1-6 months'
+      - functional_decline: true
+    go: schizophreniform
+  - when:
+      all_of:
+      - duration: '>6 months'
+      - negative_symptoms: true
+    go: schizophrenia
+  - when:
+      symptoms_contains_any:
+      - major depression
+      - manic episode
+    go: mood_disorder_with_psychosis
+  - default: psychotic_disorder_nos
+
+- id: brief_psychotic_disorder
+  when:
+    all_of:
+    - duration: '<1 month'
+    - identifiable_stressor: may_be_present
+  description: Brief psychotic disorder
+  tests:
+  - Verify duration <1 month
+  - Assess for precipitating stressor
+  - Rule out substance use
+  suggest_dx:
+  - Brief psychotic disorder (F23)
+  - With marked stressor (brief reactive psychosis)
+  - Without marked stressor
+  - With postpartum onset
+  referrals:
+  - Psychiatry follow-up within 1 week
+  - Consider hospitalization if severe
+  - Psychotherapy after acute phase resolves
+  management:
+  - Short-term antipsychotic (2-3 months)
+  - Risperidone 1-3mg or olanzapine 5-15mg
+  - Most patients recover completely
+  - May not need long-term antipsychotic
+  - Taper medication after 1-3 months if stable
+  - Risk of conversion to schizophrenia ~25%
+  monitoring:
+  - Close follow-up first 6 months
+  - Monitor for recurrence or progression to longer psychotic disorder
+  next:
+  - default: null
+
+- id: schizophreniform
+  when:
+    all_of:
+    - duration: '1-6 months'
+    - functional_decline: true
+  description: Schizophreniform disorder
+  tests:
+  - Document duration of symptoms
+  - Assess level of functioning
+  - Social and occupational impairment
+  suggest_dx:
+  - Schizophreniform disorder (F20.81)
+  - Good prognostic features (acute onset, good premorbid function, confusion/perplexity, no blunted affect)
+  - Poor prognostic features (insidious onset, poor premorbid function, blunted affect)
+  referrals:
+  - Psychiatry consultation required
+  - Consider first-episode psychosis program
+  - Individual and family therapy
+  management:
+  - Antipsychotic medication required
+  - Second-generation preferred (risperidone, olanzapine, aripiprazole)
+  - If symptoms persist >6 months, diagnosis changes to schizophrenia
+  - 1/3 recover completely, 2/3 progress to schizophrenia or schizoaffective
+  next:
+  - default: null
+
+- id: schizophrenia
+  when:
+    all_of:
+    - duration: '>6 months'
+    - functional_decline: true
+  description: Schizophrenia diagnosis and management
+  tests:
+  - Comprehensive psychiatric assessment
+  - Positive symptoms (hallucinations, delusions, disorganized speech/behavior)
+  - Negative symptoms (flat affect, avolition, alogia, anhedonia, asociality)
+  - Cognitive symptoms (memory, attention, executive function)
+  - Level of functioning
+  suggest_dx:
+  - Schizophrenia (F20.9)
+  - Paranoid type (predominantly delusions/hallucinations)
+  - Disorganized type (disorganized speech/behavior)
+  - Catatonic type (motor abnormalities)
+  - Undifferentiated or residual
+  referrals:
+  - Psychiatry - long-term management required
+  - Assertive Community Treatment (ACT) team if available
+  - Vocational rehabilitation
+  - Supported employment programs
+  - Family psychoeducation groups
+  management:
+  - Long-term antipsychotic medication required
+  - Second-generation antipsychotics (SGAs) preferred
+    - Risperidone 2-6mg, olanzapine 10-20mg, aripiprazole 10-30mg
+    - Quetiapine 300-800mg, ziprasidone 80-160mg
+  - Long-acting injectable (LAI) for non-adherence
+    - Paliperidone palmitate, aripiprazole lauroxil, risperidone microspheres
+  - Clozapine for treatment-resistant (failed 2+ antipsychotics)
+  - Psychosocial interventions essential
+    - Cognitive Behavioral Therapy for psychosis (CBTp)
+    - Social skills training
+    - Supported employment
+  - Treat negative and cognitive symptoms (often most disabling)
+  monitoring:
+  - Metabolic monitoring (weight, glucose, lipids, A1c) - SGAs cause metabolic syndrome
+  - Movement disorders (EPS, tardive dyskinesia)
+  - Prolactin levels if sexual dysfunction
+  - Medication adherence (leading cause of relapse)
+  - Monitor for depression and suicidality
+  prognosis:
+  - 1/3 achieve good functional recovery
+  - 1/3 moderate impairment
+  - 1/3 severe impairment
+  - Early treatment improves outcomes
+  - 10-year average reduced lifespan due to medical comorbidities
+  next:
+  - default: null
+
+- id: mood_disorder_with_psychosis
+  when:
+    symptoms_contains_any:
+    - major depressive episode
+    - manic episode
+  description: Mood disorder with psychotic features vs schizoaffective
+  tests:
+  - Timeline of mood vs psychotic symptoms
+  - Do psychotic symptoms occur only during mood episodes?
+  - Duration of psychosis without mood symptoms
+  suggest_dx:
+  - Major depression with psychotic features (if depressed mood)
+  - Bipolar I with psychotic features (if manic/mixed)
+  - Schizoaffective disorder (if psychosis persists without mood symptoms)
+  referrals:
+  - Psychiatry consultation required
+  - Higher acuity than non-psychotic mood disorders
+  - Often requires hospitalization
+  management:
+  - Combination antidepressant + antipsychotic (for depression)
+  - Mood stabilizer + antipsychotic (for bipolar)
+  - Do NOT use antipsychotic monotherapy for depression
+  - ECT highly effective for psychotic depression
+  - Schizoaffective requires long-term antipsychotic + mood stabilizer
+  next:
+  - default: null
+
+- id: psychotic_disorder_nos
+  when: {}
+  description: Psychotic disorder not otherwise specified
+  tests:
+  - Further evaluation needed
+  - Observation over time to clarify diagnosis
+  suggest_dx:
+  - Unspecified schizophrenia spectrum and other psychotic disorder (F29)
+  - Attenuated psychosis syndrome (requires further assessment)
+  referrals:
+  - Psychiatry for ongoing evaluation
+  - May clarify diagnosis with longitudinal observation
+  management:
+  - Consider trial of antipsychotic
+  - Close follow-up to monitor course
+  next:
+  - default: null
+
+differential_diagnosis:
+  medical:
+    - CNS infection (encephalitis, meningitis)
+    - CNS neoplasm
+    - Temporal lobe epilepsy
+    - Dementia with behavioral disturbance
+    - Delirium
+    - Autoimmune encephalitis (NMDA receptor, anti-LGI1)
+    - Wilson disease
+    - Huntington disease
+    - Neurosyphilis
+    - HIV encephalopathy
+    - Vitamin B12 deficiency
+    - Thyroid dysfunction
+  substance:
+    - Stimulant intoxication (methamphetamine, cocaine)
+    - Cannabis-induced psychosis
+    - Hallucinogen intoxication (LSD, psilocybin, PCP)
+    - Synthetic cannabinoids (K2, Spice)
+    - Bath salts (cathinones)
+    - Alcohol withdrawal
+    - Benzodiazepine withdrawal
+    - Anticholinergic toxicity
+    - Corticosteroid-induced psychosis
+  psychiatric:
+    - Schizophrenia
+    - Schizoaffective disorder
+    - Schizophreniform disorder
+    - Brief psychotic disorder
+    - Delusional disorder
+    - Major depression with psychotic features
+    - Bipolar disorder with psychotic features
+    - PTSD with dissociation
+
+disposition_guidance:
+  admit:
+  - First episode psychosis (consider hospitalization)
+  - Acute danger to self or others
+  - Command hallucinations
+  - Grave disability (unable to care for self)
+  - Severe disorganization
+  - Catatonia
+  - Medication non-adherence with decompensation
+  - Lack of social support
+  discharge:
+  - Chronic stable schizophrenia on medication
+  - No acute safety concerns
+  - Adequate social support and housing
+  - Psychiatry follow-up within 1 week
+  - Medication supply and adherence plan
+  follow_up:
+  - Psychiatry within 1 week (first episode within 24-48 hours)
+  - First-episode psychosis clinic if available
+  - Case management/ACT team
+  - Medication monitoring (metabolic, movement disorders)
+  - Family psychoeducation
+
+references:
+  - American Psychiatric Association. DSM-5-TR Diagnostic Criteria for Schizophrenia Spectrum Disorders. 2022.
+  - APA Practice Guideline for the Treatment of Patients with Schizophrenia, 3rd Edition. 2020.
+  - NICE Guidelines - Psychosis and schizophrenia in adults - prevention and management. 2014.
+  - Kane JM et al. Clinical Guidance on the Identification and Management of Treatment-Resistant Schizophrenia. J Clin Psychiatry. 2019.
+  - Correll CU et al. Cardiometabolic Risk in Patients With First-Episode Schizophrenia Spectrum Disorders. JAMA Psychiatry. 2014.
+
+citations:
+  - APA (American Psychiatric Association) Practice Guidelines
+  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+  - UpToDate - Psychiatry

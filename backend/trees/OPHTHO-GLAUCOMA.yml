@@ -1,0 +1,75 @@
+tree_id: OPHTHO-GLAUCOMA
+name: Glaucoma (Primary Open-Angle)
+family: ophthalmology
+specialty: Ophthalmology
+chief_complaint: Gradual vision loss or elevated eye pressure
+description: Progressive optic neuropathy causing irreversible vision loss from elevated intraocular pressure damaging optic nerve. Early detection and IOP-lowering treatment preserve vision.
+icd10: H40.11
+snomed: 392288008
+presentations:
+  - Often asymptomatic (chronic open-angle)
+  - Peripheral vision loss (tunnel vision)
+  - Acute angle-closure: severe eye pain, headache, nausea, halos around lights
+  - Elevated intraocular pressure
+  - Optic nerve cupping
+urgency: non-urgent
+
+referrals:
+  emergency:
+    - Acute vision loss
+    - Chemical burn
+    - Globe rupture
+  urgent:
+    - Floaters with flashes
+    - Suspected GCA
+    - Corneal ulcer
+  routine:
+    - Cataracts
+    - Glaucoma screening
+    - Routine eye exam
+
+workup:
+  - Intraocular pressure (IOP) measurement: tonometry, normal 10-21 mmHg, elevated >21 mmHg increases risk
+  - Dilated fundoscopic exam: optic disc cupping (cup-to-disc ratio >0.5 abnormal), vertical elongation, notching, disc hemorrhages
+  - Visual field testing (perimetry): detects peripheral vision loss (arcuate scotomas, nasal steps), monitors progression
+  - Optical coherence tomography (OCT): measures retinal nerve fiber layer thickness (objective assessment of optic nerve damage)
+  - Gonioscopy: assess anterior chamber angle (open vs closed angle), differentiates types of glaucoma
+  - Central corneal thickness: thin corneas underestimate IOP, thick corneas overestimate
+  - Screening: all adults >40 comprehensive eye exam every 1-2 years, high-risk (African American, family history, diabetes) every 1-2 years starting age 40
+
+treatment:
+  - Goal: lower IOP 25-30% from baseline to prevent progression (individualized target based on severity)
+  - Prostaglandin analogs (first-line): latanoprost 0.005% one drop nightly, or travoprost, bimatoprost (most effective IOP reduction 25-33%)
+  - Side effects: conjunctival hyperemia, iris darkening, eyelash growth, periorbital fat atrophy
+  - Beta-blockers: timolol 0.5% twice daily (contraindicated in asthma, COPD, heart block, bradycardia)
+  - Alpha-agonists: brimonidine 0.2% twice or three times daily (avoid in young children - CNS depression)
+  - Carbonic anhydrase inhibitors: dorzolamide 2% three times daily topical, or acetazolamide 250 mg PO BID systemic (caution in sulfa allergy)
+  - Combination drops: if monotherapy inadequate, fixed-dose combinations improve adherence
+  - Selective laser trabeculoplasty (SLT): alternative or adjunct to medications, lowers IOP 20-30%, repeatable
+  - Surgery (trabeculectomy or tube shunt): if medications and laser fail, creates new drainage pathway
+  - Lifelong treatment and monitoring: check IOP and visual fields every 3-6 months initially, less frequent if stable
+  - Medication adherence critical: missed doses lead to IOP fluctuation and progression
+
+clinical_pearls:
+  - Asymptomatic until advanced - screening crucial for early detection
+  - Optic disc cupping and peripheral visual field loss diagnostic
+  - Prostaglandin analogs first-line - latanoprost one drop nightly most effective
+  - Goal IOP reduction 25-30% from baseline prevents progression
+  - Visual field and OCT monitor for progression despite treatment
+  - Irreversible damage - emphasize medication adherence
+  - Risk factors: age >60, African American, family history, thin corneas, diabetes
+  - Acute angle-closure glaucoma different entity - sudden painful vision loss, emergent
+
+differentials:
+  - Ocular hypertension: elevated IOP without optic nerve damage or visual field loss (observation vs treatment)
+  - Normal-tension glaucoma: optic nerve damage and visual field loss with normal IOP <21 mmHg
+  - Acute angle-closure glaucoma: sudden severe eye pain, headache, nausea, halos, rock-hard eye - EMERGENT
+  - Optic neuritis: sudden vision loss, pain with eye movement, relative afferent pupillary defect, usually MS-related
+
+trace: |
+  A 58-year-old African American woman with family history of glaucoma (mother blind from glaucoma) underwent routine eye exam. No visual complaints. IOP right eye 28 mmHg, left eye 26 mmHg (elevated). Dilated exam showed cup-to-disc ratio 0.7 bilaterally with vertical elongation (abnormal). Visual field testing showed early superior arcuate defects bilaterally. OCT showed thinning of inferior retinal nerve fiber layer. Gonioscopy showed open angles. Central corneal thickness normal. Diagnosed with primary open-angle glaucoma. Started latanoprost 0.005% one drop each eye nightly. At 6 weeks IOP improved to right 18, left 17 (30% reduction achieved). At 3 months visual fields stable. At 6 months IOP stable, no progression on visual fields or OCT. At 12 months IOP 16/17, excellent control on monotherapy. Continues latanoprost with follow-up every 6 months. Counseled extensively on medication adherence and lifelong treatment to prevent irreversible blindness. Patient's siblings referred for screening.
+
+citations:
+  - AAO (American Academy of Ophthalmology) Preferred Practice Patterns
+  - RCOphth (Royal College of Ophthalmologists) Clinical Guidelines
+  - UpToDate - Ophthalmology

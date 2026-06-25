@@ -1,0 +1,78 @@
+tree_id: GI-CELIAC-DISEASE
+name: Celiac Disease
+family: gastroenterology
+specialty: Gastroenterology
+chief_complaint: Chronic diarrhea and abdominal pain
+description: Autoimmune disorder triggered by gluten ingestion causing small intestinal villous atrophy and malabsorption. Strict lifelong gluten-free diet reverses damage and prevents complications.
+icd10: K90.0
+snomed: 396331005
+presentations:
+  - Chronic diarrhea, steatorrhea
+  - Abdominal pain, bloating
+  - Weight loss, failure to thrive (children)
+  - Fatigue, anemia
+  - Dermatitis herpetiformis
+  - Osteoporosis, infertility
+urgency: non-urgent
+
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+
+workup:
+  - Serologic screening (while on gluten-containing diet): tissue transglutaminase IgA (tTG-IgA) most sensitive and specific
+  - Total IgA level: check simultaneously (5% celiac patients have IgA deficiency causing false negative tTG-IgA)
+  - If IgA deficient: order IgG-based tests (tTG-IgG, deamidated gliadin peptide IgG)
+  - Endomysial antibody (EMA): highly specific confirmatory test if tTG positive
+  - HLA-DQ2/DQ8 genetic testing: negative result effectively rules out celiac (high negative predictive value >99%)
+  - Upper endoscopy with duodenal biopsies: gold standard for diagnosis, shows villous atrophy, crypt hyperplasia, increased intraepithelial lymphocytes (Marsh 3)
+  - Biopsy required before starting gluten-free diet (GFD) to confirm diagnosis
+  - Labs for malabsorption: CBC (anemia from iron, B12, folate deficiency), CMP (hypoalbuminemia), iron studies, vitamin D, folate, B12
+  - Bone density scan: if osteoporosis risk factors (malabsorption causes vitamin D and calcium deficiency)
+  - Screening: first-degree relatives, type 1 diabetes, autoimmune thyroid disease, Down syndrome, Turner syndrome
+
+treatment:
+  - Strict lifelong gluten-free diet (GFD): avoid wheat, barley, rye (oats controversial but usually tolerated if uncontaminated)
+  - Dietitian referral: education on GFD, hidden sources of gluten, cross-contamination, label reading
+  - Nutritional supplementation: iron, calcium 1500 mg daily, vitamin D 2000 IU daily, folate, B12 if deficient
+  - Serologic monitoring: tTG-IgA at 6 months then annually to assess adherence (should normalize on strict GFD)
+  - Repeat endoscopy: consider at 1-2 years if symptoms persist or tTG remains elevated (assess mucosal healing)
+  - Screen for associated conditions: autoimmune thyroid disease (TSH), type 1 diabetes (HbA1c, glucose), osteoporosis (DEXA)
+  - Pneumococcal vaccine: hyposplenism common in untreated celiac
+  - Refractory celiac disease: persistent symptoms and villous atrophy despite strict GFD >12 months, may require immunosuppression
+  - Avoid gluten challenge unless diagnostic uncertainty
+
+clinical_pearls:
+  - Screen with tTG-IgA and total IgA (if IgA deficient use IgG-based tests)
+  - Must be on gluten-containing diet for accurate serology and biopsy
+  - Duodenal biopsy confirms diagnosis before starting GFD
+  - Strict lifelong gluten-free diet reverses damage and prevents complications
+  - tTG normalizes on GFD - monitor adherence annually
+  - Screen first-degree relatives (10% risk), type 1 diabetes, autoimmune thyroid disease
+  - Complications if untreated: osteoporosis, lymphoma, infertility
+  - Oats usually tolerated if uncontaminated
+
+differentials:
+  - Irritable bowel syndrome: normal labs and endoscopy, negative serology
+  - Inflammatory bowel disease: bloody diarrhea, extraintestinal manifestations, colonoscopy shows ulceration
+  - Lactose intolerance: diarrhea and bloating after dairy, improves with lactose avoidance, normal biopsy
+  - Small intestinal bacterial overgrowth: responds to antibiotics, normal biopsy
+
+trace: |
+  A 28-year-old woman presented with 2 years of chronic diarrhea 4-5 times daily, bloating, abdominal pain, fatigue, and 15-pound unintentional weight loss. Labs showed iron deficiency anemia (Hgb 9.8, ferritin 8) and low vitamin D 12. tTG-IgA 156 (strongly positive, normal <20), total IgA normal. Referred to gastroenterology for upper endoscopy which showed scalloped duodenal folds, biopsies revealed total villous atrophy with increased intraepithelial lymphocytes (Marsh 3c) confirming celiac disease. Started strict gluten-free diet with dietitian guidance and supplementation with iron, calcium 1500 mg, vitamin D 2000 IU, folate. At 3 months diarrhea resolved, energy improved, gained 8 pounds. At 6 months tTG-IgA 18 (normalized), Hgb 12.4, ferritin 45. At 12 months repeat endoscopy showed complete mucosal healing with normal villi. Remains on strict GFD, annual tTG monitoring, excellent quality of life. First-degree relatives screened, sister also diagnosed with celiac disease.
+
+citations:
+  - ACG (American College of Gastroenterology) Clinical Guidelines
+  - AGA (American Gastroenterological Association) Clinical Practice Updates
+  - UpToDate - Gastroenterology and Hepatology

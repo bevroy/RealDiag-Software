@@ -1,0 +1,61 @@
+tree_id: PULM-PLEURAL-EFFUSION
+name: Pleural Effusion
+family: Pulmonology
+specialty: Pulmonology
+icd10:
+- J90
+- J94.0
+snomed:
+- '60046008'
+urgency: medium
+description: Comprehensive evaluation and management of Pleural Effusion
+version: '1.0'
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Dyspnea, pleuritic chest pain, cough
+- Decreased breath sounds, dullness to percussion
+- 'Chest X-ray: Blunting of costophrenic angle (>200mL), meniscus sign'
+- Ultrasound more sensitive than X-ray (detects 5-50mL)
+- 'Transudative: CHF, cirrhosis, nephrotic syndrome'
+- 'Exudative: Pneumonia (parapneumonic), malignancy, TB, PE'
+workup:
+- Chest X-ray (PA, lateral, lateral decubitus)
+- 'Thoracentesis: Send fluid for cell count, protein, LDH, glucose, pH, gram stain,
+  culture, cytology'
+- Serum protein, LDH (for Light's criteria)
+- Chest ultrasound (localize, assess septations)
+treatment:
+- 'Guideline-based treatment options for Pleural Effusion include:'
+- Diagnostic thoracentesis if >10mm on lateral decubitus film (ATS 2023)
+- 'Transudate: Treat underlying (ATS 2023)'
+- 'Exudative: Treat cause (antibiotics for parapneumonic, chemotherapy for malignant)
+  (ATS 2023)'
+- 'Complicated parapneumonic or empyema: Chest tube drainage, consider VATS (ATS 2023)'
+- 'Recurrent malignant: Pleurodesis or tunneled pleural catheter (ATS 2023)'
+clinical_pearls:
+- Light's criteria distinguish transudate vs exudate (use if serum protein 5-8 g/dL)
+- 'Exudate if: Pleural protein/serum protein >0.5, pleural LDH/serum LDH >0.6, OR
+  pleural LDH >2/3 upper limit normal'
+- 'Parapneumonic effusion: Needs drainage if pH <7.2, glucose <60, or positive gram
+  stain/culture'
+- 'Empyema: Pus in pleural space, needs chest tube drainage'
+- 'Malignant effusion: Exudative, often bloody, positive cytology'
+referrals:
+- Pulmonology for thoracentesis or complex effusions
+- Cardiothoracic surgery if empyema or need for VATS/decortication
+differentials:
+  - Heart failure
+  - Pneumonia
+  - Malignancy
+  - Pulmonary embolism
+  - Cirrhosis
+trace:
+  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
+    Obstructive Lung Disease (GOLD)
+  version: 0.1.0
+  last_updated: '2024-12-26'

@@ -1,0 +1,75 @@
+tree_id: SURG-POSTOP-FOLLOWUP
+name: Post-operative Follow-up (Encounter)
+family: surgery
+specialty: Surgery, Primary Care
+chief_complaint: Post-surgical follow-up visit
+description: |
+  Routine post-operative follow-up to assess healing, manage complications, and plan further care.
+  Timing varies by procedure - typically 1-2 weeks for initial visit.
+icd10: Z48.89
+snomed: "183677006"
+presentations:
+  - Recent surgery (days to weeks ago)
+  - Routine follow-up or concern for complication
+  - Wound assessment needed
+  - Suture/staple removal
+  - Pain management
+urgency: Low
+referrals:
+  emergency:
+    - Signs of surgical emergency (bleeding, dehiscence, severe infection, organ failure)
+  surgeon:
+    - Complications requiring surgical intervention
+workup:
+  - Review surgical procedure and operative report
+  - Current symptoms - pain, fever, drainage, function
+  - Wound examination - erythema, warmth, drainage, dehiscence, hematoma
+  - Vital signs including temperature
+  - Assess pain control
+  - Review pathology results if applicable
+  - Labs if indicated - CBC if concern for infection/bleeding, basic metabolic panel
+treatment:
+  routine_postop_care:
+    - Wound care - keep clean and dry, dressing changes as needed
+    - Suture/staple removal when appropriate (5-7 days face, 10-14 days body/extremities)
+    - Scar management counseling
+    - Activity restrictions per surgeon
+  pain_management:
+    - Acetaminophen 1000mg Q6h scheduled
+    - NSAIDs if appropriate - ibuprofen 400-600mg TID
+    - Opioids if needed for severe pain (tapering regimen)
+  complications:
+    wound_infection:
+      - Antibiotics - cephalexin 500mg QID or augmentin 875mg BID
+      - Open wound if abscess
+    seroma_hematoma:
+      - Small - observation
+      - Large - aspiration or surgical drainage
+    dehiscence:
+      - Superficial - local wound care, may heal by secondary intention
+      - Deep - surgical re-closure
+  return_to_activity:
+    - Individualized based on procedure
+    - General guidelines - no heavy lifting 4-6 weeks for abdominal surgery
+    - Driving when off narcotics and able to perform emergency stop
+    - Work return varies by job demands and procedure
+clinical_pearls:
+  - Most surgical site infections develop 4-7 days post-op
+  - Fever in first 48 hours usually atelectasis, after that consider infection
+  - Wound erythema within 2cm of incision in first 2-3 days often normal inflammatory response
+  - Seroma common after procedures with large tissue dissection
+  - Early mobilization reduces DVT and pulmonary complications
+  - Patient should know warning signs - fever, increasing pain, purulent drainage, dehiscence
+differentials:
+  - Normal healing
+  - Surgical site infection
+  - Seroma or hematoma
+  - Wound dehiscence
+  - DVT/PE
+  - Ileus
+  - Urinary retention
+trace:
+  - 50-year-old 10 days post laparoscopic cholecystectomy. Wounds clean and dry. No fever, tolerating regular diet. Mild incisional discomfort controlled with acetaminophen. Remove steri-strips. Clear to return to work in 1 week, avoid heavy lifting for 4 weeks. Doing well.
+citations:
+  - American College of Surgeons Guidelines
+  - UpToDate - General Surgery

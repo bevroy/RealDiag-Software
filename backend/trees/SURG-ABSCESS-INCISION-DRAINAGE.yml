@@ -1,0 +1,82 @@
+tree_id: SURG-ABSCESS-INCISION-DRAINAGE
+name: Abscess Requiring Incision and Drainage (Encounter)
+family: surgery
+specialty: Surgery, Emergency Medicine, Primary Care
+chief_complaint: Skin abscess, boil
+description: |
+  Cutaneous abscess is localized collection of pus requiring drainage.
+  Incision and drainage is primary treatment; antibiotics adjunctive.
+icd10: L02.91
+snomed: "439822008"
+presentations:
+  - Painful, fluctuant, erythematous nodule
+  - Warmth and swelling
+  - Possible spontaneous drainage
+  - Fever if large or systemic involvement
+  - Common locations - axilla, groin, buttocks, neck
+urgency: Medium
+referrals:
+  emergency:
+    - Facial abscesses near danger triangle (risk of cavernous sinus thrombosis)
+    - Large abscesses with systemic toxicity
+    - Perirectal abscesses
+  surgery:
+    - Deep abscesses
+    - Abscesses in difficult locations requiring OR drainage
+workup:
+  - Size, location, fluctuance
+  - Surrounding cellulitis
+  - Fever, signs of systemic infection
+  - Risk factors - diabetes, immunosuppression, MRSA colonization/history
+  - Ultrasound if uncertainty about fluid collection
+treatment:
+  incision_and_drainage:
+    - Anesthesia - local lidocaine (may inject around abscess or regional block)
+    - Incision over most fluctuant area
+    - Blunt dissection to break up loculations
+    - Express purulent material
+    - Irrigate cavity with saline
+    - Pack cavity with iodoform gauze (remove in 24-48 hours)
+    - Or leave open to drain
+  wound_care:
+    - Warm compresses TID
+    - Dressing changes daily
+    - Packing removal in 24-48 hours
+    - Follow-up in 2-3 days to assess healing
+  antibiotics:
+    not_routinely_needed_if_adequate_drainage:
+      - Drainage is primary treatment
+    indications_for_antibiotics:
+      - Extensive surrounding cellulitis (>2cm from abscess)
+      - Systemic signs (fever, tachycardia)
+      - Immunocompromised
+      - Lack of response to I&D alone
+      - Difficult to drain completely
+    antibiotic_choice:
+      - TMP-SMX DS BID (covers MRSA) - first line
+      - Doxycycline 100mg BID (alternative)
+      - Clindamycin 300-450mg TID (alternative)
+      - Cephalexin 500mg QID if suspected MSSA and no MRSA risk factors
+  recurrent_abscesses:
+    - Consider MRSA decolonization - mupirocin nasal ointment, chlorhexidine washes
+    - Improve hygiene
+    - Treat household contacts if colonized
+clinical_pearls:
+  - I&D is primary and usually sufficient treatment - antibiotics adjunctive
+  - Most skin abscesses now MRSA - use appropriate antibiotics if needed
+  - Packing helps keep wound open and prevents premature closure with re-accumulation
+  - Culture purulent drainage if antibiotics needed or recurrent infections
+  - Perirectal abscesses often have fistula connection to bowel
+  - Never squeeze abscess before anesthesia (very painful and spreads infection)
+differentials:
+  - Simple cutaneous abscess
+  - Carbuncle (multiple connected abscesses)
+  - Hidradenitis suppurativa (recurrent abscesses in skin folds)
+  - Pilonidal abscess
+  - Bartholin gland abscess
+  - Perirectal abscess
+trace:
+  - 30-year-old with 3cm tender, fluctuant mass on buttock for 3 days. Diagnose cutaneous abscess. Perform I&D under local anesthesia. Express 15mL purulent material. Pack with iodoform gauze. Prescribe TMP-SMX DS BID x 7 days due to surrounding cellulitis. Return for packing removal in 48 hours. Wound heals over 2 weeks.
+citations:
+  - American Academy of Dermatology Guidelines
+  - UpToDate - Emergency Medicine and Dermatology

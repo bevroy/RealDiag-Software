@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: realdiag-ingress
+  namespace: staging
+  annotations:
+    # Use your cluster's ingress controller class here, e.g. "nginx"
+    kubernetes.io/ingress.class: "nginx"
+    # cert-manager annotation to request a TLS certificate (example)
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+    - hosts:
+        - realdiag.example.com
+      secretName: realdiag-tls
+  rules:
+    - host: realdiag.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: realdiag-web
+                port:
+                  number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: realdiag-api
+                port:
+                  number: 80

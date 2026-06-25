@@ -1,0 +1,101 @@
+tree_id: IMMUNO-IMMUNODEFICIENCY
+name: Immunodeficiency (Encounter)
+family: allergy
+specialty: Immunology
+icd10: D84.9
+snomed: "234532001"
+
+presentations:
+  - Recurrent or severe infections
+  - Frequent sinusitis or pneumonia
+  - Unusual or opportunistic infections
+  - Poor response to antibiotics
+  - Chronic diarrhea or malabsorption
+  - Failure to thrive in children
+  - Chronic mucocutaneous candidiasis
+  - Recurrent bacterial skin infections
+  - Family history of immunodeficiency
+  - Prolonged infection recovery time
+
+workup:
+  - History:
+    - Infection frequency, severity, and types (bacterial, viral, fungal, parasitic)
+    - Age of onset (congenital vs acquired)
+    - Family history of immunodeficiency or early deaths
+    - Autoimmune conditions
+    - Medications (corticosteroids, immunosuppressants, chemotherapy)
+    - HIV risk factors
+    - Malignancy history
+    - Nutritional status
+    - Vaccination history and response
+  - Physical exam:
+    - Growth parameters (weight, height, BMI)
+    - Signs of chronic infection or inflammation
+    - Lymphadenopathy or absence of lymph nodes
+    - Tonsil and adenoid presence (absent in certain immunodeficiencies)
+    - Skin examination (eczema, warts, candidiasis, abscesses)
+    - Hepatosplenomegaly
+    - Oral thrush or periodontal disease
+  - Laboratory studies:
+    - Complete blood count with differential
+    - Quantitative immunoglobulins (IgG, IgA, IgM, IgE)
+    - Lymphocyte subset panel (CD3, CD4, CD8, CD19, CD16/56)
+    - HIV testing
+    - Vaccine antibody titers (tetanus, diphtheria, pneumococcus)
+    - Complement levels (CH50, C3, C4)
+    - Functional tests (lymphocyte proliferation, neutrophil oxidative burst)
+    - Genetic testing if primary immunodeficiency suspected
+    - Chest X-ray (thymic shadow in infants, chronic lung changes)
+
+treatment:
+  primary_immunodeficiency:
+    - Immunoglobulin replacement therapy (IVIG or SubQ Ig) for antibody deficiencies
+    - Prophylactic antibiotics (trimethoprim-sulfamethoxazole, azithromycin)
+    - Aggressive treatment of infections with appropriate antibiotics
+    - Avoid live vaccines in severe T-cell deficiencies
+    - Hematopoietic stem cell transplantation for severe combined immunodeficiency (SCID)
+    - Gene therapy for select conditions (X-linked SCID, ADA deficiency)
+    - Nutritional support and monitoring
+  secondary_immunodeficiency:
+    - Treat underlying cause (HIV, malnutrition, malignancy)
+    - Antiretroviral therapy for HIV
+    - Nutritional supplementation
+    - Reduce or discontinue immunosuppressive medications if possible
+    - Prophylaxis against opportunistic infections
+  supportive_care:
+    - Vaccinate household contacts (especially influenza)
+    - Hand hygiene education
+    - Avoid exposure to sick individuals
+    - Prompt treatment of infections
+    - Regular monitoring by immunology specialist
+    - Pneumocystis prophylaxis if CD4 <200 cells/mm3 or other severe T-cell defect
+  immunoglobulin_replacement:
+    - IVIG 400-600 mg/kg every 3-4 weeks
+    - SubQ Ig weekly (home administration possible)
+    - Target IgG trough >500-600 mg/dL
+    - Monitor for infections and adjust dose as needed
+
+clinical_pearls:
+  - Recurrent sinopulmonary infections suggest antibody deficiency (common variable immunodeficiency, selective IgA deficiency)
+  - Recurrent skin abscesses or fungal infections suggest phagocytic defect (chronic granulomatous disease)
+  - Severe viral or fungal infections suggest T-cell deficiency
+  - Opportunistic infections (PCP, CMV, Candida) indicate severe immunodeficiency
+  - Warning signs include >8 ear infections/year, >2 pneumonias/year, infections requiring IV antibiotics
+  - Selective IgA deficiency is most common primary immunodeficiency (1 in 500-700)
+  - Common variable immunodeficiency (CVID) presents in teens to 30s with recurrent infections
+  - SCID is a pediatric emergency requiring immediate immunology referral and HSCT
+  - Secondary immunodeficiency is more common than primary (HIV, medications, malnutrition, aging)
+  - Check vaccine responses to assess functional antibody production
+  - Low IgG with normal vaccine responses may not require treatment
+  - Autoimmune conditions commonly coexist with immunodeficiency
+
+trace:
+  - Diagnostic workup for suspected immunodeficiency
+  - Immunoglobulin replacement therapy indications and dosing
+  - Prophylactic strategies for immunodeficient patients
+  - Differentiation of primary vs secondary immunodeficiency
+
+citations:
+  - Bonilla FA, et al. (2015). Practice parameter for the diagnosis and management of primary immunodeficiency. J Allergy Clin Immunol, 136(5), 1186-1205.
+  - Picard C, et al. (2018). International Union of Immunological Societies: 2017 Primary Immunodeficiency Diseases Committee Report. J Clin Immunol, 38(1), 96-128.
+  - Ballow M, et al. (2016). The iCARE pathway: A standardized approach to primary immunodeficiency diagnosis. Ann Allergy Asthma Immunol, 117(6), 644-650.

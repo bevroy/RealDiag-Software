@@ -1,0 +1,64 @@
+tree_id: GER-URINARY-INCONTINENCE
+name: Urinary Incontinence (Geriatric)
+family: Geriatrics
+specialty: Geriatrics
+age_min: 65
+icd10:
+- N39.46
+- R32
+snomed:
+- 165232002
+urgency: medium
+description: Comprehensive evaluation and management of Urinary Incontinence (Geriatric)
+version: '1.0'
+citations:
+  - AGS (American Geriatrics Society) Clinical Practice Guidelines
+  - British Geriatrics Society Guidelines
+  - UpToDate - Geriatric Medicine
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Involuntary urine loss
+- Stress, urge, or overflow types
+- Nocturia and urgency
+- Impacts quality of life
+- Multiple contributing factors
+workup: []
+treatment:
+  - 'Classify type - stress (cough/sneeze), urge (overactive bladder), overflow (retention), mixed'
+  - 'Pelvic floor exercises (Kegels) - 10 contractions TID, hold 10 sec each'
+  - 'Bladder training - scheduled voiding Q2-3H, gradually increase intervals'
+  - 'Urge incontinence: Antimuscarinic (oxybutynin 5mg BID-TID, tolterodine 2-4mg daily) OR beta-3 agonist (mirabegron 25-50mg daily)'
+  - 'Avoid antimuscarinics in elderly (cognitive impairment) - prefer mirabegron'
+  - 'Stress incontinence: Pessary trial, pelvic floor PT, surgical sling if severe'
+  - 'Overflow: Treat obstruction (BPH with alpha-blocker or 5-ARI), intermittent self-cath if retention'
+  - 'Fluid management - adequate hydration but avoid evening fluids, limit caffeine/alcohol'
+  - 'Weight loss if obese'
+  - 'Absorbent pads for residual symptoms'
+  - 'Botulinum toxin bladder injection for refractory urge incontinence'
+  - 'Surgical options - mid-urethral sling (stress), sacral neuromodulation (urge)'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute delirium
+    - Falls with injury
+    - Severe dehydration
+  urgent:
+    - Functional decline
+    - Medication issues
+    - Cognitive changes
+  routine:
+    - Geriatric assessment
+    - Fall prevention
+    - Polypharmacy review
+differentials:
+  - Stress incontinence
+  - Urge incontinence
+  - Overflow incontinence
+  - UTI
+  - Neurogenic bladder
+trace:
+  source: American Geriatrics Society (AGS) Guidelines, Beers Criteria for Potentially
+    Inappropriate Medication Use
+  version: 0.1.0
+  last_updated: '2024-12-26'

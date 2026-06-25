@@ -1,0 +1,122 @@
+tree_id: ONCO-LUNG-CANCER
+name: Lung Cancer Evaluation
+family: oncology
+specialty: Oncology / Pulmonology
+presentations:
+  - Persistent cough (new or changed chronic cough)
+  - Hemoptysis
+  - Dyspnea and chest pain
+  - Hoarseness (recurrent laryngeal nerve involvement)
+  - Weight loss and anorexia
+  - Bone pain (metastatic disease)
+  - Superior vena cava syndrome
+  - Pancoast syndrome (shoulder/arm pain, Horner syndrome)
+icd10:
+  - C34.90 # Malignant neoplasm of unspecified part of bronchus or lung
+  - C34.10 # Malignant neoplasm of upper lobe, bronchus or lung
+  - C34.30 # Malignant neoplasm of lower lobe, bronchus or lung
+snomed:
+  - "93880001" # Primary malignant neoplasm of lung
+urgency: High
+urgency_explanation: Early detection and staging critical for treatment options; requires prompt evaluation
+
+referrals:
+  pulmonology: For bronchoscopy and tissue diagnosis
+  oncology: For chemotherapy and systemic therapy
+  thoracic_surgery: For surgical evaluation if resectable
+  radiation_oncology: For radiation therapy planning
+
+workup:
+  initial_assessment:
+    - Complete history including smoking history (pack-years)
+    - Physical exam including lymph node exam
+    - Performance status assessment (ECOG or Karnofsky)
+  laboratory:
+    - CBC, CMP
+    - LFTs (liver metastases)
+    - Calcium (elevated in squamous cell)
+    - LDH
+  imaging:
+    - Chest CT with contrast (primary tumor and mediastinal lymph nodes)
+    - PET-CT for staging (unless clearly stage IV)
+    - Brain MRI if symptoms or stage III/IV disease
+    - Bone scan if bone pain or elevated alkaline phosphatase
+  tissue_diagnosis:
+    - CT-guided needle biopsy
+    - Bronchoscopy with biopsy/brushings
+    - Mediastinoscopy for lymph node sampling
+    - Thoracentesis if pleural effusion
+  molecular_testing:
+    - EGFR mutations
+    - ALK rearrangements
+    - ROS1 rearrangements
+    - BRAF V600E
+    - PD-L1 expression
+    - Comprehensive next-generation sequencing
+
+treatment:
+  non_small_cell_lung_cancer_nsclc:
+    stage_I_II:
+      - Surgical resection (lobectomy preferred over wedge)
+      - Adjuvant chemotherapy for stage IB-III
+      - SBRT for medically inoperable patients
+    stage_III:
+      - Concurrent chemoradiation
+      - Consider surgical resection if technically feasible
+      - Adjuvant immunotherapy (durvalumab) after chemoradiation
+    stage_IV:
+      - Systemic therapy based on molecular profile:
+        - EGFR mutation: Osimertinib, erlotinib
+        - ALK rearrangement: Alectinib, crizotinib
+        - ROS1: Crizotinib
+        - PD-L1 ≥50%: Pembrolizumab monotherapy
+        - PD-L1 <50%: Platinum doublet + immunotherapy
+      - Local therapy (radiation, surgery) for oligometastatic disease
+      - Palliative care integration
+  small_cell_lung_cancer_sclc:
+    limited_stage:
+      - Concurrent chemoradiation (cisplatin/etoposide + thoracic radiation)
+      - Prophylactic cranial irradiation (PCI) if complete response
+    extensive_stage:
+      - Chemotherapy: Platinum/etoposide + immunotherapy (atezolizumab)
+      - PCI if good response
+      - Palliative radiation for symptomatic sites
+  supportive:
+    - Smoking cessation
+    - Nutritional support
+    - Pain management
+    - Pulmonary rehabilitation
+
+clinical_pearls:
+  - Lung cancer is leading cause of cancer death worldwide
+  - NSCLC (85%): adenocarcinoma, squamous, large cell; SCLC (15%)
+  - Screening: Annual low-dose CT for ages 50-80 with 20 pack-year history
+  - Most cases diagnosed at advanced stage (60% stage III-IV)
+  - Molecular testing revolutionized treatment of NSCLC with targeted therapies
+  - Immunotherapy has dramatically improved outcomes in metastatic NSCLC
+  - Surgical resection offers best cure rate for early-stage disease
+  - SCLC highly responsive initially but most relapse
+
+differentials:
+  - Pulmonary infections (TB, fungal, bacterial)
+  - Sarcoidosis
+  - Metastatic disease from other primary
+  - Benign tumors (hamartoma)
+  - Bronchogenic cyst
+  - Vascular malformation
+
+trace:
+  - Suspicious findings on imaging or persistent symptoms
+  - Obtain tissue diagnosis via biopsy
+  - Stage with PET-CT and brain imaging
+  - Perform molecular testing on tumor
+  - Multidisciplinary tumor board discussion
+  - Treatment based on histology, stage, and molecular profile
+  - Integrate palliative care early
+
+citations:
+  - "NCCN Guidelines: Non-Small Cell Lung Cancer"
+  - "NCCN Guidelines: Small Cell Lung Cancer"
+  - "ASCO Guidelines for Lung Cancer Screening and Diagnosis"
+  - "UpToDate: Overview of the initial treatment of non-small cell lung cancer"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

@@ -1,0 +1,982 @@
+tree_id: ONCOLOGY-BREAST-MASS
+name: Breast Mass Evaluation
+family: Oncology
+specialty: Breast Surgery
+icd10: N63.0
+snomed: 274153004
+presentations:
+  - Palpable breast lump
+  - Usually painless
+  - Skin changes (dimpling, retraction)
+  - Nipple changes (inversion, discharge)
+  - Axillary lymphadenopathy
+  - Usually unilateral
+chief_complaint: Breast lump, breast mass, breast pain, nipple discharge
+description: Systematic evaluation of breast mass with emphasis on triple assessment (clinical exam, imaging, tissue diagnosis) and appropriate use of breast imaging (mammography, ultrasound, MRI). Critical distinction between benign and malignant lesions, and proper referral pathways for biopsy and treatment.
+
+differentials:
+  - Fibroadenoma
+  - Fibrocystic changes
+  - Fat necrosis
+  - Mastitis
+  - Breast cancer
+
+referrals:
+  emergency:
+    - Tumor lysis
+    - Oncologic emergency
+    - Severe complication
+  urgent:
+    - Suspected cancer
+    - New mass
+    - Abnormal imaging
+  routine:
+    - Surveillance
+    - Screening
+    - Prevention
+
+clinical_pearls:
+  - Most breast masses are benign but all need evaluation
+  - Triple assessment: clinical exam, imaging, tissue diagnosis
+  - Mammography less sensitive in dense breasts; ultrasound adjunct
+  - Family history important: BRCA mutations increase risk dramatically
+
+nodes:
+  - id: initial_presentation
+    type: question
+    question: "Patient presents with breast concern. What is the primary complaint?"
+    options:
+      - label: "Palpable breast lump/mass"
+        next: patient_age_risk
+      - label: "Nipple discharge (spontaneous, bloody)"
+        next: nipple_discharge_assessment
+      - label: "Breast pain without palpable mass"
+        next: breast_pain_assessment
+      - label: "Skin changes (dimpling, peau d'orange, nipple inversion)"
+        next: concerning_skin_changes
+
+  - id: patient_age_risk
+    type: question
+    question: "Palpable breast mass identified. Patient age and risk factors?"
+    options:
+      - label: "Age <30, no risk factors"
+        next: young_patient_exam
+      - label: "Age 30-39, average risk"
+        next: intermediate_age_imaging
+      - label: "Age ≥40"
+        next: screening_age_imaging
+      - label: "Any age + high risk (BRCA mutation, strong family history, prior chest radiation)"
+        next: high_risk_workup
+
+  - id: young_patient_exam
+    type: question
+    question: "Patient <30 years with breast mass. Physical exam characteristics?"
+    options:
+      - label: "Smooth, mobile, well-defined, rubbery mass - likely fibroadenoma"
+        next: ultrasound_young_benign
+      - label: "Fixed, hard, irregular mass"
+        next: ultrasound_young_suspicious
+      - label: "Tender, fluctuant, erythematous - suggests abscess"
+        next: dx_breast_abscess
+      - label: "Multiple bilateral lumps, cyclic with menses"
+        next: dx_fibrocystic_changes
+
+  - id: intermediate_age_imaging
+    type: question
+    question: "Age 30-39 with palpable mass. Start with ultrasound (dense breast tissue). Findings?"
+    options:
+      - label: "Simple cyst (anechoic, posterior enhancement, thin walls)"
+        next: dx_simple_cyst
+      - label: "Complex cyst (internal echoes, thick walls, septations)"
+        next: biopsy_complex_cyst
+      - label: "Solid mass with benign features (circumscribed, parallel orientation, <3 lobulations)"
+        next: birads_assessment_ultrasound
+      - label: "Solid mass with suspicious features (irregular, non-parallel, posterior shadowing, microcalcifications)"
+        next: biopsy_suspicious_mass
+
+  - id: screening_age_imaging
+    type: question
+    question: "Age ≥40 with palpable mass. Triple assessment required. Imaging approach?"
+    options:
+      - label: "Diagnostic mammogram + targeted ultrasound"
+        next: mammogram_findings
+      - label: "Patient refuses mammogram, ultrasound only"
+        next: ultrasound_only_findings
+
+  - id: high_risk_workup
+    type: question
+    question: "High-risk patient (BRCA+, strong family history, chest radiation age 10-30). Enhanced screening indicated. Imaging findings?"
+    options:
+      - label: "Mammogram + ultrasound + breast MRI recommended annually"
+        next: mri_high_risk_findings
+      - label: "Suspicious lesion on any modality"
+        next: biopsy_suspicious_mass
+
+  - id: nipple_discharge_assessment
+    type: question
+    question: "Nipple discharge characteristics? (Physiologic vs pathologic)"
+    options:
+      - label: "Bilateral, milky, multiductal - likely galactorrhea"
+        next: dx_galactorrhea
+      - label: "Unilateral, spontaneous, bloody or clear, single duct"
+        next: pathologic_discharge_workup
+      - label: "Multiductal, green/brown, expressed only"
+        next: dx_duct_ectasia
+      - label: "Purulent, associated with erythema/fever"
+        next: dx_mastitis
+
+  - id: breast_pain_assessment
+    type: question
+    question: "Breast pain (mastalgia) without palpable mass. Pattern and characteristics?"
+    options:
+      - label: "Bilateral, cyclic with menses, diffuse"
+        next: dx_cyclic_mastalgia
+      - label: "Unilateral, non-cyclic, localized"
+        next: imaging_for_pain
+      - label: "Chest wall pain, reproducible with palpation"
+        next: dx_chest_wall_pain
+
+  - id: concerning_skin_changes
+    type: question
+    question: "Skin changes present. Describe characteristics?"
+    options:
+      - label: "Peau d'orange (orange peel), erythema, warmth - suggests inflammatory breast cancer"
+        next: imaging_inflammatory_cancer
+      - label: "Skin dimpling/retraction with underlying mass"
+        next: screening_age_imaging
+      - label: "New nipple inversion or deviation"
+        next: screening_age_imaging
+      - label: "Paget's disease: nipple eczematous changes, erosion, crusting"
+        next: pagets_workup
+
+  - id: ultrasound_young_benign
+    type: question
+    question: "Ultrasound in patient <30. Findings?"
+    options:
+      - label: "Simple cyst"
+        next: dx_simple_cyst
+      - label: "Solid mass <2cm, benign features (BI-RADS 3)"
+        next: dx_probable_fibroadenoma
+      - label: "Solid mass with ANY suspicious features or >2cm"
+        next: biopsy_suspicious_mass
+
+  - id: ultrasound_young_suspicious
+    type: question
+    question: "Concerning mass in young patient on ultrasound. Features?"
+    options:
+      - label: "Irregular margins, posterior shadowing, non-parallel orientation"
+        next: biopsy_suspicious_mass
+      - label: "BI-RADS 4 or 5"
+        next: biopsy_suspicious_mass
+
+  - id: mammogram_findings
+    type: question
+    question: "Diagnostic mammogram findings?"
+    options:
+      - label: "Mass with suspicious features: irregular, spiculated, high density"
+        next: ultrasound_for_biopsy
+      - label: "Clustered microcalcifications: pleomorphic, linear branching"
+        next: stereotactic_biopsy_mammo
+      - label: "Architectural distortion"
+        next: ultrasound_for_biopsy
+      - label: "Asymmetry, benign calcifications"
+        next: benign_mammogram_correlate
+      - label: "BI-RADS 4 or 5"
+        next: ultrasound_for_biopsy
+      - label: "BI-RADS 3 (probably benign)"
+        next: short_interval_followup
+
+  - id: ultrasound_only_findings
+    type: question
+    question: "Ultrasound findings (no mammogram performed)?"
+    options:
+      - label: "Simple cyst"
+        next: dx_simple_cyst
+      - label: "Suspicious solid mass"
+        next: biopsy_suspicious_mass
+      - label: "Benign-appearing mass"
+        next: birads_assessment_ultrasound
+
+  - id: mri_high_risk_findings
+    type: question
+    question: "Breast MRI in high-risk patient. Findings?"
+    options:
+      - label: "Enhancing mass with suspicious kinetics (rapid initial, washout)"
+        next: mri_guided_biopsy
+      - label: "Non-mass enhancement (NME), suspicious distribution"
+        next: mri_guided_biopsy
+      - label: "Negative MRI"
+        next: continue_screening
+
+  - id: pathologic_discharge_workup
+    type: question
+    question: "Pathologic nipple discharge (bloody, clear, single duct, spontaneous). Imaging findings?"
+    options:
+      - label: "Mammogram + ultrasound show intraductal mass/papilloma"
+        next: dx_intraductal_papilloma
+      - label: "Imaging negative"
+        next: ductoscopy_or_ductogram
+      - label: "Mass identified"
+        next: biopsy_suspicious_mass
+
+  - id: imaging_for_pain
+    type: question
+    question: "Imaging for localized unilateral breast pain. Findings?"
+    options:
+      - label: "Mass or concerning finding identified"
+        next: biopsy_suspicious_mass
+      - label: "No mass identified, negative imaging"
+        next: dx_noncyclic_mastalgia
+
+  - id: imaging_inflammatory_cancer
+    type: question
+    question: "Suspected inflammatory breast cancer (peau d'orange, erythema, warmth). Imaging?"
+    options:
+      - label: "Mammogram + ultrasound: skin thickening, increased density, no discrete mass typical"
+        next: biopsy_inflammatory_cancer
+      - label: "If mass identified"
+        next: biopsy_inflammatory_cancer
+
+  - id: pagets_workup
+    type: question
+    question: "Paget's disease of nipple suspected (eczematous, erosive nipple changes). Workup?"
+    options:
+      - label: "Mammogram + ultrasound + nipple biopsy"
+        next: dx_pagets_disease
+
+  - id: birads_assessment_ultrasound
+    type: question
+    question: "Benign-appearing solid mass on ultrasound. BI-RADS category assigned?"
+    options:
+      - label: "BI-RADS 2 (benign) - fibroadenoma, lipoma, lymph node"
+        next: dx_benign_mass_imaging
+      - label: "BI-RADS 3 (probably benign <2% malignancy risk)"
+        next: short_interval_followup
+      - label: "BI-RADS 4 (suspicious, 2-95% malignancy risk)"
+        next: biopsy_suspicious_mass
+
+  - id: benign_mammogram_correlate
+    type: question
+    question: "Benign mammogram but palpable mass. Correlation?"
+    options:
+      - label: "Mass corresponds to benign finding on mammogram"
+        next: dx_benign_mass_imaging
+      - label: "Palpable mass not visualized on mammogram - need ultrasound"
+        next: ultrasound_for_biopsy
+
+  - id: short_interval_followup
+    type: diagnosis
+    diagnosis: "BI-RADS 3 - Probably Benign, Short Interval Follow-up"
+    icd10: N63
+    description: "Probably benign finding with <2% risk of malignancy. Appropriate for short-interval follow-up imaging at 6 months, then 12 months, then 24 months (total 3 years). If stable throughout, return to routine screening. Any change requires biopsy."
+    recommendations:
+      - "BI-RADS 3 criteria: <2% malignancy risk, specific benign-appearing findings"
+      - "Common BI-RADS 3 lesions:"
+      - "  - Solid mass <2cm, circumscribed, round/oval, parallel orientation"
+      - "  - Non-palpable circumscribed mass in screening"
+      - "  - Clustered round calcifications"
+      - "  - Focal asymmetry (not mass)"
+      - "Follow-up protocol:"
+      - "  - Repeat imaging at 6 months (same modality)"
+      - "  - If stable: repeat at 12 months"
+      - "  - If stable: repeat at 24 months"
+      - "  - If stable for 3 years total: return to annual screening"
+      - "  - ANY change in size, shape, or character → biopsy"
+      - "Patient education:"
+      - "  - Very low risk (<2%) but not zero"
+      - "  - Alternative: biopsy now if patient anxious"
+      - "  - Must adhere to follow-up schedule"
+      - "Breast self-exam monthly, report any changes"
+      - "Do NOT use BI-RADS 3 for palpable masses (should be biopsied)"
+
+  - id: ultrasound_for_biopsy
+    type: question
+    question: "Suspicious finding on mammogram. Ultrasound correlation for biopsy planning?"
+    options:
+      - label: "Mass visualized on ultrasound - amenable to US-guided biopsy"
+        next: core_needle_biopsy
+      - label: "Microcalcifications only, no mass on ultrasound"
+        next: stereotactic_biopsy_mammo
+      - label: "No sonographic correlate but suspicious on mammogram"
+        next: stereotactic_biopsy_mammo
+
+  - id: biopsy_suspicious_mass
+    type: question
+    question: "Suspicious mass identified, biopsy required. Which biopsy method?"
+    options:
+      - label: "Mass visible on ultrasound"
+        next: core_needle_biopsy
+      - label: "Microcalcifications only (no mass)"
+        next: stereotactic_biopsy_mammo
+      - label: "Only visible on MRI"
+        next: mri_guided_biopsy
+
+  - id: biopsy_complex_cyst
+    type: question
+    question: "Complex cyst with concerning features. Management?"
+    options:
+      - label: "Aspirate cyst under ultrasound guidance"
+        next: cyst_aspiration_result
+      - label: "Solid component present - core needle biopsy"
+        next: core_needle_biopsy
+
+  - id: cyst_aspiration_result
+    type: question
+    question: "Cyst aspiration results?"
+    options:
+      - label: "Clear fluid, mass resolves completely"
+        next: dx_simple_cyst
+      - label: "Bloody fluid OR residual mass after aspiration"
+        next: core_needle_biopsy
+
+  - id: core_needle_biopsy
+    type: question
+    question: "Ultrasound-guided core needle biopsy performed. Pathology results?"
+    options:
+      - label: "Benign: fibroadenoma, fibrocystic changes, fat necrosis"
+        next: benign_biopsy_result
+      - label: "High-risk lesion: atypical ductal hyperplasia (ADH), lobular carcinoma in situ (LCIS), papilloma with atypia, radial scar"
+        next: high_risk_lesion
+      - label: "Malignant: invasive ductal/lobular carcinoma"
+        next: dx_breast_cancer_invasive
+      - label: "Ductal carcinoma in situ (DCIS)"
+        next: dx_dcis
+
+  - id: stereotactic_biopsy_mammo
+    type: question
+    question: "Stereotactic biopsy (for calcifications or findings only visible on mammogram). Pathology?"
+    options:
+      - label: "Benign calcifications (fibrocystic, calcified fibroadenoma)"
+        next: benign_biopsy_result
+      - label: "High-risk lesion (ADH, ALH, LCIS, papilloma)"
+        next: high_risk_lesion
+      - label: "DCIS"
+        next: dx_dcis
+      - label: "Invasive carcinoma"
+        next: dx_breast_cancer_invasive
+
+  - id: mri_guided_biopsy
+    type: question
+    question: "MRI-guided biopsy performed. Pathology results?"
+    options:
+      - label: "Benign"
+        next: benign_biopsy_result
+      - label: "High-risk lesion"
+        next: high_risk_lesion
+      - label: "Malignant"
+        next: dx_breast_cancer_invasive
+
+  - id: biopsy_inflammatory_cancer
+    type: question
+    question: "Skin punch biopsy for inflammatory breast cancer. Pathology?"
+    options:
+      - label: "Dermal lymphatic invasion confirmed"
+        next: dx_inflammatory_breast_cancer
+      - label: "Benign, infection suspected"
+        next: dx_mastitis
+
+  - id: ductoscopy_or_ductogram
+    type: question
+    question: "Pathologic nipple discharge with negative imaging. Further evaluation?"
+    options:
+      - label: "Ductoscopy performed: intraductal lesion visualized"
+        next: dx_intraductal_papilloma
+      - label: "Surgical duct excision recommended (definitive)"
+        next: dx_intraductal_papilloma
+
+  - id: benign_biopsy_result
+    type: diagnosis
+    diagnosis: "Benign Breast Lesion - Concordant"
+    icd10: N60.9
+    description: "Benign pathology on core needle biopsy that is concordant with imaging findings. Appropriate to follow clinically and with imaging. Excision not required unless patient preference or discordant with imaging."
+    recommendations:
+      - "Pathology-radiology correlation (concordance) essential:"
+      - "  - Concordant: pathology matches imaging appearance → follow clinically"
+      - "  - Discordant: pathology doesn't explain imaging → surgical excision required"
+      - "Common benign diagnoses:"
+      - "  - Fibroadenoma (most common benign solid tumor in young women)"
+      - "  - Fibrocystic changes (cysts, fibrosis, apocrine metaplasia)"
+      - "  - Fat necrosis (history of trauma, surgery, or radiation)"
+      - "  - Intraductal papilloma (if no atypia)"
+      - "Follow-up:"
+      - "  - Repeat imaging in 6-12 months to confirm stability"
+      - "  - If stable: return to routine screening"
+      - "  - If grows: re-biopsy or excision"
+      - "Surgical excision indications (even if benign):"
+      - "  - Patient preference"
+      - "  - Symptomatic (painful)"
+      - "  - Enlarging on serial imaging"
+      - "  - Discordant pathology"
+      - "Breast self-exam monthly, annual clinical exam"
+      - "Return to age-appropriate screening mammography"
+
+  - id: high_risk_lesion
+    type: diagnosis
+    diagnosis: "High-Risk Breast Lesion"
+    icd10: N60.9
+    description: "Pathology shows lesion with increased risk of upgrade to malignancy on excision (10-30% upgrade rate) or increased future breast cancer risk. Surgical excision recommended for most high-risk lesions due to sampling error on core biopsy."
+    recommendations:
+      - "High-risk lesions requiring surgical excision:"
+      - "  - Atypical ductal hyperplasia (ADH): 10-20% upgrade to DCIS or invasive cancer"
+      - "  - Atypical lobular hyperplasia (ALH): marker of increased risk"
+      - "  - Lobular carcinoma in situ (LCIS): 7-12% upgrade, 20% lifetime bilateral breast cancer risk"
+      - "  - Papilloma with atypia: 10-15% upgrade"
+      - "  - Radial scar: 5-10% upgrade if complex"
+      - "  - Flat epithelial atypia (FEA): management controversial, often excised"
+      - "Surgical referral to breast surgeon for excisional biopsy"
+      - "Excision with negative margins to ensure no adjacent DCIS/invasive cancer"
+      - "If LCIS or ALH:"
+      - "  - Bilateral mammogram annually (if not already)"
+      - "  - Consider chemoprevention: tamoxifen 20mg daily × 5 years (reduces risk by 50%)"
+      - "  - Consider risk-reducing strategies if BRCA+ or very high risk"
+      - "If ADH on final excision (no upgrade):"
+      - "  - Increased screening: annual mammogram + consider MRI if high-risk"
+      - "  - Chemoprevention discussion"
+      - "Genetic counseling if strong family history or young age (<50)"
+      - "Lifetime surveillance required - increased cancer risk"
+
+  - id: dx_dcis
+    type: diagnosis
+    diagnosis: "Ductal Carcinoma In Situ (DCIS)"
+    icd10: D05.9
+    description: "Non-invasive breast cancer confined to ducts without invasion through basement membrane. Treated to prevent progression to invasive cancer (occurs in 30-50% if untreated). Stage 0 disease - 98% cure rate with appropriate treatment."
+    recommendations:
+      - "Breast surgery consultation for treatment planning"
+      - "Treatment options (individualized based on extent, grade, patient factors):"
+      - "  - Breast-conserving surgery (lumpectomy) + whole breast radiation therapy (most common)"
+      - "  - Mastectomy if:"
+      - "    • Extensive disease (multicentric, >4cm, or unable to achieve negative margins)"
+      - "    • Patient preference"
+      - "    • BRCA mutation carrier"
+      - "    • Unable to receive radiation therapy"
+      - "Sentinel lymph node biopsy NOT routinely required for pure DCIS (but done if mastectomy)"
+      - "Margins: at least 2mm clear margins recommended"
+      - "Radiation therapy after lumpectomy:"
+      - "  - Whole breast RT: 50 Gy in 25 fractions + boost 10-16 Gy to tumor bed"
+      - "  - Reduces local recurrence by 50% (from 30% to 15% at 10 years)"
+      - "  - May omit radiation in select patients: low-grade, <2.5cm, age >65, margins >3mm (discuss oncology)"
+      - "Adjuvant endocrine therapy if ER/PR positive (70% of DCIS):"
+      - "  - Tamoxifen 20mg daily × 5 years (premenopausal or postmenopausal)"
+      - "  - OR aromatase inhibitor (letrozole, anastrozole) if postmenopausal"
+      - "  - Reduces ipsilateral recurrence and contralateral breast cancer"
+      - "Surveillance:"
+      - "  - Mammogram q6months × 2 years, then annual lifelong"
+      - "  - Clinical breast exam q6-12 months"
+      - "Prognosis: excellent, >98% disease-specific survival at 10 years"
+
+  - id: dx_breast_cancer_invasive
+    type: diagnosis
+    diagnosis: "Invasive Breast Cancer"
+    icd10: C50.9
+    description: "Malignant tumor with invasion through basement membrane into surrounding breast tissue. Requires complete staging workup, surgical treatment, and consideration of systemic therapy (chemotherapy, endocrine therapy, targeted therapy) based on tumor characteristics and stage."
+    recommendations:
+      - "URGENT breast surgery and medical oncology consultation"
+      - "Complete staging workup:"
+      - "  - Bilateral diagnostic mammogram + ultrasound (if not already done)"
+      - "  - Chest imaging: CXR or CT chest"
+      - "  - If clinical stage II or higher: CT abdomen/pelvis, bone scan or PET/CT"
+      - "  - Labs: CBC, CMP, LFTs"
+      - "Core biopsy pathology review - critical markers:"
+      - "  - Histologic type: invasive ductal (80%), invasive lobular (10%), other"
+      - "  - Grade: 1 (well-differentiated) to 3 (poorly differentiated)"
+      - "  - ER/PR status (hormone receptor positive ~70%)"
+      - "  - HER2 status (HER2 positive ~15-20%)"
+      - "  - Ki-67 proliferation index"
+      - "Surgical treatment options:"
+      - "  - Breast-conserving surgery (lumpectomy) + radiation: oncologically equivalent to mastectomy for early-stage"
+      - "  - Mastectomy indications: multicentric disease, extensive DCIS, prior chest RT, BRCA+ (consider bilateral), patient preference"
+      - "  - Sentinel lymph node biopsy: standard for clinically node-negative"
+      - "  - Axillary lymph node dissection if nodes positive"
+      - "Neoadjuvant chemotherapy (before surgery) if:"
+      - "  - Locally advanced (stage III)"
+      - "  - Inflammatory breast cancer"
+      - "  - Large tumor wanting breast conservation"
+      - "  - HER2+ or triple-negative disease"
+      - "Adjuvant systemic therapy (after surgery) based on subtype:"
+      - "  - HR+/HER2-: endocrine therapy (tamoxifen or AI) × 5-10 years ± chemotherapy"
+      - "  - HER2+: trastuzumab-based therapy + chemotherapy + endocrine if HR+"
+      - "  - Triple-negative: chemotherapy ± immunotherapy (pembrolizumab)"
+      - "Radiation therapy:"
+      - "  - Whole breast RT after lumpectomy (required)"
+      - "  - Chest wall RT after mastectomy if high-risk features"
+      - "  - Regional nodal irradiation if ≥4 positive nodes or other high-risk factors"
+      - "Genetic counseling and testing if:"
+      - "  - Age <50 at diagnosis"
+      - "  - Triple-negative breast cancer age <60"
+      - "  - Male breast cancer"
+      - "  - Ashkenazi Jewish ancestry"
+      - "  - Strong family history (multiple relatives with breast/ovarian cancer)"
+      - "Surveillance after treatment:"
+      - "  - Mammogram q6-12 months × 2-3 years, then annual"
+      - "  - Clinical exam q3-6 months × 3 years, then q6-12 months"
+      - "  - No routine labs or imaging if asymptomatic (low yield)"
+      - "Multidisciplinary tumor board discussion recommended"
+
+  - id: dx_inflammatory_breast_cancer
+    type: diagnosis
+    diagnosis: "Inflammatory Breast Cancer (IBC)"
+    icd10: C50.9
+    description: "Aggressive subtype (1-5% of breast cancers) with rapid onset of breast erythema, edema (peau d'orange), and warmth due to dermal lymphatic invasion. Clinical diagnosis - often no discrete mass. Stage III at minimum. Requires neoadjuvant chemotherapy followed by mastectomy and radiation."
+    recommendations:
+      - "URGENT medical oncology and breast surgery consultation"
+      - "Clinical diagnosis based on:"
+      - "  - Erythema involving ≥1/3 of breast"
+      - "  - Peau d'orange (orange peel appearance from lymphatic blockage)"
+      - "  - Breast edema, warmth, heaviness"
+      - "  - Rapid onset (<6 months)"
+      - "  - Skin punch biopsy showing dermal lymphatic invasion (confirmatory but not required)"
+      - "Core biopsy of breast for histology and biomarkers (ER/PR/HER2)"
+      - "Complete staging:"
+      - "  - Bilateral mammogram + ultrasound"
+      - "  - PET/CT (preferred) or CT chest/abdomen/pelvis + bone scan"
+      - "  - Brain MRI if neurologic symptoms"
+      - "  - Labs: CBC, CMP, LFTs"
+      - "Stage: minimum T4d (inflammatory), often stage IIIB or IIIC"
+      - "Treatment (ALWAYS multimodal):"
+      - "  1. Neoadjuvant chemotherapy first (4-6 months):"
+      - "    - Standard regimen: anthracycline + taxane based"
+      - "    - Add trastuzumab + pertuzumab if HER2+"
+      - "    - Add pembrolizumab if triple-negative (emerging)"
+      - "  2. Surgery after chemo: modified radical mastectomy (lumpectomy contraindicated)"
+      - "  3. Radiation therapy: chest wall + regional nodes (required)"
+      - "  4. Adjuvant endocrine therapy if HR+ × 5-10 years"
+      - "  5. Complete 1 year trastuzumab if HER2+"
+      - "Prognosis:"
+      - "  - 5-year survival: 40-50% (better than historical 20% with modern therapy)"
+      - "  - Worse than stage-matched non-inflammatory breast cancer"
+      - "  - Pathologic complete response to neoadjuvant chemo predicts better outcome"
+      - "Close surveillance - high recurrence risk"
+
+  - id: dx_pagets_disease
+    type: diagnosis
+    diagnosis: "Paget's Disease of the Nipple"
+    icd10: C50.0
+    description: "Rare presentation of breast cancer (1-4%) with malignant cells extending into nipple epidermis. Presents as eczematous, erosive nipple changes. 95% have underlying DCIS or invasive cancer. Requires treatment of both nipple and underlying breast cancer."
+    recommendations:
+      - "Breast surgery consultation"
+      - "Diagnostic workup:"
+      - "  - Nipple punch or scrape biopsy: Paget cells (large cells with pale cytoplasm in epidermis)"
+      - "  - Bilateral mammogram + ultrasound to identify underlying mass (present 50-60%)"
+      - "  - Breast MRI to define extent of disease"
+      - "  - Core biopsy of any identified mass"
+      - "Underlying breast cancer present in 95%:"
+      - "  - DCIS only: 30-40%"
+      - "  - Invasive cancer: 50-60%"
+      - "  - No underlying cancer: 5% (Paget's alone)"
+      - "Treatment:"
+      - "  - If underlying invasive cancer or extensive DCIS: mastectomy (preferred)"
+      - "  - If isolated Paget's or limited DCIS: central lumpectomy (nipple-areolar complex + underlying tissue) + radiation"
+      - "  - Sentinel lymph node biopsy if invasive component"
+      - "Adjuvant therapy based on underlying cancer:"
+      - "  - Endocrine therapy if HR+"
+      - "  - Chemotherapy if invasive cancer and indicated by stage/biology"
+      - "  - Trastuzumab if HER2+"
+      - "Radiation therapy after breast-conserving surgery"
+      - "Prognosis depends on presence and extent of underlying cancer:"
+      - "  - Paget's with DCIS only: >95% survival (similar to DCIS)"
+      - "  - Paget's with invasive cancer: depends on stage and biology"
+
+  - id: dx_simple_cyst
+    type: diagnosis
+    diagnosis: "Simple Breast Cyst"
+    icd10: N60.0
+    description: "Fluid-filled sac, extremely common (50% of women age 30-50). Benign with essentially 0% malignancy risk if meets simple cyst criteria on ultrasound. Aspiration only if symptomatic. Does not increase cancer risk."
+    recommendations:
+      - "Simple cyst criteria on ultrasound (all must be present):"
+      - "  - Anechoic (black, no internal echoes)"
+      - "  - Round or oval shape"
+      - "  - Thin, imperceptible walls"
+      - "  - Posterior acoustic enhancement"
+      - "Reassurance: benign, very common, does NOT increase cancer risk"
+      - "Management:"
+      - "  - Asymptomatic: no intervention needed, routine screening"
+      - "  - Symptomatic (painful): ultrasound-guided aspiration"
+      - "    • Clear fluid + complete resolution → no further action"
+      - "    • Bloody fluid OR residual mass → core biopsy required"
+      - "  - Recurrent symptomatic cyst: re-aspirate or surgical excision"
+      - "Complex cyst features (internal echoes, thick walls, septations, solid component) → biopsy required"
+      - "No need for follow-up imaging if asymptomatic simple cyst"
+      - "Return to routine age-appropriate screening"
+      - "Patient education: cysts may fluctuate with menstrual cycle, can come and go"
+
+  - id: dx_probable_fibroadenoma
+    type: diagnosis
+    diagnosis: "Probable Fibroadenoma"
+    icd10: D24
+    description: "Most common benign solid breast tumor, especially in women <30. Estrogen-sensitive, may grow during pregnancy. Classic 'breast mouse' - mobile, rubbery mass. Biopsy usually indicated to confirm diagnosis unless classic appearance in young patient."
+    recommendations:
+      - "Classic fibroadenoma features:"
+      - "  - Age <30 (peak 20s-30s)"
+      - "  - Well-circumscribed, round/oval, mobile mass"
+      - "  - Ultrasound: hypoechoic, circumscribed, <3 lobulations, parallel orientation"
+      - "Management options:"
+      - "  - Age <25 with classic features <2cm: observation with 6-month ultrasound follow-up acceptable"
+      - "  - Age ≥25 or atypical features: core needle biopsy to confirm (preferred)"
+      - "After biopsy confirmation:"
+      - "  - Observation if asymptomatic and stable (most common approach)"
+      - "  - Repeat imaging at 6-12 months to document stability"
+      - "  - Excision indications:"
+      - "    • Growing (>20% size increase)"
+      - "    • Symptomatic (painful)"
+      - "    • Patient anxiety"
+      - "    • >2-3 cm (may consider removal)"
+      - "Natural history:"
+      - "  - 10-40% regress spontaneously"
+      - "  - 10-20% grow"
+      - "  - Most remain stable"
+      - "  - May grow during pregnancy or with hormone therapy"
+      - "Complex fibroadenoma (cysts, sclerosis, calcifications) may have slightly increased cancer risk - discuss with pathologist"
+      - "Return to routine screening when stable"
+      - "Does NOT require aggressive management - very low cancer risk"
+
+  - id: dx_benign_mass_imaging
+    type: diagnosis
+    diagnosis: "Benign Breast Mass by Imaging (BI-RADS 2)"
+    icd10: N63
+    description: "Breast mass with definitively benign imaging characteristics requiring no biopsy. Examples: lymph node, lipoma, oil cyst (fat necrosis), clustered microcysts. Routine screening follow-up appropriate."
+    recommendations:
+      - "BI-RADS 2 = definitively benign (0% malignancy risk)"
+      - "Common benign findings:"
+      - "  - Intramammary lymph node (reniform shape, fatty hilum)"
+      - "  - Lipoma (fat density on mammogram, echogenic on ultrasound)"
+      - "  - Oil cyst/fat necrosis (history of trauma, surgery, or radiation)"
+      - "  - Hamartoma (fibroadenolipoma)"
+      - "  - Calcified fibroadenoma"
+      - "  - Vascular calcifications"
+      - "No biopsy or follow-up needed"
+      - "Return to routine annual screening mammography (age ≥40)"
+      - "Continue monthly breast self-exam"
+      - "Patient reassurance: benign finding, no cancer risk"
+
+  - id: dx_fibrocystic_changes
+    type: diagnosis
+    diagnosis: "Fibrocystic Breast Changes"
+    icd10: N60.1
+    description: "Extremely common (50-60% of women), not a disease but normal variant. Combination of fibrosis, cysts, and epithelial proliferation causing lumpiness and cyclic pain. Hormone-sensitive, worse premenstrually. Does NOT increase cancer risk unless atypia present on biopsy."
+    recommendations:
+      - "Reassurance: very common, normal variant, not pre-cancerous"
+      - "Symptoms typically:"
+      - "  - Bilateral lumpy, 'rope-like' texture"
+      - "  - Cyclic pain (worse premenstrually, improves after menses)"
+      - "  - Multiple tender areas"
+      - "Management (all symptom-directed, no treatment required if asymptomatic):"
+      - "  - Supportive bra (especially during exercise)"
+      - "  - NSAIDs for pain: ibuprofen 600mg q6h PRN during symptomatic period"
+      - "  - Topical NSAIDs: diclofenac gel may help localized pain"
+      - "  - Consider caffeine reduction (controversial, may help some patients)"
+      - "  - Vitamin E 400 IU daily (limited evidence but low risk)"
+      - "  - Evening primrose oil (limited evidence)"
+      - "  - For severe refractory pain:"
+      - "    • Danazol 100-200mg PO BID (decreases estrogen, many side effects)"
+      - "    • Tamoxifen 10-20mg daily (off-label, severe cases only)"
+      - "Imaging if:"
+      - "  - Dominant mass develops"
+      - "  - Asymmetric findings on exam"
+      - "  - Age-appropriate screening (not more frequently)"
+      - "Does NOT increase cancer risk unless proliferative changes with atypia on biopsy"
+      - "Routine screening mammography per guidelines"
+
+  - id: dx_breast_abscess
+    type: diagnosis
+    diagnosis: "Breast Abscess"
+    icd10: N61.1
+    description: "Localized infection with purulent collection, most commonly postpartum/lactating (lactational abscess from Staph aureus) or non-lactating (periareolar from anaerobes in smokers with duct ectasia). Requires drainage in addition to antibiotics."
+    recommendations:
+      - "Lactational abscess (postpartum, breastfeeding):"
+      - "  - Organisms: Staph aureus (including MRSA), Streptococcus"
+      - "  - Treatment:"
+      - "    • Ultrasound-guided needle aspiration or incision & drainage"
+      - "    • Antibiotics: dicloxacillin 500mg PO QID × 10-14 days"
+      - "    • OR if MRSA risk factors: TMP-SMX DS 1-2 tabs PO BID + cephalexin 500mg PO QID"
+      - "    • If severe/toxic: vancomycin 15-20mg/kg IV q8-12h"
+      - "  - Continue breastfeeding from affected breast (helps drainage, safe for infant)"
+      - "  - Pump and dump NOT necessary"
+      - "  - Frequent feeding/pumping to prevent milk stasis"
+      - "Non-lactational abscess (smokers, periareolar):"
+      - "  - Organisms: anaerobes, Staphylococcus, Streptococcus"
+      - "  - Treatment:"
+      - "    • Incision and drainage (I&D)"
+      - "    • Antibiotics: amoxicillin-clavulanate 875mg PO BID × 10-14 days"
+      - "    • OR clindamycin 300-450mg PO TID"
+      - "  - Smoking cessation counseling (causative factor)"
+      - "  - May require duct excision if recurrent"
+      - "Drainage:"
+      - "  - Small abscess <3cm: needle aspiration may be sufficient (may need repeated)"
+      - "  - Large abscess >3cm: I&D with drain placement"
+      - "Culture abscess fluid to guide antibiotic therapy"
+      - "Follow-up in 2-3 days to assess response"
+      - "If not improving after 48-72h: consider MRSA, TB, or inflammatory breast cancer"
+
+  - id: dx_mastitis
+    type: diagnosis
+    diagnosis: "Mastitis"
+    icd10: N61.0
+    description: "Breast infection without abscess formation. Most common in lactating women (lactational mastitis) from milk stasis and bacterial entry through nipple cracks. Cellulitis with erythema, warmth, pain, fever. Antibiotics treat infection; continued breastfeeding/pumping essential."
+    recommendations:
+      - "Lactational mastitis (breastfeeding):"
+      - "  - Clinical: wedge-shaped area of erythema, warmth, pain, fever >38°C, often unilateral"
+      - "  - Organisms: Staph aureus (most common), Streptococcus"
+      - "  - Treatment:"
+      - "    • Antibiotics: dicloxacillin 500mg PO QID × 10-14 days (first-line)"
+      - "    • PCN allergy: cephalexin 500mg PO QID"
+      - "    • MRSA risk factors: TMP-SMX DS PO BID + cephalexin"
+      - "    • Severe/hospitalized: nafcillin 2g IV q4h or vancomycin 15-20mg/kg IV q8-12h"
+      - "  - Supportive care (CRITICAL):"
+      - "    • CONTINUE breastfeeding from affected breast (does NOT harm infant)"
+      - "    • Frequent feeding/pumping q2-3h to empty breast (prevents abscess)"
+      - "    • Warm compresses before feeding"
+      - "    • Adequate hydration, rest, analgesia (ibuprofen 600mg q6h)"
+      - "  - If no improvement in 48-72h: ultrasound to rule out abscess"
+      - "Non-lactational mastitis (rare):"
+      - "  - Consider inflammatory breast cancer if not responding to antibiotics"
+      - "  - Skin biopsy if persistent after antibiotic course"
+      - "Prevention of recurrence:"
+      - "  - Proper latch technique (lactation consultant referral)"
+      - "  - Treat nipple cracks/fissures promptly"
+      - "  - Empty breasts completely at each feeding"
+      - "  - Avoid tight bras"
+
+  - id: dx_galactorrhea
+    type: diagnosis
+    diagnosis: "Galactorrhea"
+    icd10: N64.3
+    description: "Bilateral milky nipple discharge not associated with pregnancy/lactation. Most commonly from hyperprolactinemia (medications, pituitary adenoma, hypothyroidism). Physiologic discharge is typically bilateral, multiductal, and only with expression."
+    recommendations:
+      - "Confirm galactorrhea: bilateral, milky, multiductal discharge"
+      - "Laboratory workup:"
+      - "  - Serum prolactin level (morning, fasting, no breast stimulation for 24h prior)"
+      - "  - TSH (hypothyroidism causes hyperprolactinemia)"
+      - "  - Pregnancy test (βhCG) in women of reproductive age"
+      - "  - Renal function (uremia causes hyperprolactinemia)"
+      - "Common causes of hyperprolactinemia:"
+      - "  - Medications (most common): antipsychotics (risperidone, haloperidol), metoclopramide, domperidone, verapamil, SSRIs, opioids"
+      - "  - Prolactinoma (pituitary adenoma)"
+      - "  - Hypothyroidism"
+      - "  - Chronic kidney disease"
+      - "  - Physiologic: pregnancy, lactation, breast stimulation, stress"
+      - "If prolactin elevated:"
+      - "  - If on causative medication: consider discontinuation or switch if possible"
+      - "  - If prolactin >200 ng/mL: likely prolactinoma → MRI pituitary"
+      - "  - If prolactin 100-200 ng/mL: repeat level, consider MRI pituitary"
+      - "  - If prolactin 25-100 ng/mL: evaluate for secondary causes, repeat level"
+      - "Treatment:"
+      - "  - Treat underlying cause (stop causative drug, treat hypothyroidism)"
+      - "  - Prolactinoma: dopamine agonist (cabergoline 0.25-1mg twice weekly preferred over bromocriptine)"
+      - "  - Asymptomatic: often no treatment needed if mild elevation and no mass"
+      - "  - Avoid breast stimulation (worsens galactorrhea)"
+      - "Endocrinology referral if prolactinoma or unclear etiology"
+
+  - id: dx_duct_ectasia
+    type: diagnosis
+    diagnosis: "Mammary Duct Ectasia"
+    icd10: N60.4
+    description: "Benign condition of periareolar ducts with dilation and inflammation, most common in perimenopausal women and smokers. Presents as thick, sticky, multicolor discharge (green, brown, gray) from multiple ducts, often bilateral. Not malignant but can be symptomatic."
+    recommendations:
+      - "Clinical features:"
+      - "  - Multiductal, multicolor discharge (green, brown, black, gray)"
+      - "  - Bilateral, only with expression (not spontaneous)"
+      - "  - Associated with periareolar pain/tenderness in some"
+      - "  - Nipple retraction may occur (chronic fibrosis)"
+      - "Imaging:"
+      - "  - Mammogram: periareolar calcifications, dilated ducts (may see)"
+      - "  - Ultrasound: dilated ducts with debris"
+      - "Reassurance: benign condition, not cancerous"
+      - "Management:"
+      - "  - Asymptomatic: observation only, no treatment needed"
+      - "  - Symptomatic discharge or pain:"
+      - "    • Warm compresses"
+      - "    • NSAIDs for pain"
+      - "    • Avoid nipple stimulation/compression"
+      - "    • Antibiotics if superimposed infection (periductal mastitis)"
+      - "  - Refractory severe symptoms: surgical excision of affected ducts"
+      - "Smoking cessation strongly encouraged (associated with duct ectasia)"
+      - "No increased cancer risk"
+      - "Continue routine screening mammography"
+
+  - id: dx_intraductal_papilloma
+    type: diagnosis
+    diagnosis: "Intraductal Papilloma"
+    icd10: D24
+    description: "Benign tumor within breast duct, most common cause of bloody or clear nipple discharge from single duct. Central (subareolar) papillomas are usually solitary and benign. Peripheral papillomas may be multiple and have slight increased cancer risk. Excision recommended."
+    recommendations:
+      - "Classic presentation: spontaneous, unilateral, bloody or serous discharge from single duct"
+      - "Types:"
+      - "  - Central (solitary): single duct, subareolar, benign"
+      - "  - Peripheral (multiple): associated with increased cancer risk (ADH, DCIS possible)"
+      - "Imaging:"
+      - "  - Mammogram + ultrasound: may show intraductal mass, often normal"
+      - "  - Ductography (galactography): filling defect in duct (rarely performed now)"
+      - "  - MRI: may detect occult lesions"
+      - "Core needle biopsy if mass identified:"
+      - "  - Papilloma without atypia: surgical excision recommended (10% upgrade rate)"
+      - "  - Papilloma with atypia: surgical excision mandatory (high upgrade risk)"
+      - "Surgical management:"
+      - "  - Microdochectomy (single duct excision) - preferred for symptomatic single-duct discharge"
+      - "  - Central duct excision if multiple ducts involved"
+      - "Final pathology:"
+      - "  - Benign papilloma: no further treatment, routine screening"
+      - "  - Papilloma with atypia or upgrade to DCIS/cancer: treat accordingly"
+      - "Follow-up: clinical exam every 6-12 months × 2 years, then annual"
+      - "Routine screening mammography"
+
+  - id: dx_cyclic_mastalgia
+    type: diagnosis
+    diagnosis: "Cyclic Mastalgia (Cyclic Breast Pain)"
+    icd10: N64.4
+    description: "Breast pain related to menstrual cycle, typically bilateral and diffuse, worse in luteal phase (week before menses), improves with menses. Very common (60-70% of women). Benign, not associated with cancer. Typically resolves with menopause."
+    recommendations:
+      - "Reassurance: extremely common, benign, NOT a sign of breast cancer"
+      - "Characteristics of cyclic mastalgia:"
+      - "  - Bilateral, diffuse, often worse in upper outer quadrants"
+      - "  - Worse week before menses, improves with menstruation"
+      - "  - Dull, heavy, aching quality"
+      - "  - Associated with breast swelling/fullness"
+      - "Management (trial in order):"
+      - "  1. Supportive, well-fitting bra (day and night during symptomatic period)"
+      - "  2. NSAIDs during symptomatic period: ibuprofen 600mg PO q6h PRN"
+      - "  3. Topical NSAIDs: diclofenac 1% gel to affected area TID"
+      - "  4. Lifestyle modifications:"
+      - "    • Reduce caffeine intake (coffee, tea, chocolate, soda) - inconsistent evidence but may help"
+      - "    • Evening primrose oil 1000mg PO TID (limited evidence)"
+      - "    • Vitamin E 400 IU daily (limited evidence)"
+      - "  5. Hormonal interventions (for severe, refractory pain):"
+      - "    • Oral contraceptives: continuous dosing (skip placebo pills) may help"
+      - "    • Danazol 100-200mg PO BID (effective but significant side effects: weight gain, acne, hirsutism)"
+      - "    • Tamoxifen 10mg PO daily (off-label, severe cases only, consider oncology referral)"
+      - "No imaging required unless:"
+      - "  - Focal asymmetric pain"
+      - "  - Age-appropriate screening due"
+      - "  - Palpable mass"
+      - "Typically improves with menopause"
+      - "Pain diary may help identify triggers and patterns"
+
+  - id: dx_noncyclic_mastalgia
+    type: diagnosis
+    diagnosis: "Non-Cyclic Mastalgia (Non-Cyclic Breast Pain)"
+    icd10: N64.4
+    description: "Breast pain unrelated to menstrual cycle, usually unilateral and localized. May be from breast pathology (cyst, duct ectasia, trauma) or chest wall/musculoskeletal pain. Imaging required to rule out underlying lesion."
+    recommendations:
+      - "Differentiate from cyclic pain: unilateral, localized, constant (not cyclic)"
+      - "Rule out chest wall pain first:"
+      - "  - Reproducible with palpation or arm movement"
+      - "  - Costochondritis (Tietze syndrome): pain at costochondral junctions"
+      - "  - Musculoskeletal: strain, posture-related"
+      - "Imaging to rule out breast pathology:"
+      - "  - Age ≥30: mammogram + targeted ultrasound of painful area"
+      - "  - Age <30: ultrasound of painful area"
+      - "If lesion found: treat accordingly (cyst aspiration, biopsy if indicated)"
+      - "If imaging negative (most common):"
+      - "  - Reassurance: no underlying cancer or concerning pathology"
+      - "  - Often idiopathic, may spontaneously resolve"
+      - "Management:"
+      - "  - NSAIDs: ibuprofen 600mg PO q6h PRN"
+      - "  - Topical NSAIDs: diclofenac gel to affected area TID"
+      - "  - Supportive bra"
+      - "  - If chest wall origin: physical therapy, posture correction"
+      - "Refer to breast surgery if severe, persistent, and no cause identified"
+      - "Routine screening per guidelines"
+
+  - id: dx_chest_wall_pain
+    type: diagnosis
+    diagnosis: "Chest Wall Pain (Non-Breast Origin)"
+    icd10: M79.1
+    description: "Pain perceived as breast pain but actually originating from chest wall structures (ribs, cartilage, muscles). Reproduced by palpation or movement. Common in postural strain, costochondritis. No imaging needed unless trauma history."
+    recommendations:
+      - "Confirm chest wall origin:"
+      - "  - Pain reproducible with palpation of chest wall"
+      - "  - Pain with arm movement or deep breathing"
+      - "  - Localized tenderness over ribs or costochondral junctions"
+      - "Common causes:"
+      - "  - Costochondritis (Tietze syndrome): inflammation of costochondral junctions"
+      - "  - Muscle strain: pectoralis major/minor"
+      - "  - Posture-related: slouching, computer work"
+      - "  - Radicular pain: thoracic spine origin"
+      - "No breast imaging needed if clearly chest wall origin"
+      - "Treatment:"
+      - "  - NSAIDs: ibuprofen 600mg PO q6h × 7-10 days"
+      - "  - Topical NSAIDs: diclofenac gel TID to affected area"
+      - "  - Heat application"
+      - "  - Posture correction, ergonomic assessment"
+      - "  - Physical therapy for persistent cases"
+      - "  - Avoid activities that worsen pain"
+      - "If trauma history or severe pain: consider CXR to rule out rib fracture"
+      - "Reassurance: not breast pathology, will improve with conservative management"
+
+  - id: continue_screening
+    type: diagnosis
+    diagnosis: "Negative Workup - Continue Routine Screening"
+    icd10: Z12.31
+    description: "Complete breast evaluation negative for malignancy or concerning pathology. Return to age-appropriate routine breast cancer screening."
+    recommendations:
+      - "Negative workup completed - reassurance provided"
+      - "Routine screening recommendations:"
+      - "  - Age 40-75: annual mammogram (USPSTF: biennial age 50-74, but many organizations recommend annual starting age 40)"
+      - "  - Age >75: individualized based on health status and life expectancy"
+      - "  - High-risk patients: annual mammogram + annual breast MRI starting age 30 or 10 years before earliest family diagnosis"
+      - "Monthly breast self-examination (controversial - no longer strongly recommended but reasonable)"
+      - "Annual clinical breast exam"
+      - "Risk reduction strategies:"
+      - "  - Maintain healthy weight"
+      - "  - Regular exercise"
+      - "  - Limit alcohol (<1 drink/day)"
+      - "  - Avoid hormone replacement therapy if possible"
+      - "Return immediately if new concerning symptoms:"
+      - "  - New palpable mass"
+      - "  - Skin changes (dimpling, nipple inversion)"
+      - "  - Spontaneous bloody nipple discharge"
+      - "  - Persistent pain (>2 weeks)"
+
+metadata:
+  guidelines:
+    - name: "American College of Radiology BI-RADS"
+      url: "https://www.acr.org"
+      description: "Standardized breast imaging reporting system"
+    
+    - name: "NCCN Guidelines for Breast Cancer Screening and Diagnosis"
+      url: "https://www.nccn.org"
+      description: "Comprehensive breast cancer screening recommendations"
+  
+  key_medications:
+    - name: Tamoxifen
+      dose: "20mg PO daily × 5-10 years"
+      indication: "ER/PR+ breast cancer, chemoprevention for high-risk"
+      
+    - name: Trastuzumab (Herceptin)
+      dose: "Loading 4mg/kg, then 2mg/kg IV weekly OR 8mg/kg, then 6mg/kg q3weeks"
+      indication: "HER2+ breast cancer"
+
+  red_flags:
+    - "Peau d'orange (orange peel) + erythema + warmth = inflammatory breast cancer → urgent oncology referral"
+    - "Hard, fixed, irregular mass + axillary lymphadenopathy = likely malignant → urgent biopsy"
+    - "Bloody spontaneous single-duct nipple discharge = intraductal papilloma or cancer → surgical evaluation"
+    - "New nipple inversion or skin retraction = may indicate underlying malignancy → imaging + possible biopsy"
+    - "Male breast mass = ~1% of breast cancers occur in men → needs full workup including mammogram"
+
+  key_concepts:
+    - "Triple assessment: clinical exam + imaging + tissue diagnosis (core biopsy) - gold standard"
+    - "BI-RADS 3 (probably benign): <2% malignancy risk - short interval follow-up acceptable"
+    - "BI-RADS 4 or 5: biopsy required"
+    - "Core needle biopsy preferred over FNA (provides histology and receptors)"
+    - "Concordance essential: pathology must match imaging findings"
+    - "Most breast masses are benign (80-85%), but all require appropriate evaluation"
+    - "Breast cancer screening saves lives: 20-30% mortality reduction with mammography"
+
+citations:
+  - NCCN (National Comprehensive Cancer Network) Clinical Practice Guidelines in Oncology
+  - ASCO (American Society of Clinical Oncology) Clinical Practice Guidelines
+  - UpToDate - Oncology
+
+treatment:
+  - 'Triple assessment: Clinical exam + imaging (mammogram/ultrasound) + tissue diagnosis (core biopsy)'
+  - 'Mammogram for all age >30, ultrasound for age <30 or dense breast'
+  - 'Core needle biopsy for all suspicious masses (not FNA) - get ER/PR/HER2 status'
+  - 'Benign findings (simple cyst, fibroadenoma <2cm, lipoma): Reassurance, routine screening'
+  - 'Complicated cyst or solid mass: Refer to surgery for biopsy'
+  - 'Malignancy: Immediate breast surgical oncology and medical oncology referral'
+  - 'Staging workup for cancer - CXR, consider CT/PET, bone scan if symptoms'
+  - 'Treatment multimodality - surgery (lumpectomy vs mastectomy), radiation, chemotherapy, hormonal therapy'
+  - 'ER+ cancers: Tamoxifen (premenopausal) or aromatase inhibitor (postmenopausal) x5-10 years'
+  - 'HER2+ cancers: Trastuzumab (Herceptin) + chemotherapy'
+  - 'BRCA testing if age <50, bilateral, family history - may change surgical approach'
+  - 'Do NOT delay referral - suspicious mass needs biopsy within 2 weeks'
+

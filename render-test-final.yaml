@@ -1,0 +1,76 @@
+# Render Blueprint for RealDiag TEST Environment
+# Deploy with: Render Dashboard → New Blueprint → Select this file
+# 
+# This configuration deploys:
+# - Backend API with test mode enabled
+# - Uses EXISTING production database (shared with production)
+#
+# All users automatically get ENTERPRISE access in test mode
+
+# No new database - using existing realdiag-database from production
+
+services:
+
+  # Backend Web Service (Test Mode)
+  - type: web
+    name: realdiag-test-backend
+    env: docker
+    branch: main
+    plan: free
+    repo: https://github.com/bevroy/RealDiag-Software
+    dockerfilePath: backend/Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8000
+      
+      # TEST MODE CONFIGURATION
+      - key: ENVIRONMENT
+        value: test
+      - key: FREE_ACCESS_TESTING
+        value: true
+      - key: BYPASS_SUBSCRIPTION_CHECKS
+        value: true
+      - key: RATE_LIMIT_ENABLED
+        value: false
+      - key: SUBSCRIPTION_CHECK_ENABLED
+        value: false
+      
+      # Database - Using existing production database
+      # Both test and production will share the same database
+      - key: DATABASE_URL
+        fromDatabase:
+          name: realdiag-database
+          property: connectionString
+      
+      # Security (relaxed for testing)
+      - key: SECURITY_ENABLED
+        value: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      
+      # CORS (allow all origins for testing)
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: PREVIEW_ORIGIN_REGEX
+        value: ^https?://.*$
+      
+      # Optional: Disable external services
+      - key: EMAIL_ENABLED
+        value: false
+      - key: STRIPE_ENABLED
+        value: false
+      - key: FHIR_ENABLED
+        value: false
+      
+      # Logging
+      - key: LOG_LEVEL
+        value: DEBUG
+
+  # Frontend Static Site (Test Mode) - REMOVED
+  # Static sites require paid plan on Render ($7/month)
+  # Host frontend on Vercel or Netlify for free instead
+  # Then point NEXT_PUBLIC_API_BASE to: https://realdiag-test-backend.onrender.com

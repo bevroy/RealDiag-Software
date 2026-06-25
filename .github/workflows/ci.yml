@@ -1,0 +1,228 @@
+name: CI
+permissions:
+  contents: read
+  packages: write
+
+on:
+  push:
+    branches: [ main ]
+    # Also run on tag pushes that start with "v" (release tags). This ensures
+    # the `publish` job's `if: startsWith(github.ref, 'refs/tags/v')` can be
+    # exercised when tags are pushed.
+    tags: [ 'v*' ]
+  # Allow manual runs from the Actions UI if needed for debugging or reruns.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to verify/pull (e.g. v1.0.6). If empty, defaults to latest.'
+        required: false
+        default: ''
+  # Scheduled verification to check cross-region availability daily.
+  schedule:
+    - cron: '0 5 * * *'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # httpx is required by starlette/testclient (used by FastAPI tests)
+          # prometheus_client is required by backend/main.py (metrics endpoint)
+          pip install fastapi uvicorn jinja2 pyyaml pytest requests httpx prometheus_client
+      - name: Run tests
+        run: pytest -q -m "not e2e" backend/tests/ || [ $? -eq 5 ] || exit $?
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          # Use `npm install` in CI since package-lock.json may not be present in this repo
+          npm install
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+      - name: Verify Netlify static export output
+        run: |
+          cd frontend
+          NETLIFY=true npm run build
+          test -f out/index.html
+
+  publish:
+    name: Publish containers
+    needs: test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    outputs:
+      tag: ${{ steps.publish_outputs.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      # Prefer an explicit PAT stored in repository secrets so CI can push
+      # packages even when organization policies restrict the default
+      # GITHUB_TOKEN. If the `GHCR_PAT` secret is not defined the job will
+      # fall back to using the `GITHUB_TOKEN` provided by Actions.
+      - name: Log in to GHCR (prefer GHCR_PAT, fall back to GITHUB_TOKEN)
+        run: |
+          set -euo pipefail
+          if [ -n "${{ secrets.GHCR_PAT }}" ]; then
+            echo "Using GHCR_PAT for login"
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          else
+            echo "GHCR_PAT not set — falling back to GITHUB_TOKEN"
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          fi
+      - name: Build and push API image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: backend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/realdiag-api:${{ github.ref_name }}
+      - name: Build and push Web image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: frontend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/realdiag-web:${{ github.ref_name }}
+      - name: Verify pushed images are pullable (with retry/backoff)
+        run: |
+          set -euo pipefail
+          TAG=${{ github.ref_name }}
+          OWNER=${{ github.repository_owner }}
+
+          retry() {
+            local cmd="$*"
+            local max=5
+            local n=0
+            until eval "$cmd"; do
+              n=$((n+1))
+              if [ $n -ge $max ]; then
+                echo "Command failed after $n attempts: $cmd"
+                return 1
+              fi
+              sleep_sec=$((2 ** n))
+              echo "Attempt $n failed — retrying in ${sleep_sec}s..."
+              sleep $sleep_sec
+            done
+          }
+
+          echo "Verifying the pushed images can be pulled from GHCR (owner=${OWNER}, tag=${TAG})..."
+          retry docker pull ghcr.io/${OWNER}/realdiag-web:${TAG}
+          retry docker pull ghcr.io/${OWNER}/realdiag-api:${TAG}
+          echo "Pulled images:"
+          docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}"
+      - name: Set publish outputs
+        id: publish_outputs
+        run: |
+          # Expose the tag we published as a job output so other jobs can
+          # reliably verify the same tag instead of guessing 'latest'.
+          echo "tag=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          # Use `npm ci` here for reproducible installs now that
+          # `frontend/package-lock.json` is committed.
+          npm ci
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+      - name: Verify Netlify static export output
+        run: |
+          cd frontend
+          NETLIFY=true npm run build
+          test -f out/index.html
+
+  cross-region-verify:
+    name: Cross-region GHCR pull verification
+    # This job runs on a separate runner and should only perform verification
+    # when there's a tag to verify (i.e. publish ran successfully) or when
+    # invoked manually/scheduled. Gate it so we don't fail regular `main`
+    # pushes where no publish step ran.
+    runs-on: ubuntu-latest
+    needs: [publish]
+    if: needs.publish.result == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    steps:
+      - name: Set variables
+        run: |
+          # Prefer the tag produced by the publish job (when present). If the
+          # publish job didn't run (e.g., scheduled/manual verify) fall back to
+          # the workflow input, and finally to 'latest'.
+          PUB_TAG='${{ needs.publish.outputs.tag }}'
+          INPUT_TAG='${{ github.event.inputs.tag }}'
+          if [ -n "$PUB_TAG" ]; then
+            TAG="$PUB_TAG"
+          elif [ -n "$INPUT_TAG" ]; then
+            TAG="$INPUT_TAG"
+          else
+            TAG='latest'
+          fi
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+
+      - name: Log in to GHCR (prefer GHCR_PAT, fall back to GITHUB_TOKEN)
+        run: |
+          set -euo pipefail
+          if [ -n "${{ secrets.GHCR_PAT }}" ]; then
+            echo "Using GHCR_PAT for login"
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          else
+            echo "GHCR_PAT not set — falling back to GITHUB_TOKEN"
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          fi
+
+      - name: Pull images with retry/backoff
+        run: |
+          set -euo pipefail
+          OWNER=${OWNER}
+          TAG=${TAG}
+          retry() {
+            local cmd="$*"
+            local max=5
+            local n=0
+            until eval "$cmd"; do
+              n=$((n+1))
+              if [ $n -ge $max ]; then
+                echo "Command failed after $n attempts: $cmd"
+                return 1
+              fi
+              sleep_sec=$((2 ** n))
+              echo "Attempt $n failed — retrying in ${sleep_sec}s..."
+              sleep $sleep_sec
+            done
+          }
+
+          echo "Pulling ghcr.io/${OWNER}/realdiag-web:${TAG}"
+          retry docker pull ghcr.io/${OWNER}/realdiag-web:${TAG}
+          echo "Pulling ghcr.io/${OWNER}/realdiag-api:${TAG}"
+          retry docker pull ghcr.io/${OWNER}/realdiag-api:${TAG}
+          echo "Pulled images successfully"

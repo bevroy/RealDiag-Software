@@ -1,0 +1,79 @@
+tree_id: TRAUMA-LACERATION
+name: Laceration
+family: emergency
+specialty: Emergency Medicine, Primary Care, Surgery
+chief_complaint: Cut, laceration requiring repair
+description: |
+  Laceration is a traumatic wound with irregular edges caused by blunt or sharp force.
+  Requires assessment for depth, neurovascular injury, contamination, and need for repair.
+icd10: S01.81XA
+snomed: "312608009"
+presentations:
+  - Open wound with irregular edges
+  - Bleeding (may be minimal to profuse)
+  - Pain at wound site
+  - Possible visible deeper structures (fat, fascia, muscle, tendon, bone)
+  - Mechanism - fall, sharp object, machinery, assault, animal bite
+urgency: High
+referrals:
+  emergency:
+    - Arterial bleeding
+    - Deep laceration with possible neurovascular or tendon injury
+    - Extensive wounds requiring specialist repair
+  hand_surgery:
+    - Hand lacerations with suspected tendon, nerve, or vascular injury
+  plastic_surgery:
+    - Facial lacerations requiring cosmetic repair
+    - Complex wounds
+workup:
+  - Assess mechanism and tetanus status
+  - Evaluate wound depth, length, location
+  - Check neurovascular status distal to wound - pulses, capillary refill, sensation, motor function
+  - Check tendon function with active range of motion
+  - Explore wound to assess depth and rule out foreign body
+  - X-ray if concern for foreign body (glass, metal) or bone injury
+treatment:
+  wound_preparation:
+    - Anesthesia - local lidocaine with/without epinephrine (avoid epinephrine in fingers, toes, nose, ears)
+    - Irrigation - copious high-pressure saline irrigation (minimum 200mL per inch)
+    - Debridement - remove devitalized tissue and contaminants
+  closure:
+    simple_lacerations:
+      - Primary closure if <12 hours old (24 hours for face), clean, minimal tissue loss
+      - Sutures - nylon or prolene for skin
+      - Absorbable sutures for deep layers if needed
+      - Tissue adhesive for small superficial lacerations
+    contaminated_wounds:
+      - Delayed primary closure or healing by secondary intention
+      - Consider antibiotics
+  post_repair_care:
+    - Keep clean and dry for 24-48 hours
+    - Topical antibiotic ointment
+    - Suture removal - face 5-7 days, extremities/trunk 10-14 days
+    - Scar management counseling
+  tetanus_prophylaxis:
+    - Clean minor wounds - Td if >10 years since last dose
+    - All other wounds - Td if >5 years since last dose
+    - TIG if unimmunized or incomplete series with contaminated wound
+  antibiotics:
+    - Not routinely needed for clean lacerations
+    - Consider for - contaminated wounds, crush injuries, delayed presentation, immunocompromised
+    - Cephalexin 500mg QID or amoxicillin-clavulanate 875mg BID for 5-7 days
+clinical_pearls:
+  - Golden period for primary closure - 12 hours for body, 24 hours for face (good vascularity)
+  - Never use epinephrine in end-arterial areas (fingers, toes, nose, ears, penis)
+  - Always check neurovascular and tendon function before anesthetizing
+  - High-pressure irrigation most important factor preventing infection
+  - Human/animal bites have high infection risk - often leave open or delayed closure
+  - Glass foreign bodies visible on X-ray if >2mm
+differentials:
+  - Simple laceration
+  - Laceration with nerve injury
+  - Laceration with tendon injury
+  - Laceration with vascular injury
+  - Contaminated/infected wound
+trace:
+  - 25-year-old with 3cm laceration to forearm from broken glass 2 hours ago. Exam shows full sensation, normal capillary refill, intact tendon function. Wound irrigated with 500mL saline. Closed with 4-0 nylon interrupted sutures. Tetanus up to date. Instructions for wound care and suture removal in 10-14 days. Heals without complications.
+citations:
+  - UpToDate - Emergency Medicine
+  - American College of Emergency Physicians Guidelines

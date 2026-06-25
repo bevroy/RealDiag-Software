@@ -1,0 +1,63 @@
+tree_id: ID-COMMUNITY-ACQUIRED-PNEUMONIA
+name: Community-Acquired Pneumonia (CAP)
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- J18.9
+- J13
+snomed:
+- '385093006'
+urgency: medium
+description: Comprehensive evaluation and management of Community-Acquired Pneumonia
+  (CAP)
+version: '1.0'
+citations:
+  - IDSA (Infectious Diseases Society of America) Guidelines
+  - CDC (Centers for Disease Control and Prevention) Guidelines
+  - UpToDate - Infectious Diseases
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Cough (productive or non-productive), fever, dyspnea
+- Pleuritic chest pain, chills, rigors
+- Crackles/rales on auscultation, bronchial breath sounds
+- 'Chest X-ray: Lobar consolidation, infiltrate'
+- Sputum production (may be purulent, rust-colored, or blood-tinged)
+- 'CURB-65 score predicts mortality: Confusion, Uremia, RR ≥30, BP <90/60, age ≥65'
+workup:
+- Chest X-ray (PA and lateral)
+- CBC, basic metabolic panel
+- Blood cultures x2 if admitted
+- Sputum culture if ICU or failed outpatient treatment
+- Procalcitonin (helps distinguish bacterial from viral)
+treatment:
+- 'Guideline-based treatment options for Community-Acquired Pneumonia (CAP) include:'
+- 'Outpatient: Amoxicillin 1g TID x 5-7d or doxycycline 100mg BID x 5-7d (IDSA 2024)'
+- 'Inpatient non-ICU: Ceftriaxone 1-2g IV daily + azithromycin 500mg IV/PO daily (IDSA
+  2024)'
+- 'ICU: Ceftriaxone + azithromycin OR beta-lactam + fluoroquinolone (levofloxacin)
+  (IDSA 2024)'
+- 'If MRSA or Pseudomonas risk: Add vancomycin or piperacillin-tazobactam (IDSA 2024)'
+- 'Supportive: Oxygen, fluids, fever control (IDSA 2024)'
+clinical_pearls:
+- 'Most common pathogens: S. pneumoniae, H. influenzae, atypical (Mycoplasma, Chlamydia)'
+- 'CURB-65 ≥2: Consider admission; ≥3: ICU consideration'
+- 'Outpatient: Amoxicillin or doxycycline (low resistance)'
+- 'Inpatient: Ceftriaxone + azithromycin (covers typical + atypical)'
+- 'Typical vs atypical: Typical has high fever, productive cough; atypical has dry
+  cough, gradual onset'
+referrals:
+- Hospital admission if CURB-65 ≥2 or hypoxia
+- ICU if CURB-65 ≥3 or severe respiratory distress
+- Pulmonology if complicated (effusion, abscess, empyema)
+differentials:
+  - Viral pneumonia
+  - Bronchitis
+  - Heart failure
+  - Pulmonary embolism
+  - COPD exacerbation
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

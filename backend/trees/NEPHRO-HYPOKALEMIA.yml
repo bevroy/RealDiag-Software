@@ -1,0 +1,277 @@
+tree_id: NEPHRO-HYPOKALEMIA
+name: Hypokalemia
+family: Nephrology
+specialty: Nephrology
+chief_complaint: Low serum potassium, often with muscle weakness or cardiac arrhythmias
+description: Serum potassium under 3.5 mEq/L. Common electrolyte disorder affecting 20% of hospitalized patients. Causes include gastrointestinal losses (diarrhea, vomiting), renal losses (diuretics, mineralocorticoid excess), transcellular shifts (alkalosis, insulin), or inadequate intake. Clinical manifestations include muscle weakness, cramps, cardiac arrhythmias, and rhabdomyolysis if severe. ECG shows flattened T waves, U waves, ST depression, and predisposes to torsades de pointes especially with QT-prolonging medications. Treatment involves potassium replacement (oral preferred if mild, IV if severe or symptomatic) and addressing underlying cause. Concurrent hypomagnesemia must be corrected for effective treatment.
+icd10: E87.6
+urgency: urgent
+
+differentials:
+  - Diarrhea
+  - Vomiting
+  - Diuretic use
+  - Primary aldosteronism
+  - RTA
+
+referrals:
+  emergency:
+    - AKI with K>6.5
+    - Severe acidosis
+    - Uremia needing dialysis
+  urgent:
+    - Rapidly progressive GN
+    - AKI rising Cr
+    - Nephrotic syndrome
+  routine:
+    - CKD management
+    - Proteinuria
+    - Stone prevention
+
+workup:
+  - Clinical presentation (severity correlates with potassium level):
+    - Cardiovascular symptoms:
+      - Palpitations or irregular heartbeat
+      - Increased risk of arrhythmias (especially atrial fibrillation, ventricular ectopy)
+      - Torsades de pointes (polymorphic VT, especially if concurrent QT prolongation)
+      - Increased digoxin toxicity risk
+      - Worsened heart failure
+    - Neuromuscular symptoms:
+      - Muscle weakness (worse with hypokalemia under 2.5)
+      - Muscle cramps and myalgias
+      - Paresthesias
+      - Paralysis if severe (under 2.0)
+      - Rhabdomyolysis (severe hypokalemia)
+      - Respiratory muscle weakness (rare, life-threatening)
+    - Gastrointestinal symptoms:
+      - Constipation or ileus
+      - Nausea
+      - Abdominal distension
+    - Renal manifestations:
+      - Polyuria (impaired urinary concentrating ability)
+      - Polydipsia
+      - Worsening of chronic kidney disease
+    - Endocrine:
+      - Impaired insulin secretion (glucose intolerance)
+    - Asymptomatic if mild (K+ 3.0-3.5)
+  - Causes of hypokalemia (categorize by mechanism):
+    - GI losses (most common cause):
+      - Diarrhea (acute or chronic, laxative abuse)
+      - Vomiting (also causes metabolic alkalosis)
+      - NG suction or drainage
+      - Villous adenoma (secretory diarrhea)
+      - VIPoma (rare, causes secretory diarrhea)
+    - Renal losses (check urine potassium):
+      - Diuretics (most common medication cause):
+        - Loop diuretics (furosemide, bumetanide)
+        - Thiazide diuretics (hydrochlorothiazide)
+      - Mineralocorticoid excess:
+        - Primary hyperaldosteronism (Conn syndrome)
+        - Secondary hyperaldosteronism (heart failure, cirrhosis, renal artery stenosis)
+        - Cushing syndrome (cortisol has mineralocorticoid activity)
+        - Licorice ingestion (inhibits 11-beta-HSD, increases cortisol activity)
+      - Renal tubular acidosis (Type 1 and 2)
+      - Hypomagnesemia (impairs potassium reabsorption)
+      - Bartter syndrome (genetic, loop of Henle defect)
+      - Gitelman syndrome (genetic, DCT defect, also causes hypomagnesemia)
+      - Antibiotics (amphotericin B, aminoglycosides)
+    - Transcellular shift (K+ moves into cells):
+      - Insulin administration or endogenous hyperinsulinemia
+      - Beta-2 agonists (albuterol, terbutaline)
+      - Metabolic alkalosis
+      - Refeeding syndrome (rapid glucose administration)
+      - Hypokalemic periodic paralysis (familial or thyrotoxic)
+      - Theophylline or caffeine toxicity
+      - Acute stress (catecholamine surge)
+    - Inadequate intake (rare as sole cause):
+      - Malnutrition or poor diet
+      - Anorexia nervosa
+      - Alcoholism
+  - Physical examination:
+    - Vital signs (assess BP for hypertension - suggests mineralocorticoid excess)
+    - Cardiovascular:
+      - Irregular rhythm (arrhythmias)
+      - Assess for signs of heart failure
+    - Neuromuscular:
+      - Muscle strength testing (proximal muscle weakness)
+      - Deep tendon reflexes (may be diminished or absent)
+      - Sensation testing
+      - Bowel sounds (hypoactive if ileus)
+    - Volume status:
+      - Dehydration (vomiting, diarrhea)
+      - Edema (heart failure, cirrhosis)
+    - Signs of Cushing syndrome (moon facies, central obesity, striae)
+  - Laboratory evaluation:
+    - Serum potassium:
+      - Mild: 3.0-3.4 mEq/L
+      - Moderate: 2.5-2.9 mEq/L
+      - Severe: under 2.5 mEq/L
+    - Basic metabolic panel:
+      - Assess for concurrent electrolyte abnormalities
+      - Magnesium (ALWAYS check, hypomagnesemia very common and impairs K+ repletion)
+      - Calcium, phosphate
+      - Creatinine (renal function)
+      - Glucose (hyperglycemia suggests insulin as cause or refeeding)
+    - Arterial blood gas or serum bicarbonate:
+      - Metabolic acidosis: RTA, diarrhea, DKA
+      - Metabolic alkalosis: Vomiting, diuretics, mineralocorticoid excess
+    - Urine potassium and creatinine (differentiate renal vs extrarenal losses):
+      - Spot urine K+/Cr ratio:
+        - Under 13 mEq/mmol suggests extrarenal loss (GI losses, shift)
+        - Over 13 mEq/mmol suggests renal loss
+      - 24-hour urine potassium:
+        - Under 20 mEq/day suggests extrarenal loss or inadequate intake
+        - Over 20 mEq/day suggests renal wasting
+      - Transtubular potassium gradient (TTKG):
+        - TTKG under 3 suggests appropriate renal conservation (extrarenal loss)
+        - TTKG over 4 suggests inappropriate renal wasting
+    - If renal losses with hypertension (suspect mineralocorticoid excess):
+      - Plasma renin and aldosterone levels
+      - Calculate aldosterone:renin ratio (screening for primary hyperaldosteronism)
+      - 24-hour urine cortisol or dexamethasone suppression test (Cushing syndrome)
+    - If renal losses without hypertension:
+      - Consider Gitelman or Bartter syndrome
+      - Genetic testing if suspected
+    - Creatine kinase if muscle pain or weakness (rhabdomyolysis)
+    - Digoxin level if on digoxin (hypokalemia increases toxicity risk)
+    - TSH (thyrotoxic periodic paralysis)
+  - ECG findings (do NOT correlate well with serum level):
+    - Mild hypokalemia (K+ 3.0-3.4):
+      - Decreased T wave amplitude (flattened T waves)
+      - ST segment depression
+      - Prominent U waves (most specific finding)
+    - Moderate hypokalemia (K+ 2.5-2.9):
+      - More prominent U waves (amplitude over 1 mm, taller than T wave)
+      - T wave inversion
+      - Apparent QT prolongation (actually QU interval)
+    - Severe hypokalemia (K+ under 2.5):
+      - Marked U waves
+      - ST depression
+      - Ventricular ectopy (PVCs)
+      - Risk of ventricular arrhythmias (VT, VF, torsades)
+    - Always obtain ECG if K+ under 3.0 or symptomatic
+
+treatment:
+  - Assess severity and determine route of replacement:
+    - Mild hypokalemia (K+ 3.0-3.4) AND asymptomatic:
+      - Oral replacement preferred
+      - Increase dietary potassium (bananas, oranges, potatoes, spinach, tomatoes)
+      - Oral potassium supplements (see below)
+    - Moderate to severe (K+ under 3.0) OR symptomatic OR ECG changes:
+      - IV replacement required
+      - Continuous cardiac monitoring
+      - Admit to monitored setting
+  - Oral potassium replacement (preferred if tolerated):
+    - Potassium chloride (KCl) 20-80 mEq PO:
+      - Typical dose 40-80 mEq PO divided TID-QID
+      - Maximum 20-40 mEq per dose to avoid GI upset
+      - Each 10 mEq raises serum K+ by approximately 0.1 mEq/L
+      - Available as tablets, capsules, liquid
+      - KCl preferred (provides both potassium and chloride)
+    - Estimate total deficit:
+      - Each 1 mEq/L decrease represents ~200-400 mEq total body deficit
+      - K+ 3.0 suggests ~80-120 mEq deficit
+      - K+ 2.0 suggests ~400-800 mEq deficit
+    - Recheck potassium after replacement to guide further dosing
+  - IV potassium replacement (if severe, symptomatic, or unable to take PO):
+    - Peripheral line infusion:
+      - Maximum concentration 40 mEq/L (higher concentrations cause phlebitis)
+      - Maximum rate 10 mEq/hr (faster rates cause pain, risk of hyperkalemia)
+      - Typical dose 10-20 mEq/hr
+      - Example: KCl 40 mEq in 1L NS at 100-200 mL/hr
+    - Central line infusion (if severe K+ under 2.5 or life-threatening arrhythmia):
+      - Can give higher concentration (up to 20 mEq/100 mL)
+      - Can give faster rate (up to 40 mEq/hr with continuous monitoring)
+      - Requires ICU setting with continuous cardiac monitoring
+      - Risk of rebound hyperkalemia if given too rapidly
+    - Recheck potassium every 2-4 hours during active repletion
+    - Continue until K+ over 3.5 mEq/L
+  - Correct concurrent hypomagnesemia (CRITICAL):
+    - Hypomagnesemia present in 40-60% of hypokalemia cases
+    - Hypokalemia is REFRACTORY to treatment if hypomagnesemia not corrected
+    - Magnesium enhances renal potassium reabsorption
+    - Magnesium replacement:
+      - Mild (Mg 1.0-1.7 mg/dL): Magnesium oxide 400-800 mg PO daily
+      - Moderate-severe (Mg under 1.0): Magnesium sulfate 1-2 grams IV over 1 hour, repeat as needed
+      - Recheck magnesium level and continue supplementation
+  - Address underlying cause:
+    - Discontinue or reduce diuretic dose if possible
+    - Add potassium-sparing diuretic (amiloride, spironolactone) if diuretic needed
+    - Treat diarrhea (anti-motility agents, address infection)
+    - Control vomiting (antiemetics, treat underlying cause)
+    - Treat hyperaldosteronism:
+      - Spironolactone or eplerenone for primary hyperaldosteronism
+      - Adrenalectomy for adrenal adenoma
+    - Optimize insulin dosing (avoid excessive insulin causing shift)
+    - Discontinue or reduce beta-agonist if possible
+    - Correct acidosis or alkalosis
+  - Monitoring:
+    - Continuous cardiac monitoring if K+ under 3.0 or symptomatic
+    - Repeat serum potassium:
+      - Every 2-4 hours during IV repletion
+      - Daily during oral repletion
+      - After completion of replacement
+    - Repeat ECG after repletion to assess resolution of changes
+    - Monitor for rebound hyperkalemia (especially if aggressive IV repletion)
+    - Monitor magnesium and replace concurrently
+  - Special considerations:
+    - Digoxin toxicity risk:
+      - Hypokalemia increases digoxin binding to Na-K-ATPase
+      - More aggressive repletion if on digoxin (target K+ over 4.0)
+    - Patients on RAAS inhibitors (ACE-I, ARB):
+      - May need to hold medication during aggressive repletion
+      - Risk of rebound hyperkalemia
+    - Concurrent acidosis or alkalosis:
+      - Acidosis: Potassium shifts out of cells, serum level may underestimate deficit
+      - Alkalosis: Potassium shifts into cells, serum level may overestimate deficit
+      - Correct acid-base status while replacing potassium
+  - Long-term management:
+    - Dietary potassium supplementation (high-potassium foods)
+    - Chronic oral potassium supplements if ongoing losses
+    - Potassium-sparing diuretics (amiloride, spironolactone, triamterene) if on loop or thiazide diuretics
+    - Treat underlying cause (RTA, hyperaldosteronism, malabsorption)
+    - Regular monitoring in high-risk patients:
+      - Patients on diuretics (monthly to quarterly)
+      - Chronic diarrhea or GI losses
+      - Eating disorders
+
+clinical_pearls:
+  - Each 1 mEq/L decrease in K+ represents approximately 200-400 mEq total body deficit
+  - Hypokalemia is refractory to treatment if concurrent hypomagnesemia not corrected - ALWAYS check and replace Mg
+  - Prominent U waves are most specific ECG finding for hypokalemia
+  - Hypokalemia increases risk of digoxin toxicity - target K+ over 4.0 in patients on digoxin
+  - Oral replacement preferred unless severe (under 3.0), symptomatic, or ECG changes
+  - Maximum peripheral IV infusion rate 10 mEq/hr (faster causes pain and risk of hyperkalemia)
+  - Central line allows higher concentration and faster rate (up to 40 mEq/hr) with ICU monitoring
+  - Urine K+/Cr ratio over 13 mEq/mmol suggests renal potassium wasting
+  - Diuretics are most common medication cause of hypokalemia
+  - Diarrhea is most common overall cause of hypokalemia
+  - Hypokalemia with hypertension suggests mineralocorticoid excess (check renin/aldosterone)
+  - Severe hypokalemia (under 2.5) can cause rhabdomyolysis and respiratory muscle weakness
+
+presentations:
+  - Asymptomatic (if mild)
+  - Muscle weakness
+  - Muscle cramps
+  - Fatigue
+  - Constipation
+  - Palpitations
+  - Polyuria
+  - Paresthesias
+  - Paralysis (if severe)
+  - Rhabdomyolysis
+  - Cardiac arrhythmias
+  - U waves on ECG
+  - Flattened T waves
+
+snomed:
+  - "43339004"  # Hypokalemia
+  - "267398009" # Hypokalemia due to diuretic
+  - "89627008"  # Hypokalemia due to vomiting
+
+citations:
+  - Kardalas E et al. Hypokalemia: a clinical update. Endocr Connect 2018;7:R135-R146
+  - Gennari FJ. Hypokalemia. N Engl J Med 1998;339:451-458
+  - Mount DB. Disorders of potassium balance. In: Brenner and Rector's The Kidney, 10th ed. Elsevier 2016
+  - UpToDate - Clinical manifestations and treatment of hypokalemia in adults
+  - Weiner ID et al. Hypokalemia: consequences, causes, and correction. J Am Soc Nephrol 1997;8:1179-1188

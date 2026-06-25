@@ -1,0 +1,117 @@
+tree_id: NEPHRO-AKI
+name: Acute Kidney Injury (AKI)
+family: nephrology
+specialty: Nephrology/Internal Medicine
+icd10: N17.9
+snomed: 14669001
+urgency: []
+homeopathy: []
+presentations:
+  - Rapid increase in serum creatinine (0.3 mg/dL or greater within 48 hours, or 1.5x baseline within 7 days)
+  - Decreased urine output (oliguria less than 0.5 mL/kg/hr for 6+ hours)
+  - Azotemia (elevated BUN and creatinine)
+  - Fluid overload (edema, pulmonary congestion, hypertension)
+  - Electrolyte abnormalities (hyperkalemia, metabolic acidosis, hyperphosphatemia)
+  - Uremic symptoms if severe (nausea, vomiting, confusion, altered mental status)
+  - May be asymptomatic if mild (discovered on routine labs)
+  - Risk factors present (sepsis, hypotension, nephrotoxic medications, contrast exposure)
+workup:
+  - Assess severity using KDIGO staging criteria
+  - Stage 1: Cr increase 1.5-1.9x baseline or 0.3+ mg/dL increase, or urine output less than 0.5 mL/kg/hr for 6-12 hours
+  - Stage 2: Cr increase 2.0-2.9x baseline, or urine output less than 0.5 mL/kg/hr for 12+ hours
+  - Stage 3: Cr increase 3x baseline or Cr 4.0+ mg/dL, or urine output less than 0.3 mL/kg/hr for 24+ hours or anuria 12+ hours
+  - Determine baseline kidney function
+  - Review prior creatinine values if available
+  - Estimate baseline if unknown (assume eGFR 75 mL/min)
+  - Classify etiology: prerenal, intrinsic renal, or postrenal
+  - Prerenal (most common 55-60%): hypoperfusion from volume depletion, hypotension, heart failure, cirrhosis
+  - Intrinsic renal (35-40%): acute tubular necrosis (ATN), acute interstitial nephritis (AIN), glomerulonephritis, vascular causes
+  - Postrenal (5-10%): urinary tract obstruction (BPH, stones, malignancy)
+  - Laboratory evaluation
+  - Basic metabolic panel (BUN, creatinine, electrolytes)
+  - BUN:Cr ratio: greater than 20:1 suggests prerenal, less than 15:1 suggests intrinsic
+  - Complete blood count
+  - Urinalysis with microscopy (CRITICAL for diagnosis)
+  - Prerenal: bland sediment, hyaline casts
+  - ATN: muddy brown granular casts, renal tubular epithelial cells
+  - AIN: white blood cells, white cell casts, eosinophils
+  - Glomerulonephritis: red blood cells, red cell casts, proteinuria
+  - Urine sodium and fractional excretion of sodium (FENa)
+  - "FENa less than 1%: prerenal; FENa greater than 2%: intrinsic (ATN)"
+  - Less reliable if on diuretics (use FEUrea instead)
+  - Imaging: renal ultrasound to assess kidney size and rule out obstruction (hydronephrosis)
+  - Small kidneys suggest chronic kidney disease
+  - Large kidneys suggest acute process or infiltrative disease
+  - Hydronephrosis suggests postrenal obstruction
+  - Additional testing based on clinical suspicion
+  - Creatine kinase if rhabdomyolysis suspected
+  - Complement levels, autoantibodies if glomerulonephritis suspected
+  - Drug levels if toxicity suspected (vancomycin, aminoglycosides, lithium)
+  - Kidney biopsy if diagnosis unclear or concern for glomerulonephritis or vasculitis
+treatment:
+  - Treat underlying cause (PRIMARY goal)
+  - Prerenal: restore intravascular volume
+  - Isotonic fluids (normal saline or lactated Ringer's)
+  - Correct hypotension
+  - Optimize cardiac output if heart failure
+  - Intrinsic renal: supportive care, avoid further injury
+  - Discontinue nephrotoxic medications (NSAIDs, aminoglycosides, contrast)
+  - Adjust medication doses for renal function
+  - Postrenal: relieve obstruction urgently
+  - Foley catheter if bladder outlet obstruction
+  - Nephrostomy or ureteral stents if upper tract obstruction
+  - Supportive care measures
+  - Maintain euvolemia (avoid fluid overload)
+  - Daily weights, strict intake/output monitoring
+  - Diuretics if volume overloaded (furosemide 40-80 mg IV, titrate)
+  - Manage electrolyte abnormalities
+  - Treat hyperkalemia (calcium gluconate, insulin/dextrose, kayexalate, dialysis if severe)
+  - Correct metabolic acidosis (sodium bicarbonate if pH less than 7.2)
+  - Restrict phosphorus, potassium, magnesium intake
+  - Nutritional support: adequate calories (25-30 kcal/kg), protein 0.8-1.0 g/kg if not on dialysis
+  - Avoid nephrotoxic agents
+  - NSAIDs, aminoglycosides, vancomycin, contrast dye
+  - Adjust medication doses based on GFR
+  - Renal replacement therapy (dialysis) indications
+  - Refractory hyperkalemia (K greater than 6.5 mEq/L)
+  - Refractory metabolic acidosis (pH less than 7.1)
+  - Refractory volume overload (pulmonary edema)
+  - Uremic complications (pericarditis, encephalopathy, bleeding)
+  - Severe uremia (BUN greater than 100 mg/dL)
+  - Modality: intermittent hemodialysis vs continuous renal replacement therapy (CRRT)
+  - Monitor for recovery
+  - Daily creatinine, BUN, electrolytes
+  - Urine output trending
+  - Most AKI recovers within days to weeks with supportive care
+clinical_pearls:
+  - "AKI affects 10-15% of hospitalized patients, 50% of ICU patients - major cause of morbidity and mortality"
+  - "Prerenal AKI most common (55-60%) and most reversible - early recognition and volume resuscitation key"
+  - "ATN develops if prerenal state prolonged - ischemic injury to tubular cells"
+  - "FENa less than 1% suggests prerenal (kidneys retaining sodium); FENa greater than 2% suggests ATN (tubules damaged, cannot reabsorb sodium)"
+  - "Muddy brown casts on urinalysis pathognomonic for ATN"
+  - "AKI increases mortality 4-fold in hospitalized patients"
+  - "Up to 20% of AKI patients do not recover renal function and progress to chronic kidney disease"
+  - "Contrast-induced AKI risk highest in diabetics, CKD, volume depletion - IV fluids before and after contrast protective"
+referrals:
+  - Nephrology consultation for severe AKI (Stage 2-3), unclear etiology, or need for dialysis
+  - Urology if postrenal obstruction requiring intervention
+  - ICU if hemodynamically unstable or multiorgan failure
+differentials:
+  - Prerenal AKI (volume depletion, hypotension, heart failure - FENa less than 1%, bland urine sediment, BUN:Cr greater than 20:1)
+  - Acute tubular necrosis (ischemic or nephrotoxic injury - FENa greater than 2%, muddy brown casts)
+  - Acute interstitial nephritis (drug reaction - WBCs, WBC casts, eosinophils in urine)
+  - Glomerulonephritis (RBCs, RBC casts, proteinuria - nephritic syndrome)
+  - Postrenal AKI (obstruction - hydronephrosis on ultrasound)
+  - Chronic kidney disease (small kidneys, anemia, hyperparathyroidism, prior elevated creatinine)
+  - Rhabdomyolysis (elevated CK, myoglobin in urine, dark urine)
+  - Hepatorenal syndrome (cirrhosis, ascites, jaundice, no other cause of AKI)
+  - Vascular causes (renal artery stenosis, renal vein thrombosis, atheroemboli)
+trace:
+  source: KDIGO AKI Guidelines, UpToDate AKI Management, NEJM Review on AKI
+  version: '1.0'
+  last_updated: '2025-12-26'
+
+citations:
+  - KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines
+  - NKF (National Kidney Foundation) Clinical Practice Guidelines
+  - UpToDate - Nephrology

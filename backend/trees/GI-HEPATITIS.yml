@@ -1,0 +1,324 @@
+tree_id: GI-HEPATITIS
+name: Hepatitis Evaluation and Management
+family: gastroenterology
+specialty: Gastroenterology, Hepatology, Infectious Disease
+chief_complaint: Jaundice, Elevated Liver Enzymes, Abdominal Pain, Dark Urine
+description: Comprehensive evaluation of acute and chronic hepatitis including viral, alcoholic, and autoimmune etiologies
+version: "1.0"
+icd10: K75.9
+snomed: 40468003
+presentations:
+  - Jaundice, dark urine, pale stools
+  - Right upper quadrant pain
+  - Fatigue, malaise
+  - Nausea, anorexia
+  - Fever (acute viral hepatitis)
+  - May be asymptomatic
+differentials:
+  - Viral hepatitis (A,B,C)
+  - Alcoholic hepatitis
+  - NAFLD
+  - Autoimmune hepatitis
+  - Drug-induced
+citations:
+  - ACG (American College of Gastroenterology) Clinical Guidelines
+  - AGA (American Gastroenterological Association) Clinical Practice Updates
+  - UpToDate - Gastroenterology and Hepatology
+author: RealDiag Clinical Team
+
+
+treatment:
+  - 'Hepatitis A: Supportive care, self-limited, vaccinate contacts'
+  - 'Hepatitis B acute: Supportive care (90-95% clear), monitor LFTs, refer if fulminant'
+  - 'Hepatitis B chronic: Entecavir 0.5mg daily or tenofovir 300mg daily lifelong - prevent cirrhosis/HCC'
+  - 'Hepatitis C: Direct-acting antivirals (DAAs) - sofosbuvir/velpatasvir (Epclusa) 1 tab daily x12 weeks, 95% cure'
+  - 'All HCV patients should be treated regardless of fibrosis stage'
+  - 'Alcoholic hepatitis: Prednisolone 40mg daily x4 weeks if severe (Maddrey discriminant function ≥32)'
+  - 'Avoid alcohol completely - abstinence essential for recovery'
+  - 'Autoimmune hepatitis: Prednisone 30-60mg daily + azathioprine 50-100mg daily, taper steroids'
+  - 'Monitor for cirrhosis - ultrasound Q6months, varices screening with EGD'
+  - 'Hepatitis A/B vaccination if not immune'
+  - 'Liver transplant evaluation if decompensated cirrhosis'
+
+entry_point: hepatitis_presentation
+
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+
+clinical_pearls:
+  - 'Viral hepatitis: A/E fecal-oral, B/C/D bloodborne'
+  - 'Drug-induced hepatitis: exclude acetaminophen toxicity'
+  - 'Autoimmune hepatitis: female predominance, elevated IgG, ANA positive'
+  - 'Ischemic hepatitis: shock liver with massive transaminase elevation'
+
+nodes:
+  - id: hepatitis_presentation
+    type: question
+    text: "Pattern of liver injury and presentation?"
+    options:
+      - label: "Acute hepatitis with severe elevation (ALT/AST >1000) or acute liver failure"
+        next: acute_severe_hepatitis
+      - label: "Chronic hepatitis (elevated enzymes >6 months)"
+        next: chronic_hepatitis_workup
+      - label: "Alcoholic hepatitis suspected"
+        next: alcoholic_hepatitis
+
+  - id: acute_severe_hepatitis
+    type: question
+    text: "Etiology of acute hepatitis?"
+    options:
+      - label: "Acute viral hepatitis (A, B, C, E)"
+        next: acute_viral_hepatitis
+      - label: "Drug-induced liver injury (acetaminophen, other medications)"
+        next: drug_induced_hepatitis
+      - label: "Autoimmune hepatitis"
+        next: autoimmune_hepatitis
+      - label: "Ischemic hepatitis (shock liver)"
+        next: ischemic_hepatitis
+
+  - id: acute_viral_hepatitis
+    type: diagnosis
+    name: "Acute Viral Hepatitis"
+    icd10: "B19.9"
+    urgency: high
+    workup:
+      - Acute hepatitis panel
+      - Hepatitis A - Anti-HAV IgM (acute infection), anti-HAV total or IgG (prior infection/immunity)
+      - Hepatitis B - HBsAg (surface antigen - acute or chronic), anti-HBc IgM (acute infection), anti-HBc total, anti-HBs (immunity from vaccine or resolved infection)
+      - Hepatitis C - Anti-HCV antibody (may be negative in acute infection), HCV RNA (detects active infection earlier)
+      - Hepatitis E - Anti-HEV IgM (suspect if travel, pregnancy, or negative workup)
+      - Hepatitis D (delta) - Only with HBV co-infection, anti-HDV
+      - Labs - CBC, CMP (AST/ALT markedly elevated ALT >1000, bilirubin elevated), PT/INR (assess synthetic function), albumin
+      - Assess for acute liver failure - INR >1.5, encephalopathy, hypoglycemia
+    treatment:
+      - Hepatitis A
+      - Supportive care (self-limited, typically resolves in 2-3 months)
+      - Hospitalize if severe (INR >1.5, encephalopathy, vomiting/dehydration, bilirubin >10)
+      - No antiviral therapy
+      - Post-exposure prophylaxis for close contacts (HAV vaccine or immunoglobulin)
+      - Hepatitis B (acute)
+      - Supportive care (90-95% clear virus spontaneously in immunocompetent adults)
+      - Monitor HBsAg, anti-HBs, HBV DNA, ALT, INR
+      - Start antivirals if severe acute hepatitis or acute liver failure (tenofovir or entecavir)
+      - If progresses to chronic (HBsAg positive >6 months) - see chronic hepatitis B management
+      - Hepatitis C (acute)
+      - 20-30% spontaneous clearance in first 6 months
+      - Monitor HCV RNA at 12 and 24 weeks
+      - If still positive at 12 weeks, treat with direct-acting antivirals (sofosbuvir/velpatasvir x 12 weeks)
+      - Hepatitis E
+      - Self-limited in immunocompetent (resolves in 2-6 weeks)
+      - High mortality in pregnancy (20%)
+      - Ribavirin if severe or immunocompromised
+      - Acute liver failure management
+      - ICU admission
+      - Monitor for encephalopathy, cerebral edema, coagulopathy, hypoglycemia, infection
+      - Liver transplant evaluation (contact transplant center early)
+      - King's College Criteria for transplant (acetaminophen - pH <7.3 or INR >6.5 + Cr >3.4 + encephalopathy grade 3-4; non-acetaminophen - INR >6.5 or 3+ of: age <10 or >40, non-A non-B hepatitis, jaundice >7 days before encephalopathy, INR >3.5, bilirubin >17.5)
+
+  - id: drug_induced_hepatitis
+    type: diagnosis
+    name: "Drug-Induced Liver Injury (DILI)"
+    icd10: "K71.9"
+    urgency: high
+    workup:
+      - History - ALL medications (prescription, OTC, herbal/supplements - especially green tea extract, anabolic steroids, kava)
+      - Timing - Onset typically 5 days to 90 days after drug initiation
+      - Pattern - Hepatocellular (ALT predominant, R ratio >5), cholestatic (alk phos predominant, R ratio <2), or mixed (R ratio 2-5)
+      - R ratio = (ALT/ULN) / (Alk Phos/ULN)
+      - Common culprits - Acetaminophen (dose >4g/day or >7.5g in 24hr), isoniazid, nitrofurantoin, NSAIDs, antibiotics (amoxicillin-clavulanate, TMP-SMX, azithromycin), statins, anti-epileptics (phenytoin, valproate), herbal supplements
+      - Labs - Acetaminophen level (if overdose suspected), CBC, CMP, PT/INR, viral hepatitis panel (rule out)
+    treatment:
+      - STOP offending medication immediately
+      - Acetaminophen toxicity
+      - N-acetylcysteine (NAC) - Antidote
+      - Loading 150mg/kg IV over 1 hour, then 50mg/kg over 4 hours, then 100mg/kg over 16 hours (21-hour protocol)
+      - OR oral NAC 140mg/kg load, then 70mg/kg q4h x 17 doses
+      - Indications - Acetaminophen level above Rumack-Matthew nomogram line (150 mcg/mL at 4 hours), OR unknown time of ingestion with level >10 mcg/mL, OR acute liver failure with acetaminophen detected
+      - NAC effective if given within 8 hours, still beneficial up to 72 hours
+      - Liver transplant evaluation if fulminant hepatic failure
+      - Other DILI
+      - Supportive care
+      - Corticosteroids controversial (may consider if autoimmune-like DILI with positive autoantibodies)
+      - Ursodeoxycholic acid for cholestatic DILI
+      - Monitor LFTs weekly until improving
+      - Prognosis - Hy's Law (ALT >3x ULN + bilirubin >2x ULN) predicts 10% mortality/transplant risk
+      - Avoid re-challenge with causative drug
+
+  - id: autoimmune_hepatitis
+    type: diagnosis
+    name: "Autoimmune Hepatitis"
+    icd10: "K75.4"
+    urgency: high
+    workup:
+      - Demographics - Young-middle aged women (can occur any age/gender)
+      - Labs - Marked transaminase elevation (ALT/AST >500), hypergammaglobulinemia (IgG >1.5x ULN)
+      - Autoantibodies
+      - Type 1 (most common, 80%) - ANA and/or anti-smooth muscle antibody (ASMA) positive
+      - Type 2 (children/young adults) - Anti-LKM1 (liver-kidney microsomal) positive
+      - Liver biopsy - Interface hepatitis (piecemeal necrosis), plasma cell infiltration
+      - Rule out viral hepatitis, Wilson disease (ceruloplasmin, 24-hr urine copper), drug-induced
+    treatment:
+      - Immunosuppression (mainstay)
+      - Prednisone 40-60mg PO daily OR prednisolone 30mg PO daily + azathioprine 50mg PO daily (steroid-sparing)
+      - Taper prednisone slowly over months as transaminases normalize
+      - Maintenance - Azathioprine 1-2mg/kg/day (long-term), low-dose prednisone
+      - Check TPMT enzyme activity before starting azathioprine (genetic polymorphism affects metabolism)
+      - Monitor LFTs monthly initially, then q3 months on maintenance
+      - Alternative if azathioprine intolerant - Mycophenolate mofetil
+      - Liver transplant if acute liver failure or cirrhosis with decompensation
+      - Lifelong treatment usually required (high relapse rate if stopped)
+      - GI/hepatology referral
+
+  - id: ischemic_hepatitis
+    type: diagnosis
+    name: "Ischemic Hepatitis (Shock Liver)"
+    icd10: "K76.2"
+    urgency: critical
+    workup:
+      - History - Recent hypotension, cardiac arrest, septic shock, cardiogenic shock
+      - Labs - MASSIVE transaminase elevation (ALT/AST often >3000-10,000), rapid rise and fall (peak 1-3 days, normalize within 7-10 days if perfusion restored)
+      - LDH very elevated
+      - Normal or mild bilirubin elevation
+      - Acute renal injury often coexists
+    treatment:
+      - Treat underlying cause - Restore hemodynamic stability (fluids, pressors, treat heart failure/arrhythmia, treat sepsis)
+      - Supportive care
+      - Monitor for acute liver failure (rare if perfusion restored)
+      - Prognosis depends on underlying condition (high mortality 50-70% due to underlying shock)
+
+  - id: chronic_hepatitis_workup
+    type: question
+    text: "Etiology of chronic hepatitis?"
+    options:
+      - label: "Chronic hepatitis B"
+        next: chronic_hep_b
+      - label: "Chronic hepatitis C"
+        next: chronic_hep_c
+      - label: "Non-alcoholic fatty liver disease (NAFLD/NASH)"
+        next: nafld_nash
+      - label: "Chronic autoimmune hepatitis"
+        next: autoimmune_hepatitis
+
+  - id: chronic_hep_b
+    type: diagnosis
+    name: "Chronic Hepatitis B"
+    icd10: "B18.1"
+    urgency: medium
+    workup:
+      - Chronic HBV = HBsAg positive >6 months
+      - Serologic markers - HBsAg, HBeAg (high replication), anti-HBe (low replication), HBV DNA viral load
+      - Labs - ALT, AST, bilirubin, albumin, PT/INR, platelet count
+      - Assess fibrosis - FibroScan (elastography) or biopsy
+      - Screen for hepatocellular carcinoma (HCC) - AFP and liver ultrasound q6 months
+    treatment:
+      - Indications for treatment - HBV DNA >2000 IU/mL + ALT elevated + fibrosis, OR cirrhosis, OR HBeAg positive with HBV DNA >20,000, OR family history of HCC
+      - First-line antivirals (indefinite treatment for most)
+      - Entecavir 0.5mg PO daily OR
+      - Tenofovir (TDF 300mg or TAF 25mg) PO daily
+      - High barrier to resistance, excellent viral suppression
+      - Monitoring - HBV DNA, ALT q3-6 months
+      - Goal - Undetectable HBV DNA, HBeAg seroconversion (HBeAg negative, anti-HBe positive)
+      - Functional cure (HBsAg loss) rare but ideal endpoint
+      - HCC surveillance - AFP + ultrasound q6 months (lifelong, even if cirrhosis regresses)
+      - Vaccination of household contacts
+      - Hepatology referral
+
+  - id: chronic_hep_c
+    type: diagnosis
+    name: "Chronic Hepatitis C"
+    icd10: "B18.2"
+    urgency: medium
+    workup:
+      - Chronic HCV = HCV RNA positive >6 months (or any HCV RNA positive if anti-HCV positive)
+      - Genotype - Genotype 1 most common in US, determines treatment duration
+      - Labs - ALT, AST, bilirubin, albumin, PT/INR, platelet count, HIV test
+      - Assess fibrosis - FibroScan or FIB-4 score or APRI score (avoid biopsy if possible)
+      - HCC screening if cirrhosis - AFP + ultrasound q6 months
+    treatment:
+      - Direct-acting antivirals (DAAs) - CURE rate >95%
+      - Sofosbuvir/velpatasvir (Epclusa) 400/100mg PO daily x 12 weeks (pan-genotypic, first-line)
+      - Glecaprevir/pibrentasvir (Mavyret) 300/120mg PO daily x 8-12 weeks (pan-genotypic, alternative)
+      - Ledipasvir/sofosbuvir (Harvoni) for genotype 1, 4, 5, 6
+      - Treatment duration - 8-12 weeks (12 weeks if cirrhosis or treatment-experienced)
+      - Monitoring - HCV RNA at week 4 (on-treatment response), at end of treatment, and 12 weeks post-treatment (SVR12 = sustained virologic response = CURE)
+      - SVR12 (HCV RNA undetectable 12 weeks post-treatment) = virologic cure (>99% remain cured)
+      - If cirrhosis - Continue HCC surveillance even after cure (3-4% annual risk)
+      - Treat ALL patients with chronic HCV (no longer restricted by fibrosis stage)
+      - Highly effective, well-tolerated, short duration - treat as soon as diagnosed
+
+  - id: nafld_nash
+    type: diagnosis
+    name: "Non-Alcoholic Fatty Liver Disease (NAFLD) and NASH"
+    icd10: "K76.0"
+    urgency: low
+    workup:
+      - NAFLD = Hepatic steatosis (>5% fat) without significant alcohol use (<20g/day women, <30g/day men)
+      - Spectrum - Simple steatosis (benign) → NASH (steatohepatitis with inflammation/fibrosis) → cirrhosis
+      - Risk factors - Metabolic syndrome (obesity, diabetes, dyslipidemia, hypertension)
+      - Labs - Mild ALT/AST elevation (AST:ALT <1 typically, reverses in cirrhosis), rule out other causes (viral hepatitis, hemochromatosis [ferritin, transferrin saturation], Wilson [ceruloplasmin], autoimmune [ANA, ASMA])
+      - Imaging - Ultrasound or CT shows hepatic steatosis
+      - Assess fibrosis - FibroScan, FIB-4 score, or liver biopsy (gold standard for diagnosing NASH vs simple steatosis)
+    treatment:
+      - Lifestyle modification (cornerstone)
+      - Weight loss - 7-10% weight loss improves steatosis and inflammation, >10% may reverse fibrosis
+      - Diet - Mediterranean diet, reduce refined carbs and saturated fats
+      - Exercise - 150 min/week moderate aerobic + resistance training
+      - Treat underlying metabolic syndrome
+      - Diabetes control - Metformin (first-line), GLP-1 agonists (semaglutide, liraglutide - improve NASH), SGLT2 inhibitors, pioglitazone (improves NASH but weight gain)
+      - Dyslipidemia - Statins safe in NAFLD (despite elevated LFTs), reduce CV risk
+      - Hypertension - ACE-I or ARBs preferred (may reduce fibrosis progression)
+      - Bariatric surgery if BMI >35 (highly effective for NASH)
+      - Medications for NASH (limited options)
+      - Vitamin E 800 IU daily (non-diabetic NASH with biopsy-proven inflammation)
+      - Pioglitazone 30-45mg daily (improves histology but side effects)
+      - Resmetirom (thyroid hormone receptor agonist) - new FDA-approved for NASH with fibrosis
+      - Avoid alcohol, hepatotoxic medications
+      - HCC surveillance if cirrhosis develops
+      - Hepatology referral if advanced fibrosis or NASH
+
+  - id: alcoholic_hepatitis
+    type: diagnosis
+    name: "Alcoholic Hepatitis"
+    icd10: "K70.10"
+    urgency: high
+    workup:
+      - Clinical - Jaundice, hepatomegaly, right upper quadrant pain in heavy drinker (>40-80g alcohol daily for years)
+      - Rapid onset over days-weeks
+      - Labs - AST/ALT elevated (AST:ALT ratio >2:1 characteristic, both typically <300-400), elevated bilirubin (>3), prolonged PT/INR, leukocytosis
+      - Severity assessment - Maddrey Discriminant Function (MDF) = 4.6 x (PT - control PT) + bilirubin
+      - MDF ≥32 = severe alcoholic hepatitis (high mortality, consider steroids)
+      - MELD score also used for prognosis
+      - Rule out other causes - Viral hepatitis, drug-induced, sepsis
+      - Ultrasound or CT - Hepatomegaly, rule out biliary obstruction, assess for cirrhosis
+    treatment:
+      - Hospital admission for moderate-severe disease
+      - Abstinence from alcohol (CRITICAL)
+      - Nutritional support (often malnourished)
+      - High-calorie diet (35-40 kcal/kg/day), high protein (1.2-1.5 g/kg/day)
+      - Thiamine 100mg IV daily, folate, multivitamin
+      - Enteral nutrition if unable to eat (NG tube)
+      - Corticosteroids (for severe alcoholic hepatitis - MDF ≥32)
+      - Prednisolone 40mg PO daily x 28 days (improves short-term survival)
+      - Assess Lille score at day 7 (incorporates change in bilirubin) - If Lille >0.45 (non-responder), stop steroids (no benefit, risk infection)
+      - Contraindications to steroids - Active infection, GI bleed, renal failure, pancreatitis
+      - Pentoxifylline 400mg PO TID (alternative if steroids contraindicated, less evidence)
+      - Treat complications
+      - Infection (high risk) - Low threshold for antibiotics, diagnostic paracentesis if ascites
+      - Hepatorenal syndrome
+      - Ascites - Diuretics, sodium restriction, therapeutic paracentesis
+      - Encephalopathy - Lactulose, rifaximin
+      - Alcohol use disorder treatment - Addiction counseling, naltrexone, acamprosate, disulfiram (once liver function improving)
+      - Liver transplant evaluation if severe (6-month sobriety typically required)
+      - Prognosis - 30-day mortality 20-50% if severe

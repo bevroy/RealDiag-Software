@@ -1,0 +1,122 @@
+tree_id: ENT-TINNITUS
+name: Tinnitus
+family: ent
+specialty: ENT (Otolaryngology)
+presentations:
+  - Ringing in ears (most common description)
+  - Buzzing, hissing, clicking, or roaring sounds
+  - Continuous or intermittent
+  - Unilateral or bilateral
+  - May worsen with stress or quiet environments
+  - Associated hearing loss in many cases
+  - May affect sleep and concentration
+icd10:
+  - H93.11 # Tinnitus, right ear
+  - H93.12 # Tinnitus, left ear
+  - H93.13 # Tinnitus, bilateral
+  - H93.19 # Tinnitus, unspecified ear
+snomed:
+  - "60862001" # Tinnitus
+urgency: Low
+urgency_explanation: Usually benign; urgent if sudden onset with hearing loss, pulsatile tinnitus, or neurologic symptoms
+
+referrals:
+  ent: For comprehensive evaluation, especially if unilateral or pulsatile
+  audiology: For hearing test and tinnitus masking evaluation
+  neurology: If neurologic symptoms or concern for acoustic neuroma
+
+workup:
+  history:
+    - Duration, onset (gradual vs sudden)
+    - Unilateral vs bilateral
+    - Pulsatile (synchronous with heartbeat) vs non-pulsatile
+    - Associated hearing loss, vertigo, fullness
+    - Noise exposure history
+    - Medications (aspirin, NSAIDs, aminoglycosides, loop diuretics, chemotherapy)
+    - Head trauma
+    - Stress, anxiety, depression
+  physical_examination:
+    - Otoscopy: cerumen impaction, infection, TM abnormalities
+    - Auscultation over ear, mastoid, neck (pulsatile tinnitus - vascular causes)
+    - Cranial nerve examination
+    - Temporomandibular joint assessment
+  audiometry:
+    - Pure tone audiometry
+    - Speech discrimination
+    - Tympanometry
+  imaging:
+    - MRI internal auditory canals with gadolinium: if unilateral, asymmetric hearing loss, or neurologic symptoms (rule out acoustic neuroma)
+    - CT temporal bones: if trauma, conductive hearing loss
+    - MRI/MRA brain: if pulsatile tinnitus (vascular malformation, glomus tumor)
+  laboratory:
+    - Usually not needed
+    - Consider: CBC, TSH, lipid panel, B12 if systemic symptoms
+
+treatment:
+  address_underlying_cause:
+    - Remove cerumen impaction
+    - Treat otitis media or externa
+    - Discontinue ototoxic medications if possible
+    - Control hypertension (pulsatile tinnitus)
+    - TMJ treatment if contributing
+  sound_therapy:
+    - Hearing aids (if hearing loss present) - most effective
+    - Sound machines or white noise
+    - Tinnitus masking devices
+    - Music therapy
+  cognitive_behavioral_therapy:
+    - CBT reduces distress and improves coping
+    - Tinnitus retraining therapy (TRT)
+    - Mindfulness and relaxation techniques
+  pharmacotherapy:
+    - No FDA-approved medication for tinnitus
+    - Antidepressants (nortriptyline, amitriptyline) may help if depression/anxiety
+    - Avoid: Ginkgo biloba (not effective), high-dose zinc (not effective)
+  lifestyle_modifications:
+    - Avoid loud noise exposure
+    - Limit caffeine, alcohol, nicotine
+    - Stress reduction
+    - Adequate sleep
+    - Exercise
+  avoid_ineffective_treatments:
+    - Ginkgo biloba
+    - Zinc supplementation
+    - Melatonin
+    - Intratympanic steroids (unless acute acoustic trauma)
+
+clinical_pearls:
+  - Affects 10-15% of adults; bothersome in 20% of those affected
+  - Most tinnitus is subjective (only patient hears it)
+  - Objective tinnitus (examiner can hear) suggests vascular or muscular cause
+  - Pulsatile tinnitus warrants imaging (AVM, carotid stenosis, glomus tumor, venous hum)
+  - Unilateral tinnitus + asymmetric hearing loss = MRI to rule out acoustic neuroma
+  - Most common cause: noise-induced hearing loss
+  - Presbycusis (age-related hearing loss) commonly associated
+  - Ménière's disease triad: tinnitus, vertigo, hearing loss
+  - No cure for most cases; treatment focuses on habituation and coping
+  - Depression and anxiety often co-occur and should be addressed
+
+differentials:
+  - Acoustic neuroma (vestibular schwannoma)
+  - Ménière's disease
+  - Presbycusis
+  - Noise-induced hearing loss
+  - Ototoxicity
+  - TMJ disorder
+  - Pulsatile tinnitus causes: carotid stenosis, AVM, glomus tumor, venous hum
+
+trace:
+  - Patient presents with ringing in ears
+  - Obtain detailed history: unilateral vs bilateral, pulsatile, associated symptoms
+  - Perform otoscopy and basic neurologic exam
+  - Refer for audiometry
+  - If unilateral or pulsatile: order MRI IAC
+  - Treat underlying cause if identified
+  - Offer sound therapy and CBT
+  - Consider hearing aids if hearing loss present
+
+citations:
+  - "AAO-HNSF Clinical Practice Guideline: Tinnitus"
+  - "American Tinnitus Association Guidelines"
+  - "UpToDate: Etiology and diagnosis of tinnitus"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

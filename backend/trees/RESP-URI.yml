@@ -1,0 +1,88 @@
+tree_id: RESP-URI
+name: Upper Respiratory Infection (Common Cold)
+family: pulmonology
+specialty: Primary Care, Infectious Disease
+chief_complaint: Runny nose, sore throat, congestion, cough
+description: Viral infection of upper respiratory tract causing rhinorrhea, nasal congestion, sore throat, and cough. Most common acute illness in ambulatory care, typically self-limited in 7-10 days.
+
+icd10: J06.9
+snomed: ["82272006", "54150009"]
+
+urgency: routine
+
+homeopathy:
+  - remedy: "Aconitum napellus 30C"
+    indications: "Sudden onset after cold exposure, anxiety, early stage, first 24 hours"
+  - remedy: "Allium cepa 30C"
+    indications: "Watery nasal discharge, burning eyes, worse in warm room"
+  - remedy: "Arsenicum album 30C"
+    indications: "Burning nasal discharge, sneezing, restless, worse at night"
+  - remedy: "Gelsemium 30C"
+    indications: "Gradual onset, weakness, heavy eyelids, chills, aching muscles"
+  - remedy: "Pulsatilla 30C"
+    indications: "Thick yellow-green discharge, better in fresh air, clingy"
+
+differentials:
+  - Influenza
+  - Strep pharyngitis
+  - Sinusitis
+  - Allergic rhinitis
+  - COVID-19
+
+workup:
+  - Clinical diagnosis based on symptoms: rhinorrhea, nasal congestion, sore throat, cough, sneezing, low-grade fever
+  - Typical duration 7-10 days, peak symptoms days 2-3
+  - Viral etiology: rhinovirus (most common), coronavirus, RSV, adenovirus, influenza, parainfluenza
+  - Physical exam: rhinorrhea, nasal mucosal erythema and edema, pharyngeal erythema without exudate, clear lungs
+  - No laboratory testing needed for uncomplicated URI
+  - Consider strep throat if severe pharyngitis with exudate (rapid strep test or throat culture)
+  - Consider influenza testing if during flu season and within 48 hours of symptom onset (for treatment consideration)
+  - Red flags requiring further evaluation: symptoms >10-14 days (consider sinusitis or other cause), high fever >38.5°C (>101°F), severe headache, shortness of breath, chest pain
+
+treatment:
+  - Supportive care (mainstay): rest, hydration, humidified air
+  - Symptomatic relief: acetaminophen or ibuprofen for fever/pain/headache, avoid aspirin in children (Reye syndrome risk)
+  - Nasal congestion: saline nasal spray or irrigation, oral decongestants (pseudoephedrine 30-60 mg Q4-6H, phenylephrine less effective)
+  - Topical decongestants: oxymetazoline nasal spray (limit to 3 days to avoid rebound congestion)
+  - Cough suppressants: dextromethorphan 10-20 mg Q4H if disruptive dry cough (evidence limited)
+  - Antihistamines: first-generation (diphenhydramine) may help rhinorrhea/sneezing but causes sedation, second-generation not effective for URI
+  - Honey (children >1 year): 1-2 tsp at bedtime reduces cough, more effective than dextromethorphan
+  - Zinc lozenges: may reduce duration by 1-2 days if started within 24 hours (13-25 mg Q2H while awake)
+  - Vitamin C: minimal benefit, not routinely recommended
+  - Antibiotics NOT indicated: URI is viral, antibiotics do not shorten duration or prevent complications
+  - Indications for antibiotics: bacterial superinfection (acute bacterial sinusitis if symptoms >10 days or worsening after initial improvement, streptococcal pharyngitis if positive test)
+  - Return precautions: worsening symptoms, high fever, severe headache, shortness of breath, symptoms >14 days
+
+clinical_pearls:
+  - URI is the most common acute illness, caused by viruses (not bacteria)
+  - Antibiotics do not help and contribute to resistance - educate patients
+  - Green/yellow nasal discharge does NOT indicate bacterial infection or need for antibiotics
+  - Most patients improve in 7-10 days with supportive care alone
+  - Cough may persist 2-3 weeks after other symptoms resolve (post-viral cough)
+  - Hand hygiene is most important prevention measure
+  - Zinc lozenges may help if started early but taste unpleasant
+  - Echinacea, vitamin C have minimal proven benefit
+  - Consider influenza if high fever and severe myalgias during flu season
+  - Consider COVID-19 testing if during pandemic or local surge
+
+referrals:
+  - Primary care follow-up if symptoms persist >14 days
+  - ENT referral if recurrent infections or suspected structural abnormality
+  - Pulmonology if develops pneumonia or chronic cough
+
+presentations:
+  - Rhinorrhea (runny nose)
+  - Nasal congestion
+  - Sore throat (pharyngitis)
+  - Cough (typically dry initially, may become productive)
+  - Sneezing
+  - Low-grade fever or no fever
+  - Headache (mild, frontal)
+  - Malaise, mild fatigue
+  - Hoarseness
+  - Post-nasal drip
+
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine

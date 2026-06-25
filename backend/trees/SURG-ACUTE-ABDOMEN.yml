@@ -1,0 +1,68 @@
+tree_id: SURG-ACUTE-ABDOMEN
+name: Acute Surgical Abdomen
+family: Surgery
+specialty: Surgery
+icd10:
+- R10.0
+snomed:
+- 9991008
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Surgical Abdomen
+version: '1.0'
+citations:
+  - ACS (American College of Surgeons) Clinical Guidelines
+  - RCS (Royal College of Surgeons) Guidelines
+  - UpToDate - General Surgery
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Sudden severe abdominal pain
+- Peritoneal signs (guarding, rebound)
+- Rigidity
+- Absent bowel sounds
+- Requires urgent surgical evaluation
+- Free air on imaging suggests perforation
+workup: []
+treatment:
+  - 'NPO (nothing by mouth), IV fluids resuscitation'
+  - 'Nasogastric tube if bowel obstruction or severe vomiting'
+  - 'Broad-spectrum antibiotics if suspected perforation or ischemia - piperacillin-tazobactam 3.375g IV Q6H + metronidazole'
+  - 'Urgent surgical consultation for peritonitis, perforation, ischemia'
+  - 'CT abdomen/pelvis with IV contrast - diagnostic test of choice'
+  - 'Pain control - IV opioids acceptable (does not mask exam)'
+  - 'Serial abdominal exams Q4-6H to monitor progression'
+  - 'Emergency surgery indications: Free air, peritonitis, unstable vitals, ischemic bowel'
+  - 'Perforated viscus: Emergent exploratory laparotomy'
+  - 'Bowel obstruction: Decompress with NG, surgery if strangulation/complete/no improvement'
+  - 'Appendicitis: Laparoscopic appendectomy'
+  - 'Cholecystitis: Laparoscopic cholecystectomy (within 72 hours)'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute abdomen
+    - Peritonitis
+    - Perforated viscus
+    - Ruptured AAA
+    - Necrotizing fasciitis
+  urgent:
+    - Suspected malignancy
+    - Bowel obstruction
+    - Incarcerated hernia
+    - Acute cholecystitis
+  routine:
+    - Elective hernia repair
+    - Gallstones without cholecystitis
+    - Benign masses
+    - Screening abnormalities
+differentials:
+  - Appendicitis
+  - Cholecystitis
+  - Perforated ulcer
+  - Bowel obstruction
+  - Ectopic pregnancy
+  - Pancreatitis
+trace:
+  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
+    and Endoscopic Surgeons (SAGES)
+  version: 0.1.0
+  last_updated: '2024-12-26'

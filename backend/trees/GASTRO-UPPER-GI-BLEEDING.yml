@@ -1,0 +1,60 @@
+tree_id: GASTRO-UPPER-GI-BLEEDING
+name: Upper Gastrointestinal Bleeding
+family: gastroenterology
+specialty: Gastroenterology
+icd10:
+- K92.2
+- K92.0
+- K92.1
+snomed:
+- '37372002'
+urgency: medium
+description: Comprehensive evaluation and management of Upper Gastrointestinal Bleeding
+version: '1.0'
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Hematemesis (vomiting blood, coffee-ground emesis)
+- Melena (black, tarry stools)
+- 'Hemodynamic instability: Hypotension, tachycardia, syncope'
+- Anemia, elevated BUN/Cr ratio (BUN/Cr >30 suggests upper GI source)
+- 'Causes: Peptic ulcer (40%), varices (20%), Mallory-Weiss tear, gastritis, malignancy'
+workup:
+- CBC (hemoglobin trend), type and cross
+- BMP (BUN/Cr ratio >30 suggests upper GI source)
+- Coagulation studies (PT/INR if on anticoagulation)
+- Liver function tests (if suspect varices)
+- EGD (diagnostic and therapeutic)
+treatment:
+- 'Guideline-based treatment options for Upper Gastrointestinal Bleeding include:'
+- 'Resuscitation: Two large-bore IVs, crystalloid, transfuse if Hgb <7 (ACG 2023)'
+- 'PPI: Pantoprazole 80mg IV bolus, then 8mg/hr infusion (ACG 2023)'
+- 'If variceal suspected: Octreotide 50mcg bolus, then 50mcg/hr + ceftriaxone 1g IV
+  (ACG 2023)'
+- EGD within 24 hours (emergent if unstable) (ACG 2023)
+- Hold anticoagulation, reverse if necessary (ACG 2023)
+clinical_pearls:
+- 'Stabilize first: Two large-bore IVs, fluids, type and cross'
+- GBS score (Glasgow-Blatchford) predicts need for intervention
+- PPI drip (pantoprazole 80mg bolus, then 8mg/hr) for ulcer bleeding
+- 'Variceal bleeding: Octreotide drip + antibiotics + EGD banding'
+- Emergent EGD within 24 hours (sooner if unstable)
+referrals:
+- Gastroenterology for emergent EGD
+- Surgery if endoscopic therapy fails
+- ICU if hemodynamically unstable
+differentials:
+  - Peptic ulcer
+  - Esophageal varices
+  - Mallory-Weiss tear
+  - Gastritis
+  - Gastric cancer
+trace:
+  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
+    Association (AGA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

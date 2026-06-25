@@ -1,0 +1,63 @@
+tree_id: OBGYN-OVARIAN-CANCER
+name: Ovarian Cancer
+family: obstetrics_gynecology
+specialty: OB/GYN, Oncology
+applies_to: female
+chief_complaint: Abdominal bloating, pelvic mass, abdominal pain
+description: |
+  Ovarian cancer is the most lethal gynecologic malignancy, often diagnosed at advanced stages due to vague symptoms.
+  Risk factors include BRCA mutations, family history, nulliparity, endometriosis. Epithelial ovarian cancer is most common type.
+icd10: C56.9
+snomed: "363443007"
+presentations:
+  - Abdominal bloating or distension
+  - Pelvic or abdominal pain
+  - Early satiety or difficulty eating
+  - Urinary urgency or frequency
+  - Pelvic mass on exam
+  - Ascites
+  - Weight loss
+  - Change in bowel habits
+  - Abnormal vaginal bleeding
+urgency: High
+referrals:
+  urgent:
+    - Pelvic mass with concerning features
+    - Elevated CA-125 with pelvic mass
+    - Ascites of unknown cause
+  gynecologic_oncology:
+    - Suspected or confirmed ovarian cancer
+workup:
+  - Pelvic exam
+  - Transvaginal ultrasound
+  - CA-125 tumor marker (elevated in 80% of epithelial ovarian cancers)
+  - CT abdomen/pelvis with contrast
+  - Chest imaging to rule out metastases
+  - Surgical staging with pathology is gold standard
+treatment:
+  - Primary treatment is cytoreductive surgery (debulking)
+  - Total abdominal hysterectomy, bilateral salpingo-oophorectomy, omentectomy, lymph node sampling
+  - Adjuvant platinum-based chemotherapy (carboplatin/paclitaxel)
+  - Neoadjuvant chemotherapy if unresectable disease
+  - PARP inhibitors for BRCA-mutated or platinum-sensitive disease
+  - Targeted therapy (bevacizumab) in select cases
+clinical_pearls:
+  - Most common cause of death from gynecologic malignancy
+  - 75% diagnosed at advanced stage (stage III or IV)
+  - BRCA1/2 mutations increase lifetime risk to 40-50%
+  - No effective screening test for general population
+  - CA-125 not useful for screening but helpful for monitoring treatment response
+  - Consider BRCA testing for all epithelial ovarian cancers
+differentials:
+  - Benign ovarian cyst or mass
+  - Uterine fibroids
+  - Endometriosis
+  - Tubo-ovarian abscess
+  - Gastrointestinal malignancy
+  - Peritoneal carcinomatosis from other primary
+trace:
+  - 58-year-old woman presents with 2 months of abdominal bloating and early satiety. Pelvic exam reveals right adnexal mass. Transvaginal ultrasound shows 8cm complex solid and cystic right ovarian mass with internal septations. CA-125 elevated at 450. CT shows omental caking and ascites concerning for metastatic disease. Referred to gynecologic oncologist. Undergoes exploratory laparotomy with surgical staging. Pathology confirms high-grade serous ovarian carcinoma, stage IIIC. Optimal cytoreduction achieved. Receives 6 cycles of carboplatin and paclitaxel with good response. Started on maintenance PARP inhibitor given BRCA2 mutation.
+citations:
+  - ACOG Practice Bulletins on Ovarian Cancer
+  - NCCN Ovarian Cancer Guidelines
+  - UpToDate - Gynecologic Oncology

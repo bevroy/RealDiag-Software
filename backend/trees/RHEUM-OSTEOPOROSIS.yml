@@ -1,0 +1,114 @@
+tree_id: RHEUM-OSTEOPOROSIS
+name: Osteoporosis
+family: rheumatology
+specialty: Rheumatology / Endocrinology
+presentations:
+  - Often asymptomatic until fracture occurs
+  - Fragility fracture (low-energy trauma): hip, vertebrae, wrist
+  - Back pain from vertebral compression fractures
+  - Loss of height and kyphosis (dowager's hump)
+  - Risk factors: postmenopausal, advanced age, low body weight, smoking, excess alcohol, corticosteroid use
+icd10:
+  - M81.0 # Age-related osteoporosis without current pathological fracture
+  - M80.00 # Age-related osteoporosis with current pathological fracture, unspecified site
+  - M81.8 # Other osteoporosis without current pathological fracture
+snomed:
+  - "64859006" # Osteoporosis
+urgency: Low
+urgency_explanation: Chronic condition; urgent evaluation needed if fracture suspected
+
+referrals:
+  rheumatology: For complex cases or secondary causes
+  endocrinology: If endocrine cause suspected (hyperparathyroidism, hyperthyroidism)
+  orthopedics: For fracture management
+  physical_therapy: For fall prevention and safe mobility
+
+workup:
+  screening:
+    - DEXA scan (dual-energy X-ray absorptiometry):
+      - All women ≥65 years
+      - Postmenopausal women <65 with risk factors
+      - Men ≥70 years
+      - Adults with fragility fracture
+      - Adults on chronic corticosteroids (≥3 months)
+    - T-score interpretation:
+      - Normal: T-score ≥-1.0
+      - Osteopenia: T-score -1.0 to -2.5
+      - Osteoporosis: T-score ≤-2.5
+      - Severe osteoporosis: T-score ≤-2.5 + fragility fracture
+  laboratory:
+    - Serum calcium, phosphorus, albumin
+    - 25-OH vitamin D
+    - PTH (if calcium abnormal)
+    - TSH
+    - CBC, CMP
+    - Testosterone (men)
+    - 24-hour urine calcium (if hypercalciuria suspected)
+    - Consider: serum protein electrophoresis (multiple myeloma), celiac antibodies
+  fracture_risk_assessment:
+    - FRAX score (10-year fracture risk calculator)
+    - Incorporates age, BMI, risk factors, femoral neck BMD
+    - Guides treatment decisions in osteopenia
+
+treatment:
+  lifestyle_modifications:
+    - Weight-bearing exercise (walking, resistance training)
+    - Fall prevention: home safety assessment, balance training, vision check
+    - Smoking cessation
+    - Limit alcohol (<2 drinks/day)
+    - Adequate nutrition
+  calcium_and_vitamin_d:
+    - Calcium: 1000-1200 mg/day (diet + supplements)
+    - Vitamin D: 800-1000 IU/day (target 25-OH vitamin D >30 ng/mL)
+  pharmacologic:
+    first_line_bisphosphonates:
+      - Alendronate 70 mg PO weekly (or 10 mg daily)
+      - Risedronate 35 mg PO weekly (or 5 mg daily)
+      - Ibandronate 150 mg PO monthly (or 3 mg IV q3 months)
+      - Zoledronic acid 5 mg IV annually
+      - Instructions: take on empty stomach, stay upright 30 min (avoid esophagitis)
+      - Drug holiday after 5 years oral or 3 years IV if low-risk
+    alternative_agents:
+      - Denosumab 60 mg SC q6 months (RANKL inhibitor; preferred if CKD)
+      - Raloxifene 60 mg daily (SERM; postmenopausal women, reduces breast cancer risk)
+      - Teriparatide 20 mcg SC daily (anabolic; severe osteoporosis or failed bisphosphonates)
+      - Romosozumab (newest anabolic; severe osteoporosis)
+    glucocorticoid_induced_osteoporosis:
+      - Treat if prednisone ≥7.5 mg/day for ≥3 months
+      - Bisphosphonates or denosumab
+  monitoring:
+    - DEXA scan q2 years while on treatment
+    - Reassess fracture risk and medication need periodically
+
+clinical_pearls:
+  - Hip and vertebral fractures associated with significant morbidity and mortality
+  - Most common in postmenopausal women due to estrogen deficiency
+  - Secondary causes: glucocorticoids, hyperthyroidism, hyperparathyroidism, celiac disease, vitamin D deficiency
+  - Bisphosphonates reduce fracture risk by 50-70%
+  - Rare side effects of bisphosphonates: osteonecrosis of jaw (ONJ), atypical femoral fractures
+  - Denosumab requires continuation (rebound bone loss if stopped)
+  - Z-score used in premenopausal women and men <50 (compares to age-matched controls)
+
+differentials:
+  - Osteomalacia (vitamin D deficiency)
+  - Multiple myeloma
+  - Metastatic bone disease
+  - Paget's disease of bone
+  - Hyperparathyroidism
+  - Osteogenesis imperfecta
+
+trace:
+  - Screen appropriate patients with DEXA scan
+  - Diagnose osteoporosis if T-score ≤-2.5 or fragility fracture
+  - Evaluate for secondary causes (labs)
+  - Initiate calcium, vitamin D, and lifestyle modifications
+  - Start bisphosphonate if osteoporosis or high fracture risk (FRAX)
+  - Monitor response with repeat DEXA in 2 years
+  - Fall prevention strategies
+
+citations:
+  - "American Association of Clinical Endocrinologists Guidelines for Osteoporosis"
+  - "National Osteoporosis Foundation Clinician's Guide"
+  - "USPSTF: Screening for Osteoporosis to Prevent Fractures"
+  - "UpToDate: Overview of the management of osteoporosis in postmenopausal women"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

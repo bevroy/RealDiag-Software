@@ -1,0 +1,207 @@
+tree_id: TRAUMA-HEAD-INJURY
+name: Head Trauma Evaluation
+family: emergency
+specialty: Emergency Medicine, Neurosurgery, Trauma Surgery, Neurology
+description: Decision tree for evaluating head injury and traumatic brain injury
+version: "1.0"
+icd10: S09.90XA
+snomed: 82271004
+presentations:
+  - Altered consciousness, LOC
+  - Headache
+  - Nausea, vomiting
+  - Confusion, amnesia
+  - Focal neurologic deficits
+  - Scalp laceration, hematoma
+  - Mechanism: fall, MVA, assault
+differentials:
+  - Concussion
+  - Skull fracture
+  - Intracranial hemorrhage
+  - Cervical spine injury
+  - TBI
+entry_point: initial_triage
+
+referrals:
+  emergency:
+    - Severe head injury
+    - Intracranial hemorrhage
+    - GCS <13
+  urgent:
+    - Moderate head injury
+    - GCS 13-15 with symptoms
+  routine:
+    - Minor head injury follow-up
+    - Concussion management
+workup:
+  - Non-contrast head CT for: LOC, vomiting, severe headache, focal deficits, GCS <15
+  - Cervical spine imaging if neck pain, tenderness, or mechanism suggests C-spine injury
+  - Repeat CT in 6-8 hours if initial negative but high risk or anticoagulated
+  - Skull X-rays NOT recommended (CT superior)
+  - Neurochecks q1-2h: GCS, pupils, vital signs
+  - Coagulation studies if on anticoagulants; consider reversal
+
+treatment:
+  - Mild TBI/concussion: rest, gradual return to activity, avoid re-injury
+  - Moderate-severe: ICU monitoring, maintain cerebral perfusion pressure
+  - Elevated ICP: elevate HOB 30°, osmotic therapy (mannitol or hypertonic saline)
+  - Seizure prophylaxis: levetiracetam or phenytoin x7 days if indicated
+  - Avoid hypotension (SBP >90) and hypoxia (SpO2 >90%)
+  - Neurosurgery consultation for: hematoma, skull fracture, deteriorating GCS
+
+clinical_pearls:
+  - GCS <13 or declining: intubate and CT head immediately
+  - Lucid interval: epidural hematoma (middle meningeal artery)
+  - Chronic subdural: elderly on anticoagulation, trivial trauma
+  - Return precautions: worsening headache, vomiting, confusion, seizure
+
+nodes:
+  initial_triage:
+    when:
+      symptoms_contains_any: ["head trauma", "head injury", "hit head", "fall"]
+    tests:
+      - Vital signs
+      - GCS (Glasgow Coma Scale)
+      - Neurologic examination
+      - Mechanism of injury
+      - Loss of consciousness
+      - Cervical spine precautions
+    suggest_dx:
+      - Head trauma (severity to be determined)
+    referrals:
+      - Emergency evaluation
+    trace:
+      - "Head trauma triage - assess severity"
+    next:
+      - node: critical_head_injury
+        if:
+          any_of:
+            - red_flags_any: ["GCS < 13", "deteriorating mental status", "focal neurologic deficit"]
+            - exam_flags_any: ["unresponsive", "posturing", "unequal pupils"]
+      - node: moderate_risk
+        if:
+          any_of:
+            - symptoms_contains_any: ["loss of consciousness", "amnesia", "vomiting", "severe headache"]
+            - exam_flags_any: ["skull deformity", "signs of basilar skull fracture"]
+      - node: low_risk
+        default: true
+
+  critical_head_injury:
+    when:
+      any_of:
+        - red_flags_any: ["GCS < 13", "deteriorating GCS", "focal deficit", "seizure"]
+        - exam_flags_any: ["unequal pupils", "posturing", "Battle sign", "raccoon eyes"]
+    tests:
+      - Stat non-contrast CT head
+      - Cervical spine imaging
+      - ABCs - airway, breathing, circulation
+      - Neurosurgery consult
+      - ICU admission
+      - ICP monitoring if indicated
+    suggest_dx:
+      - NEU-STROKE-ICH (traumatic)
+      - NEU-STROKE-SAH (traumatic)
+      - Epidural hematoma
+      - Subdural hematoma
+      - Skull fracture
+      - Diffuse axonal injury
+    referrals:
+      - Neurosurgery STAT
+      - Trauma surgery
+      - ICU admission
+    trace:
+      - "Critical head injury - immediate intervention"
+    next: []
+
+  moderate_risk:
+    when:
+      any_of:
+        - symptoms_contains_any: ["loss of consciousness", "amnesia", "vomiting", "severe headache"]
+        - exam_flags_any: ["skull deformity", "palpable fracture", "hemotympanum", "CSF rhinorrhea/otorrhea"]
+    tests:
+      - CT head (Canadian CT Head Rule or NEXUS criteria)
+      - Cervical spine imaging if indicated
+      - Observation
+      - Repeat neurologic exams
+    suggest_dx:
+      - NEU-CONCUSSION
+      - Skull fracture
+      - Intracranial hemorrhage
+      - Contusion
+    referrals:
+      - Neurosurgery if imaging abnormal
+      - Admission for observation if high-risk features
+      - Discharge with head injury precautions if imaging normal
+    trace:
+      - "Moderate risk head injury - imaging indicated"
+    next:
+      - node: imaging_abnormal
+        if:
+          exam_flags_any: ["CT shows bleeding", "CT shows fracture", "CT shows mass effect"]
+      - node: concussion_management
+        if:
+          exam_flags_any: ["CT normal", "no fracture"]
+
+  imaging_abnormal:
+    when:
+      exam_flags_any: ["CT abnormal", "intracranial hemorrhage", "skull fracture"]
+    tests:
+      - Serial neurologic exams
+      - Repeat CT if clinically worsening
+      - Neurosurgery evaluation
+    suggest_dx:
+      - Intracranial hemorrhage
+      - Skull fracture
+      - Cerebral contusion
+      - Epidural hematoma
+      - Subdural hematoma
+    referrals:
+      - Neurosurgery
+      - Admission for observation or surgery
+    trace:
+      - "Abnormal imaging - neurosurgery consultation"
+    next: []
+
+  concussion_management:
+    when:
+      symptoms_contains_any: ["concussion", "mild TBI"]
+    tests:
+      - Post-concussion symptom assessment
+      - Cognitive testing
+      - Balance testing
+    suggest_dx:
+      - NEU-CONCUSSION
+    referrals:
+      - Neurology or sports medicine follow-up
+      - Discharge with head injury precautions
+      - Return to play/work guidelines
+      - Avoid contact sports until cleared
+    trace:
+      - "Concussion - discharge with precautions"
+    next: []
+
+  low_risk:
+    when:
+      all_of:
+        - no_red_flags: ["no LOC", "no amnesia", "GCS 15", "no vomiting"]
+        - exam_flags_any: ["normal neurologic exam", "minor scalp laceration only"]
+    tests:
+      - Observation
+      - Head injury precautions
+      - CT not routinely indicated
+    suggest_dx:
+      - Minor head trauma
+      - Scalp laceration
+      - Scalp contusion
+    referrals:
+      - Discharge with precautions
+      - Return if symptoms develop
+      - Follow-up with primary care if needed
+    trace:
+      - "Low risk head injury - discharge with precautions"
+    next: []
+
+citations:
+  - EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines
+  - ATLS (Advanced Trauma Life Support) Guidelines
+  - UpToDate - Trauma Surgery and Critical Care

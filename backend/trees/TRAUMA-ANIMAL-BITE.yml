@@ -1,0 +1,75 @@
+tree_id: TRAUMA-ANIMAL-BITE
+name: Dog/Cat Bite
+family: emergency
+specialty: Emergency Medicine, Primary Care, Infectious Disease
+chief_complaint: Animal bite, dog or cat bite
+description: |
+  Animal bites require assessment for infection risk, rabies exposure, and structural injury.
+  Dog bites cause crush injury; cat bites cause puncture wounds with higher infection risk.
+icd10: S61.451A
+snomed: "217716008"
+presentations:
+  - Puncture wound, laceration, or avulsion from animal bite
+  - Dog bites - crush injury, tissue avulsion
+  - Cat bites - deep puncture wounds
+  - Pain, swelling, bleeding
+  - Location commonly hands, arms, legs
+urgency: High
+referrals:
+  emergency:
+    - Severe tissue injury
+    - Neurovascular compromise
+    - Signs of compartment syndrome
+  hand_surgery:
+    - Hand bites with deep puncture or tendon/joint involvement
+  plastic_surgery:
+    - Facial bites requiring cosmetic repair
+workup:
+  - Mechanism - dog vs cat, provoked vs unprovoked, domestic vs wild
+  - Rabies vaccination status of animal
+  - Animal behavior - captured/quarantined vs unknown whereabouts
+  - Wound assessment - depth, location, neurovascular and tendon function
+  - X-ray if deep puncture near bone or concern for fracture
+treatment:
+  wound_management:
+    - Copious irrigation - high-pressure saline (at least 200mL)
+    - Debride devitalized tissue
+    - Primary closure - consider for facial wounds (cosmetic), avoid for hand punctures
+    - Many wounds left to heal by secondary intention (especially cat bites, hand wounds)
+  prophylactic_antibiotics_recommended:
+    - Cat bites (high infection risk ~50%)
+    - Dog bites to hand
+    - Deep puncture wounds
+    - Wounds requiring closure
+    - Immunocompromised patients
+    - Amoxicillin-clavulanate 875mg BID x 5-7 days (covers Pasteurella)
+    - Alternative - doxycycline 100mg BID + metronidazole 500mg TID
+  tetanus_prophylaxis:
+    - Update if >5 years since last dose
+  rabies_prophylaxis:
+    - Assess risk based on animal species and behavior
+    - High risk - wild animal (bat, raccoon, skunk, fox), unprovoked attack, animal not captured
+    - Low risk - domestic dog/cat with current rabies vaccine and available for 10-day observation
+    - If indicated - rabies immune globulin + rabies vaccine series
+  follow_up:
+    - Re-check in 24-48 hours for signs of infection
+    - Watch for fever, increasing pain, redness, purulent drainage
+clinical_pearls:
+  - Cat bites have highest infection risk (50%) due to deep puncture and Pasteurella
+  - Dog bites cause more tissue damage but lower infection rate (15-20%)
+  - Pasteurella multocida most common organism (onset within 24 hours)
+  - Hand bites at highest risk for serious infection (tenosynovitis, septic arthritis)
+  - Bat exposure may occur without obvious bite - consider rabies prophylaxis
+  - Animal observation for 10 days adequate to rule out rabies in domestic dog/cat
+differentials:
+  - Simple animal bite
+  - Infected animal bite (Pasteurella, Streptococcus, Staphylococcus, anaerobes)
+  - Tenosynovitis from bite
+  - Septic arthritis
+  - Rabies exposure
+trace:
+  - 35-year-old bitten by neighbor's dog on hand. Deep puncture wound over dorsal hand. Copious irrigation performed. No tendon or nerve injury. Wound left open. Prescribe augmentin 875mg BID x 7 days. Tetanus booster given. Dog current on rabies vaccine, observed for 10 days, no rabies prophylaxis needed. Wound heals without infection.
+citations:
+  - CDC Rabies Guidelines
+  - American Academy of Family Physicians
+  - UpToDate - Emergency Medicine and Infectious Disease

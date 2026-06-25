@@ -1,0 +1,119 @@
+tree_id: GI-IRRITABLE-BOWEL-SYNDROME
+name: Irritable Bowel Syndrome (IBS)
+family: gastroenterology
+specialty: Gastroenterology
+chief_complaint: Recurrent abdominal pain with altered bowel habits
+description: Functional GI disorder characterized by abdominal pain associated with change in bowel habits
+icd10: K58.9
+snomed: 10743008
+presentations:
+  - "Recurrent abdominal pain"
+  - "Crampy abdominal pain"
+  - "Cramping abdominal pain"
+  - "Abdominal pain relieved by defecation"
+  - "Abdominal pain relieved by bowel movement"
+  - "Pain improves with defecation"
+  - "Pain relieved by passing stool"
+  - "Associated with change in stool frequency or form"
+  - "Change in bowel habits"
+  - "Bloating, gas"
+  - "Bloating and abdominal distension"
+  - "Alternating diarrhea and constipation"
+  - "No alarm features (weight loss, bleeding)"
+urgency: routine
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+
+workup:
+  - Rome IV criteria (clinical diagnosis) - recurrent abdominal pain at least 1 day/week in last 3 months with at least 2 of pain related to defecation, change in stool frequency, change in stool form/appearance
+  - Symptoms must be present for last 3 months with onset at least 6 months ago
+  - Classify subtype based on predominant stool pattern (Bristol Stool Form Scale)
+  - IBS-C (constipation predominant) - greater than 25% hard/lumpy stools, less than 25% loose/watery
+  - IBS-D (diarrhea predominant) - greater than 25% loose/watery stools, less than 25% hard/lumpy
+  - IBS-M (mixed) - greater than 25% hard AND greater than 25% loose stools
+  - IBS-U (unclassified) - insufficient abnormality for other subtypes
+  - Limited lab workup to exclude organic disease (red flag features)
+  - CBC (rule out anemia), CRP or fecal calprotectin (rule out IBD)
+  - Celiac serology (TTG-IgA) if IBS-D or IBS-M
+  - Thyroid function tests (TSH)
+  - Stool studies if diarrhea predominant - ova and parasites, Giardia antigen, C. diff toxin
+  - Colonoscopy if age greater than 50, alarm features (weight loss, rectal bleeding, family history colon cancer)
+  - Hydrogen breath test for lactose intolerance or small intestinal bacterial overgrowth (SIBO)
+treatment:
+  - Establish therapeutic relationship - validate symptoms, reassure no serious disease
+  - Dietary modifications - Low FODMAP diet (fermentable oligosaccharides, disaccharides, monosaccharides, polyols) supervised by dietitian
+  - Increase soluble fiber (psyllium) for IBS-C, avoid insoluble fiber
+  - Avoid trigger foods (caffeine, alcohol, fatty foods, gas-producing foods)
+  - Lactose-free diet if lactose intolerance confirmed
+  - IBS-C treatment - Fiber supplementation psyllium 1 tablespoon BID, Osmotic laxatives polyethylene glycol 3350 (Miralax) 17 g daily, Lubiprostone 8 mcg BID (chloride channel activator), Linaclotide 145-290 mcg daily (guanylate cyclase-C agonist)
+  - IBS-D treatment - Loperamide 2-4 mg PRN before meals or activities (max 16 mg/day), Rifaximin 550 mg TID for 14 days (non-absorbable antibiotic for SIBO), Alosetron 0.5-1 mg BID (5-HT3 antagonist, females only, risk of ischemic colitis), Eluxadoline 100 mg BID with food (mu-opioid receptor agonist), Bile acid sequestrants if bile acid malabsorption cholestyramine 4 g BID
+  - All subtypes - Antispasmodics dicyclomine 20 mg QID or hyoscyamine 0.125-0.25 mg PRN
+  - Tricyclic antidepressants amitriptyline 10-50 mg at bedtime or nortriptyline 10-75 mg
+  - SSRIs for IBS-D citalopram 20-40 mg daily, paroxetine 20-40 mg daily
+  - Cognitive behavioral therapy (CBT) or gut-directed hypnotherapy
+  - Probiotics (Bifidobacterium infantis) - modest benefit
+  - Peppermint oil 180-200 mg TID (enteric-coated)
+clinical_pearls:
+  - Most common GI disorder seen by gastroenterologists, affects 10-15% of population
+  - Female-to-male ratio 2:1, peak onset 20-40 years
+  - Rome IV criteria allow diagnosis without extensive testing if no red flags
+  - Red flags requiring further workup - age greater than 50 at onset, nocturnal symptoms, unintentional weight loss, rectal bleeding, family history IBD/colon cancer, anemia, fever
+  - Symptoms often triggered by stress, menses, food (high FODMAP foods)
+  - Bloating and distension common (90% of patients)
+  - Post-infectious IBS develops in 10% after acute gastroenteritis
+  - Brain-gut axis dysfunction - visceral hypersensitivity and altered motility
+  - No structural or biochemical abnormality - diagnosis of exclusion
+  - Psychological comorbidity common - anxiety, depression in 50-60%
+differentials:
+  - Inflammatory bowel disease (Crohn, ulcerative colitis) - weight loss, bloody stools, elevated CRP/calprotectin
+  - Celiac disease - diarrhea, weight loss, positive TTG-IgA, villous atrophy on biopsy
+  - Lactose intolerance - symptoms after dairy, positive hydrogen breath test
+  - Small intestinal bacterial overgrowth (SIBO) - bloating, diarrhea after meals, positive breath test
+  - Microscopic colitis - watery diarrhea, normal colonoscopy, collagenous/lymphocytic colitis on biopsy
+  - Colon cancer - age greater than 50, weight loss, iron deficiency anemia, positive FIT
+  - Chronic pancreatitis - epigastric pain radiating to back, steatorrhea, alcohol history
+  - Endometriosis - cyclic pain with menses, dysmenorrhea, dyspareunia
+  - Bile acid malabsorption - chronic watery diarrhea, responds to cholestyramine
+trace:
+  - 32-year-old woman with 2-year history of recurrent abdominal cramping and diarrhea
+  - Abdominal pain relieved after bowel movement, occurring 3-4 times per week
+  - Loose stools 3-5 times per day, urgency, no blood or mucus
+  - Bloating and distension common, worse in evening
+  - Symptoms worse with stress at work, around menses
+  - Denies weight loss, fever, nocturnal symptoms
+  - Past medical history - anxiety disorder on sertraline
+  - Family history - mother with IBS
+  - Physical exam - soft, non-tender abdomen, normal bowel sounds, no masses
+  - Labs - CBC normal (Hgb 13.2 g/dL), CRP less than 0.5 mg/L (normal), TSH 2.1 mIU/L (normal)
+  - Celiac serology (TTG-IgA) negative
+  - Stool studies - negative for ova/parasites, Giardia, C. diff
+  - Fecal calprotectin 25 mcg/g (normal less than 50, rules out IBD)
+  - Diagnosis - IBS-D (diarrhea predominant) based on Rome IV criteria
+  - No red flags, no colonoscopy indicated (age less than 50, no alarm features)
+  - Treatment plan - Dietary counseling low FODMAP diet with dietitian, avoid caffeine and alcohol
+  - Loperamide 2 mg before meals PRN for diarrhea
+  - Dicyclomine 20 mg QID PRN for cramping
+  - Continue sertraline for anxiety (may help IBS symptoms)
+  - Cognitive behavioral therapy referral
+  - Follow-up in 4 weeks - 40% improvement with low FODMAP diet and loperamide
+  - Added rifaximin 550 mg TID for 14 days (empiric SIBO treatment)
+  - 3-month follow-up - 70% improvement in symptoms, better quality of life
+  - Continues low FODMAP diet with occasional reintroduction of foods, loperamide PRN
+  - Outcome - Good symptom control with dietary modification and PRN antidiarrheals
+
+citations:
+  - ACG (American College of Gastroenterology) Clinical Guidelines
+  - AGA (American Gastroenterological Association) Clinical Practice Updates
+  - UpToDate - Gastroenterology and Hepatology

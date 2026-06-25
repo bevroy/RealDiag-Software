@@ -1,0 +1,129 @@
+tree_id: CARDS-UNSTABLE-ANGINA
+name: Unstable Angina
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest pain at rest or with minimal exertion
+description: Acute coronary syndrome without myocardial necrosis causing crescendo angina, rest angina, or new-onset severe angina. Normal troponin distinguishes from NSTEMI. Plaque rupture with transient occlusion. Early invasive strategy if high risk, dual antiplatelet therapy, anticoagulation.
+icd10: I20.0
+snomed: 25106000
+presentations:
+  - Chest pain at rest or with minimal exertion
+  - Angina increasing in frequency, severity, or duration
+  - New-onset severe angina
+  - Pain not fully relieved by nitroglycerin
+  - May progress to MI
+  - High risk for adverse cardiac events
+urgency: emergent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Symptoms: escalating ischemic chest pain
+  - Rest angina: angina at rest or with minimal exertion (most concerning)
+  - New-onset angina: severe angina (class III) within 2 months of first episode
+  - Crescendo angina: increasing frequency, duration, or severity of stable angina
+  - Duration: usually under 20 minutes per episode, relieved by rest or nitroglycerin
+  - Character: substernal pressure, tightness, squeezing
+  - Radiation: left arm, jaw, back
+  - Associated symptoms: dyspnea, diaphoresis, nausea
+  - Physical exam: often normal between episodes
+  - May have S4 gallop during ischemia
+  - Signs of heart failure if severe ischemia
+  - ECG (during pain):
+  - ST depression: horizontal or downsloping (most specific for ischemia)
+  - T wave inversion: deep symmetric T waves in precordial leads
+  - Transient ST elevation: Wellens syndrome (LAD stenosis)
+  - Normal ECG: possible even with ongoing ischemia
+  - ECG between episodes: may normalize
+  - Cardiac biomarkers (distinguish from NSTEMI):
+  - Troponin: normal (no myocardial necrosis)
+  - Serial troponins: 0 and 3-6 hours, both normal
+  - If troponin elevated: diagnosis is NSTEMI not unstable angina
+  - Risk stratification:
+  - TIMI risk score for UA/NSTEMI:
+  - Age 65 or older (1 point)
+  - 3 or more CAD risk factors (1 point)
+  - Known CAD with stenosis over 50% (1 point)
+  - Aspirin use in past 7 days (1 point)
+  - Severe angina (2+ episodes in 24 hours) (1 point)
+  - ST deviation 0.5 mm or more (1 point)
+  - Positive cardiac biomarker (1 point)
+  - Score 0-2: low risk (4.7% events)
+  - Score 3-4: intermediate risk (13% events)
+  - Score 5-7: high risk (26-41% events)
+  - High-risk features: rest angina over 20 minutes, hemodynamic instability, new mitral regurgitation, dynamic ST changes
+
+treatment:
+  - Acute management:
+  - Aspirin: 325 mg chewed immediately (most important)
+  - Nitroglycerin: sublingual 0.4 mg Q5min x3, then IV infusion if ongoing pain
+  - Beta blocker: metoprolol 25-50 mg PO (reduce myocardial oxygen demand)
+  - Morphine: for pain relief if severe (use cautiously)
+  - Oxygen: if hypoxic (saturation under 90%)
+  - Antiplatelet therapy (dual antiplatelet therapy):
+  - Aspirin: 81-325 mg daily (lifelong)
+  - P2Y12 inhibitor: ticagrelor 180 mg load then 90 mg BID (preferred) or clopidogrel 600 mg load then 75 mg daily
+  - Continue DAPT x12 months
+  - Anticoagulation:
+  - Enoxaparin: 1 mg/kg SC BID or
+  - Unfractionated heparin: bolus and infusion or
+  - Fondaparinux: 2.5 mg SC daily
+  - Continue until revascularization or discharge
+  - Management strategy:
+  - Early invasive strategy (coronary angiography within 24-72 hours):
+  - High-risk patients: TIMI score 3+, refractory angina, hemodynamic instability, dynamic ST changes, elevated troponin (NSTEMI)
+  - Revascularization: PCI or CABG based on anatomy
+  - Ischemia-guided strategy (conservative):
+  - Low-risk patients: TIMI score 0-2
+  - Medical management, stress test before discharge
+  - Angiography only if recurrent ischemia or positive stress test
+  - Long-term medical therapy:
+  - Aspirin: 81 mg daily (lifelong)
+  - P2Y12 inhibitor: ticagrelor or clopidogrel x12 months
+  - Statin: high-intensity (atorvastatin 80 mg or rosuvastatin 40 mg)
+  - Beta blocker: metoprolol, carvedilol
+  - ACE inhibitor or ARB: if EF under 40%, hypertension, diabetes
+  - Risk factor modification:
+  - Smoking cessation: most important modifiable risk factor
+  - Blood pressure control: under 130/80
+  - LDL cholesterol: under 70 mg/dL (high-intensity statin)
+  - Diabetes management: HbA1c under 7%
+  - Weight loss, exercise, diet (Mediterranean diet)
+
+clinical_pearls:
+  - Crescendo angina, rest angina, or new-onset severe angina
+  - Normal troponin distinguishes from NSTEMI (no myocardial necrosis)
+  - Early invasive strategy if high-risk (TIMI score 3+)
+  - DAPT x12 months: aspirin plus ticagrelor or clopidogrel
+  - High-intensity statin regardless of baseline LDL
+  - Risk stratification with TIMI score guides management
+
+differentials:
+  - NSTEMI: elevated troponin (myocardial necrosis)
+  - Stable angina: predictable, not crescendo pattern
+  - GERD: burning, related to meals
+  - Musculoskeletal: reproducible with palpation
+
+trace: |
+  A 62-year-old woman with diabetes and hypertension presented to ED with 3 days of increasing chest pain. Baseline stable angina x1 year (exertional, relieved by rest and sublingual nitroglycerin). Over past 3 days: angina episodes increased from once daily to 5-6 times daily (crescendo pattern), now occurring at rest, lasting 10-15 minutes, requiring multiple sublingual nitroglycerin (worsening pattern concerning for unstable angina). Current episode: chest pressure at rest x20 minutes, partially relieved by nitroglycerin. Risk factors: diabetes, hypertension, hyperlipidemia, family history CAD (father MI at age 55). Exam: BP 155/88, HR 88, anxious, lungs clear, S4 gallop, no murmurs. ECG: normal sinus rhythm, ST depression 1 mm in V4-V6 and I, aVL (lateral ischemia), T wave flattening. No ST elevations. Troponin I 0.02 ng/mL (normal, under 0.04), repeat at 6 hours 0.03 ng/mL (remains normal - rules out NSTEMI, confirms unstable angina). Diagnosed with unstable angina (crescendo pattern with rest angina, ST depression during pain, normal troponins). TIMI risk score: Age 65+ (0 - she's 62), 3+ CAD risk factors (1 - diabetes, hypertension, hyperlipidemia, family history), known CAD (1 - prior stable angina), aspirin use (1 - on aspirin), severe angina (1 - multiple episodes in 24 hours), ST deviation (1 - ST depression 1 mm), positive biomarker (0 - troponin normal) = 5 points (high risk, 26% event rate). Immediate treatment: aspirin 325 mg chewed (already on aspirin but loaded), ticagrelor 180 mg loading dose (P2Y12 inhibitor for DAPT), IV nitroglycerin infusion (ongoing pain), IV metoprolol 5 mg (beta blocker), enoxaparin 60 mg SC (anticoagulation). Pain resolved with nitroglycerin. Admitted to telemetry. High-risk unstable angina (TIMI 5, rest angina, ST changes) - early invasive strategy indicated (angiography within 24-72 hours). At 18 hours underwent coronary angiography: severe 90% stenosis proximal LAD (culprit - explains anterior ischemia), 70% stenosis RCA, mild disease LCx. Underwent PCI to LAD: drug-eluting stent to proximal LAD, excellent result, TIMI 3 flow. Decided to stage RCA PCI in 4-6 weeks. Post-PCI: chest pain resolved completely, ECG normalized (ST depressions resolved). Troponins after PCI: minimal rise to 0.8 ng/mL (periprocedural MI small, common with PCI). Started optimal medical therapy: aspirin 81 mg daily, ticagrelor 90 mg BID x12 months (DAPT), atorvastatin 80 mg daily (high-intensity statin), metoprolol 50 mg BID, lisinopril 10 mg daily (diabetes and hypertension). Intensive diabetes management, BP control. At 1 week discharged, no angina. At 6 weeks underwent staged PCI to RCA (70% stenosis), drug-eluting stent placed. At 6 months: no angina, excellent functional status, DAPT continues, LDL 55 mg/dL on statin (goal under 70 achieved), HbA1c 6.8% (improved diabetes control). At 1 year: completes DAPT, transitions to aspirin monotherapy, remains asymptomatic. Unstable angina successfully managed with early invasive strategy and optimal medical therapy.
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature

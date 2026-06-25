@@ -1,0 +1,89 @@
+tree_id: GI-GASTROENTERITIS-ACUTE
+name: Acute Gastroenteritis
+family: gastroenterology
+specialty: Infectious Disease
+chief_complaint: Diarrhea and vomiting
+description: Acute inflammation of GI tract causing diarrhea, nausea, vomiting, and abdominal cramping, typically from viral or bacterial infection. Most cases self-limited, treatment focuses on hydration and symptom management.
+icd10: K52.9
+snomed: 25374005
+presentations:
+  - Acute diarrhea (watery or bloody)
+  - Nausea, vomiting
+  - Abdominal cramping
+  - Fever
+  - Recent exposure (contaminated food/water, sick contacts)
+  - Dehydration
+urgency: routine
+
+homeopathy:
+  - remedy: "Arsenicum album 30C"
+    indications: "Burning diarrhea, restlessness, anxiety, worse after midnight, thirsty for small sips"
+  - remedy: "Veratrum album 30C"
+    indications: "Profuse watery diarrhea with vomiting, cold sweats, weakness, collapse"
+  - remedy: "Podophyllum 30C"
+    indications: "Explosive watery diarrhea, worse in morning, gurgling before stool"
+  - remedy: "Aloe socotrina 30C"
+    indications: "Urgent diarrhea, sudden urge, spluttering stool, worse after eating/drinking"
+  - remedy: "Nux vomica 30C"
+    indications: "After food poisoning or overindulgence, cramping, irritability"
+
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+
+workup:
+  - Clinical diagnosis: acute onset diarrhea (≥3 loose stools per day) with nausea, vomiting, abdominal cramps, fever
+  - Assess dehydration: vital signs (tachycardia, orthostasis, hypotension), dry mucous membranes, decreased skin turgor, oliguria
+  - Most cases viral (norovirus, rotavirus) - self-limited, no testing needed
+  - Stool studies if severe, bloody diarrhea, immunocompromised, or persistent >7 days: stool culture, C. difficile toxin, ova and parasites, fecal leukocytes
+  - Bacterial causes: Campylobacter, Salmonella, Shigella, E. coli O157:H7, C. difficile
+  - History: sick contacts (viral), recent antibiotics (C. difficile), travel (traveler's diarrhea), food exposure (food poisoning)
+  - Labs if severe dehydration: BMP (assess electrolytes, renal function), CBC if sepsis concern
+
+treatment:
+  - Oral rehydration therapy (most important): oral rehydration solution (Pedialyte, WHO ORS) preferred over plain water (replaces electrolytes)
+  - Goal 50-100 mL per kg over 2-4 hours if mild-moderate dehydration, then maintenance plus replacement of ongoing losses
+  - IV hydration: if severe dehydration, unable to tolerate PO, or persistent vomiting (normal saline or lactated Ringer bolus then maintenance)
+  - Diet: resume regular diet as tolerated (BRAT diet outdated - no evidence of benefit), avoid fatty or spicy foods initially
+  - Antiemetics: ondansetron 4-8 mg PO/IV if persistent vomiting prevents oral intake (especially children)
+  - Antimotility agents: loperamide 4 mg initial then 2 mg after each loose stool (max 16 mg/day) - symptomatic relief
+  - AVOID loperamide if bloody diarrhea, high fever, or E. coli O157:H7 (increases HUS risk)
+  - Antibiotics rarely needed: only if severe bacterial infection (ciprofloxacin 500 mg BID x3-5 days for traveler's diarrhea, azithromycin for Campylobacter)
+  - C. difficile if recent antibiotics: discontinue offending antibiotic, start PO vancomycin 125 mg QID or fidaxomicin 200 mg BID x10 days
+  - Probiotics: may shorten duration by 1 day (Lactobacillus, Saccharomyces boulardii)
+  - Prevention: hand hygiene (most important), food safety, avoid raw/undercooked foods
+
+clinical_pearls:
+  - Acute diarrhea with vomiting and cramps usually viral - self-limited in 3-7 days
+  - Oral rehydration therapy cornerstone - ORS better than plain water
+  - Most cases need no testing or antibiotics - supportive care
+  - Stool studies if bloody diarrhea, severe, persistent >7 days, or immunocompromised
+  - Loperamide for symptom relief but avoid if bloody diarrhea or high fever
+  - IV hydration if severe dehydration or unable to tolerate PO
+  - Recent antibiotics think C. difficile - treat with PO vancomycin
+  - Hand hygiene most important prevention
+
+differentials:
+  - Inflammatory bowel disease: chronic diarrhea, weight loss, extraintestinal manifestations, colonoscopy shows ulceration
+  - Irritable bowel syndrome: chronic diarrhea without red flags, normal labs and colonoscopy
+  - Appendicitis: right lower quadrant pain, fever, peritoneal signs, CT diagnostic
+  - Small bowel obstruction: abdominal distension, obstipation, vomiting, abdominal X-ray shows dilated bowel
+
+trace: |
+  A 28-year-old woman presented to ED with 1 day of acute onset watery diarrhea (8 loose stools), nausea, vomiting 4 times, abdominal cramps, and low-grade fever 100.2°F. Multiple family members with similar symptoms (viral outbreak). No blood in stool, no recent travel or antibiotics. Exam showed mild dehydration (dry mucous membranes, mild tachycardia 102), diffuse abdominal tenderness without peritoneal signs. Diagnosed with acute viral gastroenteritis. Started oral rehydration with Pedialyte in ED, tolerated 500 mL. Given ondansetron 4 mg IV for nausea. Discharged home with instructions for continued oral hydration, ondansetron 4 mg PO Q8H PRN nausea, resume regular diet as tolerated. No antibiotics needed. At 24 hours vomiting stopped, tolerating clear liquids well. At 48 hours diarrhea decreased to 3 stools, tolerating regular diet. At 5 days symptoms completely resolved, returned to work. Self-limited viral illness with excellent outcome.
+
+citations:
+  - ACG (American College of Gastroenterology) Clinical Guidelines
+  - AGA (American Gastroenterological Association) Clinical Practice Updates
+  - UpToDate - Gastroenterology and Hepatology

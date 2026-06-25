@@ -1,0 +1,61 @@
+tree_id: GASTRO-ACUTE-HEPATITIS
+name: Acute Viral Hepatitis (A, B, C)
+family: gastroenterology
+specialty: Gastroenterology
+icd10:
+- B15.9
+- B16.9
+- B17.10
+snomed:
+- '40468003'
+urgency: urgent
+description: Comprehensive evaluation and management of Acute Viral Hepatitis (A,
+  B, C)
+version: '1.0'
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Jaundice, dark urine, clay-colored stools
+- Right upper quadrant pain, hepatomegaly
+- Nausea, vomiting, anorexia, fatigue
+- Fever, myalgias (prodrome)
+- Markedly elevated transaminases (ALT/AST >1000 U/L)
+- 'Hep A: Fecal-oral transmission, self-limited'
+- 'Hep B: Percutaneous/sexual, risk of chronic infection'
+- 'Hep C: Bloodborne, high chronicity rate (70-85%)'
+workup:
+- 'Hepatitis panel: Anti-HAV IgM, HBsAg, anti-HBc IgM, anti-HCV'
+- 'Liver function tests: ALT, AST, bilirubin, alkaline phosphatase, PT/INR'
+- 'If chronic suspected: HCV RNA, HBV DNA, HIV test, liver ultrasound'
+treatment:
+- 'Guideline-based treatment options for Acute Viral Hepatitis (A, B, C) include:'
+- 'Supportive care: Hydration, antiemetics, rest (ACG 2023)'
+- 'Avoid: Alcohol, hepatotoxic drugs (acetaminophen, NSAIDs) (ACG 2023)'
+- 'Hep A: Self-limited, no specific treatment (ACG 2023)'
+- 'Hep B: Most resolve, monitor; if chronic → entecavir or tenofovir (ACG 2023)'
+- 'Hep C: Treat with direct-acting antivirals (sofosbuvir-based regimens), cure rate
+  >95% (ACG 2023)'
+clinical_pearls:
+- ALT > AST (unlike alcoholic hepatitis where AST > ALT 2:1)
+- 'Hep A: IgM anti-HAV positive (acute infection)'
+- 'Hep B: HBsAg + IgM anti-HBc = acute infection'
+- 'Hep C: Anti-HCV + HCV RNA = acute or chronic (check HCV RNA)'
+- Fulminant hepatic failure rare but serious (encephalopathy, coagulopathy)
+referrals:
+- Gastroenterology/hepatology for chronic hepatitis B or C
+- Transplant hepatology if fulminant hepatic failure
+differentials:
+  - Viral hepatitis
+  - Drug-induced hepatitis
+  - Autoimmune hepatitis
+  - Ischemic hepatitis
+  - Wilson disease
+trace:
+  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
+    Association (AGA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

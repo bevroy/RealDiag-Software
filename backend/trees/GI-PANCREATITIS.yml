@@ -1,0 +1,122 @@
+tree_id: GI-PANCREATITIS
+name: Acute Pancreatitis
+family: gastroenterology
+specialty: Gastroenterology
+presentations:
+  - Severe epigastric pain radiating to back
+  - Nausea and vomiting
+  - Abdominal tenderness and guarding
+  - Fever
+  - Tachycardia and hypotension (severe cases)
+  - Jaundice (if biliary etiology)
+  - Cullen's sign (periumbilical ecchymosis) or Grey Turner's sign (flank ecchymosis) in hemorrhagic pancreatitis
+icd10:
+  - K85.9 # Acute pancreatitis, unspecified
+  - K85.0 # Idiopathic acute pancreatitis
+  - K85.1 # Biliary acute pancreatitis
+  - K85.2 # Alcohol-induced acute pancreatitis
+snomed:
+  - "197456007" # Acute pancreatitis
+urgency: High
+urgency_explanation: Requires hospitalization; can progress to severe systemic complications including shock, ARDS, multi-organ failure
+
+referrals:
+  gastroenterology: For ERCP if biliary obstruction/cholangitis
+  general_surgery: For cholecystectomy (gallstone pancreatitis) or necrosectomy (infected necrosis)
+  critical_care: If severe pancreatitis with organ failure
+  interventional_radiology: For drainage of fluid collections or pseudocysts
+
+workup:
+  diagnosis_requires_2_of_3:
+    - Characteristic abdominal pain
+    - Serum lipase or amylase >3x upper limit of normal
+    - Imaging findings consistent with pancreatitis
+  laboratory:
+    - Lipase (more specific than amylase, stays elevated longer)
+    - Amylase
+    - CBC (leukocytosis, hemoconcentration)
+    - CMP (hypocalcemia, hyperglycemia, elevated BUN/Cr)
+    - LFTs (elevated if biliary cause: ALT >150 U/L suggests gallstones)
+    - Triglycerides (if >1000 mg/dL, likely cause)
+    - Calcium (hypocalcemia poor prognostic sign)
+    - Arterial blood gas (hypoxemia)
+  imaging:
+    - CT abdomen/pelvis with IV contrast (NOT needed for diagnosis):
+      - Obtain if diagnosis uncertain or patient not improving after 48-72h
+      - CT severity index (Balthazar score)
+      - Identify necrosis, fluid collections, complications
+    - RUQ ultrasound: identify gallstones (biliary pancreatitis)
+    - MRCP or EUS: if biliary obstruction suspected but ultrasound negative
+  severity_assessment:
+    - Ranson's criteria (0-11 points)
+    - APACHE II score
+    - BISAP score (simpler): BUN >25, Impaired mental status, SIRS, Age >60, Pleural effusion
+    - Atlanta classification: Mild, moderately severe, severe
+
+treatment:
+  supportive_care:
+    - Aggressive IV fluid resuscitation: 250-500 mL/hr crystalloid (Ringer's lactate preferred)
+    - Goal: UOP >0.5 mL/kg/hr, decrease BUN, prevent hemoconcentration
+    - Pain control: opioids (no evidence morphine worsens pancreatitis)
+    - Antiemetics
+    - NPO initially
+    - Nutritional support:
+      - Early enteral feeding (within 24-48h) if tolerated reduces complications
+      - Nasogastric or nasojejunal tube if cannot tolerate PO
+      - TPN only if enteral feeding fails or not tolerated
+  etiology_specific:
+    gallstone_pancreatitis:
+      - ERCP within 24h if concurrent cholangitis or biliary obstruction
+      - Cholecystectomy during same admission (once improved) to prevent recurrence
+    alcohol_induced:
+      - Alcohol cessation counseling
+      - Thiamine, folate supplementation
+    hypertriglyceridemia:
+      - Insulin infusion, plasmapheresis if severe (TG >1000)
+  antibiotics:
+    - NOT indicated for prophylaxis in sterile necrosis
+    - Indicated for:
+      - Infected necrosis (documented or highly suspected)
+      - Concurrent cholangitis
+      - Extrapancreatic infections
+  complications_management:
+    - Infected necrosis: CT-guided drainage or surgical necrosectomy
+    - Pseudocyst: observe if asymptomatic; drain if symptomatic, infected, or enlarging
+    - Pancreatic abscess: drainage and antibiotics
+    - Organ failure: ICU-level care, mechanical ventilation, vasopressors
+
+clinical_pearls:
+  - Most common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (5%)
+  - GET SMASHED mnemonic: Gallstones, Ethanol, Trauma, Steroids, Mumps, Autoimmune, Scorpion sting, Hyperlipidemia/Hypercalcemia, ERCP, Drugs
+  - Common drugs: azathioprine, 6-MP, valproic acid, furosemide, pentamidine, didanosine
+  - 80% of cases are mild and self-limited
+  - Hemoconcentration (elevated Hct) predicts severe pancreatitis
+  - Early aggressive fluid resuscitation (first 12-24h) critical to outcomes
+  - CT not needed for diagnosis; reserve for complications or diagnostic uncertainty
+  - Lipase more sensitive and specific than amylase
+
+differentials:
+  - Perforated peptic ulcer
+  - Acute cholecystitis
+  - Bowel obstruction or perforation
+  - Mesenteric ischemia
+  - Myocardial infarction
+  - Ruptured AAA
+  - Diabetic ketoacidosis
+
+trace:
+  - Patient presents with severe epigastric pain and vomiting
+  - Lipase >3x normal confirms diagnosis
+  - Assess severity with BISAP score
+  - Aggressive IV fluid resuscitation
+  - RUQ ultrasound to identify gallstones
+  - NPO, pain control, antiemetics
+  - Early enteral nutrition if tolerated
+  - ERCP if biliary obstruction or cholangitis
+  - Cholecystectomy before discharge if gallstone etiology
+
+citations:
+  - "ACG Clinical Guideline: Management of Acute Pancreatitis"
+  - "AGA Institute Clinical Practice Update on Management of Pancreatitis"
+  - "UpToDate: Clinical manifestations and diagnosis of acute pancreatitis"
+  - "Clinical Practice Guidelines from relevant medical specialty societies"

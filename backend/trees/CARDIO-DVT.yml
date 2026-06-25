@@ -1,0 +1,63 @@
+tree_id: CARDIO-DVT
+name: Deep vein thrombosis
+family: Cardiology
+specialty: Cardiology
+icd10:
+- I82.40
+snomed:
+- '128053003'
+urgency: medium
+description: Comprehensive evaluation and management of Deep vein thrombosis
+version: '1.0'
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- unilateral leg swelling, pain, warmth, erythema
+- positive Doppler ultrasound
+- Unilateral leg swelling (most specific finding)
+- Calf or thigh pain, tenderness along deep venous system
+- Warmth, erythema over affected area
+- 'Risk factors: Recent surgery, immobilization, malignancy, pregnancy, OCPs, thrombophilia'
+- 'Wells score: Clinical prediction rule (≥2 = high probability)'
+workup:
+- 'Compression ultrasound with Doppler: First-line diagnostic test (95% sensitive
+  for proximal DVT)'
+- 'Wells score: Pretest probability (≥2 = high probability)'
+- 'D-dimer: If low probability Wells score, negative D-dimer rules out DVT'
+- 'Consider: CT venography or MR venography if ultrasound equivocal'
+treatment:
+- 'Guideline-based treatment options for Deep vein thrombosis include:'
+- 'Anticoagulation: Apixaban 10mg BID x7 days, then 5mg BID OR rivaroxaban 15mg BID
+  x21 days, then 20mg daily (ACC/AHA 2023)'
+- 'Alternative: LMWH→ warfarin (INR 2-3) (ACC/AHA 2023)'
+- 'Duration: 3 months minimum (provoked), 3-6 months (unprovoked), indefinite if recurrent
+  (ACC/AHA 2023)'
+- 'IVC filter: Only if anticoagulation contraindicated (active bleeding) (ACC/AHA
+  2023)'
+- 'Compression stockings: May reduce post-thrombotic syndrome (controversial) (ACC/AHA
+  2023)'
+clinical_pearls:
+- 'Proximal DVT (popliteal/femoral): High risk for PE, needs anticoagulation'
+- 'Distal DVT (calf veins): Lower PE risk, consider serial ultrasound vs anticoagulation'
+- 'D-dimer: High sensitivity, low specificity. Negative rules out DVT if low pretest
+  probability'
+- 'Duplex ultrasound: 95% sensitive for proximal DVT, less sensitive for calf DVT'
+- 'Anticoagulation: Apixaban or rivaroxaban preferred (no LMWH bridge needed)'
+referrals:
+- 'Hematology if: Recurrent DVT, thrombophilia workup, anticoagulation complications'
+- 'Vascular surgery if: Phlegmasia cerulea dolens (limb-threatening), IVC filter placement'
+differentials:
+  - Cellulitis
+  - Baker cyst rupture
+  - Superficial thrombophlebitis
+  - Muscle strain
+  - Lymphedema
+trace:
+  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
+    Society of Cardiology (ESC) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

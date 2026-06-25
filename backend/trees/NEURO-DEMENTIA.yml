@@ -1,0 +1,210 @@
+tree_id: NEURO-DEMENTIA
+name: Dementia Evaluation and Management
+family: Neurology
+specialty: Neurology, Geriatrics, Psychiatry
+chief_complaint: Memory Loss, Confusion, Behavioral Changes
+description: Comprehensive evaluation and differential diagnosis of dementia
+version: "1.0"
+icd10: F03.90
+snomed: 52448006
+presentations:
+  - Progressive cognitive decline
+  - Memory impairment
+  - Impaired executive function
+  - Language difficulties
+  - Visuospatial deficits
+  - Behavioral changes
+  - Functional impairment in ADLs
+differentials:
+  - Alzheimers
+  - Vascular dementia
+  - Lewy body dementia
+  - Frontotemporal dementia
+  - Depression
+citations:
+  - AAN (American Academy of Neurology) Clinical Practice Guidelines
+  - EAN (European Academy of Neurology) Guidelines
+  - UpToDate - Neurology
+author: RealDiag Clinical Team
+
+
+treatment:
+  - 'Assess for reversible causes - B12, thyroid, depression, medications, NPH, subdural'
+  - 'Cholinesterase inhibitors - donepezil 5-10mg daily, rivastigmine, galantamine (modest benefit, delay decline)'
+  - 'Memantine 10mg BID - moderate-severe Alzheimer, NMDA antagonist'
+  - 'Combination therapy - cholinesterase inhibitor + memantine'
+  - 'Lecanemab (Leqembi) or donanemab - anti-amyloid monoclonal antibodies, slow progression in early Alzheimer (require amyloid PET confirmation)'
+  - 'Behavioral symptoms: Non-pharm first (redirection, music, routines), SSRI for depression/anxiety, low-dose antipsychotics last resort (risperidone 0.25-1mg, quetiapine 25-100mg)'
+  - 'Safety evaluation - driving assessment, home safety, financial capacity'
+  - 'Caregiver support - respite care, support groups, education critical'
+  - 'Advance directives - discuss goals of care early'
+  - 'Avoid anticholinergics (worsen cognition), benzodiazepines (falls, confusion)'
+  - 'Vascular dementia: Control vascular risk factors (HTN, DM, lipids), antiplatelet therapy'
+
+entry_point: dementia_presentation
+
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New neurological deficits
+    - Seizure
+  routine:
+    - Headache management
+    - Neuropathy
+    - Movement disorders
+
+clinical_pearls:
+  - Alzheimers most common; gradual memory decline
+  - Rule out reversible causes: B12, hypothyroidism, NPH
+  - Lewy body: visual hallucinations, parkinsonism, fluctuating cognition
+  - Behavioral symptoms often more distressing than cognitive
+
+nodes:
+  - id: dementia_presentation
+    type: question
+    text: "Clinical presentation pattern?"
+    options:
+      - label: "Gradual memory loss, executive dysfunction (most common)"
+        next: alzheimers_dementia
+      - label: "Fluctuating cognition, visual hallucinations, parkinsonism"
+        next: lewy_body_dementia
+      - label: "Behavioral changes, personality changes, language problems (younger onset)"
+        next: frontotemporal_dementia
+
+  - id: alzheimers_dementia
+    type: diagnosis
+    name: "Alzheimer's Disease Dementia"
+    icd10: "G30.9"
+    urgency: medium
+    workup:
+      - Most common dementia (60-70% of cases), age >65 typically, insidious onset, progressive
+      - Clinical criteria - Gradual onset (months to years), progressive worsening, core feature is memory impairment (short-term memory loss), plus ≥1 other cognitive domain (language, visuospatial, executive function)
+      - Early symptoms - Difficulty remembering recent events, repeating questions, misplacing items, getting lost in familiar places, word-finding difficulty, poor judgment
+      - Later symptoms - Confusion, disorientation, behavioral changes, wandering, sundowning, apraxia, agnosia
+      - Rule out reversible causes (DEMENTIA mnemonic)
+      - Drugs - Anticholinergics, benzodiazepines, opioids, antihistamines
+      - Emotional - Depression (pseudodementia)
+      - Metabolic - Thyroid (hypothyroidism), B12 deficiency, hyperparathyroidism
+      - Eyes/Ears - Vision/hearing impairment mimicking cognitive decline
+      - Normal pressure hydrocephalus - Triad (gait disturbance, urinary incontinence, dementia)
+      - Tumor - Brain tumor, subdural hematoma
+      - Infection - HIV, syphilis, Lyme
+      - Alcohol - Chronic alcohol abuse, Wernicke-Korsakoff
+      - Cognitive testing - Montreal Cognitive Assessment (MoCA) or Mini-Mental State Exam (MMSE)
+      - MoCA 0-30 points, <26 = cognitive impairment, more sensitive than MMSE
+      - MMSE 0-30 points, <24 = dementia
+      - Labs - CBC, CMP, TSH, vitamin B12, RPR (syphilis if risk factors), HIV if risk factors
+      - MRI brain - Hippocampal atrophy (medial temporal lobe), rule out structural lesions (tumor, stroke, NPH, subdural hematoma)
+      - Cortical atrophy, enlarged ventricles (nonspecific)
+      - CSF biomarkers (research, not routine) - Low Aβ42, elevated tau and phospho-tau (support AD diagnosis)
+      - Amyloid PET scan - Shows amyloid plaques (research, expensive, not routine)
+      - Genetic testing - APOE ε4 allele (risk factor, NOT diagnostic), familial AD genes (APP, PSEN1, PSEN2) if early-onset (<65) or strong family history
+    treatment:
+      - Cholinesterase inhibitors - First-line for mild-moderate AD (boost acetylcholine)
+      - Donepezil 5-10mg daily (most commonly used, once daily dosing)
+      - Rivastigmine 6-12mg daily or patch 9.5-13.3 mg/24hr
+      - Galantamine 16-24mg daily
+      - Modest benefit (slow progression 6-12 months), improve cognition and function
+      - Side effects - Nausea, diarrhea, bradycardia, insomnia, vivid dreams (take in AM)
+      - NMDA receptor antagonist - For moderate-severe AD
+      - Memantine 10mg BID or extended-release 28mg daily
+      - Can combine with cholinesterase inhibitor
+      - Modest benefit, well-tolerated
+      - NEW monoclonal antibodies (anti-amyloid)
+      - Lecanemab 10 mg/kg IV q2 weeks - FDA approved 2023, removes amyloid plaques, modest slowing of decline (27% slower), for early AD with confirmed amyloid
+      - Requires amyloid PET confirmation, risk ARIA (amyloid-related imaging abnormalities, brain edema/microhemorrhages), MRI monitoring
+      - Donanemab - Similar, pending approval
+      - Aducanumab - Controversial, accelerated approval 2021, limited use
+      - Behavioral and psychological symptoms of dementia (BPSD)
+      - Agitation, aggression, hallucinations, delusions, wandering, sundowning
+      - Non-pharmacologic first - Environmental modifications, routine, music therapy, minimize stimulation
+      - Pharmacologic - Use cautiously
+      - SSRIs for depression/anxiety (sertraline, citalopram)
+      - Atypical antipsychotics for severe agitation/psychosis (quetiapine 25-100mg, risperidone 0.5-2mg) - BLACK BOX WARNING increased mortality in elderly with dementia, use lowest dose shortest duration
+      - Avoid typical antipsychotics, benzodiazepines (worsen cognition, fall risk)
+      - Caregiver support CRITICAL - Respite care, support groups, education, Adult day care
+      - Safety - Remove weapons, car keys (assess driving safety), medication management, fall prevention, wandering precautions (ID bracelet, door alarms)
+      - Advance directives - Early in disease while patient can participate
+      - Prognosis - Average 8-10 years from diagnosis to death, wide variability
+
+  - id: lewy_body_dementia
+    type: diagnosis
+    name: "Dementia with Lewy Bodies (DLB)"
+    icd10: "G31.83"
+    urgency: medium
+    workup:
+      - Second most common neurodegenerative dementia (10-15%), overlaps with Parkinson disease dementia
+      - Core clinical features (need 2 of 4 for probable DLB)
+      - Fluctuating cognition - Day-to-day or within-day variability, episodes of confusion alternating with lucid periods
+      - Visual hallucinations - Recurrent, well-formed, detailed (people, animals)
+      - REM sleep behavior disorder (RBD) - Acting out dreams, vocalizations, limb movements during sleep
+      - Parkinsonism - Rigidity, bradykinesia, resting tremor (tremor less prominent than PD)
+      - Supportive features - Severe neuroleptic sensitivity (life-threatening reaction to antipsychotics), postural instability, falls, syncope, autonomic dysfunction, hypersomnia, hyposmia, depression, anxiety
+      - Cognitive profile - Prominent visuospatial and executive dysfunction early, memory relatively preserved early (vs AD)
+      - Dementia precedes or occurs within 1 year of parkinsonism (vs Parkinson dementia where motor symptoms precede cognitive decline by >1 year)
+      - Labs - Same as AD workup (rule out reversible causes)
+      - MRI brain - Relative preservation of hippocampus and medial temporal lobes (vs AD), midbrain atrophy
+      - DaTscan (dopamine transporter SPECT) - Reduced striatal dopamine uptake (differentiates from AD, but does not distinguish DLB from PD)
+      - MIBG cardiac scintigraphy - Reduced cardiac uptake (denervation)
+      - Polysomnography - Confirms RBD if suspected
+    treatment:
+      - Cholinesterase inhibitors - VERY effective in DLB (more than AD)
+      - Rivastigmine or donepezil - Improve cognition, hallucinations, and behavioral symptoms
+      - Start low, titrate slowly
+      - Parkinsonism - Treat cautiously
+      - Carbidopa/levodopa - Start low dose (25/100mg BID-TID), increase slowly, often less effective than in PD
+      - Avoid dopamine agonists (worsen hallucinations/psychosis)
+      - Hallucinations/psychosis - Challenging
+      - Non-pharmacologic strategies first
+      - If medication needed - Quetiapine 12.5-50mg (least D2 blockade, safest) OR pimavanserin 34mg daily (no worsening of motor symptoms)
+      - AVOID typical antipsychotics and risperidone/olanzapine - Severe neuroleptic sensitivity (rigidity, confusion, falls, death)
+      - REM sleep behavior disorder - Melatonin 3-12mg QHS or clonazepam 0.5-2mg QHS, bed partner safety (padding, remove hazards)
+      - Autonomic dysfunction - Midodrine for orthostatic hypotension, manage constipation
+      - Depression - SSRIs (sertraline)
+      - Caregiver education - Fluctuations are part of disease, not environmental
+      - Prognosis - More rapid decline than AD, average survival 5-7 years
+
+  - id: frontotemporal_dementia
+    type: diagnosis
+    name: "Frontotemporal Dementia (FTD)"
+    icd10: "G31.09"
+    urgency: medium
+    workup:
+      - 10-15% of dementias, younger onset (typically 45-65 years, vs AD usually >65)
+      - Variants
+      - Behavioral variant FTD (bvFTD) - Most common (60%), personality and behavioral changes predominate
+      - Primary progressive aphasia (PPA) - Language impairment predominates
+      - Semantic variant (svPPA) - Loss of word meaning, anomia
+      - Nonfluent/agrammatic variant (nfvPPA) - Effortful speech, agrammatism
+      - Behavioral variant FTD - Early behavioral changes
+      - Disinhibition - Socially inappropriate behavior, impulsivity, loss of manners
+      - Apathy - Loss of motivation, indifference
+      - Loss of empathy - Diminished social cognition
+      - Compulsive behaviors - Stereotyped behaviors, rituals
+      - Hyperorality - Overeating, food preferences change (sweet), oral exploration
+      - Executive dysfunction - Poor planning, judgment, organization
+      - Memory relatively PRESERVED early (vs AD)
+      - Primary progressive aphasia - Language predominates
+      - Word-finding difficulty, anomia, comprehension deficits, speech production problems
+      - Memory and visuospatial functions preserved early
+      - Associated features - Parkinsonism (20-30%), motor neuron disease (15%, FTD-ALS)
+      - Labs - Rule out reversible causes (same as AD)
+      - MRI brain - Frontal and/or anterior temporal lobe atrophy (asymmetric often), knife-edge atrophy
+      - FDG-PET - Frontal and anterior temporal hypometabolism (more sensitive than MRI early)
+      - Genetic testing - 40% familial, autosomal dominant mutations (C9orf72, MAPT, GRN)
+    treatment:
+      - No FDA-approved disease-modifying therapy
+      - Cholinesterase inhibitors - NOT helpful (may worsen behavioral symptoms)
+      - Behavioral management
+      - SSRIs - Trazodone, sertraline, citalopram for behavioral symptoms (compulsions, disinhibition), some benefit
+      - Atypical antipsychotics - Quetiapine for severe agitation (use cautiously, limited benefit)
+      - Avoid benzodiazepines (disinhibition)
+      - Behavioral interventions - Routine, redirection, environmental modifications
+      - Speech therapy - For PPA variants
+      - Caregiver support - Disease is particularly challenging for families (personality changes, loss of empathy, disinhibition)
+      - Legal/financial planning - Early given young age
+      - Prognosis - Average 6-8 years from diagnosis, faster progression than AD

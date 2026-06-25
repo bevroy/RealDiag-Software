@@ -1,0 +1,74 @@
+tree_id: ENT-SINUSITIS
+name: Acute Sinusitis
+family: otolaryngology
+specialty: ENT
+chief_complaint: Facial pain and nasal congestion
+description: |
+  Inflammation of paranasal sinuses, usually viral (90-98%). Bacterial superinfection occurs in 2-10%.
+  Acute (less than 4 weeks), subacute (4-12 weeks), chronic (greater than 12 weeks). Maxillary sinus most commonly affected.
+icd10: J01.90
+snomed: 36971009
+presentations:
+  - Facial pain, pressure (over affected sinus)
+  - Purulent nasal discharge
+  - Nasal congestion
+  - Hyposmia, anosmia
+  - Fever, malaise
+  - Headache
+  - Symptoms >10 days or worsening after initial improvement
+urgency: Low
+referrals:
+  emergency:
+    - Airway compromise
+    - Peritonsillar abscess with trismus
+    - Sudden hearing loss
+    - Severe epistaxis
+  urgent:
+    - Suspected malignancy
+    - Persistent hoarseness >2 weeks
+    - Recurrent acute sinusitis
+    - Vertigo with neurological signs
+  routine:
+    - Chronic sinusitis
+    - Hearing loss evaluation
+    - Tinnitus
+    - Allergy management
+
+workup:
+  - Clinical diagnosis based on symptoms - purulent nasal discharge, facial pain/pressure, nasal obstruction, hyposmia
+  - Acute bacterial rhinosinusitis (ABRS) criteria - symptoms greater than 10 days without improvement, severe symptoms (fever greater than 102F, purulent discharge) for 3-4 days, or worsening after initial improvement (double sickening)
+  - Physical exam - tenderness over sinuses, purulent discharge in nasal cavity
+  - Imaging not routinely needed for uncomplicated acute sinusitis
+  - CT scan if complications suspected (orbital or intracranial extension), recurrent or chronic sinusitis, or presurgical planning
+  - Nasal endoscopy by ENT if chronic or recurrent
+treatment:
+  - Viral rhinosinusitis (most common) - supportive care, symptomatic treatment
+  - Intranasal saline irrigation (neti pot) reduces symptoms and duration
+  - Intranasal corticosteroids (fluticasone 2 sprays each nostril daily) reduce inflammation
+  - Decongestants - pseudoephedrine 30-60mg q4-6h or phenylephrine nasal spray (limit to 3 days to avoid rebound)
+  - Analgesics - acetaminophen or ibuprofen for pain and fever
+  - Antibiotics only if ABRS criteria met - amoxicillin-clavulanate 875mg BID x 5-7 days (first-line)
+  - Alternative if penicillin allergy - doxycycline 100mg BID or levofloxacin 500mg daily
+  - Refer to ENT if complications, chronic/recurrent sinusitis, or failed medical therapy
+  - Functional endoscopic sinus surgery (FESS) for chronic sinusitis refractory to medical therapy
+clinical_pearls:
+  - Most acute sinusitis is viral and resolves spontaneously in 7-10 days
+  - Antibiotics not indicated unless bacterial criteria met (prevents unnecessary use and resistance)
+  - Green or yellow nasal discharge alone does not indicate bacterial infection (common in viral rhinosinusitis)
+  - Complications include orbital cellulitis, orbital abscess, meningitis, cavernous sinus thrombosis, brain abscess (rare but serious)
+  - Periorbital edema, proptosis, ophthalmoplegia, or vision changes require urgent imaging and ENT/ophthalmology consultation
+  - Chronic sinusitis often related to anatomic obstruction, polyps, or allergic rhinitis
+differentials:
+  - Viral upper respiratory infection
+  - Allergic rhinitis
+  - Migraine or tension headache
+  - Dental abscess
+  - Temporal arteritis
+  - Trigeminal neuralgia
+trace:
+  - Nasal congestion, facial pressure, purulent nasal discharge x 12 days without improvement → Maxillary sinus tenderness on exam → Diagnose acute bacterial rhinosinusitis → Amoxicillin-clavulanate 875mg BID x 7 days → Intranasal fluticasone 2 sprays each nostril daily → Saline nasal irrigation TID → Symptoms improve by day 3 → Complete antibiotic course → Symptoms resolve by day 7
+
+citations:
+  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+  - British Society of Otology Guidelines
+  - UpToDate - Otolaryngology

@@ -1,0 +1,87 @@
+tree_id: DERM-CANDIDIASIS-CUTANEOUS
+name: Cutaneous Candidiasis
+family: dermatology
+specialty: Dermatology / Primary Care
+chief_complaint: Itchy red rash in skin folds
+description: Superficial fungal infection of skin and mucous membranes caused by Candida species (usually C. albicans). Occurs in warm, moist intertriginous areas. Risk factors include diabetes, obesity, immunosuppression, antibiotics, and moisture/occlusion.
+icd10: B37.2
+snomed: "78048006"
+presentations:
+  - Erythematous patches with satellite pustules
+  - Pruritus and burning sensation
+  - Maceration in skin folds
+  - White, curd-like exudate (thrush if oral)
+  - Common sites: intertriginous areas (groin, axillae, under breasts, intergluteal)
+  - Interdigital involvement (web spaces)
+  - Diaper dermatitis pattern in infants
+  - Angular cheilitis (corners of mouth)
+urgency: non-urgent
+
+referrals:
+  dermatology:
+    - Recurrent infections despite treatment
+    - Chronic mucocutaneous candidiasis
+    - Uncertain diagnosis
+  infectious_disease:
+    - Suspected invasive candidiasis
+    - Immunocompromised patients with persistent infection
+
+workup:
+  - Clinical diagnosis based on appearance and location
+  - KOH preparation: scrape scale from leading edge, add 10% KOH, examine for budding yeasts and pseudohyphae
+  - Fungal culture: if KOH negative or uncertain diagnosis (Sabouraud agar)
+  - Assess risk factors:
+    - Diabetes (check HbA1c if not recently done)
+    - Obesity and moisture in skin folds
+    - Recent antibiotic use
+    - Immunosuppression (HIV, transplant, steroids)
+    - Pregnancy
+    - Occupational exposure (frequent hand washing, wet work)
+
+treatment:
+  topical_therapy:
+    - Topical antifungals (first-line):
+      - Clotrimazole 1% cream twice daily x2-4 weeks
+      - Miconazole 2% cream twice daily x2-4 weeks
+      - Nystatin cream or ointment 4 times daily x2-4 weeks (less effective than azoles)
+      - Ketoconazole 2% cream once daily x2-4 weeks
+    - Apply to affected area and 1-2 cm beyond margins
+    - Combination products if significant inflammation:
+      - Clotrimazole-betamethasone cream (use short-term only, <2 weeks due to steroid)
+  oral_therapy:
+    - Reserved for extensive disease or failed topical therapy:
+      - Fluconazole 150-200 mg weekly x2-4 weeks
+      - Itraconazole 200 mg daily x1-2 weeks
+  prevention:
+    - Keep affected areas clean and dry
+    - Absorptive powders (miconazole powder, nystatin powder) to reduce moisture
+    - Barrier creams (zinc oxide) for diaper area
+    - Cotton undergarments, avoid occlusive clothing
+    - Control diabetes (target HbA1c <7%)
+    - Weight loss if obesity contributing
+    - Avoid unnecessary antibiotics
+
+clinical_pearls:
+  - Satellite pustules surrounding main erythematous patch are characteristic
+  - Intertriginous candidiasis occurs in warm, moist skin folds
+  - KOH prep shows budding yeasts and pseudohyphae (vs dermatophytes show true hyphae)
+  - Diabetes and obesity are major risk factors
+  - Broad-spectrum antibiotics disrupt normal flora allowing Candida overgrowth
+  - Chronic mucocutaneous candidiasis suggests T-cell immunodeficiency
+  - Keep areas dry - moisture control essential for prevention
+  - Azoles (clotrimazole, miconazole) more effective than nystatin
+
+differentials:
+  - Tinea cruris (dermatophyte infection, spares scrotum, active scaly border, no satellites)
+  - Inverse psoriasis (well-demarcated, no satellites, personal/family history)
+  - Seborrheic dermatitis (greasy scales, no satellites)
+  - Erythrasma (coral-red fluorescence under Wood's lamp, Corynebacterium)
+  - Intertrigo (simple irritant dermatitis without infection)
+
+trace: |
+  A 55-year-old obese woman with type 2 diabetes (HbA1c 8.5%) presented with 2 weeks of intensely itchy, painful rash under both breasts. Recently completed amoxicillin course for sinusitis. Exam showed bright erythematous patches in inframammary folds bilaterally with satellite pustules at periphery, maceration, and white exudate. Diagnosed clinically as intertriginous candidiasis. KOH prep from pustule showed budding yeasts and pseudohyphae confirming Candida. Started clotrimazole 1% cream to affected areas twice daily. Instructed to keep area clean and dry: wash and dry thoroughly after showers, lift breasts to air dry, use absorptive gauze or cotton pads between skin folds, apply miconazole powder after cream dries. Discussed diabetes control importance. At 1 week pruritus improved 60%, satellite pustules resolved. At 3 weeks complete resolution. Continued preventive measures with miconazole powder daily. Referred to endocrinology for diabetes optimization. At 6-month follow-up with improved diabetes control (HbA1c 7.1%), no recurrence of candidiasis.
+
+citations:
+  - AAD (American Academy of Dermatology) Guidelines
+  - IDSA Clinical Practice Guidelines for Candidiasis
+  - UpToDate - Dermatology and Infectious Diseases

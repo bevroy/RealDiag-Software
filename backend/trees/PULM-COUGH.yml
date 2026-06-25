@@ -1,0 +1,322 @@
+tree_id: PULM-COUGH
+name: Cough Evaluation
+family: Pulmonology
+specialty: Pulmonology/Primary Care/Emergency Medicine
+chief_complaint: Cough
+description: Diagnostic decision tree for evaluating acute and chronic cough
+version: "1.0"
+icd10: R05
+snomed: 49727002
+presentations:
+  - Acute (<3 weeks) or chronic (>8 weeks)
+  - Dry or productive
+  - Associated symptoms: fever, dyspnea, chest pain
+  - Postnasal drip, heartburn
+  - Triggers: exercise, cold air
+  - Hemoptysis (red flag)
+differentials:
+  - Asthma
+  - GERD
+  - Post-nasal drip
+  - ACE inhibitor
+  - Chronic bronchitis
+citations:
+  - CHEST and ATS (American Thoracic Society) Guidelines
+  - BTS (British Thoracic Society) Guidelines
+  - UpToDate - Pulmonary Medicine
+author: RealDiag Team
+
+treatment:
+  - 'Acute cough (<3 weeks): Usually viral URI, supportive care (fluids, honey, guaifenesin)'
+  - 'Bacterial sinusitis/bronchitis if purulent sputum >7-10 days: Amoxicillin-clavulanate 875/125mg BID x7-10 days'
+  - 'Pertussis suspected (paroxysmal, post-tussive vomit): Azithromycin 500mg x1, then 250mg daily x4 days'
+  - 'Subacute cough (3-8 weeks): Post-infectious (supportive), consider pertussis, pneumonia'
+  - 'Chronic cough (>8 weeks): Upper airway cough (rhinosinusitis), GERD, asthma - trial directed therapy'
+  - 'UACS treatment: Nasal steroid (fluticasone 2 sprays BID), antihistamine (cetirizine 10mg daily)'
+  - 'Asthma/cough-variant: Inhaled corticosteroid (fluticasone 110mcg BID) + albuterol PRN'
+  - 'GERD: PPI (omeprazole 20-40mg BID) x8-12 weeks trial'
+  - 'ACE inhibitor cough: Switch to ARB (losartan 50mg daily)'
+  - 'Chronic bronchitis (COPD): Bronchodilators, inhaled steroids, smoking cessation'
+  - 'Unexplained chronic cough: Gabapentin 300mg TID or speech therapy (laryngeal hypersensitivity)'
+
+entry_point: duration
+
+referrals:
+  emergency:
+    - Respiratory failure
+    - Massive hemoptysis
+    - Tension pneumothorax
+    - Severe COPD exacerbation
+  urgent:
+    - Suspected lung cancer
+    - Moderate COPD exacerbation
+    - Recurrent pneumonia
+    - New oxygen requirement
+  routine:
+    - Chronic cough
+    - Asthma management
+    - OSA evaluation
+    - Smoking cessation
+
+clinical_pearls:
+  - Acute <3 weeks: usually viral URI
+  - Chronic >8 weeks: asthma, GERD, post-nasal drip (ABC)
+  - ACE inhibitors cause dry cough in 10-20%
+  - Chest X-ray if red flags: hemoptysis, weight loss, smoking
+
+nodes:
+  - id: duration
+    type: question
+    text: "Duration of cough?"
+    options:
+      - label: "< 3 weeks (Acute)"
+        next: acute_features
+      - label: "≥ 3 weeks (Chronic)"
+        next: chronic_smoking
+
+  - id: acute_features
+    type: question
+    text: "Associated symptoms?"
+    options:
+      - label: "Fever, dyspnea, productive sputum"
+        next: pneumonia_concern
+      - label: "Rhinorrhea, sore throat, congestion"
+        next: uri_diagnosis
+      - label: "Barking cough, stridor (child)"
+        next: croup_diagnosis
+      - label: "Wheezing, dyspnea"
+        next: asthma_copd
+
+  - id: pneumonia_concern
+    type: question
+    text: "Vital signs and exam findings?"
+    options:
+      - label: "Tachypnea, fever >38.5°C, crackles"
+        next: pneumonia_diagnosis
+      - label: "Mild symptoms, normal vitals"
+        next: bronchitis_diagnosis
+
+  - id: pneumonia_diagnosis
+    type: diagnosis
+    diagnosis: Community-Acquired Pneumonia (CAP)
+    icd10: J18.9
+    urgency: high
+    workup:
+      - Chest X-ray
+      - CBC
+      - Blood cultures if severe
+      - Sputum culture
+    treatment:
+      - Antibiotics (amoxicillin-clavulanate or respiratory fluoroquinolone)
+      - Supportive care
+      - Consider hospitalization (CURB-65 score)
+
+  - id: bronchitis_diagnosis
+    type: diagnosis
+    diagnosis: Acute Bronchitis
+    icd10: J20.9
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - CXR if pneumonia suspected
+    treatment:
+      - Supportive care (hydration, rest)
+      - Cough suppressants prn
+      - Bronchodilators if wheezing
+      - Avoid antibiotics unless bacterial superinfection
+
+  - id: uri_diagnosis
+    type: diagnosis
+    diagnosis: Upper Respiratory Infection (URI)
+    icd10: J06.9
+    urgency: low
+    workup:
+      - Clinical diagnosis
+    treatment:
+      - Symptomatic treatment
+      - Analgesics
+      - Decongestants
+      - Increased fluids
+
+  - id: croup_diagnosis
+    type: diagnosis
+    diagnosis: Croup (Laryngotracheobronchitis)
+    icd10: J05.0
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Neck X-ray (steeple sign) if uncertain
+    treatment:
+      - Dexamethasone 0.6mg/kg PO/IM x1
+      - Nebulized epinephrine if severe
+      - Cool mist
+      - Observation
+
+  - id: asthma_copd
+    type: question
+    text: "Patient history?"
+    options:
+      - label: "Known asthma or atopy"
+        next: asthma_exacerbation
+      - label: "Smoking history, COPD"
+        next: copd_exacerbation
+      - label: "First episode, unknown"
+        next: bronchospasm_diagnosis
+
+  - id: asthma_exacerbation
+    type: diagnosis
+    diagnosis: Asthma Exacerbation
+    icd10: J45.901
+    urgency: medium
+    workup:
+      - Peak flow or spirometry
+      - Pulse oximetry
+    treatment:
+      - Albuterol nebulizer
+      - Systemic corticosteroids
+      - Consider IV magnesium if severe
+
+  - id: copd_exacerbation
+    type: diagnosis
+    diagnosis: COPD Exacerbation
+    icd10: J44.1
+    urgency: medium
+    workup:
+      - Pulse oximetry
+      - ABG if severe
+      - Chest X-ray
+    treatment:
+      - Bronchodilators
+      - Systemic corticosteroids
+      - Antibiotics if purulent sputum
+      - Supplemental O2
+
+  - id: bronchospasm_diagnosis
+    type: diagnosis
+    diagnosis: Acute Bronchospasm
+    icd10: J98.01
+    urgency: medium
+    workup:
+      - Peak flow
+      - Pulse oximetry
+    treatment:
+      - Albuterol nebulizer
+      - Consider corticosteroids
+      - Reassess and follow up
+
+  - id: chronic_smoking
+    type: question
+    text: "Smoking history?"
+    options:
+      - label: "Current or former smoker"
+        next: chronic_smoker_eval
+      - label: "Never smoker"
+        next: chronic_nonsmoker
+
+  - id: chronic_smoker_eval
+    type: question
+    text: "Additional symptoms?"
+    options:
+      - label: "Weight loss, hemoptysis"
+        next: lung_cancer_concern
+      - label: "Chronic dyspnea, purulent sputum"
+        next: chronic_bronchitis
+      - label: "Postnasal drip"
+        next: upper_airway_cough
+
+  - id: lung_cancer_concern
+    type: diagnosis
+    diagnosis: Lung Cancer (Rule Out)
+    icd10: Z12.2
+    urgency: high
+    workup:
+      - CT chest
+      - Sputum cytology
+      - Bronchoscopy with biopsy
+      - PET scan if indicated
+    treatment:
+      - Refer to pulmonology/oncology
+      - Smoking cessation
+
+  - id: chronic_bronchitis
+    type: diagnosis
+    diagnosis: Chronic Bronchitis (COPD)
+    icd10: J42
+    urgency: medium
+    workup:
+      - Spirometry
+      - Chest X-ray
+      - Consider CT chest
+    treatment:
+      - Smoking cessation
+      - Bronchodilators (LABA/LAMA)
+      - Inhaled corticosteroids if indicated
+      - Pulmonary rehabilitation
+
+  - id: chronic_nonsmoker
+    type: question
+    text: "Associated features?"
+    options:
+      - label: "Heartburn, nocturnal cough"
+        next: gerd_cough
+      - label: "Rhinorrhea, throat clearing"
+        next: upper_airway_cough
+      - label: "ACE inhibitor use"
+        next: ace_inhibitor_cough
+      - label: "Dyspnea on exertion"
+        next: cardiac_cough
+
+  - id: gerd_cough
+    type: diagnosis
+    diagnosis: GERD-Related Cough
+    icd10: K21.9
+    urgency: low
+    workup:
+      - Clinical trial of PPI
+      - Consider pH monitoring
+    treatment:
+      - PPI therapy
+      - Lifestyle modifications
+      - Elevate head of bed
+
+  - id: upper_airway_cough
+    type: diagnosis
+    diagnosis: Upper Airway Cough Syndrome
+    icd10: R05
+    urgency: low
+    workup:
+      - Clinical evaluation
+      - Sinus CT if chronic sinusitis suspected
+    treatment:
+      - Antihistamines
+      - Decongestants
+      - Nasal corticosteroids
+      - Treat underlying rhinitis/sinusitis
+
+  - id: ace_inhibitor_cough
+    type: diagnosis
+    diagnosis: ACE Inhibitor-Induced Cough
+    icd10: T46.4X5A
+    urgency: low
+    workup:
+      - Review medications
+      - Trial off ACE inhibitor
+    treatment:
+      - Discontinue ACE inhibitor
+      - Switch to ARB
+      - Cough resolves in 1-4 weeks
+
+  - id: cardiac_cough
+    type: diagnosis
+    diagnosis: Cardiac Cough (CHF)
+    icd10: I50.9
+    urgency: medium
+    workup:
+      - Echocardiogram
+      - BNP/NT-proBNP
+      - Chest X-ray
+    treatment:
+      - Treat underlying heart failure
+      - Diuretics
+      - ACE inhibitors/ARBs
+      - Beta-blockers

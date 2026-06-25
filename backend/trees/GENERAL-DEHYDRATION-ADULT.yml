@@ -1,0 +1,73 @@
+tree_id: GENERAL-DEHYDRATION-ADULT
+name: Dehydration (Adult)
+family: general
+specialty: Emergency Medicine, Primary Care, Internal Medicine
+chief_complaint: Dehydration, decreased oral intake
+description: |
+  Dehydration is deficit in total body water from inadequate intake or excessive losses.
+  Ranges from mild to severe; can lead to acute kidney injury, shock, and death if untreated.
+icd10: E86.0
+snomed: "34095006"
+presentations:
+  - Decreased oral intake
+  - Vomiting and/or diarrhea
+  - Thirst, dry mouth
+  - Decreased urine output, dark urine
+  - Dizziness, lightheadedness
+  - Fatigue, weakness
+  - If severe - altered mental status, hypotension, tachycardia
+urgency: High
+referrals:
+  emergency:
+    - Severe dehydration with hemodynamic instability
+    - Inability to tolerate oral fluids
+    - Altered mental status
+    - Acute kidney injury
+workup:
+  clinical_assessment:
+    - Vital signs including orthostatics (drop in BP ≥20 systolic or HR increase ≥20)
+    - Mucous membranes (dry)
+    - Skin turgor (tenting)
+    - Capillary refill
+    - Mental status
+  laboratory:
+    - Basic metabolic panel - elevated BUN/Cr ratio (>20:1 suggests prerenal)
+    - Elevated sodium if dehydration from water loss
+    - Low sodium if from GI losses with hypotonic fluid replacement
+    - Elevated hematocrit (hemoconcentration)
+    - Urinalysis - specific gravity >1.020, low urine sodium
+treatment:
+  mild_to_moderate_dehydration:
+    - Oral rehydration preferred if able to tolerate
+    - Oral rehydration solution (ORS) - Pedialyte, WHO ORS
+    - Goal 50-100 mL/kg over 2-4 hours
+    - Small frequent sips if nausea
+    - Advance to regular diet as tolerated
+  severe_dehydration_or_unable_to_tolerate_oral:
+    - IV fluid resuscitation
+    - Normal saline or lactated Ringer's
+    - Bolus 1-2 liters then reassess
+    - Monitor electrolytes and renal function
+    - Correct electrolyte abnormalities
+  treat_underlying_cause:
+    - Antiemetics for nausea/vomiting (ondansetron)
+    - Antidiarrheals if appropriate (loperamide)
+    - Antibiotics if bacterial gastroenteritis
+clinical_pearls:
+  - Orthostatic vital signs sensitive for moderate-severe dehydration
+  - Elderly at higher risk - decreased thirst sensation, medications (diuretics)
+  - BUN/Cr ratio >20:1 suggests prerenal azotemia from dehydration
+  - Normal saline preferred initial resuscitation fluid
+  - Avoid rapid overcorrection of sodium abnormalities
+  - Address underlying cause (gastroenteritis, heat exposure, etc)
+differentials:
+  - Mild dehydration
+  - Moderate to severe dehydration
+  - Hypovolemic shock
+  - Acute kidney injury
+  - Electrolyte abnormalities
+trace:
+  - 45-year-old with 3 days of vomiting and diarrhea. Unable to keep down fluids. Orthostatic hypotension present. BUN 42, Cr 1.6 (baseline 0.9). Diagnose moderate dehydration with prerenal AKI. Give 2L normal saline IV. Ondansetron for nausea. Symptoms improve, able to tolerate oral fluids. Cr normalizes. Discharge with oral rehydration instructions.
+citations:
+  - UpToDate - Emergency Medicine
+  - WHO Oral Rehydration Guidelines

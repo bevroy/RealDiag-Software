@@ -1,0 +1,143 @@
+tree_id: CARDS-HEART-FAILURE-SYSTOLIC
+name: Heart Failure with Reduced Ejection Fraction (HFrEF)
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Progressive dyspnea and lower extremity edema
+description: Heart failure with EF under 40%, impaired systolic function. Common causes include ischemic cardiomyopathy, dilated cardiomyopathy, valvular disease. Guideline-directed medical therapy (ACE inhibitor/ARB/ARNI, beta blocker, aldosterone antagonist, SGLT2 inhibitor) improves survival. ICD for primary prevention if EF under 35%. CRT if wide QRS.
+icd10: I50.23
+snomed: 441530006
+presentations:
+  - Dyspnea at rest or with minimal exertion
+  - Orthopnea, PND
+  - Reduced ejection fraction (HFrEF)
+  - Peripheral edema, weight gain
+  - Fatigue, weakness
+  - Pulmonary rales, S3 gallop, JVD
+urgency: urgent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical presentation (symptoms):
+  - Dyspnea: exertional initially, progresses to rest dyspnea
+  - Orthopnea: dyspnea lying flat, relieved by sitting up
+  - Paroxysmal nocturnal dyspnea: sudden nighttime dyspnea
+  - Fatigue: reduced cardiac output
+  - Lower extremity edema: volume overload
+  - NYHA functional class:
+  - Class I: no symptoms with ordinary activity
+  - Class II: slight limitation, symptoms with ordinary activity
+  - Class III: marked limitation, symptoms with less than ordinary activity
+  - Class IV: symptoms at rest
+  - Physical exam findings:
+  - Vital signs: tachycardia, narrow pulse pressure, hypotension if severe
+  - JVP elevated: over 8 cm H2O (fluid overload)
+  - Lung exam: crackles bilaterally (pulmonary edema)
+  - Cardiac exam: S3 gallop (specific for HF), displaced PMI (LV dilation), holosystolic murmur at apex if functional MR
+  - Extremities: pitting edema, cool peripheries if low output
+  - Imaging (assess LV function and structure):
+  - Echocardiogram: essential for diagnosis
+  - EF under 40% diagnostic for HFrEF
+  - LV dilation, regional wall motion abnormalities
+  - Valvular function, pulmonary hypertension
+  - Chest X-ray:
+  - Cardiomegaly (cardiothoracic ratio over 0.5)
+  - Pulmonary edema: cephalization, Kerley B lines, pleural effusions
+  - Labs:
+  - BNP or NT-proBNP: elevated (BNP over 100 pg/mL, NT-proBNP over 300 pg/mL)
+  - Renal function: creatinine, GFR (assess cardiorenal syndrome)
+  - Electrolytes: hyponatremia common, check potassium before starting RAAS inhibitors
+  - CBC: anemia exacerbates HF
+  - Thyroid function: hyper/hypothyroidism can cause or worsen HF
+  - Iron studies: iron deficiency common, repleting improves symptoms
+  - ECG:
+  - May show prior MI (Q waves), LVH, bundle branch block
+  - QRS duration important: wide QRS (over 120 ms) indicates CRT candidacy
+  - Assess for arrhythmias: AFib common in HF
+  - Coronary angiography: if ischemic etiology suspected
+  - Revascularization may improve EF if viable myocardium
+
+treatment:
+  - Guideline-directed medical therapy (GDMT - foundational):
+  - ACE inhibitor or ARB: first-line RAAS inhibition
+  - Enalapril 10-20 mg BID, lisinopril 20-40 mg daily, or losartan 50-100 mg daily
+  - Reduce mortality, improve symptoms
+  - ARNI (angiotensin receptor-neprilysin inhibitor): superior to ACE inhibitor
+  - Sacubitril/valsartan 97/103 mg BID
+  - Replace ACE inhibitor after 36 hour washout (avoid angioedema)
+  - Beta blocker: carvedilol, metoprolol succinate, or bisoprolol
+  - Start low, titrate slowly (may worsen HF initially)
+  - Reduce mortality 35%
+  - Aldosterone antagonist: spironolactone 25 mg daily or eplerenone 50 mg daily
+  - If EF under 35% and NYHA class II-IV
+  - Monitor potassium (risk hyperkalemia with RAAS inhibition)
+  - SGLT2 inhibitor: dapagliflozin 10 mg daily or empagliflozin 10 mg daily
+  - Reduce HF hospitalizations 30%, mortality benefit
+  - Even if non-diabetic
+  - Loop diuretic: furosemide, torsemide, bumetanide
+  - Symptom relief, reduce congestion
+  - Titrate to euvolemia, daily weights
+  - Additional therapies:
+  - Hydralazine plus isosorbide dinitrate: if Black race or intolerant to ACE/ARB
+  - Ivabradine: if sinus rhythm, HR over 70 on max beta blocker
+  - Vericiguat: if recent HF hospitalization
+  - Digoxin: symptom relief, reduce hospitalizations (no mortality benefit)
+  - Device therapy:
+  - ICD (implantable cardioverter-defibrillator):
+  - Primary prevention: EF under 35% despite 3 months optimal medical therapy
+  - Reduce sudden cardiac death
+  - CRT (cardiac resynchronization therapy):
+  - If EF under 35%, LBBB with QRS over 150 ms, sinus rhythm
+  - Improve symptoms, reduce hospitalizations, mortality benefit
+  - LVAD (left ventricular assist device):
+  - Bridge to transplant or destination therapy if refractory HF
+  - Heart transplant: definitive therapy for end-stage HF
+  - Lifestyle modifications:
+  - Sodium restriction: under 2 grams daily
+  - Fluid restriction: 1.5-2 liters daily if hyponatremia
+  - Daily weights: report gain over 2-3 pounds in 1 day
+  - Exercise: cardiac rehab improves functional capacity
+  - Comorbidity management:
+  - AFib: rate control, anticoagulation
+  - Hypertension: goal BP 120-130 systolic
+  - Diabetes: SGLT2 inhibitor preferred
+  - Iron deficiency: IV iron (ferric carboxymaltose) if ferritin under 100 or TSAT under 20%
+
+clinical_pearls:
+  - HFrEF: EF under 40%, impaired systolic function
+  - Guideline-directed medical therapy: ACE inhibitor/ARNI, beta blocker, aldosterone antagonist, SGLT2 inhibitor (4 pillars)
+  - ARNI superior to ACE inhibitor (sacubitril/valsartan)
+  - SGLT2 inhibitor reduces hospitalizations 30% even in non-diabetics
+  - ICD for primary prevention if EF under 35% despite optimal therapy
+  - CRT if LBBB with QRS over 150 ms
+  - BNP over 100 pg/mL supports diagnosis
+
+differentials:
+  - Heart failure with preserved EF (HFpEF): EF over 50%, diastolic dysfunction
+  - COPD: dyspnea but no edema, BNP low
+  - Renal failure: edema but no pulmonary congestion
+  - Cirrhosis: ascites, edema, but no dyspnea or elevated BNP
+
+trace: |
+  A 62-year-old man with history of anterior MI 5 years ago presented with 3 months progressive dyspnea and lower extremity edema. Initially dyspnea only with climbing stairs (NYHA class II), now dyspnea walking on level ground (NYHA class III). Orthopnea requiring 3 pillows to sleep. Gained 10 pounds from edema. Exam: BP 110/70, HR 95 (tachycardia), JVP 12 cm H2O (elevated - volume overload), bibasilar crackles, S3 gallop (specific for HF), 2+ pitting edema to knees. ECG: Q waves in V1-V3 (prior anterior MI), LBBB with QRS 160 ms (wide QRS - CRT candidate). Chest X-ray: cardiomegaly (enlarged heart), cephalization of pulmonary vessels (pulmonary edema). Labs: BNP 850 pg/mL (markedly elevated - over 100 diagnostic), creatinine 1.4 mg/dL (mild renal dysfunction), sodium 134 mEq/L (hyponatremia - dilutional from volume overload), potassium 4.2 mEq/L, ferritin 65 ng/mL (iron deficiency), TSAT 15% (low). Echocardiogram: EF 28% (severely reduced - under 40%), LV dilation, anterior wall akinesis (prior MI territory), moderate functional MR (from LV dilation). Diagnosed with HFrEF (EF 28%) due to ischemic cardiomyopathy (anterior MI). NYHA class III symptoms (marked limitation). Admitted for diuresis and medication titration. IV furosemide 40 mg BID for diuresis, lost 12 pounds over 4 days to euvolemia (JVP normalized, crackles resolved, edema improved). Started guideline-directed medical therapy: sacubitril/valsartan 24/26 mg BID (ARNI - superior to ACE inhibitor), carvedilol 3.125 mg BID (beta blocker - start low), spironolactone 25 mg daily (aldosterone antagonist), dapagliflozin 10 mg daily (SGLT2 inhibitor), torsemide 20 mg daily (loop diuretic for maintenance). Counseled on sodium restriction (under 2 grams daily), daily weights (report gain over 2-3 pounds), fluid restriction 1.5 liters daily. Discharged with close follow-up. At 2 weeks: outpatient cardiology visit, uptitrated sacubitril/valsartan to 49/51 mg BID, carvedilol to 6.25 mg BID (slow titration - beta blockers can worsen HF initially). At 6 weeks: further uptitrated sacubitril/valsartan to 97/103 mg BID (target dose), carvedilol to 12.5 mg BID. Given iron deficiency (ferritin 65, TSAT 15%), treated with IV ferric carboxymaltose 1000 mg infusion (repleting iron improves symptoms). At 3 months on optimal medical therapy: symptoms markedly improved, NYHA class II (slight limitation only). Repeat echo: EF improved from 28% to 35% (positive response to GDMT). However, EF still under 35% despite 3 months optimal therapy, qualifies for ICD for primary prevention (reduce sudden cardiac death). Also LBBB with QRS 160 ms (over 150 ms) makes CRT candidate. Underwent CRT-D implantation (combined CRT and ICD). Post-device: continued GDMT, enrolled in cardiac rehab. At 6 months: NYHA class I-II, functional capacity excellent, repeat echo EF improved to 42% (response to CRT plus GDMT). At 1 year: stable, no HF hospitalizations, excellent quality of life. HFrEF successfully managed with comprehensive guideline-directed medical therapy, device therapy, and lifestyle modifications.
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature

@@ -1,0 +1,98 @@
+tree_id: GI-DIARRHEA
+name: Diarrhea Evaluation
+family: gastroenterology
+specialty: Gastroenterology
+icd10: K59.1
+snomed: "62315008"
+
+presentations:
+  - Increased stool frequency (>3 per day)
+  - Loose or watery stools
+  - Urgency or fecal incontinence
+  - Abdominal cramping or pain
+  - Bloating and gas
+  - Blood or mucus in stool
+  - Fever (if infectious)
+  - Recent travel or sick contacts
+  - Recent antibiotic use
+
+workup:
+  - History:
+    - Duration (acute <2 weeks, persistent 2-4 weeks, chronic >4 weeks)
+    - Stool characteristics (watery, bloody, mucoid, fatty)
+    - Associated symptoms (fever, weight loss, abdominal pain)
+    - Recent travel, camping, or well water exposure
+    - Food exposures (undercooked meat, unpasteurized dairy, seafood)
+    - Sick contacts or daycare exposure
+    - Recent antibiotic use (C. difficile risk)
+    - Medications (laxatives, antacids, metformin, SSRIs)
+    - Medical history (IBD, IBS, celiac disease, immunosuppression)
+  - Physical exam:
+    - Vital signs (fever, tachycardia, orthostatic hypotension)
+    - Volume status (skin turgor, mucous membranes, capillary refill)
+    - Abdominal exam (tenderness, distension, bowel sounds)
+    - Rectal exam (fissures, hemorrhoids, stool occult blood)
+  - Laboratory studies:
+    - Stool culture (if bloody diarrhea, fever, severe illness, or travel)
+    - Stool ova and parasites (if travel to endemic area, >7 days duration)
+    - C. difficile toxin assay (if recent antibiotic use or hospitalization)
+    - Fecal leukocytes or lactoferrin (inflammatory vs non-inflammatory)
+    - Stool for Giardia and Cryptosporidium antigen
+    - CBC (anemia, leukocytosis)
+    - BMP (electrolytes, kidney function if dehydration)
+    - Celiac serology (if chronic diarrhea)
+  - Imaging:
+    - Abdominal CT if concern for complications (toxic megacolon, perforation, abscess)
+
+treatment:
+  acute_watery_diarrhea:
+    - Oral rehydration therapy (ORS) or IV fluids if severe dehydration
+    - Electrolyte replacement
+    - Avoid antidiarrheals if bloody diarrhea or high fever
+    - Loperamide 4mg initially, then 2mg after each loose stool (max 16mg/day) if non-inflammatory
+    - Bismuth subsalicylate 524mg PO q30min to 1 hour PRN (max 8 doses/day)
+    - Supportive care, clear liquid diet advancing as tolerated
+  infectious_diarrhea:
+    - Most viral and bacterial gastroenteritis is self-limited
+    - Antibiotics if severe, immunocompromised, or specific pathogens (Shigella, Campylobacter)
+    - Ciprofloxacin 500mg PO BID x 3-5 days or azithromycin 500mg PO daily x 3 days
+    - Avoid antibiotics for E. coli O157:H7 (increases HUS risk)
+  c_difficile_infection:
+    - Discontinue offending antibiotic if possible
+    - Vancomycin 125mg PO QID x 10 days (first-line)
+    - Fidaxomicin 200mg PO BID x 10 days (alternative, lower recurrence)
+    - Avoid antidiarrheals
+    - Infection control precautions
+  giardiasis:
+    - Metronidazole 250mg PO TID x 5-7 days
+    - Tinidazole 2g PO x 1 dose (alternative)
+  travelers_diarrhea:
+    - Fluoroquinolone or azithromycin
+    - Rifaximin 200mg PO TID x 3 days for non-invasive
+  chronic_diarrhea:
+    - Treat underlying cause (IBD, celiac, IBS, malabsorption)
+    - Consider empiric trial of cholestyramine if bile acid diarrhea suspected
+    - GI referral for colonoscopy if alarm features
+
+clinical_pearls:
+  - Acute diarrhea (<2 weeks) is usually infectious and self-limited
+  - Bloody diarrhea suggests invasive bacterial infection, IBD, or ischemic colitis
+  - Watery diarrhea without fever suggests viral, toxin-mediated, or non-inflammatory cause
+  - C. difficile should be suspected with recent antibiotics or healthcare exposure
+  - Chronic diarrhea (>4 weeks) requires evaluation for IBD, celiac, malabsorption, IBS
+  - Red flags include blood, weight loss, nocturnal symptoms, fever, age >50 with new onset
+  - Stool studies have low yield in immunocompetent patients with non-bloody diarrhea <7 days
+  - Avoid loperamide if bloody diarrhea or suspected C. difficile (risk of toxic megacolon)
+  - Most cases of traveler's diarrhea are due to enterotoxigenic E. coli (ETEC)
+  - Cryptosporidium and Giardia cause persistent diarrhea in immunocompromised patients
+
+trace:
+  - Diagnostic approach to acute and chronic diarrhea
+  - Indications for stool studies and imaging
+  - Antibiotic selection for infectious diarrhea
+  - Management of C. difficile infection
+
+citations:
+  - Riddle MS, et al. (2017). ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol, 112(5), 726-738.
+  - Schiller LR, et al. (2017). Chronic diarrhea: diagnosis and management. Clin Gastroenterol Hepatol, 15(2), 182-193.
+  - McDonald LC, et al. (2018). Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by the IDSA and SHEA. Clin Infect Dis, 66(7), e1-e48.

@@ -1,0 +1,59 @@
+tree_id: ID-INFECTIVE-ENDOCARDITIS
+name: Infective Endocarditis
+family: Infectious Disease
+specialty: Infectious Disease
+icd10:
+- I33.0
+snomed:
+- '56819008'
+urgency: medium
+description: Comprehensive evaluation and management of Infective Endocarditis
+version: '1.0'
+citations:
+  - IDSA (Infectious Diseases Society of America) Guidelines
+  - CDC (Centers for Disease Control and Prevention) Guidelines
+  - UpToDate - Infectious Diseases
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Fever (most common, 85%), new heart murmur (regurgitant)
+- 'Signs of septic emboli: Osler nodes (painful finger/toe nodules), Janeway lesions
+  (palms/soles)'
+- Roth spots (retinal hemorrhages), splinter hemorrhages (under nails)
+- Heart failure (valve destruction), stroke (septic emboli)
+- Modified Duke criteria for diagnosis (clinical + echo + blood cultures)
+- 'Risk factors: Prosthetic valve, IV drug use, structural heart disease'
+workup:
+- Blood cultures x3 (from different sites, before antibiotics)
+- 'Echocardiogram: TTE first, TEE if high suspicion and TTE negative'
+- CBC, ESR/CRP, basic metabolic panel
+- ECG (conduction abnormalities suggest abscess)
+treatment:
+- 'Guideline-based treatment options for Infective Endocarditis include:'
+- Blood cultures x3 before antibiotics (IDSA 2024)
+- 'Empiric: Vancomycin 15-20mg/kg q12h + ceftriaxone 2g IV q24h (IDSA 2024)'
+- 'If prosthetic valve: Add gentamicin 1mg/kg q8h (IDSA 2024)'
+- 'Tailor to organism: S. aureus, Streptococcus, Enterococcus (IDSA 2024)'
+- 'Duration: 4-6 weeks IV antibiotics, surgery if indicated (IDSA 2024)'
+clinical_pearls:
+- 3 sets of blood cultures from different sites before antibiotics
+- 'IVDU: Think tricuspid valve endocarditis (Staph aureus)'
+- 'Dental procedures: Viridans strep; IVDU: Staph aureus; Healthcare: Enterococcus'
+- 'Empiric: Vancomycin + ceftriaxone (native valve) or + gentamicin (prosthetic)'
+- 'Surgery for: Severe heart failure, abscess, large vegetation (>10mm), persistent
+  bacteremia'
+referrals:
+- Infectious disease consult (all cases)
+- Cardiology consult
+- Cardiac surgery if heart failure, abscess, large vegetation, persistent bacteremia
+differentials:
+  - Rheumatic fever
+  - Myocarditis
+  - Pericarditis
+  - Septic emboli
+  - Non-bacterial thrombotic endocarditis
+trace:
+  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
+    Control and Prevention (CDC)
+  version: 0.1.0
+  last_updated: '2024-12-26'

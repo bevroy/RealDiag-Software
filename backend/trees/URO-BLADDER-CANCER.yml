@@ -1,0 +1,163 @@
+tree_id: URO-BLADDER-CANCER
+name: Bladder Cancer Evaluation
+family: urology
+specialty: Urology, Oncology
+chief_complaint: Painless Hematuria, Gross Blood in Urine
+description: Evaluation and management of bladder cancer
+version: "1.0"
+icd10: C67.9
+snomed: 399068003
+presentations:
+  - Painless hematuria
+  - Urinary frequency, urgency
+  - Dysuria
+  - Pelvic pain (advanced)
+  - Weight loss
+  - Risk factors: smoking, occupational exposures
+differentials:
+  - UTI
+  - Bladder stone
+  - Prostatitis
+  - Urethritis
+  - Benign bladder tumor
+citations:
+  - AUA (American Urological Association) Clinical Guidelines
+  - EAU (European Association of Urology) Guidelines
+  - UpToDate - Urology
+author: RealDiag Clinical Team
+
+
+treatment:
+  - 'Hematuria workup - cystoscopy with biopsy diagnostic'
+  - 'CT urogram to stage and rule out upper tract disease'
+  - 'Non-muscle invasive (Ta, T1, CIS): Transurethral resection of bladder tumor (TURBT)'
+  - 'Intravesical therapy after TURBT - BCG (Bacillus Calmette-Guerin) weekly x6 weeks, then monthly maintenance x3 years (reduces recurrence 40%)'
+  - 'High-risk non-muscle invasive: Consider cystectomy if BCG failure'
+  - 'Muscle-invasive (T2+): Neoadjuvant cisplatin-based chemotherapy x3-4 cycles, then radical cystectomy with pelvic lymph node dissection'
+  - 'Bladder preservation alternative (select T2): Maximal TURBT + concurrent chemoradiation'
+  - 'Metastatic: Platinum-based chemotherapy (cisplatin + gemcitabine), immunotherapy (pembrolizumab, atezolizumab) for PD-L1+'
+  - 'Urinary diversion after cystectomy - ileal conduit (most common) vs neobladder'
+  - 'Smoking cessation essential - 50% of bladder cancers from smoking'
+  - 'Surveillance - cystoscopy Q3months x2 years, then Q6months x5 years, then annual'
+
+entry_point: bladder_cancer_evaluation
+
+referrals:
+  emergency:
+    - Acute urinary retention with renal failure
+    - Fournier gangrene
+    - Testicular torsion
+    - Priapism
+  urgent:
+    - Suspected bladder/kidney cancer
+    - Renal mass
+    - Recurrent UTIs
+    - Hematuria workup
+  routine:
+    - BPH management
+    - Kidney stones
+    - Erectile dysfunction
+    - PSA elevation
+
+clinical_pearls:
+  - Painless hematuria classic presentation
+  - Smoking strongest risk factor
+  - Cystoscopy with biopsy diagnostic
+  - Transitional cell carcinoma most common (90%)
+
+nodes:
+  - id: bladder_cancer_evaluation
+    type: diagnosis
+    name: "Bladder Cancer"
+    icd10: "C67.9"
+    urgency: high
+    workup:
+      - Bladder cancer - 4th most common cancer in men, 90% transitional cell carcinoma (urothelial), 10% squamous cell or adenocarcinoma
+      - Epidemiology - Male:female 3:1, peak age 65-85, 80,000 new cases/year US
+      - Risk factors - Smoking (50% attributable, 4x risk), occupational exposures (aromatic amines, benzene - dye/rubber/paint/textile industries), cyclophosphamide, pelvic radiation, chronic bladder irritation (indwelling catheter, stones), schistosomiasis (squamous cell)
+      - Presentation - Painless gross hematuria (85% present with this) - CLASSIC
+      - Intermittent hematuria (can disappear and recur)
+      - Microscopic hematuria (incidental on UA)
+      - Irritative voiding symptoms - Urgency, frequency, dysuria (especially CIS)
+      - Recurrent UTIs
+      - Ureteral obstruction - Flank pain, hydronephrosis (advanced)
+      - PAINLESS HEMATURIA IN ADULT >35 = UROLOGY REFERRAL (cancer until proven otherwise)
+      - Differential diagnosis - UTI, kidney stones, BPH, prostatitis, renal cell carcinoma
+      - Workup
+      - Urinalysis with microscopy - Confirm hematuria (>3 RBC/hpf)
+      - Urine cytology - Detect malignant cells (high-grade tumors), sensitivity 50% (low-grade false negative), specificity 90%
+      - Cystoscopy - GOLD STANDARD for diagnosis
+      - Direct visualization of bladder mucosa, identify tumors, biopsy
+      - Tumor appearance - Papillary (finger-like projections, most common) vs sessile/flat (CIS)
+      - Transurethral resection of bladder tumor (TURBT) - Diagnostic AND therapeutic
+      - Resect tumor, obtain tissue for pathology (grade/stage), resect deep enough to include muscularis propria (muscle) to assess invasion
+      - Upper tract imaging - CT urography with IV contrast (CT IVP) or retrograde pyelography
+      - Evaluate kidneys, ureters (upper tract urothelial carcinoma 2-5%)
+      - Staging - TNM system
+      - Non-muscle-invasive bladder cancer (NMIBC) - 75-80% at diagnosis
+      - Ta - Papillary tumor, confined to mucosa (non-invasive)
+      - T1 - Invades lamina propria (subepithelial connective tissue)
+      - Tis - Carcinoma in situ (CIS), flat high-grade tumor on mucosal surface
+      - Muscle-invasive bladder cancer (MIBC) - 20-25%
+      - T2 - Invades muscularis propria (detrusor muscle)
+      - T2a - Superficial muscle (inner half)
+      - T2b - Deep muscle (outer half)
+      - T3 - Invades perivesical fat
+      - T4 - Invades adjacent organs (prostate, uterus, vagina, pelvic/abdominal wall)
+      - N - Regional lymph nodes (pelvic, para-aortic)
+      - M - Distant metastases (lungs, liver, bone most common)
+      - Grading - Low-grade vs high-grade (WHO/ISUP)
+      - Low-grade - Well-differentiated, less aggressive, low recurrence
+      - High-grade - Poorly differentiated, aggressive, high recurrence/progression
+      - Metastatic workup - If muscle-invasive or high-grade T1
+      - CT chest/abdomen/pelvis, bone scan if symptoms
+    treatment:
+      - Non-muscle-invasive bladder cancer (Ta, T1, Tis)
+      - TURBT - Complete resection, repeat TURBT in 2-6 weeks (restage, 30-50% residual tumor)
+      - Intravesical therapy - Instill medication into bladder via catheter
+      - Indications - High-grade, T1, Tis (CIS), multifocal, large tumors, recurrent
+      - BCG (Bacillus Calmette-Guérin) - MOST EFFECTIVE for high-grade
+      - Live attenuated Mycobacterium bovis, immunotherapy (activates immune response against tumor)
+      - Induction - Weekly instillations x 6 weeks
+      - Maintenance - Monthly or intermittent for 1-3 years (reduces recurrence 30-40%, reduces progression to muscle-invasive)
+      - Side effects - Cystitis (dysuria, frequency 90%), hematuria, fever, BCG-osis (systemic infection rare <1%, treat with isoniazid + rifampin)
+      - Contraindications - Immunosuppression, traumatic catheterization (risk systemic BCG), active UTI
+      - Mitomycin C - Chemotherapy, intravesical
+      - Alternative to BCG (if contraindication or BCG shortage)
+      - Less effective than BCG for high-grade
+      - Single immediate post-TURBT dose reduces recurrence 10-15% (for low-grade)
+      - Surveillance - Cystoscopy every 3 months x 2 years, then every 6 months x 2 years, then annually
+      - High recurrence rate (50-70% recur within 5 years)
+      - Progression to muscle-invasive 10-20% (especially T1 high-grade)
+      - Muscle-invasive bladder cancer (T2-T4)
+      - Radical cystectomy - GOLD STANDARD
+      - Remove entire bladder, prostate/seminal vesicles (men) or uterus/ovaries/anterior vaginal wall (women), pelvic lymph node dissection
+      - Urinary diversion
+      - Ileal conduit - Incontinent diversion, urostomy bag (most common)
+      - Neobladder - Continent diversion, create new bladder from intestine, orthotopic (void through urethra)
+      - Complications - Infection, VTE, urinary leak, strictures, bowel obstruction, erectile dysfunction (men), sexual dysfunction
+      - 5-year survival 60-70% (T2), 40-50% (T3-T4)
+      - Neoadjuvant chemotherapy - BEFORE cystectomy
+      - Cisplatin-based regimens (MVAC: methotrexate, vinblastine, doxorubicin, cisplatin OR gemcitabine-cisplatin)
+      - 3-4 cycles
+      - Improves survival 5-10% (downstage tumor, treat micrometastases)
+      - Standard of care for T2-T4a N0 M0
+      - Bladder-sparing trimodality therapy - Alternative to cystectomy (select patients)
+      - Maximal TURBT + concurrent chemoradiation (cisplatin + external beam radiation 60-66 Gy)
+      - Complete response 60-70%, bladder preservation 40-50%
+      - Requires intact bladder function, T2 disease, no CIS, complete TURBT
+      - Close surveillance (cystoscopy q3 months), salvage cystectomy if recurrence
+      - Metastatic bladder cancer (M1)
+      - Systemic chemotherapy - First-line
+      - Cisplatin-based - Gemcitabine-cisplatin or MVAC (if cisplatin-eligible)
+      - Median survival 12-15 months, response rate 50%
+      - Carboplatin-based - If cisplatin-ineligible (renal dysfunction, hearing loss, neuropathy, heart failure)
+      - Immunotherapy - Checkpoint inhibitors
+      - Pembrolizumab, atezolizumab, nivolumab (PD-1/PD-L1 inhibitors)
+      - Second-line after chemotherapy progression OR first-line if cisplatin-ineligible with high PD-L1
+      - Durable responses 20-30%, median survival 10 months
+      - Erdafitinib - FGFR inhibitor (if FGFR2/3 mutations/fusions 15-20% patients)
+      - Enfortumab vedotin - Antibody-drug conjugate (nectin-4 target)
+      - Very effective third-line or later
+      - Prognosis - 5-year survival NMIBC 90%, MIBC 50%, metastatic 5%
+      - Prevention - Smoking cessation (reduces recurrence even after diagnosis)

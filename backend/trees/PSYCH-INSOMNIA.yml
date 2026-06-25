@@ -1,0 +1,326 @@
+tree_id: PSYCH-INSOMNIA
+name: Insomnia Evaluation and Management
+family: Psychiatry
+specialty: Psychiatry/Primary Care/Sleep Medicine
+icd10: G47.00
+snomed: 193462001
+presentations:
+  - Difficulty falling asleep
+  - Difficulty staying asleep
+  - Early morning awakening
+  - Non-restorative sleep
+  - Daytime impairment (fatigue, mood, concentration)
+  - ≥3 nights per week for ≥3 months
+chief_complaint: Difficulty Sleeping
+description: Diagnostic decision tree for insomnia evaluation
+version: "1.0"
+differentials:
+  - Sleep apnea
+  - Restless leg syndrome
+  - Depression
+  - Anxiety
+  - Medication effect
+citations:
+  - APA (American Psychiatric Association) Practice Guidelines
+  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+  - UpToDate - Psychiatry
+author: RealDiag Team
+
+treatment:
+  - 'Cognitive behavioral therapy for insomnia (CBT-I) first-line - sleep restriction, stimulus control, most effective long-term'
+  - 'Sleep hygiene - consistent sleep schedule, cool dark room, avoid screens 1 hour before bed, limit caffeine'
+  - 'Pharmacotherapy if CBT-I insufficient: Zolpidem 5-10mg, eszopiclone 1-3mg, zaleplon 5-10mg qHS (<4 weeks)'
+  - 'Melatonin 0.5-5mg 1-2 hours before bed - safe, helps circadian rhythm'
+  - 'Trazodone 25-100mg or mirtazapine 7.5-15mg qHS if comorbid depression'
+  - 'Avoid benzodiazepines (dependence risk, cognitive impairment)'
+  - 'Treat underlying causes - depression, anxiety, sleep apnea, medications'
+
+entry_point: duration
+
+referrals:
+  emergency:
+    - Acute suicidal ideation with plan
+    - Homicidal ideation
+    - Psychotic break with danger
+    - Severe mania
+    - Catatonia
+  urgent:
+    - Suicidal ideation without plan
+    - Medication-resistant depression
+    - Severe anxiety
+    - New psychosis
+  routine:
+    - Depression/anxiety management
+    - ADHD evaluation
+    - Therapy referral
+    - Medication management
+
+clinical_pearls:
+  - Sleep hygiene first: regular schedule, dark quiet room, no screens
+  - CBT-I (Cognitive Behavioral Therapy for Insomnia) most effective long-term
+  - Avoid chronic benzodiazepines (tolerance, dependence, falls)
+  - Treat underlying conditions: depression, anxiety, sleep apnea, pain
+
+nodes:
+  - id: duration
+    type: question
+    text: "Duration of sleep difficulty?"
+    options:
+      - label: "Acute (<3 months)"
+        next: acute_insomnia
+      - label: "Chronic (≥3 months)"
+        next: chronic_insomnia
+
+  - id: acute_insomnia
+    type: question
+    text: "Identifiable trigger or stressor?"
+    options:
+      - label: "Recent stressor (job loss, relationship, illness)"
+        next: adjustment_insomnia
+      - label: "Shift work or jet lag"
+        next: circadian_disorder
+      - label: "Recent medication change"
+        next: medication_insomnia
+      - label: "Medical illness or pain"
+        next: secondary_insomnia
+
+  - id: adjustment_insomnia
+    type: diagnosis
+    diagnosis: Adjustment Insomnia (Acute Stress-Related)
+    icd10: G47.00
+    urgency: low
+    workup:
+      - Sleep diary
+      - Assess stressor
+      - Rule out depression/anxiety
+    treatment:
+      - Sleep hygiene education
+      - Cognitive behavioral therapy for insomnia (CBT-I)
+      - Short-term hypnotic (2-4 weeks max)
+      - Zolpidem 5-10mg or eszopiclone 1-3mg PRN
+      - Address underlying stressor
+      - Should resolve when stressor resolves
+
+  - id: circadian_disorder
+    type: diagnosis
+    diagnosis: Circadian Rhythm Sleep-Wake Disorder
+    icd10: G47.20
+    urgency: low
+    workup:
+      - Sleep diary with work schedule
+      - Actigraphy
+      - Consider sleep study if severe
+    treatment:
+      - Light therapy (bright light in morning for delayed phase)
+      - Melatonin 0.5-3mg 2-3 hours before desired sleep time
+      - Maintain consistent sleep schedule on days off
+      - Strategic napping (20-30 min before night shift)
+      - Sleep hygiene
+      - Consider job schedule change if possible
+
+  - id: medication_insomnia
+    type: diagnosis
+    diagnosis: Medication-Induced Insomnia
+    icd10: G47.09
+    urgency: low
+    workup:
+      - Medication review
+      - Common culprits: stimulants, SSRIs, steroids, beta-agonists, decongestants, thyroid hormones
+      - Caffeine and alcohol intake
+    treatment:
+      - Adjust timing (stimulating meds in AM)
+      - Reduce dose if possible
+      - Switch to alternative medication
+      - Discontinue if appropriate
+      - Temporary sleep aid if needed
+
+  - id: secondary_insomnia
+    type: question
+    text: "Primary medical condition?"
+    options:
+      - label: "Pain (arthritis, neuropathy)"
+        next: pain_insomnia
+      - label: "GERD or dyspnea"
+        next: gerd_insomnia
+      - label: "Nocturia"
+        next: nocturia_insomnia
+
+  - id: pain_insomnia
+    type: diagnosis
+    diagnosis: Insomnia Due to Pain
+    icd10: G47.09
+    urgency: medium
+    workup:
+      - Assess pain source and severity
+      - Pain medication review
+    treatment:
+      - Optimize pain management
+      - Long-acting pain medication at bedtime
+      - Physical therapy
+      - Sleep positioning
+      - CBT-I
+      - Avoid opioids for sleep if possible
+
+  - id: gerd_insomnia
+    type: diagnosis
+    diagnosis: Insomnia Due to GERD/Dyspnea
+    icd10: G47.09
+    urgency: medium
+    workup:
+      - Assess GERD or respiratory symptoms
+      - Consider pulmonary function tests
+    treatment:
+      - Elevate head of bed
+      - PPI for GERD
+      - Avoid late meals
+      - Optimize asthma/COPD management
+      - Treat underlying condition
+
+  - id: nocturia_insomnia
+    type: diagnosis
+    diagnosis: Insomnia Due to Nocturia
+    icd10: R35.1
+    urgency: medium
+    workup:
+      - Voiding diary
+      - BMP, glucose, urinalysis
+      - Post-void residual
+      - Rule out diabetes, CHF, BPH
+    treatment:
+      - Limit fluids 2-3 hours before bed
+      - Void before bed
+      - Treat underlying cause (BPH, diabetes, CHF)
+      - Consider desmopressin if refractory
+      - Timed diuretics (take in afternoon, not evening)
+
+  - id: chronic_insomnia
+    type: question
+    text: "Pattern of sleep difficulty?"
+    options:
+      - label: "Difficulty falling asleep (sleep onset >30 min)"
+        next: sleep_onset_insomnia
+      - label: "Difficulty staying asleep (frequent awakenings)"
+        next: sleep_maintenance_insomnia
+      - label: "Early morning awakening (>30 min before desired)"
+        next: early_morning_awakening
+      - label: "Snoring, witnessed apneas, daytime sleepiness"
+        next: sleep_apnea_eval
+
+  - id: sleep_onset_insomnia
+    type: question
+    text: "Associated features?"
+    options:
+      - label: "Racing thoughts, worry, anxiety"
+        next: anxiety_insomnia
+      - label: "Leg discomfort, urge to move"
+        next: restless_legs
+      - label: "Delayed sleep phase (can't fall asleep until 2-4 AM)"
+        next: delayed_sleep_phase
+
+  - id: anxiety_insomnia
+    type: diagnosis
+    diagnosis: Insomnia with Anxiety
+    icd10: G47.00
+    urgency: medium
+    workup:
+      - GAD-7 screening
+      - PHQ-9 for depression
+      - Sleep diary
+    treatment:
+      - CBT-I (first-line)
+      - Sleep restriction therapy
+      - Stimulus control (bed only for sleep)
+      - Relaxation techniques
+      - SSRI/SNRI for anxiety
+      - Avoid benzodiazepines long-term
+      - Consider trazodone 50-100mg or mirtazapine 7.5-15mg
+      - Psychiatry referral if severe
+
+  - id: restless_legs
+    type: diagnosis
+    diagnosis: Restless Legs Syndrome
+    icd10: G25.81
+    urgency: medium
+    workup:
+      - Ferritin level (treat if <75)
+      - BMP, creatinine
+      - Rule out medication cause (antidepressants, antihistamines)
+    treatment:
+      - Iron supplementation if deficient
+      - Gabapentin 300-900mg at bedtime OR
+      - Pramipexole 0.125-0.5mg 2 hours before bed OR
+      - Ropinirole 0.25-2mg before bed
+      - Avoid caffeine, alcohol
+      - Leg massage, warm bath
+      - Neurology referral if refractory
+
+  - id: delayed_sleep_phase
+    type: diagnosis
+    diagnosis: Delayed Sleep-Wake Phase Disorder
+    icd10: G47.21
+    urgency: low
+    workup:
+      - Sleep diary (shows consistent late sleep/wake times)
+      - Actigraphy
+    treatment:
+      - Chronotherapy (progressively delay bedtime)
+      - Bright light therapy in morning (10,000 lux x 30 min)
+      - Melatonin 0.5-3mg 5-6 hours before desired sleep
+      - Avoid screens/blue light in evening
+      - Strict wake time
+      - Sleep medicine referral
+
+  - id: sleep_maintenance_insomnia
+    type: diagnosis
+    diagnosis: Sleep Maintenance Insomnia
+    icd10: G47.00
+    urgency: medium
+    workup:
+      - Sleep diary
+      - Rule out sleep apnea
+      - Assess for depression, anxiety
+      - Medication review
+    treatment:
+      - CBT-I (first-line)
+      - Sleep hygiene
+      - Avoid clock-watching
+      - Get out of bed if awake >20 min
+      - Longer-acting hypnotic if needed (eszopiclone, doxepin)
+      - Treat underlying psychiatric condition
+      - Consider sleep study if snoring/apnea symptoms
+
+  - id: early_morning_awakening
+    type: diagnosis
+    diagnosis: Early Morning Awakening Insomnia
+    icd10: G47.00
+    urgency: medium
+    workup:
+      - PHQ-9 (screen for depression)
+      - Sleep diary
+      - Rule out advanced sleep phase
+    treatment:
+      - Treat depression if present (SSRI/SNRI)
+      - CBT-I
+      - Avoid early bedtime
+      - Bright light exposure in evening
+      - Consider low-dose sedating antidepressant (trazodone, mirtazapine)
+      - Psychiatry referral if depression
+
+  - id: sleep_apnea_eval
+    type: diagnosis
+    diagnosis: Suspected Obstructive Sleep Apnea
+    icd10: G47.33
+    urgency: high
+    workup:
+      - STOP-BANG questionnaire
+      - Epworth Sleepiness Scale
+      - Polysomnography (sleep study)
+      - Neck circumference, BMI
+    treatment:
+      - Sleep study for diagnosis
+      - CPAP if moderate-severe OSA (AHI >15)
+      - Weight loss
+      - Positional therapy
+      - Avoid alcohol and sedatives
+      - Sleep medicine referral
+      - Treat insomnia after OSA treated

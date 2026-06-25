@@ -1,0 +1,491 @@
+tree_id: EMERGENCY-ANAPHYLAXIS
+name: Anaphylaxis
+family: Emergency Medicine
+specialty: Emergency Medicine
+icd10: T78.2
+snomed: 39579001
+presentations:
+  - Acute onset skin/mucosal involvement (urticaria, angioedema, flushing)
+  - Respiratory compromise (dyspnea, wheezing, stridor, throat tightness)
+  - Cardiovascular collapse (hypotension, syncope, tachycardia)
+  - GI symptoms (nausea, vomiting, cramping, diarrhea)
+  - Onset within minutes to hours of allergen exposure
+  - Sense of impending doom
+chief_complaint: Allergic reaction, difficulty breathing, hives, throat swelling, hypotension after exposure
+description: Rapid recognition and management of anaphylaxis, a life-threatening systemic allergic reaction. Emphasizes immediate epinephrine administration as first-line treatment, airway management, and identification of biphasic reactions. Critical time-sensitive intervention required.
+
+differentials:
+  - Severe allergic reaction
+  - Asthma exacerbation
+  - Septic shock
+  - Cardiogenic shock
+  - Vasovagal syncope
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical diagnosis - do NOT delay treatment for testing
+  - Tryptase level (peaks 1-2 hours after reaction) confirms mast cell activation
+  - Serial tryptase: baseline, 1-2 hours post, 24 hours post
+  - After stabilization: allergy testing (skin testing, specific IgE)
+  - ECG if cardiac symptoms
+  - CXR if severe respiratory symptoms or not improving
+
+treatment:
+  - Epinephrine 0.3-0.5mg IM (1:1000) anterolateral thigh - FIRST-LINE
+  - Repeat epinephrine q5-15min PRN; consider IV infusion if refractory
+  - Supplemental oxygen, IV fluids (1-2L bolus), place on monitor
+  - H1 blocker: diphenhydramine 25-50mg IV/PO
+  - H2 blocker: ranitidine 50mg IV or famotidine 20mg IV
+  - Steroids: methylprednisolone 125mg IV (prevent biphasic reaction)
+  - Bronchospasm: albuterol nebulizer; glucagon if on beta-blockers
+  - Observe 4-8 hours; prescribe EpiPen x2, allergist referral
+
+clinical_pearls:
+  - Epinephrine is first-line; do not delay for antihistamines
+  - IM epinephrine (anterolateral thigh) faster than subcutaneous
+  - Biphasic reactions occur in 20%; observe 4-8 hours minimum
+  - Beta-blockers may make anaphylaxis refractory; consider glucagon
+
+nodes:
+  - id: initial_assessment
+    type: question
+    question: "Patient presents with possible allergic reaction. Recent exposure to potential allergen (food, medication, insect sting)?"
+    options:
+      - label: "Yes, within minutes to 2 hours + symptoms involving ≥2 organ systems"
+        next: anaphylaxis_criteria
+      - label: "Yes, exposure + isolated skin symptoms only (hives, itching)"
+        next: dx_allergic_reaction_mild
+      - label: "Sudden hypotension or bronchospasm after known allergen exposure"
+        next: anaphylaxis_criteria
+      - label: "Unknown exposure, symptoms unclear"
+        next: symptom_assessment
+
+  - id: symptom_assessment
+    type: question
+    question: "Describe current symptoms and organ systems involved?"
+    options:
+      - label: "Respiratory: dyspnea, wheezing, stridor, throat tightness"
+        next: airway_assessment
+      - label: "Cardiovascular: hypotension (SBP <90), tachycardia, syncope"
+        next: anaphylaxis_criteria
+      - label: "Skin: hives, angioedema, flushing, pruritus"
+        next: skin_only_assessment
+      - label: "GI: abdominal pain, vomiting, diarrhea"
+        next: check_other_systems
+
+  - id: anaphylaxis_criteria
+    type: question
+    question: "ANAPHYLAXIS SUSPECTED. Does patient meet diagnostic criteria (any ONE of the following)? 1) Acute onset involving skin/mucosa AND respiratory OR cardiovascular compromise, 2) ≥2 systems involved after allergen, 3) Hypotension after known allergen"
+    options:
+      - label: "YES - Anaphylaxis criteria met"
+        next: severity_assessment
+      - label: "NO - Only 1 organ system involved, no respiratory/cardiovascular compromise"
+        next: skin_only_assessment
+
+  - id: severity_assessment
+    type: question
+    question: "ANAPHYLAXIS CONFIRMED. Assess severity - airway and hemodynamic status?"
+    options:
+      - label: "Severe: stridor, cyanosis, hypoxia (O2 sat <90%), SBP <90, confusion, or collapse"
+        next: severe_anaphylaxis
+      - label: "Moderate: dyspnea, wheezing, throat tightness, tachycardia, but SBP >90 and alert"
+        next: moderate_anaphylaxis
+      - label: "Mild: skin symptoms + GI symptoms or mild respiratory symptoms without distress"
+        next: mild_anaphylaxis
+
+  - id: airway_assessment
+    type: question
+    question: "Respiratory symptoms present. Assess airway patency and work of breathing?"
+    options:
+      - label: "Stridor, inability to speak, drooling, severe tongue/lip swelling - airway threatened"
+        next: severe_anaphylaxis
+      - label: "Wheezing, dyspnea, throat tightness, but speaking in full sentences"
+        next: moderate_anaphylaxis
+      - label: "Mild throat sensation, no wheezing or dyspnea"
+        next: mild_anaphylaxis
+
+  - id: skin_only_assessment
+    type: question
+    question: "Isolated skin symptoms (hives, angioedema, pruritus). Any respiratory, cardiovascular, or GI involvement?"
+    options:
+      - label: "Skin symptoms ONLY, no other organ systems"
+        next: dx_allergic_reaction_mild
+      - label: "Skin + ANY other system (respiratory, CV, GI)"
+        next: anaphylaxis_criteria
+
+  - id: check_other_systems
+    type: question
+    question: "GI symptoms present. Are there additional symptoms in other organ systems?"
+    options:
+      - label: "GI + skin or respiratory or cardiovascular symptoms"
+        next: anaphylaxis_criteria
+      - label: "GI symptoms only, no other organ involvement"
+        next: dx_allergic_reaction_mild
+
+  - id: severe_anaphylaxis
+    type: question
+    question: "SEVERE ANAPHYLAXIS (airway compromise or shock). Immediate interventions performed?"
+    options:
+      - label: "Epinephrine IM administered + airway secured + IV access obtained"
+        next: dx_anaphylaxis_severe
+      - label: "Preparing interventions now"
+        next: dx_anaphylaxis_severe
+
+  - id: moderate_anaphylaxis
+    type: question
+    question: "MODERATE ANAPHYLAXIS (respiratory or cardiovascular involvement, stable airway). Epinephrine administered?"
+    options:
+      - label: "Yes, epinephrine IM 0.3-0.5mg given"
+        next: dx_anaphylaxis_moderate
+      - label: "No, about to give now"
+        next: dx_anaphylaxis_moderate
+
+  - id: mild_anaphylaxis
+    type: question
+    question: "MILD ANAPHYLAXIS (skin + 1 other system, but mild). Epinephrine available?"
+    options:
+      - label: "Yes, epinephrine available, considering administration"
+        next: dx_anaphylaxis_mild
+      - label: "No epinephrine, will use H1 antihistamine only"
+        next: dx_anaphylaxis_mild
+
+  - id: dx_anaphylaxis_severe
+    type: diagnosis
+    diagnosis: "Severe Anaphylaxis - MEDICAL EMERGENCY"
+    icd10: T78.2XXA
+    description: "Life-threatening anaphylaxis with airway compromise (stridor, severe angioedema) or cardiovascular collapse (hypotension, shock). Requires IMMEDIATE epinephrine, aggressive airway management, fluid resuscitation, and ICU admission. High risk of cardiac arrest without immediate treatment."
+    recommendations:
+      - "IMMEDIATE ACTIONS (within 60 seconds):"
+      - "1. EPINEPHRINE 1:1000 (1mg/mL) IM into anterolateral thigh:"
+      - "   - Adults: 0.5mg (0.5mL) IM"
+      - "   - Children: 0.01mg/kg (max 0.3mg) IM"
+      - "   - Repeat q5-15min PRN if no improvement or worsening"
+      - "   - NO absolute contraindication in anaphylaxis"
+      - "2. AIRWAY MANAGEMENT:"
+      - "   - High-flow O2 15L via non-rebreather mask"
+      - "   - If stridor/impending airway loss: prepare for intubation or cricothyrotomy"
+      - "   - Early intubation preferred over emergency cricothyrotomy"
+      - "   - Largest ETT possible (vocal cord edema expected)"
+      - "3. Position patient SUPINE (prevents empty vena cava syndrome in shock)"
+      - "   - If vomiting: left lateral decubitus"
+      - "   - NEVER sit upright (can precipitate cardiovascular collapse)"
+      - "4. IV ACCESS - 2 large-bore IVs (18g or larger)"
+      - "5. AGGRESSIVE FLUID RESUSCITATION:"
+      - "   - Adults: NS 1-2L rapid bolus, then 5-10mL/kg boluses"
+      - "   - Children: NS 20mL/kg bolus, repeat up to 60mL/kg in first hour"
+      - "   - May require 4-6L in first hour for adults in shock"
+      - ""
+      - "SECONDARY MEDICATIONS (after epinephrine):"
+      - "H1 antihistamine: diphenhydramine 50mg IV/IM (adults) or 1mg/kg (peds, max 50mg)"
+      - "H2 antihistamine: ranitidine 50mg IV or famotidine 20mg IV (adults)"
+      - "Corticosteroids (prevent biphasic reaction):"
+      - "  - Methylprednisolone 125mg IV OR"
+      - "  - Dexamethasone 10mg IV OR"
+      - "  - Prednisone 60mg PO (if stable)"
+      - "Bronchodilators if wheezing persists:"
+      - "  - Albuterol 2.5-5mg nebulized q20min × 3"
+      - "  - Ipratropium 0.5mg nebulized q20min × 3"
+      - ""
+      - "IF REFRACTORY TO EPINEPHRINE (3+ doses or ongoing shock):"
+      - "Consider epinephrine infusion:"
+      - "  - 0.1 mcg/kg/min (typical 5-15 mcg/min), titrate to response"
+      - "  - Requires ICU, continuous cardiac monitoring"
+      - "Vasopressors if shock persists despite epinephrine + fluids:"
+      - "  - Norepinephrine 0.05-0.3 mcg/kg/min OR"
+      - "  - Vasopressin 0.01-0.04 units/min"
+      - "Glucagon 1-5mg IV bolus, then 5-15 mcg/min infusion (especially if on beta-blockers)"
+      - ""
+      - "MONITORING:"
+      - "Continuous cardiac monitor, pulse oximetry"
+      - "BP q2-5min until stable, then q15min"
+      - "Consider arterial line if prolonged hypotension"
+      - ""
+      - "ADMISSION:"
+      - "ICU admission required"
+      - "Observe minimum 6-24 hours (biphasic reaction risk 4-6 hours post-resolution)"
+      - "Longer observation if:"
+      - "  - Required multiple epinephrine doses"
+      - "  - Severe reaction"
+      - "  - History of biphasic reaction"
+      - "  - On beta-blockers"
+      - "  - Unclear trigger (may have continued exposure)"
+      - ""
+      - "SPECIAL CONSIDERATIONS:"
+      - "Beta-blocker patients:"
+      - "  - May be refractory to epinephrine"
+      - "  - Give glucagon 1-5mg IV bolus (bypasses beta-receptors)"
+      - "  - Higher fluid requirements"
+      - "ACE inhibitor patients:"
+      - "  - May have more severe/prolonged angioedema"
+      - "  - Epinephrine still first-line"
+      - ""
+      - "DISCHARGE (when stable):"
+      - "Prescribe EpiPen 2-pack: 0.3mg for adults (0.15mg if <30kg)"
+      - "Train patient/family on EpiPen use"
+      - "Written anaphylaxis action plan"
+      - "Strict allergen avoidance counseling"
+      - "MedicAlert bracelet"
+      - "Allergy/immunology referral (within 1-2 weeks)"
+      - "Document trigger in medical record prominently"
+
+  - id: dx_anaphylaxis_moderate
+    type: diagnosis
+    diagnosis: "Moderate Anaphylaxis"
+    icd10: T78.2XXA
+    description: "Anaphylaxis with respiratory involvement (wheezing, dyspnea, throat tightness) or mild hypotension but stable airway and alert mental status. Requires epinephrine IM, close monitoring for progression, and observation for biphasic reaction. Can deteriorate rapidly to severe."
+    recommendations:
+      - "IMMEDIATE TREATMENT:"
+      - "1. EPINEPHRINE 1:1000 IM (anterolateral thigh):"
+      - "   - Adults: 0.3-0.5mg (0.3-0.5mL)"
+      - "   - Children: 0.01mg/kg (max 0.3mg)"
+      - "   - Repeat q5-15min if symptoms not improving or worsening"
+      - "   - Reassess after each dose"
+      - "2. Position patient supine or semi-recumbent (NOT sitting upright)"
+      - "3. High-flow O2 via nasal cannula or face mask"
+      - "4. IV access (1-2 large-bore IVs)"
+      - "5. Fluid bolus: NS 500-1000mL (adults) or 10-20mL/kg (children)"
+      - ""
+      - "ADJUNCTIVE MEDICATIONS:"
+      - "H1 antihistamine: diphenhydramine 50mg IM/IV (or 1mg/kg peds, max 50mg)"
+      - "H2 antihistamine: famotidine 20mg IV or ranitidine 50mg IV"
+      - "Corticosteroids:"
+      - "  - Methylprednisolone 60-125mg IV OR"
+      - "  - Prednisone 40-60mg PO"
+      - "  - (Does NOT help acute reaction but may prevent biphasic)"
+      - "If wheezing/bronchospasm:"
+      - "  - Albuterol 2.5-5mg nebulized"
+      - "  - Can repeat q20min × 3 if needed"
+      - "  - Consider ipratropium 0.5mg nebulized if severe bronchospasm"
+      - ""
+      - "MONITORING:"
+      - "Continuous pulse oximetry, cardiac monitor"
+      - "Vital signs q5-15min until stable, then q30min"
+      - "Reassess airway, breathing, circulation frequently"
+      - ""
+      - "RESPONSE ASSESSMENT (15 minutes after epinephrine):"
+      - "Improving: symptoms resolving, BP stable, decreased respiratory distress"
+      - "  → Continue observation, may need repeat epinephrine if recurrence"
+      - "Not improving or worsening: persistent symptoms, hypotension, increased work of breathing"
+      - "  → Repeat epinephrine immediately"
+      - "  → Consider epinephrine infusion if 3+ doses needed"
+      - "  → Upgrade to severe anaphylaxis management"
+      - ""
+      - "ADMISSION CRITERIA:"
+      - "Admit (telemetry or ICU) if:"
+      - "  - Required ≥2 doses epinephrine"
+      - "  - Slow/incomplete response"
+      - "  - History of biphasic reaction"
+      - "  - Severe asthma or cardiovascular disease"
+      - "  - On beta-blockers"
+      - "  - Remote location (difficult to access care if recurs)"
+      - "  - Evening presentation (for observation through biphasic window)"
+      - "Observation minimum 4-6 hours if rapid complete response to single epinephrine dose"
+      - "  - Extend to 8-24h if any risk factors above"
+      - ""
+      - "DISCHARGE CRITERIA (if not admitted):"
+      - "Complete resolution of symptoms × ≥4 hours"
+      - "No respiratory distress, normal vital signs"
+      - "Reliable patient with transportation"
+      - "Able to return quickly if symptoms recur"
+      - ""
+      - "DISCHARGE INSTRUCTIONS:"
+      - "EpiPen prescription: 2-pack of 0.3mg (adults) or 0.15mg (<30kg)"
+      - "Train on EpiPen use: remove cap, jab thigh at 90°, hold 3 seconds"
+      - "Use EpiPen immediately if symptoms recur, then call 911"
+      - "Avoid identified trigger strictly"
+      - "Return immediately if ANY recurrence of symptoms (biphasic reaction)"
+      - "Prednisone 60mg PO daily × 3 days (to reduce biphasic risk)"
+      - "Follow-up with allergist within 1-2 weeks"
+      - "MedicAlert bracelet"
+      - "Written anaphylaxis action plan"
+
+  - id: dx_anaphylaxis_mild
+    type: diagnosis
+    diagnosis: "Mild Anaphylaxis"
+    icd10: T78.2XXA
+    description: "Anaphylaxis criteria met (≥2 organ systems) but mild symptoms: skin involvement + GI or mild respiratory symptoms without dyspnea/wheezing. Epinephrine administration recommended even for mild cases as can progress unpredictably. Close observation required."
+    recommendations:
+      - "EPINEPHRINE CONSIDERATION:"
+      - "Epinephrine 1:1000 IM is FIRST-LINE even for mild anaphylaxis:"
+      - "  - Adults: 0.3mg (0.3mL) IM anterolateral thigh"
+      - "  - Children: 0.01mg/kg (max 0.3mg) IM"
+      - "  - Rationale: prevents progression, most effective if given early"
+      - "  - Earlier epinephrine = better outcomes, fewer biphasic reactions"
+      - "May observe without epinephrine if:"
+      - "  - Only skin + mild GI (nausea, single episode vomiting)"
+      - "  - No respiratory or cardiovascular symptoms"
+      - "  - Rapid access to epinephrine if worsens"
+      - "  - Close continuous monitoring"
+      - "BUT low threshold to give epinephrine - it's SAFER to give than withhold"
+      - ""
+      - "ADJUNCTIVE TREATMENT:"
+      - "H1 antihistamine:"
+      - "  - Diphenhydramine 25-50mg PO/IM/IV (adults)"
+      - "  - 1mg/kg PO/IM/IV (children, max 50mg)"
+      - "H2 antihistamine:"
+      - "  - Famotidine 20mg PO/IV or ranitidine 150mg PO"
+      - "Corticosteroids (may prevent biphasic reaction):"
+      - "  - Prednisone 40-60mg PO OR"
+      - "  - Methylprednisolone 40-60mg IV"
+      - ""
+      - "MONITORING:"
+      - "Observe in ED minimum 4-6 hours (biphasic reaction risk)"
+      - "Vital signs q30min"
+      - "Frequent reassessment for progression"
+      - "IV access should be established or readily available"
+      - "Epinephrine immediately available at bedside"
+      - ""
+      - "SIGNS OF PROGRESSION (give epinephrine immediately):"
+      - "Development of wheezing, dyspnea, throat tightness"
+      - "Hypotension, tachycardia, lightheadedness"
+      - "Increasing urticaria/angioedema"
+      - "Worsening GI symptoms (severe cramping, diarrhea)"
+      - ""
+      - "DISCHARGE CRITERIA:"
+      - "Minimum 4-6 hour observation without progression"
+      - "Symptoms resolved or minimal"
+      - "Stable vital signs"
+      - "Reliable patient with close follow-up"
+      - ""
+      - "DISCHARGE INSTRUCTIONS:"
+      - "EpiPen prescription: 2 auto-injectors"
+      - "  - 0.3mg (EpiPen) for adults and children >30kg"
+      - "  - 0.15mg (EpiPen Jr) for children 15-30kg"
+      - "Train patient/family on EpiPen use:"
+      - "  - Remove blue safety cap"
+      - "  - Place orange tip against outer thigh (can go through clothing)"
+      - "  - Push down hard until click, hold 3 seconds"
+      - "  - Massage injection site 10 seconds"
+      - "  - Call 911 immediately after use"
+      - "Strict avoidance of identified allergen"
+      - "Prednisone taper: 40-60mg daily × 3 days (reduce biphasic risk)"
+      - "Return immediately if:"
+      - "  - ANY recurrence of symptoms (biphasic reaction occurs 4-12h later in 5-20%)"
+      - "  - Difficulty breathing, throat tightness"
+      - "  - Dizziness, confusion, chest pain"
+      - "  - Recurrent hives or angioedema"
+      - "Allergist referral urgently (within 1-2 weeks) for:"
+      - "  - Trigger identification (skin testing, RAST)"
+      - "  - Venom immunotherapy if insect sting"
+      - "  - Consider oral immunotherapy for food allergy"
+      - "MedicAlert bracelet with allergen documented"
+      - "Written anaphylaxis emergency action plan"
+
+  - id: dx_allergic_reaction_mild
+    type: diagnosis
+    diagnosis: "Mild Allergic Reaction (NOT Anaphylaxis)"
+    icd10: T78.40XA
+    description: "Isolated skin manifestations (urticaria, angioedema, pruritus) or isolated mild GI symptoms without involvement of respiratory or cardiovascular systems. Does NOT meet anaphylaxis criteria. Treated with antihistamines. Observe for progression to anaphylaxis."
+    recommendations:
+      - "Differentiate from anaphylaxis:"
+      - "  - Anaphylaxis = skin/mucosa + respiratory OR cardiovascular OR ≥2 systems"
+      - "  - Mild allergic reaction = ONE system only (typically skin)"
+      - ""
+      - "TREATMENT:"
+      - "H1 antihistamine (first-generation preferred for acute):"
+      - "  - Diphenhydramine 25-50mg PO/IM (adults)"
+      - "  - 1mg/kg PO/IM (children, max 50mg)"
+      - "  - Onset 15-30 minutes"
+      - "  - OR cetirizine 10mg PO (less sedating but slower onset)"
+      - "H2 antihistamine (adjunctive, may improve response):"
+      - "  - Famotidine 20mg PO or ranitidine 150mg PO"
+      - "If significant angioedema or extensive urticaria:"
+      - "  - Add corticosteroid: prednisone 40-60mg PO × 3-5 days"
+      - "  - Prevents prolonged symptoms"
+      - ""
+      - "EPINEPHRINE NOT routinely indicated but:"
+      - "  - Should be immediately available"
+      - "  - Low threshold if ANY respiratory/cardiovascular symptoms develop"
+      - "  - Consider in patients with history of anaphylaxis"
+      - ""
+      - "OBSERVATION:"
+      - "Monitor in ED/clinic 1-2 hours after antihistamine"
+      - "Ensure symptoms improving, not progressing"
+      - "If progression to other organ systems → treat as anaphylaxis"
+      - ""
+      - "DISCHARGE INSTRUCTIONS:"
+      - "Continue antihistamines:"
+      - "  - Diphenhydramine 25-50mg PO q6h PRN × 24-48h"
+      - "  - OR cetirizine 10mg PO daily × 3-5 days (less sedating)"
+      - "Avoid identified trigger"
+      - "Return immediately if:"
+      - "  - Difficulty breathing, wheezing, throat tightness"
+      - "  - Swelling of tongue/throat"
+      - "  - Dizziness, fainting, chest pain"
+      - "  - Symptoms worsening despite antihistamines"
+      - "Consider EpiPen prescription if:"
+      - "  - History of anaphylaxis"
+      - "  - Known severe allergen (food, insect venom)"
+      - "  - Remote location, difficult healthcare access"
+      - "Allergist follow-up for:"
+      - "  - Recurrent reactions"
+      - "  - Unclear trigger (need testing)"
+      - "  - Severe reactions"
+      - "  - Food or insect venom allergy"
+      - ""
+      - "ALLERGEN AVOIDANCE:"
+      - "If food: read labels carefully, alert restaurants"
+      - "If medication: document allergy prominently in records"
+      - "If insect: avoid outdoor activities in peak season, wear closed-toe shoes"
+
+metadata:
+  guidelines:
+    - name: "World Allergy Organization Anaphylaxis Guidelines"
+      url: "https://www.worldallergy.org"
+      description: "International consensus on anaphylaxis diagnosis and management"
+    
+    - name: "NIAID/FAAN Anaphylaxis Guidelines"
+      url: "https://www.niaid.nih.gov"
+      description: "Evidence-based anaphylaxis diagnosis and treatment"
+  
+  key_medications:
+    - name: Epinephrine
+      dose: "0.3-0.5mg IM (1:1000) adults, 0.01mg/kg (max 0.3mg) children"
+      indication: "FIRST-LINE treatment for anaphylaxis"
+      
+    - name: Diphenhydramine
+      dose: "25-50mg PO/IV/IM"
+      indication: "H1 antihistamine, adjunct to epinephrine"
+      
+    - name: Methylprednisolone
+      dose: "60-125mg IV"
+      indication: "Prevent biphasic reaction"
+
+  red_flags:
+    - "Stridor or severe tongue/lip swelling → impending airway loss, immediate epinephrine + prepare for intubation"
+    - "Hypotension (SBP <90) → anaphylactic shock, immediate epinephrine + aggressive fluid resuscitation"
+    - "Worsening symptoms despite epinephrine → give repeated doses q5min, consider epinephrine infusion"
+    - "Patient on beta-blockers → may be refractory to epinephrine, give glucagon"
+    - "Biphasic reaction (4-12h after initial): occurs in 5-20% → all anaphylaxis patients need observation ≥4-6h"
+
+  key_concepts:
+    - "Epinephrine IM is ONLY definitive treatment - never delay for antihistamines or steroids"
+    - "IM absorption faster than subcutaneous - ALWAYS use IM route (anterolateral thigh best)"
+    - "Sitting upright during anaphylaxis can precipitate cardiac arrest (empty vena cava syndrome)"
+    - "Antihistamines and steroids are ADJUNCTS - they do NOT treat anaphylaxis, only symptoms"
+    - "Biphasic reactions occur in 5-20%, peak 4-6 hours (can be up to 72h) after initial resolution"
+    - "No absolute contraindication to epinephrine in anaphylaxis - benefit always exceeds risk"
+    - "Common triggers: food (peanuts, tree nuts, shellfish, fish), medications (penicillin, NSAIDs), insect stings (Hymenoptera)"
+    - "Tryptase level peaks 1-2h after onset, can confirm diagnosis retrospectively"
+
+citations:
+  - ACEP (American College of Emergency Physicians) Clinical Policies
+  - ENA (Emergency Nurses Association) Clinical Practice Guidelines
+  - UpToDate - Emergency Medicine

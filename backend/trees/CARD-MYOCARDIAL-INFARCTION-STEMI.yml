@@ -1,0 +1,111 @@
+tree_id: CARD-MYOCARDIAL-INFARCTION-STEMI
+name: ST-Elevation Myocardial Infarction
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Severe chest pain
+description: Complete coronary artery occlusion causing transmural myocardial ischemia with ST-segment elevation on ECG, time-sensitive emergency requiring immediate reperfusion
+
+icd10: I21.3
+snomed: 401303003
+presentations:
+  - Severe substernal chest pain: crushing, pressure-like, >20 minutes duration
+  - Radiation to left arm, jaw, neck, or back
+  - Diaphoresis, nausea, vomiting, dyspnea
+  - Sense of impending doom, anxiety
+  - May have syncope, palpitations, or cardiogenic shock
+  - Atypical in elderly/diabetics: epigastric pain, dyspnea without chest pain
+
+urgency: emergent
+
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+
+workup:
+  - Clinical presentation: severe crushing or pressure-like chest pain (substernal, may radiate to left arm, jaw, back, epigastrium), duration greater than 20 minutes, associated symptoms (dyspnea, diaphoresis, nausea, lightheadedness), not relieved by nitroglycerin
+  - Time critical: door-to-balloon (PCI) goal less than 90 minutes, door-to-needle (fibrinolysis) goal less than 30 minutes
+  - ECG diagnostic: ST-segment elevation greater than or equal to 1 mm in 2 contiguous leads (limb leads) or greater than or equal to 2 mm in 2 contiguous precordial leads, or new LBBB with clinical suspicion MI
+  - ECG localization: anterior STEMI (V1-V4, LAD occlusion), inferior STEMI (II, III, aVF, RCA or LCx occlusion), lateral STEMI (I, aVL, V5-V6, LCx occlusion), posterior STEMI (tall R waves V1-V2, ST depression V1-V3 with ST elevation posterior leads V7-V9)
+  - Right ventricular infarction: with inferior STEMI check right-sided leads (ST elevation V4R, RV infarction), requires IV fluids (preload-dependent), avoid nitrates (precipitate hypotension)
+  - Cardiac biomarkers: troponin I or T elevated (starts rising 3-4 hours, peaks 24 hours, stays elevated 7-14 days), do NOT wait for troponin to treat STEMI (ECG diagnostic, treatment emergent)
+  - Labs: CBC, CMP, lipid panel, coagulation studies (baseline before anticoagulation and fibrinolysis)
+  - Chest X-ray: assess for pulmonary edema, cardiomegaly, widened mediastinum (aortic dissection mimics MI)
+  - Echocardiogram: assess LV function (EF), wall motion abnormalities, mechanical complications (papillary muscle rupture, VSD, free wall rupture)
+
+treatment:
+  - MONA: Morphine (pain relief), Oxygen (if hypoxic SpO2 less than 90 percent, avoid hyperoxia), Nitroglycerin (0.4 mg sublingual every 5 minutes x 3 doses, then IV infusion if ongoing pain - contraindicated if RV infarction or hypotension), Aspirin (162-325 mg chewed immediately, antiplatelet)
+  - Reperfusion therapy: PCI (percutaneous coronary intervention) preferred over fibrinolysis if available within 120 minutes of first medical contact
+  - Primary PCI: emergent cardiac catheterization with stent placement, door-to-balloon goal less than 90 minutes, superior to fibrinolysis (better outcomes, less bleeding), TIMI 3 flow restoration
+  - Dual antiplatelet therapy before PCI: aspirin 162-325 mg plus P2Y12 inhibitor (ticagrelor 180 mg loading dose preferred, or clopidogrel 600 mg, or prasugrel 60 mg)
+  - Anticoagulation during PCI: unfractionated heparin IV bolus (70-100 units/kg) or bivalirudin
+  - Fibrinolysis: if PCI not available within 120 minutes, give within 30 minutes of arrival, alteplase (tPA), reteplase, or tenecteplase, most effective if given within 3 hours of symptom onset (up to 12 hours acceptable)
+  - Fibrinolysis contraindications: prior intracranial hemorrhage, ischemic stroke within 3 months, active bleeding, suspected aortic dissection, severe uncontrolled hypertension
+  - Post-fibrinolysis: transfer to PCI-capable facility, if successful reperfusion (ST segments resolve, chest pain relieved, reperfusion arrhythmias) perform angiography within 24 hours, if failed reperfusion (persistent ST elevation and pain) rescue PCI immediately
+  - Beta-blocker: oral metoprolol 25-50 mg within 24 hours (reduce mortality, prevent arrhythmias), contraindications (heart failure, hypotension, bradycardia, high-degree AV block)
+  - ACE inhibitor or ARB: start within 24 hours if no contraindications (lisinopril 5 mg daily, ramipril, especially if anterior MI, LV dysfunction, heart failure, diabetes), reduce mortality and remodeling
+  - Statin: high-intensity atorvastatin 80 mg daily (reduce mortality, stabilize plaque)
+  - Complications: cardiogenic shock (most common cause of death, hypotension, pulmonary edema, requires pressors and emergent PCI), ventricular arrhythmias (VT/VF common first 48 hours), heart block (more common with inferior MI), mechanical complications (papillary muscle rupture causing acute mitral regurgitation, ventricular septal rupture, free wall rupture with tamponade - all require emergent surgery), acute heart failure, pericarditis
+
+clinical_pearls:
+  - Severe chest pain with ST elevation on ECG time-sensitive emergency
+  - Door-to-balloon goal less than 90 minutes (PCI preferred over fibrinolysis)
+  - Aspirin 325 mg chewed immediately, dual antiplatelet therapy before PCI
+  - Anterior STEMI (V1-V4 LAD), inferior STEMI (II, III, aVF RCA)
+  - RV infarction with inferior STEMI (check V4R, give fluids, avoid nitrates)
+  - Cardiogenic shock most common cause of death
+  - Secondary prevention: aspirin, P2Y12 inhibitor x 12 months, beta-blocker, ACE inhibitor, high-intensity statin
+
+differentials:
+  - Aortic dissection (tearing pain radiating to back, pulse differential, widened mediastinum - do NOT give fibrinolysis)
+  - Pulmonary embolism (sudden dyspnea, pleuritic pain, right heart strain on ECG)
+  - Pericarditis (sharp positional chest pain, diffuse ST elevation, PR depression)
+  - Takotsubo cardiomyopathy (apical ballooning, mimics STEMI, triggered by stress)
+
+trace:
+  - 58-year-old man brought to ED by EMS with 60 minutes severe substernal chest pressure (10/10, crushing, radiating to left arm and jaw), diaphoresis, nausea, not relieved by sublingual nitroglycerin x 3 given by EMS
+  - History: hypertension, hyperlipidemia, smoker 30 pack-years, family history father MI at age 55
+  - Exam: diaphoretic, anxious, BP 148/92, HR 98, RR 20, SpO2 96 percent on room air, lungs clear, cardiac regular no murmur, no edema
+  - ECG: ST-segment elevation 3-4 mm in leads V1, V2, V3, V4 (anterior STEMI, LAD occlusion)
+  - Time: symptom onset 60 minutes ago, EMS first medical contact 30 minutes ago
+  - Immediate treatment initiated while activating catheterization lab:
+  - Aspirin 325 mg chewed
+  - Ticagrelor 180 mg loading dose (dual antiplatelet)
+  - Unfractionated heparin 5000 units IV bolus
+  - Morphine 4 mg IV (pain relief)
+  - Nitroglycerin 0.4 mg sublingual x 1 (held further doses, BP trending down)
+  - Labs sent: troponin I 0.8 ng/mL (elevated, normal less than 0.04), CK-MB elevated, CBC and CMP normal
+  - Catheterization lab activated (STEMI alert)
+  - Door-to-balloon time: 68 minutes (goal less than 90 minutes achieved)
+  - Cardiac catheterization: 100 percent occlusion proximal LAD (total thrombotic occlusion), RCA and LCx normal
+  - Primary PCI performed: aspiration thrombectomy, drug-eluting stent placed in proximal LAD, TIMI 3 flow restored (complete reperfusion)
+  - Post-PCI: chest pain resolved completely, repeat ECG shows ST segments resolving (reperfusion successful)
+  - Admitted to CCU for monitoring
+  - Medications started: aspirin 81 mg daily, ticagrelor 90 mg BID x 12 months, metoprolol 25 mg BID, lisinopril 5 mg daily, atorvastatin 80 mg daily
+  - Echocardiogram post-PCI: anterior wall hypokinesis, EF 45 percent (mildly reduced), no mechanical complications
+  - Day 2: stable, no chest pain, no arrhythmias, ambulating, cardiac rehab education started
+  - Discharge day 3: chest pain free, hemodynamically stable
+  - Discharge medications: aspirin 81 mg daily (indefinite), ticagrelor 90 mg BID x 12 months, metoprolol succinate 50 mg daily, lisinopril 10 mg daily, atorvastatin 80 mg daily
+  - Counseling: smoking cessation critical (most important intervention), cardiac rehab enrollment, medication adherence, diet and exercise
+  - Follow-up 1 week: doing well, enrolled in cardiac rehab, quit smoking (using nicotine patch), no angina
+  - Stress test at 6 weeks: negative for ischemia (good revascularization)
+  - Repeat echocardiogram 3 months: EF improved to 52 percent (reverse remodeling from ACE inhibitor and revascularization)
+  - 1 year: continues dual antiplatelet (aspirin plus ticagrelor full 12 months), no recurrent events, quit smoking sustained, optimal medical therapy, excellent functional status
+
+citations:
+  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+  - ESC (European Society of Cardiology) Clinical Practice Guidelines
+  - UpToDate - Cardiovascular Medicine

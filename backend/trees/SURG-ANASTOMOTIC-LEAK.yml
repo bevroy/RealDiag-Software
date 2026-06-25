@@ -1,0 +1,66 @@
+tree_id: SURG-ANASTOMOTIC-LEAK
+name: Anastomotic Leak
+family: Surgery
+specialty: Surgery
+icd10:
+- K91.89
+snomed:
+- 698979004
+urgency: medium
+description: Comprehensive evaluation and management of Anastomotic Leak
+version: '1.0'
+citations:
+  - ACS (American College of Surgeons) Clinical Guidelines
+  - RCS (Royal College of Surgeons) Guidelines
+  - UpToDate - General Surgery
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Postoperative fever (POD 5-7 typically)
+- Abdominal pain
+- Tachycardia and leukocytosis
+- Peritoneal signs
+- Recent GI surgery or bowel anastomosis
+- May require reoperation
+workup: []
+treatment:
+  - 'Urgent surgical consultation - high mortality if untreated'
+  - 'NPO, aggressive IV fluid resuscitation'
+  - 'Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H + vancomycin 15-20mg/kg IV Q8-12H'
+  - 'CT abdomen/pelvis with oral contrast - diagnostic test'
+  - 'Drain intra-abdominal collections percutaneously if possible'
+  - 'Operative management for peritonitis or septic shock - washout, diversion (colostomy/ileostomy), drain placement'
+  - 'ICU care - sepsis management, vasopressor support'
+  - 'TPN (total parenteral nutrition) - bowel rest during healing'
+  - 'Endoscopic approaches for selected leaks - stent placement, clips, vacuum therapy'
+  - 'Second-look operation in 24-48 hours if unstable'
+  - 'Mortality 10-30% depending on location and timing'
+clinical_pearls: []
+referrals:
+  emergency:
+    - Acute abdomen
+    - Peritonitis
+    - Perforated viscus
+    - Ruptured AAA
+    - Necrotizing fasciitis
+  urgent:
+    - Suspected malignancy
+    - Bowel obstruction
+    - Incarcerated hernia
+    - Acute cholecystitis
+  routine:
+    - Elective hernia repair
+    - Gallstones without cholecystitis
+    - Benign masses
+    - Screening abnormalities
+differentials:
+  - Postop ileus
+  - Abscess
+  - Perforation
+  - Wound infection
+  - Fistula
+trace:
+  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
+    and Endoscopic Surgeons (SAGES)
+  version: 0.1.0
+  last_updated: '2024-12-26'

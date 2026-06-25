@@ -1,0 +1,472 @@
+tree_id: GENERAL-EDEMA
+name: Edema Evaluation
+family: General Medicine
+specialty: Internal Medicine/Primary Care
+icd10: R60.9
+snomed: 267038008
+presentations:
+  - Swelling of extremities, face, or trunk
+  - Pitting or non-pitting
+  - Bilateral or unilateral
+  - Onset (acute vs chronic)
+  - Associated dyspnea, orthopnea
+  - Ascites, pleural effusions
+chief_complaint: Swelling
+description: Diagnostic decision tree for edema evaluation
+version: "1.0"
+differentials:
+  - Heart failure
+  - Liver disease
+  - Kidney disease
+  - Venous insufficiency
+  - Medication effect
+citations:
+  - AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
+  - USPSTF (U.S. Preventive Services Task Force) Recommendations
+  - UpToDate - Primary Care Medicine
+author: RealDiag Team
+
+treatment:
+  - 'Treat underlying cause - heart failure, CKD, cirrhosis, venous insufficiency, medications'
+  - 'Leg elevation - above heart level, 30 minutes TID-QID'
+  - 'Compression stockings - 20-30 mmHg for venous insufficiency'
+  - 'Diuretics if volume overload - furosemide 20-40mg daily, increase as needed'
+  - 'Heart failure: ACE inhibitor + beta-blocker + diuretic, consider spironolactone'
+  - 'Cirrhosis with ascites: Spironolactone 100mg + furosemide 40mg, salt restriction <2g/day'
+  - 'Nephrotic syndrome: Treat underlying kidney disease, diuretics, ACE inhibitor'
+  - 'Medications causing edema - stop if possible (CCBs switch to non-DHP, NSAIDs discontinue)'
+  - 'DVT: Anticoagulation (see PE protocol)'
+  - 'Lymphedema: Manual lymphatic drainage, compression, pneumatic compression device'
+  - 'Monitor weight daily - 2-3 lbs/week safe fluid removal rate'
+  - 'Restrict sodium <2-3g/day'
+
+entry_point: distribution
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+clinical_pearls:
+  - Bilateral edema suggests systemic cause; unilateral suggests local
+  - Dependent edema improves with elevation; lymphedema does not
+  - Pitting vs non-pitting helps narrow differential
+  - Albumin <3 suggests protein-losing process
+
+nodes:
+  - id: distribution
+    type: question
+    text: "Distribution of edema?"
+    options:
+      - label: "Bilateral lower extremity"
+        next: bilateral_le
+      - label: "Unilateral lower extremity"
+        next: unilateral_le
+      - label: "Generalized (anasarca)"
+        next: generalized
+      - label: "Facial/periorbital"
+        next: facial
+      - label: "Upper extremity"
+        next: upper_extremity
+
+  - id: bilateral_le
+    type: question
+    text: "Associated symptoms?"
+    options:
+      - label: "Dyspnea, orthopnea, JVD"
+        next: heart_failure
+      - label: "Ascites, jaundice"
+        next: cirrhosis
+      - label: "Foamy urine, proteinuria"
+        next: nephrotic_syndrome
+      - label: "Medications (CCB, NSAIDs)"
+        next: medication_edema
+      - label: "None, symmetrical pitting"
+        next: venous_insufficiency
+
+  - id: heart_failure
+    type: diagnosis
+    diagnosis: Heart Failure
+    icd10: I50.9
+    urgency: high
+    workup:
+      - BNP/NT-proBNP
+      - CXR
+      - Echocardiogram
+      - ECG
+      - BMP, creatinine
+    treatment:
+      - Diuretics (furosemide 20-80mg PO/IV)
+      - ACE-I/ARB
+      - Beta-blocker
+      - Sodium restriction
+      - Daily weights
+      - Cardiology referral
+
+  - id: cirrhosis
+    type: diagnosis
+    diagnosis: Cirrhosis with Ascites
+    icd10: K70.31
+    urgency: high
+    workup:
+      - Liver function tests
+      - Albumin
+      - Abdominal ultrasound with Doppler
+      - Paracentesis if new ascites
+      - Rule out spontaneous bacterial peritonitis
+    treatment:
+      - Diuretics (spironolactone + furosemide)
+      - Sodium restriction (<2g/day)
+      - Paracentesis if tense
+      - Hepatology referral
+      - Evaluate for liver transplant
+
+  - id: nephrotic_syndrome
+    type: diagnosis
+    diagnosis: Nephrotic Syndrome
+    icd10: N04.9
+    urgency: high
+    workup:
+      - Urinalysis (proteinuria >3.5g/24hr)
+      - 24-hour urine protein
+      - Serum albumin
+      - Lipid panel
+      - BMP, creatinine
+      - Renal ultrasound
+      - Consider renal biopsy
+    treatment:
+      - Diuretics
+      - ACE-I/ARB
+      - Statin
+      - Treat underlying cause
+      - Nephrology referral
+      - Anticoagulation if severe
+
+  - id: medication_edema
+    type: diagnosis
+    diagnosis: Medication-Induced Edema
+    icd10: T46.1X5A
+    urgency: low
+    workup:
+      - Medication review
+      - BMP, creatinine
+      - Urinalysis
+    treatment:
+      - Discontinue or reduce offending medication
+      - Consider alternative (switch amlodipine to ACE-I/ARB)
+      - Compression stockings
+      - Leg elevation
+      - May require low-dose diuretic
+
+  - id: venous_insufficiency
+    type: diagnosis
+    diagnosis: Chronic Venous Insufficiency
+    icd10: I87.2
+    urgency: low
+    workup:
+      - Venous duplex ultrasound
+      - Check for varicose veins, skin changes
+    treatment:
+      - Compression stockings (20-30 mmHg)
+      - Leg elevation
+      - Exercise
+      - Weight loss if obese
+      - Avoid prolonged standing
+      - Consider vein ablation/stripping if severe
+
+  - id: unilateral_le
+    type: question
+    text: "Clinical presentation?"
+    options:
+      - label: "Sudden onset, painful, warmth, erythema"
+        next: dvt_suspected
+      - label: "Erythema, warmth, fever, skin changes"
+        next: cellulitis_check
+      - label: "Post-surgery or trauma"
+        next: post_procedure_edema
+      - label: "Chronic, painless"
+        next: lymphedema
+
+  - id: dvt_suspected
+    type: question
+    text: "Wells score for DVT?"
+    options:
+      - label: "High probability (≥3 points)"
+        next: dvt
+      - label: "Low-moderate probability (<3 points)"
+        next: dvt_rule_out
+
+  - id: dvt
+    type: diagnosis
+    diagnosis: Deep Vein Thrombosis
+    icd10: I82.40
+    urgency: high
+    workup:
+      - Venous duplex ultrasound (compression)
+      - D-dimer if low probability
+      - CBC, PT/INR, aPTT
+      - Rule out PE (chest pain, dyspnea)
+    treatment:
+      - Anticoagulation (rivaroxaban, apixaban, or enoxaparin + warfarin)
+      - Leg elevation
+      - Ambulation as tolerated
+      - Compression stockings after acute phase
+      - Evaluate for thrombophilia if unprovoked
+
+  - id: dvt_rule_out
+    type: diagnosis
+    diagnosis: DVT Ruled Out
+    icd10: R22.41
+    urgency: low
+    workup:
+      - D-dimer
+      - Ultrasound if D-dimer positive
+    treatment:
+      - Reassurance if negative
+      - Symptomatic care
+      - Consider alternative diagnoses
+
+  - id: cellulitis_check
+    type: diagnosis
+    diagnosis: Cellulitis
+    icd10: L03.115
+    urgency: medium
+    workup:
+      - Clinical diagnosis
+      - Blood cultures if systemically ill
+      - CBC if severe
+    treatment:
+      - Cephalexin 500mg QID OR dicloxacillin 500mg QID
+      - Clindamycin if penicillin allergic
+      - Leg elevation
+      - Mark borders
+      - Admit if severe or immunocompromised
+
+  - id: post_procedure_edema
+    type: diagnosis
+    diagnosis: Post-Surgical/Post-Traumatic Edema
+    icd10: T81.9XXA
+    urgency: low
+    workup:
+      - Rule out DVT if high suspicion
+      - Assess wound healing
+    treatment:
+      - Elevation
+      - Compression
+      - Physical therapy
+      - NSAIDs
+      - Should resolve over weeks
+
+  - id: lymphedema
+    type: diagnosis
+    diagnosis: Lymphedema
+    icd10: I89.0
+    urgency: low
+    workup:
+      - Clinical diagnosis
+      - History of surgery, radiation, infection
+      - Consider imaging if unclear
+    treatment:
+      - Complete decongestive therapy
+      - Compression garments
+      - Manual lymphatic drainage
+      - Skin care to prevent infection
+      - Referral to lymphedema specialist
+
+  - id: generalized
+    type: question
+    text: "Severity and associated findings?"
+    options:
+      - label: "Dyspnea, orthopnea"
+        next: severe_heart_failure
+      - label: "Ascites, jaundice"
+        next: cirrhosis_anasarca
+      - label: "Hypoalbuminemia, proteinuria"
+        next: nephrotic_anasarca
+      - label: "Malnutrition, weight loss"
+        next: kwashiorkor
+
+  - id: severe_heart_failure
+    type: diagnosis
+    diagnosis: Severe Decompensated Heart Failure
+    icd10: I50.9
+    urgency: critical
+    workup:
+      - BNP
+      - CXR
+      - Echocardiogram
+      - BMP
+    treatment:
+      - Hospital admission
+      - IV diuretics
+      - ACE-I/ARB
+      - Monitor I/O
+      - Daily weights
+      - Cardiology consult
+
+  - id: cirrhosis_anasarca
+    type: diagnosis
+    diagnosis: Cirrhosis with Anasarca
+    icd10: K74.60
+    urgency: high
+    workup:
+      - LFTs, albumin
+      - Abdominal imaging
+      - Paracentesis
+    treatment:
+      - Diuretics
+      - Sodium restriction
+      - Albumin infusions if severe
+      - Hepatology referral
+      - Transplant evaluation
+
+  - id: nephrotic_anasarca
+    type: diagnosis
+    diagnosis: Severe Nephrotic Syndrome
+    icd10: N04.9
+    urgency: high
+    workup:
+      - 24-hour urine protein
+      - Albumin
+      - Lipids
+      - Renal biopsy
+    treatment:
+      - High-dose diuretics
+      - Albumin infusions
+      - Nephrology referral
+      - Consider immunosuppression
+
+  - id: kwashiorkor
+    type: diagnosis
+    diagnosis: Protein-Energy Malnutrition
+    icd10: E40
+    urgency: high
+    workup:
+      - Albumin, prealbumin
+      - CBC
+      - Nutritional assessment
+    treatment:
+      - Nutritional rehabilitation
+      - High-protein diet
+      - Vitamin supplementation
+      - Treat underlying cause
+      - Nutrition consult
+
+  - id: facial
+    type: question
+    text: "Acute vs chronic?"
+    options:
+      - label: "Acute with airway compromise"
+        next: angioedema
+      - label: "Acute without airway symptoms"
+        next: allergic_reaction
+      - label: "Chronic, worse in morning"
+        next: facial_chronic
+
+  - id: angioedema
+    type: diagnosis
+    diagnosis: Angioedema
+    icd10: T78.3XXA
+    urgency: critical
+    workup:
+      - Airway assessment
+      - Identify trigger
+    treatment:
+      - Epinephrine 0.3mg IM if airway compromise
+      - IV antihistamines
+      - IV steroids
+      - Secure airway if needed
+      - Discontinue ACE-I if causative
+      - FFP or C1-inhibitor for hereditary angioedema
+
+  - id: allergic_reaction
+    type: diagnosis
+    diagnosis: Allergic Reaction
+    icd10: T78.40XA
+    urgency: medium
+    workup:
+      - Identify allergen
+    treatment:
+      - Antihistamines
+      - Steroids if severe
+      - Avoid allergen
+      - Epinephrine if anaphylaxis
+
+  - id: facial_chronic
+    type: diagnosis
+    diagnosis: Chronic Facial Edema
+    icd10: R22.0
+    urgency: low
+    workup:
+      - TSH (hypothyroidism)
+      - Sleep study (OSA)
+      - Imaging if concern for mass
+    treatment:
+      - Treat underlying cause
+      - Elevate head of bed
+      - Reduce sodium intake
+
+  - id: upper_extremity
+    type: question
+    text: "Unilateral or bilateral?"
+    options:
+      - label: "Unilateral, post-mastectomy"
+        next: lymphedema_upper
+      - label: "Unilateral, painful with cyanosis"
+        next: upper_extremity_dvt
+      - label: "Bilateral"
+        next: superior_vena_cava
+
+  - id: lymphedema_upper
+    type: diagnosis
+    diagnosis: Upper Extremity Lymphedema
+    icd10: I97.2
+    urgency: low
+    workup:
+      - Clinical diagnosis
+    treatment:
+      - Compression sleeve
+      - Manual lymphatic drainage
+      - Complete decongestive therapy
+      - Lymphedema specialist referral
+
+  - id: upper_extremity_dvt
+    type: diagnosis
+    diagnosis: Upper Extremity DVT
+    icd10: I82.60
+    urgency: high
+    workup:
+      - Venous duplex ultrasound
+      - D-dimer
+    treatment:
+      - Anticoagulation
+      - Remove catheter if present
+      - Arm elevation
+      - Consider thoracic outlet if recurrent
+
+  - id: superior_vena_cava
+    type: diagnosis
+    diagnosis: Superior Vena Cava Syndrome
+    icd10: I87.1
+    urgency: high
+    workup:
+      - CT chest with contrast
+      - Evaluate for malignancy
+    treatment:
+      - Oncology referral
+      - Radiation or chemotherapy
+      - Stenting if severe
+      - Treat underlying malignancy

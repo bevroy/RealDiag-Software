@@ -1,0 +1,117 @@
+tree_id: CARDS-MYOCARDITIS
+name: Myocarditis
+family: Cardiology
+specialty: Cardiology
+chief_complaint: Chest pain and shortness of breath after viral illness
+description: Inflammatory disease of myocardium causing chest pain, heart failure, and arrhythmias, most commonly viral. Elevated troponin with wall motion abnormalities on echo but normal coronaries. Supportive care for most, immunosuppression for giant cell or autoimmune myocarditis, high mortality if fulminant.
+icd10: I40.9
+snomed: 50920009
+presentations:
+  - Chest pain (often pleuritic)
+  - Dyspnea, fatigue
+  - Palpitations, arrhythmias
+  - Recent viral illness (URI, GI symptoms)
+  - May present with acute heart failure
+  - Fulminant myocarditis: cardiogenic shock, arrhythmias
+urgency: emergent
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical presentation spectrum: asymptomatic to cardiogenic shock
+  - Typical: young patient with acute chest pain and dyspnea 1-2 weeks after viral illness
+  - Viral prodrome: URI symptoms, GI symptoms, fever (50-80%)
+  - Chest pain: mimics acute coronary syndrome (troponin elevated)
+  - Heart failure: dyspnea, orthopnea, pulmonary edema, reduced EF
+  - Arrhythmias: palpitations, syncope, sudden cardiac death (ventricular arrhythmias or heart block)
+  - Fulminant myocarditis: cardiogenic shock, severe LV dysfunction, requires inotropes/mechanical support
+  - Troponin: elevated (myocardial injury), may be very high mimicking STEMI
+  - BNP: elevated (reflects heart failure)
+  - Inflammatory markers: ESR and CRP elevated
+  - ECG: nonspecific ST-T changes, ST elevations (can mimic STEMI or pericarditis), PR depressions, AV blocks, ventricular arrhythmias
+  - Echocardiogram:
+  - Wall motion abnormalities: hypokinesis or akinesis (may be global or regional)
+  - Reduced LV systolic function: EF may be severely reduced (below 30-40% in fulminant)
+  - LV dilation (if subacute or chronic)
+  - Pericardial effusion (if myopericarditis)
+  - Coronary angiography: normal coronaries (distinguishes from ACS despite elevated troponin)
+  - Essential if chest pain and ST elevations (rule out STEMI)
+  - Cardiac MRI (diagnostic test of choice):
+  - Late gadolinium enhancement: mid-wall or epicardial pattern (vs subendocardial in MI)
+  - T2 signal: myocardial edema (acute inflammation)
+  - Lake Louise criteria for myocarditis diagnosis
+  - Endomyocardial biopsy (gold standard but rarely done):
+  - Invasive, low sensitivity (sampling error), complications
+  - Reserved for: unexplained new heart failure, heart block, ventricular arrhythmias, no improvement with supportive care
+  - Dallas criteria: lymphocytic infiltrate with myocyte necrosis
+  - Viral PCR: identify virus (coxsackievirus, adenovirus, parvovirus B19, HHV-6, CMV, EBV, influenza)
+  - Giant cell myocarditis: biopsy shows multinucleated giant cells, worse prognosis, requires immunosuppression
+  - Causes:
+  - Viral (most common): coxsackievirus B, adenovirus, parvovirus B19, HHV-6, influenza, COVID-19
+  - Autoimmune: SLE, sarcoidosis, giant cell myocarditis, eosinophilic myocarditis
+  - Toxic: cocaine, amphetamines, chemotherapy (anthracyclines), checkpoint inhibitors (pembrolizumab)
+  - Hypersensitivity: penicillin, sulfonamides, clozapine
+
+treatment:
+  - Supportive care (most cases):
+  - Heart failure management: diuretics (furosemide), ACE inhibitors, beta blockers (once stable)
+  - Avoid NSAIDs: may worsen myocardial inflammation
+  - Activity restriction: strict bed rest, no exercise until inflammation resolves (x3-6 months)
+  - Athletes: no competitive sports x6 months minimum
+  - Arrhythmia management: monitor telemetry, antiarrhythmics if VT, temporary pacemaker if high-degree AV block
+  - Fulminant myocarditis (cardiogenic shock):
+  - ICU admission, inotropes (dobutamine, milrinone)
+  - Mechanical circulatory support: IABP, Impella, ECMO if refractory shock
+  - Bridge to recovery (most recover) or transplant
+  - Immunosuppression (specific scenarios only):
+  - Giant cell myocarditis: corticosteroids plus azathioprine or cyclosporine (improves survival)
+  - Cardiac sarcoidosis: corticosteroids
+  - Eosinophilic myocarditis: corticosteroids
+  - Do NOT use immunosuppression for routine viral myocarditis (no benefit, may worsen)
+  - IVIG: no proven benefit for routine myocarditis
+  - ICD: if persistent LV dysfunction (EF below 35%) x40 days despite optimal medical therapy
+  - Prognosis:
+  - Acute lymphocytic: 50% complete recovery, 25% chronic DCM, 25% progressive heart failure
+  - Fulminant: paradoxically better long-term prognosis if survive acute phase (90% full recovery)
+  - Giant cell: poor prognosis without immunosuppression, high risk of VT and death
+
+clinical_pearls:
+  - Chest pain and heart failure after viral illness in young patient
+  - Elevated troponin with wall motion abnormalities but normal coronaries
+  - Cardiac MRI diagnostic (mid-wall late gadolinium enhancement)
+  - Supportive care for most viral myocarditis (ACE inhibitors, beta blockers, diuretics)
+  - Avoid NSAIDs (worsen inflammation) and exercise (x3-6 months)
+  - Immunosuppression only for giant cell, sarcoid, or eosinophilic (NOT routine viral)
+  - Fulminant myocarditis requires mechanical support but better long-term prognosis if survives
+  - Endomyocardial biopsy rarely needed (low sensitivity)
+
+differentials:
+  - Acute coronary syndrome: elevated troponin and chest pain but coronary occlusion on angiography
+  - Acute pericarditis: chest pain and elevated troponin but normal LV function, no wall motion abnormalities
+  - Stress cardiomyopathy (Takotsubo): apical ballooning, mimics MI, postmenopausal women, emotional stress
+  - Dilated cardiomyopathy: heart failure but gradual onset, no viral prodrome
+  - Pulmonary embolism: dyspnea, elevated troponin, RV strain not LV
+
+trace: |
+  A 28-year-old previously healthy man presented with 2 days of chest pain and dyspnea. One week ago had flu-like illness with fever, myalgias, cough (viral prodrome). Chest pain substernal, constant, not positional. Progressive dyspnea, orthopnea, PND. Exam: BP 102/68, HR 118, RR 24, rales bilateral bases, elevated JVP, S3 gallop. ECG: sinus tachycardia, diffuse ST elevations in V2-V6 and II, III, aVF (mimics STEMI). Troponin I 8.5 ng/mL (markedly elevated - over 100 times upper limit), BNP 1200, WBC 12500, ESR 55, CRP 48. Emergent cardiac catheterization: normal coronary arteries (no obstructive CAD - ruled out STEMI despite elevated troponin and ST elevations). Echocardiogram: globally reduced LV systolic function (EF 30%), diffuse hypokinesis, no regional wall motion abnormality, mild pericardial effusion. Diagnosed with acute myocarditis (clinical presentation: chest pain and heart failure after viral illness, elevated troponin, wall motion abnormalities, normal coronaries). Admitted to CCU. Cardiac MRI: diffuse mid-wall and epicardial late gadolinium enhancement (classic myocarditis pattern vs subendocardial in MI), T2 signal increased (myocardial edema confirming acute inflammation), confirmed myocarditis. Viral serologies: acute coxsackievirus B infection (IgM positive). Started heart failure management: furosemide 40 mg IV BID for pulmonary edema, lisinopril 5 mg daily, carvedilol held initially due to low BP and decompensated state. Strict bed rest, no NSAIDs (worsen myocardial inflammation). Telemetry monitoring: brief runs of non-sustained VT managed with amiodarone loading. At 3 days diuresed 8 pounds, dyspnea improved, BP stable 115/70. Started low-dose carvedilol 3.125 mg BID. At 1 week troponin downtrended to 0.8, BNP 400, moved to step-down unit. At 2 weeks repeat echo: EF improved to 45% (improving), discharged on lisinopril, carvedilol, furosemide. Strict activity restriction x6 months (no exercise - risk of arrhythmias and sudden death during active inflammation). At 6 weeks echo: EF 55% (normalized), cardiac MRI: resolved edema, persistent mild late gadolinium enhancement. At 3 months EF 60%, tolerated gradual return to light exercise. At 6 months EF 60%, full recovery, released to full activities. No ICD needed (EF recovered). Annual echo monitoring. Counseled on excellent prognosis for acute viral myocarditis with supportive care (50% full recovery).
+
+citations:
+  - Clinical Practice Guidelines from relevant medical specialty societies
+  - UpToDate Clinical Reference
+  - Evidence-based medical literature

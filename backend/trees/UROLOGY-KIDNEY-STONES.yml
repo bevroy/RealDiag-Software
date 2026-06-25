@@ -1,0 +1,101 @@
+tree_id: UROLOGY-KIDNEY-STONES
+name: Kidney Stones (Nephrolithiasis)
+family: Urology
+specialty: Urology
+chief_complaint: Severe flank pain and hematuria
+description: |
+  Formation of crystals in urinary tract causing obstruction and pain. Lifetime risk 10-15%, recurrence 50% within 5-10 years. Stone types - calcium oxalate (75%), calcium phosphate (10%), uric acid (10%), struvite (infection, 5%), cystine (rare, genetic).
+  Risk factors include dehydration, high sodium diet, high animal protein, obesity, family history. Severe renal colic classic presentation.
+icd10: N20.0
+snomed: 95570007
+presentations:
+  - Acute severe flank pain (colicky)
+  - Pain radiating to groin
+  - Hematuria (gross or microscopic)
+  - Nausea, vomiting
+  - Restlessness (cannot find comfortable position)
+  - Dysuria if stone in distal ureter
+urgency: High
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical presentation - sudden onset severe unilateral flank pain radiating to groin, restless (cannot find comfortable position)
+  - Renal colic paroxysmal, waves of pain as stone moves through ureter
+  - Associated nausea, vomiting, hematuria (gross or microscopic)
+  - CVA tenderness on exam
+  - Urinalysis - hematuria (90%), pH (alkaline suggests struvite, acidic suggests uric acid), crystals, bacteria (if infection)
+  - Absence of hematuria does not rule out stone (10% have no blood in urine)
+  - Urine culture if concern for infection (pyuria, fever) - infected obstructed kidney is emergency
+  - BUN, creatinine - assess renal function
+  - Non-contrast CT abdomen/pelvis (CT KUB) - gold standard (98% sensitivity), shows stone size, location, degree of obstruction, hydronephrosis
+  - Measure stone in longest axis - less than 5 mm likely to pass spontaneously (90%), 5-10 mm (50%), greater than 10 mm (10%)
+  - Proximal ureteral stones less likely to pass than distal
+  - Renal ultrasound alternative if pregnancy or want to avoid radiation - detects hydronephrosis but less sensitive for stones
+  - KUB (plain abdominal X-ray) - only sees radiopaque stones (calcium), misses uric acid and cystine
+  - 24-hour urine collection for stone analysis after acute episode - volume, calcium, oxalate, uric acid, citrate, pH, cystine
+  - Analyze stone if passed or retrieved - guides prevention
+treatment:
+  - Acute pain management - NSAIDs superior to opioids for renal colic
+  - Ketorolac 30mg IV or 10mg PO q6h (most effective) or ibuprofen 800mg PO q8h
+  - Morphine 4-10mg IV or hydromorphone 0.5-2mg IV if inadequate response or NSAID contraindicated
+  - Antiemetics - ondansetron 4-8mg IV/PO, metoclopramide 10mg IV
+  - Hydration - oral fluids if tolerating, IV fluids if vomiting (normal saline, avoid excessive fluids if obstructed)
+  - Medical expulsive therapy (MET) - alpha-blocker facilitates stone passage
+  - Tamsulosin 0.4mg daily until stone passes (relaxes distal ureter)
+  - Most beneficial for distal ureteral stones 5-10 mm
+  - Observation and outpatient management if stone less than 10 mm, pain controlled, no infection, solitary kidney, or renal insufficiency
+  - Strain urine to capture stone for analysis
+  - Follow-up in 1-2 weeks, repeat imaging if not passed by 4-6 weeks
+  - Urgent urology consultation and intervention if infected obstructed kidney (urosepsis risk), acute kidney injury, bilateral obstruction, solitary kidney, intractable pain/vomiting
+  - Percutaneous nephrostomy tube or ureteral stent to relieve obstruction
+  - Definitive stone removal - shock wave lithotripsy (SWL), ureteroscopy with laser lithotripsy, percutaneous nephrolithotomy (PCNL)
+  - SWL for stones less than 2 cm in kidney or proximal ureter (non-invasive but may need repeat treatment)
+  - Ureteroscopy for ureteral stones or renal stones less than 2 cm (more invasive but higher success)
+  - PCNL for large renal stones greater than 2 cm or staghorn calculi (invasive)
+  - Prevention - cornerstone is increased fluid intake
+  - Drink 2-3 liters daily to achieve urine output greater than 2 liters (urine specific gravity less than 1.010)
+  - Reduce sodium (less than 2300 mg daily) - high sodium increases urinary calcium
+  - Moderate animal protein (decrease oxalate precursors)
+  - Calcium oxalate stones - normal dietary calcium (do NOT restrict, increases oxalate absorption), reduce oxalate (spinach, nuts, chocolate, tea), potassium citrate 10-20 mEq BID-TID raises urine pH and binds calcium
+  - Uric acid stones - alkalinize urine with potassium citrate (target pH 6.5-7), allopurinol 100-300mg daily if hyperuricosuria
+  - Struvite stones - treat underlying UTI, consider surgical removal (medical therapy ineffective)
+  - Cystine stones - high fluid intake, alkalinize urine (pH greater than 7.5), tiopronin or penicillamine
+  - Thiazide diuretics (hydrochlorothiazide 25-50mg daily) if hypercalciuria despite dietary modification
+clinical_pearls:
+  - Renal colic often described as worst pain of life, patient writhing in pain (vs peritonitis where patient lies still)
+  - Staghorn calculus (fills renal pelvis and calyces) usually struvite from chronic UTI with urease-producing bacteria (Proteus)
+  - Uric acid stones radiolucent on X-ray but visible on CT
+  - Hypercalciuria most common metabolic abnormality in stone formers
+  - Primary hyperparathyroidism if elevated calcium and PTH - causes calcium stones
+  - Pregnancy with kidney stone - ultrasound preferred, ureteroscopy safe if intervention needed
+  - Most stones (80%) pass spontaneously within 4 weeks
+differentials:
+  - Pyelonephritis
+  - Appendicitis
+  - Ovarian torsion or cyst
+  - Ectopic pregnancy
+  - Abdominal aortic aneurysm
+  - Musculoskeletal pain
+trace:
+  - 42-year-old man with sudden onset severe right flank pain radiating to groin x 4 hours → Restless, cannot find comfortable position → Nausea, vomiting → Exam shows right CVA tenderness → Urinalysis shows 50-100 RBCs/hpf, pH 6.0, no bacteria → Non-contrast CT shows 6 mm right distal ureteral stone with mild hydronephrosis, no other stones → Creatinine normal → Ketorolac 30mg IV provides significant pain relief → Ondansetron 4mg IV for nausea → Symptoms improve, tolerating oral fluids → Discharge home with ibuprofen 800mg q8h, tamsulosin 0.4mg daily → Strain urine, increase fluid intake to 3 liters daily → Stone passes spontaneously after 10 days → Stone analysis shows calcium oxalate → 24-hour urine shows hypercalciuria 380 mg/day (high), low citrate → Dietary counseling - limit sodium, normal calcium, reduce animal protein → Start potassium citrate 10 mEq BID → No recurrence at 1-year follow-up
+
+citations:
+  - AUA (American Urological Association) Clinical Guidelines
+  - EAU (European Association of Urology) Guidelines
+  - UpToDate - Urology

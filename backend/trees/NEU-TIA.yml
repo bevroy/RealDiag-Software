@@ -1,0 +1,72 @@
+tree_id: NEU-TIA
+name: Transient ischemic attack (TIA)
+family: Neurology
+specialty: Neurology
+icd10:
+- G45.9
+snomed:
+- '266257000'
+urgency: medium
+description: Comprehensive evaluation and management of Transient ischemic attack
+  (TIA)
+version: '1.0'
+citations:
+  - AAN (American Academy of Neurology) Clinical Practice Guidelines
+  - EAN (European Academy of Neurology) Guidelines
+  - UpToDate - Neurology
+author: RealDiag Clinical Team
+homeopathy: []
+presentations:
+- Transient focal neurological symptoms (typically <1 hour duration)
+- Complete resolution within 24 hours (by definition)
+- No acute infarction on DWI MRI (tissue-based definition)
+- 'Same symptoms as stroke: weakness, aphasia, visual loss, ataxia'
+- 'High early stroke risk: ABCD2 score predicts 2-day stroke risk'
+- 'Crescendo TIAs (multiple in 24 hours): Very high risk, urgent evaluation'
+workup: []
+treatment: []
+clinical_pearls:
+- 'ABCD2 score: Age, BP, Clinical features, Duration, Diabetes (0-7 points)'
+- 'High risk (ABCD2 ≥4): 4% stroke risk at 2 days, admit for workup'
+- 'Urgent workup: Carotid imaging (US or CTA), echocardiogram, telemetry'
+- Dual antiplatelet therapy (aspirin + clopidogrel) for 21 days reduces stroke risk
+- '50-99% carotid stenosis: Consider urgent CEA/CAS within 2 weeks'
+treatment:
+  - 'Urgent evaluation: Admit high-risk patients (ABCD2 ≥4, crescendo TIAs, symptomatic carotid stenosis)'
+  - Dual antiplatelet therapy (DAPT) - aspirin 50-325mg + clopidogrel 75mg daily x21 days, then aspirin alone (POINT and CHANCE trials)
+  - Alternative if DAPT contraindicated - aspirin 81-325mg daily alone OR clopidogrel 75mg daily alone
+  - 'High-grade carotid stenosis (70-99% symptomatic): Urgent CEA or CAS within 2 weeks of TIA (reduces stroke risk from 26% to 9%)'
+  - 'Moderate carotid stenosis (50-69% symptomatic): CEA reasonable in selected patients (men, recent symptoms)'
+  - High-intensity statin - atorvastatin 80mg or rosuvastatin 20-40mg daily (reduces stroke risk regardless of LDL)
+  - Blood pressure control - target <140/90 (SPRINT trial suggests <120/80 may be better for stroke prevention)
+  - Anticoagulation if atrial fibrillation detected - apixaban 5mg BID, rivaroxaban 20mg daily, or warfarin (INR 2-3)
+  - Risk factor modification - smoking cessation, diabetes control (HbA1c <7%), weight loss, exercise
+  - Address underlying etiology - carotid revascularization, PFO closure if indicated (age <60, large shunt), cardioembolic source treatment
+  - Follow-up imaging at 3-6 months to assess for progression of stenosis or new lesions
+  - Avoid antihypertensives in acute phase (first 24-48 hours) unless BP >220/120 - may worsen ischemia
+referrals:
+  emergency:
+    - Acute stroke
+    - Status epilepticus
+    - SAH
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New seizure
+    - Progressive deficit
+    - Suspected MS
+  routine:
+    - Headache
+    - Seizure follow-up
+    - Tremor
+differentials:
+  - Stroke
+  - Migraine with aura
+  - Seizure
+  - Syncope
+  - Hypoglycemia
+trace:
+  source: American Academy of Neurology (AAN) Practice Guidelines, American Stroke
+    Association (ASA) Guidelines
+  version: 0.1.0
+  last_updated: '2024-12-26'

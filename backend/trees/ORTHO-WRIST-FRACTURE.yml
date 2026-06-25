@@ -1,0 +1,69 @@
+tree_id: ORTHO-WRIST-FRACTURE
+name: Wrist Fracture (Suspected/Confirmed)
+family: orthopedics
+specialty: Orthopedics, Emergency Medicine
+chief_complaint: Wrist pain after fall or injury
+description: |
+  Wrist fracture most commonly involves distal radius (Colles fracture) or scaphoid bone.
+  High index of suspicion needed for scaphoid fracture which may not show on initial X-rays.
+icd10: S62.109A
+snomed: "263204007"
+presentations:
+  - Wrist pain and swelling after fall on outstretched hand (FOOSH)
+  - Tenderness over distal radius or anatomic snuffbox (scaphoid)
+  - Decreased range of motion
+  - Deformity if displaced (Colles - dinner fork deformity)
+  - Inability to bear weight on hand
+urgency: High
+referrals:
+  orthopedics:
+    - Displaced fractures
+    - Intra-articular fractures
+    - Scaphoid fractures
+    - Unstable fractures requiring surgical fixation
+  emergency:
+    - Open fracture
+    - Neurovascular compromise
+workup:
+  - Mechanism of injury - fall on outstretched hand most common
+  - Physical exam - point tenderness, swelling, deformity, range of motion
+  - Anatomic snuffbox tenderness suggests scaphoid fracture
+  - Neurovascular exam - radial pulse, capillary refill, median nerve function
+  - X-rays - PA, lateral, and oblique views of wrist
+  - Scaphoid views if snuffbox tenderness
+  - MRI or CT if high suspicion for scaphoid fracture with negative initial X-rays
+treatment:
+  emergency_management:
+    - Analgesia
+    - Reduction if displaced (with procedural sedation)
+    - Splinting in neutral position
+  non_displaced_distal_radius:
+    - Volar splint or short arm cast for 4-6 weeks
+    - Repeat X-rays at 1-2 weeks to ensure no displacement
+    - Orthopedic follow-up
+  displaced_distal_radius:
+    - Orthopedic consultation
+    - May require closed reduction and casting or surgical fixation (ORIF)
+  scaphoid_fracture:
+    - Thumb spica splint even if X-rays negative but clinically suspected
+    - Non-displaced - thumb spica cast for 6-12 weeks
+    - Displaced or proximal pole - usually requires surgical fixation
+    - High risk of avascular necrosis and nonunion
+clinical_pearls:
+  - Colles fracture most common wrist fracture (distal radius with dorsal angulation)
+  - Scaphoid fracture may have normal X-rays initially - treat clinically and re-image in 10-14 days
+  - Anatomic snuffbox tenderness has high sensitivity for scaphoid fracture
+  - Scaphoid blood supply enters distally - proximal fractures high risk for avascular necrosis
+  - Median nerve injury can occur - check sensation in thumb/index/middle fingers
+differentials:
+  - Distal radius fracture (Colles, Smith)
+  - Scaphoid fracture
+  - Ulnar styloid fracture
+  - Carpal bone fractures
+  - Wrist sprain
+  - TFCC tear
+trace:
+  - 55-year-old fell on outstretched hand. Wrist swollen with dinner fork deformity. X-ray shows dorsally displaced distal radius fracture. Hematoma block performed, closed reduction, splinted. Referred to orthopedics. Underwent ORIF with plate and screws. Healed well with full function after 3 months physical therapy.
+citations:
+  - American Academy of Orthopaedic Surgeons Guidelines
+  - UpToDate - Orthopedics

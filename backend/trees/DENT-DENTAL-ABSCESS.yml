@@ -1,0 +1,414 @@
+tree_id: DENT-DENTAL-ABSCESS
+name: Dental Abscess
+family: Dentistry
+specialty: Oral Surgery
+icd10: K04.7
+snomed: 300488002
+presentations:
+  - Severe throbbing toothache
+  - Facial swelling, jaw pain
+  - Fever, malaise
+  - Difficulty swallowing or opening mouth (trismus)
+  - Foul taste, bad breath
+  - Ludwig angina: floor of mouth swelling, airway compromise
+chief_complaint: Tooth pain, facial swelling, jaw pain, gum swelling
+description: Evaluation and management of odontogenic infections including periapical abscess, periodontal abscess, and spreading fascial space infections. Emphasizes early recognition of life-threatening deep space infections (Ludwig's angina) and appropriate antibiotic selection with definitive source control.
+
+differentials:
+  - Periapical abscess
+  - Periodontal abscess
+  - Ludwig angina
+  - Facial cellulitis
+  - Parotitis
+
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+
+workup:
+  - Clinical diagnosis based on exam: fluctuant swelling, dental caries
+  - Panoramic X-ray (Panorex) to assess tooth and bone involvement
+  - CT maxillofacial if concern for deep space infection (Ludwig angina, parapharyngeal)
+  - CBC if systemic symptoms or immunocompromised
+  - Blood cultures if febrile or toxic appearing
+  - Consider glucose screening (diabetes increases risk)
+
+treatment:
+  - Definitive: incision and drainage + dental extraction/root canal
+  - Antibiotics: amoxicillin 500mg PO TID x7-10 days
+  - Penicillin allergy: clindamycin 300mg PO QID x7-10 days
+  - Severe/spreading: admit for IV antibiotics (ampicillin-sulbactam)
+  - Pain control: ibuprofen 600mg PO q6h + acetaminophen 1000mg PO q6h
+  - Urgent dental referral; same-day if possible
+
+clinical_pearls:
+  - Ludwig angina (floor of mouth) is life-threatening; secure airway first
+  - Dental infections can spread to deep neck spaces
+  - Source control (extraction/drainage) is essential; antibiotics alone insufficient
+  - Diabetics at higher risk for severe odontogenic infections
+
+nodes:
+  - id: initial_presentation
+    type: question
+    question: "Patient presents with dental pain and swelling. What is the anatomic location and extent?"
+    options:
+      - label: "Localized gum swelling adjacent to single tooth"
+        next: localized_exam
+      - label: "Facial swelling, jaw involvement"
+        next: facial_swelling_exam
+      - label: "Floor of mouth swelling, difficulty swallowing/breathing"
+        next: airway_emergency
+      - label: "Trismus (difficulty opening mouth)"
+        next: trismus_assessment
+
+  - id: airway_emergency
+    type: question
+    question: "AIRWAY EMERGENCY: Floor of mouth swelling with dysphagia or dyspnea suggests Ludwig's angina. What are the airway signs?"
+    options:
+      - label: "Stridor, severe dyspnea, drooling, unable to lie flat"
+        next: dx_ludwigs_angina_critical
+      - label: "Dysphagia, moderate dyspnea, can speak in full sentences"
+        next: dx_ludwigs_angina_stable
+      - label: "Mild dysphagia, no respiratory distress"
+        next: facial_swelling_exam
+
+  - id: localized_exam
+    type: question
+    question: "Examination of localized swelling. What are the clinical findings?"
+    options:
+      - label: "Fluctuant gum swelling, draining pus, tooth tender to percussion"
+        next: dx_periapical_abscess
+      - label: "Gum swelling between teeth, deep periodontal pocket >6mm"
+        next: dx_periodontal_abscess
+      - label: "Swelling around partially erupted wisdom tooth (age 17-25)"
+        next: dx_pericoronitis
+      - label: "Firm swelling, no fluctuance, tooth mobile"
+        next: imaging_cellulitis
+
+  - id: facial_swelling_exam
+    type: question
+    question: "Facial swelling characteristics and systemic signs?"
+    options:
+      - label: "Buccal space swelling (cheek), tooth #6-8 or #25-27 pain"
+        next: imaging_required
+      - label: "Submandibular space swelling (under jaw)"
+        next: imaging_required
+      - label: "Fever >38.5°C, tachycardia, appears toxic"
+        next: imaging_sepsis
+      - label: "Periorbital swelling, visual changes, eye pain"
+        next: dx_orbital_cellulitis_emergency
+
+  - id: trismus_assessment
+    type: question
+    question: "Trismus present (cannot open mouth >30mm). Associated findings?"
+    options:
+      - label: "Masticator space involvement, posterior mandible swelling"
+        next: imaging_sepsis
+      - label: "Lateral pharyngeal space involvement, neck swelling"
+        next: imaging_sepsis
+      - label: "Mild trismus, localized tooth pain, no fever"
+        next: imaging_required
+
+  - id: imaging_required
+    type: question
+    question: "CT neck with IV contrast for fascial space involvement. What are the findings?"
+    options:
+      - label: "Localized fluid collection with rim enhancement, single space"
+        next: dx_fascial_space_abscess
+      - label: "Multiple space involvement, gas in soft tissue"
+        next: dx_descending_necrotizing_infection
+      - label: "Cellulitis only, no drainable fluid collection"
+        next: dx_dental_cellulitis
+
+  - id: imaging_sepsis
+    type: question
+    question: "Patient with systemic signs. CT neck with IV contrast findings?"
+    options:
+      - label: "Abscess in submandibular, sublingual, submental spaces (bilateral floor of mouth)"
+        next: dx_ludwigs_angina_stable
+      - label: "Parapharyngeal or retropharyngeal space involvement"
+        next: dx_deep_space_infection
+      - label: "Mediastinal extension visible on CT chest"
+        next: dx_descending_necrotizing_infection
+      - label: "Localized abscess, one space"
+        next: dx_fascial_space_abscess
+
+  - id: imaging_cellulitis
+    type: question
+    question: "Dental imaging (periapical radiograph or panoramic X-ray) findings?"
+    options:
+      - label: "Periapical radiolucency (dark area at tooth root)"
+        next: dx_periapical_abscess
+      - label: "Bone loss around tooth, periodontal pocket"
+        next: dx_periodontal_abscess
+      - label: "Normal radiograph, clinical cellulitis"
+        next: dx_dental_cellulitis
+
+  - id: dx_periapical_abscess
+    type: diagnosis
+    diagnosis: "Periapical Abscess"
+    icd10: K04.7
+    description: "Localized collection of pus at tooth root apex due to pulp necrosis and periapical infection. Most common odontogenic infection. Requires definitive source control (extraction or root canal) in addition to antibiotics if indicated."
+    recommendations:
+      - "Analgesia: ibuprofen 600mg PO q6h + acetaminophen 1000mg PO q6h (alternating)"
+      - "Antibiotics ONLY if systemic signs (fever, lymphadenopathy, cellulitis extending beyond alveolar mucosa):"
+      - "  - First-line: amoxicillin 500mg PO TID × 7 days"
+      - "  - PCN allergy: clindamycin 300mg PO TID × 7 days"
+      - "  - Alternative: azithromycin 500mg day 1, then 250mg daily × 4 days"
+      - "Definitive treatment within 24-48 hours:"
+      - "  - Root canal therapy if tooth salvageable"
+      - "  - Extraction if tooth non-restorable"
+      - "If fluctuant swelling: incision and drainage by dentist/oral surgeon"
+      - "Warm saline rinses (1 tsp salt in 8oz water) q2h while awake"
+      - "Return precautions: worsening swelling, difficulty breathing/swallowing, fever >38.5°C"
+
+  - id: dx_periodontal_abscess
+    type: diagnosis
+    diagnosis: "Periodontal Abscess"
+    icd10: K05.21
+    description: "Abscess in periodontal pocket due to plaque and calculus accumulation with bacterial infection. Distinguished from periapical abscess by presence of deep periodontal pocket and often vital pulp. Requires periodontal treatment."
+    recommendations:
+      - "Analgesia: ibuprofen 600mg PO q6h + acetaminophen 1000mg PO q6h"
+      - "Antibiotics if systemic involvement:"
+      - "  - Amoxicillin 500mg PO TID × 7 days"
+      - "  - PCN allergy: clindamycin 300mg PO TID × 7 days"
+      - "Definitive treatment by dentist/periodontist within 24-48h:"
+      - "  - Incision and drainage if fluctuant"
+      - "  - Scaling and root planing (deep cleaning)"
+      - "  - Periodontal surgery if severe bone loss"
+      - "  - Extraction if tooth non-salvageable"
+      - "Chlorhexidine 0.12% oral rinse BID × 2 weeks"
+      - "Improve oral hygiene: flossing daily, soft toothbrush"
+
+  - id: dx_pericoronitis
+    type: diagnosis
+    diagnosis: "Pericoronitis"
+    icd10: K05.22
+    description: "Inflammation and infection of gingival tissue overlying partially erupted tooth, most commonly mandibular third molars (wisdom teeth). Food debris and bacteria accumulate under operculum (gum flap). Can progress to severe fascial space infection if untreated."
+    recommendations:
+      - "Analgesia: ibuprofen 600mg PO q6h + acetaminophen 1000mg PO q6h"
+      - "Antibiotics if fever, trismus, or spreading cellulitis:"
+      - "  - Amoxicillin 500mg PO TID × 7 days"
+      - "  - PCN allergy: clindamycin 300mg PO TID × 7 days"
+      - "  - If severe: amoxicillin-clavulanate 875mg PO BID × 7 days"
+      - "Warm saline rinses q2h while awake"
+      - "Chlorhexidine 0.12% rinse BID"
+      - "Irrigation under operculum by dentist (hydrogen peroxide or chlorhexidine)"
+      - "Definitive treatment after inflammation resolves (2-4 weeks):"
+      - "  - Operculectomy (remove gum flap) if tooth has room to erupt"
+      - "  - Extraction if tooth impacted or insufficient space"
+      - "Dental referral within 1 week for definitive management"
+
+  - id: dx_dental_cellulitis
+    type: diagnosis
+    diagnosis: "Odontogenic Cellulitis"
+    icd10: K12.2
+    description: "Spreading soft tissue infection from dental source without drainable abscess. Requires antibiotics and close monitoring for progression to abscess or deep space infection. Source control (tooth extraction/root canal) essential for resolution."
+    recommendations:
+      - "Analgesia: ibuprofen 600mg PO q6h + acetaminophen 1000mg PO q6h"
+      - "Antibiotics (required for cellulitis):"
+      - "  - Amoxicillin-clavulanate 875mg PO BID × 7-10 days (first-line)"
+      - "  - PCN allergy: clindamycin 300-450mg PO TID × 7-10 days"
+      - "  - Alternative: moxifloxacin 400mg PO daily × 7-10 days"
+      - "Mark cellulitis border with pen to monitor progression"
+      - "Dental referral within 24-48 hours for source control"
+      - "Follow-up in 48 hours to assess response to antibiotics"
+      - "If worsening despite 48h antibiotics → admit for IV antibiotics and imaging"
+      - "Return precautions: difficulty breathing/swallowing, worsening swelling, high fever"
+
+  - id: dx_fascial_space_abscess
+    type: diagnosis
+    diagnosis: "Fascial Space Abscess"
+    icd10: K12.2
+    description: "Odontogenic infection spreading to potential fascial spaces (buccal, submandibular, submental, masticator). Requires CT imaging for surgical planning, IV antibiotics, and incision/drainage by oral maxillofacial surgeon. Admission usually required."
+    recommendations:
+      - "ADMIT to hospital"
+      - "NPO if surgery planned"
+      - "IV hydration: NS 125 mL/hr"
+      - "IV antibiotics:"
+      - "  - Ampicillin-sulbactam 3g IV q6h (first-line)"
+      - "  - PCN allergy: clindamycin 600mg IV q8h + ciprofloxacin 400mg IV q12h"
+      - "  - Alternative: piperacillin-tazobactam 3.375g IV q6h"
+      - "Analgesia: morphine 2-4mg IV q4h PRN or hydromorphone 0.5-1mg IV q4h PRN"
+      - "CT neck with IV contrast to define extent and plan drainage"
+      - "Incision and drainage by oral maxillofacial surgery:"
+      - "  - Intraoral approach if localized"
+      - "  - External approach for deeper spaces"
+      - "  - Drains placed, culture abscess fluid"
+      - "Dental extraction or root canal once acute infection controlled"
+      - "Continue IV antibiotics until afebrile 24h, then switch to PO to complete 10-14 days total"
+
+  - id: dx_ludwigs_angina_critical
+    type: diagnosis
+    diagnosis: "Ludwig's Angina - AIRWAY EMERGENCY"
+    icd10: K12.2
+    description: "LIFE-THREATENING cellulitis/abscess of bilateral submandibular, sublingual, and submental spaces causing floor of mouth elevation and posterior tongue displacement. Airway obstruction is primary cause of death. Immediate airway management and surgical decompression required."
+    recommendations:
+      - "IMMEDIATE ENT/OMFS + ANESTHESIA CODE"
+      - "DO NOT LAY PATIENT FLAT - keep upright to maintain airway"
+      - "Prepare for difficult airway:"
+      - "  - Awake fiberoptic intubation by anesthesia (preferred)"
+      - "  - Tracheostomy tray at bedside"
+      - "  - Cricothyrotomy kit available"
+      - "High-flow oxygen, continuous pulse oximetry"
+      - "IV antibiotics STAT before intubation:"
+      - "  - Ampicillin-sulbactam 3g IV PLUS metronidazole 500mg IV"
+      - "  - OR piperacillin-tazobactam 4.5g IV"
+      - "IV hydration, strict I&Os"
+      - "EMERGENT incision and drainage by OMFS/ENT:"
+      - "  - Bilateral submandibular spaces"
+      - "  - Sublingual and submental spaces"
+      - "  - External approach, wide decompression"
+      - "  - Multiple drains placed"
+      - "ICU admission postoperatively, may need intubated 24-48h"
+      - "Serial imaging to monitor for descending necrotizing mediastinitis"
+      - "IV antibiotics × 7-10 days, then oral to complete 14-21 days total"
+
+  - id: dx_ludwigs_angina_stable
+    type: diagnosis
+    diagnosis: "Ludwig's Angina - Early/Stable"
+    icd10: K12.2
+    description: "Bilateral floor of mouth infection involving submandibular and sublingual spaces without immediate airway compromise. Still high-risk - can deteriorate rapidly. Requires ICU monitoring, IV antibiotics, and surgical consultation even if airway currently stable."
+    recommendations:
+      - "ADMIT to ICU for airway monitoring"
+      - "Keep patient upright (semi-Fowler's or sitting)"
+      - "OMFS/ENT consultation immediately"
+      - "Anesthesia consultation for airway planning"
+      - "NPO (may need emergent intubation/surgery)"
+      - "Continuous pulse oximetry, q1h airway checks"
+      - "IV antibiotics STAT:"
+      - "  - Ampicillin-sulbactam 3g IV q6h PLUS metronidazole 500mg IV q8h"
+      - "  - PCN allergy: clindamycin 900mg IV q8h + ciprofloxacin 400mg IV q12h"
+      - "IV dexamethasone 10mg IV × 1 to reduce edema (controversial but often used)"
+      - "CT neck with IV contrast to assess extent"
+      - "Surgical drainage if drainable fluid collection (40-50% of cases)"
+      - "If cellulitis without abscess: IV antibiotics × 48-72h, surgery if no improvement"
+      - "Monitor for airway deterioration: worsening dysphagia, tachypnea, O2 desaturation"
+      - "Total antibiotic course: 14-21 days (IV then transition to oral)"
+
+  - id: dx_deep_space_infection
+    type: diagnosis
+    diagnosis: "Deep Neck Space Infection (Parapharyngeal/Retropharyngeal)"
+    icd10: J39.0
+    description: "Life-threatening infection of deep neck spaces. Parapharyngeal space connects to mediastinum - risk of descending necrotizing mediastinitis (40% mortality). Retropharyngeal space can cause airway obstruction. Requires IV antibiotics and surgical drainage."
+    recommendations:
+      - "ADMIT to ICU"
+      - "ENT/OMFS consultation immediately"
+      - "NPO, IV hydration"
+      - "Airway monitoring: pulse ox, serial exams q2-4h"
+      - "IV antibiotics for polymicrobial coverage:"
+      - "  - Ampicillin-sulbactam 3g IV q6h + metronidazole 500mg IV q8h"
+      - "  - OR piperacillin-tazobactam 4.5g IV q6h"
+      - "  - OR clindamycin 900mg IV q8h + ceftriaxone 2g IV q24h"
+      - "CT neck with IV contrast + CT chest to rule out mediastinal extension"
+      - "Surgical drainage by ENT/OMFS:"
+      - "  - Transcervical approach for parapharyngeal space"
+      - "  - Transoral or transcervical for retropharyngeal space"
+      - "  - Multiple drains placed"
+      - "Monitor for complications:"
+      - "  - Jugular vein thrombosis (Lemierre syndrome)"
+      - "  - Carotid artery erosion (rare but catastrophic)"
+      - "  - Descending necrotizing mediastinitis (requires thoracotomy)"
+      - "IV antibiotics × 7-14 days, then oral to complete 21 days total"
+
+  - id: dx_descending_necrotizing_infection
+    type: diagnosis
+    diagnosis: "Descending Necrotizing Mediastinitis"
+    icd10: J85.3
+    description: "CRITICAL: Odontogenic infection spreading along fascial planes into mediastinum. Mortality 20-40% even with treatment. Requires emergent surgical debridement (cervical + thoracic) and broad-spectrum IV antibiotics. Cardiothoracic surgery involvement mandatory."
+    recommendations:
+      - "SURGICAL EMERGENCY - activate cardiothoracic surgery STAT"
+      - "ICU admission, intubation likely required"
+      - "Aggressive IV resuscitation if septic shock"
+      - "Broad-spectrum IV antibiotics STAT:"
+      - "  - Meropenem 1g IV q8h OR imipenem 500mg IV q6h"
+      - "  - PLUS vancomycin 15-20mg/kg IV q8-12h (for MRSA coverage)"
+      - "CT chest and neck with IV contrast"
+      - "Emergent surgical debridement:"
+      - "  - Transcervical drainage of neck spaces (ENT/OMFS)"
+      - "  - Thoracotomy or VATS for mediastinal debridement (CT surgery)"
+      - "  - Multiple drains placed"
+      - "  - May require multiple staged debridements"
+      - "Source control: dental extraction once stabilized"
+      - "Prolonged ICU stay (1-3 weeks typical)"
+      - "IV antibiotics × 14-21 days minimum, often longer"
+      - "High mortality: 20-40% even with aggressive treatment"
+      - "Complications: septic shock, empyema, pericarditis, pneumonia"
+
+  - id: dx_orbital_cellulitis_emergency
+    type: diagnosis
+    diagnosis: "Orbital Cellulitis from Dental Source"
+    icd10: H05.011
+    description: "EMERGENCY: Maxillary tooth infection spreading to orbit through maxillary sinus. Risk of blindness, cavernous sinus thrombosis, intracranial extension. Requires immediate IV antibiotics, ophthalmology consultation, and imaging. Surgical drainage often needed."
+    recommendations:
+      - "OPHTHALMOLOGY CONSULTATION STAT"
+      - "OMFS and ENT consultation"
+      - "Visual acuity testing immediately and q4h"
+      - "Check extraocular movements, pupil reactivity, proptosis"
+      - "CT orbits and sinuses with IV contrast STAT"
+      - "MRI brain if concern for intracranial extension or cavernous sinus thrombosis"
+      - "Admit to hospital, ICU if vision-threatening"
+      - "IV antibiotics STAT (must cover sinusitis pathogens):"
+      - "  - Vancomycin 15-20mg/kg IV q8-12h + ceftriaxone 2g IV q12h + metronidazole 500mg IV q8h"
+      - "  - OR piperacillin-tazobactam 4.5g IV q6h + vancomycin"
+      - "Surgical drainage if:"
+      - "  - Vision deterioration"
+      - "  - Abscess on imaging"
+      - "  - No improvement after 24-48h IV antibiotics"
+      - "Source control: maxillary tooth extraction by OMFS"
+      - "Monitor for cavernous sinus thrombosis: headache, cranial nerve palsies, bilateral eye involvement"
+      - "IV antibiotics × 2-3 weeks, consider anticoagulation if thrombosis"
+
+metadata:
+  guidelines:
+    - name: "American Association of Oral and Maxillofacial Surgeons"
+      url: "https://www.aaoms.org"
+      description: "Guidelines for management of odontogenic infections"
+  
+  key_medications:
+    - name: Amoxicillin
+      dose: "500mg PO TID"
+      indication: "First-line for uncomplicated dental infection"
+      
+    - name: Clindamycin
+      dose: "300-450mg PO TID or 600-900mg IV q8h"
+      indication: "PCN allergy, anaerobic coverage"
+      
+    - name: Ampicillin-Sulbactam
+      dose: "3g IV q6h"
+      indication: "First-line IV for severe odontogenic infection"
+
+  red_flags:
+    - "Floor of mouth swelling + dysphagia/dyspnea = Ludwig's angina → ICU, airway emergency"
+    - "Trismus + fever + toxic appearance = deep space infection → CT imaging, IV antibiotics, admit"
+    - "Periorbital swelling from dental infection = orbital cellulitis → ophthalmology STAT"
+    - "Chest pain/mediastinal widening on imaging = descending necrotizing mediastinitis → CT surgery emergency"
+    - "Multiple space involvement on CT = high-risk deep space infection → surgical drainage"
+
+  key_concepts:
+    - "Odontogenic infections are polymicrobial: anaerobes (Prevotella, Fusobacterium) + streptococci"
+    - "Antibiotics alone will FAIL without source control (extraction or root canal)"
+    - "Antibiotics NOT needed for localized periapical abscess without systemic signs - drainage/extraction sufficient"
+    - "Ludwig's angina: historically 50% mortality, now <5% with modern airway management and antibiotics"
+    - "Lower teeth infections spread to submandibular space, upper teeth to maxillary sinus/orbit"
+    - "Immunocompromised patients (diabetes, HIV, chemotherapy) at high risk for rapid progression"
+    - "Needle aspiration is NOT adequate drainage - incision and drainage required for abscesses"
+
+citations:
+  - ADA (American Dental Association) Clinical Practice Guidelines
+  - CDC Oral Health Guidelines
+  - UpToDate - Oral and Dental Medicine

@@ -1,0 +1,71 @@
+tree_id: ID-BACTEREMIA
+name: Bacteremia and Bloodstream Infection
+family: infectious_disease
+specialty: Infectious Disease
+icd10: R78.81
+snomed: 5758002
+urgency: []
+homeopathy: []
+presentations:
+  - Fever with chills and rigors
+  - Hypotension or signs of septic shock
+  - Tachycardia and tachypnea
+  - Altered mental status or confusion
+  - Source of infection (IV catheter, wound, pneumonia, UTI)
+  - Immunocompromised state
+  - Recent hospitalization or procedure
+  - Persistent positive blood cultures
+  - Signs of end-organ dysfunction
+  - Presence of indwelling medical devices
+workup:
+  - Blood cultures x2 sets from different sites before antibiotics
+  - Complete blood count with differential (leukocytosis or leukopenia)
+  - Comprehensive metabolic panel (assess renal function, electrolytes)
+  - Lactate level (elevated in sepsis)
+  - Procalcitonin (elevated in bacterial infection)
+  - Urinalysis and urine culture if UTI suspected
+  - Chest X-ray if respiratory symptoms present
+  - Echocardiography if endocarditis suspected (persistent bacteremia, new murmur)
+  - CT imaging to identify source (abdomen/pelvis for intra-abdominal source)
+  - Consider fungal blood cultures if high risk (immunosuppressed, TPN, broad-spectrum antibiotics)
+treatment:
+  - Immediate broad-spectrum IV antibiotics (within 1 hour of recognition)
+  - Empiric regimen - vancomycin PLUS piperacillin-tazobactam or cefepime
+  - Consider adding antifungal (micafungin) if high risk for candidemia
+  - Aggressive IV fluid resuscitation (30 mL/kg crystalloid within 3 hours)
+  - Vasopressors (norepinephrine) if hypotensive despite fluids
+  - Source control - remove infected catheter, drain abscess, debride wounds
+  - De-escalate antibiotics based on culture results and sensitivities
+  - Duration of therapy typically 7-14 days depending on source and organism
+  - Infectious disease consultation for complicated cases
+  - Monitor for complications (septic shock, DIC, multi-organ failure)
+clinical_pearls:
+  - "Bacteremia vs Sepsis: Bacteremia is presence of bacteria in blood; sepsis is systemic inflammatory response with organ dysfunction"
+  - "Blood cultures should be drawn from two separate sites before antibiotics to increase sensitivity and help distinguish contamination"
+  - "Time to antibiotics is critical - each hour delay increases mortality by 7-10% in septic shock"
+  - "Common sources: urinary tract (25%), respiratory (20%), abdominal (15%), skin/soft tissue (10%), catheter-related (5%)"
+  - "Staph aureus bacteremia always requires 4-6 weeks of therapy and evaluation for endocarditis"
+  - "Persistent bacteremia (>72 hours despite appropriate therapy) suggests endocarditis, undrained abscess, or infected device"
+  - "Polymicrobial bacteremia suggests intra-abdominal or skin/soft tissue source"
+  - "Immunocompromised patients may not mount fever response - maintain high suspicion with other signs of infection"
+referrals:
+  - Infectious Disease for all cases of bacteremia for antibiotic guidance
+  - Critical Care/ICU if septic shock or multi-organ dysfunction
+  - Surgery for source control (drain abscess, remove infected hardware)
+  - Cardiology for echocardiography if endocarditis suspected
+differentials:
+  - Sepsis and septic shock (bacteremia with systemic inflammatory response)
+  - Contaminated blood culture (single positive culture, coagulase-negative staph, common skin flora)
+  - Endocarditis (persistent bacteremia, new heart murmur, embolic phenomena)
+  - Catheter-related bloodstream infection (central line, PICC, port)
+  - Candidemia (fungal bloodstream infection in high-risk patients)
+  - Viral sepsis syndrome (influenza, COVID-19, CMV, EBV in immunocompromised)
+trace:
+  source: Surviving Sepsis Campaign Guidelines 2021, IDSA Bloodstream Infection Guidelines
+  version: '1.0'
+  last_updated: '2025-12-26'
+
+citations:
+  - IDSA (Infectious Diseases Society of America) Guidelines
+  - CDC (Centers for Disease Control and Prevention) Guidelines
+  - UpToDate - Infectious Diseases
