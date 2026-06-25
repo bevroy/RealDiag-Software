@@ -69,7 +69,6 @@ export default function SymptomSearch() {
   const [temperature, setTemperature] = useState('');
   const [respiratoryRate, setRespiratoryRate] = useState('');
   const [oxygenSaturation, setOxygenSaturation] = useState('');
-  const [showVitalSigns, setShowVitalSigns] = useState(false);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -1562,33 +1561,16 @@ export default function SymptomSearch() {
 
           {/* Vital Signs */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <button
-              onClick={() => setShowVitalSigns(!showVitalSigns)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: '#1a202c',
-                fontSize: '1rem',
-                fontWeight: '600',
-                marginBottom: showVitalSigns ? '1rem' : 0
-              }}
-            >
-              <span>❤️ Vital Signs (Optional)</span>
-              <span style={{ fontSize: '0.8rem', color: '#6b7280' }}>{showVitalSigns ? '▲ Hide' : '▼ Show'}</span>
-            </button>
-            {showVitalSigns && (
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '1rem'
-              }}>
+            <h3 style={{ margin: '0 0 1rem', color: getTextColor(), fontSize: '1rem', fontWeight: '600' }}>
+              ❤️ Vital Signs (Optional)
+            </h3>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '1rem'
+            }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Heart Rate (bpm)
                   </label>
                   <input
@@ -1601,14 +1583,16 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Blood Pressure — Systolic (mmHg)
                   </label>
                   <input
@@ -1621,14 +1605,16 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Blood Pressure — Diastolic (mmHg)
                   </label>
                   <input
@@ -1641,14 +1627,16 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Temperature (°F)
                   </label>
                   <input
@@ -1662,14 +1650,16 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Respiratory Rate (breaths/min)
                   </label>
                   <input
@@ -1682,14 +1672,16 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: '#374151', fontSize: '0.9rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Oxygen Saturation — SpO₂ (%)
                   </label>
                   <input
@@ -1703,14 +1695,15 @@ export default function SymptomSearch() {
                     style={{
                       width: '100%',
                       padding: '0.75rem',
-                      border: '1px solid #d1d5db',
+                      border: `1px solid ${getBorderColor()}`,
                       borderRadius: '6px',
-                      fontSize: '0.95rem'
+                      fontSize: '0.95rem',
+                      background: darkMode ? '#374151' : 'white',
+                      color: getTextColor()
                     }}
                   />
                 </div>
               </div>
-            )}
           </div>
 
           {/* Action Buttons */}
