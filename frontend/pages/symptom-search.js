@@ -1644,6 +1644,7 @@ export default function SymptomSearch() {
                     }}
                   />
                 </div>
+                <div aria-hidden="true" style={{ gridColumn: '1 / -1', height: '0.25rem' }} />
                 <div>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
                     Temperature (°F)
