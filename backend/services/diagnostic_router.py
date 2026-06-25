@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter, Body, Depends, Request, HTTPException
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 from .decision_tree_engine import DecisionTreeEngine
 from .auth_service import get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
@@ -34,6 +34,72 @@ async def get_patient_history_service() -> PatientHistoryService:
             auth_token=FHIR_AUTH_TOKEN
         )
     return _patient_history
+
+
+def _append_unique_terms(target: List[str], values: List[str]) -> List[str]:
+    """Append non-empty strings while preserving insertion order."""
+    seen = {str(v).lower() for v in target if isinstance(v, str)}
+    for value in values:
+        if not isinstance(value, str):
+            continue
+        clean = value.strip()
+        if not clean:
+            continue
+        key = clean.lower()
+        if key not in seen:
+            target.append(clean)
+            seen.add(key)
+    return target
+
+
+def _derive_terms_from_history(patient_history) -> Dict[str, List[str]]:
+    """Derive clinically relevant symptom/red-flag terms from encounter/history data."""
+    derived_symptoms: List[str] = []
+    derived_red_flags: List[str] = []
+
+    for hp in patient_history.history_and_physicals[:3]:
+        if hp.chief_complaint:
+            derived_symptoms.append(hp.chief_complaint)
+
+    if patient_history.vital_signs:
+        v = patient_history.vital_signs[0]
+
+        if v.heart_rate is not None:
+            if v.heart_rate >= 130:
+                derived_red_flags.append("severe tachycardia")
+            if v.heart_rate >= 100:
+                derived_symptoms.append("tachycardia")
+            elif v.heart_rate <= 50:
+                derived_symptoms.append("bradycardia")
+
+        if v.blood_pressure_systolic is not None:
+            if v.blood_pressure_systolic < 90:
+                derived_red_flags.append("hypotension")
+            elif v.blood_pressure_systolic >= 140:
+                derived_symptoms.append("hypertension")
+
+        if v.temperature is not None:
+            if v.temperature >= 100.4:
+                derived_symptoms.append("fever")
+            elif v.temperature < 95.0:
+                derived_red_flags.append("hypothermia")
+
+        if v.respiratory_rate is not None:
+            if v.respiratory_rate >= 22:
+                derived_symptoms.append("tachypnea")
+            elif v.respiratory_rate <= 10:
+                derived_red_flags.append("bradypnea")
+
+        if v.oxygen_saturation is not None:
+            if v.oxygen_saturation < 90:
+                derived_red_flags.append("severe hypoxemia")
+            elif v.oxygen_saturation < 94:
+                derived_symptoms.append("hypoxemia")
+
+    return {
+        "symptoms": derived_symptoms,
+        "red_flags": derived_red_flags,
+    }
 
 @router.get("/search-limit")
 def get_search_limit_status(
@@ -130,6 +196,12 @@ async def evaluate_tree(
         # Paid users have unlimited searches (handled by subscription)
         limit_check = {"searches_used": 0, "searches_remaining": float('inf')}
     
+    # Normalize primary tree input lists to avoid type edge cases.
+    if "symptoms" in patient and not isinstance(patient["symptoms"], list):
+        patient["symptoms"] = [patient["symptoms"]]
+    if "red_flags" in patient and not isinstance(patient["red_flags"], list):
+        patient["red_flags"] = [patient["red_flags"]]
+
     # Pull patient history from EMR if patient_id provided (EMR instances)
     emr_data_pulled = False
     if patient.get("emr_patient_id"):
@@ -152,6 +224,40 @@ async def evaluate_tree(
             
             if patient_history.active_conditions:
                 patient["conditions"] = [cond.get("code") for cond in patient_history.active_conditions if cond.get("code")]
+
+            # Attach latest encounter vitals in a machine-readable form.
+            if patient_history.vital_signs:
+                latest_vitals = patient_history.vital_signs[0]
+                patient["vital_signs"] = {
+                    "heart_rate": latest_vitals.heart_rate,
+                    "blood_pressure": {
+                        "systolic": latest_vitals.blood_pressure_systolic,
+                        "diastolic": latest_vitals.blood_pressure_diastolic,
+                    },
+                    "temperature": latest_vitals.temperature,
+                    "respiratory_rate": latest_vitals.respiratory_rate,
+                    "oxygen_saturation": latest_vitals.oxygen_saturation,
+                }
+
+            # Convert encounter/history context into decision-tree compatible terms.
+            derived_terms = _derive_terms_from_history(patient_history)
+            if "symptoms" not in patient or not isinstance(patient.get("symptoms"), list):
+                patient["symptoms"] = []
+            if "red_flags" not in patient or not isinstance(patient.get("red_flags"), list):
+                patient["red_flags"] = []
+            _append_unique_terms(patient["symptoms"], derived_terms["symptoms"])
+            _append_unique_terms(patient["red_flags"], derived_terms["red_flags"])
+
+            # Persist a compact context block for downstream explainability.
+            patient["patient_context"] = patient.get("patient_context", {}) or {}
+            patient["patient_context"]["emr_summary"] = {
+                "history_notes_count": len(patient_history.visit_notes),
+                "history_h_and_p_count": len(patient_history.history_and_physicals),
+                "history_test_count": len(patient_history.diagnostic_tests),
+                "history_imaging_count": len(patient_history.imaging_studies),
+                "history_condition_count": len(patient_history.active_conditions),
+                "history_medication_count": len(patient_history.current_medications),
+            }
             
             # Add patient demographics if not provided
             if not patient.get("age") and patient_history.age:
@@ -159,6 +265,8 @@ async def evaluate_tree(
             
             if not patient.get("gender") and patient_history.gender:
                 patient["gender"] = patient_history.gender
+
+            emr_data_pulled = True
             
         except Exception as e:
             # Log error but continue with diagnostic evaluation

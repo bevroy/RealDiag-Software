@@ -17,6 +17,7 @@ from pydantic import BaseModel, validator, conint, conlist
 import logging
 from functools import lru_cache
 import os
+from backend.services.patient_history_service import PatientHistoryService
 
 # Import cache service for performance
 try:
@@ -71,6 +72,91 @@ except ImportError:
 
 router = APIRouter()
 
+# FHIR configuration for optional encounter/history enrichment
+FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "http://localhost:8080/fhir")
+FHIR_AUTH_TOKEN = os.getenv("FHIR_AUTH_TOKEN", None)
+_patient_history = None
+
+
+async def get_patient_history_service() -> PatientHistoryService:
+    """Get or initialize patient history service for encounter enrichment."""
+    global _patient_history
+    if _patient_history is None:
+        _patient_history = PatientHistoryService(
+            fhir_base_url=FHIR_BASE_URL,
+            auth_token=FHIR_AUTH_TOKEN
+        )
+    return _patient_history
+
+
+class VitalSignsInput(BaseModel):
+    """Optional vital signs passed from encounter context."""
+    heart_rate: Optional[int] = None
+    blood_pressure: Optional[Dict[str, int]] = None
+    temperature: Optional[float] = None
+    respiratory_rate: Optional[int] = None
+    oxygen_saturation: Optional[float] = None
+
+
+def _append_unique_terms(target: List[str], values: List[str]) -> List[str]:
+    """Append non-empty strings to target while preserving order and uniqueness."""
+    seen = {v.lower() for v in target if isinstance(v, str)}
+    for value in values:
+        if not isinstance(value, str):
+            continue
+        clean = value.strip()
+        if not clean:
+            continue
+        key = clean.lower()
+        if key not in seen:
+            target.append(clean)
+            seen.add(key)
+    return target
+
+
+def _derive_terms_from_vitals(vitals: Dict[str, Any]) -> List[str]:
+    """Map raw vitals to clinically meaningful search terms."""
+    if not vitals:
+        return []
+
+    terms: List[str] = []
+
+    heart_rate = vitals.get("heart_rate")
+    if isinstance(heart_rate, (int, float)):
+        if heart_rate >= 100:
+            terms.append("tachycardia")
+        elif heart_rate <= 50:
+            terms.append("bradycardia")
+
+    bp = vitals.get("blood_pressure") or {}
+    systolic = bp.get("systolic") if isinstance(bp, dict) else None
+    diastolic = bp.get("diastolic") if isinstance(bp, dict) else None
+    if isinstance(systolic, (int, float)):
+        if systolic < 90:
+            terms.append("hypotension")
+        elif systolic >= 140 or (isinstance(diastolic, (int, float)) and diastolic >= 90):
+            terms.append("hypertension")
+
+    temperature = vitals.get("temperature")
+    if isinstance(temperature, (int, float)):
+        if temperature >= 100.4:
+            terms.append("fever")
+        elif temperature < 95.0:
+            terms.append("hypothermia")
+
+    respiratory_rate = vitals.get("respiratory_rate")
+    if isinstance(respiratory_rate, (int, float)):
+        if respiratory_rate >= 22:
+            terms.append("tachypnea")
+        elif respiratory_rate <= 10:
+            terms.append("bradypnea")
+
+    oxygen_saturation = vitals.get("oxygen_saturation")
+    if isinstance(oxygen_saturation, (int, float)) and oxygen_saturation < 94:
+        terms.append("hypoxemia")
+
+    return terms
+
 # Models
 class SymptomSearchRequest(BaseModel):
     """Request model for symptom-based search with input validation."""
@@ -78,6 +164,9 @@ class SymptomSearchRequest(BaseModel):
     age: Optional[int] = None  # Patient age
     sex: Optional[str] = None
     family: Optional[str] = None  # Optional filter by disease family
+    vital_signs: Optional[VitalSignsInput] = None
+    emr_patient_id: Optional[str] = None
+    lookback_days: Optional[conint(ge=1, le=1825)] = 365
     
     @validator('symptoms')
     def validate_symptoms(cls, v):
@@ -902,8 +991,51 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
         
         if not request.symptoms:
             raise HTTPException(status_code=400, detail="At least one symptom is required")
-        
-        logging.info(f"Symptom search request: {request.symptoms}")
+
+        effective_symptoms = list(request.symptoms)
+
+        # Add symptom terms inferred from user-entered encounter vitals.
+        if request.vital_signs:
+            vitals_terms = _derive_terms_from_vitals(request.vital_signs.dict(exclude_none=True))
+            _append_unique_terms(effective_symptoms, vitals_terms)
+
+        # Optionally enrich with EHR encounter/history context when available.
+        if request.emr_patient_id:
+            try:
+                history_service = await get_patient_history_service()
+                patient_history = await history_service.get_comprehensive_history(
+                    patient_id=request.emr_patient_id,
+                    lookback_days=request.lookback_days or 365
+                )
+
+                history_terms: List[str] = []
+
+                for hp in patient_history.history_and_physicals[:3]:
+                    if hp.chief_complaint:
+                        history_terms.append(hp.chief_complaint)
+
+                if patient_history.vital_signs:
+                    latest_vitals = patient_history.vital_signs[0]
+                    history_vitals = {
+                        "heart_rate": latest_vitals.heart_rate,
+                        "blood_pressure": {
+                            "systolic": latest_vitals.blood_pressure_systolic,
+                            "diastolic": latest_vitals.blood_pressure_diastolic
+                        },
+                        "temperature": latest_vitals.temperature,
+                        "respiratory_rate": latest_vitals.respiratory_rate,
+                        "oxygen_saturation": latest_vitals.oxygen_saturation,
+                    }
+                    history_terms.extend(_derive_terms_from_vitals(history_vitals))
+
+                _append_unique_terms(effective_symptoms, history_terms)
+            except Exception as e:
+                logging.warning(f"Unable to enrich symptom search with EMR history: {e}")
+
+        if not effective_symptoms:
+            raise HTTPException(status_code=400, detail="At least one symptom is required")
+
+        logging.info(f"Symptom search request: {effective_symptoms}")
         
         # Load all families
         all_families = load_all_families()
@@ -918,7 +1050,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
             families_to_search = all_families
         
         # Pre-normalize input symptoms once
-        normalized_input = [normalize_text(s) for s in request.symptoms]
+        normalized_input = [normalize_text(s) for s in effective_symptoms]
         
         # Search and score all rules
         results = []
@@ -938,7 +1070,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                 
                 # Calculate match score with clinical likelihood (pass pre-normalized input)
                 score, matched_presentations = calculate_match_score_optimized(
-                    normalized_input, request.symptoms, string_presentations, rule
+                    normalized_input, effective_symptoms, string_presentations, rule
                 )
                 
                 # Only include if there's a match
@@ -974,7 +1106,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
             logging.info(f"Insufficient tree results ({len(results)}), querying AI for additional diagnoses")
             
             try:
-                ai_diagnoses = await query_ai_for_diagnoses(request.symptoms, request.age, request.sex)
+                ai_diagnoses = await query_ai_for_diagnoses(effective_symptoms, request.age, request.sex)
                 
                 # Get set of existing diagnosis IDs from tree results
                 existing_ids = {r.rule_id.upper() for r in results}
@@ -1005,7 +1137,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                         family=ai_dx.get('specialty', 'general'),
                         match_score=ai_score,
                         matched_presentations=ai_dx.get('key_features', []),
-                        all_presentations=[f"AI suggestion based on: {', '.join(request.symptoms)}"],
+                        all_presentations=[f"AI suggestion based on: {', '.join(effective_symptoms)}"],
                         icd10=ai_dx.get('icd10', []),
                         snomed=[],
                         sensitivity=None,
@@ -1039,7 +1171,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
             # 3. User has 2+ symptoms (enough context for AI)
             should_generate = (
                 (len(top_results) == 0 or (top_results and top_results[0].match_score < 2.0))
-                and len(request.symptoms) >= 2
+                and len(effective_symptoms) >= 2
             )
             
             if should_generate:
@@ -1053,7 +1185,7 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                 # Note: Actual generation happens via separate endpoint to avoid blocking
         
         response_data = SymptomSearchResponse(
-            query_symptoms=request.symptoms,
+            query_symptoms=effective_symptoms,
             total_results=len(top_results),
             results=top_results
         )
