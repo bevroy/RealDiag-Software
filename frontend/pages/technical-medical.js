@@ -15,9 +15,6 @@ export default function TechnicalMedicalPage() {
               How RealDiag combines medical reasoning, safety checks, and data integration
             </p>
           </div>
-          <Link href="/">
-            <a style={styles.backLink}>Back to Home</a>
-          </Link>
         </div>
       </div>
 
