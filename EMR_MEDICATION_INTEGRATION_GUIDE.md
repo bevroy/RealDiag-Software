@@ -620,7 +620,25 @@ Content-Type: application/json
   "emr_patient_id": "string",      # FHIR Patient ID (required for EMR pull)
   "lookback_days": 365,             # Optional: days to look back (default: 365)
   "symptoms": ["string"],           # Required: current symptoms
-  "vital_signs": {...}              # Optional: vital signs
+  "vital_signs": {...},             # Optional: vital signs
+  "medication_history": [           # Optional: historical medication overrides
+    {
+      "name": "metoprolol",
+      "status": "stopped",
+      "date_prescribed": "2025-01-05",
+      "date_stopped": "2025-03-01",
+      "stop_reason": "adverse fatigue"
+    }
+  ],
+  "proposed_medications": ["metoprolol", "atorvastatin"],
+  "patient_context": {
+    "med_history_weights": {
+      "base_weight": 1.0,
+      "outcome_learning_weight": 0.6,
+      "adverse_penalty_multiplier": 2.0,
+      "half_life_days": 90
+    }
+  }
 }
 ```
 
@@ -629,6 +647,52 @@ Content-Type: application/json
 - `emr_data_source`: "FHIR" (if EMR data was pulled)
 - `emr_data_pulled`: true/false
 - `medication_safety`: Medication safety check results
+- `tree_result.medication_history_analysis`: Derived medication timeline features
+- `tree_result.history_supported_signals`: Signals supporting current diagnostic context
+- `tree_result.history_conflicting_signals`: Historical medication conflicts
+- `tree_result.prior_medication_failures_considered`: Whether failed trials were considered
+- `warnings[*].type = historical_medication_block`: Recommendation blocked by adverse history
+
+**Example response fragment:**
+
+```json
+{
+  "tree_result": {
+    "medication_history_analysis": {
+      "features": {
+        "recent_discontinuations_30d": 1,
+        "prior_adverse_reaction_flags": 1,
+        "failed_trials_by_class": {
+          "beta blocker": 2
+        },
+        "duplicate_therapy_history": {
+          "statin": 2
+        },
+        "high_risk_withdrawal_risk": true
+      },
+      "blocked_recommendations": [
+        {
+          "medication": "metoprolol",
+          "reason": "Blocked due to prior adverse history (metoprolol)"
+        }
+      ]
+    },
+    "history_supported_signals": [
+      "Medication class statin supports cardiology context"
+    ],
+    "history_conflicting_signals": [
+      "Prior adverse reaction to metoprolol"
+    ],
+    "prior_medication_failures_considered": true
+  },
+  "warnings": [
+    {
+      "type": "historical_medication_block",
+      "message": "Blocked by medication history: metoprolol"
+    }
+  ]
+}
+```
 
 ### **Endpoint 2: EMR Medication Retrieval**
 
@@ -674,6 +738,43 @@ Content-Type: application/json
 - `contraindicated_medications`: List of contraindicated medications
 - `major_interactions`: List of major drug interactions
 
+### **Endpoint 4: Medication Outcome Feedback (Learning Loop)**
+
+```http
+POST /diagnostic/medication-outcomes
+Content-Type: application/json
+
+{
+  "medication": "metoprolol",
+  "outcome": "adverse",            # success | failure | adverse
+  "specialty": "cardiology",       # Optional
+  "site_id": "hospital-east"       # Optional
+}
+```
+
+**Response:**
+- `status`: "recorded"
+- `medication`: Submitted medication name
+- `medication_class`: Normalized class used for learning aggregation
+- `outcome`: Recorded outcome label
+- `totals`: Updated per-class counters (`success`, `failure`, `adverse`)
+
+**Example response:**
+
+```json
+{
+  "status": "recorded",
+  "medication": "metoprolol",
+  "medication_class": "beta blocker",
+  "outcome": "adverse",
+  "totals": {
+    "success": 3,
+    "failure": 2,
+    "adverse": 1
+  }
+}
+```
+
 ---
 
 ## 📖 Related Documentation
@@ -693,6 +794,6 @@ Content-Type: application/json
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** December 2025  
+**Version:** 1.1.0  
+**Last Updated:** June 2026  
 **Status:** ✅ Production Ready
