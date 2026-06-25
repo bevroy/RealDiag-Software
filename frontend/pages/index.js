@@ -226,7 +226,7 @@ export default function Home() {
                 fontWeight: '600',
                 textAlign: 'center'
               }}>
-                📋 Browse Rules
+                📋 Diagnostic Rulse and Codes
               </a>
             </Link>
           </div>
