@@ -1560,14 +1560,23 @@ export default function SymptomSearch() {
           </div>
 
           {/* Vital Signs */}
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ margin: '0 0 1rem', color: getTextColor(), fontSize: '1rem', fontWeight: '600' }}>
+          <div style={{
+            marginBottom: '1.5rem',
+            padding: '1rem',
+            border: `1px solid ${getBorderColor()}`,
+            borderRadius: '8px',
+            background: darkMode ? 'rgba(17, 24, 39, 0.35)' : '#f8fafc'
+          }}>
+            <h3 style={{ margin: '0 0 0.35rem', color: getTextColor(), fontSize: '1rem', fontWeight: '600' }}>
               ❤️ Vital Signs (Optional)
             </h3>
+            <p style={{ margin: '0 0 0.9rem', color: getSecondaryTextColor(), fontSize: '0.85rem' }}>
+              Add BP, HR, respiratory rate, oxygen saturation, or temperature to improve result relevance.
+            </p>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '1rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '0.9rem'
             }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: getTextColor(), fontSize: '0.9rem' }}>
