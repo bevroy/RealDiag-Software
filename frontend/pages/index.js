@@ -49,7 +49,7 @@ export default function Home() {
         {/* Header / Logo */}
         <div style={{
           textAlign: 'center',
-          marginBottom: '2.5rem'
+          marginBottom: '1.25rem'
         }}>
           <img
             src="/logo.png"
