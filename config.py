@@ -35,7 +35,6 @@ class Config:
     MIN_SYMPTOMS_FOR_AI = int(os.getenv("MIN_SYMPTOMS_FOR_AI", "2"))
     MIN_CONFIDENCE_THRESHOLD = float(os.getenv("MIN_CONFIDENCE_THRESHOLD", "2.0"))
     ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")
-    
     @classmethod
     def ensure_directories(cls):
         """Create necessary directories if they don't exist"""

@@ -1,0 +1,69 @@
+id: NEU-VERTIGO
+title: Dizziness/Vertigo Diagnostic Tree
+entry: v_start
+nodes:
+- id: v_start
+  when: {}
+  tests: []
+  suggest_dx: []
+  next:
+  - when:
+      red_flags_any:
+      - new focal deficit
+      - severe gait ataxia
+      - central nystagmus
+    go: central
+  - when:
+      any_of:
+      - triage_o2_le: hypoxemia_o2
+      - triage_sbp_le: hypotension_sbp
+      - triage_sbp_ge: severe_htn_sbp
+      - triage_hr_ge: tachycardia_hr
+      - triage_resp_ge: tachypnea_resp
+      - triage_temp_c_ge: high_fever_temp_c
+    go: vertigo_vitals_urgent
+  - when:
+      symptoms_contains_any:
+      - brief positional vertigo
+      - dix-hallpike positive
+    go: bppv
+  - default: peripheral_vs_central
+- id: central
+  when: {}
+  tests:
+  - ED evaluation
+  - HINTS expert
+  - MRI brain if indicated
+  suggest_dx:
+  - Central cause (consider stroke)
+  next:
+  - default: null
+- id: bppv
+  when: {}
+  tests:
+  - Dix-Hallpike
+  - Epley maneuver
+  suggest_dx:
+  - BPPV
+  next:
+  - default: null
+- id: vertigo_vitals_urgent
+  when: {}
+  tests:
+  - Immediate ED evaluation with cardiorespiratory monitoring
+  - ECG and basic labs if unstable or persistent symptoms
+  - Neuroimaging if central features emerge
+  suggest_dx:
+  - Vertigo/dizziness with physiologic instability
+  - Central process vs systemic illness
+  next:
+  - default: null
+- id: peripheral_vs_central
+  when: {}
+  tests:
+  - HINTS bedside
+  - Audiometry if hearing symptoms
+  suggest_dx:
+  - Peripheral vestibulopathy vs central
+  next:
+  - default: null

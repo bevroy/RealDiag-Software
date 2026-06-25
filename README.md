@@ -1,8 +1,8 @@
 # RealDiag-Software
 
-![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
+[![CI](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml/badge.svg)](https://github.com/bevroy/RealDiag-Software/actions/workflows/ci.yml)
 
-Real Time Diagnostic Assistant Software - A comprehensive clinical decision support system for medical education and reference.
+Real Time Diagnostic Assistant Software - A comprehensive clinical decision support system for medical education and reference, with a standalone system monitoring CLI tool.
 
 ## ⚠️ **CRITICAL DISCLAIMER**
 
@@ -68,6 +68,12 @@ python main.py --all
 - **SMART Launch Page**: Native Epic integration interface
 - **Educational Mode**: Learning tools for medical students
 - **Report Generation**: PDF export and clinical documentation
+
+### System Monitoring CLI
+- **System Diagnostics**: Monitor CPU, memory, and disk usage with configurable thresholds
+- **Network Diagnostics**: Check network connectivity, interface information, and network statistics
+- **Performance Monitoring**: Track system uptime, process information, and load averages
+- **Report Generation**: Save diagnostic reports in JSON format for later analysis
 
 ## Installation
 
@@ -196,42 +202,6 @@ The application can be configured by editing the `config.py` file. Available set
 - **Network Settings**: Default test host and timeout values
 - **Report Settings**: Report directory and log file locations
 - **Check Interval**: Frequency of diagnostic checks
-
-## Output Examples
-
-### System Diagnostics
-Shows CPU usage, memory utilization, and disk space with status indicators:
-- ✓ **OK**: Metrics within normal thresholds
-- ⚠ **WARNING**: Metrics exceeding configured thresholds
-
-### Network Diagnostics
-Displays:
-- Connectivity status to test hosts
-- Network interface information
-- Network I/O statistics (bytes sent/received, packets, errors)
-
-### Performance Diagnostics
-Provides:
-- System uptime information
-- Total running processes
-- Top 5 processes by CPU usage
-- Load averages (on supported platforms)
-
-## Report Files
-
-Diagnostic reports are saved in the `reports/` directory with the following naming convention:
-```
-{diagnostic_type}_report_{timestamp}.json
-```
-
-Example: `full_report_20241103_162530.json`
-
-## Dependencies
-
-- **psutil**: Cross-platform library for system and process utilities
-- **colorama**: Cross-platform colored terminal text
-
-See `requirements.txt` for specific versions.
 
 ## Architecture
 
