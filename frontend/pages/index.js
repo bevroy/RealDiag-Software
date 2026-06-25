@@ -215,6 +215,20 @@ export default function Home() {
                 🧠 Technical and Medical Overview
               </a>
             </Link>
+            <Link href="/rules">
+              <a style={{
+                padding: '0.85rem 1rem',
+                borderRadius: '12px',
+                border: '1px solid #fde68a',
+                background: '#fffbeb',
+                textDecoration: 'none',
+                color: '#92400e',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}>
+                📋 Browse Rules
+              </a>
+            </Link>
           </div>
         </div>
 
