@@ -1,6 +1,10 @@
 
 from fastapi import APIRouter, Body, Depends, Request, HTTPException
 from typing import Any, Dict, Optional, List
+from datetime import datetime, timezone
+from pydantic import BaseModel, Field
+import math
+import os
 from .decision_tree_engine import DecisionTreeEngine
 from .auth_service import get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
@@ -8,12 +12,56 @@ from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
 from .context_engine import get_context_engine
-import os
 
 router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
 _trees = DecisionTreeEngine()
 _med_safety = MedicationSafetyService()
 _context_engine = get_context_engine()
+
+# Medication-history tuning (phase 3): defaults can be overridden per site/specialty.
+DEFAULT_MED_HISTORY_WEIGHTS = {
+    "base_weight": float(os.getenv("MED_HISTORY_BASE_WEIGHT", "1.0")),
+    "outcome_learning_weight": float(os.getenv("MED_HISTORY_OUTCOME_LEARNING_WEIGHT", "0.6")),
+    "adverse_penalty_multiplier": float(os.getenv("MED_HISTORY_ADVERSE_PENALTY_MULTIPLIER", "2.0")),
+    "half_life_days": float(os.getenv("MED_HISTORY_HALF_LIFE_DAYS", "90")),
+}
+
+DX_FAMILY_KEYWORDS = {
+    "cardiology": ["card", "acs", "mi", "arrhythm", "heart", "htn", "hypertension"],
+    "endocrine": ["endo", "diab", "dka", "thyroid", "glucose"],
+    "infectious": ["id", "sepsis", "infect", "pneum", "uti"],
+    "pulmonary": ["pulm", "copd", "asthma", "resp", "hypox"],
+    "neurology": ["neuro", "stroke", "seizure", "migraine"],
+}
+
+MEDICATION_CLASS_HINTS = {
+    "statin": ["atorvastatin", "simvastatin", "rosuvastatin", "pravastatin"],
+    "beta blocker": ["metoprolol", "atenolol", "carvedilol", "bisoprolol"],
+    "ace inhibitor": ["lisinopril", "enalapril", "ramipril"],
+    "arb": ["losartan", "valsartan", "irbesartan"],
+    "anticoagulant": ["warfarin", "apixaban", "rivaroxaban", "dabigatran", "enoxaparin"],
+    "antiplatelet": ["aspirin", "clopidogrel", "ticagrelor"],
+    "insulin": ["insulin", "glargine", "lispro", "aspart"],
+    "antidiabetic": ["metformin", "glipizide", "empagliflozin", "sitagliptin"],
+    "nsaid": ["ibuprofen", "naproxen", "diclofenac", "ketorolac"],
+    "ssri": ["sertraline", "fluoxetine", "escitalopram", "citalopram", "paroxetine"],
+}
+
+THERAPY_CLASS_TO_FAMILY = {
+    "statin": ["cardiology"],
+    "beta blocker": ["cardiology", "neurology"],
+    "ace inhibitor": ["cardiology"],
+    "arb": ["cardiology"],
+    "anticoagulant": ["cardiology", "neurology"],
+    "antiplatelet": ["cardiology", "neurology"],
+    "insulin": ["endocrine"],
+    "antidiabetic": ["endocrine"],
+    "nsaid": ["infectious", "pulmonary", "neurology"],
+    "ssri": ["neurology"],
+}
+
+# Simple in-memory outcome-learning store.
+_medication_outcomes_store: Dict[str, Dict[str, int]] = {}
 
 # Initialize patient history service for EMR integration
 # FHIR server configuration from environment variables
@@ -34,6 +82,222 @@ async def get_patient_history_service() -> PatientHistoryService:
             auth_token=FHIR_AUTH_TOKEN
         )
     return _patient_history
+
+
+class MedicationOutcomeFeedback(BaseModel):
+    """Outcome feedback used to tune medication-history weighting over time."""
+    medication: str
+    outcome: str = Field(..., description="success | failure | adverse")
+    specialty: Optional[str] = None
+    site_id: Optional[str] = None
+
+
+def _normalize_text(value: Optional[str]) -> str:
+    return (value or "").strip().lower()
+
+
+def _parse_iso_date(value: Optional[str]) -> Optional[datetime]:
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return None
+
+
+def _days_since(reference_dt: Optional[datetime]) -> Optional[float]:
+    if reference_dt is None:
+        return None
+    now = datetime.now(timezone.utc)
+    delta = now - reference_dt
+    return max(0.0, delta.total_seconds() / 86400.0)
+
+
+def _recency_weight(days_ago: Optional[float], half_life_days: float) -> float:
+    """Exponential decay where weight halves every half_life_days."""
+    if days_ago is None:
+        return 0.2
+    if half_life_days <= 0:
+        return 1.0
+    return math.exp(-math.log(2) * (days_ago / half_life_days))
+
+
+def _classify_medication(med_name: Optional[str]) -> str:
+    med = _normalize_text(med_name)
+    if not med:
+        return "unknown"
+
+    direct_class = _med_safety._get_drug_class(med)
+    if direct_class:
+        return direct_class
+
+    for class_name, hints in MEDICATION_CLASS_HINTS.items():
+        if any(hint in med for hint in hints):
+            return class_name
+
+    return "unknown"
+
+
+def _infer_dx_family(tree_id: str, result: Dict[str, Any]) -> str:
+    """Infer diagnosis family from tree metadata/id for medication-history scoring."""
+    family_raw = _normalize_text(result.get("tree", {}).get("title"))
+    tree_key = _normalize_text(tree_id)
+    haystack = f"{family_raw} {tree_key}"
+
+    for family, keywords in DX_FAMILY_KEYWORDS.items():
+        if any(keyword in haystack for keyword in keywords):
+            return family
+    return "general"
+
+
+def _get_effective_weights(patient_context: Dict[str, Any]) -> Dict[str, float]:
+    """Merge default weight config with optional site/specialty overrides."""
+    effective = dict(DEFAULT_MED_HISTORY_WEIGHTS)
+    if not isinstance(patient_context, dict):
+        return effective
+
+    med_cfg = patient_context.get("med_history_weights") or {}
+    if isinstance(med_cfg, dict):
+        for key in ["base_weight", "outcome_learning_weight", "adverse_penalty_multiplier", "half_life_days"]:
+            if key in med_cfg:
+                try:
+                    effective[key] = float(med_cfg[key])
+                except Exception:
+                    pass
+    return effective
+
+
+def _get_outcome_bias(med_class: str, outcome_learning_weight: float) -> float:
+    bucket = _medication_outcomes_store.get(med_class, {})
+    success = int(bucket.get("success", 0))
+    failure = int(bucket.get("failure", 0))
+    adverse = int(bucket.get("adverse", 0))
+    total = success + failure + adverse
+    if total == 0:
+        return 0.0
+
+    raw = (success - failure - (2 * adverse)) / total
+    return raw * outcome_learning_weight
+
+
+def _extract_med_history_features(
+    medication_history: List[Dict[str, Any]],
+    current_medications: List[Dict[str, Any]],
+    dx_family: str,
+    weights: Dict[str, float],
+    proposed_medications: List[str],
+) -> Dict[str, Any]:
+    """Build medication timeline features and explainability signals for diagnosis support."""
+    half_life_days = float(weights.get("half_life_days", 90.0))
+    adverse_penalty_multiplier = float(weights.get("adverse_penalty_multiplier", 2.0))
+
+    features = {
+        "recent_discontinuations_30d": 0,
+        "prior_adverse_reaction_flags": 0,
+        "failed_trials_by_class": {},
+        "duplicate_therapy_history": {},
+        "high_risk_withdrawal_risk": False,
+    }
+
+    support_score = 0.0
+    conflict_score = 0.0
+    supported_signals: List[str] = []
+    conflicting_signals: List[str] = []
+    blocked_recommendations: List[Dict[str, str]] = []
+
+    current_classes: List[str] = []
+    for med in current_medications or []:
+        cls = _classify_medication(med.get("name"))
+        if cls != "unknown":
+            current_classes.append(cls)
+
+    class_frequency: Dict[str, int] = {}
+    therapy_matches = THERAPY_CLASS_TO_FAMILY
+
+    for med in medication_history or []:
+        med_name = med.get("name")
+        med_class = _classify_medication(med_name)
+        if med_class == "unknown":
+            continue
+
+        class_frequency[med_class] = class_frequency.get(med_class, 0) + 1
+
+        status = _normalize_text(med.get("status"))
+        stop_dt = _parse_iso_date(med.get("date_stopped")) or _parse_iso_date(med.get("date_prescribed"))
+        days_ago = _days_since(stop_dt)
+        recency = _recency_weight(days_ago, half_life_days)
+        outcome_bias = _get_outcome_bias(med_class, float(weights.get("outcome_learning_weight", 0.6)))
+
+        reason_text = _normalize_text(med.get("stop_reason") or med.get("reason") or med.get("note"))
+        adverse_stop = any(tok in reason_text for tok in ["adverse", "allergy", "rash", "anaphyl", "intoler", "side effect"])
+
+        is_discontinued = status in ["stopped", "completed", "cancelled"]
+        if is_discontinued and days_ago is not None and days_ago <= 30:
+            features["recent_discontinuations_30d"] += 1
+
+        if adverse_stop:
+            features["prior_adverse_reaction_flags"] += 1
+            conflict_increment = recency * adverse_penalty_multiplier
+            conflict_score += conflict_increment
+            conflicting_signals.append(f"Prior adverse reaction to {med_name or med_class}")
+
+        if is_discontinued and not adverse_stop:
+            failed = features["failed_trials_by_class"].get(med_class, 0)
+            features["failed_trials_by_class"][med_class] = failed + 1
+            conflict_score += recency
+            conflicting_signals.append(f"Prior failed trial in class: {med_class}")
+
+        mapped_families = therapy_matches.get(med_class, [])
+        if dx_family in mapped_families:
+            support_delta = recency + outcome_bias
+            support_score += support_delta
+            supported_signals.append(f"Medication class {med_class} supports {dx_family} context")
+        elif mapped_families:
+            # Non-matching class can weakly conflict with current family focus.
+            conflict_score += max(0.0, recency * 0.25)
+
+    for med_class, count in class_frequency.items():
+        if count > 1:
+            features["duplicate_therapy_history"][med_class] = count
+
+    withdrawal_classes = {"beta blocker", "ssri", "anticoagulant", "insulin"}
+    features["high_risk_withdrawal_risk"] = any(
+        med_class in withdrawal_classes and freq >= 2
+        for med_class, freq in class_frequency.items()
+    )
+
+    # Recommendation blocking based on prior adverse reactions by class/name.
+    adverse_markers = {sig.split(" to ")[-1].lower() for sig in conflicting_signals if "Prior adverse reaction" in sig}
+    filtered_proposals: List[str] = []
+    for proposed in proposed_medications:
+        proposed_norm = _normalize_text(proposed)
+        proposed_class = _classify_medication(proposed_norm)
+        blocked = False
+        for marker in adverse_markers:
+            marker_class = _classify_medication(marker)
+            if proposed_norm == marker or (marker_class != "unknown" and proposed_class == marker_class):
+                blocked = True
+                blocked_recommendations.append({
+                    "medication": proposed,
+                    "reason": f"Blocked due to prior adverse history ({marker})"
+                })
+                conflict_score += 0.5
+                break
+        if not blocked:
+            filtered_proposals.append(proposed)
+
+    return {
+        "features": features,
+        "support_score": round(support_score * float(weights.get("base_weight", 1.0)), 3),
+        "conflict_score": round(conflict_score * float(weights.get("base_weight", 1.0)), 3),
+        "history_supported_signals": supported_signals[:20],
+        "history_conflicting_signals": conflicting_signals[:20],
+        "blocked_recommendations": blocked_recommendations,
+        "filtered_proposed_medications": filtered_proposals,
+    }
 
 
 def _append_unique_terms(target: List[str], values: List[str]) -> List[str]:
@@ -202,6 +466,10 @@ async def evaluate_tree(
     if "red_flags" in patient and not isinstance(patient["red_flags"], list):
         patient["red_flags"] = [patient["red_flags"]]
 
+    medication_history_records: List[Dict[str, Any]] = []
+    if isinstance(patient.get("medication_history"), list):
+        medication_history_records = patient.get("medication_history", [])
+
     # Pull patient history from EMR if patient_id provided (EMR instances)
     emr_data_pulled = False
     if patient.get("emr_patient_id"):
@@ -218,6 +486,10 @@ async def evaluate_tree(
                 emr_medications = [med.get("name") for med in patient_history.current_medications if med.get("name")]
                 patient["current_medications"] = emr_medications
                 emr_data_pulled = True
+
+            # Preserve full medication records for timeline-aware scoring.
+            medication_history_records = patient_history.medication_history or []
+            patient["medication_history"] = medication_history_records
             
             if patient_history.allergies:
                 patient["allergies"] = patient_history.allergies
@@ -257,6 +529,7 @@ async def evaluate_tree(
                 "history_imaging_count": len(patient_history.imaging_studies),
                 "history_condition_count": len(patient_history.active_conditions),
                 "history_medication_count": len(patient_history.current_medications),
+                "history_discontinued_med_count": len(patient_history.medication_history),
             }
             
             # Add patient demographics if not provided
@@ -274,12 +547,42 @@ async def evaluate_tree(
     
     # Perform the evaluation
     result = _trees.evaluate(tree_id, patient)
+
+    # Medication-history intelligence (phases 1-3): features, weights, explainability.
+    med_history_analysis = None
+    if result and not result.get("error"):
+        current_med_records = [{"name": med} for med in patient.get("current_medications", []) if med]
+        proposed_from_payload = patient.get("proposed_medications")
+        if not isinstance(proposed_from_payload, list):
+            proposed_from_payload = []
+
+        patient_context = patient.get("patient_context", {}) if isinstance(patient.get("patient_context", {}), dict) else {}
+        effective_weights = _get_effective_weights(patient_context)
+        dx_family = _infer_dx_family(tree_id, result)
+        med_history_analysis = _extract_med_history_features(
+            medication_history=medication_history_records,
+            current_medications=current_med_records,
+            dx_family=dx_family,
+            weights=effective_weights,
+            proposed_medications=[str(m) for m in proposed_from_payload],
+        )
+
+        result["medication_history_analysis"] = {
+            "diagnosis_family": dx_family,
+            "weights": effective_weights,
+            "features": med_history_analysis["features"],
+            "support_score": med_history_analysis["support_score"],
+            "conflict_score": med_history_analysis["conflict_score"],
+            "history_supported_signals": med_history_analysis["history_supported_signals"],
+            "history_conflicting_signals": med_history_analysis["history_conflicting_signals"],
+            "blocked_recommendations": med_history_analysis["blocked_recommendations"],
+        }
     
     # Check medication safety if medications provided
     medication_alerts = None
     if result and not result.get("error"):
         current_medications = patient.get("current_medications", [])
-        proposed_medications = []
+        proposed_medications = patient.get("proposed_medications", []) if isinstance(patient.get("proposed_medications"), list) else []
         
         # Extract proposed medications from management recommendations
         if result.get("management"):
@@ -296,6 +599,10 @@ async def evaluate_tree(
                     if "lisinopril" in mgmt.lower() or "ace inhibitor" in mgmt.lower():
                         proposed_medications.append("lisinopril")
         
+        # Apply medication-history recommendation blocking before safety checks.
+        if med_history_analysis and med_history_analysis.get("filtered_proposed_medications") is not None:
+            proposed_medications = med_history_analysis["filtered_proposed_medications"]
+
         # Run medication safety check if we have medications
         if current_medications or proposed_medications:
             medication_alerts = _med_safety.check_medication_safety(
@@ -313,6 +620,14 @@ async def evaluate_tree(
     if emr_data_pulled:
         result["emr_data_source"] = "FHIR"
         result["emr_data_pulled"] = True
+
+    # Surface explainability fields at top level for consumers/UI.
+    if med_history_analysis:
+        result["history_supported_signals"] = med_history_analysis.get("history_supported_signals", [])
+        result["history_conflicting_signals"] = med_history_analysis.get("history_conflicting_signals", [])
+        result["prior_medication_failures_considered"] = bool(
+            med_history_analysis.get("features", {}).get("failed_trials_by_class")
+        )
     
     # Save to search history for authenticated users
     if current_user and result:
@@ -384,6 +699,20 @@ async def evaluate_tree(
                     "details": alert['clinical_effect'],
                     "recommendation": alert['recommendation']
                 })
+
+    # Add medication-history specific recommendation penalties/blocks to warnings.
+    if med_history_analysis:
+        blocked = med_history_analysis.get("blocked_recommendations", [])
+        if blocked:
+            if "warnings" not in response:
+                response["warnings"] = []
+            for item in blocked:
+                response["warnings"].append({
+                    "type": "historical_medication_block",
+                    "message": f"⛔ Blocked by medication history: {item.get('medication')}",
+                    "details": item.get("reason", "prior adverse history"),
+                    "recommendation": "Choose an alternative medication class."
+                })
     
     # Add search limit info to response
     if not current_user:
@@ -400,9 +729,41 @@ async def evaluate_tree(
     return response
 
 
+@router.post("/medication-outcomes")
+async def record_medication_outcome_feedback(
+    payload: MedicationOutcomeFeedback,
+    current_user: Optional[Dict] = Depends(get_optional_user)
+):
+    """
+    Capture medication outcome feedback to continuously tune history-based weighting.
+
+    Outcome values:
+    - success: medication supported expected clinical improvement
+    - failure: medication was ineffective
+    - adverse: medication caused clinically relevant adverse event
+    """
+    outcome = _normalize_text(payload.outcome)
+    if outcome not in {"success", "failure", "adverse"}:
+        raise HTTPException(status_code=400, detail="outcome must be one of: success, failure, adverse")
+
+    med_class = _classify_medication(payload.medication)
+    if med_class == "unknown":
+        med_class = _normalize_text(payload.medication)
+
+    if med_class not in _medication_outcomes_store:
+        _medication_outcomes_store[med_class] = {"success": 0, "failure": 0, "adverse": 0}
+    _medication_outcomes_store[med_class][outcome] += 1
+
+    return {
+        "status": "recorded",
+        "medication": payload.medication,
+        "medication_class": med_class,
+        "outcome": outcome,
+        "totals": _medication_outcomes_store[med_class],
+    }
+
+
 # Data models for manual patient history
-from pydantic import BaseModel, Field
-from typing import List, Optional
 from datetime import date
 
 
