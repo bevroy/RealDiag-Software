@@ -219,25 +219,6 @@ export default function Home() {
 
       </div>
 
-      {/* Medical Disclaimer at Bottom */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{
-          margin: '0 0 2rem',
-          padding: '1.25rem 1.75rem',
-          background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
-          borderRadius: '24px',
-          color: 'white',
-          textAlign: 'center',
-          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.18)'
-        }}>
-          <strong style={{ fontSize: '0.95rem', letterSpacing: '0.02em' }}>⚠️ MEDICAL DISCLAIMER: NOT FOR CLINICAL USE</strong>
-          <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.95 }}>
-            Educational purposes only. Not FDA-approved. Not a substitute for professional medical judgment.
-            See <Link href="/legal-disclaimer" style={{ color: '#ccfbf1', textDecoration: 'underline' }}>Legal Disclaimer</Link> for complete terms.
-          </p>
-        </div>
-      </div>
-
       {/* Footer — dark slate, mirrors realdiag.org */}
       <div style={{
         background: '#0f172a',
@@ -250,7 +231,10 @@ export default function Home() {
         fontSize: '0.875rem'
       }}>
         <p style={{ margin: 0 }}>
-          RealDiag Clinical Decision Support • Evidence-based diagnostics • For educational purposes
+          RealDiag is designed to support, not replace, clinical judgment.
+        </p>
+        <p style={{ margin: '0.5rem 0 0' }}>
+          Diagnostic suggestions are informational and should be interpreted in full clinical context.
         </p>
         <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
           © {new Date().getFullYear()} RealDiag, LLC. All rights reserved.
