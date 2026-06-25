@@ -13,6 +13,14 @@ nodes:
       - worst headache of life
     go: thunderclap
   - when:
+      any_of:
+      - triage_sbp_ge: severe_htn_sbp
+      - triage_dbp_ge: severe_htn_dbp
+      - triage_o2_le: hypoxemia_o2
+      - triage_temp_c_ge: high_fever_temp_c
+      - triage_hr_ge: tachycardia_hr
+    go: headache_vitals_urgent
+  - when:
       exam_flags_any:
       - papilledema
     go: iih
@@ -40,6 +48,17 @@ nodes:
   - Lumbar puncture (if safe)
   suggest_dx:
   - Idiopathic intracranial hypertension
+  next:
+  - default: null
+- id: headache_vitals_urgent
+  when: {}
+  tests:
+  - Immediate ED evaluation and neurologic reassessment
+  - Repeat focused vitals and oxygenation monitoring
+  - CT head w/o contrast if severe or atypical headache
+  suggest_dx:
+  - Secondary headache with physiologic instability
+  - Hypertensive emergency vs systemic cause
   next:
   - default: null
 - id: primary

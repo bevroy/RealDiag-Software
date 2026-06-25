@@ -14,6 +14,15 @@ nodes:
       - central nystagmus
     go: central
   - when:
+      any_of:
+      - triage_o2_le: hypoxemia_o2
+      - triage_sbp_le: hypotension_sbp
+      - triage_sbp_ge: severe_htn_sbp
+      - triage_hr_ge: tachycardia_hr
+      - triage_resp_ge: tachypnea_resp
+      - triage_temp_c_ge: high_fever_temp_c
+    go: vertigo_vitals_urgent
+  - when:
       symptoms_contains_any:
       - brief positional vertigo
       - dix-hallpike positive
@@ -36,6 +45,17 @@ nodes:
   - Epley maneuver
   suggest_dx:
   - BPPV
+  next:
+  - default: null
+- id: vertigo_vitals_urgent
+  when: {}
+  tests:
+  - Immediate ED evaluation with cardiorespiratory monitoring
+  - ECG and basic labs if unstable or persistent symptoms
+  - Neuroimaging if central features emerge
+  suggest_dx:
+  - Vertigo/dizziness with physiologic instability
+  - Central process vs systemic illness
   next:
   - default: null
 - id: peripheral_vs_central
