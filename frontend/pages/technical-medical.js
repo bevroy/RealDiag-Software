@@ -1,17 +1,23 @@
 import Link from 'next/link'
+import RoleBasedNavigation from '../components/RoleBasedNavigation'
 
 export default function TechnicalMedicalPage() {
   return (
     <div style={styles.page}>
-      <div style={styles.headerWrap}>
-        <div style={styles.headerInner}>
+      <RoleBasedNavigation />
+
+      <div style={styles.bannerWrap}>
+        <div style={styles.bannerInner}>
+          <img src="/logo.png" alt="RealDiag Logo" style={styles.logo} />
+          <div style={{ flex: 1 }}>
+            <h1 style={styles.title}>Technical and Medical Overview</h1>
+            <p style={styles.subtitle}>
+              How RealDiag combines medical reasoning, safety checks, and data integration
+            </p>
+          </div>
           <Link href="/">
             <a style={styles.backLink}>Back to Home</a>
           </Link>
-          <h1 style={styles.title}>Technical and Medical Overview</h1>
-          <p style={styles.subtitle}>
-            How RealDiag combines medical reasoning, safety checks, and data integration
-          </p>
         </div>
       </div>
 
@@ -117,21 +123,33 @@ const styles = {
     color: '#0f172a',
     fontFamily: "'Poppins', system-ui, -apple-system, sans-serif",
   },
-  headerWrap: {
-    borderBottom: '1px solid #d7e3ee',
-    background: 'rgba(255,255,255,0.9)',
+  bannerWrap: {
+    padding: '0.5rem 1rem 0.25rem',
   },
-  headerInner: {
+  bannerInner: {
     maxWidth: '980px',
-    margin: '0 auto',
-    padding: '1.5rem 1rem 1.25rem',
+    margin: '0 auto 0.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    padding: '1rem 1.1rem',
+    border: '1px solid #d7e3ee',
+    borderRadius: '18px',
+    background: '#ffffff',
+    boxShadow: '0 12px 28px rgba(15, 23, 42, 0.07)',
+  },
+  logo: {
+    maxHeight: '56px',
+    width: 'auto',
+    objectFit: 'contain',
+    flexShrink: 0,
   },
   backLink: {
     display: 'inline-block',
-    marginBottom: '0.75rem',
     color: '#0f766e',
     textDecoration: 'none',
     fontWeight: 600,
+    whiteSpace: 'nowrap',
   },
   title: {
     margin: '0 0 0.4rem',

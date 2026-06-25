@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import RoleBasedNavigation from '../components/RoleBasedNavigation'
 
 export default function UserGuidePage() {
   const printedOn = new Date().toLocaleDateString()
@@ -26,11 +27,15 @@ export default function UserGuidePage() {
         }
       `}</style>
 
-      <div style={styles.topBar} className="screen-only">
-        <div style={styles.topBarInner}>
-          <Link href="/">
-            <a style={styles.link}>Back to Home</a>
-          </Link>
+      <RoleBasedNavigation />
+
+      <div style={styles.banner} className="screen-only">
+        <div style={styles.bannerInner}>
+          <img src="/logo.png" alt="RealDiag Logo" style={styles.logo} />
+          <div>
+            <h1 style={styles.bannerTitle}>User Guide</h1>
+            <p style={styles.bannerSubtitle}>Printable quick-start and workflow reference</p>
+          </div>
           <button
             onClick={() => window.print()}
             style={styles.printButton}
@@ -143,26 +148,39 @@ const styles = {
     color: '#0f172a',
     fontFamily: "'Poppins', system-ui, -apple-system, sans-serif",
   },
-  topBar: {
-    position: 'sticky',
-    top: 0,
-    zIndex: 10,
-    borderBottom: '1px solid #dbe4ea',
-    background: 'rgba(255,255,255,0.92)',
-    backdropFilter: 'blur(6px)',
-    padding: '0.75rem 1rem',
+  banner: {
+    padding: '0.5rem 1rem 0.25rem',
   },
-  topBarInner: {
+  bannerInner: {
     maxWidth: '960px',
-    margin: '0 auto',
+    margin: '0 auto 0.5rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: '1rem',
+    padding: '1rem 1.1rem',
+    background: '#ffffff',
+    border: '1px solid #dbe4ea',
+    borderRadius: '18px',
+    boxShadow: '0 10px 28px rgba(15, 23, 42, 0.08)',
   },
-  link: {
+  logo: {
+    maxHeight: '56px',
+    width: 'auto',
+    objectFit: 'contain',
+    flexShrink: 0,
+  },
+  bannerTitle: {
+    margin: '0 0 0.25rem',
+    fontSize: '1.5rem',
+    lineHeight: 1.2,
+    color: '#0f172a',
+  },
+  bannerSubtitle: {
+    margin: 0,
     color: '#0f766e',
-    textDecoration: 'none',
     fontWeight: 600,
+    fontSize: '0.95rem',
   },
   printButton: {
     border: 'none',
