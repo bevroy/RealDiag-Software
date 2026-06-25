@@ -184,12 +184,14 @@ export default function Home() {
           </h3>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '0.75rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '0.9rem',
+            alignItems: 'stretch'
           }}>
             <Link href="/user-guide">
               <a style={{
-                padding: '0.85rem 1rem',
+                minHeight: '72px',
+                padding: '0.95rem 1rem',
                 borderRadius: '12px',
                 border: '1px solid #0f172a',
                 background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
@@ -197,6 +199,10 @@ export default function Home() {
                 color: '#ffffff',
                 fontWeight: '600',
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: '1.35',
                 boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 🖨️ Printable User Guide
@@ -204,7 +210,8 @@ export default function Home() {
             </Link>
             <Link href="/technical-medical">
               <a style={{
-                padding: '0.85rem 1rem',
+                minHeight: '72px',
+                padding: '0.95rem 1rem',
                 borderRadius: '12px',
                 border: '1px solid #0f172a',
                 background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
@@ -212,6 +219,10 @@ export default function Home() {
                 color: '#ffffff',
                 fontWeight: '600',
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: '1.35',
                 boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 🧠 Technical and Medical Overview
@@ -219,7 +230,8 @@ export default function Home() {
             </Link>
             <Link href="/rules">
               <a style={{
-                padding: '0.85rem 1rem',
+                minHeight: '72px',
+                padding: '0.95rem 1rem',
                 borderRadius: '12px',
                 border: '1px solid #0f172a',
                 background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
@@ -227,6 +239,10 @@ export default function Home() {
                 color: '#ffffff',
                 fontWeight: '600',
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: '1.35',
                 boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 📋 Diagnostic Rulse and Codes
@@ -234,7 +250,8 @@ export default function Home() {
             </Link>
             <Link href="/sources">
               <a style={{
-                padding: '0.85rem 1rem',
+                minHeight: '72px',
+                padding: '0.95rem 1rem',
                 borderRadius: '12px',
                 border: '1px solid #0f172a',
                 background: 'linear-gradient(135deg, #0f172a 0%, #0f766e 100%)',
@@ -242,6 +259,10 @@ export default function Home() {
                 color: '#ffffff',
                 fontWeight: '600',
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: '1.35',
                 boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)'
               }}>
                 📖 Sources
