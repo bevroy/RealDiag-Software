@@ -164,6 +164,59 @@ export default function Home() {
           </ul>
         </div>
 
+        {/* Guides */}
+        <div style={{
+          background: 'white',
+          padding: '1.5rem 2rem',
+          borderRadius: '24px',
+          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
+          border: '1px solid #e2e8f0',
+          marginBottom: '2.5rem'
+        }}>
+          <h3 style={{
+            margin: '0 0 1rem',
+            color: '#0f766e',
+            fontSize: '1.2rem',
+            fontWeight: '600'
+          }}>
+            Guides and Reference
+          </h3>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '0.75rem'
+          }}>
+            <Link href="/user-guide">
+              <a style={{
+                padding: '0.85rem 1rem',
+                borderRadius: '12px',
+                border: '1px solid #ccfbf1',
+                background: '#f0fdfa',
+                textDecoration: 'none',
+                color: '#0f766e',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}>
+                🖨️ Printable User Guide
+              </a>
+            </Link>
+            <Link href="/technical-medical">
+              <a style={{
+                padding: '0.85rem 1rem',
+                borderRadius: '12px',
+                border: '1px solid #dbeafe',
+                background: '#eff6ff',
+                textDecoration: 'none',
+                color: '#1d4ed8',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}>
+                🧠 Technical and Medical Overview
+              </a>
+            </Link>
+          </div>
+        </div>
+
       </div>
 
       {/* Medical Disclaimer at Bottom */}

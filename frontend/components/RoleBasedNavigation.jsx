@@ -63,6 +63,8 @@ export default function RoleBasedNavigation() {
   const navItems = [
     { href: '/', label: '🏠 Home', roles: ['all'] },
     { href: '/symptom-search', label: '🔬 Symptom Search', roles: ['all'] },
+    { href: '/user-guide', label: '🖨️ User Guide', roles: ['all'] },
+    { href: '/technical-medical', label: '🧠 Technical/Medical', roles: ['all'] },
     { href: '/search', label: '🔍 Diagnosis Search', roles: ['admin', 'provider', 'doctor'] },
     { href: '/rules', label: '📋 Browse Rules', roles: ['admin', 'provider', 'doctor'] },
     { href: '/integration', label: '🔌 API', roles: ['admin', 'provider', 'doctor'] },
