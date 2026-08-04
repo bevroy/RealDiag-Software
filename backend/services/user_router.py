@@ -40,6 +40,22 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+APPROVED_PROVIDER_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+
+
+def _is_approved_provider_email(email: Optional[str]) -> bool:
+    if not email:
+        return False
+    parts = str(email).strip().lower().rsplit("@", 1)
+    return len(parts) == 2 and parts[1] in APPROVED_PROVIDER_DOMAINS
+
+
+def _normalize_ui_role(email: Optional[str], role: Optional[str]) -> str:
+    role_value = (role or "user").strip().lower()
+    if _is_approved_provider_email(email) and role_value in {"user", "patient", ""}:
+        return "provider"
+    return role_value or "user"
+
 # Import rate limiter
 try:
     from backend.services.security import limiter
@@ -145,8 +161,7 @@ async def login_user(request: Request, credentials: UserLogin):
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
 
     # Default role compatibility: treat generic "user" as provider-level UI role.
-    role = user_safe.get("role", "user")
-    user_safe["role"] = "provider" if role == "user" else role
+    user_safe["role"] = _normalize_ui_role(user_safe.get("email"), user_safe.get("role"))
     
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
@@ -399,8 +414,7 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
     profile = {k: v for k, v in current_user.items() if k != "password_hash"}
-    role = profile.get("role", "user")
-    profile["role"] = "provider" if role == "user" else role
+    profile["role"] = _normalize_ui_role(profile.get("email"), profile.get("role"))
     
     return profile
 
