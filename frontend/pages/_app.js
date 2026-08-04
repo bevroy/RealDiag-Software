@@ -6,7 +6,7 @@ import { AuthGuard } from '../utils/AuthGuard'
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)
   const [showInstallButton, setShowInstallButton] = useState(false)
-  const appVersion = '2026-08-04-nav-cache-fix-1'
+  const appVersion = '2026-08-04-authguard-visibility-fix-2'
 
   useEffect(()=>{
     // Initialize Sentry (client-side only)

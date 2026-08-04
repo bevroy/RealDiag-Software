@@ -8,6 +8,18 @@ const PUBLIC_ROUTES = [
   '/',                    // Landing page with demo video
   '/account',             // Login/Register page
   '/legal-disclaimer',    // Legal information
+  '/symptom-search',      // Core diagnostic workflow
+  '/search',              // Diagnosis search
+  '/rules',               // Rule browser
+  '/integration',         // API/EHR integration page
+  '/features-demo',       // Feature showcase
+  '/education',           // Education module
+  '/sources',             // Source references
+  '/patient-history',     // Clinical documentation tools
+  '/technical-medical',   // Technical and medical overview
+  '/user-guide',          // Printable guide
+  '/health-manager',      // Patient-facing health manager
+  '/pricing',             // Plan/pricing page
   '/_error',              // Error pages
   '/404'                  // Not found page
 ];
