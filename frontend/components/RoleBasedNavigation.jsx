@@ -83,14 +83,15 @@ export default function RoleBasedNavigation() {
 
   const isAuthenticatedHint = typeof window !== 'undefined' && isStoredAuthenticated();
 
-  // If auth is known true but role fetch fails (cross-site cookie issues,
-  // stale cache, transient API errors), default to provider-level nav.
-  const effectiveRole = userRole || (isAuthenticatedHint ? 'provider' : null);
+  // Operational safety: default to provider-level navigation even if auth
+  // signals are inconsistent across domains/cookies, so users are not locked
+  // into a reduced menu due to client-side state drift.
+  const effectiveRole = userRole || (isAuthenticatedHint ? 'provider' : 'provider');
 
   // Filter navigation based on user role
   const visibleNavItems = navItems.filter(item => {
     if (item.roles.includes('all')) return true;
-    if (!effectiveRole) return false; // Hide role-specific items if not logged in
+    if (!effectiveRole) return false;
     return item.roles.includes(effectiveRole);
   });
   

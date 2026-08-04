@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
 import { isAuthenticated, getCurrentUser } from '../utils/auth';
+import { getStoredUser, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
@@ -139,28 +140,18 @@ export default function SymptomSearch() {
       }
       
       // Load user role from localStorage
-      const userStr = localStorage.getItem('realdiag_user');
-      if (userStr) {
-        try {
-          const userData = JSON.parse(userStr);
-          setUserRole(userData.role);
-          console.log('✅ Symptom-search: Loaded role from localStorage:', userData.role);
-        } catch (err) {
-          console.error('Failed to parse user data:', err);
-        }
+      const storedUser = getStoredUser();
+      if (storedUser) {
+        setUserRole(storedUser.role);
+        console.log('✅ Symptom-search: Loaded role from localStorage:', storedUser.role);
       } else {
         // If no localStorage, fetch from API
         console.log('⚠️ Symptom-search: No localStorage, fetching from API...');
-        fetch('https://realdiag-software.onrender.com/users/me', {
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' }
-        })
-          .then(res => res.ok ? res.json() : null)
+        getCurrentUser()
           .then(userData => {
             if (userData) {
               console.log('✅ Symptom-search: Fetched user from API:', userData);
-              localStorage.setItem('realdiag_user', JSON.stringify(userData));
-              localStorage.setItem('realdiag_authenticated', 'true');
+              storeAuthData(userData, null);
               setUserRole(userData.role);
             } else {
               console.log('⚠️ Symptom-search: Not logged in');

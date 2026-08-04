@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
-import { getStoredUser, isStoredAuthenticated, clearStoredAuth } from '../utils/clientAuth';
+import { getStoredUser, isStoredAuthenticated, clearStoredAuth, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 
@@ -117,11 +117,7 @@ export default function AccountPage() {
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       // Store auth data for AuthGuard on other pages
-      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-      localStorage.setItem('realdiag_authenticated', 'true');
-      if (data.csrf_token) {
-        sessionStorage.setItem('csrf_token', data.csrf_token);
-      }
+      storeAuthData(data.user, data.csrf_token || null);
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -147,11 +143,7 @@ export default function AccountPage() {
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       // Store auth data for AuthGuard on other pages
-      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-      localStorage.setItem('realdiag_authenticated', 'true');
-      if (data.csrf_token) {
-        sessionStorage.setItem('csrf_token', data.csrf_token);
-      }
+      storeAuthData(data.user, data.csrf_token || null);
       loadDashboardData();
     } catch (err) {
       setError(err.message);
