@@ -8,6 +8,8 @@
  * CSRF token management for POST/PUT/DELETE requests.
  */
 
+import { storeAuthData, isStoredAuthenticated } from './clientAuth';
+
 /**
  * Get API base URL from runtime config
  */
@@ -37,7 +39,7 @@ export function isAuthenticated() {
   // Check localStorage for authentication state
   // This works across domains unlike HttpOnly cookies
   if (typeof window === 'undefined') return false;
-  return localStorage.getItem('realdiag_authenticated') === 'true';
+  return isStoredAuthenticated();
 }
 
 /**
@@ -93,6 +95,10 @@ export async function login(email, password) {
   if (data.csrf_token) {
     sessionStorage.setItem('csrf_token', data.csrf_token);
   }
+
+  if (data.user) {
+    storeAuthData(data.user, data.csrf_token);
+  }
   
   return data;
 }
@@ -119,6 +125,10 @@ export async function register(userData) {
   
   if (data.csrf_token) {
     sessionStorage.setItem('csrf_token', data.csrf_token);
+  }
+
+  if (data.user) {
+    storeAuthData(data.user, data.csrf_token);
   }
   
   return data;
@@ -170,7 +180,11 @@ export async function getCurrentUser() {
     throw new Error('Failed to get user profile');
   }
   
-  return await response.json();
+  const user = await response.json();
+  if (user) {
+    storeAuthData(user, null);
+  }
+  return user;
 }
 
 /**

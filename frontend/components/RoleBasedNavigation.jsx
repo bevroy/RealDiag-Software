@@ -3,6 +3,7 @@
  * Shows different navigation items based on user role
  */
 import { useEffect, useState } from 'react';
+import { getStoredUser, isStoredAuthenticated, storeAuthData } from '../utils/clientAuth';
 
 export default function RoleBasedNavigation() {
   const [userRole, setUserRole] = useState(null);
@@ -22,19 +23,12 @@ export default function RoleBasedNavigation() {
         'https://realdiag-software.onrender.com';
 
       // Load user role from localStorage
-      const userStr = localStorage.getItem('realdiag_user');
-      console.log('🔍 RoleBasedNav - Raw localStorage value:', userStr);
-      
-      if (userStr) {
-        try {
-          const user = JSON.parse(userStr);
-          console.log('🔍 RoleBasedNav - Parsed user:', user);
-          console.log('🔍 RoleBasedNav - User role:', user.role);
-          // Show cached role immediately for responsiveness...
-          setUserRole(normalizeRole(user.role));
-        } catch (err) {
-          console.error('Failed to parse user data:', err);
-        }
+      const storedUser = getStoredUser();
+      console.log('🔍 RoleBasedNav - Parsed stored user:', storedUser);
+
+      if (storedUser) {
+        // Show cached role immediately for responsiveness.
+        setUserRole(normalizeRole(storedUser.role));
       }
       
       // ...but always refresh from API to avoid stale cached roles.
@@ -50,18 +44,18 @@ export default function RoleBasedNavigation() {
         if (response.ok) {
           const userData = await response.json();
           console.log('🔍 RoleBasedNav - Fetched user from API:', userData);
-          
-          // Store in localStorage for future use
-          localStorage.setItem('realdiag_user', JSON.stringify(userData));
-          localStorage.setItem('realdiag_authenticated', 'true');
+
+          // Store normalized user in localStorage for future use
+          storeAuthData(userData, null);
           
           setUserRole(normalizeRole(userData.role));
         } else {
           console.log('🔍 RoleBasedNav - Not logged in');
-          setUserRole(null);
+          setUserRole(storedUser ? normalizeRole(storedUser.role) : null);
         }
       } catch (error) {
         console.error('🔍 RoleBasedNav - Error fetching user:', error);
+        setUserRole(storedUser ? normalizeRole(storedUser.role) : null);
       }
       
       setIsLoading(false);
@@ -87,8 +81,7 @@ export default function RoleBasedNavigation() {
     { href: '/account', label: '👤 Account', roles: ['all'] }
   ];
 
-  const isAuthenticatedHint =
-    typeof window !== 'undefined' && localStorage.getItem('realdiag_authenticated') === 'true';
+  const isAuthenticatedHint = typeof window !== 'undefined' && isStoredAuthenticated();
 
   // If auth is known true but role fetch fails (cross-site cookie issues,
   // stale cache, transient API errors), default to provider-level nav.

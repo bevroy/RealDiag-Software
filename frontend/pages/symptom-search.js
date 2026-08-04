@@ -9,7 +9,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
-import { isAuthenticated } from '../utils/auth';
+import { isAuthenticated, getCurrentUser } from '../utils/auth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
