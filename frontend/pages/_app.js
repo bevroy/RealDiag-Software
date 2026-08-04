@@ -6,6 +6,7 @@ import { AuthGuard } from '../utils/AuthGuard'
 export default function App({Component, pageProps}){
   const [installPrompt, setInstallPrompt] = useState(null)
   const [showInstallButton, setShowInstallButton] = useState(false)
+  const appVersion = '2026-08-04-nav-cache-fix-1'
 
   useEffect(()=>{
     // Initialize Sentry (client-side only)
@@ -13,6 +14,21 @@ export default function App({Component, pageProps}){
       import('../utils/sentry').catch(err => {
         console.warn('Sentry initialization skipped:', err.message)
       })
+    }
+
+    const storedVersion = typeof window !== 'undefined' ? localStorage.getItem('realdiag_app_version') : null
+    if (typeof window !== 'undefined' && storedVersion !== appVersion) {
+      localStorage.setItem('realdiag_app_version', appVersion)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((regs) => {
+          regs.forEach((reg) => reg.unregister())
+        }).catch(() => {})
+      }
+      if (window.caches) {
+        caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key)))).catch(() => {})
+      }
+      window.location.reload()
+      return
     }
 
     // Register service worker for PWA, with auto-update on new versions.
