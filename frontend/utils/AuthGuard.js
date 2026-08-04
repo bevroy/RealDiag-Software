@@ -5,15 +5,12 @@ import { getCurrentUser } from './auth';
 
 // Pages that don't require authentication
 const PUBLIC_ROUTES = [
-  '/',                    // Landing page with demo video
   '/account',             // Login/Register page
   '/login',               // App-router login page
   '/register',            // App-router register page
   '/forgot-password',     // Password recovery
   '/reset-password',      // Password reset
   '/verify-email',        // Email verification
-  '/legal-disclaimer',    // Legal information
-  '/pricing',             // Plan/pricing page
   '/_error',              // Error pages
   '/404'                  // Not found page
 ];

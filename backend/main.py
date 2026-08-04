@@ -9,7 +9,7 @@ from fastapi import FastAPI, Request
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
 import logging
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from backend.services.diagnostic_router import router as diagnostic_router
@@ -25,6 +25,7 @@ from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
 from backend.services.context_router import router as context_router
+from backend.services.auth_service import verify_token
 
 # Import admin router for AI tree management
 try:
@@ -134,6 +135,58 @@ app = FastAPI(
     version="1.4.0", 
     description="Clinical Decision Support System with Enhanced Security and Medical Training Tools"
 )
+
+
+# Global access control: require authentication for all application routes
+# except explicit auth and health endpoints required for login and service ops.
+PUBLIC_PATHS = {
+    "/health",
+    "/health/version",
+    "/metrics",
+    "/users/login",
+    "/users/register",
+    "/users/forgot-password",
+    "/users/reset-password",
+    "/users/verify-email",
+    "/users/resend-verification",
+}
+
+PUBLIC_PREFIXES = (
+    "/docs",
+    "/openapi.json",
+    "/redoc",
+    "/static/",
+)
+
+
+@app.middleware("http")
+async def require_authentication_globally(request: Request, call_next):
+    """Enforce login by default for all routes not explicitly public."""
+    path = request.url.path or "/"
+
+    if request.method == "OPTIONS":
+        return await call_next(request)
+
+    if path in PUBLIC_PATHS or any(path.startswith(prefix) for prefix in PUBLIC_PREFIXES):
+        return await call_next(request)
+
+    token = request.cookies.get("access_token")
+    if not token:
+        authorization = request.headers.get("Authorization", "")
+        if authorization.startswith("Bearer "):
+            token = authorization[7:]
+
+    if not token:
+        return JSONResponse(status_code=401, content={"detail": "Not authenticated"})
+
+    try:
+        payload = verify_token(token)
+        if payload.get("mfa_pending"):
+            return JSONResponse(status_code=401, content={"detail": "MFA verification required"})
+    except Exception:
+        return JSONResponse(status_code=401, content={"detail": "Not authenticated"})
+
+    return await call_next(request)
 
 # Add test environment middleware FIRST if test mode is enabled
 if TEST_ENVIRONMENT_AVAILABLE and is_test_mode():
