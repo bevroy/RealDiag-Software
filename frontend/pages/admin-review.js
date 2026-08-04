@@ -11,6 +11,11 @@ export default function AdminReview() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [reviewNotes, setReviewNotes] = useState('');
   const [rejectionReason, setRejectionReason] = useState('');
+  const [roleEmail, setRoleEmail] = useState('');
+  const [roleUserId, setRoleUserId] = useState('');
+  const [targetRole, setTargetRole] = useState('provider');
+  const [roleReason, setRoleReason] = useState('');
+  const [roleUpdating, setRoleUpdating] = useState(false);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://realdiag-software.onrender.com';
 
@@ -134,6 +139,69 @@ export default function AdminReview() {
     }
   };
 
+  const handleUpdateRoleByEmail = async (e) => {
+    e.preventDefault();
+    if (!roleEmail.trim()) {
+      alert('Please provide an email address');
+      return;
+    }
+    setRoleUpdating(true);
+    try {
+      const res = await fetch(`${API_URL}/admin/users/role/by-email`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken}`
+        },
+        body: JSON.stringify({
+          email: roleEmail.trim().toLowerCase(),
+          role: targetRole,
+          reason: roleReason || undefined,
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.detail || 'Role update failed');
+      }
+      alert(`Role updated for ${data.email}: ${data.old_role || 'unset'} -> ${data.new_role}`);
+    } catch (error) {
+      alert(error.message || 'Failed to update role');
+    } finally {
+      setRoleUpdating(false);
+    }
+  };
+
+  const handleUpdateRoleByUserId = async (e) => {
+    e.preventDefault();
+    if (!roleUserId.trim()) {
+      alert('Please provide a user_id');
+      return;
+    }
+    setRoleUpdating(true);
+    try {
+      const res = await fetch(`${API_URL}/admin/users/${encodeURIComponent(roleUserId.trim())}/role`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken}`
+        },
+        body: JSON.stringify({
+          role: targetRole,
+          reason: roleReason || undefined,
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.detail || 'Role update failed');
+      }
+      alert(`Role updated for ${data.user_id}: ${data.old_role || 'unset'} -> ${data.new_role}`);
+    } catch (error) {
+      alert(error.message || 'Failed to update role');
+    } finally {
+      setRoleUpdating(false);
+    }
+  };
+
   // Login form
   if (!isAuthenticated) {
     return (
@@ -197,6 +265,72 @@ export default function AdminReview() {
             <button onClick={handleLogout} style={styles.logoutButton}>
               Logout
             </button>
+          </div>
+        </div>
+
+        {/* Role Management */}
+        <div style={styles.roleManagerContainer}>
+          <h2 style={styles.sectionTitle}>👥 Role Management</h2>
+          <p style={styles.roleHelpText}>
+            Promote or demote account roles using the admin API. Allowed roles: user, patient, provider, doctor, admin.
+          </p>
+
+          <div style={styles.roleFormGrid}>
+            <form onSubmit={handleUpdateRoleByEmail} style={styles.roleFormBox}>
+              <h3 style={styles.roleFormTitle}>Update By Email</h3>
+              <input
+                type="email"
+                value={roleEmail}
+                onChange={(e) => setRoleEmail(e.target.value)}
+                placeholder="user@realdiag.com"
+                style={styles.input}
+              />
+              <select value={targetRole} onChange={(e) => setTargetRole(e.target.value)} style={styles.input}>
+                <option value="user">user</option>
+                <option value="patient">patient</option>
+                <option value="provider">provider</option>
+                <option value="doctor">doctor</option>
+                <option value="admin">admin</option>
+              </select>
+              <input
+                type="text"
+                value={roleReason}
+                onChange={(e) => setRoleReason(e.target.value)}
+                placeholder="Reason (optional)"
+                style={styles.input}
+              />
+              <button type="submit" disabled={roleUpdating} style={styles.roleActionButton}>
+                {roleUpdating ? 'Updating...' : 'Update Role by Email'}
+              </button>
+            </form>
+
+            <form onSubmit={handleUpdateRoleByUserId} style={styles.roleFormBox}>
+              <h3 style={styles.roleFormTitle}>Update By User ID</h3>
+              <input
+                type="text"
+                value={roleUserId}
+                onChange={(e) => setRoleUserId(e.target.value)}
+                placeholder="user_xxxxx"
+                style={styles.input}
+              />
+              <select value={targetRole} onChange={(e) => setTargetRole(e.target.value)} style={styles.input}>
+                <option value="user">user</option>
+                <option value="patient">patient</option>
+                <option value="provider">provider</option>
+                <option value="doctor">doctor</option>
+                <option value="admin">admin</option>
+              </select>
+              <input
+                type="text"
+                value={roleReason}
+                onChange={(e) => setRoleReason(e.target.value)}
+                placeholder="Reason (optional)"
+                style={styles.input}
+              />
+              <button type="submit" disabled={roleUpdating} style={styles.roleActionButton}>
+                {roleUpdating ? 'Updating...' : 'Update Role by User ID'}
+              </button>
+            </form>
           </div>
         </div>
 
@@ -544,6 +678,49 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gap: '20px',
+  },
+  roleManagerContainer: {
+    maxWidth: '1400px',
+    margin: '0 auto 30px',
+    background: 'white',
+    borderRadius: '12px',
+    padding: '20px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+  },
+  roleHelpText: {
+    marginTop: '-8px',
+    marginBottom: '16px',
+    color: '#475569',
+    fontSize: '0.9rem',
+  },
+  roleFormGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gap: '16px',
+  },
+  roleFormBox: {
+    border: '1px solid #e2e8f0',
+    borderRadius: '10px',
+    padding: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    background: '#f8fafc',
+  },
+  roleFormTitle: {
+    margin: 0,
+    fontSize: '1rem',
+    color: '#1e293b',
+  },
+  roleActionButton: {
+    background: '#2563eb',
+    color: 'white',
+    padding: '10px 14px',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    cursor: 'pointer',
   },
   statCard: {
     background: 'white',
