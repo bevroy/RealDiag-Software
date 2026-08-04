@@ -480,7 +480,7 @@ export default function AccountPage() {
           )}
 
           {/* Dashboard Tab */}
-          {activeTab === 'dashboard' && isAuthenticated && (
+          {activeTab === 'dashboard' && isAuthenticated() && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Dashboard</h2>
               
@@ -581,7 +581,7 @@ export default function AccountPage() {
           )}
 
           {/* History Tab */}
-          {activeTab === 'history' && isAuthenticated && (
+          {activeTab === 'history' && isAuthenticated() && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Search History</h2>
               {searchHistory.length === 0 ? (
@@ -615,7 +615,7 @@ export default function AccountPage() {
           )}
 
           {/* Favorites Tab */}
-          {activeTab === 'favorites' && isAuthenticated && (
+          {activeTab === 'favorites' && isAuthenticated() && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>My Favorites</h2>
               {favorites.length === 0 ? (
@@ -656,7 +656,7 @@ export default function AccountPage() {
           )}
 
           {/* Lists Tab */}
-          {activeTab === 'lists' && isAuthenticated && (
+          {activeTab === 'lists' && isAuthenticated() && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Custom Differential Lists</h2>
               {customLists.length === 0 ? (
@@ -702,7 +702,7 @@ export default function AccountPage() {
           )}
 
           {/* Analytics Tab */}
-          {activeTab === 'analytics' && isAuthenticated && analytics && (
+          {activeTab === 'analytics' && isAuthenticated() && analytics && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Usage Analytics</h2>
               

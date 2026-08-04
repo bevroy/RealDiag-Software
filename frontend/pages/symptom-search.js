@@ -10,7 +10,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
 import { isAuthenticated, getCurrentUser } from '../utils/auth';
-import { getStoredUser, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
@@ -140,18 +139,28 @@ export default function SymptomSearch() {
       }
       
       // Load user role from localStorage
-      const storedUser = getStoredUser();
-      if (storedUser) {
-        setUserRole(storedUser.role);
-        console.log('✅ Symptom-search: Loaded role from localStorage:', storedUser.role);
+      const userStr = localStorage.getItem('realdiag_user');
+      if (userStr) {
+        try {
+          const userData = JSON.parse(userStr);
+          setUserRole(userData.role);
+          console.log('✅ Symptom-search: Loaded role from localStorage:', userData.role);
+        } catch (err) {
+          console.error('Failed to parse user data:', err);
+        }
       } else {
         // If no localStorage, fetch from API
         console.log('⚠️ Symptom-search: No localStorage, fetching from API...');
-        getCurrentUser()
+        fetch('https://realdiag-software.onrender.com/users/me', {
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then(res => res.ok ? res.json() : null)
           .then(userData => {
             if (userData) {
               console.log('✅ Symptom-search: Fetched user from API:', userData);
-              storeAuthData(userData, null);
+              localStorage.setItem('realdiag_user', JSON.stringify(userData));
+              localStorage.setItem('realdiag_authenticated', 'true');
               setUserRole(userData.role);
             } else {
               console.log('⚠️ Symptom-search: Not logged in');
@@ -722,7 +731,7 @@ export default function SymptomSearch() {
       }
       
       // Track search in user history if authenticated
-      if (isAuthenticated) {
+      if (isAuthenticated()) {
         const token = localStorage.getItem('realdiag_token');
         if (token) {
           try {
@@ -796,7 +805,7 @@ export default function SymptomSearch() {
 
   // Add to favorites
   const addToFavorites = async (result) => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       alert('Please sign in to save favorites');
       window.location.href = '/account';
       return;
