@@ -11,7 +11,7 @@ export default function RoleBasedNavigation() {
   const normalizeRole = (role) => {
     // Backward compatibility: older accounts are often persisted as "user"
     // even though they should see the core clinician/provider tools.
-    if (role === 'user') return 'provider';
+    if (role === 'user' || role === 'patient') return 'provider';
     return role;
   };
 
@@ -87,14 +87,21 @@ export default function RoleBasedNavigation() {
     { href: '/account', label: '👤 Account', roles: ['all'] }
   ];
 
+  const isAuthenticatedHint =
+    typeof window !== 'undefined' && localStorage.getItem('realdiag_authenticated') === 'true';
+
+  // If auth is known true but role fetch fails (cross-site cookie issues,
+  // stale cache, transient API errors), default to provider-level nav.
+  const effectiveRole = userRole || (isAuthenticatedHint ? 'provider' : null);
+
   // Filter navigation based on user role
   const visibleNavItems = navItems.filter(item => {
     if (item.roles.includes('all')) return true;
-    if (!userRole) return false; // Hide role-specific items if not logged in
-    return item.roles.includes(userRole);
+    if (!effectiveRole) return false; // Hide role-specific items if not logged in
+    return item.roles.includes(effectiveRole);
   });
   
-  console.log('🔍 RoleBasedNav - User role:', userRole);
+  console.log('🔍 RoleBasedNav - User role:', userRole, 'effective role:', effectiveRole);
   console.log('🔍 RoleBasedNav - Visible items:', visibleNavItems.map(i => i.label));
 
   return (
