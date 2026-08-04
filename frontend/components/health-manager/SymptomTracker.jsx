@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { authenticatedFetch } from '../../utils/auth';
 
 export default function SymptomTracker({ userData, onSave }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -45,12 +46,8 @@ export default function SymptomTracker({ userData, onSave }) {
 
     setSaving(true);
     try {
-      const response = await fetch('/api/health/symptoms', {
+      const response = await authenticatedFetch('/api/health/symptoms', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
         body: JSON.stringify({
           symptoms: selectedSymptoms,
           severity,

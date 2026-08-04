@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { authenticatedFetch } from '../../utils/auth';
 
 export default function WearableSync({ wearableData, onSync }) {
   const [syncing, setSyncing] = useState(false);
@@ -16,12 +17,8 @@ export default function WearableSync({ wearableData, onSync }) {
   const handleSync = async (deviceId) => {
     setSyncing(true);
     try {
-      const response = await fetch('/api/health/wearable/sync', {
+      const response = await authenticatedFetch('/api/health/wearable/sync', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
         body: JSON.stringify({ deviceId })
       });
 
@@ -41,12 +38,8 @@ export default function WearableSync({ wearableData, onSync }) {
 
   const handleConnect = async (deviceType) => {
     try {
-      const response = await fetch('/api/health/wearable/connect', {
+      const response = await authenticatedFetch('/api/health/wearable/connect', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
         body: JSON.stringify({ deviceType })
       });
 
@@ -69,11 +62,8 @@ export default function WearableSync({ wearableData, onSync }) {
     if (!confirm('Are you sure you want to disconnect this device?')) return;
 
     try {
-      const response = await fetch(`/api/health/wearable/${deviceId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+      const response = await authenticatedFetch(`/api/health/wearable/${deviceId}`, {
+        method: 'DELETE'
       });
 
       if (response.ok) {
