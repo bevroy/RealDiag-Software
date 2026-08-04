@@ -152,9 +152,6 @@ PUBLIC_PATHS = {
 }
 
 PUBLIC_PREFIXES = (
-    "/docs",
-    "/openapi.json",
-    "/redoc",
     "/static/",
 )
 
