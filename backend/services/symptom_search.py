@@ -7,7 +7,7 @@ It searches across all disease families and ranks results by symptom match score
 Features AI tree generation for symptom combinations not in database.
 """
 
-from fastapi import APIRouter, HTTPException, Request, BackgroundTasks
+from fastapi import APIRouter, HTTPException, Request, BackgroundTasks, Depends
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 import yaml
@@ -18,6 +18,7 @@ import logging
 from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
+from backend.services.auth_service import get_current_user
 
 # Import cache service for performance
 try:
@@ -70,7 +71,7 @@ except ImportError:
         def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
             logging.info(f"AUDIT: {event_type} - {details}")
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 # FHIR configuration for optional encounter/history enrichment
 FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "http://localhost:8080/fhir")

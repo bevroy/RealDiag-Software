@@ -7,18 +7,12 @@ import { getCurrentUser } from './auth';
 const PUBLIC_ROUTES = [
   '/',                    // Landing page with demo video
   '/account',             // Login/Register page
+  '/login',               // App-router login page
+  '/register',            // App-router register page
+  '/forgot-password',     // Password recovery
+  '/reset-password',      // Password reset
+  '/verify-email',        // Email verification
   '/legal-disclaimer',    // Legal information
-  '/symptom-search',      // Core diagnostic workflow
-  '/search',              // Diagnosis search
-  '/rules',               // Rule browser
-  '/integration',         // API/EHR integration page
-  '/features-demo',       // Feature showcase
-  '/education',           // Education module
-  '/sources',             // Source references
-  '/patient-history',     // Clinical documentation tools
-  '/technical-medical',   // Technical and medical overview
-  '/user-guide',          // Printable guide
-  '/health-manager',      // Patient-facing health manager
   '/pricing',             // Plan/pricing page
   '/_error',              // Error pages
   '/404'                  // Not found page

@@ -42,7 +42,7 @@ except ImportError:
         def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
             logging.info(f"AUDIT: {event_type} - {details}")
 
-router = APIRouter(prefix="/education", tags=["education"])
+router = APIRouter(prefix="/education", tags=["education"], dependencies=[Depends(get_current_user)])
 
 # ========== MODELS ==========
 
