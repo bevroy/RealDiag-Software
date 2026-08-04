@@ -17,6 +17,10 @@ export default function RoleBasedNavigation() {
 
   useEffect(() => {
     async function loadUserRole() {
+      const apiBase =
+        (typeof window !== 'undefined' && (window.__RUNTIME_CONFIG?.NEXT_PUBLIC_API_BASE || window.__RUNTIME_CONFIG__?.NEXT_PUBLIC_API_BASE)) ||
+        'https://realdiag-software.onrender.com';
+
       // Load user role from localStorage
       const userStr = localStorage.getItem('realdiag_user');
       console.log('🔍 RoleBasedNav - Raw localStorage value:', userStr);
@@ -26,18 +30,17 @@ export default function RoleBasedNavigation() {
           const user = JSON.parse(userStr);
           console.log('🔍 RoleBasedNav - Parsed user:', user);
           console.log('🔍 RoleBasedNav - User role:', user.role);
+          // Show cached role immediately for responsiveness...
           setUserRole(normalizeRole(user.role));
-          setIsLoading(false);
-          return;
         } catch (err) {
           console.error('Failed to parse user data:', err);
         }
       }
       
-      // If no localStorage data, try to fetch from API (user might be logged in via cookies)
-      console.log('🔍 RoleBasedNav - No localStorage, checking API...');
+      // ...but always refresh from API to avoid stale cached roles.
+      console.log('🔍 RoleBasedNav - Checking API for fresh role...');
       try {
-        const response = await fetch('https://realdiag-software.onrender.com/users/me', {
+        const response = await fetch(`${apiBase}/users/me`, {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
@@ -55,6 +58,7 @@ export default function RoleBasedNavigation() {
           setUserRole(normalizeRole(userData.role));
         } else {
           console.log('🔍 RoleBasedNav - Not logged in');
+          setUserRole(null);
         }
       } catch (error) {
         console.error('🔍 RoleBasedNav - Error fetching user:', error);
