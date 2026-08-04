@@ -6,14 +6,14 @@ from pydantic import BaseModel, Field
 import math
 import os
 from .decision_tree_engine import DecisionTreeEngine
-from .auth_service import get_optional_user, add_search_to_history
+from .auth_service import get_current_user, get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
 from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
 from .context_engine import get_context_engine
 
-router = APIRouter(prefix="/diagnostic", tags=["diagnostic"])
+router = APIRouter(prefix="/diagnostic", tags=["diagnostic"], dependencies=[Depends(get_current_user)])
 _trees = DecisionTreeEngine()
 _med_safety = MedicationSafetyService()
 _context_engine = get_context_engine()

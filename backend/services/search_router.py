@@ -4,12 +4,13 @@ Provides detailed clinical information including presentations, workup, treatmen
 With AI-powered content enrichment for incomplete diagnoses
 """
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 from typing import List, Dict, Optional
 from pathlib import Path
 import yaml
 import sys
 import os
+from backend.services.auth_service import get_current_user
 
 # Add data directory to path for ICD-10 and SNOMED databases
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "data"))
@@ -37,7 +38,7 @@ except ImportError:
     AI_ENRICHMENT_ENABLED = False
     AIContentEnricher = None
 
-router = APIRouter(prefix="/api", tags=["search"])
+router = APIRouter(prefix="/api", tags=["search"], dependencies=[Depends(get_current_user)])
 
 # Initialize AI enricher if API keys are available
 ai_enricher = None

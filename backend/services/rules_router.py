@@ -2,11 +2,11 @@
 from fastapi import APIRouter, Query, Depends
 from typing import Optional, Dict
 from .rules_engine import RulesEngine
-from .auth_service import get_optional_user
+from .auth_service import get_current_user, get_optional_user
 from .cache_service import cache
 from functools import lru_cache
 
-router = APIRouter(prefix="/rules", tags=["rules"])
+router = APIRouter(prefix="/rules", tags=["rules"], dependencies=[Depends(get_current_user)])
 
 # Lazy initialization - only create engine when first accessed
 _rules_engine: Optional[RulesEngine] = None
