@@ -16,6 +16,8 @@ import secrets
 from datetime import datetime
 import logging
 
+logger = logging.getLogger(__name__)
+
 # Import AI tree generator
 try:
     from backend.services.ai_tree_generator import AITreeGenerator
@@ -49,6 +51,44 @@ class AdminUser(BaseModel):
     username: str
     role: str
     permissions: List[str]
+
+
+class RoleUpdateRequest(BaseModel):
+    """Request body for role updates."""
+    role: str
+    reason: Optional[str] = None
+
+
+class RoleUpdateByEmailRequest(BaseModel):
+    """Request body for role updates using an email lookup."""
+    email: str
+    role: str
+    reason: Optional[str] = None
+
+
+ALLOWED_ACCOUNT_ROLES = {"user", "patient", "provider", "doctor", "admin"}
+
+
+def _normalize_allowed_role(role: str) -> str:
+    normalized = (role or "").strip().lower()
+    if normalized not in ALLOWED_ACCOUNT_ROLES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid role '{role}'. Allowed roles: {sorted(ALLOWED_ACCOUNT_ROLES)}"
+        )
+    return normalized
+
+
+def _audit_role_change(admin: AdminUser, target_user_id: str, old_role: Optional[str], new_role: str, reason: Optional[str]):
+    logger.info(
+        "ROLE_CHANGE admin=%s target_user_id=%s old_role=%s new_role=%s reason=%s at=%s",
+        admin.username,
+        target_user_id,
+        old_role,
+        new_role,
+        reason or "",
+        datetime.utcnow().isoformat(),
+    )
 
 
 # Simple admin authentication (replace with proper auth in production)
@@ -375,3 +415,140 @@ async def get_admin_stats(admin: AdminUser = Depends(verify_admin_token)):
             status_code=500,
             detail=f"Failed to load statistics: {str(e)}"
         )
+
+
+@router.put("/users/{user_id}/role")
+async def update_user_role(
+    user_id: str,
+    body: RoleUpdateRequest,
+    admin: AdminUser = Depends(verify_admin_token)
+):
+    """
+    Update a user's role by user_id.
+
+    Admin-only endpoint. Supports both DB-backed and in-memory fallback users.
+    """
+    new_role = _normalize_allowed_role(body.role)
+
+    # Prefer DB path when available.
+    try:
+        from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
+        if DATABASE_AVAILABLE:
+            with get_db_session() as db:
+                user = db.query(User).filter_by(user_id=user_id).first()
+                if not user:
+                    raise HTTPException(status_code=404, detail="User not found")
+                old_role = getattr(user, "role", None)
+                user.role = new_role
+                _audit_role_change(admin, user_id, old_role, new_role, body.reason)
+                return {
+                    "success": True,
+                    "user_id": user_id,
+                    "email": getattr(user, "email", None),
+                    "old_role": old_role,
+                    "new_role": new_role,
+                    "reason": body.reason,
+                    "updated_at": datetime.utcnow().isoformat(),
+                }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.warning("DB role update path unavailable for user_id=%s: %s", user_id, e)
+
+    # Fallback to in-memory storage.
+    try:
+        from backend.services.auth_service import users_db
+        user = users_db.get(user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        old_role = user.get("role")
+        user["role"] = new_role
+        _audit_role_change(admin, user_id, old_role, new_role, body.reason)
+        return {
+            "success": True,
+            "user_id": user_id,
+            "email": user.get("email"),
+            "old_role": old_role,
+            "new_role": new_role,
+            "reason": body.reason,
+            "updated_at": datetime.utcnow().isoformat(),
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Role update failed for user_id=%s: %s", user_id, e)
+        raise HTTPException(status_code=500, detail="Role update failed")
+
+
+@router.put("/users/role/by-email")
+async def update_user_role_by_email(
+    body: RoleUpdateByEmailRequest,
+    admin: AdminUser = Depends(verify_admin_token)
+):
+    """
+    Update a user's role by email.
+
+    This is convenient when admins don't know user_id values.
+    """
+    if not body.email:
+        raise HTTPException(status_code=400, detail="email is required")
+
+    email = body.email.strip().lower()
+    new_role = _normalize_allowed_role(body.role)
+
+    # Prefer DB path when available.
+    try:
+        from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
+        if DATABASE_AVAILABLE:
+            with get_db_session() as db:
+                user = db.query(User).filter_by(email=email).first()
+                if not user:
+                    raise HTTPException(status_code=404, detail="User not found")
+                old_role = getattr(user, "role", None)
+                user.role = new_role
+                _audit_role_change(admin, user.user_id, old_role, new_role, body.reason)
+                return {
+                    "success": True,
+                    "user_id": user.user_id,
+                    "email": email,
+                    "old_role": old_role,
+                    "new_role": new_role,
+                    "reason": body.reason,
+                    "updated_at": datetime.utcnow().isoformat(),
+                }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.warning("DB role-by-email path unavailable for email=%s: %s", email, e)
+
+    # Fallback to in-memory storage.
+    try:
+        from backend.services.auth_service import users_db
+        found_user_id = None
+        found_user = None
+        for uid, user in users_db.items():
+            if str(user.get("email", "")).strip().lower() == email:
+                found_user_id = uid
+                found_user = user
+                break
+
+        if not found_user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        old_role = found_user.get("role")
+        found_user["role"] = new_role
+        _audit_role_change(admin, found_user_id, old_role, new_role, body.reason)
+        return {
+            "success": True,
+            "user_id": found_user_id,
+            "email": email,
+            "old_role": old_role,
+            "new_role": new_role,
+            "reason": body.reason,
+            "updated_at": datetime.utcnow().isoformat(),
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Role update by email failed for email=%s: %s", email, e)
+        raise HTTPException(status_code=500, detail="Role update failed")
