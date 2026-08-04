@@ -18,7 +18,7 @@ export function AuthGuard({ children }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       setIsChecking(true);
       
       // Check if current route is public
