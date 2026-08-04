@@ -161,6 +161,21 @@ else:
     logger.warning("⚠️  Using in-memory storage - data will be lost on restart")
 
 
+ALLOWED_LOGIN_EMAIL_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+
+
+def _is_allowed_login_email(email: str) -> bool:
+    """Only allow credentialed access for approved email domains."""
+    if not email:
+        return False
+    normalized = email.strip().lower()
+    parts = normalized.rsplit("@", 1)
+    if len(parts) != 2:
+        return False
+    domain = parts[1]
+    return domain in ALLOWED_LOGIN_EMAIL_DOMAINS
+
+
 # Helper functions
 def _is_bcrypt_hash(value: str) -> bool:
     return isinstance(value, str) and value.startswith(("$2a$", "$2b$", "$2y$"))
@@ -380,6 +395,12 @@ def update_user_mfa_state(user_id: str, **fields) -> None:
 # User management functions
 def create_user(user_data: UserCreate) -> Dict[str, Any]:
     """Create new user account."""
+    if not _is_allowed_login_email(user_data.email):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Account registration is restricted to realdiag.com or elionyxhealth.com email addresses"
+        )
+
     if DATABASE_AVAILABLE:
         # Database version
         with get_db_session() as db:
@@ -507,6 +528,12 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
 
 def authenticate_user(email: str, password: str) -> Dict[str, Any]:
     """Authenticate user and return user data."""
+    if not _is_allowed_login_email(email):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Login is restricted to realdiag.com or elionyxhealth.com email addresses"
+        )
+
     if DATABASE_AVAILABLE:
         # Database version
         try:

@@ -8,6 +8,13 @@ export default function RoleBasedNavigation() {
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const normalizeRole = (role) => {
+    // Backward compatibility: older accounts are often persisted as "user"
+    // even though they should see the core clinician/provider tools.
+    if (role === 'user') return 'provider';
+    return role;
+  };
+
   useEffect(() => {
     async function loadUserRole() {
       // Load user role from localStorage
@@ -19,7 +26,7 @@ export default function RoleBasedNavigation() {
           const user = JSON.parse(userStr);
           console.log('🔍 RoleBasedNav - Parsed user:', user);
           console.log('🔍 RoleBasedNav - User role:', user.role);
-          setUserRole(user.role);
+          setUserRole(normalizeRole(user.role));
           setIsLoading(false);
           return;
         } catch (err) {
@@ -45,7 +52,7 @@ export default function RoleBasedNavigation() {
           localStorage.setItem('realdiag_user', JSON.stringify(userData));
           localStorage.setItem('realdiag_authenticated', 'true');
           
-          setUserRole(userData.role);
+          setUserRole(normalizeRole(userData.role));
         } else {
           console.log('🔍 RoleBasedNav - Not logged in');
         }

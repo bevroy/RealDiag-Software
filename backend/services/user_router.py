@@ -143,8 +143,10 @@ async def login_user(request: Request, credentials: UserLogin):
     
     # Remove sensitive data
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
-    
-    user_safe["role"] = user_safe.get("role", "user")
+
+    # Default role compatibility: treat generic "user" as provider-level UI role.
+    role = user_safe.get("role", "user")
+    user_safe["role"] = "provider" if role == "user" else role
     
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
@@ -397,7 +399,8 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
     profile = {k: v for k, v in current_user.items() if k != "password_hash"}
-    profile["role"] = profile.get("role", "user")
+    role = profile.get("role", "user")
+    profile["role"] = "provider" if role == "user" else role
     
     return profile
 
