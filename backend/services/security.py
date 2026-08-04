@@ -303,6 +303,10 @@ class APIKeyManager:
         self.storage_file = storage_file
         self.api_keys: Dict[str, Dict[str, Any]] = {}
         self._load_keys()
+
+    @staticmethod
+    def _hash_key(api_key: str) -> str:
+        return hashlib.sha256(api_key.encode('utf-8')).hexdigest()
     
     def _load_keys(self):
         """Load API keys from file"""
@@ -335,9 +339,11 @@ class APIKeyManager:
     def create_key(self, name: str, permissions: list = None) -> str:
         """Create a new API key"""
         api_key = secrets.token_urlsafe(32)
+        key_hash = self._hash_key(api_key)
         
-        self.api_keys[api_key] = {
+        self.api_keys[key_hash] = {
             "name": name,
+            "prefix": api_key[:8],
             "created_at": datetime.utcnow().isoformat(),
             "permissions": permissions or ["read"],
             "last_used": None,
@@ -349,26 +355,28 @@ class APIKeyManager:
     
     def validate_key(self, api_key: str) -> bool:
         """Validate API key"""
-        if api_key not in self.api_keys:
+        key_hash = self._hash_key(api_key)
+        if key_hash not in self.api_keys:
             return False
         
         # Update usage stats
-        self.api_keys[api_key]["last_used"] = datetime.utcnow().isoformat()
-        self.api_keys[api_key]["usage_count"] += 1
+        self.api_keys[key_hash]["last_used"] = datetime.utcnow().isoformat()
+        self.api_keys[key_hash]["usage_count"] += 1
         self._save_keys()
         
         return True
     
     def revoke_key(self, api_key: str):
         """Revoke an API key"""
-        if api_key in self.api_keys:
-            del self.api_keys[api_key]
+        key_hash = self._hash_key(api_key)
+        if key_hash in self.api_keys:
+            del self.api_keys[key_hash]
             self._save_keys()
     
     def list_keys(self) -> Dict[str, Dict[str, Any]]:
         """List all API keys (without showing the actual keys)"""
         return {
-            key[:8] + "...": {
+            data.get("prefix", key[:8]) + "...": {
                 "name": data["name"],
                 "created_at": data["created_at"],
                 "last_used": data["last_used"],

@@ -70,6 +70,24 @@ logger = logging.getLogger("realdiag")
 SENTRY_DSN = os.getenv("SENTRY_DSN")
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
+if ENVIRONMENT == "production":
+    unsafe_flags = []
+    if os.getenv("SECURITY_ENABLED", "true").lower() == "false":
+        unsafe_flags.append("SECURITY_ENABLED=false")
+    if os.getenv("MFA_REQUIRED", "true").lower() == "false":
+        unsafe_flags.append("MFA_REQUIRED=false")
+    if os.getenv("ENCRYPTION_ENABLED", "true").lower() == "false":
+        unsafe_flags.append("ENCRYPTION_ENABLED=false")
+    if os.getenv("BYPASS_SUBSCRIPTION_CHECKS", "false").lower() == "true":
+        unsafe_flags.append("BYPASS_SUBSCRIPTION_CHECKS=true")
+    if os.getenv("TEST_MODE_UNLIMITED_ACCESS", "false").lower() == "true":
+        unsafe_flags.append("TEST_MODE_UNLIMITED_ACCESS=true")
+    if unsafe_flags:
+        raise RuntimeError(
+            "Refusing to start: ENVIRONMENT=production but test/security flags are set: "
+            + ", ".join(unsafe_flags)
+        )
+
 # Log environment and test mode status
 logger.info(f"🌍 Environment: {ENVIRONMENT}")
 if is_test_mode():
@@ -215,7 +233,9 @@ templates = Jinja2Templates(directory="backend/templates")
 # call this API without requiring a manual env var change in Render.
 _preview_env = os.getenv("PREVIEW_ORIGIN_REGEX")
 _netlify_part = r"(?:[A-Za-z0-9-]+--)?realdiag\.netlify\.app"
-if _preview_env:
+if ENVIRONMENT == "production":
+    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:%s)$" % _netlify_part
+elif _preview_env:
     # strip optional leading scheme anchor and trailing dollar so we can embed
     _p = re.sub(r'^https?://', '', _preview_env)
     _p = re.sub(r'\$$', '', _p)
@@ -251,7 +271,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
-logger.info(f"✅ CORS configured for {ENVIRONMENT} (permissive)")
+logger.info(f"✅ CORS configured for {ENVIRONMENT}")
 
 
 @app.get('/metrics')
@@ -290,6 +310,8 @@ def health_check():
         "subscription_bypass": should_bypass_subscription(),
     }
     
+    REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
+    logger.info('health check')
     return health_status
 
 
@@ -307,14 +329,6 @@ def root(request: Request):
         return templates.TemplateResponse(request, "index.html", {"request": request, "app": Config.APP_NAME, "version": Config.APP_VERSION})
     # Non-browser clients: redirect to docs
     return RedirectResponse(url="/docs", status_code=301)
-
-
-@app.get("/health")
-def health():
-    REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
-    logger.info('health check')
-    return {"ok": True}
-
 
 @app.get("/version")
 def version():

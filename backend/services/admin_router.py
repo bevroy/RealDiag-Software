@@ -11,6 +11,8 @@ from typing import Optional, List
 from pydantic import BaseModel
 import json
 import os
+import re
+import secrets
 from datetime import datetime
 import logging
 
@@ -23,6 +25,14 @@ except ImportError:
     AITreeGenerator = None
 
 router = APIRouter(prefix="/admin", tags=["admin"])
+
+_SAFE_TREE_ID_RE = re.compile(r"^[A-Za-z0-9_-]+$")
+
+
+def _validate_tree_id(tree_id: str) -> str:
+    if not tree_id or not _SAFE_TREE_ID_RE.match(tree_id):
+        raise HTTPException(status_code=400, detail="Invalid tree_id")
+    return tree_id
 
 
 # Models
@@ -66,7 +76,7 @@ def verify_admin_token(authorization: Optional[str] = Header(None)) -> AdminUser
             detail="Admin authentication not configured"
         )
     
-    if token != admin_token:
+    if not secrets.compare_digest(token, admin_token):
         raise HTTPException(status_code=403, detail="Invalid admin token")
     
     # Return admin user info
@@ -155,9 +165,14 @@ async def get_pending_tree_detail(
             detail="AI tree management not available"
         )
     
+    tree_id = _validate_tree_id(tree_id)
+
     try:
         # Load tree file
-        filepath = f"backend/data/generated_trees/pending/{tree_id}.json"
+        pending_dir = os.path.abspath("backend/data/generated_trees/pending")
+        filepath = os.path.join(pending_dir, f"{tree_id}.json")
+        if not os.path.abspath(filepath).startswith(pending_dir + os.sep):
+            raise HTTPException(status_code=400, detail="Invalid tree_id")
         if not os.path.exists(filepath):
             raise HTTPException(
                 status_code=404,
@@ -202,6 +217,8 @@ async def review_tree(
             detail="AI tree management not available"
         )
     
+    _validate_tree_id(review.tree_id)
+
     if review.action not in ["approve", "reject"]:
         raise HTTPException(
             status_code=400,

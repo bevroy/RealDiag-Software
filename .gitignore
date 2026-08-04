@@ -87,10 +87,17 @@ credentials/
 config/*.secret.*
 
 # Diagnostic reports
+# PATCHED (audit fix): this used to be a blanket `*.json` rule with only
+# two path exceptions (!frontend/tsconfig.json, !realdiag-demo/**/*.json).
+# That meant ANY new JSON file added anywhere in the repo - a new data
+# file under backend/data/, a lockfile, a config file - would be silently
+# untracked unless whoever added it knew to `git add -f` it. The CI
+# workflow even has a comment acknowledging uncertainty about whether
+# package-lock.json is tracked, which traces back to this rule. Scoped
+# down to the actual ad-hoc report files this was meant to ignore.
 reports/
-*.json
-!frontend/tsconfig.json
-!realdiag-demo/**/*.json
+diagnostic_report*.json
+system_diagnostic*.json
 *.csv
 frontend/out/
 backups/

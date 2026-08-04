@@ -1,3 +1,6 @@
+# PATCHED (audit fix): no USER instruction previously, so the container
+# ran as root. Switched to the `node` user that the official node:18-alpine
+# image already ships with, after fixing ownership of the app directory.
 
 FROM node:18-alpine AS builder
 WORKDIR /app/frontend
@@ -15,5 +18,10 @@ RUN chmod +x ./docker-entrypoint.sh
 # Ensure curl is available for the container healthcheck and runtime probes
 # Alpine images don't include curl by default.
 RUN apk add --no-cache curl
+
+# PATCHED: run as the non-root `node` user (built into node:18-alpine)
+# instead of root.
+RUN chown -R node:node /app/frontend
+USER node
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

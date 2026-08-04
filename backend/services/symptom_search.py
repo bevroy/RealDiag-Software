@@ -1129,11 +1129,13 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
                         ai_score = 2.5
                     else:
                         ai_score = 1.5
+
+                    display_label = f"(AI-suggested, unverified) {diagnosis_name}" if diagnosis_name else diagnosis_name
                     
                     # Create diagnosis match from AI suggestion
                     ai_match = DiagnosisMatch(
                         rule_id=dx_id,
-                        label=diagnosis_name,
+                        label=display_label,
                         family=ai_dx.get('specialty', 'general'),
                         match_score=ai_score,
                         matched_presentations=ai_dx.get('key_features', []),
@@ -1217,6 +1219,8 @@ async def get_search_suggestions():
         for rule in rules:
             presentations = rule.get('presentations', [])
             for presentation in presentations:
+                if not isinstance(presentation, str):
+                    continue
                 # Extract individual symptoms (simple approach: split by comma)
                 parts = [p.strip() for p in presentation.split(',')]
                 symptoms.update(parts)

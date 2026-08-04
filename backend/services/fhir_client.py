@@ -493,3 +493,4 @@ class CommonLOINC:
     WEIGHT = "29463-7"
     HEIGHT = "8302-2"
     BMI = "39156-5"
+    GCS_SCORE = "9269-2"

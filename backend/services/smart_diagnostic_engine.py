@@ -215,20 +215,33 @@ class SmartDiagnosticEngine:
         
         if troponin_i or troponin_t:
             tropo = troponin_i or troponin_t
-            if tropo.value > 0.04:  # Elevated
+            assay_name = "troponin I" if troponin_i else "troponin T"
+            if tropo.reference_range:
+                high_ref = tropo.reference_range.get("high")
+                is_elevated = tropo.is_abnormal and tropo.value > (high_ref or 0)
+                threshold_desc = f"> {high_ref} {tropo.unit} (lab reference range)"
+            else:
+                fallback_threshold = 0.04 if troponin_i else 0.01
+                is_elevated = tropo.value > fallback_threshold
+                threshold_desc = (
+                    f"> {fallback_threshold} {tropo.unit} "
+                    "(assay-specific default, no lab reference range provided)"
+                )
+
+            if is_elevated:
                 criteria_met.append(CriterionEvaluation(
                     criterion="Elevated troponin",
                     status=CriteriaStatus.PRESENT,
                     value=f"{tropo.value} {tropo.unit}",
-                    expected="> 0.04 ng/mL",
-                    details=f"Troponin elevated - consistent with myocardial injury"
+                    expected=threshold_desc,
+                    details=f"{assay_name} elevated - consistent with myocardial injury"
                 ))
             else:
                 criteria_not_met.append(CriterionEvaluation(
                     criterion="Elevated troponin",
                     status=CriteriaStatus.ABSENT,
                     value=f"{tropo.value} {tropo.unit}",
-                    expected="> 0.04 ng/mL"
+                    expected=threshold_desc
                 ))
         else:
             criteria_unknown.append(CriterionEvaluation(
@@ -324,6 +337,33 @@ class SmartDiagnosticEngine:
                     value=f"{sbp.value} {sbp.unit}",
                     expected="<= 100 mmHg"
                 ))
+
+        # Altered mentation (GCS < 15)
+        gcs = patient_data.get_vital(CommonLOINC.GCS_SCORE)
+        if gcs:
+            if gcs.value < 15:
+                qsofa_score += 1
+                criteria_met.append(CriterionEvaluation(
+                    criterion="Altered mentation (qSOFA)",
+                    status=CriteriaStatus.PRESENT,
+                    value=f"GCS {gcs.value}",
+                    expected="GCS < 15",
+                    details="Altered mental status contributes to qSOFA"
+                ))
+            else:
+                criteria_not_met.append(CriterionEvaluation(
+                    criterion="Altered mentation (qSOFA)",
+                    status=CriteriaStatus.ABSENT,
+                    value=f"GCS {gcs.value}",
+                    expected="GCS < 15"
+                ))
+        else:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Altered mentation (qSOFA)",
+                status=CriteriaStatus.UNKNOWN,
+                details="GCS not documented - qSOFA cannot be fully scored without it"
+            ))
+            missing_tests.append("Glasgow Coma Scale / mental status assessment")
         
         # WBC abnormal
         wbc = patient_data.get_lab(CommonLOINC.WBC)

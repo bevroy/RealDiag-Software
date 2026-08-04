@@ -4,6 +4,18 @@ PostgreSQL Database Module
 
 Provides database connection, ORM models, and helper functions for data persistence.
 Uses SQLAlchemy for ORM and connection pooling.
+
+PATCHED (audit fixes):
+- Added mfa_enabled / mfa_pending / mfa_secret / mfa_backup_codes / mfa_enrolled_at
+  columns to User so MFA state can actually be persisted (previously the columns
+  didn't exist on the ORM model, so mfa_router.py had nothing to write to and its
+  persistence lines were commented out).
+- to_dict() now exposes mfa_enabled/mfa_enrolled_at (safe to show the user) but
+  deliberately excludes mfa_secret and mfa_backup_codes so those never leak into
+  a generic API response. Code that needs the raw secret/backup codes should use
+  auth_service.get_user_mfa_state(), which reads them directly from the DB row.
+- _ensure_user_columns() now also backfills the new mfa_* columns and role on
+  pre-existing databases, the same way it already did for password_reset_token.
 """
 
 import os
@@ -35,7 +47,7 @@ if not DATABASE_URL:
     db_name = os.getenv("DATABASE_NAME")
     db_user = os.getenv("DATABASE_USER")
     db_password = os.getenv("DATABASE_PASSWORD")
-    
+
     if all([db_host, db_name, db_user, db_password]):
         # Construct URL without SSL parameters - we'll add them via connect_args
         DATABASE_URL = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
@@ -52,14 +64,14 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
     Base = None
 else:
     DATABASE_AVAILABLE = True
-    
+
     # Use DATABASE_URL and switch to asyncpg driver for better SSL compatibility
     db_url = DATABASE_URL
     connect_args = {}
-    
+
     if db_url and "postgresql" in db_url:
         import re
-        
+
         # Strip all SSL parameters and add only what works with Render
         db_url = re.sub(r'[?&]sslmode=[^&]*', '', db_url)
         db_url = re.sub(r'[?&]sslrootcert=[^&]*', '', db_url)
@@ -68,14 +80,14 @@ else:
         # Clean up trailing separators
         db_url = re.sub(r'\?&', '?', db_url)
         db_url = re.sub(r'[?&]$', '', db_url)
-        
+
         # Add simple sslmode parameter in the URL
         separator = '&' if '?' in db_url else '?'
         db_url = f"{db_url}{separator}sslmode=require"
-        
+
         connect_args = {}
         logger.info(f"🔧 Using psycopg2 with sslmode=require in URL")
-    
+
     # SQLAlchemy engine optimized for Supabase Transaction mode pooler
     # Transaction mode has 6000+ connection limit vs 15 in Session mode
     # With 2 workers: 2 × (5 pool + 10 overflow) = max 30 connections (well under limit)
@@ -89,13 +101,13 @@ else:
         pool_recycle=3600,        # Recycle connections every hour
         echo=False
     )
-    
+
     # Session factory
     SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
-    
+
     # Base class for ORM models
     Base = declarative_base()
-    
+
     logger.info("✅ Database engine created successfully")
 
 
@@ -105,14 +117,14 @@ def get_db_session():
     """
     Context manager for database sessions.
     Automatically handles commit, rollback, and session cleanup.
-    
+
     Usage:
         with get_db_session() as db:
             user = db.query(User).filter_by(email=email).first()
     """
     if not DATABASE_AVAILABLE:
         raise RuntimeError("Database not available - DATABASE_URL not configured")
-    
+
     session = SessionLocal()
     try:
         yield session
@@ -131,7 +143,7 @@ if DATABASE_AVAILABLE and Base is not None:
     class User(Base):
         """User account model."""
         __tablename__ = "users"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         user_id = Column(String(255), unique=True, nullable=False, index=True)
         email = Column(String(255), unique=True, nullable=False, index=True)
@@ -153,16 +165,33 @@ if DATABASE_AVAILABLE and Base is not None:
         last_login = Column(DateTime, nullable=True)
         search_count = Column(Integer, default=0)
         favorite_count = Column(Integer, default=0)
-        
+
+        # --- MFA (added by audit patch) ---
+        # mfa_backup_codes is stored as a JSON-encoded string (list of hashed
+        # codes) in a Text column, matching the column type already created by
+        # backend/migrations/add_mfa_rbac_columns.py. Encode/decode happens in
+        # auth_service.get_user_mfa_state()/update_user_mfa_state(), not here,
+        # so this model stays a plain 1:1 mirror of the DB schema.
+        mfa_enabled = Column(Boolean, default=False)
+        mfa_pending = Column(Boolean, default=False)
+        mfa_secret = Column(String(255), nullable=True)
+        mfa_backup_codes = Column(Text, nullable=True)
+        mfa_enrolled_at = Column(DateTime, nullable=True)
+
         # Relationships
         sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
         search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
         favorites = relationship("Favorite", back_populates="user", cascade="all, delete-orphan")
         custom_lists = relationship("CustomList", back_populates="user", cascade="all, delete-orphan")
         settings = relationship("UserSettings", back_populates="user", uselist=False, cascade="all, delete-orphan")
-        
+
         def to_dict(self) -> Dict[str, Any]:
-            """Convert to dictionary."""
+            """Convert to dictionary.
+
+            Deliberately does NOT include mfa_secret or mfa_backup_codes -
+            those are sensitive and callers that need them should go through
+            auth_service.get_user_mfa_state() instead of trusting this dict.
+            """
             return {
                 "user_id": self.user_id,
                 "email": self.email,
@@ -178,24 +207,26 @@ if DATABASE_AVAILABLE and Base is not None:
                 "created_at": self.created_at.isoformat() if self.created_at else None,
                 "last_login": self.last_login.isoformat() if self.last_login else None,
                 "search_count": self.search_count,
-                "favorite_count": self.favorite_count
+                "favorite_count": self.favorite_count,
+                "mfa_enabled": bool(getattr(self, "mfa_enabled", False)),
+                "mfa_enrolled_at": self.mfa_enrolled_at.isoformat() if getattr(self, "mfa_enrolled_at", None) else None,
             }
 
 
     class Session(Base):
         """User session model."""
         __tablename__ = "sessions"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         session_id = Column(String(255), unique=True, nullable=False, index=True)
         user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
         token = Column(Text, nullable=False)
         expires_at = Column(DateTime, nullable=False)
         created_at = Column(DateTime, default=datetime.utcnow)
-        
+
         # Relationships
         user = relationship("User", back_populates="sessions")
-        
+
         def to_dict(self) -> Dict[str, Any]:
             """Convert to dictionary."""
             return {
@@ -209,7 +240,7 @@ if DATABASE_AVAILABLE and Base is not None:
     class SearchHistory(Base):
         """Search history model."""
         __tablename__ = "search_history"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         search_id = Column(String(255), unique=True, nullable=False, index=True)
         user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
@@ -220,10 +251,10 @@ if DATABASE_AVAILABLE and Base is not None:
         timestamp = Column(DateTime, default=datetime.utcnow, index=True)
         result_count = Column(Integer, default=0)
         top_diagnosis = Column(String(255), nullable=True)
-        
+
         # Relationships
         user = relationship("User", back_populates="search_history")
-        
+
         def to_dict(self) -> Dict[str, Any]:
             """Convert to dictionary."""
             return {
@@ -242,7 +273,7 @@ if DATABASE_AVAILABLE and Base is not None:
     class Favorite(Base):
         """Favorite diagnosis model."""
         __tablename__ = "favorites"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         favorite_id = Column(String(255), unique=True, nullable=False, index=True)
         user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
@@ -251,10 +282,10 @@ if DATABASE_AVAILABLE and Base is not None:
         family = Column(String(100), nullable=True)
         notes = Column(Text, nullable=True)
         added_at = Column(DateTime, default=datetime.utcnow)
-        
+
         # Relationships
         user = relationship("User", back_populates="favorites")
-        
+
         def to_dict(self) -> Dict[str, Any]:
             """Convert to dictionary."""
             return {
@@ -271,7 +302,7 @@ if DATABASE_AVAILABLE and Base is not None:
     class CustomList(Base):
         """Custom differential diagnosis list model."""
         __tablename__ = "custom_lists"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         list_id = Column(String(255), unique=True, nullable=False, index=True)
         user_id = Column(String(255), ForeignKey("users.user_id"), nullable=False, index=True)
@@ -282,10 +313,10 @@ if DATABASE_AVAILABLE and Base is not None:
         created_at = Column(DateTime, default=datetime.utcnow)
         updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
         is_public = Column(Boolean, default=False)
-        
+
         # Relationships
         user = relationship("User", back_populates="custom_lists")
-        
+
         def to_dict(self) -> Dict[str, Any]:
             """Convert to dictionary."""
             return {
@@ -304,16 +335,16 @@ if DATABASE_AVAILABLE and Base is not None:
     class UserSettings(Base):
         """User settings and preferences model."""
         __tablename__ = "user_settings"
-        
+
         id = Column(Integer, primary_key=True, index=True)
         user_id = Column(String(255), ForeignKey("users.user_id"), unique=True, nullable=False, index=True)
         default_specialty = Column(String(100), nullable=True)
         notification_preferences = Column(JSON, default={})  # Store as JSON object
         display_preferences = Column(JSON, default={})  # Store as JSON object
-        
+
         # Relationships
         user = relationship("User", back_populates="settings")
-        
+
         def to_dict(self) -> Dict[str, Any]:
             """Convert to dictionary."""
             return {
@@ -342,7 +373,7 @@ def init_database():
     if not DATABASE_AVAILABLE:
         logger.warning("⚠️  Cannot initialize database - DATABASE_URL not configured")
         return False
-    
+
     try:
         # Create all tables
         Base.metadata.create_all(bind=engine)
@@ -372,6 +403,14 @@ def _ensure_user_columns():
         wanted = {
             "password_reset_token": "VARCHAR(255)",
             "password_reset_sent_at": "TIMESTAMP",
+            # MFA columns - added by audit patch so the ORM model above
+            # actually matches what's in the database on upgrade.
+            "role": "VARCHAR(50) DEFAULT 'user'",
+            "mfa_enabled": "BOOLEAN DEFAULT false",
+            "mfa_pending": "BOOLEAN DEFAULT false",
+            "mfa_secret": "VARCHAR(255)",
+            "mfa_backup_codes": "TEXT",
+            "mfa_enrolled_at": "TIMESTAMP",
         }
         with engine.begin() as conn:
             for name, col_type in wanted.items():
@@ -390,7 +429,7 @@ def drop_all_tables():
     if not DATABASE_AVAILABLE:
         logger.warning("⚠️  Cannot drop tables - DATABASE_URL not configured")
         return False
-    
+
     logger.warning("⚠️  Dropping all database tables...")
     Base.metadata.drop_all(bind=engine)
     logger.info("✅ All tables dropped")
@@ -403,7 +442,7 @@ def check_database_connection() -> bool:
     """
     if not DATABASE_AVAILABLE:
         return False
-    
+
     try:
         with get_db_session() as db:
             db.execute(text("SELECT 1"))
@@ -419,7 +458,7 @@ def get_user_by_id(user_id: str) -> Optional[User]:
     """Get user by user_id."""
     if not DATABASE_AVAILABLE:
         return None
-    
+
     with get_db_session() as db:
         return db.query(User).filter_by(user_id=user_id).first()
 
@@ -428,7 +467,7 @@ def get_user_by_email(email: str) -> Optional[User]:
     """Get user by email."""
     if not DATABASE_AVAILABLE:
         return None
-    
+
     with get_db_session() as db:
         return db.query(User).filter_by(email=email).first()
 
@@ -437,7 +476,7 @@ def get_user_search_history(user_id: str, limit: int = 50) -> List[SearchHistory
     """Get user's search history."""
     if not DATABASE_AVAILABLE:
         return []
-    
+
     with get_db_session() as db:
         return db.query(SearchHistory)\
             .filter_by(user_id=user_id)\
@@ -450,7 +489,7 @@ def get_user_favorites(user_id: str) -> List[Favorite]:
     """Get user's favorites."""
     if not DATABASE_AVAILABLE:
         return []
-    
+
     with get_db_session() as db:
         return db.query(Favorite)\
             .filter_by(user_id=user_id)\
@@ -462,7 +501,7 @@ def get_user_custom_lists(user_id: str) -> List[CustomList]:
     """Get user's custom lists."""
     if not DATABASE_AVAILABLE:
         return []
-    
+
     with get_db_session() as db:
         return db.query(CustomList)\
             .filter_by(user_id=user_id)\
@@ -474,7 +513,7 @@ def get_user_settings(user_id: str) -> Optional[UserSettings]:
     """Get user settings."""
     if not DATABASE_AVAILABLE:
         return None
-    
+
     with get_db_session() as db:
         return db.query(UserSettings).filter_by(user_id=user_id).first()
 
