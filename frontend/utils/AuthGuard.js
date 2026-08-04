@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getStoredUser, isStoredAuthenticated } from './clientAuth';
+import { getStoredUser, isStoredAuthenticated, storeAuthData } from './clientAuth';
+import { getCurrentUser } from './auth';
 
 // Pages that don't require authentication
 const PUBLIC_ROUTES = [
@@ -41,6 +42,18 @@ export function AuthGuard({ children }) {
       const user = getStoredUser();
 
       if (!authenticated || !user) {
+        try {
+          const currentUser = await getCurrentUser();
+          if (currentUser) {
+            storeAuthData(currentUser, null);
+            setIsAuthorized(true);
+            setIsChecking(false);
+            return;
+          }
+        } catch (error) {
+          console.error('AuthGuard profile check failed:', error);
+        }
+
         // Not authenticated - redirect to account page (login/register)
         setIsAuthorized(false);
         setIsChecking(false);
