@@ -4,6 +4,7 @@
 
 import os
 import re
+from pathlib import Path
 from fastapi import FastAPI, Request
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
 import logging
@@ -221,8 +222,12 @@ except ImportError:
     logger.warning("Monitoring module not available")
 
 
-# Serve static files (assets)
-app.mount("/static", StaticFiles(directory="backend/static"), name="static")
+# Serve static files (assets) when the directory exists.
+static_dir = Path("backend/static")
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+else:
+    logger.warning("Static directory not found; skipping /static mount")
 
 # Jinja2 templates directory
 templates = Jinja2Templates(directory="backend/templates")
@@ -282,37 +287,9 @@ def metrics():
 
 @app.get("/health")
 def health_check():
-    """
-    Health check endpoint with environment status.
-    Shows test mode status and feature availability.
-    """
-    health_status = {
-        "status": "healthy",
-        "version": Config.APP_VERSION,
-        "environment": ENVIRONMENT,
-        "test_mode": is_test_mode(),
-    }
-    
-    # Add test mode specific info
-    if is_test_mode():
-        health_status["test_info"] = {
-            "subscription_checks": "bypassed",
-            "user_access_level": "enterprise",
-            "rate_limiting": "disabled",
-            "payment_processing": "disabled",
-            "warning": "Test environment - not for production use"
-        }
-    
-    # Add feature flags
-    health_status["features"] = {
-        "security_enabled": SECURITY_ENABLED,
-        "test_environment_available": TEST_ENVIRONMENT_AVAILABLE,
-        "subscription_bypass": should_bypass_subscription(),
-    }
-    
     REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
     logger.info('health check')
-    return health_status
+    return {"ok": True}
 
 
 @app.get("/")
@@ -323,7 +300,8 @@ def root(request: Request):
     template. Otherwise we send a 301 redirect to /docs for API clients and bots.
     """
     accept = request.headers.get("accept", "")
-    if "text/html" in accept or "*/*" in accept:
+    template_path = Path("backend/templates/index.html")
+    if template_path.exists() and ("text/html" in accept or "*/*" in accept):
         # Render template with app/version context using the new TemplateResponse signature
         # (request, name, context) to avoid the deprecation warning.
         return templates.TemplateResponse(request, "index.html", {"request": request, "app": Config.APP_NAME, "version": Config.APP_VERSION})

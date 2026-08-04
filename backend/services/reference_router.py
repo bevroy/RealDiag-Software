@@ -211,6 +211,8 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
   """
   # Load all trees for this family
   trees = _load_trees_by_family(family)
+  if not trees:
+    raise HTTPException(status_code=404, detail=f"Family not found: {family}")
   all_rules = []
   
   # Load all trees for this family
