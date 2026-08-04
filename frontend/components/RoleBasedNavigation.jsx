@@ -88,12 +88,9 @@ export default function RoleBasedNavigation() {
   // into a reduced menu due to client-side state drift.
   const effectiveRole = userRole || (isAuthenticatedHint ? 'provider' : 'provider');
 
-  // Filter navigation based on user role
-  const visibleNavItems = navItems.filter(item => {
-    if (item.roles.includes('all')) return true;
-    if (!effectiveRole) return false;
-    return item.roles.includes(effectiveRole);
-  });
+  // Keep the navigation visible and complete; page access remains enforced by
+  // AuthGuard, so links can be shown consistently without role-based hiding.
+  const visibleNavItems = navItems;
   
   console.log('🔍 RoleBasedNav - User role:', userRole, 'effective role:', effectiveRole);
   console.log('🔍 RoleBasedNav - Visible items:', visibleNavItems.map(i => i.label));
