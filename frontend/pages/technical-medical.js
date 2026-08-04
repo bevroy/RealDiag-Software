@@ -92,7 +92,17 @@ export default function TechnicalMedicalPage() {
         </section>
 
         <section style={styles.section}>
-          <h2 style={styles.h2}>8. Related In-App Guides</h2>
+          <h2 style={styles.h2}>8. Recent Platform Updates</h2>
+          <ul style={styles.list}>
+            <li>Authentication now revalidates cookie-based sessions against the backend before restricting access.</li>
+            <li>Navigation normalizes legacy roles so approved clinical accounts are shown provider-level tools consistently.</li>
+            <li>Admin role-management endpoints support updates by email or user ID for onboarding and access corrections.</li>
+            <li>Client cache invalidation was added so stale bundles do not preserve older limited-navigation behavior after deploys.</li>
+          </ul>
+        </section>
+
+        <section style={styles.section}>
+          <h2 style={styles.h2}>9. Related In-App Guides</h2>
           <ul style={styles.list}>
             <li>
               <Link href="/user-guide">

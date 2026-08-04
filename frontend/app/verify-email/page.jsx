@@ -2,6 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { storeAuthData } from '../../utils/clientAuth'
 
 export default function VerifyEmailPage() {
   return (
@@ -62,8 +63,7 @@ function VerifyEmail() {
         
         // Store user data
         if (data.user) {
-          localStorage.setItem('realdiag_user', JSON.stringify(data.user))
-          localStorage.setItem('realdiag_authenticated', 'true')
+          storeAuthData(data.user, data.csrf_token || null)
         }
 
         // Redirect to main site after 3 seconds

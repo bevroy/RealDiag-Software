@@ -9,7 +9,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
-import { isAuthenticated } from '../utils/auth';
+import { isAuthenticated, getCurrentUser, authenticatedFetch } from '../utils/auth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
@@ -731,27 +731,20 @@ export default function SymptomSearch() {
       }
       
       // Track search in user history if authenticated
-      if (isAuthenticated) {
-        const token = localStorage.getItem('realdiag_token');
-        if (token) {
-          try {
-            await fetch(`${apiBase}/users/me/history`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                symptoms: symptoms,
-                age: ageValue ? parseInt(ageValue) : null,
-                sex: sex || null,
-                family: family || null,
-                result_count: data.results.length
-              })
-            });
-          } catch (err) {
-            console.error('Failed to track search:', err);
-          }
+      if (isAuthenticated()) {
+        try {
+          await authenticatedFetch(`${apiBase}/users/me/history`, {
+            method: 'POST',
+            body: JSON.stringify({
+              symptoms: symptoms,
+              age: ageValue ? parseInt(ageValue) : null,
+              sex: sex || null,
+              family: family || null,
+              result_count: data.results.length
+            })
+          });
+        } catch (err) {
+          console.error('Failed to track search:', err);
         }
       }
     } catch (err) {
@@ -805,22 +798,15 @@ export default function SymptomSearch() {
 
   // Add to favorites
   const addToFavorites = async (result) => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       alert('Please sign in to save favorites');
       window.location.href = '/account';
       return;
     }
 
-    const token = localStorage.getItem('realdiag_token');
-    if (!token) return;
-
     try {
-      const response = await fetch(`${apiBase}/users/me/favorites`, {
+      const response = await authenticatedFetch(`${apiBase}/users/me/favorites`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
         body: JSON.stringify({
           rule_id: result.rule_id,
           diagnosis_label: result.label,

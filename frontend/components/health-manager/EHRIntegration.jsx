@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { authenticatedFetch } from '../../utils/auth';
 
 export default function EHRIntegration({ ehrData, onSync }) {
   const [connecting, setConnecting] = useState(false);
@@ -15,12 +16,8 @@ export default function EHRIntegration({ ehrData, onSync }) {
   const handleConnect = async (ehrSystem) => {
     setConnecting(true);
     try {
-      const response = await fetch('/api/health/ehr/connect', {
+      const response = await authenticatedFetch('/api/health/ehr/connect', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
         body: JSON.stringify({ ehrSystem })
       });
 
@@ -45,11 +42,8 @@ export default function EHRIntegration({ ehrData, onSync }) {
     if (!confirm('Are you sure you want to disconnect your EHR? This will remove access to your medical records.')) return;
 
     try {
-      const response = await fetch('/api/health/ehr/disconnect', {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+      const response = await authenticatedFetch('/api/health/ehr/disconnect', {
+        method: 'DELETE'
       });
 
       if (response.ok) {
@@ -67,11 +61,8 @@ export default function EHRIntegration({ ehrData, onSync }) {
 
   const handleSync = async () => {
     try {
-      const response = await fetch('/api/health/ehr/sync', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+      const response = await authenticatedFetch('/api/health/ehr/sync', {
+        method: 'POST'
       });
 
       if (response.ok) {

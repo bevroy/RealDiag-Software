@@ -75,6 +75,24 @@ class DecisionTreeEngine:
     def evaluate(self, tree_id: str, patient: Dict[str, Any]):
         t=self.trees.get(tree_id)
         if not t: return {"error": f"tree '{tree_id}' not found"}
+
+        if not t.get("nodes"):
+            tree_icd10 = t.get("icd10", [])
+            if isinstance(tree_icd10, str):
+                tree_icd10 = [tree_icd10]
+            return {
+                "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10},
+                "path": [],
+                "tests": [],
+                "provisional_dx": [],
+                "referrals": [],
+                "trace": [],
+                "warning": (
+                    f"Tree '{tree_id}' has no interactive decision-node structure; "
+                    "use /search/by-symptoms for presentation-based matching."
+                ),
+            }
+
         cur=t.get("entry"); path=[]; tests=[]; dx=[]; trace_all=[]; seen=set()
         for _ in range(64):
             if cur is None or cur in seen: break

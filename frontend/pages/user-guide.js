@@ -49,7 +49,7 @@ export default function UserGuidePage() {
         <header style={styles.header}>
           <h1 style={styles.title}>RealDiag User Guide</h1>
           <p style={styles.subtitle}>Printable quick-start and workflow reference</p>
-          <p style={styles.meta}>Version: 1.0 | Printed: {printedOn}</p>
+          <p style={styles.meta}>Version: 1.1 | Printed: {printedOn}</p>
         </header>
 
         <section style={styles.section}>
@@ -122,8 +122,18 @@ export default function UserGuidePage() {
           </ul>
         </section>
 
+        <section style={styles.section}>
+          <h2 style={styles.h2}>8. Access and Role Notes</h2>
+          <ul style={styles.list}>
+            <li>Approved clinical domains can be promoted to provider-level access without relying on stale cached roles.</li>
+            <li>The navigation now rechecks backend session state so logged-in users should see the full provider feature set after refresh.</li>
+            <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
+            <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
+          </ul>
+        </section>
+
         <section style={styles.section} className="print-page-break">
-          <h2 style={styles.h2}>8. Clinical Safety Reminder</h2>
+          <h2 style={styles.h2}>9. Clinical Safety Reminder</h2>
           <p style={styles.p}>
             RealDiag is a clinical decision support aid. It does not replace clinical judgment,
             institution protocols, or emergency pathways. Always validate recommendations against

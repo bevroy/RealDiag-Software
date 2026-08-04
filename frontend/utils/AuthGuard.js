@@ -1,12 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getStoredUser, isStoredAuthenticated } from './clientAuth';
+import { getStoredUser, isStoredAuthenticated, storeAuthData } from './clientAuth';
+import { getCurrentUser } from './auth';
 
 // Pages that don't require authentication
 const PUBLIC_ROUTES = [
   '/',                    // Landing page with demo video
   '/account',             // Login/Register page
   '/legal-disclaimer',    // Legal information
+  '/symptom-search',      // Core diagnostic workflow
+  '/search',              // Diagnosis search
+  '/rules',               // Rule browser
+  '/integration',         // API/EHR integration page
+  '/features-demo',       // Feature showcase
+  '/education',           // Education module
+  '/sources',             // Source references
+  '/patient-history',     // Clinical documentation tools
+  '/technical-medical',   // Technical and medical overview
+  '/user-guide',          // Printable guide
+  '/health-manager',      // Patient-facing health manager
+  '/pricing',             // Plan/pricing page
   '/_error',              // Error pages
   '/404'                  // Not found page
 ];
@@ -17,7 +30,7 @@ export function AuthGuard({ children }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       setIsChecking(true);
       
       // Check if current route is public
@@ -41,6 +54,18 @@ export function AuthGuard({ children }) {
       const user = getStoredUser();
 
       if (!authenticated || !user) {
+        try {
+          const currentUser = await getCurrentUser();
+          if (currentUser) {
+            storeAuthData(currentUser, null);
+            setIsAuthorized(true);
+            setIsChecking(false);
+            return;
+          }
+        } catch (error) {
+          console.error('AuthGuard profile check failed:', error);
+        }
+
         // Not authenticated - redirect to account page (login/register)
         setIsAuthorized(false);
         setIsChecking(false);

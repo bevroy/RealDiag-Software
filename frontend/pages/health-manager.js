@@ -2,20 +2,16 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { getStoredUser, storeAuthData } from '../utils/clientAuth';
 
 export default function HealthManagerPage() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     // Load user data from localStorage (already authenticated via AuthGuard)
-    const userStr = localStorage.getItem('realdiag_user');
-    if (userStr) {
-      try {
-        const data = JSON.parse(userStr);
-        setUserData(data);
-      } catch (error) {
-        console.error('Failed to parse user data:', error);
-      }
+    const storedUser = getStoredUser();
+    if (storedUser) {
+      setUserData(storedUser);
     } else {
       // Try to fetch from API if not in localStorage
       fetch('https://realdiag-software.onrender.com/users/me', {
@@ -25,7 +21,7 @@ export default function HealthManagerPage() {
         .then(response => response.ok ? response.json() : null)
         .then(data => {
           if (data) {
-            localStorage.setItem('realdiag_user', JSON.stringify(data));
+            storeAuthData(data, null);
             setUserData(data);
           }
         })

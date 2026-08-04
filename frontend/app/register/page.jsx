@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { storeAuthData } from '../../utils/clientAuth';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -78,8 +79,7 @@ export default function RegisterPage() {
       
       // Store user data
       if (data.user) {
-        localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-        localStorage.setItem('realdiag_authenticated', 'true');
+        storeAuthData(data.user, data.csrf_token || null);
       }
       
       // Check if employee account

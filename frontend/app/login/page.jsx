@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { storeAuthData } from '../../utils/clientAuth';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -49,8 +50,7 @@ export default function LoginPage() {
       
       // Store user data for cross-domain authentication
       if (data.user) {
-        localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-        localStorage.setItem('realdiag_authenticated', 'true');
+        storeAuthData(data.user, data.csrf_token || null);
       }
 
       // Show success message

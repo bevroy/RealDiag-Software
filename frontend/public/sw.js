@@ -1,5 +1,5 @@
 // Enhanced Service Worker for RealDiag PWA - Field-Ready Offline Mode
-const CACHE_VERSION = '4.0.0';
+const CACHE_VERSION = '4.0.1';
 const CACHE_NAME = `realdiag-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `realdiag-runtime-v${CACHE_VERSION}`;
 const RULES_CACHE = `realdiag-rules-v${CACHE_VERSION}`;

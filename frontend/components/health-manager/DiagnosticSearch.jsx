@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { authenticatedFetch } from '../../utils/auth';
 
 export default function DiagnosticSearch({ patientData, onDiagnosisComplete }) {
   const [symptoms, setSymptoms] = useState([]);
@@ -32,12 +33,8 @@ export default function DiagnosticSearch({ patientData, onDiagnosisComplete }) {
 
     setLoading(true);
     try {
-      const response = await fetch('/api/diagnostic/search', {
+      const response = await authenticatedFetch('/api/diagnostic/search', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
         body: JSON.stringify({
           symptoms: selectedSymptoms,
           query: searchQuery,

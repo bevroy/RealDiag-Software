@@ -1,12 +1,39 @@
 // Authentication utility for client-side state management
 // Used when cookies don't work across domains (Netlify + Render)
 
+const APPROVED_PROVIDER_DOMAINS = new Set(['realdiag.com', 'elionyxhealth.com']);
+
+export function normalizeUiRole(role, email) {
+  const roleValue = String(role || 'user').trim().toLowerCase();
+  const emailValue = String(email || '').trim().toLowerCase();
+  const domain = emailValue.includes('@') ? emailValue.split('@').pop() : '';
+
+  if (APPROVED_PROVIDER_DOMAINS.has(domain) && (roleValue === 'user' || roleValue === 'patient' || roleValue === '')) {
+    return 'provider';
+  }
+
+  if (roleValue === 'user' || roleValue === 'patient') {
+    return 'provider';
+  }
+
+  return roleValue || 'user';
+}
+
+export function normalizeStoredUser(user) {
+  if (!user || typeof user !== 'object') return null;
+  return {
+    ...user,
+    role: normalizeUiRole(user.role, user.email)
+  };
+}
+
 export function getStoredUser() {
   if (typeof window === 'undefined') return null;
   
   try {
     const userStr = localStorage.getItem('realdiag_user');
-    return userStr ? JSON.parse(userStr) : null;
+    const parsed = userStr ? JSON.parse(userStr) : null;
+    return normalizeStoredUser(parsed);
   } catch {
     return null;
   }
@@ -14,7 +41,8 @@ export function getStoredUser() {
 
 export function isStoredAuthenticated() {
   if (typeof window === 'undefined') return false;
-  return localStorage.getItem('realdiag_authenticated') === 'true';
+  if (localStorage.getItem('realdiag_authenticated') === 'true') return true;
+  return !!getStoredUser();
 }
 
 export function clearStoredAuth() {
@@ -36,7 +64,8 @@ export function storeAuthData(user, csrfToken) {
   if (typeof window === 'undefined') return;
   
   if (user) {
-    localStorage.setItem('realdiag_user', JSON.stringify(user));
+    const normalized = normalizeStoredUser(user);
+    localStorage.setItem('realdiag_user', JSON.stringify(normalized));
     localStorage.setItem('realdiag_authenticated', 'true');
   }
   

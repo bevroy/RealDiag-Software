@@ -12,7 +12,7 @@ GUIDE_TECH="frontend/pages/technical-medical.js"
 get_diff_range() {
   if [[ "${EVENT_NAME}" == "pull_request" && -n "${BASE_REF}" ]]; then
     git fetch --no-tags --depth=1 origin "${BASE_REF}"
-    echo "origin/${BASE_REF}...HEAD"
+    echo "origin/${BASE_REF}..HEAD"
     return
   fi
 
@@ -35,7 +35,7 @@ if [[ -z "${DIFF_RANGE}" ]]; then
   exit 0
 fi
 
-CHANGED_FILES="$(git diff --name-only "${DIFF_RANGE}")"
+CHANGED_FILES="$(git diff --name-only ${DIFF_RANGE})"
 
 if [[ -z "${CHANGED_FILES}" ]]; then
   echo "Guide sync check: no changed files detected."

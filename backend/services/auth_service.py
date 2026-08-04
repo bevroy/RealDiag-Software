@@ -19,6 +19,8 @@ import json
 import os
 import logging
 
+from .security import hash_password as _bcrypt_hash_password, verify_password as _bcrypt_verify_password
+
 # Import database module
 try:
     from .database import (
@@ -62,6 +64,7 @@ except ImportError:
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_urlsafe(32))  # Load from env in production
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRATION_MINUTES", "60"))  # 1 hour default
+MFA_PENDING_TOKEN_EXPIRE_MINUTES = 5
 
 security = HTTPBearer(auto_error=False)  # Don't auto-error, we'll check cookies too
 
@@ -158,14 +161,52 @@ else:
     logger.warning("⚠️  Using in-memory storage - data will be lost on restart")
 
 
+ALLOWED_LOGIN_EMAIL_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+
+
+def _is_allowed_login_email(email: str) -> bool:
+    """Only allow credentialed access for approved email domains."""
+    if not email:
+        return False
+    normalized = email.strip().lower()
+    parts = normalized.rsplit("@", 1)
+    if len(parts) != 2:
+        return False
+    domain = parts[1]
+    return domain in ALLOWED_LOGIN_EMAIL_DOMAINS
+
+
 # Helper functions
+def _is_bcrypt_hash(value: str) -> bool:
+    return isinstance(value, str) and value.startswith(("$2a$", "$2b$", "$2y$"))
+
+
 def hash_password(password: str) -> str:
-    """Hash password using SHA-256."""
-    return hashlib.sha256(password.encode()).hexdigest()
+    """Hash password using bcrypt."""
+    return _bcrypt_hash_password(password)
+
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify password against hash."""
-    return hash_password(plain_password) == hashed_password
+    """Verify password against bcrypt or legacy SHA-256 hashes."""
+    if not hashed_password:
+        return False
+    if _is_bcrypt_hash(hashed_password):
+        return _bcrypt_verify_password(plain_password, hashed_password)
+    legacy_hash = hashlib.sha256(plain_password.encode()).hexdigest()
+    return legacy_hash == hashed_password
+
+
+def verify_password_with_upgrade_flag(plain_password: str, hashed_password: str) -> (bool, bool):
+    """
+    Returns (is_valid, was_legacy_format) so successful legacy auth can be
+    transparently upgraded to bcrypt.
+    """
+    if not hashed_password:
+        return False, False
+    if _is_bcrypt_hash(hashed_password):
+        return _bcrypt_verify_password(plain_password, hashed_password), False
+    legacy_hash = hashlib.sha256(plain_password.encode()).hexdigest()
+    return (legacy_hash == hashed_password), True
 
 def create_access_token(user_id: str, email: str) -> str:
     """Create JWT access token."""
@@ -177,6 +218,28 @@ def create_access_token(user_id: str, email: str) -> str:
     }
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
+
+def create_mfa_pending_token(user_id: str, email: str) -> str:
+    """Create a short-lived token used only between password and MFA checks."""
+    expire = datetime.utcnow() + timedelta(minutes=MFA_PENDING_TOKEN_EXPIRE_MINUTES)
+    to_encode = {
+        "sub": user_id,
+        "email": email,
+        "mfa_pending": True,
+        "exp": expire,
+    }
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def verify_mfa_pending_token(token: str) -> Dict[str, Any]:
+    payload = verify_token(token)
+    if not payload.get("mfa_pending"):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid MFA session token",
+        )
+    return payload
+
 def verify_token(token: str) -> Dict[str, Any]:
     """Verify and decode JWT token."""
     try:
@@ -187,7 +250,7 @@ def verify_token(token: str) -> Dict[str, Any]:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token has expired"
         )
-    except jwt.JWTError:
+    except jwt.PyJWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials"
@@ -218,6 +281,11 @@ async def get_current_user(
         )
     
     payload = verify_token(token)
+    if payload.get("mfa_pending"):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="MFA verification required to complete login",
+        )
     user_id = payload.get("sub")
     
     # Try database first, fall back to in-memory
@@ -257,6 +325,8 @@ async def get_optional_user(
     
     try:
         payload = verify_token(token)
+        if payload.get("mfa_pending"):
+            return None
         user_id = payload.get("sub")
         
         # Try database first
@@ -271,9 +341,66 @@ async def get_optional_user(
         return None
 
 
+def get_user_mfa_state(user_id: str) -> Dict[str, Any]:
+    """Return raw MFA state for a user, including secret and backup-code hashes."""
+    if DATABASE_AVAILABLE:
+        with get_db_session() as db:
+            user = db.query(User).filter_by(user_id=user_id).first()
+            if not user:
+                return {}
+            raw_codes = getattr(user, "mfa_backup_codes", None)
+            try:
+                backup_codes = json.loads(raw_codes) if raw_codes else []
+            except (TypeError, ValueError):
+                backup_codes = []
+            return {
+                "mfa_enabled": bool(getattr(user, "mfa_enabled", False)),
+                "mfa_pending": bool(getattr(user, "mfa_pending", False)),
+                "mfa_secret": getattr(user, "mfa_secret", None),
+                "mfa_backup_codes": backup_codes,
+                "mfa_enrolled_at": getattr(user, "mfa_enrolled_at", None),
+            }
+
+    user = users_db.get(user_id)
+    if not user:
+        return {}
+    return {
+        "mfa_enabled": user.get("mfa_enabled", False),
+        "mfa_pending": user.get("mfa_pending", False),
+        "mfa_secret": user.get("mfa_secret"),
+        "mfa_backup_codes": user.get("mfa_backup_codes", []),
+        "mfa_enrolled_at": user.get("mfa_enrolled_at"),
+    }
+
+
+def update_user_mfa_state(user_id: str, **fields) -> None:
+    """Persist MFA-related fields for a user in DB or in-memory fallback."""
+    if "mfa_backup_codes" in fields and DATABASE_AVAILABLE:
+        fields = {**fields, "mfa_backup_codes": json.dumps(fields["mfa_backup_codes"])}
+
+    if DATABASE_AVAILABLE:
+        with get_db_session() as db:
+            user = db.query(User).filter_by(user_id=user_id).first()
+            if not user:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+            for key, value in fields.items():
+                setattr(user, key, value)
+        return
+
+    if user_id not in users_db:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    users_db[user_id].update(fields)
+
+
 # User management functions
 def create_user(user_data: UserCreate) -> Dict[str, Any]:
     """Create new user account."""
+    if not _is_allowed_login_email(user_data.email):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Account registration is restricted to realdiag.com or elionyxhealth.com email addresses"
+        )
+
     if DATABASE_AVAILABLE:
         # Database version
         with get_db_session() as db:
@@ -362,11 +489,17 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             "full_name": user_data.full_name,
             "specialty": user_data.specialty,
             "institution": user_data.institution,
+            "role": "user",
             "created_at": datetime.utcnow().isoformat(),
             "last_login": None,
             "search_count": 0,
             "favorite_count": 0,
-            "is_active": True
+            "is_active": True,
+            "mfa_enabled": False,
+            "mfa_pending": False,
+            "mfa_secret": None,
+            "mfa_backup_codes": [],
+            "mfa_enrolled_at": None,
         }
         
         users_db[user_id] = user
@@ -395,6 +528,12 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
 
 def authenticate_user(email: str, password: str) -> Dict[str, Any]:
     """Authenticate user and return user data."""
+    if not _is_allowed_login_email(email):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Login is restricted to realdiag.com or elionyxhealth.com email addresses"
+        )
+
     if DATABASE_AVAILABLE:
         # Database version
         try:
@@ -407,11 +546,16 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
                         detail="User not found"
                     )
                 
-                if not verify_password(password, user.hashed_password):
+                is_valid, was_legacy = verify_password_with_upgrade_flag(password, user.hashed_password)
+                if not is_valid:
                     raise HTTPException(
                         status_code=status.HTTP_401_UNAUTHORIZED,
                         detail="Incorrect password"
                     )
+
+                if was_legacy:
+                    user.hashed_password = hash_password(password)
+                    logger.info(f"Upgraded password hash to bcrypt for user {user.user_id}")
                 
                 # Update last login
                 try:
@@ -435,7 +579,10 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
         # In-memory version (fallback)
         for user in users_db.values():
             if user["email"] == email:
-                if verify_password(password, user["password_hash"]):
+                is_valid, was_legacy = verify_password_with_upgrade_flag(password, user["password_hash"])
+                if is_valid:
+                    if was_legacy:
+                        user["password_hash"] = hash_password(password)
                     # Update last login
                     user["last_login"] = datetime.utcnow().isoformat()
                     return user

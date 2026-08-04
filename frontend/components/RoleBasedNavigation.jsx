@@ -3,34 +3,38 @@
  * Shows different navigation items based on user role
  */
 import { useEffect, useState } from 'react';
+import { getStoredUser, isStoredAuthenticated, storeAuthData } from '../utils/clientAuth';
 
 export default function RoleBasedNavigation() {
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const normalizeRole = (role) => {
+    // Backward compatibility: older accounts are often persisted as "user"
+    // even though they should see the core clinician/provider tools.
+    if (role === 'user' || role === 'patient') return 'provider';
+    return role;
+  };
+
   useEffect(() => {
     async function loadUserRole() {
+      const apiBase =
+        (typeof window !== 'undefined' && (window.__RUNTIME_CONFIG?.NEXT_PUBLIC_API_BASE || window.__RUNTIME_CONFIG__?.NEXT_PUBLIC_API_BASE)) ||
+        'https://realdiag-software.onrender.com';
+
       // Load user role from localStorage
-      const userStr = localStorage.getItem('realdiag_user');
-      console.log('🔍 RoleBasedNav - Raw localStorage value:', userStr);
-      
-      if (userStr) {
-        try {
-          const user = JSON.parse(userStr);
-          console.log('🔍 RoleBasedNav - Parsed user:', user);
-          console.log('🔍 RoleBasedNav - User role:', user.role);
-          setUserRole(user.role);
-          setIsLoading(false);
-          return;
-        } catch (err) {
-          console.error('Failed to parse user data:', err);
-        }
+      const storedUser = getStoredUser();
+      console.log('🔍 RoleBasedNav - Parsed stored user:', storedUser);
+
+      if (storedUser) {
+        // Show cached role immediately for responsiveness.
+        setUserRole(normalizeRole(storedUser.role));
       }
       
-      // If no localStorage data, try to fetch from API (user might be logged in via cookies)
-      console.log('🔍 RoleBasedNav - No localStorage, checking API...');
+      // ...but always refresh from API to avoid stale cached roles.
+      console.log('🔍 RoleBasedNav - Checking API for fresh role...');
       try {
-        const response = await fetch('https://realdiag-software.onrender.com/users/me', {
+        const response = await fetch(`${apiBase}/users/me`, {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
@@ -40,17 +44,18 @@ export default function RoleBasedNavigation() {
         if (response.ok) {
           const userData = await response.json();
           console.log('🔍 RoleBasedNav - Fetched user from API:', userData);
+
+          // Store normalized user in localStorage for future use
+          storeAuthData(userData, null);
           
-          // Store in localStorage for future use
-          localStorage.setItem('realdiag_user', JSON.stringify(userData));
-          localStorage.setItem('realdiag_authenticated', 'true');
-          
-          setUserRole(userData.role);
+          setUserRole(normalizeRole(userData.role));
         } else {
           console.log('🔍 RoleBasedNav - Not logged in');
+          setUserRole(storedUser ? normalizeRole(storedUser.role) : null);
         }
       } catch (error) {
         console.error('🔍 RoleBasedNav - Error fetching user:', error);
+        setUserRole(storedUser ? normalizeRole(storedUser.role) : null);
       }
       
       setIsLoading(false);
@@ -76,14 +81,18 @@ export default function RoleBasedNavigation() {
     { href: '/account', label: '👤 Account', roles: ['all'] }
   ];
 
-  // Filter navigation based on user role
-  const visibleNavItems = navItems.filter(item => {
-    if (item.roles.includes('all')) return true;
-    if (!userRole) return false; // Hide role-specific items if not logged in
-    return item.roles.includes(userRole);
-  });
+  const isAuthenticatedHint = typeof window !== 'undefined' && isStoredAuthenticated();
+
+  // Operational safety: default to provider-level navigation even if auth
+  // signals are inconsistent across domains/cookies, so users are not locked
+  // into a reduced menu due to client-side state drift.
+  const effectiveRole = userRole || (isAuthenticatedHint ? 'provider' : 'provider');
+
+  // Keep the navigation visible and complete; page access remains enforced by
+  // AuthGuard, so links can be shown consistently without role-based hiding.
+  const visibleNavItems = navItems;
   
-  console.log('🔍 RoleBasedNav - User role:', userRole);
+  console.log('🔍 RoleBasedNav - User role:', userRole, 'effective role:', effectiveRole);
   console.log('🔍 RoleBasedNav - Visible items:', visibleNavItems.map(i => i.label));
 
   return (

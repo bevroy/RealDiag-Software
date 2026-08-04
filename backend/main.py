@@ -4,6 +4,7 @@
 
 import os
 import re
+from pathlib import Path
 from fastapi import FastAPI, Request
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter
 import logging
@@ -69,6 +70,24 @@ logger = logging.getLogger("realdiag")
 # Initialize Sentry for error tracking (production)
 SENTRY_DSN = os.getenv("SENTRY_DSN")
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+if ENVIRONMENT == "production":
+    unsafe_flags = []
+    if os.getenv("SECURITY_ENABLED", "true").lower() == "false":
+        unsafe_flags.append("SECURITY_ENABLED=false")
+    if os.getenv("MFA_REQUIRED", "true").lower() == "false":
+        unsafe_flags.append("MFA_REQUIRED=false")
+    if os.getenv("ENCRYPTION_ENABLED", "true").lower() == "false":
+        unsafe_flags.append("ENCRYPTION_ENABLED=false")
+    if os.getenv("BYPASS_SUBSCRIPTION_CHECKS", "false").lower() == "true":
+        unsafe_flags.append("BYPASS_SUBSCRIPTION_CHECKS=true")
+    if os.getenv("TEST_MODE_UNLIMITED_ACCESS", "false").lower() == "true":
+        unsafe_flags.append("TEST_MODE_UNLIMITED_ACCESS=true")
+    if unsafe_flags:
+        raise RuntimeError(
+            "Refusing to start: ENVIRONMENT=production but test/security flags are set: "
+            + ", ".join(unsafe_flags)
+        )
 
 # Log environment and test mode status
 logger.info(f"🌍 Environment: {ENVIRONMENT}")
@@ -203,8 +222,12 @@ except ImportError:
     logger.warning("Monitoring module not available")
 
 
-# Serve static files (assets)
-app.mount("/static", StaticFiles(directory="backend/static"), name="static")
+# Serve static files (assets) when the directory exists.
+static_dir = Path("backend/static")
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+else:
+    logger.warning("Static directory not found; skipping /static mount")
 
 # Jinja2 templates directory
 templates = Jinja2Templates(directory="backend/templates")
@@ -215,7 +238,9 @@ templates = Jinja2Templates(directory="backend/templates")
 # call this API without requiring a manual env var change in Render.
 _preview_env = os.getenv("PREVIEW_ORIGIN_REGEX")
 _netlify_part = r"(?:[A-Za-z0-9-]+--)?realdiag\.netlify\.app"
-if _preview_env:
+if ENVIRONMENT == "production":
+    PREVIEW_ORIGIN_REGEX_COMBINED = r"^https?://(?:%s)$" % _netlify_part
+elif _preview_env:
     # strip optional leading scheme anchor and trailing dollar so we can embed
     _p = re.sub(r'^https?://', '', _preview_env)
     _p = re.sub(r'\$$', '', _p)
@@ -251,7 +276,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
-logger.info(f"✅ CORS configured for {ENVIRONMENT} (permissive)")
+logger.info(f"✅ CORS configured for {ENVIRONMENT}")
 
 
 @app.get('/metrics')
@@ -262,35 +287,9 @@ def metrics():
 
 @app.get("/health")
 def health_check():
-    """
-    Health check endpoint with environment status.
-    Shows test mode status and feature availability.
-    """
-    health_status = {
-        "status": "healthy",
-        "version": Config.APP_VERSION,
-        "environment": ENVIRONMENT,
-        "test_mode": is_test_mode(),
-    }
-    
-    # Add test mode specific info
-    if is_test_mode():
-        health_status["test_info"] = {
-            "subscription_checks": "bypassed",
-            "user_access_level": "enterprise",
-            "rate_limiting": "disabled",
-            "payment_processing": "disabled",
-            "warning": "Test environment - not for production use"
-        }
-    
-    # Add feature flags
-    health_status["features"] = {
-        "security_enabled": SECURITY_ENABLED,
-        "test_environment_available": TEST_ENVIRONMENT_AVAILABLE,
-        "subscription_bypass": should_bypass_subscription(),
-    }
-    
-    return health_status
+    REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
+    logger.info('health check')
+    return {"ok": True}
 
 
 @app.get("/")
@@ -301,20 +300,13 @@ def root(request: Request):
     template. Otherwise we send a 301 redirect to /docs for API clients and bots.
     """
     accept = request.headers.get("accept", "")
-    if "text/html" in accept or "*/*" in accept:
+    template_path = Path("backend/templates/index.html")
+    if template_path.exists() and ("text/html" in accept or "*/*" in accept):
         # Render template with app/version context using the new TemplateResponse signature
         # (request, name, context) to avoid the deprecation warning.
         return templates.TemplateResponse(request, "index.html", {"request": request, "app": Config.APP_NAME, "version": Config.APP_VERSION})
     # Non-browser clients: redirect to docs
     return RedirectResponse(url="/docs", status_code=301)
-
-
-@app.get("/health")
-def health():
-    REQUEST_COUNTER.labels(path='/health', method='GET', status='200').inc()
-    logger.info('health check')
-    return {"ok": True}
-
 
 @app.get("/version")
 def version():

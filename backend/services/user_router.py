@@ -13,7 +13,9 @@ from backend.services.auth_service import (
     UserCreate, UserLogin, UserProfile, UserSettings,
     SearchHistory, FavoriteDiagnosis, CustomList,
     create_user, authenticate_user, create_access_token,
+    create_mfa_pending_token,
     get_current_user, get_optional_user,
+    get_user_mfa_state,
     add_search_to_history, get_user_search_history,
     add_favorite, get_user_favorites, remove_favorite,
     create_custom_list, get_user_custom_lists,
@@ -37,6 +39,22 @@ import secrets
 import logging
 
 logger = logging.getLogger(__name__)
+
+APPROVED_PROVIDER_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+
+
+def _is_approved_provider_email(email: Optional[str]) -> bool:
+    if not email:
+        return False
+    parts = str(email).strip().lower().rsplit("@", 1)
+    return len(parts) == 2 and parts[1] in APPROVED_PROVIDER_DOMAINS
+
+
+def _normalize_ui_role(email: Optional[str], role: Optional[str]) -> str:
+    role_value = (role or "user").strip().lower()
+    if _is_approved_provider_email(email) and role_value in {"user", "patient", ""}:
+        return "provider"
+    return role_value or "user"
 
 # Import rate limiter
 try:
@@ -126,22 +144,24 @@ async def login_user(request: Request, credentials: UserLogin):
     except Exception as e:
         logger.error(f"Login error for {credentials.email}: {str(e)}")
         raise
+
+    mfa_state = get_user_mfa_state(user["user_id"])
+    if mfa_state.get("mfa_enabled"):
+        mfa_token = create_mfa_pending_token(user["user_id"], user["email"])
+        return {
+            "mfa_required": True,
+            "mfa_token": mfa_token,
+            "message": "MFA verification required. Submit your code to POST /mfa/login-verify."
+        }
+
     access_token = create_access_token(user["user_id"], user["email"])
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
     user_safe = {k: v for k, v in user.items() if k != "password_hash"}
-    
-    # Add role based on email/specialty
-    email = user_safe.get("email", "").lower()
-    specialty = user_safe.get("specialty", "")
-    
-    if "admin" in email or email == "admin@realdiag.org":
-        user_safe["role"] = "admin"
-    elif specialty or email.endswith(("@hospital.com", "@clinic.com", "@medical.com", "@health.org", "@realdiag.org")):
-        user_safe["role"] = "provider" if "provider" in email else "doctor"
-    else:
-        user_safe["role"] = "patient"
+
+    # Default role compatibility: treat generic "user" as provider-level UI role.
+    user_safe["role"] = _normalize_ui_role(user_safe.get("email"), user_safe.get("role"))
     
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
@@ -394,17 +414,7 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
     profile = {k: v for k, v in current_user.items() if k != "password_hash"}
-    
-    # Determine user role based on email/specialty
-    email = profile.get("email", "").lower()
-    specialty = profile.get("specialty", "")
-    
-    if "admin" in email or email == "admin@realdiag.org":
-        profile["role"] = "admin"
-    elif specialty or email.endswith(("@hospital.com", "@clinic.com", "@medical.com", "@health.org", "@realdiag.org")):
-        profile["role"] = "provider" if "provider" in email else "doctor"
-    else:
-        profile["role"] = "patient"
+    profile["role"] = _normalize_ui_role(profile.get("email"), profile.get("role"))
     
     return profile
 

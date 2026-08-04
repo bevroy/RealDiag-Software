@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
-import { getStoredUser, isStoredAuthenticated, clearStoredAuth } from '../utils/clientAuth';
+import { getStoredUser, isStoredAuthenticated, clearStoredAuth, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 
@@ -117,11 +117,7 @@ export default function AccountPage() {
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       // Store auth data for AuthGuard on other pages
-      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-      localStorage.setItem('realdiag_authenticated', 'true');
-      if (data.csrf_token) {
-        sessionStorage.setItem('csrf_token', data.csrf_token);
-      }
+      storeAuthData(data.user, data.csrf_token || null);
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -147,11 +143,7 @@ export default function AccountPage() {
       setIsUserAuthenticated(true);
       setActiveTab('dashboard');
       // Store auth data for AuthGuard on other pages
-      localStorage.setItem('realdiag_user', JSON.stringify(data.user));
-      localStorage.setItem('realdiag_authenticated', 'true');
-      if (data.csrf_token) {
-        sessionStorage.setItem('csrf_token', data.csrf_token);
-      }
+      storeAuthData(data.user, data.csrf_token || null);
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -488,7 +480,7 @@ export default function AccountPage() {
           )}
 
           {/* Dashboard Tab */}
-          {activeTab === 'dashboard' && isAuthenticated && (
+          {activeTab === 'dashboard' && isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Dashboard</h2>
               
@@ -589,7 +581,7 @@ export default function AccountPage() {
           )}
 
           {/* History Tab */}
-          {activeTab === 'history' && isAuthenticated && (
+          {activeTab === 'history' && isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Search History</h2>
               {searchHistory.length === 0 ? (
@@ -623,7 +615,7 @@ export default function AccountPage() {
           )}
 
           {/* Favorites Tab */}
-          {activeTab === 'favorites' && isAuthenticated && (
+          {activeTab === 'favorites' && isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>My Favorites</h2>
               {favorites.length === 0 ? (
@@ -664,7 +656,7 @@ export default function AccountPage() {
           )}
 
           {/* Lists Tab */}
-          {activeTab === 'lists' && isAuthenticated && (
+          {activeTab === 'lists' && isUserAuthenticated && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Custom Differential Lists</h2>
               {customLists.length === 0 ? (
@@ -710,7 +702,7 @@ export default function AccountPage() {
           )}
 
           {/* Analytics Tab */}
-          {activeTab === 'analytics' && isAuthenticated && analytics && (
+          {activeTab === 'analytics' && isAuthenticated() && analytics && (
             <div>
               <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Usage Analytics</h2>
               

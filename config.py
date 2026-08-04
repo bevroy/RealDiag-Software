@@ -10,7 +10,7 @@ class Config:
     
     # Application info
     APP_NAME = "RealDiag"
-    APP_VERSION = "1.0.0"
+    APP_VERSION = "1.4.0"
     APP_DESCRIPTION = "Real Time Diagnostic Assistant Software"
     
     # Diagnostic settings
