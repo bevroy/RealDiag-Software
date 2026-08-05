@@ -4,11 +4,14 @@
 playwright==1.41.0
 
 # AI Text-to-Speech (Microsoft Edge TTS - Free)
-edge-tts==6.1.9
+edge-tts==7.2.8
 
 # Video processing
 opencv-python==4.9.0.80
-pillow==10.2.0
+pillow==12.3.0
+
+# Pinned transitively via playwright/edge-tts; older versions have known CVEs
+certifi>=2024.7.4
 
 # Alternative TTS options (uncomment if needed):
 # gTTS==2.5.0  # Google Text-to-Speech (free but lower quality)
