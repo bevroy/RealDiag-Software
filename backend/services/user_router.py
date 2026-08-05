@@ -56,13 +56,14 @@ def _normalize_ui_role(email: Optional[str], role: Optional[str]) -> str:
         return "provider"
     return role_value or "user"
 
-# Import rate limiter
+# Import rate limiter and audit logger
 try:
-    from backend.services.security import limiter
+    from backend.services.security import limiter, AuditLogger
     LIMITER_AVAILABLE = True
 except ImportError:
     LIMITER_AVAILABLE = False
     limiter = None
+    AuditLogger = None
     
 # Create a no-op limiter when security module unavailable
 class NoOpLimiter:
@@ -73,6 +74,16 @@ class NoOpLimiter:
 
 if not LIMITER_AVAILABLE:
     limiter = NoOpLimiter()
+
+if AuditLogger is None:
+    class AuditLogger:
+        @staticmethod
+        def log_authentication(*args, **kwargs):
+            pass
+
+
+def _request_ip(request: Request) -> str:
+    return request.client.host if request.client else "unknown"
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -143,7 +154,20 @@ async def login_user(request: Request, credentials: UserLogin):
         user = authenticate_user(credentials.email, credentials.password)
     except Exception as e:
         logger.error(f"Login error for {credentials.email}: {str(e)}")
+        AuditLogger.log_authentication(
+            user_id=credentials.email,
+            success=False,
+            ip=_request_ip(request),
+            user_agent=request.headers.get("user-agent", "unknown")
+        )
         raise
+
+    AuditLogger.log_authentication(
+        user_id=user["user_id"],
+        success=True,
+        ip=_request_ip(request),
+        user_agent=request.headers.get("user-agent", "unknown")
+    )
 
     mfa_state = get_user_mfa_state(user["user_id"])
     if mfa_state.get("mfa_enabled"):

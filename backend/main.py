@@ -303,7 +303,10 @@ else:
 if SECURITY_ENABLED and security_middleware:
     app.middleware("http")(security_middleware)
 
-# CORS Configuration - Allow all domains (production + development)
+# CORS Configuration - explicit origin allowlist (production + development)
+# plus a regex for known preview hosts (Codespaces/Netlify). This is NOT a
+# wildcard: allow_credentials=True is safe here because origins are checked
+# against a fixed list/regex, never "*".
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
 # Allow both production and development origins

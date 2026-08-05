@@ -61,7 +61,44 @@ except ImportError:
         return False
 
 # JWT Configuration
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", secrets.token_urlsafe(32))  # Load from env in production
+_JWT_SECRET_ENV = "JWT_SECRET_KEY"
+_PLACEHOLDER_JWT_SECRETS = {
+    "changeme",
+    "change_me",
+    "changeme_to_random_secret_key_32_chars_min",
+    "your-secret-key",
+    "your-secret-key-here",
+    "secret",
+    "test_jwt_secret_key_change_in_production",
+}
+
+
+def _load_jwt_secret_key() -> str:
+    """Load JWT_SECRET_KEY from the environment, refusing to start without a real secret.
+
+    A missing secret would make every worker/process sign tokens with a different
+    random key (breaking multi-worker deployments and invalidating sessions on every
+    restart). A placeholder secret would let anyone forge valid tokens.
+    """
+    raw = os.getenv(_JWT_SECRET_ENV)
+    if not raw or not raw.strip():
+        raise RuntimeError(
+            f"{_JWT_SECRET_ENV} environment variable is required. Generate one with: "
+            "python -c \"import secrets; print(secrets.token_urlsafe(32))\""
+        )
+    value = raw.strip()
+    normalized = value.lower().replace("-", "_")
+    if normalized in _PLACEHOLDER_JWT_SECRETS or "change_me" in normalized:
+        raise RuntimeError(
+            f"{_JWT_SECRET_ENV} is set to a known placeholder value and must be replaced "
+            "with a unique random secret before starting the application."
+        )
+    if len(value) < 32:
+        raise RuntimeError(f"{_JWT_SECRET_ENV} must be at least 32 characters long.")
+    return value
+
+
+SECRET_KEY = _load_jwt_secret_key()
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRATION_MINUTES", "60"))  # 1 hour default
 MFA_PENDING_TOKEN_EXPIRE_MINUTES = 5

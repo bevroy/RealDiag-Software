@@ -6,12 +6,22 @@ Secure JWT storage using HttpOnly cookies instead of localStorage
 from fastapi import Response, Request, HTTPException, status
 from fastapi.responses import JSONResponse
 from datetime import datetime, timedelta
+import os
 import secrets
 import hashlib
 from typing import Optional, Dict, Any
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    """Parse a boolean environment variable, falling back to `default` if unset."""
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
 
 
 class CookieAuthManager:
@@ -153,7 +163,16 @@ class CookieAuthManager:
 
 
 # Global instance
-cookie_auth = CookieAuthManager()
+# Reads settings from environment so JWT_EXPIRATION_MINUTES / HTTPS_ONLY /
+# SECURE_COOKIES / SAME_SITE_COOKIES actually take effect instead of being
+# silently ignored in favor of hardcoded defaults.
+cookie_auth = CookieAuthManager(
+    access_token_expire_minutes=int(os.getenv("JWT_EXPIRATION_MINUTES", "60")),
+    refresh_token_expire_days=int(os.getenv("REFRESH_TOKEN_EXPIRATION_DAYS", "30")),
+    cookie_secure=_env_bool("SECURE_COOKIES", _env_bool("HTTPS_ONLY", True)),
+    cookie_samesite=os.getenv("SAME_SITE_COOKIES", "strict"),
+    cookie_domain=os.getenv("COOKIE_DOMAIN") or None,
+)
 
 
 # Dependency for extracting tokens from cookies

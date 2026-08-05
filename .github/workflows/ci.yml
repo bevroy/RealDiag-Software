@@ -48,6 +48,8 @@ jobs:
           # prometheus_client is required by backend/main.py (metrics endpoint)
           pip install fastapi uvicorn jinja2 pyyaml pytest requests httpx prometheus_client
       - name: Run tests
+        env:
+          JWT_SECRET_KEY: test-only-ci-secret-key-not-for-production-use
         run: pytest -q backend/tests/ tests/ --ignore=tests/test_e2e.py || [ $? -eq 5 ] || exit $?
       - name: Set up Node
         uses: actions/setup-node@v4

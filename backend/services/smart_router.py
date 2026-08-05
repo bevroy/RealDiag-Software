@@ -17,7 +17,10 @@ from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import os
 import logging
-from datetime import datetime
+import secrets
+import jwt
+from datetime import datetime, timedelta
+from urllib.parse import urlparse
 
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
@@ -35,8 +38,53 @@ CLIENT_SECRET = os.getenv("SMART_CLIENT_SECRET", "")
 REDIRECT_URI = os.getenv("SMART_REDIRECT_URI", "http://localhost:8000/smart/callback")
 TENANT_ID = os.getenv("EHR_TENANT_ID")  # Required for Cerner
 
+# State token secret used to sign the SMART launch state (OAuth CSRF protection).
+# Falls back to JWT_SECRET_KEY so a single required secret covers both flows.
+SMART_STATE_SECRET = os.getenv("SMART_STATE_SECRET") or os.getenv("JWT_SECRET_KEY")
+STATE_TOKEN_EXPIRE_MINUTES = 10
+
+# Issuer allowlist: only launch redirects to known/trusted FHIR servers.
+# Defaults to the host of the configured FHIR_BASE_URL; extra hosts (e.g. for
+# multi-tenant deployments) can be added via SMART_ALLOWED_ISS_HOSTS.
+_extra_allowed_hosts = {
+    host.strip().lower()
+    for host in os.getenv("SMART_ALLOWED_ISS_HOSTS", "").split(",")
+    if host.strip()
+}
+ALLOWED_ISS_HOSTS = _extra_allowed_hosts | {urlparse(FHIR_BASE_URL).netloc.lower()}
+
 # Global instances (in production, use dependency injection)
 diagnostic_engine = SmartDiagnosticEngine()
+
+
+def _validate_iss(iss: str) -> str:
+    """Reject issuer URLs that aren't in the trusted allowlist."""
+    parsed = urlparse(iss)
+    if parsed.scheme != "https" or not parsed.netloc:
+        raise HTTPException(status_code=400, detail="Invalid iss: must be an https URL")
+    if parsed.netloc.lower() not in ALLOWED_ISS_HOSTS:
+        logger.warning(f"Rejected SMART launch from disallowed iss host: {parsed.netloc}")
+        raise HTTPException(status_code=400, detail="Unrecognized FHIR issuer")
+    return iss
+
+
+def _create_state_token(iss: str) -> str:
+    """Create a signed, short-lived state token to prevent OAuth CSRF."""
+    payload = {
+        "iss": iss,
+        "nonce": secrets.token_urlsafe(16),
+        "exp": datetime.utcnow() + timedelta(minutes=STATE_TOKEN_EXPIRE_MINUTES),
+    }
+    return jwt.encode(payload, SMART_STATE_SECRET, algorithm="HS256")
+
+
+def _verify_state_token(state: str) -> Dict[str, Any]:
+    """Verify the state token returned by the EHR authorization server."""
+    try:
+        return jwt.decode(state, SMART_STATE_SECRET, algorithms=["HS256"])
+    except jwt.PyJWTError as e:
+        logger.warning(f"SMART callback rejected: invalid state token ({e})")
+        raise HTTPException(status_code=400, detail="Invalid or expired state parameter")
 
 
 class EvaluatePatientRequest(BaseModel):
@@ -117,6 +165,9 @@ async def smart_launch(
     Returns:
         Redirect to EHR authorization page
     """
+    # Reject issuer URLs that aren't in the trusted allowlist before using them.
+    iss = _validate_iss(iss)
+
     logger.info(f"SMART launch initiated from {iss} using {EHR_VENDOR}")
     
     # Get vendor-specific configuration
@@ -133,7 +184,7 @@ async def smart_launch(
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
         "scope": " ".join(scopes),
-        "state": f"iss={iss}",  # Include issuer in state
+        "state": _create_state_token(iss),  # Signed, single-use nonce (CSRF protection)
         "aud": iss,
         "launch": launch
     }
@@ -148,7 +199,7 @@ async def smart_launch(
 @router.get("/callback")
 async def smart_callback(
     code: str = Query(..., description="Authorization code"),
-    state: Optional[str] = Query(None, description="State parameter")
+    state: str = Query(..., description="State parameter")
 ):
     """
     OAuth callback handler.
@@ -157,12 +208,14 @@ async def smart_callback(
     
     Args:
         code: Authorization code from EHR
-        state: State parameter (contains issuer)
+        state: Signed state token issued by /smart/launch (contains issuer + nonce)
         
     Returns:
         HTML page that launches the SMART app
     """
-    logger.info(f"OAuth callback received with code: {code[:10]}...")
+    # Verify the state token to prevent OAuth CSRF (rejects forged/replayed/expired state)
+    state_payload = _verify_state_token(state)
+    logger.info(f"OAuth callback received with code: {code[:10]}... for iss={state_payload.get('iss')}")
     
     try:
         # Initialize FHIR client

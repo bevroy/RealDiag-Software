@@ -16,6 +16,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # Disable rate limiting for tests
 os.environ["TESTING"] = "1"
 
+# auth_service refuses to start without a real JWT_SECRET_KEY; provide a
+# non-placeholder test-only value if one isn't already set in the environment.
+os.environ.setdefault("JWT_SECRET_KEY", "test-only-" + "a" * 32)
+
 from backend.main import app
 
 
