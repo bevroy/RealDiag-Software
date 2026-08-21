@@ -149,10 +149,20 @@ PUBLIC_PATHS = {
     "/users/reset-password",
     "/users/verify-email",
     "/users/resend-verification",
+    "/",
+    "/version",
+    "/docs",
+    "/openapi.json",
+    "/redoc",
+    "/search/by-symptoms",
+    "/education/learning-objectives",
+    "/education/quiz/questions",
 }
 
 PUBLIC_PREFIXES = (
     "/static/",
+    "/reference/",
+    "/education/cases",
 )
 
 

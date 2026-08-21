@@ -42,7 +42,7 @@ except ImportError:
         def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
             logging.info(f"AUDIT: {event_type} - {details}")
 
-router = APIRouter(prefix="/education", tags=["education"], dependencies=[Depends(get_current_user)])
+router = APIRouter(prefix="/education", tags=["education"])
 
 # ========== MODELS ==========
 
@@ -730,7 +730,7 @@ async def get_quiz_questions(
 async def submit_quiz_answer(
     request: Request,
     attempt: QuizAttempt,
-    current_user: Optional[Dict] = Depends(get_optional_user)
+    current_user: Dict = Depends(get_current_user)
 ):
     """
     Submit quiz answer.
@@ -738,12 +738,7 @@ async def submit_quiz_answer(
     ⚠️ REQUIRES AUTHENTICATION
     Must be logged in to submit answers and track progress.
     """
-    # Use authenticated user when present, otherwise preserve the submitted user_id
-    # so unauthenticated test/client calls can still get a deterministic response.
-    if current_user:
-        attempt.user_id = current_user["user_id"]
-    elif not attempt.user_id:
-        attempt.user_id = "guest_user"
+    attempt.user_id = current_user["user_id"]
     
     result = quiz_system.submit_answer(attempt)
     
@@ -761,7 +756,7 @@ async def submit_quiz_answer(
 async def get_progress(
     request: Request,
     user_id: str,
-    current_user: Optional[Dict] = Depends(get_optional_user)
+    current_user: Dict = Depends(get_current_user)
 ):
     """
     Get user progress statistics.
@@ -769,9 +764,7 @@ async def get_progress(
     ⚠️ REQUIRES AUTHENTICATION
     Users can only view their own progress.
     """
-    # Authenticated users can only view their own progress, but anonymous
-    # requests are allowed for compatibility with the public educational tests.
-    if current_user and user_id != current_user["user_id"]:
+    if user_id != current_user["user_id"]:
         raise HTTPException(
             status_code=403, 
             detail="Access denied: You can only view your own progress"
@@ -792,23 +785,17 @@ async def get_progress(
 async def get_due_flashcards(
     request: Request,
     limit: int = 20,
-    user_id: Optional[str] = None,
-    current_user: Optional[Dict] = Depends(get_optional_user)
+    current_user: Dict = Depends(get_current_user)
 ):
     """
     Get flashcards due for review.
     
-    Authentication optional. Authenticated users get personalized flashcards.
-    Unauthenticated users get sample flashcards.
+    ⚠️ REQUIRES AUTHENTICATION
     """
     if limit > 100:
         raise HTTPException(status_code=400, detail="Maximum 100 flashcards per request")
     
-    # Use authenticated user's ID, or provided user_id, or default
-    if current_user:
-        user_id = current_user["user_id"]
-    elif not user_id:
-        user_id = "guest_user"
+    user_id = current_user["user_id"]
     
     cards = flashcard_system.get_due_flashcards(user_id, limit)
     
@@ -819,22 +806,17 @@ async def get_due_flashcards(
 async def review_flashcard(
     request: Request, 
     review: FlashcardReview,
-    current_user: Optional[Dict] = Depends(get_optional_user)
+    current_user: Dict = Depends(get_current_user)
 ):
     """
     Review flashcard and update schedule.
     
-    Authentication optional. Authenticated users get persistent progress tracking.
-    Unauthenticated users get temporary session-based tracking.
+    ⚠️ REQUIRES AUTHENTICATION
     """
     if review.quality < 0 or review.quality > 5:
         raise HTTPException(status_code=400, detail="Quality must be 0-5")
     
-    # Use authenticated user's ID if available, otherwise use provided user_id
-    if current_user:
-        review.user_id = current_user["user_id"]
-    elif not review.user_id:
-        review.user_id = "guest_user"
+    review.user_id = current_user["user_id"]
     
     result = flashcard_system.review_flashcard(review)
     

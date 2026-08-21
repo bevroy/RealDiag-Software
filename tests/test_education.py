@@ -5,6 +5,29 @@ Tests for medical training endpoints
 
 import pytest
 from fastapi.testclient import TestClient
+import uuid
+
+
+@pytest.fixture(scope="module")
+def authenticated_user(test_client: TestClient) -> dict:
+    """Register a test user and attach its auth cookie to test_client.
+
+    TestClient drops Secure-flagged cookies on the http:// test host, so the
+    token is copied from the response directly instead of relying on the
+    client's cookie jar to persist it across requests.
+    """
+    email = f"edu-test-{uuid.uuid4().hex[:8]}@realdiag.com"
+    response = test_client.post(
+        "/users/register",
+        json={
+            "email": email,
+            "password": "TestPass123!",
+            "full_name": "Education Test User",
+        },
+    )
+    assert response.status_code == 201
+    test_client.cookies.set("access_token", response.cookies.get("access_token"))
+    return response.json()["user"]
 
 
 def test_education_cases_endpoint(test_client: TestClient):
@@ -40,7 +63,7 @@ def test_education_quiz_questions(test_client: TestClient):
     assert "count" in data
 
 
-def test_education_quiz_submit(test_client: TestClient):
+def test_education_quiz_submit(test_client: TestClient, authenticated_user: dict):
     """Test submitting a quiz answer"""
     payload = {
         "attempt_id": "test_attempt_001",
@@ -56,16 +79,16 @@ def test_education_quiz_submit(test_client: TestClient):
     assert response.status_code in [200, 404]
 
 
-def test_education_progress(test_client: TestClient):
+def test_education_progress(test_client: TestClient, authenticated_user: dict):
     """Test getting user progress"""
-    response = test_client.get("/education/progress/test_user")
+    response = test_client.get(f"/education/progress/{authenticated_user['user_id']}")
     assert response.status_code == 200
     data = response.json()
     # Either has progress data or message about no progress
     assert "user_id" in data or "message" in data
 
 
-def test_education_flashcards_due(test_client: TestClient):
+def test_education_flashcards_due(test_client: TestClient, authenticated_user: dict):
     """Test getting due flashcards"""
     response = test_client.get("/education/flashcards/due?user_id=test_user&limit=10")
     assert response.status_code == 200
@@ -74,7 +97,7 @@ def test_education_flashcards_due(test_client: TestClient):
     assert "count" in data
 
 
-def test_education_flashcard_review(test_client: TestClient):
+def test_education_flashcard_review(test_client: TestClient, authenticated_user: dict):
     """Test reviewing a flashcard"""
     payload = {
         "user_id": "test_user",
@@ -112,7 +135,7 @@ def test_education_quiz_invalid_count(test_client: TestClient):
     assert response.status_code in [200, 400]  # May limit to max count
 
 
-def test_education_flashcard_invalid_quality(test_client: TestClient):
+def test_education_flashcard_invalid_quality(test_client: TestClient, authenticated_user: dict):
     """Test flashcard review with invalid quality"""
     payload = {
         "user_id": "test_user",
