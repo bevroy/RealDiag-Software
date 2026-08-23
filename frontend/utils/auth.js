@@ -16,9 +16,9 @@ import { storeAuthData, isStoredAuthenticated } from './clientAuth';
 function getApiBase() {
   if (typeof window !== 'undefined') {
     const runtimeConfig = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__;
-    return runtimeConfig?.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+    return runtimeConfig?.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
   }
-  return 'https://realdiag-software.onrender.com';
+  return 'https://api.realdiag.com';
 }
 
 /**
