@@ -306,9 +306,13 @@ async def smart_callback(
 
         logger.info(f"SMART session created for patient {patient_id or 'unknown'}, expires in {ttl_seconds}s")
 
-        redirect_url = f"{FRONTEND_URL.rstrip('/')}/symptom?smart=true"
+        # The built-out chart-summary/CDS UI lives at /smart-launch (see
+        # frontend/app/smart-launch/page.jsx) - it reads patient_id from the
+        # URL and gets the FHIR access token via the SMART session cookie
+        # set below, never from the URL or sessionStorage.
+        redirect_url = f"{FRONTEND_URL.rstrip('/')}/smart-launch"
         if patient_id:
-            redirect_url += f"&patient_id={patient_id}"
+            redirect_url += f"?patient_id={patient_id}"
 
         redirect_response = RedirectResponse(url=redirect_url, status_code=302)
         redirect_response.set_cookie(

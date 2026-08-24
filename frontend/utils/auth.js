@@ -13,7 +13,7 @@ import { storeAuthData, isStoredAuthenticated } from './clientAuth';
 /**
  * Get API base URL from runtime config
  */
-function getApiBase() {
+export function getApiBase() {
   if (typeof window !== 'undefined') {
     const runtimeConfig = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__;
     return runtimeConfig?.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';

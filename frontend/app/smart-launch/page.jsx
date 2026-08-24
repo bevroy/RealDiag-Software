@@ -2,16 +2,21 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { getApiBase } from '../../utils/auth';
 
 /**
  * SmartLaunch Component
- * 
- * Handles SMART on FHIR launch sequence from Epic/EHR systems
- * 
+ *
+ * Displays the chart summary and clinical decision support view after a
+ * SMART on FHIR launch from Epic/Cerner/etc.
+ *
  * Usage:
- * 1. Epic launches: /smart-launch?patient_id=xxx&smart_token=yyy
- * 2. Component fetches patient data and evaluations
- * 3. Displays interactive diagnostic view with actual patient data
+ * 1. EHR launches -> /smart/launch -> EHR auth -> /smart/callback
+ * 2. /smart/callback exchanges the code for a token, stores it server-side,
+ *    and redirects here as /smart-launch?patient_id=xxx with an HttpOnly
+ *    session cookie set (realdiag_smart_session) - never a token in the URL.
+ * 3. This page reads patient_id from the URL and calls the backend with
+ *    credentials: 'include' so the session cookie authenticates the calls.
  */
 export default function SmartLaunchPage() {
   return (
@@ -36,67 +41,60 @@ function SmartLaunch() {
   const [evaluations, setEvaluations] = useState([]);
 
   useEffect(() => {
-    // Check for SMART launch parameters
     const patientId = searchParams.get('patient_id');
-    const smartToken = searchParams.get('smart_token');
-    
-    if (!patientId || !smartToken) {
-      // Check sessionStorage (set by OAuth callback)
-      const storedToken = sessionStorage.getItem('fhir_access_token');
-      const storedPatient = sessionStorage.getItem('patient_id');
-      
-      if (storedToken && storedPatient) {
-        fetchPatientData(storedPatient, storedToken);
-      } else {
-        setError('Missing SMART launch parameters. This page must be launched from Epic.');
-        setLoading(false);
-      }
-    } else {
-      // Store in session for future requests
-      sessionStorage.setItem('fhir_access_token', smartToken);
-      sessionStorage.setItem('patient_id', patientId);
-      fetchPatientData(patientId, smartToken);
+
+    if (!patientId) {
+      setError('Missing patient context. This page must be launched from the EHR.');
+      setLoading(false);
+      return;
     }
+
+    fetchPatientData(patientId);
   }, [searchParams]);
 
-  const fetchPatientData = async (patientId, token) => {
+  const fetchPatientData = async (patientId) => {
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://realdiag-software.onrender.com';
-      
-      // Fetch patient summary
+      const apiBase = getApiBase();
+
+      // The SMART session cookie set by /smart/callback authenticates this
+      // request - credentials: 'include' sends it cross-subdomain to the API.
       const summaryResponse = await fetch(
-        `${apiBase}/smart/patient/${patientId}?access_token=${token}`
+        `${apiBase}/smart/patient/${patientId}`,
+        { credentials: 'include' }
       );
-      
+
       if (!summaryResponse.ok) {
-        throw new Error('Failed to fetch patient data from Epic');
+        if (summaryResponse.status === 401) {
+          throw new Error('Your session with the EHR has expired. Please relaunch from the EHR.');
+        }
+        throw new Error('Failed to fetch patient data from the EHR');
       }
-      
+
       const summary = await summaryResponse.json();
       setPatientData(summary);
-      
-      // Fetch diagnostic evaluations
+
+      // Same cookie-based session - no access token in the request body.
       const evalResponse = await fetch(`${apiBase}/smart/evaluate-patient`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           patient_id: patientId,
-          access_token: token,
           chief_complaint: null, // Auto-detect from symptoms
           focus_specialties: null // Evaluate all relevant
         })
       });
-      
+
       if (!evalResponse.ok) {
         throw new Error('Failed to evaluate patient');
       }
-      
+
       const evals = await evalResponse.json();
       setEvaluations(evals);
       setLoading(false);
-      
+
     } catch (err) {
       console.error('Error fetching patient data:', err);
       setError(err.message);
@@ -109,7 +107,7 @@ function SmartLaunch() {
       <div style={styles.container}>
         <div style={styles.loadingContainer}>
           <div style={styles.spinner}></div>
-          <p style={styles.loadingText}>Loading patient data from Epic...</p>
+          <p style={styles.loadingText}>Loading patient data from the EHR...</p>
         </div>
       </div>
     );
@@ -122,9 +120,9 @@ function SmartLaunch() {
           <h2 style={styles.errorTitle}>⚠️ Launch Error</h2>
           <p style={styles.errorText}>{error}</p>
           <p style={styles.errorHint}>
-            This application must be launched from within Epic using the SMART on FHIR protocol.
+            This application must be launched from within the EHR using the SMART on FHIR protocol.
           </p>
-          <button 
+          <button
             style={styles.backButton}
             onClick={() => window.location.href = '/'}
           >
@@ -139,11 +137,11 @@ function SmartLaunch() {
     <div style={styles.container}>
       {/* Patient Banner */}
       <PatientBanner patient={patientData} />
-      
+
       {/* Diagnostic Evaluations */}
       <div style={styles.content}>
         <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
-        
+
         {evaluations.length === 0 ? (
           <div style={styles.noResults}>
             <p>✓ No significant diagnostic concerns identified.</p>
@@ -156,7 +154,7 @@ function SmartLaunch() {
             ))}
           </div>
         )}
-        
+
         {/* Abnormal Labs Section */}
         {patientData.abnormal_labs && patientData.abnormal_labs.length > 0 && (
           <AbnormalLabsSection labs={patientData.abnormal_labs} />
@@ -192,7 +190,7 @@ function PatientBanner({ patient }) {
 // Diagnostic Card Component
 function DiagnosticCard({ evaluation }) {
   const [expanded, setExpanded] = useState(false);
-  
+
   const getSeverityColor = (severity) => {
     switch (severity.toUpperCase()) {
       case 'CRITICAL': return '#ef4444';
@@ -202,7 +200,7 @@ function DiagnosticCard({ evaluation }) {
       default: return '#6b7280';
     }
   };
-  
+
   const getSeverityEmoji = (severity) => {
     switch (severity.toUpperCase()) {
       case 'CRITICAL': return '🔴';
@@ -215,7 +213,7 @@ function DiagnosticCard({ evaluation }) {
 
   return (
     <div style={styles.card}>
-      <div 
+      <div
         style={styles.cardHeader}
         onClick={() => setExpanded(!expanded)}
       >
@@ -229,7 +227,7 @@ function DiagnosticCard({ evaluation }) {
           </div>
         </div>
         <div style={styles.cardHeaderRight}>
-          <div 
+          <div
             style={{
               ...styles.probabilityBadge,
               backgroundColor: getSeverityColor(evaluation.severity)
@@ -240,7 +238,7 @@ function DiagnosticCard({ evaluation }) {
           <span style={styles.expandIcon}>{expanded ? '▼' : '▶'}</span>
         </div>
       </div>
-      
+
       {expanded && (
         <div style={styles.cardBody}>
           {/* Criteria Met */}
@@ -259,7 +257,7 @@ function DiagnosticCard({ evaluation }) {
               </ul>
             </div>
           )}
-          
+
           {/* Criteria Not Met */}
           {evaluation.criteria_not_met && evaluation.criteria_not_met.length > 0 && (
             <div style={styles.criteriaSection}>
@@ -273,7 +271,7 @@ function DiagnosticCard({ evaluation }) {
               </ul>
             </div>
           )}
-          
+
           {/* Missing Tests */}
           {evaluation.missing_tests && evaluation.missing_tests.length > 0 && (
             <div style={styles.criteriaSection}>
@@ -287,7 +285,7 @@ function DiagnosticCard({ evaluation }) {
               </ul>
             </div>
           )}
-          
+
           {/* Recommendations */}
           {evaluation.recommendations && evaluation.recommendations.length > 0 && (
             <div style={styles.recommendationsSection}>
@@ -310,17 +308,17 @@ function DiagnosticCard({ evaluation }) {
 // Abnormal Labs Section
 function AbnormalLabsSection({ labs }) {
   const [expanded, setExpanded] = useState(true);
-  
+
   return (
     <div style={styles.abnormalLabsContainer}>
-      <div 
+      <div
         style={styles.abnormalLabsHeader}
         onClick={() => setExpanded(!expanded)}
       >
         <h3 style={styles.abnormalLabsTitle}>⚠️ Abnormal Lab Values ({labs.length})</h3>
         <span style={styles.expandIcon}>{expanded ? '▼' : '▶'}</span>
       </div>
-      
+
       {expanded && (
         <div style={styles.abnormalLabsBody}>
           <table style={styles.labTable}>
