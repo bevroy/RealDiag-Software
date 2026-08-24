@@ -161,6 +161,7 @@ PUBLIC_PATHS = {
 
 PUBLIC_PREFIXES = (
     "/static/",
+    "/smart/",
     "/reference/",
     "/education/cases",
 )
