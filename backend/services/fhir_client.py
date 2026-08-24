@@ -348,7 +348,122 @@ class FHIRClient:
         except (KeyError, ValueError, TypeError) as e:
             logger.warning(f"Failed to parse observation: {e}")
             return None
-    
+
+    def get_encounters(
+        self,
+        patient_id: str,
+        status: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """Get patient encounters (visits/admissions), optionally filtered by status."""
+        params = {"patient": patient_id, "_count": 20, "_sort": "-date"}
+        if status:
+            params["status"] = status
+
+        bundle = self._query_resource("Encounter", params)
+
+        encounters = []
+        if bundle.get("entry"):
+            encounters = [entry["resource"] for entry in bundle["entry"]]
+
+        return encounters
+
+    def get_current_encounter(self, patient_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get the patient's current (in-progress) encounter/admission, if any.
+
+        Returns:
+            The FHIR Encounter resource for the active admission, or None if
+            the patient has no in-progress encounter (e.g., not currently
+            admitted).
+        """
+        encounters = self.get_encounters(patient_id, status="in-progress")
+
+        if not encounters:
+            return None
+
+        def _start(enc):
+            return enc.get("period", {}).get("start") or ""
+
+        encounters.sort(key=_start, reverse=True)
+        return encounters[0]
+
+    def get_patient_updates_since(
+        self,
+        patient_id: str,
+        since: datetime
+    ) -> Dict[str, Any]:
+        """
+        Get everything new for a patient since a given timestamp - the basis
+        for shift-handoff / "what's changed since admission" summaries.
+
+        Unlike get_patient_data(), this is NOT limited to a fixed 7/30-day
+        lookback window - it queries from the exact timestamp given, however
+        long ago that was (e.g., the start of a multi-week admission).
+
+        Returns:
+            Dict with new_labs, new_abnormal_labs, new_vitals, new_conditions,
+            new_medications.
+        """
+        since_str = since.strftime("%Y-%m-%d")
+
+        lab_observations = self.get_observations(
+            patient_id, category="laboratory", date_range=f"ge{since_str}"
+        )
+        new_labs = []
+        for obs in lab_observations:
+            lab = self.parse_observation(obs)
+            if lab:
+                new_labs.append(lab)
+        new_abnormal_labs = [lab for lab in new_labs if lab.is_abnormal]
+
+        vital_observations = self.get_observations(
+            patient_id, category="vital-signs", date_range=f"ge{since_str}"
+        )
+        new_vitals = []
+        for obs in vital_observations:
+            try:
+                code_obj = obs.get("code", {})
+                coding = code_obj.get("coding", [{}])[0]
+                code = coding.get("code")
+                display = coding.get("display", "Unknown")
+
+                value_qty = obs.get("valueQuantity", {})
+                value = float(value_qty.get("value", 0))
+                unit = value_qty.get("unit", "")
+
+                effective_date = datetime.fromisoformat(
+                    obs["effectiveDateTime"].replace("Z", "+00:00")
+                )
+
+                new_vitals.append(VitalSign(
+                    code=code, display=display, value=value,
+                    unit=unit, effective_date=effective_date
+                ))
+            except (KeyError, ValueError):
+                continue
+
+        condition_bundle = self._query_resource("Condition", {
+            "patient": patient_id, "_count": 100, "recorded-date": f"ge{since_str}"
+        })
+        new_conditions = []
+        if condition_bundle.get("entry"):
+            new_conditions = [entry["resource"] for entry in condition_bundle["entry"]]
+
+        medication_bundle = self._query_resource("MedicationRequest", {
+            "patient": patient_id, "_count": 100, "authoredon": f"ge{since_str}"
+        })
+        new_medications = []
+        if medication_bundle.get("entry"):
+            new_medications = [entry["resource"] for entry in medication_bundle["entry"]]
+
+        return {
+            "new_labs": new_labs,
+            "new_abnormal_labs": new_abnormal_labs,
+            "new_vitals": new_vitals,
+            "new_conditions": new_conditions,
+            "new_medications": new_medications,
+        }
+
     def get_patient_data(self, patient_id: str) -> PatientData:
         """
         Get comprehensive patient data for clinical decision support.

@@ -5,18 +5,19 @@ Implements SMART on FHIR launch sequence and clinical decision support endpoints
 for Epic and other EHR integration.
 
 Endpoints:
-    GET  /smart/launch           - SMART launch entry point
-    GET  /smart/callback         - OAuth callback handler
-    POST /smart/evaluate-patient - Evaluate patient with CDS
-    GET  /smart/patient/{id}     - Get patient summary
+    GET  /smart/launch                 - SMART launch entry point
+    GET  /smart/callback               - OAuth callback handler
+    POST /smart/evaluate-patient       - Evaluate patient with CDS
+    GET  /smart/patient/{id}           - Get patient chart summary
+    GET  /smart/patient/{id}/handoff   - Chart summary + updates since admission/shift start
+    GET  /smart/config                 - Frontend SMART launch config
 
 SECURITY NOTE (fixed 2026-08-24): the OAuth callback used to hand the raw
 FHIR access token to the browser (embedded in an inline <script> tag and
 written to sessionStorage), and evaluate-patient / patient summary took
-that same token back as a plain request parameter. A real EHR access token
-was sitting in browser storage and traveling on every request. It's now
-stored server-side only (see smart_session_store.py); the browser gets
-nothing but an opaque, HttpOnly session cookie.
+that same token back as a plain request parameter. It's now stored
+server-side only (see smart_session_store.py); the browser gets nothing
+but an opaque, HttpOnly session cookie.
 """
 
 from fastapi import APIRouter, HTTPException, Query, Depends, Request, Cookie
@@ -43,34 +44,21 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/smart", tags=["SMART on FHIR"])
 
 # Configuration (should be environment variables in production)
-# Supports multiple EHR vendors: Epic, Cerner, Allscripts, athenahealth
-EHR_VENDOR = os.getenv("EHR_VENDOR", "epic").lower()  # epic, cerner, allscripts, athenahealth
+EHR_VENDOR = os.getenv("EHR_VENDOR", "epic").lower()
 FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4")
 CLIENT_ID = os.getenv("SMART_CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("SMART_CLIENT_SECRET", "")
 REDIRECT_URI = os.getenv("SMART_REDIRECT_URI", "http://localhost:8000/smart/callback")
-TENANT_ID = os.getenv("EHR_TENANT_ID")  # Required for Cerner
+TENANT_ID = os.getenv("EHR_TENANT_ID")
 
-# Where to send the clinician's browser after a successful EHR launch.
-# Reuses the same FRONTEND_URL convention as email_service.py.
 FRONTEND_URL = os.getenv("FRONTEND_URL", "https://app.realdiag.com")
 
-# SMART session cookie: opaque pointer to the server-side session record in
-# smart_session_store.py. Never contains the actual FHIR access token.
 SMART_SESSION_COOKIE_NAME = "realdiag_smart_session"
-# Upper bound on session lifetime, independent of how long-lived the EHR's
-# own access token is - keeps a long-lived EHR token from becoming a
-# long-lived RealDiag cookie.
 SMART_SESSION_MAX_TTL_SECONDS = int(os.getenv("SMART_SESSION_TTL_MINUTES", "30")) * 60
 
-# State token secret used to sign the SMART launch state (OAuth CSRF protection).
-# Falls back to JWT_SECRET_KEY so a single required secret covers both flows.
 SMART_STATE_SECRET = os.getenv("SMART_STATE_SECRET") or os.getenv("JWT_SECRET_KEY")
 STATE_TOKEN_EXPIRE_MINUTES = 10
 
-# Issuer allowlist: only launch redirects to known/trusted FHIR servers.
-# Defaults to the host of the configured FHIR_BASE_URL; extra hosts (e.g. for
-# multi-tenant deployments) can be added via SMART_ALLOWED_ISS_HOSTS.
 _extra_allowed_hosts = {
     host.strip().lower()
     for host in os.getenv("SMART_ALLOWED_ISS_HOSTS", "").split(",")
@@ -78,7 +66,6 @@ _extra_allowed_hosts = {
 }
 ALLOWED_ISS_HOSTS = _extra_allowed_hosts | {urlparse(FHIR_BASE_URL).netloc.lower()}
 
-# Global instances (in production, use dependency injection)
 diagnostic_engine = SmartDiagnosticEngine()
 
 
@@ -117,11 +104,6 @@ def get_active_smart_session(
 ):
     """
     Resolve the caller's SMART session from their session cookie.
-
-    Replaces the old pattern where the frontend held the raw FHIR access
-    token and passed it back on every request. The token now lives only in
-    the smart_sessions table; the browser just proves which row is theirs
-    via this opaque cookie.
     """
     session = get_smart_session(realdiag_smart_session) if realdiag_smart_session else None
 
@@ -140,15 +122,12 @@ class EvaluatePatientRequest(BaseModel):
     patient_id: str
     chief_complaint: Optional[str] = None
     focus_specialties: Optional[List[str]] = None
-    # NOTE: no longer takes access_token - the FHIR access token is
-    # resolved server-side from the caller's SMART session cookie
-    # (see get_active_smart_session) instead of being passed by the client.
 
 
 class CriterionResponse(BaseModel):
     """Criterion evaluation result."""
     criterion: str
-    status: str  # present, absent, unknown
+    status: str
     value: Optional[str] = None
     expected: Optional[str] = None
     details: Optional[str] = None
@@ -182,6 +161,37 @@ class PatientSummaryResponse(BaseModel):
     recent_vitals: List[Dict[str, Any]]
 
 
+class HandoffUpdateItem(BaseModel):
+    """A single new/changed item since the handoff timeframe started."""
+    name: str
+    detail: Optional[str] = None
+    date: Optional[str] = None
+
+
+class HandoffUpdatesResponse(BaseModel):
+    """Structured delta: what's new since the timeframe boundary."""
+    new_lab_count: int
+    new_abnormal_labs: List[Dict[str, Any]]
+    new_vital_count: int
+    new_conditions: List[HandoffUpdateItem]
+    new_medications: List[HandoffUpdateItem]
+
+
+class HandoffSummaryResponse(BaseModel):
+    """
+    Shift-handoff / admission-to-date summary: the full chart summary
+    plus what's changed since a timeframe boundary (admission start by
+    default, or a manually specified shift-change time).
+    """
+    patient_id: str
+    admission_start: Optional[str]
+    timeframe_start: Optional[str]
+    timeframe_source: str  # "admission" | "manual" | "none"
+    full_summary: PatientSummaryResponse
+    updates: Optional[HandoffUpdatesResponse]
+    narrative: str
+
+
 def get_ehr_config():
     """Get EHR configuration for current vendor."""
     try:
@@ -197,29 +207,131 @@ def get_ehr_config():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientSummaryResponse:
+    """
+    Shared chart-summary logic, used by both GET /patient/{id} and
+    GET /patient/{id}/handoff so they can never drift out of sync.
+    """
+    patient_data = fhir_client.get_patient_data(patient_id)
+
+    abnormal_labs = []
+    for lab in patient_data.labs:
+        if lab.is_abnormal:
+            abnormal_labs.append({
+                "name": lab.display,
+                "value": lab.value,
+                "unit": lab.unit,
+                "reference_range": lab.reference_range,
+                "date": lab.effective_date.isoformat() if lab.effective_date else None
+            })
+
+    vital_summary = []
+    vital_types_seen = set()
+    for vital in sorted(patient_data.vitals, key=lambda v: v.effective_date, reverse=True):
+        if vital.code not in vital_types_seen or len([v for v in vital_summary if v["code"] == vital.code]) < 3:
+            vital_summary.append({
+                "code": vital.code,
+                "name": vital.display,
+                "value": vital.value,
+                "unit": vital.unit,
+                "date": vital.effective_date.isoformat()
+            })
+        vital_types_seen.add(vital.code)
+
+    return PatientSummaryResponse(
+        patient_id=patient_data.patient_id,
+        name=patient_data.name,
+        age=patient_data.age,
+        gender=patient_data.gender,
+        lab_count=len(patient_data.labs),
+        vital_count=len(patient_data.vitals),
+        condition_count=len(patient_data.conditions),
+        medication_count=len(patient_data.medications),
+        abnormal_labs=abnormal_labs[:10],
+        recent_vitals=vital_summary[:10]
+    )
+
+
+def _generate_handoff_narrative(
+    full_summary: PatientSummaryResponse,
+    updates: Optional[Dict[str, Any]],
+    timeframe_start: Optional[datetime],
+    timeframe_source: str
+) -> str:
+    """
+    Build a plain-language handoff narrative from structured data.
+
+    Deliberately template-based rather than AI-generated: every sentence
+    here traces directly back to a specific FHIR value, so there's nothing
+    for a clinician to fact-check against the underlying chart - it's a
+    formatted restatement of the structured data, not a synthesized one.
+    """
+    if timeframe_start is None or updates is None:
+        return (
+            f"No active admission found for {full_summary.name}. Showing the "
+            f"standard chart summary only; time-bounded updates require an "
+            f"active encounter or a manually specified start time."
+        )
+
+    when = timeframe_start.strftime("%b %d, %Y at %H:%M")
+    basis = "since admission" if timeframe_source == "admission" else "since the specified handoff time"
+
+    parts = [f"{full_summary.name} ({full_summary.age}yo {full_summary.gender}) - updates {basis} ({when}):"]
+
+    abnormal = updates["new_abnormal_labs"]
+    new_lab_count = len(updates["new_labs"])
+    if new_lab_count:
+        if abnormal:
+            names = ", ".join(f"{lab.display} {lab.value}{lab.unit}" for lab in abnormal[:5])
+            more = f" and {len(abnormal) - 5} more" if len(abnormal) > 5 else ""
+            parts.append(f"{new_lab_count} new lab result(s), including {len(abnormal)} abnormal: {names}{more}.")
+        else:
+            parts.append(f"{new_lab_count} new lab result(s), all within normal range.")
+    else:
+        parts.append("No new labs.")
+
+    new_vital_count = len(updates["new_vitals"])
+    parts.append(f"{new_vital_count} new vital sign reading(s) recorded." if new_vital_count else "No new vitals recorded.")
+
+    new_conditions = updates["new_conditions"]
+    if new_conditions:
+        names = ", ".join(
+            c.get("code", {}).get("text") or c.get("code", {}).get("coding", [{}])[0].get("display", "Unspecified condition")
+            for c in new_conditions[:5]
+        )
+        parts.append(f"{len(new_conditions)} new condition(s) added to the problem list: {names}.")
+    else:
+        parts.append("No new conditions added.")
+
+    new_meds = updates["new_medications"]
+    if new_meds:
+        names = ", ".join(
+            m.get("medicationCodeableConcept", {}).get("text")
+            or m.get("medicationCodeableConcept", {}).get("coding", [{}])[0].get("display", "Unspecified medication")
+            for m in new_meds[:5]
+        )
+        parts.append(f"{len(new_meds)} new medication(s) ordered: {names}.")
+    else:
+        parts.append("No new medications ordered.")
+
+    return " ".join(parts)
+
+
 @router.get("/launch")
 async def smart_launch(
     iss: str = Query(..., description="FHIR server URL"),
     launch: str = Query(..., description="Launch context token")
 ):
     """
-    SMART on FHIR launch endpoint.
-
-    This is the entry point when launching from Epic, Cerner, or another EHR.
-    Redirects to EHR authorization page.
+    SMART on FHIR launch endpoint. Entry point when launching from Epic,
+    Cerner, or another EHR. Redirects to the EHR authorization page.
     """
-    # Reject issuer URLs that aren't in the trusted allowlist before using them.
     iss = _validate_iss(iss)
 
     logger.info(f"SMART launch initiated from {iss} using {EHR_VENDOR}")
 
-    # Get vendor-specific configuration
     ehr_config = get_ehr_config()
-
-    # Use vendor-specific authorization URL
     auth_url = ehr_config.authorize_url
-
-    # Build authorization URL with vendor-specific scopes
     scopes = ehr_config.scopes
 
     params = {
@@ -227,12 +339,11 @@ async def smart_launch(
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
         "scope": " ".join(scopes),
-        "state": _create_state_token(iss),  # Signed, single-use nonce (CSRF protection)
+        "state": _create_state_token(iss),
         "aud": iss,
         "launch": launch
     }
 
-    # Build query string
     query_string = "&".join([f"{k}={v}" for k, v in params.items()])
     full_auth_url = f"{auth_url}?{query_string}"
 
@@ -245,26 +356,18 @@ async def smart_callback(
     state: str = Query(..., description="State parameter"),
 ):
     """
-    OAuth callback handler.
-
-    Exchanges the authorization code for an access token, stores it
-    server-side in a SMART session, and redirects the clinician's browser
-    to the app with nothing but an opaque session cookie - no token is
-    ever placed in the URL, the page, or browser storage.
+    OAuth callback handler. Exchanges the code for an access token, stores
+    it server-side in a SMART session, and redirects to /smart-launch with
+    nothing but an opaque session cookie - no token in the URL, page, or
+    browser storage.
     """
-    # Verify the state token to prevent OAuth CSRF (rejects forged/replayed/expired state)
     state_payload = _verify_state_token(state)
     iss = state_payload.get("iss")
     logger.info(f"OAuth callback received with code: {code[:10]}... for iss={iss}")
 
     try:
-        # Look up the vendor-specific OAuth endpoints. Epic, Cerner, etc. each
-        # use a different token URL that isn't simply "FHIR base + /oauth2/token" -
-        # get_ehr_config() (the same helper /smart/launch uses for authorize_url)
-        # has the correct per-vendor value.
         ehr_config = get_ehr_config()
 
-        # Initialize FHIR client
         fhir_client = FHIRClient(
             fhir_base_url=FHIR_BASE_URL,
             client_id=CLIENT_ID,
@@ -272,7 +375,6 @@ async def smart_callback(
             token_url=ehr_config.token_url
         )
 
-        # Exchange code for token
         token_data = fhir_client.authenticate(
             authorization_code=code,
             redirect_uri=REDIRECT_URI
@@ -280,10 +382,8 @@ async def smart_callback(
 
         access_token = token_data["access_token"]
         refresh_token = token_data.get("refresh_token")
-        patient_id = token_data.get("patient")  # Patient ID from launch context
+        patient_id = token_data.get("patient")
 
-        # Bound the session lifetime to whichever is shorter: the EHR
-        # token's own expiry, or our TTL cap.
         token_ttl_seconds = int(token_data.get("expires_in", SMART_SESSION_MAX_TTL_SECONDS))
         ttl_seconds = max(60, min(token_ttl_seconds, SMART_SESSION_MAX_TTL_SECONDS))
         expires_at = datetime.utcnow() + timedelta(seconds=ttl_seconds)
@@ -298,18 +398,11 @@ async def smart_callback(
         )
 
         if not session_id:
-            # No database configured - there's nowhere safe to hold the
-            # token server-side, so refuse rather than falling back to
-            # exposing it to the browser.
             logger.error("SMART callback rejected: no database configured, cannot store session server-side")
             raise HTTPException(status_code=503, detail="SMART on FHIR sign-in is temporarily unavailable")
 
         logger.info(f"SMART session created for patient {patient_id or 'unknown'}, expires in {ttl_seconds}s")
 
-        # The built-out chart-summary/CDS UI lives at /smart-launch (see
-        # frontend/app/smart-launch/page.jsx) - it reads patient_id from the
-        # URL and gets the FHIR access token via the SMART session cookie
-        # set below, never from the URL or sessionStorage.
         redirect_url = f"{FRONTEND_URL.rstrip('/')}/smart-launch"
         if patient_id:
             redirect_url += f"?patient_id={patient_id}"
@@ -339,34 +432,26 @@ async def evaluate_patient(
     smart_session = Depends(get_active_smart_session),
 ):
     """
-    Evaluate patient data against diagnostic rules.
-
-    Performs real-time clinical decision support by fetching patient data
-    from the FHIR server (using the token from the caller's SMART session)
-    and evaluating it against diagnostic criteria.
+    Evaluate patient data against diagnostic rules using the token from
+    the caller's server-side SMART session.
     """
     logger.info(f"Evaluating patient {request.patient_id}")
 
     try:
-        # Initialize FHIR client with the access token from the caller's
-        # server-side SMART session (never passed in by the client).
         fhir_client = FHIRClient(
             fhir_base_url=FHIR_BASE_URL,
             client_id=CLIENT_ID,
             access_token=smart_session.fhir_access_token
         )
 
-        # Fetch patient data
         patient_data = fhir_client.get_patient_data(request.patient_id)
 
-        # Evaluate with diagnostic engine
         evaluations = diagnostic_engine.evaluate_patient(
             patient_data=patient_data,
             chief_complaint=request.chief_complaint,
             focus_specialties=request.focus_specialties
         )
 
-        # Convert to response format
         responses = []
         for eval in evaluations:
             responses.append(DiagnosisResponse(
@@ -377,29 +462,20 @@ async def evaluate_patient(
                 severity=eval.severity,
                 criteria_met=[
                     CriterionResponse(
-                        criterion=c.criterion,
-                        status=c.status.value,
-                        value=c.value,
-                        expected=c.expected,
-                        details=c.details
+                        criterion=c.criterion, status=c.status.value,
+                        value=c.value, expected=c.expected, details=c.details
                     ) for c in eval.criteria_met
                 ],
                 criteria_not_met=[
                     CriterionResponse(
-                        criterion=c.criterion,
-                        status=c.status.value,
-                        value=c.value,
-                        expected=c.expected,
-                        details=c.details
+                        criterion=c.criterion, status=c.status.value,
+                        value=c.value, expected=c.expected, details=c.details
                     ) for c in eval.criteria_not_met
                 ],
                 criteria_unknown=[
                     CriterionResponse(
-                        criterion=c.criterion,
-                        status=c.status.value,
-                        value=c.value,
-                        expected=c.expected,
-                        details=c.details
+                        criterion=c.criterion, status=c.status.value,
+                        value=c.value, expected=c.expected, details=c.details
                     ) for c in eval.criteria_unknown
                 ],
                 recommendations=eval.recommendations,
@@ -420,11 +496,37 @@ async def get_patient_summary(
     smart_session = Depends(get_active_smart_session),
 ):
     """
-    Get patient clinical summary.
+    Get patient clinical summary: high-level overview including abnormal
+    labs and recent vitals, using the access token from the caller's
+    server-side SMART session.
+    """
+    try:
+        fhir_client = FHIRClient(
+            fhir_base_url=FHIR_BASE_URL,
+            client_id=CLIENT_ID,
+            access_token=smart_session.fhir_access_token
+        )
+        return _build_patient_summary(fhir_client, patient_id)
 
-    Returns high-level overview of patient's clinical data including
-    abnormal labs and recent vitals. Uses the access token from the
-    caller's server-side SMART session.
+    except Exception as e:
+        logger.error(f"Failed to get patient summary: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve patient data: {str(e)}")
+
+
+@router.get("/patient/{patient_id}/handoff", response_model=HandoffSummaryResponse)
+async def get_patient_handoff_summary(
+    patient_id: str,
+    since: Optional[str] = Query(
+        None,
+        description="ISO timestamp to use as the update boundary instead of admission start (e.g. for a specific shift change). Defaults to the current admission's start time."
+    ),
+    smart_session = Depends(get_active_smart_session),
+):
+    """
+    Shift-handoff summary: the full chart summary plus a delta of what's
+    changed (labs, vitals, conditions, medications) since a timeframe
+    boundary - the current admission's start by default, or a manually
+    specified handoff time (e.g., start of the prior shift).
     """
     try:
         fhir_client = FHIRClient(
@@ -433,67 +535,97 @@ async def get_patient_summary(
             access_token=smart_session.fhir_access_token
         )
 
-        patient_data = fhir_client.get_patient_data(patient_id)
+        full_summary = _build_patient_summary(fhir_client, patient_id)
 
-        # Find abnormal labs
-        abnormal_labs = []
-        for lab in patient_data.labs:
-            if lab.is_abnormal:
-                abnormal_labs.append({
-                    "name": lab.display,
-                    "value": lab.value,
-                    "unit": lab.unit,
-                    "reference_range": lab.reference_range,
-                    "date": lab.effective_date.isoformat() if lab.effective_date else None
-                })
+        admission_start_iso = None
+        try:
+            encounter = fhir_client.get_current_encounter(patient_id)
+            if encounter:
+                admission_start_iso = encounter.get("period", {}).get("start")
+        except Exception as e:
+            # Don't let an Encounter-query failure (e.g. unsupported by a
+            # given sandbox) break the whole handoff view - fall back to
+            # "none" and let a manual `since` still work.
+            logger.warning(f"Could not fetch current encounter for {patient_id}: {e}")
 
-        # Get recent vitals (last 3 of each type)
-        vital_summary = []
-        vital_types_seen = set()
-        for vital in sorted(patient_data.vitals, key=lambda v: v.effective_date, reverse=True):
-            if vital.code not in vital_types_seen or len([v for v in vital_summary if v["code"] == vital.code]) < 3:
-                vital_summary.append({
-                    "code": vital.code,
-                    "name": vital.display,
-                    "value": vital.value,
-                    "unit": vital.unit,
-                    "date": vital.effective_date.isoformat()
-                })
-            vital_types_seen.add(vital.code)
+        timeframe_start = None
+        timeframe_source = "none"
 
-        return PatientSummaryResponse(
-            patient_id=patient_data.patient_id,
-            name=patient_data.name,
-            age=patient_data.age,
-            gender=patient_data.gender,
-            lab_count=len(patient_data.labs),
-            vital_count=len(patient_data.vitals),
-            condition_count=len(patient_data.conditions),
-            medication_count=len(patient_data.medications),
-            abnormal_labs=abnormal_labs[:10],
-            recent_vitals=vital_summary[:10]
+        if since:
+            try:
+                timeframe_start = datetime.fromisoformat(since.replace("Z", "+00:00"))
+                timeframe_source = "manual"
+            except ValueError:
+                raise HTTPException(status_code=400, detail="Invalid 'since' timestamp - use ISO 8601 format")
+        elif admission_start_iso:
+            try:
+                timeframe_start = datetime.fromisoformat(admission_start_iso.replace("Z", "+00:00"))
+                timeframe_source = "admission"
+            except ValueError:
+                timeframe_start = None
+
+        updates_response = None
+        raw_updates = None
+        if timeframe_start is not None:
+            raw_updates = fhir_client.get_patient_updates_since(patient_id, timeframe_start)
+
+            updates_response = HandoffUpdatesResponse(
+                new_lab_count=len(raw_updates["new_labs"]),
+                new_abnormal_labs=[
+                    {
+                        "name": lab.display, "value": lab.value, "unit": lab.unit,
+                        "reference_range": lab.reference_range,
+                        "date": lab.effective_date.isoformat() if lab.effective_date else None
+                    } for lab in raw_updates["new_abnormal_labs"]
+                ],
+                new_vital_count=len(raw_updates["new_vitals"]),
+                new_conditions=[
+                    HandoffUpdateItem(
+                        name=(
+                            c.get("code", {}).get("text")
+                            or c.get("code", {}).get("coding", [{}])[0].get("display", "Unspecified condition")
+                        ),
+                        date=c.get("recordedDate")
+                    ) for c in raw_updates["new_conditions"]
+                ],
+                new_medications=[
+                    HandoffUpdateItem(
+                        name=(
+                            m.get("medicationCodeableConcept", {}).get("text")
+                            or m.get("medicationCodeableConcept", {}).get("coding", [{}])[0].get("display", "Unspecified medication")
+                        ),
+                        date=m.get("authoredOn")
+                    ) for m in raw_updates["new_medications"]
+                ],
+            )
+
+        narrative = _generate_handoff_narrative(full_summary, raw_updates, timeframe_start, timeframe_source)
+
+        return HandoffSummaryResponse(
+            patient_id=patient_id,
+            admission_start=admission_start_iso,
+            timeframe_start=timeframe_start.isoformat() if timeframe_start else None,
+            timeframe_source=timeframe_source,
+            full_summary=full_summary,
+            updates=updates_response,
+            narrative=narrative
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Failed to get patient summary: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to retrieve patient data: {str(e)}")
+        logger.error(f"Failed to get handoff summary for patient {patient_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve handoff summary: {str(e)}")
 
 
 @router.get("/config")
 async def get_smart_config():
     """
-    Get SMART on FHIR configuration.
-
-    Returns configuration needed for frontend SMART launch.
+    Get SMART on FHIR configuration needed for frontend SMART launch.
     """
     return {
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
-        "scopes": [
-            "launch",
-            "patient/*.read",
-            "openid",
-            "fhirUser"
-        ],
+        "scopes": ["launch", "patient/*.read", "openid", "fhirUser"],
         "fhir_base_url": FHIR_BASE_URL
     }

@@ -182,6 +182,12 @@ function PatientBanner({ patient }) {
         <span style={styles.stats}>
           {patient.lab_count} labs • {patient.vital_count} vitals
         </span>
+        <a
+          href={`/handoff?patient_id=${patient.patient_id}`}
+          style={{ fontSize: '13px', color: 'white', textDecoration: 'underline' }}
+        >
+          View Shift Handoff Summary →
+        </a>
       </div>
     </div>
   );
