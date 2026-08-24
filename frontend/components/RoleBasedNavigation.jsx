@@ -1,13 +1,19 @@
 /**
  * Role-Based Navigation Component
- * Shows different navigation items based on user role
+ * Shows different navigation items based on user role, plus an Inpatient
+ * link when the clinician has an active SMART on FHIR session (checked via
+ * GET /smart/session/status, which never 401s - most users won't have one,
+ * and that's expected here, not an error).
  */
 import { useEffect, useState } from 'react';
 import { getStoredUser, isStoredAuthenticated, storeAuthData } from '../utils/clientAuth';
+import { getApiBase } from '../utils/auth';
 
 export default function RoleBasedNavigation() {
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [smartActive, setSmartActive] = useState(false);
+  const [smartPatientId, setSmartPatientId] = useState(null);
 
   const normalizeRole = (role) => {
     // Backward compatibility: older accounts are often persisted as "user"
@@ -18,9 +24,7 @@ export default function RoleBasedNavigation() {
 
   useEffect(() => {
     async function loadUserRole() {
-      const apiBase =
-        (typeof window !== 'undefined' && (window.__RUNTIME_CONFIG?.NEXT_PUBLIC_API_BASE || window.__RUNTIME_CONFIG__?.NEXT_PUBLIC_API_BASE)) ||
-        'https://realdiag-software.onrender.com';
+      const apiBase = getApiBase();
 
       // Load user role from localStorage
       const storedUser = getStoredUser();
@@ -30,7 +34,7 @@ export default function RoleBasedNavigation() {
         // Show cached role immediately for responsiveness.
         setUserRole(normalizeRole(storedUser.role));
       }
-      
+
       // ...but always refresh from API to avoid stale cached roles.
       console.log('🔍 RoleBasedNav - Checking API for fresh role...');
       try {
@@ -40,14 +44,14 @@ export default function RoleBasedNavigation() {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (response.ok) {
           const userData = await response.json();
           console.log('🔍 RoleBasedNav - Fetched user from API:', userData);
 
           // Store normalized user in localStorage for future use
           storeAuthData(userData, null);
-          
+
           setUserRole(normalizeRole(userData.role));
         } else {
           console.log('🔍 RoleBasedNav - Not logged in');
@@ -57,11 +61,29 @@ export default function RoleBasedNavigation() {
         console.error('🔍 RoleBasedNav - Error fetching user:', error);
         setUserRole(storedUser ? normalizeRole(storedUser.role) : null);
       }
-      
+
       setIsLoading(false);
     }
-    
+
     loadUserRole();
+  }, []);
+
+  useEffect(() => {
+    async function checkSmartSession() {
+      try {
+        const apiBase = getApiBase();
+        const response = await fetch(`${apiBase}/smart/session/status`, { credentials: 'include' });
+        if (response.ok) {
+          const data = await response.json();
+          setSmartActive(!!data.active);
+          setSmartPatientId(data.patient_id || null);
+        }
+      } catch (error) {
+        // No active SMART session, or the check failed - either way, the
+        // Inpatient link just stays hidden. Not worth surfacing as an error.
+      }
+    }
+    checkSmartSession();
   }, []);
 
   // Define navigation items with role requirements
@@ -81,6 +103,14 @@ export default function RoleBasedNavigation() {
     { href: '/account', label: '👤 Account', roles: ['all'] }
   ];
 
+  if (smartActive) {
+    navItems.push({
+      href: `/inpatient${smartPatientId ? `?patient_id=${smartPatientId}` : ''}`,
+      label: '🛏️ Inpatient',
+      roles: ['all']
+    });
+  }
+
   const isAuthenticatedHint = typeof window !== 'undefined' && isStoredAuthenticated();
 
   // Operational safety: default to provider-level navigation even if auth
@@ -91,7 +121,7 @@ export default function RoleBasedNavigation() {
   // Keep the navigation visible and complete; page access remains enforced by
   // AuthGuard, so links can be shown consistently without role-based hiding.
   const visibleNavItems = navItems;
-  
+
   console.log('🔍 RoleBasedNav - User role:', userRole, 'effective role:', effectiveRole);
   console.log('🔍 RoleBasedNav - Visible items:', visibleNavItems.map(i => i.label));
 

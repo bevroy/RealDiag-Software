@@ -192,6 +192,17 @@ class HandoffSummaryResponse(BaseModel):
     narrative: str
 
 
+class SmartSessionStatusResponse(BaseModel):
+    """Non-throwing SMART session check, used by the main app's nav
+    (RoleBasedNavigation) to decide whether to show an Inpatient link.
+    Unlike get_active_smart_session, this never 401s - it just reports
+    whether a session exists, since the main nav renders for users who may
+    not have one."""
+    active: bool
+    patient_id: Optional[str] = None
+    ehr_vendor: Optional[str] = None
+
+
 def get_ehr_config():
     """Get EHR configuration for current vendor."""
     try:
@@ -403,7 +414,11 @@ async def smart_callback(
 
         logger.info(f"SMART session created for patient {patient_id or 'unknown'}, expires in {ttl_seconds}s")
 
-        redirect_url = f"{FRONTEND_URL.rstrip('/')}/smart-launch"
+        # /inpatient is the consolidated chart-summary + handoff view (tabs).
+        # It reads patient_id from the URL and authenticates via the SMART
+        # session cookie set below - same auth model as the standalone
+        # smart-launch/handoff pages it now replaces as the landing spot.
+        redirect_url = f"{FRONTEND_URL.rstrip('/')}/inpatient"
         if patient_id:
             redirect_url += f"?patient_id={patient_id}"
 
@@ -616,6 +631,26 @@ async def get_patient_handoff_summary(
     except Exception as e:
         logger.error(f"Failed to get handoff summary for patient {patient_id}: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to retrieve handoff summary: {str(e)}")
+
+
+@router.get("/session/status", response_model=SmartSessionStatusResponse)
+async def get_smart_session_status(
+    realdiag_smart_session: Optional[str] = Cookie(default=None, alias=SMART_SESSION_COOKIE_NAME)
+):
+    """
+    Lightweight, non-throwing check for whether the caller has an active
+    SMART session. The main app's nav polls this (credentials: 'include')
+    to decide whether to show the Inpatient link - most users won't have
+    an active SMART session, and that's an expected, non-error state here.
+    """
+    session = get_smart_session(realdiag_smart_session) if realdiag_smart_session else None
+    if not session or session.expires_at < datetime.utcnow():
+        return SmartSessionStatusResponse(active=False)
+    return SmartSessionStatusResponse(
+        active=True,
+        patient_id=session.patient_id,
+        ehr_vendor=session.ehr_vendor,
+    )
 
 
 @router.get("/config")
