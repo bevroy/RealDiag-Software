@@ -258,11 +258,18 @@ async def smart_callback(
     logger.info(f"OAuth callback received with code: {code[:10]}... for iss={iss}")
 
     try:
+        # Look up the vendor-specific OAuth endpoints. Epic, Cerner, etc. each
+        # use a different token URL that isn't simply "FHIR base + /oauth2/token" -
+        # get_ehr_config() (the same helper /smart/launch uses for authorize_url)
+        # has the correct per-vendor value.
+        ehr_config = get_ehr_config()
+
         # Initialize FHIR client
         fhir_client = FHIRClient(
             fhir_base_url=FHIR_BASE_URL,
             client_id=CLIENT_ID,
-            client_secret=CLIENT_SECRET
+            client_secret=CLIENT_SECRET,
+            token_url=ehr_config.token_url
         )
 
         # Exchange code for token

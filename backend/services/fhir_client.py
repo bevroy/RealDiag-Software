@@ -110,7 +110,8 @@ class FHIRClient:
         fhir_base_url: str,
         client_id: str,
         client_secret: Optional[str] = None,
-        access_token: Optional[str] = None
+        access_token: Optional[str] = None,
+        token_url: Optional[str] = None
     ):
         """
         Initialize FHIR client.
@@ -120,12 +121,15 @@ class FHIRClient:
             client_id: OAuth client ID
             client_secret: OAuth client secret (for backend apps)
             access_token: Pre-obtained access token (for SMART launch)
+            token_url: Explicit OAuth token endpoint override (vendor-specific;
+                falls back to guessing "{fhir_base_url}/oauth2/token" if omitted)
         """
         self.fhir_base_url = fhir_base_url.rstrip("/")
         self.client_id = client_id
         self.client_secret = client_secret
         self._access_token = access_token
         self._token_expiry = None
+        self._token_url = token_url
     
     def authenticate(self, authorization_code: str, redirect_uri: str) -> Dict[str, Any]:
         """
@@ -138,7 +142,7 @@ class FHIRClient:
         Returns:
             Token response with access_token, refresh_token, etc.
         """
-        token_url = f"{self.fhir_base_url}/oauth2/token"
+        token_url = self._token_url or f"{self.fhir_base_url}/oauth2/token"
         
         data = {
             "grant_type": "authorization_code",
