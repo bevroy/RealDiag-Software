@@ -117,6 +117,29 @@ def get_active_smart_session(
     return session
 
 
+def _verify_patient_match(smart_session, requested_patient_id: str) -> None:
+    """
+    Defense-in-depth check: confirm the patient_id being requested matches
+    the patient the EHR actually launched this session for.
+
+    In a normal EHR-launch flow, the FHIR access token itself is scoped
+    server-side (by Epic/Cerner) to the one patient in the launch context,
+    so a mismatched patient_id would typically be rejected by the FHIR
+    server regardless. This check doesn't rely on that vendor-side
+    enforcement - it stops a mismatched request at RealDiag's own boundary
+    before it's ever sent to the FHIR server.
+    """
+    if smart_session.patient_id and smart_session.patient_id != requested_patient_id:
+        logger.warning(
+            f"Session/patient mismatch: session launched for patient "
+            f"{smart_session.patient_id}, request was for {requested_patient_id}"
+        )
+        raise HTTPException(
+            status_code=403,
+            detail="This session is not authorized for the requested patient. Please relaunch from the EHR."
+        )
+
+
 class EvaluatePatientRequest(BaseModel):
     """Request to evaluate patient with clinical decision support."""
     patient_id: str
@@ -451,6 +474,7 @@ async def evaluate_patient(
     the caller's server-side SMART session.
     """
     logger.info(f"Evaluating patient {request.patient_id}")
+    _verify_patient_match(smart_session, request.patient_id)
 
     try:
         fhir_client = FHIRClient(
@@ -502,7 +526,7 @@ async def evaluate_patient(
 
     except Exception as e:
         logger.error(f"Patient evaluation failed: {e}")
-        raise HTTPException(status_code=500, detail=f"Evaluation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Evaluation failed. Please try relaunching from the EHR.")
 
 
 @router.get("/patient/{patient_id}", response_model=PatientSummaryResponse)
@@ -515,6 +539,7 @@ async def get_patient_summary(
     labs and recent vitals, using the access token from the caller's
     server-side SMART session.
     """
+    _verify_patient_match(smart_session, patient_id)
     try:
         fhir_client = FHIRClient(
             fhir_base_url=FHIR_BASE_URL,
@@ -525,7 +550,7 @@ async def get_patient_summary(
 
     except Exception as e:
         logger.error(f"Failed to get patient summary: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to retrieve patient data: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve patient data. Please try relaunching from the EHR.")
 
 
 @router.get("/patient/{patient_id}/handoff", response_model=HandoffSummaryResponse)
@@ -543,6 +568,7 @@ async def get_patient_handoff_summary(
     boundary - the current admission's start by default, or a manually
     specified handoff time (e.g., start of the prior shift).
     """
+    _verify_patient_match(smart_session, patient_id)
     try:
         fhir_client = FHIRClient(
             fhir_base_url=FHIR_BASE_URL,
@@ -630,7 +656,7 @@ async def get_patient_handoff_summary(
         raise
     except Exception as e:
         logger.error(f"Failed to get handoff summary for patient {patient_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to retrieve handoff summary: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve handoff summary. Please try relaunching from the EHR.")
 
 
 @router.get("/session/status", response_model=SmartSessionStatusResponse)
