@@ -151,10 +151,10 @@ class FHIRClient:
             "client_id": self.client_id
         }
 
-        # Cerner/Oracle Health's EHR-launch token exchange doesn't send the
-        # confidential-client secret - just client_id, per Oracle's own docs.
+        # Confidential clients authenticate via HTTP Basic Auth using the Cerner Central System Account secret.
+        auth = (self.client_id, self.client_secret) if self.client_secret else None
 
-        response = requests.post(token_url, data=data); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
+        response = requests.post(token_url, data=data, auth=auth); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
         response.raise_for_status()
 
         token_data = response.json()
