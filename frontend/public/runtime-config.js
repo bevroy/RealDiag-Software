@@ -14,6 +14,8 @@ window.__RUNTIME_CONFIG = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__ |
     ? "http://localhost:8000"
     : window.location.hostname.includes("github.dev")
     ? window.location.origin.replace(/-8080\.app\.github\.dev/, "-8000.app.github.dev")
+    : window.location.hostname === "realdiag-test-frontend.netlify.app"
+    ? "https://realdiag-test-backend.onrender.com"
     : "https://api.realdiag.com"
 };
 
