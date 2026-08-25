@@ -452,7 +452,7 @@ async def smart_callback(
             max_age=ttl_seconds,
             httponly=True,
             secure=True,
-            samesite="lax",
+            samesite="none",
             path="/",
         )
         return redirect_response
