@@ -151,10 +151,10 @@ class FHIRClient:
             "client_id": self.client_id
         }
 
-        if self.client_secret:
-            data["client_secret"] = self.client_secret
+        # Confidential clients (client_secret set) authenticate via HTTP Basic Auth - required by Cerner/Oracle Health, accepted by Epic too.
+        auth = (self.client_id, self.client_secret) if self.client_secret else None
 
-        response = requests.post(token_url, data=data)
+        response = requests.post(token_url, data=data, auth=auth)
         response.raise_for_status()
 
         token_data = response.json()
