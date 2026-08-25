@@ -104,7 +104,7 @@ def get_smart_session(session_id: str):
         return row
         
         
-    def delete_smart_session(session_id: str) -> None:
+def delete_smart_session(session_id: str) -> None:
     """Remove a SMART session, e.g. once it's expired."""
     if not DATABASE_AVAILABLE or SmartSession is None or not session_id:
         return
