@@ -334,6 +334,7 @@ app.add_middleware(
         "http://localhost:8080",
         "https://realdiag.netlify.app",
         "https://main--realdiag.netlify.app",
+        "https://realdiag-test-frontend.netlify.app",
     ],
     allow_origin_regex=PREVIEW_ORIGIN_REGEX_COMBINED,
     allow_credentials=True,
