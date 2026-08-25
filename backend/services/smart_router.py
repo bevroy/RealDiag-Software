@@ -377,17 +377,13 @@ async def smart_launch(
         "launch": launch
     }
 
-        query_string = urlencode(params)
+    query_string = urlencode(params)
     full_auth_url = f"{auth_url}?{query_string}"
-
     return RedirectResponse(url=full_auth_url)
-
-
 @router.get("/callback")
 async def smart_callback(
-    code: str = Query(..., description="Authorization code"),
-    state: str = Query(..., description="State parameter"),
-):
+        code: str = Query(..., description="Authorization code"),
+        state: str = Query(..., description="State parameter"),
     """
     OAuth callback handler. Exchanges the code for an access token, stores
     it server-side in a SMART session, and redirects to /smart-launch with
