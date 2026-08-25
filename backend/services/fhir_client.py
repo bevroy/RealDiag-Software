@@ -151,10 +151,10 @@ class FHIRClient:
             "client_id": self.client_id
         }
 
-        # Confidential clients (client_secret set) authenticate via HTTP Basic Auth - required by Cerner/Oracle Health, accepted by Epic too.
-        auth = (self.client_id, self.client_secret) if self.client_secret else None
+        # Cerner/Oracle Health's EHR-launch token exchange doesn't send the
+        # confidential-client secret - just client_id, per Oracle's own docs.
 
-        response = requests.post(token_url, data=data, auth=auth)
+        response = requests.post(token_url, data=data)
         response.raise_for_status()
 
         token_data = response.json()
