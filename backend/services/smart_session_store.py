@@ -95,10 +95,16 @@ def get_smart_session(session_id: str):
     if not DATABASE_AVAILABLE or SmartSession is None or not session_id:
         return None
     with get_db_session() as db:
-        return db.query(SmartSession).filter_by(session_id=session_id).first()
-
-
-def delete_smart_session(session_id: str) -> None:
+        row = db.query(SmartSession).filter_by(session_id=session_id).first()
+        if row is None: return None
+        # Detach the row before this session commits/closes below, so
+        # callers can safely read its attributes afterward without a
+        # DetachedInstanceError.
+        db.expunge(row)
+        return row
+        
+        
+    def delete_smart_session(session_id: str) -> None:
     """Remove a SMART session, e.g. once it's expired."""
     if not DATABASE_AVAILABLE or SmartSession is None or not session_id:
         return
