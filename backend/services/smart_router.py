@@ -29,11 +29,10 @@ import logging
 import secrets
 import jwt
 from datetime import datetime, timedelta
-from urllib.parse import urlparse
 
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
-from ..services.ehr_adapter import EHRAdapter, EHRVendor
+from urllib.parse import urlparse, urlencode
 from ..services.smart_session_store import (
     create_smart_session,
     get_smart_session,
@@ -378,7 +377,7 @@ async def smart_launch(
         "launch": launch
     }
 
-    query_string = "&".join([f"{k}={v}" for k, v in params.items()])
+        query_string = urlencode(params)
     full_auth_url = f"{auth_url}?{query_string}"
 
     return RedirectResponse(url=full_auth_url)
@@ -417,6 +416,7 @@ async def smart_callback(
         access_token = token_data["access_token"]
         refresh_token = token_data.get("refresh_token")
         patient_id = token_data.get("patient")
+        logger.info(f"Cerner token response scope granted: {token_data.get('scope')}")
 
         token_ttl_seconds = int(token_data.get("expires_in", SMART_SESSION_MAX_TTL_SECONDS))
         ttl_seconds = max(60, min(token_ttl_seconds, SMART_SESSION_MAX_TTL_SECONDS))
