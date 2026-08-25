@@ -9,6 +9,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Load runtime-config.js early so window.__RUNTIME_CONFIG is available to client scripts (mirrors pages/_document.js) */}
+        <script src="/runtime-config.js" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Brand teal — mirrors realdiag.org */}
