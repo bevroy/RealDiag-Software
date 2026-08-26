@@ -85,8 +85,7 @@ class EHRAdapter:
             "name": "Cerner/Oracle Health",
             "token_url": "https://authorization.cerner.com/tenants/{tenant_id}/protocols/oauth2/profiles/smart-v1/token",
             "authorize_url": "https://authorization.cerner.com/tenants/{tenant_id}/protocols/oauth2/profiles/smart-v1/personas/provider/authorize",
-            "scopes": ["launch", "patient/Patient.read", "patient/Observation.read", "patient/Condition.read", "openid", "fhirUser"],
-            "requires_tenant_id": True,
+            "scopes": ["launch", "patient/Patient.read", "patient/Observation.read", "patient/Condition.read", "patient/MedicationRequest.read", "patient/AllergyIntolerance.read", "patient/Encounter.read", "patient/Immunization.read", "patient/Procedure.read", "patient/DocumentReference.read", "patient/DiagnosticReport.read", "openid", "fhirUser"],            "requires_tenant_id": True,
             "supports_smart_launch": True,
             "supports_cds_hooks": True,
             "patient_id_system": None,  # Varies by tenant
