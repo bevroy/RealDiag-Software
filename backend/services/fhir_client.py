@@ -15,6 +15,7 @@ Usage:
 """
 
 import requests
+import os
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import logging
@@ -22,6 +23,13 @@ from dataclasses import dataclass
 from enum import Enum
 
 logger = logging.getLogger(__name__)
+
+# Configurable lookback windows for the default (non-"since") chart summary.
+# Kept short in production so an active inpatient chart summary stays
+# recent; widened via env var for testing against static/historical data
+# (e.g. Epic's sandbox test patients, whose records predate any fixed window).
+LAB_LOOKBACK_DAYS = int(os.getenv("LAB_LOOKBACK_DAYS", "30"))
+VITAL_LOOKBACK_DAYS = int(os.getenv("VITAL_LOOKBACK_DAYS", "7"))
 
 
 class FHIRResourceType(Enum):
@@ -504,7 +512,7 @@ class FHIRClient:
         gender = patient.get("gender", "unknown")
 
         # Get labs (last 30 days)
-        thirty_days_ago = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        thirty_days_ago = (datetime.now() - timedelta(days=LAB_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
         lab_observations = self.get_observations(
             patient_id,
             category="laboratory",
@@ -518,7 +526,7 @@ class FHIRClient:
                 labs.append(lab)
 
         # Get vitals (last 7 days)
-        seven_days_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+        seven_days_ago = (datetime.now() - timedelta(days=VITAL_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
         vital_observations = self.get_observations(
             patient_id,
             category="vital-signs",
