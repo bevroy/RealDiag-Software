@@ -190,6 +190,8 @@ class PatientSummaryResponse(BaseModel):
     medication_count: int
     abnormal_labs: List[Dict[str, Any]]
     recent_vitals: List[Dict[str, Any]]
+    allergy_count: int
+    allergies: List[Dict[str, Any]]
 
 
 class HandoffUpdateItem(BaseModel):
@@ -298,6 +300,22 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
             })
         vital_types_seen.add(vital.code)
 
+    allergies = []
+    for allergy in patient_data.allergies:
+        code_obj = allergy.get("code", {})
+        name = code_obj.get("text") or code_obj.get("coding", [{}])[0].get("display", "Unknown")
+        reaction_text = None
+        reactions = allergy.get("reaction", [])
+        if reactions:
+            manifestations = reactions[0].get("manifestation", [])
+            if manifestations:
+                reaction_text = manifestations[0].get("text") or manifestations[0].get("coding", [{}])[0].get("display")
+        allergies.append({
+            "name": name,
+            "criticality": allergy.get("criticality"),
+            "reaction": reaction_text
+        })
+
     return PatientSummaryResponse(
         patient_id=patient_data.patient_id,
         name=patient_data.name,
@@ -308,7 +326,9 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
         condition_count=len(patient_data.conditions),
         medication_count=len(patient_data.medications),
         abnormal_labs=abnormal_labs[:10],
-        recent_vitals=vital_summary[:10]
+        recent_vitals=vital_summary[:10],
+        allergy_count=len(allergies),
+        allergies=allergies[:10]
     )
 
 
@@ -716,7 +736,6 @@ async def get_ambulatory_differential(
     """
     _verify_patient_match(smart_session, patient_id)
 
-    client_host = None
     try:
         history_service = PatientHistoryService(
             fhir_base_url=FHIR_BASE_URL,
