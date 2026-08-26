@@ -10,6 +10,7 @@ Endpoints:
     POST /smart/evaluate-patient       - Evaluate patient with CDS
     GET  /smart/patient/{id}           - Get patient chart summary
     GET  /smart/patient/{id}/handoff   - Chart summary + updates since admission/shift start
+    GET  /smart/patient/{id}/differential - Full-chart pull -> ranked differential (ambulatory/ER)
     GET  /smart/config                 - Frontend SMART launch config
 
 SECURITY NOTE (fixed 2026-08-24): the OAuth callback used to hand the raw
@@ -32,6 +33,14 @@ from datetime import datetime, timedelta
 
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
+from ..services.patient_history_service import PatientHistoryService
+from ..services.symptom_search import (
+    rank_diagnoses,
+    derive_search_terms_from_history,
+    _append_unique_terms,
+    SymptomSearchResponse,
+    AuditLogger,
+)
 from urllib.parse import urlparse, urlencode
 from ..services.ehr_adapter import EHRAdapter
 from ..services.smart_session_store import (create_smart_session,
@@ -223,6 +232,24 @@ class SmartSessionStatusResponse(BaseModel):
     active: bool
     patient_id: Optional[str] = None
     ehr_vendor: Optional[str] = None
+
+
+class AmbulatoryDifferentialResponse(BaseModel):
+    """
+    Full-chart pull -> concise summary -> ranked differential, for the
+    ambulatory/ER use case: a patient with no active admission, where the
+    goal is pulling as much of the available chart as exists (however
+    old) rather than a bounded inpatient window, and feeding it into the
+    core ranked-differential engine.
+    """
+    patient_id: str
+    name: str
+    age: Optional[int] = None
+    gender: Optional[str] = None
+    chart_summary: str
+    data_pulled: Dict[str, int]
+    search_terms_used: List[str]
+    differential: SymptomSearchResponse
 
 
 def get_ehr_config():
@@ -654,6 +681,120 @@ async def get_patient_handoff_summary(
     except Exception as e:
         logger.error(f"Failed to get handoff summary for patient {patient_id}: {e}")
         raise HTTPException(status_code=500, detail="Failed to retrieve handoff summary. Please try relaunching from the EHR.")
+
+
+@router.get("/patient/{patient_id}/differential", response_model=AmbulatoryDifferentialResponse)
+async def get_ambulatory_differential(
+    patient_id: str,
+    symptoms: Optional[str] = Query(
+        None,
+        description="Comma-separated presenting symptoms/chief complaint to seed the search, in addition to whatever is extracted from the chart."
+    ),
+    lookback_days: Optional[int] = Query(
+        None,
+        description="Days of chart history to pull. Omit, or pass 0, for an unbounded pull covering the patient's full available chart regardless of age."
+    ),
+    smart_session = Depends(get_active_smart_session),
+):
+    """
+    Ambulatory / ER full-chart differential.
+
+    Unlike /patient/{id} and /patient/{id}/handoff (which serve the
+    inpatient chart-summary flow and pull a handful of FHIR resource
+    types over a bounded recency window), this endpoint pulls the
+    patient's complete available chart - visit notes, H&Ps, procedures,
+    immunizations, imaging, problem list, medications, allergies, and
+    family/social history, unbounded by age unless lookback_days is
+    explicitly set - via PatientHistoryService, authenticated with the
+    same live SMART session token as every other /smart/* endpoint.
+
+    The extracted chief complaints and vitals (plus any symptoms passed
+    explicitly) are fed into the same rules-first, AI-fallback ranked
+    differential engine used by the standalone symptom search feature
+    (rank_diagnoses in symptom_search.py), so this is the same core
+    diagnostic engine - just chart-driven instead of manually typed.
+    """
+    _verify_patient_match(smart_session, patient_id)
+
+    client_host = None
+    try:
+        history_service = PatientHistoryService(
+            fhir_base_url=FHIR_BASE_URL,
+            auth_token=smart_session.fhir_access_token
+        )
+
+        patient_history = await history_service.get_comprehensive_history(
+            patient_id=patient_id,
+            lookback_days=lookback_days if lookback_days and lookback_days > 0 else None
+        )
+
+        search_terms: List[str] = []
+        if symptoms:
+            search_terms.extend(s.strip() for s in symptoms.split(",") if s.strip())
+
+        _append_unique_terms(search_terms, derive_search_terms_from_history(patient_history))
+
+        # Fall back to the active problem list if the chart yielded no
+        # chief complaint/vitals-derived terms and the caller didn't pass
+        # any symptoms directly - better than a bare 400 with nothing to
+        # search from.
+        if not search_terms and patient_history.active_conditions:
+            _append_unique_terms(
+                search_terms,
+                [c.get("code") for c in patient_history.active_conditions if c.get("code")]
+            )
+
+        if not search_terms:
+            raise HTTPException(
+                status_code=422,
+                detail="No symptoms available to search from. Pass ?symptoms=... or ensure the chart has chief complaints, vitals, or active conditions on file."
+            )
+
+        AuditLogger.log_security_event(
+            "ambulatory_differential",
+            {
+                "patient_id": patient_id,
+                "search_term_count": len(search_terms),
+                "lookback_days": lookback_days,
+            }
+        )
+
+        differential, ai_tree_info = await rank_diagnoses(
+            search_terms,
+            age=patient_history.age,
+            sex=patient_history.gender,
+        )
+
+        data_pulled = {
+            "visit_notes": len(patient_history.visit_notes),
+            "history_and_physicals": len(patient_history.history_and_physicals),
+            "vital_signs": len(patient_history.vital_signs),
+            "diagnostic_tests": len(patient_history.diagnostic_tests),
+            "procedures": len(patient_history.procedures),
+            "imaging_studies": len(patient_history.imaging_studies),
+            "immunizations": len(patient_history.immunizations),
+            "active_conditions": len(patient_history.active_conditions),
+            "past_conditions": len(patient_history.past_conditions),
+            "current_medications": len(patient_history.current_medications),
+            "allergies": len(patient_history.allergies),
+        }
+
+        return AmbulatoryDifferentialResponse(
+            patient_id=patient_id,
+            name=patient_history.patient_name,
+            age=patient_history.age,
+            gender=patient_history.gender,
+            chart_summary=patient_history.summary or "",
+            data_pulled=data_pulled,
+            search_terms_used=search_terms,
+            differential=differential,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to build ambulatory differential for patient {patient_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to build differential. Please try relaunching from the EHR.")
 
 
 @router.get("/session/status", response_model=SmartSessionStatusResponse)
