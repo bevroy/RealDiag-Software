@@ -456,7 +456,9 @@ class SmartDiagnosticEngine:
         
         probability = len(criteria_met) / max(len(criteria_met) + len(criteria_not_met), 1)
         
-        severity = "high"
+        severity = "moderate"
+        if len(criteria_met) >= 2:
+            severity = "high"
         if glucose and glucose.value > 500:
             severity = "critical"
         
