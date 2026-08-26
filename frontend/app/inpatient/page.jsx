@@ -196,6 +196,9 @@ function Inpatient() {
 function ChartSummaryTab({ patientData, evaluations }) {
   return (
     <>
+      {patientData.allergies && patientData.allergies.length > 0 && (
+        <AllergyBanner allergies={patientData.allergies} />
+      )}
       <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
       {evaluations.length === 0 ? (
         <div style={styles.noResults}>
@@ -231,11 +234,16 @@ function HandoffTab({ loading, error, data, sinceOverride, setSinceOverride, onA
 
   return (
     <>
+      {full_summary.allergies && full_summary.allergies.length > 0 && (
+        <AllergyBanner allergies={full_summary.allergies} />
+      )}
+
       <div style={styles.statsRow}>
         <div style={styles.statBox}><strong>{full_summary.lab_count}</strong><span>Labs</span></div>
         <div style={styles.statBox}><strong>{full_summary.vital_count}</strong><span>Vitals</span></div>
         <div style={styles.statBox}><strong>{full_summary.condition_count}</strong><span>Conditions</span></div>
         <div style={styles.statBox}><strong>{full_summary.medication_count}</strong><span>Medications</span></div>
+        <div style={styles.statBox}><strong>{full_summary.allergy_count}</strong><span>Allergies</span></div>
       </div>
 
       <div style={styles.timeframeHeader}>
@@ -294,8 +302,28 @@ function PatientBanner({ patient }) {
       </div>
       <div style={styles.bannerRight}>
         <span style={styles.mrn}>MRN: {patient.patient_id}</span>
-        <span style={styles.stats}>{patient.lab_count} labs • {patient.vital_count} vitals</span>
+        <span style={styles.stats}>
+          {patient.lab_count} labs • {patient.vital_count} vitals
+          {patient.allergy_count > 0 && ` • ${patient.allergy_count} allergies`}
+        </span>
       </div>
+    </div>
+  );
+}
+
+function AllergyBanner({ allergies }) {
+  return (
+    <div style={styles.allergyBanner}>
+      <h3 style={styles.allergyTitle}>⚠️ Allergies ({allergies.length})</h3>
+      <ul style={styles.allergyList}>
+        {allergies.map((allergy, idx) => (
+          <li key={idx} style={styles.allergyItem}>
+            <strong>{allergy.name}</strong>
+            {allergy.criticality && <span style={styles.allergyCriticality}> ({allergy.criticality})</span>}
+            {allergy.reaction && <span style={styles.allergyReaction}> — {allergy.reaction}</span>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -490,4 +518,10 @@ const styles = {
   simpleList: { listStyle: 'none', padding: 0, margin: 0 },
   simpleListItem: { padding: '10px 12px', backgroundColor: '#f9fafb', borderRadius: '4px', marginBottom: '6px', fontSize: '14px', color: '#374151' },
   simpleListDate: { color: '#6b7280', fontSize: '13px' },
+  allergyBanner: { backgroundColor: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '8px', padding: '16px 20px', marginBottom: '20px' },
+  allergyTitle: { fontSize: '15px', fontWeight: 'bold', color: '#991b1b', margin: '0 0 8px' },
+  allergyList: { listStyle: 'none', padding: 0, margin: 0 },
+  allergyItem: { fontSize: '14px', color: '#7f1d1d', padding: '4px 0' },
+  allergyCriticality: { color: '#b91c1c', fontSize: '13px' },
+  allergyReaction: { color: '#7f1d1d', fontSize: '13px' },
 };
