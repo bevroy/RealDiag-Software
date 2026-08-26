@@ -1077,32 +1077,26 @@ class PatientHistoryService:
         visit_notes: List[VisitNote]
     ) -> str:
         """Generate a clinical summary of patient history."""
-        summary_parts = []
-
-        # Patient intro
         name = patient_data.get('name', 'Patient')
         age = patient_data.get('age', 'unknown age')
         gender = patient_data.get('gender', 'unknown gender')
-        summary_parts.append(f"{name} is a {age}-year-old {gender} with")
 
-        # Active conditions
         if active_conditions:
             conditions_list = [c['code'] for c in active_conditions[:5]]
-            summary_parts.append(f"history of {', '.join(conditions_list)}")
+            intro = f"{name} is a {age}-year-old {gender} with history of {', '.join(conditions_list)}."
         else:
-            summary_parts.append("no significant past medical history")
+            intro = f"{name} is a {age}-year-old {gender} with no significant past medical history."
 
-        # Recent visits
+        summary_parts = [intro]
+
         if visit_notes:
-            summary_parts.append(f"Recent visits: {len(visit_notes)} clinical encounters on file")
+            summary_parts.append(f"Recent visits: {len(visit_notes)} clinical encounters on file.")
 
-        # Abnormal labs
         abnormal_tests = [t for t in diagnostic_tests if t.abnormal]
         if abnormal_tests:
-            summary_parts.append(f"{len(abnormal_tests)} abnormal test results noted")
+            summary_parts.append(f"{len(abnormal_tests)} abnormal test results noted.")
 
-        # Current medications
         if current_meds:
-            summary_parts.append(f"Currently on {len(current_meds)} medications")
+            summary_parts.append(f"Currently on {len(current_meds)} medications.")
 
-        return ". ".join(summary_parts) + "."
+        return " ".join(summary_parts)
