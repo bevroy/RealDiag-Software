@@ -206,6 +206,8 @@ class FHIRClient:
         """Get patient demographics."""
         url = f"{self.fhir_base_url}/Patient/{patient_id}"
         response = requests.get(url, headers=self._get_headers())
+        if not response.ok:
+            logger.error(f"FHIR Patient fetch {response.status_code}: {response.text}")
         response.raise_for_status()
         return response.json()
 
