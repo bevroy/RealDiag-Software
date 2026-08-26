@@ -384,6 +384,7 @@ async def smart_launch(
 async def smart_callback(
         code: str = Query(..., description="Authorization code"),
         state: str = Query(..., description="State parameter"),
+):
     """
     OAuth callback handler. Exchanges the code for an access token, stores
     it server-side in a SMART session, and redirects to /smart-launch with
