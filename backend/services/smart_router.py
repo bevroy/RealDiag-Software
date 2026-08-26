@@ -33,8 +33,8 @@ from datetime import datetime, timedelta
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
 from urllib.parse import urlparse, urlencode
-from ..services.smart_session_store import (
-    create_smart_session,
+from ..services.ehr_adapter import EHRAdapter
+from ..services.smart_session_store import (create_smart_session,
     get_smart_session,
     delete_smart_session,
 )
