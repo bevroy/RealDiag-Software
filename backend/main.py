@@ -157,6 +157,8 @@ PUBLIC_PATHS = {
     "/search/by-symptoms",
     "/education/learning-objectives",
     "/education/quiz/questions",
+    # Auth enforced by verify_user_or_api_key (X-API-Key), not the JWT-only global gate.
+    "/integration/symptom-search/patient",
 }
 
 PUBLIC_PREFIXES = (

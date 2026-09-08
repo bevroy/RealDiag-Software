@@ -1439,3 +1439,102 @@ async def warmup_cache():
             status_code=500,
             detail=f"Warmup failed: {str(e)}"
         )
+
+
+# ---------------------------------------------------------------------------
+# Patient-facing response shaping
+#
+# Used by /integration/symptom-search/patient (see integration_router.py) to
+# reframe clinician-facing DiagnosisMatch results for a consumer audience.
+# Deliberately NOT a diagnosis: strips clinician workflow fields (raw match
+# score, sensitivity/specificity, management steps, ordered tests) and
+# reframes referrals as questions to raise with a provider, per the
+# Health Matters One integration's visit-prep framing.
+# ---------------------------------------------------------------------------
+
+PATIENT_DISCLAIMER = (
+    "This is not a diagnosis. These are possible topics based on the symptoms you entered, "
+    "intended to help you prepare for a conversation with your healthcare provider. "
+    "If you are experiencing a medical emergency, call 911 or go to the nearest emergency room."
+)
+
+
+class PatientDiagnosisTopic(BaseModel):
+    """A possible topic to raise with your healthcare provider, based on entered symptoms."""
+    label: str
+    likelihood: str  # "Worth discussing" / "Possible" / "Less likely" -- no raw score exposed
+    specialty_area: str
+    matched_symptoms: List[str]
+    icd10_reference: List[str] = []
+    discuss_with_provider: Optional[List[str]] = None
+
+
+class PatientSymptomSearchResponse(BaseModel):
+    """Patient-facing symptom search response. Framed for visit-prep, not diagnosis."""
+    query_symptoms: List[str]
+    disclaimer: str
+    total_topics: int
+    topics: List[PatientDiagnosisTopic]
+
+
+def _match_score_to_likelihood(score: float) -> str:
+    """Map an internal match score to patient-safe qualitative language.
+    NOTE: these thresholds (5.0 / 2.5) are a first-pass guess based on the
+    score ranges visible in this file's AI-fallback examples -- tune against
+    real match_score distributions once you have production search data."""
+    if score >= 5.0:
+        return "Worth discussing"
+    elif score >= 2.5:
+        return "Possible"
+    return "Less likely"
+
+
+def _soften_referrals(referrals: Optional[List[str]]) -> Optional[List[str]]:
+    """Reframe clinician referral instructions as provider-facing questions, not directives."""
+    if not referrals:
+        return None
+    return [f"Ask your provider whether a referral to {r} may be appropriate." for r in referrals]
+
+
+def _to_patient_topic(match: DiagnosisMatch) -> PatientDiagnosisTopic:
+    return PatientDiagnosisTopic(
+        label=match.label,
+        likelihood=_match_score_to_likelihood(match.match_score),
+        specialty_area=match.family,
+        matched_symptoms=match.matched_presentations,
+        icd10_reference=match.icd10 or [],
+        discuss_with_provider=_soften_referrals(match.referrals),
+    )
+
+
+async def build_patient_symptom_search_response(
+    request: SymptomSearchRequest, request_obj: Request
+) -> PatientSymptomSearchResponse:
+    """
+    Run the standard clinician-facing symptom search and reshape it for a
+    patient/consumer audience. Calls search_by_symptoms() directly (it's a
+    plain async function under the @router.post decorator, so this is a
+    normal function call, not a re-route) rather than duplicating matching
+    logic.
+    """
+    clinician_response = await search_by_symptoms(request, request_obj)
+
+    if isinstance(clinician_response, dict):
+        raw_results = clinician_response.get("results", [])
+        query_symptoms = clinician_response.get("query_symptoms", request.symptoms)
+    else:
+        raw_results = clinician_response.results
+        query_symptoms = clinician_response.query_symptoms
+
+    matches = [
+        r if isinstance(r, DiagnosisMatch) else DiagnosisMatch(**r)
+        for r in raw_results
+    ]
+    topics = [_to_patient_topic(m) for m in matches]
+
+    return PatientSymptomSearchResponse(
+        query_symptoms=query_symptoms,
+        disclaimer=PATIENT_DISCLAIMER,
+        total_topics=len(topics),
+        topics=topics,
+    )

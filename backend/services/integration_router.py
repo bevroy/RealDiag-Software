@@ -10,7 +10,7 @@ AUTHENTICATION:
 - User Authentication (for logged-in users): JWT token in Authorization header or cookie
 """
 
-from fastapi import APIRouter, HTTPException, Header, Depends, Body
+from fastapi import APIRouter, HTTPException, Header, Depends, Body, Request
 from typing import Optional, List, Dict, Any, Union
 from pydantic import BaseModel, Field
 from datetime import datetime
@@ -19,6 +19,11 @@ import secrets
 import json
 from backend.services.auth_service import get_current_user, get_optional_user
 from backend.services.subscription_gate import SubscriptionGate
+from backend.services.symptom_search import (
+    SymptomSearchRequest,
+    PatientSymptomSearchResponse,
+    build_patient_symptom_search_response,
+)
 
 router = APIRouter(prefix="/integration", tags=["integration"])
 
@@ -132,6 +137,23 @@ def verify_user_or_api_key(
         status_code=401,
         detail="Authentication required: Provide either user login (JWT token) or API key (X-API-Key header)"
     )
+
+
+@router.post("/symptom-search/patient", response_model=PatientSymptomSearchResponse)
+async def patient_symptom_search(
+    request: SymptomSearchRequest,
+    request_obj: Request,
+    auth: Dict[str, Any] = Depends(verify_user_or_api_key)
+):
+    """
+    Patient-facing symptom search for external consumer apps (e.g. Health Matters One).
+
+    ⚠️ REQUIRES AUTHENTICATION (User login OR API key)
+
+    Reuses the clinician-facing search engine but reframes results as
+    visit-prep topics, not a diagnosis - see PATIENT_DISCLAIMER.
+    """
+    return await build_patient_symptom_search_response(request, request_obj)
 
 
 @router.post("/fhir/condition")
