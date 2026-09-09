@@ -29,10 +29,19 @@ def test_client() -> Generator[TestClient, None, None]:
     Create a test client for the FastAPI app.
     Session-scoped to reuse across all tests.
     """
-    # Disable rate limiting for tests if it's enabled
+    # Disable rate limiting for tests if it's enabled. app.state.limiter is
+    # only consulted by the RateLimitExceeded handler -- the @limiter.limit(...)
+    # decorators on individual routes (e.g. /users/register) are bound to the
+    # security.py module-level Limiter singleton directly, so it has to be
+    # disabled there too or multi-registration tests hit the real 5/15min cap.
     if hasattr(app.state, 'limiter'):
         app.state.limiter = None
-    
+    try:
+        from backend.services.security import limiter as _security_limiter
+        _security_limiter.enabled = False
+    except ImportError:
+        pass
+
     with TestClient(app, raise_server_exceptions=False) as client:
         yield client
 

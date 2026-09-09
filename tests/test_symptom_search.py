@@ -246,3 +246,72 @@ def test_build_patient_symptom_search_response_no_padding(monkeypatch):
 
     assert len(result.topics) == 3
     assert result.total_topics == 3
+
+
+def _set_user_role(user_id: str, role: str) -> None:
+    """Directly set a role in whichever store auth_service is using (DB or
+    in-memory) -- normal /users/register signup only ever produces
+    role='user' regardless of email domain (user_router.py's
+    _normalize_ui_role() only relabels "user" -> "provider" for display in
+    a couple of response bodies, it never persists), so a provider-role
+    test account has to be set up this way."""
+    from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
+    if DATABASE_AVAILABLE:
+        with get_db_session() as db:
+            user = db.query(User).filter_by(user_id=user_id).first()
+            if user:
+                user.role = role
+                return
+    from backend.services.auth_service import users_db
+    if user_id in users_db:
+        users_db[user_id]["role"] = role
+
+
+@pytest.fixture(scope="module")
+def provider_access_token() -> str:
+    """Register exactly one provider-role account for this module and reuse
+    its token across tests. /users/register is rate-limited (5/15min)
+    across the whole test session, so tests must not each register a fresh
+    account -- see also the plain-USER gate test below, which reuses the
+    module's existing `authenticated_user` fixture (role='user' by default)
+    instead of registering another account."""
+    from backend.main import app
+    email = f"emr-gate-provider-{uuid.uuid4().hex[:8]}@realdiag.com"
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.post(
+            "/users/register",
+            json={
+                "email": email,
+                "password": "TestPass123!",
+                "full_name": "EMR Gate Provider Tester",
+            },
+        )
+        assert response.status_code == 201
+        user_id = response.json()["user"]["user_id"]
+        _set_user_role(user_id, "provider")
+        return response.cookies.get("access_token")
+
+
+def test_symptom_search_emr_patient_id_denied_for_plain_user(test_client: TestClient, authenticated_user):
+    """A plain USER-role account (the shared authenticated_user fixture --
+    normal signup always produces role='user') supplying emr_patient_id is
+    rejected with a clear 403, not silently ignored."""
+    response = test_client.post(
+        "/search/by-symptoms",
+        json={"symptoms": ["fever"], "emr_patient_id": "test-patient-1"},
+    )
+    assert response.status_code == 403
+    assert "provider-level access" in response.json()["detail"]
+
+
+def test_symptom_search_emr_patient_id_allowed_for_provider(provider_access_token: str):
+    """A PROVIDER-role account supplying emr_patient_id is not rejected for
+    role reasons."""
+    from backend.main import app
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.post(
+            "/search/by-symptoms",
+            headers={"Authorization": f"Bearer {provider_access_token}"},
+            json={"symptoms": ["fever"], "emr_patient_id": "test-patient-1"},
+        )
+    assert response.status_code == 200

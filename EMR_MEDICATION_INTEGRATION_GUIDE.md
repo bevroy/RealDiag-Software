@@ -91,6 +91,13 @@ Any **FHIR R4 compliant** EMR system, including:
 
 When you include `emr_patient_id` in your diagnostic request, RealDiag automatically pulls medications:
 
+> ⚠️ **Requires a provider/admin-role account.** `emr_patient_id` triggers a
+> live EHR/FHIR lookup, so it's now gated behind the calling user's role.
+> Accounts with the default `user` role get `403 {"detail": "emr_patient_id
+> requires provider-level access"}` if they include this field. A request
+> without `emr_patient_id` is unaffected for any role. Contact an admin to
+> have your account promoted to `provider` if you need this feature.
+
 ```bash
 POST /diagnostic/evaluate/CARDS-ACUTE-CORONARY-SYNDROME
 Content-Type: application/json

@@ -12,6 +12,19 @@ from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
 from .context_engine import get_context_engine
+from .rbac_service import get_rbac_service, Permission
+
+try:
+    from .security import AuditLogger
+except ImportError:
+    import logging as _logging
+
+    class AuditLogger:
+        """Fallback if security.py's optional deps (e.g. slowapi) aren't installed."""
+        @staticmethod
+        def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
+            _logging.info(f"AUDIT: {event_type} - {details}")
+
 
 router = APIRouter(prefix="/diagnostic", tags=["diagnostic"], dependencies=[Depends(get_current_user)])
 _trees = DecisionTreeEngine()
@@ -473,6 +486,18 @@ async def evaluate_tree(
     # Pull patient history from EMR if patient_id provided (EMR instances)
     emr_data_pulled = False
     if patient.get("emr_patient_id"):
+        if not get_rbac_service().check_permission(current_user or {}, Permission.EHR_READ):
+            AuditLogger.log_security_event(
+                "emr_patient_id_access_denied",
+                {
+                    "user_id": (current_user or {}).get("user_id"),
+                    "role": (current_user or {}).get("role"),
+                    "emr_patient_id": patient.get("emr_patient_id"),
+                    "tree_id": tree_id
+                },
+                severity="WARNING"
+            )
+            raise HTTPException(status_code=403, detail="emr_patient_id requires provider-level access")
         try:
             history_service = await get_patient_history_service()
             patient_history = await history_service.get_comprehensive_history(

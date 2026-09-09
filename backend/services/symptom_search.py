@@ -20,6 +20,7 @@ from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.auth_service import get_current_user
+from backend.services.rbac_service import get_rbac_service, Permission
 
 # Import cache service for performance
 try:
@@ -1181,7 +1182,11 @@ async def rank_diagnoses(
 
 
 @router.post("/search/by-symptoms", response_model=SymptomSearchResponse)
-async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request):
+async def search_by_symptoms(
+    request: SymptomSearchRequest,
+    request_obj: Request,
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
     """
     Search for diagnoses based on symptom input.
     Rate limit: 60 requests per minute per IP.
@@ -1213,6 +1218,18 @@ async def search_by_symptoms(request: SymptomSearchRequest, request_obj: Request
 
         # Optionally enrich with EHR encounter/history context when available.
         if request.emr_patient_id:
+            if not get_rbac_service().check_permission(current_user, Permission.EHR_READ):
+                AuditLogger.log_security_event(
+                    "emr_patient_id_access_denied",
+                    {
+                        "user_id": current_user.get("user_id"),
+                        "role": current_user.get("role"),
+                        "emr_patient_id": request.emr_patient_id,
+                        "ip": client_ip
+                    },
+                    severity="WARNING"
+                )
+                raise HTTPException(status_code=403, detail="emr_patient_id requires provider-level access")
             try:
                 history_service = await get_patient_history_service()
                 patient_history = await history_service.get_comprehensive_history(
