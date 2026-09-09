@@ -3,8 +3,20 @@ Symptom Search Tests
 Tests for symptom-based diagnostic search functionality
 """
 
+import asyncio
+
 import pytest
 from fastapi.testclient import TestClient
+
+from backend.services import symptom_search as symptom_search_module
+from backend.services.symptom_search import (
+    build_patient_symptom_search_response,
+    DiagnosisMatch,
+    PATIENT_DISCLAIMER,
+    PATIENT_RESULT_CAP,
+    SymptomSearchRequest,
+    SymptomSearchResponse,
+)
 
 
 def test_symptom_search_valid_request(test_client: TestClient, sample_symptoms):
@@ -124,3 +136,77 @@ def test_symptom_search_multiple_symptoms(test_client: TestClient):
     assert response.status_code == 200
     data = response.json()
     assert len(data["results"]) >= 0  # Should return results
+
+
+def _fake_match(rank: int, score: float) -> DiagnosisMatch:
+    """Build a minimal DiagnosisMatch for patient-shaping tests, independent
+    of any real rule data."""
+    return DiagnosisMatch(
+        rule_id=f"TEST-RULE-{rank}",
+        label=f"Test Condition {rank}",
+        family="test_family",
+        match_score=score,
+        matched_presentations=["test symptom"],
+        all_presentations=["test symptom", "other symptom"],
+        icd10=["Z00.0"],
+        snomed=[123456],
+        referrals=["Test Specialty"],
+    )
+
+
+def test_build_patient_symptom_search_response_tiers_and_cap(monkeypatch):
+    """Patient-facing shaping: rank-based tiers spread across likelihoods,
+    results are capped at PATIENT_RESULT_CAP, and the disclaimer is exact."""
+    # 10 fake matches, already sorted descending by match_score -- more than
+    # PATIENT_RESULT_CAP (8) so the cap is actually exercised.
+    fake_matches = [_fake_match(i, score=100 - i) for i in range(10)]
+    fake_response = SymptomSearchResponse(
+        query_symptoms=["chest pain"],
+        total_results=len(fake_matches),
+        results=fake_matches,
+    )
+
+    async def fake_search_by_symptoms(request, request_obj):
+        return fake_response
+
+    monkeypatch.setattr(symptom_search_module, "search_by_symptoms", fake_search_by_symptoms)
+
+    request = SymptomSearchRequest(symptoms=["chest pain"])
+    result = asyncio.run(
+        build_patient_symptom_search_response(request, request_obj=None)
+    )
+
+    # (b) never more than the patient cap, even with 10 matches available
+    assert len(result.topics) == PATIENT_RESULT_CAP
+    assert result.total_topics == PATIENT_RESULT_CAP
+
+    # (a) more than one distinct likelihood value across the returned topics
+    likelihoods = {topic.likelihood for topic in result.topics}
+    assert len(likelihoods) > 1
+    assert likelihoods <= {"Worth discussing", "Possible", "Less likely"}
+
+    # (c) disclaimer matches the current constant exactly
+    assert result.disclaimer == PATIENT_DISCLAIMER
+
+
+def test_build_patient_symptom_search_response_no_padding(monkeypatch):
+    """Fewer matches than the cap should return all of them, unpadded."""
+    fake_matches = [_fake_match(i, score=10 - i) for i in range(3)]
+    fake_response = SymptomSearchResponse(
+        query_symptoms=["headache"],
+        total_results=len(fake_matches),
+        results=fake_matches,
+    )
+
+    async def fake_search_by_symptoms(request, request_obj):
+        return fake_response
+
+    monkeypatch.setattr(symptom_search_module, "search_by_symptoms", fake_search_by_symptoms)
+
+    request = SymptomSearchRequest(symptoms=["headache"])
+    result = asyncio.run(
+        build_patient_symptom_search_response(request, request_obj=None)
+    )
+
+    assert len(result.topics) == 3
+    assert result.total_topics == 3

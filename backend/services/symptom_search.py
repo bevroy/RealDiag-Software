@@ -13,6 +13,7 @@ from pathlib import Path
 import yaml
 import re
 import time
+import math
 from pydantic import BaseModel, validator, conint, conlist
 import logging
 from functools import lru_cache
@@ -1455,8 +1456,14 @@ async def warmup_cache():
 PATIENT_DISCLAIMER = (
     "This is not a diagnosis. These are possible topics based on the symptoms you entered, "
     "intended to help you prepare for a conversation with your healthcare provider. "
+    "The 'Worth discussing,' 'Possible,' and 'Less likely' labels reflect how closely your "
+    "symptoms matched each topic in this list — they are not a measure of medical likelihood, "
+    "severity, or urgency, and only a healthcare provider can assess that. "
     "If you are experiencing a medical emergency, call 911 or go to the nearest emergency room."
 )
+
+# Independent of the clinician-facing /search/by-symptoms cap of 20.
+PATIENT_RESULT_CAP = 8
 
 
 class PatientDiagnosisTopic(BaseModel):
@@ -1477,14 +1484,14 @@ class PatientSymptomSearchResponse(BaseModel):
     topics: List[PatientDiagnosisTopic]
 
 
-def _match_score_to_likelihood(score: float) -> str:
-    """Map an internal match score to patient-safe qualitative language.
-    NOTE: these thresholds (5.0 / 2.5) are a first-pass guess based on the
-    score ranges visible in this file's AI-fallback examples -- tune against
-    real match_score distributions once you have production search data."""
-    if score >= 5.0:
+def _rank_to_likelihood(rank: int, n: int) -> str:
+    """Map a 0-indexed rank within a sorted (descending match_score), capped
+    list of size n to patient-safe qualitative language. Rank-based (not a
+    fixed score cutoff) so tiers always spread across results regardless of
+    the absolute match_score scale."""
+    if rank < math.ceil(n / 3):
         return "Worth discussing"
-    elif score >= 2.5:
+    elif rank < math.ceil(2 * n / 3):
         return "Possible"
     return "Less likely"
 
@@ -1496,10 +1503,10 @@ def _soften_referrals(referrals: Optional[List[str]]) -> Optional[List[str]]:
     return [f"Ask your provider whether a referral to {r} may be appropriate." for r in referrals]
 
 
-def _to_patient_topic(match: DiagnosisMatch) -> PatientDiagnosisTopic:
+def _to_patient_topic(match: DiagnosisMatch, rank: int, n: int) -> PatientDiagnosisTopic:
     return PatientDiagnosisTopic(
         label=match.label,
-        likelihood=_match_score_to_likelihood(match.match_score),
+        likelihood=_rank_to_likelihood(rank, n),
         specialty_area=match.family,
         matched_symptoms=match.matched_presentations,
         icd10_reference=match.icd10 or [],
@@ -1530,7 +1537,14 @@ async def build_patient_symptom_search_response(
         r if isinstance(r, DiagnosisMatch) else DiagnosisMatch(**r)
         for r in raw_results
     ]
-    topics = [_to_patient_topic(m) for m in matches]
+    # search_by_symptoms()/rank_diagnoses() already sort descending by
+    # match_score before capping to 20 -- re-sort defensively here since the
+    # patient cap/tiering below depends on that order.
+    matches.sort(key=lambda m: m.match_score, reverse=True)
+    matches = matches[:PATIENT_RESULT_CAP]
+
+    n = len(matches)
+    topics = [_to_patient_topic(m, rank, n) for rank, m in enumerate(matches)]
 
     return PatientSymptomSearchResponse(
         query_symptoms=query_symptoms,
