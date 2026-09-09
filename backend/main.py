@@ -154,7 +154,6 @@ PUBLIC_PATHS = {
     "/docs",
     "/openapi.json",
     "/redoc",
-    "/search/by-symptoms",
     "/education/learning-objectives",
     "/education/quiz/questions",
     # Auth enforced by verify_user_or_api_key (X-API-Key), not the JWT-only global gate.

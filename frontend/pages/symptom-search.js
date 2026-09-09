@@ -72,6 +72,7 @@ export default function SymptomSearch() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [needsLogin, setNeedsLogin] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [viewMode, setViewMode] = useState('card'); // 'card' or 'compact'
   const [sortBy, setSortBy] = useState('likelihood'); // 'likelihood', 'score', 'alpha', 'family'
@@ -678,8 +679,18 @@ export default function SymptomSearch() {
       return;
     }
 
+    // /search/by-symptoms now requires a logged-in session -- check before
+    // hitting the network so a logged-out user gets a login prompt instead
+    // of a raw 401.
+    if (!isAuthenticated()) {
+      setNeedsLogin(true);
+      setError(null);
+      return;
+    }
+
     setLoading(true);
     setError(null);
+    setNeedsLogin(false);
     setHasSearched(true);
     resetDisplayLimit(); // Reset to show 5 results
 
@@ -709,11 +720,19 @@ export default function SymptomSearch() {
         } : {})
       };
 
-      const response = await fetch(`${apiBase}/search/by-symptoms`, {
+      const response = await authenticatedFetch(`${apiBase}/search/by-symptoms`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
       });
+
+      if (response.status === 401) {
+        // Session expired/invalid between the isAuthenticated() check above
+        // and this request -- prompt to log in again instead of a raw error.
+        setNeedsLogin(true);
+        setHasSearched(false);
+        setResults([]);
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(`Search failed: ${response.statusText}`);
@@ -793,6 +812,7 @@ export default function SymptomSearch() {
     setResults([]);
     setHasSearched(false);
     setError(null);
+    setNeedsLogin(false);
     setExpandedCards({});
   };
 
@@ -1737,6 +1757,35 @@ export default function SymptomSearch() {
               Clear All
             </button>
           </div>
+
+          {needsLogin && (
+            <div style={{
+              marginTop: '1rem',
+              padding: '1rem',
+              background: '#eff6ff',
+              color: '#1e3a8a',
+              borderRadius: '6px',
+              fontSize: '0.9rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '0.75rem'
+            }}>
+              <span>Please log in to search diagnoses.</span>
+              <Link href="/login" style={{
+                padding: '0.5rem 1rem',
+                background: '#2563eb',
+                color: 'white',
+                borderRadius: '6px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap'
+              }}>
+                Log In
+              </Link>
+            </div>
+          )}
 
           {error && (
             <div style={{

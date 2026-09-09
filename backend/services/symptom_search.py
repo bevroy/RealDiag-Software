@@ -72,7 +72,7 @@ except ImportError:
         def log_security_event(event_type: str, details: dict, severity: str = "INFO"):
             logging.info(f"AUDIT: {event_type} - {details}")
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 # FHIR configuration for optional encounter/history enrichment
 FHIR_BASE_URL = os.getenv("FHIR_BASE_URL", "http://localhost:8080/fhir")
