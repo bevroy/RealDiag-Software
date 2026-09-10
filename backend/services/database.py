@@ -102,8 +102,18 @@ else:
         echo=False
     )
 
-    # Session factory
-    SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
+    # Session factory.
+    # expire_on_commit=False is required: get_user_by_id/get_user_by_email
+    # (and get_user_search_history/get_user_favorites/get_user_custom_lists/
+    # get_user_settings below) return the ORM row AFTER their `with
+    # get_db_session()` block has already committed and closed the session.
+    # With the default expire_on_commit=True, that commit marks every
+    # attribute on the returned object as expired; once the session is then
+    # closed the object is also detached, so any attribute access (e.g.
+    # auth_service.py's user.to_dict() in get_current_user/get_optional_user)
+    # raises sqlalchemy.orm.exc.DetachedInstanceError. Disabling it lets the
+    # already-loaded column values keep working after the session closes.
+    SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine, expire_on_commit=False))
 
     # Base class for ORM models
     Base = declarative_base()
