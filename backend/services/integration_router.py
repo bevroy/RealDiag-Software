@@ -13,12 +13,14 @@ AUTHENTICATION:
 from fastapi import APIRouter, HTTPException, Header, Depends, Body, Request
 from typing import Optional, List, Dict, Any, Union
 from pydantic import BaseModel, Field
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 import secrets
 import json
 from backend.services.auth_service import get_current_user, get_optional_user
 from backend.services.subscription_gate import SubscriptionGate
+from backend.services.rbac_service import get_rbac_service, Permission
+from backend.services import api_key_store
 from backend.services.symptom_search import (
     SymptomSearchRequest,
     PatientSymptomSearchResponse,
@@ -78,26 +80,27 @@ class DiagnosisExportRequest(BaseModel):
 
 # In-memory storage (replace with database in production)
 webhooks_db = {}
-api_keys_db = {}
+# API keys are now persisted via api_key_store (DB-backed, in-memory fallback
+# when no DATABASE_URL is configured) - see backend/services/api_key_store.py.
 
 
 def verify_api_key(x_api_key: Optional[str] = Header(None)) -> str:
     """Verify API key from header (for system-to-system integration)."""
     if not x_api_key:
         raise HTTPException(status_code=401, detail="API key required")
-    
-    if x_api_key not in api_keys_db:
+
+    key_data = api_key_store.get_api_key_by_raw(x_api_key)
+    if key_data is None:
         raise HTTPException(status_code=401, detail="Invalid API key")
-    
-    key_data = api_keys_db[x_api_key]
+
     if key_data.get("revoked"):
         raise HTTPException(status_code=401, detail="API key revoked")
-    
+
     # Check expiration
     if key_data.get("expires_at"):
-        if datetime.fromisoformat(key_data["expires_at"]) < datetime.now():
+        if datetime.fromisoformat(key_data["expires_at"]) < datetime.utcnow():
             raise HTTPException(status_code=401, detail="API key expired")
-    
+
     return x_api_key
 
 
@@ -126,10 +129,11 @@ def verify_user_or_api_key(
     # Fall back to API key
     if x_api_key:
         api_key = verify_api_key(x_api_key)
+        key_data = api_key_store.get_api_key_by_raw(api_key) or {}
         return {
             'type': 'api_key',
             'key': api_key,
-            'name': api_keys_db.get(api_key, {}).get('name', 'Unknown')
+            'name': key_data.get('name', 'Unknown')
         }
     
     # No authentication provided
@@ -428,30 +432,25 @@ async def create_api_key(
     """
     # Associate API key with user who created it
     user_id = current_user.get("user_id")
-    # Generate API key
-    api_key = f"rdiag_{secrets.token_urlsafe(32)}"
-    
+
     # Calculate expiration
     expires_at = None
     if key_request.expires_days:
-        from datetime import timedelta
-        expires_at = (datetime.now() + timedelta(days=key_request.expires_days)).isoformat()
-    
-    api_keys_db[api_key] = {
-        "key": api_key,
-        "name": key_request.name,
-        "scopes": key_request.scopes,
-        "user_id": user_id,  # Track which user created this key
-        "created_at": datetime.now().isoformat(),
-        "expires_at": expires_at,
-        "revoked": False
-    }
-    
+        expires_at = datetime.utcnow() + timedelta(days=key_request.expires_days)
+
+    created = api_key_store.create_api_key(
+        name=key_request.name,
+        scopes=key_request.scopes,
+        user_id=user_id,
+        expires_at=expires_at,
+    )
+
     return {
-        "api_key": api_key,
-        "name": key_request.name,
-        "scopes": key_request.scopes,
-        "expires_at": expires_at,
+        "api_key": created["raw_key"],
+        "key_id": created["key_id"],
+        "name": created["name"],
+        "scopes": created["scopes"],
+        "expires_at": created["expires_at"],
         "message": "API key created successfully. Store this key securely - it cannot be retrieved again."
     }
 
@@ -464,18 +463,38 @@ async def list_api_keys(current_user: Dict = Depends(get_current_user)):
     ⚠️ REQUIRES USER AUTHENTICATION
     """
     user_id = current_user.get("user_id")
-    
-    # Filter to only show user's own API keys
-    user_keys = [
-        {k: v for k, v in key_data.items() if k != "key"}
-        for key_data in api_keys_db.values()
-        if key_data.get("user_id") == user_id
-    ]
-    
+    user_keys = api_key_store.list_api_keys_for_user(user_id)
+
     return {
         "api_keys": user_keys,
         "total": len(user_keys)
     }
+
+
+@router.delete("/api-keys/{key_id}")
+async def revoke_api_key(
+    key_id: str,
+    current_user: Dict = Depends(get_current_user)
+):
+    """
+    Revoke an API key so it can no longer authenticate.
+
+    ⚠️ REQUIRES USER AUTHENTICATION
+
+    Callers may revoke their own keys. Revoking another user's key requires
+    the admin-only Permission.API_KEY_DELETE.
+    """
+    key_data = api_key_store.get_api_key_by_id(key_id)
+    if key_data is None:
+        raise HTTPException(status_code=404, detail="API key not found")
+
+    is_owner = key_data["user_id"] == current_user.get("user_id")
+    is_admin = get_rbac_service().check_permission(current_user, Permission.API_KEY_DELETE)
+    if not is_owner and not is_admin:
+        raise HTTPException(status_code=403, detail="Not authorized to revoke this API key")
+
+    api_key_store.revoke_api_key(key_id)
+    return {"message": "API key revoked successfully", "key_id": key_id}
 
 
 @router.post("/export")
@@ -581,7 +600,7 @@ async def integration_health():
             "cpoe": "available"
         },
         "active_webhooks": len(webhooks_db),
-        "active_api_keys": len([k for k in api_keys_db.values() if not k.get("revoked")])
+        "active_api_keys": api_key_store.count_active_api_keys()
     }
 
 
