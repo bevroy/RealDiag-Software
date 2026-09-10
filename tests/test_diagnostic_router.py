@@ -9,20 +9,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.main import app
-from backend.services import diagnostic_router as diagnostic_router_module
-
-
-@pytest.fixture(autouse=True)
-def _stub_broken_tree_info_lookup(monkeypatch):
-    """Work around a pre-existing, unrelated bug: evaluate_tree()'s
-    subscription-gate block calls _trees.get_tree_info(tree_id), but
-    DecisionTreeEngine has no such method (confirmed via `git blame` --
-    predates this change, commit 9884b53, 2026-06-25) -- it 500s for ANY
-    authenticated caller before the emr_patient_id gate is ever reached.
-    Stubbed here (test-only, doesn't touch source) so these tests can
-    actually exercise the role gate through the real endpoint; flagged
-    separately as an out-of-scope bug worth fixing on its own."""
-    monkeypatch.setattr(diagnostic_router_module._trees, "get_tree_info", lambda tree_id: None, raising=False)
 
 
 def _set_user_role(user_id: str, role: str) -> None:
@@ -72,6 +58,25 @@ def user_access_token() -> str:
 @pytest.fixture(scope="module")
 def provider_access_token() -> str:
     return _register_access_token("provider")
+
+
+def test_evaluate_tree_no_longer_500s_on_dead_module_gate(user_access_token: str):
+    """Regression test: evaluate_tree() used to call the nonexistent
+    _trees.get_tree_info(tree_id) in a dead module-access gate block,
+    500ing for every authenticated caller regardless of role or
+    emr_patient_id (introduced in fcab568, present since 9884b53). That
+    block has been removed entirely (never functional: no tree YAML has a
+    "module" field, and the feature-key check would always have returned
+    False anyway). A plain authenticated user with no emr_patient_id must
+    get a clean 200, not a 500."""
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.post(
+            "/diagnostic/evaluate/CARD-CHEST-PAIN",
+            headers={"Authorization": f"Bearer {user_access_token}"},
+            json={"symptoms": ["chest pain"]},
+        )
+    assert response.status_code == 200
+    assert "tree_result" in response.json()
 
 
 def test_evaluate_tree_without_emr_patient_id_unaffected(user_access_token: str):

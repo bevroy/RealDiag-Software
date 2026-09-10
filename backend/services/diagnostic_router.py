@@ -8,7 +8,6 @@ import os
 from .decision_tree_engine import DecisionTreeEngine
 from .auth_service import get_current_user, get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
-from .subscription_gate import SubscriptionGate
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
 from .context_engine import get_context_engine
@@ -438,29 +437,6 @@ async def evaluate_tree(
     Authenticated users get searches based on their subscription plan.
     Anonymous users limited to 10 searches per 7 days.
     """
-    # Check subscription-based limits for authenticated users
-    if current_user:
-        async with SubscriptionGate(current_user, user_subscriptions) as gate:
-            # Check if user has module access
-            tree_info = _trees.get_tree_info(tree_id)
-            if tree_info and tree_info.get("module"):
-                module_name = tree_info["module"]
-                
-                # Check module access based on subscription
-                feature_key = f"modules_{module_name.lower()}"
-                if not gate.has_feature(feature_key):
-                    raise HTTPException(
-                        status_code=403,
-                        detail={
-                            "error": "Module access restricted",
-                            "module": module_name,
-                            "tree_id": tree_id,
-                            "current_plan": gate.plan.value,
-                            "upgrade_required": True,
-                            "message": f"Upgrade your plan to access {module_name} module"
-                        }
-                    )
-    
     # For anonymous users or free plan users, check free trial limits
     if not current_user or (current_user and str(user_subscriptions.get(current_user["user_id"], {}).get("plan_type", "free")) == "free"):
         # Check search limits (raises 429 if limit exceeded for anonymous users)
