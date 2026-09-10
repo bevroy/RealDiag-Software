@@ -29,6 +29,7 @@ from backend.services.email_service import (
 from backend.services.subscription_router import create_subscription
 from backend.services.subscription_models import PlanType, BillingInterval
 from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
+from backend.services.rbac_service import get_rbac_service, Permission
 from datetime import datetime
 from backend.services.auth_cookies import (
     cookie_auth,
@@ -79,6 +80,10 @@ if AuditLogger is None:
     class AuditLogger:
         @staticmethod
         def log_authentication(*args, **kwargs):
+            pass
+
+        @staticmethod
+        def log_security_event(*args, **kwargs):
             pass
 
 
@@ -438,6 +443,7 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
 async def get_my_profile(current_user: Dict = Depends(get_current_user)):
     """Get current user's profile."""
     profile = {k: v for k, v in current_user.items() if k != "password_hash"}
+    profile["can_manage_favorites"] = get_rbac_service().check_permission(current_user, Permission.DIAGNOSIS_WRITE)
     profile["role"] = _normalize_ui_role(profile.get("email"), profile.get("role"))
     
     return profile
@@ -531,7 +537,15 @@ async def add_to_favorites(
     favorite: FavoriteCreate,
     current_user: Dict = Depends(get_current_user)
 ):
-    """Add diagnosis to favorites."""
+    """Add diagnosis to favorites. Provider/admin accounts only - there's no
+    real use case for a patient-side account to save a diagnosis."""
+    if not get_rbac_service().check_permission(current_user, Permission.DIAGNOSIS_WRITE):
+        AuditLogger.log_security_event(
+            "add_favorite_access_denied",
+            {"user_id": current_user.get("user_id"), "role": current_user.get("role")},
+            severity="WARNING"
+        )
+        raise HTTPException(status_code=403, detail="Favorites require a provider-level account")
     return add_favorite(
         user_id=current_user["user_id"],
         rule_id=favorite.rule_id,

@@ -131,6 +131,12 @@ class UserProfile(BaseModel):
     last_login: Optional[str] = None
     search_count: int = 0
     favorite_count: int = 0
+    # Real (non-display-relabeled) permission check, so the frontend can
+    # gate provider-only features like favorites without misreading the
+    # `role` field above, which _normalize_ui_role() shows as "provider"
+    # for every realdiag.com/elionyxhealth.com account regardless of the
+    # actual stored role.
+    can_manage_favorites: bool = False
 
 class UserSettings(BaseModel):
     """User settings and preferences."""

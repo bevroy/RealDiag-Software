@@ -820,7 +820,12 @@ export default function SymptomSearch() {
   const addToFavorites = async (result) => {
     if (!isAuthenticated()) {
       alert('Please sign in to save favorites');
-      window.location.href = '/account';
+      window.location.href = '/login';
+      return;
+    }
+
+    if (!user?.can_manage_favorites) {
+      alert('Favorites are available for provider accounts only.');
       return;
     }
 
@@ -2071,13 +2076,16 @@ export default function SymptomSearch() {
                           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                             <button
                               onClick={() => addToFavorites(result)}
+                              disabled={isUserAuthenticated && !user?.can_manage_favorites}
                               style={{
                                 padding: '0.5rem 1rem',
-                                background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                                background: (isUserAuthenticated && !user?.can_manage_favorites)
+                                  ? '#9ca3af'
+                                  : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                                 color: 'white',
                                 border: 'none',
                                 borderRadius: '6px',
-                                cursor: 'pointer',
+                                cursor: (isUserAuthenticated && !user?.can_manage_favorites) ? 'not-allowed' : 'pointer',
                                 fontWeight: '600',
                                 fontSize: '0.85rem',
                                 boxShadow: '0 2px 4px rgba(20, 184, 166, 0.3)',
@@ -2085,7 +2093,7 @@ export default function SymptomSearch() {
                                 alignItems: 'center',
                                 gap: '0.25rem'
                               }}
-                              title="Add to favorites"
+                              title={(isUserAuthenticated && !user?.can_manage_favorites) ? 'Favorites are available for provider accounts' : 'Add to favorites'}
                             >
                               ⭐ Favorite
                             </button>
@@ -2953,17 +2961,20 @@ export default function SymptomSearch() {
                       </div>
                       <button
                         onClick={() => addToFavorites(result)}
+                        disabled={isUserAuthenticated && !user?.can_manage_favorites}
                         style={{
                           padding: '0.5rem 0.75rem',
-                          background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                          background: (isUserAuthenticated && !user?.can_manage_favorites)
+                            ? '#9ca3af'
+                            : 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
                           color: 'white',
                           border: 'none',
                           borderRadius: '6px',
-                          cursor: 'pointer',
+                          cursor: (isUserAuthenticated && !user?.can_manage_favorites) ? 'not-allowed' : 'pointer',
                           fontSize: '0.85rem',
                           fontWeight: '600'
                         }}
-                        title="Add to favorites"
+                        title={(isUserAuthenticated && !user?.can_manage_favorites) ? 'Favorites are available for provider accounts' : 'Add to favorites'}
                       >
                         ⭐
                       </button>
