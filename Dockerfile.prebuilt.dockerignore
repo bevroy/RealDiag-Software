@@ -1,0 +1,70 @@
+# Build context rules for Dockerfile.prebuilt only (BuildKit picks this up
+# automatically for `docker build -f Dockerfile.prebuilt`). Same as
+# .dockerignore, except frontend/.next is kept: it is the prebuilt output.
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node
+**/node_modules/
+npm-debug.log
+yarn-error.log
+.nuxt/
+**/out/
+frontend/out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+tests/
+*.test.js
+*.spec.js
+coverage/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Build artifacts and cache
+*.log
+*.txt
+!requirements.txt
+.pytest_cache/
+.coverage
+*.pyc
+load_test*
+
+# Kubernetes
+k8s/
+
+# Misc
+*.log
+.env
+.env.*
+!.env.example
+
+# Build cache is not needed at runtime
+frontend/.next/cache/

@@ -122,7 +122,8 @@ version: "3.9"
 services:
 	web:
 		image: realdiag-frontend:prebuilt
-		build: null
+		build: !reset null
+		pull_policy: never
 YML
 
 docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
