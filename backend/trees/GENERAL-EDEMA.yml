@@ -6,7 +6,7 @@ family: General Medicine
 specialty: Internal Medicine
 secondary_specialties:
   - Primary Care
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: Swelling
 description: Diagnostic decision tree for edema evaluation
@@ -469,3 +469,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

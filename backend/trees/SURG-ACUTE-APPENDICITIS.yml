@@ -5,7 +5,7 @@ status: draft
 family: Surgery
 specialty: General Surgery
 secondary_specialties: []
-urgency: ''
+urgency: emergent
 urgency_explanation: ''
 chief_complaint: Right lower quadrant pain, abdominal pain, periumbilical pain migrating to RLQ
 description: Systematic evaluation and management of suspected acute appendicitis using clinical criteria, imaging, and surgical decision-making. Emphasizes early recognition, appropriate imaging selection, and timely surgical intervention to prevent perforation and complications.
@@ -321,3 +321,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

@@ -5,7 +5,7 @@ status: draft
 family: infectious_disease
 specialty: Emergency Medicine
 secondary_specialties: []
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -56,12 +56,6 @@ workup:
   - Consider testing if symptoms develop: Lyme serology, Ehrlichia/Anaplasma PCR, Babesia testing
   - Watch for signs of tick-borne illness over next 30 days
 treatment:
-  - Prevention counseling for future tick exposure
-  - Protective clothing (long sleeves, long pants, tucked in)
-  - Insect repellent (DEET 20-30%, picaridin, permethrin on clothing)
-  - Daily tick checks after outdoor activity in endemic areas
-  - Prompt tick removal reduces transmission risk
-treatment_duplicate:
   - Proper tick removal with fine-tipped tweezers
   - Grasp tick close to skin surface and pull upward with steady pressure
   - Avoid twisting or squeezing tick body
@@ -74,6 +68,11 @@ treatment_duplicate:
   - Monitor for signs of infection (cellulitis)
   - Educate about signs/symptoms of tick-borne diseases
   - Return precautions if fever, rash, flu-like illness develop within 30 days
+  - Prevention counseling for future tick exposure
+  - Protective clothing (long sleeves, long pants, tucked in)
+  - Insect repellent (DEET 20-30%, picaridin, permethrin on clothing)
+  - Daily tick checks after outdoor activity in endemic areas
+  - Prompt tick removal reduces transmission risk
 clinical_pearls:
   - Lyme disease transmission requires ≥36-48 hours of attachment for most cases
   - Prophylactic doxycycline reduces Lyme disease risk by 87% if given within 72 hours
@@ -107,3 +106,9 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.

@@ -73,6 +73,14 @@ def test_validator_rejects_nonstandard_urgency(tmp_path):
     assert "High" not in URGENCY_VALUES
 
 
+def test_validator_rejects_empty_urgency(tmp_path):
+    tree = _valid_tree()
+    tree["urgency"] = ""
+    path = tmp_path / "TEST-TREE.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    assert any("Urgency is empty" in e for e in _validate(path).errors)
+
+
 def test_validator_rejects_missing_field(tmp_path):
     tree = _valid_tree()
     del tree["codes"]

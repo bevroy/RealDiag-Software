@@ -95,7 +95,7 @@ export default function TechnicalMedicalPage() {
           <h2 style={styles.h2}>8. Recent Platform Updates</h2>
           <ul style={styles.list}>
             <li>All decision trees now share one standard template: codes (ICD-10, SNOMED CT, ICPC-2) are grouped together, guideline sources are consolidated, and every tree carries a version, review status, and change log.</li>
-            <li>Tree urgency uses three standard levels (emergent, urgent, routine); trees still awaiting a clinician-assigned urgency are tracked for review.</li>
+            <li>Tree urgency uses three standard levels (emergent, urgent, routine); every tree has a level, and levels proposed during standardization are marked in each tree's change log pending clinician confirmation.</li>
             <li>Authentication now revalidates cookie-based sessions against the backend before restricting access.</li>
             <li>Navigation normalizes legacy roles so approved clinical accounts are shown provider-level tools consistently.</li>
             <li>Admin role-management endpoints support updates by email or user ID for onboarding and access corrections.</li>

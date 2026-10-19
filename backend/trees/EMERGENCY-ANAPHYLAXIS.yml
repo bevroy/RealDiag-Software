@@ -5,7 +5,7 @@ status: draft
 family: Emergency Medicine
 specialty: Emergency Medicine
 secondary_specialties: []
-urgency: ''
+urgency: emergent
 urgency_explanation: ''
 chief_complaint: Allergic reaction, difficulty breathing, hives, throat swelling, hypotension after exposure
 description: Rapid recognition and management of anaphylaxis, a life-threatening systemic allergic reaction. Emphasizes immediate epinephrine administration as first-line treatment, airway management, and identification of biphasic reactions. Critical time-sensitive intervention required.
@@ -493,3 +493,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

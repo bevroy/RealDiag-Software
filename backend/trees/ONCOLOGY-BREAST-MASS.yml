@@ -5,7 +5,7 @@ status: draft
 family: Oncology
 specialty: Breast Surgery
 secondary_specialties: []
-urgency: ''
+urgency: urgent
 urgency_explanation: ''
 chief_complaint: Breast lump, breast mass, breast pain, nipple discharge
 description: Systematic evaluation of breast mass with emphasis on triple assessment (clinical exam, imaging, tissue diagnosis) and appropriate use of breast imaging (mammography, ultrasound, MRI). Critical distinction between benign and malignant lesions, and proper referral pathways for biopsy and treatment.
@@ -951,3 +951,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

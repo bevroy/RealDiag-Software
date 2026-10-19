@@ -7,7 +7,7 @@ specialty: Endocrinology
 secondary_specialties:
   - Emergency Medicine
   - Internal Medicine
-urgency: ''
+urgency: emergent
 urgency_explanation: ''
 chief_complaint: Thyrotoxicosis
 description: Diagnostic decision tree for thyroid storm and severe thyrotoxicosis
@@ -339,3 +339,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

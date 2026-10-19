@@ -5,7 +5,7 @@ status: draft
 family: infectious_disease
 specialty: Gastroenterology
 secondary_specialties: []
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -56,10 +56,6 @@ workup:
   - Blood cultures if signs of bacteremia (high fever, sepsis)
   - Consider stool for fecal leukocytes/lactoferrin (indicates inflammatory diarrhea)
 treatment:
-  - Dietary modifications - BRAT diet (bananas, rice, applesauce, toast) initially
-  - Avoid dairy products temporarily (transient lactose intolerance common)
-  - Zinc supplementation in children may reduce duration
-treatment_duplicate:
   - Oral rehydration therapy - first-line for mild-moderate dehydration
   - IV fluids for severe dehydration or inability to tolerate oral intake
   - Antimotility agents (loperamide) generally avoided in suspected bacterial diarrhea
@@ -70,6 +66,9 @@ treatment_duplicate:
   - Avoid antibiotics in suspected STEC/EHEC (E. coli O157:H7) - increases HUS risk
   - Probiotics (Lactobacillus, Saccharomyces boulardii) may reduce duration
   - Report to public health if Salmonella, Shigella, STEC, or outbreak suspected
+  - Dietary modifications - BRAT diet (bananas, rice, applesauce, toast) initially
+  - Avoid dairy products temporarily (transient lactose intolerance common)
+  - Zinc supplementation in children may reduce duration
 clinical_pearls:
   - Bacterial gastroenteritis more likely if fever, bloody diarrhea, severe abdominal pain, fecal leukocytes
   - 'Common bacterial causes: Campylobacter (most common in US), Salmonella, Shigella, E. coli (ETEC, STEC)'
@@ -102,3 +101,9 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.

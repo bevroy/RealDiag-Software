@@ -6,7 +6,7 @@ family: pediatrics
 specialty: Pediatrics
 secondary_specialties:
   - Gastroenterology
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -211,3 +211,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency held a list of red flags; moved to red_flags, urgency left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

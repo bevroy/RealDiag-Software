@@ -6,7 +6,7 @@ family: dermatology
 specialty: Dermatology
 secondary_specialties:
   - Primary Care
-urgency: routine
+urgency: urgent
 urgency_explanation: ''
 chief_complaint: Non-healing skin lesion, growing scaly patch or nodule on sun-exposed area
 description: |
@@ -93,3 +93,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency 'Moderate' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

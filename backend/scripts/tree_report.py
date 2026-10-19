@@ -50,8 +50,13 @@ def row_for(path: Path) -> dict:
         missing.append("codes.snomed")
 
     notes = standardization_notes(tree)
+    changes = [str(e.get("change", "")) for e in tree.get("change_log") or [] if isinstance(e, dict)]
+    urgency_proposed = any(c.startswith("Urgency set to") and "pending clinician confirmation" in c
+                           for c in changes)
     if "treatment_duplicate" in tree:
         duplicate = "yes - merge by hand"
+    elif any(c.startswith("Merged duplicate treatment sections") for c in changes):
+        duplicate = "merged - needs clinical review"
     elif "duplicate treatment key" in notes:
         duplicate = "resolved - empty duplicate removed"
     else:
@@ -62,6 +67,8 @@ def row_for(path: Path) -> dict:
     issues = []
     if not tree.get("urgency"):
         issues.append("missing urgency")
+    elif urgency_proposed:
+        issues.append("urgency pending clinician confirmation")
     if not codes.get("icpc2"):
         issues.append("no ICPC-2 code")
     if no_year:
@@ -72,6 +79,8 @@ def row_for(path: Path) -> dict:
         issues.append("missing sections")
     if duplicate.startswith("yes"):
         issues.append("duplicate treatment")
+    elif duplicate.startswith("merged"):
+        issues.append("merged treatment needs clinical review")
     if tree.get("tree_id") != path.stem:
         issues.append("tree_id differs from file name")
 
@@ -87,6 +96,7 @@ def row_for(path: Path) -> dict:
         "duplicate_treatment": duplicate,
         "urgency": tree.get("urgency", ""),
         "urgency_mapping": mapping,
+        "urgency_pending_confirmation": "yes" if urgency_proposed else "",
         "status": tree.get("status", ""),
     }
 

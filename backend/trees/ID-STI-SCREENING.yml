@@ -5,7 +5,7 @@ status: draft
 family: infectious_disease
 specialty: Preventive Medicine
 secondary_specialties: []
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -57,11 +57,6 @@ workup:
   - Pregnancy test in women of reproductive age
   - Site-specific testing: pharyngeal, rectal, urogenital based on exposure sites
 treatment:
-  - Treatment initiated based on positive results
-  - Expedited partner therapy (EPT) for chlamydia and gonorrhea where legal
-  - Contraception counseling and provision
-  - Substance use screening and counseling (associated with STI risk)
-treatment_duplicate:
   - Counseling about safer sex practices
   - Consistent condom use with all partners
   - Limiting number of sexual partners
@@ -73,6 +68,10 @@ treatment_duplicate:
   - Routine rescreening at 3 months if positive test
   - Annual or more frequent screening based on risk
   - STI prevention education and resources
+  - Treatment initiated based on positive results
+  - Expedited partner therapy (EPT) for chlamydia and gonorrhea where legal
+  - Contraception counseling and provision
+  - Substance use screening and counseling (associated with STI risk)
 clinical_pearls:
   - Most STIs are asymptomatic - screening is essential for detection and prevention
   - Annual chlamydia screening recommended for all sexually active women <25
@@ -107,3 +106,9 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.

@@ -258,15 +258,15 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
         if field in data and not data.get(field):
             result.add_error(file_path.name, f"Required field is empty: {field}")
 
-    # Urgency: empty (not yet assigned) or one of the standard values
+    # Urgency must be one of the standard values
     urgency = data.get("urgency")
-    if urgency not in ("", None) and urgency not in URGENCY_VALUES:
+    if "urgency" in data and urgency in ("", None):
+        result.add_error(file_path.name, f"Urgency is empty (use one of: {', '.join(URGENCY_VALUES)})")
+    elif "urgency" in data and urgency not in URGENCY_VALUES:
         result.add_error(
             file_path.name,
             f"Non-standard urgency {urgency!r} (use one of: {', '.join(URGENCY_VALUES)})"
         )
-    elif "urgency" in data and urgency in ("", None):
-        result.add_info(file_path.name, "Urgency not yet assigned")
 
     if "status" in data and data.get("status") not in STATUS_VALUES:
         result.add_error(file_path.name, f"Invalid status {data.get('status')!r} (use one of: {', '.join(STATUS_VALUES)})")

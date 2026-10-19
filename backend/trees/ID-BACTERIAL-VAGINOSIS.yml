@@ -5,7 +5,7 @@ status: draft
 family: infectious_disease
 specialty: Gynecology
 secondary_specialties: []
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -55,11 +55,6 @@ workup:
   - NAAT testing available but not standard of care
   - Rule out co-infections (trichomoniasis, candidiasis, STIs)
 treatment:
-  - Routine screening not recommended in asymptomatic patients
-  - Screen before surgical procedures (hysterectomy, abortion, IUD insertion)
-  - Test of cure not recommended if symptoms resolve
-  - Educate about increased risk of STIs and PID
-treatment_duplicate:
   - First-line: Metronidazole 500 mg PO BID x 7 days
   - Alternative: Metronidazole gel 0.75% intravaginal daily x 5 days
   - Alternative: Clindamycin cream 2% intravaginal at bedtime x 7 days
@@ -70,6 +65,10 @@ treatment_duplicate:
   - Suppressive therapy: Metronidazole gel 0.75% twice weekly x 4-6 months
   - Partner treatment not recommended (not sexually transmitted)
   - Probiotics may help prevent recurrence but evidence limited
+  - Routine screening not recommended in asymptomatic patients
+  - Screen before surgical procedures (hysterectomy, abortion, IUD insertion)
+  - Test of cure not recommended if symptoms resolve
+  - Educate about increased risk of STIs and PID
 clinical_pearls:
   - BV is not considered sexually transmitted but is associated with sexual activity and multiple partners
   - Caused by overgrowth of anaerobes (Gardnerella vaginalis, Prevotella, Mobiluncus) with decreased lactobacilli
@@ -100,3 +99,9 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.

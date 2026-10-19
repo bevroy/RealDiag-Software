@@ -8,7 +8,7 @@ secondary_specialties:
   - Internal Medicine
   - Cardiology
   - Emergency Medicine
-urgency: ''
+urgency: urgent
 urgency_explanation: ''
 chief_complaint: ''
 description: Decision tree for evaluating shortness of breath
@@ -437,3 +437,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

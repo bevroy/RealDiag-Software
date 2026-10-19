@@ -5,7 +5,7 @@ status: draft
 family: infectious_disease
 specialty: Gastroenterology
 secondary_specialties: []
-urgency: ''
+urgency: routine
 urgency_explanation: ''
 chief_complaint: ''
 description: ''
@@ -54,10 +54,6 @@ workup:
   - Consider stool culture to rule out bacterial if bloody diarrhea or severe symptoms
   - Assess hydration status (vital signs, mucous membranes, skin turgor, urine output)
 treatment:
-  - Isolate patient to prevent transmission (contact precautions)
-  - Hand hygiene with soap and water (alcohol sanitizers less effective for norovirus)
-  - Disinfect contaminated surfaces with bleach solution
-treatment_duplicate:
   - Supportive care - cornerstone of treatment
   - Oral rehydration solution (ORS) - WHO formula or commercial products (Pedialyte)
   - Small frequent sips if nausea/vomiting; avoid large volumes at once
@@ -70,6 +66,9 @@ treatment_duplicate:
   - Zinc supplementation in children 6 months-5 years (10-20 mg daily x 10-14 days)
   - Return to normal diet as tolerated; avoid prolonged dietary restrictions
   - Breastfeeding should continue in infants
+  - Isolate patient to prevent transmission (contact precautions)
+  - Hand hygiene with soap and water (alcohol sanitizers less effective for norovirus)
+  - Disinfect contaminated surfaces with bleach solution
 clinical_pearls:
   - Norovirus is most common cause of viral gastroenteritis in all age groups (58% of cases in US)
   - Rotavirus was leading cause in children before vaccine; now rare in vaccinated populations
@@ -103,3 +102,9 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.
