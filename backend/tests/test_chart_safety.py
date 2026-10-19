@@ -257,13 +257,15 @@ def test_evaluator_exception_is_reported_as_failed(engine, monkeypatch):
 
 # --- 4. Missing data ---------------------------------------------------------
 
-def test_unknown_criteria_are_shown_as_insufficient_data(engine):
-    evaluations = engine.evaluate_patient(_patient())  # no labs or vitals at all
-    assert {e.diagnosis_id for e in evaluations} == {ACS, "ID-SEPSIS", "ENDO-DKA"}
-    for evaluation in evaluations:
-        assert evaluation.evaluation_status == "insufficient data"
-        assert evaluation.missing_tests
-        assert "missing" in evaluation.status_reason
+def test_nothing_measured_shows_no_cards(engine):
+    assert engine.evaluate_patient(_patient()) == []   # no labs or vitals at all
+
+
+def test_unreadable_result_is_shown_as_insufficient_data(engine):
+    evaluations = engine.evaluate_patient(_patient(labs=[_lab(CommonLOINC.TROPONIN_I, 0.5, "", high=0.04)]))
+    acs = _by_id(evaluations, ACS)
+    assert acs.evaluation_status == "insufficient data"
+    assert "missing" in acs.status_reason
 
 
 def test_missing_birth_date_gives_unknown_age():

@@ -48,13 +48,21 @@ def test_each_evaluator_matches_previous_output(engine, case, legacy_id):
     assert serialize(result) == GOLDEN[case]["raw"][legacy_id]
 
 
+def _still_shown(golden_entry):
+    """Acute cards are now shown only when a criterion is met or a result could
+    not be read (an unusable result carries a value); a card that only said
+    "not measured" is no longer shown."""
+    return bool(golden_entry["criteria_met"]) or any(c["value"] for c in golden_entry["criteria_unknown"])
+
+
 @pytest.mark.parametrize("case", sorted(CASES))
 def test_shown_results_match_previous_output(engine, case):
-    """Same diagnoses shown (after insufficient-data labelling and filtering)."""
+    """Same content for every card still shown (after insufficient-data labelling)."""
     unchanged_trees = {LEGACY_TO_TREE[k] for k in UNCHANGED}
     shown = {e.diagnosis_id: serialize(e) for e in engine.evaluate_patient(patient(case), now=NOW)
              if e.diagnosis_id in unchanged_trees}
-    expected = {LEGACY_TO_TREE[k]: v for k, v in GOLDEN[case]["shown"].items() if k in UNCHANGED}
+    expected = {LEGACY_TO_TREE[k]: v for k, v in GOLDEN[case]["shown"].items()
+                if k in UNCHANGED and _still_shown(v)}
     assert shown == expected
 
 

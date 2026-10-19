@@ -22,7 +22,10 @@ backend/scripts/validate_rules.py):
     criteria:
       finding_label: diabetes mellitus
       source: ADA Standards of Care in Diabetes-2026, Section 2
-      display: always | when_found     # when_found = chronic condition
+      display: when_met | when_found | always
+                                       # when_met: acute, shown when a criterion is met
+                                       # when_found: chronic, shown when consistent/possible
+      finding_template: "..."           # optional wording; {label} {source} {screens}
       probability: met_over_all | met_over_known
       suggest_when: {count_met: 1, group: <optional>}
       confirm: {min_abnormal_results: 2}            # optional
@@ -100,7 +103,8 @@ class DiagnosisEvaluation:
     # Condition already on the patient's problem list
     known_condition: bool = False
     known_condition_text: Optional[str] = None
-    # "always" (acute: shown even with missing data) | "when_found" (chronic)
+    # "when_met" (acute: shown when a criterion is met) | "when_found" (chronic:
+    # shown when consistent/possible) | "always"
     display: str = "always"
     sources: List[str] = field(default_factory=list)
     review_status: Optional[str] = None
@@ -495,6 +499,11 @@ def _groups_met(item_results: List[_ItemResult], groups: List[str]) -> bool:
     return all(_count_met(item_results, g) >= 1 for g in groups)
 
 
+def _screens_positive(rule: Dict[str, Any], item_results: List[_ItemResult]) -> List[str]:
+    """Labels of the `any` sub-rules that hold, e.g. ["SIRS >= 2"]."""
+    return [r.get("label", "") for r in rule.get("any", []) if _rule_holds(r, item_results) and r.get("label")]
+
+
 def _rule_holds(rule: Dict[str, Any], item_results: List[_ItemResult]) -> bool:
     """suggest_when rule: {count_met, group} | {all_groups: [...]} | {any: [rules]}."""
     if "any" in rule:
@@ -594,8 +603,13 @@ def evaluate_tree(tree: Dict[str, Any], patient_data: PatientData, now: Optional
     if known_text:
         recommendations.append(f"Known condition on the problem list ({known_text}).")
     if finding == "consistent":
-        prefix = "Current findings consistent with" if known_text else "Findings consistent with"
-        recommendations.append(f"{prefix} {label}; consider evaluation per {source}.")
+        template = criteria.get("finding_template")
+        if template:
+            screens = " and ".join(_screens_positive(suggest, item_results))
+            recommendations.append(template.format(label=label, source=source, screens=screens))
+        else:
+            prefix = "Current findings consistent with" if known_text else "Findings consistent with"
+            recommendations.append(f"{prefix} {label}; consider evaluation per {source}.")
         recommendations.extend(criteria.get("next_steps") or [])
     elif finding == "possible":
         need = confirm.get("min_abnormal_results")
@@ -731,10 +745,13 @@ class SmartDiagnosticEngine:
                     f"{tree.get('name', tree_id)} could not be assessed: patient sex is not recorded.")
                 continue
 
-            if (evaluation.display == "when_found" and evaluation.finding is None
-                    and not evaluation.has_unusable_results):
-                # Chronic condition with nothing found: hide it. If the data it
-                # needs could not be retrieved, report that once, globally.
+            nothing_found = (
+                (evaluation.display == "when_found" and evaluation.finding is None)
+                or (evaluation.display == "when_met" and not evaluation.criteria_met and evaluation.finding is None)
+            )
+            if nothing_found and not evaluation.has_unusable_results:
+                # Nothing relevant measured or found: hide the card. If the data
+                # it needs could not be retrieved, report that once, globally.
                 status = patient_data.retrieval_status or {}
                 for item in tree["criteria"]["items"]:
                     resource = "labs" if item.get("resource", "lab") == "lab" else "vitals"
@@ -750,19 +767,20 @@ class SmartDiagnosticEngine:
             evaluations.append(evaluation)
 
         evaluations.sort(key=lambda x: x.probability, reverse=True)
-        # Hide low-probability acute results only when they were fully
-        # evaluated; failed and insufficient-data evaluations are always shown,
-        # and so are chronic findings (consistent or possible).
+        # Hide low-probability results only when they were fully evaluated;
+        # failed and insufficient-data evaluations are always shown, and so are
+        # findings (consistent or possible) and acute cards with a met criterion.
         evaluations = [
             e for e in evaluations
             if e.probability > 0.3
             or e.severity in ["high", "critical"]
             or e.evaluation_status != "evaluated"
-            or (e.display == "when_found" and e.finding is not None)
+            or e.finding is not None
+            or (e.display == "when_met" and e.criteria_met)
         ]
 
         labels = {"labs": "lab results", "vitals": "vital signs"}
-        warnings = [f"Chronic conditions could not be assessed: {labels.get(r, r)} could not be retrieved."
+        warnings = [f"Some conditions could not be assessed: {labels.get(r, r)} could not be retrieved."
                     for r in unassessable] + not_applicable
         logger.info(f"Generated {len(evaluations)} diagnostic evaluations")
         return EncounterAssessment(evaluations=evaluations, warnings=warnings)

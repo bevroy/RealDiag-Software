@@ -44,7 +44,8 @@ def evaluate(engine, tree_id, data):
 def test_qsofa_two_still_screens_positive(engine):
     s = evaluate(engine, "ID-SEPSIS", patient(vitals=[vital("9279-1", 24, "/min"), vital("8480-6", 95, "mmHg")]))
     assert s.finding == "consistent" and s.severity == "critical"
-    assert "qSOFA >= 2 or SIRS >= 2" in s.recommendations[0]
+    assert s.recommendations[0].startswith(
+        "Screen positive (qSOFA >= 2); consider sepsis evaluation if infection is suspected, per Surviving Sepsis Campaign")
 
 
 def test_sirs_screens_positive_when_qsofa_does_not(engine):

@@ -129,7 +129,7 @@ nodes: []
 criteria:
   finding_label: acute coronary syndrome
   source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
-  display: always
+  display: when_met
   probability: met_over_all
   suggest_when:
     count_met: 1
@@ -225,3 +225,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured).

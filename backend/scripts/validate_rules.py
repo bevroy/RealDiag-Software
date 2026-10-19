@@ -341,7 +341,7 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
 
 CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
 CRITERIA_ROLES = {"core", "supporting"}
-CRITERIA_DISPLAY = {"always", "when_found"}
+CRITERIA_DISPLAY = {"always", "when_met", "when_found"}
 CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
 SEVERITY_LEVELS = {"low", "moderate", "high", "critical", "unknown", "not rated"}
 SEVERITY_RULE_TYPES = {"reference_multiple", "count_met", "unusable", "value", "any_met", "all_groups"}

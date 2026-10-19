@@ -57,10 +57,9 @@ def shown(engine, data):
 
 # --- Condition 1: chronic cards hidden only when retrieved and not done -------
 
-def test_chronic_conditions_hidden_when_tests_not_done(engine):
+def test_no_cards_when_nothing_relevant_was_measured(engine):
     results, warnings = shown(engine, patient())
-    assert not CHRONIC & set(results)
-    assert ACUTE <= set(results)          # acute still shown as insufficient data
+    assert results == {}                  # neither chronic nor acute cards
     assert warnings == []
 
 
@@ -68,13 +67,13 @@ def test_failed_lab_query_gives_global_warning_not_silence(engine):
     status = dict(ALL_RETRIEVED, labs="failed")
     results, warnings = shown(engine, patient(status=status))
     assert not CHRONIC & set(results)
-    assert "Chronic conditions could not be assessed: lab results could not be retrieved." in warnings
+    assert "Some conditions could not be assessed: lab results could not be retrieved." in warnings
 
 
 def test_failed_vitals_query_gives_global_warning(engine):
     status = dict(ALL_RETRIEVED, vitals="not available")
     _, warnings = shown(engine, patient(status=status))
-    assert "Chronic conditions could not be assessed: vital signs could not be retrieved." in warnings
+    assert "Some conditions could not be assessed: vital signs could not be retrieved." in warnings
 
 
 def test_chronic_condition_with_unreadable_result_is_shown_as_insufficient_data(engine):
@@ -351,9 +350,125 @@ def test_evaluate_patient_api_returns_assessment_fields(monkeypatch):
     finally:
         app.dependency_overrides.pop(smart_router.get_active_smart_session, None)
 
-    assert "Chronic conditions could not be assessed: vital signs could not be retrieved." in body["assessment_warnings"]
+    assert "Some conditions could not be assessed: vital signs could not be retrieved." in body["assessment_warnings"]
     k = next(e for e in body["evaluations"] if e["diagnosis_id"] == "NEPHRO-HYPERKALEMIA")
     assert k["known_condition"] is True and k["known_condition_text"] == "Hyperkalemia"
     assert k["finding"] == "consistent" and k["display"] == "when_found"
     assert k["criteria_met"][0]["source"].startswith("UK Kidney Association")
     assert k["review_status_label"] == "Draft - under clinical review."
+
+
+# --- Acute cards: shown only when a criterion is met ----------------------------
+
+def test_acute_card_shown_when_a_criterion_is_met(engine):
+    results, _ = shown(engine, patient(labs=[lab("2345-7", 320, "mg/dL")]))
+    assert "ENDO-DKA" in results and results["ENDO-DKA"].finding is None   # D met, K/A not measured
+    assert "CARD-ACUTE-CORONARY-SYNDROME" not in results and "ID-SEPSIS" not in results
+
+
+def test_acute_supporting_finding_alone_does_not_show_a_card(engine):
+    tachy = [VitalSign(code="8867-4", display="HR", value=130, unit="/min", effective_date=NOW)]
+    assert "CARD-ACUTE-CORONARY-SYNDROME" not in shown(engine, patient(vitals=tachy))[0]
+
+
+def test_failed_retrieval_warns_for_acute_conditions_too(engine):
+    _, warnings = shown(engine, patient(status=dict(ALL_RETRIEVED, labs="failed", vitals="failed")))
+    assert "Some conditions could not be assessed: lab results could not be retrieved." in warnings
+    assert "Some conditions could not be assessed: vital signs could not be retrieved." in warnings
+
+
+# --- Sepsis wording ------------------------------------------------------------
+
+def test_sepsis_screen_wording_names_the_positive_screen(engine):
+    sirs = [VitalSign(code="8310-5", display="T", value=38.7, unit="Cel", effective_date=NOW),
+            VitalSign(code="8867-4", display="HR", value=112, unit="/min", effective_date=NOW)]
+    s = shown(engine, patient(vitals=sirs))[0]["ID-SEPSIS"]
+    assert s.recommendations[0].startswith(
+        "Screen positive (SIRS >= 2); consider sepsis evaluation if infection is suspected, per")
+    both = sirs + [VitalSign(code="9279-1", display="RR", value=26, unit="/min", effective_date=NOW),
+                   VitalSign(code="8480-6", display="SBP", value=92, unit="mmHg", effective_date=NOW)]
+    s = shown(engine, patient(vitals=both))[0]["ID-SEPSIS"]
+    assert s.recommendations[0].startswith("Screen positive (qSOFA >= 2 and SIRS >= 2); consider sepsis evaluation")
+
+
+# --- Results cut off at the page cap ----------------------------------------------
+
+def _paged_client(monkeypatch, total, page=100):
+    """FHIRClient whose Observation queries return `total` results, `page` per page."""
+    from backend.services import fhir_client as fhir
+    client = FHIRClient("https://fhir.example.test/R4", "c", access_token="t")
+
+    def obs(i):
+        day = (NOW - timedelta(days=i)).strftime("%Y-%m-%d")
+        return {"status": "final", "code": {"coding": [{"system": "http://loinc.org", "code": "2823-3"}]},
+                "valueQuantity": {"value": 4.2, "unit": "mmol/L"}, "effectiveDateTime": f"{day}T08:00:00Z"}
+
+    def bundle(offset):
+        entries = [{"resource": obs(i)} for i in range(offset, min(offset + page, total))]
+        links = [{"relation": "next", "url": f"https://fhir.example.test/R4/next?o={offset + page}"}] \
+            if offset + page < total else []
+        return {"entry": entries, "link": links}
+
+    class Resp:
+        def __init__(self, body):
+            self.body = body
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.body
+
+    monkeypatch.setattr(client, "_query_resource", lambda resource, params: bundle(0))
+    monkeypatch.setattr(fhir.requests, "get", lambda url, headers=None: Resp(bundle(int(url.split("o=")[1]))))
+    monkeypatch.setattr(client, "get_patient", lambda pid: {"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+    for name in ("get_conditions", "get_medications", "get_allergies"):
+        monkeypatch.setattr(client, name, lambda pid: [])
+    return client
+
+
+def test_page_cap_adds_visible_cut_off_warning(monkeypatch):
+    from backend.services import fhir_client as fhir
+    monkeypatch.setattr(fhir, "CRITERIA_MAX_PAGES", 3)
+    client = _paged_client(monkeypatch, total=450)
+    data = client.get_patient_data("p", observation_requirements={"labs": {"codes": ["2823-3"], "lookback_days": 730}})
+    cut = [w for w in data.data_warnings if w.startswith("Lab results cut off")]
+    assert len(cut) >= 1
+    newest = NOW.strftime("%Y-%m-%d")
+    oldest = (NOW - timedelta(days=299)).strftime("%Y-%m-%d")
+    criteria_note = next(w for w in cut if "300 results" in w)
+    assert f"dated {oldest} to {newest}" in criteria_note
+    assert "were not retrieved and were not assessed" in criteria_note
+    assert "since" in criteria_note
+
+
+def test_no_cut_off_warning_when_everything_fits(monkeypatch):
+    client = _paged_client(monkeypatch, total=80)
+    data = client.get_patient_data("p", observation_requirements={"labs": {"codes": ["2823-3"], "lookback_days": 730}})
+    assert not any("cut off" in w for w in data.data_warnings)
+
+
+def test_cut_off_warning_reaches_the_api(monkeypatch):
+    from fastapi.testclient import TestClient
+    from backend.main import app
+    from backend.services import smart_router
+
+    data = patient(labs=[lab("2823-3", 6.2, "mmol/L")])
+    data.truncation_warnings = ["Lab results cut off: the page limit was reached after 1000 results, dated 2025-03-01 to 2026-10-18. Other results since 2024-10-19 were not retrieved and were not assessed."]
+
+    class FakeClient:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def get_patient_data(self, patient_id, observation_requirements=None):
+            return data
+
+    monkeypatch.setattr(smart_router, "FHIRClient", FakeClient)
+    session = SimpleNamespace(patient_id="p", ehr_vendor="epic", fhir_access_token="t",
+                              expires_at=datetime.utcnow() + timedelta(minutes=30))
+    app.dependency_overrides[smart_router.get_active_smart_session] = lambda: session
+    try:
+        body = TestClient(app).post("/smart/evaluate-patient", json={"patient_id": "p"}).json()
+    finally:
+        app.dependency_overrides.pop(smart_router.get_active_smart_session, None)
+    assert any(w.startswith("Lab results cut off") for w in body["data_warnings"])

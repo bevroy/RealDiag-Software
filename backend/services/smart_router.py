@@ -380,7 +380,7 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
         allergy_count=_count("allergies", allergies),
         allergies=allergies[:10],
         data_status=status,
-        data_warnings=retrieval_warnings(status),
+        data_warnings=retrieval_warnings(status) + list(getattr(patient_data, "truncation_warnings", []) or []),
         data_notes=list(getattr(patient_data, "data_notes", []) or []),
     )
 
@@ -666,7 +666,7 @@ async def evaluate_patient(
             patient_id=request.patient_id,
             evaluations=responses,
             data_status=status,
-            data_warnings=retrieval_warnings(status),
+            data_warnings=retrieval_warnings(status) + list(getattr(patient_data, "truncation_warnings", []) or []),
             data_notes=list(getattr(patient_data, "data_notes", []) or []),
             assessment_warnings=list(assessment.warnings),
             clinical_review_notice=review_notice(),
@@ -768,7 +768,7 @@ async def get_patient_handoff_summary(
                 new_abnormal_labs=[_lab_summary(lab) for lab in raw_updates["new_abnormal_labs"]],
                 new_vital_count=_update_count("vitals", raw_updates["new_vitals"]),
                 data_status=update_status,
-                data_warnings=retrieval_warnings(update_status),
+                data_warnings=raw_updates.get("data_warnings") or retrieval_warnings(update_status),
                 new_conditions=[
                     HandoffUpdateItem(
                         name=(

@@ -80,7 +80,7 @@ nodes: []
 criteria:
   finding_label: diabetic ketoacidosis (2024 consensus criteria)
   source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
-  display: always
+  display: when_met
   probability: met_over_known
   suggest_when:
     all_groups:
@@ -205,3 +205,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: DKA criteria updated to the 2024 ADA/EASD/JBDS/AACE/DTS consensus (glucose >= 200 mg/dL or known diabetes; beta-hydroxybutyrate >= 3.0 mmol/L; pH < 7.3 and/or bicarbonate < 18 mmol/L). Pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured).

@@ -89,6 +89,15 @@ def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
 
+def truncation_warning(resource: str, event: Dict[str, Any]) -> str:
+    """Visible note when the page limit stopped a query before all results were retrieved."""
+    label = RESOURCE_LABELS.get(resource, resource.capitalize())
+    covered = (f", dated {event['first']} to {event['last']}" if event.get("first") else "")
+    window = f" since {event['since']}" if event.get("since") else ""
+    return (f"{label} cut off: the page limit was reached after {event['count']} results{covered}. "
+            f"Other results{window} were not retrieved and were not assessed.")
+
+
 def _record_status(status: Dict[str, str], resource: str, outcome: str) -> None:
     """Keep the worst outcome when one resource needs several queries."""
     if resource not in status or _STATUS_RANK[outcome] > _STATUS_RANK[status[resource]]:
@@ -195,10 +204,12 @@ class PatientData:
     retrieval_status: Dict[str, str] = field(default_factory=dict)
     # Notes about data that was skipped (blank values, excluded entries, ...)
     data_notes: List[str] = field(default_factory=list)
+    # "Lab results cut off: ..." when the page limit stopped a query early
+    truncation_warnings: List[str] = field(default_factory=list)
 
     @property
     def data_warnings(self) -> List[str]:
-        return retrieval_warnings(self.retrieval_status)
+        return retrieval_warnings(self.retrieval_status) + list(self.truncation_warnings)
 
     def get_lab(self, loinc_code: str) -> Optional[LabResult]:
         """Get most recent lab result by LOINC code."""
@@ -248,6 +259,7 @@ class FHIRClient:
         self._access_token = access_token
         self._token_expiry = None
         self._token_url = token_url
+        self._truncations: List[Dict[str, Any]] = []
 
     def authenticate(self, authorization_code: str, redirect_uri: str) -> Dict[str, Any]:
         """
@@ -373,12 +385,21 @@ class FHIRClient:
             bundle = response.json()
             observations.extend(entry["resource"] for entry in bundle.get("entry", []) or [])
             pages += 1
+        if any(link.get("relation") == "next" for link in bundle.get("link", []) or []):
+            dates = sorted(o["effectiveDateTime"][:10] for o in observations if o.get("effectiveDateTime"))
+            self._truncations.append({
+                "count": len(observations), "pages": pages,
+                "first": dates[0] if dates else None, "last": dates[-1] if dates else None,
+                "since": date_range[2:] if date_range and len(date_range) > 2 else None,
+            })
+            logger.warning(f"Observation query cut off at {pages} page(s), {len(observations)} results")
         return observations
 
     def get_criteria_observations(
-        self, patient_id: str, codes: List[str], lookback_days: int, max_pages: int = CRITERIA_MAX_PAGES
+        self, patient_id: str, codes: List[str], lookback_days: int, max_pages: Optional[int] = None
     ) -> List[Dict[str, Any]]:
         """Observations for specific LOINC codes over a longer lookback (chart-evaluation criteria)."""
+        max_pages = max_pages or CRITERIA_MAX_PAGES
         since = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
         code_param = ",".join(f"{LOINC_SYSTEM}|{c}" for c in codes)
         return self.get_observations(patient_id, code=code_param, date_range=f"ge{since}", max_pages=max_pages)
@@ -634,10 +655,12 @@ class FHIRClient:
         since_str = since.strftime("%Y-%m-%d")
         status: Dict[str, str] = {}
         notes: List[str] = []
+        truncated: List[str] = []
 
         lab_observations = self._fetch_tracked(
             "labs", status,
             lambda: self.get_observations(patient_id, category="laboratory", date_range=f"ge{since_str}"),
+            truncated,
         )
         new_labs = [lab for lab in (self.parse_observation(o, notes) for o in lab_observations) if lab]
         new_abnormal_labs = [lab for lab in new_labs if lab.is_abnormal]
@@ -645,6 +668,7 @@ class FHIRClient:
         vital_observations = self._fetch_tracked(
             "vitals", status,
             lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"ge{since_str}"),
+            truncated,
         )
         new_vitals = [v for o in vital_observations for v in self.parse_vitals(o, notes)]
 
@@ -671,7 +695,7 @@ class FHIRClient:
             "new_conditions": new_conditions,
             "new_medications": new_medications,
             "retrieval_status": status,
-            "data_warnings": retrieval_warnings(status),
+            "data_warnings": retrieval_warnings(status) + truncated,
             "data_notes": notes,
         }
 
@@ -692,17 +716,26 @@ class FHIRClient:
             kept.append(resource)
         return kept
 
-    @staticmethod
-    def _fetch_tracked(resource: str, status: Dict[str, str], fetch) -> List[Dict[str, Any]]:
+    def _fetch_tracked(self, resource: str, status: Dict[str, str], fetch,
+                       truncation_warnings: Optional[List[str]] = None) -> List[Dict[str, Any]]:
         """Run one FHIR fetch and record whether it succeeded.
 
         403/404/501 mean the resource type isn't enabled or supported for this
         app/EHR ("not available"); any other error is "failed". Either way the
         caller gets [] and must report the gap rather than "none found".
         """
+        truncations = getattr(self, "_truncations", None)
+        if truncations is None:
+            truncations = self._truncations = []
+        before = len(truncations)
         try:
             result = fetch()
             _record_status(status, resource, RETRIEVED)
+            if truncation_warnings is not None:
+                for event in truncations[before:]:
+                    message = truncation_warning(resource, event)
+                    if message not in truncation_warnings:
+                        truncation_warnings.append(message)
             return result
         except requests.RequestException as e:
             code = getattr(getattr(e, "response", None), "status_code", None)
@@ -765,12 +798,14 @@ class FHIRClient:
 
         gender = patient.get("gender", "unknown")
         status: Dict[str, str] = {}
+        truncated: List[str] = []
 
         # Get labs (last LAB_LOOKBACK_DAYS days)
         lab_since = (datetime.now() - timedelta(days=LAB_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
         lab_observations = self._fetch_tracked(
             "labs", status,
             lambda: self.get_observations(patient_id, category="laboratory", date_range=f"gt{lab_since}"),
+            truncated,
         )
         labs = [lab for lab in (self.parse_observation(o, notes) for o in lab_observations) if lab]
 
@@ -779,6 +814,7 @@ class FHIRClient:
         vital_observations = self._fetch_tracked(
             "vitals", status,
             lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"gt{vital_since}"),
+            truncated,
         )
         vitals = [v for o in vital_observations for v in self.parse_vitals(o, notes)]
 
@@ -790,6 +826,7 @@ class FHIRClient:
             extra = self._fetch_tracked(
                 resource, status,
                 lambda need=need: self.get_criteria_observations(patient_id, need["codes"], need["lookback_days"]),
+                truncated,
             )
             if resource == "labs":
                 labs = _merge_results(labs, [r for r in (self.parse_observation(o, notes) for o in extra) if r])
@@ -821,6 +858,7 @@ class FHIRClient:
             allergies=allergies,
             retrieval_status=status,
             data_notes=notes,
+            truncation_warnings=truncated,
         )
 
         logger.info(
