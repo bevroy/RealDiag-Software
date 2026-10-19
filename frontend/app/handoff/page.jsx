@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
+import { ClinicalReviewNotice } from '../../components/ClinicalReview';
 
 /**
  * Shift-Handoff Summary
@@ -112,7 +113,7 @@ function Handoff() {
     );
   }
 
-  const { full_summary, updates, narrative, admission_start, timeframe_source } = data;
+  const { full_summary, updates, narrative, admission_start, timeframe_source, clinical_review_notice } = data;
   const dataWarnings = [...new Set([...(full_summary.data_warnings || []), ...((updates && updates.data_warnings) || [])])];
 
   return (
@@ -131,6 +132,7 @@ function Handoff() {
       </div>
 
       <div style={styles.content}>
+        <ClinicalReviewNotice notice={clinical_review_notice} />
         {dataWarnings.length > 0 && (
           <div style={styles.dataWarningBox} role="alert">
             <strong>⚠️ Incomplete chart data</strong>

@@ -63,3 +63,20 @@ Please confirm the wording and the guideline named for each.
   e.g. MONA with aspirin 325 mg) are served only by `/education/flashcards`
   and shown only on the Education page. They never appear alongside
   patient results or search results.
+
+## How review status is shown and cleared
+
+- Every tree's `status` is shown to users as a label: `draft` → "Draft - under
+  clinical review.", `review` → "In clinical review - not yet approved.",
+  `approved` → "Clinically reviewed.", `retired` → "Retired - not for clinical use."
+- While any content is unreviewed, every screen and API response that carries
+  tree content, urgency, treatment or severity ratings shows this notice
+  (`clinical_review_notice` in the API):
+  "Clinical content is under review. Urgency levels, treatment information, and
+  severity thresholds are proposed and have not completed clinical review.
+  Verify against current guidelines before acting."
+- To mark a tree reviewed: set its `status: approved` and add a change_log entry
+  naming the reviewer and date. The label updates on the next deploy.
+- The notice disappears automatically once **no tree is `draft` or `review`**
+  and `SEVERITY_THRESHOLDS_REVIEWED` in `backend/services/clinical_review.py` is
+  set to `True` (only after section 3 and 4 thresholds are signed off).

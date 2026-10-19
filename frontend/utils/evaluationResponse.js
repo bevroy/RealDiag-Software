@@ -18,6 +18,7 @@ function parseEvaluationResponse(body) {
       dataStatus: {},
       dataWarnings: [UNKNOWN_COMPLETENESS_WARNING],
       dataNotes: [],
+      clinicalReviewNotice: undefined,
     }
   }
   if (!body || typeof body !== 'object' || !Array.isArray(body.evaluations)) {
@@ -26,6 +27,7 @@ function parseEvaluationResponse(body) {
       dataStatus: {},
       dataWarnings: ['The evaluation response could not be read; no evaluations are shown.'],
       dataNotes: [],
+      clinicalReviewNotice: undefined,
     }
   }
   return {
@@ -33,6 +35,8 @@ function parseEvaluationResponse(body) {
     dataStatus: body.data_status || {},
     dataWarnings: Array.isArray(body.data_warnings) ? body.data_warnings : [],
     dataNotes: Array.isArray(body.data_notes) ? body.data_notes : [],
+    // undefined when the API predates the field (UI then shows the default notice)
+    clinicalReviewNotice: body.clinical_review_notice,
   }
 }
 

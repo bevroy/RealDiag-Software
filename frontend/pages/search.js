@@ -4,11 +4,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { AuthGuard } from '../utils/AuthGuard';
 import PageHeader from '../components/PageHeader';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 
 export default function Search() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState(null);
   const [families, setFamilies] = useState([]);
@@ -55,6 +57,7 @@ export default function Search() {
 
       const data = await response.json();
       setSearchResults(data.results || []);
+      setReviewNotice(data.clinical_review_notice);
     } catch (err) {
       setError('Failed to search. Please try again.');
       console.error('Search error:', err);
@@ -82,6 +85,7 @@ export default function Search() {
 
       const data = await response.json();
       setSearchResults(data.results || []);
+      setReviewNotice(data.clinical_review_notice);
       setSearchQuery('');
     } catch (err) {
       setError('Failed to filter. Please try again.');
@@ -435,6 +439,7 @@ export default function Search() {
               }}>
                 Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}
               </h2>
+              <ClinicalReviewNotice notice={reviewNotice} />
 
               <div style={{
                 display: 'grid',
@@ -469,6 +474,7 @@ export default function Search() {
                       }}>
                         {result.name}
                       </h3>
+                      <ReviewStatusBadge status={result.review_status} label={result.review_status_label} />
                       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                         {result.icd10 && (
                           <span style={{

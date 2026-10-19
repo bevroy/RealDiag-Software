@@ -3,6 +3,7 @@ import styles from '../styles/Diagnose.module.css'
 import PatientContext from '../components/PatientContext'
 import ContextResults from '../components/ContextResults'
 import PageHeader from '../components/PageHeader'
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview'
 
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
@@ -18,6 +19,7 @@ export default function Diagnose() {
   })
   const [patientContext, setPatientContext] = useState({})
   const [result, setResult] = useState(null)
+  const [treesNotice, setTreesNotice] = useState(undefined)
   const [loading, setLoading] = useState(false)
   const [apiBase, setApiBase] = useState('')
   const [showWizardMode, setShowWizardMode] = useState(true) // Toggle between wizard and traditional
@@ -34,7 +36,10 @@ export default function Diagnose() {
     if (!apiBase) return
     fetch(`${apiBase}/diagnostic/trees`)
       .then(res => res.json())
-      .then(data => setTrees(data.trees || []))
+      .then(data => {
+        setTrees(data.trees || [])
+        setTreesNotice(data.clinical_review_notice)
+      })
       .catch(err => console.error('Failed to load trees:', err))
   }, [apiBase])
 
@@ -264,6 +269,7 @@ export default function Diagnose() {
         {/* Tree Selection */}
         <section className={styles.section} style={{display: (!showWizardMode || currentStep === 1) ? 'block' : 'none'}}>
           <h2>1. Select Diagnostic Tree</h2>
+          <ClinicalReviewNotice notice={treesNotice} />
           <div className={styles.treeSelection}>
             {trees.map(tree => (
               <button
@@ -275,6 +281,11 @@ export default function Diagnose() {
                 }}
               >
                 {tree.title}
+                {tree.review_status_label && (
+                  <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 500, opacity: 0.8 }}>
+                    {tree.review_status_label}
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -458,6 +469,23 @@ export default function Diagnose() {
             {result && (
               <section className={`${styles.section} ${styles.results}`}>
                 <h2>📋 Clinical Decision Support Results</h2>
+                {result.tree && (
+                  <p style={{ margin: '0 0 0.75rem', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <strong>{result.tree.title || result.tree.id}</strong>
+                    <ReviewStatusBadge status={result.tree.review_status} label={result.tree.review_status_label} />
+                  </p>
+                )}
+                <ClinicalReviewNotice notice={result.error ? undefined : result.clinical_review_notice} />
+                {result.error && (
+                  <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fef2f2', border: '1px solid #ef4444', borderRadius: '8px', color: '#7f1d1d' }}>
+                    <strong>This tree could not be evaluated.</strong> {result.error}
+                  </div>
+                )}
+                {result.warning && (
+                  <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: '8px', color: '#78350f' }}>
+                    <strong>{result.evaluated === false ? 'Not evaluated automatically.' : 'Note:'}</strong> {result.warning}
+                  </div>
+                )}
                 
                 {result.path && result.path.length > 0 && (
                   <div className={styles.resultCard}>

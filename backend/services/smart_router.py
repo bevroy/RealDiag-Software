@@ -33,6 +33,7 @@ from datetime import datetime, timedelta
 
 from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC, RETRIEVED, retrieval_warnings
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
+from ..services.clinical_review import review_notice
 from ..services.patient_history_service import PatientHistoryService
 from ..services.symptom_search import (
     rank_diagnoses,
@@ -191,6 +192,8 @@ class EvaluatePatientResponse(BaseModel):
     data_status: Dict[str, str]
     data_warnings: List[str]
     data_notes: List[str] = []
+    # Severity ratings and recommendations are not yet clinically reviewed
+    clinical_review_notice: Optional[str] = None
 
 
 class PatientSummaryResponse(BaseModel):
@@ -251,6 +254,7 @@ class HandoffSummaryResponse(BaseModel):
     full_summary: PatientSummaryResponse
     updates: Optional[HandoffUpdatesResponse]
     narrative: str
+    clinical_review_notice: Optional[str] = None
 
 
 class SmartSessionStatusResponse(BaseModel):
@@ -284,6 +288,7 @@ class AmbulatoryDifferentialResponse(BaseModel):
     # Per data type: "retrieved" | "failed" | "not available"
     data_status: Dict[str, str] = {}
     data_warnings: List[str] = []
+    clinical_review_notice: Optional[str] = None
 
 
 def get_ehr_config():
@@ -641,6 +646,7 @@ async def evaluate_patient(
             data_status=status,
             data_warnings=retrieval_warnings(status),
             data_notes=list(getattr(patient_data, "data_notes", []) or []),
+            clinical_review_notice=review_notice(),
         )
 
     except Exception as e:
@@ -769,7 +775,8 @@ async def get_patient_handoff_summary(
             timeframe_source=timeframe_source,
             full_summary=full_summary,
             updates=updates_response,
-            narrative=narrative
+            narrative=narrative,
+            clinical_review_notice=review_notice(),
         )
 
     except HTTPException:
@@ -895,6 +902,7 @@ async def get_ambulatory_differential(
             differential=differential,
             data_status=history_status,
             data_warnings=data_warnings,
+            clinical_review_notice=review_notice(),
         )
 
     except HTTPException:

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 
 const FAMILIES = [
   { id: "allergy", label: "Allergy/Immunology" },
@@ -39,6 +40,7 @@ export default function ReferencePage() {
   const [expandedId, setExpandedId] = useState(null);
   const [selectedFamily, setSelectedFamily] = useState("all");
   const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [displayCount, setDisplayCount] = useState(100); // Start with 100 items to show more diagnoses initially
 
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function ReferencePage() {
           if (!cancelled && treesData.trees) {
             setTreeCount(treesData.trees.length);
           }
+          if (!cancelled) setReviewNotice(treesData.clinical_review_notice);
         }
         
         // Progressive loading - load families sequentially to show results faster
@@ -182,6 +185,9 @@ export default function ReferencePage() {
       <RoleBasedNavigation />
 
       <PageHeader title="Reference: Diagnostic Rules & Codes" />
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1rem' }}>
+        <ClinicalReviewNotice notice={reviewNotice} />
+      </div>
       
       <div style={{ background: 'white', borderRadius: '12px', padding: '1rem', marginBottom: '1rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <p style={{ marginBottom: 8, fontSize: 14, color: "#64748b" }}>
@@ -391,6 +397,7 @@ export default function ReferencePage() {
                 <div>
                   <div style={{ fontWeight: 600 }}>{label}</div>
                   <div style={{ fontSize: 11, color: "#777" }}>{r.id}</div>
+                  <ReviewStatusBadge status={r.review_status} label={r.review_status_label} style={{ marginTop: 4 }} />
                 </div>
                 <div>
                   {presentations.length === 0 ? (

@@ -4,6 +4,7 @@ from typing import Any, Dict, List
 import yaml
 from fastapi import APIRouter, HTTPException, Request
 
+from .clinical_review import review_fields, review_notice
 from .tree_schema import icd10_codes, primary_source, snomed_codes, source_texts, tree_id as get_tree_id, tree_name
 
 # Import rate limiter
@@ -126,6 +127,7 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
             "source": source,
             "urgency": tree_data.get("urgency", ""),
             "status": tree_data.get("status", ""),
+            **review_fields(tree_data.get("status")),
           })
       except Exception as e:
         print(f"Error loading tree {tree_file}: {e}")
@@ -156,6 +158,7 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
           "source": data.get("source", "Clinical Practice Guidelines"),
           "count": len(rules),
           "rules": rules,
+          "clinical_review_notice": review_notice(),
         }
     except Exception as e:
       print(f"Error loading endocrinology rules: {e}")
@@ -172,6 +175,7 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
     "source": "RealDiag Clinical Decision Trees",
     "count": len(trees_sorted),
     "rules": trees_sorted,
+    "clinical_review_notice": review_notice(),
   }
 
 
@@ -280,4 +284,5 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     "source": "RealDiag Clinical Decision Trees",
     "count": len(all_rules_sorted),
     "rules": all_rules_sorted,
+    "clinical_review_notice": review_notice(),
   }

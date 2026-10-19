@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import yaml
 from .tree_schema import entry_point, icd10_codes, node_format, node_list, tree_id as _tree_id, tree_name
+from .clinical_review import review_fields, review_notice
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 def _lower_list(xs): return [str(x).lower() for x in xs or []]
 def _match(preds, facts):
@@ -68,15 +69,24 @@ class DecisionTreeEngine:
                     doc["nodes"] = node_list(doc)
                 trees[tree_id] = doc
         return trees
-    def list(self): return [{"id":t["id"],"title":t.get("title")} for t in self.trees.values()]
+    def list(self):
+        return [{"id": t["id"], "title": t.get("title"), **review_fields(t.get("status"))}
+                for t in self.trees.values()]
+    def _tree_summary(self, t):
+        return {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t), **review_fields(t.get("status"))}
     def evaluate(self, tree_id: str, patient: Dict[str, Any]):
+        result = self._evaluate(tree_id, patient)
+        if "error" not in result:
+            # Every evaluation carries the tree's review status and the global notice
+            result["clinical_review_notice"] = review_notice()
+        return result
+    def _evaluate(self, tree_id: str, patient: Dict[str, Any]):
         t=self.trees.get(tree_id)
         if not t: return {"error": f"tree '{tree_id}' not found"}
 
         if not t.get("nodes"):
-            tree_icd10 = icd10_codes(t)
             return {
-                "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10},
+                "tree": self._tree_summary(t),
                 "path": [],
                 "tests": [],
                 "provisional_dx": [],
@@ -110,7 +120,7 @@ class DecisionTreeEngine:
         fmt = t.get("node_format")
         if fmt in ("questionnaire", "mixed", "content"):
             return {
-                "tree": {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t)},
+                "tree": self._tree_summary(t),
                 "path": [],
                 "tests": [],
                 "provisional_dx": [],
@@ -151,11 +161,8 @@ class DecisionTreeEngine:
                     nxt=branch["default"]
             cur=nxt
         
-        # Get ICD-10 code from the tree metadata
-        tree_icd10 = icd10_codes(t)
-
         return {
-            "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10}, 
+            "tree": self._tree_summary(t), 
             "path": path, 
             "tests": sorted(set(tests)), 
             "provisional_dx": sorted(set(dx)), 

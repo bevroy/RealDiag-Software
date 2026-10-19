@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEvaluationResponse } from '../../utils/evaluationResponse';
+import { ClinicalReviewNotice } from '../../components/ClinicalReview';
 
 /**
  * Inpatient
@@ -44,6 +45,7 @@ function Inpatient() {
   const [patientData, setPatientData] = useState(null);
   const [evaluations, setEvaluations] = useState([]);
   const [evaluationWarnings, setEvaluationWarnings] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
 
   const [handoffData, setHandoffData] = useState(null);
   const [handoffLoading, setHandoffLoading] = useState(false);
@@ -90,6 +92,7 @@ function Inpatient() {
       const parsed = parseEvaluationResponse(await evalResponse.json());
       setEvaluations(parsed.evaluations);
       setEvaluationWarnings(parsed.dataWarnings);
+      setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching chart summary:', err);
@@ -179,7 +182,7 @@ function Inpatient() {
 
       <div style={styles.content}>
         {activeTab === 'summary' && (
-          <ChartSummaryTab patientData={patientData} evaluations={evaluations} evaluationWarnings={evaluationWarnings} />
+          <ChartSummaryTab patientData={patientData} evaluations={evaluations} evaluationWarnings={evaluationWarnings} reviewNotice={reviewNotice} />
         )}
         {activeTab === 'handoff' && (
           <HandoffTab
@@ -197,7 +200,7 @@ function Inpatient() {
   );
 }
 
-function ChartSummaryTab({ patientData, evaluations, evaluationWarnings }) {
+function ChartSummaryTab({ patientData, evaluations, evaluationWarnings, reviewNotice }) {
   const warnings = uniqueWarnings(patientData.data_warnings, evaluationWarnings);
   return (
     <>
@@ -206,6 +209,7 @@ function ChartSummaryTab({ patientData, evaluations, evaluationWarnings }) {
         <AllergyBanner allergies={patientData.allergies} />
       )}
       <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
+      <ClinicalReviewNotice notice={reviewNotice} />
       {evaluations.length === 0 ? (
         warnings.length > 0 ? (
           <div style={styles.incompleteResults}>
@@ -243,12 +247,13 @@ function HandoffTab({ loading, error, data, sinceOverride, setSinceOverride, onA
     return null;
   }
 
-  const { full_summary, updates, narrative, admission_start, timeframe_source } = data;
+  const { full_summary, updates, narrative, admission_start, timeframe_source, clinical_review_notice } = data;
   const warnings = uniqueWarnings(full_summary.data_warnings, updates && updates.data_warnings);
 
   return (
     <>
       <DataWarnings warnings={warnings} notes={full_summary.data_notes} />
+      <ClinicalReviewNotice notice={clinical_review_notice} />
       {full_summary.allergies && full_summary.allergies.length > 0 && (
         <AllergyBanner allergies={full_summary.allergies} />
       )}

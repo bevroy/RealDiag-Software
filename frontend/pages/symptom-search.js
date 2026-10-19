@@ -12,6 +12,7 @@ import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../
 import { isAuthenticated, getCurrentUser, authenticatedFetch } from '../utils/auth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
 import { assessUrgency, getUrgencyBadge } from '../utils/timeSensitiveAlerts';
 import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor, getSeverityIcon } from '../utils/drugInteractions';
@@ -83,6 +84,7 @@ export default function SymptomSearch() {
   const [respiratoryRate, setRespiratoryRate] = useState('');
   const [oxygenSaturation, setOxygenSaturation] = useState('');
   const [results, setResults] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [needsLogin, setNeedsLogin] = useState(false);
@@ -753,6 +755,7 @@ export default function SymptomSearch() {
 
       const data = await response.json();
       setResults(data.results || []);
+      setReviewNotice(data.clinical_review_notice);
       
       // Save to recent searches (local)
       if (data.results && data.results.length > 0) {
@@ -1947,6 +1950,8 @@ export default function SymptomSearch() {
             borderRadius: '8px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
           }}>
+            {results.length > 0 && <ClinicalReviewNotice notice={reviewNotice} />}
+
             {/* Results Header with Controls */}
             <div style={{ 
               display: 'flex', 
@@ -2055,6 +2060,7 @@ export default function SymptomSearch() {
                           <h3 style={{ margin: '0 0 0.75rem', color: '#1a202c', fontSize: '1.2rem', fontWeight: '600' }}>
                             {result.label}
                           </h3>
+                          <ReviewStatusBadge status={result.review_status} label={result.review_status_label} style={{ marginBottom: '0.5rem' }} />
                           {result.ai_suggested && (
                             <div style={aiLabelStyle} role="note">
                               🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
@@ -2590,6 +2596,7 @@ export default function SymptomSearch() {
                                   
                                   {expandedRedFlags[idx] && (
                                     <div style={{ padding: '1rem', background: 'white' }}>
+                                      <ClinicalReviewNotice notice={reviewNotice} style={{ fontSize: '0.8rem' }} />
                                       {redFlags.map((flag, flagIdx) => (
                                         <div key={flagIdx} style={{ marginBottom: flagIdx < redFlags.length - 1 ? '1.5rem' : '0' }}>
                                           <div style={{ marginBottom: '0.75rem' }}>
@@ -2655,6 +2662,7 @@ export default function SymptomSearch() {
                                   
                                   {expandedUrgency[idx] && (
                                     <div style={{ padding: '1rem', background: 'white' }}>
+                                      <ClinicalReviewNotice notice={reviewNotice} style={{ fontSize: '0.8rem' }} />
                                       <div style={{ marginBottom: '1rem' }}>
                                         <strong>Time to Treatment:</strong> {urgencyInfo.timeToTreatment}
                                       </div>
@@ -2968,6 +2976,7 @@ export default function SymptomSearch() {
                         <div style={{ fontWeight: '600', color: '#1a202c', marginBottom: '0.25rem' }}>
                           {result.label}
                         </div>
+                        <ReviewStatusBadge status={result.review_status} label={result.review_status_label} style={{ marginBottom: '0.25rem' }} />
                         {result.ai_suggested && (
                           <div style={aiLabelStyle} role="note">
                             🤖 {result.ai_label || 'AI-generated; not clinically validated.'}

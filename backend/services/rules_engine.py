@@ -5,6 +5,7 @@ from typing import Any, Dict, List
 import yaml
 
 from .tree_schema import applies_to, icd10_codes, snomed_codes
+from .clinical_review import review_fields
 
 # Updated to use trees directory (individual tree files, not family-grouped rules)
 RULES_PATH = Path(__file__).resolve().parents[1] / "trees"
@@ -48,6 +49,7 @@ class RulesEngine:
                     'age_max': population['age_max'],
                     'urgency': tree_data.get('urgency', ''),
                     'status': tree_data.get('status', ''),
+                    **review_fields(tree_data.get('status')),
                 }
                 
                 # Group by family
@@ -101,31 +103,41 @@ class RulesEngine:
                         "id": rule.get("id"),
                         "label": rule.get("label"),
                         "presentations": rule.get("presentations", []),
-                        "icd10": rule.get("icd10", [])
+                        "icd10": rule.get("icd10", []),
+                        "review_status": rule.get("review_status"),
+                        "review_status_label": rule.get("review_status_label"),
                     })
                     continue
                 
                 # Search in presentations
-                presentations_text = " ".join(rule.get("presentations", [])).lower()
+                # Items may be "Key: value" pairs parsed as dicts; join them as text
+                presentations_text = " ".join(
+                    " ".join(f"{k}: {v}" for k, v in p.items()) if isinstance(p, dict) else str(p)
+                    for p in rule.get("presentations", []) or []
+                ).lower()
                 if query in presentations_text:
                     results.append({
                         "family": fam,
                         "id": rule.get("id"),
                         "label": rule.get("label"),
                         "presentations": rule.get("presentations", []),
-                        "icd10": rule.get("icd10", [])
+                        "icd10": rule.get("icd10", []),
+                        "review_status": rule.get("review_status"),
+                        "review_status_label": rule.get("review_status_label"),
                     })
                     continue
                 
                 # Search in ICD-10 codes
-                icd10_text = " ".join(rule.get("icd10", [])).lower()
+                icd10_text = " ".join(str(c) for c in rule.get("icd10", []) or []).lower()
                 if query in icd10_text:
                     results.append({
                         "family": fam,
                         "id": rule.get("id"),
                         "label": rule.get("label"),
                         "presentations": rule.get("presentations", []),
-                        "icd10": rule.get("icd10", [])
+                        "icd10": rule.get("icd10", []),
+                        "review_status": rule.get("review_status"),
+                        "review_status_label": rule.get("review_status_label"),
                     })
         
         return results

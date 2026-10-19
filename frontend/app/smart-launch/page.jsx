@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEvaluationResponse } from '../../utils/evaluationResponse';
+import { ClinicalReviewNotice } from '../../components/ClinicalReview';
 
 /**
  * SmartLaunch Component
@@ -41,6 +42,7 @@ function SmartLaunch() {
   const [patientData, setPatientData] = useState(null);
   const [evaluations, setEvaluations] = useState([]);
   const [dataWarnings, setDataWarnings] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
 
   useEffect(() => {
     const patientId = searchParams.get('patient_id');
@@ -96,6 +98,7 @@ function SmartLaunch() {
       const parsed = parseEvaluationResponse(await evalResponse.json());
       setEvaluations(parsed.evaluations);
       setDataWarnings(parsed.dataWarnings);
+      setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
 
     } catch (err) {
@@ -153,6 +156,7 @@ function SmartLaunch() {
         )}
 
         <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
+        <ClinicalReviewNotice notice={reviewNotice} />
 
         {evaluations.length === 0 ? (
           dataWarnings.length > 0 ? (

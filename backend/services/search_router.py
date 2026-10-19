@@ -12,6 +12,7 @@ import sys
 import os
 from backend.services.auth_service import get_current_user
 from backend.services.tree_schema import icd10_codes, snomed_codes as tree_snomed_codes
+from backend.services.clinical_review import review_fields, review_notice
 from backend.services.content_labels import (
     AI_CONTENT_LABEL,
     HOMEOPATHY_VALIDATION_STATEMENT,
@@ -286,6 +287,7 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
         'urgency': urgency,
         'urgency_explanation': urgency_explanation,
         'status': tree_data.get('status', ''),
+        **review_fields(tree_data.get('status')),
         'clinical_pearls': sorted(list(clinical_pearls)),
         'presentations': sorted(list(presentations)),
         'workup': sorted(list(workup_tests)),
@@ -349,6 +351,7 @@ async def search_diagnoses(
     # Search through all tree files
     if not TREES_PATH.exists():
         return {
+            'clinical_review_notice': review_notice(),
             'query': q,
             'count': 0,
             'results': []
@@ -612,6 +615,7 @@ async def search_diagnoses(
                     pass
     
     return {
+        'clinical_review_notice': review_notice(),
         'query': q,
         'count': len(results),
         'results': results,
@@ -631,6 +635,7 @@ async def search_by_family(
     
     if not TREES_PATH.exists():
         return {
+            'clinical_review_notice': review_notice(),
             'family': family,
             'count': 0,
             'results': []
@@ -657,6 +662,7 @@ async def search_by_family(
     results.sort(key=lambda x: x.get('name', ''))
     
     return {
+        'clinical_review_notice': review_notice(),
         'family': family,
         'count': len(results),
         'results': results

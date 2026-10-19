@@ -44,3 +44,10 @@ test.each([null, undefined, 'error', { detail: 'Evaluation failed' }])(
     expect(parsed.dataWarnings[0]).toMatch(/could not be read/)
   }
 )
+
+test('clinical review notice is passed through, including null once reviewed', () => {
+  const notice = 'Clinical content is under review.'
+  expect(parseEvaluationResponse({ evaluations: [], clinical_review_notice: notice }).clinicalReviewNotice).toBe(notice)
+  expect(parseEvaluationResponse({ evaluations: [], clinical_review_notice: null }).clinicalReviewNotice).toBeNull()
+  expect(parseEvaluationResponse([]).clinicalReviewNotice).toBeUndefined()
+})

@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 import math
 import os
 from .decision_tree_engine import DecisionTreeEngine
+from .clinical_review import review_notice
 from .auth_service import get_current_user, get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
 from .medication_safety_service import MedicationSafetyService
@@ -406,7 +407,7 @@ def list_trees(
     """
     trees = _trees.list()
     
-    result = {"trees": trees}
+    result = {"trees": trees, "clinical_review_notice": review_notice()}
     
     # Add personalized data for authenticated users
     if current_user:

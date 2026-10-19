@@ -98,6 +98,7 @@ export default function UserGuidePage() {
             <li><strong>Top matches:</strong> Most relevant differential candidates.</li>
             <li><strong>Matched presentations:</strong> Findings that aligned with your input.</li>
             <li><strong>Tests and referrals:</strong> Suggested workup and specialty escalation.</li>
+            <li><strong>Under clinical review:</strong> While clinical content is still being reviewed, results show an amber notice and each diagnosis shows its review status (for example "Draft - under clinical review."). Verify urgency, treatment and severity information against current guidelines before acting.</li>
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>

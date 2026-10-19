@@ -21,6 +21,7 @@ import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, snomed_codes
 from backend.services.content_labels import AI_CONTENT_LABEL
+from backend.services.clinical_review import review_fields, review_notice
 from backend.services.auth_service import get_current_user
 from backend.services.rbac_service import get_rbac_service, Permission
 
@@ -267,12 +268,16 @@ class DiagnosisMatch(BaseModel):
     has_tree: bool = True  # Whether a decision tree exists
     ai_suggested: bool = False  # Whether suggested by AI (no tree yet)
     ai_label: Optional[str] = None  # AI_CONTENT_LABEL whenever ai_suggested is true
+    review_status: Optional[str] = None  # tree status, e.g. "draft" (None for AI suggestions)
+    review_status_label: Optional[str] = None  # e.g. "Draft - under clinical review."
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
     query_symptoms: List[str]
     total_results: int
     results: List[DiagnosisMatch]
+    # Present while clinical content is unreviewed; None once review is complete
+    clinical_review_notice: Optional[str] = None
 
 
 # Helper functions
@@ -431,6 +436,7 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
                     'family': family,
+                    'status': tree_data.get('status'),
                     'applies_to': population['sex'],  # Sex restriction ('male'/'female') or None
                     'age_min': population['age_min'],  # Age restrictions
                     'age_max': population['age_max'],
@@ -1071,7 +1077,8 @@ async def rank_diagnoses(
                     clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
                     management=rule.get('management'),
                     tests=rule.get('tests'),
-                    referrals=rule.get('referrals')
+                    referrals=rule.get('referrals'),
+                    **review_fields(rule.get('status')),
                 )
 
                 results.append(diagnosis_match)
@@ -1172,7 +1179,8 @@ async def rank_diagnoses(
     response_data = SymptomSearchResponse(
         query_symptoms=effective_symptoms,
         total_results=len(top_results),
-        results=top_results
+        results=top_results,
+        clinical_review_notice=review_notice(),
     )
 
     return response_data, ai_tree_info
@@ -1488,6 +1496,8 @@ class PatientDiagnosisTopic(BaseModel):
     matched_symptoms: List[str]
     icd10_reference: List[str] = []
     discuss_with_provider: Optional[List[str]] = None
+    review_status: Optional[str] = None
+    review_status_label: Optional[str] = None
 
 
 class PatientSymptomSearchResponse(BaseModel):
@@ -1496,6 +1506,7 @@ class PatientSymptomSearchResponse(BaseModel):
     disclaimer: str
     total_topics: int
     topics: List[PatientDiagnosisTopic]
+    clinical_review_notice: Optional[str] = None
 
 
 def _rank_to_likelihood(rank: int, n: int) -> str:
@@ -1525,6 +1536,8 @@ def _to_patient_topic(match: DiagnosisMatch, rank: int, n: int) -> PatientDiagno
         matched_symptoms=match.matched_presentations,
         icd10_reference=match.icd10 or [],
         discuss_with_provider=_soften_referrals(match.referrals),
+        review_status=match.review_status,
+        review_status_label=match.review_status_label,
     )
 
 
@@ -1565,4 +1578,5 @@ async def build_patient_symptom_search_response(
         disclaimer=PATIENT_DISCLAIMER,
         total_topics=len(topics),
         topics=topics,
+        clinical_review_notice=review_notice(),
     )
