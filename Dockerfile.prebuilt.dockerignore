@@ -1,6 +1,7 @@
 # Build context rules for Dockerfile.prebuilt only (BuildKit picks this up
 # automatically for `docker build -f Dockerfile.prebuilt`). Same as
-# .dockerignore, except frontend/.next is kept: it is the prebuilt output.
+# .dockerignore, except the Next.js build output is kept: it is the prebuilt
+# frontend (next.config.js sets distDir: 'out', so it lives in frontend/out).
 # Git
 .git
 .gitignore
@@ -23,8 +24,6 @@ build/
 npm-debug.log
 yarn-error.log
 .nuxt/
-**/out/
-frontend/out/
 
 # IDE
 .vscode/
@@ -67,4 +66,5 @@ k8s/
 !.env.example
 
 # Build cache is not needed at runtime
-frontend/.next/cache/
+frontend/out/cache/
+frontend/.next/

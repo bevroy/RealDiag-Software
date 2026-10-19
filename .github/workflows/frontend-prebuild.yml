@@ -39,9 +39,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
+          # next.config.js sets distDir: 'out', so the build output is frontend/out
           include-hidden-files: true
           path: |
-            frontend/.next
+            frontend/out
             frontend/public
             frontend/package-lock.json
 
@@ -63,7 +64,7 @@ jobs:
           path: frontend
 
       - name: Show files (debug)
-        run: ls -la frontend && test -d frontend/.next
+        run: ls -la frontend && test -d frontend/out
 
       - name: Build image (no push)
         run: |

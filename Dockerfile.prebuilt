@@ -1,12 +1,12 @@
 # Frontend image built from an already-built Next.js project: the CI job
-# runs `npm run build` and passes frontend/.next in as an artifact, so the
-# heavy build stays out of the Docker build (useful on small runners).
-# Dockerfile.prebuilt.dockerignore keeps frontend/.next in the build context
-# (the repo-wide .dockerignore excludes it).
+# runs `npm run build` and passes the output (frontend/out - next.config.js
+# sets distDir: 'out') in as an artifact, so the heavy build stays out of the
+# Docker build (useful on small runners). Dockerfile.prebuilt.dockerignore
+# keeps frontend/out in the build context (the repo .dockerignore excludes it).
 FROM node:20-alpine
 WORKDIR /app/frontend
 COPY frontend/ /app/frontend
-# Runtime dependencies only; the build output is already in .next
+# Runtime dependencies only; the build output is already in frontend/out
 RUN npm ci --omit=dev --legacy-peer-deps && npm cache clean --force
 ENV NODE_ENV=production
 EXPOSE 3000
