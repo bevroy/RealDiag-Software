@@ -86,7 +86,7 @@ crisis_resources: []
 homeopathy:
   validation_statement: This content has not been clinically validated.
   remedies: []
-entry_point: ''
+entry_point: initial_presentation
 nodes:
   - id: initial_presentation
     type: question
@@ -954,3 +954,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to urgent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Set entry_point to first node (initial_presentation); it was missing.

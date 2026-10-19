@@ -27,6 +27,8 @@ import argparse
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from services.tree_schema import (  # noqa: E402
     HOMEOPATHY_VALIDATION_STATEMENT,
+    node_format,
+    node_list,
     REQUIRED_FIELDS as REQUIRED_TREE_FIELDS,
     REQUIRED_NON_EMPTY as REQUIRED_NON_EMPTY_TREE_FIELDS,
     STATUS_VALUES,
@@ -65,6 +67,7 @@ class ValidationResult:
         self.errors = []
         self.warnings = []
         self.info = []
+        self.node_formats = {}  # node format -> tree ids (see tree_schema.node_format)
         
     def add_error(self, file_path, message):
         self.errors.append(f"❌ {file_path}: {message}")
@@ -311,8 +314,17 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
                 result.add_error(file_path.name, f"Node #{idx+1}: Missing 'id' field")
     elif not isinstance(nodes, dict):
         result.add_error(file_path.name, "nodes must be a list or mapping")
-    if nodes and not data.get("entry_point"):
-        result.add_warning(file_path.name, "Tree has nodes but no entry_point")
+        return
+    if nodes:
+        node_ids = {n.get("id") for n in node_list(data)}
+        entry = data.get("entry_point")
+        if not entry:
+            result.add_error(file_path.name, "Tree has nodes but no entry_point")
+        elif entry not in node_ids:
+            result.add_error(file_path.name, f"entry_point '{entry}' does not match any node id")
+
+    fmt = node_format(data)
+    result.node_formats[fmt] = result.node_formats.get(fmt, []) + [file_path.stem]
 
 
 def generate_report(result: ValidationResult, rules_files: List[Path], trees_files: List[Path]):
@@ -427,6 +439,13 @@ def main():
         validate_decision_tree(file_path, result)
         print("✓")
     
+    # Node formats: only "conditional" trees are evaluated automatically by the engine
+    if result.node_formats:
+        print("\nNode formats:")
+        for fmt, ids in sorted(result.node_formats.items()):
+            listed = f": {', '.join(sorted(ids))}" if fmt not in ("none", "conditional") else ""
+            print(f"  • {fmt} ({len(ids)}){listed}")
+
     # Print results
     result.print_summary()
     

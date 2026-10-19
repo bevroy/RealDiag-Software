@@ -87,7 +87,7 @@ crisis_resources: []
 homeopathy:
   validation_statement: This content has not been clinically validated.
   remedies: []
-entry_point: ''
+entry_point: initial_assessment
 nodes:
   - id: initial_assessment
     type: question
@@ -324,3 +324,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to emergent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Set entry_point to first node (initial_assessment); it was missing.

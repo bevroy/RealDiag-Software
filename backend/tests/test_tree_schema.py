@@ -93,3 +93,21 @@ def test_validator_rejects_duplicate_keys(tmp_path):
     path = tmp_path / "TEST-TREE.yml"
     path.write_text(yaml.safe_dump(_valid_tree(), sort_keys=False) + "treatment: []\n")
     assert any("Duplicate top-level key: treatment" in e for e in _validate(path).errors)
+
+
+def test_validator_rejects_nodes_without_entry_point(tmp_path):
+    tree = _valid_tree()
+    tree["nodes"] = [{"id": "start", "when": {}}]
+    tree["entry_point"] = ""
+    path = tmp_path / "TEST-TREE.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    assert any("no entry_point" in e for e in _validate(path).errors)
+
+
+def test_validator_rejects_entry_point_not_matching_node(tmp_path):
+    tree = _valid_tree()
+    tree["nodes"] = [{"id": "start", "when": {}}]
+    tree["entry_point"] = "missing"
+    path = tmp_path / "TEST-TREE.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    assert any("does not match any node id" in e for e in _validate(path).errors)

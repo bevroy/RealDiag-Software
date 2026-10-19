@@ -15,6 +15,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from services.tree_schema import node_format  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[2]
 TREES_DIR = ROOT / "backend" / "trees"
 DEFAULT_OUT = ROOT / "docs" / "tree_standardization_report.csv"
@@ -81,6 +84,8 @@ def row_for(path: Path) -> dict:
         issues.append("duplicate treatment")
     elif duplicate.startswith("merged"):
         issues.append("merged treatment needs clinical review")
+    if node_format(tree) in ("questionnaire", "mixed"):
+        issues.append("questionnaire tree not evaluated automatically")
     if tree.get("tree_id") != path.stem:
         issues.append("tree_id differs from file name")
 
@@ -98,6 +103,7 @@ def row_for(path: Path) -> dict:
         "urgency_mapping": mapping,
         "urgency_pending_confirmation": "yes" if urgency_proposed else "",
         "status": tree.get("status", ""),
+        "node_format": node_format(tree),
     }
 
 

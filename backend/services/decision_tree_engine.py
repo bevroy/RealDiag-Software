@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import yaml
-from .tree_schema import entry_point, icd10_codes, tree_id as _tree_id, tree_name
+from .tree_schema import entry_point, icd10_codes, node_format, node_list, tree_id as _tree_id, tree_name
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 def _lower_list(xs): return [str(x).lower() for x in xs or []]
 def _match(preds, facts):
@@ -62,10 +62,10 @@ class DecisionTreeEngine:
                 doc["id"] = tree_id
                 doc["title"] = tree_name(doc)
                 doc["entry"] = entry_point(doc)
+                doc["node_format"] = node_format(doc)
                 # Convert nodes from dict to list if needed
                 if isinstance(doc.get("nodes"), dict):
-                    nodes_dict = doc["nodes"]
-                    doc["nodes"] = [{"id": k, **v} for k, v in nodes_dict.items()]
+                    doc["nodes"] = node_list(doc)
                 trees[tree_id] = doc
         return trees
     def list(self): return [{"id":t["id"],"title":t.get("title")} for t in self.trees.values()]
@@ -82,13 +82,39 @@ class DecisionTreeEngine:
                 "provisional_dx": [],
                 "referrals": [],
                 "trace": [],
+                "evaluated": False,
                 "warning": (
                     f"Tree '{tree_id}' has no interactive decision-node structure; "
                     "use /search/by-symptoms for presentation-based matching."
                 ),
             }
 
-        cur=t.get("entry"); path=[]; tests=[]; dx=[]; trace_all=[]; seen=set()
+        node_ids = {n.get("id") for n in t.get("nodes", [])}
+        if not t.get("entry"):
+            return {"error": f"tree '{tree_id}' has decision nodes but no entry_point; it cannot be evaluated"}
+        if t["entry"] not in node_ids:
+            return {"error": f"tree '{tree_id}' entry_point '{t['entry']}' does not match any node id; it cannot be evaluated"}
+
+        if t.get("node_format") in ("questionnaire", "mixed"):
+            return {
+                "tree": {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t)},
+                "path": [],
+                "tests": [],
+                "provisional_dx": [],
+                "referrals": [],
+                "trace": [],
+                "evaluated": False,
+                "node_format": t["node_format"],
+                "warning": (
+                    f"Tree '{tree_id}' is an interactive questionnaire that requires clinician "
+                    "answers at each step; it was NOT evaluated automatically. The empty test, "
+                    "diagnosis and referral lists in this result do not mean there are no "
+                    "findings. Work through the questionnaire "
+                    "with the patient, or use /search/by-symptoms for presentation-based matching."
+                ),
+            }
+
+        cur=t.get("entry"); path=[]; tests=[]; dx=[]; referrals=[]; trace_all=[]; seen=set()
         for _ in range(64):
             if cur is None or cur in seen: break
             seen.add(cur)
@@ -97,7 +123,7 @@ class DecisionTreeEngine:
             ok,tr=_match(node.get("when") or {}, patient)
             trace_all.extend([f"[{cur}] "+s for s in tr])
             path.append(cur); tests.extend(node.get("tests") or []); dx.extend(node.get("suggest_dx") or [])
-            referrals=[]; referrals.extend(node.get("referrals") or [])
+            referrals.extend(node.get("referrals") or [])
             nxt=None
             # Handle "next" field which can be a list of conditional branches
             next_branches = node.get("next") or []
@@ -127,5 +153,6 @@ class DecisionTreeEngine:
             "tests": sorted(set(tests)), 
             "provisional_dx": sorted(set(dx)), 
             "referrals": sorted(set(referrals)), 
-            "trace": trace_all
+            "trace": trace_all,
+            "evaluated": True,
         }

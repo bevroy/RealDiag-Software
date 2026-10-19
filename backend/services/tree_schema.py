@@ -148,3 +148,35 @@ def differential_names(tree: Dict[str, Any]) -> List[str]:
         elif d:
             out.append(str(d))
     return out
+
+
+# Node formats (see node_format):
+#   none          - no nodes; presentation-based tree only
+#   conditional   - nodes branch on `when` / `next` predicates the engine evaluates
+#   questionnaire - nodes ask questions with `options` (label/next) a clinician answers
+#   content       - nodes hold content only, with no branching
+#   mixed         - both conditional and questionnaire nodes
+NODE_FORMATS = ("none", "conditional", "questionnaire", "content", "mixed")
+
+
+def node_list(tree: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Nodes as a list of dicts, whether stored as a list or an id -> node mapping."""
+    nodes = tree.get("nodes") or []
+    if isinstance(nodes, dict):
+        return [{"id": k, **(v or {})} for k, v in nodes.items()]
+    return [n for n in nodes if isinstance(n, dict)]
+
+
+def node_format(tree: Dict[str, Any]) -> str:
+    nodes = node_list(tree)
+    if not nodes:
+        return "none"
+    has_options = any("options" in n for n in nodes)
+    has_conditions = any("when" in n or "next" in n for n in nodes)
+    if has_options and has_conditions:
+        return "mixed"
+    if has_options:
+        return "questionnaire"
+    if has_conditions:
+        return "conditional"
+    return "content"
