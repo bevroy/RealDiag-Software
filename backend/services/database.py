@@ -26,6 +26,24 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
+def normalize_database_url(url: Optional[str]) -> Optional[str]:
+    """Pin PostgreSQL URLs to the psycopg2 driver that requirements.txt installs.
+
+    SQLAlchemy 2.1 changed the default driver for plain ``postgresql://`` URLs
+    from psycopg2 to psycopg (v3), which is not installed, so startup failed with
+    "No module named 'psycopg'". Render's connection strings carry no driver,
+    so name it explicitly. Also accepts the legacy ``postgres://`` scheme.
+    URLs that already name a driver (``postgresql+...://``) are left as-is.
+    """
+    if not url:
+        return url
+    for scheme in ("postgresql://", "postgres://"):
+        if url.startswith(scheme):
+            return "postgresql+psycopg2://" + url[len(scheme):]
+    return url
+
+
 # Try to import SQLAlchemy - graceful fallback if not available
 try:
     from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON, text
@@ -65,8 +83,8 @@ if not DATABASE_URL or not SQLALCHEMY_AVAILABLE:
 else:
     DATABASE_AVAILABLE = True
 
-    # Use DATABASE_URL and switch to asyncpg driver for better SSL compatibility
-    db_url = DATABASE_URL
+    # Use DATABASE_URL with an explicit psycopg2 driver (see normalize_database_url)
+    db_url = normalize_database_url(DATABASE_URL)
     connect_args = {}
 
     if db_url and "postgresql" in db_url:
