@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
+import { parseEvaluationResponse } from '../../utils/evaluationResponse';
 
 /**
  * SmartLaunch Component
@@ -92,9 +93,9 @@ function SmartLaunch() {
         throw new Error('Failed to evaluate patient');
       }
 
-      const evalBody = await evalResponse.json();
-      setEvaluations(evalBody.evaluations || []);
-      setDataWarnings(evalBody.data_warnings || []);
+      const parsed = parseEvaluationResponse(await evalResponse.json());
+      setEvaluations(parsed.evaluations);
+      setDataWarnings(parsed.dataWarnings);
       setLoading(false);
 
     } catch (err) {
