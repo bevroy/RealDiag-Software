@@ -19,7 +19,7 @@ import os
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 logger = logging.getLogger(__name__)
@@ -44,6 +44,63 @@ class FHIRResourceType(Enum):
     ENCOUNTER = "Encounter"
 
 
+LOINC_SYSTEM = "http://loinc.org"
+
+# Observation / resource statuses that must never feed clinical logic.
+EXCLUDED_STATUSES = {"entered-in-error", "cancelled"}
+
+# Per-resource retrieval status values carried in PatientData and API responses.
+RETRIEVED = "retrieved"          # query succeeded; an empty list means none found
+FAILED = "failed"                # query errored; contents unknown
+NOT_AVAILABLE = "not available"  # resource type not enabled/supported by this EHR
+
+# Human-readable resource names for retrieval warnings.
+RESOURCE_LABELS = {
+    "labs": "Lab results",
+    "vitals": "Vital signs",
+    "conditions": "Conditions",
+    "medications": "Medications",
+    "allergies": "Allergies",
+}
+
+
+def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
+    """Plain-language warnings for every resource that could not be retrieved."""
+    warnings = []
+    for resource, status in retrieval_status.items():
+        if status != RETRIEVED:
+            label = RESOURCE_LABELS.get(resource, resource.capitalize())
+            warnings.append(f"{label} could not be retrieved; do not assume none.")
+    return warnings
+
+
+def find_loinc_coding(code_obj: Dict[str, Any]) -> Dict[str, Any]:
+    """Return the LOINC coding from a CodeableConcept, searching every coding.
+
+    Falls back to the first coding only when it carries no system at all
+    (some servers omit it); a coding from another system is never treated
+    as LOINC.
+    """
+    codings = code_obj.get("coding") or []
+    for coding in codings:
+        if coding.get("system") == LOINC_SYSTEM:
+            return coding
+    if codings and not codings[0].get("system"):
+        return codings[0]
+    return {}
+
+
+def _is_excluded(resource: Dict[str, Any]) -> bool:
+    """True for resources marked entered-in-error or cancelled."""
+    if str(resource.get("status", "")).lower() in EXCLUDED_STATUSES:
+        return True
+    verification = resource.get("verificationStatus") or {}
+    for coding in verification.get("coding", []) or []:
+        if str(coding.get("code", "")).lower() in EXCLUDED_STATUSES:
+            return True
+    return False
+
+
 @dataclass
 class LabResult:
     """Structured lab result from FHIR Observation."""
@@ -55,16 +112,21 @@ class LabResult:
     status: str = "final"
     effective_date: Optional[datetime] = None
     is_abnormal: bool = False
+    reference_unit: Optional[str] = None  # unit stated on the reference range, if any
 
     def __post_init__(self):
         """Check if value is outside reference range."""
         if self.reference_range:
             low = self.reference_range.get("low")
             high = self.reference_range.get("high")
-            if low and self.value < low:
+            if low is not None and self.value < low:
                 self.is_abnormal = True
-            if high and self.value > high:
+            if high is not None and self.value > high:
                 self.is_abnormal = True
+
+    @property
+    def is_preliminary(self) -> bool:
+        return self.status == "preliminary"
 
 
 @dataclass
@@ -75,6 +137,11 @@ class VitalSign:
     value: float
     unit: str
     effective_date: datetime
+    status: str = "final"
+
+    @property
+    def is_preliminary(self) -> bool:
+        return self.status == "preliminary"
 
 
 @dataclass
@@ -82,13 +149,23 @@ class PatientData:
     """Aggregated patient data from FHIR resources."""
     patient_id: str
     name: str
-    age: int
+    age: Optional[int]  # None when the chart has no usable birth date
     gender: str
     labs: List[LabResult]
     vitals: List[VitalSign]
     conditions: List[Dict[str, Any]]
     medications: List[Dict[str, Any]]
     allergies: List[Dict[str, Any]]
+    # Per-resource status (RETRIEVED / FAILED / NOT_AVAILABLE) for labs,
+    # vitals, conditions, medications and allergies. An empty list is only
+    # "none found" when its status is RETRIEVED.
+    retrieval_status: Dict[str, str] = field(default_factory=dict)
+    # Notes about data that was skipped (blank values, excluded entries, ...)
+    data_notes: List[str] = field(default_factory=list)
+
+    @property
+    def data_warnings(self) -> List[str]:
+        return retrieval_warnings(self.retrieval_status)
 
     def get_lab(self, loinc_code: str) -> Optional[LabResult]:
         """Get most recent lab result by LOINC code."""
@@ -299,43 +376,68 @@ class FHIRClient:
 
         return allergies
 
-    def parse_observation(self, observation: Dict[str, Any]) -> Optional[LabResult]:
+    @staticmethod
+    def _observation_name(observation: Dict[str, Any]) -> str:
+        code_obj = observation.get("code", {}) or {}
+        coding = find_loinc_coding(code_obj)
+        first = (code_obj.get("coding") or [{}])[0]
+        return coding.get("display") or first.get("display") or code_obj.get("text") or "Unknown"
+
+    def parse_observation(
+        self, observation: Dict[str, Any], notes: Optional[List[str]] = None
+    ) -> Optional[LabResult]:
         """
         Parse FHIR Observation into LabResult.
 
         Args:
             observation: FHIR Observation resource
+            notes: optional list that receives a note for every result skipped
+                (entered-in-error/cancelled, or no numeric value)
 
         Returns:
-            LabResult or None if parsing fails
+            LabResult or None if the observation is excluded or unusable
         """
+        notes = notes if notes is not None else []
+        name = self._observation_name(observation)
         try:
-            # Get code (LOINC)
-            code_obj = observation.get("code", {})
-            coding = code_obj.get("coding", [{}])[0]
-            code = coding.get("code")
-            display = coding.get("display", code_obj.get("text", "Unknown"))
+            if _is_excluded(observation):
+                notes.append(f"{name}: excluded (marked {observation.get('status')}).")
+                return None
 
-            # Get value
+            # Get code: the LOINC coding, wherever it sits in the coding list
+            code_obj = observation.get("code", {}) or {}
+            coding = find_loinc_coding(code_obj)
+            code = coding.get("code")
+            display = name
+
+            # Get value - a blank value is skipped, never read as 0
             value_qty = observation.get("valueQuantity", {})
             if not value_qty:
-                return None  # No numeric value
+                return None  # No numeric value (coded/text result)
+            raw_value = value_qty.get("value")
+            if raw_value is None or (isinstance(raw_value, str) and not raw_value.strip()):
+                notes.append(f"{name}: result has no value; skipped.")
+                return None
 
-            value = float(value_qty.get("value", 0))
-            unit = value_qty.get("unit", "")
+            value = float(raw_value)
+            unit = value_qty.get("unit") or value_qty.get("code") or ""
 
             # Get reference range
             reference_range = None
+            reference_unit = None
             if observation.get("referenceRange"):
                 ref = observation["referenceRange"][0]
-                low_val = ref.get("low", {}).get("value")
-                high_val = ref.get("high", {}).get("value")
-                if low_val or high_val:
+                low = ref.get("low", {}) or {}
+                high = ref.get("high", {}) or {}
+                low_val = low.get("value")
+                high_val = high.get("value")
+                if low_val is not None or high_val is not None:
                     reference_range = {}
-                    if low_val:
+                    if low_val is not None:
                         reference_range["low"] = float(low_val)
-                    if high_val:
+                    if high_val is not None:
                         reference_range["high"] = float(high_val)
+                    reference_unit = high.get("unit") or low.get("unit") or None
 
             # Get effective date
             effective_date = None
@@ -353,10 +455,43 @@ class FHIRClient:
                 unit=unit,
                 reference_range=reference_range,
                 status=status,
-                effective_date=effective_date
+                effective_date=effective_date,
+                reference_unit=reference_unit,
             )
         except (KeyError, ValueError, TypeError) as e:
             logger.warning(f"Failed to parse observation: {e}")
+            notes.append(f"{name}: result could not be read ({e}); skipped.")
+            return None
+
+    def parse_vital(
+        self, observation: Dict[str, Any], notes: Optional[List[str]] = None
+    ) -> Optional[VitalSign]:
+        """Parse a vital-signs Observation; same exclusion/blank rules as labs."""
+        notes = notes if notes is not None else []
+        name = self._observation_name(observation)
+        try:
+            if _is_excluded(observation):
+                notes.append(f"{name}: excluded (marked {observation.get('status')}).")
+                return None
+            code = find_loinc_coding(observation.get("code", {}) or {}).get("code")
+            value_qty = observation.get("valueQuantity", {}) or {}
+            raw_value = value_qty.get("value")
+            if raw_value is None or (isinstance(raw_value, str) and not raw_value.strip()):
+                if value_qty:
+                    notes.append(f"{name}: reading has no value; skipped.")
+                return None
+            return VitalSign(
+                code=code,
+                display=name,
+                value=float(raw_value),
+                unit=value_qty.get("unit") or value_qty.get("code") or "",
+                effective_date=datetime.fromisoformat(
+                    observation["effectiveDateTime"].replace("Z", "+00:00")
+                ),
+                status=observation.get("status", "final"),
+            )
+        except (KeyError, ValueError, TypeError) as e:
+            notes.append(f"{name}: reading could not be read ({e}); skipped.")
             return None
 
     def get_encounters(
@@ -412,59 +547,42 @@ class FHIRClient:
 
         Returns:
             Dict with new_labs, new_abnormal_labs, new_vitals, new_conditions,
-            new_medications.
+            new_medications, plus retrieval_status (per resource), data_warnings
+            and data_notes. A resource whose query failed has an empty list
+            and a non-"retrieved" status - never read that as "nothing new".
         """
         since_str = since.strftime("%Y-%m-%d")
+        status: Dict[str, str] = {}
+        notes: List[str] = []
 
-        lab_observations = self.get_observations(
-            patient_id, category="laboratory", date_range=f"ge{since_str}"
+        lab_observations = self._fetch_tracked(
+            "labs", status,
+            lambda: self.get_observations(patient_id, category="laboratory", date_range=f"ge{since_str}"),
         )
-        new_labs = []
-        for obs in lab_observations:
-            lab = self.parse_observation(obs)
-            if lab:
-                new_labs.append(lab)
+        new_labs = [lab for lab in (self.parse_observation(o, notes) for o in lab_observations) if lab]
         new_abnormal_labs = [lab for lab in new_labs if lab.is_abnormal]
 
-        vital_observations = self.get_observations(
-            patient_id, category="vital-signs", date_range=f"ge{since_str}"
+        vital_observations = self._fetch_tracked(
+            "vitals", status,
+            lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"ge{since_str}"),
         )
-        new_vitals = []
-        for obs in vital_observations:
-            try:
-                code_obj = obs.get("code", {})
-                coding = code_obj.get("coding", [{}])[0]
-                code = coding.get("code")
-                display = coding.get("display", "Unknown")
+        new_vitals = [v for v in (self.parse_vital(o, notes) for o in vital_observations) if v]
 
-                value_qty = obs.get("valueQuantity", {})
-                value = float(value_qty.get("value", 0))
-                unit = value_qty.get("unit", "")
+        new_conditions = self._fetch_tracked(
+            "conditions", status,
+            lambda: self._bundle_resources(self._query_resource("Condition", {
+                "patient": patient_id, "_count": 100, "recorded-date": f"ge{since_str}"
+            })),
+        )
+        new_conditions = self._drop_excluded(new_conditions, "condition", notes)
 
-                effective_date = datetime.fromisoformat(
-                    obs["effectiveDateTime"].replace("Z", "+00:00")
-                )
-
-                new_vitals.append(VitalSign(
-                    code=code, display=display, value=value,
-                    unit=unit, effective_date=effective_date
-                ))
-            except (KeyError, ValueError):
-                continue
-
-        condition_bundle = self._query_resource("Condition", {
-            "patient": patient_id, "_count": 100, "recorded-date": f"ge{since_str}"
-        })
-        new_conditions = []
-        if condition_bundle.get("entry"):
-            new_conditions = [entry["resource"] for entry in condition_bundle["entry"]]
-
-        medication_bundle = self._query_resource("MedicationRequest", {
-            "patient": patient_id, "_count": 100, "authoredon": f"ge{since_str}"
-        })
-        new_medications = []
-        if medication_bundle.get("entry"):
-            new_medications = [entry["resource"] for entry in medication_bundle["entry"]]
+        new_medications = self._fetch_tracked(
+            "medications", status,
+            lambda: self._bundle_resources(self._query_resource("MedicationRequest", {
+                "patient": patient_id, "_count": 100, "authoredon": f"ge{since_str}"
+            })),
+        )
+        new_medications = self._drop_excluded(new_medications, "medication", notes)
 
         return {
             "new_labs": new_labs,
@@ -472,21 +590,71 @@ class FHIRClient:
             "new_vitals": new_vitals,
             "new_conditions": new_conditions,
             "new_medications": new_medications,
+            "retrieval_status": status,
+            "data_warnings": retrieval_warnings(status),
+            "data_notes": notes,
         }
 
-    def _safe_fetch_list(self, fetch_fn, patient_id: str, label: str) -> List[Dict[str, Any]]:
-        """Call a per-resource-type FHIR fetch; return [] instead of
-        raising if that resource type is unavailable (e.g. a 403 because
-        the API isn't enabled in the app's EHR registration)."""
+    @staticmethod
+    def _bundle_resources(bundle: Dict[str, Any]) -> List[Dict[str, Any]]:
+        return [entry["resource"] for entry in bundle.get("entry", []) or []]
+
+    @staticmethod
+    def _drop_excluded(resources: List[Dict[str, Any]], kind: str, notes: List[str]) -> List[Dict[str, Any]]:
+        """Remove resources marked entered-in-error or cancelled, noting each."""
+        kept = []
+        for resource in resources:
+            if _is_excluded(resource):
+                code_obj = resource.get("code") or resource.get("medicationCodeableConcept") or {}
+                name = code_obj.get("text") or (code_obj.get("coding") or [{}])[0].get("display") or f"A {kind}"
+                notes.append(f"{name}: excluded (marked entered-in-error or cancelled).")
+                continue
+            kept.append(resource)
+        return kept
+
+    @staticmethod
+    def _fetch_tracked(resource: str, status: Dict[str, str], fetch) -> List[Dict[str, Any]]:
+        """Run one FHIR fetch and record whether it succeeded.
+
+        403/404/501 mean the resource type isn't enabled or supported for this
+        app/EHR ("not available"); any other error is "failed". Either way the
+        caller gets [] and must report the gap rather than "none found".
+        """
         try:
-            return fetch_fn(patient_id)
+            result = fetch()
+            status[resource] = RETRIEVED
+            return result
         except requests.RequestException as e:
-            logger.warning(f"Skipping {label} - FHIR query failed: {e}")
+            code = getattr(getattr(e, "response", None), "status_code", None)
+            status[resource] = NOT_AVAILABLE if code in (403, 404, 501) else FAILED
+            logger.warning(f"FHIR query for {resource} {status[resource]}: {e}")
             return []
+
+    @staticmethod
+    def _age_from_birth_date(birth_date: Optional[str]) -> Optional[int]:
+        """Whole years since birth, or None when the birth date is missing or unreadable."""
+        if not birth_date:
+            return None
+        for fmt in ("%Y-%m-%d", "%Y-%m", "%Y"):
+            try:
+                born = datetime.strptime(birth_date, fmt)
+                break
+            except ValueError:
+                continue
+        else:
+            return None
+        today = datetime.now()
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
     def get_patient_data(self, patient_id: str) -> PatientData:
         """
         Get comprehensive patient data for clinical decision support.
+
+        Each resource type is fetched independently and its outcome recorded
+        in PatientData.retrieval_status, so a single unavailable resource
+        (e.g. a 403 because that API isn't enabled in the app's EHR
+        registration) doesn't take down the summary - but is never silently
+        reported as "none on file" either.
 
         Args:
             patient_id: Patient FHIR ID
@@ -498,74 +666,47 @@ class FHIRClient:
 
         # Get patient demographics
         patient = self.get_patient(patient_id)
-        name_obj = patient.get("name", [{}])[0]
+        name_obj = (patient.get("name") or [{}])[0]
         given = " ".join(name_obj.get("given", []))
         family = name_obj.get("family", "")
         full_name = f"{given} {family}".strip()
 
-        # Calculate age from birthDate
-        age = 0
-        if patient.get("birthDate"):
-            birth_date = datetime.strptime(patient["birthDate"], "%Y-%m-%d")
-            age = (datetime.now() - birth_date).days // 365
+        notes: List[str] = []
+        age = self._age_from_birth_date(patient.get("birthDate"))
+        if age is None:
+            notes.append("Birth date missing or unreadable; age is unknown.")
 
         gender = patient.get("gender", "unknown")
+        status: Dict[str, str] = {}
 
-        # Get labs (last 30 days)
-        thirty_days_ago = (datetime.now() - timedelta(days=LAB_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
-        lab_observations = self.get_observations(
-            patient_id,
-            category="laboratory",
-            date_range=f"gt{thirty_days_ago}"
+        # Get labs (last LAB_LOOKBACK_DAYS days)
+        lab_since = (datetime.now() - timedelta(days=LAB_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
+        lab_observations = self._fetch_tracked(
+            "labs", status,
+            lambda: self.get_observations(patient_id, category="laboratory", date_range=f"gt{lab_since}"),
         )
+        labs = [lab for lab in (self.parse_observation(o, notes) for o in lab_observations) if lab]
 
-        labs = []
-        for obs in lab_observations:
-            lab = self.parse_observation(obs)
-            if lab:
-                labs.append(lab)
-
-        # Get vitals (last 7 days)
-        seven_days_ago = (datetime.now() - timedelta(days=VITAL_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
-        vital_observations = self.get_observations(
-            patient_id,
-            category="vital-signs",
-            date_range=f"gt{seven_days_ago}"
+        # Get vitals (last VITAL_LOOKBACK_DAYS days)
+        vital_since = (datetime.now() - timedelta(days=VITAL_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
+        vital_observations = self._fetch_tracked(
+            "vitals", status,
+            lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"gt{vital_since}"),
         )
+        vitals = [v for v in (self.parse_vital(o, notes) for o in vital_observations) if v]
 
-        vitals = []
-        for obs in vital_observations:
-            try:
-                code_obj = obs.get("code", {})
-                coding = code_obj.get("coding", [{}])[0]
-                code = coding.get("code")
-                display = coding.get("display", "Unknown")
-
-                value_qty = obs.get("valueQuantity", {})
-                value = float(value_qty.get("value", 0))
-                unit = value_qty.get("unit", "")
-
-                effective_date = datetime.fromisoformat(
-                    obs["effectiveDateTime"].replace("Z", "+00:00")
-                )
-
-                vitals.append(VitalSign(
-                    code=code,
-                    display=display,
-                    value=value,
-                    unit=unit,
-                    effective_date=effective_date
-                ))
-            except (KeyError, ValueError):
-                continue
-
-        # Get conditions, medications, allergies - each independently, so a
-        # single resource type being unavailable (e.g. a 403 because that
-        # API isn't enabled in the app's EHR registration) doesn't take
-        # down the whole patient summary.
-        conditions = self._safe_fetch_list(self.get_conditions, patient_id, "conditions")
-        medications = self._safe_fetch_list(self.get_medications, patient_id, "medications")
-        allergies = self._safe_fetch_list(self.get_allergies, patient_id, "allergies")
+        conditions = self._drop_excluded(
+            self._fetch_tracked("conditions", status, lambda: self.get_conditions(patient_id)),
+            "condition", notes,
+        )
+        medications = self._drop_excluded(
+            self._fetch_tracked("medications", status, lambda: self.get_medications(patient_id)),
+            "medication", notes,
+        )
+        allergies = self._drop_excluded(
+            self._fetch_tracked("allergies", status, lambda: self.get_allergies(patient_id)),
+            "allergy", notes,
+        )
 
         patient_data = PatientData(
             patient_id=patient_id,
@@ -576,13 +717,16 @@ class FHIRClient:
             vitals=vitals,
             conditions=conditions,
             medications=medications,
-            allergies=allergies
+            allergies=allergies,
+            retrieval_status=status,
+            data_notes=notes,
         )
 
         logger.info(
             f"Retrieved data for {full_name}: "
             f"{len(labs)} labs, {len(vitals)} vitals, "
-            f"{len(conditions)} conditions, {len(medications)} medications"
+            f"{len(conditions)} conditions, {len(medications)} medications; "
+            f"status {status}"
         )
 
         return patient_data

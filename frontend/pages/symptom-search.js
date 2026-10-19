@@ -44,6 +44,19 @@ import {
   validatePatientID
 } from '../utils/barcodeScanner';
 
+// Label shown next to AI-generated and unvalidated content
+const aiLabelStyle = {
+  display: 'inline-block',
+  margin: '0 0 0.75rem',
+  padding: '0.3rem 0.7rem',
+  background: '#eef2ff',
+  color: '#3730a3',
+  border: '1px solid #a5b4fc',
+  borderRadius: '6px',
+  fontSize: '0.8rem',
+  fontWeight: '600'
+};
+
 export default function SymptomSearch() {
   // Use runtime config for API base, with fallback to env var or Render URL
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
@@ -2042,6 +2055,11 @@ export default function SymptomSearch() {
                           <h3 style={{ margin: '0 0 0.75rem', color: '#1a202c', fontSize: '1.2rem', fontWeight: '600' }}>
                             {result.label}
                           </h3>
+                          {result.ai_suggested && (
+                            <div style={aiLabelStyle} role="note">
+                              🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
+                            </div>
+                          )}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
                             <span style={{
                               padding: '0.35rem 0.85rem',
@@ -2407,6 +2425,12 @@ export default function SymptomSearch() {
                                     </p>
                                   </div>
                                   
+                                  {homeopathyData[idx] && homeopathyData[idx].validation_statement && (
+                                    <div style={{ ...aiLabelStyle, background: '#fef3c7', color: '#92400e', borderColor: '#f59e0b' }} role="note">
+                                      {homeopathyData[idx].validation_statement}
+                                    </div>
+                                  )}
+
                                   {/* Loading state */}
                                   {!homeopathyData[idx] && (
                                     <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
@@ -2944,6 +2968,11 @@ export default function SymptomSearch() {
                         <div style={{ fontWeight: '600', color: '#1a202c', marginBottom: '0.25rem' }}>
                           {result.label}
                         </div>
+                        {result.ai_suggested && (
+                          <div style={aiLabelStyle} role="note">
+                            🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
+                          </div>
+                        )}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.8rem' }}>
                           <span style={{
                             padding: '0.2rem 0.6rem',

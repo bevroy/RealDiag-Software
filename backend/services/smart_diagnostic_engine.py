@@ -21,7 +21,7 @@ Usage:
 import yaml
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 import re
 import logging
@@ -60,7 +60,13 @@ class DiagnosisEvaluation:
     criteria_unknown: List[CriterionEvaluation]
     recommendations: List[str]
     missing_tests: List[str]
-    severity: str = "moderate"  # low, moderate, high, critical
+    severity: str = "moderate"  # low, moderate, high, critical, unknown
+    # "evaluated" | "insufficient data" | "evaluation failed"
+    evaluation_status: str = "evaluated"
+    status_reason: Optional[str] = None
+    # Findings shown for context only; they never raise the probability
+    supporting_findings: List[CriterionEvaluation] = field(default_factory=list)
+    severity_reason: Optional[str] = None
 
 
 class SmartDiagnosticEngine:
@@ -69,7 +75,22 @@ class SmartDiagnosticEngine:
     
     Evaluates diagnostic rules against actual patient data from FHIR/EHR,
     automatically checking lab values, vital signs, and clinical criteria.
+
+    Decision support only: recommendations describe what findings may
+    warrant, never treatment orders (no drug doses, STAT orders or
+    procedure activations).
     """
+
+    EVALUATOR_LABELS = {
+        "CARD-ACS": "Acute Coronary Syndrome",
+        "ID-SEPSIS": "Sepsis",
+        "ENDO-DKA": "Diabetic Ketoacidosis",
+    }
+    EVALUATOR_FAMILIES = {
+        "CARD-ACS": "cardiology",
+        "ID-SEPSIS": "infectious_disease",
+        "ENDO-DKA": "endocrinology",
+    }
     
     def __init__(self, rules_dir: str = "backend/rules"):
         """Initialize engine and load all diagnostic rules."""
@@ -156,6 +177,7 @@ class SmartDiagnosticEngine:
             value=f"{value} {lab.unit}",
             expected=f"{operator} {threshold} {lab.unit}",
             details=f"{lab.display}: {value} {lab.unit} (ref: {lab.reference_range})"
+            + (" - PRELIMINARY result" if getattr(lab, "is_preliminary", False) else "")
         )
     
     def _check_vital_criterion(
@@ -198,95 +220,152 @@ class SmartDiagnosticEngine:
             details=f"{vital.display}: {value} {vital.unit}"
         )
     
+    # Troponin units recognised for comparison, as a factor to ng/L.
+    TROPONIN_UNIT_TO_NG_PER_L = {
+        "ng/l": 1.0,
+        "pg/ml": 1.0,
+        "ng/ml": 1000.0,
+        "ug/l": 1000.0,
+        "µg/l": 1000.0,
+        "mcg/l": 1000.0,
+    }
+    # Severity by multiple of the lab's upper reference limit (URL).
+    TROPONIN_HIGH_MULTIPLE = 2.5
+    TROPONIN_CRITICAL_MULTIPLE = 10.0
+
+    @classmethod
+    def _troponin_unit_factor(cls, unit: Optional[str]) -> Optional[float]:
+        if not unit:
+            return None
+        return cls.TROPONIN_UNIT_TO_NG_PER_L.get(unit.strip().lower().replace(" ", ""))
+
+    @classmethod
+    def assess_troponin(cls, lab: LabResult) -> Dict[str, Any]:
+        """
+        Compare a troponin result with the lab's own upper reference limit.
+
+        Returns {"elevated": True/False/None, "severity": str, "multiple": float|None,
+        "reason": str, "expected": str}. "elevated" is None and severity "unknown"
+        when the unit is missing/unrecognised or the lab gives no upper limit -
+        no fixed cutoff is ever assumed.
+        """
+        factor = cls._troponin_unit_factor(lab.unit)
+        if factor is None:
+            reason = (f"troponin unit '{lab.unit}' is not recognised (expected ng/mL or ng/L)"
+                      if lab.unit else "troponin result has no unit")
+            return {"elevated": None, "severity": "unknown", "multiple": None,
+                    "reason": f"Severity unknown: {reason}.", "expected": "lab upper reference limit"}
+
+        high = (lab.reference_range or {}).get("high")
+        if high is None:
+            return {"elevated": None, "severity": "unknown", "multiple": None,
+                    "reason": "Severity unknown: the lab reported no upper reference limit for troponin.",
+                    "expected": "lab upper reference limit"}
+
+        ref_factor = cls._troponin_unit_factor(lab.reference_unit) if lab.reference_unit else factor
+        if ref_factor is None:
+            return {"elevated": None, "severity": "unknown", "multiple": None,
+                    "reason": f"Severity unknown: reference range unit '{lab.reference_unit}' is not recognised.",
+                    "expected": "lab upper reference limit"}
+
+        value_ng_l = lab.value * factor
+        url_ng_l = high * ref_factor
+        if url_ng_l <= 0:
+            return {"elevated": None, "severity": "unknown", "multiple": None,
+                    "reason": "Severity unknown: the lab's upper reference limit is zero or negative.",
+                    "expected": "lab upper reference limit"}
+
+        multiple = value_ng_l / url_ng_l
+        expected = f"> {high} {lab.reference_unit or lab.unit} (lab upper reference limit)"
+        if multiple <= 1:
+            return {"elevated": False, "severity": "low", "multiple": multiple,
+                    "reason": "Troponin at or below the lab's upper reference limit.", "expected": expected}
+        if multiple >= cls.TROPONIN_CRITICAL_MULTIPLE:
+            severity = "critical"
+        elif multiple >= cls.TROPONIN_HIGH_MULTIPLE:
+            severity = "high"
+        else:
+            severity = "moderate"
+        return {"elevated": True, "severity": severity, "multiple": multiple,
+                "reason": f"Troponin {multiple:.1f}x the lab's upper reference limit.", "expected": expected}
+
     def _evaluate_acs(self, patient_data: PatientData) -> DiagnosisEvaluation:
         """
         Specialized evaluator for Acute Coronary Syndrome.
-        
-        Checks troponin, ECG findings, and risk factors.
+
+        ACS evaluation is suggested only when troponin is elevated above the
+        lab's own upper reference limit. Heart rate is reported as a supporting
+        finding and never produces an ACS suggestion on its own.
         """
         criteria_met = []
         criteria_not_met = []
         criteria_unknown = []
+        supporting = []
         missing_tests = []
-        
-        # Check troponin
-        troponin_i = patient_data.get_lab(CommonLOINC.TROPONIN_I)
-        troponin_t = patient_data.get_lab(CommonLOINC.TROPONIN_T)
-        
-        if troponin_i or troponin_t:
-            tropo = troponin_i or troponin_t
-            assay_name = "troponin I" if troponin_i else "troponin T"
-            if tropo.reference_range:
-                high_ref = tropo.reference_range.get("high")
-                is_elevated = tropo.is_abnormal and tropo.value > (high_ref or 0)
-                threshold_desc = f"> {high_ref} {tropo.unit} (lab reference range)"
-            else:
-                fallback_threshold = 0.04 if troponin_i else 0.01
-                is_elevated = tropo.value > fallback_threshold
-                threshold_desc = (
-                    f"> {fallback_threshold} {tropo.unit} "
-                    "(assay-specific default, no lab reference range provided)"
-                )
 
-            if is_elevated:
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Elevated troponin",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{tropo.value} {tropo.unit}",
-                    expected=threshold_desc,
-                    details=f"{assay_name} elevated - consistent with myocardial injury"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Elevated troponin",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{tropo.value} {tropo.unit}",
-                    expected=threshold_desc
-                ))
-        else:
+        severity = "unknown"
+        severity_reason = None
+        results = []
+        for loinc, assay_name in ((CommonLOINC.TROPONIN_I, "troponin I"), (CommonLOINC.TROPONIN_T, "troponin T")):
+            lab = patient_data.get_lab(loinc)
+            if lab:
+                results.append((assay_name, lab, self.assess_troponin(lab)))
+
+        if not results:
             criteria_unknown.append(CriterionEvaluation(
                 criterion="Elevated troponin",
                 status=CriteriaStatus.UNKNOWN,
                 details="Troponin not measured"
             ))
-            missing_tests.append("Troponin (serial x3 at 0, 3, 6 hours)")
-        
-        # Check for tachycardia (HR > 100)
+            missing_tests.append("Troponin (serial measurements per institutional protocol)")
+            severity_reason = "Severity unknown: troponin not measured."
+        else:
+            # Use the most concerning troponin result available
+            rank = {"critical": 4, "high": 3, "moderate": 2, "low": 1, "unknown": 0}
+            assay_name, tropo, assessment = max(results, key=lambda r: rank[r[2]["severity"]])
+            prelim = " (PRELIMINARY result)" if tropo.is_preliminary else ""
+            criterion = CriterionEvaluation(
+                criterion="Elevated troponin",
+                status=CriteriaStatus.UNKNOWN,
+                value=f"{tropo.value} {tropo.unit}".strip(),
+                expected=assessment["expected"],
+                details=f"{assay_name}: {assessment['reason']}{prelim}",
+            )
+            if assessment["elevated"] is True:
+                criterion.status = CriteriaStatus.PRESENT
+                criteria_met.append(criterion)
+            elif assessment["elevated"] is False:
+                criterion.status = CriteriaStatus.ABSENT
+                criteria_not_met.append(criterion)
+            else:
+                criteria_unknown.append(criterion)
+                missing_tests.append("Troponin with lab reference range and units")
+            severity = assessment["severity"] if assessment["elevated"] is not False else "low"
+            severity_reason = assessment["reason"]
+
+        # Heart rate: context only
         hr = patient_data.get_vital(CommonLOINC.HEART_RATE)
         if hr:
-            if hr.value > 100:
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Tachycardia",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{hr.value} {hr.unit}"
-                ))
-        
-        # Calculate probability
+            supporting.append(CriterionEvaluation(
+                criterion="Heart rate",
+                status=CriteriaStatus.PRESENT if hr.value > 100 else CriteriaStatus.ABSENT,
+                value=f"{hr.value} {hr.unit}",
+                expected="> 100/min (tachycardia)",
+                details="Supporting finding only; tachycardia alone does not suggest ACS.",
+            ))
+
         total_criteria = len(criteria_met) + len(criteria_not_met) + len(criteria_unknown)
-        if total_criteria > 0:
-            probability = len(criteria_met) / total_criteria
-        else:
-            probability = 0.0
-        
-        # Determine severity
-        severity = "moderate"
-        if troponin_i and troponin_i.value > 0.4:
-            severity = "critical"
-        elif troponin_i and troponin_i.value > 0.1:
-            severity = "high"
-        
+        probability = len(criteria_met) / total_criteria if total_criteria else 0.0
+
         recommendations = []
-        if len(criteria_met) > 0:
-            recommendations.extend([
-                "Aspirin 325mg STAT (if not contraindicated)",
-                "Obtain ECG immediately",
-                "Cardiology consultation",
-                "Consider cath lab activation if STEMI criteria met"
-            ])
-        
+        if criteria_met:
+            recommendations.append(
+                "Findings may warrant evaluation for ACS per ACC/AHA guidelines; "
+                "consider ECG and serial troponins."
+            )
         if missing_tests:
-            recommendations.append(f"Order missing tests: {', '.join(missing_tests)}")
-        
+            recommendations.append(f"Data needed to evaluate: {', '.join(missing_tests)}")
+
         return DiagnosisEvaluation(
             diagnosis_id="CARD-ACS",
             diagnosis_label="Acute Coronary Syndrome",
@@ -297,7 +376,9 @@ class SmartDiagnosticEngine:
             criteria_unknown=criteria_unknown,
             recommendations=recommendations,
             missing_tests=missing_tests,
-            severity=severity
+            severity=severity,
+            supporting_findings=supporting,
+            severity_reason=severity_reason,
         )
     
     def _evaluate_sepsis(self, patient_data: PatientData) -> DiagnosisEvaluation:
@@ -320,6 +401,13 @@ class SmartDiagnosticEngine:
                     value=f"{rr.value} {rr.unit}",
                     expected=">= 22/min"
                 ))
+            else:
+                criteria_not_met.append(CriterionEvaluation(
+                    criterion="Tachypnea (qSOFA)",
+                    status=CriteriaStatus.ABSENT,
+                    value=f"{rr.value} {rr.unit}",
+                    expected=">= 22/min"
+                ))
         else:
             criteria_unknown.append(CriterionEvaluation(
                 criterion="Respiratory rate",
@@ -337,6 +425,19 @@ class SmartDiagnosticEngine:
                     value=f"{sbp.value} {sbp.unit}",
                     expected="<= 100 mmHg"
                 ))
+            else:
+                criteria_not_met.append(CriterionEvaluation(
+                    criterion="Hypotension (qSOFA)",
+                    status=CriteriaStatus.ABSENT,
+                    value=f"{sbp.value} {sbp.unit}",
+                    expected="<= 100 mmHg"
+                ))
+        else:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Hypotension (qSOFA)",
+                status=CriteriaStatus.UNKNOWN,
+                details="Systolic blood pressure not documented"
+            ))
 
         # Altered mentation (GCS < 15)
         gcs = patient_data.get_vital(CommonLOINC.GCS_SCORE)
@@ -376,7 +477,19 @@ class SmartDiagnosticEngine:
                     expected="4-12 K/uL",
                     details="Leukocytosis or leukopenia"
                 ))
+            else:
+                criteria_not_met.append(CriterionEvaluation(
+                    criterion="Abnormal WBC",
+                    status=CriteriaStatus.ABSENT,
+                    value=f"{wbc.value} {wbc.unit}",
+                    expected="< 4 or > 12 K/uL"
+                ))
         else:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Abnormal WBC",
+                status=CriteriaStatus.UNKNOWN,
+                details="WBC not measured"
+            ))
             missing_tests.append("CBC with differential")
         
         # Lactate
@@ -393,12 +506,11 @@ class SmartDiagnosticEngine:
         recommendations = []
         if qsofa_score >= 2:
             recommendations.extend([
-                "🚨 qSOFA >= 2: HIGH RISK FOR SEPSIS",
-                "Obtain blood cultures x2 before antibiotics",
-                "Administer broad-spectrum antibiotics within 1 hour",
-                "IV fluid resuscitation (30 mL/kg crystalloid)",
-                "Measure lactate",
-                "Consider ICU admission"
+                "qSOFA >= 2: findings may indicate high risk for sepsis.",
+                "Consider evaluation per Surviving Sepsis Campaign guidelines, "
+                "including blood cultures and lactate.",
+                "Antibiotic and fluid management decisions per clinician judgment "
+                "and institutional sepsis protocol.",
             ])
         
         return DiagnosisEvaluation(
@@ -438,6 +550,11 @@ class SmartDiagnosticEngine:
                     value=f"{glucose.value} {glucose.unit}"
                 ))
         else:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Hyperglycemia",
+                status=CriteriaStatus.UNKNOWN,
+                details="Blood glucose not measured"
+            ))
             missing_tests.append("Blood glucose")
         
         # Metabolic acidosis (low bicarb)
@@ -451,7 +568,19 @@ class SmartDiagnosticEngine:
                     expected="< 18 mEq/L",
                     details="Low bicarbonate suggests metabolic acidosis"
                 ))
+            else:
+                criteria_not_met.append(CriterionEvaluation(
+                    criterion="Metabolic acidosis",
+                    status=CriteriaStatus.ABSENT,
+                    value=f"{co2.value} {co2.unit}",
+                    expected="< 18 mEq/L"
+                ))
         else:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Metabolic acidosis",
+                status=CriteriaStatus.UNKNOWN,
+                details="Bicarbonate (CO2) not measured"
+            ))
             missing_tests.append("Basic metabolic panel (BMP)")
         
         probability = len(criteria_met) / max(len(criteria_met) + len(criteria_not_met), 1)
@@ -465,12 +594,12 @@ class SmartDiagnosticEngine:
         recommendations = []
         if len(criteria_met) >= 2:
             recommendations.extend([
-                "Check serum/urine ketones",
-                "Obtain VBG or ABG for pH",
-                "Start IV fluids (NS 500-1000 mL/hr initially)",
-                "Insulin drip protocol",
-                "Monitor potassium closely",
-                "Search for precipitating cause (infection, MI, medication noncompliance)"
+                "Findings may warrant evaluation for DKA per ADA guidelines; "
+                "consider serum/urine ketones, VBG or ABG for pH, and potassium.",
+                "Fluid and insulin management per clinician judgment and "
+                "institutional DKA protocol.",
+                "Consider evaluating for a precipitating cause (infection, MI, "
+                "medication nonadherence).",
             ])
         
         return DiagnosisEvaluation(
@@ -523,17 +652,39 @@ class SmartDiagnosticEngine:
         for diagnosis_id, evaluator_func in specialized_evaluations.items():
             try:
                 evaluation = evaluator_func(patient_data)
-                evaluations.append(evaluation)
             except Exception as e:
                 logger.error(f"Failed to evaluate {diagnosis_id}: {e}")
+                evaluation = DiagnosisEvaluation(
+                    diagnosis_id=diagnosis_id,
+                    diagnosis_label=self.EVALUATOR_LABELS.get(diagnosis_id, diagnosis_id),
+                    family=self.EVALUATOR_FAMILIES.get(diagnosis_id, "unknown"),
+                    probability=0.0,
+                    criteria_met=[], criteria_not_met=[], criteria_unknown=[],
+                    recommendations=[],
+                    missing_tests=[],
+                    severity="unknown",
+                    evaluation_status="evaluation failed",
+                    status_reason=f"Evaluation failed: {type(e).__name__}: {e}",
+                )
+            else:
+                if evaluation.criteria_unknown and evaluation.probability <= 0.3:
+                    evaluation.evaluation_status = "insufficient data"
+                    missing = ", ".join(evaluation.missing_tests) or ", ".join(
+                        c.criterion for c in evaluation.criteria_unknown)
+                    evaluation.status_reason = f"Insufficient data to evaluate; missing: {missing}"
+            evaluations.append(evaluation)
         
         # Sort by probability (highest first)
         evaluations.sort(key=lambda x: x.probability, reverse=True)
         
-        # Filter out low probability unless high severity
+        # Hide low-probability results only when they were fully evaluated;
+        # failed and insufficient-data evaluations are always shown so a gap
+        # in the data is never mistaken for a negative finding.
         evaluations = [
             e for e in evaluations
-            if e.probability > 0.3 or e.severity in ["high", "critical"]
+            if e.probability > 0.3
+            or e.severity in ["high", "critical"]
+            or e.evaluation_status != "evaluated"
         ]
         
         logger.info(f"Generated {len(evaluations)} diagnostic evaluations")
@@ -555,6 +706,8 @@ class SmartDiagnosticEngine:
         report.append(f"   Family: {evaluation.family.replace('_', ' ').title()}")
         report.append(f"   Probability: {evaluation.probability:.1%}")
         report.append(f"   Severity: {evaluation.severity.upper()}")
+        if evaluation.evaluation_status != "evaluated":
+            report.append(f"   Status: {evaluation.evaluation_status.upper()} - {evaluation.status_reason}")
         report.append("=" * 70)
         
         if evaluation.criteria_met:

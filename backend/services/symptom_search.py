@@ -20,6 +20,7 @@ from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, snomed_codes
+from backend.services.content_labels import AI_CONTENT_LABEL
 from backend.services.auth_service import get_current_user
 from backend.services.rbac_service import get_rbac_service, Permission
 
@@ -265,6 +266,7 @@ class DiagnosisMatch(BaseModel):
     referrals: Optional[List[str]] = None  # Specialist referrals
     has_tree: bool = True  # Whether a decision tree exists
     ai_suggested: bool = False  # Whether suggested by AI (no tree yet)
+    ai_label: Optional[str] = None  # AI_CONTENT_LABEL whenever ai_suggested is true
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -1128,7 +1130,8 @@ async def rank_diagnoses(
                     tests=None,
                     referrals=None,
                     has_tree=False,
-                    ai_suggested=True
+                    ai_suggested=True,
+                    ai_label=AI_CONTENT_LABEL,
                 )
 
                 results.append(ai_match)
@@ -1160,7 +1163,8 @@ async def rank_diagnoses(
                 "generation_triggered": True,
                 "reason": "No high-confidence matches found",
                 "status": "pending",
-                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds."
+                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds.",
+                "ai_label": AI_CONTENT_LABEL,
             }
 
             # Note: Actual generation happens via separate endpoint to avoid blocking

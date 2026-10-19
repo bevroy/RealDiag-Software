@@ -99,6 +99,8 @@ def _summary(name="Anna Cadence", age=45, gender="female"):
         medication_count=0,
         abnormal_labs=[],
         recent_vitals=[],
+        allergy_count=0,
+        allergies=[],
     )
 
 

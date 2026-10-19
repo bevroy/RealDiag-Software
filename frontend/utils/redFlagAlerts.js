@@ -9,11 +9,11 @@ export const redFlagConditions = {
   'stemi': {
     severity: 'critical',
     category: 'Cardiovascular',
-    alert: '🚨 STEMI - ACTIVATE CATH LAB',
+    alert: '🚨 POSSIBLE STEMI - EVALUATE PER STEMI PROTOCOL',
     timeWindow: '90 minutes',
     actions: [
-      'Activate STEMI protocol immediately',
-      'Aspirin 325mg chewed',
+      'Findings may warrant evaluation per STEMI protocol (ACC/AHA)',
+      'Consider antiplatelet therapy per ACC/AHA guidelines if not contraindicated',
       'Dual antiplatelet therapy (clopidogrel/ticagrelor)',
       'Anticoagulation (heparin or enoxaparin)',
       'Door-to-balloon time <90 minutes',
@@ -33,7 +33,7 @@ export const redFlagConditions = {
       'Beta blocker first (esmolol or labetalol)',
       'CTA chest/abdomen/pelvis STAT',
       'Cardiothoracic surgery consult immediately',
-      'Type and crossmatch 6 units'
+      'Type and crossmatch per institutional protocol'
     ],
     mortality: '1-2% per hour if untreated',
     keywords: ['aortic dissection', 'tearing chest pain', 'mediastinal widening']
@@ -110,9 +110,9 @@ export const redFlagConditions = {
     actions: [
       'Blood cultures x2 STAT',
       'Empiric antibiotics within 1 hour (do NOT wait for LP)',
-      'Ceftriaxone 2g IV + vancomycin 15-20mg/kg',
+      'Empiric antibiotic selection and dosing per IDSA guidelines',
       'Add ampicillin if >50yo or immunocompromised',
-      'Dexamethasone 10mg IV before or with antibiotics',
+      'Consider adjunctive dexamethasone per IDSA guidelines',
       'LP when safe (check for elevated ICP)'
     ],
     mortality: '15-30% if delayed treatment',
@@ -124,8 +124,8 @@ export const redFlagConditions = {
     alert: '🚨 STATUS EPILEPTICUS',
     timeWindow: '< 30 minutes',
     actions: [
-      'Benzodiazepines immediately (lorazepam 0.1mg/kg)',
-      'If continues: Fosphenytoin 20 PE/kg',
+      'First-line benzodiazepine therapy per AES guideline; dosing per institutional protocol',
+      'If seizures continue: second-line antiseizure therapy per AES guideline',
       'If refractory: ICU, intubation, propofol/midazolam',
       'Check glucose, correct electrolytes',
       'EEG monitoring',
@@ -177,7 +177,7 @@ export const redFlagConditions = {
     actions: [
       'Vascular surgery STAT - DO NOT DELAY',
       'NPO',
-      'Type and cross 10 units PRBC',
+      'Type and crossmatch per massive transfusion protocol',
       'Permissive hypotension (SBP 90-100)',
       'Large bore IV x2',
       'Direct to OR - imaging only if stable'
@@ -207,7 +207,7 @@ export const redFlagConditions = {
     timeWindow: '< 12 hours',
     actions: [
       'Two large bore IVs',
-      'Type and cross 4 units',
+      'Type and crossmatch per institutional protocol',
       'Aggressive resuscitation (crystalloid, PRBCs)',
       'PPI bolus + infusion',
       'GI consult for urgent endoscopy',
@@ -227,7 +227,7 @@ export const redFlagConditions = {
       'Blood cultures x2 before antibiotics',
       'Broad spectrum antibiotics within 1 hour',
       'Lactate level',
-      '30mL/kg IV crystalloid bolus',
+      'Fluid resuscitation per Surviving Sepsis Campaign guidelines',
       'Vasopressors if hypotension persists',
       'Source control'
     ],
@@ -258,9 +258,9 @@ export const redFlagConditions = {
     alert: '🚨 ANAPHYLAXIS',
     timeWindow: 'Immediate',
     actions: [
-      'Epinephrine 0.3-0.5mg IM (anterolateral thigh)',
-      'Repeat epinephrine q5-15min if needed',
-      'IV fluids 1-2L bolus',
+      'IM epinephrine is first-line per anaphylaxis guidelines (WAO/AAAAI); dosing per protocol',
+      'Repeat dosing per protocol if symptoms persist',
+      'IV fluid resuscitation per protocol',
       'H1 blocker (diphenhydramine)',
       'H2 blocker (ranitidine/famotidine)',
       'Corticosteroids',
@@ -277,9 +277,9 @@ export const redFlagConditions = {
     actions: [
       'Ophthalmology consult STAT',
       'IOP-lowering medications immediately',
-      'Acetazolamide 500mg IV',
-      'Timolol 0.5% eye drops',
-      'Pilocarpine 2% eye drops',
+      'Consider systemic IOP-lowering therapy (e.g., carbonic anhydrase inhibitor) per ophthalmology guidance',
+      'Consider topical beta-blocker per ophthalmology guidance',
+      'Consider topical miotic per ophthalmology guidance',
       'Definitive treatment: Laser iridotomy'
     ],
     mortality: 'Permanent vision loss if delayed',

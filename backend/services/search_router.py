@@ -12,6 +12,11 @@ import sys
 import os
 from backend.services.auth_service import get_current_user
 from backend.services.tree_schema import icd10_codes, snomed_codes as tree_snomed_codes
+from backend.services.content_labels import (
+    AI_CONTENT_LABEL,
+    HOMEOPATHY_VALIDATION_STATEMENT,
+    ai_enrichment_enabled,
+)
 
 # Add data directory to path for ICD-10 and SNOMED databases
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "data"))
@@ -41,9 +46,11 @@ except ImportError:
 
 router = APIRouter(prefix="/api", tags=["search"], dependencies=[Depends(get_current_user)])
 
-# Initialize AI enricher if API keys are available
+# Initialize AI enricher only when explicitly enabled (ENABLE_AI_ENRICHMENT=true)
+# and an API key is available. Off by default: AI-generated clinical content
+# is not clinically validated.
 ai_enricher = None
-if AI_ENRICHMENT_ENABLED and (os.getenv("ANTHROPIC_API_KEY") or os.getenv("OPENAI_API_KEY")):
+if AI_ENRICHMENT_ENABLED and ai_enrichment_enabled() and (os.getenv("ANTHROPIC_API_KEY") or os.getenv("OPENAI_API_KEY")):
     try:
         provider = os.getenv("AI_PROVIDER", "claude")
         ai_enricher = AIContentEnricher(provider=provider)
@@ -284,8 +291,47 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
         'workup': sorted(list(workup_tests)),
         'treatment': sorted(list(treatments)),
         'referrals': sorted(list(referrals)),
-        'homeopathic_remedies': sorted(list(homeopathic_remedies))
+        'homeopathic_remedies': sorted(list(homeopathic_remedies)),
+        'homeopathy_validation_statement': HOMEOPATHY_VALIDATION_STATEMENT if homeopathic_remedies else None,
     }
+
+
+# Sections the AI enricher may fill, as named in search results.
+AI_ENRICHABLE_SECTIONS = ('presentations', 'workup', 'treatment', 'clinical_pearls', 'referrals', 'homeopathic_remedies')
+
+
+def _apply_ai_enrichment(result: Dict, enriched: Dict) -> Dict:
+    """Merge AI enrichment into a search result, labelling every AI-filled section.
+
+    Only sections that were empty before are filled. The AI's "homeopathy"
+    list ({remedy, indications}) is converted to the result's
+    homeopathic_remedies strings so it is shown with both labels.
+    """
+    before = {section: bool(result.get(section)) for section in AI_ENRICHABLE_SECTIONS}
+    enriched = dict(enriched)
+    ai_homeopathy = enriched.pop('homeopathy', None)
+    if ai_homeopathy and not result.get('homeopathic_remedies'):
+        remedies = []
+        for remedy in ai_homeopathy:
+            if isinstance(remedy, dict):
+                name, indications = remedy.get('remedy', ''), remedy.get('indications', '')
+                if name:
+                    remedies.append(f"{name}: {indications}" if indications else name)
+            elif remedy:
+                remedies.append(str(remedy))
+        enriched['homeopathic_remedies'] = remedies
+    for section in AI_ENRICHABLE_SECTIONS:
+        if not before[section] and enriched.get(section):
+            result[section] = enriched[section]
+    filled = [section for section in AI_ENRICHABLE_SECTIONS if not before[section] and result.get(section)]
+    if filled:
+        result['ai_enriched'] = True
+        result['ai_enriched_sections'] = filled
+        result['ai_generated_sections'] = {section: AI_CONTENT_LABEL for section in filled}
+        result['ai_content_label'] = AI_CONTENT_LABEL
+    if result.get('homeopathic_remedies'):
+        result['homeopathy_validation_statement'] = HOMEOPATHY_VALIDATION_STATEMENT
+    return result
 
 @router.get("/search")
 async def search_diagnoses(
@@ -557,12 +603,8 @@ async def search_diagnoses(
                         temperature=0.3  # Conservative for medical content
                     )
                     
-                    # Update result with enriched content
-                    result.update(enriched)
-                    
-                    # Add indicator that content was AI-generated
-                    result['ai_enriched'] = True
-                    result['ai_enriched_sections'] = missing_sections
+                    # Fill only the empty sections, labelling each as AI-generated
+                    _apply_ai_enrichment(result, enriched)
                     
                 except Exception as e:
                     print(f"Warning: Could not enrich {result.get('name', '')}: {e}")
