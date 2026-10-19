@@ -152,7 +152,10 @@ jobs:
         run: python -m pip install pytest requests
 
       - name: Generate a throwaway JWT secret for the API container
-        run: echo "JWT_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_urlsafe(48))')" >> "$GITHUB_ENV"
+        run: |
+          KEY=$(python -c 'import secrets; print(secrets.token_urlsafe(48))')
+          echo "::add-mask::$KEY"
+          echo "JWT_SECRET_KEY=$KEY" >> "$GITHUB_ENV"
 
       - name: Run e2e pytest against the prebuilt frontend image
         env:
@@ -162,7 +165,9 @@ jobs:
           COMPOSE_FILE: docker-compose.yml:docker-compose.local.yml
         run: |
           docker tag realdiag-frontend:smoketest realdiag-frontend:prebuilt
-          pytest -q tests/test_e2e.py::test_e2e_stack
+          # --noconftest: tests/conftest.py imports the backend app (FastAPI),
+          # which this job doesn't install; the e2e test only needs requests.
+          pytest -q --noconftest tests/test_e2e.py::test_e2e_stack
 
       - name: Tear down stack
         if: always()
