@@ -403,32 +403,33 @@ def _dka(engine, glucose_value, glucose_unit, co2=None):
     return engine.evaluate_tree("ENDO-DKA", _patient(labs=labs))
 
 
-@pytest.mark.parametrize("value,unit,met,severity", [
-    (600, "mg/dL", True, "critical"),
-    (30, "mmol/L", True, "critical"),     # 540 mg/dL
-    (20, "mmol/L", True, "moderate"),     # 360 mg/dL, glucose criterion only
-    (10, "mmol/L", False, "moderate"),    # 180 mg/dL
-    (200, "mg/dL", False, "moderate"),
+def _glucose(dka):
+    return next(c for c in dka.criteria_met + dka.criteria_not_met + dka.criteria_unknown
+                if c.criterion.startswith("Glucose"))
+
+
+@pytest.mark.parametrize("value,unit,met", [
+    (600, "mg/dL", True),
+    (30, "mmol/L", True),     # 540 mg/dL
+    (12, "mmol/L", True),     # 216 mg/dL
+    (10, "mmol/L", False),    # 180 mg/dL
+    (200, "mg/dL", True),     # 2024 consensus: >= 200 mg/dL
+    (199, "mg/dL", False),
 ])
-def test_dka_glucose_converted_before_comparison(engine, value, unit, met, severity):
-    dka = _dka(engine, value, unit)
-    assert bool([c for c in dka.criteria_met if c.criterion == "Hyperglycemia"]) is met
-    assert dka.severity == severity
+def test_dka_glucose_converted_before_comparison(engine, value, unit, met):
+    assert (_glucose(_dka(engine, value, unit)).status.value == "present") is met
 
 
 def test_mmol_glucose_is_not_read_as_mg_dl(engine):
-    # 30 mmol/L used to be compared with 250/500 mg/dL as-is and called normal
-    dka = _dka(engine, 30, "mmol/L", co2=12)
-    assert dka.severity == "critical"
-    assert "540 mg/dL" in dka.criteria_met[0].value
+    assert _glucose(_dka(engine, 30, "mmol/L", co2=12)).value == "30 mmol/L (= 540 mg/dL)"
 
 
 @pytest.mark.parametrize("unit,reason", [("", "no unit"), ("g/L", "not recognised")])
 def test_dka_glucose_unit_missing_or_unknown(engine, unit, reason):
     dka = _dka(engine, 600, unit, co2=12)
-    assert dka.severity == "unknown"
-    assert reason in dka.severity_reason
-    assert [c.criterion for c in dka.criteria_unknown] == ["Hyperglycemia"]
+    glucose = _glucose(dka)
+    assert glucose.status.value == "unknown" and reason in glucose.details
+    assert "Blood glucose with units (mg/dL or mmol/L)" in dka.missing_tests
 
 
 # --- Patient history service retrieval status --------------------------------

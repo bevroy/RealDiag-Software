@@ -78,58 +78,115 @@ homeopathy:
 entry_point: ''
 nodes: []
 criteria:
-  finding_label: diabetic ketoacidosis
-  source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
+  finding_label: diabetic ketoacidosis (2024 consensus criteria)
+  source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
   display: always
   probability: met_over_known
   suggest_when:
-    count_met: 2
+    all_groups:
+      - dka_d
+      - dka_k
+      - dka_a
   severity_default: moderate
   severity:
-    - type: count_met
-      at_least: 2
+    - type: all_groups
+      groups:
+        - dka_d
+        - dka_k
+        - dka_a
       level: high
-    - type: unusable
-      item: glucose
-      level: unknown
+      reason: Meets 2024 consensus DKA criteria (D, K and A).
     - type: value
-      item: glucose
-      op: '>'
-      value: 500
+      item: bicarbonate
+      op: <
+      value: 10
       level: critical
-      reason: Glucose {value:.0f} mg/dL (> 500 mg/dL).
+      reason: 'Bicarbonate {value:.0f} mmol/L (< 10: severe range).'
+    - type: value
+      item: ph
+      op: <
+      value: 7.0
+      level: critical
+      reason: 'pH {value:.2f} (< 7.0: severe range).'
   next_steps:
-    - Consider serum/urine ketones, VBG or ABG for pH, and potassium; fluid and insulin management per clinician judgment and institutional DKA protocol.
+    - Consider repeat ketones, venous blood gas and potassium; fluid and insulin management per clinician judgment and institutional DKA protocol.
   items:
     - id: glucose
-      label: Hyperglycemia
+      label: Glucose >= 200 mg/dL (D)
+      group: dka_d
       resource: lab
       loinc:
         - 2345-7
-      operator: '>'
-      value: 250
+      operator: '>='
+      value: 200
       unit: mg/dL
       show_converted: true
-      expected: '> 250 mg/dL (13.9 mmol/L)'
+      expected: '>= 200 mg/dL (11.1 mmol/L)'
       details_unusable: '{problem}.'
       details_unknown: Blood glucose not measured
       missing_test: Blood glucose
       missing_test_unusable: Blood glucose with units (mg/dL or mmol/L)
-      source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
+      source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
+    - id: known_diabetes
+      label: Known diabetes on the problem list (D)
+      group: dka_d
+      resource: problem_list
+      icd10_prefixes:
+        - E08
+        - E09
+        - E10
+        - E11
+        - E13
+      snomed:
+        - '73211009'
+        - '44054006'
+        - '46635009'
+      details_met: Prior diabetes satisfies the D criterion regardless of glucose (euglycemic DKA).
+      source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
+    - id: beta_hydroxybutyrate
+      label: Beta-hydroxybutyrate >= 3.0 mmol/L (K)
+      group: dka_k
+      resource: lab
+      loinc:
+        - 53060-9
+      operator: '>='
+      value: 3.0
+      unit: mmol/L
+      expected: '>= 3.0 mmol/L'
+      details_unknown: Beta-hydroxybutyrate not measured (urine ketones >= 2+ are not assessed)
+      missing_test: Serum beta-hydroxybutyrate (ketones)
+      source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
+    - id: ph
+      label: pH < 7.3 (A)
+      group: dka_a
+      resource: lab
+      loinc:
+        - 2744-1
+        - 2746-5
+        - 11558-4
+      operator: <
+      value: 7.3
+      unit: '[pH]'
+      unit_check: false
+      expected: < 7.3
+      details_unknown: Blood gas pH not measured
+      missing_test: Venous or arterial blood gas (pH)
+      source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
     - id: bicarbonate
-      label: Metabolic acidosis
+      label: Bicarbonate < 18 mmol/L (A)
+      group: dka_a
       resource: lab
       loinc:
         - 2028-9
+        - 1963-8
       operator: <
       value: 18
-      unit: mEq/L
-      unit_check: false
-      expected: < 18 mEq/L
+      unit: mmol/L
+      expected: < 18 mmol/L
       details_met: Low bicarbonate suggests metabolic acidosis
       details_unknown: Bicarbonate (CO2) not measured
       missing_test: Basic metabolic panel (BMP)
-      source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
+      source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
 author: RealDiag Clinical Team
 change_log:
   - date: '2024-12-26'
@@ -145,3 +202,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: DKA criteria updated to the 2024 ADA/EASD/JBDS/AACE/DTS consensus (glucose >= 200 mg/dL or known diabetes; beta-hydroxybutyrate >= 3.0 mmol/L; pH < 7.3 and/or bicarbonate < 18 mmol/L). Pending clinical review.

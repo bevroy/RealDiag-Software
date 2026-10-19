@@ -344,7 +344,7 @@ CRITERIA_ROLES = {"core", "supporting"}
 CRITERIA_DISPLAY = {"always", "when_found"}
 CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
 SEVERITY_LEVELS = {"low", "moderate", "high", "critical", "unknown", "not rated"}
-SEVERITY_RULE_TYPES = {"reference_multiple", "count_met", "unusable", "value", "any_met"}
+SEVERITY_RULE_TYPES = {"reference_multiple", "count_met", "unusable", "value", "any_met", "all_groups"}
 LOINC_PATTERN = re.compile(r"^\d{1,7}-\d$")
 
 
@@ -372,10 +372,21 @@ def criteria_problems(criteria) -> List[str]:
     if not isinstance(items, list) or not items:
         return problems + ["'items' must be a non-empty list"]
     ids = set()
+    groups = {i.get("group") for i in items if isinstance(i, dict) and i.get("group")}
     for index, item in enumerate(items):
         where = f"item {item.get('id', index + 1)}" if isinstance(item, dict) else f"item {index + 1}"
         if not isinstance(item, dict):
             problems.append(f"{where}: must be a mapping")
+            continue
+        if item.get("resource") == "problem_list":
+            for key in ("id", "label", "source"):
+                if not str(item.get(key) or "").strip():
+                    problems.append(f"{where}: missing '{key}'")
+            if not (item.get("icd10_prefixes") or item.get("snomed")):
+                problems.append(f"{where}: problem_list items need icd10_prefixes or snomed codes")
+            if item.get("id") in ids:
+                problems.append(f"{where}: duplicate id")
+            ids.add(item.get("id"))
             continue
         for key in ("id", "label", "loinc", "operator", "unit", "source"):
             if item.get(key) in (None, "", []):
@@ -388,7 +399,12 @@ def criteria_problems(criteria) -> List[str]:
             problems.append(f"{where}: loinc must be a list of LOINC codes like '4548-4'")
             codes = []
         if item.get("resource", "lab") not in ("lab", "vital"):
-            problems.append(f"{where}: resource must be 'lab' or 'vital'")
+            problems.append(f"{where}: resource must be 'lab', 'vital' or 'problem_list'")
+        if "aggregate" in item and item["aggregate"] != "daily_mean":
+            problems.append(f"{where}: aggregate must be 'daily_mean'")
+        for key in ("min_days", "max_days"):
+            if key in item and not (isinstance(item[key], int) and item[key] > 0):
+                problems.append(f"{where}: {key} must be a positive whole number")
         if item.get("role", "core") not in CRITERIA_ROLES:
             problems.append(f"{where}: role must be one of {sorted(CRITERIA_ROLES)}")
         op = item.get("operator")
@@ -429,11 +445,26 @@ def criteria_problems(criteria) -> List[str]:
         for ref in refs:
             if ref not in ids:
                 problems.append(f"severity rule {kind}: refers to unknown item {ref!r}")
+        for group in rule.get("groups", []) + ([rule["group"]] if rule.get("group") else []):
+            if group not in groups:
+                problems.append(f"severity rule {kind}: refers to unknown group {group!r}")
         if "level" in rule and rule["level"] not in SEVERITY_LEVELS:
             problems.append(f"severity rule {kind}: unknown level {rule['level']!r}")
     for key in ("suggest_when", "confirm", "known_condition"):
         if key in criteria and not isinstance(criteria[key], dict):
             problems.append(f"'{key}' must be a mapping")
+
+    def check_rule(rule):
+        if not isinstance(rule, dict):
+            problems.append("suggest_when rules must be mappings")
+            return
+        for sub in rule.get("any", []):
+            check_rule(sub)
+        for group in rule.get("all_groups", []) + ([rule["group"]] if rule.get("group") else []):
+            if group not in groups:
+                problems.append(f"suggest_when refers to unknown group {group!r}")
+    if isinstance(criteria.get("suggest_when"), dict):
+        check_rule(criteria["suggest_when"])
     return problems
 
 

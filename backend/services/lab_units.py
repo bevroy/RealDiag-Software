@@ -37,6 +37,14 @@ ANALYTES: Dict[str, Tuple[str, Dict[str, Factor], str]] = {
     "potassium": ("mmol/L", {"mmol/l": 1.0, "meq/l": 1.0}, "mmol/L or mEq/L"),
     "ldl": ("mg/dL", {"mg/dl": 1.0, "mmol/l": 38.67}, "mg/dL or mmol/L"),
     "blood_pressure": ("mmHg", {"mmhg": 1.0, "mm[hg]": 1.0}, "mmHg"),
+    "temperature": ("Cel", {"cel": 1.0, "c": 1.0, "°c": 1.0, "degc": 1.0,
+                            "[degf]": lambda f: (f - 32) * 5 / 9, "f": lambda f: (f - 32) * 5 / 9,
+                            "°f": lambda f: (f - 32) * 5 / 9, "degf": lambda f: (f - 32) * 5 / 9},
+                    "Cel or [degF]"),
+    "lactate": ("mmol/L", {"mmol/l": 1.0, "meq/l": 1.0, "mg/dl": 0.111}, "mmol/L or mg/dL"),
+    # beta-hydroxybutyrate (MW 104.1): 1 mg/dL = 0.0961 mmol/L
+    "beta_hydroxybutyrate": ("mmol/L", {"mmol/l": 1.0, "mg/dl": 0.0961}, "mmol/L or mg/dL"),
+    "bicarbonate": ("mmol/L", {"mmol/l": 1.0, "meq/l": 1.0}, "mmol/L or mEq/L"),
 }
 
 ANALYTE_BY_LOINC: Dict[str, str] = {
@@ -51,6 +59,10 @@ ANALYTE_BY_LOINC: Dict[str, str] = {
     "2823-3": "potassium", "6298-4": "potassium",
     "13457-7": "ldl", "18262-6": "ldl", "2089-1": "ldl",
     "8480-6": "blood_pressure", "8462-4": "blood_pressure",
+    "8310-5": "temperature",
+    "2524-7": "lactate", "32693-4": "lactate",
+    "53060-9": "beta_hydroxybutyrate",
+    "2028-9": "bicarbonate", "1963-8": "bicarbonate",
 }
 
 
@@ -59,7 +71,8 @@ ANALYTE_NAMES: Dict[str, str] = {
     "troponin": "troponin", "glucose": "glucose", "hba1c": "HbA1c", "egfr": "eGFR",
     "uacr": "urine albumin-creatinine ratio", "hemoglobin": "hemoglobin", "tsh": "TSH",
     "free_t4": "free T4", "potassium": "potassium", "ldl": "LDL cholesterol",
-    "blood_pressure": "blood pressure",
+    "blood_pressure": "blood pressure", "temperature": "temperature", "lactate": "lactate",
+    "beta_hydroxybutyrate": "beta-hydroxybutyrate", "bicarbonate": "bicarbonate",
 }
 
 

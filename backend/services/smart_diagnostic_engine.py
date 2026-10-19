@@ -40,6 +40,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from types import SimpleNamespace
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -281,6 +282,9 @@ def _evaluate_item(item: Dict[str, Any], patient_data: PatientData, now: datetim
     if sex and str(patient_data.gender or "").lower() != sex:
         return _ItemResult(item=item, criterion=None, status=None)
 
+    if item.get("resource") == "problem_list":
+        return _evaluate_problem_list(item, patient_data)
+
     ev = _ItemEvaluator(item)
     label = item["label"]
     source = item.get("source")
@@ -294,6 +298,9 @@ def _evaluate_item(item: Dict[str, Any], patient_data: PatientData, now: datetim
             criterion=CriterionEvaluation(criterion=item.get("unknown_label", label), status=CriteriaStatus.UNKNOWN,
                                           details=item.get("details_unknown"), source=source),
         )
+
+    if item.get("aggregate") == "daily_mean":
+        return _evaluate_daily_mean(item, ev, results)
 
     min_occ = int(item.get("min_occurrences", 1))
     min_span = int(item.get("min_span_days", 0))
@@ -393,6 +400,68 @@ def _evaluate_repeated(item, ev: _ItemEvaluator, results, min_occ: int, min_span
     )
 
 
+def _evaluate_problem_list(item: Dict[str, Any], patient_data: PatientData) -> _ItemResult:
+    """Criterion met by a condition on the problem list (e.g. known diabetes)."""
+    label, source = item["label"], item.get("source")
+    status = (patient_data.retrieval_status or {}).get("conditions", RETRIEVED)
+    match = known_condition({"known_condition": item}, patient_data.conditions)
+    if match:
+        return _ItemResult(item=item, status=CriteriaStatus.PRESENT, abnormal_count=1, criterion=CriterionEvaluation(
+            criterion=label, status=CriteriaStatus.PRESENT, value=match, expected="on the problem list",
+            details=item.get("details_met"), source=source))
+    if status != RETRIEVED:
+        return _ItemResult(item=item, status=CriteriaStatus.UNKNOWN, problem="problem list could not be retrieved",
+                           criterion=CriterionEvaluation(criterion=label, status=CriteriaStatus.UNKNOWN,
+                                                         details="Problem list could not be retrieved.", source=source))
+    return _ItemResult(item=item, status=CriteriaStatus.ABSENT, criterion=CriterionEvaluation(
+        criterion=label, status=CriteriaStatus.ABSENT, value="not on the problem list",
+        expected="on the problem list", source=source))
+
+
+def _evaluate_daily_mean(item, ev: _ItemEvaluator, results) -> _ItemResult:
+    """Average readings per day (one occasion), then average the most recent
+    occasions; e.g. BP classified on the average of >= 2 readings on >= 2 occasions."""
+    label, source = item["label"], item.get("source")
+    min_days, max_days = int(item.get("min_days", 2)), int(item.get("max_days", 3))
+    by_day: Dict[Any, List[float]] = {}
+    problems = []
+    for r in results:   # newest first
+        canonical, problem = (to_canonical(ev.analyte, r.value, r.unit) if ev.unit_check else (r.value, None))
+        if problem:
+            problems.append(problem)
+            continue
+        day = (_naive_utc(r.effective_date) or datetime.min).date()
+        by_day.setdefault(day, []).append(canonical)
+    if not by_day:
+        return _ItemResult(
+            item=item, status=CriteriaStatus.UNKNOWN, problem=problems[0] if problems else None,
+            missing_test=item.get("missing_test"),
+            criterion=CriterionEvaluation(criterion=item.get("unknown_label", label), status=CriteriaStatus.UNKNOWN,
+                                          expected=item.get("expected"),
+                                          details=f"{problems[0]}." if problems else None, source=source))
+
+    days = sorted(by_day, reverse=True)[:max_days]
+    daily = [(d, sum(by_day[d]) / len(by_day[d]), len(by_day[d])) for d in days]
+    mean = sum(m for _, m, _ in daily) / len(daily)
+    readings = sum(n for _, _, n in daily)
+    met = ev.check(SimpleNamespace(value=mean, unit=ev.item.get("unit"), reference_range=None,
+                                   reference_unit=None, code=None)).met
+    unit = item.get("unit", "")
+    value = f"{mean:.0f} {unit} (average of {readings} readings on {len(daily)} day{'s' if len(daily) != 1 else ''})"
+    per_day = ", ".join(f"{d.isoformat()}: {m:.0f} ({n} reading{'s' if n != 1 else ''})" for d, m, n in daily)
+    enough = len(daily) >= min_days
+    if not met:
+        return _ItemResult(item=item, status=CriteriaStatus.ABSENT, criterion=CriterionEvaluation(
+            criterion=label, status=CriteriaStatus.ABSENT, value=value, expected=item.get("expected"),
+            details=f"Daily averages: {per_day}.", source=source))
+    details = f"Daily averages: {per_day}."
+    if not enough:
+        details += f" Confirmation pending: readings on {len(daily)} of {min_days} required occasions."
+    return _ItemResult(item=item, status=CriteriaStatus.PRESENT, partial=not enough, abnormal_count=1,
+                       criterion=CriterionEvaluation(criterion=label, status=CriteriaStatus.PRESENT, value=value,
+                                                     expected=item.get("expected"), details=details, source=source))
+
+
 # --------------------------------------------------------------------------- tree-level evaluation
 
 def known_condition(criteria: Dict[str, Any], conditions: List[Dict[str, Any]]) -> Optional[str]:
@@ -419,6 +488,20 @@ def _count_met(item_results: List[_ItemResult], group: Optional[str]) -> int:
         and r.item.get("role", "core") == "core"
         and (group is None or r.item.get("group") == group)
     )
+
+
+def _groups_met(item_results: List[_ItemResult], groups: List[str]) -> bool:
+    """Every group has at least one fully met core item (e.g. DKA: D and K and A)."""
+    return all(_count_met(item_results, g) >= 1 for g in groups)
+
+
+def _rule_holds(rule: Dict[str, Any], item_results: List[_ItemResult]) -> bool:
+    """suggest_when rule: {count_met, group} | {all_groups: [...]} | {any: [rules]}."""
+    if "any" in rule:
+        return any(_rule_holds(r, item_results) for r in rule["any"])
+    if "all_groups" in rule:
+        return _groups_met(item_results, rule["all_groups"])
+    return _count_met(item_results, rule.get("group")) >= rule.get("count_met", 1)
 
 
 def _apply_severity(criteria: Dict[str, Any], item_results: List[_ItemResult]) -> Tuple[str, Optional[str]]:
@@ -450,6 +533,10 @@ def _apply_severity(criteria: Dict[str, Any], item_results: List[_ItemResult]) -
                 if hit:
                     severity = rule["level"]
                     reason = rule["reason"].format(value=v) if rule.get("reason") else reason
+        elif kind == "all_groups":
+            if _groups_met(item_results, rule["groups"]):
+                severity = rule["level"]
+                reason = rule.get("reason", reason)
         elif kind == "any_met":
             if any(by_id.get(i) is not None and by_id[i].status == CriteriaStatus.PRESENT and not by_id[i].partial
                    for i in rule["items"]):
@@ -495,7 +582,7 @@ def evaluate_tree(tree: Dict[str, Any], patient_data: PatientData, now: Optional
             finding = "consistent"
         elif abnormal_total >= 1:
             finding = "possible"
-    elif _count_met(item_results, suggest.get("group")) >= suggest.get("count_met", 1):
+    elif _rule_holds(suggest, item_results):
         finding = "consistent"
     elif any(r.partial for r in item_results):
         finding = "possible"

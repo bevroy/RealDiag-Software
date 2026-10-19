@@ -119,15 +119,23 @@ homeopathy:
 entry_point: ''
 nodes: []
 criteria:
-  finding_label: sepsis risk (qSOFA >= 2)
-  source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+  finding_label: a positive sepsis screen (qSOFA >= 2 or SIRS >= 2)
+  source: 'Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (recommends against qSOFA alone as a screening tool, compared with SIRS, NEWS or MEWS)'
   display: always
   probability: met_over_known
   suggest_when:
-    count_met: 2
-    group: qsofa
+    any:
+      - count_met: 2
+        group: qsofa
+      - count_met: 2
+        group: sirs
   severity_default: moderate
   severity:
+    - type: count_met
+      group: sirs
+      at_least: 2
+      level: high
+      reason: SIRS >= 2 (sensitive, not specific).
     - type: count_met
       group: qsofa
       at_least: 1
@@ -136,12 +144,12 @@ criteria:
       group: qsofa
       at_least: 2
       level: critical
+      reason: qSOFA >= 2 (higher risk of poor outcome).
   next_steps:
     - Consider blood cultures and lactate; antibiotic and fluid decisions per clinician judgment and institutional sepsis protocol.
   items:
     - id: respiratory_rate
       label: Tachypnea (qSOFA)
-      unknown_label: Respiratory rate
       group: qsofa
       resource: vital
       loinc:
@@ -149,9 +157,10 @@ criteria:
       operator: '>='
       value: 22
       unit: /min
-      unit_check: false
       expected: '>= 22/min'
-      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+      unknown_label: Respiratory rate
+      unit_check: false
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
     - id: systolic_bp
       label: Hypotension (qSOFA)
       group: qsofa
@@ -161,10 +170,10 @@ criteria:
       operator: <=
       value: 100
       unit: mmHg
-      unit_check: false
       expected: <= 100 mmHg
+      unit_check: false
       details_unknown: Systolic blood pressure not documented
-      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
     - id: gcs
       label: Altered mentation (qSOFA)
       group: qsofa
@@ -174,15 +183,56 @@ criteria:
       operator: <
       value: 15
       unit: '{score}'
+      expected: GCS < 15
       unit_check: false
       value_format: GCS {value}
-      expected: GCS < 15
       details_met: Altered mental status contributes to qSOFA
       details_unknown: GCS not documented - qSOFA cannot be fully scored without it
       missing_test: Glasgow Coma Scale / mental status assessment
-      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
+    - id: temperature
+      label: Temperature > 38.0 or < 36.0 C (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 8310-5
+      operator: outside
+      value:
+        - 36.0
+        - 38.0
+      unit: Cel
+      expected: < 36.0 or > 38.0 C
+      details_unknown: Temperature not documented
+      missing_test: Temperature
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: heart_rate
+      label: Heart rate > 90/min (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 8867-4
+      operator: '>'
+      value: 90
+      unit: /min
+      expected: '> 90/min'
+      unit_check: false
+      details_unknown: Heart rate not documented
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: respiratory_rate_sirs
+      label: Respiratory rate > 20/min (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 9279-1
+      operator: '>'
+      value: 20
+      unit: /min
+      expected: '> 20/min'
+      unit_check: false
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
     - id: wbc
-      label: Abnormal WBC
+      label: Abnormal WBC (SIRS)
+      group: sirs
       resource: lab
       loinc:
         - 6690-2
@@ -197,7 +247,20 @@ criteria:
       details_met: Leukocytosis or leukopenia
       details_unknown: WBC not measured
       missing_test: CBC with differential
-      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: lactate
+      label: Lactate > 2 mmol/L
+      role: supporting
+      resource: lab
+      loinc:
+        - 2524-7
+        - 32693-4
+      operator: '>'
+      value: 2.0
+      unit: mmol/L
+      expected: '> 2 mmol/L'
+      details_met: Elevated lactate (Sepsis-3 septic shock definition uses > 2 mmol/L).
+      source: Sepsis-3 (Singer et al., JAMA 2016); SSC 2021 suggests measuring blood lactate
 trace:
   - Recognize infection with organ dysfunction
   - Activate sepsis protocol immediately
@@ -214,3 +277,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Sepsis criteria: qSOFA no longer used alone; screen positive when qSOFA >= 2 or SIRS >= 2, lactate shown as supporting (SSC 2021). Pending clinical review.'

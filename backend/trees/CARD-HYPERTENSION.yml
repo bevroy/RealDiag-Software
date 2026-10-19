@@ -123,71 +123,79 @@ criteria:
     snomed:
       - '38341003'
   severity_default: moderate
-  severity_default_reason: Stage 1 range (130-139 / 80-89 mmHg).
+  severity_default_reason: Stage 1 range (average 130-139 / 80-89 mmHg on >= 2 occasions).
   severity:
     - type: any_met
       items:
         - systolic_stage2
         - diastolic_stage2
       level: high
-      reason: Stage 2 range (>= 140 / 90 mmHg) on 2 or more occasions.
+      reason: Stage 2 range (average >= 140 / 90 mmHg on >= 2 occasions).
   items:
     - id: systolic
-      label: Systolic BP >= 130 mmHg on 2 or more occasions
+      label: Average systolic BP >= 130 mmHg
       resource: vital
       loinc:
         - 8480-6
       operator: '>='
       value: 130
       unit: mmHg
-      min_occurrences: 2
-      distinct_days: true
+      aggregate: daily_mean
+      min_days: 2
+      max_days: 3
       lookback_days: 365
-      expected: '>= 130 mmHg on >= 2 separate days'
+      expected: '>= 130 mmHg, average of readings on >= 2 occasions'
       missing_test: Blood pressure readings on 2 or more occasions
       source: 2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults
     - id: diastolic
-      label: Diastolic BP >= 80 mmHg on 2 or more occasions
+      label: Average diastolic BP >= 80 mmHg
       resource: vital
       loinc:
         - 8462-4
       operator: '>='
       value: 80
       unit: mmHg
-      min_occurrences: 2
-      distinct_days: true
+      aggregate: daily_mean
+      min_days: 2
+      max_days: 3
       lookback_days: 365
-      expected: '>= 80 mmHg on >= 2 separate days'
+      expected: '>= 80 mmHg, average of readings on >= 2 occasions'
       missing_test: Blood pressure readings on 2 or more occasions
       source: 2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults
     - id: systolic_stage2
-      label: Systolic BP >= 140 mmHg on 2 or more occasions
-      role: supporting
+      label: Average systolic BP >= 140 mmHg
       resource: vital
       loinc:
         - 8480-6
       operator: '>='
       value: 140
       unit: mmHg
-      min_occurrences: 2
-      distinct_days: true
+      aggregate: daily_mean
+      min_days: 2
+      max_days: 3
       lookback_days: 365
       expected: '>= 140 mmHg'
+      missing_test: Blood pressure readings on 2 or more occasions
       source: 2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults
-    - id: diastolic_stage2
-      label: Diastolic BP >= 90 mmHg on 2 or more occasions
       role: supporting
+    - id: diastolic_stage2
+      label: Average diastolic BP >= 90 mmHg
       resource: vital
       loinc:
         - 8462-4
       operator: '>='
       value: 90
       unit: mmHg
-      min_occurrences: 2
-      distinct_days: true
+      aggregate: daily_mean
+      min_days: 2
+      max_days: 3
       lookback_days: 365
       expected: '>= 90 mmHg'
+      missing_test: Blood pressure readings on 2 or more occasions
       source: 2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults
+      role: supporting
+  next_steps:
+    - Consider out-of-office blood pressure measurement (home or ambulatory) to confirm, per the 2025 AHA/ACC guideline.
 trace:
   - 52-year-old man presents for health maintenance, no complaints, BP readings at pharmacy consistently 140s/90s x 3 months
   - Past medical history: no known medical conditions, family history father with MI at age 58
@@ -210,3 +218,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Hypertension criteria now average readings per occasion (>= 2 occasions) instead of counting elevated readings (2025 AHA/ACC). Pending clinical review.

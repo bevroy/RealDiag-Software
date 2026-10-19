@@ -9,6 +9,11 @@ smart_engine_cases.py. These tests require the criteria engine to reproduce
 every criterion, value, expected range, detail, probability, severity,
 severity reason, missing test and evaluation status exactly. Only the result
 ids (now tree ids) and the recommendation wording changed by design.
+
+Equivalence for all three was proven in commit 83c4054 (Phase 1). Sepsis and
+DKA criteria were then deliberately updated (SSC 2021: qSOFA not used alone;
+2024 hyperglycemic-crises consensus), so only ACS is still compared here; the
+golden file is kept unchanged as the record of the previous behavior.
 """
 
 import json
@@ -32,8 +37,12 @@ def test_golden_covers_every_case():
     assert set(GOLDEN) == set(CASES)
 
 
+# Evaluators whose criteria are unchanged since Phase 1 (83c4054)
+UNCHANGED = ["CARD-ACS"]
+
+
 @pytest.mark.parametrize("case", sorted(CASES))
-@pytest.mark.parametrize("legacy_id", sorted(LEGACY_TO_TREE))
+@pytest.mark.parametrize("legacy_id", UNCHANGED)
 def test_each_evaluator_matches_previous_output(engine, case, legacy_id):
     result = engine.evaluate_tree(LEGACY_TO_TREE[legacy_id], patient(case), now=NOW)
     assert serialize(result) == GOLDEN[case]["raw"][legacy_id]
@@ -42,9 +51,10 @@ def test_each_evaluator_matches_previous_output(engine, case, legacy_id):
 @pytest.mark.parametrize("case", sorted(CASES))
 def test_shown_results_match_previous_output(engine, case):
     """Same diagnoses shown (after insufficient-data labelling and filtering)."""
+    unchanged_trees = {LEGACY_TO_TREE[k] for k in UNCHANGED}
     shown = {e.diagnosis_id: serialize(e) for e in engine.evaluate_patient(patient(case), now=NOW)
-             if e.diagnosis_id in LEGACY_TO_TREE.values()}
-    expected = {LEGACY_TO_TREE[k]: v for k, v in GOLDEN[case]["shown"].items()}
+             if e.diagnosis_id in unchanged_trees}
+    expected = {LEGACY_TO_TREE[k]: v for k, v in GOLDEN[case]["shown"].items() if k in UNCHANGED}
     assert shown == expected
 
 
