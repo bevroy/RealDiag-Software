@@ -111,3 +111,14 @@ def test_validator_rejects_entry_point_not_matching_node(tmp_path):
     path = tmp_path / "TEST-TREE.yml"
     path.write_text(yaml.safe_dump(tree, sort_keys=False))
     assert any("does not match any node id" in e for e in _validate(path).errors)
+
+
+def test_validator_flags_single_node_without_branches(tmp_path):
+    tree = _valid_tree()
+    tree["nodes"] = [{"id": "evaluation", "type": "diagnosis", "workup": ["BMI"]}]
+    tree["entry_point"] = "evaluation"
+    path = tmp_path / "TEST-TREE.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    result = _validate(path)
+    assert result.errors == []
+    assert any("single node and no decision branches" in w for w in result.warnings)

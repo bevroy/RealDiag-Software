@@ -6,6 +6,11 @@ from backend.services.decision_tree_engine import DecisionTreeEngine
 
 TREES_DIR = Path(__file__).resolve().parents[1] / "trees"
 
+QUESTIONNAIRE_WARNING = (
+    "This tree is an interactive questionnaire that requires answers from the user "
+    "and was not evaluated automatically."
+)
+
 QUESTIONNAIRE_TREES = [
     "ALLERGY-DRUG-ALLERGY", "DENT-DENTAL-ABSCESS", "DERM-ECZEMA-DERMATITIS",
     "EMERGENCY-ANAPHYLAXIS", "ENDO-THYROID-STORM", "ENT-HEARING-LOSS", "GENERAL-EDEMA",
@@ -77,7 +82,7 @@ def test_questionnaire_tree_is_not_evaluated(tmp_path):
     result = _engine_with(tmp_path, tree).evaluate("TEST-QUESTIONS", {})
     assert result["evaluated"] is False
     assert result["node_format"] == "questionnaire"
-    assert "NOT evaluated automatically" in result["warning"]
+    assert result["warning"] == QUESTIONNAIRE_WARNING
     assert "error" not in result
 
 
@@ -86,7 +91,32 @@ def test_real_questionnaire_trees_return_warning():
     for tree_id in QUESTIONNAIRE_TREES:
         result = engine.evaluate(tree_id, {"symptoms": ["pain"]})
         assert result.get("evaluated") is False, tree_id
-        assert "interactive questionnaire" in result["warning"], tree_id
+        assert result["warning"] == QUESTIONNAIRE_WARNING, tree_id
+
+
+def test_single_content_node_tree_is_not_evaluated(tmp_path):
+    tree = {
+        "tree_id": "TEST-CONTENT",
+        "name": "Test content-only tree",
+        "codes": {"icd10": ["E66.9"], "snomed": [], "icpc2": []},
+        "entry_point": "evaluation",
+        "nodes": [
+            {"id": "evaluation", "type": "diagnosis", "name": "Obesity", "workup": ["BMI"]},
+        ],
+    }
+    result = _engine_with(tmp_path, tree).evaluate("TEST-CONTENT", {"symptoms": ["weight gain"]})
+    assert result["evaluated"] is False
+    assert result["node_format"] == "content"
+    assert "no decision branches to evaluate" in result["warning"]
+    assert "error" not in result
+
+
+def test_real_single_node_trees_return_warning():
+    engine = DecisionTreeEngine()
+    for tree_id in ("GEN-MED-OBESITY", "URO-BLADDER-CANCER"):
+        result = engine.evaluate(tree_id, {"symptoms": []})
+        assert result.get("evaluated") is False, tree_id
+        assert "no decision branches to evaluate" in result["warning"], tree_id
 
 
 def test_every_tree_evaluates_without_exception():

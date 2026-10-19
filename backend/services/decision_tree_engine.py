@@ -95,7 +95,20 @@ class DecisionTreeEngine:
         if t["entry"] not in node_ids:
             return {"error": f"tree '{tree_id}' entry_point '{t['entry']}' does not match any node id; it cannot be evaluated"}
 
-        if t.get("node_format") in ("questionnaire", "mixed"):
+        # Trees the engine cannot walk: report them as not evaluated rather than
+        # returning empty lists that could be read as "no findings".
+        not_evaluated = {
+            "questionnaire": (
+                "This tree is an interactive questionnaire that requires answers from the user "
+                "and was not evaluated automatically."
+            ),
+            "content": (
+                "This tree has no decision branches to evaluate (its nodes hold reference "
+                "content only) and was not evaluated automatically."
+            ),
+        }
+        fmt = t.get("node_format")
+        if fmt in ("questionnaire", "mixed", "content"):
             return {
                 "tree": {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t)},
                 "path": [],
@@ -104,14 +117,8 @@ class DecisionTreeEngine:
                 "referrals": [],
                 "trace": [],
                 "evaluated": False,
-                "node_format": t["node_format"],
-                "warning": (
-                    f"Tree '{tree_id}' is an interactive questionnaire that requires clinician "
-                    "answers at each step; it was NOT evaluated automatically. The empty test, "
-                    "diagnosis and referral lists in this result do not mean there are no "
-                    "findings. Work through the questionnaire "
-                    "with the patient, or use /search/by-symptoms for presentation-based matching."
-                ),
+                "node_format": fmt,
+                "warning": not_evaluated["content" if fmt == "content" else "questionnaire"],
             }
 
         cur=t.get("entry"); path=[]; tests=[]; dx=[]; referrals=[]; trace_all=[]; seen=set()

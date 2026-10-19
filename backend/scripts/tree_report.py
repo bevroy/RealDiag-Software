@@ -86,6 +86,8 @@ def row_for(path: Path) -> dict:
         issues.append("merged treatment needs clinical review")
     if node_format(tree) in ("questionnaire", "mixed"):
         issues.append("questionnaire tree not evaluated automatically")
+    elif node_format(tree) == "content":
+        issues.append("no decision branches; not evaluated automatically")
     if tree.get("tree_id") != path.stem:
         issues.append("tree_id differs from file name")
 

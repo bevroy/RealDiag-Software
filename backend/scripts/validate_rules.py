@@ -325,6 +325,13 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
 
     fmt = node_format(data)
     result.node_formats[fmt] = result.node_formats.get(fmt, []) + [file_path.stem]
+    if fmt == "content":
+        count = len(node_list(data))
+        shape = "a single node" if count == 1 else f"{count} nodes"
+        result.add_warning(
+            file_path.name,
+            f"Tree has {shape} and no decision branches; the engine reports it as not evaluated"
+        )
 
 
 def generate_report(result: ValidationResult, rules_files: List[Path], trees_files: List[Path]):
