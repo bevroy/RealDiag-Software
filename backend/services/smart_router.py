@@ -277,9 +277,13 @@ class AmbulatoryDifferentialResponse(BaseModel):
     age: Optional[int] = None
     gender: Optional[str] = None
     chart_summary: str
-    data_pulled: Dict[str, int]
+    # Items pulled per data type; None = that data type could not be retrieved
+    data_pulled: Dict[str, Optional[int]]
     search_terms_used: List[str]
     differential: SymptomSearchResponse
+    # Per data type: "retrieved" | "failed" | "not available"
+    data_status: Dict[str, str] = {}
+    data_warnings: List[str] = []
 
 
 def get_ehr_config():
@@ -856,29 +860,41 @@ async def get_ambulatory_differential(
             sex=patient_history.gender,
         )
 
-        data_pulled = {
-            "visit_notes": len(patient_history.visit_notes),
-            "history_and_physicals": len(patient_history.history_and_physicals),
-            "vital_signs": len(patient_history.vital_signs),
-            "diagnostic_tests": len(patient_history.diagnostic_tests),
-            "procedures": len(patient_history.procedures),
-            "imaging_studies": len(patient_history.imaging_studies),
-            "immunizations": len(patient_history.immunizations),
-            "active_conditions": len(patient_history.active_conditions),
-            "past_conditions": len(patient_history.past_conditions),
-            "current_medications": len(patient_history.current_medications),
-            "allergies": len(patient_history.allergies),
+        history_status = patient_history.retrieval_status or {}
+        pulled_items = {
+            "visit_notes": ("visit_notes", patient_history.visit_notes),
+            "history_and_physicals": ("history_and_physicals", patient_history.history_and_physicals),
+            "vital_signs": ("vital_signs", patient_history.vital_signs),
+            "diagnostic_tests": ("diagnostic_tests", patient_history.diagnostic_tests),
+            "procedures": ("procedures", patient_history.procedures),
+            "imaging_studies": ("imaging_studies", patient_history.imaging_studies),
+            "immunizations": ("immunizations", patient_history.immunizations),
+            "active_conditions": ("conditions", patient_history.active_conditions),
+            "past_conditions": ("conditions", patient_history.past_conditions),
+            "current_medications": ("medications", patient_history.current_medications),
+            "allergies": ("allergies", patient_history.allergies),
         }
+        # None = could not be retrieved; 0 = retrieved, none found
+        data_pulled = {
+            key: (len(items) if history_status.get(resource, RETRIEVED) == RETRIEVED else None)
+            for key, (resource, items) in pulled_items.items()
+        }
+        data_warnings = patient_history.data_warnings or retrieval_warnings(history_status)
+        chart_summary = patient_history.summary or ""
+        if data_warnings:
+            chart_summary = (chart_summary + "\n\n" if chart_summary else "") + "Incomplete chart data: " + " ".join(data_warnings)
 
         return AmbulatoryDifferentialResponse(
             patient_id=patient_id,
             name=patient_history.patient_name,
             age=patient_history.age,
             gender=patient_history.gender,
-            chart_summary=patient_history.summary or "",
+            chart_summary=chart_summary,
             data_pulled=data_pulled,
             search_terms_used=search_terms,
             differential=differential,
+            data_status=history_status,
+            data_warnings=data_warnings,
         )
 
     except HTTPException:

@@ -61,6 +61,16 @@ RESOURCE_LABELS = {
     "conditions": "Conditions",
     "medications": "Medications",
     "allergies": "Allergies",
+    # PatientHistoryService data types
+    "demographics": "Patient demographics",
+    "visit_notes": "Visit notes",
+    "vital_signs": "Vital signs",
+    "diagnostic_tests": "Diagnostic test results",
+    "history_and_physicals": "History and physicals",
+    "procedures": "Procedures",
+    "imaging_studies": "Imaging studies",
+    "immunizations": "Immunizations",
+    "family_social_history": "Family and social history",
 }
 
 

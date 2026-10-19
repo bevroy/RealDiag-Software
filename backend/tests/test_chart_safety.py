@@ -384,3 +384,146 @@ def test_test_backend_uses_test_database():
     backend = next(s for s in config["services"] if s["name"] == "realdiag-test-backend")
     db_var = next(v for v in backend["envVars"] if v["key"] == "DATABASE_URL")
     assert db_var["fromDatabase"]["name"] == "realdiag-test-database"
+
+
+# --- DKA glucose units -------------------------------------------------------
+
+def _dka(engine, glucose_value, glucose_unit, co2=None):
+    labs = [_lab(CommonLOINC.GLUCOSE, glucose_value, glucose_unit)]
+    if co2 is not None:
+        labs.append(_lab(CommonLOINC.CO2, co2, "mmol/L"))
+    return engine._evaluate_dka(_patient(labs=labs))
+
+
+@pytest.mark.parametrize("value,unit,met,severity", [
+    (600, "mg/dL", True, "critical"),
+    (30, "mmol/L", True, "critical"),     # 540 mg/dL
+    (20, "mmol/L", True, "moderate"),     # 360 mg/dL, glucose criterion only
+    (10, "mmol/L", False, "moderate"),    # 180 mg/dL
+    (200, "mg/dL", False, "moderate"),
+])
+def test_dka_glucose_converted_before_comparison(engine, value, unit, met, severity):
+    dka = _dka(engine, value, unit)
+    assert bool([c for c in dka.criteria_met if c.criterion == "Hyperglycemia"]) is met
+    assert dka.severity == severity
+
+
+def test_mmol_glucose_is_not_read_as_mg_dl(engine):
+    # 30 mmol/L used to be compared with 250/500 mg/dL as-is and called normal
+    dka = _dka(engine, 30, "mmol/L", co2=12)
+    assert dka.severity == "critical"
+    assert "540 mg/dL" in dka.criteria_met[0].value
+
+
+@pytest.mark.parametrize("unit,reason", [("", "no unit"), ("g/L", "not recognised")])
+def test_dka_glucose_unit_missing_or_unknown(engine, unit, reason):
+    dka = _dka(engine, 600, unit, co2=12)
+    assert dka.severity == "unknown"
+    assert reason in dka.severity_reason
+    assert [c.criterion for c in dka.criteria_unknown] == ["Hyperglycemia"]
+
+
+# --- Patient history service retrieval status --------------------------------
+
+import asyncio  # noqa: E402
+
+import httpx  # noqa: E402
+
+from backend.services.patient_history_service import PatientHistoryService  # noqa: E402
+
+_EMPTY_BUNDLE = {"resourceType": "Bundle", "entry": []}
+
+
+def _history_service(failures):
+    """PatientHistoryService whose FHIR server fails the given resource paths."""
+    def handler(request):
+        path = request.url.path.rsplit("/", 2)
+        resource = path[-1] if path[-1] != "p1" else path[-2]
+        if resource in failures:
+            return httpx.Response(failures[resource], json={})
+        if resource == "Patient":
+            return httpx.Response(200, json={"name": [{"given": ["Ann"], "family": "Lee"}],
+                                             "birthDate": "1970-01-01", "gender": "female"})
+        return httpx.Response(200, json=_EMPTY_BUNDLE)
+
+    service = PatientHistoryService("https://fhir.example.test/R4", auth_token="t")
+    service.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    return service
+
+
+def test_history_service_reports_status_per_data_type():
+    history = asyncio.run(_history_service({"AllergyIntolerance": 500, "MedicationRequest": 403})
+                          .get_comprehensive_history("p1"))
+    assert history.retrieval_status["allergies"] == "failed"
+    assert history.retrieval_status["medications"] == "not available"
+    assert history.retrieval_status["conditions"] == "retrieved"
+    assert history.retrieval_status["visit_notes"] == "retrieved"
+    assert "Allergies could not be retrieved; do not assume none." in history.data_warnings
+    assert "Medications could not be retrieved; do not assume none." in history.data_warnings
+    assert len(history.data_warnings) == 2
+
+
+def test_history_service_transport_error_is_failed():
+    def handler(request):
+        if "Condition" in request.url.path:
+            raise httpx.ConnectError("connection reset")
+        return httpx.Response(200, json=_EMPTY_BUNDLE if "Patient" not in request.url.path else {})
+
+    service = PatientHistoryService("https://fhir.example.test/R4", auth_token="t")
+    service.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    history = asyncio.run(service.get_comprehensive_history("p1"))
+    assert history.retrieval_status["conditions"] == "failed"
+
+
+def test_history_status_is_not_shared_between_concurrent_requests():
+    # One shared service instance (as symptom_search uses); allergies fail
+    # only for patient "bad". Requests interleave at every await.
+    async def handler(request):
+        await asyncio.sleep(0)
+        if "AllergyIntolerance" in request.url.path and request.url.params.get("patient") == "bad":
+            return httpx.Response(500, json={})
+        if "/Patient/" in request.url.path:
+            return httpx.Response(200, json={"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+        return httpx.Response(200, json=_EMPTY_BUNDLE)
+
+    service = PatientHistoryService("https://fhir.example.test/R4", auth_token="t")
+    service.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+
+    async def both():
+        return await asyncio.gather(
+            service.get_comprehensive_history("bad"), service.get_comprehensive_history("good"))
+
+    bad_history, good_history = asyncio.run(both())
+    assert bad_history.retrieval_status["allergies"] == "failed"
+    assert good_history.retrieval_status["allergies"] == "retrieved"
+    assert good_history.data_warnings == []
+
+
+def test_ambulatory_differential_shows_retrieval_warnings(monkeypatch):
+    from fastapi.testclient import TestClient
+    from backend.main import app
+    from backend.services import smart_router
+    from backend.services.symptom_search import SymptomSearchResponse
+
+    service = _history_service({"AllergyIntolerance": 500})
+    monkeypatch.setattr(smart_router, "PatientHistoryService", lambda **kwargs: service)
+
+    async def fake_rank(terms, age=None, sex=None):
+        return SymptomSearchResponse(query_symptoms=terms, total_results=0, results=[]), None
+    monkeypatch.setattr(smart_router, "rank_diagnoses", fake_rank)
+
+    session = SimpleNamespace(patient_id="p1", ehr_vendor="epic", fhir_access_token="t",
+                              expires_at=datetime.utcnow() + timedelta(minutes=30))
+    app.dependency_overrides[smart_router.get_active_smart_session] = lambda: session
+    try:
+        response = TestClient(app).get("/smart/patient/p1/differential", params={"symptoms": "cough"})
+    finally:
+        app.dependency_overrides.pop(smart_router.get_active_smart_session, None)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["data_status"]["allergies"] == "failed"
+    assert body["data_pulled"]["allergies"] is None
+    assert body["data_pulled"]["current_medications"] == 0
+    assert "Allergies could not be retrieved; do not assume none." in body["data_warnings"]
+    assert "Allergies could not be retrieved" in body["chart_summary"]

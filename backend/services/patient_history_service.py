@@ -6,11 +6,22 @@ Comprehensive patient history retrieval including prior visit notes,
 diagnostic tests, H&Ps, procedures, and imaging for complete diagnostic context.
 """
 
+from contextvars import ContextVar
 from fastapi import HTTPException
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 import httpx
 from pydantic import BaseModel, Field
+
+from backend.services.fhir_client import FAILED, NOT_AVAILABLE, RETRIEVED, retrieval_warnings
+
+# Per-request retrieval tracking. ContextVars keep concurrent requests that
+# share one PatientHistoryService instance from mixing up each other's status.
+_current_resource: ContextVar[Optional[str]] = ContextVar("history_current_resource", default=None)
+_retrieval_status: ContextVar[Optional[Dict[str, str]]] = ContextVar("history_retrieval_status", default=None)
+
+# Worst outcome wins when one data type needs several queries.
+_STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
 
 class VisitNote(BaseModel):
@@ -145,6 +156,11 @@ class ComprehensivePatientHistory(BaseModel):
     # Summary
     summary: Optional[str] = None
 
+    # Per data type: "retrieved" | "failed" | "not available". An empty list
+    # means "none found" only when its status is "retrieved".
+    retrieval_status: Dict[str, str] = {}
+    data_warnings: List[str] = []
+
 
 class PatientHistoryService:
     """Service for comprehensive patient history retrieval."""
@@ -165,6 +181,44 @@ class PatientHistoryService:
             headers["Authorization"] = f"Bearer {self.auth_token}"
 
         return headers
+
+    @staticmethod
+    def _mark(status: str, resource: Optional[str] = None) -> None:
+        """Record an outcome for the data type being fetched (worst outcome wins)."""
+        resource = resource or _current_resource.get()
+        tracker = _retrieval_status.get()
+        if resource is None or tracker is None:
+            return
+        previous = tracker.get(resource)
+        if previous is None or _STATUS_RANK[status] > _STATUS_RANK[previous]:
+            tracker[resource] = status
+
+    async def _get(self, url: str, **kwargs) -> httpx.Response:
+        """GET a FHIR query and record whether it succeeded for the current data type.
+
+        200 = retrieved; 403/404/501 = not available (resource type not enabled
+        or supported); any other status or a transport error = failed.
+        """
+        try:
+            response = await self.client.get(url, **kwargs)
+        except Exception:
+            self._mark(FAILED)
+            raise
+        if response.status_code == 200:
+            self._mark(RETRIEVED)
+        elif response.status_code in (403, 404, 501):
+            self._mark(NOT_AVAILABLE)
+        else:
+            self._mark(FAILED)
+        return response
+
+    async def _tracked(self, resource: str, fetch):
+        """Run one fetcher with `resource` as the data type its queries count toward."""
+        token = _current_resource.set(resource)
+        try:
+            return await fetch
+        finally:
+            _current_resource.reset(token)
 
     async def get_comprehensive_history(
         self,
@@ -194,41 +248,29 @@ class PatientHistoryService:
         if lookback_days is not None and lookback_days > 0:
             lookback_date = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
 
-        # Fetch patient demographics
-        patient_data = await self._fetch_patient_demographics(patient_id, headers)
-
-        # Fetch visit notes (DocumentReference)
-        visit_notes = await self._fetch_visit_notes(patient_id, lookback_date, headers)
-
-        # Fetch vital signs (Observation with vital-signs category)
-        vital_signs = await self._fetch_vital_signs(patient_id, lookback_date, headers)
-
-        # Fetch diagnostic tests (Observation + DiagnosticReport)
-        diagnostic_tests = await self._fetch_diagnostic_tests(patient_id, lookback_date, headers)
-
-        # Fetch H&Ps (specific DocumentReference type)
-        history_and_physicals = await self._fetch_history_and_physicals(patient_id, lookback_date, headers)
-
-        # Fetch procedures (Procedure)
-        procedures = await self._fetch_procedures(patient_id, lookback_date, headers)
-
-        # Fetch imaging studies (ImagingStudy + DiagnosticReport)
-        imaging_studies = await self._fetch_imaging_studies(patient_id, lookback_date, headers)
-
-        # Fetch immunizations (Immunization)
-        immunizations = await self._fetch_immunizations(patient_id, lookback_date, headers)
-
-        # Fetch conditions (active and resolved)
-        active_conditions, past_conditions = await self._fetch_conditions(patient_id, include_resolved, headers)
-
-        # Fetch medications (current and historical)
-        current_meds, med_history = await self._fetch_medications(patient_id, headers)
-
-        # Fetch allergies
-        allergies = await self._fetch_allergies(patient_id, headers)
-
-        # Fetch family and social history
-        family_history, social_history = await self._fetch_family_social_history(patient_id, headers)
+        status_token = _retrieval_status.set({})
+        try:
+            patient_data = await self._tracked("demographics", self._fetch_patient_demographics(patient_id, headers))
+            visit_notes = await self._tracked("visit_notes", self._fetch_visit_notes(patient_id, lookback_date, headers))
+            vital_signs = await self._tracked("vital_signs", self._fetch_vital_signs(patient_id, lookback_date, headers))
+            diagnostic_tests = await self._tracked(
+                "diagnostic_tests", self._fetch_diagnostic_tests(patient_id, lookback_date, headers))
+            history_and_physicals = await self._tracked(
+                "history_and_physicals", self._fetch_history_and_physicals(patient_id, lookback_date, headers))
+            procedures = await self._tracked("procedures", self._fetch_procedures(patient_id, lookback_date, headers))
+            imaging_studies = await self._tracked(
+                "imaging_studies", self._fetch_imaging_studies(patient_id, lookback_date, headers))
+            immunizations = await self._tracked(
+                "immunizations", self._fetch_immunizations(patient_id, lookback_date, headers))
+            active_conditions, past_conditions = await self._tracked(
+                "conditions", self._fetch_conditions(patient_id, include_resolved, headers))
+            current_meds, med_history = await self._tracked("medications", self._fetch_medications(patient_id, headers))
+            allergies = await self._tracked("allergies", self._fetch_allergies(patient_id, headers))
+            family_history, social_history = await self._tracked(
+                "family_social_history", self._fetch_family_social_history(patient_id, headers))
+            retrieval_status = dict(_retrieval_status.get() or {})
+        finally:
+            _retrieval_status.reset(status_token)
 
         # Generate summary
         summary = self._generate_summary(
@@ -259,13 +301,15 @@ class PatientHistoryService:
             allergies=allergies,
             family_history=family_history,
             social_history=social_history,
-            summary=summary
+            summary=summary,
+            retrieval_status=retrieval_status,
+            data_warnings=retrieval_warnings(retrieval_status),
         )
 
     async def _fetch_patient_demographics(self, patient_id: str, headers: Dict) -> Dict[str, Any]:
         """Fetch patient demographics."""
         try:
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/Patient/{patient_id}",
                 headers=headers
             )
@@ -300,6 +344,7 @@ class PatientHistoryService:
             }
         except Exception as e:
             print(f"Error fetching patient demographics: {e}")
+            self._mark(FAILED)
             return {}
 
     async def _fetch_attachment_content(self, url: str, headers: Dict) -> str:
@@ -317,7 +362,7 @@ class PatientHistoryService:
             fetch_headers = dict(headers)
             fetch_headers['Accept'] = 'text/plain, text/html, application/xml, application/fhir+json;q=0.5, */*;q=0.3'
 
-            response = await self.client.get(full_url, headers=fetch_headers)
+            response = await self.client.get(full_url, headers=fetch_headers)  # document body, not tracked
 
             if response.status_code != 200:
                 return f"[Document URL: {url}]"
@@ -349,7 +394,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -402,6 +447,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching visit notes: {e}")
+            self._mark(FAILED)
 
         return visit_notes
 
@@ -414,7 +460,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -510,6 +556,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching vital signs: {e}")
+            self._mark(FAILED)
 
         return vital_signs_list
 
@@ -523,7 +570,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -600,7 +647,7 @@ class PatientHistoryService:
             if lookback_date:
                 report_url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(report_url, headers=headers)
+            response = await self._get(report_url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -623,6 +670,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching diagnostic tests: {e}")
+            self._mark(FAILED)
 
         return diagnostic_tests
 
@@ -636,7 +684,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -669,6 +717,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching H&Ps: {e}")
+            self._mark(FAILED)
 
         return h_and_ps
 
@@ -738,7 +787,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -773,6 +822,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching procedures: {e}")
+            self._mark(FAILED)
 
         return procedures
 
@@ -785,7 +835,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&started=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -804,7 +854,7 @@ class PatientHistoryService:
 
                     if study_uid:
                         # Fetch associated DiagnosticReport
-                        report_response = await self.client.get(
+                        report_response = await self._get(
                             f"{self.fhir_base_url}/DiagnosticReport?imagingStudy={study_uid}",
                             headers=headers
                         )
@@ -830,6 +880,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching imaging studies: {e}")
+            self._mark(FAILED)
 
         return imaging_studies
 
@@ -842,7 +893,7 @@ class PatientHistoryService:
             if lookback_date:
                 url += f"&date=ge{lookback_date}"
 
-            response = await self.client.get(url, headers=headers)
+            response = await self._get(url, headers=headers)
 
             if response.status_code == 200:
                 bundle = response.json()
@@ -882,6 +933,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching immunizations: {e}")
+            self._mark(FAILED)
 
         return immunizations
 
@@ -892,7 +944,7 @@ class PatientHistoryService:
 
         try:
             # Fetch active conditions
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/Condition?patient={patient_id}&clinical-status=active&_count=50",
                 headers=headers
             )
@@ -911,7 +963,7 @@ class PatientHistoryService:
 
             # Fetch resolved conditions if requested
             if include_resolved:
-                response = await self.client.get(
+                response = await self._get(
                     f"{self.fhir_base_url}/Condition?patient={patient_id}&clinical-status=resolved,inactive&_count=50",
                     headers=headers
                 )
@@ -930,6 +982,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching conditions: {e}")
+            self._mark(FAILED)
 
         return active_conditions, past_conditions
 
@@ -940,7 +993,7 @@ class PatientHistoryService:
 
         try:
             # Current medications
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/MedicationRequest?patient={patient_id}&status=active&_count=50",
                 headers=headers
             )
@@ -963,7 +1016,7 @@ class PatientHistoryService:
                     })
 
             # Historical medications
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/MedicationRequest?patient={patient_id}&status=completed,stopped&_count=50&_sort=-authoredon",
                 headers=headers
             )
@@ -987,6 +1040,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching medications: {e}")
+            self._mark(FAILED)
 
         return current_meds, med_history
 
@@ -995,7 +1049,7 @@ class PatientHistoryService:
         allergies = []
 
         try:
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/AllergyIntolerance?patient={patient_id}&_count=50",
                 headers=headers
             )
@@ -1015,6 +1069,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching allergies: {e}")
+            self._mark(FAILED)
 
         return allergies
 
@@ -1025,7 +1080,7 @@ class PatientHistoryService:
 
         try:
             # Family history (FamilyMemberHistory or Observation with category)
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/FamilyMemberHistory?patient={patient_id}&_count=20",
                 headers=headers
             )
@@ -1044,7 +1099,7 @@ class PatientHistoryService:
                     family_history = '; '.join(family_items)
 
             # Social history (Observation with category=social-history)
-            response = await self.client.get(
+            response = await self._get(
                 f"{self.fhir_base_url}/Observation?patient={patient_id}&category=social-history&_count=20",
                 headers=headers
             )
@@ -1065,6 +1120,7 @@ class PatientHistoryService:
 
         except Exception as e:
             print(f"Error fetching family/social history: {e}")
+            self._mark(FAILED)
 
         return family_history, social_history
 

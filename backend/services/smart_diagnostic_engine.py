@@ -526,6 +526,22 @@ class SmartDiagnosticEngine:
             severity=severity
         )
     
+    # Glucose thresholds in mg/dL; mmol/L results are converted first.
+    DKA_GLUCOSE_MG_DL = 250
+    CRITICAL_GLUCOSE_MG_DL = 500
+    GLUCOSE_MG_DL_PER_MMOL_L = 18.016
+    GLUCOSE_UNIT_TO_MG_DL = {"mg/dl": 1.0, "mmol/l": GLUCOSE_MG_DL_PER_MMOL_L}
+
+    @classmethod
+    def glucose_in_mg_dl(cls, lab: LabResult) -> Tuple[Optional[float], Optional[str]]:
+        """Return (glucose in mg/dL, None), or (None, reason) when the unit is unusable."""
+        if not lab.unit or not lab.unit.strip():
+            return None, "glucose result has no unit."
+        factor = cls.GLUCOSE_UNIT_TO_MG_DL.get(lab.unit.strip().lower().replace(" ", ""))
+        if factor is None:
+            return None, f"glucose unit '{lab.unit}' is not recognised (expected mg/dL or mmol/L)."
+        return lab.value * factor, None
+
     def _evaluate_dka(self, patient_data: PatientData) -> DiagnosisEvaluation:
         """Evaluate for Diabetic Ketoacidosis."""
         criteria_met = []
@@ -533,21 +549,33 @@ class SmartDiagnosticEngine:
         criteria_unknown = []
         missing_tests = []
         
-        # Hyperglycemia
+        # Hyperglycemia - compared in mg/dL after unit conversion
         glucose = patient_data.get_lab(CommonLOINC.GLUCOSE)
-        if glucose:
-            if glucose.value > 250:
+        glucose_mg_dl, glucose_unit_problem = self.glucose_in_mg_dl(glucose) if glucose else (None, None)
+        if glucose and glucose_unit_problem:
+            criteria_unknown.append(CriterionEvaluation(
+                criterion="Hyperglycemia",
+                status=CriteriaStatus.UNKNOWN,
+                value=f"{glucose.value} {glucose.unit}".strip(),
+                expected="> 250 mg/dL (13.9 mmol/L)",
+                details=glucose_unit_problem,
+            ))
+            missing_tests.append("Blood glucose with units (mg/dL or mmol/L)")
+        elif glucose:
+            converted = "" if glucose.unit.strip().lower() == "mg/dl" else f" (= {glucose_mg_dl:.0f} mg/dL)"
+            if glucose_mg_dl > self.DKA_GLUCOSE_MG_DL:
                 criteria_met.append(CriterionEvaluation(
                     criterion="Hyperglycemia",
                     status=CriteriaStatus.PRESENT,
-                    value=f"{glucose.value} {glucose.unit}",
-                    expected="> 250 mg/dL"
+                    value=f"{glucose.value} {glucose.unit}{converted}",
+                    expected="> 250 mg/dL (13.9 mmol/L)"
                 ))
             else:
                 criteria_not_met.append(CriterionEvaluation(
                     criterion="Hyperglycemia",
                     status=CriteriaStatus.ABSENT,
-                    value=f"{glucose.value} {glucose.unit}"
+                    value=f"{glucose.value} {glucose.unit}{converted}",
+                    expected="> 250 mg/dL (13.9 mmol/L)"
                 ))
         else:
             criteria_unknown.append(CriterionEvaluation(
@@ -586,10 +614,15 @@ class SmartDiagnosticEngine:
         probability = len(criteria_met) / max(len(criteria_met) + len(criteria_not_met), 1)
         
         severity = "moderate"
+        severity_reason = None
         if len(criteria_met) >= 2:
             severity = "high"
-        if glucose and glucose.value > 500:
+        if glucose and glucose_unit_problem:
+            severity = "unknown"
+            severity_reason = f"Severity unknown: {glucose_unit_problem}"
+        elif glucose_mg_dl is not None and glucose_mg_dl > self.CRITICAL_GLUCOSE_MG_DL:
             severity = "critical"
+            severity_reason = f"Glucose {glucose_mg_dl:.0f} mg/dL (> {self.CRITICAL_GLUCOSE_MG_DL} mg/dL)."
         
         recommendations = []
         if len(criteria_met) >= 2:
@@ -612,7 +645,8 @@ class SmartDiagnosticEngine:
             criteria_unknown=criteria_unknown,
             recommendations=recommendations,
             missing_tests=missing_tests,
-            severity=severity
+            severity=severity,
+            severity_reason=severity_reason,
         )
     
     def evaluate_patient(
