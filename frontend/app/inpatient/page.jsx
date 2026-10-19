@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEvaluationResponse } from '../../utils/evaluationResponse';
-import { ClinicalReviewNotice } from '../../components/ClinicalReview';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
  * Inpatient
@@ -91,7 +91,7 @@ function Inpatient() {
       }
       const parsed = parseEvaluationResponse(await evalResponse.json());
       setEvaluations(parsed.evaluations);
-      setEvaluationWarnings(parsed.dataWarnings);
+      setEvaluationWarnings([...parsed.dataWarnings, ...parsed.assessmentWarnings]);
       setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
     } catch (err) {
@@ -383,6 +383,17 @@ function DiagnosticCard({ evaluation }) {
             {evaluation.evaluation_status && evaluation.evaluation_status !== 'evaluated' && (
               <span style={styles.statusBadge}>{evaluation.evaluation_status.toUpperCase()}</span>
             )}
+            {evaluation.known_condition && (
+              <span style={styles.knownBadge} title={evaluation.known_condition_text || ''}>
+                KNOWN CONDITION{evaluation.known_condition_text ? `: ${evaluation.known_condition_text}` : ''}
+              </span>
+            )}
+            {evaluation.finding === 'possible' && (
+              <span style={styles.statusBadge}>POSSIBLE - NEEDS CONFIRMATION</span>
+            )}
+            <div style={{ marginTop: '4px' }}>
+              <ReviewStatusBadge status={evaluation.review_status} label={evaluation.review_status_label} />
+            </div>
           </div>
         </div>
         <div style={styles.cardHeaderRight}>
@@ -408,6 +419,8 @@ function DiagnosticCard({ evaluation }) {
                   <li key={idx} style={styles.criterionMet}>
                     <strong>{criterion.criterion}:</strong> {criterion.value}
                     {criterion.expected && <span style={styles.reference}> (expected: {criterion.expected})</span>}
+                    {criterion.details && <div style={styles.reference}>{criterion.details}</div>}
+                    {criterion.source && <div style={styles.criterionSource}>Source: {criterion.source}</div>}
                   </li>
                 ))}
               </ul>
@@ -579,6 +592,8 @@ const styles = {
   dataWarningTitle: { margin: '0 0 8px', fontSize: '16px' },
   dataWarningList: { margin: 0, paddingLeft: '20px', lineHeight: 1.6 },
   dataNotes: { marginTop: '8px', fontSize: '13px', color: '#374151' },
+  knownBadge: { display: 'inline-block', marginTop: '4px', marginLeft: '6px', padding: '2px 8px', borderRadius: '10px', backgroundColor: '#e0f2fe', color: '#075985', fontSize: '11px', fontWeight: 700 },
+  criterionSource: { fontSize: '12px', color: '#6b7280', marginTop: '2px' },
   statusBadge: { display: 'inline-block', marginTop: '4px', padding: '2px 8px', borderRadius: '10px', backgroundColor: '#fef3c7', color: '#92400e', fontSize: '11px', fontWeight: 700 },
   statusReason: { margin: '0 0 12px', padding: '8px 12px', backgroundColor: '#fffbeb', borderRadius: '6px', color: '#92400e', fontSize: '14px' },
   preliminaryBadge: { marginLeft: '8px', padding: '1px 6px', borderRadius: '8px', backgroundColor: '#e0e7ff', color: '#3730a3', fontSize: '10px', fontWeight: 700 },

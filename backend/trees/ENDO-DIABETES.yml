@@ -188,7 +188,55 @@ nodes:
       - Podiatry for foot care if complications
     next:
       - default: null
-criteria: []
+criteria:
+  finding_label: diabetes mellitus
+  source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
+  display: when_found
+  probability: met_over_known
+  confirm:
+    min_abnormal_results: 2
+  known_condition:
+    icd10_prefixes:
+      - E08
+      - E09
+      - E10
+      - E11
+      - E13
+    snomed:
+      - '73211009'
+      - '44054006'
+      - '46635009'
+  items:
+    - id: hba1c
+      label: HbA1c >= 6.5%
+      resource: lab
+      loinc:
+        - 4548-4
+        - 17856-6
+        - 59261-8
+      operator: '>='
+      value: 6.5
+      unit: '%'
+      count_all: true
+      lookback_days: 365
+      expected: '>= 6.5% (48 mmol/mol)'
+      missing_test: HbA1c
+      source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
+    - id: fasting_glucose
+      label: Fasting plasma glucose >= 126 mg/dL
+      resource: lab
+      loinc:
+        - 1558-6
+        - 14771-0
+      operator: '>='
+      value: 126
+      unit: mg/dL
+      count_all: true
+      show_converted: true
+      lookback_days: 365
+      expected: '>= 126 mg/dL (7.0 mmol/L)'
+      missing_test: Fasting plasma glucose
+      source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
 legacy_title: Diabetes & Hyperglycemic Emergencies
 change_log:
   - date: '2026-10-19'
@@ -198,3 +246,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

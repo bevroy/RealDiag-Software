@@ -97,7 +97,51 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: prediabetes
+  source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - R73.0
+    snomed:
+      - '714628002'
+  items:
+    - id: hba1c
+      label: HbA1c 5.7-6.4%
+      resource: lab
+      loinc:
+        - 4548-4
+        - 17856-6
+        - 59261-8
+      operator: between
+      value:
+        - 5.7
+        - 6.4
+      unit: '%'
+      lookback_days: 365
+      expected: 5.7-6.4% (39-47 mmol/mol)
+      missing_test: HbA1c
+      source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
+    - id: fasting_glucose
+      label: Fasting plasma glucose 100-125 mg/dL
+      resource: lab
+      loinc:
+        - 1558-6
+        - 14771-0
+      operator: between
+      value:
+        - 100
+        - 125
+      unit: mg/dL
+      show_converted: true
+      lookback_days: 365
+      expected: 100-125 mg/dL (5.6-6.9 mmol/L)
+      missing_test: Fasting plasma glucose
+      source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
 change_log:
   - date: '2025-12-26'
     version: '1.0'
@@ -109,3 +153,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

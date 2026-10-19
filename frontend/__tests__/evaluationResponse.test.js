@@ -45,6 +45,12 @@ test.each([null, undefined, 'error', { detail: 'Evaluation failed' }])(
   }
 )
 
+test('assessment warnings are passed through', () => {
+  const warning = 'Chronic conditions could not be assessed: lab results could not be retrieved.'
+  expect(parseEvaluationResponse({ evaluations: [], assessment_warnings: [warning] }).assessmentWarnings).toEqual([warning])
+  expect(parseEvaluationResponse([]).assessmentWarnings).toEqual([])
+})
+
 test('clinical review notice is passed through, including null once reviewed', () => {
   const notice = 'Clinical content is under review.'
   expect(parseEvaluationResponse({ evaluations: [], clinical_review_notice: notice }).clinicalReviewNotice).toBe(notice)

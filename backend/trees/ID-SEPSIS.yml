@@ -118,7 +118,86 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: sepsis risk (qSOFA >= 2)
+  source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+  display: always
+  probability: met_over_known
+  suggest_when:
+    count_met: 2
+    group: qsofa
+  severity_default: moderate
+  severity:
+    - type: count_met
+      group: qsofa
+      at_least: 1
+      level: high
+    - type: count_met
+      group: qsofa
+      at_least: 2
+      level: critical
+  next_steps:
+    - Consider blood cultures and lactate; antibiotic and fluid decisions per clinician judgment and institutional sepsis protocol.
+  items:
+    - id: respiratory_rate
+      label: Tachypnea (qSOFA)
+      unknown_label: Respiratory rate
+      group: qsofa
+      resource: vital
+      loinc:
+        - 9279-1
+      operator: '>='
+      value: 22
+      unit: /min
+      unit_check: false
+      expected: '>= 22/min'
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+    - id: systolic_bp
+      label: Hypotension (qSOFA)
+      group: qsofa
+      resource: vital
+      loinc:
+        - 8480-6
+      operator: <=
+      value: 100
+      unit: mmHg
+      unit_check: false
+      expected: <= 100 mmHg
+      details_unknown: Systolic blood pressure not documented
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+    - id: gcs
+      label: Altered mentation (qSOFA)
+      group: qsofa
+      resource: vital
+      loinc:
+        - 9269-2
+      operator: <
+      value: 15
+      unit: '{score}'
+      unit_check: false
+      value_format: GCS {value}
+      expected: GCS < 15
+      details_met: Altered mental status contributes to qSOFA
+      details_unknown: GCS not documented - qSOFA cannot be fully scored without it
+      missing_test: Glasgow Coma Scale / mental status assessment
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
+    - id: wbc
+      label: Abnormal WBC
+      resource: lab
+      loinc:
+        - 6690-2
+      operator: outside
+      value:
+        - 4
+        - 12
+      unit: K/uL
+      unit_check: false
+      expected: 4-12 K/uL
+      expected_not_met: < 4 or > 12 K/uL
+      details_met: Leukocytosis or leukopenia
+      details_unknown: WBC not measured
+      missing_test: CBC with differential
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016); Surviving Sepsis Campaign 2021 guidelines
 trace:
   - Recognize infection with organ dysfunction
   - Activate sepsis protocol immediately
@@ -132,3 +211,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency 'Critical' mapped to 'emergent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.

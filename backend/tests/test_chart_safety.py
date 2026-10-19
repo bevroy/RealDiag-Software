@@ -16,6 +16,8 @@ from backend.services.fhir_client import (
     CommonLOINC, FHIRClient, LabResult, PatientData, VitalSign,
 )
 from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine
+
+ACS = "CARD-ACUTE-CORONARY-SYNDROME"
 from backend.services.smart_router import _build_patient_summary, _generate_handoff_narrative
 from backend.services.content_labels import AI_CONTENT_LABEL, HOMEOPATHY_VALIDATION_STATEMENT
 
@@ -63,19 +65,21 @@ def test_tachycardia_alone_does_not_suggest_acs(engine):
         labs=[_lab(CommonLOINC.TROPONIN_I, 0.01, "ng/mL", high=0.04)],
         vitals=[_vital(CommonLOINC.HEART_RATE, 130, "beats/min")],
     )
-    acs = engine._evaluate_acs(patient)
+    acs = engine.evaluate_tree(ACS, patient)
     assert acs.criteria_met == []
     assert acs.probability == 0
     assert acs.recommendations == []
     assert acs.supporting_findings[0].criterion == "Heart rate"
-    assert _by_id(engine.evaluate_patient(patient), "CARD-ACS") is None
+    assert _by_id(engine.evaluate_patient(patient), ACS) is None
 
 
 def test_elevated_troponin_gives_supportive_wording_only(engine):
     patient = _patient(labs=[_lab(CommonLOINC.TROPONIN_I, 0.5, "ng/mL", high=0.04)])
-    acs = engine._evaluate_acs(patient)
+    acs = engine.evaluate_tree(ACS, patient)
     assert [c.criterion for c in acs.criteria_met] == ["Elevated troponin"]
-    assert acs.recommendations[0].startswith("Findings may warrant evaluation for ACS per ACC/AHA")
+    assert acs.recommendations[0].startswith(
+        "Findings consistent with acute coronary syndrome; consider evaluation per 2025 ACC/AHA")
+    assert acs.criteria_met[0].source.startswith("Fourth Universal Definition of Myocardial Infarction")
     for rec in acs.recommendations:
         assert not TREATMENT_ORDER.search(rec), rec
 
@@ -95,7 +99,7 @@ def test_no_evaluator_issues_treatment_orders(engine):
         ],
     )
     evaluations = engine.evaluate_patient(patient)
-    assert {e.diagnosis_id for e in evaluations} == {"CARD-ACS", "ID-SEPSIS", "ENDO-DKA"}
+    assert {e.diagnosis_id for e in evaluations} == {ACS, "ID-SEPSIS", "ENDO-DKA"}
     for evaluation in evaluations:
         for rec in evaluation.recommendations:
             assert not TREATMENT_ORDER.search(rec), (evaluation.diagnosis_id, rec)
@@ -119,22 +123,22 @@ def test_frontend_alert_lists_have_no_drug_doses():
     (0.05, "ng/mL", 26, "ng/L", "moderate"),      # value ng/mL, range ng/L: 50/26 = 1.9x
     (10, "ng/L", 14, None, "low"),                # below URL
 ])
-def test_troponin_severity_uses_units_and_reference_limit(value, unit, high, ref_unit, expected):
+def test_troponin_severity_uses_units_and_reference_limit(engine, value, unit, high, ref_unit, expected):
     lab = _lab(CommonLOINC.TROPONIN_I, value, unit, high=high, ref_unit=ref_unit)
-    assert SmartDiagnosticEngine.assess_troponin(lab)["severity"] == expected
+    assert engine.evaluate_tree(ACS, _patient(labs=[lab])).severity == expected
 
 
-def test_ng_per_l_value_is_not_compared_with_ng_per_ml_cutoffs():
+def test_ng_per_l_value_is_not_compared_with_ng_per_ml_cutoffs(engine):
     # 50 ng/L is 0.05 ng/mL; with a 52 ng/L URL it is NOT elevated
     lab = _lab(CommonLOINC.TROPONIN_I, 50, "ng/L", high=52)
-    assessment = SmartDiagnosticEngine.assess_troponin(lab)
-    assert assessment["elevated"] is False
+    acs = engine.evaluate_tree(ACS, _patient(labs=[lab]))
+    assert acs.criteria_met == [] and acs.criteria_not_met[0].criterion == "Elevated troponin"
 
 
 @pytest.mark.parametrize("unit,reason", [("", "no unit"), ("mmol/L", "not recognised")])
 def test_missing_or_unknown_troponin_unit_gives_unknown_severity(engine, unit, reason):
     patient = _patient(labs=[_lab(CommonLOINC.TROPONIN_I, 0.5, unit, high=0.04)])
-    acs = engine._evaluate_acs(patient)
+    acs = engine.evaluate_tree(ACS, patient)
     assert acs.severity == "unknown"
     assert reason in acs.severity_reason
     assert acs.criteria_unknown and not acs.criteria_met
@@ -142,7 +146,7 @@ def test_missing_or_unknown_troponin_unit_gives_unknown_severity(engine, unit, r
 
 def test_troponin_without_reference_range_is_unknown(engine):
     patient = _patient(labs=[_lab(CommonLOINC.TROPONIN_I, 0.5, "ng/mL")])
-    acs = engine._evaluate_acs(patient)
+    acs = engine.evaluate_tree(ACS, patient)
     assert acs.severity == "unknown"
     assert "no upper reference limit" in acs.severity_reason
     assert not acs.recommendations or "ACS" not in acs.recommendations[0]
@@ -173,7 +177,7 @@ class _StubClient(FHIRClient):
     def get_patient(self, patient_id):
         return self.patient
 
-    def get_observations(self, patient_id, category=None, code=None, date_range=None):
+    def get_observations(self, patient_id, category=None, code=None, date_range=None, max_pages=1):
         self._maybe_fail("labs" if category == "laboratory" else "vitals")
         return self.observations.get(category, [])
 
@@ -238,9 +242,13 @@ def test_updates_since_tracks_status():
 
 
 def test_evaluator_exception_is_reported_as_failed(engine, monkeypatch):
-    def boom(patient_data):
-        raise ValueError("bad data")
-    monkeypatch.setattr(engine, "_evaluate_dka", boom)
+    real = engine._evaluate_tree
+
+    def boom(tree_id, patient_data, now=None):
+        if tree_id == "ENDO-DKA":
+            raise ValueError("bad data")
+        return real(tree_id, patient_data, now)
+    monkeypatch.setattr(engine, "_evaluate_tree", boom)
     dka = _by_id(engine.evaluate_patient(_patient()), "ENDO-DKA")
     assert dka is not None
     assert dka.evaluation_status == "evaluation failed"
@@ -251,7 +259,7 @@ def test_evaluator_exception_is_reported_as_failed(engine, monkeypatch):
 
 def test_unknown_criteria_are_shown_as_insufficient_data(engine):
     evaluations = engine.evaluate_patient(_patient())  # no labs or vitals at all
-    assert {e.diagnosis_id for e in evaluations} == {"CARD-ACS", "ID-SEPSIS", "ENDO-DKA"}
+    assert {e.diagnosis_id for e in evaluations} == {ACS, "ID-SEPSIS", "ENDO-DKA"}
     for evaluation in evaluations:
         assert evaluation.evaluation_status == "insufficient data"
         assert evaluation.missing_tests
@@ -392,7 +400,7 @@ def _dka(engine, glucose_value, glucose_unit, co2=None):
     labs = [_lab(CommonLOINC.GLUCOSE, glucose_value, glucose_unit)]
     if co2 is not None:
         labs.append(_lab(CommonLOINC.CO2, co2, "mmol/L"))
-    return engine._evaluate_dka(_patient(labs=labs))
+    return engine.evaluate_tree("ENDO-DKA", _patient(labs=labs))
 
 
 @pytest.mark.parametrize("value,unit,met,severity", [

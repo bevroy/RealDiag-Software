@@ -16,6 +16,7 @@ Usage:
     python validate_rules.py --all            # All checks + report
 """
 
+import re
 import yaml
 import os
 import sys
@@ -25,6 +26,7 @@ from typing import Dict, List, Tuple
 import argparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from services.lab_units import ANALYTES, analyte_for, canonical_unit  # noqa: E402
 from services.tree_schema import (  # noqa: E402
     HOMEOPATHY_VALIDATION_STATEMENT,
     node_format,
@@ -332,6 +334,107 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
             file_path.name,
             f"Tree has {shape} and no decision branches; the engine reports it as not evaluated"
         )
+
+    for problem in criteria_problems(data.get("criteria")):
+        result.add_error(file_path.name, f"criteria: {problem}")
+
+
+CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
+CRITERIA_ROLES = {"core", "supporting"}
+CRITERIA_DISPLAY = {"always", "when_found"}
+CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
+SEVERITY_LEVELS = {"low", "moderate", "high", "critical", "unknown", "not rated"}
+SEVERITY_RULE_TYPES = {"reference_multiple", "count_met", "unusable", "value", "any_met"}
+LOINC_PATTERN = re.compile(r"^\d{1,7}-\d$")
+
+
+def criteria_problems(criteria) -> List[str]:
+    """Problems in a tree's `criteria` section (empty list = valid).
+
+    `criteria: []` means the tree has no chart-evaluation criteria.
+    """
+    if criteria in (None, []):
+        return []
+    if not isinstance(criteria, dict):
+        return ["must be a mapping with an 'items' list (or [] for none)"]
+    problems = []
+    for key in ("finding_label", "source"):
+        if not str(criteria.get(key) or "").strip():
+            problems.append(f"missing '{key}'")
+    if criteria.get("display", "always") not in CRITERIA_DISPLAY:
+        problems.append(f"display must be one of {sorted(CRITERIA_DISPLAY)}")
+    if criteria.get("probability", "met_over_known") not in CRITERIA_PROBABILITY:
+        problems.append(f"probability must be one of {sorted(CRITERIA_PROBABILITY)}")
+    if criteria.get("severity_default", "not rated") not in SEVERITY_LEVELS:
+        problems.append(f"severity_default must be one of {sorted(SEVERITY_LEVELS)}")
+
+    items = criteria.get("items")
+    if not isinstance(items, list) or not items:
+        return problems + ["'items' must be a non-empty list"]
+    ids = set()
+    for index, item in enumerate(items):
+        where = f"item {item.get('id', index + 1)}" if isinstance(item, dict) else f"item {index + 1}"
+        if not isinstance(item, dict):
+            problems.append(f"{where}: must be a mapping")
+            continue
+        for key in ("id", "label", "loinc", "operator", "unit", "source"):
+            if item.get(key) in (None, "", []):
+                problems.append(f"{where}: missing '{key}'")
+        if item.get("id") in ids:
+            problems.append(f"{where}: duplicate id")
+        ids.add(item.get("id"))
+        codes = item.get("loinc") or []
+        if not isinstance(codes, list) or not all(LOINC_PATTERN.match(str(c)) for c in codes):
+            problems.append(f"{where}: loinc must be a list of LOINC codes like '4548-4'")
+            codes = []
+        if item.get("resource", "lab") not in ("lab", "vital"):
+            problems.append(f"{where}: resource must be 'lab' or 'vital'")
+        if item.get("role", "core") not in CRITERIA_ROLES:
+            problems.append(f"{where}: role must be one of {sorted(CRITERIA_ROLES)}")
+        op = item.get("operator")
+        if op not in CRITERIA_OPERATORS:
+            problems.append(f"{where}: unknown operator {op!r}")
+        value = item.get("value")
+        if op in (">", ">=", "<", "<=") and not isinstance(value, (int, float)):
+            problems.append(f"{where}: operator {op} needs a numeric 'value'")
+        if op in ("between", "outside") and not (
+                isinstance(value, list) and len(value) == 2 and all(isinstance(v, (int, float)) for v in value)
+                and value[0] < value[1]):
+            problems.append(f"{where}: operator {op} needs 'value: [low, high]' with low < high")
+        if op in ("above_ref_high", "below_ref_low") and value is not None:
+            problems.append(f"{where}: operator {op} compares with the lab's reference range; remove 'value'")
+        for key in ("lookback_days", "min_occurrences", "min_span_days"):
+            if key in item and not (isinstance(item[key], int) and item[key] > 0):
+                problems.append(f"{where}: {key} must be a positive whole number")
+        sex = (item.get("applies_to") or {}).get("sex")
+        if sex not in (None, "male", "female"):
+            problems.append(f"{where}: applies_to.sex must be male or female")
+        # Unit: must be the analyte's canonical unit when units are checked
+        analytes = {analyte_for(c) for c in codes}
+        if item.get("unit_check", True) and codes:
+            analyte = item.get("analyte") or (analytes.pop() if len(analytes) == 1 else None)
+            if analyte is None or analyte not in ANALYTES:
+                problems.append(f"{where}: no unit conversion is defined for LOINC {codes} "
+                                "(add it to lab_units.py or set unit_check: false)")
+            elif str(item.get("unit")) != canonical_unit(analyte):
+                problems.append(f"{where}: unit must be {canonical_unit(analyte)!r} for {analyte} "
+                                f"(results are converted to it), not {item.get('unit')!r}")
+
+    for rule in criteria.get("severity") or []:
+        kind = rule.get("type") if isinstance(rule, dict) else None
+        if kind not in SEVERITY_RULE_TYPES:
+            problems.append(f"severity rule {rule!r}: unknown type")
+            continue
+        refs = [rule["item"]] if "item" in rule else list(rule.get("items", []))
+        for ref in refs:
+            if ref not in ids:
+                problems.append(f"severity rule {kind}: refers to unknown item {ref!r}")
+        if "level" in rule and rule["level"] not in SEVERITY_LEVELS:
+            problems.append(f"severity rule {kind}: unknown level {rule['level']!r}")
+    for key in ("suggest_when", "confirm", "known_condition"):
+        if key in criteria and not isinstance(criteria[key], dict):
+            problems.append(f"'{key}' must be a mapping")
+    return problems
 
 
 def generate_report(result: ValidationResult, rules_files: List[Path], trees_files: List[Path]):

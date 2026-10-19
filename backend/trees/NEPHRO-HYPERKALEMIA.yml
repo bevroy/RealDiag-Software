@@ -72,7 +72,49 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: hyperkalaemia
+  source: 'UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults (2023)'
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - E87.5
+    snomed:
+      - '14140009'
+  severity_default: moderate
+  severity_default_reason: Mild hyperkalaemia range (5.5-5.9 mmol/L).
+  severity:
+    - type: value
+      item: potassium
+      op: '>='
+      value: 6.0
+      level: high
+      reason: 'Moderate hyperkalaemia range (6.0-6.4 mmol/L): {value:.1f} mmol/L.'
+    - type: value
+      item: potassium
+      op: '>='
+      value: 6.5
+      level: critical
+      reason: 'Severe hyperkalaemia range (>= 6.5 mmol/L): {value:.1f} mmol/L.'
+  next_steps:
+    - Consider a repeat potassium to exclude pseudohyperkalaemia (e.g. a haemolysed sample) and an ECG, per UKKA guidance.
+  items:
+    - id: potassium
+      label: Potassium >= 5.5 mmol/L
+      resource: lab
+      loinc:
+        - 2823-3
+        - 6298-4
+      operator: '>='
+      value: 5.5
+      unit: mmol/L
+      lookback_days: 30
+      expected: '>= 5.5 mmol/L'
+      missing_test: Potassium
+      source: 'UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults (2023)'
 author: RealDiag Clinical Team
 change_log:
   - date: '2024-12-26'
@@ -85,3 +127,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to urgent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

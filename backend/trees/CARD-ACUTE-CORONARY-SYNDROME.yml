@@ -126,7 +126,58 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: acute coronary syndrome
+  source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
+  display: always
+  probability: met_over_all
+  suggest_when:
+    count_met: 1
+  severity_default: unknown
+  severity:
+    - type: reference_multiple
+      item: troponin
+      not_measured_reason: 'Severity unknown: troponin not measured.'
+  next_steps:
+    - Consider ECG and serial troponins.
+  items:
+    - id: troponin
+      label: Elevated troponin
+      resource: lab
+      loinc:
+        - 10839-9
+        - 6598-7
+      operator: above_ref_high
+      unit: ng/L
+      select: most_concerning_per_code
+      code_names:
+        10839-9: troponin I
+        6598-7: troponin T
+      severity_multiples:
+        high: 2.5
+        critical: 10
+      mark_preliminary: true
+      details_met: '{code_name}: {reason}{prelim}'
+      details_not_met: '{code_name}: {reason}{prelim}'
+      details_unusable: '{code_name}: Severity unknown: {problem}.{prelim}'
+      details_unknown: Troponin not measured
+      missing_test: Troponin (serial measurements per institutional protocol)
+      missing_test_unusable: Troponin with lab reference range and units
+      source: 'Fourth Universal Definition of Myocardial Infarction (2018): troponin above the 99th-percentile upper reference limit'
+    - id: heart_rate
+      label: Heart rate
+      role: supporting
+      resource: vital
+      loinc:
+        - 8867-4
+      operator: '>'
+      value: 100
+      unit: /min
+      unit_check: false
+      expected: '> 100/min (tachycardia)'
+      details_met: Supporting finding only; tachycardia alone does not suggest ACS.
+      details_not_met: Supporting finding only; tachycardia alone does not suggest ACS.
+      source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
 trace:
   - 58-year-old man with history of hypertension and hyperlipidemia presents to ED via EMS with chest pain
   - Sudden onset severe substernal chest pressure 90 minutes ago while shoveling snow
@@ -171,3 +222,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency 'emergency' mapped to 'emergent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.

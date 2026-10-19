@@ -18,6 +18,7 @@ function parseEvaluationResponse(body) {
       dataStatus: {},
       dataWarnings: [UNKNOWN_COMPLETENESS_WARNING],
       dataNotes: [],
+      assessmentWarnings: [],
       clinicalReviewNotice: undefined,
     }
   }
@@ -27,6 +28,7 @@ function parseEvaluationResponse(body) {
       dataStatus: {},
       dataWarnings: ['The evaluation response could not be read; no evaluations are shown.'],
       dataNotes: [],
+      assessmentWarnings: [],
       clinicalReviewNotice: undefined,
     }
   }
@@ -35,6 +37,8 @@ function parseEvaluationResponse(body) {
     dataStatus: body.data_status || {},
     dataWarnings: Array.isArray(body.data_warnings) ? body.data_warnings : [],
     dataNotes: Array.isArray(body.data_notes) ? body.data_notes : [],
+    // e.g. "Chronic conditions could not be assessed: lab results could not be retrieved."
+    assessmentWarnings: Array.isArray(body.assessment_warnings) ? body.assessment_warnings : [],
     // undefined when the API predates the field (UI then shows the default notice)
     clinicalReviewNotice: body.clinical_review_notice,
   }

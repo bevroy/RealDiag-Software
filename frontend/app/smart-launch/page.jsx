@@ -97,7 +97,7 @@ function SmartLaunch() {
 
       const parsed = parseEvaluationResponse(await evalResponse.json());
       setEvaluations(parsed.evaluations);
-      setDataWarnings(parsed.dataWarnings);
+      setDataWarnings([...parsed.dataWarnings, ...parsed.assessmentWarnings]);
       setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
 
@@ -257,6 +257,17 @@ function DiagnosticCard({ evaluation }) {
                 {evaluation.evaluation_status.toUpperCase()}
                 {evaluation.status_reason && ` — ${evaluation.status_reason}`}
               </p>
+            )}
+            {evaluation.known_condition && (
+              <p style={styles.statusText}>
+                KNOWN CONDITION{evaluation.known_condition_text ? `: ${evaluation.known_condition_text}` : ''}
+              </p>
+            )}
+            {evaluation.finding === 'possible' && (
+              <p style={styles.statusText}>POSSIBLE - NEEDS CONFIRMATION</p>
+            )}
+            {evaluation.review_status_label && (
+              <p style={styles.statusText}>{evaluation.review_status_label}</p>
             )}
           </div>
         </div>

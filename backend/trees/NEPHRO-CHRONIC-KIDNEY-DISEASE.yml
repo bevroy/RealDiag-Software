@@ -109,7 +109,52 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: chronic kidney disease
+  source: KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - N18
+    snomed:
+      - '709044004'
+  items:
+    - id: egfr
+      label: eGFR < 60 mL/min/1.73m2 for more than 3 months
+      resource: lab
+      loinc:
+        - 33914-3
+        - 62238-1
+        - 98979-8
+        - 48642-3
+        - 48643-1
+      operator: <
+      value: 60
+      unit: mL/min/1.73m2
+      min_occurrences: 2
+      min_span_days: 90
+      lookback_days: 730
+      expected: < 60 mL/min/1.73m2, >= 90 days apart
+      missing_test: eGFR (serum creatinine)
+      source: KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease
+    - id: uacr
+      label: Urine albumin-creatinine ratio >= 30 mg/g for more than 3 months
+      resource: lab
+      loinc:
+        - 9318-7
+        - 14959-1
+      operator: '>='
+      value: 30
+      unit: mg/g
+      min_occurrences: 2
+      min_span_days: 90
+      lookback_days: 730
+      expected: '>= 30 mg/g (3 mg/mmol), >= 90 days apart'
+      missing_test: Urine albumin-creatinine ratio
+      source: KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease
 trace:
   - 65-year-old man with type 2 diabetes and hypertension presents for annual exam
   - Diabetes for 15 years, HbA1c 7.8% on metformin and glipizide
@@ -145,3 +190,6 @@ change_log:
     version: '1.0'
     change: Standardized to template
     notes: urgency 'routine-to-urgent' mapped to 'urgent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

@@ -77,7 +77,59 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: diabetic ketoacidosis
+  source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
+  display: always
+  probability: met_over_known
+  suggest_when:
+    count_met: 2
+  severity_default: moderate
+  severity:
+    - type: count_met
+      at_least: 2
+      level: high
+    - type: unusable
+      item: glucose
+      level: unknown
+    - type: value
+      item: glucose
+      op: '>'
+      value: 500
+      level: critical
+      reason: Glucose {value:.0f} mg/dL (> 500 mg/dL).
+  next_steps:
+    - Consider serum/urine ketones, VBG or ABG for pH, and potassium; fluid and insulin management per clinician judgment and institutional DKA protocol.
+  items:
+    - id: glucose
+      label: Hyperglycemia
+      resource: lab
+      loinc:
+        - 2345-7
+      operator: '>'
+      value: 250
+      unit: mg/dL
+      show_converted: true
+      expected: '> 250 mg/dL (13.9 mmol/L)'
+      details_unusable: '{problem}.'
+      details_unknown: Blood glucose not measured
+      missing_test: Blood glucose
+      missing_test_unusable: Blood glucose with units (mg/dL or mmol/L)
+      source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
+    - id: bicarbonate
+      label: Metabolic acidosis
+      resource: lab
+      loinc:
+        - 2028-9
+      operator: <
+      value: 18
+      unit: mEq/L
+      unit_check: false
+      expected: < 18 mEq/L
+      details_met: Low bicarbonate suggests metabolic acidosis
+      details_unknown: Bicarbonate (CO2) not measured
+      missing_test: Basic metabolic panel (BMP)
+      source: ADA hyperglycemic crises guidance (thresholds as previously coded; see docs/CLINICAL_CONTENT_REVIEW.md)
 author: RealDiag Clinical Team
 change_log:
   - date: '2024-12-26'
@@ -90,3 +142,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to emergent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.

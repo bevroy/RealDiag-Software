@@ -332,7 +332,62 @@ nodes:
       - Alcohol cessation if alcohol-related
       - Treat hypothyroidism
       - Hematology referral if MDS suspected
-criteria: []
+criteria:
+  finding_label: anemia
+  source: WHO Guideline on haemoglobin cutoffs to define anaemia in individuals and populations (2024)
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - D50
+      - D51
+      - D52
+      - D53
+      - D55
+      - D56
+      - D57
+      - D58
+      - D59
+      - D60
+      - D61
+      - D62
+      - D63
+      - D64
+    snomed:
+      - '271737000'
+  items:
+    - id: hemoglobin_male
+      label: Hemoglobin < 13.0 g/dL (men)
+      applies_to:
+        sex: male
+      resource: lab
+      loinc:
+        - 718-7
+      operator: <
+      value: 13.0
+      unit: g/dL
+      lookback_days: 90
+      show_converted: false
+      expected: < 13.0 g/dL (130 g/L)
+      missing_test: Hemoglobin (CBC)
+      source: WHO Guideline on haemoglobin cutoffs to define anaemia in individuals and populations (2024)
+    - id: hemoglobin_female
+      label: Hemoglobin < 12.0 g/dL (non-pregnant women)
+      applies_to:
+        sex: female
+      resource: lab
+      loinc:
+        - 718-7
+      operator: <
+      value: 12.0
+      unit: g/dL
+      lookback_days: 90
+      expected: < 12.0 g/dL (120 g/L); pregnancy cutoffs differ
+      details_met: Threshold assumes the patient is not pregnant (WHO uses trimester-specific cutoffs in pregnancy).
+      missing_test: Hemoglobin (CBC)
+      source: WHO Guideline on haemoglobin cutoffs to define anaemia in individuals and populations (2024)
 author: RealDiag Clinical Team
 change_log:
   - date: '2026-10-19'
@@ -342,3 +397,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

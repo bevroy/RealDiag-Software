@@ -163,6 +163,7 @@ class CriterionResponse(BaseModel):
     value: Optional[str] = None
     expected: Optional[str] = None
     details: Optional[str] = None
+    source: Optional[str] = None
 
 
 class DiagnosisResponse(BaseModel):
@@ -182,6 +183,16 @@ class DiagnosisResponse(BaseModel):
     status_reason: Optional[str] = None
     severity_reason: Optional[str] = None
     supporting_findings: List[CriterionResponse] = []
+    # "consistent" | "possible" (a repeat result is needed) | None
+    finding: Optional[str] = None
+    # Already on the patient's problem list (shown as "known condition")
+    known_condition: bool = False
+    known_condition_text: Optional[str] = None
+    # "always" (acute) | "when_found" (chronic: shown only when something is found)
+    display: str = "always"
+    sources: List[str] = []
+    review_status: Optional[str] = None
+    review_status_label: Optional[str] = None
 
 
 class EvaluatePatientResponse(BaseModel):
@@ -192,6 +203,9 @@ class EvaluatePatientResponse(BaseModel):
     data_status: Dict[str, str]
     data_warnings: List[str]
     data_notes: List[str] = []
+    # Conditions that could not be assessed, e.g. "Chronic conditions could not
+    # be assessed: lab results could not be retrieved."
+    assessment_warnings: List[str] = []
     # Severity ratings and recommendations are not yet clinically reviewed
     clinical_review_notice: Optional[str] = None
 
@@ -388,7 +402,8 @@ def _lab_summary(lab) -> Dict[str, Any]:
 def _criterion_response(c) -> "CriterionResponse":
     return CriterionResponse(
         criterion=c.criterion, status=c.status.value,
-        value=c.value, expected=c.expected, details=c.details
+        value=c.value, expected=c.expected, details=c.details,
+        source=getattr(c, "source", None),
     )
 
 
@@ -408,6 +423,13 @@ def _diagnosis_response(evaluation: DiagnosisEvaluation) -> DiagnosisResponse:
         status_reason=evaluation.status_reason,
         severity_reason=evaluation.severity_reason,
         supporting_findings=[_criterion_response(c) for c in evaluation.supporting_findings],
+        finding=getattr(evaluation, "finding", None),
+        known_condition=getattr(evaluation, "known_condition", False),
+        known_condition_text=getattr(evaluation, "known_condition_text", None),
+        display=getattr(evaluation, "display", "always"),
+        sources=list(getattr(evaluation, "sources", []) or []),
+        review_status=getattr(evaluation, "review_status", None),
+        review_status_label=getattr(evaluation, "review_status_label", None),
     )
 
 
@@ -628,15 +650,15 @@ async def evaluate_patient(
             access_token=smart_session.fhir_access_token
         )
 
-        patient_data = fhir_client.get_patient_data(request.patient_id)
-
-        evaluations = diagnostic_engine.evaluate_patient(
-            patient_data=patient_data,
-            chief_complaint=request.chief_complaint,
-            focus_specialties=request.focus_specialties
+        # Fetch the specific results tree criteria need, over their lookback
+        patient_data = fhir_client.get_patient_data(
+            request.patient_id,
+            observation_requirements=diagnostic_engine.observation_requirements(),
         )
 
-        responses = [_diagnosis_response(evaluation) for evaluation in evaluations]
+        assessment = diagnostic_engine.evaluate_encounter(patient_data)
+
+        responses = [_diagnosis_response(evaluation) for evaluation in assessment.evaluations]
         status = getattr(patient_data, "retrieval_status", {}) or {}
 
         logger.info(f"Returned {len(responses)} evaluations for patient {request.patient_id}")
@@ -646,6 +668,7 @@ async def evaluate_patient(
             data_status=status,
             data_warnings=retrieval_warnings(status),
             data_notes=list(getattr(patient_data, "data_notes", []) or []),
+            assessment_warnings=list(assessment.warnings),
             clinical_review_notice=review_notice(),
         )
 

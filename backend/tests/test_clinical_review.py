@@ -183,7 +183,7 @@ def test_smart_evaluation_response_carries_notice(monkeypatch):
         def __init__(self, *args, **kwargs):
             pass
 
-        def get_patient_data(self, patient_id):
+        def get_patient_data(self, patient_id, observation_requirements=None):
             return SimpleNamespace(patient_id="p1", name="A", age=50, gender="female", labs=[], vitals=[],
                                    conditions=[], medications=[], allergies=[],
                                    retrieval_status={"labs": "retrieved"}, data_notes=[])

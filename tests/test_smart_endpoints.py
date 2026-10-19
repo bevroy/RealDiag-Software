@@ -70,7 +70,7 @@ class _FakeFHIRClient:
     def __init__(self, *args, **kwargs):
         pass
 
-    def get_patient_data(self, patient_id):
+    def get_patient_data(self, patient_id, observation_requirements=None):
         return _fake_patient_data()
 
     def get_current_encounter(self, patient_id):
@@ -93,7 +93,8 @@ def _clear_overrides():
 def fake_fhir_client(monkeypatch):
     monkeypatch.setattr(smart_router_module, "FHIRClient", _FakeFHIRClient)
     monkeypatch.setattr(
-        smart_router_module.diagnostic_engine, "evaluate_patient", lambda **kwargs: []
+        smart_router_module.diagnostic_engine, "evaluate_encounter",
+        lambda *args, **kwargs: SimpleNamespace(evaluations=[], warnings=[]),
     )
 
 

@@ -30,6 +30,8 @@ logger = logging.getLogger(__name__)
 # (e.g. Epic's sandbox test patients, whose records predate any fixed window).
 LAB_LOOKBACK_DAYS = int(os.getenv("LAB_LOOKBACK_DAYS", "30"))
 VITAL_LOOKBACK_DAYS = int(os.getenv("VITAL_LOOKBACK_DAYS", "7"))
+# Pages (of up to 100 results) to follow for the longer criteria lookback
+CRITERIA_MAX_PAGES = int(os.getenv("CRITERIA_MAX_PAGES", "10"))
 
 
 class FHIRResourceType(Enum):
@@ -82,6 +84,27 @@ def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
             label = RESOURCE_LABELS.get(resource, resource.capitalize())
             warnings.append(f"{label} could not be retrieved; do not assume none.")
     return warnings
+
+
+_STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
+
+
+def _record_status(status: Dict[str, str], resource: str, outcome: str) -> None:
+    """Keep the worst outcome when one resource needs several queries."""
+    if resource not in status or _STATUS_RANK[outcome] > _STATUS_RANK[status[resource]]:
+        status[resource] = outcome
+
+
+def _merge_results(existing: List[Any], extra: List[Any]) -> List[Any]:
+    """Append results not already present (same code, time, value and unit)."""
+    seen = {(r.code, r.effective_date, r.value, r.unit) for r in existing}
+    merged = list(existing)
+    for r in extra:
+        key = (r.code, r.effective_date, r.value, r.unit)
+        if key not in seen:
+            seen.add(key)
+            merged.append(r)
+    return merged
 
 
 def find_loinc_coding(code_obj: Dict[str, Any]) -> Dict[str, Any]:
@@ -311,7 +334,8 @@ class FHIRClient:
         patient_id: str,
         category: Optional[str] = None,
         code: Optional[str] = None,
-        date_range: Optional[str] = None
+        date_range: Optional[str] = None,
+        max_pages: int = 1,
     ) -> List[Dict[str, Any]]:
         """
         Get patient observations (labs, vitals).
@@ -319,8 +343,9 @@ class FHIRClient:
         Args:
             patient_id: Patient ID
             category: laboratory, vital-signs, etc.
-            code: LOINC code filter
+            code: LOINC code filter (comma-separated for several)
             date_range: Date range (e.g., "gt2024-01-01")
+            max_pages: follow the bundle's `next` links up to this many pages
 
         Returns:
             List of Observation resources
@@ -336,11 +361,27 @@ class FHIRClient:
 
         bundle = self._query_resource(FHIRResourceType.OBSERVATION.value, params)
 
-        observations = []
-        if bundle.get("entry"):
-            observations = [entry["resource"] for entry in bundle["entry"]]
-
+        observations = [entry["resource"] for entry in bundle.get("entry", []) or []]
+        pages = 1
+        while pages < max_pages:
+            next_url = next((link.get("url") for link in bundle.get("link", []) or []
+                             if link.get("relation") == "next"), None)
+            if not next_url:
+                break
+            response = requests.get(next_url, headers=self._get_headers())
+            response.raise_for_status()
+            bundle = response.json()
+            observations.extend(entry["resource"] for entry in bundle.get("entry", []) or [])
+            pages += 1
         return observations
+
+    def get_criteria_observations(
+        self, patient_id: str, codes: List[str], lookback_days: int, max_pages: int = CRITERIA_MAX_PAGES
+    ) -> List[Dict[str, Any]]:
+        """Observations for specific LOINC codes over a longer lookback (chart-evaluation criteria)."""
+        since = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+        code_param = ",".join(f"{LOINC_SYSTEM}|{c}" for c in codes)
+        return self.get_observations(patient_id, code=code_param, date_range=f"ge{since}", max_pages=max_pages)
 
     def get_conditions(self, patient_id: str) -> List[Dict[str, Any]]:
         """Get patient's active conditions/problems."""
@@ -473,6 +514,35 @@ class FHIRClient:
             notes.append(f"{name}: result could not be read ({e}); skipped.")
             return None
 
+    def parse_vitals(
+        self, observation: Dict[str, Any], notes: Optional[List[str]] = None
+    ) -> List[VitalSign]:
+        """Parse a vital-signs Observation into one or more readings.
+
+        Blood pressure is commonly sent as one panel (LOINC 85354-9) whose
+        systolic (8480-6) and diastolic (8462-4) values are components rather
+        than a top-level valueQuantity; each component becomes a reading.
+        """
+        notes = notes if notes is not None else []
+        components = observation.get("component") or []
+        if not components or observation.get("valueQuantity"):
+            vital = self.parse_vital(observation, notes)
+            return [vital] if vital else []
+        if _is_excluded(observation):
+            notes.append(f"{self._observation_name(observation)}: excluded (marked {observation.get('status')}).")
+            return []
+        readings = []
+        for component in components:
+            part = dict(component)
+            part.setdefault("status", observation.get("status", "final"))
+            for key in ("effectiveDateTime", "id"):
+                if key in observation:
+                    part[key] = observation[key]
+            vital = self.parse_vital(part, notes)
+            if vital:
+                readings.append(vital)
+        return readings
+
     def parse_vital(
         self, observation: Dict[str, Any], notes: Optional[List[str]] = None
     ) -> Optional[VitalSign]:
@@ -576,7 +646,7 @@ class FHIRClient:
             "vitals", status,
             lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"ge{since_str}"),
         )
-        new_vitals = [v for v in (self.parse_vital(o, notes) for o in vital_observations) if v]
+        new_vitals = [v for o in vital_observations for v in self.parse_vitals(o, notes)]
 
         new_conditions = self._fetch_tracked(
             "conditions", status,
@@ -632,12 +702,13 @@ class FHIRClient:
         """
         try:
             result = fetch()
-            status[resource] = RETRIEVED
+            _record_status(status, resource, RETRIEVED)
             return result
         except requests.RequestException as e:
             code = getattr(getattr(e, "response", None), "status_code", None)
-            status[resource] = NOT_AVAILABLE if code in (403, 404, 501) else FAILED
-            logger.warning(f"FHIR query for {resource} {status[resource]}: {e}")
+            outcome = NOT_AVAILABLE if code in (403, 404, 501) else FAILED
+            _record_status(status, resource, outcome)
+            logger.warning(f"FHIR query for {resource} {outcome}: {e}")
             return []
 
     @staticmethod
@@ -656,7 +727,9 @@ class FHIRClient:
         today = datetime.now()
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
-    def get_patient_data(self, patient_id: str) -> PatientData:
+    def get_patient_data(
+        self, patient_id: str, observation_requirements: Optional[Dict[str, Dict[str, Any]]] = None
+    ) -> PatientData:
         """
         Get comprehensive patient data for clinical decision support.
 
@@ -668,6 +741,10 @@ class FHIRClient:
 
         Args:
             patient_id: Patient FHIR ID
+            observation_requirements: optional {"labs"/"vitals": {"codes": [...],
+                "lookback_days": n}} from SmartDiagnosticEngine.observation_requirements();
+                those codes are fetched over that lookback in addition to the
+                chart-summary windows.
 
         Returns:
             PatientData object with aggregated clinical information
@@ -703,7 +780,21 @@ class FHIRClient:
             "vitals", status,
             lambda: self.get_observations(patient_id, category="vital-signs", date_range=f"gt{vital_since}"),
         )
-        vitals = [v for v in (self.parse_vital(o, notes) for o in vital_observations) if v]
+        vitals = [v for o in vital_observations for v in self.parse_vitals(o, notes)]
+
+        # Chart-evaluation criteria may need specific results over a longer
+        # lookback than the chart summary (e.g. HbA1c over a year).
+        for resource, need in (observation_requirements or {}).items():
+            if not need.get("codes") or resource not in ("labs", "vitals"):
+                continue
+            extra = self._fetch_tracked(
+                resource, status,
+                lambda need=need: self.get_criteria_observations(patient_id, need["codes"], need["lookback_days"]),
+            )
+            if resource == "labs":
+                labs = _merge_results(labs, [r for r in (self.parse_observation(o, notes) for o in extra) if r])
+            else:
+                vitals = _merge_results(vitals, [v for o in extra for v in self.parse_vitals(o, notes)])
 
         conditions = self._drop_excluded(
             self._fetch_tracked("conditions", status, lambda: self.get_conditions(patient_id)),

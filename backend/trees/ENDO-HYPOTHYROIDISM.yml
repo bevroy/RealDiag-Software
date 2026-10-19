@@ -78,7 +78,56 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: hypothyroidism
+  source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - E01
+      - E02
+      - E03
+      - E89.0
+    snomed:
+      - '40930008'
+  severity_default_reason: TSH above reference range with free T4 normal or not measured (subclinical range).
+  severity:
+    - type: any_met
+      items:
+        - free_t4_low
+      level: not rated
+      reason: TSH above and free T4 below the lab reference ranges (overt range).
+  items:
+    - id: tsh_high
+      label: TSH above the lab's reference range
+      resource: lab
+      loinc:
+        - 3016-3
+        - 11580-8
+      operator: above_ref_high
+      unit: mIU/L
+      lookback_days: 365
+      details_met: '{reason}'
+      details_not_met: '{reason}'
+      details_unusable: '{problem}.'
+      missing_test: TSH
+      source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
+    - id: free_t4_low
+      label: Free T4 below the lab's reference range
+      role: supporting
+      resource: lab
+      loinc:
+        - 3024-7
+        - 14920-3
+      operator: below_ref_low
+      unit: ng/dL
+      lookback_days: 365
+      details_met: '{reason}'
+      details_not_met: '{reason}'
+      source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
 author: RealDiag Clinical Team
 change_log:
   - date: '2024-12-26'
@@ -91,3 +140,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.

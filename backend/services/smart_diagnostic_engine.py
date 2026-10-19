@@ -1,34 +1,60 @@
 """
 Smart Diagnostic Engine with EHR Integration
 
-Enhanced diagnostic engine that evaluates clinical rules against actual patient data
-from FHIR/EHR systems. Provides real-time clinical decision support with automated
-criteria matching.
+Evaluates the `criteria` section of each decision tree against patient data
+from FHIR/EHR systems (labs and vital signs) and reports which criteria are
+met, not met or unknown. Decision support only: outputs describe what the
+findings may be consistent with and cite the tree's source; they never issue
+treatment orders.
 
 Usage:
     from services.fhir_client import FHIRClient, PatientData
     from services.smart_diagnostic_engine import SmartDiagnosticEngine
-    
+
     engine = SmartDiagnosticEngine()
-    patient_data = fhir_client.get_patient_data("patient123")
-    
-    results = engine.evaluate_patient(
-        patient_data=patient_data,
-        chief_complaint="chest pain"
-    )
+    patient_data = fhir_client.get_patient_data(
+        "patient123", observation_requirements=engine.observation_requirements())
+    results = engine.evaluate_patient(patient_data=patient_data)
+
+Criteria format (documented in docs/CLINICAL_CONTENT_REVIEW.md; checked by
+backend/scripts/validate_rules.py):
+
+    criteria:
+      finding_label: diabetes mellitus
+      source: ADA Standards of Care in Diabetes-2026, Section 2
+      display: always | when_found     # when_found = chronic condition
+      probability: met_over_all | met_over_known
+      suggest_when: {count_met: 1, group: <optional>}
+      confirm: {min_abnormal_results: 2}            # optional
+      known_condition: {icd10_prefixes: [...], snomed: [...]}   # optional
+      severity_default: moderate
+      severity: [ ...rules... ]
+      next_steps: [ ...decision-support text... ]
+      items: [ ...criteria items... ]
 """
 
-import yaml
-from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple
-from dataclasses import dataclass, field
-from enum import Enum
-import re
-import logging
+from __future__ import annotations
 
-from .fhir_client import PatientData, LabResult, CommonLOINC
+import logging
+import re
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
+from enum import Enum
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import yaml
+
+from .clinical_review import review_fields
+from .fhir_client import PatientData, RETRIEVED
+from .lab_units import analyte_for, analyte_name, analyte_title, to_canonical
 
 logger = logging.getLogger(__name__)
+
+TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
+
+OPERATORS = (">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low")
+SEVERITY_RANK = {"critical": 4, "high": 3, "moderate": 2, "low": 1, "unknown": 0}
 
 
 class CriteriaStatus(Enum):
@@ -46,6 +72,7 @@ class CriterionEvaluation:
     value: Optional[Any] = None
     expected: Optional[str] = None
     details: Optional[str] = None
+    source: Optional[str] = None
 
 
 @dataclass
@@ -60,723 +87,646 @@ class DiagnosisEvaluation:
     criteria_unknown: List[CriterionEvaluation]
     recommendations: List[str]
     missing_tests: List[str]
-    severity: str = "moderate"  # low, moderate, high, critical, unknown
+    severity: str = "moderate"  # low, moderate, high, critical, unknown, not rated
     # "evaluated" | "insufficient data" | "evaluation failed"
     evaluation_status: str = "evaluated"
     status_reason: Optional[str] = None
     # Findings shown for context only; they never raise the probability
     supporting_findings: List[CriterionEvaluation] = field(default_factory=list)
     severity_reason: Optional[str] = None
+    # "consistent" | "possible" (needs a repeat result) | None
+    finding: Optional[str] = None
+    # Condition already on the patient's problem list
+    known_condition: bool = False
+    known_condition_text: Optional[str] = None
+    # "always" (acute: shown even with missing data) | "when_found" (chronic)
+    display: str = "always"
+    sources: List[str] = field(default_factory=list)
+    review_status: Optional[str] = None
+    review_status_label: Optional[str] = None
+    # A result exists but could not be compared (unit missing/unrecognised,
+    # no reference range): the test was done, so the gap must be shown.
+    has_unusable_results: bool = False
+
+
+@dataclass
+class EncounterAssessment:
+    """Evaluations to show plus warnings about conditions that could not be assessed."""
+    evaluations: List[DiagnosisEvaluation]
+    warnings: List[str]
+
+
+# --------------------------------------------------------------------------- data access
+
+def _naive_utc(dt: Optional[datetime]) -> Optional[datetime]:
+    if dt is None:
+        return None
+    if dt.tzinfo is not None:
+        return dt.astimezone(timezone.utc).replace(tzinfo=None)
+    return dt
+
+
+def _sort_key(result) -> datetime:
+    return _naive_utc(result.effective_date) or datetime.min
+
+
+def _results(patient_data: PatientData, item: Dict[str, Any], now: datetime) -> List[Any]:
+    """All results for the item's LOINC codes (within its lookback), newest first."""
+    codes = set(item["loinc"])
+    pool = patient_data.labs if item.get("resource", "lab") == "lab" else patient_data.vitals
+    results = [r for r in pool if r.code in codes]
+    lookback = item.get("lookback_days")
+    if lookback:
+        since = now - timedelta(days=int(lookback))
+        results = [r for r in results if (_naive_utc(r.effective_date) or datetime.min) >= since]
+    return sorted(results, key=_sort_key, reverse=True)
+
+
+# --------------------------------------------------------------------------- one result vs one item
+
+@dataclass
+class _Check:
+    """Outcome of comparing one result with one criterion."""
+    met: Optional[bool]           # None = could not compare (see problem)
+    problem: Optional[str] = None
+    canonical: Optional[float] = None
+    reason: Optional[str] = None  # explanation (reference-range operators)
+    expected: Optional[str] = None
+    severity: str = "unknown"     # band for reference-range operators
+
+
+class _ItemEvaluator:
+    """Compares results against one `criteria.items[]` entry."""
+
+    def __init__(self, item: Dict[str, Any]):
+        self.item = item
+        self.operator = item["operator"]
+        self.analyte = item.get("analyte") or analyte_for(item["loinc"][0])
+        self.unit_check = item.get("unit_check", True)
+
+    def check(self, result) -> _Check:
+        if self.operator in ("above_ref_high", "below_ref_low"):
+            return self._check_reference(result)
+        canonical = result.value
+        if self.unit_check:
+            canonical, problem = to_canonical(self.analyte, result.value, result.unit)
+            if problem:
+                return _Check(met=None, problem=problem)
+        threshold = self.item.get("value")
+        op = self.operator
+        if op == ">":
+            met = canonical > threshold
+        elif op == ">=":
+            met = canonical >= threshold
+        elif op == "<":
+            met = canonical < threshold
+        elif op == "<=":
+            met = canonical <= threshold
+        elif op == "between":
+            met = threshold[0] <= canonical <= threshold[1]
+        elif op == "outside":
+            met = canonical < threshold[0] or canonical > threshold[1]
+        else:  # pragma: no cover - the validator rejects unknown operators
+            raise ValueError(f"unknown operator {op}")
+        return _Check(met=met, canonical=canonical)
+
+    def _check_reference(self, result) -> _Check:
+        """Compare with the lab's own reference limit, after unit conversion."""
+        name, title = analyte_name(self.analyte), analyte_title(self.analyte)
+        upper = self.operator == "above_ref_high"
+        bound = "upper" if upper else "lower"
+        expected_unknown = f"lab {bound} reference limit"
+
+        value, problem = to_canonical(self.analyte, result.value, result.unit)
+        if problem:
+            return _Check(met=None, problem=problem, expected=expected_unknown)
+        limit = (result.reference_range or {}).get("high" if upper else "low")
+        if limit is None:
+            return _Check(met=None, problem=f"the lab reported no {bound} reference limit for {name}",
+                          expected=expected_unknown)
+        ref_unit = getattr(result, "reference_unit", None)
+        if ref_unit:
+            limit_canonical, ref_problem = to_canonical(self.analyte, limit, ref_unit)
+            if ref_problem:
+                return _Check(met=None, problem=f"reference range unit '{ref_unit}' is not recognised",
+                              expected=expected_unknown)
+        else:
+            limit_canonical, _ = to_canonical(self.analyte, limit, result.unit)
+        if limit_canonical <= 0:
+            return _Check(met=None, problem=f"the lab's {bound} reference limit is zero or negative",
+                          expected=expected_unknown)
+
+        expected = f"{'>' if upper else '<'} {limit} {ref_unit or result.unit} (lab {bound} reference limit)"
+        if upper:
+            multiple = value / limit_canonical
+            if multiple <= 1:
+                return _Check(met=False, canonical=value, expected=expected, severity="low",
+                              reason=f"{title} at or below the lab's upper reference limit.")
+            return _Check(met=True, canonical=value, expected=expected, severity=self._band(multiple),
+                          reason=f"{title} {multiple:.1f}x the lab's upper reference limit.")
+        if value >= limit_canonical:
+            return _Check(met=False, canonical=value, expected=expected, severity="low",
+                          reason=f"{title} at or above the lab's lower reference limit.")
+        return _Check(met=True, canonical=value, expected=expected, severity="moderate",
+                      reason=f"{title} below the lab's lower reference limit.")
+
+    def _band(self, multiple: float) -> str:
+        bands = self.item.get("severity_multiples") or {}
+        if "critical" in bands and multiple >= bands["critical"]:
+            return "critical"
+        if "high" in bands and multiple >= bands["high"]:
+            return "high"
+        return "moderate"
+
+    def value_text(self, result, check: Optional[_Check]) -> str:
+        template = self.item.get("value_format", "{value} {unit}")
+        text = template.format(value=result.value, unit=result.unit or "").strip()
+        if (self.item.get("show_converted") and check is not None and check.canonical is not None
+                and (result.unit or "").strip().lower() != str(self.item.get("unit", "")).strip().lower()):
+            text += f" (= {check.canonical:.0f} {self.item.get('unit')})"
+        return text
+
+    def fill(self, template: Optional[str], result=None, check: Optional[_Check] = None,
+             problem: Optional[str] = None) -> Optional[str]:
+        if template is None:
+            return None
+        names = self.item.get("code_names") or {}
+        prelim = ""
+        if result is not None and self.item.get("mark_preliminary") and getattr(result, "status", "") == "preliminary":
+            prelim = " (PRELIMINARY result)"
+        return template.format(
+            code_name=names.get(getattr(result, "code", None),
+                                analyte_name(self.analyte) if self.analyte else self.item["label"]),
+            reason=(check.reason if check else "") or "",
+            problem=problem or "",
+            prelim=prelim,
+        )
+
+
+@dataclass
+class _ItemResult:
+    item: Dict[str, Any]
+    criterion: Optional[CriterionEvaluation]
+    status: Optional[CriteriaStatus]       # None = not applicable / omitted
+    partial: bool = False
+    abnormal_count: int = 0
+    problem: Optional[str] = None
+    not_measured: bool = False
+    check: Optional[_Check] = None
+    missing_test: Optional[str] = None
+
+
+def _evaluate_item(item: Dict[str, Any], patient_data: PatientData, now: datetime) -> _ItemResult:
+    sex = (item.get("applies_to") or {}).get("sex")
+    if sex and str(patient_data.gender or "").lower() != sex:
+        return _ItemResult(item=item, criterion=None, status=None)
+
+    ev = _ItemEvaluator(item)
+    label = item["label"]
+    source = item.get("source")
+    results = _results(patient_data, item, now)
+
+    if not results:
+        if item.get("role", "core") == "supporting":
+            return _ItemResult(item=item, criterion=None, status=None, not_measured=True)
+        return _ItemResult(
+            item=item, status=CriteriaStatus.UNKNOWN, not_measured=True, missing_test=item.get("missing_test"),
+            criterion=CriterionEvaluation(criterion=item.get("unknown_label", label), status=CriteriaStatus.UNKNOWN,
+                                          details=item.get("details_unknown"), source=source),
+        )
+
+    min_occ = int(item.get("min_occurrences", 1))
+    min_span = int(item.get("min_span_days", 0))
+    if min_occ > 1 or min_span > 0 or item.get("count_all"):
+        # count_all: every abnormal result in the window counts (e.g. two
+        # separate HbA1c results confirm diabetes)
+        return _evaluate_repeated(item, ev, results, min_occ, min_span)
+
+    # Single-result criterion: the most recent result, or the most concerning
+    # of each code's most recent result.
+    if item.get("select") == "most_concerning_per_code":
+        latest_per_code: Dict[str, Any] = {}
+        for r in results:
+            latest_per_code.setdefault(r.code, r)
+        ordered = [latest_per_code[c] for c in item["loinc"] if c in latest_per_code]
+        checks = [(r, ev.check(r)) for r in ordered]
+        result, check = max(checks, key=lambda rc: SEVERITY_RANK[rc[1].severity])
+    else:
+        result = results[0]
+        check = ev.check(result)
+
+    value = ev.value_text(result, check)
+    expected = check.expected or item.get("expected")
+    if check.met is None:
+        details = ev.fill(item.get("details_unusable", "{problem}."), result, check, check.problem)
+        return _ItemResult(
+            item=item, status=CriteriaStatus.UNKNOWN, problem=check.problem, check=check,
+            missing_test=item.get("missing_test_unusable", item.get("missing_test")),
+            criterion=CriterionEvaluation(criterion=item.get("unknown_label", label), status=CriteriaStatus.UNKNOWN,
+                                          value=value, expected=expected, details=details, source=source),
+        )
+    status = CriteriaStatus.PRESENT if check.met else CriteriaStatus.ABSENT
+    if check.met:
+        details = ev.fill(item.get("details_met"), result, check)
+    else:
+        details = ev.fill(item.get("details_not_met"), result, check)
+        expected = check.expected or item.get("expected_not_met", item.get("expected"))
+    return _ItemResult(
+        item=item, status=status, check=check, abnormal_count=1 if check.met else 0,
+        criterion=CriterionEvaluation(criterion=label, status=status, value=value, expected=expected,
+                                      details=details, source=source),
+    )
+
+
+def _evaluate_repeated(item, ev: _ItemEvaluator, results, min_occ: int, min_span: int) -> _ItemResult:
+    """Criteria that need repeat abnormal results (e.g. 2 readings, >= 90 days apart)."""
+    label, source = item["label"], item.get("source")
+    qualifying, usable, problems = [], [], []
+    for r in results:
+        check = ev.check(r)
+        if check.met is None:
+            problems.append(check.problem)
+            continue
+        usable.append((r, check))
+        if check.met:
+            qualifying.append((r, check))
+
+    if not usable:
+        return _ItemResult(
+            item=item, status=CriteriaStatus.UNKNOWN, problem=problems[0],
+            missing_test=item.get("missing_test_unusable", item.get("missing_test")),
+            criterion=CriterionEvaluation(criterion=item.get("unknown_label", label), status=CriteriaStatus.UNKNOWN,
+                                          expected=item.get("expected"), details=f"{problems[0]}.", source=source),
+        )
+    if not qualifying:
+        latest, latest_check = usable[0]
+        return _ItemResult(
+            item=item, status=CriteriaStatus.ABSENT, check=latest_check,
+            criterion=CriterionEvaluation(criterion=label, status=CriteriaStatus.ABSENT,
+                                          value=ev.value_text(latest, latest_check),
+                                          expected=item.get("expected"), source=source),
+        )
+
+    dates = [_naive_utc(r.effective_date) for r, _ in qualifying if r.effective_date]
+    if item.get("distinct_days") and dates:
+        count = len({d.date() for d in dates})
+    else:
+        count = len(qualifying)
+    span = (max(dates) - min(dates)).days if len(dates) > 1 else 0
+    full = count >= min_occ and span >= min_span
+    listing = ", ".join(
+        f"{ev.value_text(r, c)} ({_naive_utc(r.effective_date).date().isoformat() if r.effective_date else 'date unknown'})"
+        for r, c in qualifying[:6]
+    )
+    need = []
+    if count < min_occ:
+        need.append(f"{count} of {min_occ} required abnormal results")
+    if span < min_span:
+        need.append(f"{span} of {min_span} required days between first and last abnormal result")
+    details = f"Abnormal results: {listing}." + ("" if full else f" Confirmation pending: {'; '.join(need)}.")
+    first, first_check = qualifying[0]
+    return _ItemResult(
+        item=item, status=CriteriaStatus.PRESENT, partial=not full, abnormal_count=count, check=first_check,
+        criterion=CriterionEvaluation(criterion=label, status=CriteriaStatus.PRESENT,
+                                      value=ev.value_text(first, first_check), expected=item.get("expected"),
+                                      details=details, source=source),
+    )
+
+
+# --------------------------------------------------------------------------- tree-level evaluation
+
+def known_condition(criteria: Dict[str, Any], conditions: List[Dict[str, Any]]) -> Optional[str]:
+    """Display name of a matching problem-list condition, if any."""
+    spec = criteria.get("known_condition") or {}
+    prefixes = [str(p).upper() for p in spec.get("icd10_prefixes", [])]
+    snomed = {str(s) for s in spec.get("snomed", [])}
+    for condition in conditions or []:
+        code = condition.get("code") or {}
+        for coding in code.get("coding") or []:
+            system = str(coding.get("system", "")).lower()
+            value = str(coding.get("code", ""))
+            if prefixes and ("icd-10" in system or "icd10" in system) and any(value.upper().startswith(p) for p in prefixes):
+                return code.get("text") or coding.get("display") or value
+            if snomed and "snomed" in system and value in snomed:
+                return code.get("text") or coding.get("display") or value
+    return None
+
+
+def _count_met(item_results: List[_ItemResult], group: Optional[str]) -> int:
+    return sum(
+        1 for r in item_results
+        if r.status == CriteriaStatus.PRESENT and not r.partial
+        and r.item.get("role", "core") == "core"
+        and (group is None or r.item.get("group") == group)
+    )
+
+
+def _apply_severity(criteria: Dict[str, Any], item_results: List[_ItemResult]) -> Tuple[str, Optional[str]]:
+    """Run severity rules in order; a rule that fires overrides earlier ones."""
+    severity = criteria.get("severity_default", "not rated")
+    reason = criteria.get("severity_default_reason")
+    by_id = {r.item["id"]: r for r in item_results}
+    for rule in criteria.get("severity") or []:
+        kind = rule["type"]
+        r = by_id.get(rule.get("item"))
+        if kind == "reference_multiple":
+            if r is None or r.not_measured or r.status is None:
+                severity, reason = "unknown", rule.get("not_measured_reason")
+            elif r.problem:
+                severity, reason = "unknown", f"Severity unknown: {r.problem}."
+            else:
+                severity, reason = r.check.severity, r.check.reason
+        elif kind == "count_met":
+            if _count_met(item_results, rule.get("group")) >= rule["at_least"]:
+                severity = rule["level"]
+                reason = rule.get("reason", reason)
+        elif kind == "unusable":
+            if r is not None and r.problem:
+                severity, reason = rule.get("level", "unknown"), f"Severity unknown: {r.problem}."
+        elif kind == "value":
+            if r is not None and r.check is not None and r.check.canonical is not None and not r.problem:
+                v, threshold = r.check.canonical, rule["value"]
+                hit = {">": v > threshold, ">=": v >= threshold, "<": v < threshold, "<=": v <= threshold}[rule["op"]]
+                if hit:
+                    severity = rule["level"]
+                    reason = rule["reason"].format(value=v) if rule.get("reason") else reason
+        elif kind == "any_met":
+            if any(by_id.get(i) is not None and by_id[i].status == CriteriaStatus.PRESENT and not by_id[i].partial
+                   for i in rule["items"]):
+                severity = rule["level"]
+                reason = rule.get("reason", reason)
+    return severity, reason
+
+
+def evaluate_tree(tree: Dict[str, Any], patient_data: PatientData, now: Optional[datetime] = None) -> DiagnosisEvaluation:
+    """Evaluate one tree's criteria against the patient's data (no display filtering)."""
+    now = now or datetime.utcnow()
+    criteria = tree["criteria"]
+    item_results = [_evaluate_item(item, patient_data, now) for item in criteria["items"]]
+
+    met, not_met, unknown, supporting, missing_tests = [], [], [], [], []
+    for r in item_results:
+        if r.status is None:
+            continue
+        if r.item.get("role", "core") == "supporting":
+            supporting.append(r.criterion)
+            continue
+        {CriteriaStatus.PRESENT: met, CriteriaStatus.ABSENT: not_met,
+         CriteriaStatus.UNKNOWN: unknown}[r.status].append(r.criterion)
+        if r.status == CriteriaStatus.UNKNOWN and r.missing_test and r.missing_test not in missing_tests:
+            missing_tests.append(r.missing_test)
+
+    if criteria.get("probability", "met_over_known") == "met_over_all":
+        total = len(met) + len(not_met) + len(unknown)
+        probability = len(met) / total if total else 0.0
+    else:
+        probability = len(met) / max(len(met) + len(not_met), 1)
+
+    severity, severity_reason = _apply_severity(criteria, item_results)
+
+    # Finding: "consistent" when the suggestion rule holds; "possible" when an
+    # abnormal result still needs confirmation by a repeat result.
+    suggest = criteria.get("suggest_when") or {"count_met": 1}
+    confirm = criteria.get("confirm") or {}
+    abnormal_total = sum(r.abnormal_count for r in item_results if r.item.get("role", "core") == "core")
+    finding = None
+    if confirm.get("min_abnormal_results"):
+        if abnormal_total >= confirm["min_abnormal_results"]:
+            finding = "consistent"
+        elif abnormal_total >= 1:
+            finding = "possible"
+    elif _count_met(item_results, suggest.get("group")) >= suggest.get("count_met", 1):
+        finding = "consistent"
+    elif any(r.partial for r in item_results):
+        finding = "possible"
+
+    known_text = known_condition(criteria, patient_data.conditions)
+    label = criteria.get("finding_label", tree.get("name", tree["tree_id"]))
+    source = criteria.get("source", "")
+    recommendations: List[str] = []
+    if known_text:
+        recommendations.append(f"Known condition on the problem list ({known_text}).")
+    if finding == "consistent":
+        prefix = "Current findings consistent with" if known_text else "Findings consistent with"
+        recommendations.append(f"{prefix} {label}; consider evaluation per {source}.")
+        recommendations.extend(criteria.get("next_steps") or [])
+    elif finding == "possible":
+        need = confirm.get("min_abnormal_results")
+        detail = f" ({abnormal_total} of {need} required abnormal results)" if need else ""
+        recommendations.append(f"Possible {label}{detail}; confirmation requires a repeat result per {source}.")
+    if missing_tests:
+        recommendations.append(f"Data needed to evaluate: {', '.join(missing_tests)}")
+
+    sources: List[str] = []
+    for s in [source] + [r.item.get("source") for r in item_results if r.status is not None]:
+        if s and s not in sources:
+            sources.append(s)
+
+    return DiagnosisEvaluation(
+        diagnosis_id=tree["tree_id"],
+        diagnosis_label=tree.get("name", tree["tree_id"]),
+        family=str(tree.get("family", "")).lower().replace(" ", "_"),
+        probability=probability,
+        criteria_met=met,
+        criteria_not_met=not_met,
+        criteria_unknown=unknown,
+        recommendations=recommendations,
+        missing_tests=missing_tests,
+        severity=severity,
+        supporting_findings=supporting,
+        severity_reason=severity_reason,
+        finding=finding,
+        known_condition=bool(known_text),
+        known_condition_text=known_text,
+        display=criteria.get("display", "always"),
+        sources=sources,
+        has_unusable_results=any(r.problem for r in item_results if r.item.get("role", "core") == "core"),
+        **review_fields(tree.get("status")),
+    )
+
+
+# --------------------------------------------------------------------------- engine
+
+def _no_applicable_core_items(tree: Dict[str, Any], patient_data: PatientData) -> bool:
+    """True when every core item is restricted to a sex the patient isn't recorded as."""
+    core = [i for i in tree["criteria"]["items"] if i.get("role", "core") == "core"]
+    gender = str(patient_data.gender or "").lower()
+    restricted = [(i.get("applies_to") or {}).get("sex") for i in core]
+    return bool(core) and all(sex is not None and sex != gender for sex in restricted)
+
+
+_CRITERIA_BLOCK = re.compile(r"^criteria:\s*\n\s+\S", re.MULTILINE)
 
 
 class SmartDiagnosticEngine:
     """
-    Enhanced diagnostic engine with EHR integration.
-    
-    Evaluates diagnostic rules against actual patient data from FHIR/EHR,
-    automatically checking lab values, vital signs, and clinical criteria.
+    Evaluates every tree that has a `criteria` section against patient data.
 
-    Decision support only: recommendations describe what findings may
-    warrant, never treatment orders (no drug doses, STAT orders or
-    procedure activations).
+    Decision support only: recommendations describe what findings may be
+    consistent with and cite the tree's source; never treatment orders.
     """
 
-    EVALUATOR_LABELS = {
-        "CARD-ACS": "Acute Coronary Syndrome",
-        "ID-SEPSIS": "Sepsis",
-        "ENDO-DKA": "Diabetic Ketoacidosis",
-    }
-    EVALUATOR_FAMILIES = {
-        "CARD-ACS": "cardiology",
-        "ID-SEPSIS": "infectious_disease",
-        "ENDO-DKA": "endocrinology",
-    }
-    
-    def __init__(self, rules_dir: str = "backend/rules"):
-        """Initialize engine and load all diagnostic rules."""
-        self.rules_dir = Path(rules_dir)
-        self.rules = self._load_all_rules()
-        logger.info(f"Loaded {len(self.rules)} diagnostic rules")
-    
-    def _load_all_rules(self) -> List[Dict[str, Any]]:
-        """Load all rule files from rules directory."""
-        all_rules = []
-        
-        if not self.rules_dir.exists():
-            logger.warning(f"Rules directory not found: {self.rules_dir}")
-            return all_rules
-        
-        for rule_file in self.rules_dir.glob("*.yml"):
+    def __init__(self, trees_dir: Optional[Path] = None):
+        self.trees_dir = Path(trees_dir) if trees_dir else TREES_PATH
+        self.trees = self._load_criteria_trees()
+        logger.info(f"Loaded criteria for {len(self.trees)} trees")
+
+    def _load_criteria_trees(self) -> Dict[str, Dict[str, Any]]:
+        trees: Dict[str, Dict[str, Any]] = {}
+        if not self.trees_dir.exists():
+            logger.warning(f"Trees directory not found: {self.trees_dir}")
+            return trees
+        for path in sorted(self.trees_dir.glob("*.yml")):
+            text = path.read_text(encoding="utf-8")
+            if not _CRITERIA_BLOCK.search(text):
+                continue  # `criteria: []` - nothing to evaluate
+            tree = yaml.safe_load(text) or {}
+            criteria = tree.get("criteria")
+            if isinstance(criteria, dict) and criteria.get("items") and tree.get("status") != "retired":
+                trees[tree["tree_id"]] = tree
+        return trees
+
+    def observation_requirements(self) -> Dict[str, Dict[str, Any]]:
+        """LOINC codes and the longest lookback each resource needs, for the FHIR fetch.
+
+        Only items with lookback_days are included; other items rely on the
+        default chart-summary windows.
+        """
+        needs: Dict[str, Dict[str, Any]] = {}
+        for tree in self.trees.values():
+            for item in tree["criteria"]["items"]:
+                lookback = item.get("lookback_days")
+                if not lookback:
+                    continue
+                resource = "labs" if item.get("resource", "lab") == "lab" else "vitals"
+                entry = needs.setdefault(resource, {"codes": set(), "lookback_days": 0})
+                entry["codes"].update(item["loinc"])
+                entry["lookback_days"] = max(entry["lookback_days"], int(lookback))
+        return {k: {"codes": sorted(v["codes"]), "lookback_days": v["lookback_days"]} for k, v in needs.items()}
+
+    def _evaluate_tree(self, tree_id: str, patient_data: PatientData,
+                       now: Optional[datetime] = None) -> DiagnosisEvaluation:
+        return evaluate_tree(self.trees[tree_id], patient_data, now)
+
+    def evaluate_tree(self, tree_id: str, patient_data: PatientData,
+                      now: Optional[datetime] = None) -> DiagnosisEvaluation:
+        """One tree's evaluation before any display filtering."""
+        return self._evaluate_tree(tree_id, patient_data, now)
+
+    def evaluate_encounter(self, patient_data: PatientData, now: Optional[datetime] = None) -> EncounterAssessment:
+        evaluations: List[DiagnosisEvaluation] = []
+        unassessable: List[str] = []
+        not_applicable: List[str] = []
+
+        for tree_id, tree in self.trees.items():
             try:
-                with open(rule_file, 'r') as f:
-                    data = yaml.safe_load(f)
-                    
-                family = data.get("family")
-                rules = data.get("rules", [])
-                
-                # Add family context to each rule
-                for rule in rules:
-                    rule["family"] = family
-                    rule["family_source"] = data.get("source", "")
-                    all_rules.append(rule)
-                    
+                evaluation = self._evaluate_tree(tree_id, patient_data, now)
             except Exception as e:
-                logger.error(f"Failed to load {rule_file}: {e}")
-        
-        return all_rules
-    
-    def _check_lab_criterion(
-        self,
-        patient_data: PatientData,
-        loinc_code: str,
-        operator: str,
-        threshold: float,
-        criterion_text: str
-    ) -> CriterionEvaluation:
-        """
-        Check if patient's lab result meets criterion.
-        
-        Args:
-            patient_data: Patient clinical data
-            loinc_code: LOINC code for lab test
-            operator: Comparison operator (>, <, >=, <=, =)
-            threshold: Threshold value
-            criterion_text: Human-readable criterion description
-            
-        Returns:
-            CriterionEvaluation with result
-        """
-        lab = patient_data.get_lab(loinc_code)
-        
-        if not lab:
-            return CriterionEvaluation(
-                criterion=criterion_text,
-                status=CriteriaStatus.UNKNOWN,
-                details=f"Lab test not found (LOINC: {loinc_code})"
-            )
-        
-        value = lab.value
-        meets_criterion = False
-        
-        if operator == ">":
-            meets_criterion = value > threshold
-        elif operator == "<":
-            meets_criterion = value < threshold
-        elif operator == ">=":
-            meets_criterion = value >= threshold
-        elif operator == "<=":
-            meets_criterion = value <= threshold
-        elif operator == "=":
-            meets_criterion = abs(value - threshold) < 0.01
-        
-        status = CriteriaStatus.PRESENT if meets_criterion else CriteriaStatus.ABSENT
-        
-        return CriterionEvaluation(
-            criterion=criterion_text,
-            status=status,
-            value=f"{value} {lab.unit}",
-            expected=f"{operator} {threshold} {lab.unit}",
-            details=f"{lab.display}: {value} {lab.unit} (ref: {lab.reference_range})"
-            + (" - PRELIMINARY result" if getattr(lab, "is_preliminary", False) else "")
-        )
-    
-    def _check_vital_criterion(
-        self,
-        patient_data: PatientData,
-        loinc_code: str,
-        operator: str,
-        threshold: float,
-        criterion_text: str
-    ) -> CriterionEvaluation:
-        """Check if patient's vital sign meets criterion."""
-        vital = patient_data.get_vital(loinc_code)
-        
-        if not vital:
-            return CriterionEvaluation(
-                criterion=criterion_text,
-                status=CriteriaStatus.UNKNOWN,
-                details=f"Vital sign not found (LOINC: {loinc_code})"
-            )
-        
-        value = vital.value
-        meets_criterion = False
-        
-        if operator == ">":
-            meets_criterion = value > threshold
-        elif operator == "<":
-            meets_criterion = value < threshold
-        elif operator == ">=":
-            meets_criterion = value >= threshold
-        elif operator == "<=":
-            meets_criterion = value <= threshold
-        
-        status = CriteriaStatus.PRESENT if meets_criterion else CriteriaStatus.ABSENT
-        
-        return CriterionEvaluation(
-            criterion=criterion_text,
-            status=status,
-            value=f"{value} {vital.unit}",
-            expected=f"{operator} {threshold} {vital.unit}",
-            details=f"{vital.display}: {value} {vital.unit}"
-        )
-    
-    # Troponin units recognised for comparison, as a factor to ng/L.
-    TROPONIN_UNIT_TO_NG_PER_L = {
-        "ng/l": 1.0,
-        "pg/ml": 1.0,
-        "ng/ml": 1000.0,
-        "ug/l": 1000.0,
-        "µg/l": 1000.0,
-        "mcg/l": 1000.0,
-    }
-    # Severity by multiple of the lab's upper reference limit (URL).
-    TROPONIN_HIGH_MULTIPLE = 2.5
-    TROPONIN_CRITICAL_MULTIPLE = 10.0
-
-    @classmethod
-    def _troponin_unit_factor(cls, unit: Optional[str]) -> Optional[float]:
-        if not unit:
-            return None
-        return cls.TROPONIN_UNIT_TO_NG_PER_L.get(unit.strip().lower().replace(" ", ""))
-
-    @classmethod
-    def assess_troponin(cls, lab: LabResult) -> Dict[str, Any]:
-        """
-        Compare a troponin result with the lab's own upper reference limit.
-
-        Returns {"elevated": True/False/None, "severity": str, "multiple": float|None,
-        "reason": str, "expected": str}. "elevated" is None and severity "unknown"
-        when the unit is missing/unrecognised or the lab gives no upper limit -
-        no fixed cutoff is ever assumed.
-        """
-        factor = cls._troponin_unit_factor(lab.unit)
-        if factor is None:
-            reason = (f"troponin unit '{lab.unit}' is not recognised (expected ng/mL or ng/L)"
-                      if lab.unit else "troponin result has no unit")
-            return {"elevated": None, "severity": "unknown", "multiple": None,
-                    "reason": f"Severity unknown: {reason}.", "expected": "lab upper reference limit"}
-
-        high = (lab.reference_range or {}).get("high")
-        if high is None:
-            return {"elevated": None, "severity": "unknown", "multiple": None,
-                    "reason": "Severity unknown: the lab reported no upper reference limit for troponin.",
-                    "expected": "lab upper reference limit"}
-
-        ref_factor = cls._troponin_unit_factor(lab.reference_unit) if lab.reference_unit else factor
-        if ref_factor is None:
-            return {"elevated": None, "severity": "unknown", "multiple": None,
-                    "reason": f"Severity unknown: reference range unit '{lab.reference_unit}' is not recognised.",
-                    "expected": "lab upper reference limit"}
-
-        value_ng_l = lab.value * factor
-        url_ng_l = high * ref_factor
-        if url_ng_l <= 0:
-            return {"elevated": None, "severity": "unknown", "multiple": None,
-                    "reason": "Severity unknown: the lab's upper reference limit is zero or negative.",
-                    "expected": "lab upper reference limit"}
-
-        multiple = value_ng_l / url_ng_l
-        expected = f"> {high} {lab.reference_unit or lab.unit} (lab upper reference limit)"
-        if multiple <= 1:
-            return {"elevated": False, "severity": "low", "multiple": multiple,
-                    "reason": "Troponin at or below the lab's upper reference limit.", "expected": expected}
-        if multiple >= cls.TROPONIN_CRITICAL_MULTIPLE:
-            severity = "critical"
-        elif multiple >= cls.TROPONIN_HIGH_MULTIPLE:
-            severity = "high"
-        else:
-            severity = "moderate"
-        return {"elevated": True, "severity": severity, "multiple": multiple,
-                "reason": f"Troponin {multiple:.1f}x the lab's upper reference limit.", "expected": expected}
-
-    def _evaluate_acs(self, patient_data: PatientData) -> DiagnosisEvaluation:
-        """
-        Specialized evaluator for Acute Coronary Syndrome.
-
-        ACS evaluation is suggested only when troponin is elevated above the
-        lab's own upper reference limit. Heart rate is reported as a supporting
-        finding and never produces an ACS suggestion on its own.
-        """
-        criteria_met = []
-        criteria_not_met = []
-        criteria_unknown = []
-        supporting = []
-        missing_tests = []
-
-        severity = "unknown"
-        severity_reason = None
-        results = []
-        for loinc, assay_name in ((CommonLOINC.TROPONIN_I, "troponin I"), (CommonLOINC.TROPONIN_T, "troponin T")):
-            lab = patient_data.get_lab(loinc)
-            if lab:
-                results.append((assay_name, lab, self.assess_troponin(lab)))
-
-        if not results:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Elevated troponin",
-                status=CriteriaStatus.UNKNOWN,
-                details="Troponin not measured"
-            ))
-            missing_tests.append("Troponin (serial measurements per institutional protocol)")
-            severity_reason = "Severity unknown: troponin not measured."
-        else:
-            # Use the most concerning troponin result available
-            rank = {"critical": 4, "high": 3, "moderate": 2, "low": 1, "unknown": 0}
-            assay_name, tropo, assessment = max(results, key=lambda r: rank[r[2]["severity"]])
-            prelim = " (PRELIMINARY result)" if tropo.is_preliminary else ""
-            criterion = CriterionEvaluation(
-                criterion="Elevated troponin",
-                status=CriteriaStatus.UNKNOWN,
-                value=f"{tropo.value} {tropo.unit}".strip(),
-                expected=assessment["expected"],
-                details=f"{assay_name}: {assessment['reason']}{prelim}",
-            )
-            if assessment["elevated"] is True:
-                criterion.status = CriteriaStatus.PRESENT
-                criteria_met.append(criterion)
-            elif assessment["elevated"] is False:
-                criterion.status = CriteriaStatus.ABSENT
-                criteria_not_met.append(criterion)
-            else:
-                criteria_unknown.append(criterion)
-                missing_tests.append("Troponin with lab reference range and units")
-            severity = assessment["severity"] if assessment["elevated"] is not False else "low"
-            severity_reason = assessment["reason"]
-
-        # Heart rate: context only
-        hr = patient_data.get_vital(CommonLOINC.HEART_RATE)
-        if hr:
-            supporting.append(CriterionEvaluation(
-                criterion="Heart rate",
-                status=CriteriaStatus.PRESENT if hr.value > 100 else CriteriaStatus.ABSENT,
-                value=f"{hr.value} {hr.unit}",
-                expected="> 100/min (tachycardia)",
-                details="Supporting finding only; tachycardia alone does not suggest ACS.",
-            ))
-
-        total_criteria = len(criteria_met) + len(criteria_not_met) + len(criteria_unknown)
-        probability = len(criteria_met) / total_criteria if total_criteria else 0.0
-
-        recommendations = []
-        if criteria_met:
-            recommendations.append(
-                "Findings may warrant evaluation for ACS per ACC/AHA guidelines; "
-                "consider ECG and serial troponins."
-            )
-        if missing_tests:
-            recommendations.append(f"Data needed to evaluate: {', '.join(missing_tests)}")
-
-        return DiagnosisEvaluation(
-            diagnosis_id="CARD-ACS",
-            diagnosis_label="Acute Coronary Syndrome",
-            family="cardiology",
-            probability=probability,
-            criteria_met=criteria_met,
-            criteria_not_met=criteria_not_met,
-            criteria_unknown=criteria_unknown,
-            recommendations=recommendations,
-            missing_tests=missing_tests,
-            severity=severity,
-            supporting_findings=supporting,
-            severity_reason=severity_reason,
-        )
-    
-    def _evaluate_sepsis(self, patient_data: PatientData) -> DiagnosisEvaluation:
-        """Evaluate for sepsis using qSOFA and SIRS criteria."""
-        criteria_met = []
-        criteria_not_met = []
-        criteria_unknown = []
-        missing_tests = []
-        
-        qsofa_score = 0
-        
-        # Respiratory rate >= 22
-        rr = patient_data.get_vital(CommonLOINC.RESPIRATORY_RATE)
-        if rr:
-            if rr.value >= 22:
-                qsofa_score += 1
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Tachypnea (qSOFA)",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{rr.value} {rr.unit}",
-                    expected=">= 22/min"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Tachypnea (qSOFA)",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{rr.value} {rr.unit}",
-                    expected=">= 22/min"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Respiratory rate",
-                status=CriteriaStatus.UNKNOWN
-            ))
-        
-        # Systolic BP <= 100
-        sbp = patient_data.get_vital(CommonLOINC.SYSTOLIC_BP)
-        if sbp:
-            if sbp.value <= 100:
-                qsofa_score += 1
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Hypotension (qSOFA)",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{sbp.value} {sbp.unit}",
-                    expected="<= 100 mmHg"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Hypotension (qSOFA)",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{sbp.value} {sbp.unit}",
-                    expected="<= 100 mmHg"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Hypotension (qSOFA)",
-                status=CriteriaStatus.UNKNOWN,
-                details="Systolic blood pressure not documented"
-            ))
-
-        # Altered mentation (GCS < 15)
-        gcs = patient_data.get_vital(CommonLOINC.GCS_SCORE)
-        if gcs:
-            if gcs.value < 15:
-                qsofa_score += 1
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Altered mentation (qSOFA)",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"GCS {gcs.value}",
-                    expected="GCS < 15",
-                    details="Altered mental status contributes to qSOFA"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Altered mentation (qSOFA)",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"GCS {gcs.value}",
-                    expected="GCS < 15"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Altered mentation (qSOFA)",
-                status=CriteriaStatus.UNKNOWN,
-                details="GCS not documented - qSOFA cannot be fully scored without it"
-            ))
-            missing_tests.append("Glasgow Coma Scale / mental status assessment")
-        
-        # WBC abnormal
-        wbc = patient_data.get_lab(CommonLOINC.WBC)
-        if wbc:
-            if wbc.value > 12 or wbc.value < 4:
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Abnormal WBC",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{wbc.value} {wbc.unit}",
-                    expected="4-12 K/uL",
-                    details="Leukocytosis or leukopenia"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Abnormal WBC",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{wbc.value} {wbc.unit}",
-                    expected="< 4 or > 12 K/uL"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Abnormal WBC",
-                status=CriteriaStatus.UNKNOWN,
-                details="WBC not measured"
-            ))
-            missing_tests.append("CBC with differential")
-        
-        # Lactate
-        # Note: LOINC for lactate is 2524-7, but not in CommonLOINC yet
-        
-        probability = len(criteria_met) / max(len(criteria_met) + len(criteria_not_met), 1)
-        
-        severity = "moderate"
-        if qsofa_score >= 2:
-            severity = "critical"
-        elif qsofa_score == 1:
-            severity = "high"
-        
-        recommendations = []
-        if qsofa_score >= 2:
-            recommendations.extend([
-                "qSOFA >= 2: findings may indicate high risk for sepsis.",
-                "Consider evaluation per Surviving Sepsis Campaign guidelines, "
-                "including blood cultures and lactate.",
-                "Antibiotic and fluid management decisions per clinician judgment "
-                "and institutional sepsis protocol.",
-            ])
-        
-        return DiagnosisEvaluation(
-            diagnosis_id="ID-SEPSIS",
-            diagnosis_label="Sepsis",
-            family="infectious_disease",
-            probability=probability,
-            criteria_met=criteria_met,
-            criteria_not_met=criteria_not_met,
-            criteria_unknown=criteria_unknown,
-            recommendations=recommendations,
-            missing_tests=missing_tests,
-            severity=severity
-        )
-    
-    # Glucose thresholds in mg/dL; mmol/L results are converted first.
-    DKA_GLUCOSE_MG_DL = 250
-    CRITICAL_GLUCOSE_MG_DL = 500
-    GLUCOSE_MG_DL_PER_MMOL_L = 18.016
-    GLUCOSE_UNIT_TO_MG_DL = {"mg/dl": 1.0, "mmol/l": GLUCOSE_MG_DL_PER_MMOL_L}
-
-    @classmethod
-    def glucose_in_mg_dl(cls, lab: LabResult) -> Tuple[Optional[float], Optional[str]]:
-        """Return (glucose in mg/dL, None), or (None, reason) when the unit is unusable."""
-        if not lab.unit or not lab.unit.strip():
-            return None, "glucose result has no unit."
-        factor = cls.GLUCOSE_UNIT_TO_MG_DL.get(lab.unit.strip().lower().replace(" ", ""))
-        if factor is None:
-            return None, f"glucose unit '{lab.unit}' is not recognised (expected mg/dL or mmol/L)."
-        return lab.value * factor, None
-
-    def _evaluate_dka(self, patient_data: PatientData) -> DiagnosisEvaluation:
-        """Evaluate for Diabetic Ketoacidosis."""
-        criteria_met = []
-        criteria_not_met = []
-        criteria_unknown = []
-        missing_tests = []
-        
-        # Hyperglycemia - compared in mg/dL after unit conversion
-        glucose = patient_data.get_lab(CommonLOINC.GLUCOSE)
-        glucose_mg_dl, glucose_unit_problem = self.glucose_in_mg_dl(glucose) if glucose else (None, None)
-        if glucose and glucose_unit_problem:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Hyperglycemia",
-                status=CriteriaStatus.UNKNOWN,
-                value=f"{glucose.value} {glucose.unit}".strip(),
-                expected="> 250 mg/dL (13.9 mmol/L)",
-                details=glucose_unit_problem,
-            ))
-            missing_tests.append("Blood glucose with units (mg/dL or mmol/L)")
-        elif glucose:
-            converted = "" if glucose.unit.strip().lower() == "mg/dl" else f" (= {glucose_mg_dl:.0f} mg/dL)"
-            if glucose_mg_dl > self.DKA_GLUCOSE_MG_DL:
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Hyperglycemia",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{glucose.value} {glucose.unit}{converted}",
-                    expected="> 250 mg/dL (13.9 mmol/L)"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Hyperglycemia",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{glucose.value} {glucose.unit}{converted}",
-                    expected="> 250 mg/dL (13.9 mmol/L)"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Hyperglycemia",
-                status=CriteriaStatus.UNKNOWN,
-                details="Blood glucose not measured"
-            ))
-            missing_tests.append("Blood glucose")
-        
-        # Metabolic acidosis (low bicarb)
-        co2 = patient_data.get_lab(CommonLOINC.CO2)
-        if co2:
-            if co2.value < 18:
-                criteria_met.append(CriterionEvaluation(
-                    criterion="Metabolic acidosis",
-                    status=CriteriaStatus.PRESENT,
-                    value=f"{co2.value} {co2.unit}",
-                    expected="< 18 mEq/L",
-                    details="Low bicarbonate suggests metabolic acidosis"
-                ))
-            else:
-                criteria_not_met.append(CriterionEvaluation(
-                    criterion="Metabolic acidosis",
-                    status=CriteriaStatus.ABSENT,
-                    value=f"{co2.value} {co2.unit}",
-                    expected="< 18 mEq/L"
-                ))
-        else:
-            criteria_unknown.append(CriterionEvaluation(
-                criterion="Metabolic acidosis",
-                status=CriteriaStatus.UNKNOWN,
-                details="Bicarbonate (CO2) not measured"
-            ))
-            missing_tests.append("Basic metabolic panel (BMP)")
-        
-        probability = len(criteria_met) / max(len(criteria_met) + len(criteria_not_met), 1)
-        
-        severity = "moderate"
-        severity_reason = None
-        if len(criteria_met) >= 2:
-            severity = "high"
-        if glucose and glucose_unit_problem:
-            severity = "unknown"
-            severity_reason = f"Severity unknown: {glucose_unit_problem}"
-        elif glucose_mg_dl is not None and glucose_mg_dl > self.CRITICAL_GLUCOSE_MG_DL:
-            severity = "critical"
-            severity_reason = f"Glucose {glucose_mg_dl:.0f} mg/dL (> {self.CRITICAL_GLUCOSE_MG_DL} mg/dL)."
-        
-        recommendations = []
-        if len(criteria_met) >= 2:
-            recommendations.extend([
-                "Findings may warrant evaluation for DKA per ADA guidelines; "
-                "consider serum/urine ketones, VBG or ABG for pH, and potassium.",
-                "Fluid and insulin management per clinician judgment and "
-                "institutional DKA protocol.",
-                "Consider evaluating for a precipitating cause (infection, MI, "
-                "medication nonadherence).",
-            ])
-        
-        return DiagnosisEvaluation(
-            diagnosis_id="ENDO-DKA",
-            diagnosis_label="Diabetic Ketoacidosis",
-            family="endocrinology",
-            probability=probability,
-            criteria_met=criteria_met,
-            criteria_not_met=criteria_not_met,
-            criteria_unknown=criteria_unknown,
-            recommendations=recommendations,
-            missing_tests=missing_tests,
-            severity=severity,
-            severity_reason=severity_reason,
-        )
-    
-    def evaluate_patient(
-        self,
-        patient_data: PatientData,
-        chief_complaint: Optional[str] = None,
-        focus_specialties: Optional[List[str]] = None
-    ) -> List[DiagnosisEvaluation]:
-        """
-        Evaluate patient data against diagnostic rules.
-        
-        Args:
-            patient_data: Patient clinical data from FHIR
-            chief_complaint: Patient's chief complaint (optional)
-            focus_specialties: List of specialties to focus on (optional)
-            
-        Returns:
-            List of DiagnosisEvaluation objects, sorted by probability
-        """
-        logger.info(
-            f"Evaluating patient {patient_data.name} "
-            f"(Age: {patient_data.age}, Gender: {patient_data.gender})"
-        )
-        
-        if chief_complaint:
-            logger.info(f"Chief complaint: {chief_complaint}")
-        
-        evaluations = []
-        
-        # Use specialized evaluators for key conditions
-        specialized_evaluations = {
-            "CARD-ACS": self._evaluate_acs,
-            "ID-SEPSIS": self._evaluate_sepsis,
-            "ENDO-DKA": self._evaluate_dka
-        }
-        
-        for diagnosis_id, evaluator_func in specialized_evaluations.items():
-            try:
-                evaluation = evaluator_func(patient_data)
-            except Exception as e:
-                logger.error(f"Failed to evaluate {diagnosis_id}: {e}")
-                evaluation = DiagnosisEvaluation(
-                    diagnosis_id=diagnosis_id,
-                    diagnosis_label=self.EVALUATOR_LABELS.get(diagnosis_id, diagnosis_id),
-                    family=self.EVALUATOR_FAMILIES.get(diagnosis_id, "unknown"),
+                logger.error(f"Failed to evaluate {tree_id}: {e}")
+                evaluations.append(DiagnosisEvaluation(
+                    diagnosis_id=tree_id,
+                    diagnosis_label=tree.get("name", tree_id),
+                    family=str(tree.get("family", "")).lower().replace(" ", "_"),
                     probability=0.0,
                     criteria_met=[], criteria_not_met=[], criteria_unknown=[],
-                    recommendations=[],
-                    missing_tests=[],
+                    recommendations=[], missing_tests=[],
                     severity="unknown",
                     evaluation_status="evaluation failed",
                     status_reason=f"Evaluation failed: {type(e).__name__}: {e}",
-                )
-            else:
-                if evaluation.criteria_unknown and evaluation.probability <= 0.3:
-                    evaluation.evaluation_status = "insufficient data"
-                    missing = ", ".join(evaluation.missing_tests) or ", ".join(
-                        c.criterion for c in evaluation.criteria_unknown)
-                    evaluation.status_reason = f"Insufficient data to evaluate; missing: {missing}"
+                    display=(tree.get("criteria") or {}).get("display", "always"),
+                    **review_fields(tree.get("status")),
+                ))
+                continue
+
+            if (evaluation.display == "when_found" and evaluation.finding is None
+                    and _no_applicable_core_items(tree, patient_data)):
+                not_applicable.append(
+                    f"{tree.get('name', tree_id)} could not be assessed: patient sex is not recorded.")
+                continue
+
+            if (evaluation.display == "when_found" and evaluation.finding is None
+                    and not evaluation.has_unusable_results):
+                # Chronic condition with nothing found: hide it. If the data it
+                # needs could not be retrieved, report that once, globally.
+                status = patient_data.retrieval_status or {}
+                for item in tree["criteria"]["items"]:
+                    resource = "labs" if item.get("resource", "lab") == "lab" else "vitals"
+                    if status.get(resource, RETRIEVED) != RETRIEVED and resource not in unassessable:
+                        unassessable.append(resource)
+                continue
+
+            if evaluation.criteria_unknown and evaluation.probability <= 0.3 and evaluation.finding is None:
+                evaluation.evaluation_status = "insufficient data"
+                missing = ", ".join(evaluation.missing_tests) or ", ".join(
+                    c.criterion for c in evaluation.criteria_unknown)
+                evaluation.status_reason = f"Insufficient data to evaluate; missing: {missing}"
             evaluations.append(evaluation)
-        
-        # Sort by probability (highest first)
+
         evaluations.sort(key=lambda x: x.probability, reverse=True)
-        
-        # Hide low-probability results only when they were fully evaluated;
-        # failed and insufficient-data evaluations are always shown so a gap
-        # in the data is never mistaken for a negative finding.
+        # Hide low-probability acute results only when they were fully
+        # evaluated; failed and insufficient-data evaluations are always shown,
+        # and so are chronic findings (consistent or possible).
         evaluations = [
             e for e in evaluations
             if e.probability > 0.3
             or e.severity in ["high", "critical"]
             or e.evaluation_status != "evaluated"
+            or (e.display == "when_found" and e.finding is not None)
         ]
-        
+
+        labels = {"labs": "lab results", "vitals": "vital signs"}
+        warnings = [f"Chronic conditions could not be assessed: {labels.get(r, r)} could not be retrieved."
+                    for r in unassessable] + not_applicable
         logger.info(f"Generated {len(evaluations)} diagnostic evaluations")
-        
-        return evaluations
-    
+        return EncounterAssessment(evaluations=evaluations, warnings=warnings)
+
+    def evaluate_patient(
+        self,
+        patient_data: PatientData,
+        chief_complaint: Optional[str] = None,
+        focus_specialties: Optional[List[str]] = None,
+        now: Optional[datetime] = None,
+    ) -> List[DiagnosisEvaluation]:
+        """Evaluations to show, sorted by probability (warnings: evaluate_encounter)."""
+        logger.info(f"Evaluating patient {patient_data.name} (Age: {patient_data.age}, Gender: {patient_data.gender})")
+        if chief_complaint:
+            logger.info(f"Chief complaint: {chief_complaint}")
+        return self.evaluate_encounter(patient_data, now).evaluations
+
     def format_evaluation_report(self, evaluation: DiagnosisEvaluation) -> str:
         """Format evaluation as human-readable report."""
-        severity_emoji = {
-            "low": "🟢",
-            "moderate": "🟡",
-            "high": "🟠",
-            "critical": "🔴"
-        }
-        
-        report = []
-        report.append("=" * 70)
-        report.append(f"{severity_emoji.get(evaluation.severity, '')} {evaluation.diagnosis_label}")
-        report.append(f"   Family: {evaluation.family.replace('_', ' ').title()}")
-        report.append(f"   Probability: {evaluation.probability:.1%}")
-        report.append(f"   Severity: {evaluation.severity.upper()}")
+        severity_emoji = {"low": "🟢", "moderate": "🟡", "high": "🟠", "critical": "🔴"}
+
+        report = ["=" * 70,
+                  f"{severity_emoji.get(evaluation.severity, '')} {evaluation.diagnosis_label}",
+                  f"   Family: {evaluation.family.replace('_', ' ').title()}",
+                  f"   Probability: {evaluation.probability:.1%}",
+                  f"   Severity: {evaluation.severity.upper()}"]
         if evaluation.evaluation_status != "evaluated":
             report.append(f"   Status: {evaluation.evaluation_status.upper()} - {evaluation.status_reason}")
+        if evaluation.known_condition:
+            report.append(f"   Known condition: {evaluation.known_condition_text}")
         report.append("=" * 70)
-        
-        if evaluation.criteria_met:
-            report.append("\n✓ CRITERIA MET:")
-            for criterion in evaluation.criteria_met:
-                report.append(f"  • {criterion.criterion}")
-                if criterion.value:
-                    report.append(f"    Value: {criterion.value} (expected: {criterion.expected})")
-                if criterion.details:
-                    report.append(f"    {criterion.details}")
-        
-        if evaluation.criteria_not_met:
-            report.append("\n✗ CRITERIA NOT MET:")
-            for criterion in evaluation.criteria_not_met:
-                report.append(f"  • {criterion.criterion}")
-                if criterion.value:
-                    report.append(f"    Value: {criterion.value}")
-        
-        if evaluation.criteria_unknown:
-            report.append("\n? INSUFFICIENT DATA:")
-            for criterion in evaluation.criteria_unknown:
-                report.append(f"  • {criterion.criterion}")
-                if criterion.details:
-                    report.append(f"    {criterion.details}")
-        
+
+        for title, items in (("\n✓ CRITERIA MET:", evaluation.criteria_met),
+                             ("\n✗ CRITERIA NOT MET:", evaluation.criteria_not_met),
+                             ("\n? INSUFFICIENT DATA:", evaluation.criteria_unknown)):
+            if items:
+                report.append(title)
+                for criterion in items:
+                    report.append(f"  • {criterion.criterion}")
+                    if criterion.value:
+                        report.append(f"    Value: {criterion.value} (expected: {criterion.expected})")
+                    if criterion.details:
+                        report.append(f"    {criterion.details}")
+                    if criterion.source:
+                        report.append(f"    Source: {criterion.source}")
+
         if evaluation.missing_tests:
             report.append("\n🔬 RECOMMENDED TESTS:")
-            for test in evaluation.missing_tests:
-                report.append(f"  • {test}")
-        
+            report.extend(f"  • {test}" for test in evaluation.missing_tests)
         if evaluation.recommendations:
-            report.append("\n💡 RECOMMENDATIONS:")
-            for rec in evaluation.recommendations:
-                report.append(f"  • {rec}")
-        
+            report.append("\n💡 DECISION SUPPORT:")
+            report.extend(f"  • {rec}" for rec in evaluation.recommendations)
         report.append("=" * 70)
-        
         return "\n".join(report)

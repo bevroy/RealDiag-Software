@@ -110,7 +110,34 @@ homeopathy:
   remedies: []
 entry_point: ''
 nodes: []
-criteria: []
+criteria:
+  finding_label: severe hypercholesterolemia (LDL-C >= 190 mg/dL)
+  source: 2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  known_condition:
+    icd10_prefixes:
+      - E78
+    snomed:
+      - '370992007'
+  items:
+    - id: ldl
+      label: LDL cholesterol >= 190 mg/dL
+      resource: lab
+      loinc:
+        - 13457-7
+        - 18262-6
+        - 2089-1
+      operator: '>='
+      value: 190
+      unit: mg/dL
+      show_converted: true
+      lookback_days: 730
+      expected: '>= 190 mg/dL (4.9 mmol/L)'
+      missing_test: Lipid panel (LDL cholesterol)
+      source: 2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia
 change_log:
   - date: '2025-12-26'
     version: '1.0'
@@ -122,3 +149,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
