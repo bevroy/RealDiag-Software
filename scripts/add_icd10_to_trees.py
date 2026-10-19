@@ -3,9 +3,14 @@
 Add ICD-10 codes to decision tree files based on their condition names.
 """
 
+import sys
 import yaml
 from pathlib import Path
 import re
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
+from scripts.standardize_trees import dump as dump_tree  # noqa: E402
+from services.tree_schema import icd10_codes  # noqa: E402
 
 # Comprehensive ICD-10 mapping for common medical conditions
 ICD10_MAPPING = {
@@ -490,7 +495,7 @@ def add_icd10_to_tree_file(tree_path: Path):
             return False
         
         # Skip if already has ICD-10
-        if tree_data.get("icd10"):
+        if icd10_codes(tree_data):
             print(f"  ✓ Skipping {tree_path.name}: Already has ICD-10")
             return False
         
@@ -505,27 +510,15 @@ def add_icd10_to_tree_file(tree_path: Path):
             print(f"  ⚠️  No ICD-10 match for {tree_path.name} ({tree_name})")
             return False
         
-        # Insert ICD-10 after version line
-        lines = content.split("\n")
-        new_lines = []
-        inserted = False
-        
-        for i, line in enumerate(lines):
-            new_lines.append(line)
-            # Insert after version line, before nodes
-            if not inserted and line.startswith("version:") and i + 1 < len(lines):
-                new_lines.append(f"icd10: {icd10_code}")
-                inserted = True
-        
-        if inserted:
-            # Write back to file
-            with tree_path.open("w", encoding="utf-8") as f:
-                f.write("\n".join(new_lines))
-            print(f"  ✅ Added {icd10_code} to {tree_path.name}")
-            return True
-        else:
-            print(f"  ⚠️  Could not insert ICD-10 for {tree_path.name}")
-            return False
+        # Standard template keeps codes under codes.icd10 (a list)
+        codes = tree_data.setdefault("codes", {})
+        codes["icd10"] = [icd10_code]
+        codes.setdefault("snomed", [])
+        codes.setdefault("icpc2", [])
+        with tree_path.open("w", encoding="utf-8") as f:
+            f.write(dump_tree(tree_data))
+        print(f"  ✅ Added {icd10_code} to {tree_path.name}")
+        return True
             
     except Exception as e:
         print(f"  ❌ Error processing {tree_path.name}: {e}")

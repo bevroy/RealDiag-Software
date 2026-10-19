@@ -1,12 +1,33 @@
 tree_id: NEURO-DEMENTIA
 name: Dementia Evaluation and Management
+version: '1.0'
+status: draft
 family: Neurology
-specialty: Neurology, Geriatrics, Psychiatry
+specialty: Neurology
+secondary_specialties:
+  - Geriatrics
+  - Psychiatry
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Memory Loss, Confusion, Behavioral Changes
 description: Comprehensive evaluation and differential diagnosis of dementia
-version: "1.0"
-icd10: F03.90
-snomed: 52448006
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F03.90
+  snomed:
+    - '52448006'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Progressive cognitive decline
   - Memory impairment
@@ -21,28 +42,26 @@ differentials:
   - Lewy body dementia
   - Frontotemporal dementia
   - Depression
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'Assess for reversible causes - B12, thyroid, depression, medications, NPH, subdural'
-  - 'Cholinesterase inhibitors - donepezil 5-10mg daily, rivastigmine, galantamine (modest benefit, delay decline)'
-  - 'Memantine 10mg BID - moderate-severe Alzheimer, NMDA antagonist'
-  - 'Combination therapy - cholinesterase inhibitor + memantine'
-  - 'Lecanemab (Leqembi) or donanemab - anti-amyloid monoclonal antibodies, slow progression in early Alzheimer (require amyloid PET confirmation)'
+  - Assess for reversible causes - B12, thyroid, depression, medications, NPH, subdural
+  - Cholinesterase inhibitors - donepezil 5-10mg daily, rivastigmine, galantamine (modest benefit, delay decline)
+  - Memantine 10mg BID - moderate-severe Alzheimer, NMDA antagonist
+  - Combination therapy - cholinesterase inhibitor + memantine
+  - Lecanemab (Leqembi) or donanemab - anti-amyloid monoclonal antibodies, slow progression in early Alzheimer (require amyloid PET confirmation)
   - 'Behavioral symptoms: Non-pharm first (redirection, music, routines), SSRI for depression/anxiety, low-dose antipsychotics last resort (risperidone 0.25-1mg, quetiapine 25-100mg)'
-  - 'Safety evaluation - driving assessment, home safety, financial capacity'
-  - 'Caregiver support - respite care, support groups, education critical'
-  - 'Advance directives - discuss goals of care early'
-  - 'Avoid anticholinergics (worsen cognition), benzodiazepines (falls, confusion)'
+  - Safety evaluation - driving assessment, home safety, financial capacity
+  - Caregiver support - respite care, support groups, education critical
+  - Advance directives - discuss goals of care early
+  - Avoid anticholinergics (worsen cognition), benzodiazepines (falls, confusion)
   - 'Vascular dementia: Control vascular risk factors (HTN, DM, lipids), antiplatelet therapy'
-
-entry_point: dementia_presentation
-
+clinical_pearls:
+  - Alzheimers most common; gradual memory decline
+  - Rule out reversible causes: B12, hypothyroidism, NPH
+  - Lewy body: visual hallucinations, parkinsonism, fluctuating cognition
+  - Behavioral symptoms often more distressing than cognitive
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Stroke
@@ -56,29 +75,27 @@ referrals:
     - Headache management
     - Neuropathy
     - Movement disorders
-
-clinical_pearls:
-  - Alzheimers most common; gradual memory decline
-  - Rule out reversible causes: B12, hypothyroidism, NPH
-  - Lewy body: visual hallucinations, parkinsonism, fluctuating cognition
-  - Behavioral symptoms often more distressing than cognitive
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: dementia_presentation
 nodes:
   - id: dementia_presentation
     type: question
-    text: "Clinical presentation pattern?"
+    text: Clinical presentation pattern?
     options:
-      - label: "Gradual memory loss, executive dysfunction (most common)"
+      - label: Gradual memory loss, executive dysfunction (most common)
         next: alzheimers_dementia
-      - label: "Fluctuating cognition, visual hallucinations, parkinsonism"
+      - label: Fluctuating cognition, visual hallucinations, parkinsonism
         next: lewy_body_dementia
-      - label: "Behavioral changes, personality changes, language problems (younger onset)"
+      - label: Behavioral changes, personality changes, language problems (younger onset)
         next: frontotemporal_dementia
-
   - id: alzheimers_dementia
     type: diagnosis
-    name: "Alzheimer's Disease Dementia"
-    icd10: "G30.9"
+    name: Alzheimer's Disease Dementia
+    icd10: G30.9
     urgency: medium
     workup:
       - Most common dementia (60-70% of cases), age >65 typically, insidious onset, progressive
@@ -130,11 +147,10 @@ nodes:
       - Safety - Remove weapons, car keys (assess driving safety), medication management, fall prevention, wandering precautions (ID bracelet, door alarms)
       - Advance directives - Early in disease while patient can participate
       - Prognosis - Average 8-10 years from diagnosis to death, wide variability
-
   - id: lewy_body_dementia
     type: diagnosis
-    name: "Dementia with Lewy Bodies (DLB)"
-    icd10: "G31.83"
+    name: Dementia with Lewy Bodies (DLB)
+    icd10: G31.83
     urgency: medium
     workup:
       - Second most common neurodegenerative dementia (10-15%), overlaps with Parkinson disease dementia
@@ -167,11 +183,10 @@ nodes:
       - Depression - SSRIs (sertraline)
       - Caregiver education - Fluctuations are part of disease, not environmental
       - Prognosis - More rapid decline than AD, average survival 5-7 years
-
   - id: frontotemporal_dementia
     type: diagnosis
-    name: "Frontotemporal Dementia (FTD)"
-    icd10: "G31.09"
+    name: Frontotemporal Dementia (FTD)
+    icd10: G31.09
     urgency: medium
     workup:
       - 10-15% of dementias, younger onset (typically 45-65 years, vs AD usually >65)
@@ -208,3 +223,10 @@ nodes:
       - Caregiver support - Disease is particularly challenging for families (personality changes, loss of empathy, disinhibition)
       - Legal/financial planning - Early given young age
       - Prognosis - Average 6-8 years from diagnosis, faster progression than AD
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

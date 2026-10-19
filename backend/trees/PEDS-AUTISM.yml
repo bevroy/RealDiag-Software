@@ -1,17 +1,37 @@
 tree_id: PEDS-AUTISM
 name: Autism Spectrum Disorder (Encounter)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Developmental-Behavioral Pediatrics/Psychiatry
-age_max: 18
-icd10: F84.0
-snomed: 408856003
-urgency:
-  - Self-injurious behavior causing harm
-  - Severe aggression toward others
-  - Elopement (running away) with safety concerns
-  - Suicidal ideation (older children and adolescents)
-  - Severe regression with loss of skills
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Developmental-Behavioral Pediatrics
+  - Psychiatry
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: 18
+codes:
+  icd10:
+    - F84.0
+  snomed:
+    - '408856003'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Autism Identification, Evaluation, and Management Guidelines
+    origin: citations
+  - text: DSM-5 Diagnostic Criteria for Autism Spectrum Disorder
+    origin: citations
+  - text: UpToDate Pediatrics - Autism Spectrum Disorder
+    origin: citations
+  - text: Hyman SL et al. Pediatrics 2020 - AAP Identification, Evaluation, and Management of ASD
+    origin: citations
+  - text: AAP Autism Identification and Evaluation Guidelines, DSM-5 Criteria
+    origin: trace.source
 presentations:
   - Social communication deficits (persistent across contexts)
   - Reduced or absent eye contact
@@ -34,6 +54,18 @@ presentations:
   - Regression (loss of previously acquired language or social skills) in 25-30% of cases
   - Symptoms present in early developmental period (usually recognized by age 2-3 years)
   - Family history of autism or developmental delays
+differentials:
+  - Autism spectrum disorder (social-communication deficits + restricted/repetitive behaviors)
+  - Global developmental delay (delay in multiple domains without specific autism features)
+  - Intellectual disability (low IQ and adaptive functioning, but social skills relatively preserved)
+  - Speech-language disorder (isolated language delay without social deficits or repetitive behaviors)
+  - Hearing loss (can mimic autism - always rule out)
+  - Social (pragmatic) communication disorder (social-communication deficits WITHOUT repetitive behaviors)
+  - ADHD (inattention, hyperactivity, impulsivity, but social reciprocity intact)
+  - Anxiety disorder (social avoidance due to anxiety, but desire for social interaction present)
+  - Selective mutism (speaks in certain settings, not pervasive communication deficit)
+  - Reactive attachment disorder (social neglect/deprivation, improves with nurturing environment)
+  - Genetic syndromes: fragile X (most common single-gene cause), tuberous sclerosis, Rett syndrome (girls with regression)
 workup:
   - Autism-specific screening
   - Universal autism screening at 18 and 24 months per AAP guidelines
@@ -210,13 +242,20 @@ treatment:
   - Adult services and supports
 clinical_pearls:
   - 'Autism is clinical diagnosis: persistent social-communication deficits + restricted/repetitive behaviors present in early development'
-  - 'Screen all children at 18 and 24 months with M-CHAT-R/F per AAP - early identification critical'
-  - 'Hearing evaluation MANDATORY for any child with speech delay or suspected autism - rule out hearing loss first'
-  - 'Early intensive behavioral interventions (ABA, 20-40 hours/week) are evidence-based and improve outcomes - start as early as age 2'
-  - 'Genetic testing (chromosomal microarray, fragile X) recommended for all children diagnosed with autism - diagnostic yield 10-15%'
+  - Screen all children at 18 and 24 months with M-CHAT-R/F per AAP - early identification critical
+  - Hearing evaluation MANDATORY for any child with speech delay or suspected autism - rule out hearing loss first
+  - Early intensive behavioral interventions (ABA, 20-40 hours/week) are evidence-based and improve outcomes - start as early as age 2
+  - Genetic testing (chromosomal microarray, fragile X) recommended for all children diagnosed with autism - diagnostic yield 10-15%
   - 'High comorbidity: intellectual disability (30-40%), ADHD (50-70%), anxiety, seizures (20-30%)'
-  - 'NO medications treat core social-communication deficits - medications only for comorbid symptoms (irritability, ADHD, anxiety, sleep)'
-  - 'Regression (loss of language or social skills) occurs in 25-30% of children with autism, typically 15-24 months'
+  - NO medications treat core social-communication deficits - medications only for comorbid symptoms (irritability, ADHD, anxiety, sleep)
+  - Regression (loss of language or social skills) occurs in 25-30% of children with autism, typically 15-24 months
+red_flags:
+  - Self-injurious behavior causing harm
+  - Severe aggression toward others
+  - Elopement (running away) with safety concerns
+  - Suicidal ideation (older children and adolescents)
+  - Severe regression with loss of skills
+disposition_guidance: {}
 referrals:
   - Developmental-behavioral pediatrics or child psychiatry for comprehensive diagnostic evaluation (ADOS-2, ADI-R)
   - Audiology for comprehensive hearing evaluation (MANDATORY)
@@ -226,25 +265,19 @@ referrals:
   - Occupational therapy for sensory processing and adaptive skills evaluation
   - Genetics and genetic counseling for genetic testing and counseling
   - Neurology if seizures, regression, or abnormal neurologic exam
-differentials:
-  - Autism spectrum disorder (social-communication deficits + restricted/repetitive behaviors)
-  - Global developmental delay (delay in multiple domains without specific autism features)
-  - Intellectual disability (low IQ and adaptive functioning, but social skills relatively preserved)
-  - Speech-language disorder (isolated language delay without social deficits or repetitive behaviors)
-  - Hearing loss (can mimic autism - always rule out)
-  - Social (pragmatic) communication disorder (social-communication deficits WITHOUT repetitive behaviors)
-  - ADHD (inattention, hyperactivity, impulsivity, but social reciprocity intact)
-  - Anxiety disorder (social avoidance due to anxiety, but desire for social interaction present)
-  - Selective mutism (speaks in certain settings, not pervasive communication deficit)
-  - Reactive attachment disorder (social neglect/deprivation, improves with nurturing environment)
-  - Genetic syndromes: fragile X (most common single-gene cause), tuberous sclerosis, Rett syndrome (girls with regression)
-trace:
-  source: AAP Autism Identification and Evaluation Guidelines, DSM-5 Criteria
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Autism Identification, Evaluation, and Management Guidelines
-  - DSM-5 Diagnostic Criteria for Autism Spectrum Disorder
-  - UpToDate Pediatrics - Autism Spectrum Disorder
-  - Hyman SL et al. Pediatrics 2020 - AAP Identification, Evaluation, and Management of ASD
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

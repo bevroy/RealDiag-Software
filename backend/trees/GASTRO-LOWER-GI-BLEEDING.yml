@@ -1,13 +1,34 @@
 tree_id: GASTRO-LOWER-GI-BLEEDING
 name: Lower Gastrointestinal Bleeding
+version: '1.0'
+status: draft
 family: gastroenterology
-specialty: Gastroenterology, Emergency Medicine
+specialty: Gastroenterology
+secondary_specialties:
+  - Emergency Medicine
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Rectal bleeding, blood in stool
 description: |
   Bleeding from a source distal to the ligament of Treitz. Hematochezia (bright red blood per rectum) is the hallmark.
   Most common causes: diverticulosis (30-40%), hemorrhoids/anal fissures (20%), inflammatory bowel disease, colorectal cancer, angiodysplasia.
-icd10: K92.1
-snomed: "37372002"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K92.1
+  snomed:
+    - '37372002'
+  icpc2: []
+sources:
+  - text: American College of Gastroenterology Guidelines on Lower GI Bleeding
+    origin: citations
+  - text: American Society for Gastrointestinal Endoscopy Guidelines
+    origin: citations
+  - text: UpToDate - Gastroenterology
+    origin: citations
 presentations:
   - Hematochezia (bright red or maroon blood per rectum)
   - Clots in stool
@@ -16,19 +37,17 @@ presentations:
   - Abdominal pain or cramping
   - Diarrhea or change in bowel habits
   - Weight loss (if malignancy)
-urgency: High
-referrals:
-  emergency:
-    - Hemodynamic instability (hypotension, tachycardia, syncope)
-    - Large volume bleeding
-    - Signs of shock
-  urgent:
-    - Moderate bleeding with stable vital signs
-    - Recurrent bleeding
-    - Age >60 with new onset bleeding
-  gastroenterology:
-    - Colonoscopy for diagnosis and possible treatment
-    - All cases of lower GI bleeding
+differentials:
+  - Upper GI bleeding presenting as hematochezia
+  - Hemorrhoids or anal fissure
+  - Diverticular bleeding
+  - Colorectal cancer or polyps
+  - Inflammatory bowel disease (Crohn's, ulcerative colitis)
+  - Angiodysplasia
+  - Ischemic colitis
+  - Infectious colitis
+  - Radiation proctitis
+  - Meckel's diverticulum (young patients)
 workup:
   - History: timing, volume, color of blood, associated symptoms, prior episodes, medications (NSAIDs, anticoagulants), comorbidities
   - Physical exam: vital signs for hemodynamic stability, abdominal exam, rectal exam with visual inspection and digital exam
@@ -48,11 +67,11 @@ treatment:
   - Angiography with embolization if colonoscopy fails or unavailable
   - Surgery: reserved for massive uncontrolled bleeding or failed endoscopic/angiographic therapy
   - Specific treatment based on source:
-    - Diverticular bleeding: usually self-limited, colonoscopic hemostasis if active
-    - Hemorrhoids/fissures: conservative management, topical therapy, may need surgical intervention
-    - IBD: medical management of underlying disease
-    - Angiodysplasia: endoscopic ablation
-    - Colorectal cancer: surgical resection
+      - Diverticular bleeding: usually self-limited, colonoscopic hemostasis if active
+      - Hemorrhoids/fissures: conservative management, topical therapy, may need surgical intervention
+      - IBD: medical management of underlying disease
+      - Angiodysplasia: endoscopic ablation
+      - Colorectal cancer: surgical resection
 clinical_pearls:
   - 80% of lower GI bleeds stop spontaneously
   - Diverticulosis is the most common cause in adults >60 years
@@ -60,20 +79,32 @@ clinical_pearls:
   - Hemorrhoids are common but consider other sources in patients >40, weight loss, or anemia
   - Early colonoscopy (within 24 hours) improves diagnostic yield and outcomes
   - Aspirin and anticoagulants increase bleeding risk but are not usually the primary cause
-differentials:
-  - Upper GI bleeding presenting as hematochezia
-  - Hemorrhoids or anal fissure
-  - Diverticular bleeding
-  - Colorectal cancer or polyps
-  - Inflammatory bowel disease (Crohn's, ulcerative colitis)
-  - Angiodysplasia
-  - Ischemic colitis
-  - Infectious colitis
-  - Radiation proctitis
-  - Meckel's diverticulum (young patients)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Hemodynamic instability (hypotension, tachycardia, syncope)
+    - Large volume bleeding
+    - Signs of shock
+  urgent:
+    - Moderate bleeding with stable vital signs
+    - Recurrent bleeding
+    - Age >60 with new onset bleeding
+  gastroenterology:
+    - Colonoscopy for diagnosis and possible treatment
+    - All cases of lower GI bleeding
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 65-year-old presents with large volume bright red blood per rectum. Check vital signs BP 90/60, HR 110. Two large-bore IVs, crystalloid resuscitation. Labs Hgb 8.5, type and cross. Transfuse 2 units PRBCs. Hemodynamically stabilizes. Colonoscopy within 24 hours reveals bleeding diverticulum. Endoscopic clipping achieves hemostasis. Bleeding resolves. High fiber diet and avoid NSAIDs.
-citations:
-  - American College of Gastroenterology Guidelines on Lower GI Bleeding
-  - American Society for Gastrointestinal Endoscopy Guidelines
-  - UpToDate - Gastroenterology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

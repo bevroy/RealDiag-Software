@@ -1,11 +1,32 @@
 tree_id: DERM-ACTINIC-KERATOSIS
 name: Actinic Keratosis
+version: '1.0'
+status: draft
 family: Dermatology
-specialty: Dermatology/Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Rough, scaly patches on sun-exposed skin
 description: Precancerous lesions caused by chronic UV exposure. Appear as rough, scaly papules or plaques on sun-damaged skin. Small risk of progression to squamous cell carcinoma (0.1-10% per year). Treatment prevents malignant transformation and improves cosmesis.
-icd10: L57.0
-snomed: 201101007
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L57.0
+  snomed:
+    - '201101007'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Guidelines for Actinic Keratosis
+    origin: citations
+  - text: NCCN (National Comprehensive Cancer Network) Guidelines for Keratinocyte Carcinomas
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Rough, scaly papules or plaques
   - Erythematous or skin-colored
@@ -13,17 +34,14 @@ presentations:
   - Located on sun-exposed areas (face, scalp, arms, hands)
   - Feel better than they look - more easily felt than seen
   - Often multiple lesions (field cancerization)
-urgency: routine
-referrals:
-  emergency:
-    - None typically
-  urgent:
-    - Rapidly growing or changing lesion (rule out SCC)
-    - Thick, indurated, or ulcerated AK (suspicious for transformation)
-  routine:
-    - Biopsy confirmation if uncertain
-    - Multiple lesions requiring field treatment
-
+differentials:
+  - Squamous cell carcinoma in situ (Bowen disease) - larger, well-demarcated scaly plaque, full-thickness dysplasia on biopsy
+  - Invasive squamous cell carcinoma - indurated, ulcerated, rapid growth, larger
+  - Seborrheic keratosis - waxy, "stuck on," smooth not rough, not on sun-damaged skin
+  - Basal cell carcinoma (superficial type) - pink scaly plaque, pearly border, no sandpaper texture
+  - Psoriasis - silvery scale, well-demarcated plaques, extensor surfaces and scalp, not limited to sun-exposed areas
+  - Eczema/dermatitis - pruritic, ill-defined, not rough texture, responds to topical steroids
+  - Keratosis pilaris - small rough bumps on upper arms and thighs, not sun-exposed areas, in younger patients
 workup:
   - Clinical diagnosis based on appearance, texture, and location
   - Clinical features
@@ -159,14 +177,25 @@ clinical_pearls:
   - Nicotinamide 500 mg twice daily reduces new AK formation in high-risk patients
   - Untreated AKs may spontaneously regress (15-30%), but new ones develop
   - Seborrheic keratoses may mimic AKs - but waxy, "stuck on" appearance, no sandpaper texture
-differentials:
-  - Squamous cell carcinoma in situ (Bowen disease) - larger, well-demarcated scaly plaque, full-thickness dysplasia on biopsy
-  - Invasive squamous cell carcinoma - indurated, ulcerated, rapid growth, larger
-  - Seborrheic keratosis - waxy, "stuck on," smooth not rough, not on sun-damaged skin
-  - Basal cell carcinoma (superficial type) - pink scaly plaque, pearly border, no sandpaper texture
-  - Psoriasis - silvery scale, well-demarcated plaques, extensor surfaces and scalp, not limited to sun-exposed areas
-  - Eczema/dermatitis - pruritic, ill-defined, not rough texture, responds to topical steroids
-  - Keratosis pilaris - small rough bumps on upper arms and thighs, not sun-exposed areas, in younger patients
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - None typically
+  urgent:
+    - Rapidly growing or changing lesion (rule out SCC)
+    - Thick, indurated, or ulcerated AK (suspicious for transformation)
+  routine:
+    - Biopsy confirmation if uncertain
+    - Multiple lesions requiring field treatment
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 68-year-old fair-skinned man (Fitzpatrick I) with history of extensive sun exposure (worked outdoors as landscaper for 40 years) presents for routine skin check
   - Wife noticed rough spots on his forehead and scalp (balding)
@@ -198,8 +227,7 @@ trace:
   - Cryotherapy to 2 residual AKs
   - Continues nicotinamide daily and sun protection
   - At 1 year - no new AKs, skin improved, continues surveillance every 6 months
-
-citations:
-  - AAD (American Academy of Dermatology) Guidelines for Actinic Keratosis
-  - NCCN (National Comprehensive Cancer Network) Guidelines for Keratinocyte Carcinomas
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

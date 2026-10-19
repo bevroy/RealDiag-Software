@@ -1,41 +1,64 @@
 tree_id: RHEUM-OSTEOPOROSIS
 name: Osteoporosis
+version: '1.0'
+status: draft
 family: rheumatology
-specialty: Rheumatology / Endocrinology
+specialty: Rheumatology
+secondary_specialties:
+  - Endocrinology
+urgency: routine
+urgency_explanation: Chronic condition; urgent evaluation needed if fracture suspected
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - M81.0
+    - M80.00
+    - M81.8
+  snomed:
+    - '64859006'
+  icpc2: []
+sources:
+  - text: American Association of Clinical Endocrinologists Guidelines for Osteoporosis
+    origin: citations
+  - text: National Osteoporosis Foundation Clinician's Guide
+    origin: citations
+  - text: 'USPSTF: Screening for Osteoporosis to Prevent Fractures'
+    origin: citations
+  - text: 'UpToDate: Overview of the management of osteoporosis in postmenopausal women'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Often asymptomatic until fracture occurs
   - Fragility fracture (low-energy trauma): hip, vertebrae, wrist
   - Back pain from vertebral compression fractures
   - Loss of height and kyphosis (dowager's hump)
   - Risk factors: postmenopausal, advanced age, low body weight, smoking, excess alcohol, corticosteroid use
-icd10:
-  - M81.0 # Age-related osteoporosis without current pathological fracture
-  - M80.00 # Age-related osteoporosis with current pathological fracture, unspecified site
-  - M81.8 # Other osteoporosis without current pathological fracture
-snomed:
-  - "64859006" # Osteoporosis
-urgency: Low
-urgency_explanation: Chronic condition; urgent evaluation needed if fracture suspected
-
-referrals:
-  rheumatology: For complex cases or secondary causes
-  endocrinology: If endocrine cause suspected (hyperparathyroidism, hyperthyroidism)
-  orthopedics: For fracture management
-  physical_therapy: For fall prevention and safe mobility
-
+differentials:
+  - Osteomalacia (vitamin D deficiency)
+  - Multiple myeloma
+  - Metastatic bone disease
+  - Paget's disease of bone
+  - Hyperparathyroidism
+  - Osteogenesis imperfecta
 workup:
   screening:
     - DEXA scan (dual-energy X-ray absorptiometry):
-      - All women ≥65 years
-      - Postmenopausal women <65 with risk factors
-      - Men ≥70 years
-      - Adults with fragility fracture
-      - Adults on chronic corticosteroids (≥3 months)
+        - All women ≥65 years
+        - Postmenopausal women <65 with risk factors
+        - Men ≥70 years
+        - Adults with fragility fracture
+        - Adults on chronic corticosteroids (≥3 months)
     - T-score interpretation:
-      - Normal: T-score ≥-1.0
-      - Osteopenia: T-score -1.0 to -2.5
-      - Osteoporosis: T-score ≤-2.5
-      - Severe osteoporosis: T-score ≤-2.5 + fragility fracture
+        - Normal: T-score ≥-1.0
+        - Osteopenia: T-score -1.0 to -2.5
+        - Osteoporosis: T-score ≤-2.5
+        - Severe osteoporosis: T-score ≤-2.5 + fragility fracture
   laboratory:
     - Serum calcium, phosphorus, albumin
     - 25-OH vitamin D
@@ -49,7 +72,6 @@ workup:
     - FRAX score (10-year fracture risk calculator)
     - Incorporates age, BMI, risk factors, femoral neck BMD
     - Guides treatment decisions in osteopenia
-
 treatment:
   lifestyle_modifications:
     - Weight-bearing exercise (walking, resistance training)
@@ -79,7 +101,6 @@ treatment:
   monitoring:
     - DEXA scan q2 years while on treatment
     - Reassess fracture risk and medication need periodically
-
 clinical_pearls:
   - Hip and vertebral fractures associated with significant morbidity and mortality
   - Most common in postmenopausal women due to estrogen deficiency
@@ -88,15 +109,21 @@ clinical_pearls:
   - Rare side effects of bisphosphonates: osteonecrosis of jaw (ONJ), atypical femoral fractures
   - Denosumab requires continuation (rebound bone loss if stopped)
   - Z-score used in premenopausal women and men <50 (compares to age-matched controls)
-
-differentials:
-  - Osteomalacia (vitamin D deficiency)
-  - Multiple myeloma
-  - Metastatic bone disease
-  - Paget's disease of bone
-  - Hyperparathyroidism
-  - Osteogenesis imperfecta
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  rheumatology: For complex cases or secondary causes
+  endocrinology: If endocrine cause suspected (hyperparathyroidism, hyperthyroidism)
+  orthopedics: For fracture management
+  physical_therapy: For fall prevention and safe mobility
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Screen appropriate patients with DEXA scan
   - Diagnose osteoporosis if T-score ≤-2.5 or fragility fracture
@@ -105,10 +132,8 @@ trace:
   - Start bisphosphonate if osteoporosis or high fracture risk (FRAX)
   - Monitor response with repeat DEXA in 2 years
   - Fall prevention strategies
-
-citations:
-  - "American Association of Clinical Endocrinologists Guidelines for Osteoporosis"
-  - "National Osteoporosis Foundation Clinician's Guide"
-  - "USPSTF: Screening for Osteoporosis to Prevent Fractures"
-  - "UpToDate: Overview of the management of osteoporosis in postmenopausal women"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

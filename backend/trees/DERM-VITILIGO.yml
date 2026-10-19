@@ -1,58 +1,81 @@
 tree_id: DERM-VITILIGO
 name: Vitiligo
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
-icd10:
-- L80
-snomed:
-- '56727007'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Vitiligo
-version: '1.0'
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L80
+  snomed:
+    - '56727007'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
+  - text: American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer Network (NCCN) for skin cancers
+    origin: trace.source
 presentations:
-- Depigmented patches
-- Well-demarcated borders
-- Often symmetric
-- Face, hands, body folds
-- May be associated with autoimmune disease
-workup:
-- Clinical diagnosis with Wood's lamp examination
-- Screen for autoimmune: TSH, CBC, comprehensive metabolic panel, ANA
-- Skin biopsy rarely needed (shows absence of melanocytes)
-treatment:
-- 'Guideline-based treatment options for Vitiligo include:'
-- Topical corticosteroids (clobetasol 0.05%) BID for 3-4 months - best for localized
-  disease (AAD 2023)
-- Topical calcineurin inhibitors (tacrolimus 0.1%) for face/intertriginous areas (AAD
-  2023)
-- Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo (AAD
-  2023)
-- Excimer laser for focal lesions (AAD 2023)
-- Cosmetic camouflage makeup, self-tanners for psychosocial impact (AAD 2023)
-clinical_pearls:
-- Autoimmune destruction of melanocytes - associated with thyroid disease (20%), type
-  1 DM, Addison's
-- 'Types: Generalized (most common), segmental (unilateral, follows dermatome), focal/localized'
-- 'Koebner phenomenon: New lesions at sites of trauma'
-- Wood's lamp enhances depigmented areas, helps identify in fair-skinned patients
-- Psychological impact significant - provide emotional support and counseling resources
-referrals:
-- Dermatology for phototherapy or advanced treatments
-- Endocrinology if associated autoimmune disease
-- Psychology/psychiatry for significant emotional distress
+  - Depigmented patches
+  - Well-demarcated borders
+  - Often symmetric
+  - Face, hands, body folds
+  - May be associated with autoimmune disease
 differentials:
   - Tinea versicolor
   - Pityriasis alba
   - Post-inflammatory hypopigmentation
   - Idiopathic guttate hypomelanosis
-trace:
-  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
-    Cancer Network (NCCN) for skin cancers
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Clinical diagnosis with Wood's lamp examination
+  - Screen for autoimmune: TSH, CBC, comprehensive metabolic panel, ANA
+  - Skin biopsy rarely needed (shows absence of melanocytes)
+treatment:
+  - 'Guideline-based treatment options for Vitiligo include:'
+  - Topical corticosteroids (clobetasol 0.05%) BID for 3-4 months - best for localized disease (AAD 2023)
+  - Topical calcineurin inhibitors (tacrolimus 0.1%) for face/intertriginous areas (AAD 2023)
+  - Narrowband UVB phototherapy 2-3x/week - first-line for generalized vitiligo (AAD 2023)
+  - Excimer laser for focal lesions (AAD 2023)
+  - Cosmetic camouflage makeup, self-tanners for psychosocial impact (AAD 2023)
+clinical_pearls:
+  - Autoimmune destruction of melanocytes - associated with thyroid disease (20%), type 1 DM, Addison's
+  - 'Types: Generalized (most common), segmental (unilateral, follows dermatome), focal/localized'
+  - 'Koebner phenomenon: New lesions at sites of trauma'
+  - Wood's lamp enhances depigmented areas, helps identify in fair-skinned patients
+  - Psychological impact significant - provide emotional support and counseling resources
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Dermatology for phototherapy or advanced treatments
+  - Endocrinology if associated autoimmune disease
+  - Psychology/psychiatry for significant emotional distress
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

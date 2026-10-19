@@ -24,6 +24,15 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import argparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from services.tree_schema import (  # noqa: E402
+    HOMEOPATHY_VALIDATION_STATEMENT,
+    REQUIRED_FIELDS as REQUIRED_TREE_FIELDS,
+    REQUIRED_NON_EMPTY as REQUIRED_NON_EMPTY_TREE_FIELDS,
+    STATUS_VALUES,
+    URGENCY_VALUES,
+)
+
 # Configuration
 RULES_DIR = Path(__file__).parent.parent / "rules"
 TREES_DIR = Path(__file__).parent.parent / "trees"
@@ -217,32 +226,93 @@ def check_citations(file_path: Path, data: Dict, result: ValidationResult):
         )
 
 
+def find_duplicate_top_level_keys(file_path: Path) -> List[str]:
+    """PyYAML silently keeps the last of two identical keys; report them instead."""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        node = yaml.compose(f)
+    if not isinstance(node, yaml.MappingNode):
+        return []
+    keys = [k.value for k, _ in node.value]
+    return sorted({k for k in keys if keys.count(k) > 1})
+
+
 def validate_decision_tree(file_path: Path, result: ValidationResult):
-    """Validate decision tree YAML files."""
+    """Validate a decision tree against the standard template (services/tree_schema.py)."""
     data, error = load_yaml_file(file_path)
     
     if error:
         result.add_error(file_path.name, error)
         return
+    if not isinstance(data, dict):
+        result.add_error(file_path.name, "Tree must be a YAML mapping")
+        return
+
+    for key in find_duplicate_top_level_keys(file_path):
+        result.add_error(file_path.name, f"Duplicate top-level key: {key}")
         
     # Check required fields
-    required_tree_fields = ["id", "title", "entry", "nodes"]
-    for field in required_tree_fields:
+    for field in REQUIRED_TREE_FIELDS:
         if field not in data:
             result.add_error(file_path.name, f"Missing required field: {field}")
-            
-    # Check for version and last_updated
-    if "version" not in data:
-        result.add_warning(file_path.name, "No version specified")
-    if "last_updated" not in data:
-        result.add_warning(file_path.name, "No last_updated date specified")
-        
-    # Check nodes structure
-    if "nodes" in data:
-        nodes = data.get("nodes", [])
+    for field in REQUIRED_NON_EMPTY_TREE_FIELDS:
+        if field in data and not data.get(field):
+            result.add_error(file_path.name, f"Required field is empty: {field}")
+
+    # Urgency: empty (not yet assigned) or one of the standard values
+    urgency = data.get("urgency")
+    if urgency not in ("", None) and urgency not in URGENCY_VALUES:
+        result.add_error(
+            file_path.name,
+            f"Non-standard urgency {urgency!r} (use one of: {', '.join(URGENCY_VALUES)})"
+        )
+    elif "urgency" in data and urgency in ("", None):
+        result.add_info(file_path.name, "Urgency not yet assigned")
+
+    if "status" in data and data.get("status") not in STATUS_VALUES:
+        result.add_error(file_path.name, f"Invalid status {data.get('status')!r} (use one of: {', '.join(STATUS_VALUES)})")
+    if "version" in data and not isinstance(data.get("version"), str):
+        result.add_error(file_path.name, f"Version must be a string, got {type(data.get('version')).__name__}")
+    if "secondary_specialties" in data and not isinstance(data.get("secondary_specialties"), list):
+        result.add_error(file_path.name, "secondary_specialties must be a list")
+
+    codes = data.get("codes")
+    if "codes" in data:
+        if not isinstance(codes, dict):
+            result.add_error(file_path.name, "codes must be a mapping with icd10, snomed and icpc2 lists")
+        else:
+            for system in ("icd10", "snomed", "icpc2"):
+                if not isinstance(codes.get(system), list):
+                    result.add_error(file_path.name, f"codes.{system} must be a list")
+
+    applies = data.get("applies_to")
+    if "applies_to" in data:
+        if not isinstance(applies, dict) or not {"sex", "age_min", "age_max"} <= set(applies):
+            result.add_error(file_path.name, "applies_to must be a mapping with sex, age_min and age_max")
+        elif applies.get("sex") not in (None, "male", "female"):
+            result.add_error(file_path.name, f"applies_to.sex must be male, female or empty, got {applies.get('sex')!r}")
+
+    homeopathy = data.get("homeopathy")
+    if "homeopathy" in data:
+        if not isinstance(homeopathy, dict) or not isinstance(homeopathy.get("remedies"), list):
+            result.add_error(file_path.name, "homeopathy must be a mapping with validation_statement and a remedies list")
+        elif homeopathy.get("validation_statement") != HOMEOPATHY_VALIDATION_STATEMENT and homeopathy.get("remedies"):
+            result.add_warning(file_path.name, "homeopathy.validation_statement differs from the standard statement")
+
+    if "sources" in data and not isinstance(data.get("sources"), list):
+        result.add_error(file_path.name, "sources must be a list")
+    if "change_log" in data and not (isinstance(data.get("change_log"), list) and data["change_log"]):
+        result.add_error(file_path.name, "change_log must be a non-empty list")
+
+    # Check nodes structure (list of nodes, or mapping of id -> node)
+    nodes = data.get("nodes") or []
+    if isinstance(nodes, list):
         for idx, node in enumerate(nodes):
-            if "id" not in node:
+            if not isinstance(node, dict) or "id" not in node:
                 result.add_error(file_path.name, f"Node #{idx+1}: Missing 'id' field")
+    elif not isinstance(nodes, dict):
+        result.add_error(file_path.name, "nodes must be a list or mapping")
+    if nodes and not data.get("entry_point"):
+        result.add_warning(file_path.name, "Tree has nodes but no entry_point")
 
 
 def generate_report(result: ValidationResult, rules_files: List[Path], trees_files: List[Path]):

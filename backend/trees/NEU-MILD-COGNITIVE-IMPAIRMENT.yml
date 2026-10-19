@@ -1,27 +1,32 @@
 tree_id: NEU-MILD-COGNITIVE-IMPAIRMENT
 name: Mild Cognitive Impairment
+version: '1.0'
+status: draft
 family: Neurology
-specialty: Neurology/Geriatrics
+specialty: Neurology
+secondary_specialties:
+  - Geriatrics
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Subjective cognitive complaints with objective impairment but preserved daily function
 description: Intermediate stage between normal aging and dementia, characterized by cognitive decline greater than expected for age and education but without significant functional impairment in daily activities
-
-icd10: G31.84
-snomed: "386806002"
-
-urgency: routine
-
-homeopathy:
-  - remedy: "Phosphoricum acidum 30C"
-    indications: "Mental exhaustion, difficulty concentrating, forgetfulness, apathy after mental strain"
-  - remedy: "Kali phosphoricum 30C"
-    indications: "Brain fatigue, memory weakness, mental exhaustion from overwork, nervous exhaustion"
-  - remedy: "Anacardium orientale 30C"
-    indications: "Memory loss, confusion, lacks confidence, forgets what about to say"
-  - remedy: "Lycopodium 200C"
-    indications: "Memory weak for recent events, forgets words, worse late afternoon"
-  - remedy: "Baryta carbonica 30C"
-    indications: "Memory loss in elderly, slow comprehension, loss of confidence, childishness"
-
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G31.84
+  snomed:
+    - '386806002'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Memory complaints (patient or family noticed)
   - Word-finding difficulty
@@ -33,7 +38,15 @@ presentations:
   - Preserved independence in daily activities
   - Insight into deficits (unlike dementia)
   - Worried about developing dementia
-
+differentials:
+  - Normal aging (occasional forgetfulness, no objective impairment on testing, functional abilities intact)
+  - Dementia (multiple domains significantly impaired, ADL/IADL dependence, lacks insight)
+  - Depression (pseudodementia - poor effort on testing, pervasive sadness, improves with antidepressants)
+  - Delirium (acute onset, fluctuating, inattention, identifiable cause - infection, medications)
+  - Medication side effects (benzodiazepines, anticholinergics, opioids)
+  - Sleep disorders (sleep apnea causes daytime cognitive impairment - improves with CPAP)
+  - Hypothyroidism (fatigue, weight gain, cognitive slowing - responds to thyroid replacement)
+  - Vitamin B12 deficiency (macrocytic anemia, neuropathy - responds to supplementation)
 workup:
   - Diagnostic criteria for MCI: subjective cognitive complaint (patient or informant), objective cognitive impairment on testing (below age/education norms), preserved independence in daily activities (ADLs/IADLs intact or minimal impairment), not demented (multiple domains not severely impaired)
   - Distinguish from normal aging and dementia: normal aging (occasional forgetfulness, no objective impairment on testing), MCI (objective impairment but ADLs preserved), dementia (multiple domains impaired, significant ADL/IADL decline)
@@ -46,7 +59,6 @@ workup:
   - Formal neuropsychological testing: comprehensive assessment of all cognitive domains (memory, language, executive function, visuospatial, attention), establish baseline for monitoring progression, more sensitive than bedside screening, identify specific domain impairment
   - Advanced biomarkers (research or specialized centers): CSF analysis (amyloid-beta 42 low, tau elevated suggests Alzheimer disease pathology - higher progression risk), amyloid PET imaging (positive amyloid predicts progression to Alzheimer dementia), APOE genotyping not recommended routinely (APOE-ε4 increases risk but not diagnostic)
   - Longitudinal monitoring: repeat cognitive testing annually or if decline noted (MoCA, MMSE), reassess functional status (ADLs/IADLs), 10-15 percent per year progress from MCI to dementia (amnestic MCI highest risk), some remain stable or even improve (especially if reversible cause addressed)
-
 treatment:
   - No FDA-approved medications for MCI, focus on modifiable risk factors and monitoring for progression
   - Address reversible causes: treat hypothyroidism (levothyroxine), replete vitamin B12 if deficient (1000 mcg daily or monthly injections), treat depression (SSRI - sertraline, escitalopram), treat sleep apnea (CPAP), discontinue cognitive-impairing medications (benzodiazepines, anticholinergics, opioids if possible)
@@ -58,7 +70,6 @@ treatment:
   - Treat comorbid conditions: depression common in MCI (30-50 percent) treat with SSRI, anxiety (CBT, consider SSRI, avoid benzodiazepines), insomnia (sleep hygiene, consider melatonin 3-5 mg, trazodone 25-50 mg, avoid diphenhydramine)
   - Monitor for progression: annual or biannual visits with cognitive testing (MoCA), reassess functional status, watch for conversion to dementia (15-20 percent/year for amnestic MCI)
   - Early planning: discuss prognosis (risk of progression to dementia), encourage advance directives while patient has capacity, power of attorney designation, consider driving evaluation if concerns
-
 clinical_pearls:
   - MCI is intermediate stage - cognitive impairment greater than normal aging but ADLs preserved (not dementia)
   - 10-15 percent per year progress from MCI to dementia (amnestic MCI highest risk for Alzheimer disease)
@@ -70,7 +81,8 @@ clinical_pearls:
   - Some MCI remains stable or even reverts to normal (20-30 percent), especially if reversible cause
   - Depression common in MCI and can worsen cognition - screen and treat
   - Encourage advance care planning while patient still has capacity
-
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Neurology or geriatrics for initial evaluation (especially if rapid decline or young age)
   - Neuropsychology for formal cognitive testing (confirm diagnosis, establish baseline, identify specific deficits)
@@ -78,17 +90,24 @@ referrals:
   - Occupational therapy for cognitive rehabilitation and compensatory strategies
   - Social work for community resources, support groups, advance care planning assistance
   - Sleep medicine if sleep apnea suspected (cognitive impairment from poor sleep)
-
-differentials:
-  - Normal aging (occasional forgetfulness, no objective impairment on testing, functional abilities intact)
-  - Dementia (multiple domains significantly impaired, ADL/IADL dependence, lacks insight)
-  - Depression (pseudodementia - poor effort on testing, pervasive sadness, improves with antidepressants)
-  - Delirium (acute onset, fluctuating, inattention, identifiable cause - infection, medications)
-  - Medication side effects (benzodiazepines, anticholinergics, opioids)
-  - Sleep disorders (sleep apnea causes daytime cognitive impairment - improves with CPAP)
-  - Hypothyroidism (fatigue, weight gain, cognitive slowing - responds to thyroid replacement)
-  - Vitamin B12 deficiency (macrocytic anemia, neuropathy - responds to supplementation)
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies:
+    - remedy: Phosphoricum acidum 30C
+      indications: Mental exhaustion, difficulty concentrating, forgetfulness, apathy after mental strain
+    - remedy: Kali phosphoricum 30C
+      indications: Brain fatigue, memory weakness, mental exhaustion from overwork, nervous exhaustion
+    - remedy: Anacardium orientale 30C
+      indications: Memory loss, confusion, lacks confidence, forgets what about to say
+    - remedy: Lycopodium 200C
+      indications: Memory weak for recent events, forgets words, worse late afternoon
+    - remedy: Baryta carbonica 30C
+      indications: Memory loss in elderly, slow comprehension, loss of confidence, childishness
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 68-year-old retired teacher presents with concerns about memory x 1 year, reports forgetting names, misplacing keys, word-finding difficulty, worried about Alzheimer disease
   - Patient reports: repeats herself more, forgets what went to room for, writes everything down now (never needed lists before), took longer to learn new phone, still managing all activities independently (drives, pays bills, cooks, manages medications), no getting lost
@@ -103,15 +122,14 @@ trace:
   - Formal neuropsychological testing: confirmed amnestic MCI (memory domain 1.5 SD below age norms), other domains relatively preserved, consistent with possible early Alzheimer disease pathology
   - Diagnosis: Mild Cognitive Impairment, amnestic type (at risk for progression to Alzheimer disease 10-15 percent/year)
   - Discussed prognosis: explained MCI, risk of progression to dementia, also noted 20-30 percent remain stable or improve, importance of modifiable risk factors
-  - "Management plan: Lifestyle interventions to continue regular exercise (increase to 30 min daily if possible), cognitive stimulation (continue book club, consider brain training apps), social engagement (continue church activities), Mediterranean diet counseling; Vascular risk factors with BP and lipids already well-controlled on current medications, continue statin and antihypertensive; Vitamin E 400 IU daily (discussed limited evidence, patient elected to try), omega-3 fatty acids 1 gram daily; No cholinesterase inhibitor (not FDA-approved for MCI, no proven benefit); Compensatory strategies to use smartphone calendar with reminders, keep keys in designated spot, lists for shopping"
+  - 'Management plan: Lifestyle interventions to continue regular exercise (increase to 30 min daily if possible), cognitive stimulation (continue book club, consider brain training apps), social engagement (continue church activities), Mediterranean diet counseling; Vascular risk factors with BP and lipids already well-controlled on current medications, continue statin and antihypertensive; Vitamin E 400 IU daily (discussed limited evidence, patient elected to try), omega-3 fatty acids 1 gram daily; No cholinesterase inhibitor (not FDA-approved for MCI, no proven benefit); Compensatory strategies to use smartphone calendar with reminders, keep keys in designated spot, lists for shopping'
   - Advance care planning: encouraged advance directives, power of attorney while still has capacity, discussed importance of planning ahead
   - Monitoring plan: follow-up every 6 months with repeat MoCA, assess for functional decline (conversion to dementia), reassess if any acute decline
   - 6-month follow-up: MoCA stable at 24/26, functionally unchanged (still fully independent), adhering to Mediterranean diet, exercising 5 days/week, enrolled in online brain training program, no depression (PHQ-9 score 2)
   - 12-month follow-up: MoCA 22/26 (declined 2 points), still independent in all ADLs/IADLs but husband reports more repetition, forgets conversations more often, still manages finances but husband double-checks, referred back to neuropsychology for repeat formal testing
   - Repeat neuropsychological testing 15 months: memory decline progressing (now 2 SD below norms), beginning to show mild executive dysfunction, remains below dementia threshold
   - 18-month follow-up: MoCA 20/26, now requiring some assistance with complex tasks (husband helps with bills), discussed that appears to be progressing, trial of donepezil 5 mg nightly (now meets criteria for mild dementia rather than MCI), continued lifestyle interventions, increased monitoring to every 3-4 months
-
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

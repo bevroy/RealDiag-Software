@@ -1,11 +1,31 @@
 tree_id: DERM-CONTACT-DERMATITIS
 name: Contact Dermatitis
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Itchy rash after exposure to irritant or allergen
 description: Inflammatory skin reaction from direct contact with irritant or allergen causing pruritic erythematous rash in distribution matching exposure. Identify and avoid trigger, topical corticosteroids treat inflammation, resolves with trigger avoidance.
-icd10: L25.9
-snomed: 40275004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L25.9
+  snomed:
+    - '40275004'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Pruritic erythematous rash
   - Well-demarcated, corresponds to contact area
@@ -13,24 +33,11 @@ presentations:
   - Linear streaks (poison ivy pattern)
   - Delayed onset (24-72 hours for allergic)
   - Immediate onset for irritant contact dermatitis
-urgency: routine
-
-referrals:
-  emergency:
-    - Suspected necrotizing fasciitis
-    - Stevens-Johnson syndrome/TEN
-    - Anaphylaxis
-  urgent:
-    - Suspected melanoma
-    - Rapidly growing lesion
-    - Severe drug reaction
-    - Suspected malignancy
-  routine:
-    - Chronic dermatitis management
-    - Acne unresponsive to treatment
-    - Cosmetic concerns
-    - Mole surveillance
-
+differentials:
+  - Atopic dermatitis: flexural distribution (antecubital, popliteal), personal/family history atopy, chronic relapsing course
+  - Psoriasis: well-demarcated plaques with silvery scale, extensor surfaces, nail pitting
+  - Nummular eczema: coin-shaped plaques, often on lower legs, chronic and pruritic
+  - Tinea corporis: annular scaling plaques with central clearing, KOH prep shows hyphae
 workup:
   - Clinical diagnosis: pruritic erythematous rash with distribution corresponding to exposure site
   - Types: irritant contact dermatitis (80% - direct toxic effect, immediate or cumulative), allergic contact dermatitis (20% - type IV hypersensitivity, delayed 24-72 hours)
@@ -43,7 +50,6 @@ workup:
   - Patch testing: gold standard for allergic contact dermatitis, identifies specific allergens, performed by dermatologist when trigger unclear
   - Apply potential allergens to back under occlusion x48 hours, read at 72-96 hours
   - Rule out other causes: if distribution atypical consider atopic dermatitis, nummular eczema, psoriasis
-
 treatment:
   - Identify and avoid trigger: most important intervention, complete avoidance necessary for resolution
   - Ask about new products, occupational exposures, hobbies, jewelry
@@ -60,7 +66,6 @@ treatment:
   - Avoid sensitizers: do not use topical antibiotics (neomycin, bacitracin common sensitizers)
   - Poison ivy treatment: wash exposed skin immediately with soap and water, launder clothes, wash under nails
   - Calcineurin inhibitors: tacrolimus 0.1% or pimecrolimus 1% for facial dermatitis if steroid-sparing needed
-
 clinical_pearls:
   - Distribution matches exposure site - key diagnostic clue
   - Identify and avoid trigger most important for resolution
@@ -70,17 +75,34 @@ clinical_pearls:
   - Topical steroids treat inflammation but avoidance cures
   - Patch testing identifies specific allergens when trigger unclear
   - Systemic steroids if severe - need 2-week course to prevent rebound
-
-differentials:
-  - Atopic dermatitis: flexural distribution (antecubital, popliteal), personal/family history atopy, chronic relapsing course
-  - Psoriasis: well-demarcated plaques with silvery scale, extensor surfaces, nail pitting
-  - Nummular eczema: coin-shaped plaques, often on lower legs, chronic and pruritic
-  - Tinea corporis: annular scaling plaques with central clearing, KOH prep shows hyphae
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Suspected necrotizing fasciitis
+    - Stevens-Johnson syndrome/TEN
+    - Anaphylaxis
+  urgent:
+    - Suspected melanoma
+    - Rapidly growing lesion
+    - Severe drug reaction
+    - Suspected malignancy
+  routine:
+    - Chronic dermatitis management
+    - Acne unresponsive to treatment
+    - Cosmetic concerns
+    - Mole surveillance
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 28-year-old woman presented with 5 days of intensely pruritic rash on both wrists. Started 2 days after wearing new costume jewelry bracelet. Rash limited to area under bracelet, well-demarcated. Exam showed bilateral wrist erythema, small vesicles, and weeping in band-like distribution corresponding to bracelet location. No other skin involvement. Diagnosed with allergic contact dermatitis (nickel allergy suspected - common in costume jewelry). Advised to discontinue wearing bracelet and avoid nickel-containing jewelry (costume jewelry, belt buckles, jean buttons). Prescribed triamcinolone 0.1% cream to affected areas twice daily x2 weeks. Hydroxyzine 25 mg at bedtime for pruritus and sleep. Cool compresses for comfort. At 5 days pruritus improved 60%, vesicles dried. At 2 weeks rash resolved completely with post-inflammatory hyperpigmentation. Stopped topical steroid. Counseled to avoid nickel jewelry, choose surgical steel or gold. At 3 months no recurrence since avoiding costume jewelry. If needs confirmation of nickel allergy, could perform patch testing but clinical diagnosis clear given distribution and temporal relationship.
-
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

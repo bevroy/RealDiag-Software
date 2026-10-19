@@ -1,12 +1,33 @@
 tree_id: DERM-ECZEMA-DERMATITIS
 name: Eczema and Dermatitis Evaluation
+version: '1.0'
+status: draft
 family: dermatology
-specialty: Dermatology, Allergy, Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Allergy
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Itchy Rash, Dry Skin, Red Patches
 description: Comprehensive evaluation and management of eczema and various forms of dermatitis
-version: "1.0"
-icd10: L30.9
-snomed: 43116000
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L30.9
+  snomed:
+    - '43116000'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Pruritus, erythema
   - Dry, scaly, cracked skin
@@ -20,27 +41,25 @@ differentials:
   - Seborrheic dermatitis
   - Psoriasis
   - Fungal infection
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'Identify and avoid triggers - irritants, allergens, stress'
-  - 'Moisturizers liberally and frequently - fragrance-free, thick creams/ointments (Cetaphil, CeraVe, Vanicream)'
-  - 'Topical corticosteroids for flares - hydrocortisone 1-2.5% (face), triamcinolone 0.1% (body), betamethasone for severe'
-  - 'Apply steroids to active lesions BID, then taper as improves'
-  - 'Topical calcineurin inhibitors - tacrolimus 0.03-0.1% or pimecrolimus 1% BID (steroid-sparing, safe for face)'
-  - 'Antihistamines for itch - hydroxyzine 25-50mg qHS, cetirizine 10mg daily'
-  - 'Bleach baths for infected eczema - 0.5 cup bleach in full tub 2x/week'
+  - Identify and avoid triggers - irritants, allergens, stress
+  - Moisturizers liberally and frequently - fragrance-free, thick creams/ointments (Cetaphil, CeraVe, Vanicream)
+  - Topical corticosteroids for flares - hydrocortisone 1-2.5% (face), triamcinolone 0.1% (body), betamethasone for severe
+  - Apply steroids to active lesions BID, then taper as improves
+  - Topical calcineurin inhibitors - tacrolimus 0.03-0.1% or pimecrolimus 1% BID (steroid-sparing, safe for face)
+  - Antihistamines for itch - hydroxyzine 25-50mg qHS, cetirizine 10mg daily
+  - Bleach baths for infected eczema - 0.5 cup bleach in full tub 2x/week
   - 'Severe refractory: Dupilumab (Dupixent) 300mg SC Q2weeks - biologic targeting IL-4/IL-13'
-  - 'Avoid hot water, harsh soaps - use gentle cleansers, lukewarm water'
-  - 'Short-term systemic steroids for severe flares - prednisone 40-60mg daily x5-7 days'
-
-entry_point: dermatitis_presentation
-
+  - Avoid hot water, harsh soaps - use gentle cleansers, lukewarm water
+  - Short-term systemic steroids for severe flares - prednisone 40-60mg daily x5-7 days
+clinical_pearls:
+  - Moisturize, moisturize, moisturize - barrier repair is key
+  - Topical steroids: use lowest potency for shortest duration
+  - Avoid high-potency steroids on face, axillae, groin
+  - Treat secondary bacterial infection (Staph aureus) if present
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Suspected necrotizing fasciitis
@@ -56,31 +75,29 @@ referrals:
     - Acne unresponsive to treatment
     - Cosmetic concerns
     - Mole surveillance
-
-clinical_pearls:
-  - Moisturize, moisturize, moisturize - barrier repair is key
-  - Topical steroids: use lowest potency for shortest duration
-  - Avoid high-potency steroids on face, axillae, groin
-  - Treat secondary bacterial infection (Staph aureus) if present
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: dermatitis_presentation
 nodes:
   - id: dermatitis_presentation
     type: question
-    text: "Pattern and distribution of dermatitis?"
+    text: Pattern and distribution of dermatitis?
     options:
-      - label: "Chronic relapsing eczema, typically flexural areas, history of atopy"
+      - label: Chronic relapsing eczema, typically flexural areas, history of atopy
         next: atopic_dermatitis
-      - label: "Contact dermatitis - well-demarcated, corresponds to exposure pattern"
+      - label: Contact dermatitis - well-demarcated, corresponds to exposure pattern
         next: contact_dermatitis_type
-      - label: "Seborrheic distribution (scalp, face, chest)"
+      - label: Seborrheic distribution (scalp, face, chest)
         next: seborrheic_dermatitis
-      - label: "Hand dermatitis"
+      - label: Hand dermatitis
         next: hand_dermatitis
-
   - id: atopic_dermatitis
     type: diagnosis
-    name: "Atopic Dermatitis (Eczema)"
-    icd10: "L20.9"
+    name: Atopic Dermatitis (Eczema)
+    icd10: L20.9
     urgency: low
     workup:
       - Clinical diagnosis (no specific tests needed)
@@ -111,20 +128,18 @@ nodes:
       - Phototherapy (UVB) - 3x/week
       - JAK inhibitors - Upadacitinib (Rinvoq), abrocitinib (oral options)
       - Dermatology referral for severe or refractory cases
-
   - id: contact_dermatitis_type
     type: question
-    text: "Onset and pattern of contact dermatitis?"
+    text: Onset and pattern of contact dermatitis?
     options:
-      - label: "Allergic contact dermatitis - delayed onset (24-48 hrs after exposure), pruritic, corresponds to contactant"
+      - label: Allergic contact dermatitis - delayed onset (24-48 hrs after exposure), pruritic, corresponds to contactant
         next: allergic_contact_dermatitis
-      - label: "Irritant contact dermatitis - immediate onset, burning/stinging, often occupational"
+      - label: Irritant contact dermatitis - immediate onset, burning/stinging, often occupational
         next: irritant_contact_dermatitis
-
   - id: allergic_contact_dermatitis
     type: diagnosis
-    name: "Allergic Contact Dermatitis"
-    icd10: "L23.9"
+    name: Allergic Contact Dermatitis
+    icd10: L23.9
     urgency: low
     workup:
       - Clinical diagnosis
@@ -139,11 +154,10 @@ nodes:
       - Cool compresses with Burrow's solution (aluminum acetate)
       - Antihistamines for pruritus
       - Barrier protection if occupational exposure unavoidable
-
   - id: irritant_contact_dermatitis
     type: diagnosis
-    name: "Irritant Contact Dermatitis"
-    icd10: "L24.9"
+    name: Irritant Contact Dermatitis
+    icd10: L24.9
     urgency: low
     workup:
       - Clinical diagnosis (no allergy, immediate onset after contact)
@@ -156,11 +170,10 @@ nodes:
       - Mild topical corticosteroids (hydrocortisone 1-2.5% or triamcinolone 0.1%) BID
       - Healing takes time after irritant removed (barrier function recovery)
       - Occupational modifications if work-related
-
   - id: seborrheic_dermatitis
     type: diagnosis
-    name: "Seborrheic Dermatitis"
-    icd10: "L21.9"
+    name: Seborrheic Dermatitis
+    icd10: L21.9
     urgency: low
     workup:
       - Clinical diagnosis
@@ -180,11 +193,10 @@ nodes:
       - Pimecrolimus 1% cream BID (steroid-sparing option for face)
       - Maintenance - Continue antifungal shampoo 1-2x/week long-term to prevent recurrence
       - Exacerbating factors - Stress, cold weather, HIV (severe seborrheic dermatitis can be sign of immunosuppression)
-
   - id: hand_dermatitis
     type: diagnosis
-    name: "Hand Dermatitis/Hand Eczema"
-    icd10: "L30.9"
+    name: Hand Dermatitis/Hand Eczema
+    icd10: L30.9
     urgency: low
     workup:
       - Clinical diagnosis
@@ -200,3 +212,10 @@ nodes:
       - Occlusion technique - Apply steroid ointment, cover with plastic wrap or cotton gloves overnight
       - For dyshidrotic eczema (vesicular hand eczema) - High-potency steroids, tacrolimus, consider oral prednisone burst for severe flares
       - Severe/refractory hand eczema - Systemic therapy (dupilumab, methotrexate, cyclosporine, alitretinoin), phototherapy (hand-directed UVB), dermatology referral
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

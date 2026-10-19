@@ -1,16 +1,35 @@
 tree_id: PEDS-FEVER
 name: Fever, Unspecified (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Family Medicine/Emergency Medicine
-icd10: R50.9
-snomed: 386661006
-urgency:
-  - Age less than 28 days with any fever
-  - Fever with petechiae or purpura
-  - Altered mental status
-  - Severe respiratory distress
-  - Signs of shock
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Family Medicine
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R50.9
+  snomed:
+    - '386661006'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Febrile Infant Guidelines
+    origin: citations
+  - text: UpToDate - Fever Without Source in Children
+    origin: citations
+  - text: Pantell RH et al. Pediatrics 2021 (Febrile Infant Guidelines)
+    origin: citations
+  - text: AAP Febrile Infant Guidelines, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Elevated body temperature (rectal temp greater than or equal to 100.4°F/38°C)
   - Irritability or fussiness
@@ -20,6 +39,15 @@ presentations:
   - Chills or shivering
   - May be only sign of serious bacterial infection in young infants
   - No obvious source of fever identified on initial evaluation
+differentials:
+  - Viral infection (most common - URI, gastroenteritis, viral syndrome)
+  - Bacterial infection (UTI most common occult source in young children, also otitis media, pneumonia, bacteremia, meningitis)
+  - Kawasaki disease (fever greater than 5 days, rash, conjunctivitis, mucositis, extremity changes, lymphadenopathy)
+  - Urinary tract infection (most common serious bacterial infection in febrile infants without source)
+  - Roseola infantum (high fever 3-5 days, followed by rash as fever resolves, age 6-24 months, caused by HHV-6)
+  - Teething (causes low-grade temp less than 100.4°F/38°C, NOT true fever)
+  - Immunization reaction (low-grade fever within 48 hours of vaccines, usually mild and self-limited)
+  - Heat illness (environmental exposure, core temp elevation)
 workup:
   - Clinical history
   - Age of child (most critical factor in evaluation)
@@ -117,33 +145,38 @@ treatment:
   - Treat fever for comfort, not to prevent complications
   - When to return: altered mental status, difficulty breathing, rash with fever, inconsolable crying, not drinking, decreased urine output, fever persisting more than 3 days
 clinical_pearls:
-  - 'Fever in neonate (age less than 28 days) requires full sepsis workup and empiric antibiotics - ALWAYS admit'
-  - 'Rectal temperature most accurate in infants - oral and tympanic less reliable, forehead/axillary unreliable'
-  - 'Well-appearing clinical status most important factor - ill-appearing child requires evaluation regardless of age'
-  - 'Fever does NOT cause brain damage - safe to treat for comfort but not mandatory'
-  - 'Alternating acetaminophen and ibuprofen NOT recommended - increases risk of dosing errors'
-  - 'Febrile seizures occur in 2-5% of children age 6 months to 5 years - antipyretics do NOT prevent febrile seizures'
-  - 'Bundling or overdressing child with fever worsens hyperthermia - dress in light clothing'
-  - 'Complete Hib/PCV13 immunization dramatically reduces risk occult bacteremia in febrile children - unimmunized children higher risk'
+  - Fever in neonate (age less than 28 days) requires full sepsis workup and empiric antibiotics - ALWAYS admit
+  - Rectal temperature most accurate in infants - oral and tympanic less reliable, forehead/axillary unreliable
+  - Well-appearing clinical status most important factor - ill-appearing child requires evaluation regardless of age
+  - Fever does NOT cause brain damage - safe to treat for comfort but not mandatory
+  - Alternating acetaminophen and ibuprofen NOT recommended - increases risk of dosing errors
+  - Febrile seizures occur in 2-5% of children age 6 months to 5 years - antipyretics do NOT prevent febrile seizures
+  - Bundling or overdressing child with fever worsens hyperthermia - dress in light clothing
+  - Complete Hib/PCV13 immunization dramatically reduces risk occult bacteremia in febrile children - unimmunized children higher risk
+red_flags:
+  - Age less than 28 days with any fever
+  - Fever with petechiae or purpura
+  - Altered mental status
+  - Severe respiratory distress
+  - Signs of shock
+disposition_guidance: {}
 referrals:
   - Pediatric infectious disease if immunocompromised, recurrent fever without source, or unusual pathogen
   - Pediatric rheumatology if prolonged fever (greater than 2 weeks) without identified source (consider Kawasaki, JIA, autoinflammatory)
   - Pediatric hematology-oncology if fever with pancytopenia or hepatosplenomegaly (consider malignancy)
-differentials:
-  - Viral infection (most common - URI, gastroenteritis, viral syndrome)
-  - Bacterial infection (UTI most common occult source in young children, also otitis media, pneumonia, bacteremia, meningitis)
-  - Kawasaki disease (fever greater than 5 days, rash, conjunctivitis, mucositis, extremity changes, lymphadenopathy)
-  - Urinary tract infection (most common serious bacterial infection in febrile infants without source)
-  - Roseola infantum (high fever 3-5 days, followed by rash as fever resolves, age 6-24 months, caused by HHV-6)
-  - Teething (causes low-grade temp less than 100.4°F/38°C, NOT true fever)
-  - Immunization reaction (low-grade fever within 48 hours of vaccines, usually mild and self-limited)
-  - Heat illness (environmental exposure, core temp elevation)
-trace:
-  source: AAP Febrile Infant Guidelines, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Febrile Infant Guidelines
-  - UpToDate - Fever Without Source in Children
-  - Pantell RH et al. Pediatrics 2021 (Febrile Infant Guidelines)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

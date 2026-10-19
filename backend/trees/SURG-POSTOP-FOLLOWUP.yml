@@ -1,25 +1,46 @@
 tree_id: SURG-POSTOP-FOLLOWUP
 name: Post-operative Follow-up (Encounter)
+version: '1.0'
+status: draft
 family: surgery
-specialty: Surgery, Primary Care
+specialty: Surgery
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Post-surgical follow-up visit
 description: |
   Routine post-operative follow-up to assess healing, manage complications, and plan further care.
   Timing varies by procedure - typically 1-2 weeks for initial visit.
-icd10: Z48.89
-snomed: "183677006"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z48.89
+  snomed:
+    - '183677006'
+  icpc2: []
+sources:
+  - text: American College of Surgeons Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
 presentations:
   - Recent surgery (days to weeks ago)
   - Routine follow-up or concern for complication
   - Wound assessment needed
   - Suture/staple removal
   - Pain management
-urgency: Low
-referrals:
-  emergency:
-    - Signs of surgical emergency (bleeding, dehiscence, severe infection, organ failure)
-  surgeon:
-    - Complications requiring surgical intervention
+differentials:
+  - Normal healing
+  - Surgical site infection
+  - Seroma or hematoma
+  - Wound dehiscence
+  - DVT/PE
+  - Ileus
+  - Urinary retention
 workup:
   - Review surgical procedure and operative report
   - Current symptoms - pain, fever, drainage, function
@@ -60,16 +81,25 @@ clinical_pearls:
   - Seroma common after procedures with large tissue dissection
   - Early mobilization reduces DVT and pulmonary complications
   - Patient should know warning signs - fever, increasing pain, purulent drainage, dehiscence
-differentials:
-  - Normal healing
-  - Surgical site infection
-  - Seroma or hematoma
-  - Wound dehiscence
-  - DVT/PE
-  - Ileus
-  - Urinary retention
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Signs of surgical emergency (bleeding, dehiscence, severe infection, organ failure)
+  surgeon:
+    - Complications requiring surgical intervention
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 50-year-old 10 days post laparoscopic cholecystectomy. Wounds clean and dry. No fever, tolerating regular diet. Mild incisional discomfort controlled with acetaminophen. Remove steri-strips. Clear to return to work in 1 week, avoid heavy lifting for 4 weeks. Doing well.
-citations:
-  - American College of Surgeons Guidelines
-  - UpToDate - General Surgery
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

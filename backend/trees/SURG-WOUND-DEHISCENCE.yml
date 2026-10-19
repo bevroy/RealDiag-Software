@@ -1,40 +1,61 @@
 tree_id: SURG-WOUND-DEHISCENCE
 name: Wound Dehiscence
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- T81.31XA
-snomed:
-- 231091007
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Wound Dehiscence
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - T81.31XA
+  snomed:
+    - '231091007'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Separation of surgical wound edges
-- Sudden gush of serosanguineous fluid
-- Visible bowel (evisceration)
-- Postoperative day 7-10 typically
-- 'Risk factors: obesity, infection, poor nutrition'
-- Requires urgent surgical repair
+  - Separation of surgical wound edges
+  - Sudden gush of serosanguineous fluid
+  - Visible bowel (evisceration)
+  - Postoperative day 7-10 typically
+  - 'Risk factors: obesity, infection, poor nutrition'
+  - Requires urgent surgical repair
+differentials:
+  - Seroma
+  - Hematoma
+  - Infection
+  - Evisceration
+  - Hernia
 workup: []
 treatment:
   - 'Superficial: Wound care, close monitoring, allow granulation'
   - 'Deep fascial dehiscence: Immediate surgical consultation'
   - 'Evisceration (bowel protruding): Cover with saline-soaked gauze, NPO, urgent OR'
-  - 'Operative repair - re-suture fascia with retention sutures, close skin loosely'
-  - 'Wound VAC therapy postoperatively'
-  - 'Optimize nutrition - protein >1.5g/kg/day, vitamin C, zinc'
-  - 'Control risk factors - hyperglycemia, infection, malnutrition'
-  - 'Abdominal binder for support during healing'
-  - 'Avoid heavy lifting/straining x6-8 weeks'
-  - 'Risk of incisional hernia - long-term follow-up'
+  - Operative repair - re-suture fascia with retention sutures, close skin loosely
+  - Wound VAC therapy postoperatively
+  - Optimize nutrition - protein >1.5g/kg/day, vitamin C, zinc
+  - Control risk factors - hyperglycemia, infection, malnutrition
+  - Abdominal binder for support during healing
+  - Avoid heavy lifting/straining x6-8 weeks
+  - Risk of incisional hernia - long-term follow-up
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -52,14 +73,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Seroma
-  - Hematoma
-  - Infection
-  - Evisceration
-  - Hernia
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

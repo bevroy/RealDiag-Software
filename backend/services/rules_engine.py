@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Any, Dict, List
 import yaml
 
+from .tree_schema import applies_to, icd10_codes, snomed_codes
+
 # Updated to use trees directory (individual tree files, not family-grouped rules)
 RULES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
@@ -27,22 +29,25 @@ class RulesEngine:
                     continue
                 
                 family = tree_data.get('family', 'general')
+                population = applies_to(tree_data)
                 
                 # Convert tree format to rule format
                 rule = {
                     'id': tree_data.get('tree_id', f.stem),
                     'label': tree_data.get('name', f.stem),
                     'presentations': tree_data.get('presentations', []),
-                    'icd10': tree_data.get('icd10', []),
-                    'snomed': tree_data.get('snomed', []),
+                    'icd10': icd10_codes(tree_data),
+                    'snomed': snomed_codes(tree_data),
                     'sensitivity': tree_data.get('sensitivity'),
                     'specificity': tree_data.get('specificity'),
                     'clinical_pearls': tree_data.get('clinical_pearls', []),
                     'management': tree_data.get('treatment', []),
                     'tests': tree_data.get('workup', []),
-                    'applies_to': tree_data.get('applies_to'),
-                    'age_min': tree_data.get('age_min'),
-                    'age_max': tree_data.get('age_max')
+                    'applies_to': population['sex'],
+                    'age_min': population['age_min'],
+                    'age_max': population['age_max'],
+                    'urgency': tree_data.get('urgency', ''),
+                    'status': tree_data.get('status', ''),
                 }
                 
                 # Group by family

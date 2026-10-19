@@ -1,12 +1,34 @@
 tree_id: OBGYN-MENORRHAGIA
 name: Menorrhagia
+version: '1.0'
+status: draft
 family: obstetrics_gynecology
-specialty: Gynecology/Primary Care
-applies_to: female
-icd10: N92.0
-snomed: 386692008
-urgency: []
-homeopathy: []
+specialty: Gynecology
+secondary_specialties:
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N92.0
+  snomed:
+    - '386692008'
+  icpc2: []
+sources:
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Guidelines
+    origin: citations
+  - text: UpToDate - Gynecology
+    origin: citations
+  - text: ACOG Practice Bulletins on Abnormal Uterine Bleeding, NICE Guidelines, UpToDate
+    origin: trace.source
 presentations:
   - Heavy menstrual bleeding (soaking through pad/tampon every 1-2 hours)
   - Menstrual periods lasting longer than 7 days
@@ -16,6 +38,15 @@ presentations:
   - Fatigue and weakness (from anemia)
   - Lightheadedness or shortness of breath with exertion
   - Interference with daily activities due to heavy bleeding
+differentials:
+  - Uterine fibroids (leiomyomas - enlarged uterus, firm, irregular contour on exam)
+  - Adenomyosis (diffusely enlarged, tender uterus, worsens with age, often coexists with fibroids)
+  - Endometrial polyp (focal intracavitary lesion on ultrasound or hysteroscopy)
+  - Endometrial hyperplasia or cancer (postmenopausal bleeding, risk factors, thickened endometrium)
+  - Coagulopathy (von Willebrand disease, thrombocytopenia, anticoagulation therapy)
+  - Hypothyroidism (fatigue, weight gain, elevated TSH)
+  - Anovulatory bleeding (PCOS, irregular cycles, unopposed estrogen)
+  - Pregnancy complications (threatened abortion, ectopic pregnancy - positive pregnancy test)
 workup:
   - Detailed menstrual history
   - Age of menarche and menstrual pattern
@@ -36,7 +67,7 @@ workup:
   - Laboratory evaluation
   - Complete blood count
   - Hemoglobin and hematocrit (assess for anemia)
-  - "Hb less than 12 g/dL in women: anemia present"
+  - 'Hb less than 12 g/dL in women: anemia present'
   - Mean corpuscular volume (MCV) - low in iron deficiency
   - Platelet count (thrombocytopenia can cause bleeding)
   - Pregnancy test (beta-hCG) - rule out pregnancy complications
@@ -48,8 +79,8 @@ workup:
   - Imaging studies
   - Transvaginal ultrasound (first-line imaging)
   - Assess endometrial thickness
-  - "Premenopausal: variable, typically less than 16 mm"
-  - "Postmenopausal: less than 4 mm normal"
+  - 'Premenopausal: variable, typically less than 16 mm'
+  - 'Postmenopausal: less than 4 mm normal'
   - Identify uterine fibroids (leiomyomas)
   - Detect adenomyosis (heterogeneous myometrium, globular uterus)
   - Evaluate for ovarian masses
@@ -130,34 +161,34 @@ treatment:
   - Options: vaginal, laparoscopic, abdominal approach
   - Consider ovarian preservation if premenopausal and ovaries normal
 clinical_pearls:
-  - 'Menorrhagia defined as menstrual blood loss greater than 80 mL per cycle (soaking pad/tampon hourly for several hours)'
-  - 'Levonorgestrel IUD (Mirena) most effective medical treatment - reduces bleeding by 90% and 50% achieve amenorrhea'
-  - 'Always rule out pregnancy and thyroid dysfunction in women with menorrhagia - common and treatable causes'
-  - 'Endometrial sampling required for women over 45 or under 45 with risk factors (obesity, PCOS, anovulation) to rule out cancer'
-  - '10-20% of adolescents with menorrhagia have underlying bleeding disorder (von Willebrand most common)'
-  - 'Tranexamic acid highly effective (40-50% reduction) with no hormonal side effects - good option if contraception not desired'
-  - 'Iron deficiency anemia common with menorrhagia - replete iron stores with 3-6 months supplementation'
-  - 'Endometrial ablation effective for women who completed childbearing but want to avoid hysterectomy'
+  - Menorrhagia defined as menstrual blood loss greater than 80 mL per cycle (soaking pad/tampon hourly for several hours)
+  - Levonorgestrel IUD (Mirena) most effective medical treatment - reduces bleeding by 90% and 50% achieve amenorrhea
+  - Always rule out pregnancy and thyroid dysfunction in women with menorrhagia - common and treatable causes
+  - Endometrial sampling required for women over 45 or under 45 with risk factors (obesity, PCOS, anovulation) to rule out cancer
+  - 10-20% of adolescents with menorrhagia have underlying bleeding disorder (von Willebrand most common)
+  - Tranexamic acid highly effective (40-50% reduction) with no hormonal side effects - good option if contraception not desired
+  - Iron deficiency anemia common with menorrhagia - replete iron stores with 3-6 months supplementation
+  - Endometrial ablation effective for women who completed childbearing but want to avoid hysterectomy
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gynecology for failed medical management, consideration of endometrial ablation or hysterectomy
   - Hematology if suspected bleeding disorder (von Willebrand, platelet dysfunction)
   - Interventional radiology for uterine artery embolization if symptomatic fibroids
   - Reproductive endocrinology if menorrhagia with infertility or desire for fertility-sparing fibroid treatment
-differentials:
-  - Uterine fibroids (leiomyomas - enlarged uterus, firm, irregular contour on exam)
-  - Adenomyosis (diffusely enlarged, tender uterus, worsens with age, often coexists with fibroids)
-  - Endometrial polyp (focal intracavitary lesion on ultrasound or hysteroscopy)
-  - Endometrial hyperplasia or cancer (postmenopausal bleeding, risk factors, thickened endometrium)
-  - Coagulopathy (von Willebrand disease, thrombocytopenia, anticoagulation therapy)
-  - Hypothyroidism (fatigue, weight gain, elevated TSH)
-  - Anovulatory bleeding (PCOS, irregular cycles, unopposed estrogen)
-  - Pregnancy complications (threatened abortion, ectopic pregnancy - positive pregnancy test)
-trace:
-  source: ACOG Practice Bulletins on Abnormal Uterine Bleeding, NICE Guidelines, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - NICE (National Institute for Health and Care Excellence) Guidelines
-  - UpToDate - Gynecology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

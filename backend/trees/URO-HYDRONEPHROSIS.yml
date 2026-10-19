@@ -1,11 +1,34 @@
 tree_id: URO-HYDRONEPHROSIS
 name: Hydronephrosis
+version: '1.0'
+status: draft
 family: urology
-specialty: Urology/Nephrology
-icd10: N13.30
-snomed: 43064006
-urgency: []
-homeopathy: []
+specialty: Urology
+secondary_specialties:
+  - Nephrology
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N13.30
+  snomed:
+    - '43064006'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
+  - text: American Urological Association Guidelines, European Association of Urology Guidelines, UpToDate on Hydronephrosis
+    origin: trace.source
 presentations:
   - Often asymptomatic (discovered incidentally on imaging)
   - Flank pain (dull ache or sharp colicky pain if acute obstruction)
@@ -15,6 +38,13 @@ presentations:
   - Hematuria (gross or microscopic)
   - Palpable flank mass in severe cases
   - Symptoms of renal failure if bilateral or chronic (fatigue, edema, nausea)
+differentials:
+  - Obstructive hydronephrosis (kidney stone, tumor, stricture, BPH - requires intervention)
+  - Non-obstructive hydronephrosis (vesicoureteral reflux, pregnancy - often resolves spontaneously)
+  - Pyonephrosis (infected hydronephrosis - EMERGENCY)
+  - Congenital UPJ obstruction (children, intermittent flank pain)
+  - Polycystic kidney disease (bilateral cystic kidneys, no obstruction)
+  - Renal cyst (simple fluid collection, not connected to collecting system)
 workup:
   - Renal ultrasound (INITIAL imaging of choice)
   - Detects fluid collection in renal pelvis and calyces
@@ -95,31 +125,33 @@ treatment:
   - Serial creatinine if bilateral or declining function
   - Repeat imaging to assess for resolution after treating cause
 clinical_pearls:
-  - "Hydronephrosis is FINDING not diagnosis - always identify underlying cause of obstruction"
-  - "Infected obstructed kidney (pyonephrosis) is urologic emergency - requires urgent decompression and antibiotics"
-  - "Bilateral hydronephrosis or unilateral in solitary kidney can cause acute kidney injury"
-  - "Most common causes: kidney stones (adults), UPJ obstruction (children), BPH (older men), pregnancy (women)"
-  - "Physiologic hydronephrosis of pregnancy common (80% on right side) - resolves postpartum"
-  - "Chronic severe hydronephrosis leads to irreversible kidney damage - cortical thinning on imaging suggests permanent loss"
-  - "Post-obstructive diuresis can occur after relieving obstruction - monitor fluids and electrolytes carefully"
-  - "CT urogram is gold standard for identifying cause and level of obstruction"
+  - Hydronephrosis is FINDING not diagnosis - always identify underlying cause of obstruction
+  - Infected obstructed kidney (pyonephrosis) is urologic emergency - requires urgent decompression and antibiotics
+  - Bilateral hydronephrosis or unilateral in solitary kidney can cause acute kidney injury
+  - 'Most common causes: kidney stones (adults), UPJ obstruction (children), BPH (older men), pregnancy (women)'
+  - Physiologic hydronephrosis of pregnancy common (80% on right side) - resolves postpartum
+  - Chronic severe hydronephrosis leads to irreversible kidney damage - cortical thinning on imaging suggests permanent loss
+  - Post-obstructive diuresis can occur after relieving obstruction - monitor fluids and electrolytes carefully
+  - CT urogram is gold standard for identifying cause and level of obstruction
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Urology EMERGENT for infected obstructed system, bilateral obstruction with AKI, or anuria
   - Urology urgent for symptomatic unilateral hydronephrosis or declining renal function
   - Nephrology for management of acute kidney injury from obstruction
-differentials:
-  - Obstructive hydronephrosis (kidney stone, tumor, stricture, BPH - requires intervention)
-  - Non-obstructive hydronephrosis (vesicoureteral reflux, pregnancy - often resolves spontaneously)
-  - Pyonephrosis (infected hydronephrosis - EMERGENCY)
-  - Congenital UPJ obstruction (children, intermittent flank pain)
-  - Polycystic kidney disease (bilateral cystic kidneys, no obstruction)
-  - Renal cyst (simple fluid collection, not connected to collecting system)
-trace:
-  source: American Urological Association Guidelines, European Association of Urology Guidelines, UpToDate on Hydronephrosis
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

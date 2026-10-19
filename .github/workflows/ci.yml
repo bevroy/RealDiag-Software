@@ -47,6 +47,8 @@ jobs:
           # httpx is required by starlette/testclient (used by FastAPI tests)
           # prometheus_client is required by backend/main.py (metrics endpoint)
           pip install fastapi uvicorn jinja2 pyyaml pytest requests httpx prometheus_client
+      - name: Validate decision trees
+        run: python backend/scripts/validate_rules.py
       - name: Run tests
         env:
           JWT_SECRET_KEY: test-only-ci-secret-key-not-for-production-use

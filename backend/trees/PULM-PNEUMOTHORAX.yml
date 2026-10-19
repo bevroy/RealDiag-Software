@@ -1,59 +1,84 @@
 tree_id: PULM-PNEUMOTHORAX
 name: Pneumothorax
+version: '1.0'
+status: draft
 family: Pulmonology
 specialty: Pulmonology
-icd10:
-- J93.0
-- J93.11
-- J93.12
-snomed:
-- '36118008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Pneumothorax
-version: '1.0'
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J93.0
+    - J93.11
+    - J93.12
+  snomed:
+    - '36118008'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic Obstructive Lung Disease (GOLD)
+    origin: trace.source
 presentations:
-- Sudden onset sharp pleuritic chest pain, dyspnea
-- Decreased breath sounds, hyperresonance to percussion on affected side
-- 'Chest X-ray: Visceral pleural line, absence of lung markings beyond'
-- 'Tension pneumothorax: Hypotension, JVD, tracheal deviation (emergency!)'
-- 'Primary spontaneous: Tall, thin, young males (ruptured bleb)'
-- 'Secondary: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia)'
-- 'Traumatic: Rib fracture, penetrating injury, iatrogenic (central line, thoracentesis)'
-workup:
-- Chest X-ray (PA upright, expiratory view increases sensitivity)
-- CT chest if small or uncertain diagnosis
-- ABG if respiratory distress
-treatment:
-- 'Guideline-based treatment options for Pneumothorax include:'
-- 'Tension: Immediate needle decompression (2nd ICS midclavicular line), then chest
-  tube (ATS 2023)'
-- 'Small (<2 cm) + stable: Observation, 100% oxygen, repeat CXR in 6 hours (ATS 2023)'
-- 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal (ATS 2023)'
-- 'Alternative for primary: Aspiration with small catheter (ATS 2023)'
-- 'If persistent air leak >5 days: VATS with pleurodesis (ATS 2023)'
-clinical_pearls:
-- Tension pneumothorax = clinical diagnosis, treat immediately (needle decompression,
-  don't wait for CXR)
-- 'Small (<2 cm apex to cupola): Observe if stable and asymptomatic'
-- 'Large (>2 cm): Chest tube (or aspiration if primary spontaneous)'
-- 100% oxygen accelerates reabsorption (4x faster)
-- Recurrence risk 20-30% after first episode
-referrals:
-- Cardiothoracic surgery if persistent air leak, recurrent, or tension
-- Pulmonology for recurrent pneumothorax (consider pleurodesis)
+  - Sudden onset sharp pleuritic chest pain, dyspnea
+  - Decreased breath sounds, hyperresonance to percussion on affected side
+  - 'Chest X-ray: Visceral pleural line, absence of lung markings beyond'
+  - 'Tension pneumothorax: Hypotension, JVD, tracheal deviation (emergency!)'
+  - 'Primary spontaneous: Tall, thin, young males (ruptured bleb)'
+  - 'Secondary: Underlying lung disease (COPD, cystic fibrosis, PCP pneumonia)'
+  - 'Traumatic: Rib fracture, penetrating injury, iatrogenic (central line, thoracentesis)'
 differentials:
   - Pneumonia
   - Pulmonary embolism
   - Rib fracture
   - Myocardial infarction
-trace:
-  source: American Thoracic Society (ATS) Guidelines, Global Initiative for Chronic
-    Obstructive Lung Disease (GOLD)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Chest X-ray (PA upright, expiratory view increases sensitivity)
+  - CT chest if small or uncertain diagnosis
+  - ABG if respiratory distress
+treatment:
+  - 'Guideline-based treatment options for Pneumothorax include:'
+  - 'Tension: Immediate needle decompression (2nd ICS midclavicular line), then chest tube (ATS 2023)'
+  - 'Small (<2 cm) + stable: Observation, 100% oxygen, repeat CXR in 6 hours (ATS 2023)'
+  - 'Large (>2 cm) or symptomatic: Chest tube 20-28F to water seal (ATS 2023)'
+  - 'Alternative for primary: Aspiration with small catheter (ATS 2023)'
+  - 'If persistent air leak >5 days: VATS with pleurodesis (ATS 2023)'
+clinical_pearls:
+  - Tension pneumothorax = clinical diagnosis, treat immediately (needle decompression, don't wait for CXR)
+  - 'Small (<2 cm apex to cupola): Observe if stable and asymptomatic'
+  - 'Large (>2 cm): Chest tube (or aspiration if primary spontaneous)'
+  - 100% oxygen accelerates reabsorption (4x faster)
+  - Recurrence risk 20-30% after first episode
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Cardiothoracic surgery if persistent air leak, recurrent, or tension
+  - Pulmonology for recurrent pneumothorax (consider pleurodesis)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

@@ -1,57 +1,65 @@
 tree_id: GER-FALLS
 name: Recurrent Falls (Geriatric Syndrome)
+version: '1.0'
+status: draft
 family: Geriatrics
 specialty: Geriatrics
-age_min: 65
-icd10:
-- R29.6
-- Z91.81
-snomed:
-- '161898004'
-urgency: medium
-description: Comprehensive evaluation and management of Recurrent Falls (Geriatric
-  Syndrome)
-version: '1.0'
-citations:
-  - AGS (American Geriatrics Society) Clinical Practice Guidelines
-  - British Geriatrics Society Guidelines
-  - UpToDate - Geriatric Medicine
-author: RealDiag Clinical Team
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: Comprehensive evaluation and management of Recurrent Falls (Geriatric Syndrome)
+applies_to:
+  sex: null
+  age_min: 65
+  age_max: null
+codes:
+  icd10:
+    - R29.6
+    - Z91.81
+  snomed:
+    - '161898004'
+  icpc2: []
+sources:
+  - text: AGS (American Geriatrics Society) Clinical Practice Guidelines
+    origin: citations
+  - text: British Geriatrics Society Guidelines
+    origin: citations
+  - text: UpToDate - Geriatric Medicine
+    origin: citations
+  - text: American Geriatrics Society (AGS) Guidelines, Beers Criteria for Potentially Inappropriate Medication Use
+    origin: trace.source
 presentations:
-- Two or more falls in past 12 months, or 1 fall with injury requiring medical attention
-- 'Gait instability: Shuffling, wide-based, slow speed, difficulty turning'
-- 'Balance impairment: Unable to tandem walk, Romberg positive, difficulty with chair
-  rises'
-- 'Fear of falling (FOF): Limits activities, social isolation, deconditioning'
-- 'Intrinsic risk factors: Age >80, prior falls, muscle weakness, vision impairment,
-  cognitive impairment'
-- 'Extrinsic risk factors: Polypharmacy (>4 meds), environmental hazards (rugs, poor
-  lighting)'
-- May result in fractures (hip, wrist), head injury, inability to get up ("long lie")
+  - Two or more falls in past 12 months, or 1 fall with injury requiring medical attention
+  - 'Gait instability: Shuffling, wide-based, slow speed, difficulty turning'
+  - 'Balance impairment: Unable to tandem walk, Romberg positive, difficulty with chair rises'
+  - 'Fear of falling (FOF): Limits activities, social isolation, deconditioning'
+  - 'Intrinsic risk factors: Age >80, prior falls, muscle weakness, vision impairment, cognitive impairment'
+  - 'Extrinsic risk factors: Polypharmacy (>4 meds), environmental hazards (rugs, poor lighting)'
+  - May result in fractures (hip, wrist), head injury, inability to get up ("long lie")
+differentials:
+  - Syncope
+  - Stroke
+  - Parkinson disease
+  - Orthostatic hypotension
+  - Medication effect
 workup: []
 treatment:
-- 'Guideline-based treatment options for Recurrent Falls (Geriatric Syndrome) include:'
-- 'History: Circumstances of fall, loss of consciousness, prodrome, injuries, witnesses
-  (AGS 2023)'
-- 'Physical exam: Orthostatic vitals, vision screen, gait/balance testing, neurologic
-  exam, foot exam (AGS 2023)'
-- 'Labs: CBC (anemia), BMP (dehydration), vitamin D, consider ECG/Holter if syncope
-  suspected (AGS 2023)'
-- 'Interventions: PT/OT referral (strengthening, balance, assistive device), medication
-  review (stop/reduce high-risk meds), vision correction, home safety evaluation (AGS
-  2023)'
-- 'Disposition: Admit if fall with injury, syncope, unable to mobilize safely; outpatient
-  if low-risk with close follow-up (AGS 2023)'
+  - 'Guideline-based treatment options for Recurrent Falls (Geriatric Syndrome) include:'
+  - 'History: Circumstances of fall, loss of consciousness, prodrome, injuries, witnesses (AGS 2023)'
+  - 'Physical exam: Orthostatic vitals, vision screen, gait/balance testing, neurologic exam, foot exam (AGS 2023)'
+  - 'Labs: CBC (anemia), BMP (dehydration), vitamin D, consider ECG/Holter if syncope suspected (AGS 2023)'
+  - 'Interventions: PT/OT referral (strengthening, balance, assistive device), medication review (stop/reduce high-risk meds), vision correction, home safety evaluation (AGS 2023)'
+  - 'Disposition: Admit if fall with injury, syncope, unable to mobilize safely; outpatient if low-risk with close follow-up (AGS 2023)'
 clinical_pearls:
-- 'Fall assessment: Ask ALL patients >65: ''Have you fallen in the past year?'''
-- 'Get Up and Go test: Time patient standing from chair, walking 10 feet, turning,
-  walking back, sitting - >12 sec = high risk'
-- 'High-risk medications: Sedatives (benzos, antihistamines), antihypertensives, psychotropics'
-- 'Multifactorial intervention: Exercise (strength + balance), medication review,
-  vision correction, home safety'
-- 'Vitamin D 800-1000 IU daily: Reduces falls by 20% in elderly'
-- 'Hip protectors: Consider for nursing home residents with high fall risk'
+  - 'Fall assessment: Ask ALL patients >65: ''Have you fallen in the past year?'''
+  - 'Get Up and Go test: Time patient standing from chair, walking 10 feet, turning, walking back, sitting - >12 sec = high risk'
+  - 'High-risk medications: Sedatives (benzos, antihistamines), antihypertensives, psychotropics'
+  - 'Multifactorial intervention: Exercise (strength + balance), medication review, vision correction, home safety'
+  - 'Vitamin D 800-1000 IU daily: Reduces falls by 20% in elderly'
+  - 'Hip protectors: Consider for nursing home residents with high fall risk'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -69,14 +77,20 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-differentials:
-  - Syncope
-  - Stroke
-  - Parkinson disease
-  - Orthostatic hypotension
-  - Medication effect
-trace:
-  source: American Geriatrics Society (AGS) Guidelines, Beers Criteria for Potentially
-    Inappropriate Medication Use
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

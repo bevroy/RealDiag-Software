@@ -1,11 +1,32 @@
 tree_id: DERM-WARTS
 name: Verruca (Warts)
+version: '1.0'
+status: draft
 family: Dermatology
-specialty: Dermatology/Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Painless growths on hands or feet
 description: Benign epithelial proliferations caused by human papillomavirus (HPV). Common warts (verruca vulgaris) on hands, plantar warts on feet. Many treatment options, but spontaneous resolution common especially in children. Resistant to treatment, often require multiple modalities.
-icd10: B07.9
-snomed: 240217005
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - B07.9
+  snomed:
+    - '240217005'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Guidelines for Warts
+    origin: citations
+  - text: Cochrane Database Systematic Review - Warts Treatment
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Hyperkeratotic papules or plaques
   - Rough, irregular surface
@@ -14,17 +35,13 @@ presentations:
   - Common warts on hands, fingers
   - Flat warts on face (smooth, flat-topped)
   - Filiform warts (finger-like projections)
-urgency: routine
-referrals:
-  emergency:
-    - None typically
-  urgent:
-    - Rapidly growing lesions (rule out malignancy)
-    - Extensive warts in immunocompromised
-  routine:
-    - Refractory to multiple treatments
-    - Warts in sensitive areas (face, genitals)
-
+differentials:
+  - Callus or corn - preserves dermatoglyphics, no black dots, does not bleed with paring, on pressure points
+  - Molluscum contagiosum - smooth, dome-shaped, central umbilication, no black dots
+  - Seborrheic keratosis - "stuck on" appearance, waxy, horn pseudocysts, not on palms/soles
+  - Squamous cell carcinoma - in elderly or immunosuppressed, non-healing, atypical features, biopsy if uncertain
+  - Acrochordon (skin tag) - soft, pedunculated, no hyperkeratosis
+  - Condyloma acuminatum (genital warts) - anogenital area, HPV types 6, 11
 workup:
   - Clinical diagnosis based on appearance and location
   - Types of warts
@@ -158,13 +175,25 @@ clinical_pearls:
   - Immunocompromised patients (HIV, transplant) - extensive, treatment-resistant warts
   - Flat warts on face - use gentle treatments (tretinoin, imiquimod), avoid scarring
   - HPV vaccine (Gardasil-9) protects against genital wart types (6, 11) but not cutaneous wart types
-differentials:
-  - Callus or corn - preserves dermatoglyphics, no black dots, does not bleed with paring, on pressure points
-  - Molluscum contagiosum - smooth, dome-shaped, central umbilication, no black dots
-  - Seborrheic keratosis - "stuck on" appearance, waxy, horn pseudocysts, not on palms/soles
-  - Squamous cell carcinoma - in elderly or immunosuppressed, non-healing, atypical features, biopsy if uncertain
-  - Acrochordon (skin tag) - soft, pedunculated, no hyperkeratosis
-  - Condyloma acuminatum (genital warts) - anogenital area, HPV types 6, 11
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - None typically
+  urgent:
+    - Rapidly growing lesions (rule out malignancy)
+    - Extensive warts in immunocompromised
+  routine:
+    - Refractory to multiple treatments
+    - Warts in sensitive areas (face, genitals)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 28-year-old woman presents with painful growth on right heel for 6 months
   - Started as small bump, gradually enlarged, now painful with walking and standing
@@ -190,8 +219,7 @@ trace:
   - Advised to continue salicylic acid for 2 more weeks
   - At 12 weeks - complete resolution, normal skin on heel, no pain, normal dermatoglyphics restored
   - Counseled that recurrence possible (30% chance), return if recurs
-
-citations:
-  - AAD (American Academy of Dermatology) Guidelines for Warts
-  - Cochrane Database Systematic Review - Warts Treatment
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

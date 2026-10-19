@@ -1,12 +1,35 @@
 tree_id: OBGYN-CERVICITIS
 name: Cervicitis
+version: '1.0'
+status: draft
 family: obstetrics_gynecology
-specialty: Gynecology/Primary Care/Infectious Disease
-applies_to: female
-icd10: N72
-snomed: 37610005
-urgency: []
-homeopathy: []
+specialty: Gynecology
+secondary_specialties:
+  - Primary Care
+  - Infectious Disease
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N72
+  snomed:
+    - '37610005'
+  icpc2: []
+sources:
+  - text: CDC Sexually Transmitted Infections Treatment Guidelines (2021)
+    origin: citations
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: CDC STI Treatment Guidelines 2021, ACOG Practice Bulletins, UpToDate
+    origin: trace.source
 presentations:
   - Abnormal vaginal discharge (mucopurulent, yellow or green)
   - Postcoital bleeding (bleeding after intercourse)
@@ -17,6 +40,16 @@ presentations:
   - May be asymptomatic (detected on routine pelvic exam or Pap smear)
   - New sexual partner or multiple partners
   - History of sexually transmitted infection
+differentials:
+  - Chlamydial cervicitis (mucopurulent discharge, friability, positive NAAT)
+  - Gonococcal cervicitis (mucopurulent discharge, friability, positive NAAT)
+  - Trichomoniasis (yellow-green frothy discharge, strawberry cervix, motile trichomonads on wet mount)
+  - Herpes simplex virus cervicitis (vesicles or ulcers on cervix, severe pain)
+  - Bacterial vaginosis (thin gray discharge, fishy odor, clue cells - but does NOT cause cervicitis)
+  - Candidiasis (thick white discharge, pruritus, pseudohyphae - does NOT cause cervicitis)
+  - Mycoplasma genitalium (emerging pathogen, can cause persistent urethritis/cervicitis)
+  - Pelvic inflammatory disease (cervicitis with upper genital tract involvement - fever, adnexal tenderness)
+  - Cervical ectropion (physiologic - columnar epithelium on ectocervix, can cause discharge and bleeding)
 workup:
   - Sexual history
   - Number of sexual partners, new partners
@@ -51,8 +84,8 @@ workup:
   - KOH prep: pseudohyphae and budding yeast (candidiasis)
   - Whiff test: fishy odor with KOH (bacterial vaginosis)
   - Vaginal pH
-  - "Normal: 4.0-4.5"
-  - "Greater than 4.5: bacterial vaginosis or trichomoniasis"
+  - 'Normal: 4.0-4.5'
+  - 'Greater than 4.5: bacterial vaginosis or trichomoniasis'
   - Additional testing
   - HIV screening (all patients with STI)
   - Syphilis screening (RPR or VDRL)
@@ -105,35 +138,34 @@ treatment:
   - Annual STI screening for sexually active women under age 25
   - HPV vaccination if not previously vaccinated (Gardasil 9)
 clinical_pearls:
-  - 'Cervicitis most commonly caused by Chlamydia trachomatis (40%) and Neisseria gonorrhoeae (30-40%)'
-  - 'Empiric treatment for both chlamydia and gonorrhea recommended - do not wait for test results'
-  - 'Doxycycline 100 mg BID for 7 days now preferred over azithromycin 1 g for chlamydia (rising azithromycin resistance)'
-  - 'Ceftriaxone 500 mg IM alone sufficient for gonorrhea - dual therapy no longer required per 2021 CDC guidelines'
-  - 'Cervical friability (easily induced bleeding) highly specific for cervicitis - warrants testing and treatment'
-  - 'Expedited partner therapy (EPT) reduces reinfection rates - provide medication for partner(s) without examination'
-  - 'Reinfection rates high (20% within 3 months) - rescreen at 3 months after treatment'
-  - 'Untreated cervicitis can ascend to pelvic inflammatory disease (PID) causing infertility and chronic pelvic pain'
+  - Cervicitis most commonly caused by Chlamydia trachomatis (40%) and Neisseria gonorrhoeae (30-40%)
+  - Empiric treatment for both chlamydia and gonorrhea recommended - do not wait for test results
+  - Doxycycline 100 mg BID for 7 days now preferred over azithromycin 1 g for chlamydia (rising azithromycin resistance)
+  - Ceftriaxone 500 mg IM alone sufficient for gonorrhea - dual therapy no longer required per 2021 CDC guidelines
+  - Cervical friability (easily induced bleeding) highly specific for cervicitis - warrants testing and treatment
+  - Expedited partner therapy (EPT) reduces reinfection rates - provide medication for partner(s) without examination
+  - Reinfection rates high (20% within 3 months) - rescreen at 3 months after treatment
+  - Untreated cervicitis can ascend to pelvic inflammatory disease (PID) causing infertility and chronic pelvic pain
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gynecology if cervicitis refractory to treatment or recurrent infections
   - Infectious disease for complicated STI, HIV coinfection, or treatment failure
   - PID requiring hospitalization (if fever, severe pain, tubo-ovarian abscess)
   - Sexual health clinic for comprehensive STI screening and partner services
-differentials:
-  - Chlamydial cervicitis (mucopurulent discharge, friability, positive NAAT)
-  - Gonococcal cervicitis (mucopurulent discharge, friability, positive NAAT)
-  - Trichomoniasis (yellow-green frothy discharge, strawberry cervix, motile trichomonads on wet mount)
-  - Herpes simplex virus cervicitis (vesicles or ulcers on cervix, severe pain)
-  - Bacterial vaginosis (thin gray discharge, fishy odor, clue cells - but does NOT cause cervicitis)
-  - Candidiasis (thick white discharge, pruritus, pseudohyphae - does NOT cause cervicitis)
-  - Mycoplasma genitalium (emerging pathogen, can cause persistent urethritis/cervicitis)
-  - Pelvic inflammatory disease (cervicitis with upper genital tract involvement - fever, adnexal tenderness)
-  - Cervical ectropion (physiologic - columnar epithelium on ectocervix, can cause discharge and bleeding)
-trace:
-  source: CDC STI Treatment Guidelines 2021, ACOG Practice Bulletins, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - CDC Sexually Transmitted Infections Treatment Guidelines (2021)
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - UpToDate - Infectious Diseases
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

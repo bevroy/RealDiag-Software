@@ -1,13 +1,33 @@
 tree_id: DERM-ACNE-VULGARIS
 name: Acne Vulgaris
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Facial pimples and oily skin
 description: |
   Common inflammatory disorder of pilosebaceous units causing comedones, papules, pustules, nodules, and cysts. Affects 85% of adolescents and young adults.
   Pathogenesis involves follicular hyperkeratinization, excess sebum production, Cutibacterium acnes (formerly Propionibacterium) colonization, and inflammation. Can cause scarring and psychosocial distress.
-icd10: L70.0
-snomed: 88616000
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L70.0
+  snomed:
+    - '88616000'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Comedones (open and closed blackheads/whiteheads)
   - Inflammatory papules and pustules
@@ -15,23 +35,13 @@ presentations:
   - Face, chest, back involvement
   - Post-inflammatory hyperpigmentation, scarring
   - Worsens with stress, menstruation
-urgency: Low
-referrals:
-  emergency:
-    - Suspected necrotizing fasciitis
-    - Stevens-Johnson syndrome/TEN
-    - Anaphylaxis
-  urgent:
-    - Suspected melanoma
-    - Rapidly growing lesion
-    - Severe drug reaction
-    - Suspected malignancy
-  routine:
-    - Chronic dermatitis management
-    - Acne unresponsive to treatment
-    - Cosmetic concerns
-    - Mole surveillance
-
+differentials:
+  - Rosacea
+  - Folliculitis
+  - Perioral dermatitis
+  - Seborrheic dermatitis
+  - Keratosis pilaris
+  - Hidradenitis suppurativa
 workup:
   - Clinical diagnosis - no testing needed
   - Assess severity - mild (comedones, few papules), moderate (more papules/pustules), severe (nodules, cysts)
@@ -79,17 +89,35 @@ clinical_pearls:
   - Scarring more likely with severe inflammatory acne, picking, delayed treatment
   - Adult acne increasing in women - consider hormonal causes, PCOS
   - Neonatal acne (3-6 months) and infantile acne (6-12 months) usually resolve spontaneously
-differentials:
-  - Rosacea
-  - Folliculitis
-  - Perioral dermatitis
-  - Seborrheic dermatitis
-  - Keratosis pilaris
-  - Hidradenitis suppurativa
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Suspected necrotizing fasciitis
+    - Stevens-Johnson syndrome/TEN
+    - Anaphylaxis
+  urgent:
+    - Suspected melanoma
+    - Rapidly growing lesion
+    - Severe drug reaction
+    - Suspected malignancy
+  routine:
+    - Chronic dermatitis management
+    - Acne unresponsive to treatment
+    - Cosmetic concerns
+    - Mole surveillance
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 17-year-old girl with moderate facial acne x 2 years, worse with menses → Exam shows comedones, inflammatory papules, pustules on face, mild scarring → Previous OTC benzoyl peroxide minimally effective → No signs of hyperandrogenism → Start adapalene 0.1% gel nightly and clindamycin/benzoyl peroxide gel each morning → Counsel on gradual improvement over 8-12 weeks, initial irritation → Symptoms initially worsen at week 3 (purging), patient wants to stop → Reassurance, continue treatment → Significant improvement by week 10, 75% clearance → Increase adapalene to 0.3% gel, continue benzoyl peroxide, discontinue clindamycin after 3 months → Mild acne persists, add spironolactone 100mg daily for hormonal component → Nearly complete clearance by 6 months, minimal scarring → Continues adapalene long-term for maintenance, discontinues spironolactone after 18 months
-
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

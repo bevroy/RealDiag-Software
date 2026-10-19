@@ -1,29 +1,47 @@
 tree_id: TRAUMA-ANIMAL-BITE
 name: Dog/Cat Bite
+version: '1.0'
+status: draft
 family: emergency
-specialty: Emergency Medicine, Primary Care, Infectious Disease
+specialty: Emergency Medicine
+secondary_specialties:
+  - Primary Care
+  - Infectious Disease
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Animal bite, dog or cat bite
 description: |
   Animal bites require assessment for infection risk, rabies exposure, and structural injury.
   Dog bites cause crush injury; cat bites cause puncture wounds with higher infection risk.
-icd10: S61.451A
-snomed: "217716008"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - S61.451A
+  snomed:
+    - '217716008'
+  icpc2: []
+sources:
+  - text: CDC Rabies Guidelines
+    origin: citations
+  - text: American Academy of Family Physicians
+    origin: citations
+  - text: UpToDate - Emergency Medicine and Infectious Disease
+    origin: citations
 presentations:
   - Puncture wound, laceration, or avulsion from animal bite
   - Dog bites - crush injury, tissue avulsion
   - Cat bites - deep puncture wounds
   - Pain, swelling, bleeding
   - Location commonly hands, arms, legs
-urgency: High
-referrals:
-  emergency:
-    - Severe tissue injury
-    - Neurovascular compromise
-    - Signs of compartment syndrome
-  hand_surgery:
-    - Hand bites with deep puncture or tendon/joint involvement
-  plastic_surgery:
-    - Facial bites requiring cosmetic repair
+differentials:
+  - Simple animal bite
+  - Infected animal bite (Pasteurella, Streptococcus, Staphylococcus, anaerobes)
+  - Tenosynovitis from bite
+  - Septic arthritis
+  - Rabies exposure
 workup:
   - Mechanism - dog vs cat, provoked vs unprovoked, domestic vs wild
   - Rabies vaccination status of animal
@@ -61,15 +79,29 @@ clinical_pearls:
   - Hand bites at highest risk for serious infection (tenosynovitis, septic arthritis)
   - Bat exposure may occur without obvious bite - consider rabies prophylaxis
   - Animal observation for 10 days adequate to rule out rabies in domestic dog/cat
-differentials:
-  - Simple animal bite
-  - Infected animal bite (Pasteurella, Streptococcus, Staphylococcus, anaerobes)
-  - Tenosynovitis from bite
-  - Septic arthritis
-  - Rabies exposure
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Severe tissue injury
+    - Neurovascular compromise
+    - Signs of compartment syndrome
+  hand_surgery:
+    - Hand bites with deep puncture or tendon/joint involvement
+  plastic_surgery:
+    - Facial bites requiring cosmetic repair
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 35-year-old bitten by neighbor's dog on hand. Deep puncture wound over dorsal hand. Copious irrigation performed. No tendon or nerve injury. Wound left open. Prescribe augmentin 875mg BID x 7 days. Tetanus booster given. Dog current on rabies vaccine, observed for 10 days, no rabies prophylaxis needed. Wound heals without infection.
-citations:
-  - CDC Rabies Guidelines
-  - American Academy of Family Physicians
-  - UpToDate - Emergency Medicine and Infectious Disease
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

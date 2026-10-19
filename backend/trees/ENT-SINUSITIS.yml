@@ -1,13 +1,33 @@
 tree_id: ENT-ACUTE-SINUSITIS
 name: Acute Sinusitis
+version: '1.0'
+status: draft
 family: otolaryngology
 specialty: ENT
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Facial pain and nasal congestion
 description: |
   Inflammation of paranasal sinuses, usually viral (90-98%). Bacterial superinfection occurs in 2-10%.
   Acute (less than 4 weeks), subacute (4-12 weeks), chronic (greater than 12 weeks). Maxillary sinus most commonly affected.
-icd10: J01.90
-snomed: 36971009
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J01.90
+  snomed:
+    - '36971009'
+  icpc2: []
+sources:
+  - text: AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+    origin: citations
+  - text: British Society of Otology Guidelines
+    origin: citations
+  - text: UpToDate - Otolaryngology
+    origin: citations
 presentations:
   - Facial pain, pressure (over affected sinus)
   - Purulent nasal discharge
@@ -16,24 +36,13 @@ presentations:
   - Fever, malaise
   - Headache
   - Symptoms >10 days or worsening after initial improvement
-urgency: Low
-referrals:
-  emergency:
-    - Airway compromise
-    - Peritonsillar abscess with trismus
-    - Sudden hearing loss
-    - Severe epistaxis
-  urgent:
-    - Suspected malignancy
-    - Persistent hoarseness >2 weeks
-    - Recurrent acute sinusitis
-    - Vertigo with neurological signs
-  routine:
-    - Chronic sinusitis
-    - Hearing loss evaluation
-    - Tinnitus
-    - Allergy management
-
+differentials:
+  - Viral upper respiratory infection
+  - Allergic rhinitis
+  - Migraine or tension headache
+  - Dental abscess
+  - Temporal arteritis
+  - Trigeminal neuralgia
 workup:
   - Clinical diagnosis based on symptoms - purulent nasal discharge, facial pain/pressure, nasal obstruction, hyposmia
   - Acute bacterial rhinosinusitis (ABRS) criteria - symptoms greater than 10 days without improvement, severe symptoms (fever greater than 102F, purulent discharge) for 3-4 days, or worsening after initial improvement (double sickening)
@@ -58,17 +67,36 @@ clinical_pearls:
   - Complications include orbital cellulitis, orbital abscess, meningitis, cavernous sinus thrombosis, brain abscess (rare but serious)
   - Periorbital edema, proptosis, ophthalmoplegia, or vision changes require urgent imaging and ENT/ophthalmology consultation
   - Chronic sinusitis often related to anatomic obstruction, polyps, or allergic rhinitis
-differentials:
-  - Viral upper respiratory infection
-  - Allergic rhinitis
-  - Migraine or tension headache
-  - Dental abscess
-  - Temporal arteritis
-  - Trigeminal neuralgia
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Airway compromise
+    - Peritonsillar abscess with trismus
+    - Sudden hearing loss
+    - Severe epistaxis
+  urgent:
+    - Suspected malignancy
+    - Persistent hoarseness >2 weeks
+    - Recurrent acute sinusitis
+    - Vertigo with neurological signs
+  routine:
+    - Chronic sinusitis
+    - Hearing loss evaluation
+    - Tinnitus
+    - Allergy management
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Nasal congestion, facial pressure, purulent nasal discharge x 12 days without improvement → Maxillary sinus tenderness on exam → Diagnose acute bacterial rhinosinusitis → Amoxicillin-clavulanate 875mg BID x 7 days → Intranasal fluticasone 2 sprays each nostril daily → Saline nasal irrigation TID → Symptoms improve by day 3 → Complete antibiotic course → Symptoms resolve by day 7
-
-citations:
-  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
-  - British Society of Otology Guidelines
-  - UpToDate - Otolaryngology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

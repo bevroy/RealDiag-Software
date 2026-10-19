@@ -1,41 +1,62 @@
 tree_id: SURG-SURGICAL-SITE-INFECTION
 name: Surgical Site Infection
+version: '1.0'
+status: draft
 family: surgery
 specialty: Surgery
-icd10:
-- T81.4XXA
-snomed:
-- 433202001
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Surgical Site Infection
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - T81.4XXA
+  snomed:
+    - '433202001'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Wound erythema and warmth
-- Purulent drainage
-- Pain and tenderness at incision
-- Fever
-- Postoperative day 3-7 typically
-- May require wound opening and drainage
+  - Wound erythema and warmth
+  - Purulent drainage
+  - Pain and tenderness at incision
+  - Fever
+  - Postoperative day 3-7 typically
+  - May require wound opening and drainage
+differentials:
+  - Cellulitis
+  - Abscess
+  - Seroma
+  - Hematoma
+  - Dehiscence
 workup: []
 treatment:
   - 'Superficial SSI: Open incision, drain purulence, pack wound, allow healing by secondary intention'
-  - 'Oral antibiotics if cellulitis extends >2cm from wound - cephalexin 500mg QID or clindamycin 450mg TID x7 days'
+  - Oral antibiotics if cellulitis extends >2cm from wound - cephalexin 500mg QID or clindamycin 450mg TID x7 days
   - 'MRSA risk: TMP-SMX DS BID + cephalexin OR clindamycin alone'
   - 'Deep/organ-space SSI: CT imaging, broad-spectrum IV antibiotics (piperacillin-tazobactam 4.5g Q6H)'
-  - 'Operative debridement if necrotizing fasciitis or deep abscess'
-  - 'Wound VAC (negative pressure therapy) for complex wounds'
-  - 'Daily dressing changes - wet-to-dry or saline-moistened gauze'
-  - 'Culture wound fluid - adjust antibiotics based on sensitivities'
-  - 'Monitor for systemic infection - fever, leukocytosis, sepsis'
+  - Operative debridement if necrotizing fasciitis or deep abscess
+  - Wound VAC (negative pressure therapy) for complex wounds
+  - Daily dressing changes - wet-to-dry or saline-moistened gauze
+  - Culture wound fluid - adjust antibiotics based on sensitivities
+  - Monitor for systemic infection - fever, leukocytosis, sepsis
   - 'Necrotizing fasciitis: Emergency surgical debridement + clindamycin 900mg IV Q8H + penicillin G 4 million units IV Q4H'
   - 'Prevention: Perioperative antibiotic prophylaxis, chlorhexidine skin prep, glucose control'
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -53,14 +74,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Cellulitis
-  - Abscess
-  - Seroma
-  - Hematoma
-  - Dehiscence
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

@@ -1,11 +1,33 @@
 tree_id: GI-NASH
 name: Nonalcoholic Steatohepatitis (NASH)
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K75.81
-snomed: 442685003
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K75.81
+  snomed:
+    - '442685003'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: AASLD Practice Guidance on NAFLD/NASH 2023, EASL Clinical Practice Guidelines on NAFLD
+    origin: trace.source
 presentations:
   - Often asymptomatic until advanced disease
   - Fatigue and right upper quadrant discomfort (nonspecific)
@@ -15,6 +37,16 @@ presentations:
   - Central obesity and insulin resistance
   - May present with complications of cirrhosis if advanced (ascites, variceal bleeding, encephalopathy)
   - Incidental finding on imaging showing fatty liver
+differentials:
+  - Simple hepatic steatosis (fat without inflammation - benign prognosis)
+  - Nonalcoholic steatohepatitis (NASH) - inflammatory, can progress to cirrhosis
+  - Alcoholic steatohepatitis (significant alcohol use, AST:ALT >2)
+  - Viral hepatitis (HBV, HCV)
+  - Autoimmune hepatitis (elevated IgG, positive autoantibodies)
+  - Medication-induced steatohepatitis (amiodarone, methotrexate, tamoxifen)
+  - Hemochromatosis (elevated iron studies)
+  - Wilson's disease (age <40, low ceruloplasmin)
+  - Alpha-1 antitrypsin deficiency (emphysema, low AAT level)
 workup:
   - Distinguish NASH from simple steatosis (requires inflammation and hepatocyte injury)
   - Liver enzymes: ALT, AST (ALT > AST, unlike alcoholic liver disease)
@@ -27,9 +59,9 @@ workup:
   - Imaging: ultrasound or MRI shows hepatic steatosis
   - Non-invasive fibrosis assessment crucial
   - FibroScan (transient elastography) - measures liver stiffness (kPa)
-  - "Less than 7 kPa: minimal fibrosis; 7-10 kPa: significant fibrosis; greater than 10 kPa: advanced fibrosis/cirrhosis"
+  - 'Less than 7 kPa: minimal fibrosis; 7-10 kPa: significant fibrosis; greater than 10 kPa: advanced fibrosis/cirrhosis'
   - Fibrosis-4 (FIB-4) score: age × AST / (platelets × √ALT)
-  - "Less than 1.3: low risk; 1.3-2.67: intermediate; greater than 2.67: high risk of advanced fibrosis"
+  - 'Less than 1.3: low risk; 1.3-2.67: intermediate; greater than 2.67: high risk of advanced fibrosis'
   - NAFLD Fibrosis Score (online calculator)
   - Liver biopsy - gold standard for diagnosis but not always required
   - Indicated if diagnostic uncertainty or to stage fibrosis
@@ -56,36 +88,35 @@ treatment:
   - Screen for hepatocellular carcinoma if cirrhosis (ultrasound + AFP every 6 months)
   - Esophageal varices screening if cirrhosis present
 clinical_pearls:
-  - "NASH is inflammatory subtype of NAFLD - can progress to cirrhosis and HCC"
-  - "20-30% of NAFLD patients have NASH; 20% of NASH patients develop cirrhosis"
-  - "NASH becoming leading indication for liver transplantation in US"
-  - "Weight loss of 7-10% can resolve NASH and improve fibrosis"
-  - "Fibrosis stage is strongest predictor of long-term outcomes and mortality"
-  - "NASH increases risk of cardiovascular disease - aggressively treat CV risk factors"
-  - "Liver biopsy not always needed - use non-invasive tests (FibroScan, FIB-4) for risk stratification"
-  - "No FDA-approved medications specifically for NASH yet, but several in clinical trials"
+  - NASH is inflammatory subtype of NAFLD - can progress to cirrhosis and HCC
+  - 20-30% of NAFLD patients have NASH; 20% of NASH patients develop cirrhosis
+  - NASH becoming leading indication for liver transplantation in US
+  - Weight loss of 7-10% can resolve NASH and improve fibrosis
+  - Fibrosis stage is strongest predictor of long-term outcomes and mortality
+  - NASH increases risk of cardiovascular disease - aggressively treat CV risk factors
+  - Liver biopsy not always needed - use non-invasive tests (FibroScan, FIB-4) for risk stratification
+  - No FDA-approved medications specifically for NASH yet, but several in clinical trials
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gastroenterology/Hepatology for NASH diagnosis, staging, and management
   - Refer if FIB-4 >2.67, FibroScan >10 kPa, or clinical suspicion of advanced fibrosis
   - Endocrinology for optimization of diabetes and metabolic syndrome
   - Bariatric surgery evaluation if BMI >35 and refractory to medical management
   - Liver transplant center if decompensated cirrhosis or hepatocellular carcinoma
-differentials:
-  - Simple hepatic steatosis (fat without inflammation - benign prognosis)
-  - Nonalcoholic steatohepatitis (NASH) - inflammatory, can progress to cirrhosis
-  - Alcoholic steatohepatitis (significant alcohol use, AST:ALT >2)
-  - Viral hepatitis (HBV, HCV)
-  - Autoimmune hepatitis (elevated IgG, positive autoantibodies)
-  - Medication-induced steatohepatitis (amiodarone, methotrexate, tamoxifen)
-  - Hemochromatosis (elevated iron studies)
-  - Wilson's disease (age <40, low ceruloplasmin)
-  - Alpha-1 antitrypsin deficiency (emphysema, low AAT level)
-trace:
-  source: AASLD Practice Guidance on NAFLD/NASH 2023, EASL Clinical Practice Guidelines on NAFLD
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

@@ -1,7 +1,39 @@
 tree_id: ONCO-COLORECTAL-CANCER
 name: Colorectal Cancer
+version: '1.0'
+status: draft
 family: oncology
-specialty: Oncology / Gastroenterology
+specialty: Oncology
+secondary_specialties:
+  - Gastroenterology
+urgency: urgent
+urgency_explanation: Requires prompt evaluation and staging; obstructing or perforated tumors are surgical emergencies
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C18.9
+    - C19
+    - C20
+  snomed:
+    - '363406005'
+    - '363351006'
+  icpc2: []
+sources:
+  - text: 'NCCN Guidelines: Colon Cancer'
+    origin: citations
+  - text: 'NCCN Guidelines: Rectal Cancer'
+    origin: citations
+  - text: 'ASCO Guidelines: Adjuvant Chemotherapy for Stage II Colon Cancer'
+    origin: citations
+  - text: 'UpToDate: Clinical presentation, diagnosis, and staging of colorectal cancer'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Change in bowel habits and anemia
   - Change in bowel habits with iron deficiency anemia
@@ -19,23 +51,14 @@ presentations:
   - Weakness and fatigue
   - Bowel obstruction (late presentation)
   - May be asymptomatic (screening detection)
-icd10:
-  - C18.9 # Malignant neoplasm of colon, unspecified
-  - C19 # Malignant neoplasm of rectosigmoid junction
-  - C20 # Malignant neoplasm of rectum
-snomed:
-  - "363406005" # Malignant tumor of colon
-  - "363351006" # Malignant tumor of rectum
-urgency: High
-urgency_explanation: Requires prompt evaluation and staging; obstructing or perforated tumors are surgical emergencies
-
-referrals:
-  gastroenterology: For colonoscopy and diagnosis
-  colorectal_surgery: For surgical resection
-  oncology: For chemotherapy planning
-  radiation_oncology: For rectal cancer (neoadjuvant or adjuvant)
-  genetics: If suspected Lynch syndrome or familial polyposis
-
+differentials:
+  - Inflammatory bowel disease (Crohn's, ulcerative colitis)
+  - Diverticular disease
+  - Hemorrhoids
+  - Anal fissure
+  - Infectious colitis
+  - Ischemic colitis
+  - Benign polyps
 workup:
   screening_and_diagnosis:
     - Colonoscopy with biopsy (gold standard)
@@ -54,7 +77,6 @@ workup:
     - KRAS, NRAS, BRAF mutations
     - HER2 amplification (in specific cases)
     - All stage II and above should have tumor profiling
-
 treatment:
   colon_cancer:
     stage_I:
@@ -68,8 +90,8 @@ treatment:
     stage_IV:
       - Resection of primary if symptomatic or risk of complications
       - Systemic chemotherapy:
-        - FOLFOX or FOLFIRI ± biologics (bevacizumab, cetuximab, panitumumab)
-        - Selection based on RAS/BRAF status
+          - FOLFOX or FOLFIRI ± biologics (bevacizumab, cetuximab, panitumumab)
+          - Selection based on RAS/BRAF status
       - Resection of metastases if oligometastatic and resectable
       - Immunotherapy (pembrolizumab, nivolumab) if MSI-high or dMMR
   rectal_cancer:
@@ -88,7 +110,6 @@ treatment:
     - Nutritional support
     - Pain management
     - Psychosocial support
-
 clinical_pearls:
   - Third most common cancer worldwide
   - 90% of cases occur in people >50 years old
@@ -98,16 +119,22 @@ clinical_pearls:
   - MSI-high tumors have excellent prognosis and respond to immunotherapy
   - Left-sided tumors generally have better prognosis than right-sided
   - Elevated CEA suggests metastatic disease but is not diagnostic
-
-differentials:
-  - Inflammatory bowel disease (Crohn's, ulcerative colitis)
-  - Diverticular disease
-  - Hemorrhoids
-  - Anal fissure
-  - Infectious colitis
-  - Ischemic colitis
-  - Benign polyps
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  gastroenterology: For colonoscopy and diagnosis
+  colorectal_surgery: For surgical resection
+  oncology: For chemotherapy planning
+  radiation_oncology: For rectal cancer (neoadjuvant or adjuvant)
+  genetics: If suspected Lynch syndrome or familial polyposis
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Patient presents with concerning symptoms or positive screening
   - Colonoscopy with biopsy confirms adenocarcinoma
@@ -116,10 +143,8 @@ trace:
   - Surgery for resectable disease
   - Adjuvant chemotherapy for stage III or high-risk stage II
   - Surveillance with CEA and colonoscopy
-
-citations:
-  - "NCCN Guidelines: Colon Cancer"
-  - "NCCN Guidelines: Rectal Cancer"
-  - "ASCO Guidelines: Adjuvant Chemotherapy for Stage II Colon Cancer"
-  - "UpToDate: Clinical presentation, diagnosis, and staging of colorectal cancer"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

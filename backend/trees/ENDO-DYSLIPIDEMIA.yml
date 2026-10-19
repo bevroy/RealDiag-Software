@@ -1,11 +1,33 @@
 tree_id: ENDO-DYSLIPIDEMIA
 name: Dyslipidemia (Metabolic)
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: E78.5
-snomed: 370992007
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E78.5
+  snomed:
+    - '370992007'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: ACC/AHA Guidelines on Cholesterol Management 2018, ADA Standards of Care 2024
+    origin: trace.source
 presentations:
   - Asymptomatic (found on screening lipid panel)
   - Elevated LDL cholesterol (>100 mg/dL)
@@ -15,6 +37,11 @@ presentations:
   - Xanthelasmata (yellowish plaques around eyelids)
   - Corneal arcus (white ring around cornea) in young patients suggests familial hypercholesterolemia
   - Risk factors: family history, obesity, diabetes, metabolic syndrome, sedentary lifestyle
+differentials:
+  - Primary dyslipidemia (polygenic, familial hypercholesterolemia, familial combined hyperlipidemia)
+  - Secondary dyslipidemia (diabetes, hypothyroidism, nephrotic syndrome, obesity)
+  - Metabolic syndrome (abdominal obesity, hypertension, hyperglycemia, low HDL, high triglycerides)
+  - Medication-induced (thiazides, beta-blockers, steroids, atypical antipsychotics, protease inhibitors)
 workup:
   - Fasting lipid panel (preferred) or non-fasting
   - Total cholesterol, LDL cholesterol, HDL cholesterol, triglycerides
@@ -23,7 +50,7 @@ workup:
   - Assess cardiovascular risk
   - 10-year ASCVD (atherosclerotic cardiovascular disease) risk calculator
   - Pooled Cohort Equations (age, sex, race, cholesterol, BP, diabetes, smoking)
-  - "Less than 5%: low risk; 5-7.5%: borderline; 7.5-20%: intermediate; greater than 20%: high risk"
+  - 'Less than 5%: low risk; 5-7.5%: borderline; 7.5-20%: intermediate; greater than 20%: high risk'
   - Rule out secondary causes
   - Fasting glucose or HbA1c (diabetes)
   - TSH (hypothyroidism)
@@ -62,29 +89,33 @@ treatment:
   - Check ALT at baseline and if symptoms (statin-induced hepatotoxicity rare)
   - Monitor for statin side effects (myalgias, rarely rhabdomyolysis)
 clinical_pearls:
-  - "LDL cholesterol most important target - directly causes atherosclerosis"
-  - "Statins reduce ASCVD events by 25-35% and are cornerstone of therapy"
-  - "High-intensity statin reduces LDL by ≥50% - use for secondary prevention"
-  - "Non-HDL cholesterol useful when triglycerides elevated (includes VLDL and remnants)"
-  - "Familial hypercholesterolemia: LDL >190, family history, tendon xanthomas - needs aggressive treatment"
-  - "Triglycerides ≥500 mg/dL increase pancreatitis risk - lower TG first priority"
-  - "HDL <40 mg/dL (men) or <50 (women) is cardiovascular risk factor"
-  - "Statin-associated muscle symptoms common (10-15%) but true rhabdomyolysis rare (<0.1%)"
+  - LDL cholesterol most important target - directly causes atherosclerosis
+  - Statins reduce ASCVD events by 25-35% and are cornerstone of therapy
+  - High-intensity statin reduces LDL by ≥50% - use for secondary prevention
+  - Non-HDL cholesterol useful when triglycerides elevated (includes VLDL and remnants)
+  - 'Familial hypercholesterolemia: LDL >190, family history, tendon xanthomas - needs aggressive treatment'
+  - Triglycerides ≥500 mg/dL increase pancreatitis risk - lower TG first priority
+  - HDL <40 mg/dL (men) or <50 (women) is cardiovascular risk factor
+  - Statin-associated muscle symptoms common (10-15%) but true rhabdomyolysis rare (<0.1%)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Cardiology if very high risk ASCVD or complex dyslipidemia
   - Lipid specialist or preventive cardiology if refractory hyperlipidemia or suspected familial hypercholesterolemia
   - Endocrinology if secondary causes (diabetes, thyroid disease)
-differentials:
-  - Primary dyslipidemia (polygenic, familial hypercholesterolemia, familial combined hyperlipidemia)
-  - Secondary dyslipidemia (diabetes, hypothyroidism, nephrotic syndrome, obesity)
-  - Metabolic syndrome (abdominal obesity, hypertension, hyperglycemia, low HDL, high triglycerides)
-  - Medication-induced (thiazides, beta-blockers, steroids, atypical antipsychotics, protease inhibitors)
-trace:
-  source: ACC/AHA Guidelines on Cholesterol Management 2018, ADA Standards of Care 2024
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

@@ -1,17 +1,37 @@
 tree_id: PEDS-GASTROENTERITIS
 name: Gastroenteritis (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Gastroenterology/Emergency Medicine
-icd10: A09
-snomed: 25374005
-urgency:
-  - Severe dehydration (greater than 9% fluid loss)
-  - Signs of shock (hypotension, altered mental status, poor perfusion)
-  - Bloody diarrhea with fever or severe abdominal pain
-  - Bilious vomiting (concern for obstruction or volvulus)
-  - Age less than 3 months with vomiting and diarrhea
-  - Altered mental status or seizures
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Gastroenterology
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A09
+  snomed:
+    - '25374005'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Clinical Practice Guideline for Acute Gastroenteritis
+    origin: citations
+  - text: CDC Guidelines for Managing Acute Gastroenteritis
+    origin: citations
+  - text: King CK et al. MMWR 2003 - Managing Acute Gastroenteritis Among Children
+    origin: citations
+  - text: UpToDate Pediatrics - Acute Viral Gastroenteritis in Children
+    origin: citations
+  - text: AAP Guidelines, CDC Recommendations, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Acute onset of diarrhea (loose or watery stools, increased frequency)
   - Vomiting (may precede diarrhea by 12-24 hours)
@@ -25,6 +45,17 @@ presentations:
   - Travel history (increased risk bacterial pathogens)
   - Blood or mucus in stool (suggests invasive bacterial infection)
   - Tenesmus (painful straining with bowel movements)
+differentials:
+  - Viral gastroenteritis (rotavirus, norovirus, adenovirus, astrovirus) - most common, watery diarrhea, vomiting
+  - Bacterial gastroenteritis (Salmonella, Shigella, Campylobacter, E. coli, Yersinia, C. difficile)
+  - Parasitic infection (Giardia, Cryptosporidium, Entamoeba histolytica)
+  - Food poisoning (Staphylococcus aureus, Bacillus cereus, Clostridium perfringens) - short incubation, often outbreak
+  - Appendicitis (right lower quadrant pain, fever, vomiting, anorexia, rebound tenderness)
+  - Intussusception (intermittent colicky pain, vomiting, currant jelly stools, age 6-36 months, ultrasound target sign)
+  - Malrotation with midgut volvulus (bilious vomiting, abdominal distension, surgical emergency)
+  - Inflammatory bowel disease (IBD) - Crohn's or ulcerative colitis (chronic bloody diarrhea, weight loss, growth delay)
+  - Hemolytic uremic syndrome (HUS) - triad of hemolytic anemia, thrombocytopenia, acute kidney injury (post E. coli O157:H7)
+  - Lactose intolerance (secondary to viral gastroenteritis, watery diarrhea, bloating, usually self-resolves)
 workup:
   - Clinical history
   - Onset and duration of symptoms
@@ -58,7 +89,7 @@ workup:
   - Bacterial: bloody diarrhea, high fever, severe abdominal pain, less vomiting, food exposure
   - Laboratory evaluation
   - NOT routinely needed for typical viral gastroenteritis
-  - Consider testing if:
+  - Consider testing if: null
   - Severe symptoms, high fever, bloody diarrhea
   - Immunocompromised patient
   - Recent travel or outbreak setting
@@ -110,7 +141,7 @@ treatment:
   - Antibiotic therapy - NOT routinely indicated for most cases
   - Viral gastroenteritis: supportive care only, antibiotics not helpful
   - Bacterial gastroenteritis: usually self-limited, antibiotics often NOT needed
-  - Consider antibiotics for:
+  - Consider antibiotics for: null
   - Shigella (especially if greater than 5 years or daycare attendee): azithromycin 12 mg/kg day 1, then 6 mg/kg days 2-5
   - Campylobacter if early course (within 3 days onset): azithromycin 10 mg/kg/day for 3 days
   - Salmonella: do NOT treat uncomplicated cases (prolongs carrier state)
@@ -139,37 +170,40 @@ treatment:
   - Admit if moderate-severe dehydration, failed oral rehydration trial, age less than 3 months, toxic appearance
   - Anticipatory guidance: continue ORS for ongoing losses, when to return (lethargy, no urine, blood in stool, worsening)
 clinical_pearls:
-  - 'Viral gastroenteritis most common cause (rotavirus, norovirus, adenovirus) - supportive care with rehydration only, no antibiotics needed'
-  - 'Bloody diarrhea suggests bacterial pathogen (Shigella, Campylobacter, Salmonella, E. coli O157:H7) - obtain stool culture'
-  - 'Do NOT give antibiotics for E. coli O157:H7 - increases risk of hemolytic uremic syndrome (HUS)'
-  - 'Oral rehydration therapy (ORT) equally effective as IV fluids for mild-moderate dehydration - first-line treatment'
-  - 'Resume normal diet immediately after rehydration - BRAT diet outdated and nutritionally inadequate'
-  - 'Ondansetron single dose improves oral rehydration success if vomiting - consider to facilitate ORT'
-  - 'Antidiarrheal agents (loperamide) contraindicated in children - risk complications including toxic megacolon'
-  - 'Rotavirus vaccination dramatically reduced hospitalizations for gastroenteritis - most important prevention measure'
+  - Viral gastroenteritis most common cause (rotavirus, norovirus, adenovirus) - supportive care with rehydration only, no antibiotics needed
+  - Bloody diarrhea suggests bacterial pathogen (Shigella, Campylobacter, Salmonella, E. coli O157:H7) - obtain stool culture
+  - Do NOT give antibiotics for E. coli O157:H7 - increases risk of hemolytic uremic syndrome (HUS)
+  - Oral rehydration therapy (ORT) equally effective as IV fluids for mild-moderate dehydration - first-line treatment
+  - Resume normal diet immediately after rehydration - BRAT diet outdated and nutritionally inadequate
+  - Ondansetron single dose improves oral rehydration success if vomiting - consider to facilitate ORT
+  - Antidiarrheal agents (loperamide) contraindicated in children - risk complications including toxic megacolon
+  - Rotavirus vaccination dramatically reduced hospitalizations for gastroenteritis - most important prevention measure
+red_flags:
+  - Severe dehydration (greater than 9% fluid loss)
+  - Signs of shock (hypotension, altered mental status, poor perfusion)
+  - Bloody diarrhea with fever or severe abdominal pain
+  - Bilious vomiting (concern for obstruction or volvulus)
+  - Age less than 3 months with vomiting and diarrhea
+  - Altered mental status or seizures
+disposition_guidance: {}
 referrals:
   - Pediatric gastroenterology if chronic diarrhea (greater than 14 days), blood in stool persisting, weight loss or failure to thrive
   - Pediatric nephrology if hemolytic uremic syndrome (HUS) develops (triad: hemolytic anemia, thrombocytopenia, acute kidney injury)
   - Pediatric infectious disease if immunocompromised host, unusual pathogen, or complicated course
   - Public health notification if concern for outbreak, food poisoning, or reportable pathogen
-differentials:
-  - Viral gastroenteritis (rotavirus, norovirus, adenovirus, astrovirus) - most common, watery diarrhea, vomiting
-  - Bacterial gastroenteritis (Salmonella, Shigella, Campylobacter, E. coli, Yersinia, C. difficile)
-  - Parasitic infection (Giardia, Cryptosporidium, Entamoeba histolytica)
-  - Food poisoning (Staphylococcus aureus, Bacillus cereus, Clostridium perfringens) - short incubation, often outbreak
-  - Appendicitis (right lower quadrant pain, fever, vomiting, anorexia, rebound tenderness)
-  - Intussusception (intermittent colicky pain, vomiting, currant jelly stools, age 6-36 months, ultrasound target sign)
-  - Malrotation with midgut volvulus (bilious vomiting, abdominal distension, surgical emergency)
-  - Inflammatory bowel disease (IBD) - Crohn's or ulcerative colitis (chronic bloody diarrhea, weight loss, growth delay)
-  - Hemolytic uremic syndrome (HUS) - triad of hemolytic anemia, thrombocytopenia, acute kidney injury (post E. coli O157:H7)
-  - Lactose intolerance (secondary to viral gastroenteritis, watery diarrhea, bloating, usually self-resolves)
-trace:
-  source: AAP Guidelines, CDC Recommendations, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Clinical Practice Guideline for Acute Gastroenteritis
-  - CDC Guidelines for Managing Acute Gastroenteritis
-  - King CK et al. MMWR 2003 - Managing Acute Gastroenteritis Among Children
-  - UpToDate Pediatrics - Acute Viral Gastroenteritis in Children
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

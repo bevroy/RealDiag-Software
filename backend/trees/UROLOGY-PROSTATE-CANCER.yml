@@ -1,14 +1,33 @@
 tree_id: UROLOGY-PROSTATE-CANCER
 name: Prostate Cancer
+version: '1.0'
+status: draft
 family: Urology
 specialty: Urology
-applies_to: male
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Elevated PSA or abnormal prostate exam
 description: |
   Most common non-cutaneous cancer in men, second leading cause of cancer death in men. Usually adenocarcinoma arising from peripheral zone.
   Often indolent and slow-growing, but subset aggressive. Age, race (African American), family history are major risk factors. Screening controversial.
-icd10: C61
-snomed: 399068003
+applies_to:
+  sex: male
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C61
+  snomed:
+    - '399068003'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
 presentations:
   - Often asymptomatic (PSA screening)
   - LUTS (similar to BPH)
@@ -16,25 +35,12 @@ presentations:
   - Bone pain (metastatic)
   - Elevated PSA
   - Hard nodule on DRE
-urgency: Moderate
-referrals:
-  emergency:
-    - GI bleeding with hemodynamic instability
-    - Acute liver failure
-    - Toxic megacolon
-    - Perforated viscus
-    - Acute cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting/diarrhea
-    - Abnormal imaging requiring intervention
-  routine:
-    - IBS management
-    - GERD unresponsive to treatment
-    - Abnormal liver enzymes
-    - Screening colonoscopy
-
+differentials:
+  - Benign prostatic hyperplasia
+  - Prostatitis
+  - Urinary tract infection
+  - Bladder cancer
+  - Other pelvic malignancy
 workup:
   - PSA screening controversial - discuss risks and benefits, shared decision-making
   - USPSTF recommends individualized decision for ages 55-69, against screening for 70+
@@ -73,16 +79,37 @@ clinical_pearls:
   - PSA recurrence (biochemical recurrence) after treatment - rising PSA without metastases on imaging, may recur years after treatment
   - Gleason 6 considered very low-grade, some argue should not be called cancer (virtually no metastatic potential)
   - African American men have 2x higher incidence and mortality
-differentials:
-  - Benign prostatic hyperplasia
-  - Prostatitis
-  - Urinary tract infection
-  - Bladder cancer
-  - Other pelvic malignancy
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 68-year-old man with PSA 8.5 ng/mL on routine screening, previous PSA 4.2 two years ago → DRE shows firm nodule right lobe → Multiparametric MRI shows 1.2 cm PI-RADS 4 lesion right peripheral zone → TRUS biopsy with MRI fusion - 4/12 cores positive, Gleason 7 (3+4) Grade Group 2 → Bone scan and CT pelvis negative for metastases → Diagnose intermediate-risk localized prostate cancer (T2aN0M0) → Counsel on treatment options → Patient opts for robotic radical prostatectomy → Nerve-sparing bilateral → Pathology shows pT2c disease, negative margins, Gleason 3+4, 30% tumor volume → PSA undetectable at 6 weeks → Regains urinary continence by 3 months, erectile function improving with PDE5 inhibitors → PSA remains undetectable at 2 years, excellent outcome
-
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Moderate' mapped to 'routine'

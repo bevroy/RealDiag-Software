@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import yaml
+from .tree_schema import entry_point, icd10_codes, tree_id as _tree_id, tree_name
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 def _lower_list(xs): return [str(x).lower() for x in xs or []]
 def _match(preds, facts):
@@ -55,16 +56,12 @@ class DecisionTreeEngine:
         if not self.trees_path.exists(): return trees
         for f in sorted(self.trees_path.glob("*.yml")):
             doc=yaml.safe_load(f.read_text()) or {}
-            # Support both old format (id) and new format (tree_id)
-            tree_id = doc.get("id") or doc.get("tree_id")
+            tree_id = _tree_id(doc)
             if tree_id:
-                # Normalize to old format for compatibility
-                if "tree_id" in doc:
-                    doc["id"] = doc["tree_id"]
-                if "name" in doc and "title" not in doc:
-                    doc["title"] = doc["name"]
-                if "entry_point" in doc and "entry" not in doc:
-                    doc["entry"] = doc["entry_point"]
+                # Internal aliases used by evaluate()/list() below
+                doc["id"] = tree_id
+                doc["title"] = tree_name(doc)
+                doc["entry"] = entry_point(doc)
                 # Convert nodes from dict to list if needed
                 if isinstance(doc.get("nodes"), dict):
                     nodes_dict = doc["nodes"]
@@ -77,9 +74,7 @@ class DecisionTreeEngine:
         if not t: return {"error": f"tree '{tree_id}' not found"}
 
         if not t.get("nodes"):
-            tree_icd10 = t.get("icd10", [])
-            if isinstance(tree_icd10, str):
-                tree_icd10 = [tree_icd10]
+            tree_icd10 = icd10_codes(t)
             return {
                 "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10},
                 "path": [],
@@ -124,10 +119,8 @@ class DecisionTreeEngine:
             cur=nxt
         
         # Get ICD-10 code from the tree metadata
-        tree_icd10 = t.get("icd10", [])
-        if isinstance(tree_icd10, str):
-            tree_icd10 = [tree_icd10]
-        
+        tree_icd10 = icd10_codes(t)
+
         return {
             "tree": {"id": t["id"], "title": t.get("title"), "icd10": tree_icd10}, 
             "path": path, 

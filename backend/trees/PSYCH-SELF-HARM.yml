@@ -1,11 +1,34 @@
 tree_id: PSYCH-SELF-HARM
 name: Self-Harm (Non-Suicidal Self-Injury)
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Emergency Medicine
-icd10: Z91.5
-snomed: 248062006
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z91.5
+  snomed:
+    - '248062006'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR, International Society for the Study of Self-Injury Guidelines, DBT Research by Marsha Linehan
+    origin: trace.source
 presentations:
   - Intentional self-inflicted damage to body tissue without suicidal intent
   - Common methods: cutting (most common 70-90%), burning, scratching, hitting, interfering with wound healing
@@ -17,6 +40,17 @@ presentations:
   - Most commonly affects arms, legs, abdomen
   - May report relief, calmness, or numbness after self-injury
   - Often expresses guilt or shame about behavior
+differentials:
+  - Non-suicidal self-injury (intent to relieve emotional distress, not die)
+  - Suicide attempt (intent to end life)
+  - Borderline personality disorder (chronic pattern of self-harm, identity disturbance, unstable relationships)
+  - Major depressive disorder (self-harm as symptom of depression)
+  - Post-traumatic stress disorder (self-harm related to trauma)
+  - Eating disorders (self-harm behavior comorbid with restrictive eating)
+  - Substance use disorders (self-harm during intoxication)
+  - Factitious disorder (self-injury for sick role)
+  - Psychosis (self-harm in response to command hallucinations)
+  - Developmental disorders (stereotypic self-injury in autism, intellectual disability)
 workup:
   - Comprehensive safety assessment (CRITICAL)
   - Distinguish non-suicidal self-injury from suicide attempt
@@ -88,36 +122,34 @@ treatment:
   - Improve communication
   - Avoid punishment or threats
 clinical_pearls:
-  - "NSSI affects 15-20% of adolescents and young adults, more common in females (3:1 ratio)"
-  - "Peak onset age 12-14 years, typically decreases in late 20s"
-  - "NSSI is NOT a suicide attempt, but increases suicide risk 3-4 times - always assess both"
-  - "Primary function: emotion regulation (90%) - temporary relief from intense negative emotions"
-  - "Cutting most common method (70-90%), usually on arms, legs, or abdomen"
-  - "DBT most effective treatment - reduces self-harm frequency by 50-70%"
-  - "90% have comorbid psychiatric disorder - borderline personality disorder, depression, anxiety most common"
-  - "Avoid 'no-harm contracts' - ineffective and may damage therapeutic relationship"
+  - NSSI affects 15-20% of adolescents and young adults, more common in females (3:1 ratio)
+  - Peak onset age 12-14 years, typically decreases in late 20s
+  - NSSI is NOT a suicide attempt, but increases suicide risk 3-4 times - always assess both
+  - 'Primary function: emotion regulation (90%) - temporary relief from intense negative emotions'
+  - Cutting most common method (70-90%), usually on arms, legs, or abdomen
+  - DBT most effective treatment - reduces self-harm frequency by 50-70%
+  - 90% have comorbid psychiatric disorder - borderline personality disorder, depression, anxiety most common
+  - Avoid 'no-harm contracts' - ineffective and may damage therapeutic relationship
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department if active suicidal ideation, severe injuries, or unable to ensure safety
   - Psychiatry for medication management and risk assessment
   - DBT-trained therapist (evidence-based treatment for NSSI)
   - Outpatient mental health for ongoing psychotherapy
-differentials:
-  - Non-suicidal self-injury (intent to relieve emotional distress, not die)
-  - Suicide attempt (intent to end life)
-  - Borderline personality disorder (chronic pattern of self-harm, identity disturbance, unstable relationships)
-  - Major depressive disorder (self-harm as symptom of depression)
-  - Post-traumatic stress disorder (self-harm related to trauma)
-  - Eating disorders (self-harm behavior comorbid with restrictive eating)
-  - Substance use disorders (self-harm during intoxication)
-  - Factitious disorder (self-injury for sick role)
-  - Psychosis (self-harm in response to command hallucinations)
-  - Developmental disorders (stereotypic self-injury in autism, intellectual disability)
-trace:
-  source: DSM-5-TR, International Society for the Study of Self-Injury Guidelines, DBT Research by Marsha Linehan
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

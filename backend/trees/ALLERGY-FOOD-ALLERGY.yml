@@ -1,14 +1,35 @@
 tree_id: ALLERGY-FOOD-ALLERGY
 name: Food Allergy (Encounter)
+version: '1.0'
+status: draft
 family: allergy
-specialty: Allergy and Immunology, Primary Care
+specialty: Allergy and Immunology
+secondary_specialties:
+  - Primary Care
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Suspected or documented food allergy
 description: |
   Food allergy is an immune-mediated adverse reaction to food proteins.
   Can range from mild (oral allergy syndrome) to severe (anaphylaxis).
   Most common food allergens are milk, egg, peanut, tree nuts, soy, wheat, fish, and shellfish.
-icd10: Z91.018
-snomed: "414285001"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z91.018
+  snomed:
+    - '414285001'
+  icpc2: []
+sources:
+  - text: NIAID Guidelines for Food Allergy
+    origin: citations
+  - text: American Academy of Allergy, Asthma and Immunology
+    origin: citations
+  - text: UpToDate - Allergy and Immunology
+    origin: citations
 presentations:
   - Immediate reactions (minutes to 2 hours after ingestion)
   - Urticaria (hives) and itching
@@ -18,16 +39,14 @@ presentations:
   - Anaphylaxis (severe, life-threatening systemic reaction)
   - Oral allergy syndrome (itching/tingling of lips, mouth, throat with raw fruits/vegetables)
   - Eosinophilic esophagitis (chronic, non-IgE mediated)
-urgency: High
-referrals:
-  emergency:
-    - Anaphylaxis or signs of airway compromise
-    - Severe reactions
-  allergy:
-    - Confirmed or suspected IgE-mediated food allergy
-    - Multiple food allergies
-    - Unclear triggers
-    - Need for oral food challenge
+differentials:
+  - IgE-mediated food allergy
+  - Food intolerance (lactose, fructose)
+  - Oral allergy syndrome
+  - Eosinophilic esophagitis
+  - Food protein-induced enterocolitis syndrome (FPIES)
+  - Celiac disease
+  - Irritable bowel syndrome
 workup:
   - Detailed food and symptom history - timing, reproducibility, foods consumed
   - Skin prick testing - identify specific food allergens
@@ -60,17 +79,29 @@ clinical_pearls:
   - Biphasic reactions can occur 4-12 hours after initial reaction
   - Food allergy testing (skin prick, IgE) has high false positive rate - clinical correlation essential
   - Negative testing does not completely rule out allergy if history suggestive
-differentials:
-  - IgE-mediated food allergy
-  - Food intolerance (lactose, fructose)
-  - Oral allergy syndrome
-  - Eosinophilic esophagitis
-  - Food protein-induced enterocolitis syndrome (FPIES)
-  - Celiac disease
-  - Irritable bowel syndrome
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Anaphylaxis or signs of airway compromise
+    - Severe reactions
+  allergy:
+    - Confirmed or suspected IgE-mediated food allergy
+    - Multiple food allergies
+    - Unclear triggers
+    - Need for oral food challenge
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 5-year-old develops urticaria, vomiting, and wheezing 30 minutes after eating peanut butter. Treated with epinephrine and antihistamines in ED, symptoms resolve. Follow-up skin prick testing confirms peanut allergy. Prescribe two EpiPens. Provide food allergy action plan. Educate family on strict peanut avoidance and label reading. Refer to allergist for ongoing management.
-citations:
-  - NIAID Guidelines for Food Allergy
-  - American Academy of Allergy, Asthma and Immunology
-  - UpToDate - Allergy and Immunology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

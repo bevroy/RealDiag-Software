@@ -1,11 +1,35 @@
 tree_id: URO-INCONTINENCE-STRESS
 name: Urinary Incontinence (Stress)
+version: '1.0'
+status: draft
 family: urology
-specialty: Urology/Gynecology/Primary Care
-icd10: N39.3
-snomed: 48340000
-urgency: []
-homeopathy: []
+specialty: Urology
+secondary_specialties:
+  - Gynecology
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N39.3
+  snomed:
+    - '48340000'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
+  - text: American Urological Association Guidelines on Stress Urinary Incontinence, International Continence Society Standards, UpToDate
+    origin: trace.source
 presentations:
   - Involuntary urine leakage with physical exertion or increased abdominal pressure
   - Leakage with coughing, sneezing, laughing
@@ -15,6 +39,15 @@ presentations:
   - Typically small volume leakage (drops to small amounts)
   - More common in women (female-to-male ratio 2:1)
   - Risk factors: childbirth, menopause, obesity, chronic cough, pelvic surgery, high-impact sports
+differentials:
+  - Stress urinary incontinence (leakage with exertion, no urgency, cough stress test positive)
+  - Urge urinary incontinence (overactive bladder - urgency precedes leakage, detrusor overactivity on urodynamics)
+  - Mixed incontinence (both stress and urge components)
+  - Overflow incontinence (urinary retention with dribbling, elevated PVR)
+  - Functional incontinence (mobility or cognitive impairment prevents timely toileting)
+  - Urinary tract infection (dysuria, frequency, urgency, pyuria)
+  - Urethral diverticulum (anterior vaginal mass, post-void dribbling)
+  - Vesicovaginal fistula (continuous leakage, history of pelvic surgery or radiation)
 workup:
   - Clinical history
   - Onset, duration, frequency, severity
@@ -39,8 +72,8 @@ workup:
   - Rule out glycosuria (uncontrolled diabetes causes polyuria)
   - Post-void residual (PVR) urine volume
   - Bladder scan or catheterization immediately after voiding
-  - "PVR less than 50 mL: normal (pure stress incontinence unlikely to have retention)"
-  - "PVR greater than 200 mL: significant retention (suggests overflow incontinence)"
+  - 'PVR less than 50 mL: normal (pure stress incontinence unlikely to have retention)'
+  - 'PVR greater than 200 mL: significant retention (suggests overflow incontinence)'
   - Additional testing if diagnosis unclear or considering surgery
   - Urodynamic testing (cystometry)
   - Measures bladder pressure during filling and voiding
@@ -91,33 +124,33 @@ treatment:
   - Implantable device, highly effective but complex
   - Complications: infection, mechanical failure, erosion
 clinical_pearls:
-  - "Stress incontinence most common type in women, accounts for 50% of female incontinence"
-  - "Pelvic floor muscle training (Kegels) is first-line treatment - 50-70% improvement with consistent practice"
-  - "Weight loss of 5-10% can reduce incontinence episodes by 50%"
-  - "Childbirth is major risk factor - vaginal delivery increases risk 2-3x over C-section"
-  - "Cough stress test has 90% sensitivity and specificity for stress incontinence"
-  - "Mid-urethral slings (TVT/TOT) are gold standard surgery - 80-90% cure rate"
-  - "Always rule out urinary tract infection before diagnosing incontinence"
-  - "Mixed incontinence (stress + urge) is common - treat most bothersome component first"
+  - Stress incontinence most common type in women, accounts for 50% of female incontinence
+  - Pelvic floor muscle training (Kegels) is first-line treatment - 50-70% improvement with consistent practice
+  - Weight loss of 5-10% can reduce incontinence episodes by 50%
+  - Childbirth is major risk factor - vaginal delivery increases risk 2-3x over C-section
+  - Cough stress test has 90% sensitivity and specificity for stress incontinence
+  - Mid-urethral slings (TVT/TOT) are gold standard surgery - 80-90% cure rate
+  - Always rule out urinary tract infection before diagnosing incontinence
+  - Mixed incontinence (stress + urge) is common - treat most bothersome component first
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Urogynecology or urology for failed conservative therapy or desire for surgery
   - Pelvic floor physical therapy for supervised Kegel training
   - Urology if hematuria, recurrent UTIs, or male patient with incontinence
-differentials:
-  - Stress urinary incontinence (leakage with exertion, no urgency, cough stress test positive)
-  - Urge urinary incontinence (overactive bladder - urgency precedes leakage, detrusor overactivity on urodynamics)
-  - Mixed incontinence (both stress and urge components)
-  - Overflow incontinence (urinary retention with dribbling, elevated PVR)
-  - Functional incontinence (mobility or cognitive impairment prevents timely toileting)
-  - Urinary tract infection (dysuria, frequency, urgency, pyuria)
-  - Urethral diverticulum (anterior vaginal mass, post-void dribbling)
-  - Vesicovaginal fistula (continuous leakage, history of pelvic surgery or radiation)
-trace:
-  source: American Urological Association Guidelines on Stress Urinary Incontinence, International Continence Society Standards, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

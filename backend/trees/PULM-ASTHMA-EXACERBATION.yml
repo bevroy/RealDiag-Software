@@ -1,11 +1,33 @@
 tree_id: PULM-ASTHMA-EXACERBATION
 name: Acute Asthma Exacerbation
+version: '1.0'
+status: draft
 family: pulmonology
 specialty: Pulmonology
-icd10: J45.901
-snomed: 195967001
-urgency: high
-homeopathy: []
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J45.901
+  snomed:
+    - '195967001'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: GINA Guidelines for Asthma Management 2023
+    origin: trace.source
 presentations:
   - Progressive worsening of dyspnea
   - Increased wheezing
@@ -21,6 +43,15 @@ presentations:
   - Prolonged expiratory phase
   - Decreased breath sounds or silent chest (life-threatening)
   - Triggers - viral URI, allergens, cold air, exercise, stress, medication noncompliance
+differentials:
+  - Acute asthma exacerbation
+  - COPD exacerbation (older, smoking history)
+  - Pneumonia (fever, infiltrate on CXR)
+  - Pulmonary embolism (sudden onset, risk factors)
+  - Heart failure (elevated JVP, peripheral edema, BNP)
+  - Upper airway obstruction (anaphylaxis, foreign body, vocal cord dysfunction)
+  - Pneumothorax (unilateral decreased breath sounds)
+  - Panic attack (normal peak flow, hyperventilation)
 workup:
   - Peak expiratory flow rate (PEFR) or FEV1 measurement
   - Severity classification based on PEFR or FEV1 (% predicted or personal best)
@@ -63,25 +94,25 @@ clinical_pearls:
   - Reassess peak flow 1 hour after initial treatment to guide disposition
   - Lactic acidosis common from beta-agonists (not infection)
   - Admit if PEFR <40% after initial treatment or poor social support
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pulmonology for recurrent exacerbations (≥2 per year), severe asthma, or poor control
   - ICU admission for life-threatening exacerbation or respiratory failure
   - Allergy/immunology for allergic triggers or consideration of biologic therapy
-differentials:
-  - Acute asthma exacerbation
-  - COPD exacerbation (older, smoking history)
-  - Pneumonia (fever, infiltrate on CXR)
-  - Pulmonary embolism (sudden onset, risk factors)
-  - Heart failure (elevated JVP, peripheral edema, BNP)
-  - Upper airway obstruction (anaphylaxis, foreign body, vocal cord dysfunction)
-  - Pneumothorax (unilateral decreased breath sounds)
-  - Panic attack (normal peak flow, hyperventilation)
-trace:
-  source: GINA Guidelines for Asthma Management 2023
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'high' mapped to 'urgent'

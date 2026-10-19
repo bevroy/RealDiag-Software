@@ -1,12 +1,33 @@
 tree_id: ALLERGY-DRUG-ALLERGY
 name: Drug Allergy Evaluation
+version: '1.0'
+status: draft
 family: Allergy and Immunology
-specialty: Allergy/Immunology, Internal Medicine, Emergency Medicine
+specialty: Allergy/Immunology
+secondary_specialties:
+  - Internal Medicine
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Rash After Medication, Drug Reaction
 description: Evaluation and management of suspected drug allergies
-version: "1.0"
-icd10: C91.00
-snomed: 91861009
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C91.00
+  snomed:
+    - '91861009'
+  icpc2: []
+sources:
+  - text: AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters
+    origin: citations
+  - text: EAACI (European Academy of Allergy and Clinical Immunology) Guidelines
+    origin: citations
+  - text: UpToDate - Allergy and Immunology
+    origin: citations
 presentations:
   - Cutaneous reactions: maculopapular rash, urticaria, angioedema (most common)
   - Systemic reactions: fever, lymphadenopathy, arthralgias
@@ -19,24 +40,22 @@ differentials:
   - Contact dermatitis
   - Urticaria from other cause
   - Serum sickness
-citations:
-  - AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters
-  - EAACI (European Academy of Allergy and Clinical Immunology) Guidelines
-  - UpToDate - Allergy and Immunology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'STOP suspected drug immediately'
+  - STOP suspected drug immediately
   - 'Mild reaction (rash): Antihistamines (cetirizine 10mg daily, hydroxyzine 25-50mg QID), topical corticosteroids'
   - 'Stevens-Johnson Syndrome/TEN: Immediate dermatology/burn unit admission, IVIG 2-3g/kg over 3-5 days, supportive care'
   - 'Anaphylaxis: Epinephrine 0.3-0.5mg IM (repeat Q5-15min PRN), IV fluids, H1/H2 blockers, corticosteroids'
-  - 'Document allergy clearly in medical record - drug name, reaction type, severity'
-  - 'Desensitization protocols available for essential drugs (penicillin, aspirin, chemotherapy)'
+  - Document allergy clearly in medical record - drug name, reaction type, severity
+  - Desensitization protocols available for essential drugs (penicillin, aspirin, chemotherapy)
   - 'Penicillin allergy: 90% can tolerate after formal testing (most are not true IgE-mediated)'
-
-entry_point: drug_allergy_evaluation
-
+clinical_pearls:
+  - True drug allergy is IgE-mediated; distinguish from side effects and intolerances
+  - Penicillin allergy is often over-reported; 90% lose sensitivity after 10 years
+  - Cross-reactivity between penicillin and cephalosporins is <2% despite structural similarity
+  - Document timing, symptoms, and severity of reaction for future reference
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -54,29 +73,27 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-
-clinical_pearls:
-  - True drug allergy is IgE-mediated; distinguish from side effects and intolerances
-  - Penicillin allergy is often over-reported; 90% lose sensitivity after 10 years
-  - Cross-reactivity between penicillin and cephalosporins is <2% despite structural similarity
-  - Document timing, symptoms, and severity of reaction for future reference
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: drug_allergy_evaluation
 nodes:
   - id: drug_allergy_evaluation
     type: question
-    text: "Type of reaction?"
+    text: Type of reaction?
     options:
-      - label: "Immediate hypersensitivity (IgE-mediated)"
+      - label: Immediate hypersensitivity (IgE-mediated)
         next: immediate_hypersensitivity
-      - label: "Delayed hypersensitivity (T-cell mediated)"
+      - label: Delayed hypersensitivity (T-cell mediated)
         next: delayed_hypersensitivity
-      - label: "Severe cutaneous adverse reactions (SCAR)"
+      - label: Severe cutaneous adverse reactions (SCAR)
         next: severe_reactions
-
   - id: immediate_hypersensitivity
     type: diagnosis
-    name: "Immediate Drug Hypersensitivity"
-    icd10: "T88.6XXA"
+    name: Immediate Drug Hypersensitivity
+    icd10: T88.6XXA
     urgency: high
     workup:
       - Immediate hypersensitivity - IgE-mediated (Type I), onset within minutes to 1 hour of drug exposure
@@ -124,11 +141,10 @@ nodes:
       - Allergy testing and delabeling - Most "penicillin allergies" NOT true allergy
       - Penicillin skin testing + oral challenge → 95% can safely use penicillin
       - Benefits - Access to first-line antibiotics, avoid broad-spectrum (C. diff risk)
-
   - id: delayed_hypersensitivity
     type: diagnosis
-    name: "Delayed Drug Hypersensitivity"
-    icd10: "L27.0"
+    name: Delayed Drug Hypersensitivity
+    icd10: L27.0
     urgency: medium
     workup:
       - Delayed hypersensitivity - T-cell mediated (Type IV), onset days to weeks after drug exposure
@@ -149,11 +165,10 @@ nodes:
       - OR stop drug (resolve 1-2 weeks)
       - Symptomatic - Antihistamines (cetirizine, loratadine), topical steroids (hydrocortisone)
       - Avoidance - Document allergy, avoid culprit drug
-
   - id: severe_reactions
     type: diagnosis
-    name: "Severe Cutaneous Adverse Reactions (SCAR)"
-    icd10: "L51.1"
+    name: Severe Cutaneous Adverse Reactions (SCAR)
+    icd10: L51.1
     urgency: critical
     workup:
       - SCAR - Life-threatening drug reactions (Stevens-Johnson syndrome, TEN, DRESS)
@@ -204,3 +219,10 @@ nodes:
       - DRESS - Mortality 5-10%, prolonged course, autoimmune sequelae (hypothyroidism, diabetes)
       - Prevention - Avoid culprit drug FOREVER (cross-reactivity with structurally similar drugs)
       - Genetic screening - Consider HLA-B*1502 before carbamazepine (Asians), HLA-B*5701 before abacavir
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

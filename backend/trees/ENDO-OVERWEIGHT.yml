@@ -1,11 +1,33 @@
 tree_id: ENDO-OVERWEIGHT
 name: Overweight
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: E66.3
-snomed: 238131007
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E66.3
+  snomed:
+    - '238131007'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: AHA/ACC/TOS Guidelines on Obesity Management 2022, AACE Guidelines on Obesity
+    origin: trace.source
 presentations:
   - BMI 25.0-29.9 kg/m² (overweight classification)
   - Weight gain over time
@@ -15,6 +37,13 @@ presentations:
   - Early metabolic changes: prediabetes, dyslipidemia, elevated blood pressure
   - Difficulty with physical activity or exercise tolerance
   - Psychosocial concerns (body image, self-esteem)
+differentials:
+  - Primary overweight (excess caloric intake, sedentary lifestyle)
+  - Hypothyroidism (weight gain, fatigue, cold intolerance)
+  - Medication-induced weight gain (steroids, antipsychotics, antidepressants, insulin)
+  - Cushing syndrome (central obesity, striae, moon facies, hypertension)
+  - Polycystic ovary syndrome (PCOS) - irregular menses, hirsutism
+  - Genetic syndromes (Prader-Willi, rare)
 workup:
   - Anthropometric measurements
   - Calculate BMI: weight (kg) / height (m)²
@@ -56,32 +85,34 @@ treatment:
   - May consider if BMI ≥27 with comorbidities and lifestyle failure
   - Bariatric surgery not indicated for overweight alone (requires BMI ≥35-40)
 clinical_pearls:
-  - "Overweight affects 31% of US adults - precursor to obesity"
-  - "5-10% weight loss significantly improves metabolic health"
-  - "Central adiposity (waist circumference) more predictive of metabolic risk than BMI alone"
-  - "Weight gain of 5-10% increases diabetes risk by 50-100%"
-  - "Preventing progression to obesity is more effective than treating established obesity"
-  - "Muscle mass increases metabolic rate - resistance training crucial"
-  - "Many medications cause weight gain - review and modify if possible"
-  - "BMI limitations: doesn't distinguish muscle from fat, may underestimate risk in Asian populations"
+  - Overweight affects 31% of US adults - precursor to obesity
+  - 5-10% weight loss significantly improves metabolic health
+  - Central adiposity (waist circumference) more predictive of metabolic risk than BMI alone
+  - Weight gain of 5-10% increases diabetes risk by 50-100%
+  - Preventing progression to obesity is more effective than treating established obesity
+  - Muscle mass increases metabolic rate - resistance training crucial
+  - Many medications cause weight gain - review and modify if possible
+  - 'BMI limitations: doesn''t distinguish muscle from fat, may underestimate risk in Asian populations'
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Registered dietitian for medical nutrition therapy
   - Endocrinology if secondary causes suspected (thyroid, Cushing syndrome)
   - Behavioral health if disordered eating patterns
   - Exercise physiologist or physical therapy for exercise prescription
-differentials:
-  - Primary overweight (excess caloric intake, sedentary lifestyle)
-  - Hypothyroidism (weight gain, fatigue, cold intolerance)
-  - Medication-induced weight gain (steroids, antipsychotics, antidepressants, insulin)
-  - Cushing syndrome (central obesity, striae, moon facies, hypertension)
-  - Polycystic ovary syndrome (PCOS) - irregular menses, hirsutism
-  - Genetic syndromes (Prader-Willi, rare)
-trace:
-  source: AHA/ACC/TOS Guidelines on Obesity Management 2022, AACE Guidelines on Obesity
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

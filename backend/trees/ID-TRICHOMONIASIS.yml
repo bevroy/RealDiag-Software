@@ -1,11 +1,33 @@
 tree_id: ID-TRICHOMONIASIS
 name: Trichomoniasis (Trichomonas vaginalis)
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Infectious Disease
-icd10: A59.9
-snomed: 79782009
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A59.9
+  snomed:
+    - '79782009'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: CDC Sexually Transmitted Infections Treatment Guidelines 2021
+    origin: trace.source
 presentations:
   - Copious frothy yellow-green vaginal discharge
   - Vulvovaginal irritation and pruritus
@@ -17,6 +39,13 @@ presentations:
   - Asymptomatic in 70% of men, 50% of women
   - Male partners may have urethritis or prostatitis
   - Post-coital spotting
+differentials:
+  - Bacterial vaginosis (thin gray discharge, pH >4.5, clue cells, less inflammation)
+  - Vulvovaginal candidiasis (thick white discharge, pH <4.5, severe pruritus)
+  - Gonorrhea or chlamydia cervicitis (mucopurulent discharge, test simultaneously)
+  - Aerobic vaginitis (purulent discharge, severe inflammation, parabasal cells)
+  - Atrophic vaginitis (postmenopausal, thin vaginal mucosa, pH >5.0)
+  - Foreign body (retained tampon) - foul odor, non-infectious
 workup:
   - NAAT (nucleic acid amplification test) - most sensitive (95% sensitivity)
   - Vaginal swab, endocervical swab, or urine (women)
@@ -40,34 +69,36 @@ treatment:
   - Treatment failure: Metronidazole 500 mg PO BID x 7 days or Tinidazole 2 g PO daily x 7 days
   - Persistent failure: Consider susceptibility testing and ID consultation
 clinical_pearls:
-  - "Most common non-viral STI worldwide (156 million new cases/year)"
-  - "Increases risk of HIV acquisition 2-3 fold and facilitates HIV transmission"
-  - "Associated with adverse pregnancy outcomes (preterm birth, low birth weight, PROM)"
-  - "Strawberry cervix (punctate hemorrhages) pathognomonic but only seen in 2% of cases"
-  - "Men are usually asymptomatic carriers but can transmit infection"
-  - "Routine screening not recommended except in high-risk populations (HIV+, incarcerated women)"
-  - "Metronidazole resistance rare (<5%) but increasing"
-  - "Trichomonas can persist in male urethra and prostate - treat partners even if asymptomatic"
-  - "Whiff test may be positive (fishy odor) but less specific than for bacterial vaginosis"
-  - "Copious discharge differentiates from bacterial vaginosis (thin discharge) and candidiasis (thick discharge)"
+  - Most common non-viral STI worldwide (156 million new cases/year)
+  - Increases risk of HIV acquisition 2-3 fold and facilitates HIV transmission
+  - Associated with adverse pregnancy outcomes (preterm birth, low birth weight, PROM)
+  - Strawberry cervix (punctate hemorrhages) pathognomonic but only seen in 2% of cases
+  - Men are usually asymptomatic carriers but can transmit infection
+  - Routine screening not recommended except in high-risk populations (HIV+, incarcerated women)
+  - Metronidazole resistance rare (<5%) but increasing
+  - Trichomonas can persist in male urethra and prostate - treat partners even if asymptomatic
+  - Whiff test may be positive (fishy odor) but less specific than for bacterial vaginosis
+  - Copious discharge differentiates from bacterial vaginosis (thin discharge) and candidiasis (thick discharge)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Infectious Disease for treatment failures or resistant infections
   - Gynecology for recurrent infections or complications
   - Public Health for partner notification (some jurisdictions)
   - HIV testing and counseling services if HIV-positive
-differentials:
-  - Bacterial vaginosis (thin gray discharge, pH >4.5, clue cells, less inflammation)
-  - Vulvovaginal candidiasis (thick white discharge, pH <4.5, severe pruritus)
-  - Gonorrhea or chlamydia cervicitis (mucopurulent discharge, test simultaneously)
-  - Aerobic vaginitis (purulent discharge, severe inflammation, parabasal cells)
-  - Atrophic vaginitis (postmenopausal, thin vaginal mucosa, pH >5.0)
-  - Foreign body (retained tampon) - foul odor, non-infectious
-trace:
-  source: CDC Sexually Transmitted Infections Treatment Guidelines 2021
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

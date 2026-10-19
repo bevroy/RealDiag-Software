@@ -1,56 +1,81 @@
 tree_id: DERM-TINEA
 name: Tinea Corporis (Ringworm)
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
-icd10:
-- B35.4
-- B35.9
-snomed:
-- '414941008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Tinea Corporis (Ringworm)
-version: '1.0'
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - B35.4
+    - B35.9
+  snomed:
+    - '414941008'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
+  - text: American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer Network (NCCN) for skin cancers
+    origin: trace.source
 presentations:
-- Annular erythematous patch
-- Central clearing
-- Scaly advancing border
-- Pruritic
-- KOH positive for hyphae
-workup:
-- KOH prep: Scrape scale, add KOH, look for hyphae (quick office test)
-- Fungal culture if KOH negative but high suspicion (takes 2-4 weeks)
-- Wood's lamp (no longer used - only works for rare Microsporum species)
-treatment:
-- 'Guideline-based treatment options for Tinea Corporis (Ringworm) include:'
-- 'Tinea corporis/cruris: Topical azole (clotrimazole, ketoconazole) BID for 2-4 weeks
-  (AAD 2023)'
-- 'Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective) (AAD 2023)'
-- 'Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks (AAD 2023)'
-- 'Tinea capitis: Oral griseofulvin 20-25mg/kg/day for 6-8 weeks (first-line in children)
-  (AAD 2023)'
-- 'Alternative for capitis: Oral terbinafine or fluconazole (AAD 2023)'
-clinical_pearls:
-- 'Dermatophyte infection: Trichophyton, Microsporum, Epidermophyton species'
-- 'Named by location: Corporis (body), cruris (groin), pedis (feet), capitis (scalp)'
-- Tinea capitis requires oral therapy (topicals don't penetrate hair follicles)
-- Steroid use can modify appearance ('tinea incognito') - looks atypical
-- 'Majocchi granuloma: Deep follicular infection, requires systemic therapy'
-referrals:
-- Dermatology if refractory, extensive, or tinea capitis with scarring
+  - Annular erythematous patch
+  - Central clearing
+  - Scaly advancing border
+  - Pruritic
+  - KOH positive for hyphae
 differentials:
   - Eczema
   - Psoriasis
   - Contact dermatitis
   - Candidiasis
   - Seborrheic dermatitis
-trace:
-  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
-    Cancer Network (NCCN) for skin cancers
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - KOH prep: Scrape scale, add KOH, look for hyphae (quick office test)
+  - Fungal culture if KOH negative but high suspicion (takes 2-4 weeks)
+  - Wood's lamp (no longer used - only works for rare Microsporum species)
+treatment:
+  - 'Guideline-based treatment options for Tinea Corporis (Ringworm) include:'
+  - 'Tinea corporis/cruris: Topical azole (clotrimazole, ketoconazole) BID for 2-4 weeks (AAD 2023)'
+  - 'Tinea pedis: Topical terbinafine 1% BID for 1-2 weeks (most effective) (AAD 2023)'
+  - 'Extensive/refractory: Oral terbinafine 250mg daily for 2-4 weeks (AAD 2023)'
+  - 'Tinea capitis: Oral griseofulvin 20-25mg/kg/day for 6-8 weeks (first-line in children) (AAD 2023)'
+  - 'Alternative for capitis: Oral terbinafine or fluconazole (AAD 2023)'
+clinical_pearls:
+  - 'Dermatophyte infection: Trichophyton, Microsporum, Epidermophyton species'
+  - 'Named by location: Corporis (body), cruris (groin), pedis (feet), capitis (scalp)'
+  - Tinea capitis requires oral therapy (topicals don't penetrate hair follicles)
+  - Steroid use can modify appearance ('tinea incognito') - looks atypical
+  - 'Majocchi granuloma: Deep follicular infection, requires systemic therapy'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Dermatology if refractory, extensive, or tinea capitis with scarring
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

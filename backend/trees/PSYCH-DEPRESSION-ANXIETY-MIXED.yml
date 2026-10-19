@@ -1,11 +1,34 @@
 tree_id: PSYCH-DEPRESSION-ANXIETY-MIXED
 name: Depression with Anxiety (Mixed)
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Primary Care
-icd10: F41.8
-snomed: 231504006
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F41.8
+  snomed:
+    - '231504006'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR Criteria, APA Practice Guidelines for Major Depressive Disorder, Cochrane Review on Combined Treatment
+    origin: trace.source
 presentations:
   - Symptoms of both depression and anxiety present simultaneously
   - Depressive symptoms: persistent sad mood, anhedonia, low energy, sleep disturbance, appetite changes, poor concentration, feelings of worthlessness
@@ -15,6 +38,18 @@ presentations:
   - Very common presentation (50-60% of depression includes significant anxiety; 60-70% of anxiety includes depression)
   - Often more severe and chronic than pure depression or anxiety
   - Higher suicide risk than pure depression or anxiety alone
+differentials:
+  - Mixed anxiety-depression (significant symptoms of both, neither clearly predominates)
+  - Major depressive disorder with anxious distress (depression predominates, anxiety is specifier)
+  - Generalized anxiety disorder with depressive symptoms (anxiety predominates)
+  - Bipolar disorder (screen for manic/hypomanic episodes)
+  - Adjustment disorder with mixed anxiety and depressed mood (identifiable stressor, <6 months)
+  - PTSD (trauma history, specific symptom clusters)
+  - Panic disorder with agoraphobia (panic attacks, avoidance)
+  - Social anxiety disorder (fear of social situations)
+  - OCD (obsessions and compulsions)
+  - Substance-induced mood disorder (alcohol, benzodiazepines, stimulants)
+  - Medical conditions (hyperthyroidism, hypothyroidism, anemia)
 workup:
   - Comprehensive psychiatric assessment
   - Assess depressive symptoms (PHQ-9)
@@ -82,36 +117,33 @@ treatment:
   - Limit caffeine and alcohol
   - Social support and engagement
 clinical_pearls:
-  - "Mixed anxiety-depression affects 25-35% of primary care patients with mood/anxiety disorders"
-  - "More chronic and severe than pure depression or anxiety - worse prognosis, higher relapse rates"
-  - "Suicide risk higher with mixed presentations - always assess carefully"
-  - "SSRIs effective for both depression and anxiety - single agent treats both symptom clusters"
-  - "CBT addresses both cognitive distortions (depression) and avoidance behaviors (anxiety) - ideal for mixed presentations"
-  - "Avoid benzodiazepines long-term - worsen depression, addiction risk, interfere with therapy"
-  - "Screen for bipolar disorder - agitated depression with anxiety can be misdiagnosed as mixed anxiety-depression"
-  - "Combination therapy (medication + psychotherapy) superior to monotherapy for mixed presentations"
+  - Mixed anxiety-depression affects 25-35% of primary care patients with mood/anxiety disorders
+  - More chronic and severe than pure depression or anxiety - worse prognosis, higher relapse rates
+  - Suicide risk higher with mixed presentations - always assess carefully
+  - SSRIs effective for both depression and anxiety - single agent treats both symptom clusters
+  - CBT addresses both cognitive distortions (depression) and avoidance behaviors (anxiety) - ideal for mixed presentations
+  - Avoid benzodiazepines long-term - worsen depression, addiction risk, interfere with therapy
+  - Screen for bipolar disorder - agitated depression with anxiety can be misdiagnosed as mixed anxiety-depression
+  - Combination therapy (medication + psychotherapy) superior to monotherapy for mixed presentations
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Mental health therapist for CBT or other evidence-based psychotherapy
   - Psychiatry if symptoms severe, not responding to treatment, or diagnostic uncertainty
   - Emergency evaluation if active suicidal ideation or intent
-differentials:
-  - Mixed anxiety-depression (significant symptoms of both, neither clearly predominates)
-  - Major depressive disorder with anxious distress (depression predominates, anxiety is specifier)
-  - Generalized anxiety disorder with depressive symptoms (anxiety predominates)
-  - Bipolar disorder (screen for manic/hypomanic episodes)
-  - Adjustment disorder with mixed anxiety and depressed mood (identifiable stressor, <6 months)
-  - PTSD (trauma history, specific symptom clusters)
-  - Panic disorder with agoraphobia (panic attacks, avoidance)
-  - Social anxiety disorder (fear of social situations)
-  - OCD (obsessions and compulsions)
-  - Substance-induced mood disorder (alcohol, benzodiazepines, stimulants)
-  - Medical conditions (hyperthyroidism, hypothyroidism, anemia)
-trace:
-  source: DSM-5-TR Criteria, APA Practice Guidelines for Major Depressive Disorder, Cochrane Review on Combined Treatment
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

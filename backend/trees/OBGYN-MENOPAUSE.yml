@@ -1,12 +1,31 @@
 tree_id: OBGYN-MENOPAUSE
 name: Menopause
+version: '1.0'
+status: draft
 family: Obstetrics and Gynecology
 specialty: Gynecology
-applies_to: female
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Hot flashes and irregular periods
 description: Permanent cessation of menstruation marking end of reproductive life, diagnosed after 12 consecutive months of amenorrhea. Hormone therapy effectively treats vasomotor symptoms, non-hormonal options available.
-icd10: N95.1
-snomed: 161712005
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N95.1
+  snomed:
+    - '161712005'
+  icpc2: []
+sources:
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: RCOG (Royal College of Obstetricians and Gynaecologists) Guidelines
+    origin: citations
+  - text: UpToDate - Obstetrics and Gynecology
+    origin: citations
 presentations:
   - Irregular menses, amenorrhea
   - Vasomotor symptoms (hot flashes, night sweats)
@@ -14,23 +33,11 @@ presentations:
   - Mood changes, irritability
   - Sleep disturbance
   - Osteoporosis risk
-urgency: non-urgent
-
-referrals:
-  emergency:
-    - Ectopic rupture
-    - Eclampsia
-    - Severe hemorrhage
-    - Ovarian torsion
-  urgent:
-    - Preeclampsia
-    - Ectopic pregnancy
-    - Pelvic mass
-  routine:
-    - Routine OB/GYN
-    - Contraception
-    - Screening
-
+differentials:
+  - Pregnancy: rule out with hCG if age below 50 and amenorrhea
+  - Primary ovarian insufficiency: menopause age below 40, elevated FSH, low estradiol
+  - Hypothyroidism: fatigue, weight gain, cold intolerance, irregular periods, elevated TSH
+  - Hyperprolactinemia: amenorrhea, galactorrhea, elevated prolactin, pituitary adenoma
 workup:
   - Clinical diagnosis: age above 45 with 12 months amenorrhea plus menopausal symptoms (vasomotor symptoms, vaginal dryness, sleep disturbance, mood changes)
   - No lab testing needed if typical presentation (age, symptoms, amenorrhea)
@@ -40,7 +47,6 @@ workup:
   - Average age menopause: 51 years (range 45-55)
   - Perimenopause: transition period with irregular cycles, fluctuating estrogen, symptoms begin (lasts 4-8 years before final period)
   - Premature menopause: age below 40 (primary ovarian insufficiency)
-
 treatment:
   - Menopausal hormone therapy (MHT): most effective for vasomotor symptoms (hot flashes, night sweats)
   - Estrogen-progestin combined: if intact uterus (progestin protects endometrium from unopposed estrogen)
@@ -55,7 +61,6 @@ treatment:
   - Vaginal moisturizers: non-hormonal (Replens, hyaluronic acid) if estrogen contraindicated
   - Bone health: calcium 1200 mg daily, vitamin D 800-1000 IU, weight-bearing exercise, DEXA at age 65 or earlier if risk factors
   - Lifestyle: dress in layers, cool environment, avoid triggers (spicy foods, alcohol, caffeine), regular exercise
-
 clinical_pearls:
   - 12 months amenorrhea in woman above 45 with symptoms diagnostic - no testing needed
   - Menopausal hormone therapy most effective for hot flashes - reduces by 75-90%
@@ -65,17 +70,34 @@ clinical_pearls:
   - Vaginal estrogen safe and effective for genitourinary symptoms
   - Screen for osteoporosis at age 65 or earlier if risk factors
   - Average age menopause 51 years
-
-differentials:
-  - Pregnancy: rule out with hCG if age below 50 and amenorrhea
-  - Primary ovarian insufficiency: menopause age below 40, elevated FSH, low estradiol
-  - Hypothyroidism: fatigue, weight gain, cold intolerance, irregular periods, elevated TSH
-  - Hyperprolactinemia: amenorrhea, galactorrhea, elevated prolactin, pituitary adenoma
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Ectopic rupture
+    - Eclampsia
+    - Severe hemorrhage
+    - Ovarian torsion
+  urgent:
+    - Preeclampsia
+    - Ectopic pregnancy
+    - Pelvic mass
+  routine:
+    - Routine OB/GYN
+    - Contraception
+    - Screening
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 52-year-old woman presented with 14 months amenorrhea and severe vasomotor symptoms consisting of 15-20 hot flashes per day and 4-5 night sweats nightly causing sleep disruption and daytime fatigue. Vaginal dryness causing dyspareunia. No personal or family history of breast cancer, no VTE history. Last menstrual period 14 months ago. Diagnosed with menopause. Discussed risks and benefits of menopausal hormone therapy. Patient desired treatment given severity of symptoms. Started estradiol patch 0.05 mg twice weekly plus micronized progesterone 100 mg nightly (if intact uterus protects endometrium). At 2 weeks hot flashes reduced to 5-6 per day, night sweats 1-2 per night, sleep improved significantly. At 6 weeks hot flashes rare (1-2 per day), night sweats resolved, vaginal symptoms improved. At 3 months excellent symptom control, quality of life dramatically improved. Counseled on annual reassessment, plan to use lowest effective dose for 3-5 years then reassess need. Started calcium 1200 mg daily and vitamin D 1000 IU for bone health. At 12 months continues hormone therapy with excellent control, scheduled for DEXA scan at age 65.
-
-citations:
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - RCOG (Royal College of Obstetricians and Gynaecologists) Guidelines
-  - UpToDate - Obstetrics and Gynecology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'non-urgent' mapped to 'routine'

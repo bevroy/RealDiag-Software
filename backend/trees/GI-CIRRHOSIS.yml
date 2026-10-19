@@ -1,69 +1,88 @@
 tree_id: GI-CIRRHOSIS
 name: Liver Cirrhosis
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10:
-- K74.60
-- K70.30
-- K74.69
-snomed:
-- '19943007'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Liver Cirrhosis
-version: '1.0'
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K74.60
+    - K70.30
+    - K74.69
+  snomed:
+    - '19943007'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological Association (AGA) Guidelines
+    origin: trace.source
 presentations:
-- Jaundice
-- Ascites
-- Spider angiomas
-- Palmar erythema
-- Hepatic encephalopathy
-- Easy bruising
-workup:
-- Liver ultrasound (nodular liver, splenomegaly, ascites, portal vein patency)
-- Liver function tests (albumin, bilirubin, PT/INR, transaminases)
-- Hepatitis serologies (HBsAg, anti-HCV), iron studies (ferritin, TIBC), ANA/ASMA
-  (autoimmune)
-- EGD (screen for varices)
-- Ultrasound + AFP every 6 months (HCC screening)
-treatment:
-- 'Guideline-based treatment options for Liver Cirrhosis include:'
-- 'Treat underlying cause: Alcohol cessation, antiviral therapy (HBV with tenofovir,
-  HCV with DAAs) (ACG 2023)'
-- 'Ascites: Sodium restriction (<2g/day), spironolactone 100mg + furosemide 40mg (2:1
-  ratio) (ACG 2023)'
-- 'Hepatic encephalopathy: Lactulose 30mL TID (goal 2-3 soft stools/day) + rifaximin
-  550mg BID (ACG 2023)'
-- 'Variceal prophylaxis: Propranolol 20mg BID (titrate to HR 55-60) or nadolol, or
-  EGD banding (ACG 2023)'
-- Liver transplant evaluation if decompensated (ascites, variceal bleed, encephalopathy)
-  or MELD >15 (ACG 2023)
-clinical_pearls:
-- End-stage liver disease with fibrosis and regenerative nodules
-- 'Causes: Alcohol (most common US), hepatitis C, NAFLD, hepatitis B, autoimmune,
-  hemochromatosis'
-- Child-Pugh score (A, B, C) and MELD score predict mortality
-- 'Screen for HCC: Ultrasound + AFP every 6 months (cirrhosis increases HCC risk 100-fold)'
-- 'Variceal screening: EGD at diagnosis, if large varices start propranolol prophylaxis'
-- 'Hepatorenal syndrome: Renal failure in cirrhosis (high mortality without transplant)'
-referrals:
-- Gastroenterology/hepatology for all cirrhosis patients
-- Transplant hepatology if decompensated (ascites, variceal bleed, encephalopathy)
-  or MELD >15
-- Addiction medicine for alcohol use disorder
+  - Jaundice
+  - Ascites
+  - Spider angiomas
+  - Palmar erythema
+  - Hepatic encephalopathy
+  - Easy bruising
 differentials:
   - NAFLD
   - Alcoholic liver disease
   - Chronic hepatitis
   - Primary biliary cholangitis
   - Hemochromatosis
-trace:
-  source: American College of Gastroenterology (ACG) Guidelines, American Gastroenterological
-    Association (AGA) Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Liver ultrasound (nodular liver, splenomegaly, ascites, portal vein patency)
+  - Liver function tests (albumin, bilirubin, PT/INR, transaminases)
+  - Hepatitis serologies (HBsAg, anti-HCV), iron studies (ferritin, TIBC), ANA/ASMA (autoimmune)
+  - EGD (screen for varices)
+  - Ultrasound + AFP every 6 months (HCC screening)
+treatment:
+  - 'Guideline-based treatment options for Liver Cirrhosis include:'
+  - 'Treat underlying cause: Alcohol cessation, antiviral therapy (HBV with tenofovir, HCV with DAAs) (ACG 2023)'
+  - 'Ascites: Sodium restriction (<2g/day), spironolactone 100mg + furosemide 40mg (2:1 ratio) (ACG 2023)'
+  - 'Hepatic encephalopathy: Lactulose 30mL TID (goal 2-3 soft stools/day) + rifaximin 550mg BID (ACG 2023)'
+  - 'Variceal prophylaxis: Propranolol 20mg BID (titrate to HR 55-60) or nadolol, or EGD banding (ACG 2023)'
+  - Liver transplant evaluation if decompensated (ascites, variceal bleed, encephalopathy) or MELD >15 (ACG 2023)
+clinical_pearls:
+  - End-stage liver disease with fibrosis and regenerative nodules
+  - 'Causes: Alcohol (most common US), hepatitis C, NAFLD, hepatitis B, autoimmune, hemochromatosis'
+  - Child-Pugh score (A, B, C) and MELD score predict mortality
+  - 'Screen for HCC: Ultrasound + AFP every 6 months (cirrhosis increases HCC risk 100-fold)'
+  - 'Variceal screening: EGD at diagnosis, if large varices start propranolol prophylaxis'
+  - 'Hepatorenal syndrome: Renal failure in cirrhosis (high mortality without transplant)'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Gastroenterology/hepatology for all cirrhosis patients
+  - Transplant hepatology if decompensated (ascites, variceal bleed, encephalopathy) or MELD >15
+  - Addiction medicine for alcohol use disorder
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

@@ -1,39 +1,50 @@
 tree_id: ID-C-DIFF
 name: Clostridioides difficile Infection
+version: '1.0'
+status: draft
 family: Infectious Disease
 specialty: Infectious Disease
-icd10:
-- A04.7
-- A04.72
-snomed:
-- '186431008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Clostridioides difficile Infection
-version: '1.0'
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A04.7
+    - A04.72
+  snomed:
+    - '186431008'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease Control and Prevention (CDC)
+    origin: trace.source
 presentations:
-- Watery diarrhea (≥3 unformed stools in 24 hours)
-- Abdominal cramping and tenderness
-- Fever, leukocytosis (WBC >15,000)
-- 'Recent antibiotic use (within 3 months): Clindamycin, fluoroquinolones, cephalosporins'
-- 'Severe: WBC >15K, Cr >1.5x baseline, or complicated (hypotension, ileus, megacolon)'
-- 'Fulminant: Hypotension, shock, ileus, or megacolon'
-- 'Stool test: Nucleic acid amplification test (NAAT) or toxin EIA'
+  - Watery diarrhea (≥3 unformed stools in 24 hours)
+  - Abdominal cramping and tenderness
+  - Fever, leukocytosis (WBC >15,000)
+  - 'Recent antibiotic use (within 3 months): Clindamycin, fluoroquinolones, cephalosporins'
+  - 'Severe: WBC >15K, Cr >1.5x baseline, or complicated (hypotension, ileus, megacolon)'
+  - 'Fulminant: Hypotension, shock, ileus, or megacolon'
+  - 'Stool test: Nucleic acid amplification test (NAAT) or toxin EIA'
+differentials:
+  - Gastroenteritis from other cause
+  - IBD
+  - Ischemic colitis
+  - Medication effect
 workup: []
-treatment: []
-clinical_pearls:
-- 'Initial episode: Vancomycin 125mg PO QID or fidaxomicin 200mg PO BID x 10 days'
-- 'First recurrence: Same regimen. Second recurrence: Fidaxomicin or vancomycin taper'
-- 'Severe/fulminant: Vancomycin 500mg PO QID + metronidazole 500mg IV q8h'
-- 'If ileus: Consider vancomycin retention enema, surgical evaluation if no improvement'
-- Stop inciting antibiotics if possible. Fecal microbiota transplant for recurrent
 treatment:
-  - 'STOP inciting antibiotic if possible (most important step)'
+  - STOP inciting antibiotic if possible (most important step)
   - 'Initial episode non-severe: Fidaxomicin 200mg PO BID x10 days (preferred - lower recurrence) OR vancomycin 125mg PO QID x10 days'
   - Metronidazole 500mg PO TID x10 days only if fidaxomicin/vancomycin unavailable (inferior efficacy)
   - 'Severe C. diff (WBC >15K, Cr ≥1.5x baseline, albumin <3): Vancomycin 125mg PO QID x10 days OR fidaxomicin 200mg BID x10 days'
@@ -49,6 +60,14 @@ treatment:
   - Avoid antidiarrheals (loperamide, diphenoxylate) - can precipitate toxic megacolon
   - Infection control - contact precautions, hand washing with soap and water (alcohol gel not effective against spores), environmental cleaning with bleach
   - Probiotics NOT recommended during active infection (no proven benefit)
+clinical_pearls:
+  - 'Initial episode: Vancomycin 125mg PO QID or fidaxomicin 200mg PO BID x 10 days'
+  - 'First recurrence: Same regimen. Second recurrence: Fidaxomicin or vancomycin taper'
+  - 'Severe/fulminant: Vancomycin 500mg PO QID + metronidazole 500mg IV q8h'
+  - 'If ileus: Consider vancomycin retention enema, surgical evaluation if no improvement'
+  - Stop inciting antibiotics if possible. Fecal microbiota transplant for recurrent
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Sepsis
@@ -62,13 +81,20 @@ referrals:
     - HIV management
     - Hepatitis care
     - Travel medicine
-differentials:
-  - Gastroenteritis from other cause
-  - IBD
-  - Ischemic colitis
-  - Medication effect
-trace:
-  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
-    Control and Prevention (CDC)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: 'urgency ''medium'' mapped to ''routine''; duplicate treatment key: empty section removed, populated section kept'

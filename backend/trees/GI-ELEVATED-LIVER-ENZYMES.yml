@@ -1,11 +1,33 @@
 tree_id: GI-ELEVATED-LIVER-ENZYMES
 name: Elevated Liver Enzymes (Transaminitis)
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: R74.0
-snomed: 166603001
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R74.0
+  snomed:
+    - '166603001'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: AASLD Practice Guidelines on Evaluation of Abnormal Liver Chemistries 2017
+    origin: trace.source
 presentations:
   - Asymptomatic elevation found on routine labs
   - Mild elevation (ALT/AST <5x upper limit of normal)
@@ -14,6 +36,18 @@ presentations:
   - May have associated symptoms: fatigue, right upper quadrant discomfort, jaundice
   - Known risk factors: alcohol use, obesity, diabetes, medications
   - Pattern: hepatocellular (elevated transaminases) vs cholestatic (elevated Alk Phos, bilirubin)
+differentials:
+  - Non-alcoholic fatty liver disease (NAFLD/NASH) - most common cause in US
+  - Alcoholic liver disease (AST:ALT >2, history of heavy alcohol use)
+  - Viral hepatitis (B, C, A, E, CMV, EBV)
+  - Medication/drug-induced liver injury (acetaminophen, statins, antibiotics, herbal supplements)
+  - Autoimmune hepatitis (positive ANA, ASMA, elevated IgG)
+  - Hemochromatosis (elevated ferritin and transferrin saturation)
+  - Wilson's disease (young patients, neurologic symptoms, low ceruloplasmin)
+  - Alpha-1 antitrypsin deficiency (emphysema, liver disease, low AAT level)
+  - Celiac disease (can cause mild transaminase elevation)
+  - Thyroid disease (hypothyroidism can cause mild elevation)
+  - Muscle disorders (elevated AST from rhabdomyolysis, check CK)
 workup:
   - Repeat testing to confirm persistent elevation
   - Comprehensive metabolic panel including total and direct bilirubin
@@ -47,37 +81,34 @@ treatment:
   - Vaccinate for hepatitis A and B if not immune
   - Monitor for progression of liver disease
 clinical_pearls:
-  - "Mild transaminase elevation (<5x ULN) usually chronic liver disease; severe (>10x) suggests acute injury"
-  - "AST:ALT ratio >2 highly suggestive of alcoholic liver disease"
-  - "ALT more specific for liver than AST (AST also in muscle, heart, kidney)"
-  - "Most common causes: NAFLD (most common in developed countries), alcohol, viral hepatitis, medications"
-  - "Isolated alkaline phosphatase elevation often non-hepatic (bone, pregnancy, malignancy)"
-  - "Normal PT/INR and albumin reassuring - indicates preserved synthetic function"
-  - "Hepatitis C now curable with 8-12 week direct-acting antiviral regimens"
-  - "NAFLD affects 25% of US population - spectrum from simple steatosis to NASH to cirrhosis"
-  - "Always ask about herbal supplements - many hepatotoxic (green tea extract, kava, kratom)"
+  - Mild transaminase elevation (<5x ULN) usually chronic liver disease; severe (>10x) suggests acute injury
+  - AST:ALT ratio >2 highly suggestive of alcoholic liver disease
+  - ALT more specific for liver than AST (AST also in muscle, heart, kidney)
+  - 'Most common causes: NAFLD (most common in developed countries), alcohol, viral hepatitis, medications'
+  - Isolated alkaline phosphatase elevation often non-hepatic (bone, pregnancy, malignancy)
+  - Normal PT/INR and albumin reassuring - indicates preserved synthetic function
+  - Hepatitis C now curable with 8-12 week direct-acting antiviral regimens
+  - NAFLD affects 25% of US population - spectrum from simple steatosis to NASH to cirrhosis
+  - Always ask about herbal supplements - many hepatotoxic (green tea extract, kava, kratom)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gastroenterology/Hepatology for persistent elevation, unclear etiology, or advanced liver disease
   - Consider GI referral if transaminases >3x ULN persisting >6 months
   - Liver transplant evaluation if cirrhosis with decompensation (MELD >15)
-differentials:
-  - Non-alcoholic fatty liver disease (NAFLD/NASH) - most common cause in US
-  - Alcoholic liver disease (AST:ALT >2, history of heavy alcohol use)
-  - Viral hepatitis (B, C, A, E, CMV, EBV)
-  - Medication/drug-induced liver injury (acetaminophen, statins, antibiotics, herbal supplements)
-  - Autoimmune hepatitis (positive ANA, ASMA, elevated IgG)
-  - Hemochromatosis (elevated ferritin and transferrin saturation)
-  - Wilson's disease (young patients, neurologic symptoms, low ceruloplasmin)
-  - Alpha-1 antitrypsin deficiency (emphysema, liver disease, low AAT level)
-  - Celiac disease (can cause mild transaminase elevation)
-  - Thyroid disease (hypothyroidism can cause mild elevation)
-  - Muscle disorders (elevated AST from rhabdomyolysis, check CK)
-trace:
-  source: AASLD Practice Guidelines on Evaluation of Abnormal Liver Chemistries 2017
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

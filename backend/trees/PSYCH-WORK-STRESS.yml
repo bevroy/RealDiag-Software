@@ -1,11 +1,34 @@
 tree_id: PSYCH-WORK-STRESS
 name: Work-Related Stress
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Occupational Medicine
-icd10: Z56.6
-snomed: 38003003
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Occupational Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z56.6
+  snomed:
+    - '38003003'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: National Institute for Occupational Safety and Health (NIOSH) Stress Guidelines, WHO Healthy Workplace Framework, American Psychological Association Work Stress Resources
+    origin: trace.source
 presentations:
   - Physical, emotional, or mental strain related to work environment or demands
   - Feeling overwhelmed by job responsibilities
@@ -17,6 +40,15 @@ presentations:
   - Reduced job satisfaction and motivation
   - Increased absenteeism or presenteeism (at work but unproductive)
   - Common stressors: excessive workload, time pressure, lack of control, job insecurity, interpersonal conflicts, poor work-life balance
+differentials:
+  - Work-related stress (job-related stressors, symptoms improve when away from work)
+  - Adjustment disorder with anxiety or depressed mood (if work stressor is primary, symptoms within 3 months)
+  - Generalized anxiety disorder (chronic worry not limited to work)
+  - Major depressive disorder (persistent symptoms not limited to work context)
+  - Burnout (emotional exhaustion, depersonalization, reduced accomplishment)
+  - PTSD (if traumatic workplace event occurred)
+  - Medical conditions (thyroid disorder, anemia, sleep apnea)
+  - Substance use (alcohol or drugs to cope with stress)
 workup:
   - Comprehensive occupational history
   - Job description and responsibilities
@@ -93,35 +125,35 @@ treatment:
   - Not indicated for work stress alone without psychiatric disorder
   - Consider job change if chronic severe stress and other interventions fail
 clinical_pearls:
-  - "Work-related stress affects 40-50% of workers at some point - leading cause of occupational health problems"
-  - "Chronic work stress increases risk of cardiovascular disease, diabetes, depression, and anxiety"
-  - "Job strain model: high demands + low control = highest stress and health risks"
-  - "Burnout distinct from stress - characterized by exhaustion, cynicism, and reduced efficacy"
-  - "Early intervention prevents progression to depression, anxiety disorders, or burnout"
-  - "Individual coping strategies AND organizational changes often needed for sustained improvement"
-  - "Employee Assistance Programs (EAPs) underutilized but highly effective - free, confidential"
-  - "Work-life balance protective factor - regular breaks, vacation use associated with better outcomes"
+  - Work-related stress affects 40-50% of workers at some point - leading cause of occupational health problems
+  - Chronic work stress increases risk of cardiovascular disease, diabetes, depression, and anxiety
+  - 'Job strain model: high demands + low control = highest stress and health risks'
+  - Burnout distinct from stress - characterized by exhaustion, cynicism, and reduced efficacy
+  - Early intervention prevents progression to depression, anxiety disorders, or burnout
+  - Individual coping strategies AND organizational changes often needed for sustained improvement
+  - Employee Assistance Programs (EAPs) underutilized but highly effective - free, confidential
+  - Work-life balance protective factor - regular breaks, vacation use associated with better outcomes
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Mental health therapist for CBT or stress management counseling
   - Employee Assistance Program (EAP) for workplace counseling
   - Psychiatry if major depression or anxiety disorder develops
   - Occupational medicine if physical health concerns
   - Human resources for workplace accommodations or conflict resolution
-differentials:
-  - Work-related stress (job-related stressors, symptoms improve when away from work)
-  - Adjustment disorder with anxiety or depressed mood (if work stressor is primary, symptoms within 3 months)
-  - Generalized anxiety disorder (chronic worry not limited to work)
-  - Major depressive disorder (persistent symptoms not limited to work context)
-  - Burnout (emotional exhaustion, depersonalization, reduced accomplishment)
-  - PTSD (if traumatic workplace event occurred)
-  - Medical conditions (thyroid disorder, anemia, sleep apnea)
-  - Substance use (alcohol or drugs to cope with stress)
-trace:
-  source: National Institute for Occupational Safety and Health (NIOSH) Stress Guidelines, WHO Healthy Workplace Framework, American Psychological Association Work Stress Resources
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

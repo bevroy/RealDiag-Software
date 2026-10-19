@@ -1,43 +1,63 @@
 tree_id: SURG-POSTOP-ILEUS
 name: Postoperative Ileus
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K56.7
-snomed:
-- 44186003
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Postoperative Ileus
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K56.7
+  snomed:
+    - '44186003'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Abdominal distension after surgery
-- Nausea and vomiting
-- Absent or hypoactive bowel sounds
-- No passage of stool or flatus
-- Typically resolves with conservative management
-- Prolonged ileus > 5 days concerning
+  - Abdominal distension after surgery
+  - Nausea and vomiting
+  - Absent or hypoactive bowel sounds
+  - No passage of stool or flatus
+  - Typically resolves with conservative management
+  - Prolonged ileus > 5 days concerning
+differentials:
+  - Bowel obstruction
+  - Anastomotic leak
+  - Infection
+  - Medication effect
 workup: []
 treatment:
-  - 'Supportive care - usually resolves spontaneously in 3-5 days'
-  - 'NPO until return of bowel function (flatus, bowel movement)'
-  - 'IV fluids to maintain hydration and electrolytes'
-  - 'Nasogastric tube if severe nausea/vomiting or gastric distension'
-  - 'Minimize opioids - switch to non-opioid pain control (acetaminophen, NSAIDs, gabapentin)'
-  - 'Early ambulation - walk QID'
-  - 'Chewing gum QID for 30 minutes - stimulates GI motility'
-  - 'Avoid unnecessary lab tests and CT scans unless fever or peritoneal signs'
-  - 'Alvimopan (Entereg) 12mg BID if available - peripherally acting mu-opioid antagonist, reduces ileus duration'
-  - 'Discontinue anticholinergics, avoid calcium channel blockers'
-  - 'NG decompression if severe distension'
+  - Supportive care - usually resolves spontaneously in 3-5 days
+  - NPO until return of bowel function (flatus, bowel movement)
+  - IV fluids to maintain hydration and electrolytes
+  - Nasogastric tube if severe nausea/vomiting or gastric distension
+  - Minimize opioids - switch to non-opioid pain control (acetaminophen, NSAIDs, gabapentin)
+  - Early ambulation - walk QID
+  - Chewing gum QID for 30 minutes - stimulates GI motility
+  - Avoid unnecessary lab tests and CT scans unless fever or peritoneal signs
+  - Alvimopan (Entereg) 12mg BID if available - peripherally acting mu-opioid antagonist, reduces ileus duration
+  - Discontinue anticholinergics, avoid calcium channel blockers
+  - NG decompression if severe distension
   - 'If prolonged (>5-7 days): CT to rule out mechanical obstruction, anastomotic leak, abscess'
-  - 'Neostigmine 2mg IV slowly for Ogilvie syndrome (pseudo-obstruction)'
+  - Neostigmine 2mg IV slowly for Ogilvie syndrome (pseudo-obstruction)
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -55,13 +75,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Bowel obstruction
-  - Anastomotic leak
-  - Infection
-  - Medication effect
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

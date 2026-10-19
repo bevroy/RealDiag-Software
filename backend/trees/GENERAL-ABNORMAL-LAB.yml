@@ -1,18 +1,42 @@
 tree_id: GENERAL-ABNORMAL-LAB
 name: Abnormal Lab Result (Encounter)
+version: '1.0'
+status: draft
 family: general
-specialty: Primary Care, Internal Medicine
+specialty: Primary Care
+secondary_specialties:
+  - Internal Medicine
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Abnormal lab results, follow-up of test results
 description: |
   Encounter to evaluate and manage abnormal laboratory test results.
   Approach depends on specific abnormality - may require repeat testing, additional workup, or referral.
-icd10: R79.9
-snomed: "441742003"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R79.9
+  snomed:
+    - '441742003'
+  icpc2: []
+sources:
+  - text: UpToDate - Laboratory Medicine
+    origin: citations
+  - text: American Family Physician Guidelines
+    origin: citations
 presentations:
   - Incidental abnormal lab finding
   - Targeted testing with abnormal result
   - Screening test abnormality
-urgency: Variable
+differentials:
+  - Laboratory error
+  - Benign or physiologic variation
+  - Medication effect
+  - Underlying disease requiring treatment
+  - Requires specialist evaluation
 workup:
   general_approach:
     - Review specific abnormal results
@@ -66,14 +90,21 @@ clinical_pearls:
   - Correlate lab findings with clinical picture
   - Trending values over time more informative than single result
   - Document discussion of results with patient
-differentials:
-  - Laboratory error
-  - Benign or physiologic variation
-  - Medication effect
-  - Underlying disease requiring treatment
-  - Requires specialist evaluation
+red_flags: []
+disposition_guidance: {}
+referrals: []
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 40-year-old asymptomatic woman with elevated ALT 85, AST 72 on routine screening. BMI 32. No alcohol use. Negative viral hepatitis panel. Ultrasound shows hepatic steatosis. Diagnose non-alcoholic fatty liver disease (NAFLD). Counsel on weight loss and exercise. Repeat LFTs in 3 months show improvement to ALT 58. Continue lifestyle modifications.
-citations:
-  - UpToDate - Laboratory Medicine
-  - American Family Physician Guidelines
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Variable' mapped to 'routine'

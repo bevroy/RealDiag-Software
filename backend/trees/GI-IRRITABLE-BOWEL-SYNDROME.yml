@@ -1,41 +1,55 @@
 tree_id: GI-IRRITABLE-BOWEL-SYNDROME
 name: Irritable Bowel Syndrome (IBS)
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Recurrent abdominal pain with altered bowel habits
 description: Functional GI disorder characterized by abdominal pain associated with change in bowel habits
-icd10: K58.9
-snomed: 10743008
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K58.9
+  snomed:
+    - '10743008'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
 presentations:
-  - "Recurrent abdominal pain"
-  - "Crampy abdominal pain"
-  - "Cramping abdominal pain"
-  - "Abdominal pain relieved by defecation"
-  - "Abdominal pain relieved by bowel movement"
-  - "Pain improves with defecation"
-  - "Pain relieved by passing stool"
-  - "Associated with change in stool frequency or form"
-  - "Change in bowel habits"
-  - "Bloating, gas"
-  - "Bloating and abdominal distension"
-  - "Alternating diarrhea and constipation"
-  - "No alarm features (weight loss, bleeding)"
-urgency: routine
-referrals:
-  emergency:
-    - GI bleeding with instability
-    - Acute liver failure
-    - Perforated viscus
-    - Cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting
-  routine:
-    - IBS management
-    - GERD treatment
-    - Screening colonoscopy
-
+  - Recurrent abdominal pain
+  - Crampy abdominal pain
+  - Cramping abdominal pain
+  - Abdominal pain relieved by defecation
+  - Abdominal pain relieved by bowel movement
+  - Pain improves with defecation
+  - Pain relieved by passing stool
+  - Associated with change in stool frequency or form
+  - Change in bowel habits
+  - Bloating, gas
+  - Bloating and abdominal distension
+  - Alternating diarrhea and constipation
+  - No alarm features (weight loss, bleeding)
+differentials:
+  - Inflammatory bowel disease (Crohn, ulcerative colitis) - weight loss, bloody stools, elevated CRP/calprotectin
+  - Celiac disease - diarrhea, weight loss, positive TTG-IgA, villous atrophy on biopsy
+  - Lactose intolerance - symptoms after dairy, positive hydrogen breath test
+  - Small intestinal bacterial overgrowth (SIBO) - bloating, diarrhea after meals, positive breath test
+  - Microscopic colitis - watery diarrhea, normal colonoscopy, collagenous/lymphocytic colitis on biopsy
+  - Colon cancer - age greater than 50, weight loss, iron deficiency anemia, positive FIT
+  - Chronic pancreatitis - epigastric pain radiating to back, steatorrhea, alcohol history
+  - Endometriosis - cyclic pain with menses, dysmenorrhea, dyspareunia
+  - Bile acid malabsorption - chronic watery diarrhea, responds to cholestyramine
 workup:
   - Rome IV criteria (clinical diagnosis) - recurrent abdominal pain at least 1 day/week in last 3 months with at least 2 of pain related to defecation, change in stool frequency, change in stool form/appearance
   - Symptoms must be present for last 3 months with onset at least 6 months ago
@@ -76,16 +90,30 @@ clinical_pearls:
   - Brain-gut axis dysfunction - visceral hypersensitivity and altered motility
   - No structural or biochemical abnormality - diagnosis of exclusion
   - Psychological comorbidity common - anxiety, depression in 50-60%
-differentials:
-  - Inflammatory bowel disease (Crohn, ulcerative colitis) - weight loss, bloody stools, elevated CRP/calprotectin
-  - Celiac disease - diarrhea, weight loss, positive TTG-IgA, villous atrophy on biopsy
-  - Lactose intolerance - symptoms after dairy, positive hydrogen breath test
-  - Small intestinal bacterial overgrowth (SIBO) - bloating, diarrhea after meals, positive breath test
-  - Microscopic colitis - watery diarrhea, normal colonoscopy, collagenous/lymphocytic colitis on biopsy
-  - Colon cancer - age greater than 50, weight loss, iron deficiency anemia, positive FIT
-  - Chronic pancreatitis - epigastric pain radiating to back, steatorrhea, alcohol history
-  - Endometriosis - cyclic pain with menses, dysmenorrhea, dyspareunia
-  - Bile acid malabsorption - chronic watery diarrhea, responds to cholestyramine
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 32-year-old woman with 2-year history of recurrent abdominal cramping and diarrhea
   - Abdominal pain relieved after bowel movement, occurring 3-4 times per week
@@ -112,8 +140,7 @@ trace:
   - 3-month follow-up - 70% improvement in symptoms, better quality of life
   - Continues low FODMAP diet with occasional reintroduction of foods, loperamide PRN
   - Outcome - Good symptom control with dietary modification and PRN antidiarrheals
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

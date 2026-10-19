@@ -1,39 +1,59 @@
 tree_id: SURG-HERNIA-STRANGULATED
 name: Strangulated Hernia
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K46.1
-snomed:
-- 77456000
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Strangulated Hernia
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K46.1
+  snomed:
+    - '77456000'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Incarcerated hernia with vascular compromise
-- Severe pain at hernia site
-- Erythema and warmth of overlying skin
-- Systemic signs (fever, tachycardia)
-- Peritoneal signs if bowel necrosis
-- Requires emergency surgery
+  - Incarcerated hernia with vascular compromise
+  - Severe pain at hernia site
+  - Erythema and warmth of overlying skin
+  - Systemic signs (fever, tachycardia)
+  - Peritoneal signs if bowel necrosis
+  - Requires emergency surgery
+differentials:
+  - Incarcerated hernia
+  - Bowel obstruction
+  - Abscess
+  - Lipoma
 workup: []
 treatment:
-  - 'Surgical emergency - immediate surgery consultation'
-  - 'NPO, aggressive IV resuscitation (often hypovolemic from third-spacing)'
-  - 'Nasogastric tube decompression'
-  - 'Broad-spectrum antibiotics - cefazolin 2g IV + metronidazole 500mg IV (anticipate bowel resection)'
-  - 'Emergency hernia repair with bowel inspection'
-  - 'Resect nonviable bowel - primary anastomosis if contamination minimal'
-  - 'Primary repair without mesh if contaminated (bowel resection)'
-  - 'ICU postop if septic or bowel resection'
-  - 'Mortality 5-15% (higher in elderly)'
+  - Surgical emergency - immediate surgery consultation
+  - NPO, aggressive IV resuscitation (often hypovolemic from third-spacing)
+  - Nasogastric tube decompression
+  - Broad-spectrum antibiotics - cefazolin 2g IV + metronidazole 500mg IV (anticipate bowel resection)
+  - Emergency hernia repair with bowel inspection
+  - Resect nonviable bowel - primary anastomosis if contamination minimal
+  - Primary repair without mesh if contaminated (bowel resection)
+  - ICU postop if septic or bowel resection
+  - Mortality 5-15% (higher in elderly)
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -51,13 +71,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Incarcerated hernia
-  - Bowel obstruction
-  - Abscess
-  - Lipoma
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

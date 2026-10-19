@@ -1,11 +1,31 @@
 tree_id: NEURO-MIGRAINE
 name: Migraine Headache
+version: '1.0'
+status: draft
 family: Neurology
 specialty: Neurology
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Severe throbbing headache, often unilateral, with nausea and photophobia
 description: Primary headache disorder with recurrent moderate-severe headaches and associated symptoms
-icd10: G43.909
-snomed: 37796009
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G43.909
+  snomed:
+    - '37796009'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Unilateral throbbing headache (4-72 hours)
   - Nausea, vomiting
@@ -13,34 +33,13 @@ presentations:
   - Aura (visual, sensory) in 25%
   - Worsened by activity
   - Family history common
-urgency: routine-to-urgent
-
-homeopathy:
-  - remedy: "Belladonna 30C"
-    indications: "Throbbing right-sided headache, sudden onset, worse from light/noise/motion"
-  - remedy: "Iris versicolor 30C"
-    indications: "Right-sided headache with visual disturbances, nausea, vomiting bile"
-  - remedy: "Natrum muriaticum 30C"
-    indications: "Hammering headache, worse from sun, emotional stress, craves salt"
-  - remedy: "Sanguinaria 30C"
-    indications: "Right-sided headache ascending from neck, better after vomiting"
-  - remedy: "Spigelia 30C"
-    indications: "Left-sided headache extending to eye, worse from motion"
-
-referrals:
-  emergency:
-    - Stroke
-    - Status epilepticus
-    - Spinal cord compression
-  urgent:
-    - TIA
-    - New neurological deficits
-    - Seizure
-  routine:
-    - Headache management
-    - Neuropathy
-    - Movement disorders
-
+differentials:
+  - Tension-type headache (bilateral, pressing quality, no nausea, mild-moderate)
+  - Cluster headache (unilateral orbital, autonomic features, short duration 15-180 min)
+  - Trigeminal neuralgia (brief electric shocks, trigger points)
+  - Temporal arteritis (age greater than 50, jaw claudication, elevated ESR)
+  - Subarachnoid hemorrhage (thunderclap sudden onset, worst headache of life)
+  - Meningitis (fever, neck stiffness)
 workup:
   - Clinical presentation with characteristic headache features
   - Migraine without aura (75%) - unilateral throbbing headache 4-72 hours
@@ -98,13 +97,39 @@ clinical_pearls:
   - Preventive therapy indicated if 4+ migraine days per month
   - Medication overuse headache common - limit acute meds to less than 10-15 days/month
   - Chronic migraine responds to botulinum toxin injections
-differentials:
-  - Tension-type headache (bilateral, pressing quality, no nausea, mild-moderate)
-  - Cluster headache (unilateral orbital, autonomic features, short duration 15-180 min)
-  - Trigeminal neuralgia (brief electric shocks, trigger points)
-  - Temporal arteritis (age greater than 50, jaw claudication, elevated ESR)
-  - Subarachnoid hemorrhage (thunderclap sudden onset, worst headache of life)
-  - Meningitis (fever, neck stiffness)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New neurological deficits
+    - Seizure
+  routine:
+    - Headache management
+    - Neuropathy
+    - Movement disorders
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies:
+    - remedy: Belladonna 30C
+      indications: Throbbing right-sided headache, sudden onset, worse from light/noise/motion
+    - remedy: Iris versicolor 30C
+      indications: Right-sided headache with visual disturbances, nausea, vomiting bile
+    - remedy: Natrum muriaticum 30C
+      indications: Hammering headache, worse from sun, emotional stress, craves salt
+    - remedy: Sanguinaria 30C
+      indications: Right-sided headache ascending from neck, better after vomiting
+    - remedy: Spigelia 30C
+      indications: Left-sided headache extending to eye, worse from motion
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 32-year-old woman presents with recurrent severe headaches x 2 years
   - Headaches 5-6 times per month, lasting 8-24 hours each
@@ -141,8 +166,8 @@ trace:
   - Sumatriptan effective for attacks
   - Tolerating propranolol well (mild fatigue initially, resolved)
   - Outcome - successful migraine management with acute triptan and preventive beta-blocker
-
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'routine-to-urgent' mapped to 'urgent'

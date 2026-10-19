@@ -1,52 +1,72 @@
 tree_id: TOX-ALCOHOL-WITHDRAWAL
 name: Alcohol Withdrawal Syndrome
+version: '1.0'
+status: draft
 family: Toxicology
 specialty: Toxicology
-icd10:
-- F10.239
-snomed:
-- 82800008
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Alcohol Withdrawal Syndrome
-version: '1.0'
-citations:
-  - Clinical Practice Guidelines from relevant medical specialty societies
-  - UpToDate Clinical Reference
-  - Evidence-based medical literature
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F10.239
+  snomed:
+    - '82800008'
+  icpc2: []
+sources:
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
+  - text: UpToDate Clinical Reference
+    origin: citations
+  - text: Evidence-based medical literature
+    origin: citations
+  - text: American College of Medical Toxicology (ACMT) Guidelines, American Association of Poison Control Centers (AAPCC)
+    origin: trace.source
 presentations:
-- Tremors and anxiety
-- Tremors especially in hands
-- Hand tremor and sweating
-- Anxiety restlessness
-- Diaphoresis
-- Nausea vomiting
-- Tachycardia hypertension
-- Seizures (6-48 hours after last drink)
-- Delirium tremens (48-96 hours) - hallucinations, confusion, autonomic instability
-- History of chronic heavy alcohol use
-- Tremor and blackouts
-- Blackouts and tremor
-- Alcohol withdrawal tremor
-- Withdrawal symptoms after stopping alcohol
+  - Tremors and anxiety
+  - Tremors especially in hands
+  - Hand tremor and sweating
+  - Anxiety restlessness
+  - Diaphoresis
+  - Nausea vomiting
+  - Tachycardia hypertension
+  - Seizures (6-48 hours after last drink)
+  - Delirium tremens (48-96 hours) - hallucinations, confusion, autonomic instability
+  - History of chronic heavy alcohol use
+  - Tremor and blackouts
+  - Blackouts and tremor
+  - Alcohol withdrawal tremor
+  - Withdrawal symptoms after stopping alcohol
+differentials:
+  - Delirium from other cause
+  - Sepsis
+  - Benzodiazepine withdrawal
+  - Thyrotoxicosis
 workup: []
 treatment:
-  - 'Benzodiazepines first-line - prevent seizures and DTs, reduce mortality'
+  - Benzodiazepines first-line - prevent seizures and DTs, reduce mortality
   - 'CIWA-Ar protocol: Symptom-triggered dosing - chlordiazepoxide 50-100mg Q1H PRN or lorazepam 2-4mg Q1H PRN until CIWA <8-10'
   - 'Fixed-dose alternative: Chlordiazepoxide 50mg Q6H x4 doses, then 25mg Q6H x8 doses, then taper OR lorazepam 2mg Q6H with taper'
   - 'Severe withdrawal or DTs: Diazepam 10-20mg IV Q5-15min or lorazepam 2-4mg IV Q10-15min until sedation, may need VERY high doses'
-  - 'Thiamine 100mg IV/IM before any glucose (prevent Wernicke encephalopathy), continue 100mg daily x3-5 days'
-  - 'Folic acid 1mg daily, multivitamin'
-  - 'Magnesium sulfate 2g IV over 10 min if low or if seizure (replete to >2 mg/dL)'
-  - 'Phosphate and potassium repletion as needed (often depleted)'
-  - 'Avoid phenytoin for withdrawal seizures (not effective, benzos are treatment)'
-  - 'Propofol or phenobarbital for benzodiazepine-refractory DTs'
-  - 'Supportive care - IV fluids (often dehydrated), antiemetics (ondansetron 4mg), treat concurrent conditions'
-  - 'Haloperidol 5mg IM/IV for severe agitation (adjunct to benzos, not monotherapy)'
-  - 'ICU admission for DTs, severe withdrawal (CIWA >15), or concurrent serious illness'
-  - 'Alcohol counseling and addiction treatment referral before discharge'
+  - Thiamine 100mg IV/IM before any glucose (prevent Wernicke encephalopathy), continue 100mg daily x3-5 days
+  - Folic acid 1mg daily, multivitamin
+  - Magnesium sulfate 2g IV over 10 min if low or if seizure (replete to >2 mg/dL)
+  - Phosphate and potassium repletion as needed (often depleted)
+  - Avoid phenytoin for withdrawal seizures (not effective, benzos are treatment)
+  - Propofol or phenobarbital for benzodiazepine-refractory DTs
+  - Supportive care - IV fluids (often dehydrated), antiemetics (ondansetron 4mg), treat concurrent conditions
+  - Haloperidol 5mg IM/IV for severe agitation (adjunct to benzos, not monotherapy)
+  - ICU admission for DTs, severe withdrawal (CIWA >15), or concurrent serious illness
+  - Alcohol counseling and addiction treatment referral before discharge
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Altered mental status from toxin
@@ -61,13 +81,20 @@ referrals:
     - Substance use disorder treatment
     - Chronic exposure evaluation
     - Lead screening
-differentials:
-  - Delirium from other cause
-  - Sepsis
-  - Benzodiazepine withdrawal
-  - Thyrotoxicosis
-trace:
-  source: American College of Medical Toxicology (ACMT) Guidelines, American Association
-    of Poison Control Centers (AAPCC)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

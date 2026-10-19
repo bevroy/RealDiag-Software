@@ -19,6 +19,7 @@ import logging
 from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
+from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, snomed_codes
 from backend.services.auth_service import get_current_user
 from backend.services.rbac_service import get_rbac_service, Permission
 
@@ -408,17 +409,9 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     referral_list = [str(referrals)] if referrals else []
 
                 # Build rule-compatible format
-                # Normalize snomed to always be a list
-                snomed_value = tree_data.get('snomed', [])
-                if not isinstance(snomed_value, list):
-                    snomed_value = [snomed_value] if snomed_value is not None else []
-
-                # Normalize icd10 to always be a list of strings
-                icd10_value = tree_data.get('icd10', tree_data.get('icd10_code', ''))
-                if not isinstance(icd10_value, list):
-                    icd10_value = [icd10_value] if icd10_value else []
-                # Filter out empty strings
-                icd10_value = [str(code) for code in icd10_value if code]
+                snomed_value = snomed_codes(tree_data)
+                icd10_value = icd10_codes(tree_data)
+                population = tree_applies_to(tree_data)
 
                 # Normalize clinical_pearls to list of strings (convert dicts to "key: value" format)
                 clinical_pearls_raw = tree_data.get('clinical_pearls', [])
@@ -436,9 +429,9 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
                     'family': family,
-                    'applies_to': tree_data.get('applies_to'),  # Add sex-specific metadata
-                    'age_min': tree_data.get('age_min'),  # Add age restrictions
-                    'age_max': tree_data.get('age_max'),  # Add age restrictions
+                    'applies_to': population['sex'],  # Sex restriction ('male'/'female') or None
+                    'age_min': population['age_min'],  # Age restrictions
+                    'age_max': population['age_max'],
                     'presentations': presentations,
                     'icd10': icd10_value,
                     'snomed': snomed_value,

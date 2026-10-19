@@ -1,7 +1,38 @@
 tree_id: HEME-LEUKEMIA
 name: Leukemia (Acute and Chronic)
+version: '1.0'
+status: draft
 family: hematology
 specialty: Hematology / Oncology
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: 'Acute leukemia requires immediate treatment; chronic types may be less urgent but need prompt evaluation (Original urgency value: Emergency (acute leukemia), High (chronic leukemia))'
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C91.00
+    - C92.00
+    - C91.10
+    - C92.10
+    - C95.90
+  snomed:
+    - '91861009'
+    - '353431000119107'
+    - '92814006'
+    - '413448007'
+  icpc2: []
+sources:
+  - text: NCCN Guidelines for Acute Myeloid Leukemia, Acute Lymphoblastic Leukemia, CML, and CLL
+    origin: citations
+  - text: European LeukemiaNet (ELN) AML Risk Stratification
+    origin: citations
+  - text: UpToDate - Hematology and Oncology
+    origin: citations
 presentations:
   - Fatigue and weakness (anemia)
   - Easy bruising and bleeding (thrombocytopenia)
@@ -15,24 +46,13 @@ presentations:
   - Petechiae, purpura
   - Weight loss
   - May be asymptomatic (chronic leukemia found on routine labs)
-icd10:
-  - C91.00 # Acute lymphoblastic leukemia not achieved remission
-  - C92.00 # Acute myeloid leukemia not achieved remission
-  - C91.10 # Chronic lymphocytic leukemia not achieved remission
-  - C92.10 # Chronic myeloid leukemia not achieved remission
-  - C95.90 # Leukemia, unspecified
-snomed:
-  - "91861009" # Acute lymphoblastic leukemia
-  - "353431000119107" # Acute myeloid leukemia
-  - "92814006" # Chronic lymphocytic leukemia
-  - "413448007" # Chronic myeloid leukemia
-urgency: Emergency (acute leukemia), High (chronic leukemia)
-urgency_explanation: Acute leukemia requires immediate treatment; chronic types may be less urgent but need prompt evaluation
-
-referrals:
-  hematology_oncology: Immediate for diagnosis and treatment
-  bone_marrow_transplant: For allogeneic transplant evaluation if indicated
-
+differentials:
+  - Myelodysplastic syndrome (MDS) - dysplasia, <20% blasts
+  - Aplastic anemia (pancytopenia without blasts)
+  - Lymphoma with bone marrow involvement
+  - Viral infections (EBV, CMV causing atypical lymphocytes)
+  - Myeloproliferative neoplasms (polycythemia vera, essential thrombocythemia)
+  - Reactive leukocytosis (infection, steroids)
 workup:
   initial_laboratory:
     - CBC with differential (often shows blasts, cytopenias or leukocytosis)
@@ -53,7 +73,6 @@ workup:
   tumor_lysis_monitoring:
     - Potassium, phosphorus, calcium, uric acid, LDH, creatinine
     - EKG if hyperkalemia
-
 treatment:
   acute_myeloid_leukemia_AML:
     - Induction chemotherapy: 7+3 (cytarabine x7 days + anthracycline x3 days)
@@ -85,7 +104,6 @@ treatment:
     - Antimicrobial prophylaxis: antibacterial, antifungal, antiviral
     - Growth factors: G-CSF for neutropenia
     - Central line placement for chemotherapy
-
 clinical_pearls:
   - Acute leukemias (AML, ALL) are medical emergencies requiring immediate treatment
   - Chronic leukemias (CML, CLL) often asymptomatic and may be discovered incidentally
@@ -97,19 +115,23 @@ clinical_pearls:
   - Tumor lysis syndrome risk high with acute leukemias (monitor and prophylaxis)
   - Hyperleukocytosis (WBC >100k) risk for leukostasis (pulmonary/CNS complications)
   - Allogeneic transplant only curative option for many but significant morbidity/mortality
-
-differentials:
-  - Myelodysplastic syndrome (MDS) - dysplasia, <20% blasts
-  - Aplastic anemia (pancytopenia without blasts)
-  - Lymphoma with bone marrow involvement
-  - Viral infections (EBV, CMV causing atypical lymphocytes)
-  - Myeloproliferative neoplasms (polycythemia vera, essential thrombocythemia)
-  - Reactive leukocytosis (infection, steroids)
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  hematology_oncology: Immediate for diagnosis and treatment
+  bone_marrow_transplant: For allogeneic transplant evaluation if indicated
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 35-year-old woman presented to ED with 3 weeks of progressive fatigue, easy bruising, and gingival bleeding. Also noted fevers and bone pain. Physical exam showed pallor, petechiae, ecchymoses, and splenomegaly. No lymphadenopathy. Labs: WBC 42,000/µL with 60% blasts, Hgb 7.2 g/dL, platelets 18,000/µL. Peripheral smear showed numerous myeloblasts with Auer rods. CMP: LDH 850 U/L, uric acid 9.5 mg/dL. Admitted for emergent evaluation. Bone marrow biopsy: 75% blasts with myeloid markers (CD13, CD33, MPO positive). Flow cytometry confirmed acute myeloid leukemia. Cytogenetics: normal karyotype. Molecular: FLT3-ITD mutation positive, NPM1 mutation positive (favorable prognosis if NPM1+ without FLT3-ITD, but FLT3-ITD is adverse). Started tumor lysis prophylaxis (allopurinol, aggressive hydration). Placed PICC line. Initiated 7+3 induction chemotherapy (cytarabine continuous infusion x7 days + daunorubicin x3 days) plus midostaurin (FLT3 inhibitor). Developed febrile neutropenia on day 10, started broad-spectrum antibiotics (cefepime + vancomycin). Required platelet and RBC transfusions. Day 28 bone marrow: complete remission achieved (blasts <5%). Proceeded with consolidation chemotherapy: high-dose cytarabine x4 cycles with continued midostaurin. Given high-risk FLT3-ITD mutation, evaluated for allogeneic stem cell transplant. Matched sibling donor identified. Underwent myeloablative conditioning and allogeneic transplant in first remission. Post-transplant course complicated by grade II acute GVHD (skin, GI) managed with steroids and immunosuppression. At 18-month post-transplant follow-up, remains in complete molecular remission with no evidence of AML, full donor chimerism.
-
-citations:
-  - NCCN Guidelines for Acute Myeloid Leukemia, Acute Lymphoblastic Leukemia, CML, and CLL
-  - European LeukemiaNet (ELN) AML Risk Stratification
-  - UpToDate - Hematology and Oncology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Emergency (acute leukemia), High (chronic leukemia)' mapped to 'emergent' (highest level named)

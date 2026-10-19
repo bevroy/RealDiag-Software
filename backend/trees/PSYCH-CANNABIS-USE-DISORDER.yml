@@ -1,7 +1,40 @@
 tree_id: PSYCH-CANNABIS-USE-DISORDER
 name: Cannabis Use Disorder
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry / Addiction Medicine
+specialty: Psychiatry
+secondary_specialties:
+  - Addiction Medicine
+urgency: routine
+urgency_explanation: Chronic condition requiring treatment; urgent if severe withdrawal, psychosis, or suicidal ideation
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F12.10
+    - F12.20
+    - F12.21
+    - F12.23
+  snomed:
+    - '191910008'
+    - '361055000'
+  icpc2: []
+sources:
+  - text: 'SAMHSA Treatment Improvement Protocol (TIP) 35: Counseling for Substance Abuse'
+    origin: citations
+  - text: 'American Psychiatric Association: DSM-5 Cannabis Use Disorder'
+    origin: citations
+  - text: 'NIDA: Marijuana Research Report - Treatment'
+    origin: citations
+  - text: 'UpToDate: Cannabis use and cannabis use disorder'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Persistent desire or unsuccessful efforts to cut down cannabis use
   - Cannabis taken in larger amounts or over longer period than intended
@@ -12,22 +45,11 @@ presentations:
   - Recurrent use in physically hazardous situations
   - Tolerance (need more to achieve effect or diminished effect with same amount)
   - Withdrawal symptoms when stopping (irritability, anxiety, insomnia, appetite changes)
-icd10:
-  - F12.10 # Cannabis abuse, uncomplicated
-  - F12.20 # Cannabis dependence, uncomplicated
-  - F12.21 # Cannabis dependence, in remission
-  - F12.23 # Cannabis dependence with withdrawal
-snomed:
-  - "191910008" # Cannabis dependence
-  - "361055000" # Cannabis abuse
-urgency: Low
-urgency_explanation: Chronic condition requiring treatment; urgent if severe withdrawal, psychosis, or suicidal ideation
-
-referrals:
-  addiction_medicine: For comprehensive substance use disorder treatment
-  psychiatry: For co-occurring psychiatric disorders (anxiety, depression, psychosis)
-  outpatient_treatment: IOP or PHP programs for structured support
-
+differentials:
+  - Other substance use disorders (alcohol, opioids, stimulants)
+  - Primary psychiatric disorders (depression, anxiety, schizophrenia)
+  - ADHD (self-medication with cannabis)
+  - Chronic pain syndromes (cannabis used for pain relief)
 workup:
   screening_and_diagnosis:
     - DSM-5 criteria - at least 2 of 11 criteria in 12-month period
@@ -48,7 +70,6 @@ workup:
     - Urine drug screen (UDS) for cannabis and other substances
     - Consider: hepatitis C, HIV (if IV drug use history)
     - Mental health screening (PHQ-9, GAD-7)
-
 treatment:
   psychosocial_interventions:
     first_line:
@@ -98,7 +119,6 @@ treatment:
     - Address underlying mental health issues
     - Regular follow-up and monitoring (UDS)
     - Continued therapy/support groups
-
 clinical_pearls:
   - Cannabis use disorder affects ~9% of users (increases to 17% if start in adolescence)
   - Most common illicit substance use disorder in US
@@ -108,14 +128,21 @@ clinical_pearls:
   - Cannabis use disorder often co-occurs with depression, anxiety, PTSD
   - Withdrawal is real but less severe than alcohol or opioid withdrawal
   - Pregnant women: advise against use (risk to fetal development)
-  - "Amotivational syndrome": decreased motivation, apathy with chronic heavy use
-
-differentials:
-  - Other substance use disorders (alcohol, opioids, stimulants)
-  - Primary psychiatric disorders (depression, anxiety, schizophrenia)
-  - ADHD (self-medication with cannabis)
-  - Chronic pain syndromes (cannabis used for pain relief)
-
+  - Amotivational syndrome: decreased motivation, apathy with chronic heavy use
+red_flags: []
+disposition_guidance: {}
+referrals:
+  addiction_medicine: For comprehensive substance use disorder treatment
+  psychiatry: For co-occurring psychiatric disorders (anxiety, depression, psychosis)
+  outpatient_treatment: IOP or PHP programs for structured support
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Screen for cannabis use in routine care
   - If positive screen, assess for use disorder using DSM-5 criteria
@@ -125,10 +152,8 @@ trace:
   - Initiate evidence-based therapy (CBT, MET, contingency management)
   - Consider pharmacotherapy for co-occurring conditions or severe withdrawal
   - Regular follow-up with UDS and relapse prevention
-
-citations:
-  - "SAMHSA Treatment Improvement Protocol (TIP) 35: Counseling for Substance Abuse"
-  - "American Psychiatric Association: DSM-5 Cannabis Use Disorder"
-  - "NIDA: Marijuana Research Report - Treatment"
-  - "UpToDate: Cannabis use and cannabis use disorder"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

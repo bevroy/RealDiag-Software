@@ -1,11 +1,33 @@
 tree_id: ENDO-PREDIABETES
 name: Prediabetes
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: R73.03
-snomed: 714628002
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R73.03
+  snomed:
+    - '714628002'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: ADA Standards of Care in Diabetes 2024, Diabetes Prevention Program Research Group
+    origin: trace.source
 presentations:
   - Asymptomatic (most common)
   - Incidental finding on routine labs
@@ -15,6 +37,12 @@ presentations:
   - History of gestational diabetes
   - Metabolic syndrome components present
   - Fatigue or increased thirst (mild symptoms)
+differentials:
+  - Prediabetes (impaired fasting glucose or impaired glucose tolerance)
+  - Type 2 diabetes mellitus (FPG ≥126, 2hr OGTT ≥200, or A1c ≥6.5%)
+  - Stress hyperglycemia (acute illness, recent hospitalization)
+  - Medication-induced hyperglycemia (steroids, thiazides, atypical antipsychotics)
+  - Normal glucose metabolism (FPG <100, A1c <5.7%)
 workup:
   - Diagnostic criteria (any one of the following)
   - Fasting plasma glucose 100-125 mg/dL (impaired fasting glucose)
@@ -47,31 +75,34 @@ treatment:
   - Repeat A1c or fasting glucose annually
   - More frequent if very high risk or A1c approaching 6.5%
 clinical_pearls:
-  - "Prediabetes affects 38% of US adults - 96 million Americans"
-  - "5-10% of prediabetics progress to diabetes annually without intervention"
-  - "Lifestyle intervention more effective than metformin in preventing diabetes (58% vs 31% risk reduction)"
-  - "Weight loss of 7-10% can return blood glucose to normal in many patients"
-  - "Prediabetes increases cardiovascular disease risk even before progression to diabetes"
-  - "A1c 6.0-6.4% has highest risk of progression to diabetes - consider metformin"
-  - "Diabetes Prevention Program (DPP) covered by Medicare for eligible patients"
-  - "Not everyone with prediabetes will develop diabetes - some revert to normal glucose"
+  - Prediabetes affects 38% of US adults - 96 million Americans
+  - 5-10% of prediabetics progress to diabetes annually without intervention
+  - Lifestyle intervention more effective than metformin in preventing diabetes (58% vs 31% risk reduction)
+  - Weight loss of 7-10% can return blood glucose to normal in many patients
+  - Prediabetes increases cardiovascular disease risk even before progression to diabetes
+  - A1c 6.0-6.4% has highest risk of progression to diabetes - consider metformin
+  - Diabetes Prevention Program (DPP) covered by Medicare for eligible patients
+  - Not everyone with prediabetes will develop diabetes - some revert to normal glucose
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Endocrinology if unable to prevent progression despite interventions
   - Registered dietitian for medical nutrition therapy
   - Diabetes Prevention Program (DPP) - structured lifestyle intervention
   - Cardiology if significant cardiovascular disease present
-differentials:
-  - Prediabetes (impaired fasting glucose or impaired glucose tolerance)
-  - Type 2 diabetes mellitus (FPG ≥126, 2hr OGTT ≥200, or A1c ≥6.5%)
-  - Stress hyperglycemia (acute illness, recent hospitalization)
-  - Medication-induced hyperglycemia (steroids, thiazides, atypical antipsychotics)
-  - Normal glucose metabolism (FPG <100, A1c <5.7%)
-trace:
-  source: ADA Standards of Care in Diabetes 2024, Diabetes Prevention Program Research Group
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

@@ -1,12 +1,32 @@
 tree_id: ENT-HEARING-LOSS
 name: Hearing Loss Evaluation
+version: '1.0'
+status: draft
 family: Otolaryngology
-specialty: Otolaryngology, Audiology
+specialty: Otolaryngology
+secondary_specialties:
+  - Audiology
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Decreased Hearing, Difficulty Hearing
 description: Evaluation and management of hearing loss
-version: "1.0"
-icd10: H91.90
-snomed: 15188001
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H91.90
+  snomed:
+    - '15188001'
+  icpc2: []
+sources:
+  - text: AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+    origin: citations
+  - text: British Society of Otology Guidelines
+    origin: citations
+  - text: UpToDate - Otolaryngology
+    origin: citations
 presentations:
   - Gradual or sudden onset
   - Unilateral or bilateral
@@ -20,28 +40,26 @@ differentials:
   - Cerumen impaction
   - Acoustic neuroma
   - Meniere disease
-citations:
-  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
-  - British Society of Otology Guidelines
-  - UpToDate - Otolaryngology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'Identify type - conductive (middle ear) vs sensorineural (inner ear/nerve) vs mixed'
-  - 'Remove cerumen impaction - irrigation, mineral oil drops, manual extraction'
+  - Identify type - conductive (middle ear) vs sensorineural (inner ear/nerve) vs mixed
+  - Remove cerumen impaction - irrigation, mineral oil drops, manual extraction
   - 'Sensorineural: Hearing aids first-line for bilateral hearing loss >40 dB'
-  - 'Cochlear implant for severe-profound bilateral loss unresponsive to hearing aids'
+  - Cochlear implant for severe-profound bilateral loss unresponsive to hearing aids
   - 'Sudden sensorineural loss: HIGH-DOSE oral prednisone 60mg daily x10-14 days within 72 hours (urgent!)'
-  - 'Intratympanic steroid injection if systemic steroids fail or contraindicated'
+  - Intratympanic steroid injection if systemic steroids fail or contraindicated
   - 'Chronic suppurative otitis media: Topical fluoroquinolone drops, consider tympanoplasty'
   - 'Ossicular chain disruption: Surgical reconstruction'
   - 'Ménière disease: Salt restriction, diuretics, betahistine'
-  - 'Assistive devices - amplified phones, captioning, FM systems'
-  - 'Communication strategies - face patient, reduce background noise'
-
-entry_point: hearing_loss_evaluation
-
+  - Assistive devices - amplified phones, captioning, FM systems
+  - Communication strategies - face patient, reduce background noise
+clinical_pearls:
+  - Sudden sensorineural hearing loss is emergency; steroids within 72 hours
+  - Conductive loss: Weber lateralizes to affected side; Rinne negative
+  - Sensorineural loss: Weber to good ear; Rinne positive both sides
+  - Presbycusis affects high frequencies first; bilateral and symmetric
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Airway compromise
@@ -58,29 +76,27 @@ referrals:
     - Hearing loss evaluation
     - Tinnitus
     - Allergy management
-
-clinical_pearls:
-  - Sudden sensorineural hearing loss is emergency; steroids within 72 hours
-  - Conductive loss: Weber lateralizes to affected side; Rinne negative
-  - Sensorineural loss: Weber to good ear; Rinne positive both sides
-  - Presbycusis affects high frequencies first; bilateral and symmetric
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: hearing_loss_evaluation
 nodes:
   - id: hearing_loss_evaluation
     type: question
-    text: "Type of hearing loss?"
+    text: Type of hearing loss?
     options:
-      - label: "Conductive hearing loss"
+      - label: Conductive hearing loss
         next: conductive_loss
-      - label: "Sensorineural hearing loss"
+      - label: Sensorineural hearing loss
         next: sensorineural_loss
-      - label: "Sudden sensorineural hearing loss"
+      - label: Sudden sensorineural hearing loss
         next: sudden_hearing_loss
-
   - id: conductive_loss
     type: diagnosis
-    name: "Conductive Hearing Loss"
-    icd10: "H90.2"
+    name: Conductive Hearing Loss
+    icd10: H90.2
     urgency: low
     workup:
       - Conductive hearing loss - Problem transmitting sound from outer/middle ear to inner ear
@@ -122,11 +138,10 @@ nodes:
       - Alternative - Hearing aid
       - Tympanic membrane perforation - Small perforations may heal spontaneously, large or persistent → tympanoplasty (graft repair)
       - Hearing aids - Amplify sound, effective for conductive loss
-
   - id: sensorineural_loss
     type: diagnosis
-    name: "Sensorineural Hearing Loss"
-    icd10: "H90.3"
+    name: Sensorineural Hearing Loss
+    icd10: H90.3
     urgency: low
     workup:
       - Sensorineural hearing loss (SNHL) - Problem in inner ear (cochlea) or auditory nerve (CN VIII)
@@ -136,7 +151,7 @@ nodes:
       - Affects 30-50% adults >65 years
       - Cumulative hair cell loss over lifetime
       - Noise-induced hearing loss - Loud noise exposure (occupational, recreational), high-frequency loss (3000-6000 Hz "notch"), bilateral
-      - ">85 dB chronic exposure (machinery, concerts, firearms)"
+      - '>85 dB chronic exposure (machinery, concerts, firearms)'
       - Ototoxic medications - Aminoglycosides (gentamicin, tobramycin), cisplatin, loop diuretics (furosemide), aspirin high-dose, vancomycin
       - Aminoglycosides - Permanent bilateral high-frequency loss
       - Meniere's disease - Episodic vertigo + tinnitus + hearing loss + ear fullness, low-frequency loss initially, unilateral (70%)
@@ -173,11 +188,10 @@ nodes:
       - Autoimmune - Systemic corticosteroids (prednisone 1 mg/kg/day), immunosuppressants
       - Ototoxicity - Stop offending drug if possible, monitor levels (aminoglycosides)
       - Prevention - Noise protection (earplugs, earmuffs for >85 dB exposure), limit ototoxic drugs, baseline hearing test before aminoglycosides
-
   - id: sudden_hearing_loss
     type: diagnosis
-    name: "Sudden Sensorineural Hearing Loss"
-    icd10: "H91.2"
+    name: Sudden Sensorineural Hearing Loss
+    icd10: H91.2
     urgency: critical
     workup:
       - Sudden sensorineural hearing loss (SSNHL) - ≥30 dB hearing loss in ≥3 contiguous frequencies over <72 hours
@@ -211,3 +225,10 @@ nodes:
       - Prognosis - 60-70% have some recovery (spontaneous 30%, with steroids 60%)
       - Better prognosis - Mild-moderate loss, no vertigo, younger age, early treatment
       - Worse prognosis - Profound loss, vertigo, downsloping audiogram, delay >2 weeks
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

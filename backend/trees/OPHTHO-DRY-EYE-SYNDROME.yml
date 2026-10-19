@@ -1,13 +1,32 @@
 tree_id: OPHTHO-DRY-EYE-SYNDROME
 name: Dry Eye Syndrome (Keratoconjunctivitis Sicca)
+version: '1.0'
+status: draft
 family: ophthalmology
-specialty: Ophthalmology, Primary Care
+specialty: Ophthalmology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Dry, gritty eyes, eye discomfort
 description: |
   Dry eye syndrome results from inadequate tear production or excessive tear evaporation leading to ocular surface inflammation.
   Common causes include aging, medications, autoimmune diseases (Sjögren's syndrome), environmental factors, and meibomian gland dysfunction.
-icd10: H04.12
-snomed: "46152009"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H04.12
+  snomed:
+    - '46152009'
+  icpc2: []
+sources:
+  - text: American Academy of Ophthalmology Dry Eye Guidelines
+    origin: citations
+  - text: UpToDate - Ophthalmology
+    origin: citations
 presentations:
   - Dry, gritty sensation in eyes
   - Burning or stinging eyes
@@ -19,12 +38,13 @@ presentations:
   - Sensitivity to light (photophobia)
   - Difficulty wearing contact lenses
   - Symptoms worse at end of day or with prolonged screen use
-urgency: Low
-referrals:
-  ophthalmology:
-    - Severe dry eye not responding to treatment
-    - Suspected Sjögren's syndrome
-    - Corneal complications
+differentials:
+  - Blepharitis
+  - Conjunctivitis
+  - Meibomian gland dysfunction
+  - Sjögren's syndrome
+  - Medication side effect
+  - Environmental factors
 workup:
   - History - duration, symptoms, aggravating factors, medications, medical conditions
   - Slit-lamp examination - tear film quality, corneal staining with fluorescein
@@ -56,15 +76,25 @@ clinical_pearls:
   - Many medications cause or worsen dry eye
   - Sjögren's syndrome should be considered in severe cases or with systemic symptoms
   - Artificial tears are first-line but need frequent application
-differentials:
-  - Blepharitis
-  - Conjunctivitis
-  - Meibomian gland dysfunction
-  - Sjögren's syndrome
-  - Medication side effect
-  - Environmental factors
+red_flags: []
+disposition_guidance: {}
+referrals:
+  ophthalmology:
+    - Severe dry eye not responding to treatment
+    - Suspected Sjögren's syndrome
+    - Corneal complications
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 62-year-old woman presents with 6-month history of gritty, burning eyes, worse at end of day and with computer use. Slit-lamp exam shows reduced tear meniscus and corneal punctate staining. Schirmer test shows 6mm in 5 minutes bilaterally. Diagnose moderate dry eye syndrome. Start preservative-free artificial tears q3h and lubricating ointment at bedtime. Recommend warm compresses for meibomian gland dysfunction. Symptoms improve 50% in 2 weeks. Continue artificial tears maintenance therapy.
-citations:
-  - American Academy of Ophthalmology Dry Eye Guidelines
-  - UpToDate - Ophthalmology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

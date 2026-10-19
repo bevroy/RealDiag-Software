@@ -1,13 +1,33 @@
 tree_id: PULM-CHRONIC-BRONCHITIS
 name: Chronic Bronchitis (COPD)
+version: '1.0'
+status: draft
 family: Pulmonology
 specialty: Pulmonology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Chronic productive cough and dyspnea
 description: |
   Clinical diagnosis - productive cough for at least 3 months per year for 2 consecutive years. Type of chronic obstructive pulmonary disease (COPD) characterized by airway inflammation and mucus hypersecretion.
   Blue bloater phenotype - overweight, cyanotic, peripheral edema, chronic hypoxemia and hypercapnia. Contrasts with emphysema (pink puffer). Smoking causes 85-90% of COPD. Third leading cause of death in US.
-icd10: J44.0
-snomed: 63480004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J44.0
+  snomed:
+    - '63480004'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
 presentations:
   - Chronic productive cough ≥3 months for ≥2 consecutive years
   - Sputum production
@@ -15,24 +35,13 @@ presentations:
   - Wheezing
   - Smoking history
   - May have cor pulmonale
-urgency: Moderate
-referrals:
-  emergency:
-    - Respiratory failure
-    - Massive hemoptysis
-    - Tension pneumothorax
-    - Severe COPD exacerbation
-  urgent:
-    - Suspected lung cancer
-    - Moderate COPD exacerbation
-    - Recurrent pneumonia
-    - New oxygen requirement
-  routine:
-    - Chronic cough
-    - Asthma management
-    - OSA evaluation
-    - Smoking cessation
-
+differentials:
+  - Asthma
+  - Bronchiectasis
+  - Congestive heart failure
+  - Interstitial lung disease
+  - Lung cancer
+  - Chronic pulmonary embolism
 workup:
   - Clinical diagnosis - chronic productive cough (3+ months per year x 2 years), dyspnea, wheezing, smoking history
   - Spirometry required to diagnose and stage COPD - post-bronchodilator FEV1/FVC less than 0.70 confirms airflow obstruction
@@ -78,17 +87,36 @@ clinical_pearls:
   - Cor pulmonale (right heart failure from pulmonary hypertension) - JVD, hepatomegaly, peripheral edema
   - COPD overlap with asthma (ACO) - younger age, atopy, reversibility on spirometry, higher eosinophils (use ICS)
   - Bullectomy or lung volume reduction surgery for giant bullae or severe upper lobe emphysema in select patients
-differentials:
-  - Asthma
-  - Bronchiectasis
-  - Congestive heart failure
-  - Interstitial lung disease
-  - Lung cancer
-  - Chronic pulmonary embolism
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Respiratory failure
+    - Massive hemoptysis
+    - Tension pneumothorax
+    - Severe COPD exacerbation
+  urgent:
+    - Suspected lung cancer
+    - Moderate COPD exacerbation
+    - Recurrent pneumonia
+    - New oxygen requirement
+  routine:
+    - Chronic cough
+    - Asthma management
+    - OSA evaluation
+    - Smoking cessation
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 64-year-old man with chronic productive cough x 4 years, progressive dyspnea limiting activities → 45 pack-year smoking history, currently smokes → Exam shows barrel chest, diminished breath sounds, scattered wheezes, no crackles → Spirometry - FEV1/FVC 0.58, FEV1 48% predicted (GOLD 2 moderate COPD), minimal bronchodilator response → Chest X-ray shows hyperinflation, no infiltrate → Diagnose moderate COPD, chronic bronchitis phenotype → Smoking cessation counseling, start varenicline → Initiate tiotropium 18mcg daily (LAMA), continue albuterol PRN → Dyspnea improves but still limited → Add indacaterol 75mcg daily (LABA), switch to combination LABA/LAMA → Pulmonary rehabilitation referral → Vaccinations updated (influenza, PCV20) → Successfully quit smoking after 3 months → Symptoms stable on LABA/LAMA, exercise tolerance improved → Annual spirometry shows stable lung function
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Moderate' mapped to 'routine'

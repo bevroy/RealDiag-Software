@@ -1,7 +1,36 @@
 tree_id: GI-PANCREATITIS
 name: Acute Pancreatitis
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: Requires hospitalization; can progress to severe systemic complications including shock, ARDS, multi-organ failure
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K85.9
+    - K85.0
+    - K85.1
+    - K85.2
+  snomed:
+    - '197456007'
+  icpc2: []
+sources:
+  - text: 'ACG Clinical Guideline: Management of Acute Pancreatitis'
+    origin: citations
+  - text: AGA Institute Clinical Practice Update on Management of Pancreatitis
+    origin: citations
+  - text: 'UpToDate: Clinical manifestations and diagnosis of acute pancreatitis'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Severe epigastric pain radiating to back
   - Nausea and vomiting
@@ -10,22 +39,14 @@ presentations:
   - Tachycardia and hypotension (severe cases)
   - Jaundice (if biliary etiology)
   - Cullen's sign (periumbilical ecchymosis) or Grey Turner's sign (flank ecchymosis) in hemorrhagic pancreatitis
-icd10:
-  - K85.9 # Acute pancreatitis, unspecified
-  - K85.0 # Idiopathic acute pancreatitis
-  - K85.1 # Biliary acute pancreatitis
-  - K85.2 # Alcohol-induced acute pancreatitis
-snomed:
-  - "197456007" # Acute pancreatitis
-urgency: High
-urgency_explanation: Requires hospitalization; can progress to severe systemic complications including shock, ARDS, multi-organ failure
-
-referrals:
-  gastroenterology: For ERCP if biliary obstruction/cholangitis
-  general_surgery: For cholecystectomy (gallstone pancreatitis) or necrosectomy (infected necrosis)
-  critical_care: If severe pancreatitis with organ failure
-  interventional_radiology: For drainage of fluid collections or pseudocysts
-
+differentials:
+  - Perforated peptic ulcer
+  - Acute cholecystitis
+  - Bowel obstruction or perforation
+  - Mesenteric ischemia
+  - Myocardial infarction
+  - Ruptured AAA
+  - Diabetic ketoacidosis
 workup:
   diagnosis_requires_2_of_3:
     - Characteristic abdominal pain
@@ -42,9 +63,9 @@ workup:
     - Arterial blood gas (hypoxemia)
   imaging:
     - CT abdomen/pelvis with IV contrast (NOT needed for diagnosis):
-      - Obtain if diagnosis uncertain or patient not improving after 48-72h
-      - CT severity index (Balthazar score)
-      - Identify necrosis, fluid collections, complications
+        - Obtain if diagnosis uncertain or patient not improving after 48-72h
+        - CT severity index (Balthazar score)
+        - Identify necrosis, fluid collections, complications
     - RUQ ultrasound: identify gallstones (biliary pancreatitis)
     - MRCP or EUS: if biliary obstruction suspected but ultrasound negative
   severity_assessment:
@@ -52,7 +73,6 @@ workup:
     - APACHE II score
     - BISAP score (simpler): BUN >25, Impaired mental status, SIRS, Age >60, Pleural effusion
     - Atlanta classification: Mild, moderately severe, severe
-
 treatment:
   supportive_care:
     - Aggressive IV fluid resuscitation: 250-500 mL/hr crystalloid (Ringer's lactate preferred)
@@ -61,9 +81,9 @@ treatment:
     - Antiemetics
     - NPO initially
     - Nutritional support:
-      - Early enteral feeding (within 24-48h) if tolerated reduces complications
-      - Nasogastric or nasojejunal tube if cannot tolerate PO
-      - TPN only if enteral feeding fails or not tolerated
+        - Early enteral feeding (within 24-48h) if tolerated reduces complications
+        - Nasogastric or nasojejunal tube if cannot tolerate PO
+        - TPN only if enteral feeding fails or not tolerated
   etiology_specific:
     gallstone_pancreatitis:
       - ERCP within 24h if concurrent cholangitis or biliary obstruction
@@ -76,15 +96,14 @@ treatment:
   antibiotics:
     - NOT indicated for prophylaxis in sterile necrosis
     - Indicated for:
-      - Infected necrosis (documented or highly suspected)
-      - Concurrent cholangitis
-      - Extrapancreatic infections
+        - Infected necrosis (documented or highly suspected)
+        - Concurrent cholangitis
+        - Extrapancreatic infections
   complications_management:
     - Infected necrosis: CT-guided drainage or surgical necrosectomy
     - Pseudocyst: observe if asymptomatic; drain if symptomatic, infected, or enlarging
     - Pancreatic abscess: drainage and antibiotics
     - Organ failure: ICU-level care, mechanical ventilation, vasopressors
-
 clinical_pearls:
   - Most common causes: Gallstones (40%), alcohol (30%), hypertriglyceridemia (5%)
   - GET SMASHED mnemonic: Gallstones, Ethanol, Trauma, Steroids, Mumps, Autoimmune, Scorpion sting, Hyperlipidemia/Hypercalcemia, ERCP, Drugs
@@ -94,16 +113,21 @@ clinical_pearls:
   - Early aggressive fluid resuscitation (first 12-24h) critical to outcomes
   - CT not needed for diagnosis; reserve for complications or diagnostic uncertainty
   - Lipase more sensitive and specific than amylase
-
-differentials:
-  - Perforated peptic ulcer
-  - Acute cholecystitis
-  - Bowel obstruction or perforation
-  - Mesenteric ischemia
-  - Myocardial infarction
-  - Ruptured AAA
-  - Diabetic ketoacidosis
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  gastroenterology: For ERCP if biliary obstruction/cholangitis
+  general_surgery: For cholecystectomy (gallstone pancreatitis) or necrosectomy (infected necrosis)
+  critical_care: If severe pancreatitis with organ failure
+  interventional_radiology: For drainage of fluid collections or pseudocysts
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Patient presents with severe epigastric pain and vomiting
   - Lipase >3x normal confirms diagnosis
@@ -114,9 +138,8 @@ trace:
   - Early enteral nutrition if tolerated
   - ERCP if biliary obstruction or cholangitis
   - Cholecystectomy before discharge if gallstone etiology
-
-citations:
-  - "ACG Clinical Guideline: Management of Acute Pancreatitis"
-  - "AGA Institute Clinical Practice Update on Management of Pancreatitis"
-  - "UpToDate: Clinical manifestations and diagnosis of acute pancreatitis"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

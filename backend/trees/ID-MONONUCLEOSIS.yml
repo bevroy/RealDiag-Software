@@ -1,62 +1,85 @@
 tree_id: ID-MONONUCLEOSIS
 name: Infectious Mononucleosis
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Infectious Disease
-icd10:
-- B27.90
-snomed:
-- '271558008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Infectious Mononucleosis
-version: '1.0'
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - B27.90
+  snomed:
+    - '271558008'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease Control and Prevention (CDC)
+    origin: trace.source
 presentations:
-- Severe sore throat
-- Fever
-- Lymphadenopathy (especially posterior cervical)
-- Splenomegaly
-- Fatigue
-- Atypical lymphocytes
-workup:
-- Monospot test (heterophile antibody) - quick, but negative first week or in young
-  children
-- 'EBV serology: VCA-IgM (acute), VCA-IgG (past/chronic), EBNA (past infection)'
-- 'CBC: Lymphocytosis with atypical lymphocytes (>10%)'
-- Liver function tests (mild transaminitis common)
-treatment:
-- 'Guideline-based treatment options for Infectious Mononucleosis include:'
-- 'Supportive care: Rest, fluids, NSAIDs or acetaminophen for fever/pain (IDSA 2024)'
-- Avoid contact sports for 3-4 weeks (risk splenic rupture) (IDSA 2024)
-- Short course steroids if severe tonsillar hypertrophy with airway compromise (prednisone
-  40-60mg x 5-7 days) (IDSA 2024)
-- Avoid ampicillin/amoxicillin (causes rash) (IDSA 2024)
-- Most recover in 2-4 weeks, but fatigue may persist months (IDSA 2024)
-clinical_pearls:
-- Epstein-Barr virus (EBV) most common cause, transmitted via saliva ('kissing disease')
-- 'Classic triad: Fever, pharyngitis, lymphadenopathy (especially posterior cervical)'
-- Avoid ampicillin/amoxicillin (causes maculopapular rash in 90-100% of EBV patients)
-- Splenomegaly in 50% (peak 2-3 weeks) - avoid contact sports 3-4 weeks to prevent
-  splenic rupture
-- 'Monospot test (heterophile antibody): Quick, but false negative in first week or
-  young children'
-- Self-limited, supportive care only (no antivirals effective)
-referrals:
-- ENT if severe tonsillar hypertrophy with airway compromise
-- Hematology if severe cytopenias or prolonged symptoms
-- Most managed outpatient with supportive care
+  - Severe sore throat
+  - Fever
+  - Lymphadenopathy (especially posterior cervical)
+  - Splenomegaly
+  - Fatigue
+  - Atypical lymphocytes
 differentials:
   - Pharyngitis
   - Cytomegalovirus
   - Toxoplasmosis
   - Acute HIV
   - Lymphoma
-trace:
-  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
-    Control and Prevention (CDC)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Monospot test (heterophile antibody) - quick, but negative first week or in young children
+  - 'EBV serology: VCA-IgM (acute), VCA-IgG (past/chronic), EBNA (past infection)'
+  - 'CBC: Lymphocytosis with atypical lymphocytes (>10%)'
+  - Liver function tests (mild transaminitis common)
+treatment:
+  - 'Guideline-based treatment options for Infectious Mononucleosis include:'
+  - 'Supportive care: Rest, fluids, NSAIDs or acetaminophen for fever/pain (IDSA 2024)'
+  - Avoid contact sports for 3-4 weeks (risk splenic rupture) (IDSA 2024)
+  - Short course steroids if severe tonsillar hypertrophy with airway compromise (prednisone 40-60mg x 5-7 days) (IDSA 2024)
+  - Avoid ampicillin/amoxicillin (causes rash) (IDSA 2024)
+  - Most recover in 2-4 weeks, but fatigue may persist months (IDSA 2024)
+clinical_pearls:
+  - Epstein-Barr virus (EBV) most common cause, transmitted via saliva ('kissing disease')
+  - 'Classic triad: Fever, pharyngitis, lymphadenopathy (especially posterior cervical)'
+  - Avoid ampicillin/amoxicillin (causes maculopapular rash in 90-100% of EBV patients)
+  - Splenomegaly in 50% (peak 2-3 weeks) - avoid contact sports 3-4 weeks to prevent splenic rupture
+  - 'Monospot test (heterophile antibody): Quick, but false negative in first week or young children'
+  - Self-limited, supportive care only (no antivirals effective)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - ENT if severe tonsillar hypertrophy with airway compromise
+  - Hematology if severe cytopenias or prolonged symptoms
+  - Most managed outpatient with supportive care
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

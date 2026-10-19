@@ -1,7 +1,36 @@
 tree_id: ENT-TINNITUS
 name: Tinnitus
+version: '1.0'
+status: draft
 family: ent
 specialty: ENT (Otolaryngology)
+secondary_specialties: []
+urgency: routine
+urgency_explanation: Usually benign; urgent if sudden onset with hearing loss, pulsatile tinnitus, or neurologic symptoms
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H93.11
+    - H93.12
+    - H93.13
+    - H93.19
+  snomed:
+    - '60862001'
+  icpc2: []
+sources:
+  - text: 'AAO-HNSF Clinical Practice Guideline: Tinnitus'
+    origin: citations
+  - text: American Tinnitus Association Guidelines
+    origin: citations
+  - text: 'UpToDate: Etiology and diagnosis of tinnitus'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Ringing in ears (most common description)
   - Buzzing, hissing, clicking, or roaring sounds
@@ -10,21 +39,14 @@ presentations:
   - May worsen with stress or quiet environments
   - Associated hearing loss in many cases
   - May affect sleep and concentration
-icd10:
-  - H93.11 # Tinnitus, right ear
-  - H93.12 # Tinnitus, left ear
-  - H93.13 # Tinnitus, bilateral
-  - H93.19 # Tinnitus, unspecified ear
-snomed:
-  - "60862001" # Tinnitus
-urgency: Low
-urgency_explanation: Usually benign; urgent if sudden onset with hearing loss, pulsatile tinnitus, or neurologic symptoms
-
-referrals:
-  ent: For comprehensive evaluation, especially if unilateral or pulsatile
-  audiology: For hearing test and tinnitus masking evaluation
-  neurology: If neurologic symptoms or concern for acoustic neuroma
-
+differentials:
+  - Acoustic neuroma (vestibular schwannoma)
+  - Ménière's disease
+  - Presbycusis
+  - Noise-induced hearing loss
+  - Ototoxicity
+  - TMJ disorder
+  - Pulsatile tinnitus causes: carotid stenosis, AVM, glomus tumor, venous hum
 workup:
   history:
     - Duration, onset (gradual vs sudden)
@@ -51,7 +73,6 @@ workup:
   laboratory:
     - Usually not needed
     - Consider: CBC, TSH, lipid panel, B12 if systemic symptoms
-
 treatment:
   address_underlying_cause:
     - Remove cerumen impaction
@@ -83,7 +104,6 @@ treatment:
     - Zinc supplementation
     - Melatonin
     - Intratympanic steroids (unless acute acoustic trauma)
-
 clinical_pearls:
   - Affects 10-15% of adults; bothersome in 20% of those affected
   - Most tinnitus is subjective (only patient hears it)
@@ -95,16 +115,20 @@ clinical_pearls:
   - Ménière's disease triad: tinnitus, vertigo, hearing loss
   - No cure for most cases; treatment focuses on habituation and coping
   - Depression and anxiety often co-occur and should be addressed
-
-differentials:
-  - Acoustic neuroma (vestibular schwannoma)
-  - Ménière's disease
-  - Presbycusis
-  - Noise-induced hearing loss
-  - Ototoxicity
-  - TMJ disorder
-  - Pulsatile tinnitus causes: carotid stenosis, AVM, glomus tumor, venous hum
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  ent: For comprehensive evaluation, especially if unilateral or pulsatile
+  audiology: For hearing test and tinnitus masking evaluation
+  neurology: If neurologic symptoms or concern for acoustic neuroma
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Patient presents with ringing in ears
   - Obtain detailed history: unilateral vs bilateral, pulsatile, associated symptoms
@@ -114,9 +138,8 @@ trace:
   - Treat underlying cause if identified
   - Offer sound therapy and CBT
   - Consider hearing aids if hearing loss present
-
-citations:
-  - "AAO-HNSF Clinical Practice Guideline: Tinnitus"
-  - "American Tinnitus Association Guidelines"
-  - "UpToDate: Etiology and diagnosis of tinnitus"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

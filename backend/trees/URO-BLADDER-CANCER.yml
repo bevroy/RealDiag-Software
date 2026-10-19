@@ -1,12 +1,32 @@
 tree_id: URO-BLADDER-CANCER
 name: Bladder Cancer Evaluation
+version: '1.0'
+status: draft
 family: urology
-specialty: Urology, Oncology
+specialty: Urology
+secondary_specialties:
+  - Oncology
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Painless Hematuria, Gross Blood in Urine
 description: Evaluation and management of bladder cancer
-version: "1.0"
-icd10: C67.9
-snomed: 399068003
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C67.9
+  snomed:
+    - '399068003'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
 presentations:
   - Painless hematuria
   - Urinary frequency, urgency
@@ -20,28 +40,26 @@ differentials:
   - Prostatitis
   - Urethritis
   - Benign bladder tumor
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'Hematuria workup - cystoscopy with biopsy diagnostic'
-  - 'CT urogram to stage and rule out upper tract disease'
+  - Hematuria workup - cystoscopy with biopsy diagnostic
+  - CT urogram to stage and rule out upper tract disease
   - 'Non-muscle invasive (Ta, T1, CIS): Transurethral resection of bladder tumor (TURBT)'
-  - 'Intravesical therapy after TURBT - BCG (Bacillus Calmette-Guerin) weekly x6 weeks, then monthly maintenance x3 years (reduces recurrence 40%)'
+  - Intravesical therapy after TURBT - BCG (Bacillus Calmette-Guerin) weekly x6 weeks, then monthly maintenance x3 years (reduces recurrence 40%)
   - 'High-risk non-muscle invasive: Consider cystectomy if BCG failure'
   - 'Muscle-invasive (T2+): Neoadjuvant cisplatin-based chemotherapy x3-4 cycles, then radical cystectomy with pelvic lymph node dissection'
   - 'Bladder preservation alternative (select T2): Maximal TURBT + concurrent chemoradiation'
   - 'Metastatic: Platinum-based chemotherapy (cisplatin + gemcitabine), immunotherapy (pembrolizumab, atezolizumab) for PD-L1+'
-  - 'Urinary diversion after cystectomy - ileal conduit (most common) vs neobladder'
-  - 'Smoking cessation essential - 50% of bladder cancers from smoking'
-  - 'Surveillance - cystoscopy Q3months x2 years, then Q6months x5 years, then annual'
-
-entry_point: bladder_cancer_evaluation
-
+  - Urinary diversion after cystectomy - ileal conduit (most common) vs neobladder
+  - Smoking cessation essential - 50% of bladder cancers from smoking
+  - Surveillance - cystoscopy Q3months x2 years, then Q6months x5 years, then annual
+clinical_pearls:
+  - Painless hematuria classic presentation
+  - Smoking strongest risk factor
+  - Cystoscopy with biopsy diagnostic
+  - Transitional cell carcinoma most common (90%)
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute urinary retention with renal failure
@@ -58,18 +76,17 @@ referrals:
     - Kidney stones
     - Erectile dysfunction
     - PSA elevation
-
-clinical_pearls:
-  - Painless hematuria classic presentation
-  - Smoking strongest risk factor
-  - Cystoscopy with biopsy diagnostic
-  - Transitional cell carcinoma most common (90%)
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: bladder_cancer_evaluation
 nodes:
   - id: bladder_cancer_evaluation
     type: diagnosis
-    name: "Bladder Cancer"
-    icd10: "C67.9"
+    name: Bladder Cancer
+    icd10: C67.9
     urgency: high
     workup:
       - Bladder cancer - 4th most common cancer in men, 90% transitional cell carcinoma (urothelial), 10% squamous cell or adenocarcinoma
@@ -161,3 +178,10 @@ nodes:
       - Very effective third-line or later
       - Prognosis - 5-year survival NMIBC 90%, MIBC 50%, metastatic 5%
       - Prevention - Smoking cessation (reduces recurrence even after diagnosis)
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

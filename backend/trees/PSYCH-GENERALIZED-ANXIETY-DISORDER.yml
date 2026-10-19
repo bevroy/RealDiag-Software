@@ -1,13 +1,33 @@
 tree_id: PSYCH-GENERALIZED-ANXIETY-DISORDER
 name: Generalized Anxiety Disorder
+version: '1.0'
+status: draft
 family: Psychiatry
 specialty: Psychiatry
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Excessive worry and restlessness
 description: |
   Chronic excessive anxiety and worry about multiple events or activities, difficult to control, causing significant distress or impairment. Affects 5-6% of population, women 2:1.
   Different from normal worry by being excessive, persistent (greater than 6 months), and impairing function. Often comorbid with depression (60%), other anxiety disorders, substance abuse. Combination of psychotherapy and medication most effective.
-icd10: F41.1
-snomed: 21897009
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F41.1
+  snomed:
+    - '21897009'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
 presentations:
   - Excessive anxiety most days for ≥6 months
   - Worry about multiple domains
@@ -16,25 +36,13 @@ presentations:
   - Sleep disturbance
   - Difficulty concentrating
   - Significant distress or impairment
-urgency: Low
-referrals:
-  emergency:
-    - Acute suicidal ideation with plan
-    - Homicidal ideation
-    - Psychotic break with danger
-    - Severe mania
-    - Catatonia
-  urgent:
-    - Suicidal ideation without plan
-    - Medication-resistant depression
-    - Severe anxiety
-    - New psychosis
-  routine:
-    - Depression/anxiety management
-    - ADHD evaluation
-    - Therapy referral
-    - Medication management
-
+differentials:
+  - Major depressive disorder
+  - Panic disorder
+  - Social anxiety disorder
+  - Obsessive-compulsive disorder
+  - Hyperthyroidism
+  - Substance use or withdrawal
 workup:
   - DSM-5 diagnostic criteria
   - Excessive anxiety and worry about multiple events/activities, more days than not for at least 6 months
@@ -92,17 +100,37 @@ clinical_pearls:
   - Children with GAD - excessive worry about performance, perfectionism, need reassurance
   - Distinguish from adjustment disorder (anxiety within 3 months of stressor, resolves within 6 months of stressor ending)
   - SSRI withdrawal syndrome - dizziness, paresthesias, flu-like symptoms (taper slowly to avoid)
-differentials:
-  - Major depressive disorder
-  - Panic disorder
-  - Social anxiety disorder
-  - Obsessive-compulsive disorder
-  - Hyperthyroidism
-  - Substance use or withdrawal
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Acute suicidal ideation with plan
+    - Homicidal ideation
+    - Psychotic break with danger
+    - Severe mania
+    - Catatonia
+  urgent:
+    - Suicidal ideation without plan
+    - Medication-resistant depression
+    - Severe anxiety
+    - New psychosis
+  routine:
+    - Depression/anxiety management
+    - ADHD evaluation
+    - Therapy referral
+    - Medication management
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 35-year-old woman presents with 18 months of constant worry about multiple things (finances, health, children's safety, work performance) → Worries most days, difficult to control → Feels on edge, fatigued, difficulty sleeping, muscle tension (neck and shoulders), difficulty concentrating at work → No specific triggers, not limited to social situations → GAD-7 score 16 (severe) → PHQ-9 score 14 (moderate depression) - comorbid MDD → TSH normal, no medical causes identified → Diagnose generalized anxiety disorder and major depressive disorder → Start sertraline 50mg daily → Refer to CBT therapist → Educate on 4-6 week lag for medication effect → Prescribe clonazepam 0.5mg BID PRN x 2 weeks for severe symptoms while SSRI takes effect → Follow-up 2 weeks - tolerating medication, used clonazepam 5 times, starting CBT → Increase sertraline to 100mg daily at week 4 → Discontinue clonazepam → GAD-7 score 9 (mild) and PHQ-9 score 7 (mild) at 8 weeks → Continues CBT weekly x 12 sessions → GAD-7 score 4 (minimal) at 6 months → Continues sertraline 100mg daily, uses CBT techniques for residual symptoms → Plans to continue medication x 12 months then taper
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

@@ -1,13 +1,33 @@
 tree_id: GENERAL-DEHYDRATION-ADULT
 name: Dehydration (Adult)
+version: '1.0'
+status: draft
 family: general
-specialty: Emergency Medicine, Primary Care, Internal Medicine
+specialty: Emergency Medicine
+secondary_specialties:
+  - Primary Care
+  - Internal Medicine
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Dehydration, decreased oral intake
 description: |
   Dehydration is deficit in total body water from inadequate intake or excessive losses.
   Ranges from mild to severe; can lead to acute kidney injury, shock, and death if untreated.
-icd10: E86.0
-snomed: "34095006"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E86.0
+  snomed:
+    - '34095006'
+  icpc2: []
+sources:
+  - text: UpToDate - Emergency Medicine
+    origin: citations
+  - text: WHO Oral Rehydration Guidelines
+    origin: citations
 presentations:
   - Decreased oral intake
   - Vomiting and/or diarrhea
@@ -16,13 +36,12 @@ presentations:
   - Dizziness, lightheadedness
   - Fatigue, weakness
   - If severe - altered mental status, hypotension, tachycardia
-urgency: High
-referrals:
-  emergency:
-    - Severe dehydration with hemodynamic instability
-    - Inability to tolerate oral fluids
-    - Altered mental status
-    - Acute kidney injury
+differentials:
+  - Mild dehydration
+  - Moderate to severe dehydration
+  - Hypovolemic shock
+  - Acute kidney injury
+  - Electrolyte abnormalities
 workup:
   clinical_assessment:
     - Vital signs including orthostatics (drop in BP ≥20 systolic or HR increase ≥20)
@@ -60,14 +79,26 @@ clinical_pearls:
   - Normal saline preferred initial resuscitation fluid
   - Avoid rapid overcorrection of sodium abnormalities
   - Address underlying cause (gastroenteritis, heat exposure, etc)
-differentials:
-  - Mild dehydration
-  - Moderate to severe dehydration
-  - Hypovolemic shock
-  - Acute kidney injury
-  - Electrolyte abnormalities
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Severe dehydration with hemodynamic instability
+    - Inability to tolerate oral fluids
+    - Altered mental status
+    - Acute kidney injury
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 45-year-old with 3 days of vomiting and diarrhea. Unable to keep down fluids. Orthostatic hypotension present. BUN 42, Cr 1.6 (baseline 0.9). Diagnose moderate dehydration with prerenal AKI. Give 2L normal saline IV. Ondansetron for nausea. Symptoms improve, able to tolerate oral fluids. Cr normalizes. Discharge with oral rehydration instructions.
-citations:
-  - UpToDate - Emergency Medicine
-  - WHO Oral Rehydration Guidelines
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

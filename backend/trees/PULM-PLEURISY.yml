@@ -1,11 +1,33 @@
 tree_id: PULM-PLEURISY
 name: Pleurisy (Pleuritic Chest Pain)
+version: '1.0'
+status: draft
 family: pulmonology
 specialty: Pulmonology
-icd10: R07.1
-snomed: 3723001
-urgency: moderate
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R07.1
+  snomed:
+    - '3723001'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: CHEST Guidelines on Pleuritic Pain Evaluation 2021
+    origin: trace.source
 presentations:
   - Sharp, stabbing chest pain
   - Pain worsens with deep breathing, coughing, or movement
@@ -16,6 +38,19 @@ presentations:
   - Associated symptoms depend on etiology - fever, dyspnea, cough
   - Tachypnea and shallow breathing
   - May have history of recent viral illness, trauma, or pulmonary embolism risk factors
+differentials:
+  - Viral pleuritis (most common, self-limited)
+  - Bacterial pneumonia with pleural involvement
+  - Pulmonary embolism (sudden onset, risk factors)
+  - Pneumothorax (decreased breath sounds, hyperresonance)
+  - Rib fracture or costochondritis (tender to palpation)
+  - Pericarditis (pain better leaning forward, diffuse ST elevation)
+  - Acute coronary syndrome (cardiac risk factors, troponin elevation)
+  - Pleural effusion (dullness to percussion)
+  - Lung cancer (chronic, weight loss, smoking history)
+  - Autoimmune pleuritis (lupus, rheumatoid arthritis)
+  - Tuberculous pleuritis (endemic areas, chronic)
+  - Mesothelioma (asbestos exposure)
 workup:
   - Detailed history - onset, quality, radiation, associated symptoms, risk factors
   - Physical examination - respiratory rate, breath sounds, pleural rub, cardiac exam
@@ -63,31 +98,27 @@ clinical_pearls:
   - Autoimmune pleuritis - lupus most common (can be first manifestation)
   - Post-cardiac injury syndrome (Dressler syndrome) - pleuritis 2-10 weeks after MI or cardiac surgery
   - Familial Mediterranean fever - recurrent pleuritis with fever in Mediterranean populations
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pulmonology for recurrent pleuritis, complicated effusion, or unclear etiology
   - Cardiology if pericarditis or post-MI syndrome
   - Rheumatology if autoimmune/connective tissue disease suspected
   - Thoracic surgery for empyema requiring decortication or recurrent malignant effusions
   - Oncology if malignant effusion
-differentials:
-  - Viral pleuritis (most common, self-limited)
-  - Bacterial pneumonia with pleural involvement
-  - Pulmonary embolism (sudden onset, risk factors)
-  - Pneumothorax (decreased breath sounds, hyperresonance)
-  - Rib fracture or costochondritis (tender to palpation)
-  - Pericarditis (pain better leaning forward, diffuse ST elevation)
-  - Acute coronary syndrome (cardiac risk factors, troponin elevation)
-  - Pleural effusion (dullness to percussion)
-  - Lung cancer (chronic, weight loss, smoking history)
-  - Autoimmune pleuritis (lupus, rheumatoid arthritis)
-  - Tuberculous pleuritis (endemic areas, chronic)
-  - Mesothelioma (asbestos exposure)
-trace:
-  source: CHEST Guidelines on Pleuritic Pain Evaluation 2021
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'moderate' mapped to 'routine'

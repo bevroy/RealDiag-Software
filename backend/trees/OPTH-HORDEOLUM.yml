@@ -1,34 +1,42 @@
 tree_id: OPTH-HORDEOLUM
 name: Hordeolum (Stye)
+version: '1.0'
+status: draft
 family: Ophthalmology
 specialty: Ophthalmology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Painful red eyelid bump
 description: Acute bacterial infection of eyelid gland causing painful red swollen nodule at lid margin. Warm compresses resolve most cases within 5-7 days, spontaneous drainage common, rarely requires incision and drainage.
-icd10: H00.019
-snomed: 1489008
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H00.019
+  snomed:
+    - '1489008'
+  icpc2: []
+sources:
+  - text: AAO (American Academy of Ophthalmology) Preferred Practice Patterns
+    origin: citations
+  - text: RCOphth (Royal College of Ophthalmologists) Clinical Guidelines
+    origin: citations
+  - text: UpToDate - Ophthalmology
+    origin: citations
 presentations:
   - Painful, red eyelid swelling
   - Tender nodule at lid margin (external) or tarsus (internal)
   - Acute onset
   - May have purulent drainage
   - Warmth, erythema
-urgency: routine
-
-referrals:
-  emergency:
-    - GI bleeding with instability
-    - Acute liver failure
-    - Perforated viscus
-    - Cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting
-  routine:
-    - IBS management
-    - GERD treatment
-    - Screening colonoscopy
-
+differentials:
+  - Chalazion: painless chronic eyelid nodule, sterile granulomatous inflammation, develops over weeks
+  - Preseptal cellulitis: diffuse eyelid swelling and erythema, fever, tender, no discrete nodule, may follow hordeolum
+  - Dacryocystitis: infection of lacrimal sac at medial canthus, swelling and erythema medial lower eyelid, epiphora
+  - Sebaceous cell carcinoma: painless recurrent lesion, loss of eyelashes, does not respond to antibiotics
 workup:
   - Clinical diagnosis: acute onset painful red swollen tender nodule on eyelid
   - External hordeolum (stye): infection of Zeis gland (sebaceous) or Moll gland (apocrine) at base of eyelash, points to skin surface
@@ -40,7 +48,6 @@ workup:
   - Causative organism: Staphylococcus aureus (most common)
   - Risk factors: blepharitis, seborrheic dermatitis, rosacea, poor eyelid hygiene, diabetes
   - Usually unilateral and localized (vs diffuse in preseptal cellulitis)
-
 treatment:
   - Conservative management (first-line): most resolve spontaneously in 5-7 days with warm compresses
   - Warm compresses: apply warm washcloth to closed eyelid 10-15 minutes QID (promotes drainage and resolution)
@@ -57,7 +64,6 @@ treatment:
   - Natural history: most drain spontaneously within 5-7 days with warm compresses
   - May evolve into chalazion: if acute infection resolves but granulomatous inflammation persists (chronic painless nodule)
   - Prevention: daily eyelid hygiene, treat underlying blepharitis
-
 clinical_pearls:
   - Acute painful red swollen tender nodule at eyelid margin
   - External points to skin, internal points to conjunctiva
@@ -67,17 +73,33 @@ clinical_pearls:
   - Distinguish from chalazion: hordeolum acute and painful, chalazion chronic and painless
   - May evolve into chalazion if acute infection resolves but inflammation persists
   - Staphylococcus aureus most common organism
-
-differentials:
-  - Chalazion: painless chronic eyelid nodule, sterile granulomatous inflammation, develops over weeks
-  - Preseptal cellulitis: diffuse eyelid swelling and erythema, fever, tender, no discrete nodule, may follow hordeolum
-  - Dacryocystitis: infection of lacrimal sac at medial canthus, swelling and erythema medial lower eyelid, epiphora
-  - Sebaceous cell carcinoma: painless recurrent lesion, loss of eyelashes, does not respond to antibiotics
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 35-year-old woman presented with 2 days of painful red bump on left upper eyelid. Acute onset, increasingly tender. No vision changes. Denies contact lens use. Exam showed localized tender erythematous swelling at upper eyelid margin with small yellow pustule at center (pointing to skin surface), no periorbital cellulitis, extraocular movements intact, vision normal. Diagnosed with external hordeolum (stye - infection of eyelash follicle gland). Started warm compresses: apply warm washcloth to closed eyelid 10-15 minutes four times daily to promote drainage. Prescribed erythromycin 0.5% ointment to eyelid margin four times daily x7 days. Ibuprofen 400 mg Q6H PRN for pain. Counseled NOT to squeeze or manipulate lesion (may spread infection). At 3 days pustule spontaneously drained overnight, pain significantly improved. At 5 days swelling resolved 80%, minimal residual tenderness. At 7 days completely resolved, eyelid normal. Counseled on prevention: daily eyelid hygiene with warm compresses and lid scrubs to prevent recurrence, especially if history of blepharitis. No incision and drainage needed.
-
-citations:
-  - AAO (American Academy of Ophthalmology) Preferred Practice Patterns
-  - RCOphth (Royal College of Ophthalmologists) Clinical Guidelines
-  - UpToDate - Ophthalmology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

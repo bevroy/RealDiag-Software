@@ -1,11 +1,33 @@
 tree_id: CARDS-HYPERLIPIDEMIA
 name: Hyperlipidemia
+version: '1.0'
+status: draft
 family: cardiology
 specialty: Cardiology
-icd10: E78.5
-snomed: 55822004
+secondary_specialties: []
 urgency: routine
-homeopathy: []
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E78.5
+  snomed:
+    - '55822004'
+  icpc2: []
+sources:
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
+  - text: UpToDate Clinical Reference
+    origin: citations
+  - text: Evidence-based medical literature
+    origin: citations
+  - text: ACC/AHA Cholesterol Guidelines 2018
+    origin: trace.source
 presentations:
   - Asymptomatic, found on screening labs
   - Xanthomas (cholesterol deposits in skin)
@@ -15,6 +37,12 @@ presentations:
   - Known coronary artery disease or stroke
   - Diabetes mellitus or metabolic syndrome
   - Peripheral arterial disease
+differentials:
+  - Familial hypercholesterolemia (LDL >190, family history, premature CAD)
+  - Familial combined hyperlipidemia (elevated LDL and triglycerides)
+  - Hypertriglyceridemia (TG >150 mg/dL, associated with metabolic syndrome)
+  - Secondary dyslipidemia (hypothyroidism, nephrotic syndrome, cholestasis)
+  - Metabolic syndrome (dyslipidemia with HTN, obesity, insulin resistance)
 workup:
   - Fasting lipid panel (total cholesterol, LDL, HDL, triglycerides)
   - Non-fasting lipid panel acceptable for screening
@@ -48,23 +76,25 @@ clinical_pearls:
   - Non-HDL cholesterol (total - HDL) is better predictor than LDL when TG >200
   - Lipoprotein(a) is independent risk factor not affected by statins
   - Familial hypercholesterolemia screening indicated if LDL >190 mg/dL or premature CAD
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Cardiology for established cardiovascular disease or LDL >190 despite therapy
   - Lipid specialist for refractory hyperlipidemia or familial forms
   - Dietitian for medical nutrition therapy
   - Endocrinology if secondary dyslipidemia due to diabetes or thyroid disease
-differentials:
-  - Familial hypercholesterolemia (LDL >190, family history, premature CAD)
-  - Familial combined hyperlipidemia (elevated LDL and triglycerides)
-  - Hypertriglyceridemia (TG >150 mg/dL, associated with metabolic syndrome)
-  - Secondary dyslipidemia (hypothyroidism, nephrotic syndrome, cholestasis)
-  - Metabolic syndrome (dyslipidemia with HTN, obesity, insulin resistance)
-trace:
-  source: ACC/AHA Cholesterol Guidelines 2018
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Clinical Practice Guidelines from relevant medical specialty societies
-  - UpToDate Clinical Reference
-  - Evidence-based medical literature
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

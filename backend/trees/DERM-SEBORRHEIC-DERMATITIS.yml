@@ -1,11 +1,31 @@
 tree_id: DERM-SEBORRHEIC-DERMATITIS
 name: Seborrheic Dermatitis
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Scaly rash on scalp and face
 description: Chronic inflammatory skin condition affecting sebaceous gland-rich areas (scalp, face, chest) causing greasy yellowish scales and erythema. Antifungal shampoos and topical steroids control symptoms but condition tends to recur.
-icd10: L21.9
-snomed: 86708008
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L21.9
+  snomed:
+    - '86708008'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Greasy, yellowish scales
   - Erythematous plaques
@@ -13,24 +33,11 @@ presentations:
   - Pruritus variable
   - Chronic, relapsing course
   - Worse in winter, stress
-urgency: non-urgent
-
-referrals:
-  emergency:
-    - Suspected necrotizing fasciitis
-    - Stevens-Johnson syndrome/TEN
-    - Anaphylaxis
-  urgent:
-    - Suspected melanoma
-    - Rapidly growing lesion
-    - Severe drug reaction
-    - Suspected malignancy
-  routine:
-    - Chronic dermatitis management
-    - Acne unresponsive to treatment
-    - Cosmetic concerns
-    - Mole surveillance
-
+differentials:
+  - Psoriasis: well-demarcated thick plaques with silvery scales, extensor surfaces (elbows, knees), nail pitting
+  - Atopic dermatitis: flexural involvement, personal/family history atopy, dry skin, intense pruritus
+  - Tinea capitis: focal hair loss, broken hairs, KOH prep shows fungal hyphae, more common children
+  - Contact dermatitis: pruritic, acute onset after exposure to allergen or irritant, distribution matches exposure
 workup:
   - Clinical diagnosis: greasy yellowish scales with erythema in sebaceous gland-rich areas
   - Common locations: scalp (dandruff), eyebrows, nasolabial folds, ears, central chest, intertriginous areas
@@ -42,7 +49,6 @@ workup:
   - No lab testing needed: clinical diagnosis
   - Biopsy: only if diagnosis uncertain (shows spongiosis, parakeratosis)
   - Rule out psoriasis: well-demarcated plaques with silvery scales (vs greasy yellow scales)
-
 treatment:
   - Scalp treatment (first-line): medicated shampoos used 2-3 times weekly
   - Ketoconazole 2% shampoo: antifungal most effective (targets Malassezia yeast), lather and leave on 5 minutes then rinse
@@ -58,7 +64,6 @@ treatment:
   - Body/chest: ketoconazole 2% shampoo used as body wash or selenium sulfide lotion
   - Maintenance: continue medicated shampoos 1-2 times weekly to prevent recurrence
   - Lifestyle: manage stress, adequate sleep, sunlight may improve (UV has anti-inflammatory effect)
-
 clinical_pearls:
   - Greasy yellowish scales in sebaceous areas (scalp, eyebrows, nasolabial folds, chest)
   - Chronic relapsing condition - maintenance therapy needed
@@ -68,17 +73,35 @@ clinical_pearls:
   - Calcineurin inhibitors safe for long-term facial use
   - Worse in winter, stress, Parkinson disease
   - Dandruff is mild form affecting scalp only
-
-differentials:
-  - Psoriasis: well-demarcated thick plaques with silvery scales, extensor surfaces (elbows, knees), nail pitting
-  - Atopic dermatitis: flexural involvement, personal/family history atopy, dry skin, intense pruritus
-  - Tinea capitis: focal hair loss, broken hairs, KOH prep shows fungal hyphae, more common children
-  - Contact dermatitis: pruritic, acute onset after exposure to allergen or irritant, distribution matches exposure
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Suspected necrotizing fasciitis
+    - Stevens-Johnson syndrome/TEN
+    - Anaphylaxis
+  urgent:
+    - Suspected melanoma
+    - Rapidly growing lesion
+    - Severe drug reaction
+    - Suspected malignancy
+  routine:
+    - Chronic dermatitis management
+    - Acne unresponsive to treatment
+    - Cosmetic concerns
+    - Mole surveillance
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 35-year-old man presented with 2 years of scalp flaking and facial rash. Scalp showed diffuse fine white flakes (dandruff) with mild erythema. Face showed erythematous patches with greasy yellowish scales in eyebrows bilaterally, nasolabial folds, and glabella. Mild pruritus. Symptoms worse in winter months. Using regular shampoo and over-the-counter dandruff shampoo with minimal improvement. Exam confirmed seborrheic dermatitis scalp and face. Started ketoconazole 2% shampoo three times weekly (lather, leave on scalp 5 minutes, rinse). Ketoconazole 2% cream to facial lesions twice daily. Hydrocortisone 1% cream to face twice daily x1 week for inflammation then discontinue. At 2 weeks scalp flaking reduced 70%, facial lesions improved 60%. At 4 weeks scalp clear, facial lesions 90% resolved. Continued ketoconazole shampoo twice weekly maintenance, discontinued facial cream. At 3 months scalp remains clear, face occasional mild flare in winter managed with short course ketoconazole cream. Counseled on chronic relapsing nature and importance of maintenance medicated shampoo to prevent recurrence.
-
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'non-urgent' mapped to 'routine'

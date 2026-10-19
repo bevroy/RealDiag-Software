@@ -1,27 +1,32 @@
 tree_id: NEU-HEMORRHAGIC-STROKE
 name: Hemorrhagic Stroke
+version: '1.0'
+status: draft
 family: Neurology
-specialty: Neurology/Emergency Medicine
+specialty: Neurology
+secondary_specialties:
+  - Emergency Medicine
+urgency: emergent
+urgency_explanation: ''
 chief_complaint: Sudden onset focal neurologic deficit with intracranial hemorrhage
 description: Acute neurologic deficit caused by spontaneous rupture of blood vessel resulting in intracerebral hemorrhage (ICH) or subarachnoid hemorrhage (SAH) with devastating morbidity and mortality
-
-icd10: I61.9
-snomed: "230690007"
-
-urgency: emergency
-
-homeopathy:
-  - remedy: "Arnica montana 200C"
-    indications: "Trauma, bruising, hemorrhage, head injury, shock state, bleeding"
-  - remedy: "Belladonna 200C"
-    indications: "Sudden onset, throbbing headache, flushed face, dilated pupils, confusion"
-  - remedy: "Lachesis 200C"
-    indications: "Left-sided symptoms, hemorrhage, worse after sleep, purple discoloration"
-  - remedy: "Opium 200C"
-    indications: "Coma, stupor, stroke-like presentation, slow response, respiratory depression"
-  - remedy: "Bothrops 30C"
-    indications: "Hemorrhagic tendency, right-sided hemiplegia, blood disorders"
-
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I61.9
+  snomed:
+    - '230690007'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Sudden severe headache (worst headache of life - SAH)
   - Focal neurologic deficit (hemiparesis, aphasia, visual field defect)
@@ -33,7 +38,14 @@ presentations:
   - Rapidly progressive symptoms
   - Worst in early morning hours (elevated BP during sleep)
   - Activity-related onset (SAH during exertion)
-
+differentials:
+  - Ischemic stroke (CT negative for hemorrhage, similar presentation otherwise)
+  - Brain tumor with hemorrhage (underlying mass on MRI)
+  - Vascular malformation (AVM, cavernoma - younger patients)
+  - Cerebral venous thrombosis (hemorrhagic infarct, different pattern)
+  - Subdural or epidural hematoma (trauma history, different CT appearance)
+  - Hypertensive encephalopathy (elevated BP, confusion, seizures, posterior reversible encephalopathy syndrome PRES on MRI)
+  - Migraine with aura (visual symptoms, no permanent deficit)
 workup:
   - Immediate recognition: stroke alert for any acute focal neurologic deficit or worst headache of life, time is critical (golden hour for hemorrhage control)
   - Rapid assessment: airway breathing circulation (ABCs), vital signs (elevated BP common in ICH), Glasgow Coma Scale (GCS), NIHSS stroke scale score (quantify deficit severity), blood glucose (exclude hypoglycemia mimicking stroke)
@@ -44,7 +56,6 @@ workup:
   - Reverse coagulopathy urgently if present: warfarin (INR greater than 1.5) - give 4-factor prothrombin complex concentrate (PCC 25-50 units/kg) plus vitamin K 10 mg IV (faster reversal than FFP), direct oral anticoagulants (dabigatran - idarucizumab, rivaroxaban/apixaban - andexanet alfa or PCC), heparin - protamine sulfate, thrombocytopenia - platelet transfusion
   - Subarachnoid hemorrhage workup: non-contrast CT 95 percent sensitive first 24 hours (blood in basal cisterns, sylvian fissures), lumbar puncture if CT negative and high suspicion (xanthochromia - yellow CSF from bilirubin, elevated RBC count that does not decrease tube 1 to 4), CT angiography or conventional angiography to identify aneurysm (85 percent SAH from aneurysm rupture)
   - MRI brain (if subacute or diagnosis unclear): gradient echo (GRE) or susceptibility-weighted imaging (SWI) detects old microbleeds (suggests hypertensive vasculopathy or amyloid angiopathy), identifies tumor or vascular malformation, better for posterior fossa
-
 treatment:
   - Emergency management: secure airway if GCS less than 8 or declining (intubation for airway protection), elevate head of bed 30 degrees (reduce ICP), IV access (two large bore), activate neurosurgery stroke team
   - Blood pressure management (ICH): lower BP acutely reduces hematoma expansion but balance cerebral perfusion, systolic BP 140-180 mmHg target (lower if possible without neurologic decline), IV nicardipine or labetalol (titratable), avoid nitroprusside (increases ICP), lower BP within 1 hour of presentation if systolic BP greater than 220 mmHg
@@ -56,7 +67,6 @@ treatment:
   - ICU monitoring: continuous cardiac telemetry (arrhythmias common), frequent neurologic checks (hourly initially), repeat CT head at 6 hours and if neurologic decline (detect hematoma expansion), monitor for complications (rebleeding, hydrocephalus, seizures, cerebral edema)
   - Medical complications: fever (associated with worse outcome - treat aggressively with acetaminophen, cooling), hyperglycemia (keep glucose 80-180 mg/dL with insulin), electrolyte abnormalities
   - Long-term management: rehabilitation (physical, occupational, speech therapy), secondary prevention (strict BP control, target less than 130/80 for ICH survivors), avoid anticoagulation if possible (high rebleeding risk especially lobar amyloid angiopathy), restart antiplatelet therapy cautiously after 4-8 weeks if needed for coronary disease
-
 clinical_pearls:
   - Hemorrhagic stroke is 10-15 percent of all strokes but highest mortality (40 percent at 30 days)
   - Non-contrast CT head is first-line imaging (detects acute blood immediately)
@@ -68,7 +78,8 @@ clinical_pearls:
   - Nimodipine reduces vasospasm and improves outcomes in SAH
   - Intraventricular extension of ICH worsens prognosis
   - Lobar hemorrhage in elderly suggests cerebral amyloid angiopathy (recurrence risk high)
-
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department immediately (stroke alert activation)
   - Neurosurgery emergently for large cerebellar hemorrhage, hydrocephalus, or deteriorating patient (surgical evacuation consideration)
@@ -76,16 +87,24 @@ referrals:
   - Interventional neuroradiology for SAH aneurysm coiling (preferred over surgical clipping for most)
   - Rehabilitation services (inpatient then outpatient physical, occupational, speech therapy)
   - Vascular neurology for secondary prevention and long-term management
-
-differentials:
-  - Ischemic stroke (CT negative for hemorrhage, similar presentation otherwise)
-  - Brain tumor with hemorrhage (underlying mass on MRI)
-  - Vascular malformation (AVM, cavernoma - younger patients)
-  - Cerebral venous thrombosis (hemorrhagic infarct, different pattern)
-  - Subdural or epidural hematoma (trauma history, different CT appearance)
-  - Hypertensive encephalopathy (elevated BP, confusion, seizures, posterior reversible encephalopathy syndrome PRES on MRI)
-  - Migraine with aura (visual symptoms, no permanent deficit)
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies:
+    - remedy: Arnica montana 200C
+      indications: Trauma, bruising, hemorrhage, head injury, shock state, bleeding
+    - remedy: Belladonna 200C
+      indications: Sudden onset, throbbing headache, flushed face, dilated pupils, confusion
+    - remedy: Lachesis 200C
+      indications: Left-sided symptoms, hemorrhage, worse after sleep, purple discoloration
+    - remedy: Opium 200C
+      indications: Coma, stupor, stroke-like presentation, slow response, respiratory depression
+    - remedy: Bothrops 30C
+      indications: Hemorrhagic tendency, right-sided hemiplegia, blood disorders
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 62-year-old man with history of poorly controlled hypertension presents to ED via EMS with sudden onset right-sided weakness and slurred speech, onset 1 hour ago while watching TV
   - Past medical history: hypertension x 10 years (poorly compliant with medications), hyperlipidemia, 30 pack-year smoking history
@@ -112,8 +131,8 @@ trace:
   - Outpatient follow-up neurology 1 month: repeat MRI brain shows chronic left basal ganglia hemosiderin deposition, small residual cavity, no new hemorrhage
   - Secondary prevention: strict BP control (target less than 130/80) on amlodipine 10 mg and lisinopril 40 mg daily, home BP monitoring, atorvastatin continued, aspirin HELD (high rebleed risk first 6-12 months after ICH, patient has no strong indication for antiplatelet - no CAD or stent)
   - 6 months: BP well controlled at home (average 125/78), no recurrent hemorrhage, mild residual right hand weakness only, returned to work part-time, smoking cessation achieved
-
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'emergency' mapped to 'emergent'

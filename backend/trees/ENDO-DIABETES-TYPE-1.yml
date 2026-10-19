@@ -1,12 +1,31 @@
 tree_id: ENDO-DIABETES-TYPE-1
 name: Type 1 Diabetes Mellitus
+version: '1.0'
+status: draft
 family: Endocrinology
 specialty: Endocrinology
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
 chief_complaint: Polyuria and weight loss
 description: Autoimmune destruction of pancreatic beta cells causing absolute insulin deficiency with hyperglycemia, ketosis-prone
-
-icd10: E10.9
-snomed: 46635009
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E10.9
+  snomed:
+    - '46635009'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
 presentations:
   - Polyuria, polydipsia, polyphagia
   - Weight loss despite increased appetite
@@ -14,9 +33,43 @@ presentations:
   - May present with DKA: nausea, vomiting, abdominal pain, Kussmaul breathing
   - Typically young onset
   - Rapid symptom onset
-
-urgency: emergent
-
+differentials:
+  - Type 2 diabetes (older, obese, insidious onset, insulin resistant, C-peptide normal/elevated)
+  - LADA (latent autoimmune diabetes in adults) - slow-onset type 1 in adults, autoantibodies positive
+  - Monogenic diabetes (MODY) - family history, young onset, non-obese, negative autoantibodies
+  - Secondary diabetes (pancreatitis, cystic fibrosis, medications)
+workup:
+  - Clinical presentation: classic triad polyuria (osmotic diuresis from glucosuria), polydipsia (dehydration), polyphagia with weight loss (catabolic state from insulin deficiency), rapid onset over days-weeks
+  - Age: typically children and young adults (peak age 10-14 years), but can occur at any age (latent autoimmune diabetes in adults LADA is slow-onset type 1 in adults)
+  - Diabetic ketoacidosis (DKA) at presentation: 25-40 percent present in DKA (nausea, vomiting, abdominal pain, Kussmaul breathing, fruity breath, altered mental status) - medical emergency
+  - Laboratory diagnosis: fasting glucose greater than or equal to 126 mg/dL, random glucose greater than or equal to 200 mg/dL with symptoms, hemoglobin A1c greater than or equal to 6.5 percent
+  - Distinguish type 1 from type 2: autoantibodies positive in type 1 (GAD65 antibodies most common 70-80 percent, islet cell antibodies ICA, insulin autoantibodies IAA, IA-2 antibodies), C-peptide low or absent in type 1 (measures endogenous insulin production)
+  - DKA workup if suspected: glucose typically greater than 250 mg/dL, anion gap metabolic acidosis (pH less than 7.3, bicarbonate less than 18 mEq/L, anion gap greater than 10), ketones in urine or serum (beta-hydroxybutyrate greater than 3 mmol/L)
+  - Hemoglobin A1c: reflects average glucose over 3 months, diagnosis greater than or equal to 6.5 percent, goal less than 7 percent for most adults (less than 7.5 percent for adolescents)
+  - Screen for complications: annual comprehensive foot exam (neuropathy, ulcers), annual urine albumin-to-creatinine ratio (nephropathy), annual dilated eye exam (retinopathy), lipid panel
+  - Screen for autoimmune comorbidities: thyroid (TSH, anti-TPO - Hashimoto common), celiac disease (tissue transglutaminase antibodies), Addison disease if symptoms
+treatment:
+  - Insulin replacement essential (absolute insulin deficiency requires exogenous insulin for survival)
+  - Basal-bolus regimen gold standard: long-acting basal insulin once or twice daily (glargine 10-20 units daily, detemir, or degludec) plus rapid-acting bolus insulin with meals (lispro, aspart, or glulisine - dose based on carb counting and correction factor)
+  - Carbohydrate counting: insulin-to-carb ratio (typically 1 unit per 10-15 grams carbs, individualized), correction factor (1 unit lowers glucose by 30-50 mg/dL)
+  - Continuous glucose monitoring (CGM): real-time glucose readings, alerts for hypo/hyperglycemia, improves A1c and reduces hypoglycemia, recommended for all type 1 diabetes
+  - Insulin pump therapy: continuous subcutaneous insulin infusion (basal rate plus boluses), integrated with CGM (sensor-augmented pump), automated insulin delivery systems (closed-loop, hybrid closed-loop)
+  - Target glucose: fasting and pre-meal 80-130 mg/dL, post-meal less than 180 mg/dL, bedtime 90-150 mg/dL
+  - Hypoglycemia treatment: glucose less than 70 mg/dL, rule of 15 (give 15 grams fast-acting carbs, recheck in 15 minutes), if severe (unconscious, seizure) give glucagon 1 mg IM/SC or dextrose 50 mL IV
+  - DKA treatment: aggressive IV fluid resuscitation (normal saline 1 L/hr initially), regular insulin infusion 0.1 units/kg/hr, potassium replacement (DKA causes total body potassium depletion), treat precipitant (infection most common)
+  - Sick day management: never stop insulin (stress increases insulin requirements), check glucose and ketones every 2-4 hours, increase insulin doses, stay hydrated, seek care if persistent ketones or vomiting
+  - Exercise: lowers glucose (reduce insulin or increase carbs before exercise), check glucose before/during/after, carry fast-acting carbs
+  - Pregnancy: tight glucose control critical (prevents congenital anomalies and complications), goal A1c less than 6 percent, more frequent monitoring
+clinical_pearls:
+  - Classic triad polyuria, polydipsia, weight loss in young person think type 1 diabetes
+  - 25-40 percent present in diabetic ketoacidosis (nausea, vomiting, Kussmaul breathing)
+  - Autoantibodies positive (GAD65 most common), C-peptide low (distinguishes from type 2)
+  - Requires insulin for survival (absolute insulin deficiency)
+  - Basal-bolus regimen: long-acting basal plus rapid-acting bolus with meals
+  - CGM recommended for all type 1 (improves A1c, reduces hypoglycemia)
+  - Hypoglycemia rule of 15: 15 grams carbs, recheck in 15 minutes
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - DKA
@@ -34,46 +87,14 @@ referrals:
     - Thyroid nodule surveillance
     - Osteoporosis management
     - Lipid disorders
-
-workup:
-  - Clinical presentation: classic triad polyuria (osmotic diuresis from glucosuria), polydipsia (dehydration), polyphagia with weight loss (catabolic state from insulin deficiency), rapid onset over days-weeks
-  - Age: typically children and young adults (peak age 10-14 years), but can occur at any age (latent autoimmune diabetes in adults LADA is slow-onset type 1 in adults)
-  - Diabetic ketoacidosis (DKA) at presentation: 25-40 percent present in DKA (nausea, vomiting, abdominal pain, Kussmaul breathing, fruity breath, altered mental status) - medical emergency
-  - Laboratory diagnosis: fasting glucose greater than or equal to 126 mg/dL, random glucose greater than or equal to 200 mg/dL with symptoms, hemoglobin A1c greater than or equal to 6.5 percent
-  - Distinguish type 1 from type 2: autoantibodies positive in type 1 (GAD65 antibodies most common 70-80 percent, islet cell antibodies ICA, insulin autoantibodies IAA, IA-2 antibodies), C-peptide low or absent in type 1 (measures endogenous insulin production)
-  - DKA workup if suspected: glucose typically greater than 250 mg/dL, anion gap metabolic acidosis (pH less than 7.3, bicarbonate less than 18 mEq/L, anion gap greater than 10), ketones in urine or serum (beta-hydroxybutyrate greater than 3 mmol/L)
-  - Hemoglobin A1c: reflects average glucose over 3 months, diagnosis greater than or equal to 6.5 percent, goal less than 7 percent for most adults (less than 7.5 percent for adolescents)
-  - Screen for complications: annual comprehensive foot exam (neuropathy, ulcers), annual urine albumin-to-creatinine ratio (nephropathy), annual dilated eye exam (retinopathy), lipid panel
-  - Screen for autoimmune comorbidities: thyroid (TSH, anti-TPO - Hashimoto common), celiac disease (tissue transglutaminase antibodies), Addison disease if symptoms
-
-treatment:
-  - Insulin replacement essential (absolute insulin deficiency requires exogenous insulin for survival)
-  - Basal-bolus regimen gold standard: long-acting basal insulin once or twice daily (glargine 10-20 units daily, detemir, or degludec) plus rapid-acting bolus insulin with meals (lispro, aspart, or glulisine - dose based on carb counting and correction factor)
-  - Carbohydrate counting: insulin-to-carb ratio (typically 1 unit per 10-15 grams carbs, individualized), correction factor (1 unit lowers glucose by 30-50 mg/dL)
-  - Continuous glucose monitoring (CGM): real-time glucose readings, alerts for hypo/hyperglycemia, improves A1c and reduces hypoglycemia, recommended for all type 1 diabetes
-  - Insulin pump therapy: continuous subcutaneous insulin infusion (basal rate plus boluses), integrated with CGM (sensor-augmented pump), automated insulin delivery systems (closed-loop, hybrid closed-loop)
-  - Target glucose: fasting and pre-meal 80-130 mg/dL, post-meal less than 180 mg/dL, bedtime 90-150 mg/dL
-  - Hypoglycemia treatment: glucose less than 70 mg/dL, rule of 15 (give 15 grams fast-acting carbs, recheck in 15 minutes), if severe (unconscious, seizure) give glucagon 1 mg IM/SC or dextrose 50 mL IV
-  - DKA treatment: aggressive IV fluid resuscitation (normal saline 1 L/hr initially), regular insulin infusion 0.1 units/kg/hr, potassium replacement (DKA causes total body potassium depletion), treat precipitant (infection most common)
-  - Sick day management: never stop insulin (stress increases insulin requirements), check glucose and ketones every 2-4 hours, increase insulin doses, stay hydrated, seek care if persistent ketones or vomiting
-  - Exercise: lowers glucose (reduce insulin or increase carbs before exercise), check glucose before/during/after, carry fast-acting carbs
-  - Pregnancy: tight glucose control critical (prevents congenital anomalies and complications), goal A1c less than 6 percent, more frequent monitoring
-
-clinical_pearls:
-  - Classic triad polyuria, polydipsia, weight loss in young person think type 1 diabetes
-  - 25-40 percent present in diabetic ketoacidosis (nausea, vomiting, Kussmaul breathing)
-  - Autoantibodies positive (GAD65 most common), C-peptide low (distinguishes from type 2)
-  - Requires insulin for survival (absolute insulin deficiency)
-  - Basal-bolus regimen: long-acting basal plus rapid-acting bolus with meals
-  - CGM recommended for all type 1 (improves A1c, reduces hypoglycemia)
-  - Hypoglycemia rule of 15: 15 grams carbs, recheck in 15 minutes
-
-differentials:
-  - Type 2 diabetes (older, obese, insidious onset, insulin resistant, C-peptide normal/elevated)
-  - LADA (latent autoimmune diabetes in adults) - slow-onset type 1 in adults, autoantibodies positive
-  - Monogenic diabetes (MODY) - family history, young onset, non-obese, negative autoantibodies
-  - Secondary diabetes (pancreatitis, cystic fibrosis, medications)
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 14-year-old girl presents with 3 weeks polyuria (urinating every hour including 4-5 times nightly), polydipsia (drinking 3-4 liters water daily), 12-pound weight loss despite increased appetite, fatigue
   - History: previously healthy, no family history diabetes, normal weight (BMI 22)
@@ -95,8 +116,7 @@ trace:
   - Counseled on: never stop insulin (even if sick or not eating), check ketones if glucose greater than 250 mg/dL or sick, annual screening for complications (eye exam, urine albumin, foot exam), screen for thyroid disease and celiac
   - 6 months: A1c 6.9 percent (excellent control), time in range 82 percent, well-adjusted to diabetes management
   - Considering insulin pump therapy (patient interested in automation, hybrid closed-loop system)
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

@@ -1,11 +1,33 @@
 tree_id: GI-ULCERATIVE-COLITIS
 name: Ulcerative Colitis
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K51.90
-snomed: 64766004
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K51.90
+  snomed:
+    - '64766004'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: ACG Clinical Guidelines on Ulcerative Colitis 2019, ECCO Guidelines on UC 2022
+    origin: trace.source
 presentations:
   - Bloody diarrhea (hallmark symptom)
   - Urgency and tenesmus (frequent urge to defecate)
@@ -16,6 +38,15 @@ presentations:
   - Fever in moderate to severe flares
   - Extraintestinal manifestations: arthritis, erythema nodosum, pyoderma gangrenosum, uveitis, PSC
   - Young age of onset (peak 15-30 years, second peak 50-70 years)
+differentials:
+  - Ulcerative colitis (continuous inflammation from rectum, superficial)
+  - Crohn's disease (skip lesions, transmural, can affect any GI segment, fistulas)
+  - Infectious colitis (C. diff, Campylobacter, E. coli O157:H7, Salmonella, Shigella)
+  - Ischemic colitis (elderly, vascular disease, thumbprinting on imaging)
+  - Microscopic colitis (chronic watery diarrhea, normal colonoscopy, biopsy diagnosis)
+  - Diverticulitis (left lower quadrant pain, fever, CT shows inflammation)
+  - Colorectal cancer (weight loss, change in bowel habits, mass on colonoscopy)
+  - Radiation colitis (history of pelvic radiation)
 workup:
   - Colonoscopy with biopsies - gold standard for diagnosis
   - Continuous mucosal inflammation starting from rectum extending proximally
@@ -58,34 +89,34 @@ treatment:
   - Total colectomy with ileal pouch-anal anastomosis (IPAA) - curative
   - Indications: refractory disease, dysplasia/cancer, toxic megacolon
 clinical_pearls:
-  - "UC limited to colon (vs Crohn's which can affect any GI tract segment)"
-  - "Continuous inflammation from rectum extending proximally (vs skip lesions in Crohn's)"
-  - "Increased risk of colorectal cancer - start surveillance colonoscopy 8-10 years after diagnosis"
-  - "PSC (primary sclerosing cholangitis) associated with UC in 5% - increases cancer risk"
-  - "Toxic megacolon is surgical emergency - colon dilation >6 cm with systemic toxicity"
-  - "Smoking protective for UC (opposite of Crohn's) - mechanism unknown"
-  - "C. difficile infection common trigger for UC flares - always test in hospitalized patients"
-  - "Colectomy is curative for UC but pouchitis occurs in 50% of IPAA patients"
+  - UC limited to colon (vs Crohn's which can affect any GI tract segment)
+  - Continuous inflammation from rectum extending proximally (vs skip lesions in Crohn's)
+  - Increased risk of colorectal cancer - start surveillance colonoscopy 8-10 years after diagnosis
+  - PSC (primary sclerosing cholangitis) associated with UC in 5% - increases cancer risk
+  - Toxic megacolon is surgical emergency - colon dilation >6 cm with systemic toxicity
+  - Smoking protective for UC (opposite of Crohn's) - mechanism unknown
+  - C. difficile infection common trigger for UC flares - always test in hospitalized patients
+  - Colectomy is curative for UC but pouchitis occurs in 50% of IPAA patients
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gastroenterology for colonoscopy, diagnosis confirmation, and ongoing management
   - Colorectal surgery for refractory disease, dysplasia, or complications
   - Ophthalmology if ocular symptoms (uveitis, episcleritis)
   - Dermatology for skin manifestations (erythema nodosum, pyoderma gangrenosum)
-differentials:
-  - Ulcerative colitis (continuous inflammation from rectum, superficial)
-  - Crohn's disease (skip lesions, transmural, can affect any GI segment, fistulas)
-  - Infectious colitis (C. diff, Campylobacter, E. coli O157:H7, Salmonella, Shigella)
-  - Ischemic colitis (elderly, vascular disease, thumbprinting on imaging)
-  - Microscopic colitis (chronic watery diarrhea, normal colonoscopy, biopsy diagnosis)
-  - Diverticulitis (left lower quadrant pain, fever, CT shows inflammation)
-  - Colorectal cancer (weight loss, change in bowel habits, mass on colonoscopy)
-  - Radiation colitis (history of pelvic radiation)
-trace:
-  source: ACG Clinical Guidelines on Ulcerative Colitis 2019, ECCO Guidelines on UC 2022
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

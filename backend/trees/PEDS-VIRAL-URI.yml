@@ -1,11 +1,34 @@
 tree_id: PEDS-VIRAL-URI
 name: Viral Upper Respiratory Infection (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Family Medicine
-icd10: J06.9
-snomed: 82272006
-urgency: []
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Family Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J06.9
+  snomed:
+    - '82272006'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Pediatrics
+    origin: citations
+  - text: CDC Respiratory Illness Guidelines
+    origin: citations
+  - text: AAP Clinical Practice Guidelines, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Nasal congestion or rhinorrhea (clear to yellow/green discharge)
   - Sneezing
@@ -21,6 +44,16 @@ presentations:
   - Duration typically 7-10 days (cough may persist 2-3 weeks)
   - Peak symptoms at days 3-5
   - Commonly follows exposure to sick contacts or daycare
+differentials:
+  - Viral upper respiratory infection (most common - rhinovirus, coronavirus, adenovirus, RSV)
+  - Allergic rhinitis (chronic or seasonal symptoms, clear rhinorrhea, sneezing, itchy eyes, no fever)
+  - Acute bacterial sinusitis (persistent symptoms greater than 10 days OR worsening after initial improvement OR severe symptoms with high fever greater than 39°C and purulent nasal discharge for 3+ days)
+  - Strep pharyngitis (exudative pharyngitis, fever, no cough, tender anterior cervical lymphadenopathy)
+  - Influenza (abrupt onset high fever, myalgias, more severe systemic symptoms, during flu season)
+  - COVID-19 (similar symptoms, consider based on exposure and local prevalence)
+  - Acute otitis media (ear pain, fever, bulging tympanic membrane)
+  - Bronchiolitis (age less than 2 years, wheezing, respiratory distress)
+  - Pneumonia (persistent fever, respiratory distress, hypoxia, crackles on exam)
 workup:
   - Clinical history
   - Duration and progression of symptoms
@@ -101,35 +134,34 @@ treatment:
   - Annual influenza vaccine
   - Ensure up-to-date immunizations
 clinical_pearls:
-  - 'Viral URI most common illness in children - average 6-8 colds per year in young children, up to 12/year in daycare'
-  - 'Color of nasal discharge (green or yellow) does NOT indicate bacterial infection - common in normal course of viral URI'
-  - 'Antibiotics NOT indicated for uncomplicated viral URI - do not prevent bacterial complications and increase antibiotic resistance'
-  - 'Fever in viral URI typically peaks day 2-3 and resolves by day 4-5 - persistence beyond 5 days suggests complication'
-  - 'Over-the-counter cough and cold medications not recommended age less than 6 years - ineffective and potentially harmful'
-  - 'Honey (age greater than 1 year) more effective than dextromethorphan for nighttime cough in children'
-  - 'Most viral URIs self-resolve within 7-10 days - counseling parents on natural history reduces antibiotic prescribing'
-  - 'Secondary bacterial infections (AOM, sinusitis, pneumonia) occur in less than 5% of viral URIs in previously healthy children'
+  - Viral URI most common illness in children - average 6-8 colds per year in young children, up to 12/year in daycare
+  - Color of nasal discharge (green or yellow) does NOT indicate bacterial infection - common in normal course of viral URI
+  - Antibiotics NOT indicated for uncomplicated viral URI - do not prevent bacterial complications and increase antibiotic resistance
+  - Fever in viral URI typically peaks day 2-3 and resolves by day 4-5 - persistence beyond 5 days suggests complication
+  - Over-the-counter cough and cold medications not recommended age less than 6 years - ineffective and potentially harmful
+  - Honey (age greater than 1 year) more effective than dextromethorphan for nighttime cough in children
+  - Most viral URIs self-resolve within 7-10 days - counseling parents on natural history reduces antibiotic prescribing
+  - Secondary bacterial infections (AOM, sinusitis, pneumonia) occur in less than 5% of viral URIs in previously healthy children
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pediatric pulmonology if recurrent respiratory infections with wheezing or persistent symptoms
   - Pediatric ENT if recurrent otitis media, adenoid hypertrophy, or chronic sinusitis
   - Pediatric immunology if unusually frequent or severe infections (suggests immunodeficiency)
   - Pediatric allergy if suspicion for allergic rhinitis as contributing factor
-differentials:
-  - Viral upper respiratory infection (most common - rhinovirus, coronavirus, adenovirus, RSV)
-  - Allergic rhinitis (chronic or seasonal symptoms, clear rhinorrhea, sneezing, itchy eyes, no fever)
-  - Acute bacterial sinusitis (persistent symptoms greater than 10 days OR worsening after initial improvement OR severe symptoms with high fever greater than 39°C and purulent nasal discharge for 3+ days)
-  - Strep pharyngitis (exudative pharyngitis, fever, no cough, tender anterior cervical lymphadenopathy)
-  - Influenza (abrupt onset high fever, myalgias, more severe systemic symptoms, during flu season)
-  - COVID-19 (similar symptoms, consider based on exposure and local prevalence)
-  - Acute otitis media (ear pain, fever, bulging tympanic membrane)
-  - Bronchiolitis (age less than 2 years, wheezing, respiratory distress)
-  - Pneumonia (persistent fever, respiratory distress, hypoxia, crackles on exam)
-trace:
-  source: AAP Clinical Practice Guidelines, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Clinical Practice Guidelines
-  - UpToDate - Pediatrics
-  - CDC Respiratory Illness Guidelines
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

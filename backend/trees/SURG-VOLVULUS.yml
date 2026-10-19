@@ -1,39 +1,60 @@
 tree_id: SURG-VOLVULUS
 name: Colonic Volvulus
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K56.2
-snomed:
-- 235509008
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Colonic Volvulus
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K56.2
+  snomed:
+    - '235509008'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Sudden onset abdominal pain and distension
-- Obstipation
-- Coffee-bean sign on X-ray (sigmoid)
-- Elderly or institutionalized patients
-- Nausea and vomiting
-- May require urgent detorsion
+  - Sudden onset abdominal pain and distension
+  - Obstipation
+  - Coffee-bean sign on X-ray (sigmoid)
+  - Elderly or institutionalized patients
+  - Nausea and vomiting
+  - May require urgent detorsion
+differentials:
+  - Bowel obstruction
+  - Ileus
+  - Hernia
+  - Intussusception
+  - Adhesions
 workup: []
 treatment:
   - 'Sigmoid volvulus: Attempt endoscopic detorsion first (rectal tube placed)'
   - 'Successful detorsion: Elective sigmoid colectomy within 1-2 weeks (high recurrence risk)'
   - 'Failed detorsion or peritonitis: Emergency surgery - resection ± primary anastomosis vs Hartmann'
   - 'Cecal volvulus: Emergency surgical right hemicolectomy (endoscopy usually unsuccessful)'
-  - 'NPO, NG decompression, IV fluid resuscitation'
-  - 'Gastrografin enema diagnostic (bird beak sign)'
-  - 'CT abdomen/pelvis shows whirl sign'
-  - 'Risk of ischemia and perforation - monitor for peritonitis'
-  - 'Mortality 20-40% if ischemic or perforated'
+  - NPO, NG decompression, IV fluid resuscitation
+  - Gastrografin enema diagnostic (bird beak sign)
+  - CT abdomen/pelvis shows whirl sign
+  - Risk of ischemia and perforation - monitor for peritonitis
+  - Mortality 20-40% if ischemic or perforated
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -51,14 +72,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Bowel obstruction
-  - Ileus
-  - Hernia
-  - Intussusception
-  - Adhesions
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

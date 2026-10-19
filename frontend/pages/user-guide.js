@@ -98,6 +98,7 @@ export default function UserGuidePage() {
             <li><strong>Top matches:</strong> Most relevant differential candidates.</li>
             <li><strong>Matched presentations:</strong> Findings that aligned with your input.</li>
             <li><strong>Tests and referrals:</strong> Suggested workup and specialty escalation.</li>
+            <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Some diagnoses do not yet have a reviewed urgency level; rely on red flags and clinical judgment for those.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
           </ul>

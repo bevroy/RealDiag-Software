@@ -1,11 +1,34 @@
 tree_id: PSYCH-ACUTE-STRESS-REACTION
 name: Acute Stress Reaction
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Emergency Medicine
-icd10: F43.0
-snomed: 129104009
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F43.0
+  snomed:
+    - '129104009'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR Criteria, APA Clinical Practice Guideline for PTSD, International Society for Traumatic Stress Studies Guidelines
+    origin: trace.source
 presentations:
   - Exposure to actual or threatened death, serious injury, or sexual violence
   - Occurs immediately or within hours of traumatic event
@@ -16,6 +39,16 @@ presentations:
   - Duration: 3 days to 1 month after trauma exposure
   - Dissociative symptoms common (feeling dazed, altered sense of reality, depersonalization, derealization)
   - Significant distress or functional impairment
+differentials:
+  - Acute Stress Disorder (3 days to 1 month after trauma, specific symptom clusters)
+  - Post-Traumatic Stress Disorder (symptoms persist greater than 1 month)
+  - Acute stress reaction/crisis (immediate response, less severe, resolves quickly)
+  - Adjustment disorder (stressor not traumatic in nature, different symptom pattern)
+  - Panic disorder (panic attacks not triggered by trauma reminders)
+  - Major depressive disorder (may follow trauma, different symptom focus)
+  - Substance withdrawal (agitation, autonomic symptoms)
+  - Traumatic brain injury (cognitive symptoms, history of head trauma)
+  - Dissociative disorders (chronic dissociative symptoms)
 workup:
   - Clinical assessment based on DSM-5-TR criteria for Acute Stress Disorder
   - Detailed trauma history
@@ -69,35 +102,34 @@ treatment:
   - Monitor for PTSD development (30-50% of ASD develops into PTSD)
   - Reassess at 1 month post-trauma
 clinical_pearls:
-  - "Acute Stress Disorder affects 20-50% of trauma survivors in first month"
-  - "30-50% of those with ASD go on to develop PTSD if untreated"
-  - "Early trauma-focused CBT reduces PTSD risk by 50-70% - most effective intervention"
-  - "Dissociative symptoms (depersonalization, derealization, amnesia) associated with higher PTSD risk"
-  - "Critical Incident Stress Debriefing (CISD) NOT recommended - may worsen outcomes"
-  - "Benzodiazepines NOT recommended - interfere with trauma processing, may increase PTSD risk"
-  - "Distinguish ASD (3 days to 1 month) from PTSD (greater than 1 month) - treatment similar"
-  - "Most trauma survivors recover without developing PTSD - avoid over-pathologizing normal reactions"
+  - Acute Stress Disorder affects 20-50% of trauma survivors in first month
+  - 30-50% of those with ASD go on to develop PTSD if untreated
+  - Early trauma-focused CBT reduces PTSD risk by 50-70% - most effective intervention
+  - Dissociative symptoms (depersonalization, derealization, amnesia) associated with higher PTSD risk
+  - Critical Incident Stress Debriefing (CISD) NOT recommended - may worsen outcomes
+  - Benzodiazepines NOT recommended - interfere with trauma processing, may increase PTSD risk
+  - Distinguish ASD (3 days to 1 month) from PTSD (greater than 1 month) - treatment similar
+  - Most trauma survivors recover without developing PTSD - avoid over-pathologizing normal reactions
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Mental health provider for trauma-focused therapy (CBT, CPT, EMDR)
   - Psychiatry if severe symptoms, suicidality, or complex presentation
   - Emergency evaluation if safety concerns or severe psychiatric symptoms
   - Follow-up at 1 month to assess for PTSD development
-differentials:
-  - Acute Stress Disorder (3 days to 1 month after trauma, specific symptom clusters)
-  - Post-Traumatic Stress Disorder (symptoms persist greater than 1 month)
-  - Acute stress reaction/crisis (immediate response, less severe, resolves quickly)
-  - Adjustment disorder (stressor not traumatic in nature, different symptom pattern)
-  - Panic disorder (panic attacks not triggered by trauma reminders)
-  - Major depressive disorder (may follow trauma, different symptom focus)
-  - Substance withdrawal (agitation, autonomic symptoms)
-  - Traumatic brain injury (cognitive symptoms, history of head trauma)
-  - Dissociative disorders (chronic dissociative symptoms)
-trace:
-  source: DSM-5-TR Criteria, APA Clinical Practice Guideline for PTSD, International Society for Traumatic Stress Studies Guidelines
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

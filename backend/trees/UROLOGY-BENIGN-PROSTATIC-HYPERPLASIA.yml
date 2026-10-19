@@ -1,12 +1,31 @@
 tree_id: UROLOGY-BENIGN-PROSTATIC-HYPERPLASIA
 name: Benign Prostatic Hyperplasia (BPH)
+version: '1.0'
+status: draft
 family: Nephrology
 specialty: Urology
-applies_to: male
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Urinary frequency, weak stream, nocturia
 description: Non-malignant enlargement of prostate gland causing lower urinary tract symptoms
-icd10: N40.0
-snomed: 266569009
+applies_to:
+  sex: male
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N40.0
+  snomed:
+    - '266569009'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
 presentations:
   - Weak urinary stream and nocturia
   - Weak stream and nocturia
@@ -24,25 +43,15 @@ presentations:
   - Enlarged prostate on DRE
   - Gradual onset
   - No hematuria, weight loss
-urgency: routine
-referrals:
-  emergency:
-    - GI bleeding with hemodynamic instability
-    - Acute liver failure
-    - Toxic megacolon
-    - Perforated viscus
-    - Acute cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting/diarrhea
-    - Abnormal imaging requiring intervention
-  routine:
-    - IBS management
-    - GERD unresponsive to treatment
-    - Abnormal liver enzymes
-    - Screening colonoscopy
-
+differentials:
+  - Prostate cancer (abnormal DRE, elevated PSA, biopsy confirmation)
+  - Prostatitis (acute pain, fever, tender prostate, elevated WBC)
+  - Urethral stricture (history of instrumentation, gonorrhea, trauma)
+  - Bladder cancer (painless hematuria, cytology positive)
+  - Overactive bladder (urgency/frequency without obstruction, normal flow rate)
+  - Neurogenic bladder (diabetes, spinal cord injury, MS, abnormal urodynamics)
+  - Bladder stone (irritative symptoms, hematuria, stone on imaging)
+  - Medication-induced retention (anticholinergics, antihistamines, decongestants)
 workup:
   - Lower urinary tract symptoms (LUTS) assessment
   - Obstructive/voiding symptoms - hesitancy, weak stream, straining, intermittency, incomplete emptying, terminal dribbling
@@ -98,15 +107,33 @@ clinical_pearls:
   - Avoid anticholinergics, antihistamines, decongestants - can precipitate retention
   - Hematuria in BPH patient requires evaluation to rule out bladder cancer or stones
   - Post-TURP syndrome - hyponatremia from glycine irrigation absorption (rare with modern techniques)
-differentials:
-  - Prostate cancer (abnormal DRE, elevated PSA, biopsy confirmation)
-  - Prostatitis (acute pain, fever, tender prostate, elevated WBC)
-  - Urethral stricture (history of instrumentation, gonorrhea, trauma)
-  - Bladder cancer (painless hematuria, cytology positive)
-  - Overactive bladder (urgency/frequency without obstruction, normal flow rate)
-  - Neurogenic bladder (diabetes, spinal cord injury, MS, abnormal urodynamics)
-  - Bladder stone (irritative symptoms, hematuria, stone on imaging)
-  - Medication-induced retention (anticholinergics, antihistamines, decongestants)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with hemodynamic instability
+    - Acute liver failure
+    - Toxic megacolon
+    - Perforated viscus
+    - Acute cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting/diarrhea
+    - Abnormal imaging requiring intervention
+  routine:
+    - IBS management
+    - GERD unresponsive to treatment
+    - Abnormal liver enzymes
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 67-year-old man presents with 2-year history of worsening urinary symptoms
   - Frequent urination every 2-3 hours during day, waking 3-4 times per night to urinate
@@ -144,8 +171,7 @@ trace:
   - No erectile dysfunction or other side effects
   - Continue current regimen, annual monitoring
   - Outcome - Excellent response to combination medical therapy, avoidance of surgery
-
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

@@ -1,11 +1,31 @@
 tree_id: GI-IBD
 name: Inflammatory Bowel Disease
+version: '1.0'
+status: draft
 family: gastroenterology
-specialty: Gastroenterology  
+specialty: Gastroenterology
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Chronic diarrhea, abdominal pain, rectal bleeding, weight loss
 description: Chronic relapsing inflammatory GI disorders including Crohn disease (transmural, skip lesions, fistulas) and ulcerative colitis (mucosal only, continuous from rectum)
-icd10: K51.90
-snomed: 64766004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K51.90
+  snomed:
+    - '64766004'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
 presentations:
   - Chronic diarrhea (often bloody in UC)
   - Abdominal pain, cramping
@@ -13,22 +33,12 @@ presentations:
   - Fatigue, fever
   - Extraintestinal: arthritis, uveitis, skin lesions
   - Perianal disease (Crohn)
-urgency: urgent
-referrals:
-  emergency:
-    - GI bleeding with instability
-    - Acute liver failure
-    - Perforated viscus
-    - Cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting
-  routine:
-    - IBS management
-    - GERD treatment
-    - Screening colonoscopy
-
+differentials:
+  - GI-IRRITABLE-BOWEL-SYNDROME
+  - INFECTIOUS-C-DIFFICILE-COLITIS
+  - INFECTIOUS-GASTROENTERITIS
+  - GI-CELIAC-DISEASE
+  - GI-DIVERTICULITIS
 workup:
   - Overview - Crohn disease (CD) can affect any GI tract (mouth to anus), transmural inflammation, skip lesions, fistulas and strictures; Ulcerative colitis (UC) limited to colon, mucosal only, continuous from rectum
   - Epidemiology - 1.6 million in US, peak 15-30 years and 50-70 years, more common in northern latitudes, whites, Ashkenazi Jews
@@ -73,20 +83,37 @@ clinical_pearls:
   - Screen for TB before starting anti-TNF therapy (reactivation risk)
   - Total colectomy with IPAA is curative for UC but not CD (disease recurs post-op)
   - Colorectal cancer surveillance every 1-2 years starting 8-10 years after UC diagnosis
-differentials:
-  - GI-IRRITABLE-BOWEL-SYNDROME
-  - INFECTIOUS-C-DIFFICILE-COLITIS
-  - INFECTIOUS-GASTROENTERITIS
-  - GI-CELIAC-DISEASE
-  - GI-DIVERTICULITIS
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Chronic diarrhea (bloody in UC, non-bloody in CD) with abdominal pain and weight loss
   - Elevated fecal calprotectin, CRP, anemia
   - Colonoscopy with biopsies (continuous from rectum in UC, skip lesions in CD)
   - Mild-moderate UC - 5-ASA oral and topical
   - Moderate-severe or steroid-refractory - Anti-TNF biologics (infliximab, adalimumab)
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

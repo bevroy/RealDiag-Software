@@ -1,9 +1,33 @@
 tree_id: PSYCH-INSOMNIA
 name: Insomnia Evaluation and Management
+version: '1.0'
+status: draft
 family: Psychiatry
-specialty: Psychiatry/Primary Care/Sleep Medicine
-icd10: G47.00
-snomed: 193462001
+specialty: Psychiatry
+secondary_specialties:
+  - Primary Care
+  - Sleep Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: Difficulty Sleeping
+description: Diagnostic decision tree for insomnia evaluation
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G47.00
+  snomed:
+    - '193462001'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
 presentations:
   - Difficulty falling asleep
   - Difficulty staying asleep
@@ -11,32 +35,28 @@ presentations:
   - Non-restorative sleep
   - Daytime impairment (fatigue, mood, concentration)
   - ≥3 nights per week for ≥3 months
-chief_complaint: Difficulty Sleeping
-description: Diagnostic decision tree for insomnia evaluation
-version: "1.0"
 differentials:
   - Sleep apnea
   - Restless leg syndrome
   - Depression
   - Anxiety
   - Medication effect
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
-author: RealDiag Team
-
+workup: []
 treatment:
-  - 'Cognitive behavioral therapy for insomnia (CBT-I) first-line - sleep restriction, stimulus control, most effective long-term'
-  - 'Sleep hygiene - consistent sleep schedule, cool dark room, avoid screens 1 hour before bed, limit caffeine'
+  - Cognitive behavioral therapy for insomnia (CBT-I) first-line - sleep restriction, stimulus control, most effective long-term
+  - Sleep hygiene - consistent sleep schedule, cool dark room, avoid screens 1 hour before bed, limit caffeine
   - 'Pharmacotherapy if CBT-I insufficient: Zolpidem 5-10mg, eszopiclone 1-3mg, zaleplon 5-10mg qHS (<4 weeks)'
-  - 'Melatonin 0.5-5mg 1-2 hours before bed - safe, helps circadian rhythm'
-  - 'Trazodone 25-100mg or mirtazapine 7.5-15mg qHS if comorbid depression'
-  - 'Avoid benzodiazepines (dependence risk, cognitive impairment)'
-  - 'Treat underlying causes - depression, anxiety, sleep apnea, medications'
-
-entry_point: duration
-
+  - Melatonin 0.5-5mg 1-2 hours before bed - safe, helps circadian rhythm
+  - Trazodone 25-100mg or mirtazapine 7.5-15mg qHS if comorbid depression
+  - Avoid benzodiazepines (dependence risk, cognitive impairment)
+  - Treat underlying causes - depression, anxiety, sleep apnea, medications
+clinical_pearls:
+  - Sleep hygiene first: regular schedule, dark quiet room, no screens
+  - CBT-I (Cognitive Behavioral Therapy for Insomnia) most effective long-term
+  - Avoid chronic benzodiazepines (tolerance, dependence, falls)
+  - Treat underlying conditions: depression, anxiety, sleep apnea, pain
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute suicidal ideation with plan
@@ -54,36 +74,33 @@ referrals:
     - ADHD evaluation
     - Therapy referral
     - Medication management
-
-clinical_pearls:
-  - Sleep hygiene first: regular schedule, dark quiet room, no screens
-  - CBT-I (Cognitive Behavioral Therapy for Insomnia) most effective long-term
-  - Avoid chronic benzodiazepines (tolerance, dependence, falls)
-  - Treat underlying conditions: depression, anxiety, sleep apnea, pain
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: duration
 nodes:
   - id: duration
     type: question
-    text: "Duration of sleep difficulty?"
+    text: Duration of sleep difficulty?
     options:
-      - label: "Acute (<3 months)"
+      - label: Acute (<3 months)
         next: acute_insomnia
-      - label: "Chronic (≥3 months)"
+      - label: Chronic (≥3 months)
         next: chronic_insomnia
-
   - id: acute_insomnia
     type: question
-    text: "Identifiable trigger or stressor?"
+    text: Identifiable trigger or stressor?
     options:
-      - label: "Recent stressor (job loss, relationship, illness)"
+      - label: Recent stressor (job loss, relationship, illness)
         next: adjustment_insomnia
-      - label: "Shift work or jet lag"
+      - label: Shift work or jet lag
         next: circadian_disorder
-      - label: "Recent medication change"
+      - label: Recent medication change
         next: medication_insomnia
-      - label: "Medical illness or pain"
+      - label: Medical illness or pain
         next: secondary_insomnia
-
   - id: adjustment_insomnia
     type: diagnosis
     diagnosis: Adjustment Insomnia (Acute Stress-Related)
@@ -100,7 +117,6 @@ nodes:
       - Zolpidem 5-10mg or eszopiclone 1-3mg PRN
       - Address underlying stressor
       - Should resolve when stressor resolves
-
   - id: circadian_disorder
     type: diagnosis
     diagnosis: Circadian Rhythm Sleep-Wake Disorder
@@ -117,7 +133,6 @@ nodes:
       - Strategic napping (20-30 min before night shift)
       - Sleep hygiene
       - Consider job schedule change if possible
-
   - id: medication_insomnia
     type: diagnosis
     diagnosis: Medication-Induced Insomnia
@@ -133,18 +148,16 @@ nodes:
       - Switch to alternative medication
       - Discontinue if appropriate
       - Temporary sleep aid if needed
-
   - id: secondary_insomnia
     type: question
-    text: "Primary medical condition?"
+    text: Primary medical condition?
     options:
-      - label: "Pain (arthritis, neuropathy)"
+      - label: Pain (arthritis, neuropathy)
         next: pain_insomnia
-      - label: "GERD or dyspnea"
+      - label: GERD or dyspnea
         next: gerd_insomnia
-      - label: "Nocturia"
+      - label: Nocturia
         next: nocturia_insomnia
-
   - id: pain_insomnia
     type: diagnosis
     diagnosis: Insomnia Due to Pain
@@ -160,7 +173,6 @@ nodes:
       - Sleep positioning
       - CBT-I
       - Avoid opioids for sleep if possible
-
   - id: gerd_insomnia
     type: diagnosis
     diagnosis: Insomnia Due to GERD/Dyspnea
@@ -175,7 +187,6 @@ nodes:
       - Avoid late meals
       - Optimize asthma/COPD management
       - Treat underlying condition
-
   - id: nocturia_insomnia
     type: diagnosis
     diagnosis: Insomnia Due to Nocturia
@@ -192,31 +203,28 @@ nodes:
       - Treat underlying cause (BPH, diabetes, CHF)
       - Consider desmopressin if refractory
       - Timed diuretics (take in afternoon, not evening)
-
   - id: chronic_insomnia
     type: question
-    text: "Pattern of sleep difficulty?"
+    text: Pattern of sleep difficulty?
     options:
-      - label: "Difficulty falling asleep (sleep onset >30 min)"
+      - label: Difficulty falling asleep (sleep onset >30 min)
         next: sleep_onset_insomnia
-      - label: "Difficulty staying asleep (frequent awakenings)"
+      - label: Difficulty staying asleep (frequent awakenings)
         next: sleep_maintenance_insomnia
-      - label: "Early morning awakening (>30 min before desired)"
+      - label: Early morning awakening (>30 min before desired)
         next: early_morning_awakening
-      - label: "Snoring, witnessed apneas, daytime sleepiness"
+      - label: Snoring, witnessed apneas, daytime sleepiness
         next: sleep_apnea_eval
-
   - id: sleep_onset_insomnia
     type: question
-    text: "Associated features?"
+    text: Associated features?
     options:
-      - label: "Racing thoughts, worry, anxiety"
+      - label: Racing thoughts, worry, anxiety
         next: anxiety_insomnia
-      - label: "Leg discomfort, urge to move"
+      - label: Leg discomfort, urge to move
         next: restless_legs
-      - label: "Delayed sleep phase (can't fall asleep until 2-4 AM)"
+      - label: Delayed sleep phase (can't fall asleep until 2-4 AM)
         next: delayed_sleep_phase
-
   - id: anxiety_insomnia
     type: diagnosis
     diagnosis: Insomnia with Anxiety
@@ -235,7 +243,6 @@ nodes:
       - Avoid benzodiazepines long-term
       - Consider trazodone 50-100mg or mirtazapine 7.5-15mg
       - Psychiatry referral if severe
-
   - id: restless_legs
     type: diagnosis
     diagnosis: Restless Legs Syndrome
@@ -253,7 +260,6 @@ nodes:
       - Avoid caffeine, alcohol
       - Leg massage, warm bath
       - Neurology referral if refractory
-
   - id: delayed_sleep_phase
     type: diagnosis
     diagnosis: Delayed Sleep-Wake Phase Disorder
@@ -269,7 +275,6 @@ nodes:
       - Avoid screens/blue light in evening
       - Strict wake time
       - Sleep medicine referral
-
   - id: sleep_maintenance_insomnia
     type: diagnosis
     diagnosis: Sleep Maintenance Insomnia
@@ -288,7 +293,6 @@ nodes:
       - Longer-acting hypnotic if needed (eszopiclone, doxepin)
       - Treat underlying psychiatric condition
       - Consider sleep study if snoring/apnea symptoms
-
   - id: early_morning_awakening
     type: diagnosis
     diagnosis: Early Morning Awakening Insomnia
@@ -305,7 +309,6 @@ nodes:
       - Bright light exposure in evening
       - Consider low-dose sedating antidepressant (trazodone, mirtazapine)
       - Psychiatry referral if depression
-
   - id: sleep_apnea_eval
     type: diagnosis
     diagnosis: Suspected Obstructive Sleep Apnea
@@ -324,3 +327,10 @@ nodes:
       - Avoid alcohol and sedatives
       - Sleep medicine referral
       - Treat insomnia after OSA treated
+criteria: []
+author: RealDiag Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

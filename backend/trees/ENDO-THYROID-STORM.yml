@@ -1,12 +1,33 @@
 tree_id: ENDO-THYROID-STORM
 name: Thyroid Storm and Thyrotoxicosis
+version: '1.0'
+status: draft
 family: Endocrinology
-specialty: Endocrinology/Emergency Medicine/Internal Medicine
+specialty: Endocrinology
+secondary_specialties:
+  - Emergency Medicine
+  - Internal Medicine
+urgency: ''
+urgency_explanation: ''
 chief_complaint: Thyrotoxicosis
 description: Diagnostic decision tree for thyroid storm and severe thyrotoxicosis
-version: "1.0"
-icd10: E07.9
-snomed: 10273003
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E07.9
+  snomed:
+    - '10273003'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
 presentations:
   - Severe hyperthyroidism
   - High fever (>38.5°C)
@@ -21,13 +42,32 @@ differentials:
   - Malignant hyperthermia
   - Sympathomimetic toxicity
   - Thyrotoxicosis
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
-author: RealDiag Team
-entry_point: severity
-
+workup: []
+treatment:
+  - ICU admission required - thyroid storm is life-threatening emergency with 20-30% mortality
+  - 'Beta-blockade (FIRST): Propranolol 60-80mg PO Q4H OR 0.5-1mg IV Q4H (blocks peripheral conversion T4→T3, controls tachycardia)'
+  - Alternative beta-blockers - esmolol IV infusion (short-acting, titratable), metoprolol, or atenolol
+  - 'If beta-blocker contraindicated: Diltiazem 60-90mg PO Q6H OR 0.25mg/kg IV'
+  - 'Thionamide (SECOND): Propylthiouracil (PTU) preferred - 500-1000mg loading dose, then 250mg Q4H (blocks synthesis AND peripheral conversion)'
+  - 'Alternative thionamide: Methimazole 20mg Q4-6H (if PTU unavailable or contraindicated - pregnancy first trimester)'
+  - 'Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
+  - 'Corticosteroids: Hydrocortisone 100mg IV Q8H OR dexamethasone 2mg Q6H (blocks T4→T3 conversion, treats potential adrenal insufficiency)'
+  - Supportive care - aggressive cooling (acetaminophen 650mg Q4H, cooling blankets), avoid aspirin (displaces thyroid hormone from binding proteins)
+  - IV fluids - patients often volume depleted from fever, vomiting, diarrhea (2-3L NS in first 24 hours)
+  - Treat precipitating cause - antibiotics for infection, control DKA, treat MI
+  - Consider cholestyramine 4g Q6H - binds thyroid hormone in gut, enhances elimination
+  - Plasmapheresis or dialysis for refractory cases unresponsive to medical therapy
+  - Monitor for complications - heart failure, arrhythmias (especially atrial fibrillation), hepatic dysfunction
+  - DO NOT use aspirin for fever (increases free thyroid hormone)
+  - Transition to oral therapy once stable - continue thionamide, reduce beta-blocker, taper steroids
+  - Definitive therapy after stabilization - radioactive iodine ablation or thyroidectomy to prevent recurrence
+clinical_pearls:
+  - Thyroid storm is clinical diagnosis; do not wait for labs
+  - Treat with propylthiouracil (blocks production AND conversion)
+  - Give beta-blocker BEFORE iodine (to prevent worsening)
+  - ICU-level care required; mortality 20-30% even with treatment
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - DKA
@@ -45,46 +85,25 @@ referrals:
     - Thyroid nodule surveillance
     - Osteoporosis management
     - Lipid disorders
-
-clinical_pearls:
-  - Thyroid storm is clinical diagnosis; do not wait for labs
-  - Treat with propylthiouracil (blocks production AND conversion)
-  - Give beta-blocker BEFORE iodine (to prevent worsening)
-  - ICU-level care required; mortality 20-30% even with treatment
-
-treatment:
-  - 'ICU admission required - thyroid storm is life-threatening emergency with 20-30% mortality'
-  - 'Beta-blockade (FIRST): Propranolol 60-80mg PO Q4H OR 0.5-1mg IV Q4H (blocks peripheral conversion T4→T3, controls tachycardia)'
-  - Alternative beta-blockers - esmolol IV infusion (short-acting, titratable), metoprolol, or atenolol
-  - 'If beta-blocker contraindicated: Diltiazem 60-90mg PO Q6H OR 0.25mg/kg IV'
-  - 'Thionamide (SECOND): Propylthiouracil (PTU) preferred - 500-1000mg loading dose, then 250mg Q4H (blocks synthesis AND peripheral conversion)'
-  - 'Alternative thionamide: Methimazole 20mg Q4-6H (if PTU unavailable or contraindicated - pregnancy first trimester)'
-  - 'Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
-  - 'Corticosteroids: Hydrocortisone 100mg IV Q8H OR dexamethasone 2mg Q6H (blocks T4→T3 conversion, treats potential adrenal insufficiency)'
-  - Supportive care - aggressive cooling (acetaminophen 650mg Q4H, cooling blankets), avoid aspirin (displaces thyroid hormone from binding proteins)
-  - IV fluids - patients often volume depleted from fever, vomiting, diarrhea (2-3L NS in first 24 hours)
-  - Treat precipitating cause - antibiotics for infection, control DKA, treat MI
-  - Consider cholestyramine 4g Q6H - binds thyroid hormone in gut, enhances elimination
-  - Plasmapheresis or dialysis for refractory cases unresponsive to medical therapy
-  - Monitor for complications - heart failure, arrhythmias (especially atrial fibrillation), hepatic dysfunction
-  - 'DO NOT use aspirin for fever (increases free thyroid hormone)'
-  - Transition to oral therapy once stable - continue thionamide, reduce beta-blocker, taper steroids
-  - Definitive therapy after stabilization - radioactive iodine ablation or thyroidectomy to prevent recurrence
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: severity
 nodes:
   - id: severity
     type: question
-    text: "Clinical severity assessment?"
+    text: Clinical severity assessment?
     options:
-      - label: "Thyroid storm (fever, altered mental status, severe tachycardia)"
+      - label: Thyroid storm (fever, altered mental status, severe tachycardia)
         next: thyroid_storm
-      - label: "Severe thyrotoxicosis without storm"
+      - label: Severe thyrotoxicosis without storm
         next: severe_thyrotoxicosis
-      - label: "Symptomatic hyperthyroidism"
+      - label: Symptomatic hyperthyroidism
         next: hyperthyroidism
-      - label: "Subclinical hyperthyroidism"
+      - label: Subclinical hyperthyroidism
         next: subclinical_hyperthyroid
-
   - id: thyroid_storm
     type: diagnosis
     diagnosis: Thyroid Storm
@@ -111,18 +130,16 @@ nodes:
       - Consider plasmapheresis or dialysis if refractory
       - Endocrinology consult
       - Mortality 10-30% even with treatment
-
   - id: severe_thyrotoxicosis
     type: question
-    text: "Cardiac complications?"
+    text: Cardiac complications?
     options:
-      - label: "Atrial fibrillation with RVR"
+      - label: Atrial fibrillation with RVR
         next: thyrotoxic_afib
-      - label: "Heart failure"
+      - label: Heart failure
         next: thyrotoxic_cardiomyopathy
-      - label: "Stable but severe symptoms"
+      - label: Stable but severe symptoms
         next: symptomatic_graves
-
   - id: thyrotoxic_afib
     type: diagnosis
     diagnosis: Thyrotoxicosis with Atrial Fibrillation
@@ -144,7 +161,6 @@ nodes:
       - AFib often converts to sinus rhythm once euthyroid (3-6 months)
       - Continue anticoagulation until euthyroid x 4 weeks, then reassess
       - Endocrinology and cardiology consult
-
   - id: thyrotoxic_cardiomyopathy
     type: diagnosis
     diagnosis: Thyrotoxic Cardiomyopathy
@@ -165,7 +181,6 @@ nodes:
       - Usually reversible once euthyroid
       - May take 3-6 months to recover
       - Endocrinology and cardiology consult
-
   - id: symptomatic_graves
     type: diagnosis
     diagnosis: Graves Disease (Symptomatic)
@@ -188,20 +203,18 @@ nodes:
       - Definitive therapy if refractory: RAI ablation or thyroidectomy
       - Selenium 200 mcg daily for mild eye disease
       - Endocrinology referral
-
   - id: hyperthyroidism
     type: question
-    text: "Etiology determination?"
+    text: Etiology determination?
     options:
-      - label: "Toxic multinodular goiter"
+      - label: Toxic multinodular goiter
         next: toxic_mng
-      - label: "Toxic adenoma"
+      - label: Toxic adenoma
         next: toxic_adenoma
-      - label: "Subacute thyroiditis"
+      - label: Subacute thyroiditis
         next: subacute_thyroiditis
-      - label: "Medication-induced"
+      - label: Medication-induced
         next: medication_hyperthyroid
-
   - id: toxic_mng
     type: diagnosis
     diagnosis: Toxic Multinodular Goiter
@@ -220,7 +233,6 @@ nodes:
       - Thyroidectomy (if large goiter, compression, or suspicious nodules)
       - Pretreat with methimazole before RAI (stop 3 days before RAI)
       - Endocrinology referral
-
   - id: toxic_adenoma
     type: diagnosis
     diagnosis: Toxic Adenoma (Autonomous Nodule)
@@ -238,7 +250,6 @@ nodes:
       - Thyroid lobectomy
       - No role for antithyroid drugs long-term
       - Endocrinology referral
-
   - id: subacute_thyroiditis
     type: diagnosis
     diagnosis: Subacute (De Quervain) Thyroiditis
@@ -259,7 +270,6 @@ nodes:
       - May have hypothyroid phase later (transient, rarely permanent)
       - Monitor thyroid function
       - Endocrinology follow-up
-
   - id: medication_hyperthyroid
     type: diagnosis
     diagnosis: Medication-Induced Thyrotoxicosis
@@ -277,16 +287,14 @@ nodes:
       - Discontinue offending medication if possible
       - Cardiology consult if amiodarone
       - Endocrinology consult
-
   - id: subclinical_hyperthyroid
     type: question
-    text: "TSH level and symptoms?"
+    text: TSH level and symptoms?
     options:
-      - label: "TSH <0.1, symptomatic or high-risk"
+      - label: TSH <0.1, symptomatic or high-risk
         next: treat_subclinical
-      - label: "TSH 0.1-0.4, asymptomatic"
+      - label: TSH 0.1-0.4, asymptomatic
         next: monitor_subclinical
-
   - id: treat_subclinical
     type: diagnosis
     diagnosis: Subclinical Hyperthyroidism (Treat)
@@ -301,16 +309,15 @@ nodes:
       - ECG (atrial fibrillation risk)
     treatment:
       - Treat if TSH <0.1 AND:
-        - Age >65
-        - Cardiac disease or risk factors
-        - Osteoporosis
-        - Symptoms
+          - Age >65
+          - Cardiac disease or risk factors
+          - Osteoporosis
+          - Symptoms
       - Beta-blocker if symptoms
       - Methimazole 5-15mg daily OR definitive therapy
       - Treat underlying cause
       - Monitor thyroid function q3-6 months
       - Endocrinology referral
-
   - id: monitor_subclinical
     type: diagnosis
     diagnosis: Subclinical Hyperthyroidism (Monitor)
@@ -325,3 +332,10 @@ nodes:
       - Treat if TSH becomes <0.1 or develops symptoms
       - Screen for complications (AFib, osteoporosis)
       - Endocrinology referral if persistent
+criteria: []
+author: RealDiag Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

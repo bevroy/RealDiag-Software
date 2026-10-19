@@ -1,10 +1,31 @@
 tree_id: ENT-PHARYNGITIS
 name: Pharyngitis
+version: '1.0'
+status: draft
 family: ent
 specialty: Otolaryngology
-icd10: J02.9
-snomed: "405737000"
-
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J02.9
+  snomed:
+    - '405737000'
+  icpc2: []
+sources:
+  - text: 'Shulman ST, et al. (2012). Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update by the Infectious Diseases Society of America. Clin Infect Dis, 55(10), e86-e102.'
+    origin: citations
+  - text: Fine AM, et al. (2012). Large-scale validation of the Centor and McIsaac scores to predict group A streptococcal pharyngitis. Arch Intern Med, 172(11), 847-52.
+    origin: citations
+  - text: Bisno AL. (2001). Acute pharyngitis. N Engl J Med, 344(3), 205-11.
+    origin: citations
 presentations:
   - Sore throat or throat pain
   - Odynophagia (painful swallowing)
@@ -16,36 +37,35 @@ presentations:
   - Cough
   - Rhinorrhea and nasal congestion (viral)
   - Headache and myalgias
-
+differentials: []
 workup:
   - History:
-    - Onset and duration of symptoms
-    - Associated symptoms (fever, cough, rhinorrhea, conjunctivitis)
-    - Sick contacts or recent exposures
-    - Immunization status (pertussis, COVID-19)
-    - Sexual history (gonorrhea, HIV risk factors)
-    - Recent antibiotic use
+      - Onset and duration of symptoms
+      - Associated symptoms (fever, cough, rhinorrhea, conjunctivitis)
+      - Sick contacts or recent exposures
+      - Immunization status (pertussis, COVID-19)
+      - Sexual history (gonorrhea, HIV risk factors)
+      - Recent antibiotic use
   - Physical exam:
-    - Oral temperature
-    - Pharyngeal and tonsillar examination (erythema, exudates, petechiae, ulcers)
-    - Cervical lymph node examination
-    - Presence of cough, conjunctivitis, or coryza (suggests viral)
-    - Sandpaper rash (scarlet fever)
-    - Grayish pseudomembrane (diphtheria)
-    - Trismus or muffled voice (peritonsillar abscess)
+      - Oral temperature
+      - Pharyngeal and tonsillar examination (erythema, exudates, petechiae, ulcers)
+      - Cervical lymph node examination
+      - Presence of cough, conjunctivitis, or coryza (suggests viral)
+      - Sandpaper rash (scarlet fever)
+      - Grayish pseudomembrane (diphtheria)
+      - Trismus or muffled voice (peritonsillar abscess)
   - Centor criteria (for bacterial pharyngitis likelihood):
-    - Tonsillar exudates (+1 point)
-    - Tender anterior cervical adenopathy (+1 point)
-    - Fever >38°C (+1 point)
-    - Absence of cough (+1 point)
-    - Age 3-14 years (+1 point), Age 15-44 (0 points), Age >45 (-1 point)
+      - Tonsillar exudates (+1 point)
+      - Tender anterior cervical adenopathy (+1 point)
+      - Fever >38°C (+1 point)
+      - Absence of cough (+1 point)
+      - Age 3-14 years (+1 point), Age 15-44 (0 points), Age >45 (-1 point)
   - Diagnostic studies:
-    - Rapid antigen detection test (RADT) for Group A Streptococcus (if Centor score 2-3)
-    - Throat culture (if RADT negative but high clinical suspicion)
-    - Monospot or EBV serology (if infectious mononucleosis suspected)
-    - COVID-19 testing if indicated
-    - Gonorrhea/Chlamydia pharyngeal culture (if sexual exposure)
-
+      - Rapid antigen detection test (RADT) for Group A Streptococcus (if Centor score 2-3)
+      - Throat culture (if RADT negative but high clinical suspicion)
+      - Monospot or EBV serology (if infectious mononucleosis suspected)
+      - COVID-19 testing if indicated
+      - Gonorrhea/Chlamydia pharyngeal culture (if sexual exposure)
 treatment:
   group_a_streptococcus:
     - First-line Amoxicillin 500mg PO TID x 10 days (or 1000mg PO BID)
@@ -72,7 +92,6 @@ treatment:
     - Peritonsillar abscess - requires incision and drainage
     - Retropharyngeal abscess - requires ENT consultation and possible surgical drainage
     - Rheumatic fever prophylaxis if recurrent Group A Strep infections
-
 clinical_pearls:
   - Most pharyngitis (80-90%) is viral and does not require antibiotics
   - Group A Streptococcus (Strep pyogenes) is most common bacterial cause (5-15% of adult pharyngitis)
@@ -87,14 +106,24 @@ clinical_pearls:
   - Unilateral tonsillar enlargement or severe trismus should raise concern for peritonsillar abscess
   - Diphtheria presents with gray pseudomembrane but extremely rare in vaccinated populations
   - Fusobacterium necrophorum can cause Lemierre syndrome (suppurative thrombophlebitis of internal jugular vein)
-
+red_flags: []
+disposition_guidance: {}
+referrals: []
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Centor criteria and modified McIsaac score for streptococcal pharyngitis
   - Antibiotic treatment regimens for Group A Streptococcus
   - Management of infectious mononucleosis and complications
   - Prevention of acute rheumatic fever
-
-citations:
-  - Shulman ST, et al. (2012). Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update by the Infectious Diseases Society of America. Clin Infect Dis, 55(10), e86-e102.
-  - Fine AM, et al. (2012). Large-scale validation of the Centor and McIsaac scores to predict group A streptococcal pharyngitis. Arch Intern Med, 172(11), 847-52.
-  - Bisno AL. (2001). Acute pharyngitis. N Engl J Med, 344(3), 205-11.
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

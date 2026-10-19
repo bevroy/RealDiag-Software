@@ -1,11 +1,35 @@
 tree_id: PEDS-ACUTE-OTITIS-MEDIA
 name: Acute Otitis Media (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Family Medicine/ENT
-icd10: H66.90
-snomed: 3110003
-urgency: []
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Family Medicine
+  - ENT
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H66.90
+  snomed:
+    - '3110003'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Clinical Practice Guideline - Acute Otitis Media
+    origin: citations
+  - text: UpToDate - Pediatrics
+    origin: citations
+  - text: Lieberthal AS et al. Pediatrics 2013 (AAP AOM Guidelines)
+    origin: citations
+  - text: AAP Clinical Practice Guideline for Diagnosis and Management of Acute Otitis Media, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Ear pain or tugging/pulling at ears (especially infants and toddlers)
   - Fever (present in 50-60% of cases)
@@ -17,6 +41,15 @@ presentations:
   - Preceding or concurrent upper respiratory infection symptoms (80-90% of cases)
   - More common in children age 6 months to 3 years
   - Increased risk with daycare attendance, pacifier use, bottle-feeding, smoke exposure
+differentials:
+  - Acute otitis media (bulging TM, acute onset ear pain, fever, MEE)
+  - Otitis media with effusion (MEE without acute inflammation - retracted or neutral TM, no ear pain, no fever)
+  - Otitis externa (swimmer's ear - pain with tragus or pinna manipulation, external auditory canal erythema and edema, normal TM)
+  - Referred pain from pharyngitis or dental pain (normal otoscopic exam)
+  - Temporomandibular joint (TMJ) dysfunction (jaw pain radiating to ear, worse with chewing)
+  - Cerumen impaction (fullness sensation, hearing loss, visible cerumen on otoscopy)
+  - Mastoiditis (postauricular swelling, erythema, tenderness, protruding ear)
+  - Foreign body in ear canal (visible on otoscopy, unilateral symptoms)
 workup:
   - Clinical history
   - Onset and duration of ear pain or symptoms
@@ -125,34 +158,34 @@ treatment:
   - Xylitol (sugar substitute) may reduce AOM in high-risk children (limited evidence)
 clinical_pearls:
   - 'AOM requires ALL 3 criteria: acute onset, middle ear effusion (bulging TM or otorrhea), and signs of inflammation - TM erythema alone insufficient'
-  - 'Bulging tympanic membrane most specific finding for AOM - distinguishes from otitis media with effusion (OME)'
-  - 'High-dose amoxicillin (80-90 mg/kg/day) first-line treatment - covers drug-resistant S. pneumoniae'
-  - 'Observation (watchful waiting) option for age greater than 6 months with non-severe unilateral AOM and reliable follow-up - reduces antibiotic overuse'
-  - 'Most AOM resolves spontaneously within 48-72 hours - 80% improve without antibiotics'
-  - 'Pneumococcal vaccine reduces AOM incidence by 20-30% - most effective prevention strategy'
-  - 'Recurrent AOM (3+ in 6 months or 4+ in 12 months) indication for tympanostomy tubes - NOT for prolonged antibiotics'
-  - 'TM perforation occurs in 5-10% of AOM - heals spontaneously in most cases, continue antibiotics'
+  - Bulging tympanic membrane most specific finding for AOM - distinguishes from otitis media with effusion (OME)
+  - High-dose amoxicillin (80-90 mg/kg/day) first-line treatment - covers drug-resistant S. pneumoniae
+  - Observation (watchful waiting) option for age greater than 6 months with non-severe unilateral AOM and reliable follow-up - reduces antibiotic overuse
+  - Most AOM resolves spontaneously within 48-72 hours - 80% improve without antibiotics
+  - Pneumococcal vaccine reduces AOM incidence by 20-30% - most effective prevention strategy
+  - Recurrent AOM (3+ in 6 months or 4+ in 12 months) indication for tympanostomy tubes - NOT for prolonged antibiotics
+  - TM perforation occurs in 5-10% of AOM - heals spontaneously in most cases, continue antibiotics
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pediatric ENT for recurrent AOM (3+ in 6 months or 4+ in 12 months) - consider tympanostomy tubes
   - Pediatric ENT for persistent middle ear effusion (greater than 3 months) with hearing loss
   - Pediatric ENT for suspected complications (mastoiditis, facial nerve paralysis)
   - Audiology for formal hearing evaluation if speech delay or persistent effusion
   - Pediatric infectious disease if immunocompromised or treatment failure with multiple antibiotics
-differentials:
-  - Acute otitis media (bulging TM, acute onset ear pain, fever, MEE)
-  - Otitis media with effusion (MEE without acute inflammation - retracted or neutral TM, no ear pain, no fever)
-  - Otitis externa (swimmer's ear - pain with tragus or pinna manipulation, external auditory canal erythema and edema, normal TM)
-  - Referred pain from pharyngitis or dental pain (normal otoscopic exam)
-  - Temporomandibular joint (TMJ) dysfunction (jaw pain radiating to ear, worse with chewing)
-  - Cerumen impaction (fullness sensation, hearing loss, visible cerumen on otoscopy)
-  - Mastoiditis (postauricular swelling, erythema, tenderness, protruding ear)
-  - Foreign body in ear canal (visible on otoscopy, unilateral symptoms)
-trace:
-  source: AAP Clinical Practice Guideline for Diagnosis and Management of Acute Otitis Media, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Clinical Practice Guideline - Acute Otitis Media
-  - UpToDate - Pediatrics
-  - Lieberthal AS et al. Pediatrics 2013 (AAP AOM Guidelines)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

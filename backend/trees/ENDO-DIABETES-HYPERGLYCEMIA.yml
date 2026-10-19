@@ -1,11 +1,33 @@
 tree_id: ENDO-DIABETES-HYPERGLYCEMIA
 name: Diabetes with Hyperglycemia
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: E11.65
-snomed: 190331003
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E11.65
+  snomed:
+    - '190331003'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: ADA Standards of Care in Diabetes 2024, AACE Guidelines on Glycemic Control
+    origin: trace.source
 presentations:
   - Elevated blood glucose in known diabetic
   - Polyuria (increased urination) and polydipsia (increased thirst)
@@ -17,6 +39,14 @@ presentations:
   - Nausea without ketoacidosis
   - Medication non-adherence or missed doses
   - Recent illness, infection, or stress
+differentials:
+  - Diabetic ketoacidosis (DKA) - ketones present, anion gap acidosis
+  - Hyperosmolar hyperglycemic state (HHS) - glucose >600, severe dehydration, altered mental status
+  - Medication non-adherence or inadequate dosing
+  - Infection or acute illness (UTI, pneumonia, MI, stroke)
+  - Steroid-induced hyperglycemia
+  - Pancreatitis (can cause or result from hyperglycemia)
+  - New-onset diabetes (undiagnosed previously)
 workup:
   - Point-of-care glucose measurement
   - Determine severity: mild (200-300), moderate (300-400), severe (>400 mg/dL)
@@ -56,32 +86,33 @@ treatment:
   - Consider GLP-1 agonist or SGLT2 inhibitor as adjunct
   - Diabetes education reinforcement
 clinical_pearls:
-  - "Hyperglycemia in diabetes most commonly due to medication non-adherence or intercurrent illness"
-  - "DKA rare in type 2 diabetes unless severe stressor - more common in type 1"
-  - "HHS (hyperosmolar hyperglycemic state) occurs in type 2 - glucose often >600, severe dehydration, altered mental status"
-  - "Steroid-induced hyperglycemia peaks 4-8 hours after dose, may require insulin"
-  - "SGLT2 inhibitors can cause euglycemic DKA (normal glucose with ketoacidosis)"
-  - "Infection most common precipitant - UTI, pneumonia, skin/soft tissue"
-  - "Persistent hyperglycemia increases risk of complications: retinopathy, nephropathy, neuropathy"
+  - Hyperglycemia in diabetes most commonly due to medication non-adherence or intercurrent illness
+  - DKA rare in type 2 diabetes unless severe stressor - more common in type 1
+  - HHS (hyperosmolar hyperglycemic state) occurs in type 2 - glucose often >600, severe dehydration, altered mental status
+  - Steroid-induced hyperglycemia peaks 4-8 hours after dose, may require insulin
+  - SGLT2 inhibitors can cause euglycemic DKA (normal glucose with ketoacidosis)
+  - Infection most common precipitant - UTI, pneumonia, skin/soft tissue
+  - 'Persistent hyperglycemia increases risk of complications: retinopathy, nephropathy, neuropathy'
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department if glucose >400 with symptoms, suspected DKA/HHS, or unable to tolerate oral intake
   - Endocrinology if recurrent hyperglycemia despite medication adjustment
   - Diabetes educator for medication adherence counseling
   - Social work if financial barriers to medication access
-differentials:
-  - Diabetic ketoacidosis (DKA) - ketones present, anion gap acidosis
-  - Hyperosmolar hyperglycemic state (HHS) - glucose >600, severe dehydration, altered mental status
-  - Medication non-adherence or inadequate dosing
-  - Infection or acute illness (UTI, pneumonia, MI, stroke)
-  - Steroid-induced hyperglycemia
-  - Pancreatitis (can cause or result from hyperglycemia)
-  - New-onset diabetes (undiagnosed previously)
-trace:
-  source: ADA Standards of Care in Diabetes 2024, AACE Guidelines on Glycemic Control
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

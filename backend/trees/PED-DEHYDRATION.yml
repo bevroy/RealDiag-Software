@@ -1,11 +1,35 @@
 tree_id: PED-DEHYDRATION
 name: Dehydration (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Family Medicine/Emergency Medicine
-icd10: E86.0
-snomed: 34095006
-urgency: []
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Family Medicine
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E86.0
+  snomed:
+    - '34095006'
+  icpc2: []
+sources:
+  - text: AAP (American Academy of Pediatrics) Clinical Practice Guidelines
+    origin: citations
+  - text: CDC Oral Rehydration Therapy Guidelines
+    origin: citations
+  - text: UpToDate - Pediatrics
+    origin: citations
+  - text: AAP Clinical Practice Guidelines on Gastroenteritis, CDC Oral Rehydration Therapy Guidelines, UpToDate
+    origin: trace.source
 presentations:
   - Decreased urine output (fewer wet diapers, dark concentrated urine)
   - Dry mucous membranes (mouth, tongue)
@@ -17,6 +41,15 @@ presentations:
   - Sunken eyes
   - Cool or mottled extremities (severe dehydration)
   - History of fluid losses (vomiting, diarrhea, decreased intake, fever, excessive sweating)
+differentials:
+  - Dehydration from gastroenteritis (vomiting, diarrhea, most common cause)
+  - Dehydration from decreased oral intake (anorexia, sore throat, stomatitis)
+  - Dehydration from fever and increased insensible losses
+  - Diabetic ketoacidosis (polyuria, polydipsia, hyperglycemia, metabolic acidosis)
+  - Adrenal insufficiency (hypotension, hyponatremia, hyperkalemia, hypoglycemia)
+  - Pyloric stenosis (projectile vomiting in infant 3-12 weeks, hypochloremic metabolic alkalosis)
+  - Sepsis (fever, ill-appearing, poor perfusion)
+  - Heat illness (exposure to high temperatures, hyperthermia)
 workup:
   - Clinical history
   - Onset and duration of symptoms
@@ -104,8 +137,8 @@ treatment:
   - Avoid sports drinks, juice, soda (inappropriate electrolyte composition)
   - Rehydration phase (first 4 hours)
   - Calculate fluid deficit
-  - "Mild (3-5%): 50 mL/kg over 4 hours"
-  - "Moderate (6-9%): 100 mL/kg over 4 hours"
+  - 'Mild (3-5%): 50 mL/kg over 4 hours'
+  - 'Moderate (6-9%): 100 mL/kg over 4 hours'
   - Give small frequent amounts
   - 5 mL every 5 minutes initially, increase as tolerated
   - Use syringe or spoon for infants
@@ -114,8 +147,8 @@ treatment:
   - Maintenance phase (after rehydration)
   - Resume age-appropriate diet
   - Continue ORS for ongoing losses
-  - "10 mL/kg ORS for each diarrheal stool"
-  - "2 mL/kg ORS for each vomiting episode"
+  - 10 mL/kg ORS for each diarrheal stool
+  - 2 mL/kg ORS for each vomiting episode
   - Breastfeeding should continue throughout
   - Feeding recommendations
   - Do NOT withhold food (BRAT diet outdated)
@@ -135,9 +168,9 @@ treatment:
   - Repeat boluses as needed until improved perfusion
   - Then calculate fluid deficit and give over 24 hours (or faster if severe)
   - Maintenance fluids: calculated by weight or 4-2-1 rule
-  - "First 10 kg: 100 mL/kg/day (4 mL/kg/hr)"
-  - "Second 10 kg: 50 mL/kg/day (2 mL/kg/hr)"
-  - "Each kg above 20: 20 mL/kg/day (1 mL/kg/hr)"
+  - 'First 10 kg: 100 mL/kg/day (4 mL/kg/hr)'
+  - 'Second 10 kg: 50 mL/kg/day (2 mL/kg/hr)'
+  - 'Each kg above 20: 20 mL/kg/day (1 mL/kg/hr)'
   - Antiemetics
   - Ondansetron (Zofran) may reduce vomiting and facilitate oral rehydration
   - 0.15 mg/kg PO/IV single dose (max 8 mg)
@@ -162,33 +195,33 @@ treatment:
   - Persistent vomiting preventing any oral intake
   - Fever greater than 102°F (39°C) in infant under 3 months
 clinical_pearls:
-  - 'Oral rehydration therapy (ORT) as effective as IV fluids for mild-moderate dehydration and preferred (less invasive, lower cost)'
-  - 'Give ORS in small frequent amounts (5 mL every 5 minutes) - even with vomiting, most fluid is absorbed'
-  - 'Sports drinks and juice NOT appropriate for rehydration - incorrect electrolyte composition (too much sugar, not enough sodium)'
-  - 'Clinical assessment more accurate than labs for determining dehydration severity - use vital signs and exam findings'
-  - 'BRAT diet outdated - resume age-appropriate diet as soon as child tolerates, does not need to be restricted'
-  - 'Capillary refill time greater than 2 seconds and decreased skin turgor most reliable clinical signs of dehydration'
-  - 'Ondansetron can facilitate oral rehydration by reducing vomiting but should not replace ORT as first-line treatment'
-  - 'Infants and young children at highest risk for rapid dehydration due to higher baseline water requirements and increased losses'
+  - Oral rehydration therapy (ORT) as effective as IV fluids for mild-moderate dehydration and preferred (less invasive, lower cost)
+  - Give ORS in small frequent amounts (5 mL every 5 minutes) - even with vomiting, most fluid is absorbed
+  - Sports drinks and juice NOT appropriate for rehydration - incorrect electrolyte composition (too much sugar, not enough sodium)
+  - Clinical assessment more accurate than labs for determining dehydration severity - use vital signs and exam findings
+  - BRAT diet outdated - resume age-appropriate diet as soon as child tolerates, does not need to be restricted
+  - Capillary refill time greater than 2 seconds and decreased skin turgor most reliable clinical signs of dehydration
+  - Ondansetron can facilitate oral rehydration by reducing vomiting but should not replace ORT as first-line treatment
+  - Infants and young children at highest risk for rapid dehydration due to higher baseline water requirements and increased losses
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department if severe dehydration, altered mental status, hemodynamic instability, or failed oral rehydration
   - Gastroenterology if chronic diarrhea, malabsorption, or failure to thrive
   - Nephrology if electrolyte abnormalities persist or concern for renal dysfunction
-differentials:
-  - Dehydration from gastroenteritis (vomiting, diarrhea, most common cause)
-  - Dehydration from decreased oral intake (anorexia, sore throat, stomatitis)
-  - Dehydration from fever and increased insensible losses
-  - Diabetic ketoacidosis (polyuria, polydipsia, hyperglycemia, metabolic acidosis)
-  - Adrenal insufficiency (hypotension, hyponatremia, hyperkalemia, hypoglycemia)
-  - Pyloric stenosis (projectile vomiting in infant 3-12 weeks, hypochloremic metabolic alkalosis)
-  - Sepsis (fever, ill-appearing, poor perfusion)
-  - Heat illness (exposure to high temperatures, hyperthermia)
-trace:
-  source: AAP Clinical Practice Guidelines on Gastroenteritis, CDC Oral Rehydration Therapy Guidelines, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - AAP (American Academy of Pediatrics) Clinical Practice Guidelines
-  - CDC Oral Rehydration Therapy Guidelines
-  - UpToDate - Pediatrics
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

@@ -1,45 +1,66 @@
 tree_id: PSYCH-SUBSTANCE-USE
 name: Substance Use Disorder
+version: '1.0'
+status: draft
 family: Psychiatry
 specialty: Psychiatry
-icd10:
-- F10.20
-- F11.20
-- F19.20
-snomed:
-- '191816009'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Substance Use Disorder
-version: '1.0'
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F10.20
+    - F11.20
+    - F19.20
+  snomed:
+    - '191816009'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic Criteria
+    origin: trace.source
 presentations:
-- Impaired control over substance use
-- Continued use despite harm
-- Tolerance
-- Withdrawal symptoms
-- Social/occupational impairment
-- Craving
+  - Impaired control over substance use
+  - Continued use despite harm
+  - Tolerance
+  - Withdrawal symptoms
+  - Social/occupational impairment
+  - Craving
+differentials:
+  - Depression
+  - Anxiety
+  - Bipolar disorder
+  - Personality disorder
+  - Dual diagnosis
 workup: []
 treatment:
-  - 'Screen with validated tools - CAGE, AUDIT (alcohol), DAST (drugs), tobacco use assessment'
-  - 'Brief intervention - SBIRT model (Screening, Brief Intervention, Referral to Treatment) effective in primary care'
-  - 'Motivational interviewing - patient-centered counseling to enhance intrinsic motivation for change'
+  - Screen with validated tools - CAGE, AUDIT (alcohol), DAST (drugs), tobacco use assessment
+  - Brief intervention - SBIRT model (Screening, Brief Intervention, Referral to Treatment) effective in primary care
+  - Motivational interviewing - patient-centered counseling to enhance intrinsic motivation for change
   - 'Medication for opioid use disorder (MOUD): Buprenorphine/naloxone (Suboxone) first-line, methadone, naltrexone'
   - 'Alcohol use disorder: Naltrexone 50mg daily (reduces craving), acamprosate 666mg TID (helps abstinence), disulfiram 250mg daily (aversive)'
   - 'Tobacco: Varenicline (Chantix) 1mg BID most effective, bupropion SR 150mg BID, nicotine replacement (patch, gum, lozenge)'
   - 'Stimulant use disorder: No FDA-approved medications, behavioral therapy (contingency management, CBT)'
-  - 'Intensive outpatient programs (IOP), partial hospitalization (PHP), residential treatment for severe cases'
-  - 'Mutual support groups - AA (alcohol), NA (narcotics), SMART Recovery (evidence-based alternative)'
-  - 'Address co-occurring psychiatric disorders - depression, anxiety, PTSD (dual diagnosis treatment)'
-  - 'Harm reduction strategies - naloxone distribution, fentanyl test strips, safe supply programs'
-  - 'Relapse prevention planning - identify triggers, coping strategies, support system'
-  - 'Long-term follow-up essential - substance use disorder is chronic relapsing condition'
+  - Intensive outpatient programs (IOP), partial hospitalization (PHP), residential treatment for severe cases
+  - Mutual support groups - AA (alcohol), NA (narcotics), SMART Recovery (evidence-based alternative)
+  - Address co-occurring psychiatric disorders - depression, anxiety, PTSD (dual diagnosis treatment)
+  - Harm reduction strategies - naloxone distribution, fentanyl test strips, safe supply programs
+  - Relapse prevention planning - identify triggers, coping strategies, support system
+  - Long-term follow-up essential - substance use disorder is chronic relapsing condition
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute suicidal ideation with plan
@@ -57,14 +78,20 @@ referrals:
     - ADHD evaluation
     - Therapy referral
     - Medication management
-differentials:
-  - Depression
-  - Anxiety
-  - Bipolar disorder
-  - Personality disorder
-  - Dual diagnosis
-trace:
-  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
-    Criteria
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

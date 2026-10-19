@@ -1,11 +1,33 @@
 tree_id: ENDO-OSTEOPENIA
 name: Osteopenia (Low Bone Mass)
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: M85.80
-snomed: 312894000
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - M85.80
+  snomed:
+    - '312894000'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: AACE Guidelines on Osteoporosis 2020, NOF Clinician's Guide to Prevention and Treatment
+    origin: trace.source
 presentations:
   - Asymptomatic (found on bone density screening)
   - Low bone mineral density on DEXA scan
@@ -15,6 +37,13 @@ presentations:
   - Previous fragility fracture
   - Chronic glucocorticoid use
   - No fracture history (distinguishes from osteoporosis clinically)
+differentials:
+  - Osteopenia (T-score -1.0 to -2.5) - low bone mass without fractures
+  - Osteoporosis (T-score ≤-2.5 or fragility fracture)
+  - Normal bone density (T-score ≥-1.0)
+  - Secondary osteoporosis/osteopenia (hyperparathyroidism, hyperthyroidism, celiac, myeloma)
+  - Glucocorticoid-induced bone loss
+  - Vitamin D deficiency
 workup:
   - Bone mineral density (BMD) testing via DEXA scan
   - T-score -1.0 to -2.5 = osteopenia
@@ -54,31 +83,33 @@ treatment:
   - Minimize glucocorticoid use if possible
   - Repeat DEXA scan every 2-5 years to monitor progression
 clinical_pearls:
-  - "Osteopenia is intermediate bone density - lower than normal but not osteoporosis"
-  - "50% of women >50 have osteopenia - very common"
-  - "Most osteopenia patients do not require medication - focus on prevention"
-  - "Lifestyle interventions can slow or reverse bone loss in osteopenia"
-  - "FRAX score guides treatment decisions - not all osteopenia needs medication"
-  - "Weight-bearing exercise stimulates bone formation - key for prevention"
-  - "Glucocorticoids most common medication cause of bone loss (even low doses)"
-  - "Vitamin D insufficiency (<30 ng/mL) impairs calcium absorption - optimize first"
+  - Osteopenia is intermediate bone density - lower than normal but not osteoporosis
+  - 50% of women >50 have osteopenia - very common
+  - Most osteopenia patients do not require medication - focus on prevention
+  - Lifestyle interventions can slow or reverse bone loss in osteopenia
+  - FRAX score guides treatment decisions - not all osteopenia needs medication
+  - Weight-bearing exercise stimulates bone formation - key for prevention
+  - Glucocorticoids most common medication cause of bone loss (even low doses)
+  - Vitamin D insufficiency (<30 ng/mL) impairs calcium absorption - optimize first
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Endocrinology if high fracture risk, secondary causes, or considering pharmacotherapy
   - Physical therapy for fall prevention and exercise prescription
   - Rheumatology if underlying inflammatory condition
-differentials:
-  - Osteopenia (T-score -1.0 to -2.5) - low bone mass without fractures
-  - Osteoporosis (T-score ≤-2.5 or fragility fracture)
-  - Normal bone density (T-score ≥-1.0)
-  - Secondary osteoporosis/osteopenia (hyperparathyroidism, hyperthyroidism, celiac, myeloma)
-  - Glucocorticoid-induced bone loss
-  - Vitamin D deficiency
-trace:
-  source: AACE Guidelines on Osteoporosis 2020, NOF Clinician's Guide to Prevention and Treatment
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

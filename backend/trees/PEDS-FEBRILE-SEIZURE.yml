@@ -1,18 +1,37 @@
 tree_id: PEDS-FEBRILE-SEIZURE
 name: Febrile Seizure
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Neurology/Emergency Medicine
-age_max: 6
-icd10: R56.00
-snomed: 41497008
-urgency:
-  - Prolonged seizure (greater than 5 minutes) or status epilepticus
-  - Recurrent seizures within same febrile illness (complex febrile seizure)
-  - Focal seizure or focal neurologic deficits post-ictally
-  - Age less than 6 months or greater than 5 years (not typical febrile seizure age)
-  - Signs of meningitis (altered mental status, bulging fontanelle, neck stiffness)
-  - Seizure before fever onset (suggests CNS infection or epilepsy, not febrile seizure)
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Neurology
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: 6
+codes:
+  icd10:
+    - R56.00
+  snomed:
+    - '41497008'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Febrile Seizures Clinical Practice Guideline (Subcommittee on Febrile Seizures)
+    origin: citations
+  - text: UpToDate Pediatrics - Febrile Seizures
+    origin: citations
+  - text: Steering Committee on Quality Improvement and Management. Pediatrics 2011 - Febrile Seizures Guideline
+    origin: citations
+  - text: 'Leung AK et al. J Pediatr Health Care 2018 - Febrile Seizures: An Overview'
+    origin: citations
+  - text: AAP Clinical Practice Guideline, Pediatric Neurology Guidelines, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Generalized tonic-clonic seizure associated with fever
   - Sudden loss of consciousness
@@ -26,6 +45,17 @@ presentations:
   - First-time seizure versus recurrent febrile seizures
   - Family history of febrile seizures (20-25% recurrence risk if family history)
   - Otherwise healthy child with normal development
+differentials:
+  - Simple febrile seizure (most common) - age 6 months to 5 years, generalized, brief, rapid recovery, benign
+  - Complex febrile seizure - prolonged (greater than 15 minutes), focal, or recurrent in 24 hours
+  - Epilepsy (afebrile seizure) - seizure without fever, recurrent unprovoked seizures
+  - Meningitis or encephalitis - fever with seizure, altered mental status, meningeal signs, CSF pleocytosis
+  - Breath-holding spell - triggered by crying or frustration, cyanotic or pallid type, brief, age 6-18 months
+  - Rigors or shivering (not true seizure) - child conscious, can be consoled, no post-ictal period
+  - Syncope - brief loss of consciousness, no tonic-clonic activity, rapid recovery
+  - Acute symptomatic seizure (provoked) - metabolic (hypoglycemia, hyponatremia), toxic ingestion, head trauma
+  - Infantile spasms (West syndrome) - clusters of brief spasms, hypsarrhythmia on EEG, developmental regression
+  - Dravet syndrome (severe myoclonic epilepsy of infancy) - starts with prolonged febrile seizures in infancy, progresses to refractory epilepsy
 workup:
   - Clinical history
   - Detailed seizure description
@@ -93,7 +123,7 @@ workup:
   - CSF studies: cell count, glucose, protein, Gram stain, culture
   - Neuroimaging (CT or MRI brain)
   - NOT routinely indicated for simple febrile seizure
-  - Consider if:
+  - Consider if: null
   - Focal seizure or focal neurologic deficits
   - Signs of increased intracranial pressure
   - Complex febrile seizure not rapidly returning to baseline
@@ -104,7 +134,7 @@ workup:
   - Consider if concern for underlying epilepsy (afebrile seizure history, developmental delay)
   - Serum electrolytes, glucose, calcium, magnesium
   - NOT routinely indicated for simple febrile seizure
-  - Consider if:
+  - Consider if: null
   - Prolonged or focal seizure
   - History of vomiting/diarrhea (dehydration, electrolyte imbalance)
   - Concern for metabolic cause
@@ -145,7 +175,7 @@ treatment:
   - Rectal diazepam 0.5 mg/kg (max 20 mg) at fever onset can be prescribed for home use
   - Disposition
   - Simple febrile seizure, well-appearing, returned to baseline: may discharge home
-  - Admit if:
+  - Admit if: null
   - Complex febrile seizure (prolonged, focal, recurrent)
   - Age less than 6 months or greater than 5 years
   - Suspected meningitis or serious bacterial infection
@@ -161,37 +191,40 @@ treatment:
   - If seizure occurs at home: keep safe (side position, do not restrain), call 911 if prolonged greater than 5 minutes
   - Reassurance: vast majority outgrow febrile seizures by age 5-6 years, excellent prognosis
 clinical_pearls:
-  - 'Febrile seizures occur in 2-5% of children age 6 months to 5 years - benign condition with excellent prognosis'
+  - Febrile seizures occur in 2-5% of children age 6 months to 5 years - benign condition with excellent prognosis
   - 'Simple febrile seizure: generalized, less than 15 minutes, single in 24 hours, rapid return to baseline - no workup needed if well-appearing and fully immunized'
-  - 'Lumbar puncture STRONGLY consider in infants less than 12 months (meningeal signs unreliable) or if not fully immunized'
-  - 'Antipyretics (acetaminophen, ibuprofen) do NOT prevent febrile seizures - give for comfort but set realistic expectations'
-  - 'Prophylactic antiseizure medications (phenobarbital, valproate) NOT recommended - risks outweigh benefits, do not prevent epilepsy'
-  - 'Risk of recurrence 30-40% (higher if young age, family history, low-grade fever at first seizure)'
-  - 'Risk of epilepsy only 1-2% (slightly higher than general population) - febrile seizures do NOT cause epilepsy or brain damage'
-  - 'Complex febrile seizure (prolonged greater than 15 minutes, focal, or recurrent in 24 hours) warrants further evaluation - consider LP, labs, possible imaging'
+  - Lumbar puncture STRONGLY consider in infants less than 12 months (meningeal signs unreliable) or if not fully immunized
+  - Antipyretics (acetaminophen, ibuprofen) do NOT prevent febrile seizures - give for comfort but set realistic expectations
+  - Prophylactic antiseizure medications (phenobarbital, valproate) NOT recommended - risks outweigh benefits, do not prevent epilepsy
+  - Risk of recurrence 30-40% (higher if young age, family history, low-grade fever at first seizure)
+  - Risk of epilepsy only 1-2% (slightly higher than general population) - febrile seizures do NOT cause epilepsy or brain damage
+  - Complex febrile seizure (prolonged greater than 15 minutes, focal, or recurrent in 24 hours) warrants further evaluation - consider LP, labs, possible imaging
+red_flags:
+  - Prolonged seizure (greater than 5 minutes) or status epilepticus
+  - Recurrent seizures within same febrile illness (complex febrile seizure)
+  - Focal seizure or focal neurologic deficits post-ictally
+  - Age less than 6 months or greater than 5 years (not typical febrile seizure age)
+  - Signs of meningitis (altered mental status, bulging fontanelle, neck stiffness)
+  - Seizure before fever onset (suggests CNS infection or epilepsy, not febrile seizure)
+disposition_guidance: {}
 referrals:
   - Pediatric neurology if complex febrile seizure, recurrent febrile seizures with family concern, focal neurologic deficits, or developmental delay
   - Pediatric neurology if seizure before fever onset or afebrile seizure (suggests epilepsy)
   - Pediatric infectious disease if concern for meningitis, encephalitis, or complicated infection
   - EEG and neuroimaging NOT routinely indicated but neurology may order if atypical features
-differentials:
-  - Simple febrile seizure (most common) - age 6 months to 5 years, generalized, brief, rapid recovery, benign
-  - Complex febrile seizure - prolonged (greater than 15 minutes), focal, or recurrent in 24 hours
-  - Epilepsy (afebrile seizure) - seizure without fever, recurrent unprovoked seizures
-  - Meningitis or encephalitis - fever with seizure, altered mental status, meningeal signs, CSF pleocytosis
-  - Breath-holding spell - triggered by crying or frustration, cyanotic or pallid type, brief, age 6-18 months
-  - Rigors or shivering (not true seizure) - child conscious, can be consoled, no post-ictal period
-  - Syncope - brief loss of consciousness, no tonic-clonic activity, rapid recovery
-  - Acute symptomatic seizure (provoked) - metabolic (hypoglycemia, hyponatremia), toxic ingestion, head trauma
-  - Infantile spasms (West syndrome) - clusters of brief spasms, hypsarrhythmia on EEG, developmental regression
-  - Dravet syndrome (severe myoclonic epilepsy of infancy) - starts with prolonged febrile seizures in infancy, progresses to refractory epilepsy
-trace:
-  source: AAP Clinical Practice Guideline, Pediatric Neurology Guidelines, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Febrile Seizures Clinical Practice Guideline (Subcommittee on Febrile Seizures)
-  - UpToDate Pediatrics - Febrile Seizures
-  - Steering Committee on Quality Improvement and Management. Pediatrics 2011 - Febrile Seizures Guideline
-  - Leung AK et al. J Pediatr Health Care 2018 - Febrile Seizures: An Overview
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

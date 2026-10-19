@@ -1,11 +1,34 @@
 tree_id: PSYCH-SOMATIC-SYMPTOM-DISORDER
 name: Somatic Symptom Disorder
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Primary Care
-icd10: F45.1
-snomed: 271587009
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F45.1
+  snomed:
+    - '271587009'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR Criteria, APA Practice Guidelines, Cochrane Review on CBT for Somatic Symptom Disorders
+    origin: trace.source
 presentations:
   - One or more somatic symptoms that are distressing or result in significant disruption of daily life
   - Excessive thoughts, feelings, or behaviors related to somatic symptoms
@@ -16,6 +39,17 @@ presentations:
   - May involve single symptom (usually pain) or multiple symptoms
   - Symptoms may or may not be medically explained
   - High healthcare utilization, "doctor shopping"
+differentials:
+  - Somatic symptom disorder (psychological symptoms prominent, excessive focus on symptoms)
+  - Illness anxiety disorder (preoccupation with having serious illness, minimal somatic symptoms)
+  - Conversion disorder/Functional neurological symptom disorder (neurological symptoms incompatible with medical condition)
+  - Factitious disorder (intentional production of symptoms for sick role)
+  - Malingering (intentional symptoms for external gain)
+  - Medical conditions causing symptoms (always consider, but SSD can coexist)
+  - Major depressive disorder with somatic complaints
+  - Generalized anxiety disorder (worry not focused solely on health)
+  - Body dysmorphic disorder (preoccupation with appearance)
+  - Pain disorders (chronic pain without excessive psychological symptoms)
 workup:
   - Clinical diagnosis based on DSM-5-TR criteria (not diagnosis of exclusion)
   - Key: focus on excessive thoughts, feelings, behaviors about symptoms, not whether symptoms are medically explained
@@ -70,36 +104,34 @@ treatment:
   - Stress management
   - Gradual return to normal activities
 clinical_pearls:
-  - "Affects 5-7% of general population, more common in women"
-  - "Key change in DSM-5: focus on psychological features (excessive thoughts/behaviors), not whether symptoms are medically unexplained"
-  - "Diagnosis is made in ADDITION to medical conditions, not instead of them"
-  - "High healthcare costs - patients use 6-14 times more healthcare resources than average"
-  - "Avoid extensive medical testing - reinforces belief that serious disease is present"
-  - "Regular scheduled visits reduce PRN/emergency visits and improve outcomes"
-  - "Comorbid depression/anxiety present in 70-80% - treat aggressively"
-  - "Family involvement important - family members often reinforce illness behavior"
+  - Affects 5-7% of general population, more common in women
+  - 'Key change in DSM-5: focus on psychological features (excessive thoughts/behaviors), not whether symptoms are medically unexplained'
+  - Diagnosis is made in ADDITION to medical conditions, not instead of them
+  - High healthcare costs - patients use 6-14 times more healthcare resources than average
+  - Avoid extensive medical testing - reinforces belief that serious disease is present
+  - Regular scheduled visits reduce PRN/emergency visits and improve outcomes
+  - Comorbid depression/anxiety present in 70-80% - treat aggressively
+  - Family involvement important - family members often reinforce illness behavior
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Psychiatry or psychology for CBT and medication management
   - Mental health therapist for ongoing psychotherapy
   - Pain management if chronic pain prominent (multidisciplinary approach)
   - Avoid specialty referrals for extensive workup unless clear indication
-differentials:
-  - Somatic symptom disorder (psychological symptoms prominent, excessive focus on symptoms)
-  - Illness anxiety disorder (preoccupation with having serious illness, minimal somatic symptoms)
-  - Conversion disorder/Functional neurological symptom disorder (neurological symptoms incompatible with medical condition)
-  - Factitious disorder (intentional production of symptoms for sick role)
-  - Malingering (intentional symptoms for external gain)
-  - Medical conditions causing symptoms (always consider, but SSD can coexist)
-  - Major depressive disorder with somatic complaints
-  - Generalized anxiety disorder (worry not focused solely on health)
-  - Body dysmorphic disorder (preoccupation with appearance)
-  - Pain disorders (chronic pain without excessive psychological symptoms)
-trace:
-  source: DSM-5-TR Criteria, APA Practice Guidelines, Cochrane Review on CBT for Somatic Symptom Disorders
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

@@ -1,11 +1,34 @@
 tree_id: PSYCH-GRIEF-REACTION
 name: Grief Reaction (Uncomplicated Bereavement)
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Primary Care
-icd10: Z63.4
-snomed: 309785001
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Primary Care
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z63.4
+  snomed:
+    - '309785001'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR, APA Practice Guidelines, Complicated Grief Treatment Research by Katherine Shear MD
+    origin: trace.source
 presentations:
   - Recent loss of loved one (death, separation, or other significant loss)
   - Sadness, yearning, or longing for deceased
@@ -20,6 +43,13 @@ presentations:
   - Able to experience positive emotions at times
   - Maintains self-esteem and sense of identity
   - Gradual improvement over weeks to months
+differentials:
+  - Normal grief/bereavement (waves of sadness, triggered by reminders, self-esteem intact, improves over time)
+  - Prolonged grief disorder (intense symptoms persist beyond 12 months, significant functional impairment)
+  - Major depressive disorder (persistent depressed mood, anhedonia, worthlessness, not necessarily tied to loss)
+  - Adjustment disorder (stressor other than bereavement, resolves within 6 months)
+  - Post-traumatic stress disorder (traumatic death with intrusion, avoidance, hyperarousal symptoms)
+  - Complicated grief (difficulty accepting death, intense yearning, functional impairment beyond 12 months)
 workup:
   - Clinical assessment
   - Establish timing and nature of loss
@@ -74,32 +104,34 @@ treatment:
   - Monitor for prolonged grief disorder
   - Reassess at 6-12 months if symptoms not improving
 clinical_pearls:
-  - "Normal grief is not a mental disorder - most bereaved individuals do not require professional treatment"
-  - "Acute grief typically peaks around 6 months, with gradual improvement over 1-2 years"
-  - "Complicated/Prolonged grief disorder affects 10-20% of bereaved - persistent intense symptoms beyond 12 months"
-  - "Key difference from depression: in grief, pain comes in waves (triggered by reminders), self-esteem preserved; in MDD, persistent low mood and feelings of worthlessness"
-  - "Stages of grief (denial, anger, bargaining, depression, acceptance) not linear - individuals move back and forth"
-  - "Avoid premature medicalization of grief - antidepressants NOT indicated for normal grief"
-  - "Suicide risk elevated in first year after bereavement - always assess"
-  - "Cultural variation in grief expression - assess within cultural context"
+  - Normal grief is not a mental disorder - most bereaved individuals do not require professional treatment
+  - Acute grief typically peaks around 6 months, with gradual improvement over 1-2 years
+  - Complicated/Prolonged grief disorder affects 10-20% of bereaved - persistent intense symptoms beyond 12 months
+  - 'Key difference from depression: in grief, pain comes in waves (triggered by reminders), self-esteem preserved; in MDD, persistent low mood and feelings of worthlessness'
+  - Stages of grief (denial, anger, bargaining, depression, acceptance) not linear - individuals move back and forth
+  - Avoid premature medicalization of grief - antidepressants NOT indicated for normal grief
+  - Suicide risk elevated in first year after bereavement - always assess
+  - Cultural variation in grief expression - assess within cultural context
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Bereavement support groups or counseling
   - Mental health professional if prolonged grief disorder develops (beyond 12 months)
   - Psychiatry if major depressive disorder develops or suicidal ideation present
   - Complicated grief treatment specialist if available
-differentials:
-  - Normal grief/bereavement (waves of sadness, triggered by reminders, self-esteem intact, improves over time)
-  - Prolonged grief disorder (intense symptoms persist beyond 12 months, significant functional impairment)
-  - Major depressive disorder (persistent depressed mood, anhedonia, worthlessness, not necessarily tied to loss)
-  - Adjustment disorder (stressor other than bereavement, resolves within 6 months)
-  - Post-traumatic stress disorder (traumatic death with intrusion, avoidance, hyperarousal symptoms)
-  - Complicated grief (difficulty accepting death, intense yearning, functional impairment beyond 12 months)
-trace:
-  source: DSM-5-TR, APA Practice Guidelines, Complicated Grief Treatment Research by Katherine Shear MD
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

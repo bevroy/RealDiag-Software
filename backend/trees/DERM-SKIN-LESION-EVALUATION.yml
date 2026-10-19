@@ -1,11 +1,34 @@
 tree_id: DERM-SKIN-LESION-EVALUATION
 name: Skin Lesion / Mole Evaluation (Encounter)
+version: '1.0'
+status: draft
 family: Dermatology
-specialty: Dermatology/Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Changing mole or concerning skin lesion
 description: Systematic evaluation of pigmented and non-pigmented skin lesions to identify benign vs malignant features. ABCDE criteria for melanoma screening. Dermoscopy enhances diagnostic accuracy. Biopsy indicated for suspicious lesions.
-icd10: D48.5
-snomed: 400210000
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - D48.5
+  snomed:
+    - '400210000'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Guidelines for Melanoma Screening
+    origin: citations
+  - text: NCCN (National Comprehensive Cancer Network) Melanoma Guidelines
+    origin: citations
+  - text: Dermoscopy Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - New or changing mole
   - Irregular borders or color
@@ -15,19 +38,10 @@ presentations:
   - Bleeding or crusting lesion
   - Non-healing sore
   - Patient or family concern
-urgency: routine
-referrals:
-  emergency:
-    - Rapidly growing aggressive tumor
-  urgent:
-    - Suspected melanoma (ABCDE criteria, ugly duckling sign)
-    - Suspected non-melanoma skin cancer
-    - Symptomatic or bleeding lesion
-  routine:
-    - Routine skin cancer screening
-    - Atypical nevi surveillance
-    - Family history of melanoma
-
+differentials:
+  - Benign - melanocytic nevus, seborrheic keratosis, lentigo, dermatofibroma, hemangioma
+  - Premalignant - dysplastic nevus, actinic keratosis
+  - Malignant - melanoma, basal cell carcinoma, squamous cell carcinoma, Merkel cell carcinoma
 workup:
   - Comprehensive skin examination - systematic head-to-toe inspection
   - History
@@ -124,10 +138,27 @@ clinical_pearls:
   - Atypical mole syndrome (dysplastic nevi) - precursor to melanoma, requires surveillance
   - Five or more blistering sunburns doubles melanoma risk
   - Melanoma incidence increasing - sun protection and early detection critical
-differentials:
-  - Benign - melanocytic nevus, seborrheic keratosis, lentigo, dermatofibroma, hemangioma
-  - Premalignant - dysplastic nevus, actinic keratosis
-  - Malignant - melanoma, basal cell carcinoma, squamous cell carcinoma, Merkel cell carcinoma
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Rapidly growing aggressive tumor
+  urgent:
+    - Suspected melanoma (ABCDE criteria, ugly duckling sign)
+    - Suspected non-melanoma skin cancer
+    - Symptomatic or bleeding lesion
+  routine:
+    - Routine skin cancer screening
+    - Atypical nevi surveillance
+    - Family history of melanoma
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 52-year-old woman presents for skin check after noticing changing mole on left shoulder
   - Mole present for years but noticed darkening and irregular border over past 6 months
@@ -152,9 +183,7 @@ trace:
   - Excisional biopsy of two atypical nevi on trunk - both dysplastic nevi with moderate atypia, margins clear
   - Diagnosis - dysplastic nevus syndrome
   - Continues surveillance every 6 months
-
-citations:
-  - AAD (American Academy of Dermatology) Guidelines for Melanoma Screening
-  - NCCN (National Comprehensive Cancer Network) Melanoma Guidelines
-  - Dermoscopy Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

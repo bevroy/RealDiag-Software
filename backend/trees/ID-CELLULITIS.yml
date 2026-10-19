@@ -1,71 +1,93 @@
 tree_id: ID-CELLULITIS
 name: Cellulitis
+version: '1.0'
+status: draft
 family: infectious disease
 specialty: Infectious Disease
-icd10:
-- L03.90
-- L03.115
-- L03.119
-snomed:
-- '128045006'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Cellulitis
-version: '1.0'
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L03.90
+    - L03.115
+    - L03.119
+  snomed:
+    - '128045006'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease Control and Prevention (CDC)
+    origin: trace.source
 presentations:
-- Erythema and warmth (localized skin redness)
-- Pain and tenderness of affected area
-- Swelling, edema
-- Fever, chills if systemic infection
-- Regional lymphadenopathy (swollen lymph nodes)
-- Poorly demarcated borders (vs erysipelas with sharp, raised borders)
-- 'Most common organisms: Streptococcus pyogenes (Group A Strep), Staphylococcus aureus'
-- 'Risk factors: Skin breaks, lymphedema, venous insufficiency, obesity, diabetes'
-- Lymphangitis (red streaks extending from infection site)
-- Purulent drainage suggests abscess - needs incision and drainage (I&D)
-- 'MRSA risk factors: IVDU, recent hospitalization, prior MRSA, purulent drainage'
-- Mark borders with pen to track progression or improvement on antibiotics
-workup:
-- Clinical diagnosis (no routine lab testing for uncomplicated)
-- Blood cultures if systemic symptoms (fever, tachycardia)
-- Wound culture if abscess drained
-- Ultrasound if abscess suspected but not clinically apparent
-treatment:
-- 'Guideline-based treatment options for Cellulitis include:'
-- 'Non-purulent: Cephalexin 500mg PO QID x 5-7 days or dicloxacillin 500mg QID (IDSA
-  2024)'
-- 'MRSA risk: TMP-SMX DS 1-2 tabs BID + cephalexin OR doxycycline 100mg BID (IDSA
-  2024)'
-- 'Severe/systemic: Admit for IV cefazolin 2g q8h or vancomycin 15-20mg/kg q12h if
-  MRSA (IDSA 2024)'
-- 'Abscess: Incision and drainage (I&D) REQUIRED + antibiotics (IDSA 2024)'
-- Elevation of affected extremity, NSAIDs for pain and inflammation (IDSA 2024)
-clinical_pearls:
-- Strep pyogenes (Group A Strep) and Staph aureus most common organisms
-- 'Purulent cellulitis (abscess/drainage): Suspect MRSA, needs I&D + antibiotics'
-- 'Non-purulent cellulitis: Beta-lactam (cephalexin) covers strep adequately'
-- Mark borders with marker pen to track progression or improvement
-- Elevation + NSAIDs reduce inflammation and edema
-- 'Recurrent cellulitis: Consider prophylaxis (penicillin VK 250-500mg daily)'
-referrals:
-- 'Admission if: Systemic toxicity, failed outpatient therapy, immunocompromised,
-  rapidly progressive'
-- Surgery if necrotizing fasciitis suspected (pain out of proportion, crepitus, rapid
-  progression)
-- Dermatology if atypical or recurrent
+  - Erythema and warmth (localized skin redness)
+  - Pain and tenderness of affected area
+  - Swelling, edema
+  - Fever, chills if systemic infection
+  - Regional lymphadenopathy (swollen lymph nodes)
+  - Poorly demarcated borders (vs erysipelas with sharp, raised borders)
+  - 'Most common organisms: Streptococcus pyogenes (Group A Strep), Staphylococcus aureus'
+  - 'Risk factors: Skin breaks, lymphedema, venous insufficiency, obesity, diabetes'
+  - Lymphangitis (red streaks extending from infection site)
+  - Purulent drainage suggests abscess - needs incision and drainage (I&D)
+  - 'MRSA risk factors: IVDU, recent hospitalization, prior MRSA, purulent drainage'
+  - Mark borders with pen to track progression or improvement on antibiotics
 differentials:
   - DVT
   - Abscess
   - Necrotizing fasciitis
   - Contact dermatitis
   - Stasis dermatitis
-trace:
-  source: Infectious Diseases Society of America (IDSA) Guidelines, Centers for Disease
-    Control and Prevention (CDC)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Clinical diagnosis (no routine lab testing for uncomplicated)
+  - Blood cultures if systemic symptoms (fever, tachycardia)
+  - Wound culture if abscess drained
+  - Ultrasound if abscess suspected but not clinically apparent
+treatment:
+  - 'Guideline-based treatment options for Cellulitis include:'
+  - 'Non-purulent: Cephalexin 500mg PO QID x 5-7 days or dicloxacillin 500mg QID (IDSA 2024)'
+  - 'MRSA risk: TMP-SMX DS 1-2 tabs BID + cephalexin OR doxycycline 100mg BID (IDSA 2024)'
+  - 'Severe/systemic: Admit for IV cefazolin 2g q8h or vancomycin 15-20mg/kg q12h if MRSA (IDSA 2024)'
+  - 'Abscess: Incision and drainage (I&D) REQUIRED + antibiotics (IDSA 2024)'
+  - Elevation of affected extremity, NSAIDs for pain and inflammation (IDSA 2024)
+clinical_pearls:
+  - Strep pyogenes (Group A Strep) and Staph aureus most common organisms
+  - 'Purulent cellulitis (abscess/drainage): Suspect MRSA, needs I&D + antibiotics'
+  - 'Non-purulent cellulitis: Beta-lactam (cephalexin) covers strep adequately'
+  - Mark borders with marker pen to track progression or improvement
+  - Elevation + NSAIDs reduce inflammation and edema
+  - 'Recurrent cellulitis: Consider prophylaxis (penicillin VK 250-500mg daily)'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - 'Admission if: Systemic toxicity, failed outpatient therapy, immunocompromised, rapidly progressive'
+  - Surgery if necrotizing fasciitis suspected (pain out of proportion, crepitus, rapid progression)
+  - Dermatology if atypical or recurrent
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

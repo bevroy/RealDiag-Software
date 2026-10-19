@@ -1,11 +1,33 @@
 tree_id: ORTHO-KNEE-SPRAIN
 name: Knee Sprain
+version: '1.0'
+status: draft
 family: orthopedics
 specialty: Orthopedics
-icd10: S83.90XA
-snomed: 239720000
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - S83.90XA
+  snomed:
+    - '239720000'
+  icpc2: []
+sources:
+  - text: AAOS (American Academy of Orthopaedic Surgeons) Clinical Practice Guidelines
+    origin: citations
+  - text: BOA (British Orthopaedic Association) Standards
+    origin: citations
+  - text: UpToDate - Orthopedic Surgery
+    origin: citations
+  - text: AAOS Clinical Practice Guidelines on Knee Injuries, ACL Reconstruction Guidelines, Ottawa Knee Rules
+    origin: trace.source
 presentations:
   - Acute knee pain after twisting, pivoting, or direct blow to knee
   - Immediate or delayed swelling (hemarthrosis suggests ACL/PCL tear)
@@ -15,6 +37,16 @@ presentations:
   - Popping or tearing sensation at time of injury
   - Tenderness along ligament course (medial/lateral joint line, anterior/posterior)
   - Limited range of motion
+differentials:
+  - MCL sprain (medial joint line pain, valgus stress laxity)
+  - ACL tear (pop, immediate swelling, positive Lachman, pivot shift)
+  - PCL tear (posterior drawer laxity, dashboard injury mechanism)
+  - LCL sprain (lateral pain, varus stress laxity, less common)
+  - Meniscal tear (joint line tenderness, locking, catching, positive McMurray)
+  - Patellar dislocation (patella displaced laterally, young female athletes)
+  - Fracture (tibial plateau, femoral condyle, patella)
+  - Patellar tendon rupture (unable to extend knee, palpable gap)
+  - Quadriceps tendon rupture (unable to extend knee, high-riding patella)
 workup:
   - Clinical assessment and mechanism of injury
   - Non-contact deceleration/pivoting: ACL tear
@@ -79,35 +111,34 @@ treatment:
   - Proprioception and neuromuscular training
   - Sport-specific training before return to play
 clinical_pearls:
-  - "MCL most commonly injured knee ligament (40-50% of knee sprains)"
-  - "ACL tear classic: non-contact pivot/deceleration, 'pop', immediate swelling (hemarthrosis)"
-  - "Lachman test most sensitive for ACL tear (85-95% sensitive)"
-  - "MCL Grade 1-2 sprains heal well non-operatively - surgery rarely needed"
-  - "Unhappy triad: ACL + MCL + medial meniscus tear (severe valgus injury)"
-  - "PCL tear rare (5-20% knee injuries) - dashboard injury or fall on flexed knee"
-  - "Immediate large effusion suggests hemarthrosis (ACL, PCL, fracture, dislocation)"
-  - "Isolated LCL injury rare - usually with other structures (posterolateral corner)"
+  - MCL most commonly injured knee ligament (40-50% of knee sprains)
+  - 'ACL tear classic: non-contact pivot/deceleration, ''pop'', immediate swelling (hemarthrosis)'
+  - Lachman test most sensitive for ACL tear (85-95% sensitive)
+  - MCL Grade 1-2 sprains heal well non-operatively - surgery rarely needed
+  - 'Unhappy triad: ACL + MCL + medial meniscus tear (severe valgus injury)'
+  - PCL tear rare (5-20% knee injuries) - dashboard injury or fall on flexed knee
+  - Immediate large effusion suggests hemarthrosis (ACL, PCL, fracture, dislocation)
+  - Isolated LCL injury rare - usually with other structures (posterolateral corner)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Orthopedic sports medicine if suspected ACL, PCL, or Grade 3 ligament tear
   - MRI recommended before orthopedic referral to guide treatment planning
   - Physical therapy for all Grade 2-3 sprains
   - Emergency orthopedics if knee dislocation (high risk vascular injury)
-differentials:
-  - MCL sprain (medial joint line pain, valgus stress laxity)
-  - ACL tear (pop, immediate swelling, positive Lachman, pivot shift)
-  - PCL tear (posterior drawer laxity, dashboard injury mechanism)
-  - LCL sprain (lateral pain, varus stress laxity, less common)
-  - Meniscal tear (joint line tenderness, locking, catching, positive McMurray)
-  - Patellar dislocation (patella displaced laterally, young female athletes)
-  - Fracture (tibial plateau, femoral condyle, patella)
-  - Patellar tendon rupture (unable to extend knee, palpable gap)
-  - Quadriceps tendon rupture (unable to extend knee, high-riding patella)
-trace:
-  source: AAOS Clinical Practice Guidelines on Knee Injuries, ACL Reconstruction Guidelines, Ottawa Knee Rules
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - AAOS (American Academy of Orthopaedic Surgeons) Clinical Practice Guidelines
-  - BOA (British Orthopaedic Association) Standards
-  - UpToDate - Orthopedic Surgery
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

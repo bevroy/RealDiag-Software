@@ -1,11 +1,33 @@
 tree_id: ID-FEVER
 name: Fever Workup
+version: '1.0'
+status: draft
 family: infectious disease
-specialty: Infectious Disease, Internal Medicine, Emergency Medicine
+specialty: Infectious Disease
+secondary_specialties:
+  - Internal Medicine
+  - Emergency Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
 description: Decision tree for evaluating fever and sepsis screening
-version: "1.0"
-icd10: R50.9
-snomed: 386661006
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R50.9
+  snomed:
+    - '386661006'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
 presentations:
   - Temperature ≥38°C (100.4°F)
   - Chills, rigors
@@ -19,8 +41,28 @@ differentials:
   - Autoimmune disease
   - Drug fever
   - Factitious fever
-entry_point: initial_assessment
-
+workup:
+  - Vital signs including temperature curve
+  - CBC with differential (leukocytosis, left shift, lymphocytosis)
+  - Blood cultures x2 from different sites before antibiotics
+  - UA and urine culture
+  - Chest X-ray
+  - Lumbar puncture if meningismus, altered mental status, or immunocompromised
+  - Consider: viral PCR panel, procalcitonin (bacterial vs viral), travel history workup
+treatment:
+  - Identify source: CXR, UA, blood cultures, consider lumbar puncture
+  - Empiric antibiotics if sepsis: vancomycin + ceftriaxone or piperacillin-tazobactam
+  - Influenza: oseltamivir 75mg BID x5 days if <48 hours from onset
+  - Neutropenic fever: emergent broad-spectrum (cefepime or meropenem)
+  - Antipyretics: acetaminophen 1000mg q6h, ibuprofen 400-600mg q6h
+  - Supportive: IV fluids, monitor vitals, treat underlying infection
+clinical_pearls:
+  - Fever >41°C (105.8°F) suggests CNS pathology or drug reaction
+  - 'Fever of unknown origin: >3 weeks, multiple visits, no diagnosis'
+  - 'Neutropenic fever: emergency requiring immediate broad-spectrum antibiotics'
+  - Low-grade fever in elderly or immunosuppressed may represent serious infection
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Sepsis
@@ -31,33 +73,20 @@ referrals:
   routine:
     - Chronic fever
     - Immunization
-workup:
-  - Vital signs including temperature curve
-  - CBC with differential (leukocytosis, left shift, lymphocytosis)
-  - Blood cultures x2 from different sites before antibiotics
-  - UA and urine culture
-  - Chest X-ray
-  - Lumbar puncture if meningismus, altered mental status, or immunocompromised
-  - Consider: viral PCR panel, procalcitonin (bacterial vs viral), travel history workup
-
-treatment:
-  - Identify source: CXR, UA, blood cultures, consider lumbar puncture
-  - Empiric antibiotics if sepsis: vancomycin + ceftriaxone or piperacillin-tazobactam
-  - Influenza: oseltamivir 75mg BID x5 days if <48 hours from onset
-  - Neutropenic fever: emergent broad-spectrum (cefepime or meropenem)
-  - Antipyretics: acetaminophen 1000mg q6h, ibuprofen 400-600mg q6h
-  - Supportive: IV fluids, monitor vitals, treat underlying infection
-
-clinical_pearls:
-  - 'Fever >41°C (105.8°F) suggests CNS pathology or drug reaction'
-  - 'Fever of unknown origin: >3 weeks, multiple visits, no diagnosis'
-  - 'Neutropenic fever: emergency requiring immediate broad-spectrum antibiotics'
-  - 'Low-grade fever in elderly or immunosuppressed may represent serious infection'
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: initial_assessment
 nodes:
   initial_assessment:
     when:
-      symptoms_contains_any: ["fever", "elevated temperature", "chills", "rigors"]
+      symptoms_contains_any:
+        - fever
+        - elevated temperature
+        - chills
+        - rigors
     tests:
       - Temperature measurement
       - Vital signs (BP, HR, RR, O2 sat)
@@ -70,21 +99,36 @@ nodes:
     referrals:
       - Emergency evaluation if unstable
     trace:
-      - "Fever evaluation - assess severity and sepsis risk"
+      - Fever evaluation - assess severity and sepsis risk
     next:
       - node: sepsis_screening
         if:
           any_of:
-            - red_flags_any: ["hypotension", "altered mental status", "hypoxia", "tachycardia", "tachypnea"]
-            - exam_flags_any: ["systolic BP < 90", "HR > 100", "RR > 22", "temperature > 38.3°C"]
+            - red_flags_any:
+                - hypotension
+                - altered mental status
+                - hypoxia
+                - tachycardia
+                - tachypnea
+            - exam_flags_any:
+                - systolic BP < 90
+                - HR > 100
+                - RR > 22
+                - temperature > 38.3°C
       - node: localized_infection
         default: true
-
   sepsis_screening:
     when:
       any_of:
-        - red_flags_any: ["hypotension", "altered mental status", "severe sepsis", "septic shock"]
-        - exam_flags_any: ["SIRS criteria met", "lactate > 2", "organ dysfunction"]
+        - red_flags_any:
+            - hypotension
+            - altered mental status
+            - severe sepsis
+            - septic shock
+        - exam_flags_any:
+            - SIRS criteria met
+            - lactate > 2
+            - organ dysfunction
     tests:
       - Blood cultures (x2 from different sites)
       - Lactate level
@@ -102,17 +146,23 @@ nodes:
       - Infectious disease consult
       - Early goal-directed therapy
     trace:
-      - "SEPSIS ALERT - initiate sepsis bundle"
+      - SEPSIS ALERT - initiate sepsis bundle
     next:
       - node: sepsis_management
         if:
-          red_flags_any: ["hypotension despite fluids", "lactate > 4", "organ failure"]
+          red_flags_any:
+            - hypotension despite fluids
+            - lactate > 4
+            - organ failure
       - node: source_identification
         default: true
-
   sepsis_management:
     when:
-      red_flags_any: ["septic shock", "hypotension", "high lactate", "multi-organ dysfunction"]
+      red_flags_any:
+        - septic shock
+        - hypotension
+        - high lactate
+        - multi-organ dysfunction
     tests:
       - Serial lactate measurements
       - Central line for vasopressors
@@ -126,12 +176,13 @@ nodes:
       - Critical care team
       - Infectious disease consult
     trace:
-      - "Septic shock management - resuscitation and source control"
+      - Septic shock management - resuscitation and source control
     next: []
-
   source_identification:
     when:
-      symptoms_contains_any: ["fever", "infection symptoms"]
+      symptoms_contains_any:
+        - fever
+        - infection symptoms
     tests:
       - History and physical for source localization
       - Imaging based on suspected source
@@ -141,41 +192,80 @@ nodes:
     referrals:
       - Appropriate specialist based on source
     trace:
-      - "Identify infection source for targeted therapy"
+      - Identify infection source for targeted therapy
     next:
       - node: respiratory_source
         if:
           any_of:
-            - symptoms_contains_any: ["cough", "dyspnea", "chest pain"]
-            - exam_flags_any: ["crackles", "decreased breath sounds", "tachypnea"]
+            - symptoms_contains_any:
+                - cough
+                - dyspnea
+                - chest pain
+            - exam_flags_any:
+                - crackles
+                - decreased breath sounds
+                - tachypnea
       - node: urinary_source
         if:
           any_of:
-            - symptoms_contains_any: ["dysuria", "frequency", "flank pain", "suprapubic pain"]
-            - exam_flags_any: ["CVA tenderness", "suprapubic tenderness"]
+            - symptoms_contains_any:
+                - dysuria
+                - frequency
+                - flank pain
+                - suprapubic pain
+            - exam_flags_any:
+                - CVA tenderness
+                - suprapubic tenderness
       - node: abdominal_source
         if:
           any_of:
-            - symptoms_contains_any: ["abdominal pain", "nausea", "vomiting", "diarrhea"]
-            - exam_flags_any: ["abdominal tenderness", "peritoneal signs", "guarding"]
+            - symptoms_contains_any:
+                - abdominal pain
+                - nausea
+                - vomiting
+                - diarrhea
+            - exam_flags_any:
+                - abdominal tenderness
+                - peritoneal signs
+                - guarding
       - node: skin_soft_tissue
         if:
           any_of:
-            - symptoms_contains_any: ["skin redness", "swelling", "wound"]
-            - exam_flags_any: ["erythema", "warmth", "fluctuance", "abscess"]
+            - symptoms_contains_any:
+                - skin redness
+                - swelling
+                - wound
+            - exam_flags_any:
+                - erythema
+                - warmth
+                - fluctuance
+                - abscess
       - node: cns_source
         if:
           any_of:
-            - symptoms_contains_any: ["headache", "neck stiffness", "altered mental status", "photophobia"]
-            - exam_flags_any: ["nuchal rigidity", "altered mental status", "focal neurologic deficit"]
+            - symptoms_contains_any:
+                - headache
+                - neck stiffness
+                - altered mental status
+                - photophobia
+            - exam_flags_any:
+                - nuchal rigidity
+                - altered mental status
+                - focal neurologic deficit
       - node: fever_without_source
         default: true
-
   respiratory_source:
     when:
       any_of:
-        - symptoms_contains_any: ["cough", "dyspnea", "chest pain", "sputum production"]
-        - exam_flags_any: ["crackles", "decreased breath sounds", "dullness to percussion"]
+        - symptoms_contains_any:
+            - cough
+            - dyspnea
+            - chest pain
+            - sputum production
+        - exam_flags_any:
+            - crackles
+            - decreased breath sounds
+            - dullness to percussion
     tests:
       - Chest X-ray
       - Sputum culture (if productive)
@@ -191,14 +281,19 @@ nodes:
       - Pulmonology if complicated
       - Admission if severe pneumonia (PSI/CURB-65)
     trace:
-      - "Respiratory source identified - pneumonia workup"
+      - Respiratory source identified - pneumonia workup
     next: []
-
   urinary_source:
     when:
       any_of:
-        - symptoms_contains_any: ["dysuria", "frequency", "urgency", "flank pain"]
-        - exam_flags_any: ["CVA tenderness", "suprapubic tenderness"]
+        - symptoms_contains_any:
+            - dysuria
+            - frequency
+            - urgency
+            - flank pain
+        - exam_flags_any:
+            - CVA tenderness
+            - suprapubic tenderness
     tests:
       - Urinalysis
       - Urine culture
@@ -214,14 +309,21 @@ nodes:
       - Urology if obstruction or recurrent
       - Admission if severe pyelonephritis
     trace:
-      - "Urinary source identified - UTI/pyelonephritis workup"
+      - Urinary source identified - UTI/pyelonephritis workup
     next: []
-
   abdominal_source:
     when:
       any_of:
-        - symptoms_contains_any: ["abdominal pain", "nausea", "vomiting", "diarrhea"]
-        - exam_flags_any: ["abdominal tenderness", "peritoneal signs", "RUQ tenderness", "RLQ tenderness"]
+        - symptoms_contains_any:
+            - abdominal pain
+            - nausea
+            - vomiting
+            - diarrhea
+        - exam_flags_any:
+            - abdominal tenderness
+            - peritoneal signs
+            - RUQ tenderness
+            - RLQ tenderness
     tests:
       - CBC, CMP, lipase
       - Blood cultures
@@ -239,14 +341,21 @@ nodes:
       - GI consult
       - Admission for IV antibiotics
     trace:
-      - "Abdominal source identified - surgical vs medical"
+      - Abdominal source identified - surgical vs medical
     next: []
-
   skin_soft_tissue:
     when:
       any_of:
-        - symptoms_contains_any: ["skin redness", "swelling", "pain", "wound"]
-        - exam_flags_any: ["erythema", "warmth", "fluctuance", "purulent drainage"]
+        - symptoms_contains_any:
+            - skin redness
+            - swelling
+            - pain
+            - wound
+        - exam_flags_any:
+            - erythema
+            - warmth
+            - fluctuance
+            - purulent drainage
     tests:
       - Wound culture
       - Blood cultures if systemic
@@ -262,19 +371,30 @@ nodes:
       - Emergency surgery if necrotizing fasciitis
       - Admission for IV antibiotics
     trace:
-      - "Skin/soft tissue source - cellulitis vs abscess"
+      - Skin/soft tissue source - cellulitis vs abscess
     next:
       - node: necrotizing_infection
         if:
           any_of:
-            - red_flags_any: ["severe pain out of proportion", "crepitus", "skin necrosis", "bullae"]
-            - exam_flags_any: ["rapid progression", "systemic toxicity"]
-
+            - red_flags_any:
+                - severe pain out of proportion
+                - crepitus
+                - skin necrosis
+                - bullae
+            - exam_flags_any:
+                - rapid progression
+                - systemic toxicity
   necrotizing_infection:
     when:
       any_of:
-        - red_flags_any: ["severe pain out of proportion", "crepitus", "skin necrosis"]
-        - exam_flags_any: ["rapid spread", "bullae", "systemic toxicity"]
+        - red_flags_any:
+            - severe pain out of proportion
+            - crepitus
+            - skin necrosis
+        - exam_flags_any:
+            - rapid spread
+            - bullae
+            - systemic toxicity
     tests:
       - STAT surgical consult
       - CT or MRI to assess depth
@@ -288,14 +408,22 @@ nodes:
       - ICU admission
       - Infectious disease consult
     trace:
-      - "NECROTIZING INFECTION ALERT - urgent surgery required"
+      - NECROTIZING INFECTION ALERT - urgent surgery required
     next: []
-
   cns_source:
     when:
       any_of:
-        - symptoms_contains_any: ["headache", "neck stiffness", "altered mental status", "photophobia", "seizure"]
-        - exam_flags_any: ["nuchal rigidity", "Kernig sign", "Brudzinski sign", "altered mental status"]
+        - symptoms_contains_any:
+            - headache
+            - neck stiffness
+            - altered mental status
+            - photophobia
+            - seizure
+        - exam_flags_any:
+            - nuchal rigidity
+            - Kernig sign
+            - Brudzinski sign
+            - altered mental status
     tests:
       - CT head (rule out mass lesion before LP)
       - Lumbar puncture (opening pressure, cell count, glucose, protein, gram stain, culture)
@@ -311,17 +439,26 @@ nodes:
       - Infectious disease consult
       - ICU if severe or altered mental status
     trace:
-      - "CNS infection suspected - LP after imaging"
+      - CNS infection suspected - LP after imaging
     next:
       - node: bacterial_meningitis
         if:
-          red_flags_any: ["altered mental status", "seizure", "focal neurologic deficit", "papilledema"]
-
+          red_flags_any:
+            - altered mental status
+            - seizure
+            - focal neurologic deficit
+            - papilledema
   bacterial_meningitis:
     when:
       any_of:
-        - red_flags_any: ["altered mental status", "seizure", "petechial rash"]
-        - exam_flags_any: ["nuchal rigidity", "Kernig sign", "Brudzinski sign"]
+        - red_flags_any:
+            - altered mental status
+            - seizure
+            - petechial rash
+        - exam_flags_any:
+            - nuchal rigidity
+            - Kernig sign
+            - Brudzinski sign
     tests:
       - Blood cultures x2
       - CT head before LP if altered mental status or focal deficit
@@ -336,12 +473,12 @@ nodes:
       - ICU admission
       - Infectious disease consult
     trace:
-      - "BACTERIAL MENINGITIS - empiric antibiotics immediately"
+      - BACTERIAL MENINGITIS - empiric antibiotics immediately
     next: []
-
   fever_without_source:
     when:
-      symptoms_contains_any: ["fever"]
+      symptoms_contains_any:
+        - fever
     tests:
       - Comprehensive history (travel, exposures, medications, immunosuppression)
       - Complete physical examination
@@ -360,19 +497,31 @@ nodes:
       - Consider rheumatology or hematology
       - Admission if ill-appearing or immunocompromised
     trace:
-      - "Fever without localizing source - broad workup"
+      - Fever without localizing source - broad workup
     next:
       - node: immunocompromised_fever
         if:
           any_of:
-            - symptoms_contains_any: ["HIV", "chemotherapy", "transplant", "immunosuppression"]
-            - exam_flags_any: ["neutropenia", "ANC < 500"]
-
+            - symptoms_contains_any:
+                - HIV
+                - chemotherapy
+                - transplant
+                - immunosuppression
+            - exam_flags_any:
+                - neutropenia
+                - ANC < 500
   immunocompromised_fever:
     when:
       any_of:
-        - symptoms_contains_any: ["immunosuppression", "chemotherapy", "transplant", "HIV"]
-        - exam_flags_any: ["neutropenia", "ANC < 500", "CD4 < 200"]
+        - symptoms_contains_any:
+            - immunosuppression
+            - chemotherapy
+            - transplant
+            - HIV
+        - exam_flags_any:
+            - neutropenia
+            - ANC < 500
+            - CD4 < 200
     tests:
       - Blood cultures (bacterial and fungal)
       - Comprehensive infectious workup
@@ -389,10 +538,11 @@ nodes:
       - Hematology/oncology
       - Admission for empiric broad-spectrum antibiotics
     trace:
-      - "Immunocompromised host with fever - empiric broad antibiotics"
+      - Immunocompromised host with fever - empiric broad antibiotics
     next: []
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+criteria: []
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

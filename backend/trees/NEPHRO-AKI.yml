@@ -1,11 +1,34 @@
 tree_id: NEPHRO-AKI
 name: Acute Kidney Injury (AKI)
+version: '1.0'
+status: draft
 family: nephrology
-specialty: Nephrology/Internal Medicine
-icd10: N17.9
-snomed: 14669001
-urgency: []
-homeopathy: []
+specialty: Nephrology
+secondary_specialties:
+  - Internal Medicine
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N17.9
+  snomed:
+    - '14669001'
+  icpc2: []
+sources:
+  - text: 'KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines'
+    origin: citations
+  - text: NKF (National Kidney Foundation) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Nephrology
+    origin: citations
+  - text: KDIGO AKI Guidelines, UpToDate AKI Management, NEJM Review on AKI
+    origin: trace.source
 presentations:
   - Rapid increase in serum creatinine (0.3 mg/dL or greater within 48 hours, or 1.5x baseline within 7 days)
   - Decreased urine output (oliguria less than 0.5 mL/kg/hr for 6+ hours)
@@ -15,6 +38,16 @@ presentations:
   - Uremic symptoms if severe (nausea, vomiting, confusion, altered mental status)
   - May be asymptomatic if mild (discovered on routine labs)
   - Risk factors present (sepsis, hypotension, nephrotoxic medications, contrast exposure)
+differentials:
+  - Prerenal AKI (volume depletion, hypotension, heart failure - FENa less than 1%, bland urine sediment, BUN:Cr greater than 20:1)
+  - Acute tubular necrosis (ischemic or nephrotoxic injury - FENa greater than 2%, muddy brown casts)
+  - Acute interstitial nephritis (drug reaction - WBCs, WBC casts, eosinophils in urine)
+  - Glomerulonephritis (RBCs, RBC casts, proteinuria - nephritic syndrome)
+  - Postrenal AKI (obstruction - hydronephrosis on ultrasound)
+  - Chronic kidney disease (small kidneys, anemia, hyperparathyroidism, prior elevated creatinine)
+  - Rhabdomyolysis (elevated CK, myoglobin in urine, dark urine)
+  - Hepatorenal syndrome (cirrhosis, ascites, jaundice, no other cause of AKI)
+  - Vascular causes (renal artery stenosis, renal vein thrombosis, atheroemboli)
 workup:
   - Assess severity using KDIGO staging criteria
   - Stage 1: Cr increase 1.5-1.9x baseline or 0.3+ mg/dL increase, or urine output less than 0.5 mL/kg/hr for 6-12 hours
@@ -37,7 +70,7 @@ workup:
   - AIN: white blood cells, white cell casts, eosinophils
   - Glomerulonephritis: red blood cells, red cell casts, proteinuria
   - Urine sodium and fractional excretion of sodium (FENa)
-  - "FENa less than 1%: prerenal; FENa greater than 2%: intrinsic (ATN)"
+  - 'FENa less than 1%: prerenal; FENa greater than 2%: intrinsic (ATN)'
   - Less reliable if on diuretics (use FEUrea instead)
   - Imaging: renal ultrasound to assess kidney size and rule out obstruction (hydronephrosis)
   - Small kidneys suggest chronic kidney disease
@@ -84,34 +117,33 @@ treatment:
   - Urine output trending
   - Most AKI recovers within days to weeks with supportive care
 clinical_pearls:
-  - "AKI affects 10-15% of hospitalized patients, 50% of ICU patients - major cause of morbidity and mortality"
-  - "Prerenal AKI most common (55-60%) and most reversible - early recognition and volume resuscitation key"
-  - "ATN develops if prerenal state prolonged - ischemic injury to tubular cells"
-  - "FENa less than 1% suggests prerenal (kidneys retaining sodium); FENa greater than 2% suggests ATN (tubules damaged, cannot reabsorb sodium)"
-  - "Muddy brown casts on urinalysis pathognomonic for ATN"
-  - "AKI increases mortality 4-fold in hospitalized patients"
-  - "Up to 20% of AKI patients do not recover renal function and progress to chronic kidney disease"
-  - "Contrast-induced AKI risk highest in diabetics, CKD, volume depletion - IV fluids before and after contrast protective"
+  - AKI affects 10-15% of hospitalized patients, 50% of ICU patients - major cause of morbidity and mortality
+  - Prerenal AKI most common (55-60%) and most reversible - early recognition and volume resuscitation key
+  - ATN develops if prerenal state prolonged - ischemic injury to tubular cells
+  - FENa less than 1% suggests prerenal (kidneys retaining sodium); FENa greater than 2% suggests ATN (tubules damaged, cannot reabsorb sodium)
+  - Muddy brown casts on urinalysis pathognomonic for ATN
+  - AKI increases mortality 4-fold in hospitalized patients
+  - Up to 20% of AKI patients do not recover renal function and progress to chronic kidney disease
+  - Contrast-induced AKI risk highest in diabetics, CKD, volume depletion - IV fluids before and after contrast protective
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Nephrology consultation for severe AKI (Stage 2-3), unclear etiology, or need for dialysis
   - Urology if postrenal obstruction requiring intervention
   - ICU if hemodynamically unstable or multiorgan failure
-differentials:
-  - Prerenal AKI (volume depletion, hypotension, heart failure - FENa less than 1%, bland urine sediment, BUN:Cr greater than 20:1)
-  - Acute tubular necrosis (ischemic or nephrotoxic injury - FENa greater than 2%, muddy brown casts)
-  - Acute interstitial nephritis (drug reaction - WBCs, WBC casts, eosinophils in urine)
-  - Glomerulonephritis (RBCs, RBC casts, proteinuria - nephritic syndrome)
-  - Postrenal AKI (obstruction - hydronephrosis on ultrasound)
-  - Chronic kidney disease (small kidneys, anemia, hyperparathyroidism, prior elevated creatinine)
-  - Rhabdomyolysis (elevated CK, myoglobin in urine, dark urine)
-  - Hepatorenal syndrome (cirrhosis, ascites, jaundice, no other cause of AKI)
-  - Vascular causes (renal artery stenosis, renal vein thrombosis, atheroemboli)
-trace:
-  source: KDIGO AKI Guidelines, UpToDate AKI Management, NEJM Review on AKI
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines
-  - NKF (National Kidney Foundation) Clinical Practice Guidelines
-  - UpToDate - Nephrology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty

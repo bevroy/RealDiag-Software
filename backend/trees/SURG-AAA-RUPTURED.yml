@@ -1,55 +1,65 @@
 tree_id: SURG-AAA-RUPTURED
 name: Ruptured Abdominal Aortic Aneurysm (rAAA)
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- I71.3
-snomed:
-- '233985008'
-urgency: medium
-description: Comprehensive evaluation and management of Ruptured Abdominal Aortic
-  Aneurysm (rAAA)
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: Comprehensive evaluation and management of Ruptured Abdominal Aortic Aneurysm (rAAA)
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I71.3
+  snomed:
+    - '233985008'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- 'Classic triad (50%): Abdominal/back pain, hypotension, pulsatile abdominal mass'
-- Sudden onset severe abdominal, flank, or back pain (tearing, ripping quality)
-- Hypotension, tachycardia, shock (may be contained rupture initially)
-- Syncope or near-syncope
-- Pulsatile abdominal mass on palpation (but absence doesn't rule out)
-- 'Grey-Turner sign: Flank ecchymosis (retroperitoneal bleed)'
-- 'Risk factors: Age >65, male, smoking, hypertension, known AAA'
-- 'Mortality: 50% prehospital, 80-90% overall if untreated'
+  - 'Classic triad (50%): Abdominal/back pain, hypotension, pulsatile abdominal mass'
+  - Sudden onset severe abdominal, flank, or back pain (tearing, ripping quality)
+  - Hypotension, tachycardia, shock (may be contained rupture initially)
+  - Syncope or near-syncope
+  - Pulsatile abdominal mass on palpation (but absence doesn't rule out)
+  - 'Grey-Turner sign: Flank ecchymosis (retroperitoneal bleed)'
+  - 'Risk factors: Age >65, male, smoking, hypertension, known AAA'
+  - 'Mortality: 50% prehospital, 80-90% overall if untreated'
+differentials:
+  - Kidney stone
+  - Diverticulitis
+  - Perforated ulcer
+  - Mesenteric ischemia
+  - Back pain
 workup: []
 treatment:
-- 'Guideline-based treatment options for Ruptured Abdominal Aortic Aneurysm (rAAA)
-  include:'
-- 'Immediate: Large-bore IV access ×2, permissive hypotension (SBP 80-100), activate
-  massive transfusion protocol (ACS 2023)'
-- 'UNSTABLE: Call vascular surgery, go directly to OR, do NOT delay for imaging (ACS
-  2023)'
-- 'STABLE: CT angiogram abdomen/pelvis, vascular surgery consult, determine EVAR vs
-  open (ACS 2023)'
-- 'Blood products: 1:1:1 ratio PRBC:FFP:Platelets, avoid crystalloid overresuscitation
-  (ACS 2023)'
-- 'Disposition: OR emergently, ICU post-op, high mortality even with surgery (40-50%)
-  (ACS 2023)'
+  - 'Guideline-based treatment options for Ruptured Abdominal Aortic Aneurysm (rAAA) include:'
+  - 'Immediate: Large-bore IV access ×2, permissive hypotension (SBP 80-100), activate massive transfusion protocol (ACS 2023)'
+  - 'UNSTABLE: Call vascular surgery, go directly to OR, do NOT delay for imaging (ACS 2023)'
+  - 'STABLE: CT angiogram abdomen/pelvis, vascular surgery consult, determine EVAR vs open (ACS 2023)'
+  - 'Blood products: 1:1:1 ratio PRBC:FFP:Platelets, avoid crystalloid overresuscitation (ACS 2023)'
+  - 'Disposition: OR emergently, ICU post-op, high mortality even with surgery (40-50%) (ACS 2023)'
 clinical_pearls:
-- 'Unstable patient (SBP <90) with known AAA or pulsatile mass: Go straight to OR,
-  do NOT get CT'
-- 'Permissive hypotension: Target SBP 80-100 until proximal control (avoid ''pop the
-  clot'')'
-- 'FAST exam: Free intraperitoneal or retroperitoneal fluid + hypotension = presumed
-  rAAA'
-- 'CT angiogram if stable: Confirms diagnosis, guides EVAR vs open repair'
-- 'EVAR (endovascular repair): Faster, less invasive if anatomy suitable'
-- 'Open repair: Midline laparotomy, proximal aortic control, higher mortality but
-  definitive'
+  - 'Unstable patient (SBP <90) with known AAA or pulsatile mass: Go straight to OR, do NOT get CT'
+  - 'Permissive hypotension: Target SBP 80-100 until proximal control (avoid ''pop the clot'')'
+  - 'FAST exam: Free intraperitoneal or retroperitoneal fluid + hypotension = presumed rAAA'
+  - 'CT angiogram if stable: Confirms diagnosis, guides EVAR vs open repair'
+  - 'EVAR (endovascular repair): Faster, less invasive if anatomy suitable'
+  - 'Open repair: Midline laparotomy, proximal aortic control, higher mortality but definitive'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -67,14 +77,20 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Kidney stone
-  - Diverticulitis
-  - Perforated ulcer
-  - Mesenteric ischemia
-  - Back pain
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'

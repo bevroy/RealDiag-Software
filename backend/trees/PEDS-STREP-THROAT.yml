@@ -1,16 +1,36 @@
 tree_id: PEDS-STREP-THROAT
 name: Strep Throat (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Infectious Disease
-icd10: J02.0
-snomed: 43878008
-urgency:
-  - Stridor or severe dysphagia with drooling (concern for peritonsillar abscess or epiglottitis)
-  - Respiratory distress or airway compromise
-  - Severe dehydration from inability to swallow
-  - Signs of sepsis or toxic shock syndrome
-  - Suspected Lemierre syndrome (septic thrombophlebitis of internal jugular vein)
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Infectious Disease
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J02.0
+  snomed:
+    - '43878008'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) Red Book - Group A Streptococcal Infections
+    origin: citations
+  - text: IDSA Guidelines for Group A Streptococcal Pharyngitis (Shulman et al. CID 2012)
+    origin: citations
+  - text: UpToDate Pediatrics - Group A Streptococcal Pharyngitis
+    origin: citations
+  - text: Gerber MA et al. Pediatrics 2009 - Prevention of Rheumatic Fever
+    origin: citations
+  - text: AAP Red Book, IDSA Guidelines, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Acute onset sore throat
   - Painful swallowing (odynophagia)
@@ -25,6 +45,17 @@ presentations:
   - Scarlatiniform rash (sandpaper texture, if scarlet fever)
   - Age typically 5-15 years (peak incidence)
   - Sick contacts or known strep exposure
+differentials:
+  - Group A Streptococcus pharyngitis (strep throat) - sudden onset, fever, exudate, anterior cervical adenopathy, no cough
+  - Viral pharyngitis (most common) - gradual onset, rhinorrhea, cough, conjunctivitis, lower fever
+  - Infectious mononucleosis (EBV) - severe tonsillar exudate, posterior cervical adenopathy, hepatosplenomegaly, atypical lymphocytes, fatigue
+  - Adenovirus pharyngitis - pharyngoconjunctival fever (pharyngitis, conjunctivitis, fever)
+  - Peritonsillar abscess - unilateral severe pain, trismus, uvular deviation, muffled voice, drooling
+  - Gonococcal pharyngitis - sexually active adolescents, history of oral sexual contact
+  - Diphtheria (rare, preventable by vaccine) - gray pseudomembrane, bull neck, airway obstruction
+  - Herpangina (coxsackievirus) - painful vesicles or ulcers on soft palate, posterior pharynx
+  - Epiglottitis (rare post-Hib vaccine) - drooling, tripod positioning, stridor, toxic appearance (EMERGENCY)
+  - Kawasaki disease - fever greater than 5 days, strawberry tongue, conjunctivitis, rash, extremity changes
 workup:
   - Clinical history
   - Onset and duration of symptoms
@@ -138,37 +169,39 @@ treatment:
   - Suppurative: peritonsillar abscess, retropharyngeal abscess, cervical lymphadenitis, sinusitis, otitis media
   - Non-suppurative (immune-mediated): acute rheumatic fever (prevented by antibiotics within 9 days), post-streptococcal glomerulonephritis (NOT prevented by antibiotics)
 clinical_pearls:
-  - 'Group A Strep pharyngitis peak age 5-15 years - uncommon in children younger than 3 years (viral more likely)'
+  - Group A Strep pharyngitis peak age 5-15 years - uncommon in children younger than 3 years (viral more likely)
   - 'Centor/McIsaac criteria help predict strep likelihood: fever, absence of cough, tonsillar exudate, tender anterior cervical lymphadenopathy'
-  - 'Positive rapid strep test (RADT) confirms diagnosis, can treat immediately - high specificity'
-  - 'Negative RADT in children requires backup throat culture (lower sensitivity) - not needed in adults'
-  - 'Amoxicillin preferred over penicillin VK - better taste, once-daily option, equal efficacy, no group A Strep resistance'
-  - 'Full 10-day antibiotic course required (except azithromycin 5 days) to prevent acute rheumatic fever'
-  - 'Return to school after 24 hours on antibiotics and afebrile - no longer contagious'
-  - 'Antibiotics prevent acute rheumatic fever but NOT post-streptococcal glomerulonephritis'
+  - Positive rapid strep test (RADT) confirms diagnosis, can treat immediately - high specificity
+  - Negative RADT in children requires backup throat culture (lower sensitivity) - not needed in adults
+  - Amoxicillin preferred over penicillin VK - better taste, once-daily option, equal efficacy, no group A Strep resistance
+  - Full 10-day antibiotic course required (except azithromycin 5 days) to prevent acute rheumatic fever
+  - Return to school after 24 hours on antibiotics and afebrile - no longer contagious
+  - Antibiotics prevent acute rheumatic fever but NOT post-streptococcal glomerulonephritis
+red_flags:
+  - Stridor or severe dysphagia with drooling (concern for peritonsillar abscess or epiglottitis)
+  - Respiratory distress or airway compromise
+  - Severe dehydration from inability to swallow
+  - Signs of sepsis or toxic shock syndrome
+  - Suspected Lemierre syndrome (septic thrombophlebitis of internal jugular vein)
+disposition_guidance: {}
 referrals:
   - Otolaryngology (ENT) if recurrent strep throat (3+ episodes in 6 months or 5+ in 12 months) for tonsillectomy consideration
   - Otolaryngology URGENT if peritonsillar abscess suspected (unilateral tonsillar enlargement, uvular deviation, trismus, drooling)
   - Pediatric infectious disease if unusual organism, recurrent infections despite treatment, immunocompromised host
   - Pediatric rheumatology if acute rheumatic fever develops (Jones criteria: carditis, polyarthritis, chorea, erythema marginatum, subcutaneous nodules)
-differentials:
-  - Group A Streptococcus pharyngitis (strep throat) - sudden onset, fever, exudate, anterior cervical adenopathy, no cough
-  - Viral pharyngitis (most common) - gradual onset, rhinorrhea, cough, conjunctivitis, lower fever
-  - Infectious mononucleosis (EBV) - severe tonsillar exudate, posterior cervical adenopathy, hepatosplenomegaly, atypical lymphocytes, fatigue
-  - Adenovirus pharyngitis - pharyngoconjunctival fever (pharyngitis, conjunctivitis, fever)
-  - Peritonsillar abscess - unilateral severe pain, trismus, uvular deviation, muffled voice, drooling
-  - Gonococcal pharyngitis - sexually active adolescents, history of oral sexual contact
-  - Diphtheria (rare, preventable by vaccine) - gray pseudomembrane, bull neck, airway obstruction
-  - Herpangina (coxsackievirus) - painful vesicles or ulcers on soft palate, posterior pharynx
-  - Epiglottitis (rare post-Hib vaccine) - drooling, tripod positioning, stridor, toxic appearance (EMERGENCY)
-  - Kawasaki disease - fever greater than 5 days, strawberry tongue, conjunctivitis, rash, extremity changes
-trace:
-  source: AAP Red Book, IDSA Guidelines, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) Red Book - Group A Streptococcal Infections
-  - IDSA Guidelines for Group A Streptococcal Pharyngitis (Shulman et al. CID 2012)
-  - UpToDate Pediatrics - Group A Streptococcal Pharyngitis
-  - Gerber MA et al. Pediatrics 2009 - Prevention of Rheumatic Fever
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

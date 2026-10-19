@@ -1,16 +1,37 @@
 tree_id: PEDS-ADHD
 name: ADHD (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Developmental-Behavioral Pediatrics/Psychiatry
-icd10: F90.9
-snomed: 406506008
-urgency:
-  - Suicidal ideation or self-harm behaviors
-  - Severe aggression or violence toward others
-  - Severe impairment in functioning with acute crisis
-  - Psychotic symptoms
-  - Substance abuse concerns
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Developmental-Behavioral Pediatrics
+  - Psychiatry
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F90.9
+  snomed:
+    - '406506008'
+  icpc2: []
+sources:
+  - text: American Academy of Pediatrics (AAP) ADHD Clinical Practice Guideline 2019
+    origin: citations
+  - text: DSM-5 Diagnostic Criteria for ADHD
+    origin: citations
+  - text: UpToDate Pediatrics - Attention-Deficit/Hyperactivity Disorder in Children and Adolescents
+    origin: citations
+  - text: Wolraich ML et al. Pediatrics 2019 - AAP Guideline for Diagnosis and Treatment of ADHD
+    origin: citations
+  - text: AAP ADHD Clinical Practice Guideline, DSM-5 Criteria, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Inattention symptoms (difficulty sustaining attention, easily distracted)
   - Does not seem to listen when spoken to directly
@@ -38,6 +59,18 @@ presentations:
   - Symptoms present in multiple settings (home AND school)
   - Age of onset before 12 years
   - Symptoms persist for at least 6 months
+differentials:
+  - ADHD (combined, inattentive, or hyperactive-impulsive presentation)
+  - Normal developmental variation (active toddler/preschooler, high energy)
+  - Oppositional defiant disorder (ODD) - defiant, argumentative, often comorbid with ADHD
+  - Anxiety disorders (inattention due to worry and rumination)
+  - Depression (poor concentration, lack of motivation, anhedonia)
+  - Learning disorders (inattention specific to academic tasks - dyslexia, dyscalculia)
+  - Autism spectrum disorder (inattention, hyperactivity, restricted interests, social deficits)
+  - Intellectual disability (global cognitive delay, low IQ)
+  - Sleep disorders (sleep apnea, insufficient sleep, insomnia causing daytime inattention)
+  - Trauma or adverse childhood experiences (PTSD symptoms mimic ADHD)
+  - Thyroid disorder (hyperthyroidism can cause hyperactivity, hypothyroidism can cause inattention)
 workup:
   - Clinical history (comprehensive)
   - ADHD symptoms
@@ -195,37 +228,38 @@ treatment:
   - Iron supplementation if iron deficiency present
 clinical_pearls:
   - 'ADHD is clinical diagnosis based on DSM-5 criteria: 6+ symptoms (inattention and/or hyperactivity-impulsivity), present greater than 6 months, before age 12, in 2+ settings, with impairment'
-  - 'Standardized rating scales from parent AND teacher are ESSENTIAL - subjective report alone insufficient'
-  - 'Behavioral parent training first-line for preschool age (4-5 years) before considering medication'
-  - 'Stimulant medications (methylphenidate or amphetamine) are first-line pharmacotherapy for school-age children - 70-80% response rate'
-  - 'Multimodal treatment (medication + behavioral interventions + school supports) most effective for ADHD'
+  - Standardized rating scales from parent AND teacher are ESSENTIAL - subjective report alone insufficient
+  - Behavioral parent training first-line for preschool age (4-5 years) before considering medication
+  - Stimulant medications (methylphenidate or amphetamine) are first-line pharmacotherapy for school-age children - 70-80% response rate
+  - Multimodal treatment (medication + behavioral interventions + school supports) most effective for ADHD
   - 'High comorbidity: ODD (50%), anxiety (30%), learning disorders (30%), depression (20%), autism (50-70%)'
-  - 'Growth monitoring important with stimulants - may cause decreased appetite and weight loss, usually stabilizes over time'
-  - 'No specific laboratory tests or neuroimaging for ADHD diagnosis - rule out mimics (thyroid, anemia, lead, sleep disorder)'
+  - Growth monitoring important with stimulants - may cause decreased appetite and weight loss, usually stabilizes over time
+  - No specific laboratory tests or neuroimaging for ADHD diagnosis - rule out mimics (thyroid, anemia, lead, sleep disorder)
+red_flags:
+  - Suicidal ideation or self-harm behaviors
+  - Severe aggression or violence toward others
+  - Severe impairment in functioning with acute crisis
+  - Psychotic symptoms
+  - Substance abuse concerns
+disposition_guidance: {}
 referrals:
   - Developmental-behavioral pediatrics or child psychiatry for diagnostic clarification, comorbid conditions, or refractory symptoms
   - Neuropsychological testing if concern for learning disorder, intellectual disability, or complex profile
   - School psychologist for IEP or 504 plan evaluation and accommodations
   - Mental health counseling for behavioral interventions, family therapy, CBT
-differentials:
-  - ADHD (combined, inattentive, or hyperactive-impulsive presentation)
-  - Normal developmental variation (active toddler/preschooler, high energy)
-  - Oppositional defiant disorder (ODD) - defiant, argumentative, often comorbid with ADHD
-  - Anxiety disorders (inattention due to worry and rumination)
-  - Depression (poor concentration, lack of motivation, anhedonia)
-  - Learning disorders (inattention specific to academic tasks - dyslexia, dyscalculia)
-  - Autism spectrum disorder (inattention, hyperactivity, restricted interests, social deficits)
-  - Intellectual disability (global cognitive delay, low IQ)
-  - Sleep disorders (sleep apnea, insufficient sleep, insomnia causing daytime inattention)
-  - Trauma or adverse childhood experiences (PTSD symptoms mimic ADHD)
-  - Thyroid disorder (hyperthyroidism can cause hyperactivity, hypothyroidism can cause inattention)
-trace:
-  source: AAP ADHD Clinical Practice Guideline, DSM-5 Criteria, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - American Academy of Pediatrics (AAP) ADHD Clinical Practice Guideline 2019
-  - DSM-5 Diagnostic Criteria for ADHD
-  - UpToDate Pediatrics - Attention-Deficit/Hyperactivity Disorder in Children and Adolescents
-  - Wolraich ML et al. Pediatrics 2019 - AAP Guideline for Diagnosis and Treatment of ADHD
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

@@ -1,16 +1,34 @@
 tree_id: PEDS-ASTHMA
 name: Pediatric Asthma
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Pulmonology
-icd10: J45.909
-snomed: 195967001
-urgency:
-  - Severe respiratory distress
-  - Inability to speak
-  - Cyanosis
-  - Altered mental status
-  - Silent chest
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Pulmonology
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J45.909
+  snomed:
+    - '195967001'
+  icpc2: []
+sources:
+  - text: Global Initiative for Asthma (GINA) Guidelines 2024
+    origin: citations
+  - text: NHLBI Expert Panel Report on Asthma Management
+    origin: citations
+  - text: American Academy of Pediatrics (AAP) Asthma Guidelines
+    origin: citations
+  - text: GINA (Global Initiative for Asthma) Guidelines, NHLBI Expert Panel Report, AAP
+    origin: trace.source
 presentations:
   - Recurrent wheezing episodes
   - Cough (especially nighttime or early morning, with exercise, or with laughing/crying)
@@ -21,6 +39,17 @@ presentations:
   - Family history of asthma or atopy (eczema, allergic rhinitis)
   - More common in boys before puberty
   - May have history of infant wheezing with bronchiolitis
+differentials:
+  - Asthma (recurrent wheezing with reversibility, triggered by allergens/exercise/URI, responds to bronchodilators)
+  - Viral-induced wheeze (wheezing only with respiratory infections, age less than 3 years, may outgrow)
+  - Bronchiolitis (first episode of wheeze, age less than 2 years, winter seasonality, preceding URI)
+  - Foreign body aspiration (sudden onset, unilateral wheeze, choking episode)
+  - Gastroesophageal reflux disease (GERD) - can trigger asthma-like symptoms
+  - Vocal cord dysfunction (inspiratory stridor, normal spirometry, occurs during episode)
+  - Cystic fibrosis (chronic cough, failure to thrive, recurrent pneumonia, malabsorption)
+  - Primary ciliary dyskinesia (chronic rhinosinusitis, recurrent pneumonia, situs inversus in some)
+  - Congenital heart disease with pulmonary overcirculation (failure to thrive, tachypnea, hepatomegaly)
+  - Bronchopulmonary dysplasia (prematurity, chronic oxygen requirement)
 workup:
   - Clinical history
   - Pattern of symptoms (episodic versus chronic, triggers)
@@ -123,36 +152,39 @@ treatment:
   - Avoid mold exposure
   - Influenza and pneumococcal vaccination
 clinical_pearls:
-  - 'Asthma clinical diagnosis based on recurrent wheezing, cough, dyspnea that improves with bronchodilators - spirometry confirms if able to perform'
-  - 'Inhaled corticosteroids (ICS) are first-line controller therapy for persistent asthma - reduce exacerbations and improve lung function'
-  - 'Silent chest (absence of wheeze) in severe asthma exacerbation is ominous sign - indicates minimal air movement, impending respiratory failure'
-  - 'Oral corticosteroids (prednisolone 1-2 mg/kg for 3-5 days) given early in exacerbation reduce hospitalization - no taper needed for short course'
-  - 'Frequent SABA use (greater than 2 days/week) indicates poor asthma control - escalate controller therapy'
-  - 'Tobacco smoke exposure single most important modifiable risk factor - counsel parents on smoking cessation'
-  - 'Asthma action plan essential for all patients - written plan improves outcomes and reduces hospitalizations'
-  - 'Spacers mandatory with MDI in children - improves drug delivery to lungs, reduces oropharyngeal deposition'
+  - Asthma clinical diagnosis based on recurrent wheezing, cough, dyspnea that improves with bronchodilators - spirometry confirms if able to perform
+  - Inhaled corticosteroids (ICS) are first-line controller therapy for persistent asthma - reduce exacerbations and improve lung function
+  - Silent chest (absence of wheeze) in severe asthma exacerbation is ominous sign - indicates minimal air movement, impending respiratory failure
+  - Oral corticosteroids (prednisolone 1-2 mg/kg for 3-5 days) given early in exacerbation reduce hospitalization - no taper needed for short course
+  - Frequent SABA use (greater than 2 days/week) indicates poor asthma control - escalate controller therapy
+  - Tobacco smoke exposure single most important modifiable risk factor - counsel parents on smoking cessation
+  - Asthma action plan essential for all patients - written plan improves outcomes and reduces hospitalizations
+  - Spacers mandatory with MDI in children - improves drug delivery to lungs, reduces oropharyngeal deposition
+red_flags:
+  - Severe respiratory distress
+  - Inability to speak
+  - Cyanosis
+  - Altered mental status
+  - Silent chest
+disposition_guidance: {}
 referrals:
   - Pediatric pulmonology if severe persistent asthma, poor control despite optimal therapy, frequent exacerbations requiring hospitalization
   - Pediatric pulmonology if considering biologic therapy (omalizumab, mepolizumab, dupilumab)
   - Pediatric allergy for comprehensive allergy testing and immunotherapy consideration
   - Pediatric ICU if life-threatening exacerbation, impending respiratory failure
-differentials:
-  - Asthma (recurrent wheezing with reversibility, triggered by allergens/exercise/URI, responds to bronchodilators)
-  - Viral-induced wheeze (wheezing only with respiratory infections, age less than 3 years, may outgrow)
-  - Bronchiolitis (first episode of wheeze, age less than 2 years, winter seasonality, preceding URI)
-  - Foreign body aspiration (sudden onset, unilateral wheeze, choking episode)
-  - Gastroesophageal reflux disease (GERD) - can trigger asthma-like symptoms
-  - Vocal cord dysfunction (inspiratory stridor, normal spirometry, occurs during episode)
-  - Cystic fibrosis (chronic cough, failure to thrive, recurrent pneumonia, malabsorption)
-  - Primary ciliary dyskinesia (chronic rhinosinusitis, recurrent pneumonia, situs inversus in some)
-  - Congenital heart disease with pulmonary overcirculation (failure to thrive, tachypnea, hepatomegaly)
-  - Bronchopulmonary dysplasia (prematurity, chronic oxygen requirement)
-trace:
-  source: GINA (Global Initiative for Asthma) Guidelines, NHLBI Expert Panel Report, AAP
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - Global Initiative for Asthma (GINA) Guidelines 2024
-  - NHLBI Expert Panel Report on Asthma Management
-  - American Academy of Pediatrics (AAP) Asthma Guidelines
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty

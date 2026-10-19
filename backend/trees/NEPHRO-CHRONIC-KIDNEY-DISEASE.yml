@@ -1,11 +1,31 @@
 tree_id: NEPHRO-CHRONIC-KIDNEY-DISEASE
 name: Chronic Kidney Disease (CKD)
+version: '1.0'
+status: draft
 family: Nephrology
 specialty: Nephrology
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Often asymptomatic, found on routine labs, or symptoms of uremia in advanced stages
 description: Progressive loss of kidney function over greater than 3 months with metabolic consequences
-icd10: N18.9
-snomed: 709044004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N18.9
+  snomed:
+    - '709044004'
+  icpc2: []
+sources:
+  - text: 'KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines'
+    origin: citations
+  - text: NKF (National Kidney Foundation) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Nephrology
+    origin: citations
 presentations:
   - Often asymptomatic until advanced
   - Fatigue, weakness
@@ -13,21 +33,12 @@ presentations:
   - Pruritus
   - Edema, dyspnea
   - Uremic symptoms: altered mental status, pericarditis
-urgency: routine-to-urgent
-referrals:
-  emergency:
-    - AKI with K>6.5
-    - Severe acidosis
-    - Uremia needing dialysis
-  urgent:
-    - Rapidly progressive GN
-    - AKI rising Cr
-    - Nephrotic syndrome
-  routine:
-    - CKD management
-    - Proteinuria
-    - Stone prevention
-
+differentials:
+  - Acute kidney injury (rapid rise in creatinine over days-weeks, potentially reversible)
+  - Acute on chronic kidney disease (CKD with superimposed AKI)
+  - Prerenal azotemia (dehydration, hypotension - BUN/Cr ratio greater than 20:1)
+  - Postrenal obstruction (hydronephrosis on ultrasound, enlarged prostate)
+  - Rapidly progressive glomerulonephritis (weeks to months, crescents on biopsy)
 workup:
   - Serum creatinine and calculate estimated GFR (eGFR) using CKD-EPI equation
   - Stage 1 - eGFR greater than 90 mL/min/1.73m² with kidney damage (proteinuria, hematuria, imaging abnormality)
@@ -76,12 +87,29 @@ clinical_pearls:
   - Start dialysis when eGFR less than 10 or earlier if symptomatic uremia
   - Uremic symptoms - anorexia, nausea, pruritus, altered mental status, pericarditis, neuropathy
   - Avoid MRI with gadolinium if eGFR less than 30 (risk of nephrogenic systemic fibrosis)
-differentials:
-  - Acute kidney injury (rapid rise in creatinine over days-weeks, potentially reversible)
-  - Acute on chronic kidney disease (CKD with superimposed AKI)
-  - Prerenal azotemia (dehydration, hypotension - BUN/Cr ratio greater than 20:1)
-  - Postrenal obstruction (hydronephrosis on ultrasound, enlarged prostate)
-  - Rapidly progressive glomerulonephritis (weeks to months, crescents on biopsy)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - AKI with K>6.5
+    - Severe acidosis
+    - Uremia needing dialysis
+  urgent:
+    - Rapidly progressive GN
+    - AKI rising Cr
+    - Nephrotic syndrome
+  routine:
+    - CKD management
+    - Proteinuria
+    - Stone prevention
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 65-year-old man with type 2 diabetes and hypertension presents for annual exam
   - Diabetes for 15 years, HbA1c 7.8% on metformin and glipizide
@@ -112,8 +140,8 @@ trace:
   - Hemoglobin improved to 11.8 g/dL, bicarbonate 23 mEq/L
   - Continued treatment, close monitoring every 3 months
   - Outcome - CKD progression slowed, stable kidney function over 18 months
-
-citations:
-  - KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines
-  - NKF (National Kidney Foundation) Clinical Practice Guidelines
-  - UpToDate - Nephrology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'routine-to-urgent' mapped to 'urgent'

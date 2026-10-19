@@ -1,13 +1,33 @@
 tree_id: ENDO-CUSHINGS-SYNDROME
 name: Cushing's Syndrome
+version: '1.0'
+status: draft
 family: Endocrinology
 specialty: Endocrinology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Weight gain, easy bruising, and facial rounding
 description: |
   Chronic glucocorticoid excess from endogenous overproduction or exogenous administration. Endogenous causes include ACTH-dependent (pituitary adenoma 70% - Cushing's disease, ectopic ACTH 10%) and ACTH-independent (adrenal adenoma/carcinoma 20%).
   Exogenous glucocorticoids most common overall cause. Classic features - central obesity, moon facies, buffalo hump, purple striae, proximal myopathy, hypertension, hyperglycemia.
-icd10: E24.9
-snomed: 47270006
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E24.9
+  snomed:
+    - '47270006'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
 presentations:
   - Central obesity, buffalo hump
   - Moon facies, facial plethora
@@ -16,25 +36,12 @@ presentations:
   - Proximal muscle weakness
   - Hypertension, hyperglycemia
   - Mood changes, depression
-urgency: Low
-referrals:
-  emergency:
-    - DKA
-    - HHS
-    - Thyroid storm
-    - Myxedema coma
-    - Adrenal crisis
-  urgent:
-    - New diabetes with poor control
-    - Thyroid nodule >4cm
-    - Severe hypercalcemia
-    - Pituitary mass
-  routine:
-    - Diabetes management
-    - Thyroid nodule surveillance
-    - Osteoporosis management
-    - Lipid disorders
-
+differentials:
+  - Obesity (pseudo-Cushing's)
+  - Metabolic syndrome
+  - Polycystic ovary syndrome
+  - Depression (pseudo-Cushing's)
+  - Alcoholism (pseudo-Cushing's)
 workup:
   - Clinical features - central obesity with extremity wasting, moon facies (round plethoric face), dorsocervical fat pad (buffalo hump), supraclavicular fat pads
   - Skin changes - wide purple striae (greater than 1 cm), thin skin, easy bruising, acne, hirsutism, hyperpigmentation (if ACTH elevated)
@@ -78,16 +85,37 @@ clinical_pearls:
   - Small cell lung cancer classic ectopic ACTH source - rapid onset, severe hypokalemia, metabolic alkalosis
   - Children with Cushing's have growth arrest (pathognomonic - normal children growing obese do not stop growing)
   - Post-surgical remission requires glucocorticoid replacement (hydrocortisone 15-20mg divided BID-TID) until adrenal function recovers (6-18 months)
-differentials:
-  - Obesity (pseudo-Cushing's)
-  - Metabolic syndrome
-  - Polycystic ovary syndrome
-  - Depression (pseudo-Cushing's)
-  - Alcoholism (pseudo-Cushing's)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - DKA
+    - HHS
+    - Thyroid storm
+    - Myxedema coma
+    - Adrenal crisis
+  urgent:
+    - New diabetes with poor control
+    - Thyroid nodule >4cm
+    - Severe hypercalcemia
+    - Pituitary mass
+  routine:
+    - Diabetes management
+    - Thyroid nodule surveillance
+    - Osteoporosis management
+    - Lipid disorders
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 42-year-old woman with progressive weight gain (50 lbs x 2 years), easy bruising, facial rounding, fatigue → Exam shows moon facies, central obesity (BMI 34), buffalo hump, wide purple striae on abdomen, proximal muscle weakness → BP 165/98, glucose 186 mg/dL → Screening tests - 24h UFC 380 mcg (normal less than 50), late-night salivary cortisol 12.8 ng/mL (elevated), 1mg dex suppression test cortisol 18.2 mcg/dL (failed to suppress) → Confirm hypercortisolism → 8 AM ACTH 68 pg/mL (ACTH-dependent) → High-dose dex suppression - cortisol suppresses 60% (suggests pituitary) → Pituitary MRI shows 4 mm hypoenhancing lesion left side → IPSS performed - central:peripheral ACTH ratio 4.2 (confirms pituitary source) → Diagnose Cushing's disease → Transsphenoidal surgery removes microadenoma → Post-op day 3 cortisol 2.1 mcg/dL (remission) → Start hydrocortisone replacement 20mg AM, 10mg PM → Blood pressure normalizes, glucose improves → 6-month follow-up shows 15 lb weight loss, striae fading, energy improved → Continues hydrocortisone replacement pending HPA axis recovery testing
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Low' mapped to 'routine'

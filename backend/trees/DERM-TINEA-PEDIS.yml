@@ -1,11 +1,32 @@
 tree_id: DERM-TINEA-PEDIS
 name: Tinea Pedis (Athlete's Foot)
+version: '1.0'
+status: draft
 family: Dermatology
-specialty: Dermatology/Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Itchy, scaly feet with peeling skin
 description: Dermatophyte fungal infection of the feet, most common fungal infection in adults. Three clinical patterns - interdigital (most common), moccasin-type (chronic hyperkeratotic), and vesiculobullous (acute inflammatory). Responds well to topical antifungals.
-icd10: B35.3
-snomed: 6020002
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - B35.3
+  snomed:
+    - '6020002'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Guidelines for Management of Tinea Pedis
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Interdigital maceration and scaling (between toes)
   - Pruritus
@@ -14,17 +35,13 @@ presentations:
   - Vesicles or bullae (inflammatory type)
   - Malodor
   - Often bilateral but may be asymmetric
-urgency: routine
-referrals:
-  emergency:
-    - Secondary bacterial infection with systemic signs (fever, ascending lymphangitis)
-  urgent:
-    - Rapidly spreading infection
-    - Immunocompromised with extensive disease
-  routine:
-    - Refractory to treatment
-    - Recurrent infections
-
+differentials:
+  - Contact dermatitis (irritant or allergic) - history of exposure, KOH negative, may be bilateral symmetric
+  - Dyshidrotic eczema - vesicles on sides of fingers and toes, soles, palms, very pruritic, KOH negative
+  - Psoriasis (plantar) - well-demarcated plaques with silvery scale, often with nail changes, KOH negative
+  - Pitted keratolysis - bacterial (Corynebacterium) infection, punched-out pits on weight-bearing surfaces, malodor, not pruritic
+  - Juvenile plantar dermatosis - shiny, glazed appearance of soles in children, fissuring, affects forefeet, KOH negative
+  - Erythrasma (interdigital) - bacterial (Corynebacterium minutissimum), coral-red fluorescence with Wood's lamp
 workup:
   - Clinical diagnosis based on appearance and distribution
   - Three clinical patterns
@@ -111,13 +128,25 @@ clinical_pearls:
   - Relapse common if predisposing factors not addressed (occlusive footwear, wet feet)
   - Diabetic patients at higher risk - check feet regularly, prevent secondary infections
   - Prevention key - keep feet dry, breathable shoes, avoid walking barefoot in public areas
-differentials:
-  - Contact dermatitis (irritant or allergic) - history of exposure, KOH negative, may be bilateral symmetric
-  - Dyshidrotic eczema - vesicles on sides of fingers and toes, soles, palms, very pruritic, KOH negative
-  - Psoriasis (plantar) - well-demarcated plaques with silvery scale, often with nail changes, KOH negative
-  - Pitted keratolysis - bacterial (Corynebacterium) infection, punched-out pits on weight-bearing surfaces, malodor, not pruritic
-  - Juvenile plantar dermatosis - shiny, glazed appearance of soles in children, fissuring, affects forefeet, KOH negative
-  - Erythrasma (interdigital) - bacterial (Corynebacterium minutissimum), coral-red fluorescence with Wood's lamp
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Secondary bacterial infection with systemic signs (fever, ascending lymphangitis)
+  urgent:
+    - Rapidly spreading infection
+    - Immunocompromised with extensive disease
+  routine:
+    - Refractory to treatment
+    - Recurrent infections
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 42-year-old man presents with 3-month history of itchy, scaly feet
   - Itching between toes, especially right 4th and 5th toes, worse at night
@@ -144,8 +173,7 @@ trace:
   - At 4 weeks - complete resolution, skin between toes normal, no scaling on soles
   - Advised to continue preventive measures - daily powder, rotate shoes, keep feet dry
   - At 6 months - no recurrence, continues preventive foot hygiene
-
-citations:
-  - AAD (American Academy of Dermatology) Guidelines for Management of Tinea Pedis
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

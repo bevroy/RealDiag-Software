@@ -1,11 +1,33 @@
 tree_id: ID-BACTEREMIA
 name: Bacteremia and Bloodstream Infection
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Infectious Disease
-icd10: R78.81
-snomed: 5758002
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: ''
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R78.81
+  snomed:
+    - '5758002'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: Surviving Sepsis Campaign Guidelines 2021, IDSA Bloodstream Infection Guidelines
+    origin: trace.source
 presentations:
   - Fever with chills and rigors
   - Hypotension or signs of septic shock
@@ -17,6 +39,13 @@ presentations:
   - Persistent positive blood cultures
   - Signs of end-organ dysfunction
   - Presence of indwelling medical devices
+differentials:
+  - Sepsis and septic shock (bacteremia with systemic inflammatory response)
+  - Contaminated blood culture (single positive culture, coagulase-negative staph, common skin flora)
+  - Endocarditis (persistent bacteremia, new heart murmur, embolic phenomena)
+  - Catheter-related bloodstream infection (central line, PICC, port)
+  - Candidemia (fungal bloodstream infection in high-risk patients)
+  - Viral sepsis syndrome (influenza, COVID-19, CMV, EBV in immunocompromised)
 workup:
   - Blood cultures x2 sets from different sites before antibiotics
   - Complete blood count with differential (leukocytosis or leukopenia)
@@ -40,32 +69,34 @@ treatment:
   - Infectious disease consultation for complicated cases
   - Monitor for complications (septic shock, DIC, multi-organ failure)
 clinical_pearls:
-  - "Bacteremia vs Sepsis: Bacteremia is presence of bacteria in blood; sepsis is systemic inflammatory response with organ dysfunction"
-  - "Blood cultures should be drawn from two separate sites before antibiotics to increase sensitivity and help distinguish contamination"
-  - "Time to antibiotics is critical - each hour delay increases mortality by 7-10% in septic shock"
-  - "Common sources: urinary tract (25%), respiratory (20%), abdominal (15%), skin/soft tissue (10%), catheter-related (5%)"
-  - "Staph aureus bacteremia always requires 4-6 weeks of therapy and evaluation for endocarditis"
-  - "Persistent bacteremia (>72 hours despite appropriate therapy) suggests endocarditis, undrained abscess, or infected device"
-  - "Polymicrobial bacteremia suggests intra-abdominal or skin/soft tissue source"
-  - "Immunocompromised patients may not mount fever response - maintain high suspicion with other signs of infection"
+  - 'Bacteremia vs Sepsis: Bacteremia is presence of bacteria in blood; sepsis is systemic inflammatory response with organ dysfunction'
+  - Blood cultures should be drawn from two separate sites before antibiotics to increase sensitivity and help distinguish contamination
+  - Time to antibiotics is critical - each hour delay increases mortality by 7-10% in septic shock
+  - 'Common sources: urinary tract (25%), respiratory (20%), abdominal (15%), skin/soft tissue (10%), catheter-related (5%)'
+  - Staph aureus bacteremia always requires 4-6 weeks of therapy and evaluation for endocarditis
+  - Persistent bacteremia (>72 hours despite appropriate therapy) suggests endocarditis, undrained abscess, or infected device
+  - Polymicrobial bacteremia suggests intra-abdominal or skin/soft tissue source
+  - Immunocompromised patients may not mount fever response - maintain high suspicion with other signs of infection
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Infectious Disease for all cases of bacteremia for antibiotic guidance
   - Critical Care/ICU if septic shock or multi-organ dysfunction
   - Surgery for source control (drain abscess, remove infected hardware)
   - Cardiology for echocardiography if endocarditis suspected
-differentials:
-  - Sepsis and septic shock (bacteremia with systemic inflammatory response)
-  - Contaminated blood culture (single positive culture, coagulase-negative staph, common skin flora)
-  - Endocarditis (persistent bacteremia, new heart murmur, embolic phenomena)
-  - Catheter-related bloodstream infection (central line, PICC, port)
-  - Candidemia (fungal bloodstream infection in high-risk patients)
-  - Viral sepsis syndrome (influenza, COVID-19, CMV, EBV in immunocompromised)
-trace:
-  source: Surviving Sepsis Campaign Guidelines 2021, IDSA Bloodstream Infection Guidelines
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
