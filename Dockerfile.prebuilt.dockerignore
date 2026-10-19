@@ -61,9 +61,18 @@ k8s/
 
 # Misc
 *.log
-.env
-.env.*
-!.env.example
+# Secrets: never copy env files, keys or registry credentials into an image,
+# at any depth (a bare ".env" pattern only matches the context root).
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/.npmrc
+**/.netrc
+**/id_rsa*
 
 # Build cache is not needed at runtime
 frontend/out/cache/
