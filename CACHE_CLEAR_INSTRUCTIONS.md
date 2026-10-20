@@ -73,7 +73,7 @@ Should show:
 1. Check browser console for specific error message
 2. Verify API is accessible:
    ```bash
-   curl https://realdiag-software.onrender.com/api/search/families
+   curl https://api.realdiag.com/api/search/families
    ```
 3. Check Netlify build logs for errors
 

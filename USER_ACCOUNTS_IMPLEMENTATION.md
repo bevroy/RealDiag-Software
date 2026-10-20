@@ -277,7 +277,7 @@ Complete user account interface:
    - symptom-search.js (search tracking & favorites)
 
 ### Live Deployment
-- ✅ **Backend:** Deployed to Render.com (realdiag-software.onrender.com)
+- ✅ **Backend:** Deployed to Render.com (api.realdiag.com)
 - ✅ **Frontend:** Deployed to Netlify (realdiag.netlify.app)
 - ⏱️ **Deployment Time:** ~3-5 minutes for full propagation
 
@@ -285,7 +285,7 @@ Complete user account interface:
 - Homepage: `https://realdiag.netlify.app`
 - Account Page: `https://realdiag.netlify.app/account`
 - Symptom Search: `https://realdiag.netlify.app/symptom-search`
-- API Docs: `https://realdiag-software.onrender.com/docs`
+- API Docs: `https://api.realdiag.com/docs`
 
 ---
 
@@ -686,7 +686,7 @@ custom_lists: {
 - **Video Tutorial:** Planned for YouTube channel
 
 ### For Developers
-- **API Documentation:** `https://realdiag-software.onrender.com/docs`
+- **API Documentation:** `https://api.realdiag.com/docs`
 - **Authentication Guide:** This document
 - **Database Schema:** See "Data Storage" section above
 - **Contributing Guide:** `/CONTRIBUTING.md`

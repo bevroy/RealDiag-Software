@@ -59,7 +59,7 @@ import requests
 
 # Configure FHIR server
 requests.post(
-    "https://realdiag-software.onrender.com/integration/ehr/fhir/configure",
+    "https://api.realdiag.com/integration/ehr/fhir/configure",
     headers={"X-API-Key": "your_key"},
     json={
         "config_name": "main_ehr",
@@ -71,7 +71,7 @@ requests.post(
 
 # Pull patient data
 response = requests.get(
-    "https://realdiag-software.onrender.com/integration/ehr/fhir/pull/patient/12345",
+    "https://api.realdiag.com/integration/ehr/fhir/pull/patient/12345",
     headers={"X-API-Key": "your_key"},
     params={"config_name": "main_ehr"}
 )
@@ -132,7 +132,7 @@ Generate comparative report with top differentials ranked by match score.
 import requests
 
 response = requests.post(
-    "https://realdiag-software.onrender.com/integration/export/pdf/diagnosis",
+    "https://api.realdiag.com/integration/export/pdf/diagnosis",
     headers={"X-API-Key": "your_key"},
     json={
         "diagnosis_data": {
@@ -206,7 +206,7 @@ import requests
 
 # Order troponin STAT
 response = requests.post(
-    "https://realdiag-software.onrender.com/integration/cpoe/order",
+    "https://api.realdiag.com/integration/cpoe/order",
     headers={"X-API-Key": "your_key"},
     json={
         "order_type": "lab",
@@ -365,7 +365,7 @@ This was fully implemented in the previous commit (8e03881).
 
 ### 1. Create API Key
 ```bash
-curl -X POST https://realdiag-software.onrender.com/integration/api-keys \
+curl -X POST https://api.realdiag.com/integration/api-keys \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Integration Key",
@@ -376,7 +376,7 @@ curl -X POST https://realdiag-software.onrender.com/integration/api-keys \
 
 ### 2. Configure FHIR Server
 ```bash
-curl -X POST https://realdiag-software.onrender.com/integration/ehr/fhir/configure \
+curl -X POST https://api.realdiag.com/integration/ehr/fhir/configure \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your_api_key" \
   -d '{
@@ -388,14 +388,14 @@ curl -X POST https://realdiag-software.onrender.com/integration/ehr/fhir/configu
 
 ### 3. Pull Patient Data
 ```bash
-curl https://realdiag-software.onrender.com/integration/ehr/fhir/pull/patient/example \
+curl https://api.realdiag.com/integration/ehr/fhir/pull/patient/example \
   -H "X-API-Key: your_api_key" \
   -G -d "config_name=test_ehr"
 ```
 
 ### 4. Generate PDF Report
 ```bash
-curl -X POST https://realdiag-software.onrender.com/integration/export/pdf/diagnosis \
+curl -X POST https://api.realdiag.com/integration/export/pdf/diagnosis \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your_api_key" \
   -d @diagnosis_data.json \
@@ -404,7 +404,7 @@ curl -X POST https://realdiag-software.onrender.com/integration/export/pdf/diagn
 
 ### 5. Create CPOE Order
 ```bash
-curl -X POST https://realdiag-software.onrender.com/integration/cpoe/order \
+curl -X POST https://api.realdiag.com/integration/cpoe/order \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your_api_key" \
   -d '{

@@ -9,7 +9,7 @@
 ## 📊 What Was Deployed
 
 ### **Backend (Render.com)** ✅
-- **URL**: https://realdiag-software.onrender.com
+- **URL**: https://api.realdiag.com
 - **Status**: ✅ Live and Running
 - **Auto-deploys**: Yes (from GitHub main branch)
 
@@ -30,7 +30,7 @@
 - **URL**: https://www.realdiag.com
 - **Status**: ⏳ Rebuilding now (triggered by git push)
 - **Auto-deploys**: Yes (from GitHub main branch)
-- **Connected to**: Backend at realdiag-software.onrender.com
+- **Connected to**: Backend at api.realdiag.com
 
 ---
 
@@ -38,13 +38,13 @@
 
 ### Test 1: Backend Health ✅
 ```bash
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 ```
 **Result**: `{"ok":true}` ✅
 
 ### Test 2: Medication Safety ✅
 ```bash
-curl -X POST https://realdiag-software.onrender.com/diagnostic/medication-safety-check \
+curl -X POST https://api.realdiag.com/diagnostic/medication-safety-check \
   -H "Content-Type: application/json" \
   -d '{
     "current_medications": ["warfarin"],
@@ -68,7 +68,7 @@ curl -X POST https://realdiag-software.onrender.com/diagnostic/medication-safety
 
 ### Test 3: EMR Integration Endpoint ✅
 ```bash
-curl https://realdiag-software.onrender.com/diagnostic/emr/patient/test-123/medications
+curl https://api.realdiag.com/diagnostic/emr/patient/test-123/medications
 ```
 **Result**: EMR endpoint responding! ✅
 
@@ -82,7 +82,7 @@ Push to GitHub main branch
     Git commit
          ↓
     ├─→ Render.com (auto-deploys backend)
-    │   └─→ realdiag-software.onrender.com ✅
+    │   └─→ api.realdiag.com ✅
     │
     └─→ Netlify (auto-deploys frontend)
         └─→ www.realdiag.com ✅
@@ -110,9 +110,9 @@ Push to GitHub main branch
 ## 🌐 Live URLs
 
 - **Production Site**: https://www.realdiag.com
-- **Backend API**: https://realdiag-software.onrender.com
-- **API Health**: https://realdiag-software.onrender.com/health
-- **API Docs**: https://realdiag-software.onrender.com/docs
+- **Backend API**: https://api.realdiag.com
+- **API Health**: https://api.realdiag.com/health
+- **API Docs**: https://api.realdiag.com/docs
 
 ---
 
@@ -159,7 +159,7 @@ Visit www.realdiag.com and test:
 **Check**:
 1. Netlify build succeeded: https://app.netlify.com
 2. Render service is running: https://dashboard.render.com
-3. Backend health: https://realdiag-software.onrender.com/health
+3. Backend health: https://api.realdiag.com/health
 
 ---
 
@@ -167,7 +167,7 @@ Visit www.realdiag.com and test:
 
 | Component | Status | URL |
 |-----------|--------|-----|
-| Backend API | ✅ Live | https://realdiag-software.onrender.com |
+| Backend API | ✅ Live | https://api.realdiag.com |
 | Frontend | ⏳ Deploying | https://www.realdiag.com |
 | Medication Safety | ✅ Working | `/diagnostic/medication-safety-check` |
 | EMR Integration | ✅ Ready | `/diagnostic/emr/patient/{id}/medications` |

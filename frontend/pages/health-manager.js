@@ -3,6 +3,7 @@ import Link from 'next/link';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { getStoredUser, storeAuthData } from '../utils/clientAuth';
+import { getApiBase } from '../utils/auth';
 
 export default function HealthManagerPage() {
   const [userData, setUserData] = useState(null);
@@ -14,7 +15,7 @@ export default function HealthManagerPage() {
       setUserData(storedUser);
     } else {
       // Try to fetch from API if not in localStorage
-      fetch('https://realdiag-software.onrender.com/users/me', {
+      fetch(`${getApiBase()}/users/me`, {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' }
       })

@@ -134,7 +134,7 @@ mobile/
 Update `src/constants/index.ts`:
 
 ```typescript
-export const API_BASE_URL = 'https://realdiag-software.onrender.com';
+export const API_BASE_URL = 'https://api.realdiag.com';
 ```
 
 ### Theme Customization
@@ -222,7 +222,7 @@ cd android
 Create `.env` file:
 
 ```env
-API_BASE_URL=https://realdiag-software.onrender.com
+API_BASE_URL=https://api.realdiag.com
 API_TIMEOUT=30000
 ENABLE_LOGGING=true
 ```

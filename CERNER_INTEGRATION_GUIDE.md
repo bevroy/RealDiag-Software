@@ -105,7 +105,7 @@ GET /Observation?patient=123&category=laboratory&code=10839-9
    App Name: RealDiag Clinical Decision Support
    Launch Type: EHR Launch (Provider)
    FHIR Version: R4
-   Redirect URI: https://realdiag-software.onrender.com/smart/callback
+   Redirect URI: https://api.realdiag.com/smart/callback
    
    Requested Scopes:
      - launch
@@ -142,7 +142,7 @@ SMART_CLIENT_SECRET=your_cerner_client_secret
 EHR_TENANT_ID=YOUR_TENANT_ID_HERE
 
 # Redirect URI (must match Cerner Code Console)
-SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+SMART_REDIRECT_URI=https://api.realdiag.com/smart/callback
 ```
 
 ### Step 3: Test with Cerner Sandbox
@@ -308,7 +308,7 @@ FHIR_BASE_URL=https://fhir-myrecord.cerner.com/r4/YOUR_TENANT_ID
 SMART_CLIENT_ID=your_cerner_client_id
 SMART_CLIENT_SECRET=your_cerner_client_secret
 EHR_TENANT_ID=YOUR_TENANT_ID
-SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+SMART_REDIRECT_URI=https://api.realdiag.com/smart/callback
 ```
 
 ### Netlify Frontend (No Changes Needed!)

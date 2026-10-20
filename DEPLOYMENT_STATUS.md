@@ -60,18 +60,18 @@ After Render deployment completes (usually 2-5 minutes):
 
 ```bash
 # Test endocrinology rules (should show 12+ presentations)
-curl -s https://realdiag-software.onrender.com/reference/endocrinology | \
+curl -s https://api.realdiag.com/reference/endocrinology | \
   python3 -c "import sys, json; d=json.load(sys.stdin); r=d['rules'][0]; \
   print(f'{r[\"id\"]}: {len(r.get(\"presentations\", []))} presentations')"
 
 # Test cardiology (should show comprehensive presentations)
-curl -s https://realdiag-software.onrender.com/reference/cardiology | \
+curl -s https://api.realdiag.com/reference/cardiology | \
   python3 -c "import sys, json; d=json.load(sys.stdin); \
   [print(f'{r[\"id\"]}: {len(r.get(\"presentations\", []))} presentations') \
   for r in d['rules'][:5]]"
 
 # Test new allergy/immunology family (should show 12 presentations)
-curl -s https://realdiag-software.onrender.com/reference/allergy_immunology | \
+curl -s https://api.realdiag.com/reference/allergy_immunology | \
   python3 -c "import sys, json; d=json.load(sys.stdin); \
   print(f'Urticaria: {len(d[\"rules\"][0].get(\"presentations\", []))} presentations')"
 ```

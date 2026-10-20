@@ -19,7 +19,7 @@ export default function SourcesDebugPage() {
         addLog('Starting sources load...');
         
         const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
         
         addLog(`API Base: ${apiBase}`);
         

@@ -12,7 +12,7 @@ Usage:
 import requests
 import json
 
-BASE_URL = "https://realdiag-software.onrender.com"
+BASE_URL = "https://api.realdiag.com"
 
 class Colors:
     GREEN = '\033[92m'

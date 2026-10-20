@@ -43,7 +43,7 @@ TTL: 3600 (or Auto)
 ```
 Type: CNAME
 Name: api
-Value: realdiag-software.onrender.com
+Value: <your Render service>.onrender.com (shown in Render > Settings > Custom Domains)
 TTL: 3600 (or Auto)
 ```
 
@@ -115,7 +115,7 @@ curl -I https://realdiag.com
    - Click **Save**
 
 3. **Verify DNS:**
-   - Render will show CNAME target (should be `realdiag-software.onrender.com`)
+   - Render will show the CNAME target (your service's `.onrender.com` hostname)
    - Ensure your DNS CNAME record matches
    - Wait for "DNS configured" status
 

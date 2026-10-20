@@ -34,7 +34,7 @@ export default function PatientHistory() {
   // Get API base
   useEffect(() => {
     const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null
-    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com'
+    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com'
     setApiBase(base.replace(/\/$/, ''))
   }, [])
 

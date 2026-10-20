@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="/runtime-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Comprehensive Rule Data</title>
@@ -71,7 +72,7 @@
     <div id="sample-result"></div>
 
     <script>
-        const BACKEND_API = 'https://realdiag-software.onrender.com';
+        const BACKEND_API = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://api.realdiag.com';
         const FRONTEND_URL = 'https://realdiag.netlify.app';
 
         // Test 1: Backend API

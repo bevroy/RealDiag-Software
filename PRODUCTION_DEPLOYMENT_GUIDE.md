@@ -49,7 +49,7 @@ Last Updated: November 20, 2025
 3. **Verify Backend Sentry:**
    - The backend already has full Sentry integration in `backend/main.py`
    - After deployment, check logs for: `✅ Sentry initialized for environment: production`
-   - Test by triggering an error: `curl https://realdiag-software.onrender.com/invalid-endpoint`
+   - Test by triggering an error: `curl https://api.realdiag.com/invalid-endpoint`
    - Check Sentry dashboard for the error event
 
 ### Frontend Configuration (Netlify)
@@ -115,7 +115,7 @@ HSTS_ENABLED=true
 
 **Verify HSTS is Active:**
 ```bash
-curl -I https://realdiag-software.onrender.com/health | grep -i strict-transport
+curl -I https://api.realdiag.com/health | grep -i strict-transport
 ```
 
 Expected output:
@@ -217,22 +217,22 @@ python -c "import secrets; print(secrets.token_urlsafe(32))"
 
 **Check Health:**
 ```bash
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 ```
 
 **Check Version:**
 ```bash
-curl https://realdiag-software.onrender.com/version
+curl https://api.realdiag.com/version
 ```
 
 **Check Security Headers:**
 ```bash
-curl -I https://realdiag-software.onrender.com/health | grep -E "content-security-policy|x-frame-options|strict-transport"
+curl -I https://api.realdiag.com/health | grep -E "content-security-policy|x-frame-options|strict-transport"
 ```
 
 **Test Symptom Search:**
 ```bash
-curl -X POST https://realdiag-software.onrender.com/api/symptom-search \
+curl -X POST https://api.realdiag.com/api/symptom-search \
   -H "Content-Type: application/json" \
   -d '{"symptoms": ["headache", "fever"]}'
 ```
@@ -305,7 +305,7 @@ cat load_test_results_*.txt
 **Test Error Capture:**
 ```bash
 # Should appear in Sentry within 1 minute
-curl https://realdiag-software.onrender.com/api/nonexistent-endpoint
+curl https://api.realdiag.com/api/nonexistent-endpoint
 ```
 
 ### Performance Not Improved
@@ -313,7 +313,7 @@ curl https://realdiag-software.onrender.com/api/nonexistent-endpoint
 **Check if optimization deployed:**
 ```bash
 # View deployed code
-curl https://realdiag-software.onrender.com/version
+curl https://api.realdiag.com/version
 
 # Check git commit
 git log --oneline -1
@@ -328,7 +328,7 @@ git log --oneline -1
 **Run diagnostic:**
 ```bash
 # Test symptom search directly
-time curl -X POST https://realdiag-software.onrender.com/api/symptom-search \
+time curl -X POST https://api.realdiag.com/api/symptom-search \
   -H "Content-Type: application/json" \
   -d '{"symptoms": ["headache"]}'
 ```
@@ -421,8 +421,8 @@ git push
 # 4. Wait for deployment (~3-5 minutes)
 
 # 5. Verify deployment
-curl https://realdiag-software.onrender.com/health
-curl -I https://realdiag-software.onrender.com/health | grep -i strict-transport
+curl https://api.realdiag.com/health
+curl -I https://api.realdiag.com/health | grep -i strict-transport
 
 # 6. Test performance
 bash load_test.sh

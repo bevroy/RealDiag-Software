@@ -48,7 +48,7 @@ export default function ReferencePage() {
     async function loadAll() {
       // Get API base inside useEffect to ensure runtime-config.js has loaded
       const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
       
       setLoading(true);
       setErr("");

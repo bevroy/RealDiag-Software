@@ -72,9 +72,9 @@ const aiLabelStyle = {
 };
 
 export default function SymptomSearch() {
-  // Use runtime config for API base, with fallback to env var or Render URL
+  // Use runtime config for API base, with fallback to env var or the production API
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-  const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+  const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
   
   // Debug logging
   if (typeof window !== 'undefined') {
@@ -181,7 +181,7 @@ export default function SymptomSearch() {
       } else {
         // If no localStorage, fetch from API
         console.log('⚠️ Symptom-search: No localStorage, fetching from API...');
-        fetch('https://realdiag-software.onrender.com/users/me', {
+        fetch(`${apiBase}/users/me`, {
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' }
         })

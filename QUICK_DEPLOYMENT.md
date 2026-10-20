@@ -30,7 +30,7 @@ SENTRY_PROFILES_SAMPLE_RATE=0.1
 ### Verify
 ```bash
 # Wait 3-5 minutes for deployment, then:
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 ```
 
 Check Render logs for: `✅ Sentry initialized for environment: production`
@@ -92,7 +92,7 @@ All 3 tasks complete when you see:
 1. **Sentry Dashboard** shows events from both frontend and backend
 2. **Security headers** include HSTS:
    ```bash
-   curl -I https://realdiag-software.onrender.com/health | grep -i strict-transport
+   curl -I https://api.realdiag.com/health | grep -i strict-transport
    ```
    Output: `strict-transport-security: max-age=31536000; includeSubDomains; preload`
 

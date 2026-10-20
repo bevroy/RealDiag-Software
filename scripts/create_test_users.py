@@ -142,7 +142,7 @@ def main():
     parser = argparse.ArgumentParser(description="Create test user accounts for RealDiag")
     parser.add_argument(
         "--url",
-        default="https://realdiag-software.onrender.com",
+        default="https://api.realdiag.com",
         help="Backend API base URL (default: production)"
     )
     parser.add_argument(

@@ -63,10 +63,10 @@ After deployment completes (watch the "Logs" tab):
 
 ```bash
 # Test health endpoint
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 
 # Check if database is connected (should show database info, not "in-memory")
-curl https://realdiag-software.onrender.com/docs
+curl https://api.realdiag.com/docs
 ```
 
 You can also check the logs in Render dashboard for:
@@ -159,10 +159,10 @@ git commit -m "Configure PostgreSQL database"
 git push origin main
 
 # Verify deployment
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 
 # Test user registration
-curl -X POST https://realdiag-software.onrender.com/users/register \
+curl -X POST https://api.realdiag.com/users/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",

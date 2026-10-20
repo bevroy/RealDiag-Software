@@ -203,7 +203,7 @@ Patient: patient@example.com / Patient123!
 
 ### 🔗 Integration Points
 
-- **Backend API**: https://realdiag-software.onrender.com
+- **Backend API**: https://api.realdiag.com
 - **EHR Systems**: Epic, Cerner integration via backend
 - **Voice Service**: @react-native-voice/voice
 - **Secure Storage**: react-native-keychain
