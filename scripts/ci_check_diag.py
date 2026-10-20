@@ -3,11 +3,12 @@
 
 This script is used by CI to verify the Netlify site can reach the backend.
 
-Usage: python3 scripts/ci_check_diag.py --url https://realdiag.netlify.app --timeout 60
+Usage: python3 scripts/ci_check_diag.py --url https://app.realdiag.com --timeout 60
 """
 import argparse
 import json
 import sys
+import time
 from playwright.sync_api import sync_playwright
 
 
@@ -23,7 +24,7 @@ def run_check(url: str, timeout: int = 60) -> int:
         page.on("response", lambda r: logs.append(f"RESPONSE {r.status} {r.url}"))
 
         try:
-            page.goto(f"{url}/diagnostic", wait_until="networkidle", timeout=timeout * 1000)
+            response = page.goto(f"{url}/diagnostic", wait_until="networkidle", timeout=timeout * 1000)
         except Exception as e:
             print("NAV_ERROR:", e)
             for l in logs:
@@ -54,7 +55,7 @@ def run_check(url: str, timeout: int = 60) -> int:
         # Try performing a fetch from page context to /health to ensure backend reachable
         try:
             fetch_result = page.evaluate('''async () => {
-                const runtime = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://realdiag-software.onrender.com';
+                const runtime = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://api.realdiag.com';
                 const url = runtime + '/health';
                 try {
                     const res = await fetch(url, {cache: 'no-store'});
@@ -71,7 +72,18 @@ def run_check(url: str, timeout: int = 60) -> int:
 
         browser.close()
 
-        # Decide exit code: success if fetch_result indicates ok
+        # Success only if the diagnostic page itself loaded and reached the
+        # backend, and the backend answers a fetch from the page's origin.
+        if response is None or response.status != 200:
+            print(f"PAGE_ERROR: /diagnostic returned {response.status if response else 'no response'}")
+            return 5
+        try:
+            page_ok = '"health"' in (result_text or '') and 'Unable to contact backend' not in (result_text or '')
+        except NameError:
+            page_ok = False
+        if not page_ok:
+            print("PAGE_ERROR: the diagnostic page did not report backend health")
+            return 6
         try:
             if isinstance(fetch_result, dict) and fetch_result.get('ok'):
                 return 0
@@ -85,9 +97,19 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--url', required=True)
     p.add_argument('--timeout', type=int, default=60)
+    # On a push to main the workflow can start before Netlify has published
+    # the new build, so retry a few times before failing.
+    p.add_argument('--retries', type=int, default=1, help='attempts before failing')
+    p.add_argument('--retry-delay', type=int, default=60, help='seconds between attempts')
     args = p.parse_args()
 
-    rc = run_check(args.url, args.timeout)
+    rc = 1
+    for attempt in range(1, max(args.retries, 1) + 1):
+        rc = run_check(args.url, args.timeout)
+        if rc == 0 or attempt >= args.retries:
+            break
+        print(f'Attempt {attempt} failed (code {rc}); retrying in {args.retry_delay}s')
+        time.sleep(args.retry_delay)
     if rc == 0:
         print('Diagnostic check: OK')
     else:

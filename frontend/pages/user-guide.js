@@ -125,6 +125,7 @@ export default function UserGuidePage() {
             <li>Unexpected ranking: verify vitals and age/sex filters are correct.</li>
             <li>Missing EHR data: confirm integration token and patient identifier mapping.</li>
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
+            <li>Backend connection check: the /diagnostic page shows whether the site can reach the RealDiag API (health and version).</li>
           </ul>
         </section>
 
