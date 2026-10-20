@@ -1,11 +1,34 @@
 tree_id: PSYCH-AGITATION
 name: Agitation (Behavioral)
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Emergency Medicine
-icd10: R45.1
-snomed: 24199005
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Emergency Medicine
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R45.1
+  snomed:
+    - '24199005'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: American Association for Emergency Psychiatry Project BETA De-escalation Guidelines, Cochrane Review on Rapid Tranquilization
+    origin: trace.source
 presentations:
   - Excessive motor activity associated with internal tension
   - Restlessness, pacing, inability to sit still
@@ -16,6 +39,17 @@ presentations:
   - Disinhibition
   - May escalate rapidly without intervention
   - Often triggered by perceived threat, frustration, or overstimulation
+differentials:
+  - Delirium (acute confusion, fluctuating mental status, medical cause)
+  - Psychosis (hallucinations, delusions, disorganized behavior)
+  - Mania (elevated mood, grandiosity, decreased need for sleep, increased goal-directed activity)
+  - Substance intoxication (stimulants, synthetic cannabinoids, PCP)
+  - Substance withdrawal (alcohol, benzodiazepines - life-threatening)
+  - Akathisia (medication-induced restlessness from antipsychotics)
+  - Anxiety disorders (severe panic, PTSD hyperarousal)
+  - Personality disorders (borderline, antisocial with impulsivity)
+  - Dementia with behavioral disturbance (chronic cognitive impairment)
+  - Neurological emergencies (seizure, stroke, traumatic brain injury)
 workup:
   - Immediate safety assessment (patient, staff, others)
   - De-escalation environment (quiet, low-stimulation, sufficient space)
@@ -87,36 +121,37 @@ treatment:
   - Release as soon as safe
   - Document thoroughly
 clinical_pearls:
-  - "Always attempt verbal de-escalation before medication or restraints - successful in 50-75% of cases"
-  - "Rule out medical causes first - delirium, hypoglycemia, hypoxia, pain common in elderly"
-  - "Agitation affects 10-30% of psychiatric emergency presentations"
-  - "Combination therapy (antipsychotic + benzodiazepine) often more effective than monotherapy"
-  - "Oral medication as effective as IM with faster onset - offer oral first"
-  - "Physical restraints associated with serious risks: injury, cardiac arrest, rhabdomyolysis - use only when imminent danger"
-  - "Akathisia (medication-induced restlessness) can mimic or worsen agitation"
-  - "In elderly, assume delirium until proven otherwise - agitation often first sign"
+  - Always attempt verbal de-escalation before medication or restraints - successful in 50-75% of cases
+  - Rule out medical causes first - delirium, hypoglycemia, hypoxia, pain common in elderly
+  - Agitation affects 10-30% of psychiatric emergency presentations
+  - Combination therapy (antipsychotic + benzodiazepine) often more effective than monotherapy
+  - Oral medication as effective as IM with faster onset - offer oral first
+  - 'Physical restraints associated with serious risks: injury, cardiac arrest, rhabdomyolysis - use only when imminent danger'
+  - Akathisia (medication-induced restlessness) can mimic or worsen agitation
+  - In elderly, assume delirium until proven otherwise - agitation often first sign
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Psychiatry consultation for underlying psychiatric disorder
   - Neurology if seizure, stroke, or neurological cause
   - Medical admission if delirium or medical cause requiring treatment
   - Transfer to psychiatric facility if psychiatric cause and medically stable
-differentials:
-  - Delirium (acute confusion, fluctuating mental status, medical cause)
-  - Psychosis (hallucinations, delusions, disorganized behavior)
-  - Mania (elevated mood, grandiosity, decreased need for sleep, increased goal-directed activity)
-  - Substance intoxication (stimulants, synthetic cannabinoids, PCP)
-  - Substance withdrawal (alcohol, benzodiazepines - life-threatening)
-  - Akathisia (medication-induced restlessness from antipsychotics)
-  - Anxiety disorders (severe panic, PTSD hyperarousal)
-  - Personality disorders (borderline, antisocial with impulsivity)
-  - Dementia with behavioral disturbance (chronic cognitive impairment)
-  - Neurological emergencies (seizure, stroke, traumatic brain injury)
-trace:
-  source: American Association for Emergency Psychiatry Project BETA De-escalation Guidelines, Cochrane Review on Rapid Tranquilization
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

@@ -1,39 +1,47 @@
 tree_id: CARD-MYOCARDIAL-INFARCTION
 name: Myocardial Infarction (Heart Attack)
+version: '1.0'
+status: draft
 family: Cardiology
 specialty: Cardiology
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
 chief_complaint: Chest pain and shortness of breath
 description: |
   Acute coronary syndrome (ACS) caused by rupture of atherosclerotic plaque with thrombotic occlusion of coronary artery. Results in myocardial necrosis.
   STEMI (ST-elevation MI) involves complete occlusion requiring immediate reperfusion. NSTEMI (non-ST elevation MI) involves partial occlusion. Leading cause of death worldwide. Time is muscle - rapid treatment critical.
-icd10: I21.9
-snomed: 57054005
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I21.9
+  snomed:
+    - '57054005'
+  icpc2: []
+sources:
+  - text: ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+    origin: citations
+  - text: ESC (European Society of Cardiology) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Cardiovascular Medicine
+    origin: citations
 presentations:
   - Substernal chest pain or pressure lasting >20 minutes
   - Pain radiating to left arm, jaw, neck, back, or epigastrium
   - Associated dyspnea, diaphoresis, nausea, vomiting
   - Lightheadedness, palpitations, or syncope
   - May be asymptomatic (silent MI in elderly or diabetics)
-  - Cardiogenic shock: hypotension, cool/clammy skin, altered mental status
-urgency: Critical
-referrals:
-  emergency:
-    - Acute MI/STEMI
-    - Cardiogenic shock
-    - Acute heart failure with hypoxia
-    - Unstable arrhythmia
-    - Cardiac tamponade
-  urgent:
-    - Unstable angina
-    - New-onset heart failure
-    - Symptomatic arrhythmia
-    - Moderate-severe valvular disease
-  routine:
-    - Stable angina for evaluation
-    - Hypertension uncontrolled on multiple meds
-    - Asymptomatic murmur workup
-    - Risk stratification
-
+  - 'Cardiogenic shock: hypotension, cool/clammy skin, altered mental status'
+differentials:
+  - Unstable angina
+  - Aortic dissection
+  - Pulmonary embolism
+  - Pericarditis
+  - Gastroesophageal reflux disease
+  - Pneumothorax
 workup:
   - Clinical presentation - acute chest pain (pressure, tightness, heaviness), often radiates to left arm, jaw, neck, back, epigastrium
   - Associated symptoms - dyspnea, diaphoresis, nausea, lightheadedness
@@ -82,17 +90,37 @@ clinical_pearls:
   - Wellens syndrome - biphasic or deeply inverted T waves V2-V4, proximal LAD stenosis, high risk for anterior MI
   - Reinfarction or recurrent ischemia - repeat ECG and troponin, urgent angiography
   - Women and diabetics higher mortality, more atypical presentations
-differentials:
-  - Unstable angina
-  - Aortic dissection
-  - Pulmonary embolism
-  - Pericarditis
-  - Gastroesophageal reflux disease
-  - Pneumothorax
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 58-year-old man with sudden onset substernal chest pressure radiating to left arm x 45 minutes → Associated dyspnea, diaphoresis, nausea → Risk factors - hypertension, hyperlipidemia, smoking → BP 155/90, HR 95, oxygen saturation 94% → ECG shows 3 mm ST elevation leads II, III, aVF (inferior STEMI), 1 mm ST elevation V4R (RV involvement) → Aspirin 325mg chewed, ticagrelor 180mg, heparin bolus → Activate cath lab → Troponin I 8.2 ng/mL (elevated) → Emergent coronary angiography shows 100% occlusion proximal right coronary artery → Primary PCI with drug-eluting stent placement, door-to-balloon 65 minutes → TIMI 3 flow restored → Start metoprolol 25mg BID, atorvastatin 80mg, lisinopril 5mg daily → Echo shows LVEF 45%, inferior wall hypokinesis, no mechanical complications → Continue aspirin 81mg and ticagrelor 90mg BID x 12 months → Cardiac rehabilitation referral → Smoking cessation, lifestyle modifications → LVEF improves to 52% at 3-month follow-up
-
-citations:
-  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
-  - ESC (European Society of Cardiology) Clinical Practice Guidelines
-  - UpToDate - Cardiovascular Medicine
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Critical' mapped to 'emergent'

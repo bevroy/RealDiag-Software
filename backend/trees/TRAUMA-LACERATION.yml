@@ -1,30 +1,45 @@
 tree_id: TRAUMA-LACERATION
 name: Laceration
+version: '1.0'
+status: draft
 family: emergency
-specialty: Emergency Medicine, Primary Care, Surgery
+specialty: Emergency Medicine
+secondary_specialties:
+  - Primary Care
+  - Surgery
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Cut, laceration requiring repair
 description: |
   Laceration is a traumatic wound with irregular edges caused by blunt or sharp force.
   Requires assessment for depth, neurovascular injury, contamination, and need for repair.
-icd10: S01.81XA
-snomed: "312608009"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - S01.81XA
+  snomed:
+    - '312608009'
+  icpc2: []
+sources:
+  - text: UpToDate - Emergency Medicine
+    origin: citations
+  - text: American College of Emergency Physicians Guidelines
+    origin: citations
 presentations:
   - Open wound with irregular edges
   - Bleeding (may be minimal to profuse)
   - Pain at wound site
   - Possible visible deeper structures (fat, fascia, muscle, tendon, bone)
   - Mechanism - fall, sharp object, machinery, assault, animal bite
-urgency: High
-referrals:
-  emergency:
-    - Arterial bleeding
-    - Deep laceration with possible neurovascular or tendon injury
-    - Extensive wounds requiring specialist repair
-  hand_surgery:
-    - Hand lacerations with suspected tendon, nerve, or vascular injury
-  plastic_surgery:
-    - Facial lacerations requiring cosmetic repair
-    - Complex wounds
+differentials:
+  - Simple laceration
+  - Laceration with nerve injury
+  - Laceration with tendon injury
+  - Laceration with vascular injury
+  - Contaminated/infected wound
 workup:
   - Assess mechanism and tetanus status
   - Evaluate wound depth, length, location
@@ -66,14 +81,30 @@ clinical_pearls:
   - High-pressure irrigation most important factor preventing infection
   - Human/animal bites have high infection risk - often leave open or delayed closure
   - Glass foreign bodies visible on X-ray if >2mm
-differentials:
-  - Simple laceration
-  - Laceration with nerve injury
-  - Laceration with tendon injury
-  - Laceration with vascular injury
-  - Contaminated/infected wound
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Arterial bleeding
+    - Deep laceration with possible neurovascular or tendon injury
+    - Extensive wounds requiring specialist repair
+  hand_surgery:
+    - Hand lacerations with suspected tendon, nerve, or vascular injury
+  plastic_surgery:
+    - Facial lacerations requiring cosmetic repair
+    - Complex wounds
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 25-year-old with 3cm laceration to forearm from broken glass 2 hours ago. Exam shows full sensation, normal capillary refill, intact tendon function. Wound irrigated with 500mL saline. Closed with 4-0 nylon interrupted sutures. Tetanus up to date. Instructions for wound care and suture removal in 10-14 days. Heals without complications.
-citations:
-  - UpToDate - Emergency Medicine
-  - American College of Emergency Physicians Guidelines
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

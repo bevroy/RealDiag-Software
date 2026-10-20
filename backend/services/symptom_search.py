@@ -19,6 +19,41 @@ import logging
 from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
+from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, presentation_texts, snomed_codes
+from backend.services.complaint_matching import match_terms, split_negated
+
+# Emergent trees whose presentations or complaint terms match are always
+# returned, whatever their score or the result cap.
+CANT_MISS_LABEL = "Can't-miss condition"
+
+# Lay and clinical wordings searched together (pending clinical review; listed
+# in docs/CLINICAL_CONTENT_REVIEW.md).
+SYMPTOM_SYNONYMS = {
+    "shortness of breath": ["dyspnea"],
+    "short of breath": ["dyspnea"],
+    "sob": ["dyspnea"],
+    "difficulty breathing": ["dyspnea"],
+    "dyspnea": ["shortness of breath"],
+    "stomach pain": ["abdominal pain"],
+    "belly pain": ["abdominal pain"],
+}
+
+
+def expand_synonyms(symptoms: List[str]) -> List[str]:
+    """Symptoms plus their listed synonyms (whole-phrase match, original order kept)."""
+    expanded = list(symptoms)
+    seen = {s.lower() for s in symptoms}
+    for symptom in symptoms:
+        text = f" {normalize_text(symptom)} "
+        for phrase, synonyms in SYMPTOM_SYNONYMS.items():
+            if f" {phrase} " in text:
+                for synonym in synonyms:
+                    if synonym not in seen:
+                        expanded.append(synonym)
+                        seen.add(synonym)
+    return expanded
+from backend.services.content_labels import AI_CONTENT_LABEL, ai_generation_enabled
+from backend.services.clinical_review import review_fields, review_notice
 from backend.services.auth_service import get_current_user
 from backend.services.rbac_service import get_rbac_service, Permission
 
@@ -264,12 +299,24 @@ class DiagnosisMatch(BaseModel):
     referrals: Optional[List[str]] = None  # Specialist referrals
     has_tree: bool = True  # Whether a decision tree exists
     ai_suggested: bool = False  # Whether suggested by AI (no tree yet)
+    ai_label: Optional[str] = None  # AI_CONTENT_LABEL whenever ai_suggested is true
+    review_status: Optional[str] = None  # tree status, e.g. "draft" (None for AI suggestions)
+    review_status_label: Optional[str] = None  # e.g. "Draft - under clinical review."
+    # Emergent tree matching the complaint: always returned, labelled
+    cant_miss: bool = False
+    cant_miss_label: Optional[str] = None
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
     query_symptoms: List[str]
     total_results: int
     results: List[DiagnosisMatch]
+    # Matches found before the result cap (total_results is after it)
+    total_matches: Optional[int] = None
+    # Negated parts of the input that were not searched ("no fever")
+    negated_terms: List[str] = []
+    # Present while clinical content is unreviewed; None once review is complete
+    clinical_review_notice: Optional[str] = None
 
 
 # Helper functions
@@ -329,11 +376,11 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 family = tree_data.get('family', 'general')
 
                 # Extract and flatten presentations
-                presentations = tree_data.get('presentations', [])
-                if isinstance(presentations, dict):
-                    presentations = list(presentations.values())
-                elif not isinstance(presentations, list):
-                    presentations = [presentations] if presentations else []
+                presentations = presentation_texts(tree_data.get('presentations'))
+                # The tree's chief complaint is matched like a presentation
+                chief_complaint = tree_data.get('chief_complaint')
+                if isinstance(chief_complaint, str) and chief_complaint.strip():
+                    presentations = presentations + [chief_complaint]
 
                 # Extract and flatten workup/tests
                 workup = tree_data.get('workup', [])
@@ -408,17 +455,9 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     referral_list = [str(referrals)] if referrals else []
 
                 # Build rule-compatible format
-                # Normalize snomed to always be a list
-                snomed_value = tree_data.get('snomed', [])
-                if not isinstance(snomed_value, list):
-                    snomed_value = [snomed_value] if snomed_value is not None else []
-
-                # Normalize icd10 to always be a list of strings
-                icd10_value = tree_data.get('icd10', tree_data.get('icd10_code', ''))
-                if not isinstance(icd10_value, list):
-                    icd10_value = [icd10_value] if icd10_value else []
-                # Filter out empty strings
-                icd10_value = [str(code) for code in icd10_value if code]
+                snomed_value = snomed_codes(tree_data)
+                icd10_value = icd10_codes(tree_data)
+                population = tree_applies_to(tree_data)
 
                 # Normalize clinical_pearls to list of strings (convert dicts to "key: value" format)
                 clinical_pearls_raw = tree_data.get('clinical_pearls', [])
@@ -436,9 +475,10 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'id': tree_data.get('tree_id', yaml_file.stem),
                     'label': tree_data.get('name', yaml_file.stem),
                     'family': family,
-                    'applies_to': tree_data.get('applies_to'),  # Add sex-specific metadata
-                    'age_min': tree_data.get('age_min'),  # Add age restrictions
-                    'age_max': tree_data.get('age_max'),  # Add age restrictions
+                    'status': tree_data.get('status'),
+                    'applies_to': population['sex'],  # Sex restriction ('male'/'female') or None
+                    'age_min': population['age_min'],  # Age restrictions
+                    'age_max': population['age_max'],
                     'presentations': presentations,
                     'icd10': icd10_value,
                     'snomed': snomed_value,
@@ -447,7 +487,10 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'clinical_pearls': clinical_pearls,
                     'management': management,
                     'tests': tests,
-                    'referrals': referral_list
+                    'referrals': referral_list,
+                    'urgency': tree_data.get('urgency'),
+                    'complaint_terms': list((tree_data.get('criteria') or {}).get('complaint_terms') or [])
+                    if isinstance(tree_data.get('criteria'), dict) else [],
                 }
 
                 # Add to family
@@ -918,7 +961,7 @@ async def query_ai_for_diagnoses(symptoms: List[str], age: Optional[int] = None,
         return []
 
     # Check if AI generation is enabled
-    if not os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+    if not ai_generation_enabled():
         return []
 
     try:
@@ -1009,10 +1052,16 @@ async def rank_diagnoses(
     age: Optional[int] = None,
     sex: Optional[str] = None,
     family: Optional[str] = None,
+    allow_ai: bool = True,
+    limit: Optional[int] = 20,
 ) -> tuple:
     """
     Core ranked-differential logic: tree-based match scoring (rules-first),
     with an AI fallback when tree coverage is sparse or low-confidence.
+
+    The AI fallback runs only when allow_ai is true AND ENABLE_AI_GENERATION
+    is on. allow_ai=False ranks from the tree library alone, whatever the
+    settings (used by the encounter assessment).
 
     Extracted from the /search/by-symptoms route handler so it can be
     reused by any caller that has already assembled its own symptom list -
@@ -1035,8 +1084,21 @@ async def rank_diagnoses(
     else:
         families_to_search = all_families
 
-    # Pre-normalize input symptoms once
-    normalized_input = [normalize_text(s) for s in effective_symptoms]
+    # Negated parts ("no chest pain", "denies fever") are not searched; the
+    # complaint-term match below handles negation itself on the full text.
+    complaint_text = "; ".join(effective_symptoms)
+    affirmed: List[str] = []
+    negated_terms: List[str] = []
+    for symptom in effective_symptoms:
+        kept, dropped = split_negated(symptom)
+        if kept:
+            affirmed.append(kept)
+        negated_terms.extend(dropped)
+    query_symptoms = list(effective_symptoms)
+    effective_symptoms = affirmed
+
+    # Pre-normalize input symptoms once (with listed synonyms)
+    normalized_input = [normalize_text(s) for s in expand_synonyms(effective_symptoms)]
 
     # Search and score all rules
     results = []
@@ -1051,16 +1113,23 @@ async def rank_diagnoses(
             # Filter out non-string presentations (sometimes YAML has dicts or other types)
             string_presentations = [p for p in presentations if isinstance(p, str)]
 
-            if not string_presentations:
+            emergent = str(rule.get('urgency') or '').lower() == 'emergent'
+            matched_terms = match_terms(complaint_text, rule.get('complaint_terms') or [])[0] if emergent else []
+
+            if not string_presentations and not matched_terms:
                 continue
 
             # Calculate match score with clinical likelihood (pass pre-normalized input)
             score, matched_presentations = calculate_match_score_optimized(
                 normalized_input, effective_symptoms, string_presentations, rule
-            )
+            ) if string_presentations else (0.0, [])
+            cant_miss = emergent and (score > 0 or bool(matched_terms))
+            for term in matched_terms:
+                if term not in matched_presentations:
+                    matched_presentations.append(term)
 
             # Only include if there's a match
-            if score > 0:
+            if score > 0 or cant_miss:
                 # Prepare result with enhanced metadata
                 diagnosis_match = DiagnosisMatch(
                     rule_id=rule.get('id', ''),
@@ -1076,7 +1145,10 @@ async def rank_diagnoses(
                     clinical_pearls=rule.get('clinical_pearls'),  # Will be None if not present, or list if present
                     management=rule.get('management'),
                     tests=rule.get('tests'),
-                    referrals=rule.get('referrals')
+                    referrals=rule.get('referrals'),
+                    cant_miss=cant_miss,
+                    cant_miss_label=CANT_MISS_LABEL if cant_miss else None,
+                    **review_fields(rule.get('status')),
                 )
 
                 results.append(diagnosis_match)
@@ -1086,9 +1158,9 @@ async def rank_diagnoses(
 
     # Check if we should query AI for additional suggestions
     # Query AI if: <5 tree results OR best score < 3.0
-    should_query_ai = len(results) < 5 or (results and results[0].match_score < 3.0)
+    should_query_ai = bool(effective_symptoms) and (len(results) < 5 or (results and results[0].match_score < 3.0))
 
-    if should_query_ai and AI_GENERATION_AVAILABLE:
+    if should_query_ai and allow_ai and AI_GENERATION_AVAILABLE and ai_generation_enabled():
         logging.info(f"Insufficient tree results ({len(results)}), querying AI for additional diagnoses")
 
         try:
@@ -1135,7 +1207,8 @@ async def rank_diagnoses(
                     tests=None,
                     referrals=None,
                     has_tree=False,
-                    ai_suggested=True
+                    ai_suggested=True,
+                    ai_label=AI_CONTENT_LABEL,
                 )
 
                 results.append(ai_match)
@@ -1148,11 +1221,14 @@ async def rank_diagnoses(
             logging.error(f"Failed to get AI diagnosis suggestions: {e}")
 
     # Return top 20 results
-    top_results = results[:20]
+    total_matches = len(results)
+    top_results = results[:limit] if limit else results
+    # Can't-miss conditions are returned even when they fall below the cap.
+    top_results = top_results + [r for r in results[len(top_results):] if r.cant_miss]
 
     # Check if we should trigger AI tree generation (low/no results)
     ai_tree_info = None
-    if AI_GENERATION_AVAILABLE and os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+    if allow_ai and AI_GENERATION_AVAILABLE and ai_generation_enabled():
         # Trigger AI generation if:
         # 1. No results found, OR
         # 2. Best result has low confidence (score < 2.0)
@@ -1167,15 +1243,19 @@ async def rank_diagnoses(
                 "generation_triggered": True,
                 "reason": "No high-confidence matches found",
                 "status": "pending",
-                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds."
+                "message": "AI is generating a diagnostic tree for your symptoms. This may take 30-60 seconds.",
+                "ai_label": AI_CONTENT_LABEL,
             }
 
             # Note: Actual generation happens via separate endpoint to avoid blocking
 
     response_data = SymptomSearchResponse(
-        query_symptoms=effective_symptoms,
+        query_symptoms=query_symptoms,
+        negated_terms=negated_terms,
         total_results=len(top_results),
-        results=top_results
+        results=top_results,
+        total_matches=total_matches,
+        clinical_review_notice=review_notice(),
     )
 
     return response_data, ai_tree_info
@@ -1246,11 +1326,14 @@ async def search_by_symptoms(
 
         logging.info(f"Symptom search request: {effective_symptoms}")
 
+        # EHR data is never sent to an AI provider: a search that pulls the
+        # chart (emr_patient_id) ranks from the tree library only.
         response_data, ai_tree_info = await rank_diagnoses(
             effective_symptoms,
             age=request.age,
             sex=request.sex,
             family=request.family,
+            allow_ai=not request.emr_patient_id,
         )
 
         # Add AI generation info if applicable
@@ -1311,7 +1394,7 @@ async def generate_ai_tree(request: SymptomSearchRequest, background_tasks: Back
             detail="AI tree generation is not available. Contact administrator."
         )
 
-    if not os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true":
+    if not ai_generation_enabled():
         raise HTTPException(
             status_code=403,
             detail="AI tree generation is disabled"
@@ -1375,8 +1458,11 @@ async def generate_ai_tree(request: SymptomSearchRequest, background_tasks: Back
             "tree_id": tree_data["tree_id"],
             "tree_data": tree_data,
             "status": "pending_review",
+            "ai_generated": True,
+            "ai_content_label": AI_CONTENT_LABEL,
+            "clinical_review_notice": review_notice(),
             "message": "Decision tree generated successfully. It will be available after medical review.",
-            "disclaimer": "This diagnostic tree was generated by AI and is pending review by medical professionals. Use with caution and always consult a healthcare provider."
+            "disclaimer": f"{AI_CONTENT_LABEL} This diagnostic tree is pending review by medical professionals."
         }
 
     except Exception as e:
@@ -1397,8 +1483,10 @@ async def generate_ai_tree(request: SymptomSearchRequest, background_tasks: Back
 
 
 @router.get("/search/ai-trees/pending")
-async def get_pending_trees():
+async def get_pending_trees(current_user: Dict[str, Any] = Depends(get_current_user)):
     """Get list of AI-generated trees pending review (admin only)"""
+    if not get_rbac_service().check_permission(current_user, Permission.SYSTEM_CONFIG):
+        raise HTTPException(status_code=403, detail="Admin access required")
     if not AI_GENERATION_AVAILABLE:
         return {"trees": [], "count": 0}
 
@@ -1415,12 +1503,15 @@ async def get_pending_trees():
                 "chief_complaint": tree.get("chief_complaint", ""),
                 "generated_at": tree.get("metadata", {}).get("generated_at", ""),
                 "source_symptoms": tree.get("metadata", {}).get("source_symptoms", []),
-                "specialty": tree.get("specialty", "")
+                "specialty": tree.get("specialty", ""),
+                "ai_generated": True,
+                "ai_content_label": AI_CONTENT_LABEL,
             })
 
         return {
             "trees": summaries,
-            "count": len(summaries)
+            "count": len(summaries),
+            "clinical_review_notice": review_notice(),
         }
     except Exception as e:
         raise HTTPException(
@@ -1491,6 +1582,8 @@ class PatientDiagnosisTopic(BaseModel):
     matched_symptoms: List[str]
     icd10_reference: List[str] = []
     discuss_with_provider: Optional[List[str]] = None
+    review_status: Optional[str] = None
+    review_status_label: Optional[str] = None
 
 
 class PatientSymptomSearchResponse(BaseModel):
@@ -1499,6 +1592,7 @@ class PatientSymptomSearchResponse(BaseModel):
     disclaimer: str
     total_topics: int
     topics: List[PatientDiagnosisTopic]
+    clinical_review_notice: Optional[str] = None
 
 
 def _rank_to_likelihood(rank: int, n: int) -> str:
@@ -1528,6 +1622,8 @@ def _to_patient_topic(match: DiagnosisMatch, rank: int, n: int) -> PatientDiagno
         matched_symptoms=match.matched_presentations,
         icd10_reference=match.icd10 or [],
         discuss_with_provider=_soften_referrals(match.referrals),
+        review_status=match.review_status,
+        review_status_label=match.review_status_label,
     )
 
 
@@ -1568,4 +1664,5 @@ async def build_patient_symptom_search_response(
         disclaimer=PATIENT_DISCLAIMER,
         total_topics=len(topics),
         topics=topics,
+        clinical_review_notice=review_notice(),
     )

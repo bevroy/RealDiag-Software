@@ -1,11 +1,35 @@
 tree_id: PED-CONJUNCTIVITIS
 name: Conjunctivitis (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Ophthalmology/Family Medicine
-icd10: H10.9
-snomed: 9826008
-urgency: []
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Ophthalmology
+  - Family Medicine
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - H10.9
+  snomed:
+    - '9826008'
+  icpc2: []
+sources:
+  - text: AAP (American Academy of Pediatrics) Clinical Guidelines
+    origin: citations
+  - text: American Academy of Ophthalmology Preferred Practice Patterns
+    origin: citations
+  - text: UpToDate - Pediatrics
+    origin: citations
+  - text: AAP Clinical Practice Guidelines, American Academy of Ophthalmology Guidelines, UpToDate
+    origin: trace.source
 presentations:
   - Red or pink eye(s)
   - Eye discharge (watery, mucoid, or purulent)
@@ -16,6 +40,16 @@ presentations:
   - May have associated upper respiratory infection symptoms
   - Unilateral or bilateral presentation
   - Typically no vision changes or severe pain
+differentials:
+  - Viral conjunctivitis (watery discharge, bilateral, URI symptoms, preauricular lymphadenopathy)
+  - Bacterial conjunctivitis (purulent discharge, crusting, may be unilateral)
+  - Allergic conjunctivitis (itching prominent, bilateral, watery discharge, seasonal)
+  - Chemical/irritant conjunctivitis (exposure history, improves after irrigation)
+  - Corneal abrasion (pain, foreign body sensation, fluorescein uptake)
+  - Foreign body (unilateral, pain, visible on exam)
+  - Nasolacrimal duct obstruction (chronic tearing, discharge from birth, massage helps)
+  - Blepharitis (eyelid margin inflammation, crusting at lash base)
+  - Uveitis (eye pain, photophobia, decreased vision, requires urgent ophthalmology)
 workup:
   - Clinical history
   - Onset and duration
@@ -52,8 +86,8 @@ workup:
   - Failed antibiotic therapy
 treatment:
   - Viral conjunctivitis (MOST COMMON - 80% of infectious cases)
-  - Presentation: watery discharge, bilateral, associated URI symptoms, preauricular lymphadenopathy
-  - Treatment: supportive care only
+  - 'Presentation: watery discharge, bilateral, associated URI symptoms, preauricular lymphadenopathy'
+  - 'Treatment: supportive care only'
   - Cool compresses 4-6 times daily
   - Artificial tears for symptom relief
   - Hand hygiene to prevent spread
@@ -61,18 +95,18 @@ treatment:
   - Antibiotics NOT helpful
   - Highly contagious - exclude from school/daycare until discharge resolves
   - Bacterial conjunctivitis
-  - Presentation: purulent discharge, matting of lashes, may be unilateral
-  - Most common pathogens: H. influenzae, S. pneumoniae, M. catarrhalis
+  - 'Presentation: purulent discharge, matting of lashes, may be unilateral'
+  - 'Most common pathogens: H. influenzae, S. pneumoniae, M. catarrhalis'
   - Topical antibiotic therapy (first-line)
-  - Erythromycin 0.5% ointment: thin ribbon to lower lid 4 times daily for 5-7 days
+  - 'Erythromycin 0.5% ointment: thin ribbon to lower lid 4 times daily for 5-7 days'
   - Preferred for infants and young children (less stinging)
-  - Polytrim (polymyxin B-trimethoprim) drops: 1 drop 4 times daily for 5-7 days
-  - Azithromycin 1% drops: 1 drop twice daily for 2 days, then once daily for 5 days
-  - Fluoroquinolones (ciprofloxacin, moxifloxacin): reserve for contact lens wearers
+  - 'Polytrim (polymyxin B-trimethoprim) drops: 1 drop 4 times daily for 5-7 days'
+  - 'Azithromycin 1% drops: 1 drop twice daily for 2 days, then once daily for 5 days'
+  - 'Fluoroquinolones (ciprofloxacin, moxifloxacin): reserve for contact lens wearers'
   - Usually improves within 2-3 days
   - Can return to school/daycare after 24 hours of antibiotics
   - Allergic conjunctivitis
-  - Presentation: bilateral itching (prominent), watery discharge, seasonal pattern, personal/family history atopy
+  - 'Presentation: bilateral itching (prominent), watery discharge, seasonal pattern, personal/family history atopy'
   - Treatment
   - Avoid allergens if identified
   - Cool compresses
@@ -82,14 +116,14 @@ treatment:
   - Mast cell stabilizer drops (nedocromil, cromolyn) for prevention
   - Neonatal conjunctivitis (ophthalmia neonatorum)
   - Age-based differential
-  - "Day 1: chemical (silver nitrate prophylaxis)"
-  - "Days 2-5: gonococcal (N. gonorrhoeae)"
-  - "Days 5-14: chlamydial (C. trachomatis) - most common"
-  - "Beyond 2 weeks: HSV, other bacteria"
-  - Workup: bacterial culture, gonorrhea/chlamydia NAAT, consider HSV PCR
+  - 'Day 1: chemical (silver nitrate prophylaxis)'
+  - 'Days 2-5: gonococcal (N. gonorrhoeae)'
+  - 'Days 5-14: chlamydial (C. trachomatis) - most common'
+  - 'Beyond 2 weeks: HSV, other bacteria'
+  - 'Workup: bacterial culture, gonorrhea/chlamydia NAAT, consider HSV PCR'
   - Treatment
-  - Gonococcal: ceftriaxone 25-50 mg/kg IV/IM (max 125 mg) single dose PLUS topical erythromycin
-  - Chlamydial: oral azithromycin 20 mg/kg/day for 3 days OR erythromycin 50 mg/kg/day divided QID for 14 days
+  - 'Gonococcal: ceftriaxone 25-50 mg/kg IV/IM (max 125 mg) single dose PLUS topical erythromycin'
+  - 'Chlamydial: oral azithromycin 20 mg/kg/day for 3 days OR erythromycin 50 mg/kg/day divided QID for 14 days'
   - Hospitalize if concern for gonorrhea (can cause corneal perforation)
   - Treat mother and sexual partners
   - Infection control and prevention
@@ -99,34 +133,36 @@ treatment:
   - Discard eye makeup and contact lenses if bacterial
   - Clean and disinfect surfaces
 clinical_pearls:
-  - 'Viral conjunctivitis most common (80% of infectious cases) - watery discharge, bilateral, self-limited, NO antibiotics needed'
-  - 'Bacterial conjunctivitis has purulent discharge and crusting - topical antibiotics shorten duration by 1-2 days'
-  - 'Itching is hallmark of allergic conjunctivitis - antihistamine drops (olopatadine) highly effective'
-  - 'Neonatal conjunctivitis in first month of life requires cultures and systemic antibiotics for gonorrhea or chlamydia'
-  - 'Preauricular lymphadenopathy suggests viral etiology (adenovirus most common)'
-  - 'Contact lens wearers with purulent conjunctivitis need pseudomonas coverage (fluoroquinolone drops) and ophthalmology referral'
-  - 'Can return to school/daycare after 24 hours of antibiotic drops or when discharge resolves (viral)'
+  - Viral conjunctivitis most common (80% of infectious cases) - watery discharge, bilateral, self-limited, NO antibiotics needed
+  - Bacterial conjunctivitis has purulent discharge and crusting - topical antibiotics shorten duration by 1-2 days
+  - Itching is hallmark of allergic conjunctivitis - antihistamine drops (olopatadine) highly effective
+  - Neonatal conjunctivitis in first month of life requires cultures and systemic antibiotics for gonorrhea or chlamydia
+  - Preauricular lymphadenopathy suggests viral etiology (adenovirus most common)
+  - Contact lens wearers with purulent conjunctivitis need pseudomonas coverage (fluoroquinolone drops) and ophthalmology referral
+  - Can return to school/daycare after 24 hours of antibiotic drops or when discharge resolves (viral)
   - 'Red flags: vision loss, severe pain, corneal involvement, photophobia - require ophthalmology evaluation'
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Ophthalmology if vision changes, severe pain, corneal involvement, failed treatment, or neonatal conjunctivitis
   - Emergency ophthalmology for suspected gonococcal conjunctivitis (hyperacute, copious purulent discharge)
   - Allergy/immunology if severe recurrent allergic conjunctivitis
-differentials:
-  - Viral conjunctivitis (watery discharge, bilateral, URI symptoms, preauricular lymphadenopathy)
-  - Bacterial conjunctivitis (purulent discharge, crusting, may be unilateral)
-  - Allergic conjunctivitis (itching prominent, bilateral, watery discharge, seasonal)
-  - Chemical/irritant conjunctivitis (exposure history, improves after irrigation)
-  - Corneal abrasion (pain, foreign body sensation, fluorescein uptake)
-  - Foreign body (unilateral, pain, visible on exam)
-  - Nasolacrimal duct obstruction (chronic tearing, discharge from birth, massage helps)
-  - Blepharitis (eyelid margin inflammation, crusting at lash base)
-  - Uveitis (eye pain, photophobia, decreased vision, requires urgent ophthalmology)
-trace:
-  source: AAP Clinical Practice Guidelines, American Academy of Ophthalmology Guidelines, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - AAP (American Academy of Pediatrics) Clinical Guidelines
-  - American Academy of Ophthalmology Preferred Practice Patterns
-  - UpToDate - Pediatrics
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

@@ -1,75 +1,98 @@
 tree_id: NEU-MS
 name: Multiple sclerosis
+version: '1.0'
+status: draft
 family: Neurology
 specialty: Neurology
-icd10:
-- G35
-snomed:
-- '24700007'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Multiple sclerosis
-version: '1.0'
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G35
+  snomed:
+    - '24700007'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
+  - text: American Academy of Neurology (AAN) Practice Guidelines, American Stroke Association (ASA) Guidelines
+    origin: trace.source
 presentations:
-- Visual loss and limb weakness
-- Vision loss and weakness
-- Blurred vision and weakness
-- Visual disturbances and weakness
-- Vision problems and limb weakness
-- relapsing-remitting or progressive neurological symptoms
-- optic neuritis, sensory changes, weakness, ataxia
-- Visual loss or blurred vision
-- Vision changes
-- Limb weakness
-- Weakness in arms or legs
-- MRI with demyelinating lesions
-- 'Optic neuritis (25% present with): Painful vision loss, RAPD'
-- 'Sensory symptoms: Paresthesias, Lhermitte sign (electric shock with neck flexion)'
-- 'Motor: Unilateral weakness, spasticity, hyperreflexia, Babinski sign'
-- 'Cerebellar: Ataxia, intention tremor, nystagmus, dysarthria'
-workup:
-- 'MRI brain/spine with contrast: Periventricular white matter lesions, enhancement
-  indicates active inflammation'
-- 'LP: Oligoclonal bands (95% MS, absent in serum), elevated IgG index'
-- 'VEP (visual evoked potentials): Prolonged latency (optic nerve demyelination)'
-- 'Serology: Check for NMO-IgG (aquaporin-4 antibody) to exclude neuromyelitis optica'
-treatment:
-- 'Guideline-based treatment options for Multiple sclerosis include:'
-- 'Acute relapse: Methylprednisolone 1g IV daily x3-5 days (speeds recovery, doesn''t
-  change long-term outcome) (AAN 2024)'
-- 'First-line DMT: Interferon beta, glatiramer, teriflunomide, dimethyl fumarate (AAN
-  2024)'
-- 'High-efficacy DMT (aggressive disease): Natalizumab, ocrelizumab, alemtuzumab (AAN
-  2024)'
-- 'Symptomatic: Baclofen/tizanidine (spasticity), amantadine (fatigue), oxybutynin
-  (bladder) (AAN 2024)'
-- 'MRI monitoring: Annual MRI to assess disease activity and treatment response (AAN
-  2024)'
-clinical_pearls:
-- 'McDonald criteria: Dissemination in time (2+ attacks) and space (2+ CNS lesions)'
-- 'Relapsing-remitting MS (85%): Discrete attacks with full/partial recovery'
-- 'Primary progressive MS (10%): Gradual worsening from onset without relapses'
-- 'MRI: Periventricular white matter lesions (Dawson fingers), juxtacortical, infratentorial'
-- 'OCT (optical coherence tomography): Retinal nerve fiber layer thinning predicts
-  disability'
-- 'Disease-modifying therapy (DMT): Start early to prevent disability'
-referrals:
-- 'Neurology for: Suspected MS, initiation of DMT, disease monitoring'
-- 'Neuro-ophthalmology if: Optic neuritis, vision loss'
-- 'Urology if: Neurogenic bladder, urinary retention'
+  - Visual loss and limb weakness
+  - Vision loss and weakness
+  - Blurred vision and weakness
+  - Visual disturbances and weakness
+  - Vision problems and limb weakness
+  - relapsing-remitting or progressive neurological symptoms
+  - optic neuritis, sensory changes, weakness, ataxia
+  - Visual loss or blurred vision
+  - Vision changes
+  - Limb weakness
+  - Weakness in arms or legs
+  - MRI with demyelinating lesions
+  - 'Optic neuritis (25% present with): Painful vision loss, RAPD'
+  - 'Sensory symptoms: Paresthesias, Lhermitte sign (electric shock with neck flexion)'
+  - 'Motor: Unilateral weakness, spasticity, hyperreflexia, Babinski sign'
+  - 'Cerebellar: Ataxia, intention tremor, nystagmus, dysarthria'
 differentials:
   - Neuromyelitis optica
   - ADEM
   - Lyme disease
   - Sarcoidosis
   - Vasculitis
-trace:
-  source: American Academy of Neurology (AAN) Practice Guidelines, American Stroke
-    Association (ASA) Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - 'MRI brain/spine with contrast: Periventricular white matter lesions, enhancement indicates active inflammation'
+  - 'LP: Oligoclonal bands (95% MS, absent in serum), elevated IgG index'
+  - 'VEP (visual evoked potentials): Prolonged latency (optic nerve demyelination)'
+  - 'Serology: Check for NMO-IgG (aquaporin-4 antibody) to exclude neuromyelitis optica'
+treatment:
+  - 'Guideline-based treatment options for Multiple sclerosis include:'
+  - 'Acute relapse: Methylprednisolone 1g IV daily x3-5 days (speeds recovery, doesn''t change long-term outcome) (AAN 2024)'
+  - 'First-line DMT: Interferon beta, glatiramer, teriflunomide, dimethyl fumarate (AAN 2024)'
+  - 'High-efficacy DMT (aggressive disease): Natalizumab, ocrelizumab, alemtuzumab (AAN 2024)'
+  - 'Symptomatic: Baclofen/tizanidine (spasticity), amantadine (fatigue), oxybutynin (bladder) (AAN 2024)'
+  - 'MRI monitoring: Annual MRI to assess disease activity and treatment response (AAN 2024)'
+clinical_pearls:
+  - 'McDonald criteria: Dissemination in time (2+ attacks) and space (2+ CNS lesions)'
+  - 'Relapsing-remitting MS (85%): Discrete attacks with full/partial recovery'
+  - 'Primary progressive MS (10%): Gradual worsening from onset without relapses'
+  - 'MRI: Periventricular white matter lesions (Dawson fingers), juxtacortical, infratentorial'
+  - 'OCT (optical coherence tomography): Retinal nerve fiber layer thinning predicts disability'
+  - 'Disease-modifying therapy (DMT): Start early to prevent disability'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - 'Neurology for: Suspected MS, initiation of DMT, disease monitoring'
+  - 'Neuro-ophthalmology if: Optic neuritis, vision loss'
+  - 'Urology if: Neurogenic bladder, urinary retention'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

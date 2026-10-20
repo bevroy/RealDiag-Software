@@ -1,11 +1,33 @@
 tree_id: ID-CHLAMYDIA
 name: Chlamydia Trachomatis Infection
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Infectious Disease
-icd10: A56.9
-snomed: 105629000
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A56.9
+  snomed:
+    - '105629000'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: CDC Sexually Transmitted Infections Treatment Guidelines 2021
+    origin: trace.source
 presentations:
   - Asymptomatic in 70-95% of women and 50% of men
   - Mucopurulent cervical discharge in women
@@ -17,41 +39,6 @@ presentations:
   - Rectal pain or discharge (proctitis)
   - Pharyngitis (usually asymptomatic)
   - Conjunctivitis in neonates or adults
-workup:
-  - NAAT (nucleic acid amplification test) - most sensitive and specific
-  - Women: endocervical swab, vaginal swab (self-collected acceptable), or first-catch urine
-  - Men: first-catch urine or urethral swab
-  - Rectal NAAT if receptive anal intercourse
-  - Pharyngeal NAAT if receptive oral sex
-  - Test for co-infection with gonorrhea (simultaneous NAAT available)
-  - HIV testing and other STI screening as appropriate
-  - Pregnancy test in women of reproductive age
-  - Consider testing for other STIs (syphilis, hepatitis B/C, HIV)
-treatment:
-  - First-line: Doxycycline 100 mg PO BID x 7 days
-  - Alternative: Azithromycin 1 g PO single dose (lower efficacy, use if adherence concern)
-  - Pregnancy: Azithromycin 1 g PO single dose (doxycycline contraindicated)
-  - Alternative in pregnancy: Amoxicillin 500 mg PO TID x 7 days
-  - Treat all sexual partners from past 60 days (or most recent partner if >60 days)
-  - Expedited partner therapy (EPT) - provide prescription for partners without exam
-  - Abstain from sexual activity for 7 days after single-dose therapy or until completion of 7-day regimen
-  - Test of cure 3 weeks after treatment if pregnant or symptoms persist
-  - Retest 3 months after treatment (high reinfection rate 10-20%)
-  - Report to health department (nationally notifiable disease)
-clinical_pearls:
-  - "Most common reportable STI in the United States (1.6 million cases/year)"
-  - "Screen all sexually active women age <25 annually; older women with risk factors"
-  - "Screen men who have sex with men (MSM) at least annually; every 3-6 months if high risk"
-  - "Untreated chlamydia can lead to PID (10-15%), ectopic pregnancy, and infertility in women"
-  - "Lymphogranuloma venereum (LGV) is invasive form caused by serovars L1-L3 - treat x21 days"
-  - "Reiter syndrome (reactive arthritis) can follow urogenital or GI chlamydia infection"
-  - "Neonatal transmission during delivery causes conjunctivitis (5-12 days) or pneumonia (1-3 months)"
-  - "Azithromycin resistance emerging - doxycycline preferred when feasible"
-  - "Partner notification is critical - 20-40% of partners infected"
-referrals:
-  - Gynecology/Urology if PID, epididymitis, or complications develop
-  - Public health for partner notification and contact tracing
-  - Infectious Disease for complicated infections (LGV, treatment failures)
 differentials:
   - Gonorrhea (similar presentation, test simultaneously with NAAT)
   - Nongonococcal urethritis (Mycoplasma genitalium, Ureaplasma, Trichomonas)
@@ -59,12 +46,59 @@ differentials:
   - Urinary tract infection (urgency and frequency more prominent, pyuria)
   - Mycoplasma genitalium (similar presentation, requires different treatment)
   - Cervicitis from other causes (HSV, bacterial vaginosis, trauma)
-trace:
-  source: CDC Sexually Transmitted Infections Treatment Guidelines 2021
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+workup:
+  - NAAT (nucleic acid amplification test) - most sensitive and specific
+  - 'Women: endocervical swab, vaginal swab (self-collected acceptable), or first-catch urine'
+  - 'Men: first-catch urine or urethral swab'
+  - Rectal NAAT if receptive anal intercourse
+  - Pharyngeal NAAT if receptive oral sex
+  - Test for co-infection with gonorrhea (simultaneous NAAT available)
+  - HIV testing and other STI screening as appropriate
+  - Pregnancy test in women of reproductive age
+  - Consider testing for other STIs (syphilis, hepatitis B/C, HIV)
+treatment:
+  - 'First-line: Doxycycline 100 mg PO BID x 7 days'
+  - 'Alternative: Azithromycin 1 g PO single dose (lower efficacy, use if adherence concern)'
+  - 'Pregnancy: Azithromycin 1 g PO single dose (doxycycline contraindicated)'
+  - 'Alternative in pregnancy: Amoxicillin 500 mg PO TID x 7 days'
+  - Treat all sexual partners from past 60 days (or most recent partner if >60 days)
+  - Expedited partner therapy (EPT) - provide prescription for partners without exam
+  - Abstain from sexual activity for 7 days after single-dose therapy or until completion of 7-day regimen
+  - Test of cure 3 weeks after treatment if pregnant or symptoms persist
+  - Retest 3 months after treatment (high reinfection rate 10-20%)
+  - Report to health department (nationally notifiable disease)
+clinical_pearls:
+  - Most common reportable STI in the United States (1.6 million cases/year)
+  - Screen all sexually active women age <25 annually; older women with risk factors
+  - Screen men who have sex with men (MSM) at least annually; every 3-6 months if high risk
+  - Untreated chlamydia can lead to PID (10-15%), ectopic pregnancy, and infertility in women
+  - Lymphogranuloma venereum (LGV) is invasive form caused by serovars L1-L3 - treat x21 days
+  - Reiter syndrome (reactive arthritis) can follow urogenital or GI chlamydia infection
+  - Neonatal transmission during delivery causes conjunctivitis (5-12 days) or pneumonia (1-3 months)
+  - Azithromycin resistance emerging - doxycycline preferred when feasible
+  - Partner notification is critical - 20-40% of partners infected
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Gynecology/Urology if PID, epididymitis, or complications develop
+  - Public health for partner notification and contact tracing
+  - Infectious Disease for complicated infections (LGV, treatment failures)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

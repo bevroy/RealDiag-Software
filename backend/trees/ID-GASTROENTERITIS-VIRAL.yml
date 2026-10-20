@@ -1,11 +1,33 @@
 tree_id: ID-GASTROENTERITIS-VIRAL
 name: Viral Gastroenteritis
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Gastroenterology
-icd10: A08.4
-snomed: 25225006
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A08.4
+  snomed:
+    - '25225006'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: CDC Norovirus Guidelines, AAP Clinical Practice Guidelines for Acute Gastroenteritis 2016
+    origin: trace.source
 presentations:
   - Acute watery diarrhea (non-bloody)
   - Nausea and vomiting (often prominent)
@@ -17,6 +39,13 @@ presentations:
   - Symptoms typically resolve in 1-3 days
   - Minimal to no fecal leukocytes
   - Exposure to young children or healthcare setting
+differentials:
+  - Bacterial gastroenteritis (high fever, bloody diarrhea, fecal leukocytes, more severe)
+  - Food poisoning (Staph aureus, Bacillus cereus) - rapid onset, short duration
+  - Parasitic infection (Giardia, Cryptosporidium) - more prolonged course
+  - C. difficile colitis (recent antibiotic use, healthcare-associated)
+  - Inflammatory bowel disease (chronic or recurrent symptoms, weight loss, blood)
+  - Medication-induced diarrhea (antibiotics, NSAIDs, metformin, antacids)
 workup:
   - Clinical diagnosis based on symptoms and epidemiology
   - No routine testing needed for most cases (self-limited)
@@ -35,40 +64,50 @@ treatment:
   - No antibiotics (viral etiology, not effective)
   - Probiotics (Lactobacillus rhamnosus, Saccharomyces boulardii) may reduce duration
   - Zinc supplementation in children 6 months-5 years (10-20 mg daily x 10-14 days)
-  - Return to normal diet as tolerated; avoid prolonged dietary restrictions
+  - 'Patient advice: Return to normal diet as tolerated; avoid prolonged dietary restrictions'
   - Breastfeeding should continue in infants
-treatment:
   - Isolate patient to prevent transmission (contact precautions)
   - Hand hygiene with soap and water (alcohol sanitizers less effective for norovirus)
   - Disinfect contaminated surfaces with bleach solution
 clinical_pearls:
-  - "Norovirus is most common cause of viral gastroenteritis in all age groups (58% of cases in US)"
-  - "Rotavirus was leading cause in children before vaccine; now rare in vaccinated populations"
-  - "Norovirus is highly contagious - low infectious dose (10-100 viral particles), prolonged shedding"
-  - "Vomiting more prominent than diarrhea suggests viral (especially norovirus)"
-  - "Dehydration is main complication, especially in young children and elderly"
-  - "Viral shedding can persist 2+ weeks after symptoms resolve"
-  - "Outbreaks common in closed settings (cruise ships, schools, nursing homes, hospitals)"
-  - "No specific antiviral therapy available for viral gastroenteritis"
-  - "Rotavirus vaccine (RotaTeq, Rotarix) highly effective - given to infants at 2, 4, 6 months"
-  - "Post-infectious lactose intolerance common - avoid dairy for 1-2 weeks if symptoms recur"
+  - Norovirus is most common cause of viral gastroenteritis in all age groups (58% of cases in US)
+  - Rotavirus was leading cause in children before vaccine; now rare in vaccinated populations
+  - Norovirus is highly contagious - low infectious dose (10-100 viral particles), prolonged shedding
+  - Vomiting more prominent than diarrhea suggests viral (especially norovirus)
+  - Dehydration is main complication, especially in young children and elderly
+  - Viral shedding can persist 2+ weeks after symptoms resolve
+  - Outbreaks common in closed settings (cruise ships, schools, nursing homes, hospitals)
+  - No specific antiviral therapy available for viral gastroenteritis
+  - Rotavirus vaccine (RotaTeq, Rotarix) highly effective - given to infants at 2, 4, 6 months
+  - Post-infectious lactose intolerance common - avoid dairy for 1-2 weeks if symptoms recur
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department if severe dehydration, altered mental status, or unable to tolerate oral intake
   - Gastroenterology if symptoms persist >7 days or concern for other etiology
   - Public Health if outbreak setting for investigation and control measures
-differentials:
-  - Bacterial gastroenteritis (high fever, bloody diarrhea, fecal leukocytes, more severe)
-  - Food poisoning (Staph aureus, Bacillus cereus) - rapid onset, short duration
-  - Parasitic infection (Giardia, Cryptosporidium) - more prolonged course
-  - C. difficile colitis (recent antibiotic use, healthcare-associated)
-  - Inflammatory bowel disease (chronic or recurrent symptoms, weight loss, blood)
-  - Medication-induced diarrhea (antibiotics, NSAIDs, metformin, antacids)
-trace:
-  source: CDC Norovirus Guidelines, AAP Clinical Practice Guidelines for Acute Gastroenteritis 2016
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

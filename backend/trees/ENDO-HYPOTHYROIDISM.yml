@@ -1,72 +1,158 @@
 tree_id: ENDO-HYPOTHYROIDISM
 name: Hypothyroidism
+version: '1.0'
+status: draft
 family: Endocrinology
 specialty: Endocrinology
-icd10:
-- E03.9
-snomed:
-- '40930008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Hypothyroidism
-version: '1.0'
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E03.9
+  snomed:
+    - '40930008'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: American Diabetes Association (ADA) Standards of Care, Endocrine Society Clinical Practice Guidelines
+    origin: trace.source
 presentations:
-- Fatigue and lethargy
-- Cold intolerance
-- Weight gain (modest, 5-10 lbs)
-- Constipation
-- Dry, coarse skin
-- Hair loss (scalp and lateral eyebrows)
-- Hoarseness
-- Muscle aches and cramps
-- Depression and cognitive impairment ("brain fog")
-- Menstrual irregularities (menorrhagia)
-- Bradycardia
-- Delayed deep tendon reflexes (slow relaxation phase)
-- Periorbital edema and non-pitting edema
-- Gradual onset of symptoms (months to years)
-workup:
-- TSH (elevated in primary hypothyroidism, low/normal in secondary)
-- Free T4 (low - confirms hypothyroidism)
-- Anti-TPO antibodies if Hashimoto's suspected (helps predict progression in subclinical
-  cases)
-- 'If secondary suspected: Morning cortisol, IGF-1, prolactin, LH/FSH, pituitary MRI'
-treatment:
-- 'Guideline-based treatment options for Hypothyroidism include:'
-- Levothyroxine 1.6 mcg/kg/day PO (round to 25, 50, 75, 88, 100, 112, 125, 137, 150
-  mcg strengths) (ADA 2024)
-- 'Start lower in elderly or cardiac disease: 25-50 mcg daily (ADA 2024)'
-- Recheck TSH in 6-8 weeks, adjust dose by 12.5-25 mcg increments until TSH normalized
-  (ADA 2024)
-- 'Goal TSH 0.5-2.5 mIU/L (tighter range if pregnant: 0.1-2.5 by trimester) (ADA 2024)'
-- Once stable, check TSH annually - dose may need adjustment with weight changes or
-  pregnancy (ADA 2024)
-clinical_pearls:
-- 'Primary (95%): Thyroid gland failure (Hashimoto''s, post-RAI, post-thyroidectomy).
-  Secondary (5%): Pituitary failure'
-- 'Subclinical hypothyroidism: Elevated TSH with normal free T4 - treat if TSH >10
-  or symptoms/pregnancy'
-- 'Hashimoto''s thyroiditis: Anti-TPO antibodies positive in 90%, gradual thyroid
-  destruction'
-- 'Medication effects: Amiodarone, lithium, interferon can cause hypothyroidism'
-- Levothyroxine must be taken on empty stomach, 30-60 min before breakfast (food reduces
-  absorption)
-referrals:
-- 'Endocrinology if: Secondary hypothyroidism, pregnant, difficulty controlling TSH,
-  or large goiter'
-- Cardiology if new cardiac symptoms after starting levothyroxine (reduce dose)
+  - Fatigue and lethargy
+  - Cold intolerance
+  - Weight gain (modest, 5-10 lbs)
+  - Constipation
+  - Dry, coarse skin
+  - Hair loss (scalp and lateral eyebrows)
+  - Hoarseness
+  - Muscle aches and cramps
+  - Depression and cognitive impairment ("brain fog")
+  - Menstrual irregularities (menorrhagia)
+  - Bradycardia
+  - Delayed deep tendon reflexes (slow relaxation phase)
+  - Periorbital edema and non-pitting edema
+  - Gradual onset of symptoms (months to years)
 differentials:
   - Subclinical hypothyroidism
   - Euthyroid sick syndrome
   - Depression
   - Anemia
-trace:
-  source: American Diabetes Association (ADA) Standards of Care, Endocrine Society
-    Clinical Practice Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - TSH (elevated in primary hypothyroidism, low/normal in secondary)
+  - Free T4 (low - confirms hypothyroidism)
+  - Anti-TPO antibodies if Hashimoto's suspected (helps predict progression in subclinical cases)
+  - 'If secondary suspected: Morning cortisol, IGF-1, prolactin, LH/FSH, pituitary MRI'
+treatment:
+  - 'Guideline-based treatment options for Hypothyroidism include:'
+  - Levothyroxine 1.6 mcg/kg/day PO (round to 25, 50, 75, 88, 100, 112, 125, 137, 150 mcg strengths) (ADA 2024)
+  - 'Consider starting lower in elderly or cardiac disease: 25-50 mcg daily (ADA 2024)'
+  - Recheck TSH in 6-8 weeks, adjust dose by 12.5-25 mcg increments until TSH normalized (ADA 2024)
+  - 'Goal TSH 0.5-2.5 mIU/L (tighter range if pregnant: 0.1-2.5 by trimester) (ADA 2024)'
+  - Once stable, check TSH annually - dose may need adjustment with weight changes or pregnancy (ADA 2024)
+clinical_pearls:
+  - 'Primary (95%): Thyroid gland failure (Hashimoto''s, post-RAI, post-thyroidectomy). Secondary (5%): Pituitary failure'
+  - 'Subclinical hypothyroidism: Elevated TSH with normal free T4 - treat if TSH >10 or symptoms/pregnancy'
+  - 'Hashimoto''s thyroiditis: Anti-TPO antibodies positive in 90%, gradual thyroid destruction'
+  - 'Medication effects: Amiodarone, lithium, interferon can cause hypothyroidism'
+  - Levothyroxine must be taken on empty stomach, 30-60 min before breakfast (food reduces absorption)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - 'Endocrinology if: Secondary hypothyroidism, pregnant, difficulty controlling TSH, or large goiter'
+  - Cardiology if new cardiac symptoms after starting levothyroxine (reduce dose)
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria:
+  finding_label: hypothyroidism
+  source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - 'levothyroxine'
+    - 'liothyronine'
+    - 'thyroid desiccated'
+    - 'armour thyroid'
+  known_condition:
+    icd10_prefixes:
+      - E01
+      - E02
+      - E03
+      - E89.0
+    snomed:
+      - '40930008'
+  severity_default_reason: TSH above reference range with free T4 normal or not measured (subclinical range).
+  severity:
+    - type: any_met
+      items:
+        - free_t4_low
+      level: not rated
+      reason: TSH above and free T4 below the lab reference ranges (overt range).
+  items:
+    - id: tsh_high
+      label: TSH above the lab's reference range
+      resource: lab
+      loinc:
+        - 3016-3
+        - 11580-8
+      operator: above_ref_high
+      unit: mIU/L
+      lookback_days: 365
+      details_met: '{reason}'
+      details_not_met: '{reason}'
+      details_unusable: '{problem}.'
+      missing_test: TSH
+      source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
+    - id: free_t4_low
+      label: Free T4 below the lab's reference range
+      role: supporting
+      resource: lab
+      loinc:
+        - 3024-7
+        - 14920-3
+      operator: below_ref_low
+      unit: ng/dL
+      lookback_days: 365
+      details_met: '{reason}'
+      details_not_met: '{reason}'
+      source: ATA/AACE Clinical Practice Guidelines for Hypothyroidism in Adults (2012); ATA Guidelines for the Treatment of Hypothyroidism (2014)
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.

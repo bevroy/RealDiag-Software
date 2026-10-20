@@ -16,6 +16,7 @@ Usage:
     python validate_rules.py --all            # All checks + report
 """
 
+import re
 import yaml
 import os
 import sys
@@ -24,9 +25,22 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import argparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from services.lab_units import ANALYTES, analyte_for, canonical_unit  # noqa: E402
+from services.tree_schema import (  # noqa: E402
+    HOMEOPATHY_VALIDATION_STATEMENT,
+    node_format,
+    node_list,
+    REQUIRED_FIELDS as REQUIRED_TREE_FIELDS,
+    REQUIRED_NON_EMPTY as REQUIRED_NON_EMPTY_TREE_FIELDS,
+    STATUS_VALUES,
+    URGENCY_VALUES,
+)
+
 # Configuration
 RULES_DIR = Path(__file__).parent.parent / "rules"
 TREES_DIR = Path(__file__).parent.parent / "trees"
+SCREENING_RULES = Path(__file__).parent.parent / "screening" / "uspstf_rules.yml"
 MAX_AGE_DAYS = 365  # Flag rules older than 1 year
 REQUIRED_RULE_FIELDS = [
     "family",
@@ -56,6 +70,7 @@ class ValidationResult:
         self.errors = []
         self.warnings = []
         self.info = []
+        self.node_formats = {}  # node format -> tree ids (see tree_schema.node_format)
         
     def add_error(self, file_path, message):
         self.errors.append(f"❌ {file_path}: {message}")
@@ -217,32 +232,303 @@ def check_citations(file_path: Path, data: Dict, result: ValidationResult):
         )
 
 
+def find_duplicate_top_level_keys(file_path: Path) -> List[str]:
+    """PyYAML silently keeps the last of two identical keys; report them instead."""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        node = yaml.compose(f)
+    if not isinstance(node, yaml.MappingNode):
+        return []
+    keys = [k.value for k, _ in node.value]
+    return sorted({k for k in keys if keys.count(k) > 1})
+
+
 def validate_decision_tree(file_path: Path, result: ValidationResult):
-    """Validate decision tree YAML files."""
+    """Validate a decision tree against the standard template (services/tree_schema.py)."""
     data, error = load_yaml_file(file_path)
     
     if error:
         result.add_error(file_path.name, error)
         return
+    if not isinstance(data, dict):
+        result.add_error(file_path.name, "Tree must be a YAML mapping")
+        return
+
+    for key in find_duplicate_top_level_keys(file_path):
+        result.add_error(file_path.name, f"Duplicate top-level key: {key}")
         
     # Check required fields
-    required_tree_fields = ["id", "title", "entry", "nodes"]
-    for field in required_tree_fields:
+    for field in REQUIRED_TREE_FIELDS:
         if field not in data:
             result.add_error(file_path.name, f"Missing required field: {field}")
-            
-    # Check for version and last_updated
-    if "version" not in data:
-        result.add_warning(file_path.name, "No version specified")
-    if "last_updated" not in data:
-        result.add_warning(file_path.name, "No last_updated date specified")
-        
-    # Check nodes structure
-    if "nodes" in data:
-        nodes = data.get("nodes", [])
+    for field in REQUIRED_NON_EMPTY_TREE_FIELDS:
+        if field in data and not data.get(field):
+            result.add_error(file_path.name, f"Required field is empty: {field}")
+
+    # Urgency must be one of the standard values
+    urgency = data.get("urgency")
+    if "urgency" in data and urgency in ("", None):
+        result.add_error(file_path.name, f"Urgency is empty (use one of: {', '.join(URGENCY_VALUES)})")
+    elif "urgency" in data and urgency not in URGENCY_VALUES:
+        result.add_error(
+            file_path.name,
+            f"Non-standard urgency {urgency!r} (use one of: {', '.join(URGENCY_VALUES)})"
+        )
+
+    if "status" in data and data.get("status") not in STATUS_VALUES:
+        result.add_error(file_path.name, f"Invalid status {data.get('status')!r} (use one of: {', '.join(STATUS_VALUES)})")
+    if "version" in data and not isinstance(data.get("version"), str):
+        result.add_error(file_path.name, f"Version must be a string, got {type(data.get('version')).__name__}")
+    if "secondary_specialties" in data and not isinstance(data.get("secondary_specialties"), list):
+        result.add_error(file_path.name, "secondary_specialties must be a list")
+
+    codes = data.get("codes")
+    if "codes" in data:
+        if not isinstance(codes, dict):
+            result.add_error(file_path.name, "codes must be a mapping with icd10, snomed and icpc2 lists")
+        else:
+            for system in ("icd10", "snomed", "icpc2"):
+                if not isinstance(codes.get(system), list):
+                    result.add_error(file_path.name, f"codes.{system} must be a list")
+
+    applies = data.get("applies_to")
+    if "applies_to" in data:
+        if not isinstance(applies, dict) or not {"sex", "age_min", "age_max"} <= set(applies):
+            result.add_error(file_path.name, "applies_to must be a mapping with sex, age_min and age_max")
+        elif applies.get("sex") not in (None, "male", "female"):
+            result.add_error(file_path.name, f"applies_to.sex must be male, female or empty, got {applies.get('sex')!r}")
+
+    homeopathy = data.get("homeopathy")
+    if "homeopathy" in data:
+        if not isinstance(homeopathy, dict) or not isinstance(homeopathy.get("remedies"), list):
+            result.add_error(file_path.name, "homeopathy must be a mapping with validation_statement and a remedies list")
+        elif homeopathy.get("validation_statement") != HOMEOPATHY_VALIDATION_STATEMENT and homeopathy.get("remedies"):
+            result.add_warning(file_path.name, "homeopathy.validation_statement differs from the standard statement")
+
+    if "sources" in data and not isinstance(data.get("sources"), list):
+        result.add_error(file_path.name, "sources must be a list")
+    if "change_log" in data and not (isinstance(data.get("change_log"), list) and data["change_log"]):
+        result.add_error(file_path.name, "change_log must be a non-empty list")
+
+    # Check nodes structure (list of nodes, or mapping of id -> node)
+    nodes = data.get("nodes") or []
+    if isinstance(nodes, list):
         for idx, node in enumerate(nodes):
-            if "id" not in node:
+            if not isinstance(node, dict) or "id" not in node:
                 result.add_error(file_path.name, f"Node #{idx+1}: Missing 'id' field")
+    elif not isinstance(nodes, dict):
+        result.add_error(file_path.name, "nodes must be a list or mapping")
+        return
+    if nodes:
+        node_ids = {n.get("id") for n in node_list(data)}
+        entry = data.get("entry_point")
+        if not entry:
+            result.add_error(file_path.name, "Tree has nodes but no entry_point")
+        elif entry not in node_ids:
+            result.add_error(file_path.name, f"entry_point '{entry}' does not match any node id")
+
+    fmt = node_format(data)
+    result.node_formats[fmt] = result.node_formats.get(fmt, []) + [file_path.stem]
+    if fmt == "content":
+        count = len(node_list(data))
+        shape = "a single node" if count == 1 else f"{count} nodes"
+        result.add_warning(
+            file_path.name,
+            f"Tree has {shape} and no decision branches; the engine reports it as not evaluated"
+        )
+
+    for problem in criteria_problems(data.get("criteria")):
+        result.add_error(file_path.name, f"criteria: {problem}")
+
+    for problem in list_item_problems(data):
+        result.add_error(file_path.name, problem)
+
+
+# Fields whose entries are structured data rather than display text.
+STRUCTURED_FIELDS = {"sources", "change_log", "nodes", "criteria", "codes", "applies_to", "homeopathy",
+                     "entry_point", "metadata"}
+# differentials may group diagnoses: {category, diagnoses[, origin]}
+DIFFERENTIAL_GROUP_KEYS = {"category", "diagnoses", "origin"}
+
+
+def list_item_problems(tree: Dict) -> List[str]:
+    """Text-list items must be plain text (or a heading over a nested list).
+
+    An unquoted "- Chest pain: substernal ..." loads as a key-value pair,
+    not text, and is dropped or mangled by code that expects text. Quote it.
+    """
+    problems: List[str] = []
+
+    def check(value, path: str, field: str):
+        if isinstance(value, dict):
+            for key, inner in value.items():
+                check(inner, f"{path}.{key}", field)
+            return
+        if not isinstance(value, list):
+            return
+        for i, item in enumerate(value):
+            where = f"{path}[{i}]"
+            if isinstance(item, str) or item is None:
+                continue
+            if isinstance(item, dict):
+                keys = set(map(str, item))
+                if len(item) == 1 and isinstance(next(iter(item.values())), list):
+                    check(next(iter(item.values())), where, field)      # heading over a nested list
+                    continue
+                if field == "differentials" and keys <= DIFFERENTIAL_GROUP_KEYS and "diagnoses" in keys:
+                    check(item.get("diagnoses"), f"{where}.diagnoses", field)
+                    continue
+                if len(item) == 1:
+                    key, inner = next(iter(item.items()))
+                    text = f"{key}: {inner}" if inner is not None else f"{key}:"
+                    problems.append(f"{where} loads as a key-value pair, not text; quote it: '{text[:80]}'")
+                else:
+                    problems.append(f"{where} is a mapping ({', '.join(sorted(keys))}), not text")
+            elif isinstance(item, list):
+                check(item, where, field)
+            else:
+                problems.append(f"{where} is {type(item).__name__}, not text; quote it: '{item}'")
+
+    for field, value in tree.items():
+        if field not in STRUCTURED_FIELDS:
+            check(value, field, field)
+    return problems
+
+
+CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
+CRITERIA_ROLES = {"core", "supporting"}
+CRITERIA_DISPLAY = {"always", "when_met", "when_found"}
+CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
+SEVERITY_LEVELS = {"low", "moderate", "high", "critical", "unknown", "not rated"}
+SEVERITY_RULE_TYPES = {"reference_multiple", "count_met", "unusable", "value", "any_met", "all_groups"}
+LOINC_PATTERN = re.compile(r"^\d{1,7}-\d$")
+
+
+def criteria_problems(criteria) -> List[str]:
+    """Problems in a tree's `criteria` section (empty list = valid).
+
+    `criteria: []` means the tree has no chart-evaluation criteria.
+    """
+    if criteria in (None, []):
+        return []
+    if not isinstance(criteria, dict):
+        return ["must be a mapping with an 'items' list (or [] for none)"]
+    problems = []
+    for key in ("finding_label", "source"):
+        if not str(criteria.get(key) or "").strip():
+            problems.append(f"missing '{key}'")
+    if criteria.get("display", "always") not in CRITERIA_DISPLAY:
+        problems.append(f"display must be one of {sorted(CRITERIA_DISPLAY)}")
+    meds = criteria.get("related_medications")
+    if meds is not None and (not isinstance(meds, list) or not meds
+                             or not all(isinstance(m, str) and m.strip(" *") for m in meds)):
+        problems.append("related_medications must be a non-empty list of names ('*suffix' allowed)")
+    terms = criteria.get("complaint_terms")
+    if terms is not None and (not isinstance(terms, list) or not terms
+                              or not all(isinstance(t, str) and t.strip() for t in terms)):
+        problems.append("complaint_terms must be a non-empty list of non-empty strings")
+    if criteria.get("probability", "met_over_known") not in CRITERIA_PROBABILITY:
+        problems.append(f"probability must be one of {sorted(CRITERIA_PROBABILITY)}")
+    if criteria.get("severity_default", "not rated") not in SEVERITY_LEVELS:
+        problems.append(f"severity_default must be one of {sorted(SEVERITY_LEVELS)}")
+
+    items = criteria.get("items")
+    if not isinstance(items, list) or not items:
+        return problems + ["'items' must be a non-empty list"]
+    ids = set()
+    groups = {i.get("group") for i in items if isinstance(i, dict) and i.get("group")}
+    for index, item in enumerate(items):
+        where = f"item {item.get('id', index + 1)}" if isinstance(item, dict) else f"item {index + 1}"
+        if not isinstance(item, dict):
+            problems.append(f"{where}: must be a mapping")
+            continue
+        if item.get("resource") == "problem_list":
+            for key in ("id", "label", "source"):
+                if not str(item.get(key) or "").strip():
+                    problems.append(f"{where}: missing '{key}'")
+            if not (item.get("icd10_prefixes") or item.get("snomed")):
+                problems.append(f"{where}: problem_list items need icd10_prefixes or snomed codes")
+            if item.get("id") in ids:
+                problems.append(f"{where}: duplicate id")
+            ids.add(item.get("id"))
+            continue
+        for key in ("id", "label", "loinc", "operator", "unit", "source"):
+            if item.get(key) in (None, "", []):
+                problems.append(f"{where}: missing '{key}'")
+        if item.get("id") in ids:
+            problems.append(f"{where}: duplicate id")
+        ids.add(item.get("id"))
+        codes = item.get("loinc") or []
+        if not isinstance(codes, list) or not all(LOINC_PATTERN.match(str(c)) for c in codes):
+            problems.append(f"{where}: loinc must be a list of LOINC codes like '4548-4'")
+            codes = []
+        if item.get("resource", "lab") not in ("lab", "vital"):
+            problems.append(f"{where}: resource must be 'lab', 'vital' or 'problem_list'")
+        if "aggregate" in item and item["aggregate"] != "daily_mean":
+            problems.append(f"{where}: aggregate must be 'daily_mean'")
+        for key in ("min_days", "max_days"):
+            if key in item and not (isinstance(item[key], int) and item[key] > 0):
+                problems.append(f"{where}: {key} must be a positive whole number")
+        if item.get("role", "core") not in CRITERIA_ROLES:
+            problems.append(f"{where}: role must be one of {sorted(CRITERIA_ROLES)}")
+        op = item.get("operator")
+        if op not in CRITERIA_OPERATORS:
+            problems.append(f"{where}: unknown operator {op!r}")
+        value = item.get("value")
+        if op in (">", ">=", "<", "<=") and not isinstance(value, (int, float)):
+            problems.append(f"{where}: operator {op} needs a numeric 'value'")
+        if op in ("between", "outside") and not (
+                isinstance(value, list) and len(value) == 2 and all(isinstance(v, (int, float)) for v in value)
+                and value[0] < value[1]):
+            problems.append(f"{where}: operator {op} needs 'value: [low, high]' with low < high")
+        if op in ("above_ref_high", "below_ref_low") and value is not None:
+            problems.append(f"{where}: operator {op} compares with the lab's reference range; remove 'value'")
+        for key in ("lookback_days", "min_occurrences", "min_span_days"):
+            if key in item and not (isinstance(item[key], int) and item[key] > 0):
+                problems.append(f"{where}: {key} must be a positive whole number")
+        sex = (item.get("applies_to") or {}).get("sex")
+        if sex not in (None, "male", "female"):
+            problems.append(f"{where}: applies_to.sex must be male or female")
+        # Unit: must be the analyte's canonical unit when units are checked
+        analytes = {analyte_for(c) for c in codes}
+        if item.get("unit_check", True) and codes:
+            analyte = item.get("analyte") or (analytes.pop() if len(analytes) == 1 else None)
+            if analyte is None or analyte not in ANALYTES:
+                problems.append(f"{where}: no unit conversion is defined for LOINC {codes} "
+                                "(add it to lab_units.py or set unit_check: false)")
+            elif str(item.get("unit")) != canonical_unit(analyte):
+                problems.append(f"{where}: unit must be {canonical_unit(analyte)!r} for {analyte} "
+                                f"(results are converted to it), not {item.get('unit')!r}")
+
+    for rule in criteria.get("severity") or []:
+        kind = rule.get("type") if isinstance(rule, dict) else None
+        if kind not in SEVERITY_RULE_TYPES:
+            problems.append(f"severity rule {rule!r}: unknown type")
+            continue
+        refs = [rule["item"]] if "item" in rule else list(rule.get("items", []))
+        for ref in refs:
+            if ref not in ids:
+                problems.append(f"severity rule {kind}: refers to unknown item {ref!r}")
+        for group in rule.get("groups", []) + ([rule["group"]] if rule.get("group") else []):
+            if group not in groups:
+                problems.append(f"severity rule {kind}: refers to unknown group {group!r}")
+        if "level" in rule and rule["level"] not in SEVERITY_LEVELS:
+            problems.append(f"severity rule {kind}: unknown level {rule['level']!r}")
+    for key in ("suggest_when", "confirm", "known_condition"):
+        if key in criteria and not isinstance(criteria[key], dict):
+            problems.append(f"'{key}' must be a mapping")
+
+    def check_rule(rule):
+        if not isinstance(rule, dict):
+            problems.append("suggest_when rules must be mappings")
+            return
+        for sub in rule.get("any", []):
+            check_rule(sub)
+        for group in rule.get("all_groups", []) + ([rule["group"]] if rule.get("group") else []):
+            if group not in groups:
+                problems.append(f"suggest_when refers to unknown group {group!r}")
+    if isinstance(criteria.get("suggest_when"), dict):
+        check_rule(criteria["suggest_when"])
+    return problems
 
 
 def generate_report(result: ValidationResult, rules_files: List[Path], trees_files: List[Path]):
@@ -273,6 +559,52 @@ def generate_report(result: ValidationResult, rules_files: List[Path], trees_fil
         print("  4. Review and update outdated rules per current guidelines")
         
     print("\n" + "="*70)
+
+
+SCREENING_EVIDENCE_KINDS = {"lab", "vital", "procedure", "imaging"}
+SCREENING_STATUSES = {"draft", "review", "approved", "retired"}
+
+
+def screening_rule_problems(data: Dict) -> List[str]:
+    """Each screening rule needs an id, title, status, cited source, population and evidence."""
+    problems: List[str] = []
+    rules = data.get("rules")
+    if not isinstance(rules, list) or not rules:
+        return ["rules must be a non-empty list"]
+    seen = set()
+    for i, rule in enumerate(rules):
+        where = f"rules[{i}] ({rule.get('id', '?') if isinstance(rule, dict) else '?'})"
+        if not isinstance(rule, dict):
+            problems.append(f"{where}: must be a mapping")
+            continue
+        for key in ("id", "title", "status", "source", "population", "evidence", "grades"):
+            if not rule.get(key):
+                problems.append(f"{where}: missing {key}")
+        if rule.get("id") in seen:
+            problems.append(f"{where}: duplicate id")
+        seen.add(rule.get("id"))
+        if rule.get("status") and rule["status"] not in SCREENING_STATUSES:
+            problems.append(f"{where}: status must be one of {sorted(SCREENING_STATUSES)}")
+        source = rule.get("source") or {}
+        if not (isinstance(source, dict) and source.get("citation") and str(source.get("url", "")).startswith("https://")):
+            problems.append(f"{where}: source needs citation and https url")
+        population = rule.get("population") or {}
+        if population.get("sex") not in (None, "male", "female"):
+            problems.append(f"{where}: population.sex must be male or female")
+        if population.get("smoking") not in (None, "ever"):
+            problems.append(f"{where}: population.smoking must be 'ever'")
+        for j, ev in enumerate(rule.get("evidence") or []):
+            kind = ev.get("kind")
+            if kind not in SCREENING_EVIDENCE_KINDS:
+                problems.append(f"{where}: evidence[{j}].kind must be one of {sorted(SCREENING_EVIDENCE_KINDS)}")
+            if kind in ("lab", "vital") and not all(LOINC_PATTERN.match(str(c)) for c in ev.get("loinc") or [None]):
+                problems.append(f"{where}: evidence[{j}] needs valid LOINC codes")
+            if kind in ("procedure", "imaging") and not ev.get("keywords"):
+                problems.append(f"{where}: evidence[{j}] needs keywords")
+            years = ev.get("within_years")
+            if years is not None and (not isinstance(years, (int, float)) or years <= 0):
+                problems.append(f"{where}: evidence[{j}].within_years must be positive or null")
+    return problems
 
 
 def main():
@@ -357,6 +689,21 @@ def main():
         validate_decision_tree(file_path, result)
         print("✓")
     
+    # Screening rules (encounter assessment: possible missed items)
+    if SCREENING_RULES.exists():
+        print(f"Checking {SCREENING_RULES.name}...", end=" ")
+        data = yaml.safe_load(SCREENING_RULES.read_text(encoding="utf-8")) or {}
+        for problem in screening_rule_problems(data):
+            result.add_error(SCREENING_RULES.name, problem)
+        print("✓")
+
+    # Node formats: only "conditional" trees are evaluated automatically by the engine
+    if result.node_formats:
+        print("\nNode formats:")
+        for fmt, ids in sorted(result.node_formats.items()):
+            listed = f": {', '.join(sorted(ids))}" if fmt not in ("none", "conditional") else ""
+            print(f"  • {fmt} ({len(ids)}){listed}")
+
     # Print results
     result.print_summary()
     

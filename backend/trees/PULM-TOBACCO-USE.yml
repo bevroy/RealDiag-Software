@@ -1,11 +1,33 @@
 tree_id: PULM-TOBACCO-USE
 name: Smoking-Related Disorder / Tobacco Use
+version: '1.0'
+status: draft
 family: pulmonology
 specialty: Pulmonology
-icd10: Z72.0
-snomed: 77176002
+secondary_specialties: []
 urgency: routine
-homeopathy: []
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z72.0
+  snomed:
+    - '77176002'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: USPSTF Tobacco Cessation Guidelines 2021
+    origin: trace.source
 presentations:
   - Active tobacco use (cigarettes, cigars, pipes, smokeless tobacco)
   - Former smoker with smoking-related health concerns
@@ -19,6 +41,15 @@ presentations:
   - Failed previous quit attempts
   - Withdrawal symptoms during prior attempts
   - Social/occupational impairment from smoking
+differentials:
+  - Tobacco use disorder (current smoker, nicotine dependence)
+  - Former tobacco user (quit, monitoring for tobacco-related diseases)
+  - COPD (chronic bronchitis, emphysema from smoking)
+  - Lung cancer (smoking is
+  - Cardiovascular disease (smoking major risk factor for CAD, stroke, PAD)
+  - Chronic cough from smoking
+  - Oral cancer (smokeless tobacco)
+  - Nicotine withdrawal syndrome (irritability, anxiety, insomnia, increased appetite)
 workup:
   - Smoking history - pack-years, age started, previous quit attempts, readiness to quit
   - Assess for nicotine dependence (Fagerström Test)
@@ -49,11 +80,11 @@ treatment:
   - First-line medications (FDA-approved)
   - Varenicline (Chantix) 0.5-1mg BID x 12 weeks - most effective (OR 3.1)
   - Partial nicotine receptor agonist, reduces cravings and withdrawal
-  - Start 1 week before quit date
+  - 'Patient advice: Start 1 week before quit date'
   - Side effects - nausea, vivid dreams, rarely neuropsychiatric symptoms
   - Bupropion SR 150mg BID x 12 weeks (OR 2.0)
   - Antidepressant, reduces cravings
-  - Start 1-2 weeks before quit date
+  - 'Patient advice: Start 1-2 weeks before quit date'
   - Contraindicated if seizure history or eating disorder
   - Nicotine replacement therapy (NRT) - gum, patch, lozenge, inhaler, nasal spray
   - Patch 21mg daily x 6 weeks, taper to 14mg x 2 weeks, then 7mg x 2 weeks
@@ -79,27 +110,29 @@ clinical_pearls:
   - Smokeless tobacco (chewing tobacco, snuff) causes oral cancer, not "safe" alternative
   - Pregnancy - NRT safer than continued smoking, varenicline/bupropion not recommended
   - Financial incentives and support from employer/insurance improve quit rates
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Tobacco cessation program for intensive counseling
   - Behavioral health for comorbid depression, anxiety, or substance use disorder
   - Pulmonology if COPD or chronic respiratory symptoms
   - Cardiology if cardiovascular disease
   - Oncology if lung cancer detected on screening
-differentials:
-  - Tobacco use disorder (current smoker, nicotine dependence)
-  - Former tobacco user (quit, monitoring for tobacco-related diseases)
-  - COPD (chronic bronchitis, emphysema from smoking)
-  - Lung cancer (smoking is #1 risk factor)
-  - Cardiovascular disease (smoking major risk factor for CAD, stroke, PAD)
-  - Chronic cough from smoking
-  - Oral cancer (smokeless tobacco)
-  - Nicotine withdrawal syndrome (irritability, anxiety, insomnia, increased appetite)
-trace:
-  source: USPSTF Tobacco Cessation Guidelines 2021
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

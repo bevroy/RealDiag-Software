@@ -1,45 +1,66 @@
 tree_id: PSYCH-EATING-ANOREXIA
 name: Anorexia Nervosa
+version: '1.0'
+status: draft
 family: Psychiatry
 specialty: Psychiatry
-icd10:
-- F50.00
-- F50.02
-snomed:
-- '56882008'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Anorexia Nervosa
-version: '1.0'
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F50.00
+    - F50.02
+  snomed:
+    - '56882008'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic Criteria
+    origin: trace.source
 presentations:
-- Restricted food intake
-- Significantly low body weight
-- Intense fear of weight gain
-- Distorted body image
-- Amenorrhea
-- Excessive exercise
+  - Restricted food intake
+  - Significantly low body weight
+  - Intense fear of weight gain
+  - Distorted body image
+  - Amenorrhea
+  - Excessive exercise
+differentials:
+  - Bulimia
+  - Depression
+  - Hyperthyroidism
+  - GI disease
+  - Malignancy
 workup: []
 treatment:
-  - 'Multidisciplinary team - physician, therapist, dietitian, psychiatrist essential'
-  - 'Nutritional rehabilitation - gradual refeeding, goal 2-3 lbs/week weight gain, monitor refeeding syndrome'
-  - 'Refeeding syndrome prevention - monitor phosphate, potassium, magnesium closely during first week, replace aggressively'
-  - 'Start refeeding at 30-40 kcal/kg/day, advance slowly to avoid refeeding syndrome'
-  - 'Family-based therapy (FBT/Maudsley method) - first-line for adolescents, parents take charge of refeeding'
-  - 'Cognitive behavioral therapy (CBT-E) enhanced for eating disorders - effective in adults'
+  - Multidisciplinary team - physician, therapist, dietitian, psychiatrist essential
+  - Nutritional rehabilitation - gradual refeeding, goal 2-3 lbs/week weight gain, monitor refeeding syndrome
+  - Refeeding syndrome prevention - monitor phosphate, potassium, magnesium closely during first week, replace aggressively
+  - 'Consider starting refeeding at 30-40 kcal/kg/day, advancing slowly to avoid refeeding syndrome'
+  - Family-based therapy (FBT/Maudsley method) - first-line for adolescents, parents take charge of refeeding
+  - Cognitive behavioral therapy (CBT-E) enhanced for eating disorders - effective in adults
   - 'Hospitalization indications: HR <40, BP <90/60, temp <96°F, severe electrolyte abnormalities, acute food refusal, suicidality'
-  - 'No medications cure anorexia, but SSRIs may help prevent relapse after weight restoration'
-  - 'Olanzapine 2.5-10mg qHS may help with anxiety around eating and weight gain (off-label)'
-  - 'Address bone health - calcium 1200-1500mg daily, vitamin D 1000-2000 IU daily, consider DEXA scan'
-  - 'Cardiac monitoring - ECG for QTc prolongation, bradycardia common'
-  - 'Restore menses - usually returns when BMI >18.5 and body fat 17-22%, may take 6-12 months'
-  - 'Treat comorbid depression, anxiety, OCD common'
-  - 'Long-term follow-up critical - high relapse rate, chronic course in 20%'
+  - No medications cure anorexia, but SSRIs may help prevent relapse after weight restoration
+  - Olanzapine 2.5-10mg qHS may help with anxiety around eating and weight gain (off-label)
+  - Address bone health - calcium 1200-1500mg daily, vitamin D 1000-2000 IU daily, consider DEXA scan
+  - Cardiac monitoring - ECG for QTc prolongation, bradycardia common
+  - Restore menses - usually returns when BMI >18.5 and body fat 17-22%, may take 6-12 months
+  - Treat comorbid depression, anxiety, OCD common
+  - Long-term follow-up critical - high relapse rate, chronic course in 20%
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute suicidal ideation with plan
@@ -57,14 +78,26 @@ referrals:
     - ADHD evaluation
     - Therapy referral
     - Medication management
-differentials:
-  - Bulimia
-  - Depression
-  - Hyperthyroidism
-  - GI disease
-  - Malignancy
-trace:
-  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
-    Criteria
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

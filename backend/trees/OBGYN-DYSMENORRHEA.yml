@@ -1,12 +1,34 @@
 tree_id: OBGYN-DYSMENORRHEA
 name: Dysmenorrhea
+version: '1.0'
+status: draft
 family: obstetrics_gynecology
-specialty: Gynecology/Primary Care
-applies_to: female
-icd10: N94.6
-snomed: 266599000
-urgency: []
-homeopathy: []
+specialty: Gynecology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N94.6
+  snomed:
+    - '266599000'
+  icpc2: []
+sources:
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: Cochrane Systematic Reviews
+    origin: citations
+  - text: UpToDate - Gynecology
+    origin: citations
+  - text: ACOG Practice Bulletins on Dysmenorrhea, Cochrane Reviews, UpToDate
+    origin: trace.source
 presentations:
   - Painful menstrual cramps in lower abdomen
   - Pain typically begins with onset of menses or 1-2 days before
@@ -15,8 +37,17 @@ presentations:
   - Associated nausea, vomiting, diarrhea
   - Headache and fatigue
   - Pain interferes with daily activities, school, or work
-  - Primary dysmenorrhea: starts with menarche or shortly after, no pelvic pathology
-  - Secondary dysmenorrhea: develops later in life, associated with pelvic pathology
+  - 'Primary dysmenorrhea: starts with menarche or shortly after, no pelvic pathology'
+  - 'Secondary dysmenorrhea: develops later in life, associated with pelvic pathology'
+differentials:
+  - Primary dysmenorrhea (no pelvic pathology, starts with menarche, responds to NSAIDs)
+  - Endometriosis (progressive pain, dyspareunia, dyschezia, infertility, may have endometriomas)
+  - Adenomyosis (age greater than 30, heavy bleeding, diffusely enlarged tender uterus)
+  - Uterine fibroids (enlarged irregular uterus, heavy bleeding, pelvic pressure)
+  - Pelvic inflammatory disease (cervical motion tenderness, fever, abnormal discharge, STI exposure)
+  - Ovarian cyst (unilateral pain, acute if rupture or torsion)
+  - Irritable bowel syndrome (cyclical bowel symptoms with menses, bloating, diarrhea/constipation)
+  - Interstitial cystitis (pelvic pain, urinary frequency, dysuria)
 workup:
   - Detailed menstrual and pain history
   - Age of menarche and when pain started
@@ -26,8 +57,8 @@ workup:
   - Impact on daily functioning
   - Associated symptoms (heavy bleeding, dyspareunia, dyschezia)
   - Distinguish primary versus secondary dysmenorrhea
-  - Primary: pain starts with menarche, age less than 20, cramping begins with menses, lasts 1-3 days
-  - Secondary: pain develops later (age greater than 25), progressively worsens, persists beyond menses, deep dyspareunia
+  - 'Primary: pain starts with menarche, age less than 20, cramping begins with menses, lasts 1-3 days'
+  - 'Secondary: pain develops later (age greater than 25), progressively worsens, persists beyond menses, deep dyspareunia'
   - Sexual history and contraception use
   - Physical examination
   - Abdominal examination (tenderness, masses, guarding)
@@ -57,12 +88,12 @@ workup:
   - Can diagnose and treat endometriosis (excision or ablation)
 treatment:
   - Primary dysmenorrhea management
-  - First-line therapy: NSAIDs
+  - 'First-line therapy: NSAIDs'
   - Ibuprofen 400-600 mg every 6 hours (max 2400 mg/day)
   - Naproxen sodium 550 mg initially, then 275 mg every 6-8 hours
   - Mefenamic acid 500 mg TID
-  - Start 1-2 days before expected menses and continue first 2-3 days
-  - Mechanism: inhibit prostaglandin synthesis (excess prostaglandins cause uterine contractions)
+  - 'Patient advice: Start 1-2 days before expected menses and continue first 2-3 days'
+  - 'Mechanism: inhibit prostaglandin synthesis (excess prostaglandins cause uterine contractions)'
   - 70-80% effective for pain relief
   - Take with food to minimize GI side effects
   - Hormonal contraception (if NSAIDs insufficient or contraception desired)
@@ -84,7 +115,7 @@ treatment:
   - Acupuncture (some evidence for benefit)
   - Secondary dysmenorrhea treatment - treat underlying cause
   - Endometriosis
-  - First-line: NSAIDs + hormonal contraception (OCPs, IUD)
+  - 'First-line: NSAIDs + hormonal contraception (OCPs, IUD)'
   - GnRH agonists (leuprolide) for severe cases - induces medical menopause
   - Add-back hormone therapy to prevent bone loss
   - Laparoscopic excision or ablation of endometriotic lesions
@@ -97,7 +128,7 @@ treatment:
   - Hormonal contraception (may worsen if submucosal fibroids)
   - Myomectomy or uterine artery embolization for large symptomatic fibroids
   - Pelvic inflammatory disease (PID)
-  - Antibiotics: ceftriaxone 500 mg IM + doxycycline 100 mg PO BID for 14 days
+  - 'Antibiotics: ceftriaxone 500 mg IM + doxycycline 100 mg PO BID for 14 days'
   - Treat sexual partners
   - Cervical stenosis
   - Cervical dilation (rare)
@@ -107,34 +138,40 @@ treatment:
   - Presacral neurectomy or laparoscopic uterine nerve ablation (rarely performed)
   - Hysterectomy as last resort if childbearing complete
 clinical_pearls:
-  - 'Primary dysmenorrhea affects 50-90% of menstruating women - most common gynecologic complaint in adolescents'
-  - 'NSAIDs are first-line treatment - most effective when started 1-2 days before menses (prevent prostaglandin buildup)'
-  - 'Combined oral contraceptives effective for 70-80% of women with primary dysmenorrhea'
-  - 'Progressive worsening of pain over time suggests secondary dysmenorrhea (endometriosis, adenomyosis)'
-  - 'Endometriosis present in 70% of adolescents with dysmenorrhea refractory to NSAIDs and OCPs'
-  - 'Heat therapy as effective as ibuprofen for dysmenorrhea pain relief in some studies'
-  - 'Continuous OCP regimens (skipping placebo week) more effective than cyclic for dysmenorrhea'
-  - 'Dyspareunia (painful intercourse) with dysmenorrhea strongly suggests endometriosis'
+  - Primary dysmenorrhea affects 50-90% of menstruating women - most common gynecologic complaint in adolescents
+  - NSAIDs are first-line treatment - most effective when started 1-2 days before menses (prevent prostaglandin buildup)
+  - Combined oral contraceptives effective for 70-80% of women with primary dysmenorrhea
+  - Progressive worsening of pain over time suggests secondary dysmenorrhea (endometriosis, adenomyosis)
+  - Endometriosis present in 70% of adolescents with dysmenorrhea refractory to NSAIDs and OCPs
+  - Heat therapy as effective as ibuprofen for dysmenorrhea pain relief in some studies
+  - Continuous OCP regimens (skipping placebo week) more effective than cyclic for dysmenorrhea
+  - Dyspareunia (painful intercourse) with dysmenorrhea strongly suggests endometriosis
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gynecology for failed medical management, suspicion of endometriosis or adenomyosis
   - Gynecology for consideration of laparoscopy if refractory to NSAIDs and hormonal therapy
   - Pain management or chronic pain specialist for severe refractory dysmenorrhea
   - Pelvic floor physical therapy for associated pelvic floor dysfunction
-differentials:
-  - Primary dysmenorrhea (no pelvic pathology, starts with menarche, responds to NSAIDs)
-  - Endometriosis (progressive pain, dyspareunia, dyschezia, infertility, may have endometriomas)
-  - Adenomyosis (age greater than 30, heavy bleeding, diffusely enlarged tender uterus)
-  - Uterine fibroids (enlarged irregular uterus, heavy bleeding, pelvic pressure)
-  - Pelvic inflammatory disease (cervical motion tenderness, fever, abnormal discharge, STI exposure)
-  - Ovarian cyst (unilateral pain, acute if rupture or torsion)
-  - Irritable bowel syndrome (cyclical bowel symptoms with menses, bloating, diarrhea/constipation)
-  - Interstitial cystitis (pelvic pain, urinary frequency, dysuria)
-trace:
-  source: ACOG Practice Bulletins on Dysmenorrhea, Cochrane Reviews, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - Cochrane Systematic Reviews
-  - UpToDate - Gynecology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

@@ -1,38 +1,49 @@
 tree_id: NEU-TIA
 name: Transient ischemic attack (TIA)
+version: '1.0'
+status: draft
 family: Neurology
 specialty: Neurology
-icd10:
-- G45.9
-snomed:
-- '266257000'
-urgency: medium
-description: Comprehensive evaluation and management of Transient ischemic attack
-  (TIA)
-version: '1.0'
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
-author: RealDiag Clinical Team
-homeopathy: []
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
+chief_complaint: ''
+description: Comprehensive evaluation and management of Transient ischemic attack (TIA)
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G45.9
+  snomed:
+    - '266257000'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
+  - text: American Academy of Neurology (AAN) Practice Guidelines, American Stroke Association (ASA) Guidelines
+    origin: trace.source
 presentations:
-- Transient focal neurological symptoms (typically <1 hour duration)
-- Complete resolution within 24 hours (by definition)
-- No acute infarction on DWI MRI (tissue-based definition)
-- 'Same symptoms as stroke: weakness, aphasia, visual loss, ataxia'
-- 'High early stroke risk: ABCD2 score predicts 2-day stroke risk'
-- 'Crescendo TIAs (multiple in 24 hours): Very high risk, urgent evaluation'
+  - Transient focal neurological symptoms (typically <1 hour duration)
+  - Complete resolution within 24 hours (by definition)
+  - No acute infarction on DWI MRI (tissue-based definition)
+  - 'Same symptoms as stroke: weakness, aphasia, visual loss, ataxia'
+  - 'High early stroke risk: ABCD2 score predicts 2-day stroke risk'
+  - 'Crescendo TIAs (multiple in 24 hours): Very high risk, urgent evaluation'
+differentials:
+  - Stroke
+  - Migraine with aura
+  - Seizure
+  - Syncope
+  - Hypoglycemia
 workup: []
-treatment: []
-clinical_pearls:
-- 'ABCD2 score: Age, BP, Clinical features, Duration, Diabetes (0-7 points)'
-- 'High risk (ABCD2 ≥4): 4% stroke risk at 2 days, admit for workup'
-- 'Urgent workup: Carotid imaging (US or CTA), echocardiogram, telemetry'
-- Dual antiplatelet therapy (aspirin + clopidogrel) for 21 days reduces stroke risk
-- '50-99% carotid stenosis: Consider urgent CEA/CAS within 2 weeks'
 treatment:
-  - 'Urgent evaluation: Admit high-risk patients (ABCD2 ≥4, crescendo TIAs, symptomatic carotid stenosis)'
+  - 'Urgent evaluation: consider admission for high-risk patients (ABCD2 ≥4, crescendo TIAs, symptomatic carotid stenosis)'
   - Dual antiplatelet therapy (DAPT) - aspirin 50-325mg + clopidogrel 75mg daily x21 days, then aspirin alone (POINT and CHANCE trials)
   - Alternative if DAPT contraindicated - aspirin 81-325mg daily alone OR clopidogrel 75mg daily alone
   - 'High-grade carotid stenosis (70-99% symptomatic): Urgent CEA or CAS within 2 weeks of TIA (reduces stroke risk from 26% to 9%)'
@@ -44,6 +55,14 @@ treatment:
   - Address underlying etiology - carotid revascularization, PFO closure if indicated (age <60, large shunt), cardioembolic source treatment
   - Follow-up imaging at 3-6 months to assess for progression of stenosis or new lesions
   - Avoid antihypertensives in acute phase (first 24-48 hours) unless BP >220/120 - may worsen ischemia
+clinical_pearls:
+  - 'ABCD2 score: Age, BP, Clinical features, Duration, Diabetes (0-7 points)'
+  - 'High risk (ABCD2 ≥4): 4% stroke risk at 2 days, admit for workup'
+  - 'Urgent workup: Carotid imaging (US or CTA), echocardiogram, telemetry'
+  - Dual antiplatelet therapy (aspirin + clopidogrel) for 21 days reduces stroke risk
+  - '50-99% carotid stenosis: Consider urgent CEA/CAS within 2 weeks'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute stroke
@@ -59,14 +78,26 @@ referrals:
     - Headache
     - Seizure follow-up
     - Tremor
-differentials:
-  - Stroke
-  - Migraine with aura
-  - Seizure
-  - Syncope
-  - Hypoglycemia
-trace:
-  source: American Academy of Neurology (AAN) Practice Guidelines, American Stroke
-    Association (ASA) Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: 'urgency ''medium'' mapped to ''routine''; duplicate treatment key: empty section removed, populated section kept'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

@@ -35,7 +35,17 @@ export default function TechnicalMedicalPage() {
             Symptom search uses normalized symptom terms, demographic filters, and presentation
             matching to rank likely diagnoses. Matching emphasizes direct phrase overlap and
             clinically relevant word intersections, with optional AI-assisted suggestions when
-            confidence is low.
+            confidence is low. Each tree&apos;s chief complaint is matched along with its presentations,
+            and a short list of lay and clinical synonyms (for example shortness of breath and
+            dyspnea) is searched together. Negated parts of the input (&quot;no chest pain&quot;) are dropped
+            before ranking in symptom search, the ambulatory differential and the encounter assessment. Emergent trees that match are always returned and labelled
+            &quot;Can&apos;t-miss condition&quot;, whatever their score or the result cap.
+          </p>
+          <p style={styles.p}>
+            AI features are off unless ENABLE_AI_GENERATION or ENABLE_AI_ENRICHMENT is set to
+            &quot;true&quot;, and anything AI-generated is labelled &quot;AI-generated; not clinically
+            validated.&quot; Chart-driven requests (encounter assessment, ambulatory differential,
+            symptom search with an EHR patient) never use AI: EHR data is never sent to an AI provider.
           </p>
         </section>
 
@@ -71,6 +81,20 @@ export default function TechnicalMedicalPage() {
             selected historical records. This enables diagnosis support that reflects encounter and
             longitudinal context rather than symptom-only snapshots.
           </p>
+          <p style={styles.p}>
+            The encounter assessment pulls the chart once (no data type is requested twice) and
+            reports every data type that could not be retrieved or was cut off at the page limit.
+            Today&apos;s complaint comes from the clinician&apos;s text, otherwise the EHR visit reason.
+            Acute chart cards (ACS, sepsis, DKA) appear when a criterion is met or the complaint
+            matches the tree&apos;s reviewed complaint terms.
+          </p>
+          <p style={styles.p}>
+            Possible missed items are rule-based (no AI): chronic-condition criteria met without a
+            matching problem-list entry; problem-list conditions with no supporting result or related
+            medication in the lookback; and USPSTF grade A/B screening rules evaluated against age, sex,
+            BMI, smoking status, procedures, imaging and results over 10 years. Data RealDiag cannot see
+            (such as pack-years) is reported as unavailable, never assumed.
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -85,6 +109,9 @@ export default function TechnicalMedicalPage() {
         <section style={styles.section}>
           <h2 style={styles.h2}>7. Safety Boundaries</h2>
           <p style={styles.p}>
+            Content still under clinical review (trees, urgency, treatment, thresholds and screening
+            rules) carries a review notice and per-tree status in every page, API response, export
+            (FHIR, HL7, JSON, XML, CSV) and PDF report.
             RealDiag is a decision-support system, not an autonomous diagnostic authority. It must
             be used with clinician oversight, institutional protocols, and full patient context.
             Urgent or emergent care decisions should always follow local emergency standards.
@@ -94,6 +121,8 @@ export default function TechnicalMedicalPage() {
         <section style={styles.section}>
           <h2 style={styles.h2}>8. Recent Platform Updates</h2>
           <ul style={styles.list}>
+            <li>All decision trees now share one standard template: codes (ICD-10, SNOMED CT, ICPC-2) are grouped together, guideline sources are consolidated, and every tree carries a version, review status, and change log.</li>
+            <li>Tree urgency uses three standard levels (emergent, urgent, routine); every tree has a level, and levels proposed during standardization are marked in each tree's change log pending clinician confirmation.</li>
             <li>Authentication now revalidates cookie-based sessions against the backend before restricting access.</li>
             <li>Navigation normalizes legacy roles so approved clinical accounts are shown provider-level tools consistently.</li>
             <li>Admin role-management endpoints support updates by email or user ID for onboarding and access corrections.</li>

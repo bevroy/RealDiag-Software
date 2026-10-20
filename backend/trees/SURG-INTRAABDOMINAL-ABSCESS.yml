@@ -1,39 +1,60 @@
 tree_id: SURG-INTRAABDOMINAL-ABSCESS
 name: Intraabdominal Abscess
+version: '1.0'
+status: draft
 family: surgery
 specialty: Surgery
-icd10:
-- K65.1
-snomed:
-- 128477000
-urgency: medium
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Intraabdominal Abscess
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K65.1
+  snomed:
+    - '128477000'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Postoperative fever
-- Abdominal pain
-- Leukocytosis
-- CT shows fluid collection
-- Recent abdominal surgery or complicated appendicitis
-- May require percutaneous drainage
+  - Postoperative fever
+  - Abdominal pain
+  - Leukocytosis
+  - CT shows fluid collection
+  - Recent abdominal surgery or complicated appendicitis
+  - May require percutaneous drainage
+differentials:
+  - Peritonitis
+  - Appendicitis
+  - Diverticulitis
+  - Crohn abscess
+  - Postop collection
 workup: []
 treatment:
-  - 'Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H OR ceftriaxone 2g IV daily + metronidazole 500mg IV Q8H'
-  - 'CT-guided percutaneous drainage - first-line for accessible abscesses'
-  - 'Send fluid for culture (aerobic, anaerobic, fungal)'
-  - 'Drain remains until output <10-20mL/day'
-  - 'Serial CT to document resolution'
+  - Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H OR ceftriaxone 2g IV daily + metronidazole 500mg IV Q8H
+  - CT-guided percutaneous drainage - first-line for accessible abscesses
+  - Send fluid for culture (aerobic, anaerobic, fungal)
+  - Drain remains until output <10-20mL/day
+  - Serial CT to document resolution
   - 'Operative drainage if: percutaneous drainage fails, multiple loculated abscesses, or bowel fistula'
   - 'Duration antibiotics: 4-6 weeks (2 weeks IV, then transition to PO based on clinical response)'
-  - 'Source control critical - address underlying cause (diverticulitis, appendicitis, anastomotic leak)'
-  - 'Monitor for complications - fistula formation, sepsis, recurrence'
+  - Source control critical - address underlying cause (diverticulitis, appendicitis, anastomotic leak)
+  - Monitor for complications - fistula formation, sepsis, recurrence
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -51,14 +72,23 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Peritonitis
-  - Appendicitis
-  - Diverticulitis
-  - Crohn abscess
-  - Postop collection
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

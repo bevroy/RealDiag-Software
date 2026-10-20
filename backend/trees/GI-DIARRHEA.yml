@@ -1,10 +1,31 @@
 tree_id: GI-DIARRHEA
 name: Diarrhea Evaluation
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K59.1
-snomed: "62315008"
-
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K59.1
+  snomed:
+    - '62315008'
+  icpc2: []
+sources:
+  - text: 'Riddle MS, et al. (2017). ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol, 112(5), 726-738.'
+    origin: citations
+  - text: 'Schiller LR, et al. (2017). Chronic diarrhea: diagnosis and management. Clin Gastroenterol Hepatol, 15(2), 182-193.'
+    origin: citations
+  - text: 'McDonald LC, et al. (2018). Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by the IDSA and SHEA. Clin Infect Dis, 66(7), e1-e48.'
+    origin: citations
 presentations:
   - Increased stool frequency (>3 per day)
   - Loose or watery stools
@@ -15,35 +36,34 @@ presentations:
   - Fever (if infectious)
   - Recent travel or sick contacts
   - Recent antibiotic use
-
+differentials: []
 workup:
   - History:
-    - Duration (acute <2 weeks, persistent 2-4 weeks, chronic >4 weeks)
-    - Stool characteristics (watery, bloody, mucoid, fatty)
-    - Associated symptoms (fever, weight loss, abdominal pain)
-    - Recent travel, camping, or well water exposure
-    - Food exposures (undercooked meat, unpasteurized dairy, seafood)
-    - Sick contacts or daycare exposure
-    - Recent antibiotic use (C. difficile risk)
-    - Medications (laxatives, antacids, metformin, SSRIs)
-    - Medical history (IBD, IBS, celiac disease, immunosuppression)
+      - Duration (acute <2 weeks, persistent 2-4 weeks, chronic >4 weeks)
+      - Stool characteristics (watery, bloody, mucoid, fatty)
+      - Associated symptoms (fever, weight loss, abdominal pain)
+      - Recent travel, camping, or well water exposure
+      - Food exposures (undercooked meat, unpasteurized dairy, seafood)
+      - Sick contacts or daycare exposure
+      - Recent antibiotic use (C. difficile risk)
+      - Medications (laxatives, antacids, metformin, SSRIs)
+      - Medical history (IBD, IBS, celiac disease, immunosuppression)
   - Physical exam:
-    - Vital signs (fever, tachycardia, orthostatic hypotension)
-    - Volume status (skin turgor, mucous membranes, capillary refill)
-    - Abdominal exam (tenderness, distension, bowel sounds)
-    - Rectal exam (fissures, hemorrhoids, stool occult blood)
+      - Vital signs (fever, tachycardia, orthostatic hypotension)
+      - Volume status (skin turgor, mucous membranes, capillary refill)
+      - Abdominal exam (tenderness, distension, bowel sounds)
+      - Rectal exam (fissures, hemorrhoids, stool occult blood)
   - Laboratory studies:
-    - Stool culture (if bloody diarrhea, fever, severe illness, or travel)
-    - Stool ova and parasites (if travel to endemic area, >7 days duration)
-    - C. difficile toxin assay (if recent antibiotic use or hospitalization)
-    - Fecal leukocytes or lactoferrin (inflammatory vs non-inflammatory)
-    - Stool for Giardia and Cryptosporidium antigen
-    - CBC (anemia, leukocytosis)
-    - BMP (electrolytes, kidney function if dehydration)
-    - Celiac serology (if chronic diarrhea)
+      - Stool culture (if bloody diarrhea, fever, severe illness, or travel)
+      - Stool ova and parasites (if travel to endemic area, >7 days duration)
+      - C. difficile toxin assay (if recent antibiotic use or hospitalization)
+      - Fecal leukocytes or lactoferrin (inflammatory vs non-inflammatory)
+      - Stool for Giardia and Cryptosporidium antigen
+      - CBC (anemia, leukocytosis)
+      - BMP (electrolytes, kidney function if dehydration)
+      - Celiac serology (if chronic diarrhea)
   - Imaging:
-    - Abdominal CT if concern for complications (toxic megacolon, perforation, abscess)
-
+      - Abdominal CT if concern for complications (toxic megacolon, perforation, abscess)
 treatment:
   acute_watery_diarrhea:
     - Oral rehydration therapy (ORS) or IV fluids if severe dehydration
@@ -73,7 +93,6 @@ treatment:
     - Treat underlying cause (IBD, celiac, IBS, malabsorption)
     - Consider empiric trial of cholestyramine if bile acid diarrhea suspected
     - GI referral for colonoscopy if alarm features
-
 clinical_pearls:
   - Acute diarrhea (<2 weeks) is usually infectious and self-limited
   - Bloody diarrhea suggests invasive bacterial infection, IBD, or ischemic colitis
@@ -85,14 +104,27 @@ clinical_pearls:
   - Avoid loperamide if bloody diarrhea or suspected C. difficile (risk of toxic megacolon)
   - Most cases of traveler's diarrhea are due to enterotoxigenic E. coli (ETEC)
   - Cryptosporidium and Giardia cause persistent diarrhea in immunocompromised patients
-
+red_flags: []
+disposition_guidance: {}
+referrals: []
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Diagnostic approach to acute and chronic diarrhea
   - Indications for stool studies and imaging
   - Antibiotic selection for infectious diarrhea
   - Management of C. difficile infection
-
-citations:
-  - Riddle MS, et al. (2017). ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol, 112(5), 726-738.
-  - Schiller LR, et al. (2017). Chronic diarrhea: diagnosis and management. Clin Gastroenterol Hepatol, 15(2), 182-193.
-  - McDonald LC, et al. (2018). Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by the IDSA and SHEA. Clin Infect Dis, 66(7), e1-e48.
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

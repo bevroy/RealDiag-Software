@@ -1,11 +1,33 @@
 tree_id: PSYCH-PERSISTENT-DEPRESSIVE-DISORDER
 name: Persistent Depressive Disorder (Dysthymia)
+version: '1.0'
+status: draft
 family: psychiatry
 specialty: Psychiatry
-icd10: F34.1
-snomed: 78667006
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F34.1
+  snomed:
+    - '78667006'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR Criteria, APA Practice Guidelines for Major Depressive Disorder, Cochrane Review on Dysthymia Treatment
+    origin: trace.source
 presentations:
   - Depressed mood for most of the day, more days than not, for at least 2 years (1 year in children/adolescents)
   - Poor appetite or overeating
@@ -16,11 +38,21 @@ presentations:
   - Feelings of hopelessness
   - Never without symptoms for more than 2 months at a time during 2-year period
   - Functioning impaired but able to maintain daily activities (unlike major depression)
+differentials:
+  - Persistent depressive disorder (chronic low-grade depression 2+ years)
+  - Major depressive disorder (more severe episodic depression)
+  - Bipolar disorder II (history of hypomanic episodes)
+  - Cyclothymic disorder (chronic mood instability with hypomanic and depressive periods)
+  - Adjustment disorder with depressed mood (identifiable stressor, <6 months duration)
+  - Hypothyroidism (fatigue, weight gain, check TSH)
+  - Chronic fatigue syndrome (predominantly physical fatigue)
+  - Substance-induced mood disorder (alcohol, benzodiazepines, beta-blockers)
+  - Personality disorders (borderline, avoidant - long-standing interpersonal patterns)
 workup:
   - Clinical diagnosis based on DSM-5-TR criteria
   - Psychiatric evaluation and mental status examination
-  - Duration: depressed mood most days for at least 2 years (adults) or 1 year (children/adolescents)
-  - Must have at least 2 of: appetite changes, sleep disturbance, low energy, low self-esteem, poor concentration, hopelessness
+  - 'Duration: depressed mood most days for at least 2 years (adults) or 1 year (children/adolescents)'
+  - 'Must have at least 2 of: appetite changes, sleep disturbance, low energy, low self-esteem, poor concentration, hopelessness'
   - Rule out major depressive disorder (may be superimposed on PDD - "double depression")
   - Assess severity and functional impairment
   - Screen for suicidality (PHQ-9, Columbia Scale)
@@ -54,7 +86,7 @@ treatment:
   - Combination therapy (psychotherapy + medication) more effective than either alone
   - Lifestyle interventions
   - Regular exercise (30 minutes moderate activity 5 days/week)
-  - Sleep hygiene
+  - 'Patient advice: Sleep hygiene'
   - Stress reduction techniques
   - Social support and engagement
   - Nutritional counseling
@@ -63,35 +95,40 @@ treatment:
   - High relapse rate if discontinued prematurely
   - Some patients require long-term maintenance
 clinical_pearls:
-  - "Dysthymia affects 3-6% of general population, more common in women (2:1 ratio)"
-  - "Average duration before seeking treatment is 5-10 years - often viewed as 'personality' rather than treatable disorder"
-  - "Double depression (major depression superimposed on PDD) occurs in 75% at some point - treat the acute major episode"
-  - "Combination therapy (psychotherapy + medication) superior to monotherapy - 75% response vs 48-55% with either alone"
-  - "Earlier onset (before age 21) associated with worse prognosis and higher comorbidity"
-  - "High comorbidity: 75% have another psychiatric disorder (anxiety, substance use, personality disorders)"
-  - "Suicide risk lower than major depression but still elevated - always assess"
-  - "Treatment resistance common - may require augmentation strategies or medication trials"
+  - Dysthymia affects 3-6% of general population, more common in women (2:1 ratio)
+  - Average duration before seeking treatment is 5-10 years - often viewed as 'personality' rather than treatable disorder
+  - Double depression (major depression superimposed on PDD) occurs in 75% at some point - treat the acute major episode
+  - Combination therapy (psychotherapy + medication) superior to monotherapy - 75% response vs 48-55% with either alone
+  - Earlier onset (before age 21) associated with worse prognosis and higher comorbidity
+  - 'High comorbidity: 75% have another psychiatric disorder (anxiety, substance use, personality disorders)'
+  - Suicide risk lower than major depression but still elevated - always assess
+  - Treatment resistance common - may require augmentation strategies or medication trials
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Psychiatry for medication management and complex cases
   - Psychotherapy referral for CBT or IPT (evidence-based modalities)
   - Psychiatry if treatment-resistant (failed 2+ medication trials)
   - Emergency evaluation if active suicidal ideation or intent
-differentials:
-  - Persistent depressive disorder (chronic low-grade depression 2+ years)
-  - Major depressive disorder (more severe episodic depression)
-  - Bipolar disorder II (history of hypomanic episodes)
-  - Cyclothymic disorder (chronic mood instability with hypomanic and depressive periods)
-  - Adjustment disorder with depressed mood (identifiable stressor, <6 months duration)
-  - Hypothyroidism (fatigue, weight gain, check TSH)
-  - Chronic fatigue syndrome (predominantly physical fatigue)
-  - Substance-induced mood disorder (alcohol, benzodiazepines, beta-blockers)
-  - Personality disorders (borderline, avoidant - long-standing interpersonal patterns)
-trace:
-  source: DSM-5-TR Criteria, APA Practice Guidelines for Major Depressive Disorder, Cochrane Review on Dysthymia Treatment
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

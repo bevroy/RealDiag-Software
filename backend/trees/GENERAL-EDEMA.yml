@@ -1,9 +1,32 @@
 tree_id: GENERAL-EDEMA
 name: Edema Evaluation
+version: '1.0'
+status: draft
 family: General Medicine
-specialty: Internal Medicine/Primary Care
-icd10: R60.9
-snomed: 267038008
+specialty: Internal Medicine
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
+chief_complaint: Swelling
+description: Diagnostic decision tree for edema evaluation
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R60.9
+  snomed:
+    - '267038008'
+  icpc2: []
+sources:
+  - text: AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
+    origin: citations
+  - text: USPSTF (U.S. Preventive Services Task Force) Recommendations
+    origin: citations
+  - text: UpToDate - Primary Care Medicine
+    origin: citations
 presentations:
   - Swelling of extremities, face, or trunk
   - Pitting or non-pitting
@@ -11,37 +34,33 @@ presentations:
   - Onset (acute vs chronic)
   - Associated dyspnea, orthopnea
   - Ascites, pleural effusions
-chief_complaint: Swelling
-description: Diagnostic decision tree for edema evaluation
-version: "1.0"
 differentials:
   - Heart failure
   - Liver disease
   - Kidney disease
   - Venous insufficiency
   - Medication effect
-citations:
-  - AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
-  - USPSTF (U.S. Preventive Services Task Force) Recommendations
-  - UpToDate - Primary Care Medicine
-author: RealDiag Team
-
+workup: []
 treatment:
-  - 'Treat underlying cause - heart failure, CKD, cirrhosis, venous insufficiency, medications'
-  - 'Leg elevation - above heart level, 30 minutes TID-QID'
-  - 'Compression stockings - 20-30 mmHg for venous insufficiency'
-  - 'Diuretics if volume overload - furosemide 20-40mg daily, increase as needed'
+  - Treat underlying cause - heart failure, CKD, cirrhosis, venous insufficiency, medications
+  - Leg elevation - above heart level, 30 minutes TID-QID
+  - Compression stockings - 20-30 mmHg for venous insufficiency
+  - Diuretics if volume overload - furosemide 20-40mg daily, increase as needed
   - 'Heart failure: ACE inhibitor + beta-blocker + diuretic, consider spironolactone'
   - 'Cirrhosis with ascites: Spironolactone 100mg + furosemide 40mg, salt restriction <2g/day'
   - 'Nephrotic syndrome: Treat underlying kidney disease, diuretics, ACE inhibitor'
-  - 'Medications causing edema - stop if possible (CCBs switch to non-DHP, NSAIDs discontinue)'
+  - Medications causing edema - stop if possible (CCBs switch to non-DHP, NSAIDs discontinue)
   - 'DVT: Anticoagulation (see PE protocol)'
   - 'Lymphedema: Manual lymphatic drainage, compression, pneumatic compression device'
-  - 'Monitor weight daily - 2-3 lbs/week safe fluid removal rate'
-  - 'Restrict sodium <2-3g/day'
-
-entry_point: distribution
-
+  - Monitor weight daily - 2-3 lbs/week safe fluid removal rate
+  - Restrict sodium <2-3g/day
+clinical_pearls:
+  - Bilateral edema suggests systemic cause; unilateral suggests local
+  - Dependent edema improves with elevation; lymphedema does not
+  - Pitting vs non-pitting helps narrow differential
+  - Albumin <3 suggests protein-losing process
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -59,44 +78,41 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-
-clinical_pearls:
-  - Bilateral edema suggests systemic cause; unilateral suggests local
-  - Dependent edema improves with elevation; lymphedema does not
-  - Pitting vs non-pitting helps narrow differential
-  - Albumin <3 suggests protein-losing process
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: distribution
 nodes:
   - id: distribution
     type: question
-    text: "Distribution of edema?"
+    text: Distribution of edema?
     options:
-      - label: "Bilateral lower extremity"
+      - label: Bilateral lower extremity
         next: bilateral_le
-      - label: "Unilateral lower extremity"
+      - label: Unilateral lower extremity
         next: unilateral_le
-      - label: "Generalized (anasarca)"
+      - label: Generalized (anasarca)
         next: generalized
-      - label: "Facial/periorbital"
+      - label: Facial/periorbital
         next: facial
-      - label: "Upper extremity"
+      - label: Upper extremity
         next: upper_extremity
-
   - id: bilateral_le
     type: question
-    text: "Associated symptoms?"
+    text: Associated symptoms?
     options:
-      - label: "Dyspnea, orthopnea, JVD"
+      - label: Dyspnea, orthopnea, JVD
         next: heart_failure
-      - label: "Ascites, jaundice"
+      - label: Ascites, jaundice
         next: cirrhosis
-      - label: "Foamy urine, proteinuria"
+      - label: Foamy urine, proteinuria
         next: nephrotic_syndrome
-      - label: "Medications (CCB, NSAIDs)"
+      - label: Medications (CCB, NSAIDs)
         next: medication_edema
-      - label: "None, symmetrical pitting"
+      - label: None, symmetrical pitting
         next: venous_insufficiency
-
   - id: heart_failure
     type: diagnosis
     diagnosis: Heart Failure
@@ -115,7 +131,6 @@ nodes:
       - Sodium restriction
       - Daily weights
       - Cardiology referral
-
   - id: cirrhosis
     type: diagnosis
     diagnosis: Cirrhosis with Ascites
@@ -133,7 +148,6 @@ nodes:
       - Paracentesis if tense
       - Hepatology referral
       - Evaluate for liver transplant
-
   - id: nephrotic_syndrome
     type: diagnosis
     diagnosis: Nephrotic Syndrome
@@ -154,7 +168,6 @@ nodes:
       - Treat underlying cause
       - Nephrology referral
       - Anticoagulation if severe
-
   - id: medication_edema
     type: diagnosis
     diagnosis: Medication-Induced Edema
@@ -170,7 +183,6 @@ nodes:
       - Compression stockings
       - Leg elevation
       - May require low-dose diuretic
-
   - id: venous_insufficiency
     type: diagnosis
     diagnosis: Chronic Venous Insufficiency
@@ -186,29 +198,26 @@ nodes:
       - Weight loss if obese
       - Avoid prolonged standing
       - Consider vein ablation/stripping if severe
-
   - id: unilateral_le
     type: question
-    text: "Clinical presentation?"
+    text: Clinical presentation?
     options:
-      - label: "Sudden onset, painful, warmth, erythema"
+      - label: Sudden onset, painful, warmth, erythema
         next: dvt_suspected
-      - label: "Erythema, warmth, fever, skin changes"
+      - label: Erythema, warmth, fever, skin changes
         next: cellulitis_check
-      - label: "Post-surgery or trauma"
+      - label: Post-surgery or trauma
         next: post_procedure_edema
-      - label: "Chronic, painless"
+      - label: Chronic, painless
         next: lymphedema
-
   - id: dvt_suspected
     type: question
-    text: "Wells score for DVT?"
+    text: Wells score for DVT?
     options:
-      - label: "High probability (≥3 points)"
+      - label: High probability (≥3 points)
         next: dvt
-      - label: "Low-moderate probability (<3 points)"
+      - label: Low-moderate probability (<3 points)
         next: dvt_rule_out
-
   - id: dvt
     type: diagnosis
     diagnosis: Deep Vein Thrombosis
@@ -225,7 +234,6 @@ nodes:
       - Ambulation as tolerated
       - Compression stockings after acute phase
       - Evaluate for thrombophilia if unprovoked
-
   - id: dvt_rule_out
     type: diagnosis
     diagnosis: DVT Ruled Out
@@ -238,7 +246,6 @@ nodes:
       - Reassurance if negative
       - Symptomatic care
       - Consider alternative diagnoses
-
   - id: cellulitis_check
     type: diagnosis
     diagnosis: Cellulitis
@@ -254,7 +261,6 @@ nodes:
       - Leg elevation
       - Mark borders
       - Admit if severe or immunocompromised
-
   - id: post_procedure_edema
     type: diagnosis
     diagnosis: Post-Surgical/Post-Traumatic Edema
@@ -269,7 +275,6 @@ nodes:
       - Physical therapy
       - NSAIDs
       - Should resolve over weeks
-
   - id: lymphedema
     type: diagnosis
     diagnosis: Lymphedema
@@ -285,20 +290,18 @@ nodes:
       - Manual lymphatic drainage
       - Skin care to prevent infection
       - Referral to lymphedema specialist
-
   - id: generalized
     type: question
-    text: "Severity and associated findings?"
+    text: Severity and associated findings?
     options:
-      - label: "Dyspnea, orthopnea"
+      - label: Dyspnea, orthopnea
         next: severe_heart_failure
-      - label: "Ascites, jaundice"
+      - label: Ascites, jaundice
         next: cirrhosis_anasarca
-      - label: "Hypoalbuminemia, proteinuria"
+      - label: Hypoalbuminemia, proteinuria
         next: nephrotic_anasarca
-      - label: "Malnutrition, weight loss"
+      - label: Malnutrition, weight loss
         next: kwashiorkor
-
   - id: severe_heart_failure
     type: diagnosis
     diagnosis: Severe Decompensated Heart Failure
@@ -316,7 +319,6 @@ nodes:
       - Monitor I/O
       - Daily weights
       - Cardiology consult
-
   - id: cirrhosis_anasarca
     type: diagnosis
     diagnosis: Cirrhosis with Anasarca
@@ -332,7 +334,6 @@ nodes:
       - Albumin infusions if severe
       - Hepatology referral
       - Transplant evaluation
-
   - id: nephrotic_anasarca
     type: diagnosis
     diagnosis: Severe Nephrotic Syndrome
@@ -348,7 +349,6 @@ nodes:
       - Albumin infusions
       - Nephrology referral
       - Consider immunosuppression
-
   - id: kwashiorkor
     type: diagnosis
     diagnosis: Protein-Energy Malnutrition
@@ -364,18 +364,16 @@ nodes:
       - Vitamin supplementation
       - Treat underlying cause
       - Nutrition consult
-
   - id: facial
     type: question
-    text: "Acute vs chronic?"
+    text: Acute vs chronic?
     options:
-      - label: "Acute with airway compromise"
+      - label: Acute with airway compromise
         next: angioedema
-      - label: "Acute without airway symptoms"
+      - label: Acute without airway symptoms
         next: allergic_reaction
-      - label: "Chronic, worse in morning"
+      - label: Chronic, worse in morning
         next: facial_chronic
-
   - id: angioedema
     type: diagnosis
     diagnosis: Angioedema
@@ -391,7 +389,6 @@ nodes:
       - Secure airway if needed
       - Discontinue ACE-I if causative
       - FFP or C1-inhibitor for hereditary angioedema
-
   - id: allergic_reaction
     type: diagnosis
     diagnosis: Allergic Reaction
@@ -404,7 +401,6 @@ nodes:
       - Steroids if severe
       - Avoid allergen
       - Epinephrine if anaphylaxis
-
   - id: facial_chronic
     type: diagnosis
     diagnosis: Chronic Facial Edema
@@ -418,18 +414,16 @@ nodes:
       - Treat underlying cause
       - Elevate head of bed
       - Reduce sodium intake
-
   - id: upper_extremity
     type: question
-    text: "Unilateral or bilateral?"
+    text: Unilateral or bilateral?
     options:
-      - label: "Unilateral, post-mastectomy"
+      - label: Unilateral, post-mastectomy
         next: lymphedema_upper
-      - label: "Unilateral, painful with cyanosis"
+      - label: Unilateral, painful with cyanosis
         next: upper_extremity_dvt
-      - label: "Bilateral"
+      - label: Bilateral
         next: superior_vena_cava
-
   - id: lymphedema_upper
     type: diagnosis
     diagnosis: Upper Extremity Lymphedema
@@ -442,7 +436,6 @@ nodes:
       - Manual lymphatic drainage
       - Complete decongestive therapy
       - Lymphedema specialist referral
-
   - id: upper_extremity_dvt
     type: diagnosis
     diagnosis: Upper Extremity DVT
@@ -456,7 +449,6 @@ nodes:
       - Remove catheter if present
       - Arm elevation
       - Consider thoracic outlet if recurrent
-
   - id: superior_vena_cava
     type: diagnosis
     diagnosis: Superior Vena Cava Syndrome
@@ -470,3 +462,13 @@ nodes:
       - Radiation or chemotherapy
       - Stenting if severe
       - Treat underlying malignancy
+criteria: []
+author: RealDiag Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

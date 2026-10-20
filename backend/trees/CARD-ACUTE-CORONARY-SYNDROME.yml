@@ -1,36 +1,46 @@
 tree_id: CARD-ACUTE-CORONARY-SYNDROME
 name: Acute Coronary Syndrome (ACS)
+version: '1.0'
+status: draft
 family: Cardiology
-specialty: Cardiology/Emergency Medicine
+specialty: Cardiology
+secondary_specialties:
+  - Emergency Medicine
+urgency: emergent
+urgency_explanation: ''
 chief_complaint: Chest pain or pressure, shortness of breath, diaphoresis
 description: Spectrum of acute myocardial ischemia ranging from unstable angina to STEMI
-icd10: I24.9
-snomed: 394659003
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I24.9
+  snomed:
+    - '394659003'
+  icpc2: []
+sources:
+  - text: ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+    origin: citations
+  - text: ESC (European Society of Cardiology) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Cardiovascular Medicine
+    origin: citations
 presentations:
-  - Chest pain: substernal, pressure-like, radiating to left arm/jaw/back
-  - Associated symptoms: dyspnea, diaphoresis, nausea, lightheadedness
+  - 'Chest pain: substernal, pressure-like, radiating to left arm/jaw/back'
+  - 'Associated symptoms: dyspnea, diaphoresis, nausea, lightheadedness'
   - Pain lasting >20 minutes, not fully relieved by rest or nitroglycerin
   - May present atypically in elderly, diabetics, women (epigastric pain, fatigue)
-  - Cardiogenic shock: hypotension, cool extremities, altered mental status
-urgency: emergency
-referrals:
-  emergency:
-    - Acute MI/STEMI
-    - Cardiogenic shock
-    - Acute heart failure with hypoxia
-    - Unstable arrhythmia
-    - Cardiac tamponade
-  urgent:
-    - Unstable angina
-    - New-onset heart failure
-    - Symptomatic arrhythmia
-    - Moderate-severe valvular disease
-  routine:
-    - Stable angina for evaluation
-    - Hypertension uncontrolled on multiple meds
-    - Asymptomatic murmur workup
-    - Risk stratification
-
+  - 'Cardiogenic shock: hypotension, cool extremities, altered mental status'
+differentials:
+  - Aortic dissection (tearing pain radiating to back, pulse differential, widened mediastinum)
+  - Pulmonary embolism (dyspnea, pleuritic chest pain, DVT risk factors, elevated D-dimer)
+  - Pericarditis (pleuritic chest pain, worse with lying flat, better leaning forward, friction rub)
+  - Pneumothorax (sudden dyspnea, unilateral decreased breath sounds, hyperresonance)
+  - GERD (burning chest pain, relieved with antacids, no ECG changes)
+  - Costochondritis (chest wall tenderness, reproducible with palpation)
+  - Anxiety/panic attack (younger patient, hyperventilation, no cardiac risk factors)
 workup:
   - Immediate assessment - within 10 minutes of presentation
   - Brief focused history - chest pain characteristics (onset, quality, duration, radiation, associated symptoms)
@@ -51,7 +61,7 @@ workup:
   - Echocardiography (wall motion abnormalities, complications)
 treatment:
   - STEMI - time is muscle, door-to-balloon less than 90 minutes for PCI
-  - Activate cardiac catheterization lab immediately
+  - 'Consider immediate cardiac catheterization lab activation per institutional STEMI protocol'
   - Primary PCI (percutaneous coronary intervention) preferred if available within 120 minutes
   - Fibrinolysis if PCI not available within 120 minutes (door-to-needle less than 30 minutes)
   - Alteplase, reteplase, or tenecteplase
@@ -90,14 +100,97 @@ clinical_pearls:
   - High risk for anterior STEMI within days-weeks, urgent catheterization
   - Post-MI medications - aspirin lifelong, P2Y12 inhibitor 12 months, beta-blocker, ACE/ARB, statin
   - Cardiac rehabilitation improves outcomes - enroll all post-MI patients
-differentials:
-  - Aortic dissection (tearing pain radiating to back, pulse differential, widened mediastinum)
-  - Pulmonary embolism (dyspnea, pleuritic chest pain, DVT risk factors, elevated D-dimer)
-  - Pericarditis (pleuritic chest pain, worse with lying flat, better leaning forward, friction rub)
-  - Pneumothorax (sudden dyspnea, unilateral decreased breath sounds, hyperresonance)
-  - GERD (burning chest pain, relieved with antacids, no ECG changes)
-  - Costochondritis (chest wall tenderness, reproducible with palpation)
-  - Anxiety/panic attack (younger patient, hyperventilation, no cardiac risk factors)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria:
+  finding_label: acute coronary syndrome
+  source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
+  display: when_met
+  # Today's complaint shows this card even when nothing was measured (pending clinical review)
+  complaint_terms:
+    - chest pain
+    - chest pressure
+    - chest tightness
+    - chest discomfort
+    - angina
+    - shortness of breath with exertion
+    - epigastric pain
+    - pain radiating to the jaw
+    - pain radiating to the neck
+    - pain radiating to the back
+    - pain radiating to the arm
+  probability: met_over_all
+  suggest_when:
+    count_met: 1
+  severity_default: unknown
+  severity:
+    - type: reference_multiple
+      item: troponin
+      not_measured_reason: 'Severity unknown: troponin not measured.'
+  next_steps:
+    - Consider ECG and serial troponins.
+  items:
+    - id: troponin
+      label: Elevated troponin
+      resource: lab
+      loinc:
+        - 10839-9
+        - 6598-7
+      operator: above_ref_high
+      unit: ng/L
+      select: most_concerning_per_code
+      code_names:
+        10839-9: troponin I
+        6598-7: troponin T
+      severity_multiples:
+        high: 2.5
+        critical: 10
+      mark_preliminary: true
+      details_met: '{code_name}: {reason}{prelim}'
+      details_not_met: '{code_name}: {reason}{prelim}'
+      details_unusable: '{code_name}: Severity unknown: {problem}.{prelim}'
+      details_unknown: Troponin not measured
+      missing_test: Troponin (serial measurements per institutional protocol)
+      missing_test_unusable: Troponin with lab reference range and units
+      source: 'Fourth Universal Definition of Myocardial Infarction (2018): troponin above the 99th-percentile upper reference limit'
+    - id: heart_rate
+      label: Heart rate
+      role: supporting
+      resource: vital
+      loinc:
+        - 8867-4
+      operator: '>'
+      value: 100
+      unit: /min
+      unit_check: false
+      expected: '> 100/min (tachycardia)'
+      details_met: Supporting finding only; tachycardia alone does not suggest ACS.
+      details_not_met: Supporting finding only; tachycardia alone does not suggest ACS.
+      source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
 trace:
   - 58-year-old man with history of hypertension and hyperlipidemia presents to ED via EMS with chest pain
   - Sudden onset severe substernal chest pressure 90 minutes ago while shoveling snow
@@ -137,8 +230,20 @@ trace:
   - Quit smoking, tolerating medications well
   - Repeat echo - EF improved to 50%
   - Outcome - Successful primary PCI with good recovery, excellent compliance with secondary prevention
-
-citations:
-  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
-  - ESC (European Society of Cardiology) Clinical Practice Guidelines
-  - UpToDate - Cardiovascular Medicine
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'emergency' mapped to 'emergent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured).
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

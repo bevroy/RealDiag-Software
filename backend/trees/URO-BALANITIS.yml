@@ -1,12 +1,35 @@
 tree_id: URO-BALANITIS
 name: Balanitis (Glans Penis Inflammation)
+version: '1.0'
+status: draft
 family: urology
-specialty: Urology/Infectious Disease/Dermatology
-applies_to: male
-icd10: N48.1
-snomed: 44882003
-urgency: []
-homeopathy: []
+specialty: Urology
+secondary_specialties:
+  - Infectious Disease
+  - Dermatology
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: male
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N48.1
+  snomed:
+    - '44882003'
+  icpc2: []
+sources:
+  - text: AUA (American Urological Association) Clinical Guidelines
+    origin: citations
+  - text: EAU (European Association of Urology) Guidelines
+    origin: citations
+  - text: UpToDate - Urology
+    origin: citations
+  - text: American Urological Association, American Academy of Dermatology, European Association of Urology Guidelines, UpToDate
+    origin: trace.source
 presentations:
   - Erythema and swelling of glans penis
   - Pain, tenderness, or itching of glans
@@ -18,6 +41,17 @@ presentations:
   - Inguinal lymphadenopathy if severe infection
   - Balanoposthitis if foreskin also inflamed (combined inflammation of glans and foreskin)
   - Systemic symptoms rare (fever, malaise) unless severe infection
+differentials:
+  - Candidal balanitis (erythema, white plaques, satellite lesions, diabetics)
+  - Bacterial balanitis (purulent discharge, Streptococcus/Staphylococcus)
+  - STI-related (gonorrhea, chlamydia, syphilis chancre, herpes ulcers, HPV warts)
+  - Contact dermatitis (irritant or allergic, recent exposure to soaps/condoms)
+  - Lichen sclerosus (white scarred plaques, steroid-resistant, may cause phimosis)
+  - Lichen planus (violaceous plaques, Wickham striae)
+  - Psoriasis (well-demarcated red plaques, may lack typical scales on glans)
+  - Plasma cell balanitis (Zoon's balanitis - shiny red/orange plaques, chronic)
+  - Fixed drug eruption (dusky red plaque, recurs same site with drug re-exposure)
+  - Squamous cell carcinoma (chronic non-healing lesion, older men, biopsy to confirm)
 workup:
   - History
   - Onset and duration of symptoms
@@ -52,7 +86,7 @@ workup:
 treatment:
   - Management based on etiology
   - General measures (all cases)
-  - Improve hygiene: wash daily with water, pat dry
+  - 'Patient advice: Improve hygiene: wash daily with water, pat dry'
   - Avoid irritants (harsh soaps, fragrances)
   - Retract foreskin daily and clean if possible
   - Saline soaks or sitz baths
@@ -72,52 +106,56 @@ treatment:
   - Amoxicillin-clavulanate 875/125 mg twice daily for 7 days
   - Anaerobic coverage (clindamycin, metronidazole) if foul odor suggests anaerobes
   - STI-related balanitis
-  - Gonorrhea: ceftriaxone 500 mg IM single dose
-  - Chlamydia: doxycycline 100 mg twice daily for 7 days OR azithromycin 1 g single dose
-  - Syphilis: benzathine penicillin G 2.4 million units IM single dose (primary/secondary)
-  - Herpes: valacyclovir 1 g twice daily for 7-10 days (primary episode)
+  - 'Gonorrhea: ceftriaxone 500 mg IM single dose'
+  - 'Chlamydia: doxycycline 100 mg twice daily for 7 days OR azithromycin 1 g single dose'
+  - 'Syphilis: benzathine penicillin G 2.4 million units IM single dose (primary/secondary)'
+  - 'Herpes: valacyclovir 1 g twice daily for 7-10 days (primary episode)'
   - Treat partner(s) if STI identified
   - Dermatologic causes
-  - Lichen sclerosus: clobetasol 0.05% cream twice daily for 8-12 weeks, consider circumcision
-  - Lichen planus: topical corticosteroids, immunosuppressants
-  - Plasma cell balanitis (Zoon's): topical corticosteroids, circumcision curative
-  - Psoriasis: topical corticosteroids, calcipotriene
-  - Contact dermatitis: avoid irritant, topical corticosteroids
+  - 'Lichen sclerosus: clobetasol 0.05% cream twice daily for 8-12 weeks, consider circumcision'
+  - 'Lichen planus: topical corticosteroids, immunosuppressants'
+  - 'Plasma cell balanitis (Zoon''s): topical corticosteroids, circumcision curative'
+  - 'Psoriasis: topical corticosteroids, calcipotriene'
+  - 'Contact dermatitis: avoid irritant, topical corticosteroids'
   - Refractory or recurrent balanitis
   - Consider circumcision (definitive treatment, prevents recurrence)
   - Re-evaluate for underlying conditions (diabetes, immunosuppression)
 clinical_pearls:
-  - "Candida is most common cause (30-35%), especially in diabetics and uncircumcised men"
-  - "Poor hygiene and diabetes are major risk factors"
-  - "Uncircumcised men 3-10 times more likely than circumcised"
-  - "Recurrent candidal balanitis should prompt diabetes screening"
-  - "Balanoposthitis is combined inflammation of glans AND foreskin"
-  - "Zoon's balanitis (plasma cell balanitis): chronic, shiny red plaques, more common in older uncircumcised men, circumcision curative"
-  - "Always consider STIs in sexually active patients"
-  - "Circumcision is definitive treatment for recurrent balanitis (eliminates foreskin environment)"
-  - "Fixed drug eruption can mimic balanitis - ask about recent medications"
+  - Candida is most common cause (30-35%), especially in diabetics and uncircumcised men
+  - Poor hygiene and diabetes are major risk factors
+  - Uncircumcised men 3-10 times more likely than circumcised
+  - Recurrent candidal balanitis should prompt diabetes screening
+  - Balanoposthitis is combined inflammation of glans AND foreskin
+  - 'Zoon''s balanitis (plasma cell balanitis): chronic, shiny red plaques, more common in older uncircumcised men, circumcision curative'
+  - Always consider STIs in sexually active patients
+  - Circumcision is definitive treatment for recurrent balanitis (eliminates foreskin environment)
+  - Fixed drug eruption can mimic balanitis - ask about recent medications
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Urology if recurrent episodes despite appropriate treatment (consider circumcision)
   - Urology if concern for malignancy, chronic refractory lesions
   - Dermatology if dermatologic cause suspected (lichen sclerosus, lichen planus, psoriasis)
   - Infectious disease if atypical organism or immunocompromised patient
-differentials:
-  - Candidal balanitis (erythema, white plaques, satellite lesions, diabetics)
-  - Bacterial balanitis (purulent discharge, Streptococcus/Staphylococcus)
-  - STI-related (gonorrhea, chlamydia, syphilis chancre, herpes ulcers, HPV warts)
-  - Contact dermatitis (irritant or allergic, recent exposure to soaps/condoms)
-  - Lichen sclerosus (white scarred plaques, steroid-resistant, may cause phimosis)
-  - Lichen planus (violaceous plaques, Wickham striae)
-  - Psoriasis (well-demarcated red plaques, may lack typical scales on glans)
-  - Plasma cell balanitis (Zoon's balanitis - shiny red/orange plaques, chronic)
-  - Fixed drug eruption (dusky red plaque, recurs same site with drug re-exposure)
-  - Squamous cell carcinoma (chronic non-healing lesion, older men, biopsy to confirm)
-trace:
-  source: American Urological Association, American Academy of Dermatology, European Association of Urology Guidelines, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - AUA (American Urological Association) Clinical Guidelines
-  - EAU (European Association of Urology) Guidelines
-  - UpToDate - Urology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

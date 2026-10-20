@@ -1,0 +1,97 @@
+tree_id: CARD-AORTIC-DISSECTION
+name: Acute Aortic Dissection
+version: '1.0'
+status: draft
+family: Cardiology
+specialty: Cardiology
+secondary_specialties:
+  - Cardiothoracic Surgery
+  - Vascular Surgery
+  - Emergency Medicine
+urgency: emergent
+urgency_explanation: 'Acute aortic syndrome: high early mortality; type A dissection is a surgical emergency (2022 ACC/AHA Aortic Disease Guideline §7.4.1).'
+chief_complaint: 'Chest pain, back pain, abdominal pain: abrupt, severe, sharp, stabbing, tearing or ripping'
+description: Acute aortic syndrome due to dissection of the aortic wall (Stanford type A involves the ascending aorta; type B does not). Evaluation and management per the 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease.
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I71.00
+    - I71.010
+    - I71.011
+    - I71.012
+    - I71.019
+    - I71.02
+    - I71.03
+  snomed:
+    - '308546005'
+  icpc2: []
+sources:
+  - text: 'Isselbacher EM, Preventza O, Hamilton Black J 3rd, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146:e334-e482; J Am Coll Cardiol. 2022;80:e223-e393. doi:10.1016/j.jacc.2022.08.004'
+    origin: citations
+presentations:
+  - 'Abrupt onset of severe chest or back pain (sometimes abdominal), more often described as sharp or stabbing than the classic tearing or ripping (§7.1)'
+  - 'Asymmetric blood pressure (>20 mm Hg) between limbs or pulse deficit; measure BP in both arms and both legs (§7.1, Table 22)'
+  - 'Syncope (carotid involvement or cardiac tamponade) (§7.1, Table 22)'
+  - 'Stroke symptoms or focal neurologic deficit (carotid or vertebral involvement) (§7.1, Table 22)'
+  - 'New murmur of aortic regurgitation (§7.1, Table 22)'
+  - 'Shock: tamponade, hemothorax, rupture, severe aortic regurgitation or ischemia (§7.1, Table 22)'
+  - 'Malperfusion: bowel ischemia, oliguria or hematuria, paraplegia, limb ischemia (§7.1, Table 22; Table 26)'
+differentials:
+  - Acute coronary syndrome
+  - Pulmonary embolism
+  - Pneumothorax
+  - Acute pericarditis
+  - Ruptured abdominal aortic aneurysm
+  - Intramural hematoma or penetrating aortic ulcer (other acute aortic syndromes)
+  - Musculoskeletal pain
+workup:
+  - 'Aortic Dissection Detection Risk Score (ADD-RS): one point for each category with at least one feature: high-risk conditions (Marfan or other connective tissue disease, family history of aortic disease, known aortic valve disease, recent aortic manipulation, known thoracic aortic aneurysm), high-risk pain (abrupt onset, severe intensity, ripping or tearing), high-risk exam (pulse deficit or systolic BP differential, focal neurologic deficit with pain, new aortic regurgitation murmur with pain, hypotension or shock); 0 low, 1 moderate, 2-3 high risk (§7.2, Table 24)'
+  - 'D-dimer: not diagnostic; in low-probability patients a D-dimer <500 ng/mL makes the diagnosis unlikely (§7.2)'
+  - 'CT is recommended for initial diagnostic imaging in suspected acute aortic syndrome (§7.2; COR 1, LOE C-LD)'
+  - 'TEE and MRI are reasonable alternatives for initial diagnostic imaging; echocardiography (TEE/TTE) is an alternative when the patient is too unstable to travel to radiology (§7.2; COR 2a, LOE C-LD)'
+  - 'ECG and troponin to evaluate for acute coronary syndrome, which can coexist or mimic dissection'
+treatment:
+  - 'Consider prompt anti-impulse therapy with invasive arterial BP monitoring in an ICU setting (§7.3.1; COR 1, LOE B-NR)'
+  - 'Blood pressure target: SBP <120 mm Hg or the lowest BP that maintains adequate end-organ perfusion (§7.3.1; COR 1, LOE C-LD)'
+  - 'Heart rate target: 60 to 80 bpm (§7.3.1; COR 1, LOE C-LD)'
+  - 'Consider intravenous beta blockers as initial therapy unless contraindicated (§7.3.1; COR 1, LOE B-NR); an intravenous non-dihydropyridine calcium channel blocker is reasonable for heart rate control when beta blockers are contraindicated (§7.3.1; COR 2a, LOE B-NR)'
+  - 'Consider intravenous vasodilators if BP is not well controlled after heart rate control (§7.3.1; COR 1, LOE C-LD)'
+  - 'Consider pain control as needed to help with hemodynamic management (§7.3.1; COR 1, LOE C-EO)'
+  - 'Type A: emergency surgical consultation and evaluation, with immediate surgical intervention, is recommended (§7.4.1; COR 1, LOE B-NR); with malperfusion, immediate operative repair of the ascending aorta is recommended (§7.4.1; COR 1, LOE B-NR)'
+  - 'Type A, clinically stable at a low-volume center: transfer to a high-volume aortic center is reasonable to improve survival (§7.4.1; COR 2a, LOE B-NR)'
+  - 'Type B, uncomplicated: medical therapy is recommended as the initial management strategy (§7.4.2; COR 1, LOE B-NR); endovascular management may be considered with high-risk anatomic features (§7.4.2, Table 28; COR 2b, LOE B-R)'
+  - 'Type B, complicated (rupture, malperfusion, extension, aneurysmal expansion, refractory pain or hypertension; Table 27): intervention is recommended (§7.4.2; COR 1, LOE C-LD); with rupture, endovascular stent grafting is recommended over open repair (§7.4.2; COR 1, LOE C-EO)'
+  - 'Surveillance after dissection (repaired with residual disease, or medical therapy alone): CT (or MRI) at 1, 6 and 12 months, then annually if stable (§7.8.1; COR 1, LOE B-NR)'
+clinical_pearls:
+  - 'Classic tearing or ripping pain is less common than sharp or stabbing pain; absence of the classic description does not exclude dissection (§7.1)'
+  - 'Dissection can involve the coronary arteries and mimic or coexist with acute coronary syndrome; consider dissection before antithrombotic therapy when features suggest it'
+  - 'A low ADD-RS with D-dimer <500 ng/mL may help make acute aortic syndrome unlikely in low-probability patients; neither is diagnostic alone (§7.2)'
+red_flags:
+  - 'Hypotension or shock (possible tamponade, rupture or severe aortic regurgitation) (§7.1, Table 22)'
+  - 'Pulse deficit or systolic BP difference >20 mm Hg between limbs (§7.1, Table 22)'
+  - 'New focal neurologic deficit, syncope or paraplegia with chest or back pain (§7.1, Table 22)'
+  - 'Signs of malperfusion: abdominal pain with ischemia, oliguria, limb ischemia (§7.1, Table 26)'
+disposition_guidance:
+  emergency:
+    - 'Suspected acute aortic syndrome: emergency evaluation with CT imaging; ICU-level monitoring during anti-impulse therapy (§7.2, §7.3.1)'
+referrals:
+  emergency:
+    - 'Cardiothoracic surgery: emergency consultation for type A dissection (§7.4.1)'
+    - 'Vascular or endovascular surgery: complicated type B dissection (§7.4.2)'
+    - 'Multidisciplinary aortic team for acute aortic disease requiring urgent repair (§4; COR 1, LOE C-EO)'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: New tree drafted from the 2022 ACC/AHA Aortic Disease Guideline (section, COR and LOE cited per line). Pending clinical review.

@@ -1,11 +1,33 @@
 tree_id: GI-DYSPHAGIA
 name: Dysphagia (Difficulty Swallowing)
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: R13.10
-snomed: 40739000
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R13.10
+  snomed:
+    - '40739000'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: ACG Clinical Guidelines on Esophageal Dysphagia 2020, AGA Guidelines on Eosinophilic Esophagitis
+    origin: trace.source
 presentations:
   - Difficulty initiating swallowing or food "getting stuck"
   - Sensation of food lodging in chest or throat
@@ -15,49 +37,7 @@ presentations:
   - Solids and liquids suggests motility disorder
   - Progressive symptoms suggest malignancy or stricture
   - Intermittent symptoms suggest esophageal rings or eosinophilic esophagitis
-  - Associated symptoms: odynophagia (painful swallowing), weight loss, regurgitation
-workup:
-  - Detailed history to distinguish oropharyngeal vs esophageal dysphagia
-  - Oropharyngeal: neurologic exam, speech/swallow evaluation
-  - Esophageal: upper endoscopy (EGD) is first-line
-  - EGD visualizes mucosa, identifies strictures, masses, inflammation, rings
-  - Obtain biopsies even if mucosa appears normal (rule out eosinophilic esophagitis)
-  - Barium esophagram useful if stricture, motility disorder, or anatomic abnormality suspected
-  - Esophageal manometry if normal EGD and barium study (diagnose motility disorders)
-  - Modified barium swallow (videofluoroscopy) for oropharyngeal dysphagia
-  - CT neck/chest if mass lesion suspected
-  - Laboratory tests: CBC (anemia from malignancy), iron studies if indicated
-treatment:
-  - Treatment directed at underlying cause
-  - Mechanical obstruction (stricture, tumor, ring)
-  - Endoscopic dilation for benign strictures (peptic, radiation, post-surgical)
-  - Schatzki ring: dilation or incision
-  - Esophageal cancer: multidisciplinary oncology care, possible stenting
-  - Eosinophilic esophagitis: topical steroids (swallowed fluticasone or budesonide), dietary elimination
-  - Motility disorders
-  - Achalasia: pneumatic dilation, Heller myotomy, or peroral endoscopic myotomy (POEM)
-  - Diffuse esophageal spasm: calcium channel blockers, nitrates, botulinum toxin
-  - Oropharyngeal dysphagia: speech therapy, dietary modifications (thickened liquids)
-  - GERD-related: PPI therapy (omeprazole 20-40 mg daily)
-  - Supportive measures
-  - Small bites, thorough chewing, adequate fluid with meals
-  - Avoid dry, sticky, or tough foods if mechanical obstruction
-  - Nutritional support if significant weight loss or aspiration risk
-clinical_pearls:
-  - "Dysphagia is ALARM symptom - always requires evaluation, especially if progressive or with weight loss"
-  - "Oropharyngeal dysphagia: immediate coughing/choking (neurologic or structural)"
-  - "Esophageal dysphagia: delayed sensation of food stuck in chest"
-  - "Solids only → mechanical obstruction; solids and liquids → motility disorder"
-  - "Progressive dysphagia → malignancy or stricture; intermittent → rings or eosinophilic esophagitis"
-  - "Odynophagia (painful swallowing) suggests infection (CMV, HSV, Candida), pill esophagitis, or cancer"
-  - "Eosinophilic esophagitis increasing - young males, food impaction, atopic history"
-  - "Achalasia: dysphagia to solids and liquids from onset, regurgitation, chest pain"
-referrals:
-  - Gastroenterology for upper endoscopy and further evaluation
-  - Speech-language pathology for oropharyngeal dysphagia and swallow evaluation
-  - Otolaryngology if structural oropharyngeal abnormality suspected
-  - Cardiothoracic surgery for achalasia (Heller myotomy) or esophageal cancer
-  - Oncology if esophageal malignancy diagnosed
+  - 'Associated symptoms: odynophagia (painful swallowing), weight loss, regurgitation'
 differentials:
   - Esophageal stricture (peptic, radiation, caustic injury, post-surgical)
   - Esophageal rings and webs (Schatzki ring, Plummer-Vinson syndrome)
@@ -69,12 +49,66 @@ differentials:
   - Oropharyngeal dysphagia (stroke, Parkinson's, myasthenia gravis, ALS)
   - Infectious esophagitis (Candida, CMV, HSV in immunocompromised)
   - Medication-induced (pill esophagitis from bisphosphonates, NSAIDs, tetracyclines)
-trace:
-  source: ACG Clinical Guidelines on Esophageal Dysphagia 2020, AGA Guidelines on Eosinophilic Esophagitis
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+workup:
+  - Detailed history to distinguish oropharyngeal vs esophageal dysphagia
+  - 'Oropharyngeal: neurologic exam, speech/swallow evaluation'
+  - 'Esophageal: upper endoscopy (EGD) is first-line'
+  - EGD visualizes mucosa, identifies strictures, masses, inflammation, rings
+  - Obtain biopsies even if mucosa appears normal (rule out eosinophilic esophagitis)
+  - Barium esophagram useful if stricture, motility disorder, or anatomic abnormality suspected
+  - Esophageal manometry if normal EGD and barium study (diagnose motility disorders)
+  - Modified barium swallow (videofluoroscopy) for oropharyngeal dysphagia
+  - CT neck/chest if mass lesion suspected
+  - 'Laboratory tests: CBC (anemia from malignancy), iron studies if indicated'
+treatment:
+  - Treatment directed at underlying cause
+  - Mechanical obstruction (stricture, tumor, ring)
+  - Endoscopic dilation for benign strictures (peptic, radiation, post-surgical)
+  - 'Schatzki ring: dilation or incision'
+  - 'Esophageal cancer: multidisciplinary oncology care, possible stenting'
+  - 'Eosinophilic esophagitis: topical steroids (swallowed fluticasone or budesonide), dietary elimination'
+  - Motility disorders
+  - 'Achalasia: pneumatic dilation, Heller myotomy, or peroral endoscopic myotomy (POEM)'
+  - 'Diffuse esophageal spasm: calcium channel blockers, nitrates, botulinum toxin'
+  - 'Oropharyngeal dysphagia: speech therapy, dietary modifications (thickened liquids)'
+  - 'GERD-related: PPI therapy (omeprazole 20-40 mg daily)'
+  - Supportive measures
+  - Small bites, thorough chewing, adequate fluid with meals
+  - Avoid dry, sticky, or tough foods if mechanical obstruction
+  - Nutritional support if significant weight loss or aspiration risk
+clinical_pearls:
+  - Dysphagia is ALARM symptom - always requires evaluation, especially if progressive or with weight loss
+  - 'Oropharyngeal dysphagia: immediate coughing/choking (neurologic or structural)'
+  - 'Esophageal dysphagia: delayed sensation of food stuck in chest'
+  - Solids only → mechanical obstruction; solids and liquids → motility disorder
+  - Progressive dysphagia → malignancy or stricture; intermittent → rings or eosinophilic esophagitis
+  - Odynophagia (painful swallowing) suggests infection (CMV, HSV, Candida), pill esophagitis, or cancer
+  - Eosinophilic esophagitis increasing - young males, food impaction, atopic history
+  - 'Achalasia: dysphagia to solids and liquids from onset, regurgitation, chest pain'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Gastroenterology for upper endoscopy and further evaluation
+  - Speech-language pathology for oropharyngeal dysphagia and swallow evaluation
+  - Otolaryngology if structural oropharyngeal abnormality suspected
+  - Cardiothoracic surgery for achalasia (Heller myotomy) or esophageal cancer
+  - Oncology if esophageal malignancy diagnosed
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

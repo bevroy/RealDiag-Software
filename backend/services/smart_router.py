@@ -31,8 +31,9 @@ import secrets
 import jwt
 from datetime import datetime, timedelta
 
-from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC
+from ..services.fhir_client import FHIRClient, PatientData, CommonLOINC, RETRIEVED, retrieval_warnings
 from ..services.smart_diagnostic_engine import SmartDiagnosticEngine, DiagnosisEvaluation
+from ..services.clinical_review import review_notice
 from ..services.patient_history_service import PatientHistoryService
 from ..services.symptom_search import (
     rank_diagnoses,
@@ -162,6 +163,7 @@ class CriterionResponse(BaseModel):
     value: Optional[str] = None
     expected: Optional[str] = None
     details: Optional[str] = None
+    source: Optional[str] = None
 
 
 class DiagnosisResponse(BaseModel):
@@ -176,22 +178,61 @@ class DiagnosisResponse(BaseModel):
     criteria_unknown: List[CriterionResponse]
     recommendations: List[str]
     missing_tests: List[str]
+    # "evaluated" | "insufficient data" | "evaluation failed"
+    evaluation_status: str = "evaluated"
+    status_reason: Optional[str] = None
+    severity_reason: Optional[str] = None
+    supporting_findings: List[CriterionResponse] = []
+    # "consistent" | "possible" (a repeat result is needed) | None
+    finding: Optional[str] = None
+    # Already on the patient's problem list (shown as "known condition")
+    known_condition: bool = False
+    known_condition_text: Optional[str] = None
+    # "always" (acute) | "when_found" (chronic: shown only when something is found)
+    display: str = "always"
+    sources: List[str] = []
+    review_status: Optional[str] = None
+    review_status_label: Optional[str] = None
+    # Terms of today's complaint that matched this condition
+    complaint_matches: List[str] = []
+
+
+class EvaluatePatientResponse(BaseModel):
+    """Diagnosis evaluations plus what chart data they were based on."""
+    patient_id: str
+    evaluations: List[DiagnosisResponse]
+    # Per resource: "retrieved" | "failed" | "not available"
+    data_status: Dict[str, str]
+    data_warnings: List[str]
+    data_notes: List[str] = []
+    # Conditions that could not be assessed, e.g. "Chronic conditions could not
+    # be assessed: lab results could not be retrieved."
+    assessment_warnings: List[str] = []
+    # Severity ratings and recommendations are not yet clinically reviewed
+    clinical_review_notice: Optional[str] = None
 
 
 class PatientSummaryResponse(BaseModel):
-    """Patient clinical summary."""
+    """Patient clinical summary.
+
+    A count of None means that resource could not be retrieved (see
+    data_status / data_warnings); 0 means it was retrieved and none were found.
+    """
     patient_id: str
     name: str
-    age: int
+    age: Optional[int]  # None when the birth date is missing
     gender: str
-    lab_count: int
-    vital_count: int
-    condition_count: int
-    medication_count: int
+    lab_count: Optional[int]
+    vital_count: Optional[int]
+    condition_count: Optional[int]
+    medication_count: Optional[int]
     abnormal_labs: List[Dict[str, Any]]
     recent_vitals: List[Dict[str, Any]]
-    allergy_count: int
+    allergy_count: Optional[int]
     allergies: List[Dict[str, Any]]
+    data_status: Dict[str, str] = {}
+    data_warnings: List[str] = []
+    data_notes: List[str] = []
 
 
 class HandoffUpdateItem(BaseModel):
@@ -202,12 +243,18 @@ class HandoffUpdateItem(BaseModel):
 
 
 class HandoffUpdatesResponse(BaseModel):
-    """Structured delta: what's new since the timeframe boundary."""
-    new_lab_count: int
+    """Structured delta: what's new since the timeframe boundary.
+
+    Counts are None (and lists empty) for resources that could not be
+    retrieved; see data_status / data_warnings.
+    """
+    new_lab_count: Optional[int]
     new_abnormal_labs: List[Dict[str, Any]]
-    new_vital_count: int
+    new_vital_count: Optional[int]
     new_conditions: List[HandoffUpdateItem]
     new_medications: List[HandoffUpdateItem]
+    data_status: Dict[str, str] = {}
+    data_warnings: List[str] = []
 
 
 class HandoffSummaryResponse(BaseModel):
@@ -223,6 +270,7 @@ class HandoffSummaryResponse(BaseModel):
     full_summary: PatientSummaryResponse
     updates: Optional[HandoffUpdatesResponse]
     narrative: str
+    clinical_review_notice: Optional[str] = None
 
 
 class SmartSessionStatusResponse(BaseModel):
@@ -249,9 +297,14 @@ class AmbulatoryDifferentialResponse(BaseModel):
     age: Optional[int] = None
     gender: Optional[str] = None
     chart_summary: str
-    data_pulled: Dict[str, int]
+    # Items pulled per data type; None = that data type could not be retrieved
+    data_pulled: Dict[str, Optional[int]]
     search_terms_used: List[str]
     differential: SymptomSearchResponse
+    # Per data type: "retrieved" | "failed" | "not available"
+    data_status: Dict[str, str] = {}
+    data_warnings: List[str] = []
+    clinical_review_notice: Optional[str] = None
 
 
 def get_ehr_config():
@@ -274,18 +327,12 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
     Shared chart-summary logic, used by both GET /patient/{id} and
     GET /patient/{id}/handoff so they can never drift out of sync.
     """
-    patient_data = fhir_client.get_patient_data(patient_id)
+    return summary_from_patient_data(fhir_client.get_patient_data(patient_id))
 
-    abnormal_labs = []
-    for lab in patient_data.labs:
-        if lab.is_abnormal:
-            abnormal_labs.append({
-                "name": lab.display,
-                "value": lab.value,
-                "unit": lab.unit,
-                "reference_range": lab.reference_range,
-                "date": lab.effective_date.isoformat() if lab.effective_date else None
-            })
+
+def summary_from_patient_data(patient_data) -> PatientSummaryResponse:
+    """Chart summary from already-fetched PatientData (no further FHIR queries)."""
+    abnormal_labs = [_lab_summary(lab) for lab in patient_data.labs if lab.is_abnormal]
 
     vital_summary = []
     vital_types_seen = set()
@@ -296,7 +343,9 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
                 "name": vital.display,
                 "value": vital.value,
                 "unit": vital.unit,
-                "date": vital.effective_date.isoformat()
+                "date": vital.effective_date.isoformat(),
+                "status": getattr(vital, "status", "final"),
+                "preliminary": getattr(vital, "status", "final") == "preliminary",
             })
         vital_types_seen.add(vital.code)
 
@@ -316,19 +365,77 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
             "reaction": reaction_text
         })
 
+    status = getattr(patient_data, "retrieval_status", {}) or {}
+
+    def _count(resource: str, items) -> Optional[int]:
+        # None = could not be retrieved; 0 = retrieved, none found
+        return len(items) if status.get(resource, RETRIEVED) == RETRIEVED else None
+
     return PatientSummaryResponse(
         patient_id=patient_data.patient_id,
         name=patient_data.name,
         age=patient_data.age,
         gender=patient_data.gender,
-        lab_count=len(patient_data.labs),
-        vital_count=len(patient_data.vitals),
-        condition_count=len(patient_data.conditions),
-        medication_count=len(patient_data.medications),
+        lab_count=_count("labs", patient_data.labs),
+        vital_count=_count("vitals", patient_data.vitals),
+        condition_count=_count("conditions", patient_data.conditions),
+        medication_count=_count("medications", patient_data.medications),
         abnormal_labs=abnormal_labs[:10],
         recent_vitals=vital_summary[:10],
-        allergy_count=len(allergies),
-        allergies=allergies[:10]
+        allergy_count=_count("allergies", allergies),
+        allergies=allergies[:10],
+        data_status=status,
+        data_warnings=retrieval_warnings(status) + list(getattr(patient_data, "truncation_warnings", []) or []),
+        data_notes=list(getattr(patient_data, "data_notes", []) or []),
+    )
+
+
+def _lab_summary(lab) -> Dict[str, Any]:
+    """Lab result for API output, labelled when preliminary."""
+    status = getattr(lab, "status", "final")
+    return {
+        "name": lab.display,
+        "value": lab.value,
+        "unit": lab.unit,
+        "reference_range": lab.reference_range,
+        "date": lab.effective_date.isoformat() if lab.effective_date else None,
+        "status": status,
+        "preliminary": status == "preliminary",
+    }
+
+
+def _criterion_response(c) -> "CriterionResponse":
+    return CriterionResponse(
+        criterion=c.criterion, status=c.status.value,
+        value=c.value, expected=c.expected, details=c.details,
+        source=getattr(c, "source", None),
+    )
+
+
+def _diagnosis_response(evaluation: DiagnosisEvaluation) -> DiagnosisResponse:
+    return DiagnosisResponse(
+        diagnosis_id=evaluation.diagnosis_id,
+        diagnosis_label=evaluation.diagnosis_label,
+        family=evaluation.family,
+        probability=evaluation.probability,
+        severity=evaluation.severity,
+        criteria_met=[_criterion_response(c) for c in evaluation.criteria_met],
+        criteria_not_met=[_criterion_response(c) for c in evaluation.criteria_not_met],
+        criteria_unknown=[_criterion_response(c) for c in evaluation.criteria_unknown],
+        recommendations=evaluation.recommendations,
+        missing_tests=evaluation.missing_tests,
+        evaluation_status=evaluation.evaluation_status,
+        status_reason=evaluation.status_reason,
+        severity_reason=evaluation.severity_reason,
+        supporting_findings=[_criterion_response(c) for c in evaluation.supporting_findings],
+        finding=getattr(evaluation, "finding", None),
+        known_condition=getattr(evaluation, "known_condition", False),
+        known_condition_text=getattr(evaluation, "known_condition_text", None),
+        display=getattr(evaluation, "display", "always"),
+        sources=list(getattr(evaluation, "sources", []) or []),
+        review_status=getattr(evaluation, "review_status", None),
+        review_status_label=getattr(evaluation, "review_status_label", None),
+        complaint_matches=list(getattr(evaluation, "complaint_matches", []) or []),
     )
 
 
@@ -355,26 +462,46 @@ def _generate_handoff_narrative(
 
     when = timeframe_start.strftime("%b %d, %Y at %H:%M")
     basis = "since admission" if timeframe_source == "admission" else "since the specified handoff time"
+    age = f"{full_summary.age}yo" if full_summary.age is not None else "age unknown"
+    status = updates.get("retrieval_status", {}) or {}
 
-    parts = [f"{full_summary.name} ({full_summary.age}yo {full_summary.gender}) - updates {basis} ({when}):"]
+    def _missing(resource: str, label: str) -> Optional[str]:
+        if status.get(resource, RETRIEVED) != RETRIEVED:
+            return f"{label} could not be retrieved; do not assume none."
+        return None
+
+    parts = [f"{full_summary.name} ({age} {full_summary.gender}) - updates {basis} ({when}):"]
 
     abnormal = updates["new_abnormal_labs"]
     new_lab_count = len(updates["new_labs"])
-    if new_lab_count:
+    if _missing("labs", "Lab results"):
+        parts.append(_missing("labs", "Lab results"))
+    elif new_lab_count:
+        prelim = sum(1 for lab in updates["new_labs"] if getattr(lab, "status", "final") == "preliminary")
+        prelim_note = f" ({prelim} preliminary)" if prelim else ""
         if abnormal:
-            names = ", ".join(f"{lab.display} {lab.value}{lab.unit}" for lab in abnormal[:5])
+            names = ", ".join(
+                f"{lab.display} {lab.value}{lab.unit}"
+                + (" (preliminary)" if getattr(lab, "status", "final") == "preliminary" else "")
+                for lab in abnormal[:5]
+            )
             more = f" and {len(abnormal) - 5} more" if len(abnormal) > 5 else ""
-            parts.append(f"{new_lab_count} new lab result(s), including {len(abnormal)} abnormal: {names}{more}.")
+            parts.append(f"{new_lab_count} new lab result(s){prelim_note}, including {len(abnormal)} abnormal: {names}{more}.")
         else:
-            parts.append(f"{new_lab_count} new lab result(s), all within normal range.")
+            parts.append(f"{new_lab_count} new lab result(s){prelim_note}, all within normal range.")
     else:
         parts.append("No new labs.")
 
     new_vital_count = len(updates["new_vitals"])
-    parts.append(f"{new_vital_count} new vital sign reading(s) recorded." if new_vital_count else "No new vitals recorded.")
+    if _missing("vitals", "Vital signs"):
+        parts.append(_missing("vitals", "Vital signs"))
+    else:
+        parts.append(f"{new_vital_count} new vital sign reading(s) recorded." if new_vital_count else "No new vitals recorded.")
 
     new_conditions = updates["new_conditions"]
-    if new_conditions:
+    if _missing("conditions", "Conditions"):
+        parts.append(_missing("conditions", "Conditions"))
+    elif new_conditions:
         names = ", ".join(
             c.get("code", {}).get("text") or c.get("code", {}).get("coding", [{}])[0].get("display", "Unspecified condition")
             for c in new_conditions[:5]
@@ -384,7 +511,9 @@ def _generate_handoff_narrative(
         parts.append("No new conditions added.")
 
     new_meds = updates["new_medications"]
-    if new_meds:
+    if _missing("medications", "Medications"):
+        parts.append(_missing("medications", "Medications"))
+    elif new_meds:
         names = ", ".join(
             m.get("medicationCodeableConcept", {}).get("text")
             or m.get("medicationCodeableConcept", {}).get("coding", [{}])[0].get("display", "Unspecified medication")
@@ -508,7 +637,7 @@ async def smart_callback(
         raise HTTPException(status_code=500, detail="Authentication with the EHR failed")
 
 
-@router.post("/evaluate-patient", response_model=List[DiagnosisResponse])
+@router.post("/evaluate-patient", response_model=EvaluatePatientResponse)
 async def evaluate_patient(
     request: EvaluatePatientRequest,
     smart_session = Depends(get_active_smart_session),
@@ -527,46 +656,27 @@ async def evaluate_patient(
             access_token=smart_session.fhir_access_token
         )
 
-        patient_data = fhir_client.get_patient_data(request.patient_id)
-
-        evaluations = diagnostic_engine.evaluate_patient(
-            patient_data=patient_data,
-            chief_complaint=request.chief_complaint,
-            focus_specialties=request.focus_specialties
+        # Fetch the specific results tree criteria need, over their lookback
+        patient_data = fhir_client.get_patient_data(
+            request.patient_id,
+            observation_requirements=diagnostic_engine.observation_requirements(),
         )
 
-        responses = []
-        for eval in evaluations:
-            responses.append(DiagnosisResponse(
-                diagnosis_id=eval.diagnosis_id,
-                diagnosis_label=eval.diagnosis_label,
-                family=eval.family,
-                probability=eval.probability,
-                severity=eval.severity,
-                criteria_met=[
-                    CriterionResponse(
-                        criterion=c.criterion, status=c.status.value,
-                        value=c.value, expected=c.expected, details=c.details
-                    ) for c in eval.criteria_met
-                ],
-                criteria_not_met=[
-                    CriterionResponse(
-                        criterion=c.criterion, status=c.status.value,
-                        value=c.value, expected=c.expected, details=c.details
-                    ) for c in eval.criteria_not_met
-                ],
-                criteria_unknown=[
-                    CriterionResponse(
-                        criterion=c.criterion, status=c.status.value,
-                        value=c.value, expected=c.expected, details=c.details
-                    ) for c in eval.criteria_unknown
-                ],
-                recommendations=eval.recommendations,
-                missing_tests=eval.missing_tests
-            ))
+        assessment = diagnostic_engine.evaluate_encounter(patient_data, complaint=request.chief_complaint)
+
+        responses = [_diagnosis_response(evaluation) for evaluation in assessment.evaluations]
+        status = getattr(patient_data, "retrieval_status", {}) or {}
 
         logger.info(f"Returned {len(responses)} evaluations for patient {request.patient_id}")
-        return responses
+        return EvaluatePatientResponse(
+            patient_id=request.patient_id,
+            evaluations=responses,
+            data_status=status,
+            data_warnings=retrieval_warnings(status) + list(getattr(patient_data, "truncation_warnings", []) or []),
+            data_notes=list(getattr(patient_data, "data_notes", []) or []),
+            assessment_warnings=list(assessment.warnings),
+            clinical_review_notice=review_notice(),
+        )
 
     except Exception as e:
         logger.error(f"Patient evaluation failed: {e}")
@@ -654,16 +764,17 @@ async def get_patient_handoff_summary(
         if timeframe_start is not None:
             raw_updates = fhir_client.get_patient_updates_since(patient_id, timeframe_start)
 
+            update_status = raw_updates.get("retrieval_status", {}) or {}
+
+            def _update_count(resource: str, items) -> Optional[int]:
+                return len(items) if update_status.get(resource, RETRIEVED) == RETRIEVED else None
+
             updates_response = HandoffUpdatesResponse(
-                new_lab_count=len(raw_updates["new_labs"]),
-                new_abnormal_labs=[
-                    {
-                        "name": lab.display, "value": lab.value, "unit": lab.unit,
-                        "reference_range": lab.reference_range,
-                        "date": lab.effective_date.isoformat() if lab.effective_date else None
-                    } for lab in raw_updates["new_abnormal_labs"]
-                ],
-                new_vital_count=len(raw_updates["new_vitals"]),
+                new_lab_count=_update_count("labs", raw_updates["new_labs"]),
+                new_abnormal_labs=[_lab_summary(lab) for lab in raw_updates["new_abnormal_labs"]],
+                new_vital_count=_update_count("vitals", raw_updates["new_vitals"]),
+                data_status=update_status,
+                data_warnings=raw_updates.get("data_warnings") or retrieval_warnings(update_status),
                 new_conditions=[
                     HandoffUpdateItem(
                         name=(
@@ -693,7 +804,8 @@ async def get_patient_handoff_summary(
             timeframe_source=timeframe_source,
             full_summary=full_summary,
             updates=updates_response,
-            narrative=narrative
+            narrative=narrative,
+            clinical_review_notice=review_notice(),
         )
 
     except HTTPException:
@@ -778,35 +890,50 @@ async def get_ambulatory_differential(
             }
         )
 
+        # Chart-driven: EHR data is never sent to an AI provider.
         differential, ai_tree_info = await rank_diagnoses(
             search_terms,
             age=patient_history.age,
             sex=patient_history.gender,
+            allow_ai=False,
         )
 
-        data_pulled = {
-            "visit_notes": len(patient_history.visit_notes),
-            "history_and_physicals": len(patient_history.history_and_physicals),
-            "vital_signs": len(patient_history.vital_signs),
-            "diagnostic_tests": len(patient_history.diagnostic_tests),
-            "procedures": len(patient_history.procedures),
-            "imaging_studies": len(patient_history.imaging_studies),
-            "immunizations": len(patient_history.immunizations),
-            "active_conditions": len(patient_history.active_conditions),
-            "past_conditions": len(patient_history.past_conditions),
-            "current_medications": len(patient_history.current_medications),
-            "allergies": len(patient_history.allergies),
+        history_status = patient_history.retrieval_status or {}
+        pulled_items = {
+            "visit_notes": ("visit_notes", patient_history.visit_notes),
+            "history_and_physicals": ("history_and_physicals", patient_history.history_and_physicals),
+            "vital_signs": ("vital_signs", patient_history.vital_signs),
+            "diagnostic_tests": ("diagnostic_tests", patient_history.diagnostic_tests),
+            "procedures": ("procedures", patient_history.procedures),
+            "imaging_studies": ("imaging_studies", patient_history.imaging_studies),
+            "immunizations": ("immunizations", patient_history.immunizations),
+            "active_conditions": ("conditions", patient_history.active_conditions),
+            "past_conditions": ("conditions", patient_history.past_conditions),
+            "current_medications": ("medications", patient_history.current_medications),
+            "allergies": ("allergies", patient_history.allergies),
         }
+        # None = could not be retrieved; 0 = retrieved, none found
+        data_pulled = {
+            key: (len(items) if history_status.get(resource, RETRIEVED) == RETRIEVED else None)
+            for key, (resource, items) in pulled_items.items()
+        }
+        data_warnings = patient_history.data_warnings or retrieval_warnings(history_status)
+        chart_summary = patient_history.summary or ""
+        if data_warnings:
+            chart_summary = (chart_summary + "\n\n" if chart_summary else "") + "Incomplete chart data: " + " ".join(data_warnings)
 
         return AmbulatoryDifferentialResponse(
             patient_id=patient_id,
             name=patient_history.patient_name,
             age=patient_history.age,
             gender=patient_history.gender,
-            chart_summary=patient_history.summary or "",
+            chart_summary=chart_summary,
             data_pulled=data_pulled,
             search_terms_used=search_terms,
             differential=differential,
+            data_status=history_status,
+            data_warnings=data_warnings,
+            clinical_review_notice=review_notice(),
         )
 
     except HTTPException:
@@ -814,6 +941,64 @@ async def get_ambulatory_differential(
     except Exception as e:
         logger.error(f"Failed to build ambulatory differential for patient {patient_id}: {e}")
         raise HTTPException(status_code=500, detail="Failed to build differential. Please try relaunching from the EHR.")
+
+
+class EncounterAssessmentRequest(BaseModel):
+    """Request for an encounter assessment."""
+    patient_id: str
+    # Typed by the clinician; when empty, the EHR's visit reason is used
+    chief_complaint: Optional[str] = None
+
+
+@router.post("/encounter-assessment")
+async def encounter_assessment(
+    request: EncounterAssessmentRequest,
+    smart_session = Depends(get_active_smart_session),
+):
+    """
+    Encounter assessment: pulls the chart once and combines the chart summary,
+    today's complaint, complaint- and criteria-supported diagnoses with their
+    evidence, tree guidance, red flags, and what could not be assessed.
+
+    Decision support only. Ranking uses the tree library alone; EHR data is
+    never sent to an AI provider.
+    """
+    from ..services.encounter_assessment import assess_encounter
+
+    _verify_patient_match(smart_session, request.patient_id)
+    try:
+        fhir_client = FHIRClient(
+            fhir_base_url=FHIR_BASE_URL,
+            client_id=CLIENT_ID,
+            access_token=smart_session.fhir_access_token
+        )
+        history_service = PatientHistoryService(
+            fhir_base_url=FHIR_BASE_URL,
+            auth_token=smart_session.fhir_access_token
+        )
+        result = await assess_encounter(
+            request.patient_id,
+            request.chief_complaint,
+            fhir_client,
+            history_service,
+            diagnostic_engine,
+            criteria_response=_diagnosis_response,
+            summary_response=summary_from_patient_data,
+        )
+        AuditLogger.log_security_event(
+            "encounter_assessment",
+            {
+                "patient_id": request.patient_id,
+                "complaint_source": result["complaint"]["source"],
+                "diagnosis_count": len(result["diagnoses"]["items"]),
+            }
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Encounter assessment failed for patient {request.patient_id}: {e}")
+        raise HTTPException(status_code=500, detail="Encounter assessment failed. Please try relaunching from the EHR.")
 
 
 @router.get("/session/status", response_model=SmartSessionStatusResponse)

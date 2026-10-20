@@ -1,12 +1,31 @@
 tree_id: OB-UTERINE-FIBROIDS
 name: Uterine Fibroids (Leiomyomas)
+version: '1.0'
+status: draft
 family: Obstetrics and Gynecology
 specialty: Obstetrics-Gynecology
-applies_to: female
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Heavy menstrual bleeding, pelvic pressure, or asymptomatic
 description: Benign smooth muscle tumors of the uterus, most common pelvic tumor in women
-icd10: D25.9
-snomed: 95315005
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - D25.9
+  snomed:
+    - '95315005'
+  icpc2: []
+sources:
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: SMFM (Society for Maternal-Fetal Medicine) Clinical Guidelines
+    origin: citations
+  - text: UpToDate - Obstetrics
+    origin: citations
 presentations:
   - Heavy menstrual bleeding, prolonged periods
   - Pelvic pain, pressure
@@ -14,22 +33,14 @@ presentations:
   - Enlarged, irregular uterus on exam
   - May be asymptomatic
   - Infertility, recurrent pregnancy loss
-urgency: routine
-referrals:
-  emergency:
-    - Eclampsia
-    - Abruption
-    - Cord prolapse
-    - Hemorrhage
-  urgent:
-    - Preeclampsia
-    - Preterm labor
-    - IUGR
-  routine:
-    - Prenatal care
-    - GDM management
-    - Routine pregnancy
-
+differentials:
+  - Adenomyosis - diffusely enlarged tender uterus, no discrete masses on ultrasound
+  - Endometrial polyp - abnormal bleeding, hysteroscopy for diagnosis and treatment
+  - Ovarian mass - separate from uterus on imaging, elevated CA-125
+  - Leiomyosarcoma - rare malignancy, rapid growth, postmenopausal, irregular borders
+  - Pregnancy - positive pregnancy test, gestational sac on ultrasound
+  - Endometrial hyperplasia/cancer - postmenopausal bleeding, endometrial thickness greater than 4 mm
+  - Pelvic inflammatory disease - fever, cervical motion tenderness, elevated WBC
 workup:
   - Clinical diagnosis confirmed with imaging
   - Detailed menstrual history (quantity, duration, frequency, clots)
@@ -77,14 +88,30 @@ clinical_pearls:
   - Fibroids can cause infertility or pregnancy complications (preterm birth, malpresentation)
   - Pedunculated subserosal fibroid can torse causing acute pain
   - Red degeneration (infarction) common in pregnancy - severe pain, fever, treat conservatively
-differentials:
-  - Adenomyosis - diffusely enlarged tender uterus, no discrete masses on ultrasound
-  - Endometrial polyp - abnormal bleeding, hysteroscopy for diagnosis and treatment
-  - Ovarian mass - separate from uterus on imaging, elevated CA-125
-  - Leiomyosarcoma - rare malignancy, rapid growth, postmenopausal, irregular borders
-  - Pregnancy - positive pregnancy test, gestational sac on ultrasound
-  - Endometrial hyperplasia/cancer - postmenopausal bleeding, endometrial thickness greater than 4 mm
-  - Pelvic inflammatory disease - fever, cervical motion tenderness, elevated WBC
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Eclampsia
+    - Abruption
+    - Cord prolapse
+    - Hemorrhage
+  urgent:
+    - Preeclampsia
+    - Preterm labor
+    - IUGR
+  routine:
+    - Prenatal care
+    - GDM management
+    - Routine pregnancy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 42-year-old nulliparous woman presents with 2-year history of progressively heavy menstrual periods
   - Menses every 28 days, lasting 8-9 days, soaking through super tampon every 1-2 hours first 3 days
@@ -112,8 +139,7 @@ trace:
   - Postoperative course unremarkable, discharged home day 1
   - 6-week follow-up - complete resolution of bleeding and pressure symptoms, hemoglobin 12.5 g/dL
   - Outcome - Excellent result, highly satisfied with treatment decision
-
-citations:
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - SMFM (Society for Maternal-Fetal Medicine) Clinical Guidelines
-  - UpToDate - Obstetrics
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

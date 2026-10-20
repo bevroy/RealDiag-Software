@@ -1,69 +1,88 @@
 tree_id: ENT-PHARYNGITIS-STREP
 name: Streptococcal Pharyngitis (Strep Throat)
+version: '1.0'
+status: draft
 family: otolaryngology
 specialty: Ent
-icd10:
-- J02.0
-snomed:
-- 43878008
-urgency: medium
-description: Comprehensive evaluation and management of Streptococcal Pharyngitis
-  (Strep Throat)
-version: '1.0'
-citations:
-  - AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
-  - British Society of Otology Guidelines
-  - UpToDate - Otolaryngology
-author: RealDiag Clinical Team
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: Comprehensive evaluation and management of Streptococcal Pharyngitis (Strep Throat)
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J02.0
+  snomed:
+    - '43878008'
+  icpc2: []
+sources:
+  - text: AAO-HNS (American Academy of Otolaryngology–Head and Neck Surgery) Clinical Practice Guidelines
+    origin: citations
+  - text: British Society of Otology Guidelines
+    origin: citations
+  - text: UpToDate - Otolaryngology
+    origin: citations
+  - text: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical Practice Guidelines
+    origin: trace.source
 presentations:
-- Sore throat (sudden onset)
-- Fever
-- Tonsillar exudates
-- Tender anterior cervical lymphadenopathy
-- Absence of cough
-- Palatal petechiae
-- Positive rapid strep test or throat culture
-workup:
-- Rapid antigen detection test (RADT) - 85-90% sensitive, 95% specific
-- Throat culture if RADT negative but high clinical suspicion (Centor ≥3) - results
-  in 24-48hrs
-- 'DO NOT test/treat if: Centor score 0-1 (low probability), age <3 years (rare, complications
-  rare)'
-treatment:
-- 'Guideline-based treatment options for Streptococcal Pharyngitis (Strep Throat)
-  include:'
-- Penicillin V 500mg PO BID × 10 days (first-line, narrow spectrum, cheap) OR amoxicillin
-  500mg TID × 10 days (AAO-HNS 2023)
-- 'Single-dose option: Benzathine penicillin G 1.2 million units IM × 1 (ensures compliance)
-  (AAO-HNS 2023)'
-- 'If penicillin allergy: Cephalexin 500mg BID × 10 days OR azithromycin 500mg day
-  1, then 250mg days 2-5 (AAO-HNS 2023)'
-- 'Symptomatic: NSAIDs (ibuprofen 400-600mg q6h), throat lozenges, salt water gargles
-  (AAO-HNS 2023)'
-- Return to school/work 24 hours after starting antibiotics (no longer contagious)
-  (AAO-HNS 2023)
-clinical_pearls:
-- Caused by Group A Streptococcus (Streptococcus pyogenes) - peak age 5-15 years
-- 'Centor criteria (score 0-4): Fever, tonsillar exudates, tender cervical nodes,
-  absence of cough. Score ≥3 test/treat'
-- 'Complications if untreated: Acute rheumatic fever (2-3 weeks), post-strep glomerulonephritis
-  (1-3 weeks), peritonsillar abscess'
-- 'Scarlet fever: Strep pharyngitis + sandpaper rash (erythematous, blanching, starts
-  trunk/neck)'
-- Rapid strep test 85-90% sensitive - if negative with high suspicion, send throat
-  culture (gold standard)
-referrals:
-- 'ENT if: Recurrent strep throat (≥7 episodes in 1 year) - consider tonsillectomy'
-- 'Emergency department if: Peritonsillar abscess, inability to swallow/drooling,
-  respiratory distress'
+  - Sore throat (sudden onset)
+  - Fever
+  - Tonsillar exudates
+  - Tender anterior cervical lymphadenopathy
+  - Absence of cough
+  - Palatal petechiae
+  - Positive rapid strep test or throat culture
 differentials:
   - Viral pharyngitis
   - Mononucleosis
   - Peritonsillar abscess
   - Epiglottitis
-trace:
-  source: American Academy of Otolaryngology-Head and Neck Surgery (AAO-HNS) Clinical
-    Practice Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Rapid antigen detection test (RADT) - 85-90% sensitive, 95% specific
+  - Throat culture if RADT negative but high clinical suspicion (Centor ≥3) - results in 24-48hrs
+  - 'DO NOT test/treat if: Centor score 0-1 (low probability), age <3 years (rare, complications rare)'
+treatment:
+  - 'Guideline-based treatment options for Streptococcal Pharyngitis (Strep Throat) include:'
+  - Penicillin V 500mg PO BID × 10 days (first-line, narrow spectrum, cheap) OR amoxicillin 500mg TID × 10 days (AAO-HNS 2023)
+  - 'Single-dose option: Benzathine penicillin G 1.2 million units IM × 1 (ensures compliance) (AAO-HNS 2023)'
+  - 'If penicillin allergy: Cephalexin 500mg BID × 10 days OR azithromycin 500mg day 1, then 250mg days 2-5 (AAO-HNS 2023)'
+  - 'Symptomatic: NSAIDs (ibuprofen 400-600mg q6h), throat lozenges, salt water gargles (AAO-HNS 2023)'
+  - 'Patient advice: Return to school/work 24 hours after starting antibiotics (no longer contagious) (AAO-HNS 2023)'
+clinical_pearls:
+  - Caused by Group A Streptococcus (Streptococcus pyogenes) - peak age 5-15 years
+  - 'Centor criteria (score 0-4): Fever, tonsillar exudates, tender cervical nodes, absence of cough. Score ≥3 test/treat'
+  - 'Complications if untreated: Acute rheumatic fever (2-3 weeks), post-strep glomerulonephritis (1-3 weeks), peritonsillar abscess'
+  - 'Scarlet fever: Strep pharyngitis + sandpaper rash (erythematous, blanching, starts trunk/neck)'
+  - Rapid strep test 85-90% sensitive - if negative with high suspicion, send throat culture (gold standard)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - 'ENT if: Recurrent strep throat (≥7 episodes in 1 year) - consider tonsillectomy'
+  - 'Emergency department if: Peritonsillar abscess, inability to swallow/drooling, respiratory distress'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

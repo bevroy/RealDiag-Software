@@ -1,57 +1,85 @@
 tree_id: DERM-ROSACEA
 name: Rosacea
+version: '1.0'
+status: draft
 family: Dermatology
 specialty: Dermatology
-icd10:
-- L71.9
-- L71.0
-snomed:
-- '398909004'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Rosacea
-version: '1.0'
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L71.9
+    - L71.0
+  snomed:
+    - '398909004'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
+  - text: American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer Network (NCCN) for skin cancers
+    origin: trace.source
 presentations:
-- Facial erythema and flushing
-- Telangiectasias
-- Papules and pustules
-- Rhinophyma
-- Central face involvement
-- Triggers (heat, alcohol, spicy foods)
-workup:
-- Clinical diagnosis (no specific tests)
-- Skin biopsy only if diagnosis uncertain
-treatment:
-- 'Guideline-based treatment options for Rosacea include:'
-- 'Erythematotelangiectatic: Avoid triggers, gentle skincare, topical metronidazole
-  0.75% BID (AAD 2023)'
-- 'Papulopustular: Topical metronidazole or azelaic acid 15% BID + oral doxycycline
-  40mg daily (AAD 2023)'
-- 'Severe: Oral doxycycline 100mg BID or isotretinoin (AAD 2023)'
-- 'Telangiectasias: Laser therapy (AAD 2023)'
-- 'Rhinophyma: Surgical debulking or CO2 laser (AAD 2023)'
-clinical_pearls:
-- 'Four subtypes: Erythematotelangiectatic, papulopustular, phymatous, ocular'
-- No comedones (unlike acne) - helps distinguish
-- 'Ocular rosacea in 50%: Dry eyes, blepharitis, foreign body sensation'
-- 'Triggers: Sun, heat, alcohol, spicy food, stress, hot beverages'
-- Rhinophyma (bulbous nose) is late-stage complication, more common in men
-referrals:
-- Dermatology for refractory cases or laser therapy
-- Ophthalmology if ocular symptoms
+  - Facial erythema and flushing
+  - Telangiectasias
+  - Papules and pustules
+  - Rhinophyma
+  - Central face involvement
+  - Triggers (heat, alcohol, spicy foods)
 differentials:
   - Acne vulgaris
   - Seborrheic dermatitis
   - Lupus
   - Perioral dermatitis
   - Steroid-induced rosacea
-trace:
-  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
-    Cancer Network (NCCN) for skin cancers
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Clinical diagnosis (no specific tests)
+  - Skin biopsy only if diagnosis uncertain
+treatment:
+  - 'Guideline-based treatment options for Rosacea include:'
+  - 'Erythematotelangiectatic: Avoid triggers, gentle skincare, topical metronidazole 0.75% BID (AAD 2023)'
+  - 'Papulopustular: Topical metronidazole or azelaic acid 15% BID + oral doxycycline 40mg daily (AAD 2023)'
+  - 'Severe: Oral doxycycline 100mg BID or isotretinoin (AAD 2023)'
+  - 'Telangiectasias: Laser therapy (AAD 2023)'
+  - 'Rhinophyma: Surgical debulking or CO2 laser (AAD 2023)'
+clinical_pearls:
+  - 'Four subtypes: Erythematotelangiectatic, papulopustular, phymatous, ocular'
+  - No comedones (unlike acne) - helps distinguish
+  - 'Ocular rosacea in 50%: Dry eyes, blepharitis, foreign body sensation'
+  - 'Triggers: Sun, heat, alcohol, spicy food, stress, hot beverages'
+  - Rhinophyma (bulbous nose) is late-stage complication, more common in men
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Dermatology for refractory cases or laser therapy
+  - Ophthalmology if ocular symptoms
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

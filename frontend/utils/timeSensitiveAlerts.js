@@ -62,7 +62,7 @@ export const timeSensitiveConditions = {
     criticalActions: [
       'CPR immediately',
       'Defibrillation if shockable rhythm',
-      'Epinephrine q3-5min',
+      'Epinephrine per ACLS guidelines',
       'Advanced airway',
       'Treat reversible causes (H\'s and T\'s)'
     ],
@@ -73,8 +73,8 @@ export const timeSensitiveConditions = {
     timeToTreatment: '< 5 minutes',
     outcomeWithDelay: 'Airway compromise, cardiovascular collapse, death',
     criticalActions: [
-      'Epinephrine 0.3-0.5mg IM immediately',
-      'Repeat q5-15min as needed',
+      'IM epinephrine is first-line per anaphylaxis guidelines; dosing per protocol',
+      'Repeat dosing per protocol if symptoms persist',
       'Airway management',
       'IV fluids',
       'Antihistamines and steroids'
@@ -100,8 +100,8 @@ export const timeSensitiveConditions = {
     timeToTreatment: '< 90 minutes (door-to-balloon)',
     outcomeWithDelay: 'Every 30-minute delay increases 1-year mortality by 7.5%',
     criticalActions: [
-      'Activate cath lab',
-      'Aspirin 325mg immediately',
+      'Findings may warrant evaluation per STEMI protocol (ACC/AHA)',
+      'Consider antiplatelet therapy per ACC/AHA guidelines if not contraindicated',
       'Dual antiplatelet therapy',
       'Anticoagulation',
       'Primary PCI < 90 minutes'
@@ -139,7 +139,7 @@ export const timeSensitiveConditions = {
     criticalActions: [
       'Blood cultures before antibiotics',
       'Broad-spectrum antibiotics within 1 hour',
-      '30mL/kg crystalloid bolus',
+      'Fluid resuscitation per Surviving Sepsis Campaign guidelines',
       'Lactate level',
       'Vasopressors if needed',
       'Source control'

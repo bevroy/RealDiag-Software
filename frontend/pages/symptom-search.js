@@ -12,6 +12,7 @@ import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../
 import { isAuthenticated, getCurrentUser, authenticatedFetch } from '../utils/auth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 import { detectRedFlags, getSeverityStyle, formatTimeWindow, getActionList } from '../utils/redFlagAlerts';
 import { assessUrgency, getUrgencyBadge } from '../utils/timeSensitiveAlerts';
 import { analyzeManagementInteractions, getSeverityColor as getDrugSeverityColor, getSeverityIcon } from '../utils/drugInteractions';
@@ -44,6 +45,32 @@ import {
   validatePatientID
 } from '../utils/barcodeScanner';
 
+// Label shown next to AI-generated and unvalidated content
+// Emergent condition matching the symptoms: always listed, whatever its score
+const cantMissStyle = {
+  display: 'inline-block',
+  margin: '0 0 0.5rem',
+  padding: '0.2rem 0.6rem',
+  background: '#fef2f2',
+  border: '1px solid #ef4444',
+  borderRadius: '6px',
+  color: '#991b1b',
+  fontSize: '0.8rem',
+  fontWeight: 600,
+}
+
+const aiLabelStyle = {
+  display: 'inline-block',
+  margin: '0 0 0.75rem',
+  padding: '0.3rem 0.7rem',
+  background: '#eef2ff',
+  color: '#3730a3',
+  border: '1px solid #a5b4fc',
+  borderRadius: '6px',
+  fontSize: '0.8rem',
+  fontWeight: '600'
+};
+
 export default function SymptomSearch() {
   // Use runtime config for API base, with fallback to env var or Render URL
   const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
@@ -70,6 +97,8 @@ export default function SymptomSearch() {
   const [respiratoryRate, setRespiratoryRate] = useState('');
   const [oxygenSaturation, setOxygenSaturation] = useState('');
   const [results, setResults] = useState([]);
+  const [negatedTerms, setNegatedTerms] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [needsLogin, setNeedsLogin] = useState(false);
@@ -731,6 +760,7 @@ export default function SymptomSearch() {
         setNeedsLogin(true);
         setHasSearched(false);
         setResults([]);
+        setNegatedTerms([]);
         return;
       }
 
@@ -740,6 +770,8 @@ export default function SymptomSearch() {
 
       const data = await response.json();
       setResults(data.results || []);
+      setNegatedTerms(data.negated_terms || []);
+      setReviewNotice(data.clinical_review_notice);
       
       // Save to recent searches (local)
       if (data.results && data.results.length > 0) {
@@ -769,6 +801,7 @@ export default function SymptomSearch() {
     } catch (err) {
       setError(err.message);
       setResults([]);
+      setNegatedTerms([]);
     } finally {
       setLoading(false);
     }
@@ -810,6 +843,7 @@ export default function SymptomSearch() {
     setRespiratoryRate('');
     setOxygenSaturation('');
     setResults([]);
+    setNegatedTerms([]);
     setHasSearched(false);
     setError(null);
     setNeedsLogin(false);
@@ -1934,6 +1968,13 @@ export default function SymptomSearch() {
             borderRadius: '8px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
           }}>
+            {hasSearched && !loading && negatedTerms.length > 0 && (
+              <p role="note" style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', color: '#4b5563' }}>
+                Not searched (negated): {negatedTerms.join(', ')}
+              </p>
+            )}
+            {results.length > 0 && <ClinicalReviewNotice notice={reviewNotice} />}
+
             {/* Results Header with Controls */}
             <div style={{ 
               display: 'flex', 
@@ -2042,6 +2083,17 @@ export default function SymptomSearch() {
                           <h3 style={{ margin: '0 0 0.75rem', color: '#1a202c', fontSize: '1.2rem', fontWeight: '600' }}>
                             {result.label}
                           </h3>
+                          <ReviewStatusBadge status={result.review_status} label={result.review_status_label} style={{ marginBottom: '0.5rem' }} />
+                          {result.ai_suggested && (
+                            <div style={aiLabelStyle} role="note">
+                              🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
+                            </div>
+                          )}
+                          {result.cant_miss && (
+                            <div style={cantMissStyle} role="note">
+                              ⚠️ {result.cant_miss_label || "Can't-miss condition"}
+                            </div>
+                          )}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
                             <span style={{
                               padding: '0.35rem 0.85rem',
@@ -2407,6 +2459,12 @@ export default function SymptomSearch() {
                                     </p>
                                   </div>
                                   
+                                  {homeopathyData[idx] && homeopathyData[idx].validation_statement && (
+                                    <div style={{ ...aiLabelStyle, background: '#fef3c7', color: '#92400e', borderColor: '#f59e0b' }} role="note">
+                                      {homeopathyData[idx].validation_statement}
+                                    </div>
+                                  )}
+
                                   {/* Loading state */}
                                   {!homeopathyData[idx] && (
                                     <div style={{ textAlign: 'center', padding: '2rem', color: '#6b7280' }}>
@@ -2566,6 +2624,7 @@ export default function SymptomSearch() {
                                   
                                   {expandedRedFlags[idx] && (
                                     <div style={{ padding: '1rem', background: 'white' }}>
+                                      <ClinicalReviewNotice notice={reviewNotice} style={{ fontSize: '0.8rem' }} />
                                       {redFlags.map((flag, flagIdx) => (
                                         <div key={flagIdx} style={{ marginBottom: flagIdx < redFlags.length - 1 ? '1.5rem' : '0' }}>
                                           <div style={{ marginBottom: '0.75rem' }}>
@@ -2631,6 +2690,7 @@ export default function SymptomSearch() {
                                   
                                   {expandedUrgency[idx] && (
                                     <div style={{ padding: '1rem', background: 'white' }}>
+                                      <ClinicalReviewNotice notice={reviewNotice} style={{ fontSize: '0.8rem' }} />
                                       <div style={{ marginBottom: '1rem' }}>
                                         <strong>Time to Treatment:</strong> {urgencyInfo.timeToTreatment}
                                       </div>
@@ -2944,6 +3004,17 @@ export default function SymptomSearch() {
                         <div style={{ fontWeight: '600', color: '#1a202c', marginBottom: '0.25rem' }}>
                           {result.label}
                         </div>
+                        <ReviewStatusBadge status={result.review_status} label={result.review_status_label} style={{ marginBottom: '0.25rem' }} />
+                        {result.ai_suggested && (
+                          <div style={aiLabelStyle} role="note">
+                            🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
+                          </div>
+                        )}
+                        {result.cant_miss && (
+                          <div style={cantMissStyle} role="note">
+                            ⚠️ {result.cant_miss_label || "Can't-miss condition"}
+                          </div>
+                        )}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.8rem' }}>
                           <span style={{
                             padding: '0.2rem 0.6rem',

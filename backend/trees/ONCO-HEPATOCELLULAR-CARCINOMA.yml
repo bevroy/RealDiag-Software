@@ -1,7 +1,36 @@
 tree_id: ONCO-HEPATOCELLULAR-CARCINOMA
 name: Hepatocellular Carcinoma (HCC)
+version: '1.0'
+status: draft
 family: oncology
-specialty: Oncology / Gastroenterology / Hepatology
+specialty: Oncology
+secondary_specialties:
+  - Gastroenterology
+  - Hepatology
+urgency: urgent
+urgency_explanation: Develops in cirrhosis background; requires prompt staging and treatment planning
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C22.0
+    - C22.9
+  snomed:
+    - '109841003'
+  icpc2: []
+sources:
+  - text: AASLD (American Association for the Study of Liver Diseases) Guidelines for HCC
+    origin: citations
+  - text: NCCN Guidelines for Hepatobiliary Cancers
+    origin: citations
+  - text: Barcelona Clinic Liver Cancer (BCLC) Staging System
+    origin: citations
+  - text: UpToDate - Hepatology and Oncology
+    origin: citations
 presentations:
   - Right upper quadrant pain
   - Hepatomegaly with palpable mass
@@ -10,25 +39,17 @@ presentations:
   - Jaundice (late finding)
   - Ascites or variceal bleeding (decompensated cirrhosis)
   - Often asymptomatic until advanced (found on screening)
-icd10:
-  - C22.0 # Liver cell carcinoma
-  - C22.9 # Malignant neoplasm of liver, unspecified
-snomed:
-  - "109841003" # Hepatocellular carcinoma
-urgency: High
-urgency_explanation: Develops in cirrhosis background; requires prompt staging and treatment planning
-
-referrals:
-  hepatology: For liver disease management
-  hepatobiliary_surgery: For resection or transplant evaluation
-  interventional_radiology: For locoregional therapies (ablation, TACE)
-  oncology: For systemic therapy
-  transplant_surgery: For transplant evaluation if appropriate
-
+differentials:
+  - Hemangioma (most common benign liver tumor, peripheral nodular enhancement)
+  - Focal nodular hyperplasia (central scar, no washout)
+  - Hepatic adenoma (oral contraceptives, hemorrhage risk)
+  - Cholangiocarcinoma (peripheral, rim enhancement, bile duct dilation)
+  - Liver metastases (from colon, breast, lung)
+  - Regenerative nodule or dysplastic nodule in cirrhosis
 workup:
   screening:
     - AFP and liver ultrasound every 6 months in cirrhosis patients
-    - Applies to: cirrhosis any cause, chronic HBV (even without cirrhosis), chronic HCV with advanced fibrosis
+    - 'Applies to: cirrhosis any cause, chronic HBV (even without cirrhosis), chronic HCV with advanced fibrosis'
   diagnostic_imaging:
     - Multiphasic CT or MRI with contrast
     - Arterial hyperenhancement with washout in portal venous/delayed phase (LI-RADS 5)
@@ -46,14 +67,13 @@ workup:
     - CT chest for metastases
     - Bone scan if bone pain or elevated alkaline phosphatase
     - BCLC (Barcelona Clinic Liver Cancer) staging system
-
 treatment:
   very_early_stage_0_single_tumor_less_2cm:
     - Surgical resection (if adequate liver reserve)
     - Radiofrequency ablation (RFA) or microwave ablation
     - Liver transplantation evaluation
   early_stage_A:
-    - Milan criteria (single ≤5 cm or up to 3 nodules ≤3 cm): liver transplantation preferred
+    - 'Milan criteria (single ≤5 cm or up to 3 nodules ≤3 cm): liver transplantation preferred'
     - Surgical resection if non-cirrhotic or well-compensated cirrhosis (Child A)
     - RFA or microwave ablation for unresectable
   intermediate_stage_B:
@@ -61,40 +81,45 @@ treatment:
     - Radioembolization (Y-90) alternative
   advanced_stage_C:
     - Systemic therapy:
-      - First-line: Atezolizumab + bevacizumab (immunotherapy + anti-VEGF)
-      - Alternative: Sorafenib or lenvatinib
-    - Second-line: Regorafenib, cabozantinib, ramucirumab (if AFP >400)
+        - 'First-line: Atezolizumab + bevacizumab (immunotherapy + anti-VEGF)'
+        - 'Alternative: Sorafenib or lenvatinib'
+    - 'Second-line: Regorafenib, cabozantinib, ramucirumab (if AFP >400)'
   terminal_stage_D:
     - Best supportive care
     - Palliative care
   hepatitis_management:
-    - HBV: antiviral therapy (entecavir, tenofovir) to prevent reactivation
-    - HCV: DAA therapy after cancer treatment
-
+    - 'HBV: antiviral therapy (entecavir, tenofovir) to prevent reactivation'
+    - 'HCV: DAA therapy after cancer treatment'
 clinical_pearls:
   - 80-90% occur in setting of cirrhosis (any etiology)
-  - Major risk factors: HBV, HCV, alcohol, NASH, hemochromatosis, aflatoxin
+  - 'Major risk factors: HBV, HCV, alcohol, NASH, hemochromatosis, aflatoxin'
   - Surveillance with AFP + ultrasound q6 months reduces mortality in cirrhosis
-  - Typical imaging: arterial hyperenhancement with washout (LI-RADS 5 diagnostic)
-  - Milan criteria for transplant: single ≤5 cm or up to 3 nodules ≤3 cm, no vascular invasion
+  - 'Typical imaging: arterial hyperenhancement with washout (LI-RADS 5 diagnostic)'
+  - 'Milan criteria for transplant: single ≤5 cm or up to 3 nodules ≤3 cm, no vascular invasion'
   - Liver transplant best long-term outcome but limited by organ availability
   - Atezolizumab + bevacizumab now standard first-line for advanced disease
   - AFP >400 ng/mL highly suggestive but only elevated in 50-60% of cases
   - Child-Pugh and MELD scores guide treatment tolerance
-
-differentials:
-  - Hemangioma (most common benign liver tumor, peripheral nodular enhancement)
-  - Focal nodular hyperplasia (central scar, no washout)
-  - Hepatic adenoma (oral contraceptives, hemorrhage risk)
-  - Cholangiocarcinoma (peripheral, rim enhancement, bile duct dilation)
-  - Liver metastases (from colon, breast, lung)
-  - Regenerative nodule or dysplastic nodule in cirrhosis
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  hepatology: For liver disease management
+  hepatobiliary_surgery: For resection or transplant evaluation
+  interventional_radiology: For locoregional therapies (ablation, TACE)
+  oncology: For systemic therapy
+  transplant_surgery: For transplant evaluation if appropriate
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 62-year-old man with hepatitis C cirrhosis (Child-Pugh A) on surveillance presented with AFP elevated from baseline 12 ng/mL to 180 ng/mL at routine 6-month check. Ultrasound showed new 3.2 cm lesion in right lobe. Asymptomatic. Exam showed stigmata of cirrhosis (spider angiomata, splenomegaly) but no jaundice or ascites. Triphasic MRI liver demonstrated 3.3 cm mass with arterial hyperenhancement and washout in portal venous phase (LI-RADS 5) consistent with HCC. No vascular invasion. CT chest negative for metastases. Labs: total bilirubin 1.2 mg/dL, INR 1.1, albumin 3.6 g/dL, platelets 110k (Child-Pugh A5, compensated). MELD score 9. Evaluated by transplant surgery: outside Milan criteria (single tumor >5 cm threshold) but within UCSF criteria. Multidisciplinary tumor board recommended downstaging with TACE. Underwent TACE with drug-eluting beads. Follow-up MRI at 6 weeks showed partial response with tumor necrosis. Repeat TACE at 3 months achieved complete response. AFP decreased to 35 ng/mL. Now within Milan criteria. Listed for liver transplantation. Maintained HCV suppression with ledipasvir-sofosbuvir DAA therapy. At 8 months on waitlist, received liver transplant. Explant pathology: 2.1 cm completely necrotic tumor with no viable HCC, no vascular invasion. Post-transplant immunosuppression with tacrolimus. At 18-month follow-up, no recurrence, excellent graft function, undetectable HCV RNA.
-
-citations:
-  - AASLD (American Association for the Study of Liver Diseases) Guidelines for HCC
-  - NCCN Guidelines for Hepatobiliary Cancers
-  - Barcelona Clinic Liver Cancer (BCLC) Staging System
-  - UpToDate - Hepatology and Oncology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

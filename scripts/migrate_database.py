@@ -17,9 +17,12 @@ if not DATABASE_URL:
     print("Please set it in .env file or environment")
     exit(1)
 
-# Fix postgres:// to postgresql:// if needed
-if DATABASE_URL.startswith('postgres://'):
-    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+# Use the psycopg2 driver from requirements.txt. SQLAlchemy 2.1 otherwise
+# picks psycopg (v3) for plain postgresql:// URLs, which is not installed.
+for _scheme in ('postgresql://', 'postgres://'):
+    if DATABASE_URL.startswith(_scheme):
+        DATABASE_URL = 'postgresql+psycopg2://' + DATABASE_URL[len(_scheme):]
+        break
 
 print(f"🔗 Connecting to database...")
 engine = create_engine(DATABASE_URL)

@@ -1,32 +1,46 @@
 tree_id: DERM-ABSCESS-SKIN
 name: Skin Abscess (Furuncle / Carbuncle)
+version: '1.0'
+status: draft
 family: dermatology
-specialty: Dermatology/Primary Care/Emergency Medicine
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+  - Emergency Medicine
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Painful, swollen, red lump with pus
 description: Localized collection of pus in dermis and subcutaneous tissue. Most commonly caused by Staphylococcus aureus (including MRSA). Incision and drainage (I&D) is primary treatment. Antibiotics indicated for specific situations.
-icd10: L02.91
-snomed: 128477000
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L02.91
+  snomed:
+    - '128477000'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines for Skin and Soft Tissue Infections
+    origin: citations
+  - text: AAD (American Academy of Dermatology) Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology and Infectious Disease
+    origin: citations
 presentations:
   - Painful, tender, fluctuant nodule
   - Erythema, warmth, swelling
   - Purulent drainage (spontaneous or after rupture)
   - Fever if large or systemic involvement
   - Common locations - axilla, groin, buttocks, face, neck
-urgency: medium
-referrals:
-  emergency:
-    - Facial abscess with signs of cavernous sinus thrombosis
-    - Extensive cellulitis with systemic toxicity
-    - Abscess with sepsis
-    - Necrotizing fasciitis
-  urgent:
-    - Large abscess requiring I&D
-    - Abscess in immunocompromised
-    - Failed outpatient management
-  routine:
-    - Small abscess amenable to outpatient I&D
-    - Recurrent abscesses
-
+differentials:
+  - Cellulitis - erythema, warmth, induration but no fluctuance (no pus collection), antibiotics primary treatment
+  - Furuncle vs carbuncle - furuncle single hair follicle abscess, carbuncle coalescence of multiple
+  - Pilonidal cyst/abscess - sacrococcygeal region, natal cleft, may have hair visible in sinus tract
+  - Hidradenitis suppurativa - recurrent abscesses in axillae, groin, perianal, chronic inflammatory condition
+  - Inflamed epidermoid cyst - fluctuant but with central punctum (pore), drains cheesy material not pus
+  - Necrotizing fasciitis - severe pain out of proportion, rapid progression, skin necrosis, bullae, systemic toxicity, surgical emergency
 workup:
   - Clinical diagnosis based on examination
   - History
@@ -137,13 +151,29 @@ clinical_pearls:
   - Warm compresses help - before drainage promotes maturation, after drainage promotes continued drainage
   - Packing controversial - some studies show no benefit, but commonly done for hemostasis
   - Hidradenitis suppurativa chronic condition - requires long-term management, not just I&D
-differentials:
-  - Cellulitis - erythema, warmth, induration but no fluctuance (no pus collection), antibiotics primary treatment
-  - Furuncle vs carbuncle - furuncle single hair follicle abscess, carbuncle coalescence of multiple
-  - Pilonidal cyst/abscess - sacrococcygeal region, natal cleft, may have hair visible in sinus tract
-  - Hidradenitis suppurativa - recurrent abscesses in axillae, groin, perianal, chronic inflammatory condition
-  - Inflamed epidermoid cyst - fluctuant but with central punctum (pore), drains cheesy material not pus
-  - Necrotizing fasciitis - severe pain out of proportion, rapid progression, skin necrosis, bullae, systemic toxicity, surgical emergency
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Facial abscess with signs of cavernous sinus thrombosis
+    - Extensive cellulitis with systemic toxicity
+    - Abscess with sepsis
+    - Necrotizing fasciitis
+  urgent:
+    - Large abscess requiring I&D
+    - Abscess in immunocompromised
+    - Failed outpatient management
+  routine:
+    - Small abscess amenable to outpatient I&D
+    - Recurrent abscesses
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 35-year-old man presents to urgent care with painful lump on right buttock for 4 days
   - Started as small firm bump, progressively enlarged and more painful
@@ -174,8 +204,11 @@ trace:
   - At 1 week - wound nearly closed, minimal drainage, no signs of infection
   - Counseled on decolonization - intranasal mupirocin 2% ointment twice daily x 5 days, chlorhexidine body washes daily x 2 weeks, clean gym equipment before use, don't share towels
   - At 3 weeks - wound completely healed, small scar, no recurrence
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines for Skin and Soft Tissue Infections
-  - AAD (American Academy of Dermatology) Guidelines
-  - UpToDate - Dermatology and Infectious Disease
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

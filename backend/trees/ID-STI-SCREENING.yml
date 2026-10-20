@@ -1,11 +1,33 @@
 tree_id: ID-STI-SCREENING
 name: Sexually Transmitted Infection (STI) Screening/Encounter
+version: '1.0'
+status: draft
 family: infectious_disease
 specialty: Preventive Medicine
-icd10: Z11.3
-snomed: 171149006
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - Z11.3
+  snomed:
+    - '171149006'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: CDC (Centers for Disease Control and Prevention) Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
+  - text: CDC Sexually Transmitted Infections Treatment Guidelines 2021, USPSTF STI Screening Recommendations
+    origin: trace.source
 presentations:
   - Routine screening in asymptomatic patient
   - New sexual partner
@@ -17,11 +39,15 @@ presentations:
   - Sex work or transactional sex
   - History of prior STI
   - Adolescent or young adult seeking screening
+differentials:
+  - Symptomatic STI requiring treatment rather than screening alone
+  - Sexual assault (requires forensic exam and prophylaxis protocols)
+  - Post-exposure prophylaxis needs (HIV, hepatitis B)
 workup:
   - Chlamydia and gonorrhea NAAT (all sexually active individuals per guidelines)
-  - Women <25 years: annual screening for chlamydia and gonorrhea
-  - MSM: screen at least annually for chlamydia, gonorrhea, syphilis, HIV
-  - MSM high-risk: screen every 3-6 months
+  - 'Women <25 years: annual screening for chlamydia and gonorrhea'
+  - 'MSM: screen at least annually for chlamydia, gonorrhea, syphilis, HIV'
+  - 'MSM high-risk: screen every 3-6 months'
   - HIV testing - 4th generation Ag/Ab test or HIV RNA if acute infection suspected
   - Syphilis screening - RPR or VDRL (nontreponemal) then confirmatory treponemal test
   - Hepatitis B serology (HBsAg, anti-HBs, anti-HBc) if not vaccinated
@@ -29,7 +55,7 @@ workup:
   - Trichomonas NAAT in women with symptoms or high risk
   - HSV type-specific serology only if patient/partner has genital ulcers
   - Pregnancy test in women of reproductive age
-  - Site-specific testing: pharyngeal, rectal, urogenital based on exposure sites
+  - 'Site-specific testing: pharyngeal, rectal, urogenital based on exposure sites'
 treatment:
   - Counseling about safer sex practices
   - Consistent condom use with all partners
@@ -42,37 +68,47 @@ treatment:
   - Routine rescreening at 3 months if positive test
   - Annual or more frequent screening based on risk
   - STI prevention education and resources
-treatment:
   - Treatment initiated based on positive results
   - Expedited partner therapy (EPT) for chlamydia and gonorrhea where legal
   - Contraception counseling and provision
   - Substance use screening and counseling (associated with STI risk)
 clinical_pearls:
-  - "Most STIs are asymptomatic - screening is essential for detection and prevention"
-  - "Annual chlamydia screening recommended for all sexually active women <25"
-  - "MSM have higher STI rates - need more frequent screening at all exposure sites"
-  - "Screen all pregnant women for HIV, syphilis, hepatitis B, chlamydia at first visit"
-  - "Rescreening at 3 months after treatment due to high reinfection rates (20%)"
-  - "HIV PrEP (Truvada, Descovy) highly effective - requires quarterly STI screening"
-  - "HPV vaccine prevents genital warts and cervical/anal/oropharyngeal cancers"
-  - "Routine HSV-2 screening not recommended - many false positives, limited intervention"
-  - "Window periods: HIV 18-45 days (4th gen), syphilis 3-6 weeks, HCV 8-11 weeks"
-  - "Expedited partner therapy (EPT): providing prescriptions for partners without exam"
+  - Most STIs are asymptomatic - screening is essential for detection and prevention
+  - Annual chlamydia screening recommended for all sexually active women <25
+  - MSM have higher STI rates - need more frequent screening at all exposure sites
+  - Screen all pregnant women for HIV, syphilis, hepatitis B, chlamydia at first visit
+  - Rescreening at 3 months after treatment due to high reinfection rates (20%)
+  - HIV PrEP (Truvada, Descovy) highly effective - requires quarterly STI screening
+  - HPV vaccine prevents genital warts and cervical/anal/oropharyngeal cancers
+  - Routine HSV-2 screening not recommended - many false positives, limited intervention
+  - 'Window periods: HIV 18-45 days (4th gen), syphilis 3-6 weeks, HCV 8-11 weeks'
+  - 'Expedited partner therapy (EPT): providing prescriptions for partners without exam'
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Infectious Disease for HIV pre-exposure prophylaxis (PrEP) management
   - OB/GYN for abnormal Pap smear or HPV-related conditions
   - Public Health for partner notification services and free STI testing
   - Family planning clinic for contraception and reproductive health services
-differentials:
-  - Symptomatic STI requiring treatment rather than screening alone
-  - Sexual assault (requires forensic exam and prophylaxis protocols)
-  - Post-exposure prophylaxis needs (HIV, hepatitis B)
-trace:
-  source: CDC Sexually Transmitted Infections Treatment Guidelines 2021, USPSTF STI Screening Recommendations
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - CDC (Centers for Disease Control and Prevention) Guidelines
-  - UpToDate - Infectious Diseases
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: 'urgency missing; left empty; duplicate treatment key: section the app displayed kept as treatment, the other kept as treatment_duplicate; merge by hand'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Merged duplicate treatment sections; needs clinical review.

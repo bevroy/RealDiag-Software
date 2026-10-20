@@ -1,27 +1,49 @@
 tree_id: GENERAL-WEIGHT-LOSS
 name: Unintentional Weight Loss (Encounter)
+version: '1.0'
+status: draft
 family: general
-specialty: Primary Care, Internal Medicine
+specialty: Primary Care
+secondary_specialties:
+  - Internal Medicine
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Unintentional weight loss
 description: |
   Unintentional weight loss (>5% body weight over 6-12 months) requires evaluation for underlying cause.
   Differential is broad - malignancy, GI disorders, endocrine, psychiatric, medication side effects.
-icd10: R63.4
-snomed: "448765001"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R63.4
+  snomed:
+    - '448765001'
+  icpc2: []
+sources:
+  - text: UpToDate - Internal Medicine
+    origin: citations
+  - text: American Family Physician Guidelines
+    origin: citations
 presentations:
   - Weight loss without trying to lose weight
   - Clothes fitting more loosely
   - Decreased appetite or normal appetite with weight loss
   - Fatigue, weakness
   - May have symptoms of underlying condition
-urgency: Medium
-referrals:
-  oncology:
-    - Suspected malignancy
-  gastroenterology:
-    - Suspected malabsorption, celiac disease, IBD
-  endocrinology:
-    - Suspected hyperthyroidism, diabetes, adrenal insufficiency
+differentials:
+  - Malignancy (especially GI, lung, hematologic)
+  - Hyperthyroidism
+  - Diabetes mellitus
+  - GI disorders (celiac, IBD, malabsorption, peptic ulcer)
+  - Chronic infections (TB, HIV, endocarditis)
+  - Depression or psychiatric disorder
+  - Medications (especially in elderly)
+  - Substance abuse
+  - Dementia or cognitive decline
+  - Heart failure or COPD
 workup:
   history:
     - Quantify weight loss (amount and timeframe)
@@ -71,19 +93,30 @@ clinical_pearls:
   - Up to 25% may remain unexplained after workup
   - Always consider depression and medication side effects
   - Document baseline weight for future comparison
-differentials:
-  - Malignancy (especially GI, lung, hematologic)
-  - Hyperthyroidism
-  - Diabetes mellitus
-  - GI disorders (celiac, IBD, malabsorption, peptic ulcer)
-  - Chronic infections (TB, HIV, endocarditis)
-  - Depression or psychiatric disorder
-  - Medications (especially in elderly)
-  - Substance abuse
-  - Dementia or cognitive decline
-  - Heart failure or COPD
+red_flags: []
+disposition_guidance: {}
+referrals:
+  oncology:
+    - Suspected malignancy
+  gastroenterology:
+    - Suspected malabsorption, celiac disease, IBD
+  endocrinology:
+    - Suspected hyperthyroidism, diabetes, adrenal insufficiency
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 62-year-old man with 20 lb unintentional weight loss over 4 months. Decreased appetite, fatigue. No GI symptoms. Labs show mild anemia, elevated ESR. CT shows pancreatic mass. Refer to oncology. Diagnosed with pancreatic cancer. Begin treatment.
-citations:
-  - UpToDate - Internal Medicine
-  - American Family Physician Guidelines
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

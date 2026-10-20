@@ -1,0 +1,187 @@
+# Overdue-screening rules for the encounter assessment ("Possible missed items").
+#
+# Each rule restates a current USPSTF grade A or B recommendation, checked
+# against uspreventiveservicestaskforce.org on 2026-10-19. Every rule is
+# status: draft until clinically reviewed (listed in
+# docs/CLINICAL_CONTENT_REVIEW.md section 12); while any rule is draft the
+# clinical review notice is shown.
+#
+# Fields:
+#   population      age_min / age_max (inclusive), sex, bmi_min (overweight),
+#                   smoking: ever (current or former smoker)
+#   exclude_conditions  problem-list ICD-10 prefixes that take the patient out
+#                   of the screened population (known disease)
+#   exclude_procedures  procedure keywords that do the same (e.g. hysterectomy)
+#   evidence        any one option within its window means "not due":
+#                   kind lab (LOINC), vital (LOINC), procedure / imaging (keywords)
+#                   within_years: null = ever (limited to the data retrieved)
+#   needs_unavailable  data RealDiag cannot see; stated, never guessed
+#   grades          grade by age band, for the wording
+rules:
+  - id: colorectal-cancer
+    title: Colorectal cancer screening
+    status: draft
+    source:
+      citation: 'USPSTF. Colorectal Cancer: Screening. Final Recommendation Statement, May 2021'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening
+    grades:
+      - {age_min: 45, age_max: 49, grade: B}
+      - {age_min: 50, age_max: 75, grade: A}
+    population: {age_min: 45, age_max: 75}
+    exclude_conditions: [C18, C19, C20, Z85.03, Z85.04]
+    evidence:
+      - {kind: procedure, label: colonoscopy, keywords: [colonoscopy], within_years: 10}
+      - {kind: imaging, label: CT colonography, keywords: [colonography], within_years: 5}
+      - {kind: procedure, label: flexible sigmoidoscopy, keywords: [sigmoidoscopy], within_years: 5}
+      - {kind: lab, label: FIT or high-sensitivity gFOBT, loinc: [29771-3, 56490-6, 56491-4, 57905-2, 2335-8, 14563-1, 14564-9, 14565-6], within_years: 1}
+      - {kind: lab, label: stool DNA-FIT, loinc: [77353-1, 77354-9], within_years: 3}
+    caveats:
+      - Applies to adults at average risk; earlier or more frequent screening for higher risk is outside this rule.
+
+  - id: breast-cancer
+    title: Breast cancer screening
+    status: draft
+    source:
+      citation: 'USPSTF. Breast Cancer: Screening. Final Recommendation Statement, April 2024'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/breast-cancer-screening
+    grades:
+      - {age_min: 40, age_max: 74, grade: B}
+    population: {age_min: 40, age_max: 74, sex: female}
+    evidence:
+      - {kind: imaging, label: mammogram, keywords: [mammogra, 'modality: mg', tomosynthesis], within_years: 2}
+      - {kind: procedure, label: mammogram, keywords: [mammogra, tomosynthesis], within_years: 2}
+    caveats:
+      - Biennial screening mammography; prior mastectomy is not checked.
+
+  - id: cervical-cancer
+    title: Cervical cancer screening
+    status: draft
+    source:
+      citation: 'USPSTF. Cervical Cancer: Screening. Final Recommendation Statement, August 2018'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening
+    grades:
+      - {age_min: 21, age_max: 65, grade: A}
+    population: {age_min: 21, age_max: 65, sex: female}
+    exclude_procedures: [hysterectomy]
+    exclude_conditions: [Z90.71]
+    evidence:
+      - {kind: lab, label: cervical cytology, loinc: [10524-7, 19762-4, 19764-0, 19765-7, 19766-5, 47527-7, 47528-5, 33717-0], within_years: 3}
+      - {kind: lab, label: high-risk HPV test, loinc: [21440-3, 30167-1, 59263-4, 59420-0, 71431-1, 77379-6, 77399-4, 77400-0], within_years: 5, age_min: 30}
+    caveats:
+      - Ages 21-29 every 3 years with cytology; ages 30-65 cytology every 3 years, hrHPV alone or cotesting every 5 years.
+      - Does not apply after hysterectomy with removal of the cervix.
+
+  - id: hypertension
+    title: Hypertension screening
+    status: draft
+    source:
+      citation: 'USPSTF. Hypertension in Adults: Screening. Final Recommendation Statement, April 2021'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hypertension-in-adults-screening
+    grades:
+      - {age_min: 18, age_max: null, grade: A}
+    population: {age_min: 18}
+    exclude_conditions: [I10, I11, I12, I13, I15, I16]
+    evidence:
+      - {kind: vital, label: blood pressure reading, loinc: [8480-6, 85354-9], within_years: 1, age_min: 40}
+      - {kind: vital, label: blood pressure reading, loinc: [8480-6, 85354-9], within_years: 3, age_max: 39}
+    caveats:
+      - Annual screening is suggested from age 40 or with increased risk; every 3 to 5 years for adults 18-39 not at increased risk with a prior normal reading.
+
+  - id: prediabetes-diabetes
+    title: Prediabetes and type 2 diabetes screening
+    status: draft
+    source:
+      citation: 'USPSTF. Prediabetes and Type 2 Diabetes: Screening. Final Recommendation Statement, August 2021'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-for-prediabetes-and-type-2-diabetes
+    grades:
+      - {age_min: 35, age_max: 70, grade: B}
+    population: {age_min: 35, age_max: 70, bmi_min: 25}
+    exclude_conditions: [E08, E09, E10, E11, E13, R73.03, R73.09]
+    evidence:
+      - {kind: lab, label: HbA1c or fasting glucose, loinc: [4548-4, 17856-6, 1558-6, 76629-5], within_years: 3}
+    caveats:
+      - Overweight is BMI 25 or more (23 or more may be appropriate for Asian American persons; race is not checked).
+      - Screening every 3 years may be a reasonable approach after a normal result.
+
+  - id: hiv
+    title: HIV screening
+    status: draft
+    source:
+      citation: 'USPSTF. Human Immunodeficiency Virus (HIV) Infection: Screening. Final Recommendation Statement, June 2019'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/human-immunodeficiency-virus-hiv-infection-screening
+    grades:
+      - {age_min: 15, age_max: 65, grade: A}
+    population: {age_min: 15, age_max: 65}
+    exclude_conditions: [B20, Z21]
+    evidence:
+      - {kind: lab, label: HIV test, loinc: [75622-1, 56888-1, 7917-8, 7918-6, 68961-2, 5221-7, 48345-6, 58900-2, 80387-4], within_years: null}
+    caveats:
+      - At least once; repeat screening for people at increased risk is not checked.
+      - Pregnant persons should also be screened (pregnancy is not checked).
+
+  - id: hepatitis-c
+    title: Hepatitis C screening
+    status: draft
+    source:
+      citation: 'USPSTF. Hepatitis C Virus Infection in Adolescents and Adults: Screening. Final Recommendation Statement, March 2020'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hepatitis-c-screening
+    grades:
+      - {age_min: 18, age_max: 79, grade: B}
+    population: {age_min: 18, age_max: 79}
+    exclude_conditions: [B17.1, B18.2, B19.2]
+    evidence:
+      - {kind: lab, label: hepatitis C antibody or RNA test, loinc: [16128-1, 13955-0, 40726-3, 11011-4, 20416-4, 29609-5], within_years: null}
+    caveats:
+      - Most adults need only one-time screening; periodic screening for ongoing risk is not checked.
+
+  - id: osteoporosis
+    title: Osteoporosis screening
+    status: draft
+    source:
+      citation: 'USPSTF. Osteoporosis to Prevent Fractures: Screening. Final Recommendation Statement, January 2025'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/osteoporosis-screening
+    grades:
+      - {age_min: 65, age_max: null, grade: B}
+    population: {age_min: 65, sex: female}
+    exclude_conditions: [M80, M81]
+    evidence:
+      - {kind: imaging, label: bone density (DXA), keywords: [dxa, dexa, densitometry, bone density], within_years: null}
+      - {kind: procedure, label: bone density (DXA), keywords: [dxa, dexa, densitometry, bone density], within_years: null}
+    caveats:
+      - Postmenopausal women under 65 at increased fracture risk (grade B) need a clinical risk assessment and are not checked.
+      - The recommendation does not set a rescreening interval.
+
+  - id: lung-cancer
+    title: Lung cancer screening
+    status: draft
+    source:
+      citation: 'USPSTF. Lung Cancer: Screening. Final Recommendation Statement, March 2021'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/lung-cancer-screening
+    grades:
+      - {age_min: 50, age_max: 80, grade: B}
+    population: {age_min: 50, age_max: 80, smoking: ever}
+    exclude_conditions: [C34]
+    evidence:
+      - {kind: imaging, label: low-dose CT of the chest, keywords: [low dose, low-dose, ldct, lung cancer screening], within_years: 1}
+      - {kind: procedure, label: low-dose CT of the chest, keywords: [low dose, low-dose, ldct, lung cancer screening], within_years: 1}
+    needs_unavailable:
+      - pack-years (20 pack-year history required)
+      - quit date (current smoker or quit within the past 15 years)
+    caveats:
+      - Annual low-dose CT; eligibility depends on pack-years and years since quitting, which RealDiag cannot see.
+
+  - id: abdominal-aortic-aneurysm
+    title: Abdominal aortic aneurysm screening
+    status: draft
+    source:
+      citation: 'USPSTF. Abdominal Aortic Aneurysm: Screening. Final Recommendation Statement, December 2019'
+      url: https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening
+    grades:
+      - {age_min: 65, age_max: 75, grade: B}
+    population: {age_min: 65, age_max: 75, sex: male, smoking: ever}
+    exclude_conditions: [I71.3, I71.4, I71.5, I71.6]
+    evidence:
+      - {kind: imaging, label: abdominal aortic ultrasound, keywords: [aaa, aortic aneurysm, abdominal aorta, aorta ultrasound, aortic ultrasound], within_years: null}
+      - {kind: procedure, label: abdominal aortic ultrasound, keywords: [aaa screening, aortic aneurysm screening, abdominal aorta, aortic ultrasound], within_years: null}
+    caveats:
+      - One-time ultrasonography.

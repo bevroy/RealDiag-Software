@@ -1,12 +1,34 @@
 tree_id: OBGYN-VAGINITIS-UNSPECIFIED
 name: Vaginitis, Unspecified
+version: '1.0'
+status: draft
 family: obstetrics_gynecology
-specialty: Gynecology/Primary Care
-applies_to: female
-icd10: N76.0
-snomed: 30800001
-urgency: []
-homeopathy: []
+specialty: Gynecology
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: female
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - N76.0
+  snomed:
+    - '30800001'
+  icpc2: []
+sources:
+  - text: CDC Sexually Transmitted Infections Treatment Guidelines
+    origin: citations
+  - text: ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
+    origin: citations
+  - text: UpToDate - Gynecology
+    origin: citations
+  - text: CDC STI Treatment Guidelines, ACOG Practice Bulletins on Vaginitis, UpToDate
+    origin: trace.source
 presentations:
   - Abnormal vaginal discharge (change in color, amount, odor, or consistency)
   - Vaginal itching or irritation
@@ -16,6 +38,15 @@ presentations:
   - Vulvar erythema or swelling
   - Vaginal odor (fishy, foul)
   - May be asymptomatic with incidental finding on exam
+differentials:
+  - Bacterial vaginosis (thin gray discharge, clue cells, pH greater than 4.5, fishy odor)
+  - Vulvovaginal candidiasis (thick white curdy discharge, pH less than 4.5, pseudohyphae, intense pruritus)
+  - Trichomoniasis (yellow-green frothy discharge, pH greater than 4.5, motile trichomonads, strawberry cervix)
+  - Cervicitis (mucopurulent cervical discharge, friability, caused by gonorrhea/chlamydia)
+  - Atrophic vaginitis (postmenopausal, vaginal dryness, pH greater than 5, parabasal cells)
+  - Physiologic discharge (white, floccular, no odor, pH 4.0-4.5, asymptomatic - normal)
+  - Contact/irritant dermatitis (exposure to irritant, pruritus, normal wet mount)
+  - Foreign body (retained tampon, pessary - foul odor, may see foreign body on exam)
 workup:
   - Clinical history
   - Onset and duration of symptoms
@@ -37,42 +68,42 @@ workup:
   - Speculum examination
   - Inspect vaginal walls and cervix
   - Assess discharge characteristics
-  - Color: white, gray, yellow-green
-  - Consistency: thick, thin, frothy, curdy
-  - Amount: scant, copious
+  - 'Color: white, gray, yellow-green'
+  - 'Consistency: thick, thin, frothy, curdy'
+  - 'Amount: scant, copious'
   - Adherence to walls
-  - Cervical appearance (cervicitis: mucopurulent discharge, friability)
+  - 'Cervical appearance (cervicitis: mucopurulent discharge, friability)'
   - Laboratory evaluation - POINT-OF-CARE testing preferred
   - Vaginal pH measurement
-  - "Normal pH: 4.0-4.5"
-  - "pH greater than 4.5: bacterial vaginosis or trichomoniasis"
-  - "pH normal (less than 4.5): vulvovaginal candidiasis"
+  - 'Normal pH: 4.0-4.5'
+  - 'pH greater than 4.5: bacterial vaginosis or trichomoniasis'
+  - 'pH normal (less than 4.5): vulvovaginal candidiasis'
   - Wet mount microscopy (saline preparation)
   - Obtain vaginal discharge from posterior fornix or lateral wall
   - Mix with drop of normal saline on slide
   - Findings
-  - Clue cells (epithelial cells with adherent bacteria): bacterial vaginosis
-  - Motile trichomonads (flagellated protozoa): trichomoniasis
+  - 'Clue cells (epithelial cells with adherent bacteria): bacterial vaginosis'
+  - 'Motile trichomonads (flagellated protozoa): trichomoniasis'
   - White blood cells (many suggest infection)
   - Whiff test (amine/KOH test)
   - Add drop of 10% KOH to discharge on slide
-  - Positive test: fishy amine odor (bacterial vaginosis or trichomoniasis)
+  - 'Positive test: fishy amine odor (bacterial vaginosis or trichomoniasis)'
   - KOH preparation (fungal prep)
   - Add 10% KOH to discharge to lyse epithelial cells
-  - Look for pseudohyphae and budding yeast: vulvovaginal candidiasis
+  - 'Look for pseudohyphae and budding yeast: vulvovaginal candidiasis'
   - Vaginal culture (if microscopy negative but symptoms present)
   - Fungal culture for recurrent candidiasis
   - Bacterial culture rarely helpful
   - Nucleic acid amplification testing (NAAT)
   - For Trichomonas vaginalis (more sensitive than wet mount)
-  - For STI screening: gonorrhea and chlamydia if risk factors
+  - 'For STI screening: gonorrhea and chlamydia if risk factors'
   - Additional testing if indicated
   - Pregnancy test
   - HIV, syphilis screening if STI suspected
   - Fasting glucose or HbA1c if recurrent candidiasis (screen for diabetes)
 treatment:
   - Bacterial vaginosis
-  - Diagnosis: Amsel criteria (need 3 of 4)
+  - 'Diagnosis: Amsel criteria (need 3 of 4)'
   - Thin, gray-white homogeneous discharge
   - Clue cells on wet mount (greater than 20%)
   - Vaginal pH greater than 4.5
@@ -81,12 +112,12 @@ treatment:
   - Metronidazole 500 mg PO twice daily for 7 days (FIRST-LINE)
   - Metronidazole gel 0.75% one applicator intravaginally daily for 5 days
   - Clindamycin cream 2% one applicator intravaginally at bedtime for 7 days
-  - Alternative: clindamycin 300 mg PO twice daily for 7 days
+  - 'Alternative: clindamycin 300 mg PO twice daily for 7 days'
   - Avoid alcohol during metronidazole and 24 hours after (disulfiram reaction)
   - Treat in pregnancy (oral metronidazole preferred)
   - Partner treatment NOT recommended (not sexually transmitted)
   - Vulvovaginal candidiasis (yeast infection)
-  - Diagnosis: vaginal pH less than 4.5, pseudohyphae/budding yeast on KOH prep
+  - 'Diagnosis: vaginal pH less than 4.5, pseudohyphae/budding yeast on KOH prep'
   - Uncomplicated candidiasis (mild-moderate symptoms, infrequent, C. albicans, non-immunocompromised)
   - Single-dose oral fluconazole 150 mg (MOST CONVENIENT)
   - Intravaginal azole therapies
@@ -99,14 +130,14 @@ treatment:
   - Fluconazole 150 mg on days 1, 4, 7, then weekly for 6 months (suppressive therapy)
   - Screen for diabetes
   - Consider vaginal culture to identify non-albicans species
-  - Severe symptoms: 7-14 days topical azole or two doses fluconazole 150 mg 72 hours apart
-  - Pregnancy: topical azole only (fluconazole contraindicated)
+  - 'Severe symptoms: 7-14 days topical azole or two doses fluconazole 150 mg 72 hours apart'
+  - 'Pregnancy: topical azole only (fluconazole contraindicated)'
   - Trichomoniasis
-  - Diagnosis: motile trichomonads on wet mount or positive NAAT
-  - Presentation: yellow-green frothy discharge, pH greater than 4.5, strawberry cervix
+  - 'Diagnosis: motile trichomonads on wet mount or positive NAAT'
+  - 'Presentation: yellow-green frothy discharge, pH greater than 4.5, strawberry cervix'
   - Treatment (sexually transmitted - treat partners)
   - Metronidazole 500 mg PO twice daily for 7 days (PREFERRED)
-  - Alternative: tinidazole 2 g PO single dose or metronidazole 2 g PO single dose
+  - 'Alternative: tinidazole 2 g PO single dose or metronidazole 2 g PO single dose'
   - Treat all sexual partners from past 60 days
   - Abstain from intercourse for 7 days after treatment
   - Test of cure in 3 months (high reinfection rates)
@@ -115,46 +146,52 @@ treatment:
   - Can have more than one type simultaneously
   - Treat each identified pathogen
   - Non-infectious vaginitis
-  - Atrophic vaginitis (postmenopausal): vaginal estrogen therapy
-  - Irritant/allergic vaginitis: avoid irritants, topical corticosteroids
-  - Cytolytic vaginosis (excess lactobacilli): baking soda sitz baths
-  - Desquamative inflammatory vaginitis: clindamycin cream + hydrocortisone
+  - 'Atrophic vaginitis (postmenopausal): vaginal estrogen therapy'
+  - 'Irritant/allergic vaginitis: avoid irritants, topical corticosteroids'
+  - 'Cytolytic vaginosis (excess lactobacilli): baking soda sitz baths'
+  - 'Desquamative inflammatory vaginitis: clindamycin cream + hydrocortisone'
   - Prevention counseling
   - Avoid douching (disrupts normal flora)
   - Avoid scented feminine products, bubble baths
-  - Wear cotton underwear, avoid tight clothing
+  - 'Patient advice: Wear cotton underwear, avoid tight clothing'
   - Wipe front to back
   - Change out of wet clothing promptly
   - Condom use to prevent STIs
 clinical_pearls:
-  - 'Bacterial vaginosis most common cause of vaginal discharge (40-50%), followed by candidiasis (20-25%) and trichomoniasis (15-20%)'
-  - 'Vaginal pH single most useful test - pH greater than 4.5 rules OUT candidiasis (normal pH in VVC)'
-  - 'Clue cells on wet mount pathognomonic for bacterial vaginosis - epithelial cells with stippled borders from adherent bacteria'
-  - 'Wet mount sensitivity for Trichomonas only 60% - NAAT more sensitive (95%) if high suspicion and negative wet mount'
-  - 'Bacterial vaginosis NOT sexually transmitted - partner treatment not recommended, does not reduce recurrence'
-  - 'Fluconazole 150 mg single dose equally effective as 7 days topical azoles for uncomplicated candidiasis'
-  - 'Recurrent candidiasis (4+ episodes/year) warrants diabetes screening - chronic hyperglycemia promotes yeast overgrowth'
-  - 'Trichomoniasis IS sexually transmitted - must treat all partners or reinfection inevitable'
+  - Bacterial vaginosis most common cause of vaginal discharge (40-50%), followed by candidiasis (20-25%) and trichomoniasis (15-20%)
+  - Vaginal pH single most useful test - pH greater than 4.5 rules OUT candidiasis (normal pH in VVC)
+  - Clue cells on wet mount pathognomonic for bacterial vaginosis - epithelial cells with stippled borders from adherent bacteria
+  - Wet mount sensitivity for Trichomonas only 60% - NAAT more sensitive (95%) if high suspicion and negative wet mount
+  - Bacterial vaginosis NOT sexually transmitted - partner treatment not recommended, does not reduce recurrence
+  - Fluconazole 150 mg single dose equally effective as 7 days topical azoles for uncomplicated candidiasis
+  - Recurrent candidiasis (4+ episodes/year) warrants diabetes screening - chronic hyperglycemia promotes yeast overgrowth
+  - Trichomoniasis IS sexually transmitted - must treat all partners or reinfection inevitable
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gynecology for recurrent vaginitis despite appropriate treatment
   - Infectious disease for refractory trichomoniasis or candidiasis in immunocompromised patients
   - Dermatology if suspicion for dermatologic condition (lichen sclerosus, lichen planus)
   - Allergy/immunology for suspected allergic vaginitis
-differentials:
-  - Bacterial vaginosis (thin gray discharge, clue cells, pH greater than 4.5, fishy odor)
-  - Vulvovaginal candidiasis (thick white curdy discharge, pH less than 4.5, pseudohyphae, intense pruritus)
-  - Trichomoniasis (yellow-green frothy discharge, pH greater than 4.5, motile trichomonads, strawberry cervix)
-  - Cervicitis (mucopurulent cervical discharge, friability, caused by gonorrhea/chlamydia)
-  - Atrophic vaginitis (postmenopausal, vaginal dryness, pH greater than 5, parabasal cells)
-  - Physiologic discharge (white, floccular, no odor, pH 4.0-4.5, asymptomatic - normal)
-  - Contact/irritant dermatitis (exposure to irritant, pruritus, normal wet mount)
-  - Foreign body (retained tampon, pessary - foul odor, may see foreign body on exam)
-trace:
-  source: CDC STI Treatment Guidelines, ACOG Practice Bulletins on Vaginitis, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - CDC Sexually Transmitted Infections Treatment Guidelines
-  - ACOG (American College of Obstetricians and Gynecologists) Practice Bulletins
-  - UpToDate - Gynecology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

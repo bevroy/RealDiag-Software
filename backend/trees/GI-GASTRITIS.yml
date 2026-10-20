@@ -1,11 +1,33 @@
 tree_id: GI-GASTRITIS
 name: Gastritis
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K29.70
-snomed: 4556007
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K29.70
+  snomed:
+    - '4556007'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: ACG Clinical Guidelines on Gastritis Management 2017, Maastricht V Consensus Report on H. pylori
+    origin: trace.source
 presentations:
   - Epigastric pain or discomfort
   - Nausea and vomiting
@@ -14,21 +36,32 @@ presentations:
   - Upper GI bleeding (hematemesis or melena) in erosive gastritis
   - Symptoms may be worse after eating
   - May be asymptomatic (incidental finding on endoscopy)
-  - Risk factors: H. pylori, NSAIDs, alcohol, stress
+  - 'Risk factors: H. pylori, NSAIDs, alcohol, stress'
+differentials:
+  - H. pylori gastritis (most common worldwide cause)
+  - NSAID-induced gastritis (erosive, related to NSAID use)
+  - Autoimmune gastritis (atrophic, pernicious anemia, anti-parietal cell antibodies)
+  - Alcoholic gastritis (acute erosive gastritis from heavy alcohol use)
+  - Stress-related mucosal disease (ICU patients, burns, trauma, sepsis)
+  - Peptic ulcer disease (discrete ulcer vs diffuse inflammation)
+  - Gastroesophageal reflux disease (GERD) - symptoms overlap but esophageal involvement
+  - Functional dyspepsia (normal endoscopy and biopsies)
+  - Gastric cancer (weight loss, anemia, mass lesion on endoscopy)
+  - Zollinger-Ellison syndrome (gastrinoma causing severe gastritis and PUD)
 workup:
   - Upper endoscopy (EGD) with biopsies - diagnostic standard
   - Visualize gastric mucosa - erythema, erosions, friability
   - Biopsies essential for histologic diagnosis and H. pylori testing
   - Obtain biopsies from antrum and body of stomach
   - H. pylori testing - rapid urease test on biopsy, histology, culture
-  - Non-invasive H. pylori tests: stool antigen, urea breath test (if not on PPI)
-  - Laboratory tests: CBC (anemia from chronic bleeding), vitamin B12 (atrophic gastritis)
-  - If pernicious anemia suspected: anti-parietal cell antibodies, anti-intrinsic factor antibodies
+  - 'Non-invasive H. pylori tests: stool antigen, urea breath test (if not on PPI)'
+  - 'Laboratory tests: CBC (anemia from chronic bleeding), vitamin B12 (atrophic gastritis)'
+  - 'If pernicious anemia suspected: anti-parietal cell antibodies, anti-intrinsic factor antibodies'
   - Serum gastrin level if Zollinger-Ellison syndrome suspected (very high gastrin)
 treatment:
   - H. pylori-positive gastritis - eradication therapy
-  - Clarithromycin triple therapy: PPI BID + amoxicillin 1g BID + clarithromycin 500mg BID x 14 days
-  - Bismuth quadruple therapy: PPI BID + bismuth + tetracycline + metronidazole x 14 days
+  - 'Clarithromycin triple therapy: PPI BID + amoxicillin 1g BID + clarithromycin 500mg BID x 14 days'
+  - 'Bismuth quadruple therapy: PPI BID + bismuth + tetracycline + metronidazole x 14 days'
   - Levofloxacin-based if penicillin allergy or clarithromycin resistance
   - Confirm eradication 4-6 weeks after therapy with urea breath test or stool antigen
   - NSAID-related gastritis
@@ -41,37 +74,38 @@ treatment:
   - Autoimmune gastritis (pernicious anemia)
   - Vitamin B12 replacement (1000 mcg IM monthly or oral 1000-2000 mcg daily)
   - Monitor for development of gastric carcinoid or adenocarcinoma
-  - General measures: avoid alcohol, smoking cessation, stress reduction
+  - 'General measures: avoid alcohol, smoking cessation, stress reduction'
 clinical_pearls:
-  - "Gastritis is histologic diagnosis - inflammation of gastric mucosa seen on biopsy"
-  - "Most common causes: H. pylori infection (most common worldwide), NSAIDs, alcohol"
-  - "Erosive gastritis more likely to cause bleeding; non-erosive gastritis usually asymptomatic"
-  - "H. pylori increases risk of peptic ulcer disease, gastric cancer, and MALT lymphoma"
-  - "Atrophic gastritis from chronic H. pylori or autoimmune can lead to vitamin B12 deficiency"
-  - "Autoimmune gastritis targets parietal cells → loss of intrinsic factor → pernicious anemia"
-  - "Zollinger-Ellison syndrome (gastrinoma) causes severe gastritis and refractory PUD"
-  - "Long-term PPI use can cause atrophic gastritis and hypergastrinemia"
+  - Gastritis is histologic diagnosis - inflammation of gastric mucosa seen on biopsy
+  - 'Most common causes: H. pylori infection (most common worldwide), NSAIDs, alcohol'
+  - Erosive gastritis more likely to cause bleeding; non-erosive gastritis usually asymptomatic
+  - H. pylori increases risk of peptic ulcer disease, gastric cancer, and MALT lymphoma
+  - Atrophic gastritis from chronic H. pylori or autoimmune can lead to vitamin B12 deficiency
+  - Autoimmune gastritis targets parietal cells → loss of intrinsic factor → pernicious anemia
+  - Zollinger-Ellison syndrome (gastrinoma) causes severe gastritis and refractory PUD
+  - Long-term PPI use can cause atrophic gastritis and hypergastrinemia
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Gastroenterology for upper endoscopy to confirm diagnosis
   - GI referral if refractory symptoms, alarm features, or H. pylori eradication failure
   - Hematology if severe pernicious anemia or megaloblastic anemia
-differentials:
-  - H. pylori gastritis (most common worldwide cause)
-  - NSAID-induced gastritis (erosive, related to NSAID use)
-  - Autoimmune gastritis (atrophic, pernicious anemia, anti-parietal cell antibodies)
-  - Alcoholic gastritis (acute erosive gastritis from heavy alcohol use)
-  - Stress-related mucosal disease (ICU patients, burns, trauma, sepsis)
-  - Peptic ulcer disease (discrete ulcer vs diffuse inflammation)
-  - Gastroesophageal reflux disease (GERD) - symptoms overlap but esophageal involvement
-  - Functional dyspepsia (normal endoscopy and biopsies)
-  - Gastric cancer (weight loss, anemia, mass lesion on endoscopy)
-  - Zollinger-Ellison syndrome (gastrinoma causing severe gastritis and PUD)
-trace:
-  source: ACG Clinical Guidelines on Gastritis Management 2017, Maastricht V Consensus Report on H. pylori
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

@@ -12,6 +12,10 @@ services:
     # use a different pattern than the default (which matches `*-3000.app.github.dev`).
     environment:
       PREVIEW_ORIGIN_REGEX: "^https?://(?:localhost(?::\\d+)?|.+-3000\\.app\\.github\\.dev)$"
+      # Required by the API (32+ random characters). Export it before
+      # `docker compose up`, e.g.:
+      #   export JWT_SECRET_KEY=$(python3 -c "import secrets; print(secrets.token_urlsafe(48))")
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?Set JWT_SECRET_KEY (32+ characters) before docker compose up}
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
       interval: 10s

@@ -4,6 +4,9 @@ from typing import Any, Dict, List
 import yaml
 from fastapi import APIRouter, HTTPException, Request
 
+from .clinical_review import review_fields, review_notice
+from .tree_schema import icd10_codes, primary_source, snomed_codes, source_texts, tree_id as get_tree_id, tree_name
+
 # Import rate limiter
 try:
     from backend.services.security import limiter
@@ -85,9 +88,8 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
             continue
           
           # Convert tree structure to rule-like format for compatibility
-          # Support both 'id' and 'tree_id' field names
-          tree_id = tree_data.get("id") or tree_data.get("tree_id") or tree_file.stem
-          tree_title = tree_data.get("title") or tree_data.get("name") or tree_id
+          tree_id = get_tree_id(tree_data, tree_file.stem)
+          tree_title = tree_name(tree_data, tree_id)
           
           # Extract presentations from multiple possible sources
           presentations = []
@@ -110,47 +112,22 @@ def _load_trees_by_family(family: str) -> List[Dict[str, Any]]:
             if description and description not in presentations:
               presentations.append(description)
           
-          # Ensure citations are always strings (not objects or dicts)
-          citations_raw = tree_data.get("citations", [])
-          citations = []
-          if isinstance(citations_raw, list):
-            for citation in citations_raw:
-              if isinstance(citation, str):
-                citations.append(citation)
-              elif isinstance(citation, dict):
-                # Convert dict to string (take first key or value)
-                citations.append(str(list(citation.keys())[0]) if citation else "")
-              else:
-                citations.append(str(citation))
-          
-          # Extract SNOMED code (can be string, number, or list)
-          snomed_codes = []
-          snomed_raw = tree_data.get("snomed")
-          if snomed_raw:
-            if isinstance(snomed_raw, list):
-              snomed_codes = [str(code) for code in snomed_raw]
-            else:
-              snomed_codes = [str(snomed_raw)]
-          
-          # Extract source from trace section or use default
-          trace_info = tree_data.get("trace", {})
-          # Handle both old format (trace as list) and new format (trace as dict with source)
-          if isinstance(trace_info, dict):
-            source = trace_info.get("source", "Clinical Decision Tree")
-          else:
-            # Old format - trace is a list (case study), no source field
-            source = "Clinical Decision Tree"
-          if not source:
-            source = "Clinical Decision Tree"
+          # trace.source is reported separately as "source"
+          citations = source_texts(tree_data, exclude_origins=("trace.source",))
+          snomed = snomed_codes(tree_data)
+          source = primary_source(tree_data)
           
           trees.append({
             "id": tree_id,
             "label": tree_title,
             "presentations": presentations,
-            "icd10": [tree_data.get("icd10")] if tree_data.get("icd10") else [],
-            "snomed": snomed_codes,
+            "icd10": icd10_codes(tree_data),
+            "snomed": snomed,
             "citations": citations,
-            "source": source
+            "source": source,
+            "urgency": tree_data.get("urgency", ""),
+            "status": tree_data.get("status", ""),
+            **review_fields(tree_data.get("status")),
           })
       except Exception as e:
         print(f"Error loading tree {tree_file}: {e}")
@@ -181,6 +158,7 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
           "source": data.get("source", "Clinical Practice Guidelines"),
           "count": len(rules),
           "rules": rules,
+          "clinical_review_notice": review_notice(),
         }
     except Exception as e:
       print(f"Error loading endocrinology rules: {e}")
@@ -197,6 +175,7 @@ def get_endocrinology_rules(request: Request) -> Dict[str, Any]:
     "source": "RealDiag Clinical Decision Trees",
     "count": len(trees_sorted),
     "rules": trees_sorted,
+    "clinical_review_notice": review_notice(),
   }
 
 
@@ -305,4 +284,5 @@ def get_rules_by_family(request: Request, family: str) -> Dict[str, Any]:
     "source": "RealDiag Clinical Decision Trees",
     "count": len(all_rules_sorted),
     "rules": all_rules_sorted,
+    "clinical_review_notice": review_notice(),
   }

@@ -1,60 +1,87 @@
 tree_id: DERM-MELANOMA
 name: Malignant Melanoma
+version: '1.0'
+status: draft
 family: dermatology
 specialty: Dermatology
-icd10:
-- C43.9
-- D03.9
-snomed:
-- '372244006'
-urgency: medium
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Malignant Melanoma
-version: '1.0'
-citations:
-  - AAD (American Academy of Dermatology) Clinical Guidelines
-  - British Association of Dermatologists Guidelines
-  - UpToDate - Dermatology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C43.9
+    - D03.9
+  snomed:
+    - '372244006'
+  icpc2: []
+sources:
+  - text: AAD (American Academy of Dermatology) Clinical Guidelines
+    origin: citations
+  - text: British Association of Dermatologists Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
+  - text: American Academy of Dermatology (AAD) Guidelines, National Comprehensive Cancer Network (NCCN) for skin cancers
+    origin: trace.source
 presentations:
-- Asymmetric pigmented lesion
-- Irregular borders
-- Color variation
-- Diameter > 6mm
-- Evolving lesion (ABCDEs)
-workup:
-- Excisional biopsy with narrow margins (1-3mm) for diagnosis
-- Sentinel lymph node biopsy if Breslow >0.8mm
-- LDH (elevated suggests metastatic disease)
-- CT chest/abdomen/pelvis and brain MRI for staging if high-risk
-treatment:
-- 'Guideline-based treatment options for Malignant Melanoma include:'
-- DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth (AAD 2023)
-- 'After diagnosis: Wide local excision with margins based on depth (0.5-2cm) (AAD
-  2023)'
-- Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated (AAD 2023)
-- 'Staging workup for Stage IIB+ or node-positive: CT chest/abdomen/pelvis, brain
-  MRI (AAD 2023)'
-- 'Adjuvant therapy: Interferon, anti-PD1 (pembrolizumab), or BRAF/MEK inhibitors
-  if indicated (AAD 2023)'
-clinical_pearls:
-- 'ABCDE: Asymmetry, Border irregular, Color variation, Diameter >6mm, Evolving'
-- '''Ugly duckling sign'': Lesion that looks different from other moles'
-- 'High-risk: Personal/family history, >50 nevi, atypical moles, fair skin, sunburns'
-- Breslow depth (thickness) is most important prognostic factor
-- Amelanotic melanoma exists (pink/red) - don't miss it
-referrals:
-- Dermatology or surgical oncology for biopsy and wide excision
-- Medical oncology if Stage IIB or higher for adjuvant therapy
-- Plastic surgery for complex reconstructions
+  - Asymmetric pigmented lesion
+  - Irregular borders
+  - Color variation
+  - Diameter > 6mm
+  - Evolving lesion (ABCDEs)
 differentials:
   - Seborrheic keratosis
   - Atypical nevus
   - Basal cell carcinoma
   - Hemangioma
   - Pigmented BCC
-trace:
-  source: American Academy of Dermatology (AAD) Guidelines, National Comprehensive
-    Cancer Network (NCCN) for skin cancers
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Excisional biopsy with narrow margins (1-3mm) for diagnosis
+  - Sentinel lymph node biopsy if Breslow >0.8mm
+  - LDH (elevated suggests metastatic disease)
+  - CT chest/abdomen/pelvis and brain MRI for staging if high-risk
+treatment:
+  - 'Guideline-based treatment options for Malignant Melanoma include:'
+  - DO NOT SHAVE BIOPSY - must do excisional or punch biopsy for full depth (AAD 2023)
+  - 'After diagnosis: Wide local excision with margins based on depth (0.5-2cm) (AAD 2023)'
+  - Sentinel lymph node biopsy if Breslow depth >0.8mm or ulcerated (AAD 2023)
+  - 'Staging workup for Stage IIB+ or node-positive: CT chest/abdomen/pelvis, brain MRI (AAD 2023)'
+  - 'Adjuvant therapy: Interferon, anti-PD1 (pembrolizumab), or BRAF/MEK inhibitors if indicated (AAD 2023)'
+clinical_pearls:
+  - 'ABCDE: Asymmetry, Border irregular, Color variation, Diameter >6mm, Evolving'
+  - '''Ugly duckling sign'': Lesion that looks different from other moles'
+  - 'High-risk: Personal/family history, >50 nevi, atypical moles, fair skin, sunburns'
+  - Breslow depth (thickness) is most important prognostic factor
+  - Amelanotic melanoma exists (pink/red) - don't miss it
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Dermatology or surgical oncology for biopsy and wide excision
+  - Medical oncology if Stage IIB or higher for adjuvant therapy
+  - Plastic surgery for complex reconstructions
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

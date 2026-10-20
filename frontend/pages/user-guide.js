@@ -89,6 +89,8 @@ export default function UserGuidePage() {
             <li>If EHR-connected, include patient ID to pull historical context.</li>
             <li>Review medication-history evidence signals and blocked recommendations.</li>
             <li>Use output as decision support, not as a standalone clinical determination.</li>
+            <li><strong>Encounter Assessment (EHR launch):</strong> open it from the patient banner. Type today&apos;s complaint, or leave it blank to use the EHR&apos;s visit reason; the source is shown. The page combines the chart summary (with any data that could not be retrieved or was cut off), diagnoses matched to the complaint and to chart results with their evidence, workup, treatment information and referrals from each matched tree, listed red flags, and what could not be assessed. Negated complaints (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not matched.</li>
+            <li><strong>Possible missed items:</strong> the encounter assessment also lists, from chart data only, abnormal results whose condition is not on the problem list, problem-list conditions with no supporting result or related medication, and USPSTF screenings that may be due. Each line cites its source and review status; expand it for the evidence, the window checked and caveats. These are prompts to consider, not findings that something was missed.</li>
           </ul>
         </section>
 
@@ -96,8 +98,12 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>5. How to Read Results</h2>
           <ul style={styles.list}>
             <li><strong>Top matches:</strong> Most relevant differential candidates.</li>
-            <li><strong>Matched presentations:</strong> Findings that aligned with your input.</li>
+            <li><strong>Matched presentations:</strong> Findings that aligned with your input. Negated symptoms (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not searched.</li>
+            <li><strong>Can&apos;t-miss condition:</strong> An emergent condition that matches the symptoms. It is always listed, even when its match score is low, so it can be considered and ruled out.</li>
+            <li><strong>Treatment information:</strong> Shown as reference from the decision tree, not as an order. Lines starting &quot;Patient advice:&quot; are self-care advice to pass on to the patient.</li>
             <li><strong>Tests and referrals:</strong> Suggested workup and specialty escalation.</li>
+            <li><strong>Under clinical review:</strong> While clinical content is still being reviewed, results show an amber notice and each diagnosis shows its review status (for example "Draft - under clinical review."). Verify urgency, treatment, thresholds and screening rules against current guidelines before acting. The notice disappears automatically once all content has been reviewed.</li>
+            <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
           </ul>

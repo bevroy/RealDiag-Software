@@ -1,61 +1,141 @@
 tree_id: NEPHRO-HYPERKALEMIA
 name: Hyperkalemia
+version: '1.0'
+status: draft
 family: Nephrology
 specialty: Nephrology
-icd10:
-- E87.5
-snomed:
-- '14140009'
-urgency: medium
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Hyperkalemia
-version: '1.0'
-citations:
-  - KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines
-  - NKF (National Kidney Foundation) Clinical Practice Guidelines
-  - UpToDate - Nephrology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E87.5
+  snomed:
+    - '14140009'
+  icpc2: []
+sources:
+  - text: 'KDIGO (Kidney Disease: Improving Global Outcomes) Guidelines'
+    origin: citations
+  - text: NKF (National Kidney Foundation) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Nephrology
+    origin: citations
+  - text: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American Society of Nephrology (ASN)'
+    origin: trace.source
 presentations:
-- Often asymptomatic until severe (>6.5 mEq/L)
-- Muscle weakness, paresthesias
-- Nausea, palpitations
-- 'ECG changes: Peaked T waves (earliest), widened QRS, prolonged PR, loss of P wave'
-- Sine wave pattern on ECG (pre-arrest, >8.0 mEq/L)
-- 'Causes: Renal failure, ACEi/ARB, K-sparing diuretics, rhabdomyolysis, tumor lysis'
-workup:
-- Basic metabolic panel (K+, Cr)
-- ECG (assess for cardiac toxicity)
-- ABG if metabolic acidosis suspected (worsens hyperkalemia)
-- Urinalysis, urine electrolytes (assess renal K+ excretion)
-treatment:
-- 'Guideline-based treatment options for Hyperkalemia include:'
-- 'If ECG changes: Calcium gluconate 1-2g IV over 2-5 min (membrane stabilization)
-  (KDIGO 2024)'
-- 'Shift K+ into cells: Regular insulin 10 units IV + D50 25g (or D10 250mL if not
-  hypoglycemic) (KDIGO 2024)'
-- Albuterol nebulized 10-20mg (lowers K+ 0.5-1 mEq/L) (KDIGO 2024)
-- 'Remove K+: Sodium polystyrene sulfonate (Kayexalate) 15-30g PO, or patiromer (KDIGO
-  2024)'
-- 'Dialysis if: Refractory, severe (>7.0), renal failure (KDIGO 2024)'
-clinical_pearls:
-- ECG changes correlate poorly with K+ level (always check ECG!)
-- 'Peaked T waves: Earliest sign (K+ 6.0-6.5)'
-- 'Widened QRS, loss of P wave: Severe (K+ >7.0) → high risk cardiac arrest'
-- 'Treatment priorities: Stabilize myocardium (Ca), shift K+ into cells (insulin/glucose),
-  remove K+ (kayexalate, dialysis)'
-- 'Pseudohyperkalemia: Hemolysis, thrombocytosis, leukocytosis (repeat sample)'
-referrals:
-- Nephrology if severe or refractory
-- Dialysis if K+ >7.0 or refractory to medical management
-- CCU if ECG changes or K+ >7.0
+  - Often asymptomatic until severe (>6.5 mEq/L)
+  - Muscle weakness, paresthesias
+  - Nausea, palpitations
+  - 'ECG changes: Peaked T waves (earliest), widened QRS, prolonged PR, loss of P wave'
+  - Sine wave pattern on ECG (pre-arrest, >8.0 mEq/L)
+  - 'Causes: Renal failure, ACEi/ARB, K-sparing diuretics, rhabdomyolysis, tumor lysis'
 differentials:
   - Pseudohyperkalemia
   - Medication effect
   - Renal failure
   - Adrenal insufficiency
   - Hemolysis
-trace:
-  source: 'Kidney Disease: Improving Global Outcomes (KDIGO) Guidelines, American
-    Society of Nephrology (ASN)'
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Basic metabolic panel (K+, Cr)
+  - ECG (assess for cardiac toxicity)
+  - ABG if metabolic acidosis suspected (worsens hyperkalemia)
+  - Urinalysis, urine electrolytes (assess renal K+ excretion)
+treatment:
+  - 'Guideline-based treatment options for Hyperkalemia include:'
+  - 'If ECG changes: Calcium gluconate 1-2g IV over 2-5 min (membrane stabilization) (KDIGO 2024)'
+  - 'Shift K+ into cells: Regular insulin 10 units IV + D50 25g (or D10 250mL if not hypoglycemic) (KDIGO 2024)'
+  - Albuterol nebulized 10-20mg (lowers K+ 0.5-1 mEq/L) (KDIGO 2024)
+  - 'Remove K+: Sodium polystyrene sulfonate (Kayexalate) 15-30g PO, or patiromer (KDIGO 2024)'
+  - 'Dialysis if: Refractory, severe (>7.0), renal failure (KDIGO 2024)'
+clinical_pearls:
+  - ECG changes correlate poorly with K+ level (always check ECG!)
+  - 'Peaked T waves: Earliest sign (K+ 6.0-6.5)'
+  - 'Widened QRS, loss of P wave: Severe (K+ >7.0) → high risk cardiac arrest'
+  - 'Treatment priorities: Stabilize myocardium (Ca), shift K+ into cells (insulin/glucose), remove K+ (kayexalate, dialysis)'
+  - 'Pseudohyperkalemia: Hemolysis, thrombocytosis, leukocytosis (repeat sample)'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Nephrology if severe or refractory
+  - Dialysis if K+ >7.0 or refractory to medical management
+  - CCU if ECG changes or K+ >7.0
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria:
+  finding_label: hyperkalaemia
+  source: 'UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults (2023)'
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - 'patiromer'
+    - 'sodium zirconium cyclosilicate'
+    - 'sodium polystyrene sulfonate'
+  known_condition:
+    icd10_prefixes:
+      - E87.5
+    snomed:
+      - '14140009'
+  severity_default: moderate
+  severity_default_reason: Mild hyperkalaemia range (5.5-5.9 mmol/L).
+  severity:
+    - type: value
+      item: potassium
+      op: '>='
+      value: 6.0
+      level: high
+      reason: 'Moderate hyperkalaemia range (6.0-6.4 mmol/L): {value:.1f} mmol/L.'
+    - type: value
+      item: potassium
+      op: '>='
+      value: 6.5
+      level: critical
+      reason: 'Severe hyperkalaemia range (>= 6.5 mmol/L): {value:.1f} mmol/L.'
+  next_steps:
+    - Consider a repeat potassium to exclude pseudohyperkalaemia (e.g. a haemolysed sample) and an ECG, per UKKA guidance.
+  items:
+    - id: potassium
+      label: Potassium >= 5.5 mmol/L
+      resource: lab
+      loinc:
+        - 2823-3
+        - 6298-4
+      operator: '>='
+      value: 5.5
+      unit: mmol/L
+      lookback_days: 30
+      expected: '>= 5.5 mmol/L'
+      missing_test: Potassium
+      source: 'UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults (2023)'
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.

@@ -1,11 +1,33 @@
 tree_id: ENDO-DYSLIPIDEMIA
 name: Dyslipidemia (Metabolic)
+version: '1.0'
+status: draft
 family: endocrinology
 specialty: Endocrinology
-icd10: E78.5
-snomed: 370992007
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E78.5
+  snomed:
+    - '370992007'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
+  - text: ACC/AHA Guidelines on Cholesterol Management 2018, ADA Standards of Care 2024
+    origin: trace.source
 presentations:
   - Asymptomatic (found on screening lipid panel)
   - Elevated LDL cholesterol (>100 mg/dL)
@@ -14,7 +36,12 @@ presentations:
   - Xanthomas (cholesterol deposits in tendons, skin) if severe familial dyslipidemia
   - Xanthelasmata (yellowish plaques around eyelids)
   - Corneal arcus (white ring around cornea) in young patients suggests familial hypercholesterolemia
-  - Risk factors: family history, obesity, diabetes, metabolic syndrome, sedentary lifestyle
+  - 'Risk factors: family history, obesity, diabetes, metabolic syndrome, sedentary lifestyle'
+differentials:
+  - Primary dyslipidemia (polygenic, familial hypercholesterolemia, familial combined hyperlipidemia)
+  - Secondary dyslipidemia (diabetes, hypothyroidism, nephrotic syndrome, obesity)
+  - Metabolic syndrome (abdominal obesity, hypertension, hyperglycemia, low HDL, high triglycerides)
+  - Medication-induced (thiazides, beta-blockers, steroids, atypical antipsychotics, protease inhibitors)
 workup:
   - Fasting lipid panel (preferred) or non-fasting
   - Total cholesterol, LDL cholesterol, HDL cholesterol, triglycerides
@@ -23,7 +50,7 @@ workup:
   - Assess cardiovascular risk
   - 10-year ASCVD (atherosclerotic cardiovascular disease) risk calculator
   - Pooled Cohort Equations (age, sex, race, cholesterol, BP, diabetes, smoking)
-  - "Less than 5%: low risk; 5-7.5%: borderline; 7.5-20%: intermediate; greater than 20%: high risk"
+  - 'Less than 5%: low risk; 5-7.5%: borderline; 7.5-20%: intermediate; greater than 20%: high risk'
   - Rule out secondary causes
   - Fasting glucose or HbA1c (diabetes)
   - TSH (hypothyroidism)
@@ -35,22 +62,22 @@ workup:
   - LDL = Total cholesterol - HDL - (Triglycerides/5) [if TG <400]
 treatment:
   - Lifestyle modifications (all patients)
-  - Diet: Mediterranean diet, reduce saturated fat (<7% calories), increase fiber
-  - Exercise: 150 min/week moderate-intensity aerobic + resistance training
+  - 'Diet: Mediterranean diet, reduce saturated fat (<7% calories), increase fiber'
+  - 'Exercise: 150 min/week moderate-intensity aerobic + resistance training'
   - Weight loss if overweight (5-10% reduces triglycerides, increases HDL)
   - Smoking cessation
-  - Limit alcohol (excess increases triglycerides)
+  - 'Patient advice: Limit alcohol (excess increases triglycerides)'
   - Statin therapy indications (primary prevention)
-  - LDL ≥190 mg/dL: high-intensity statin
-  - Diabetes age 40-75: moderate-intensity statin
-  - ASCVD risk ≥7.5%: moderate to high-intensity statin
-  - ASCVD risk 5-7.5% with risk enhancers: consider moderate-intensity statin
+  - 'LDL ≥190 mg/dL: high-intensity statin'
+  - 'Diabetes age 40-75: moderate-intensity statin'
+  - 'ASCVD risk ≥7.5%: moderate to high-intensity statin'
+  - 'ASCVD risk 5-7.5% with risk enhancers: consider moderate-intensity statin'
   - Statin therapy (secondary prevention) - established ASCVD
   - High-intensity statin for all (atorvastatin 40-80 mg, rosuvastatin 20-40 mg)
   - Goal LDL <70 mg/dL (or <55 mg/dL if very high risk)
   - Statin intensity definitions
-  - High-intensity: atorvastatin 40-80 mg, rosuvastatin 20-40 mg (lowers LDL ≥50%)
-  - Moderate-intensity: atorvastatin 10-20 mg, rosuvastatin 5-10 mg, simvastatin 20-40 mg (lowers LDL 30-50%)
+  - 'High-intensity: atorvastatin 40-80 mg, rosuvastatin 20-40 mg (lowers LDL ≥50%)'
+  - 'Moderate-intensity: atorvastatin 10-20 mg, rosuvastatin 5-10 mg, simvastatin 20-40 mg (lowers LDL 30-50%)'
   - Additional therapies if LDL not at goal on maximally tolerated statin
   - Ezetimibe 10 mg daily (lowers LDL 15-20%)
   - PCSK9 inhibitors (evolocumab, alirocumab) - injectable, expensive, for very high risk
@@ -62,29 +89,85 @@ treatment:
   - Check ALT at baseline and if symptoms (statin-induced hepatotoxicity rare)
   - Monitor for statin side effects (myalgias, rarely rhabdomyolysis)
 clinical_pearls:
-  - "LDL cholesterol most important target - directly causes atherosclerosis"
-  - "Statins reduce ASCVD events by 25-35% and are cornerstone of therapy"
-  - "High-intensity statin reduces LDL by ≥50% - use for secondary prevention"
-  - "Non-HDL cholesterol useful when triglycerides elevated (includes VLDL and remnants)"
-  - "Familial hypercholesterolemia: LDL >190, family history, tendon xanthomas - needs aggressive treatment"
-  - "Triglycerides ≥500 mg/dL increase pancreatitis risk - lower TG first priority"
-  - "HDL <40 mg/dL (men) or <50 (women) is cardiovascular risk factor"
-  - "Statin-associated muscle symptoms common (10-15%) but true rhabdomyolysis rare (<0.1%)"
+  - LDL cholesterol most important target - directly causes atherosclerosis
+  - Statins reduce ASCVD events by 25-35% and are cornerstone of therapy
+  - High-intensity statin reduces LDL by ≥50% - use for secondary prevention
+  - Non-HDL cholesterol useful when triglycerides elevated (includes VLDL and remnants)
+  - 'Familial hypercholesterolemia: LDL >190, family history, tendon xanthomas - needs aggressive treatment'
+  - Triglycerides ≥500 mg/dL increase pancreatitis risk - lower TG first priority
+  - HDL <40 mg/dL (men) or <50 (women) is cardiovascular risk factor
+  - Statin-associated muscle symptoms common (10-15%) but true rhabdomyolysis rare (<0.1%)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Cardiology if very high risk ASCVD or complex dyslipidemia
   - Lipid specialist or preventive cardiology if refractory hyperlipidemia or suspected familial hypercholesterolemia
   - Endocrinology if secondary causes (diabetes, thyroid disease)
-differentials:
-  - Primary dyslipidemia (polygenic, familial hypercholesterolemia, familial combined hyperlipidemia)
-  - Secondary dyslipidemia (diabetes, hypothyroidism, nephrotic syndrome, obesity)
-  - Metabolic syndrome (abdominal obesity, hypertension, hyperglycemia, low HDL, high triglycerides)
-  - Medication-induced (thiazides, beta-blockers, steroids, atypical antipsychotics, protease inhibitors)
-trace:
-  source: ACC/AHA Guidelines on Cholesterol Management 2018, ADA Standards of Care 2024
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria:
+  finding_label: severe hypercholesterolemia (LDL-C >= 190 mg/dL)
+  source: 2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia
+  display: when_found
+  probability: met_over_known
+  suggest_when:
+    count_met: 1
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - '*statin'
+    - 'ezetimibe'
+    - 'evolocumab'
+    - 'alirocumab'
+    - 'inclisiran'
+    - 'bempedoic acid'
+    - 'fenofibrate'
+    - 'gemfibrozil'
+    - 'icosapent ethyl'
+    - 'niacin'
+  known_condition:
+    icd10_prefixes:
+      - E78
+    snomed:
+      - '370992007'
+  items:
+    - id: ldl
+      label: LDL cholesterol >= 190 mg/dL
+      resource: lab
+      loinc:
+        - 13457-7
+        - 18262-6
+        - 2089-1
+      operator: '>='
+      value: 190
+      unit: mg/dL
+      show_converted: true
+      lookback_days: 730
+      expected: '>= 190 mg/dL (4.9 mmol/L)'
+      missing_test: Lipid panel (LDL cholesterol)
+      source: 2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.

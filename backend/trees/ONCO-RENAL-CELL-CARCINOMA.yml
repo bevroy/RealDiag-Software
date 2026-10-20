@@ -1,7 +1,34 @@
 tree_id: ONCO-RENAL-CELL-CARCINOMA
 name: Renal Cell Carcinoma
+version: '1.0'
+status: draft
 family: oncology
-specialty: Oncology / Urology
+specialty: Oncology
+secondary_specialties:
+  - Urology
+urgency: urgent
+urgency_explanation: Requires prompt staging to determine resectability; early detection improves outcomes
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C64.9
+    - C64.1
+    - C64.2
+  snomed:
+    - '126926005'
+  icpc2: []
+sources:
+  - text: NCCN Guidelines for Kidney Cancer
+    origin: citations
+  - text: AUA (American Urological Association) Guidelines
+    origin: citations
+  - text: UpToDate - Oncology and Urology
+    origin: citations
 presentations:
   - Hematuria (painless, gross or microscopic)
   - Flank pain or mass
@@ -11,20 +38,14 @@ presentations:
   - Varicocele (left-sided, from renal vein involvement)
   - Often asymptomatic (incidental finding on imaging)
   - Paraneoplastic syndromes (hypercalcemia, erythrocytosis, hypertension)
-icd10:
-  - C64.9 # Malignant neoplasm of kidney, except renal pelvis
-  - C64.1 # Malignant neoplasm of right kidney, except renal pelvis
-  - C64.2 # Malignant neoplasm of left kidney, except renal pelvis
-snomed:
-  - "126926005" # Renal cell carcinoma
-urgency: High
-urgency_explanation: Requires prompt staging to determine resectability; early detection improves outcomes
-
-referrals:
-  urology: For surgical management (nephrectomy)
-  oncology: For systemic therapy if advanced
-  interventional_radiology: For ablation of small tumors in poor surgical candidates
-
+differentials:
+  - Renal cyst (simple cyst, Bosniak classification)
+  - Angiomyolipoma (fat-containing benign tumor, associated with tuberous sclerosis)
+  - Oncocytoma (benign, central scar, cannot distinguish from RCC on imaging)
+  - Renal pelvis transitional cell carcinoma (urothelial, different prognosis)
+  - Wilms tumor (children)
+  - Renal lymphoma
+  - Metastases to kidney (lung, breast, melanoma)
 workup:
   imaging:
     - CT abdomen/pelvis with contrast (triphasic renal protocol)
@@ -46,16 +67,15 @@ workup:
     - TNM staging system
     - Assess for renal vein or IVC involvement
     - Evaluate for regional lymphadenopathy
-    - Common metastatic sites: lungs (75%), bone (20%), liver, brain
-
+    - 'Common metastatic sites: lungs (75%), bone (20%), liver, brain'
 treatment:
   localized_stage_I_III:
     - Surgical resection gold standard:
-      - Partial nephrectomy (nephron-sparing) preferred if technically feasible
-      - Radical nephrectomy for larger tumors or central location
+        - Partial nephrectomy (nephron-sparing) preferred if technically feasible
+        - Radical nephrectomy for larger tumors or central location
     - Ablation alternatives for small tumors (<3 cm) in poor surgical candidates:
-      - Radiofrequency ablation (RFA)
-      - Cryoablation
+        - Radiofrequency ablation (RFA)
+        - Cryoablation
     - Active surveillance for small renal masses (<2 cm) in elderly or high comorbidity
   locally_advanced:
     - Radical nephrectomy with lymph node dissection
@@ -64,39 +84,42 @@ treatment:
   metastatic_stage_IV:
     - Cytoreductive nephrectomy if good performance status and resectable
     - Systemic therapy:
-      - First-line favorable/intermediate risk: 
-        - Immunotherapy combinations (nivolumab + ipilimumab or pembrolizumab + axitinib)
-        - TKI monotherapy (sunitinib, pazopanib, cabozantinib)
-      - First-line poor risk: immunotherapy + TKI combination
-      - Second-line: Switch to alternative TKI or immunotherapy
+        - First-line favorable/intermediate risk:
+            - Immunotherapy combinations (nivolumab + ipilimumab or pembrolizumab + axitinib)
+            - TKI monotherapy (sunitinib, pazopanib, cabozantinib)
+        - 'First-line poor risk: immunotherapy + TKI combination'
+        - 'Second-line: Switch to alternative TKI or immunotherapy'
     - Metastasectomy for oligometastatic disease (lung, adrenal)
     - Radiation for brain or bone metastases (palliative)
-
 clinical_pearls:
   - Most common malignant kidney tumor in adults (85% of renal tumors)
   - Clear cell subtype most common (70-80%), worse prognosis than papillary or chromophobe
   - Incidence increasing due to incidental detection on abdominal imaging
   - Classic triad (hematuria, flank pain, mass) rare and indicates advanced disease
   - Von Hippel-Lindau syndrome predisposes to bilateral clear cell RCC
-  - Paraneoplastic syndromes common: erythrocytosis (EPO), hypercalcemia (PTHrP), HTN (renin), Stauffer syndrome (hepatic dysfunction)
+  - 'Paraneoplastic syndromes common: erythrocytosis (EPO), hypercalcemia (PTHrP), HTN (renin), Stauffer syndrome (hepatic dysfunction)'
   - Partial nephrectomy preferred to preserve renal function
   - 30% have metastatic disease at diagnosis
   - Immunotherapy revolutionized treatment of metastatic disease
   - Responds poorly to traditional chemotherapy and radiation
-
-differentials:
-  - Renal cyst (simple cyst, Bosniak classification)
-  - Angiomyolipoma (fat-containing benign tumor, associated with tuberous sclerosis)
-  - Oncocytoma (benign, central scar, cannot distinguish from RCC on imaging)
-  - Renal pelvis transitional cell carcinoma (urothelial, different prognosis)
-  - Wilms tumor (children)
-  - Renal lymphoma
-  - Metastases to kidney (lung, breast, melanoma)
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  urology: For surgical management (nephrectomy)
+  oncology: For systemic therapy if advanced
+  interventional_radiology: For ablation of small tumors in poor surgical candidates
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace: |
   A 58-year-old man presented with 2 episodes of painless gross hematuria over 3 weeks. CT abdomen/pelvis with contrast ordered by PCP showed 5.5 cm enhancing mass in left kidney lower pole with no vascular invasion or lymphadenopathy. CT chest negative for metastases. Asymptomatic, no weight loss or constitutional symptoms. Physical exam unremarkable, no palpable mass. Labs: Cr 1.1 mg/dL, calcium 9.2 mg/dL, Hgb 15 g/dL. Urinalysis: 50-100 RBCs/hpf, no protein. Referred to urology. Preoperative CT confirmed 5.7 cm exophytic mass confined to kidney (clinical stage T1b). Given size and location, underwent laparoscopic radical left nephrectomy. Surgical pathology: 5.5 cm clear cell renal cell carcinoma, Fuhrman grade 2, confined to kidney with negative margins and no lymphovascular invasion (pT1b N0 M0, stage I). Post-operative course uncomplicated. Right kidney function excellent (Cr 1.2 mg/dL). Surveillance plan: CT chest/abdomen at 6 months, then annually for 5 years. Annual labs and urinalysis. At 2-year follow-up, no evidence of recurrence, excellent renal function with solitary kidney.
-
-citations:
-  - NCCN Guidelines for Kidney Cancer
-  - AUA (American Urological Association) Guidelines
-  - UpToDate - Oncology and Urology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'High' mapped to 'urgent'

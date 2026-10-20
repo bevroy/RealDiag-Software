@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Query, Depends
 from typing import Optional, Dict
 from .rules_engine import RulesEngine
+from .clinical_review import with_notice
 from .auth_service import get_current_user, get_optional_user
 from .cache_service import cache
 from functools import lru_cache
@@ -45,7 +46,7 @@ def list_families(current_user: Optional[Dict] = Depends(get_optional_user)):
         result = {"families": cached_families}
         if current_user:
             result["user_id"] = current_user.get("user_id")
-        return result
+        return with_notice(result)
     
     # Load from engine
     rules = get_rules_engine()
@@ -61,7 +62,7 @@ def list_families(current_user: Optional[Dict] = Depends(get_optional_user)):
         result["user_id"] = current_user.get("user_id")
         # Could filter by user's specialty or show recently viewed families
     
-    return result
+    return with_notice(result)
 
 @router.get("/family/{family}")
 def get_family(family: str, current_user: Optional[Dict] = Depends(get_optional_user)):
@@ -77,7 +78,7 @@ def get_family(family: str, current_user: Optional[Dict] = Depends(get_optional_
     if cached_rules:
         if current_user:
             cached_rules["user_id"] = current_user.get("user_id")
-        return cached_rules
+        return with_notice(dict(cached_rules))
     
     # Load from engine
     rules_engine = get_rules_engine()
@@ -91,7 +92,7 @@ def get_family(family: str, current_user: Optional[Dict] = Depends(get_optional_
     if current_user and rules:
         rules["user_id"] = current_user.get("user_id")
     
-    return rules
+    return with_notice(dict(rules)) if isinstance(rules, dict) else rules
 
 @router.get("/rule/{rule_id}")
 def get_rule(rule_id: str, current_user: Optional[Dict] = Depends(get_optional_user)):
@@ -108,7 +109,7 @@ def get_rule(rule_id: str, current_user: Optional[Dict] = Depends(get_optional_u
     if cached_rule:
         if current_user:
             cached_rule["user_id"] = current_user.get("user_id")
-        return cached_rule
+        return with_notice(dict(cached_rule))
     
     # Load from engine
     rules_engine = get_rules_engine()
@@ -122,7 +123,7 @@ def get_rule(rule_id: str, current_user: Optional[Dict] = Depends(get_optional_u
         # Could check if rule is favorited by user
         rule["user_id"] = current_user.get("user_id")
     
-    return rule
+    return with_notice(dict(rule)) if isinstance(rule, dict) else rule
 
 @router.get("/search")
 def search_rules(
@@ -141,7 +142,7 @@ def search_rules(
     cache_key = f"rules_search_{q}_{family or 'all'}"
     cached_results = cache.get(cache_key)
     if cached_results:
-        response = {"results": cached_results}
+        response = with_notice({"results": cached_results})
         if current_user:
             response["user_id"] = current_user.get("user_id")
         return response
@@ -153,7 +154,7 @@ def search_rules(
     # Cache for 30 minutes (shorter than other endpoints since searches vary more)
     cache.set(cache_key, results, ttl=1800)
     
-    response = {"results": results}
+    response = with_notice({"results": results})
     
     if current_user:
         response["user_id"] = current_user.get("user_id")

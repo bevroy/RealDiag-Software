@@ -1,38 +1,50 @@
 tree_id: CARD-PE
 name: Pulmonary embolism
+version: '1.0'
+status: draft
 family: Cardiology
 specialty: Cardiology
-icd10:
-- I26.9
-- I26.0
-snomed:
-- '59282003'
-urgency: medium
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Pulmonary embolism
-version: '1.0'
-citations:
-  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
-  - ESC (European Society of Cardiology) Clinical Practice Guidelines
-  - UpToDate - Cardiovascular Medicine
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I26.9
+    - I26.0
+  snomed:
+    - '59282003'
+  icpc2: []
+sources:
+  - text: ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+    origin: citations
+  - text: ESC (European Society of Cardiology) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Cardiovascular Medicine
+    origin: citations
+  - text: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European Society of Cardiology (ESC) Guidelines
+    origin: trace.source
 presentations:
-- Sudden onset dyspnea (most common symptom)
-- Pleuritic chest pain, tachycardia (HR >100)
-- Tachypnea (RR >20), hypoxia
-- Hemoptysis (less common, 10-15%)
-- 'Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state'
-- Wells criteria for risk stratification (≥4 points = high probability)
-- 'PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative'
-- 'D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)'
+  - Sudden onset dyspnea (most common symptom)
+  - Pleuritic chest pain, tachycardia (HR >100)
+  - Tachypnea (RR >20), hypoxia
+  - Hemoptysis (less common, 10-15%)
+  - 'Risk factors: immobility, recent surgery, malignancy, DVT, hypercoagulable state'
+  - Wells criteria for risk stratification (≥4 points = high probability)
+  - 'PERC rule: Can rule out PE if low risk and all 8 PERC criteria negative'
+  - 'D-dimer: High sensitivity, low specificity (useful to rule OUT if negative)'
+differentials:
+  - Pneumonia
+  - Acute coronary syndrome
+  - Pneumothorax
+  - Pleuritis
+  - Musculoskeletal pain
 workup: []
-treatment: []
-clinical_pearls:
-- CTA pulmonary angiography is gold standard for diagnosis
-- V/Q scan alternative if contrast contraindicated
-- 'Massive PE: Hemodynamic instability, consider thrombolysis'
-- Start anticoagulation immediately if high suspicion, don't wait for imaging
-- Check for DVT with duplex ultrasound (present in ~50% of PE cases)
 treatment:
   - Immediate anticoagulation if high clinical suspicion (don't wait for imaging confirmation)
   - Low molecular weight heparin (enoxaparin 1 mg/kg SC Q12H or 1.5 mg/kg daily) OR
@@ -48,6 +60,14 @@ treatment:
   - Warfarin - target INR 2-3, overlap with heparin until INR therapeutic for 2 consecutive days
   - Monitor for bleeding complications - most common adverse effect
   - Compression stockings not recommended for post-PE syndrome prevention
+clinical_pearls:
+  - CTA pulmonary angiography is gold standard for diagnosis
+  - V/Q scan alternative if contrast contraindicated
+  - 'Massive PE: Hemodynamic instability, consider thrombolysis'
+  - Start anticoagulation immediately if high suspicion, don't wait for imaging
+  - Check for DVT with duplex ultrasound (present in ~50% of PE cases)
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute MI/STEMI
@@ -65,14 +85,23 @@ referrals:
     - Hypertension uncontrolled on multiple meds
     - Asymptomatic murmur workup
     - Risk stratification
-differentials:
-  - Pneumonia
-  - Acute coronary syndrome
-  - Pneumothorax
-  - Pleuritis
-  - Musculoskeletal pain
-trace:
-  source: American College of Cardiology (ACC/AHA) Clinical Practice Guidelines, European
-    Society of Cardiology (ESC) Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: 'urgency ''medium'' mapped to ''routine''; duplicate treatment key: empty section removed, populated section kept'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

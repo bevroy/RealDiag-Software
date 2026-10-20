@@ -1,11 +1,34 @@
 tree_id: TRAUMA-HEAD-INJURY
 name: Head Trauma Evaluation
+version: '1.0'
+status: draft
 family: emergency
-specialty: Emergency Medicine, Neurosurgery, Trauma Surgery, Neurology
+specialty: Emergency Medicine
+secondary_specialties:
+  - Neurosurgery
+  - Trauma Surgery
+  - Neurology
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Decision tree for evaluating head injury and traumatic brain injury
-version: "1.0"
-icd10: S09.90XA
-snomed: 82271004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - S09.90XA
+  snomed:
+    - '82271004'
+  icpc2: []
+sources:
+  - text: EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines
+    origin: citations
+  - text: ATLS (Advanced Trauma Life Support) Guidelines
+    origin: citations
+  - text: UpToDate - Trauma Surgery and Critical Care
+    origin: citations
 presentations:
   - Altered consciousness, LOC
   - Headache
@@ -13,15 +36,34 @@ presentations:
   - Confusion, amnesia
   - Focal neurologic deficits
   - Scalp laceration, hematoma
-  - Mechanism: fall, MVA, assault
+  - 'Mechanism: fall, MVA, assault'
 differentials:
   - Concussion
   - Skull fracture
   - Intracranial hemorrhage
   - Cervical spine injury
   - TBI
-entry_point: initial_triage
-
+workup:
+  - 'Non-contrast head CT for: LOC, vomiting, severe headache, focal deficits, GCS <15'
+  - Cervical spine imaging if neck pain, tenderness, or mechanism suggests C-spine injury
+  - Repeat CT in 6-8 hours if initial negative but high risk or anticoagulated
+  - Skull X-rays NOT recommended (CT superior)
+  - 'Neurochecks q1-2h: GCS, pupils, vital signs'
+  - Coagulation studies if on anticoagulants; consider reversal
+treatment:
+  - 'Patient advice: Mild TBI/concussion: rest, gradual return to activity, avoid re-injury'
+  - 'Moderate-severe: ICU monitoring, maintain cerebral perfusion pressure'
+  - 'Elevated ICP: elevate HOB 30°, osmotic therapy (mannitol or hypertonic saline)'
+  - 'Seizure prophylaxis: levetiracetam or phenytoin x7 days if indicated'
+  - Avoid hypotension (SBP >90) and hypoxia (SpO2 >90%)
+  - 'Neurosurgery consultation for: hematoma, skull fracture, deteriorating GCS'
+clinical_pearls:
+  - 'GCS <13 or declining: intubate and CT head immediately'
+  - 'Lucid interval: epidural hematoma (middle meningeal artery)'
+  - 'Chronic subdural: elderly on anticoagulation, trivial trauma'
+  - 'Return precautions: worsening headache, vomiting, confusion, seizure'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Severe head injury
@@ -33,32 +75,20 @@ referrals:
   routine:
     - Minor head injury follow-up
     - Concussion management
-workup:
-  - Non-contrast head CT for: LOC, vomiting, severe headache, focal deficits, GCS <15
-  - Cervical spine imaging if neck pain, tenderness, or mechanism suggests C-spine injury
-  - Repeat CT in 6-8 hours if initial negative but high risk or anticoagulated
-  - Skull X-rays NOT recommended (CT superior)
-  - Neurochecks q1-2h: GCS, pupils, vital signs
-  - Coagulation studies if on anticoagulants; consider reversal
-
-treatment:
-  - Mild TBI/concussion: rest, gradual return to activity, avoid re-injury
-  - Moderate-severe: ICU monitoring, maintain cerebral perfusion pressure
-  - Elevated ICP: elevate HOB 30°, osmotic therapy (mannitol or hypertonic saline)
-  - Seizure prophylaxis: levetiracetam or phenytoin x7 days if indicated
-  - Avoid hypotension (SBP >90) and hypoxia (SpO2 >90%)
-  - Neurosurgery consultation for: hematoma, skull fracture, deteriorating GCS
-
-clinical_pearls:
-  - GCS <13 or declining: intubate and CT head immediately
-  - Lucid interval: epidural hematoma (middle meningeal artery)
-  - Chronic subdural: elderly on anticoagulation, trivial trauma
-  - Return precautions: worsening headache, vomiting, confusion, seizure
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: initial_triage
 nodes:
   initial_triage:
     when:
-      symptoms_contains_any: ["head trauma", "head injury", "hit head", "fall"]
+      symptoms_contains_any:
+        - head trauma
+        - head injury
+        - hit head
+        - fall
     tests:
       - Vital signs
       - GCS (Glasgow Coma Scale)
@@ -71,26 +101,45 @@ nodes:
     referrals:
       - Emergency evaluation
     trace:
-      - "Head trauma triage - assess severity"
+      - Head trauma triage - assess severity
     next:
       - node: critical_head_injury
         if:
           any_of:
-            - red_flags_any: ["GCS < 13", "deteriorating mental status", "focal neurologic deficit"]
-            - exam_flags_any: ["unresponsive", "posturing", "unequal pupils"]
+            - red_flags_any:
+                - GCS < 13
+                - deteriorating mental status
+                - focal neurologic deficit
+            - exam_flags_any:
+                - unresponsive
+                - posturing
+                - unequal pupils
       - node: moderate_risk
         if:
           any_of:
-            - symptoms_contains_any: ["loss of consciousness", "amnesia", "vomiting", "severe headache"]
-            - exam_flags_any: ["skull deformity", "signs of basilar skull fracture"]
+            - symptoms_contains_any:
+                - loss of consciousness
+                - amnesia
+                - vomiting
+                - severe headache
+            - exam_flags_any:
+                - skull deformity
+                - signs of basilar skull fracture
       - node: low_risk
         default: true
-
   critical_head_injury:
     when:
       any_of:
-        - red_flags_any: ["GCS < 13", "deteriorating GCS", "focal deficit", "seizure"]
-        - exam_flags_any: ["unequal pupils", "posturing", "Battle sign", "raccoon eyes"]
+        - red_flags_any:
+            - GCS < 13
+            - deteriorating GCS
+            - focal deficit
+            - seizure
+        - exam_flags_any:
+            - unequal pupils
+            - posturing
+            - Battle sign
+            - raccoon eyes
     tests:
       - Stat non-contrast CT head
       - Cervical spine imaging
@@ -110,14 +159,21 @@ nodes:
       - Trauma surgery
       - ICU admission
     trace:
-      - "Critical head injury - immediate intervention"
+      - Critical head injury - immediate intervention
     next: []
-
   moderate_risk:
     when:
       any_of:
-        - symptoms_contains_any: ["loss of consciousness", "amnesia", "vomiting", "severe headache"]
-        - exam_flags_any: ["skull deformity", "palpable fracture", "hemotympanum", "CSF rhinorrhea/otorrhea"]
+        - symptoms_contains_any:
+            - loss of consciousness
+            - amnesia
+            - vomiting
+            - severe headache
+        - exam_flags_any:
+            - skull deformity
+            - palpable fracture
+            - hemotympanum
+            - CSF rhinorrhea/otorrhea
     tests:
       - CT head (Canadian CT Head Rule or NEXUS criteria)
       - Cervical spine imaging if indicated
@@ -133,18 +189,25 @@ nodes:
       - Admission for observation if high-risk features
       - Discharge with head injury precautions if imaging normal
     trace:
-      - "Moderate risk head injury - imaging indicated"
+      - Moderate risk head injury - imaging indicated
     next:
       - node: imaging_abnormal
         if:
-          exam_flags_any: ["CT shows bleeding", "CT shows fracture", "CT shows mass effect"]
+          exam_flags_any:
+            - CT shows bleeding
+            - CT shows fracture
+            - CT shows mass effect
       - node: concussion_management
         if:
-          exam_flags_any: ["CT normal", "no fracture"]
-
+          exam_flags_any:
+            - CT normal
+            - no fracture
   imaging_abnormal:
     when:
-      exam_flags_any: ["CT abnormal", "intracranial hemorrhage", "skull fracture"]
+      exam_flags_any:
+        - CT abnormal
+        - intracranial hemorrhage
+        - skull fracture
     tests:
       - Serial neurologic exams
       - Repeat CT if clinically worsening
@@ -159,12 +222,13 @@ nodes:
       - Neurosurgery
       - Admission for observation or surgery
     trace:
-      - "Abnormal imaging - neurosurgery consultation"
+      - Abnormal imaging - neurosurgery consultation
     next: []
-
   concussion_management:
     when:
-      symptoms_contains_any: ["concussion", "mild TBI"]
+      symptoms_contains_any:
+        - concussion
+        - mild TBI
     tests:
       - Post-concussion symptom assessment
       - Cognitive testing
@@ -177,14 +241,19 @@ nodes:
       - Return to play/work guidelines
       - Avoid contact sports until cleared
     trace:
-      - "Concussion - discharge with precautions"
+      - Concussion - discharge with precautions
     next: []
-
   low_risk:
     when:
       all_of:
-        - no_red_flags: ["no LOC", "no amnesia", "GCS 15", "no vomiting"]
-        - exam_flags_any: ["normal neurologic exam", "minor scalp laceration only"]
+        - no_red_flags:
+            - no LOC
+            - no amnesia
+            - GCS 15
+            - no vomiting
+        - exam_flags_any:
+            - normal neurologic exam
+            - minor scalp laceration only
     tests:
       - Observation
       - Head injury precautions
@@ -198,10 +267,17 @@ nodes:
       - Return if symptoms develop
       - Follow-up with primary care if needed
     trace:
-      - "Low risk head injury - discharge with precautions"
+      - Low risk head injury - discharge with precautions
     next: []
-
-citations:
-  - EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines
-  - ATLS (Advanced Trauma Life Support) Guidelines
-  - UpToDate - Trauma Surgery and Critical Care
+criteria: []
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

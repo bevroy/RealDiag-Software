@@ -1,32 +1,56 @@
 tree_id: ID-SEPSIS
 name: Sepsis and Septic Shock
+version: '1.0'
+status: draft
 family: infectious_disease
-specialty: Critical Care / Infectious Disease
+specialty: Critical Care
+secondary_specialties:
+  - Infectious Disease
+urgency: emergent
+urgency_explanation: Medical emergency requiring immediate intervention; high mortality without rapid treatment
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - A41.9
+    - R65.20
+    - R65.21
+  snomed:
+    - '91302008'
+    - '76571007'
+  icpc2: []
+sources:
+  - text: Surviving Sepsis Campaign Guidelines 2021
+    origin: citations
+  - text: 'SCCM/ESICM: The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3)'
+    origin: citations
+  - text: 'UpToDate: Evaluation and management of suspected sepsis and septic shock in adults'
+    origin: citations
+  - text: Clinical Practice Guidelines from relevant medical specialty societies
+    origin: citations
 presentations:
   - Fever or hypothermia (temperature >38°C or <36°C)
   - Tachycardia (heart rate >90 bpm)
   - Tachypnea (respiratory rate >20/min)
   - Altered mental status
   - Hypotension (systolic BP <90 mmHg)
-  - Hypoperfusion signs: mottled skin, decreased urine output, lactic acidosis
+  - 'Hypoperfusion signs: mottled skin, decreased urine output, lactic acidosis'
   - Source of infection may be apparent (pneumonia, UTI, abdominal, skin/soft tissue)
-icd10:
-  - A41.9 # Sepsis, unspecified organism
-  - R65.20 # Severe sepsis without septic shock
-  - R65.21 # Severe sepsis with septic shock
-snomed:
-  - "91302008" # Sepsis
-  - "76571007" # Septic shock
-urgency: Critical
-urgency_explanation: Medical emergency requiring immediate intervention; high mortality without rapid treatment
-
-referrals:
-  critical_care: Immediate ICU consultation for septic shock or severe sepsis
-  infectious_disease: For antibiotic stewardship and source control guidance
-
+differentials:
+  - SIRS from non-infectious causes (pancreatitis, trauma, burns)
+  - Cardiogenic shock
+  - Hypovolemic shock
+  - Anaphylactic shock
+  - Adrenal crisis
+  - Thyroid storm
+  - Toxic ingestion
 workup:
   immediate_assessment:
-    - SIRS criteria (2+ of: temp, HR, RR, WBC abnormalities)
+    - 'SIRS criteria (2+ of: temp, HR, RR, WBC abnormalities)'
     - qSOFA score (mental status, SBP ≤100, RR ≥22)
     - SOFA score for organ dysfunction
   laboratory:
@@ -42,58 +66,211 @@ workup:
     - Chest X-ray (pneumonia)
     - CT imaging based on suspected source
     - Ultrasound for abscess or fluid collections
-
 treatment:
   sepsis_six_bundle:
     within_1_hour:
-      - Administer high-flow oxygen
+      - 'Consider high-flow oxygen'
       - Obtain blood cultures
-      - Administer broad-spectrum antibiotics
+      - 'Consider broad-spectrum antibiotics'
       - Measure serum lactate
-      - Start IV fluid resuscitation
+      - 'Consider IV fluid resuscitation'
       - Measure urine output (consider Foley catheter)
   fluid_resuscitation:
-    - Initial: 30 mL/kg crystalloid bolus within 3 hours
+    - 'Initial: 30 mL/kg crystalloid bolus within 3 hours'
     - Target MAP ≥65 mmHg
     - Reassess volume status frequently
     - Avoid excessive fluids after initial resuscitation
   antibiotics:
     empiric_therapy:
-      - Community-acquired: Vancomycin + piperacillin-tazobactam or cefepime
-      - Healthcare-associated: Add coverage for MRSA, Pseudomonas, resistant gram-negatives
-      - Neutropenic: Cefepime or meropenem ± vancomycin
-      - Post-splenectomy: Add ceftriaxone for encapsulated organisms
-      - Abdominal source: Add metronidazole or use carbapenem
+      - 'Community-acquired: Vancomycin + piperacillin-tazobactam or cefepime'
+      - 'Healthcare-associated: Add coverage for MRSA, Pseudomonas, resistant gram-negatives'
+      - 'Neutropenic: Cefepime or meropenem ± vancomycin'
+      - 'Post-splenectomy: Add ceftriaxone for encapsulated organisms'
+      - 'Abdominal source: Add metronidazole or use carbapenem'
     principles:
-      - Administer within 1 hour of recognition
+      - 'Recommended within 1 hour of recognition'
       - De-escalate based on culture results
       - Source control within 12 hours if possible
   vasopressors:
-    - First-line: Norepinephrine (target MAP ≥65)
-    - Second-line: Add vasopressin or epinephrine
+    - 'First-line: Norepinephrine (target MAP ≥65)'
+    - 'Second-line: Add vasopressin or epinephrine'
     - Consider hydrocortisone if refractory shock
   adjunctive:
     - Stress-dose steroids (hydrocortisone 200 mg/day) if refractory to fluids/vasopressors
     - Blood transfusion if Hgb <7 g/dL
     - Mechanical ventilation if respiratory failure
-
 clinical_pearls:
-  - Time to antibiotics is critical: each hour delay increases mortality
+  - 'Time to antibiotics is critical: each hour delay increases mortality'
   - Lactate >4 mmol/L or persistent elevation indicates poor prognosis
-  - Sepsis-3 definitions: Sepsis = infection + SOFA score ≥2; Septic shock = sepsis + vasopressors + lactate >2 despite fluids
-  - Most common sources: pneumonia (50%), abdominal (25%), urinary (10%)
+  - 'Sepsis-3 definitions: Sepsis = infection + SOFA score ≥2; Septic shock = sepsis + vasopressors + lactate >2 despite fluids'
+  - 'Most common sources: pneumonia (50%), abdominal (25%), urinary (10%)'
   - Procalcitonin helps differentiate bacterial vs viral and guide antibiotic duration
   - Early goal-directed therapy improves outcomes
-
-differentials:
-  - SIRS from non-infectious causes (pancreatitis, trauma, burns)
-  - Cardiogenic shock
-  - Hypovolemic shock
-  - Anaphylactic shock
-  - Adrenal crisis
-  - Thyroid storm
-  - Toxic ingestion
-
+red_flags: []
+disposition_guidance: {}
+referrals:
+  critical_care: Immediate ICU consultation for septic shock or severe sepsis
+  infectious_disease: For antibiotic stewardship and source control guidance
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria:
+  finding_label: a positive sepsis screen
+  source: 'Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (recommends against qSOFA alone as a screening tool, compared with SIRS, NEWS or MEWS)'
+  display: when_met
+  # Today's complaint shows this card even when nothing was measured (pending clinical review)
+  complaint_terms:
+    - fever
+    - chills
+    - rigors
+    - suspected infection
+    - confusion
+  probability: met_over_known
+  suggest_when:
+    any:
+      - count_met: 2
+        group: qsofa
+        label: qSOFA >= 2
+      - count_met: 2
+        group: sirs
+        label: SIRS >= 2
+  severity_default: moderate
+  severity:
+    - type: count_met
+      group: sirs
+      at_least: 2
+      level: high
+      reason: SIRS >= 2 (sensitive, not specific).
+    - type: count_met
+      group: qsofa
+      at_least: 1
+      level: high
+    - type: count_met
+      group: qsofa
+      at_least: 2
+      level: critical
+      reason: qSOFA >= 2 (higher risk of poor outcome).
+  next_steps:
+    - Consider blood cultures and lactate; antibiotic and fluid decisions per clinician judgment and institutional sepsis protocol.
+  items:
+    - id: respiratory_rate
+      label: Tachypnea (qSOFA)
+      group: qsofa
+      resource: vital
+      loinc:
+        - 9279-1
+      operator: '>='
+      value: 22
+      unit: /min
+      expected: '>= 22/min'
+      unknown_label: Respiratory rate
+      unit_check: false
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
+    - id: systolic_bp
+      label: Hypotension (qSOFA)
+      group: qsofa
+      resource: vital
+      loinc:
+        - 8480-6
+      operator: <=
+      value: 100
+      unit: mmHg
+      expected: <= 100 mmHg
+      unit_check: false
+      details_unknown: Systolic blood pressure not documented
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
+    - id: gcs
+      label: Altered mentation (qSOFA)
+      group: qsofa
+      resource: vital
+      loinc:
+        - 9269-2
+      operator: <
+      value: 15
+      unit: '{score}'
+      expected: GCS < 15
+      unit_check: false
+      value_format: GCS {value}
+      details_met: Altered mental status contributes to qSOFA
+      details_unknown: GCS not documented - qSOFA cannot be fully scored without it
+      missing_test: Glasgow Coma Scale / mental status assessment
+      source: Sepsis-3 qSOFA (Singer et al., JAMA 2016)
+    - id: temperature
+      label: Temperature > 38.0 or < 36.0 C (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 8310-5
+      operator: outside
+      value:
+        - 36.0
+        - 38.0
+      unit: Cel
+      expected: < 36.0 or > 38.0 C
+      details_unknown: Temperature not documented
+      missing_test: Temperature
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: heart_rate
+      label: Heart rate > 90/min (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 8867-4
+      operator: '>'
+      value: 90
+      unit: /min
+      expected: '> 90/min'
+      unit_check: false
+      details_unknown: Heart rate not documented
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: respiratory_rate_sirs
+      label: Respiratory rate > 20/min (SIRS)
+      group: sirs
+      resource: vital
+      loinc:
+        - 9279-1
+      operator: '>'
+      value: 20
+      unit: /min
+      expected: '> 20/min'
+      unit_check: false
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: wbc
+      label: Abnormal WBC (SIRS)
+      group: sirs
+      resource: lab
+      loinc:
+        - 6690-2
+      operator: outside
+      value:
+        - 4
+        - 12
+      unit: K/uL
+      unit_check: false
+      expected: 4-12 K/uL
+      expected_not_met: < 4 or > 12 K/uL
+      details_met: Leukocytosis or leukopenia
+      details_unknown: WBC not measured
+      missing_test: CBC with differential
+      source: SIRS criteria, ACCP/SCCM Consensus Conference (Bone et al., Chest 1992)
+    - id: lactate
+      label: Lactate > 2 mmol/L
+      role: supporting
+      resource: lab
+      loinc:
+        - 2524-7
+        - 32693-4
+      operator: '>'
+      value: 2.0
+      unit: mmol/L
+      expected: '> 2 mmol/L'
+      details_met: Elevated lactate (Sepsis-3 septic shock definition uses > 2 mmol/L).
+      source: Sepsis-3 (Singer et al., JAMA 2016); SSC 2021 suggests measuring blood lactate
+  finding_template: Screen positive ({screens}); consider sepsis evaluation if infection is suspected, per {source}.
 trace:
   - Recognize infection with organ dysfunction
   - Activate sepsis protocol immediately
@@ -102,9 +279,23 @@ trace:
   - Start vasopressors if hypotension persists despite fluids
   - Identify and control source of infection
   - ICU admission for close monitoring
-
-citations:
-  - "Surviving Sepsis Campaign Guidelines 2021"
-  - "SCCM/ESICM: The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3)"
-  - "UpToDate: Evaluation and management of suspected sepsis and septic shock in adults"
-  - "Clinical Practice Guidelines from relevant medical specialty societies"
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Critical' mapped to 'emergent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added chart-evaluation criteria (moved from smart_diagnostic_engine.py, same thresholds); pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Sepsis criteria: qSOFA no longer used alone; screen positive when qSOFA >= 2 or SIRS >= 2, lactate shown as supporting (SSC 2021). Pending clinical review.'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured). Positive-screen wording states it applies when infection is suspected.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

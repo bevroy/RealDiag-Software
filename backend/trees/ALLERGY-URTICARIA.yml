@@ -1,90 +1,106 @@
 tree_id: ALLERGY-URTICARIA
 name: Urticaria (Hives)
+version: '1.0'
+status: draft
 family: Allergy
 specialty: Allergy
-icd10:
-- L50.9
-- L50.0
-- L50.1
-snomed:
-- '126485001'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Urticaria (Hives)
-version: '1.0'
-citations:
-  - AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters
-  - EAACI (European Academy of Allergy and Clinical Immunology) Guidelines
-  - UpToDate - Allergy and Immunology
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - L50.9
+    - L50.0
+    - L50.1
+  snomed:
+    - '126485001'
+  icpc2: []
+sources:
+  - text: AAAAI (American Academy of Allergy, Asthma & Immunology) Practice Parameters
+    origin: citations
+  - text: EAACI (European Academy of Allergy and Clinical Immunology) Guidelines
+    origin: citations
+  - text: UpToDate - Allergy and Immunology
+    origin: citations
+  - text: American Academy of Allergy, Asthma & Immunology (AAAAI) Guidelines, World Allergy Organization (WAO) Guidelines
+    origin: trace.source
 presentations:
-- Pruritic wheals (raised, blanching lesions)
-- Transient lesions that resolve within 24 hours
-- Central pallor with erythematous border
-- Variable size from few millimeters to large plaques
-- Migratory pattern (lesions appear and disappear in different locations)
-- May have angioedema (deeper swelling of face, lips, tongue, extremities)
-- Worse with heat, pressure, or scratching
-- Associated with flushing or warmth
-- Triggered by allergens (food, medications, insect stings)
-- Can occur with infections (viral URI), stress, or physical stimuli
-- May have dermographism (skin writing from light scratching)
-- Systemic symptoms if anaphylaxis (dyspnea, hypotension, GI symptoms)
-workup:
-- Acute urticaria: Usually clinical diagnosis, no routine testing needed
-- 'Chronic urticaria workup: CBC with differential, ESR or CRP, TSH (thyroid autoimmunity
-  common)'
-- Serum tryptase if concern for mastocytosis (urticaria pigmentosa, systemic symptoms)
-- Complement levels (C4, C1q, C1 esterase inhibitor) if recurrent angioedema without
-  urticaria
-- Skin biopsy if lesions persist >24 hours or have purpura (rule out urticarial vasculitis)
-- 'Allergy testing: Skin prick or specific IgE only if clear trigger history (not
-  routine)'
-- Autologous serum skin test (ASST) can identify autoimmune urticaria but doesn't
-  change management
-treatment:
-- 'Guideline-based treatment options for Urticaria (Hives) include:'
-- 'First-line acute: Non-sedating H1 antihistamine (cetirizine 10mg, loratadine 10mg,
-  or fexofenadine 180mg daily) (AAAAI 2023)'
-- Can increase H1 antihistamine up to 4x standard dose if inadequate response (AAAAI
-  2023)
-- Add H2 blocker (famotidine 20mg BID) if inadequate response to H1 blocker alone
-  (AAAAI 2023)
-- 'Severe/angioedema: Prednisone 40-60mg daily for 3-7 days, avoid long-term steroids
-  (AAAAI 2023)'
-- 'Airway angioedema: Epinephrine 0.3-0.5mg IM, consider ICU monitoring (AAAAI 2023)'
-- 'Chronic urticaria: Daily non-sedating H1 antihistamine, increase to 4x dose before
-  adding other agents (AAAAI 2023)'
-- 'Refractory chronic urticaria: Omalizumab (anti-IgE) 150-300mg SQ every 4 weeks
-  (first-line add-on) (AAAAI 2023)'
-- 'Alternative for refractory: Cyclosporine 3-5mg/kg/day (requires monitoring) (AAAAI
-  2023)'
-- Avoid aspirin and NSAIDs as they can worsen urticaria
-- Identify and eliminate triggers when possible (food diary, medication review)
-clinical_pearls:
-- 'Acute urticaria (<6 weeks): Usually identifiable trigger (food, medication, infection)'
-- 'Chronic urticaria (>6 weeks): Often idiopathic, autoimmune in 30-50% of cases'
-- Individual lesions resolve in <24 hours (if longer, consider urticarial vasculitis)
-- 'Angioedema without urticaria: Consider ACE inhibitor, hereditary angioedema, C1
-  esterase deficiency'
-- 'Common triggers: Foods (shellfish, nuts, eggs), medications (NSAIDs, antibiotics,
-  opioids), infections (viral URI)'
-- 'Physical urticaria subtypes: Dermatographism (most common), cold-induced, cholinergic
-  (exercise/heat), solar, pressure-induced'
-- Up to 20% of population experiences urticaria at some point in life
-- 'Chronic urticaria can last years: 50% resolve by 1 year, 20% persist >10 years'
-referrals:
-- Allergy/Immunology for chronic urticaria or when first-line therapy fails
-- Consider for recurrent angioedema or suspected hereditary angioedema
-- Dermatology if concern for urticarial vasculitis or atypical features
+  - Pruritic wheals (raised, blanching lesions)
+  - Transient lesions that resolve within 24 hours
+  - Central pallor with erythematous border
+  - Variable size from few millimeters to large plaques
+  - Migratory pattern (lesions appear and disappear in different locations)
+  - May have angioedema (deeper swelling of face, lips, tongue, extremities)
+  - Worse with heat, pressure, or scratching
+  - Associated with flushing or warmth
+  - Triggered by allergens (food, medications, insect stings)
+  - Can occur with infections (viral URI), stress, or physical stimuli
+  - May have dermographism (skin writing from light scratching)
+  - Systemic symptoms if anaphylaxis (dyspnea, hypotension, GI symptoms)
 differentials:
   - Angioedema
   - Erythema multiforme
   - Urticarial vasculitis
   - Drug eruption
   - Viral exanthem
-trace:
-  source: American Academy of Allergy, Asthma & Immunology (AAAAI) Guidelines, World
-    Allergy Organization (WAO) Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - 'Acute urticaria: Usually clinical diagnosis, no routine testing needed'
+  - 'Chronic urticaria workup: CBC with differential, ESR or CRP, TSH (thyroid autoimmunity common)'
+  - Serum tryptase if concern for mastocytosis (urticaria pigmentosa, systemic symptoms)
+  - Complement levels (C4, C1q, C1 esterase inhibitor) if recurrent angioedema without urticaria
+  - Skin biopsy if lesions persist >24 hours or have purpura (rule out urticarial vasculitis)
+  - 'Allergy testing: Skin prick or specific IgE only if clear trigger history (not routine)'
+  - Autologous serum skin test (ASST) can identify autoimmune urticaria but doesn't change management
+treatment:
+  - 'Guideline-based treatment options for Urticaria (Hives) include:'
+  - 'First-line acute: Non-sedating H1 antihistamine (cetirizine 10mg, loratadine 10mg, or fexofenadine 180mg daily) (AAAAI 2023)'
+  - Can increase H1 antihistamine up to 4x standard dose if inadequate response (AAAAI 2023)
+  - Add H2 blocker (famotidine 20mg BID) if inadequate response to H1 blocker alone (AAAAI 2023)
+  - 'Severe/angioedema: Prednisone 40-60mg daily for 3-7 days, avoid long-term steroids (AAAAI 2023)'
+  - 'Airway angioedema: Epinephrine 0.3-0.5mg IM, consider ICU monitoring (AAAAI 2023)'
+  - 'Chronic urticaria: Daily non-sedating H1 antihistamine, increase to 4x dose before adding other agents (AAAAI 2023)'
+  - 'Refractory chronic urticaria: Omalizumab (anti-IgE) 150-300mg SQ every 4 weeks (first-line add-on) (AAAAI 2023)'
+  - 'Alternative for refractory: Cyclosporine 3-5mg/kg/day (requires monitoring) (AAAAI 2023)'
+  - Avoid aspirin and NSAIDs as they can worsen urticaria
+  - Identify and eliminate triggers when possible (food diary, medication review)
+clinical_pearls:
+  - 'Acute urticaria (<6 weeks): Usually identifiable trigger (food, medication, infection)'
+  - 'Chronic urticaria (>6 weeks): Often idiopathic, autoimmune in 30-50% of cases'
+  - Individual lesions resolve in <24 hours (if longer, consider urticarial vasculitis)
+  - 'Angioedema without urticaria: Consider ACE inhibitor, hereditary angioedema, C1 esterase deficiency'
+  - 'Common triggers: Foods (shellfish, nuts, eggs), medications (NSAIDs, antibiotics, opioids), infections (viral URI)'
+  - 'Physical urticaria subtypes: Dermatographism (most common), cold-induced, cholinergic (exercise/heat), solar, pressure-induced'
+  - Up to 20% of population experiences urticaria at some point in life
+  - 'Chronic urticaria can last years: 50% resolve by 1 year, 20% persist >10 years'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Allergy/Immunology for chronic urticaria or when first-line therapy fails
+  - Consider for recurrent angioedema or suspected hereditary angioedema
+  - Dermatology if concern for urticarial vasculitis or atypical features
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

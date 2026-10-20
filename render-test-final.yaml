@@ -3,11 +3,13 @@
 # 
 # This configuration deploys:
 # - Backend API with test mode enabled
-# - Uses EXISTING production database (shared with production)
+# - Uses the EXISTING test database (realdiag-test-database), never production
 #
 # All users automatically get ENTERPRISE access in test mode
 
-# No new database - using existing realdiag-database from production
+# No new database - points at the existing realdiag-test-database on Render.
+# It is not defined in this blueprint, so syncing this file creates nothing;
+# the database must already exist in the Render account.
 
 services:
 
@@ -37,11 +39,10 @@ services:
       - key: SUBSCRIPTION_CHECK_ENABLED
         value: false
       
-      # Database - Using existing production database
-      # Both test and production will share the same database
+      # Database - separate test database; test must never write to production
       - key: DATABASE_URL
         fromDatabase:
-          name: realdiag-database
+          name: realdiag-test-database
           property: connectionString
       
       # Security (relaxed for testing)

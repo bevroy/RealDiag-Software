@@ -1,12 +1,33 @@
 tree_id: GI-HEPATITIS
 name: Hepatitis Evaluation and Management
+version: '1.0'
+status: draft
 family: gastroenterology
-specialty: Gastroenterology, Hepatology, Infectious Disease
+specialty: Gastroenterology
+secondary_specialties:
+  - Hepatology
+  - Infectious Disease
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Jaundice, Elevated Liver Enzymes, Abdominal Pain, Dark Urine
 description: Comprehensive evaluation of acute and chronic hepatitis including viral, alcoholic, and autoimmune etiologies
-version: "1.0"
-icd10: K75.9
-snomed: 40468003
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K75.9
+  snomed:
+    - '40468003'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
 presentations:
   - Jaundice, dark urine, pale stools
   - Right upper quadrant pain
@@ -20,28 +41,26 @@ differentials:
   - NAFLD
   - Autoimmune hepatitis
   - Drug-induced
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
   - 'Hepatitis A: Supportive care, self-limited, vaccinate contacts'
   - 'Hepatitis B acute: Supportive care (90-95% clear), monitor LFTs, refer if fulminant'
   - 'Hepatitis B chronic: Entecavir 0.5mg daily or tenofovir 300mg daily lifelong - prevent cirrhosis/HCC'
   - 'Hepatitis C: Direct-acting antivirals (DAAs) - sofosbuvir/velpatasvir (Epclusa) 1 tab daily x12 weeks, 95% cure'
-  - 'All HCV patients should be treated regardless of fibrosis stage'
+  - All HCV patients should be treated regardless of fibrosis stage
   - 'Alcoholic hepatitis: Prednisolone 40mg daily x4 weeks if severe (Maddrey discriminant function ≥32)'
-  - 'Avoid alcohol completely - abstinence essential for recovery'
+  - Avoid alcohol completely - abstinence essential for recovery
   - 'Autoimmune hepatitis: Prednisone 30-60mg daily + azathioprine 50-100mg daily, taper steroids'
-  - 'Monitor for cirrhosis - ultrasound Q6months, varices screening with EGD'
-  - 'Hepatitis A/B vaccination if not immune'
-  - 'Liver transplant evaluation if decompensated cirrhosis'
-
-entry_point: hepatitis_presentation
-
+  - Monitor for cirrhosis - ultrasound Q6months, varices screening with EGD
+  - Hepatitis A/B vaccination if not immune
+  - Liver transplant evaluation if decompensated cirrhosis
+clinical_pearls:
+  - 'Viral hepatitis: A/E fecal-oral, B/C/D bloodborne'
+  - 'Drug-induced hepatitis: exclude acetaminophen toxicity'
+  - 'Autoimmune hepatitis: female predominance, elevated IgG, ANA positive'
+  - 'Ischemic hepatitis: shock liver with massive transaminase elevation'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute liver failure (INR >1.5 with encephalopathy)
@@ -55,42 +74,39 @@ referrals:
     - Chronic hepatitis B or C requiring antiviral therapy - hepatology referral
     - Cirrhosis surveillance - HCC screening (AFP + ultrasound) and variceal screening (EGD)
     - Autoimmune hepatitis - long-term immunosuppression management
-
-clinical_pearls:
-  - 'Viral hepatitis: A/E fecal-oral, B/C/D bloodborne'
-  - 'Drug-induced hepatitis: exclude acetaminophen toxicity'
-  - 'Autoimmune hepatitis: female predominance, elevated IgG, ANA positive'
-  - 'Ischemic hepatitis: shock liver with massive transaminase elevation'
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: hepatitis_presentation
 nodes:
   - id: hepatitis_presentation
     type: question
-    text: "Pattern of liver injury and presentation?"
+    text: Pattern of liver injury and presentation?
     options:
-      - label: "Acute hepatitis with severe elevation (ALT/AST >1000) or acute liver failure"
+      - label: Acute hepatitis with severe elevation (ALT/AST >1000) or acute liver failure
         next: acute_severe_hepatitis
-      - label: "Chronic hepatitis (elevated enzymes >6 months)"
+      - label: Chronic hepatitis (elevated enzymes >6 months)
         next: chronic_hepatitis_workup
-      - label: "Alcoholic hepatitis suspected"
+      - label: Alcoholic hepatitis suspected
         next: alcoholic_hepatitis
-
   - id: acute_severe_hepatitis
     type: question
-    text: "Etiology of acute hepatitis?"
+    text: Etiology of acute hepatitis?
     options:
-      - label: "Acute viral hepatitis (A, B, C, E)"
+      - label: Acute viral hepatitis (A, B, C, E)
         next: acute_viral_hepatitis
-      - label: "Drug-induced liver injury (acetaminophen, other medications)"
+      - label: Drug-induced liver injury (acetaminophen, other medications)
         next: drug_induced_hepatitis
-      - label: "Autoimmune hepatitis"
+      - label: Autoimmune hepatitis
         next: autoimmune_hepatitis
-      - label: "Ischemic hepatitis (shock liver)"
+      - label: Ischemic hepatitis (shock liver)
         next: ischemic_hepatitis
-
   - id: acute_viral_hepatitis
     type: diagnosis
-    name: "Acute Viral Hepatitis"
-    icd10: "B19.9"
+    name: Acute Viral Hepatitis
+    icd10: B19.9
     urgency: high
     workup:
       - Acute hepatitis panel
@@ -124,12 +140,12 @@ nodes:
       - ICU admission
       - Monitor for encephalopathy, cerebral edema, coagulopathy, hypoglycemia, infection
       - Liver transplant evaluation (contact transplant center early)
-      - King's College Criteria for transplant (acetaminophen - pH <7.3 or INR >6.5 + Cr >3.4 + encephalopathy grade 3-4; non-acetaminophen - INR >6.5 or 3+ of: age <10 or >40, non-A non-B hepatitis, jaundice >7 days before encephalopathy, INR >3.5, bilirubin >17.5)
-
+      - ? King's College Criteria for transplant (acetaminophen - pH <7.3 or INR >6.5 + Cr >3.4 + encephalopathy grade 3-4; non-acetaminophen - INR >6.5 or 3+ of
+        : age <10 or >40, non-A non-B hepatitis, jaundice >7 days before encephalopathy, INR >3.5, bilirubin >17.5)
   - id: drug_induced_hepatitis
     type: diagnosis
-    name: "Drug-Induced Liver Injury (DILI)"
-    icd10: "K71.9"
+    name: Drug-Induced Liver Injury (DILI)
+    icd10: K71.9
     urgency: high
     workup:
       - History - ALL medications (prescription, OTC, herbal/supplements - especially green tea extract, anabolic steroids, kava)
@@ -154,11 +170,10 @@ nodes:
       - Monitor LFTs weekly until improving
       - Prognosis - Hy's Law (ALT >3x ULN + bilirubin >2x ULN) predicts 10% mortality/transplant risk
       - Avoid re-challenge with causative drug
-
   - id: autoimmune_hepatitis
     type: diagnosis
-    name: "Autoimmune Hepatitis"
-    icd10: "K75.4"
+    name: Autoimmune Hepatitis
+    icd10: K75.4
     urgency: high
     workup:
       - Demographics - Young-middle aged women (can occur any age/gender)
@@ -179,11 +194,10 @@ nodes:
       - Liver transplant if acute liver failure or cirrhosis with decompensation
       - Lifelong treatment usually required (high relapse rate if stopped)
       - GI/hepatology referral
-
   - id: ischemic_hepatitis
     type: diagnosis
-    name: "Ischemic Hepatitis (Shock Liver)"
-    icd10: "K76.2"
+    name: Ischemic Hepatitis (Shock Liver)
+    icd10: K76.2
     urgency: critical
     workup:
       - History - Recent hypotension, cardiac arrest, septic shock, cardiogenic shock
@@ -196,24 +210,22 @@ nodes:
       - Supportive care
       - Monitor for acute liver failure (rare if perfusion restored)
       - Prognosis depends on underlying condition (high mortality 50-70% due to underlying shock)
-
   - id: chronic_hepatitis_workup
     type: question
-    text: "Etiology of chronic hepatitis?"
+    text: Etiology of chronic hepatitis?
     options:
-      - label: "Chronic hepatitis B"
+      - label: Chronic hepatitis B
         next: chronic_hep_b
-      - label: "Chronic hepatitis C"
+      - label: Chronic hepatitis C
         next: chronic_hep_c
-      - label: "Non-alcoholic fatty liver disease (NAFLD/NASH)"
+      - label: Non-alcoholic fatty liver disease (NAFLD/NASH)
         next: nafld_nash
-      - label: "Chronic autoimmune hepatitis"
+      - label: Chronic autoimmune hepatitis
         next: autoimmune_hepatitis
-
   - id: chronic_hep_b
     type: diagnosis
-    name: "Chronic Hepatitis B"
-    icd10: "B18.1"
+    name: Chronic Hepatitis B
+    icd10: B18.1
     urgency: medium
     workup:
       - Chronic HBV = HBsAg positive >6 months
@@ -233,11 +245,10 @@ nodes:
       - HCC surveillance - AFP + ultrasound q6 months (lifelong, even if cirrhosis regresses)
       - Vaccination of household contacts
       - Hepatology referral
-
   - id: chronic_hep_c
     type: diagnosis
-    name: "Chronic Hepatitis C"
-    icd10: "B18.2"
+    name: Chronic Hepatitis C
+    icd10: B18.2
     urgency: medium
     workup:
       - Chronic HCV = HCV RNA positive >6 months (or any HCV RNA positive if anti-HCV positive)
@@ -256,11 +267,10 @@ nodes:
       - If cirrhosis - Continue HCC surveillance even after cure (3-4% annual risk)
       - Treat ALL patients with chronic HCV (no longer restricted by fibrosis stage)
       - Highly effective, well-tolerated, short duration - treat as soon as diagnosed
-
   - id: nafld_nash
     type: diagnosis
-    name: "Non-Alcoholic Fatty Liver Disease (NAFLD) and NASH"
-    icd10: "K76.0"
+    name: Non-Alcoholic Fatty Liver Disease (NAFLD) and NASH
+    icd10: K76.0
     urgency: low
     workup:
       - NAFLD = Hepatic steatosis (>5% fat) without significant alcohol use (<20g/day women, <30g/day men)
@@ -286,11 +296,10 @@ nodes:
       - Avoid alcohol, hepatotoxic medications
       - HCC surveillance if cirrhosis develops
       - Hepatology referral if advanced fibrosis or NASH
-
   - id: alcoholic_hepatitis
     type: diagnosis
-    name: "Alcoholic Hepatitis"
-    icd10: "K70.10"
+    name: Alcoholic Hepatitis
+    icd10: K70.10
     urgency: high
     workup:
       - Clinical - Jaundice, hepatomegaly, right upper quadrant pain in heavy drinker (>40-80g alcohol daily for years)
@@ -321,3 +330,13 @@ nodes:
       - Alcohol use disorder treatment - Addiction counseling, naltrexone, acamprosate, disulfiram (once liver function improving)
       - Liver transplant evaluation if severe (6-month sobriety typically required)
       - Prognosis - 30-day mortality 20-50% if severe
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

@@ -1,10 +1,31 @@
 tree_id: IMMUNO-AUTOIMMUNE-DISORDER
 name: Autoimmune Disorder, Unspecified (Encounter)
+version: '1.0'
+status: draft
 family: allergy
 specialty: Immunology
-icd10: M35.9
-snomed: "85828009"
-
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - M35.9
+  snomed:
+    - '85828009'
+  icpc2: []
+sources:
+  - text: Aringer M, et al. (2019). 2019 EULAR/ACR Classification Criteria for Systemic Lupus Erythematosus. Arthritis Rheumatol, 71(9), 1400-1412.
+    origin: citations
+  - text: Smolen JS, et al. (2020). Rheumatoid arthritis. Lancet, 388(10055), 2023-2038.
+    origin: citations
+  - text: Agmon-Levin N, et al. (2014). International recommendations for the assessment of autoantibodies to cellular antigens referred to as anti-nuclear antibodies. Ann Rheum Dis, 73(1), 17-23.
+    origin: citations
 presentations:
   - Multisystem involvement (joints, skin, kidneys, lungs, heart)
   - Fatigue and malaise
@@ -19,47 +40,46 @@ presentations:
   - Muscle weakness or myalgias
   - Peripheral neuropathy
   - Recurrent miscarriages or thrombosis
-
+differentials: []
 workup:
   - History:
-    - Onset and duration of symptoms
-    - Pattern of organ involvement
-    - Family history of autoimmune disease
-    - Medication history (drug-induced lupus)
-    - Environmental exposures
-    - Smoking history
-    - Response to previous treatments
+      - Onset and duration of symptoms
+      - Pattern of organ involvement
+      - Family history of autoimmune disease
+      - Medication history (drug-induced lupus)
+      - Environmental exposures
+      - Smoking history
+      - Response to previous treatments
   - Physical exam:
-    - Skin examination (rashes, photosensitivity, vasculitis, alopecia)
-    - Joint examination (synovitis, deformities)
-    - Muscle strength testing
-    - Cardiovascular exam (pericardial rub, murmurs)
-    - Pulmonary exam (crackles suggesting ILD)
-    - Neurologic exam (peripheral neuropathy, cranial nerves)
-    - Lymphadenopathy or hepatosplenomegaly
+      - Skin examination (rashes, photosensitivity, vasculitis, alopecia)
+      - Joint examination (synovitis, deformities)
+      - Muscle strength testing
+      - Cardiovascular exam (pericardial rub, murmurs)
+      - Pulmonary exam (crackles suggesting ILD)
+      - Neurologic exam (peripheral neuropathy, cranial nerves)
+      - Lymphadenopathy or hepatosplenomegaly
   - Laboratory studies:
-    - Complete blood count with differential (cytopenias)
-    - Comprehensive metabolic panel (kidney function, liver enzymes)
-    - Urinalysis (proteinuria, hematuria, cellular casts)
-    - Inflammatory markers (ESR, CRP)
-    - Antinuclear antibody (ANA) with reflex to specific antibodies
-    - Rheumatoid factor (RF) and anti-CCP
-    - Complement levels (C3, C4, CH50) - low in active SLE
-    - Anti-dsDNA (specific for SLE)
-    - Anti-Smith (highly specific for SLE)
-    - Anti-Ro/SSA and Anti-La/SSB (Sjogren, neonatal lupus)
-    - Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein)
-    - ANCA (vasculitis)
-    - Thyroid function tests and thyroid antibodies
-    - Creatine kinase (if myositis suspected)
+      - Complete blood count with differential (cytopenias)
+      - Comprehensive metabolic panel (kidney function, liver enzymes)
+      - Urinalysis (proteinuria, hematuria, cellular casts)
+      - Inflammatory markers (ESR, CRP)
+      - Antinuclear antibody (ANA) with reflex to specific antibodies
+      - Rheumatoid factor (RF) and anti-CCP
+      - Complement levels (C3, C4, CH50) - low in active SLE
+      - Anti-dsDNA (specific for SLE)
+      - Anti-Smith (highly specific for SLE)
+      - Anti-Ro/SSA and Anti-La/SSB (Sjogren, neonatal lupus)
+      - Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein)
+      - ANCA (vasculitis)
+      - Thyroid function tests and thyroid antibodies
+      - Creatine kinase (if myositis suspected)
   - Imaging and procedures:
-    - Chest X-ray (ILD, pleural effusions, cardiomegaly)
-    - Echocardiogram if cardiac involvement suspected
-    - CT chest if ILD suspected
-    - MRI for CNS involvement
-    - Joint X-rays or ultrasound
-    - Tissue biopsy (skin, kidney, muscle) for definitive diagnosis
-
+      - Chest X-ray (ILD, pleural effusions, cardiomegaly)
+      - Echocardiogram if cardiac involvement suspected
+      - CT chest if ILD suspected
+      - MRI for CNS involvement
+      - Joint X-rays or ultrasound
+      - Tissue biopsy (skin, kidney, muscle) for definitive diagnosis
 treatment:
   general_management:
     - Identify and treat specific autoimmune condition when possible
@@ -90,7 +110,6 @@ treatment:
     - Ophthalmology monitoring if on hydroxychloroquine
     - Pregnancy planning and contraception counseling
     - Mental health support
-
 clinical_pearls:
   - Positive ANA is sensitive but not specific (can be positive in 5-10% of healthy individuals)
   - Pattern and titer of ANA guide further testing (homogeneous suggests anti-dsDNA, speckled suggests anti-Sm, anti-Ro/La)
@@ -104,14 +123,27 @@ clinical_pearls:
   - Screen for malignancy in new-onset autoimmune disease in older adults (paraneoplastic)
   - Monitor for infection on immunosuppression (TB screening, opportunistic infection prophylaxis)
   - Autoimmune diseases increase cardiovascular risk independent of traditional risk factors
-
+red_flags: []
+disposition_guidance: {}
+referrals: []
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Diagnostic approach to suspected autoimmune disease
   - Interpretation of autoantibody panels
   - Immunosuppressive therapy selection and monitoring
   - Management of autoimmune disease flares
-
-citations:
-  - Aringer M, et al. (2019). 2019 EULAR/ACR Classification Criteria for Systemic Lupus Erythematosus. Arthritis Rheumatol, 71(9), 1400-1412.
-  - Smolen JS, et al. (2020). Rheumatoid arthritis. Lancet, 388(10055), 2023-2038.
-  - Agmon-Levin N, et al. (2014). International recommendations for the assessment of autoantibodies to cellular antigens referred to as anti-nuclear antibodies. Ann Rheum Dis, 73(1), 17-23.
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

@@ -1,11 +1,35 @@
 tree_id: PED-RASH
 name: Rash (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Dermatology/Family Medicine
-icd10: R21
-snomed: 271807003
-urgency: []
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Dermatology
+  - Family Medicine
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R21
+  snomed:
+    - '271807003'
+  icpc2: []
+sources:
+  - text: AAP Red Book (Report of the Committee on Infectious Diseases)
+    origin: citations
+  - text: Pediatric Dermatology Association Guidelines
+    origin: citations
+  - text: UpToDate - Pediatrics
+    origin: citations
+  - text: AAP Red Book, Pediatric Dermatology Guidelines, UpToDate
+    origin: trace.source
 presentations:
   - Skin eruption or discoloration
   - Itching (pruritus)
@@ -15,6 +39,16 @@ presentations:
   - New medications or exposures
   - Distribution pattern (localized versus generalized)
   - Morphology varies (macular, papular, vesicular, petechial, purpuric)
+differentials:
+  - Viral exanthems (roseola, fifth disease, hand-foot-mouth, varicella)
+  - Scarlet fever (sandpaper rash, strawberry tongue, positive strep test)
+  - Atopic dermatitis (itchy, flexural surfaces, personal or family history atopy)
+  - Contact dermatitis (geometric or linear pattern, history of exposure)
+  - Urticaria (hives - transient raised wheals, pruritic, migratory)
+  - Impetigo (honey-crusted lesions, face and extremities)
+  - Drug reaction (recent medication, morbilliform or urticarial)
+  - Kawasaki disease (fever greater than 5 days, conjunctivitis, mucositis, extremity changes)
+  - Meningococcemia (petechiae/purpura, fever, ill-appearing, meningeal signs)
 workup:
   - Clinical history
   - Onset and duration
@@ -48,14 +82,14 @@ workup:
 treatment:
   - Management based on etiology
   - Viral exanthems (most common) - supportive care
-  - Roseola: antipyretics for fever, supportive care (self-limited)
-  - Fifth disease: usually no treatment needed
-  - Hand-foot-mouth: supportive care, pain relief for oral lesions
-  - Varicella (chickenpox): supportive care, antihistamines for itching, acyclovir if high-risk
+  - 'Roseola: antipyretics for fever, supportive care (self-limited)'
+  - 'Fifth disease: usually no treatment needed'
+  - 'Hand-foot-mouth: supportive care, pain relief for oral lesions'
+  - 'Varicella (chickenpox): supportive care, antihistamines for itching, acyclovir if high-risk'
   - Bacterial infections
-  - Scarlet fever: amoxicillin 50 mg/kg/day divided BID for 10 days
-  - Impetigo: topical mupirocin or oral antibiotics (cephalexin)
-  - Cellulitis: oral or IV antibiotics based on severity
+  - 'Scarlet fever: amoxicillin 50 mg/kg/day divided BID for 10 days'
+  - 'Impetigo: topical mupirocin or oral antibiotics (cephalexin)'
+  - 'Cellulitis: oral or IV antibiotics based on severity'
   - Atopic dermatitis/eczema
   - Emollients and moisturizers (frequent application)
   - Topical corticosteroids (hydrocortisone 1% mild, triamcinolone 0.1% moderate)
@@ -71,42 +105,47 @@ treatment:
   - Symptomatic treatment for most rashes
   - Antihistamines for pruritus (diphenhydramine, cetirizine)
   - Calamine lotion or colloidal oatmeal baths
-  - Keep nails short to prevent excoriation
+  - 'Patient advice: Keep nails short to prevent excoriation'
   - Cool compresses
   - Emergent conditions requiring immediate evaluation
   - Petechial/purpuric rash with fever (meningococcemia)
   - Stevens-Johnson syndrome (mucosal involvement, blistering, recent medication)
   - Kawasaki disease (fever greater than 5 days, conjunctivitis, mucositis, extremity changes)
 clinical_pearls:
-  - 'Most pediatric rashes are viral exanthems - self-limited, supportive care only'
-  - 'Non-blanching petechial or purpuric rash with fever is meningococcemia until proven otherwise - medical emergency'
+  - Most pediatric rashes are viral exanthems - self-limited, supportive care only
+  - Non-blanching petechial or purpuric rash with fever is meningococcemia until proven otherwise - medical emergency
   - 'Roseola classic presentation: high fever 3-5 days, then rash as fever resolves (not contagious once rash appears)'
   - 'Scarlet fever: sandpaper-textured rash, strawberry tongue, circumoral pallor - treat with penicillin'
   - 'Kawasaki disease: fever greater than 5 days plus 4 of 5 criteria (rash, conjunctivitis, mucositis, extremity changes, lymphadenopathy)'
   - 'Drug rashes typically appear 7-14 days after medication started - common culprits: amoxicillin, sulfa drugs'
-  - 'Varicella (chickenpox) is vesicular rash (dewdrop on rose petal) in crops with different stages present simultaneously'
-  - 'Contact dermatitis has linear or geometric distribution matching exposure pattern (poison ivy linear streaks)'
+  - Varicella (chickenpox) is vesicular rash (dewdrop on rose petal) in crops with different stages present simultaneously
+  - Contact dermatitis has linear or geometric distribution matching exposure pattern (poison ivy linear streaks)
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Emergency department if petechial/purpuric rash with fever, toxic appearance, or hemodynamic instability
   - Dermatology if uncertain diagnosis, severe eczema, or refractory rash
   - Cardiology if concern for Kawasaki disease (requires echocardiogram and IVIG treatment)
   - Allergy/immunology if recurrent urticaria or concern for anaphylaxis
-differentials:
-  - Viral exanthems (roseola, fifth disease, hand-foot-mouth, varicella)
-  - Scarlet fever (sandpaper rash, strawberry tongue, positive strep test)
-  - Atopic dermatitis (itchy, flexural surfaces, personal or family history atopy)
-  - Contact dermatitis (geometric or linear pattern, history of exposure)
-  - Urticaria (hives - transient raised wheals, pruritic, migratory)
-  - Impetigo (honey-crusted lesions, face and extremities)
-  - Drug reaction (recent medication, morbilliform or urticarial)
-  - Kawasaki disease (fever greater than 5 days, conjunctivitis, mucositis, extremity changes)
-  - Meningococcemia (petechiae/purpura, fever, ill-appearing, meningeal signs)
-trace:
-  source: AAP Red Book, Pediatric Dermatology Guidelines, UpToDate
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - AAP Red Book (Report of the Committee on Infectious Diseases)
-  - Pediatric Dermatology Association Guidelines
-  - UpToDate - Pediatrics
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

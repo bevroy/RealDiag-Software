@@ -1,0 +1,79 @@
+# Build context rules for Dockerfile.prebuilt only (BuildKit picks this up
+# automatically for `docker build -f Dockerfile.prebuilt`). Same as
+# .dockerignore, except the Next.js build output is kept: it is the prebuilt
+# frontend (next.config.js sets distDir: 'out', so it lives in frontend/out).
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node
+**/node_modules/
+npm-debug.log
+yarn-error.log
+.nuxt/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+tests/
+*.test.js
+*.spec.js
+coverage/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Build artifacts and cache
+*.log
+*.txt
+!requirements.txt
+.pytest_cache/
+.coverage
+*.pyc
+load_test*
+
+# Kubernetes
+k8s/
+
+# Misc
+*.log
+# Secrets: never copy env files, keys or registry credentials into an image,
+# at any depth (a bare ".env" pattern only matches the context root).
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/.npmrc
+**/.netrc
+**/id_rsa*
+
+# Build cache is not needed at runtime
+frontend/out/cache/
+frontend/.next/

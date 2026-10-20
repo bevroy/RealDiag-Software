@@ -1,0 +1,6964 @@
+{
+ "acs_elevated_with_tachycardia": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_most_recent_result_used": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin at or below the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "absent",
+      "value": "0.02 ng/mL"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.0,
+    "severity": "low",
+    "severity_reason": "Troponin at or below the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_no_reference_range": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: the lab reported no upper reference limit for troponin.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: the lab reported no upper reference limit for troponin.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: the lab reported no upper reference limit for troponin.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: the lab reported no upper reference limit for troponin.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin with lab reference range and units",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_no_unit": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: troponin result has no unit.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin result has no unit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: troponin result has no unit.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5"
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin result has no unit.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin with lab reference range and units",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_preliminary_elevated": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit. (PRELIMINARY result)",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit. (PRELIMINARY result)",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tachycardia_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_critical": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_high": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 5.0x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.2 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 5.0x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 5.0x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.2 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 5.0x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_moderate": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 1.2x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.05 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": "Troponin 1.2x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 1.2x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.05 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": "Troponin 1.2x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_ng_l_not_elevated": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin at or below the lab's upper reference limit.",
+      "expected": "> 52 ng/L (lab upper reference limit)",
+      "status": "absent",
+      "value": "50 ng/L"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.0,
+    "severity": "low",
+    "severity_reason": "Troponin at or below the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_normal_hr_normal": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin at or below the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "absent",
+      "value": "0.01 ng/mL"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.0,
+    "severity": "low",
+    "severity_reason": "Troponin at or below the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "absent",
+      "value": "88 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tni_normal_tnt_elevated": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin T: Troponin 2.9x the lab's upper reference limit.",
+      "expected": "> 14 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "40 ng/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 2.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin T: Troponin 2.9x the lab's upper reference limit.",
+      "expected": "> 14 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "40 ng/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 2.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_tnt_hs_ng_l": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin T: Troponin 2.9x the lab's upper reference limit.",
+      "expected": "> 14 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "40 ng/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 2.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin T: Troponin 2.9x the lab's upper reference limit.",
+      "expected": "> 14 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "40 ng/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": "Troponin 2.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_unknown_reference_unit": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: reference range unit 'furlongs' is not recognised.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: reference range unit 'furlongs' is not recognised.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: reference range unit 'furlongs' is not recognised.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: reference range unit 'furlongs' is not recognised.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin with lab reference range and units",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_unknown_unit": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: troponin unit 'mmol/L' is not recognised (expected ng/mL or ng/L).",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 mmol/L"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin unit 'mmol/L' is not recognised (expected ng/mL or ng/L).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: troponin unit 'mmol/L' is not recognised (expected ng/mL or ng/L).",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 mmol/L"
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin unit 'mmol/L' is not recognised (expected ng/mL or ng/L).",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin with lab reference range and units",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_value_ng_ml_ref_ng_l": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 1.9x the lab's upper reference limit.",
+      "expected": "> 26 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "0.05 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": "Troponin 1.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 1.9x the lab's upper reference limit.",
+      "expected": "> 26 ng/L (lab upper reference limit)",
+      "status": "present",
+      "value": "0.05 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": "Troponin 1.9x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "acs_zero_reference_high": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: the lab's upper reference limit is zero or negative.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: the lab's upper reference limit is zero or negative.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Severity unknown: the lab's upper reference limit is zero or negative.",
+      "expected": "lab upper reference limit",
+      "status": "unknown",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin with lab reference range and units"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: the lab's upper reference limit is zero or negative.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin with lab reference range and units",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "all_abnormal": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "600 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "10 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 600 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "30 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "80 mmHg"
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "Altered mental status contributes to qSOFA",
+      "expected": "GCS < 15",
+      "status": "present",
+      "value": "GCS 12"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "20 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "troponin I: Troponin 12.5x the lab's upper reference limit.",
+      "expected": "> 0.04 ng/mL (lab upper reference limit)",
+      "status": "present",
+      "value": "0.5 ng/mL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Troponin 12.5x the lab's upper reference limit.",
+    "status_reason": null,
+    "supporting_findings": [
+     {
+      "criterion": "Heart rate",
+      "details": "Supporting finding only; tachycardia alone does not suggest ACS.",
+      "expected": "> 100/min (tachycardia)",
+      "status": "present",
+      "value": "130 beats/min"
+     }
+    ]
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "600 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "10 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 600 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "30 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "80 mmHg"
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "Altered mental status contributes to qSOFA",
+      "expected": "GCS < 15",
+      "status": "present",
+      "value": "GCS 12"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "20 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_10_mmol_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "absent",
+      "value": "10 mmol/L (= 180 mg/dL)"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "absent",
+      "value": "10 mmol/L (= 180 mg/dL)"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_200_mg_dl_co2_normal": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "absent",
+      "value": "200 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": null,
+      "expected": "< 18 mEq/L",
+      "status": "absent",
+      "value": "20 mEq/L"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_20_mmol_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "20 mmol/L (= 360 mg/dL)"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "20 mmol/L (= 360 mg/dL)"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_30_mmol_co2_low": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "30 mmol/L (= 540 mg/dL)"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mmol/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 540 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "30 mmol/L (= 540 mg/dL)"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mmol/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 540 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_600_mg_dl_co2_low": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "600 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 600 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "600 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": "Glucose 600 mg/dL (> 500 mg/dL).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_co2_low_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_glucose_250_boundary": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "absent",
+      "value": "250 mg/dL"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "absent",
+      "value": "250 mg/dL"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_no_glucose_unit": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "glucose result has no unit.",
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "unknown",
+      "value": "600"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose with units (mg/dL or mmol/L)"
+    ],
+    "probability": 1.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: glucose result has no unit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "glucose result has no unit.",
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "unknown",
+      "value": "600"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose with units (mg/dL or mmol/L)"
+    ],
+    "probability": 1.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: glucose result has no unit.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_preliminary_glucose": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "300 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "15 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": null,
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "present",
+      "value": "300 mg/dL"
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "15 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "dka_unknown_glucose_unit": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "glucose unit 'g/L' is not recognised (expected mg/dL or mmol/L).",
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "unknown",
+      "value": "600 g/L"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose with units (mg/dL or mmol/L)"
+    ],
+    "probability": 1.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: glucose unit 'g/L' is not recognised (expected mg/dL or mmol/L).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Low bicarbonate suggests metabolic acidosis",
+      "expected": "< 18 mEq/L",
+      "status": "present",
+      "value": "12 mEq/L"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "glucose unit 'g/L' is not recognised (expected mg/dL or mmol/L).",
+      "expected": "> 250 mg/dL (13.9 mmol/L)",
+      "status": "unknown",
+      "value": "600 g/L"
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose with units (mg/dL or mmol/L)"
+    ],
+    "probability": 1.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: glucose unit 'g/L' is not recognised (expected mg/dL or mmol/L).",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "no_data": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_all_normal": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "absent",
+      "value": "18 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "absent",
+      "value": "120 mmHg"
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": null,
+      "expected": "GCS < 15",
+      "status": "absent",
+      "value": "GCS 15"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": null,
+      "expected": "< 4 or > 12 K/uL",
+      "status": "absent",
+      "value": "8 K/uL"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_boundaries_qsofa2": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "22 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "100 mmHg"
+     }
+    ],
+    "criteria_not_met": [
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": null,
+      "expected": "GCS < 15",
+      "status": "absent",
+      "value": "GCS 15"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": null,
+      "expected": "< 4 or > 12 K/uL",
+      "status": "absent",
+      "value": "12 K/uL"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.5,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "22 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "100 mmHg"
+     }
+    ],
+    "criteria_not_met": [
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": null,
+      "expected": "GCS < 15",
+      "status": "absent",
+      "value": "GCS 15"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": null,
+      "expected": "< 4 or > 12 K/uL",
+      "status": "absent",
+      "value": "12 K/uL"
+     }
+    ],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 0.5,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_most_recent_vital_used": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "absent",
+      "value": "16 /min"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [],
+    "criteria_not_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "absent",
+      "value": "16 /min"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Glasgow Coma Scale / mental status assessment, CBC with differential",
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_qsofa1_rr_unknown": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "95 mmHg"
+     }
+    ],
+    "criteria_not_met": [
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": null,
+      "expected": "GCS < 15",
+      "status": "absent",
+      "value": "GCS 15"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "CBC with differential"
+    ],
+    "probability": 0.5,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "95 mmHg"
+     }
+    ],
+    "criteria_not_met": [
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": null,
+      "expected": "GCS < 15",
+      "status": "absent",
+      "value": "GCS 15"
+     }
+    ],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "CBC with differential"
+    ],
+    "probability": 0.5,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_qsofa3_wbc_high": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "24 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "90 mmHg"
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "Altered mental status contributes to qSOFA",
+      "expected": "GCS < 15",
+      "status": "present",
+      "value": "GCS 13"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "15 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "24 /min"
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": null,
+      "expected": "<= 100 mmHg",
+      "status": "present",
+      "value": "90 mmHg"
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "Altered mental status contributes to qSOFA",
+      "expected": "GCS < 15",
+      "status": "present",
+      "value": "GCS 13"
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "15 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [],
+    "evaluation_status": "evaluated",
+    "missing_tests": [],
+    "probability": 1.0,
+    "severity": "critical",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_rr_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "24 /min"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Tachypnea (qSOFA)",
+      "details": null,
+      "expected": ">= 22/min",
+      "status": "present",
+      "value": "24 /min"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Abnormal WBC",
+      "details": "WBC not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment",
+     "CBC with differential"
+    ],
+    "probability": 1.0,
+    "severity": "high",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ },
+ "sepsis_wbc_low_only": {
+  "raw": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "3 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  },
+  "shown": {
+   "CARD-ACS": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Elevated troponin",
+      "details": "Troponin not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Troponin (serial measurements per institutional protocol)"
+    ],
+    "probability": 0.0,
+    "severity": "unknown",
+    "severity_reason": "Severity unknown: troponin not measured.",
+    "status_reason": "Insufficient data to evaluate; missing: Troponin (serial measurements per institutional protocol)",
+    "supporting_findings": []
+   },
+   "ENDO-DKA": {
+    "criteria_met": [],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Hyperglycemia",
+      "details": "Blood glucose not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Metabolic acidosis",
+      "details": "Bicarbonate (CO2) not measured",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "insufficient data",
+    "missing_tests": [
+     "Blood glucose",
+     "Basic metabolic panel (BMP)"
+    ],
+    "probability": 0.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": "Insufficient data to evaluate; missing: Blood glucose, Basic metabolic panel (BMP)",
+    "supporting_findings": []
+   },
+   "ID-SEPSIS": {
+    "criteria_met": [
+     {
+      "criterion": "Abnormal WBC",
+      "details": "Leukocytosis or leukopenia",
+      "expected": "4-12 K/uL",
+      "status": "present",
+      "value": "3 K/uL"
+     }
+    ],
+    "criteria_not_met": [],
+    "criteria_unknown": [
+     {
+      "criterion": "Respiratory rate",
+      "details": null,
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Hypotension (qSOFA)",
+      "details": "Systolic blood pressure not documented",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     },
+     {
+      "criterion": "Altered mentation (qSOFA)",
+      "details": "GCS not documented - qSOFA cannot be fully scored without it",
+      "expected": null,
+      "status": "unknown",
+      "value": null
+     }
+    ],
+    "evaluation_status": "evaluated",
+    "missing_tests": [
+     "Glasgow Coma Scale / mental status assessment"
+    ],
+    "probability": 1.0,
+    "severity": "moderate",
+    "severity_reason": null,
+    "status_reason": null,
+    "supporting_findings": []
+   }
+  }
+ }
+}

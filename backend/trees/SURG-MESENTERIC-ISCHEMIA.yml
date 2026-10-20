@@ -1,41 +1,62 @@
 tree_id: SURG-MESENTERIC-ISCHEMIA
 name: Acute Mesenteric Ischemia
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K55.0
-snomed:
-- 63367001
+secondary_specialties: []
 urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Acute Mesenteric Ischemia
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K55.0
+  snomed:
+    - '63367001'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Severe abdominal pain out of proportion to exam
-- Atrial fibrillation or vascular disease history
-- Nausea, vomiting, bloody diarrhea
-- Metabolic acidosis and elevated lactate
-- CT angiography shows vascular occlusion
-- High mortality if delayed
+  - Severe abdominal pain out of proportion to exam
+  - Atrial fibrillation or vascular disease history
+  - Nausea, vomiting, bloody diarrhea
+  - Metabolic acidosis and elevated lactate
+  - CT angiography shows vascular occlusion
+  - High mortality if delayed
+differentials:
+  - Bowel obstruction
+  - Pancreatitis
+  - Perforated ulcer
+  - Aortic dissection
+  - Gastroenteritis
 workup: []
 treatment:
-  - 'Surgical emergency - high mortality (60-80%)'
-  - 'Aggressive IV fluid resuscitation'
-  - 'Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H + vancomycin'
-  - 'NPO, NG tube decompression'
-  - 'CT angiography - diagnostic test (SMA/celiac occlusion or non-occlusive)'
-  - 'Immediate laparotomy if peritonitis - resect necrotic bowel, revascularize (embolectomy, bypass, stent)'
-  - 'Papaverine infusion for non-occlusive mesenteric ischemia (vasodilator)'
-  - 'Second-look laparotomy in 24-48 hours to reassess bowel viability'
-  - 'Anticoagulation after revascularization to prevent recurrence'
-  - 'ICU care - sepsis management, TPN'
-  - 'Prognosis poor - early recognition critical'
+  - Surgical emergency - high mortality (60-80%)
+  - Aggressive IV fluid resuscitation
+  - Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H + vancomycin
+  - NPO, NG tube decompression
+  - CT angiography - diagnostic test (SMA/celiac occlusion or non-occlusive)
+  - Immediate laparotomy if peritonitis - resect necrotic bowel, revascularize (embolectomy, bypass, stent)
+  - Papaverine infusion for non-occlusive mesenteric ischemia (vasodilator)
+  - Second-look laparotomy in 24-48 hours to reassess bowel viability
+  - Anticoagulation after revascularization to prevent recurrence
+  - ICU care - sepsis management, TPN
+  - Prognosis poor - early recognition critical
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -53,14 +74,19 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Bowel obstruction
-  - Pancreatitis
-  - Perforated ulcer
-  - Aortic dissection
-  - Gastroenteritis
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

@@ -118,7 +118,7 @@ These represent different conditions that should NOT be merged:
     - `URO-PROSTATITIS.yml` - General prostatitis
 
 15. **Sinusitis** - Acute vs Chronic
-    - `ENT-SINUSITIS.yml` - Acute sinusitis
+    - `ENT-ACUTE-SINUSITIS.yml` - Acute sinusitis
     - `ENT-CHRONIC-SINUSITIS.yml` - Chronic sinusitis
 
 16. **Strep Throat** - Adult vs Pediatric

@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
+import { ClinicalReviewNotice } from '../../components/ClinicalReview';
 
 /**
  * Shift-Handoff Summary
@@ -112,14 +113,15 @@ function Handoff() {
     );
   }
 
-  const { full_summary, updates, narrative, admission_start, timeframe_source } = data;
+  const { full_summary, updates, narrative, admission_start, timeframe_source, clinical_review_notice } = data;
+  const dataWarnings = [...new Set([...(full_summary.data_warnings || []), ...((updates && updates.data_warnings) || [])])];
 
   return (
     <div style={styles.container}>
       <div style={styles.banner}>
         <div style={styles.bannerLeft}>
           <strong style={styles.patientName}>{full_summary.name}</strong>
-          <span style={styles.patientInfo}>{full_summary.age} yo {full_summary.gender}</span>
+          <span style={styles.patientInfo}>{full_summary.age != null ? `${full_summary.age} yo` : 'Age unknown'} {full_summary.gender}</span>
         </div>
         <div style={styles.bannerRight}>
           <span style={styles.mrn}>MRN: {full_summary.patient_id}</span>
@@ -130,14 +132,25 @@ function Handoff() {
       </div>
 
       <div style={styles.content}>
+        <ClinicalReviewNotice notice={clinical_review_notice} />
+        {dataWarnings.length > 0 && (
+          <div style={styles.dataWarningBox} role="alert">
+            <strong>⚠️ Incomplete chart data</strong>
+            <ul style={{ margin: '8px 0 0', paddingLeft: '20px' }}>
+              {dataWarnings.map(
+                (warning, idx) => <li key={idx}>{warning}</li>
+              )}
+            </ul>
+          </div>
+        )}
         {/* Full summary section - shown first, per handoff convention */}
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>Full Chart Summary</h2>
           <div style={styles.statsRow}>
-            <div style={styles.statBox}><strong>{full_summary.lab_count}</strong><span>Labs</span></div>
-            <div style={styles.statBox}><strong>{full_summary.vital_count}</strong><span>Vitals</span></div>
-            <div style={styles.statBox}><strong>{full_summary.condition_count}</strong><span>Conditions</span></div>
-            <div style={styles.statBox}><strong>{full_summary.medication_count}</strong><span>Medications</span></div>
+            <div style={styles.statBox}><strong>{full_summary.lab_count ?? 'N/A'}</strong><span>Labs</span></div>
+            <div style={styles.statBox}><strong>{full_summary.vital_count ?? 'N/A'}</strong><span>Vitals</span></div>
+            <div style={styles.statBox}><strong>{full_summary.condition_count ?? 'N/A'}</strong><span>Conditions</span></div>
+            <div style={styles.statBox}><strong>{full_summary.medication_count ?? 'N/A'}</strong><span>Medications</span></div>
           </div>
 
           {full_summary.abnormal_labs && full_summary.abnormal_labs.length > 0 && (
@@ -264,6 +277,7 @@ const styles = {
   content: { maxWidth: '1200px', margin: '0 auto', padding: '24px' },
   section: { backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', padding: '24px', marginBottom: '24px' },
   sectionTitle: { fontSize: '22px', fontWeight: 'bold', color: '#1f2937', margin: 0 },
+  dataWarningBox: { backgroundColor: '#fef2f2', border: '2px solid #ef4444', borderRadius: '8px', padding: '16px', marginBottom: '20px', color: '#7f1d1d' },
   statsRow: { display: 'flex', gap: '16px', margin: '16px 0' },
   statBox: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 20px', backgroundColor: '#f9fafb', borderRadius: '6px', minWidth: '80px' },
   timeframeHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' },

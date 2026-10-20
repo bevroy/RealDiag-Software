@@ -1,29 +1,60 @@
 tree_id: GI-BILIARY-COLIC
 name: Biliary Colic
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K80.20
-snomed: 26329005
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K80.20
+  snomed:
+    - '26329005'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: Tokyo Guidelines 2018, SAGES Guidelines on Gallstone Disease
+    origin: trace.source
 presentations:
-  - "Sudden onset severe right upper quadrant (RUQ) or epigastric pain"
-  - "RUQ pain after fatty meals"
-  - "Severe RUQ pain or epigastric pain"
-  - "Pain typically lasts 30 minutes to 6 hours"
-  - "Pain often triggered by fatty meals"
-  - "Steady, constant pain (not truly colicky despite name)"
-  - "Radiation to right shoulder or scapula"
-  - "Nausea and vomiting common"
-  - "Nausea"
-  - "Pain resolves completely between episodes"
-  - "No fever (distinguishes from cholecystitis)"
-  - "Normal laboratory values (no inflammation)"
+  - Sudden onset severe right upper quadrant (RUQ) or epigastric pain
+  - RUQ pain after fatty meals
+  - Severe RUQ pain or epigastric pain
+  - Pain typically lasts 30 minutes to 6 hours
+  - Pain often triggered by fatty meals
+  - Steady, constant pain (not truly colicky despite name)
+  - Radiation to right shoulder or scapula
+  - Nausea and vomiting common
+  - Nausea
+  - Pain resolves completely between episodes
+  - No fever (distinguishes from cholecystitis)
+  - Normal laboratory values (no inflammation)
+differentials:
+  - Acute cholecystitis (fever, persistent pain >6 hours, positive Murphy's sign, WBC elevation)
+  - Choledocholithiasis (jaundice, elevated bilirubin and liver enzymes)
+  - Acute pancreatitis (elevated lipase >3x normal, epigastric pain radiating to back)
+  - Peptic ulcer disease (epigastric pain, relation to meals, response to antacids)
+  - Gastroesophageal reflux disease (burning epigastric pain, worse when supine)
+  - Hepatitis (elevated transaminases, malaise, jaundice)
+  - Right-sided renal colic (flank pain, hematuria, colicky pain)
+  - Cardiac ischemia (especially inferior MI) - always consider in older patients
 workup:
   - Right upper quadrant ultrasound (first-line imaging)
   - Identifies gallstones, gallbladder wall thickness, pericholecystic fluid
   - Normal gallbladder wall (<3 mm) and no pericholecystic fluid (not cholecystitis)
-  - Laboratory tests: CBC, CMP, liver enzymes, lipase, bilirubin
+  - 'Laboratory tests: CBC, CMP, liver enzymes, lipase, bilirubin'
   - Normal WBC count and liver enzymes (if elevated, consider cholecystitis or choledocholithiasis)
   - HIDA scan if diagnosis unclear and ultrasound non-diagnostic
   - Consider EGD if symptoms atypical or to rule out peptic ulcer disease
@@ -40,33 +71,36 @@ treatment:
   - Conservative management acceptable if patient refuses surgery or high surgical risk
   - Ursodeoxycholic acid (UDCA) 8-10 mg/kg/day may dissolve small cholesterol stones (limited efficacy)
 clinical_pearls:
-  - "Despite name, pain is constant and steady, not colicky"
-  - "Duration <30 minutes or >6 hours suggests alternative diagnosis"
-  - "Murphy's sign absent in biliary colic (present in cholecystitis)"
-  - "Risk factors: female, forty, fertile, fat, fair (5 F's) - but can occur in anyone"
-  - "10-25% of adults have gallstones, but only 20% become symptomatic"
-  - "Recurrent episodes common - 70% have repeat symptoms within 2 years"
-  - "Elective cholecystectomy safer than waiting for complications"
-  - "Complications include acute cholecystitis (10-20%), pancreatitis (3-7%), choledocholithiasis"
+  - Despite name, pain is constant and steady, not colicky
+  - Duration <30 minutes or >6 hours suggests alternative diagnosis
+  - Murphy's sign absent in biliary colic (present in cholecystitis)
+  - 'Risk factors: female, forty, fertile, fat, fair (5 F''s) - but can occur in anyone'
+  - 10-25% of adults have gallstones, but only 20% become symptomatic
+  - Recurrent episodes common - 70% have repeat symptoms within 2 years
+  - Elective cholecystectomy safer than waiting for complications
+  - Complications include acute cholecystitis (10-20%), pancreatitis (3-7%), choledocholithiasis
+red_flags: []
+disposition_guidance: {}
 referrals:
   - General Surgery for laparoscopic cholecystectomy
   - Gastroenterology if ERCP needed for suspected choledocholithiasis
   - Consider surgical referral after first episode of symptomatic biliary colic
-differentials:
-  - Acute cholecystitis (fever, persistent pain >6 hours, positive Murphy's sign, WBC elevation)
-  - Choledocholithiasis (jaundice, elevated bilirubin and liver enzymes)
-  - Acute pancreatitis (elevated lipase >3x normal, epigastric pain radiating to back)
-  - Peptic ulcer disease (epigastric pain, relation to meals, response to antacids)
-  - Gastroesophageal reflux disease (burning epigastric pain, worse when supine)
-  - Hepatitis (elevated transaminases, malaise, jaundice)
-  - Right-sided renal colic (flank pain, hematuria, colicky pain)
-  - Cardiac ischemia (especially inferior MI) - always consider in older patients
-trace:
-  source: Tokyo Guidelines 2018, SAGES Guidelines on Gallstone Disease
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

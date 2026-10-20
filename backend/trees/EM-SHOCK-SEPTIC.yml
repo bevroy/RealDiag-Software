@@ -1,53 +1,65 @@
 tree_id: EM-SHOCK-SEPTIC
 name: Septic Shock
+version: '1.0'
+status: draft
 family: Emergency Medicine
 specialty: Emergency Medicine
-icd10:
-- R65.21
-- A41.9
-snomed:
-- '76571007'
-urgency: medium
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Septic Shock
-version: '1.0'
-citations:
-  - ACEP (American College of Emergency Physicians) Clinical Policies
-  - Resuscitation Council Guidelines
-  - UpToDate - Emergency Medicine and Critical Care
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R65.21
+    - A41.9
+  snomed:
+    - '76571007'
+  icpc2: []
+sources:
+  - text: ACEP (American College of Emergency Physicians) Clinical Policies
+    origin: citations
+  - text: Resuscitation Council Guidelines
+    origin: citations
+  - text: UpToDate - Emergency Medicine and Critical Care
+    origin: citations
+  - text: American College of Emergency Physicians (ACEP) Clinical Policies, Emergency Medicine Practice Guidelines
+    origin: trace.source
 presentations:
-- Hypotension (SBP <90 or MAP <65) requiring vasopressors despite fluids
-- Serum lactate >2 mmol/L (indicates tissue hypoperfusion)
-- Fever (>38.3°C) or hypothermia (<36°C)
-- Tachycardia, tachypnea, altered mental status
-- Warm, flushed skin initially (distributive shock) → later cool, mottled
-- Suspected or confirmed infection source
-- Meets sepsis criteria (infection + organ dysfunction, SOFA ≥2)
-- 'High mortality: 40% even with treatment'
+  - Hypotension (SBP <90 or MAP <65) requiring vasopressors despite fluids
+  - Serum lactate >2 mmol/L (indicates tissue hypoperfusion)
+  - Fever (>38.3°C) or hypothermia (<36°C)
+  - Tachycardia, tachypnea, altered mental status
+  - Warm, flushed skin initially (distributive shock) → later cool, mottled
+  - Suspected or confirmed infection source
+  - Meets sepsis criteria (infection + organ dysfunction, SOFA ≥2)
+  - 'High mortality: 40% even with treatment'
+differentials:
+  - Hypovolemic shock
+  - Cardiogenic shock
+  - Anaphylactic shock
+  - Adrenal crisis
 workup: []
 treatment:
-- 'Guideline-based treatment options for Septic Shock include:'
-- 'Immediate: IV access, blood cultures ×2 (before antibiotics), lactate, broad-spectrum
-  antibiotics (ACEP 2023)'
-- 'Fluid resuscitation: 30 mL/kg crystalloid, reassess after each bolus (lung sounds,
-  JVP, lactate) (ACEP 2023)'
-- 'Vasopressors: Norepinephrine via central line if MAP <65 despite fluids (can start
-  peripherally if needed) (ACEP 2023)'
-- 'Source control: CT imaging to identify abscess/infection, urgent surgery/IR consult
-  if needed (ACEP 2023)'
-- 'Disposition: ICU admission for all septic shock patients, continuous hemodynamic
-  monitoring (ACEP 2023)'
+  - 'Guideline-based treatment options for Septic Shock include:'
+  - 'Immediate: IV access, blood cultures ×2 (before antibiotics), lactate, broad-spectrum antibiotics (ACEP 2023)'
+  - 'Fluid resuscitation: 30 mL/kg crystalloid, reassess after each bolus (lung sounds, JVP, lactate) (ACEP 2023)'
+  - 'Vasopressors: Norepinephrine via central line if MAP <65 despite fluids (can start peripherally if needed) (ACEP 2023)'
+  - 'Source control: CT imaging to identify abscess/infection, urgent surgery/IR consult if needed (ACEP 2023)'
+  - 'Disposition: ICU admission for all septic shock patients, continuous hemodynamic monitoring (ACEP 2023)'
 clinical_pearls:
-- 'Surviving Sepsis 1-hour bundle: (1) Lactate, (2) Cultures, (3) Antibiotics, (4)
-  30 mL/kg fluids, (5) Vasopressors'
-- 'Broad-spectrum empiric antibiotics within 1 hour: Vancomycin + pip-tazo or carbapenem'
-- 'Fluid resuscitation: 30 mL/kg crystalloid bolus (e.g., 2L for 70kg) in first 3
-  hours'
-- 'Norepinephrine first-line vasopressor: Target MAP ≥65 mmHg'
-- 'Source control critical: Drain abscesses, remove infected devices, debride necrotic
-  tissue'
-- 'Early ICU involvement: Most require central line, arterial line, mechanical ventilation'
+  - 'Surviving Sepsis 1-hour bundle: (1) Lactate, (2) Cultures, (3) Antibiotics, (4) 30 mL/kg fluids, (5) Vasopressors'
+  - 'Broad-spectrum empiric antibiotics within 1 hour: Vancomycin + pip-tazo or carbapenem'
+  - 'Fluid resuscitation: 30 mL/kg crystalloid bolus (e.g., 2L for 70kg) in first 3 hours'
+  - 'Norepinephrine first-line vasopressor: Target MAP ≥65 mmHg'
+  - 'Source control critical: Drain abscesses, remove infected devices, debride necrotic tissue'
+  - 'Early ICU involvement: Most require central line, arterial line, mechanical ventilation'
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -65,13 +77,23 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-differentials:
-  - Hypovolemic shock
-  - Cardiogenic shock
-  - Anaphylactic shock
-  - Adrenal crisis
-trace:
-  source: American College of Emergency Physicians (ACEP) Clinical Policies, Emergency
-    Medicine Practice Guidelines
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

@@ -3,6 +3,8 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
+import { parseEvaluationResponse } from '../../utils/evaluationResponse';
+import { ClinicalReviewNotice } from '../../components/ClinicalReview';
 
 /**
  * SmartLaunch Component
@@ -39,6 +41,8 @@ function SmartLaunch() {
   const [error, setError] = useState(null);
   const [patientData, setPatientData] = useState(null);
   const [evaluations, setEvaluations] = useState([]);
+  const [dataWarnings, setDataWarnings] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
 
   useEffect(() => {
     const patientId = searchParams.get('patient_id');
@@ -91,8 +95,10 @@ function SmartLaunch() {
         throw new Error('Failed to evaluate patient');
       }
 
-      const evals = await evalResponse.json();
-      setEvaluations(evals);
+      const parsed = parseEvaluationResponse(await evalResponse.json());
+      setEvaluations(parsed.evaluations);
+      setDataWarnings([...parsed.dataWarnings, ...parsed.assessmentWarnings]);
+      setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
 
     } catch (err) {
@@ -140,13 +146,29 @@ function SmartLaunch() {
 
       {/* Diagnostic Evaluations */}
       <div style={styles.content}>
+        {dataWarnings.length > 0 && (
+          <div style={styles.dataWarningBox} role="alert">
+            <strong>⚠️ Incomplete chart data</strong>
+            <ul style={{ margin: '8px 0 0', paddingLeft: '20px' }}>
+              {dataWarnings.map((warning, idx) => <li key={idx}>{warning}</li>)}
+            </ul>
+          </div>
+        )}
+
         <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
+        <ClinicalReviewNotice notice={reviewNotice} />
 
         {evaluations.length === 0 ? (
-          <div style={styles.noResults}>
-            <p>✓ No significant diagnostic concerns identified.</p>
-            <p style={styles.subtext}>Patient data reviewed. All values within normal ranges.</p>
-          </div>
+          dataWarnings.length > 0 ? (
+            <div style={styles.dataWarningBox}>
+              <p>No diagnostic concerns were flagged, but the chart data is incomplete; this is not a complete review.</p>
+            </div>
+          ) : (
+            <div style={styles.noResults}>
+              <p>✓ No significant diagnostic concerns identified.</p>
+              <p style={styles.subtext}>All retrieved chart data was reviewed.</p>
+            </div>
+          )
         ) : (
           <div style={styles.evaluationsList}>
             {evaluations.map((evaluation, idx) => (
@@ -171,7 +193,7 @@ function PatientBanner({ patient }) {
       <div style={styles.bannerLeft}>
         <strong style={styles.patientName}>{patient.name}</strong>
         <span style={styles.patientInfo}>
-          {patient.age} yo {patient.gender}
+          {patient.age != null ? `${patient.age} yo` : 'Age unknown'} {patient.gender}
         </span>
         {patient.date_of_birth && (
           <span style={styles.patientInfo}>DOB: {patient.date_of_birth}</span>
@@ -180,8 +202,14 @@ function PatientBanner({ patient }) {
       <div style={styles.bannerRight}>
         <span style={styles.mrn}>MRN: {patient.patient_id}</span>
         <span style={styles.stats}>
-          {patient.lab_count} labs • {patient.vital_count} vitals
+          {patient.lab_count ?? 'N/A'} labs • {patient.vital_count ?? 'N/A'} vitals
         </span>
+        <a
+          href={`/encounter?patient_id=${patient.patient_id}`}
+          style={{ fontSize: '13px', color: 'white', textDecoration: 'underline' }}
+        >
+          Open Encounter Assessment →
+        </a>
         <a
           href={`/handoff?patient_id=${patient.patient_id}`}
           style={{ fontSize: '13px', color: 'white', textDecoration: 'underline' }}
@@ -229,7 +257,24 @@ function DiagnosticCard({ evaluation }) {
           </span>
           <div>
             <h3 style={styles.diagnosisLabel}>{evaluation.diagnosis_label}</h3>
-            <p style={styles.diagnosisFamily}>{evaluation.diagnosis_family}</p>
+            <p style={styles.diagnosisFamily}>{evaluation.family}</p>
+            {evaluation.evaluation_status && evaluation.evaluation_status !== 'evaluated' && (
+              <p style={styles.statusText}>
+                {evaluation.evaluation_status.toUpperCase()}
+                {evaluation.status_reason && ` — ${evaluation.status_reason}`}
+              </p>
+            )}
+            {evaluation.known_condition && (
+              <p style={styles.statusText}>
+                KNOWN CONDITION{evaluation.known_condition_text ? `: ${evaluation.known_condition_text}` : ''}
+              </p>
+            )}
+            {evaluation.finding === 'possible' && (
+              <p style={styles.statusText}>POSSIBLE - NEEDS CONFIRMATION</p>
+            )}
+            {evaluation.review_status_label && (
+              <p style={styles.statusText}>{evaluation.review_status_label}</p>
+            )}
           </div>
         </div>
         <div style={styles.cardHeaderRight}>
@@ -464,6 +509,8 @@ const styles = {
     color: '#1f2937',
     marginBottom: '24px',
   },
+  dataWarningBox: { backgroundColor: '#fef2f2', border: '2px solid #ef4444', borderRadius: '8px', padding: '16px', marginBottom: '20px', color: '#7f1d1d' },
+  statusText: { margin: '4px 0 0', fontSize: '12px', fontWeight: 600, color: '#92400e' },
   noResults: {
     backgroundColor: 'white',
     padding: '40px',

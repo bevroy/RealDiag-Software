@@ -17,6 +17,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 
 
+from backend.services.clinical_review import review_notice, tree_review_fields
+
 class PDFReportGenerator:
     """Generate PDF reports for diagnostic results."""
     
@@ -63,6 +65,24 @@ class PDFReportGenerator:
             backColor=HexColor('#fef3c7')
         ))
     
+    def _add_review_notice(self, story: List[Any]) -> None:
+        """Clinical review notice while content is unreviewed."""
+        notice = review_notice()
+        if notice:
+            story.append(Paragraph(f"<b>Under clinical review.</b> {notice}", self.styles['Normal']))
+            story.append(Spacer(1, 0.15*inch))
+
+    def _add_status_line(self, story: List[Any], diagnosis: Dict[str, Any]) -> None:
+        """Per-diagnosis review status (and can't-miss label) when known."""
+        fields = diagnosis if diagnosis.get('review_status_label') else tree_review_fields(
+            str(diagnosis.get('rule_id') or diagnosis.get('id') or diagnosis.get('tree_id') or ''))
+        label = fields.get('review_status_label')
+        if label:
+            story.append(Paragraph(f"<i>Review status:</i> {label}", self.styles['Normal']))
+        if diagnosis.get('cant_miss'):
+            story.append(Paragraph(f"<b>{diagnosis.get('cant_miss_label') or 'Can' + chr(39) + 't-miss condition'}</b>",
+                                   self.styles['Normal']))
+
     def generate_diagnosis_report(
         self,
         diagnosis: Dict[str, Any],
@@ -94,6 +114,7 @@ class PDFReportGenerator:
         report_date = datetime.now().strftime("%B %d, %Y at %I:%M %p")
         story.append(Paragraph(f"<b>Report Generated:</b> {report_date}", self.styles['Normal']))
         story.append(Spacer(1, 0.1*inch))
+        self._add_review_notice(story)
         
         # Patient information (if provided)
         if patient_info:
@@ -125,6 +146,7 @@ class PDFReportGenerator:
         story.append(Paragraph("Diagnosis", self.styles['SectionHeader']))
         story.append(Paragraph(f"<b>{diagnosis.get('label', 'Unknown')}</b>", self.styles['Heading3']))
         story.append(Paragraph(f"<i>Family:</i> {diagnosis.get('family', 'N/A').title()}", self.styles['Normal']))
+        self._add_status_line(story, diagnosis)
         story.append(Spacer(1, 0.1*inch))
         
         # ICD-10 and SNOMED codes
@@ -231,6 +253,7 @@ class PDFReportGenerator:
         report_date = datetime.now().strftime("%B %d, %Y at %I:%M %p")
         story.append(Paragraph(f"<b>Report Generated:</b> {report_date}", self.styles['Normal']))
         story.append(Spacer(1, 0.1*inch))
+        self._add_review_notice(story)
         
         # Patient information
         if patient_info:
@@ -293,6 +316,7 @@ class PDFReportGenerator:
         for idx, dx in enumerate(diagnoses[:3], 1):
             story.append(Paragraph(f"{idx}. {dx.get('label', 'Unknown')}", self.styles['Heading3']))
             story.append(Paragraph(f"Match Score: {dx.get('match_score', 0):.1f}/10", self.styles['Normal']))
+            self._add_status_line(story, dx)
             
             # Clinical pearls
             if dx.get('clinical_pearls'):

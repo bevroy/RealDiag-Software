@@ -1,11 +1,33 @@
 tree_id: PULM-CHRONIC-COUGH
 name: Chronic Cough
+version: '1.0'
+status: draft
 family: pulmonology
 specialty: Pulmonology
-icd10: R05.3
-snomed: 68154008
+secondary_specialties: []
 urgency: routine
-homeopathy: []
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R05.3
+  snomed:
+    - '68154008'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: CHEST Expert Panel Report on Chronic Cough 2018
+    origin: trace.source
 presentations:
   - Cough lasting >8 weeks (definition of chronic cough)
   - Dry or productive cough
@@ -17,6 +39,19 @@ presentations:
   - Cough triggered by talking, laughing, exercise, cold air
   - Otherwise healthy patient (no fever, weight loss, dyspnea at rest)
   - May significantly impact quality of life
+differentials:
+  - Upper airway cough syndrome (postnasal drip syndrome)
+  - Asthma or cough-variant asthma
+  - Gastroesophageal reflux disease (GERD)
+  - ACE inhibitor-induced cough
+  - Chronic bronchitis (smoking history)
+  - Eosinophilic bronchitis
+  - Bronchiectasis
+  - Interstitial lung disease
+  - Lung cancer (especially if smoker, weight loss, hemoptysis)
+  - Post-infectious cough (usually resolves in 8 weeks)
+  - Laryngeal hypersensitivity syndrome
+  - Psychogenic or habit cough
 workup:
   - Detailed history - duration, character, triggers, associated symptoms
   - Medication review - ACE inhibitors most common drug cause (10-20% of patients)
@@ -50,7 +85,7 @@ treatment:
   - May need high-dose ICS or add LABA if no response
   - GERD-related cough
   - PPI (omeprazole 40mg BID or equivalent) for 2-3 months
-  - Lifestyle modifications - elevate head of bed, avoid late meals, weight loss
+  - 'Patient advice: Lifestyle modifications - elevate head of bed, avoid late meals, weight loss'
   - H2 blocker addition if partial response
   - If refractory to above, consider
   - Gabapentin 300-1800mg daily for neuropathic/hypersensitivity cough
@@ -68,31 +103,29 @@ clinical_pearls:
   - Sequential empiric trials last 2-3 months each before moving to next cause
   - Combination therapy often needed (treat all contributing factors)
   - Psychogenic cough rare - diagnosis of exclusion after thorough workup
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pulmonology for refractory cough despite treatment trials or abnormal imaging
   - ENT for chronic rhinosinusitis, laryngoscopy evaluation
   - Gastroenterology for refractory GERD or need for pH monitoring
   - Speech therapy for paradoxical vocal cord motion or habit cough
   - Allergy/immunology if allergic component suspected
-differentials:
-  - Upper airway cough syndrome (postnasal drip syndrome)
-  - Asthma or cough-variant asthma
-  - Gastroesophageal reflux disease (GERD)
-  - ACE inhibitor-induced cough
-  - Chronic bronchitis (smoking history)
-  - Eosinophilic bronchitis
-  - Bronchiectasis
-  - Interstitial lung disease
-  - Lung cancer (especially if smoker, weight loss, hemoptysis)
-  - Post-infectious cough (usually resolves in 8 weeks)
-  - Laryngeal hypersensitivity syndrome
-  - Psychogenic or habit cough
-trace:
-  source: CHEST Expert Panel Report on Chronic Cough 2018
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

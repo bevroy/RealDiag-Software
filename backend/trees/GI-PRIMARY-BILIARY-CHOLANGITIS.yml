@@ -1,11 +1,32 @@
 tree_id: GI-PRIMARY-BILIARY-CHOLANGITIS
 name: Primary Biliary Cholangitis (PBC)
+version: '1.0'
+status: draft
 family: gastroenterology
-specialty: Gastroenterology/Hepatology
+specialty: Gastroenterology
+secondary_specialties:
+  - Hepatology
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Often asymptomatic or fatigue, pruritus
 description: Chronic autoimmune cholestatic liver disease causing destruction of small intrahepatic bile ducts
-icd10: K74.3
-snomed: 31712002
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K74.3
+  snomed:
+    - '31712002'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
 presentations:
   - Pruritus (often first symptom)
   - Fatigue
@@ -13,22 +34,14 @@ presentations:
   - Xanthomas, xanthelasmas
   - Hepatomegaly
   - Associated autoimmune diseases
-urgency: routine
-referrals:
-  emergency:
-    - GI bleeding with instability
-    - Acute liver failure
-    - Perforated viscus
-    - Cholangitis
-  urgent:
-    - Suspected malignancy
-    - Severe IBD flare
-    - Persistent vomiting
-  routine:
-    - IBS management
-    - GERD treatment
-    - Screening colonoscopy
-
+differentials:
+  - Primary sclerosing cholangitis (PSC) - associated with IBD, AMA negative, bile duct strictures on MRCP
+  - Secondary biliary cirrhosis (bile duct obstruction) - imaging shows dilated ducts, stone or stricture
+  - Autoimmune hepatitis (AIH) - elevated transaminases greater than ALP, ANA/ASMA positive, interface hepatitis on biopsy
+  - AIH-PBC overlap syndrome (8-10% of cases) - features of both diseases
+  - Drug-induced cholestasis (phenytoin, chlorpromazine) - temporal relationship, resolves off drug
+  - Sarcoidosis (granulomas on biopsy, elevated ACE, hilar lymphadenopathy)
+  - Non-alcoholic fatty liver disease (metabolic syndrome, AMA negative)
 workup:
   - Clinical presentation - often detected on routine lab testing
   - Symptoms - fatigue (most common, 50-70%), pruritus (20-70%), jaundice (late finding)
@@ -101,14 +114,30 @@ clinical_pearls:
   - No correlation between severity of pruritus and severity of liver disease
   - Hepatocellular carcinoma risk 3-4x general population once cirrhosis develops
   - AMA-negative PBC (5% of cases) - same clinical picture and prognosis, requires biopsy for diagnosis
-differentials:
-  - Primary sclerosing cholangitis (PSC) - associated with IBD, AMA negative, bile duct strictures on MRCP
-  - Secondary biliary cirrhosis (bile duct obstruction) - imaging shows dilated ducts, stone or stricture
-  - Autoimmune hepatitis (AIH) - elevated transaminases greater than ALP, ANA/ASMA positive, interface hepatitis on biopsy
-  - AIH-PBC overlap syndrome (8-10% of cases) - features of both diseases
-  - Drug-induced cholestasis (phenytoin, chlorpromazine) - temporal relationship, resolves off drug
-  - Sarcoidosis (granulomas on biopsy, elevated ACE, hilar lymphadenopathy)
-  - Non-alcoholic fatty liver disease (metabolic syndrome, AMA negative)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - GI bleeding with instability
+    - Acute liver failure
+    - Perforated viscus
+    - Cholangitis
+  urgent:
+    - Suspected malignancy
+    - Severe IBD flare
+    - Persistent vomiting
+  routine:
+    - IBS management
+    - GERD treatment
+    - Screening colonoscopy
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 52-year-old woman presents to PCP with 6-month history of fatigue and generalized itching
   - Fatigue significant, affecting work performance, no improvement with sleep
@@ -160,8 +189,7 @@ trace:
   - Continue UDCA indefinitely
   - Annual monitoring of liver function, consider repeat imaging in 2-3 years
   - Outcome - Good response to UDCA, stable disease, improved quality of life
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template

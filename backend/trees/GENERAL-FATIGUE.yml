@@ -1,9 +1,32 @@
 tree_id: GENERAL-FATIGUE
 name: Fatigue Evaluation
+version: '1.0'
+status: draft
 family: general
-specialty: Internal Medicine/Primary Care
-icd10: R53.83
-snomed: 84229001
+specialty: Internal Medicine
+secondary_specialties:
+  - Primary Care
+urgency: routine
+urgency_explanation: ''
+chief_complaint: Fatigue
+description: Diagnostic decision tree for fatigue evaluation
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R53.83
+  snomed:
+    - '84229001'
+  icpc2: []
+sources:
+  - text: AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
+    origin: citations
+  - text: USPSTF (U.S. Preventive Services Task Force) Recommendations
+    origin: citations
+  - text: UpToDate - Primary Care Medicine
+    origin: citations
 presentations:
   - Persistent tiredness not relieved by rest
   - Reduced energy, stamina
@@ -11,36 +34,32 @@ presentations:
   - Sleep disturbance
   - Associated symptoms (fever, weight loss, pain)
   - Impact on daily activities
-chief_complaint: Fatigue
-description: Diagnostic decision tree for fatigue evaluation
-version: "1.0"
 differentials:
   - Anemia
   - Hypothyroidism
   - Depression
   - Sleep apnea
   - Chronic fatigue syndrome
-citations:
-  - AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
-  - USPSTF (U.S. Preventive Services Task Force) Recommendations
-  - UpToDate - Primary Care Medicine
-author: RealDiag Team
-
+workup: []
 treatment:
-  - 'Identify underlying cause - anemia, hypothyroidism, depression, sleep apnea, CKD, medications, chronic disease'
+  - Identify underlying cause - anemia, hypothyroidism, depression, sleep apnea, CKD, medications, chronic disease
   - 'Treat specific conditions: Levothyroxine for hypothyroidism, iron for deficiency, CPAP for sleep apnea, antidepressants for depression'
-  - 'Sleep hygiene - regular schedule, 7-9 hours nightly, treat insomnia'
-  - 'Graded exercise therapy - start low (10-15 min), gradually increase'
-  - 'Cognitive behavioral therapy for chronic fatigue'
-  - 'Avoid overexertion - pacing strategies, energy conservation'
-  - 'Review medications - sedating drugs, beta-blockers, opioids can worsen fatigue'
-  - 'Stimulants rarely indicated - modafinil for narcolepsy, shift work'
+  - Sleep hygiene - regular schedule, 7-9 hours nightly, treat insomnia
+  - 'Patient advice: Graded exercise therapy - start low (10-15 min), gradually increase'
+  - Cognitive behavioral therapy for chronic fatigue
+  - Avoid overexertion - pacing strategies, energy conservation
+  - Review medications - sedating drugs, beta-blockers, opioids can worsen fatigue
+  - Stimulants rarely indicated - modafinil for narcolepsy, shift work
   - 'Rule out: Chronic infections (HIV, hepatitis), malignancy, rheumatologic disease'
-  - 'Nutritional deficiencies - B12, vitamin D, iron'
+  - Nutritional deficiencies - B12, vitamin D, iron
   - 'ME/CFS (myalgic encephalomyelitis): Supportive care, pacing, avoid push-crash cycle'
-
-entry_point: duration
-
+clinical_pearls:
+  - Fatigue is symptom, not diagnosis; search for underlying cause
+  - 'Most common causes: anemia, hypothyroidism, depression, sleep disorders'
+  - 'Red flags: weight loss, fever, night sweats suggest serious pathology'
+  - Chronic fatigue syndrome is diagnosis of exclusion
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -58,36 +77,33 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-
-clinical_pearls:
-  - Fatigue is symptom, not diagnosis; search for underlying cause
-  - Most common causes: anemia, hypothyroidism, depression, sleep disorders
-  - Red flags: weight loss, fever, night sweats suggest serious pathology
-  - Chronic fatigue syndrome is diagnosis of exclusion
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: duration
 nodes:
   - id: duration
     type: question
-    text: "Duration of fatigue?"
+    text: Duration of fatigue?
     options:
-      - label: "Acute (<1 month)"
+      - label: Acute (<1 month)
         next: acute_fatigue
-      - label: "Chronic (≥1 month)"
+      - label: Chronic (≥1 month)
         next: chronic_fatigue
-
   - id: acute_fatigue
     type: question
-    text: "Associated symptoms?"
+    text: Associated symptoms?
     options:
-      - label: "Fever, URI symptoms"
+      - label: Fever, URI symptoms
         next: viral_illness
-      - label: "Dyspnea, chest pain"
+      - label: Dyspnea, chest pain
         next: cardiac_eval
-      - label: "Recent medication change"
+      - label: Recent medication change
         next: medication_fatigue
-      - label: "Insomnia, poor sleep"
+      - label: Insomnia, poor sleep
         next: sleep_deprivation
-
   - id: viral_illness
     type: diagnosis
     diagnosis: Acute Viral Illness
@@ -103,7 +119,6 @@ nodes:
       - Hydration
       - NSAIDs for fever
       - Expect resolution in 1-2 weeks
-
   - id: cardiac_eval
     type: diagnosis
     diagnosis: Cardiac Evaluation Required
@@ -119,7 +134,6 @@ nodes:
       - Rule out ACS, heart failure
       - Cardiology referral if abnormal
       - Treat underlying condition
-
   - id: medication_fatigue
     type: diagnosis
     diagnosis: Medication-Induced Fatigue
@@ -133,7 +147,6 @@ nodes:
       - Consider alternative medication
       - May improve over time
       - Discontinue if possible
-
   - id: sleep_deprivation
     type: diagnosis
     diagnosis: Sleep Deprivation
@@ -147,33 +160,30 @@ nodes:
       - Treat underlying cause
       - Cognitive behavioral therapy
       - Address insomnia
-
   - id: chronic_fatigue
     type: question
-    text: "Pattern of fatigue?"
+    text: Pattern of fatigue?
     options:
-      - label: "Progressive weakness, muscle fatigue"
+      - label: Progressive weakness, muscle fatigue
         next: neuromuscular_eval
-      - label: "Unrefreshing sleep, post-exertional malaise"
+      - label: Unrefreshing sleep, post-exertional malaise
         next: chronic_fatigue_syndrome
-      - label: "Mood symptoms (depression, anhedonia)"
+      - label: Mood symptoms (depression, anhedonia)
         next: depression_eval
-      - label: "Weight changes, temperature intolerance"
+      - label: Weight changes, temperature intolerance
         next: endocrine_eval
-      - label: "Shortness of breath, pallor"
+      - label: Shortness of breath, pallor
         next: anemia_eval
-
   - id: neuromuscular_eval
     type: question
-    text: "Neurological findings?"
+    text: Neurological findings?
     options:
-      - label: "Proximal muscle weakness"
+      - label: Proximal muscle weakness
         next: myopathy
-      - label: "Ascending weakness, absent reflexes"
+      - label: Ascending weakness, absent reflexes
         next: guillain_barre
-      - label: "Fluctuating weakness, ptosis, diplopia"
+      - label: Fluctuating weakness, ptosis, diplopia
         next: myasthenia_gravis
-
   - id: myopathy
     type: diagnosis
     diagnosis: Myopathy
@@ -191,7 +201,6 @@ nodes:
       - Treat underlying cause
       - Neurology referral
       - Physical therapy
-
   - id: guillain_barre
     type: diagnosis
     diagnosis: Guillain-Barré Syndrome
@@ -207,7 +216,6 @@ nodes:
       - Monitor respiratory function
       - Neurology consult
       - ICU if respiratory compromise
-
   - id: myasthenia_gravis
     type: diagnosis
     diagnosis: Myasthenia Gravis
@@ -224,7 +232,6 @@ nodes:
       - Immunosuppression (prednisone, azathioprine)
       - Neurology referral
       - Thymectomy if thymoma
-
   - id: chronic_fatigue_syndrome
     type: diagnosis
     diagnosis: Chronic Fatigue Syndrome (ME/CFS)
@@ -243,7 +250,6 @@ nodes:
       - Treat symptoms (pain, sleep)
       - Multidisciplinary approach
       - No cure, focus on function
-
   - id: depression_eval
     type: diagnosis
     diagnosis: Major Depressive Disorder
@@ -260,20 +266,18 @@ nodes:
       - Sleep hygiene
       - Psychiatry referral if severe
       - Monitor for response in 4-6 weeks
-
   - id: endocrine_eval
     type: question
-    text: "Endocrine symptoms?"
+    text: Endocrine symptoms?
     options:
-      - label: "Weight gain, cold intolerance, constipation"
+      - label: Weight gain, cold intolerance, constipation
         next: hypothyroidism
-      - label: "Weight loss, heat intolerance, tremor"
+      - label: Weight loss, heat intolerance, tremor
         next: hyperthyroidism
-      - label: "Polyuria, polydipsia"
+      - label: Polyuria, polydipsia
         next: diabetes
-      - label: "Hyperpigmentation, hypotension, salt craving"
+      - label: Hyperpigmentation, hypotension, salt craving
         next: adrenal_insufficiency
-
   - id: hypothyroidism
     type: diagnosis
     diagnosis: Hypothyroidism
@@ -288,7 +292,6 @@ nodes:
       - Recheck TSH in 6-8 weeks
       - Titrate to goal TSH 0.5-2.5
       - Lifelong therapy
-
   - id: hyperthyroidism
     type: diagnosis
     diagnosis: Hyperthyroidism
@@ -304,7 +307,6 @@ nodes:
       - Beta-blocker for symptoms
       - Endocrinology referral
       - Consider radioactive iodine or surgery
-
   - id: diabetes
     type: diagnosis
     diagnosis: Diabetes Mellitus
@@ -321,7 +323,6 @@ nodes:
       - Glucose monitoring
       - Diabetes education
       - Target HbA1c <7%
-
   - id: adrenal_insufficiency
     type: diagnosis
     diagnosis: Adrenal Insufficiency
@@ -338,18 +339,16 @@ nodes:
       - Stress dose steroids when ill
       - Endocrinology referral
       - MedicAlert bracelet
-
   - id: anemia_eval
     type: question
-    text: "Anemia type?"
+    text: Anemia type?
     options:
-      - label: "Microcytic (MCV <80)"
+      - label: Microcytic (MCV <80)
         next: iron_deficiency
-      - label: "Macrocytic (MCV >100)"
+      - label: Macrocytic (MCV >100)
         next: b12_deficiency
-      - label: "Normocytic"
+      - label: Normocytic
         next: anemia_chronic_disease
-
   - id: iron_deficiency
     type: diagnosis
     diagnosis: Iron Deficiency Anemia
@@ -366,7 +365,6 @@ nodes:
       - Recheck CBC in 4-6 weeks
       - Treat underlying cause
       - Consider IV iron if intolerant
-
   - id: b12_deficiency
     type: diagnosis
     diagnosis: Vitamin B12 Deficiency
@@ -382,7 +380,6 @@ nodes:
       - Or high-dose oral 1000-2000mcg daily
       - Recheck CBC in 2-3 months
       - Lifelong if pernicious anemia
-
   - id: anemia_chronic_disease
     type: diagnosis
     diagnosis: Anemia of Chronic Disease
@@ -399,3 +396,16 @@ nodes:
       - EPO if renal disease
       - Transfusion if severe
       - Iron supplementation may not help
+criteria: []
+author: RealDiag Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

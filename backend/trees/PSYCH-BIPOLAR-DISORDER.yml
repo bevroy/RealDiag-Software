@@ -1,61 +1,87 @@
 tree_id: PSYCH-BIPOLAR-DISORDER
 name: Bipolar I Disorder
+version: '1.0'
+status: draft
 family: Psychiatry
 specialty: Psychiatry
-icd10:
-- F31.10
-- F31.31
-snomed:
-- '13746004'
-urgency: medium
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Bipolar I Disorder
-version: '1.0'
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F31.10
+    - F31.31
+  snomed:
+    - '13746004'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic Criteria
+    origin: trace.source
 presentations:
-- 'Manic episode: ≥1 week of elevated/expansive or irritable mood'
-- Inflated self-esteem or grandiosity, decreased need for sleep (3 hours feels sufficient)
-- More talkative than usual, pressured speech, flight of ideas
-- Distractibility, increased goal-directed activity, psychomotor agitation
-- Excessive involvement in pleasurable activities (spending sprees, sexual indiscretions,
-  risky investments)
-- Marked functional impairment, may require hospitalization
-- Depressive episodes also common (but not required for diagnosis)
-workup:
-- Mood Disorder Questionnaire (MDQ) for screening
-- 'Lithium level (if on lithium): Therapeutic 0.6-1.2 mEq/L'
-- TSH, Cr, CBC (baseline and monitor with mood stabilizers)
-- Urine drug screen (substance-induced mania)
-treatment:
-- 'Guideline-based treatment options for Bipolar I Disorder include:'
-- 'Acute mania: Atypical antipsychotic (olanzapine 10-20mg, risperidone 2-6mg, quetiapine
-  400-800mg) (APA 2022)'
-- 'Mood stabilizer: Lithium 300mg BID-TID (titrate to level 0.6-1.2), or valproate
-  500-1500mg/day (APA 2022)'
-- 'Depressive episode: Lamotrigine 200mg daily, or quetiapine, or add antidepressant
-  (with mood stabilizer) (APA 2022)'
-- 'Avoid: Antidepressants alone (risk mania), benzodiazepines long-term (APA 2022)'
-- 'Psychotherapy: CBT, family-focused therapy, psychoeducation (APA 2022)'
-clinical_pearls:
-- 'Bipolar I: At least one manic episode (depressive episodes common but not required)'
-- 'Bipolar II: Hypomanic episodes + major depressive episodes (no full mania)'
-- 'Mood stabilizers first-line: Lithium, valproate, lamotrigine, atypical antipsychotics'
-- 'Avoid antidepressants alone: Can trigger mania or rapid cycling'
-- 'Lithium levels: Therapeutic 0.6-1.2 mEq/L, check levels q3-6 months + TSH, Cr'
-referrals:
-- Psychiatry for all bipolar disorder
-- Hospitalization if manic with psychosis, danger to self/others, or severe impairment
+  - 'Manic episode: ≥1 week of elevated/expansive or irritable mood'
+  - Inflated self-esteem or grandiosity, decreased need for sleep (3 hours feels sufficient)
+  - More talkative than usual, pressured speech, flight of ideas
+  - Distractibility, increased goal-directed activity, psychomotor agitation
+  - Excessive involvement in pleasurable activities (spending sprees, sexual indiscretions, risky investments)
+  - Marked functional impairment, may require hospitalization
+  - Depressive episodes also common (but not required for diagnosis)
 differentials:
   - Major depression
   - Borderline personality disorder
   - Substance use
   - ADHD
-trace:
-  source: American Psychiatric Association (APA) Practice Guidelines, DSM-5-TR Diagnostic
-    Criteria
-  version: 0.1.0
-  last_updated: '2024-12-26'
+workup:
+  - Mood Disorder Questionnaire (MDQ) for screening
+  - 'Lithium level (if on lithium): Therapeutic 0.6-1.2 mEq/L'
+  - TSH, Cr, CBC (baseline and monitor with mood stabilizers)
+  - Urine drug screen (substance-induced mania)
+treatment:
+  - 'Guideline-based treatment options for Bipolar I Disorder include:'
+  - 'Acute mania: Atypical antipsychotic (olanzapine 10-20mg, risperidone 2-6mg, quetiapine 400-800mg) (APA 2022)'
+  - 'Mood stabilizer: Lithium 300mg BID-TID (titrate to level 0.6-1.2), or valproate 500-1500mg/day (APA 2022)'
+  - 'Depressive episode: Lamotrigine 200mg daily, or quetiapine, or add antidepressant (with mood stabilizer) (APA 2022)'
+  - 'Avoid: Antidepressants alone (risk mania), benzodiazepines long-term (APA 2022)'
+  - 'Psychotherapy: CBT, family-focused therapy, psychoeducation (APA 2022)'
+clinical_pearls:
+  - 'Bipolar I: At least one manic episode (depressive episodes common but not required)'
+  - 'Bipolar II: Hypomanic episodes + major depressive episodes (no full mania)'
+  - 'Mood stabilizers first-line: Lithium, valproate, lamotrigine, atypical antipsychotics'
+  - 'Avoid antidepressants alone: Can trigger mania or rapid cycling'
+  - 'Lithium levels: Therapeutic 0.6-1.2 mEq/L, check levels q3-6 months + TSH, Cr'
+red_flags: []
+disposition_guidance: {}
+referrals:
+  - Psychiatry for all bipolar disorder
+  - Hospitalization if manic with psychosis, danger to self/others, or severe impairment
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

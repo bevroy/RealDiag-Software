@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import { ClinicalReviewNotice } from "../../components/ClinicalReview";
 
 const FAMILIES = [
   { id: "neurology", label: "Neurology" },
@@ -22,6 +23,7 @@ export default function PrintableReferencePage() {
   const apiBase = useApiBase();
   const [grouped, setGrouped] = useState({});
   const [loading, setLoading] = useState(true);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [err, setErr] = useState("");
 
   useEffect(() => {
@@ -46,7 +48,9 @@ export default function PrintableReferencePage() {
                 icd10: r.icd10 || [],
                 snomed: r.snomed || [],
                 citations: r.citations || [],
+                review_status_label: r.review_status_label || null,
               })),
+              notice: data.clinical_review_notice,
             };
           })
         );
@@ -58,6 +62,8 @@ export default function PrintableReferencePage() {
             byFamily[block.family] = rows;
           }
           setGrouped(byFamily);
+          const withNotice = results.find((block) => block.notice !== undefined);
+          setReviewNotice(withNotice ? withNotice.notice : undefined);
         }
       } catch (e) {
         if (!cancelled) {
@@ -200,6 +206,7 @@ export default function PrintableReferencePage() {
           Neurology, Cardiology, and Endocrinology. For best results, select{" "}
           <strong>Landscape</strong> when printing and use a larger paper size (e.g., A4 or US Letter).
         </p>
+        <ClinicalReviewNotice notice={reviewNotice} />
 
         {err && (
           <div
@@ -253,6 +260,7 @@ export default function PrintableReferencePage() {
                         <td>
                           <div style={{ fontWeight: 600 }}>{r.label}</div>
                           <div className="small">{r.id}</div>
+                          {r.review_status_label && <div className="small"><em>{r.review_status_label}</em></div>}
                         </td>
                         <td>
                           {r.presentations.length ? (

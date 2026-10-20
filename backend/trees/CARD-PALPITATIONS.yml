@@ -1,18 +1,40 @@
 tree_id: CARD-PALPITATIONS
 name: Palpitations Evaluation
+version: '1.0'
+status: draft
 family: Cardiology
-specialty: Cardiology, Internal Medicine, Emergency Medicine
+specialty: Cardiology
+secondary_specialties:
+  - Internal Medicine
+  - Emergency Medicine
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
 description: Decision tree for evaluating palpitations and irregular heartbeat
-version: "1.0"
-icd10: R00.2
-snomed: 80313002
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - R00.2
+  snomed:
+    - '80313002'
+  icpc2: []
+sources:
+  - text: ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+    origin: citations
+  - text: ESC (European Society of Cardiology) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Cardiovascular Medicine
+    origin: citations
 presentations:
   - Sensation of rapid, irregular, or forceful heartbeat
   - Fluttering or pounding sensation in chest or neck
   - May be paroxysmal (sudden onset/offset) or sustained
   - Associated lightheadedness, dyspnea, or chest discomfort
   - Syncope or near-syncope with palpitations (concerning)
-  - Triggers: caffeine, alcohol, stress, exercise, or medications
+  - 'Triggers: caffeine, alcohol, stress, exercise, or medications'
 differentials:
   - Atrial fibrillation
   - SVT
@@ -20,8 +42,27 @@ differentials:
   - Anxiety
   - Hyperthyroidism
   - Anemia
-entry_point: initial_assessment
-
+workup:
+  - ECG (12-lead) - look for pre-excitation, prolonged QT, ischemia, arrhythmia
+  - Holter monitor (24-48 hour) or event recorder if ECG normal but symptoms persist
+  - Echocardiogram to assess structure and function
+  - 'Labs: CBC (anemia), TSH (hyperthyroid), BMP (electrolytes), troponin if chest pain'
+  - Exercise stress test if symptoms with exertion
+  - EP study if high-risk features or syncope with palpitations
+treatment:
+  - 'Benign: reassurance, reduce triggers (caffeine, stress, stimulants)'
+  - 'Symptomatic PVCs: beta-blockers (metoprolol 25-50mg BID)'
+  - 'SVT: vagal maneuvers, adenosine 6mg IV rapid push (then 12mg if needed)'
+  - 'Atrial fibrillation: rate control (metoprolol/diltiazem) + anticoagulation'
+  - 'VT: amiodarone load, consider cardioversion, cardiology consult'
+  - 'Frequent/symptomatic arrhythmias: consider EP study and ablation'
+clinical_pearls:
+  - Most palpitations are benign but patient anxiety is real
+  - Ask about caffeine, alcohol, medications, and supplements
+  - Palpitations with syncope or during exercise warrant urgent evaluation
+  - Ambulatory monitoring often needed as palpitations are intermittent
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Unstable arrhythmia
@@ -32,32 +73,20 @@ referrals:
   routine:
     - Benign palpitations workup
     - Asymptomatic palpitations
-workup:
-  - ECG (12-lead) - look for pre-excitation, prolonged QT, ischemia, arrhythmia
-  - Holter monitor (24-48 hour) or event recorder if ECG normal but symptoms persist
-  - Echocardiogram to assess structure and function
-  - Labs: CBC (anemia), TSH (hyperthyroid), BMP (electrolytes), troponin if chest pain
-  - Exercise stress test if symptoms with exertion
-  - EP study if high-risk features or syncope with palpitations
-
-treatment:
-  - Benign: reassurance, reduce triggers (caffeine, stress, stimulants)
-  - Symptomatic PVCs: beta-blockers (metoprolol 25-50mg BID)
-  - SVT: vagal maneuvers, adenosine 6mg IV rapid push (then 12mg if needed)
-  - Atrial fibrillation: rate control (metoprolol/diltiazem) + anticoagulation
-  - VT: amiodarone load, consider cardioversion, cardiology consult
-  - Frequent/symptomatic arrhythmias: consider EP study and ablation
-
-clinical_pearls:
-  - Most palpitations are benign but patient anxiety is real
-  - Ask about caffeine, alcohol, medications, and supplements
-  - Palpitations with syncope or during exercise warrant urgent evaluation
-  - Ambulatory monitoring often needed as palpitations are intermittent
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: initial_assessment
 nodes:
   initial_assessment:
     when:
-      symptoms_contains_any: ["palpitations", "racing heart", "irregular heartbeat", "heart flutter"]
+      symptoms_contains_any:
+        - palpitations
+        - racing heart
+        - irregular heartbeat
+        - heart flutter
     tests:
       - Vital signs (HR, BP, orthostatic vitals)
       - 12-lead ECG
@@ -69,30 +98,52 @@ nodes:
     referrals:
       - Cardiology if concerning features
     trace:
-      - "Palpitations evaluation - rhythm identification"
+      - Palpitations evaluation - rhythm identification
     next:
       - node: unstable_tachycardia
         if:
           any_of:
-            - red_flags_any: ["chest pain", "syncope", "hypotension", "altered mental status"]
-            - exam_flags_any: ["systolic BP < 90", "severe dyspnea", "heart failure"]
+            - red_flags_any:
+                - chest pain
+                - syncope
+                - hypotension
+                - altered mental status
+            - exam_flags_any:
+                - systolic BP < 90
+                - severe dyspnea
+                - heart failure
       - node: atrial_fibrillation
         if:
-          exam_flags_any: ["irregularly irregular rhythm", "absent P waves", "AFib on ECG"]
+          exam_flags_any:
+            - irregularly irregular rhythm
+            - absent P waves
+            - AFib on ECG
       - node: svt_evaluation
         if:
-          exam_flags_any: ["narrow complex tachycardia", "regular tachycardia", "HR > 150"]
+          exam_flags_any:
+            - narrow complex tachycardia
+            - regular tachycardia
+            - HR > 150
       - node: ventricular_arrhythmia
         if:
-          exam_flags_any: ["wide complex tachycardia", "polymorphic VT", "torsades"]
+          exam_flags_any:
+            - wide complex tachycardia
+            - polymorphic VT
+            - torsades
       - node: benign_palpitations
         default: true
-
   unstable_tachycardia:
     when:
       any_of:
-        - red_flags_any: ["chest pain", "syncope", "hypotension", "altered mental status", "severe dyspnea"]
-        - exam_flags_any: ["unstable", "hemodynamically compromised"]
+        - red_flags_any:
+            - chest pain
+            - syncope
+            - hypotension
+            - altered mental status
+            - severe dyspnea
+        - exam_flags_any:
+            - unstable
+            - hemodynamically compromised
     tests:
       - Continuous cardiac monitoring
       - IV access
@@ -109,12 +160,14 @@ nodes:
       - ICU admission
       - Consider electrical cardioversion
     trace:
-      - "Unstable tachycardia - immediate intervention"
+      - Unstable tachycardia - immediate intervention
     next: []
-
   atrial_fibrillation:
     when:
-      exam_flags_any: ["irregularly irregular", "AFib on ECG", "absent P waves"]
+      exam_flags_any:
+        - irregularly irregular
+        - AFib on ECG
+        - absent P waves
     tests:
       - TSH (thyroid)
       - Echocardiogram
@@ -130,18 +183,26 @@ nodes:
       - Rhythm control (cardioversion, antiarrhythmics)
       - Anticoagulation if CHADS2-VASc ≥ 2
     trace:
-      - "Atrial fibrillation identified - assess stroke risk"
+      - Atrial fibrillation identified - assess stroke risk
     next:
       - node: afib_with_rvr
         if:
-          exam_flags_any: ["HR > 110", "rapid ventricular response", "symptomatic"]
+          exam_flags_any:
+            - HR > 110
+            - rapid ventricular response
+            - symptomatic
       - node: chronic_afib_management
         if:
-          exam_flags_any: ["HR controlled", "asymptomatic", "chronic AFib"]
-
+          exam_flags_any:
+            - HR controlled
+            - asymptomatic
+            - chronic AFib
   afib_with_rvr:
     when:
-      exam_flags_any: ["AFib with RVR", "HR > 110", "symptomatic AFib"]
+      exam_flags_any:
+        - AFib with RVR
+        - HR > 110
+        - symptomatic AFib
     tests:
       - Rate control medications
       - Consider cardioversion if acute onset (< 48 hours)
@@ -154,12 +215,14 @@ nodes:
       - Admission if unstable or new-onset
       - EP study if refractory or considering ablation
     trace:
-      - "AFib with RVR - rate control vs cardioversion"
+      - AFib with RVR - rate control vs cardioversion
     next: []
-
   chronic_afib_management:
     when:
-      exam_flags_any: ["chronic AFib", "rate controlled", "asymptomatic"]
+      exam_flags_any:
+        - chronic AFib
+        - rate controlled
+        - asymptomatic
     tests:
       - CHADS2-VASc score
       - Anticoagulation (warfarin, DOACs)
@@ -171,12 +234,14 @@ nodes:
       - Cardiology for ongoing management
       - EP study if considering ablation
     trace:
-      - "Chronic AFib - anticoagulation and rate control"
+      - Chronic AFib - anticoagulation and rate control
     next: []
-
   svt_evaluation:
     when:
-      exam_flags_any: ["narrow complex tachycardia", "regular tachycardia", "HR 150-250"]
+      exam_flags_any:
+        - narrow complex tachycardia
+        - regular tachycardia
+        - HR 150-250
     tests:
       - 12-lead ECG during episode if possible
       - Vagal maneuvers (Valsalva, carotid massage)
@@ -193,12 +258,15 @@ nodes:
       - EP study if recurrent
       - Consider catheter ablation for definitive treatment
     trace:
-      - "SVT evaluation - vagal maneuvers and adenosine"
+      - SVT evaluation - vagal maneuvers and adenosine
     next: []
-
   ventricular_arrhythmia:
     when:
-      exam_flags_any: ["wide complex tachycardia", "polymorphic VT", "VT", "V-fib"]
+      exam_flags_any:
+        - wide complex tachycardia
+        - polymorphic VT
+        - VT
+        - V-fib
     tests:
       - Treat as VT until proven otherwise
       - Amiodarone or lidocaine
@@ -217,14 +285,19 @@ nodes:
       - Consider ICD placement
       - ICU admission
     trace:
-      - "Ventricular arrhythmia - high-risk condition"
+      - Ventricular arrhythmia - high-risk condition
     next: []
-
   benign_palpitations:
     when:
       all_of:
-        - exam_flags_any: ["normal ECG", "normal vital signs", "sinus rhythm"]
-        - no_red_flags: ["no chest pain", "no syncope", "no family history sudden death"]
+        - exam_flags_any:
+            - normal ECG
+            - normal vital signs
+            - sinus rhythm
+        - no_red_flags:
+            - no chest pain
+            - no syncope
+            - no family history sudden death
     tests:
       - Outpatient monitoring (Holter or event monitor)
       - TSH (rule out hyperthyroidism)
@@ -243,10 +316,14 @@ nodes:
       - Reassurance if benign
       - Reduce caffeine, alcohol, stimulants
     trace:
-      - "Benign palpitations - outpatient monitoring"
+      - Benign palpitations - outpatient monitoring
     next: []
-
-citations:
-  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
-  - ESC (European Society of Cardiology) Clinical Practice Guidelines
-  - UpToDate - Cardiovascular Medicine
+criteria: []
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

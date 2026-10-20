@@ -47,6 +47,8 @@ jobs:
           # httpx is required by starlette/testclient (used by FastAPI tests)
           # prometheus_client is required by backend/main.py (metrics endpoint)
           pip install fastapi uvicorn jinja2 pyyaml pytest requests httpx prometheus_client
+      - name: Validate decision trees
+        run: python backend/scripts/validate_rules.py
       - name: Run tests
         env:
           JWT_SECRET_KEY: test-only-ci-secret-key-not-for-production-use
@@ -54,7 +56,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
       - name: Install frontend dependencies
         run: |
           cd frontend
@@ -151,7 +153,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
       - name: Install frontend dependencies
         run: |
           cd frontend

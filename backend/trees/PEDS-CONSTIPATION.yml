@@ -1,16 +1,36 @@
 tree_id: PEDS-CONSTIPATION
 name: Constipation (Pediatric)
+version: '1.0'
+status: draft
 family: pediatrics
-specialty: Pediatrics/Gastroenterology
-icd10: K59.00
-snomed: 14760008
-urgency:
-  - Abdominal distension with vomiting (concern for obstruction)
-  - Severe abdominal pain with peritoneal signs
-  - Acute urinary retention
-  - Fecal impaction with overflow incontinence
-  - Neurologic symptoms (lower extremity weakness, saddle anesthesia)
-homeopathy: []
+specialty: Pediatrics
+secondary_specialties:
+  - Gastroenterology
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K59.00
+  snomed:
+    - '14760008'
+  icpc2: []
+sources:
+  - text: NASPGHAN/ESPGHAN Guidelines for Evaluation and Treatment of Constipation in Children
+    origin: citations
+  - text: American Academy of Pediatrics (AAP) Clinical Report on Constipation
+    origin: citations
+  - text: Tabbers MM et al. J Pediatr Gastroenterol Nutr 2014 - ESPGHAN Guidelines
+    origin: citations
+  - text: UpToDate Pediatrics - Functional Constipation in Children
+    origin: citations
+  - text: NASPGHAN Guidelines, AAP Recommendations, UpToDate Pediatrics
+    origin: trace.source
 presentations:
   - Infrequent bowel movements (less than 3 per week)
   - Hard, dry, or pellet-like stools
@@ -24,6 +44,17 @@ presentations:
   - Palpable stool in abdomen or on rectal exam
   - Irritability or behavioral changes related to toileting
   - Diet history of low fiber, excessive dairy intake
+differentials:
+  - Functional constipation (95% of cases) - stool withholding, dietary factors, no organic cause
+  - Hirschsprung disease (congenital aganglionic megacolon) - delayed meconium passage, tight sphincter with empty rectal vault, biopsy diagnostic
+  - Anal fissure (painful defecation leads to stool withholding)
+  - Celiac disease (constipation, diarrhea, failure to thrive, abdominal distension)
+  - Hypothyroidism (constipation, fatigue, cold intolerance, growth delay, elevated TSH)
+  - Cystic fibrosis (meconium ileus in newborn, recurrent pneumonia, failure to thrive)
+  - Spinal cord abnormality (tethered cord, spinal dysraphism) - neurologic symptoms, back findings
+  - Cow's milk protein allergy (infants, constipation with anal fissures, occult blood)
+  - Medications (opioids, anticholinergics, iron, antacids)
+  - Hypercalcemia (constipation, polyuria, weakness, rare)
 workup:
   - Clinical history
   - Onset and duration of constipation
@@ -110,15 +141,15 @@ treatment:
   - Avoid punishment or pressure
   - Disimpaction (if fecal impaction present)
   - Oral disimpaction (preferred if tolerated, takes 3-5 days)
-  - Polyethylene glycol (PEG, MiraLAX) high dose: 1-1.5 g/kg/day for 3-6 days (max 17 g/day)
-  - Alternative: mineral oil 3 mL/kg/day (age greater than 1 year, max 90 mL/day) for 3 days
+  - 'Polyethylene glycol (PEG, MiraLAX) high dose: 1-1.5 g/kg/day for 3-6 days (max 17 g/day)'
+  - 'Alternative: mineral oil 3 mL/kg/day (age greater than 1 year, max 90 mL/day) for 3 days'
   - Rectal disimpaction (faster, if severe impaction or oral not tolerated)
   - Pediatric glycerin suppository (age less than 3 years)
   - Bisacodyl suppository (age greater than 3 years)
   - Pediatric Fleet enema (sodium phosphate) - use cautiously, risk electrolyte imbalance
   - Maintenance therapy (after disimpaction, continue for months)
   - Polyethylene glycol (PEG 3350, MiraLAX) - FIRST-LINE
-  - Starting dose: 0.4-0.8 g/kg/day (usual 17 g/day for school-age child)
+  - 'Starting dose: 0.4-0.8 g/kg/day (usual 17 g/day for school-age child)'
   - Titrate dose to achieve soft daily stools
   - Well-tolerated, safe for long-term use (months to years)
   - Lactulose 1-3 mL/kg/day divided twice daily (alternative to PEG)
@@ -128,8 +159,8 @@ treatment:
   - Mineral oil 1-3 mL/kg/day (age greater than 1 year)
   - Risk aspiration if given to young child or child with swallowing difficulty
   - Senna (stimulant laxative) - second-line, short-term use
-  - Age 2-6 years: 2.5-7.5 mL/day
-  - Age greater than 6 years: 5-15 mL/day
+  - 'Age 2-6 years: 2.5-7.5 mL/day'
+  - 'Age greater than 6 years: 5-15 mL/day'
   - Avoid long-term use (concern for dependency, tolerance)
   - Rectal therapies (if needed for breakthrough constipation)
   - Glycerin suppository (infants and toddlers)
@@ -144,37 +175,42 @@ treatment:
   - Add stimulant laxative (senna) if osmotic alone insufficient
   - Consider specialist referral
 clinical_pearls:
-  - 'Functional constipation accounts for 95% of childhood constipation - usually clinical diagnosis, labs and imaging not needed'
+  - Functional constipation accounts for 95% of childhood constipation - usually clinical diagnosis, labs and imaging not needed
   - 'Red flags requiring further workup: onset before 1 month, delayed meconium passage, failure to thrive, neurologic symptoms, explosive diarrhea'
-  - 'Stool withholding behavior (child resists urge to defecate) creates vicious cycle - harder stool, more pain, more withholding'
-  - 'Disimpaction MUST be completed before starting maintenance therapy - maintenance alone will not clear impaction'
-  - 'Polyethylene glycol (MiraLAX) is first-line maintenance therapy - safe, effective, well-tolerated for long-term use (months to years)'
-  - 'Encopresis (fecal soiling) usually represents overflow incontinence from severe impaction - NOT intentional, NOT behavioral problem'
-  - 'Treatment often takes many months (6-24 months typical) - set realistic expectations, patience required'
-  - 'Delayed passage of meconium (greater than 48 hours in term infant) warrants evaluation for Hirschsprung disease'
+  - Stool withholding behavior (child resists urge to defecate) creates vicious cycle - harder stool, more pain, more withholding
+  - Disimpaction MUST be completed before starting maintenance therapy - maintenance alone will not clear impaction
+  - Polyethylene glycol (MiraLAX) is first-line maintenance therapy - safe, effective, well-tolerated for long-term use (months to years)
+  - Encopresis (fecal soiling) usually represents overflow incontinence from severe impaction - NOT intentional, NOT behavioral problem
+  - Treatment often takes many months (6-24 months typical) - set realistic expectations, patience required
+  - Delayed passage of meconium (greater than 48 hours in term infant) warrants evaluation for Hirschsprung disease
+red_flags:
+  - Abdominal distension with vomiting (concern for obstruction)
+  - Severe abdominal pain with peritoneal signs
+  - Acute urinary retention
+  - Fecal impaction with overflow incontinence
+  - Neurologic symptoms (lower extremity weakness, saddle anesthesia)
+disposition_guidance: {}
 referrals:
   - Pediatric gastroenterology if red flag symptoms, refractory to treatment after 3-6 months, concern for Hirschsprung or anatomic abnormality
   - Pediatric surgery if Hirschsprung disease confirmed, anorectal malformation, or severe refractory constipation
   - Pediatric neurology if neurologic abnormalities, tethered cord suspected, or spinal dysraphism
   - Behavioral health if significant behavioral issues, toilet refusal, or psychosocial stressors contributing
-differentials:
-  - Functional constipation (95% of cases) - stool withholding, dietary factors, no organic cause
-  - Hirschsprung disease (congenital aganglionic megacolon) - delayed meconium passage, tight sphincter with empty rectal vault, biopsy diagnostic
-  - Anal fissure (painful defecation leads to stool withholding)
-  - Celiac disease (constipation, diarrhea, failure to thrive, abdominal distension)
-  - Hypothyroidism (constipation, fatigue, cold intolerance, growth delay, elevated TSH)
-  - Cystic fibrosis (meconium ileus in newborn, recurrent pneumonia, failure to thrive)
-  - Spinal cord abnormality (tethered cord, spinal dysraphism) - neurologic symptoms, back findings
-  - Cow's milk protein allergy (infants, constipation with anal fissures, occult blood)
-  - Medications (opioids, anticholinergics, iron, antacids)
-  - Hypercalcemia (constipation, polyuria, weakness, rare)
-trace:
-  source: NASPGHAN Guidelines, AAP Recommendations, UpToDate Pediatrics
-  version: '1.0'
-  last_updated: '2025-12-27'
-
-citations:
-  - NASPGHAN/ESPGHAN Guidelines for Evaluation and Treatment of Constipation in Children
-  - American Academy of Pediatrics (AAP) Clinical Report on Constipation
-  - Tabbers MM et al. J Pediatr Gastroenterol Nutr 2014 - ESPGHAN Guidelines
-  - UpToDate Pediatrics - Functional Constipation in Children
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-27'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency held a list of red flags; moved to red_flags, urgency left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

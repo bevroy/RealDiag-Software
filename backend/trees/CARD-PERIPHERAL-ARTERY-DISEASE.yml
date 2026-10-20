@@ -1,37 +1,47 @@
 tree_id: CARD-PERIPHERAL-ARTERY-DISEASE
 name: Peripheral Artery Disease (PAD)
+version: '1.0'
+status: draft
 family: Cardiology
-specialty: Vascular Surgery/Cardiology
+specialty: Vascular Surgery
+secondary_specialties:
+  - Cardiology
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Leg pain with walking, non-healing leg wounds, or asymptomatic
 description: Atherosclerotic narrowing of peripheral arteries causing reduced blood flow to extremities
-icd10: I73.9
-snomed: 399957001
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - I73.9
+  snomed:
+    - '399957001'
+  icpc2: []
+sources:
+  - text: ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
+    origin: citations
+  - text: ESC (European Society of Cardiology) Clinical Practice Guidelines
+    origin: citations
+  - text: UpToDate - Cardiovascular Medicine
+    origin: citations
 presentations:
-  - Intermittent claudication: leg pain with walking, relieved by rest
+  - 'Intermittent claudication: leg pain with walking, relieved by rest'
   - Pain typically in calf, thigh, or buttock (depends on lesion location)
   - Cool, pale extremities with diminished pulses
   - Hair loss, shiny skin, brittle nails on affected limb
   - Chronic wounds or ulcers (especially on toes/heels)
-  - Critical limb ischemia: rest pain, non-healing wounds, gangrene
-urgency: routine-to-urgent
-referrals:
-  emergency:
-    - Acute MI/STEMI
-    - Cardiogenic shock
-    - Acute heart failure with hypoxia
-    - Unstable arrhythmia
-    - Cardiac tamponade
-  urgent:
-    - Unstable angina
-    - New-onset heart failure
-    - Symptomatic arrhythmia
-    - Moderate-severe valvular disease
-  routine:
-    - Stable angina for evaluation
-    - Hypertension uncontrolled on multiple meds
-    - Asymptomatic murmur workup
-    - Risk stratification
-
+  - 'Critical limb ischemia: rest pain, non-healing wounds, gangrene'
+differentials:
+  - Spinal stenosis (neurogenic claudication - bilateral leg pain, worse with standing/extension, better with sitting/flexion)
+  - Lumbar radiculopathy (dermatomal distribution, positive straight leg raise)
+  - Chronic venous insufficiency (edema, varicose veins, hyperpigmentation, pain relieved with elevation)
+  - Musculoskeletal pain (joint-related, not reproducible with walking distance)
+  - Deep vein thrombosis (acute onset, unilateral swelling, positive D-dimer)
+  - Diabetic neuropathy (burning/tingling, symmetric stocking distribution, normal pulses)
+  - Compartment syndrome (acute severe pain, tense compartments, recent trauma)
 workup:
   - Clinical history - intermittent claudication (reproducible leg pain with walking, relieved by rest)
   - Classify severity using Fontaine classification or Rutherford categories
@@ -58,7 +68,7 @@ treatment:
   - Blood pressure control - target less than 130/80 mmHg, ACE inhibitors or ARBs preferred
   - Diabetes management - target HbA1c less than 7%
   - Supervised exercise therapy - 30-45 minutes walking 3-5 times per week (first-line for claudication)
-  - Walk until near-maximal pain, rest, repeat - improves symptoms and walking distance
+  - 'Patient advice: Walk until near-maximal pain, rest, repeat - improves symptoms and walking distance'
   - Pharmacotherapy for claudication
   - Cilostazol 100 mg BID (phosphodiesterase inhibitor) - improves walking distance 40-60%
   - Contraindicated in heart failure
@@ -80,14 +90,33 @@ clinical_pearls:
   - Annual risk of cardiovascular events (MI, stroke, death) 5-7% in PAD patients
   - Critical limb ischemia - rest pain requiring narcotics for 2+ weeks, ulceration, or gangrene
   - One-year amputation rate 25-40% in critical limb ischemia if not revascularized
-differentials:
-  - Spinal stenosis (neurogenic claudication - bilateral leg pain, worse with standing/extension, better with sitting/flexion)
-  - Lumbar radiculopathy (dermatomal distribution, positive straight leg raise)
-  - Chronic venous insufficiency (edema, varicose veins, hyperpigmentation, pain relieved with elevation)
-  - Musculoskeletal pain (joint-related, not reproducible with walking distance)
-  - Deep vein thrombosis (acute onset, unilateral swelling, positive D-dimer)
-  - Diabetic neuropathy (burning/tingling, symmetric stocking distribution, normal pulses)
-  - Compartment syndrome (acute severe pain, tense compartments, recent trauma)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Acute MI/STEMI
+    - Cardiogenic shock
+    - Acute heart failure with hypoxia
+    - Unstable arrhythmia
+    - Cardiac tamponade
+  urgent:
+    - Unstable angina
+    - New-onset heart failure
+    - Symptomatic arrhythmia
+    - Moderate-severe valvular disease
+  routine:
+    - Stable angina for evaluation
+    - Hypertension uncontrolled on multiple meds
+    - Asymptomatic murmur workup
+    - Risk stratification
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 68-year-old man with 50-pack-year smoking history presents with 6-month history of bilateral calf pain with walking
   - Pain starts after walking 2 blocks (about 200 yards), cramping in both calves
@@ -123,8 +152,11 @@ trace:
   - Continues cilostazol, exercise program, risk factor modification
   - No need for revascularization at this time
   - Outcome - Successful medical management with exercise and pharmacotherapy
-
-citations:
-  - ACC/AHA (American College of Cardiology/American Heart Association) Guidelines
-  - ESC (European Society of Cardiology) Clinical Practice Guidelines
-  - UpToDate - Cardiovascular Medicine
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'routine-to-urgent' mapped to 'urgent'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

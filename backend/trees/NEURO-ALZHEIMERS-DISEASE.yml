@@ -1,13 +1,33 @@
 tree_id: NEURO-ALZHEIMERS-DISEASE
 name: Alzheimer's Disease
+version: '1.0'
+status: draft
 family: Neurology
 specialty: Neurology
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Progressive memory loss and cognitive decline
 description: |
   Most common cause of dementia, accounts for 60-80% of cases. Progressive neurodegenerative disease with amyloid plaques and neurofibrillary tangles.
   Onset typically after age 65, early-onset (before 65) often familial. Progresses over 8-10 years from mild cognitive impairment to severe dementia.
-icd10: G30.9
-snomed: 26929004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - G30.9
+  snomed:
+    - '26929004'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Progressive memory loss (especially recent memories)
   - Impaired judgment, reasoning
@@ -16,21 +36,13 @@ presentations:
   - Personality changes
   - Difficulty with complex tasks
   - Progressive functional decline
-urgency: Moderate
-referrals:
-  emergency:
-    - Stroke
-    - Status epilepticus
-    - Spinal cord compression
-  urgent:
-    - TIA
-    - New neurological deficits
-    - Seizure
-  routine:
-    - Headache management
-    - Neuropathy
-    - Movement disorders
-
+differentials:
+  - Vascular dementia
+  - Lewy body dementia
+  - Frontotemporal dementia
+  - Normal pressure hydrocephalus
+  - Depression (pseudodementia)
+  - Vitamin B12 deficiency
 workup:
   - Clinical diagnosis based on history and cognitive testing - gradual onset, progressive worsening of memory and other cognitive domains
   - Detailed history from patient and informant (family member) - memory loss affecting daily function, getting lost, repeating questions, difficulty with complex tasks
@@ -65,17 +77,36 @@ clinical_pearls:
   - Behavioral changes include apathy, depression, agitation, wandering, sundowning
   - Preserved social graces early in disease (can mask severity in brief encounters)
   - Average survival 8-10 years from diagnosis, range 3-20 years
-differentials:
-  - Vascular dementia
-  - Lewy body dementia
-  - Frontotemporal dementia
-  - Normal pressure hydrocephalus
-  - Depression (pseudodementia)
-  - Vitamin B12 deficiency
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Stroke
+    - Status epilepticus
+    - Spinal cord compression
+  urgent:
+    - TIA
+    - New neurological deficits
+    - Seizure
+  routine:
+    - Headache management
+    - Neuropathy
+    - Movement disorders
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 72-year-old woman brought by daughter for memory problems x 2 years, worsening x 6 months → Repeating questions, forgot stove on twice, missed appointments, difficulty managing medications → MoCA score 18/30 (impaired memory and visuospatial) → Exam shows no focal neurologic deficits → Labs (B12, TSH, CBC, CMP) normal → MRI shows bilateral hippocampal atrophy, no stroke or mass → Diagnose probable Alzheimer disease, mild-moderate stage → Start donepezil 5mg nightly, increase to 10mg after 4 weeks → Refer to neuropsychology for full testing, social work for caregiver resources → Discuss advanced directives, driving safety, home safety modifications → Consider lecanemab after amyloid PET confirmation → Establish care plan with neurology follow-up every 6 months, support for daughter as primary caregiver
-
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Moderate' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

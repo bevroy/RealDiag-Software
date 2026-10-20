@@ -1,12 +1,33 @@
 tree_id: GEN-MED-OBESITY
 name: Obesity Evaluation and Management
+version: '1.0'
+status: draft
 family: General Medicine
-specialty: Internal Medicine, Endocrinology, Bariatric Surgery
+specialty: Internal Medicine
+secondary_specialties:
+  - Endocrinology
+  - Bariatric Surgery
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Weight Gain, Obesity-Related Complications
 description: Comprehensive evaluation and management of obesity
-version: "1.0"
-icd10: E66.9
-snomed: 414916001
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E66.9
+  snomed:
+    - '414916001'
+  icpc2: []
+sources:
+  - text: AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
+    origin: citations
+  - text: USPSTF (U.S. Preventive Services Task Force) Recommendations
+    origin: citations
+  - text: UpToDate - General Internal Medicine
+    origin: citations
 presentations:
   - BMI ≥30 kg/m²
   - Weight-related health problems
@@ -20,29 +41,27 @@ differentials:
   - PCOS
   - Medication-induced weight gain
   - Prader-Willi syndrome
-citations:
-  - AAFP (American Academy of Family Physicians) Evidence-Based Guidelines
-  - USPSTF (U.S. Preventive Services Task Force) Recommendations
-  - UpToDate - General Internal Medicine
-author: RealDiag Clinical Team
-
-
+workup: []
 treatment:
-  - 'Lifestyle modification foundation - diet, exercise, behavioral therapy'
-  - 'Calorie deficit 500-750 kcal/day for 1-2 lbs/week weight loss (Mediterranean, DASH, low-carb effective)'
-  - 'Exercise 150-300 min/week moderate intensity plus strength training'
-  - 'Behavioral therapy - self-monitoring, goal-setting, stimulus control'
-  - 'Pharmacotherapy if BMI ≥30 OR ≥27 with comorbidities and lifestyle failed'
-  - 'Semaglutide (Wegovy) 2.4mg SC weekly - 15% weight loss, GLP-1 agonist, most effective'
-  - 'Tirzepatide (Zepbound) 15mg SC weekly - 20% weight loss, GLP-1/GIP agonist'
-  - 'Phentermine/topiramate ER (Qsymia) - 10% weight loss, contraindicated in pregnancy'
-  - 'Naltrexone/bupropion (Contrave) - 5% weight loss'
-  - 'Bariatric surgery if BMI ≥40 OR ≥35 with comorbidities - sleeve gastrectomy, Roux-en-Y bypass (30% weight loss)'
-  - 'Treat obesity complications - diabetes, hypertension, dyslipidemia, sleep apnea'
-  - 'Long-term follow-up essential - obesity is chronic disease requiring ongoing management'
-
-entry_point: obesity_evaluation
-
+  - Lifestyle modification foundation - diet, exercise, behavioral therapy
+  - Calorie deficit 500-750 kcal/day for 1-2 lbs/week weight loss (Mediterranean, DASH, low-carb effective)
+  - 'Patient advice: Exercise 150-300 min/week moderate intensity plus strength training'
+  - Behavioral therapy - self-monitoring, goal-setting, stimulus control
+  - Pharmacotherapy if BMI ≥30 OR ≥27 with comorbidities and lifestyle failed
+  - Semaglutide (Wegovy) 2.4mg SC weekly - 15% weight loss, GLP-1 agonist, most effective
+  - Tirzepatide (Zepbound) 15mg SC weekly - 20% weight loss, GLP-1/GIP agonist
+  - Phentermine/topiramate ER (Qsymia) - 10% weight loss, contraindicated in pregnancy
+  - Naltrexone/bupropion (Contrave) - 5% weight loss
+  - Bariatric surgery if BMI ≥40 OR ≥35 with comorbidities - sleeve gastrectomy, Roux-en-Y bypass (30% weight loss)
+  - Treat obesity complications - diabetes, hypertension, dyslipidemia, sleep apnea
+  - Long-term follow-up essential - obesity is chronic disease requiring ongoing management
+clinical_pearls:
+  - BMI is screening tool; not diagnostic of health status
+  - Even 5-10% weight loss improves cardiometabolic health
+  - 'Address underlying causes: medications, endocrine disorders, sleep'
+  - Avoid weight stigma; use person-first language
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -60,18 +79,17 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-
-clinical_pearls:
-  - BMI is screening tool; not diagnostic of health status
-  - Even 5-10% weight loss improves cardiometabolic health
-  - Address underlying causes: medications, endocrine disorders, sleep
-  - Avoid weight stigma; use person-first language
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: obesity_evaluation
 nodes:
   - id: obesity_evaluation
     type: diagnosis
-    name: "Obesity"
-    icd10: "E66.9"
+    name: Obesity
+    icd10: E66.9
     urgency: medium
     workup:
       - Obesity - Excess body fat, BMI ≥30 kg/m²
@@ -166,3 +184,16 @@ nodes:
       - Adjunctive treatments - Address comorbidities (CPAP for OSA, metformin for diabetes, statins for dyslipidemia)
       - Multidisciplinary approach - Dietitian, exercise physiologist, behavioral therapist, primary care, specialists (endocrinology, surgery)
       - Prevention - Public health priority (obesogenic environment modification, early intervention)
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Patient self-care treatment lines labelled ''patient advice:''. Pending clinical review.'

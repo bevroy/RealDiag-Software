@@ -3,6 +3,8 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
+import { parseEvaluationResponse } from '../../utils/evaluationResponse';
+import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
  * Inpatient
@@ -42,6 +44,8 @@ function Inpatient() {
   const [error, setError] = useState(null);
   const [patientData, setPatientData] = useState(null);
   const [evaluations, setEvaluations] = useState([]);
+  const [evaluationWarnings, setEvaluationWarnings] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
 
   const [handoffData, setHandoffData] = useState(null);
   const [handoffLoading, setHandoffLoading] = useState(false);
@@ -85,7 +89,10 @@ function Inpatient() {
       if (!evalResponse.ok) {
         throw new Error('Failed to evaluate patient');
       }
-      setEvaluations(await evalResponse.json());
+      const parsed = parseEvaluationResponse(await evalResponse.json());
+      setEvaluations(parsed.evaluations);
+      setEvaluationWarnings([...parsed.dataWarnings, ...parsed.assessmentWarnings]);
+      setReviewNotice(parsed.clinicalReviewNotice);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching chart summary:', err);
@@ -175,7 +182,7 @@ function Inpatient() {
 
       <div style={styles.content}>
         {activeTab === 'summary' && (
-          <ChartSummaryTab patientData={patientData} evaluations={evaluations} />
+          <ChartSummaryTab patientData={patientData} evaluations={evaluations} evaluationWarnings={evaluationWarnings} reviewNotice={reviewNotice} />
         )}
         {activeTab === 'handoff' && (
           <HandoffTab
@@ -193,18 +200,28 @@ function Inpatient() {
   );
 }
 
-function ChartSummaryTab({ patientData, evaluations }) {
+function ChartSummaryTab({ patientData, evaluations, evaluationWarnings, reviewNotice }) {
+  const warnings = uniqueWarnings(patientData.data_warnings, evaluationWarnings);
   return (
     <>
+      <DataWarnings warnings={warnings} notes={patientData.data_notes} />
       {patientData.allergies && patientData.allergies.length > 0 && (
         <AllergyBanner allergies={patientData.allergies} />
       )}
       <h2 style={styles.contentTitle}>Clinical Decision Support</h2>
+      <ClinicalReviewNotice notice={reviewNotice} />
       {evaluations.length === 0 ? (
-        <div style={styles.noResults}>
-          <p>✓ No significant diagnostic concerns identified.</p>
-          <p style={styles.subtext}>Patient data reviewed. All values within normal ranges.</p>
-        </div>
+        warnings.length > 0 ? (
+          <div style={styles.incompleteResults}>
+            <p>No diagnostic concerns were flagged, but the chart data is incomplete.</p>
+            <p style={styles.subtext}>Some data could not be retrieved (see above); this is not a complete review.</p>
+          </div>
+        ) : (
+          <div style={styles.noResults}>
+            <p>✓ No significant diagnostic concerns identified.</p>
+            <p style={styles.subtext}>All retrieved chart data was reviewed.</p>
+          </div>
+        )
       ) : (
         <div style={styles.evaluationsList}>
           {evaluations.map((evaluation, idx) => (
@@ -230,20 +247,23 @@ function HandoffTab({ loading, error, data, sinceOverride, setSinceOverride, onA
     return null;
   }
 
-  const { full_summary, updates, narrative, admission_start, timeframe_source } = data;
+  const { full_summary, updates, narrative, admission_start, timeframe_source, clinical_review_notice } = data;
+  const warnings = uniqueWarnings(full_summary.data_warnings, updates && updates.data_warnings);
 
   return (
     <>
+      <DataWarnings warnings={warnings} notes={full_summary.data_notes} />
+      <ClinicalReviewNotice notice={clinical_review_notice} />
       {full_summary.allergies && full_summary.allergies.length > 0 && (
         <AllergyBanner allergies={full_summary.allergies} />
       )}
 
       <div style={styles.statsRow}>
-        <div style={styles.statBox}><strong>{full_summary.lab_count}</strong><span>Labs</span></div>
-        <div style={styles.statBox}><strong>{full_summary.vital_count}</strong><span>Vitals</span></div>
-        <div style={styles.statBox}><strong>{full_summary.condition_count}</strong><span>Conditions</span></div>
-        <div style={styles.statBox}><strong>{full_summary.medication_count}</strong><span>Medications</span></div>
-        <div style={styles.statBox}><strong>{full_summary.allergy_count}</strong><span>Allergies</span></div>
+        <div style={styles.statBox}><strong>{countOrUnavailable(full_summary.lab_count)}</strong><span>Labs</span></div>
+        <div style={styles.statBox}><strong>{countOrUnavailable(full_summary.vital_count)}</strong><span>Vitals</span></div>
+        <div style={styles.statBox}><strong>{countOrUnavailable(full_summary.condition_count)}</strong><span>Conditions</span></div>
+        <div style={styles.statBox}><strong>{countOrUnavailable(full_summary.medication_count)}</strong><span>Medications</span></div>
+        <div style={styles.statBox}><strong>{countOrUnavailable(full_summary.allergy_count)}</strong><span>Allergies</span></div>
       </div>
 
       <div style={styles.timeframeHeader}>
@@ -297,14 +317,16 @@ function PatientBanner({ patient }) {
     <div style={styles.banner}>
       <div style={styles.bannerLeft}>
         <strong style={styles.patientName}>{patient.name}</strong>
-        <span style={styles.patientInfo}>{patient.age} yo {patient.gender}</span>
+        <span style={styles.patientInfo}>{patient.age != null ? `${patient.age} yo` : 'Age unknown'} {patient.gender}</span>
         {patient.date_of_birth && <span style={styles.patientInfo}>DOB: {patient.date_of_birth}</span>}
       </div>
       <div style={styles.bannerRight}>
         <span style={styles.mrn}>MRN: {patient.patient_id}</span>
         <span style={styles.stats}>
-          {patient.lab_count} labs • {patient.vital_count} vitals
-          {patient.allergy_count > 0 && ` • ${patient.allergy_count} allergies`}
+          {countOrUnavailable(patient.lab_count)} labs • {countOrUnavailable(patient.vital_count)} vitals
+          {patient.allergy_count == null
+            ? ' • allergies not retrieved'
+            : patient.allergy_count > 0 && ` • ${patient.allergy_count} allergies`}
         </span>
       </div>
     </div>
@@ -357,7 +379,21 @@ function DiagnosticCard({ evaluation }) {
           <span style={styles.severityEmoji}>{getSeverityEmoji(evaluation.severity)}</span>
           <div>
             <h3 style={styles.diagnosisLabel}>{evaluation.diagnosis_label}</h3>
-            <p style={styles.diagnosisFamily}>{evaluation.diagnosis_family}</p>
+            <p style={styles.diagnosisFamily}>{evaluation.family}</p>
+            {evaluation.evaluation_status && evaluation.evaluation_status !== 'evaluated' && (
+              <span style={styles.statusBadge}>{evaluation.evaluation_status.toUpperCase()}</span>
+            )}
+            {evaluation.known_condition && (
+              <span style={styles.knownBadge} title={evaluation.known_condition_text || ''}>
+                KNOWN CONDITION{evaluation.known_condition_text ? `: ${evaluation.known_condition_text}` : ''}
+              </span>
+            )}
+            {evaluation.finding === 'possible' && (
+              <span style={styles.statusBadge}>POSSIBLE - NEEDS CONFIRMATION</span>
+            )}
+            <div style={{ marginTop: '4px' }}>
+              <ReviewStatusBadge status={evaluation.review_status} label={evaluation.review_status_label} />
+            </div>
           </div>
         </div>
         <div style={styles.cardHeaderRight}>
@@ -369,6 +405,12 @@ function DiagnosticCard({ evaluation }) {
       </div>
       {expanded && (
         <div style={styles.cardBody}>
+          {evaluation.status_reason && (
+            <p style={styles.statusReason}>{evaluation.status_reason}</p>
+          )}
+          {evaluation.severity_reason && (
+            <p style={styles.subtext}>{evaluation.severity_reason}</p>
+          )}
           {evaluation.criteria_met && evaluation.criteria_met.length > 0 && (
             <div style={styles.criteriaSection}>
               <h4 style={styles.criteriaTitle}>✓ Criteria Met</h4>
@@ -377,6 +419,33 @@ function DiagnosticCard({ evaluation }) {
                   <li key={idx} style={styles.criterionMet}>
                     <strong>{criterion.criterion}:</strong> {criterion.value}
                     {criterion.expected && <span style={styles.reference}> (expected: {criterion.expected})</span>}
+                    {criterion.details && <div style={styles.reference}>{criterion.details}</div>}
+                    {criterion.source && <div style={styles.criterionSource}>Source: {criterion.source}</div>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {evaluation.criteria_unknown && evaluation.criteria_unknown.length > 0 && (
+            <div style={styles.criteriaSection}>
+              <h4 style={styles.criteriaTitle}>? Insufficient Data</h4>
+              <ul style={styles.criteriaList}>
+                {evaluation.criteria_unknown.map((criterion, idx) => (
+                  <li key={idx} style={styles.missingTest}>
+                    <strong>{criterion.criterion}</strong>{criterion.details && `: ${criterion.details}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {evaluation.supporting_findings && evaluation.supporting_findings.length > 0 && (
+            <div style={styles.criteriaSection}>
+              <h4 style={styles.criteriaTitle}>Supporting Findings (context only)</h4>
+              <ul style={styles.criteriaList}>
+                {evaluation.supporting_findings.map((finding, idx) => (
+                  <li key={idx}>
+                    <strong>{finding.criterion}:</strong> {finding.value}
+                    {finding.details && <span style={styles.reference}> — {finding.details}</span>}
                   </li>
                 ))}
               </ul>
@@ -424,14 +493,58 @@ function LabTable({ title, labs }) {
         <tbody>
           {labs.map((lab, idx) => (
             <tr key={idx} style={idx % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd}>
-              <td style={styles.tableCell}>{lab.name}</td>
+              <td style={styles.tableCell}>
+                {lab.name}
+                {lab.preliminary && <span style={styles.preliminaryBadge}>PRELIMINARY</span>}
+              </td>
               <td style={{ ...styles.tableCell, ...styles.abnormalValue }}>{lab.value} {lab.unit}</td>
-              <td style={styles.tableCell}>{lab.reference_range || 'N/A'}</td>
+              <td style={styles.tableCell}>{formatRange(lab.reference_range)}</td>
               <td style={styles.tableCell}>{lab.date ? new Date(lab.date).toLocaleDateString() : 'N/A'}</td>
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function countOrUnavailable(count) {
+  // null/undefined = the EHR query failed; 0 = retrieved, none found
+  return count == null ? 'N/A' : count;
+}
+
+function formatRange(range) {
+  if (!range) return 'N/A';
+  if (typeof range === 'string') return range;
+  const low = range.low != null ? range.low : '';
+  const high = range.high != null ? range.high : '';
+  return `${low}–${high}`;
+}
+
+function uniqueWarnings(...lists) {
+  return [...new Set(lists.flat().filter(Boolean))];
+}
+
+function DataWarnings({ warnings, notes }) {
+  if ((!warnings || warnings.length === 0) && (!notes || notes.length === 0)) return null;
+  return (
+    <div style={styles.dataWarningBox} role="alert">
+      {warnings && warnings.length > 0 && (
+        <>
+          <h3 style={styles.dataWarningTitle}>⚠️ Incomplete chart data</h3>
+          <ul style={styles.dataWarningList}>
+            {warnings.map((warning, idx) => <li key={idx}>{warning}</li>)}
+          </ul>
+        </>
+      )}
+      {notes && notes.length > 0 && (
+        <details style={styles.dataNotes}>
+          <summary>Skipped or excluded entries ({notes.length})</summary>
+          <ul style={styles.dataWarningList}>
+            {notes.map((note, idx) => <li key={idx}>{note}</li>)}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }
@@ -474,6 +587,16 @@ const styles = {
   tabButtonActive: { backgroundColor: 'white', color: '#667eea', boxShadow: '0 -2px 4px rgba(0,0,0,0.05)' },
   content: { maxWidth: '1200px', margin: '0 auto', padding: '24px', backgroundColor: 'white', borderRadius: '0 8px 8px 8px' },
   contentTitle: { fontSize: '22px', fontWeight: 'bold', color: '#1f2937', margin: '0 0 16px' },
+  incompleteResults: { backgroundColor: '#fffbeb', padding: '24px', borderRadius: '8px', textAlign: 'center', color: '#92400e', fontSize: '16px', border: '1px solid #fcd34d' },
+  dataWarningBox: { backgroundColor: '#fef2f2', border: '2px solid #ef4444', borderRadius: '8px', padding: '16px', marginBottom: '20px', color: '#7f1d1d' },
+  dataWarningTitle: { margin: '0 0 8px', fontSize: '16px' },
+  dataWarningList: { margin: 0, paddingLeft: '20px', lineHeight: 1.6 },
+  dataNotes: { marginTop: '8px', fontSize: '13px', color: '#374151' },
+  knownBadge: { display: 'inline-block', marginTop: '4px', marginLeft: '6px', padding: '2px 8px', borderRadius: '10px', backgroundColor: '#e0f2fe', color: '#075985', fontSize: '11px', fontWeight: 700 },
+  criterionSource: { fontSize: '12px', color: '#6b7280', marginTop: '2px' },
+  statusBadge: { display: 'inline-block', marginTop: '4px', padding: '2px 8px', borderRadius: '10px', backgroundColor: '#fef3c7', color: '#92400e', fontSize: '11px', fontWeight: 700 },
+  statusReason: { margin: '0 0 12px', padding: '8px 12px', backgroundColor: '#fffbeb', borderRadius: '6px', color: '#92400e', fontSize: '14px' },
+  preliminaryBadge: { marginLeft: '8px', padding: '1px 6px', borderRadius: '8px', backgroundColor: '#e0e7ff', color: '#3730a3', fontSize: '10px', fontWeight: 700 },
   noResults: { backgroundColor: '#f9fafb', padding: '40px', borderRadius: '8px', textAlign: 'center', color: '#22c55e', fontSize: '18px' },
   subtext: { color: '#6b7280', fontSize: '14px', marginTop: '8px' },
   evaluationsList: { display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' },

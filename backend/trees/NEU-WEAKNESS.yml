@@ -1,11 +1,33 @@
 tree_id: NEU-WEAKNESS
 name: Acute Weakness Localization
+version: '1.0'
+status: draft
 family: Neurology
-specialty: Neurology, Internal Medicine, Emergency Medicine
+specialty: Neurology
+secondary_specialties:
+  - Internal Medicine
+  - Emergency Medicine
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
 description: Decision tree for localizing acute weakness and determining urgency
-version: "1.0"
-icd10: M62.81
-snomed: 26544005
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - M62.81
+  snomed:
+    - '26544005'
+  icpc2: []
+sources:
+  - text: AAN (American Academy of Neurology) Clinical Practice Guidelines
+    origin: citations
+  - text: EAN (European Academy of Neurology) Guidelines
+    origin: citations
+  - text: UpToDate - Neurology
+    origin: citations
 presentations:
   - Muscle weakness (proximal vs distal, symmetric vs asymmetric)
   - Difficulty with ADLs
@@ -19,8 +41,27 @@ differentials:
   - Guillain-Barre
   - Peripheral neuropathy
   - Myopathy
-entry_point: initial_weakness
-
+workup:
+  - Emergent non-contrast head CT to rule out stroke/hemorrhage
+  - MRI brain/spine with contrast if CT negative (GBS, transverse myelitis, MS)
+  - 'Labs: CBC, CMP, CK, TSH, B12, ESR/CRP'
+  - EMG/NCS to differentiate neuropathy vs myopathy vs NMJ disorder
+  - Lumbar puncture if suspect GBS (elevated protein, normal WBC)
+  - Tensilon test or acetylcholine receptor antibodies if myasthenia gravis suspected
+treatment:
+  - 'Stroke: tPA if <4.5 hours, thrombectomy if large vessel occlusion <24 hours'
+  - 'Guillain-Barré: IVIG 0.4 g/kg/day x5 days or plasmapheresis'
+  - 'Myasthenia gravis crisis: IVIG or plasmapheresis + intubation if respiratory failure'
+  - 'Transverse myelitis: high-dose methylprednisolone 1g IV daily x3-5 days'
+  - 'Acute: ICU monitoring if bulbar/respiratory involvement'
+  - 'Supportive: DVT prophylaxis, PT/OT, nutrition support'
+clinical_pearls:
+  - 'Acute onset weakness: stroke until proven otherwise'
+  - 'Pattern helps localization: UMN vs LMN, proximal vs distal'
+  - 'Ascending paralysis: Guillain-Barré; may compromise respiratory muscles'
+  - Check for sensory loss, reflexes, fasciculations to narrow differential
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute stroke
@@ -32,32 +73,20 @@ referrals:
   routine:
     - Chronic weakness
     - Myopathy workup
-workup:
-  - Emergent non-contrast head CT to rule out stroke/hemorrhage
-  - MRI brain/spine with contrast if CT negative (GBS, transverse myelitis, MS)
-  - Labs: CBC, CMP, CK, TSH, B12, ESR/CRP
-  - EMG/NCS to differentiate neuropathy vs myopathy vs NMJ disorder
-  - Lumbar puncture if suspect GBS (elevated protein, normal WBC)
-  - Tensilon test or acetylcholine receptor antibodies if myasthenia gravis suspected
-
-treatment:
-  - Stroke: tPA if <4.5 hours, thrombectomy if large vessel occlusion <24 hours
-  - Guillain-Barré: IVIG 0.4 g/kg/day x5 days or plasmapheresis
-  - Myasthenia gravis crisis: IVIG or plasmapheresis + intubation if respiratory failure
-  - Transverse myelitis: high-dose methylprednisolone 1g IV daily x3-5 days
-  - Acute: ICU monitoring if bulbar/respiratory involvement
-  - Supportive: DVT prophylaxis, PT/OT, nutrition support
-
-clinical_pearls:
-  - Acute onset weakness: stroke until proven otherwise
-  - Pattern helps localization: UMN vs LMN, proximal vs distal
-  - Ascending paralysis: Guillain-Barré; may compromise respiratory muscles
-  - Check for sensory loss, reflexes, fasciculations to narrow differential
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: initial_weakness
 nodes:
   initial_weakness:
     when:
-      symptoms_contains_any: ["weakness", "can't move limb", "paralysis", "difficulty walking"]
+      symptoms_contains_any:
+        - weakness
+        - can't move limb
+        - paralysis
+        - difficulty walking
     tests:
       - Onset and tempo (acute vs gradual)
       - Distribution (focal vs diffuse, proximal vs distal)
@@ -71,33 +100,58 @@ nodes:
     referrals:
       - Emergency evaluation if acute onset
     trace:
-      - "Weakness evaluation - determine localization"
+      - Weakness evaluation - determine localization
     next:
       - node: acute_stroke_like
         if:
           any_of:
-            - red_flags_any: ["sudden onset", "focal weakness", "facial droop", "speech difficulty"]
-            - symptoms_contains_any: ["hemiparesis", "hemiplegia"]
+            - red_flags_any:
+                - sudden onset
+                - focal weakness
+                - facial droop
+                - speech difficulty
+            - symptoms_contains_any:
+                - hemiparesis
+                - hemiplegia
       - node: cord_lesion
         if:
           any_of:
-            - exam_flags_any: ["sensory level", "bowel/bladder dysfunction", "bilateral leg weakness"]
-            - symptoms_contains_any: ["back pain + weakness", "urinary retention"]
+            - exam_flags_any:
+                - sensory level
+                - bowel/bladder dysfunction
+                - bilateral leg weakness
+            - symptoms_contains_any:
+                - back pain + weakness
+                - urinary retention
       - node: neuromuscular_junction
         if:
-          symptoms_contains_any: ["fatigable weakness", "ptosis", "diplopia", "dysphagia"]
+          symptoms_contains_any:
+            - fatigable weakness
+            - ptosis
+            - diplopia
+            - dysphagia
       - node: peripheral_neuropathy
         if:
-          exam_flags_any: ["areflexia", "distal weakness", "stocking-glove sensory loss"]
+          exam_flags_any:
+            - areflexia
+            - distal weakness
+            - stocking-glove sensory loss
       - node: myopathy
         if:
-          symptoms_contains_any: ["proximal weakness", "difficulty rising from chair", "difficulty climbing stairs"]
-
+          symptoms_contains_any:
+            - proximal weakness
+            - difficulty rising from chair
+            - difficulty climbing stairs
   acute_stroke_like:
     when:
       any_of:
-        - symptoms_contains_any: ["sudden weakness", "hemiparesis", "facial droop"]
-        - red_flags_any: ["acute onset", "focal deficit"]
+        - symptoms_contains_any:
+            - sudden weakness
+            - hemiparesis
+            - facial droop
+        - red_flags_any:
+            - acute onset
+            - focal deficit
     tests:
       - STAT CT head without contrast
       - Blood glucose
@@ -116,14 +170,18 @@ nodes:
       - Consider thrombolysis if within window
       - ICU or stroke unit admission
     trace:
-      - "Acute stroke-like presentation - emergency evaluation"
+      - Acute stroke-like presentation - emergency evaluation
     next: []
-
   cord_lesion:
     when:
       any_of:
-        - exam_flags_any: ["sensory level", "bilateral leg weakness", "hyperreflexia with Babinski"]
-        - symptoms_contains_any: ["back pain + bilateral leg weakness", "bowel/bladder dysfunction"]
+        - exam_flags_any:
+            - sensory level
+            - bilateral leg weakness
+            - hyperreflexia with Babinski
+        - symptoms_contains_any:
+            - back pain + bilateral leg weakness
+            - bowel/bladder dysfunction
     tests:
       - STAT MRI spine (thoracic and lumbar)
       - Neurosurgery consult
@@ -141,12 +199,16 @@ nodes:
       - Antibiotics if infection suspected
       - High-dose steroids if compression from malignancy
     trace:
-      - "Spinal cord level - urgent spine imaging"
+      - Spinal cord level - urgent spine imaging
     next: []
-
   neuromuscular_junction:
     when:
-      symptoms_contains_any: ["fatigable weakness", "ptosis worse with sustained upgaze", "diplopia", "difficulty swallowing", "difficulty breathing"]
+      symptoms_contains_any:
+        - fatigable weakness
+        - ptosis worse with sustained upgaze
+        - diplopia
+        - difficulty swallowing
+        - difficulty breathing
     tests:
       - Vital capacity and negative inspiratory force (if bulbar symptoms)
       - Edrophonium test or ice pack test (if available)
@@ -164,19 +226,26 @@ nodes:
       - Plasmapheresis or IVIG if myasthenic crisis
       - Pyridostigmine trial
     trace:
-      - "Neuromuscular junction - fatigable weakness"
+      - Neuromuscular junction - fatigable weakness
     next:
       - node: myasthenic_crisis
         if:
-          red_flags_any: ["respiratory distress", "vital capacity < 15 mL/kg", "dysphagia with aspiration"]
+          red_flags_any:
+            - respiratory distress
+            - vital capacity < 15 mL/kg
+            - dysphagia with aspiration
       - node: stable_nmj
         default: true
-
   myasthenic_crisis:
     when:
       any_of:
-        - red_flags_any: ["respiratory failure", "vital capacity < 15 mL/kg"]
-        - symptoms_contains_any: ["dyspnea", "orthopnea", "weak cough"]
+        - red_flags_any:
+            - respiratory failure
+            - vital capacity < 15 mL/kg
+        - symptoms_contains_any:
+            - dyspnea
+            - orthopnea
+            - weak cough
     tests:
       - Vital capacity every 2-4 hours
       - Negative inspiratory force
@@ -191,12 +260,13 @@ nodes:
       - Plasmapheresis or IVIG
       - Hold anticholinesterase if cholinergic crisis suspected
     trace:
-      - "Myasthenic crisis - ICU admission required"
+      - Myasthenic crisis - ICU admission required
     next: []
-
   stable_nmj:
     when:
-      symptoms_contains_any: ["myasthenia", "LEMS"]
+      symptoms_contains_any:
+        - myasthenia
+        - LEMS
     tests:
       - Outpatient neuromuscular workup
       - Antibody testing
@@ -210,12 +280,14 @@ nodes:
       - Pyridostigmine trial
       - Immunosuppression if needed
     trace:
-      - "Stable NMJ disorder - outpatient workup"
+      - Stable NMJ disorder - outpatient workup
     next: []
-
   peripheral_neuropathy:
     when:
-      exam_flags_any: ["areflexia", "distal weakness", "stocking-glove sensory loss"]
+      exam_flags_any:
+        - areflexia
+        - distal weakness
+        - stocking-glove sensory loss
     tests:
       - EMG/NCS
       - Workup for Guillain-Barré if rapidly progressive
@@ -231,21 +303,29 @@ nodes:
       - ICU if respiratory compromise (GBS)
       - IVIG or plasmapheresis for GBS/CIDP
     trace:
-      - "Peripheral neuropathy - determine acuity"
+      - Peripheral neuropathy - determine acuity
     next:
       - node: guillain_barre
         if:
           any_of:
-            - symptoms_contains_any: ["rapidly progressive weakness", "ascending paralysis"]
-            - exam_flags_any: ["areflexia", "facial weakness", "respiratory weakness"]
+            - symptoms_contains_any:
+                - rapidly progressive weakness
+                - ascending paralysis
+            - exam_flags_any:
+                - areflexia
+                - facial weakness
+                - respiratory weakness
       - node: chronic_neuropathy
         default: true
-
   guillain_barre:
     when:
       any_of:
-        - symptoms_contains_any: ["ascending paralysis", "rapidly progressive weakness"]
-        - exam_flags_any: ["areflexia", "bilateral weakness"]
+        - symptoms_contains_any:
+            - ascending paralysis
+            - rapidly progressive weakness
+        - exam_flags_any:
+            - areflexia
+            - bilateral weakness
     tests:
       - Lumbar puncture (albuminocytologic dissociation)
       - EMG/NCS
@@ -260,12 +340,13 @@ nodes:
       - IVIG or plasmapheresis
       - Monitor for autonomic instability
     trace:
-      - "Guillain-Barré syndrome - monitor respiratory function"
+      - Guillain-Barré syndrome - monitor respiratory function
     next: []
-
   chronic_neuropathy:
     when:
-      symptoms_contains_any: ["chronic weakness", "gradual onset"]
+      symptoms_contains_any:
+        - chronic weakness
+        - gradual onset
     tests:
       - EMG/NCS
       - Metabolic workup (B12, TSH, HbA1c)
@@ -280,12 +361,14 @@ nodes:
       - Treat underlying cause
       - Physical therapy
     trace:
-      - "Chronic neuropathy - outpatient workup"
+      - Chronic neuropathy - outpatient workup
     next: []
-
   myopathy:
     when:
-      symptoms_contains_any: ["proximal weakness", "difficulty rising from chair", "difficulty climbing stairs"]
+      symptoms_contains_any:
+        - proximal weakness
+        - difficulty rising from chair
+        - difficulty climbing stairs
     tests:
       - CK (creatine kinase)
       - Aldolase
@@ -303,10 +386,14 @@ nodes:
       - Stop offending medications (statins)
       - Immunosuppression if inflammatory myopathy
     trace:
-      - "Myopathy - proximal weakness pattern"
+      - Myopathy - proximal weakness pattern
     next: []
-
-citations:
-  - AAN (American Academy of Neurology) Clinical Practice Guidelines
-  - EAN (European Academy of Neurology) Guidelines
-  - UpToDate - Neurology
+criteria: []
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

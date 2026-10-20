@@ -1,37 +1,43 @@
 tree_id: ENDO-HYPONATREMIA
 name: Hyponatremia
+version: '1.0'
+status: draft
 family: Endocrinology
-specialty: Endocrinology/Nephrology
+specialty: Endocrinology
+secondary_specialties:
+  - Nephrology
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Confusion, nausea, headache, seizures if severe
 description: Serum sodium less than 135 mEq/L, most common electrolyte disorder
-icd10: E87.1
-snomed: 89627008
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - E87.1
+  snomed:
+    - '89627008'
+  icpc2: []
+sources:
+  - text: Endocrine Society Clinical Practice Guidelines
+    origin: citations
+  - text: ADA (American Diabetes Association) Standards of Care
+    origin: citations
+  - text: UpToDate - Endocrinology and Diabetes
+    origin: citations
 presentations:
-  - Mild: often asymptomatic
+  - 'Mild: often asymptomatic'
   - Nausea, malaise, headache
   - Confusion, disorientation
-  - Severe: seizures, coma
+  - 'Severe: seizures, coma'
   - Muscle cramps, weakness
   - Acute vs chronic affects symptoms
-urgency: routine-to-emergency
-referrals:
-  emergency:
-    - DKA
-    - HHS
-    - Thyroid storm
-    - Myxedema coma
-    - Adrenal crisis
-  urgent:
-    - New diabetes with poor control
-    - Thyroid nodule >4cm
-    - Severe hypercalcemia
-    - Pituitary mass
-  routine:
-    - Diabetes management
-    - Thyroid nodule surveillance
-    - Osteoporosis management
-    - Lipid disorders
-
+differentials:
+  - Pseudohyponatremia (lab artifact from hyperlipidemia, hyperproteinemia - normal serum osmolality)
+  - Hyperglycemia causing hyponatremia (hypertonic hyponatremia - correct sodium for glucose)
+  - Cerebral salt wasting vs SIADH (both UNa greater than 40 but CSW has volume depletion, occurs with CNS disease)
 workup:
   - Clinical presentation - severity depends on degree and rapidity of sodium decline
   - Mild hyponatremia (130-135 mEq/L) - often asymptomatic
@@ -137,10 +143,33 @@ clinical_pearls:
   - High-risk patients for ODS - chronic hyponatremia, alcoholics, malnourished, liver disease
   - If severe symptomatic hyponatremia (seizures) - give hypertonic saline emergently, but then slow correction
   - Beer potomania - hyponatremia in chronic alcoholics from poor solute intake (beer has minimal sodium/protein) plus high fluid intake
-differentials:
-  - Pseudohyponatremia (lab artifact from hyperlipidemia, hyperproteinemia - normal serum osmolality)
-  - Hyperglycemia causing hyponatremia (hypertonic hyponatremia - correct sodium for glucose)
-  - Cerebral salt wasting vs SIADH (both UNa greater than 40 but CSW has volume depletion, occurs with CNS disease)
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - DKA
+    - HHS
+    - Thyroid storm
+    - Myxedema coma
+    - Adrenal crisis
+  urgent:
+    - New diabetes with poor control
+    - Thyroid nodule >4cm
+    - Severe hypercalcemia
+    - Pituitary mass
+  routine:
+    - Diabetes management
+    - Thyroid nodule surveillance
+    - Osteoporosis management
+    - Lipid disorders
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 72-year-old woman presents to ED with 2-day history of confusion and nausea
   - Family reports she has been increasingly confused, not making sense
@@ -181,19 +210,19 @@ trace:
   - Monitor sodium every 4 hours
   - Fluid restriction 800 mL daily
   - Discontinue ondansetron (can worsen SIADH)
-  - Hospital course - 4 hours: Sodium increased to 122 mEq/L (increase 4 mEq/L)
+  - 'Hospital course - 4 hours: Sodium increased to 122 mEq/L (increase 4 mEq/L)'
   - Confusion improving
   - Hypertonic saline rate decreased to 10 mL/hr
-  - 24 hours: Sodium 124 mEq/L (total increase 6 mEq/L in 24 hours - appropriate rate)
+  - '24 hours: Sodium 124 mEq/L (total increase 6 mEq/L in 24 hours - appropriate rate)'
   - Confusion resolved, nausea improved
   - Continue hypertonic saline at 10 mL/hr
   - Strict fluid restriction
-  - 48 hours: Sodium 129 mEq/L (total increase 11 mEq/L in 48 hours - safe, below 18 mEq/L limit)
+  - '48 hours: Sodium 129 mEq/L (total increase 11 mEq/L in 48 hours - safe, below 18 mEq/L limit)'
   - Asymptomatic, tolerating oral intake
   - Stop hypertonic saline
   - Continue fluid restriction
   - Transition to oral salt tablets
-  - Day 4: Sodium 132 mEq/L (stable)
+  - 'Day 4: Sodium 132 mEq/L (stable)'
   - Discharge planned
   - Discharge Day 5 - sodium 133 mEq/L
   - Fluid restriction 1000 mL daily
@@ -209,8 +238,8 @@ trace:
   - Sodium stable 133-138 mEq/L
   - Continue treatment of underlying malignancy
   - Outcome - Successful treatment of severe symptomatic SIADH with gradual sodium correction, no osmotic demyelination syndrome
-
-citations:
-  - Endocrine Society Clinical Practice Guidelines
-  - ADA (American Diabetes Association) Standards of Care
-  - UpToDate - Endocrinology and Diabetes
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'routine-to-emergency' mapped to 'urgent'

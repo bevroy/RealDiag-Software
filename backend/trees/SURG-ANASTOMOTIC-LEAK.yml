@@ -1,41 +1,62 @@
 tree_id: SURG-ANASTOMOTIC-LEAK
 name: Anastomotic Leak
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K91.89
-snomed:
-- 698979004
-urgency: medium
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Anastomotic Leak
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K91.89
+  snomed:
+    - '698979004'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Postoperative fever (POD 5-7 typically)
-- Abdominal pain
-- Tachycardia and leukocytosis
-- Peritoneal signs
-- Recent GI surgery or bowel anastomosis
-- May require reoperation
+  - Postoperative fever (POD 5-7 typically)
+  - Abdominal pain
+  - Tachycardia and leukocytosis
+  - Peritoneal signs
+  - Recent GI surgery or bowel anastomosis
+  - May require reoperation
+differentials:
+  - Postop ileus
+  - Abscess
+  - Perforation
+  - Wound infection
+  - Fistula
 workup: []
 treatment:
-  - 'Urgent surgical consultation - high mortality if untreated'
-  - 'NPO, aggressive IV fluid resuscitation'
-  - 'Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H + vancomycin 15-20mg/kg IV Q8-12H'
-  - 'CT abdomen/pelvis with oral contrast - diagnostic test'
-  - 'Drain intra-abdominal collections percutaneously if possible'
-  - 'Operative management for peritonitis or septic shock - washout, diversion (colostomy/ileostomy), drain placement'
-  - 'ICU care - sepsis management, vasopressor support'
-  - 'TPN (total parenteral nutrition) - bowel rest during healing'
-  - 'Endoscopic approaches for selected leaks - stent placement, clips, vacuum therapy'
-  - 'Second-look operation in 24-48 hours if unstable'
-  - 'Mortality 10-30% depending on location and timing'
+  - Urgent surgical consultation - high mortality if untreated
+  - NPO, aggressive IV fluid resuscitation
+  - Broad-spectrum antibiotics - piperacillin-tazobactam 4.5g IV Q6H + vancomycin 15-20mg/kg IV Q8-12H
+  - CT abdomen/pelvis with oral contrast - diagnostic test
+  - Drain intra-abdominal collections percutaneously if possible
+  - Operative management for peritonitis or septic shock - washout, diversion (colostomy/ileostomy), drain placement
+  - ICU care - sepsis management, vasopressor support
+  - TPN (total parenteral nutrition) - bowel rest during healing
+  - Endoscopic approaches for selected leaks - stent placement, clips, vacuum therapy
+  - Second-look operation in 24-48 hours if unstable
+  - Mortality 10-30% depending on location and timing
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -53,14 +74,23 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Postop ileus
-  - Abscess
-  - Perforation
-  - Wound infection
-  - Fistula
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

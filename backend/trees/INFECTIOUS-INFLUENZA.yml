@@ -1,34 +1,47 @@
 tree_id: INFECTIOUS-INFLUENZA
 name: Influenza
+version: '1.0'
+status: draft
 family: Infectious Disease
 specialty: Infectious Disease
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
 chief_complaint: Fever, cough, and myalgias
 description: |
   Acute respiratory illness caused by influenza A or B virus. Highly contagious, transmitted via respiratory droplets.
   Seasonal epidemics (winter in temperate climates). Incubation period 1-4 days. Complications include pneumonia, myocarditis, encephalitis.
-icd10: J11.1
-snomed: 6142004
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J11.1
+  snomed:
+    - '6142004'
+  icpc2: []
+sources:
+  - text: IDSA (Infectious Diseases Society of America) Guidelines
+    origin: citations
+  - text: WHO (World Health Organization) Treatment Guidelines
+    origin: citations
+  - text: UpToDate - Infectious Diseases
+    origin: citations
 presentations:
   - Abrupt onset fever, chills
   - Myalgias, headache
   - Cough, sore throat
   - Fatigue, weakness
-  - Complications: pneumonia, myocarditis
-  - High-risk: elderly, pregnant, immunocompromised
-urgency: Moderate
-referrals:
-  emergency:
-    - Sepsis
-    - Meningitis
-    - Systemic severe infection
-  urgent:
-    - Suspected endocarditis
-    - Complicated infection
-  routine:
-    - Chronic infection
-    - Prevention
-    - Immunization
-
+  - 'Complications: pneumonia, myocarditis'
+  - 'High-risk: elderly, pregnant, immunocompromised'
+differentials:
+  - Common cold (rhinovirus)
+  - COVID-19
+  - Respiratory syncytial virus (RSV)
+  - Streptococcal pharyngitis
+  - Community-acquired pneumonia
+  - Mononucleosis
 workup:
   - Clinical diagnosis during influenza season - sudden onset fever, cough, myalgias, headache, fatigue
   - Rapid influenza diagnostic test (RIDT) detects viral antigens (60-80% sensitive, results in 15 minutes)
@@ -54,17 +67,35 @@ clinical_pearls:
   - Secondary bacterial pneumonia presents with new fever after initial improvement
   - Oseltamivir reduces symptom duration by 1 day and reduces complications
   - Chemoprophylaxis with oseltamivir 75mg daily x 10 days for high-risk exposed individuals (within 48 hours of exposure)
-differentials:
-  - Common cold (rhinovirus)
-  - COVID-19
-  - Respiratory syncytial virus (RSV)
-  - Streptococcal pharyngitis
-  - Community-acquired pneumonia
-  - Mononucleosis
+red_flags: []
+disposition_guidance: {}
+referrals:
+  emergency:
+    - Sepsis
+    - Meningitis
+    - Systemic severe infection
+  urgent:
+    - Suspected endocarditis
+    - Complicated infection
+  routine:
+    - Chronic infection
+    - Prevention
+    - Immunization
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Sudden onset fever 102F, severe myalgias, dry cough, headache x 24 hours → Flu season, multiple colleagues ill → Rapid influenza test positive for influenza A → High-risk patient (diabetes, age 68) → Start oseltamivir 75mg BID within 36 hours of symptom onset → Symptomatic treatment with acetaminophen → Fever resolves day 3, symptoms improve → Complete 5-day course → Full recovery by day 7
-
-citations:
-  - IDSA (Infectious Diseases Society of America) Guidelines
-  - WHO (World Health Organization) Treatment Guidelines
-  - UpToDate - Infectious Diseases
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Moderate' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

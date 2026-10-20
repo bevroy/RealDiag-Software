@@ -1,11 +1,33 @@
 tree_id: GI-ANAL-FISSURE
 name: Anal Fissure
+version: '1.0'
+status: draft
 family: gastroenterology
 specialty: Gastroenterology
-icd10: K60.2
-snomed: 17319000
-urgency: []
-homeopathy: []
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K60.2
+  snomed:
+    - '17319000'
+  icpc2: []
+sources:
+  - text: ACG (American College of Gastroenterology) Clinical Guidelines
+    origin: citations
+  - text: AGA (American Gastroenterological Association) Clinical Practice Updates
+    origin: citations
+  - text: UpToDate - Gastroenterology and Hepatology
+    origin: citations
+  - text: American Society of Colon and Rectal Surgeons Clinical Practice Guidelines 2017
+    origin: trace.source
 presentations:
   - Sharp, tearing pain during and after bowel movements
   - Bright red blood on toilet paper or stool surface
@@ -16,6 +38,13 @@ presentations:
   - Sentinel skin tag at distal end of fissure
   - Chronic fissure with exposed internal anal sphincter fibers
   - Most commonly located in posterior midline (90%)
+differentials:
+  - Hemorrhoids (painless bleeding, prolapse, no tear visible)
+  - Perianal abscess (tender fluctuant mass, fever, systemic symptoms)
+  - Anal fistula (chronic drainage, opening visible, history of abscess)
+  - Proctitis (inflammatory bowel disease, sexually transmitted infections)
+  - Anal cancer (indurated ulcer, irregular borders, lymphadenopathy)
+  - Crohn's disease (lateral fissures, skip lesions, systemic symptoms)
 workup:
   - Clinical diagnosis based on history and visual inspection
   - Gentle external examination - visualize tear in anoderm
@@ -39,31 +68,36 @@ treatment:
   - Surgical referral - lateral internal sphincterotomy (gold standard for refractory cases)
   - Avoid straining and prolonged sitting on toilet
 clinical_pearls:
-  - "Acute fissures (<6 weeks) heal spontaneously in 50% of cases with conservative management"
-  - "Chronic fissures (>6 weeks) have <50% healing rate without medical or surgical intervention"
-  - "Posterior midline location (90%) due to relatively poor blood supply in that area"
-  - "Lateral or multiple fissures suggest Crohn's disease, tuberculosis, syphilis, HIV, or malignancy"
-  - "Classic triad: pain during defecation, bright red blood, sentinel skin tag"
-  - "Nitroglycerin and diltiazem work by relaxing internal anal sphincter, improving blood flow"
-  - "Lateral internal sphincterotomy is 95% effective but risk of minor incontinence (5-10%)"
-  - "Botox injection avoids permanent sphincter damage but may need repeat injections"
+  - Acute fissures (<6 weeks) heal spontaneously in 50% of cases with conservative management
+  - Chronic fissures (>6 weeks) have <50% healing rate without medical or surgical intervention
+  - Posterior midline location (90%) due to relatively poor blood supply in that area
+  - Lateral or multiple fissures suggest Crohn's disease, tuberculosis, syphilis, HIV, or malignancy
+  - 'Classic triad: pain during defecation, bright red blood, sentinel skin tag'
+  - Nitroglycerin and diltiazem work by relaxing internal anal sphincter, improving blood flow
+  - Lateral internal sphincterotomy is 95% effective but risk of minor incontinence (5-10%)
+  - Botox injection avoids permanent sphincter damage but may need repeat injections
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Colorectal surgery for chronic fissures refractory to medical management
   - Gastroenterology if concern for inflammatory bowel disease
   - Consider surgical consultation if atypical features or recurrent fissures
-differentials:
-  - Hemorrhoids (painless bleeding, prolapse, no tear visible)
-  - Perianal abscess (tender fluctuant mass, fever, systemic symptoms)
-  - Anal fistula (chronic drainage, opening visible, history of abscess)
-  - Proctitis (inflammatory bowel disease, sexually transmitted infections)
-  - Anal cancer (indurated ulcer, irregular borders, lymphadenopathy)
-  - Crohn's disease (lateral fissures, skip lesions, systemic symptoms)
-trace:
-  source: American Society of Colon and Rectal Surgeons Clinical Practice Guidelines 2017
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - ACG (American College of Gastroenterology) Clinical Guidelines
-  - AGA (American Gastroenterological Association) Clinical Practice Updates
-  - UpToDate - Gastroenterology and Hepatology
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

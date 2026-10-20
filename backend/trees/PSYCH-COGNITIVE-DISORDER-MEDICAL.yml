@@ -1,18 +1,50 @@
 tree_id: PSYCH-COGNITIVE-DISORDER-MEDICAL
 name: Cognitive Disorder Due to Medical Condition
+version: '1.0'
+status: draft
 family: psychiatry
-specialty: Psychiatry/Neurology
-icd10: F06.8
-snomed: 19367006
-urgency: []
-homeopathy: []
+specialty: Psychiatry
+secondary_specialties:
+  - Neurology
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - F06.8
+  snomed:
+    - '19367006'
+  icpc2: []
+sources:
+  - text: APA (American Psychiatric Association) Practice Guidelines
+    origin: citations
+  - text: NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
+    origin: citations
+  - text: UpToDate - Psychiatry
+    origin: citations
+  - text: DSM-5-TR Criteria, American Academy of Neurology Guidelines on Dementia, Mayo Clinic Proceedings on Reversible Dementia
+    origin: trace.source
 presentations:
   - Cognitive impairment (memory, attention, executive function, language) secondary to medical condition
   - Evidence from history, exam, or labs that cognitive disturbance is direct consequence of medical condition
   - Temporal relationship between medical condition and cognitive symptoms
   - Not better explained by delirium, dementia, or primary psychiatric disorder
   - May be reversible if underlying condition treated
-  - Common medical causes: neurological (stroke, TBI, tumor, MS), metabolic (thyroid, B12, hepatic encephalopathy), infectious (HIV, neurosyphilis), autoimmune (lupus cerebritis)
+  - 'Common medical causes: neurological (stroke, TBI, tumor, MS), metabolic (thyroid, B12, hepatic encephalopathy), infectious (HIV, neurosyphilis), autoimmune (lupus cerebritis)'
+differentials:
+  - Cognitive disorder due to medical condition (temporal relationship to medical illness, potentially reversible)
+  - Alzheimer disease and other dementias (chronic, progressive, no clear medical cause)
+  - Delirium (acute, fluctuating, impaired attention)
+  - Major depressive disorder (pseudodementia - cognitive symptoms improve with depression treatment)
+  - Substance-induced cognitive disorder (alcohol, benzodiazepines, chronic drug use)
+  - Mild cognitive impairment (less severe, may not significantly impair function)
+  - Vascular dementia (stepwise decline, cardiovascular risk factors, focal neurological signs)
+  - Normal aging (mild forgetfulness, no functional impairment)
 workup:
   - Comprehensive medical history
   - Onset and timeline of cognitive symptoms
@@ -21,7 +53,7 @@ workup:
   - Substance use history (alcohol, drugs)
   - Cognitive assessment
   - Montreal Cognitive Assessment (MoCA) or Mini-Mental State Exam (MMSE)
-  - Assess domains: memory, attention, executive function, language, visuospatial
+  - 'Assess domains: memory, attention, executive function, language, visuospatial'
   - Compare to baseline if available
   - Neurological examination
   - Focal neurological deficits (suggest structural lesion)
@@ -36,11 +68,11 @@ workup:
   - Vitamin D
   - Rapid plasma reagin (RPR) for syphilis
   - HIV testing
-  - Consider: heavy metals, ceruloplasmin (Wilson's), ammonia, arterial blood gas
+  - 'Consider: heavy metals, ceruloplasmin (Wilson''s), ammonia, arterial blood gas'
   - Brain imaging (essential to rule out structural causes)
   - MRI brain preferred (better detail)
   - CT head if MRI contraindicated or emergency
-  - Look for: stroke, tumor, hydrocephalus, atrophy, white matter disease
+  - 'Look for: stroke, tumor, hydrocephalus, atrophy, white matter disease'
   - Additional testing based on clinical suspicion
   - EEG if seizure disorder suspected
   - Lumbar puncture if infection, autoimmune, or paraneoplastic syndrome suspected
@@ -49,12 +81,12 @@ workup:
 treatment:
   - Treat underlying medical condition (PRIMARY goal)
   - Examples based on etiology
-  - Hypothyroidism: levothyroxine replacement
-  - Vitamin B12 deficiency: B12 supplementation (1000 mcg daily)
-  - Neurosyphilis: IV penicillin
-  - Normal pressure hydrocephalus: ventriculoperitoneal shunt
-  - Brain tumor: neurosurgical referral
-  - Autoimmune encephalitis: immunotherapy (steroids, IVIG, plasmapheresis)
+  - 'Hypothyroidism: levothyroxine replacement'
+  - 'Vitamin B12 deficiency: B12 supplementation (1000 mcg daily)'
+  - 'Neurosyphilis: IV penicillin'
+  - 'Normal pressure hydrocephalus: ventriculoperitoneal shunt'
+  - 'Brain tumor: neurosurgical referral'
+  - 'Autoimmune encephalitis: immunotherapy (steroids, IVIG, plasmapheresis)'
   - Medication optimization
   - Discontinue or reduce anticholinergic medications
   - Simplify medication regimen
@@ -76,14 +108,16 @@ treatment:
   - Reassess cognitive function after treating underlying condition
   - Some conditions reversible with treatment, others progressive
 clinical_pearls:
-  - "Always assume cognitive impairment is due to medical cause until proven otherwise - potentially reversible"
-  - "Most common reversible causes: thyroid disorders, vitamin B12 deficiency, normal pressure hydrocephalus, medication effects"
-  - "Brain MRI essential - identifies structural causes in 15-30% of cases"
-  - "Temporal relationship between medical condition and cognitive symptoms is key diagnostic feature"
-  - "HIV-associated neurocognitive disorder affects 15-50% of HIV patients despite antiretroviral therapy"
-  - "Autoimmune encephalitis increasingly recognized - consider in rapidly progressive cognitive decline with psychiatric symptoms"
-  - "Cognitive impairment from hypothyroidism usually reversible with thyroid replacement"
-  - "Anticholinergic burden from medications major contributor to cognitive impairment in elderly"
+  - Always assume cognitive impairment is due to medical cause until proven otherwise - potentially reversible
+  - 'Most common reversible causes: thyroid disorders, vitamin B12 deficiency, normal pressure hydrocephalus, medication effects'
+  - Brain MRI essential - identifies structural causes in 15-30% of cases
+  - Temporal relationship between medical condition and cognitive symptoms is key diagnostic feature
+  - HIV-associated neurocognitive disorder affects 15-50% of HIV patients despite antiretroviral therapy
+  - Autoimmune encephalitis increasingly recognized - consider in rapidly progressive cognitive decline with psychiatric symptoms
+  - Cognitive impairment from hypothyroidism usually reversible with thyroid replacement
+  - Anticholinergic burden from medications major contributor to cognitive impairment in elderly
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Neurology for neurological causes (stroke, seizures, dementia evaluation)
   - Endocrinology for endocrine disorders (thyroid, pituitary)
@@ -91,21 +125,22 @@ referrals:
   - Rheumatology for autoimmune causes (lupus, vasculitis)
   - Neurosurgery for structural lesions requiring intervention
   - Neuropsychology for formal cognitive testing
-differentials:
-  - Cognitive disorder due to medical condition (temporal relationship to medical illness, potentially reversible)
-  - Alzheimer disease and other dementias (chronic, progressive, no clear medical cause)
-  - Delirium (acute, fluctuating, impaired attention)
-  - Major depressive disorder (pseudodementia - cognitive symptoms improve with depression treatment)
-  - Substance-induced cognitive disorder (alcohol, benzodiazepines, chronic drug use)
-  - Mild cognitive impairment (less severe, may not significantly impair function)
-  - Vascular dementia (stepwise decline, cardiovascular risk factors, focal neurological signs)
-  - Normal aging (mild forgetfulness, no functional impairment)
-trace:
-  source: DSM-5-TR Criteria, American Academy of Neurology Guidelines on Dementia, Mayo Clinic Proceedings on Reversible Dementia
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - APA (American Psychiatric Association) Practice Guidelines
-  - NICE (National Institute for Health and Care Excellence) Mental Health Guidelines
-  - UpToDate - Psychiatry
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

@@ -10,6 +10,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 from backend.services.homeopathy_service import get_homeopathy_service, HomeopathicRemedy
+from backend.services.content_labels import HOMEOPATHY_VALIDATION_STATEMENT
 
 router = APIRouter(prefix="/homeopathy", tags=["homeopathy"])
 
@@ -23,6 +24,7 @@ class HomeopathyRequest(BaseModel):
 class HomeopathyResponse(BaseModel):
     """Response with homeopathic remedy suggestions."""
     remedies: List[HomeopathicRemedy]
+    validation_statement: str = HOMEOPATHY_VALIDATION_STATEMENT
     disclaimer: str = (
         "DISCLAIMER: Homeopathic remedies are complementary suggestions based on classical "
         "homeopathic materia medica. These suggestions are for informational purposes only "

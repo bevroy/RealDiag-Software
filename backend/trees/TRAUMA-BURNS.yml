@@ -1,47 +1,67 @@
 tree_id: TRAUMA-BURNS
 name: Burn Evaluation and Management
+version: '1.0'
+status: draft
 family: emergency
-specialty: Trauma Surgery/Emergency Medicine/Burn Surgery
-icd10: T30.0
-snomed: 125666000
+specialty: Trauma Surgery
+secondary_specialties:
+  - Emergency Medicine
+  - Burn Surgery
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: Burn Injury
+description: Diagnostic decision tree for burn evaluation and management
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - T30.0
+  snomed:
+    - '125666000'
+  icpc2: []
+sources:
+  - text: EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines
+    origin: citations
+  - text: ATLS (Advanced Trauma Life Support) Guidelines
+    origin: citations
+  - text: UpToDate - Trauma Surgery and Critical Care
+    origin: citations
 presentations:
   - Burn injury (thermal, chemical, electrical)
   - Pain (except full-thickness)
   - Erythema, blistering
-  - Circumferential burns: compartment syndrome risk
-  - Inhalation injury: stridor, carbonaceous sputum
+  - 'Circumferential burns: compartment syndrome risk'
+  - 'Inhalation injury: stridor, carbonaceous sputum'
   - Rule of 9s for TBSA calculation
-chief_complaint: Burn Injury
-description: Diagnostic decision tree for burn evaluation and management
-version: "1.0"
 differentials:
   - Thermal burn
   - Chemical burn
   - Electrical burn
   - Radiation burn
   - Sunburn
-citations:
-  - EAST (Eastern Association for the Surgery of Trauma) Clinical Practice Guidelines
-  - ATLS (Advanced Trauma Life Support) Guidelines
-  - UpToDate - Trauma Surgery and Critical Care
-author: RealDiag Team
-
+workup: []
 treatment:
-  - 'Remove from source, stop burning process - cool water x10-20 min (not ice)'
-  - 'Assess airway - inhalation injury if singed nasal hairs, soot, hoarseness (intubate early)'
-  - 'Calculate TBSA with Rule of Nines - each arm 9%, each leg 18%, anterior/posterior trunk 18% each, head 9%'
-  - 'Parkland formula for fluid resuscitation - 4mL x kg x %TBSA give half in first 8 hours, half in next 16 hours'
+  - Remove from source, stop burning process - cool water x10-20 min (not ice)
+  - Assess airway - inhalation injury if singed nasal hairs, soot, hoarseness (intubate early)
+  - Calculate TBSA with Rule of Nines - each arm 9%, each leg 18%, anterior/posterior trunk 18% each, head 9%
+  - Parkland formula for fluid resuscitation - 4mL x kg x %TBSA give half in first 8 hours, half in next 16 hours
   - 'Burn center transfer if: TBSA >10%, face/hands/feet/genitals, circumferential, inhalation, electrical, chemical, or age extremes'
-  - 'Pain control - IV morphine, fentanyl'
-  - 'Tetanus prophylaxis'
+  - Pain control - IV morphine, fentanyl
+  - Tetanus prophylaxis
   - 'Superficial (first-degree): Moisturizers, NSAIDs, no debridement needed'
   - 'Partial thickness (second-degree): Clean, debride blisters if >2cm, topical silver sulfadiazine BID, burn dressing'
   - 'Full thickness (third-degree): Surgical excision and skin grafting within 1 week'
-  - 'Prophylactic antibiotics NOT recommended - increases resistance'
-  - 'Early enteral nutrition critical - hypermetabolic state, protein 1.5-2g/kg/day'
-
-entry_point: severity_assessment
-
+  - Prophylactic antibiotics NOT recommended - increases resistance
+  - Early enteral nutrition critical - hypermetabolic state, protein 1.5-2g/kg/day
+clinical_pearls:
+  - 'Rule of nines: head 9%, each arm 9%, each leg 18%, torso 36%, perineum 1%'
+  - 'Parkland formula: 4 mL/kg/%BSA LR first 24 hours (half in first 8)'
+  - 'Circumferential burns: monitor for compartment syndrome'
+  - Inhalation injury increases mortality independent of burn size
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - GI bleeding with hemodynamic instability
@@ -59,46 +79,43 @@ referrals:
     - GERD unresponsive to treatment
     - Abnormal liver enzymes
     - Screening colonoscopy
-
-clinical_pearls:
-  - Rule of nines: head 9%, each arm 9%, each leg 18%, torso 36%, perineum 1%
-  - Parkland formula: 4 mL/kg/%BSA LR first 24 hours (half in first 8)
-  - Circumferential burns: monitor for compartment syndrome
-  - Inhalation injury increases mortality independent of burn size
-
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: severity_assessment
 nodes:
   - id: severity_assessment
     type: question
-    text: "Burn depth and extent?"
+    text: Burn depth and extent?
     options:
-      - label: "Critical burn (transfer criteria)"
+      - label: Critical burn (transfer criteria)
         next: critical_burn
-      - label: "Full-thickness (3rd degree)"
+      - label: Full-thickness (3rd degree)
         next: full_thickness
-      - label: "Partial-thickness (2nd degree)"
+      - label: Partial-thickness (2nd degree)
         next: partial_thickness
-      - label: "Superficial (1st degree)"
+      - label: Superficial (1st degree)
         next: superficial_burn
-      - label: "Chemical burn"
+      - label: Chemical burn
         next: chemical_burn
-      - label: "Electrical burn"
+      - label: Electrical burn
         next: electrical_burn
-
   - id: critical_burn
     type: question
-    text: "Which burn center transfer criteria met?"
+    text: Which burn center transfer criteria met?
     options:
-      - label: "Partial-thickness >10% TBSA"
+      - label: Partial-thickness >10% TBSA
         next: major_burn
-      - label: "Full-thickness any %"
+      - label: Full-thickness any %
         next: full_thickness_transfer
-      - label: "Face, hands, feet, genitals, joints"
+      - label: Face, hands, feet, genitals, joints
         next: special_area_burn
-      - label: "Inhalation injury"
+      - label: Inhalation injury
         next: inhalation_injury
-      - label: "Circumferential burn"
+      - label: Circumferential burn
         next: circumferential_burn
-
   - id: major_burn
     type: diagnosis
     diagnosis: Major Burn (>10% TBSA)
@@ -122,7 +139,6 @@ nodes:
       - Clean burns, apply silver sulfadiazine
       - TRANSFER to burn center
       - Keep patient warm
-
   - id: full_thickness_transfer
     type: diagnosis
     diagnosis: Full-Thickness Burn (Burn Center Transfer)
@@ -142,7 +158,6 @@ nodes:
       - Do NOT apply topical agents before transfer
       - TRANSFER to burn center
       - Will require excision and grafting
-
   - id: special_area_burn
     type: diagnosis
     diagnosis: Burn to Special Area (Face/Hands/Feet/Genitals/Joints)
@@ -162,7 +177,6 @@ nodes:
       - Tetanus prophylaxis
       - TRANSFER to burn center for definitive care
       - Burn center for specialized rehabilitation
-
   - id: inhalation_injury
     type: diagnosis
     diagnosis: Inhalation Injury
@@ -183,7 +197,6 @@ nodes:
       - TRANSFER to burn center
       - ICU admission
       - High mortality risk
-
   - id: circumferential_burn
     type: diagnosis
     diagnosis: Circumferential Burn
@@ -201,16 +214,14 @@ nodes:
       - IV fluid resuscitation
       - TRANSFER to burn center
       - May require fasciotomy
-
   - id: full_thickness
     type: question
-    text: "TBSA of full-thickness burn?"
+    text: TBSA of full-thickness burn?
     options:
-      - label: "<2% TBSA"
+      - label: <2% TBSA
         next: small_full_thickness
-      - label: "≥2% TBSA or special area"
+      - label: ≥2% TBSA or special area
         next: full_thickness_transfer
-
   - id: small_full_thickness
     type: diagnosis
     diagnosis: Small Full-Thickness Burn
@@ -229,16 +240,14 @@ nodes:
       - Plastic surgery or burn clinic follow-up in 24-48 hours
       - Will likely need excision and grafting
       - Keep clean and moist
-
   - id: partial_thickness
     type: question
-    text: "Characteristics of partial-thickness burn?"
+    text: Characteristics of partial-thickness burn?
     options:
-      - label: "<10% TBSA, no special areas"
+      - label: <10% TBSA, no special areas
         next: minor_partial_thickness
-      - label: "≥10% TBSA or special area"
+      - label: ≥10% TBSA or special area
         next: major_burn
-
   - id: minor_partial_thickness
     type: diagnosis
     diagnosis: Minor Partial-Thickness Burn (2nd Degree)
@@ -259,7 +268,6 @@ nodes:
       - Dressing changes daily or BID
       - Should heal in 2-3 weeks
       - Burn clinic follow-up if not improving
-
   - id: superficial_burn
     type: diagnosis
     diagnosis: Superficial Burn (1st Degree/Sunburn)
@@ -276,20 +284,18 @@ nodes:
       - Should heal in 3-5 days without scarring
       - No special wound care needed
       - Return if blistering or worsening
-
   - id: chemical_burn
     type: question
-    text: "Type of chemical?"
+    text: Type of chemical?
     options:
-      - label: "Acid (pH <7)"
+      - label: Acid (pH <7)
         next: acid_burn
-      - label: "Alkali (pH >7)"
+      - label: Alkali (pH >7)
         next: alkali_burn
-      - label: "Hydrofluoric acid"
+      - label: Hydrofluoric acid
         next: hf_burn
-      - label: "White phosphorus"
+      - label: White phosphorus
         next: phosphorus_burn
-
   - id: acid_burn
     type: diagnosis
     diagnosis: Acid Chemical Burn
@@ -308,7 +314,6 @@ nodes:
       - Silver sulfadiazine
       - Transfer to burn center if severe
       - Ophthalmology consult if eye exposure
-
   - id: alkali_burn
     type: diagnosis
     diagnosis: Alkali Chemical Burn
@@ -327,7 +332,6 @@ nodes:
       - Tetanus
       - TRANSFER to burn center (higher risk)
       - May require debridement
-
   - id: hf_burn
     type: diagnosis
     diagnosis: Hydrofluoric Acid Burn
@@ -347,7 +351,6 @@ nodes:
       - Toxicology consult
       - TRANSFER to burn center
       - Can cause fatal arrhythmias
-
   - id: phosphorus_burn
     type: diagnosis
     diagnosis: White Phosphorus Burn
@@ -364,16 +367,14 @@ nodes:
       - Surgical debridement of embedded particles
       - TRANSFER to burn center
       - Risk of systemic toxicity
-
   - id: electrical_burn
     type: question
-    text: "Voltage and presentation?"
+    text: Voltage and presentation?
     options:
-      - label: "High-voltage (>1000V) or lightning"
+      - label: High-voltage (>1000V) or lightning
         next: high_voltage
-      - label: "Low-voltage (<1000V) household"
+      - label: Low-voltage (<1000V) household
         next: low_voltage
-
   - id: high_voltage
     type: diagnosis
     diagnosis: High-Voltage Electrical Burn
@@ -399,7 +400,6 @@ nodes:
       - TRANSFER to burn center
       - High risk of delayed complications
       - May require amputations
-
   - id: low_voltage
     type: diagnosis
     diagnosis: Low-Voltage Electrical Burn
@@ -415,3 +415,13 @@ nodes:
       - Tetanus
       - Outpatient follow-up if stable
       - Return precautions for palpitations, chest pain
+criteria: []
+author: RealDiag Team
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

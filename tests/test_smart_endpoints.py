@@ -56,7 +56,12 @@ def _fake_patient_data():
         gender="female",
         labs=[_fake_lab("Potassium", 6.2, "mmol/L", abnormal=True)],
         vitals=[_fake_vital("8867-4", "Heart Rate", 88, "bpm")],
-        conditions=[], medications=[],
+        conditions=[], medications=[], allergies=[],
+        retrieval_status={
+            "labs": "retrieved", "vitals": "retrieved", "conditions": "retrieved",
+            "medications": "retrieved", "allergies": "retrieved",
+        },
+        data_notes=[],
     )
 
 
@@ -65,7 +70,7 @@ class _FakeFHIRClient:
     def __init__(self, *args, **kwargs):
         pass
 
-    def get_patient_data(self, patient_id):
+    def get_patient_data(self, patient_id, observation_requirements=None):
         return _fake_patient_data()
 
     def get_current_encounter(self, patient_id):
@@ -88,7 +93,8 @@ def _clear_overrides():
 def fake_fhir_client(monkeypatch):
     monkeypatch.setattr(smart_router_module, "FHIRClient", _FakeFHIRClient)
     monkeypatch.setattr(
-        smart_router_module.diagnostic_engine, "evaluate_patient", lambda **kwargs: []
+        smart_router_module.diagnostic_engine, "evaluate_encounter",
+        lambda *args, **kwargs: SimpleNamespace(evaluations=[], warnings=[]),
     )
 
 
@@ -177,7 +183,9 @@ def test_evaluate_patient_happy_path(test_client, fake_fhir_client):
     app.dependency_overrides[get_active_smart_session] = lambda: _fake_session(patient_id="12345")
     response = test_client.post("/smart/evaluate-patient", json={"patient_id": "12345"})
     assert response.status_code == 200
-    assert response.json() == []
+    body = response.json()
+    assert body["evaluations"] == []
+    assert body["data_warnings"] == []
 
 
 def test_handoff_falls_back_when_no_active_admission(test_client, fake_fhir_client):

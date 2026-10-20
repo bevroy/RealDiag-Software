@@ -1,10 +1,31 @@
 tree_id: IMMUNO-IMMUNODEFICIENCY
 name: Immunodeficiency (Encounter)
+version: '1.0'
+status: draft
 family: allergy
 specialty: Immunology
-icd10: D84.9
-snomed: "234532001"
-
+secondary_specialties: []
+urgency: routine
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - D84.9
+  snomed:
+    - '234532001'
+  icpc2: []
+sources:
+  - text: Bonilla FA, et al. (2015). Practice parameter for the diagnosis and management of primary immunodeficiency. J Allergy Clin Immunol, 136(5), 1186-1205.
+    origin: citations
+  - text: 'Picard C, et al. (2018). International Union of Immunological Societies: 2017 Primary Immunodeficiency Diseases Committee Report. J Clin Immunol, 38(1), 96-128.'
+    origin: citations
+  - text: 'Ballow M, et al. (2016). The iCARE pathway: A standardized approach to primary immunodeficiency diagnosis. Ann Allergy Asthma Immunol, 117(6), 644-650.'
+    origin: citations
 presentations:
   - Recurrent or severe infections
   - Frequent sinusitis or pneumonia
@@ -16,37 +37,36 @@ presentations:
   - Recurrent bacterial skin infections
   - Family history of immunodeficiency
   - Prolonged infection recovery time
-
+differentials: []
 workup:
   - History:
-    - Infection frequency, severity, and types (bacterial, viral, fungal, parasitic)
-    - Age of onset (congenital vs acquired)
-    - Family history of immunodeficiency or early deaths
-    - Autoimmune conditions
-    - Medications (corticosteroids, immunosuppressants, chemotherapy)
-    - HIV risk factors
-    - Malignancy history
-    - Nutritional status
-    - Vaccination history and response
+      - Infection frequency, severity, and types (bacterial, viral, fungal, parasitic)
+      - Age of onset (congenital vs acquired)
+      - Family history of immunodeficiency or early deaths
+      - Autoimmune conditions
+      - Medications (corticosteroids, immunosuppressants, chemotherapy)
+      - HIV risk factors
+      - Malignancy history
+      - Nutritional status
+      - Vaccination history and response
   - Physical exam:
-    - Growth parameters (weight, height, BMI)
-    - Signs of chronic infection or inflammation
-    - Lymphadenopathy or absence of lymph nodes
-    - Tonsil and adenoid presence (absent in certain immunodeficiencies)
-    - Skin examination (eczema, warts, candidiasis, abscesses)
-    - Hepatosplenomegaly
-    - Oral thrush or periodontal disease
+      - Growth parameters (weight, height, BMI)
+      - Signs of chronic infection or inflammation
+      - Lymphadenopathy or absence of lymph nodes
+      - Tonsil and adenoid presence (absent in certain immunodeficiencies)
+      - Skin examination (eczema, warts, candidiasis, abscesses)
+      - Hepatosplenomegaly
+      - Oral thrush or periodontal disease
   - Laboratory studies:
-    - Complete blood count with differential
-    - Quantitative immunoglobulins (IgG, IgA, IgM, IgE)
-    - Lymphocyte subset panel (CD3, CD4, CD8, CD19, CD16/56)
-    - HIV testing
-    - Vaccine antibody titers (tetanus, diphtheria, pneumococcus)
-    - Complement levels (CH50, C3, C4)
-    - Functional tests (lymphocyte proliferation, neutrophil oxidative burst)
-    - Genetic testing if primary immunodeficiency suspected
-    - Chest X-ray (thymic shadow in infants, chronic lung changes)
-
+      - Complete blood count with differential
+      - Quantitative immunoglobulins (IgG, IgA, IgM, IgE)
+      - Lymphocyte subset panel (CD3, CD4, CD8, CD19, CD16/56)
+      - HIV testing
+      - Vaccine antibody titers (tetanus, diphtheria, pneumococcus)
+      - Complement levels (CH50, C3, C4)
+      - Functional tests (lymphocyte proliferation, neutrophil oxidative burst)
+      - Genetic testing if primary immunodeficiency suspected
+      - Chest X-ray (thymic shadow in infants, chronic lung changes)
 treatment:
   primary_immunodeficiency:
     - Immunoglobulin replacement therapy (IVIG or SubQ Ig) for antibody deficiencies
@@ -74,7 +94,6 @@ treatment:
     - SubQ Ig weekly (home administration possible)
     - Target IgG trough >500-600 mg/dL
     - Monitor for infections and adjust dose as needed
-
 clinical_pearls:
   - Recurrent sinopulmonary infections suggest antibody deficiency (common variable immunodeficiency, selective IgA deficiency)
   - Recurrent skin abscesses or fungal infections suggest phagocytic defect (chronic granulomatous disease)
@@ -88,14 +107,27 @@ clinical_pearls:
   - Check vaccine responses to assess functional antibody production
   - Low IgG with normal vaccine responses may not require treatment
   - Autoimmune conditions commonly coexist with immunodeficiency
-
+red_flags: []
+disposition_guidance: {}
+referrals: []
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - Diagnostic workup for suspected immunodeficiency
   - Immunoglobulin replacement therapy indications and dosing
   - Prophylactic strategies for immunodeficient patients
   - Differentiation of primary vs secondary immunodeficiency
-
-citations:
-  - Bonilla FA, et al. (2015). Practice parameter for the diagnosis and management of primary immunodeficiency. J Allergy Clin Immunol, 136(5), 1186-1205.
-  - Picard C, et al. (2018). International Union of Immunological Societies: 2017 Primary Immunodeficiency Diseases Committee Report. J Clin Immunol, 38(1), 96-128.
-  - Ballow M, et al. (2016). The iCARE pathway: A standardized approach to primary immunodeficiency diagnosis. Ann Allergy Asthma Immunol, 117(6), 644-650.
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency missing; left empty
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to routine; proposed default, pending clinician confirmation.

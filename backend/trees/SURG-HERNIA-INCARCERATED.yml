@@ -1,39 +1,59 @@
 tree_id: SURG-HERNIA-INCARCERATED
 name: Incarcerated Hernia
+version: '1.0'
+status: draft
 family: Surgery
 specialty: Surgery
-icd10:
-- K46.0
-snomed:
-- 49341006
-urgency: medium
+secondary_specialties: []
+urgency: emergent
+urgency_explanation: ''
+chief_complaint: ''
 description: Comprehensive evaluation and management of Incarcerated Hernia
-version: '1.0'
-citations:
-  - ACS (American College of Surgeons) Clinical Guidelines
-  - RCS (Royal College of Surgeons) Guidelines
-  - UpToDate - General Surgery
-author: RealDiag Clinical Team
-homeopathy: []
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - K46.0
+  snomed:
+    - '49341006'
+  icpc2: []
+sources:
+  - text: ACS (American College of Surgeons) Clinical Guidelines
+    origin: citations
+  - text: RCS (Royal College of Surgeons) Guidelines
+    origin: citations
+  - text: UpToDate - General Surgery
+    origin: citations
+  - text: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)
+    origin: trace.source
 presentations:
-- Painful irreducible hernia
-- Nausea and vomiting
-- Abdominal distension
-- Tender firm mass at hernia site
-- Signs of bowel obstruction
-- Risk of strangulation
+  - Painful irreducible hernia
+  - Nausea and vomiting
+  - Abdominal distension
+  - Tender firm mass at hernia site
+  - Signs of bowel obstruction
+  - Risk of strangulation
+differentials:
+  - Bowel obstruction
+  - Lipoma
+  - Abscess
+  - Femoral aneurysm
 workup: []
 treatment:
-  - 'Urgent surgical evaluation - risk of strangulation'
-  - 'NPO, IV fluids'
-  - 'Attempt manual reduction if no peritoneal signs - Trendelenburg position, sedation, gentle sustained pressure'
+  - Urgent surgical evaluation - risk of strangulation
+  - NPO, IV fluids
+  - Attempt manual reduction if no peritoneal signs - Trendelenburg position, sedation, gentle sustained pressure
   - 'If successful reduction: Elective hernia repair within days'
   - 'If cannot reduce OR signs of strangulation (fever, peritonitis, WBC elevation): Emergency surgery'
-  - 'Emergent hernia repair with bowel inspection for ischemia'
-  - 'Resect ischemic bowel if present'
-  - 'Mesh repair if no contamination, primary repair if contaminated field'
-  - 'Antibiotics perioperative - cefazolin 2g IV'
+  - Emergent hernia repair with bowel inspection for ischemia
+  - Resect ischemic bowel if present
+  - Mesh repair if no contamination, primary repair if contaminated field
+  - Antibiotics perioperative - cefazolin 2g IV
 clinical_pearls: []
+red_flags: []
+disposition_guidance: {}
 referrals:
   emergency:
     - Acute abdomen
@@ -51,13 +71,23 @@ referrals:
     - Gallstones without cholecystitis
     - Benign masses
     - Screening abnormalities
-differentials:
-  - Bowel obstruction
-  - Lipoma
-  - Abscess
-  - Femoral aneurysm
-trace:
-  source: American College of Surgeons (ACS) Guidelines, Society of American Gastrointestinal
-    and Endoscopic Surgeons (SAGES)
-  version: 0.1.0
-  last_updated: '2024-12-26'
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+author: RealDiag Clinical Team
+change_log:
+  - date: '2024-12-26'
+    version: 0.1.0
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'medium' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to emergent; proposed default, pending clinician confirmation.

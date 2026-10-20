@@ -1,13 +1,34 @@
 tree_id: DERM-SQUAMOUS-CELL-CARCINOMA
 name: Squamous Cell Carcinoma (Skin)
+version: '1.0'
+status: draft
 family: dermatology
-specialty: Dermatology, Primary Care
+specialty: Dermatology
+secondary_specialties:
+  - Primary Care
+urgency: urgent
+urgency_explanation: ''
 chief_complaint: Non-healing skin lesion, growing scaly patch or nodule on sun-exposed area
 description: |
   Squamous cell carcinoma (SCC) is the second most common skin cancer. Arises from keratinocytes in epidermis.
   Most often caused by cumulative UV exposure. Can metastasize but less aggressive than melanoma. Precursor is actinic keratosis.
-icd10: C44.92
-snomed: "402815007"
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - C44.92
+  snomed:
+    - '402815007'
+  icpc2: []
+sources:
+  - text: American Academy of Dermatology Skin Cancer Guidelines
+    origin: citations
+  - text: NCCN Squamous Cell Skin Cancer Guidelines
+    origin: citations
+  - text: UpToDate - Dermatology
+    origin: citations
 presentations:
   - Scaly, crusted, or hyperkeratotic patch or plaque
   - Firm, flesh-colored or red nodule
@@ -17,17 +38,14 @@ presentations:
   - Growth on sun-exposed areas (face, ears, scalp, neck, arms, hands)
   - History of actinic keratoses
   - Lesion arising in scar or chronic wound
-urgency: Moderate
-referrals:
-  urgent:
-    - Rapidly growing lesion
-    - Large lesion (>2cm)
-    - High-risk location (ear, lip, genitals)
-    - Perineural invasion or deep invasion
-  dermatology:
-    - All suspected squamous cell carcinomas for biopsy and treatment planning
-  oncology:
-    - Metastatic disease
+differentials:
+  - Actinic keratosis
+  - Basal cell carcinoma
+  - Keratoacanthoma
+  - Wart
+  - Seborrheic keratosis
+  - Hypertrophic scar or keloid
+  - Melanoma
 workup:
   - Clinical exam with dermoscopy
   - Skin biopsy (shave, punch, or excisional)
@@ -48,17 +66,33 @@ clinical_pearls:
   - Actinic keratoses are precursor lesions
   - Immunosuppressed patients (organ transplant) have much higher risk
   - Sun protection critical for prevention
-differentials:
-  - Actinic keratosis
-  - Basal cell carcinoma
-  - Keratoacanthoma
-  - Wart
-  - Seborrheic keratosis
-  - Hypertrophic scar or keloid
-  - Melanoma
+red_flags: []
+disposition_guidance: {}
+referrals:
+  urgent:
+    - Rapidly growing lesion
+    - Large lesion (>2cm)
+    - High-risk location (ear, lip, genitals)
+    - Perineural invasion or deep invasion
+  dermatology:
+    - All suspected squamous cell carcinomas for biopsy and treatment planning
+  oncology:
+    - Metastatic disease
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
 trace:
   - 72-year-old man with fair skin presents with 8-month history of growing, non-healing lesion on left ear. Exam reveals 1.5cm firm, erythematous nodule with central ulceration and crust on helix. Shave biopsy performed. Pathology confirms well-differentiated squamous cell carcinoma. Given high-risk location on ear, referred to dermatology for Mohs surgery. Complete excision achieved with 3 stages. Wound reconstructed with skin graft. Margins clear. Patient counseled on sun protection and close surveillance with full skin exams every 6 months.
-citations:
-  - American Academy of Dermatology Skin Cancer Guidelines
-  - NCCN Squamous Cell Skin Cancer Guidelines
-  - UpToDate - Dermatology
+change_log:
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'Moderate' mapped to 'routine'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Urgency set to urgent; proposed default, pending clinician confirmation.

@@ -1,11 +1,33 @@
 tree_id: PULM-COPD-EXACERBATION
 name: COPD Exacerbation
+version: '1.0'
+status: draft
 family: pulmonology
 specialty: Pulmonology
-icd10: J44.1
-snomed: 195951007
-urgency: high
-homeopathy: []
+secondary_specialties: []
+urgency: urgent
+urgency_explanation: ''
+chief_complaint: ''
+description: ''
+applies_to:
+  sex: null
+  age_min: null
+  age_max: null
+codes:
+  icd10:
+    - J44.1
+  snomed:
+    - '195951007'
+  icpc2: []
+sources:
+  - text: CHEST and ATS (American Thoracic Society) Guidelines
+    origin: citations
+  - text: BTS (British Thoracic Society) Guidelines
+    origin: citations
+  - text: UpToDate - Pulmonary Medicine
+    origin: citations
+  - text: GOLD Guidelines for COPD Management 2023
+    origin: trace.source
 presentations:
   - Worsening dyspnea (cardinal symptom)
   - Increased sputum production
@@ -20,6 +42,15 @@ presentations:
   - Pursed-lip breathing
   - Peripheral edema (right heart failure)
   - Triggers - bacterial/viral infection, air pollution, medication noncompliance
+differentials:
+  - COPD exacerbation
+  - Pneumonia (infiltrate on CXR, high fever)
+  - Heart failure exacerbation (elevated JVP, BNP >400)
+  - Pulmonary embolism (sudden onset, risk factors, D-dimer)
+  - Pneumothorax (unilateral decreased breath sounds, sudden onset)
+  - Pleural effusion (dullness to percussion)
+  - Lung cancer (weight loss, hemoptysis, mass on CXR)
+  - Arrhythmia (palpitations, ECG changes)
 workup:
   - Pulse oximetry - assess baseline O2 saturation and response to supplemental O2
   - Arterial blood gas if severe or concern for hypercapnia
@@ -64,26 +95,26 @@ clinical_pearls:
   - Mortality 10% for hospitalized patients, 40% for ICU patients requiring intubation
   - Post-discharge follow-up at 4-6 weeks to reassess and optimize therapy
   - 30-day readmission rate 20% - high-risk period
+red_flags: []
+disposition_guidance: {}
 referrals:
   - Pulmonology for recurrent exacerbations (≥2 per year), severe COPD, or candidacy for advanced therapies
   - ICU admission for respiratory failure, altered mental status, or hemodynamic instability
   - Palliative care for end-stage COPD (GOLD stage IV) or frequent exacerbations
   - Pulmonary rehabilitation post-exacerbation (improves outcomes)
-differentials:
-  - COPD exacerbation
-  - Pneumonia (infiltrate on CXR, high fever)
-  - Heart failure exacerbation (elevated JVP, BNP >400)
-  - Pulmonary embolism (sudden onset, risk factors, D-dimer)
-  - Pneumothorax (unilateral decreased breath sounds, sudden onset)
-  - Pleural effusion (dullness to percussion)
-  - Lung cancer (weight loss, hemoptysis, mass on CXR)
-  - Arrhythmia (palpitations, ECG changes)
-trace:
-  source: GOLD Guidelines for COPD Management 2023
-  version: '1.0'
-  last_updated: '2025-12-26'
-
-citations:
-  - CHEST and ATS (American Thoracic Society) Guidelines
-  - BTS (British Thoracic Society) Guidelines
-  - UpToDate - Pulmonary Medicine
+special_populations: {}
+crisis_resources: []
+homeopathy:
+  validation_statement: This content has not been clinically validated.
+  remedies: []
+entry_point: ''
+nodes: []
+criteria: []
+change_log:
+  - date: '2025-12-26'
+    version: '1.0'
+    change: Version recorded in trace metadata before standardization
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Standardized to template
+    notes: urgency 'high' mapped to 'urgent'
