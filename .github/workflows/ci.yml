@@ -28,6 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history so the guide-page check can diff a push against its
+          # "before" commit (a shallow clone does not contain it).
+          fetch-depth: 0
       - name: Enforce guide page updates
         env:
           EVENT_NAME: ${{ github.event_name }}

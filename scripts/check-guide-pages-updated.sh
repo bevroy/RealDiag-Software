@@ -9,6 +9,13 @@ CURRENT_SHA="${CURRENT_SHA:-HEAD}"
 GUIDE_USER="frontend/pages/user-guide.js"
 GUIDE_TECH="frontend/pages/technical-medical.js"
 
+# Only changes are checked: pull requests and pushes. Scheduled and manual
+# runs re-test existing code and have nothing to compare.
+if [[ "${EVENT_NAME}" != "pull_request" && "${EVENT_NAME}" != "push" ]]; then
+  echo "Guide sync check: ${EVENT_NAME:-unknown} event, no change to check; skipping."
+  exit 0
+fi
+
 get_diff_range() {
   if [[ "${EVENT_NAME}" == "pull_request" && -n "${BASE_REF}" ]]; then
     git fetch --no-tags --depth=1 origin "${BASE_REF}"
@@ -17,8 +24,16 @@ get_diff_range() {
   fi
 
   if [[ -n "${BEFORE_SHA}" && "${BEFORE_SHA}" != "0000000000000000000000000000000000000000" ]]; then
-    echo "${BEFORE_SHA}...${CURRENT_SHA}"
-    return
+    # The "before" commit may be missing (shallow clone, or force push);
+    # try to fetch it, otherwise fall back to the last commit only.
+    if ! git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+      git fetch --no-tags origin "${BEFORE_SHA}" >/dev/null 2>&1 || true
+    fi
+    if git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+      echo "${BEFORE_SHA}...${CURRENT_SHA}"
+      return
+    fi
+    echo "Guide sync check: before commit ${BEFORE_SHA} not available; checking the last commit only." >&2
   fi
 
   if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
