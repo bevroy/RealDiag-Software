@@ -27,9 +27,10 @@
       <pre id="result">Checking backend...</pre>
     </section>
 
+    <script src="/runtime-config.js"></script>
     <script>
-      // Use runtime-config if available; fall back to the Render backend URL.
-      const API_BASE = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://realdiag-software.onrender.com';
+      // Use runtime-config if available; fall back to the production API.
+      const API_BASE = (window.__RUNTIME_CONFIG && window.__RUNTIME_CONFIG.NEXT_PUBLIC_API_BASE) || 'https://api.realdiag.com';
       async function check(){
         try{
           const h = await fetch(API_BASE + '/health');
