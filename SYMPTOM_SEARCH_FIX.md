@@ -67,7 +67,7 @@ management: [
 
 ### Before Fix:
 ```bash
-curl -X POST https://realdiag-software.onrender.com/search/by-symptoms \
+curl -X POST https://api.realdiag.com/search/by-symptoms \
   -H "Content-Type: application/json" \
   -d '{"symptoms": ["headache", "fever"]}'
 
@@ -126,7 +126,7 @@ Found 170 matches
 1. **Wait for Render Deployment** (2-5 minutes from push)
 2. **Test on Production:**
    ```bash
-   curl -X POST https://realdiag-software.onrender.com/search/by-symptoms \
+   curl -X POST https://api.realdiag.com/search/by-symptoms \
      -H "Content-Type: application/json" \
      -d '{"symptoms": ["headache", "fever"]}'
    ```

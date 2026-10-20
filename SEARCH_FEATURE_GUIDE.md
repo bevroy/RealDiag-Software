@@ -138,16 +138,16 @@ Action: Find specific diabetes-related condition
 ### API Testing
 ```bash
 # Search by diagnosis name
-curl "https://realdiag-software.onrender.com/api/search?q=pneumonia"
+curl "https://api.realdiag.com/api/search?q=pneumonia"
 
 # Search by ICD-10 code
-curl "https://realdiag-software.onrender.com/api/search?q=I21.9"
+curl "https://api.realdiag.com/api/search?q=I21.9"
 
 # Get all families
-curl "https://realdiag-software.onrender.com/api/search/families"
+curl "https://api.realdiag.com/api/search/families"
 
 # Filter by family
-curl "https://realdiag-software.onrender.com/api/search/by-family?family=CARDIOLOGY"
+curl "https://api.realdiag.com/api/search/by-family?family=CARDIOLOGY"
 ```
 
 ## Deployment Status

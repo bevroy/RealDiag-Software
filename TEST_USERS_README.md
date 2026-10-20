@@ -49,7 +49,7 @@ Four test accounts have been created for testing different user roles and featur
 
 ### Login via API (for developers)
 ```bash
-curl -X POST https://realdiag-software.onrender.com/users/login \
+curl -X POST https://api.realdiag.com/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "doctor@example.com",
@@ -133,7 +133,7 @@ All credentials are saved in `test_users_credentials.json` for easy reference:
 
 ```json
 {
-  "backend_url": "https://realdiag-software.onrender.com",
+  "backend_url": "https://api.realdiag.com",
   "users": [
     {
       "email": "admin@realdiag.org",

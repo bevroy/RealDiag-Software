@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ClinicalReviewNotice } from '../components/ClinicalReview';
+import { getApiBase } from '../utils/auth';
 
 export default function AdminReview() {
   const [pendingTrees, setPendingTrees] = useState([]);
@@ -19,7 +20,7 @@ export default function AdminReview() {
   const [roleReason, setRoleReason] = useState('');
   const [roleUpdating, setRoleUpdating] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://realdiag-software.onrender.com';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || getApiBase();
 
   // Load admin token from localStorage
   useEffect(() => {

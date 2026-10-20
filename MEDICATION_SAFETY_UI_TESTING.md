@@ -108,7 +108,7 @@ Navigate to **"⚠️ Allergies"** and add:
 
 The UI calls this endpoint:
 ```
-POST https://realdiag-software.onrender.com/diagnostic/medication-safety-check
+POST https://api.realdiag.com/diagnostic/medication-safety-check
 
 Body:
 {
@@ -120,7 +120,7 @@ Body:
 
 You can also test directly via curl:
 ```bash
-curl -X POST https://realdiag-software.onrender.com/diagnostic/medication-safety-check \
+curl -X POST https://api.realdiag.com/diagnostic/medication-safety-check \
   -H "Content-Type: application/json" \
   -d '{
     "current_medications": ["warfarin", "aspirin"],

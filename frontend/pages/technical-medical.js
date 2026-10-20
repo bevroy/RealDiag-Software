@@ -121,6 +121,7 @@ export default function TechnicalMedicalPage() {
         <section style={styles.section}>
           <h2 style={styles.h2}>8. Recent Platform Updates</h2>
           <ul style={styles.list}>
+            <li>All pages use the configured API address (api.realdiag.com in production); the retired realdiag-software.onrender.com address has been removed from the app, scripts and docs.</li>
             <li>The /diagnostic page and its CI check now use the production API (api.realdiag.com) via the site&apos;s runtime configuration; CI checks app.realdiag.com after each push to main and retries while Netlify publishes.</li>
             <li>All decision trees now share one standard template: codes (ICD-10, SNOMED CT, ICPC-2) are grouped together, guideline sources are consolidated, and every tree carries a version, review status, and change log.</li>
             <li>Tree urgency uses three standard levels (emergent, urgent, routine); every tree has a level, and levels proposed during standardization are marked in each tree's change log pending clinician confirmation.</li>

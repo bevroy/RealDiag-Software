@@ -74,7 +74,7 @@ When Netlify rebuilds, the following NEW features will go live:
 ### Files That Will Deploy
 1. `frontend/pages/patient-history.js` - UI with safety checking
 2. `frontend/styles/PatientHistory.module.css` - Modal and alert styling
-3. All backend API endpoints already live at `https://realdiag-software.onrender.com`
+3. All backend API endpoints already live at `https://api.realdiag.com`
 
 ## ⏱️ Expected Timeline
 - **Manual deploy trigger**: Immediate
@@ -131,11 +131,11 @@ Look at Netlify build logs for:
 ### Check 4: Verify API Connection
 ```bash
 # Test backend is responding
-curl https://realdiag-software.onrender.com/health
+curl https://api.realdiag.com/health
 # Expected: {"ok":true}
 
 # Test medication safety endpoint
-curl -X POST https://realdiag-software.onrender.com/diagnostic/medication-safety-check \
+curl -X POST https://api.realdiag.com/diagnostic/medication-safety-check \
   -H "Content-Type: application/json" \
   -d '{"current_medications": ["warfarin", "aspirin"]}'
 # Expected: JSON with alerts about bleeding risk

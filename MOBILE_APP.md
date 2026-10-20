@@ -147,7 +147,7 @@ Create `src/config.ts`:
 export const API_CONFIG = {
   BASE_URL: __DEV__ 
     ? 'http://localhost:8000' 
-    : 'https://realdiag-software.onrender.com',
+    : 'https://api.realdiag.com',
   TIMEOUT: 30000,
   API_KEY: '', // Set via secure storage
 };

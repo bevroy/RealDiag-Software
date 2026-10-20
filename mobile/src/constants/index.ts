@@ -5,7 +5,7 @@
 // API Configuration
 export const API_BASE_URL = __DEV__
   ? 'http://localhost:8000'
-  : 'https://realdiag-software.onrender.com';
+  : 'https://api.realdiag.com';
 
 export const API_TIMEOUT = 10000; // 10 seconds
 

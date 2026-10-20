@@ -1,7 +1,7 @@
 import type { AnalyzeRequest, AnalyzeResponse } from "./types";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://realdiag-software.onrender.com";
+  process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "https://api.realdiag.com";
 
 export async function analyzeDiagnosticCase(
   payload: AnalyzeRequest

@@ -79,7 +79,7 @@ After deployment completes (~3 minutes), check the logs:
 3. Test the API:
    ```bash
    # Create a test account
-   curl -X POST https://realdiag-software.onrender.com/users/register \
+   curl -X POST https://api.realdiag.com/users/register \
      -H "Content-Type: application/json" \
      -d '{
        "email": "test@example.com",

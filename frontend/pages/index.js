@@ -9,7 +9,7 @@ export default function Home() {
     async function loadTreeCount() {
       try {
         const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-software.onrender.com';
+        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
         
         const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
         if (treesRes.ok) {

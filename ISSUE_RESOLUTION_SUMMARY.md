@@ -11,7 +11,7 @@ The issue wasn't that changes weren't deploying - the issue was that **the medic
 ### Backend vs Frontend Status
 
 #### ✅ Backend (FULLY WORKING)
-- **Location**: https://realdiag-software.onrender.com
+- **Location**: https://api.realdiag.com
 - **Status**: ✅ LIVE with all medication safety features
 - **API Endpoints Working**:
   - `POST /diagnostic/medication-safety-check` ✅
@@ -20,7 +20,7 @@ The issue wasn't that changes weren't deploying - the issue was that **the medic
 
 **Verified via curl testing**:
 ```bash
-curl -X POST https://realdiag-software.onrender.com/diagnostic/medication-safety-check \
+curl -X POST https://api.realdiag.com/diagnostic/medication-safety-check \
   -d '{"current_medications": ["warfarin", "aspirin"]}'
 # Returned: Full safety report with bleeding risk alert ✅
 ```

@@ -129,7 +129,7 @@ python main.py --performance
 1. **Register your app with Epic App Oriel**:
    - Go to https://apporchard.epic.com/
    - Create new SMART on FHIR app
-   - Configure redirect URI: `https://realdiag-software.onrender.com/smart/callback`
+   - Configure redirect URI: `https://api.realdiag.com/smart/callback`
 
 2. **Configure environment variables**:
 ```bash
@@ -140,7 +140,7 @@ cp .env.example .env
 FHIR_BASE_URL=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4
 SMART_CLIENT_ID=your_epic_client_id
 SMART_CLIENT_SECRET=your_epic_client_secret
-SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+SMART_REDIRECT_URI=https://api.realdiag.com/smart/callback
 ```
 
 3. **Launch from Epic**:

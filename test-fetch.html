@@ -10,7 +10,7 @@ async function testFetch() {
   const result = document.getElementById('result');
   result.textContent = 'Testing...';
   try {
-    const response = await fetch('https://realdiag-software.onrender.com/search/by-symptoms', {
+    const response = await fetch('https://api.realdiag.com/search/by-symptoms', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({symptoms: ['headache']})

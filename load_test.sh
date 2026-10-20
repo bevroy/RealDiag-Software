@@ -3,7 +3,7 @@
 # Load Test Script for RealDiag Backend
 # Tests critical endpoints with concurrent requests
 
-API_BASE="https://realdiag-software.onrender.com"
+API_BASE="https://api.realdiag.com"
 RESULTS_FILE="load_test_results.txt"
 
 echo "=== RealDiag Load Test ===" > $RESULTS_FILE

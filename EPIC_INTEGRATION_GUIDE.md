@@ -66,7 +66,7 @@ RealDiag now supports **Epic EHR integration** via **SMART on FHIR** and **FHIR 
    App Name: RealDiag Clinical Decision Support
    Description: AI-powered diagnostic decision support system
    Redirect URIs: 
-     - https://realdiag-software.onrender.com/smart/callback
+     - https://api.realdiag.com/smart/callback
      - http://localhost:8000/smart/callback (for testing)
    
    Requested Scopes:
@@ -89,7 +89,7 @@ Add to your `.env` file or Render environment variables:
 FHIR_BASE_URL=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4
 SMART_CLIENT_ID=your_client_id_here
 SMART_CLIENT_SECRET=your_client_secret_here
-SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+SMART_REDIRECT_URI=https://api.realdiag.com/smart/callback
 ```
 
 **For Render.com:**
@@ -136,7 +136,7 @@ Render will automatically deploy.
 
 In Epic App Oriel, set your launch URL:
 ```
-https://realdiag-software.onrender.com/smart/launch
+https://api.realdiag.com/smart/launch
 ```
 
 ---
@@ -148,7 +148,7 @@ https://realdiag-software.onrender.com/smart/launch
 **Clinician workflow:**
 1. Clinician opens patient chart in Epic
 2. Clicks "RealDiag" app in Epic menu
-3. Epic redirects to: `https://realdiag-software.onrender.com/smart/launch?iss=...&launch=...`
+3. Epic redirects to: `https://api.realdiag.com/smart/launch?iss=...&launch=...`
 4. RealDiag handles OAuth flow
 5. Clinician sees patient data with diagnostic recommendations
 
@@ -160,7 +160,7 @@ import requests
 # After SMART launch, you have an access token and patient ID
 
 response = requests.post(
-    "https://realdiag-software.onrender.com/smart/evaluate-patient",
+    "https://api.realdiag.com/smart/evaluate-patient",
     json={
         "patient_id": "eXg4k...",
         "chief_complaint": "chest pain",
@@ -204,7 +204,7 @@ Recommendations:
 
 ```python
 response = requests.get(
-    "https://realdiag-software.onrender.com/smart/patient/eXg4k...",
+    "https://api.realdiag.com/smart/patient/eXg4k...",
     params={"access_token": "eyJhbG..."}
 )
 
@@ -369,7 +369,7 @@ export default function SmartLaunch() {
     
     if (token && patientId) {
       // Fetch patient evaluations
-      fetch('https://realdiag-software.onrender.com/smart/evaluate-patient', {
+      fetch('https://api.realdiag.com/smart/evaluate-patient', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -206,7 +206,7 @@ https://apporchard.epic.com/
 SMART_CLIENT_ID=your_epic_client_id
 SMART_CLIENT_SECRET=your_epic_secret
 FHIR_BASE_URL=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4
-SMART_REDIRECT_URI=https://realdiag-software.onrender.com/smart/callback
+SMART_REDIRECT_URI=https://api.realdiag.com/smart/callback
 ```
 
 ### 2. Register with Cerner
