@@ -82,11 +82,22 @@ def test_condition_on_problem_list_is_not_listed(engine):
     assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]
 
 
-def test_possible_finding_needs_repeat_caveat(engine):
+def test_single_result_goes_to_the_collapsed_line(engine):
     c = check(run(engine, patient(labs=[lab("4548-4", 7.0, "%", 30)])), "abnormal_without_diagnosis")
-    item = next(i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES")
-    assert "may suggest possible" in item["summary"]
-    assert item["details"]["caveats"][0] == "Confirmation requires a repeat result."
+    assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]
+    single = c["single_results"]
+    assert single["title"] == "Single results that may need repeating"
+    item = next(i for i in single["items"] if i["tree_id"] == "ENDO-DIABETES")
+    assert item["summary"].startswith("HbA1c >= 6.5%: 7.0 % on 2026-09-19: a single result above the diabetes")
+    assert "consider repeating per ADA Standards of Care" in item["summary"]
+    assert item["source"].startswith("ADA") and item["review_status_label"] == "Draft - under clinical review."
+
+
+def test_single_bp_reading_is_not_in_the_main_list(engine):
+    data = patient(vitals=[vital("8480-6", 132, "mmHg"), vital("8462-4", 78, "mmHg")])
+    c = check(run(engine, data), "abnormal_without_diagnosis")
+    assert not [i for i in c["items"] if i["tree_id"] == "CARD-HYPERTENSION"]
+    assert [i for i in c["single_results"]["items"] if i["tree_id"] == "CARD-HYPERTENSION"]
 
 
 def test_acute_criteria_are_not_missed_items(engine):

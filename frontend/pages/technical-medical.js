@@ -37,7 +37,8 @@ export default function TechnicalMedicalPage() {
             clinically relevant word intersections, with optional AI-assisted suggestions when
             confidence is low. Each tree&apos;s chief complaint is matched along with its presentations,
             and a short list of lay and clinical synonyms (for example shortness of breath and
-            dyspnea) is searched together. Emergent trees that match are always returned and labelled
+            dyspnea) is searched together. Negated parts of the input (&quot;no chest pain&quot;) are dropped
+            before ranking in symptom search, the ambulatory differential and the encounter assessment. Emergent trees that match are always returned and labelled
             &quot;Can&apos;t-miss condition&quot;, whatever their score or the result cap.
           </p>
           <p style={styles.p}>

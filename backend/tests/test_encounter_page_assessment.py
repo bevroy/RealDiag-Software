@@ -276,7 +276,8 @@ def test_ehr_visit_reason_used_and_shown(engine, no_ai):
     fhir = FakeFHIR(patient(), encounter={"reasonCode": [{"text": "Chest pressure"}]})
     result, _, _ = run(engine, patient(), None, fhir=fhir)
     assert result["complaint"] == {"text": "Chest pressure", "source": "ehr_visit_reason",
-                                   "source_label": "EHR visit reason", "phrases_used": ["Chest pressure"]}
+                                   "source_label": "EHR visit reason", "phrases_used": ["Chest pressure"],
+                                   "negated_terms": []}
     assert any(d["tree_id"] == ACS for d in result["diagnoses"]["items"])
 
 

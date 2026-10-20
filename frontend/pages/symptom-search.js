@@ -97,6 +97,7 @@ export default function SymptomSearch() {
   const [respiratoryRate, setRespiratoryRate] = useState('');
   const [oxygenSaturation, setOxygenSaturation] = useState('');
   const [results, setResults] = useState([]);
+  const [negatedTerms, setNegatedTerms] = useState([]);
   const [reviewNotice, setReviewNotice] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -759,6 +760,7 @@ export default function SymptomSearch() {
         setNeedsLogin(true);
         setHasSearched(false);
         setResults([]);
+        setNegatedTerms([]);
         return;
       }
 
@@ -768,6 +770,7 @@ export default function SymptomSearch() {
 
       const data = await response.json();
       setResults(data.results || []);
+      setNegatedTerms(data.negated_terms || []);
       setReviewNotice(data.clinical_review_notice);
       
       // Save to recent searches (local)
@@ -798,6 +801,7 @@ export default function SymptomSearch() {
     } catch (err) {
       setError(err.message);
       setResults([]);
+      setNegatedTerms([]);
     } finally {
       setLoading(false);
     }
@@ -839,6 +843,7 @@ export default function SymptomSearch() {
     setRespiratoryRate('');
     setOxygenSaturation('');
     setResults([]);
+    setNegatedTerms([]);
     setHasSearched(false);
     setError(null);
     setNeedsLogin(false);
@@ -1963,6 +1968,11 @@ export default function SymptomSearch() {
             borderRadius: '8px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
           }}>
+            {hasSearched && !loading && negatedTerms.length > 0 && (
+              <p role="note" style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', color: '#4b5563' }}>
+                Not searched (negated): {negatedTerms.join(', ')}
+              </p>
+            )}
             {results.length > 0 && <ClinicalReviewNotice notice={reviewNotice} />}
 
             {/* Results Header with Controls */}

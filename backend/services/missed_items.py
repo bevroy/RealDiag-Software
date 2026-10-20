@@ -40,6 +40,8 @@ EVIDENCE_WINDOW_DAYS = {"lab": SCREENING_LAB_LOOKBACK_DAYS, "vital": VITAL_LOOKB
                         "procedure": SCREENING_PROCEDURE_LOOKBACK_DAYS, "imaging": SCREENING_PROCEDURE_LOOKBACK_DAYS}
 NOT_VISIBLE = "Tests, results or prescriptions from other organizations may not be in this chart."
 
+SINGLE_RESULTS_TITLE = "Single results that may need repeating"
+
 CHECK_TITLES = {
     "abnormal_without_diagnosis": "Abnormal results without a diagnosis",
     "diagnosis_without_support": "Diagnoses without supporting results or medication",
@@ -139,6 +141,16 @@ def _condition_codes(conditions: Iterable[Dict[str, Any]]) -> List[str]:
     return codes
 
 
+_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def _single_result_text(criterion: Any) -> str:
+    """'HbA1c >= 6.5%: 7.0 % on 2026-09-19' (value and date of the single result)."""
+    dates = _DATE.findall(criterion.details or "")
+    when = f" on {dates[-1]}" if dates else ""
+    return f"{criterion.criterion}: {criterion.value}{when}"
+
+
 def _item(summary: str, source: str, status: Optional[str], evidence: List[str], window: str,
           caveats: List[str], **extra: Any) -> Dict[str, Any]:
     return {"summary": summary, "source": source, **review_fields(status),
@@ -151,7 +163,9 @@ def abnormal_without_diagnosis(engine: SmartDiagnosticEngine, evaluations: Dict[
                                patient_data: Any, all_status: Dict[str, str]) -> Dict[str, Any]:
     check = {"type": "abnormal_without_diagnosis", "title": CHECK_TITLES["abnormal_without_diagnosis"],
              "items": [], "not_checked": [],
-             "scope": "Chronic conditions with chart criteria; acute conditions are shown as chart cards instead."}
+             "scope": "Chronic conditions with chart criteria; acute conditions are shown as chart cards instead.",
+             # Single abnormal results that need confirmation, shown collapsed
+             "single_results": {"title": SINGLE_RESULTS_TITLE, "items": []}}
     if _status(all_status, "conditions") != RETRIEVED:
         check["not_checked"].append(
             f"{_not_retrieved_text('conditions', _status(all_status, 'conditions'))}; abnormal results "
@@ -166,13 +180,21 @@ def abnormal_without_diagnosis(engine: SmartDiagnosticEngine, evaluations: Dict[
         label = criteria.get("finding_label", tree.get("name", tree_id))
         source = criteria.get("source", "")
         lookback = max(int(i.get("lookback_days") or 0) for i in criteria["items"]) or None
-        qualifier = "may be consistent with" if evaluation.finding == "consistent" else "may suggest possible"
         caveats = ["The problem list may record this condition under a code RealDiag does not map to it.",
                    NOT_VISIBLE]
         if evaluation.finding == "possible":
-            caveats.insert(0, "Confirmation requires a repeat result.")
+            results = [_single_result_text(c) for c in evaluation.criteria_met]
+            check["single_results"]["items"].append(_item(
+                summary=(f"{'; '.join(results)}: a single result above the {label} threshold. A repeat result "
+                         f"is needed to meet criteria; consider repeating per {source}."),
+                source=source, status=tree.get("status"),
+                evidence=[f"{c.criterion}: {c.value}" + (f" ({c.details})" if c.details else "")
+                          for c in evaluation.criteria_met],
+                window=f"Results from the last {_years_text(lookback)}" if lookback else "Most recent results retrieved",
+                caveats=["Not on the problem list.", NOT_VISIBLE], tree_id=tree_id, name=tree.get("name", tree_id)))
+            continue
         check["items"].append(_item(
-            summary=f"Results {qualifier} {label}, which is not on the problem list. Consider evaluation per {source}.",
+            summary=f"Results may be consistent with {label}, which is not on the problem list. Consider evaluation per {source}.",
             source=source, status=tree.get("status"),
             evidence=[f"{c.criterion}: {c.value}" + (f" ({c.details})" if c.details else "")
                       for c in evaluation.criteria_met],
@@ -451,4 +473,5 @@ def possible_missed_items(engine: SmartDiagnosticEngine, patient_data: Any, hist
                    "none is a finding that something was missed."),
         "checks": checks,
         "item_count": sum(len(c["items"]) for c in checks),
+        "single_result_count": sum(len((c.get("single_results") or {}).get("items", [])) for c in checks),
     }

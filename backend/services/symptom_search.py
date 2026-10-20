@@ -20,7 +20,7 @@ from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, presentation_texts, snomed_codes
-from backend.services.complaint_matching import match_terms
+from backend.services.complaint_matching import match_terms, split_negated
 
 # Emergent trees whose presentations or complaint terms match are always
 # returned, whatever their score or the result cap.
@@ -313,6 +313,8 @@ class SymptomSearchResponse(BaseModel):
     results: List[DiagnosisMatch]
     # Matches found before the result cap (total_results is after it)
     total_matches: Optional[int] = None
+    # Negated parts of the input that were not searched ("no fever")
+    negated_terms: List[str] = []
     # Present while clinical content is unreviewed; None once review is complete
     clinical_review_notice: Optional[str] = None
 
@@ -1082,8 +1084,20 @@ async def rank_diagnoses(
     else:
         families_to_search = all_families
 
-    # Pre-normalize input symptoms once (with listed synonyms)
+    # Negated parts ("no chest pain", "denies fever") are not searched; the
+    # complaint-term match below handles negation itself on the full text.
     complaint_text = "; ".join(effective_symptoms)
+    affirmed: List[str] = []
+    negated_terms: List[str] = []
+    for symptom in effective_symptoms:
+        kept, dropped = split_negated(symptom)
+        if kept:
+            affirmed.append(kept)
+        negated_terms.extend(dropped)
+    query_symptoms = list(effective_symptoms)
+    effective_symptoms = affirmed
+
+    # Pre-normalize input symptoms once (with listed synonyms)
     normalized_input = [normalize_text(s) for s in expand_synonyms(effective_symptoms)]
 
     # Search and score all rules
@@ -1144,7 +1158,7 @@ async def rank_diagnoses(
 
     # Check if we should query AI for additional suggestions
     # Query AI if: <5 tree results OR best score < 3.0
-    should_query_ai = len(results) < 5 or (results and results[0].match_score < 3.0)
+    should_query_ai = bool(effective_symptoms) and (len(results) < 5 or (results and results[0].match_score < 3.0))
 
     if should_query_ai and allow_ai and AI_GENERATION_AVAILABLE and ai_generation_enabled():
         logging.info(f"Insufficient tree results ({len(results)}), querying AI for additional diagnoses")
@@ -1236,7 +1250,8 @@ async def rank_diagnoses(
             # Note: Actual generation happens via separate endpoint to avoid blocking
 
     response_data = SymptomSearchResponse(
-        query_symptoms=effective_symptoms,
+        query_symptoms=query_symptoms,
+        negated_terms=negated_terms,
         total_results=len(top_results),
         results=top_results,
         total_matches=total_matches,

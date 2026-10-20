@@ -109,6 +109,9 @@ function AssessmentView({ result }) {
           {complaint.text ? <strong>{complaint.text}</strong> : <em>None</em>}
           {' '}<span style={styles.muted}>({complaint.source_label})</span>
         </p>
+        {complaint.negated_terms && complaint.negated_terms.length > 0 && (
+          <p style={styles.muted}>Not searched (negated): {complaint.negated_terms.join(', ')}</p>
+        )}
       </Section>
 
       <Section title="Diagnoses to consider">
@@ -153,28 +156,42 @@ function MissedItems({ missed }) {
           <h3 style={styles.missedTitle}>{check.title} ({check.items.length})</h3>
           {check.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
           {check.items.length === 0 && check.not_checked.length === 0 && <p style={styles.muted}>None found.</p>}
-          {check.items.map((item, i) => (
-            <details key={i} style={styles.missedItem}>
+          {check.items.map((item, i) => <MissedItem key={i} item={item} />)}
+          {check.single_results && check.single_results.items.length > 0 && (
+            <details style={styles.missedItem}>
               <summary style={styles.missedSummary}>
-                {item.summary}{' '}
-                <ReviewStatusBadge status={item.review_status} label={item.review_status_label} />
+                {check.single_results.title} ({check.single_results.items.length})
               </summary>
-              <div style={styles.missedDetails}>
-                {item.source && <p><strong>Source:</strong> {item.url ? <a href={item.url} target="_blank" rel="noreferrer">{item.source}</a> : item.source}</p>}
-                <p><strong>Window checked:</strong> {item.details.window}</p>
-                <ul>{item.details.evidence.map((e, j) => <li key={j}>{e}</li>)}</ul>
-                {item.details.caveats.length > 0 && (
-                  <>
-                    <strong>Caveats</strong>
-                    <ul>{item.details.caveats.map((c, j) => <li key={j}>{c}</li>)}</ul>
-                  </>
-                )}
+              <div style={{ paddingLeft: 16 }}>
+                {check.single_results.items.map((item, i) => <MissedItem key={i} item={item} />)}
               </div>
             </details>
-          ))}
+          )}
         </div>
       ))}
     </Section>
+  );
+}
+
+function MissedItem({ item }) {
+  return (
+    <details style={styles.missedItem}>
+      <summary style={styles.missedSummary}>
+        {item.summary}{' '}
+        <ReviewStatusBadge status={item.review_status} label={item.review_status_label} />
+      </summary>
+      <div style={styles.missedDetails}>
+        {item.source && <p><strong>Source:</strong> {item.url ? <a href={item.url} target="_blank" rel="noreferrer">{item.source}</a> : item.source}</p>}
+        <p><strong>Window checked:</strong> {item.details.window}</p>
+        <ul>{item.details.evidence.map((e, j) => <li key={j}>{e}</li>)}</ul>
+        {item.details.caveats.length > 0 && (
+          <>
+            <strong>Caveats</strong>
+            <ul>{item.details.caveats.map((c, j) => <li key={j}>{c}</li>)}</ul>
+          </>
+        )}
+      </div>
+    </details>
   );
 }
 

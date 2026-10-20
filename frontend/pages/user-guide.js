@@ -98,7 +98,7 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>5. How to Read Results</h2>
           <ul style={styles.list}>
             <li><strong>Top matches:</strong> Most relevant differential candidates.</li>
-            <li><strong>Matched presentations:</strong> Findings that aligned with your input.</li>
+            <li><strong>Matched presentations:</strong> Findings that aligned with your input. Negated symptoms (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not searched.</li>
             <li><strong>Can&apos;t-miss condition:</strong> An emergent condition that matches the symptoms. It is always listed, even when its match score is low, so it can be considered and ruled out.</li>
             <li><strong>Treatment information:</strong> Shown as reference from the decision tree, not as an order. Lines starting &quot;Patient advice:&quot; are self-care advice to pass on to the patient.</li>
             <li><strong>Tests and referrals:</strong> Suggested workup and specialty escalation.</li>

@@ -37,7 +37,24 @@ _NORMALIZE = [
     (re.compile(r"[^a-z0-9 ]"), " "),
     (re.compile(r"\s+"), " "),
 ]
-_NEGATION = re.compile(r"\b(" + "|".join(re.escape(c) for c in NEGATION_CUES) + r")\b")
+_NEGATION_WORDS = re.compile(r"\b(" + "|".join(re.escape(c) for c in NEGATION_CUES) + r")\b")
+# "No appetite", "not eating" etc. are symptoms, not negations (pending review).
+NEGATION_EXCEPTIONS = ("no appetite", "not eating", "not drinking", "no energy", "not sleeping", "no urine",
+                       "not urinating", "no bowel movement", "no stool", "no period", "not feeling well",
+                       "not moving", "no feeling", "not able to")
+_EXCEPTION = re.compile(r"\b(" + "|".join(re.escape(e) for e in NEGATION_EXCEPTIONS) + r")\b")
+
+
+class _Negation:
+    """Negation cues, ignoring cues that start a symptom phrase in NEGATION_EXCEPTIONS."""
+
+    @staticmethod
+    def search(text: str):
+        exceptions = {m.start() for m in _EXCEPTION.finditer(text)}
+        return next((m for m in _NEGATION_WORDS.finditer(text) if m.start() not in exceptions), None)
+
+
+_NEGATION = _Negation()
 
 
 @dataclass
@@ -96,6 +113,28 @@ def affirmed_phrases(complaint: Optional[str]) -> List[str]:
             if part and part.lower() not in (p.lower() for p in phrases):
                 phrases.append(part)
     return phrases
+
+
+def split_negated(text: Optional[str]) -> Tuple[str, List[str]]:
+    """(affirmed text, negated terms): each clause is cut at its first negation cue.
+
+    The negated terms are reported without the cue word, for display as
+    "Not searched (negated): fever".
+    "chest pain, no fever" -> ("chest pain", ["fever"]); "no chest pain" -> ("", ["chest pain"]).
+    """
+    kept: List[str] = []
+    dropped: List[str] = []
+    for clause in _CLAUSE_BREAK.split(text or ""):
+        cue = _NEGATION.search(clause.lower())
+        head, tail = (clause[:cue.start()], clause[cue.start():]) if cue else (clause, "")
+        head = head.strip(" ,;:-\t")
+        if head:
+            kept.append(head)
+        term = tail[cue.end() - cue.start():] if cue else ""
+        term = term.strip(" ,;:-\t")
+        if term:
+            dropped.append(term)
+    return "; ".join(kept), dropped
 
 
 def encounter_reason(encounter: Optional[Dict[str, Any]]) -> Optional[str]:

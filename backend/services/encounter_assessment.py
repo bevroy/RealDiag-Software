@@ -26,7 +26,9 @@ from typing import Any, Callable, Dict, List, Optional
 import yaml
 
 from backend.services.clinical_review import review_fields, review_notice
-from backend.services.complaint_matching import NO_COMPLAINT, Complaint, affirmed_phrases, resolve_complaint
+from backend.services.complaint_matching import (
+    NO_COMPLAINT, Complaint, affirmed_phrases, resolve_complaint, split_negated,
+)
 from backend.services.fhir_client import RESOURCE_LABELS, RETRIEVED, NOT_AVAILABLE, retrieval_warnings
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
@@ -400,7 +402,8 @@ async def assess_encounter(
         "patient_id": patient_id,
         "summary": summary,
         "complaint": {"text": complaint.text, "source": complaint.source, "source_label": complaint.source_label,
-                      "phrases_used": phrases},
+                      "phrases_used": phrases,
+                      "negated_terms": split_negated(complaint.text)[1] if complaint.text else []},
         "diagnoses": diagnoses,
         "guidance": [g for g in (tree_guidance(t) for t in tree_ids) if g],
         "red_flags": [r for r in (tree_red_flags(t) for t in tree_ids) if r],

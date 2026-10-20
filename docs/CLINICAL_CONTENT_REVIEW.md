@@ -247,8 +247,18 @@ Ranking fixes made with this rule:
   SOB / difficulty breathing with dyspnea; stomach pain and belly pain with
   abdominal pain.
 
-Typed symptom search does not handle negation ("no chest pain" still matches
-chest pain); the encounter assessment removes negated phrases before ranking.
+Negation: symptom search, the SMART ambulatory differential and the
+encounter assessment all drop negated parts of the input before ranking
+("no chest pain", "denies fever", "chest pain without radiation"); negated
+terms cannot trigger a can't-miss label. The response lists them as
+`negated_terms` (without the cue word), and the symptom-search and encounter
+pages show "Not searched (negated): fever". Negation cues: no, not, denies/denied/denying, without,
+negative for, free of, absence of, resolved, never; a cue stops at ".", ";",
+"but", "however", "although", "except". Phrases that are themselves symptoms
+are not treated as negations (pending review): no appetite, not eating, not
+drinking, no energy, not sleeping, no urine, not urinating, no bowel
+movement, no stool, no period, not feeling well, not moving, no feeling,
+not able to.
 
 ## 10. Treatment wording: clinician actions reworded, patient advice labelled
 
@@ -484,9 +494,11 @@ caveats. A check whose data could not be retrieved says "Not checked" instead
 of producing items.
 
 1. **Abnormal results without a diagnosis:** a chronic tree's chart criteria
-   are met (consistent or possible) and its `known_condition` codes are not on
-   the problem list. Acute trees (ACS, sepsis, DKA) are excluded; they are
-   shown as chart cards.
+   are met ("consistent") and its `known_condition` codes are not on the
+   problem list. A single abnormal result that still needs confirmation
+   ("possible") is listed separately under a collapsed line, "Single results
+   that may need repeating", with its value, date and source. Acute trees
+   (ACS, sepsis, DKA) are excluded; they are shown as chart cards.
 2. **Diagnoses without support:** a problem-list condition that maps to one of
    the 8 chronic criteria trees, with no criterion met in the tree's lookback
    and none of its `related_medications` on the active medication list. Both
