@@ -235,8 +235,12 @@ Ranking fixes made with this rule:
 
 - 77 trees had 121 presentations written as `- Chest pain: substernal, ...`,
   which YAML reads as a key-value pair; ranking silently dropped them (this is
-  why ACS was missing for "chest pain"). They are now matched as text. No tree
-  content changed.
+  why ACS was missing for "chest pain"). The same problem affected 3,050 list
+  items in 219 trees (treatment 1,319, workup 1,061, trace 237, differentials
+  143, clinical_pearls 124, presentations 121, referrals 45). Each line is now
+  quoted so it loads as the text written; no wording changed. The validator
+  rejects list items that are not plain text (a heading over a nested list
+  and grouped differentials are still allowed).
 - Each tree's `chief_complaint` is now matched like a presentation (this is
   where SURG-ACUTE-APPENDICITIS lists "abdominal pain").
 - Searched together (pending review): shortness of breath / short of breath /

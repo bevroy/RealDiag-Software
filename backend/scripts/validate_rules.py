@@ -338,6 +338,60 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
     for problem in criteria_problems(data.get("criteria")):
         result.add_error(file_path.name, f"criteria: {problem}")
 
+    for problem in list_item_problems(data):
+        result.add_error(file_path.name, problem)
+
+
+# Fields whose entries are structured data rather than display text.
+STRUCTURED_FIELDS = {"sources", "change_log", "nodes", "criteria", "codes", "applies_to", "homeopathy",
+                     "entry_point", "metadata"}
+# differentials may group diagnoses: {category, diagnoses[, origin]}
+DIFFERENTIAL_GROUP_KEYS = {"category", "diagnoses", "origin"}
+
+
+def list_item_problems(tree: Dict) -> List[str]:
+    """Text-list items must be plain text (or a heading over a nested list).
+
+    An unquoted "- Chest pain: substernal ..." loads as a key-value pair,
+    not text, and is dropped or mangled by code that expects text. Quote it.
+    """
+    problems: List[str] = []
+
+    def check(value, path: str, field: str):
+        if isinstance(value, dict):
+            for key, inner in value.items():
+                check(inner, f"{path}.{key}", field)
+            return
+        if not isinstance(value, list):
+            return
+        for i, item in enumerate(value):
+            where = f"{path}[{i}]"
+            if isinstance(item, str) or item is None:
+                continue
+            if isinstance(item, dict):
+                keys = set(map(str, item))
+                if len(item) == 1 and isinstance(next(iter(item.values())), list):
+                    check(next(iter(item.values())), where, field)      # heading over a nested list
+                    continue
+                if field == "differentials" and keys <= DIFFERENTIAL_GROUP_KEYS and "diagnoses" in keys:
+                    check(item.get("diagnoses"), f"{where}.diagnoses", field)
+                    continue
+                if len(item) == 1:
+                    key, inner = next(iter(item.items()))
+                    text = f"{key}: {inner}" if inner is not None else f"{key}:"
+                    problems.append(f"{where} loads as a key-value pair, not text; quote it: '{text[:80]}'")
+                else:
+                    problems.append(f"{where} is a mapping ({', '.join(sorted(keys))}), not text")
+            elif isinstance(item, list):
+                check(item, where, field)
+            else:
+                problems.append(f"{where} is {type(item).__name__}, not text; quote it: '{item}'")
+
+    for field, value in tree.items():
+        if field not in STRUCTURED_FIELDS:
+            check(value, field, field)
+    return problems
+
 
 CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
 CRITERIA_ROLES = {"core", "supporting"}
