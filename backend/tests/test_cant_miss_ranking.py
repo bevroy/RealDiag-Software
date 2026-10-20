@@ -16,13 +16,14 @@ from backend.services.tree_schema import presentation_texts
 
 # complaint -> (age, sex, emergent tree ids that must be returned)
 MUST_RETURN = {
-    "chest pain": (62, "male", ["CARD-ACUTE-CORONARY-SYNDROME", "CARD-PE", "PULM-PNEUMOTHORAX"]),
+    "chest pain": (62, "male", ["CARD-ACUTE-CORONARY-SYNDROME", "CARD-PE", "PULM-PNEUMOTHORAX",
+                                "CARD-AORTIC-DISSECTION"]),
     "headache": (40, "male", ["NEU-SAH", "ID-BACTERIAL-MENINGITIS"]),
     "abdominal pain": (28, "female", ["SURG-ACUTE-APPENDICITIS", "OBGYN-ECTOPIC-PREGNANCY", "SURG-AAA-RUPTURED"]),
     "shortness of breath": (55, "male", ["CARD-PE", "PULM-PNEUMOTHORAX"]),
 }
 # Expected conditions with no tree in the library yet (content work)
-MISSING_FROM_LIBRARY = {"chest pain": ["aortic dissection"]}
+MISSING_FROM_LIBRARY = {}
 
 
 def ranked(complaint, age, sex, **kwargs):
@@ -44,6 +45,12 @@ def test_cant_miss_returned_even_below_the_cap(complaint):
     age, sex, expected = MUST_RETURN[complaint]
     results = ranked(complaint, age, sex, limit=1)
     assert set(expected) <= set(results)
+
+
+def test_aortic_dissection_tree_exists_and_is_emergent():
+    rules = {r["id"]: r for rs in symptom_search.load_all_families().values() for r in rs}
+    assert rules["CARD-AORTIC-DISSECTION"]["urgency"] == "emergent"
+    assert rules["CARD-AORTIC-DISSECTION"]["status"] == "draft"
 
 
 def test_missing_trees_really_are_missing():

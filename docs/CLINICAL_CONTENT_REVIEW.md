@@ -226,7 +226,7 @@ must return these trees.
 
 | Complaint | Must return | Not in the library |
 |---|---|---|
-| chest pain | CARD-ACUTE-CORONARY-SYNDROME, CARD-PE, PULM-PNEUMOTHORAX | **aortic dissection** (no tree) |
+| chest pain | CARD-ACUTE-CORONARY-SYNDROME, CARD-PE, PULM-PNEUMOTHORAX, CARD-AORTIC-DISSECTION (new, section 11) | |
 | headache | NEU-SAH, ID-BACTERIAL-MENINGITIS | |
 | abdominal pain | SURG-ACUTE-APPENDICITIS, OBGYN-ECTOPIC-PREGNANCY (female patients), SURG-AAA-RUPTURED | |
 | shortness of breath | CARD-PE, PULM-PNEUMOTHORAX | |
@@ -430,6 +430,49 @@ tree has a change_log entry. Please confirm each rewording.
 | PULM-TOBACCO-USE | Start 1 week before quit date |
 | PULM-TOBACCO-USE | Start 1-2 weeks before quit date |
 | URO-INCONTINENCE-URGE | Start voiding every 1-2 hours whether or not urge present |
+
+## 11. New tree: CARD-AORTIC-DISSECTION (draft)
+
+Added because the can't-miss list for chest pain had no aortic dissection
+tree. Status draft, urgency emergent. Every presentation, workup, treatment
+and referral line cites the section, class of recommendation (COR) and level
+of evidence (LOE) of:
+
+Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and
+Management of Aortic Disease. Circulation. 2022;146:e334-e482;
+J Am Coll Cardiol. 2022;80:e223-e393.
+
+| Content | Guideline basis |
+|---|---|
+| Presentation: abrupt severe chest/back pain (sharp or stabbing more common than tearing), limb BP difference >20 mm Hg, syncope, stroke symptoms, new AR murmur, shock, malperfusion | §7.1, Table 22, Table 26 |
+| ADD-RS risk score (0 low, 1 moderate, 2-3 high) | §7.2, Table 24 |
+| D-dimer <500 ng/mL makes AAS unlikely in low-probability patients; not diagnostic | §7.2 (text, no numbered recommendation) |
+| CT for initial imaging | §7.2, COR 1, LOE C-LD |
+| TEE or MRI as alternatives; echo when too unstable for radiology | §7.2, COR 2a, LOE C-LD |
+| Anti-impulse therapy with arterial line in ICU | §7.3.1, COR 1, LOE B-NR |
+| SBP <120 mm Hg or lowest BP maintaining end-organ perfusion | §7.3.1, COR 1, LOE C-LD |
+| Heart rate 60-80 bpm | §7.3.1, COR 1, LOE C-LD |
+| IV beta blockers first; IV non-dihydropyridine CCB if contraindicated | §7.3.1, COR 1 / COR 2a, LOE B-NR |
+| IV vasodilators if BP not controlled | §7.3.1, COR 1, LOE C-LD |
+| Pain control for hemodynamic management | §7.3.1, COR 1, LOE C-EO |
+| Type A: emergency surgical consultation and immediate surgery; immediate repair with malperfusion | §7.4.1, COR 1, LOE B-NR |
+| Type A: transfer from low- to high-volume aortic center is reasonable | §7.4.1, COR 2a, LOE B-NR |
+| Type B uncomplicated: medical therapy first; endovascular may be considered with high-risk features | §7.4.2, COR 1, LOE B-NR / COR 2b, LOE B-R |
+| Type B complicated: intervention; endovascular over open repair for rupture | §7.4.2, COR 1, LOE C-LD / C-EO |
+| Surveillance CT/MRI at 1, 6, 12 months, then annually | §7.8.1, COR 1, LOE B-NR |
+| Multidisciplinary aortic team for acute aortic disease needing urgent repair | §4, COR 1, LOE C-EO |
+
+D-dimer units: the <500 ng/mL cutoff depends on how the lab reports D-dimer
+(fibrinogen-equivalent units, FEU, vs D-dimer units, DDU; 1 DDU is roughly
+2 FEU). Confirm the cutoff against the units and assay in use before relying
+on it.
+
+Reviewer notes: treatment lines quote the guideline's recommendation wording
+("is recommended", "is reasonable", "may be considered") or use "Consider"; no
+drug doses are given. The ECG/troponin workup line and the antithrombotic
+caution pearl are general practice, not quoted guideline recommendations.
+Codes to confirm: ICD-10-CM I71.00, I71.010-I71.019, I71.02, I71.03 (FY2023
+expansion of I71.0) and SNOMED CT 308546005 (Dissection of aorta).
 
 ## Checked: no action needed
 
