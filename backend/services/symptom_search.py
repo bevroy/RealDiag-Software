@@ -19,7 +19,39 @@ import logging
 from functools import lru_cache
 import os
 from backend.services.patient_history_service import PatientHistoryService
-from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, snomed_codes
+from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, presentation_texts, snomed_codes
+from backend.services.complaint_matching import match_terms
+
+# Emergent trees whose presentations or complaint terms match are always
+# returned, whatever their score or the result cap.
+CANT_MISS_LABEL = "Can't-miss condition"
+
+# Lay and clinical wordings searched together (pending clinical review; listed
+# in docs/CLINICAL_CONTENT_REVIEW.md).
+SYMPTOM_SYNONYMS = {
+    "shortness of breath": ["dyspnea"],
+    "short of breath": ["dyspnea"],
+    "sob": ["dyspnea"],
+    "difficulty breathing": ["dyspnea"],
+    "dyspnea": ["shortness of breath"],
+    "stomach pain": ["abdominal pain"],
+    "belly pain": ["abdominal pain"],
+}
+
+
+def expand_synonyms(symptoms: List[str]) -> List[str]:
+    """Symptoms plus their listed synonyms (whole-phrase match, original order kept)."""
+    expanded = list(symptoms)
+    seen = {s.lower() for s in symptoms}
+    for symptom in symptoms:
+        text = f" {normalize_text(symptom)} "
+        for phrase, synonyms in SYMPTOM_SYNONYMS.items():
+            if f" {phrase} " in text:
+                for synonym in synonyms:
+                    if synonym not in seen:
+                        expanded.append(synonym)
+                        seen.add(synonym)
+    return expanded
 from backend.services.content_labels import AI_CONTENT_LABEL, ai_generation_enabled
 from backend.services.clinical_review import review_fields, review_notice
 from backend.services.auth_service import get_current_user
@@ -270,6 +302,9 @@ class DiagnosisMatch(BaseModel):
     ai_label: Optional[str] = None  # AI_CONTENT_LABEL whenever ai_suggested is true
     review_status: Optional[str] = None  # tree status, e.g. "draft" (None for AI suggestions)
     review_status_label: Optional[str] = None  # e.g. "Draft - under clinical review."
+    # Emergent tree matching the complaint: always returned, labelled
+    cant_miss: bool = False
+    cant_miss_label: Optional[str] = None
 
 class SymptomSearchResponse(BaseModel):
     """Response model for symptom search."""
@@ -339,11 +374,11 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                 family = tree_data.get('family', 'general')
 
                 # Extract and flatten presentations
-                presentations = tree_data.get('presentations', [])
-                if isinstance(presentations, dict):
-                    presentations = list(presentations.values())
-                elif not isinstance(presentations, list):
-                    presentations = [presentations] if presentations else []
+                presentations = presentation_texts(tree_data.get('presentations'))
+                # The tree's chief complaint is matched like a presentation
+                chief_complaint = tree_data.get('chief_complaint')
+                if isinstance(chief_complaint, str) and chief_complaint.strip():
+                    presentations = presentations + [chief_complaint]
 
                 # Extract and flatten workup/tests
                 workup = tree_data.get('workup', [])
@@ -450,7 +485,10 @@ def load_all_families() -> Dict[str, List[Dict[str, Any]]]:
                     'clinical_pearls': clinical_pearls,
                     'management': management,
                     'tests': tests,
-                    'referrals': referral_list
+                    'referrals': referral_list,
+                    'urgency': tree_data.get('urgency'),
+                    'complaint_terms': list((tree_data.get('criteria') or {}).get('complaint_terms') or [])
+                    if isinstance(tree_data.get('criteria'), dict) else [],
                 }
 
                 # Add to family
@@ -1044,8 +1082,9 @@ async def rank_diagnoses(
     else:
         families_to_search = all_families
 
-    # Pre-normalize input symptoms once
-    normalized_input = [normalize_text(s) for s in effective_symptoms]
+    # Pre-normalize input symptoms once (with listed synonyms)
+    complaint_text = "; ".join(effective_symptoms)
+    normalized_input = [normalize_text(s) for s in expand_synonyms(effective_symptoms)]
 
     # Search and score all rules
     results = []
@@ -1060,16 +1099,23 @@ async def rank_diagnoses(
             # Filter out non-string presentations (sometimes YAML has dicts or other types)
             string_presentations = [p for p in presentations if isinstance(p, str)]
 
-            if not string_presentations:
+            emergent = str(rule.get('urgency') or '').lower() == 'emergent'
+            matched_terms = match_terms(complaint_text, rule.get('complaint_terms') or [])[0] if emergent else []
+
+            if not string_presentations and not matched_terms:
                 continue
 
             # Calculate match score with clinical likelihood (pass pre-normalized input)
             score, matched_presentations = calculate_match_score_optimized(
                 normalized_input, effective_symptoms, string_presentations, rule
-            )
+            ) if string_presentations else (0.0, [])
+            cant_miss = emergent and (score > 0 or bool(matched_terms))
+            for term in matched_terms:
+                if term not in matched_presentations:
+                    matched_presentations.append(term)
 
             # Only include if there's a match
-            if score > 0:
+            if score > 0 or cant_miss:
                 # Prepare result with enhanced metadata
                 diagnosis_match = DiagnosisMatch(
                     rule_id=rule.get('id', ''),
@@ -1086,6 +1132,8 @@ async def rank_diagnoses(
                     management=rule.get('management'),
                     tests=rule.get('tests'),
                     referrals=rule.get('referrals'),
+                    cant_miss=cant_miss,
+                    cant_miss_label=CANT_MISS_LABEL if cant_miss else None,
                     **review_fields(rule.get('status')),
                 )
 
@@ -1161,6 +1209,8 @@ async def rank_diagnoses(
     # Return top 20 results
     total_matches = len(results)
     top_results = results[:limit] if limit else results
+    # Can't-miss conditions are returned even when they fall below the cap.
+    top_results = top_results + [r for r in results[len(top_results):] if r.cant_miss]
 
     # Check if we should trigger AI tree generation (low/no results)
     ai_tree_info = None

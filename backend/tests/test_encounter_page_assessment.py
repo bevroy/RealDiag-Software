@@ -251,8 +251,10 @@ def test_complaint_matches_capped_at_15_with_note(engine, no_ai):
     d = result["diagnoses"]
     assert d["complaint_matches_total"] > 15
     assert d["complaint_matches_shown"] == 15
-    assert d["complaint_matches_note"] == f"Showing 15 of {d['complaint_matches_total']} complaint matches."
-    assert len([i for i in d["items"] if i["evidence"] == "complaint"]) <= 15
+    assert d["complaint_matches_note"].startswith(f"Showing 15 of {d['complaint_matches_total']} complaint matches")
+    assert len([i for i in d["items"] if i["evidence"] == "complaint"]) <= 15 + d["cant_miss_added"]
+    if d["cant_miss_added"]:
+        assert "can't-miss condition" in d["complaint_matches_note"]
 
 
 def test_no_cap_note_when_few_matches(engine, no_ai):

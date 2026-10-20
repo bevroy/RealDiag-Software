@@ -29,7 +29,7 @@ from backend.services.clinical_review import review_fields, review_notice
 from backend.services.complaint_matching import NO_COMPLAINT, Complaint, affirmed_phrases, resolve_complaint
 from backend.services.fhir_client import RESOURCE_LABELS, RETRIEVED, NOT_AVAILABLE, retrieval_warnings
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
-from backend.services.symptom_search import rank_diagnoses
+from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
 
 logger = logging.getLogger(__name__)
 
@@ -158,13 +158,16 @@ def _criteria_rank(evaluation: DiagnosisEvaluation) -> tuple:
 def merge_diagnoses(evaluations: List[DiagnosisEvaluation], matches: List[Any],
                     criteria_response: Callable[[DiagnosisEvaluation], Dict[str, Any]],
                     limit: int = COMPLAINT_MATCH_LIMIT) -> Dict[str, Any]:
-    """Complaint matches (top `limit`) merged with criteria-supported diagnoses by tree id.
+    """Complaint matches (top `limit`, plus every can't-miss match) merged with
+    criteria-supported diagnoses by tree id.
 
     Order: both kinds of evidence first, then criteria only (by severity),
     then complaint only (by match score).
     """
     by_id = {m.rule_id: m for m in matches}
-    shown_matches = matches[:limit]
+    top_matches = matches[:limit]
+    extra_cant_miss = [m for m in matches[limit:] if getattr(m, "cant_miss", False)]
+    shown_matches = top_matches + extra_cant_miss
     entries: Dict[str, Dict[str, Any]] = {}
 
     for evaluation in evaluations:
@@ -175,6 +178,8 @@ def merge_diagnoses(evaluations: List[DiagnosisEvaluation], matches: List[Any],
             "family": evaluation.family,
             "complaint_match": _match_evidence(match, evaluation.complaint_matches),
             "criteria": criteria_response(evaluation),
+            "cant_miss": bool(getattr(match, "cant_miss", False)) or (
+                bool(evaluation.complaint_matches) and _is_emergent(evaluation.diagnosis_id)),
             "review_status": evaluation.review_status,
             "review_status_label": evaluation.review_status_label,
             "_rank": _criteria_rank(evaluation),
@@ -189,6 +194,7 @@ def merge_diagnoses(evaluations: List[DiagnosisEvaluation], matches: List[Any],
             "family": match.family,
             "complaint_match": _match_evidence(match),
             "criteria": None,
+            "cant_miss": bool(getattr(match, "cant_miss", False)),
             "review_status": match.review_status,
             "review_status_label": match.review_status_label,
             "_rank": (-1,),
@@ -196,6 +202,7 @@ def merge_diagnoses(evaluations: List[DiagnosisEvaluation], matches: List[Any],
         }
 
     for entry in entries.values():
+        entry["cant_miss_label"] = CANT_MISS_LABEL if entry["cant_miss"] else None
         has_complaint = entry["complaint_match"] is not None
         has_criteria = entry["criteria"] is not None
         entry["evidence"] = ("complaint and criteria" if has_complaint and has_criteria
@@ -212,13 +219,25 @@ def merge_diagnoses(evaluations: List[DiagnosisEvaluation], matches: List[Any],
             entry.pop(key)
 
     total = len(matches)
+    note = None
+    if total > len(top_matches):
+        note = f"Showing {len(top_matches)} of {total} complaint matches"
+        if extra_cant_miss:
+            count = len(extra_cant_miss)
+            note += f", plus {count} can't-miss condition{'s' if count > 1 else ''} below the cut-off"
+        note += "."
     return {
         "items": ordered,
         "complaint_matches_total": total,
-        "complaint_matches_shown": len(shown_matches),
-        "complaint_matches_note": (f"Showing {len(shown_matches)} of {total} complaint matches."
-                                   if total > len(shown_matches) else None),
+        "complaint_matches_shown": len(top_matches),
+        "cant_miss_added": len(extra_cant_miss),
+        "complaint_matches_note": note,
     }
+
+
+def _is_emergent(tree_id: str) -> bool:
+    tree = load_tree(tree_id) or {}
+    return str(tree.get("urgency") or "").lower() == "emergent"
 
 
 def _match_evidence(match: Any, matched_terms: Optional[List[str]] = None) -> Optional[Dict[str, Any]]:

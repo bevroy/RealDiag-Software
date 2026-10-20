@@ -35,7 +35,16 @@ export default function TechnicalMedicalPage() {
             Symptom search uses normalized symptom terms, demographic filters, and presentation
             matching to rank likely diagnoses. Matching emphasizes direct phrase overlap and
             clinically relevant word intersections, with optional AI-assisted suggestions when
-            confidence is low.
+            confidence is low. Each tree&apos;s chief complaint is matched along with its presentations,
+            and a short list of lay and clinical synonyms (for example shortness of breath and
+            dyspnea) is searched together. Emergent trees that match are always returned and labelled
+            &quot;Can&apos;t-miss condition&quot;, whatever their score or the result cap.
+          </p>
+          <p style={styles.p}>
+            AI features are off unless ENABLE_AI_GENERATION or ENABLE_AI_ENRICHMENT is set to
+            &quot;true&quot;, and anything AI-generated is labelled &quot;AI-generated; not clinically
+            validated.&quot; Chart-driven requests (encounter assessment, ambulatory differential,
+            symptom search with an EHR patient) never use AI: EHR data is never sent to an AI provider.
           </p>
         </section>
 
@@ -70,6 +79,13 @@ export default function TechnicalMedicalPage() {
             context including current vitals, active conditions, medication lists, allergies, and
             selected historical records. This enables diagnosis support that reflects encounter and
             longitudinal context rather than symptom-only snapshots.
+          </p>
+          <p style={styles.p}>
+            The encounter assessment pulls the chart once (no data type is requested twice) and
+            reports every data type that could not be retrieved or was cut off at the page limit.
+            Today&apos;s complaint comes from the clinician&apos;s text, otherwise the EHR visit reason.
+            Acute chart cards (ACS, sepsis, DKA) appear when a criterion is met or the complaint
+            matches the tree&apos;s reviewed complaint terms.
           </p>
         </section>
 

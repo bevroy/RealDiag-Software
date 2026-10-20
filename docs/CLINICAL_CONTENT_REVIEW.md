@@ -213,6 +213,39 @@ anything AI-generated is labelled "AI-generated; not clinically validated."
   assessment, the SMART ambulatory differential, and symptom search with
   `emr_patient_id`. EHR data is never sent to an AI provider.
 
+## 9. Can't-miss conditions in ranking
+
+Any **emergent** tree whose presentations, chief complaint or complaint terms
+match the complaint is always returned and labelled "Can't-miss condition",
+whatever its score or the result cap. This applies to symptom search, the
+SMART ambulatory differential and the encounter assessment. Which trees count
+depends on each tree's `urgency`, which is itself pending review (section 1).
+
+Regression list (`backend/tests/test_cant_miss_ranking.py`): each complaint
+must return these trees.
+
+| Complaint | Must return | Not in the library |
+|---|---|---|
+| chest pain | CARD-ACUTE-CORONARY-SYNDROME, CARD-PE, PULM-PNEUMOTHORAX | **aortic dissection** (no tree) |
+| headache | NEU-SAH, ID-BACTERIAL-MENINGITIS | |
+| abdominal pain | SURG-ACUTE-APPENDICITIS, OBGYN-ECTOPIC-PREGNANCY (female patients), SURG-AAA-RUPTURED | |
+| shortness of breath | CARD-PE, PULM-PNEUMOTHORAX | |
+
+Ranking fixes made with this rule:
+
+- 77 trees had 121 presentations written as `- Chest pain: substernal, ...`,
+  which YAML reads as a key-value pair; ranking silently dropped them (this is
+  why ACS was missing for "chest pain"). They are now matched as text. No tree
+  content changed.
+- Each tree's `chief_complaint` is now matched like a presentation (this is
+  where SURG-ACUTE-APPENDICITIS lists "abdominal pain").
+- Searched together (pending review): shortness of breath / short of breath /
+  SOB / difficulty breathing with dyspnea; stomach pain and belly pain with
+  abdominal pain.
+
+Typed symptom search does not handle negation ("no chest pain" still matches
+chest pain); the encounter assessment removes negated phrases before ranking.
+
 ## Checked: no action needed
 
 - **Teaching flashcards with drug doses** (`backend/services/education_router.py`,

@@ -35,6 +35,28 @@ def _as_list(value: Any) -> List[Any]:
     return list(value) if isinstance(value, list) else [value]
 
 
+def presentation_texts(value: Any) -> List[str]:
+    """Presentations as text lines.
+
+    YAML reads "- Chest pain: substernal, ..." as a one-key mapping, not a
+    string; it becomes "Chest pain: substernal, ..." so it can be matched.
+    """
+    if isinstance(value, dict):
+        value = [value]
+    texts: List[str] = []
+    for item in _as_list(value):
+        if isinstance(item, str):
+            if item.strip():
+                texts.append(item)
+        elif isinstance(item, dict):
+            for key, inner in item.items():
+                inner_text = ", ".join(str(v) for v in inner) if isinstance(inner, list) else inner
+                texts.append(f"{key}: {inner_text}" if inner_text not in (None, "") else str(key))
+        elif item is not None:
+            texts.append(str(item))
+    return texts
+
+
 def tree_id(tree: Dict[str, Any], default: str = "") -> str:
     return tree.get("tree_id") or tree.get("id") or default
 

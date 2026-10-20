@@ -150,6 +150,7 @@ function DiagnosisCard({ diagnosis, guidance }) {
         <span>
           <strong>{diagnosis.name}</strong>{' '}
           <ReviewStatusBadge status={diagnosis.review_status} label={diagnosis.review_status_label} />
+          {diagnosis.cant_miss && <span style={styles.cantMiss}>{diagnosis.cant_miss_label || "Can't-miss condition"}</span>}
         </span>
         <span style={styles.evidence}>{evidenceLabel(diagnosis.evidence)}</span>
       </button>
@@ -271,6 +272,8 @@ const styles = {
   cardHeader: { display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, width: '100%',
     background: 'none', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer', fontSize: 15 },
   evidence: { fontSize: 13, color: '#1d4ed8' },
+  cantMiss: { marginLeft: 6, padding: '2px 8px', borderRadius: 999, fontSize: 12, fontWeight: 600,
+    background: '#fef2f2', border: '1px solid #ef4444', color: '#991b1b' },
   statusText: { fontSize: 13, color: '#92400e', margin: '6px 0' },
   recommendation: { fontSize: 14, margin: '6px 0' },
   cardBody: { marginTop: 8 },

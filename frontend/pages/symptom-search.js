@@ -46,6 +46,19 @@ import {
 } from '../utils/barcodeScanner';
 
 // Label shown next to AI-generated and unvalidated content
+// Emergent condition matching the symptoms: always listed, whatever its score
+const cantMissStyle = {
+  display: 'inline-block',
+  margin: '0 0 0.5rem',
+  padding: '0.2rem 0.6rem',
+  background: '#fef2f2',
+  border: '1px solid #ef4444',
+  borderRadius: '6px',
+  color: '#991b1b',
+  fontSize: '0.8rem',
+  fontWeight: 600,
+}
+
 const aiLabelStyle = {
   display: 'inline-block',
   margin: '0 0 0.75rem',
@@ -2066,6 +2079,11 @@ export default function SymptomSearch() {
                               🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
                             </div>
                           )}
+                          {result.cant_miss && (
+                            <div style={cantMissStyle} role="note">
+                              ⚠️ {result.cant_miss_label || "Can't-miss condition"}
+                            </div>
+                          )}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
                             <span style={{
                               padding: '0.35rem 0.85rem',
@@ -2980,6 +2998,11 @@ export default function SymptomSearch() {
                         {result.ai_suggested && (
                           <div style={aiLabelStyle} role="note">
                             🤖 {result.ai_label || 'AI-generated; not clinically validated.'}
+                          </div>
+                        )}
+                        {result.cant_miss && (
+                          <div style={cantMissStyle} role="note">
+                            ⚠️ {result.cant_miss_label || "Can't-miss condition"}
                           </div>
                         )}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.8rem' }}>
