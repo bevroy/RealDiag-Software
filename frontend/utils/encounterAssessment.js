@@ -9,6 +9,9 @@
 const MISSING_SECTION_WARNING =
   'The server did not report what could not be assessed; do not assume the assessment is complete.'
 
+const MISSED_ITEMS_UNAVAILABLE =
+  'The server did not return the possible missed items check; it was not run.'
+
 const EVIDENCE_LABELS = {
   'complaint and criteria': "Matches today's complaint and chart criteria",
   criteria: 'Chart criteria',
@@ -38,9 +41,12 @@ function parseEncounterAssessment(body) {
     redFlags: b.red_flags || [],
     redFlagsById,
     notAssessed,
+    missedItems: b.missed_items && Array.isArray(b.missed_items.checks)
+      ? b.missed_items
+      : { title: 'Possible missed items', notice: MISSED_ITEMS_UNAVAILABLE, checks: [], item_count: 0 },
     decisionSupportNotice: b.decision_support_notice || null,
     clinicalReviewNotice: b.clinical_review_notice,
   }
 }
 
-module.exports = { parseEncounterAssessment, evidenceLabel, MISSING_SECTION_WARNING }
+module.exports = { parseEncounterAssessment, evidenceLabel, MISSING_SECTION_WARNING, MISSED_ITEMS_UNAVAILABLE }

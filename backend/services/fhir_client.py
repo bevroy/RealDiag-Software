@@ -73,6 +73,7 @@ RESOURCE_LABELS = {
     "imaging_studies": "Imaging studies",
     "immunizations": "Immunizations",
     "family_social_history": "Family and social history",
+    "smoking_status": "Smoking status",
 }
 
 
@@ -87,6 +88,19 @@ def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
 
 
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
+
+# US Core Smoking Status (LOINC 72166-2) answer codes (SNOMED CT)
+SMOKING_STATUS_LOINC = "72166-2"
+SMOKING_STATUS_CODES = {
+    "449868002": "current",          # Smokes tobacco daily
+    "428041000124106": "current",    # Occasional tobacco smoker
+    "428071000124103": "current",    # Heavy tobacco smoker
+    "428061000124105": "current",    # Light tobacco smoker
+    "77176002": "current",           # Smoker, current status unknown (ever smoked)
+    "8517006": "former",             # Ex-smoker
+    "266919005": "never",            # Never smoked tobacco
+    "266927001": "unknown",          # Tobacco smoking consumption unknown
+}
 
 
 def truncation_warning(resource: str, event: Dict[str, Any]) -> str:
@@ -403,6 +417,31 @@ class FHIRClient:
         since = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
         code_param = ",".join(f"{LOINC_SYSTEM}|{c}" for c in codes)
         return self.get_observations(patient_id, code=code_param, date_range=f"ge{since}", max_pages=max_pages)
+
+    def get_smoking_status(self, patient_id: str) -> Optional[Dict[str, Any]]:
+        """Most recent US Core smoking status (LOINC 72166-2), or None if none on file.
+
+        Returns {"status": current|former|never|unknown, "text", "date"}.
+        Pack-years and quit date are separate observations and not read here.
+        """
+        bundle = self._query_resource(FHIRResourceType.OBSERVATION.value, {
+            "patient": patient_id, "code": f"{LOINC_SYSTEM}|{SMOKING_STATUS_LOINC}", "_sort": "-date", "_count": 10})
+        observations = [e["resource"] for e in bundle.get("entry", []) or []
+                        if (e.get("resource") or {}).get("status") not in ("entered-in-error", "cancelled")]
+        if not observations:
+            return None
+        def _when(o):
+            return o.get("effectiveDateTime") or o.get("issued") or ""
+        latest = max(observations, key=_when)
+        concept = latest.get("valueCodeableConcept") or {}
+        codes = {c.get("code") for c in concept.get("coding") or []}
+        text = concept.get("text") or next((c.get("display") for c in concept.get("coding") or [] if c.get("display")), "")
+        status = next((s for code, s in SMOKING_STATUS_CODES.items() if code in codes), None)
+        if status is None:
+            lowered = text.lower()
+            status = ("never" if "never" in lowered else "former" if "former" in lowered or "ex-" in lowered
+                      else "current" if "current" in lowered or "smoker" in lowered else "unknown")
+        return {"status": status, "text": text or None, "date": _when(latest)[:10] or None}
 
     def get_conditions(self, patient_id: str) -> List[Dict[str, Any]]:
         """Get patient's active conditions/problems."""
@@ -820,7 +859,10 @@ class FHIRClient:
 
         # Chart-evaluation criteria may need specific results over a longer
         # lookback than the chart summary (e.g. HbA1c over a year).
-        for resource, need in (observation_requirements or {}).items():
+        # Keys are "labs" / "vitals", optionally with a group suffix ("labs:screening")
+        # so a group can use its own lookback without widening the others.
+        for key, need in (observation_requirements or {}).items():
+            resource = key.split(":")[0]
             if not need.get("codes") or resource not in ("labs", "vitals"):
                 continue
             extra = self._fetch_tracked(

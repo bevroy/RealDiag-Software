@@ -131,12 +131,50 @@ function AssessmentView({ result }) {
         ))}
       </Section>
 
+      <MissedItems missed={result.missedItems} />
+
       <Section title="Could not be assessed">
         {notAssessed.length === 0 ? <p>Everything needed was retrieved.</p> : (
           <ul>{notAssessed.map((item, i) => <li key={i}>{item.text}</li>)}</ul>
         )}
       </Section>
     </>
+  );
+}
+
+// Compact: grouped by check, one line per item with source and review
+// status; evidence, window checked and caveats expand on demand.
+function MissedItems({ missed }) {
+  return (
+    <Section title={missed.title || 'Possible missed items'}>
+      {missed.notice && <p style={styles.muted}>{missed.notice}</p>}
+      {missed.checks.map((check) => (
+        <div key={check.type} style={styles.missedGroup}>
+          <h3 style={styles.missedTitle}>{check.title} ({check.items.length})</h3>
+          {check.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
+          {check.items.length === 0 && check.not_checked.length === 0 && <p style={styles.muted}>None found.</p>}
+          {check.items.map((item, i) => (
+            <details key={i} style={styles.missedItem}>
+              <summary style={styles.missedSummary}>
+                {item.summary}{' '}
+                <ReviewStatusBadge status={item.review_status} label={item.review_status_label} />
+              </summary>
+              <div style={styles.missedDetails}>
+                {item.source && <p><strong>Source:</strong> {item.url ? <a href={item.url} target="_blank" rel="noreferrer">{item.source}</a> : item.source}</p>}
+                <p><strong>Window checked:</strong> {item.details.window}</p>
+                <ul>{item.details.evidence.map((e, j) => <li key={j}>{e}</li>)}</ul>
+                {item.details.caveats.length > 0 && (
+                  <>
+                    <strong>Caveats</strong>
+                    <ul>{item.details.caveats.map((c, j) => <li key={j}>{c}</li>)}</ul>
+                  </>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      ))}
+    </Section>
   );
 }
 
@@ -280,4 +318,10 @@ const styles = {
   detail: { marginTop: 8 },
   detailTitle: { fontSize: 14, margin: '0 0 4px' },
   redFlagBlock: { marginBottom: 8 },
+  missedGroup: { marginBottom: 12 },
+  missedTitle: { fontSize: 15, margin: '8px 0 4px' },
+  notChecked: { fontSize: 13, color: '#92400e', margin: '2px 0' },
+  missedItem: { borderBottom: '1px solid #f3f4f6', padding: '4px 0' },
+  missedSummary: { cursor: 'pointer', fontSize: 14 },
+  missedDetails: { fontSize: 13, padding: '4px 0 4px 16px', color: '#374151' },
 };

@@ -87,6 +87,13 @@ export default function TechnicalMedicalPage() {
             Acute chart cards (ACS, sepsis, DKA) appear when a criterion is met or the complaint
             matches the tree&apos;s reviewed complaint terms.
           </p>
+          <p style={styles.p}>
+            Possible missed items are rule-based (no AI): chronic-condition criteria met without a
+            matching problem-list entry; problem-list conditions with no supporting result or related
+            medication in the lookback; and USPSTF grade A/B screening rules evaluated against age, sex,
+            BMI, smoking status, procedures, imaging and results over 10 years. Data RealDiag cannot see
+            (such as pack-years) is reported as unavailable, never assumed.
+          </p>
         </section>
 
         <section style={styles.section}>

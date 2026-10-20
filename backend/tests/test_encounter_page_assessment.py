@@ -167,9 +167,15 @@ def test_coded_condition_without_text_uses_display():
 # --- Endpoint ------------------------------------------------------------------------
 
 class FakeFHIR:
-    def __init__(self, data, encounter=None, encounter_error=False):
+    def __init__(self, data, encounter=None, encounter_error=False, smoking=None, smoking_error=False):
         self.data, self.encounter, self.encounter_error = data, encounter, encounter_error
+        self.smoking, self.smoking_error = smoking, smoking_error
         self.requirements = None
+
+    def get_smoking_status(self, patient_id):
+        if self.smoking_error:
+            raise RuntimeError("Observation query failed")
+        return self.smoking
 
     def get_patient_data(self, patient_id, observation_requirements=None):
         self.requirements = observation_requirements
@@ -182,14 +188,16 @@ class FakeFHIR:
 
 
 class FakeHistory:
-    def __init__(self, status=None, error=False):
-        self.status, self.error, self.skip = status or HISTORY_OK, error, None
+    def __init__(self, status=None, error=False, procedures=(), imaging=()):
+        self.status, self.error, self.skip, self.overrides = status or HISTORY_OK, error, None, None
+        self.procedures, self.imaging = list(procedures), list(imaging)
 
-    async def get_comprehensive_history(self, patient_id, lookback_days=None, skip=None):
-        self.skip = skip
+    async def get_comprehensive_history(self, patient_id, lookback_days=None, skip=None, lookback_overrides=None):
+        self.skip, self.overrides = skip, lookback_overrides
         if self.error:
             raise RuntimeError("DocumentReference search failed")
-        return ComprehensivePatientHistory(patient_id=patient_id, patient_name="", retrieval_status=self.status)
+        return ComprehensivePatientHistory(patient_id=patient_id, patient_name="", retrieval_status=self.status,
+                                           procedures=self.procedures, imaging_studies=self.imaging)
 
 
 def run(engine, data, complaint=None, fhir=None, history=None):
@@ -218,7 +226,9 @@ def test_all_sections_present(engine, no_ai):
     result, fhir, history = run(engine, patient(labs=[troponin()]), "chest pain")
     assert set(result) >= {"summary", "complaint", "diagnoses", "guidance", "red_flags", "not_assessed",
                            "decision_support_notice", "clinical_review_notice"}
-    assert fhir.requirements == engine.observation_requirements()      # criteria lookback fetched once
+    from backend.services.missed_items import screening_requirements
+    assert fhir.requirements == {**engine.observation_requirements(), **screening_requirements()}
+    assert history.overrides == {"procedures": 3650, "imaging_studies": 3650}
     assert history.skip == ea.HISTORY_SKIP                               # no overlap with the FHIR client
 
 

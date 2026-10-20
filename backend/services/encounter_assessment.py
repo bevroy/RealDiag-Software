@@ -30,6 +30,9 @@ from backend.services.complaint_matching import NO_COMPLAINT, Complaint, affirme
 from backend.services.fhir_client import RESOURCE_LABELS, RETRIEVED, NOT_AVAILABLE, retrieval_warnings
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
+from backend.services.missed_items import (
+    SCREENING_PROCEDURE_LOOKBACK_DAYS, possible_missed_items, screening_requirements,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -338,19 +341,33 @@ async def assess_encounter(
 
     async def history_pull():
         return await history_service.get_comprehensive_history(
-            patient_id=patient_id, lookback_days=lookback_days, skip=HISTORY_SKIP)
+            patient_id=patient_id, lookback_days=lookback_days, skip=HISTORY_SKIP,
+            lookback_overrides={"procedures": SCREENING_PROCEDURE_LOOKBACK_DAYS,
+                                "imaging_studies": SCREENING_PROCEDURE_LOOKBACK_DAYS})
+
+    def smoking_pull():
+        # US Core smoking status, for the AAA and lung cancer screening rules
+        if not hasattr(fhir_client, "get_smoking_status"):
+            return NOT_AVAILABLE, None
+        try:
+            return RETRIEVED, fhir_client.get_smoking_status(patient_id)
+        except Exception as e:
+            response = getattr(e, "response", None)
+            code = getattr(response, "status_code", None)
+            return (NOT_AVAILABLE if code in (403, 404, 501) else "failed"), None
 
     def complaint_pull():
         if typed_complaint and typed_complaint.strip():
             return resolve_complaint(typed_complaint)
         return resolve_complaint(None, lambda: fhir_client.get_current_encounter(patient_id))
 
+    requirements = {**engine.observation_requirements(), **screening_requirements()}
     patient_task = asyncio.to_thread(
-        fhir_client.get_patient_data, patient_id,
-        observation_requirements=engine.observation_requirements())
+        fhir_client.get_patient_data, patient_id, observation_requirements=requirements)
     results = await asyncio.gather(patient_task, history_pull(), asyncio.to_thread(complaint_pull),
-                                   return_exceptions=True)
-    patient_data, history, complaint = results
+                                   asyncio.to_thread(smoking_pull), return_exceptions=True)
+    patient_data, history, complaint, smoking_result = results
+    smoking_status, smoking = (smoking_result if not isinstance(smoking_result, Exception) else ("failed", None))
     if isinstance(patient_data, Exception):
         raise patient_data
     history_error = history if isinstance(history, Exception) else None
@@ -375,7 +392,9 @@ async def assess_encounter(
                                 lambda e: _as_dict(criteria_response(e)))
     tree_ids = [d["tree_id"] for d in diagnoses["items"]]
     history_status = _history_status(history, history_error)
+    history_status["smoking_status"] = smoking_status
     summary = build_summary(patient_data, history, history_status, summary_response)
+    missed = possible_missed_items(engine, patient_data, history, smoking, summary["data_status"], now=now)
 
     return {
         "patient_id": patient_id,
@@ -385,6 +404,7 @@ async def assess_encounter(
         "diagnoses": diagnoses,
         "guidance": [g for g in (tree_guidance(t) for t in tree_ids) if g],
         "red_flags": [r for r in (tree_red_flags(t) for t in tree_ids) if r],
+        "missed_items": missed,
         "not_assessed": not_assessed(summary["data_status"], assessment.warnings,
                                      assessment.evaluations, complaint),
         "decision_support_notice": DECISION_SUPPORT_NOTICE,

@@ -90,6 +90,7 @@ export default function UserGuidePage() {
             <li>Review medication-history evidence signals and blocked recommendations.</li>
             <li>Use output as decision support, not as a standalone clinical determination.</li>
             <li><strong>Encounter Assessment (EHR launch):</strong> open it from the patient banner. Type today&apos;s complaint, or leave it blank to use the EHR&apos;s visit reason; the source is shown. The page combines the chart summary (with any data that could not be retrieved or was cut off), diagnoses matched to the complaint and to chart results with their evidence, workup, treatment information and referrals from each matched tree, listed red flags, and what could not be assessed. Negated complaints (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not matched.</li>
+            <li><strong>Possible missed items:</strong> the encounter assessment also lists, from chart data only, abnormal results whose condition is not on the problem list, problem-list conditions with no supporting result or related medication, and USPSTF screenings that may be due. Each line cites its source and review status; expand it for the evidence, the window checked and caveats. These are prompts to consider, not findings that something was missed.</li>
           </ul>
         </section>
 

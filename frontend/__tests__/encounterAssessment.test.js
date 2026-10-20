@@ -2,6 +2,7 @@ const {
   parseEncounterAssessment,
   evidenceLabel,
   MISSING_SECTION_WARNING,
+  MISSED_ITEMS_UNAVAILABLE,
 } = require('../utils/encounterAssessment')
 
 const body = {
@@ -40,6 +41,15 @@ test('empty response renders safely', () => {
   expect(parsed.diagnoses).toEqual([])
   expect(parsed.complaint.source).toBe('none')
   expect(parsed.notAssessed[0].text).toBe(MISSING_SECTION_WARNING)
+})
+
+test('missed items pass through, and a missing section says the check did not run', () => {
+  const missed = { title: 'Possible missed items', notice: 'n', item_count: 1,
+    checks: [{ type: 'overdue_screening', title: 'Screenings that may be due', not_checked: [], items: [{ summary: 's' }] }] }
+  expect(parseEncounterAssessment({ ...body, missed_items: missed }).missedItems).toEqual(missed)
+  const absent = parseEncounterAssessment(body).missedItems
+  expect(absent.checks).toEqual([])
+  expect(absent.notice).toBe(MISSED_ITEMS_UNAVAILABLE)
 })
 
 test('evidence labels', () => {

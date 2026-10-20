@@ -40,6 +40,7 @@ from services.tree_schema import (  # noqa: E402
 # Configuration
 RULES_DIR = Path(__file__).parent.parent / "rules"
 TREES_DIR = Path(__file__).parent.parent / "trees"
+SCREENING_RULES = Path(__file__).parent.parent / "screening" / "uspstf_rules.yml"
 MAX_AGE_DAYS = 365  # Flag rules older than 1 year
 REQUIRED_RULE_FIELDS = [
     "family",
@@ -417,6 +418,10 @@ def criteria_problems(criteria) -> List[str]:
             problems.append(f"missing '{key}'")
     if criteria.get("display", "always") not in CRITERIA_DISPLAY:
         problems.append(f"display must be one of {sorted(CRITERIA_DISPLAY)}")
+    meds = criteria.get("related_medications")
+    if meds is not None and (not isinstance(meds, list) or not meds
+                             or not all(isinstance(m, str) and m.strip(" *") for m in meds)):
+        problems.append("related_medications must be a non-empty list of names ('*suffix' allowed)")
     terms = criteria.get("complaint_terms")
     if terms is not None and (not isinstance(terms, list) or not terms
                               or not all(isinstance(t, str) and t.strip() for t in terms)):
@@ -556,6 +561,52 @@ def generate_report(result: ValidationResult, rules_files: List[Path], trees_fil
     print("\n" + "="*70)
 
 
+SCREENING_EVIDENCE_KINDS = {"lab", "vital", "procedure", "imaging"}
+SCREENING_STATUSES = {"draft", "review", "approved", "retired"}
+
+
+def screening_rule_problems(data: Dict) -> List[str]:
+    """Each screening rule needs an id, title, status, cited source, population and evidence."""
+    problems: List[str] = []
+    rules = data.get("rules")
+    if not isinstance(rules, list) or not rules:
+        return ["rules must be a non-empty list"]
+    seen = set()
+    for i, rule in enumerate(rules):
+        where = f"rules[{i}] ({rule.get('id', '?') if isinstance(rule, dict) else '?'})"
+        if not isinstance(rule, dict):
+            problems.append(f"{where}: must be a mapping")
+            continue
+        for key in ("id", "title", "status", "source", "population", "evidence", "grades"):
+            if not rule.get(key):
+                problems.append(f"{where}: missing {key}")
+        if rule.get("id") in seen:
+            problems.append(f"{where}: duplicate id")
+        seen.add(rule.get("id"))
+        if rule.get("status") and rule["status"] not in SCREENING_STATUSES:
+            problems.append(f"{where}: status must be one of {sorted(SCREENING_STATUSES)}")
+        source = rule.get("source") or {}
+        if not (isinstance(source, dict) and source.get("citation") and str(source.get("url", "")).startswith("https://")):
+            problems.append(f"{where}: source needs citation and https url")
+        population = rule.get("population") or {}
+        if population.get("sex") not in (None, "male", "female"):
+            problems.append(f"{where}: population.sex must be male or female")
+        if population.get("smoking") not in (None, "ever"):
+            problems.append(f"{where}: population.smoking must be 'ever'")
+        for j, ev in enumerate(rule.get("evidence") or []):
+            kind = ev.get("kind")
+            if kind not in SCREENING_EVIDENCE_KINDS:
+                problems.append(f"{where}: evidence[{j}].kind must be one of {sorted(SCREENING_EVIDENCE_KINDS)}")
+            if kind in ("lab", "vital") and not all(LOINC_PATTERN.match(str(c)) for c in ev.get("loinc") or [None]):
+                problems.append(f"{where}: evidence[{j}] needs valid LOINC codes")
+            if kind in ("procedure", "imaging") and not ev.get("keywords"):
+                problems.append(f"{where}: evidence[{j}] needs keywords")
+            years = ev.get("within_years")
+            if years is not None and (not isinstance(years, (int, float)) or years <= 0):
+                problems.append(f"{where}: evidence[{j}].within_years must be positive or null")
+    return problems
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Validate RealDiag medical rules for completeness and consistency"
@@ -638,6 +689,14 @@ def main():
         validate_decision_tree(file_path, result)
         print("✓")
     
+    # Screening rules (encounter assessment: possible missed items)
+    if SCREENING_RULES.exists():
+        print(f"Checking {SCREENING_RULES.name}...", end=" ")
+        data = yaml.safe_load(SCREENING_RULES.read_text(encoding="utf-8")) or {}
+        for problem in screening_rule_problems(data):
+            result.add_error(SCREENING_RULES.name, problem)
+        print("✓")
+
     # Node formats: only "conditional" trees are evaluated automatically by the engine
     if result.node_formats:
         print("\nNode formats:")

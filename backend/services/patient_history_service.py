@@ -239,7 +239,8 @@ class PatientHistoryService:
         patient_id: str,
         lookback_days: Optional[int] = 365,
         include_resolved: bool = True,
-        skip: Optional[set] = None
+        skip: Optional[set] = None,
+        lookback_overrides: Optional[Dict[str, Optional[int]]] = None
     ) -> ComprehensivePatientHistory:
         """
         Retrieve comprehensive patient history for diagnostic decision support.
@@ -254,6 +255,8 @@ class PatientHistoryService:
                 always unbounded regardless of this setting - the FHIR
                 queries backing them don't support meaningful date scoping.)
             include_resolved: Include resolved/inactive conditions
+            lookback_overrides: per-data-type lookback in days (e.g.
+                {"procedures": 3650}) used instead of lookback_days
             skip: data types not to query (e.g. {"vital_signs", "conditions"})
                 because the caller fetched them already; they come back empty
                 with no retrieval status.
@@ -262,9 +265,14 @@ class PatientHistoryService:
             ComprehensivePatientHistory with all available patient data
         """
         headers = await self._get_headers()
-        lookback_date = None
-        if lookback_days is not None and lookback_days > 0:
-            lookback_date = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+        def since(days: Optional[int]) -> Optional[str]:
+            if days is None or days <= 0:
+                return None
+            return (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+
+        lookback_date = since(lookback_days)
+        overrides = lookback_overrides or {}
+        lookback_for = {r: since(d) for r, d in overrides.items()}
 
         status_token = _retrieval_status.set({})
         try:
@@ -289,9 +297,11 @@ class PatientHistoryService:
                 "history_and_physicals",
                 lambda: self._fetch_history_and_physicals(patient_id, lookback_date, headers), [])
             procedures = await fetch(
-                "procedures", lambda: self._fetch_procedures(patient_id, lookback_date, headers), [])
+                "procedures", lambda: self._fetch_procedures(
+                    patient_id, lookback_for.get("procedures", lookback_date), headers), [])
             imaging_studies = await fetch(
-                "imaging_studies", lambda: self._fetch_imaging_studies(patient_id, lookback_date, headers), [])
+                "imaging_studies", lambda: self._fetch_imaging_studies(
+                    patient_id, lookback_for.get("imaging_studies", lookback_date), headers), [])
             immunizations = await fetch(
                 "immunizations", lambda: self._fetch_immunizations(patient_id, lookback_date, headers), [])
             active_conditions, past_conditions = await fetch(

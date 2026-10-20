@@ -79,6 +79,12 @@ criteria:
   probability: met_over_known
   suggest_when:
     count_met: 1
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - 'patiromer'
+    - 'sodium zirconium cyclosilicate'
+    - 'sodium polystyrene sulfonate'
   known_condition:
     icd10_prefixes:
       - E87.5
@@ -130,3 +136,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.

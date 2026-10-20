@@ -474,6 +474,75 @@ caution pearl are general practice, not quoted guideline recommendations.
 Codes to confirm: ICD-10-CM I71.00, I71.010-I71.019, I71.02, I71.03 (FY2023
 expansion of I71.0) and SNOMED CT 308546005 (Dissection of aorta).
 
+## 12. Possible missed items (encounter assessment, Phase 3)
+
+A "Possible missed items" section in the encounter assessment runs three
+rule-based checks (no AI). Wording is "consider" / "may be due" with the
+source cited; nothing is stated as missed. Each item shows its tree's or
+rule's review status and expands to the evidence, the window checked and the
+caveats. A check whose data could not be retrieved says "Not checked" instead
+of producing items.
+
+1. **Abnormal results without a diagnosis:** a chronic tree's chart criteria
+   are met (consistent or possible) and its `known_condition` codes are not on
+   the problem list. Acute trees (ACS, sepsis, DKA) are excluded; they are
+   shown as chart cards.
+2. **Diagnoses without support:** a problem-list condition that maps to one of
+   the 8 chronic criteria trees, with no criterion met in the tree's lookback
+   and none of its `related_medications` on the active medication list. Both
+   sides are shown (problem-list entry, results found or "no results in the
+   window", medications on file, medications looked for); the conflict is not
+   resolved.
+3. **Screenings that may be due:** the rules below (`backend/screening/uspstf_rules.yml`,
+   all `status: draft`). Data windows: lab results and procedures/imaging
+   10 years, vital signs (BP, BMI) 1 year, latest US Core smoking status
+   (LOINC 72166-2). Where a rule needs data RealDiag cannot see, the item says
+   so rather than guessing: BMI missing ("may apply"), smoking status missing
+   or unknown (AAA, lung), pack-years and quit date (lung, always unavailable).
+
+### Screening rules (checked against uspreventiveservicestaskforce.org, 2026-10-19)
+
+| Rule | Source | Grade | Population | Counts as done (any one) | Excluded if |
+|---|---|---|---|---|---|
+| Colorectal cancer screening | [USPSTF. Colorectal Cancer: Screening. Final Recommendation Statement, May 2021](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening) | B (45-49), A (50-75) | all, 45-75 | colonoscopy within 10 y [keywords: colonoscopy]; CT colonography within 5 y [keywords: colonography]; flexible sigmoidoscopy within 5 y [keywords: sigmoidoscopy]; FIT or high-sensitivity gFOBT within 1 y [LOINC 29771-3, 56490-6, 56491-4, 57905-2, 2335-8, 14563-1, 14564-9, 14565-6]; stool DNA-FIT within 3 y [LOINC 77353-1, 77354-9] | C18, C19, C20, Z85.03, Z85.04 |
+| Breast cancer screening | [USPSTF. Breast Cancer: Screening. Final Recommendation Statement, April 2024](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/breast-cancer-screening) | B (40-74) | female, 40-74 | mammogram within 2 y [keywords: mammogra, modality: mg, tomosynthesis]; mammogram within 2 y [keywords: mammogra, tomosynthesis] | - |
+| Cervical cancer screening | [USPSTF. Cervical Cancer: Screening. Final Recommendation Statement, August 2018](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening) | A (21-65) | female, 21-65 | cervical cytology within 3 y [LOINC 10524-7, 19762-4, 19764-0, 19765-7, 19766-5, 47527-7, 47528-5, 33717-0]; high-risk HPV test within 5 y [LOINC 21440-3, 30167-1, 59263-4, 59420-0, 71431-1, 77379-6, 77399-4, 77400-0] | Z90.71, hysterectomy |
+| Hypertension screening | [USPSTF. Hypertension in Adults: Screening. Final Recommendation Statement, April 2021](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hypertension-in-adults-screening) | A (18-+) | all, 18 | blood pressure reading within 1 y [LOINC 8480-6, 85354-9]; blood pressure reading within 3 y [LOINC 8480-6, 85354-9] | I10, I11, I12, I13, I15, I16 |
+| Prediabetes and type 2 diabetes screening | [USPSTF. Prediabetes and Type 2 Diabetes: Screening. Final Recommendation Statement, August 2021](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-for-prediabetes-and-type-2-diabetes) | B (35-70) | all, 35-70, BMI >= 25 | HbA1c or fasting glucose within 3 y [LOINC 4548-4, 17856-6, 1558-6, 76629-5] | E08, E09, E10, E11, E13, R73.03, R73.09 |
+| HIV screening | [USPSTF. Human Immunodeficiency Virus (HIV) Infection: Screening. Final Recommendation Statement, June 2019](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/human-immunodeficiency-virus-hiv-infection-screening) | A (15-65) | all, 15-65 | HIV test ever [LOINC 75622-1, 56888-1, 7917-8, 7918-6, 68961-2, 5221-7, 48345-6, 58900-2, 80387-4] | B20, Z21 |
+| Hepatitis C screening | [USPSTF. Hepatitis C Virus Infection in Adolescents and Adults: Screening. Final Recommendation Statement, March 2020](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hepatitis-c-screening) | B (18-79) | all, 18-79 | hepatitis C antibody or RNA test ever [LOINC 16128-1, 13955-0, 40726-3, 11011-4, 20416-4, 29609-5] | B17.1, B18.2, B19.2 |
+| Osteoporosis screening | [USPSTF. Osteoporosis to Prevent Fractures: Screening. Final Recommendation Statement, January 2025](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/osteoporosis-screening) | B (65-+) | female, 65 | bone density (DXA) ever [keywords: dxa, dexa, densitometry, bone density]; bone density (DXA) ever [keywords: dxa, dexa, densitometry, bone density] | M80, M81 |
+| Lung cancer screening | [USPSTF. Lung Cancer: Screening. Final Recommendation Statement, March 2021](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/lung-cancer-screening) | B (50-80) | all, 50-80, ever smoked | low-dose CT of the chest within 1 y [keywords: low dose, low-dose, ldct, lung cancer screening]; low-dose CT of the chest within 1 y [keywords: low dose, low-dose, ldct, lung cancer screening] | C34 |
+| Abdominal aortic aneurysm screening | [USPSTF. Abdominal Aortic Aneurysm: Screening. Final Recommendation Statement, December 2019](https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening) | B (65-75) | male, 65-75, ever smoked | abdominal aortic ultrasound ever [keywords: aaa, aortic aneurysm, abdominal aorta, aorta ultrasound, aortic ultrasound]; abdominal aortic ultrasound ever [keywords: aaa screening, aortic aneurysm screening, abdominal aorta, aortic ultrasound] | I71.3, I71.4, I71.5, I71.6 |
+
+Reviewer notes:
+- LOINC and keyword lists decide what counts as "done"; please confirm them
+  (results without LOINC coding, or procedures named differently, will not be
+  found and the item will say "may be due").
+- Hypertension 18-39: the rule allows 3-5 years but only 1 year of vital signs
+  is retrieved; the item says so.
+- HIV and hepatitis C "at least once": only 10 years of results are retrieved;
+  the item says so.
+- Not covered: osteoporosis screening under 65 (needs a clinical risk
+  assessment), HIV screening in pregnancy and repeat screening for risk,
+  Asian American BMI cut-off of 23 (race is not checked), prior mastectomy.
+- Smoking status codes read as current: 449868002, 428041000124106,
+  428071000124103, 428061000124105, 77176002; former: 8517006; never:
+  266919005; unknown: 266927001.
+
+### Related medications (check 2), pending review
+
+- **CARD-HYPERTENSION:** *pril, *sartan, hydrochlorothiazide, chlorthalidone, indapamide, amlodipine, nifedipine, felodipine, diltiazem, verapamil, *olol, spironolactone, eplerenone, hydralazine, clonidine, minoxidil, doxazosin, terazosin, prazosin
+- **ENDO-DIABETES:** metformin, insulin, glipizide, glyburide, glimepiride, sitagliptin, linagliptin, saxagliptin, alogliptin, empagliflozin, dapagliflozin, canagliflozin, ertugliflozin, semaglutide, liraglutide, dulaglutide, exenatide, tirzepatide, pioglitazone
+- **ENDO-DYSLIPIDEMIA:** *statin, ezetimibe, evolocumab, alirocumab, inclisiran, bempedoic acid, fenofibrate, gemfibrozil, icosapent ethyl, niacin
+- **ENDO-HYPOTHYROIDISM:** levothyroxine, liothyronine, thyroid desiccated, armour thyroid
+- **ENDO-PREDIABETES:** metformin
+- **HEME-ANEMIA:** ferrous sulfate, ferrous gluconate, ferrous fumarate, iron sucrose, ferric carboxymaltose, iron dextran, ferumoxytol, folic acid, cyanocobalamin, vitamin b12, epoetin, darbepoetin
+- **NEPHRO-CHRONIC-KIDNEY-DISEASE:** *pril, *sartan, dapagliflozin, empagliflozin, canagliflozin, finerenone, sodium bicarbonate, sevelamer, calcium acetate, lanthanum, epoetin, darbepoetin, calcitriol
+- **NEPHRO-HYPERKALEMIA:** patiromer, sodium zirconium cyclosilicate, sodium polystyrene sulfonate
+
+("*pril", "*sartan", "*olol", "*statin" match any drug name ending that way.)
+
 ## Checked: no action needed
 
 - **Teaching flashcards with drug doses** (`backend/services/education_router.py`,

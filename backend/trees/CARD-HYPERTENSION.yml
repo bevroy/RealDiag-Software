@@ -112,6 +112,28 @@ criteria:
   probability: met_over_known
   suggest_when:
     count_met: 1
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - '*pril'
+    - '*sartan'
+    - 'hydrochlorothiazide'
+    - 'chlorthalidone'
+    - 'indapamide'
+    - 'amlodipine'
+    - 'nifedipine'
+    - 'felodipine'
+    - 'diltiazem'
+    - 'verapamil'
+    - '*olol'
+    - 'spironolactone'
+    - 'eplerenone'
+    - 'hydralazine'
+    - 'clonidine'
+    - 'minoxidil'
+    - 'doxazosin'
+    - 'terazosin'
+    - 'prazosin'
   known_condition:
     icd10_prefixes:
       - I10
@@ -224,3 +246,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.

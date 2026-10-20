@@ -195,6 +195,28 @@ criteria:
   probability: met_over_known
   confirm:
     min_abnormal_results: 2
+  # Possible missed items: a problem-list entry with none of these medications and no
+  # supporting result is shown for review (pending clinical review; '*x' = name ending in x)
+  related_medications:
+    - 'metformin'
+    - 'insulin'
+    - 'glipizide'
+    - 'glyburide'
+    - 'glimepiride'
+    - 'sitagliptin'
+    - 'linagliptin'
+    - 'saxagliptin'
+    - 'alogliptin'
+    - 'empagliflozin'
+    - 'dapagliflozin'
+    - 'canagliflozin'
+    - 'ertugliflozin'
+    - 'semaglutide'
+    - 'liraglutide'
+    - 'dulaglutide'
+    - 'exenatide'
+    - 'tirzepatide'
+    - 'pioglitazone'
   known_condition:
     icd10_prefixes:
       - E08
@@ -249,3 +271,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added chart-evaluation criteria with cited guideline thresholds; pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.
