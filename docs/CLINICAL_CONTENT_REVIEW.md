@@ -250,6 +250,187 @@ Ranking fixes made with this rule:
 Typed symptom search does not handle negation ("no chest pain" still matches
 chest pain); the encounter assessment removes negated phrases before ranking.
 
+## 10. Treatment wording: clinician actions reworded, patient advice labelled
+
+Treatment sections are shown as "Treatment information from the decision tree
+(reference, not an order)". Of 7,064 treatment lines:
+
+- **56 clinician-directed action lines** (activate, administer, admit, transfuse,
+  intubate, give, start or initiate a drug or procedure) in 45 trees are reworded
+  into decision-support wording. Drugs, doses, thresholds and citations are unchanged.
+- **97 patient self-care lines** in 73 trees are labelled "Patient advice:" and otherwise
+  left as written.
+- **243 cautions** ("Avoid ...", "Do not ...") in 165 trees are left as written.
+- Other clinician lines (treat, continue, add, titrate, monitor, ...; about 450) are
+  left as written.
+
+Lines were grouped by their opening verb (also after a heading such as "Disposition:")
+and the clinician and patient groups were then checked by hand. Each affected
+tree has a change_log entry. Please confirm each rewording.
+
+### Reworded clinician actions
+
+| Tree | Old | New |
+|---|---|---|
+| CARD-ACUTE-CORONARY-SYNDROME | Activate cardiac catheterization lab immediately | Consider immediate cardiac catheterization lab activation per institutional STEMI protocol |
+| CARD-HYPERTENSION | Initiate antihypertensive therapy: stage 1 hypertension (130-139/80-89) if ASCVD risk 10 percent or more or existing ASCVD/diabetes/CKD, stage 2 hypertension (140 or more/90 or more) regardless of risk | Consider antihypertensive therapy: stage 1 hypertension (130-139/80-89) if ASCVD risk 10 percent or more or existing ASCVD/diabetes/CKD, stage 2 hypertension (140 or more/90 or more) regardless of risk |
+| CARD-HYPERTENSION | First-line agents (thiazide diuretics, ACE inhibitors, ARBs, CCBs): start monotherapy if BP less than 20/10 above goal, start 2 agents if 20/10 or more above goal | First-line agents (thiazide diuretics, ACE inhibitors, ARBs, CCBs): consider monotherapy if BP less than 20/10 above goal, 2 agents if 20/10 or more above goal |
+| CARD-HYPERTENSION | Hypertensive emergency (BP 180 or more/120 or more with end-organ damage): admit ICU, IV antihypertensives (labetalol, nicardipine, clevidipine), reduce BP 10-20 percent first hour, then 5-15 percent over next 23 hours (avoid rapid reduction - cerebral hypoperfusion) | Hypertensive emergency (BP 180 or more/120 or more with end-organ damage): consider ICU admission, IV antihypertensives (labetalol, nicardipine, clevidipine), with BP reduction of 10-20 percent first hour, then 5-15 percent over next 23 hours (avoid rapid reduction - cerebral hypoperfusion) |
+| CARD-MYOCARDIAL-INFARCTION-STEMI | ACE inhibitor or ARB: start within 24 hours if no contraindications (lisinopril 5 mg daily, ramipril, especially if anterior MI, LV dysfunction, heart failure, diabetes), reduce mortality and remodeling | ACE inhibitor or ARB: consider starting within 24 hours if no contraindications (lisinopril 5 mg daily, ramipril, especially if anterior MI, LV dysfunction, heart failure, diabetes), reduce mortality and remodeling |
+| CARDS-HEART-FAILURE-SYSTOLIC | Start low, titrate slowly (may worsen HF initially) | Consider starting low and titrating slowly (may worsen HF initially) |
+| DENT-DENTAL-ABSCESS | Severe/spreading: admit for IV antibiotics (ampicillin-sulbactam) | Severe/spreading: consider admission for IV antibiotics (ampicillin-sulbactam) |
+| DERM-ACNE-VULGARIS | Start with lower concentrations, increase gradually to minimize irritation | Consider starting with lower concentrations, increasing gradually to minimize irritation |
+| DERM-SUNBURN | Start within 24 hours of burn for maximum benefit | Consider starting within 24 hours of burn for maximum benefit |
+| EMERGENCY-HEAT-STROKE | Do NOT wait for laboratory results - start cooling immediately based on clinical diagnosis | Do NOT wait for laboratory results - consider starting cooling immediately based on clinical diagnosis |
+| EMERGENCY-HEAT-STROKE | Transfuse PRBCs if anemia and bleeding | Consider PRBC transfusion if anemia and bleeding |
+| EMERGENCY-HEAT-STROKE | Transfuse platelets if under 10,000-20,000 or active bleeding | Consider platelet transfusion if under 10,000-20,000 or active bleeding |
+| ENDO-DIABETES-HYPERGLYCEMIA | Start 0.1 units/kg for glucose >200 mg/dL | Consider starting 0.1 units/kg for glucose >200 mg/dL |
+| ENDO-HYPOGLYCEMIA | If sulfonylurea-induced: Admit for D10W infusion + frequent glucose monitoring (can recur 12-24hrs) (ADA 2024) | If sulfonylurea-induced: consider admission for D10W infusion + frequent glucose monitoring (can recur 12-24hrs) (ADA 2024) |
+| ENDO-HYPOTHYROIDISM | Start lower in elderly or cardiac disease: 25-50 mcg daily (ADA 2024) | Consider starting lower in elderly or cardiac disease: 25-50 mcg daily (ADA 2024) |
+| ENDO-THYROID-STORM | Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release) | Iodine (THIRD - 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release) |
+| ENDO-THYROIDITIS | Start 1.6 mcg/kg/day, adjust to normalize TSH | Consider starting 1.6 mcg/kg/day, adjusting to normalize TSH |
+| ENT-EPISTAXIS | Posterior packing: Foley catheter or posterior pack if anterior pack fails - admit for monitoring, O2, IV antibiotics (toxic shock risk) (AAO-HNS 2023) | Posterior packing: Foley catheter or posterior pack if anterior pack fails - consider admission for monitoring, O2, IV antibiotics (toxic shock risk) (AAO-HNS 2023) |
+| ENT-VERTIGO | Central causes: admit, neurology consult, treat underlying etiology | Central causes: consider admission, neurology consult, treat underlying etiology |
+| GER-DELIRIUM | Disposition: Admit if cannot identify/treat cause outpatient, high fall risk, unable to care for self at home (AGS 2023) | Disposition: consider admission if cannot identify/treat cause outpatient, high fall risk, unable to care for self at home (AGS 2023) |
+| GER-FALLS | Disposition: Admit if fall with injury, syncope, unable to mobilize safely; outpatient if low-risk with close follow-up (AGS 2023) | Disposition: consider admission if fall with injury, syncope, unable to mobilize safely; outpatient if low-risk with close follow-up (AGS 2023) |
+| GI-HEPATITIS-ACUTE | Acetaminophen overdose: N-acetylcysteine (NAC) - start immediately if suspected | Acetaminophen overdose: N-acetylcysteine (NAC) - consider starting immediately if suspected |
+| HEME-SICKLE-CELL-DISEASE | Start 15-20 mg/kg daily, increase by 5 mg/kg every 8-12 weeks to maximum tolerated dose (typically 25-35 mg/kg, max 35 mg/kg) | Consider starting 15-20 mg/kg daily, increasing by 5 mg/kg every 8-12 weeks to maximum tolerated dose (typically 25-35 mg/kg, max 35 mg/kg) |
+| ID-CELLULITIS | Severe/systemic: Admit for IV cefazolin 2g q8h or vancomycin 15-20mg/kg q12h if MRSA (IDSA 2024) | Severe/systemic: consider admission for IV cefazolin 2g q8h or vancomycin 15-20mg/kg q12h if MRSA (IDSA 2024) |
+| ID-SEPSIS | Administer high-flow oxygen | Consider high-flow oxygen |
+| ID-SEPSIS | Administer broad-spectrum antibiotics | Consider broad-spectrum antibiotics |
+| ID-SEPSIS | Start IV fluid resuscitation | Consider IV fluid resuscitation |
+| ID-SEPSIS | Administer within 1 hour of recognition | Recommended within 1 hour of recognition |
+| NEPHRO-HYPOKALEMIA | Admit to monitored setting | Consider admission to a monitored setting |
+| NEU-ALS | Riluzole 50mg BID: Start at diagnosis, may slow progression, monitor LFTs (AAN 2024) | Riluzole 50mg BID: consider starting at diagnosis, may slow progression, monitor LFTs (AAN 2024) |
+| NEU-BELL-PALSY | Prednisone 60mg daily x5 days, taper over 5 days (10 days total) - START WITHIN 72 HOURS (AAN 2024) | Prednisone 60mg daily x5 days, taper over 5 days (10 days total) - consider starting within 72 hours (AAN 2024) |
+| NEU-ENCEPHALITIS | Empiric acyclovir 10mg/kg IV q8h: Start immediately if encephalitis suspected (AAN 2024) | Empiric acyclovir 10mg/kg IV q8h: consider starting immediately if encephalitis suspected (AAN 2024) |
+| NEU-PARKINSONS | Start when functional impairment: Carbidopa/levodopa 25/100mg TID, titrate by 25/100mg q3-7days (AAN 2024) | Consider starting when functional impairment: Carbidopa/levodopa 25/100mg TID, titrate by 25/100mg q3-7days (AAN 2024) |
+| NEU-SAH | Nimodipine 60mg PO/NG q4h: Start immediately, continue 21 days to prevent vasospasm (AAN 2024) | Nimodipine 60mg PO/NG q4h: consider starting immediately, continue 21 days to prevent vasospasm (AAN 2024) |
+| NEU-STATUS-EPILEPTICUS | 20-40 min: Refractory status - intubate, propofol/midazolam drip, ICU, EEG (AAN 2024) | 20-40 min: Refractory status - consider intubation, propofol/midazolam drip, ICU, EEG (AAN 2024) |
+| NEU-TIA | Urgent evaluation: Admit high-risk patients (ABCD2 ≥4, crescendo TIAs, symptomatic carotid stenosis) | Urgent evaluation: consider admission for high-risk patients (ABCD2 ≥4, crescendo TIAs, symptomatic carotid stenosis) |
+| NEURO-SEIZURE-DISORDER | Start single agent (monotherapy), titrate to seizure control or side effects, if inadequate try alternative monotherapy before polytherapy | Consider starting a single agent (monotherapy), titrating to seizure control or side effects; if inadequate, consider alternative monotherapy before polytherapy |
+| OB-PRETERM-LABOR | Admit for observation if preterm labor suspected (less than 37 weeks with contractions and cervical change) | Consider admission for observation if preterm labor suspected (less than 37 weeks with contractions and cervical change) |
+| OB-PRETERM-LABOR | Give if 24-34 weeks with threatened preterm delivery within 7 days | Consider if 24-34 weeks with threatened preterm delivery within 7 days |
+| OBGYN-MENOPAUSE | Lowest effective dose shortest duration: start low dose, reassess annually, consider stopping after 3-5 years | Lowest effective dose shortest duration: consider starting low dose, reassess annually, consider stopping after 3-5 years |
+| ORTHO-LOW-BACK-PAIN | Physical therapy: core strengthening, stretching, postural training - start after acute phase (1-2 weeks), critical for chronic pain | Physical therapy: core strengthening, stretching, postural training - consider starting after acute phase (1-2 weeks), critical for chronic pain |
+| ORTHO-RIB-FRACTURE | Admit for - >3 rib fractures - Inadequate pain control - Oxygen requirement - Elderly age (>65 years) - COPD or other lung disease - Pneumothorax or hemothorax - Associated injuries | Consider admission for - >3 rib fractures - Inadequate pain control - Oxygen requirement - Elderly age (>65 years) - COPD or other lung disease - Pneumothorax or hemothorax - Associated injuries |
+| PEDS-ADHD | Start low, go slow, titrate to optimal dose based on response and tolerability | Consider starting low, going slow, titrating to optimal dose based on response and tolerability |
+| PEDS-AUTISM | Start as early as possible (age 2-3 years ideal) | Consider starting as early as possible (age 2-3 years ideal) |
+| PEDS-FEBRILE-SEIZURE | Seizure lasting greater than 5 minutes or ongoing: administer antiseizure medication | Seizure lasting greater than 5 minutes or ongoing: consider antiseizure medication |
+| PEDS-FEBRILE-SEIZURE | Admit if: | Consider admission if: |
+| PEDS-FEVER | Neonates: admit all | Neonates: consider admission for all |
+| PEDS-FEVER | Young infants: admit if high-risk, toxic-appearing, or positive labs | Young infants: consider admission if high-risk, toxic-appearing, or positive labs |
+| PEDS-FEVER | Children greater than 3 months: admit if toxic-appearing, dehydrated, unable to tolerate oral, unreliable follow-up | Children greater than 3 months: consider admission if toxic-appearing, dehydrated, unable to tolerate oral, unreliable follow-up |
+| PEDS-GASTROENTERITIS | Admit if moderate-severe dehydration, failed oral rehydration trial, age less than 3 months, toxic appearance | Consider admission if moderate-severe dehydration, failed oral rehydration trial, age less than 3 months, toxic appearance |
+| PEDS-HAND-FOOT-MOUTH | Admit if severe dehydration, inability to tolerate oral fluids, or complications | Consider admission if severe dehydration, inability to tolerate oral fluids, or complications |
+| PSYCH-EATING-ANOREXIA | Start refeeding at 30-40 kcal/kg/day, advance slowly to avoid refeeding syndrome | Consider starting refeeding at 30-40 kcal/kg/day, advancing slowly to avoid refeeding syndrome |
+| PSYCH-PSYCHOSIS | First-episode psychosis: start low-dose atypical antipsychotic | First-episode psychosis: consider low-dose atypical antipsychotic |
+| RHEUM-RHEUMATOID-ARTHRITIS | Early aggressive DMARD therapy prevents joint damage - start within 3 months of diagnosis | Early aggressive DMARD therapy prevents joint damage - consider starting within 3 months of diagnosis |
+| TOX-ACETAMINOPHEN-OD | Disposition: Admit if NAC needed, psychiatry consult if intentional, liver transplant evaluation if fulminant hepatic failure (AAPCC 2023) | Disposition: consider admission if NAC needed, psychiatry consult if intentional, liver transplant evaluation if fulminant hepatic failure (AAPCC 2023) |
+| URO-URINARY-RETENTION | Start alpha-blocker: Tamsulosin 0.4mg daily immediately after catheterization (improves voiding trial success) (AUA 2023) | Consider alpha-blocker: Tamsulosin 0.4mg daily immediately after catheterization (improves voiding trial success) (AUA 2023) |
+
+### Labelled patient advice (text after the label unchanged)
+
+| Tree | Line |
+|---|---|
+| ALLERGY-FOOD-ALLERGY | Call 911 after using epinephrine |
+| CARD-PERIPHERAL-ARTERY-DISEASE | Walk until near-maximal pain, rest, repeat - improves symptoms and walking distance |
+| CARDS-CV-RISK-ASSESSMENT | Increase fruits, vegetables, whole grains, fish |
+| CARDS-STABLE-ANGINA | If not relieved after 3 doses: call 911 (possible ACS) |
+| DENT-TMJ-DISORDER | Moist heat: apply to affected area 15-20 minutes several times daily (relaxes muscles) |
+| DERM-CONTACT-DERMATITIS | Poison ivy treatment: wash exposed skin immediately with soap and water, launder clothes, wash under nails |
+| DERM-IMPETIGO-ADULT | Remove crusts - soak with warm water or saline compresses, gently remove crusts to allow antibiotic penetration |
+| DERM-IMPETIGO-ADULT | Wash with antibacterial soap (chlorhexidine, benzoyl peroxide) |
+| DERM-IMPETIGO-ADULT | Keep nails short, avoid scratching |
+| DERM-SCABIES | Environmental decontamination: wash all clothing, bedding, towels in hot water and dry on high heat, items that cannot be washed seal in plastic bag x72 hours (mites die off host in 2-3 days) |
+| DERM-SUNBURN | Apply liberally several times daily |
+| DERM-WARTS | Apply daily after soaking in warm water and paring dead tissue |
+| DERM-WARTS | Apply 3-5 times per week at bedtime |
+| DERM-WARTS | Keep hands and feet dry |
+| EMERGENCY-HEAT-STROKE | Wear light, loose clothing |
+| EMERGENCY-HEAT-STROKE | Take frequent breaks in shade or air conditioning |
+| ENDO-DYSLIPIDEMIA | Limit alcohol (excess increases triglycerides) |
+| ENDO-NEUROPATHY-DIABETIC | Educate on foot hygiene: wash and dry thoroughly, moisturize (not between toes), avoid barefoot walking |
+| ENDO-OSTEOPENIA | Take on empty stomach with water, remain upright 30-60 min |
+| ENDO-OVERWEIGHT | Increase vegetables, fruits, whole grains, lean protein |
+| ENDO-OVERWEIGHT | Exercise |
+| ENDO-OVERWEIGHT | Reduce sedentary time (stand, walk breaks) |
+| ENT-LARYNGITIS | Hydration: Increase fluids (8+ glasses/day), humidified air (AAO-HNS 2023) |
+| ENT-PHARYNGITIS-STREP | Return to school/work 24 hours after starting antibiotics (no longer contagious) (AAO-HNS 2023) |
+| ENT-PHARYNGITIS-VIRAL | Increase oral fluids, rest, humidified air (AAO-HNS 2023) |
+| ENT-TINNITUS | Limit caffeine, alcohol, nicotine |
+| ENT-TINNITUS | Exercise |
+| GEN-MED-OBESITY | Exercise 150-300 min/week moderate intensity plus strength training |
+| ID-GASTROENTERITIS-VIRAL | Return to normal diet as tolerated; avoid prolonged dietary restrictions |
+| ID-HEPATITIS-A | Rest as needed; no strict bed rest required |
+| ID-MONONUCLEOSIS | Supportive care: Rest, fluids, NSAIDs or acetaminophen for fever/pain (IDSA 2024) |
+| ID-TICK-BITE | Return precautions if fever, rash, flu-like illness develop within 30 days |
+| NEU-CONCUSSION | Acute: Rest 24-48 hours (physical and cognitive), avoid screens, sleep hygiene (AAN 2024) |
+| NEURO-HEADACHE | Non-pharmacologic: sleep hygiene, regular meals, hydration, exercise, stress reduction, biofeedback, trigger avoidance |
+| OBGYN-AMENORRHEA | Reduce exercise intensity if excessive |
+| OBGYN-ATROPHIC-VAGINITIS | Wear cotton underwear |
+| OBGYN-VAGINITIS-UNSPECIFIED | Wear cotton underwear, avoid tight clothing |
+| ORTHO-ANKLE-SPRAIN | Return to activities in 1-2 weeks |
+| ORTHO-ANKLE-SPRAIN | Return to sports in 4-6 weeks |
+| ORTHO-ANKLE-SPRAIN | Return to sports 3-6 months |
+| ORTHO-KNEE-SPRAIN | Return to activities 2-4 weeks |
+| ORTHO-KNEE-SPRAIN | Return to sports 6-8 weeks |
+| ORTHO-LATERAL-EPICONDYLITIS | Wear during activities that provoke symptoms |
+| ORTHO-LATERAL-EPICONDYLITIS | Ice: apply 15-20 minutes after aggravating activities |
+| ORTHO-RIB-FRACTURE | Rest from strenuous activity for 4-6 weeks |
+| ORTHO-RIB-FRACTURE | Return precautions for worsening shortness of breath, fever, productive cough (pneumonia) |
+| ORTHO-TROCHANTERIC-BURSITIS | Ice application 15-20 minutes several times daily |
+| ORTHO-WRIST-SPRAIN | Return to activities as tolerated (1-2 weeks) |
+| ORTHO-WRIST-SPRAIN | Return to activities in 4-6 weeks |
+| ORTHO-WRIST-SPRAIN | Return to full activities 3-6 months |
+| PED-DEHYDRATION | Return precautions |
+| PED-IMPETIGO | Hygiene measures - keep lesions covered, wash hands frequently, separate towels and linens, trim fingernails |
+| PED-IMPETIGO | Return to school/daycare after 24 hours of antibiotics and lesions covered |
+| PED-RASH | Keep nails short to prevent excoriation |
+| PEDS-ADHD | Exercise and physical activity (beneficial for ADHD symptoms) |
+| PEDS-ASTHMA | Reduce dust mite exposure (mattress/pillow covers, wash bedding hot water weekly) |
+| PEDS-AUTISM | Sleep hygiene, behavioral interventions |
+| PEDS-FEBRILE-SEIZURE | If seizure occurs at home: keep safe (side position, do not restrain), call 911 if prolonged greater than 5 minutes |
+| PEDS-FEVER | Rest |
+| PEDS-STREP-THROAT | Return to school/daycare after 24 hours of antibiotics and fever-free |
+| PEDS-VIRAL-URI | Use before feedings and sleep |
+| PEDS-VIRAL-URI | Keep child home from daycare/school when ill |
+| PSYCH-ACUTE-STRESS-REACTION | Sleep hygiene and self-care |
+| PSYCH-CANNABIS-USE-DISORDER | Sleep hygiene, exercise, healthy diet |
+| PSYCH-DEPRESSION-ANXIETY-MIXED | Sleep hygiene |
+| PSYCH-DEPRESSION-ANXIETY-MIXED | Limit caffeine and alcohol |
+| PSYCH-GRIEF-REACTION | Stay connected to social support |
+| PSYCH-PERSISTENT-DEPRESSIVE-DISORDER | Sleep hygiene |
+| PSYCH-SLEEP-DISTURBANCE | Sleep hygiene education |
+| PSYCH-SLEEP-DISTURBANCE | Sleep hygiene (foundational but insufficient alone) |
+| PSYCH-SOMATIC-SYMPTOM-DISORDER | Sleep hygiene |
+| PSYCH-WORK-STRESS | Limit caffeine and alcohol |
+| PSYCH-WORK-STRESS | Take regular breaks during workday |
+| PULM-BRONCHITIS-ACUTE | Supportive care: rest, hydration, humidified air |
+| PULM-CHRONIC-COUGH | Lifestyle modifications - elevate head of bed, avoid late meals, weight loss |
+| RESP-URI | Supportive care (mainstay): rest, hydration, humidified air |
+| RHEUM-GOUT | Lifestyle: Limit alcohol, red meat, seafood (high purines). Increase water, low-fat dairy, cherries (ACR 2023) |
+| RHEUM-OSTEOPOROSIS | Limit alcohol (<2 drinks/day) |
+| SURG-POSTOP-ILEUS | Early ambulation - walk QID |
+| TRAUMA-HEAD-INJURY | Mild TBI/concussion: rest, gradual return to activity, avoid re-injury |
+| URO-BALANITIS | Improve hygiene: wash daily with water, pat dry |
+| URO-DYSURIA | Increase oral fluids |
+| URO-INCONTINENCE-STRESS | Perform 10 repetitions, 3 times daily |
+| URO-NOCTURIA | Limit fluids 2-3 hours before bedtime |
+| URO-NOCTURIA | Elevate legs in afternoon/evening (mobilize edema before bedtime) |
+| URO-NOCTURIA | Sleep hygiene |
+| URO-OVERACTIVE-BLADDER | Reduce caffeine, alcohol, carbonated drinks, artificial sweeteners, spicy/acidic foods |
+| URO-TESTICULAR-PAIN | Rest, avoid heavy lifting and sexual activity until resolved |
+| UROLOGY-BENIGN-PROSTATIC-HYPERPLASIA | Lifestyle modifications - limit fluids before bed, reduce caffeine/alcohol, timed voiding, double voiding |
+| UROLOGY-ERECTILE-DYSFUNCTION | Take on empty stomach for faster onset, requires sexual stimulation to work |
+| UROLOGY-KIDNEY-STONES | Drink 2-3 liters daily to achieve urine output greater than 2 liters (urine specific gravity less than 1.010) |
+| GENERAL-FATIGUE | Graded exercise therapy - start low (10-15 min), gradually increase |
+| OBGYN-DYSMENORRHEA | Start 1-2 days before expected menses and continue first 2-3 days |
+| PED-DEHYDRATION | Give small frequent amounts |
+| PULM-TOBACCO-USE | Start 1 week before quit date |
+| PULM-TOBACCO-USE | Start 1-2 weeks before quit date |
+| URO-INCONTINENCE-URGE | Start voiding every 1-2 hours whether or not urge present |
+
 ## Checked: no action needed
 
 - **Teaching flashcards with drug doses** (`backend/services/education_router.py`,

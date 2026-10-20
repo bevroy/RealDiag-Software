@@ -68,3 +68,38 @@ def test_every_shipped_tree_has_only_text_items(validator):
 def test_acs_presentation_loads_as_text():
     tree = yaml.safe_load((ROOT / "trees" / "CARD-ACUTE-CORONARY-SYNDROME.yml").read_text(encoding="utf-8"))
     assert tree["presentations"][0] == "Chest pain: substernal, pressure-like, radiating to left arm/jaw/back"
+
+
+ORDER_VERB = __import__("re").compile(
+    r"(?:^|:\s+|\s[-–]\s|;\s+|\.\s+|,\s+then\s+|\bthen\s+)(activate|administer|admit|transfuse|intubate|give|start|initiate)\b",
+    __import__("re").IGNORECASE)
+
+
+def _strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, list):
+        for item in value:
+            yield from _strings(item)
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from _strings(item)
+
+
+def test_treatment_has_no_clinician_orders():
+    """Clinician-directed actions are worded as decision support (review doc section 10)."""
+    orders = []
+    for path in sorted((ROOT / "trees").glob("*.yml")):
+        tree = yaml.safe_load(path.read_text(encoding="utf-8"))
+        for line in _strings(tree.get("treatment")):
+            if not line.startswith("Patient advice:") and ORDER_VERB.search(line):
+                orders.append(f"{path.stem}: {line}")
+    assert orders == []
+
+
+def test_examples_of_reworded_and_labelled_lines():
+    acs = yaml.safe_load((ROOT / "trees" / "CARD-ACUTE-CORONARY-SYNDROME.yml").read_text(encoding="utf-8"))
+    lines = list(_strings(acs["treatment"]))
+    assert "Consider immediate cardiac catheterization lab activation per institutional STEMI protocol" in lines
+    heat = yaml.safe_load((ROOT / "trees" / "EMERGENCY-HEAT-STROKE.yml").read_text(encoding="utf-8"))
+    assert "Patient advice: Wear light, loose clothing" in list(_strings(heat["treatment"]))

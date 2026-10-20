@@ -69,11 +69,11 @@ workup:
 treatment:
   sepsis_six_bundle:
     within_1_hour:
-      - Administer high-flow oxygen
+      - 'Consider high-flow oxygen'
       - Obtain blood cultures
-      - Administer broad-spectrum antibiotics
+      - 'Consider broad-spectrum antibiotics'
       - Measure serum lactate
-      - Start IV fluid resuscitation
+      - 'Consider IV fluid resuscitation'
       - Measure urine output (consider Foley catheter)
   fluid_resuscitation:
     - 'Initial: 30 mL/kg crystalloid bolus within 3 hours'
@@ -88,7 +88,7 @@ treatment:
       - 'Post-splenectomy: Add ceftriaxone for encapsulated organisms'
       - 'Abdominal source: Add metronidazole or use carbapenem'
     principles:
-      - Administer within 1 hour of recognition
+      - 'Recommended within 1 hour of recognition'
       - De-escalate based on culture results
       - Source control within 12 hours if possible
   vasopressors:
@@ -296,3 +296,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

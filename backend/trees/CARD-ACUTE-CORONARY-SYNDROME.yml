@@ -61,7 +61,7 @@ workup:
   - Echocardiography (wall motion abnormalities, complications)
 treatment:
   - STEMI - time is muscle, door-to-balloon less than 90 minutes for PCI
-  - Activate cardiac catheterization lab immediately
+  - 'Consider immediate cardiac catheterization lab activation per institutional STEMI protocol'
   - Primary PCI (percutaneous coronary intervention) preferred if available within 120 minutes
   - Fibrinolysis if PCI not available within 120 minutes (door-to-needle less than 30 minutes)
   - Alteplase, reteplase, or tenecteplase
@@ -244,3 +244,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'

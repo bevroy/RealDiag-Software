@@ -99,7 +99,7 @@ export default function UserGuidePage() {
             <li><strong>Top matches:</strong> Most relevant differential candidates.</li>
             <li><strong>Matched presentations:</strong> Findings that aligned with your input.</li>
             <li><strong>Can&apos;t-miss condition:</strong> An emergent condition that matches the symptoms. It is always listed, even when its match score is low, so it can be considered and ruled out.</li>
-            <li><strong>Treatment information:</strong> Shown as reference from the decision tree, not as an order.</li>
+            <li><strong>Treatment information:</strong> Shown as reference from the decision tree, not as an order. Lines starting &quot;Patient advice:&quot; are self-care advice to pass on to the patient.</li>
             <li><strong>Tests and referrals:</strong> Suggested workup and specialty escalation.</li>
             <li><strong>Under clinical review:</strong> While clinical content is still being reviewed, results show an amber notice and each diagnosis shows its review status (for example "Draft - under clinical review."). Verify urgency, treatment and severity information against current guidelines before acting.</li>
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>

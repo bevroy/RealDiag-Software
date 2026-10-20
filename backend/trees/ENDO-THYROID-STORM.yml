@@ -50,7 +50,7 @@ treatment:
   - 'If beta-blocker contraindicated: Diltiazem 60-90mg PO Q6H OR 0.25mg/kg IV'
   - 'Thionamide (SECOND): Propylthiouracil (PTU) preferred - 500-1000mg loading dose, then 250mg Q4H (blocks synthesis AND peripheral conversion)'
   - 'Alternative thionamide: Methimazole 20mg Q4-6H (if PTU unavailable or contraindicated - pregnancy first trimester)'
-  - 'Iodine (THIRD - give 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
+  - 'Iodine (THIRD - 1 hour AFTER thionamide): Lugol solution 8 drops Q6H OR SSKI 5 drops Q6H OR sodium iodide 0.5-1g IV Q12H (blocks thyroid hormone release)'
   - 'Corticosteroids: Hydrocortisone 100mg IV Q8H OR dexamethasone 2mg Q6H (blocks T4→T3 conversion, treats potential adrenal insufficiency)'
   - Supportive care - aggressive cooling (acetaminophen 650mg Q4H, cooling blankets), avoid aspirin (displaces thyroid hormone from binding proteins)
   - IV fluids - patients often volume depleted from fever, vomiting, diarrhea (2-3L NS in first 24 hours)
@@ -342,3 +342,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Urgency set to emergent; proposed default, pending clinician confirmation.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: 'Clinician-directed treatment lines reworded to decision-support wording (drugs and doses unchanged). Pending clinical review.'
