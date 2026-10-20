@@ -24,6 +24,20 @@ _retrieval_status: ContextVar[Optional[Dict[str, str]]] = ContextVar("history_re
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
 
+
+def _concept_name(concept: Optional[Dict[str, Any]]) -> str:
+    """A CodeableConcept's text, else its first coding display, else its code."""
+    concept = concept or {}
+    if concept.get('text'):
+        return concept['text']
+    for coding in concept.get('coding') or []:
+        if coding.get('display'):
+            return coding['display']
+    for coding in concept.get('coding') or []:
+        if coding.get('code'):
+            return coding['code']
+    return 'Unnamed condition'
+
 class VisitNote(BaseModel):
     """Clinical visit note."""
     date: str
@@ -224,7 +238,8 @@ class PatientHistoryService:
         self,
         patient_id: str,
         lookback_days: Optional[int] = 365,
-        include_resolved: bool = True
+        include_resolved: bool = True,
+        skip: Optional[set] = None
     ) -> ComprehensivePatientHistory:
         """
         Retrieve comprehensive patient history for diagnostic decision support.
@@ -239,6 +254,9 @@ class PatientHistoryService:
                 always unbounded regardless of this setting - the FHIR
                 queries backing them don't support meaningful date scoping.)
             include_resolved: Include resolved/inactive conditions
+            skip: data types not to query (e.g. {"vital_signs", "conditions"})
+                because the caller fetched them already; they come back empty
+                with no retrieval status.
 
         Returns:
             ComprehensivePatientHistory with all available patient data
@@ -250,24 +268,40 @@ class PatientHistoryService:
 
         status_token = _retrieval_status.set({})
         try:
-            patient_data = await self._tracked("demographics", self._fetch_patient_demographics(patient_id, headers))
-            visit_notes = await self._tracked("visit_notes", self._fetch_visit_notes(patient_id, lookback_date, headers))
-            vital_signs = await self._tracked("vital_signs", self._fetch_vital_signs(patient_id, lookback_date, headers))
-            diagnostic_tests = await self._tracked(
-                "diagnostic_tests", self._fetch_diagnostic_tests(patient_id, lookback_date, headers))
-            history_and_physicals = await self._tracked(
-                "history_and_physicals", self._fetch_history_and_physicals(patient_id, lookback_date, headers))
-            procedures = await self._tracked("procedures", self._fetch_procedures(patient_id, lookback_date, headers))
-            imaging_studies = await self._tracked(
-                "imaging_studies", self._fetch_imaging_studies(patient_id, lookback_date, headers))
-            immunizations = await self._tracked(
-                "immunizations", self._fetch_immunizations(patient_id, lookback_date, headers))
-            active_conditions, past_conditions = await self._tracked(
-                "conditions", self._fetch_conditions(patient_id, include_resolved, headers))
-            current_meds, med_history = await self._tracked("medications", self._fetch_medications(patient_id, headers))
-            allergies = await self._tracked("allergies", self._fetch_allergies(patient_id, headers))
-            family_history, social_history = await self._tracked(
-                "family_social_history", self._fetch_family_social_history(patient_id, headers))
+            skip = set(skip or ())
+
+            async def fetch(resource: str, make, empty):
+                # A skipped data type is not queried and gets no status: the
+                # caller already fetched it with its own client.
+                if resource in skip:
+                    return empty
+                return await self._tracked(resource, make())
+
+            patient_data = await fetch(
+                "demographics", lambda: self._fetch_patient_demographics(patient_id, headers), {})
+            visit_notes = await fetch(
+                "visit_notes", lambda: self._fetch_visit_notes(patient_id, lookback_date, headers), [])
+            vital_signs = await fetch(
+                "vital_signs", lambda: self._fetch_vital_signs(patient_id, lookback_date, headers), [])
+            diagnostic_tests = await fetch(
+                "diagnostic_tests", lambda: self._fetch_diagnostic_tests(patient_id, lookback_date, headers), [])
+            history_and_physicals = await fetch(
+                "history_and_physicals",
+                lambda: self._fetch_history_and_physicals(patient_id, lookback_date, headers), [])
+            procedures = await fetch(
+                "procedures", lambda: self._fetch_procedures(patient_id, lookback_date, headers), [])
+            imaging_studies = await fetch(
+                "imaging_studies", lambda: self._fetch_imaging_studies(patient_id, lookback_date, headers), [])
+            immunizations = await fetch(
+                "immunizations", lambda: self._fetch_immunizations(patient_id, lookback_date, headers), [])
+            active_conditions, past_conditions = await fetch(
+                "conditions", lambda: self._fetch_conditions(patient_id, include_resolved, headers), ([], []))
+            current_meds, med_history = await fetch(
+                "medications", lambda: self._fetch_medications(patient_id, headers), ([], []))
+            allergies = await fetch("allergies", lambda: self._fetch_allergies(patient_id, headers), [])
+            family_history, social_history = await fetch(
+                "family_social_history", lambda: self._fetch_family_social_history(patient_id, headers),
+                (None, None))
             retrieval_status = dict(_retrieval_status.get() or {})
         finally:
             _retrieval_status.reset(status_token)
@@ -278,7 +312,8 @@ class PatientHistoryService:
             active_conditions,
             current_meds,
             diagnostic_tests,
-            visit_notes
+            visit_notes,
+            retrieval_status,
         )
 
         return ComprehensivePatientHistory(
@@ -955,7 +990,7 @@ class PatientHistoryService:
                 for entry in bundle.get('entry', []):
                     condition = entry.get('resource', {})
                     active_conditions.append({
-                        'code': condition.get('code', {}).get('text', 'Unknown'),
+                        'code': _concept_name(condition.get('code')),
                         'status': 'active',
                         'recorded_date': condition.get('recordedDate'),
                         'onset': condition.get('onsetDateTime')
@@ -974,7 +1009,7 @@ class PatientHistoryService:
                     for entry in bundle.get('entry', []):
                         condition = entry.get('resource', {})
                         past_conditions.append({
-                            'code': condition.get('code', {}).get('text', 'Unknown'),
+                            'code': _concept_name(condition.get('code')),
                             'status': condition.get('clinicalStatus', {}).get('coding', [{}])[0].get('code', 'resolved'),
                             'recorded_date': condition.get('recordedDate'),
                             'abatement': condition.get('abatementDateTime')
@@ -1124,35 +1159,62 @@ class PatientHistoryService:
 
         return family_history, social_history
 
+    @staticmethod
     def _generate_summary(
-        self,
         patient_data: Dict,
         active_conditions: List[Dict],
         current_meds: List[Dict],
         diagnostic_tests: List[DiagnosticTest],
-        visit_notes: List[VisitNote]
+        visit_notes: List[VisitNote],
+        retrieval_status: Optional[Dict[str, str]] = None,
     ) -> str:
-        """Generate a clinical summary of patient history."""
-        name = patient_data.get('name', 'Patient')
-        age = patient_data.get('age', 'unknown age')
-        gender = patient_data.get('gender', 'unknown gender')
+        """Plain template summary of the history (no language model).
 
-        if active_conditions:
-            conditions_list = [c['code'] for c in active_conditions[:5]]
-            intro = f"{name} is a {age}-year-old {gender} with history of {', '.join(conditions_list)}."
-        else:
-            intro = f"{name} is a {age}-year-old {gender} with no significant past medical history."
+        Only states what was retrieved: a data type that could not be
+        retrieved is reported as such, never as "none on file".
+        """
+        status = retrieval_status or {}
 
+        def gap(resource: str, label: str) -> Optional[str]:
+            outcome = status.get(resource, RETRIEVED)
+            if outcome == NOT_AVAILABLE:
+                return f"{label} is not available from this EHR."
+            if outcome != RETRIEVED:
+                return f"{label} could not be retrieved."
+            return None
+
+        name = patient_data.get('name') or 'Patient'
+        age = patient_data.get('age')
+        gender = patient_data.get('gender') or 'unknown sex'
+        intro = f"{name} is a {age}-year-old {gender}." if age is not None else f"{name}, age unknown, {gender}."
         summary_parts = [intro]
 
-        if visit_notes:
+        if gap("conditions", "Problem list"):
+            summary_parts.append(gap("conditions", "Problem list"))
+        elif active_conditions:
+            names = [c['code'] for c in active_conditions[:5]]
+            more = f" and {len(active_conditions) - 5} more" if len(active_conditions) > 5 else ""
+            summary_parts.append(f"Active problems on file: {', '.join(names)}{more}.")
+        else:
+            summary_parts.append("No active problems on file.")
+
+        if gap("visit_notes", "Visit notes"):
+            summary_parts.append(gap("visit_notes", "Visit notes").replace(" is ", " are "))
+        elif visit_notes:
             summary_parts.append(f"Recent visits: {len(visit_notes)} clinical encounters on file.")
 
-        abnormal_tests = [t for t in diagnostic_tests if t.abnormal]
-        if abnormal_tests:
-            summary_parts.append(f"{len(abnormal_tests)} abnormal test results noted.")
+        if gap("diagnostic_tests", "Test results"):
+            summary_parts.append(gap("diagnostic_tests", "Test results").replace(" is ", " are "))
+        else:
+            abnormal_tests = [t for t in diagnostic_tests if t.abnormal]
+            if abnormal_tests:
+                summary_parts.append(f"{len(abnormal_tests)} test results flagged abnormal.")
 
-        if current_meds:
-            summary_parts.append(f"Currently on {len(current_meds)} medications.")
+        if gap("medications", "Medication list"):
+            summary_parts.append(gap("medications", "Medication list"))
+        elif current_meds:
+            summary_parts.append(f"{len(current_meds)} active medications on file.")
+        else:
+            summary_parts.append("No active medications on file.")
 
         return " ".join(summary_parts)

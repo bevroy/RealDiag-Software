@@ -171,6 +171,48 @@ guideline or institutional protocol (for example "IM epinephrine is
 first-line per anaphylaxis guidelines (WAO/AAAAI); dosing per protocol").
 Please confirm the wording and the guideline named for each.
 
+## 6. Today's complaint: term lists (Phase 2)
+
+ACS, sepsis and DKA chart cards are also shown when today's complaint matches
+one of these terms (`criteria.complaint_terms` in each tree). Matching is on
+whole words or phrases; a term preceded by a negation cue in the same clause
+("no", "denies", "without", "negative for", ...) does not match. Hyphens and
+"the", "left", "right" are ignored, "radiates/radiation" match "radiating",
+and "on exertion" matches "with exertion". All lists are pending clinical review.
+
+| Tree | Complaint terms |
+|---|---|
+| CARD-ACUTE-CORONARY-SYNDROME | chest pain, chest pressure, chest tightness, chest discomfort, angina, shortness of breath with exertion, epigastric pain, pain radiating to the jaw / neck / back / arm (atypical presentations included on purpose) |
+| ID-SEPSIS | fever, chills, rigors, suspected infection, confusion ("hypotension" removed: a finding, not a complaint) |
+| ENDO-DKA | hyperglycemia, high blood sugar, vomiting with diabetes, polyuria, polydipsia, DKA, diabetic ketoacidosis |
+
+Reviewer notes: "DKA" also matches a mention of past DKA ("history of DKA").
+The card then says the complaint matched and shows what the results do or do
+not meet. No new thresholds were added in Phase 2.
+
+The complaint comes from the clinician's typed text, otherwise the EHR's
+reason for the current visit (Encounter.reasonCode); the source is shown.
+
+## 7. Red flags: content gap
+
+Only 16 of 416 trees list any `red_flags`. The encounter assessment shows only
+listed red flags and says "No red flags listed for this condition." otherwise;
+it does not infer red flags from urgency or generate them. Adding reviewed red
+flags to the remaining 400 trees is content work.
+
+## 8. AI-generated content
+
+Both AI settings follow one rule: off unless set to exactly "true", and
+anything AI-generated is labelled "AI-generated; not clinically validated."
+
+- `ENABLE_AI_GENERATION`: AI-suggested diagnoses added to typed symptom
+  search, and new trees generated into `backend/data/generated_trees/pending`
+  for admin review (not loaded into the library).
+- `ENABLE_AI_ENRICHMENT`: AI fills empty sections of `/search` results.
+- Chart-driven requests never use AI, whatever the settings: the encounter
+  assessment, the SMART ambulatory differential, and symptom search with
+  `emr_patient_id`. EHR data is never sent to an AI provider.
+
 ## Checked: no action needed
 
 - **Teaching flashcards with drug doses** (`backend/services/education_router.py`,

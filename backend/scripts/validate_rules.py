@@ -363,6 +363,10 @@ def criteria_problems(criteria) -> List[str]:
             problems.append(f"missing '{key}'")
     if criteria.get("display", "always") not in CRITERIA_DISPLAY:
         problems.append(f"display must be one of {sorted(CRITERIA_DISPLAY)}")
+    terms = criteria.get("complaint_terms")
+    if terms is not None and (not isinstance(terms, list) or not terms
+                              or not all(isinstance(t, str) and t.strip() for t in terms)):
+        problems.append("complaint_terms must be a non-empty list of non-empty strings")
     if criteria.get("probability", "met_over_known") not in CRITERIA_PROBABILITY:
         problems.append(f"probability must be one of {sorted(CRITERIA_PROBABILITY)}")
     if criteria.get("severity_default", "not rated") not in SEVERITY_LEVELS:

@@ -122,6 +122,13 @@ criteria:
   finding_label: a positive sepsis screen
   source: 'Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (recommends against qSOFA alone as a screening tool, compared with SIRS, NEWS or MEWS)'
   display: when_met
+  # Today's complaint shows this card even when nothing was measured (pending clinical review)
+  complaint_terms:
+    - fever
+    - chills
+    - rigors
+    - suspected infection
+    - confusion
   probability: met_over_known
   suggest_when:
     any:
@@ -286,3 +293,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured). Positive-screen wording states it applies when infection is suspected.
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.

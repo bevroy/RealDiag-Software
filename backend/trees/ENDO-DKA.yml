@@ -81,6 +81,15 @@ criteria:
   finding_label: diabetic ketoacidosis (2024 consensus criteria)
   source: 'Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS; Umpierrez et al., Diabetes Care 2024;47:1257-1275)'
   display: when_met
+  # Today's complaint shows this card even when nothing was measured (pending clinical review)
+  complaint_terms:
+    - hyperglycemia
+    - high blood sugar
+    - vomiting with diabetes
+    - polyuria
+    - polydipsia
+    - DKA
+    - diabetic ketoacidosis
   probability: met_over_known
   suggest_when:
     all_groups:
@@ -208,3 +217,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured).
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.

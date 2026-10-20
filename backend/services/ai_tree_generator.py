@@ -10,6 +10,8 @@ from typing import List, Dict, Optional
 import openai
 from anthropic import Anthropic
 
+from backend.services.content_labels import AI_CONTENT_LABEL
+
 # Try to import medical code databases
 try:
     from backend.data.icd10_codes import search_icd10_by_diagnosis
@@ -168,7 +170,8 @@ Return ONLY the JSON object, no additional text."""
                 "generated_at": datetime.utcnow().isoformat(),
                 "source_symptoms": symptoms,
                 "status": "pending_review",
-                "version": "1.0"
+                "version": "1.0",
+                "ai_content_label": AI_CONTENT_LABEL,
             }
             
             # Validate structure

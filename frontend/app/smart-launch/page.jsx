@@ -205,6 +205,12 @@ function PatientBanner({ patient }) {
           {patient.lab_count ?? 'N/A'} labs • {patient.vital_count ?? 'N/A'} vitals
         </span>
         <a
+          href={`/encounter?patient_id=${patient.patient_id}`}
+          style={{ fontSize: '13px', color: 'white', textDecoration: 'underline' }}
+        >
+          Open Encounter Assessment →
+        </a>
+        <a
           href={`/handoff?patient_id=${patient.patient_id}`}
           style={{ fontSize: '13px', color: 'white', textDecoration: 'underline' }}
         >

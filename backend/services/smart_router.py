@@ -193,6 +193,8 @@ class DiagnosisResponse(BaseModel):
     sources: List[str] = []
     review_status: Optional[str] = None
     review_status_label: Optional[str] = None
+    # Terms of today's complaint that matched this condition
+    complaint_matches: List[str] = []
 
 
 class EvaluatePatientResponse(BaseModel):
@@ -325,8 +327,11 @@ def _build_patient_summary(fhir_client: FHIRClient, patient_id: str) -> PatientS
     Shared chart-summary logic, used by both GET /patient/{id} and
     GET /patient/{id}/handoff so they can never drift out of sync.
     """
-    patient_data = fhir_client.get_patient_data(patient_id)
+    return summary_from_patient_data(fhir_client.get_patient_data(patient_id))
 
+
+def summary_from_patient_data(patient_data) -> PatientSummaryResponse:
+    """Chart summary from already-fetched PatientData (no further FHIR queries)."""
     abnormal_labs = [_lab_summary(lab) for lab in patient_data.labs if lab.is_abnormal]
 
     vital_summary = []
@@ -430,6 +435,7 @@ def _diagnosis_response(evaluation: DiagnosisEvaluation) -> DiagnosisResponse:
         sources=list(getattr(evaluation, "sources", []) or []),
         review_status=getattr(evaluation, "review_status", None),
         review_status_label=getattr(evaluation, "review_status_label", None),
+        complaint_matches=list(getattr(evaluation, "complaint_matches", []) or []),
     )
 
 
@@ -656,7 +662,7 @@ async def evaluate_patient(
             observation_requirements=diagnostic_engine.observation_requirements(),
         )
 
-        assessment = diagnostic_engine.evaluate_encounter(patient_data)
+        assessment = diagnostic_engine.evaluate_encounter(patient_data, complaint=request.chief_complaint)
 
         responses = [_diagnosis_response(evaluation) for evaluation in assessment.evaluations]
         status = getattr(patient_data, "retrieval_status", {}) or {}
@@ -884,10 +890,12 @@ async def get_ambulatory_differential(
             }
         )
 
+        # Chart-driven: EHR data is never sent to an AI provider.
         differential, ai_tree_info = await rank_diagnoses(
             search_terms,
             age=patient_history.age,
             sex=patient_history.gender,
+            allow_ai=False,
         )
 
         history_status = patient_history.retrieval_status or {}
@@ -933,6 +941,64 @@ async def get_ambulatory_differential(
     except Exception as e:
         logger.error(f"Failed to build ambulatory differential for patient {patient_id}: {e}")
         raise HTTPException(status_code=500, detail="Failed to build differential. Please try relaunching from the EHR.")
+
+
+class EncounterAssessmentRequest(BaseModel):
+    """Request for an encounter assessment."""
+    patient_id: str
+    # Typed by the clinician; when empty, the EHR's visit reason is used
+    chief_complaint: Optional[str] = None
+
+
+@router.post("/encounter-assessment")
+async def encounter_assessment(
+    request: EncounterAssessmentRequest,
+    smart_session = Depends(get_active_smart_session),
+):
+    """
+    Encounter assessment: pulls the chart once and combines the chart summary,
+    today's complaint, complaint- and criteria-supported diagnoses with their
+    evidence, tree guidance, red flags, and what could not be assessed.
+
+    Decision support only. Ranking uses the tree library alone; EHR data is
+    never sent to an AI provider.
+    """
+    from ..services.encounter_assessment import assess_encounter
+
+    _verify_patient_match(smart_session, request.patient_id)
+    try:
+        fhir_client = FHIRClient(
+            fhir_base_url=FHIR_BASE_URL,
+            client_id=CLIENT_ID,
+            access_token=smart_session.fhir_access_token
+        )
+        history_service = PatientHistoryService(
+            fhir_base_url=FHIR_BASE_URL,
+            auth_token=smart_session.fhir_access_token
+        )
+        result = await assess_encounter(
+            request.patient_id,
+            request.chief_complaint,
+            fhir_client,
+            history_service,
+            diagnostic_engine,
+            criteria_response=_diagnosis_response,
+            summary_response=summary_from_patient_data,
+        )
+        AuditLogger.log_security_event(
+            "encounter_assessment",
+            {
+                "patient_id": request.patient_id,
+                "complaint_source": result["complaint"]["source"],
+                "diagnosis_count": len(result["diagnoses"]["items"]),
+            }
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Encounter assessment failed for patient {request.patient_id}: {e}")
+        raise HTTPException(status_code=500, detail="Encounter assessment failed. Please try relaunching from the EHR.")
 
 
 @router.get("/session/status", response_model=SmartSessionStatusResponse)

@@ -50,6 +50,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import yaml
 
 from .clinical_review import review_fields
+from .complaint_matching import match_terms
 from .fhir_client import PatientData, RETRIEVED
 from .lab_units import analyte_for, analyte_name, analyte_title, to_canonical
 
@@ -112,6 +113,8 @@ class DiagnosisEvaluation:
     # A result exists but could not be compared (unit missing/unrecognised,
     # no reference range): the test was done, so the gap must be shown.
     has_unusable_results: bool = False
+    # Terms from the tree's complaint_terms that today's complaint matched
+    complaint_matches: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -648,6 +651,19 @@ def evaluate_tree(tree: Dict[str, Any], patient_data: PatientData, now: Optional
 
 # --------------------------------------------------------------------------- engine
 
+def _describe_complaint_match(evaluation: DiagnosisEvaluation, criteria: Dict[str, Any]) -> None:
+    """Say why a complaint-matched card is shown when no criterion is met."""
+    if evaluation.criteria_met or evaluation.finding is not None:
+        return
+    terms = ", ".join(evaluation.complaint_matches)
+    label = criteria.get("finding_label", evaluation.diagnosis_label)
+    if evaluation.criteria_not_met:
+        text = f"Today's complaint matches ({terms}); available results do not meet criteria for {label}."
+    else:
+        text = f"Today's complaint matches ({terms}); relevant results are not available."
+    evaluation.recommendations.insert(0, text)
+
+
 def _no_applicable_core_items(tree: Dict[str, Any], patient_data: PatientData) -> bool:
     """True when every core item is restricted to a sex the patient isn't recorded as."""
     core = [i for i in tree["criteria"]["items"] if i.get("role", "core") == "core"]
@@ -714,7 +730,14 @@ class SmartDiagnosticEngine:
         """One tree's evaluation before any display filtering."""
         return self._evaluate_tree(tree_id, patient_data, now)
 
-    def evaluate_encounter(self, patient_data: PatientData, now: Optional[datetime] = None) -> EncounterAssessment:
+    def evaluate_encounter(self, patient_data: PatientData, now: Optional[datetime] = None,
+                           complaint: Optional[str] = None) -> EncounterAssessment:
+        """Evaluations to show, plus warnings for conditions that could not be assessed.
+
+        An acute card (display: when_met) is shown when a criterion is met, a
+        result could not be read, or today's complaint matches the tree's
+        complaint_terms.
+        """
         evaluations: List[DiagnosisEvaluation] = []
         unassessable: List[str] = []
         not_applicable: List[str] = []
@@ -745,9 +768,15 @@ class SmartDiagnosticEngine:
                     f"{tree.get('name', tree_id)} could not be assessed: patient sex is not recorded.")
                 continue
 
+            evaluation.complaint_matches = match_terms(
+                complaint, (tree["criteria"].get("complaint_terms") or []))[0]
+            if evaluation.complaint_matches:
+                _describe_complaint_match(evaluation, tree["criteria"])
+
             nothing_found = (
                 (evaluation.display == "when_found" and evaluation.finding is None)
-                or (evaluation.display == "when_met" and not evaluation.criteria_met and evaluation.finding is None)
+                or (evaluation.display == "when_met" and not evaluation.criteria_met and evaluation.finding is None
+                    and not evaluation.complaint_matches)
             )
             if nothing_found and not evaluation.has_unusable_results:
                 # Nothing relevant measured or found: hide the card. If the data
@@ -777,6 +806,7 @@ class SmartDiagnosticEngine:
             or e.evaluation_status != "evaluated"
             or e.finding is not None
             or (e.display == "when_met" and e.criteria_met)
+            or e.complaint_matches
         ]
 
         labels = {"labs": "lab results", "vitals": "vital signs"}
@@ -796,7 +826,7 @@ class SmartDiagnosticEngine:
         logger.info(f"Evaluating patient {patient_data.name} (Age: {patient_data.age}, Gender: {patient_data.gender})")
         if chief_complaint:
             logger.info(f"Chief complaint: {chief_complaint}")
-        return self.evaluate_encounter(patient_data, now).evaluations
+        return self.evaluate_encounter(patient_data, now, complaint=chief_complaint).evaluations
 
     def format_evaluation_report(self, evaluation: DiagnosisEvaluation) -> str:
         """Format evaluation as human-readable report."""

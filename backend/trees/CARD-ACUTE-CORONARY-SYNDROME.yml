@@ -130,6 +130,19 @@ criteria:
   finding_label: acute coronary syndrome
   source: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes
   display: when_met
+  # Today's complaint shows this card even when nothing was measured (pending clinical review)
+  complaint_terms:
+    - chest pain
+    - chest pressure
+    - chest tightness
+    - chest discomfort
+    - angina
+    - shortness of breath with exertion
+    - epigastric pain
+    - pain radiating to the jaw
+    - pain radiating to the neck
+    - pain radiating to the back
+    - pain radiating to the arm
   probability: met_over_all
   suggest_when:
     count_met: 1
@@ -228,3 +241,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Chart card shown only when at least one criterion is met (no card when nothing relevant was measured).
+  - date: '2026-10-19'
+    version: '1.0'
+    change: Added complaint_terms; the chart card is also shown when today's complaint matches one (negated mentions excluded). Pending clinical review.

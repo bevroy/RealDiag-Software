@@ -16,6 +16,8 @@ import secrets
 from datetime import datetime
 import logging
 
+from backend.services.content_labels import AI_CONTENT_LABEL, ai_generation_enabled
+
 logger = logging.getLogger(__name__)
 
 # Import AI tree generator
@@ -167,7 +169,9 @@ async def list_pending_trees(admin: AdminUser = Depends(verify_admin_token)):
                 "generated_by": metadata.get("provider", ""),
                 "source_symptoms": metadata.get("source_symptoms", []),
                 "question_count": len(tree.get("questions", [])),
-                "differential_count": len(diagnosis.get("differential_diagnoses", []))
+                "differential_count": len(diagnosis.get("differential_diagnoses", [])),
+                "ai_generated": True,
+                "ai_content_label": AI_CONTENT_LABEL,
             }
             summaries.append(summary)
         
@@ -224,6 +228,8 @@ async def get_pending_tree_detail(
         
         return {
             "tree": tree_data,
+            "ai_generated": True,
+            "ai_content_label": AI_CONTENT_LABEL,
             "timestamp": datetime.utcnow().isoformat()
         }
         
@@ -389,7 +395,7 @@ async def get_admin_stats(admin: AdminUser = Depends(verify_admin_token)):
         stats = {
             "ai_generation": {
                 "available": AI_AVAILABLE,
-                "enabled": os.getenv("ENABLE_AI_GENERATION", "false").lower() == "true",
+                "enabled": ai_generation_enabled(),
                 "provider": os.getenv("AI_PROVIDER", "claude")
             },
             "trees": {

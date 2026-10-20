@@ -519,7 +519,8 @@ def test_ambulatory_differential_shows_retrieval_warnings(monkeypatch):
     service = _history_service({"AllergyIntolerance": 500})
     monkeypatch.setattr(smart_router, "PatientHistoryService", lambda **kwargs: service)
 
-    async def fake_rank(terms, age=None, sex=None):
+    async def fake_rank(terms, age=None, sex=None, allow_ai=True):
+        assert allow_ai is False   # chart-driven: never AI
         return SymptomSearchResponse(query_symptoms=terms, total_results=0, results=[]), None
     monkeypatch.setattr(smart_router, "rank_diagnoses", fake_rank)
 
