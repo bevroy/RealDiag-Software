@@ -1445,6 +1445,7 @@ async def generate_ai_tree(request: SymptomSearchRequest, background_tasks: Back
             "status": "pending_review",
             "ai_generated": True,
             "ai_content_label": AI_CONTENT_LABEL,
+            "clinical_review_notice": review_notice(),
             "message": "Decision tree generated successfully. It will be available after medical review.",
             "disclaimer": f"{AI_CONTENT_LABEL} This diagnostic tree is pending review by medical professionals."
         }
@@ -1494,7 +1495,8 @@ async def get_pending_trees(current_user: Dict[str, Any] = Depends(get_current_u
 
         return {
             "trees": summaries,
-            "count": len(summaries)
+            "count": len(summaries),
+            "clinical_review_notice": review_notice(),
         }
     except Exception as e:
         raise HTTPException(

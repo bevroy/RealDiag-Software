@@ -2,11 +2,13 @@ import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { ClinicalReviewNotice } from '../components/ClinicalReview';
 
 export default function SourcesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sources, setSources] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [treeCount, setTreeCount] = useState(null); // Dynamic tree count
 
   useEffect(() => {
@@ -70,6 +72,7 @@ export default function SourcesPage() {
             
             if (!res.ok) return null;
             const data = await res.json();
+            if (data && 'clinical_review_notice' in data) setReviewNotice(data.clinical_review_notice);
             
             // Map specialties to their actual medical guideline sources
             const sourceMap = {
@@ -231,6 +234,7 @@ export default function SourcesPage() {
 
             {!loading && !error && sources && sources.length > 0 && (
               <>
+                <ClinicalReviewNotice notice={reviewNotice} />
                 {/* Family-Level Sources */}
                 <section style={{ marginBottom: 48 }}>
                   <h2 style={{ fontSize: 24, marginBottom: 16, color: "#0f766e" }}>

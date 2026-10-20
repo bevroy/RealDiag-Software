@@ -16,7 +16,7 @@ TREES_DIR = Path(__file__).resolve().parents[1] / "trees"
 
 EXPECTED_NOTICE = (
     "Clinical content is under review. Urgency levels, treatment information, "
-    "and severity thresholds are proposed and have not completed clinical review. "
+    "thresholds, and screening rules are proposed and have not completed clinical review. "
     "Verify against current guidelines before acting."
 )
 
@@ -64,7 +64,7 @@ def test_every_shipped_tree_is_draft_and_notice_is_shown():
 def test_notice_disappears_when_everything_is_reviewed(tmp_path, monkeypatch):
     trees = _write_trees(tmp_path, ["approved", "approved", "retired"])
     monkeypatch.setattr(clinical_review, "SEVERITY_THRESHOLDS_REVIEWED", True)
-    assert review_notice(trees) is None
+    assert review_notice(trees, screening_rules=tmp_path / "no-rules.yml") is None
 
 
 def test_one_draft_tree_keeps_the_notice(tmp_path, monkeypatch):
@@ -196,4 +196,92 @@ def test_smart_evaluation_response_carries_notice(monkeypatch):
         body = TestClient(app).post("/smart/evaluate-patient", json={"patient_id": "p1"}).json()
     finally:
         app.dependency_overrides.pop(smart_router.get_active_smart_session, None)
+    assert body["clinical_review_notice"] == EXPECTED_NOTICE
+
+
+# --- screening rules count toward the notice ---------------------------------
+
+def _write_rules(tmp_path, statuses):
+    path = tmp_path / "rules.yml"
+    path.write_text("rules:\n" + "".join(f"  - id: R{i}\n    status: {s}\n" for i, s in enumerate(statuses)))
+    return path
+
+
+def test_draft_screening_rule_keeps_the_notice(tmp_path, monkeypatch):
+    (tmp_path / "t").mkdir()
+    trees = _write_trees(tmp_path / "t", ["approved"])
+    monkeypatch.setattr(clinical_review, "SEVERITY_THRESHOLDS_REVIEWED", True)
+    assert review_notice(trees, screening_rules=_write_rules(tmp_path, ["approved", "draft"])) == EXPECTED_NOTICE
+
+
+def test_notice_disappears_when_trees_rules_and_thresholds_are_reviewed(tmp_path, monkeypatch):
+    (tmp_path / "t").mkdir()
+    trees = _write_trees(tmp_path / "t", ["approved", "retired"])
+    monkeypatch.setattr(clinical_review, "SEVERITY_THRESHOLDS_REVIEWED", True)
+    assert review_notice(trees, screening_rules=_write_rules(tmp_path, ["approved", "approved"])) is None
+
+
+def test_tree_review_fields_by_id():
+    assert clinical_review.tree_review_fields("CARD-AORTIC-DISSECTION") == {
+        "review_status": "draft", "review_status_label": "Draft - under clinical review."}
+    assert clinical_review.tree_review_fields("NO-SUCH-TREE") == {"review_status": None, "review_status_label": None}
+
+
+# --- exports, PDFs and AI review endpoints carry the notice -------------------
+
+AUTH = {"auth_type": "api_key"}
+
+
+@pytest.mark.parametrize("fmt", ["json", "xml", "csv"])
+def test_export_formats_carry_notice_and_status(fmt):
+    from backend.services import integration_router as router
+    body = asyncio.run(router.export_diagnosis(router.DiagnosisExportRequest(rule_id="CARD-PE", format=fmt), auth=AUTH))
+    assert body["clinical_review_notice"] == EXPECTED_NOTICE
+    assert body["review_status_label"] == "Draft - under clinical review."
+    if fmt == "xml":
+        assert f"<clinical_review_notice>{EXPECTED_NOTICE}</clinical_review_notice>" in body["data"]
+    if fmt == "csv":
+        assert body["data"]["review_status"] == "draft"
+
+
+def test_fhir_condition_and_hl7_carry_notice():
+    from backend.services import integration_router as router
+    fhir = asyncio.run(router.export_to_fhir_condition(
+        router.FHIRConditionRequest(rule_id="CARD-PE", patient_id="p"), auth=AUTH))
+    hl7 = asyncio.run(router.generate_hl7_message(router.HL7MessageRequest(
+        rule_id="CARD-PE", patient_id="p", patient_name="A B", message_type="ORU"), auth=AUTH))
+    notes = [n["text"] for n in fhir["fhir_resource"]["note"]]
+    assert EXPECTED_NOTICE in notes and "Draft - under clinical review." in notes
+    assert f"NTE|2|L|{EXPECTED_NOTICE}" in hl7["hl7_message"]
+    assert hl7["clinical_review_notice"] == EXPECTED_NOTICE
+
+
+def test_pdf_reports_include_notice_and_status(monkeypatch):
+    pytest.importorskip("reportlab")
+    from backend.services import pdf_export
+    seen = []
+    real = pdf_export.Paragraph
+
+    def capture(text, *args, **kwargs):
+        seen.append(text)
+        return real(text, *args, **kwargs)
+    monkeypatch.setattr(pdf_export, "Paragraph", capture)
+    generator = pdf_export.PDFReportGenerator()
+    generator.generate_diagnosis_report({"rule_id": "CARD-PE", "label": "Pulmonary embolism", "family": "cardiology"})
+    generator.generate_multi_diagnosis_report([{"rule_id": "CARD-AORTIC-DISSECTION", "label": "Aortic dissection",
+                                                "match_score": 5, "cant_miss": True}])
+    assert sum(EXPECTED_NOTICE in t for t in seen) == 2
+    assert sum("Draft - under clinical review." in t for t in seen) == 2
+    assert any("Can't-miss condition" in t for t in seen)
+
+
+def test_ai_pending_trees_carry_notice(monkeypatch):
+    from backend.services import symptom_search
+
+    class FakeGenerator:
+        def load_pending_trees(self):
+            return [{"tree_id": "ai_1", "name": "X", "metadata": {}}]
+    monkeypatch.setattr(symptom_search, "AI_GENERATION_AVAILABLE", True)
+    monkeypatch.setattr(symptom_search, "AITreeGenerator", FakeGenerator)
+    body = asyncio.run(symptom_search.get_pending_trees(current_user={"user_id": "a", "role": "admin"}))
     assert body["clinical_review_notice"] == EXPECTED_NOTICE

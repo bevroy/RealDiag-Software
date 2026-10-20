@@ -487,13 +487,16 @@ expansion of I71.0) and SNOMED CT 308546005 (Dissection of aorta).
   clinical review.", `review` → "In clinical review - not yet approved.",
   `approved` → "Clinically reviewed.", `retired` → "Retired - not for clinical use."
 - While any content is unreviewed, every screen and API response that carries
-  tree content, urgency, treatment or severity ratings shows this notice
-  (`clinical_review_notice` in the API):
-  "Clinical content is under review. Urgency levels, treatment information, and
-  severity thresholds are proposed and have not completed clinical review.
-  Verify against current guidelines before acting."
+  tree content, urgency, treatment, severity, can't-miss labels, criteria
+  results or possible missed items shows this notice (`clinical_review_notice`
+  in the API; also in FHIR Condition notes, HL7 NTE segments, JSON/XML/CSV
+  exports and PDF reports):
+  "Clinical content is under review. Urgency levels, treatment information,
+  thresholds, and screening rules are proposed and have not completed
+  clinical review. Verify against current guidelines before acting."
 - To mark a tree reviewed: set its `status: approved` and add a change_log entry
   naming the reviewer and date. The label updates on the next deploy.
-- The notice disappears automatically once **no tree is `draft` or `review`**
-  and `SEVERITY_THRESHOLDS_REVIEWED` in `backend/services/clinical_review.py` is
+- The notice disappears automatically once **no tree and no screening rule
+  (`backend/screening/uspstf_rules.yml`) is `draft` or `review`** and
+  `SEVERITY_THRESHOLDS_REVIEWED` in `backend/services/clinical_review.py` is
   set to `True` (only after section 3 and 4 thresholds are signed off).

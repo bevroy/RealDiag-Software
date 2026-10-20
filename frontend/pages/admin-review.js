@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { ClinicalReviewNotice } from '../components/ClinicalReview';
 
 export default function AdminReview() {
   const [pendingTrees, setPendingTrees] = useState([]);
+  const [reviewNotice, setReviewNotice] = useState(undefined);
   const [selectedTree, setSelectedTree] = useState(null);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState(null);
@@ -44,6 +46,7 @@ export default function AdminReview() {
       if (treesRes.ok) {
         const treesData = await treesRes.json();
         setPendingTrees(treesData.trees || []);
+        setReviewNotice(treesData.clinical_review_notice);
       } else if (treesRes.status === 403 || treesRes.status === 401) {
         setIsAuthenticated(false);
         localStorage.removeItem('admin_token');
@@ -267,6 +270,10 @@ export default function AdminReview() {
             </button>
           </div>
         </div>
+        <ClinicalReviewNotice notice={reviewNotice} />
+        <p role="note" style={{ margin: '0 0 1rem', fontWeight: 600, color: '#92400e' }}>
+          🤖 Pending trees are AI-generated; not clinically validated.
+        </p>
 
         {/* Role Management */}
         <div style={styles.roleManagerContainer}>

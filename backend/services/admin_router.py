@@ -17,6 +17,7 @@ from datetime import datetime
 import logging
 
 from backend.services.content_labels import AI_CONTENT_LABEL, ai_generation_enabled
+from backend.services.clinical_review import review_notice
 
 logger = logging.getLogger(__name__)
 
@@ -181,6 +182,7 @@ async def list_pending_trees(admin: AdminUser = Depends(verify_admin_token)):
         return {
             "trees": summaries,
             "count": len(summaries),
+            "clinical_review_notice": review_notice(),
             "timestamp": datetime.utcnow().isoformat()
         }
         
@@ -230,6 +232,7 @@ async def get_pending_tree_detail(
             "tree": tree_data,
             "ai_generated": True,
             "ai_content_label": AI_CONTENT_LABEL,
+            "clinical_review_notice": review_notice(),
             "timestamp": datetime.utcnow().isoformat()
         }
         
@@ -372,6 +375,7 @@ async def list_approved_trees(admin: AdminUser = Depends(verify_admin_token)):
         return {
             "trees": trees,
             "count": len(trees),
+            "clinical_review_notice": review_notice(),
             "timestamp": datetime.utcnow().isoformat()
         }
         

@@ -101,6 +101,9 @@ export default function TechnicalMedicalPage() {
         <section style={styles.section}>
           <h2 style={styles.h2}>7. Safety Boundaries</h2>
           <p style={styles.p}>
+            Content still under clinical review (trees, urgency, treatment, thresholds and screening
+            rules) carries a review notice and per-tree status in every page, API response, export
+            (FHIR, HL7, JSON, XML, CSV) and PDF report.
             RealDiag is a decision-support system, not an autonomous diagnostic authority. It must
             be used with clinician oversight, institutional protocols, and full patient context.
             Urgent or emergent care decisions should always follow local emergency standards.

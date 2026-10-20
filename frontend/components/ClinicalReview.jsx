@@ -4,7 +4,7 @@
 // content is reviewed) and `review_status` / `review_status_label` per tree.
 
 export const DEFAULT_CLINICAL_REVIEW_NOTICE =
-  'Clinical content is under review. Urgency levels, treatment information, and severity thresholds are proposed and have not completed clinical review. Verify against current guidelines before acting.'
+  'Clinical content is under review. Urgency levels, treatment information, thresholds, and screening rules are proposed and have not completed clinical review. Verify against current guidelines before acting.'
 
 // notice: string -> show it; null -> content reviewed, show nothing;
 // undefined -> the response predates the field (older API), so show the default.

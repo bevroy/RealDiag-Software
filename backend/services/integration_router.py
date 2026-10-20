@@ -31,6 +31,7 @@ router = APIRouter(prefix="/integration", tags=["integration"])
 
 # Import user subscriptions
 from backend.services.subscription_router import user_subscriptions
+from backend.services.clinical_review import review_notice, tree_review_fields
 
 # Models
 class FHIRConditionRequest(BaseModel):
@@ -259,11 +260,19 @@ async def export_to_fhir_condition(
         condition["note"] = [{
             "text": request.note
         }]
+    # Review status travels with the exported resource (FHIR Condition.note)
+    status = tree_review_fields(request.rule_id)
+    notice = review_notice()
+    review_notes = [text for text in (notice, status.get("review_status_label")) if text]
+    if review_notes:
+        condition["note"] = condition.get("note", []) + [{"text": text} for text in review_notes]
     
     return {
         "fhir_resource": condition,
         "format": "FHIR R4",
-        "resource_type": "Condition"
+        "resource_type": "Condition",
+        "clinical_review_notice": notice,
+        **status,
     }
 
 
@@ -328,6 +337,12 @@ async def generate_hl7_message(
             f"OBX|{idx}|CE|ICD10^ICD-10 Code||{icd10_code}||||||F|||{timestamp}"
         )
     
+    # NTE - review status and clinical review notice
+    status = tree_review_fields(request.rule_id)
+    notice = review_notice()
+    for idx, text in enumerate([t for t in (status.get("review_status_label"), notice) if t], start=1):
+        hl7_segments.append(f"NTE|{idx}|L|{text.replace('|', '/')}")
+
     hl7_message = "\r".join(hl7_segments)
     
     return {
@@ -335,7 +350,9 @@ async def generate_hl7_message(
         "message_type": request.message_type,
         "version": "HL7 v2.5",
         "encoding": "UTF-8",
-        "segments": len(hl7_segments)
+        "segments": len(hl7_segments),
+        "clinical_review_notice": notice,
+        **status,
     }
 
 
@@ -542,10 +559,15 @@ async def export_diagnosis(
         )
         return await export_to_fhir_condition(fhir_request, auth)
     
-    elif export_request.format == "json":
+    status = tree_review_fields(export_request.rule_id)
+    notice = review_notice()
+
+    if export_request.format == "json":
         return {
             "format": "JSON",
-            "data": rule
+            "data": rule,
+            "clinical_review_notice": notice,
+            **status,
         }
     
     elif export_request.format == "xml":
@@ -561,10 +583,15 @@ async def export_diagnosis(
   <icd10>
     {''.join(f'<code>{c}</code>' for c in rule.get('icd10', []))}
   </icd10>
+  <review_status>{status.get('review_status') or ''}</review_status>
+  <review_status_label>{status.get('review_status_label') or ''}</review_status_label>
+  <clinical_review_notice>{notice or ''}</clinical_review_notice>
 </diagnosis>"""
         return {
             "format": "XML",
-            "data": xml
+            "data": xml,
+            "clinical_review_notice": notice,
+            **status,
         }
     
     elif export_request.format == "csv":
@@ -574,11 +601,16 @@ async def export_diagnosis(
             "label": rule.get("label", ""),
             "family": rule.get("family", ""),
             "icd10_codes": ", ".join(rule.get("icd10", [])),
-            "presentations": " | ".join(rule.get("presentations", []))
+            "presentations": " | ".join(rule.get("presentations", [])),
+            "review_status": status.get("review_status") or "",
+            "review_status_label": status.get("review_status_label") or "",
+            "clinical_review_notice": notice or "",
         }
         return {
             "format": "CSV",
-            "data": csv_data
+            "data": csv_data,
+            "clinical_review_notice": notice,
+            **status,
         }
     
     else:

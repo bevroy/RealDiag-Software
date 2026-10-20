@@ -1,8 +1,9 @@
 """
 Clinical review status of RealDiag's clinical content.
 
-Every API response that carries decision-tree content, urgency levels,
-treatment information or severity ratings includes:
+Every API response and page that carries decision-tree content, urgency,
+treatment, severity, can't-miss labels, criteria results or possible missed
+items (including screening rules) includes:
 
   clinical_review_notice  - CLINICAL_REVIEW_NOTICE while any content is
                             unreviewed, otherwise None
@@ -10,7 +11,8 @@ treatment information or severity ratings includes:
   review_status_label     - human-readable label for that status
 
 The notice is driven by the content itself: it disappears automatically once
-no tree is in "draft" or "review" status and the severity thresholds coded in
+no tree and no screening rule (backend/screening/uspstf_rules.yml) is in
+"draft" or "review" status and the severity thresholds coded in
 smart_diagnostic_engine.py are marked reviewed (SEVERITY_THRESHOLDS_REVIEWED).
 See docs/CLINICAL_CONTENT_REVIEW.md.
 """
@@ -23,11 +25,14 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+import yaml
+
 TREES_DIR = Path(__file__).resolve().parents[1] / "trees"
+SCREENING_RULES_PATH = Path(__file__).resolve().parents[1] / "screening" / "uspstf_rules.yml"
 
 CLINICAL_REVIEW_NOTICE = (
     "Clinical content is under review. Urgency levels, treatment information, "
-    "and severity thresholds are proposed and have not completed clinical review. "
+    "thresholds, and screening rules are proposed and have not completed clinical review. "
     "Verify against current guidelines before acting."
 )
 
@@ -70,11 +75,46 @@ def unreviewed_tree_count(trees_dir: Path = TREES_DIR) -> int:
     return sum(n for status, n in counts.items() if status in UNREVIEWED_STATUSES or status == "unknown")
 
 
-def review_notice(trees_dir: Path = TREES_DIR) -> Optional[str]:
+@lru_cache(maxsize=4)
+def screening_rule_status_counts(path: Path = SCREENING_RULES_PATH) -> Dict[str, int]:
+    """Count screening rules by status (no file -> no rules)."""
+    path = Path(path)
+    if not path.exists():
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    counts: Counter = Counter()
+    for rule in data.get("rules") or []:
+        counts[str(rule.get("status") or "unknown").lower()] += 1
+    return dict(counts)
+
+
+def unreviewed_screening_rule_count(path: Path = SCREENING_RULES_PATH) -> int:
+    counts = screening_rule_status_counts(path)
+    return sum(n for status, n in counts.items() if status in UNREVIEWED_STATUSES or status == "unknown")
+
+
+def review_notice(trees_dir: Path = TREES_DIR, screening_rules: Path = SCREENING_RULES_PATH) -> Optional[str]:
     """CLINICAL_REVIEW_NOTICE while any clinical content is unreviewed, else None."""
-    if unreviewed_tree_count(trees_dir) > 0 or not SEVERITY_THRESHOLDS_REVIEWED:
+    if (unreviewed_tree_count(trees_dir) > 0 or unreviewed_screening_rule_count(screening_rules) > 0
+            or not SEVERITY_THRESHOLDS_REVIEWED):
         return CLINICAL_REVIEW_NOTICE
     return None
+
+
+@lru_cache(maxsize=1024)
+def tree_review_fields(tree_id: str, trees_dir: Path = TREES_DIR) -> Dict[str, Any]:
+    """review_status / review_status_label for a tree id (file name or tree_id line)."""
+    path = Path(trees_dir) / f"{tree_id}.yml"
+    if not path.exists():
+        for candidate in Path(trees_dir).glob("*.yml"):
+            if re.search(rf"^tree_id:\s*['\"]?{re.escape(tree_id)}['\"]?\s*$",
+                         candidate.read_text(encoding="utf-8"), re.MULTILINE):
+                path = candidate
+                break
+        else:
+            return review_fields(None)
+    match = _STATUS_LINE.search(path.read_text(encoding="utf-8"))
+    return review_fields(match.group(1).lower() if match else None)
 
 
 def review_fields(status: Optional[str]) -> Dict[str, Any]:
@@ -89,5 +129,7 @@ def with_notice(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def reset_cache() -> None:
-    """Forget cached tree status counts (tests, or after trees change on disk)."""
+    """Forget cached status counts (tests, or after trees or rules change on disk)."""
     tree_status_counts.cache_clear()
+    screening_rule_status_counts.cache_clear()
+    tree_review_fields.cache_clear()
