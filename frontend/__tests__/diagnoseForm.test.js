@@ -3,6 +3,7 @@ const path = require('path')
 const {
   NOT_ASSESSED,
   walkableTrees,
+  unavailableTrees,
   displayLabel,
   emptyAnswers,
   buildSteps,
@@ -35,6 +36,19 @@ test('only conditional trees are offered for walking', () => {
   ]
   expect(walkableTrees(trees).map((t) => t.id)).toEqual(['ENT-SORE-THROAT'])
   expect(walkableTrees(undefined)).toEqual([])
+})
+
+test('trees pending content review are held back and listed for the note', () => {
+  const trees = [
+    { id: 'ENT-SORE-THROAT', node_format: 'conditional', walk_available: true },
+    { id: 'ID-FEVER', title: 'Fever Workup', node_format: 'conditional', walk_available: false },
+    { id: 'PSYCH-PSYCHOSIS', title: 'Psychosis', node_format: 'conditional', walk_available: false },
+    { id: 'PULM-COUGH', node_format: 'questionnaire', walk_available: false },
+  ]
+  expect(walkableTrees(trees).map((t) => t.id)).toEqual(['ENT-SORE-THROAT'])
+  expect(unavailableTrees(trees).map((t) => t.id)).toEqual(['ID-FEVER', 'PSYCH-PSYCHOSIS'])
+  // An older API without walk_available still offers conditional trees.
+  expect(walkableTrees([{ id: 'X', node_format: 'conditional' }])).toHaveLength(1)
 })
 
 test('steps skip sections the tree does not use', () => {
@@ -93,6 +107,11 @@ test('/diagnose has no hard-coded symptom lists for trees that do not exist', ()
   const src = fs.readFileSync(path.join(__dirname, '..', 'pages', 'diagnose.js'), 'utf8')
   expect(src).not.toMatch(/NEU-HEADACHE|NEU-VERTIGO/)
   expect(src).toMatch(/\/diagnostic\/trees\/\$\{encodeURIComponent\(treeId\)\}\/inputs/)
+})
+
+test('/diagnose notes trees that are temporarily unavailable', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'pages', 'diagnose.js'), 'utf8')
+  expect(src).toMatch(/temporarily unavailable pending\s+content review/)
 })
 
 test('/diagnose shows the clinical review notice and review status', () => {

@@ -50,6 +50,9 @@ def test_tree_list_marks_node_format(client, cookies):
     assert by_id["ENT-SORE-THROAT"]["node_format"] == "conditional"
     assert by_id["PULM-COUGH"]["node_format"] == "questionnaire"
     assert sum(t["node_format"] == "conditional" for t in trees) == 17
+    assert sum(t["walk_available"] for t in trees) == 15
+    assert by_id["ID-FEVER"]["walk_available"] is False
+    assert by_id["PSYCH-PSYCHOSIS"]["unavailable_reason"] == "Temporarily unavailable pending content review."
     assert all("review_status_label" in t for t in trees)
 
 
@@ -67,6 +70,7 @@ def test_inputs_errors(client, cookies):
     client.cookies.update(cookies)
     assert client.get("/diagnostic/trees/PULM-COUGH/inputs").status_code == 400
     assert client.get("/diagnostic/trees/NOPE/inputs").status_code == 404
+    assert client.get("/diagnostic/trees/PSYCH-PSYCHOSIS/inputs").status_code == 400
 
 
 def test_evaluate_walks_on_named_findings(client, cookies):

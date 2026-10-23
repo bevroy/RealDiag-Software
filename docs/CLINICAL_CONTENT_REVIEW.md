@@ -555,6 +555,33 @@ Reviewer notes:
 
 ("*pril", "*sartan", "*olol", "*statin" match any drug name ending that way.)
 
+## 13. Decision trees with a branch to a missing step
+
+Two conditional trees have a branch that points to a step the tree does not
+contain. Their content has **not** been changed. Until they are fixed:
+
+- the step-by-step decision tree page (`/diagnose`) does not offer them and
+  says they are temporarily unavailable pending content review;
+- the tree validator lists them in `KNOWN_MISSING_BRANCH_TARGETS`
+  (`backend/scripts/validate_rules.py`) so CI passes; any other tree with a
+  missing step fails validation, and a test fails if that list grows.
+
+| Priority | Tree | Step | Branch | Missing step | Effect on a walk |
+|---|---|---|---|---|---|
+| **High** | PSYCH-PSYCHOSIS (Psychosis) | `safety_assessment` | default (taken when none of the other branches match) | `psychotic_disorder_assessment` | A patient with no emergency features, no medical-emergency features, not a first episode and no substance use stops at the safety assessment with no further guidance. |
+| Normal | ID-FEVER (Fever Workup) | `initial_assessment` | default (taken when the sepsis screen does not match) | `localized_infection` | A febrile patient without sepsis features stops at the initial assessment; the source-finding steps are reachable only through the sepsis screen. |
+
+PSYCH-PSYCHOSIS is the priority because it is the safety-assessment step of a
+psychiatric presentation: the path that ends silently is the common
+non-emergency one.
+
+To fix a tree: add the missing step (or point the branch at an existing step,
+or set the default to `null` to end the walk there), add a change_log entry,
+then remove the tree from `KNOWN_MISSING_BRANCH_TARGETS` (the validator fails
+until it is removed) and from `KNOWN_MISSING_TARGETS` in
+`backend/tests/test_tree_walks.py`. The tree then reappears on `/diagnose`
+automatically.
+
 ## Checked: no action needed
 
 - **Teaching flashcards with drug doses** (`backend/services/education_router.py`,

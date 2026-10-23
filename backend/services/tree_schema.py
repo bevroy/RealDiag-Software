@@ -202,3 +202,33 @@ def node_format(tree: Dict[str, Any]) -> str:
     if has_conditions:
         return "conditional"
     return "content"
+
+
+def missing_branch_targets(tree: Dict[str, Any]) -> List[str]:
+    """Branches and answer options that point to a node id the tree does not contain.
+
+    The engine stops a walk at such a branch (end_reason "missing_node"), so the
+    nodes after it can never be reached that way. Checked: conditional `next`
+    branches ({node}, {go}, {default: "<id>"}) and questionnaire `options[].next`.
+    A null target means "end here" and is allowed.
+    """
+    nodes = node_list(tree) if isinstance(tree, dict) else []
+    ids = {n.get("id") for n in nodes}
+    problems = []
+    for n in nodes:
+        targets = []
+        for b in n.get("next") or [] if isinstance(n.get("next"), list) else []:
+            if not isinstance(b, dict):
+                continue
+            for key in ("node", "go"):
+                if b.get(key) is not None:
+                    targets.append((f"next.{key}", b[key]))
+            if isinstance(b.get("default"), str):
+                targets.append(("next.default", b["default"]))
+        for i, opt in enumerate(n.get("options") or []):
+            if isinstance(opt, dict) and opt.get("next") is not None:
+                targets.append((f"options[{i}].next", opt["next"]))
+        for where, target in targets:
+            if target not in ids:
+                problems.append(f"node '{n.get('id')}' {where} points to '{target}', which is not a node in this tree")
+    return problems

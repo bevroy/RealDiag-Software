@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import re
 import yaml
-from .tree_schema import entry_point, icd10_codes, node_format, node_list, tree_id as _tree_id, tree_name
+from .tree_schema import entry_point, icd10_codes, missing_branch_targets, node_format, node_list, tree_id as _tree_id, tree_name
 from .clinical_review import review_fields, review_notice
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 def _lower_list(xs):
@@ -154,9 +154,21 @@ class DecisionTreeEngine:
                     doc["nodes"] = node_list(doc)
                 trees[tree_id] = doc
         return trees
+    # Shown on /diagnose for a conditional tree that has a branch pointing to a
+    # node it does not contain (see validate_rules.KNOWN_MISSING_BRANCH_TARGETS).
+    UNAVAILABLE_PENDING_REVIEW = "Temporarily unavailable pending content review."
+
     def list(self):
-        return [{"id": t["id"], "title": t.get("title"), "node_format": self._format(t), **review_fields(t.get("status"))}
+        return [{"id": t["id"], "title": t.get("title"), "node_format": self._format(t),
+                 **self._walk_availability(t), **review_fields(t.get("status"))}
                 for t in self.trees.values()]
+    def _walk_availability(self, t):
+        """walk_available: offered on /diagnose (conditional, with no missing branch targets)."""
+        if self._format(t) != "conditional":
+            return {"walk_available": False, "unavailable_reason": None}
+        if missing_branch_targets(t):
+            return {"walk_available": False, "unavailable_reason": self.UNAVAILABLE_PENDING_REVIEW}
+        return {"walk_available": True, "unavailable_reason": None}
     def _format(self, t):
         return t.get("node_format") if t.get("nodes") else "none"
     def _tree_summary(self, t):
@@ -168,6 +180,9 @@ class DecisionTreeEngine:
         fmt=self._format(t)
         if fmt != "conditional":
             return {"error": f"tree '{tree_id}' is not a conditional decision tree (node format: {fmt})", "node_format": fmt}
+        if not self._walk_availability(t)["walk_available"]:
+            return {"error": f"tree '{tree_id}' is not available for walking: {self.UNAVAILABLE_PENDING_REVIEW}",
+                    "node_format": fmt}
         return {"tree": self._tree_summary(t), "node_format": fmt, "inputs": tree_inputs(t),
                 "clinical_review_notice": review_notice()}
     def evaluate(self, tree_id: str, patient: Dict[str, Any]):

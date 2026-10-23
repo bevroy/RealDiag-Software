@@ -38,6 +38,17 @@ def test_the_seventeen_walkable_trees_are_the_conditional_ones(engine):
     assert conditional == WALKABLE_TREES
 
 
+def test_trees_with_missing_targets_are_held_back_from_diagnose(engine):
+    listed = {t["id"]: t for t in engine.list() if t["node_format"] == "conditional"}
+    held_back = sorted(i for i, t in listed.items() if not t["walk_available"])
+    assert held_back == sorted(KNOWN_MISSING_TARGETS)
+    assert sum(t["walk_available"] for t in listed.values()) == 15
+    for tree_id in held_back:
+        assert listed[tree_id]["unavailable_reason"] == "Temporarily unavailable pending content review."
+        assert "pending content review" in engine.inputs(tree_id)["error"]
+    assert all(not t["walk_available"] for t in engine.list() if t["node_format"] != "conditional")
+
+
 @pytest.mark.parametrize("tree_id", WALKABLE_TREES)
 def test_every_end_node_is_reachable_from_the_offered_choices(engine, tree_id):
     tree = engine.trees[tree_id]

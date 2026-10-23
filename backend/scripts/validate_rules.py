@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from services.lab_units import ANALYTES, analyte_for, canonical_unit  # noqa: E402
 from services.tree_schema import (  # noqa: E402
     HOMEOPATHY_VALIDATION_STATEMENT,
+    missing_branch_targets as branch_target_problems,
     node_format,
     node_list,
     REQUIRED_FIELDS as REQUIRED_TREE_FIELDS,
@@ -36,6 +37,21 @@ from services.tree_schema import (  # noqa: E402
     STATUS_VALUES,
     URGENCY_VALUES,
 )
+
+# Trees allowed, for now, to keep a branch that points to a missing node. Their
+# content is pending clinical review (docs/CLINICAL_CONTENT_REVIEW.md, section 13)
+# and /diagnose does not offer them. Do not add trees here: fix the tree instead.
+# backend/tests/test_branch_targets.py fails if this list grows, and the
+# validator fails once a listed problem is fixed so the entry is removed.
+KNOWN_MISSING_BRANCH_TARGETS = {
+    "ID-FEVER": [
+        "node 'initial_assessment' next.node points to 'localized_infection', which is not a node in this tree",
+    ],
+    "PSYCH-PSYCHOSIS": [
+        "node 'safety_assessment' next.default points to 'psychotic_disorder_assessment', "
+        "which is not a node in this tree",
+    ],
+}
 
 # Configuration
 RULES_DIR = Path(__file__).parent.parent / "rules"
@@ -326,8 +342,16 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
         elif entry not in node_ids:
             result.add_error(file_path.name, f"entry_point '{entry}' does not match any node id")
 
-    for problem in branch_target_problems(data):
-        result.add_error(file_path.name, problem)
+    known = KNOWN_MISSING_BRANCH_TARGETS.get(file_path.stem, [])
+    problems = branch_target_problems(data)
+    for problem in problems:
+        if problem in known:
+            result.add_warning(file_path.name, f"{problem} (known exception, pending clinical review)")
+        else:
+            result.add_error(file_path.name, problem)
+    for problem in known:
+        if problem not in problems:
+            result.add_error(file_path.name, f"Fixed: remove this entry from KNOWN_MISSING_BRANCH_TARGETS: {problem}")
 
     fmt = node_format(data)
     result.node_formats[fmt] = result.node_formats.get(fmt, []) + [file_path.stem]
@@ -344,36 +368,6 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
 
     for problem in list_item_problems(data):
         result.add_error(file_path.name, problem)
-
-
-def branch_target_problems(tree: Dict) -> List[str]:
-    """Branches and answer options that point to a node id the tree does not contain.
-
-    The engine stops a walk at such a branch (end_reason "missing_node"), so the
-    nodes after it can never be reached that way. Checked: conditional `next`
-    branches ({node}, {go}, {default: "<id>"}) and questionnaire `options[].next`.
-    A null target means "end here" and is allowed.
-    """
-    nodes = node_list(tree) if isinstance(tree, dict) else []
-    ids = {n.get("id") for n in nodes}
-    problems = []
-    for n in nodes:
-        targets = []
-        for b in n.get("next") or [] if isinstance(n.get("next"), list) else []:
-            if not isinstance(b, dict):
-                continue
-            for key in ("node", "go"):
-                if b.get(key) is not None:
-                    targets.append((f"next.{key}", b[key]))
-            if isinstance(b.get("default"), str):
-                targets.append(("next.default", b["default"]))
-        for i, opt in enumerate(n.get("options") or []):
-            if isinstance(opt, dict) and opt.get("next") is not None:
-                targets.append((f"options[{i}].next", opt["next"]))
-        for where, target in targets:
-            if target not in ids:
-                problems.append(f"node '{n.get('id')}' {where} points to '{target}', which is not a node in this tree")
-    return problems
 
 
 # Fields whose entries are structured data rather than display text.

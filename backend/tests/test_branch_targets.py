@@ -11,14 +11,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 TREES_DIR = ROOT / "trees"
 
-# Current tree content with a missing branch target. Reported, not edited; when a
-# tree is fixed, remove it here.
-TREES_WITH_MISSING_TARGETS = {
-    "ID-FEVER": ["node 'initial_assessment' next.node points to 'localized_infection', "
-                 "which is not a node in this tree"],
-    "PSYCH-PSYCHOSIS": ["node 'safety_assessment' next.default points to 'psychotic_disorder_assessment', "
-                        "which is not a node in this tree"],
-}
+# The two trees allowed, for now, to keep a missing branch target (pending
+# clinical review). This must only ever shrink.
+ALLOWED_EXCEPTIONS = {"ID-FEVER", "PSYCH-PSYCHOSIS"}
 
 
 @pytest.fixture(scope="module")
@@ -70,16 +65,49 @@ def test_mapping_style_nodes_are_checked(validator):
         "node 'a' next.default points to 'gone', which is not a node in this tree"]
 
 
-def test_current_trees_with_missing_targets(validator):
+def test_known_exceptions_list_does_not_grow(validator):
+    added = set(validator.KNOWN_MISSING_BRANCH_TARGETS) - ALLOWED_EXCEPTIONS
+    assert not added, (
+        f"Trees added to KNOWN_MISSING_BRANCH_TARGETS: {sorted(added)}. "
+        "Fix the tree's branch instead of adding an exception.")
+
+
+def test_only_the_known_exceptions_have_missing_targets(validator):
     found = {}
     for path in sorted(TREES_DIR.glob("*.yml")):
         problems = validator.branch_target_problems(yaml.safe_load(path.read_text()) or {})
         if problems:
             found[path.stem] = problems
-    assert found == TREES_WITH_MISSING_TARGETS
+    assert found == validator.KNOWN_MISSING_BRANCH_TARGETS
 
 
-def test_validate_decision_tree_reports_it_as_an_error(validator):
+def test_known_exception_is_a_warning_not_an_error(validator):
     result = validator.ValidationResult()
     validator.validate_decision_tree(TREES_DIR / "ID-FEVER.yml", result)
-    assert any("localized_infection" in e for e in result.errors)
+    assert not any("localized_infection" in e for e in result.errors)
+    assert any("localized_infection" in w and "known exception" in w for w in result.warnings)
+
+
+def test_any_other_missing_target_is_an_error(validator, tmp_path):
+    tree = yaml.safe_load((TREES_DIR / "ENT-SORE-THROAT.yml").read_text())
+    tree["nodes"][0]["next"].append({"default": "no_such_step"})
+    path = tmp_path / "ENT-SORE-THROAT.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    result = validator.ValidationResult()
+    validator.validate_decision_tree(path, result)
+    assert any("no_such_step" in e for e in result.errors)
+
+
+def test_fixed_exception_must_be_removed(validator, tmp_path):
+    tree = yaml.safe_load((TREES_DIR / "ID-FEVER.yml").read_text())
+    nodes = tree["nodes"].values() if isinstance(tree["nodes"], dict) else tree["nodes"]
+    for node in nodes:
+        branches = node.get("next") if isinstance(node, dict) and isinstance(node.get("next"), list) else []
+        for branch in branches:
+            if isinstance(branch, dict) and branch.get("node") == "localized_infection":
+                branch["node"] = None
+    path = tmp_path / "ID-FEVER.yml"
+    path.write_text(yaml.safe_dump(tree, sort_keys=False))
+    result = validator.ValidationResult()
+    validator.validate_decision_tree(path, result)
+    assert any("remove this entry from KNOWN_MISSING_BRANCH_TARGETS" in e for e in result.errors)

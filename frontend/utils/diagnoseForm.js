@@ -10,9 +10,16 @@ const LIST_FIELDS = ['symptoms', 'exam', 'red_flags', 'patient_characteristics',
 const NOT_ASSESSED = ''
 
 // Only trees the engine walks automatically. Questionnaire and content-only
-// trees are listed with node_format and are not offered on /diagnose.
+// trees are listed with node_format and are not offered on /diagnose; a
+// conditional tree with walk_available false (a branch to a missing step,
+// pending content review) is held back too.
 function walkableTrees(trees) {
-  return (trees || []).filter((t) => t.node_format === 'conditional')
+  return (trees || []).filter((t) => t.node_format === 'conditional' && t.walk_available !== false)
+}
+
+// Conditional trees held back, for the note on /diagnose.
+function unavailableTrees(trees) {
+  return (trees || []).filter((t) => t.node_format === 'conditional' && t.walk_available === false)
 }
 
 // Tree tokens are snake_case ids ("unable_to_swallow"); show them with spaces.
@@ -116,6 +123,7 @@ module.exports = {
   NOT_ASSESSED,
   STEP_TITLES,
   walkableTrees,
+  unavailableTrees,
   displayLabel,
   emptyAnswers,
   buildSteps,

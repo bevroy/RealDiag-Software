@@ -10,6 +10,7 @@ import {
   NOT_ASSESSED,
   STEP_TITLES,
   walkableTrees,
+  unavailableTrees,
   displayLabel,
   emptyAnswers,
   buildSteps,
@@ -50,6 +51,7 @@ function CheckboxGroup({ options, selected, onToggle }) {
 
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
+  const [heldBack, setHeldBack] = useState([])
   const [treesNotice, setTreesNotice] = useState(undefined)
   const [treesError, setTreesError] = useState('')
   const [selectedTree, setSelectedTree] = useState('')
@@ -71,6 +73,7 @@ export default function Diagnose() {
       })
       .then(data => {
         setTrees(walkableTrees(data.trees))
+        setHeldBack(unavailableTrees(data.trees))
         setTreesNotice(data.clinical_review_notice)
       })
       .catch(err => setTreesError(err.message))
@@ -202,6 +205,12 @@ export default function Diagnose() {
             findings this tree&apos;s branches check, in the tree&apos;s own words. Leave anything you did not
             assess unticked.
           </p>
+          {heldBack.length > 0 && (
+            <div role="note" style={{ padding: '0.6rem 0.9rem', margin: '0 0 1rem', background: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '8px', color: '#374151', fontSize: '0.875rem' }}>
+              {heldBack.length === 1 ? 'One tree is' : `${heldBack.length} trees are`} temporarily unavailable pending
+              content review: {heldBack.map(t => t.title || t.id).join(', ')}.
+            </div>
+          )}
           {treesError && <div role="alert" style={{ color: '#b91c1c' }}>{treesError}</div>}
           <div className={styles.treeSelection}>
             {trees.map(tree => (
