@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import styles from '../styles/PatientHistory.module.css'
 import RoleBasedNavigation from '../components/RoleBasedNavigation'
 import PageHeader from '../components/PageHeader'
+import { apiFetch } from '../utils/apiClient';
 
 export default function PatientHistory() {
   const [apiBase, setApiBase] = useState('')
@@ -2253,7 +2254,7 @@ export default function PatientHistory() {
         .filter(allergy => allergy.allergen && allergy.allergen !== '')
         .map(allergy => allergy.allergen)
 
-      const response = await fetch(`${apiBase}/diagnostic/medication-safety-check`, {
+      const response = await apiFetch(`/diagnostic/medication-safety-check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2281,7 +2282,7 @@ export default function PatientHistory() {
   // Save data
   const handleSave = async () => {
     try {
-      const response = await fetch(`${apiBase}/diagnostic/manual-history`, {
+      const response = await apiFetch(`/diagnostic/manual-history`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(patientData)

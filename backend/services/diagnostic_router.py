@@ -421,6 +421,20 @@ def list_trees(
     
     return result
 
+def _tree_or_error(result: Dict[str, Any]) -> Dict[str, Any]:
+    if "error" in result:
+        status = 404 if "not found" in result["error"] else 400
+        raise HTTPException(status_code=status, detail=result["error"])
+    return result
+
+@router.get("/trees/{tree_id}/inputs")
+def tree_inputs(tree_id: str):
+    """
+    Answer choices for walking a conditional tree on /diagnose: the symptoms,
+    exam findings, red flags and named findings its own branches test for.
+    """
+    return _tree_or_error(_trees.inputs(tree_id))
+
 @router.post("/evaluate/{tree_id}")
 async def evaluate_tree(
     tree_id: str,

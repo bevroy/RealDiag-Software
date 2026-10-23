@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { ClinicalReviewNotice } from "../../components/ClinicalReview";
-
+import { apiFetch } from "../../utils/apiClient";
 const FAMILIES = [
   { id: "neurology", label: "Neurology" },
   { id: "cardiology", label: "Cardiology" },
@@ -35,7 +35,7 @@ export default function PrintableReferencePage() {
       try {
         const results = await Promise.all(
           FAMILIES.map(async (f) => {
-            const res = await fetch(`${apiBase}/reference/${f.id}`);
+            const res = await apiFetch(`/reference/${f.id}`);
             if (!res.ok) throw new Error(`HTTP ${res.status} for ${f.id}`);
             const data = await res.json();
             return {

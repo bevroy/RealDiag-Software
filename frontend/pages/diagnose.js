@@ -1,191 +1,160 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/Diagnose.module.css'
+import RoleBasedNavigation from '../components/RoleBasedNavigation'
 import PatientContext from '../components/PatientContext'
 import ContextResults from '../components/ContextResults'
 import PageHeader from '../components/PageHeader'
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview'
+import { apiFetch, getApiBase } from '../utils/apiClient'
+import {
+  NOT_ASSESSED,
+  STEP_TITLES,
+  walkableTrees,
+  displayLabel,
+  emptyAnswers,
+  buildSteps,
+  toggle,
+  findingOptionKey,
+  findingFromOptionKey,
+  buildPatientBody,
+  endReasonMessage,
+} from '../utils/diagnoseForm'
+
+const navButton = (enabled, color) => ({
+  padding: '1rem 2rem',
+  background: enabled ? color : '#e5e7eb',
+  color: enabled ? 'white' : '#9ca3af',
+  border: 'none',
+  borderRadius: '6px',
+  cursor: enabled ? 'pointer' : 'not-allowed',
+  fontSize: '1rem',
+  fontWeight: '600'
+})
+
+function CheckboxGroup({ options, selected, onToggle }) {
+  return (
+    <div className={styles.checkboxGrid}>
+      {options.map(option => (
+        <label key={option} className={styles.checkbox}>
+          <input
+            type="checkbox"
+            checked={selected.includes(option)}
+            onChange={() => onToggle(option)}
+          />
+          <span>{displayLabel(option)}</span>
+        </label>
+      ))}
+    </div>
+  )
+}
 
 export default function Diagnose() {
   const [trees, setTrees] = useState([])
-  const [selectedTree, setSelectedTree] = useState('')
-  const [currentStep, setCurrentStep] = useState(1) // Track wizard step
-  const [patientData, setPatientData] = useState({
-    diagnosis: '',
-    symptoms: [],
-    exam: [],
-    red_flags: [],
-    age: '',
-    onset_hours: ''
-  })
-  const [patientContext, setPatientContext] = useState({})
-  const [result, setResult] = useState(null)
   const [treesNotice, setTreesNotice] = useState(undefined)
+  const [treesError, setTreesError] = useState('')
+  const [selectedTree, setSelectedTree] = useState('')
+  const [treeInfo, setTreeInfo] = useState(null) // { tree, inputs, clinical_review_notice }
+  const [inputsError, setInputsError] = useState('')
+  const [answers, setAnswers] = useState(emptyAnswers())
+  const [patientContext, setPatientContext] = useState({})
+  const [currentStep, setCurrentStep] = useState(0) // index into ['tree', ...buildSteps()]
+  const [showWizardMode, setShowWizardMode] = useState(true)
+  const [result, setResult] = useState(null)
+  const [evaluateError, setEvaluateError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [apiBase, setApiBase] = useState('')
-  const [showWizardMode, setShowWizardMode] = useState(true) // Toggle between wizard and traditional
 
-  // Get API base from runtime config or environment
   useEffect(() => {
-    const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null
-    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com'
-    setApiBase(base.replace(/\/$/, ''))
-  }, [])
-
-  // Fetch available diagnostic trees
-  useEffect(() => {
-    if (!apiBase) return
-    fetch(`${apiBase}/diagnostic/trees`)
-      .then(res => res.json())
+    apiFetch('/diagnostic/trees')
+      .then(res => {
+        if (!res.ok) throw new Error(`Could not load decision trees (HTTP ${res.status}).`)
+        return res.json()
+      })
       .then(data => {
-        setTrees(data.trees || [])
+        setTrees(walkableTrees(data.trees))
         setTreesNotice(data.clinical_review_notice)
       })
-      .catch(err => console.error('Failed to load trees:', err))
-  }, [apiBase])
+      .catch(err => setTreesError(err.message))
+  }, [])
 
-  const handleSymptomToggle = (symptom) => {
-    setPatientData(prev => ({
-      ...prev,
-      symptoms: prev.symptoms.includes(symptom)
-        ? prev.symptoms.filter(s => s !== symptom)
-        : [...prev.symptoms, symptom]
-    }))
+  const selectTree = async (treeId) => {
+    setSelectedTree(treeId)
+    setTreeInfo(null)
+    setInputsError('')
+    setAnswers(emptyAnswers())
+    setPatientContext({})
+    setResult(null)
+    setEvaluateError('')
+    setCurrentStep(0)
+    try {
+      const res = await apiFetch(`/diagnostic/trees/${encodeURIComponent(treeId)}/inputs`)
+      if (!res.ok) throw new Error(`Could not load this tree's questions (HTTP ${res.status}).`)
+      setTreeInfo(await res.json())
+    } catch (err) {
+      setInputsError(err.message)
+    }
   }
 
-  const handleExamToggle = (finding) => {
-    setPatientData(prev => ({
-      ...prev,
-      exam: prev.exam.includes(finding)
-        ? prev.exam.filter(e => e !== finding)
-        : [...prev.exam, finding]
-    }))
-  }
+  const inputs = treeInfo ? treeInfo.inputs : null
+  const steps = ['tree', ...buildSteps(inputs)]
+  const stepKey = steps[currentStep]
+  const visible = (key) => !showWizardMode || stepKey === key
 
-  const handleRedFlagToggle = (flag) => {
-    setPatientData(prev => ({
-      ...prev,
-      red_flags: prev.red_flags.includes(flag)
-        ? prev.red_flags.filter(f => f !== flag)
-        : [...prev.red_flags, flag]
-    }))
-  }
+  const setList = (field) => (value) => setAnswers(prev => ({ ...prev, [field]: toggle(prev[field], value) }))
+  const setFinding = (name, optionKey) => setAnswers(prev => ({
+    ...prev,
+    findings: { ...prev.findings, [name]: findingFromOptionKey(optionKey) }
+  }))
 
   const handleEvaluate = async () => {
-    if (!selectedTree) {
-      alert('Please select a diagnostic tree')
-      return
-    }
-
     setLoading(true)
     setResult(null)
-
+    setEvaluateError('')
     try {
-      const response = await fetch(`${apiBase}/diagnostic/evaluate/${selectedTree}`, {
+      const response = await apiFetch(`/diagnostic/evaluate/${encodeURIComponent(selectedTree)}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...patientData,
+          ...buildPatientBody(answers),
           patient_context: Object.keys(patientContext).length > 0 ? patientContext : undefined
         })
       })
+      if (!response.ok) throw new Error(`Evaluation failed (HTTP ${response.status}).`)
       const data = await response.json()
-      setResult(data.tree_result)
+      setResult({ ...data.tree_result, context: data.context })
     } catch (err) {
-      console.error('Evaluation failed:', err)
-      alert('Failed to evaluate. Please try again.')
+      setEvaluateError(err.message)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleReset = () => {
-    setPatientData({
-      diagnosis: '',
-      symptoms: [],
-      exam: [],
-      red_flags: [],
-      age: '',
-      onset_hours: ''
-    })
+  const handleStartOver = () => {
+    setAnswers(emptyAnswers())
     setPatientContext({})
     setResult(null)
-    setCurrentStep(1)
+    setEvaluateError('')
+    setCurrentStep(0)
   }
 
-  const getTotalSteps = () => {
-    if (!selectedTree) return 4
-    return 5 // Tree selection + symptoms + exam + red flags + evaluate
-  }
-
-  const getStepTitle = (step) => {
-    const titles = [
-      'Select Diagnostic Tree',
-      'Patient Demographics',
-      'Clinical Symptoms',
-      'Physical Examination',
-      'Red Flags & Risk Factors'
-    ]
-    return titles[step - 1] || 'Unknown Step'
-  }
-
-  const canProceedToNextStep = () => {
-    if (currentStep === 1) return selectedTree !== ''
-    if (currentStep === 2) return patientData.age !== ''
-    if (currentStep === 3) return patientData.symptoms.length > 0
-    return true
-  }
-
-  const nextStep = () => {
-    if (canProceedToNextStep() && currentStep < getTotalSteps()) {
-      setCurrentStep(currentStep + 1)
-    }
-  }
-
-  const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1)
-    }
-  }
-
-  // Symptom options based on tree type
-  const getSymptomOptions = () => {
-    if (selectedTree === 'NEU-HEADACHE') {
-      return ['headache', 'nausea', 'vomiting', 'photophobia', 'phonophobia', 'aura', 'pulsatile tinnitus']
-    } else if (selectedTree === 'NEU-VERTIGO') {
-      return ['vertigo', 'dizziness', 'nausea', 'vomiting', 'hearing loss', 'tinnitus', 'imbalance']
-    }
-    return []
-  }
-
-  const getExamOptions = () => {
-    if (selectedTree === 'NEU-HEADACHE') {
-      return ['papilledema', 'focal neuro deficit', 'altered mental status', 'fever', 'neck stiffness']
-    } else if (selectedTree === 'NEU-VERTIGO') {
-      return ['nystagmus', 'hearing loss', 'focal neuro deficit', 'ataxia', 'head impulse test abnormal']
-    }
-    return []
-  }
-
-  const getRedFlagOptions = () => {
-    if (selectedTree === 'NEU-HEADACHE') {
-      return ['thunderclap', 'worst headache of life', 'new onset > 50 years', 'immunocompromised', 'cancer history']
-    } else if (selectedTree === 'NEU-VERTIGO') {
-      return ['sudden onset', 'severe headache', 'focal neuro signs', 'chest pain', 'dyspnea']
-    }
-    return []
-  }
+  const reviewHeader = treeInfo && (
+    <p style={{ margin: '0 0 0.75rem', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      <strong>{treeInfo.tree.title || treeInfo.tree.id}</strong>
+      <ReviewStatusBadge status={treeInfo.tree.review_status} label={treeInfo.tree.review_status_label} />
+    </p>
+  )
+  const stopMessage = endReasonMessage(result)
+  const isLastStep = currentStep === steps.length - 1
 
   return (
     <div className={styles.container}>
+      <RoleBasedNavigation />
       <header className={styles.header}>
         <PageHeader
-          title="RealDiag - Clinical Decision Support"
-          subtitle="Interactive diagnostic decision trees for clinical evaluation"
+          title="Decision Tree Walk"
+          subtitle="Walk a diagnostic decision tree step by step, using the tree's own branch criteria"
         />
       </header>
 
       <div className={styles.main}>
-        {/* Wizard Mode Toggle */}
         <div style={{maxWidth: '800px', margin: '0 auto 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <button
             onClick={() => setShowWizardMode(!showWizardMode)}
@@ -200,85 +169,46 @@ export default function Diagnose() {
               fontWeight: '500'
             }}
           >
-            {showWizardMode ? '✓ Wizard Mode' : 'Traditional Mode'}
+            {showWizardMode ? '✓ One step at a time' : 'All steps on one page'}
           </button>
-          {result && (
+          {selectedTree && (
             <button
-              onClick={handleReset}
-              style={{
-                padding: '0.5rem 1rem',
-                background: '#ef4444',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                fontWeight: '500'
-              }}
+              onClick={handleStartOver}
+              style={{ padding: '0.5rem 1rem', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: '500' }}
             >
               🔄 Start Over
             </button>
           )}
         </div>
 
-        {/* Progress Indicator (Wizard Mode Only) */}
-        {showWizardMode && selectedTree && !result && (
+        {/* Progress (one-step-at-a-time mode) */}
+        {showWizardMode && treeInfo && !result && (
           <div style={{maxWidth: '800px', margin: '0 auto 2rem', background: 'white', borderRadius: '8px', padding: '1.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.1)'}}>
-            <div style={{marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-              <span style={{fontSize: '0.9rem', fontWeight: '600', color: '#374151'}}>
-                Step {currentStep} of {getTotalSteps()}: {getStepTitle(currentStep)}
-              </span>
-              <span style={{fontSize: '0.85rem', color: '#6b7280'}}>
-                {Math.round((currentStep / getTotalSteps()) * 100)}% Complete
-              </span>
+            <div style={{marginBottom: '1rem', fontSize: '0.9rem', fontWeight: '600', color: '#374151'}}>
+              Step {currentStep + 1} of {steps.length}: {STEP_TITLES[stepKey]}
             </div>
-            {/* Progress Bar */}
             <div style={{width: '100%', height: '8px', background: '#e5e7eb', borderRadius: '4px', overflow: 'hidden'}}>
-              <div style={{
-                width: `${(currentStep / getTotalSteps()) * 100}%`,
-                height: '100%',
-                background: 'linear-gradient(90deg, #3b82f6 0%, #2563eb 100%)',
-                transition: 'width 0.3s ease'
-              }} />
-            </div>
-            {/* Step Indicators */}
-            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '1rem', gap: '0.5rem'}}>
-              {Array.from({length: getTotalSteps()}, (_, i) => i + 1).map(step => (
-                <div
-                  key={step}
-                  style={{
-                    flex: 1,
-                    textAlign: 'center',
-                    padding: '0.5rem',
-                    borderRadius: '4px',
-                    background: step === currentStep ? '#dbeafe' : (step < currentStep ? '#dcfce7' : '#f3f4f6'),
-                    border: step === currentStep ? '2px solid #3b82f6' : 'none',
-                    fontSize: '0.75rem',
-                    fontWeight: '500',
-                    color: step <= currentStep ? '#374151' : '#9ca3af',
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  {step === currentStep ? '▶' : (step < currentStep ? '✓' : step)}
-                </div>
-              ))}
+              <div style={{ width: `${((currentStep + 1) / steps.length) * 100}%`, height: '100%', background: 'linear-gradient(90deg, #3b82f6 0%, #2563eb 100%)', transition: 'width 0.3s ease' }} />
             </div>
           </div>
         )}
 
-        {/* Tree Selection */}
-        <section className={styles.section} style={{display: (!showWizardMode || currentStep === 1) ? 'block' : 'none'}}>
-          <h2>1. Select Diagnostic Tree</h2>
+        {/* Tree selection */}
+        <section className={styles.section} style={{display: visible('tree') && !result ? 'block' : 'none'}}>
+          <h2>Select a decision tree</h2>
           <ClinicalReviewNotice notice={treesNotice} />
+          <p style={{ margin: '0 0 1rem', color: '#4b5563', fontSize: '0.9rem' }}>
+            These {trees.length || ''} trees have branching decision steps. Each later step shows only the
+            findings this tree&apos;s branches check, in the tree&apos;s own words. Leave anything you did not
+            assess unticked.
+          </p>
+          {treesError && <div role="alert" style={{ color: '#b91c1c' }}>{treesError}</div>}
           <div className={styles.treeSelection}>
             {trees.map(tree => (
               <button
                 key={tree.id}
                 className={`${styles.treeButton} ${selectedTree === tree.id ? styles.active : ''}`}
-                onClick={() => {
-                  setSelectedTree(tree.id)
-                  handleReset()
-                }}
+                onClick={() => selectTree(tree.id)}
               >
                 {tree.title}
                 {tree.review_status_label && (
@@ -289,284 +219,208 @@ export default function Diagnose() {
               </button>
             ))}
           </div>
+          {inputsError && <div role="alert" style={{ color: '#b91c1c', marginTop: '1rem' }}>{inputsError}</div>}
         </section>
 
-        {selectedTree && (
+        {treeInfo && !result && (
           <>
-            {/* Patient Demographics */}
-            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 2) ? 'block' : 'none'}}>
-              <h2>2. Patient Information</h2>
-              <div className={styles.formGrid}>
-                <div className={styles.formGroup}>
-                  <label>Age</label>
-                  <input
-                    type="number"
-                    value={patientData.age}
-                    onChange={(e) => setPatientData({...patientData, age: e.target.value})}
-                    placeholder="Patient age"
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Onset (hours ago)</label>
-                  <input
-                    type="number"
-                    value={patientData.onset_hours}
-                    onChange={(e) => setPatientData({...patientData, onset_hours: e.target.value})}
-                    placeholder="Hours since onset"
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Working Diagnosis</label>
-                  <input
-                    type="text"
-                    value={patientData.diagnosis}
-                    onChange={(e) => setPatientData({...patientData, diagnosis: e.target.value})}
-                    placeholder="Optional"
-                  />
-                </div>
+            {(stepKey !== 'tree' || !showWizardMode) && (
+              <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                {reviewHeader}
+                <ClinicalReviewNotice notice={treeInfo.clinical_review_notice} />
               </div>
-            </section>
+            )}
 
-            {/* Symptoms */}
-            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 3) ? 'block' : 'none'}}>
-              <h2>3. Symptoms</h2>
-              <div className={styles.checkboxGrid}>
-                {getSymptomOptions().map(symptom => (
-                  <label key={symptom} className={styles.checkbox}>
-                    <input
-                      type="checkbox"
-                      checked={patientData.symptoms.includes(symptom)}
-                      onChange={() => handleSymptomToggle(symptom)}
-                    />
-                    <span>{symptom}</span>
-                  </label>
-                ))}
-              </div>
-            </section>
-
-            {/* Physical Exam */}
-            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 4) ? 'block' : 'none'}}>
-              <h2>4. Physical Exam Findings</h2>
-              <div className={styles.checkboxGrid}>
-                {getExamOptions().map(finding => (
-                  <label key={finding} className={styles.checkbox}>
-                    <input
-                      type="checkbox"
-                      checked={patientData.exam.includes(finding)}
-                      onChange={() => handleExamToggle(finding)}
-                    />
-                    <span>{finding}</span>
-                  </label>
-                ))}
-              </div>
-            </section>
-
-            {/* Red Flags */}
-            <section className={`${styles.section} ${styles.redFlags}`} style={{display: (!showWizardMode || currentStep === 5) ? 'block' : 'none'}}>
-              <h2>5. Red Flags ⚠️</h2>
-              <div className={styles.checkboxGrid}>
-                {getRedFlagOptions().map(flag => (
-                  <label key={flag} className={styles.checkbox}>
-                    <input
-                      type="checkbox"
-                      checked={patientData.red_flags.includes(flag)}
-                      onChange={() => handleRedFlagToggle(flag)}
-                    />
-                    <span>{flag}</span>
-                  </label>
-                ))}
-              </div>
-            </section>
-
-            {/* Patient Context Modifiers */}
-            <section className={styles.section} style={{display: (!showWizardMode || currentStep === 5) ? 'block' : 'none'}}>
-              <PatientContext
-                value={patientContext}
-                onChange={setPatientContext}
-                apiBase={apiBase}
-              />
-            </section>
-
-            {/* Actions / Wizard Navigation */}
-            <section className={styles.actions}>
-              {showWizardMode ? (
-                <div style={{display: 'flex', gap: '1rem', justifyContent: 'space-between'}}>
-                  <button
-                    onClick={prevStep}
-                    disabled={currentStep === 1}
-                    style={{
-                      flex: 1,
-                      padding: '1rem 2rem',
-                      background: currentStep === 1 ? '#e5e7eb' : '#6b7280',
-                      color: currentStep === 1 ? '#9ca3af' : 'white',
-                      border: 'none',
-                      borderRadius: '6px',
-                      cursor: currentStep === 1 ? 'not-allowed' : 'pointer',
-                      fontSize: '1rem',
-                      fontWeight: '600'
-                    }}
-                  >
-                    ← Previous
-                  </button>
-                  {currentStep < getTotalSteps() ? (
-                    <button
-                      onClick={nextStep}
-                      disabled={!canProceedToNextStep()}
-                      style={{
-                        flex: 2,
-                        padding: '1rem 2rem',
-                        background: canProceedToNextStep() ? '#3b82f6' : '#9ca3af',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: canProceedToNextStep() ? 'pointer' : 'not-allowed',
-                        fontSize: '1rem',
-                        fontWeight: '600'
-                      }}
-                    >
-                      Continue →
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleEvaluate}
-                      disabled={loading}
-                      style={{
-                        flex: 2,
-                        padding: '1rem 2rem',
-                        background: loading ? '#9ca3af' : '#10b981',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: loading ? 'not-allowed' : 'pointer',
-                        fontSize: '1rem',
-                        fontWeight: '600'
-                      }}
-                    >
-                      {loading ? '🔄 Evaluating...' : '🩺 Complete Evaluation'}
-                    </button>
+            {inputs.uses_age || inputs.uses_onset_hours || inputs.uses_diagnosis ? (
+              <section className={styles.section} style={{display: visible('patient') ? 'block' : 'none'}}>
+                <h2>Patient information</h2>
+                <div className={styles.formGrid}>
+                  {inputs.uses_age && (
+                    <div className={styles.formGroup}>
+                      <label htmlFor="diagnose-age">Age (years)</label>
+                      <input id="diagnose-age" type="number" value={answers.age} onChange={(e) => setAnswers({...answers, age: e.target.value})} placeholder="Not assessed" />
+                    </div>
+                  )}
+                  {inputs.uses_onset_hours && (
+                    <div className={styles.formGroup}>
+                      <label htmlFor="diagnose-onset">Onset (hours ago)</label>
+                      <input id="diagnose-onset" type="number" value={answers.onset_hours} onChange={(e) => setAnswers({...answers, onset_hours: e.target.value})} placeholder="Not assessed" />
+                    </div>
+                  )}
+                  {inputs.uses_diagnosis && (
+                    <div className={styles.formGroup}>
+                      <label htmlFor="diagnose-diagnosis">Working diagnosis</label>
+                      <input id="diagnose-diagnosis" type="text" value={answers.diagnosis} onChange={(e) => setAnswers({...answers, diagnosis: e.target.value})} placeholder="Optional" />
+                    </div>
                   )}
                 </div>
-              ) : (
-                <>
-                  <button
-                    className={styles.evaluateButton}
-                    onClick={handleEvaluate}
-                    disabled={loading}
-                  >
-                    {loading ? '🔄 Evaluating...' : '🩺 Evaluate Diagnosis'}
-                  </button>
-                  <button
-                    className={styles.resetButton}
-                    onClick={handleReset}
-                  >
-                    🔄 Reset
-                  </button>
-                </>
-              )}
-            </section>
+              </section>
+            ) : null}
 
-            {/* Results */}
-            {result && (
-              <section className={`${styles.section} ${styles.results}`}>
-                <h2>📋 Clinical Decision Support Results</h2>
-                {result.tree && (
-                  <p style={{ margin: '0 0 0.75rem', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <strong>{result.tree.title || result.tree.id}</strong>
-                    <ReviewStatusBadge status={result.tree.review_status} label={result.tree.review_status_label} />
-                  </p>
-                )}
-                <ClinicalReviewNotice notice={result.error ? undefined : result.clinical_review_notice} />
-                {result.error && (
-                  <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fef2f2', border: '1px solid #ef4444', borderRadius: '8px', color: '#7f1d1d' }}>
-                    <strong>This tree could not be evaluated.</strong> {result.error}
-                  </div>
-                )}
-                {result.warning && (
-                  <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: '8px', color: '#78350f' }}>
-                    <strong>{result.evaluated === false ? 'Not evaluated automatically.' : 'Note:'}</strong> {result.warning}
-                  </div>
-                )}
-                
-                {result.path && result.path.length > 0 && (
-                  <div className={styles.resultCard}>
-                    <h3>✓ Decision Path: {result.path.join(' → ')}</h3>
-                    
-                    {result.provisional_dx && result.provisional_dx.length > 0 && (
-                      <div className={styles.resultSection}>
-                        <h4>🎯 Suggested Diagnoses:</h4>
-                        <ul>
-                          {result.provisional_dx.map((dx, i) => (
-                            <li key={i}>{dx}</li>
-                          ))}
-                        </ul>
-                        {result.tree && result.tree.icd10 && result.tree.icd10.length > 0 && (
-                          <div style={{
-                            marginTop: '0.75rem',
-                            padding: '0.75rem',
-                            background: '#f9fafb',
-                            borderRadius: '6px',
-                            borderLeft: '3px solid #0f766e'
-                          }}>
-                            <strong style={{color: '#0f766e'}}>📋 ICD-10:</strong>{' '}
-                            <span style={{fontFamily: 'monospace', fontSize: '0.9rem'}}>
-                              {result.tree.icd10.join(', ')}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    
-                    {result.tests && result.tests.length > 0 && (
-                      <div className={styles.resultSection}>
-                        <h4>🔬 Recommended Tests:</h4>
-                        <ul>
-                          {result.tests.map((test, i) => (
-                            <li key={i}>{test}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+            {inputs.symptoms.length > 0 && (
+              <section className={styles.section} style={{display: visible('symptoms') ? 'block' : 'none'}}>
+                <h2>Symptoms</h2>
+                <CheckboxGroup options={inputs.symptoms} selected={answers.symptoms} onToggle={setList('symptoms')} />
+              </section>
+            )}
 
-                    {result.referrals && result.referrals.length > 0 && (
-                      <div className={styles.resultSection}>
-                        <h4>👨‍⚕️ Specialist Referrals:</h4>
-                        <ul>
-                          {result.referrals.map((referral, i) => (
-                            <li key={i}>{referral}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+            {inputs.exam.length > 0 && (
+              <section className={styles.section} style={{display: visible('exam') ? 'block' : 'none'}}>
+                <h2>Examination findings</h2>
+                <CheckboxGroup options={inputs.exam} selected={answers.exam} onToggle={setList('exam')} />
+              </section>
+            )}
 
-                    {result.trace && result.trace.length > 0 && (
-                      <details className={styles.trace}>
-                        <summary>View Decision Trace</summary>
-                        <ul>
-                          {result.trace.map((step, i) => (
-                            <li key={i}>{step}</li>
+            {inputs.red_flags.length > 0 && (
+              <section className={`${styles.section} ${styles.redFlags}`} style={{display: visible('red_flags') ? 'block' : 'none'}}>
+                <h2>Red flags ⚠️</h2>
+                <CheckboxGroup options={inputs.red_flags} selected={answers.red_flags} onToggle={setList('red_flags')} />
+              </section>
+            )}
+
+            {steps.includes('findings') && (
+              <section className={styles.section} style={{display: visible('findings') ? 'block' : 'none'}}>
+                <h2>Other findings</h2>
+                {Object.keys(inputs.findings).length > 0 && (
+                  <div className={styles.formGrid}>
+                    {Object.entries(inputs.findings).map(([name, values]) => (
+                      <div key={name} className={styles.formGroup}>
+                        <label htmlFor={`finding-${name}`}>{displayLabel(name)}</label>
+                        <select
+                          id={`finding-${name}`}
+                          value={answers.findings[name] === undefined ? NOT_ASSESSED : findingOptionKey(answers.findings[name])}
+                          onChange={(e) => setFinding(name, e.target.value)}
+                        >
+                          <option value={NOT_ASSESSED}>Not assessed</option>
+                          {values.map(value => (
+                            <option key={findingOptionKey(value)} value={findingOptionKey(value)}>{displayLabel(value)}</option>
                           ))}
-                        </ul>
-                      </details>
-                    )}
+                        </select>
+                      </div>
+                    ))}
                   </div>
                 )}
-                {/* Context-Based Modifications */}
-                {result.context && (
-                  <ContextResults contextData={result.context} />
+                {inputs.patient_characteristics.length > 0 && (
+                  <>
+                    <h3>Patient characteristics</h3>
+                    <CheckboxGroup options={inputs.patient_characteristics} selected={answers.patient_characteristics} onToggle={setList('patient_characteristics')} />
+                  </>
                 )}
-                {(!result.path || result.path.length === 0) && (
-                  <div className={styles.noMatch}>
-                    <p>No matching diagnostic pathway found with current inputs.</p>
-                  </div>
+                {inputs.no_red_flags.length > 0 && (
+                  <>
+                    <h3>Confirmed on assessment</h3>
+                    <CheckboxGroup options={inputs.no_red_flags} selected={answers.no_red_flags} onToggle={setList('no_red_flags')} />
+                  </>
                 )}
               </section>
             )}
+
+            {/* Patient context modifiers (last step) */}
+            <section className={styles.section} style={{display: !showWizardMode || isLastStep ? 'block' : 'none'}}>
+              <PatientContext value={patientContext} onChange={setPatientContext} apiBase={getApiBase()} />
+            </section>
+
+            <section className={styles.actions}>
+              {showWizardMode && (
+                <button onClick={() => setCurrentStep(currentStep - 1)} disabled={currentStep === 0} style={{ ...navButton(currentStep > 0, '#6b7280'), flex: 1 }}>
+                  ← Previous
+                </button>
+              )}
+              {showWizardMode && !isLastStep ? (
+                <button onClick={() => setCurrentStep(currentStep + 1)} style={{ ...navButton(true, '#3b82f6'), flex: 2 }}>
+                  Continue →
+                </button>
+              ) : (
+                <button onClick={handleEvaluate} disabled={loading} style={{ ...navButton(!loading, '#10b981'), flex: 2 }}>
+                  {loading ? '🔄 Walking the tree...' : '🩺 Walk the tree'}
+                </button>
+              )}
+            </section>
+            {evaluateError && <div role="alert" style={{ color: '#b91c1c', textAlign: 'center' }}>{evaluateError}</div>}
           </>
+        )}
+
+        {/* Results */}
+        {result && (
+          <section className={`${styles.section} ${styles.results}`}>
+            <h2>📋 Decision tree walk</h2>
+            {result.tree && (
+              <p style={{ margin: '0 0 0.75rem', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <strong>{result.tree.title || result.tree.id}</strong>
+                <ReviewStatusBadge status={result.tree.review_status} label={result.tree.review_status_label} />
+              </p>
+            )}
+            <ClinicalReviewNotice notice={result.error ? undefined : result.clinical_review_notice} />
+            {result.error && (
+              <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fef2f2', border: '1px solid #ef4444', borderRadius: '8px', color: '#7f1d1d' }}>
+                <strong>This tree could not be walked.</strong> {result.error}
+              </div>
+            )}
+            {result.warning && (
+              <div role="alert" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: '8px', color: '#78350f' }}>
+                <strong>{result.evaluated === false ? 'Not evaluated automatically.' : 'Note:'}</strong> {result.warning}
+              </div>
+            )}
+            {stopMessage && (
+              <div role="status" style={{ padding: '0.75rem 1rem', margin: '0 0 1rem', background: '#eff6ff', border: '1px solid #3b82f6', borderRadius: '8px', color: '#1e3a8a' }}>
+                {stopMessage}
+              </div>
+            )}
+
+            {result.path && result.path.length > 0 && (
+              <div className={styles.resultCard}>
+                <h3>✓ Path: {result.path.map(displayLabel).join(' → ')}</h3>
+
+                {result.provisional_dx && result.provisional_dx.length > 0 && (
+                  <div className={styles.resultSection}>
+                    <h4>🎯 Diagnoses to consider (from the tree):</h4>
+                    <ul>{result.provisional_dx.map((dx, i) => <li key={i}>{dx}</li>)}</ul>
+                    {result.tree && result.tree.icd10 && result.tree.icd10.length > 0 && (
+                      <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#f9fafb', borderRadius: '6px', borderLeft: '3px solid #0f766e' }}>
+                        <strong style={{color: '#0f766e'}}>📋 ICD-10:</strong>{' '}
+                        <span style={{fontFamily: 'monospace', fontSize: '0.9rem'}}>{result.tree.icd10.join(', ')}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {result.tests && result.tests.length > 0 && (
+                  <div className={styles.resultSection}>
+                    <h4>🔬 Tests listed on this path:</h4>
+                    <ul>{result.tests.map((test, i) => <li key={i}>{test}</li>)}</ul>
+                  </div>
+                )}
+
+                {result.referrals && result.referrals.length > 0 && (
+                  <div className={styles.resultSection}>
+                    <h4>👨‍⚕️ Referrals listed on this path:</h4>
+                    <ul>{result.referrals.map((referral, i) => <li key={i}>{referral}</li>)}</ul>
+                  </div>
+                )}
+
+                {result.trace && result.trace.length > 0 && (
+                  <details className={styles.trace}>
+                    <summary>Why the walk went this way</summary>
+                    <ul>{result.trace.map((step, i) => <li key={i}>{step}</li>)}</ul>
+                  </details>
+                )}
+              </div>
+            )}
+            {result.context && <ContextResults contextData={result.context} />}
+            {(!result.path || result.path.length === 0) && !result.error && (
+              <div className={styles.noMatch}>
+                <p>No decision path was produced for these answers.</p>
+              </div>
+            )}
+            <div className={styles.actions}>
+              <button className={styles.resetButton} onClick={() => setResult(null)}>← Change answers</button>
+            </div>
+          </section>
         )}
 
         {!selectedTree && (
           <div className={styles.emptyState}>
-            <p>👆 Select a diagnostic tree above to begin clinical evaluation</p>
+            <p>👆 Select a decision tree above to begin</p>
           </div>
         )}
       </div>

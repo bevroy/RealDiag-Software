@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { apiFetch } from '../../utils/apiClient';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -16,8 +17,8 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        'https://realdiag-backend.onrender.com/users/forgot-password',
+      const response = await apiFetch(
+        '/users/forgot-password',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

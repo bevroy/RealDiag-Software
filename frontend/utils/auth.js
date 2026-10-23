@@ -9,17 +9,9 @@
  */
 
 import { storeAuthData, isStoredAuthenticated } from './clientAuth';
+import { getApiBase, apiFetch } from './apiClient';
 
-/**
- * Get API base URL from runtime config
- */
-export function getApiBase() {
-  if (typeof window !== 'undefined') {
-    const runtimeConfig = window.__RUNTIME_CONFIG || window.__RUNTIME_CONFIG__;
-    return runtimeConfig?.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-  }
-  return 'https://api.realdiag.com';
-}
+export { getApiBase, apiFetch };
 
 /**
  * Get CSRF token from response or cookie
@@ -47,27 +39,10 @@ export function isAuthenticated() {
  * Automatically includes credentials (cookies) and CSRF token
  */
 export async function authenticatedFetch(url, options = {}) {
-  const csrfToken = getCsrfToken();
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(options.headers || {})
-  };
-  
-  // Add CSRF token for state-changing requests
-  if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(options.method?.toUpperCase())) {
-    if (csrfToken) {
-      headers['X-CSRF-Token'] = csrfToken;
-    }
-  }
-  
-  const response = await fetch(url, {
+  return apiFetch(url, {
     ...options,
-    credentials: 'include', // Important: sends cookies with request
-    headers
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
   });
-  
-  return response;
 }
 
 /**

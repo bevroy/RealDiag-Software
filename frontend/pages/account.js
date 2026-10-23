@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch } from '../utils/auth';
+import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch, getApiBase } from '../utils/auth';
 import { getStoredUser, isStoredAuthenticated, clearStoredAuth, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
@@ -32,9 +32,7 @@ export default function AccountPage() {
   const [analytics, setAnalytics] = useState(null);
 
   useEffect(() => {
-    const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-    const base = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://realdiag-backend.onrender.com';
-    setApiBase(base.replace(/\/$/, ''));
+    setApiBase(getApiBase().replace(/\/$/, ''));
 
     // Check if already logged in (try localStorage first for cross-domain auth)
     const storedUser = getStoredUser();

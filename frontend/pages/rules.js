@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
+import { apiFetch } from '../utils/apiClient';
 
 const FAMILIES = [
   { id: "allergy", label: "Allergy/Immunology" },
@@ -46,17 +47,13 @@ export default function ReferencePage() {
   useEffect(() => {
     let cancelled = false;
     async function loadAll() {
-      // Get API base inside useEffect to ensure runtime-config.js has loaded
-      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-      
       setLoading(true);
       setErr("");
       setExpandedId(null);
       setAllRules([]); // Clear existing data before loading
       try {
         // Fetch the total tree count from backend
-        const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+        const treesRes = await apiFetch(`/diagnostic/trees`);
         if (treesRes.ok) {
           const treesData = await treesRes.json();
           if (!cancelled && treesData.trees) {
@@ -73,7 +70,7 @@ export default function ReferencePage() {
           if (cancelled) break;
           
           try {
-            const res = await fetch(`${apiBase}/reference/${f.id}${cacheBuster}`);
+            const res = await apiFetch(`/reference/${f.id}${cacheBuster}`);
             if (!res.ok) {
               console.warn(`Failed to load ${f.label}`);
               continue;

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { apiFetch } from '../utils/apiClient';
 
 export default function IntegrationPage() {
   const [apiBase, setApiBase] = useState('');
@@ -22,7 +23,7 @@ export default function IntegrationPage() {
     }
 
     try {
-      const response = await fetch(`${apiBase}/integration/fhir/condition`, {
+      const response = await apiFetch(`/integration/fhir/condition`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './PatientContext.module.css'
+import { apiFetch } from '../utils/apiClient';
 
 /**
  * PatientContext Component
@@ -24,7 +25,7 @@ export default function PatientContext({ value, onChange, apiBase }) {
 
     const loadVariables = async () => {
       try {
-        const response = await fetch(`${apiBase}/context/variables`)
+        const response = await apiFetch(`/context/variables`)
         const data = await response.json()
         setVariables(data.variables || [])
         setCategories(data.categories || [])
@@ -45,7 +46,7 @@ export default function PatientContext({ value, onChange, apiBase }) {
 
     const updateSummary = async () => {
       try {
-        const response = await fetch(`${apiBase}/context/summary`, {
+        const response = await apiFetch(`/context/summary`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(contextData)

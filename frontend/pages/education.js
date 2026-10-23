@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
+import { apiFetch } from '../utils/apiClient';
 
 export default function EducationPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -33,9 +34,6 @@ export default function EducationPage() {
   const [expandedCaseId, setExpandedCaseId] = useState(null);
   const [availableSpecialties, setAvailableSpecialties] = useState([]);
 
-  // Use runtime config for API base, with fallback to env var or Render URL
-  const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-  const API_BASE = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
   const userId = 'student_001';
 
   const loadCases = async () => {
@@ -45,7 +43,7 @@ export default function EducationPage() {
       if (filters.specialty) params.append('specialty', filters.specialty);
       if (filters.difficulty) params.append('difficulty', filters.difficulty);
       
-      const response = await fetch(`${API_BASE}/education/cases?${params}`);
+      const response = await apiFetch(`/education/cases?${params}`);
       const data = await response.json();
       setCases(data);
     } catch (error) {
@@ -57,7 +55,7 @@ export default function EducationPage() {
   const loadAvailableSpecialties = async () => {
     try {
       // Load all cases without filters to get unique specialties
-      const response = await fetch(`${API_BASE}/education/cases`);
+      const response = await apiFetch(`/education/cases`);
       const allCases = await response.json();
       
       // Extract unique specialties and sort them
@@ -76,7 +74,7 @@ export default function EducationPage() {
     
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE}/education/cases/search/${encodeURIComponent(searchQuery)}`);
+      const response = await apiFetch(`/education/cases/search/${encodeURIComponent(searchQuery)}`);
       const data = await response.json();
       setCases(data.results);
     } catch (error) {
@@ -91,7 +89,7 @@ export default function EducationPage() {
       const params = new URLSearchParams({ count: '10' });
       if (filters.difficulty) params.append('difficulty', filters.difficulty);
       
-      const response = await fetch(`${API_BASE}/education/quiz/questions?${params}`);
+      const response = await apiFetch(`/education/quiz/questions?${params}`);
       const data = await response.json();
       setQuizQuestions(data.questions);
       setQuizActive(true);
@@ -112,7 +110,7 @@ export default function EducationPage() {
     const question = quizQuestions[currentQuestionIndex];
     
     try {
-      const response = await fetch(`${API_BASE}/education/quiz/submit`, {
+      const response = await apiFetch(`/education/quiz/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -148,7 +146,7 @@ export default function EducationPage() {
   const loadFlashcards = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE}/education/flashcards/due?user_id=${userId}&limit=20`);
+      const response = await apiFetch(`/education/flashcards/due?user_id=${userId}&limit=20`);
       const data = await response.json();
       setFlashcards(data.flashcards);
       setCurrentCardIndex(0);
@@ -163,7 +161,7 @@ export default function EducationPage() {
     const card = flashcards[currentCardIndex];
     
     try {
-      await fetch(`${API_BASE}/education/flashcards/review`, {
+      await apiFetch(`/education/flashcards/review`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -187,7 +185,7 @@ export default function EducationPage() {
 
   const loadProgress = async () => {
     try {
-      const response = await fetch(`${API_BASE}/education/progress/${userId}`);
+      const response = await apiFetch(`/education/progress/${userId}`);
       const data = await response.json();
       setProgress(data);
     } catch (error) {
@@ -202,7 +200,7 @@ export default function EducationPage() {
       if (filters.specialty) params.append('specialty', filters.specialty);
       if (filters.yearLevel) params.append('year_level', filters.yearLevel);
       
-      const response = await fetch(`${API_BASE}/education/learning-objectives?${params}`);
+      const response = await apiFetch(`/education/learning-objectives?${params}`);
       const data = await response.json();
       setLearningObjectives(data.objectives);
     } catch (error) {
