@@ -116,6 +116,7 @@ export default function AccountPage() {
       setActiveTab('dashboard');
       // Store auth data for AuthGuard on other pages
       storeAuthData(data.user, data.csrf_token || null);
+      if (data.email_warning) alert(data.email_warning);
       loadDashboardData();
     } catch (err) {
       setError(err.message);

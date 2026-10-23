@@ -19,6 +19,10 @@ export default function AdminReview() {
   const [targetRole, setTargetRole] = useState('provider');
   const [roleReason, setRoleReason] = useState('');
   const [roleUpdating, setRoleUpdating] = useState(false);
+  const [accountEmail, setAccountEmail] = useState('');
+  const [accountReason, setAccountReason] = useState('');
+  const [accountBusy, setAccountBusy] = useState(false);
+  const [accountResult, setAccountResult] = useState(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || getApiBase();
 
@@ -39,6 +43,7 @@ export default function AdminReview() {
     try {
       // Load pending trees
       const treesRes = await fetch(`${API_URL}/admin/trees/pending`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -55,6 +60,7 @@ export default function AdminReview() {
 
       // Load stats
       const statsRes = await fetch(`${API_URL}/admin/stats`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -90,6 +96,7 @@ export default function AdminReview() {
   const loadTreeDetail = async (treeId) => {
     try {
       const res = await fetch(`${API_URL}/admin/trees/pending/${treeId}`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         headers: {
           'Authorization': `Bearer ${adminToken}`
         }
@@ -115,6 +122,7 @@ export default function AdminReview() {
 
     try {
       const res = await fetch(`${API_URL}/admin/trees/review`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -152,6 +160,7 @@ export default function AdminReview() {
     setRoleUpdating(true);
     try {
       const res = await fetch(`${API_URL}/admin/users/role/by-email`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -184,6 +193,7 @@ export default function AdminReview() {
     setRoleUpdating(true);
     try {
       const res = await fetch(`${API_URL}/admin/users/${encodeURIComponent(roleUserId.trim())}/role`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -203,6 +213,42 @@ export default function AdminReview() {
       alert(error.message || 'Failed to update role');
     } finally {
       setRoleUpdating(false);
+    }
+  };
+
+  // Account tools: password reset (when reset emails can't be sent) and deactivation.
+  const runAccountAction = async (action) => {
+    if (!accountEmail.trim()) {
+      alert('Please provide an email address');
+      return;
+    }
+    if (action === 'deactivate' && !window.confirm(`Deactivate ${accountEmail.trim()}? They will be signed out and unable to sign in.`)) {
+      return;
+    }
+    setAccountBusy(true);
+    setAccountResult(null);
+    try {
+      const res = await fetch(`${API_URL}/admin/users/${action}`, {
+        credentials: 'include', // the API also requires a signed-in session (main.py)
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken}`
+        },
+        body: JSON.stringify({
+          email: accountEmail.trim().toLowerCase(),
+          reason: accountReason || undefined,
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.detail || `${action} failed`);
+      }
+      setAccountResult({ action, ...data });
+    } catch (error) {
+      alert(error.message || `Failed to ${action}`);
+    } finally {
+      setAccountBusy(false);
     }
   };
 
@@ -339,6 +385,58 @@ export default function AdminReview() {
                 {roleUpdating ? 'Updating...' : 'Update Role by User ID'}
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* Account Tools */}
+        <div style={styles.roleManagerContainer}>
+          <h2 style={styles.sectionTitle}>🔑 Account Tools</h2>
+          <p style={styles.roleHelpText}>
+            Reset a password when reset emails can&apos;t be sent (a temporary password is shown once; pass it on securely),
+            or deactivate an account. Deactivated users are signed out on their next request and cannot sign in; their data is kept.
+          </p>
+          <div style={styles.roleFormBox}>
+            <input
+              type="email"
+              value={accountEmail}
+              onChange={(e) => setAccountEmail(e.target.value)}
+              placeholder="user@realdiag.com"
+              aria-label="Account email"
+              style={styles.input}
+            />
+            <input
+              type="text"
+              value={accountReason}
+              onChange={(e) => setAccountReason(e.target.value)}
+              placeholder="Reason (optional)"
+              aria-label="Reason"
+              style={styles.input}
+            />
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('reset-password')} style={styles.roleActionButton}>
+                Reset password
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('deactivate')} style={{ ...styles.roleActionButton, background: '#b91c1c' }}>
+                Deactivate
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('reactivate')} style={styles.roleActionButton}>
+                Reactivate
+              </button>
+            </div>
+            {accountResult && (
+              <div role="status" style={{ marginTop: '0.75rem', fontSize: '0.9rem' }}>
+                {accountResult.action === 'reset-password' ? (
+                  <>
+                    Password reset for {accountResult.email}.
+                    {accountResult.temporary_password && (
+                      <> Temporary password (shown once): <code style={{ userSelect: 'all' }}>{accountResult.temporary_password}</code></>
+                    )}
+                  </>
+                ) : (
+                  <>{accountResult.email} is now {accountResult.is_active ? 'active' : 'deactivated'}.</>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

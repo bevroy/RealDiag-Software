@@ -58,7 +58,7 @@ function VerifyEmail() {
 
       if (response.ok) {
         setStatus('success')
-        setMessage(data.message || 'Email verified successfully!')
+        setMessage([data.message || 'Email verified successfully!', data.email_warning].filter(Boolean).join(' '))
         setUser(data.user)
         
         // Store user data

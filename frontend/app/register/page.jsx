@@ -85,7 +85,9 @@ export default function RegisterPage() {
       // Check if employee account
       const isEmployee = formData.email.toLowerCase().endsWith('@realdiag.org');
       
-      if (isEmployee) {
+      if (data.email_warning) {
+        alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}!\n\n${data.email_warning}`);
+      } else if (isEmployee) {
         alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}!\n\nYour employee account has been created. Please check your @realdiag.org email for a verification link to activate full access.`);
       } else {
         alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}! Your account has been created.`);

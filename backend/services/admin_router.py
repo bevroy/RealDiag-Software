@@ -6,7 +6,7 @@ Provides administrative endpoints for managing AI-generated decision trees,
 user accounts, and system configuration.
 """
 
-from fastapi import APIRouter, HTTPException, Depends, Header
+from fastapi import APIRouter, HTTPException, Depends, Header, Request
 from typing import Optional, List
 from pydantic import BaseModel
 import json
@@ -562,3 +562,134 @@ async def update_user_role_by_email(
     except Exception as e:
         logger.error("Role update by email failed for email=%s: %s", email, e)
         raise HTTPException(status_code=500, detail="Role update failed")
+
+
+# --- Account tools: password reset and deactivation -----------------------
+
+class AccountTarget(BaseModel):
+    """Identify an account by email or user_id (one is required)."""
+    email: Optional[str] = None
+    user_id: Optional[str] = None
+    reason: Optional[str] = None
+
+
+class AdminPasswordResetRequest(AccountTarget):
+    """new_password is optional; when omitted a temporary password is generated
+    and returned once in the response for the admin to pass on."""
+    new_password: Optional[str] = None
+
+
+def _audit_account_action(admin: AdminUser, action: str, target_user_id: str, reason: Optional[str]):
+    logger.info(
+        "ACCOUNT_%s admin=%s target_user_id=%s reason=%s at=%s",
+        action, admin.username, target_user_id, reason or "", datetime.utcnow().isoformat(),
+    )
+
+
+def _apply_to_account(body: AccountTarget, apply):
+    """Find the account (database first, then the in-memory fallback) and call
+    apply(account, set_field) on it; returns (user_id, email)."""
+    email = (body.email or "").strip().lower() or None
+    user_id = (body.user_id or "").strip() or None
+    if not email and not user_id:
+        raise HTTPException(status_code=400, detail="email or user_id is required")
+
+    from backend.services.database import DATABASE_AVAILABLE
+    if DATABASE_AVAILABLE:
+        from backend.services.database import get_db_session, User
+        with get_db_session() as db:
+            query = db.query(User)
+            user = query.filter_by(user_id=user_id).first() if user_id else query.filter_by(email=email).first()
+            if not user:
+                raise HTTPException(status_code=404, detail="User not found")
+            apply(user, lambda k, v: setattr(user, k, v))
+            return user.user_id, user.email
+
+    from backend.services.auth_service import users_db
+    for uid, user in users_db.items():
+        if (user_id and uid == user_id) or (email and str(user.get("email", "")).strip().lower() == email):
+            apply(user, user.__setitem__)
+            return uid, user.get("email")
+    raise HTTPException(status_code=404, detail="User not found")
+
+
+@router.post("/users/reset-password")
+async def admin_reset_password(
+    body: AdminPasswordResetRequest,
+    admin: AdminUser = Depends(verify_admin_token)
+):
+    """
+    Set a new password for a user (for when reset emails cannot be sent).
+
+    Also clears any pending reset link and any sign-in lockout. If new_password
+    is omitted, a temporary password is generated and returned once; it is not
+    stored anywhere except as a hash.
+    """
+    from backend.services.auth_service import hash_password
+
+    generated = body.new_password is None
+    new_password = body.new_password if not generated else secrets.token_urlsafe(12)
+    if len(new_password) < 8:
+        raise HTTPException(status_code=400, detail="Password must be at least 8 characters.")
+    hashed = hash_password(new_password)
+
+    def apply(account, set_field):
+        set_field("hashed_password" if not isinstance(account, dict) else "password_hash", hashed)
+        set_field("password_reset_token", None)
+        set_field("password_reset_sent_at", None)
+        set_field("failed_login_count", 0)
+        set_field("locked_until", None)
+
+    user_id, email = _apply_to_account(body, apply)
+    _audit_account_action(admin, "PASSWORD_RESET", user_id, body.reason)
+    response = {
+        "success": True,
+        "user_id": user_id,
+        "email": email,
+        "updated_at": datetime.utcnow().isoformat(),
+        "note": "Existing sessions stay signed in until they expire.",
+    }
+    if generated:
+        response["temporary_password"] = new_password
+    return response
+
+
+def _set_active(body: AccountTarget, admin: AdminUser, active: bool):
+    def apply(account, set_field):
+        set_field("is_active", active)
+        if active:
+            set_field("failed_login_count", 0)
+            set_field("locked_until", None)
+
+    user_id, email = _apply_to_account(body, apply)
+    _audit_account_action(admin, "REACTIVATED" if active else "DEACTIVATED", user_id, body.reason)
+    return {
+        "success": True,
+        "user_id": user_id,
+        "email": email,
+        "is_active": active,
+        "reason": body.reason,
+        "updated_at": datetime.utcnow().isoformat(),
+    }
+
+
+@router.post("/users/deactivate")
+async def admin_deactivate_user(body: AccountTarget, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Deactivate an account: sign-in is refused and existing sessions are
+    rejected on their next request. Data is kept; reactivate to restore access.
+    """
+    return _set_active(body, admin, False)
+
+
+@router.post("/users/reactivate")
+async def admin_reactivate_user(body: AccountTarget, admin: AdminUser = Depends(verify_admin_token)):
+    """Restore a deactivated account (also clears any sign-in lockout)."""
+    return _set_active(body, admin, True)
+
+
+@router.get("/client-ip")
+async def admin_client_ip(request: Request, admin: AdminUser = Depends(verify_admin_token)):
+    """What the server sees as the caller's address, to check the proxy setup after a deploy."""
+    from backend.services.client_ip import client_ip_debug
+    return client_ip_debug(request)

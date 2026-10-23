@@ -12,17 +12,41 @@ from datetime import datetime, timedelta
 from fastapi import Request, HTTPException, status
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
-from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 import logging
 
+from backend.services.client_ip import client_ip
+
 logger = logging.getLogger("realdiag.security")
 
+def rate_limit_key(request) -> str:
+    """Signed-in requests are limited per account, others per real client IP.
+
+    A class on one campus network shares a single public IP; keying signed-in
+    traffic by account keeps one student's use from using up everyone's limit.
+    """
+    token = request.cookies.get("access_token")
+    auth = request.headers.get("authorization") or ""
+    if not token and auth.startswith("Bearer "):
+        token = auth[len("Bearer "):]
+    if token:
+        try:
+            from backend.services.auth_service import verify_token  # lazy: auth_service imports this module
+            payload = verify_token(token)
+            if payload.get("sub") and not payload.get("mfa_pending"):
+                return f"user:{payload['sub']}"
+        except Exception:
+            pass
+    return f"ip:{client_ip(request)}"
+
+
 # Rate limiter configuration
-# Global limit: 1000 requests per hour per IP
-# Specific endpoints can override with their own decorators
+# Keyed per account when signed in, else on the real client IP (client_ip.py),
+# never the hosting proxy's address. Specific endpoints set their own limits
+# with decorators; default_limits only applies if SlowAPIMiddleware is
+# installed, which main.py does not do.
 limiter = Limiter(
-    key_func=get_remote_address,
+    key_func=rate_limit_key,
     default_limits=["1000/hour"],
     storage_uri="memory://",
     strategy="fixed-window"
