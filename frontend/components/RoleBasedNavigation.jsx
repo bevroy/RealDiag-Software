@@ -90,6 +90,7 @@ export default function RoleBasedNavigation() {
   const navItems = [
     { href: '/', label: '🏠 Home', roles: ['all'] },
     { href: '/symptom-search', label: '🔬 Symptom Search', roles: ['all'] },
+    { href: '/diagnose', label: '🌳 Step-by-Step Decision Trees', roles: ['all'] },
     { href: '/search', label: '🔍 Diagnosis Search', roles: ['admin', 'provider', 'doctor'] },
     { href: '/rules', label: '📋 Browse Rules', roles: ['admin', 'provider', 'doctor'] },
     { href: '/integration', label: '🔌 API', roles: ['admin', 'provider', 'doctor'] },

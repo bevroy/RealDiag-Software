@@ -6,6 +6,7 @@ REST API endpoints for user authentication, profiles, favorites, custom lists,
 search history, and analytics.
 """
 
+import os
 from fastapi import APIRouter, HTTPException, Depends, status, Response, Request
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, EmailStr
@@ -23,6 +24,7 @@ from backend.services.auth_service import (
     get_user_analytics,
     users_db, user_settings_db
 )
+from backend.services.client_ip import client_ip
 from backend.services.email_service import (
     is_token_expired, send_welcome_email
 )
@@ -76,6 +78,15 @@ class NoOpLimiter:
 if not LIMITER_AVAILABLE:
     limiter = NoOpLimiter()
 
+# Per-IP limits on the signed-out account routes. A class of ~30 students on
+# one campus network shares a single public IP, so these are sized for that;
+# repeated wrong passwords are stopped per account instead
+# (auth_service.LOGIN_MAX_FAILED_ATTEMPTS / LOGIN_LOCKOUT_MINUTES).
+LOGIN_LIMIT = os.getenv("LOGIN_RATE_LIMIT_PER_IP", "150/15minutes")
+REGISTER_LIMIT = os.getenv("REGISTER_RATE_LIMIT_PER_IP", "60/hour")
+FORGOT_PASSWORD_LIMIT = os.getenv("FORGOT_PASSWORD_RATE_LIMIT_PER_IP", "30/15minutes")
+RESET_PASSWORD_LIMIT = os.getenv("RESET_PASSWORD_RATE_LIMIT_PER_IP", "30/15minutes")
+
 if AuditLogger is None:
     class AuditLogger:
         @staticmethod
@@ -88,7 +99,7 @@ if AuditLogger is None:
 
 
 def _request_ip(request: Request) -> str:
-    return request.client.host if request.client else "unknown"
+    return client_ip(request)
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -100,11 +111,11 @@ class TokenResponse(BaseModel):
     user: Dict[str, Any]
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
-@limiter.limit("5/15minutes")
+@limiter.limit(REGISTER_LIMIT)
 async def register_user(request: Request, user_data: UserCreate):
     """
     Register a new user account.
-    Rate limit: 5 attempts per 15 minutes per IP.
+    Rate limit: REGISTER_LIMIT per client IP (default 60/hour).
     
     Request body:
     ```json
@@ -124,25 +135,32 @@ async def register_user(request: Request, user_data: UserCreate):
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
-    user_safe = {k: v for k, v in user.items() if k != "password_hash"}
+    user_safe = {k: v for k, v in user.items() if k not in ("password_hash", "verification_email_sent")}
+    data = {
+        "message": "Registration successful",
+        "user": user_safe
+    }
+    if user.get("verification_email_sent") is False:
+        data["email_warning"] = (
+            "Your account was created, but we couldn't send the verification email. "
+            "Contact an administrator to verify your account."
+        )
     
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
-        data={
-            "message": "Registration successful",
-            "user": user_safe
-        },
+        data=data,
         access_token=access_token,
         refresh_token=refresh_token,
         status_code=status.HTTP_201_CREATED
     )
 
 @router.post("/login")
-@limiter.limit("5/15minutes")
+@limiter.limit(LOGIN_LIMIT)
 async def login_user(request: Request, credentials: UserLogin):
     """
     Authenticate user and get access token.
-    Rate limit: 5 attempts per 15 minutes per IP.
+    Rate limit: LOGIN_LIMIT per client IP (default 150/15min), and an account
+    locks for LOGIN_LOCKOUT_MINUTES after LOGIN_MAX_FAILED_ATTEMPTS wrong passwords.
     
     Request body:
     ```json
@@ -282,14 +300,19 @@ async def verify_employee_email(token: str):
             # Don't fail verification if subscription creation fails
             pass
         
-        # Send welcome email
-        send_welcome_email(user.email, user.full_name)
+        # Send welcome email (verification already succeeded, so a failure is a
+        # warning shown to the user, not an error)
+        welcome_sent = send_welcome_email(user.email, user.full_name)
         
-        return {
+        response = {
             "message": "Email verified successfully! Your employee account is now active.",
             "user": user.to_dict(),
-            "subscription": "employee"
+            "subscription": "employee",
+            "welcome_email_sent": welcome_sent,
         }
+        if not welcome_sent:
+            response["email_warning"] = "Your account is active, but we couldn't send the welcome email."
+        return response
 
 @router.post("/resend-verification")
 async def resend_verification_email(email: EmailStr):
@@ -329,12 +352,24 @@ async def resend_verification_email(email: EmailStr):
         user.email_verification_token = new_token
         user.email_verification_sent_at = datetime.utcnow()
         
-        # Send email
-        send_verification_email(user.email, new_token, user.full_name)
+        # Send email; report a failure instead of claiming it was sent
+        if not send_verification_email(user.email, new_token, user.full_name):
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail="We couldn't send the verification email. Try again later or contact an administrator."
+            )
         
         return {
             "message": "Verification email sent. Please check your inbox."
         }
+
+
+EMAIL_UNAVAILABLE_DETAIL = (
+    "Password reset emails can't be sent right now. Ask an administrator to reset your password."
+)
+EMAIL_SEND_FAILED_DETAIL = (
+    "We couldn't send the email. Try again later, or ask an administrator to reset your password."
+)
 
 
 class ForgotPasswordRequest(BaseModel):
@@ -347,28 +382,35 @@ class ResetPasswordRequest(BaseModel):
 
 
 @router.post("/forgot-password")
-@limiter.limit("5/15minutes")
+@limiter.limit(FORGOT_PASSWORD_LIMIT)
 async def forgot_password(request: Request, body: ForgotPasswordRequest):
     """
     Request a password reset link by email.
     Always returns a success message regardless of whether the email exists,
     to prevent account enumeration.
-    Rate limit: 5 attempts per 15 minutes per IP.
+    Rate limit: FORGOT_PASSWORD_LIMIT per client IP (default 30/15min).
     """
     generic_response = {
         "message": "If an account exists for that email, a password reset link has been sent."
     }
 
-    if not DATABASE_AVAILABLE:
-        # Don't leak that the database is down to the caller
-        logger.warning("Password reset requested but database is unavailable")
-        return generic_response
-
     from backend.services.email_service import (
+        email_configured,
         generate_verification_token,
         send_password_reset_email,
     )
 
+    # Failures are reported, not swallowed. Configuration and database problems
+    # affect every address alike, so reporting them reveals nothing about which
+    # accounts exist.
+    if not email_configured():
+        logger.error("Password reset requested but email (SMTP) is not configured")
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=EMAIL_UNAVAILABLE_DETAIL)
+    if not DATABASE_AVAILABLE:
+        logger.error("Password reset requested but database is unavailable")
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=EMAIL_UNAVAILABLE_DETAIL)
+
+    sent = True
     try:
         with get_db_session() as db:
             user = db.query(User).filter_by(email=body.email).first()
@@ -380,19 +422,25 @@ async def forgot_password(request: Request, body: ForgotPasswordRequest):
             user.password_reset_sent_at = datetime.utcnow()
             db.flush()
 
-            send_password_reset_email(user.email, token, user.full_name)
+            sent = send_password_reset_email(user.email, token, user.full_name)
     except Exception as e:
         logger.error(f"forgot_password error for {body.email}: {e}")
+        sent = False
 
+    if not sent:
+        # Only reachable for an existing account, so this does reveal that the
+        # address has an account - accepted so the user is not left waiting for
+        # an email that will never arrive.
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=EMAIL_SEND_FAILED_DETAIL)
     return generic_response
 
 
 @router.post("/reset-password")
-@limiter.limit("10/15minutes")
+@limiter.limit(RESET_PASSWORD_LIMIT)
 async def reset_password(request: Request, body: ResetPasswordRequest):
     """
     Reset password using the token sent to the user's email.
-    Rate limit: 10 attempts per 15 minutes per IP.
+    Rate limit: RESET_PASSWORD_LIMIT per client IP (default 30/15min).
     """
     if not DATABASE_AVAILABLE:
         raise HTTPException(

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { storeAuthData } from '../../utils/clientAuth';
+import { apiFetch } from '../../utils/apiClient';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -57,9 +58,8 @@ export default function RegisterPage() {
         if (!registrationData[key]) delete registrationData[key];
       });
 
-      const response = await fetch('https://realdiag-backend.onrender.com/users/register', {
+      const response = await apiFetch('/users/register', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -85,14 +85,16 @@ export default function RegisterPage() {
       // Check if employee account
       const isEmployee = formData.email.toLowerCase().endsWith('@realdiag.org');
       
-      if (isEmployee) {
+      if (data.email_warning) {
+        alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}!\n\n${data.email_warning}`);
+      } else if (isEmployee) {
         alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}!\n\nYour employee account has been created. Please check your @realdiag.org email for a verification link to activate full access.`);
       } else {
         alert(`Welcome to RealDiag, ${data.user?.full_name || data.user?.email}! Your account has been created.`);
       }
       
-      // Redirect to main site
-      window.location.href = 'https://realdiag.netlify.app/';
+      // Stay on this site: the login cookie and stored user belong to this origin
+      window.location.href = '/';
     } catch (err) {
       setError(err.message);
     } finally {

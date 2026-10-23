@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AuthGuard } from '../utils/AuthGuard';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
+import { apiFetch } from '../utils/apiClient';
 
 export default function Search() {
   const router = useRouter();
@@ -26,11 +27,7 @@ export default function Search() {
 
   // Load available families on mount
   useEffect(() => {
-    // Get API base inside useEffect to ensure runtime-config.js has loaded
-    const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-    const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-    
-    fetch(`${apiBase}/api/search/families`)
+    apiFetch(`/api/search/families`)
       .then(res => res.json())
       .then(data => setFamilies(data.families || []))
       .catch(err => console.error('Failed to load families:', err));
@@ -44,12 +41,7 @@ export default function Search() {
     setError(null);
 
     try {
-      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-      
-      const response = await fetch(
-        `${apiBase}/api/search?q=${encodeURIComponent(searchQuery)}`
-      );
+      const response = await apiFetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
       
       if (!response.ok) {
         throw new Error('Search failed');
@@ -72,12 +64,7 @@ export default function Search() {
     setError(null);
 
     try {
-      const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-      const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-      
-      const response = await fetch(
-        `${apiBase}/api/search/by-family?family=${encodeURIComponent(family)}`
-      );
+      const response = await apiFetch(`/api/search/by-family?family=${encodeURIComponent(family)}`);
       
       if (!response.ok) {
         throw new Error('Filter failed');

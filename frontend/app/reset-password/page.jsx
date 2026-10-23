@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { apiFetch } from '../../utils/apiClient';
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -35,8 +36,8 @@ function ResetPasswordForm() {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        'https://realdiag-backend.onrender.com/users/reset-password',
+      const response = await apiFetch(
+        '/users/reset-password',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

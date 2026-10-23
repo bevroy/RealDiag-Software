@@ -3,6 +3,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { storeAuthData } from '../../utils/clientAuth'
+import { apiFetch } from '../../utils/apiClient'
 
 export default function VerifyEmailPage() {
   return (
@@ -43,11 +44,10 @@ function VerifyEmail() {
 
   const verifyEmail = async (token) => {
     try {
-      const response = await fetch(
-        `https://realdiag-backend.onrender.com/users/verify-email?token=${token}`,
+      const response = await apiFetch(
+        `/users/verify-email?token=${token}`,
         {
           method: 'POST',
-          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -58,7 +58,7 @@ function VerifyEmail() {
 
       if (response.ok) {
         setStatus('success')
-        setMessage(data.message || 'Email verified successfully!')
+        setMessage([data.message || 'Email verified successfully!', data.email_warning].filter(Boolean).join(' '))
         setUser(data.user)
         
         // Store user data
@@ -68,7 +68,7 @@ function VerifyEmail() {
 
         // Redirect to main site after 3 seconds
         setTimeout(() => {
-          window.location.href = 'https://realdiag.netlify.app/'
+          window.location.href = '/'
         }, 3000)
       } else {
         setStatus('error')

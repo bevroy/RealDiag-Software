@@ -3,6 +3,7 @@ import Head from "next/head";
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice } from '../components/ClinicalReview';
+import { apiFetch } from '../utils/apiClient';
 
 export default function SourcesPage() {
   const [loading, setLoading] = useState(true);
@@ -14,12 +15,9 @@ export default function SourcesPage() {
   useEffect(() => {
     async function loadSources() {
       try {
-        const runtimeConfig = (typeof window !== 'undefined' && window.__RUNTIME_CONFIG) ? window.__RUNTIME_CONFIG : null;
-        const apiBase = runtimeConfig?.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE || 'https://api.realdiag.com';
-        
         // Fetch the total tree count from backend
         try {
-          const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+          const treesRes = await apiFetch(`/diagnostic/trees`);
           if (treesRes.ok) {
             const treesData = await treesRes.json();
             if (treesData.trees) {
@@ -65,7 +63,7 @@ export default function SourcesPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
             
-            const res = await fetch(`${apiBase}/reference/${family}`, {
+            const res = await apiFetch(`/reference/${family}`, {
               signal: controller.signal
             });
             clearTimeout(timeoutId);

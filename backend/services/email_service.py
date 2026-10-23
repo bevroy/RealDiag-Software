@@ -23,6 +23,22 @@ SMTP_USER = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
 FROM_EMAIL = os.getenv("FROM_EMAIL", "noreply@realdiag.org")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "https://realdiag.netlify.app")
+# Without a timeout a blocked SMTP port (Render free web services block 25, 465
+# and 587) hangs the request until the worker is killed.
+SMTP_TIMEOUT_SECONDS = float(os.getenv("SMTP_TIMEOUT_SECONDS", "15"))
+
+
+def email_configured() -> bool:
+    """True when SMTP credentials are set. Callers report False to the user."""
+    return bool(SMTP_USER and SMTP_PASSWORD)
+
+
+def _deliver(msg) -> None:
+    """Send one message; raises on any failure so the caller can report it."""
+    with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=SMTP_TIMEOUT_SECONDS) as server:
+        server.starttls()
+        server.login(SMTP_USER, SMTP_PASSWORD)
+        server.send_message(msg)
 
 # Token expiration (24 hours)
 TOKEN_EXPIRATION_HOURS = 24
@@ -79,9 +95,8 @@ def send_verification_email(email: str, token: str, full_name: Optional[str] = N
     Returns:
         True if email sent successfully, False otherwise
     """
-    if not SMTP_USER or not SMTP_PASSWORD:
+    if not email_configured():
         logger.warning("Email not configured - skipping verification email")
-        logger.info(f"Verification link: {FRONTEND_URL}/verify-email?token={token}")
         return False
     
     try:
@@ -160,10 +175,7 @@ The RealDiag Team
         msg.attach(part2)
         
         # Send email
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.send_message(msg)
+        _deliver(msg)
         
         logger.info(f"Verification email sent to {email}")
         return True
@@ -184,7 +196,7 @@ def send_welcome_email(email: str, full_name: Optional[str] = None) -> bool:
     Returns:
         True if email sent successfully, False otherwise
     """
-    if not SMTP_USER or not SMTP_PASSWORD:
+    if not email_configured():
         logger.warning("Email not configured - skipping welcome email")
         return False
     
@@ -278,10 +290,7 @@ The RealDiag Team
         msg.attach(part2)
         
         # Send email
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.send_message(msg)
+        _deliver(msg)
         
         logger.info(f"Welcome email sent to {email}")
         return True
@@ -303,9 +312,8 @@ def send_password_reset_email(email: str, token: str, full_name: Optional[str] =
     Returns:
         True if email sent successfully, False otherwise
     """
-    if not SMTP_USER or not SMTP_PASSWORD:
+    if not email_configured():
         logger.warning("Email not configured - skipping password reset email")
-        logger.info(f"Password reset link: {FRONTEND_URL}/reset-password?token={token}")
         return False
 
     try:
@@ -380,10 +388,7 @@ The RealDiag Team
         msg.attach(part1)
         msg.attach(part2)
 
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.send_message(msg)
+        _deliver(msg)
 
         logger.info(f"Password reset email sent to {email}")
         return True

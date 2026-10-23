@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import { apiFetch } from '../utils/apiClient';
 
 export default function SourcesDebugPage() {
   const [logs, setLogs] = useState([]);
@@ -26,7 +27,7 @@ export default function SourcesDebugPage() {
         // Fetch the total tree count from backend
         try {
           addLog('Fetching tree count from /diagnostic/trees...');
-          const treesRes = await fetch(`${apiBase}/diagnostic/trees`);
+          const treesRes = await apiFetch(`/diagnostic/trees`);
           addLog(`Tree count response status: ${treesRes.status}`);
           
           if (treesRes.ok) {
@@ -82,7 +83,7 @@ export default function SourcesDebugPage() {
               addLog(`${family} - TIMEOUT after 10s`, 'warn');
             }, 10000);
             
-            const res = await fetch(`${apiBase}/reference/${family}`, {
+            const res = await apiFetch(`/reference/${family}`, {
               signal: controller.signal
             });
             clearTimeout(timeoutId);

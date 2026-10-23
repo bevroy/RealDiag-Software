@@ -11,6 +11,7 @@ Authenticated users have unlimited searches.
 
 from datetime import datetime, timedelta
 from typing import Dict, Optional, Tuple
+from backend.services.client_ip import client_ip
 from fastapi import Request, HTTPException
 import logging
 
@@ -29,25 +30,10 @@ last_cleanup: Optional[datetime] = None
 
 def get_client_ip(request: Request) -> str:
     """
-    Get client IP address from request.
-    Handles proxies and load balancers.
+    Real client IP (see client_ip.py). The left-most X-Forwarded-For entry used
+    here before is client-controlled, so anyone could reset their free-trial count.
     """
-    # Check X-Forwarded-For header (for proxies/load balancers)
-    forwarded = request.headers.get("X-Forwarded-For")
-    if forwarded:
-        # X-Forwarded-For can contain multiple IPs, take the first one
-        return forwarded.split(",")[0].strip()
-    
-    # Check X-Real-IP header (nginx)
-    real_ip = request.headers.get("X-Real-IP")
-    if real_ip:
-        return real_ip.strip()
-    
-    # Fall back to direct client IP
-    if request.client:
-        return request.client.host
-    
-    return "unknown"
+    return client_ip(request)
 
 
 def cleanup_old_entries():

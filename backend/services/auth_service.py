@@ -332,19 +332,25 @@ async def get_current_user(
     user_id = payload.get("sub")
     
     # Try database first, fall back to in-memory
+    found = None
     if DATABASE_AVAILABLE:
         user = get_user_by_id(user_id)
         if user:
-            return user.to_dict()
+            found = user.to_dict()
     
     # Fallback to in-memory storage
-    if user_id in users_db:
-        return users_db[user_id]
-    
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail="User not found"
-    )
+    if found is None and user_id in users_db:
+        found = users_db[user_id]
+
+    if found is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    # A deactivated account loses access on its next request, not only at next sign-in.
+    if not _is_active(found):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=DEACTIVATED_DETAIL)
+    return found
 
 async def get_optional_user(
     request: Request,
@@ -373,13 +379,17 @@ async def get_optional_user(
         user_id = payload.get("sub")
         
         # Try database first
+        found = None
         if DATABASE_AVAILABLE:
             user = get_user_by_id(user_id)
             if user:
-                return user.to_dict()
+                found = user.to_dict()
         
         # Fallback to in-memory
-        return users_db.get(user_id)
+        if found is None:
+            found = users_db.get(user_id)
+        # A deactivated account is treated as signed out.
+        return found if found is not None and _is_active(found) else None
     except:
         return None
 
@@ -498,9 +508,10 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             db.add(user)
             db.flush()  # Get user.id without committing
             
-            # Send verification email for employees
+            # Send verification email for employees; report a failure to the caller
+            verification_email_sent = None
             if is_employee_flag and verification_token:
-                send_verification_email(user_data.email, verification_token, user_data.full_name)
+                verification_email_sent = send_verification_email(user_data.email, verification_token, user_data.full_name)
             
             # Commit the transaction to persist the user
             db.commit()
@@ -509,7 +520,10 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
             # Note: User settings will be stored as part of the User model
             # No separate settings table needed for now
             
-            return user.to_dict()
+            created = user.to_dict()
+            if verification_email_sent is not None:
+                created["verification_email_sent"] = verification_email_sent
+            return created
     
     else:
         # In-memory version (fallback)
@@ -569,8 +583,62 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
         
         return user
 
+# Per-account sign-in lockout. Wrong passwords are limited per account rather
+# than per IP, so a class sharing one network address is not locked out by a
+# few typos, while guessing one account's password is still stopped.
+LOGIN_MAX_FAILED_ATTEMPTS = int(os.getenv("LOGIN_MAX_FAILED_ATTEMPTS", "5"))
+LOGIN_LOCKOUT_MINUTES = int(os.getenv("LOGIN_LOCKOUT_MINUTES", "15"))
+
+DEACTIVATED_DETAIL = "This account has been deactivated. Contact an administrator."
+
+
+def _lockout_error(locked_until: datetime) -> HTTPException:
+    minutes = max(1, int((locked_until - datetime.utcnow()).total_seconds() // 60) + 1)
+    return HTTPException(
+        status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+        detail=(f"Too many incorrect passwords for this account. Try again in {minutes} minute"
+                f"{'s' if minutes != 1 else ''}, or ask an administrator to reset your password."),
+        headers={"Retry-After": str(minutes * 60)},
+    )
+
+
+def _record_failed_login(account) -> Optional[datetime]:
+    """Count a wrong password on a User row or in-memory dict; return locked_until if now locked."""
+    get = (lambda k, d=None: account.get(k, d)) if isinstance(account, dict) else (lambda k, d=None: getattr(account, k, d))
+    put = account.__setitem__ if isinstance(account, dict) else (lambda k, v: setattr(account, k, v))
+    count = (get("failed_login_count") or 0) + 1
+    if count >= LOGIN_MAX_FAILED_ATTEMPTS:
+        locked_until = datetime.utcnow() + timedelta(minutes=LOGIN_LOCKOUT_MINUTES)
+        put("failed_login_count", 0)
+        put("locked_until", locked_until)
+        return locked_until
+    put("failed_login_count", count)
+    return None
+
+
+def _clear_failed_logins(account) -> None:
+    put = account.__setitem__ if isinstance(account, dict) else (lambda k, v: setattr(account, k, v))
+    put("failed_login_count", 0)
+    put("locked_until", None)
+
+
+def _locked_until(account) -> Optional[datetime]:
+    value = account.get("locked_until") if isinstance(account, dict) else getattr(account, "locked_until", None)
+    return value if value and value > datetime.utcnow() else None
+
+
+def _is_active(account) -> bool:
+    value = account.get("is_active", True) if isinstance(account, dict) else getattr(account, "is_active", True)
+    return value is not False
+
+
 def authenticate_user(email: str, password: str) -> Dict[str, Any]:
-    """Authenticate user and return user data."""
+    """Authenticate user and return user data.
+
+    Raises 429 while the account is locked after LOGIN_MAX_FAILED_ATTEMPTS wrong
+    passwords, and 403 for a deactivated account (checked only after the
+    password is verified, so it is not revealed to someone guessing).
+    """
     if not _is_allowed_login_email(email):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -588,20 +656,32 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
                         status_code=status.HTTP_404_NOT_FOUND,
                         detail="User not found"
                     )
+
+                if (locked_until := _locked_until(user)):
+                    raise _lockout_error(locked_until)
                 
                 is_valid, was_legacy = verify_password_with_upgrade_flag(password, user.hashed_password)
                 if not is_valid:
+                    locked_until = _record_failed_login(user)
+                    # Commit before raising: get_db_session rolls back on exceptions.
+                    db.commit()
+                    if locked_until:
+                        raise _lockout_error(locked_until)
                     raise HTTPException(
                         status_code=status.HTTP_401_UNAUTHORIZED,
                         detail="Incorrect password"
                     )
 
+                if not _is_active(user):
+                    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=DEACTIVATED_DETAIL)
+
                 if was_legacy:
                     user.hashed_password = hash_password(password)
                     logger.info(f"Upgraded password hash to bcrypt for user {user.user_id}")
                 
-                # Update last login
+                # Update last login and clear failed attempts
                 try:
+                    _clear_failed_logins(user)
                     user.last_login = datetime.utcnow()
                     db.commit()
                 except:
@@ -622,14 +702,22 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
         # In-memory version (fallback)
         for user in users_db.values():
             if user["email"] == email:
+                if (locked_until := _locked_until(user)):
+                    raise _lockout_error(locked_until)
                 is_valid, was_legacy = verify_password_with_upgrade_flag(password, user["password_hash"])
                 if is_valid:
+                    if not _is_active(user):
+                        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=DEACTIVATED_DETAIL)
                     if was_legacy:
                         user["password_hash"] = hash_password(password)
+                    _clear_failed_logins(user)
                     # Update last login
                     user["last_login"] = datetime.utcnow().isoformat()
                     return user
                 else:
+                    locked_until = _record_failed_login(user)
+                    if locked_until:
+                        raise _lockout_error(locked_until)
                     raise HTTPException(
                         status_code=status.HTTP_401_UNAUTHORIZED,
                         detail="Incorrect password"

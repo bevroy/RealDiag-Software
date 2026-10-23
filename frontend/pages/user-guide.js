@@ -85,6 +85,7 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>4. Diagnostic Evaluation with History</h2>
           <ul style={styles.list}>
             <li>Use a specific diagnostic tree when a focused evaluation is needed.</li>
+            <li><strong>Step-by-Step Decision Trees (menu):</strong> pick one of the trees with branching decision steps (15 for now: Fever Workup and Psychosis are temporarily unavailable pending content review, and the page says so). Each step shows only the symptoms, exam findings, red flags and other findings that tree&apos;s branches check, in the tree&apos;s own words; leave anything you did not assess unticked or &quot;Not assessed&quot;. The result shows the path taken, the tests, diagnoses and referrals listed along it, and why each branch was chosen. Every step carries the tree&apos;s review status and the clinical review notice.</li>
             <li>Include encounter symptoms, exam/red-flag findings, and vitals.</li>
             <li>If EHR-connected, include patient ID to pull historical context.</li>
             <li>Review medication-history evidence signals and blocked recommendations.</li>
@@ -122,6 +123,11 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>7. Troubleshooting</h2>
           <ul style={styles.list}>
             <li>No results: broaden symptom wording and include onset/context clues.</li>
+            <li>Decision tree walk stops early: the result says why. Either none of the next steps matched your answers (go back and add findings), or the tree&apos;s next step is missing from its content (a content issue to report, not an input error).</li>
+            <li>A page says &quot;Not authenticated&quot; or shows no tree count: sign in again from Account; every page now sends your sign-in with each request.</li>
+            <li>&quot;Too many incorrect passwords for this account&quot;: after 5 wrong passwords the account is paused for 15 minutes. Other people on the same network are not affected. Wait, or ask an administrator to reset your password.</li>
+            <li>&quot;Password reset emails can&apos;t be sent right now&quot; or &quot;We couldn&apos;t send the email&quot;: the reset email did not go out, so don&apos;t wait for it. Ask an administrator to reset your password.</li>
+            <li>&quot;This account has been deactivated&quot;: an administrator has turned off the account; contact them to restore it.</li>
             <li>Unexpected ranking: verify vitals and age/sex filters are correct.</li>
             <li>Missing EHR data: confirm integration token and patient identifier mapping.</li>
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
@@ -136,6 +142,7 @@ export default function UserGuidePage() {
             <li>Approved clinical domains can be promoted to provider-level access without relying on stale cached roles.</li>
             <li>The navigation now rechecks backend session state so logged-in users should see the full provider feature set after refresh.</li>
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
+            <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
         </section>

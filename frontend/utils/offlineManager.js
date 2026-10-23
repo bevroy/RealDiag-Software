@@ -4,6 +4,8 @@
  * NOW WITH ENCRYPTION: All sensitive data encrypted using Web Crypto API
  */
 
+import { apiFetch } from './apiClient';
+
 import { 
   encryptData, 
   decryptData, 
@@ -280,7 +282,7 @@ export async function deleteFavorite(favoriteId) {
 export async function downloadAllRules(apiBase, onProgress) {
   try {
     // Get list of all available rules
-    const response = await fetch(`${apiBase}/rules/list`);
+    const response = await apiFetch(`/rules/list`);
     if (!response.ok) throw new Error('Failed to fetch rules list');
     
     const rulesList = await response.json();
@@ -290,7 +292,7 @@ export async function downloadAllRules(apiBase, onProgress) {
     // Download each rule
     for (const ruleInfo of rulesList) {
       try {
-        const ruleResponse = await fetch(`${apiBase}/rules/${ruleInfo.id}`);
+        const ruleResponse = await apiFetch(`/rules/${ruleInfo.id}`);
         if (ruleResponse.ok) {
           const rule = await ruleResponse.json();
           await saveRule(rule);

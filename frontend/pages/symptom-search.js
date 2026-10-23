@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { calculateLikelihood, getConfidenceLevel, getConfidenceColor } from '../utils/decisionSupport';
 import { isAuthenticated, getCurrentUser, authenticatedFetch } from '../utils/auth';
+import { apiFetch } from '../utils/apiClient';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
@@ -181,7 +182,7 @@ export default function SymptomSearch() {
       } else {
         // If no localStorage, fetch from API
         console.log('⚠️ Symptom-search: No localStorage, fetching from API...');
-        fetch(`${apiBase}/users/me`, {
+        apiFetch(`/users/me`, {
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' }
         })
@@ -811,7 +812,7 @@ export default function SymptomSearch() {
     if (homeopathyData[index]) return; // Already fetched
     
     try {
-      const response = await fetch(`${apiBase}/homeopathy/suggest`, {
+      const response = await apiFetch(`/homeopathy/suggest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ condition: diagnosis })

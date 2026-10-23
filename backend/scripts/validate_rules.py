@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from services.lab_units import ANALYTES, analyte_for, canonical_unit  # noqa: E402
 from services.tree_schema import (  # noqa: E402
     HOMEOPATHY_VALIDATION_STATEMENT,
+    missing_branch_targets as branch_target_problems,
     node_format,
     node_list,
     REQUIRED_FIELDS as REQUIRED_TREE_FIELDS,
@@ -36,6 +37,21 @@ from services.tree_schema import (  # noqa: E402
     STATUS_VALUES,
     URGENCY_VALUES,
 )
+
+# Trees allowed, for now, to keep a branch that points to a missing node. Their
+# content is pending clinical review (docs/CLINICAL_CONTENT_REVIEW.md, section 13)
+# and /diagnose does not offer them. Do not add trees here: fix the tree instead.
+# backend/tests/test_branch_targets.py fails if this list grows, and the
+# validator fails once a listed problem is fixed so the entry is removed.
+KNOWN_MISSING_BRANCH_TARGETS = {
+    "ID-FEVER": [
+        "node 'initial_assessment' next.node points to 'localized_infection', which is not a node in this tree",
+    ],
+    "PSYCH-PSYCHOSIS": [
+        "node 'safety_assessment' next.default points to 'psychotic_disorder_assessment', "
+        "which is not a node in this tree",
+    ],
+}
 
 # Configuration
 RULES_DIR = Path(__file__).parent.parent / "rules"
@@ -325,6 +341,17 @@ def validate_decision_tree(file_path: Path, result: ValidationResult):
             result.add_error(file_path.name, "Tree has nodes but no entry_point")
         elif entry not in node_ids:
             result.add_error(file_path.name, f"entry_point '{entry}' does not match any node id")
+
+    known = KNOWN_MISSING_BRANCH_TARGETS.get(file_path.stem, [])
+    problems = branch_target_problems(data)
+    for problem in problems:
+        if problem in known:
+            result.add_warning(file_path.name, f"{problem} (known exception, pending clinical review)")
+        else:
+            result.add_error(file_path.name, problem)
+    for problem in known:
+        if problem not in problems:
+            result.add_error(file_path.name, f"Fixed: remove this entry from KNOWN_MISSING_BRANCH_TARGETS: {problem}")
 
     fmt = node_format(data)
     result.node_formats[fmt] = result.node_formats.get(fmt, []) + [file_path.stem]

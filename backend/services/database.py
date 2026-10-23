@@ -206,6 +206,11 @@ if DATABASE_AVAILABLE and Base is not None:
         mfa_backup_codes = Column(Text, nullable=True)
         mfa_enrolled_at = Column(DateTime, nullable=True)
 
+        # Per-account sign-in lockout (auth_service.authenticate_user). Stored on
+        # the row so it holds across gunicorn workers and restarts.
+        failed_login_count = Column(Integer, default=0)
+        locked_until = Column(DateTime, nullable=True)
+
         # Relationships
         sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
         search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
@@ -439,6 +444,8 @@ def _ensure_user_columns():
             "mfa_secret": "VARCHAR(255)",
             "mfa_backup_codes": "TEXT",
             "mfa_enrolled_at": "TIMESTAMP",
+            "failed_login_count": "INTEGER DEFAULT 0",
+            "locked_until": "TIMESTAMP",
         }
         with engine.begin() as conn:
             for name, col_type in wanted.items():
