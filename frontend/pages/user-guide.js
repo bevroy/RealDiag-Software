@@ -85,6 +85,7 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>4. Diagnostic Evaluation with History</h2>
           <ul style={styles.list}>
             <li>Use a specific diagnostic tree when a focused evaluation is needed.</li>
+            <li><strong>Step-by-Step Decision Trees (menu):</strong> pick one of the 17 trees with branching decision steps. Each step shows only the symptoms, exam findings, red flags and other findings that tree&apos;s branches check, in the tree&apos;s own words; leave anything you did not assess unticked or &quot;Not assessed&quot;. The result shows the path taken, the tests, diagnoses and referrals listed along it, and why each branch was chosen. Every step carries the tree&apos;s review status and the clinical review notice.</li>
             <li>Include encounter symptoms, exam/red-flag findings, and vitals.</li>
             <li>If EHR-connected, include patient ID to pull historical context.</li>
             <li>Review medication-history evidence signals and blocked recommendations.</li>
@@ -122,6 +123,8 @@ export default function UserGuidePage() {
           <h2 style={styles.h2}>7. Troubleshooting</h2>
           <ul style={styles.list}>
             <li>No results: broaden symptom wording and include onset/context clues.</li>
+            <li>Decision tree walk stops early: the result says why. Either none of the next steps matched your answers (go back and add findings), or the tree&apos;s next step is missing from its content (a content issue to report, not an input error).</li>
+            <li>A page says &quot;Not authenticated&quot; or shows no tree count: sign in again from Account; every page now sends your sign-in with each request.</li>
             <li>Unexpected ranking: verify vitals and age/sex filters are correct.</li>
             <li>Missing EHR data: confirm integration token and patient identifier mapping.</li>
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
