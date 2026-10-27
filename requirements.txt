@@ -11,6 +11,8 @@ jinja2
 pydantic
 pydantic[email]
 httpx
+# CA bundle used by httpx/requests; 2026.10.19 removes the compromised eMudhra roots
+certifi>=2026.10.19
 reportlab
 pyjwt
 python-multipart

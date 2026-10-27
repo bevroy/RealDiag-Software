@@ -10,9 +10,10 @@ WORKDIR /app
 # Copy requirements first for better layer caching
 COPY requirements.txt /app/requirements.txt
 
-# Install dependencies
+# Install dependencies. Installing ca-certificates after apt-get update upgrades
+# the system CA store (eMudhra CA compromise, Oct 2026: Render advisory).
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends curl \
+	&& apt-get install -y --no-install-recommends curl ca-certificates \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& pip install --no-cache-dir -r requirements.txt \
 	&& pip cache purge
