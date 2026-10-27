@@ -21,7 +21,7 @@ services:
     env: docker
     region: ohio
     branch: main
-    plan: free
+    plan: starter  # Starter in the dashboard; must match it, Blueprint syncs apply this
     repo: https://github.com/bevroy/RealDiag-Software
     dockerfilePath: backend/Dockerfile
     # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
