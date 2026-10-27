@@ -1,9 +1,11 @@
-# Render infrastructure-as-code manifest to deploy the backend service.
-# See: https://render.com/docs/deploy-anything#render-yaml
+# Render Blueprint for RealDiag production. See: https://render.com/docs/blueprint-spec
 #
-# This describes a Docker-backed web service that builds from the repo's
-# `backend/Dockerfile` and runs the FastAPI app. Connect your GitHub repo to
-# Render and the `render.yaml` will allow Render to create/update the service.
+# This Blueprint manages only the production database. The production backend
+# (realdiag-backend, serving api.realdiag.com) was created in the Render
+# dashboard and is not linked to this Blueprint, so it must not be listed here:
+# a Blueprint sync creates a new, separate service for any service it does not
+# already manage (it did this once, as realdiag-backend-s2m5). Configure the
+# backend, including its environment variables, in the dashboard.
 
 databases:
   - name: realdiag-database
@@ -12,43 +14,3 @@ databases:
     plan: 0.1c-256mb  # Basic-256mb in the dashboard ($6/month); must match it, Blueprint syncs apply this
     region: virginia
     ipAllowList: []  # Only accessible from Render services
-
-services:
-
-  # Backend Web Service
-  - type: web
-    name: realdiag-backend
-    env: docker
-    region: ohio
-    branch: main
-    plan: starter  # Starter in the dashboard; must match it, Blueprint syncs apply this
-    repo: https://github.com/bevroy/RealDiag-Software
-    dockerfilePath: backend/Dockerfile
-    # The Dockerfile CMD will be used for startup (gunicorn with 2 workers)
-    healthCheckPath: /health
-    autoDeploy: true
-    envVars:
-      - key: PORT
-        value: 8000
-      - key: TZ
-        value: America/New_York
-      - key: ENVIRONMENT
-        value: production
-      - key: LOG_LEVEL
-        value: INFO
-      - key: DATABASE_URL
-        fromDatabase:
-          name: realdiag-database
-          property: connectionString
-      # Redis URL - Add manually in Render dashboard if using external Redis
-      # The app will use in-memory caching if REDIS_URL is not set
-      # - key: REDIS_URL
-      #   value: redis://your-redis-url:6379
-      - key: WEB_CONCURRENCY
-        value: 4  # Number of Gunicorn workers (auto-calculated if not set)
-      - key: FHIR_BASE_URL
-        value: http://localhost:8080/fhir  # UPDATE THIS with your EMR FHIR URL
-      - key: FHIR_AUTH_TOKEN
-        sync: false  # Set this securely in Render dashboard
-      - key: PREVIEW_ORIGIN_REGEX
-        value: ^https?://(?:localhost(?::\\d+)?|.*\\.netlify\\.app|www\\.realdiag\\.com)$
