@@ -11,7 +11,7 @@
 databases:
   # Test Database (separate from production)
   - name: realdiag-test-database
-    plan: free
+    plan: 0.1c-256mb  # Basic-256mb in the dashboard ($6/month)
     region: virginia
     databaseName: realdiag_test
     user: realdiag_test_user
@@ -24,7 +24,7 @@ services:
     env: docker
     region: virginia
     branch: main
-    plan: free
+    plan: starter  # Starter in the dashboard
     repo: https://github.com/bevroy/RealDiag-Software
     dockerfilePath: backend/Dockerfile
     healthCheckPath: /health
