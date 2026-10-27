@@ -9,7 +9,7 @@ databases:
   - name: realdiag-database
     databaseName: realdiag_prod
     user: realdiag_user
-    plan: free  # 90-day free trial, then expires (change to 'starter' for $7/month paid plan)
+    plan: 0.1c-256mb  # Basic-256mb in the dashboard ($6/month); must match it, Blueprint syncs apply this
     region: virginia
     ipAllowList: []  # Only accessible from Render services
 

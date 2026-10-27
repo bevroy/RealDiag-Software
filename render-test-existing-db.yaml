@@ -11,7 +11,7 @@
 databases:
   # Test Database (separate from production)
   - name: realdiag-test-database
-    plan: free
+    plan: 0.1c-256mb  # Basic-256mb in the dashboard ($6/month)
     region: virginia
     databaseName: realdiag_test
     user: realdiag_test_user
