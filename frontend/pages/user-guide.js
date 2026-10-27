@@ -143,6 +143,7 @@ export default function UserGuidePage() {
             <li>The navigation now rechecks backend session state so logged-in users should see the full provider feature set after refresh.</li>
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
