@@ -67,6 +67,7 @@ export default function UserGuidePage() {
             <li>If connected to EHR/EMR, verify patient context and encounter selection.</li>
             <li>Collect presenting symptoms, onset timeline, and key red flags.</li>
             <li>Enter vitals when available for improved relevance and safety checks.</li>
+            <li>Chart narrative (Encounter Assessment, October 2026): a readable summary built by fixed templates from the chart and from text found in its notes; each sentence shows its source (record type, document, section and date). It restates what the chart says and is not a clinical interpretation.</li>
           </ul>
         </section>
 
