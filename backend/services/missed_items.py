@@ -27,6 +27,7 @@ import yaml
 
 from backend.services.clinical_review import SCREENING_RULES_PATH, review_fields
 from backend.services.fhir_client import NOT_AVAILABLE, RESOURCE_LABELS, RETRIEVED
+from backend.services.medication_matching import matching_medications, medication_name
 from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine, known_condition, suppressing_condition
 
 # How far back the encounter assessment pulls screening evidence
@@ -109,26 +110,7 @@ def _not_retrieved_text(resource: str, outcome: str) -> str:
 
 
 def medication_names(medications: Iterable[Dict[str, Any]]) -> List[str]:
-    names = []
-    for med in medications or []:
-        concept = med.get("medicationCodeableConcept") or {}
-        name = concept.get("text") or next((c.get("display") for c in concept.get("coding") or [] if c.get("display")), None)
-        name = name or (med.get("medicationReference") or {}).get("display")
-        if name:
-            names.append(name)
-    return names
-
-
-def _medication_pattern(entry: str) -> re.Pattern:
-    entry = entry.strip().lower()
-    if entry.startswith("*"):
-        return re.compile(r"\b[a-z]+" + re.escape(entry[1:]) + r"\b")
-    return re.compile(r"\b" + re.escape(entry) + r"\b")
-
-
-def matching_medications(names: List[str], related: List[str]) -> List[str]:
-    patterns = [_medication_pattern(r) for r in related]
-    return [n for n in names if any(p.search(n.lower()) for p in patterns)]
+    return [n for n in (medication_name(m) for m in medications or []) if n]
 
 
 def _condition_codes(conditions: Iterable[Dict[str, Any]]) -> List[str]:
@@ -239,7 +221,7 @@ def diagnosis_without_support(engine: SmartDiagnosticEngine, evaluations: Dict[s
             continue
         if evaluation is not None and (evaluation.criteria_met or evaluation.finding):
             continue
-        meds = matching_medications(on_file, related)
+        meds = matching_medications(patient_data.medications, related)
         if meds:
             continue
         lookback = max(int(i.get("lookback_days") or 0) for i in criteria["items"]) or VITAL_LOOKBACK_DAYS

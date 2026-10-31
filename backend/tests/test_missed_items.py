@@ -217,9 +217,9 @@ def test_lab_failure_lists_condition_as_not_checked(engine):
 
 
 def test_medication_patterns():
-    assert mi.matching_medications(["Lisinopril 10 mg", "Metoprolol tartrate", "Aspirin"], ["*pril", "*olol"]) == [
-        "Lisinopril 10 mg", "Metoprolol tartrate"]
-    assert mi.matching_medications(["Prilosec"], ["*pril"]) == []
+    meds = [med("Lisinopril 10 mg"), med("Metoprolol tartrate"), med("Aspirin")]
+    assert mi.matching_medications(meds, ["*pril", "*olol"]) == ["Lisinopril 10 mg", "Metoprolol tartrate"]
+    assert mi.matching_medications([med("Prilosec")], ["*pril"]) == []
     assert mi.medication_names([med("A"), {"medicationReference": {"display": "B"}},
                                 {"medicationCodeableConcept": {"coding": [{"display": "C"}]}}]) == ["A", "B", "C"]
 
