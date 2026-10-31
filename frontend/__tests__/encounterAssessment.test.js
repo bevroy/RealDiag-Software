@@ -57,3 +57,12 @@ test('evidence labels', () => {
   expect(evidenceLabel('criteria')).toBe('Chart criteria')
   expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
 })
+
+describe('chart-derived evidence labels', () => {
+  const { evidenceLabel } = require('../utils/encounterAssessment')
+  test('matches supported only by chart terms are labelled as chart findings', () => {
+    expect(evidenceLabel('chart findings')).toBe('Matches chart findings (vital signs, H&P)')
+    expect(evidenceLabel('chart findings and criteria')).toBe('Matches chart findings (vital signs, H&P) and chart criteria')
+    expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
+  })
+})

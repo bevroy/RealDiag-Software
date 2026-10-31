@@ -277,7 +277,7 @@ def test_ehr_visit_reason_used_and_shown(engine, no_ai):
     result, _, _ = run(engine, patient(), None, fhir=fhir)
     assert result["complaint"] == {"text": "Chest pressure", "source": "ehr_visit_reason",
                                    "source_label": "EHR visit reason", "phrases_used": ["Chest pressure"],
-                                   "negated_terms": []}
+                                   "chart_terms": [], "negated_terms": []}
     assert any(d["tree_id"] == ACS for d in result["diagnoses"]["items"])
 
 
@@ -318,6 +318,35 @@ def test_abnormal_count_omitted_when_none_in_window(engine, no_ai):
                     effective_date=NOW - timedelta(days=300))
     text = run(engine, patient(labs=[old]), "chest pain")[0]["summary"]["summary_text"]
     assert "flagged abnormal" not in text
+
+
+def test_chart_terms_join_the_ranking_with_their_sources(engine, no_ai):
+    # Fever and tachycardia from the latest vitals, with no typed complaint.
+    data = patient(vitals=[VitalSign(code="8310-5", display="Temp", value=38.9, unit="Cel",
+                                     effective_date=NOW - timedelta(hours=2)),
+                           VitalSign(code="8867-4", display="HR", value=118, unit="/min",
+                                     effective_date=NOW - timedelta(hours=2)),
+                           VitalSign(code="8867-4", display="HR", value=80, unit="/min",
+                                     effective_date=NOW - timedelta(days=3))])
+    result = run(engine, data, None)[0]
+    terms = result["complaint"]["chart_terms"]
+    assert [t["term"] for t in terms] == ["tachycardia", "fever"]
+    assert terms[0]["source"] == "Vital signs: Heart rate 118 /min"
+    assert terms[1]["source"] == "Vital signs: Body temperature 38.9 Cel"
+    chart_matches = [d for d in result["diagnoses"]["items"] if d["complaint_match"]]
+    assert chart_matches
+    assert all(d["complaint_match"]["inputs"] == ["chart"] and d["evidence"].startswith("chart findings")
+               for d in chart_matches)
+
+
+def test_complaint_and_chart_inputs_are_recorded_per_match(engine, no_ai):
+    data = patient(vitals=[VitalSign(code="8867-4", display="HR", value=135, unit="/min",
+                                     effective_date=NOW - timedelta(hours=1))])
+    items = run(engine, data, "chest pain")[0]["diagnoses"]["items"]
+    inputs = {tuple(d["complaint_match"]["inputs"]) for d in items if d["complaint_match"]}
+    assert ("complaint",) in inputs or ("complaint", "chart") in inputs
+    assert all(d["evidence"] in ("complaint", "chart findings", "criteria", "complaint and criteria",
+                                 "chart findings and criteria") for d in items)
 
 
 def test_summary_section(engine, no_ai):

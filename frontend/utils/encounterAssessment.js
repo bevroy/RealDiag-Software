@@ -16,6 +16,8 @@ const EVIDENCE_LABELS = {
   'complaint and criteria': "Matches today's complaint and chart criteria",
   criteria: 'Chart criteria',
   complaint: "Matches today's complaint",
+  'chart findings and criteria': 'Matches chart findings (vital signs, H&P) and chart criteria',
+  'chart findings': 'Matches chart findings (vital signs, H&P)',
 }
 
 function evidenceLabel(evidence) {

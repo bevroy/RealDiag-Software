@@ -112,6 +112,16 @@ function AssessmentView({ result }) {
         {complaint.negated_terms && complaint.negated_terms.length > 0 && (
           <p style={styles.muted}>Not searched (negated): {complaint.negated_terms.join(', ')}</p>
         )}
+        {complaint.chart_terms && complaint.chart_terms.length > 0 && (
+          <div>
+            <p><strong>Also searched, from the chart:</strong></p>
+            <ul>
+              {complaint.chart_terms.map((t, i) => (
+                <li key={i}>{t.term} <span style={styles.muted}>({t.source}{t.date ? `, ${t.date}` : ''})</span></li>
+              ))}
+            </ul>
+          </div>
+        )}
       </Section>
 
       <Section title="Diagnoses to consider">
