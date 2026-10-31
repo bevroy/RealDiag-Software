@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEncounterAssessment, evidenceLabel } from '../../utils/encounterAssessment';
+import { REVIEW_UNAVAILABLE, reviewedSections, markStyle, factorLines } from '../../utils/treatmentReview';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
@@ -278,13 +279,68 @@ function Guidance({ guidance }) {
   return (
     <>
       <SectionList title="Workup" sections={guidance.workup} />
-      <SectionList title={guidance.treatment.label} sections={guidance.treatment.sections} />
+      <TreatmentList treatment={guidance.treatment} />
       <SectionList title="Referrals" sections={guidance.referrals} />
       <SectionList title="Disposition" sections={guidance.disposition_guidance} />
       {guidance.sources.length > 0 && (
         <Detail title="Sources"><ul>{guidance.sources.map((s, i) => <li key={i}>{s}</li>)}</ul></Detail>
       )}
     </>
+  );
+}
+
+function TreatmentList({ treatment }) {
+  const sections = reviewedSections(treatment);
+  if (!sections.length) return null;
+  const review = treatment.review;
+  return (
+    <Detail title={treatment.label}>
+      {review ? (
+        <>
+          <p style={styles.muted}>{review.notice}</p>
+          {factorLines(review).map((line, i) => <p key={i} style={styles.muted}>Chart: {line}</p>)}
+          {review.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
+        </>
+      ) : <p style={styles.notChecked}>{REVIEW_UNAVAILABLE}</p>}
+      {sections.map((s, i) => (
+        <div key={i}>
+          {s.title && <em>{s.title}</em>}
+          <ul>{s.items.map((line, j) => <TreatmentLine key={j} line={line} />)}</ul>
+        </div>
+      ))}
+    </Detail>
+  );
+}
+
+function TreatmentLine({ line }) {
+  const mark = markStyle(line.mark);
+  const badge = mark && (
+    <span style={{ ...styles.markBadge, color: mark.color, background: mark.background, borderColor: mark.border }}>
+      {mark.label}
+    </span>
+  );
+  if (!line.reasons.length) {
+    return (
+      <li>
+        {badge} {line.text}
+        {line.mark === 'appropriate' && <span style={styles.muted}> (checked: {line.medications.join(', ')})</span>}
+      </li>
+    );
+  }
+  return (
+    <li>
+      <details>
+        <summary style={styles.missedSummary}>{badge} {line.text}</summary>
+        <ul style={styles.missedDetails}>
+          {line.reasons.map((r, k) => (
+            <li key={k}>
+              <strong>{markStyle(r.mark).label}{r.medication ? ` (${r.medication})` : ''}:</strong> {r.reason}{' '}
+              <span style={styles.muted}>Source: {r.source}</span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </li>
   );
 }
 
@@ -380,4 +436,5 @@ const styles = {
   missedItem: { borderBottom: '1px solid #f3f4f6', padding: '4px 0' },
   missedSummary: { cursor: 'pointer', fontSize: 14 },
   missedDetails: { fontSize: 13, padding: '4px 0 4px 16px', color: '#374151' },
+  markBadge: { padding: '1px 8px', borderRadius: 999, fontSize: 12, fontWeight: 600, border: '1px solid', whiteSpace: 'nowrap' },
 };
