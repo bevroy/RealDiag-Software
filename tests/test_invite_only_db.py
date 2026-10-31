@@ -48,6 +48,9 @@ SCRIPT = textwrap.dedent('''
         assert c.post("/users/reset-password", json={"token": token, "new_password": "Other-Pass-2"}).status_code == 400
         with database.get_db_session() as db:
             assert not db.query(database.User).filter_by(email="new@realdiag.com").first().account_setup_pending
+        users = {u["email"]: u for u in c.get("/admin/users", **kw).json()["users"]}
+        assert users["new@realdiag.com"]["last_login"] and users["new@realdiag.com"]["invited_by"]
+        assert users["new@realdiag.com"]["access_by"] == "email domain" and not users["new@realdiag.com"]["account_setup_pending"]
 
         r = c.post("/admin/users/invite", json={"email": "late@realdiag.com"}, **kw)
         token = r.json()["setup_url"].split("token=")[1].split("&")[0]

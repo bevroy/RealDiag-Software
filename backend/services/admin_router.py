@@ -736,6 +736,46 @@ async def admin_remove_allowlist(body: AllowlistEntry, admin: AdminUser = Depend
     return {"success": True, "email": body.email.strip().lower()}
 
 
+def _iso(value):
+    return value.isoformat() if hasattr(value, "isoformat") else value
+
+
+@router.get("/users")
+async def admin_list_users(admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Every account with its access state: role, active or deactivated, MFA,
+    pending invite setup, who invited it, and last sign-in (the last accepted
+    password; with MFA the code is checked after it). Sorted by email. Used to
+    review and remove tester access after validation testing.
+    """
+    from backend.services.access_policy import email_allowlisted, email_domain_approved
+    from backend.services.database import DATABASE_AVAILABLE
+
+    rows = []
+    if DATABASE_AVAILABLE:
+        from backend.services.database import get_db_session, User
+        with get_db_session() as db:
+            for u in db.query(User).all():
+                rows.append({"user_id": u.user_id, "email": u.email, "full_name": u.full_name, "role": u.role,
+                             "is_active": bool(u.is_active), "mfa_enabled": bool(getattr(u, "mfa_enabled", False)),
+                             "account_setup_pending": bool(getattr(u, "account_setup_pending", False)),
+                             "invited_by": getattr(u, "invited_by", None), "invited_at": _iso(getattr(u, "invited_at", None)),
+                             "created_at": _iso(u.created_at), "last_login": _iso(u.last_login)})
+    else:
+        from backend.services.auth_service import users_db
+        for uid, u in users_db.items():
+            rows.append({"user_id": uid, "email": u.get("email"), "full_name": u.get("full_name"), "role": u.get("role"),
+                         "is_active": bool(u.get("is_active", True)), "mfa_enabled": bool(u.get("mfa_enabled")),
+                         "account_setup_pending": bool(u.get("account_setup_pending")),
+                         "invited_by": u.get("invited_by"), "invited_at": _iso(u.get("invited_at")),
+                         "created_at": _iso(u.get("created_at")), "last_login": _iso(u.get("last_login"))})
+    for row in rows:
+        row["access_by"] = ("email domain" if email_domain_approved(row["email"])
+                            else "allowlist" if email_allowlisted(row["email"]) else "none (sign-in refused)")
+    rows.sort(key=lambda r: (r["email"] or "").lower())
+    return {"count": len(rows), "users": rows}
+
+
 @router.post("/users/reset-password")
 async def admin_reset_password(
     body: AdminPasswordResetRequest,
