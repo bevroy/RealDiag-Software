@@ -21,7 +21,7 @@ import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, presentation_texts, snomed_codes
 from backend.services.complaint_matching import match_terms, split_negated
-from backend.services.vitals_terms import temperature_fahrenheit
+from backend.services.vitals_terms import derive_vital_sign_terms, vitals_from_history
 
 # Emergent trees whose presentations or complaint terms match are always
 # returned, whatever their score or the result cap.
@@ -156,47 +156,8 @@ def _append_unique_terms(target: List[str], values: List[str]) -> List[str]:
 
 
 def _derive_terms_from_vitals(vitals: Dict[str, Any]) -> List[str]:
-    """Map raw vitals to clinically meaningful search terms."""
-    if not vitals:
-        return []
-
-    terms: List[str] = []
-
-    heart_rate = vitals.get("heart_rate")
-    if isinstance(heart_rate, (int, float)):
-        if heart_rate >= 100:
-            terms.append("tachycardia")
-        elif heart_rate <= 50:
-            terms.append("bradycardia")
-
-    bp = vitals.get("blood_pressure") or {}
-    systolic = bp.get("systolic") if isinstance(bp, dict) else None
-    diastolic = bp.get("diastolic") if isinstance(bp, dict) else None
-    if isinstance(systolic, (int, float)):
-        if systolic < 90:
-            terms.append("hypotension")
-        elif systolic >= 140 or (isinstance(diastolic, (int, float)) and diastolic >= 90):
-            terms.append("hypertension")
-
-    temperature = temperature_fahrenheit(vitals.get("temperature"), vitals.get("temperature_unit"))
-    if temperature is not None:
-        if temperature >= 100.4:
-            terms.append("fever")
-        elif temperature < 95.0:
-            terms.append("hypothermia")
-
-    respiratory_rate = vitals.get("respiratory_rate")
-    if isinstance(respiratory_rate, (int, float)):
-        if respiratory_rate >= 22:
-            terms.append("tachypnea")
-        elif respiratory_rate <= 10:
-            terms.append("bradypnea")
-
-    oxygen_saturation = vitals.get("oxygen_saturation")
-    if isinstance(oxygen_saturation, (int, float)) and oxygen_saturation < 94:
-        terms.append("hypoxemia")
-
-    return terms
+    """Map raw vitals to search terms (symptoms and red flags, in rule order)."""
+    return derive_vital_sign_terms(vitals)["terms"]
 
 
 def derive_search_terms_from_history(patient_history) -> List[str]:
@@ -216,19 +177,7 @@ def derive_search_terms_from_history(patient_history) -> List[str]:
             history_terms.append(hp.chief_complaint)
 
     if patient_history.vital_signs:
-        latest_vitals = patient_history.vital_signs[0]
-        history_vitals = {
-            "heart_rate": latest_vitals.heart_rate,
-            "blood_pressure": {
-                "systolic": latest_vitals.blood_pressure_systolic,
-                "diastolic": latest_vitals.blood_pressure_diastolic
-            },
-            "temperature": latest_vitals.temperature,
-            "temperature_unit": latest_vitals.temperature_unit,
-            "respiratory_rate": latest_vitals.respiratory_rate,
-            "oxygen_saturation": latest_vitals.oxygen_saturation,
-        }
-        history_terms.extend(_derive_terms_from_vitals(history_vitals))
+        history_terms.extend(_derive_terms_from_vitals(vitals_from_history(patient_history.vital_signs[0])))
 
     return history_terms
 

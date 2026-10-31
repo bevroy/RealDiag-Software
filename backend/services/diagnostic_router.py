@@ -11,7 +11,7 @@ from .auth_service import get_current_user, get_optional_user, add_search_to_his
 from .search_limiter import check_search_limit, get_search_limit_info
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
-from .vitals_terms import temperature_fahrenheit
+from .vitals_terms import derive_vital_sign_terms, vitals_from_history
 from .context_engine import get_context_engine
 from .rbac_service import get_rbac_service, Permission
 
@@ -340,40 +340,9 @@ def _derive_terms_from_history(patient_history) -> Dict[str, List[str]]:
             derived_symptoms.append(hp.chief_complaint)
 
     if patient_history.vital_signs:
-        v = patient_history.vital_signs[0]
-
-        if v.heart_rate is not None:
-            if v.heart_rate >= 130:
-                derived_red_flags.append("severe tachycardia")
-            if v.heart_rate >= 100:
-                derived_symptoms.append("tachycardia")
-            elif v.heart_rate <= 50:
-                derived_symptoms.append("bradycardia")
-
-        if v.blood_pressure_systolic is not None:
-            if v.blood_pressure_systolic < 90:
-                derived_red_flags.append("hypotension")
-            elif v.blood_pressure_systolic >= 140:
-                derived_symptoms.append("hypertension")
-
-        temperature = temperature_fahrenheit(v.temperature, getattr(v, "temperature_unit", None))
-        if temperature is not None:
-            if temperature >= 100.4:
-                derived_symptoms.append("fever")
-            elif temperature < 95.0:
-                derived_red_flags.append("hypothermia")
-
-        if v.respiratory_rate is not None:
-            if v.respiratory_rate >= 22:
-                derived_symptoms.append("tachypnea")
-            elif v.respiratory_rate <= 10:
-                derived_red_flags.append("bradypnea")
-
-        if v.oxygen_saturation is not None:
-            if v.oxygen_saturation < 90:
-                derived_red_flags.append("severe hypoxemia")
-            elif v.oxygen_saturation < 94:
-                derived_symptoms.append("hypoxemia")
+        vital_terms = derive_vital_sign_terms(vitals_from_history(patient_history.vital_signs[0]))
+        derived_symptoms.extend(vital_terms["symptoms"])
+        derived_red_flags.extend(vital_terms["red_flags"])
 
     return {
         "symptoms": derived_symptoms,

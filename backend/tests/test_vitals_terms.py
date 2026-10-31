@@ -55,3 +55,49 @@ def test_fahrenheit_unchanged():
 
 def test_unrecognised_temperature_unit_is_skipped():
     assert _derive_terms_from_vitals({"temperature": 310.0, "temperature_unit": "K"}) == []
+
+
+# --- One shared mapper (vitals_terms.derive_vital_sign_terms) ---------------------------------
+
+from backend.services.vitals_terms import derive_vital_sign_terms  # noqa: E402
+
+
+def test_both_callers_use_the_same_rules():
+    vitals = dict(heart_rate=135, blood_pressure_systolic=150, blood_pressure_diastolic=95,
+                  temperature=38.6, temperature_unit="C", respiratory_rate=24, oxygen_saturation=88)
+    shared = derive_vital_sign_terms({
+        "heart_rate": 135, "blood_pressure": {"systolic": 150, "diastolic": 95},
+        "temperature": 38.6, "temperature_unit": "C", "respiratory_rate": 24, "oxygen_saturation": 88})
+    assert _derive_terms_from_history(history(**vitals)) == {"symptoms": shared["symptoms"],
+                                                             "red_flags": shared["red_flags"]}
+    assert derive_search_terms_from_history(history(**vitals)) == shared["terms"]
+    assert shared["symptoms"] == ["tachycardia", "hypertension", "fever", "tachypnea", "hypoxemia"]
+    assert shared["red_flags"] == ["severe tachycardia", "severe hypoxemia"]
+
+
+@pytest.mark.parametrize("vitals, symptoms, red_flags", [
+    # Diastolic >= 90 counts as hypertension (symptom search did this; tree evaluation did not).
+    ({"blood_pressure": {"systolic": 130, "diastolic": 92}}, ["hypertension"], []),
+    ({"blood_pressure": {"diastolic": 92}}, ["hypertension"], []),
+    ({"blood_pressure": {"systolic": 85, "diastolic": 95}}, [], ["hypotension"]),
+    # Red-flag tiers (tree evaluation had these; symptom search did not).
+    ({"heart_rate": 130}, ["tachycardia"], ["severe tachycardia"]),
+    ({"heart_rate": 129}, ["tachycardia"], []),
+    ({"oxygen_saturation": 89}, ["hypoxemia"], ["severe hypoxemia"]),
+    ({"oxygen_saturation": 90}, ["hypoxemia"], []),
+    ({"oxygen_saturation": 94}, [], []),
+    ({"respiratory_rate": 10}, [], ["bradypnea"]),
+    ({"respiratory_rate": 22}, ["tachypnea"], []),
+    ({"heart_rate": 50}, ["bradycardia"], []),
+    ({}, [], []),
+])
+def test_shared_rules(vitals, symptoms, red_flags):
+    result = derive_vital_sign_terms(vitals)
+    assert result["symptoms"] == symptoms
+    assert result["red_flags"] == red_flags
+
+
+def test_symptom_search_terms_include_red_flags_in_rule_order():
+    assert _derive_terms_from_vitals({"heart_rate": 140, "blood_pressure": {"systolic": 80},
+                                      "oxygen_saturation": 85}) == [
+        "tachycardia", "severe tachycardia", "hypotension", "hypoxemia", "severe hypoxemia"]
