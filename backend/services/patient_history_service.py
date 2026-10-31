@@ -1213,11 +1213,14 @@ class PatientHistoryService:
         diagnostic_tests: List[DiagnosticTest],
         visit_notes: List[VisitNote],
         retrieval_status: Optional[Dict[str, str]] = None,
+        abnormal_window: Optional[str] = None,
     ) -> str:
         """Plain template summary of the history (no language model).
 
         Only states what was retrieved: a data type that could not be
         retrieved is reported as such, never as "none on file".
+        `abnormal_window` (e.g. "in the last 30 days") is appended to the
+        abnormal-result count to say which results it covers.
         """
         status = retrieval_status or {}
 
@@ -1254,7 +1257,8 @@ class PatientHistoryService:
         else:
             abnormal_tests = [t for t in diagnostic_tests if t.abnormal]
             if abnormal_tests:
-                summary_parts.append(f"{len(abnormal_tests)} test results flagged abnormal.")
+                window = f" {abnormal_window}" if abnormal_window else ""
+                summary_parts.append(f"{len(abnormal_tests)} test results flagged abnormal{window}.")
 
         if gap("medications", "Medication list"):
             summary_parts.append(gap("medications", "Medication list"))
