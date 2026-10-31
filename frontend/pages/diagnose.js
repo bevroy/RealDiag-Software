@@ -123,7 +123,8 @@ export default function Diagnose() {
       })
       if (!response.ok) throw new Error(`Evaluation failed (HTTP ${response.status}).`)
       const data = await response.json()
-      setResult({ ...data.tree_result, context: data.context })
+      setResult({ ...data.tree_result, context: data.context, medicationSafety: data.medication_safety || null,
+                  medicationWarnings: data.warnings || [], criticalWarnings: data.critical_warnings || [] })
     } catch (err) {
       setEvaluateError(err.message)
     } finally {
@@ -267,6 +268,24 @@ export default function Diagnose() {
               </section>
             ) : null}
 
+            <section className={styles.section} style={{display: visible('medications') ? 'block' : 'none'}}>
+              <h2>Medications and allergies (optional)</h2>
+              <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
+                Comma-separated or one per line. Medications are checked against each other by RealDiag&apos;s
+                medication safety rules (reference only).
+              </p>
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="diagnose-medications">Current medications</label>
+                  <textarea id="diagnose-medications" rows={3} value={answers.medications} onChange={(e) => setAnswers({...answers, medications: e.target.value})} placeholder="e.g. warfarin 5 mg, aspirin 81 mg" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="diagnose-allergies">Allergies</label>
+                  <textarea id="diagnose-allergies" rows={3} value={answers.allergies} onChange={(e) => setAnswers({...answers, allergies: e.target.value})} placeholder="e.g. penicillin" />
+                </div>
+              </div>
+            </section>
+
             {inputs.symptoms.length > 0 && (
               <section className={styles.section} style={{display: visible('symptoms') ? 'block' : 'none'}}>
                 <h2>Symptoms</h2>
@@ -405,6 +424,19 @@ export default function Diagnose() {
                   <div className={styles.resultSection}>
                     <h4>👨‍⚕️ Referrals listed on this path:</h4>
                     <ul>{itemsWithSource(result, 'referrals').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
+                  </div>
+                )}
+
+                {result.medicationSafety && (
+                  <div className={styles.resultSection}>
+                    <h4>💊 Medication safety (reference only):</h4>
+                    {result.medicationSafety.alerts.length === 0 ? (
+                      <p>No alerts from the rules RealDiag has for the medications entered.</p>
+                    ) : (
+                      <ul>{result.medicationSafety.alerts.map((a, i) => (
+                        <li key={i}><strong>{(a.severity || '').toUpperCase()}</strong> {a.description}{a.clinical_effect ? `: ${a.clinical_effect}` : ''}{a.recommendation ? ` (reference note: ${a.recommendation})` : ''}</li>
+                      ))}</ul>
+                    )}
                   </div>
                 )}
 

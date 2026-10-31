@@ -155,8 +155,10 @@ class MedicationSafetyService:
                 a.medication for a in alerts 
                 if a.severity == InteractionSeverity.CONTRAINDICATED
             ],
+            # Dicts like "alerts" (MedicationAlert objects are not JSON-serializable,
+            # and callers read them as dicts).
             "major_interactions": [
-                a for a in alerts 
+                self._alert_to_dict(a) for a in alerts
                 if a.severity == InteractionSeverity.MAJOR
             ],
             "requires_monitoring": [

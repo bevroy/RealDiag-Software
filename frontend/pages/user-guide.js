@@ -79,6 +79,7 @@ export default function UserGuidePage() {
             <li>Add vital signs: HR, BP, temperature, respiratory rate, and oxygen saturation.</li>
             <li>Run search and review ranked results.</li>
             <li>Open each result to review clinical pearls, tests, referrals, and management notes.</li>
+            <li>Medications (October 2026): on /diagnose, an optional last step takes current medications and allergies, and the result lists any medication safety alerts. When RealDiag is opened from the EHR, Encounter Assessment has a Medication review section built from the chart. Both are reference only.</li>
           </ol>
         </section>
 
@@ -135,6 +136,7 @@ export default function UserGuidePage() {
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
             <li>Backend connection check: the /diagnostic page shows whether the site can reach the RealDiag API (health and version).</li>
             <li>Health Manager or symptom search not showing your account details: sign in again; both pages load your profile from the RealDiag API.</li>
+            <li>Encounter Assessment (October 2026): besides today&apos;s complaint, the latest vital signs and recent H&amp;P chief complaints from the chart are also searched; they are listed under Today&apos;s complaint with their source, and a diagnosis matched only through them is labelled &quot;Matches chart findings&quot;.</li>
           </ul>
         </section>
 
