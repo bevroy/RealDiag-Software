@@ -686,3 +686,36 @@ def test_handoff_queries_use_the_full_timestamp(monkeypatch):
     updates = client.get_patient_updates_since("p1", datetime(2026, 10, 30, 7, 15))
     assert [q.get("date") or q.get("recorded-date") or q.get("authoredon") for q in queries] == ["ge2026-10-30"] * 4
     assert any("has no timezone" in w for w in updates["data_warnings"])
+
+
+# --- Abnormal flag compares in one unit -------------------------------------------
+
+from backend.services.fhir_client import LabResult as _Lab  # noqa: E402
+
+
+def test_abnormal_flag_converts_reference_range_units():
+    # Glucose 5.0 mmol/L (90 mg/dL) against a 70-99 mg/dL range: normal. The raw
+    # comparison 5.0 < 70 used to flag it as low.
+    assert not _Lab(code="2345-7", display="Glucose", value=5.0, unit="mmol/L",
+                    reference_range={"low": 70, "high": 99}, reference_unit="mg/dL").is_abnormal
+    # 7.0 mmol/L (126 mg/dL) is above the 99 mg/dL limit.
+    assert _Lab(code="2345-7", display="Glucose", value=7.0, unit="mmol/L",
+                reference_range={"low": 70, "high": 99}, reference_unit="mg/dL").is_abnormal
+    # Hemoglobin 130 g/L (13.0 g/dL) against 13.5-17.5 g/dL is low; 150 g/L (15.0 g/dL) is normal.
+    # The raw comparison flagged both as high (130 > 17.5).
+    assert _Lab(code="718-7", display="Hemoglobin", value=130, unit="g/L",
+                reference_range={"low": 13.5, "high": 17.5}, reference_unit="g/dL").is_abnormal
+    assert not _Lab(code="718-7", display="Hemoglobin", value=150, unit="g/L",
+                    reference_range={"low": 13.5, "high": 17.5}, reference_unit="g/dL").is_abnormal
+
+
+def test_abnormal_flag_unchanged_when_units_match_or_are_unknown():
+    assert _Lab(code="2345-7", display="Glucose", value=120, unit="mg/dL",
+                reference_range={"high": 99}, reference_unit="mg/dL").is_abnormal
+    assert _Lab(code="2345-7", display="Glucose", value=120, unit="mg/dL", reference_range={"high": 99}).is_abnormal
+    # Analyte not known to lab_units: compared as reported.
+    assert _Lab(code="9999-9", display="Other", value=5, unit="x/L",
+                reference_range={"high": 4}, reference_unit="y/L").is_abnormal
+    # Unrecognised unit for a known analyte: compared as reported.
+    assert not _Lab(code="2345-7", display="Glucose", value=90, unit="mg/dL",
+                    reference_range={"low": 70, "high": 99}, reference_unit="g/L").is_abnormal

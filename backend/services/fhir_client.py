@@ -22,6 +22,8 @@ import logging
 from dataclasses import dataclass, field
 from enum import Enum
 
+from .lab_units import analyte_for, to_canonical
+
 logger = logging.getLogger(__name__)
 
 # Configurable lookback windows for the default (non-"since") chart summary.
@@ -178,6 +180,31 @@ def _is_excluded(resource: Dict[str, Any]) -> bool:
     return False
 
 
+def _comparable_to_reference(code: str, value: float, unit: Optional[str], low: Optional[float],
+                             high: Optional[float], reference_unit: Optional[str]):
+    """(value, low, high) in the analyte's canonical unit, or None to compare as reported.
+
+    Conversion applies only when the reference range has its own unit that
+    differs from the result's and lab_units knows the analyte and both units.
+    """
+    analyte = analyte_for(code)
+    if not analyte or not reference_unit or not unit or reference_unit.strip().lower() == unit.strip().lower():
+        return None
+    canonical, problem = to_canonical(analyte, value, unit)
+    if problem:
+        return None
+    bounds = []
+    for bound in (low, high):
+        if bound is None:
+            bounds.append(None)
+            continue
+        converted, problem = to_canonical(analyte, bound, reference_unit)
+        if problem:
+            return None
+        bounds.append(converted)
+    return canonical, bounds[0], bounds[1]
+
+
 @dataclass
 class LabResult:
     """Structured lab result from FHIR Observation."""
@@ -192,13 +219,24 @@ class LabResult:
     reference_unit: Optional[str] = None  # unit stated on the reference range, if any
 
     def __post_init__(self):
-        """Check if value is outside reference range."""
+        """Check if value is outside reference range.
+
+        When the range is stated in a different unit from the result and the
+        analyte is known to lab_units, both sides are converted to the
+        analyte's canonical unit before comparing (e.g. glucose 7.0 mmol/L
+        against a 70-99 mg/dL range). Otherwise the values are compared as
+        reported.
+        """
         if self.reference_range:
+            value = self.value
             low = self.reference_range.get("low")
             high = self.reference_range.get("high")
-            if low is not None and self.value < low:
+            converted = _comparable_to_reference(self.code, self.value, self.unit, low, high, self.reference_unit)
+            if converted is not None:
+                value, low, high = converted
+            if low is not None and value < low:
                 self.is_abnormal = True
-            if high is not None and self.value > high:
+            if high is not None and value > high:
                 self.is_abnormal = True
 
     @property
