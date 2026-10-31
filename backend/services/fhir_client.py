@@ -16,11 +16,13 @@ Usage:
 
 import requests
 import os
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timedelta
 import logging
 from dataclasses import dataclass, field
 from enum import Enum
+
+from .lab_units import analyte_for, to_canonical
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +91,10 @@ def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
 
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
+# Seconds before a FHIR request is abandoned (same as PatientHistoryService). A
+# timeout is a requests.RequestException, so the data type is reported "failed".
+FHIR_TIMEOUT_SECONDS = 30
+
 # US Core Smoking Status (LOINC 72166-2) answer codes (SNOMED CT)
 SMOKING_STATUS_LOINC = "72166-2"
 SMOKING_STATUS_CODES = {
@@ -110,6 +116,23 @@ def truncation_warning(resource: str, event: Dict[str, Any]) -> str:
     window = f" since {event['since']}" if event.get("since") else ""
     return (f"{label} cut off: the page limit was reached after {event['count']} results{covered}. "
             f"Other results{window} were not retrieved and were not assessed.")
+
+
+def search_since(since: datetime) -> Tuple[str, Optional[str]]:
+    """FHIR date-search value for "on or after `since`", and a note when precision is lost.
+
+    FHIR date search accepts a full dateTime, but one with a time must carry a
+    timezone. A timezone-aware `since` is sent to the second; a naive one
+    (no timezone known) is sent as its date, which includes earlier results
+    from that day, and the returned note says so.
+    """
+    if since.tzinfo is not None and since.utcoffset() is not None:
+        return since.isoformat(timespec="seconds"), None
+    date = since.strftime("%Y-%m-%d")
+    if since.time() == datetime.min.time():
+        return date, None
+    return date, (f"The handoff start time {since.strftime('%Y-%m-%d %H:%M')} has no timezone, so updates "
+                  f"were searched from the start of {date}; earlier results from that day may be included.")
 
 
 def _record_status(status: Dict[str, str], resource: str, outcome: str) -> None:
@@ -157,6 +180,31 @@ def _is_excluded(resource: Dict[str, Any]) -> bool:
     return False
 
 
+def _comparable_to_reference(code: str, value: float, unit: Optional[str], low: Optional[float],
+                             high: Optional[float], reference_unit: Optional[str]):
+    """(value, low, high) in the analyte's canonical unit, or None to compare as reported.
+
+    Conversion applies only when the reference range has its own unit that
+    differs from the result's and lab_units knows the analyte and both units.
+    """
+    analyte = analyte_for(code)
+    if not analyte or not reference_unit or not unit or reference_unit.strip().lower() == unit.strip().lower():
+        return None
+    canonical, problem = to_canonical(analyte, value, unit)
+    if problem:
+        return None
+    bounds = []
+    for bound in (low, high):
+        if bound is None:
+            bounds.append(None)
+            continue
+        converted, problem = to_canonical(analyte, bound, reference_unit)
+        if problem:
+            return None
+        bounds.append(converted)
+    return canonical, bounds[0], bounds[1]
+
+
 @dataclass
 class LabResult:
     """Structured lab result from FHIR Observation."""
@@ -171,13 +219,24 @@ class LabResult:
     reference_unit: Optional[str] = None  # unit stated on the reference range, if any
 
     def __post_init__(self):
-        """Check if value is outside reference range."""
+        """Check if value is outside reference range.
+
+        When the range is stated in a different unit from the result and the
+        analyte is known to lab_units, both sides are converted to the
+        analyte's canonical unit before comparing (e.g. glucose 7.0 mmol/L
+        against a 70-99 mg/dL range). Otherwise the values are compared as
+        reported.
+        """
         if self.reference_range:
+            value = self.value
             low = self.reference_range.get("low")
             high = self.reference_range.get("high")
-            if low is not None and self.value < low:
+            converted = _comparable_to_reference(self.code, self.value, self.unit, low, high, self.reference_unit)
+            if converted is not None:
+                value, low, high = converted
+            if low is not None and value < low:
                 self.is_abnormal = True
-            if high is not None and self.value > high:
+            if high is not None and value > high:
                 self.is_abnormal = True
 
     @property
@@ -298,7 +357,7 @@ class FHIRClient:
         # Confidential clients authenticate via HTTP Basic Auth using the Cerner Central System Account secret.
         auth = (self.client_id, self.client_secret) if self.client_secret else None
 
-        response = requests.post(token_url, data=data, auth=auth); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
+        response = requests.post(token_url, data=data, auth=auth, timeout=FHIR_TIMEOUT_SECONDS); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
         response.raise_for_status()
 
         token_data = response.json()
@@ -339,7 +398,7 @@ class FHIRClient:
         url = f"{self.fhir_base_url}/{resource_type}"
 
         try:
-            response = requests.get(url, params=params, headers=self._get_headers())
+            response = requests.get(url, params=params, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
             response.raise_for_status()
             return response.json()
         except requests.RequestException as e:
@@ -349,7 +408,7 @@ class FHIRClient:
     def get_patient(self, patient_id: str) -> Dict[str, Any]:
         """Get patient demographics."""
         url = f"{self.fhir_base_url}/Patient/{patient_id}"
-        response = requests.get(url, headers=self._get_headers())
+        response = requests.get(url, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
         if not response.ok:
             logger.error(f"FHIR Patient fetch {response.status_code}: {response.text}")
         response.raise_for_status()
@@ -394,7 +453,7 @@ class FHIRClient:
                              if link.get("relation") == "next"), None)
             if not next_url:
                 break
-            response = requests.get(next_url, headers=self._get_headers())
+            response = requests.get(next_url, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
             response.raise_for_status()
             bundle = response.json()
             observations.extend(entry["resource"] for entry in bundle.get("entry", []) or [])
@@ -682,8 +741,10 @@ class FHIRClient:
         for shift-handoff / "what's changed since admission" summaries.
 
         Unlike get_patient_data(), this is NOT limited to a fixed 7/30-day
-        lookback window - it queries from the exact timestamp given, however
-        long ago that was (e.g., the start of a multi-week admission).
+        lookback window - it queries from the timestamp given, however long
+        ago that was (e.g., the start of a multi-week admission). The search
+        uses the full timestamp when it has a timezone, else its date (see
+        search_since; a data warning says so).
 
         Returns:
             Dict with new_labs, new_abnormal_labs, new_vitals, new_conditions,
@@ -691,7 +752,7 @@ class FHIRClient:
             and data_notes. A resource whose query failed has an empty list
             and a non-"retrieved" status - never read that as "nothing new".
         """
-        since_str = since.strftime("%Y-%m-%d")
+        since_str, precision_note = search_since(since)
         status: Dict[str, str] = {}
         notes: List[str] = []
         truncated: List[str] = []
@@ -734,7 +795,7 @@ class FHIRClient:
             "new_conditions": new_conditions,
             "new_medications": new_medications,
             "retrieval_status": status,
-            "data_warnings": retrieval_warnings(status) + truncated,
+            "data_warnings": retrieval_warnings(status) + truncated + ([precision_note] if precision_note else []),
             "data_notes": notes,
         }
 

@@ -24,9 +24,10 @@ import {
   downloadAllRules, 
   getOfflineStats, 
   isOnline, 
-  onConnectionChange,
-  requestBackgroundSync 
+  onConnectionChange
 } from '../utils/offlineManager';
+import { downloadMessage } from '../utils/ruleDownload';
+import { OFFLINE_SEARCH_MESSAGE, isOfflineError, isOfflineResponse } from '../utils/offlineResponse';
 import {
   isVoiceInputSupported,
   createVoiceRecognition,
@@ -131,6 +132,7 @@ export default function SymptomSearch() {
   const [offlineStats, setOfflineStats] = useState(null);
   const [isDownloadingRules, setIsDownloadingRules] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
+  const [downloadResult, setDownloadResult] = useState(null);
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [showOfflinePanel, setShowOfflinePanel] = useState(false);
   const [voiceRecognition, setVoiceRecognition] = useState(null);
@@ -432,10 +434,8 @@ export default function SymptomSearch() {
       setConnectionStatus(online);
       if (online) {
         speak('Connection restored');
-        requestBackgroundSync('search-sync');
-        requestBackgroundSync('favorites-sync');
       } else {
-        speak('You are now offline. Cached data is available.');
+        speak('You are offline. Symptom search needs a connection.');
       }
     });
 
@@ -467,18 +467,22 @@ export default function SymptomSearch() {
     setIsDownloadingRules(true);
     setDownloadProgress(0);
 
+    setDownloadResult(null);
+
     try {
-      await downloadAllRules(apiBase, (progress) => {
-        setDownloadProgress(progress);
+      const result = await downloadAllRules(apiBase, (progress) => {
+        setDownloadProgress(progress.percentage);
       });
+      setDownloadResult(result);
 
       const stats = await getOfflineStats();
       setOfflineStats(stats);
 
-      speak('Rules downloaded successfully');
+      speak(result.success ? 'Rules downloaded' : 'Rule download failed');
     } catch (error) {
       console.error('Failed to download rules:', error);
-      speak('Failed to download rules');
+      setDownloadResult({ success: false, error: `Rule download failed: ${error.message}` });
+      speak('Rule download failed');
     } finally {
       setIsDownloadingRules(false);
       setDownloadProgress(0);
@@ -718,6 +722,15 @@ export default function SymptomSearch() {
       return;
     }
 
+    // Offline: say so, rather than running a search that cannot reach the
+    // server and showing "no results".
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      setError(OFFLINE_SEARCH_MESSAGE);
+      setHasSearched(false);
+      setResults([]);
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setNeedsLogin(false);
@@ -765,6 +778,14 @@ export default function SymptomSearch() {
         return;
       }
 
+      if (isOfflineResponse(response)) {
+        setError(OFFLINE_SEARCH_MESSAGE);
+        setHasSearched(false);
+        setResults([]);
+        setNegatedTerms([]);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(`Search failed: ${response.statusText}`);
       }
@@ -800,7 +821,12 @@ export default function SymptomSearch() {
         }
       }
     } catch (err) {
-      setError(err.message);
+      if (isOfflineError(err)) {
+        setError(OFFLINE_SEARCH_MESSAGE);
+        setHasSearched(false);
+      } else {
+        setError(err.message);
+      }
       setResults([]);
       setNegatedTerms([]);
     } finally {
@@ -1350,6 +1376,20 @@ export default function SymptomSearch() {
               >
                 {isDownloadingRules ? `Downloading... ${Math.round(downloadProgress)}%` : '⬇️ Download All Rules'}
               </button>
+
+              {downloadResult && (
+                <div role="status" style={{
+                  padding: '0.75rem',
+                  borderRadius: '6px',
+                  marginBottom: '1rem',
+                  fontSize: '0.85rem',
+                  background: downloadResult.success ? '#d1fae5' : '#fee2e2',
+                  border: `1px solid ${downloadResult.success ? '#10b981' : '#ef4444'}`,
+                  color: downloadResult.success ? '#065f46' : '#991b1b'
+                }}>
+                  {downloadMessage(downloadResult)}
+                </div>
+              )}
 
               {/* Download Progress Bar */}
               {isDownloadingRules && (

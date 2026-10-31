@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { getStoredUser, isStoredAuthenticated, storeAuthData } from '../utils/clientAuth';
 import { getApiBase } from '../utils/auth';
+import { encounterHref } from '../utils/encounterLink';
 
 export default function RoleBasedNavigation() {
   const [userRole, setUserRole] = useState(null);
@@ -110,6 +111,10 @@ export default function RoleBasedNavigation() {
       label: '🛏️ Inpatient',
       roles: ['all']
     });
+    // Encounter Assessment needs the launch patient; shown only when known.
+    if (encounterHref(smartPatientId)) {
+      navItems.push({ href: encounterHref(smartPatientId), label: '🩺 Encounter Assessment', roles: ['all'] });
+    }
   }
 
   const isAuthenticatedHint = typeof window !== 'undefined' && isStoredAuthenticated();
