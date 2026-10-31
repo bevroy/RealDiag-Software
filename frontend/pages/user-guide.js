@@ -144,6 +144,7 @@ export default function UserGuidePage() {
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
