@@ -21,6 +21,7 @@ import os
 from backend.services.patient_history_service import PatientHistoryService
 from backend.services.tree_schema import applies_to as tree_applies_to, icd10_codes, presentation_texts, snomed_codes
 from backend.services.complaint_matching import match_terms, split_negated
+from backend.services.vitals_terms import temperature_fahrenheit
 
 # Emergent trees whose presentations or complaint terms match are always
 # returned, whatever their score or the result cap.
@@ -132,6 +133,8 @@ class VitalSignsInput(BaseModel):
     heart_rate: Optional[int] = None
     blood_pressure: Optional[Dict[str, int]] = None
     temperature: Optional[float] = None
+    # Unit of `temperature` ("F", "C", "Cel", "[degF]"); none means degrees F.
+    temperature_unit: Optional[str] = None
     respiratory_rate: Optional[int] = None
     oxygen_saturation: Optional[float] = None
 
@@ -175,8 +178,8 @@ def _derive_terms_from_vitals(vitals: Dict[str, Any]) -> List[str]:
         elif systolic >= 140 or (isinstance(diastolic, (int, float)) and diastolic >= 90):
             terms.append("hypertension")
 
-    temperature = vitals.get("temperature")
-    if isinstance(temperature, (int, float)):
+    temperature = temperature_fahrenheit(vitals.get("temperature"), vitals.get("temperature_unit"))
+    if temperature is not None:
         if temperature >= 100.4:
             terms.append("fever")
         elif temperature < 95.0:
@@ -221,6 +224,7 @@ def derive_search_terms_from_history(patient_history) -> List[str]:
                 "diastolic": latest_vitals.blood_pressure_diastolic
             },
             "temperature": latest_vitals.temperature,
+            "temperature_unit": latest_vitals.temperature_unit,
             "respiratory_rate": latest_vitals.respiratory_rate,
             "oxygen_saturation": latest_vitals.oxygen_saturation,
         }

@@ -11,6 +11,7 @@ from .auth_service import get_current_user, get_optional_user, add_search_to_his
 from .search_limiter import check_search_limit, get_search_limit_info
 from .medication_safety_service import MedicationSafetyService
 from .patient_history_service import PatientHistoryService
+from .vitals_terms import temperature_fahrenheit
 from .context_engine import get_context_engine
 from .rbac_service import get_rbac_service, Permission
 
@@ -355,10 +356,11 @@ def _derive_terms_from_history(patient_history) -> Dict[str, List[str]]:
             elif v.blood_pressure_systolic >= 140:
                 derived_symptoms.append("hypertension")
 
-        if v.temperature is not None:
-            if v.temperature >= 100.4:
+        temperature = temperature_fahrenheit(v.temperature, getattr(v, "temperature_unit", None))
+        if temperature is not None:
+            if temperature >= 100.4:
                 derived_symptoms.append("fever")
-            elif v.temperature < 95.0:
+            elif temperature < 95.0:
                 derived_red_flags.append("hypothermia")
 
         if v.respiratory_rate is not None:
