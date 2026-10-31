@@ -6,16 +6,13 @@ const RULES_CACHE = `realdiag-rules-v${CACHE_VERSION}`;
 const API_CACHE = `realdiag-api-v${CACHE_VERSION}`;
 const IMAGES_CACHE = `realdiag-images-v${CACHE_VERSION}`;
 
-// IndexedDB for offline data
-const DB_NAME = 'RealDiagOfflineDB';
-const DB_VERSION = 3;
-const STORES = {
-  RULES: 'rules',
-  SEARCHES: 'searches',
-  FAVORITES: 'favorites',
-  SYNC_QUEUE: 'syncQueue',
-  USER_DATA: 'userData'
-};
+// IndexedDB for offline data: the same name, version and stores as the pages
+// (one definition in offline-db-schema.js).
+importScripts('/offline-db-schema.js');
+const OFFLINE_DB = self.REALDIAG_OFFLINE_DB;
+const DB_NAME = OFFLINE_DB.name;
+const DB_VERSION = OFFLINE_DB.version;
+const STORES = OFFLINE_DB.STORES;
 
 // Assets to cache on install
 const PRECACHE_URLS = [
@@ -31,43 +28,21 @@ const PRECACHE_URLS = [
   '/offline.html'
 ];
 
+// IndexedDB requests are not promises; wrap them so reads return results.
+function requestToPromise(request) {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
 // Initialize IndexedDB
 async function initDB() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
-    
     request.onerror = () => reject(request.error);
     request.onsuccess = () => resolve(request.result);
-    
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      
-      // Create object stores if they don't exist
-      if (!db.objectStoreNames.contains(STORES.RULES)) {
-        const rulesStore = db.createObjectStore(STORES.RULES, { keyPath: 'id' });
-        rulesStore.createIndex('family', 'family', { unique: false });
-        rulesStore.createIndex('lastUpdated', 'lastUpdated', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SEARCHES)) {
-        const searchesStore = db.createObjectStore(STORES.SEARCHES, { keyPath: 'id', autoIncrement: true });
-        searchesStore.createIndex('timestamp', 'timestamp', { unique: false });
-        searchesStore.createIndex('synced', 'synced', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.FAVORITES)) {
-        db.createObjectStore(STORES.FAVORITES, { keyPath: 'id', autoIncrement: true });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
-        const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id', autoIncrement: true });
-        syncStore.createIndex('timestamp', 'timestamp', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.USER_DATA)) {
-        db.createObjectStore(STORES.USER_DATA, { keyPath: 'key' });
-      }
-    };
+    request.onupgradeneeded = (event) => OFFLINE_DB.upgrade(event.target.result);
   });
 }
 
@@ -76,8 +51,7 @@ async function saveToStore(storeName, data) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readwrite');
-    const store = transaction.objectStore(storeName);
-    await store.put(data);
+    await requestToPromise(transaction.objectStore(storeName).put(data));
     return true;
   } catch (error) {
     console.error(`Error saving to ${storeName}:`, error);
@@ -90,8 +64,7 @@ async function getFromStore(storeName, key) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readonly');
-    const store = transaction.objectStore(storeName);
-    return await store.get(key);
+    return await requestToPromise(transaction.objectStore(storeName).get(key));
   } catch (error) {
     console.error(`Error getting from ${storeName}:`, error);
     return null;
@@ -103,8 +76,7 @@ async function getAllFromStore(storeName) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readonly');
-    const store = transaction.objectStore(storeName);
-    return await store.getAll();
+    return await requestToPromise(transaction.objectStore(storeName).getAll());
   } catch (error) {
     console.error(`Error getting all from ${storeName}:`, error);
     return [];
@@ -169,22 +141,18 @@ self.addEventListener('fetch', (event) => {
 
   // Skip non-GET requests
   if (request.method !== 'GET') {
-    // For POST/PUT/DELETE when offline, queue for sync
+    // Offline: answer with a clear "offline" response (503, header
+    // X-RealDiag-Offline: 1) instead of a fake success. Nothing is queued:
+    // a search or save replayed later would reach no one.
     if (!navigator.onLine) {
-      event.respondWith(
-        (async () => {
-          await saveToStore(STORES.SYNC_QUEUE, {
-            url: request.url,
-            method: request.method,
-            headers: [...request.headers],
-            body: await request.text(),
-            timestamp: Date.now()
-          });
-          return new Response(JSON.stringify({ queued: true, offline: true }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-        })()
-      );
+      event.respondWith(new Response(JSON.stringify({
+        offline: true,
+        error: 'offline',
+        message: "You're offline. This action needs a connection to the RealDiag server."
+      }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json', 'X-RealDiag-Offline': '1' }
+      }));
     }
     return;
   }
@@ -216,7 +184,7 @@ self.addEventListener('fetch', (event) => {
             offline: true 
           }), {
             status: 503,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'X-RealDiag-Offline': '1' }
           });
         })
     );
@@ -345,143 +313,6 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Background sync for offline actions
-self.addEventListener('sync', (event) => {
-  console.log('[SW] Background sync event:', event.tag);
-  
-  if (event.tag === 'sync-searches') {
-    event.waitUntil(syncSearches());
-  } else if (event.tag === 'sync-favorites') {
-    event.waitUntil(syncFavorites());
-  } else if (event.tag === 'sync-queue') {
-    event.waitUntil(syncQueuedRequests());
-  }
-});
-
-// Sync offline searches
-async function syncSearches() {
-  try {
-    console.log('[SW] Syncing offline searches...');
-    const searches = await getAllFromStore(STORES.SEARCHES);
-    const unsyncedSearches = searches.filter(s => !s.synced);
-    
-    if (unsyncedSearches.length === 0) {
-      console.log('[SW] No searches to sync');
-      return;
-    }
-    
-    // Try to sync each search
-    for (const search of unsyncedSearches) {
-      try {
-        const response = await fetch('/api/searches/sync', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(search)
-        });
-        
-        if (response.ok) {
-          search.synced = true;
-          await saveToStore(STORES.SEARCHES, search);
-          console.log('[SW] Synced search:', search.id);
-        }
-      } catch (error) {
-        console.error('[SW] Failed to sync search:', error);
-      }
-    }
-    
-    // Notify clients
-    const clients = await self.clients.matchAll();
-    clients.forEach(client => {
-      client.postMessage({
-        type: 'SEARCHES_SYNCED',
-        count: unsyncedSearches.length
-      });
-    });
-    
-    console.log('[SW] Search sync complete');
-  } catch (error) {
-    console.error('[SW] Error syncing searches:', error);
-  }
-}
-
-// Sync favorites
-async function syncFavorites() {
-  try {
-    console.log('[SW] Syncing favorites...');
-    const favorites = await getAllFromStore(STORES.FAVORITES);
-    
-    const response = await fetch('/api/favorites/sync', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ favorites })
-    });
-    
-    if (response.ok) {
-      console.log('[SW] Favorites synced successfully');
-      
-      // Notify clients
-      const clients = await self.clients.matchAll();
-      clients.forEach(client => {
-        client.postMessage({
-          type: 'FAVORITES_SYNCED',
-          count: favorites.length
-        });
-      });
-    }
-  } catch (error) {
-    console.error('[SW] Error syncing favorites:', error);
-  }
-}
-
-// Sync queued requests
-async function syncQueuedRequests() {
-  try {
-    console.log('[SW] Syncing queued requests...');
-    const queue = await getAllFromStore(STORES.SYNC_QUEUE);
-    
-    if (queue.length === 0) {
-      console.log('[SW] No queued requests');
-      return;
-    }
-    
-    let successCount = 0;
-    for (const item of queue) {
-      try {
-        const response = await fetch(item.url, {
-          method: item.method,
-          headers: new Headers(item.headers),
-          body: item.body
-        });
-        
-        if (response.ok) {
-          // Remove from queue
-          const db = await initDB();
-          const transaction = db.transaction([STORES.SYNC_QUEUE], 'readwrite');
-          const store = transaction.objectStore(STORES.SYNC_QUEUE);
-          await store.delete(item.id);
-          successCount++;
-        }
-      } catch (error) {
-        console.error('[SW] Failed to sync request:', error);
-      }
-    }
-    
-    // Notify clients
-    const clients = await self.clients.matchAll();
-    clients.forEach(client => {
-      client.postMessage({
-        type: 'QUEUE_SYNCED',
-        count: successCount,
-        remaining: queue.length - successCount
-      });
-    });
-    
-    console.log('[SW] Synced', successCount, 'of', queue.length, 'queued requests');
-  } catch (error) {
-    console.error('[SW] Error syncing queue:', error);
-  }
-}
-
 // Message handler for client communication
 self.addEventListener('message', (event) => {
   console.log('[SW] Message received:', event.data);
@@ -530,19 +361,6 @@ self.addEventListener('message', (event) => {
     ]).then(() => {
       event.ports[0].postMessage({ success: true });
     });
-  }
-});
-
-// Periodic background sync (if supported)
-self.addEventListener('periodicsync', (event) => {
-  if (event.tag === 'sync-data') {
-    event.waitUntil(
-      Promise.all([
-        syncSearches(),
-        syncFavorites(),
-        syncQueuedRequests()
-      ])
-    );
   }
 });
 
