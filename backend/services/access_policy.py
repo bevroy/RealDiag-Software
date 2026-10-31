@@ -120,3 +120,22 @@ def remove_from_allowlist(email: str) -> bool:
             session.delete(row)
             return True
     return _memory_allowlist.pop(address, None) is not None
+
+
+# Roles that may use clinical content offline (and the provider tools).
+APPROVED_ROLES = frozenset({"provider", "doctor", "admin"})
+
+
+def has_approved_role(user: Optional[Dict[str, Any]]) -> bool:
+    """A provider, doctor or admin; an approved-domain account with the default
+    "user"/"patient" role counts as a provider (the same rule the UI uses)."""
+    if not user:
+        return False
+    role = str(user.get("role") or "user").strip().lower()
+    if role in APPROVED_ROLES:
+        return True
+    return email_domain_approved(user.get("email")) and role in ("user", "patient", "")
+
+
+def offline_bundle_ttl_hours() -> int:
+    return int(os.getenv("OFFLINE_BUNDLE_TTL_HOURS", "24"))

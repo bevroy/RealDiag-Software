@@ -7,6 +7,7 @@ import { storeAuthData } from '../../utils/clientAuth';
 import { apiFetch } from '../../utils/apiClient';
 import { loginNextStep, mfaVerifyBody } from '../../utils/loginFlow';
 import MFASetup from '../../components/MFASetup';
+import { clearStoredBundle } from '../../utils/offlineBundle';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,7 +24,9 @@ export default function LoginPage() {
   const [useBackupCode, setUseBackupCode] = useState(false);
 
   // Signed in with MFA: store the user and go to the app.
-  const finish = (user, csrfToken) => {
+  const finish = async (user, csrfToken) => {
+    // A new session downloads its own offline library.
+    await clearStoredBundle();
     if (csrfToken) sessionStorage.setItem('csrf_token', csrfToken);
     if (user) storeAuthData(user, csrfToken || null);
     alert(`Welcome back, ${user?.full_name || user?.email}!`);
@@ -34,7 +37,7 @@ export default function LoginPage() {
   const finishFromSession = async () => {
     const me = await apiFetch('/users/me');
     if (!me.ok) throw new Error('Signed in, but your profile could not be loaded. Please sign in again.');
-    finish(await me.json(), null);
+    await finish(await me.json(), null);
   };
 
   const handleCode = async (e) => {

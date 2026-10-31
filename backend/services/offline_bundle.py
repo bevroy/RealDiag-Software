@@ -14,13 +14,20 @@ One versioned JSON document, built from the same data the server uses:
 
 `version` is a content hash, so a client refreshes only when the library
 changed. No patient data is in the bundle.
+
+Access: signed in (with MFA when required) and an approved role
+(access_policy.has_approved_role). Each download is stamped with
+issued_at/expires_at (OFFLINE_BUNDLE_TTL_HOURS, default 24); the browser
+discards an expired bundle, deletes it at sign-out and replaces it at
+sign-in. Served as compact JSON with Cache-Control: no-store.
 """
 import hashlib
 import json
+from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, Response
 
 from backend.services.auth_service import get_current_user
 from backend.services.clinical_review import review_fields, review_notice
@@ -68,17 +75,37 @@ def build_bundle() -> Dict[str, Any]:
             "questionnaire_count": len(questionnaires), **json.loads(text)}
 
 
-router = APIRouter(prefix="/offline", tags=["offline"], dependencies=[Depends(get_current_user)])
+APPROVED_ROLE_DETAIL = "The offline library is available to approved clinical accounts only."
+NO_STORE = {"Cache-Control": "no-store, private"}
+
+
+def require_approved_user(current_user: Dict[str, Any] = Depends(get_current_user)) -> Dict[str, Any]:
+    from backend.services.access_policy import has_approved_role
+    if not has_approved_role(current_user):
+        raise HTTPException(status_code=403, detail=APPROVED_ROLE_DETAIL)
+    return current_user
+
+
+router = APIRouter(prefix="/offline", tags=["offline"], dependencies=[Depends(require_approved_user)])
 
 
 @router.get("/bundle/version")
-def bundle_version():
+def bundle_version(response: Response):
     """The current bundle's version and size, so a client can tell whether to refresh."""
+    from backend.services.access_policy import offline_bundle_ttl_hours
     bundle = build_bundle()
-    return {k: bundle[k] for k in ("version", "size_bytes", "tree_count", "questionnaire_count")}
+    response.headers.update(NO_STORE)
+    return {**{k: bundle[k] for k in ("version", "size_bytes", "tree_count", "questionnaire_count")},
+            "ttl_hours": offline_bundle_ttl_hours()}
 
 
 @router.get("/bundle")
 def bundle():
-    """The full offline bundle (tree library search fields + walkable questionnaires)."""
-    return build_bundle()
+    """The full offline bundle (tree library search fields + walkable questionnaires), compact JSON,
+    stamped with when it was issued and when the device must discard it."""
+    from backend.services.access_policy import offline_bundle_ttl_hours
+    now = datetime.now(timezone.utc)
+    body = {**build_bundle(), "issued_at": now.isoformat(),
+            "expires_at": (now + timedelta(hours=offline_bundle_ttl_hours())).isoformat()}
+    return Response(content=json.dumps(body, separators=(",", ":")), media_type="application/json",
+                    headers=NO_STORE)

@@ -7,6 +7,11 @@
 // also fetches the two pages and their scripts so the service worker has
 // them for offline use.
 //
+// The server stamps each download with expires_at (OFFLINE_BUNDLE_TTL_HOURS):
+// an expired bundle is deleted and not used. The bundle is also deleted at
+// sign-out (clientAuth.clearStoredAuth) and at sign-in, so each session
+// downloads its own.
+//
 // CommonJS so jest can load it without a Babel config (see __tests__).
 
 const BUNDLE_CACHE = 'realdiag-offline-bundle'
@@ -17,14 +22,33 @@ function cacheStorage() {
   return typeof caches !== 'undefined' ? caches : null
 }
 
-async function loadStoredBundle(storage = cacheStorage()) {
+function isExpired(bundle, now = Date.now()) {
+  const expires = bundle && Date.parse(bundle.expires_at)
+  return !expires || expires <= now
+}
+
+async function clearStoredBundle(storage = cacheStorage()) {
+  if (!storage) return
+  try {
+    await storage.delete(BUNDLE_CACHE)
+  } catch (err) {
+    // Nothing stored, or storage unavailable.
+  }
+}
+
+async function loadStoredBundle(storage = cacheStorage(), now = Date.now()) {
   if (!storage) return null
   try {
     const cache = await storage.open(BUNDLE_CACHE)
     const response = await cache.match(BUNDLE_KEY)
     if (!response) return null
     const bundle = await response.json()
-    return bundle && bundle.version && bundle.search ? bundle : null
+    if (!bundle || !bundle.version || !bundle.search) return null
+    if (isExpired(bundle, now)) {
+      await clearStoredBundle(storage)
+      return null
+    }
+    return bundle
   } catch (err) {
     return null
   }
@@ -93,11 +117,13 @@ function bundleQuestionnaire(bundle, treeId) {
 function bundleSummary(bundle) {
   if (!bundle) return 'No offline library on this device yet. Open this page once while online and signed in.'
   const q = Object.keys(bundle.questionnaires || {}).length
+  const until = bundle.expires_at ? ` Available offline until ${new Date(bundle.expires_at).toLocaleString()}.` : ''
   return `Offline library ${bundle.version}: ${bundle.tree_count} trees for symptom search, ` +
-    `${q} question-by-question trees.`
+    `${q} question-by-question trees.${until}`
 }
 
 module.exports = {
   BUNDLE_CACHE, BUNDLE_KEY, OFFLINE_PAGES, loadStoredBundle, storeBundle, refreshBundle, pageAssets, warmPages,
+  clearStoredBundle, isExpired,
   bundleSummary, bundleQuestionnaireTrees, bundleQuestionnaire,
 }

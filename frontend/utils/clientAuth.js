@@ -1,3 +1,4 @@
+import { clearStoredBundle } from './offlineBundle';
 // Authentication utility for client-side state management
 // Used when cookies don't work across domains (Netlify + Render)
 
@@ -47,6 +48,9 @@ export function isStoredAuthenticated() {
 
 export function clearStoredAuth() {
   if (typeof window === 'undefined') return;
+
+  // The offline library belongs to the signed-in session.
+  clearStoredBundle();
   
   // Clear localStorage
   localStorage.removeItem('realdiag_user');

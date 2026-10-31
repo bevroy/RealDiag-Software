@@ -1,5 +1,5 @@
 const { refreshBundle, loadStoredBundle, pageAssets, bundleSummary, bundleQuestionnaireTrees, bundleQuestionnaire,
-  BUNDLE_CACHE, BUNDLE_KEY } =
+  clearStoredBundle, isExpired, BUNDLE_CACHE, BUNDLE_KEY } =
   require('../utils/offlineBundle')
 
 // Minimal Cache Storage and Response stand-ins (jest's node environment has neither).
@@ -14,6 +14,7 @@ function fakeStorage() {
   const caches = {}
   return {
     caches,
+    async delete(name) { const had = name in caches; delete caches[name]; return had },
     async open(name) {
       caches[name] = caches[name] || {}
       const store = caches[name]
@@ -22,7 +23,8 @@ function fakeStorage() {
   }
 }
 
-const bundle = (version) => ({ version, tree_count: 2, search: { rules: [] }, questionnaires: { Q1: {} } })
+const LATER = new Date(Date.now() + 3600e3).toISOString()
+const bundle = (version, expires_at = LATER) => ({ version, tree_count: 2, search: { rules: [] }, questionnaires: { Q1: {} }, expires_at })
 const json = (body, status = 200) => new FakeResponse(JSON.stringify(body), { status })
 
 test('downloads and stores the bundle when there is none', async () => {
@@ -68,7 +70,7 @@ test('page warm-up finds the page scripts and styles', () => {
 
 test('summary says what is on the device', () => {
   expect(bundleSummary(null)).toMatch(/No offline library on this device/)
-  expect(bundleSummary(bundle('abc'))).toBe('Offline library abc: 2 trees for symptom search, 1 question-by-question trees.')
+  expect(bundleSummary(bundle('abc'))).toMatch(/^Offline library abc: 2 trees for symptom search, 1 question-by-question trees\. Available offline until /)
 })
 
 test('questionnaires from the bundle have the online shapes', () => {
@@ -86,4 +88,29 @@ test('the service worker keeps the offline library cache when it updates', () =>
   const sw = require('fs').readFileSync(require('path').join(__dirname, '..', 'public', 'sw.js'), 'utf8')
   expect(sw).toContain(`const OFFLINE_BUNDLE_CACHE = '${BUNDLE_CACHE}'`)
   expect(sw).toMatch(/name !== OFFLINE_BUNDLE_CACHE/)
+})
+
+test('an expired or unstamped bundle is deleted and not used, and a refresh downloads a new one', async () => {
+  expect(isExpired({ expires_at: LATER })).toBe(false)
+  expect(isExpired({ expires_at: '2020-01-01T00:00:00Z' })).toBe(true)
+  expect(isExpired({})).toBe(true)
+  const storage = fakeStorage()
+  await refreshBundle({ apiFetchFn: async (p) => (p.endsWith('version') ? json({ version: 'v1' }) : json(bundle('v1', '2020-01-01T00:00:00Z'))), storage })
+  expect(await loadStoredBundle(storage)).toBeNull()
+  expect(storage.caches[BUNDLE_CACHE]).toBeUndefined()
+  const calls = []
+  const out = await refreshBundle({ apiFetchFn: async (p) => { calls.push(p); return p.endsWith('version') ? json({ version: 'v1' }) : json(bundle('v1')) }, storage })
+  expect(out.status).toBe('updated')
+  expect(calls).toEqual(['/offline/bundle/version', '/offline/bundle'])
+})
+
+test('sign-out and sign-in clear the stored bundle', async () => {
+  const storage = fakeStorage()
+  await refreshBundle({ apiFetchFn: async (p) => (p.endsWith('version') ? json({ version: 'v1' }) : json(bundle('v1'))), storage })
+  await clearStoredBundle(storage)
+  expect(await loadStoredBundle(storage)).toBeNull()
+  const fs = require('fs')
+  const path = require('path')
+  expect(fs.readFileSync(path.join(__dirname, '..', 'utils', 'clientAuth.js'), 'utf8')).toMatch(/clearStoredAuth\(\) \{[\s\S]*?clearStoredBundle\(\)/)
+  expect(fs.readFileSync(path.join(__dirname, '..', 'app', 'login', 'page.jsx'), 'utf8')).toMatch(/await clearStoredBundle\(\)/)
 })
