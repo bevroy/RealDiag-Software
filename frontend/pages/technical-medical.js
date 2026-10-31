@@ -139,7 +139,10 @@ export default function TechnicalMedicalPage() {
             expiry, sign-out and sign-in. Only health checks, sign-in and recovery, the MFA code step, the API-key
             integration route and the SMART launch answer without a session; the API docs, metrics, reference
             library and education content need one. GET /admin/users lists every account with status, MFA and last
-            sign-in.
+            sign-in. EHR launches (/smart/*) are authenticated by the EHR, not by a RealDiag invitation; the
+            issuers accepted are FHIR_BASE_URL&apos;s host plus SMART_ALLOWED_ISS_HOSTS, which must list sandbox
+            hosts only until validation is complete, and adding any host requires the product owner&apos;s
+            written approval.
           </p>
         </section>
 

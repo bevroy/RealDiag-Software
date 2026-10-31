@@ -68,6 +68,12 @@ SMART_SESSION_MAX_TTL_SECONDS = int(os.getenv("SMART_SESSION_TTL_MINUTES", "30")
 SMART_STATE_SECRET = os.getenv("SMART_STATE_SECRET") or os.getenv("JWT_SECRET_KEY")
 STATE_TOKEN_EXPIRE_MINUTES = 10
 
+# EHR issuers RealDiag accepts a SMART launch from. Users who launch from the
+# EHR are authenticated by that EHR, not by a RealDiag invitation, so this list
+# decides which organizations' users can reach patient data through RealDiag.
+# Until validation is complete it must contain sandbox hosts only, and adding
+# any host (sandbox or production) requires the product owner's written
+# approval, recorded in the PR or change ticket that sets the variable.
 _extra_allowed_hosts = {
     host.strip().lower()
     for host in os.getenv("SMART_ALLOWED_ISS_HOSTS", "").split(",")

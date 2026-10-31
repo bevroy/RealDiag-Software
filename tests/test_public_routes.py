@@ -43,3 +43,9 @@ def test_public_routes_still_answer(anonymous, monkeypatch):
     assert anonymous.post("/users/register", json={"email": "a@realdiag.com", "password": "Passw0rd!!",
                                                     "full_name": "A"}).status_code == 403
     assert anonymous.get("/smart/session/status").status_code == 200
+
+
+def test_smart_issuer_allowlist_documents_the_approval_rule():
+    from pathlib import Path
+    source = (Path(__file__).resolve().parents[1] / "backend" / "services" / "smart_router.py").read_text()
+    assert "sandbox hosts only" in source and "requires the product owner's written" in source
