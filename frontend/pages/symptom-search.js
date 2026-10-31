@@ -28,6 +28,8 @@ import {
 } from '../utils/offlineManager';
 import { downloadMessage } from '../utils/ruleDownload';
 import { OFFLINE_SEARCH_MESSAGE, isOfflineError, isOfflineResponse } from '../utils/offlineResponse';
+import { loadStoredBundle, refreshBundle, bundleSummary } from '../utils/offlineBundle';
+import { rankOffline } from '../utils/offlineSearch';
 import {
   isVoiceInputSupported,
   createVoiceRecognition,
@@ -144,6 +146,22 @@ export default function SymptomSearch() {
   const [scannerStream, setScannerStream] = useState(null);
   const [scannedPatientId, setScannedPatientId] = useState(null);
   const [showMobileFeatures, setShowMobileFeatures] = useState(false);
+  // Offline library (tree search fields) on this device, and whether the
+  // results shown were ranked from it.
+  const [offlineBundle, setOfflineBundle] = useState(null);
+  const [offlineResultsVersion, setOfflineResultsVersion] = useState(null);
+
+  // Load the offline library; refresh it when online and signed in.
+  useEffect(() => {
+    let cancelled = false;
+    loadStoredBundle().then((bundle) => { if (!cancelled && bundle) setOfflineBundle(bundle); });
+    if (typeof navigator !== 'undefined' && navigator.onLine !== false && isAuthenticated()) {
+      refreshBundle({ apiFetchFn: apiFetch, fetchFn: (url, opts) => fetch(url, opts) }).then((out) => {
+        if (!cancelled && out.stored) setOfflineBundle(out.stored);
+      });
+    }
+    return () => { cancelled = true; };
+  }, []);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -435,7 +453,7 @@ export default function SymptomSearch() {
       if (online) {
         speak('Connection restored');
       } else {
-        speak('You are offline. Symptom search needs a connection.');
+        speak('You are offline. Symptom search uses the offline library on this device, if downloaded.');
       }
     });
 
@@ -707,6 +725,39 @@ export default function SymptomSearch() {
     );
   };
 
+  const searchAge = () => {
+    if (ageRange && !age) {
+      const range = AGE_RANGES.find(r => r.id === ageRange);
+      if (range) return Math.floor((range.min + range.max) / 2);
+    }
+    return age;
+  };
+
+  // Rank on this device from the offline library (tree library only: no AI
+  // suggestions, vital-sign terms or chart history).
+  const runOfflineSearch = async () => {
+    const bundle = offlineBundle || await loadStoredBundle();
+    if (!bundle) {
+      setError(OFFLINE_SEARCH_MESSAGE);
+      setHasSearched(false);
+      setResults([]);
+      setNegatedTerms([]);
+      return;
+    }
+    const ageValue = searchAge();
+    const out = rankOffline(bundle, symptoms, {
+      age: ageValue ? parseInt(ageValue) : null, sex: sex || null, family: family || null,
+    });
+    setOfflineBundle(bundle);
+    setError(null);
+    setHasSearched(true);
+    resetDisplayLimit();
+    setResults(out.results);
+    setNegatedTerms(out.negated_terms);
+    setReviewNotice(bundle.clinical_review_notice);
+    setOfflineResultsVersion(bundle.version);
+  };
+
   const handleSearch = async () => {
     if (symptoms.length === 0) {
       setError('Please enter at least one symptom');
@@ -722,12 +773,10 @@ export default function SymptomSearch() {
       return;
     }
 
-    // Offline: say so, rather than running a search that cannot reach the
-    // server and showing "no results".
+    // Offline: rank from the offline library on this device; without one,
+    // say so rather than showing "no results".
     if (typeof navigator !== 'undefined' && navigator.onLine === false) {
-      setError(OFFLINE_SEARCH_MESSAGE);
-      setHasSearched(false);
-      setResults([]);
+      await runOfflineSearch();
       return;
     }
 
@@ -735,6 +784,7 @@ export default function SymptomSearch() {
     setError(null);
     setNeedsLogin(false);
     setHasSearched(true);
+    setOfflineResultsVersion(null);
     resetDisplayLimit(); // Reset to show 5 results
 
     try {
@@ -779,10 +829,7 @@ export default function SymptomSearch() {
       }
 
       if (isOfflineResponse(response)) {
-        setError(OFFLINE_SEARCH_MESSAGE);
-        setHasSearched(false);
-        setResults([]);
-        setNegatedTerms([]);
+        await runOfflineSearch();
         return;
       }
 
@@ -822,11 +869,10 @@ export default function SymptomSearch() {
       }
     } catch (err) {
       if (isOfflineError(err)) {
-        setError(OFFLINE_SEARCH_MESSAGE);
-        setHasSearched(false);
-      } else {
-        setError(err.message);
+        await runOfflineSearch();
+        return;
       }
+      setError(err.message);
       setResults([]);
       setNegatedTerms([]);
     } finally {
@@ -1424,6 +1470,10 @@ export default function SymptomSearch() {
                   <span>{offlineStats && offlineStats.rules.count > 0 ? '✅' : '❌'}</span>
                   <span>Offline Data</span>
                 </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <span>{offlineBundle ? '✅' : '❌'}</span>
+                  <span>{bundleSummary(offlineBundle)}</span>
+                </div>
               </div>
             </div>
           )}
@@ -2012,6 +2062,13 @@ export default function SymptomSearch() {
             {hasSearched && !loading && negatedTerms.length > 0 && (
               <p role="note" style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', color: '#4b5563' }}>
                 Not searched (negated): {negatedTerms.join(', ')}
+              </p>
+            )}
+            {offlineResultsVersion && (
+              <p role="status" style={{ margin: '0 0 0.75rem', padding: '0.5rem 0.75rem', fontSize: '0.9rem', color: '#1e3a8a', background: '#eff6ff', border: '1px solid #3b82f6', borderRadius: '6px' }}>
+                Offline search: ranked on this device from offline library {offlineResultsVersion}, with the same
+                tree-library rules as online search. Not included offline: AI suggestions, vital-sign terms and chart
+                history. Result details that need the server (such as remedies) are unavailable until you reconnect.
               </p>
             )}
             {results.length > 0 && <ClinicalReviewNotice notice={reviewNotice} />}

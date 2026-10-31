@@ -14,7 +14,9 @@ describe('offline.html', () => {
 
   test('says what does and does not work', () => {
     expect(html).toContain('may still open from this device')
-    expect(html).toContain('cannot be searched offline yet')
+    expect(html).toContain('ranks from the offline library on this device')
+    expect(html).toContain('question-by-question trees run from the offline library')
+    expect(html).toContain('evaluate entered findings need a connection')
     expect(html).toContain('need a connection')
     expect(html).toContain('Nothing you do offline is saved for later or sent when you reconnect.')
   })

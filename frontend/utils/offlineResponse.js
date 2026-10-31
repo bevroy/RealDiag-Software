@@ -8,8 +8,10 @@
 // CommonJS so jest can load it without a Babel config (see __tests__).
 
 const OFFLINE_HEADER = 'X-RealDiag-Offline'
+// Shown offline when this device has no offline library (utils/offlineBundle.js).
 const OFFLINE_SEARCH_MESSAGE =
-  "You're offline. Symptom search needs a connection to the RealDiag server; try again when you're back online."
+  "You're offline, and this device has no offline library yet. Open Symptom Search once while online and " +
+  "signed in to download it; until then, search needs a connection."
 
 function isOfflineResponse(response) {
   return Boolean(response && response.status === 503 && response.headers &&

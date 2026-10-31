@@ -8,6 +8,7 @@ import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalR
 import { apiFetch, getApiBase } from '../utils/apiClient'
 import QuestionnaireWalk from '../components/QuestionnaireWalk'
 import { questionnaireTrees } from '../utils/questionnaireWalker'
+import { loadStoredBundle, refreshBundle, bundleQuestionnaireTrees, bundleQuestionnaire } from '../utils/offlineBundle'
 import {
   NOT_ASSESSED,
   STEP_TITLES,
@@ -69,8 +70,22 @@ export default function Diagnose() {
   const [result, setResult] = useState(null)
   const [evaluateError, setEvaluateError] = useState('')
   const [loading, setLoading] = useState(false)
+  // Offline: question-by-question trees from the offline library on this device.
+  const [offlineBundle, setOfflineBundle] = useState(null)
+  const [offlineMode, setOfflineMode] = useState(false)
 
   useEffect(() => {
+    const useOfflineLibrary = async (err) => {
+      const bundle = await loadStoredBundle()
+      if (!bundle) {
+        setTreesError(err.message)
+        return
+      }
+      setOfflineBundle(bundle)
+      setOfflineMode(true)
+      setQTrees(bundleQuestionnaireTrees(bundle))
+      setTreesNotice(bundle.clinical_review_notice)
+    }
     apiFetch('/diagnostic/trees')
       .then(res => {
         if (!res.ok) throw new Error(`Could not load decision trees (HTTP ${res.status}).`)
@@ -81,8 +96,11 @@ export default function Diagnose() {
         setHeldBack(unavailableTrees(data.trees))
         setQTrees(questionnaireTrees(data.trees))
         setTreesNotice(data.clinical_review_notice)
+        // Online: keep the offline library current (only refetched when its version changed).
+        refreshBundle({ apiFetchFn: apiFetch, fetchFn: (url, opts) => fetch(url, opts) })
       })
-      .catch(err => setTreesError(err.message))
+      .catch(err => (typeof navigator !== 'undefined' && navigator.onLine === false
+        ? useOfflineLibrary(err) : setTreesError(err.message)))
   }, [])
 
   const selectQuestionnaire = async (treeId) => {
@@ -90,12 +108,19 @@ export default function Diagnose() {
     setTreeInfo(null)
     setResult(null)
     setInputsError('')
+    if (offlineMode) {
+      setQuestionnaire(bundleQuestionnaire(offlineBundle, treeId))
+      return
+    }
     try {
       const res = await apiFetch(`/diagnostic/trees/${encodeURIComponent(treeId)}/questionnaire`)
       if (!res.ok) throw new Error(`Could not load this tree's questions (HTTP ${res.status}).`)
       setQuestionnaire(await res.json())
     } catch (err) {
-      setInputsError(err.message)
+      const stored = await loadStoredBundle()
+      const offline = stored && bundleQuestionnaire(stored, treeId)
+      if (offline) setQuestionnaire(offline)
+      else setInputsError(err.message)
     }
   }
 
@@ -223,11 +248,18 @@ export default function Diagnose() {
         <section className={styles.section} style={{display: visible('tree') && !result && !questionnaire ? 'block' : 'none'}}>
           <h2>Select a decision tree</h2>
           <ClinicalReviewNotice notice={treesNotice} />
-          <p style={{ margin: '0 0 1rem', color: '#4b5563', fontSize: '0.9rem' }}>
+          {offlineMode && (
+            <div role="status" style={{ padding: '0.6rem 0.9rem', margin: '0 0 1rem', background: '#eff6ff', border: '1px solid #3b82f6', borderRadius: '8px', color: '#1e3a8a', fontSize: '0.875rem' }}>
+              You&apos;re offline. The question-by-question trees below run on this device from offline library{' '}
+              {offlineBundle.version}. The branching trees that evaluate entered findings, medications and patient
+              context need a connection.
+            </div>
+          )}
+          {!offlineMode && <p style={{ margin: '0 0 1rem', color: '#4b5563', fontSize: '0.9rem' }}>
             These {trees.length || ''} trees have branching decision steps. Each later step shows only the
             findings this tree&apos;s branches check, in the tree&apos;s own words. Leave anything you did not
             assess unticked.
-          </p>
+          </p>}
           {heldBack.length > 0 && (
             <div role="note" style={{ padding: '0.6rem 0.9rem', margin: '0 0 1rem', background: '#f3f4f6', border: '1px solid #d1d5db', borderRadius: '8px', color: '#374151', fontSize: '0.875rem' }}>
               {heldBack.length === 1 ? 'One tree is' : `${heldBack.length} trees are`} temporarily unavailable pending

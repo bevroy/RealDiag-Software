@@ -29,11 +29,11 @@ describe('offline responses', () => {
     expect(sw).toMatch(/status: 503,\s*\n\s*headers: \{ 'Content-Type': 'application\/json', 'X-RealDiag-Offline': '1' \}/)
   })
 
-  test('Symptom Search shows the offline message instead of "no results"', () => {
+  test('Symptom Search ranks offline from the offline library, or says it has none, instead of "no results"', () => {
     const page = read('pages', 'symptom-search.js')
-    expect(page).toMatch(/isOfflineResponse\(response\)/)
-    expect(page).toMatch(/setError\(OFFLINE_SEARCH_MESSAGE\)/)
+    expect(page).toMatch(/isOfflineResponse\(response\)\) \{\s*await runOfflineSearch\(\)/)
+    expect(page).toMatch(/if \(!bundle\) \{\s*setError\(OFFLINE_SEARCH_MESSAGE\)/)
     expect(page).not.toMatch(/Cached data is available/)
-    expect(OFFLINE_SEARCH_MESSAGE).toMatch(/^You're offline\./)
+    expect(OFFLINE_SEARCH_MESSAGE).toMatch(/^You're offline, and this device has no offline library yet\./)
   })
 })

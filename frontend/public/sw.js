@@ -1,10 +1,13 @@
 // Enhanced Service Worker for RealDiag PWA - Field-Ready Offline Mode
-const CACHE_VERSION = '4.0.1';
+const CACHE_VERSION = '4.1.0';
 const CACHE_NAME = `realdiag-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `realdiag-runtime-v${CACHE_VERSION}`;
 const RULES_CACHE = `realdiag-rules-v${CACHE_VERSION}`;
 const API_CACHE = `realdiag-api-v${CACHE_VERSION}`;
 const IMAGES_CACHE = `realdiag-images-v${CACHE_VERSION}`;
+// The offline library (utils/offlineBundle.js) has its own cache, versioned by
+// its content; it is kept across service worker updates.
+const OFFLINE_BUNDLE_CACHE = 'realdiag-offline-bundle';
 
 // IndexedDB for offline data: the same name, version and stores as the pages
 // (one definition in offline-db-schema.js).
@@ -121,7 +124,8 @@ self.addEventListener('activate', (event) => {
               name !== RUNTIME_CACHE &&
               name !== RULES_CACHE &&
               name !== API_CACHE &&
-              name !== IMAGES_CACHE
+              name !== IMAGES_CACHE &&
+              name !== OFFLINE_BUNDLE_CACHE
             )
             .map((name) => {
               console.log('[SW] Deleting old cache:', name);

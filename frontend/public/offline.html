@@ -176,14 +176,19 @@
       <a href="/symptom-search" class="secondary">
         Open Symptom Search
       </a>
+      <a href="/diagnose" class="secondary">
+        Open /diagnose
+      </a>
     </div>
     
     <div class="features">
       <h2>While you're offline:</h2>
       <ul class="feature-list">
         <li>Pages you opened while online may still open from this device's cache.</li>
-        <li>A rule library you saved with "Download All Rules" stays on this device and its count is shown under Offline Storage; it cannot be searched offline yet.</li>
-        <li>Symptom search, decision trees (/diagnose), sign-in and EHR features need a connection; Symptom Search says so instead of showing results.</li>
+        <li>Symptom Search ranks from the offline library on this device, once it has been downloaded (it downloads by itself when you open Symptom Search or /diagnose online and signed in). Offline results have no AI suggestions, vital-sign terms or chart history.</li>
+        <li>On /diagnose, the question-by-question trees run from the offline library. The branching trees that evaluate entered findings need a connection.</li>
+        <li>The rule library saved with "Download All Rules" is separate and is not searched.</li>
+        <li>Sign-in, EHR and chart features need a connection.</li>
         <li>Nothing you do offline is saved for later or sent when you reconnect.</li>
       </ul>
     </div>
