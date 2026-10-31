@@ -170,19 +170,14 @@ export default function SymptomSearch() {
       const savedSortBy = localStorage.getItem('sortBy');
       const savedDarkMode = localStorage.getItem('darkMode');
       const savedFontSize = localStorage.getItem('fontSize');
-      const savedRecentSearches = localStorage.getItem('recentSearches');
+      // Recent searches can hold patient details, so they are kept in memory
+      // only (this page, this tab). Remove copies saved by earlier versions.
+      localStorage.removeItem('recentSearches');
       
       if (savedViewMode) setViewMode(savedViewMode);
       if (savedSortBy) setSortBy(savedSortBy);
       if (savedDarkMode) setDarkMode(savedDarkMode === 'true');
       if (savedFontSize) setFontSize(savedFontSize);
-      if (savedRecentSearches) {
-        try {
-          setRecentSearches(JSON.parse(savedRecentSearches));
-        } catch (e) {
-          console.error('Error loading recent searches:', e);
-        }
-      }
       
       // Check authentication (via HttpOnly cookie)
       if (isAuthenticated()) {
@@ -265,8 +260,7 @@ export default function SymptomSearch() {
       s => JSON.stringify(s.symptoms) !== JSON.stringify(newSearch.symptoms)
     )].slice(0, 5); // Keep only 5 most recent
     
-    setRecentSearches(updated);
-    localStorage.setItem('recentSearches', JSON.stringify(updated));
+    setRecentSearches(updated); // memory only: never written to device storage
   };
 
   const loadRecentSearch = (search) => {
