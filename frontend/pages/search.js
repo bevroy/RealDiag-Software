@@ -6,6 +6,8 @@ import { AuthGuard } from '../utils/AuthGuard';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 import { apiFetch } from '../utils/apiClient';
+import { urgencyBadgeColor } from '../utils/urgencyBadge';
+import { icpc2Label } from '../utils/icpc2';
 
 export default function Search() {
   const router = useRouter();
@@ -475,10 +477,23 @@ export default function Search() {
                             ICD-10: {result.icd10}
                           </span>
                         )}
+                        {icpc2Label(result) && (
+                          <span style={{
+                            padding: '0.5rem 1rem',
+                            background: '#f3f4f6',
+                            color: '#374151',
+                            border: '1px solid #d1d5db',
+                            borderRadius: '6px',
+                            fontSize: '0.875rem',
+                            fontWeight: '600'
+                          }}>
+                            {icpc2Label(result)}
+                          </span>
+                        )}
                         {result.urgency && (
                           <span style={{
                             padding: '0.5rem 1rem',
-                            background: result.urgency === 'critical' ? '#dc2626' : result.urgency === 'urgent' ? '#f59e0b' : '#10b981',
+                            background: urgencyBadgeColor(result.urgency),
                             color: 'white',
                             borderRadius: '6px',
                             fontSize: '0.875rem',

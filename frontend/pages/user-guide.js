@@ -107,6 +107,8 @@ export default function UserGuidePage() {
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
+            <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
+            <li>Question-by-question trees (/diagnose, October 2026): 16 trees ask one question at a time and end at an outcome step showing the tree&apos;s workup, treatment information (reference, not an order) and recommendations; Back and Start over change earlier answers. The ICD-10 code and urgency shown for a step are as written in the draft tree.</li>
           </ul>
         </section>
 
@@ -116,6 +118,7 @@ export default function UserGuidePage() {
             <li>Use the Print Guide button for optimized print layout.</li>
             <li>Recommended paper size: Letter or A4.</li>
             <li>Enable background graphics if your institution requires branded copies.</li>
+            <li>ICPC-2 (October 2026): search results show &quot;ICPC-2: pending licensed mapping and review&quot;. ICPC-2 codes will appear only after a licensed mapping has been added and reviewed.</li>
           </ul>
         </section>
 
@@ -144,7 +147,10 @@ export default function UserGuidePage() {
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
+            <li>Offline (October 2026): &quot;Download All Rules&quot; on Symptom Search now says whether the download worked and how many rules were saved; when you are offline, Symptom Search says so instead of showing no results. Searching and decision trees still need a connection.</li>
+            <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
         </section>

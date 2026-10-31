@@ -46,7 +46,10 @@ def test_trees_with_missing_targets_are_held_back_from_diagnose(engine):
     for tree_id in held_back:
         assert listed[tree_id]["unavailable_reason"] == "Temporarily unavailable pending content review."
         assert "pending content review" in engine.inputs(tree_id)["error"]
-    assert all(not t["walk_available"] for t in engine.list() if t["node_format"] != "conditional")
+    # Questionnaire trees are walked one question at a time (test_questionnaire_walk.py);
+    # trees with no decision steps are never walkable.
+    assert all(not t["walk_available"] for t in engine.list()
+               if t["node_format"] not in ("conditional", "questionnaire"))
 
 
 @pytest.mark.parametrize("tree_id", WALKABLE_TREES)

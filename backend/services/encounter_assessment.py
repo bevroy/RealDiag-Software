@@ -17,7 +17,7 @@ EHR data is never sent to an AI provider: ranking uses allow_ai=False.
 
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
 from types import SimpleNamespace
@@ -29,7 +29,9 @@ from backend.services.clinical_review import review_fields, review_notice
 from backend.services.complaint_matching import (
     NO_COMPLAINT, Complaint, affirmed_phrases, resolve_complaint, split_negated,
 )
-from backend.services.fhir_client import RESOURCE_LABELS, RETRIEVED, NOT_AVAILABLE, retrieval_warnings
+from backend.services.fhir_client import (
+    LAB_LOOKBACK_DAYS, RESOURCE_LABELS, RETRIEVED, NOT_AVAILABLE, retrieval_warnings,
+)
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
 from backend.services.missed_items import (
@@ -263,8 +265,18 @@ def _history_status(history: Any, history_error: Optional[Exception]) -> Dict[st
     return {r: status[r] for r in HISTORY_RESOURCES if r in status}
 
 
+def _within_days(when: Any, days: int, now: datetime) -> bool:
+    if not isinstance(when, datetime):
+        return False
+    if when.tzinfo is not None:
+        when = when.astimezone(timezone.utc).replace(tzinfo=None)
+    if now.tzinfo is not None:
+        now = now.astimezone(timezone.utc).replace(tzinfo=None)
+    return when >= now - timedelta(days=days)
+
+
 def build_summary(patient_data: Any, history: Any, history_status: Dict[str, str],
-                  summary_response: Callable[[Any], Any]) -> Dict[str, Any]:
+                  summary_response: Callable[[Any], Any], now: Optional[datetime] = None) -> Dict[str, Any]:
     from backend.services.patient_history_service import PatientHistoryService, _concept_name
 
     chart = summary_response(patient_data).dict()
@@ -275,7 +287,11 @@ def build_summary(patient_data: Any, history: Any, history_status: Dict[str, str
         "diagnostic_tests": status.get("labs", RETRIEVED),
         "visit_notes": history_status.get("visit_notes", RETRIEVED),
     }
-    abnormal = [lab for lab in patient_data.labs if getattr(lab, "is_abnormal", False)]
+    # Labs here include longer criteria/screening lookbacks (up to years); the
+    # count covers only the chart-summary window, and the text says which.
+    now = now or datetime.now()
+    abnormal = [lab for lab in patient_data.labs if getattr(lab, "is_abnormal", False)
+                and _within_days(getattr(lab, "effective_date", None), LAB_LOOKBACK_DAYS, now)]
     text = PatientHistoryService._generate_summary(
         {"name": patient_data.name, "age": patient_data.age, "gender": patient_data.gender},
         [{"code": _concept_name(c.get("code"))} for c in patient_data.conditions],
@@ -283,6 +299,7 @@ def build_summary(patient_data: Any, history: Any, history_status: Dict[str, str
         [SimpleNamespace(abnormal=True) for _ in abnormal],
         list(getattr(history, "visit_notes", []) or []),
         summary_status,
+        abnormal_window=f"in the last {LAB_LOOKBACK_DAYS} days",
     )
     all_status = {**status, **history_status}
     chart.update({
@@ -395,7 +412,7 @@ async def assess_encounter(
     tree_ids = [d["tree_id"] for d in diagnoses["items"]]
     history_status = _history_status(history, history_error)
     history_status["smoking_status"] = smoking_status
-    summary = build_summary(patient_data, history, history_status, summary_response)
+    summary = build_summary(patient_data, history, history_status, summary_response, now=now)
     missed = possible_missed_items(engine, patient_data, history, smoking, summary["data_status"], now=now)
 
     return {

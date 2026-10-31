@@ -27,7 +27,7 @@ import yaml
 
 from backend.services.clinical_review import SCREENING_RULES_PATH, review_fields
 from backend.services.fhir_client import NOT_AVAILABLE, RESOURCE_LABELS, RETRIEVED
-from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine, known_condition
+from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine, known_condition, suppressing_condition
 
 # How far back the encounter assessment pulls screening evidence
 SCREENING_LAB_LOOKBACK_DAYS = 3650
@@ -177,6 +177,8 @@ def abnormal_without_diagnosis(engine: SmartDiagnosticEngine, evaluations: Dict[
         if (criteria.get("display") == "when_met" or evaluation is None
                 or evaluation.finding not in ("consistent", "possible") or evaluation.known_condition):
             continue
+        if suppressing_condition(engine.trees, criteria, patient_data.conditions):
+            continue  # e.g. diabetes on the problem list: prediabetes is not "missing"
         label = criteria.get("finding_label", tree.get("name", tree_id))
         source = criteria.get("source", "")
         lookback = max(int(i.get("lookback_days") or 0) for i in criteria["items"]) or None
