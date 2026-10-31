@@ -57,3 +57,18 @@ test('evidence labels', () => {
   expect(evidenceLabel('criteria')).toBe('Chart criteria')
   expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
 })
+
+describe('medication review', () => {
+  const { parseEncounterAssessment, MEDICATION_REVIEW_UNAVAILABLE } = require('../utils/encounterAssessment')
+
+  test('passes the section through', () => {
+    const review = { title: 'Medication review', notice: 'n', medications: ['Warfarin 5 mg'], alerts: [{ type: 'drug_interaction' }], history: null, not_checked: [] }
+    expect(parseEncounterAssessment({ medication_review: review }).medicationReview).toBe(review)
+  })
+
+  test('a missing section is reported as not reviewed, never as no alerts', () => {
+    const review = parseEncounterAssessment({}).medicationReview
+    expect(review.alerts).toEqual([])
+    expect(review.not_checked).toEqual([MEDICATION_REVIEW_UNAVAILABLE])
+  })
+})

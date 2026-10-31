@@ -198,6 +198,15 @@ def _get_outcome_bias(med_class: str, outcome_learning_weight: float) -> float:
     return raw * outcome_learning_weight
 
 
+# Words in a medication stop reason that mark it as an adverse reaction.
+ADVERSE_STOP_TOKENS = ("adverse", "allergy", "rash", "anaphyl", "intoler", "side effect")
+
+
+def is_adverse_stop_reason(reason: Optional[str]) -> bool:
+    text = (reason or "").lower()
+    return any(tok in text for tok in ADVERSE_STOP_TOKENS)
+
+
 def _extract_med_history_features(
     medication_history: List[Dict[str, Any]],
     current_medications: List[Dict[str, Any]],
@@ -247,7 +256,7 @@ def _extract_med_history_features(
         outcome_bias = _get_outcome_bias(med_class, float(weights.get("outcome_learning_weight", 0.6)))
 
         reason_text = _normalize_text(med.get("stop_reason") or med.get("reason") or med.get("note"))
-        adverse_stop = any(tok in reason_text for tok in ["adverse", "allergy", "rash", "anaphyl", "intoler", "side effect"])
+        adverse_stop = is_adverse_stop_reason(reason_text)
 
         is_discontinued = status in ["stopped", "completed", "cancelled"]
         if is_discontinued and days_ago is not None and days_ago <= 30:

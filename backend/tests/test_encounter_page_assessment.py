@@ -320,6 +320,18 @@ def test_abnormal_count_omitted_when_none_in_window(engine, no_ai):
     assert "flagged abnormal" not in text
 
 
+def test_medication_review_section(engine, no_ai):
+    data = patient(labs=[troponin()])
+    data.medications = [{"medicationCodeableConcept": {"text": "Warfarin 5 mg"}},
+                        {"medicationCodeableConcept": {"text": "Aspirin 81 mg"}}]
+    review = run(engine, data, "chest pain")[0]["medication_review"]
+    assert review["title"] == "Medication review"
+    assert review["medications"] == ["Warfarin 5 mg", "Aspirin 81 mg"]
+    assert any(a["type"] == "drug_interaction" for a in review["alerts"])
+    # The fake history has no medication status, so the history part is reported as not checked.
+    assert any("medication history could not be retrieved" in n for n in review["not_checked"])
+
+
 def test_summary_section(engine, no_ai):
     data = patient(labs=[troponin()], conditions=[{"code": {"text": "Hypertension"}}])
     data.truncation_warnings = ["Lab results cut off: the page limit was reached after 1000 results, "

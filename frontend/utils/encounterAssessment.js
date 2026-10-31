@@ -12,6 +12,9 @@ const MISSING_SECTION_WARNING =
 const MISSED_ITEMS_UNAVAILABLE =
   'The server did not return the possible missed items check; it was not run.'
 
+const MEDICATION_REVIEW_UNAVAILABLE =
+  'The server did not return the medication review; medications were not reviewed.'
+
 const EVIDENCE_LABELS = {
   'complaint and criteria': "Matches today's complaint and chart criteria",
   criteria: 'Chart criteria',
@@ -44,9 +47,15 @@ function parseEncounterAssessment(body) {
     missedItems: b.missed_items && Array.isArray(b.missed_items.checks)
       ? b.missed_items
       : { title: 'Possible missed items', notice: MISSED_ITEMS_UNAVAILABLE, checks: [], item_count: 0 },
+    medicationReview: b.medication_review && Array.isArray(b.medication_review.alerts)
+      ? b.medication_review
+      : { title: 'Medication review', notice: null, medications: [], alerts: [], history: null,
+          not_checked: [MEDICATION_REVIEW_UNAVAILABLE] },
     decisionSupportNotice: b.decision_support_notice || null,
     clinicalReviewNotice: b.clinical_review_notice,
   }
 }
 
-module.exports = { parseEncounterAssessment, evidenceLabel, MISSING_SECTION_WARNING, MISSED_ITEMS_UNAVAILABLE }
+module.exports = {
+  parseEncounterAssessment, evidenceLabel, MISSING_SECTION_WARNING, MISSED_ITEMS_UNAVAILABLE, MEDICATION_REVIEW_UNAVAILABLE,
+}
