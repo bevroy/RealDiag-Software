@@ -681,9 +681,17 @@ async def evaluate_tree(
             if "warnings" not in response:
                 response["warnings"] = []
             for alert in major_interactions:
+                # A major alert is a drug interaction only when it names a second drug;
+                # otherwise it is e.g. a contraindication with a condition.
+                if alert.get('interacting_medication'):
+                    kind = "major_drug_interaction"
+                    message = f"⚠️ Major interaction: {alert['medication']} + {alert['interacting_medication']}"
+                else:
+                    kind = f"major_{alert.get('alert_type') or 'alert'}"
+                    message = f"⚠️ Major: {alert.get('description') or alert['medication']}"
                 response["warnings"].append({
-                    "type": "major_drug_interaction",
-                    "message": f"⚠️ Major interaction: {alert['medication']} + {alert['interacting_medication']}",
+                    "type": kind,
+                    "message": message,
                     "details": alert['clinical_effect'],
                     "recommendation": alert['recommendation']
                 })
