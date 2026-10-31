@@ -27,6 +27,7 @@ import {
   onConnectionChange
 } from '../utils/offlineManager';
 import { downloadMessage } from '../utils/ruleDownload';
+import { OFFLINE_SEARCH_MESSAGE, isOfflineError, isOfflineResponse } from '../utils/offlineResponse';
 import {
   isVoiceInputSupported,
   createVoiceRecognition,
@@ -434,7 +435,7 @@ export default function SymptomSearch() {
       if (online) {
         speak('Connection restored');
       } else {
-        speak('You are now offline. Cached data is available.');
+        speak('You are offline. Symptom search needs a connection.');
       }
     });
 
@@ -721,6 +722,15 @@ export default function SymptomSearch() {
       return;
     }
 
+    // Offline: say so, rather than running a search that cannot reach the
+    // server and showing "no results".
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      setError(OFFLINE_SEARCH_MESSAGE);
+      setHasSearched(false);
+      setResults([]);
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setNeedsLogin(false);
@@ -768,6 +778,14 @@ export default function SymptomSearch() {
         return;
       }
 
+      if (isOfflineResponse(response)) {
+        setError(OFFLINE_SEARCH_MESSAGE);
+        setHasSearched(false);
+        setResults([]);
+        setNegatedTerms([]);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(`Search failed: ${response.statusText}`);
       }
@@ -803,7 +821,12 @@ export default function SymptomSearch() {
         }
       }
     } catch (err) {
-      setError(err.message);
+      if (isOfflineError(err)) {
+        setError(OFFLINE_SEARCH_MESSAGE);
+        setHasSearched(false);
+      } else {
+        setError(err.message);
+      }
       setResults([]);
       setNegatedTerms([]);
     } finally {

@@ -141,22 +141,18 @@ self.addEventListener('fetch', (event) => {
 
   // Skip non-GET requests
   if (request.method !== 'GET') {
-    // For POST/PUT/DELETE when offline, queue for sync
+    // Offline: answer with a clear "offline" response (503, header
+    // X-RealDiag-Offline: 1) instead of a fake success. Nothing is queued:
+    // a search or save replayed later would reach no one.
     if (!navigator.onLine) {
-      event.respondWith(
-        (async () => {
-          await saveToStore(STORES.SYNC_QUEUE, {
-            url: request.url,
-            method: request.method,
-            headers: [...request.headers],
-            body: await request.text(),
-            timestamp: Date.now()
-          });
-          return new Response(JSON.stringify({ queued: true, offline: true }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-        })()
-      );
+      event.respondWith(new Response(JSON.stringify({
+        offline: true,
+        error: 'offline',
+        message: "You're offline. This action needs a connection to the RealDiag server."
+      }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json', 'X-RealDiag-Offline': '1' }
+      }));
     }
     return;
   }
@@ -188,7 +184,7 @@ self.addEventListener('fetch', (event) => {
             offline: true 
           }), {
             status: 503,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'X-RealDiag-Offline': '1' }
           });
         })
     );
