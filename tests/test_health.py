@@ -39,14 +39,14 @@ def test_root_endpoint_redirect(test_client: TestClient):
     assert response.status_code in [200, 301]  # Either HTML or redirect
 
 
-def test_docs_endpoint(test_client: TestClient):
+def test_docs_endpoint(test_client: TestClient, signed_in):
     """Test /docs endpoint is accessible"""
     response = test_client.get("/docs")
     assert response.status_code == 200
     assert "text/html" in response.headers.get("content-type", "")
 
 
-def test_openapi_json(test_client: TestClient):
+def test_openapi_json(test_client: TestClient, signed_in):
     """Test /openapi.json is accessible"""
     response = test_client.get("/openapi.json")
     assert response.status_code == 200
@@ -56,9 +56,16 @@ def test_openapi_json(test_client: TestClient):
     assert data["info"]["title"] == "RealDiag API"
 
 
-def test_metrics_endpoint(test_client: TestClient):
+def test_metrics_endpoint(test_client: TestClient, signed_in):
     """Test /metrics endpoint for Prometheus"""
     response = test_client.get("/metrics")
     assert response.status_code == 200
     # Prometheus metrics are plain text
     assert "realdiag_requests_total" in response.text or response.status_code == 200
+
+
+def test_docs_and_metrics_need_a_signed_in_session():
+    from backend.main import app
+    with TestClient(app) as anonymous:
+        for path in ("/docs", "/openapi.json", "/redoc", "/metrics"):
+            assert anonymous.get(path).status_code == 401, path

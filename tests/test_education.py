@@ -26,8 +26,17 @@ def authenticated_user(test_client: TestClient) -> dict:
         },
     )
     assert response.status_code == 201
-    test_client.cookies.set("access_token", response.cookies.get("access_token"))
-    return response.json()["user"]
+    user = response.json()["user"]
+    user["_token"] = response.cookies.get("access_token")
+    return user
+
+
+@pytest.fixture(autouse=True)
+def _signed_in(test_client: TestClient, authenticated_user: dict):
+    """Education content needs a signed-in session (main.py PUBLIC_PATHS)."""
+    test_client.cookies.set("access_token", authenticated_user["_token"])
+    yield
+    test_client.cookies.clear()
 
 
 def test_education_cases_endpoint(test_client: TestClient):

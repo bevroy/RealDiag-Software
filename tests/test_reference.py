@@ -6,6 +6,9 @@ Tests for diagnostic rules and reference endpoints
 import pytest
 from fastapi.testclient import TestClient
 
+# The reference library needs a signed-in session (main.py PUBLIC_PATHS).
+pytestmark = pytest.mark.usefixtures("signed_in")
+
 
 VALID_FAMILIES = [
     "neurology",

@@ -140,35 +140,33 @@ app = FastAPI(
 
 # Global access control: require authentication for all application routes
 # except explicit auth and health endpoints required for login and service ops.
+# Accounts are invite-only (access_policy); the API docs, metrics, reference
+# library and education content need a signed-in session.
 PUBLIC_PATHS = {
+    # Service health checks (Render, uptime monitors): no data.
     "/health",
     "/health/version",
-    "/metrics",
+    "/version",
+    "/",
+    # Signing in and recovering an account.
     "/users/login",
-    "/users/register",
+    "/users/register",  # answers 403 "by invitation only" unless ALLOW_SELF_REGISTRATION
     "/users/forgot-password",
-    "/users/reset-password",
+    "/users/reset-password",  # also the invite setup link
     "/users/verify-email",
     "/users/resend-verification",
     # Second sign-in step: authenticated by the short-lived mfa_token from
     # /users/login (there is no session yet).
     "/mfa/login-verify",
-    "/",
-    "/version",
-    "/docs",
-    "/openapi.json",
-    "/redoc",
-    "/education/learning-objectives",
-    "/education/quiz/questions",
     # Auth enforced by verify_user_or_api_key (X-API-Key), not the JWT-only global gate.
     "/integration/symptom-search/patient",
 }
 
 PUBLIC_PREFIXES = (
     "/static/",
+    # SMART on FHIR: the EHR launch/callback, and patient routes authorized by
+    # the server-side SMART session cookie (smart_router.get_active_smart_session).
     "/smart/",
-    "/reference/",
-    "/education/cases",
 )
 
 

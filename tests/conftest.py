@@ -55,6 +55,25 @@ def test_client() -> Generator[TestClient, None, None]:
 
 
 @pytest.fixture(scope="session")
+def session_token(test_client: TestClient) -> str:
+    """A signed-in session for tests of routes that need login."""
+    import uuid
+    email = f"suite-{uuid.uuid4().hex[:8]}@realdiag.com"
+    response = test_client.post("/users/register", json={"email": email, "password": "SuitePass123!", "full_name": "Suite"})
+    assert response.status_code == 201, response.text
+    test_client.cookies.clear()
+    return response.cookies.get("access_token")
+
+
+@pytest.fixture
+def signed_in(test_client: TestClient, session_token: str):
+    """Attach the suite's signed-in session to test_client for one test."""
+    test_client.cookies.set("access_token", session_token)
+    yield
+    test_client.cookies.clear()
+
+
+@pytest.fixture(scope="session")
 def sample_symptoms() -> Dict[str, Any]:
     """Sample symptom data for testing"""
     return {

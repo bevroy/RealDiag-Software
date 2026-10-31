@@ -16,12 +16,11 @@ def test_root_html_renders_template():
 
 
 def test_root_non_html_redirects_to_docs():
-    # TestClient follows redirects by default; request as non-HTML client and
-    # assert the final URL is the docs page.
-    r = client.get("/", headers={"Accept": "application/json"})
-    assert r.status_code == 200
-    # final URL should be the docs page
-    assert r.url.path == "/docs"
+    # Non-HTML clients are redirected to the docs page, which needs a
+    # signed-in session (main.py PUBLIC_PATHS).
+    r = client.get("/", headers={"Accept": "application/json"}, follow_redirects=False)
+    assert r.status_code == 301 and r.headers["location"] == "/docs"
+    assert client.get("/docs").status_code == 401
 
 
 def test_version_endpoint():
