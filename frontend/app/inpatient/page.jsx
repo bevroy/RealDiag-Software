@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEvaluationResponse } from '../../utils/evaluationResponse';
+import { encounterHref } from '../../utils/encounterLink';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
@@ -178,6 +179,11 @@ function Inpatient() {
         >
           Handoff
         </button>
+        {encounterHref(patientId) && (
+          <a href={encounterHref(patientId)} style={styles.tabLink}>
+            Encounter Assessment →
+          </a>
+        )}
       </div>
 
       <div style={styles.content}>
@@ -583,6 +589,7 @@ const styles = {
   mrn: { fontSize: '14px', fontFamily: 'monospace' },
   stats: { fontSize: '12px', opacity: 0.8 },
   tabBar: { display: 'flex', gap: '4px', maxWidth: '1200px', margin: '16px auto 0', padding: '0 24px' },
+  tabLink: { padding: '10px 20px', color: '#1d4ed8', fontSize: '14px', fontWeight: 600, textDecoration: 'underline', alignSelf: 'center' },
   tabButton: { padding: '10px 20px', backgroundColor: '#e5e7eb', color: '#374151', border: 'none', borderRadius: '6px 6px 0 0', fontSize: '14px', fontWeight: 600, cursor: 'pointer' },
   tabButtonActive: { backgroundColor: 'white', color: '#667eea', boxShadow: '0 -2px 4px rgba(0,0,0,0.05)' },
   content: { maxWidth: '1200px', margin: '0 auto', padding: '24px', backgroundColor: 'white', borderRadius: '0 8px 8px 8px' },

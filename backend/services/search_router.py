@@ -11,7 +11,7 @@ import yaml
 import sys
 import os
 from backend.services.auth_service import get_current_user
-from backend.services.tree_schema import icd10_codes, snomed_codes as tree_snomed_codes
+from backend.services.tree_schema import homeopathy_remedies, icd10_codes, snomed_codes as tree_snomed_codes
 from backend.services.clinical_review import review_fields, review_notice
 from backend.services.content_labels import (
     AI_CONTENT_LABEL,
@@ -194,7 +194,17 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
         else:
             referrals.add(str(top_referrals))
     
-    # Homeopathic remedies
+    # Homeopathic remedies: the current template's homeopathy.remedies
+    # ({remedy, indications}), then the legacy top-level and node-level keys.
+    for remedy in homeopathy_remedies(tree_data):
+        if isinstance(remedy, dict):
+            remedy_name = remedy.get('remedy', '')
+            indications = remedy.get('indications', '')
+            if remedy_name:
+                homeopathic_remedies.add(f"{remedy_name}: {indications}" if indications else remedy_name)
+        elif remedy:
+            homeopathic_remedies.add(str(remedy))
+
     top_remedies = tree_data.get('homeopathic_remedies', [])
     if top_remedies:
         if isinstance(top_remedies, list):

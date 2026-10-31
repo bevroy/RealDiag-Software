@@ -92,6 +92,7 @@ export default function UserGuidePage() {
             <li>Use output as decision support, not as a standalone clinical determination.</li>
             <li><strong>Encounter Assessment (EHR launch):</strong> open it from the patient banner. Type today&apos;s complaint, or leave it blank to use the EHR&apos;s visit reason; the source is shown. The page combines the chart summary (with any data that could not be retrieved or was cut off), diagnoses matched to the complaint and to chart results with their evidence, workup, treatment information and referrals from each matched tree, listed red flags, and what could not be assessed. Negated complaints (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not matched.</li>
             <li><strong>Possible missed items:</strong> the encounter assessment also lists, from chart data only, abnormal results whose condition is not on the problem list, problem-list conditions with no supporting result or related medication, and USPSTF screenings that may be due. Each line cites its source and review status; expand it for the evidence, the window checked and caveats. These are prompts to consider, not findings that something was missed.</li>
+            <li>Encounter Assessment, possible missed items (October 2026): a fourth check lists medications on the medication list when none of the conditions RealDiag links them to is on the problem list. RealDiag links medications only to the chronic conditions it has chart criteria for, so a medication used for something else may be listed; review each one.</li>
           </ul>
         </section>
 
@@ -107,6 +108,7 @@ export default function UserGuidePage() {
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
+            <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
           </ul>
         </section>
 
@@ -144,7 +146,10 @@ export default function UserGuidePage() {
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
+            <li>Offline (October 2026): &quot;Download All Rules&quot; on Symptom Search now says whether the download worked and how many rules were saved; when you are offline, Symptom Search says so instead of showing no results. Searching and decision trees still need a connection.</li>
+            <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
         </section>

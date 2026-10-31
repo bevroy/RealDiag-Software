@@ -5,6 +5,9 @@
  */
 
 import { apiFetch } from './apiClient';
+import { downloadRules } from './ruleDownload';
+import { requestToPromise, transactionDone } from './idb';
+import OFFLINE_DB from '../public/offline-db-schema';
 
 import { 
   encryptData, 
@@ -13,16 +16,10 @@ import {
   isCryptoAvailable 
 } from './crypto.js';
 
-// IndexedDB configuration
-const DB_NAME = 'RealDiagOfflineDB';
-const DB_VERSION = 4; // Incremented for encryption migration
-const STORES = {
-  RULES: 'rules',
-  SEARCHES: 'searches',
-  FAVORITES: 'favorites',
-  SYNC_QUEUE: 'syncQueue',
-  USER_DATA: 'userData'
-};
+// IndexedDB configuration: shared with the service worker (public/sw.js)
+const DB_NAME = OFFLINE_DB.name;
+const DB_VERSION = OFFLINE_DB.version;
+const STORES = OFFLINE_DB.STORES;
 
 // Encryption settings
 const ENCRYPT_SEARCHES = true; // Searches may contain PHI
@@ -37,35 +34,7 @@ export async function openDB() {
     request.onerror = () => reject(request.error);
     request.onsuccess = () => resolve(request.result);
     
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      
-      // Create stores if they don't exist
-      if (!db.objectStoreNames.contains(STORES.RULES)) {
-        const rulesStore = db.createObjectStore(STORES.RULES, { keyPath: 'id' });
-        rulesStore.createIndex('family', 'family', { unique: false });
-        rulesStore.createIndex('lastUpdated', 'lastUpdated', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SEARCHES)) {
-        const searchesStore = db.createObjectStore(STORES.SEARCHES, { keyPath: 'id', autoIncrement: true });
-        searchesStore.createIndex('timestamp', 'timestamp', { unique: false });
-        searchesStore.createIndex('synced', 'synced', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.FAVORITES)) {
-        db.createObjectStore(STORES.FAVORITES, { keyPath: 'id', autoIncrement: true });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
-        const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id', autoIncrement: true });
-        syncStore.createIndex('timestamp', 'timestamp', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.USER_DATA)) {
-        db.createObjectStore(STORES.USER_DATA, { keyPath: 'key' });
-      }
-    };
+    request.onupgradeneeded = (event) => OFFLINE_DB.upgrade(event.target.result);
   });
 }
 
@@ -82,7 +51,8 @@ export async function saveRule(rule) {
     downloadedAt: Date.now()
   };
   
-  await store.put(ruleWithMeta);
+  store.put(ruleWithMeta);
+  await transactionDone(transaction);
   return ruleWithMeta;
 }
 
@@ -91,7 +61,7 @@ export async function getRule(ruleId) {
   const db = await openDB();
   const transaction = db.transaction([STORES.RULES], 'readonly');
   const store = transaction.objectStore(STORES.RULES);
-  return await store.get(ruleId);
+  return requestToPromise(store.get(ruleId));
 }
 
 // Get all rules from offline storage
@@ -99,7 +69,7 @@ export async function getAllRules() {
   const db = await openDB();
   const transaction = db.transaction([STORES.RULES], 'readonly');
   const store = transaction.objectStore(STORES.RULES);
-  const rules = await store.getAll();
+  const rules = await requestToPromise(store.getAll());
   if (!Array.isArray(rules)) {
     return [];
   }
@@ -112,14 +82,19 @@ export async function getRulesByFamily(family) {
   const transaction = db.transaction([STORES.RULES], 'readonly');
   const store = transaction.objectStore(STORES.RULES);
   const index = store.index('family');
-  return await index.getAll(family);
+  return requestToPromise(index.getAll(family));
 }
 
 // Save search to offline storage (ENCRYPTED)
 export async function saveSearch(search) {
   const db = await openDB();
-  const transaction = db.transaction([STORES.SEARCHES], 'readwrite');
-  const store = transaction.objectStore(STORES.SEARCHES);
+  // Open the transaction only when writing: it closes on its own while
+  // encryption is awaited, and a write on a closed transaction fails.
+  let currentTx = null;
+  const openStore = () => {
+    currentTx = db.transaction([STORES.SEARCHES], 'readwrite');
+    return currentTx.objectStore(STORES.SEARCHES);
+  };
   
   const searchWithMeta = {
     ...search,
@@ -148,8 +123,9 @@ export async function saveSearch(search) {
     }
   }
   
-  const request = await store.add(dataToStore);
-  return request;
+  const key = await requestToPromise(openStore().add(dataToStore));
+  await transactionDone(currentTx);
+  return key;
 }
 
 // Get all searches (DECRYPT if encrypted)
@@ -157,7 +133,7 @@ export async function getAllSearches() {
   const db = await openDB();
   const transaction = db.transaction([STORES.SEARCHES], 'readonly');
   const store = transaction.objectStore(STORES.SEARCHES);
-  const searches = await store.getAll();
+  const searches = await requestToPromise(store.getAll());
   
   // Ensure searches is an array
   if (!Array.isArray(searches)) {
@@ -185,32 +161,16 @@ export async function getAllSearches() {
   return decrypted.sort((a, b) => b.timestamp - a.timestamp);
 }
 
-// Get unsynced searches
-export async function getUnsyncedSearches() {
-  const db = await openDB();
-  const transaction = db.transaction([STORES.SEARCHES], 'readonly');
-  const store = transaction.objectStore(STORES.SEARCHES);
-  const index = store.index('synced');
-  return await index.getAll(false);
-}
-
-// Mark search as synced
-export async function markSearchSynced(searchId) {
-  const db = await openDB();
-  const transaction = db.transaction([STORES.SEARCHES], 'readwrite');
-  const store = transaction.objectStore(STORES.SEARCHES);
-  const search = await store.get(searchId);
-  if (search) {
-    search.synced = true;
-    await store.put(search);
-  }
-}
-
 // Save favorite
 export async function saveFavorite(favorite) {
   const db = await openDB();
-  const transaction = db.transaction([STORES.FAVORITES], 'readwrite');
-  const store = transaction.objectStore(STORES.FAVORITES);
+  // Open the transaction only when writing: it closes on its own while
+  // encryption is awaited, and a write on a closed transaction fails.
+  let currentTx = null;
+  const openStore = () => {
+    currentTx = db.transaction([STORES.FAVORITES], 'readwrite');
+    return currentTx.objectStore(STORES.FAVORITES);
+  };
   
   const favoriteData = {
     ...favorite,
@@ -222,20 +182,24 @@ export async function saveFavorite(favorite) {
   if (encKey && isCryptoAvailable()) {
     try {
       const { encrypted, salt, iv } = await encryptData(favoriteData, encKey);
-      return await store.add({
+      const key = await requestToPromise(openStore().add({
         _encrypted: true,
         data: encrypted,
         salt,
         iv,
         addedAt: favoriteData.addedAt
-      });
+      }));
+      await transactionDone(currentTx);
+      return key;
     } catch (error) {
       console.error('[OfflineManager] Favorite encryption failed, storing unencrypted:', error);
     }
   }
   
   // Fallback to unencrypted
-  return await store.add(favoriteData);
+  const key = await requestToPromise(openStore().add(favoriteData));
+  await transactionDone(currentTx);
+  return key;
 }
 
 // Get all favorites
@@ -243,7 +207,7 @@ export async function getAllFavorites() {
   const db = await openDB();
   const transaction = db.transaction([STORES.FAVORITES], 'readonly');
   const store = transaction.objectStore(STORES.FAVORITES);
-  const favorites = await store.getAll();
+  const favorites = await requestToPromise(store.getAll());
   
   if (!Array.isArray(favorites)) {
     return [];
@@ -275,48 +239,14 @@ export async function deleteFavorite(favoriteId) {
   const db = await openDB();
   const transaction = db.transaction([STORES.FAVORITES], 'readwrite');
   const store = transaction.objectStore(STORES.FAVORITES);
-  await store.delete(favoriteId);
+  store.delete(favoriteId);
+  await transactionDone(transaction);
 }
 
-// Download all rules from API
+// Download all rules from the API (GET /rules/all). The result reports what
+// actually happened: success only when every rule was saved.
 export async function downloadAllRules(apiBase, onProgress) {
-  try {
-    // Get list of all available rules
-    const response = await apiFetch(`/rules/list`);
-    if (!response.ok) throw new Error('Failed to fetch rules list');
-    
-    const rulesList = await response.json();
-    const total = rulesList.length;
-    let downloaded = 0;
-    
-    // Download each rule
-    for (const ruleInfo of rulesList) {
-      try {
-        const ruleResponse = await apiFetch(`/rules/${ruleInfo.id}`);
-        if (ruleResponse.ok) {
-          const rule = await ruleResponse.json();
-          await saveRule(rule);
-          downloaded++;
-          
-          if (onProgress) {
-            onProgress({
-              downloaded,
-              total,
-              current: ruleInfo.id,
-              percentage: Math.round((downloaded / total) * 100)
-            });
-          }
-        }
-      } catch (error) {
-        console.error(`Failed to download rule ${ruleInfo.id}:`, error);
-      }
-    }
-    
-    return { success: true, downloaded, total };
-  } catch (error) {
-    console.error('Error downloading rules:', error);
-    return { success: false, error: error.message };
-  }
+  return downloadRules({ fetchRules: () => apiFetch('/rules/all'), saveRule, onProgress });
 }
 
 // Get offline data statistics
@@ -384,9 +314,9 @@ export async function clearAllOfflineData() {
     const transaction = db.transaction(Object.values(STORES), 'readwrite');
     
     for (const storeName of Object.values(STORES)) {
-      const store = transaction.objectStore(storeName);
-      await store.clear();
+      transaction.objectStore(storeName).clear();
     }
+    await transactionDone(transaction);
     
     return { success: true };
   } catch (error) {
@@ -416,39 +346,16 @@ export async function getServiceWorkerStatus() {
   };
 }
 
-// Request background sync
-export async function requestBackgroundSync(tag = 'sync-searches') {
-  if (!isServiceWorkerSupported()) return false;
-  
-  const registration = await navigator.serviceWorker.ready;
-  if ('sync' in registration) {
-    try {
-      await registration.sync.register(tag);
-      return true;
-    } catch (error) {
-      console.error('Background sync registration failed:', error);
-      return false;
-    }
-  }
-  return false;
-}
-
-// Listen for sync messages from service worker
-export function listenForSyncMessages(callback) {
-  if (!isServiceWorkerSupported()) return;
-  
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data.type && event.data.type.endsWith('_SYNCED')) {
-      callback(event.data);
-    }
-  });
-}
-
 // Save user data with encryption
 export async function saveUserData(key, value) {
   const db = await openDB();
-  const transaction = db.transaction([STORES.USER_DATA], 'readwrite');
-  const store = transaction.objectStore(STORES.USER_DATA);
+  // Open the transaction only when writing: it closes on its own while
+  // encryption is awaited, and a write on a closed transaction fails.
+  let currentTx = null;
+  const openStore = () => {
+    currentTx = db.transaction([STORES.USER_DATA], 'readwrite');
+    return currentTx.objectStore(STORES.USER_DATA);
+  };
   
   const userData = {
     key,
@@ -461,21 +368,25 @@ export async function saveUserData(key, value) {
   if (ENCRYPT_USER_DATA && encKey && isCryptoAvailable()) {
     try {
       const { encrypted, salt, iv } = await encryptData(userData, encKey);
-      return await store.put({
+      const stored = await requestToPromise(openStore().put({
         key, // Keep key unencrypted for lookup
         _encrypted: true,
         data: encrypted,
         salt,
         iv,
         updatedAt: userData.updatedAt
-      });
+      }));
+      await transactionDone(currentTx);
+      return stored;
     } catch (error) {
       console.error('[OfflineManager] User data encryption failed, storing unencrypted:', error);
     }
   }
   
   // Fallback to unencrypted
-  return await store.put(userData);
+  const stored = await requestToPromise(openStore().put(userData));
+  await transactionDone(currentTx);
+  return stored;
 }
 
 // Get user data with decryption
@@ -483,7 +394,7 @@ export async function getUserData(key) {
   const db = await openDB();
   const transaction = db.transaction([STORES.USER_DATA], 'readonly');
   const store = transaction.objectStore(STORES.USER_DATA);
-  const userData = await store.get(key);
+  const userData = await requestToPromise(store.get(key));
   
   if (!userData) return null;
   
@@ -511,7 +422,8 @@ export async function deleteUserData(key) {
   const db = await openDB();
   const transaction = db.transaction([STORES.USER_DATA], 'readwrite');
   const store = transaction.objectStore(STORES.USER_DATA);
-  await store.delete(key);
+  store.delete(key);
+  await transactionDone(transaction);
 }
 
 // Get online status
@@ -533,8 +445,6 @@ export default {
   getRulesByFamily,
   saveSearch,
   getAllSearches,
-  getUnsyncedSearches,
-  markSearchSynced,
   saveFavorite,
   getAllFavorites,
   deleteFavorite,
@@ -546,8 +456,6 @@ export default {
   clearAllOfflineData,
   isServiceWorkerSupported,
   getServiceWorkerStatus,
-  requestBackgroundSync,
-  listenForSyncMessages,
   isOnline,
   onConnectionChange
 };

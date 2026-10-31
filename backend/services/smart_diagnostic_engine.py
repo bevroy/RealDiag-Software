@@ -30,6 +30,9 @@ backend/scripts/validate_rules.py):
       suggest_when: {count_met: 1, group: <optional>}
       confirm: {min_abnormal_results: 2}            # optional
       known_condition: {icd10_prefixes: [...], snomed: [...]}   # optional
+      suppressed_by: [<tree_id>, ...]   # optional: another tree's known_condition on the
+                                       # problem list means this finding is not reported as
+                                       # missing (e.g. diabetes suppresses prediabetes)
       severity_default: moderate
       severity: [ ...rules... ]
       next_steps: [ ...decision-support text... ]
@@ -58,7 +61,9 @@ logger = logging.getLogger(__name__)
 
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
-OPERATORS = (">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low")
+# between: low <= v <= high. at_least_below: low <= v < high, so a range can end exactly
+# where the next condition's threshold starts (e.g. prediabetes up to the diabetes cutoff).
+OPERATORS = (">", ">=", "<", "<=", "between", "at_least_below", "outside", "above_ref_high", "below_ref_low")
 SEVERITY_RANK = {"critical": 4, "high": 3, "moderate": 2, "low": 1, "unknown": 0}
 
 
@@ -192,6 +197,8 @@ class _ItemEvaluator:
             met = canonical <= threshold
         elif op == "between":
             met = threshold[0] <= canonical <= threshold[1]
+        elif op == "at_least_below":
+            met = threshold[0] <= canonical < threshold[1]
         elif op == "outside":
             met = canonical < threshold[0] or canonical > threshold[1]
         else:  # pragma: no cover - the validator rejects unknown operators
@@ -485,6 +492,22 @@ def known_condition(criteria: Dict[str, Any], conditions: List[Dict[str, Any]]) 
                 return code.get("text") or coding.get("display") or value
             if snomed and "snomed" in system and value in snomed:
                 return code.get("text") or coding.get("display") or value
+    return None
+
+
+def suppressing_condition(trees: Dict[str, Dict[str, Any]], criteria: Dict[str, Any],
+                          conditions: List[Dict[str, Any]]) -> Optional[str]:
+    """Problem-list condition that suppresses this tree's finding, if any.
+
+    `criteria.suppressed_by` names other trees; a problem-list entry matching
+    one of their known_condition codes suppresses the finding (e.g. a
+    diabetes diagnosis suppresses "prediabetes not on the problem list").
+    """
+    for tree_id in criteria.get("suppressed_by") or []:
+        other = (trees.get(tree_id) or {}).get("criteria") or {}
+        text = known_condition(other, conditions)
+        if text:
+            return text
     return None
 
 

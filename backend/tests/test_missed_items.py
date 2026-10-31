@@ -82,6 +82,47 @@ def test_condition_on_problem_list_is_not_listed(engine):
     assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]
 
 
+def test_diabetes_on_problem_list_suppresses_prediabetes(engine):
+    # HbA1c 6.0% is in the prediabetes range; with type 2 diabetes on the problem list,
+    # prediabetes is not "missing" from it (ENDO-PREDIABETES criteria.suppressed_by).
+    data = patient(labs=[lab("4548-4", 6.0, "%", 30)], conditions=[condition("Type 2 diabetes", "E11.9")],
+                   meds=[med("metformin 500 mg")])
+    c = check(run(engine, data), "abnormal_without_diagnosis")
+    assert not [i for i in c["items"] + c["single_results"]["items"] if i["tree_id"] == "ENDO-PREDIABETES"]
+
+
+def test_prediabetes_still_flagged_without_diabetes(engine):
+    c = check(run(engine, patient(labs=[lab("4548-4", 6.0, "%", 30)])), "abnormal_without_diagnosis")
+    assert [i for i in c["items"] if i["tree_id"] == "ENDO-PREDIABETES"]
+
+
+def test_suppressing_condition_uses_the_other_trees_codes(engine):
+    from backend.services.smart_diagnostic_engine import suppressing_condition
+    criteria = engine.trees["ENDO-PREDIABETES"]["criteria"]
+    assert criteria["suppressed_by"] == ["ENDO-DIABETES"]
+    assert suppressing_condition(engine.trees, criteria, [condition("Type 1 diabetes", "E10.9")]) == "Type 1 diabetes"
+    assert suppressing_condition(engine.trees, criteria, [condition("Hypertension", "I10")]) is None
+    assert suppressing_condition(engine.trees, {}, [condition("Type 1 diabetes", "E10.9")]) is None
+
+
+def test_validator_checks_suppressed_by():
+    import importlib.util
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[1] / "scripts" / "validate_rules.py"
+    spec = importlib.util.spec_from_file_location("validate_rules", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    known = {"known_condition": {"icd10_prefixes": ["E11"]}}
+    trees = {"A": {"criteria": {"suppressed_by": ["B", "C", "D", "A"]}},
+             "B": {"criteria": known}, "C": {"criteria": []}}
+    assert module.suppressed_by_problems(trees) == [
+        ("A", "criteria.suppressed_by: C has no criteria.known_condition codes"),
+        ("A", "criteria.suppressed_by: unknown tree 'D'"),
+        ("A", "criteria.suppressed_by: a tree cannot suppress itself")]
+    assert "suppressed_by must be a non-empty list of tree ids" in module.criteria_problems(
+        {"finding_label": "x", "source": "y", "suppressed_by": "B", "items": []})
+
+
 def test_single_result_goes_to_the_collapsed_line(engine):
     c = check(run(engine, patient(labs=[lab("4548-4", 7.0, "%", 30)])), "abnormal_without_diagnosis")
     assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]
@@ -176,11 +217,65 @@ def test_lab_failure_lists_condition_as_not_checked(engine):
 
 
 def test_medication_patterns():
-    assert mi.matching_medications(["Lisinopril 10 mg", "Metoprolol tartrate", "Aspirin"], ["*pril", "*olol"]) == [
-        "Lisinopril 10 mg", "Metoprolol tartrate"]
-    assert mi.matching_medications(["Prilosec"], ["*pril"]) == []
+    meds = [med("Lisinopril 10 mg"), med("Metoprolol tartrate"), med("Aspirin")]
+    assert mi.matching_medications(meds, ["*pril", "*olol"]) == ["Lisinopril 10 mg", "Metoprolol tartrate"]
+    assert mi.matching_medications([med("Prilosec")], ["*pril"]) == []
     assert mi.medication_names([med("A"), {"medicationReference": {"display": "B"}},
                                 {"medicationCodeableConcept": {"coding": [{"display": "C"}]}}]) == ["A", "B", "C"]
+
+
+# --- Check 4: medications without a matching diagnosis -----------------------------------
+
+RXNORM = "http://www.nlm.nih.gov/research/umls/rxnorm"
+
+
+def meds_check(engine, data, status=None):
+    return check(run(engine, data, status=status), "medication_without_diagnosis")
+
+
+def test_statin_without_a_lipid_diagnosis_is_listed(engine):
+    c = meds_check(engine, patient(meds=[med("Atorvastatin 40 mg")]))
+    item = next(i for i in c["items"] if i["name"] == "Atorvastatin 40 mg")
+    assert item["summary"].startswith("Atorvastatin 40 mg is on the medication list, but no condition RealDiag links")
+    assert "It may be prescribed for another condition" in item["summary"]
+    assert item["tree_ids"] == ["ENDO-DYSLIPIDEMIA"]
+    assert "Matched as: atorvastatin (name)" in item["details"]["evidence"]
+    assert item["review_status_label"] == "Draft - under clinical review."
+
+
+def test_medication_with_a_linked_diagnosis_is_not_listed(engine):
+    data = patient(meds=[med("Carvedilol 12.5 mg"), med("Lisinopril 10 mg"), med("Metformin 500 mg")],
+                   conditions=[condition("Hypertension", "I10"), condition("Prediabetes", "R73.03")])
+    assert meds_check(engine, data)["items"] == []
+
+
+def test_carvedilol_without_hypertension_is_listed(engine):
+    # carvedilol was missed by the old "*olol" name pattern
+    c = meds_check(engine, patient(meds=[med("Carvedilol 12.5 mg")]))
+    assert [i["tree_ids"] for i in c["items"]] == [["CARD-HYPERTENSION"]]
+
+
+def test_one_linked_condition_is_enough(engine):
+    # lisinopril is linked to hypertension and chronic kidney disease
+    data = patient(meds=[med("Lisinopril 10 mg")], conditions=[condition("CKD stage 3", "N18.30")])
+    assert meds_check(engine, data)["items"] == []
+
+
+def test_medication_matched_by_rxnorm_code_only(engine):
+    rx = {"medicationCodeableConcept": {"coding": [{"system": RXNORM, "code": "860975", "display": None}]}}
+    c = meds_check(engine, patient(meds=[rx]))
+    assert [i["tree_ids"] for i in c["items"]] == [["ENDO-DIABETES", "ENDO-PREDIABETES"]]
+
+
+def test_unlinked_medications_are_not_checked_not_flagged(engine):
+    c = meds_check(engine, patient(meds=[med("Aspirin 81 mg"), med("Nystatin suspension")]))
+    assert c["items"] == []
+    assert c["not_checked"] == ["2 medication(s) RealDiag does not link to any condition: Aspirin 81 mg, Nystatin suspension."]
+
+
+def test_unretrieved_medications_or_conditions_skip_the_check(engine):
+    c = meds_check(engine, patient(meds=[med("Atorvastatin 40 mg")]), status={"conditions": "failed"})
+    assert c["items"] == [] and "could not be retrieved" in c["not_checked"][0]
 
 
 # --- Check 3: screenings that may be due -----------------------------------------------
@@ -375,7 +470,7 @@ def test_encounter_assessment_includes_missed_items_and_smoking_status(engine):
                                              summary_response=summary_from_patient_data, now=NOW))
     missed = result["missed_items"]
     assert [c["type"] for c in missed["checks"]] == ["abnormal_without_diagnosis", "diagnosis_without_support",
-                                                     "overdue_screening"]
+                                                     "overdue_screening", "medication_without_diagnosis"]
     assert result["summary"]["data_status"]["smoking_status"] == "failed"
     assert "Smoking status could not be retrieved; do not assume none." in [i["text"] for i in result["not_assessed"]]
     aaa = next(i for i in check(missed, "overdue_screening")["items"] if i["rule_id"] == "abdominal-aortic-aneurysm")

@@ -27,7 +27,10 @@ import yaml
 
 from backend.services.clinical_review import SCREENING_RULES_PATH, review_fields
 from backend.services.fhir_client import NOT_AVAILABLE, RESOURCE_LABELS, RETRIEVED
-from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine, known_condition
+from backend.services.medication_matching import (
+    matches_entry, matching_medications, medication_ingredients, medication_name,
+)
+from backend.services.smart_diagnostic_engine import SmartDiagnosticEngine, known_condition, suppressing_condition
 
 # How far back the encounter assessment pulls screening evidence
 SCREENING_LAB_LOOKBACK_DAYS = 3650
@@ -46,6 +49,7 @@ CHECK_TITLES = {
     "abnormal_without_diagnosis": "Abnormal results without a diagnosis",
     "diagnosis_without_support": "Diagnoses without supporting results or medication",
     "overdue_screening": "Screenings that may be due",
+    "medication_without_diagnosis": "Medications without a matching diagnosis",
 }
 
 
@@ -109,26 +113,7 @@ def _not_retrieved_text(resource: str, outcome: str) -> str:
 
 
 def medication_names(medications: Iterable[Dict[str, Any]]) -> List[str]:
-    names = []
-    for med in medications or []:
-        concept = med.get("medicationCodeableConcept") or {}
-        name = concept.get("text") or next((c.get("display") for c in concept.get("coding") or [] if c.get("display")), None)
-        name = name or (med.get("medicationReference") or {}).get("display")
-        if name:
-            names.append(name)
-    return names
-
-
-def _medication_pattern(entry: str) -> re.Pattern:
-    entry = entry.strip().lower()
-    if entry.startswith("*"):
-        return re.compile(r"\b[a-z]+" + re.escape(entry[1:]) + r"\b")
-    return re.compile(r"\b" + re.escape(entry) + r"\b")
-
-
-def matching_medications(names: List[str], related: List[str]) -> List[str]:
-    patterns = [_medication_pattern(r) for r in related]
-    return [n for n in names if any(p.search(n.lower()) for p in patterns)]
+    return [n for n in (medication_name(m) for m in medications or []) if n]
 
 
 def _condition_codes(conditions: Iterable[Dict[str, Any]]) -> List[str]:
@@ -177,6 +162,8 @@ def abnormal_without_diagnosis(engine: SmartDiagnosticEngine, evaluations: Dict[
         if (criteria.get("display") == "when_met" or evaluation is None
                 or evaluation.finding not in ("consistent", "possible") or evaluation.known_condition):
             continue
+        if suppressing_condition(engine.trees, criteria, patient_data.conditions):
+            continue  # e.g. diabetes on the problem list: prediabetes is not "missing"
         label = criteria.get("finding_label", tree.get("name", tree_id))
         source = criteria.get("source", "")
         lookback = max(int(i.get("lookback_days") or 0) for i in criteria["items"]) or None
@@ -237,7 +224,7 @@ def diagnosis_without_support(engine: SmartDiagnosticEngine, evaluations: Dict[s
             continue
         if evaluation is not None and (evaluation.criteria_met or evaluation.finding):
             continue
-        meds = matching_medications(on_file, related)
+        meds = matching_medications(patient_data.medications, related)
         if meds:
             continue
         lookback = max(int(i.get("lookback_days") or 0) for i in criteria["items"]) or VITAL_LOOKBACK_DAYS
@@ -451,6 +438,75 @@ def overdue_screenings(patient_data: Any, history: Any, smoking: Optional[Dict[s
     return check
 
 
+# --------------------------------------------------------------------------- check 4
+
+def medication_without_diagnosis(engine: SmartDiagnosticEngine, patient_data: Any,
+                                 all_status: Dict[str, str]) -> Dict[str, Any]:
+    """Active medications whose every RealDiag-linked condition is missing from the problem list.
+
+    A medication is linked to a condition when it matches one of that tree's
+    related_medications (medication_matching: RxNorm code, ingredient or brand).
+    RealDiag's links cover only the chronic conditions with chart criteria, so a
+    medication used for anything else is listed as not checked, never flagged.
+    """
+    check = {"type": "medication_without_diagnosis", "title": CHECK_TITLES["medication_without_diagnosis"],
+             "items": [], "not_checked": [],
+             "scope": "Active medications RealDiag links to a chronic condition with chart criteria (through "
+                      "each condition's related-medication list); other medications are not checked."}
+    for resource in ("medications", "conditions"):
+        if _status(all_status, resource) != RETRIEVED:
+            check["not_checked"].append(
+                f"{_not_retrieved_text(resource, _status(all_status, resource))}; medications were not "
+                "compared with the problem list.")
+            return check
+    entry_trees: Dict[str, List[str]] = {}
+    for tree_id, tree in engine.trees.items():
+        criteria = tree["criteria"]
+        if criteria.get("known_condition"):
+            for entry in criteria.get("related_medications") or []:
+                entry_trees.setdefault(entry.strip().lower(), []).append(tree_id)
+    unlinked = []
+    for med in patient_data.medications or []:
+        name = medication_name(med) or "Unnamed medication"
+        tree_ids = sorted({t for entry, trees in entry_trees.items() if matches_entry(med, entry) for t in trees})
+        if not tree_ids:
+            unlinked.append(name)
+            continue
+        if any(known_condition(engine.trees[t]["criteria"], patient_data.conditions) for t in tree_ids):
+            continue
+        criteria = [engine.trees[t]["criteria"] for t in tree_ids]
+        labels = [engine.trees[t].get("name") or c.get("finding_label") or t for c, t in zip(criteria, tree_ids)]
+        sources = sorted({c.get("source", "") for c in criteria if c.get("source")})
+        statuses = {engine.trees[t].get("status") for t in tree_ids}
+        matched = [f"{i['name']} ({i['via']})" for i in medication_ingredients(med)] or ["name pattern"]
+        check["items"].append(_item(
+            summary=(f"{name} is on the medication list, but no condition RealDiag links it to is on the problem "
+                     f"list ({', '.join(labels)}). It may be prescribed for another condition; consider reviewing."),
+            source="; ".join(sources), status="draft" if "draft" in statuses else next(iter(statuses)),
+            evidence=[f"Medication: {name}", "Matched as: " + ", ".join(matched),
+                      "Conditions RealDiag links it to: " + ", ".join(labels),
+                      "Problem list: " + (", ".join(_condition_names(patient_data.conditions)) or "no active conditions on file")],
+            window="Active medication list; current problem list",
+            caveats=["RealDiag links medications only to the chronic conditions it has chart criteria for; the "
+                     "medication may be prescribed for a condition not in that list, or recorded under a code "
+                     "RealDiag does not map.", NOT_VISIBLE],
+            tree_ids=tree_ids, name=name))
+    if unlinked:
+        check["not_checked"].append(
+            f"{len(unlinked)} medication(s) RealDiag does not link to any condition: {', '.join(unlinked)}.")
+    return check
+
+
+def _condition_names(conditions: Iterable[Dict[str, Any]]) -> List[str]:
+    names = []
+    for condition in conditions or []:
+        code = condition.get("code") or {}
+        name = code.get("text") or next((c.get("display") or c.get("code") for c in code.get("coding") or []), None)
+        if name:
+            names.append(str(name))
+    return names
+
+
 # --------------------------------------------------------------------------- all checks
 
 def possible_missed_items(engine: SmartDiagnosticEngine, patient_data: Any, history: Any,
@@ -466,6 +522,7 @@ def possible_missed_items(engine: SmartDiagnosticEngine, patient_data: Any, hist
         abnormal_without_diagnosis(engine, evaluations, patient_data, all_status),
         diagnosis_without_support(engine, evaluations, patient_data, all_status),
         overdue_screenings(patient_data, history, smoking, all_status, now),
+        medication_without_diagnosis(engine, patient_data, all_status),
     ]
     return {
         "title": "Possible missed items",
