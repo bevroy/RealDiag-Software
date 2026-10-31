@@ -8,6 +8,7 @@ import yaml
 
 from .tree_schema import applies_to, icd10_codes, snomed_codes
 from .clinical_review import review_fields
+from .icpc2 import icpc2_for
 
 # Updated to use trees directory (individual tree files, not family-grouped rules)
 RULES_PATH = Path(__file__).resolve().parents[1] / "trees"
@@ -40,6 +41,7 @@ class RulesEngine:
                     'label': tree_data.get('name', f.stem),
                     'presentations': tree_data.get('presentations', []),
                     'icd10': icd10_codes(tree_data),
+                    **icpc2_for(tree_data, tree_data.get('tree_id', f.stem)),
                     'snomed': snomed_codes(tree_data),
                     'sensitivity': tree_data.get('sensitivity'),
                     'specificity': tree_data.get('specificity'),

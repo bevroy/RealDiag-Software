@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 import re
 import yaml
+from .icpc2 import icpc2_for
 from .tree_schema import entry_point, icd10_codes, missing_branch_targets, node_format, node_list, tree_id as _tree_id, tree_name
 from .clinical_review import review_fields, review_notice
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
@@ -182,7 +183,8 @@ class DecisionTreeEngine:
     def _format(self, t):
         return t.get("node_format") if t.get("nodes") else "none"
     def _tree_summary(self, t):
-        return {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t), **review_fields(t.get("status"))}
+        return {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t), **icpc2_for(t, t["id"]),
+                **review_fields(t.get("status"))}
     def inputs(self, tree_id: str):
         """Answer choices for /diagnose, built from a conditional tree's own branches."""
         t=self.trees.get(tree_id)

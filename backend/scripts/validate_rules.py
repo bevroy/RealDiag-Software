@@ -27,6 +27,8 @@ import argparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from services.lab_units import ANALYTES, analyte_for, canonical_unit  # noqa: E402
+from services.icpc2 import MAPPING_PATH as ICPC2_MAPPING, load_mapping as load_icpc2_mapping, mapping_problems as icpc2_problems  # noqa: E402
+from services.tree_schema import icpc2_codes  # noqa: E402
 from services.tree_schema import (  # noqa: E402
     HOMEOPATHY_VALIDATION_STATEMENT,
     missing_branch_targets as branch_target_problems,
@@ -751,6 +753,19 @@ def main():
             loaded_trees[str(data.get("tree_id") or file_path.stem)] = data
     for tree_id, problem in suppressed_by_problems(loaded_trees):
         result.add_error(f"{tree_id}.yml", problem)
+
+    # ICPC-2: mapping file format, provenance and trees' own codes.icpc2
+    if ICPC2_MAPPING.exists():
+        print(f"Checking {ICPC2_MAPPING.name}...", end=" ")
+        icpc2_trees = {}
+        for file_path in trees_files:
+            data = yaml.safe_load(file_path.read_text(encoding="utf-8")) or {}
+            if isinstance(data, dict):
+                icpc2_trees[str(data.get("tree_id") or file_path.stem)] = icpc2_codes(data)
+        for problem in icpc2_problems(load_icpc2_mapping(str(ICPC2_MAPPING)), list(icpc2_trees),
+                                      {t: c for t, c in icpc2_trees.items() if c}):
+            result.add_error(ICPC2_MAPPING.name, problem)
+        print("✓")
 
     # Screening rules (encounter assessment: possible missed items)
     if SCREENING_RULES.exists():

@@ -11,6 +11,7 @@ import yaml
 import sys
 import os
 from backend.services.auth_service import get_current_user
+from backend.services.icpc2 import icpc2_for
 from backend.services.tree_schema import homeopathy_remedies, icd10_codes, snomed_codes as tree_snomed_codes
 from backend.services.clinical_review import review_fields, review_notice
 from backend.services.content_labels import (
@@ -290,6 +291,7 @@ def _extract_clinical_info(tree_data: Dict) -> Dict:
         'name': name,
         'description': description,
         'icd10': icd10,
+        **icpc2_for(tree_data, tree_id),
         'snomed': list(snomed_codes) if snomed_codes else [],
         'family': family,
         'specialty': specialty,

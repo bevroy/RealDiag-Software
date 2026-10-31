@@ -1,0 +1,23 @@
+# ICPC-2 (International Classification of Primary Care, 2nd edition) codes for
+# RealDiag's decision trees.
+#
+# No codes are mapped yet. ICPC-2 is maintained by WONCA and its use and any
+# ICD-10 cross-mapping are licensed; codes are added here only from a licensed
+# source, each with who mapped it, who reviewed it and when. Until then every
+# tree reports the status below.
+#
+# Format (validated by backend/scripts/validate_rules.py):
+#   status: pending licensed mapping and review | reviewed
+#   source: name of the licensed ICPC-2 source (required once status is reviewed)
+#   version: version of that source
+#   mappings:
+#     <TREE-ID>:
+#       - code: R05            # one letter (chapter) + two digits, optional .n
+#         label: Cough         # the ICPC-2 rubric
+#         mapped_by: <name>
+#         reviewed_by: <name>
+#         reviewed_on: 'YYYY-MM-DD'
+status: pending licensed mapping and review
+source: null
+version: null
+mappings: {}
