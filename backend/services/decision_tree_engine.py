@@ -259,15 +259,24 @@ class DecisionTreeEngine:
         # "no_matching_branch" (none of its branches matched and it has no default),
         # "missing_node" (a branch points to a node id the tree does not contain),
         # or "loop".
-        end_reason="end_node"; missing_node=None
+        end_reason="end_node"; missing_node=None; unmet_conditions=[]
         for _ in range(64):
             if cur is None: break
             if cur in seen: end_reason="loop"; break
             seen.add(cur)
             node=next((n for n in t.get("nodes", []) if n.get("id")==cur), None)
             if not node: end_reason="missing_node"; missing_node=cur; break
+            # A node's own `when` does not choose the path (branches do); the walk
+            # continues either way. When it is not met, the trace says so instead
+            # of listing its partial matches as if they were the result.
             ok,tr=_match(node.get("when") or {}, patient)
-            trace_all.extend([f"[{cur}] "+s for s in tr])
+            if ok:
+                trace_all.extend([f"[{cur}] "+s for s in tr])
+            else:
+                unmet_conditions.append(cur)
+                trace_all.extend([f"[{cur}] (partial, condition not met) "+s for s in tr])
+                trace_all.append(f"[{cur}] NOT MET: this step's condition is not met by the answers; "
+                                 "the walk continues because step conditions do not choose the path")
             path.append(cur)
             tests.extend((x, cur) for x in _text_items(node.get("tests")))
             dx.extend((x, cur) for x in _text_items(node.get("suggest_dx")))
@@ -310,5 +319,7 @@ class DecisionTreeEngine:
             "trace": trace_all,
             "end_reason": end_reason,
             "missing_node": missing_node,
+            # Steps on the path whose own `when` condition was not met (see trace).
+            "unmet_node_conditions": unmet_conditions,
             "evaluated": True,
         }

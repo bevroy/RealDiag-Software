@@ -136,3 +136,18 @@ def test_every_tree_evaluates_without_exception():
         result = engine.evaluate(tree_id, {"symptoms": []})
         assert "error" not in result, (tree_id, result.get("error"))
         assert "evaluated" in result, tree_id
+
+
+def test_unmet_node_condition_is_marked_and_walk_is_unchanged(tmp_path):
+    tree = _conditional_tree()
+    tree["nodes"][1]["when"] = {"symptoms_contains_any": ["fever"], "min_age": 65}
+    engine = _engine_with(tmp_path, tree)
+    unmet = engine.evaluate("TEST-COND", {"symptoms": ["fever"], "age": 30})
+    met = engine.evaluate("TEST-COND", {"symptoms": ["fever"], "age": 70})
+    # The path is the same either way: node conditions do not choose the path.
+    assert unmet["path"] == met["path"] == ["start", "middle", "end"]
+    assert unmet["unmet_node_conditions"] == ["middle"] and met["unmet_node_conditions"] == []
+    assert "[middle] (partial, condition not met) symptoms any of ['fever']" in unmet["trace"]
+    assert any(line.startswith("[middle] NOT MET:") for line in unmet["trace"])
+    assert "[middle] symptoms any of ['fever']" in met["trace"]
+    assert not any("NOT MET" in line for line in met["trace"])
