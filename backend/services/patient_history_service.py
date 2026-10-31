@@ -82,6 +82,7 @@ class VisitNote(BaseModel):
     specialty: Optional[str] = None
     content: str
     encounter_id: Optional[str] = None
+    document_id: Optional[str] = None  # DocumentReference.id the note came from
 
 
 class DiagnosticTest(BaseModel):
@@ -598,7 +599,8 @@ class PatientHistoryService:
                         author=author,
                         specialty=specialty,
                         content=content,
-                        encounter_id=doc.get('context', {}).get('encounter', [{}])[0].get('reference')
+                        encounter_id=doc.get('context', {}).get('encounter', [{}])[0].get('reference'),
+                        document_id=doc.get('id'),
                     ))
 
         except Exception as e:

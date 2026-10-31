@@ -34,6 +34,7 @@ from backend.services.fhir_client import (
 )
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
+from backend.services.note_extraction import extracted_summary
 from backend.services.missed_items import (
     SCREENING_PROCEDURE_LOOKBACK_DAYS, possible_missed_items, screening_requirements,
 )
@@ -425,6 +426,7 @@ async def assess_encounter(
         "guidance": [g for g in (tree_guidance(t) for t in tree_ids) if g],
         "red_flags": [r for r in (tree_red_flags(t) for t in tree_ids) if r],
         "missed_items": missed,
+        "extracted_summary": extracted_summary(history, history_status.get("visit_notes")),
         "not_assessed": not_assessed(summary["data_status"], assessment.warnings,
                                      assessment.evaluations, complaint),
         "decision_support_notice": DECISION_SUPPORT_NOTICE,
