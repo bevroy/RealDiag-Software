@@ -47,6 +47,9 @@ export default function TechnicalMedicalPage() {
             validated.&quot; Chart-driven requests (encounter assessment, ambulatory differential,
             symptom search with an EHR patient) never use AI: EHR data is never sent to an AI provider.
           </p>
+          <p style={styles.p}>
+            Chart-derived ranking terms (October 2026): the encounter assessment adds terms from the latest vital signs (shared vital-sign rules) and the three most recent H&amp;P chief complaints to the complaint phrases, records for each library match whether the complaint, the chart terms or both supported it, and lists every chart term with its source and date (backend/services/chart_terms.py).
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -55,6 +58,9 @@ export default function TechnicalMedicalPage() {
             Many diagnoses include clinical pearls to help interpretation at the bedside:
             distinguishing features, cautionary flags, and practical next steps. Management and
             test recommendations are intended to support workflow planning and prioritization.
+          </p>
+          <p style={styles.p}>
+            Note extraction and narrative (October 2026): backend/services/note_extraction.py splits the 10 most recent notes (DocumentReference) into sections by heading and extracts problems, medications, allergies, chief complaint and vital/lab values written in the text, each with its document id, type, section and date; frontend/utils/chartNarrative.js turns those facts and the chart summary into template sentences with sources. Fixed rules only; no AI or model.
           </p>
         </section>
 

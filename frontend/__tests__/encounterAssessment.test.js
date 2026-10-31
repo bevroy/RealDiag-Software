@@ -58,6 +58,22 @@ test('evidence labels', () => {
   expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
 })
 
+test('a missing extracted summary says nothing was read from notes', () => {
+  const { parseEncounterAssessment } = require('../utils/encounterAssessment')
+  const extracted = parseEncounterAssessment({}).extractedSummary
+  expect(extracted.facts).toEqual([])
+  expect(extracted.not_read).toEqual(['The server did not return text extracted from notes.'])
+})
+
+describe('chart-derived evidence labels', () => {
+  const { evidenceLabel } = require('../utils/encounterAssessment')
+  test('matches supported only by chart terms are labelled as chart findings', () => {
+    expect(evidenceLabel('chart findings')).toBe('Matches chart findings (vital signs, H&P)')
+    expect(evidenceLabel('chart findings and criteria')).toBe('Matches chart findings (vital signs, H&P) and chart criteria')
+    expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
+  })
+})
+
 describe('medication review', () => {
   const { parseEncounterAssessment, MEDICATION_REVIEW_UNAVAILABLE } = require('../utils/encounterAssessment')
 

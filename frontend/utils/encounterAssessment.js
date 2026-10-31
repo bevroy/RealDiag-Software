@@ -19,6 +19,8 @@ const EVIDENCE_LABELS = {
   'complaint and criteria': "Matches today's complaint and chart criteria",
   criteria: 'Chart criteria',
   complaint: "Matches today's complaint",
+  'chart findings and criteria': 'Matches chart findings (vital signs, H&P) and chart criteria',
+  'chart findings': 'Matches chart findings (vital signs, H&P)',
 }
 
 function evidenceLabel(evidence) {
@@ -47,6 +49,9 @@ function parseEncounterAssessment(body) {
     missedItems: b.missed_items && Array.isArray(b.missed_items.checks)
       ? b.missed_items
       : { title: 'Possible missed items', notice: MISSED_ITEMS_UNAVAILABLE, checks: [], item_count: 0 },
+    extractedSummary: b.extracted_summary && Array.isArray(b.extracted_summary.facts)
+      ? b.extracted_summary
+      : { label: null, facts: [], documents_read: 0, not_read: ['The server did not return text extracted from notes.'] },
     medicationReview: b.medication_review && Array.isArray(b.medication_review.alerts)
       ? b.medication_review
       : { title: 'Medication review', notice: null, medications: [], alerts: [], history: null,

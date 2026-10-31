@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEncounterAssessment, evidenceLabel } from '../../utils/encounterAssessment';
 import { REVIEW_UNAVAILABLE, reviewedSections, markStyle, factorLines } from '../../utils/treatmentReview';
+import { buildNarrative, sourceText } from '../../utils/chartNarrative';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
@@ -105,6 +106,8 @@ function AssessmentView({ result }) {
         ) : <p>Chart summary not available.</p>}
       </Section>
 
+      <ChartNarrative summary={summary} extracted={result.extractedSummary} />
+
       <Section title="Today's complaint">
         <p>
           {complaint.text ? <strong>{complaint.text}</strong> : <em>None</em>}
@@ -112,6 +115,16 @@ function AssessmentView({ result }) {
         </p>
         {complaint.negated_terms && complaint.negated_terms.length > 0 && (
           <p style={styles.muted}>Not searched (negated): {complaint.negated_terms.join(', ')}</p>
+        )}
+        {complaint.chart_terms && complaint.chart_terms.length > 0 && (
+          <div>
+            <p><strong>Also searched, from the chart:</strong></p>
+            <ul>
+              {complaint.chart_terms.map((t, i) => (
+                <li key={i}>{t.term} <span style={styles.muted}>({t.source}{t.date ? `, ${t.date}` : ''})</span></li>
+              ))}
+            </ul>
+          </div>
         )}
       </Section>
 
@@ -150,6 +163,26 @@ function AssessmentView({ result }) {
 
 // Compact: grouped by check, one line per item with source and review
 // status; evidence, window checked and caveats expand on demand.
+function ChartNarrative({ summary, extracted }) {
+  const narrative = buildNarrative({ summary, extracted_summary: extracted });
+  return (
+    <Section title="Chart narrative">
+      <p style={styles.muted}>{narrative.label}{extracted.label ? ` ${extracted.label}` : ''}</p>
+      {(extracted.not_read || []).map((text, i) => <p key={i} style={styles.notChecked}>Not read: {text}</p>)}
+      {narrative.sentences.length === 0 ? <p style={styles.muted}>Nothing to summarize.</p> : (
+        <ul>
+          {narrative.sentences.map((s, i) => (
+            <li key={i}>
+              {s.text}{' '}
+              <span style={styles.muted}>[{s.sources.map(sourceText).join('; ')}]</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Section>
+  );
+}
+
 function MissedItems({ missed }) {
   return (
     <Section title={missed.title || 'Possible missed items'}>

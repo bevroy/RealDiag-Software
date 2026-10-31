@@ -67,6 +67,7 @@ export default function UserGuidePage() {
             <li>If connected to EHR/EMR, verify patient context and encounter selection.</li>
             <li>Collect presenting symptoms, onset timeline, and key red flags.</li>
             <li>Enter vitals when available for improved relevance and safety checks.</li>
+            <li>Chart narrative (Encounter Assessment, October 2026): a readable summary built by fixed templates from the chart and from text found in its notes; each sentence shows its source (record type, document, section and date). It restates what the chart says and is not a clinical interpretation.</li>
           </ul>
         </section>
 
@@ -78,6 +79,7 @@ export default function UserGuidePage() {
             <li>Add vital signs: HR, BP, temperature, respiratory rate, and oxygen saturation.</li>
             <li>Run search and review ranked results.</li>
             <li>Open each result to review clinical pearls, tests, referrals, and management notes.</li>
+            <li>Medications (October 2026): on /diagnose, an optional last step takes current medications and allergies, and the result lists any medication safety alerts. When RealDiag is opened from the EHR, Encounter Assessment has a Medication review section built from the chart. Both are reference only.</li>
           </ol>
         </section>
 
@@ -92,7 +94,6 @@ export default function UserGuidePage() {
             <li>Use output as decision support, not as a standalone clinical determination.</li>
             <li><strong>Encounter Assessment (EHR launch):</strong> open it from the patient banner. Type today&apos;s complaint, or leave it blank to use the EHR&apos;s visit reason; the source is shown. The page combines the chart summary (with any data that could not be retrieved or was cut off), diagnoses matched to the complaint and to chart results with their evidence, workup, treatment information and referrals from each matched tree, listed red flags, and what could not be assessed. Negated complaints (&quot;no chest pain&quot;, &quot;denies fever&quot;) are not matched.</li>
             <li><strong>Possible missed items:</strong> the encounter assessment also lists, from chart data only, abnormal results whose condition is not on the problem list, problem-list conditions with no supporting result or related medication, and USPSTF screenings that may be due. Each line cites its source and review status; expand it for the evidence, the window checked and caveats. These are prompts to consider, not findings that something was missed.</li>
-            <li>Medications (October 2026): on /diagnose, an optional last step takes current medications and allergies, and the result lists any medication safety alerts. When RealDiag is opened from the EHR, Encounter Assessment has a Medication review section built from the chart. Both are reference only.</li>
           </ul>
         </section>
 
@@ -135,6 +136,7 @@ export default function UserGuidePage() {
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
             <li>Backend connection check: the /diagnostic page shows whether the site can reach the RealDiag API (health and version).</li>
             <li>Health Manager or symptom search not showing your account details: sign in again; both pages load your profile from the RealDiag API.</li>
+            <li>Encounter Assessment (October 2026): besides today&apos;s complaint, the latest vital signs and recent H&amp;P chief complaints from the chart are also searched; they are listed under Today&apos;s complaint with their source, and a diagnosis matched only through them is labelled &quot;Matches chart findings&quot;.</li>
           </ul>
         </section>
 
