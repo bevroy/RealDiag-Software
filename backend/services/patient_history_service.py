@@ -8,7 +8,7 @@ diagnostic tests, H&Ps, procedures, and imaging for complete diagnostic context.
 
 from contextvars import ContextVar
 from fastapi import HTTPException
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime, timedelta
 import httpx
 from pydantic import BaseModel, Field
@@ -174,6 +174,39 @@ class ComprehensivePatientHistory(BaseModel):
     # means "none found" only when its status is "retrieved".
     retrieval_status: Dict[str, str] = {}
     data_warnings: List[str] = []
+
+
+def medication_stop_date(med: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:
+    """(stop date, FHIR element it came from) for an R4 MedicationRequest.
+
+    R4 has no "date stopped" element (statusChanged is R5), so the end of the
+    intended therapy period is used, in this order:
+      1. dosageInstruction[].timing.repeat.boundsPeriod.end (latest)
+      2. dispenseRequest.validityPeriod.end
+    Returns (None, None) when neither is present.
+    """
+    ends = []
+    for dosage in med.get('dosageInstruction') or []:
+        bounds = (((dosage or {}).get('timing') or {}).get('repeat') or {}).get('boundsPeriod') or {}
+        if bounds.get('end'):
+            ends.append(str(bounds['end']))
+    if ends:
+        return max(ends), 'dosageInstruction.timing.repeat.boundsPeriod.end'
+    validity = ((med.get('dispenseRequest') or {}).get('validityPeriod') or {}).get('end')
+    if validity:
+        return str(validity), 'dispenseRequest.validityPeriod.end'
+    return None, None
+
+
+def medication_stop_reason(med: Dict[str, Any]) -> Optional[str]:
+    """Why an R4 MedicationRequest was stopped, from statusReason (text, else coding)."""
+    reason = med.get('statusReason') or {}
+    if reason.get('text'):
+        return str(reason['text'])
+    for coding in reason.get('coding') or []:
+        if coding.get('display') or coding.get('code'):
+            return str(coding.get('display') or coding.get('code'))
+    return None
 
 
 class PatientHistoryService:
@@ -1076,11 +1109,14 @@ class PatientHistoryService:
                         if med.get('medicationCodeableConcept', {}).get('coding'):
                             med_name = med['medicationCodeableConcept']['coding'][0].get('display', 'Unknown')
 
+                    date_stopped, date_stopped_source = medication_stop_date(med)
                     med_history.append({
                         'name': med_name,
                         'status': med.get('status'),
                         'date_prescribed': med.get('authoredOn'),
-                        'date_stopped': med.get('statusChanged')
+                        'date_stopped': date_stopped,
+                        'date_stopped_source': date_stopped_source,
+                        'stop_reason': medication_stop_reason(med),
                     })
 
         except Exception as e:

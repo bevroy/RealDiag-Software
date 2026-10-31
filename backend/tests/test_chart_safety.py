@@ -539,3 +539,54 @@ def test_ambulatory_differential_shows_retrieval_warnings(monkeypatch):
     assert body["data_pulled"]["current_medications"] == 0
     assert "Allergies could not be retrieved; do not assume none." in body["data_warnings"]
     assert "Allergies could not be retrieved" in body["chart_summary"]
+
+
+# --- Medication history: R4 stop dates and stop reasons ---------------------------
+
+from backend.services.diagnostic_router import _extract_med_history_features  # noqa: E402
+from backend.services.patient_history_service import medication_stop_date, medication_stop_reason  # noqa: E402
+
+
+def test_medication_stop_date_uses_r4_elements():
+    bounds = {"dosageInstruction": [
+        {"timing": {"repeat": {"boundsPeriod": {"start": "2026-01-01", "end": "2026-03-01"}}}},
+        {"timing": {"repeat": {"boundsPeriod": {"end": "2026-04-15"}}}}],
+        "dispenseRequest": {"validityPeriod": {"end": "2026-12-31"}}}
+    assert medication_stop_date(bounds) == ("2026-04-15", "dosageInstruction.timing.repeat.boundsPeriod.end")
+    validity = {"dispenseRequest": {"validityPeriod": {"end": "2026-05-01"}}}
+    assert medication_stop_date(validity) == ("2026-05-01", "dispenseRequest.validityPeriod.end")
+    # statusChanged is R5, not R4: not read.
+    assert medication_stop_date({"statusChanged": "2026-02-02"}) == (None, None)
+
+
+def test_medication_stop_reason_from_status_reason():
+    assert medication_stop_reason({"statusReason": {"text": "Rash after second dose"}}) == "Rash after second dose"
+    assert medication_stop_reason({"statusReason": {"coding": [{"code": "salg", "display": "Patient allergy"}]}}) == \
+        "Patient allergy"
+    assert medication_stop_reason({}) is None
+
+
+def test_history_service_reads_stopped_medication_dates_and_reasons():
+    stopped = {"resourceType": "Bundle", "entry": [{"resource": {
+        "resourceType": "MedicationRequest", "status": "stopped", "authoredOn": "2026-01-02",
+        "medicationCodeableConcept": {"text": "lisinopril 10 mg"},
+        "statusReason": {"text": "Allergy: angioedema"},
+        "dosageInstruction": [{"timing": {"repeat": {"boundsPeriod": {"end": "2026-01-09"}}}}]}}]}
+
+    def handler(request):
+        if request.url.path.endswith("/MedicationRequest") and "completed" in request.url.params.get("status", ""):
+            return httpx.Response(200, json=stopped)
+        if "/Patient/" in request.url.path:
+            return httpx.Response(200, json={"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+        return httpx.Response(200, json=_EMPTY_BUNDLE)
+
+    service = PatientHistoryService("https://fhir.example.test/R4", auth_token="t")
+    service.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    history = asyncio.run(service.get_comprehensive_history("p1"))
+    med = history.medication_history[0]
+    assert med["date_stopped"] == "2026-01-09"
+    assert med["date_stopped_source"] == "dosageInstruction.timing.repeat.boundsPeriod.end"
+    assert med["stop_reason"] == "Allergy: angioedema"
+    # The medication-history weighting now sees the adverse stop reason.
+    signal = _extract_med_history_features(history.medication_history, [], "cardiovascular", {}, [])
+    assert signal["features"]["prior_adverse_reaction_flags"] == 1
