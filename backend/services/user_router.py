@@ -32,7 +32,7 @@ from backend.services.subscription_router import create_subscription
 from backend.services.subscription_models import PlanType, BillingInterval
 from backend.services.database import DATABASE_AVAILABLE, get_db_session, User
 from backend.services.rbac_service import get_rbac_service, Permission
-from datetime import datetime
+from datetime import datetime, timedelta
 from backend.services.auth_cookies import (
     cookie_auth,
     create_cookie_response,
@@ -129,7 +129,13 @@ async def register_user(request: Request, user_data: UserCreate):
     ```
     
     Returns tokens in secure HttpOnly cookies instead of response body.
+
+    Refused (403) unless ALLOW_SELF_REGISTRATION is on: accounts are created
+    by an admin (POST /admin/users/invite or /admin/users/create).
     """
+    from backend.services.access_policy import INVITE_ONLY_DETAIL, self_registration_allowed
+    if not self_registration_allowed():
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=INVITE_ONLY_DETAIL)
     user = create_user(user_data)
     access_token = create_access_token(user["user_id"], user["email"])
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
@@ -464,7 +470,14 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
                 detail="Invalid or expired reset token."
             )
 
-        if is_token_expired(user.password_reset_sent_at):
+        setup = bool(getattr(user, "account_setup_pending", False))
+        if setup:
+            from backend.services.access_policy import invite_expiration_hours
+            expired = (user.password_reset_sent_at is None or datetime.utcnow() - user.password_reset_sent_at
+                       > timedelta(hours=invite_expiration_hours()))
+        else:
+            expired = is_token_expired(user.password_reset_sent_at)
+        if expired:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Reset link has expired. Please request a new one."
@@ -473,6 +486,8 @@ async def reset_password(request: Request, body: ResetPasswordRequest):
         user.hashed_password = hash_password(body.new_password)
         user.password_reset_token = None
         user.password_reset_sent_at = None
+        if setup:
+            user.account_setup_pending = False
         db.flush()
 
         # Keep the in-memory mirror in sync so existing code paths see the new hash

@@ -20,6 +20,11 @@ os.environ["TESTING"] = "1"
 # non-placeholder test-only value if one isn't already set in the environment.
 os.environ.setdefault("JWT_SECRET_KEY", "test-only-" + "a" * 32)
 
+# Production is invite-only (access_policy). Most tests create their accounts
+# through /users/register, so the suite turns self-registration back on;
+# tests/test_invite_only.py checks the invite-only default.
+os.environ.setdefault("ALLOW_SELF_REGISTRATION", "1")
+
 from backend.main import app
 
 

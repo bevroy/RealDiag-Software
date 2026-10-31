@@ -626,6 +626,78 @@ def _apply_to_account(body: AccountTarget, apply):
     raise HTTPException(status_code=404, detail="User not found")
 
 
+class NewAccountRequest(BaseModel):
+    """An account created by an admin (accounts are invite-only)."""
+    email: str
+    full_name: Optional[str] = None
+    role: str = "provider"
+    reason: Optional[str] = None
+
+
+def _create_account(body: NewAccountRequest, admin: AdminUser, password: str) -> dict:
+    """Create the account through auth_service.create_user (which applies the
+    email-domain/allowlist rule), then set its role and who created it."""
+    from backend.services.auth_service import UserCreate, create_user
+
+    role = _normalize_allowed_role(body.role)
+    email = (body.email or "").strip().lower()
+    try:
+        user = create_user(UserCreate(email=email, password=password, full_name=body.full_name or email.split("@")[0]))
+    except ValueError as e:  # invalid email address
+        raise HTTPException(status_code=400, detail=str(e))
+
+    def apply(account, set_field):
+        set_field("role", role)
+        set_field("invited_by", admin.username)
+        set_field("invited_at", datetime.utcnow() if not isinstance(account, dict) else datetime.utcnow().isoformat())
+
+    _apply_to_account(AccountTarget(user_id=user["user_id"]), apply)
+    return {"user_id": user["user_id"], "email": email, "role": role}
+
+
+@router.post("/users/invite", status_code=201)
+async def admin_invite_user(body: NewAccountRequest, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Invite someone: creates the account with no usable password and emails a
+    one-time setup link (the reset-password page) that lasts
+    INVITE_EXPIRATION_HOURS. If the email cannot be sent, the link is returned
+    for the admin to pass on.
+    """
+    from backend.services.access_policy import invite_expiration_hours
+    from backend.services.email_service import generate_verification_token, invite_setup_url, send_invite_email
+
+    created = _create_account(body, admin, secrets.token_urlsafe(32))
+    token = generate_verification_token()
+
+    def apply(account, set_field):
+        set_field("password_reset_token", token)
+        set_field("password_reset_sent_at", datetime.utcnow())
+        set_field("account_setup_pending", True)
+
+    _apply_to_account(AccountTarget(user_id=created["user_id"]), apply)
+    hours = invite_expiration_hours()
+    sent = send_invite_email(created["email"], token, body.full_name, hours)
+    _audit_account_action(admin, "INVITED", created["user_id"], body.reason)
+    response = {"success": True, **created, "email_sent": sent, "setup_link_expires_in_hours": hours}
+    if not sent:
+        response["setup_url"] = invite_setup_url(token)
+        response["note"] = "The invite email could not be sent; give this one-time setup link to the user directly."
+    return response
+
+
+@router.post("/users/create", status_code=201)
+async def admin_create_user(body: NewAccountRequest, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Create an account with a temporary password, returned once in this
+    response for the admin to pass on (stored only as a hash).
+    """
+    temporary = secrets.token_urlsafe(12)
+    created = _create_account(body, admin, temporary)
+    _audit_account_action(admin, "CREATED", created["user_id"], body.reason)
+    return {"success": True, **created, "temporary_password": temporary,
+            "note": "Give the user this temporary password; they should change it after signing in."}
+
+
 @router.post("/users/reset-password")
 async def admin_reset_password(
     body: AdminPasswordResetRequest,

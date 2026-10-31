@@ -144,10 +144,7 @@ export default function LoginPage() {
         </p>
 
         <p style={styles.footer}>
-          Don't have an account?{' '}
-          <Link href="/register" style={styles.link}>
-            Create one
-          </Link>
+          Accounts are by invitation. Ask your RealDiag administrator for an invite.
         </p>
       </div>
     </div>

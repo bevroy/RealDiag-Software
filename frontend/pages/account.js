@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { isAuthenticated, getCurrentUser, login as authLogin, register as authRegister, logout as authLogout, authenticatedFetch, getApiBase } from '../utils/auth';
+import { isAuthenticated, getCurrentUser, login as authLogin, logout as authLogout, authenticatedFetch, getApiBase } from '../utils/auth';
 import { getStoredUser, isStoredAuthenticated, clearStoredAuth, storeAuthData } from '../utils/clientAuth';
 import RoleBasedNavigation from '../components/RoleBasedNavigation';
 import PageHeader from '../components/PageHeader';
@@ -19,11 +19,6 @@ export default function AccountPage() {
   // Form states
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  const [registerEmail, setRegisterEmail] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
-  const [registerName, setRegisterName] = useState('');
-  const [registerSpecialty, setRegisterSpecialty] = useState('');
-  const [registerInstitution, setRegisterInstitution] = useState('');
 
   // Dashboard data
   const [searchHistory, setSearchHistory] = useState([]);
@@ -117,32 +112,6 @@ export default function AccountPage() {
       // Store auth data for AuthGuard on other pages
       storeAuthData(data.user, data.csrf_token || null);
       if (data.email_warning) alert(data.email_warning);
-      loadDashboardData();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const data = await authRegister({
-        email: registerEmail,
-        password: registerPassword,
-        full_name: registerName,
-        specialty: registerSpecialty || null,
-        institution: registerInstitution || null
-      });
-      setUser(data.user);
-      setIsUserAuthenticated(true);
-      setActiveTab('dashboard');
-      // Store auth data for AuthGuard on other pages
-      storeAuthData(data.user, data.csrf_token || null);
       loadDashboardData();
     } catch (err) {
       setError(err.message);
@@ -359,122 +328,11 @@ export default function AccountPage() {
           {/* Register Tab */}
           {activeTab === 'register' && !isUserAuthenticated && (
             <div>
-              <h2 style={{ margin: '0 0 1.5rem', color: '#78350f' }}>Create Account</h2>
-              <form onSubmit={handleRegister} style={{ maxWidth: '500px' }}>
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={registerName}
-                    onChange={(e) => setRegisterName(e.target.value)}
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '2px solid #e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '1rem'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    value={registerEmail}
-                    onChange={(e) => setRegisterEmail(e.target.value)}
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '2px solid #e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '1rem'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
-                    Password * (min 8 characters)
-                  </label>
-                  <input
-                    type="password"
-                    value={registerPassword}
-                    onChange={(e) => setRegisterPassword(e.target.value)}
-                    required
-                    minLength={8}
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '2px solid #e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '1rem'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
-                    Specialty (optional)
-                  </label>
-                  <select
-                    value={registerSpecialty}
-                    onChange={(e) => setRegisterSpecialty(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '2px solid #e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '1rem'
-                    }}
-                  >
-                    <option value="">Select specialty...</option>
-                    {specialties.map(s => (
-                      <option key={s} value={s.toLowerCase().replace(/\//g, '_').replace(/ /g, '_')}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
-                    Institution (optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={registerInstitution}
-                    onChange={(e) => setRegisterInstitution(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '2px solid #e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '1rem'
-                    }}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    background: '#14b8a6',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    cursor: loading ? 'not-allowed' : 'pointer',
-                    opacity: loading ? 0.6 : 1
-                  }}
-                >
-                  {loading ? 'Creating Account...' : 'Create Account'}
-                </button>
-              </form>
+              <h2 style={{ margin: '0 0 1rem', color: '#78350f' }}>Accounts are by invitation</h2>
+              <p style={{ color: '#374151', maxWidth: '500px' }}>
+                RealDiag accounts are created by an administrator. If you were invited, use the setup link in your
+                invitation email to choose a password. Otherwise, ask your RealDiag administrator for an invite.
+              </p>
             </div>
           )}
 

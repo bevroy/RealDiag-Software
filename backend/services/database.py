@@ -211,6 +211,13 @@ if DATABASE_AVAILABLE and Base is not None:
         failed_login_count = Column(Integer, default=0)
         locked_until = Column(DateTime, nullable=True)
 
+        # Invite-only accounts (admin_router.invite_user): the setup link is the
+        # password_reset_token; while setup is pending the link lasts
+        # INVITE_EXPIRATION_HOURS instead of the reset link's 24 hours.
+        account_setup_pending = Column(Boolean, default=False)
+        invited_by = Column(String(255), nullable=True)
+        invited_at = Column(DateTime, nullable=True)
+
         # Relationships
         sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
         search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
@@ -446,6 +453,9 @@ def _ensure_user_columns():
             "mfa_enrolled_at": "TIMESTAMP",
             "failed_login_count": "INTEGER DEFAULT 0",
             "locked_until": "TIMESTAMP",
+            "account_setup_pending": "BOOLEAN DEFAULT false",
+            "invited_by": "VARCHAR(255)",
+            "invited_at": "TIMESTAMP",
         }
         with engine.begin() as conn:
             for name, col_type in wanted.items():
