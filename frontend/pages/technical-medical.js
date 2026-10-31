@@ -119,6 +119,15 @@ export default function TechnicalMedicalPage() {
             be used with clinician oversight, institutional protocols, and full patient context.
             Urgent or emergent care decisions should always follow local emergency standards.
           </p>
+          <p style={styles.p}>
+            Offline (October 2026): GET /offline/bundle (login required) serves a versioned bundle (content hash) of
+            every tree&apos;s ranking fields, the ranking settings (synonyms, negation cues) and the walkable
+            questionnaire trees; about 0.5 MB, no patient data. The browser keeps it in Cache Storage and refetches it
+            only when GET /offline/bundle/version changes. frontend/utils/offlineSearch.js ports the tree-library
+            ranking of /search/by-symptoms; a shared fixture checks the server and the port give the same results.
+            Offline search has no AI suggestions, vital-sign terms or chart history; branching-tree evaluation, chart
+            and EHR features stay online-only.
+          </p>
         </section>
 
         <section style={styles.section}>
