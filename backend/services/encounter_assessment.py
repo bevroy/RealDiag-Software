@@ -8,7 +8,9 @@ Sections:
                      model) merged with criteria-supported diagnoses; each
                      shows its evidence
   guidance           workup, treatment (reference, not orders), referrals and
-                     disposition from each shown tree, with sources and status
+                     disposition from each shown tree, with sources and status;
+                     each treatment line is checked against the chart
+                     (treatment.review: appropriate / caution / avoid, never ranked)
   red_flags          red flags listed in each shown tree
   not_assessed       what could not be assessed and why
 
@@ -35,6 +37,7 @@ from backend.services.fhir_client import (
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
 from backend.services.medication_review import medication_review
+from backend.services.treatment_review import TreatmentReviewer
 from backend.services.missed_items import (
     SCREENING_PROCEDURE_LOOKBACK_DAYS, possible_missed_items, screening_requirements,
 )
@@ -418,8 +421,12 @@ async def assess_encounter(
     history_status["smoking_status"] = smoking_status
     summary = build_summary(patient_data, history, history_status, summary_response, now=now)
     missed = possible_missed_items(engine, patient_data, history, smoking, summary["data_status"], now=now)
-    medications = medication_review(
-        patient_data, history, (getattr(history, "retrieval_status", None) or {}).get("medications") if history else None)
+    history_medication_status = (getattr(history, "retrieval_status", None) or {}).get("medications") if history else None
+    medications = medication_review(patient_data, history, history_medication_status)
+    guidance = [g for g in (tree_guidance(t) for t in tree_ids) if g]
+    reviewer = TreatmentReviewer(patient_data, history, history_medication_status)
+    for g in guidance:
+        g["treatment"]["review"] = reviewer.review_sections(g["treatment"]["sections"])
 
     return {
         "patient_id": patient_id,
@@ -428,7 +435,7 @@ async def assess_encounter(
                       "phrases_used": phrases,
                       "negated_terms": split_negated(complaint.text)[1] if complaint.text else []},
         "diagnoses": diagnoses,
-        "guidance": [g for g in (tree_guidance(t) for t in tree_ids) if g],
+        "guidance": guidance,
         "red_flags": [r for r in (tree_red_flags(t) for t in tree_ids) if r],
         "missed_items": missed,
         "medication_review": medications,

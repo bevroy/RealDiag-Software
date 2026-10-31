@@ -332,6 +332,21 @@ def test_medication_review_section(engine, no_ai):
     assert any("medication history could not be retrieved" in n for n in review["not_checked"])
 
 
+def test_treatment_lines_are_checked_against_the_chart(engine, no_ai):
+    data = patient(labs=[troponin()])
+    data.medications = [{"medicationCodeableConcept": {"text": "Warfarin 5 mg"}}]
+    g = next(g for g in run(engine, data, "chest pain")[0]["guidance"] if g["tree_id"] == ACS)
+    review = g["treatment"]["review"]
+    assert "not ranked" in review["notice"]
+    assert [len(lines) for lines in review["sections"]] == [len(s["items"]) for s in g["treatment"]["sections"]]
+    lines = [line for section in review["sections"] for line in section]
+    assert [line["text"] for line in lines] == [i for s in g["treatment"]["sections"] for i in s["items"]]
+    assert {line["mark"] for line in lines} <= {"appropriate", "caution", "avoid", "not_checked"}
+    # Warfarin on the chart: antiplatelet/anticoagulant lines in the ACS tree are flagged, with the source.
+    flagged = [r for line in lines for r in line["reasons"] if r["check"] == "drug_interaction"]
+    assert flagged and all(r["source"] == "Medication list: warfarin 5 mg" for r in flagged)
+
+
 def test_summary_section(engine, no_ai):
     data = patient(labs=[troponin()], conditions=[{"code": {"text": "Hypertension"}}])
     data.truncation_warnings = ["Lab results cut off: the page limit was reached after 1000 results, "
