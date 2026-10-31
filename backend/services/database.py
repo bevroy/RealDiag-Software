@@ -394,9 +394,21 @@ if DATABASE_AVAILABLE and Base is not None:
                 "display_preferences": self.display_preferences or {}
             }
 
+    class AllowedEmail(Base):
+        """Individual emails an admin allows to hold an account in addition to the
+        approved email domains (access_policy), e.g. testers from other domains."""
+        __tablename__ = "allowed_emails"
+
+        id = Column(Integer, primary_key=True, index=True)
+        email = Column(String(255), unique=True, nullable=False, index=True)
+        note = Column(String(255), nullable=True)
+        added_by = Column(String(255), nullable=True)
+        added_at = Column(DateTime, default=datetime.utcnow)
+
 else:
     # Define placeholder values when database is not available
     User = None
+    AllowedEmail = None
     Session = None
     SearchHistory = None
     Favorite = None

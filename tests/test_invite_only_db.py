@@ -55,6 +55,14 @@ SCRIPT = textwrap.dedent('''
             db.query(database.User).filter_by(email="late@realdiag.com").first().password_reset_sent_at = (
                 datetime.utcnow() - timedelta(hours=73))
         assert c.post("/users/reset-password", json={"token": token, "new_password": "Chosen-Pass-1"}).status_code == 400
+        # Allowlisted tester from another domain, stored in allowed_emails.
+        assert c.post("/admin/users/invite", json={"email": "tester@gmail.com"}, **kw).status_code == 403
+        assert c.post("/admin/allowlist", json={"email": "tester@gmail.com", "note": "validation"}, **kw).status_code == 201
+        with database.get_db_session() as db:
+            assert db.query(database.AllowedEmail).filter_by(email="tester@gmail.com").first().note == "validation"
+        assert c.post("/admin/users/invite", json={"email": "tester@gmail.com"}, **kw).status_code == 201
+        assert c.post("/admin/allowlist/remove", json={"email": "tester@gmail.com"}, **kw).status_code == 200
+        assert c.get("/admin/allowlist", **kw).json()["emails"] == []
     print("INVITE-DB-OK")
 ''')
 

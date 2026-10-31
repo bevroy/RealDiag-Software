@@ -43,7 +43,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-APPROVED_PROVIDER_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+from backend.services.access_policy import APPROVED_EMAIL_DOMAINS as APPROVED_PROVIDER_DOMAINS  # noqa: E402
 
 
 def _is_approved_provider_email(email: Optional[str]) -> bool:

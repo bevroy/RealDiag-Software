@@ -204,19 +204,14 @@ else:
     logger.warning("⚠️  Using in-memory storage - data will be lost on restart")
 
 
-ALLOWED_LOGIN_EMAIL_DOMAINS = {"realdiag.com", "elionyxhealth.com"}
+from backend.services.access_policy import APPROVED_EMAIL_DOMAINS as ALLOWED_LOGIN_EMAIL_DOMAINS  # noqa: E402
+from backend.services.access_policy import NOT_ALLOWED_DETAIL  # noqa: E402
 
 
 def _is_allowed_login_email(email: str) -> bool:
-    """Only allow credentialed access for approved email domains."""
-    if not email:
-        return False
-    normalized = email.strip().lower()
-    parts = normalized.rsplit("@", 1)
-    if len(parts) != 2:
-        return False
-    domain = parts[1]
-    return domain in ALLOWED_LOGIN_EMAIL_DOMAINS
+    """Only approved email domains, or individual emails on the admin allowlist."""
+    from backend.services.access_policy import email_allowed
+    return email_allowed(email)
 
 
 # Helper functions
@@ -451,7 +446,7 @@ def create_user(user_data: UserCreate) -> Dict[str, Any]:
     if not _is_allowed_login_email(user_data.email):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Account registration is restricted to realdiag.com or elionyxhealth.com email addresses"
+            detail=NOT_ALLOWED_DETAIL
         )
 
     if DATABASE_AVAILABLE:
@@ -642,7 +637,7 @@ def authenticate_user(email: str, password: str) -> Dict[str, Any]:
     if not _is_allowed_login_email(email):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Login is restricted to realdiag.com or elionyxhealth.com email addresses"
+            detail=NOT_ALLOWED_DETAIL
         )
 
     if DATABASE_AVAILABLE:

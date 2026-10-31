@@ -698,6 +698,44 @@ async def admin_create_user(body: NewAccountRequest, admin: AdminUser = Depends(
             "note": "Give the user this temporary password; they should change it after signing in."}
 
 
+class AllowlistEntry(BaseModel):
+    email: str
+    note: Optional[str] = None
+
+
+@router.get("/allowlist")
+async def admin_list_allowlist(admin: AdminUser = Depends(verify_admin_token)):
+    """Individual emails allowed an account besides the approved email domains."""
+    from backend.services.access_policy import APPROVED_EMAIL_DOMAINS, list_allowlist
+    return {"approved_domains": sorted(APPROVED_EMAIL_DOMAINS), "emails": list_allowlist()}
+
+
+@router.post("/allowlist", status_code=201)
+async def admin_add_allowlist(body: AllowlistEntry, admin: AdminUser = Depends(verify_admin_token)):
+    """Allow one email from another domain (e.g. a tester) to be invited and to sign in."""
+    from backend.services.access_policy import add_to_allowlist
+    try:
+        entry = add_to_allowlist(body.email, body.note, admin.username)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    logger.info("ALLOWLIST_ADD admin=%s email=%s", admin.username, entry["email"])
+    return {"success": True, **entry}
+
+
+@router.post("/allowlist/remove")
+async def admin_remove_allowlist(body: AllowlistEntry, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Remove an email from the allowlist: new sign-ins with it are refused.
+    Sessions already open last until they expire; deactivate the account to
+    end them at once.
+    """
+    from backend.services.access_policy import remove_from_allowlist
+    if not remove_from_allowlist(body.email):
+        raise HTTPException(status_code=404, detail="Email is not on the allowlist")
+    logger.info("ALLOWLIST_REMOVE admin=%s email=%s", admin.username, body.email.strip().lower())
+    return {"success": True, "email": body.email.strip().lower()}
+
+
 @router.post("/users/reset-password")
 async def admin_reset_password(
     body: AdminPasswordResetRequest,
