@@ -43,7 +43,7 @@ from ..services.symptom_search import (
     AuditLogger,
 )
 from urllib.parse import urlparse, urlencode
-from ..services.ehr_adapter import EHRAdapter
+from ..services.ehr_adapter import EHRAdapter, UnsupportedEHRVendorError
 from ..services.smart_session_store import (create_smart_session,
     get_smart_session,
     delete_smart_session,
@@ -317,6 +317,9 @@ def get_ehr_config():
             client_secret=CLIENT_SECRET,
             tenant_id=TENANT_ID
         )
+    except UnsupportedEHRVendorError as e:
+        logger.error(f"EHR configuration error: {e}")
+        raise HTTPException(status_code=503, detail=f"SMART on FHIR is not available: {e}")
     except ValueError as e:
         logger.error(f"EHR configuration error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -1026,9 +1029,14 @@ async def get_smart_config():
     """
     Get SMART on FHIR configuration needed for frontend SMART launch.
     """
+    try:
+        scopes = EHRAdapter.scopes_for(EHR_VENDOR)
+    except UnsupportedEHRVendorError as e:
+        raise HTTPException(status_code=503, detail=f"SMART on FHIR is not available: {e}")
     return {
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
-        "scopes": ["launch", "patient/*.read", "openid", "fhirUser"],
+        "ehr_vendor": EHR_VENDOR,
+        "scopes": scopes,
         "fhir_base_url": FHIR_BASE_URL
     }

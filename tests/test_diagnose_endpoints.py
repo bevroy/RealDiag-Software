@@ -43,6 +43,13 @@ def test_tree_endpoints_require_sign_in(method, path):
         assert getattr(anonymous, method)(path, **kwargs).status_code == 401
 
 
+def test_questionnaire_endpoint(client, cookies):
+    client.cookies.update(cookies)
+    body = client.get("/diagnostic/trees/PULM-COUGH/questionnaire").json()
+    assert body["entry"] == "duration" and body["nodes"]["duration"]["kind"] == "question"
+    assert client.get("/diagnostic/trees/CARD-CHEST-PAIN/questionnaire").status_code == 400
+
+
 def test_tree_list_marks_node_format(client, cookies):
     client.cookies.update(cookies)
     trees = client.get("/diagnostic/trees").json()["trees"]
@@ -50,7 +57,8 @@ def test_tree_list_marks_node_format(client, cookies):
     assert by_id["ENT-SORE-THROAT"]["node_format"] == "conditional"
     assert by_id["PULM-COUGH"]["node_format"] == "questionnaire"
     assert sum(t["node_format"] == "conditional" for t in trees) == 17
-    assert sum(t["walk_available"] for t in trees) == 15
+    assert sum(t["walk_available"] for t in trees if t["node_format"] == "conditional") == 15
+    assert sum(t["walk_available"] for t in trees if t["node_format"] == "questionnaire") == 16
     assert by_id["ID-FEVER"]["walk_available"] is False
     assert by_id["PSYCH-PSYCHOSIS"]["unavailable_reason"] == "Temporarily unavailable pending content review."
     assert all("review_status_label" in t for t in trees)

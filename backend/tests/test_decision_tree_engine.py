@@ -48,9 +48,20 @@ def test_referrals_accumulate_across_nodes(tmp_path):
     engine = _engine_with(tmp_path, _conditional_tree())
     result = engine.evaluate("TEST-COND", {})
     assert result["path"] == ["start", "middle", "end"]
-    assert result["referrals"] == ["Referral from end", "Referral from middle", "Referral from start"]
-    assert result["tests"] == ["BMP", "CBC"]
+    # Path order, not alphabetical: each item appears in the order its node was reached.
+    assert result["referrals"] == ["Referral from start", "Referral from middle", "Referral from end"]
+    assert result["tests"] == ["CBC", "BMP"]
     assert result["evaluated"] is True
+
+
+def test_items_keep_the_node_that_produced_them(tmp_path):
+    tree = _conditional_tree()
+    tree["nodes"][2]["tests"] = ["CBC"]  # the same test listed again at a later step
+    result = _engine_with(tmp_path, tree).evaluate("TEST-COND", {})
+    assert result["tests"] == ["CBC", "BMP"]
+    assert result["tests_by_node"] == [{"text": "CBC", "nodes": ["start", "end"]}, {"text": "BMP", "nodes": ["middle"]}]
+    assert result["provisional_dx_by_node"] == [{"text": "Dx A", "nodes": ["start"]}, {"text": "Dx B", "nodes": ["middle"]}]
+    assert [i["nodes"] for i in result["referrals_by_node"]] == [["start"], ["middle"], ["end"]]
 
 
 def test_tree_without_entry_point_returns_error(tmp_path):
@@ -125,3 +136,18 @@ def test_every_tree_evaluates_without_exception():
         result = engine.evaluate(tree_id, {"symptoms": []})
         assert "error" not in result, (tree_id, result.get("error"))
         assert "evaluated" in result, tree_id
+
+
+def test_unmet_node_condition_is_marked_and_walk_is_unchanged(tmp_path):
+    tree = _conditional_tree()
+    tree["nodes"][1]["when"] = {"symptoms_contains_any": ["fever"], "min_age": 65}
+    engine = _engine_with(tmp_path, tree)
+    unmet = engine.evaluate("TEST-COND", {"symptoms": ["fever"], "age": 30})
+    met = engine.evaluate("TEST-COND", {"symptoms": ["fever"], "age": 70})
+    # The path is the same either way: node conditions do not choose the path.
+    assert unmet["path"] == met["path"] == ["start", "middle", "end"]
+    assert unmet["unmet_node_conditions"] == ["middle"] and met["unmet_node_conditions"] == []
+    assert "[middle] (partial, condition not met) symptoms any of ['fever']" in unmet["trace"]
+    assert any(line.startswith("[middle] NOT MET:") for line in unmet["trace"])
+    assert "[middle] symptoms any of ['fever']" in met["trace"]
+    assert not any("NOT MET" in line for line in met["trace"])
