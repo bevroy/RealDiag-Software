@@ -133,6 +133,11 @@ def tree_inputs(tree):
             elif _is_finding_value(want): _add(out["findings"].setdefault(key, []), want)
     for _, pred in _branch_predicates(tree): visit(pred)
     return out
+# Shown with questionnaire outcomes: their icd10/urgency are as written in the tree.
+STEP_VALUES_NOTE = ("ICD-10 code and urgency shown for a step are as written in the tree (draft); they are not "
+                    "mapped to RealDiag's urgency levels or used for ranking.")
+
+
 def _by_node(items: List[Any]) -> List[Dict[str, Any]]:
     """[(text, node_id)] -> [{"text", "nodes"}] in first-appearance order, one entry per text."""
     out: Dict[str, Dict[str, Any]] = {}
@@ -173,8 +178,8 @@ class DecisionTreeEngine:
                  **self._walk_availability(t), **review_fields(t.get("status"))}
                 for t in self.trees.values()]
     def _walk_availability(self, t):
-        """walk_available: offered on /diagnose (conditional, with no missing branch targets)."""
-        if self._format(t) != "conditional":
+        """walk_available: offered on /diagnose (conditional or questionnaire, with no missing branch targets)."""
+        if self._format(t) not in ("conditional", "questionnaire"):
             return {"walk_available": False, "unavailable_reason": None}
         if missing_branch_targets(t):
             return {"walk_available": False, "unavailable_reason": self.UNAVAILABLE_PENDING_REVIEW}
@@ -183,6 +188,43 @@ class DecisionTreeEngine:
         return t.get("node_format") if t.get("nodes") else "none"
     def _tree_summary(self, t):
         return {"id": t["id"], "title": t.get("title"), "icd10": icd10_codes(t), **review_fields(t.get("status"))}
+    def questionnaire(self, tree_id: str):
+        """A questionnaire tree for walking one question at a time on /diagnose.
+
+        Questions: {"kind": "question", "text", "options": [{"label", "next"}]}.
+        Outcomes: {"kind": "outcome", "title", "description", "workup", "treatment",
+        "recommendations", "icd10", "urgency"}. A step's icd10 and urgency are
+        returned as written in the tree, for display only: they are not mapped
+        to the tree-level urgency scale or used for ranking.
+        """
+        t=self.trees.get(tree_id)
+        if not t: return {"error": f"tree '{tree_id}' not found"}
+        fmt=self._format(t)
+        if fmt != "questionnaire":
+            return {"error": f"tree '{tree_id}' is not a questionnaire (node format: {fmt})", "node_format": fmt}
+        if not self._walk_availability(t)["walk_available"]:
+            return {"error": f"tree '{tree_id}' is not available for walking: {self.UNAVAILABLE_PENDING_REVIEW}",
+                    "node_format": fmt}
+        nodes = {}
+        for n in t.get("nodes", []):
+            if not isinstance(n, dict) or not n.get("id"):
+                continue
+            if "options" in n:
+                nodes[n["id"]] = {
+                    "kind": "question", "text": str(n.get("text") or n.get("question") or n["id"]),
+                    "options": [{"label": str(o.get("label", "")), "next": o.get("next")}
+                                for o in n.get("options") or [] if isinstance(o, dict)]}
+            else:
+                icd = n.get("icd10")
+                nodes[n["id"]] = {
+                    "kind": "outcome", "title": str(n.get("diagnosis") or n.get("name") or n["id"]),
+                    "description": n.get("description"),
+                    "workup": _text_items(n.get("workup")), "treatment": _text_items(n.get("treatment")),
+                    "recommendations": _text_items(n.get("recommendations")),
+                    "icd10": [str(c) for c in (icd if isinstance(icd, list) else [icd] if icd else [])],
+                    "urgency": str(n["urgency"]) if n.get("urgency") is not None else None}
+        return {"tree": self._tree_summary(t), "node_format": fmt, "entry": t["entry"], "nodes": nodes,
+                "step_values_note": STEP_VALUES_NOTE, "clinical_review_notice": review_notice()}
     def inputs(self, tree_id: str):
         """Answer choices for /diagnose, built from a conditional tree's own branches."""
         t=self.trees.get(tree_id)

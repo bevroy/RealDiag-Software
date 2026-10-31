@@ -407,6 +407,14 @@ def tree_inputs(tree_id: str):
     """
     return _tree_or_error(_trees.inputs(tree_id))
 
+@router.get("/trees/{tree_id}/questionnaire")
+def tree_questionnaire(tree_id: str):
+    """
+    A questionnaire tree for walking one question at a time on /diagnose: its
+    questions with answer options and its outcome steps (content as written).
+    """
+    return _tree_or_error(_trees.questionnaire(tree_id))
+
 @router.post("/evaluate/{tree_id}")
 async def evaluate_tree(
     tree_id: str,
