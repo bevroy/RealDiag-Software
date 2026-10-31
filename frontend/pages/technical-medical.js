@@ -56,6 +56,9 @@ export default function TechnicalMedicalPage() {
             distinguishing features, cautionary flags, and practical next steps. Management and
             test recommendations are intended to support workflow planning and prioritization.
           </p>
+          <p style={styles.p}>
+            Note extraction and narrative (October 2026): backend/services/note_extraction.py splits the 10 most recent notes (DocumentReference) into sections by heading and extracts problems, medications, allergies, chief complaint and vital/lab values written in the text, each with its document id, type, section and date; frontend/utils/chartNarrative.js turns those facts and the chart summary into template sentences with sources. Fixed rules only; no AI or model.
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -70,7 +73,6 @@ export default function TechnicalMedicalPage() {
             <li>Recency-weighted interpretation of discontinued therapies</li>
             <li>Adverse-history blocks for high-risk repeat recommendations</li>
             <li>Explainability outputs for supported and conflicting medication signals</li>
-            <li>Note extraction and narrative (October 2026): backend/services/note_extraction.py splits the 10 most recent notes (DocumentReference) into sections by heading and extracts problems, medications, allergies, chief complaint and vital/lab values written in the text, each with its document id, type, section and date; frontend/utils/chartNarrative.js turns those facts and the chart summary into template sentences with sources. Fixed rules only; no AI or model.</li>
           </ul>
         </section>
 
