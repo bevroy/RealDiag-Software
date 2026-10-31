@@ -16,7 +16,7 @@ Usage:
 
 import requests
 import os
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timedelta
 import logging
 from dataclasses import dataclass, field
@@ -114,6 +114,23 @@ def truncation_warning(resource: str, event: Dict[str, Any]) -> str:
     window = f" since {event['since']}" if event.get("since") else ""
     return (f"{label} cut off: the page limit was reached after {event['count']} results{covered}. "
             f"Other results{window} were not retrieved and were not assessed.")
+
+
+def search_since(since: datetime) -> Tuple[str, Optional[str]]:
+    """FHIR date-search value for "on or after `since`", and a note when precision is lost.
+
+    FHIR date search accepts a full dateTime, but one with a time must carry a
+    timezone. A timezone-aware `since` is sent to the second; a naive one
+    (no timezone known) is sent as its date, which includes earlier results
+    from that day, and the returned note says so.
+    """
+    if since.tzinfo is not None and since.utcoffset() is not None:
+        return since.isoformat(timespec="seconds"), None
+    date = since.strftime("%Y-%m-%d")
+    if since.time() == datetime.min.time():
+        return date, None
+    return date, (f"The handoff start time {since.strftime('%Y-%m-%d %H:%M')} has no timezone, so updates "
+                  f"were searched from the start of {date}; earlier results from that day may be included.")
 
 
 def _record_status(status: Dict[str, str], resource: str, outcome: str) -> None:
@@ -686,8 +703,10 @@ class FHIRClient:
         for shift-handoff / "what's changed since admission" summaries.
 
         Unlike get_patient_data(), this is NOT limited to a fixed 7/30-day
-        lookback window - it queries from the exact timestamp given, however
-        long ago that was (e.g., the start of a multi-week admission).
+        lookback window - it queries from the timestamp given, however long
+        ago that was (e.g., the start of a multi-week admission). The search
+        uses the full timestamp when it has a timezone, else its date (see
+        search_since; a data warning says so).
 
         Returns:
             Dict with new_labs, new_abnormal_labs, new_vitals, new_conditions,
@@ -695,7 +714,7 @@ class FHIRClient:
             and data_notes. A resource whose query failed has an empty list
             and a non-"retrieved" status - never read that as "nothing new".
         """
-        since_str = since.strftime("%Y-%m-%d")
+        since_str, precision_note = search_since(since)
         status: Dict[str, str] = {}
         notes: List[str] = []
         truncated: List[str] = []
@@ -738,7 +757,7 @@ class FHIRClient:
             "new_conditions": new_conditions,
             "new_medications": new_medications,
             "retrieval_status": status,
-            "data_warnings": retrieval_warnings(status) + truncated,
+            "data_warnings": retrieval_warnings(status) + truncated + ([precision_note] if precision_note else []),
             "data_notes": notes,
         }
 

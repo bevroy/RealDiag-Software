@@ -645,3 +645,44 @@ def test_fhir_timeout_is_reported_as_failed(monkeypatch):
     data = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t").get_patient_data("p1")
     assert data.retrieval_status["labs"] == "failed"
     assert data.retrieval_status["conditions"] == "retrieved"
+
+
+# --- Handoff delta keeps the full "since" timestamp ------------------------------
+
+from datetime import timezone as _tz  # noqa: E402
+
+from backend.services.fhir_client import search_since  # noqa: E402
+
+
+def test_search_since_keeps_time_when_timezone_known():
+    since = datetime(2026, 10, 30, 7, 15, 30, tzinfo=_tz.utc)
+    assert search_since(since) == ("2026-10-30T07:15:30+00:00", None)
+    offset = datetime.fromisoformat("2026-10-30T07:15:00-05:00")
+    assert search_since(offset) == ("2026-10-30T07:15:00-05:00", None)
+
+
+def test_search_since_naive_time_falls_back_to_date_with_note():
+    value, note = search_since(datetime(2026, 10, 30, 7, 15))
+    assert value == "2026-10-30"
+    assert "has no timezone" in note and "start of 2026-10-30" in note
+    assert search_since(datetime(2026, 10, 30)) == ("2026-10-30", None)  # date only: nothing lost
+
+
+def test_handoff_queries_use_the_full_timestamp(monkeypatch):
+    queries = []
+
+    def fake_get(url, **kwargs):
+        queries.append(kwargs.get("params") or {})
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    client = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t")
+    updates = client.get_patient_updates_since("p1", datetime(2026, 10, 30, 7, 15, tzinfo=_tz.utc))
+    values = [q.get("date") or q.get("recorded-date") or q.get("authoredon") for q in queries]
+    assert values == ["ge2026-10-30T07:15:00+00:00"] * 4
+    assert not [w for w in updates["data_warnings"] if "timezone" in w]
+
+    queries.clear()
+    updates = client.get_patient_updates_since("p1", datetime(2026, 10, 30, 7, 15))
+    assert [q.get("date") or q.get("recorded-date") or q.get("authoredon") for q in queries] == ["ge2026-10-30"] * 4
+    assert any("has no timezone" in w for w in updates["data_warnings"])
