@@ -104,6 +104,9 @@ export default function TechnicalMedicalPage() {
             and history-derived signals can be surfaced so clinicians can understand why a
             suggestion appeared and where risk adjustments were applied.
           </p>
+          <p style={styles.p}>
+            ICPC-2 (October 2026): codes are loaded from backend/data/icpc2_mapping.yml (licensed source, version, and per-code provenance) and trees&apos; codes.icpc2, validated by validate_rules.py, and returned only once the mapping is marked reviewed. RealDiag generates no ICPC-2 codes; until a licensed mapping is reviewed every tree reports &quot;pending licensed mapping and review&quot;.
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -169,7 +172,6 @@ export default function TechnicalMedicalPage() {
               (6) Tree walks keep tests, diagnoses and referrals in path order with the step that produced each.
               (7) Steps whose own condition is not met are marked in the trace (walk unchanged).
               (8) Medication outcome feedback is stored in the database (medication_outcomes).</li>
-            <li>ICPC-2 (October 2026): codes are loaded from backend/data/icpc2_mapping.yml (licensed source, version, and per-code provenance) and trees&apos; codes.icpc2, validated by validate_rules.py, and returned only once the mapping is marked reviewed. RealDiag generates no ICPC-2 codes; until a licensed mapping is reviewed every tree reports &quot;pending licensed mapping and review&quot;.</li>
           </ul>
         </section>
 
