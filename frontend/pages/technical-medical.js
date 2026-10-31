@@ -70,6 +70,7 @@ export default function TechnicalMedicalPage() {
             <li>Recency-weighted interpretation of discontinued therapies</li>
             <li>Adverse-history blocks for high-risk repeat recommendations</li>
             <li>Explainability outputs for supported and conflicting medication signals</li>
+            <li>Chart-derived ranking terms (October 2026): the encounter assessment adds terms from the latest vital signs (shared vital-sign rules) and the three most recent H&amp;P chief complaints to the complaint phrases, records for each library match whether the complaint, the chart terms or both supported it, and lists every chart term with its source and date (backend/services/chart_terms.py).</li>
           </ul>
         </section>
 
