@@ -1,0 +1,623 @@
+{
+ "note": "Synthetic test rules, not clinical content. Expected results come from the server ranking (python -m backend.tests.offline_parity --write).",
+ "search": {
+  "result_limit": 20,
+  "synonyms": {
+   "shortness of breath": [
+    "dyspnea"
+   ],
+   "short of breath": [
+    "dyspnea"
+   ],
+   "sob": [
+    "dyspnea"
+   ],
+   "difficulty breathing": [
+    "dyspnea"
+   ],
+   "dyspnea": [
+    "shortness of breath"
+   ],
+   "stomach pain": [
+    "abdominal pain"
+   ],
+   "belly pain": [
+    "abdominal pain"
+   ]
+  },
+  "negation_cues": [
+   "no",
+   "not",
+   "denies",
+   "denied",
+   "denying",
+   "without",
+   "negative for",
+   "free of",
+   "absence of",
+   "resolved",
+   "never"
+  ],
+  "negation_exceptions": [
+   "no appetite",
+   "not eating",
+   "not drinking",
+   "no energy",
+   "not sleeping",
+   "no urine",
+   "not urinating",
+   "no bowel movement",
+   "no stool",
+   "no period",
+   "not feeling well",
+   "not moving",
+   "no feeling",
+   "not able to"
+  ]
+ },
+ "rules": [
+  {
+   "id": "TEST-CHEST",
+   "label": "Chest test",
+   "family": "cardiology",
+   "urgency": "emergent",
+   "presentations": [
+    "Chest pain radiating to arm",
+    "Shortness of breath on exertion",
+    "Diaphoresis"
+   ],
+   "complaint_terms": [
+    "chest pain",
+    "crushing chest pressure"
+   ],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": 0.9,
+   "icd10": [
+    "X00"
+   ]
+  },
+  {
+   "id": "TEST-GERD",
+   "label": "Reflux test",
+   "family": "gastroenterology",
+   "urgency": "routine",
+   "presentations": [
+    "Burning chest pain after meals",
+    "Sour taste"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "PEDS-TEST-CROUP",
+   "label": "Croup test",
+   "family": "pediatrics",
+   "urgency": "urgent",
+   "presentations": [
+    "Barking cough",
+    "Stridor"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": 6,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-PROSTATITIS",
+   "label": "Prostatitis test",
+   "family": "urology",
+   "urgency": "routine",
+   "presentations": [
+    "Pelvic pain",
+    "Dysuria"
+   ],
+   "complaint_terms": [],
+   "applies_to": "male",
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-OVARIAN",
+   "label": "Ovarian torsion test",
+   "family": "obgyn",
+   "urgency": "emergent",
+   "presentations": [
+    "Sudden pelvic pain",
+    "Nausea"
+   ],
+   "complaint_terms": [
+    "pelvic pain"
+   ],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-ASTHMA",
+   "label": "Asthma test",
+   "family": "pulmonology",
+   "urgency": "routine",
+   "presentations": [
+    "Wheezing",
+    "Dyspnea at night",
+    "Cough"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": "0.4",
+   "icd10": []
+  },
+  {
+   "id": "GER-TEST-FALLS",
+   "label": "Falls test",
+   "family": "geriatrics",
+   "urgency": "routine",
+   "presentations": [
+    "Falls",
+    "Dizziness"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-MIGRAINE",
+   "label": "Migraine test",
+   "family": "neurology",
+   "urgency": "routine",
+   "presentations": [
+    "Headache with nausea",
+    "Photophobia"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": 10,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-PE",
+   "label": "Embolism test",
+   "family": "pulmonology",
+   "urgency": "emergent",
+   "presentations": [],
+   "complaint_terms": [
+    "shortness of breath",
+    "pleuritic chest pain"
+   ],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-ABD",
+   "label": "Abdominal test",
+   "family": "gastroenterology",
+   "urgency": "routine",
+   "presentations": [
+    "Abdominal pain",
+    "Belly cramps",
+    "Pain after meals"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": null,
+   "icd10": []
+  },
+  {
+   "id": "TEST-BACK",
+   "label": "Back test",
+   "family": "orthopedics",
+   "urgency": "routine",
+   "presentations": [
+    "Low back pain",
+    "Pain on bending"
+   ],
+   "complaint_terms": [],
+   "applies_to": null,
+   "age_min": null,
+   "age_max": null,
+   "sensitivity": 0.5,
+   "icd10": []
+  }
+ ],
+ "queries": [
+  {
+   "symptoms": [
+    "chest pain"
+   ]
+  },
+  {
+   "symptoms": [
+    "shortness of breath"
+   ]
+  },
+  {
+   "symptoms": [
+    "stomach pain"
+   ]
+  },
+  {
+   "symptoms": [
+    "chest pain, no shortness of breath"
+   ]
+  },
+  {
+   "symptoms": [
+    "denies chest pain"
+   ]
+  },
+  {
+   "symptoms": [
+    "pelvic pain"
+   ],
+   "sex": "F",
+   "age": 30
+  },
+  {
+   "symptoms": [
+    "pelvic pain"
+   ],
+   "sex": "male"
+  },
+  {
+   "symptoms": [
+    "cough"
+   ],
+   "age": 40
+  },
+  {
+   "symptoms": [
+    "cough"
+   ],
+   "age": 4
+  },
+  {
+   "symptoms": [
+    "dizziness"
+   ],
+   "age": 70
+  },
+  {
+   "symptoms": [
+    "dizziness"
+   ],
+   "age": 50
+  },
+  {
+   "symptoms": [
+    "no appetite and nausea"
+   ]
+  },
+  {
+   "symptoms": [
+    "facial pain"
+   ]
+  },
+  {
+   "symptoms": [
+    "headache"
+   ],
+   "age": 8
+  },
+  {
+   "symptoms": [
+    "Chest-pain!",
+    "nausea; but no fever"
+   ]
+  },
+  {
+   "symptoms": [
+    "pain"
+   ],
+   "family": "gastroenterology"
+  },
+  {
+   "symptoms": [
+    "pain",
+    "chest pain"
+   ],
+   "limit": 2
+  }
+ ],
+ "expected": [
+  {
+   "results": [
+    [
+     "TEST-CHEST",
+     5.4,
+     [
+      "Chest pain radiating to arm",
+      "chest pain"
+     ],
+     true
+    ],
+    [
+     "TEST-GERD",
+     5.0,
+     [
+      "Burning chest pain after meals"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-CHEST",
+     5.4,
+     [
+      "Shortness of breath on exertion"
+     ],
+     true
+    ],
+    [
+     "TEST-ASTHMA",
+     4.9,
+     [
+      "Dyspnea at night"
+     ],
+     false
+    ],
+    [
+     "TEST-PE",
+     0.0,
+     [
+      "shortness of breath"
+     ],
+     true
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-ABD",
+     5.0,
+     [
+      "Abdominal pain"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-CHEST",
+     5.4,
+     [
+      "Chest pain radiating to arm",
+      "chest pain"
+     ],
+     true
+    ],
+    [
+     "TEST-GERD",
+     5.0,
+     [
+      "Burning chest pain after meals"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": [
+    "shortness of breath"
+   ]
+  },
+  {
+   "results": [],
+   "negated_terms": [
+    "chest pain"
+   ]
+  },
+  {
+   "results": [
+    [
+     "TEST-OVARIAN",
+     5.0,
+     [
+      "Sudden pelvic pain",
+      "pelvic pain"
+     ],
+     true
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-PROSTATITIS",
+     5.0,
+     [
+      "Pelvic pain"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-ASTHMA",
+     4.9,
+     [
+      "Cough"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "PEDS-TEST-CROUP",
+     5.0,
+     [
+      "Barking cough"
+     ],
+     false
+    ],
+    [
+     "TEST-ASTHMA",
+     4.9,
+     [
+      "Cough"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "GER-TEST-FALLS",
+     5.0,
+     [
+      "Dizziness"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [],
+   "negated_terms": []
+  },
+  {
+   "results": [],
+   "negated_terms": []
+  },
+  {
+   "results": [],
+   "negated_terms": []
+  },
+  {
+   "results": [],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-CHEST",
+     5.4,
+     [
+      "Chest pain radiating to arm",
+      "chest pain"
+     ],
+     true
+    ],
+    [
+     "TEST-GERD",
+     5.0,
+     [
+      "Burning chest pain after meals"
+     ],
+     false
+    ],
+    [
+     "TEST-OVARIAN",
+     5.0,
+     [
+      "Nausea"
+     ],
+     true
+    ],
+    [
+     "TEST-MIGRAINE",
+     5.0,
+     [
+      "Headache with nausea"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": [
+    "fever"
+   ]
+  },
+  {
+   "results": [
+    [
+     "TEST-ABD",
+     10.0,
+     [
+      "Abdominal pain",
+      "Pain after meals"
+     ],
+     false
+    ],
+    [
+     "TEST-GERD",
+     5.0,
+     [
+      "Burning chest pain after meals"
+     ],
+     false
+    ]
+   ],
+   "negated_terms": []
+  },
+  {
+   "results": [
+    [
+     "TEST-CHEST",
+     10.8,
+     [
+      "Chest pain radiating to arm",
+      "chest pain"
+     ],
+     true
+    ],
+    [
+     "TEST-GERD",
+     10.0,
+     [
+      "Burning chest pain after meals"
+     ],
+     false
+    ],
+    [
+     "TEST-OVARIAN",
+     5.0,
+     [
+      "Sudden pelvic pain"
+     ],
+     true
+    ]
+   ],
+   "negated_terms": []
+  }
+ ]
+}

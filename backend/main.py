@@ -25,6 +25,7 @@ from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
 from backend.services.context_router import router as context_router
+from backend.services.offline_bundle import router as offline_router
 from backend.services.auth_service import verify_token
 
 # Import admin router for AI tree management
@@ -260,6 +261,7 @@ app.include_router(homeopathy_router)
 app.include_router(mfa_router)
 app.include_router(search_router)
 app.include_router(context_router)
+app.include_router(offline_router)
 
 # POST /analyze (backend/services/diagnostic_engine.py) was removed: no page
 # called it, and none of its domain analyzers returned the declared
