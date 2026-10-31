@@ -421,7 +421,7 @@ def list_item_problems(tree: Dict) -> List[str]:
     return problems
 
 
-CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
+CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "at_least_below", "outside", "above_ref_high", "below_ref_low"}
 CRITERIA_ROLES = {"core", "supporting"}
 CRITERIA_DISPLAY = {"always", "when_met", "when_found"}
 CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
@@ -507,7 +507,7 @@ def criteria_problems(criteria) -> List[str]:
         value = item.get("value")
         if op in (">", ">=", "<", "<=") and not isinstance(value, (int, float)):
             problems.append(f"{where}: operator {op} needs a numeric 'value'")
-        if op in ("between", "outside") and not (
+        if op in ("between", "at_least_below", "outside") and not (
                 isinstance(value, list) and len(value) == 2 and all(isinstance(v, (int, float)) for v in value)
                 and value[0] < value[1]):
             problems.append(f"{where}: operator {op} needs 'value: [low, high]' with low < high")

@@ -61,7 +61,9 @@ logger = logging.getLogger(__name__)
 
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 
-OPERATORS = (">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low")
+# between: low <= v <= high. at_least_below: low <= v < high, so a range can end exactly
+# where the next condition's threshold starts (e.g. prediabetes up to the diabetes cutoff).
+OPERATORS = (">", ">=", "<", "<=", "between", "at_least_below", "outside", "above_ref_high", "below_ref_low")
 SEVERITY_RANK = {"critical": 4, "high": 3, "moderate": 2, "low": 1, "unknown": 0}
 
 
@@ -195,6 +197,8 @@ class _ItemEvaluator:
             met = canonical <= threshold
         elif op == "between":
             met = threshold[0] <= canonical <= threshold[1]
+        elif op == "at_least_below":
+            met = threshold[0] <= canonical < threshold[1]
         elif op == "outside":
             met = canonical < threshold[0] or canonical > threshold[1]
         else:  # pragma: no cover - the validator rejects unknown operators
