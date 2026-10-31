@@ -47,6 +47,9 @@ export default function TechnicalMedicalPage() {
             validated.&quot; Chart-driven requests (encounter assessment, ambulatory differential,
             symptom search with an EHR patient) never use AI: EHR data is never sent to an AI provider.
           </p>
+          <p style={styles.p}>
+            Chart-derived ranking terms (October 2026): the encounter assessment adds terms from the latest vital signs (shared vital-sign rules) and the three most recent H&amp;P chief complaints to the complaint phrases, records for each library match whether the complaint, the chart terms or both supported it, and lists every chart term with its source and date (backend/services/chart_terms.py).
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -55,6 +58,9 @@ export default function TechnicalMedicalPage() {
             Many diagnoses include clinical pearls to help interpretation at the bedside:
             distinguishing features, cautionary flags, and practical next steps. Management and
             test recommendations are intended to support workflow planning and prioritization.
+          </p>
+          <p style={styles.p}>
+            Note extraction and narrative (October 2026): backend/services/note_extraction.py splits the 10 most recent notes (DocumentReference) into sections by heading and extracts problems, medications, allergies, chief complaint and vital/lab values written in the text, each with its document id, type, section and date; frontend/utils/chartNarrative.js turns those facts and the chart summary into template sentences with sources. Fixed rules only; no AI or model.
           </p>
         </section>
 
@@ -95,6 +101,19 @@ export default function TechnicalMedicalPage() {
             BMI, smoking status, procedures, imaging and results over 10 years. Data RealDiag cannot see
             (such as pack-years) is reported as unavailable, never assumed.
           </p>
+          <p style={styles.p}>
+            Patient-aware treatment review (October 2026, rules only): for each shown tree, every
+            treatment line is scanned for drug names and classes known to MedicationSafetyService and the
+            history classifier. Each is checked for interactions and duplicate therapy with the
+            chart&apos;s active medications, contraindications with the problem list, allergy
+            cross-reactivity and named allergies, age, renal adjustment (latest eGFR under 30 or 15, or
+            CKD stage 4/5/ESRD on the problem list), hepatic adjustment (cirrhosis or Child-Pugh C on the
+            problem list), pregnancy (problem list) and prior adverse reactions to the same drug or class
+            (statusReason). Contraindicated alerts, named allergies and prior adverse reactions mark a
+            line Avoid; other alerts and missing allergy or medication data mark it Use with caution.
+            Every reason carries its data source. Lines are never ranked, and these cut-offs and mappings
+            are pending clinical review.
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -123,9 +142,31 @@ export default function TechnicalMedicalPage() {
           <ul style={styles.list}>
             <li>Security maintenance (eMudhra certificate compromise and Node.js security release, October 2026): Node.js is pinned to 22.23.4 for Netlify builds, CI and the frontend images (Node 20 and earlier receive no fix); certifi is pinned to 2026.10.19 or later; and the Python and Node images upgrade the system ca-certificates package when they are built. Running services pick this up only after a rebuild and redeploy.</li>
             <li>Security maintenance (Next.js advisories, October 2026): the frontend moves from Next.js 16.3.4 to 16.4.3, which fixes three critical and one high-severity published advisory. Production on Netlify is a static export with no Next.js server, so exposure there was low; the frontend Docker image runs a Next.js server and is the main beneficiary.</li>
+            <li>Correctness fixes (October 2026), each with tests; no threshold, urgency or tree status changed except where marked pending clinical review:
+              (1) Vital signs: one shared mapper (backend/services/vitals_terms.py) for symptom search and tree evaluation; temperature is converted from its recorded unit (°F if none) before the °F thresholds; where the two old copies differed the stricter rule is kept (diastolic &gt;= 90 is hypertension; heart rate &gt;= 130 and SpO2 &lt; 90 add red flags).
+              (2) The /search urgency badge shows emergent in red.
+              (3) Possible missed items: a tree&apos;s criteria.suppressed_by names other trees whose problem-list codes suppress its finding; prediabetes is suppressed by diabetes (pending clinical review).
+              (4) Prediabetes ranges are [5.7, 6.5) % and [100, 126) mg/dL (new operator at_least_below), meeting the diabetes thresholds with no gap (pending clinical review).
+              (5) EHR medication history reads R4 stop dates (dosage boundsPeriod.end, else dispense validityPeriod.end) and statusReason, instead of the R5-only statusChanged.
+              (6) FHIR requests time out after 30 seconds and are reported as failed.
+              (7) The handoff &quot;since&quot; search keeps the full timestamp when it has a timezone.
+              (8) The encounter summary counts abnormal results from the last 30 days only and says so.
+              (9) A lab and its reference range in different units are converted before the result is flagged abnormal.</li>
             <li>Rate limits use the real client address (backend/services/client_ip.py): behind Render&apos;s proxy, CF-Connecting-IP / True-Client-IP or the right-most untrusted X-Forwarded-For entry, trusted only when the connection comes from a private proxy address. Signed-in requests are limited per account, not per IP, so a class on one campus network does not share one limit. Sign-in (150 per 15 minutes per IP) and registration (60 per hour per IP) are sized for a class; repeated wrong passwords lock that account for 15 minutes after 5 attempts, stored on the user record so it holds across workers. Admins can check what the server sees at GET /admin/client-ip.</li>
             <li>Email failures are reported, not silent: forgot-password returns 503 when email is not configured and 502 when sending fails; registration, verification and resend responses say when an email could not be sent. SMTP connections time out after 15 seconds, and reset/verification links are no longer written to the server log.</li>
             <li>Admin account tools: POST /admin/users/reset-password, /admin/users/deactivate and /admin/users/reactivate (admin token plus a signed-in session). Deactivated accounts are refused at sign-in and on every authenticated request.</li>
+            <li>Misleading-behavior fixes (October 2026), each with tests:
+              (1) GET /rules/all returns the whole rule library with a content version, and &quot;Download All Rules&quot; reports real success or failure.
+              (2) Offline IndexedDB reads and writes are wrapped in promises (frontend/utils/idb.js), so offline storage returns its data.
+              (3) Pages and the service worker share one database name, version and schema (public/offline-db-schema.js).
+              (4) Background sync is removed: its endpoints never existed and the data it would sync is never stored.
+              (5) Offline POSTs get HTTP 503 with X-RealDiag-Offline: 1 instead of a fake success, and Symptom Search shows an offline message.
+              (6) offline.html lists only what works offline.
+              (7) Guideline names stored as origin evidence_level are shown as sources, not as evidence levels.
+              (8) /search shows the remedies stored in trees (homeopathy.remedies) with &quot;This content has not been clinically validated.&quot;
+              (9) Approving an AI-generated tree is described accurately: it is not added to the clinical library.
+              (10) POST /analyze is removed (unused; its outputs never matched the schema).
+              (11) /inpatient and the nav link to Encounter Assessment during a SMART session.</li>
             <li>The tree validator rejects any branch or questionnaire option that points to a node the tree does not contain. Two trees are explicit known exceptions pending clinical review (ID-FEVER, PSYCH-PSYCHOSIS; see docs/CLINICAL_CONTENT_REVIEW.md section 13): /diagnostic/trees marks them walk_available false and /diagnose does not offer them.</li>
             <li>Every page calls the API through one client (frontend/utils/apiClient.js) that always sends the sign-in cookie; previously /diagnose, the tree counts, Patient History save and medication check, Diagnosis Search and Training sent no credentials and got 401. Login, registration, email verification and password reset now use the configured API address and stay on the same site afterwards.</li>
             <li>Decision tree engine: every predicate key used by the conditional trees is evaluated (exam_findings_any, exam_findings, symptoms_contains_all, symptoms, patient_characteristics_any, no_red_flags, age comparators, and named findings such as rapid_strep: positive, matched exactly). Unrecognised keys used to be ignored, so those branches matched every patient; unrecognised predicate shapes now fail closed. Walk results report end_reason (end_node, no_matching_branch, missing_node, loop) and trace each branch taken. Tree content is unchanged.</li>
@@ -138,6 +179,16 @@ export default function TechnicalMedicalPage() {
             <li>Navigation normalizes legacy roles so approved clinical accounts are shown provider-level tools consistently.</li>
             <li>Admin role-management endpoints support updates by email or user ID for onboarding and access corrections.</li>
             <li>Client cache invalidation was added so stale bundles do not preserve older limited-navigation behavior after deploys.</li>
+            <li>Integration and security hardening (October 2026), each with tests:
+              (1) SMART on FHIR access and refresh tokens are encrypted at rest (Fernet; key SMART_TOKEN_ENCRYPTION_KEY or derived from JWT_SECRET_KEY).
+              (2) Only EHR vendors with a configuration are offered (MEDITECH removed); others get a clear 503.
+              (3) Cerner requests a read scope for every resource the chart pull queries (adds ImagingStudy and FamilyMemberHistory); GET /smart/config reports the active vendor&apos;s scopes.
+              (4) The patient history service follows FHIR next links up to HISTORY_MAX_PAGES (default 5) and reports searches cut off at the cap.
+              (5) The patient-facing symptom search refuses emr_patient_id (400).
+              (6) Tree walks keep tests, diagnoses and referrals in path order with the step that produced each.
+              (7) Steps whose own condition is not met are marked in the trace (walk unchanged).
+              (8) Medication outcome feedback is stored in the database (medication_outcomes).</li>
+            <li>Medication review (October 2026): the encounter assessment runs MedicationSafetyService on the chart&apos;s active medications (interactions, duplicate therapy, contraindications with the problem list, allergy cross-reactivity, age) and lists prior adverse reactions from the medication history (statusReason); each alert names the chart data it used, and unretrieved data is listed as not checked. /diagnose sends typed medications and allergies to /diagnostic/evaluate and shows its alerts. major_interactions is returned as dicts (it caused HTTP 500 before).</li>
           </ul>
         </section>
 

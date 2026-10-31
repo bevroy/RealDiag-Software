@@ -67,6 +67,7 @@ export default function UserGuidePage() {
             <li>If connected to EHR/EMR, verify patient context and encounter selection.</li>
             <li>Collect presenting symptoms, onset timeline, and key red flags.</li>
             <li>Enter vitals when available for improved relevance and safety checks.</li>
+            <li>Chart narrative (Encounter Assessment, October 2026): a readable summary built by fixed templates from the chart and from text found in its notes; each sentence shows its source (record type, document, section and date). It restates what the chart says and is not a clinical interpretation.</li>
           </ul>
         </section>
 
@@ -78,6 +79,7 @@ export default function UserGuidePage() {
             <li>Add vital signs: HR, BP, temperature, respiratory rate, and oxygen saturation.</li>
             <li>Run search and review ranked results.</li>
             <li>Open each result to review clinical pearls, tests, referrals, and management notes.</li>
+            <li>Medications (October 2026): on /diagnose, an optional last step takes current medications and allergies, and the result lists any medication safety alerts. When RealDiag is opened from the EHR, Encounter Assessment has a Medication review section built from the chart. Both are reference only.</li>
           </ol>
         </section>
 
@@ -107,6 +109,7 @@ export default function UserGuidePage() {
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
+            <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
           </ul>
         </section>
 
@@ -133,6 +136,7 @@ export default function UserGuidePage() {
             <li>Medication warning mismatch: check generic-vs-brand medication names.</li>
             <li>Backend connection check: the /diagnostic page shows whether the site can reach the RealDiag API (health and version).</li>
             <li>Health Manager or symptom search not showing your account details: sign in again; both pages load your profile from the RealDiag API.</li>
+            <li>Encounter Assessment (October 2026): besides today&apos;s complaint, the latest vital signs and recent H&amp;P chief complaints from the chart are also searched; they are listed under Today&apos;s complaint with their source, and a diagnosis matched only through them is labelled &quot;Matches chart findings&quot;.</li>
           </ul>
         </section>
 
@@ -144,7 +148,10 @@ export default function UserGuidePage() {
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
+            <li>Offline (October 2026): &quot;Download All Rules&quot; on Symptom Search now says whether the download worked and how many rules were saved; when you are offline, Symptom Search says so instead of showing no results. Searching and decision trees still need a connection.</li>
+            <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
         </section>
@@ -155,6 +162,15 @@ export default function UserGuidePage() {
             RealDiag is a clinical decision support aid. It does not replace clinical judgment,
             institution protocols, or emergency pathways. Always validate recommendations against
             the full clinical picture and local standards of care.
+          </p>
+          <p style={styles.p}>
+            Treatment check on Encounter Assessment (October 2026): each treatment line from a matched
+            tree is marked Appropriate (no conflict found), Use with caution, Avoid or Not checked, by
+            rules, against the chart&apos;s allergies, active medications, problem list, kidney and
+            liver function, pregnancy and prior adverse reactions. Expand a line to see each reason and
+            the chart data it came from. Options keep the tree&apos;s order and are not ranked;
+            &quot;Appropriate&quot; only means no conflict was found in the checks that ran, and
+            medications outside RealDiag&apos;s limited knowledge base are not checked.
           </p>
         </section>
 

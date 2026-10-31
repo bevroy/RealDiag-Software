@@ -4,6 +4,8 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getApiBase } from '../../utils/auth';
 import { parseEncounterAssessment, evidenceLabel } from '../../utils/encounterAssessment';
+import { REVIEW_UNAVAILABLE, reviewedSections, markStyle, factorLines } from '../../utils/treatmentReview';
+import { buildNarrative, sourceText } from '../../utils/chartNarrative';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../../components/ClinicalReview';
 
 /**
@@ -104,6 +106,8 @@ function AssessmentView({ result }) {
         ) : <p>Chart summary not available.</p>}
       </Section>
 
+      <ChartNarrative summary={summary} extracted={result.extractedSummary} />
+
       <Section title="Today's complaint">
         <p>
           {complaint.text ? <strong>{complaint.text}</strong> : <em>None</em>}
@@ -111,6 +115,16 @@ function AssessmentView({ result }) {
         </p>
         {complaint.negated_terms && complaint.negated_terms.length > 0 && (
           <p style={styles.muted}>Not searched (negated): {complaint.negated_terms.join(', ')}</p>
+        )}
+        {complaint.chart_terms && complaint.chart_terms.length > 0 && (
+          <div>
+            <p><strong>Also searched, from the chart:</strong></p>
+            <ul>
+              {complaint.chart_terms.map((t, i) => (
+                <li key={i}>{t.term} <span style={styles.muted}>({t.source}{t.date ? `, ${t.date}` : ''})</span></li>
+              ))}
+            </ul>
+          </div>
         )}
       </Section>
 
@@ -136,6 +150,8 @@ function AssessmentView({ result }) {
 
       <MissedItems missed={result.missedItems} />
 
+      <MedicationReview review={result.medicationReview} />
+
       <Section title="Could not be assessed">
         {notAssessed.length === 0 ? <p>Everything needed was retrieved.</p> : (
           <ul>{notAssessed.map((item, i) => <li key={i}>{item.text}</li>)}</ul>
@@ -147,6 +163,26 @@ function AssessmentView({ result }) {
 
 // Compact: grouped by check, one line per item with source and review
 // status; evidence, window checked and caveats expand on demand.
+function ChartNarrative({ summary, extracted }) {
+  const narrative = buildNarrative({ summary, extracted_summary: extracted });
+  return (
+    <Section title="Chart narrative">
+      <p style={styles.muted}>{narrative.label}{extracted.label ? ` ${extracted.label}` : ''}</p>
+      {(extracted.not_read || []).map((text, i) => <p key={i} style={styles.notChecked}>Not read: {text}</p>)}
+      {narrative.sentences.length === 0 ? <p style={styles.muted}>Nothing to summarize.</p> : (
+        <ul>
+          {narrative.sentences.map((s, i) => (
+            <li key={i}>
+              {s.text}{' '}
+              <span style={styles.muted}>[{s.sources.map(sourceText).join('; ')}]</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Section>
+  );
+}
+
 function MissedItems({ missed }) {
   return (
     <Section title={missed.title || 'Possible missed items'}>
@@ -169,6 +205,43 @@ function MissedItems({ missed }) {
           )}
         </div>
       ))}
+    </Section>
+  );
+}
+
+function MedicationReview({ review }) {
+  const history = review.history;
+  return (
+    <Section title={review.title || 'Medication review'}>
+      {review.notice && <p style={styles.muted}>{review.notice}</p>}
+      {review.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
+      {review.medications.length > 0 && (
+        <p><strong>Active medications ({review.medications.length}):</strong> {review.medications.join(', ')}</p>
+      )}
+      {review.alerts.length === 0 && review.medications.length > 0 && (
+        <p style={styles.muted}>No alerts from the rules RealDiag has for these medications.</p>
+      )}
+      {review.alerts.map((alert, i) => (
+        <details key={i} style={styles.missedItem}>
+          <summary style={styles.missedSummary}>
+            <strong>{(alert.severity || '').toUpperCase()}</strong> {alert.description}
+          </summary>
+          <div style={styles.missedDetails}>
+            {alert.clinical_effect && <p><strong>Effect:</strong> {alert.clinical_effect}</p>}
+            {alert.recommendation && <p><strong>Reference note:</strong> {alert.recommendation}</p>}
+            {alert.monitoring && <p><strong>Monitoring:</strong> {alert.monitoring}</p>}
+            <p><strong>From:</strong> {alert.data_sources.join(', ')}</p>
+          </div>
+        </details>
+      ))}
+      {history && (
+        <div>
+          <p><strong>Medication history:</strong> {history.stopped_medications_on_file} stopped medication(s) on file; {history.recent_discontinuations_30d} stopped in the last 30 days.</p>
+          {history.prior_adverse_reactions.map((r, i) => (
+            <p key={i}>Prior adverse reaction: {r.medication}{r.stopped ? ` (stopped ${r.stopped})` : ''}: {r.reason} <span style={styles.muted}>({r.source})</span></p>
+          ))}
+        </div>
+      )}
     </Section>
   );
 }
@@ -239,13 +312,68 @@ function Guidance({ guidance }) {
   return (
     <>
       <SectionList title="Workup" sections={guidance.workup} />
-      <SectionList title={guidance.treatment.label} sections={guidance.treatment.sections} />
+      <TreatmentList treatment={guidance.treatment} />
       <SectionList title="Referrals" sections={guidance.referrals} />
       <SectionList title="Disposition" sections={guidance.disposition_guidance} />
       {guidance.sources.length > 0 && (
         <Detail title="Sources"><ul>{guidance.sources.map((s, i) => <li key={i}>{s}</li>)}</ul></Detail>
       )}
     </>
+  );
+}
+
+function TreatmentList({ treatment }) {
+  const sections = reviewedSections(treatment);
+  if (!sections.length) return null;
+  const review = treatment.review;
+  return (
+    <Detail title={treatment.label}>
+      {review ? (
+        <>
+          <p style={styles.muted}>{review.notice}</p>
+          {factorLines(review).map((line, i) => <p key={i} style={styles.muted}>Chart: {line}</p>)}
+          {review.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
+        </>
+      ) : <p style={styles.notChecked}>{REVIEW_UNAVAILABLE}</p>}
+      {sections.map((s, i) => (
+        <div key={i}>
+          {s.title && <em>{s.title}</em>}
+          <ul>{s.items.map((line, j) => <TreatmentLine key={j} line={line} />)}</ul>
+        </div>
+      ))}
+    </Detail>
+  );
+}
+
+function TreatmentLine({ line }) {
+  const mark = markStyle(line.mark);
+  const badge = mark && (
+    <span style={{ ...styles.markBadge, color: mark.color, background: mark.background, borderColor: mark.border }}>
+      {mark.label}
+    </span>
+  );
+  if (!line.reasons.length) {
+    return (
+      <li>
+        {badge} {line.text}
+        {line.mark === 'appropriate' && <span style={styles.muted}> (checked: {line.medications.join(', ')})</span>}
+      </li>
+    );
+  }
+  return (
+    <li>
+      <details>
+        <summary style={styles.missedSummary}>{badge} {line.text}</summary>
+        <ul style={styles.missedDetails}>
+          {line.reasons.map((r, k) => (
+            <li key={k}>
+              <strong>{markStyle(r.mark).label}{r.medication ? ` (${r.medication})` : ''}:</strong> {r.reason}{' '}
+              <span style={styles.muted}>Source: {r.source}</span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </li>
   );
 }
 
@@ -341,4 +469,5 @@ const styles = {
   missedItem: { borderBottom: '1px solid #f3f4f6', padding: '4px 0' },
   missedSummary: { cursor: 'pointer', fontSize: 14 },
   missedDetails: { fontSize: 13, padding: '4px 0 4px 16px', color: '#374151' },
+  markBadge: { padding: '1px 8px', borderRadius: 999, fontSize: 12, fontWeight: 600, border: '1px solid', whiteSpace: 'nowrap' },
 };

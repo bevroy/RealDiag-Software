@@ -246,6 +246,16 @@ async def get_pending_tree_detail(
         )
 
 
+# What approval does, stated plainly: approved AI-generated trees are kept
+# for reference and are never loaded into the clinical library automatically.
+APPROVED_TREE_MESSAGE = (
+    "Tree approved and saved to the approved AI-generated trees "
+    "(backend/data/generated_trees/approved/). It is not part of the clinical "
+    "library and does not appear in search or /diagnose; adding it requires a "
+    "separate clinical review and import into backend/trees."
+)
+
+
 @router.post("/trees/review")
 async def review_tree(
     review: TreeReviewRequest,
@@ -257,7 +267,10 @@ async def review_tree(
     Requires admin authentication.
     
     Actions:
-    - "approve": Move tree to approved directory and make it searchable
+    - "approve": Mark the tree approved and move it to the approved directory
+      (backend/data/generated_trees/approved/). It is NOT added to the
+      clinical library (backend/trees/*.yml), so it does not appear in
+      search, /diagnose or any other clinical feature.
     - "reject": Move tree to rejected directory with reason
     """
     if not AI_AVAILABLE:
@@ -293,7 +306,7 @@ async def review_tree(
                 "success": True,
                 "action": "approved",
                 "tree_id": review.tree_id,
-                "message": "Tree approved and moved to active database",
+                "message": APPROVED_TREE_MESSAGE,
                 "timestamp": datetime.utcnow().isoformat()
             }
         

@@ -57,3 +57,34 @@ test('evidence labels', () => {
   expect(evidenceLabel('criteria')).toBe('Chart criteria')
   expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
 })
+
+test('a missing extracted summary says nothing was read from notes', () => {
+  const { parseEncounterAssessment } = require('../utils/encounterAssessment')
+  const extracted = parseEncounterAssessment({}).extractedSummary
+  expect(extracted.facts).toEqual([])
+  expect(extracted.not_read).toEqual(['The server did not return text extracted from notes.'])
+})
+
+describe('chart-derived evidence labels', () => {
+  const { evidenceLabel } = require('../utils/encounterAssessment')
+  test('matches supported only by chart terms are labelled as chart findings', () => {
+    expect(evidenceLabel('chart findings')).toBe('Matches chart findings (vital signs, H&P)')
+    expect(evidenceLabel('chart findings and criteria')).toBe('Matches chart findings (vital signs, H&P) and chart criteria')
+    expect(evidenceLabel('complaint')).toBe("Matches today's complaint")
+  })
+})
+
+describe('medication review', () => {
+  const { parseEncounterAssessment, MEDICATION_REVIEW_UNAVAILABLE } = require('../utils/encounterAssessment')
+
+  test('passes the section through', () => {
+    const review = { title: 'Medication review', notice: 'n', medications: ['Warfarin 5 mg'], alerts: [{ type: 'drug_interaction' }], history: null, not_checked: [] }
+    expect(parseEncounterAssessment({ medication_review: review }).medicationReview).toBe(review)
+  })
+
+  test('a missing section is reported as not reviewed, never as no alerts', () => {
+    const review = parseEncounterAssessment({}).medicationReview
+    expect(review.alerts).toEqual([])
+    expect(review.not_checked).toEqual([MEDICATION_REVIEW_UNAVAILABLE])
+  })
+})
