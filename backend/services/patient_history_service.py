@@ -8,21 +8,57 @@ diagnostic tests, H&Ps, procedures, and imaging for complete diagnostic context.
 
 from contextvars import ContextVar
 from fastapi import HTTPException
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime, timedelta
+import os
+
 import httpx
 from pydantic import BaseModel, Field
 
-from backend.services.fhir_client import FAILED, NOT_AVAILABLE, RETRIEVED, retrieval_warnings
+from backend.services.fhir_client import FAILED, NOT_AVAILABLE, RETRIEVED, retrieval_warnings, truncation_warning
 
 # Per-request retrieval tracking. ContextVars keep concurrent requests that
 # share one PatientHistoryService instance from mixing up each other's status.
 _current_resource: ContextVar[Optional[str]] = ContextVar("history_current_resource", default=None)
 _retrieval_status: ContextVar[Optional[Dict[str, str]]] = ContextVar("history_retrieval_status", default=None)
+# Per-request list of searches cut off at the page cap (see _get).
+_truncations: ContextVar[Optional[List[Dict[str, Any]]]] = ContextVar("history_truncations", default=None)
+
+# FHIR searches follow the bundle's `next` links up to this many pages in total;
+# anything beyond is reported as cut off, the same way FHIRClient reports it.
+HISTORY_MAX_PAGES = int(os.getenv("HISTORY_MAX_PAGES", "5"))
+
+_ENTRY_DATE_FIELDS = ("effectiveDateTime", "date", "authoredOn", "recordedDate", "started",
+                      "occurrenceDateTime", "performedDateTime", "onsetDateTime", "issued")
+
+
+def _entry_date(resource: Dict[str, Any]) -> Optional[str]:
+    for field_name in _ENTRY_DATE_FIELDS:
+        value = resource.get(field_name)
+        if isinstance(value, str) and len(value) >= 10:
+            return value[:10]
+    period = resource.get("effectivePeriod") or resource.get("performedPeriod") or {}
+    start = period.get("start") if isinstance(period, dict) else None
+    return start[:10] if isinstance(start, str) and len(start) >= 10 else None
+
+
+def _next_link(bundle: Dict[str, Any]) -> Optional[str]:
+    return next((link.get("url") for link in bundle.get("link", []) or []
+                 if link.get("relation") == "next" and link.get("url")), None)
 
 # Worst outcome wins when one data type needs several queries.
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
+
+
+def _cut_off_warnings(events: List[Dict[str, Any]]) -> List[str]:
+    """One "cut off" warning per search the page cap stopped (same wording as FHIRClient)."""
+    warnings: List[str] = []
+    for event in events:
+        message = truncation_warning(event.get("resource") or "results", event)
+        if message not in warnings:
+            warnings.append(message)
+    return warnings
 
 
 def _concept_name(concept: Optional[Dict[str, Any]]) -> str:
@@ -46,6 +82,7 @@ class VisitNote(BaseModel):
     specialty: Optional[str] = None
     content: str
     encounter_id: Optional[str] = None
+    document_id: Optional[str] = None  # DocumentReference.id the note came from
 
 
 class DiagnosticTest(BaseModel):
@@ -176,6 +213,39 @@ class ComprehensivePatientHistory(BaseModel):
     data_warnings: List[str] = []
 
 
+def medication_stop_date(med: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:
+    """(stop date, FHIR element it came from) for an R4 MedicationRequest.
+
+    R4 has no "date stopped" element (statusChanged is R5), so the end of the
+    intended therapy period is used, in this order:
+      1. dosageInstruction[].timing.repeat.boundsPeriod.end (latest)
+      2. dispenseRequest.validityPeriod.end
+    Returns (None, None) when neither is present.
+    """
+    ends = []
+    for dosage in med.get('dosageInstruction') or []:
+        bounds = (((dosage or {}).get('timing') or {}).get('repeat') or {}).get('boundsPeriod') or {}
+        if bounds.get('end'):
+            ends.append(str(bounds['end']))
+    if ends:
+        return max(ends), 'dosageInstruction.timing.repeat.boundsPeriod.end'
+    validity = ((med.get('dispenseRequest') or {}).get('validityPeriod') or {}).get('end')
+    if validity:
+        return str(validity), 'dispenseRequest.validityPeriod.end'
+    return None, None
+
+
+def medication_stop_reason(med: Dict[str, Any]) -> Optional[str]:
+    """Why an R4 MedicationRequest was stopped, from statusReason (text, else coding)."""
+    reason = med.get('statusReason') or {}
+    if reason.get('text'):
+        return str(reason['text'])
+    for coding in reason.get('coding') or []:
+        if coding.get('display') or coding.get('code'):
+            return str(coding.get('display') or coding.get('code'))
+    return None
+
+
 class PatientHistoryService:
     """Service for comprehensive patient history retrieval."""
 
@@ -224,7 +294,46 @@ class PatientHistoryService:
             self._mark(NOT_AVAILABLE)
         else:
             self._mark(FAILED)
-        return response
+            return response
+        return await self._follow_pages(response, **kwargs)
+
+    async def _follow_pages(self, response: httpx.Response, **kwargs) -> httpx.Response:
+        """A search Bundle with every page up to HISTORY_MAX_PAGES merged into one.
+
+        A page that fails marks the data type failed and keeps the entries
+        already read. When the cap stops before the last page, the cut-off is
+        recorded and reported in data_warnings.
+        """
+        try:
+            bundle = response.json()
+        except ValueError:
+            return response
+        if not isinstance(bundle, dict) or bundle.get("resourceType") != "Bundle" or not _next_link(bundle):
+            return response
+        entries = list(bundle.get("entry") or [])
+        pages, last = 1, bundle
+        while pages < HISTORY_MAX_PAGES and _next_link(last):
+            try:
+                page = await self.client.get(_next_link(last), **kwargs)
+            except Exception:
+                self._mark(FAILED)
+                break
+            if page.status_code != 200:
+                self._mark(FAILED)
+                break
+            last = page.json()
+            entries.extend(last.get("entry") or [])
+            pages += 1
+        if _next_link(last) and pages >= HISTORY_MAX_PAGES:
+            dates = sorted(d for d in (_entry_date(e.get("resource") or {}) for e in entries) if d)
+            event = {"resource": _current_resource.get(), "count": len(entries), "pages": pages,
+                     "first": dates[0] if dates else None, "last": dates[-1] if dates else None, "since": None}
+            tracker = _truncations.get()
+            if tracker is not None:
+                tracker.append(event)
+        merged = {**bundle, "entry": entries, "link": [l for l in bundle.get("link", []) or []
+                                                        if l.get("relation") != "next"]}
+        return httpx.Response(200, json=merged, request=response.request)
 
     async def _tracked(self, resource: str, fetch):
         """Run one fetcher with `resource` as the data type its queries count toward."""
@@ -275,6 +384,7 @@ class PatientHistoryService:
         lookback_for = {r: since(d) for r, d in overrides.items()}
 
         status_token = _retrieval_status.set({})
+        truncation_token = _truncations.set([])
         try:
             skip = set(skip or ())
 
@@ -313,8 +423,10 @@ class PatientHistoryService:
                 "family_social_history", lambda: self._fetch_family_social_history(patient_id, headers),
                 (None, None))
             retrieval_status = dict(_retrieval_status.get() or {})
+            cut_off = list(_truncations.get() or [])
         finally:
             _retrieval_status.reset(status_token)
+            _truncations.reset(truncation_token)
 
         # Generate summary
         summary = self._generate_summary(
@@ -348,7 +460,7 @@ class PatientHistoryService:
             social_history=social_history,
             summary=summary,
             retrieval_status=retrieval_status,
-            data_warnings=retrieval_warnings(retrieval_status),
+            data_warnings=retrieval_warnings(retrieval_status) + _cut_off_warnings(cut_off),
         )
 
     async def _fetch_patient_demographics(self, patient_id: str, headers: Dict) -> Dict[str, Any]:
@@ -487,7 +599,8 @@ class PatientHistoryService:
                         author=author,
                         specialty=specialty,
                         content=content,
-                        encounter_id=doc.get('context', {}).get('encounter', [{}])[0].get('reference')
+                        encounter_id=doc.get('context', {}).get('encounter', [{}])[0].get('reference'),
+                        document_id=doc.get('id'),
                     ))
 
         except Exception as e:
@@ -1076,11 +1189,14 @@ class PatientHistoryService:
                         if med.get('medicationCodeableConcept', {}).get('coding'):
                             med_name = med['medicationCodeableConcept']['coding'][0].get('display', 'Unknown')
 
+                    date_stopped, date_stopped_source = medication_stop_date(med)
                     med_history.append({
                         'name': med_name,
                         'status': med.get('status'),
                         'date_prescribed': med.get('authoredOn'),
-                        'date_stopped': med.get('statusChanged')
+                        'date_stopped': date_stopped,
+                        'date_stopped_source': date_stopped_source,
+                        'stop_reason': medication_stop_reason(med),
                     })
 
         except Exception as e:
@@ -1177,11 +1293,14 @@ class PatientHistoryService:
         diagnostic_tests: List[DiagnosticTest],
         visit_notes: List[VisitNote],
         retrieval_status: Optional[Dict[str, str]] = None,
+        abnormal_window: Optional[str] = None,
     ) -> str:
         """Plain template summary of the history (no language model).
 
         Only states what was retrieved: a data type that could not be
         retrieved is reported as such, never as "none on file".
+        `abnormal_window` (e.g. "in the last 30 days") is appended to the
+        abnormal-result count to say which results it covers.
         """
         status = retrieval_status or {}
 
@@ -1218,7 +1337,8 @@ class PatientHistoryService:
         else:
             abnormal_tests = [t for t in diagnostic_tests if t.abnormal]
             if abnormal_tests:
-                summary_parts.append(f"{len(abnormal_tests)} test results flagged abnormal.")
+                window = f" {abnormal_window}" if abnormal_window else ""
+                summary_parts.append(f"{len(abnormal_tests)} test results flagged abnormal{window}.")
 
         if gap("medications", "Medication list"):
             summary_parts.append(gap("medications", "Medication list"))

@@ -10,7 +10,9 @@ from .clinical_review import review_notice
 from .auth_service import get_current_user, get_optional_user, add_search_to_history
 from .search_limiter import check_search_limit, get_search_limit_info
 from .medication_safety_service import MedicationSafetyService
+from . import outcome_store
 from .patient_history_service import PatientHistoryService
+from .vitals_terms import derive_vital_sign_terms, vitals_from_history
 from .context_engine import get_context_engine
 from .rbac_service import get_rbac_service, Permission
 
@@ -73,8 +75,8 @@ THERAPY_CLASS_TO_FAMILY = {
     "ssri": ["neurology"],
 }
 
-# Simple in-memory outcome-learning store.
-_medication_outcomes_store: Dict[str, Dict[str, int]] = {}
+# Outcome-learning counts are persisted in the medication_outcomes table
+# (backend/services/outcome_store.py), shared across workers and restarts.
 
 # Initialize patient history service for EMR integration
 # FHIR server configuration from environment variables
@@ -184,7 +186,7 @@ def _get_effective_weights(patient_context: Dict[str, Any]) -> Dict[str, float]:
 
 
 def _get_outcome_bias(med_class: str, outcome_learning_weight: float) -> float:
-    bucket = _medication_outcomes_store.get(med_class, {})
+    bucket = outcome_store.get_outcomes(med_class)
     success = int(bucket.get("success", 0))
     failure = int(bucket.get("failure", 0))
     adverse = int(bucket.get("adverse", 0))
@@ -194,6 +196,15 @@ def _get_outcome_bias(med_class: str, outcome_learning_weight: float) -> float:
 
     raw = (success - failure - (2 * adverse)) / total
     return raw * outcome_learning_weight
+
+
+# Words in a medication stop reason that mark it as an adverse reaction.
+ADVERSE_STOP_TOKENS = ("adverse", "allergy", "rash", "anaphyl", "intoler", "side effect")
+
+
+def is_adverse_stop_reason(reason: Optional[str]) -> bool:
+    text = (reason or "").lower()
+    return any(tok in text for tok in ADVERSE_STOP_TOKENS)
 
 
 def _extract_med_history_features(
@@ -245,7 +256,7 @@ def _extract_med_history_features(
         outcome_bias = _get_outcome_bias(med_class, float(weights.get("outcome_learning_weight", 0.6)))
 
         reason_text = _normalize_text(med.get("stop_reason") or med.get("reason") or med.get("note"))
-        adverse_stop = any(tok in reason_text for tok in ["adverse", "allergy", "rash", "anaphyl", "intoler", "side effect"])
+        adverse_stop = is_adverse_stop_reason(reason_text)
 
         is_discontinued = status in ["stopped", "completed", "cancelled"]
         if is_discontinued and days_ago is not None and days_ago <= 30:
@@ -339,39 +350,9 @@ def _derive_terms_from_history(patient_history) -> Dict[str, List[str]]:
             derived_symptoms.append(hp.chief_complaint)
 
     if patient_history.vital_signs:
-        v = patient_history.vital_signs[0]
-
-        if v.heart_rate is not None:
-            if v.heart_rate >= 130:
-                derived_red_flags.append("severe tachycardia")
-            if v.heart_rate >= 100:
-                derived_symptoms.append("tachycardia")
-            elif v.heart_rate <= 50:
-                derived_symptoms.append("bradycardia")
-
-        if v.blood_pressure_systolic is not None:
-            if v.blood_pressure_systolic < 90:
-                derived_red_flags.append("hypotension")
-            elif v.blood_pressure_systolic >= 140:
-                derived_symptoms.append("hypertension")
-
-        if v.temperature is not None:
-            if v.temperature >= 100.4:
-                derived_symptoms.append("fever")
-            elif v.temperature < 95.0:
-                derived_red_flags.append("hypothermia")
-
-        if v.respiratory_rate is not None:
-            if v.respiratory_rate >= 22:
-                derived_symptoms.append("tachypnea")
-            elif v.respiratory_rate <= 10:
-                derived_red_flags.append("bradypnea")
-
-        if v.oxygen_saturation is not None:
-            if v.oxygen_saturation < 90:
-                derived_red_flags.append("severe hypoxemia")
-            elif v.oxygen_saturation < 94:
-                derived_symptoms.append("hypoxemia")
+        vital_terms = derive_vital_sign_terms(vitals_from_history(patient_history.vital_signs[0]))
+        derived_symptoms.extend(vital_terms["symptoms"])
+        derived_red_flags.extend(vital_terms["red_flags"])
 
     return {
         "symptoms": derived_symptoms,
@@ -709,9 +690,17 @@ async def evaluate_tree(
             if "warnings" not in response:
                 response["warnings"] = []
             for alert in major_interactions:
+                # A major alert is a drug interaction only when it names a second drug;
+                # otherwise it is e.g. a contraindication with a condition.
+                if alert.get('interacting_medication'):
+                    kind = "major_drug_interaction"
+                    message = f"⚠️ Major interaction: {alert['medication']} + {alert['interacting_medication']}"
+                else:
+                    kind = f"major_{alert.get('alert_type') or 'alert'}"
+                    message = f"⚠️ Major: {alert.get('description') or alert['medication']}"
                 response["warnings"].append({
-                    "type": "major_drug_interaction",
-                    "message": f"⚠️ Major interaction: {alert['medication']} + {alert['interacting_medication']}",
+                    "type": kind,
+                    "message": message,
                     "details": alert['clinical_effect'],
                     "recommendation": alert['recommendation']
                 })
@@ -766,16 +755,14 @@ async def record_medication_outcome_feedback(
     if med_class == "unknown":
         med_class = _normalize_text(payload.medication)
 
-    if med_class not in _medication_outcomes_store:
-        _medication_outcomes_store[med_class] = {"success": 0, "failure": 0, "adverse": 0}
-    _medication_outcomes_store[med_class][outcome] += 1
+    totals = outcome_store.record_outcome(med_class, outcome)
 
     return {
         "status": "recorded",
         "medication": payload.medication,
         "medication_class": med_class,
         "outcome": outcome,
-        "totals": _medication_outcomes_store[med_class],
+        "totals": totals,
     }
 
 

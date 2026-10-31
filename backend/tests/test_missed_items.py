@@ -82,6 +82,47 @@ def test_condition_on_problem_list_is_not_listed(engine):
     assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]
 
 
+def test_diabetes_on_problem_list_suppresses_prediabetes(engine):
+    # HbA1c 6.0% is in the prediabetes range; with type 2 diabetes on the problem list,
+    # prediabetes is not "missing" from it (ENDO-PREDIABETES criteria.suppressed_by).
+    data = patient(labs=[lab("4548-4", 6.0, "%", 30)], conditions=[condition("Type 2 diabetes", "E11.9")],
+                   meds=[med("metformin 500 mg")])
+    c = check(run(engine, data), "abnormal_without_diagnosis")
+    assert not [i for i in c["items"] + c["single_results"]["items"] if i["tree_id"] == "ENDO-PREDIABETES"]
+
+
+def test_prediabetes_still_flagged_without_diabetes(engine):
+    c = check(run(engine, patient(labs=[lab("4548-4", 6.0, "%", 30)])), "abnormal_without_diagnosis")
+    assert [i for i in c["items"] if i["tree_id"] == "ENDO-PREDIABETES"]
+
+
+def test_suppressing_condition_uses_the_other_trees_codes(engine):
+    from backend.services.smart_diagnostic_engine import suppressing_condition
+    criteria = engine.trees["ENDO-PREDIABETES"]["criteria"]
+    assert criteria["suppressed_by"] == ["ENDO-DIABETES"]
+    assert suppressing_condition(engine.trees, criteria, [condition("Type 1 diabetes", "E10.9")]) == "Type 1 diabetes"
+    assert suppressing_condition(engine.trees, criteria, [condition("Hypertension", "I10")]) is None
+    assert suppressing_condition(engine.trees, {}, [condition("Type 1 diabetes", "E10.9")]) is None
+
+
+def test_validator_checks_suppressed_by():
+    import importlib.util
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[1] / "scripts" / "validate_rules.py"
+    spec = importlib.util.spec_from_file_location("validate_rules", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    known = {"known_condition": {"icd10_prefixes": ["E11"]}}
+    trees = {"A": {"criteria": {"suppressed_by": ["B", "C", "D", "A"]}},
+             "B": {"criteria": known}, "C": {"criteria": []}}
+    assert module.suppressed_by_problems(trees) == [
+        ("A", "criteria.suppressed_by: C has no criteria.known_condition codes"),
+        ("A", "criteria.suppressed_by: unknown tree 'D'"),
+        ("A", "criteria.suppressed_by: a tree cannot suppress itself")]
+    assert "suppressed_by must be a non-empty list of tree ids" in module.criteria_problems(
+        {"finding_label": "x", "source": "y", "suppressed_by": "B", "items": []})
+
+
 def test_single_result_goes_to_the_collapsed_line(engine):
     c = check(run(engine, patient(labs=[lab("4548-4", 7.0, "%", 30)])), "abnormal_without_diagnosis")
     assert not [i for i in c["items"] if i["tree_id"] == "ENDO-DIABETES"]

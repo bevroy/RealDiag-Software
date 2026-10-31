@@ -274,7 +274,7 @@ def test_get_observations_follows_next_links(monkeypatch):
 
         def json(self):
             return second
-    monkeypatch.setattr(requests, "get", lambda url, headers=None: Resp())
+    monkeypatch.setattr(requests, "get", lambda url, headers=None, timeout=None: Resp())
     assert [o["id"] for o in client.get_observations("p", code="x", max_pages=5)] == ["1", "2"]
     assert [o["id"] for o in client.get_observations("p", code="x")] == ["1"]
 
@@ -420,7 +420,7 @@ def _paged_client(monkeypatch, total, page=100):
             return self.body
 
     monkeypatch.setattr(client, "_query_resource", lambda resource, params: bundle(0))
-    monkeypatch.setattr(fhir.requests, "get", lambda url, headers=None: Resp(bundle(int(url.split("o=")[1]))))
+    monkeypatch.setattr(fhir.requests, "get", lambda url, headers=None, timeout=None: Resp(bundle(int(url.split("o=")[1]))))
     monkeypatch.setattr(client, "get_patient", lambda pid: {"name": [{"family": "X"}], "birthDate": "1970-01-01"})
     for name in ("get_conditions", "get_medications", "get_allergies"):
         monkeypatch.setattr(client, name, lambda pid: [])
