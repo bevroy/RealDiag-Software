@@ -12,3 +12,11 @@ test('recent symptom searches are never written to device storage and old copies
   expect(page).toMatch(/localStorage\.removeItem\('recentSearches'\)/)
   expect(read('utils', 'clientAuth.js')).toMatch(/clearStoredAuth\(\) \{[\s\S]*?removeItem\('recentSearches'\)/)
 })
+
+test('the admin token is kept in memory only and old copies are removed', () => {
+  const page = read('pages', 'admin-review.js')
+  expect(page).not.toMatch(/setItem\('admin_token'/)
+  expect(page).not.toMatch(/getItem\('admin_token'/)
+  expect(page).toMatch(/localStorage\.removeItem\('admin_token'\)/)
+  expect(read('utils', 'clientAuth.js')).toMatch(/removeItem\('admin_token'\)/)
+})

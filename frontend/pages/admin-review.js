@@ -27,16 +27,11 @@ export default function AdminReview() {
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || getApiBase();
 
-  // Load admin token from localStorage
+  // The admin token is kept in memory only: enter it each time the page opens.
+  // Remove copies saved in localStorage by earlier versions.
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    if (token) {
-      setAdminToken(token);
-      setIsAuthenticated(true);
-      loadData(token);
-    } else {
-      setLoading(false);
-    }
+    localStorage.removeItem('admin_token');
+    setLoading(false);
   }, []);
 
   const loadData = async (token) => {
@@ -56,7 +51,6 @@ export default function AdminReview() {
         setReviewNotice(treesData.clinical_review_notice);
       } else if (treesRes.status === 403 || treesRes.status === 401) {
         setIsAuthenticated(false);
-        localStorage.removeItem('admin_token');
       }
 
       // Load stats
@@ -80,13 +74,11 @@ export default function AdminReview() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    localStorage.setItem('admin_token', adminToken);
     setIsAuthenticated(true);
     loadData(adminToken);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_token');
     setAdminToken('');
     setIsAuthenticated(false);
     setPendingTrees([]);

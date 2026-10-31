@@ -58,6 +58,7 @@ export function clearStoredAuth() {
   sessionStorage.removeItem('csrf_token');
   // Saved by earlier versions; may hold patient details.
   localStorage.removeItem('recentSearches');
+  localStorage.removeItem('admin_token'); // saved in plain text by earlier versions
   
   // Clear cookies - set them to expire immediately
   // Note: These are the readable cookies. HttpOnly cookies can only be cleared by the backend
