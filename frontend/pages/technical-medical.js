@@ -27,6 +27,9 @@ export default function TechnicalMedicalPage() {
             suggested workup actions. This creates transparent, auditable logic rather than
             black-box-only output.
           </p>
+          <p style={styles.p}>
+            Questionnaire trees (October 2026): GET /diagnostic/trees/{id}/questionnaire returns a questionnaire tree&apos;s questions (options with next steps) and outcome steps, and /diagnose walks it one question at a time (frontend/utils/questionnaireWalker.js). Step-level icd10 and urgency are display only, not mapped to the tree urgency scale or used for ranking.
+          </p>
         </section>
 
         <section style={styles.section}>
@@ -70,7 +73,6 @@ export default function TechnicalMedicalPage() {
             <li>Recency-weighted interpretation of discontinued therapies</li>
             <li>Adverse-history blocks for high-risk repeat recommendations</li>
             <li>Explainability outputs for supported and conflicting medication signals</li>
-            <li>Questionnaire trees (October 2026): GET /diagnostic/trees/{id}/questionnaire returns a questionnaire tree&apos;s questions (options with next steps) and outcome steps, and /diagnose walks it one question at a time (frontend/utils/questionnaireWalker.js). Step-level icd10 and urgency are display only, not mapped to the tree urgency scale or used for ranking.</li>
           </ul>
         </section>
 
