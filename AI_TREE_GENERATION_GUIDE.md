@@ -78,7 +78,7 @@ MIN_CONFIDENCE_THRESHOLD=2.0 # Trigger if best match < this score
 2. Logs in with admin token
 3. Reviews pending trees
 4. Approves or rejects with notes
-5. Approved trees move to `approved/` and become searchable
+5. Approved trees move to `approved/`. They are not loaded into the clinical library (`backend/trees/`) and do not appear in search or /diagnose; adding one requires a separate clinical review and import.
 6. Rejected trees move to `rejected/` with reason
 
 ## API Endpoints
@@ -232,4 +232,4 @@ To disable:
 ENABLE_AI_GENERATION=false
 ```
 
-Existing approved trees remain searchable. Pending trees can still be reviewed but no new trees will be generated.
+Existing approved trees stay in `approved/` (they were never searchable). Pending trees can still be reviewed but no new trees will be generated.
