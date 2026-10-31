@@ -43,7 +43,7 @@ from ..services.symptom_search import (
     AuditLogger,
 )
 from urllib.parse import urlparse, urlencode
-from ..services.ehr_adapter import EHRAdapter
+from ..services.ehr_adapter import EHRAdapter, UnsupportedEHRVendorError
 from ..services.smart_session_store import (create_smart_session,
     get_smart_session,
     delete_smart_session,
@@ -68,6 +68,12 @@ SMART_SESSION_MAX_TTL_SECONDS = int(os.getenv("SMART_SESSION_TTL_MINUTES", "30")
 SMART_STATE_SECRET = os.getenv("SMART_STATE_SECRET") or os.getenv("JWT_SECRET_KEY")
 STATE_TOKEN_EXPIRE_MINUTES = 10
 
+# EHR issuers RealDiag accepts a SMART launch from. Users who launch from the
+# EHR are authenticated by that EHR, not by a RealDiag invitation, so this list
+# decides which organizations' users can reach patient data through RealDiag.
+# Until validation is complete it must contain sandbox hosts only, and adding
+# any host (sandbox or production) requires the product owner's written
+# approval, recorded in the PR or change ticket that sets the variable.
 _extra_allowed_hosts = {
     host.strip().lower()
     for host in os.getenv("SMART_ALLOWED_ISS_HOSTS", "").split(",")
@@ -317,6 +323,9 @@ def get_ehr_config():
             client_secret=CLIENT_SECRET,
             tenant_id=TENANT_ID
         )
+    except UnsupportedEHRVendorError as e:
+        logger.error(f"EHR configuration error: {e}")
+        raise HTTPException(status_code=503, detail=f"SMART on FHIR is not available: {e}")
     except ValueError as e:
         logger.error(f"EHR configuration error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -1026,9 +1035,14 @@ async def get_smart_config():
     """
     Get SMART on FHIR configuration needed for frontend SMART launch.
     """
+    try:
+        scopes = EHRAdapter.scopes_for(EHR_VENDOR)
+    except UnsupportedEHRVendorError as e:
+        raise HTTPException(status_code=503, detail=f"SMART on FHIR is not available: {e}")
     return {
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
-        "scopes": ["launch", "patient/*.read", "openid", "fhirUser"],
+        "ehr_vendor": EHR_VENDOR,
+        "scopes": scopes,
         "fhir_base_url": FHIR_BASE_URL
     }

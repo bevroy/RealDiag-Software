@@ -396,3 +396,40 @@ The RealDiag Team
     except Exception as e:
         logger.error(f"Failed to send password reset email: {e}")
         return False
+
+
+def send_invite_email(email: str, token: str, full_name: Optional[str] = None, hours: int = 72) -> bool:
+    """Send an account invitation with a one-time setup link (the reset-password page)."""
+    if not email_configured():
+        logger.warning("Email not configured - skipping invite email")
+        return False
+    try:
+        setup_url = invite_setup_url(token)
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = "You're invited to RealDiag"
+        msg["From"] = FROM_EMAIL
+        msg["To"] = email
+        text_content = f"""
+Hi {full_name or 'there'},
+
+You have been invited to RealDiag. Choose a password to set up your account:
+
+{setup_url}
+
+This link works once and expires in {hours} hours. After choosing a password you
+will be asked to set up two-factor authentication with an authenticator app.
+
+Best regards,
+The RealDiag Team
+"""
+        msg.attach(MIMEText(text_content, "plain"))
+        _deliver(msg)
+        logger.info(f"Invite email sent to {email}")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to send invite email to {email}: {e}")
+        return False
+
+
+def invite_setup_url(token: str) -> str:
+    return f"{FRONTEND_URL}/reset-password?token={token}&setup=1"

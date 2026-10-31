@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getCSRFToken } from '../utils/auth';
+import { apiFetch } from '../utils/apiClient';
 
 /**
  * MFA Setup Component
@@ -7,7 +7,7 @@ import { getCSRFToken } from '../utils/auth';
  * Allows users to enroll in two-factor authentication using TOTP.
  * Compatible with Google Authenticator, Authy, Microsoft Authenticator, etc.
  */
-export default function MFASetup({ apiBase, onComplete }) {
+export default function MFASetup({ onComplete }) {
   const [step, setStep] = useState('initial'); // initial, enrolled, verify, complete
   const [secret, setSecret] = useState('');
   const [qrCode, setQrCode] = useState('');
@@ -21,14 +21,7 @@ export default function MFASetup({ apiBase, onComplete }) {
     setError('');
 
     try {
-      const response = await fetch(`${apiBase}/mfa/enroll`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': getCSRFToken()
-        }
-      });
+      const response = await apiFetch('/mfa/enroll', { method: 'POST' });
 
       if (!response.ok) {
         const data = await response.json();
@@ -57,15 +50,7 @@ export default function MFASetup({ apiBase, onComplete }) {
     setError('');
 
     try {
-      const response = await fetch(`${apiBase}/mfa/verify`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': getCSRFToken()
-        },
-        body: JSON.stringify({ token })
-      });
+      const response = await apiFetch('/mfa/verify', { method: 'POST', body: JSON.stringify({ token }) });
 
       const data = await response.json();
 

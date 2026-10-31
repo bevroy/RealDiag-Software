@@ -246,6 +246,16 @@ async def get_pending_tree_detail(
         )
 
 
+# What approval does, stated plainly: approved AI-generated trees are kept
+# for reference and are never loaded into the clinical library automatically.
+APPROVED_TREE_MESSAGE = (
+    "Tree approved and saved to the approved AI-generated trees "
+    "(backend/data/generated_trees/approved/). It is not part of the clinical "
+    "library and does not appear in search or /diagnose; adding it requires a "
+    "separate clinical review and import into backend/trees."
+)
+
+
 @router.post("/trees/review")
 async def review_tree(
     review: TreeReviewRequest,
@@ -257,7 +267,10 @@ async def review_tree(
     Requires admin authentication.
     
     Actions:
-    - "approve": Move tree to approved directory and make it searchable
+    - "approve": Mark the tree approved and move it to the approved directory
+      (backend/data/generated_trees/approved/). It is NOT added to the
+      clinical library (backend/trees/*.yml), so it does not appear in
+      search, /diagnose or any other clinical feature.
     - "reject": Move tree to rejected directory with reason
     """
     if not AI_AVAILABLE:
@@ -293,7 +306,7 @@ async def review_tree(
                 "success": True,
                 "action": "approved",
                 "tree_id": review.tree_id,
-                "message": "Tree approved and moved to active database",
+                "message": APPROVED_TREE_MESSAGE,
                 "timestamp": datetime.utcnow().isoformat()
             }
         
@@ -613,6 +626,156 @@ def _apply_to_account(body: AccountTarget, apply):
     raise HTTPException(status_code=404, detail="User not found")
 
 
+class NewAccountRequest(BaseModel):
+    """An account created by an admin (accounts are invite-only)."""
+    email: str
+    full_name: Optional[str] = None
+    role: str = "provider"
+    reason: Optional[str] = None
+
+
+def _create_account(body: NewAccountRequest, admin: AdminUser, password: str) -> dict:
+    """Create the account through auth_service.create_user (which applies the
+    email-domain/allowlist rule), then set its role and who created it."""
+    from backend.services.auth_service import UserCreate, create_user
+
+    role = _normalize_allowed_role(body.role)
+    email = (body.email or "").strip().lower()
+    try:
+        user = create_user(UserCreate(email=email, password=password, full_name=body.full_name or email.split("@")[0]))
+    except ValueError as e:  # invalid email address
+        raise HTTPException(status_code=400, detail=str(e))
+
+    def apply(account, set_field):
+        set_field("role", role)
+        set_field("invited_by", admin.username)
+        set_field("invited_at", datetime.utcnow() if not isinstance(account, dict) else datetime.utcnow().isoformat())
+
+    _apply_to_account(AccountTarget(user_id=user["user_id"]), apply)
+    return {"user_id": user["user_id"], "email": email, "role": role}
+
+
+@router.post("/users/invite", status_code=201)
+async def admin_invite_user(body: NewAccountRequest, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Invite someone: creates the account with no usable password and emails a
+    one-time setup link (the reset-password page) that lasts
+    INVITE_EXPIRATION_HOURS. If the email cannot be sent, the link is returned
+    for the admin to pass on.
+    """
+    from backend.services.access_policy import invite_expiration_hours
+    from backend.services.email_service import generate_verification_token, invite_setup_url, send_invite_email
+
+    created = _create_account(body, admin, secrets.token_urlsafe(32))
+    token = generate_verification_token()
+
+    def apply(account, set_field):
+        set_field("password_reset_token", token)
+        set_field("password_reset_sent_at", datetime.utcnow())
+        set_field("account_setup_pending", True)
+
+    _apply_to_account(AccountTarget(user_id=created["user_id"]), apply)
+    hours = invite_expiration_hours()
+    sent = send_invite_email(created["email"], token, body.full_name, hours)
+    _audit_account_action(admin, "INVITED", created["user_id"], body.reason)
+    response = {"success": True, **created, "email_sent": sent, "setup_link_expires_in_hours": hours}
+    if not sent:
+        response["setup_url"] = invite_setup_url(token)
+        response["note"] = "The invite email could not be sent; give this one-time setup link to the user directly."
+    return response
+
+
+@router.post("/users/create", status_code=201)
+async def admin_create_user(body: NewAccountRequest, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Create an account with a temporary password, returned once in this
+    response for the admin to pass on (stored only as a hash).
+    """
+    temporary = secrets.token_urlsafe(12)
+    created = _create_account(body, admin, temporary)
+    _audit_account_action(admin, "CREATED", created["user_id"], body.reason)
+    return {"success": True, **created, "temporary_password": temporary,
+            "note": "Give the user this temporary password; they should change it after signing in."}
+
+
+class AllowlistEntry(BaseModel):
+    email: str
+    note: Optional[str] = None
+
+
+@router.get("/allowlist")
+async def admin_list_allowlist(admin: AdminUser = Depends(verify_admin_token)):
+    """Individual emails allowed an account besides the approved email domains."""
+    from backend.services.access_policy import APPROVED_EMAIL_DOMAINS, list_allowlist
+    return {"approved_domains": sorted(APPROVED_EMAIL_DOMAINS), "emails": list_allowlist()}
+
+
+@router.post("/allowlist", status_code=201)
+async def admin_add_allowlist(body: AllowlistEntry, admin: AdminUser = Depends(verify_admin_token)):
+    """Allow one email from another domain (e.g. a tester) to be invited and to sign in."""
+    from backend.services.access_policy import add_to_allowlist
+    try:
+        entry = add_to_allowlist(body.email, body.note, admin.username)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    logger.info("ALLOWLIST_ADD admin=%s email=%s", admin.username, entry["email"])
+    return {"success": True, **entry}
+
+
+@router.post("/allowlist/remove")
+async def admin_remove_allowlist(body: AllowlistEntry, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Remove an email from the allowlist: new sign-ins with it are refused.
+    Sessions already open last until they expire; deactivate the account to
+    end them at once.
+    """
+    from backend.services.access_policy import remove_from_allowlist
+    if not remove_from_allowlist(body.email):
+        raise HTTPException(status_code=404, detail="Email is not on the allowlist")
+    logger.info("ALLOWLIST_REMOVE admin=%s email=%s", admin.username, body.email.strip().lower())
+    return {"success": True, "email": body.email.strip().lower()}
+
+
+def _iso(value):
+    return value.isoformat() if hasattr(value, "isoformat") else value
+
+
+@router.get("/users")
+async def admin_list_users(admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Every account with its access state: role, active or deactivated, MFA,
+    pending invite setup, who invited it, and last sign-in (the last accepted
+    password; with MFA the code is checked after it). Sorted by email. Used to
+    review and remove tester access after validation testing.
+    """
+    from backend.services.access_policy import email_allowlisted, email_domain_approved
+    from backend.services.database import DATABASE_AVAILABLE
+
+    rows = []
+    if DATABASE_AVAILABLE:
+        from backend.services.database import get_db_session, User
+        with get_db_session() as db:
+            for u in db.query(User).all():
+                rows.append({"user_id": u.user_id, "email": u.email, "full_name": u.full_name, "role": u.role,
+                             "is_active": bool(u.is_active), "mfa_enabled": bool(getattr(u, "mfa_enabled", False)),
+                             "account_setup_pending": bool(getattr(u, "account_setup_pending", False)),
+                             "invited_by": getattr(u, "invited_by", None), "invited_at": _iso(getattr(u, "invited_at", None)),
+                             "created_at": _iso(u.created_at), "last_login": _iso(u.last_login)})
+    else:
+        from backend.services.auth_service import users_db
+        for uid, u in users_db.items():
+            rows.append({"user_id": uid, "email": u.get("email"), "full_name": u.get("full_name"), "role": u.get("role"),
+                         "is_active": bool(u.get("is_active", True)), "mfa_enabled": bool(u.get("mfa_enabled")),
+                         "account_setup_pending": bool(u.get("account_setup_pending")),
+                         "invited_by": u.get("invited_by"), "invited_at": _iso(u.get("invited_at")),
+                         "created_at": _iso(u.get("created_at")), "last_login": _iso(u.get("last_login"))})
+    for row in rows:
+        row["access_by"] = ("email domain" if email_domain_approved(row["email"])
+                            else "allowlist" if email_allowlisted(row["email"]) else "none (sign-in refused)")
+    rows.sort(key=lambda r: (r["email"] or "").lower())
+    return {"count": len(rows), "users": rows}
+
+
 @router.post("/users/reset-password")
 async def admin_reset_password(
     body: AdminPasswordResetRequest,
@@ -671,6 +834,20 @@ def _set_active(body: AccountTarget, admin: AdminUser, active: bool):
         "reason": body.reason,
         "updated_at": datetime.utcnow().isoformat(),
     }
+
+
+@router.post("/users/reset-mfa")
+async def admin_reset_mfa(body: AccountTarget, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Clear a user's two-factor setup (lost phone): at their next sign-in they
+    set it up again. Existing sessions stay signed in until they expire.
+    """
+    from backend.services.auth_service import update_user_mfa_state
+    user_id, email = _apply_to_account(body, lambda account, set_field: None)
+    update_user_mfa_state(user_id, mfa_enabled=False, mfa_pending=False, mfa_secret=None, mfa_backup_codes=[],
+                          mfa_enrolled_at=None)
+    _audit_account_action(admin, "MFA_RESET", user_id, body.reason)
+    return {"success": True, "user_id": user_id, "email": email, "mfa_enabled": False}
 
 
 @router.post("/users/deactivate")

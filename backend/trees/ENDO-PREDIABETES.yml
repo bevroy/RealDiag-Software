@@ -113,37 +113,44 @@ criteria:
       - R73.0
     snomed:
       - '714628002'
+  # Possible missed items: diabetes on the problem list means prediabetes is not reported
+  # as missing (uses ENDO-DIABETES known_condition codes; pending clinical review)
+  suppressed_by:
+    - ENDO-DIABETES
   items:
+    # Ranges are lower-inclusive, upper-exclusive and end exactly at the ENDO-DIABETES
+    # thresholds (HbA1c >= 6.5%, FPG >= 126 mg/dL), so no value falls between the two
+    # trees (pending clinical review).
     - id: hba1c
-      label: HbA1c 5.7-6.4%
+      label: HbA1c 5.7% to below 6.5%
       resource: lab
       loinc:
         - 4548-4
         - 17856-6
         - 59261-8
-      operator: between
+      operator: at_least_below
       value:
         - 5.7
-        - 6.4
+        - 6.5
       unit: '%'
       lookback_days: 365
-      expected: 5.7-6.4% (39-47 mmol/mol)
+      expected: 5.7% to below 6.5% (39 to below 48 mmol/mol)
       missing_test: HbA1c
       source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
     - id: fasting_glucose
-      label: Fasting plasma glucose 100-125 mg/dL
+      label: Fasting plasma glucose 100 to below 126 mg/dL
       resource: lab
       loinc:
         - 1558-6
         - 14771-0
-      operator: between
+      operator: at_least_below
       value:
         - 100
-        - 125
+        - 126
       unit: mg/dL
       show_converted: true
       lookback_days: 365
-      expected: 100-125 mg/dL (5.6-6.9 mmol/L)
+      expected: 100 to below 126 mg/dL (5.6 to below 7.0 mmol/L)
       missing_test: Fasting plasma glucose
       source: 'ADA Standards of Care in Diabetes-2026, Section 2: Diagnosis and Classification of Diabetes'
 change_log:
@@ -163,3 +170,9 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.
+  - date: '2026-10-30'
+    version: '1.0'
+    change: 'criteria.suppressed_by: ENDO-DIABETES, so a patient with diabetes on the problem list is not flagged for prediabetes missing from it (pending clinical review)'
+  - date: '2026-10-30'
+    version: '1.0'
+    change: 'Criteria ranges changed from inclusive 5.7-6.4% and 100-125 mg/dL to lower-inclusive, upper-exclusive [5.7, 6.5) % and [100, 126) mg/dL, closing the gaps 6.4-6.5% and 125-126 mg/dL below the diabetes thresholds (pending clinical review)'

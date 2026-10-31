@@ -1,3 +1,5 @@
+import { clearStoredBundle } from './offlineBundle';
+import OFFLINE_DB from '../public/offline-db-schema';
 // Authentication utility for client-side state management
 // Used when cookies don't work across domains (Netlify + Render)
 
@@ -47,11 +49,18 @@ export function isStoredAuthenticated() {
 
 export function clearStoredAuth() {
   if (typeof window === 'undefined') return;
+
+  // The offline library belongs to the signed-in session.
+  clearStoredBundle();
+  deleteLegacyOfflineDatabase();
   
   // Clear localStorage
   localStorage.removeItem('realdiag_user');
   localStorage.removeItem('realdiag_authenticated');
   sessionStorage.removeItem('csrf_token');
+  // Saved by earlier versions; may hold patient details.
+  localStorage.removeItem('recentSearches');
+  localStorage.removeItem('admin_token'); // saved in plain text by earlier versions
   
   // Clear cookies - set them to expire immediately
   // Note: These are the readable cookies. HttpOnly cookies can only be cleared by the backend
@@ -71,5 +80,17 @@ export function storeAuthData(user, csrfToken) {
   
   if (csrfToken) {
     sessionStorage.setItem('csrf_token', csrfToken);
+  }
+}
+
+// The IndexedDB database written by the removed "Download All Rules" (an
+// unprotected copy of the rule library; saved searches and favorites were
+// never written). Deleted when Symptom Search opens and at sign-out.
+export function deleteLegacyOfflineDatabase() {
+  if (typeof indexedDB === 'undefined') return;
+  try {
+    indexedDB.deleteDatabase(OFFLINE_DB.name);
+  } catch (err) {
+    // Storage unavailable: nothing to delete.
   }
 }

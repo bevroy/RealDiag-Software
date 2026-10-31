@@ -62,7 +62,7 @@ function ResetPasswordForm() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h1 style={styles.title}>Choose a new password</h1>
+        <h1 style={styles.title}>{searchParams.get('setup') ? 'Set up your RealDiag account' : 'Choose a new password'}</h1>
         <p style={styles.subtitle}>
           Pick a strong password you haven't used before.
         </p>

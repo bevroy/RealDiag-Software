@@ -25,6 +25,7 @@ from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
 from backend.services.context_router import router as context_router
+from backend.services.offline_bundle import router as offline_router
 from backend.services.auth_service import verify_token
 
 # Import admin router for AI tree management
@@ -139,32 +140,33 @@ app = FastAPI(
 
 # Global access control: require authentication for all application routes
 # except explicit auth and health endpoints required for login and service ops.
+# Accounts are invite-only (access_policy); the API docs, metrics, reference
+# library and education content need a signed-in session.
 PUBLIC_PATHS = {
+    # Service health checks (Render, uptime monitors): no data.
     "/health",
     "/health/version",
-    "/metrics",
+    "/version",
+    "/",
+    # Signing in and recovering an account.
     "/users/login",
-    "/users/register",
+    "/users/register",  # answers 403 "by invitation only" unless ALLOW_SELF_REGISTRATION
     "/users/forgot-password",
-    "/users/reset-password",
+    "/users/reset-password",  # also the invite setup link
     "/users/verify-email",
     "/users/resend-verification",
-    "/",
-    "/version",
-    "/docs",
-    "/openapi.json",
-    "/redoc",
-    "/education/learning-objectives",
-    "/education/quiz/questions",
+    # Second sign-in step: authenticated by the short-lived mfa_token from
+    # /users/login (there is no session yet).
+    "/mfa/login-verify",
     # Auth enforced by verify_user_or_api_key (X-API-Key), not the JWT-only global gate.
     "/integration/symptom-search/patient",
 }
 
 PUBLIC_PREFIXES = (
     "/static/",
+    # SMART on FHIR: the EHR launch/callback, and patient routes authorized by
+    # the server-side SMART session cookie (smart_router.get_active_smart_session).
     "/smart/",
-    "/reference/",
-    "/education/cases",
 )
 
 
@@ -194,6 +196,17 @@ async def require_authentication_globally(request: Request, call_next):
             return JSONResponse(status_code=401, content={"detail": "MFA verification required"})
     except Exception:
         return JSONResponse(status_code=401, content={"detail": "Not authenticated"})
+
+    # Two-factor authentication for every account (REQUIRE_MFA, default on).
+    from backend.services.access_policy import (MFA_SETUP_DETAIL, MFA_SETUP_PATHS, MFA_SIGN_IN_AGAIN_DETAIL,
+                                                mfa_required)
+    if mfa_required():
+        if payload.get("mfa_setup_required"):
+            if path not in MFA_SETUP_PATHS:
+                return JSONResponse(status_code=403, content={"detail": MFA_SETUP_DETAIL, "mfa_setup_required": True})
+        elif not payload.get("mfa"):
+            # Sessions from before MFA was required, or that skipped it.
+            return JSONResponse(status_code=401, content={"detail": MFA_SIGN_IN_AGAIN_DETAIL})
 
     return await call_next(request)
 
@@ -260,15 +273,12 @@ app.include_router(homeopathy_router)
 app.include_router(mfa_router)
 app.include_router(search_router)
 app.include_router(context_router)
+app.include_router(offline_router)
 
-# /analyze endpoint backed by the modular DOMAIN_ANALYZERS chain
-from backend.schemas.diagnostic import AnalyzeRequest
-from backend.services.diagnostic_engine import analyze_case
-
-
-@app.post("/analyze", tags=["analyze"])
-def analyze_endpoint(payload: AnalyzeRequest):
-    return analyze_case(payload)
+# POST /analyze (backend/services/diagnostic_engine.py) was removed: no page
+# called it, and none of its domain analyzers returned the declared
+# AnalyzeResponse (the cardiovascular one raised a 500). The analyzer modules
+# are kept, unused, until their outputs are reconciled with one schema.
 
 # Include admin router if available
 if ADMIN_ROUTER_AVAILABLE and admin_router:

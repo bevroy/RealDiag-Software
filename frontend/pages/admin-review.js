@@ -23,19 +23,15 @@ export default function AdminReview() {
   const [accountReason, setAccountReason] = useState('');
   const [accountBusy, setAccountBusy] = useState(false);
   const [accountResult, setAccountResult] = useState(null);
+  const [accounts, setAccounts] = useState(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || getApiBase();
 
-  // Load admin token from localStorage
+  // The admin token is kept in memory only: enter it each time the page opens.
+  // Remove copies saved in localStorage by earlier versions.
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    if (token) {
-      setAdminToken(token);
-      setIsAuthenticated(true);
-      loadData(token);
-    } else {
-      setLoading(false);
-    }
+    localStorage.removeItem('admin_token');
+    setLoading(false);
   }, []);
 
   const loadData = async (token) => {
@@ -55,7 +51,6 @@ export default function AdminReview() {
         setReviewNotice(treesData.clinical_review_notice);
       } else if (treesRes.status === 403 || treesRes.status === 401) {
         setIsAuthenticated(false);
-        localStorage.removeItem('admin_token');
       }
 
       // Load stats
@@ -79,13 +74,11 @@ export default function AdminReview() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    localStorage.setItem('admin_token', adminToken);
     setIsAuthenticated(true);
     loadData(adminToken);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_token');
     setAdminToken('');
     setIsAuthenticated(false);
     setPendingTrees([]);
@@ -216,7 +209,28 @@ export default function AdminReview() {
     }
   };
 
-  // Account tools: password reset (when reset emails can't be sent) and deactivation.
+  // Account tools: invite / create (accounts are invite-only), password and MFA
+  // reset, deactivation, and the email allowlist for testers from other domains.
+  const ACCOUNT_PATHS = {
+    invite: '/admin/users/invite', create: '/admin/users/create', 'reset-password': '/admin/users/reset-password',
+    'reset-mfa': '/admin/users/reset-mfa', deactivate: '/admin/users/deactivate', reactivate: '/admin/users/reactivate',
+    'allowlist-add': '/admin/allowlist', 'allowlist-remove': '/admin/allowlist/remove',
+  };
+
+  const loadAccounts = async () => {
+    try {
+      const res = await fetch(`${API_URL}/admin/users`, {
+        credentials: 'include',
+        headers: { 'Authorization': `Bearer ${adminToken}` }
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Could not load accounts');
+      setAccounts(data.users);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const runAccountAction = async (action) => {
     if (!accountEmail.trim()) {
       alert('Please provide an email address');
@@ -228,7 +242,7 @@ export default function AdminReview() {
     setAccountBusy(true);
     setAccountResult(null);
     try {
-      const res = await fetch(`${API_URL}/admin/users/${action}`, {
+      const res = await fetch(`${API_URL}${ACCOUNT_PATHS[action]}`, {
         credentials: 'include', // the API also requires a signed-in session (main.py)
         method: 'POST',
         headers: {
@@ -238,6 +252,7 @@ export default function AdminReview() {
         body: JSON.stringify({
           email: accountEmail.trim().toLowerCase(),
           reason: accountReason || undefined,
+          note: accountReason || undefined, // the allowlist keeps the reason as its note
         })
       });
       const data = await res.json();
@@ -245,6 +260,7 @@ export default function AdminReview() {
         throw new Error(data.detail || `${action} failed`);
       }
       setAccountResult({ action, ...data });
+      if (accounts) loadAccounts();
     } catch (error) {
       alert(error.message || `Failed to ${action}`);
     } finally {
@@ -392,8 +408,10 @@ export default function AdminReview() {
         <div style={styles.roleManagerContainer}>
           <h2 style={styles.sectionTitle}>🔑 Account Tools</h2>
           <p style={styles.roleHelpText}>
-            Reset a password when reset emails can&apos;t be sent (a temporary password is shown once; pass it on securely),
-            or deactivate an account. Deactivated users are signed out on their next request and cannot sign in; their data is kept.
+            Accounts are by invitation only. Invite emails a one-time setup link (shown here if the email can&apos;t be sent);
+            Create gives a temporary password, shown once. Emails outside realdiag.com and elionyxhealth.com must be added to
+            the allowlist first. Every account sets up two-factor authentication at first sign-in; Reset MFA makes them set it up
+            again. Deactivated users are signed out on their next request and cannot sign in; their data is kept.
           </p>
           <div style={styles.roleFormBox}>
             <input
@@ -413,6 +431,21 @@ export default function AdminReview() {
               style={styles.input}
             />
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('allowlist-add')} style={styles.roleActionButton}>
+                Add to allowlist
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('allowlist-remove')} style={styles.roleActionButton}>
+                Remove from allowlist
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('invite')} style={styles.roleActionButton}>
+                Invite
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('create')} style={styles.roleActionButton}>
+                Create with temporary password
+              </button>
+              <button type="button" disabled={accountBusy} onClick={() => runAccountAction('reset-mfa')} style={styles.roleActionButton}>
+                Reset MFA
+              </button>
               <button type="button" disabled={accountBusy} onClick={() => runAccountAction('reset-password')} style={styles.roleActionButton}>
                 Reset password
               </button>
@@ -425,19 +458,52 @@ export default function AdminReview() {
             </div>
             {accountResult && (
               <div role="status" style={{ marginTop: '0.75rem', fontSize: '0.9rem' }}>
-                {accountResult.action === 'reset-password' ? (
-                  <>
-                    Password reset for {accountResult.email}.
-                    {accountResult.temporary_password && (
-                      <> Temporary password (shown once): <code style={{ userSelect: 'all' }}>{accountResult.temporary_password}</code></>
-                    )}
-                  </>
-                ) : (
-                  <>{accountResult.email} is now {accountResult.is_active ? 'active' : 'deactivated'}.</>
+                {accountResultText(accountResult)}
+                {accountResult.temporary_password && (
+                  <> Temporary password (shown once): <code style={{ userSelect: 'all' }}>{accountResult.temporary_password}</code></>
+                )}
+                {accountResult.setup_url && (
+                  <> Setup link (one-time, give it to the user): <code style={{ userSelect: 'all', wordBreak: 'break-all' }}>{accountResult.setup_url}</code></>
                 )}
               </div>
             )}
           </div>
+        </div>
+
+        {/* Accounts: review and remove tester access after validation testing */}
+        <div style={styles.roleManagerContainer}>
+          <h2 style={styles.sectionTitle}>👥 Accounts</h2>
+          <p style={styles.roleHelpText}>
+            Every account with its role, status, two-factor setup and last sign-in. To remove a tester&apos;s access, deactivate
+            the account (and remove the email from the allowlist).
+          </p>
+          <button type="button" onClick={loadAccounts} style={styles.roleActionButton}>
+            {accounts ? 'Refresh' : 'Load accounts'}
+          </button>
+          {accounts && (
+            <div style={{ overflowX: 'auto', marginTop: '0.75rem' }}>
+              <table style={{ borderCollapse: 'collapse', fontSize: '0.85rem', width: '100%' }}>
+                <thead>
+                  <tr>{['Email', 'Role', 'Status', 'MFA', 'Allowed by', 'Last sign-in', 'Invited by'].map((h) => (
+                    <th key={h} style={{ textAlign: 'left', padding: '0.4rem', borderBottom: '1px solid #e5e7eb' }}>{h}</th>
+                  ))}</tr>
+                </thead>
+                <tbody>
+                  {accounts.map((u) => (
+                    <tr key={u.user_id}>
+                      <td style={{ padding: '0.4rem' }}>{u.email}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.role}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.is_active ? (u.account_setup_pending ? 'invited (setup pending)' : 'active') : 'deactivated'}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.mfa_enabled ? 'on' : 'not set up'}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.access_by}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.last_login ? new Date(u.last_login).toLocaleString() : 'never'}</td>
+                      <td style={{ padding: '0.4rem' }}>{u.invited_by || '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
         {/* Stats Dashboard */}
@@ -679,6 +745,18 @@ export default function AdminReview() {
       </div>
     </>
   );
+}
+
+function accountResultText(r) {
+  switch (r.action) {
+    case 'invite': return `Invited ${r.email} as ${r.role}.${r.email_sent ? ' The setup link was emailed.' : ''}`;
+    case 'create': return `Created ${r.email} as ${r.role}.`;
+    case 'reset-password': return `Password reset for ${r.email}.`;
+    case 'reset-mfa': return `Two-factor authentication reset for ${r.email}; they set it up again at their next sign-in.`;
+    case 'allowlist-add': return `${r.email} is on the allowlist.`;
+    case 'allowlist-remove': return `${r.email} was removed from the allowlist; new sign-ins are refused.`;
+    default: return `${r.email} is now ${r.is_active ? 'active' : 'deactivated'}.`;
+  }
 }
 
 const styles = {

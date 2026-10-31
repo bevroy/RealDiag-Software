@@ -107,6 +107,8 @@ export default function UserGuidePage() {
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
+            <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
+            <li>Question-by-question trees (/diagnose, October 2026): 16 trees ask one question at a time and end at an outcome step showing the tree&apos;s workup, treatment information (reference, not an order) and recommendations; Back and Start over change earlier answers. The ICD-10 code and urgency shown for a step are as written in the draft tree.</li>
           </ul>
         </section>
 
@@ -144,8 +146,13 @@ export default function UserGuidePage() {
             <li>Admin users can update account roles by email or user ID from the admin review page when onboarding or correcting access.</li>
             <li>Security maintenance: the site and API are rebuilt with updated Node.js and trusted-certificate lists (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
+            <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
+            <li>Offline (October 2026): when you are offline and have no offline library, Symptom Search says so instead of showing no results. &quot;Download All Rules&quot; was removed (November 2026); the offline library replaces it.</li>
+            <li>Working offline (October 2026): open Symptom Search or /diagnose once while online and signed in, and the tree library is saved on this device (it updates by itself when the library changes). Offline, Symptom Search ranks from it with the same rules as online, without AI suggestions, vital-sign terms or chart history, and says the results are offline. On /diagnose, the question-by-question trees work offline; the trees that evaluate entered findings, and all EHR and chart features, need a connection.</li>
+            <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
+            <li>Access (November 2026): RealDiag accounts are by invitation only. An administrator invites you (an email with a one-time setup link, valid 72 hours) or gives you a temporary password. Every account uses two-factor authentication: at your first sign-in, set it up with an authenticator app and keep the backup codes; after that, enter the 6-digit code after your password. If you lose your phone, use a backup code or ask an administrator to reset it. The offline library is for clinical accounts only and is removed from the device when you sign out or after 24 hours.</li>
           </ul>
         </section>
 

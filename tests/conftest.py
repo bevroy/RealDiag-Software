@@ -20,6 +20,14 @@ os.environ["TESTING"] = "1"
 # non-placeholder test-only value if one isn't already set in the environment.
 os.environ.setdefault("JWT_SECRET_KEY", "test-only-" + "a" * 32)
 
+# Production is invite-only (access_policy). Most tests create their accounts
+# through /users/register, so the suite turns self-registration back on;
+# tests/test_invite_only.py checks the invite-only default.
+os.environ.setdefault("ALLOW_SELF_REGISTRATION", "1")
+# Likewise MFA is required in production; tests sign in with a password only
+# and tests/test_mfa_required.py checks the requirement.
+os.environ.setdefault("REQUIRE_MFA", "0")
+
 from backend.main import app
 
 
@@ -44,6 +52,25 @@ def test_client() -> Generator[TestClient, None, None]:
 
     with TestClient(app, raise_server_exceptions=False) as client:
         yield client
+
+
+@pytest.fixture(scope="session")
+def session_token(test_client: TestClient) -> str:
+    """A signed-in session for tests of routes that need login."""
+    import uuid
+    email = f"suite-{uuid.uuid4().hex[:8]}@realdiag.com"
+    response = test_client.post("/users/register", json={"email": email, "password": "SuitePass123!", "full_name": "Suite"})
+    assert response.status_code == 201, response.text
+    test_client.cookies.clear()
+    return response.cookies.get("access_token")
+
+
+@pytest.fixture
+def signed_in(test_client: TestClient, session_token: str):
+    """Attach the suite's signed-in session to test_client for one test."""
+    test_client.cookies.set("access_token", session_token)
+    yield
+    test_client.cookies.clear()
 
 
 @pytest.fixture(scope="session")

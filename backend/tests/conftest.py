@@ -6,3 +6,11 @@ import os
 # tests/conftest.py sets for the app-level test client.
 os.environ.setdefault("TESTING", "1")
 os.environ.setdefault("JWT_SECRET_KEY", "test-only-" + "a" * 32)
+
+# Production is invite-only (access_policy). Most tests create their accounts
+# through /users/register, so the suite turns self-registration back on;
+# tests/test_invite_only.py checks the invite-only default.
+os.environ.setdefault("ALLOW_SELF_REGISTRATION", "1")
+# Likewise MFA is required in production; tests sign in with a password only
+# and tests/test_mfa_required.py checks the requirement.
+os.environ.setdefault("REQUIRE_MFA", "0")
