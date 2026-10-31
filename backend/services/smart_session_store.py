@@ -13,14 +13,61 @@ this table is created automatically by init_database() and shares the
 existing connection pool.
 """
 
+import base64
 import logging
+import os
 import secrets as _secrets
 from datetime import datetime
+from functools import lru_cache
 from typing import Optional, Dict, Any
+
+from cryptography.fernet import Fernet, InvalidToken
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from .database import Base, DATABASE_AVAILABLE, get_db_session
 
 logger = logging.getLogger(__name__)
+
+# --------------------------------------------------------------------------- tokens at rest
+#
+# FHIR access and refresh tokens are stored encrypted (Fernet: AES-128-CBC +
+# HMAC-SHA256). The key is SMART_TOKEN_ENCRYPTION_KEY (a Fernet key) when set;
+# otherwise it is derived with HKDF-SHA256 from JWT_SECRET_KEY, which the app
+# already requires, so no extra configuration is needed. Rotating the key ends
+# active SMART sessions (they last at most 30 minutes). Stored values carry
+# the prefix "enc:v1:"; a value without it (saved before encryption) is read
+# as-is until its session expires.
+
+TOKEN_KEY_ENV = "SMART_TOKEN_ENCRYPTION_KEY"
+_ENCRYPTED_PREFIX = "enc:v1:"
+
+
+@lru_cache(maxsize=1)
+def _token_cipher() -> Fernet:
+    configured = os.getenv(TOKEN_KEY_ENV, "").strip()
+    if configured:
+        return Fernet(configured.encode())
+    secret = os.getenv("JWT_SECRET_KEY", "").strip()
+    if not secret:
+        raise RuntimeError(f"Set {TOKEN_KEY_ENV} or JWT_SECRET_KEY to store SMART session tokens")
+    key = HKDF(algorithm=hashes.SHA256(), length=32, salt=None,
+               info=b"realdiag-smart-session-tokens").derive(secret.encode())
+    return Fernet(base64.urlsafe_b64encode(key))
+
+
+def encrypt_token(token: Optional[str]) -> Optional[str]:
+    if token is None:
+        return None
+    return _ENCRYPTED_PREFIX + _token_cipher().encrypt(token.encode()).decode()
+
+
+def decrypt_token(stored: Optional[str]) -> Optional[str]:
+    """Plain token from a stored value. Raises InvalidToken if it cannot be decrypted."""
+    if stored is None or not stored.startswith(_ENCRYPTED_PREFIX):
+        return stored  # saved before encryption; expires with its session
+    return _token_cipher().decrypt(stored[len(_ENCRYPTED_PREFIX):].encode()).decode()
+
 
 if DATABASE_AVAILABLE and Base is not None:
     from sqlalchemy import Column, Integer, String, Text, DateTime
@@ -82,8 +129,8 @@ def create_smart_session(
             ehr_vendor=ehr_vendor,
             iss=iss,
             patient_id=patient_id,
-            fhir_access_token=fhir_access_token,
-            fhir_refresh_token=fhir_refresh_token,
+            fhir_access_token=encrypt_token(fhir_access_token),
+            fhir_refresh_token=encrypt_token(fhir_refresh_token),
             expires_at=expires_at,
         ))
     return session_id
@@ -91,7 +138,11 @@ def create_smart_session(
 
 def get_smart_session(session_id: str):
     """Look up an active SMART session by its opaque id. Does not check
-    expiry - callers should compare .expires_at themselves."""
+    expiry - callers should compare .expires_at themselves.
+
+    The returned (detached) row carries the decrypted tokens. A session whose
+    tokens cannot be decrypted (e.g. the key changed) is treated as missing.
+    """
     if not DATABASE_AVAILABLE or SmartSession is None or not session_id:
         return None
     with get_db_session() as db:
@@ -101,7 +152,13 @@ def get_smart_session(session_id: str):
         # callers can safely read its attributes afterward without a
         # DetachedInstanceError.
         db.expunge(row)
-        return row
+    try:
+        row.fhir_access_token = decrypt_token(row.fhir_access_token)
+        row.fhir_refresh_token = decrypt_token(row.fhir_refresh_token)
+    except InvalidToken:
+        logger.warning("SMART session tokens could not be decrypted (key changed?); treating session as expired")
+        return None
+    return row
         
         
 def delete_smart_session(session_id: str) -> None:
