@@ -1029,9 +1029,14 @@ async def get_smart_config():
     """
     Get SMART on FHIR configuration needed for frontend SMART launch.
     """
+    try:
+        scopes = EHRAdapter.scopes_for(EHR_VENDOR)
+    except UnsupportedEHRVendorError as e:
+        raise HTTPException(status_code=503, detail=f"SMART on FHIR is not available: {e}")
     return {
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
-        "scopes": ["launch", "patient/*.read", "openid", "fhirUser"],
+        "ehr_vendor": EHR_VENDOR,
+        "scopes": scopes,
         "fhir_base_url": FHIR_BASE_URL
     }
