@@ -6,16 +6,13 @@ const RULES_CACHE = `realdiag-rules-v${CACHE_VERSION}`;
 const API_CACHE = `realdiag-api-v${CACHE_VERSION}`;
 const IMAGES_CACHE = `realdiag-images-v${CACHE_VERSION}`;
 
-// IndexedDB for offline data
-const DB_NAME = 'RealDiagOfflineDB';
-const DB_VERSION = 3;
-const STORES = {
-  RULES: 'rules',
-  SEARCHES: 'searches',
-  FAVORITES: 'favorites',
-  SYNC_QUEUE: 'syncQueue',
-  USER_DATA: 'userData'
-};
+// IndexedDB for offline data: the same name, version and stores as the pages
+// (one definition in offline-db-schema.js).
+importScripts('/offline-db-schema.js');
+const OFFLINE_DB = self.REALDIAG_OFFLINE_DB;
+const DB_NAME = OFFLINE_DB.name;
+const DB_VERSION = OFFLINE_DB.version;
+const STORES = OFFLINE_DB.STORES;
 
 // Assets to cache on install
 const PRECACHE_URLS = [
@@ -31,43 +28,21 @@ const PRECACHE_URLS = [
   '/offline.html'
 ];
 
+// IndexedDB requests are not promises; wrap them so reads return results.
+function requestToPromise(request) {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
 // Initialize IndexedDB
 async function initDB() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
-    
     request.onerror = () => reject(request.error);
     request.onsuccess = () => resolve(request.result);
-    
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      
-      // Create object stores if they don't exist
-      if (!db.objectStoreNames.contains(STORES.RULES)) {
-        const rulesStore = db.createObjectStore(STORES.RULES, { keyPath: 'id' });
-        rulesStore.createIndex('family', 'family', { unique: false });
-        rulesStore.createIndex('lastUpdated', 'lastUpdated', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SEARCHES)) {
-        const searchesStore = db.createObjectStore(STORES.SEARCHES, { keyPath: 'id', autoIncrement: true });
-        searchesStore.createIndex('timestamp', 'timestamp', { unique: false });
-        searchesStore.createIndex('synced', 'synced', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.FAVORITES)) {
-        db.createObjectStore(STORES.FAVORITES, { keyPath: 'id', autoIncrement: true });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
-        const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id', autoIncrement: true });
-        syncStore.createIndex('timestamp', 'timestamp', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.USER_DATA)) {
-        db.createObjectStore(STORES.USER_DATA, { keyPath: 'key' });
-      }
-    };
+    request.onupgradeneeded = (event) => OFFLINE_DB.upgrade(event.target.result);
   });
 }
 
@@ -76,8 +51,7 @@ async function saveToStore(storeName, data) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readwrite');
-    const store = transaction.objectStore(storeName);
-    await store.put(data);
+    await requestToPromise(transaction.objectStore(storeName).put(data));
     return true;
   } catch (error) {
     console.error(`Error saving to ${storeName}:`, error);
@@ -90,8 +64,7 @@ async function getFromStore(storeName, key) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readonly');
-    const store = transaction.objectStore(storeName);
-    return await store.get(key);
+    return await requestToPromise(transaction.objectStore(storeName).get(key));
   } catch (error) {
     console.error(`Error getting from ${storeName}:`, error);
     return null;
@@ -103,8 +76,7 @@ async function getAllFromStore(storeName) {
   try {
     const db = await initDB();
     const transaction = db.transaction([storeName], 'readonly');
-    const store = transaction.objectStore(storeName);
-    return await store.getAll();
+    return await requestToPromise(transaction.objectStore(storeName).getAll());
   } catch (error) {
     console.error(`Error getting all from ${storeName}:`, error);
     return [];

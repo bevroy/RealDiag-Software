@@ -7,6 +7,7 @@
 import { apiFetch } from './apiClient';
 import { downloadRules } from './ruleDownload';
 import { requestToPromise, transactionDone } from './idb';
+import OFFLINE_DB from '../public/offline-db-schema';
 
 import { 
   encryptData, 
@@ -15,16 +16,10 @@ import {
   isCryptoAvailable 
 } from './crypto.js';
 
-// IndexedDB configuration
-const DB_NAME = 'RealDiagOfflineDB';
-const DB_VERSION = 4; // Incremented for encryption migration
-const STORES = {
-  RULES: 'rules',
-  SEARCHES: 'searches',
-  FAVORITES: 'favorites',
-  SYNC_QUEUE: 'syncQueue',
-  USER_DATA: 'userData'
-};
+// IndexedDB configuration: shared with the service worker (public/sw.js)
+const DB_NAME = OFFLINE_DB.name;
+const DB_VERSION = OFFLINE_DB.version;
+const STORES = OFFLINE_DB.STORES;
 
 // Encryption settings
 const ENCRYPT_SEARCHES = true; // Searches may contain PHI
@@ -39,35 +34,7 @@ export async function openDB() {
     request.onerror = () => reject(request.error);
     request.onsuccess = () => resolve(request.result);
     
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      
-      // Create stores if they don't exist
-      if (!db.objectStoreNames.contains(STORES.RULES)) {
-        const rulesStore = db.createObjectStore(STORES.RULES, { keyPath: 'id' });
-        rulesStore.createIndex('family', 'family', { unique: false });
-        rulesStore.createIndex('lastUpdated', 'lastUpdated', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SEARCHES)) {
-        const searchesStore = db.createObjectStore(STORES.SEARCHES, { keyPath: 'id', autoIncrement: true });
-        searchesStore.createIndex('timestamp', 'timestamp', { unique: false });
-        searchesStore.createIndex('synced', 'synced', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.FAVORITES)) {
-        db.createObjectStore(STORES.FAVORITES, { keyPath: 'id', autoIncrement: true });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
-        const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id', autoIncrement: true });
-        syncStore.createIndex('timestamp', 'timestamp', { unique: false });
-      }
-      
-      if (!db.objectStoreNames.contains(STORES.USER_DATA)) {
-        db.createObjectStore(STORES.USER_DATA, { keyPath: 'key' });
-      }
-    };
+    request.onupgradeneeded = (event) => OFFLINE_DB.upgrade(event.target.result);
   });
 }
 
