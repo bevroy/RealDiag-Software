@@ -70,6 +70,7 @@ export default function TechnicalMedicalPage() {
             <li>Recency-weighted interpretation of discontinued therapies</li>
             <li>Adverse-history blocks for high-risk repeat recommendations</li>
             <li>Explainability outputs for supported and conflicting medication signals</li>
+            <li>Medication matching (October 2026): chart medications are matched to the trees&apos; related-medication lists through RxNorm (backend/data/medication_rxnorm.json, built from NLM RxNav by backend/scripts/build_medication_rxnorm.py): by RxNorm code first, else ingredient or brand name; class patterns use ATC classes (*olol = C07A beta blockers, *statin = C10AA). Nothing is sent to an external service at runtime. Missed-items check 4 lists an active medication when none of its linked conditions is on the problem list; unlinked medications are reported as not checked.</li>
           </ul>
         </section>
 
