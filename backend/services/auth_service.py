@@ -246,14 +246,23 @@ def verify_password_with_upgrade_flag(plain_password: str, hashed_password: str)
     legacy_hash = hashlib.sha256(plain_password.encode()).hexdigest()
     return (legacy_hash == hashed_password), True
 
-def create_access_token(user_id: str, email: str) -> str:
-    """Create JWT access token."""
+def create_access_token(user_id: str, email: str, mfa: bool = False, mfa_setup: bool = False) -> str:
+    """Create JWT access token.
+
+    mfa: a TOTP or backup code was verified for this session.
+    mfa_setup: the account has not enrolled in MFA; while MFA is required
+    (access_policy.mfa_required) the session may only reach MFA_SETUP_PATHS.
+    """
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode = {
         "sub": user_id,
         "email": email,
         "exp": expire
     }
+    if mfa:
+        to_encode["mfa"] = True
+    if mfa_setup:
+        to_encode["mfa_setup_required"] = True
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 

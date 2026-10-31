@@ -152,7 +152,12 @@ async def verify_mfa_token(
             mfa_pending=False,
             mfa_enrolled_at=datetime.utcnow(),
         )
-        return MFAVerifyResponse(valid=True, message="MFA enabled successfully")
+        # The code was just verified: replace the setup-only session with a full one.
+        return create_cookie_response(
+            data={"valid": True, "message": "MFA enabled successfully"},
+            access_token=create_access_token(current_user["user_id"], current_user.get("email"), mfa=True),
+            refresh_token=_secrets.token_urlsafe(32),
+        )
     if is_valid:
         return MFAVerifyResponse(valid=True, message="Token verified")
     return MFAVerifyResponse(valid=False, message="Invalid token")
@@ -187,7 +192,11 @@ async def verify_backup_code(
 
 @router.delete("/disable")
 async def disable_mfa(current_user: dict = Depends(get_current_user)):
-    """Disable MFA for current user."""
+    """Disable MFA for current user (refused while MFA is required for all accounts)."""
+    from backend.services.access_policy import mfa_required
+    if mfa_required():
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                            detail="Two-factor authentication is required for all RealDiag accounts.")
     if not current_user.get('mfa_enabled'):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -272,7 +281,7 @@ async def login_verify(
     if not verified:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid MFA code")
 
-    access_token = create_access_token(user_id, email)
+    access_token = create_access_token(user_id, email, mfa=True)
     refresh_token = _secrets.token_urlsafe(32)
 
     return create_cookie_response(

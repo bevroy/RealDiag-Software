@@ -150,6 +150,9 @@ PUBLIC_PATHS = {
     "/users/reset-password",
     "/users/verify-email",
     "/users/resend-verification",
+    # Second sign-in step: authenticated by the short-lived mfa_token from
+    # /users/login (there is no session yet).
+    "/mfa/login-verify",
     "/",
     "/version",
     "/docs",
@@ -195,6 +198,17 @@ async def require_authentication_globally(request: Request, call_next):
             return JSONResponse(status_code=401, content={"detail": "MFA verification required"})
     except Exception:
         return JSONResponse(status_code=401, content={"detail": "Not authenticated"})
+
+    # Two-factor authentication for every account (REQUIRE_MFA, default on).
+    from backend.services.access_policy import (MFA_SETUP_DETAIL, MFA_SETUP_PATHS, MFA_SIGN_IN_AGAIN_DETAIL,
+                                                mfa_required)
+    if mfa_required():
+        if payload.get("mfa_setup_required"):
+            if path not in MFA_SETUP_PATHS:
+                return JSONResponse(status_code=403, content={"detail": MFA_SETUP_DETAIL, "mfa_setup_required": True})
+        elif not payload.get("mfa"):
+            # Sessions from before MFA was required, or that skipped it.
+            return JSONResponse(status_code=401, content={"detail": MFA_SIGN_IN_AGAIN_DETAIL})
 
     return await call_next(request)
 

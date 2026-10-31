@@ -796,6 +796,20 @@ def _set_active(body: AccountTarget, admin: AdminUser, active: bool):
     }
 
 
+@router.post("/users/reset-mfa")
+async def admin_reset_mfa(body: AccountTarget, admin: AdminUser = Depends(verify_admin_token)):
+    """
+    Clear a user's two-factor setup (lost phone): at their next sign-in they
+    set it up again. Existing sessions stay signed in until they expire.
+    """
+    from backend.services.auth_service import update_user_mfa_state
+    user_id, email = _apply_to_account(body, lambda account, set_field: None)
+    update_user_mfa_state(user_id, mfa_enabled=False, mfa_pending=False, mfa_secret=None, mfa_backup_codes=[],
+                          mfa_enrolled_at=None)
+    _audit_account_action(admin, "MFA_RESET", user_id, body.reason)
+    return {"success": True, "user_id": user_id, "email": email, "mfa_enabled": False}
+
+
 @router.post("/users/deactivate")
 async def admin_deactivate_user(body: AccountTarget, admin: AdminUser = Depends(verify_admin_token)):
     """

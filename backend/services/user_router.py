@@ -137,7 +137,8 @@ async def register_user(request: Request, user_data: UserCreate):
     if not self_registration_allowed():
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=INVITE_ONLY_DETAIL)
     user = create_user(user_data)
-    access_token = create_access_token(user["user_id"], user["email"])
+    from backend.services.access_policy import mfa_required
+    access_token = create_access_token(user["user_id"], user["email"], mfa_setup=mfa_required())
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
@@ -207,7 +208,10 @@ async def login_user(request: Request, credentials: UserLogin):
             "message": "MFA verification required. Submit your code to POST /mfa/login-verify."
         }
 
-    access_token = create_access_token(user["user_id"], user["email"])
+    # MFA is required but not set up yet: a session limited to MFA enrollment.
+    from backend.services.access_policy import mfa_required
+    setup = mfa_required()
+    access_token = create_access_token(user["user_id"], user["email"], mfa_setup=setup)
     refresh_token = secrets.token_urlsafe(32)  # Generate refresh token
     
     # Remove sensitive data
@@ -219,8 +223,9 @@ async def login_user(request: Request, credentials: UserLogin):
     # Return response with tokens in HttpOnly cookies
     return create_cookie_response(
         data={
-            "message": "Login successful",
-            "user": user_safe
+            "message": "Set up two-factor authentication to continue." if setup else "Login successful",
+            "user": user_safe,
+            **({"mfa_setup_required": True} if setup else {}),
         },
         access_token=access_token,
         refresh_token=refresh_token

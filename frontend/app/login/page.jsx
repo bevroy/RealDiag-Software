@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { storeAuthData } from '../../utils/clientAuth';
 import { apiFetch } from '../../utils/apiClient';
+import { loginNextStep, mfaVerifyBody } from '../../utils/loginFlow';
+import MFASetup from '../../components/MFASetup';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -14,6 +16,45 @@ export default function LoginPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  // Two-factor step after the password: 'password' | 'code' | 'setup'.
+  const [stage, setStage] = useState('password');
+  const [mfaToken, setMfaToken] = useState('');
+  const [code, setCode] = useState('');
+  const [useBackupCode, setUseBackupCode] = useState(false);
+
+  // Signed in with MFA: store the user and go to the app.
+  const finish = (user, csrfToken) => {
+    if (csrfToken) sessionStorage.setItem('csrf_token', csrfToken);
+    if (user) storeAuthData(user, csrfToken || null);
+    alert(`Welcome back, ${user?.full_name || user?.email}!`);
+    // Stay on this site: the login cookie and stored user belong to this origin
+    window.location.href = '/';
+  };
+
+  const finishFromSession = async () => {
+    const me = await apiFetch('/users/me');
+    if (!me.ok) throw new Error('Signed in, but your profile could not be loaded. Please sign in again.');
+    finish(await me.json(), null);
+  };
+
+  const handleCode = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const response = await apiFetch('/mfa/login-verify', {
+        method: 'POST',
+        body: JSON.stringify(mfaVerifyBody(mfaToken, code, useBackupCode)),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || 'Code not accepted');
+      await finishFromSession();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -43,21 +84,16 @@ export default function LoginPage() {
         throw new Error(data.detail || 'Login failed');
       }
 
-      // Login successful - store user data and token
-      if (data.csrf_token) {
-        sessionStorage.setItem('csrf_token', data.csrf_token);
+      // Password accepted; two-factor authentication comes next.
+      const next = loginNextStep(data);
+      if (next === 'code') {
+        setMfaToken(data.mfa_token);
+        setStage('code');
+      } else if (next === 'setup') {
+        setStage('setup');
+      } else {
+        finish(data.user, data.csrf_token);
       }
-      
-      // Store user data for cross-domain authentication
-      if (data.user) {
-        storeAuthData(data.user, data.csrf_token || null);
-      }
-
-      // Show success message
-      alert(`Welcome back, ${data.user?.full_name || data.user?.email}!`);
-      
-      // Stay on this site: the login cookie and stored user belong to this origin
-      window.location.href = '/';
     } catch (err) {
       setError(err.message);
     } finally {
@@ -92,6 +128,45 @@ export default function LoginPage() {
           </div>
         )}
 
+        {stage === 'code' && (
+          <form onSubmit={handleCode} style={styles.form}>
+            <div style={styles.formGroup}>
+              <label style={styles.label}>{useBackupCode ? 'Backup code' : 'Code from your authenticator app'}</label>
+              <input
+                name="code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                required
+                autoFocus
+                autoComplete="one-time-code"
+                inputMode={useBackupCode ? 'text' : 'numeric'}
+                style={styles.input}
+                placeholder={useBackupCode ? 'Backup code' : '6-digit code'}
+              />
+            </div>
+            <button type="submit" disabled={loading} style={{ ...styles.button, ...(loading ? styles.buttonDisabled : {}) }}>
+              {loading ? 'Checking...' : 'Verify'}
+            </button>
+            <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <button type="button" style={{ ...styles.link, background: 'none', border: 'none', cursor: 'pointer' }}
+                onClick={() => { setUseBackupCode(!useBackupCode); setCode(''); }}>
+                {useBackupCode ? 'Use a code from the app instead' : 'Use a backup code instead'}
+              </button>
+            </p>
+          </form>
+        )}
+
+        {stage === 'setup' && (
+          <div>
+            <p style={styles.subtitle}>
+              Two-factor authentication is required for every RealDiag account. Set it up with an authenticator app
+              to continue.
+            </p>
+            <MFASetup onComplete={() => finishFromSession().catch((err) => setError(err.message))} />
+          </div>
+        )}
+
+        {stage === 'password' && (
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.formGroup}>
             <label style={styles.label}>Email</label>
@@ -136,6 +211,7 @@ export default function LoginPage() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
+        )}
 
         <p style={{ textAlign: 'center', marginTop: '1rem' }}>
           <Link href="/forgot-password" style={styles.link}>

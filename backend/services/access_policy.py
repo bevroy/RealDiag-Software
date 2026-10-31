@@ -5,6 +5,10 @@ Settings are read on every call, so they can be changed per environment:
 - ALLOW_SELF_REGISTRATION (default off): POST /users/register is refused and
   accounts are created only by an admin (invite link or temporary password).
 - INVITE_EXPIRATION_HOURS (default 72): how long an account-setup link works.
+- REQUIRE_MFA (default on): every session needs two-factor authentication.
+  A signed-in account without MFA gets a session limited to MFA_SETUP_PATHS
+  until it enrolls; other sessions must carry the "mfa" claim, which is set
+  only after a TOTP or backup code is verified.
 
 Who may hold an account: an email at an approved domain (APPROVED_EMAIL_DOMAINS)
 or an individual email an admin put on the allowlist (allowed_emails table;
@@ -31,6 +35,16 @@ def _flag(name: str, default: bool) -> bool:
 
 def self_registration_allowed() -> bool:
     return _flag("ALLOW_SELF_REGISTRATION", False)
+
+
+def mfa_required() -> bool:
+    return _flag("REQUIRE_MFA", True)
+
+
+# What a signed-in account that has not enrolled in MFA yet may call.
+MFA_SETUP_PATHS = frozenset({"/mfa/enroll", "/mfa/verify", "/mfa/status", "/users/me", "/users/logout"})
+MFA_SETUP_DETAIL = "Two-factor authentication must be set up before using RealDiag."
+MFA_SIGN_IN_AGAIN_DETAIL = "Sign in again with two-factor authentication."
 
 
 def invite_expiration_hours() -> int:
