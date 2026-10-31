@@ -1,5 +1,7 @@
 
 from __future__ import annotations
+import hashlib
+import json
 from pathlib import Path
 from typing import Any, Dict, List
 import yaml
@@ -142,6 +144,17 @@ class RulesEngine:
         
         return results
     
+    def all_rules(self) -> List[Dict[str, Any]]:
+        """Every rule with its family, in family then id order (for offline download)."""
+        return [{"family": fam, **rule}
+                for fam in sorted(self.rule_sets)
+                for rule in sorted(self.rule_sets[fam].get("rules", []), key=lambda r: str(r.get("id")))]
+
+    def version(self) -> str:
+        """Short content hash of the loaded rules; changes whenever any rule changes."""
+        payload = json.dumps(self.rule_sets, sort_keys=True, default=str).encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()[:16]
+
     def get_rule(self, rule_id: str) -> Dict[str, Any]:
         """Get a specific rule by ID."""
         for fam, doc in self.rule_sets.items():

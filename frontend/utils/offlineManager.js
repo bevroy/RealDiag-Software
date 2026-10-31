@@ -5,6 +5,7 @@
  */
 
 import { apiFetch } from './apiClient';
+import { downloadRules } from './ruleDownload';
 
 import { 
   encryptData, 
@@ -278,45 +279,10 @@ export async function deleteFavorite(favoriteId) {
   await store.delete(favoriteId);
 }
 
-// Download all rules from API
+// Download all rules from the API (GET /rules/all). The result reports what
+// actually happened: success only when every rule was saved.
 export async function downloadAllRules(apiBase, onProgress) {
-  try {
-    // Get list of all available rules
-    const response = await apiFetch(`/rules/list`);
-    if (!response.ok) throw new Error('Failed to fetch rules list');
-    
-    const rulesList = await response.json();
-    const total = rulesList.length;
-    let downloaded = 0;
-    
-    // Download each rule
-    for (const ruleInfo of rulesList) {
-      try {
-        const ruleResponse = await apiFetch(`/rules/${ruleInfo.id}`);
-        if (ruleResponse.ok) {
-          const rule = await ruleResponse.json();
-          await saveRule(rule);
-          downloaded++;
-          
-          if (onProgress) {
-            onProgress({
-              downloaded,
-              total,
-              current: ruleInfo.id,
-              percentage: Math.round((downloaded / total) * 100)
-            });
-          }
-        }
-      } catch (error) {
-        console.error(`Failed to download rule ${ruleInfo.id}:`, error);
-      }
-    }
-    
-    return { success: true, downloaded, total };
-  } catch (error) {
-    console.error('Error downloading rules:', error);
-    return { success: false, error: error.message };
-  }
+  return downloadRules({ fetchRules: () => apiFetch('/rules/all'), saveRule, onProgress });
 }
 
 // Get offline data statistics
