@@ -122,3 +122,16 @@ def test_validator_flags_single_node_without_branches(tmp_path):
     result = _validate(path)
     assert result.errors == []
     assert any("single node and no decision branches" in w for w in result.warnings)
+
+
+def test_evidence_level_origin_sources_are_shown_as_sources():
+    # Six trees keep guideline names under origin: evidence_level (from the old
+    # evidence_level field). They are sources, not evidence levels.
+    from backend.services.tree_schema import source_texts
+    trees = Path(__file__).resolve().parents[1] / "trees"
+    tree = yaml.safe_load((trees / "ENT-EAR-PAIN.yml").read_text())
+    texts = source_texts(tree)
+    assert "AAO-HNS Clinical Practice Guidelines" in texts
+    assert not [t for t in texts if t.startswith("Evidence level")]
+    for path in trees.glob("*.yml"):
+        assert not [t for t in source_texts(yaml.safe_load(path.read_text())) if "Evidence level:" in t], path.name
