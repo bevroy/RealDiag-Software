@@ -161,6 +161,15 @@ export default function UserGuidePage() {
             institution protocols, or emergency pathways. Always validate recommendations against
             the full clinical picture and local standards of care.
           </p>
+          <p style={styles.p}>
+            Treatment check on Encounter Assessment (October 2026): each treatment line from a matched
+            tree is marked Appropriate (no conflict found), Use with caution, Avoid or Not checked, by
+            rules, against the chart&apos;s allergies, active medications, problem list, kidney and
+            liver function, pregnancy and prior adverse reactions. Expand a line to see each reason and
+            the chart data it came from. Options keep the tree&apos;s order and are not ranked;
+            &quot;Appropriate&quot; only means no conflict was found in the checks that ran, and
+            medications outside RealDiag&apos;s limited knowledge base are not checked.
+          </p>
         </section>
 
         <footer style={styles.footer}>

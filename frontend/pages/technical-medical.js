@@ -95,6 +95,19 @@ export default function TechnicalMedicalPage() {
             BMI, smoking status, procedures, imaging and results over 10 years. Data RealDiag cannot see
             (such as pack-years) is reported as unavailable, never assumed.
           </p>
+          <p style={styles.p}>
+            Patient-aware treatment review (October 2026, rules only): for each shown tree, every
+            treatment line is scanned for drug names and classes known to MedicationSafetyService and the
+            history classifier. Each is checked for interactions and duplicate therapy with the
+            chart&apos;s active medications, contraindications with the problem list, allergy
+            cross-reactivity and named allergies, age, renal adjustment (latest eGFR under 30 or 15, or
+            CKD stage 4/5/ESRD on the problem list), hepatic adjustment (cirrhosis or Child-Pugh C on the
+            problem list), pregnancy (problem list) and prior adverse reactions to the same drug or class
+            (statusReason). Contraindicated alerts, named allergies and prior adverse reactions mark a
+            line Avoid; other alerts and missing allergy or medication data mark it Use with caution.
+            Every reason carries its data source. Lines are never ranked, and these cut-offs and mappings
+            are pending clinical review.
+          </p>
         </section>
 
         <section style={styles.section}>
