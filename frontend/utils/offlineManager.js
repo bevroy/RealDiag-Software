@@ -5,7 +5,6 @@
  */
 
 import { apiFetch } from './apiClient';
-import { downloadRules } from './ruleDownload';
 import { requestToPromise, transactionDone } from './idb';
 import OFFLINE_DB from '../public/offline-db-schema';
 
@@ -243,70 +242,6 @@ export async function deleteFavorite(favoriteId) {
   await transactionDone(transaction);
 }
 
-// Download all rules from the API (GET /rules/all). The result reports what
-// actually happened: success only when every rule was saved.
-export async function downloadAllRules(apiBase, onProgress) {
-  return downloadRules({ fetchRules: () => apiFetch('/rules/all'), saveRule, onProgress });
-}
-
-// Get offline data statistics
-export async function getOfflineStats() {
-  try {
-    const [rules, searches, favorites] = await Promise.all([
-      getAllRules(),
-      getAllSearches(),
-      getAllFavorites()
-    ]);
-    
-    // Ensure all are arrays
-    const safeRules = Array.isArray(rules) ? rules : [];
-    const safeSearches = Array.isArray(searches) ? searches : [];
-    const safeFavorites = Array.isArray(favorites) ? favorites : [];
-    
-    const unsyncedSearches = safeSearches.filter(s => !s.synced);
-    
-    // Calculate storage size estimate
-    const rulesSize = JSON.stringify(safeRules).length;
-    const searchesSize = JSON.stringify(safeSearches).length;
-    const favoritesSize = JSON.stringify(safeFavorites).length;
-    const totalSize = rulesSize + searchesSize + favoritesSize;
-    
-    // Group rules by family
-    const rulesByFamily = safeRules.reduce((acc, rule) => {
-      const family = rule.family || 'Unknown';
-      acc[family] = (acc[family] || 0) + 1;
-      return acc;
-    }, {});
-    
-    const lastUpdated = safeRules.length > 0 
-      ? Math.max(...safeRules.map(r => r.lastUpdated || 0))
-      : 0;
-    
-    return {
-      rules: {
-        count: safeRules.length,
-        byFamily: rulesByFamily,
-        size: rulesSize,
-        lastUpdated: lastUpdated
-      },
-      searches: {
-        count: safeSearches.length,
-        unsynced: unsyncedSearches.length,
-        size: searchesSize
-      },
-      favorites: {
-        count: safeFavorites.length,
-        size: favoritesSize
-      },
-      totalSize: totalSize,
-      totalSizeMB: (totalSize / 1024 / 1024).toFixed(2)
-    };
-  } catch (error) {
-    console.error('Error getting offline stats:', error);
-    return null;
-  }
-}
-
 // Clear all offline data
 export async function clearAllOfflineData() {
   try {
@@ -451,8 +386,6 @@ export default {
   saveUserData,
   getUserData,
   deleteUserData,
-  downloadAllRules,
-  getOfflineStats,
   clearAllOfflineData,
   isServiceWorkerSupported,
   getServiceWorkerStatus,

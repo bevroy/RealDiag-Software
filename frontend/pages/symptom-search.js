@@ -21,14 +21,12 @@ import { analyzePathways } from '../utils/costEffectiveness';
 import { compareDifferentialDiagnoses, findDistinguishingFeatures } from '../utils/differentialComparison';
 import { availableCalculators } from '../utils/pretestCalculators';
 import { 
-  downloadAllRules, 
-  getOfflineStats, 
   isOnline, 
   onConnectionChange
 } from '../utils/offlineManager';
-import { downloadMessage } from '../utils/ruleDownload';
 import { OFFLINE_SEARCH_MESSAGE, isOfflineError, isOfflineResponse } from '../utils/offlineResponse';
 import { loadStoredBundle, refreshBundle, bundleSummary } from '../utils/offlineBundle';
+import { deleteLegacyOfflineDatabase } from '../utils/clientAuth';
 import { rankOffline } from '../utils/offlineSearch';
 import {
   isVoiceInputSupported,
@@ -131,10 +129,6 @@ export default function SymptomSearch() {
   const [expandedHomeopathy, setExpandedHomeopathy] = useState({});
   
   // Mobile features state
-  const [offlineStats, setOfflineStats] = useState(null);
-  const [isDownloadingRules, setIsDownloadingRules] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  const [downloadResult, setDownloadResult] = useState(null);
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [showOfflinePanel, setShowOfflinePanel] = useState(false);
   const [voiceRecognition, setVoiceRecognition] = useState(null);
@@ -451,9 +445,9 @@ export default function SymptomSearch() {
       }
     });
 
-    // Load offline stats
-    const stats = await getOfflineStats();
-    setOfflineStats(stats);
+    // The rule-library download was removed: the offline library (offlineBundle.js)
+    // replaces it. Delete the unprotected copy it left on this device.
+    deleteLegacyOfflineDatabase();
 
     // Initialize voice recognition
     if (isVoiceInputSupported()) {
@@ -469,35 +463,6 @@ export default function SymptomSearch() {
     if (isScannerSupported()) {
       const detector = await createBarcodeDetector(['qr_code', 'code_128', 'ean_13']);
       setBarcodeDetector(detector);
-    }
-  };
-
-  // Download all rules for offline use
-  const handleDownloadRules = async () => {
-    if (isDownloadingRules) return;
-
-    setIsDownloadingRules(true);
-    setDownloadProgress(0);
-
-    setDownloadResult(null);
-
-    try {
-      const result = await downloadAllRules(apiBase, (progress) => {
-        setDownloadProgress(progress.percentage);
-      });
-      setDownloadResult(result);
-
-      const stats = await getOfflineStats();
-      setOfflineStats(stats);
-
-      speak(result.success ? 'Rules downloaded' : 'Rule download failed');
-    } catch (error) {
-      console.error('Failed to download rules:', error);
-      setDownloadResult({ success: false, error: `Rule download failed: ${error.message}` });
-      speak('Rule download failed');
-    } finally {
-      setIsDownloadingRules(false);
-      setDownloadProgress(0);
     }
   };
 
@@ -1367,89 +1332,6 @@ export default function SymptomSearch() {
                 </strong>
               </div>
 
-              {/* Offline Storage Stats */}
-              {offlineStats && (
-                <div style={{
-                  padding: '1rem',
-                  background: darkMode ? '#4b5563' : 'white',
-                  borderRadius: '6px',
-                  marginBottom: '1rem'
-                }}>
-                  <h4 style={{ margin: '0 0 0.5rem', color: getTextColor(), fontSize: '0.95rem' }}>
-                    📊 Offline Storage
-                  </h4>
-                  <div style={{ fontSize: '0.85rem', color: getSecondaryTextColor(), lineHeight: '1.6' }}>
-                    <div>Rules: {offlineStats.rules.count}</div>
-                    <div>Searches: {offlineStats.searches.count}</div>
-                    <div>Favorites: {offlineStats.favorites.count}</div>
-                    {offlineStats.rules.byFamily && Object.keys(offlineStats.rules.byFamily).length > 0 && (
-                      <div style={{ marginTop: '0.5rem' }}>
-                        <strong>By Specialty:</strong>
-                        {Object.entries(offlineStats.rules.byFamily).slice(0, 5).map(([fam, count]) => (
-                          <div key={fam} style={{ marginLeft: '1rem' }}>
-                            {getFamilyLabel(fam)}: {count}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Download Rules Button */}
-              <button
-                onClick={handleDownloadRules}
-                disabled={isDownloadingRules || !connectionStatus}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  background: isDownloadingRules ? '#9ca3af' : 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: isDownloadingRules || !connectionStatus ? 'not-allowed' : 'pointer',
-                  fontWeight: '600',
-                  fontSize: '0.95rem',
-                  minHeight: '44px',
-                  marginBottom: '1rem'
-                }}
-              >
-                {isDownloadingRules ? `Downloading... ${Math.round(downloadProgress)}%` : '⬇️ Download All Rules'}
-              </button>
-
-              {downloadResult && (
-                <div role="status" style={{
-                  padding: '0.75rem',
-                  borderRadius: '6px',
-                  marginBottom: '1rem',
-                  fontSize: '0.85rem',
-                  background: downloadResult.success ? '#d1fae5' : '#fee2e2',
-                  border: `1px solid ${downloadResult.success ? '#10b981' : '#ef4444'}`,
-                  color: downloadResult.success ? '#065f46' : '#991b1b'
-                }}>
-                  {downloadMessage(downloadResult)}
-                </div>
-              )}
-
-              {/* Download Progress Bar */}
-              {isDownloadingRules && (
-                <div style={{
-                  width: '100%',
-                  height: '8px',
-                  background: darkMode ? '#4b5563' : '#e5e7eb',
-                  borderRadius: '4px',
-                  overflow: 'hidden',
-                  marginBottom: '1rem'
-                }}>
-                  <div style={{
-                    width: `${downloadProgress}%`,
-                    height: '100%',
-                    background: 'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)',
-                    transition: 'width 0.3s'
-                  }}></div>
-                </div>
-              )}
-
               {/* Feature Status */}
               <div style={{ fontSize: '0.85rem', color: getSecondaryTextColor() }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
@@ -1459,10 +1341,6 @@ export default function SymptomSearch() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
                   <span>{typeof window !== 'undefined' && isScannerSupported() ? '✅' : '❌'}</span>
                   <span>Barcode Scanner</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span>{offlineStats && offlineStats.rules.count > 0 ? '✅' : '❌'}</span>
-                  <span>Offline Data</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
                   <span>{offlineBundle ? '✅' : '❌'}</span>

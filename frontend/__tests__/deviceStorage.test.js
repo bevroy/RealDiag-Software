@@ -20,3 +20,13 @@ test('the admin token is kept in memory only and old copies are removed', () => 
   expect(page).toMatch(/localStorage\.removeItem\('admin_token'\)/)
   expect(read('utils', 'clientAuth.js')).toMatch(/removeItem\('admin_token'\)/)
 })
+
+test('"Download All Rules" is gone and its IndexedDB copy is deleted on open and at sign-out', () => {
+  const page = read('pages', 'symptom-search.js')
+  expect(page).not.toMatch(/Download All Rules|downloadAllRules|getOfflineStats/)
+  expect(page).toMatch(/deleteLegacyOfflineDatabase\(\)/)
+  const auth = read('utils', 'clientAuth.js')
+  expect(auth).toMatch(/clearStoredAuth\(\) \{[\s\S]*?deleteLegacyOfflineDatabase\(\)/)
+  expect(auth).toMatch(/indexedDB\.deleteDatabase\(OFFLINE_DB\.name\)/)
+  expect(fs.existsSync(path.join(__dirname, '..', 'utils', 'ruleDownload.js'))).toBe(false)
+})

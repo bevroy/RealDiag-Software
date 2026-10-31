@@ -162,7 +162,7 @@ export default function TechnicalMedicalPage() {
             <li>Email failures are reported, not silent: forgot-password returns 503 when email is not configured and 502 when sending fails; registration, verification and resend responses say when an email could not be sent. SMTP connections time out after 15 seconds, and reset/verification links are no longer written to the server log.</li>
             <li>Admin account tools: POST /admin/users/reset-password, /admin/users/deactivate and /admin/users/reactivate (admin token plus a signed-in session). Deactivated accounts are refused at sign-in and on every authenticated request.</li>
             <li>Misleading-behavior fixes (October 2026), each with tests:
-              (1) GET /rules/all returns the whole rule library with a content version, and &quot;Download All Rules&quot; reports real success or failure.
+              (1) GET /rules/all returns the whole rule library with a content version (&quot;Download All Rules&quot;, which used it, was removed in November 2026; the offline bundle replaces it).
               (2) Offline IndexedDB reads and writes are wrapped in promises (frontend/utils/idb.js), so offline storage returns its data.
               (3) Pages and the service worker share one database name, version and schema (public/offline-db-schema.js).
               (4) Background sync is removed: its endpoints never existed and the data it would sync is never stored.
