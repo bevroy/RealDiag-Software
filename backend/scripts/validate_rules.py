@@ -421,7 +421,7 @@ def list_item_problems(tree: Dict) -> List[str]:
     return problems
 
 
-CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "outside", "above_ref_high", "below_ref_low"}
+CRITERIA_OPERATORS = {">", ">=", "<", "<=", "between", "at_least_below", "outside", "above_ref_high", "below_ref_low"}
 CRITERIA_ROLES = {"core", "supporting"}
 CRITERIA_DISPLAY = {"always", "when_met", "when_found"}
 CRITERIA_PROBABILITY = {"met_over_all", "met_over_known"}
@@ -457,6 +457,10 @@ def criteria_problems(criteria) -> List[str]:
         problems.append(f"probability must be one of {sorted(CRITERIA_PROBABILITY)}")
     if criteria.get("severity_default", "not rated") not in SEVERITY_LEVELS:
         problems.append(f"severity_default must be one of {sorted(SEVERITY_LEVELS)}")
+    suppressed_by = criteria.get("suppressed_by")
+    if suppressed_by is not None and (not isinstance(suppressed_by, list) or not suppressed_by
+                                      or not all(isinstance(t, str) and t.strip() for t in suppressed_by)):
+        problems.append("suppressed_by must be a non-empty list of tree ids")
 
     items = criteria.get("items")
     if not isinstance(items, list) or not items:
@@ -503,7 +507,7 @@ def criteria_problems(criteria) -> List[str]:
         value = item.get("value")
         if op in (">", ">=", "<", "<=") and not isinstance(value, (int, float)):
             problems.append(f"{where}: operator {op} needs a numeric 'value'")
-        if op in ("between", "outside") and not (
+        if op in ("between", "at_least_below", "outside") and not (
                 isinstance(value, list) and len(value) == 2 and all(isinstance(v, (int, float)) for v in value)
                 and value[0] < value[1]):
             problems.append(f"{where}: operator {op} needs 'value: [low, high]' with low < high")
@@ -555,6 +559,29 @@ def criteria_problems(criteria) -> List[str]:
                 problems.append(f"suggest_when refers to unknown group {group!r}")
     if isinstance(criteria.get("suggest_when"), dict):
         check_rule(criteria["suggest_when"])
+    return problems
+
+
+def suppressed_by_problems(trees: Dict[str, Dict]) -> List[Tuple[str, str]]:
+    """(tree id, problem) for `criteria.suppressed_by` entries that cannot work.
+
+    Each entry must name another tree whose criteria declare known_condition
+    codes; those codes are what suppress the finding.
+    """
+    problems = []
+    for tree_id, tree in sorted(trees.items()):
+        criteria = tree.get("criteria")
+        if not isinstance(criteria, dict) or not isinstance(criteria.get("suppressed_by"), list):
+            continue
+        for other_id in criteria["suppressed_by"]:
+            other = trees.get(other_id)
+            other_criteria = (other or {}).get("criteria")
+            if other_id == tree_id:
+                problems.append((tree_id, "criteria.suppressed_by: a tree cannot suppress itself"))
+            elif other is None:
+                problems.append((tree_id, f"criteria.suppressed_by: unknown tree {other_id!r}"))
+            elif not isinstance(other_criteria, dict) or not other_criteria.get("known_condition"):
+                problems.append((tree_id, f"criteria.suppressed_by: {other_id} has no criteria.known_condition codes"))
     return problems
 
 
@@ -716,6 +743,15 @@ def main():
         validate_decision_tree(file_path, result)
         print("✓")
     
+    # criteria.suppressed_by must name trees with known_condition codes
+    loaded_trees = {}
+    for file_path in trees_files:
+        data = yaml.safe_load(file_path.read_text(encoding="utf-8")) or {}
+        if isinstance(data, dict):
+            loaded_trees[str(data.get("tree_id") or file_path.stem)] = data
+    for tree_id, problem in suppressed_by_problems(loaded_trees):
+        result.add_error(f"{tree_id}.yml", problem)
+
     # Screening rules (encounter assessment: possible missed items)
     if SCREENING_RULES.exists():
         print(f"Checking {SCREENING_RULES.name}...", end=" ")

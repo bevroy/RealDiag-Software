@@ -24,9 +24,12 @@ import {
   downloadAllRules, 
   getOfflineStats, 
   isOnline, 
-  onConnectionChange,
-  requestBackgroundSync 
+  onConnectionChange
 } from '../utils/offlineManager';
+import { downloadMessage } from '../utils/ruleDownload';
+import { OFFLINE_SEARCH_MESSAGE, isOfflineError, isOfflineResponse } from '../utils/offlineResponse';
+import { loadStoredBundle, refreshBundle, bundleSummary } from '../utils/offlineBundle';
+import { rankOffline } from '../utils/offlineSearch';
 import {
   isVoiceInputSupported,
   createVoiceRecognition,
@@ -131,6 +134,7 @@ export default function SymptomSearch() {
   const [offlineStats, setOfflineStats] = useState(null);
   const [isDownloadingRules, setIsDownloadingRules] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
+  const [downloadResult, setDownloadResult] = useState(null);
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [showOfflinePanel, setShowOfflinePanel] = useState(false);
   const [voiceRecognition, setVoiceRecognition] = useState(null);
@@ -142,6 +146,22 @@ export default function SymptomSearch() {
   const [scannerStream, setScannerStream] = useState(null);
   const [scannedPatientId, setScannedPatientId] = useState(null);
   const [showMobileFeatures, setShowMobileFeatures] = useState(false);
+  // Offline library (tree search fields) on this device, and whether the
+  // results shown were ranked from it.
+  const [offlineBundle, setOfflineBundle] = useState(null);
+  const [offlineResultsVersion, setOfflineResultsVersion] = useState(null);
+
+  // Load the offline library; refresh it when online and signed in.
+  useEffect(() => {
+    let cancelled = false;
+    loadStoredBundle().then((bundle) => { if (!cancelled && bundle) setOfflineBundle(bundle); });
+    if (typeof navigator !== 'undefined' && navigator.onLine !== false && isAuthenticated()) {
+      refreshBundle({ apiFetchFn: apiFetch, fetchFn: (url, opts) => fetch(url, opts) }).then((out) => {
+        if (!cancelled && out.stored) setOfflineBundle(out.stored);
+      });
+    }
+    return () => { cancelled = true; };
+  }, []);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
@@ -432,10 +452,8 @@ export default function SymptomSearch() {
       setConnectionStatus(online);
       if (online) {
         speak('Connection restored');
-        requestBackgroundSync('search-sync');
-        requestBackgroundSync('favorites-sync');
       } else {
-        speak('You are now offline. Cached data is available.');
+        speak('You are offline. Symptom search uses the offline library on this device, if downloaded.');
       }
     });
 
@@ -467,18 +485,22 @@ export default function SymptomSearch() {
     setIsDownloadingRules(true);
     setDownloadProgress(0);
 
+    setDownloadResult(null);
+
     try {
-      await downloadAllRules(apiBase, (progress) => {
-        setDownloadProgress(progress);
+      const result = await downloadAllRules(apiBase, (progress) => {
+        setDownloadProgress(progress.percentage);
       });
+      setDownloadResult(result);
 
       const stats = await getOfflineStats();
       setOfflineStats(stats);
 
-      speak('Rules downloaded successfully');
+      speak(result.success ? 'Rules downloaded' : 'Rule download failed');
     } catch (error) {
       console.error('Failed to download rules:', error);
-      speak('Failed to download rules');
+      setDownloadResult({ success: false, error: `Rule download failed: ${error.message}` });
+      speak('Rule download failed');
     } finally {
       setIsDownloadingRules(false);
       setDownloadProgress(0);
@@ -703,6 +725,39 @@ export default function SymptomSearch() {
     );
   };
 
+  const searchAge = () => {
+    if (ageRange && !age) {
+      const range = AGE_RANGES.find(r => r.id === ageRange);
+      if (range) return Math.floor((range.min + range.max) / 2);
+    }
+    return age;
+  };
+
+  // Rank on this device from the offline library (tree library only: no AI
+  // suggestions, vital-sign terms or chart history).
+  const runOfflineSearch = async () => {
+    const bundle = offlineBundle || await loadStoredBundle();
+    if (!bundle) {
+      setError(OFFLINE_SEARCH_MESSAGE);
+      setHasSearched(false);
+      setResults([]);
+      setNegatedTerms([]);
+      return;
+    }
+    const ageValue = searchAge();
+    const out = rankOffline(bundle, symptoms, {
+      age: ageValue ? parseInt(ageValue) : null, sex: sex || null, family: family || null,
+    });
+    setOfflineBundle(bundle);
+    setError(null);
+    setHasSearched(true);
+    resetDisplayLimit();
+    setResults(out.results);
+    setNegatedTerms(out.negated_terms);
+    setReviewNotice(bundle.clinical_review_notice);
+    setOfflineResultsVersion(bundle.version);
+  };
+
   const handleSearch = async () => {
     if (symptoms.length === 0) {
       setError('Please enter at least one symptom');
@@ -718,10 +773,18 @@ export default function SymptomSearch() {
       return;
     }
 
+    // Offline: rank from the offline library on this device; without one,
+    // say so rather than showing "no results".
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      await runOfflineSearch();
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setNeedsLogin(false);
     setHasSearched(true);
+    setOfflineResultsVersion(null);
     resetDisplayLimit(); // Reset to show 5 results
 
     try {
@@ -765,6 +828,11 @@ export default function SymptomSearch() {
         return;
       }
 
+      if (isOfflineResponse(response)) {
+        await runOfflineSearch();
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(`Search failed: ${response.statusText}`);
       }
@@ -800,6 +868,10 @@ export default function SymptomSearch() {
         }
       }
     } catch (err) {
+      if (isOfflineError(err)) {
+        await runOfflineSearch();
+        return;
+      }
       setError(err.message);
       setResults([]);
       setNegatedTerms([]);
@@ -1351,6 +1423,20 @@ export default function SymptomSearch() {
                 {isDownloadingRules ? `Downloading... ${Math.round(downloadProgress)}%` : '⬇️ Download All Rules'}
               </button>
 
+              {downloadResult && (
+                <div role="status" style={{
+                  padding: '0.75rem',
+                  borderRadius: '6px',
+                  marginBottom: '1rem',
+                  fontSize: '0.85rem',
+                  background: downloadResult.success ? '#d1fae5' : '#fee2e2',
+                  border: `1px solid ${downloadResult.success ? '#10b981' : '#ef4444'}`,
+                  color: downloadResult.success ? '#065f46' : '#991b1b'
+                }}>
+                  {downloadMessage(downloadResult)}
+                </div>
+              )}
+
               {/* Download Progress Bar */}
               {isDownloadingRules && (
                 <div style={{
@@ -1383,6 +1469,10 @@ export default function SymptomSearch() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>{offlineStats && offlineStats.rules.count > 0 ? '✅' : '❌'}</span>
                   <span>Offline Data</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <span>{offlineBundle ? '✅' : '❌'}</span>
+                  <span>{bundleSummary(offlineBundle)}</span>
                 </div>
               </div>
             </div>
@@ -1972,6 +2062,13 @@ export default function SymptomSearch() {
             {hasSearched && !loading && negatedTerms.length > 0 && (
               <p role="note" style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', color: '#4b5563' }}>
                 Not searched (negated): {negatedTerms.join(', ')}
+              </p>
+            )}
+            {offlineResultsVersion && (
+              <p role="status" style={{ margin: '0 0 0.75rem', padding: '0.5rem 0.75rem', fontSize: '0.9rem', color: '#1e3a8a', background: '#eff6ff', border: '1px solid #3b82f6', borderRadius: '6px' }}>
+                Offline search: ranked on this device from offline library {offlineResultsVersion}, with the same
+                tree-library rules as online search. Not included offline: AI suggestions, vital-sign terms and chart
+                history. Result details that need the server (such as remedies) are unavailable until you reconnect.
               </p>
             )}
             {results.length > 0 && <ClinicalReviewNotice notice={reviewNotice} />}

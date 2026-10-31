@@ -118,7 +118,17 @@ function endReasonMessage(result) {
   return null
 }
 
+// A walk result's tests / provisional_dx / referrals with the step(s) that
+// produced each one ({text, nodes}), in path order. Falls back to the plain
+// list (no steps) for a result without the *_by_node fields.
+function itemsWithSource(result, field) {
+  const detailed = result && result[`${field}_by_node`]
+  if (Array.isArray(detailed)) return detailed
+  return ((result && result[field]) || []).map((text) => ({ text, nodes: [] }))
+}
+
 module.exports = {
+  itemsWithSource,
   LIST_FIELDS,
   NOT_ASSESSED,
   STEP_TITLES,

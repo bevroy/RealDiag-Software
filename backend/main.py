@@ -25,6 +25,7 @@ from backend.services.homeopathy_router import router as homeopathy_router
 from backend.services.mfa_router import router as mfa_router
 from backend.services.search_router import router as search_router
 from backend.services.context_router import router as context_router
+from backend.services.offline_bundle import router as offline_router
 from backend.services.auth_service import verify_token
 
 # Import admin router for AI tree management
@@ -260,15 +261,12 @@ app.include_router(homeopathy_router)
 app.include_router(mfa_router)
 app.include_router(search_router)
 app.include_router(context_router)
+app.include_router(offline_router)
 
-# /analyze endpoint backed by the modular DOMAIN_ANALYZERS chain
-from backend.schemas.diagnostic import AnalyzeRequest
-from backend.services.diagnostic_engine import analyze_case
-
-
-@app.post("/analyze", tags=["analyze"])
-def analyze_endpoint(payload: AnalyzeRequest):
-    return analyze_case(payload)
+# POST /analyze (backend/services/diagnostic_engine.py) was removed: no page
+# called it, and none of its domain analyzers returned the declared
+# AnalyzeResponse (the cardiovascular one raised a 500). The analyzer modules
+# are kept, unused, until their outputs are reconciled with one schema.
 
 # Include admin router if available
 if ADMIN_ROUTER_AVAILABLE and admin_router:

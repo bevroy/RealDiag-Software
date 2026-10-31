@@ -6,6 +6,7 @@ import { AuthGuard } from '../utils/AuthGuard';
 import PageHeader from '../components/PageHeader';
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview';
 import { apiFetch } from '../utils/apiClient';
+import { urgencyBadgeColor } from '../utils/urgencyBadge';
 
 export default function Search() {
   const router = useRouter();
@@ -478,7 +479,7 @@ export default function Search() {
                         {result.urgency && (
                           <span style={{
                             padding: '0.5rem 1rem',
-                            background: result.urgency === 'critical' ? '#dc2626' : result.urgency === 'urgent' ? '#f59e0b' : '#10b981',
+                            background: urgencyBadgeColor(result.urgency),
                             color: 'white',
                             borderRadius: '6px',
                             fontSize: '0.875rem',
