@@ -107,6 +107,7 @@ export default function UserGuidePage() {
             <li><strong>Urgency:</strong> Shown as emergent, urgent, or routine. Many levels are proposed defaults still awaiting clinician confirmation; always weigh red flags and clinical judgment.</li>
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
+            <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
           </ul>
         </section>
 
