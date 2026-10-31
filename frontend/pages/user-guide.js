@@ -152,6 +152,7 @@ export default function UserGuidePage() {
             <li>Working offline (October 2026): open Symptom Search or /diagnose once while online and signed in, and the tree library is saved on this device (it updates by itself when the library changes). Offline, Symptom Search ranks from it with the same rules as online, without AI suggestions, vital-sign terms or chart history, and says the results are offline. On /diagnose, the question-by-question trees work offline; the trees that evaluate entered findings, and all EHR and chart features, need a connection.</li>
             <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
+            <li>Access (November 2026): RealDiag accounts are by invitation only. An administrator invites you (an email with a one-time setup link, valid 72 hours) or gives you a temporary password. Every account uses two-factor authentication: at your first sign-in, set it up with an authenticator app and keep the backup codes; after that, enter the 6-digit code after your password. If you lose your phone, use a backup code or ask an administrator to reset it. The offline library is for clinical accounts only and is removed from the device when you sign out or after 24 hours.</li>
           </ul>
         </section>
 

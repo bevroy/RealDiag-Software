@@ -128,6 +128,19 @@ export default function TechnicalMedicalPage() {
             Offline search has no AI suggestions, vital-sign terms or chart history; branching-tree evaluation, chart
             and EHR features stay online-only.
           </p>
+          <p style={styles.p}>
+            Access control (November 2026, backend/services/access_policy.py): accounts are invite-only
+            (ALLOW_SELF_REGISTRATION off; admins use POST /admin/users/invite for a one-time setup link valid
+            INVITE_EXPIRATION_HOURS, or /admin/users/create for a temporary password). Sign-in requires an approved
+            email domain or an email on the admin allowlist (allowed_emails). Two-factor authentication is required
+            (REQUIRE_MFA): an account without it gets a session limited to MFA enrollment, and full sessions carry an
+            mfa claim set only after a code is verified. /offline/* also requires an approved role, sends no-store
+            responses and stamps each bundle with an expiry (OFFLINE_BUNDLE_TTL_HOURS); the browser deletes it at
+            expiry, sign-out and sign-in. Only health checks, sign-in and recovery, the MFA code step, the API-key
+            integration route and the SMART launch answer without a session; the API docs, metrics, reference
+            library and education content need one. GET /admin/users lists every account with status, MFA and last
+            sign-in.
+          </p>
         </section>
 
         <section style={styles.section}>
