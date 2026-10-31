@@ -117,6 +117,7 @@ export default function UserGuidePage() {
             <li>Use the Print Guide button for optimized print layout.</li>
             <li>Recommended paper size: Letter or A4.</li>
             <li>Enable background graphics if your institution requires branded copies.</li>
+            <li>ICPC-2 (October 2026): search results show &quot;ICPC-2: pending licensed mapping and review&quot;. ICPC-2 codes will appear only after a licensed mapping has been added and reviewed.</li>
           </ul>
         </section>
 
