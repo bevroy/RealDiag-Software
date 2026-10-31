@@ -21,12 +21,23 @@ from enum import Enum
 
 
 class EHRVendor(Enum):
-    """Supported EHR vendors."""
+    """Supported EHR vendors: each has a configuration in EHRAdapter.VENDOR_CONFIGS.
+
+    MEDITECH was listed without one, so selecting it raised KeyError (HTTP
+    500); it is not offered until real endpoints are configured.
+    """
     EPIC = "epic"
     CERNER = "cerner"
     ALLSCRIPTS = "allscripts"
     ATHENAHEALTH = "athenahealth"
-    MEDITECH = "meditech"
+
+
+class UnsupportedEHRVendorError(ValueError):
+    """EHR_VENDOR names a vendor RealDiag has no configuration for."""
+
+
+def supported_vendors() -> list[str]:
+    return [v.value for v in EHRVendor]
 
 
 @dataclass
@@ -85,7 +96,14 @@ class EHRAdapter:
             "name": "Cerner/Oracle Health",
             "token_url": "https://authorization.cerner.com/tenants/{tenant_id}/protocols/oauth2/profiles/smart-v1/token",
             "authorize_url": "https://authorization.cerner.com/tenants/{tenant_id}/protocols/oauth2/profiles/smart-v1/personas/provider/authorize",
-            "scopes": ["launch", "patient/Patient.read", "patient/Observation.read", "patient/Condition.read", "patient/MedicationRequest.read", "patient/AllergyIntolerance.read", "patient/Encounter.read", "patient/Immunization.read", "patient/Procedure.read", "patient/DocumentReference.read", "patient/DiagnosticReport.read", "openid", "fhirUser"],            "requires_tenant_id": True,
+            # One read scope per resource the chart pull queries (fhir_client.py and
+            # patient_history_service.py), including ImagingStudy and FamilyMemberHistory.
+            "scopes": ["launch", "patient/Patient.read", "patient/Observation.read", "patient/Condition.read",
+                       "patient/MedicationRequest.read", "patient/AllergyIntolerance.read",
+                       "patient/Encounter.read", "patient/Immunization.read", "patient/Procedure.read",
+                       "patient/DocumentReference.read", "patient/DiagnosticReport.read",
+                       "patient/ImagingStudy.read", "patient/FamilyMemberHistory.read", "openid", "fhirUser"],
+            "requires_tenant_id": True,
             "supports_smart_launch": True,
             "supports_cds_hooks": True,
             "patient_id_system": None,  # Varies by tenant
@@ -114,6 +132,18 @@ class EHRAdapter:
         },
     }
     
+    @classmethod
+    def scopes_for(cls, vendor: str) -> list[str]:
+        """OAuth scopes RealDiag requests for a vendor (raises UnsupportedEHRVendorError)."""
+        try:
+            vendor_enum = EHRVendor((vendor or "").strip().lower())
+        except ValueError:
+            vendor_enum = None
+        if vendor_enum is None or vendor_enum not in cls.VENDOR_CONFIGS:
+            raise UnsupportedEHRVendorError(
+                f"EHR vendor '{vendor}' is not supported. Supported vendors: {', '.join(supported_vendors())}.")
+        return list(cls.VENDOR_CONFIGS[vendor_enum]["scopes"])
+
     @classmethod
     def get_config(
         cls,
@@ -154,7 +184,13 @@ class EHRAdapter:
                 tenant_id="ec2458f2-1e24-41c8-b71b-0e701af7583d"
             )
         """
-        vendor_enum = EHRVendor(vendor.lower())
+        try:
+            vendor_enum = EHRVendor((vendor or "").strip().lower())
+        except ValueError:
+            vendor_enum = None
+        if vendor_enum is None or vendor_enum not in cls.VENDOR_CONFIGS:
+            raise UnsupportedEHRVendorError(
+                f"EHR vendor '{vendor}' is not supported. Supported vendors: {', '.join(supported_vendors())}.")
         vendor_settings = cls.VENDOR_CONFIGS[vendor_enum]
         
         # Handle tenant ID for Cerner

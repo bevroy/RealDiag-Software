@@ -136,6 +136,8 @@ function AssessmentView({ result }) {
 
       <MissedItems missed={result.missedItems} />
 
+      <MedicationReview review={result.medicationReview} />
+
       <Section title="Could not be assessed">
         {notAssessed.length === 0 ? <p>Everything needed was retrieved.</p> : (
           <ul>{notAssessed.map((item, i) => <li key={i}>{item.text}</li>)}</ul>
@@ -169,6 +171,43 @@ function MissedItems({ missed }) {
           )}
         </div>
       ))}
+    </Section>
+  );
+}
+
+function MedicationReview({ review }) {
+  const history = review.history;
+  return (
+    <Section title={review.title || 'Medication review'}>
+      {review.notice && <p style={styles.muted}>{review.notice}</p>}
+      {review.not_checked.map((text, i) => <p key={i} style={styles.notChecked}>Not checked: {text}</p>)}
+      {review.medications.length > 0 && (
+        <p><strong>Active medications ({review.medications.length}):</strong> {review.medications.join(', ')}</p>
+      )}
+      {review.alerts.length === 0 && review.medications.length > 0 && (
+        <p style={styles.muted}>No alerts from the rules RealDiag has for these medications.</p>
+      )}
+      {review.alerts.map((alert, i) => (
+        <details key={i} style={styles.missedItem}>
+          <summary style={styles.missedSummary}>
+            <strong>{(alert.severity || '').toUpperCase()}</strong> {alert.description}
+          </summary>
+          <div style={styles.missedDetails}>
+            {alert.clinical_effect && <p><strong>Effect:</strong> {alert.clinical_effect}</p>}
+            {alert.recommendation && <p><strong>Reference note:</strong> {alert.recommendation}</p>}
+            {alert.monitoring && <p><strong>Monitoring:</strong> {alert.monitoring}</p>}
+            <p><strong>From:</strong> {alert.data_sources.join(', ')}</p>
+          </div>
+        </details>
+      ))}
+      {history && (
+        <div>
+          <p><strong>Medication history:</strong> {history.stopped_medications_on_file} stopped medication(s) on file; {history.recent_discontinuations_30d} stopped in the last 30 days.</p>
+          {history.prior_adverse_reactions.map((r, i) => (
+            <p key={i}>Prior adverse reaction: {r.medication}{r.stopped ? ` (stopped ${r.stopped})` : ''}: {r.reason} <span style={styles.muted}>({r.source})</span></p>
+          ))}
+        </div>
+      )}
     </Section>
   );
 }

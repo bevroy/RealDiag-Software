@@ -121,9 +121,9 @@ def source_texts(tree: Dict[str, Any], exclude_origins: tuple = ()) -> List[str]
             if isinstance(s, dict) and s.get("origin") in exclude_origins:
                 continue
             if isinstance(s, dict):
+                # origin "evidence_level" entries (from the old evidence_level
+                # field) hold guideline names, not evidence levels: shown as sources.
                 text = s.get("text") or s.get("name") or ""
-                if s.get("origin") == "evidence_level" and text:
-                    text = f"Evidence level: {text}"
                 if text:
                     out.append(str(text))
             elif s:

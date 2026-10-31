@@ -12,6 +12,7 @@ import {
   walkableTrees,
   unavailableTrees,
   displayLabel,
+  itemsWithSource,
   emptyAnswers,
   buildSteps,
   toggle,
@@ -122,7 +123,8 @@ export default function Diagnose() {
       })
       if (!response.ok) throw new Error(`Evaluation failed (HTTP ${response.status}).`)
       const data = await response.json()
-      setResult({ ...data.tree_result, context: data.context })
+      setResult({ ...data.tree_result, context: data.context, medicationSafety: data.medication_safety || null,
+                  medicationWarnings: data.warnings || [], criticalWarnings: data.critical_warnings || [] })
     } catch (err) {
       setEvaluateError(err.message)
     } finally {
@@ -266,6 +268,24 @@ export default function Diagnose() {
               </section>
             ) : null}
 
+            <section className={styles.section} style={{display: visible('medications') ? 'block' : 'none'}}>
+              <h2>Medications and allergies (optional)</h2>
+              <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
+                Comma-separated or one per line. Medications are checked against each other by RealDiag&apos;s
+                medication safety rules (reference only).
+              </p>
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="diagnose-medications">Current medications</label>
+                  <textarea id="diagnose-medications" rows={3} value={answers.medications} onChange={(e) => setAnswers({...answers, medications: e.target.value})} placeholder="e.g. warfarin 5 mg, aspirin 81 mg" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="diagnose-allergies">Allergies</label>
+                  <textarea id="diagnose-allergies" rows={3} value={answers.allergies} onChange={(e) => setAnswers({...answers, allergies: e.target.value})} placeholder="e.g. penicillin" />
+                </div>
+              </div>
+            </section>
+
             {inputs.symptoms.length > 0 && (
               <section className={styles.section} style={{display: visible('symptoms') ? 'block' : 'none'}}>
                 <h2>Symptoms</h2>
@@ -383,7 +403,7 @@ export default function Diagnose() {
                 {result.provisional_dx && result.provisional_dx.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>🎯 Diagnoses to consider (from the tree):</h4>
-                    <ul>{result.provisional_dx.map((dx, i) => <li key={i}>{dx}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'provisional_dx').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
                     {result.tree && result.tree.icd10 && result.tree.icd10.length > 0 && (
                       <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#f9fafb', borderRadius: '6px', borderLeft: '3px solid #0f766e' }}>
                         <strong style={{color: '#0f766e'}}>📋 ICD-10:</strong>{' '}
@@ -396,14 +416,27 @@ export default function Diagnose() {
                 {result.tests && result.tests.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>🔬 Tests listed on this path:</h4>
-                    <ul>{result.tests.map((test, i) => <li key={i}>{test}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'tests').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
                   </div>
                 )}
 
                 {result.referrals && result.referrals.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>👨‍⚕️ Referrals listed on this path:</h4>
-                    <ul>{result.referrals.map((referral, i) => <li key={i}>{referral}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'referrals').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
+                  </div>
+                )}
+
+                {result.medicationSafety && (
+                  <div className={styles.resultSection}>
+                    <h4>💊 Medication safety (reference only):</h4>
+                    {result.medicationSafety.alerts.length === 0 ? (
+                      <p>No alerts from the rules RealDiag has for the medications entered.</p>
+                    ) : (
+                      <ul>{result.medicationSafety.alerts.map((a, i) => (
+                        <li key={i}><strong>{(a.severity || '').toUpperCase()}</strong> {a.description}{a.clinical_effect ? `: ${a.clinical_effect}` : ''}{a.recommendation ? ` (reference note: ${a.recommendation})` : ''}</li>
+                      ))}</ul>
+                    )}
                   </div>
                 )}
 

@@ -539,3 +539,183 @@ def test_ambulatory_differential_shows_retrieval_warnings(monkeypatch):
     assert body["data_pulled"]["current_medications"] == 0
     assert "Allergies could not be retrieved; do not assume none." in body["data_warnings"]
     assert "Allergies could not be retrieved" in body["chart_summary"]
+
+
+# --- Medication history: R4 stop dates and stop reasons ---------------------------
+
+from backend.services.diagnostic_router import _extract_med_history_features  # noqa: E402
+from backend.services.patient_history_service import medication_stop_date, medication_stop_reason  # noqa: E402
+
+
+def test_medication_stop_date_uses_r4_elements():
+    bounds = {"dosageInstruction": [
+        {"timing": {"repeat": {"boundsPeriod": {"start": "2026-01-01", "end": "2026-03-01"}}}},
+        {"timing": {"repeat": {"boundsPeriod": {"end": "2026-04-15"}}}}],
+        "dispenseRequest": {"validityPeriod": {"end": "2026-12-31"}}}
+    assert medication_stop_date(bounds) == ("2026-04-15", "dosageInstruction.timing.repeat.boundsPeriod.end")
+    validity = {"dispenseRequest": {"validityPeriod": {"end": "2026-05-01"}}}
+    assert medication_stop_date(validity) == ("2026-05-01", "dispenseRequest.validityPeriod.end")
+    # statusChanged is R5, not R4: not read.
+    assert medication_stop_date({"statusChanged": "2026-02-02"}) == (None, None)
+
+
+def test_medication_stop_reason_from_status_reason():
+    assert medication_stop_reason({"statusReason": {"text": "Rash after second dose"}}) == "Rash after second dose"
+    assert medication_stop_reason({"statusReason": {"coding": [{"code": "salg", "display": "Patient allergy"}]}}) == \
+        "Patient allergy"
+    assert medication_stop_reason({}) is None
+
+
+def test_history_service_reads_stopped_medication_dates_and_reasons():
+    stopped = {"resourceType": "Bundle", "entry": [{"resource": {
+        "resourceType": "MedicationRequest", "status": "stopped", "authoredOn": "2026-01-02",
+        "medicationCodeableConcept": {"text": "lisinopril 10 mg"},
+        "statusReason": {"text": "Allergy: angioedema"},
+        "dosageInstruction": [{"timing": {"repeat": {"boundsPeriod": {"end": "2026-01-09"}}}}]}}]}
+
+    def handler(request):
+        if request.url.path.endswith("/MedicationRequest") and "completed" in request.url.params.get("status", ""):
+            return httpx.Response(200, json=stopped)
+        if "/Patient/" in request.url.path:
+            return httpx.Response(200, json={"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+        return httpx.Response(200, json=_EMPTY_BUNDLE)
+
+    service = PatientHistoryService("https://fhir.example.test/R4", auth_token="t")
+    service.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    history = asyncio.run(service.get_comprehensive_history("p1"))
+    med = history.medication_history[0]
+    assert med["date_stopped"] == "2026-01-09"
+    assert med["date_stopped_source"] == "dosageInstruction.timing.repeat.boundsPeriod.end"
+    assert med["stop_reason"] == "Allergy: angioedema"
+    # The medication-history weighting now sees the adverse stop reason.
+    signal = _extract_med_history_features(history.medication_history, [], "cardiovascular", {}, [])
+    assert signal["features"]["prior_adverse_reaction_flags"] == 1
+
+
+# --- FHIRClient request timeouts ---------------------------------------------------
+
+import requests  # noqa: E402
+
+from backend.services import fhir_client as fhir_client_module  # noqa: E402
+from backend.services.fhir_client import FHIR_TIMEOUT_SECONDS, FHIRClient  # noqa: E402
+
+
+class _FakeResponse:
+    def __init__(self, payload):
+        self._payload, self.ok, self.status_code, self.text = payload, True, 200, ""
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self._payload
+
+
+def test_every_fhir_request_has_a_timeout(monkeypatch):
+    seen = []
+
+    def fake_get(url, **kwargs):
+        seen.append(kwargs.get("timeout"))
+        if "/Patient/" in url:
+            return _FakeResponse({"name": [{"family": "X"}], "birthDate": "1970-01-01", "gender": "female"})
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    def fake_post(url, **kwargs):
+        seen.append(kwargs.get("timeout"))
+        return _FakeResponse({"access_token": "t", "expires_in": 60})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    monkeypatch.setattr(fhir_client_module.requests, "post", fake_post)
+    client = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t")
+    client.get_patient_data("p1")
+    client.authenticate("code", "https://app.example.test/callback")
+    assert FHIR_TIMEOUT_SECONDS == 30
+    assert seen and all(t == FHIR_TIMEOUT_SECONDS for t in seen)
+
+
+def test_fhir_timeout_is_reported_as_failed(monkeypatch):
+    def fake_get(url, **kwargs):
+        if "/Patient/" in url:
+            return _FakeResponse({"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+        if "laboratory" in str(kwargs.get("params", {}).get("category")):
+            raise requests.Timeout("read timed out")
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    data = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t").get_patient_data("p1")
+    assert data.retrieval_status["labs"] == "failed"
+    assert data.retrieval_status["conditions"] == "retrieved"
+
+
+# --- Handoff delta keeps the full "since" timestamp ------------------------------
+
+from datetime import timezone as _tz  # noqa: E402
+
+from backend.services.fhir_client import search_since  # noqa: E402
+
+
+def test_search_since_keeps_time_when_timezone_known():
+    since = datetime(2026, 10, 30, 7, 15, 30, tzinfo=_tz.utc)
+    assert search_since(since) == ("2026-10-30T07:15:30+00:00", None)
+    offset = datetime.fromisoformat("2026-10-30T07:15:00-05:00")
+    assert search_since(offset) == ("2026-10-30T07:15:00-05:00", None)
+
+
+def test_search_since_naive_time_falls_back_to_date_with_note():
+    value, note = search_since(datetime(2026, 10, 30, 7, 15))
+    assert value == "2026-10-30"
+    assert "has no timezone" in note and "start of 2026-10-30" in note
+    assert search_since(datetime(2026, 10, 30)) == ("2026-10-30", None)  # date only: nothing lost
+
+
+def test_handoff_queries_use_the_full_timestamp(monkeypatch):
+    queries = []
+
+    def fake_get(url, **kwargs):
+        queries.append(kwargs.get("params") or {})
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    client = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t")
+    updates = client.get_patient_updates_since("p1", datetime(2026, 10, 30, 7, 15, tzinfo=_tz.utc))
+    values = [q.get("date") or q.get("recorded-date") or q.get("authoredon") for q in queries]
+    assert values == ["ge2026-10-30T07:15:00+00:00"] * 4
+    assert not [w for w in updates["data_warnings"] if "timezone" in w]
+
+    queries.clear()
+    updates = client.get_patient_updates_since("p1", datetime(2026, 10, 30, 7, 15))
+    assert [q.get("date") or q.get("recorded-date") or q.get("authoredon") for q in queries] == ["ge2026-10-30"] * 4
+    assert any("has no timezone" in w for w in updates["data_warnings"])
+
+
+# --- Abnormal flag compares in one unit -------------------------------------------
+
+from backend.services.fhir_client import LabResult as _Lab  # noqa: E402
+
+
+def test_abnormal_flag_converts_reference_range_units():
+    # Glucose 5.0 mmol/L (90 mg/dL) against a 70-99 mg/dL range: normal. The raw
+    # comparison 5.0 < 70 used to flag it as low.
+    assert not _Lab(code="2345-7", display="Glucose", value=5.0, unit="mmol/L",
+                    reference_range={"low": 70, "high": 99}, reference_unit="mg/dL").is_abnormal
+    # 7.0 mmol/L (126 mg/dL) is above the 99 mg/dL limit.
+    assert _Lab(code="2345-7", display="Glucose", value=7.0, unit="mmol/L",
+                reference_range={"low": 70, "high": 99}, reference_unit="mg/dL").is_abnormal
+    # Hemoglobin 130 g/L (13.0 g/dL) against 13.5-17.5 g/dL is low; 150 g/L (15.0 g/dL) is normal.
+    # The raw comparison flagged both as high (130 > 17.5).
+    assert _Lab(code="718-7", display="Hemoglobin", value=130, unit="g/L",
+                reference_range={"low": 13.5, "high": 17.5}, reference_unit="g/dL").is_abnormal
+    assert not _Lab(code="718-7", display="Hemoglobin", value=150, unit="g/L",
+                    reference_range={"low": 13.5, "high": 17.5}, reference_unit="g/dL").is_abnormal
+
+
+def test_abnormal_flag_unchanged_when_units_match_or_are_unknown():
+    assert _Lab(code="2345-7", display="Glucose", value=120, unit="mg/dL",
+                reference_range={"high": 99}, reference_unit="mg/dL").is_abnormal
+    assert _Lab(code="2345-7", display="Glucose", value=120, unit="mg/dL", reference_range={"high": 99}).is_abnormal
+    # Analyte not known to lab_units: compared as reported.
+    assert _Lab(code="9999-9", display="Other", value=5, unit="x/L",
+                reference_range={"high": 4}, reference_unit="y/L").is_abnormal
+    # Unrecognised unit for a known analyte: compared as reported.
+    assert not _Lab(code="2345-7", display="Glucose", value=90, unit="mg/dL",
+                    reference_range={"low": 70, "high": 99}, reference_unit="g/L").is_abnormal

@@ -299,6 +299,39 @@ def test_red_flags_listed_or_explicitly_absent(engine, no_ai):
     assert all(r["note"] is None for r in with_flags)
 
 
+def test_abnormal_count_covers_only_the_summary_window(engine, no_ai):
+    # Criteria lookbacks bring in older results (HbA1c over 365 days, eGFR over 730); the
+    # summary count covers only the 30-day chart-summary window and says so.
+    old_a1c = LabResult(code="4548-4", display="HbA1c", value=7.4, unit="%", reference_range={"high": 5.6},
+                        effective_date=NOW - timedelta(days=300))
+    old_egfr = LabResult(code="33914-3", display="eGFR", value=40, unit="mL/min/1.73m2", reference_range={"low": 60},
+                         effective_date=NOW - timedelta(days=700))
+    data = patient(labs=[troponin(), old_a1c, old_egfr])
+    assert sum(1 for lab in data.labs if lab.is_abnormal) == 3
+    text = run(engine, data, "chest pain")[0]["summary"]["summary_text"]
+    assert "1 test results flagged abnormal in the last 30 days." in text
+    assert "3 test results" not in text
+
+
+def test_abnormal_count_omitted_when_none_in_window(engine, no_ai):
+    old = LabResult(code="4548-4", display="HbA1c", value=7.4, unit="%", reference_range={"high": 5.6},
+                    effective_date=NOW - timedelta(days=300))
+    text = run(engine, patient(labs=[old]), "chest pain")[0]["summary"]["summary_text"]
+    assert "flagged abnormal" not in text
+
+
+def test_medication_review_section(engine, no_ai):
+    data = patient(labs=[troponin()])
+    data.medications = [{"medicationCodeableConcept": {"text": "Warfarin 5 mg"}},
+                        {"medicationCodeableConcept": {"text": "Aspirin 81 mg"}}]
+    review = run(engine, data, "chest pain")[0]["medication_review"]
+    assert review["title"] == "Medication review"
+    assert review["medications"] == ["Warfarin 5 mg", "Aspirin 81 mg"]
+    assert any(a["type"] == "drug_interaction" for a in review["alerts"])
+    # The fake history has no medication status, so the history part is reported as not checked.
+    assert any("medication history could not be retrieved" in n for n in review["not_checked"])
+
+
 def test_summary_section(engine, no_ai):
     data = patient(labs=[troponin()], conditions=[{"code": {"text": "Hypertension"}}])
     data.truncation_warnings = ["Lab results cut off: the page limit was reached after 1000 results, "

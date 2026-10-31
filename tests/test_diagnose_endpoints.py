@@ -86,3 +86,19 @@ def test_evaluate_walks_on_named_findings(client, cookies):
     assert "end_reason" in result
     assert "clinical_review_notice" in result
     assert "review_status" in result["tree"]
+
+
+def test_evaluate_with_medications_returns_safety_alerts(client, cookies):
+    """Sending medications used to fail (500) whenever a major alert existed: major_interactions
+    held MedicationAlert objects, read as dicts and not JSON-serializable."""
+    client.cookies.update(cookies)
+    response = client.post("/diagnostic/evaluate/CARD-CHEST-PAIN", json={
+        "symptoms": ["chest pain"], "age": 70,
+        "current_medications": ["warfarin 5 mg", "aspirin 81 mg"]})
+    assert response.status_code == 200, response.text
+    body = response.json()
+    alerts = body["medication_safety"]["alerts"]
+    assert alerts and all(isinstance(a, dict) for a in alerts)
+    assert all(isinstance(a, dict) for a in body["medication_safety"]["major_interactions"])
+    for warning in body.get("warnings", []):
+        assert "+ None" not in warning["message"]
