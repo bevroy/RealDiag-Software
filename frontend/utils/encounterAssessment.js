@@ -44,6 +44,9 @@ function parseEncounterAssessment(body) {
     missedItems: b.missed_items && Array.isArray(b.missed_items.checks)
       ? b.missed_items
       : { title: 'Possible missed items', notice: MISSED_ITEMS_UNAVAILABLE, checks: [], item_count: 0 },
+    extractedSummary: b.extracted_summary && Array.isArray(b.extracted_summary.facts)
+      ? b.extracted_summary
+      : { label: null, facts: [], documents_read: 0, not_read: ['The server did not return text extracted from notes.'] },
     decisionSupportNotice: b.decision_support_notice || null,
     clinicalReviewNotice: b.clinical_review_notice,
   }
