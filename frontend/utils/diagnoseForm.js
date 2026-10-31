@@ -31,7 +31,7 @@ function displayLabel(value) {
 
 function emptyAnswers() {
   return {
-    age: '', onset_hours: '', diagnosis: '',
+    age: '', onset_hours: '', diagnosis: '', medications: '', allergies: '',
     symptoms: [], exam: [], red_flags: [], patient_characteristics: [], no_red_flags: [],
     findings: {},
   }
@@ -49,6 +49,8 @@ function buildSteps(inputs) {
   if (hasFindings || (inputs.patient_characteristics || []).length || (inputs.no_red_flags || []).length) {
     steps.push('findings')
   }
+  // Optional for every tree: checked by the medication safety service.
+  steps.push('medications')
   return steps
 }
 
@@ -59,6 +61,7 @@ const STEP_TITLES = {
   exam: 'Examination Findings',
   red_flags: 'Red Flags',
   findings: 'Other Findings',
+  medications: 'Medications and Allergies (optional)',
 }
 
 function toggle(list, value) {
@@ -84,6 +87,11 @@ function toNumber(text) {
 
 // Body for POST /diagnostic/evaluate/{id}. Only answers the student gave are
 // sent; anything left blank is "not assessed" and matches no branch.
+// "warfarin 5 mg, aspirin 81 mg" or one per line -> ["warfarin 5 mg", "aspirin 81 mg"]
+function splitList(text) {
+  return String(text || '').split(/[,;\n]/).map((s) => s.trim()).filter(Boolean)
+}
+
 function buildPatientBody(answers) {
   const body = {}
   for (const field of LIST_FIELDS) body[field] = [...(answers[field] || [])]
@@ -97,6 +105,10 @@ function buildPatientBody(answers) {
   const onset = toNumber(answers.onset_hours)
   if (onset !== undefined) body.onset_hours = onset
   if (answers.diagnosis && answers.diagnosis.trim()) body.diagnosis = answers.diagnosis.trim()
+  const medications = splitList(answers.medications)
+  if (medications.length) body.current_medications = medications
+  const allergies = splitList(answers.allergies)
+  if (allergies.length) body.allergies = allergies
   return body
 }
 
@@ -128,6 +140,7 @@ function itemsWithSource(result, field) {
 }
 
 module.exports = {
+  splitList,
   itemsWithSource,
   LIST_FIELDS,
   NOT_ASSESSED,

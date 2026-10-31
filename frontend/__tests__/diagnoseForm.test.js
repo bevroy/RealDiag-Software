@@ -52,10 +52,10 @@ test('trees pending content review are held back and listed for the note', () =>
 })
 
 test('steps skip sections the tree does not use', () => {
-  expect(buildSteps(soreThroatInputs)).toEqual(['symptoms', 'exam', 'findings'])
+  expect(buildSteps(soreThroatInputs)).toEqual(['symptoms', 'exam', 'findings', 'medications'])
   expect(buildSteps({ ...soreThroatInputs, uses_age: true, red_flags: ['hypotension'] }))
-    .toEqual(['patient', 'symptoms', 'exam', 'red_flags', 'findings'])
-  expect(buildSteps({ ...emptyAnswers(), findings: {}, no_red_flags: ['no LOC'] })).toEqual(['findings'])
+    .toEqual(['patient', 'symptoms', 'exam', 'red_flags', 'findings', 'medications'])
+  expect(buildSteps({ ...emptyAnswers(), findings: {}, no_red_flags: ['no LOC'] })).toEqual(['findings', 'medications'])
   expect(buildSteps(null)).toEqual([])
 })
 
@@ -139,5 +139,22 @@ describe('itemsWithSource', () => {
   test('falls back to the plain list without steps', () => {
     expect(itemsWithSource({ referrals: ['ENT'] }, 'referrals')).toEqual([{ text: 'ENT', nodes: [] }])
     expect(itemsWithSource({}, 'provisional_dx')).toEqual([])
+  })
+})
+
+describe('medications and allergies', () => {
+  const { buildPatientBody, emptyAnswers, splitList } = require('../utils/diagnoseForm')
+
+  test('typed lists become current_medications and allergies', () => {
+    expect(splitList('warfarin 5 mg, aspirin 81 mg\nmetoprolol;')).toEqual(['warfarin 5 mg', 'aspirin 81 mg', 'metoprolol'])
+    const body = buildPatientBody({ ...emptyAnswers(), medications: 'warfarin 5 mg, aspirin 81 mg', allergies: 'penicillin' })
+    expect(body.current_medications).toEqual(['warfarin 5 mg', 'aspirin 81 mg'])
+    expect(body.allergies).toEqual(['penicillin'])
+  })
+
+  test('nothing typed sends nothing', () => {
+    const body = buildPatientBody(emptyAnswers())
+    expect(body.current_medications).toBeUndefined()
+    expect(body.allergies).toBeUndefined()
   })
 })
