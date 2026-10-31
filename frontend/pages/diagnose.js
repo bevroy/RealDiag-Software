@@ -6,6 +6,8 @@ import ContextResults from '../components/ContextResults'
 import PageHeader from '../components/PageHeader'
 import { ClinicalReviewNotice, ReviewStatusBadge } from '../components/ClinicalReview'
 import { apiFetch, getApiBase } from '../utils/apiClient'
+import QuestionnaireWalk from '../components/QuestionnaireWalk'
+import { questionnaireTrees } from '../utils/questionnaireWalker'
 import {
   NOT_ASSESSED,
   STEP_TITLES,
@@ -56,6 +58,8 @@ export default function Diagnose() {
   const [treesNotice, setTreesNotice] = useState(undefined)
   const [treesError, setTreesError] = useState('')
   const [selectedTree, setSelectedTree] = useState('')
+  const [qTrees, setQTrees] = useState([])
+  const [questionnaire, setQuestionnaire] = useState(null)
   const [treeInfo, setTreeInfo] = useState(null) // { tree, inputs, clinical_review_notice }
   const [inputsError, setInputsError] = useState('')
   const [answers, setAnswers] = useState(emptyAnswers())
@@ -75,12 +79,28 @@ export default function Diagnose() {
       .then(data => {
         setTrees(walkableTrees(data.trees))
         setHeldBack(unavailableTrees(data.trees))
+        setQTrees(questionnaireTrees(data.trees))
         setTreesNotice(data.clinical_review_notice)
       })
       .catch(err => setTreesError(err.message))
   }, [])
 
+  const selectQuestionnaire = async (treeId) => {
+    setSelectedTree('')
+    setTreeInfo(null)
+    setResult(null)
+    setInputsError('')
+    try {
+      const res = await apiFetch(`/diagnostic/trees/${encodeURIComponent(treeId)}/questionnaire`)
+      if (!res.ok) throw new Error(`Could not load this tree's questions (HTTP ${res.status}).`)
+      setQuestionnaire(await res.json())
+    } catch (err) {
+      setInputsError(err.message)
+    }
+  }
+
   const selectTree = async (treeId) => {
+    setQuestionnaire(null)
     setSelectedTree(treeId)
     setTreeInfo(null)
     setInputsError('')
@@ -198,7 +218,9 @@ export default function Diagnose() {
         )}
 
         {/* Tree selection */}
-        <section className={styles.section} style={{display: visible('tree') && !result ? 'block' : 'none'}}>
+        {questionnaire && <QuestionnaireWalk key={questionnaire.tree.id} questionnaire={questionnaire} onClose={() => setQuestionnaire(null)} />}
+
+        <section className={styles.section} style={{display: visible('tree') && !result && !questionnaire ? 'block' : 'none'}}>
           <h2>Select a decision tree</h2>
           <ClinicalReviewNotice notice={treesNotice} />
           <p style={{ margin: '0 0 1rem', color: '#4b5563', fontSize: '0.9rem' }}>
@@ -229,6 +251,26 @@ export default function Diagnose() {
               </button>
             ))}
           </div>
+          {qTrees.length > 0 && (
+            <>
+              <h3 style={{ marginTop: '1.5rem' }}>Question-by-question trees</h3>
+              <p style={{ margin: '0 0 1rem', color: '#4b5563', fontSize: '0.9rem' }}>
+                These {qTrees.length} trees ask one question at a time and end at an outcome step, in the tree&apos;s own words.
+              </p>
+              <div className={styles.treeSelection}>
+                {qTrees.map(tree => (
+                  <button key={tree.id} className={styles.treeButton} onClick={() => selectQuestionnaire(tree.id)}>
+                    {tree.title}
+                    {tree.review_status_label && (
+                      <span style={{ display: 'block', fontSize: '0.7rem', fontWeight: 500, opacity: 0.8 }}>
+                        {tree.review_status_label}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
           {inputsError && <div role="alert" style={{ color: '#b91c1c', marginTop: '1rem' }}>{inputsError}</div>}
         </section>
 
@@ -428,7 +470,7 @@ export default function Diagnose() {
           </section>
         )}
 
-        {!selectedTree && (
+        {!selectedTree && !questionnaire && (
           <div className={styles.emptyState}>
             <p>👆 Select a decision tree above to begin</p>
           </div>
