@@ -224,6 +224,60 @@ def test_medication_patterns():
                                 {"medicationCodeableConcept": {"coding": [{"display": "C"}]}}]) == ["A", "B", "C"]
 
 
+# --- Check 4: medications without a matching diagnosis -----------------------------------
+
+RXNORM = "http://www.nlm.nih.gov/research/umls/rxnorm"
+
+
+def meds_check(engine, data, status=None):
+    return check(run(engine, data, status=status), "medication_without_diagnosis")
+
+
+def test_statin_without_a_lipid_diagnosis_is_listed(engine):
+    c = meds_check(engine, patient(meds=[med("Atorvastatin 40 mg")]))
+    item = next(i for i in c["items"] if i["name"] == "Atorvastatin 40 mg")
+    assert item["summary"].startswith("Atorvastatin 40 mg is on the medication list, but no condition RealDiag links")
+    assert "It may be prescribed for another condition" in item["summary"]
+    assert item["tree_ids"] == ["ENDO-DYSLIPIDEMIA"]
+    assert "Matched as: atorvastatin (name)" in item["details"]["evidence"]
+    assert item["review_status_label"] == "Draft - under clinical review."
+
+
+def test_medication_with_a_linked_diagnosis_is_not_listed(engine):
+    data = patient(meds=[med("Carvedilol 12.5 mg"), med("Lisinopril 10 mg"), med("Metformin 500 mg")],
+                   conditions=[condition("Hypertension", "I10"), condition("Prediabetes", "R73.03")])
+    assert meds_check(engine, data)["items"] == []
+
+
+def test_carvedilol_without_hypertension_is_listed(engine):
+    # carvedilol was missed by the old "*olol" name pattern
+    c = meds_check(engine, patient(meds=[med("Carvedilol 12.5 mg")]))
+    assert [i["tree_ids"] for i in c["items"]] == [["CARD-HYPERTENSION"]]
+
+
+def test_one_linked_condition_is_enough(engine):
+    # lisinopril is linked to hypertension and chronic kidney disease
+    data = patient(meds=[med("Lisinopril 10 mg")], conditions=[condition("CKD stage 3", "N18.30")])
+    assert meds_check(engine, data)["items"] == []
+
+
+def test_medication_matched_by_rxnorm_code_only(engine):
+    rx = {"medicationCodeableConcept": {"coding": [{"system": RXNORM, "code": "860975", "display": None}]}}
+    c = meds_check(engine, patient(meds=[rx]))
+    assert [i["tree_ids"] for i in c["items"]] == [["ENDO-DIABETES", "ENDO-PREDIABETES"]]
+
+
+def test_unlinked_medications_are_not_checked_not_flagged(engine):
+    c = meds_check(engine, patient(meds=[med("Aspirin 81 mg"), med("Nystatin suspension")]))
+    assert c["items"] == []
+    assert c["not_checked"] == ["2 medication(s) RealDiag does not link to any condition: Aspirin 81 mg, Nystatin suspension."]
+
+
+def test_unretrieved_medications_or_conditions_skip_the_check(engine):
+    c = meds_check(engine, patient(meds=[med("Atorvastatin 40 mg")]), status={"conditions": "failed"})
+    assert c["items"] == [] and "could not be retrieved" in c["not_checked"][0]
+
+
 # --- Check 3: screenings that may be due -----------------------------------------------
 
 def screenings(engine, data, hist=None, smoking=None, status=None):
@@ -416,7 +470,7 @@ def test_encounter_assessment_includes_missed_items_and_smoking_status(engine):
                                              summary_response=summary_from_patient_data, now=NOW))
     missed = result["missed_items"]
     assert [c["type"] for c in missed["checks"]] == ["abnormal_without_diagnosis", "diagnosis_without_support",
-                                                     "overdue_screening"]
+                                                     "overdue_screening", "medication_without_diagnosis"]
     assert result["summary"]["data_status"]["smoking_status"] == "failed"
     assert "Smoking status could not be retrieved; do not assume none." in [i["text"] for i in result["not_assessed"]]
     aaa = next(i for i in check(missed, "overdue_screening")["items"] if i["rule_id"] == "abdominal-aortic-aneurysm")
