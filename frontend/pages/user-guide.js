@@ -78,6 +78,7 @@ export default function UserGuidePage() {
             <li>Add vital signs: HR, BP, temperature, respiratory rate, and oxygen saturation.</li>
             <li>Run search and review ranked results.</li>
             <li>Open each result to review clinical pearls, tests, referrals, and management notes.</li>
+            <li>Medications (October 2026): on /diagnose, an optional last step takes current medications and allergies, and the result lists any medication safety alerts. When RealDiag is opened from the EHR, Encounter Assessment has a Medication review section built from the chart. Both are reference only.</li>
           </ol>
         </section>
 

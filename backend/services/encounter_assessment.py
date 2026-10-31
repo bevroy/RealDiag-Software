@@ -35,6 +35,7 @@ from backend.services.fhir_client import (
 from backend.services.smart_diagnostic_engine import SEVERITY_RANK, DiagnosisEvaluation, SmartDiagnosticEngine
 from backend.services.symptom_search import CANT_MISS_LABEL, rank_diagnoses
 from backend.services.chart_terms import chart_terms
+from backend.services.medication_review import medication_review
 from backend.services.missed_items import (
     SCREENING_PROCEDURE_LOOKBACK_DAYS, possible_missed_items, screening_requirements,
 )
@@ -44,7 +45,10 @@ logger = logging.getLogger(__name__)
 TREES_PATH = Path(__file__).resolve().parents[1] / "trees"
 COMPLAINT_MATCH_LIMIT = 15
 # Fetched by FHIRClient for the criteria; the history service skips them.
-HISTORY_SKIP = {"demographics", "vital_signs", "diagnostic_tests", "conditions", "medications", "allergies"}
+# Medications are not skipped: the history service's medication history (stopped
+# medications with stop reasons) feeds the medication review; the active list
+# still comes from the FHIR client.
+HISTORY_SKIP = {"demographics", "vital_signs", "diagnostic_tests", "conditions", "allergies"}
 # History data types the encounter assessment uses.
 HISTORY_RESOURCES = ("visit_notes", "history_and_physicals", "procedures", "imaging_studies",
                      "immunizations", "family_social_history")
@@ -444,6 +448,8 @@ async def assess_encounter(
     history_status["smoking_status"] = smoking_status
     summary = build_summary(patient_data, history, history_status, summary_response, now=now)
     missed = possible_missed_items(engine, patient_data, history, smoking, summary["data_status"], now=now)
+    medications = medication_review(
+        patient_data, history, (getattr(history, "retrieval_status", None) or {}).get("medications") if history else None)
 
     return {
         "patient_id": patient_id,
@@ -456,6 +462,7 @@ async def assess_encounter(
         "guidance": [g for g in (tree_guidance(t) for t in tree_ids) if g],
         "red_flags": [r for r in (tree_red_flags(t) for t in tree_ids) if r],
         "missed_items": missed,
+        "medication_review": medications,
         "not_assessed": not_assessed(summary["data_status"], assessment.warnings,
                                      assessment.evaluations, complaint),
         "decision_support_notice": DECISION_SUPPORT_NOTICE,

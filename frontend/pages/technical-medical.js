@@ -172,6 +172,7 @@ export default function TechnicalMedicalPage() {
               (6) Tree walks keep tests, diagnoses and referrals in path order with the step that produced each.
               (7) Steps whose own condition is not met are marked in the trace (walk unchanged).
               (8) Medication outcome feedback is stored in the database (medication_outcomes).</li>
+            <li>Medication review (October 2026): the encounter assessment runs MedicationSafetyService on the chart&apos;s active medications (interactions, duplicate therapy, contraindications with the problem list, allergy cross-reactivity, age) and lists prior adverse reactions from the medication history (statusReason); each alert names the chart data it used, and unretrieved data is listed as not checked. /diagnose sends typed medications and allergies to /diagnostic/evaluate and shows its alerts. major_interactions is returned as dicts (it caused HTTP 500 before).</li>
           </ul>
         </section>
 
