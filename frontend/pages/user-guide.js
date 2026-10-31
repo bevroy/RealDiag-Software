@@ -108,6 +108,7 @@ export default function UserGuidePage() {
             <li><strong>Medication safety:</strong> Interaction/contraindication risk summary.</li>
             <li><strong>History signals:</strong> Supportive/conflicting medication-history factors.</li>
             <li>Decision trees (/diagnose, October 2026): tests, diagnoses and referrals are listed in the order the tree reached them, each with the step it came from, and the step-by-step reasoning marks any step whose own condition your answers did not meet.</li>
+            <li>Question-by-question trees (/diagnose, October 2026): 16 trees ask one question at a time and end at an outcome step showing the tree&apos;s workup, treatment information (reference, not an order) and recommendations; Back and Start over change earlier answers. The ICD-10 code and urgency shown for a step are as written in the draft tree.</li>
           </ul>
         </section>
 
