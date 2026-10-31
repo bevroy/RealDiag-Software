@@ -113,6 +113,10 @@ criteria:
       - R73.0
     snomed:
       - '714628002'
+  # Possible missed items: diabetes on the problem list means prediabetes is not reported
+  # as missing (uses ENDO-DIABETES known_condition codes; pending clinical review)
+  suppressed_by:
+    - ENDO-DIABETES
   items:
     - id: hba1c
       label: HbA1c 5.7-6.4%
@@ -163,3 +167,6 @@ change_log:
   - date: '2026-10-19'
     version: '1.0'
     change: Added related_medications for the encounter assessment's possible missed items check. Pending clinical review.
+  - date: '2026-10-30'
+    version: '1.0'
+    change: 'criteria.suppressed_by: ENDO-DIABETES, so a patient with diabetes on the problem list is not flagged for prediabetes missing from it (pending clinical review)'

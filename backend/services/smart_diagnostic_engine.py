@@ -30,6 +30,9 @@ backend/scripts/validate_rules.py):
       suggest_when: {count_met: 1, group: <optional>}
       confirm: {min_abnormal_results: 2}            # optional
       known_condition: {icd10_prefixes: [...], snomed: [...]}   # optional
+      suppressed_by: [<tree_id>, ...]   # optional: another tree's known_condition on the
+                                       # problem list means this finding is not reported as
+                                       # missing (e.g. diabetes suppresses prediabetes)
       severity_default: moderate
       severity: [ ...rules... ]
       next_steps: [ ...decision-support text... ]
@@ -485,6 +488,22 @@ def known_condition(criteria: Dict[str, Any], conditions: List[Dict[str, Any]]) 
                 return code.get("text") or coding.get("display") or value
             if snomed and "snomed" in system and value in snomed:
                 return code.get("text") or coding.get("display") or value
+    return None
+
+
+def suppressing_condition(trees: Dict[str, Dict[str, Any]], criteria: Dict[str, Any],
+                          conditions: List[Dict[str, Any]]) -> Optional[str]:
+    """Problem-list condition that suppresses this tree's finding, if any.
+
+    `criteria.suppressed_by` names other trees; a problem-list entry matching
+    one of their known_condition codes suppresses the finding (e.g. a
+    diabetes diagnosis suppresses "prediabetes not on the problem list").
+    """
+    for tree_id in criteria.get("suppressed_by") or []:
+        other = (trees.get(tree_id) or {}).get("criteria") or {}
+        text = known_condition(other, conditions)
+        if text:
+            return text
     return None
 
 
