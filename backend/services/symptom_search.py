@@ -1627,6 +1627,12 @@ def _to_patient_topic(match: DiagnosisMatch, rank: int, n: int) -> PatientDiagno
     )
 
 
+PATIENT_CHART_DATA_REJECTED = (
+    "emr_patient_id is not accepted on the patient-facing search; it uses the symptoms sent "
+    "in the request only."
+)
+
+
 async def build_patient_symptom_search_response(
     request: SymptomSearchRequest, request_obj: Request
 ) -> PatientSymptomSearchResponse:
@@ -1637,6 +1643,10 @@ async def build_patient_symptom_search_response(
     normal function call, not a re-route) rather than duplicating matching
     logic.
     """
+    # Consumer apps send symptoms only. Chart data (emr_patient_id) needs a
+    # clinician session with EHR access, which an app or API key does not have.
+    if request.emr_patient_id:
+        raise HTTPException(status_code=400, detail=PATIENT_CHART_DATA_REJECTED)
     clinician_response = await search_by_symptoms(request, request_obj)
 
     if isinstance(clinician_response, dict):

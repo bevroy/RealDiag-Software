@@ -124,3 +124,20 @@ test('the menu links to /diagnose', () => {
   const src = fs.readFileSync(path.join(__dirname, '..', 'components', 'RoleBasedNavigation.jsx'), 'utf8')
   expect(src).toMatch(/href: '\/diagnose', label: '[^']*Step-by-Step Decision Trees', roles: \['all'\]/)
 })
+
+describe('itemsWithSource', () => {
+  const { itemsWithSource } = require('../utils/diagnoseForm')
+
+  test('uses the per-node lists, in path order, with their steps', () => {
+    const result = {
+      tests: ['CBC', 'BMP'],
+      tests_by_node: [{ text: 'CBC', nodes: ['start', 'end'] }, { text: 'BMP', nodes: ['middle'] }],
+    }
+    expect(itemsWithSource(result, 'tests')).toEqual(result.tests_by_node)
+  })
+
+  test('falls back to the plain list without steps', () => {
+    expect(itemsWithSource({ referrals: ['ENT'] }, 'referrals')).toEqual([{ text: 'ENT', nodes: [] }])
+    expect(itemsWithSource({}, 'provisional_dx')).toEqual([])
+  })
+})
