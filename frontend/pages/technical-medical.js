@@ -160,6 +160,15 @@ export default function TechnicalMedicalPage() {
             <li>Navigation normalizes legacy roles so approved clinical accounts are shown provider-level tools consistently.</li>
             <li>Admin role-management endpoints support updates by email or user ID for onboarding and access corrections.</li>
             <li>Client cache invalidation was added so stale bundles do not preserve older limited-navigation behavior after deploys.</li>
+            <li>Integration and security hardening (October 2026), each with tests:
+              (1) SMART on FHIR access and refresh tokens are encrypted at rest (Fernet; key SMART_TOKEN_ENCRYPTION_KEY or derived from JWT_SECRET_KEY).
+              (2) Only EHR vendors with a configuration are offered (MEDITECH removed); others get a clear 503.
+              (3) Cerner requests a read scope for every resource the chart pull queries (adds ImagingStudy and FamilyMemberHistory); GET /smart/config reports the active vendor&apos;s scopes.
+              (4) The patient history service follows FHIR next links up to HISTORY_MAX_PAGES (default 5) and reports searches cut off at the cap.
+              (5) The patient-facing symptom search refuses emr_patient_id (400).
+              (6) Tree walks keep tests, diagnoses and referrals in path order with the step that produced each.
+              (7) Steps whose own condition is not met are marked in the trace (walk unchanged).
+              (8) Medication outcome feedback is stored in the database (medication_outcomes).</li>
           </ul>
         </section>
 

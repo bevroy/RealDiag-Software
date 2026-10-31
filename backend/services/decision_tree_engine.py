@@ -133,6 +133,16 @@ def tree_inputs(tree):
             elif _is_finding_value(want): _add(out["findings"].setdefault(key, []), want)
     for _, pred in _branch_predicates(tree): visit(pred)
     return out
+def _by_node(items: List[Any]) -> List[Dict[str, Any]]:
+    """[(text, node_id)] -> [{"text", "nodes"}] in first-appearance order, one entry per text."""
+    out: Dict[str, Dict[str, Any]] = {}
+    for text, node_id in items:
+        entry = out.setdefault(text, {"text": text, "nodes": []})
+        if node_id not in entry["nodes"]:
+            entry["nodes"].append(node_id)
+    return list(out.values())
+
+
 class DecisionTreeEngine:
     def __init__(self, trees_path: Path | None = None):
         self.trees_path = trees_path or TREES_PATH
@@ -242,22 +252,35 @@ class DecisionTreeEngine:
                 "warning": not_evaluated["content" if fmt == "content" else "questionnaire"],
             }
 
+        # tests / dx / referrals: (text, node id) in path order, so each item keeps
+        # the step that produced it.
         cur=t.get("entry"); path=[]; tests=[]; dx=[]; referrals=[]; trace_all=[]; seen=set()
         # Why the walk stopped: "end_node" (the node has no further branches),
         # "no_matching_branch" (none of its branches matched and it has no default),
         # "missing_node" (a branch points to a node id the tree does not contain),
         # or "loop".
-        end_reason="end_node"; missing_node=None
+        end_reason="end_node"; missing_node=None; unmet_conditions=[]
         for _ in range(64):
             if cur is None: break
             if cur in seen: end_reason="loop"; break
             seen.add(cur)
             node=next((n for n in t.get("nodes", []) if n.get("id")==cur), None)
             if not node: end_reason="missing_node"; missing_node=cur; break
+            # A node's own `when` does not choose the path (branches do); the walk
+            # continues either way. When it is not met, the trace says so instead
+            # of listing its partial matches as if they were the result.
             ok,tr=_match(node.get("when") or {}, patient)
-            trace_all.extend([f"[{cur}] "+s for s in tr])
-            path.append(cur); tests.extend(_text_items(node.get("tests"))); dx.extend(_text_items(node.get("suggest_dx")))
-            referrals.extend(_text_items(node.get("referrals")))
+            if ok:
+                trace_all.extend([f"[{cur}] "+s for s in tr])
+            else:
+                unmet_conditions.append(cur)
+                trace_all.extend([f"[{cur}] (partial, condition not met) "+s for s in tr])
+                trace_all.append(f"[{cur}] NOT MET: this step's condition is not met by the answers; "
+                                 "the walk continues because step conditions do not choose the path")
+            path.append(cur)
+            tests.extend((x, cur) for x in _text_items(node.get("tests")))
+            dx.extend((x, cur) for x in _text_items(node.get("suggest_dx")))
+            referrals.extend((x, cur) for x in _text_items(node.get("referrals")))
             nxt=None; why=[]
             # Handle "next" field which can be a list of conditional branches
             next_branches = node.get("next") or []
@@ -285,11 +308,18 @@ class DecisionTreeEngine:
         return {
             "tree": self._tree_summary(t), 
             "path": path, 
-            "tests": sorted(set(tests)), 
-            "provisional_dx": sorted(set(dx)), 
-            "referrals": sorted(set(referrals)), 
+            # Plain lists in path order (first occurrence), plus each item with the
+            # node(s) that produced it.
+            "tests": [i["text"] for i in _by_node(tests)],
+            "provisional_dx": [i["text"] for i in _by_node(dx)],
+            "referrals": [i["text"] for i in _by_node(referrals)],
+            "tests_by_node": _by_node(tests),
+            "provisional_dx_by_node": _by_node(dx),
+            "referrals_by_node": _by_node(referrals),
             "trace": trace_all,
             "end_reason": end_reason,
             "missing_node": missing_node,
+            # Steps on the path whose own `when` condition was not met (see trace).
+            "unmet_node_conditions": unmet_conditions,
             "evaluated": True,
         }

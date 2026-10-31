@@ -199,3 +199,23 @@ def test_api_key_persists_across_simulated_restart():
             os.environ["DATABASE_URL"] = original_database_url
         importlib.reload(database_module)
         importlib.reload(api_key_store)
+
+
+def test_patient_search_rejects_chart_data(owner_token: str):
+    """The patient-facing search never pulls an EHR chart: emr_patient_id is refused
+    with a clear 400 (before, it reached the clinician path without a user and failed)."""
+    created = _create_key(owner_token, name="no-chart-data")
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.post(
+            "/integration/symptom-search/patient",
+            headers={"X-API-Key": created["api_key"]},
+            json={"symptoms": ["chest pain"], "emr_patient_id": "patient-123"},
+        )
+        plain = client.post(
+            "/integration/symptom-search/patient",
+            headers={"X-API-Key": created["api_key"]},
+            json={"symptoms": ["chest pain"]},
+        )
+    assert response.status_code == 400
+    assert "emr_patient_id is not accepted on the patient-facing search" in response.json()["detail"]
+    assert plain.status_code == 200
