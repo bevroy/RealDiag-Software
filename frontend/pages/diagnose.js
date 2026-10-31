@@ -12,6 +12,7 @@ import {
   walkableTrees,
   unavailableTrees,
   displayLabel,
+  itemsWithSource,
   emptyAnswers,
   buildSteps,
   toggle,
@@ -383,7 +384,7 @@ export default function Diagnose() {
                 {result.provisional_dx && result.provisional_dx.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>🎯 Diagnoses to consider (from the tree):</h4>
-                    <ul>{result.provisional_dx.map((dx, i) => <li key={i}>{dx}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'provisional_dx').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
                     {result.tree && result.tree.icd10 && result.tree.icd10.length > 0 && (
                       <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#f9fafb', borderRadius: '6px', borderLeft: '3px solid #0f766e' }}>
                         <strong style={{color: '#0f766e'}}>📋 ICD-10:</strong>{' '}
@@ -396,14 +397,14 @@ export default function Diagnose() {
                 {result.tests && result.tests.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>🔬 Tests listed on this path:</h4>
-                    <ul>{result.tests.map((test, i) => <li key={i}>{test}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'tests').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
                   </div>
                 )}
 
                 {result.referrals && result.referrals.length > 0 && (
                   <div className={styles.resultSection}>
                     <h4>👨‍⚕️ Referrals listed on this path:</h4>
-                    <ul>{result.referrals.map((referral, i) => <li key={i}>{referral}</li>)}</ul>
+                    <ul>{itemsWithSource(result, 'referrals').map((item, i) => <li key={i}>{item.text}{item.nodes.length > 0 && <span style={{ color: '#6b7280', fontSize: '0.85rem' }}> (from: {item.nodes.map(displayLabel).join(', ')})</span>}</li>)}</ul>
                   </div>
                 )}
 

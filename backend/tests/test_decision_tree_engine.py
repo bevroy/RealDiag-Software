@@ -48,9 +48,20 @@ def test_referrals_accumulate_across_nodes(tmp_path):
     engine = _engine_with(tmp_path, _conditional_tree())
     result = engine.evaluate("TEST-COND", {})
     assert result["path"] == ["start", "middle", "end"]
-    assert result["referrals"] == ["Referral from end", "Referral from middle", "Referral from start"]
-    assert result["tests"] == ["BMP", "CBC"]
+    # Path order, not alphabetical: each item appears in the order its node was reached.
+    assert result["referrals"] == ["Referral from start", "Referral from middle", "Referral from end"]
+    assert result["tests"] == ["CBC", "BMP"]
     assert result["evaluated"] is True
+
+
+def test_items_keep_the_node_that_produced_them(tmp_path):
+    tree = _conditional_tree()
+    tree["nodes"][2]["tests"] = ["CBC"]  # the same test listed again at a later step
+    result = _engine_with(tmp_path, tree).evaluate("TEST-COND", {})
+    assert result["tests"] == ["CBC", "BMP"]
+    assert result["tests_by_node"] == [{"text": "CBC", "nodes": ["start", "end"]}, {"text": "BMP", "nodes": ["middle"]}]
+    assert result["provisional_dx_by_node"] == [{"text": "Dx A", "nodes": ["start"]}, {"text": "Dx B", "nodes": ["middle"]}]
+    assert [i["nodes"] for i in result["referrals_by_node"]] == [["start"], ["middle"], ["end"]]
 
 
 def test_tree_without_entry_point_returns_error(tmp_path):
