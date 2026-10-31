@@ -146,6 +146,8 @@ export default function UserGuidePage() {
             <li>Security maintenance: the site is rebuilt with an updated version of its web framework, Next.js (October 2026). Nothing changes in how you use RealDiag.</li>
             <li>Corrections (October 2026): on Symptom Search, emergent conditions now show a red urgency badge (urgent amber, routine green); a temperature typed in °F, or recorded in °C in the EHR, is converted before it counts as fever or hypothermia; and the encounter summary&apos;s abnormal-result count now covers the last 30 days and says so.</li>
             <li>Admin Account Tools (admin review page, signed in and with the admin token): reset a user&apos;s password (a temporary password is shown once, and any lockout is cleared), deactivate an account (the user is signed out on their next request and cannot sign in; data is kept), or reactivate it.</li>
+            <li>Offline (October 2026): &quot;Download All Rules&quot; on Symptom Search now says whether the download worked and how many rules were saved; when you are offline, Symptom Search says so instead of showing no results. Searching and decision trees still need a connection.</li>
+            <li>When RealDiag is opened from the EHR, the Inpatient page and the menu link to Encounter Assessment for that patient.</li>
             <li>If the menu still looks limited, hard refresh once so the newest client bundle and auth cache are loaded.</li>
           </ul>
         </section>

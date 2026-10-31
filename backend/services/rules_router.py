@@ -64,6 +64,18 @@ def list_families(current_user: Optional[Dict] = Depends(get_optional_user)):
     
     return with_notice(result)
 
+@router.get("/all")
+def get_all_rules(current_user: Optional[Dict] = Depends(get_optional_user)):
+    """
+    Every rule in one response, for "Download Rules" (offline use).
+
+    `version` is a content hash of the rule library, so a client can tell
+    whether its downloaded copy is current; `count` is len(rules).
+    """
+    rules_engine = get_rules_engine()
+    rules = rules_engine.all_rules()
+    return with_notice({"version": rules_engine.version(), "count": len(rules), "rules": rules})
+
 @router.get("/family/{family}")
 def get_family(family: str, current_user: Optional[Dict] = Depends(get_optional_user)):
     """
