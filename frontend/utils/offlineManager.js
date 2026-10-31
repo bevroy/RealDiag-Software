@@ -161,30 +161,6 @@ export async function getAllSearches() {
   return decrypted.sort((a, b) => b.timestamp - a.timestamp);
 }
 
-// Get unsynced searches
-export async function getUnsyncedSearches() {
-  const db = await openDB();
-  const transaction = db.transaction([STORES.SEARCHES], 'readonly');
-  const store = transaction.objectStore(STORES.SEARCHES);
-  // `synced` is a boolean, which is not a valid IndexedDB key, so the
-  // 'synced' index cannot be queried with a boolean; filter instead.
-  const searches = await requestToPromise(store.getAll());
-  return (searches || []).filter((s) => !s.synced);
-}
-
-// Mark search as synced
-export async function markSearchSynced(searchId) {
-  const db = await openDB();
-  const transaction = db.transaction([STORES.SEARCHES], 'readwrite');
-  const store = transaction.objectStore(STORES.SEARCHES);
-  const search = await requestToPromise(store.get(searchId));
-  if (search) {
-    search.synced = true;
-    store.put(search);
-  }
-  await transactionDone(transaction);
-}
-
 // Save favorite
 export async function saveFavorite(favorite) {
   const db = await openDB();
@@ -370,34 +346,6 @@ export async function getServiceWorkerStatus() {
   };
 }
 
-// Request background sync
-export async function requestBackgroundSync(tag = 'sync-searches') {
-  if (!isServiceWorkerSupported()) return false;
-  
-  const registration = await navigator.serviceWorker.ready;
-  if ('sync' in registration) {
-    try {
-      await registration.sync.register(tag);
-      return true;
-    } catch (error) {
-      console.error('Background sync registration failed:', error);
-      return false;
-    }
-  }
-  return false;
-}
-
-// Listen for sync messages from service worker
-export function listenForSyncMessages(callback) {
-  if (!isServiceWorkerSupported()) return;
-  
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data.type && event.data.type.endsWith('_SYNCED')) {
-      callback(event.data);
-    }
-  });
-}
-
 // Save user data with encryption
 export async function saveUserData(key, value) {
   const db = await openDB();
@@ -497,8 +445,6 @@ export default {
   getRulesByFamily,
   saveSearch,
   getAllSearches,
-  getUnsyncedSearches,
-  markSearchSynced,
   saveFavorite,
   getAllFavorites,
   deleteFavorite,
@@ -510,8 +456,6 @@ export default {
   clearAllOfflineData,
   isServiceWorkerSupported,
   getServiceWorkerStatus,
-  requestBackgroundSync,
-  listenForSyncMessages,
   isOnline,
   onConnectionChange
 };

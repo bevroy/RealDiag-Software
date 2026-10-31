@@ -24,8 +24,7 @@ import {
   downloadAllRules, 
   getOfflineStats, 
   isOnline, 
-  onConnectionChange,
-  requestBackgroundSync 
+  onConnectionChange
 } from '../utils/offlineManager';
 import { downloadMessage } from '../utils/ruleDownload';
 import {
@@ -434,8 +433,6 @@ export default function SymptomSearch() {
       setConnectionStatus(online);
       if (online) {
         speak('Connection restored');
-        requestBackgroundSync('search-sync');
-        requestBackgroundSync('favorites-sync');
       } else {
         speak('You are now offline. Cached data is available.');
       }
