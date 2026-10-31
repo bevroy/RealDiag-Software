@@ -590,3 +590,58 @@ def test_history_service_reads_stopped_medication_dates_and_reasons():
     # The medication-history weighting now sees the adverse stop reason.
     signal = _extract_med_history_features(history.medication_history, [], "cardiovascular", {}, [])
     assert signal["features"]["prior_adverse_reaction_flags"] == 1
+
+
+# --- FHIRClient request timeouts ---------------------------------------------------
+
+import requests  # noqa: E402
+
+from backend.services import fhir_client as fhir_client_module  # noqa: E402
+from backend.services.fhir_client import FHIR_TIMEOUT_SECONDS, FHIRClient  # noqa: E402
+
+
+class _FakeResponse:
+    def __init__(self, payload):
+        self._payload, self.ok, self.status_code, self.text = payload, True, 200, ""
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self._payload
+
+
+def test_every_fhir_request_has_a_timeout(monkeypatch):
+    seen = []
+
+    def fake_get(url, **kwargs):
+        seen.append(kwargs.get("timeout"))
+        if "/Patient/" in url:
+            return _FakeResponse({"name": [{"family": "X"}], "birthDate": "1970-01-01", "gender": "female"})
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    def fake_post(url, **kwargs):
+        seen.append(kwargs.get("timeout"))
+        return _FakeResponse({"access_token": "t", "expires_in": 60})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    monkeypatch.setattr(fhir_client_module.requests, "post", fake_post)
+    client = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t")
+    client.get_patient_data("p1")
+    client.authenticate("code", "https://app.example.test/callback")
+    assert FHIR_TIMEOUT_SECONDS == 30
+    assert seen and all(t == FHIR_TIMEOUT_SECONDS for t in seen)
+
+
+def test_fhir_timeout_is_reported_as_failed(monkeypatch):
+    def fake_get(url, **kwargs):
+        if "/Patient/" in url:
+            return _FakeResponse({"name": [{"family": "X"}], "birthDate": "1970-01-01"})
+        if "laboratory" in str(kwargs.get("params", {}).get("category")):
+            raise requests.Timeout("read timed out")
+        return _FakeResponse({"resourceType": "Bundle", "entry": []})
+
+    monkeypatch.setattr(fhir_client_module.requests, "get", fake_get)
+    data = FHIRClient("https://fhir.example.test/R4", client_id="c", access_token="t").get_patient_data("p1")
+    assert data.retrieval_status["labs"] == "failed"
+    assert data.retrieval_status["conditions"] == "retrieved"

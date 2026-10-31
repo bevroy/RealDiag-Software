@@ -89,6 +89,10 @@ def retrieval_warnings(retrieval_status: Dict[str, str]) -> List[str]:
 
 _STATUS_RANK = {RETRIEVED: 0, NOT_AVAILABLE: 1, FAILED: 2}
 
+# Seconds before a FHIR request is abandoned (same as PatientHistoryService). A
+# timeout is a requests.RequestException, so the data type is reported "failed".
+FHIR_TIMEOUT_SECONDS = 30
+
 # US Core Smoking Status (LOINC 72166-2) answer codes (SNOMED CT)
 SMOKING_STATUS_LOINC = "72166-2"
 SMOKING_STATUS_CODES = {
@@ -298,7 +302,7 @@ class FHIRClient:
         # Confidential clients authenticate via HTTP Basic Auth using the Cerner Central System Account secret.
         auth = (self.client_id, self.client_secret) if self.client_secret else None
 
-        response = requests.post(token_url, data=data, auth=auth); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
+        response = requests.post(token_url, data=data, auth=auth, timeout=FHIR_TIMEOUT_SECONDS); logger.error(f"Cerner token exchange {response.status_code}: {response.text}") if not response.ok else None
         response.raise_for_status()
 
         token_data = response.json()
@@ -339,7 +343,7 @@ class FHIRClient:
         url = f"{self.fhir_base_url}/{resource_type}"
 
         try:
-            response = requests.get(url, params=params, headers=self._get_headers())
+            response = requests.get(url, params=params, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
             response.raise_for_status()
             return response.json()
         except requests.RequestException as e:
@@ -349,7 +353,7 @@ class FHIRClient:
     def get_patient(self, patient_id: str) -> Dict[str, Any]:
         """Get patient demographics."""
         url = f"{self.fhir_base_url}/Patient/{patient_id}"
-        response = requests.get(url, headers=self._get_headers())
+        response = requests.get(url, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
         if not response.ok:
             logger.error(f"FHIR Patient fetch {response.status_code}: {response.text}")
         response.raise_for_status()
@@ -394,7 +398,7 @@ class FHIRClient:
                              if link.get("relation") == "next"), None)
             if not next_url:
                 break
-            response = requests.get(next_url, headers=self._get_headers())
+            response = requests.get(next_url, headers=self._get_headers(), timeout=FHIR_TIMEOUT_SECONDS)
             response.raise_for_status()
             bundle = response.json()
             observations.extend(entry["resource"] for entry in bundle.get("entry", []) or [])
